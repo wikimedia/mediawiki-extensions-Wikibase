@@ -22,25 +22,25 @@
 			this._deferreds = {};
 			this._store = store;
 		},
-	{
-		/**
-		 * @type {Object}
-		 */
-		_deferreds: null,
+		{
+			/**
+			 * @type {Object}
+			 */
+			_deferreds: null,
 
-		/**
-		 * @type {wikibase.store.EntityStore}
-		 */
-		_store: null,
+			/**
+			 * @type {wikibase.store.EntityStore}
+			 */
+			_store: null,
 
-		/**
-		 * @see wikibase.store.EntityStore.get
-		 */
-		get: function( entityId ) {
-			if ( !this._deferreds.hasOwnProperty( entityId ) ) {
-				this._deferreds[ entityId ] = this._store.get( entityId );
+			/**
+			 * @see wikibase.store.EntityStore.get
+			 */
+			get: function( entityId ) {
+				if ( !this._deferreds.hasOwnProperty( entityId ) ) {
+					this._deferreds[ entityId ] = this._store.get( entityId );
+				}
+				return this._deferreds[ entityId ];
 			}
-			return this._deferreds[ entityId ];
-		}
-	} );
+		} );
 }( wikibase ) );

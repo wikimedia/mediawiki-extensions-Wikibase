@@ -3,297 +3,297 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( $, wb, QUnit ) {
-'use strict';
+	'use strict';
 
-/**
- * @param {Object} [options]
- * @param {jQuery} [$node]
- * @return {jQuery}
- */
-var createEntitytermsforlanguageview = function( options, $node ) {
-	options = $.extend( {
-		value: {
-			language: 'en',
-			label: new wb.datamodel.Term( 'en', 'test label' ),
-			description: new wb.datamodel.Term( 'en', 'test description' ),
-			aliases: new wb.datamodel.MultiTerm( 'en', ['alias1', 'alias2'] )
-		}
-	}, options || {} );
-
-	$node = $node || $( '<tbody/>' ).appendTo( $( '<table/>' ) );
-
-	var $entitytermsforlanguageview = $node
-		.addClass( 'test_entitytermsforlanguageview' )
-		.entitytermsforlanguageview( options );
-
-	return $entitytermsforlanguageview;
-};
-
-QUnit.module( 'jquery.wikibase.entitytermsforlanguageview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_entitytermsforlanguageview' ).each( function() {
-			var $entitytermsforlanguageview = $( this ),
-				entitytermsforlanguageview
-					= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
-
-			if ( entitytermsforlanguageview ) {
-				entitytermsforlanguageview.destroy();
+	/**
+	 * @param {Object} [options]
+	 * @param {jQuery} [$node]
+	 * @return {jQuery}
+	 */
+	var createEntitytermsforlanguageview = function( options, $node ) {
+		options = $.extend( {
+			value: {
+				language: 'en',
+				label: new wb.datamodel.Term( 'en', 'test label' ),
+				description: new wb.datamodel.Term( 'en', 'test description' ),
+				aliases: new wb.datamodel.MultiTerm( 'en', ['alias1', 'alias2'] )
 			}
+		}, options || {} );
 
-			$entitytermsforlanguageview.remove();
-		} );
-	}
-} ) );
+		$node = $node || $( '<tbody/>' ).appendTo( $( '<table/>' ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
-	assert.expect( 3 );
-	assert.throws(
-		function() {
-			createEntitytermsforlanguageview( { value: null } );
-		},
-		'Throwing error when trying to initialize widget without a value.'
-	);
+		var $entitytermsforlanguageview = $node
+			.addClass( 'test_entitytermsforlanguageview' )
+			.entitytermsforlanguageview( options );
 
-	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
-		entitytermsforlanguageview
-			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
+		return $entitytermsforlanguageview;
+	};
 
-	assert.ok(
-		entitytermsforlanguageview !== undefined,
-		'Created widget.'
-	);
+	QUnit.module( 'jquery.wikibase.entitytermsforlanguageview', QUnit.newMwEnvironment( {
+		teardown: function() {
+			$( '.test_entitytermsforlanguageview' ).each( function() {
+				var $entitytermsforlanguageview = $( this ),
+					entitytermsforlanguageview
+						= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
-	entitytermsforlanguageview.destroy();
+				if ( entitytermsforlanguageview ) {
+					entitytermsforlanguageview.destroy();
+				}
 
-	assert.ok(
-		$entitytermsforlanguageview.data( 'entitytermsforlanguageview' ) === undefined,
-		'Destroyed widget.'
-	);
-} );
+				$entitytermsforlanguageview.remove();
+			} );
+		}
+	} ) );
 
-QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
-	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
-		entitytermsforlanguageview
-			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
-
-	$entitytermsforlanguageview
-	.on( 'entitytermsforlanguageviewafterstartediting', function( event ) {
-		assert.ok(
-			true,
-			'Started edit mode.'
+	QUnit.test( 'Create & destroy', function( assert ) {
+		assert.expect( 3 );
+		assert.throws(
+			function() {
+				createEntitytermsforlanguageview( { value: null } );
+			},
+			'Throwing error when trying to initialize widget without a value.'
 		);
-	} )
-	.on( 'entitytermsforlanguageviewafterstopediting', function( event, dropValue ) {
+
+		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
+			entitytermsforlanguageview
+				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
+
 		assert.ok(
-			true,
-			'Stopped edit mode.'
+			entitytermsforlanguageview !== undefined,
+			'Created widget.'
+		);
+
+		entitytermsforlanguageview.destroy();
+
+		assert.ok(
+			$entitytermsforlanguageview.data( 'entitytermsforlanguageview' ) === undefined,
+			'Destroyed widget.'
 		);
 	} );
 
-	/**
-	 * @param {Function} func
-	 * @param {boolean} expectingEvent
-	 * @return {jQuery.Promise}
-	 */
-	function testEditModeChange( func, expectingEvent ) {
-		var deferred = $.Deferred();
-
-		if ( !expectingEvent ) {
-			func();
-			return deferred.resolve().promise();
-		}
+	QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
+		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
+			entitytermsforlanguageview
+				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
 		$entitytermsforlanguageview
-		.one(
-			'entitytermsforlanguageviewafterstartediting.entitytermsforlanguageviewtest',
-			function( event ) {
-				$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
-				deferred.resolve();
-			}
-		)
-		.one(
-			'entitytermsforlanguageviewafterstopediting.entitytermsforlanguageviewtest',
-			function( event, dropValue ) {
-				$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
-				deferred.resolve();
-			}
-		);
-
-		func();
-
-		return deferred.promise();
-	}
-
-	var $queue = $( {} );
-
-	/**
-	 * @param {jQuery} $queue
-	 * @param {Function} func
-	 * @param {boolean} [expectingEvent]
-	 */
-	function addToQueue( $queue, func, expectingEvent ) {
-		if ( expectingEvent === undefined ) {
-			expectingEvent = true;
-		}
-		$queue.queue( 'tests', function( next ) {
-			QUnit.stop();
-			testEditModeChange( func, expectingEvent ).always( function() {
-				QUnit.start();
-				next();
-			} );
+		.on( 'entitytermsforlanguageviewafterstartediting', function( event ) {
+			assert.ok(
+				true,
+				'Started edit mode.'
+			);
+		} )
+		.on( 'entitytermsforlanguageviewafterstopediting', function( event, dropValue ) {
+			assert.ok(
+				true,
+				'Stopped edit mode.'
+			);
 		} );
-	}
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.startEditing();
+		/**
+		 * @param {Function} func
+		 * @param {boolean} expectingEvent
+		 * @return {jQuery.Promise}
+		 */
+		function testEditModeChange( func, expectingEvent ) {
+			var deferred = $.Deferred();
+
+			if ( !expectingEvent ) {
+				func();
+				return deferred.resolve().promise();
+			}
+
+			$entitytermsforlanguageview
+			.one(
+				'entitytermsforlanguageviewafterstartediting.entitytermsforlanguageviewtest',
+				function( event ) {
+					$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
+					deferred.resolve();
+				}
+			)
+			.one(
+				'entitytermsforlanguageviewafterstopediting.entitytermsforlanguageviewtest',
+				function( event, dropValue ) {
+					$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
+					deferred.resolve();
+				}
+			);
+
+			func();
+
+			return deferred.promise();
+		}
+
+		var $queue = $( {} );
+
+		/**
+		 * @param {jQuery} $queue
+		 * @param {Function} func
+		 * @param {boolean} [expectingEvent]
+		 */
+		function addToQueue( $queue, func, expectingEvent ) {
+			if ( expectingEvent === undefined ) {
+				expectingEvent = true;
+			}
+			$queue.queue( 'tests', function( next ) {
+				QUnit.stop();
+				testEditModeChange( func, expectingEvent ).always( function() {
+					QUnit.start();
+					next();
+				} );
+			} );
+		}
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.startEditing();
+		} );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.startEditing();
+		}, false );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.stopEditing( true );
+		} );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.stopEditing( true );
+		}, false );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.stopEditing();
+		}, false );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.startEditing();
+		} );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.$label.find( 'input, textarea' ).val( '' );
+			entitytermsforlanguageview.stopEditing();
+		} );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.startEditing();
+		} );
+
+		addToQueue( $queue, function() {
+			entitytermsforlanguageview.$description.find( 'input, textarea' ).val( 'changed description' );
+			entitytermsforlanguageview.stopEditing();
+		} );
+
+		$queue.dequeue( 'tests' );
 	} );
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.startEditing();
-	}, false );
+	QUnit.test( 'setError()', function( assert ) {
+		assert.expect( 1 );
+		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
+			entitytermsforlanguageview
+				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.stopEditing( true );
+		$entitytermsforlanguageview
+		.on( 'entitytermsforlanguageviewtoggleerror', function( event, error ) {
+			assert.ok(
+				true,
+				'Triggered "toggleerror" event.'
+			);
+		} );
+
+		entitytermsforlanguageview.setError();
 	} );
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.stopEditing( true );
-	}, false );
+	QUnit.test( 'value()', function( assert ) {
+		assert.expect( 8 );
+		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
+			entitytermsforlanguageview
+				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' ),
+			label = new wb.datamodel.Term( 'en', 'changed label' ),
+			description = new wb.datamodel.Term( 'en', 'test description' ),
+			aliases = new wb.datamodel.MultiTerm( 'en', ['alias1', 'alias2'] );
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.stopEditing();
-	}, false );
+		assert.throws(
+			function() {
+				entitytermsforlanguageview.value( null );
+			},
+			'Trying to set no value fails.'
+		);
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.startEditing();
-	} );
+		entitytermsforlanguageview.value( {
+			language: 'en',
+			label: label,
+			description: description,
+			aliases: aliases
+		} );
 
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.$label.find( 'input, textarea' ).val( '' );
-		entitytermsforlanguageview.stopEditing();
-	} );
-
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.startEditing();
-	} );
-
-	addToQueue( $queue, function() {
-		entitytermsforlanguageview.$description.find( 'input, textarea' ).val( 'changed description' );
-		entitytermsforlanguageview.stopEditing();
-	} );
-
-	$queue.dequeue( 'tests' );
-} );
-
-QUnit.test( 'setError()', function( assert ) {
-	assert.expect( 1 );
-	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
-		entitytermsforlanguageview
-			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
-
-	$entitytermsforlanguageview
-	.on( 'entitytermsforlanguageviewtoggleerror', function( event, error ) {
 		assert.ok(
-			true,
-			'Triggered "toggleerror" event.'
+			entitytermsforlanguageview.value().label.equals( label ),
+			'Set new label.'
+		);
+
+		assert.ok(
+			entitytermsforlanguageview.value().description.equals( description ),
+			'Did not change description.'
+		);
+
+		label = new wb.datamodel.Term( 'en', 'test label' );
+		description = new wb.datamodel.Term( 'en', '' );
+
+		entitytermsforlanguageview.value( {
+			language: 'en',
+			label: label,
+			description: description,
+			aliases: aliases
+		} );
+
+		assert.ok(
+			entitytermsforlanguageview.value().label.equals( label ),
+			'Reset label.'
+		);
+
+		assert.ok(
+			entitytermsforlanguageview.value().description.equals( description ),
+			'Removed description.'
+		);
+
+		aliases = new wb.datamodel.MultiTerm( 'en', ['alias1', 'alias2', 'alias3'] );
+
+		entitytermsforlanguageview.value( {
+			language: 'en',
+			label: label,
+			description: description,
+			aliases: aliases
+		} );
+
+		assert.ok(
+			entitytermsforlanguageview.value().aliases.equals( aliases ),
+			'Added alias.'
+		);
+
+		aliases = new wb.datamodel.MultiTerm( 'en', [] );
+
+		entitytermsforlanguageview.value( {
+			language: 'en',
+			label: label,
+			description: description,
+			aliases: aliases
+		} );
+
+		assert.ok(
+			entitytermsforlanguageview.value().aliases.equals( aliases ),
+			'Removed aliases.'
+		);
+
+		assert.throws(
+			function() {
+				entitytermsforlanguageview.value( {
+					language: 'de',
+					label: label,
+					description: description,
+					aliases: aliases
+				} );
+			},
+			'Trying to change language fails.'
 		);
 	} );
-
-	entitytermsforlanguageview.setError();
-} );
-
-QUnit.test( 'value()', function( assert ) {
-	assert.expect( 8 );
-	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
-		entitytermsforlanguageview
-			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' ),
-		label = new wb.datamodel.Term( 'en', 'changed label' ),
-		description = new wb.datamodel.Term( 'en', 'test description' ),
-		aliases = new wb.datamodel.MultiTerm( 'en', ['alias1', 'alias2'] );
-
-	assert.throws(
-		function() {
-			entitytermsforlanguageview.value( null );
-		},
-		'Trying to set no value fails.'
-	);
-
-	entitytermsforlanguageview.value( {
-		language: 'en',
-		label: label,
-		description: description,
-		aliases: aliases
-	} );
-
-	assert.ok(
-		entitytermsforlanguageview.value().label.equals( label ),
-		'Set new label.'
-	);
-
-	assert.ok(
-		entitytermsforlanguageview.value().description.equals( description ),
-		'Did not change description.'
-	);
-
-	label = new wb.datamodel.Term( 'en', 'test label' );
-	description = new wb.datamodel.Term( 'en', '' );
-
-	entitytermsforlanguageview.value( {
-		language: 'en',
-		label: label,
-		description: description,
-		aliases: aliases
-	} );
-
-	assert.ok(
-		entitytermsforlanguageview.value().label.equals( label ),
-		'Reset label.'
-	);
-
-	assert.ok(
-		entitytermsforlanguageview.value().description.equals( description ),
-		'Removed description.'
-	);
-
-	aliases = new wb.datamodel.MultiTerm( 'en', ['alias1', 'alias2', 'alias3'] );
-
-	entitytermsforlanguageview.value( {
-		language: 'en',
-		label: label,
-		description: description,
-		aliases: aliases
-	} );
-
-	assert.ok(
-		entitytermsforlanguageview.value().aliases.equals( aliases ),
-		'Added alias.'
-	);
-
-	aliases = new wb.datamodel.MultiTerm( 'en', [] );
-
-	entitytermsforlanguageview.value( {
-		language: 'en',
-		label: label,
-		description: description,
-		aliases: aliases
-	} );
-
-	assert.ok(
-		entitytermsforlanguageview.value().aliases.equals( aliases ),
-		'Removed aliases.'
-	);
-
-	assert.throws(
-		function() {
-			entitytermsforlanguageview.value( {
-				language: 'de',
-				label: label,
-				description: description,
-				aliases: aliases
-			} );
-		},
-		'Trying to change language fails.'
-	);
-} );
 
 }( jQuery, wikibase, QUnit ) );

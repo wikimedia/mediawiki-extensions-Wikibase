@@ -5,47 +5,47 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-QUnit.module( 'jquery.wikibase.singlebuttontoolbar', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_singlebuttontoolbar' ).each( function() {
-			var $singlebuttontoolbar = $( this ),
-				singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
+	QUnit.module( 'jquery.wikibase.singlebuttontoolbar', QUnit.newMwEnvironment( {
+		teardown: function() {
+			$( '.test_singlebuttontoolbar' ).each( function() {
+				var $singlebuttontoolbar = $( this ),
+					singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 
-			if ( singlebuttontoolbar ) {
-				singlebuttontoolbar.destroy();
-			}
+				if ( singlebuttontoolbar ) {
+					singlebuttontoolbar.destroy();
+				}
 
-			$singlebuttontoolbar.remove();
-		} );
+				$singlebuttontoolbar.remove();
+			} );
+		}
+	} ) );
+
+	/**
+	 * @param {Object} [options]
+	 * @return {jQuery}
+	 */
+	function createSinglebuttontoolbar( options ) {
+		return $( '<span/>' )
+			.addClass( 'test_singlebuttontoolbar' )
+			.singlebuttontoolbar( options || {} );
 	}
-} ) );
 
-/**
- * @param {Object} [options]
- * @return {jQuery}
- */
-function createSinglebuttontoolbar( options ) {
-	return $( '<span/>' )
-		.addClass( 'test_singlebuttontoolbar' )
-		.singlebuttontoolbar( options || {} );
-}
+	QUnit.test( 'Create & destroy', function( assert ) {
+		assert.expect( 2 );
+		var $singlebuttontoolbar = createSinglebuttontoolbar(),
+			singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 
-QUnit.test( 'Create & destroy', function( assert ) {
-	assert.expect( 2 );
-	var $singlebuttontoolbar = createSinglebuttontoolbar(),
-		singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
+		assert.ok(
+			singlebuttontoolbar instanceof $.wikibase.singlebuttontoolbar,
+			'Instantiated widget.'
+		);
 
-	assert.ok(
-		singlebuttontoolbar instanceof $.wikibase.singlebuttontoolbar,
-		'Instantiated widget.'
-	);
+		singlebuttontoolbar.destroy();
 
-	singlebuttontoolbar.destroy();
-
-	assert.ok(
-		!$singlebuttontoolbar.data( 'singlebuttontoolbar' ),
-		'Destroyed widget.'
-	);
-} );
+		assert.ok(
+			!$singlebuttontoolbar.data( 'singlebuttontoolbar' ),
+			'Destroyed widget.'
+		);
+	} );
 
 }( jQuery, QUnit ) );
