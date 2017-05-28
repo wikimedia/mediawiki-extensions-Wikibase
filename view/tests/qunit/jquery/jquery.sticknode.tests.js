@@ -5,23 +5,23 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-QUnit.module( 'jquery.sticknode' );
+	QUnit.module( 'jquery.sticknode' );
 
-QUnit.test( 'Create & destroy', function( assert ) {
-	assert.expect( 2 );
-	var $node = $( '<div/>' ).sticknode();
+	QUnit.test( 'Create & destroy', function( assert ) {
+		assert.expect( 2 );
+		var $node = $( '<div/>' ).sticknode();
 
-	assert.ok(
-		$node.data( 'sticknode' ) !== undefined,
-		'Attached plugin.'
-	);
+		assert.ok(
+			$node.data( 'sticknode' ) !== undefined,
+			'Attached plugin.'
+		);
 
-	$node.data( 'sticknode' ).destroy();
+		$node.data( 'sticknode' ).destroy();
 
-	assert.ok(
-		$node.data( 'sticknode' ) === undefined,
-		'Detached plugin.'
-	);
-} );
+		assert.ok(
+			$node.data( 'sticknode' ) === undefined,
+			'Detached plugin.'
+		);
+	} );
 
 }( jQuery, QUnit ) );

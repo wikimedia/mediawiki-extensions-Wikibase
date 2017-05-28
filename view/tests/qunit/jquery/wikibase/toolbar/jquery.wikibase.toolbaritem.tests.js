@@ -5,48 +5,48 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-/**
- * @param {Object} [options]
- * @return {jQuery}
- */
-var createTestItem = function( options ) {
-	return $( '<span/>' )
-		.text( 'text' )
-		.addClass( 'test_toolbaritem' )
-		.toolbaritem( options || {} );
-};
+	/**
+	 * @param {Object} [options]
+	 * @return {jQuery}
+	 */
+	var createTestItem = function( options ) {
+		return $( '<span/>' )
+			.text( 'text' )
+			.addClass( 'test_toolbaritem' )
+			.toolbaritem( options || {} );
+	};
 
-QUnit.module( 'jquery.wikibase.toolbaritem', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_toolbaritem' ).each( function() {
-			var $item = $( this ).data( 'toolbaritem' ),
-				item = $item.data( 'toolbaritem' );
+	QUnit.module( 'jquery.wikibase.toolbaritem', QUnit.newMwEnvironment( {
+		teardown: function() {
+			$( '.test_toolbaritem' ).each( function() {
+				var $item = $( this ).data( 'toolbaritem' ),
+					item = $item.data( 'toolbaritem' );
 
-			if ( item ) {
-				item.destroy();
-			}
+				if ( item ) {
+					item.destroy();
+				}
 
-			$item.remove();
-		} );
-	}
-} ) );
+				$item.remove();
+			} );
+		}
+	} ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
-	assert.expect( 2 );
-	var $item = createTestItem(),
-		item = $item.data( 'toolbaritem' );
+	QUnit.test( 'Create & destroy', function( assert ) {
+		assert.expect( 2 );
+		var $item = createTestItem(),
+			item = $item.data( 'toolbaritem' );
 
-	assert.ok(
-		item instanceof $.wikibase.toolbaritem,
-		'Instantiated widget.'
-	);
+		assert.ok(
+			item instanceof $.wikibase.toolbaritem,
+			'Instantiated widget.'
+		);
 
-	item.destroy();
+		item.destroy();
 
-	assert.ok(
-		!$item.data( 'toolbaritem' ),
-		'Destroyed widget.'
-	);
-} );
+		assert.ok(
+			!$item.data( 'toolbaritem' ),
+			'Destroyed widget.'
+		);
+	} );
 
 }( jQuery, QUnit ) );

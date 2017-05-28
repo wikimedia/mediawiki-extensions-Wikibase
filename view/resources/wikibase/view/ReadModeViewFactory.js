@@ -1,18 +1,18 @@
 wikibase.view.ReadModeViewFactory = ( function( wb ) {
-'use strict';
+	'use strict';
 
-var PARENT = wb.view.ViewFactory;
+	var PARENT = wb.view.ViewFactory;
 
-var SELF = util.inherit( 'ReadModeViewFactory', PARENT, {} );
+	var SELF = util.inherit( 'ReadModeViewFactory', PARENT, {} );
 
-SELF.prototype.getStatementGroupListView = function( entity, $statementgrouplistview ) {
-	/* Skip constructing statement views entirely */
-};
+	SELF.prototype.getStatementGroupListView = function( entity, $statementgrouplistview ) {
+		/* Skip constructing statement views entirely */
+	};
 
-SELF.prototype.getSitelinkGroupListView = function( sitelinkSet, $sitelinkgrouplistview ) {
-	/* Skip constructing sitelink views entirely */
-};
+	SELF.prototype.getSitelinkGroupListView = function( sitelinkSet, $sitelinkgrouplistview ) {
+		/* Skip constructing sitelink views entirely */
+	};
 
-return SELF;
+	return SELF;
 
 }( wikibase ) );

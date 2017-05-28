@@ -42,21 +42,21 @@
 		function( stores ) {
 			this._stores = stores;
 		},
-	{
-		/**
-		 * @type {Object[]}
-		 */
-		_stores: null,
+		{
+			/**
+			 * @type {Object[]}
+			 */
+			_stores: null,
 
-		/**
-		 * @see wikibase.store.EntityStore.get
-		 */
-		get: function( entityId ) {
-			return asyncFallback( entityId, $.map( this._stores, function( store ) {
-				return function( entityId ) {
-					return store.get( entityId );
-				};
-			} ) );
-		}
-	} );
+			/**
+			 * @see wikibase.store.EntityStore.get
+			 */
+			get: function( entityId ) {
+				return asyncFallback( entityId, $.map( this._stores, function( store ) {
+					return function( entityId ) {
+						return store.get( entityId );
+					};
+				} ) );
+			}
+		} );
 }( wikibase, jQuery ) );
