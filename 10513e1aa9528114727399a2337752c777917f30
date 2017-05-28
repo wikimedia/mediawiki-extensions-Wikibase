@@ -70,6 +70,30 @@
       "revId": "10513e1aa9528114727399a2337752c777917f30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_db753c2d",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2017-05-28T09:36:38Z",
+      "side": 1,
+      "message": "What about something like this:\n\nLoading entities doesn\u0027t count as expensive if the same entity is loaded twice during a module run. However, due to restrictions in the chaching, if 14 other entities are loaded inbetween, the original entity fetching can\u0027t be served by the cache anymore and is considered expensive.",
+      "parentUuid": "0e1cb3f9_3b81f14f",
+      "range": {
+        "startLine": 11,
+        "startChar": 296,
+        "endLine": 11,
+        "endChar": 298
+      },
+      "revId": "10513e1aa9528114727399a2337752c777917f30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
