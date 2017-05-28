@@ -40,6 +40,7 @@ use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Serializer\ForbiddenSerializer;
@@ -901,9 +902,11 @@ final class WikibaseClient {
 		$lang = $this->getUserLanguage();
 
 		return new LanguageLinkBadgeDisplay(
-			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$lang
+			new SidebarLinkBadgeDisplay(
+				$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
+				is_array( $badgeClassNames ) ? $badgeClassNames : [],
+				$lang
+			)
 		);
 	}
 
