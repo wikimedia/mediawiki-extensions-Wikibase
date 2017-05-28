@@ -13,6 +13,7 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
@@ -186,9 +187,11 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			->will( $this->returnValue( new Term( 'en', 'featured' ) ) );
 
 		return new LanguageLinkBadgeDisplay(
-			$labelDescriptionLookup,
-			array( 'Q17' => 'featured' ),
-			Language::factory( 'en' )
+			new SidebarLinkBadgeDisplay(
+				$labelDescriptionLookup,
+				[ 'Q17' => 'featured' ],
+				Language::factory( 'en' )
+			)
 		);
 	}
 
