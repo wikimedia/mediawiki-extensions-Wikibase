@@ -15,7 +15,8 @@
 		.hide()
 		.after( $spinner );
 
-		mw.loader.using( [
+		mw.loader.using(
+			[
 				'jquery.wikibase.linkitem',
 				'mediawiki.Title',
 				'mw.config.values.wbRepo',

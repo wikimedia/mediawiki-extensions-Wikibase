@@ -1,50 +1,50 @@
 ( function( $, sinon, QUnit, wb, mw ) {
-'use strict';
+	'use strict';
 
-QUnit.module( 'wikibase.view.ToolbarViewController' );
+	QUnit.module( 'wikibase.view.ToolbarViewController' );
 
-function initToolbarViewController() {
-	var controller = new wb.view.ToolbarViewController(
-		{
-			remove: function() {
-				return $.Deferred();
+	function initToolbarViewController() {
+		var controller = new wb.view.ToolbarViewController(
+			{
+				remove: function() {
+					return $.Deferred();
+				},
+				save: function() {
+					return $.Deferred();
+				}
 			},
-			save: function() {
-				return $.Deferred();
-			}
-		},
-		{
-			disable: function() {},
-			enable: function() {},
-			getButton: function() {
-				return {
-					disable: function() {},
-					enable: function() {}
-				};
+			{
+				disable: function() {},
+				enable: function() {},
+				getButton: function() {
+					return {
+						disable: function() {},
+						enable: function() {}
+					};
+				},
+				toggleActionMessage: function() {},
+				toEditMode: function() {},
+				toNonEditMode: function() {}
 			},
-			toggleActionMessage: function() {},
-			toEditMode: function() {},
-			toNonEditMode: function() {}
-		},
-		{
-			disable: function() {},
-			element: {
-				on: function() {}
+			{
+				disable: function() {},
+				element: {
+					on: function() {}
+				},
+				enable: function() {},
+				setError: function() {},
+				startEditing: function() {
+					return $.Deferred();
+				},
+				stopEditing: function() {},
+				value: function() {}
 			},
-			enable: function() {},
-			setError: function() {},
-			startEditing: function() {
-				return $.Deferred();
-			},
-			stopEditing: function() {},
-			value: function() {}
-		},
-		function() {}
-	);
+			function() {}
+		);
 
-	return controller;
-}
+		return controller;
+	}
 
-wb.view.testViewController.all( wb.view.ToolbarViewController, initToolbarViewController );
+	wb.view.testViewController.all( wb.view.ToolbarViewController, initToolbarViewController );
 
 }( jQuery, sinon, QUnit, wikibase, mediaWiki ) );

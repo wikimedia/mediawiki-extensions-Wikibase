@@ -1,10 +1,10 @@
 ( function ( $ ) {
-  'use strict';
+	'use strict';
 
-  var form = $( 'form#mw-newentity-form1' );
+	var form = $( 'form#mw-newentity-form1' );
 
-  form.submit( function () {
-    $( this ).find( 'button[type=\'submit\']' ).prop( 'disabled', true );
-  } );
+	form.submit( function () {
+		$( this ).find( 'button[type=\'submit\']' ).prop( 'disabled', true );
+	} );
 
 } )( jQuery );
