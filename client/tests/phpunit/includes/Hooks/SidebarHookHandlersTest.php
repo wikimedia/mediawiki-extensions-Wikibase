@@ -13,6 +13,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\NamespaceChecker;
@@ -107,9 +108,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$this->getLabelDescriptionLookup(),
-			array( 'Q17' => 'featured' ),
-			$en
+			new SidebarLinkBadgeDisplay(
+				$this->getLabelDescriptionLookup(),
+				[ 'Q17' => 'featured' ],
+				$en
+			)
 		);
 
 		return new SidebarHookHandlers(
