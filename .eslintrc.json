@@ -19,7 +19,6 @@
 		"array-bracket-spacing": "off",
 		"computed-property-spacing": "off",
 		"dot-notation": "off",
-		"indent": "off",
 		"new-cap": "off",
 		"new-parens": "off",
 		"no-extra-boolean-cast": "off",
