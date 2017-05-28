@@ -5,172 +5,172 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_edittoolbar' ).each( function() {
-			var $edittoolbar = $( this ),
-				edittoolbar = $edittoolbar.data( 'edittoolbar' );
+	QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
+		teardown: function() {
+			$( '.test_edittoolbar' ).each( function() {
+				var $edittoolbar = $( this ),
+					edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-			if ( edittoolbar ) {
-				edittoolbar.destroy();
-			}
+				if ( edittoolbar ) {
+					edittoolbar.destroy();
+				}
 
-			$edittoolbar.remove();
-		} );
-	}
-} ) );
+				$edittoolbar.remove();
+			} );
+		}
+	} ) );
 
-/**
- * @param {Object} [options]
- * @return {jQuery}
- */
-function createEdittoolbar( options ) {
-	return $( '<span/>' )
-		.addClass( 'test_edittoolbar' )
-		.edittoolbar( $.extend( {
+	/**
+	 * @param {Object} [options]
+	 * @return {jQuery}
+	 */
+	function createEdittoolbar( options ) {
+		return $( '<span/>' )
+			.addClass( 'test_edittoolbar' )
+			.edittoolbar( $.extend( {
 				getHelpMessage: function() {
 					return $.Deferred().resolve().promise();
 				}
-		}, options || {} ) );
-}
-
-QUnit.test( 'Create & destroy', function( assert ) {
-	assert.expect( 4 );
-	var $edittoolbar = createEdittoolbar(),
-		edittoolbar = $edittoolbar.data( 'edittoolbar' );
-
-	assert.ok(
-		edittoolbar instanceof $.wikibase.edittoolbar,
-		'Instantiated widget.'
-	);
-
-	edittoolbar.destroy();
-
-	assert.ok(
-		!$edittoolbar.data( 'edittoolbar' ),
-		'Destroyed widget.'
-	);
-
-	$edittoolbar = createEdittoolbar( {
-		onRemove: function() {}
-	} );
-	edittoolbar = $edittoolbar.data( 'edittoolbar' );
-
-	assert.ok(
-		edittoolbar instanceof $.wikibase.edittoolbar,
-		'Instantiated widget with "onRemove" option set.'
-	);
-
-	edittoolbar.destroy();
-
-	assert.ok(
-		!$edittoolbar.data( 'edittoolbar' ),
-		'Destroyed widget.'
-	);
-} );
-
-QUnit.test( 'Deferred button initialization', function( assert ) {
-	assert.expect( 7 );
-	var $edittoolbar = createEdittoolbar(),
-		edittoolbar = $edittoolbar.data( 'edittoolbar' ),
-		deferredButtons = ['save', 'remove', 'cancel'];
-
-	assert.ok(
-		edittoolbar._buttons.edit !== undefined,
-		'Created "edit" button.'
-	);
-
-	for ( var i = 0; i < deferredButtons.length; i++ ) {
-		assert.ok(
-			edittoolbar._buttons[deferredButtons[i]] === undefined,
-			'"' + deferredButtons[i] + '" not yet initialized.'
-		);
+			}, options || {} ) );
 	}
 
-	var btnSave = edittoolbar.getButton( 'save' );
+	QUnit.test( 'Create & destroy', function( assert ) {
+		assert.expect( 4 );
+		var $edittoolbar = createEdittoolbar(),
+			edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-	assert.ok(
-		btnSave instanceof $.wikibase.toolbarbutton,
-		'Retrieved "save" button.'
-	);
+		assert.ok(
+			edittoolbar instanceof $.wikibase.edittoolbar,
+			'Instantiated widget.'
+		);
 
-	assert.ok(
-		edittoolbar._buttons.save !== undefined,
-		'Cached "save" button.'
-	);
+		edittoolbar.destroy();
 
-	assert.ok(
-		edittoolbar.getButton( 'save' ) === btnSave,
-		'Returning cached button when retrieving button again.'
-	);
-} );
+		assert.ok(
+			!$edittoolbar.data( 'edittoolbar' ),
+			'Destroyed widget.'
+		);
 
-QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
-	assert.expect( 9 );
-	var $edittoolbar = createEdittoolbar(),
+		$edittoolbar = createEdittoolbar( {
+			onRemove: function() {}
+		} );
 		edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-	assert.strictEqual(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
-		1,
-		'Toolbar has 1 button.'
-	);
+		assert.ok(
+			edittoolbar instanceof $.wikibase.edittoolbar,
+			'Instantiated widget with "onRemove" option set.'
+		);
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).data( 'toolbarbutton' ),
-		edittoolbar.getButton( 'edit' ),
-		'Verified toolbar\'s button being the "edit" button.'
-	);
+		edittoolbar.destroy();
 
-	edittoolbar.toEditMode();
+		assert.ok(
+			!$edittoolbar.data( 'edittoolbar' ),
+			'Destroyed widget.'
+		);
+	} );
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
-		2,
-		'Toolbar contains 2 buttons after switching to edit mode.'
-	);
+	QUnit.test( 'Deferred button initialization', function( assert ) {
+		assert.expect( 7 );
+		var $edittoolbar = createEdittoolbar(),
+			edittoolbar = $edittoolbar.data( 'edittoolbar' ),
+			deferredButtons = ['save', 'remove', 'cancel'];
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).first().data( 'toolbarbutton' ),
-		edittoolbar.getButton( 'save' ),
-		'Verified toolbar\'s first button being the "save" button.'
-	);
+		assert.ok(
+			edittoolbar._buttons.edit !== undefined,
+			'Created "edit" button.'
+		);
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).last().data( 'toolbarbutton' ),
-		edittoolbar.getButton( 'cancel' ),
-		'Verified toolbar\'s last button being the "cancel" button.'
-	);
+		for ( var i = 0; i < deferredButtons.length; i++ ) {
+			assert.ok(
+				edittoolbar._buttons[deferredButtons[i]] === undefined,
+				'"' + deferredButtons[i] + '" not yet initialized.'
+			);
+		}
 
-	edittoolbar.toNonEditMode();
+		var btnSave = edittoolbar.getButton( 'save' );
 
-	assert.strictEqual(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
-		1,
-		'Toolbar has 1 button after switching back to non-edit mode.'
-	);
+		assert.ok(
+			btnSave instanceof $.wikibase.toolbarbutton,
+			'Retrieved "save" button.'
+		);
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).first().data( 'toolbarbutton' ),
-		edittoolbar.getButton( 'edit' ),
-		'Verified toolbar\'s button being the "edit" button.'
-	);
+		assert.ok(
+			edittoolbar._buttons.save !== undefined,
+			'Cached "save" button.'
+		);
 
-	edittoolbar.option( 'onRemove', function() {} );
+		assert.ok(
+			edittoolbar.getButton( 'save' ) === btnSave,
+			'Returning cached button when retrieving button again.'
+		);
+	} );
 
-	edittoolbar.toEditMode();
+	QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
+		assert.expect( 9 );
+		var $edittoolbar = createEdittoolbar(),
+			edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
-		3,
-		'Toolbar contains 3 buttons after switching to edit mode.'
-	);
+		assert.strictEqual(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
+			1,
+			'Toolbar has 1 button.'
+		);
 
-	assert.equal(
-		$edittoolbar.find( ':wikibase-toolbarbutton' ).eq( 1 ).data( 'toolbarbutton' ),
-		edittoolbar.getButton( 'remove' ),
-		'Verified toolbar\'s second button being the "remove" button.'
-	);
-} );
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).data( 'toolbarbutton' ),
+			edittoolbar.getButton( 'edit' ),
+			'Verified toolbar\'s button being the "edit" button.'
+		);
+
+		edittoolbar.toEditMode();
+
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
+			2,
+			'Toolbar contains 2 buttons after switching to edit mode.'
+		);
+
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).first().data( 'toolbarbutton' ),
+			edittoolbar.getButton( 'save' ),
+			'Verified toolbar\'s first button being the "save" button.'
+		);
+
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).last().data( 'toolbarbutton' ),
+			edittoolbar.getButton( 'cancel' ),
+			'Verified toolbar\'s last button being the "cancel" button.'
+		);
+
+		edittoolbar.toNonEditMode();
+
+		assert.strictEqual(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
+			1,
+			'Toolbar has 1 button after switching back to non-edit mode.'
+		);
+
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).first().data( 'toolbarbutton' ),
+			edittoolbar.getButton( 'edit' ),
+			'Verified toolbar\'s button being the "edit" button.'
+		);
+
+		edittoolbar.option( 'onRemove', function() {} );
+
+		edittoolbar.toEditMode();
+
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
+			3,
+			'Toolbar contains 3 buttons after switching to edit mode.'
+		);
+
+		assert.equal(
+			$edittoolbar.find( ':wikibase-toolbarbutton' ).eq( 1 ).data( 'toolbarbutton' ),
+			edittoolbar.getButton( 'remove' ),
+			'Verified toolbar\'s second button being the "remove" button.'
+		);
+	} );
 
 }( jQuery, QUnit ) );
