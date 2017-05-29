@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_813c2e2e",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T17:39:17Z",
+      "side": 1,
+      "message": "This goes into the error log in production. Is that intended? Does this point to some sort of programming error or data corruption or misconfiguration?",
+      "revId": "ab66ee5348ede2ad0686f5f9e733970c79a9847a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_214682c6",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T17:39:17Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "ab66ee5348ede2ad0686f5f9e733970c79a9847a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
