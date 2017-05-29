@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_217e82ad",
+        "filename": "client/includes/Hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:05:41Z",
+      "side": 1,
+      "message": "Do I understand correctly that the distinction between this and the new class is that this class knows about ParserOutput and OutputPage, and the new class does not?",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_81742ecd",
+        "filename": "client/includes/Hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:05:41Z",
+      "side": 1,
+      "message": "The name of this function is bad, we have two kinds of \"Output\" in this class: ParserOutput, and OutputPage.",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_417b76bc",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:05:41Z",
+      "side": 1,
+      "message": "The parameters that this sentence refers to do not exist.",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e183aa9a",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:05:41Z",
+      "side": 1,
+      "message": "The structure should be documented. And it should say that this is a reference parameter, and expected to be modified.",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_dbca1971",
         "filename": "client/tests/phpunit/includes/Hooks/SidebarLinkBadgeDisplayTest.php",
         "patchSetId": 1
