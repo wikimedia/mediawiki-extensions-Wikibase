@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_acca891c",
+        "filename": "client/includes/Hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-29T22:41:21Z",
+      "side": 1,
+      "message": "This is one part, the main reason to do that is to make the new class usable outside of this place (e.g. for \"Other projects sidebar\" links). Mostly this is from I7a92b54c7b24fb23171d4eec0bd136b19fa8fdb9",
+      "parentUuid": "0e1cb3f9_217e82ad",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_81742ecd",
         "filename": "client/includes/Hooks/LanguageLinkBadgeDisplay.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-29T19:05:41Z",
       "side": 1,
       "message": "The name of this function is bad, we have two kinds of \"Output\" in this class: ParserOutput, and OutputPage.",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4ccbad21",
+        "filename": "client/includes/Hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-29T22:41:21Z",
+      "side": 1,
+      "message": "Even though I agree but I think we should do it in another patch. This patch isn\u0027t touching that part of the code.",
+      "parentUuid": "0e1cb3f9_81742ecd",
       "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_ec4de1c7",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-29T22:41:21Z",
+      "side": 1,
+      "message": "I removed as much as possible",
+      "parentUuid": "0e1cb3f9_417b76bc",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_e183aa9a",
         "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2017-05-29T19:05:41Z",
       "side": 1,
       "message": "The structure should be documented. And it should say that this is a reference parameter, and expected to be modified.",
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6c61d131",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-29T22:41:21Z",
+      "side": 1,
+      "message": "Done. I changed as much as possible.",
+      "parentUuid": "0e1cb3f9_e183aa9a",
       "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
