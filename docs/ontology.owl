@@ -182,11 +182,24 @@
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
-  <owl:NamedIndividual rdf:about="&wikibase;WikibaseEntityid">
-      <rdfs:label>WikibaseEntityid</rdfs:label>
-      <rdfs:comment>Type for referring to another Wikibase entity.</rdfs:comment>
+  <owl:NamedIndividual rdf:about="&wikibase;WikibaseItem">
+      <rdfs:label>WikibaseItem</rdfs:label>
+      <rdfs:comment>Type for referring to another Wikibase item.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;WikibaseProperty">
+      <rdfs:label>WikibaseProperty</rdfs:label>
+      <rdfs:comment>Type for referring to a Wikibase property.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+ <owl:NamedIndividual rdf:about="&wikibase;GeoShape">
+      <rdfs:label>GeoShape</rdfs:label>
+      <rdfs:comment>Type for storing links to geoshape data.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
 
   <!-- Individual property types supported by known Wikibase extensions -->
 
