@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_412a96d7",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-29T18:02:32Z",
+      "side": 1,
+      "message": "it only gets logged in production if we configure a monolog log channel for TermSqlIndex-duplicate and it can go to a separate log file.\n\nthe issue of duplicate entries may be indication of a bug or issue somewhere in the code. If indeed it still happens (I believe so), then it would be nice if we can make a more proper fix, but at least the logging info should be helpful",
+      "parentUuid": "0e1cb3f9_813c2e2e",
+      "revId": "ab66ee5348ede2ad0686f5f9e733970c79a9847a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_214682c6",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 4
