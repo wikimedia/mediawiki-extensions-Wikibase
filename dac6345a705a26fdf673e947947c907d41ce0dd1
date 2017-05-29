@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e18dead8",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T18:49:18Z",
+      "side": 1,
+      "message": "Is it correct for this to default to false?\nWhen I install from scratch, with the new column in the database, this should be true, right?",
+      "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c16ea6fd",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T18:49:18Z",
+      "side": 1,
+      "message": "perhaps this should be in WikibaseLib.default.php",
+      "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
