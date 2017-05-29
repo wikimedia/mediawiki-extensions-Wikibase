@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_4cb08d89",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-29T23:04:42Z",
+      "side": 1,
+      "message": "Yeah, but lots of existing mediawiki installations (including my localhost) would break if we set it true. I suggest we wait for a mediawiki release (around 20 weeks from now) to set it true  by default.",
+      "parentUuid": "0e1cb3f9_e18dead8",
+      "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_c16ea6fd",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-29T18:49:18Z",
       "side": 1,
       "message": "perhaps this should be in WikibaseLib.default.php",
+      "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2cac3930",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-29T23:04:42Z",
+      "side": 1,
+      "message": "writeFullEntityIdColumn is already here and everything is temporarily.",
+      "parentUuid": "0e1cb3f9_c16ea6fd",
       "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
