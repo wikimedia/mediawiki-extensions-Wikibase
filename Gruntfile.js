@@ -40,4 +40,5 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'test', [ 'eslint', 'jsonlint', 'banana', 'stylelint' ] );
+	grunt.registerTask( 'default', 'test' );
 };
