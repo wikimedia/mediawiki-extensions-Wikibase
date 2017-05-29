@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_fb4d9dc7",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-29T12:19:50Z",
+      "side": 1,
+      "message": "I\u0027m afraid you did not understood.\n\nThis is the Wikibase code base, not MediaWiki core. I do not have any interest in arguing about the pros and cons of certain style guide rules in an upstream discussion. I will just disable rules that do not make sense, as I did in https://github.com/wmde/WikibaseCodeSniffer. I want a discussion with the people actively working on this code base. Nobody else. I want to discuss if it makes sense to blindly follow somebody else style guide, or if we can find a balance that makes more sense for us.",
+      "parentUuid": "0e1cb3f9_fb76fdff",
+      "range": {
+        "startLine": 593,
+        "startChar": 24,
+        "endLine": 593,
+        "endChar": 26
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_58a7ef07",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
         "patchSetId": 1
