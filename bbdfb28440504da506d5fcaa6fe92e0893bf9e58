@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_814bce87",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:18:50Z",
+      "side": 1,
+      "message": "a parameter starting with a capital letter looks strange to me... I would have used $lbFactory. But no big deal.",
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2165220d",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:18:50Z",
+      "side": 1,
+      "message": "why move this? it makes the diff harder to read...",
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_41629606",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:18:50Z",
+      "side": 1,
+      "message": "We could avoid doing this until we know that $untracked isn\u0027t empty. $untracked is nearly always empty!\n\nTo do this, it would probably be best to split this method in two.",
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_3b4315b7",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 10

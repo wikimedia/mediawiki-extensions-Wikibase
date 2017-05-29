@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_012fbe9c",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-29T19:18:50Z",
+      "side": 0,
+      "message": "This is the line that actually grabs a global lock, I think we should keep it :)\n\nAlso: We will have to be very careful on which DB connection we use to engace or release the lock. The global MySQL locks are per-server, so this will probably have to be the master connection, always! Just to make sure it is always the same server...",
+      "revId": "476a4c23e4a71f4914c5644f40de4a391b7dc0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
