@@ -62,4 +62,4 @@
 		langWidget.on( 'change', updatePlaceholders );
 	} );
 
-} )( jQuery, mediaWiki, OO );
+}( jQuery, mediaWiki, OO ) );

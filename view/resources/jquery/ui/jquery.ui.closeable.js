@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -42,7 +42,7 @@ $.widget( 'ui.closeable', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	_create: function() {
+	_create: function () {
 		var self = this;
 
 		PARENT.prototype._create.call( this );
@@ -50,7 +50,7 @@ $.widget( 'ui.closeable', PARENT, {
 		this.option( '$content', this.options.$content );
 		this.option( 'cssClass', this.options.cssClass );
 
-		this.$close.on( 'click.' + this.widgetName, function() {
+		this.$close.on( 'click.' + this.widgetName, function () {
 			self.option( '$content', null );
 		} );
 	},
@@ -61,7 +61,7 @@ $.widget( 'ui.closeable', PARENT, {
 	 * @param {jQuery|null} [$content=null]
 	 * @param {string|null} [cssClasses=null]
 	 */
-	setContent: function( $content, cssClasses ) {
+	setContent: function ( $content, cssClasses ) {
 		this.option( '$content', $content || null );
 		this.option( 'cssClass', cssClasses || '' );
 		this._trigger( 'update' );
@@ -70,7 +70,7 @@ $.widget( 'ui.closeable', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === '$content' ) {
 			this.$content.empty();
 

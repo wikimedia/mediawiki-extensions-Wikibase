@@ -2,13 +2,13 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 var statementgroupviewListItemAdapter = wb.tests.getMockListItemAdapter(
 	'statementgroupview',
-	function() {
-		this.enterNewItem = function() {};
+	function () {
+		this.enterNewItem = function () {};
 	}
 );
 
@@ -17,11 +17,11 @@ var statementgroupviewListItemAdapter = wb.tests.getMockListItemAdapter(
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createStatementgrouplistview = function( options, $node ) {
+var createStatementgrouplistview = function ( options, $node ) {
 	options = $.extend( {
-		getAdder: function() {
+		getAdder: function () {
 			return {
-				destroy: function() {}
+				destroy: function () {}
 			};
 		},
 		listItemAdapter: statementgroupviewListItemAdapter,
@@ -36,8 +36,8 @@ var createStatementgrouplistview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.statementgrouplistview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementgrouplistview' ).each( function() {
+	teardown: function () {
+		$( '.test_statementgrouplistview' ).each( function () {
 			var $statementgrouplistview = $( this ),
 				statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -50,7 +50,7 @@ QUnit.module( 'jquery.wikibase.statementgrouplistview', QUnit.newMwEnvironment( 
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.expect( 3 );
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
@@ -80,7 +80,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem', function( assert ) {
+QUnit.test( 'enterNewItem', function ( assert ) {
 	assert.expect( 2 );
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
@@ -100,7 +100,7 @@ QUnit.test( 'enterNewItem', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem & save', function( assert ) {
+QUnit.test( 'enterNewItem & save', function ( assert ) {
 	assert.expect( 2 );
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
@@ -115,7 +115,7 @@ QUnit.test( 'enterNewItem & save', function( assert ) {
 	);
 
 	$statementgroupview.wrap( '<div/>' );
-	$statementgroupview.trigger( 'afterstopediting', [false] );
+	$statementgroupview.trigger( 'afterstopediting', [ false ] );
 
 	assert.ok(
 		!statementgrouplistview.listview.items().first().hasClass( 'wb-new' ),

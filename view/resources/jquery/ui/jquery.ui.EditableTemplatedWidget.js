@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -46,7 +46,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
+	_create: function () {
 		this.element.data( 'EditableTemplatedWidget', this );
 		PARENT.prototype._create.call( this );
 	},
@@ -54,7 +54,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.element.removeClass( 'wb-edit' );
 		PARENT.prototype.destroy.call( this );
 	},
@@ -67,7 +67,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		if ( this.isInEditMode() ) {
 			return $.Deferred().resolve().promise();
 		}
@@ -77,12 +77,12 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		this.element.addClass( 'wb-edit' );
 
 		return this._startEditing()
-		.done( function() {
+		.done( function () {
 			self._trigger( 'afterstartediting' );
 		} );
 	},
 
-	_startEditing: function() {
+	_startEditing: function () {
 		return $.Deferred().resolve().promise();
 	},
 
@@ -96,7 +96,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		if ( !this.isInEditMode() ) {
 			return $.Deferred().resolve().promise();
 		}
@@ -105,16 +105,16 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 
 		var self = this;
 		return this._stopEditing( dropValue )
-		.done( function() {
+		.done( function () {
 			self.enable();
-			self._trigger( 'afterstopediting', null, [dropValue] );
+			self._trigger( 'afterstopediting', null, [ dropValue ] );
 		} )
-		.fail( function( error ) {
+		.fail( function ( error ) {
 			self.setError( error );
 		} );
 	},
 
-	_stopEditing: function( dropValue ) {
+	_stopEditing: function ( dropValue ) {
 		return $.Deferred().resolve().promise();
 	},
 
@@ -123,7 +123,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *
 	 * @return {boolean}
 	 */
-	isInEditMode: function() {
+	isInEditMode: function () {
 		return this.element.hasClass( 'wb-edit' );
 	},
 
@@ -142,20 +142,20 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *
 	 * @param {Error} [error]
 	 */
-	setError: function( error ) {
+	setError: function ( error ) {
 		if ( error ) {
 			this.element.addClass( 'wb-error' );
-			this._trigger( 'toggleerror', null, [error] );
+			this._trigger( 'toggleerror', null, [ error ] );
 		} else {
 			this.removeError();
-			this._trigger( 'toggleerror', null, [null] );
+			this._trigger( 'toggleerror', null, [ null ] );
 		}
 	},
 
 	/**
 	 * Removes error state without triggering an event.
 	 */
-	removeError: function() {
+	removeError: function () {
 		this.element.removeClass( 'wb-error' );
 	},
 
@@ -166,7 +166,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 * @param {string} [additionalCssClasses]
 	 * @return {jQuery|null}
 	 */
-	notification: function( $content, additionalCssClasses ) {
+	notification: function ( $content, additionalCssClasses ) {
 		if ( !this._$notification ) {
 			this._$notification = $( '<div/>' ).closeable( {
 				encapsulate: true
@@ -184,7 +184,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         - {string}
 	 *         No rejected parameters.
 	 */
-	getHelpMessage: function() {
+	getHelpMessage: function () {
 		return $.Deferred().resolve( this.options.helpMessage ).promise();
 	},
 

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 var PARENT = $.wikibase.toolbar;
@@ -41,7 +41,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbar._create
 	 */
-	_create: function() {
+	_create: function () {
 		PARENT.prototype._create.call( this );
 
 		if ( !this.options.$content.length ) {
@@ -57,7 +57,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	 * @param {jQuery|null} $scrapedButton
 	 * @return {jQuery}
 	 */
-	_initDefaultButton: function( $scrapedButton ) {
+	_initDefaultButton: function ( $scrapedButton ) {
 		var self = this,
 			$defaultButton = $scrapedButton || $( '<span/>' );
 
@@ -66,7 +66,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 			title: this.options.title,
 			cssClassSuffix: this.options.buttonCssClassSuffix
 		} )
-		.on( 'toolbarbuttonaction.' + this.widgetName, function( event ) {
+		.on( 'toolbarbuttonaction.' + this.widgetName, function ( event ) {
 			self._trigger( self.options.eventName );
 		} );
 	},
@@ -74,11 +74,11 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	/**
 	 * @return {jQuery}
 	 */
-	_scrapeButton: function() {
+	_scrapeButton: function () {
 		var self = this,
 			$defaultButton = null;
 
-		this.getContainer().children( '.wikibase-toolbar-button' ).each( function() {
+		this.getContainer().children( '.wikibase-toolbar-button' ).each( function () {
 			var $button = $( this );
 			if ( $button.text() === self.options.label ) {
 				$defaultButton = $button;
@@ -92,7 +92,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem.focus
 	 */
-	focus: function() {
+	focus: function () {
 		var button = this.options.$content.first().data( 'toolbarbutton' );
 		if ( button ) {
 			button.focus();

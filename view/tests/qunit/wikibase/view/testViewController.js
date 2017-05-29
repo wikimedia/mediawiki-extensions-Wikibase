@@ -1,14 +1,14 @@
-wikibase.view.testViewController = ( function( QUnit, wb ) {
+wikibase.view.testViewController = ( function ( QUnit, wb ) {
 'use strict';
 
 return {
-	all: function( constructor, getInstance ) {
+	all: function ( constructor, getInstance ) {
 		this.constructorTests( constructor, getInstance );
 		this.methodTests( getInstance );
 	},
 
-	constructorTests: function( constructor, getInstance ) {
-		QUnit.test( 'implements wb.view.ViewController', function( assert ) {
+	constructorTests: function ( constructor, getInstance ) {
+		QUnit.test( 'implements wb.view.ViewController', function ( assert ) {
 			assert.expect( 2 );
 			var controller = getInstance();
 
@@ -17,8 +17,8 @@ return {
 		} );
 	},
 
-	methodTests: function( getInstance ) {
-		QUnit.test( 'has non-abstract startEditing method', function( assert ) {
+	methodTests: function ( getInstance ) {
+		QUnit.test( 'has non-abstract startEditing method', function ( assert ) {
 			assert.expect( 1 );
 			var controller = getInstance();
 
@@ -27,7 +27,7 @@ return {
 			assert.ok( true );
 		} );
 
-		QUnit.test( 'has non-abstract stopEditing method', function( assert ) {
+		QUnit.test( 'has non-abstract stopEditing method', function ( assert ) {
 			assert.expect( 1 );
 			var controller = getInstance();
 
@@ -36,7 +36,7 @@ return {
 			assert.ok( true );
 		} );
 
-		QUnit.test( 'has non-abstract cancelEditing method', function( assert ) {
+		QUnit.test( 'has non-abstract cancelEditing method', function ( assert ) {
 			assert.expect( 1 );
 			var controller = getInstance();
 
@@ -45,7 +45,7 @@ return {
 			assert.ok( true );
 		} );
 
-		QUnit.test( 'has non-abstract setError method', function( assert ) {
+		QUnit.test( 'has non-abstract setError method', function ( assert ) {
 			assert.expect( 1 );
 			var controller = getInstance();
 
@@ -54,7 +54,7 @@ return {
 			assert.ok( true );
 		} );
 
-		QUnit.test( 'has non-abstract remove method', function( assert ) {
+		QUnit.test( 'has non-abstract remove method', function ( assert ) {
 			assert.expect( 1 );
 			var controller = getInstance();
 

@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.addtoolbar', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_addtoolbar' ).each( function() {
+	teardown: function () {
+		$( '.test_addtoolbar' ).each( function () {
 			var $addtoolbar = $( this ),
 				addtoolbar = $addtoolbar.data( 'addtoolbar' );
 
@@ -30,7 +30,7 @@ function createAddtoolbar( options ) {
 		.addtoolbar( options || {} );
 }
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.expect( 2 );
 	var $addtoolbar = createAddtoolbar(),
 		addtoolbar = $addtoolbar.data( 'addtoolbar' );

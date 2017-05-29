@@ -7,12 +7,12 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( mw, $, QUnit ) {
+( function ( mw, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.templates', QUnit.newMwEnvironment() );
 
-	QUnit.test( 'mw.wbTemplate()', function( assert ) {
+	QUnit.test( 'mw.wbTemplate()', function ( assert ) {
 		assert.expect( 74 );
 
 		assert.equal(
@@ -69,8 +69,8 @@
 					'text param text',
 					'text &lt;div&gt;&lt;/div&gt; text',
 					'text <div>text</div> text',
-					['', 'text <tr></tr> text'],
-					['', 'text <td><span>text</span></td> text'],
+					[ '', 'text <tr></tr> text' ],
+					[ '', 'text <td><span>text</span></td> text' ],
 					'text text with&amp;nbsp;spaces text'
 				],
 				'<div>$1</div>': [
@@ -98,20 +98,20 @@
 					'<div><div>text with&amp;nbsp;spaces</div></div>'
 				],
 				'<tr>$1</tr>': [
-					['', '<tr>param</tr>'],
-					['', '<tr><div></div></tr>'],
-					['', '<tr><div>text</div></tr>'],
+					[ '', '<tr>param</tr>' ],
+					[ '', '<tr><div></div></tr>' ],
+					[ '', '<tr><div>text</div></tr>' ],
 					'',
 					'<tr><td><span>text</span></td></tr>',
-					['', '<tr>text with&amp;nbsp;spaces</tr>']
+					[ '', '<tr>text with&amp;nbsp;spaces</tr>' ]
 				],
 				'<table>$1</table>': [
-					['', '<table>param</table>'],
-					['', '<table><div></div></table>'],
-					['', '<table><div>text</div></table>'],
+					[ '', '<table>param</table>' ],
+					[ '', '<table><div></div></table>' ],
+					[ '', '<table><div>text</div></table>' ],
 					'<table><tbody><tr></tr></tbody></table>',
 					'',
-					['', '<table>text with&amp;nbsp;spaces</table>']
+					[ '', '<table>text with&amp;nbsp;spaces</table>' ]
 				],
 				'text<div>$1</div>': [
 					'text<div>param</div>',
@@ -159,7 +159,7 @@
 		 * @param {string} template
 		 * @param {string|Array} expected
 		 */
-		var verifyTemplate = function( params, template, expected ) {
+		var verifyTemplate = function ( params, template, expected ) {
 			var key = 'test';
 
 			/**
@@ -184,7 +184,7 @@
 			mw.wbTemplates.store.set( key, template );
 
 			var paramMessage = '';
-			$.each( params, function( i, param ) {
+			$.each( params, function ( i, param ) {
 				if ( i > 0 ) {
 					paramMessage += ', ';
 				}
@@ -196,12 +196,12 @@
 			} );
 
 			if ( Array.isArray( expected ) ) {
-				expected = ( $.client.profile().name === 'msie' ) ? expected[1] : expected[0];
+				expected = ( $.client.profile().name === 'msie' ) ? expected[ 1 ] : expected[ 0 ];
 			}
 
 			if ( expected === '' ) {
 				assert.throws(
-					function() { $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html(); },
+					function () { $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html(); },
 					'Triggered error when trying to create invalid HTML filling single param template "' + template + '" with "' + paramMessage + '"'
 				);
 			} else {
@@ -215,9 +215,9 @@
 		};
 
 		// Loop through testsData and params to run the tests
-		$.each( testsData, function( numberOfParams, testData ) {
-			$.each( testData, function( template, expectedResults ) {
-				$.each( params[ numberOfParams ], function( i, params ) {
+		$.each( testsData, function ( numberOfParams, testData ) {
+			$.each( testData, function ( template, expectedResults ) {
+				$.each( params[ numberOfParams ], function ( i, params ) {
 					verifyTemplate( params, template, expectedResults[ i ] );
 				} );
 			} );

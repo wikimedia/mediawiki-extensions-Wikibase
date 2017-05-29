@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -19,7 +19,7 @@
 	MODULE.ApiEntityStore = util.inherit(
 		'WbApiEntityStore',
 		MODULE.EntityStore,
-		function( repoApi, entityDeserializer, languages ) {
+		function ( repoApi, entityDeserializer, languages ) {
 			this._entityDeserializer = entityDeserializer;
 			this._languages = languages;
 			this._repoApi = repoApi;
@@ -44,12 +44,12 @@
 		/**
 		 * @see wikibase.store.EntityStore.get
 		 */
-		get: function( entityId ) {
+		get: function ( entityId ) {
 			var deferred = $.Deferred(),
 				self = this;
 
 			this._repoApi.getEntities( [ entityId ], null, this._languages )
-			.done( function( result ) {
+			.done( function ( result ) {
 				var entityData = result.entities[ entityId ];
 				var entity = null;
 
@@ -60,7 +60,7 @@
 				deferred.resolve( entity );
 			} )
 			// FIXME: Evaluate failing promise
-			.fail( function() {
+			.fail( function () {
 				deferred.reject();
 			} );
 

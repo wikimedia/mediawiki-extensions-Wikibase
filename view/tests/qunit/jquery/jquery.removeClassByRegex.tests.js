@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author Daniel Werner
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.removeClassByRegex' );
 
-QUnit.test( 'Basics', function( assert ) {
+QUnit.test( 'Basics', function ( assert ) {
 	assert.expect( 5 );
 	var classes = [ 'a11a', 'bbb', 'c333', 'dddd', 'e', '6', '7' ];
 	var subject = $( '<div/>', {
@@ -44,7 +44,7 @@ QUnit.test( 'Basics', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Multiple elements', function( assert ) {
+QUnit.test( 'Multiple elements', function ( assert ) {
 	assert.expect( 3 );
 
 	var subject = $(
@@ -62,7 +62,7 @@ QUnit.test( 'Multiple elements', function( assert ) {
 
 	var tmp = subject.clone().removeClassByRegex( /.*/ );
 	assert.equal(
-		$( tmp[0] ).attr( 'class' ) + $( tmp[1] ).attr( 'class' ) + $( tmp[2] ).attr( 'class' ),
+		$( tmp[ 0 ] ).attr( 'class' ) + $( tmp[ 1 ] ).attr( 'class' ) + $( tmp[ 2 ] ).attr( 'class' ),
 		'',
 		'removed all classes from all three elements (from a clone)'
 	);
@@ -70,9 +70,9 @@ QUnit.test( 'Multiple elements', function( assert ) {
 	tmp = subject.clone().removeClassByRegex( /^\d+$/ );
 	assert.equal(
 		[
-			$( tmp[0] ).attr( 'class' ),
-			$( tmp[1] ).attr( 'class' ),
-			$( tmp[2] ).attr( 'class' )
+			$( tmp[ 0 ] ).attr( 'class' ),
+			$( tmp[ 1 ] ).attr( 'class' ),
+			$( tmp[ 2 ] ).attr( 'class' )
 		].join( '_' ),
 		'A B C_AA BB CC_AAA BBB CCC',
 		'removed all numeric classes from all three elements (from a clone)'

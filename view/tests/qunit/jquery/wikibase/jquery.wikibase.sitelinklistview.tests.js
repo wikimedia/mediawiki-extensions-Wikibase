@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 /**
@@ -11,16 +11,16 @@
  */
 function createSitelinklistview( options ) {
 	options = $.extend( {
-		allowedSiteIds: ['aawiki', 'enwiki'],
-		getListItemAdapter: function() {
+		allowedSiteIds: [ 'aawiki', 'enwiki' ],
+		getListItemAdapter: function () {
 			return wb.tests.getMockListItemAdapter(
 				'sitelinkview',
-				function() {
+				function () {
 					this.$siteId = $( '<div/>' );
-					this.focus = function() {};
-					this.isEmpty = function() { return !this.options.value; };
-					this.startEditing = function() {};
-					this.value = function() {
+					this.focus = function () {};
+					this.isEmpty = function () { return !this.options.value; };
+					this.startEditing = function () {};
+					this.value = function () {
 						return this.options.value;
 					};
 				}
@@ -35,7 +35,7 @@ function createSitelinklistview( options ) {
 
 	var sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-	sitelinklistview._saveSiteLink = function( siteLink ) {
+	sitelinklistview._saveSiteLink = function ( siteLink ) {
 		if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
 			throw new Error( 'SiteLink object expected' );
 		} else {
@@ -78,8 +78,8 @@ QUnit.module( 'jquery.wikibase.sitelinklistview', QUnit.newWbEnvironment( {
 			}
 		}
 	},
-	teardown: function() {
-		$( '.test_sitelinklistview' ).each( function() {
+	teardown: function () {
+		$( '.test_sitelinklistview' ).each( function () {
 			var $sitelinklistview = $( this ),
 				sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -92,7 +92,7 @@ QUnit.module( 'jquery.wikibase.sitelinklistview', QUnit.newWbEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create and destroy', function( assert ) {
+QUnit.test( 'Create and destroy', function ( assert ) {
 	assert.expect( 2 );
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
@@ -110,11 +110,11 @@ QUnit.test( 'Create and destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Create and destroy with initial value', function( assert ) {
+QUnit.test( 'Create and destroy with initial value', function ( assert ) {
 	assert.expect( 2 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		$sitelinklistview = createSitelinklistview( {
-			value: [siteLink]
+			value: [ siteLink ]
 		} ),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -131,7 +131,7 @@ QUnit.test( 'Create and destroy with initial value', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isFull()', function( assert ) {
+QUnit.test( 'isFull()', function ( assert ) {
 	assert.expect( 2 );
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
@@ -155,10 +155,10 @@ QUnit.test( 'isFull()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	assert.expect( 1 );
 	var $sitelinklistview = createSitelinklistview( {
-			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
+			value: [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
 		} ),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -168,7 +168,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value() with invalid sitelinkview', function( assert ) {
+QUnit.test( 'value() with invalid sitelinkview', function ( assert ) {
 	assert.expect( 1 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: []
@@ -184,20 +184,20 @@ QUnit.test( 'value() with invalid sitelinkview', function( assert ) {
 	);
 } );
 
-QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
+QUnit.test( 'startEditing() & stopEditing()', 4, function ( assert ) {
 	var $sitelinklistview = createSitelinklistview( {
-			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
+			value: [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
 		} ),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 	$sitelinklistview
-	.on( 'sitelinklistviewafterstartediting', function( event ) {
+	.on( 'sitelinklistviewafterstartediting', function ( event ) {
 		assert.ok(
 			true,
 			'Started edit mode.'
 		);
 	} )
-	.on( 'sitelinklistviewafterstopediting', function( event, dropValue ) {
+	.on( 'sitelinklistviewafterstopediting', function ( event, dropValue ) {
 		assert.ok(
 			true,
 			'Stopped edit mode.'
@@ -218,13 +218,13 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 		}
 
 		$sitelinklistview
-		.one( 'sitelinklistviewafterstartediting.sitelinklistviewtest', function( event ) {
+		.one( 'sitelinklistviewafterstartediting.sitelinklistviewtest', function ( event ) {
 			$sitelinklistview.off( '.sitelinklistviewtest' );
 			deferred.resolve();
 		} )
 		.one(
 			'sitelinklistviewafterstopediting.sitelinklistviewtest',
-			function( event, dropValue ) {
+			function ( event, dropValue ) {
 				$sitelinklistview.off( '.sitelinklistviewtest' );
 				deferred.resolve();
 			}
@@ -246,40 +246,40 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 		if ( expectingEvent === undefined ) {
 			expectingEvent = true;
 		}
-		$queue.queue( 'tests', function( next ) {
+		$queue.queue( 'tests', function ( next ) {
 			QUnit.stop();
-			testEditModeChange( func, expectingEvent ).always( function() {
+			testEditModeChange( func, expectingEvent ).always( function () {
 				QUnit.start();
 				next();
 			} );
 		} );
 	}
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinklistview.startEditing();
 	} );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinklistview.startEditing();
 	}, false );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinklistview.stopEditing( true );
 	} );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinklistview.stopEditing( true );
 	}, false );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinklistview.stopEditing();
 	}, false );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinklistview.startEditing();
 	} );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		// Mock adding a new item:
 		var listview = sitelinklistview.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
@@ -291,13 +291,13 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 	$queue.dequeue( 'tests' );
 } );
 
-QUnit.test( 'setError()', 1, function( assert ) {
+QUnit.test( 'setError()', 1, function ( assert ) {
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 	$sitelinklistview
 	.addClass( 'wb-error' )
-	.on( 'sitelinklistviewtoggleerror', function( event, error ) {
+	.on( 'sitelinklistviewtoggleerror', function ( event, error ) {
 		assert.ok(
 			true,
 			'Triggered toggleerror event.'
@@ -307,9 +307,9 @@ QUnit.test( 'setError()', 1, function( assert ) {
 	sitelinklistview.setError();
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	assert.expect( 2 );
-	var value = [new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' )],
+	var value = [ new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ) ],
 		$sitelinklistview = createSitelinklistview( {
 			value: value
 		} ),
@@ -335,12 +335,12 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem()', 1, function( assert ) {
+QUnit.test( 'enterNewItem()', 1, function ( assert ) {
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 	$sitelinklistview
-	.on( 'sitelinklistviewafterstartediting', function() {
+	.on( 'sitelinklistviewafterstartediting', function () {
 		assert.ok(
 			true,
 			'Started sitelinklistview edit mode.'
@@ -350,7 +350,7 @@ QUnit.test( 'enterNewItem()', 1, function( assert ) {
 	sitelinklistview.enterNewItem();
 } );
 
-QUnit.test( 'remove empty sitelinkview when hitting backspace', function( assert ) {
+QUnit.test( 'remove empty sitelinkview when hitting backspace', function ( assert ) {
 	assert.expect( 2 );
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
@@ -360,9 +360,9 @@ QUnit.test( 'remove empty sitelinkview when hitting backspace', function( assert
 	sitelinklistview.enterNewItem();
 
 	var listview = sitelinklistview.$listview.data( 'listview' ),
-		sitelinkview = listview.value()[0];
+		sitelinkview = listview.value()[ 0 ];
 
-	sitelinkview.isEmpty = function() {
+	sitelinkview.isEmpty = function () {
 		return true;
 	};
 

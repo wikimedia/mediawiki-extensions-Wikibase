@@ -2,21 +2,21 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	var listItemAdapter = wb.tests.getMockListItemAdapter(
 		'snaklistview',
-		function() {
-			this.enterNewItem = function() {
+		function () {
+			this.enterNewItem = function () {
 				return $.Deferred().resolve( {
-					data: function() {
-						return { focus: function() {} };
+					data: function () {
+						return { focus: function () {} };
 					}
 				} ).promise();
 			};
-			this.stopEditing = function() {};
-			this.value = function() {
+			this.stopEditing = function () {};
+			this.value = function () {
 				return this.options.value;
 			};
 		}
@@ -30,22 +30,22 @@
 	 */
 	function createReferenceview( options ) {
 		options = $.extend( {
-			getAdder: function() {
+			getAdder: function () {
 				return {
-					destroy: function() {}
+					destroy: function () {}
 				};
 			},
-			getReferenceRemover: function() {
+			getReferenceRemover: function () {
 				return {
-					destroy: function() {},
-					disable: function() {},
-					enable: function() {}
+					destroy: function () {},
+					disable: function () {},
+					enable: function () {}
 				};
 			},
-			getListItemAdapter: function() {
+			getListItemAdapter: function () {
 				return listItemAdapter;
 			},
-			removeCallback: function() {}
+			removeCallback: function () {}
 		}, options );
 
 		return $( '<div/>' )
@@ -54,8 +54,8 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.referenceview', window.QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_referenceview' ).each( function( i, node ) {
+		teardown: function () {
+			$( '.test_referenceview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					referenceview = $node.data( 'referenceview' );
 
@@ -68,7 +68,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy', function( assert ) {
+	QUnit.test( 'Initialize and destroy', function ( assert ) {
 		assert.expect( 5 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
@@ -103,7 +103,7 @@
 		);
 	} );
 
-	QUnit.test( 'is initialized with a value', function( assert ) {
+	QUnit.test( 'is initialized with a value', function ( assert ) {
 		assert.expect( 1 );
 		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
@@ -119,7 +119,7 @@
 		);
 	} );
 
-	QUnit.test( 'allows to enter new item', function( assert ) {
+	QUnit.test( 'allows to enter new item', function ( assert ) {
 		assert.expect( 2 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
@@ -140,7 +140,7 @@
 
 	} );
 
-	QUnit.test( 'allows to stop editing', function( assert ) {
+	QUnit.test( 'allows to stop editing', function ( assert ) {
 		assert.expect( 2 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
@@ -161,4 +161,4 @@
 		);
 	} );
 
-} )( jQuery, wikibase, QUnit );
+}( jQuery, wikibase, QUnit ) );

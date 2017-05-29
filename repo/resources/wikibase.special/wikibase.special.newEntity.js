@@ -7,4 +7,4 @@
     $( this ).find( 'button[type=\'submit\']' ).prop( 'disabled', true );
   } );
 
-} )( jQuery );
+}( jQuery ) );

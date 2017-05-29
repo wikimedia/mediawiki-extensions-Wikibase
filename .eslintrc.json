@@ -16,23 +16,13 @@
 		"wikibase": false
 	},
 	"rules": {
-		"array-bracket-spacing": "off",
-		"computed-property-spacing": "off",
-		"dot-notation": "off",
 		"indent": "off",
 		"new-cap": "off",
-		"new-parens": "off",
-		"no-extra-boolean-cast": "off",
 		"no-underscore-dangle": "off",
 		"no-unused-vars": "off",
 		"no-useless-concat": "off",
 		"one-var": "off",
-		"operator-linebreak": "off",
-		"space-before-function-paren": "off",
-		"space-in-parens": "off",
-		"spaced-comment": "off",
 		"valid-jsdoc": "off",
-		"wrap-iife": "off",
 		"vars-on-top": "off"
 	}
 }

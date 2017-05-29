@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.sticknode' );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.expect( 2 );
 	var $node = $( '<div/>' ).sticknode();
 

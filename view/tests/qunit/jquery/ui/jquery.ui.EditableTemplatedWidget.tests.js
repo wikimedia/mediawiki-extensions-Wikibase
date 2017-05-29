@@ -2,17 +2,17 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $, QUnit ) {
+( function ( mw, $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
-	setup: function() {
+	setup: function () {
 		$.widget( 'test.editablewidget', {
-			_create: function() {
+			_create: function () {
 				this._initialValue = this.options.value;
 			},
-			draw: function() {},
-			value: function( value ) {
+			draw: function () {},
+			value: function ( value ) {
 				if ( value === undefined ) {
 					this.option( 'value', value );
 				} else {
@@ -21,10 +21,10 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 			}
 		} );
 	},
-	teardown: function() {
+	teardown: function () {
 		delete( $.test.editablewidget );
 
-		$( '.test_edittoolbar' ).each( function() {
+		$( '.test_edittoolbar' ).each( function () {
 			var $edittoolbar = $( this ),
 				edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -37,25 +37,25 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.expect( 2 );
 	var testSets = [
 		[
 			'<div><span>$1</span></div>',
 			{
-				templateParams: ['test']
+				templateParams: [ 'test' ]
 			}
 		]
 	];
 
 	for ( var i = 0; i < testSets.length; i++ ) {
-		mw.wbTemplates.store.set( 'templatedWidget-test', testSets[i][0] );
+		mw.wbTemplates.store.set( 'templatedWidget-test', testSets[ i ][ 0 ] );
 
 		var $subject = $( '<div/>' );
 
 		$subject.editablewidget( $.extend( {
 			template: 'templatedWidget-test'
-		}, testSets[i][1] ) );
+		}, testSets[ i ][ 1 ] ) );
 
 		assert.ok(
 			$subject.data( 'editablewidget' ) instanceof $.test.editablewidget,

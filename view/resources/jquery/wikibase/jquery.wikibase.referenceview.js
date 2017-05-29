@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -64,7 +64,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.getListItemAdapter || !this.options.removeCallback ) {
 			throw new Error( 'Required option not specified properly' );
 		}
@@ -74,7 +74,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		var self = this;
 		var listview;
 		this.$listview.listview( {
-			listItemAdapter: this.options.getListItemAdapter( function( snaklistview ) {
+			listItemAdapter: this.options.getListItemAdapter( function ( snaklistview ) {
 				listview.removeItem( snaklistview.element );
 				if ( listview.items().length === 0 ) {
 					self.options.removeCallback();
@@ -94,7 +94,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 *
 	 * @private
 	 */
-	_attachEditModeEventHandlers: function() {
+	_attachEditModeEventHandlers: function () {
 		var self = this,
 			listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
@@ -107,7 +107,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		];
 
 		this.$listview
-		.on( changeEvents.join( ' ' ), function( event ) {
+		.on( changeEvents.join( ' ' ), function ( event ) {
 			// Propagate "change" event.
 			self._trigger( 'change' );
 		} );
@@ -118,7 +118,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 *
 	 * @private
 	 */
-	_detachEditModeEventHandlers: function() {
+	_detachEditModeEventHandlers: function () {
 		var lia = this.$listview.data( 'listview' ).listItemAdapter(),
 			events = [
 				'snakviewchange.' + this.widgetName,
@@ -136,7 +136,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Reference|null} reference
 	 */
-	_updateReferenceHashClass: function( reference ) {
+	_updateReferenceHashClass: function ( reference ) {
 		var refHash = reference && reference.getHash() || 'new';
 
 		this.element.removeClassByRegex( /wb-reference-.+/ );
@@ -153,7 +153,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @param {wikibase.datamodel.Reference|null} [reference]
 	 * @return {wikibase.datamodel.Reference|null|undefined}
 	 */
-	value: function( reference ) {
+	value: function ( reference ) {
 		if ( reference ) {
 			return this.option( 'value', reference );
 		}
@@ -164,7 +164,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 		var snakList = new wb.datamodel.SnakList();
 
-		if ( !this.$listview.data( 'listview' ).value().every( function( snaklistview ) {
+		if ( !this.$listview.data( 'listview' ).value().every( function ( snaklistview ) {
 			var value = snaklistview.value();
 			snakList.merge( value );
 			return value;
@@ -185,7 +185,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	/**
 	 * Starts the widget's edit mode.
 	 */
-	_startEditing: function() {
+	_startEditing: function () {
 		this._attachEditModeEventHandlers();
 
 		this._referenceRemover = this.options.getReferenceRemover( this.$heading );
@@ -197,7 +197,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	/**
 	 * Stops the widget's edit mode.
 	 */
-	_stopEditing: function() {
+	_stopEditing: function () {
 		this._detachEditModeEventHandlers();
 
 		this._referenceRemover.destroy();
@@ -213,7 +213,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	/**
 	 * @private
 	 */
-	_stopEditingReferenceSnaks: function() {
+	_stopEditingReferenceSnaks: function () {
 		var listview = this.$listview.data( 'listview' );
 		listview.value( this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : [] );
 	},
@@ -227,16 +227,16 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @return {Function} return.done
 	 * @return {jQuery} return.done.$snaklistview
 	 */
-	enterNewItem: function() {
+	enterNewItem: function () {
 		var self = this,
 			listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
 		this.startEditing();
 
-		return listview.enterNewItem().done( function( $snaklistview ) {
+		return listview.enterNewItem().done( function ( $snaklistview ) {
 			lia.liInstance( $snaklistview ).enterNewItem()
-			.done( function( $snakview ) {
+			.done( function ( $snakview ) {
 				// Since the new snakview will be initialized empty which invalidates the
 				// snaklistview, external components using the snaklistview will be noticed via
 				// the "change" event.
@@ -253,7 +253,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @throws {Error} when trying to set the value to something different that a
 	 *         `wikibase.datamodel.Reference` object.
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' ) {
 			if ( !( value instanceof wb.datamodel.Reference ) ) {
 				throw new Error( 'Value has to be an instance of wikibase.datamodel.Reference' );
@@ -280,7 +280,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			$items = listview.items();

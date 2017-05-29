@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 var MODULE = wb.entityChangers;
@@ -57,19 +57,19 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	remove: function( statement ) {
+	remove: function ( statement ) {
 		var deferred = $.Deferred(),
 			self = this,
 			guid = statement.getClaim().getGuid();
 
 		this._api.removeClaim( guid, this._revisionStore.getClaimRevision( guid ) )
-		.done( function( response ) {
+		.done( function ( response ) {
 			self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
 			// FIXME: Set statement on this._entity
 			deferred.resolve();
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
 		} );
 
@@ -84,7 +84,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	save: function( statement ) {
+	save: function ( statement ) {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -92,7 +92,7 @@ $.extend( SELF.prototype, {
 			this._statementSerializer.serialize( statement ),
 			this._revisionStore.getClaimRevision( statement.getClaim().getGuid() )
 		)
-		.done( function( result ) {
+		.done( function ( result ) {
 			var savedStatement = self._statementDeserializer.deserialize( result.claim ),
 				pageInfo = result.pageinfo;
 
@@ -105,7 +105,7 @@ $.extend( SELF.prototype, {
 
 			deferred.resolve( savedStatement );
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 		} );
 

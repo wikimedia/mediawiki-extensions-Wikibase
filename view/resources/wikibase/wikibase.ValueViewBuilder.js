@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	/**
@@ -58,7 +58,7 @@
 		 *
 		 * @return {jQuery.valueview}
 		 */
-		initValueView: function( $valueViewDom, dataType, dataValue, propertyId ) {
+		initValueView: function ( $valueViewDom, dataType, dataValue, propertyId ) {
 			var valueView,
 				valueViewOptions = this._getOptions( dataType, dataValue, propertyId );
 
@@ -77,7 +77,7 @@
 		 *
 		 * @return {Object}
 		 */
-		_getOptions: function( dataType, dataValue, propertyId ) {
+		_getOptions: function ( dataType, dataValue, propertyId ) {
 			var dataTypeId = dataType && dataType.getId();
 			var valueViewOptions = $.extend( {}, this._baseOptions, {
 				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html' ),

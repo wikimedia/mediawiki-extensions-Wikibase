@@ -2,15 +2,15 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 var statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
 	'statementview',
-	function() {
+	function () {
 		var _value = this.options.value;
-		this.startEditing = function() {};
-		this.value = function( newValue ) {
+		this.startEditing = function () {};
+		this.value = function ( newValue ) {
 			if ( arguments.length ) {
 				_value = newValue;
 			}
@@ -24,14 +24,14 @@ var statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createStatementlistview = function( options, $node ) {
+var createStatementlistview = function ( options, $node ) {
 	options = $.extend( {
-		getAdder: function() {
+		getAdder: function () {
 			return {
-				destroy: function() {}
+				destroy: function () {}
 			};
 		},
-		getListItemAdapter: function() {
+		getListItemAdapter: function () {
 			return statementviewListItemAdapter;
 		},
 		value: new wb.datamodel.StatementList()
@@ -45,8 +45,8 @@ var createStatementlistview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.statementlistview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementlistview' ).each( function() {
+	teardown: function () {
+		$( '.test_statementlistview' ).each( function () {
 			var $statementlistview = $( this ),
 				statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -59,7 +59,7 @@ QUnit.module( 'jquery.wikibase.statementlistview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.expect( 3 );
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
@@ -91,14 +91,14 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	assert.expect( 4 );
-	var statementList1 = new wb.datamodel.StatementList( [new wb.datamodel.Statement(
+	var statementList1 = new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		)] ),
-		statementList2 = new wb.datamodel.StatementList( [new wb.datamodel.Statement(
+		) ] ),
+		statementList2 = new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
-		)] ),
+		) ] ),
 		$statementlistview = createStatementlistview( {
 			value: statementList1
 		} ),
@@ -124,14 +124,14 @@ QUnit.test( 'value()', function( assert ) {
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
 		);
 
-	statementview.value = function() {
+	statementview.value = function () {
 		return statement;
 	};
 
 	assert.ok(
-		statementlistview.value().equals( new wb.datamodel.StatementList( [statement] ) ),
-		'Retrieved current value after setting a new value on the statementview encapsulated by '
-			+ 'the statementlistview.'
+		statementlistview.value().equals( new wb.datamodel.StatementList( [ statement ] ) ),
+		'Retrieved current value after setting a new value on the statementview encapsulated by ' +
+			'the statementlistview.'
 	);
 
 	assert.ok(
@@ -140,7 +140,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem', function( assert ) {
+QUnit.test( 'enterNewItem', function ( assert ) {
 	assert.expect( 2 );
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );

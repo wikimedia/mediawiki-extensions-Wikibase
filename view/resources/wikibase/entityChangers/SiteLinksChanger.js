@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
@@ -41,7 +41,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setSiteLink: function( siteLink ) {
+		setSiteLink: function ( siteLink ) {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -52,9 +52,9 @@
 				siteLink.getPageName(),
 				siteLink.getBadges()
 			)
-			.done( function( result ) {
+			.done( function ( result ) {
 				var siteId = siteLink.getSiteId(),
-					resultData = result.entity.sitelinks[siteId];
+					resultData = result.entity.sitelinks[ siteId ];
 
 				// Update revision store
 				self._revisionStore.setSitelinksRevision( result.entity.lastrevid, siteId );
@@ -64,16 +64,16 @@
 				// FIXME: Introduce Item.setSiteLinks
 
 				deferred.resolve(
-					typeof resultData.removed !== 'undefined'
-						? null
-						: new wb.datamodel.SiteLink(
+					typeof resultData.removed !== 'undefined' ?
+						null :
+						new wb.datamodel.SiteLink(
 							siteId,
 							resultData.title,
 							resultData.badges
 						)
 				);
 			} )
-			.fail( function( errorCode, error ) {
+			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse(
 					error,
 					siteLink.getPageName() === '' ? 'remove' : 'save' )

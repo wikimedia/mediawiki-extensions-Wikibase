@@ -8,6 +8,7 @@ module.exports = function ( grunt ) {
 
 	grunt.initConfig( {
 		eslint: {
+			options: { fix: true },
 			all: '.'
 		},
 		jsonlint: {

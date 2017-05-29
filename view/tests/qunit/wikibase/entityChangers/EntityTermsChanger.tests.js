@@ -522,7 +522,7 @@
 			if ( !this.entity.labels ) {
 				this.entity.labels = {};
 			}
-			this.entity.labels[language] = { value: value };
+			this.entity.labels[ language ] = { value: value };
 			return this;
 		};
 
@@ -530,7 +530,7 @@
 			if ( !this.entity.descriptions ) {
 				this.entity.descriptions = {};
 			}
-			this.entity.descriptions[language] = { value: value };
+			this.entity.descriptions[ language ] = { value: value };
 			return this;
 		};
 
@@ -538,7 +538,7 @@
 			if ( !this.entity.aliases ) {
 				this.entity.aliases = {};
 			}
-			this.entity.aliases[language] = aliases.map( function ( alias ) {
+			this.entity.aliases[ language ] = aliases.map( function ( alias ) {
 				return { value: alias };
 			} );
 			return this;
@@ -588,4 +588,4 @@
 		return new FingerprintBuilder();
 	}
 
-} )( sinon, wikibase, jQuery );
+}( sinon, wikibase, jQuery ) );

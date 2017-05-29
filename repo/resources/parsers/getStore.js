@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, vp, dv ) {
+( function ( $, wb, vp, dv ) {
 'use strict';
 
 wb.parsers = wb.parsers || {};
@@ -11,7 +11,7 @@ wb.parsers = wb.parsers || {};
  * @param {wikibase.api.RepoApi} api
  * @return {valueParsers.ValueParserStore}
  */
-wb.parsers.getStore = function( api ) {
+wb.parsers.getStore = function ( api ) {
 	var apiCaller = new wb.api.ParseValueCaller( api ),
 		ApiBasedValueParser = wb.parsers.getApiBasedValueParserConstructor( apiCaller ),
 		parserStore = new vp.ValueParserStore( vp.NullParser );
@@ -31,7 +31,7 @@ wb.parsers.getStore = function( api ) {
 		'wikibase-entityid': wb.datamodel.EntityId.TYPE
 	};
 
-	$.each( parserIdToDataValueType, function( parserId, dvType ) {
+	$.each( parserIdToDataValueType, function ( parserId, dvType ) {
 		var Parser = util.inherit(
 			ApiBasedValueParser,
 			{ API_VALUE_PARSER_ID: parserId }

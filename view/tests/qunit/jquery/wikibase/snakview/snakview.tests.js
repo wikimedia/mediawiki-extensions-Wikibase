@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, wb, dt, mw ) {
+( function ( $, QUnit, wb, dt, mw ) {
 'use strict';
 
 QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_snakview' ).each( function() {
+	teardown: function () {
+		$( '.test_snakview' ).each( function () {
 			var $snakview = $( this ),
 				snakview = $snakview.data( 'snakview' );
 
@@ -28,25 +28,25 @@ var snakSerializer = new wb.serialization.SnakSerializer(),
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createSnakview = function( options, $node ) {
+var createSnakview = function ( options, $node ) {
 	options = $.extend( {
 		autoStartEditing: false,
 		entityIdHtmlFormatter: {
-			format: function() {
+			format: function () {
 				return $.Deferred().resolve( 'Label' ).promise();
 			}
 		},
 		entityIdPlainFormatter: {
-			format: function( entityId ) {
+			format: function ( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
 			}
 		},
 		entityStore: {
-			get: function( entityId ) {
+			get: function ( entityId ) {
 				return $.Deferred().resolve().promise();
 			}
 		},
-		getSnakRemover: function() {
+		getSnakRemover: function () {
 		},
 		valueViewBuilder: 'I am a ValueViewBuilder',
 		dataTypeStore: new dt.DataTypeStore()
@@ -59,7 +59,7 @@ var createSnakview = function( options, $node ) {
 		.snakview( options );
 };
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.expect( 6 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
@@ -111,7 +111,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	assert.expect( 7 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
@@ -176,7 +176,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'snak()', function( assert ) {
+QUnit.test( 'snak()', function ( assert ) {
 	assert.expect( 5 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
@@ -217,7 +217,7 @@ QUnit.test( 'snak()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'propertyId()', function( assert ) {
+QUnit.test( 'propertyId()', function ( assert ) {
 	assert.expect( 5 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
@@ -260,7 +260,7 @@ QUnit.test( 'propertyId()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'snakType()', function( assert ) {
+QUnit.test( 'snakType()', function ( assert ) {
 	assert.expect( 5 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
