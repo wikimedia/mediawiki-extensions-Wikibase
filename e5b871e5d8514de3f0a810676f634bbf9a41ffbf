@@ -117,6 +117,30 @@
       "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_fe4d8bc7",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-05-29T15:20:09Z",
+      "side": 1,
+      "message": "Then do not change this to ES3 compatibility mode.",
+      "parentUuid": "0e1cb3f9_db79b9f3",
+      "range": {
+        "startLine": 282,
+        "startChar": 8,
+        "endLine": 282,
+        "endChar": 20
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
