@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3b4315b7",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-29T10:58:35Z",
+      "side": 1,
+      "message": "Didn\u0027t understand why do we need to wait for replication before releasing the connection.",
+      "range": {
+        "startLine": 516,
+        "startChar": 2,
+        "endLine": 517,
+        "endChar": 72
+      },
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
