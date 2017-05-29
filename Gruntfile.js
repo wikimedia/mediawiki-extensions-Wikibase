@@ -27,7 +27,9 @@ module.exports = function ( grunt ) {
 			all: [
 				'**/*.css',
 				'!view/resources/jquery/ui/**',
-				'!node_modules/**'
+				'!extensions/ValueView/**',
+				'!node_modules/**',
+				'!vendor/**'
 			]
 		},
 		banana: {
@@ -44,4 +46,5 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'test', [ 'jshint', 'jscs', 'jsonlint', 'banana', 'stylelint' ] );
+	grunt.registerTask( 'default', 'test' );
 };
