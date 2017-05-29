@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_3880fbf7",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-29T07:18:45Z",
+      "side": 1,
+      "message": "This can\u0027t be done. The syntax always was\n\n conditional\n   ? then\n   : else;\n\nin all our PHP and JS code. Enforcing two different rules in PHP and JS is a no-go, in my humble opinion.",
+      "range": {
+        "startLine": 593,
+        "startChar": 24,
+        "endLine": 593,
+        "endChar": 26
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_58a7ef07",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
         "patchSetId": 1
