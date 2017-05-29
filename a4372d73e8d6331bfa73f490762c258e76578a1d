@@ -22,6 +22,29 @@
       "revId": "a4372d73e8d6331bfa73f490762c258e76578a1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1bee51eb",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-29T09:49:21Z",
+      "side": 1,
+      "message": "Either what Ladsgroup suggests, or remove this unused return value. Both is fine in my opinion. But the code should be consistent and not have unused return values.",
+      "range": {
+        "startLine": 222,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "a4372d73e8d6331bfa73f490762c258e76578a1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
