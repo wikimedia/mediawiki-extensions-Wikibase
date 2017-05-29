@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Աշոտ1997"
+			"Աշոտ1997",
+			"Narek"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "դատարկ",
@@ -11,5 +12,7 @@
 	"valueview-expert-timeinput-calendar": "Օրացույց.",
 	"valueview-expertextender-calendarhint-gregorian": "(Գրիգորյան օրացույց)",
 	"valueview-expertextender-calendarhint-julian": "(Հուլյան օրացույց)",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-preview-label": "կցուցադրվի որպես՝",
+	"valueview-listrotator-manually": "կարգավորել ձեռքով"
 }
