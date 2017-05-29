@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_dbca1971",
+        "filename": "client/tests/phpunit/includes/Hooks/SidebarLinkBadgeDisplayTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-29T09:58:00Z",
+      "side": 1,
+      "message": "This construct is redundant, the code will work in exact same way without it. We\u0027ve recently deleted bunch of those in other tests. \nCan you remove it?",
+      "range": {
+        "startLine": 34,
+        "startChar": 14,
+        "endLine": 34,
+        "endChar": 39
+      },
+      "revId": "03eea32e9a2622f418e9c6eb10e42c31405b5be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
