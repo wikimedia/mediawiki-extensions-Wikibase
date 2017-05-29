@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_fb76fdff",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-29T12:01:31Z",
+      "side": 1,
+      "message": "I see plenty of cases of \" ?\\n\" in PHP in MW core, so this must just be a local style you are using?\n\nRegardless, that should be discussed upstream in https://github.com/wikimedia/eslint-config-wikimedia/ . This is the current style in all of MW core and most deployed extensions.",
+      "parentUuid": "0e1cb3f9_3880fbf7",
+      "range": {
+        "startLine": 593,
+        "startChar": 24,
+        "endLine": 593,
+        "endChar": 26
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_58a7ef07",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-29T05:32:30Z",
       "side": 1,
       "message": "This is ES3 compatibility code. Is this intended and required?",
+      "range": {
+        "startLine": 282,
+        "startChar": 8,
+        "endLine": 282,
+        "endChar": 20
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_db79b9f3",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-29T12:01:31Z",
+      "side": 1,
+      "message": "We don\u0027t support ES3 browsers anymore: T128115",
+      "parentUuid": "0e1cb3f9_58a7ef07",
       "range": {
         "startLine": 282,
         "startChar": 8,
