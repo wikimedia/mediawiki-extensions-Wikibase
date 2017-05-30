@@ -85,6 +85,6 @@
 		"cs": [
 			"@phpcs"
 		],
-		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor,.git ."
+		"phpcs": "phpcs -p -s"
 	}
 }
