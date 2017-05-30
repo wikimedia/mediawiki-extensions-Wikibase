@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use Wikibase\ChunkAccess;

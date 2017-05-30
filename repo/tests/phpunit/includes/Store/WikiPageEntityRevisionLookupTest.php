@@ -11,13 +11,13 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Tests\EntityRevisionLookupTest;
 use MWContentSerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Lib\Store\WikiPageEntityRevisionLookup
+ * @covers Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
  *
  * @group Database
  * @group Wikibase

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
-use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
