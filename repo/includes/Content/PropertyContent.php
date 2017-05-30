@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
@@ -62,6 +63,10 @@ class PropertyContent extends EntityContent {
 	 * @return Property
 	 */
 	public function getProperty() {
+		if ( !$this->propertyHolder ) {
+			throw new LogicException( 'This content object is empty!' );
+		}
+
 		return $this->propertyHolder->getEntity( Property::class );
 	}
 

@@ -69,7 +69,8 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getContentHandler()->supportsRedirects();
 		}
 
-		return $this->getEntityId() !== null;
+		$holder = $this->getEntityHolder();
+		return $holder !== null && $holder->getEntityId() !== null;
 	}
 
 	/**
@@ -117,17 +118,18 @@ abstract class EntityContent extends AbstractContent {
 	public function getEntityId() {
 		if ( $this->isRedirect() ) {
 			return $this->getEntityRedirect()->getEntityId();
-		} else {
-			$holder = $this->getEntityHolder();
-			$id = $holder ? $holder->getEntityId() : null;
-			if ( !$id ) {
-				// @todo: Force an ID to be present; Entity objects without an ID make sense,
-				// EntityContent objects with no entity ID don't.
-				throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
-			}
-
-			return $id;
 		}
+
+		$holder = $this->getEntityHolder();
+		$id = $holder ? $holder->getEntityId() : null;
+
+		if ( $id === null ) {
+			// @todo: Force an ID to be present; Entity objects without an ID make sense,
+			// EntityContent objects with no entity ID don't.
+			throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
+		}
+
+		return $id;
 	}
 
 	/**
@@ -504,19 +506,19 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
-		$thisId = $this->getEntityHolder() ? $this->getEntityHolder()->getEntityId() : null;
-		$thatId = $that->getEntityHolder() ? $that->getEntityHolder()->getEntityId() : null;
+		$thisHolder = $this->getEntityHolder();
+		$thatHolder = $that->getEntityHolder();
+		if ( !$thisHolder && !$thatHolder ) {
+			return true;
+		}
 
-		if ( $thisId !== null && $thatId !== null
-			&& !$thisId->equals( $thatId )
-		) {
+		$thisId = $thisHolder ? $thisHolder->getEntityId() : null;
+		$thatId = $thatHolder ? $thatHolder->getEntityId() : null;
+		if ( $thisId && $thatId && !$thisId->equals( $thatId ) ) {
 			return false;
 		}
 
-		$thisEntity = $this->getEntity();
-		$thatEntity = $that->getEntity();
-
-		return $thisEntity->equals( $thatEntity );
+		return $this->getEntity()->equals( $that->getEntity() );
 	}
 
 	/**
