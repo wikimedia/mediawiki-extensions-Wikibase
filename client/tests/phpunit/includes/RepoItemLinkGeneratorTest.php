@@ -7,7 +7,7 @@ use Title;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @covers Wikibase\Client\RepoItemLinkGenerator

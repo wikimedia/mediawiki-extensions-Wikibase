@@ -8,7 +8,7 @@ use SkinFallback;
 use Title;
 use User;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @covers Wikibase\Client\Hooks\BeforePageDisplayHandler

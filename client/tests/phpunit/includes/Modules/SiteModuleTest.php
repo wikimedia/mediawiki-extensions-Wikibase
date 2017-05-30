@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Modules;
 
 use PHPUnit_Framework_TestCase;
 use ResourceLoaderContext;
-use Wikibase\SiteModule;
+use Wikibase\Client\Modules\SiteModule;
 
 /**
- * @covers Wikibase\SiteModule
+ * @covers Wikibase\Client\Modules\SiteModule
  *
  * @group Wikibase
  * @group WikibaseClient

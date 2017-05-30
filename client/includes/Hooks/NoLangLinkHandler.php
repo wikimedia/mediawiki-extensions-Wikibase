@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Hooks;
 
 use Parser;
 use ParserOutput;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * Handles the NOEXTERNALLANGLINKS parser function.

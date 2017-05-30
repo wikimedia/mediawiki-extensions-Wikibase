@@ -8,8 +8,8 @@ use ParserOutput;
 use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\NamespaceChecker;
-use Wikibase\NoLangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Hooks\NoLangLinkHandler;
 
 /**
  * ParserOutput related hook handlers.

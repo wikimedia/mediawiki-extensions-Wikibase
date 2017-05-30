@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @license GPL-2.0+

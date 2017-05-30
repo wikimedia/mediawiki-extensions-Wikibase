@@ -1,13 +1,17 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Store\Sql;
 
 use HashBagOStuff;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\StringNormalizer;
+use Wikibase\TermIndex;
+use Wikibase\TermPropertyLabelResolver;
+use Wikibase\TermSqlIndex;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;

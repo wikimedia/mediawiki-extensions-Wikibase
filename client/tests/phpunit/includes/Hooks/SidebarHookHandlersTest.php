@@ -15,7 +15,7 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\SettingsArray;
 
 /**
