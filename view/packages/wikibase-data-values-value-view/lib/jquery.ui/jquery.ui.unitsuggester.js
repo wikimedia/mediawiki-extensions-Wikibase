@@ -209,7 +209,7 @@ $.widget( 'ui.unitsuggester', PARENT, {
 
 		if ( entityStub.aliases ) {
 			$label.append(
-				$( '<span class="ui-unitsuggester-aliases">' ).text( ' (' + entityStub.aliases.join( ', ' ) +  ')' )
+				$( '<span class="ui-unitsuggester-aliases">' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
 			);
 		}
 

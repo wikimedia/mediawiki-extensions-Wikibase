@@ -21,7 +21,7 @@
 	 */
 	function generateInputElement( attributes ) {
 		return $( '<input/>', $.extend( {
-			class: 'test_eachchange',
+			'class': 'test_eachchange',
 			type: 'text',
 			name: 'test',
 			value: ''

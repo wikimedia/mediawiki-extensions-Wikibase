@@ -309,7 +309,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 		if ( newWidth < minWidth ) {
 			newWidth = minWidth;
-		} else if ( newWidth >= maxWidth  ) {
+		} else if ( newWidth >= maxWidth ) {
 			newWidth = maxWidth;
 		}
 

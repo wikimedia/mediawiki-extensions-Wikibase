@@ -4,12 +4,10 @@ php:
 - 5.5
 
 install:
-  - npm install -g jshint
-  - npm install -g jscs
+  - npm install -g eslint
 
 script:
-  - jshint .
-  - jscs .
+  - eslint .
 
 notifications:
   irc:

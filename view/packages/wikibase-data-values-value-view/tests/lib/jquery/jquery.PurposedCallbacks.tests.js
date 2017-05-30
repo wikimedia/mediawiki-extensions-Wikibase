@@ -240,7 +240,7 @@
 			'Executed all callbacks registered for purpose, except the ones removed again.'
 		);
 
-		var feedback = [];
+		feedback = [];
 		pcf.remove( 'bar', [ fn1, fn4 ] );
 		pc.fireWith( feedback, [ 'foo', 'bar' ] );
 		assert.deepEqual(

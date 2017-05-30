@@ -57,7 +57,7 @@
 			},
 			null
 		);
-		var $extender = $( '<div />' ).appendTo( 'body' ) ;
+		var $extender = $( '<div />' ).appendTo( 'body' );
 
 		calendarHint.init( $extender );
 		calendarHint.draw();
@@ -81,7 +81,7 @@
 			},
 			setSpy
 		);
-		var $extender = $( '<div />' ).appendTo( 'body' ) ;
+		var $extender = $( '<div />' ).appendTo( 'body' );
 
 		assert.equal( timeValue.getOption( 'calendarModel' ), 'http://www.wikidata.org/entity/Q1985727' );
 
@@ -112,7 +112,7 @@
 			},
 			setSpy
 		);
-		var $extender = $( '<div />' ).appendTo( 'body' ) ;
+		var $extender = $( '<div />' ).appendTo( 'body' );
 
 		calendarHint.init( $extender );
 		calendarHint.draw();

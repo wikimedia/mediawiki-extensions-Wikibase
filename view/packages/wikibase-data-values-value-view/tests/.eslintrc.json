@@ -1,0 +1,12 @@
+{
+	"extends": "../.eslintrc.json",
+	"env": {
+		"qunit": true
+	},
+	"globals": {
+		"sinon": false
+	},
+	"rules": {
+		"dot-notation": "off"
+	}
+}
