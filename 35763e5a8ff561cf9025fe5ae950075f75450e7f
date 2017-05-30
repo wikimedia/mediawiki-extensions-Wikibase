@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6db22bfb",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-30T14:57:47Z",
+      "side": 1,
+      "message": "Please add an example here, because it\u0027s critical to understand this does not accept \"en\", but requires the user to provide \"enwiki\".",
+      "revId": "35763e5a8ff561cf9025fe5ae950075f75450e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ad93635a",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-30T14:57:47Z",
+      "side": 1,
+      "message": "It was suggested to split this into two methods named \"getEntityIdForTitle\" and something like \"getEntityIdForGlobalTitle\". We could not agree on names in todays meeting, so this is more a remark than an actual edit request.\n\nThe question is: What is the actual use case you want to solve now? Do you need to look up other entity IDs on the same wiki, or on other wikis?",
+      "revId": "35763e5a8ff561cf9025fe5ae950075f75450e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_cda1f7a0",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseLibraryTests.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-30T14:57:47Z",
+      "side": 1,
+      "message": "Please change this so it throws an error if the user provided a global site ID that does not exist. E.g. \"en\" should throw an exception, but all other kinds of errors (e.g. page name not found, or item does not exist) return nil.",
+      "revId": "35763e5a8ff561cf9025fe5ae950075f75450e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
