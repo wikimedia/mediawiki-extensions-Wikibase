@@ -159,7 +159,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntityHolder
 	 *
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	protected function getEntityHolder() {
 		return $this->itemHolder;

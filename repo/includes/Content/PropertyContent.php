@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Entity\Property;
 class PropertyContent extends EntityContent {
 
 	/**
-	 * @var EntityHolder
+	 * @var EntityHolder|null
 	 */
 	private $propertyHolder;
 
@@ -33,10 +34,10 @@ class PropertyContent extends EntityContent {
 	 * @param EntityHolder $propertyHolder
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityHolder $propertyHolder ) {
+	public function __construct( EntityHolder $propertyHolder = null ) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
 
-		if ( $propertyHolder->getEntityType() !== Property::ENTITY_TYPE ) {
+		if ( $propertyHolder && $propertyHolder->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( '$propertyHolder must contain a Property entity!' );
 		}
 
@@ -60,6 +61,10 @@ class PropertyContent extends EntityContent {
 	 * @return Property
 	 */
 	public function getProperty() {
+		if ( !$this->propertyHolder ) {
+			throw new LogicException( 'This content object is empty!' );
+		}
+
 		return $this->propertyHolder->getEntity( Property::class );
 	}
 
@@ -82,7 +87,7 @@ class PropertyContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntityHolder
 	 *
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	public function getEntityHolder() {
 		return $this->propertyHolder;

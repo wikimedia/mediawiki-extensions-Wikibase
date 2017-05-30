@@ -104,7 +104,7 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns a holder for the entity contained in this EntityContent object.
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	abstract protected function getEntityHolder();
 
