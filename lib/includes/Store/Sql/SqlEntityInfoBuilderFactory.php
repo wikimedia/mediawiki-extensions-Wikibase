@@ -47,6 +47,11 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	private $repositoryName;
 
 	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn = false;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -83,7 +88,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	 * @return EntityInfoBuilder
 	 */
 	public function newEntityInfoBuilder( array $entityIds ) {
-		return new SqlEntityInfoBuilder(
+		$sqlEntityInfoBuilder = new SqlEntityInfoBuilder(
 			$this->entityIdParser,
 			$this->entityIdComposer,
 			$this->entityNamespaceLookup,
@@ -91,6 +96,17 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 			$this->wiki,
 			$this->repositoryName
 		);
+
+		$sqlEntityInfoBuilder->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
+
+		return $sqlEntityInfoBuilder;
+	}
+
+	/**
+	 * @param bool $readFullEntityIdColumn
+	 */
+	public function setReadFullEntityIdColumn( $readFullEntityIdColumn ) {
+		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 }
