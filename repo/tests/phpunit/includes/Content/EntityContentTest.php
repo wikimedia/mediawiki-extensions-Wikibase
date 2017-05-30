@@ -80,11 +80,16 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	abstract protected function getEntityType();
 
 	/**
+	 * @return EntityContent
+	 */
+	abstract protected function newEmpty();
+
+	/**
 	 * @param EntityId|null $entityId
 	 *
 	 * @return EntityContent
 	 */
-	abstract protected function newEmpty( EntityId $entityId = null );
+	abstract protected function newBlank( EntityId $entityId = null );
 
 	/**
 	 * @dataProvider getTextForSearchIndexProvider
@@ -102,7 +107,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function getTextForSearchIndexProvider() {
-		$entityContent = $this->newEmpty();
+		$entityContent = $this->newBlank();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		return array(
@@ -111,7 +116,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testWikibaseTextForSearchIndex() {
-		$entityContent = $this->newEmpty();
+		$entityContent = $this->newBlank();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
@@ -131,7 +136,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testWikibaseTextForSearchIndex_abort() {
-		$entityContent = $this->newEmpty();
+		$entityContent = $this->newBlank();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
@@ -147,7 +152,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetParserOutput() {
-		$content = $this->newEmpty();
+		$content = $this->newBlank();
 
 		//@todo: Use a fake ID, no need to hit the database once we
 		//       got rid of the rest of the storage logic.
@@ -172,14 +177,14 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function providePageProperties() {
 		$cases = array();
-		$emptyContent = $this->newEmpty( $this->getDummyId() );
+		$emptyContent = $this->newBlank( $this->getDummyId() );
 
 		$cases['empty'] = array(
 			$emptyContent,
 			[ 'wb-claims' => 0 ]
 		);
 
-		$contentWithLabel = $this->newEmpty( $this->getDummyId() );
+		$contentWithLabel = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
 
 		$cases['labels'] = array(
@@ -225,9 +230,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetEntityPageProperties() {
-		$empty = $this->newEmpty();
+		$empty = $this->newBlank();
 
-		$labeledEntityContent = $this->newEmpty();
+		$labeledEntityContent = $this->newBlank();
 		$this->setLabel( $labeledEntityContent->getEntity(), 'de', 'xyz' );
 
 		return array(
@@ -261,13 +266,13 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function diffProvider() {
-		$empty = $this->newEmpty( $this->getDummyId() );
+		$empty = $this->newBlank( $this->getDummyId() );
 		$entityType = $this->getEntityType();
 
-		$spam = $this->newEmpty( $this->getDummyId() );
+		$spam = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
 
-		$ham = $this->newEmpty( $this->getDummyId() );
+		$ham = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
@@ -319,11 +324,11 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function patchedCopyProvider() {
-		$spam = $this->newEmpty( $this->getDummyId() );
+		$spam = $this->newBlank( $this->getDummyId() );
 		$entityType = $this->getEntityType();
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
 
-		$ham = $this->newEmpty( $this->getDummyId() );
+		$ham = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
@@ -361,13 +366,12 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function copyProvider() {
-		$empty = $this->newEmpty();
-		$labels = $this->newEmpty();
-
+		$labels = $this->newBlank();
 		$this->setLabel( $labels->getEntity(), 'en', 'Foo' );
 
 		return array(
-			'empty' => array( $empty ),
+			'no entity' => array( $this->newEmpty() ),
+			'empty entity' => array( $this->newBlank() ),
 			'labels' => array( $labels ),
 		);
 	}
@@ -377,25 +381,25 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 */
 	public function testCopy( EntityContent $content ) {
 		$copy = $content->copy();
-		$this->assertNotSame( $content, $copy, 'Copy must not be the same instance.' );
 		$this->assertTrue( $content->equals( $copy ), 'Copy must be equal to the original.' );
 		$this->assertSame( get_class( $content ), get_class( $copy ), 'Copy must have the same type.' );
-		$this->assertEquals( $content->getNativeData(), $copy->getNativeData(), 'Copy must have the same data.' );
 	}
 
 	public function equalsProvider() {
 		$empty = $this->newEmpty();
 
-		$labels1 = $this->newEmpty();
+		$labels1 = $this->newBlank();
 		$this->setLabel( $labels1->getEntity(), 'en', 'Foo' );
 
-		$labels2 = $this->newEmpty();
+		$labels2 = $this->newBlank();
 		$this->setLabel( $labels2->getEntity(), 'de', 'Foo' );
 
 		return array(
 			'empty' => array( $empty, $empty, true ),
 			'same labels' => array( $labels1, $labels1, true ),
 			'different labels' => array( $labels1, $labels2, false ),
+			'empty and not empty' => array( $empty, $labels1, false ),
+			'not empty and empty' => array( $labels1, $empty, false ),
 		);
 	}
 
@@ -428,7 +432,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSecondaryDataUpdates() {
-		$entityContent = $this->newEmpty();
+		$entityContent = $this->newBlank();
 		$title = $this->createTitleForEntity( $entityContent->getEntity() );
 
 		// NOTE: $title->exists() must be true.
@@ -438,7 +442,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetDeletionUpdates() {
-		$entityContent = $this->newEmpty();
+		$entityContent = $this->newBlank();
 		$title = $this->createTitleForEntity( $entityContent->getEntity() );
 
 		$updates = $entityContent->getDeletionUpdates( new WikiPage( $title ) );
