@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use Wikibase\IdGenerator;
-use Wikibase\Lib\Store\EntityChangeLookup;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;

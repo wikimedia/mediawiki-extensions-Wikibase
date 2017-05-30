@@ -14,7 +14,7 @@ use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\Database;
 

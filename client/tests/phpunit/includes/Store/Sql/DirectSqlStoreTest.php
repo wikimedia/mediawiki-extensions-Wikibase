@@ -18,7 +18,7 @@ use Wikibase\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Store\EntityChangeLookup;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
