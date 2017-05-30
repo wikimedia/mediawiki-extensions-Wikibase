@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\Tests\Store\TermIndexTest;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermSqlIndex;
+use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\ParameterAssertionException;
 

@@ -8,7 +8,7 @@ use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSearchKeyBuilder;
-use Wikibase\TermSqlIndex;
+use Wikibase\Lib\Store\Sql\TermSqlIndex;
 
 /**
  * @covers Wikibase\TermSearchKeyBuilder

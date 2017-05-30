@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Store\EntityChangeLookup;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\WikibaseSettings;
 

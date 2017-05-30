@@ -12,10 +12,10 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
-use Wikibase\TermSqlIndex;
+use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Assert\Assert;
 
 /**

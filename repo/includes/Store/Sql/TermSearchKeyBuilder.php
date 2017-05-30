@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Wikibase\Lib\Reporting\MessageReporter;
 use MediaWiki\MediaWikiServices;
+use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\Database;
 
 /**
