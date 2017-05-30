@@ -9,6 +9,7 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -47,11 +48,11 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
-		return new LanguageLinkBadgeDisplay(
-			$labelLookup,
+		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay( $labelLookup,
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);
+		return new LanguageLinkBadgeDisplay( $sidebarLinkBadgeDisplay );
 	}
 
 	/**
