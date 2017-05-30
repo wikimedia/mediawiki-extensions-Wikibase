@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpAliases;
-use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpAliases;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;

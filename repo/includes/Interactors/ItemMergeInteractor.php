@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Interactors;
 
 use MediaWiki\MediaWikiServices;
 use User;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
+use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\ChangeOp;
+namespace Wikibase\Repo\ChangeOp;
 
 use InvalidArgumentException;
 use OutOfBoundsException;

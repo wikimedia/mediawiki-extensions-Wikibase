@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\ChangeOp;
 
-use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikimedia\Assert\Assert;
 

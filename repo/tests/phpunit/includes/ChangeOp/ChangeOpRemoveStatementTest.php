@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpRemoveStatement;
+use Wikibase\Repo\ChangeOp\ChangeOpRemoveStatement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
