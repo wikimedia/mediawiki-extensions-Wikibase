@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Hooks;
 use EchoEvent;
 use MediaWikiTestCase;
 use Title;
+use User;
 use Wikibase\ChangeRow;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\RepoLinker;
@@ -217,6 +218,52 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 				);
 			}
 		}
+	}
+
+	public function localUserCreatedProvider() {
+		return [
+			'disabled no auto' => [
+				'enabled' => false,
+				'times' => 0,
+				'auto' => false,
+			],
+			'disabled auto' => [
+				'enabled' => false,
+				'times' => 0,
+				'auto' => true,
+			],
+			'enabled no auto' => [
+				'enabled' => true,
+				'times' => 1,
+				'auto' => false,
+			],
+			'enabled auto' => [
+				'enabled' => true,
+				'times' => 1,
+				'auto' => true,
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider localUserCreatedProvider
+	 */
+	public function testLocalUserCreated( $enabled, $times, $auto ) {
+		$handlers = new EchoNotificationsHandlers(
+			$this->repoLinker,
+			'enwiki',
+			$enabled,
+			'',
+			'repoSiteName'
+		);
+
+		$user = $this->createMock( User::class );
+		$user->expects( $this->exactly( $times ) )
+			->method( 'setOption' );
+		$user->expects( $this->exactly( $times ) )
+			->method( 'saveSettings' );
+
+		$handlers->doLocalUserCreated( $user, $auto );
 	}
 
 }

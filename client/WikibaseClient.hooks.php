@@ -458,7 +458,7 @@ final class ClientHooks {
 
 		// These hooks should only be run if we use the Echo extension
 		if ( class_exists( EchoEvent::class ) ) {
-			$wgHooks['UserGetDefaultOptions'][] = EchoNotificationsHandlers::class . '::onUserGetDefaultOptions';
+			$wgHooks['LocalUserCreated'][] = EchoNotificationsHandlers::class . '::onLocalUserCreated';
 			$wgHooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
 		}
 
