@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_3f469ac6",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-30T14:38:05Z",
+      "side": 1,
+      "message": "The wiki should not break if you run update.php. Don\u0027t we have a DB update registered for adding the new column?",
+      "parentUuid": "0e1cb3f9_4cb08d89",
+      "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_c16ea6fd",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "writeFullEntityIdColumn is already here and everything is temporarily.",
       "parentUuid": "0e1cb3f9_c16ea6fd",
+      "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ff4b42cb",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-30T14:38:05Z",
+      "side": 1,
+      "message": "We have to be very sure to set this consistently on repo and all clients.",
+      "parentUuid": "0e1cb3f9_2cac3930",
       "revId": "dac6345a705a26fdf673e947947c907d41ce0dd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
