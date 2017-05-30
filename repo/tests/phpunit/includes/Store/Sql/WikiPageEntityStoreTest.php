@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Store\WikiPageEntityStore;

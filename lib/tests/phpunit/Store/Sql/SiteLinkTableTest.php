@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\Lib\Store\SiteLinkTable
+ * @covers Wikibase\Lib\Store\Sql\SiteLinkTable
  *
  * @group Wikibase
  * @group WikibaseStore

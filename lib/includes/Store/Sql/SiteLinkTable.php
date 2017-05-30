@@ -1,12 +1,13 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use MWException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikimedia\Rdbms\Database;
 
 /**

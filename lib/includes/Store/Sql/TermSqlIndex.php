@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
@@ -20,6 +20,9 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\StringNormalizer;
+use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\Database;
 
