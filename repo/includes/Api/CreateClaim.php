@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
-use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**

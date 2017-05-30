@@ -9,9 +9,9 @@ use Site;
 use TestSites;
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,7 +26,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpsMerge
+ * @covers Wikibase\Repo\ChangeOp\ChangeOpsMerge
  *
  * @group Wikibase
  * @group ChangeOp

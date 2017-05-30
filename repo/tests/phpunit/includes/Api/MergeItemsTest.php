@@ -12,7 +12,7 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;

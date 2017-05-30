@@ -18,7 +18,7 @@ use MediaWikiTestCase;
 use RequestContext;
 use Serializers\Serializer;
 use User;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

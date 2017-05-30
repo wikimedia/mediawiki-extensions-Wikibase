@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntityFactory;
