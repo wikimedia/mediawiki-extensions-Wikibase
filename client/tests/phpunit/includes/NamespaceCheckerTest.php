@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use InvalidArgumentException;
 use MWNamespace;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @covers Wikibase\NamespaceChecker

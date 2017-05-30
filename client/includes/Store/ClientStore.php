@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Store;
 
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\UsageUpdater;
@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\TermIndex;
 
 /**
  * Client store interface.

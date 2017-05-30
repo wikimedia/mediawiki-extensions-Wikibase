@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\SiteModule;
+use Wikibase\Client\Modules\SiteModule;
 
 return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'

@@ -52,7 +52,6 @@
 	},
 	"autoload": {
 		"classmap": [
-			"client/includes/",
 			"client/WikibaseClient.hooks.php",
 			"client/tests/phpunit/MockClientStore.php",
 			"lib/includes/",
