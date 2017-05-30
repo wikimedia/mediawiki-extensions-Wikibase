@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6280f5f8",
+        "filename": "phpcs.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-30T16:53:53Z",
+      "side": 1,
+      "message": "This is already in the base rule set we use here, see https://github.com/wmde/WikibaseCodeSniffer/blob/master/Wikibase/ruleset.xml.",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "4e726059622399037654f8a21662815cf978d565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0279f929",
+        "filename": "phpcs.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-30T16:53:53Z",
+      "side": 1,
+      "message": "This is already in the base rule set.",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "4e726059622399037654f8a21662815cf978d565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_629f9554",
+        "filename": "phpcs.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-30T16:53:53Z",
+      "side": 1,
+      "message": "I wonder why this is necessary? Never was an issue for me.",
+      "range": {
+        "startLine": 48,
+        "startChar": 18,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "4e726059622399037654f8a21662815cf978d565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
