@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_1f2076f1",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-30T14:54:15Z",
+      "side": 1,
+      "message": "How about calling it `releaseConnection`?\nI\u0027ve spent several minutes to understand what is so specific about it so it is tied to repository db. As I understood it is nothing and you can pass any connection here.",
+      "range": {
+        "startLine": 260,
+        "startChar": 18,
+        "endLine": 260,
+        "endChar": 31
+      },
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_2165220d",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 10
@@ -88,6 +111,30 @@
       "side": 1,
       "message": "You are right - in theory, we don\u0027t. \n\nWe do need to wait for replication before releasing the lock. And depending on what kind of lock we use, we need a connection in order to release it. \n\nSo... in practice, doing the wait after the release would probably still work, because it would end up using the same connection anyway, if needed. But it\u0027s nicer to make this explicit.",
       "parentUuid": "0e1cb3f9_3b4315b7",
+      "range": {
+        "startLine": 516,
+        "startChar": 2,
+        "endLine": 517,
+        "endChar": 72
+      },
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_9fd006ce",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-30T14:54:15Z",
+      "side": 1,
+      "message": "I didn\u0027t find any usages of connection after `releaseClient` is called.\n\nI would assume that we might need to wait for replication BEFORE we do something. Can you point out before what?",
+      "parentUuid": "0e1cb3f9_fea10b37",
       "range": {
         "startLine": 516,
         "startChar": 2,
