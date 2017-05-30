@@ -8,6 +8,7 @@ use DummySearchIndexFieldDefinition;
 use FauxRequest;
 use InvalidArgumentException;
 use Language;
+use LogicException;
 use MWException;
 use RequestContext;
 use Revision;
@@ -322,11 +323,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testMakeEmptyContent() {
-		$handler = $this->getHandler();
-		$entity = $handler->makeEmptyContent()->getEntity();
+		$content = $this->getHandler()->makeEmptyContent();
+		$this->assertInstanceOf( EntityContent::class, $content );
 
-		$this->assertTrue( $entity->isEmpty(), 'isEmpty' );
-		$this->assertEquals( $handler->getEntityType(), $entity->getType(), 'entity type' );
+		$this->setExpectedException( LogicException::class );
+		$content->getEntity();
 	}
 
 	public function testMakeRedirectContent() {
