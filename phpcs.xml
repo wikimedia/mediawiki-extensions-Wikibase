@@ -42,4 +42,6 @@
 
 	<!-- TODO: Move to the Wikibase CodeSniffer library. -->
 	<rule ref="Squiz.WhiteSpace.CastSpacing" />
+	<exclude-pattern>extensions/ValueView</exclude-pattern>
+	<file>.</file>
 </ruleset>
