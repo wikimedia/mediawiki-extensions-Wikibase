@@ -113,6 +113,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Enlace de sitio",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
+	"wikibase-pageinfo-entity-usage-C": "Declaración: $1",
 	"wikibase-pageinfo-entity-usage-X": "Todos los datos de la entidad",
 	"wikibase-pageinfo-entity-usage-O": "Otro (declaraciones)",
 	"wikibase-property-render-error": "Error al procesar propiedad $1: $2",
