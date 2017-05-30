@@ -484,6 +484,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->getHandler()->supportsCategories() );
 	}
 
+	public function testGetAutosummary() {
+		$this->assertSame( '', $this->getHandler()->getAutosummary( null, null, 0 ) );
+	}
+
 	abstract protected function getExpectedSearchIndexFields();
 
 	public function testFieldsForSearchIndex() {
