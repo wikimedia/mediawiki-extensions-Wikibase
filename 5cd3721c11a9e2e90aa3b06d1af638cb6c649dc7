@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_42da91ee",
+        "filename": ".eslintrc.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-05-30T17:35:59Z",
+      "side": 1,
+      "message": "Use\n\n false\n\nnot\n\n \"false\"",
+      "range": {
+        "startLine": 12,
+        "startChar": 13,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "5cd3721c11a9e2e90aa3b06d1af638cb6c649dc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
