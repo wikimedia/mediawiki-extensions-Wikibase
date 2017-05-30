@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpReferenceRemove;
+use Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpReferenceRemove
+ * @covers Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove
  *
  * @group Wikibase
  * @group ChangeOp

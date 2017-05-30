@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\ChangeOp\SiteLinkChangeOpFactory
+ * @covers Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory
  *
  * @group Wikibase
  * @group ChangeOp

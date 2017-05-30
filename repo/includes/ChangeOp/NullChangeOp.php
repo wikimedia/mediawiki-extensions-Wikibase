@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use ValueValidators\Result;
-use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Summary;
 

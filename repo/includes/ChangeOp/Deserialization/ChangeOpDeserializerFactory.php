@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use Deserializers\Deserializer;
-use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\StringNormalizer;

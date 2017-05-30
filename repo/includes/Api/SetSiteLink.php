@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
-use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

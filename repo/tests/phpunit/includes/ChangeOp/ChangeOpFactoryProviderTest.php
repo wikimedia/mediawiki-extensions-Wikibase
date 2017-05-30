@@ -4,17 +4,17 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use HashSiteStore;
 use TestSites;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\ChangeOp\MergeChangeOpsFactory;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpFactoryProvider
+ * @covers Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider
  *
  * @group Wikibase
  * @group ChangeOp

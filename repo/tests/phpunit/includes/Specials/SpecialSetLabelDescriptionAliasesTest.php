@@ -7,7 +7,7 @@ use FauxResponse;
 use Status;
 use ValueValidators\Result;
 use WebRequest;
-use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

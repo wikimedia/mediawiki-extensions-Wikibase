@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpReference;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpReference;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,7 +20,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpReference
+ * @covers Wikibase\Repo\ChangeOp\ChangeOpReference
  *
  * @group Wikibase
  * @group ChangeOp

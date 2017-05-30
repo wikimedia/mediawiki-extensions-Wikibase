@@ -13,7 +13,7 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use ApiUsageException;
-use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;

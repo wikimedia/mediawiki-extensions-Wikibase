@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\ChangeOp\StatementChangeOpFactory
+ * @covers Wikibase\Repo\ChangeOp\StatementChangeOpFactory
  *
  * @group Wikibase
  * @group ChangeOp

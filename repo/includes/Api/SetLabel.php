@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOpLabel;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Summary;
