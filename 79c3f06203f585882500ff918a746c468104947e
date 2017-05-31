@@ -33,6 +33,52 @@
       "revId": "79c3f06203f585882500ff918a746c468104947e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e4cacd70",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-31T11:41:17Z",
+      "side": 1,
+      "message": "I asked and Aleksey explained to me why he decided to do this feature switch here. I still think this does not belong here. This either belongs to a framework (e.g. jQuery) and the framework should decide if it\u0027s fine to use native promises or not. Or we should stick to jQuery promises as long as we need to support browsers that don\u0027t have native promises, and change all our code the moment we are dropping support for such browsers.\n\nA feature switch like this means that users can not rely on what they get.\n\nEither the things are compatible – then it shouldn\u0027t matter if we stick to jQuery. Or they are not compatible – then it\u0027s even more critical to give a guarantee users can rely on.",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_64ad5d97",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-31T11:41:17Z",
+      "side": 1,
+      "message": "Users will not be happy about the fact that they have to implement *two* of these \"then\" functions just to get a naive JSON object. I believe I – as somebody working with and complaining about this mess for several years now – am able to understand why it must be like this. I still wish it could be simpler.\n\nWhy is it not possible to do\n\n mw.loader.using( \u0027wikibase.currentEntity\u0027 ).then( function ( entity ) {\n     …\n } );\n\nThat would be so much cooler.",
+      "range": {
+        "startLine": 76,
+        "startChar": 37,
+        "endLine": 76,
+        "endChar": 41
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
