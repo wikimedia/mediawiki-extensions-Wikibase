@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8989ac29",
+        "filename": ".eslintrc.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-31T08:31:08Z",
+      "side": 0,
+      "message": "We can put this rule back in for now.",
+      "revId": "60481d3cd3232f4de76a30bc35369ad23c9a3647",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
