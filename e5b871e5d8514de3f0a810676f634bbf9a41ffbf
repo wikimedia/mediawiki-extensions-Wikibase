@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_c993245a",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-31T08:30:07Z",
+      "side": 1,
+      "message": "I thought you meant it was inconsistent with the MW style guide for PHP. In general it would be preferable to keep everyone as close to the guide as possible (https://www.mediawiki.org/wiki/Manual:Coding_conventions) but that should be balanced against being too disruptive to your work :)",
+      "parentUuid": "0e1cb3f9_fb4d9dc7",
+      "range": {
+        "startLine": 593,
+        "startChar": 24,
+        "endLine": 593,
+        "endChar": 26
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_58a7ef07",
         "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
         "patchSetId": 1
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Then do not change this to ES3 compatibility mode.",
       "parentUuid": "0e1cb3f9_db79b9f3",
+      "range": {
+        "startLine": 282,
+        "startChar": 8,
+        "endLine": 282,
+        "endChar": 20
+      },
+      "revId": "e5b871e5d8514de3f0a810676f634bbf9a41ffbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c9ac849f",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-31T08:30:07Z",
+      "side": 1,
+      "message": "Yes, we should fix this upstream",
+      "parentUuid": "0e1cb3f9_fe4d8bc7",
       "range": {
         "startLine": 282,
         "startChar": 8,
