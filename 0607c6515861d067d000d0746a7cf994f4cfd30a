@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_a95cb0f4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-31T08:10:54Z",
+      "side": 1,
+      "message": "A local \"git diff -w\" highlighted this. Our code style is\n\n if ( …\n     || …\n     || …\n ) {\n     …\n }\n\nI wonder why the newline was added here. Yea, this is super trivial and not relevant at all. Just wondering.",
+      "range": {
+        "startLine": 445,
+        "startChar": 7,
+        "endLine": 446,
+        "endChar": 4
+      },
+      "revId": "0607c6515861d067d000d0746a7cf994f4cfd30a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
