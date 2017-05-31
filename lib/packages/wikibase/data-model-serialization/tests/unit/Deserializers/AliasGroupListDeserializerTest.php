@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Exceptions\DeserializationException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -21,7 +22,8 @@ class AliasGroupListDeserializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = new AliasGroupListDeserializer();
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+
+		$this->setExpectedException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 

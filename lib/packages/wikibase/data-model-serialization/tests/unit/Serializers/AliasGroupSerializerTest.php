@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit_Framework_TestCase;
+use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
@@ -21,7 +22,8 @@ class AliasGroupSerializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
 		$serializer = new AliasGroupSerializer();
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( $nonSerializable );
 	}
 

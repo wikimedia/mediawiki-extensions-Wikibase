@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\PropertySerializer;
@@ -20,7 +21,7 @@ use Wikibase\DataModel\Term\TermList;
 class PropertySerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$termListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$termListSerializerMock = $this->getMock( Serializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( TermList $termList ) {
@@ -33,7 +34,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				);
 			} ) );
 
-		$aliasGroupListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$aliasGroupListSerializerMock = $this->getMock( Serializer::class );
 		$aliasGroupListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
@@ -46,7 +47,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				);
 			} ) );
 
-		$statementListSerializerMock = $this->getMock( 'Serializers\Serializer' );
+		$statementListSerializerMock = $this->getMock( Serializer::class );
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( StatementList $statementList ) {

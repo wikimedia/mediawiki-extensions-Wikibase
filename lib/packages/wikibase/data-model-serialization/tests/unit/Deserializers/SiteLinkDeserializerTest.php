@@ -2,6 +2,9 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +20,7 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 
 	private function buildDeserializer() {
-		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'Q42' ) )
@@ -31,7 +34,8 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = $this->buildDeserializer();
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+
+		$this->setExpectedException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
@@ -91,14 +95,14 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testDeserializeItemIdFilterPropertyId() {
-		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
 			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
-		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
+		$this->setExpectedException( InvalidAttributeException::class );
 		$deserializer->deserialize( array(
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
@@ -107,10 +111,10 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAssertBadgesIsArray() {
-		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
-		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
+		$this->setExpectedException( InvalidAttributeException::class );
 		$deserializer->deserialize( array(
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',

@@ -2,9 +2,11 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\TypedSnak;
 
 /**
@@ -21,7 +23,7 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 	private $serializer;
 
 	protected function setUp() {
-		$snakSerializer = $this->getMock( 'Serializers\Serializer' );
+		$snakSerializer = $this->getMock( Serializer::class );
 
 		$snakSerializer->expects( $this->any() )
 			->method( 'serialize' )
@@ -45,7 +47,7 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function serializationProvider() {
 		$argLists = array();
 
-		$mockSnak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
+		$mockSnak = $this->getMock( Snak::class );
 
 		$argLists[] = array(
 			new TypedSnak( $mockSnak, 'string' ),
@@ -69,7 +71,7 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWithUnsupportedObject() {
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$this->serializer->serialize( new PropertyNoValueSnak( 42 ) );
 	}
 

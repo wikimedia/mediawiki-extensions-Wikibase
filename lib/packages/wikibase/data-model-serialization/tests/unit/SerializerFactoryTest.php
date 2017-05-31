@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel;
 
 use DataValues\Serializers\DataValueSerializer;
+use InvalidArgumentException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -112,7 +113,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFactoryCreateWithUnexpectedValue() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new SerializerFactory( new DataValueSerializer(), 1.0 );
 	}
 

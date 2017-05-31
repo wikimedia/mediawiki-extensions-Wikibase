@@ -2,6 +2,9 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -18,7 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$snakDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snakDeserializerMock = $this->getMock( Deserializer::class );
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -27,7 +30,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			) ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
-		$snaksDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snaksDeserializerMock = $this->getMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -42,7 +45,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 				new PropertyNoValueSnak( 42 )
 			) ) ) );
 
-		$referencesDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$referencesDeserializerMock = $this->getMock( Deserializer::class );
 		$referencesDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array() ) )
@@ -234,7 +237,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 	 * @dataProvider invalidDeserializationProvider
 	 */
 	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
@@ -269,7 +272,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testQualifiersOrderDeserialization() {
-		$snakDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snakDeserializerMock = $this->getMock( Deserializer::class );
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -278,7 +281,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			) ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
-		$snaksDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snaksDeserializerMock = $this->getMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -306,7 +309,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 				new PropertyNoValueSnak( 42 )
 			) ) ) );
 
-		$referencesDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$referencesDeserializerMock = $this->getMock( Deserializer::class );
 		$statementDeserializer = new StatementDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
@@ -369,7 +372,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 
 		$deserializer = $this->buildDeserializer();
 
-		$this->setExpectedException( 'Deserializers\Exceptions\InvalidAttributeException' );
+		$this->setExpectedException( InvalidAttributeException::class );
 		$deserializer->deserialize( $serialization );
 	}
 
