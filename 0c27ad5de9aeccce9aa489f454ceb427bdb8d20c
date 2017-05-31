@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_a93cadde",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-31T17:14:49Z",
+      "side": 1,
+      "message": "Hm, right... The issue is that we don\u0027t really know the constructor parameters of the concrete class. \n\nOk for now, but I\u0027d prefer to see getContentClass() die.",
+      "parentUuid": "0e1cb3f9_c42f8938",
+      "revId": "0c27ad5de9aeccce9aa489f454ceb427bdb8d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_84251158",
         "filename": "repo/includes/Content/EntityHandler.php",
         "patchSetId": 3
