@@ -452,7 +452,7 @@ class EditEntityAction extends ViewEntityAction {
 				'name' => 'wpSave',
 				'value' => $this->msg( 'savearticle' )->text(),
 				'label' => $this->msg( 'savearticle' )->text(),
-				'accesskey' => $this->msg( 'accesskey-save' )->text(),
+				'accessKey' => $this->msg( 'accesskey-save' )->plain(),
 				'flags' => [ 'primary', 'progressive' ],
 				'type' => 'submit',
 				'title' => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
