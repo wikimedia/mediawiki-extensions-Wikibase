@@ -42,4 +42,7 @@
 
 	<!-- TODO: Move to the Wikibase CodeSniffer library. -->
 	<rule ref="Squiz.WhiteSpace.CastSpacing" />
+
+	<file>.</file>
+	<exclude-pattern type="relative">^extensions/</exclude-pattern>
 </ruleset>
