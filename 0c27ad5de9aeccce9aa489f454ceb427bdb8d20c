@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2412055d",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-31T09:54:40Z",
+      "side": 1,
+      "message": "This feels really bad...\n\n$contentClass::newEmpty() would be a bit better.",
+      "revId": "0c27ad5de9aeccce9aa489f454ceb427bdb8d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_a424d5ad",
+        "filename": "repo/includes/Content/PropertyContent.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-31T09:54:40Z",
+      "side": 1,
+      "message": "So, effectively, we now break the contract of getEntity() instead of the contract of newEmpty(). How is that better?\n\nHm... How did this code handle redirects?",
+      "revId": "0c27ad5de9aeccce9aa489f454ceb427bdb8d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
