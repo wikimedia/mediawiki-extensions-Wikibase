@@ -1,8 +1,10 @@
 <?php
+
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use DummySearchIndexFieldDefinition;
 use PHPUnit_Framework_TestCase;
+use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 
@@ -13,7 +15,7 @@ abstract class WikibaseNumericFieldTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMapping() {
 		$field = $this->getFieldObject();
-		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
+		$searchEngine = $this->getMock( SearchEngine::class );
 
 		$searchEngine->expects( $this->any() )
 			->method( 'makeSearchFieldMapping' )

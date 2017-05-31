@@ -11,6 +11,7 @@ use MWException;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
+use stdClass;
 use Title;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
@@ -115,9 +116,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 		$expectedException = null
 	) {
 		//NOTE: class is unclear, see Bug T66657. But we don't use that object anyway.
-		$importer = $this->getMockBuilder( 'Import' )
-			->disableOriginalConstructor()
-			->getMock();
+		$importer = new stdClass();
 
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowEntityImport );
 

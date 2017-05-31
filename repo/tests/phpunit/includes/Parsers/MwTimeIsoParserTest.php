@@ -57,7 +57,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 	}
 
 	private function getLanguage() {
-		$lang = $this->getMock( 'Language' );
+		$lang = $this->getMock( Language::class );
 
 		$lang->expects( $this->any() )
 			->method( 'getCode' )
