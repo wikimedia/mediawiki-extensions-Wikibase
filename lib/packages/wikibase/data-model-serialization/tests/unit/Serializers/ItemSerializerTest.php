@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\ItemSerializer;
@@ -22,7 +23,7 @@ use Wikibase\DataModel\Term\TermList;
 class ItemSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer( $useObjectsForMaps = false ) {
-		$termListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$termListSerializerMock = $this->getMock( Serializer::class );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( TermList $termList ) {
@@ -35,7 +36,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				);
 			} ) );
 
-		$aliasGroupListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$aliasGroupListSerializerMock = $this->getMock( Serializer::class );
 		$aliasGroupListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
@@ -48,7 +49,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				);
 			} ) );
 
-		$statementListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementListSerializerMock = $this->getMock( Serializer::class );
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( StatementList $statementList ) {
@@ -70,7 +71,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 				);
 			} ) );
 
-		$siteLinkSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$siteLinkSerializerMock = $this->getMock( Serializer::class );
 		$siteLinkSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new SiteLink( 'enwiki', 'Nyan Cat' ) ) )

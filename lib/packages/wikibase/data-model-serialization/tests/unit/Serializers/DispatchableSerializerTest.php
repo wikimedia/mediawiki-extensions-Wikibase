@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit_Framework_TestCase;
 use Serializers\DispatchableSerializer;
+use Serializers\Exceptions\UnsupportedObjectException;
 
 /**
  * @license GPL-2.0+
@@ -18,7 +19,7 @@ abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 	protected abstract function buildSerializer();
 
 	public function testImplementsDispatchableSerializerInterface() {
-		$this->assertInstanceOf( 'Serializers\DispatchableSerializer', $this->buildSerializer() );
+		$this->assertInstanceOf( DispatchableSerializer::class, $this->buildSerializer() );
 	}
 
 	/**
@@ -44,7 +45,7 @@ abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider nonSerializableProvider
 	 */
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$this->buildSerializer()->serialize( $nonSerializable );
 	}
 

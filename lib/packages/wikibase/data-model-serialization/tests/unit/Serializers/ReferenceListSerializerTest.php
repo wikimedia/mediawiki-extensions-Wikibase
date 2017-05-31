@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\Serializer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class ReferenceListSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$referenceSerializerFake = $this->getMock( '\Serializers\Serializer' );
+		$referenceSerializerFake = $this->getMock( Serializer::class );
 		$referenceSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( array(

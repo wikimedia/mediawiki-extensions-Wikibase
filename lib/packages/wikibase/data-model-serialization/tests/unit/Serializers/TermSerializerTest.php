@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Serializers\TermSerializer;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
@@ -47,7 +48,8 @@ class TermSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testWithUnsupportedObject() {
 		$serializer = new TermSerializer();
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( new \stdClass() );
 	}
 

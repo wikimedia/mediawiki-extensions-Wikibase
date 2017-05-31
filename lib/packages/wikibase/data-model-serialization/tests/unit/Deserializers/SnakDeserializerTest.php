@@ -5,6 +5,9 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -21,7 +24,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 class SnakDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
@@ -29,7 +32,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 
 		return new SnakDeserializer(
 			new DataValueDeserializer( array (
-				'string' => 'DataValues\StringValue',
+				'string' => StringValue::class,
 			) ),
 			$entityIdDeserializerMock
 		);
@@ -126,7 +129,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	 * @dataProvider invalidDeserializationProvider
 	 */
 	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
@@ -147,14 +150,14 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testDeserializePropertyIdFilterItemId() {
-		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'Q42' ) )
 			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
 		$deserializer = new SnakDeserializer( new DataValueDeserializer(), $entityIdDeserializerMock );
 
-		$this->setExpectedException( '\Deserializers\Exceptions\InvalidAttributeException' );
+		$this->setExpectedException( InvalidAttributeException::class );
 		$deserializer->deserialize( array(
 			'snaktype' => 'somevalue',
 			'property' => 'Q42'
@@ -173,7 +176,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 
 		$snak = $this->buildDeserializer()->deserialize( $serialization );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\PropertyValueSnak', $snak );
+		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
 		$this->assertSnakHasUnDeserializableValue( $snak );
 	}
 
@@ -203,7 +206,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 		/**
 		 * @var UnDeserializableValue $dataValue
 		 */
-		$this->assertInstanceOf( 'DataValues\UnDeserializableValue', $dataValue );
+		$this->assertInstanceOf( UnDeserializableValue::class, $dataValue );
 
 		$this->assertEquals( $dataValue->getTargetType(), 'string' );
 		$this->assertEquals( $dataValue->getValue(), 1337 );

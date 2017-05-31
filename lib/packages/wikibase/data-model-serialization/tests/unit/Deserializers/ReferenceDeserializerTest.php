@@ -2,6 +2,9 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
@@ -18,7 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$snaksDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snaksDeserializerMock = $this->getMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array() ) )
@@ -68,7 +71,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testSnaksOrderDeserialization() {
-		$snaksDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snaksDeserializerMock = $this->getMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -137,7 +140,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	 * @dataProvider invalidDeserializationProvider
 	 */
 	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
@@ -151,7 +154,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testGivenInvalidSnaksOrderAttribute_exceptionIsThrown() {
-		$this->setExpectedException( 'Deserializers\Exceptions\InvalidAttributeException' );
+		$this->setExpectedException( InvalidAttributeException::class );
 		$this->buildDeserializer()->deserialize( array(
 			'hash' => 'foo',
 			'snaks' => array(),

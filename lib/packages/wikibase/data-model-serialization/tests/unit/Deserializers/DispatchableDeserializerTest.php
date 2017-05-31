@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\DispatchableDeserializer;
+use Deserializers\Exceptions\DeserializationException;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -18,7 +19,7 @@ abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 	protected abstract function buildDeserializer();
 
 	public function testImplementsDispatchableDeserializerInterface() {
-		$this->assertInstanceOf( 'Deserializers\DispatchableDeserializer', $this->buildDeserializer() );
+		$this->assertInstanceOf( DispatchableDeserializer::class, $this->buildDeserializer() );
 	}
 
 	/**
@@ -45,7 +46,8 @@ abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = $this->buildDeserializer();
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+
+		$this->setExpectedException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 

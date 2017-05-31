@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use PHPUnit_Framework_TestCase;
+use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Serializers\TermListSerializer;
 use Wikibase\DataModel\Serializers\TermSerializer;
 use Wikibase\DataModel\Term\Term;
@@ -67,7 +68,8 @@ class TermListSerializerTest extends PHPUnit_Framework_TestCase {
 
 	public function testWithUnsupportedObject() {
 		$serializer = $this->buildSerializer();
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( new \stdClass() );
 	}
 

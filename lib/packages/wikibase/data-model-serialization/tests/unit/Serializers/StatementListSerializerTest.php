@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\Serializer;
 use stdClass;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -20,7 +21,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		$statementSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementSerializerMock = $this->getMock( Serializer::class );
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )
@@ -98,7 +99,7 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 	public function testStatementListSerializerWithOptionObjectsForMaps() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
-		$statementSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementSerializerMock = $this->getMock( Serializer::class );
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )

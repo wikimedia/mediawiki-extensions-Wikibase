@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Exceptions\DeserializationException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\TermDeserializer;
 use Wikibase\DataModel\Term\Term;
@@ -19,7 +20,8 @@ class TermDeserializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = new TermDeserializer();
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+
+		$this->setExpectedException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 

@@ -2,6 +2,8 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Reference;
@@ -16,7 +18,7 @@ use Wikibase\DataModel\ReferenceList;
 class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {
 
 	private function buildDeserializer() {
-		$referenceDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$referenceDeserializerMock = $this->getMock( Deserializer::class );
 
 		$referenceDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
@@ -34,7 +36,8 @@ class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = $this->buildDeserializer();
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+
+		$this->setExpectedException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
