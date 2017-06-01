@@ -29,6 +29,7 @@ use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;

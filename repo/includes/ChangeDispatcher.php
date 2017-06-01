@@ -4,7 +4,7 @@ namespace Wikibase\Repo;
 
 use MWException;
 use Wikibase\Change;
-use Wikibase\ChunkAccess;
+use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;

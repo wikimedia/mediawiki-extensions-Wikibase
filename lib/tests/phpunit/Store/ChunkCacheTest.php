@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\ChunkCache;
+use Wikibase\Lib\Store\ChunkCache;
 
 /**
- * @covers Wikibase\ChunkCache
+ * @covers Wikibase\Lib\Store\ChunkCache
  *
  * @group Wikibase
  *
