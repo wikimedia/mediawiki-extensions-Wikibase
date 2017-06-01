@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_bfb798f1",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-01T20:28:20Z",
+      "side": 1,
+      "message": "Actually, it should just be string|null. It looks like the docs weren\u0027t updated when the code was changed in PS13.",
+      "parentUuid": "ce153bd1_3f1628f7",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 148,
+        "endChar": 17
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_9f19742a",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 13
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_5fc99c7a",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-01T20:28:20Z",
+      "side": 1,
+      "message": "See the comment on line 287. Although once something triggers a call to Message::fetchMessage(), -\u003egetKey() will start returning \u0027rawmessage\u0027 instead of $messageKey.",
+      "parentUuid": "ce153bd1_1f2d6441",
+      "range": {
+        "startLine": 289,
+        "startChar": 27,
+        "endLine": 289,
+        "endChar": 38
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_7ff580c6",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 13
@@ -105,6 +153,30 @@
       "writtenOn": "2017-06-01T20:20:36Z",
       "side": 1,
       "message": "Is this still correct?",
+      "range": {
+        "startLine": 306,
+        "startChar": 12,
+        "endLine": 306,
+        "endChar": 29
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_7f990080",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-01T20:28:20Z",
+      "side": 1,
+      "message": "The call on line 317 to ApiBase::dieWithError() should unconditionally throw an ApiUsageException.",
+      "parentUuid": "ce153bd1_7ff580c6",
       "range": {
         "startLine": 306,
         "startChar": 12,
