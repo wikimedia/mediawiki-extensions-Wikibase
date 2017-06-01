@@ -83,6 +83,8 @@
 	"wikibase-rc-show-wikidata-pref": "نمایش ویرایش‌های {{WBREPONAME}} در تغییرات اخیر",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "ویرایش {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "ویرایش‌ها در {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "ویرایش‌هایی که در {{WBREPONAME}} منشأ دارند.",
 	"wikibase-replicationnote": "لطفاً توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.",
 	"wikibase-watchlist-show-changes-pref": "نمایش ویرایش‌های {{WBREPONAME}} در فهرست پیگیری‌های شما",
 	"wikibase-error-deserialize-error": "خطا در مرتب کردن داده ‌ها.",
