@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce153bd1_52775435",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T16:42:03Z",
+      "side": 1,
+      "message": "I find it a bit awkward to have this unused parameter here. How could it ever make a difference? But this test appears to be cheap, so this is most probably not a big deal.",
+      "range": {
+        "startLine": 269,
+        "startChar": 40,
+        "endLine": 269,
+        "endChar": 45
+      },
+      "revId": "d60efc442a1edf69ad4e90abac8a446736bccf78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
