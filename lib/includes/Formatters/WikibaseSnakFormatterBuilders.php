@@ -8,6 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
 use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
+use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**

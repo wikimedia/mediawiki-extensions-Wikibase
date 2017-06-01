@@ -9,8 +9,8 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\StringNormalizer;
-use Wikibase\TermIndex;
-use Wikibase\TermPropertyLabelResolver;
+use Wikibase\Lib\Store\TermIndex;
+use Wikibase\Lib\Store\TermPropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
@@ -37,7 +37,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * Implementation of the client store interface using direct access to the repository's

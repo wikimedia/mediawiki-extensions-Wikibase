@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\LinkBeginHookHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hooks\LinkBeginHookHandler

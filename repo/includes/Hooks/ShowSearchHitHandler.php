@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * Handler to format entities in the search results
