@@ -7,11 +7,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
- * Base class for tests for classes implementing Wikibase\TermIndex.
+ * Base class for tests for classes implementing Wikibase\Lib\Store\TermIndex.
  *
  * @group Wikibase
  *

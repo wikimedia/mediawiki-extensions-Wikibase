@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Interactors;
 
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * Class creating TermIndexSearchInteractor instances configured for the particular display language.

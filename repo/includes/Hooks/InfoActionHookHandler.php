@@ -7,7 +7,7 @@ use IContextSource;
 use SiteLookup;
 use Title;
 use Wikibase\Store\SubscriptionLookup;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**

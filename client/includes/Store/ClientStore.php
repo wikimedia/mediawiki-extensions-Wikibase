@@ -13,8 +13,8 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * Client store interface.

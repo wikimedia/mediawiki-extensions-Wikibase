@@ -22,9 +22,9 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\SubmitEntityAction;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\ViewEntityAction;
 
 /**

@@ -26,8 +26,8 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\SqlStore;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @covers Wikibase\SqlStore

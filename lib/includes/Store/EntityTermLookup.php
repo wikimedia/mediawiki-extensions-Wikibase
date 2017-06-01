@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\TermIndex;
 
 /**
  * @license GPL-2.0+

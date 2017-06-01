@@ -6,7 +6,7 @@ use HistoryAction;
 use IContextSource;
 use Page;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * Handles the history action for Wikibase entities.

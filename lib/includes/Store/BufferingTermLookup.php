@@ -1,14 +1,10 @@
 <?php
 
-namespace Wikibase\Store;
+namespace Wikibase\Lib\Store;
 
 use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityTermLookupBase;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermIndex;
 
 /**
  * @license GPL-2.0+

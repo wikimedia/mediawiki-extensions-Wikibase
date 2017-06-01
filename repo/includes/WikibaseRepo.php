@@ -151,7 +151,7 @@ use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\SettingsArray;
 use Wikibase\SqlStore;
 use Wikibase\Store;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\Template\TemplateFactory;

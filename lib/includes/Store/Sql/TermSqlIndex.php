@@ -21,7 +21,7 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\StringNormalizer;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\Database;

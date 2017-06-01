@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hooks\ShowSearchHitHandler
