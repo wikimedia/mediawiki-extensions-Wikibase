@@ -168,7 +168,7 @@
 		= $.expr.createPseudo( function( fullName ) {
 			return function( elem ) {
 				for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
-					if ( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
+					if ( $.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
 						return true;
 					}
 				}

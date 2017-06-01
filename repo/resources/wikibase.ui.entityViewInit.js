@@ -131,7 +131,7 @@
 		}
 
 		viewFactoryArguments.unshift( null );
-		var viewFactory = new ( Function.prototype.bind.apply( viewFactoryClass, viewFactoryArguments ) );
+		var viewFactory = new ( Function.prototype.bind.apply( viewFactoryClass, viewFactoryArguments ) )();
 		var entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
 
 		return entityView.widgetName;

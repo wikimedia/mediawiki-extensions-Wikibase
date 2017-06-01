@@ -246,7 +246,7 @@
 
 			$.when.apply( $, $.map( badgeIds, function( badgeId ) {
 				return self.options.entityIdPlainFormatter.format( badgeId );
-			} ) ).done( function( /*…*/ ) {
+			} ) ).done( function( /* … */ ) {
 				var badgeLabels = arguments;
 				$menu.empty();
 
