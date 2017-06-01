@@ -27,9 +27,9 @@
 		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
-		"mediawiki/mediawiki-codesniffer": "~0.7",
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~4.8"
+		"phpunit/phpunit": "~4.8",
+		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -44,7 +44,7 @@
 	"scripts": {
 		"test": [
 			"@validate --no-interaction",
-			"vendor/bin/phpunit --coverage-php /dev/null"
+			"phpunit --coverage-php /dev/null"
 		],
 		"cs": [
 			"@phpcs",
@@ -55,10 +55,10 @@
 			"@cs"
 		],
 		"phpcs": [
-			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
+			"phpcs -p -s"
 		],
 		"phpmd": [
-			"vendor/bin/phpmd src/,tests/unit/ text phpmd.xml"
+			"phpmd src/,tests/unit/ text phpmd.xml"
 		]
 	}
 }
