@@ -3,9 +3,7 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
-use Prophecy\Prophecy\ObjectProphecy;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;

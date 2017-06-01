@@ -3,14 +3,8 @@
 namespace Wikibase\Lib\Tests;
 
 use MWException;
-use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\WikibaseSettings;
-use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * @covers Wikibase\WikibaseSettings
