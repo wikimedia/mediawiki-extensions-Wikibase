@@ -35,6 +35,11 @@ class OtherProjectsSidebarGenerator {
 	private $siteLookup;
 
 	/**
+	 * @var SidebarLinkBadgeDisplay
+	 */
+	private $sidebarLinkBadgeDisplay;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteIdsToOutput;
@@ -43,17 +48,20 @@ class OtherProjectsSidebarGenerator {
 	 * @param string $localSiteId
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLookup $siteLookup
+	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 * @param string[] $siteIdsToOutput
 	 */
 	public function __construct(
 		$localSiteId,
 		SiteLinkLookup $siteLinkLookup,
 		SiteLookup $siteLookup,
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
 		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLookup = $siteLookup;
+		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 		$this->siteIdsToOutput = $siteIdsToOutput;
 	}
 
@@ -223,6 +231,11 @@ class OtherProjectsSidebarGenerator {
 		if ( $siteLanguageCode !== null ) {
 			$attributes['hreflang'] = $siteLanguageCode;
 		}
+
+		$this->sidebarLinkBadgeDisplay->applyBadgeToLink(
+			$attributes,
+			$this->sidebarLinkBadgeDisplay->getBadgeInfo( $siteLink->getBadges() )
+		);
 
 		return $attributes;
 	}
