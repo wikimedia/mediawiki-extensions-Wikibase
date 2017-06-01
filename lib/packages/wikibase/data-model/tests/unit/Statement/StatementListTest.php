@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Tests\Statement;
 
 use ArrayObject;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -33,7 +34,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	 * @return Statement
 	 */
 	private function getStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
-		$statement = $this->getMockBuilder( 'Wikibase\DataModel\Statement\Statement' )
+		$statement = $this->getMockBuilder( Statement::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -256,7 +257,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 		$list = new StatementList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->addStatement( $statement, -1 );
 	}
 
@@ -354,12 +355,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 			$this->getStatementWithSnak( 'P2', 'bar' ),
 		] );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new StatementList( $traversable );
 	}
 
 	public function testGivenNonTraversableOrArgList_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new StatementList( null );
 	}
 
@@ -388,7 +389,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement1 = new Statement( $this->newSnak( 'P42', 'bar' ) );
 		$statement2 = new Statement( $this->newSnak( 'P42', 'baz' ) );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new StatementList( $statement0, $statement1, [], $statement2 );
 	}
 

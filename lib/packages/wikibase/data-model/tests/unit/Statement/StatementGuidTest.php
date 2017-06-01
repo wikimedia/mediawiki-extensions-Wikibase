@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Statement;
 
 use Exception;
+use InvalidArgumentException;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -57,7 +58,7 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBadConstruction
 	 */
 	public function testBadConstruction( $entityId, $guid ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new StatementGuid( $entityId, $guid );
 	}
 

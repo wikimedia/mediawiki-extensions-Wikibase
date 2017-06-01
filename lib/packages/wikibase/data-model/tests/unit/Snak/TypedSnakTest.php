@@ -19,7 +19,7 @@ class TypedSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGettersReturnCorrectValues() {
 		/** @var Snak $snak */
-		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
+		$snak = $this->getMock( Snak::class );
 		$dataTypeId = 'awesome';
 
 		$typedSnak = new TypedSnak( $snak, $dataTypeId );

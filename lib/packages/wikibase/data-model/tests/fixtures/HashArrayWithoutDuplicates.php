@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Fixtures;
 
+use Hashable;
 use Wikibase\DataModel\HashArray;
 
 /**
@@ -11,7 +12,7 @@ use Wikibase\DataModel\HashArray;
 class HashArrayWithoutDuplicates extends HashArray {
 
 	public function getObjectType() {
-		return '\Hashable';
+		return Hashable::class;
 	}
 
 }

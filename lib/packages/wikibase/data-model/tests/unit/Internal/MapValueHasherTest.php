@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Internal;
 
 use ArrayObject;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Internal\MapValueHasher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -58,7 +59,7 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 	public function testHashThrowsExceptionOnInvalidArgument() {
 		$hasher = new MapValueHasher();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$hasher->hash( null );
 	}
 

@@ -44,13 +44,13 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	private $fingerprint;
 
 	protected function setUp() {
-		$this->labels = $this->getMockBuilder( 'Wikibase\DataModel\Term\TermList' )
+		$this->labels = $this->getMockBuilder( TermList::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->descriptions = $this->getMockBuilder( 'Wikibase\DataModel\Term\TermList' )
+		$this->descriptions = $this->getMockBuilder( TermList::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->aliasGroups = $this->getMockBuilder( 'Wikibase\DataModel\Term\AliasGroupList' )
+		$this->aliasGroups = $this->getMockBuilder( AliasGroupList::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->fingerprint = new Fingerprint(

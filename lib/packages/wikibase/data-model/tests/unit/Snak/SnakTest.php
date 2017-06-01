@@ -70,7 +70,7 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 	 * @param Snak $snak
 	 */
 	public function testGetPropertyId( Snak $snak ) {
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityId', $snak->getPropertyId() );
+		$this->assertInstanceOf( PropertyId::class, $snak->getPropertyId() );
 	}
 
 	/**

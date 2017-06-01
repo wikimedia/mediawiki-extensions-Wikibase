@@ -44,7 +44,7 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @return string
 	 */
 	public function getObjectType() {
-		return 'Wikibase\DataModel\Snak\Snak';
+		return Snak::class;
 	}
 
 	/**

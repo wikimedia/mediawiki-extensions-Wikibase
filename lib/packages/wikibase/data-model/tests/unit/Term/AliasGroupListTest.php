@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Tests\Term;
 
+use InvalidArgumentException;
+use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -88,7 +90,7 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNonAliasGroups_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new AliasGroupList( [ null ] );
 	}
 
@@ -109,14 +111,14 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new AliasGroupList();
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$list->getByLanguage( $languageCode );
 	}
 
 	public function testGivenNonSetLanguageCode_getByLanguageThrowsException() {
 		$list = new AliasGroupList();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$list->getByLanguage( 'en' );
 	}
 
@@ -311,14 +313,14 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	public function testGivenInvalidLanguageCode_setGroupTextsThrowsException() {
 		$list = new AliasGroupList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->setAliasesForLanguage( null, [ 'foo', 'bar' ] );
 	}
 
 	public function testGivenInvalidAliases_setGroupTextsThrowsException() {
 		$list = new AliasGroupList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->setAliasesForLanguage( 'en', [ 'foo', null ] );
 	}
 

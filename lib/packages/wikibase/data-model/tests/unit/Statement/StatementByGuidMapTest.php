@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Statement;
 
 use ArrayObject;
+use InvalidArgumentException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementByGuidMap;
@@ -43,7 +44,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonStringGuid_hasStatementWithGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$statements->hasStatementWithGuid( $nonString );
 	}
 
@@ -77,7 +78,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonStringGuid_getStatementByGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$statements->getStatementByGuid( $nonString );
 	}
 
@@ -105,12 +106,12 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonStringGuid_removeStatementWithGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$statements->removeStatementWithGuid( $nonString );
 	}
 
 	public function testGivenStatementWithNoGuid_constructorThrowsException() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		new StatementByGuidMap( [
 			$this->newStatement( 1, null )

@@ -185,7 +185,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetReferences( Statement $statement ) {
-		$this->assertInstanceOf( 'Wikibase\DataModel\ReferenceList', $statement->getReferences() );
+		$this->assertInstanceOf( ReferenceList::class, $statement->getReferences() );
 	}
 
 	/**
@@ -251,7 +251,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetInvalidRank( Statement $statement ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$statement->setRank( 9001 );
 	}
 

@@ -27,7 +27,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $propertyId, DataValue $dataValue, array $derivedDataValues ) {
 		$snak = new DerivedPropertyValueSnak( $propertyId, $dataValue, $derivedDataValues );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\PropertyValueSnak', $snak );
+		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
 	}
 
 	public function validConstructorArgumentsProvider() {

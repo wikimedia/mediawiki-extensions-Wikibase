@@ -76,7 +76,7 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructor( SnakList $snaks ) {
 		$omnomnomReference = new Reference( $snaks );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Reference', $omnomnomReference );
+		$this->assertInstanceOf( Reference::class, $omnomnomReference );
 
 		$this->assertEquals( $snaks, $omnomnomReference->getSnaks() );
 	}
@@ -109,7 +109,7 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSnaks( Reference $reference ) {
 		$snaks = $reference->getSnaks();
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\SnakList', $snaks );
+		$this->assertInstanceOf( SnakList::class, $snaks );
 	}
 
 	/**

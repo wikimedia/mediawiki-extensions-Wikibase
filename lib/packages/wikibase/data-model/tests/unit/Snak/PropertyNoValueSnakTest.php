@@ -28,7 +28,7 @@ class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $propertyId ) {
 		$snak = new PropertyNoValueSnak( $propertyId );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\PropertyNoValueSnak', $snak );
+		$this->assertInstanceOf( PropertyNoValueSnak::class, $snak );
 	}
 
 	public function validConstructorArgumentsProvider() {
@@ -59,7 +59,7 @@ class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testGetPropertyId() {
 		$snak = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
 		$propertyId = $snak->getPropertyId();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyId', $propertyId );
+		$this->assertInstanceOf( PropertyId::class, $propertyId );
 	}
 
 	public function testGetHash() {
