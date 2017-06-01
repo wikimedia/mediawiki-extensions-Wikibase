@@ -12,6 +12,7 @@ use MWException;
 use RequestContext;
 use Revision;
 use RuntimeException;
+use SearchEngine;
 use Title;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -489,7 +490,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testFieldsForSearchIndex() {
 		$handler = $this->getHandler();
 
-		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
+		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 
 		$searchEngine->expects( $this->any() )
 			->method( 'makeSearchFieldMapping' )
