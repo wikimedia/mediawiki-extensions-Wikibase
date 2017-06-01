@@ -22,7 +22,7 @@
 					return { value: value || null };
 				}
 			} ),
-			value: ( value ) ? value : null
+			value: value || null
 		}, options || {} );
 
 		$node.listview( options );
