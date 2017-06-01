@@ -106,8 +106,7 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
 			if ( $elementCount % 2 === 0 ) {
 				$array->removeElement( $element );
-			}
-			else {
+			} else {
 				$array->removeByElementHash( $element->getHash() );
 			}
 

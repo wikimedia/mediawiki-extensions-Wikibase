@@ -121,8 +121,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	public function setTerm( Term $term ) {
 		if ( $term->getText() === '' ) {
 			unset( $this->terms[$term->getLanguageCode()] );
-		}
-		else {
+		} else {
 			$this->terms[$term->getLanguageCode()] = $term;
 		}
 	}
