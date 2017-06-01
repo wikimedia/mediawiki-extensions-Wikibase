@@ -140,7 +140,7 @@ class DispatchingEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @param $repositoryName
+	 * @param string $repositoryName
 	 *
 	 * @return EntityInfoBuilder|null
 	 */

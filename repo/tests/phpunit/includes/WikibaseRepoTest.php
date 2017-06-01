@@ -376,21 +376,23 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param $repositoryName
+	 * @param string $repositoryName
 	 * @param array $customSettings
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function getRepositoryDefinition( $repositoryName, array $customSettings = [] ) {
-		return [ $repositoryName => array_merge(
-			[
-				'database' => '',
-				'base-uri' => 'http://acme.test/concept/',
-				'entity-types' => [ 'item', 'property' ],
-				'prefix-mapping' => []
-			],
-			$customSettings
-		) ];
+		return [
+			$repositoryName => array_merge(
+				[
+					'database' => '',
+					'base-uri' => 'http://acme.test/concept/',
+					'entity-types' => [ 'item', 'property' ],
+					'prefix-mapping' => [],
+				],
+				$customSettings
+			)
+		];
 	}
 
 	/**

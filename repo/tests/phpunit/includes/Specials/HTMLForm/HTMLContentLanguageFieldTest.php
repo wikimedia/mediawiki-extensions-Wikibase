@@ -73,10 +73,11 @@ class HTMLContentLanguageFieldTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param $params
+	 * @param array $params
+	 *
 	 * @return HTMLContentLanguageField
 	 */
-	private function createField( $params ) {
+	private function createField( array $params ) {
 		$requiredByBaseClass = [ 'fieldname' => 'some-name', ];
 
 		return new HTMLContentLanguageField( array_merge( $requiredByBaseClass, $params ) );

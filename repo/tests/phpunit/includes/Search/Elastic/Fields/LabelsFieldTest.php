@@ -58,8 +58,6 @@ class LabelsFieldTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider  getFieldDataProvider
-	 * @param $expected
-	 * @param EntityDocument $entity
 	 */
 	public function testLabels( $expected, EntityDocument $entity ) {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );

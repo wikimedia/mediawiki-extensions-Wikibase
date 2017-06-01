@@ -213,7 +213,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Creates dummy object (in context of this text to represent some service)
 	 *
-	 * @param $description
+	 * @param string $description
 	 *
 	 * @return object
 	 */
