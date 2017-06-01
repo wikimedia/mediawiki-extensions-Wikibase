@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce153bd1_5f13dc05",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "Unrelated. Should be a separate patch.",
+      "range": {
+        "startLine": 139,
+        "startChar": 45,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_3f1628f7",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "Should this be string[]?",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 148,
+        "endChar": 17
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_9f19742a",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "This is not a sufficient name for something that returns an array with two keys.",
+      "range": {
+        "startLine": 150,
+        "startChar": 18,
+        "endLine": 150,
+        "endChar": 26
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_1f2d6441",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "What is the point of trying this key again if we know it does not exist?",
+      "range": {
+        "startLine": 289,
+        "startChar": 27,
+        "endLine": 289,
+        "endChar": 38
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_7ff580c6",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "Is this still correct?",
+      "range": {
+        "startLine": 306,
+        "startChar": 12,
+        "endLine": 306,
+        "endChar": 29
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_9fde546f",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "These are really weird changes. If this is test setup, where is the assertion against this?",
+      "range": {
+        "startLine": 125,
+        "startChar": 35,
+        "endLine": 125,
+        "endChar": 40
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_5fe8bc0b",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "Same here. If this is test setup, what production code change motivated this change here?",
+      "range": {
+        "startLine": 229,
+        "startChar": 25,
+        "endLine": 229,
+        "endChar": 26
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_5f919c9b",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "This is a comment about a comment. What should be fixed here?",
+      "range": {
+        "startLine": 906,
+        "startChar": 68,
+        "endLine": 906,
+        "endChar": 73
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_bff6b8f4",
+        "filename": "repo/tests/phpunit/includes/Api/ModifyTermTestCase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T20:20:36Z",
+      "side": 1,
+      "message": "Can you explain how the removals here and in the other file are related to the change?",
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
