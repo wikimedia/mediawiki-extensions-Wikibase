@@ -21,7 +21,7 @@ class NoReverseDependencyTest extends \PHPUnit_Framework_TestCase {
 			[
 				'RepositoryServiceContainer.php',
 				'RepositoryServiceContainerFactory.php',
-				'RepositoryServiceWiring.php',
+				'PerRepositoryServiceWiring.php',
 			],
 			$this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' )
 		);

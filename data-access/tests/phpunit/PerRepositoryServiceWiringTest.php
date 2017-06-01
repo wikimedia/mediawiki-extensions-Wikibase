@@ -23,7 +23,7 @@ use Wikibase\TermIndex;
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
+class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return RepositoryServiceContainer
@@ -37,7 +37,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance()
 		);
 
-		$container->loadWiringFiles( [ __DIR__ . '/../../src/RepositoryServiceWiring.php' ] );
+		$container->loadWiringFiles( [ __DIR__ . '/../../src/PerRepositoryServiceWiring.php' ] );
 
 		return $container;
 	}
