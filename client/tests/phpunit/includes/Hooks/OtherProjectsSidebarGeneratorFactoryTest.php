@@ -3,9 +3,12 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use HashSiteStore;
+use Language;
 use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -28,11 +31,17 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 
 		$siteLinkLookup = new MockRepository();
 		$siteStore = new HashSiteStore( TestSites::getSites() );
+		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
+			$this->getMock( LabelDescriptionLookup::class ),
+			[],
+			new Language( 'en' )
+		);
 
 		$factory = new OtherProjectsSidebarGeneratorFactory(
 			$settings,
 			$siteLinkLookup,
-			$siteStore
+			$siteStore,
+			$sidebarLinkBadgeDisplay
 		);
 
 		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator();
