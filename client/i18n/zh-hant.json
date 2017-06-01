@@ -17,7 +17,8 @@
 			"EagerLin",
 			"一個正常人",
 			"Cwek",
-			"1233thehongkonger"
+			"1233thehongkonger",
+			"Wwycheuk"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -65,7 +66,7 @@
 	"wikibase-watchlist-show-changes-pref": "顯示 {{WBREPONAME}} 編輯於您的監視清單中",
 	"wikibase-error-deserialize-error": "序列化資料失敗。",
 	"wikibase-error-serialize-error": "序列化資料失敗",
-	"wikibase-error-invalid-entity-id": "系統無法辨識輸入的 ID。請使用一個有效的 ID。",
+	"wikibase-error-invalid-entity-id": "系統無法辨識輸入的 ID [$2]。請使用有效的 ID。",
 	"wikibase-error-exceeded-entity-access-limit": "查看了太多{{WBREPONAME}}項目。",
 	"unconnectedpages": "頁面未連結至任何項目",
 	"wikibase-unconnectedpages-format-row": "(該頁面有 $1 個跨語言連結)",

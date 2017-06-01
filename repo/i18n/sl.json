@@ -50,6 +50,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "stran",
 	"wikibase-alias-edit-placeholder": "vnesite drugo ime",
 	"wikibase-label-input-help-message": "Vnesite naslov tega nabora podatkov v jeziku $1.",
+	"wikibase-entitytermsview-input-help-message": "Vnesi oznako tega objekta, kratek opis in druga imena v raznih jezikih.",
 	"wikibase-statementsection-statements": "Izjave",
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|vnos|vnosa|vnosi|vnosov}}",
 	"wikibase-sitelinks-empty": "Na ta predmet se ne povezuje nobena stran.",
