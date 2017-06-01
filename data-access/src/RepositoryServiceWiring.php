@@ -13,8 +13,8 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
-use Wikibase\Store\BufferingTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\BufferingTermLookup;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Assert\Assert;
 

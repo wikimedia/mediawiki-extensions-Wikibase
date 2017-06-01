@@ -1,10 +1,9 @@
 <?php
 
-namespace Wikibase\Store;
+namespace Wikibase\Lib\Store;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * Service interface for looking up EntityIds given local wiki pages.
