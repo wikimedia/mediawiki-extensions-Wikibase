@@ -14,8 +14,8 @@ use Wikibase\Lib\Tests\MockPropertyLabelResolver;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * (Incomplete) ClientStore mock

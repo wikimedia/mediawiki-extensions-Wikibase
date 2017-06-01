@@ -6,10 +6,10 @@ use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\RedirectRevision;
+use Wikibase\Lib\Store\RedirectRevision;
 
 /**
- * @covers Wikibase\RedirectRevision
+ * @covers Wikibase\Lib\Store\RedirectRevision
  *
  * @group Wikibase
  * @group WikibaseStore

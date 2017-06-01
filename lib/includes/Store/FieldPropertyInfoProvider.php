@@ -1,10 +1,8 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 
 /**

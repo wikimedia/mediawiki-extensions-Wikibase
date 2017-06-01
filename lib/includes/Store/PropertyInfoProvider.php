@@ -1,9 +1,8 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * Service for providing a specific information about properties.
