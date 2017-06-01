@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Tests;
 
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\SiteLink;
@@ -19,7 +21,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider notSiteLinksProvider
 	 */
 	public function testGivenNonSiteLinks_constructorThrowsException( array $notSiteLinks ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new SiteLinkList( $notSiteLinks );
 	}
 
@@ -87,7 +89,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider siteLinkArrayWithDuplicateSiteIdProvider
 	 */
 	public function testGivenSiteIdTwice_constructorThrowsException( array $siteLinkArray ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new SiteLinkList( $siteLinkArray );
 	}
 
@@ -130,7 +132,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonString_getBySiteIdThrowsException() {
 		$list = new SiteLinkList( [] );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->getBySiteId( 32202 );
 	}
 
@@ -139,7 +141,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 
 		$list = new SiteLinkList( [ $link ] );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$list->getBySiteId( 'foo' );
 	}
 
@@ -197,7 +199,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonSiteId_removeSiteWithIdThrowsException() {
 		$list = new SiteLinkList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->removeLinkWithSiteId( [] );
 	}
 

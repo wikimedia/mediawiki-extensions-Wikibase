@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Tests\Entity;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -50,7 +51,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	public function testCannotParseInvalidId( $invalidIdSerialization ) {
 		$parser = $this->getBasicParser();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
+		$this->setExpectedException( EntityIdParsingException::class );
 		$parser->parse( $invalidIdSerialization );
 	}
 
@@ -74,7 +75,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	public function testCannotParseWithoutBuilders() {
 		$parser = new DispatchingEntityIdParser( [] );
 
-		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
+		$this->setExpectedException( EntityIdParsingException::class );
 		$parser->parse( 'Q1' );
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -38,7 +39,7 @@ class LegacyIdInterpreterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidInputProvider
 	 */
 	public function testNewIdFromTypeAndNumber_withInvalidInput( $type, $number ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		LegacyIdInterpreter::newIdFromTypeAndNumber( $type, $number );
 	}
 

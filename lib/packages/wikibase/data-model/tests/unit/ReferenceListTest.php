@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Tests;
 use Hashable;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
+use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -88,10 +89,10 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$references->addNewReference( new PropertyNoValueSnak( 1 ) );
 		$iterator = $references->getIterator();
 
-		$this->assertInstanceOf( 'Traversable', $iterator );
+		$this->assertInstanceOf( Traversable::class, $iterator );
 		$this->assertCount( 1, $iterator );
 		foreach ( $references as $reference ) {
-			$this->assertInstanceOf( 'Wikibase\DataModel\Reference', $reference );
+			$this->assertInstanceOf( Reference::class, $reference );
 		}
 	}
 
@@ -284,7 +285,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$referenceList = new ReferenceList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$referenceList->addReference( $reference, -1 );
 	}
 
@@ -489,7 +490,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	public function testGivenNoneSnak_addNewReferenceThrowsException() {
 		$references = new ReferenceList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$references->addNewReference( new PropertyNoValueSnak( 1 ), null );
 	}
 

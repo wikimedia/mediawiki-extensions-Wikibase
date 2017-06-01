@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -28,7 +29,7 @@ class EntityRedirectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testConstruction_baseType() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$entityId = new ItemId( 'Q123' );
 		$targetId = new PropertyId( 'P345' );

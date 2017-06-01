@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Tests\Term;
 
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
@@ -120,14 +122,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new TermList();
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$list->getByLanguage( $languageCode );
 	}
 
 	public function testGivenNonSetLanguageCode_getByLanguageThrowsException() {
 		$list = new TermList();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$list->getByLanguage( 'en' );
 	}
 
@@ -313,14 +315,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidLanguageCode_setTermTextThrowsException() {
 		$list = new TermList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->setTextForLanguage( null, 'kittens' );
 	}
 
 	public function testGivenInvalidTermText_setTermTextThrowsException() {
 		$list = new TermList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$list->setTextForLanguage( 'en', null );
 	}
 

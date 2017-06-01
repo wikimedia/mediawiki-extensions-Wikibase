@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -56,7 +57,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 	public function testGetSiteLinkWithNonSetSiteId() {
 		$item = new Item();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$item->getSiteLinkList()->getBySiteId( 'enwiki' );
 	}
 

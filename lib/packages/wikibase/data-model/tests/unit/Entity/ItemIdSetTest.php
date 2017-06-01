@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use Traversable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
 
@@ -18,7 +19,7 @@ class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetIterator() {
 		$set = new ItemIdSet();
-		$this->assertInstanceOf( 'Traversable', $set->getIterator() );
+		$this->assertInstanceOf( Traversable::class, $set->getIterator() );
 	}
 
 	/**

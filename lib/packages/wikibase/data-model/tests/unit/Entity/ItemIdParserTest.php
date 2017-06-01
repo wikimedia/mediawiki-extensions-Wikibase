@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 
@@ -37,7 +38,7 @@ class ItemIdParserTest extends PHPUnit_Framework_TestCase {
 	public function testCannotParseInvalidId( $invalidIdSerialization ) {
 		$parser = new ItemIdParser();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
+		$this->setExpectedException( EntityIdParsingException::class );
 		$parser->parse( $invalidIdSerialization );
 	}
 

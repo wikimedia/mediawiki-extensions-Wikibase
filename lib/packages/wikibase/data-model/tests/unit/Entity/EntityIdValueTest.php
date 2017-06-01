@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use DataValues\IllegalValueException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -200,7 +201,7 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidArrayProvider
 	 */
 	public function testCannotDeserializeInvalidSerialization( $invalidArray ) {
-		$this->setExpectedException( 'DataValues\IllegalValueException' );
+		$this->setExpectedException( IllegalValueException::class );
 
 		EntityIdValue::newFromArray( $invalidArray );
 	}

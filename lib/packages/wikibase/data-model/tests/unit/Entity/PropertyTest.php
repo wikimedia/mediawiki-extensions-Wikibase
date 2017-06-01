@@ -41,7 +41,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 			'string',
 			new StatementList()
 		);
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $property );
+		$this->assertInstanceOf( Property::class, $property );
 		$this->assertEquals( new PropertyId( 'P42' ), $property->getId() );
 		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
 		$this->assertEquals( 'string', $property->getDataTypeId() );
@@ -50,7 +50,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 	public function testConstructorWithMinimalParameters() {
 		$property = new Property( null, null, '' );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $property );
+		$this->assertInstanceOf( Property::class, $property );
 		$this->assertNull( $property->getId() );
 		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
 		$this->assertEquals( '', $property->getDataTypeId() );
@@ -66,7 +66,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 	public function testNewFromType() {
 		$property = Property::newFromType( 'string' );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $property );
+		$this->assertInstanceOf( Property::class, $property );
 		$this->assertEquals( 'string', $property->getDataTypeId() );
 	}
 
@@ -87,7 +87,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function assertHasCorrectIdType( Property $property ) {
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyId', $property->getId() );
+		$this->assertInstanceOf( PropertyId::class, $property->getId() );
 	}
 
 	public function testWhenIdSetWithPropertyId_GetIdReturnsPropertyId() {

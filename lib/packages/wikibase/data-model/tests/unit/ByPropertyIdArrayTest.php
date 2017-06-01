@@ -4,9 +4,12 @@ namespace Wikibase\DataModel\Tests;
 
 use ArrayObject;
 use DataValues\StringValue;
+use InvalidArgumentException;
+use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use ReflectionMethod;
+use RuntimeException;
 use stdClass;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -39,7 +42,7 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 		$object = new stdClass();
 		$object->property = true;
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new ByPropertyIdArray( $object );
 	}
 
@@ -67,7 +70,7 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 	 * @return ReflectionMethod
 	 */
 	protected static function getMethod( $methodName ) {
-		$class = new ReflectionClass( 'Wikibase\DataModel\ByPropertyIdArray' );
+		$class = new ReflectionClass( ByPropertyIdArray::class );
 		$method = $class->getMethod( $methodName );
 		$method->setAccessible( true );
 		return $method;
@@ -209,7 +212,7 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 		$indexedArray = new ByPropertyIdArray();
 		$indexedArray->buildIndex();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 
 		$indexedArray->getByPropertyId( new PropertyId( 'P9000' ) );
 	}
@@ -217,14 +220,14 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 	public function testNotBuildExceptionIsThrownForByPropertyId() {
 		$indexedArray = new ByPropertyIdArray();
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$indexedArray->getByPropertyId( new PropertyId( 'P9000' ) );
 	}
 
 	public function testNotBuildExceptionIsThrownForGetPropertyIds() {
 		$indexedArray = new ByPropertyIdArray();
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$indexedArray->getPropertyIds();
 	}
 
@@ -341,7 +344,7 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 		$indexedArray = new ByPropertyIdArray( $statements );
 		$indexedArray->buildIndex();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 
 		$indexedArray->moveObjectToIndex( new Statement( new PropertyNoValueSnak( new PropertyId( 'P9999' ) ) ), 0 );
 	}
@@ -351,7 +354,7 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 		$indexedArray = new ByPropertyIdArray( $statements );
 		$indexedArray->buildIndex();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 
 		$indexedArray->moveObjectToIndex( $statements[0], 9999 );
 	}

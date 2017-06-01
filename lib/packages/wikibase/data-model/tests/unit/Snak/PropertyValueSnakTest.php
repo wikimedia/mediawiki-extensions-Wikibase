@@ -34,7 +34,7 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $propertyId, DataValue $dataValue ) {
 		$snak = new PropertyValueSnak( $propertyId, $dataValue );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\PropertyValueSnak', $snak );
+		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
 	}
 
 	public function validConstructorArgumentsProvider() {
@@ -70,7 +70,7 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testGetPropertyId() {
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
 		$propertyId = $snak->getPropertyId();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyId', $propertyId );
+		$this->assertInstanceOf( PropertyId::class, $propertyId );
 	}
 
 	public function testGetHash() {
@@ -183,7 +183,7 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testGetDataValue() {
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
 		$dataValue = $snak->getDataValue();
-		$this->assertInstanceOf( 'DataValues\DataValue', $dataValue );
+		$this->assertInstanceOf( DataValue::class, $dataValue );
 		$this->assertTrue( $dataValue->equals( new StringValue( 'a' ) ) );
 	}
 
