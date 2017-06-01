@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\Diff\ItemPatcher;
@@ -30,7 +31,7 @@ class ItemPatcherTest extends PHPUnit_Framework_TestCase {
 
 		$patchedItem = $this->getPatchedItem( $item, new ItemDiff() );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $patchedItem );
+		$this->assertInstanceOf( Item::class, $patchedItem );
 		$this->assertTrue( $item->equals( $patchedItem ) );
 	}
 
@@ -54,7 +55,7 @@ class ItemPatcherTest extends PHPUnit_Framework_TestCase {
 	public function testGivenNonItem_exceptionIsThrown() {
 		$patcher = new ItemPatcher();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$patcher->patchEntity( Property::newFromType( 'kittens' ), new ItemDiff() );
 	}
 

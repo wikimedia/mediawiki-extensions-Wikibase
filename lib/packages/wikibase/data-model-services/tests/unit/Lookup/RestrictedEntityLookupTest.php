@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
@@ -36,10 +37,7 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructor() {
 		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 1 );
-		$this->assertInstanceOf(
-			'Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup',
-			$lookup
-		);
+		$this->assertInstanceOf( RestrictedEntityLookup::class, $lookup );
 	}
 
 	/**
@@ -99,7 +97,7 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$lookup->getEntity( new ItemId( 'Q2' ) );
 		$lookup->getEntity( new ItemId( 'Q3' ) );
 
-		$this->setExpectedException( '\Wikibase\DataModel\Services\Lookup\EntityAccessLimitException' );
+		$this->setExpectedException( EntityAccessLimitException::class );
 		$lookup->getEntity( new ItemId( 'Q4' ) );
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
@@ -49,7 +50,7 @@ class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	public function testParse_invalid( $prefix, $input ) {
 		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
 
-		$this->setExpectedException( 'Wikibase\DataModel\Entity\EntityIdParsingException' );
+		$this->setExpectedException( EntityIdParsingException::class );
 		$parser->parse( $input );
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests;
 
 use ArrayObject;
+use InvalidArgumentException;
 use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -40,7 +41,7 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testConstructorThrowsException( $argument ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new ByPropertyIdGrouper( $argument );
 	}
 

@@ -246,11 +246,11 @@ class ItemDiffTest extends EntityDiffOldTest {
 			'links' => $atomicListDiff,
 		] );
 
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getAliasesDiff() );
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getLabelsDiff() );
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getDescriptionsDiff() );
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getClaimsDiff() );
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getSiteLinkDiff() );
+		$this->assertInstanceOf( Diff::class, $diff->getAliasesDiff() );
+		$this->assertInstanceOf( Diff::class, $diff->getLabelsDiff() );
+		$this->assertInstanceOf( Diff::class, $diff->getDescriptionsDiff() );
+		$this->assertInstanceOf( Diff::class, $diff->getClaimsDiff() );
+		$this->assertInstanceOf( Diff::class, $diff->getSiteLinkDiff() );
 
 		error_reporting( $oldErrorLevel );
 	}

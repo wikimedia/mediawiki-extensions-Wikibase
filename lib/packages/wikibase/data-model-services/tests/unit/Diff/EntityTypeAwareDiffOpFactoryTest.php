@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use Diff\DiffOp\DiffOpAdd;
+use InvalidArgumentException;
 use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 
@@ -25,7 +26,7 @@ class EntityTypeAwareDiffOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenInvalidDiffOp_exceptionIsThrown() {
 		$factory = new EntityTypeAwareDiffOpFactory();
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$factory->newFromArray( [ 'wee' ] );
 	}
 
