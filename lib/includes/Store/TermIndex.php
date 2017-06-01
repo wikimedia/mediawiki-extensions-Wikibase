@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\TermIndexEntry;
 
 /**
  * Interface to a cache for terms with both write and lookup methods.

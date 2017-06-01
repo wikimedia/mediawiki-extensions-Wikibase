@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\FieldPropertyInfoProvider;
+use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\FieldPropertyInfoProvider
+ * @covers Wikibase\Lib\Store\FieldPropertyInfoProvider
  *
  * @group Wikibase
  * @group WikibaseStore

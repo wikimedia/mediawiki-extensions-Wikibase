@@ -8,8 +8,8 @@ use ApiResult;
 use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\TermIndexEntry;
 use Wikibase\WikibaseSettings;
 

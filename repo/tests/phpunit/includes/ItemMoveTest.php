@@ -7,7 +7,7 @@ use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;

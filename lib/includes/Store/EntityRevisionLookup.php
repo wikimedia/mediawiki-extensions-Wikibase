@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityRevision;
 
 /**
  * Service interface for retrieving EntityRevisions from storage.

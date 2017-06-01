@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\ChunkAccess;
+use Wikibase\Lib\Store\ChunkAccess;
 
 /**
  * Mock implementation of the ChunkAccess interface

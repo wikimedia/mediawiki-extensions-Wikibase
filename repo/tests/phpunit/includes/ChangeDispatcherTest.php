@@ -9,7 +9,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Change;
-use Wikibase\ChunkAccess;
+use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

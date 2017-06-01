@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 /**
  * Interface for DAO objects providing chunked access based on sequential indexes.

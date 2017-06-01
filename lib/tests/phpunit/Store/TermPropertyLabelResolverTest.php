@@ -7,10 +7,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermPropertyLabelResolver;
+use Wikibase\Lib\Store\TermPropertyLabelResolver;
 
 /**
- * @covers Wikibase\TermPropertyLabelResolver
+ * @covers Wikibase\Lib\Store\TermPropertyLabelResolver
  *
  * @group Wikibase
  * @group WikibaseStore

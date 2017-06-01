@@ -13,7 +13,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Lib\Store\BufferingTermLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 

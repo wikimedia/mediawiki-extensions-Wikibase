@@ -20,7 +20,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * Handler for the LinkBegin hook, used to change the default link text of links to wikibase Entity

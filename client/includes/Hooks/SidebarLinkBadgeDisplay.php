@@ -7,7 +7,6 @@ use Sanitizer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
-use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Basic display logic to output badges in the sidebar

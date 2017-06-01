@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
-use Wikibase\ChunkAccess;
+use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
