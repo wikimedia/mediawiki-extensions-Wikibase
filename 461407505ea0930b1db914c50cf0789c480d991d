@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce153bd1_cdfe6966",
+        "filename": "lib/tests/phpunit/Store/Sql/PropertyInfoTableTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-01T18:49:49Z",
+      "side": 1,
+      "message": "This was broken before. :-(",
+      "revId": "461407505ea0930b1db914c50cf0789c480d991d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
