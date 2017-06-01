@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\PropertyPatcher;
@@ -29,7 +30,7 @@ class PropertyPatcherTest extends PHPUnit_Framework_TestCase {
 
 		$patchedProperty = $this->getPatchedProperty( $property, new EntityDiff() );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $patchedProperty );
+		$this->assertInstanceOf( Property::class, $patchedProperty );
 		$this->assertTrue( $property->equals( $patchedProperty ) );
 	}
 
@@ -53,7 +54,7 @@ class PropertyPatcherTest extends PHPUnit_Framework_TestCase {
 	public function testGivenNonItem_exceptionIsThrown() {
 		$patcher = new PropertyPatcher();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$patcher->patchEntity( new Item(), new EntityDiff() );
 	}
 

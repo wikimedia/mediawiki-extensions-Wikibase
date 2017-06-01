@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
+use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
@@ -44,7 +45,7 @@ class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonSupportedEntity_exceptionIsThrown() {
 		$patcher = new EntityPatcher();
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$patcher->patchEntity( new EntityOfUnknownType(), new EntityDiff() );
 	}
 

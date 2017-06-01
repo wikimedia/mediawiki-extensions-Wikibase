@@ -98,7 +98,7 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$id = new ItemId( 'Q12' ); // Q12 is a double redirect
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException' );
+		$this->setExpectedException( UnresolvedEntityRedirectException::class );
 		$lookup->getEntity( $id );
 	}
 

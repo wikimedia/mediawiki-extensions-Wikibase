@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 
@@ -24,7 +25,7 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 
 		$diff = $differ->diffEntities( new Item(), new Item() );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Diff\ItemDiff', $diff );
+		$this->assertInstanceOf( ItemDiff::class, $diff );
 		$this->assertTrue( $diff->isEmpty() );
 	}
 

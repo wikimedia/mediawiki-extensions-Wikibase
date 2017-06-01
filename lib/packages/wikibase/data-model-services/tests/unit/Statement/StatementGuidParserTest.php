@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
@@ -42,7 +43,7 @@ class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidIdSerializationProvider
 	 */
 	public function testCannotParserInvalidId( $invalidIdSerialization ) {
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Statement\StatementGuidParsingException' );
+		$this->setExpectedException( StatementGuidParsingException::class );
 		$this->newParser()->parse( $invalidIdSerialization );
 	}
 

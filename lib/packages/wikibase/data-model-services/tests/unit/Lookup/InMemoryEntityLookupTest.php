@@ -54,7 +54,7 @@ class InMemoryEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$lookup->addException( new EntityLookupException( new ItemId( 'Q1' ) ) );
 
 		$lookup->getEntity( new ItemId( 'Q2' ) );
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityLookupException' );
+		$this->setExpectedException( EntityLookupException::class );
 		$lookup->getEntity( new ItemId( 'Q1' ) );
 	}
 
@@ -64,7 +64,7 @@ class InMemoryEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$lookup->addException( new EntityLookupException( new ItemId( 'Q1' ) ) );
 
 		$lookup->hasEntity( new ItemId( 'Q2' ) );
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityLookupException' );
+		$this->setExpectedException( EntityLookupException::class );
 		$lookup->hasEntity( new ItemId( 'Q1' ) );
 	}
 
