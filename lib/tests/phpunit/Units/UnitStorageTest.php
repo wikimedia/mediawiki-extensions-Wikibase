@@ -4,15 +4,15 @@ namespace Wikibase\Lib\Tests\Units;
 
 use MediaWikiTestCase;
 use ObjectFactory;
-use Wikibase\Lib\CSVUnitStorage;
-use Wikibase\Lib\JsonUnitStorage;
-use Wikibase\Lib\UnitStorage;
+use Wikibase\Lib\Units\CSVUnitStorage;
+use Wikibase\Lib\Units\JsonUnitStorage;
+use Wikibase\Lib\Units\UnitStorage;
 use RuntimeException;
 
 /**
- * @covers Wikibase\Lib\JsonUnitStorage
- * @covers Wikibase\Lib\CSVUnitStorage
- * @covers Wikibase\Lib\BaseUnitStorage
+ * @covers Wikibase\Lib\Units\JsonUnitStorage
+ * @covers Wikibase\Lib\Units\CSVUnitStorage
+ * @covers Wikibase\Lib\Units\BaseUnitStorage
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Units;
 
 /**
  * JSON based unit conversion storage.

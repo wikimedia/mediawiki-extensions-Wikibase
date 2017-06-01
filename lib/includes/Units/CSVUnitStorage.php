@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Units;
 
 /**
  * CSV-based unit conversion storage.
@@ -9,6 +9,7 @@ namespace Wikibase\Lib;
  * E.g.: Q130964,4.19,Q25269
  */
 class CSVUnitStorage extends BaseUnitStorage {
+
 	/**
 	 * Filename of the source file
 	 * @var string

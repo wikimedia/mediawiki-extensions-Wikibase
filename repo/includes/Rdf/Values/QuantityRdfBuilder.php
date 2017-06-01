@@ -5,7 +5,7 @@ namespace Wikibase\Rdf\Values;
 use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\UnitConverter;
+use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;

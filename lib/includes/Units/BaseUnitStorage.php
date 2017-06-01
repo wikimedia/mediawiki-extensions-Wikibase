@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Units;
 
 /**
  * Basic unit storage functionality.
@@ -8,6 +8,7 @@ namespace Wikibase\Lib;
  * @package Wikibase\Lib
  */
 abstract class BaseUnitStorage implements UnitStorage {
+
 	/**
 	 * Storage data.
 	 * @var

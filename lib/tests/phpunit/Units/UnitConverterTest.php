@@ -5,11 +5,11 @@ namespace Wikibase\Lib\Tests\Units;
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
 use PHPUnit_Framework_TestCase;
-use Wikibase\Lib\UnitConverter;
-use Wikibase\Lib\UnitStorage;
+use Wikibase\Lib\Units\UnitConverter;
+use Wikibase\Lib\Units\UnitStorage;
 
 /**
- * @covers Wikibase\Lib\UnitConverter
+ * @covers Wikibase\Lib\Units\UnitConverter
  *
  * @group Wikibase
  *
