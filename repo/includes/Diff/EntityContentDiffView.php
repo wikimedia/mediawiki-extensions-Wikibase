@@ -11,7 +11,6 @@ use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use ParserOptions;
 use ParserOutput;
 use Revision;
 use ValueFormatters\FormatterOptions;

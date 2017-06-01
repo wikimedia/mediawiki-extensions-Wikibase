@@ -2,14 +2,9 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Language;
 use OutputPage;
 use ParserOutput;
-use Sanitizer;
 use Title;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\SiteLink;
 
 /**
