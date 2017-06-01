@@ -241,6 +241,11 @@ final class WikibaseClient {
 	private $propertyOrderProvider = null;
 
 	/**
+	 * @var SidebarLinkBadgeDisplay|null
+	 */
+	private $sidebarLinkBadgeDisplay = null;
+
+	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
@@ -894,19 +899,30 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return LanguageLinkBadgeDisplay
+	 * @return SidebarLinkBadgeDisplay
 	 */
-	public function getLanguageLinkBadgeDisplay() {
-		$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
-		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
-		$lang = $this->getUserLanguage();
+	public function getSidebarLinkBadgeDisplay() {
+		if ( $this->sidebarLinkBadgeDisplay === null ) {
+			$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
+			$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
+			$lang = $this->getUserLanguage();
 
-		return new LanguageLinkBadgeDisplay(
-			new SidebarLinkBadgeDisplay(
+			$this->sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
 				$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
 				is_array( $badgeClassNames ) ? $badgeClassNames : [],
 				$lang
-			)
+			);
+		}
+
+		return $this->sidebarLinkBadgeDisplay;
+	}
+
+	/**
+	 * @return LanguageLinkBadgeDisplay
+	 */
+	private function getLanguageLinkBadgeDisplay() {
+		return new LanguageLinkBadgeDisplay(
+			$this->getSidebarLinkBadgeDisplay()
 		);
 	}
 
@@ -1037,7 +1053,8 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGeneratorFactory(
 			$this->settings,
 			$this->getStore()->getSiteLinkLookup(),
-			$this->siteLookup
+			$this->siteLookup,
+			$this->getSidebarLinkBadgeDisplay()
 		);
 	}
 
