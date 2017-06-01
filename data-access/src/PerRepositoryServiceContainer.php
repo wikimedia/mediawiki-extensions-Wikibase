@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceContainer extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
+class PerRepositoryServiceContainer extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
 
 	/**
 	 * @var string|false

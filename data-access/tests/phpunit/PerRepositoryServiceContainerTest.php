@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use HashSiteStore;
 use stdClass;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\RepositoryServiceContainer;
+use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -20,13 +20,13 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
- * @covers Wikibase\DataAccess\RepositoryServiceContainer
+ * @covers Wikibase\DataAccess\PerRepositoryServiceContainer
  *
  * @group Wikibase
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
+class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return WikibaseClient
@@ -47,13 +47,13 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return RepositoryServiceContainer
+	 * @return PerRepositoryServiceContainer
 	 */
 	private function newRepositoryServiceContainer() {
 		/** @var EntityIdParser $idParser */
 		$idParser = $this->getMock( EntityIdParser::class );
 
-		return new RepositoryServiceContainer(
+		return new PerRepositoryServiceContainer(
 			'foowiki',
 			'foo',
 			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $idParser ),
@@ -63,7 +63,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return RepositoryServiceContainer
+	 * @return PerRepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainer() {
 		$container = $this->newRepositoryServiceContainer();
@@ -121,7 +121,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	 * event to all of its watcher services but not to those that have not been used yet (in which case
 	 * it makes no sense to pass the event to them).
 	 *
-	 * @return RepositoryServiceContainer
+	 * @return PerRepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainerForEventTest( $event ) {
 		$watcherService = $this->getMock( EntityStoreWatcher::class );

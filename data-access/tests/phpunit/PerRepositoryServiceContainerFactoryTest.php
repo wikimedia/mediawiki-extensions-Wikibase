@@ -3,28 +3,28 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\RepositoryServiceContainer;
-use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\PerRepositoryServiceContainer;
+use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
- * @covers Wikibase\DataAccess\RepositoryServiceContainerFactory
+ * @covers Wikibase\DataAccess\PerRepositoryServiceContainerFactory
  *
  * @group Wikibase
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase {
+class PerRepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getRepositoryServiceContainerFactory() {
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(
 			new ItemIdParser(), []
 		);
 
-		return new RepositoryServiceContainerFactory(
+		return new PerRepositoryServiceContainerFactory(
 			$idParserFactory,
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			[ '' => false ],
@@ -38,7 +38,7 @@ class RepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase 
 
 		$container = $factory->newContainer( '' );
 
-		$this->assertInstanceOf( RepositoryServiceContainer::class, $container );
+		$this->assertInstanceOf( PerRepositoryServiceContainer::class, $container );
 		$this->assertSame( '', $container->getRepositoryName() );
 	}
 

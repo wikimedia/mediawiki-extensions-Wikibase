@@ -8,12 +8,12 @@ use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
- * A factory providing RepositoryServiceContainer objects configured for given repository.
- * RepositoryServiceContainers are initialized using wiring files provided in the constructor.
+ * A factory providing PerRepositoryServiceContainer objects configured for given repository.
+ * PerRepositoryServiceContainers are initialized using wiring files provided in the constructor.
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceContainerFactory {
+class PerRepositoryServiceContainerFactory {
 
 	/**
 	 * @var PrefixMappingEntityIdParserFactory
@@ -45,10 +45,10 @@ class RepositoryServiceContainerFactory {
 	/**
 	 * FIXME: injecting of the top-level factory (WikibaseClient) here is only a temporary solution.
 	 * The instance of the top-level factory is being passed to instantiators of services
-	 * stored in the RepositoryServiceContainer so they can get the service they depend on.
+	 * stored in the PerRepositoryServiceContainer so they can get the service they depend on.
 	 *
 	 * This approach is not clean, the class should not depend on the top-level factory.
-	 * This should be changed after some refactoring: Instantiators in RepositoryServiceWiring should
+	 * This should be changed after some refactoring: Instantiators in PerRepositoryServiceWiring should
 	 * rather be getting some other service container, not the whole top-level factory.
 	 *
 	 * @param PrefixMappingEntityIdParserFactory $idParserFactory
@@ -74,7 +74,7 @@ class RepositoryServiceContainerFactory {
 	/**
 	 * @param string $repositoryName
 	 *
-	 * @return RepositoryServiceContainer
+	 * @return PerRepositoryServiceContainer
 	 *
 	 * @throws UnknownForeignRepositoryException
 	 */
@@ -83,7 +83,7 @@ class RepositoryServiceContainerFactory {
 			throw new UnknownForeignRepositoryException( $repositoryName );
 		}
 
-		$container = new RepositoryServiceContainer(
+		$container = new PerRepositoryServiceContainer(
 			$this->databaseNames[$repositoryName],
 			$repositoryName,
 			$this->idParserFactory->getIdParser( $repositoryName ),

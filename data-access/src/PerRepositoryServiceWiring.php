@@ -2,7 +2,7 @@
 
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\RepositoryServiceContainer;
+use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -25,7 +25,7 @@ use Wikimedia\Assert\Assert;
 return [
 
 	'EntityInfoBuilderFactory' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		$factory = new SqlEntityInfoBuilderFactory(
@@ -42,7 +42,7 @@ return [
 	},
 
 	'EntityPrefetcher' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		$prefetcher = $services->getService( 'WikiPageEntityMetaDataAccessor' );
@@ -56,7 +56,7 @@ return [
 	},
 
 	'EntityRevisionLookup' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		$codec = new EntityContentDataCodec(
@@ -77,7 +77,7 @@ return [
 	},
 
 	'PrefetchingTermLookup' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		/** @var TermIndex $termIndex */
@@ -87,7 +87,7 @@ return [
 	},
 
 	'PropertyInfoLookup' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		return new PropertyInfoTable(
@@ -98,14 +98,14 @@ return [
 	},
 
 	'TermBuffer' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		return $services->getService( 'PrefetchingTermLookup' );
 	},
 
 	'TermIndex' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		$index = new TermSqlIndex(
@@ -120,7 +120,7 @@ return [
 	},
 
 	'TermSearchInteractorFactory' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		/** @var TermIndex $termIndex */
@@ -136,7 +136,7 @@ return [
 	},
 
 	'WikiPageEntityMetaDataAccessor' => function(
-		RepositoryServiceContainer $services,
+		PerRepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
