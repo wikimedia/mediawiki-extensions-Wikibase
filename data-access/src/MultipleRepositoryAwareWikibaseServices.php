@@ -21,30 +21,30 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  */
 class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices {
 
-	public function __construct( DispatchingServiceFactory $dispatchingServiceContainer ) {
+	public function __construct( MultiRepositoryServices $multiRepositoryServices ) {
 		parent::__construct();
 
 		$this->applyWiring( [
-			'EntityInfoBuilderFactory' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer->getEntityInfoBuilderFactory();
+			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getEntityInfoBuilderFactory();
 			},
-			'EntityPrefetcher' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer->getEntityPrefetcher();
+			'EntityPrefetcher' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getEntityPrefetcher();
 			},
-			'EntityRevisionLookup' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer->getEntityRevisionLookup();
+			'EntityRevisionLookup' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getEntityRevisionLookup();
 			},
-			'EntityStoreWatcher' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer;
+			'EntityStoreWatcher' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices;
 			},
-			'PropertyInfoLookup' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer->getPropertyInfoLookup();
+			'PropertyInfoLookup' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getPropertyInfoLookup();
 			},
-			'TermBuffer' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer->getTermBuffer();
+			'TermBuffer' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getTermBuffer();
 			},
-			'TermSearchInteractorFactory' => function() use ( $dispatchingServiceContainer ) {
-				return $dispatchingServiceContainer->getTermSearchInteractorFactory();
+			'TermSearchInteractorFactory' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getTermSearchInteractorFactory();
 			},
 		] );
 	}
