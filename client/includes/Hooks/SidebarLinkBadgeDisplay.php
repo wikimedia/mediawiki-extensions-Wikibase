@@ -57,6 +57,10 @@ class SidebarLinkBadgeDisplay {
 	 * string values. These fields are the one outputted by the getBadgeInfo() function.
 	 */
 	public function applyBadgeToLink( array &$sidebarLink, array $badgeInfo ) {
+		if ( !$badgeInfo['class'] ) {
+			return;
+		}
+
 		if ( isset( $sidebarLink['class'] ) ) {
 			$sidebarLink['class'] .= ' ' . $badgeInfo['class'];
 		} else {
