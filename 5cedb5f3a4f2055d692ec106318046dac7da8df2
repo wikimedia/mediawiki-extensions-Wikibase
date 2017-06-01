@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce153bd1_9b0f4f8d",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-01T01:41:46Z",
+      "side": 1,
+      "message": "Most tests in Wikibase use $this-\u003egetMockBuilder() or getMock (if possible). To keep consistency, it would be better to have this. you can also use prophecy instead.",
+      "revId": "5cedb5f3a4f2055d692ec106318046dac7da8df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
