@@ -4,12 +4,12 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Store\BufferingTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\BufferingTermLookup;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Store\BufferingTermLookup
+ * @covers Wikibase\Lib\Store\BufferingTermLookup
  * @covers Wikibase\Lib\Store\EntityTermLookupBase
  *
  * @group Wikibase

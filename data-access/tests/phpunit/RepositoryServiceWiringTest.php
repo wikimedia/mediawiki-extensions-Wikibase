@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @group Wikibase

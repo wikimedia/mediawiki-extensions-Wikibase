@@ -13,8 +13,8 @@ use Wikibase\Client\Api\PageTerms;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**

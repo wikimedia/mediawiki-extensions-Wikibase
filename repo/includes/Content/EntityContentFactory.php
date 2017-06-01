@@ -6,9 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MWException;
 use OutOfBoundsException;
-use Status;
 use Title;
-use User;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,12 +15,10 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
 /**
- * Factory for EntityContent objects.
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
