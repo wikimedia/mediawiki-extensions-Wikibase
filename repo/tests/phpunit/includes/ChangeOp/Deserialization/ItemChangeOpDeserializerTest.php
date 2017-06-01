@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Repo\ChangeOpDeserializers\ItemChangeOpDeserializer
+ * @covers Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer
  *
  * @group Wikibase
  *

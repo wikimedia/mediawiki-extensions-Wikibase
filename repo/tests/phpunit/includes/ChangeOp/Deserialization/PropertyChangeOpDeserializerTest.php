@@ -18,7 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Repo\ChangeOpDeserializers\PropertyChangeOpDeserializer
+ * @covers Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer
  *
  * @group Wikibase
  *

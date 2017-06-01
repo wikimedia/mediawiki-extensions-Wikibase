@@ -6,7 +6,7 @@ use NullLockManager;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 
 /**
- * @covers Wikibase\Store\Sql\LockManagerSqlChangeDispatchCoordinator
+ * @covers Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator
  *
  * @group Wikibase
  * @group WikibaseStore
