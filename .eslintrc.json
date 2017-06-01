@@ -16,8 +16,6 @@
 		"wikibase": false
 	},
 	"rules": {
-		"array-bracket-spacing": "off",
-		"computed-property-spacing": "off",
 		"dot-notation": "off",
 		"new-cap": "off",
 		"no-underscore-dangle": "off",
@@ -25,9 +23,7 @@
 		"no-useless-concat": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",
-		"space-before-function-paren": "off",
 		"valid-jsdoc": "off",
-		"wrap-iife": "off",
 		"vars-on-top": "off"
 	}
 }

@@ -1,4 +1,4 @@
-( function( mw, wb, $, dv ) {
+( function ( mw, wb, $, dv ) {
 	'use strict';
 
 	// Back-up components already initialized in the namespace to re-apply them after initializing
@@ -123,7 +123,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_create: function() {
+		_create: function () {
 			if ( this.options.locked === true || this.options.locked.property === true ) {
 				if ( !(
 					this.options.value instanceof wb.datamodel.Snak || ( this.options.value && this.options.value.property )
@@ -164,7 +164,7 @@
 		 *
 		 * @throws {Error} when trying to set an invalid value.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' ) {
 				if ( value !== null
 					&& !$.isPlainObject( value )
@@ -176,8 +176,8 @@
 			} else if ( key === 'locked' && typeof value === 'boolean' ) {
 				var locked = value;
 				value = $.extend( {}, $.wikibase.snakview.prototype.options.locked );
-				$.each( $.wikibase.snakview.prototype.options.locked, function( k, v ) {
-					value[k] = locked;
+				$.each( $.wikibase.snakview.prototype.options.locked, function ( k, v ) {
+					value[ k ] = locked;
 				} );
 			}
 
@@ -199,11 +199,11 @@
 				}
 
 				if ( this._snakRemover ) {
-					this._snakRemover[value ? 'disable' : 'enable']();
+					this._snakRemover[ value ? 'disable' : 'enable' ]();
 				}
 
 				if ( this._variation ) {
-					this._variation[value ? 'disable' : 'enable']();
+					this._variation[ value ? 'disable' : 'enable' ]();
 				}
 			}
 
@@ -217,7 +217,7 @@
 		 *
 		 * @return {jQuery}
 		 */
-		_buildPropertySelector: function() {
+		_buildPropertySelector: function () {
 			var self = this,
 				repoConfig = mw.config.get( 'wbRepo' ),
 				repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php';
@@ -227,7 +227,7 @@
 				type: 'property'
 			} )
 			.prop( 'placeholder', mw.msg( 'wikibase-snakview-property-input-placeholder' ) )
-			.on( 'eachchange', function( event, oldValue ) {
+			.on( 'eachchange', function ( event, oldValue ) {
 				// remove out-dated variations
 				if ( self._variation ) {
 					self.drawSnakTypeSelector();
@@ -236,7 +236,7 @@
 					self._trigger( 'change' );
 				}
 			} )
-			.on( 'entityselectorselected', function( event, entityId ) {
+			.on( 'entityselectorselected', function ( event, entityId ) {
 				self._selectProperty();
 			} );
 		},
@@ -244,7 +244,7 @@
 		/**
 		 * @private
 		 */
-		_selectProperty: function() {
+		_selectProperty: function () {
 			var self = this;
 
 			// Display spinner as long as the ValueView is loading:
@@ -267,10 +267,10 @@
 			// the property might not be valid anymore aborting the rendering of the value
 			// view.
 			if ( this._variation ) {
-				$( this._variation ).one( 'afterdraw', function() {
+				$( this._variation ).one( 'afterdraw', function () {
 					// If the variant wasn't actually updated 'afterdraw' will run synchronously,
 					// but we need to break out of the stack here.
-					setTimeout( function() {
+					setTimeout( function () {
 						self._variation.focus();
 					}, 0 );
 				} );
@@ -284,7 +284,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( this._snakRemover ) {
 				this._snakRemover.destroy();
 				this._snakRemover = null;
@@ -297,14 +297,14 @@
 			$.Widget.prototype.destroy.call( this );
 		},
 
-		_startEditing: function() {
+		_startEditing: function () {
 			var deferred = $.Deferred();
 			if ( this.options.getSnakRemover ) {
 				this._snakRemover = this.options.getSnakRemover( this.element );
 			}
 
 			if ( this._variation ) {
-				$( this._variation ).one( 'afterstartediting', function() {
+				$( this._variation ).one( 'afterstartediting', function () {
 					deferred.resolve();
 				} );
 				this.draw();
@@ -319,7 +319,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			if ( this._variation && this._variation.isFocusable() ) {
 				this._variation.focus();
 			} else {
@@ -338,7 +338,7 @@
 		 * @param {boolean} [dropValue=false] If `true`, the widget's value will be reset to the one
 		 *        from before edit mode was started.
 		 */
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			if ( this._snakRemover ) {
 				this._snakRemover.destroy();
 				this._snakRemover = null;
@@ -359,7 +359,7 @@
 		 *
 		 * @param {string} status May either be 'valid' or 'invalid'
 		 */
-		updateStatus: function( status ) {
+		updateStatus: function ( status ) {
 			if ( status === 'valid' ) {
 				this._isValid = true;
 			} else if ( status === 'invalid' ) {
@@ -378,7 +378,7 @@
 		 *
 		 * @return {jQuery.wikibase.entityselector|null}
 		 */
-		_getPropertySelector: function() {
+		_getPropertySelector: function () {
 			if ( this.$property ) {
 				return this.$property.children().first().data( 'entityselector' ) || null;
 			}
@@ -393,7 +393,7 @@
 		 *
 		 * @return {jQuery.wikibase.snakview.SnakTypeSelector|null}
 		 */
-		_getSnakTypeSelector: function() {
+		_getSnakTypeSelector: function () {
 			if ( this.$snakTypeSelector ) {
 				return this.$snakTypeSelector.children().first().data( 'snaktypeselector' ) || null;
 			}
@@ -410,7 +410,7 @@
 		 * @return {wikibase.datamodel.Snak|Object|undefined} `undefined` in case `value()` is called to
 		 *         set the value.
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value !== undefined ) {
 				this.option( 'value', value );
 				return;
@@ -458,7 +458,7 @@
 		 * @param {wikibase.datamodel.Snak|null} [snak]
 		 * @return {wikibase.datamodel.Snak|null|undefined}
 		 */
-		snak: function( snak ) {
+		snak: function ( snak ) {
 			if ( snak !== undefined ) {
 				this.value( snak || {} );
 				return;
@@ -493,7 +493,7 @@
 		 * @param {string|null} [propertyId]
 		 * @return {string|null|undefined}
 		 */
-		propertyId: function( propertyId ) {
+		propertyId: function ( propertyId ) {
 			if ( propertyId === undefined ) {
 				return this.value().property || null;
 			} else {
@@ -519,7 +519,7 @@
 		 * @param {string|null} [snakType]
 		 * @return {string|null|undefined}
 		 */
-		snakType: function( snakType ) {
+		snakType: function ( snakType ) {
 			var value = this.value();
 
 			if ( snakType === undefined ) {
@@ -544,14 +544,14 @@
 		 *
 		 * @return {jQuery.wikibase.snakview.variations.Variation|null}
 		 */
-		variation: function() {
+		variation: function () {
 			return this._variation;
 		},
 
 		/**
 		 * Updates the `Variation` according to the widget's current value.
 		 */
-		updateVariation: function() {
+		updateVariation: function () {
 			var value = this.value(),
 				propertyId = value ? value.property : null,
 				snakType = value ? value.snaktype : null,
@@ -570,7 +570,7 @@
 					};
 				}
 
-				this._cachedValues[this._variation.variationSnakConstructor.TYPE] = variationValue;
+				this._cachedValues[ this._variation.variationSnakConstructor.TYPE ] = variationValue;
 
 				this.$snakValue.empty();
 
@@ -590,9 +590,9 @@
 				);
 
 				if ( !value.datavalue
-					&& this._cachedValues[snakType] && this._cachedValues[snakType].datavalue
+					&& this._cachedValues[ snakType ] && this._cachedValues[ snakType ].datavalue
 				) {
-					value.datavalue = $.extend( {}, this._cachedValues[snakType].datavalue );
+					value.datavalue = $.extend( {}, this._cachedValues[ snakType ].datavalue );
 				}
 
 				// Update Variation with fields not directly managed by the snakview. If necessary
@@ -608,7 +608,7 @@
 		/**
 		 * (Re-)renders the widget.
 		 */
-		draw: function() {
+		draw: function () {
 			this.drawProperty();
 			this.drawSnakTypeSelector();
 			this.drawVariation();
@@ -623,7 +623,7 @@
 		 * @return {Function} return.done
 		 * @return {Function} return.fail
 		 */
-		drawProperty: function() {
+		drawProperty: function () {
 			var self = this,
 				deferred = $.Deferred(),
 				propertyId = this.value().property;
@@ -635,11 +635,11 @@
 			}
 
 			this._getPropertyDOM( propertyId )
-			.done( function( $property ) {
+			.done( function ( $property ) {
 				self.$property.empty().append( $property );
 				deferred.resolve();
 			} )
-			.fail( function() {
+			.fail( function () {
 				self.$property.empty().text( propertyId );
 				deferred.reject();
 			} );
@@ -659,7 +659,7 @@
 		 * @return {jQuery} return.$property
 		 * @return {Function} return.fail
 		 */
-		_getPropertyDOM: function( propertyId ) {
+		_getPropertyDOM: function ( propertyId ) {
 			var self = this,
 				deferred = $.Deferred(),
 				editable = !this.options.locked.property && this.isInEditMode();
@@ -672,7 +672,7 @@
 				}
 			} else {
 				if ( editable ) {
-					this.options.entityIdPlainFormatter.format( propertyId ).done( function( propertyLabel ) {
+					this.options.entityIdPlainFormatter.format( propertyId ).done( function ( propertyLabel ) {
 						deferred.resolve( self._createPropertyDOM( propertyLabel ) );
 					} );
 				} else {
@@ -692,7 +692,7 @@
 		 * @param {string} propertyLabel Rendered label for the `Property`
 		 * @return {jQuery|null}
 		 */
-		_createPropertyDOM: function( propertyLabel ) {
+		_createPropertyDOM: function ( propertyLabel ) {
 			var $propertyDom;
 
 			// No Property set for this Snak, serve edit view to specify it:
@@ -720,7 +720,7 @@
 		 * is not (re-)rendered if changing the `Snak` type is locked via the `locked` option and
 		 * previously generated HTML is detected.
 		 */
-		drawSnakTypeSelector: function() {
+		drawSnakTypeSelector: function () {
 			if ( this.options.locked.snaktype && this.$snakTypeSelector.contents().length ) {
 				return;
 			}
@@ -762,7 +762,7 @@
 		/**
 		 * Renders the `Variation` or placeholder text if no proper `Variation` is available.
 		 */
-		drawVariation: function() {
+		drawVariation: function () {
 			// property ID will be null if not in edit mode and no Snak set or if in edit mode and user
 			// didn't choose property yet.
 			var self = this,
@@ -770,7 +770,7 @@
 				propertyId = value ? value.property : null;
 
 			if ( propertyId && this._variation ) {
-				$( this._variation ).one( 'afterdraw', function() {
+				$( this._variation ).one( 'afterdraw', function () {
 					if ( self.isInEditMode() ) {
 						self.variation().startEditing();
 					}
@@ -799,7 +799,7 @@
 		 * @param {string|null} snakType
 		 * @return {jQuery}
 		 */
-		_buildSnakTypeSelector: function( snakType ) {
+		_buildSnakTypeSelector: function ( snakType ) {
 			var self = this,
 				$anchor = $( '<span/>' ),
 				// initiate snak type selector widget which is a normal widget just without a
@@ -816,7 +816,7 @@
 			var changeEvent = ( selector.widgetEventPrefix + 'change' ).toLowerCase();
 
 			// bind user interaction on selector to snakview's state:
-			$anchor.on( changeEvent + '.' + this.widgetName, function( event ) {
+			$anchor.on( changeEvent + '.' + this.widgetName, function ( event ) {
 				self.updateVariation();
 				self.drawVariation();
 				if ( self._variation ) {
@@ -828,11 +828,11 @@
 			return $anchor;
 		},
 
-		hidePropertyLabel: function() {
+		hidePropertyLabel: function () {
 			this.$property.hide();
 		},
 
-		showPropertyLabel: function() {
+		showPropertyLabel: function () {
 			this.$property.show();
 		}
 

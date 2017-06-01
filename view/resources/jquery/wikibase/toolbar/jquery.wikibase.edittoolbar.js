@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.wikibase.toolbar;
@@ -84,7 +84,7 @@
 		/**
 		 * @see jQuery.wikibase.toolbar._create
 		 */
-		_create: function() {
+		_create: function () {
 			PARENT.prototype._create.call( this );
 
 			if ( !this.options.getHelpMessage ) {
@@ -105,7 +105,7 @@
 			}
 		},
 
-		setController: function( controller ) {
+		setController: function ( controller ) {
 			this._controller = controller;
 			var missingMethods = this.checkRequiredMethods();
 			if ( missingMethods.length ) {
@@ -116,7 +116,7 @@
 		/**
 		 * @see jQuery.wikibase.toolbar.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			var self = this;
 
 			if ( this._$tooltipAnchor ) {
@@ -131,7 +131,7 @@
 
 			this.getContainer().off( '.' + this.widgetName );
 
-			$.each( this._buttons, function( buttonName, $button ) {
+			$.each( this._buttons, function ( buttonName, $button ) {
 				$button.off( '.' + self.widgetName );
 				wbtooltip = $button.data( 'wbtooltip' );
 				if ( wbtooltip ) {
@@ -149,11 +149,11 @@
 		 *
 		 * @return {string[]}
 		 */
-		checkRequiredMethods: function() {
+		checkRequiredMethods: function () {
 			var self = this,
 				missingMethods = [];
-			$.each( this._requiredMethods, function( i, methodName ) {
-				if ( !$.isFunction( self._controller[methodName] ) ) {
+			$.each( this._requiredMethods, function ( i, methodName ) {
+				if ( !$.isFunction( self._controller[ methodName ] ) ) {
 					missingMethods.push( methodName );
 				}
 			} );
@@ -165,7 +165,7 @@
 		 *
 		 * @param {jQuery} $subToolbar
 		 */
-		_initSubToolbar: function( $subToolbar ) {
+		_initSubToolbar: function ( $subToolbar ) {
 			var $content = $();
 
 			if ( !$subToolbar.length ) {
@@ -185,26 +185,26 @@
 		 *
 		 * @param {jQuery} $subToolbar
 		 */
-		_scrapeButtons: function( $subToolbar ) {
+		_scrapeButtons: function ( $subToolbar ) {
 			var self = this;
 
-			$subToolbar.children( '.wikibase-toolbar-button' ).each( function() {
+			$subToolbar.children( '.wikibase-toolbar-button' ).each( function () {
 				var $button = $( this );
-				$.each( self.options.buttonLabels, function( buttonName, label ) {
+				$.each( self.options.buttonLabels, function ( buttonName, label ) {
 					if ( $button.text() === label ) {
-						self._buttons[buttonName] = $button.toolbarbutton( {
-							$label: self.options.buttonLabels[buttonName]
+						self._buttons[ buttonName ] = $button.toolbarbutton( {
+							$label: self.options.buttonLabels[ buttonName ]
 						} );
 					}
 				} );
 			} );
 		},
 
-		_attachEventHandlers: function() {
+		_attachEventHandlers: function () {
 			var self = this;
 
 			this.getContainer()
-			.on( 'toolbarbuttonaction.' + this.widgetName, function( event ) {
+			.on( 'toolbarbuttonaction.' + this.widgetName, function ( event ) {
 				if ( self._buttons.edit && event.target === self._buttons.edit.get( 0 ) ) {
 					self._controller.startEditing();
 				} else if ( self._buttons.save && event.target === self._buttons.save.get( 0 ) ) {
@@ -223,7 +223,7 @@
 		 * Switches the toolbar to edit mode displaying "save", "cancel" and - depending on the toolbar
 		 * configuration - "remove" buttons.
 		 */
-		toEditMode: function() {
+		toEditMode: function () {
 			if ( this._isInEditMode() ) {
 				return;
 			}
@@ -251,7 +251,7 @@
 		/**
 		 * Forces drawing edit mode.
 		 */
-		_toEditMode: function() {
+		_toEditMode: function () {
 			this.getContainer().removeClass( this.widgetBaseClass + '-ineditmode' );
 			this.toEditMode();
 		},
@@ -259,7 +259,7 @@
 		/**
 		 * Switches the toolbar to non-edit mode displaying the "edit" button.
 		 */
-		toNonEditMode: function() {
+		toNonEditMode: function () {
 			if ( !this._isInEditMode() ) {
 				return;
 			}
@@ -284,7 +284,7 @@
 		/**
 		 * Forces drawing non-edit mode.
 		 */
-		_toNonEditMode: function() {
+		_toNonEditMode: function () {
 			this.getContainer().addClass( this.widgetBaseClass + '-ineditmode' );
 			this.toNonEditMode();
 		},
@@ -292,14 +292,14 @@
 		/**
 		 * @return {boolean}
 		 */
-		_isInEditMode: function() {
+		_isInEditMode: function () {
 			return this.getContainer().hasClass( this.widgetBaseClass + '-ineditmode' );
 		},
 
 		/**
 		 * @return {jQuery}
 		 */
-		_getTooltipAnchor: function() {
+		_getTooltipAnchor: function () {
 			var self = this;
 
 			if ( this._$tooltipAnchor ) {
@@ -334,15 +334,15 @@
 		 * @param {string} buttonName "edit"|"save"|"remove"|"cancel"
 		 * @return {jQuery.wikibase.toolbarbutton}
 		 */
-		getButton: function( buttonName ) {
-			if ( !this._buttons[buttonName] ) {
-				this._buttons[buttonName] = $( '<span/>' ).toolbarbutton( {
-					$label: this.options.buttonLabels[buttonName],
+		getButton: function ( buttonName ) {
+			if ( !this._buttons[ buttonName ] ) {
+				this._buttons[ buttonName ] = $( '<span/>' ).toolbarbutton( {
+					$label: this.options.buttonLabels[ buttonName ],
 					cssClassSuffix: buttonName
 				} );
 			}
 
-			return this._buttons[buttonName].data( 'toolbarbutton' );
+			return this._buttons[ buttonName ].data( 'toolbarbutton' );
 		},
 
 		/**
@@ -351,7 +351,7 @@
 		 * @param {string} [message] Message to be displayed instead of the
 		 *        toolbar contents. If omitted, the toolbar contents will be shown.
 		 */
-		toggleActionMessage: function( message ) {
+		toggleActionMessage: function ( message ) {
 			var $container = this.getContainer(),
 				actionMessageClass = this.widgetBaseClass + '-actionmsg',
 				$actionMsg = $container.find( '.' + actionMessageClass );
@@ -375,7 +375,7 @@
 		 * @param {wikibase.api.RepoApiError} error
 		 * @param {jQuery} $anchor Node the tooltip shall be attached to.
 		 */
-		displayError: function( error, $anchor ) {
+		displayError: function ( error, $anchor ) {
 			var self = this;
 
 			$anchor
@@ -383,7 +383,7 @@
 				content: error,
 				permanent: true
 			} )
-			.one( 'wbtooltipafterhide.' + this.widgetName, function() {
+			.one( 'wbtooltipafterhide.' + this.widgetName, function () {
 				self._controller.setError();
 				var wbtooltip = $anchor.data( 'wbtooltip' );
 				if ( wbtooltip ) {
@@ -397,7 +397,7 @@
 		/**
 		 * @see jQuery.wikibase.toolbar._setOption
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
 			if ( key === 'onRemove' && this._isInEditMode() ) {
@@ -410,7 +410,7 @@
 		/**
 		 * @see jQuery.wikibase.toolbar.focus
 		 */
-		focus: function() {
+		focus: function () {
 			if ( this._isInEditMode() ) {
 				var btnSave = this._buttons.save && this._buttons.save.data( 'toolbarbutton' ),
 					btnCancel = this._buttons.cancel && this._buttons.cancel.data( 'toolbarbutton' );

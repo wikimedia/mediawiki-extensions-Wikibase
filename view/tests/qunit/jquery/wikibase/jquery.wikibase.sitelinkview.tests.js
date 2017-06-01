@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -12,12 +12,12 @@
 	function createSitelinkview( options ) {
 		options = $.extend( {
 			entityIdPlainFormatter: 'i am an EntityIdPlainFormatter',
-			allowedSiteIds: ['aawiki', 'enwiki'],
-			getSiteLinkRemover: function() {
+			allowedSiteIds: [ 'aawiki', 'enwiki' ],
+			getSiteLinkRemover: function () {
 				return {
-					destroy: function() {},
-					disable: function() {},
-					enable: function() {}
+					destroy: function () {},
+					disable: function () {},
+					enable: function () {}
 				};
 			}
 		}, options );
@@ -60,8 +60,8 @@
 				}
 			}
 		},
-		teardown: function() {
-			$( '.test_sitelinkview' ).each( function() {
+		teardown: function () {
+			$( '.test_sitelinkview' ).each( function () {
 				var $sitelinkview = $( this ),
 					sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -74,7 +74,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create and destroy', function( assert ) {
+	QUnit.test( 'Create and destroy', function ( assert ) {
 		assert.expect( 2 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -92,7 +92,7 @@
 		);
 	} );
 
-	QUnit.test( 'Create and destroy with initial value', function( assert ) {
+	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
 		assert.expect( 2 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
@@ -113,18 +113,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', 4, function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function( event ) {
+		.on( 'sitelinkviewafterstartediting', function ( event ) {
 			assert.ok(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
+		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
 			assert.ok(
 				true,
 				'Stopped edit mode.'
@@ -151,7 +151,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'startEditing(), stopEditing() with initial value', 5, function( assert ) {
+	QUnit.test( 'startEditing(), stopEditing() with initial value', 5, function ( assert ) {
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -159,13 +159,13 @@
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function( event ) {
+		.on( 'sitelinkviewafterstartediting', function ( event ) {
 			assert.ok(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
+		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
 			assert.ok(
 				true,
 				'Stopped edit mode.'
@@ -192,7 +192,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		assert.expect( 2 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -217,7 +217,7 @@
 		);
 	} );
 
-	QUnit.test( 'isEmpty()', function( assert ) {
+	QUnit.test( 'isEmpty()', function ( assert ) {
 		assert.expect( 6 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview(),
@@ -271,13 +271,13 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', 1, function( assert ) {
+	QUnit.test( 'setError()', 1, function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
 		.addClass( 'wb-error' )
-		.on( 'sitelinkviewtoggleerror', function( event, error ) {
+		.on( 'sitelinkviewtoggleerror', function ( event, error ) {
 			assert.ok(
 				true,
 				'Triggered toggleerror event.'

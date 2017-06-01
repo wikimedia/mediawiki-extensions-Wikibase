@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -39,7 +39,7 @@
 		 *
 		 * @throws {Error} if required parameters are not specified properly.
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !( this.options.value instanceof wb.datamodel.Term )
 				|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 			) {
@@ -52,7 +52,7 @@
 			.on(
 				'descriptionviewafterstartediting.' + this.widgetName
 				+ ' eachchange.' + this.widgetName,
-			function( event ) {
+			function ( event ) {
 				if ( self.value().getText() === '' ) {
 					// Since the widget shall not be in view mode when there is no value, triggering
 					// the event without a proper value is only done when creating the widget. Disabling
@@ -75,11 +75,11 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( this.isInEditMode() ) {
 				var self = this;
 
-				this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
+				this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
 					PARENT.prototype.destroy.call( self );
 				} );
 
@@ -92,7 +92,7 @@
 		/**
 		 * Main draw routine.
 		 */
-		draw: function() {
+		draw: function () {
 			var done = $.Deferred().resolve().promise();
 			var self = this,
 				languageCode = this.options.value.getLanguageCode(),
@@ -102,7 +102,7 @@
 				descriptionText = null;
 			}
 
-			this.element[descriptionText ? 'removeClass' : 'addClass']( 'wb-empty' );
+			this.element[ descriptionText ? 'removeClass' : 'addClass' ]( 'wb-empty' );
 
 			if ( !this.isInEditMode() && !descriptionText ) {
 				this.$text.text( mw.msg( 'wikibase-description-empty' ) );
@@ -136,12 +136,12 @@
 			)
 			.attr( 'lang', languageCode )
 			.attr( 'dir', $.util.getDirectionality( languageCode ) )
-			.on( 'keydown.' + this.widgetName, function( event ) {
+			.on( 'keydown.' + this.widgetName, function ( event ) {
 				if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					event.preventDefault();
 				}
 			} )
-			.on( 'eachchange.' + this.widgetName, function( event ) {
+			.on( 'eachchange.' + this.widgetName, function ( event ) {
 				self._trigger( 'change' );
 			} );
 
@@ -160,12 +160,12 @@
 			return done;
 		},
 
-		_startEditing: function() {
+		_startEditing: function () {
 			// FIXME: This could be much faster
 			return this.draw();
 		},
 
-		_stopEditing: function() {
+		_stopEditing: function () {
 			// FIXME: This could be much faster
 			return this.draw();
 		},
@@ -173,7 +173,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._setOption
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' && !( value instanceof wb.datamodel.Term ) ) {
 				throw new Error( 'Value needs to be a wb.datamodel.Term instance' );
 			}
@@ -193,7 +193,7 @@
 		 * @param {wikibase.datamodel.Term} [value]
 		 * @return {wikibase.datamodel.Term|undefined}
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value !== undefined ) {
 				return this.option( 'value', value );
 			}
@@ -211,7 +211,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
-		focus: function() {
+		focus: function () {
 			if ( this.isInEditMode() ) {
 				this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
 			} else {

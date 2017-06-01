@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -82,7 +82,7 @@
 		 *
 		 * @throws {Error} if a required option is not specified properly.
 		 */
-		_create: function() {
+		_create: function () {
 			this.options.value = this.options.value || new wb.datamodel.SnakList();
 
 			if ( !this.options.getListItemAdapter || !( this.options.value instanceof wb.datamodel.SnakList ) ) {
@@ -103,7 +103,7 @@
 		 *
 		 * @private
 		 */
-		_createListView: function() {
+		_createListView: function () {
 			var self = this,
 				$listviewParent = null;
 
@@ -118,7 +118,7 @@
 			}
 
 			this.$listview.listview( {
-				listItemAdapter: this.options.getListItemAdapter( function( snakview ) {
+				listItemAdapter: this.options.getListItemAdapter( function ( snakview ) {
 					self._listview.removeItem( snakview.element );
 					if ( self.value().length === 0 ) {
 						self.options.removeCallback();
@@ -142,7 +142,7 @@
 			.on( this._lia.prefixedEvent( 'change.' ) + this.widgetName
 					// FIXME: Remove all itemremoved events, see https://gerrit.wikimedia.org/r/298766.
 					+ ' listviewitemremoved.' + this.widgetName,
-					function( event ) {
+					function ( event ) {
 						// Forward the "change" event to external components (e.g. the edit toolbar).
 						self._trigger( 'change' );
 					}
@@ -155,11 +155,11 @@
 		 *
 		 * @private
 		 */
-		_updatePropertyLabels: function() {
+		_updatePropertyLabels: function () {
 			if ( this.options.singleProperty ) {
 				this._listview.value().forEach( function ( snakview, index ) {
 					var operation = index ? 'hidePropertyLabel' : 'showPropertyLabel';
-					snakview[operation]();
+					snakview[ operation ]();
 				} );
 			}
 		},
@@ -172,7 +172,7 @@
 		 *         Rejected parameters:
 		 *         - {Error}
 		 */
-		_startEditing: function() {
+		_startEditing: function () {
 			return this._listview.startEditing();
 		},
 
@@ -182,7 +182,7 @@
 		 * @param {boolean} [dropValue=false] If `true`, the widget's value will be reset to the one from
 		 *        before edit mode was started
 		 */
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			if ( dropValue ) {
 				// If the whole item was pending, remove the whole list item. This has to be
 				// performed in the widget using the snaklistview.
@@ -191,7 +191,7 @@
 				// editing:
 				this._createListView();
 			} else {
-				this._listview.value().forEach( function( snakview ) {
+				this._listview.value().forEach( function ( snakview ) {
 					snakview.stopEditing( dropValue );
 
 					// After saving, the property should not be editable anymore.
@@ -208,14 +208,14 @@
 		 * @param {wikibase.datamodel.SnakList} [snakList]
 		 * @return {wikibase.datamodel.SnakList|undefined|null}
 		 */
-		value: function( snakList ) {
+		value: function ( snakList ) {
 			if ( snakList !== undefined ) {
 				return this.option( 'value', snakList );
 			}
 
 			var snaks = [];
 
-			if ( !this._listview.value().every( function( snakview ) {
+			if ( !this._listview.value().every( function ( snakview ) {
 				var snak = snakview.snak();
 				snaks.push( snak );
 				return snak;
@@ -235,9 +235,9 @@
 		 * @return {Function} return.done
 		 * @return {jQuery} return.done.$snakview
 		 */
-		enterNewItem: function() {
+		enterNewItem: function () {
 			var self = this;
-			return this._listview.enterNewItem().done( function() {
+			return this._listview.enterNewItem().done( function () {
 				self.startEditing();
 			} );
 		},
@@ -245,7 +245,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			this._listview.destroy();
 			this._listview = null;
 			this._lia = null;
@@ -258,7 +258,7 @@
 		 * @throws {Error} when trying to set the value to something other than a
 		 *         `wikibase.datamodel.SnakList` instance.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' ) {
 				if ( !( value instanceof wb.datamodel.SnakList ) ) {
 					throw new Error( 'value has to be an instance of wikibase.datamodel.SnakList' );
@@ -278,7 +278,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			var $items = this._listview.items();
 
 			if ( $items.length ) {

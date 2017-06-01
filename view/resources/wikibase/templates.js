@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	/**
@@ -31,17 +31,17 @@
 	 * @return {boolean}
 	 */
 	function areCachedParameterTypes( key, params ) {
-		if ( !cache[key] ) {
+		if ( !cache[ key ] ) {
 			return false;
 		}
 
-		for ( var i = 0; i < cache[key].length; i++ ) {
-			if ( params.length !== cache[key][i].length ) {
+		for ( var i = 0; i < cache[ key ].length; i++ ) {
+			if ( params.length !== cache[ key ][ i ].length ) {
 				return false;
 			}
 
 			for ( var j = 0; j < params.length; j++ ) {
-				if ( getParameterType( params[j] ) !== cache[key][i][j] ) {
+				if ( getParameterType( params[ j ] ) !== cache[ key ][ i ][ j ] ) {
 					return false;
 				}
 			}
@@ -83,18 +83,18 @@
 		// browsers as well:
 		// string = string.replace( /(<\S+)(?:[^<>"']+(?:(["'])[^\2]*\2)?)*?\/?(>)/g, '$1$3' );
 		for ( var i = 0; i < string.length; i++ ) {
-			character = string[i];
+			character = string[ i ];
 			if ( !inTag && !readTag && character === '<' ) {
 				tag = '';
 				inTag = true;
 				readTag = true;
 				filteredString += character;
-			} else if ( inTag && ( character === ' ' || character === '/' && string[i + 1] === '>' ) ) {
+			} else if ( inTag && ( character === ' ' || character === '/' && string[ i + 1 ] === '>' ) ) {
 				readTag = false;
 			} else if ( inTag && ( character === '\'' || character === '"' ) ) {
 				// skip all characters within an attribute's value
 				i++;
-				while ( string[i] !== character ) {
+				while ( string[ i ] !== character ) {
 					i++;
 				}
 			} else if ( inTag && character === '>' ) {
@@ -156,12 +156,12 @@
 	function addToCache( key, params ) {
 		var paramTypes = [];
 
-		if ( !cache[key] ) {
-			cache[key] = [];
+		if ( !cache[ key ] ) {
+			cache[ key ] = [];
 		}
 
 		for ( var i = 0; i < params.length; i++ ) {
-			var parameterType = getParameterType( params[i] );
+			var parameterType = getParameterType( params[ i ] );
 			if ( parameterType === 'object' ) {
 				// Cannot handle some generic object.
 				return;
@@ -170,7 +170,7 @@
 			}
 		}
 
-		cache[key].push( paramTypes );
+		cache[ key ].push( paramTypes );
 	}
 
 	/*
@@ -182,7 +182,7 @@
 	 *
 	 * @constructor
 	 */
-	mw.WbTemplate = function() { mw.Message.apply( this, arguments ); };
+	mw.WbTemplate = function () { mw.Message.apply( this, arguments ); };
 	mw.WbTemplate.prototype = $.extend(
 		{},
 		mw.Message.prototype,
@@ -197,7 +197,7 @@
 	 *
 	 * @return {string}
 	 */
-	mw.WbTemplate.prototype.plain = function() {
+	mw.WbTemplate.prototype.plain = function () {
 		return this.parser();
 	};
 
@@ -210,7 +210,7 @@
 		var parameters = this.parameters;
 		return this.map.get( this.key ).replace( /\$(\d+)/g, function ( str, match ) {
 			var index = parseInt( match, 10 ) - 1;
-			return parameters[index] !== undefined ? parameters[index] : '$' + match;
+			return parameters[ index ] !== undefined ? parameters[ index ] : '$' + match;
 		} );
 	};
 
@@ -227,7 +227,7 @@
 	 *
 	 * @throws {Error} if the generated template's HTML is invalid.
 	 */
-	mw.wbTemplate = function( key, parameter1 /* [, parameter2[, ...]] */ ) {
+	mw.wbTemplate = function ( key, parameter1 /* [, parameter2[, ...]] */ ) {
 		var i,
 			params = [],
 			template,
@@ -247,17 +247,17 @@
 		// Pre-parse the template inserting strings and placeholder nodes for jQuery objects jQuery
 		// objects will be appended after the template has been parsed to not lose any references:
 		for ( i = 0; i < params.length; i++ ) {
-			if ( typeof params[i] === 'string' || params[i] instanceof String ) {
+			if ( typeof params[ i ] === 'string' || params[ i ] instanceof String ) {
 				// insert strings into the template directly but have them parsed by the browser
 				// to detect HTML entities properly (e.g. a &nbsp; in Firefox would show up as a
 				// space instead of an entity which would cause an invalid HTML error)
-				tempParams.push( $( '<div/>' ).html( mw.html.escape( params[i] ) ).html() );
-			} else if ( params[i] instanceof jQuery ) {
+				tempParams.push( $( '<div/>' ).html( mw.html.escape( params[ i ] ) ).html() );
+			} else if ( params[ i ] instanceof jQuery ) {
 				// construct temporary placeholder nodes
 				// (using an actual invalid class name to not interfere with any other node)
-				var nodeName = params[i][0].nodeName.toLowerCase();
+				var nodeName = params[ i ][ 0 ].nodeName.toLowerCase();
 				tempParams.push( '<' + nodeName + ' class="--mwTemplate"></' + nodeName + '>' );
-				delayedParams.push( params[i] );
+				delayedParams.push( params[ i ] );
 			} else {
 				throw new Error( 'mw.WbTemplate: Wrong parameter type. Pass either String or jQuery.' );
 			}
@@ -278,8 +278,8 @@
 		}
 
 		// Replace temporary nodes with actual jQuery nodes:
-		$wrappedTemplate.find( '.--mwTemplate' ).each( function( i ) {
-			$( this ).replaceWith( delayedParams[i] );
+		$wrappedTemplate.find( '.--mwTemplate' ).each( function ( i ) {
+			$( this ).replaceWith( delayedParams[ i ] );
 		} );
 
 		return ( $wrappedTemplate.children( 'body' ).length )
@@ -300,7 +300,7 @@
 	 *        arguments, an array may be passed as first parameter.
 	 * @return {jQuery}
 	 */
-	$.fn.applyTemplate = function( template, parameter1 /* [, parameter2[, ...]] */ ) {
+	$.fn.applyTemplate = function ( template, parameter1 /* [, parameter2[, ...]] */ ) {
 		var $template = mw.wbTemplate.apply( null, arguments );
 
 		if ( $template.length !== 1 ) {
@@ -311,9 +311,9 @@
 
 		for ( var name in attributes ) {
 			if ( name === 'class' ) {
-				this.addClass( attributes[name] );
+				this.addClass( attributes[ name ] );
 			} else if ( attributes.hasOwnProperty( name ) ) {
-				this.attr( name, attributes[name] );
+				this.attr( name, attributes[ name ] );
 			}
 		}
 

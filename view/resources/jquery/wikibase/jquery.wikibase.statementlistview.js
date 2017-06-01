@@ -1,4 +1,4 @@
-( function( wb, mw, $ ) {
+( function ( wb, mw, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -79,7 +79,7 @@
 		 *
 		 * @throws {Error} if a required option is not specified properly.
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.getListItemAdapter
 				|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementList ) )
 			) {
@@ -98,23 +98,23 @@
 				toggleErrorEvent = lia.prefixedEvent( 'toggleerror.' + this.widgetName );
 
 			this.element
-			.on( afterStartEditingEvent, function( event ) {
+			.on( afterStartEditingEvent, function ( event ) {
 				// Forward "afterstartediting" event for higher components (e.g. statementgrouplistview)
 				// to recognize that edit mode has been started.
 				self._trigger( 'afterstartediting' );
 			} )
-			.on( afterStopEditingEvent, function( event, dropValue ) {
+			.on( afterStopEditingEvent, function ( event, dropValue ) {
 				var $statementview = $( event.target ),
 					statementview = lia.liInstance( $statementview );
 
 				// Cancelling edit mode or having stopped edit mode after saving an existing (not
 				// pending) statement.
 				if ( dropValue || !statementview || statementview.value() ) {
-					self._trigger( 'afterstopediting', null, [dropValue] );
+					self._trigger( 'afterstopediting', null, [ dropValue ] );
 				}
 			} )
-			.on( toggleErrorEvent, function( event, error ) {
-				self._trigger( 'toggleerror', null, [error] );
+			.on( toggleErrorEvent, function ( event, error ) {
+				self._trigger( 'toggleerror', null, [ error ] );
 			} );
 
 			var $containerWrapper = this.element.children( '.wikibase-toolbar-wrapper' );
@@ -133,7 +133,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		destroy: function() {
+		destroy: function () {
 			this._listview.destroy();
 			if ( this._statementAdder ) {
 				this._statementAdder.destroy();
@@ -147,7 +147,7 @@
 		 *
 		 * @private
 		 */
-		_createListView: function() {
+		_createListView: function () {
 			this.$listview.listview( {
 				listItemAdapter: this.options.getListItemAdapter( this._remove.bind( this ) ),
 				value: this.options.value ? this.options.value.toArray() : null
@@ -163,7 +163,7 @@
 		 * @param {wikibase.datamodel.StatementList} [statementList]
 		 * @return {wikibase.datamodel.StatementList|undefined}
 		 */
-		value: function( statementList ) {
+		value: function ( statementList ) {
 			if ( statementList !== undefined ) {
 				return this.option( 'value', statementList );
 			}
@@ -171,7 +171,7 @@
 			var statements = [],
 				lia = this._listview.listItemAdapter();
 
-			this._listview.items().each( function() {
+			this._listview.items().each( function () {
 				var statementview = lia.liInstance( $( this ) ),
 					statement = statementview.value();
 				if ( statement ) {
@@ -191,7 +191,7 @@
 		 * @return {Function} return.done
 		 * @return {jQuery} return.done.$statementview
 		 */
-		enterNewItem: function() {
+		enterNewItem: function () {
 			return this._listview.enterNewItem();
 		},
 
@@ -200,7 +200,7 @@
 		 *
 		 * @param {jQuery.wikibase.statementview} statementview
 		 */
-		_remove: function( statementview ) {
+		_remove: function ( statementview ) {
 			this._listview.removeItem( statementview.element );
 			this._trigger( 'afterremove' );
 		},
@@ -209,7 +209,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' && !!value ) {
 				if ( !( value instanceof wb.datamodel.StatementList ) ) {
 					throw new Error( 'value needs to be a wb.datamodel.StatementList instance' );
@@ -232,7 +232,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			var $items = this._listview.items();
 
 			if ( $items.length ) {

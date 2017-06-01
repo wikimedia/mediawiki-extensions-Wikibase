@@ -1,8 +1,8 @@
-( function( util, wb ) {
+( function ( util, wb ) {
 
 	'use strict';
 
-	var SELF = wb.ValueFormatterFactory = function() {
+	var SELF = wb.ValueFormatterFactory = function () {
 	};
 
 	/**

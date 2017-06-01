@@ -1,4 +1,4 @@
-( function( $, wb ) {
+( function ( $, wb ) {
 	'use strict';
 
 	var PARENT = $.wikibase.entityview;
@@ -37,7 +37,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_create: function() {
+		_create: function () {
 			this._createEntityview();
 
 			this.$statements = $( '.wikibase-statementgrouplistview', this.element );
@@ -55,7 +55,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_init: function() {
+		_init: function () {
 			if ( !this.options.buildSitelinkGroupListView ||
 				!this.options.buildStatementGroupListView
 			) {
@@ -70,7 +70,7 @@
 		/**
 		 * @protected
 		 */
-		_initStatements: function() {
+		_initStatements: function () {
 			this.options.buildStatementGroupListView( this.options.value, this.$statements );
 
 			// This is here to be sure there is never a duplicate id:
@@ -83,7 +83,7 @@
 		/**
 		 * @protected
 		 */
-		_initSiteLinks: function() {
+		_initSiteLinks: function () {
 			this.options.buildSitelinkGroupListView( this.options.value.getSiteLinks(), this.$siteLinks );
 		},
 
@@ -91,7 +91,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_attachEventHandlers: function() {
+		_attachEventHandlers: function () {
 			PARENT.prototype._attachEventHandlers.call( this );
 
 			var self = this;
@@ -102,7 +102,7 @@
 				'referenceviewafterstartediting.' + this.widgetName,
 				'sitelinkgroupviewafterstartediting.' + this.widgetName
 			].join( ' ' ),
-			function( event ) {
+			function ( event ) {
 				self._trigger( 'afterstartediting' );
 			} );
 
@@ -114,8 +114,8 @@
 				'referenceviewafterstopediting.' + this.widgetName,
 				'sitelinkgroupviewafterstopediting.' + this.widgetName
 			].join( ' ' ),
-			function( event, dropValue ) {
-				self._trigger( 'afterstopediting', null, [dropValue] );
+			function ( event, dropValue ) {
+				self._trigger( 'afterstopediting', null, [ dropValue ] );
 			} );
 		},
 
@@ -123,11 +123,11 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setState: function( state ) {
+		_setState: function ( state ) {
 			PARENT.prototype._setState.call( this, state );
 
-			this.$statements.data( 'statementgrouplistview' )[state]();
-			this.$siteLinks.data( 'sitelinkgrouplistview' )[state]();
+			this.$statements.data( 'statementgrouplistview' )[ state ]();
+			this.$siteLinks.data( 'sitelinkgrouplistview' )[ state ]();
 		}
 	} );
 

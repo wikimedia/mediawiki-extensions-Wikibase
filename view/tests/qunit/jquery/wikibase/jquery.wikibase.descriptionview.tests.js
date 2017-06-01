@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -10,7 +10,7 @@
 	 * @param {jQuery} [$node]
 	 * @return {jQuery}
 	 */
-	var createDescriptionview = function( options, $node ) {
+	var createDescriptionview = function ( options, $node ) {
 		options = $.extend( {
 			value: new wb.datamodel.Term( 'en', 'test description' )
 		}, options || {} );
@@ -25,8 +25,8 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.descriptionview', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_descriptionview' ).each( function() {
+		teardown: function () {
+			$( '.test_descriptionview' ).each( function () {
 				var $descriptionview = $( this ),
 					descriptionview = $descriptionview.data( 'descriptionview' );
 
@@ -39,10 +39,10 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 3 );
 		assert.throws(
-			function() {
+			function () {
 				createDescriptionview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
@@ -64,18 +64,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', 5, function ( assert ) {
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
 		$descriptionview
-		.on( 'descriptionviewafterstartediting', function( event ) {
+		.on( 'descriptionviewafterstartediting', function ( event ) {
 			assert.ok(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'descriptionviewafterstopediting', function( event, dropValue ) {
+		.on( 'descriptionviewafterstopediting', function ( event, dropValue ) {
 			assert.ok(
 				true,
 				'Stopped edit mode.'
@@ -100,13 +100,13 @@
 		descriptionview.stopEditing();
 	} );
 
-	QUnit.test( 'setError()', function( assert ) {
+	QUnit.test( 'setError()', function ( assert ) {
 		assert.expect( 1 );
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
 		$descriptionview
-		.on( 'descriptionviewtoggleerror', function( event, error ) {
+		.on( 'descriptionviewtoggleerror', function ( event, error ) {
 			assert.ok(
 				true,
 				'Triggered "toggleerror" event.'
@@ -116,14 +116,14 @@
 		descriptionview.setError();
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		assert.expect( 3 );
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' ),
 			newValue = null;
 
 		assert.throws(
-			function() {
+			function () {
 				descriptionview.value( newValue );
 			},
 			'Trying to set no value fails.'

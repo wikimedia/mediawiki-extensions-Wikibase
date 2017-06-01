@@ -1,4 +1,4 @@
-wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
+wikibase.view.ToolbarViewController = ( function ( $, wb, mw ) {
 	'use strict';
 
 	/**
@@ -23,7 +23,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 	 */
 	var SELF = util.inherit(
 		wb.view.ViewController,
-		function( model, toolbar, view, removeView, startEditingCallback ) {
+		function ( model, toolbar, view, removeView, startEditingCallback ) {
 			this._model = model;
 			this._toolbar = toolbar;
 			this._view = view;
@@ -71,7 +71,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 	/**
 	 * @param {Object|null} value A wikibase.datamodel object supporting at least an equals method.
 	 */
-	SELF.prototype.setValue = function( value ) {
+	SELF.prototype.setValue = function ( value ) {
 		this._value = value;
 		// When option is set, remove icon is shown. Not really needed on every setValue().
 		this._toolbar.option(
@@ -80,7 +80,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 		);
 	};
 
-	SELF.prototype.startEditing = function() {
+	SELF.prototype.startEditing = function () {
 		var result = this._view.startEditing();
 		this._toolbar.toEditMode();
 
@@ -97,7 +97,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 		return result;
 	};
 
-	SELF.prototype._updateToolbarState = function() {
+	SELF.prototype._updateToolbarState = function () {
 		var disable = this._view.option( 'disabled' );
 
 		this._toolbar.option( 'disabled', disable );
@@ -106,23 +106,23 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 		}
 	};
 
-	SELF.prototype._viewHasSavableValue = function() {
+	SELF.prototype._viewHasSavableValue = function () {
 		var viewValue = this._view.value();
 		return viewValue !== null && ( this._value === null || !this._value.equals( viewValue ) );
 	};
 
-	SELF.prototype._updateSaveButtonState = function() {
+	SELF.prototype._updateSaveButtonState = function () {
 		var btnSave = this._toolbar.getButton( 'save' ),
 			enableSave = this._viewHasSavableValue();
 
-		btnSave[enableSave ? 'enable' : 'disable']();
+		btnSave[ enableSave ? 'enable' : 'disable' ]();
 	};
 
 	/**
 	 * @param {boolean} [dropValue=false] Whether the current value should be kept and
 	 * persisted or dropped
 	 */
-	SELF.prototype.stopEditing = function( dropValue ) {
+	SELF.prototype.stopEditing = function ( dropValue ) {
 		if ( !dropValue && !this._viewHasSavableValue() ) {
 			return;
 		}
@@ -140,12 +140,12 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 
 		var self = this;
 		this._toolbar.toggleActionMessage( mw.msg( 'wikibase-save-inprogress' ) );
-		this._model.save( this._view.value(), this._value ).done( function( savedValue ) {
+		this._model.save( this._view.value(), this._value ).done( function ( savedValue ) {
 			self.setValue( savedValue );
 			self._view.value( savedValue );
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( dropValue );
-		} ).fail( function( error ) {
+		} ).fail( function ( error ) {
 			self._view.enable();
 			self.setError( error );
 		} );
@@ -154,7 +154,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 	/**
 	 * Remove the value currently represented in the view
 	 */
-	SELF.prototype.remove = function() {
+	SELF.prototype.remove = function () {
 		var self = this;
 
 		// FIXME: Currently done by the edittoolbar itself
@@ -171,11 +171,11 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 		} else {
 			promise = $.Deferred().resolve().promise();
 		}
-		return promise.done( function() {
+		return promise.done( function () {
 			self._value = null;
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( true );
-		} ).fail( function( error ) {
+		} ).fail( function ( error ) {
 			self._view.enable();
 			self.setError( error );
 		} );
@@ -185,7 +185,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 	 * @param {boolean} [dropValue=false] Whether the current value should be kept and
 	 * persisted or dropped
 	 */
-	SELF.prototype._leaveEditMode = function( dropValue ) {
+	SELF.prototype._leaveEditMode = function ( dropValue ) {
 		if ( dropValue && !this._value ) {
 			this._removeView();
 		} else {
@@ -195,7 +195,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 			this._toolbar.enable();
 			var self = this;
 			// FIXME: The toolbar has a race condition
-			window.setTimeout( function() {
+			window.setTimeout( function () {
 				self._toolbar.toNonEditMode();
 			}, 0 );
 		}
@@ -204,7 +204,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 	/**
 	 * Cancel editing and drop value
 	 */
-	SELF.prototype.cancelEditing = function() {
+	SELF.prototype.cancelEditing = function () {
 		return this.stopEditing( true );
 	};
 
@@ -214,7 +214,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 	 * @param {wikibase.api.RepoApiError} [error] The error or undefined, if error should be
 	 * cleared
 	 */
-	SELF.prototype.setError = function( error ) {
+	SELF.prototype.setError = function ( error ) {
 		var viewParam = error ? ( error.context ? { context: error.context } : true ) : false;
 
 		this._view.setError( viewParam );
@@ -252,4 +252,4 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 
 	return SELF;
 
-} )( jQuery, wikibase, mediaWiki );
+}( jQuery, wikibase, mediaWiki ) );

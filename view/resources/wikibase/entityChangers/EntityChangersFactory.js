@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
@@ -39,14 +39,14 @@
 		/**
 		 * @return {wikibase.entityChangers.AliasesChanger}
 		 */
-		getAliasesChanger: function() {
+		getAliasesChanger: function () {
 			return new MODULE.AliasesChanger( this._api, this._revisionStore, this._entity );
 		},
 
 		/**
 		 * @return {wikibase.entityChangers.StatementsChanger}
 		 */
-		getStatementsChanger: function() {
+		getStatementsChanger: function () {
 			return new MODULE.StatementsChanger(
 				this._api,
 				this._revisionStore,
@@ -59,28 +59,28 @@
 		/**
 		 * @return {wikibase.entityChangers.DescriptionsChanger}
 		 */
-		getDescriptionsChanger: function() {
+		getDescriptionsChanger: function () {
 			return new MODULE.DescriptionsChanger( this._api, this._revisionStore, this._entity );
 		},
 
 		/**
 		 * @return {wikibase.entityChangers.EntityTermsChanger}
 		 */
-		getEntityTermsChanger: function() {
+		getEntityTermsChanger: function () {
 			return new MODULE.EntityTermsChanger( this._api, this._revisionStore, this._entity );
 		},
 
 		/**
 		 * @return {wikibase.entityChangers.LabelsChanger}
 		 */
-		getLabelsChanger: function() {
+		getLabelsChanger: function () {
 			return new MODULE.LabelsChanger( this._api, this._revisionStore, this._entity );
 		},
 
 		/**
 		 * @return {wikibase.entityChangers.SiteLinkSetsChanger}
 		 */
-		getSiteLinkSetsChanger: function() {
+		getSiteLinkSetsChanger: function () {
 			return new MODULE.SiteLinkSetsChanger( this._api, this._revisionStore, this._entity );
 		}
 	} );

@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_edittoolbar' ).each( function() {
+		teardown: function () {
+			$( '.test_edittoolbar' ).each( function () {
 				var $edittoolbar = $( this ),
 					edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -28,13 +28,13 @@
 		return $( '<span/>' )
 			.addClass( 'test_edittoolbar' )
 			.edittoolbar( $.extend( {
-				getHelpMessage: function() {
+				getHelpMessage: function () {
 					return $.Deferred().resolve().promise();
 				}
 			}, options || {} ) );
 	}
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 4 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' );
@@ -52,7 +52,7 @@
 		);
 
 		$edittoolbar = createEdittoolbar( {
-			onRemove: function() {}
+			onRemove: function () {}
 		} );
 		edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -69,11 +69,11 @@
 		);
 	} );
 
-	QUnit.test( 'Deferred button initialization', function( assert ) {
+	QUnit.test( 'Deferred button initialization', function ( assert ) {
 		assert.expect( 7 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' ),
-			deferredButtons = ['save', 'remove', 'cancel'];
+			deferredButtons = [ 'save', 'remove', 'cancel' ];
 
 		assert.ok(
 			edittoolbar._buttons.edit !== undefined,
@@ -82,8 +82,8 @@
 
 		for ( var i = 0; i < deferredButtons.length; i++ ) {
 			assert.ok(
-				edittoolbar._buttons[deferredButtons[i]] === undefined,
-				'"' + deferredButtons[i] + '" not yet initialized.'
+				edittoolbar._buttons[ deferredButtons[ i ] ] === undefined,
+				'"' + deferredButtons[ i ] + '" not yet initialized.'
 			);
 		}
 
@@ -105,7 +105,7 @@
 		);
 	} );
 
-	QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
+	QUnit.test( 'toEditMode(), toNonEditMode()', function ( assert ) {
 		assert.expect( 9 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' );
@@ -156,7 +156,7 @@
 			'Verified toolbar\'s button being the "edit" button.'
 		);
 
-		edittoolbar.option( 'onRemove', function() {} );
+		edittoolbar.option( 'onRemove', function () {} );
 
 		edittoolbar.toEditMode();
 

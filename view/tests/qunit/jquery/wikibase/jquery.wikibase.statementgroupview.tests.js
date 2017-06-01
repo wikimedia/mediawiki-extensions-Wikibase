@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -10,21 +10,21 @@
 	 * @param {jQuery} [$node]
 	 * @return {jQuery}
 	 */
-	var createStatementgroupview = function( options, $node ) {
+	var createStatementgroupview = function ( options, $node ) {
 		options = $.extend( {
 			entityIdHtmlFormatter: {
 				format: function ( entityId ) {
 					return $.Deferred().resolve( 'Link to entity' ).promise();
 				}
 			},
-			buildStatementListView: function( value ) {
+			buildStatementListView: function ( value ) {
 				return {
 					_value: value,
-					destroy: function() {}, // FIXME: There should be a test spying on this
-					element: { off: function() {} }, // FIXME: There should be a test spying on this
-					value: function() {
+					destroy: function () {}, // FIXME: There should be a test spying on this
+					element: { off: function () {} }, // FIXME: There should be a test spying on this
+					value: function () {
 						if ( arguments.length ) {
-							this._value = arguments[0];
+							this._value = arguments[ 0 ];
 						}
 						return this._value;
 					}
@@ -40,8 +40,8 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.statementgroupview', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_statementgroupview' ).each( function() {
+		teardown: function () {
+			$( '.test_statementgroupview' ).each( function () {
 				var $statementgroupview = $( this ),
 					statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
@@ -54,7 +54,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 3 );
 		var $statementgroupview = createStatementgroupview(),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
@@ -86,7 +86,7 @@
 		);
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		assert.expect( 6 );
 		var statementGroup1 = new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
 				new wb.datamodel.Statement(
@@ -166,7 +166,7 @@
 		statementlistview.value( statementList3 );
 
 		assert.throws(
-			function() {
+			function () {
 				statementgroupview.value();
 			},
 			'Property of Statements in statementlistview differ resulting in not being able to '

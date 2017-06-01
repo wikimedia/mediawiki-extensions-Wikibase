@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.util.EventSingletonManager' );
 
-	QUnit.test( 'register() & unregister() (single source)', 2, function( assert ) {
+	QUnit.test( 'register() & unregister() (single source)', 2, function ( assert ) {
 		var manager = new $.util.EventSingletonManager(),
 			$source = $( '<div/>' ),
 			$target = $( '<div/>' ),
@@ -17,7 +17,7 @@
 			$source.get( 0 ),
 			$target.get( 0 ),
 			'custom.namespace',
-			function( event, source ) {
+			function ( event, source ) {
 				assert.ok(
 					true,
 					'Triggered event "' + event.type + '.'
@@ -38,14 +38,14 @@
 		$target.trigger( event );
 	} );
 
-	QUnit.test( 'register() & unregister() (multiple sources)', 4, function( assert ) {
+	QUnit.test( 'register() & unregister() (multiple sources)', 4, function ( assert ) {
 		var manager = new $.util.EventSingletonManager(),
 			$sources = $( '<div/><div/>' ),
-			sources = $sources.map( function() { return this; } ),
+			sources = $sources.map( function () { return this; } ),
 			$target = $( '<div/>' ),
 			triggeredForSources = [],
 			event = $.Event( 'custom' ),
-			handler = function( event, source ) {
+			handler = function ( event, source ) {
 				triggeredForSources.push( source );
 			};
 
@@ -61,12 +61,12 @@
 		);
 
 		assert.ok(
-			$.inArray( sources[0], triggeredForSources ) !== -1,
+			$.inArray( sources[ 0 ], triggeredForSources ) !== -1,
 			'Handler was called for first source.'
 		);
 
 		assert.ok(
-			$.inArray( sources[1], triggeredForSources ) !== -1,
+			$.inArray( sources[ 1 ], triggeredForSources ) !== -1,
 			'Handler was called for second source.'
 		);
 
@@ -75,7 +75,7 @@
 		$target.trigger( event );
 
 		assert.equal(
-			triggeredForSources[2],
+			triggeredForSources[ 2 ],
 			$sources.get( 0 ),
 			'Handler was called once again after unregistering a source.'
 		);
@@ -83,7 +83,7 @@
 		manager.unregister( $sources.get( 0 ), $target.get( 0 ), '.namespace' );
 	} );
 
-	QUnit.test( 'unregister() & unregister() (multiple events)', 8, function( assert ) {
+	QUnit.test( 'unregister() & unregister() (multiple events)', 8, function ( assert ) {
 		var manager = new $.util.EventSingletonManager(),
 			$source = $( '<div/>' ),
 			$target = $( '<div/>' ),
@@ -96,7 +96,7 @@
 			$source.get( 0 ),
 			$target.get( 0 ),
 			'custom1.namespace custom2.namespace custom3.namespace custom4.othernamespace',
-			function( event, source ) {
+			function ( event, source ) {
 				assert.ok(
 					true,
 					'Triggered event "' + event.type + '".'

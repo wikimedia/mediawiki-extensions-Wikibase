@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( $, wb, vp, dv, util ) {
+( function ( $, wb, vp, dv, util ) {
 	'use strict';
 
 	wb.parsers = wb.parsers || {};
@@ -18,7 +18,7 @@
 	 * @param {wikibase.api.ParseValueCaller} apiValueParser
 	 * @return {Function}
 	 */
-	wb.parsers.getApiBasedValueParserConstructor = function( apiValueParser ) {
+	wb.parsers.getApiBasedValueParserConstructor = function ( apiValueParser ) {
 		/**
 		 * Base constructor for objects representing a value parser which is doing an API request to the
 		 * 'parseValue' API module.
@@ -42,11 +42,11 @@
 			 *         Rejected parameters:
 			 *         - {string} HTML error message.
 			 */
-			parse: function( rawValue ) {
+			parse: function ( rawValue ) {
 				var deferred = $.Deferred();
 
-				apiValueParser.parseValues( this.API_VALUE_PARSER_ID, [rawValue], this._options )
-					.done( function( results ) {
+				apiValueParser.parseValues( this.API_VALUE_PARSER_ID, [ rawValue ], this._options )
+					.done( function ( results ) {
 						var result;
 
 						if ( results.length === 0 ) {
@@ -55,13 +55,13 @@
 						}
 
 						try {
-							result = dv.newDataValue( results[0].type, results[0].value );
+							result = dv.newDataValue( results[ 0 ].type, results[ 0 ].value );
 							deferred.resolve( result );
 						} catch ( error ) {
 							deferred.reject( error.message );
 						}
 					} )
-					.fail( function( error ) {
+					.fail( function ( error ) {
 						deferred.reject( error.detailedMessage || error.code );
 					} );
 

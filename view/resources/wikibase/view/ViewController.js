@@ -1,4 +1,4 @@
-wikibase.view.ViewController = ( function() {
+wikibase.view.ViewController = ( function () {
 	'use strict';
 
 	/**
@@ -10,7 +10,7 @@ wikibase.view.ViewController = ( function() {
 	 * @abstract
 	 * @constructor
 	 */
-	var SELF = function() {};
+	var SELF = function () {};
 
 	/**
 	 * Start editing
@@ -45,4 +45,4 @@ wikibase.view.ViewController = ( function() {
 
 	return SELF;
 
-} )();
+}() );

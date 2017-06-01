@@ -1,4 +1,4 @@
-wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
+wikibase.view.ControllerViewFactory = ( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = wikibase.view.ViewFactory;
@@ -45,9 +45,9 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 		}
 	);
 
-	SELF.prototype.getEntityTermsView = function( startEditingCallback, value, $entitytermsview ) {
+	SELF.prototype.getEntityTermsView = function ( startEditingCallback, value, $entitytermsview ) {
 		var controller;
-		var startEditingController = function() {
+		var startEditingController = function () {
 			return controller.startEditing();
 		};
 		var view = PARENT.prototype.getEntityTermsView.call( this, startEditingController, value, $entitytermsview );
@@ -57,20 +57,20 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 			autoWidth: true,
 			zIndex: 2
 		} )
-		.on( 'sticknodeupdate', function( event ) {
+		.on( 'sticknodeupdate', function ( event ) {
 			if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
 				$container.css( 'width', 'auto' );
 			}
 		} );
 
-		view.element.on( 'entitytermsviewchange', function() {
+		view.element.on( 'entitytermsviewchange', function () {
 			$container.data( 'sticknode' ).refresh();
 		} );
 
-		view.element.on( 'entitytermsviewafterstartediting', function() {
+		view.element.on( 'entitytermsviewafterstartediting', function () {
 			if ( !view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
 				view.$entitytermsforlanguagelistviewContainer.slideDown( {
-					complete: function() {
+					complete: function () {
 						view.$entitytermsforlanguagelistview
 							.data( 'entitytermsforlanguagelistview' ).updateInputSize();
 						view.$entitytermsforlanguagelistviewToggler.data( 'toggler' )
@@ -83,7 +83,7 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 			view.focus();
 		} );
 
-		view.element.on( 'entitytermsviewafterstopediting', function() {
+		view.element.on( 'entitytermsviewafterstopediting', function () {
 			var showEntitytermslistviewValue = mw.user.isAnon()
 				? $.cookie( 'wikibase-entitytermsview-showEntitytermslistview' )
 				: mw.user.options.get( 'wikibase-entitytermsview-showEntitytermslistview' );
@@ -93,7 +93,7 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 
 			if ( view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) && !showEntitytermslistview ) {
 				view.$entitytermsforlanguagelistviewContainer.slideUp( {
-					complete: function() {
+					complete: function () {
 						view.$entitytermsforlanguagelistviewToggler.data( 'toggler' ).refresh();
 					},
 					duration: 'fast'
@@ -108,9 +108,9 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 		return view;
 	};
 
-	SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, removeCallback, value, $dom ) {
+	SELF.prototype.getStatementView = function ( startEditingCallback, entityId, propertyId, removeCallback, value, $dom ) {
 		var controller;
-		var startEditingController = function() {
+		var startEditingController = function () {
 			return controller.startEditing();
 		};
 		var statementview = PARENT.prototype.getStatementView.call(
@@ -140,16 +140,16 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 		}
 
 		// Always focus the statementview that switched to edit mode last
-		statementview.element.on( 'statementviewafterstartediting', function() {
+		statementview.element.on( 'statementviewafterstartediting', function () {
 			statementview.focus();
 		} );
 
 		return statementview;
 	};
 
-	SELF.prototype.getSitelinkGroupView = function( startEditingCallback, groupName, value, $sitelinkgroupview ) {
+	SELF.prototype.getSitelinkGroupView = function ( startEditingCallback, groupName, value, $sitelinkgroupview ) {
 		var controller;
-		var startEditingController = function() {
+		var startEditingController = function () {
 			return controller.startEditing();
 		};
 		var view = PARENT.prototype.getSitelinkGroupView.call( this, startEditingController, groupName, value, $sitelinkgroupview );
@@ -165,7 +165,7 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 		return view;
 	};
 
-	SELF.prototype._getController = function( $container, view, model, onRemove, value, startEditingCallback ) {
+	SELF.prototype._getController = function ( $container, view, model, onRemove, value, startEditingCallback ) {
 		var edittoolbar = this._toolbarFactory.getEditToolbar(
 			{
 				$container: $container,
@@ -178,7 +178,7 @@ wikibase.view.ControllerViewFactory = ( function( mw, wb, $ ) {
 		edittoolbar.setController( controller );
 		controller.setValue( value );
 
-		view.element.on( 'keydown.edittoolbar', function( event ) {
+		view.element.on( 'keydown.edittoolbar', function ( event ) {
 			if ( view.option( 'disabled' ) ) {
 				return;
 			}

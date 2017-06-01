@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, dv, QUnit ) {
+( function ( $, wb, dv, QUnit ) {
 	'use strict';
 
 	var snakLists = [
@@ -16,25 +16,25 @@
 		] )
 	];
 
-	var listItemAdapter = wb.tests.getMockListItemAdapter( 'snakview', function() {
+	var listItemAdapter = wb.tests.getMockListItemAdapter( 'snakview', function () {
 		var _value = this.options.value;
 		this.options.locked = this.options.locked || {};
-		this.snak = function( value ) {
+		this.snak = function ( value ) {
 			if ( arguments.length ) {
 				_value = value;
 			}
 			return _value;
 		};
-		this.startEditing = function() {
+		this.startEditing = function () {
 			this._trigger( 'change' );
 			this._trigger( 'afterstartediting' );
 		};
-		this.stopEditing = function() {};
+		this.stopEditing = function () {};
 
-		this.showPropertyLabel = function() {
+		this.showPropertyLabel = function () {
 			this._propertyLabelVisible = true;
 		};
-		this.hidePropertyLabel = function() {
+		this.hidePropertyLabel = function () {
 			this._propertyLabelVisible = false;
 		};
 	} );
@@ -49,7 +49,7 @@
 	function createSnaklistview( value, additionalOptions ) {
 		var options = $.extend( additionalOptions, {
 			value: value || undefined,
-			getListItemAdapter: function() {
+			getListItemAdapter: function () {
 				return listItemAdapter;
 			}
 		} );
@@ -77,8 +77,8 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.snaklistview', window.QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_snaklistview' ).each( function( i, node ) {
+		teardown: function () {
+			$( '.test_snaklistview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					snaklistview = $node.data( 'snaklistview' );
 
@@ -91,7 +91,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy', function( assert ) {
+	QUnit.test( 'Initialize and destroy', function ( assert ) {
 		assert.expect( 6 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
@@ -127,7 +127,7 @@
 		);
 
 		assert.throws(
-			function() {
+			function () {
 				createSnaklistview( {
 					value: null
 				} );
@@ -136,7 +136,7 @@
 		);
 	} );
 
-	QUnit.test( 'Setting and getting value while not in edit mode', function( assert ) {
+	QUnit.test( 'Setting and getting value while not in edit mode', function ( assert ) {
 		assert.expect( 5 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
@@ -147,10 +147,10 @@
 			'Snaklistview is empty.'
 		);
 
-		snaklistview.value( snakLists[0] );
+		snaklistview.value( snakLists[ 0 ] );
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[0] ),
+			snaklistview.value().equals( snakLists[ 0 ] ),
 			'Set snak list.'
 		);
 
@@ -159,10 +159,10 @@
 			'Snaklistview is not in edit mode.'
 		);
 
-		snaklistview.value( snakLists[1] );
+		snaklistview.value( snakLists[ 1 ] );
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[1] ),
+			snaklistview.value().equals( snakLists[ 1 ] ),
 			'Overwrote snak list.'
 		);
 
@@ -175,7 +175,7 @@
 		);
 	} );
 
-	QUnit.test( 'Setting value while in edit mode', function( assert ) {
+	QUnit.test( 'Setting value while in edit mode', function ( assert ) {
 		assert.expect( 8 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
@@ -193,10 +193,10 @@
 			'Snaklistview is empty.'
 		);
 
-		snaklistview.value( snakLists[0] );
+		snaklistview.value( snakLists[ 0 ] );
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[0] ),
+			snaklistview.value().equals( snakLists[ 0 ] ),
 			'Set snak list.'
 		);
 
@@ -205,10 +205,10 @@
 			'Snaklistview is in edit mode.'
 		);
 
-		snaklistview.value( snakLists[1] );
+		snaklistview.value( snakLists[ 1 ] );
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[1] ),
+			snaklistview.value().equals( snakLists[ 1 ] ),
 			'Overwrote snak list.'
 		);
 
@@ -231,13 +231,13 @@
 		);
 	} );
 
-	QUnit.test( 'Basic start and stop editing', 5, function( assert ) {
+	QUnit.test( 'Basic start and stop editing', 5, function ( assert ) {
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
 		QUnit.stop();
 
-		$node.on( 'snaklistviewafterstartediting', function( e ) {
+		$node.on( 'snaklistviewafterstartediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstartediting" event.'
@@ -259,7 +259,7 @@
 
 		QUnit.stop( 1 );
 
-		$node.on( 'snaklistviewafterstopediting', function( e ) {
+		$node.on( 'snaklistviewafterstopediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstopediting" event.'
@@ -286,13 +286,13 @@
 		snaklistview.stopEditing();
 	} );
 
-	QUnit.test( 'Basic start and stop editing of filled snaklistview', 5, function( assert ) {
-		var $node = createSnaklistview( snakLists[0] ),
+	QUnit.test( 'Basic start and stop editing of filled snaklistview', 5, function ( assert ) {
+		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
 
 		QUnit.stop();
 
-		$node.on( 'snaklistviewafterstartediting', function( e ) {
+		$node.on( 'snaklistviewafterstartediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstartediting" event.'
@@ -318,7 +318,7 @@
 
 		QUnit.stop( 1 );
 
-		$node.on( 'snaklistviewafterstopediting', function( e ) {
+		$node.on( 'snaklistviewafterstopediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstopediting" event.'
@@ -336,7 +336,7 @@
 		);
 
 		assert.strictEqual(
-			snaklistview.value().equals( snakLists[0] ),
+			snaklistview.value().equals( snakLists[ 0 ] ),
 			true,
 			'Snaklistview still features initial value.'
 		);
@@ -347,14 +347,14 @@
 		$node.remove();
 	} );
 
-	QUnit.test( 'enterNewItem()', function( assert ) {
+	QUnit.test( 'enterNewItem()', function ( assert ) {
 		assert.expect( 4 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
 		QUnit.stop( 2 );
 
-		$node.on( 'snaklistviewafterstartediting', function( e ) {
+		$node.on( 'snaklistviewafterstartediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstartediting" event.'
@@ -362,7 +362,7 @@
 			QUnit.start();
 		} );
 
-		$node.on( 'snaklistviewchange', function( e ) {
+		$node.on( 'snaklistviewchange', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "change" event.'
@@ -384,7 +384,7 @@
 		);
 	} );
 
-	QUnit.test( 'Stopping edit mode dropping value', function( assert ) {
+	QUnit.test( 'Stopping edit mode dropping value', function ( assert ) {
 		assert.expect( 6 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
@@ -395,7 +395,7 @@
 
 		// Start with empty snaklistview, set a snak list and stop edit mode:
 		snaklistview.startEditing();
-		snaklistview = setValueKeepingInitial( snaklistview, snakLists[0] );
+		snaklistview = setValueKeepingInitial( snaklistview, snakLists[ 0 ] );
 
 		snaklistview.stopEditing( true );
 
@@ -411,10 +411,10 @@
 		);
 
 		// Start with a filled snaklistview, set a snak list and stop edit mode:
-		snaklistview.value( snakLists[0] );
+		snaklistview.value( snakLists[ 0 ] );
 
 		snaklistview.startEditing();
-		snaklistview = setValueKeepingInitial( snaklistview, snakLists[1] );
+		snaklistview = setValueKeepingInitial( snaklistview, snakLists[ 1 ] );
 
 		snaklistview.stopEditing( true );
 
@@ -424,7 +424,7 @@
 		);
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[0] ),
+			snaklistview.value().equals( snakLists[ 0 ] ),
 			'Verified reset to initial value.'
 		);
 
@@ -440,14 +440,14 @@
 		);
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[0] ),
+			snaklistview.value().equals( snakLists[ 0 ] ),
 			'Verified reset to initial value.'
 		);
 
 		$node.remove();
 	} );
 
-	QUnit.test( 'Stopping edit mode retaining value', function( assert ) {
+	QUnit.test( 'Stopping edit mode retaining value', function ( assert ) {
 		assert.expect( 7 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
@@ -458,7 +458,7 @@
 
 		// Start with empty snaklistview, set a snak list and stop edit mode:
 		snaklistview.startEditing();
-		snaklistview = setValueKeepingInitial( snaklistview, snakLists[0] );
+		snaklistview = setValueKeepingInitial( snaklistview, snakLists[ 0 ] );
 
 		snaklistview.stopEditing();
 
@@ -468,17 +468,17 @@
 		);
 
 		assert.ok(
-			snaklistview.value().equals( snakLists[0] ),
+			snaklistview.value().equals( snakLists[ 0 ] ),
 			'Snaklistview\'s value changed.'
 		);
 
 		assert.ok(
-			snakLists[0].equals( snaklistview.value() ),
+			snakLists[ 0 ].equals( snaklistview.value() ),
 			'Verified new value.'
 		);
 
 		snaklistview.startEditing();
-		snaklistview = setValueKeepingInitial( snaklistview, snakLists[1] );
+		snaklistview = setValueKeepingInitial( snaklistview, snakLists[ 1 ] );
 
 		snaklistview.stopEditing();
 
@@ -488,7 +488,7 @@
 		);
 
 		assert.ok(
-			snakLists[1].equals( snaklistview.value() ),
+			snakLists[ 1 ].equals( snaklistview.value() ),
 			'Verified new value.'
 		);
 
@@ -512,9 +512,9 @@
 		$node.remove();
 	} );
 
-	QUnit.test( 'Dis- and enabling', function( assert ) {
+	QUnit.test( 'Dis- and enabling', function ( assert ) {
 		assert.expect( 5 );
-		var $node = createSnaklistview( snakLists[0] ),
+		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
 
 		/**
@@ -529,8 +529,8 @@
 				isEnabled = true;
 
 			for ( var i = 0; i < snakviews.length; i++ ) {
-				isDisabled = isDisabled && snakviews[i].option( 'disabled' );
-				isEnabled = isEnabled && !snakviews[i].option( 'disabled' );
+				isDisabled = isDisabled && snakviews[ i ].option( 'disabled' );
+				isEnabled = isEnabled && !snakviews[ i ].option( 'disabled' );
 			}
 
 			if ( isDisabled && !isEnabled ) {
@@ -548,7 +548,7 @@
 			'snaklistview\'s snakviews are enabled.'
 		);
 
-		$node.on( 'snaklistviewdisable', function( e ) {
+		$node.on( 'snaklistviewdisable', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "disable" event.'
@@ -556,7 +556,7 @@
 			QUnit.start();
 		} );
 
-		$node.on( 'snaklistviewenable', function( e ) {
+		$node.on( 'snaklistviewenable', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "enable" event.'
@@ -585,9 +585,9 @@
 		);
 	} );
 
-	QUnit.test( 'singleProperty option', function( assert ) {
+	QUnit.test( 'singleProperty option', function ( assert ) {
 		assert.expect( 4 );
-		var $node = createSnaklistview( snakLists[0], { singleProperty: true } ),
+		var $node = createSnaklistview( snakLists[ 0 ], { singleProperty: true } ),
 			snaklistview = $node.data( 'snaklistview' );
 
 		assert.ok(
@@ -596,7 +596,7 @@
 		);
 
 		function testPropertyLabelVisibility( assert, snaklistview ) {
-			$.each( snaklistview._listview.items(), function( i, snakviewNode ) {
+			$.each( snaklistview._listview.items(), function ( i, snakviewNode ) {
 				var $snakview = $( snakviewNode ),
 					snakview = snaklistview._lia.liInstance( $snakview );
 
@@ -618,4 +618,4 @@
 		testPropertyLabelVisibility( assert, snaklistview );
 	} );
 
-} )( jQuery, wikibase, dataValues, QUnit );
+}( jQuery, wikibase, dataValues, QUnit ) );

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -65,7 +65,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.getListItemAdapter ) {
 				throw new Error( 'Required option(s) missing' );
 			}
@@ -81,7 +81,7 @@
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			this.$listview.data( 'listview' ).destroy();
 			this.$listview.off( '.' + this.widgetName );
 			this.element.removeClass( 'wikibase-sitelinklistview' );
@@ -94,7 +94,7 @@
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.draw
 		 */
-		draw: function() {
+		draw: function () {
 			if ( !this.$listview.data( 'listview' ) ) {
 				this._createListView();
 			}
@@ -106,7 +106,7 @@
 			if ( this.options.autoInput && !this.isFull() ) {
 				var self = this,
 					event = this.widgetEventPrefix + 'afterstartediting.' + this.widgetName,
-					updateAutoInput = function() {
+					updateAutoInput = function () {
 						self._updateAutoInput();
 					};
 
@@ -121,15 +121,15 @@
 		/**
 		 * Creates the listview widget managing the sitelinkview widgets
 		 */
-		_createListView: function() {
+		_createListView: function () {
 			var self = this,
 				listItemAdapter = this.options.getListItemAdapter(
-					function() {
-						return $.map( self._getUnusedAllowedSiteIds(), function( siteId ) {
+					function () {
+						return $.map( self._getUnusedAllowedSiteIds(), function ( siteId ) {
 							return wb.sites.getSite( siteId );
 						} );
 					},
-					function( sitelinkview ) {
+					function ( sitelinkview ) {
 						self.$listview.data( 'listview' ).removeItem( sitelinkview.element );
 						self._refreshCounter();
 						self._trigger( 'change' );
@@ -144,7 +144,7 @@
 				listItemNodeName: 'LI',
 				encapsulate: true
 			} )
-			.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), function( event ) {
+			.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
 				event.stopPropagation();
 				if ( self.options.autoInput ) {
 					self._updateAutoInput();
@@ -152,10 +152,10 @@
 				}
 				self._trigger( 'change' );
 			} )
-			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function( event, error ) {
+			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function ( event, error ) {
 				event.stopPropagation();
 			} )
-			.on( 'keydown.' + this.widgetName, function( event ) {
+			.on( 'keydown.' + this.widgetName, function ( event ) {
 				if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
 					var $sitelinkview = $( event.target ).parentsUntil( this ).addBack().filter( '.listview-item' ),
 						sitelinkview = listItemAdapter.liInstance( $sitelinkview );
@@ -172,7 +172,7 @@
 					listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
 					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
 				].join( ' ' ),
-				function( event ) {
+				function ( event ) {
 					event.stopPropagation();
 				}
 			);
@@ -182,7 +182,7 @@
 		 * @param {jQuery.wikibase.sitelinkview} sitelinkview
 		 * @param {jQuery.Event} event
 		 */
-		_removeSitelinkviewIfEmpty: function( sitelinkview, event ) {
+		_removeSitelinkviewIfEmpty: function ( sitelinkview, event ) {
 			var $sitelinkview = sitelinkview.element,
 				listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
@@ -196,7 +196,7 @@
 				event.stopPropagation();
 
 				// Shift focus to previous line or to following line if there is no previous:
-				$items.each( function( i ) {
+				$items.each( function ( i ) {
 					if ( this === $sitelinkview.get( 0 ) ) {
 						if ( i > 0 ) {
 							lia.liInstance( $items.eq( i - 1 ) ).focus();
@@ -213,7 +213,7 @@
 			}
 		},
 
-		_updateAutoInput: function() {
+		_updateAutoInput: function () {
 			var listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
 				$items = listview.items(),
@@ -237,12 +237,12 @@
 		/**
 		 * @return {string[]}
 		 */
-		_getUnusedAllowedSiteIds: function() {
-			var representedSiteIds = $.map( this.value(), function( siteLink ) {
+		_getUnusedAllowedSiteIds: function () {
+			var representedSiteIds = $.map( this.value(), function ( siteLink ) {
 				return siteLink.getSiteId();
 			} );
 
-			return $.grep( this.option( 'allowedSiteIds' ), function( siteId ) {
+			return $.grep( this.option( 'allowedSiteIds' ), function ( siteId ) {
 				return $.inArray( siteId, representedSiteIds ) === -1;
 			} );
 		},
@@ -252,7 +252,7 @@
 		 *
 		 * @return {boolean}
 		 */
-		isFull: function() {
+		isFull: function () {
 			return !this._getUnusedAllowedSiteIds().length
 				|| this.value().length === this.options.allowedSiteIds.length;
 		},
@@ -260,7 +260,7 @@
 		/**
 		 * Refreshes any nodes featuring a counter.
 		 */
-		_refreshCounter: function() {
+		_refreshCounter: function () {
 			if ( !this.options.$counter ) {
 				return;
 			}
@@ -276,10 +276,10 @@
 		 *
 		 * @return {jQuery}
 		 */
-		_getFormattedCounterText: function() {
+		_getFormattedCounterText: function () {
 			var listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
-				$items = listview.items().filter( function() {
+				$items = listview.items().filter( function () {
 					var sitelinkview = lia.liInstance( $( this ) );
 					return !sitelinkview.isEmpty();
 				} ),
@@ -302,14 +302,14 @@
 			return $parenthesesMsg.contents();
 		},
 
-		_startEditing: function() {
+		_startEditing: function () {
 			var self = this;
 
 			this._eventSingletonManager.register(
 				this,
 				window,
 				namespaceEventNames( 'scroll touchmove resize', this.widgetName ),
-				function( event, self ) {
+				function ( event, self ) {
 					// It's possible an event is triggered with the widget not being initialized.
 					if ( self.$listview ) {
 						self._startEditingInViewport();
@@ -325,7 +325,7 @@
 			return $.Deferred().resolve().promise();
 		},
 
-		_startEditingInViewport: function() {
+		_startEditingInViewport: function () {
 			/**
 			 * @param {HTMLElement} node
 			 * @return {boolean}
@@ -346,21 +346,21 @@
 				lia = listview.listItemAdapter(),
 				foundOne = false;
 
-			listview.value().forEach( function( sitelinkview ) {
-				if ( touchesViewport( sitelinkview.element[0] ) ) {
+			listview.value().forEach( function ( sitelinkview ) {
+				if ( touchesViewport( sitelinkview.element[ 0 ] ) ) {
 					sitelinkview.startEditing();
 					foundOne = true;
 				}
 			} );
 			if ( !foundOne && listview.items().length > 0 ) {
-				lia.liInstance( $( listview.items()[0] ) ).startEditing();
+				lia.liInstance( $( listview.items()[ 0 ] ) ).startEditing();
 			}
 		},
 
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.stopEditing
 		 */
-		stopEditing: function( dropValue ) {
+		stopEditing: function ( dropValue ) {
 			if ( !dropValue ) {
 				this._removeIncompleteSiteLinks();
 			}
@@ -368,7 +368,7 @@
 			return PARENT.prototype.stopEditing.call( this, dropValue );
 		},
 
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			this._refreshCounter();
 			this._eventSingletonManager.unregister(
 				this,
@@ -378,10 +378,10 @@
 			return $.Deferred().resolve().promise();
 		},
 
-		_removeIncompleteSiteLinks: function() {
+		_removeIncompleteSiteLinks: function () {
 			var listview = this.$listview.data( 'listview' );
 
-			listview.items().not( listview.nonEmptyItems() ).each( function() {
+			listview.items().not( listview.nonEmptyItems() ).each( function () {
 				listview.removeItem( $( this ) );
 			} );
 		},
@@ -389,7 +389,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
-		focus: function() {
+		focus: function () {
 			// Focus first invalid/incomplete item or - if there is none - the first item.
 			var listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
@@ -408,7 +408,7 @@
 				var $window = $( window );
 				var $foundNode = null;
 
-				$nodes.each( function() {
+				$nodes.each( function () {
 					var $node = $( this );
 					if ( $node.is( ':visible' ) && $node.offset().top > $window.scrollTop() ) {
 						$foundNode = $node;
@@ -420,7 +420,7 @@
 			}
 
 			if ( this.value() === null ) {
-				$items = $items.filter( function() {
+				$items = $items.filter( function () {
 					var sitelinkview = lia.liInstance( $( this ) );
 					return sitelinkview.value() === null;
 				} );
@@ -428,7 +428,7 @@
 			$items = findFirstInViewPort( $items );
 
 			if ( $items.length ) {
-				setTimeout( function() {
+				setTimeout( function () {
 					lia.liInstance( $items ).focus();
 				}, 10 );
 			}
@@ -440,7 +440,7 @@
 		 * @param {wikibase.datamodel.SiteLink[]} [value]
 		 * @return {wikibase.datamodel.SiteLink[]|*}
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value !== undefined ) {
 				return this.option( 'value', value );
 			}
@@ -454,7 +454,7 @@
 			var listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter();
 
-			listview.nonEmptyItems().each( function() {
+			listview.nonEmptyItems().each( function () {
 				var sitelinkview = lia.liInstance( $( this ) );
 				value.push( sitelinkview.value() );
 			} );
@@ -465,7 +465,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._setOption
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
 			if ( key === 'value' ) {
@@ -487,12 +487,12 @@
 		 * @return {Function} return.done
 		 * @return {jQuery} return.done.$sitelinkview
 		 */
-		enterNewItem: function() {
+		enterNewItem: function () {
 			var self = this,
 				listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter();
 
-			return listview.enterNewItem().done( function( $sitelinkview ) {
+			return listview.enterNewItem().done( function ( $sitelinkview ) {
 				var sitelinkview = lia.liInstance( $sitelinkview );
 
 				$sitelinkview.addClass( 'wb-new' );

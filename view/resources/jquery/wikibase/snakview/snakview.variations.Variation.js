@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $, util ) {
+( function ( $, util ) {
 	'use strict';
 
 	$.wikibase = $.wikibase || {};
@@ -113,14 +113,14 @@
 		/**
 		 * @protected
 		 */
-		_init: function() {
+		_init: function () {
 			this._viewState.notify( 'valid' );
 		},
 
 		/**
 		 * Destroys the `Variation`.
 		 */
-		destroy: function() {
+		destroy: function () {
 			this.$viewPort.removeClass( this.variationBaseClass );
 			this.$viewPort = null;
 			this._viewState = null;
@@ -131,7 +131,7 @@
 		 *
 		 * @return {boolean}
 		 */
-		isDestroyed: function() {
+		isDestroyed: function () {
 			return !this._viewState;
 		},
 
@@ -144,7 +144,7 @@
 		 * @return {jQuery.wikibase.snakview.ViewState|null} Null when called after the object got
 		 *  destroyed.
 		 */
-		viewState: function() {
+		viewState: function () {
 			return this._viewState;
 		},
 
@@ -163,7 +163,7 @@
 		 *         `wikibase.serialization.SnakSerializer.serialize()` returns, just without the
 		 *         fields `snaktype` and `property`.
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value === undefined ) {
 				return this._getValue();
 			}
@@ -183,7 +183,7 @@
 		 *
 		 * @param {Object} value Incomplete `Snak` serialization.
 		 */
-		_setValue: function( value ) {},
+		_setValue: function ( value ) {},
 
 		/**
 		 * Gets the `Variation`s value returning an incomplete `Snak` serialization containing the
@@ -194,7 +194,7 @@
 		 *
 		 * @return {Object} Incomplete `Snak` serialization.
 		 */
-		_getValue: function() {
+		_getValue: function () {
 			return {};
 		},
 
@@ -207,7 +207,7 @@
 		/**
 		 * Start the `Variation`'s edit mode.
 		 */
-		startEditing: function() {
+		startEditing: function () {
 			$( this ).triggerHandler( 'afterstartediting' );
 		},
 
@@ -216,28 +216,28 @@
 		 *
 		 * @param {boolean} dropValue
 		 */
-		stopEditing: function( dropValue ) {},
+		stopEditing: function ( dropValue ) {},
 
-		disable: function() {},
+		disable: function () {},
 
-		enable: function() {},
+		enable: function () {},
 
 		/**
 		 * @return {boolean}
 		 */
-		isFocusable: function() {
+		isFocusable: function () {
 			return false;
 		},
 
 		/**
 		 * Sets the focus on the `Variation`.
 		 */
-		focus: function() {},
+		focus: function () {},
 
 		/**
 		 * Removes focus from the `Variation`.
 		 */
-		blur: function() {}
+		blur: function () {}
 	} );
 
 }( jQuery, util ) );
