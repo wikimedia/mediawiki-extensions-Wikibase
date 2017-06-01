@@ -16,6 +16,24 @@
       "revId": "5cedb5f3a4f2055d692ec106318046dac7da8df2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_bb8b33e8",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-01T02:55:45Z",
+      "side": 1,
+      "message": "createMock was added in phpunit 5.4.0, while MediaWiki uses phpunit 4.8 (due to needing to still support php 5.5)\n\ncould it be that these tests are skipped in jenkins because echo is not enabled and thus tests passing anyway?",
+      "parentUuid": "ce153bd1_9b0f4f8d",
+      "revId": "5cedb5f3a4f2055d692ec106318046dac7da8df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
