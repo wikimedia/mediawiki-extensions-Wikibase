@@ -57,12 +57,20 @@ class SidebarLinkBadgeDisplay {
 	 * string values. These fields are the one outputted by the getBadgeInfo() function.
 	 */
 	public function applyBadgeToLink( array &$sidebarLink, array $badgeInfo ) {
-		if ( isset( $sidebarLink['class'] ) ) {
-			$sidebarLink['class'] .= ' ' . $badgeInfo['class'];
-		} else {
-			$sidebarLink['class'] = $badgeInfo['class'];
+		$badgeClass = $badgeInfo['class'];
+		if ( !$badgeClass ) {
+			return;
 		}
 
+		if ( isset( $sidebarLink['class'] ) ) {
+			$sidebarLink['class'] .= ' ' . $badgeClass;
+		} else {
+			$sidebarLink['class'] = $badgeClass;
+		}
+
+		if ( !$badgeInfo['label'] ) {
+			wfLogWarning( "Label for badge class $badgeClass could not be found." );
+		}
 		$sidebarLink['itemtitle'] = $badgeInfo['label'];
 	}
 

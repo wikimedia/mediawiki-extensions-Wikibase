@@ -4,13 +4,17 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Closure;
 use HashSiteStore;
+use Language;
 use MediaWikiSite;
 use SiteLookup;
 use Title;
 use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -28,11 +32,17 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider projectLinkSidebarProvider
 	 */
-	public function testBuildProjectLinkSidebar( array $siteIdsToOutput, array $result ) {
+	public function testBuildProjectLinkSidebar(
+		array $siteIdsToOutput,
+		array $result,
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+	) {
+
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteLookup(),
+			$sidebarLinkBadgeDisplay,
 			$siteIdsToOutput
 		);
 
@@ -43,44 +53,54 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function projectLinkSidebarProvider() {
-		$wiktionaryLink = array(
+		$wiktionaryLink = [
 			'msg' => 'wikibase-otherprojects-wiktionary',
 			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
 			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$wikiquoteLink = array(
+		];
+		$wikiquoteLink = [
 			'msg' => 'wikibase-otherprojects-wikiquote',
 			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
 			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$wikipediaLink = array(
+		];
+		$wikipediaLink = [
 			'msg' => 'wikibase-otherprojects-wikipedia',
-			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia badge-Q4242 badge-class',
 			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
-			'hreflang' => 'en'
-		);
+			'hreflang' => 'en',
+			'itemtitle' => 'Badge Label',
+		];
 
-		return array(
-			array(
-				array(),
-				array()
-			),
-			array(
-				array( 'spam', 'spam2' ),
-				array()
-			),
-			array(
-				array( 'enwiktionary' ),
-				array( $wiktionaryLink )
-			),
-			array(
+		return [
+			[
+				[],
+				[],
+				$this->getSidebarLinkBadgeDisplay()
+			],
+			[
+				[ 'spam', 'spam2' ],
+				[],
+				$this->getSidebarLinkBadgeDisplay()
+			],
+			[
+				[ 'enwiktionary' ],
+				[ $wiktionaryLink ],
+				$this->getSidebarLinkBadgeDisplay()
+			],
+			[
+				[ 'enwiki' ],
+				[ $wikipediaLink ],
+				$this->getSidebarLinkBadgeDisplay()
+			],
+			[
 				// Make sure results are sorted alphabetically by their group names
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
-			)
-		);
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
+				$this->getSidebarLinkBadgeDisplay()
+			],
+		];
 	}
 
 	/**
@@ -91,6 +111,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
 			$siteIdsToOutput
 		);
 
@@ -117,6 +138,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
 			$siteIdsToOutput
 		);
 
@@ -148,15 +170,17 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		);
 		$wikipediaLink = array(
 			'msg' => 'wikibase-otherprojects-wikipedia',
-			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia badge-Q4242 badge-class',
 			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
-			'hreflang' => 'en'
+			'hreflang' => 'en',
+			'itemtitle' => 'Badge Label',
 		);
 		$changedWikipedaLink = array(
 			'msg' => 'wikibase-otherprojects-wikipedia',
-			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia badge-Q4242 badge-class',
 			'href' => 'https://en.wikipedia.org/wiki/Cat',
-			'hreflang' => 'en'
+			'hreflang' => 'en',
+			'itemtitle' => 'Badge Label',
 		);
 
 		return array(
@@ -247,6 +271,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'enwiki',
 			$lookup,
 			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
 			array( 'enwiki' )
 		);
 
@@ -273,6 +298,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
 			array( 'unknown-site' )
 		);
 
@@ -315,11 +341,27 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			->with( $Q123 )
 			->will( $this->returnValue( array(
 				new SiteLink( 'enwikiquote', 'Nyan Cat' ),
-				new SiteLink( 'enwiki', 'Nyan Cat' ),
+				new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( 'Q4242' ) ] ),
 				new SiteLink( 'enwiktionary', 'Nyan Cat' )
 			) ) );
 
 		return $lookup;
+	}
+
+	/**
+	 * @return SidebarLinkBadgeDisplay
+	 */
+	private function getSidebarLinkBadgeDisplay() {
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup->method( 'getLabel' )
+			->with( new ItemId( 'Q4242' ) )
+			->will( $this->returnValue( new Term( 'en', 'Badge Label' ) ) );
+
+		return new SidebarLinkBadgeDisplay(
+			$labelDescriptionLookup,
+			[ 'Q4242' => 'badge-class' ],
+			new Language( 'en' )
+		);
 	}
 
 }
