@@ -110,8 +110,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	public function setGroup( AliasGroup $group ) {
 		if ( $group->isEmpty() ) {
 			unset( $this->groups[$group->getLanguageCode()] );
-		}
-		else {
+		} else {
 			$this->groups[$group->getLanguageCode()] = $group;
 		}
 	}

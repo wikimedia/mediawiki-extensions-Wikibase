@@ -111,8 +111,7 @@ abstract class HashArray extends ArrayObject {
 
 		if ( $hasHash ) {
 			return false;
-		}
-		else {
+		} else {
 			$this->offsetHashes[$hash] = $index;
 
 			return true;
@@ -203,9 +202,8 @@ abstract class HashArray extends ArrayObject {
 			$offset = $this->offsetHashes[$elementHash];
 			return $this->offsetGet( $offset );
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	/**

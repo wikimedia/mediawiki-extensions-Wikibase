@@ -131,8 +131,7 @@ class SnakListTest extends HashArrayTest {
 
 			if ( $elementCount % 2 === 0 ) {
 				$array->removeSnak( $element );
-			}
-			else {
+			} else {
 				$array->removeSnakHash( $element->getHash() );
 			}
 
