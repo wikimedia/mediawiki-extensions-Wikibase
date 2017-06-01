@@ -165,22 +165,24 @@ class EchoNotificationsHandlers {
 	}
 
 	/**
-	 * Handler for UserGetDefaultOptions hook
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UserGetDefaultOptions
-	 *
-	 * @param bool[] &$defaultOptions Array of preference keys and their default values.
+	 * Handler for LocalUserCreated hook.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LocalUserCreated
+	 * @param User $user User object that was created.
+	 * @param bool $autocreated True when account was auto-created
 	 */
-	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
+	public static function onLocalUserCreated( User $user, $autocreated ) {
 		$self = self::newFromGlobalState();
-		$self->doUserGetDefaultOptions( $defaultOptions );
+		$self->doLocalUserCreated( $user, $autocreated );
 	}
 
 	/**
-	 * @param bool[] &$defaultOptions
+	 * @param User $user
+	 * @param bool $autocreated
 	 */
-	public function doUserGetDefaultOptions( array &$defaultOptions ) {
+	public function doLocalUserCreated( User $user, $autocreated ) {
 		if ( $this->sendEchoNotification === true ) {
-			$defaultOptions['echo-subscriptions-web-wikibase-action'] = true;
+			$user->setOption( 'echo-subscriptions-web-wikibase-action', true );
+			$user->saveSettings();
 		}
 	}
 
