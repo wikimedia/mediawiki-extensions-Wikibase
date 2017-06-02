@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_b33a6fbf",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T12:11:01Z",
+      "side": 1,
+      "message": "Promise will be reused. \nThis is the reason why I did freeze here.",
+      "parentUuid": "0e1cb3f9_d91341b8",
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_e4cacd70",
         "filename": "repo/resources/wikibase.currentEntity.js",
         "patchSetId": 8
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_b3610fd3",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T12:11:01Z",
+      "side": 1,
+      "message": "\u003e and change all our code the moment we are dropping support for such browsers.\n\nIt will be doable for our code, but not for widgets/user-scripts.\nThat\u0027s one of the reasons why I try to insist on native promises. \nOther is that they have very small interface `{then:function (...){}, catch: function(...){}}` which is good in terms of support. Also the interface will be stable as soon as it is based on abstract interface definition Promises/A+ and we can state that this is the interface we provide and implementation may vary.\n\nAlso I wouldn\u0027t want to expose jQuery promice because of their specific desisions like (from http://api.jquery.com/deferred.then/ ):\n\n\u003e deferred.then( doneFilter [, failFilter ] [, progressFilter ] )\n\u003e ...\n\u003e doneCallbacks\n\u003e Type: Function()\n\u003e A function, or ARRAY of functions, called when the Deferred is resolved.\n\u003e ...\n\nHow will it work with array of functions? Docs don\u0027t say.\nAnd it will be much harder to migrate from it if someone used this array feature.\n\nAs I already said to Thiemo, most of the user-script developers (99%) will see native promise in debugger as soon as browser support for them is 88% according to caniuse.com and those people probably don\u0027t use IE, Opera Mini or Android browser to develop their scripts.\n\nAnother kind of related thing: if we are going to use Vue+Vuex we will need to add Promise polyfill to entity view pages because Vuex depends on native promises, so Promise object will be there.",
+      "parentUuid": "0e1cb3f9_e4cacd70",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_64ad5d97",
         "filename": "repo/resources/wikibase.currentEntity.js",
         "patchSetId": 8
@@ -70,6 +112,30 @@
       "writtenOn": "2017-05-31T11:41:17Z",
       "side": 1,
       "message": "Users will not be happy about the fact that they have to implement *two* of these \"then\" functions just to get a naive JSON object. I believe I – as somebody working with and complaining about this mess for several years now – am able to understand why it must be like this. I still wish it could be simpler.\n\nWhy is it not possible to do\n\n mw.loader.using( \u0027wikibase.currentEntity\u0027 ).then( function ( entity ) {\n     …\n } );\n\nThat would be so much cooler.",
+      "range": {
+        "startLine": 76,
+        "startChar": 37,
+        "endLine": 76,
+        "endChar": 41
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_13d47b4a",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T12:11:01Z",
+      "side": 1,
+      "message": "It is not possible because `mw.loader.using( ... )` returns promise of `require` that can return module, but not for the module itself. Otherwise it would be possible.\n\nI guess it is not a big problem to create such a method for loader like: \n```\nmw.loader.whenLoaded( \u0027module1\u0027 )\n         .then(function (Module1) {\n            //Do stuff\n         });\n\nmw.loader.whenLoaded( [\u0027module1\u0027, \u0027module2\u0027] )\n         .then(function (modules) {\n            var Module1 \u003d modules[0];\n            var Module2 \u003d modules[1];\n            //Do stuff\n         });\n```\nBut to get it merged?...",
+      "parentUuid": "0e1cb3f9_64ad5d97",
       "range": {
         "startLine": 76,
         "startChar": 37,
