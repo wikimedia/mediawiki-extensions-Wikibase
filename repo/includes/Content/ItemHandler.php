@@ -233,11 +233,11 @@ class ItemHandler extends EntityHandler {
 	/**
 	 * @see EntityHandler::makeEntityContent
 	 *
-	 * @param EntityHolder $entityHolder
+	 * @param EntityHolder|null $entityHolder
 	 *
 	 * @return ItemContent
 	 */
-	public function makeEntityContent( EntityHolder $entityHolder ) {
+	public function makeEntityContent( EntityHolder $entityHolder = null ) {
 		return new ItemContent( $entityHolder );
 	}
 

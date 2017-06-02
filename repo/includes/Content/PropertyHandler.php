@@ -204,11 +204,11 @@ class PropertyHandler extends EntityHandler {
 	/**
 	 * @see EntityHandler::makeEntityContent
 	 *
-	 * @param EntityHolder $entityHolder
+	 * @param EntityHolder|null $entityHolder
 	 *
 	 * @return PropertyContent
 	 */
-	public function makeEntityContent( EntityHolder $entityHolder ) {
+	public function makeEntityContent( EntityHolder $entityHolder = null ) {
 		return new PropertyContent( $entityHolder );
 	}
 

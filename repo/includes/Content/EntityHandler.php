@@ -220,12 +220,10 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::makeEmptyContent
 	 *
-	 * @throws MWException Always. EntityContent cannot be empty.
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
-		$empty = $this->makeEmptyEntity();
-		return $this->makeEntityContent( new EntityInstanceHolder( $empty ) );
+		return $this->makeEntityContent();
 	}
 
 	/**
@@ -347,11 +345,11 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @param EntityHolder $entityHolder
+	 * @param EntityHolder|null $entityHolder
 	 *
 	 * @return EntityContent
 	 */
-	abstract public function makeEntityContent( EntityHolder $entityHolder );
+	abstract public function makeEntityContent( EntityHolder $entityHolder = null );
 
 	/**
 	 * Parses the given ID string into an EntityId for the type of entity
