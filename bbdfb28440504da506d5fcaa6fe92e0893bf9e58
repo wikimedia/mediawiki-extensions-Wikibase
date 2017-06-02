@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_d59fcb04",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-02T02:38:10Z",
+      "side": 1,
+      "message": "Let\u0027s do it in another patch. This one is already too big.",
+      "parentUuid": "0e1cb3f9_1f2076f1",
+      "range": {
+        "startLine": 260,
+        "startChar": 18,
+        "endLine": 260,
+        "endChar": 31
+      },
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_2165220d",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 10
@@ -59,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_f590cff9",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-02T02:38:10Z",
+      "side": 1,
+      "message": "It has really long lines (with comments) I moved it so it\u0027ll be a little bit cleaner. I think we can move comments later on.",
+      "parentUuid": "0e1cb3f9_2165220d",
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_41629606",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 10
@@ -70,6 +112,24 @@
       "writtenOn": "2017-05-29T19:18:50Z",
       "side": 1,
       "message": "We could avoid doing this until we know that $untracked isn\u0027t empty. $untracked is nearly always empty!\n\nTo do this, it would probably be best to split this method in two.",
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_1596a3f3",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-02T02:38:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "0e1cb3f9_41629606",
       "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
