@@ -125,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_6efcf0b1",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T15:42:31Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "ce153bd1_53ff53a7",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_64ad5d97",
         "filename": "repo/resources/wikibase.currentEntity.js",
         "patchSetId": 8
