@@ -21,7 +21,6 @@ use Title;
 use User;
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -220,12 +219,10 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::makeEmptyContent
 	 *
-	 * @throws MWException Always. EntityContent cannot be empty.
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
-		$empty = $this->makeEmptyEntity();
-		return $this->makeEntityContent( new EntityInstanceHolder( $empty ) );
+		return $this->newEntityContent( null );
 	}
 
 	/**
@@ -351,7 +348,16 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return EntityContent
 	 */
-	abstract public function makeEntityContent( EntityHolder $entityHolder );
+	public function makeEntityContent( EntityHolder $entityHolder ) {
+		return $this->newEntityContent( $entityHolder );
+	}
+
+	/**
+	 * @param EntityHolder|null $entityHolder
+	 *
+	 * @return EntityContent
+	 */
+	abstract protected function newEntityContent( EntityHolder $entityHolder = null );
 
 	/**
 	 * Parses the given ID string into an EntityId for the type of entity
