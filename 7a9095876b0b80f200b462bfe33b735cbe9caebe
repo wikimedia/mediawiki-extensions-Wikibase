@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_33bdff63",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-02T14:27:25Z",
+      "side": 1,
+      "message": "How about NewItem?",
+      "parentUuid": "0e1cb3f9_93d576eb",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 12
+      },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_b3d2faff",
         "filename": "repo/tests/phpunit/includes/AnItem.php",
         "patchSetId": 3
@@ -42,6 +66,47 @@
         "endLine": 53,
         "endChar": 1
       },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_f3b6a784",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-02T14:27:25Z",
+      "side": 1,
+      "message": "We want to make the ID mandatory. How would this work, then?",
+      "parentUuid": "0e1cb3f9_b3d2faff",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 53,
+        "endChar": 1
+      },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_b3a90f24",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-02T14:27:25Z",
+      "side": 1,
+      "message": "why clone the builder?",
       "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
