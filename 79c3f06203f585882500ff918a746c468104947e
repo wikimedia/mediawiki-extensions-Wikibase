@@ -101,6 +101,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_53ff53a7",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-02T12:48:27Z",
+      "side": 1,
+      "message": "\u003e so Promise object will be there.\n\nBut it won’t look like \"[native code]\".",
+      "parentUuid": "ce153bd1_b3610fd3",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_64ad5d97",
         "filename": "repo/resources/wikibase.currentEntity.js",
         "patchSetId": 8
