@@ -6,8 +6,10 @@ use DataUpdate;
 use IContextSource;
 use Page;
 use Title;
+use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -104,15 +106,6 @@ class ItemHandler extends EntityHandler {
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
 		$this->dataTypeLookup = $dataTypeLookup;
-	}
-
-	/**
-	 * @see EntityHandler::getContentClass
-	 *
-	 * @return string
-	 */
-	protected function getContentClass() {
-		return ItemContent::class;
 	}
 
 	/**
@@ -214,6 +207,38 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function makeEmptyEntity() {
 		return new Item();
+	}
+
+	/**
+	 * @see EntityHandler::makeEntityRedirectContent
+	 *
+	 * @param EntityRedirect $redirect
+	 *
+	 * @return ItemContent
+	 */
+	public function makeEntityRedirectContent( EntityRedirect $redirect ) {
+		$title = $this->getTitleForId( $redirect->getTargetId() );
+		return ItemContent::newFromRedirect( $redirect, $title );
+	}
+
+	/**
+	 * @see EntityHandler::supportsRedirects
+	 *
+	 * @return bool Always true.
+	 */
+	public function supportsRedirects() {
+		return true;
+	}
+
+	/**
+	 * @see EntityHandler::makeEntityContent
+	 *
+	 * @param EntityHolder $entityHolder
+	 *
+	 * @return ItemContent
+	 */
+	public function makeEntityContent( EntityHolder $entityHolder ) {
+		return new ItemContent( $entityHolder );
 	}
 
 	/**

@@ -153,13 +153,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Returns the name of the EntityContent deriving class.
-	 *
-	 * @return string
-	 */
-	abstract protected function getContentClass();
-
-	/**
 	 * Handle the fact that a given page does not contain an Entity, even though it could.
 	 * Per default, this behaves similarly to Article::showMissingArticle: it shows
 	 * a message to the user.
@@ -247,39 +240,14 @@ abstract class EntityHandler extends ContentHandler {
 	abstract public function makeEmptyEntity();
 
 	/**
-	 * Will return a new EntityContent representing the given EntityRedirect,
-	 * or null if the Content class does not support redirects (that is, if it does
-	 * not have a static newFromRedirect() function).
+	 * @param EntityRedirect $redirect Unused in this default implementation.
 	 *
-	 * @see makeRedirectContent()
-	 * @see supportsRedirects()
-	 *
-	 * @param EntityRedirect $redirect
-	 *
-	 * @return EntityContent|null
+	 * @return EntityContent|null Either a new EntityContent representing the given EntityRedirect,
+	 *  or null if the entity type does not support redirects. Always null in this default
+	 *  implementation.
 	 */
 	public function makeEntityRedirectContent( EntityRedirect $redirect ) {
-		$contentClass = $this->getContentClass();
-
-		if ( !$this->supportsRedirects() ) {
-			return null;
-		} else {
-			$title = $this->getTitleForId( $redirect->getTargetId() );
-			return $contentClass::newFromRedirect( $redirect, $title );
-		}
-	}
-
-	/**
-	 * Will return true if the Content class has a static newFromRedirect() function.
-	 *
-	 * @see makeRedirectContent()
-	 * @see makeEntityRedirectContent()
-	 *
-	 * @return bool
-	 */
-	public function supportsRedirects() {
-		$contentClass = $this->getContentClass();
-		return method_exists( $contentClass, 'newFromRedirect' );
+		return null;
 	}
 
 	/**
@@ -379,21 +347,11 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Creates a Content object for the given Entity object.
-	 *
 	 * @param EntityHolder $entityHolder
 	 *
 	 * @return EntityContent
 	 */
-	public function makeEntityContent( EntityHolder $entityHolder ) {
-		$contentClass = $this->getContentClass();
-
-		$content = new $contentClass( $entityHolder );
-
-		//TODO: make sure the entity is valid/complete!
-
-		return $content;
-	}
+	abstract public function makeEntityContent( EntityHolder $entityHolder );
 
 	/**
 	 * Parses the given ID string into an EntityId for the type of entity
