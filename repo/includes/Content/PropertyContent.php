@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
@@ -57,17 +58,21 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * Gets the property that makes up this property content.
-	 *
+	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return Property
 	 */
 	public function getProperty() {
+		if ( !$this->propertyHolder ) {
+			throw new LogicException( 'This content object is empty' );
+		}
+
 		return $this->propertyHolder->getEntity( Property::class );
 	}
 
 	/**
 	 * @see EntityContent::getEntity
 	 *
+	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return Property
 	 */
 	public function getEntity() {

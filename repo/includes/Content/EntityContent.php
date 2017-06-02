@@ -96,6 +96,7 @@ abstract class EntityContent extends AbstractContent {
 	 * for greater clarity and type hinting.
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
+	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return EntityDocument
 	 */
 	abstract public function getEntity();
@@ -125,8 +126,6 @@ abstract class EntityContent extends AbstractContent {
 			}
 		}
 
-		// @todo: Force an ID to be present; Entity objects without an ID make sense,
-		// EntityContent objects with no entity ID don't.
 		throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
 	}
 
