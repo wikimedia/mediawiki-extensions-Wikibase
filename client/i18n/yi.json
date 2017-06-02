@@ -60,5 +60,6 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}־אביעקטן באניצט אין דעם בלאט",
 	"wikibase-property-render-error": "האט נישט געקענט רענדערן אייגנשאפט  $1: $2",
 	"wikibase-otherprojects": "אין אנדערע פראיעקטן",
-	"wikibase-otherprojects-beta-message": "אנדערע פראיעקטן זייטפאס"
+	"wikibase-otherprojects-beta-message": "אנדערע פראיעקטן זייטפאס",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> און נאך {{PLURAL:$4|איין בלאַט|$4 בלעטער|100=99+ בלעטער}} זענען {{GENDER:$2|פֿאַרבונדן געווארן}} מיט {{WBREPONAME}}-אביעקטן."
 }

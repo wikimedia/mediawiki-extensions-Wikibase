@@ -74,6 +74,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "Ediciones de {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Ediciones con orixe en {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Esti filtru fai conflictu con unu o más filtros de Calidá de la Contribución o d'Intención d'usuariu. Les predicciones de Calidá o d'Intención d'usuariu nun tán disponibles pa les ediciones de {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "El filtru \"Ediciones de {{WBREPONAME}}\" entra en conflictu con un filtru o más de Calidá de la contribución o d'Intención d'usuariu. Les predicciones de Calidá y d'Intención nun tán disponibles pa les ediciones {{WBREPONAME}}. Los filtros en conflictu tán marcaos na zona de Filtros activos, más arriba.",
 	"wikibase-replicationnote": "Tenga en cuenta que puen pasar dellos minutos fasta que los cambeos se vean en toles wikis",
 	"wikibase-watchlist-show-changes-pref": "Amosar les ediciones de {{WBREPONAME}} na so llista de vixilancia",
 	"wikibase-error-deserialize-error": "Falló la deserialización de los datos",

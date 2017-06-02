@@ -5,7 +5,8 @@
 			"Aurora",
 			"Aviator",
 			"SNN95",
-			"Pizza1016"
+			"Pizza1016",
+			"Muhdnurhidayat"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
@@ -50,7 +51,7 @@
 	"wikibase-replicationnote": "Sila ambil perhatian bahawa masa beberapa minit mungkin perlu diambil sehingga semua perubahan kelihatan di semua wiki",
 	"wikibase-watchlist-show-changes-pref": "Paparkan suntingan Wikidata dalam senarai pantau anda",
 	"wikibase-error-serialize-error": "Data gagal disirikan",
-	"wikibase-error-invalid-entity-id": "ID yang diberikan itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.",
+	"wikibase-error-invalid-entity-id": "ID \"$2\" itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.",
 	"unconnectedpages": "Laman yang tidak bersambung dengan perkara",
 	"wikibase-unconnectedpages-format-row": "($1 pautan antara bahasa pada halaman ini)",
 	"wikibase-unconnectedpages-submit": "Pergi",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Edgars2007",
 			"Papuass",
-			"Kikos"
+			"Kikos",
+			"Silraks"
 		]
 	},
 	"tooltip-t-wikibase": "Saite uz pievienoto datu krātuves vienumu",
@@ -35,5 +36,6 @@
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
-	"wikibase-otherprojects": "Citos projektos"
+	"wikibase-otherprojects": "Citos projektos",
+	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem."
 }
