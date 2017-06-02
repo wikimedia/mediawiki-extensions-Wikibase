@@ -104,7 +104,7 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns a holder for the entity contained in this EntityContent object.
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	abstract protected function getEntityHolder();
 
@@ -118,7 +118,8 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $this->getEntityRedirect()->getEntityId();
 		} else {
-			$id = $this->getEntityHolder()->getEntityId();
+			$holder = $this->getEntityHolder();
+			$id = $holder ? $holder->getEntityId() : null;
 			if ( !$id ) {
 				// @todo: Force an ID to be present; Entity objects without an ID make sense,
 				// EntityContent objects with no entity ID don't.
@@ -503,8 +504,8 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
-		$thisId = $this->getEntityHolder()->getEntityId();
-		$thatId = $that->getEntityHolder()->getEntityId();
+		$thisId = $this->getEntityHolder() ? $this->getEntityHolder()->getEntityId() : null;
+		$thatId = $that->getEntityHolder() ? $that->getEntityHolder()->getEntityId() : null;
 
 		if ( $thisId !== null && $thatId !== null
 			&& !$thisId->equals( $thatId )
@@ -640,6 +641,8 @@ abstract class EntityContent extends AbstractContent {
 		$handler = $this->getContentHandler();
 		if ( $this->isRedirect() ) {
 			return $handler->makeEntityRedirectContent( $this->getEntityRedirect() );
+		} elseif ( !$this->getEntityHolder() ) {
+			return $handler->makeEntityContent();
 		} else {
 			return $handler->makeEntityContent( new DeferredCopyEntityHolder( $this->getEntityHolder() ) );
 		}

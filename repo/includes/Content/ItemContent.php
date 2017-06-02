@@ -55,9 +55,8 @@ class ItemContent extends EntityContent {
 	) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
-		if ( is_null( $itemHolder ) === is_null( $entityRedirect ) ) {
-			throw new InvalidArgumentException(
-				'Either $item or $entityRedirect and $redirectTitle must be provided.' );
+		if ( $itemHolder !== null && $entityRedirect !== null ) {
+			throw new InvalidArgumentException( 'Can not be an item and a redirect the same time' );
 		}
 
 		if ( $itemHolder !== null && $itemHolder->getEntityType() !== Item::ENTITY_TYPE ) {
@@ -159,7 +158,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntityHolder
 	 *
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	protected function getEntityHolder() {
 		return $this->itemHolder;
