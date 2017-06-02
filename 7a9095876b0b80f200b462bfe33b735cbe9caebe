@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_ee41e00f",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T15:38:21Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "ce153bd1_33bdff63",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 12
+      },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_b3d2faff",
         "filename": "repo/tests/phpunit/includes/AnItem.php",
         "patchSetId": 3
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "ce153bd1_6e4e303e",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T15:38:21Z",
+      "side": 1,
+      "message": "Look how I did it there: https://gerrit.wikimedia.org/r/#/c/355232/\n\nThe idea is that if you don\u0027t care about concrete ID in test (or any other value) builder will provide random one.\nI would probably oppose random values in tests, but if we will always put \u0027Q1\u0027 as default ID, then it will be pretty easy for the person who writes test to avoid specifying the ID and check it later for equality to \u0027Q1\u0027 and some time after reader will be wondering: Where does this \u0027Q1\u0027 come from?",
+      "parentUuid": "ce153bd1_f3b6a784",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 53,
+        "endChar": 1
+      },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_b3a90f24",
         "filename": "repo/tests/phpunit/includes/AnItem.php",
         "patchSetId": 3
@@ -107,6 +155,24 @@
       "writtenOn": "2017-06-02T14:27:25Z",
       "side": 1,
       "message": "why clone the builder?",
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_ae6be881",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-02T15:38:21Z",
+      "side": 1,
+      "message": "Imagine you need two complex items that differ in one detail to test differ, for example.\nIf builder is mutable you will have to repeat the chain for every article.\nBut if it is immutable you can do this:\n\n```\n$default \u003d ItemBuilder::create()-\u003ewithId(\u0027Q1\u0027);\n\n$item1 \u003d $default-\u003ewithLabel(\u0027en\u0027, \u0027label1\u0027)-\u003ebuild();\n$item2 \u003d $default-\u003ewithLabel(\u0027en\u0027, \u0027label2\u0027)-\u003ebuild();\n\n```\n\nand also passing it around without fear that some other piece of code might break your set up.",
+      "parentUuid": "ce153bd1_b3a90f24",
       "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
