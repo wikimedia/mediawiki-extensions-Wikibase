@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests;
 
 use MediaWikiTestCase;
 use Title;
-use Wikibase\ChangeNotificationJob;
+use Wikibase\Client\ChangeNotificationJob;
 
 /**
- * @covers Wikibase\ChangeNotificationJob
+ * @covers Wikibase\Client\ChangeNotificationJob
  *
  * @group Wikibase
  * @group WikibaseChange

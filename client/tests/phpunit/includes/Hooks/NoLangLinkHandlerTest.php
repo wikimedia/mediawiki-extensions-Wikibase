@@ -6,11 +6,11 @@ use Parser;
 use ParserOptions;
 use ParserOutput;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\NamespaceChecker;
-use Wikibase\NoLangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Hooks\NoLangLinkHandler;
 
 /**
- * @covers Wikibase\NoLangLinkHandler
+ * @covers Wikibase\Client\Hooks\NoLangLinkHandler
  *
  * @group WikibaseClient
  * @group Wikibase

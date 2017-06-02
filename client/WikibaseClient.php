@@ -176,7 +176,7 @@ call_user_func( function() {
 
 	// job classes
 	$wgJobClasses['wikibase-addUsagesForPage'] = Wikibase\Client\Store\AddUsagesForPageJob::class;
-	$wgJobClasses['ChangeNotification'] = Wikibase\ChangeNotificationJob::class;
+	$wgJobClasses['ChangeNotification'] = Wikibase\Client\ChangeNotificationJob::class;
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(

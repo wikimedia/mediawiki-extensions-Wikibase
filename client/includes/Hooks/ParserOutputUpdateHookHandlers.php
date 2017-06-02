@@ -8,8 +8,8 @@ use StubUserLang;
 use Title;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\LangLinkHandler;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\LangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @license GPL-2.0+

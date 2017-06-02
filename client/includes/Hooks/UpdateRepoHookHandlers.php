@@ -12,7 +12,7 @@ use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 use WikiPage;
 
 /**

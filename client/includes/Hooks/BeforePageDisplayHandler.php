@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use OutputPage;
 use Title;
 use User;
-use Wikibase\NamespaceChecker;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @license GPL-2.0+

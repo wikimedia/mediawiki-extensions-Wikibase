@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
-use Wikibase\DirectSqlStore;
+use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\RepositoryDefinitions;
@@ -29,7 +29,7 @@ use Wikibase\TermIndex;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\DirectSqlStore
+ * @covers Wikibase\Client\Store\Sql\DirectSqlStore
  *
  * @group Database
  * @group Wikibase
