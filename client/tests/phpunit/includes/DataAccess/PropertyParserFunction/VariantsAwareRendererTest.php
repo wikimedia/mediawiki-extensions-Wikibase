@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -15,31 +15,23 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider renderProvider
 	 */
-	public function testRender( $expected, $itemId, $variants, $propertyLabel ) {
-		$languageRenderer = $this->getLanguageAwareRenderer();
-
-		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$rendererFactory->expects( $this->any() )
-			->method( 'newLanguageAwareRenderer' )
-			->will( $this->returnValue( $languageRenderer ) );
-
-		$rendererFactory->expects( $this->any() )
-			->method( 'getLanguageAwareRendererFromCode' )
-			->will( $this->returnValue( $languageRenderer ) );
-
-		$languageRenderers = array();
+	public function testRender(
+		EntityId $itemId,
+		$propertyLabel,
+		array $variants,
+		$expected
+	) {
+		$languageRenderers = [];
 
 		foreach ( $variants as $variant ) {
-			$languageRenderers[$variant] = $languageRenderer;
+			$languageRenderers[$variant] = $this->getLanguageAwareRenderer( $variant );
 		}
 
 		$variantsRenderer = new VariantsAwareRenderer(
@@ -49,41 +41,67 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $variantsRenderer->render( $itemId, $propertyLabel );
 
-		$this->assertEquals( $expected, $result );
+		$this->assertSame( $expected, $result );
 	}
 
 	public function renderProvider() {
 		$itemId = new ItemId( 'Q3' );
 
-		return array(
-			array(
-				'-{zh:mooooo;zh-hans:mooooo;zh-hant:mooooo;zh-cn:mooooo;zh-hk:mooooo;}-',
+		return [
+			'multiple variants' => [
 				$itemId,
-				array( 'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-hk' ),
-				'cat'
-			),
+				'cat',
+				[ 'zh', 'zh-hans' ],
+				'-{zh:cat in zh;zh-hans:cat in zh-hans;}-'
+			],
+
+			// No need for the problematic -{…}- variant syntax if there is only one to pick from.
+			'single variant' => [
+				$itemId,
+				'cat',
+				[ 'zh' ],
+				'cat in zh'
+			],
+
 			// Don't create "-{}-" for empty input,
 			// to keep the ability to check a missing property with {{#if: }}.
-			array(
-				'',
+			'zero variants' => [
 				$itemId,
-				array(),
-				'cat'
-			)
-		);
+				'cat',
+				[],
+				''
+			],
+
+			// Skip the -{…}- language variant syntax if all possible values are the same anyway.
+			'identical values' => [
+				$itemId,
+				'url',
+				[ 'zh', 'zh-hans' ],
+				'http://wikipedia.de'
+			],
+		];
 	}
 
 	/**
+	 * @param string $languageCode
+	 *
 	 * @return LanguageAwareRenderer
 	 */
-	private function getLanguageAwareRenderer() {
+	private function getLanguageAwareRenderer( $languageCode ) {
 		$languageRenderer = $this->getMockBuilder( LanguageAwareRenderer::class )
-		->disableOriginalConstructor()
-		->getMock();
+			->disableOriginalConstructor()
+			->getMock();
 
-		$languageRenderer->expects( $this->any() )
-			->method( 'render' )
-			->will( $this->returnValue( 'mooooo' ) );
+		$languageRenderer->method( 'render' )
+			->will( $this->returnCallback(
+				function ( EntityId $entityId, $propertyLabelOrId ) use ( $languageCode ) {
+					if ( $propertyLabelOrId === 'url' ) {
+						return 'http://wikipedia.de';
+					}
+
+					return "$propertyLabelOrId in $languageCode";
+				}
+			) );
 
 		return $languageRenderer;
 	}
