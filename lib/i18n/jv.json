@@ -7,9 +7,9 @@
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Wiji dibusak",
 	"wikibase-deletedentity-property": "Properti dibusak",
-	"wikibase-error-unexpected": "Cacad: $1.",
-	"wikibase-error-save-generic": "Ora bisa nyimpen amarga ana cacad.",
-	"wikibase-error-remove-generic": "Ora bisa mbusak amarga ana cacad.",
-	"wikibase-error-save-connection": "Ora bisa nyimpen amarga ana cacad konèksi. Tulung tiliki konèksi Internètmu.",
+	"wikibase-error-unexpected": "Masalah : $1.",
+	"wikibase-error-save-generic": "Ora bisa nyimpen amarga ana masalah.",
+	"wikibase-error-remove-generic": "Ora bisa mbusak amarga ana masalah.",
+	"wikibase-error-save-connection": "Ora bisa nyimpen amarga ana masalah konèksi. Mangga priksanen konèksi Internèté panjenengan.",
 	"wikibase-sitelinks-wikipedia": "Wikipédia"
 }

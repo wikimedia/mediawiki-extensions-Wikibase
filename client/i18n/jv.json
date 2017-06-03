@@ -48,7 +48,7 @@
 	"wikibase-linkitem-addlinks": "Tambah pranala",
 	"wikibase-linkitem-alreadylinked": "Kaca sing péngin kokgayutaké wis kapasang ing [$1 wiji] ing répositori data séntral sing nggayut $2 ing situs iki. Wiji mung bisa kapasang ing sakaca saben situsé. Mangga piliha kaca séjé sing arep kokgayutaké.",
 	"wikibase-linkitem-close": "Tutup dhialog lan balèni mot kaca",
-	"wikibase-linkitem-failure": "Cacad sing ora kawruhan dumadi nalika arep nggayutaké kaca.",
+	"wikibase-linkitem-failure": "Ana masalah sing ora dingertèni nalika arep nggayutaké kaca.",
 	"wikibase-linkitem-title": "Gayutaké karo kaca",
 	"wikibase-linkitem-linkpage": "Gayutaké karo kaca",
 	"wikibase-linkitem-selectlink": "Mangga piliha situs lan kaca sing arep kokgayutaké karo kaca iki.",
