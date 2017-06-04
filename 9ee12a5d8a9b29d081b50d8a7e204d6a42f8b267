@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae1ac700_a0b1c08f",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3210
+      },
+      "writtenOn": "2017-06-04T19:43:36Z",
+      "side": 1,
+      "message": "I think it would be nice to put this function next to mw.wikibase.getEntityIdForCurrentPage",
+      "revId": "9ee12a5d8a9b29d081b50d8a7e204d6a42f8b267",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
