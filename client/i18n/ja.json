@@ -9,7 +9,8 @@
 			"2nd-player",
 			"Ridmevo",
 			"Marine-Blue",
-			"にょきにょき"
+			"にょきにょき",
+			"Mirinano"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 拡張機能のクライアント",
@@ -77,5 +78,7 @@
 	"wikibase-otherprojects": "他のプロジェクト",
 	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",
 	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}}からの{{PLURAL:$1|接続}}",
+	"echo-pref-tooltip-wikibase-action": "誰かが{{GENDER:|私が作成した}}ページを{{WBREPONAME}}項目に接続したときに通知する。",
 	"notification-link-text-view-item": "項目を{{GENDER:$1|閲覧}}"
 }
