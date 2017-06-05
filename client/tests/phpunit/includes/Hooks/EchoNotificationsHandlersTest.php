@@ -8,6 +8,7 @@ use Title;
 use User;
 use Wikibase\ChangeRow;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 use Wikibase\SettingsArray;
@@ -26,6 +27,11 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 	 */
 	private $repoLinker;
 
+	/**
+	 * @var NamespaceChecker
+	 */
+	private $namespaceChecker;
+
 	protected function setUp() {
 		parent::setUp();
 		// if Echo is not loaded, skip this test
@@ -40,6 +46,14 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 			->expects( $this->any() )
 			->method( 'getEntityUrl' )
 			->will( $this->returnValue( 'foo' ) );
+
+		$this->namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$this->namespaceChecker
+			->expects( $this->any() )
+			->method( 'isWikibaseEnabled' )
+			->will( $this->returnValue( true ) );
 	}
 
 	/**
@@ -50,6 +64,7 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 	private function getHandlers( SettingsArray $settings ) {
 		return new EchoNotificationsHandlers(
 			$this->repoLinker,
+			$this->namespaceChecker,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			$settings->getSetting( 'echoIcon' ),
@@ -189,6 +204,7 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker,
+			$this->namespaceChecker,
 			'enwiki',
 			$register,
 			$icon,
@@ -251,6 +267,7 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 	public function testLocalUserCreated( $enabled, $times, $auto ) {
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker,
+			$this->namespaceChecker,
 			'enwiki',
 			$enabled,
 			'',

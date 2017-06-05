@@ -9,6 +9,7 @@ use Message;
 use Title;
 use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
 use Wikibase\Client\RepoLinker;
 
@@ -20,25 +21,12 @@ use Wikibase\Client\RepoLinker;
  */
 class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 
-	/**
-	 * @var RepoLinker
-	 */
-	private $repoLinker;
-
 	protected function setUp() {
 		parent::setUp();
 		// if Echo is not loaded, skip this test
 		if ( !class_exists( EchoEventPresentationModel::class ) ) {
 			$this->markTestSkipped( "Echo not loaded" );
 		}
-
-		$this->repoLinker = $this->getMockBuilder( RepoLinker::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$this->repoLinker
-			->expects( $this->any() )
-			->method( 'getEntityUrl' )
-			->will( $this->returnValue( 'foo' ) );
 	}
 
 	/**
@@ -73,11 +61,34 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 		return $event;
 	}
 
+	/**
+	 * @return RepoLinker
+	 */
+	private function getRepoLinker() {
+		$repoLinker = $this->getMockBuilder( RepoLinker::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$repoLinker
+			->expects( $this->any() )
+			->method( 'getEntityUrl' )
+			->will( $this->returnValue( 'foo' ) );
+
+		return $repoLinker;
+	}
+
 	public function testPresentationModel() {
 		global $wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons;
 
+		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
+			->disableOriginalConstructor()
+			->getMock();
 		$handlers = new EchoNotificationsHandlers(
-			$this->repoLinker, 'enwiki', true, false, 'repoSiteName'
+			$this->getRepoLinker(),
+			$namespaceChecker,
+			'enwiki',
+			true,
+			false,
+			'repoSiteName'
 		);
 		$handlers->doBeforeCreateEchoEvent(
 			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
