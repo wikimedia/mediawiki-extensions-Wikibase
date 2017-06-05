@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"NoiX180"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "kosong",
+	"valueview-expert-globecoordinateinput-customprecision": "mirunggan ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Grégorian",
+	"valueview-expert-timevalue-calendar-julian": "Julian",
+	"valueview-expert-timeinput-calendar": "Pananggalan:",
+	"valueview-expertextender-calendarhint-gregorian": "(Pananggalan Grégorian)",
+	"valueview-expertextender-calendarhint-julian": "(Pananggalan Julian)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; salin nyang Grégorian",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; salin nyang Julian",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Basa (wajib):",
+	"valueview-expertextender-unitsuggester-label": "Ékan (manasuka):",
+	"valueview-preview-label": "bakal dipajang minangka:",
+	"valueview-preview-novalue": "aji sing trep ora ana sing dingertèni",
+	"valueview-listrotator-manually": "setèl manual"
+}
