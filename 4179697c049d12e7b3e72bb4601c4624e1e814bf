@@ -65,6 +65,24 @@
     },
     {
       "key": {
+        "uuid": "ae1ac700_0049876a",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-05T19:39:24Z",
+      "side": 1,
+      "message": "It is covered. Actually, one of old tests failed because this lines weren\u0027t there and I added to be sure it behaves correctly.",
+      "parentUuid": "ce153bd1_c76e48c4",
+      "revId": "4179697c049d12e7b3e72bb4601c4624e1e814bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_472d588a",
         "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
         "patchSetId": 5
@@ -76,6 +94,30 @@
       "writtenOn": "2017-06-01T14:22:08Z",
       "side": 1,
       "message": "What if there is a label, but no class? The label will be ignored then.",
+      "range": {
+        "startLine": 70,
+        "startChar": 30,
+        "endLine": 70,
+        "endChar": 49
+      },
+      "revId": "4179697c049d12e7b3e72bb4601c4624e1e814bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae1ac700_204e0b73",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-05T19:39:24Z",
+      "side": 1,
+      "message": "We shouldn\u0027t be too sensitive when there is a misconfiguration IMO.",
+      "parentUuid": "ce153bd1_472d588a",
       "range": {
         "startLine": 70,
         "startChar": 30,
@@ -111,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "ae1ac700_803d97ba",
+        "filename": "client/tests/phpunit/includes/Hooks/OtherProjectsSidebarGeneratorFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-05T19:39:24Z",
+      "side": 1,
+      "message": "We are dropping this whole class Idb77c015ae4839a6ded44f5ede91bf6a3e6a7feb, doesn\u0027t really matter.",
+      "parentUuid": "ce153bd1_673dfcb7",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "4179697c049d12e7b3e72bb4601c4624e1e814bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_4744784a",
         "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
         "patchSetId": 5
@@ -122,6 +188,30 @@
       "writtenOn": "2017-06-01T14:22:08Z",
       "side": 1,
       "message": "As before, isn\u0027t it better to mock this entire thing?",
+      "range": {
+        "startLine": 202,
+        "startChar": 33,
+        "endLine": 202,
+        "endChar": 56
+      },
+      "revId": "4179697c049d12e7b3e72bb4601c4624e1e814bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae1ac700_60bac320",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-05T19:39:24Z",
+      "side": 1,
+      "message": "Nope, I just tested and it causes the whole thing to fail as it does replacement on reference in applyBadgeToLink and if mocked, it will make it null (that\u0027s my guess)",
+      "parentUuid": "ce153bd1_4744784a",
       "range": {
         "startLine": 202,
         "startChar": 33,
