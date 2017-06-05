@@ -89,7 +89,7 @@
 	"wikibase-watchlist-show-changes-pref": "Mostrar las ediciones de {{WBREPONAME}} en tu lista de seguimiento",
 	"wikibase-error-deserialize-error": "Error al deserializar datos.",
 	"wikibase-error-serialize-error": "Error al serializar datos.",
-	"wikibase-error-invalid-entity-id": "El ID ingresado es desconocido para el sistema. Utiliza un identificador de entidad válido.",
+	"wikibase-error-invalid-entity-id": "El sistema no reconoce el identificador «$2». Utiliza un identificador de entidad válido.",
 	"wikibase-error-exceeded-entity-access-limit": "Se accedieron a demasiadas entidades de {{WBREPONAME}}.",
 	"unconnectedpages": "Páginas no conectadas a elementos",
 	"unconnectedpages-summary": "Esta página muestra páginas sin ningún elemento de datos conectado (en los espacios de nombres que admiten elementos conectados). La lista está ordenada por identificador de página de forma descendente, por lo que las páginas más nuevas se muestran primero.",
