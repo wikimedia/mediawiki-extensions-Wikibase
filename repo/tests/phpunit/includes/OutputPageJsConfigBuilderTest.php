@@ -19,14 +19,11 @@ use Wikibase\OutputPageJsConfigBuilder;
  */
 class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 
-	/**
-	 * @dataProvider buildProvider
-	 */
-	public function testBuild( $isBlocked, $canEdit ) {
+	public function testBuild() {
 		$configBuilder = new OutputPageJsConfigBuilder();
 
 		$configVars = $configBuilder->build(
-			$this->getOutputPage( $isBlocked, $canEdit ),
+			$this->getOutputPage(),
 			'https://creativecommons.org',
 			'CC-0',
 			array(
@@ -36,8 +33,6 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 		);
 
 		$expected = array(
-			'wbUserIsBlocked' => $isBlocked,
-			'wbUserCanEdit' => $canEdit,
 			'wbCopyright' => array(
 				'version' => 'wikibase-1',
 				'messageHtml' =>
@@ -54,49 +49,24 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $configVars );
 	}
 
-	public function buildProvider() {
-		return array(
-			array( true, true ),
-			array( true, false ),
-			array( false, false ),
-			array( false, true )
-		);
-	}
-
 	/**
-	 * @param bool $isBlocked
-	 *
 	 * @return User
 	 */
-	public function getUser( $isBlocked ) {
+	public function getUser() {
 		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
-
-		$user->expects( $this->any() )
-			->method( 'isBlockedFrom' )
-			->will( $this->returnCallback( function() use ( $isBlocked ) {
-				return $isBlocked;
-			} ) );
 
 		return $user;
 	}
 
 	/**
-	 * @param bool $canEdit
-	 *
 	 * @return Title
 	 */
-	private function getTitle( $canEdit ) {
+	private function getTitle() {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
-
-		$title->expects( $this->any() )
-			->method( 'userCan' )
-			->will( $this->returnCallback( function() use ( $canEdit ) {
-				return $canEdit;
-			} ) );
 
 		return $title;
 	}
@@ -107,12 +77,12 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 	 *
 	 * @return OutputPage
 	 */
-	private function getOutputPage( $isBlocked, $canEdit ) {
+	private function getOutputPage() {
 		$out = $this->getMockBuilder( OutputPage::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$user = $this->getUser( $isBlocked );
+		$user = $this->getUser();
 
 		$out->expects( $this->any() )
 			->method( 'getUser' )
@@ -126,7 +96,7 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 				return Language::factory( 'qqx' );
 			} ) );
 
-		$title = $this->getTitle( $canEdit );
+		$title = $this->getTitle();
 
 		$out->expects( $this->any() )
 			->method( 'getTitle' )

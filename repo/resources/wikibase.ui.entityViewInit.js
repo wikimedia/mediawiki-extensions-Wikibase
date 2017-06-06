@@ -12,8 +12,7 @@
 	 */
 	function isEditable() {
 		return mw.config.get( 'wbIsEditView' )
-			&& mw.config.get( 'wbUserCanEdit' )
-			&& !mw.config.get( 'wbUserIsBlocked' );
+			&& mw.config.get( 'wgRelevantPageIsProbablyEditable' );
 	}
 
 	/**

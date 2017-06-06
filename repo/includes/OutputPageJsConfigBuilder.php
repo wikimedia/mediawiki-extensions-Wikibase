@@ -41,37 +41,9 @@ class OutputPageJsConfigBuilder {
 
 		Assert::parameter( $title !== null, '$out', 'Passed OutputPage needs to have a Title set' );
 
-		$userConfigVars = $this->getUserConfigVars( $title, $user );
-
-		$copyrightConfig = $this->getCopyrightConfig( $rightsUrl, $rightsText, $lang );
-
-		$configVars = array_merge( $userConfigVars, $copyrightConfig );
+		$configVars = $this->getCopyrightConfig( $rightsUrl, $rightsText, $lang );
 
 		$configVars['wbBadgeItems'] = $badgeItems;
-
-		return $configVars;
-	}
-
-	/**
-	 * @param Title $title
-	 * @param User $user
-	 *
-	 * @return array
-	 */
-	private function getUserConfigVars( Title $title, User $user ) {
-		$configVars = array();
-
-		/**
-		 * This is used in wikibase.ui.entityViewInit.js to double check if a user can edit, and if
-		 * so, initializes relevant javascript.
-		 *
-		 * @todo Remove these variables if the javascript no longer really needs them. This check
-		 * involves database lookup, which is not nice.
-		 */
-		$configVars['wbUserIsBlocked'] = $user->isBlockedFrom( $title, true );
-
-		// tell JS whether the user can edit
-		$configVars['wbUserCanEdit'] = $title->userCan( 'edit', $user, false );
 
 		return $configVars;
 	}
