@@ -1861,6 +1861,9 @@ class WikibaseRepo {
 
 						// T160531
 						'umu',
+
+						// T161983
+						'lag',
 					) )
 				),
 
