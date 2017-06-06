@@ -329,12 +329,6 @@ class WikibaseRepo {
 
 		$dataRetrievalServices = null;
 
-		// If client functionality is enabled, use it to enable federation.
-		if ( WikibaseSettings::isClientEnabled() ) {
-			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getEntityDataRetrievalServiceFactory();
-			$repositoryDefinitions = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
-		}
-
 		return new self(
 			$settings,
 			new DataTypeDefinitions(
