@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "ae1ac700_391642f7",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-06T10:38:42Z",
+      "side": 1,
+      "message": "It would be much nicer to get a descriptive error in this case though (if it is possible). \nOtherwise developer might be stuck for quiet some time debugging the problem.",
+      "parentUuid": "ae1ac700_204e0b73",
+      "range": {
+        "startLine": 70,
+        "startChar": 30,
+        "endLine": 70,
+        "endChar": 49
+      },
+      "revId": "4179697c049d12e7b3e72bb4601c4624e1e814bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_673dfcb7",
         "filename": "client/tests/phpunit/includes/Hooks/OtherProjectsSidebarGeneratorFactoryTest.php",
         "patchSetId": 5
