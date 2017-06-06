@@ -9,6 +9,8 @@ use Wikibase\DataModel\Entity\EntityId;
  * Handler of the {{#property}} parser function.
  *
  * @license GPL-2.0+
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class VariantsAwareRenderer implements StatementGroupRenderer {
 
@@ -35,6 +37,7 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string
 	 */
 	public function render( EntityId $entityId, $propertyLabelOrId ) {
@@ -47,10 +50,11 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string[] key by variant codes
 	 */
 	private function buildRenderedVariantsArray( EntityId $entityId, $propertyLabelOrId ) {
-		$renderedVariantsArray = array();
+		$renderedVariantsArray = [];
 
 		foreach ( $this->variants as $variantCode ) {
 			$variantText = $this->getVariantText( $variantCode, $entityId, $propertyLabelOrId );
@@ -71,19 +75,24 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 *
 	 * @param string[] $textArray
 	 *
-	 * @return string
+	 * @return string Wikitext
 	 */
 	private function processRenderedArray( array $textArray ) {
-		// We got arrays, so they must have already checked that variants are being used.
+		if ( $textArray === [] ) {
+			return '';
+		}
+
+		if ( count( array_unique( $textArray ) ) === 1 ) {
+			return reset( $textArray );
+		}
+
 		$text = '';
+
 		foreach ( $textArray as $variantCode => $variantText ) {
 			$text .= "$variantCode:$variantText;";
 		}
-		if ( $text !== '' ) {
-			$text = '-{' . $text . '}-';
-		}
 
-		return $text;
+		return '-{' . $text . '}-';
 	}
 
 	/**
@@ -91,7 +100,8 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
 	 *
-	 * @return string
+	 * @throws OutOfBoundsException
+	 * @return string Wikitext
 	 */
 	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabelOrId ) {
 		$renderer = $this->getLanguageAwareRendererFromCode( $variantCode );
