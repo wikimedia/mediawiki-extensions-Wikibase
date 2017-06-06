@@ -16,6 +16,24 @@
       "revId": "05bdac756b1cb8ca110217ac5198ccfe85d99aa9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae1ac700_0528b131",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/VariantsAwareRendererTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-06T19:25:36Z",
+      "side": 1,
+      "message": "I should have named this \"official website\". This is needed to be able to test both cases: when all formatters for all language variants return the same string (in this case: a URL), or when each output is different (see the other \"return\" below).",
+      "parentUuid": "ae1ac700_6a213af6",
+      "revId": "05bdac756b1cb8ca110217ac5198ccfe85d99aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
