@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_559f5e55",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-07T10:41:57Z",
+      "side": 1,
+      "message": "this description is no longer accurate",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 88
+      },
+      "revId": "2b1a70b430a36f3c639f3a891429459977f98a23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
