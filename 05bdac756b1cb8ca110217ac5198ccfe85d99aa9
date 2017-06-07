@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e81134c_f2db0853",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsAwareRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-07T03:57:33Z",
+      "side": 1,
+      "message": "don\u0027t think I created this code (except maybe this was part of refactoring / splitting up code)",
+      "revId": "05bdac756b1cb8ca110217ac5198ccfe85d99aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae1ac700_6a213af6",
         "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/VariantsAwareRendererTest.php",
         "patchSetId": 1
