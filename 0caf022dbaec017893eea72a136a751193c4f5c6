@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_757dc216",
+        "filename": "client/tests/phpunit/includes/Hooks/OtherProjectsSidebarGeneratorTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-07T09:40:32Z",
+      "side": 1,
+      "message": "I had hard time figuring out how do those tests actually verify that the badge is added to the sidebar. Finally I realized that, if I am not mistaken, it is not really checked apart from verifying methods are called on SiderbarLinkPageDisplay with \"correct\" arguments.\n\nThis might be enough to say the badge case is covered by tests. I was not really convinced and while exploring what is actually going on in those tests, I ended up change the test class slightly as seen in I4cf39921eb73bda5c54a253b22998ae79ff6554b\n\nNote: I am not saying I4cf39921eb73bda5c54a253b22998ae79ff6554b is the best way to do it. I also don\u0027t really like those tests, and the fact that the enwiki sitelink has a badge is a bit hidden there. Test class could clearly be improved. I4cf39921eb73bda5c54a253b22998ae79ff6554b also makes OtherProjectsSidebarGeneratorTest kind of depend on the internals of SidebarLinkBadgeDisplay.\n\nSo I4cf39921eb73bda5c54a253b22998ae79ff6554b is more a demonstration of the possible direction this patch can be changed.\n\nWhat I would appreciate is at least getting a comment on the following:\n1. Do you think those tests as of PS6 assert badge is added to a sitelink, and will also make sure it is done when some related code is changed in the future (ie. they will start to fail when some code is broken?)\n2. If no, what would be a good way to ensure that?",
+      "revId": "0caf022dbaec017893eea72a136a751193c4f5c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
