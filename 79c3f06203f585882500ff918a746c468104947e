@@ -193,6 +193,30 @@
       "revId": "79c3f06203f585882500ff918a746c468104947e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_f52c5247",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-06-07T09:08:06Z",
+      "side": 1,
+      "message": "Could we create a hook?",
+      "parentUuid": "ce153bd1_13d47b4a",
+      "range": {
+        "startLine": 76,
+        "startChar": 37,
+        "endLine": 76,
+        "endChar": 41
+      },
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
