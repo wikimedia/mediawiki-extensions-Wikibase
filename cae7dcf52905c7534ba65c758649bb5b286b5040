@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_15eb160b",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-07T08:27:47Z",
+      "side": 1,
+      "message": "it is not really an existing class, right?",
+      "range": {
+        "startLine": 565,
+        "startChar": 14,
+        "endLine": 565,
+        "endChar": 39
+      },
+      "revId": "cae7dcf52905c7534ba65c758649bb5b286b5040",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
