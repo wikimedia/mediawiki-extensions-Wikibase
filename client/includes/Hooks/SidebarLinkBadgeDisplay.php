@@ -7,7 +7,6 @@ use Sanitizer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
-use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Basic display logic to output badges in the sidebar
@@ -53,7 +52,7 @@ class SidebarLinkBadgeDisplay {
 	 * This is generally called in the context of generating skin output.
 	 *
 	 * @param string[] &$sidebarLink
-	 * @param string[] $badgeInfo An associative array with the keys 'class' and 'itemtitle' with assigned
+	 * @param string[] $badgeInfo An associative array with the keys 'class' and 'label' with assigned
 	 * string values. These fields are the one outputted by the getBadgeInfo() function.
 	 */
 	public function applyBadgeToLink( array &$sidebarLink, array $badgeInfo ) {
@@ -85,9 +84,9 @@ class SidebarLinkBadgeDisplay {
 	 *
 	 * @param ItemId[] $badgeIds
 	 *
-	 * @return string[] An associative array with the keys 'class' and 'itemtitle' with assigned
+	 * @return string[] An associative array with the keys 'class' and 'label' with assigned
 	 * string values. These fields correspond to the fields in the description array for language
-	 * links used by the SkinTemplateGetLanguageLink hook and expected by the applyBadges()
+	 * links used by the SkinTemplateGetLanguageLink hook and expected by the applyBadgeToLink()
 	 * function.
 	 */
 	public function getBadgeInfo( array $badgeIds ) {
