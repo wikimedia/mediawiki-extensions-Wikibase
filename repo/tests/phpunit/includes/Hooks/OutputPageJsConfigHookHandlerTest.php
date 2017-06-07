@@ -43,12 +43,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	public function doOutputPageBeforeHtmlRegisterConfigProvider() {
-		$expected = array(
-			'wbUserIsBlocked',
-			'wbUserCanEdit',
-			'wbCopyright',
-			'wbBadgeItems'
-		);
+		$expected = [ 'wbCopyright', 'wbBadgeItems' ];
 
 		$entityId = new ItemId( 'Q4' );
 		$title = $this->getTitleForId( $entityId );
