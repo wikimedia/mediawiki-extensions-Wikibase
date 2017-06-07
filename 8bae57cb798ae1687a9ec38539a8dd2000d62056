@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_4659f25c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 26
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-07T19:00:59Z",
+      "side": 1,
+      "message": "this declaration is strange to me, but maybe that\u0027s just because I\u0027m not used to thinking in Lua. The function name isn\u0027t a verb (what does this thing *do*), and it\u0027s not a wrapper, either. it virtualizes indexed access to fields in the entity table, if I understand the code correctly. Maybe a better name would help?",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_e634a6f9",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-07T19:00:59Z",
+      "side": 1,
+      "message": "If we had a feature flag, instead of suppressing usage aspects, we could skip this.",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_c643a266",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-07T19:00:59Z",
+      "side": 1,
+      "message": "This is a strange way to handle this edge case. How about passing $entity to resolvePropertyId?",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
