@@ -36,7 +36,7 @@ class ParserFunctionRegistrant {
 	private function registerNoLangLinkHandler( Parser $parser ) {
 		$parser->setFunctionHook(
 			'noexternallanglinks',
-			'\Wikibase\NoLangLinkHandler::handle',
+			'\Wikibase\Client\Hooks\NoLangLinkHandler::handle',
 			Parser::SFH_NO_HASH
 		);
 	}
