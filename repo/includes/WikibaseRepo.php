@@ -1864,9 +1864,6 @@ class WikibaseRepo {
 
 						// T161983
 						'lag',
-
-						// T167259
-						'fkv',
 					) )
 				),
 
