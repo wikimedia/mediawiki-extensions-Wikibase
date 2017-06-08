@@ -105,8 +105,9 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 */
 	private function getDateFormat( $precision ) {
 		$datePreference = 'dmy';
+		$datePreferences = $this->language->getDatePreferences();
 
-		if ( !in_array( $datePreference, $this->language->getDatePreferences() ) ) {
+		if ( $datePreferences === false || !in_array( $datePreference, $datePreferences ) ) {
 			$datePreference = 'default';
 		}
 
