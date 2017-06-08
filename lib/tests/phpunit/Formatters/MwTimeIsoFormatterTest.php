@@ -514,6 +514,13 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'10000000',
 				'de'
 			),
+
+			// Spanish has no date preferences
+			array(
+				'+2017-01-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				'16 ene 2017',
+				'es'
+			),
 		);
 
 		$argLists = array();
