@@ -22,6 +22,30 @@
       "revId": "cae7dcf52905c7534ba65c758649bb5b286b5040",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_b90fa08c",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-08T10:20:31Z",
+      "side": 1,
+      "message": "It kind of is. See line 570.\nAt least IDE understands it.",
+      "parentUuid": "0e81134c_15eb160b",
+      "range": {
+        "startLine": 565,
+        "startChar": 14,
+        "endLine": 565,
+        "endChar": 39
+      },
+      "revId": "cae7dcf52905c7534ba65c758649bb5b286b5040",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
