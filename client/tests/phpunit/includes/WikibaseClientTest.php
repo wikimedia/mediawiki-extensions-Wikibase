@@ -15,6 +15,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RepoLinker;
@@ -363,6 +364,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$repositoryDefinitions = $this->getWikibaseClient()->getRepositoryDefinitions();
 		$this->assertInstanceOf( RepositoryDefinitions::class, $repositoryDefinitions );
 		$this->assertEquals( $this->getRepositoryDefinitions(), $repositoryDefinitions );
+	}
+
+	public function testGetSidebarLinkBadgeDisplay() {
+		$sidebarLinkBadgeDisplay = $this->getWikibaseClient()->getSidebarLinkBadgeDisplay();
+		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
 	}
 
 	/**
