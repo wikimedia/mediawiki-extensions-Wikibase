@@ -46,6 +46,30 @@
       "revId": "ef95bd1a4d1e3944758680b27b3729b1aabef2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_cfadf2e8",
+        "filename": "lib/includes/Formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-08T14:52:32Z",
+      "side": 1,
+      "message": "Stop! This can not be configuration. This format is hard-coded because it must be compatible with the formats our time parsers understand. We can only change this if we change the parsers the exact same time and make them understand that \"01/02/2017\" means January 2nd in the US, and February 1st in the rest of the world.\n\nI\u0027m actually working on such a parser, see Ic05c310.",
+      "parentUuid": "0e81134c_c784fc60",
+      "range": {
+        "startLine": 107,
+        "startChar": 2,
+        "endLine": 107,
+        "endChar": 26
+      },
+      "revId": "ef95bd1a4d1e3944758680b27b3729b1aabef2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
