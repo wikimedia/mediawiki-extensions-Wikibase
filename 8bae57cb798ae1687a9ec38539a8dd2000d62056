@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_9c196a2a",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 26
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-06-08T12:52:25Z",
+      "side": 1,
+      "message": "Done, renamed the function",
+      "parentUuid": "0e81134c_4659f25c",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_e634a6f9",
         "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
         "patchSetId": 26
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_1c381a9b",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-06-08T12:52:25Z",
+      "side": 1,
+      "message": "We don\u0027t want to skip this, we want to track this in both cases (just not the statement usage)",
+      "parentUuid": "0e81134c_e634a6f9",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_c643a266",
         "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
         "patchSetId": 26
@@ -47,6 +83,24 @@
       "writtenOn": "2017-06-07T19:00:59Z",
       "side": 1,
       "message": "This is a strange way to handle this edge case. How about passing $entity to resolvePropertyId?",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_3c515ede",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-06-08T12:52:25Z",
+      "side": 1,
+      "message": "Handling that there sounds very weird to me.",
+      "parentUuid": "0e81134c_c643a266",
       "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
