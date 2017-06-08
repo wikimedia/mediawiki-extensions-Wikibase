@@ -514,6 +514,13 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'10000000',
 				'de'
 			),
+
+			// Spanish has no date preferences
+			array(
+				'+2017-01-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				'16 ene 2017',
+				'es'
+			),
 		);
 
 		$argLists = array();
@@ -536,6 +543,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			'ar', //replaces all numbers and separators
 			'bo', //replaces only numbers
 			'de', //switches separators
+			'es', //no date preferences
 			'la', //defaults to genitive month names
 			'or', //replaces all numbers and separators
 		);
