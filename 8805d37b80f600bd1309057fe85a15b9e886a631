@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_3c8f1ed3",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-08T14:13:12Z",
+      "side": 1,
+      "message": "this would be better to get from config.\n\nthis query is not very fast and not a good idea",
+      "revId": "8805d37b80f600bd1309057fe85a15b9e886a631",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
