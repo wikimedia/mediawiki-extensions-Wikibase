@@ -46,6 +46,7 @@ return call_user_func( function() {
 				'wikibase.experts.__namespace',
 				'wikibase.experts.Item',
 				'wikibase.experts.Property',
+				'wikibase.experts.Lexeme',
 			),
 		),
 
@@ -85,5 +86,16 @@ return call_user_func( function() {
 				'wikibase.experts.Entity',
 			),
 		),
+
+		'wikibase.experts.Lexeme' => $moduleTemplate + array(
+				'scripts' => array(
+					'Lexeme.js',
+				),
+				'dependencies' => array(
+					'jquery.valueview.Expert',
+					'wikibase.experts.__namespace',
+					'wikibase.experts.Entity',
+				),
+			),
 	);
 } );
