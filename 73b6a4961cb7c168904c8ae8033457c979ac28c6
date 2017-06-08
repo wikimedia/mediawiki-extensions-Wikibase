@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_a7ae9893",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2017-06-08T03:23:59Z",
+      "side": 1,
+      "message": "See line 1869.",
+      "range": {
+        "startLine": 1821,
+        "startChar": 14,
+        "endLine": 1821,
+        "endChar": 17
+      },
+      "revId": "73b6a4961cb7c168904c8ae8033457c979ac28c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_07aa0483",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2017-06-08T03:23:59Z",
+      "side": 1,
+      "message": "See line 1821.",
+      "revId": "73b6a4961cb7c168904c8ae8033457c979ac28c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
