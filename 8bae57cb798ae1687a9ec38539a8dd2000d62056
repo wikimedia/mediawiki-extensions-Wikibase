@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_c3c5c691",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-09T14:44:01Z",
+      "side": 1,
+      "message": "Hm... \"other\" currently means \"statements\". We could use \"C\" with no modifier in that case, and \"C.P123\" for each statement, with the feature flag enabled.\n\nThe advantage is that C.P123 already implies C, so it does not need to be tracked separately.",
+      "parentUuid": "0e81134c_1c381a9b",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_c643a266",
         "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
         "patchSetId": 26
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Handling that there sounds very weird to me.",
       "parentUuid": "0e81134c_c643a266",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_83bfbef5",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-09T14:44:01Z",
+      "side": 1,
+      "message": "Then do the try/catch here, instead of inside the method.",
+      "parentUuid": "0e81134c_3c515ede",
       "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
