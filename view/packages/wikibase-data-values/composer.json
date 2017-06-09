@@ -29,7 +29,7 @@
 		"composer/installers": ">=1.0.1"
 	},
 	"require-dev": {
-		"mediawiki/mediawiki-codesniffer": "~0.5"
+		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},
 	"autoload": {
 		"files" : [
@@ -38,7 +38,7 @@
 	},
 	"scripts": {
 		"phpcs": [
-			"vendor/bin/phpcs lib/* src/* --standard=phpcs.xml -sp"
+			"vendor/bin/phpcs . -sp"
 		]
 	}
 }
