@@ -16,6 +16,24 @@
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_7e8596b0",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-09T09:58:26Z",
+      "side": 1,
+      "message": "(Did you mean WikibaseClient?) I have just scrolled through WBC and didn\u0027t find any hook handlers stored there. So would you hint me how it should look like?",
+      "parentUuid": "0e81134c_7ec6f64f",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
