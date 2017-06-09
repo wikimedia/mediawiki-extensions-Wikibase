@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_beabfe6c",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-09T07:56:53Z",
+      "side": 1,
+      "message": "As this now is expected to be string, maybe it would be worth stating this explicitly here for clarity (given your question whether mw.title should also be accepted).\n\nOr is it obvious enough this function will always be getting a string?",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "a3c83dad79419f5e03fa7c81801f8435d1b0de69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
