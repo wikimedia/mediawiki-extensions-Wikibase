@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_5ea0d29a",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-09T07:37:12Z",
+      "side": 1,
+      "message": "Maybe those should be verified somehow here?\nCurrently it is a responsibility of the user of this class to check this (see rebuildTermSqlIndex.php line 83, as of PS23).\n\nOTOH how this class would validate those values? Should it be getting EntityTypeDefinitions instance or so in the constructor just to do the validation? Seems a bit of overkill to me.",
+      "revId": "c3b895c1be1c721bf650f9ca7d7f0e6c828fe08d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_9e963a4e",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-09T07:37:12Z",
+      "side": 1,
+      "message": "Aude: Note I\u0027ve added this to the original version of yours. I believe this must be removing old terms for entity, and then add \"rebuilt\" ones. Otherwise it will not work given how current implementation of TermSqlIndex is done (ie. it checks if there is a term there, as in triple (lang, type, text), and does not add it if the one to be added is there. With this, using the Builder class to populate full id column wouldn\u0027t work, as the exact same terms are about to be added, so they\u0027ll just be all skipped without touching wb_terms row.\n\nAlso, to use this class for removing duplicates, removing existing terms seems quite natural.\n\nOr do I miss something obvious here?",
+      "revId": "c3b895c1be1c721bf650f9ca7d7f0e6c828fe08d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
