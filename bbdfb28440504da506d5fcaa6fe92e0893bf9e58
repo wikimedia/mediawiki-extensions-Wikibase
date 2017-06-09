@@ -204,6 +204,30 @@
       "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_e3532ae1",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-09T14:53:32Z",
+      "side": 1,
+      "message": "We need to wait after updating the wb_changes_dispatch table (and committing that transaction), before releasing the lock.\n\nThe idea is: when we release the lock, we know that all replicas of wb_changes_dispatch have been updated. This makes it safe to read wb_changes_dispatch from a replica.",
+      "parentUuid": "0e1cb3f9_9fd006ce",
+      "range": {
+        "startLine": 516,
+        "startChar": 2,
+        "endLine": 517,
+        "endChar": 72
+      },
+      "revId": "bbdfb28440504da506d5fcaa6fe92e0893bf9e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
