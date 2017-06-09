@@ -85,6 +85,8 @@
 	"wikibase-rc-show-wikidata-pref": "Mostrar las ediciones de {{WBREPONAME}} en cambios recientes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edición de {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Ediciones de {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Ediciones que provienen de {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Ten en cuenta que puede tardar varios minutos hasta que los cambios sean visibles en todas las wikis.",
 	"wikibase-watchlist-show-changes-pref": "Mostrar las ediciones de {{WBREPONAME}} en tu lista de seguimiento",
 	"wikibase-error-deserialize-error": "Error al deserializar datos.",
