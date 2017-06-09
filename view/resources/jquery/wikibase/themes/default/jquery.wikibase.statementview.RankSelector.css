@@ -31,15 +31,18 @@
 	background-position: -18px;
 }
 
-.wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-preferred {
+.wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-preferred,
+.wb-edit.wikibase-rankselector.ui-state-active .ui-icon.wikibase-rankselector-preferred {
 	background-position: -27px;
 }
 
-.wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-normal {
+.wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-normal,
+.wb-edit.wikibase-rankselector.ui-state-active .ui-icon.wikibase-rankselector-normal {
 	background-position: -36px;
 }
 
-.wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-deprecated {
+.wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-deprecated,
+.wb-edit.wikibase-rankselector.ui-state-active .ui-icon.wikibase-rankselector-deprecated {
 	background-position: -45px;
 }
 
