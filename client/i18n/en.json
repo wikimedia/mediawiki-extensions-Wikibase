@@ -38,7 +38,7 @@
 	"apihelp-query+wikibase-param-prop": "Which properties to get:\n;<kbd>url</kbd>: Base URL, script path and article path of the Wikibase repository.\n;<kbd>siteid</kbd>: The siteid of this site.",
 	"wikibase-after-page-move": "Your move should now be [$1 reflected in the {{WBREPONAME}} item] language link. We ask that you check this has occurred.",
 	"wikibase-after-page-move-queued": "The [$1 {{WBREPONAME}} item] associated with this page will be automatically updated. Please note that this might not happen instantaneously.",
-	"wikibase-after-page-delete": "You should also remove the link to this page from [$1 the associated {{WBREPONAME}} item] to maintain language links.",
+	"wikibase-after-page-delete": "Link to this page should have been removed from [$1 the associated {{WBREPONAME}} item]. We ask that you check this has occurred.",
 	"wikibase-after-page-delete-queued": "The [$1 {{WBREPONAME}} item] associated with this page will be automatically updated. Please note that this might not happen instantaneously.",
 	"wikibase-comment-add": "A {{WBREPONAME}} item has been created.",
 	"wikibase-comment-remove": "Associated {{WBREPONAME}} item deleted. Language links removed.",
