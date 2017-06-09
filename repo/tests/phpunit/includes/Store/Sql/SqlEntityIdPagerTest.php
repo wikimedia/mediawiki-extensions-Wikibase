@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -11,7 +12,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
+use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -256,6 +259,72 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			]
 		];
+	}
+
+	public function testSetPosition() {
+		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
+		$item = new Item( new ItemId( 'Q5' ) );
+
+		$this->insertEntities( [ $property, $item ] );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$pager = new SqlEntityIdPager(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getEntityIdParser()
+		);
+
+		$ids = $pager->fetchIds( 2 );
+
+		$this->assertCount( 2, $ids );
+
+		/** @var WikiPageEntityStore $entityStore */
+		$entityStore = $wikibaseRepo->getEntityStore();
+
+		$propertyPage = $entityStore->getWikiPageForEntity( $property->getId() );
+
+		$pager->setPosition( $propertyPage->getId() );
+
+		$ids = $pager->fetchIds( 2 );
+
+		$this->assertCount( 1, $ids );
+
+		$this->assertEquals( new ItemId( 'Q5' ), $ids[0] );
+	}
+
+	public function testGetPositionReturnsZeroWhenNothingFetchedYet() {
+		$entityNamespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$pager = new SqlEntityIdPager(
+			$entityNamespaceLookup,
+			new BasicEntityIdParser()
+		);
+
+		$this->assertSame( 0, $pager->getPosition() );
+	}
+
+	public function testGetPositionReturnsPageIdOfLastFetchedEntity() {
+		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
+		$item = new Item( new ItemId( 'Q5' ) );
+
+		$this->insertEntities( [ $property, $item ] );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		/** @var WikiPageEntityStore $entityStore */
+		$entityStore = $wikibaseRepo->getEntityStore();
+
+		$itemPage = $entityStore->getWikiPageForEntity( $item->getId() );
+
+		$pager = new SqlEntityIdPager(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getEntityIdParser()
+		);
+
+		$pager->fetchIds( 100 );
+
+		$this->assertSame( $itemPage->getId(), $pager->getPosition() );
 	}
 
 }
