@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_293593f3",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-09T20:21:08Z",
+      "side": 1,
+      "message": "typo? (or is this also allowed?)",
+      "range": {
+        "startLine": 76,
+        "startChar": 5,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "c01f7f0a4e4897317cb57961bbb4f6f6a239bf35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
