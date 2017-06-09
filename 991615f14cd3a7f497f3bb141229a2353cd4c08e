@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_c3970692",
+        "filename": "lib/tests/phpunit/Formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-09T14:32:27Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me how the new test case relates to the code change. How do preferences factor into this?",
+      "revId": "991615f14cd3a7f497f3bb141229a2353cd4c08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
