@@ -45,6 +45,29 @@
       "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_debcc2d7",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-09T20:19:48Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
