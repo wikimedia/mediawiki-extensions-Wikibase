@@ -9,6 +9,7 @@ use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -57,50 +58,102 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			'Q42$3' => new PropertyValueSnak( $propertyId, new StringValue( '' ) ),
 		];
 
-		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), $snaks, $format );
+		$usageAccumulator = new HashUsageAccumulator();
+		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), $snaks, $format, $usageAccumulator );
 		$result = $renderer->render( new ItemId( 'Q42' ), 'p1337' );
 
 		$this->assertSame( $expected, $result );
+
+		$this->assertEquals(
+			[ 'Q42#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testRender_PropertyLabelNotResolvedException() {
-		$renderer = $this->getInteractor( $this->getPropertyIdResolverForPropertyNotFound() );
+		$usageAccumulator = new HashUsageAccumulator();
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolverForPropertyNotFound(),
+			[],
+			SnakFormatter::FORMAT_PLAIN,
+			$usageAccumulator
+		);
 
-		$this->setExpectedException( PropertyLabelNotResolvedException::class );
-		$renderer->render( new ItemId( 'Q42' ), 'blah' );
+		$exceptionThrown = false;
+		try {
+			$renderer->render( new ItemId( 'Q42' ), 'blah' );
+		} catch ( PropertyLabelNotResolvedException $ex ) {
+			$exceptionThrown = true;
+		}
+		$this->assertTrue( $exceptionThrown, 'PropertyLabelNotResolvedException exception thrown' );
+
+		$this->assertEquals(
+			[ 'Q42#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	/**
 	 * @dataProvider formatProvider
 	 */
 	public function testRender_empty( $format ) {
-		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), [], $format );
+		$usageAccumulator = new HashUsageAccumulator();
+		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), [], $format, $usageAccumulator );
 		$this->assertSame( '', $renderer->render( new ItemId( 'Q42' ), 'P1337' ) );
+
+		$this->assertEquals(
+			[ 'Q42#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testRender_unresolvedRedirect() {
-		$renderer = $this->getInteractor( $this->getPropertyIdResolver() );
+		$usageAccumulator = new HashUsageAccumulator();
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolver(),
+			[],
+			SnakFormatter::FORMAT_PLAIN,
+			$usageAccumulator
+		);
 
 		$this->assertSame( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
+
+		$this->assertEquals(
+			[ 'Q43#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testRender_unknownEntity() {
-		$renderer = $this->getInteractor( $this->getPropertyIdResolver() );
+		$usageAccumulator = new HashUsageAccumulator();
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolver(),
+			[],
+			SnakFormatter::FORMAT_PLAIN,
+			$usageAccumulator
+		);
 
 		$this->assertSame( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );
+
+		$this->assertEquals(
+			[ 'Q43333#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param Snak[] $snaks
 	 * @param string $format One of the SnakFormatter::FORMAT_… constants
+	 * @param HashUsageAccumulator|null $usageAccumulator
 	 *
 	 * @return StatementTransclusionInteractor
 	 */
 	private function getInteractor(
 		PropertyIdResolver $propertyIdResolver,
 		array $snaks = [],
-		$format = SnakFormatter::FORMAT_PLAIN
+		$format = SnakFormatter::FORMAT_PLAIN,
+		HashUsageAccumulator $usageAccumulator = null
 	) {
 		$targetLanguage = Language::factory( 'en' );
 
@@ -109,7 +162,8 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			$propertyIdResolver,
 			$this->getSnaksFinder( $snaks ),
 			$this->getSnakFormatter( $format ),
-			$this->getEntityLookup()
+			$this->getEntityLookup(),
+			$usageAccumulator ?: new HashUsageAccumulator()
 		);
 	}
 

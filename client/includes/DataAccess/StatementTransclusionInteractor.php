@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess;
 
 use Language;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\Snak;
@@ -45,24 +46,32 @@ class StatementTransclusionInteractor {
 	private $entityLookup;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @param Language $language
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityLookup $entityLookup
+	 * @param UsageAccumulator $usageAccumulator
 	 */
 	public function __construct(
 		Language $language,
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		SnakFormatter $snakFormatter,
-		EntityLookup $entityLookup
+		EntityLookup $entityLookup,
+		UsageAccumulator $usageAccumulator
 	) {
 		$this->language = $language;
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->snakFormatter = $snakFormatter;
 		$this->entityLookup = $entityLookup;
+		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -81,10 +90,19 @@ class StatementTransclusionInteractor {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			// Continue as if nothing happened (for usage tracking purposes).
+			$entity = null;
+		}
+
+		if ( $entity && !( $entity instanceof StatementListProvider ) ) {
+			// For entities that can't have Statements, we don't need to track usage,
+			// so just bail out.
 			return '';
 		}
 
-		if ( !( $entity instanceof StatementListProvider ) ) {
+		$this->usageAccumulator->addOtherUsage( $entityId );
+
+		if ( $entity === null ) {
 			return '';
 		}
 
