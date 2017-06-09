@@ -140,6 +140,24 @@
       "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_4691e451",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-09T17:09:39Z",
+      "side": 1,
+      "message": "Can relate to what Daniel wrote.\nI was also confused by `$shouldThrow`.",
+      "parentUuid": "0e81134c_83bfbef5",
+      "revId": "8bae57cb798ae1687a9ec38539a8dd2000d62056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
