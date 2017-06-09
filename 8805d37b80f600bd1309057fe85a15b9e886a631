@@ -16,6 +16,24 @@
       "revId": "8805d37b80f600bd1309057fe85a15b9e886a631",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_7e991680",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-09T07:37:12Z",
+      "side": 1,
+      "message": "Agreed. I\u0027ve removed this, and made this class always require an array of entity type names in the constructor.\nWith this change I\u0027ve also remove setEntityType method as I believe it might not make much sense here. Or does it?",
+      "parentUuid": "0e81134c_3c8f1ed3",
+      "revId": "8805d37b80f600bd1309057fe85a15b9e886a631",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
