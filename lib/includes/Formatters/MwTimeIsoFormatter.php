@@ -104,11 +104,11 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string Date format string to be used by Language::sprintfDate
 	 */
 	private function getDateFormat( $precision ) {
-		$datePreference = 'dmy';
-		$datePreferences = $this->language->getDatePreferences();
+		$datePreference = 'default';
 
-		if ( $datePreferences === false || !in_array( $datePreference, $datePreferences ) ) {
-			$datePreference = 'default';
+		$datePreferences = $this->language->getDatePreferences();
+		if ( is_array( $datePreferences ) && in_array( 'dmy', $datePreferences ) ) {
+			$datePreference = 'dmy';
 		}
 
 		if ( $precision === TimeValue::PRECISION_MONTH ) {
@@ -274,6 +274,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		}
 
 		$year = str_pad( ltrim( $year, '0' ), 1, '0', STR_PAD_LEFT );
+		// TODO: The year should be localized via Language::formatNum() at this point, but currently
+		// can't because not all relevant time parsers unlocalize numbers.
 
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
