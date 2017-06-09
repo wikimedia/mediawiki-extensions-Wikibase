@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_7ec6f64f",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-09T07:58:26Z",
+      "side": 1,
+      "message": "It looks like it\u0027s a singleton and singletons usually should be avoided. Making it a part of WikibaseRepo (like most services) would be the best option I think.",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
