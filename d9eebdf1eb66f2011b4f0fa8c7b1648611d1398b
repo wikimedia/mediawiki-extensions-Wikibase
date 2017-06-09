@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_000ae424",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-09T10:57:34Z",
+      "side": 1,
+      "message": "Can it be used like:\n```\n$wgWBClientSettings[\u0027disabledUsageAspects\u0027] \u003d [ EntityUsage::STATEMENT_USAGE ];\n```\n?\n\nIt would be much more readable/understandable then.",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_9e263ac8",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-09T10:57:34Z",
+      "side": 1,
+      "message": "Unused argument. Please remove.",
+      "range": {
+        "startLine": 134,
+        "startChar": 60,
+        "endLine": 134,
+        "endChar": 75
+      },
+      "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
