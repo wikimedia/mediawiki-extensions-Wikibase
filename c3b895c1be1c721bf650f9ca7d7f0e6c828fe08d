@@ -33,6 +33,23 @@
       "revId": "c3b895c1be1c721bf650f9ca7d7f0e6c828fe08d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_3ea94e79",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-09T07:40:50Z",
+      "side": 1,
+      "message": "This is probably OK, or should it rather be getting the DB name from WikibaseRepo\u0027s settings (just in case of non-standard setup)?",
+      "revId": "c3b895c1be1c721bf650f9ca7d7f0e6c828fe08d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
