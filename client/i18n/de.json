@@ -36,7 +36,7 @@
 	"apihelp-query+wikibase-param-prop": "Zurückzugebende Eigenschaften:\n;<kbd>url</kbd>: Basis-URL, Skript- und Artikelpfad des Wikibase-Repositoriums.\n;<kbd>siteid</kbd>: Die Website-Kennung dieser Website.",
 	"wikibase-after-page-move": "Deine Verschiebung sollte jetzt im Sprachlink [$1 des {{WBREPONAME}}-Objektes zu sehen sein]. Wir bitten dich zu prüfen, ob dies geschehen ist.",
 	"wikibase-after-page-move-queued": "Das mit dieser Seite verbundene [$1 {{WBREPONAME}}-Objekt] wird automatisch aktualisiert werden. Beachte bitte, dass dies nicht sofort geschieht.",
-	"wikibase-after-page-delete": "Du solltest auch den Link zu dieser Seite aus [$1 dem dazugehörigen {{WBREPONAME}}-Objekt] entfernen, um Sprachlinks zu verwalten.",
+	"wikibase-after-page-delete": "Der Link auf diese Seite sollte von [$1 dem dazugehörigen {{WBREPONAME}}-Objekt] entfernt worden sein. Wir bitten dich zu prüfen, ob dies geschehen ist.",
 	"wikibase-after-page-delete-queued": "Das dazugehörige [$1 {{WBREPONAME}}-Objekt] zu dieser Seite wird automatisch aktualisiert. Beachte bitte, dass dies nicht sofort geschieht.",
 	"wikibase-comment-add": "Ein {{WBREPONAME}}-Objekt wurde erstellt.",
 	"wikibase-comment-remove": "Zugeordnetes {{WBREPONAME}}-Objekt wurde gelöscht. Sprachlinks wurden entfernt.",
