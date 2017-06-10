@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_af6183d2",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-10T00:26:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_230132ba",
+      "revId": "f41b9c078d8a72bd31707a6450d376def475e16d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_e3e00afa",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-09T15:08:46Z",
       "side": 1,
       "message": "We have to be sure that we actually flush any open transactions here. endAtomic does nto actually guarantee that!\n\nBefore this change, that would not have been an issue, because releasing the DB connection would force a flush. But now we have to force the flush before we wait for replication! \n\nI suggest to use begin( __METHOD__ ) and commit(  __METHOD__, IDatabase::FLUSHING_ALL_PEERS ) here.",
+      "revId": "f41b9c078d8a72bd31707a6450d376def475e16d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_6f5b9b27",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-10T00:26:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_e3e00afa",
       "revId": "f41b9c078d8a72bd31707a6450d376def475e16d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
