@@ -85,6 +85,8 @@
 	"datatypes-type-wikibase-item": "Objeto",
 	"datatypes-type-wikibase-property": "Propriedade",
 	"datatypes-type-commonsMedia": "Ficheiro multimédia do Commons",
+	"datatypes-type-geo-shape": "Forma geográfica",
+	"datatypes-type-tabular-data": "Dados tabulares",
 	"datatypes-type-external-id": "Identificador externo",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 mil milhões de anos d.C. (EC)",
