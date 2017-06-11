@@ -16,6 +16,24 @@
       "revId": "991615f14cd3a7f497f3bb141229a2353cd4c08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_35aac483",
+        "filename": "lib/tests/phpunit/Formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-11T14:17:49Z",
+      "side": 1,
+      "message": "I don\u0027t understand the question. What preferences?\n\nPlease have a look at PS1. Katie uploaded a duplicate of this bugfix, and I rebased mine, which is why the actual code change is not visible any more in PS2.\n\n\"eo\" is one of the languages where the Messages….php file contains \"$datePreferences \u003d false\".",
+      "parentUuid": "0e81134c_c3970692",
+      "revId": "991615f14cd3a7f497f3bb141229a2353cd4c08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
