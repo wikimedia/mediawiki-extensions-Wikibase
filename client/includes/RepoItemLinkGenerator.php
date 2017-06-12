@@ -6,7 +6,6 @@ use Html;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Client\NamespaceChecker;
 
 /**
  * @license GPL-2.0+

@@ -5,7 +5,6 @@ namespace Wikibase\Client;
 use Job;
 use Title;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityChange;
 use Wikimedia\Assert\Assert;
 

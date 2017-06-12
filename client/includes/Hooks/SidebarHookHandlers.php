@@ -9,7 +9,6 @@ use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\Hooks\NoLangLinkHandler;
 
 /**
  * ParserOutput related hook handlers.

@@ -12,7 +12,6 @@ use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;

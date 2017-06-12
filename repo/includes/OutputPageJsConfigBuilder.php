@@ -5,8 +5,6 @@ namespace Wikibase;
 use Language;
 use Message;
 use OutputPage;
-use Title;
-use User;
 use Wikimedia\Assert\Assert;
 
 /**
