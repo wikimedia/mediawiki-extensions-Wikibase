@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_aaf5ee4d",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-12T09:23:23Z",
+      "side": 1,
+      "message": "the description should be also made more generic I guess.",
+      "revId": "b240002b89bf81dc642657ea3387c0f29ce85354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_2ae9fe7b",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-12T09:23:23Z",
+      "side": 1,
+      "message": "oh yeah, I was wondering whether this should be added here, thanks for adding!",
+      "revId": "b240002b89bf81dc642657ea3387c0f29ce85354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
