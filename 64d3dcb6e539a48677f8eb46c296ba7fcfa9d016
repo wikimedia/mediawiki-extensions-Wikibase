@@ -22,6 +22,29 @@
       "revId": "64d3dcb6e539a48677f8eb46c296ba7fcfa9d016",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_fd94223b",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-12T11:02:18Z",
+      "side": 1,
+      "message": "There is no test that makes sure this variable even exists. I believe the only test that will fail if we remove this are some browser tests.",
+      "range": {
+        "startLine": 15,
+        "startChar": 22,
+        "endLine": 15,
+        "endChar": 54
+      },
+      "revId": "64d3dcb6e539a48677f8eb46c296ba7fcfa9d016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
