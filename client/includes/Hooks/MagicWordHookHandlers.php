@@ -6,7 +6,6 @@ use Language;
 use Message;
 use Parser;
 use ResourceLoaderContext;
-use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\SettingsArray;
 use Wikibase\Client\WikibaseClient;
 

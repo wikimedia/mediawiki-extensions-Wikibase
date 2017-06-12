@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use Parser;
 use ParserOptions;
-use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use PPFrame;
 use PPFrame_Hash;
@@ -18,8 +17,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
