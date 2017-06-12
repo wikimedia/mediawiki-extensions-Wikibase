@@ -6,6 +6,7 @@ use DataUpdate;
 use IContextSource;
 use Page;
 use Title;
+use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
@@ -55,15 +56,6 @@ class PropertyHandler extends EntityHandler {
 	 * @var LanguageFallbackLabelDescriptionLookupFactory
 	 */
 	private $labelLookupFactory;
-
-	/**
-	 * @see EntityHandler::getContentClass
-	 *
-	 * @return string
-	 */
-	protected function getContentClass() {
-		return PropertyContent::class;
-	}
 
 	/**
 	 * @param EntityPerPage $entityPerPage
@@ -207,6 +199,17 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function makeEmptyEntity() {
 		return Property::newFromType( '' );
+	}
+
+	/**
+	 * @see EntityHandler::makeEntityContent
+	 *
+	 * @param EntityHolder $entityHolder
+	 *
+	 * @return PropertyContent
+	 */
+	public function makeEntityContent( EntityHolder $entityHolder ) {
+		return new PropertyContent( $entityHolder );
 	}
 
 	/**
