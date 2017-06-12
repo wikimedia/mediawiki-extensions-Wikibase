@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_c01cd11a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-12T13:17:07Z",
+      "side": 1,
+      "message": "This method should document what kind of serializer it returns. (I suppose that was actually even *more* necessary before this change, when it was just called “getSerializerFactory”, but I think it’s still necessary now.)",
+      "revId": "4c131c0f888559d5f5560f11b355d5eea202d9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
