@@ -22,6 +22,30 @@
       "revId": "ef88e251215c67f785c1e2ff838bc75fee2472fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_8094898e",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-12T13:19:48Z",
+      "side": 1,
+      "message": "It doesn\u0027t send entity type and it\u0027s general for all entities not for arbitrary types of entities like lexeme (which I need this for). We can make this pass argument but that doesn\u0027t really matter.",
+      "parentUuid": "0e81134c_a02d0d8d",
+      "range": {
+        "startLine": 158,
+        "startChar": 17,
+        "endLine": 158,
+        "endChar": 38
+      },
+      "revId": "ef88e251215c67f785c1e2ff838bc75fee2472fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
