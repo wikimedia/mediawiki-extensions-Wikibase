@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e81134c_40fb0112",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-12T13:04:49Z",
+      "side": 1,
+      "message": "Nested loops - Please factor this loop into a private method.\nConsider factoring the body of this loop into another private method.",
+      "revId": "e27fa0908562109d38b60ff2a661610cad914075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_a0442d4b",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-12T13:04:49Z",
+      "side": 1,
+      "message": "Deleting and re-inserting everything is simple and safe, but puts a big load on the DB server. I\u0027m not sure we can even do that on a live server in production. Can you get feedback from a DBA on this?\n\nThe alternative is to do a differential delete/insert like saveTermsOfEntity does, and update the remaining rows in-place.",
+      "revId": "e27fa0908562109d38b60ff2a661610cad914075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_20aefde4",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-12T13:04:49Z",
+      "side": 1,
+      "message": "Loading the actual entity data, and re-calcuating the terms, is simple and safe, but slow. How long will it take to do this for all entities?",
+      "revId": "e27fa0908562109d38b60ff2a661610cad914075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_fde3c29a",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 31
@@ -13,6 +64,24 @@
       "writtenOn": "2017-06-12T12:21:40Z",
       "side": 1,
       "message": "we should also include page id in the progress message",
+      "revId": "e27fa0908562109d38b60ff2a661610cad914075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_6075e591",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-12T13:04:49Z",
+      "side": 1,
+      "message": "Perhaps $idPager should offer some kind of continuation string.",
+      "parentUuid": "0e81134c_fde3c29a",
       "revId": "e27fa0908562109d38b60ff2a661610cad914075",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
