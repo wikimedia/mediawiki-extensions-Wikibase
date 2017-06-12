@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_1ba00e3e",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-12T16:30:50Z",
+      "side": 1,
+      "message": "EntitPage, not EntityData, please!\nWhen and where is the interwiki prefix added to this?\n\nIf we use an EntityTitleLookup here, the prefix would already be in the TitleValue object it returns. But using EntityTitleLookup may be overkill for now.",
+      "revId": "38c6e74425e87725a60a038e45671d3a68dca6ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
