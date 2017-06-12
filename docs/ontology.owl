@@ -200,6 +200,11 @@
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
+ <owl:NamedIndividual rdf:about="&wikibase;TabularData">
+      <rdfs:label>TabularData</rdfs:label>
+      <rdfs:comment>Type for storing links to tabular data.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
 
   <!-- Individual property types supported by known Wikibase extensions -->
 
