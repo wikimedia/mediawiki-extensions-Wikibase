@@ -25,28 +25,16 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'baseUrl' => '//www.example.com',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
-				'repoNamespaces' => array(
-					'item' => '',
-					'property' => 'Property'
-				)
 			),
 			array(
 				'baseUrl' => '//example.com/',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
-				'repoNamespaces' => array(
-					'item' => '',
-					'property' => 'Property'
-				)
 			),
 			array(
 				'baseUrl' => 'http://www.example.com',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
-				'repoNamespaces' => array(
-					'item' => 'Item',
-					'property' => 'Property'
-				)
 			)
 		);
 	}
@@ -55,45 +43,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		return new RepoLinker(
 			$settings['baseUrl'],
 			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
-	}
-
-	/**
-	 * @dataProvider namespaceProvider
-	 */
-	public function testGetNamespace( $expected, array $settings, $entityType ) {
-		$repoLinker = $this->getRepoLinkerForSettings( $settings );
-		$namespace = $repoLinker->getNamespace( $entityType );
-
-		$this->assertEquals( $expected, $namespace );
-	}
-
-	public function namespaceProvider() {
-		$settings = $this->getRepoSettings();
-
-		return array(
-			array( '', $settings[0], 'item' ),
-			array( 'Property', $settings[1], 'property' ),
-			array( 'Item', $settings[2], 'item' )
-		);
-	}
-
-	/**
-	 * @dataProvider invalidNamespaceProvider
-	 */
-	public function testGetNamespaceWithInvalid_ThrowsException( array $settings, $entityType ) {
-		$repoLinker = $this->getRepoLinkerForSettings( $settings );
-		$this->setExpectedException( InvalidArgumentException::class );
-		$repoLinker->getNamespace( $entityType );
-	}
-
-	public function invalidNamespaceProvider() {
-		$settings = $this->getRepoSettings();
-
-		return array(
-			array( $settings[0], 'chocolate' )
+			$settings['scriptPath']
 		);
 	}
 
@@ -111,11 +61,10 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		$propertyId = new PropertyId( 'P472' );
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array( 'Q388', $settings[0], $itemId ),
-			array( 'Item:Q388', $settings[2], $itemId ),
-			array( 'Property:P472', $settings[0], $propertyId )
-		);
+		return [
+			[ 'Special:EntityPage/Q388', $settings[0], $itemId ],
+			[ 'Special:EntityPage/P472', $settings[0], $propertyId ]
+		];
 	}
 
 	/**
@@ -204,19 +153,19 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				'<a class="extiw wb-entity-link" href="//example.com/wiki/Q730">Q730</a>',
+				'<a class="extiw wb-entity-link" href="//example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[1],
 				new ItemId( 'Q730' ),
 				array()
 			),
 			array(
-				'<a class="extiw wb-entity-link" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
+				'<a class="extiw wb-entity-link" href="http://www.example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
 				array()
 			),
 			array(
-				'<a class="extiw wb-entity-link kittens" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
+				'<a class="extiw wb-entity-link kittens" href="http://www.example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
 				array( 'kittens' )
@@ -238,12 +187,12 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				'//example.com/wiki/Q730',
+				'//example.com/wiki/Special:EntityPage/Q730',
 				$settings[1],
 				new ItemId( 'Q730' )
 			),
 			array(
-				'http://www.example.com/wiki/Item:Q1234',
+				'http://www.example.com/wiki/Special:EntityPage/Q1234',
 				$settings[2],
 				new ItemId( 'Q1234' )
 			)

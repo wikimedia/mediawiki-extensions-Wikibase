@@ -26,18 +26,17 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
-		$repoNamespaces = array(
-			'item' => '',
-			'property' => 'Property:'
-		);
 
-		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );
+		return new RepoLinker( $baseUrl, $articlePath, $scriptPath );
 	}
 
 	public function getLinksProvider() {
 		$prefixedId = 'q9000';
 
-		$href = preg_quote( 'http://www.example.com/wiki/Q9000#sitelinks-wikipedia', '/' );
+		$href = preg_quote(
+			'http://www.example.com/wiki/Special:EntityPage/Q9000#sitelinks-wikipedia',
+			'/'
+		);
 		$editLinks = preg_quote( wfMessage( 'wikibase-editlinks' )->text(), '/' );
 		$addLinks = preg_quote( wfMessage( 'wikibase-linkitem-addlinks' )->text(), '/' );
 

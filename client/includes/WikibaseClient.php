@@ -494,8 +494,7 @@ final class WikibaseClient {
 		return new RepoLinker(
 			$this->settings->getSetting( 'repoUrl' ),
 			$this->settings->getSetting( 'repoArticlePath' ),
-			$this->settings->getSetting( 'repoScriptPath' ),
-			$this->settings->getSetting( 'repoNamespaces' )
+			$this->settings->getSetting( 'repoScriptPath' )
 		);
 	}
 
