@@ -113,7 +113,8 @@ class UpdateRepoHookHandlersTest extends PHPUnit_Framework_TestCase {
 			'Move got propagated to repo.'
 		);
 
-		$this->assertFalse( isset( $oldTitle->wikibasePushedMoveToRepo ), 'Should not touch $oldTitle' );
+		$this->assertFalse( property_exists( $oldTitle, 'wikibasePushedMoveToRepo' ),
+			'Should not touch $oldTitle' );
 	}
 
 	public function testNewFromGlobalState() {

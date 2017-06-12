@@ -208,8 +208,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			),
 			'Hook inserts enwiki link' => array(
 				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
-					$this->assertFalse(
-						isset( $sidebar['wikipedia'] ),
+					$this->assertArrayNotHasKey(
+						'wikipedia',
+						$sidebar,
 						'No Wikipedia link present yet'
 					);
 
