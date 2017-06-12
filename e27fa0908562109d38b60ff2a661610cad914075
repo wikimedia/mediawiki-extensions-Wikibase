@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_a0fc2db2",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-12T13:23:38Z",
+      "side": 1,
+      "message": "if we can make differential update work to handle duplicate terms + populating the new column, then could be good to do that way",
+      "parentUuid": "0e81134c_a0442d4b",
+      "revId": "e27fa0908562109d38b60ff2a661610cad914075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_20aefde4",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 31
@@ -82,6 +100,24 @@
       "side": 1,
       "message": "Perhaps $idPager should offer some kind of continuation string.",
       "parentUuid": "0e81134c_fde3c29a",
+      "revId": "e27fa0908562109d38b60ff2a661610cad914075",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_c06e1193",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-12T13:23:38Z",
+      "side": 1,
+      "message": "already fixed this. it has getPosition so we can have this information",
+      "parentUuid": "0e81134c_6075e591",
       "revId": "e27fa0908562109d38b60ff2a661610cad914075",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
