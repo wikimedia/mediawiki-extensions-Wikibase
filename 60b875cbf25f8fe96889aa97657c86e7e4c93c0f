@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_d60c9b3f",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-12T16:29:26Z",
+      "side": 1,
+      "message": "If we say this class does not care about cases when there are some terms missing for the entity, loading the entity could be avoid if there is a need to actually rebuild its terms.",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
