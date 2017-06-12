@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_9dfcf6b2",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-12T10:30:17Z",
+      "side": 1,
+      "message": "-2. I can not find any code that sets this variable. Where is this supposed to come from? What does \"probably\" mean? \"Probably\" based on what input?",
+      "range": {
+        "startLine": 15,
+        "startChar": 22,
+        "endLine": 15,
+        "endChar": 54
+      },
+      "revId": "64d3dcb6e539a48677f8eb46c296ba7fcfa9d016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
