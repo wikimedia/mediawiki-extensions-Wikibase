@@ -45,11 +45,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$this->repoLinker = new RepoLinker(
 			'http://www.wikidata.org',
 			'/wiki/$1',
-			'/w',
-			array(
-				'item' => '',
-				'property' => 'Property'
-			)
+			'/w'
 		);
 	}
 
@@ -162,8 +158,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	public function getEditSiteLinkPatterns() {
 		return array(
-			'/title=Q4&amp;curid=5&amp;action=history/',
-			'/title=Q4&amp;curid=5&amp;diff=92&amp;oldid=90/',
+			'/title=Special%3AEntityData%2FQ4&amp;curid=5&amp;action=history/',
+			'/title=Special%3AEntityData%2FQ4&amp;curid=5&amp;diff=92&amp;oldid=90/',
 			'/<span class="comment">\('
 				. '‎<span dir="auto"><span class="autocomment">Changed claim: <\/span><\/span> '
 				. '<a .*?>Property:P213<\/a>: <a .*?>Q850<\/a>'
@@ -188,7 +184,9 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'edit-entitylink' => allOf(
 				withTagName( 'a' ),
 				withClass( 'wb-entity-link' ),
-				withAttribute( 'href' )->havingValue( 'http://www.wikidata.org/wiki/Q4' ),
+				withAttribute( 'href' )->havingValue(
+					'http://www.wikidata.org/wiki/Special:EntityPage/Q4'
+				),
 				havingTextContents( 'Q4' )
 			),
 			'edit-changeslist-date' => allOf(

@@ -30,12 +30,8 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
-		$repoNamespaces = array(
-			'item' => '',
-			'property' => 'Property:'
-		);
 
-		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );
+		return new RepoLinker( $baseUrl, $articlePath, $scriptPath );
 	}
 
 	/**
@@ -77,7 +73,7 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 	protected function getParsedMessage( $messageKey ) {
 		return '<div class="plainlinks">'
-			. wfMessage( $messageKey, 'http://www.example.com/wiki/Q4880' )
+			. wfMessage( $messageKey, 'http://www.example.com/wiki/Special:EntityPage/Q4880' )
 				->inLanguage( 'de' )->parse()
 			. '</div>';
 	}
