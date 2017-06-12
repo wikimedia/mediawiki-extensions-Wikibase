@@ -33,12 +33,8 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
-		$repoNamespaces = array(
-			'item' => '',
-			'property' => 'Property:'
-		);
 
-		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );
+		return new RepoLinker( $baseUrl, $articlePath, $scriptPath );
 	}
 
 	/**
@@ -97,7 +93,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 
 	protected function getParsedMessage( $messageKey ) {
 		return '<div id="wbc-after-page-move" class="plainlinks">'
-			. wfMessage( $messageKey, 'http://www.example.com/wiki/Q4880' )
+			. wfMessage( $messageKey, 'http://www.example.com/wiki/Special:EntityData/Q4880' )
 				->inLanguage( 'de' )->parse()
 			. '</div>';
 	}

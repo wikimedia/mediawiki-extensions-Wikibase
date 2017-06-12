@@ -18,46 +18,15 @@ class RepoLinker {
 
 	private $scriptPath;
 
-	private $namespaces;
-
 	/**
 	 * @param string $baseUrl
 	 * @param string $articlePath
 	 * @param string $scriptPath
-	 * @param string[] $namespaces // repoNamespaces setting
 	 */
-	public function __construct( $baseUrl, $articlePath, $scriptPath, array $namespaces ) {
+	public function __construct( $baseUrl, $articlePath, $scriptPath ) {
 		$this->baseUrl = $baseUrl;
 		$this->articlePath = $articlePath;
 		$this->scriptPath = $scriptPath;
-		$this->namespaces = $namespaces;
-	}
-
-	/**
-	 * Get namespace of an entity in string format
-	 * @todo: need a better way to have knowledge of repo namespace mappings
-	 *
-	 * @param string $entityType
-	 *
-	 * @return string
-	 * @throws InvalidArgumentException
-	 */
-	public function getNamespace( $entityType ) {
-		if ( !array_key_exists( $entityType, $this->namespaces ) ) {
-			throw new InvalidArgumentException( "No namespace configured for entities of type $entityType" );
-		}
-
-		return $this->namespaces[$entityType];
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return string
-	 */
-	public function getEntityNamespace( EntityId $entityId ) {
-		$entityType = $entityId->getEntityType();
-		return $this->getNamespace( $entityType );
 	}
 
 	/**
@@ -131,23 +100,13 @@ class RepoLinker {
 	}
 
 	/**
-	 * Get the full title as string, including namespace for an entity
-	 * @todo: use a more robust mechanism for building entity titles
-	 *   if efficient enough, maybe EntityTitleLookup.
-	 *
 	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
 	public function getEntityTitle( EntityId $entityId ) {
-		$entityNamespace = $this->getEntityNamespace( $entityId );
 		$title = $entityId->getSerialization();
-
-		if ( $entityNamespace ) {
-			$title = $entityNamespace . ':' . $title;
-		}
-
-		return $title;
+		return 'Special:EntityData/' . $title;
 	}
 
 	/**
