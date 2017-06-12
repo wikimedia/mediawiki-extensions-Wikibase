@@ -12,7 +12,8 @@
 			"Peki01",
 			"Jenniesarina",
 			"Rockyfelle",
-			"Macofe"
+			"Macofe",
+			"Frisko"
 		]
 	},
 	"wikibase-desc": "Strukturerad datalagring",
@@ -337,7 +338,7 @@
 	"wikibase-listdatatypes-commonsmedia-body": "Länk till filer som lagras på Wikimedia Commons. När ett värde anges kommer \"Fil\"-namnrymden på Commons att genomsökas efter matchande filer.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Globkoordinat",
 	"wikibase-listdatatypes-globe-coordinate-body": "Litteral data för en geografisk position angivet som ett latitud-longitud-par i gms eller decimalgrader för den angivna himlakroppen. Standardvärde är \"Jorden\" och sedan \"WGS84\". Upplösning och intervall läggs till.\n* latitude – implicit första del (float, dms, dm, dd) av koordinatsträngen, riktning ges antingen genom prefixtecken eller N/S-suffix\n* longitud – implicit andra del (float, dms, dm, dd) av koordinatsträngen, riktning ges antingen genom prefixtecken eller E/W-suffix\n* globe – explicit (?) datavärde, angiven som himlakropp. Standardvärde är Jorden \"http://www.wikidata.org/entity/Q2\"\n* precision – numerisk precision av koordinaten",
-	"wikibase-listdatatypes-geo-shape-head": "Geografisk forms",
+	"wikibase-listdatatypes-geo-shape-head": "Geografisk form",
 	"wikibase-listdatatypes-geo-shape-body": "Länk till geografisk kartdata som lagras på Wikimedia Commons (eller en annan konfigurerad wiki). Se \"https://www.mediawiki.org/wiki/Help:Map_Data\" för mer dokumentation om kartdata.",
 	"wikibase-listdatatypes-tabular-data-head": "Tabelldata",
 	"wikibase-listdatatypes-tabular-data-body": "Länk till tabelldata lagras på Wikimedia Commons (eller annan konfigurerad wiki). Se \"https://www.mediawiki.org/wiki/Help:Tabular_Data\" för mer dokumentation om tabelldata.",
