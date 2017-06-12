@@ -3,9 +3,11 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -55,6 +57,16 @@ class TermSqlIndexBuilder {
 	private $errorReporter;
 
 	/**
+	 * @var bool
+	 */
+	private $writeFullEntityIdColumn;
+
+	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn;
+
+	/**
 	 * @var int
 	 */
 	private $batchSize;
@@ -73,6 +85,8 @@ class TermSqlIndexBuilder {
 	 * @param MessageReporter $progressReporter
 	 * @param MessageReporter $errorReporter
 	 * @param int $batchSize
+	 * @param bool $writeFullEntityIdColumn
+	 * @param bool $readFullEntityIdColumn
 	 */
 	public function __construct(
 		LBFactory $loadBalancerFactory,
@@ -82,7 +96,9 @@ class TermSqlIndexBuilder {
 		array $entityTypes,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
-		$batchSize = 1000
+		$batchSize = 1000,
+		$writeFullEntityIdColumn = true,
+		$readFullEntityIdColumn = false
 	) {
 		$this->loadBalancerFactory = $loadBalancerFactory;
 		$this->termSqlIndex = $termSqlIndex;
@@ -92,6 +108,8 @@ class TermSqlIndexBuilder {
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
 		$this->batchSize = $batchSize;
+		$this->writeFullEntityIdColumn = $writeFullEntityIdColumn;
+		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 	public function rebuild() {
@@ -145,6 +163,25 @@ class TermSqlIndexBuilder {
 	private function rebuildEntityTerms( EntityId $entityId ) {
 		$serializedId = $entityId->getSerialization();
 
+		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+		$entity = $entityRevision->getEntity();
+
+		$rebuiltTerms = $this->termSqlIndex->getEntityTerms( $entity );
+		$existingTerms = $this->termSqlIndex->getTermsOfEntity( $entityId );
+
+		$termsToInsert = array_udiff( $rebuiltTerms, $existingTerms, [ TermIndexEntry::class, 'compare' ] );
+		$termsToDelete = array_udiff( $existingTerms, $rebuiltTerms, [ TermIndexEntry::class, 'compare' ] );
+
+		$termsChanged = $termsToInsert || $termsToDelete;
+
+		$needToPopulateEntityIdColumn = !$this->readFullEntityIdColumn &&
+			$this->writeFullEntityIdColumn &&
+			$this->termsHaveNoFullEntityId( $entityId );
+
+		if ( !$termsChanged && !$this->containsDuplicates( $existingTerms ) && !$needToPopulateEntityIdColumn ) {
+			return;
+		}
+
 		$ticket = $this->loadBalancerFactory->getEmptyTransactionTicket( __METHOD__ );
 		$success = $this->termSqlIndex->deleteTermsOfEntity( $entityId );
 
@@ -157,7 +194,6 @@ class TermSqlIndexBuilder {
 			return;
 		}
 
-		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 		$success = $this->termSqlIndex->saveTermsOfEntity( $entityRevision->getEntity() );
 
 		if ( !$success ) {
@@ -170,6 +206,51 @@ class TermSqlIndexBuilder {
 		}
 
 		$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+	}
+
+	/**
+	 * @param TermIndexEntry[] $terms
+	 * @return bool
+	 */
+	private function containsDuplicates( array $terms ) {
+		foreach ( $terms as $index => $term ) {
+			foreach ( $terms as $otherIndex => $otherTerm ) {
+				if ( $index === $otherIndex ) {
+					continue;
+				}
+
+				if ( TermIndexEntry::compare( $term, $otherTerm ) === 0 ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @return bool
+	 */
+	private function termsHaveNoFullEntityId( EntityId $entityId ) {
+		if ( ! $entityId instanceof Int32EntityId ) {
+			return false;
+		}
+
+		$db = $this->loadBalancerFactory->getMainLB()->getConnection( DB_REPLICA );
+
+		$hasRowWithNullFullId = (bool)$db->selectField(
+			self::TABLE_NAME,
+			'1',
+			[
+				'term_entity_type' => $entityId->getEntityType(),
+				'term_entity_id' => $entityId->getNumericId(),
+				'term_full_entity_id IS NULL'
+			],
+			__METHOD__
+		);
+
+		return $hasRowWithNullFullId;
 	}
 
 }
