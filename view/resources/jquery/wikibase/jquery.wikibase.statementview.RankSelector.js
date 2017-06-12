@@ -301,7 +301,7 @@
 		draw: function() {
 			if ( this.isInEditMode() ) {
 				this.element
-				.addClass( 'ui-state-default ui-state-active' )
+				.addClass( 'ui-state-default' )
 				.removeClass( 'ui-state-disabled' );
 			} else {
 				this.element
