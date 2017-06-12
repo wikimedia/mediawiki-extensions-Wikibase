@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_2044bd6d",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 33
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-12T14:14:46Z",
+      "side": 1,
+      "message": "This means that this script cannot run on a database that no longer has the old column, or no longer writes to it. \n\nThis should probably not be hard coded...",
+      "revId": "7b4a847597bff715ff16bb81f92ac829a112701f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
