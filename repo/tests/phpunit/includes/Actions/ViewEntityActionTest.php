@@ -55,6 +55,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$output = $this->executeViewAction( $page );
 
 		$this->assertContains( $expected, $output->getHTML() );
+		$this->assertEditable( $output );
 	}
 
 	public function testMetaTags_withoutDescription() {
@@ -174,6 +175,19 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$action->show();
 		$this->assertEquals( 404, $response->getStatusCode(), "response code" );
+	}
+
+	private function assertEditable( OutputPage $output ) {
+		$jsConfigVars = $output->getJSVars();
+
+		// This mirrors the check the front does in isEditable() in wikibase.ui.entityViewInit.js.
+		$this->assertArrayHasKey( 'wbIsEditView', $jsConfigVars );
+		$this->assertArrayHasKey( 'wgRelevantPageIsProbablyEditable', $jsConfigVars );
+		$this->assertTrue( $jsConfigVars['wbIsEditView'], 'wbIsEditView is enabled' );
+		$this->assertTrue(
+			$jsConfigVars['wgRelevantPageIsProbablyEditable'],
+			'wgRelevantPageIsProbablyEditable is enabled'
+		);
 	}
 
 	private function assertNotEditable( OutputPage $output ) {
