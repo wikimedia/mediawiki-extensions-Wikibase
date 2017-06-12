@@ -85,7 +85,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$serializerFactoryOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
 
-		$serializerFactory = $wikibaseRepo->getSerializerFactory(
+		$serializerFactory = $wikibaseRepo->getBaseDataModelSerializerFactory(
 			$serializerFactoryOptions
 		);
 
