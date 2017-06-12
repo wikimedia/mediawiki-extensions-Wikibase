@@ -34,6 +34,24 @@
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_2a633e3d",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-12T08:49:43Z",
+      "side": 1,
+      "message": "Yes, As an example I can see InfoActionHookHandler but it\u0027s not in WikibaseClient, it\u0027s in the other part but it\u0027s not a singleton which is my point.",
+      "parentUuid": "0e81134c_7e8596b0",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
