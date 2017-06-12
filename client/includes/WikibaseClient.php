@@ -141,7 +141,7 @@ final class WikibaseClient {
 	/**
 	 * @var Serializer[]
 	 */
-	private $entitySerializers = array();
+	private $entitySerializers = [];
 
 	/**
 	 * @var EntityIdParser|null
@@ -645,10 +645,10 @@ final class WikibaseClient {
 		}
 
 		$dataTypeDefinitions = $wgWBClientDataTypes;
-		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
+		Hooks::run( 'WikibaseClientDataTypes', [ &$dataTypeDefinitions ] );
 
 		$entityTypeDefinitions = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseClientEntityTypes', array( &$entityTypeDefinitions ) );
+		Hooks::run( 'WikibaseClientEntityTypes', [ &$entityTypeDefinitions ] );
 
 		$settings = WikibaseSettings::getClientSettings();
 
@@ -940,7 +940,8 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return DeserializerFactory A factory with knowledge about items, properties, and the
+	 *  elements they are made of, but no other entity types.
 	 */
 	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
@@ -966,11 +967,11 @@ final class WikibaseClient {
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
-			$deserializers = array();
+			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$deserializers = [];
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+				$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
 			}
 
 			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
@@ -1012,11 +1013,11 @@ final class WikibaseClient {
 	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-			$serializers = array();
+			$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
+				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
 			}
 
 			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
@@ -1029,7 +1030,7 @@ final class WikibaseClient {
 	 * @return DataValueDeserializer
 	 */
 	private function getDataValueDeserializer() {
-		return new DataValueDeserializer( array(
+		return new DataValueDeserializer( [
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
@@ -1041,7 +1042,7 @@ final class WikibaseClient {
 					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
 			},
-		) );
+		] );
 	}
 
 	/**
@@ -1061,10 +1062,10 @@ final class WikibaseClient {
 	 */
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
-		$changeClasses = array(
+		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
 			// Other types of entities will use EntityChange
-		);
+		];
 
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
