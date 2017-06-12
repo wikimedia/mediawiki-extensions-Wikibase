@@ -16,6 +16,24 @@
       "revId": "7b4a847597bff715ff16bb81f92ac829a112701f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_7b5efa18",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 33
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-12T14:29:02Z",
+      "side": 1,
+      "message": "Done. Same for the \"write full entity id column\" flag (that one is set using constructor parameter (final \"true\").\nThe write flag case is probably less critical but still this script should not explode when run over DB without the full ID column in place (which is technically possible).",
+      "parentUuid": "0e81134c_2044bd6d",
+      "revId": "7b4a847597bff715ff16bb81f92ac829a112701f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
