@@ -940,7 +940,8 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return DeserializerFactory A factory with knowledge about items, properties, and the
+	 *  elements they are made of, but no other entity types.
 	 */
 	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
@@ -965,12 +966,11 @@ final class WikibaseClient {
 	 */
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
 			$deserializers = array();
 
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+			foreach ( $this->getEntityDeserializerFactoryCallbacks() as $callback ) {
+				$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
 			}
 
 			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
@@ -1011,12 +1011,11 @@ final class WikibaseClient {
 	 */
 	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
 			$serializers = array();
 
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
+			foreach ( $this->entityTypeDefinitions->getSerializerFactoryCallbacks() as $callback ) {
+				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
 			}
 
 			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
