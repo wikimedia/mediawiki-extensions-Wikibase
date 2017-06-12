@@ -20,6 +20,8 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\RedirectRevision;
+use Wikimedia\Http\HttpAcceptNegotiator;
+use Wikimedia\Http\HttpAcceptParser;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
