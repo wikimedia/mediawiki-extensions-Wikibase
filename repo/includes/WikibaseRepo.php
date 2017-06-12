@@ -1348,7 +1348,8 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return DeserializerFactory A factory with knowledge about items, properties, and the
+	 *  elements they are made of, but no other entity types.
 	 */
 	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
@@ -1371,9 +1372,10 @@ class WikibaseRepo {
 	/**
 	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
 	 *
-	 * @return SerializerFactory
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types.
 	 */
-	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
+	public function getBaseDataModelSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
 		return new SerializerFactory( new DataValueSerializer(), $options );
 	}
 
@@ -1384,12 +1386,12 @@ class WikibaseRepo {
 	 */
 	public function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
-			$deserializers = array();
+			$deserializerBuilders = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$deserializers = [];
 
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+			foreach ( $deserializerBuilders as $builder ) {
+				$deserializers[] = call_user_func( $builder, $baseDeserializerFactory );
 			}
 
 			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
@@ -1414,12 +1416,12 @@ class WikibaseRepo {
 	 */
 	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = $this->getSerializerFactory( $options );
-			$serializers = array();
+			$serializerBuilders = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory( $options );
+			$serializers = [];
 
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
+			foreach ( $serializerBuilders as $builder ) {
+				$serializers[] = call_user_func( $builder, $baseSerializerFactory );
 			}
 
 			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
@@ -1450,7 +1452,7 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getStatementSerializer() {
-		return $this->getSerializerFactory()->newStatementSerializer();
+		return $this->getBaseDataModelSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
@@ -1628,7 +1630,7 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
-			$this->getSerializerFactory( $serializerOptions ),
+			$this->getBaseDataModelSerializerFactory( $serializerOptions ),
 			$this->getAllTypesEntitySerializer( $serializerOptions ),
 			$this->getEntityIdParser(),
 			$this->getStore()->newSiteLinkStore(),

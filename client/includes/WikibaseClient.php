@@ -940,7 +940,8 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return DeserializerFactory A factory with knowledge about items, properties, and the
+	 *  elements they are made of, but no other entity types.
 	 */
 	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
@@ -965,12 +966,12 @@ final class WikibaseClient {
 	 */
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
-			$deserializers = array();
+			$deserializerBuilders = $this->getEntityDeserializerFactoryCallbacks();
+			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$deserializers = [];
 
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+			foreach ( $deserializerBuilders as $builder ) {
+				$deserializers[] = call_user_func( $builder, $baseDeserializerFactory );
 			}
 
 			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
@@ -1011,12 +1012,12 @@ final class WikibaseClient {
 	 */
 	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-			$serializers = array();
+			$serializerBuilders = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$serializers = [];
 
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
+			foreach ( $serializerBuilders as $builder ) {
+				$serializers[] = call_user_func( $builder, $baseSerializerFactory );
 			}
 
 			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );

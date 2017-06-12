@@ -448,7 +448,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetSerializerFactory() {
-		$serializerFactory = $this->getWikibaseRepo()->getSerializerFactory();
+		$serializerFactory = $this->getWikibaseRepo()->getBaseDataModelSerializerFactory();
 		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
 	}
 
