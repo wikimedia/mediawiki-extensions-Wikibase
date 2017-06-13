@@ -39,6 +39,9 @@ class RebuildTermSqlIndex extends Maintenance  {
 			false,
 			true
 		);
+		$this->addOption(
+			'rebuild-all-terms', 'Rebuilds all terms of the entity (requires loading data of each processed entity)'
+		);
 		$this->addOption( 'from-id', "First row (page id) to start updating from", false, true );
 	}
 
@@ -57,6 +60,7 @@ class RebuildTermSqlIndex extends Maintenance  {
 	private function getTermIndexBuilder() {
 		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
 		$fromId = $this->getOption( 'from-id', null );
+		$rebuildAllEntityTerms = $this->getOption( 'rebuild-all-terms', false );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$idParser = $wikibaseRepo->getEntityIdParser();
@@ -90,6 +94,9 @@ class RebuildTermSqlIndex extends Maintenance  {
 
 		if ( $fromId !== null ) {
 			$builder->setFromId( (int)$fromId );
+		}
+		if ( $rebuildAllEntityTerms ) {
+			$builder->setRebuildAllEntityTerms();
 		}
 
 		return $builder;
