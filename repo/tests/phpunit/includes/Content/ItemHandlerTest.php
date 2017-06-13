@@ -56,22 +56,22 @@ class ItemHandlerTest extends EntityHandlerTest {
 	 * @see EntityHandlerTest::contentProvider
 	 */
 	public function contentProvider() {
-		$contents = [];
-		$contents[] = [ $this->newEntityContent() ];
-
 		/** @var ItemContent $content */
 		$content = $this->newEntityContent();
-		$content->getEntity()->setAliases( 'en', [ 'foo' ] );
-		$content->getEntity()->setDescription( 'de', 'foobar' );
-		$content->getEntity()->setDescription( 'en', 'baz' );
-		$content->getEntity()->setLabel( 'nl', 'o_O' );
-		$contents[] = [ $content ];
+		$content->getItem()->setAliases( 'en', [ 'foo' ] );
+		$content->getItem()->setDescription( 'de', 'foobar' );
+		$content->getItem()->setDescription( 'en', 'baz' );
+		$content->getItem()->setLabel( 'nl', 'o_O' );
 
-		$content = $content->copy();
-		$content->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
-		$contents[] = [ $content ];
+		/** @var ItemContent $withSiteLink */
+		$withSiteLink = $content->copy();
+		$withSiteLink->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
 
-		return $contents;
+		return [
+			[ $this->newEntityContent() ],
+			[ $content ],
+			[ $withSiteLink ],
+		];
 	}
 
 	public function provideGetUndoContent() {
