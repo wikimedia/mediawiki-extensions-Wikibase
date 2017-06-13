@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityContent;
+use Wikibase\ItemContent;
 
 /**
  * Example showing how the search index behavior for Wikibase entities
@@ -24,13 +25,11 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 $wgHooks['WikibaseTextForSearchIndex'][] = function( EntityContent $entityContent, &$text ) {
-	$entity = $entityContent->getEntity();
-
-	if ( !( $entity instanceof Item ) ) {
-		return true;
+	if ( !( $entityContent instanceof ItemContent ) ) {
+		return;
 	}
 
-	$statements = $entity->getStatements();
+	$statements = $entityContent->getItem()->getStatements();
 
 	/** @var Statement $statement */
 	foreach ( $statements as $statement ) {
@@ -50,6 +49,4 @@ $wgHooks['WikibaseTextForSearchIndex'][] = function( EntityContent $entityConten
 			$text .= $value->getText() . "\n";
 		}
 	}
-
-	return true;
 };
