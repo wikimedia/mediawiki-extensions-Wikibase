@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_942da843",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T09:27:37Z",
+      "side": 1,
+      "message": "This method should go away!",
+      "revId": "020273634bb3f9b9aff92dff5137b9022667a8d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
