@@ -16,6 +16,24 @@
       "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_74eda421",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-13T09:05:05Z",
+      "side": 1,
+      "message": "I guess this could be made an option in the builder and in the script. With such option (off by default) rebuilding the index would not load the entity data for each entity, and just read data from wb_terms in order to determine should there be some action done are not (that would hopefully mean faster \"default\" rebuild). See the patch making this optional: Ia0409ebfd7c905b178c8ebe17945226a845e010c",
+      "parentUuid": "0e81134c_d60c9b3f",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
