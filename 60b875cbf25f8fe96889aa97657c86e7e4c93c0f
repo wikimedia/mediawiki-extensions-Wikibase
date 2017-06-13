@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e81134c_e878d3ef",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:41:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t both be true per default?\nSoon, for a fresh vanilla install, die old column wouldn\u0027t even exist...",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_a8696b1f",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:41:57Z",
+      "side": 1,
+      "message": "This is expensive.",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_d60c9b3f",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 1
@@ -31,6 +65,58 @@
       "side": 1,
       "message": "I guess this could be made an option in the builder and in the script. With such option (off by default) rebuilding the index would not load the entity data for each entity, and just read data from wb_terms in order to determine should there be some action done are not (that would hopefully mean faster \"default\" rebuild). See the patch making this optional: Ia0409ebfd7c905b178c8ebe17945226a845e010c",
       "parentUuid": "0e81134c_d60c9b3f",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_6863833c",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:41:57Z",
+      "side": 1,
+      "message": "That seems like a good approach.\n\nNote that this touches upon an architecture issue we have recently discussed: we need to add a mapping layer that extracts label/description/aliases from arbitrary entities. That\u0027s basically what getEntityTerms does, but it should be in a separate service.",
+      "parentUuid": "0e81134c_74eda421",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_c88f0fd0",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:41:57Z",
+      "side": 1,
+      "message": "So all the new code is just so we can short-cirquit out in case there is nothing to do. Fine, but please move the detection logic to a separate method.",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_889107fe",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:41:57Z",
+      "side": 1,
+      "message": "the name is a bit odd. Perhaps better: hasMissingFullEntityId.",
       "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
