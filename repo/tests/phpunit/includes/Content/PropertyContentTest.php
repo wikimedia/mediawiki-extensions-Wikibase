@@ -3,8 +3,10 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
+use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyContent;
@@ -22,6 +24,27 @@ use Wikibase\PropertyContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyContentTest extends EntityContentTest {
+
+	public function provideValidConstructorArguments() {
+		return [
+			'empty' => [ null ],
+			'empty property' => [ new EntityInstanceHolder( Property::newFromType( 'string' ) ) ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideValidConstructorArguments
+	 */
+	public function testConstructor( EntityHolder $holder = null ) {
+		$content = new PropertyContent( $holder );
+		$this->assertInstanceOf( PropertyContent::class, $content );
+	}
+
+	public function testConstructorExceptions() {
+		$holder = new EntityInstanceHolder( new Item() );
+		$this->setExpectedException( InvalidArgumentException::class );
+		new PropertyContent( $holder );
+	}
 
 	/**
 	 * @return PropertyId
@@ -59,6 +82,13 @@ class PropertyContentTest extends EntityContentTest {
 		return array(
 			'property id' => array( $this->newEmpty( $p11 ), $p11 ),
 		);
+	}
+
+	public function provideContentObjectsWithoutId() {
+		return [
+			'no holder' => [ new PropertyContent() ],
+			'no ID' => [ new PropertyContent( new EntityInstanceHolder( Property::newFromType( 'string' ) ) ) ],
+		];
 	}
 
 	public function testIsEmpty_emptyProperty() {
