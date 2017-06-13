@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
 use ParserOutput;
+use RuntimeException;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -211,6 +212,16 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$actual = $content->getEntityId();
 
 		$this->assertEquals( $expected, $actual );
+	}
+
+	abstract public function provideContentObjectsWithoutId();
+
+	/**
+	 * @dataProvider provideContentObjectsWithoutId
+	 */
+	public function testGetEntityIdExceptions( EntityContent $content ) {
+		$this->setExpectedException( RuntimeException::class );
+		$content->getEntityId();
 	}
 
 	public function provideGetEntityPageProperties() {

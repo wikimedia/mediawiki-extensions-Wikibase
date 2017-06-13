@@ -8,11 +8,13 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 use Title;
+use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -44,6 +46,66 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class ItemContentTest extends EntityContentTest {
+
+	public function provideValidConstructorArguments() {
+		return [
+			'empty' => [ null, null, null ],
+			'empty item' => [ new EntityInstanceHolder( new Item() ), null, null ],
+			'redirect' => [
+				null,
+				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
+				$this->getMock( Title::class )
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideValidConstructorArguments
+	 */
+	public function testConstructor(
+		EntityHolder $holder = null,
+		EntityRedirect $redirect = null,
+		Title $title = null
+	) {
+		$content = new ItemContent( $holder, $redirect, $title );
+		$this->assertInstanceOf( ItemContent::class, $content );
+	}
+
+	public function provideInvalidConstructorArguments() {
+		$holder = new EntityInstanceHolder( new Item() );
+		$redirect = new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) );
+		$title = $this->getMock( Title::class );
+
+		$propertyHolder = new EntityInstanceHolder( Property::newFromType( 'string' ) );
+
+		$badTitle = $this->getMock( Title::class );
+		$badTitle->method( 'getContentModel' )
+			->will( $this->returnValue( 'bad content model' ) );
+		$badTitle->method( 'exists' )
+			->will( $this->returnValue( true ) );
+
+		return [
+			'all' => [ $holder, $redirect, $title ],
+			'holder and redirect' => [ $holder, $redirect, null ],
+			'holder and title' => [ $holder, null, $title ],
+			'redirect only' => [ null, $redirect, null ],
+			'title only' => [ null, null, $title ],
+			'bad entity type' => [ $propertyHolder, null, null ],
+			'bad title' => [ null, $redirect, $badTitle ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideInvalidConstructorArguments
+	 */
+	public function testConstructorExceptions(
+		EntityHolder $holder = null,
+		EntityRedirect $redirect = null,
+		Title $title = null
+	) {
+		$this->setExpectedException( InvalidArgumentException::class );
+		new ItemContent( $holder, $redirect, $title );
+	}
 
 	/**
 	 * @return ItemId
@@ -438,6 +500,13 @@ class ItemContentTest extends EntityContentTest {
 		$cases['redirect id'] = array( $this->newRedirect( $q11, $q12 ), $q11 );
 
 		return $cases;
+	}
+
+	public function provideContentObjectsWithoutId() {
+		return [
+			'no holder' => [ new ItemContent() ],
+			'no ID' => [ new ItemContent( new EntityInstanceHolder( new Item() ) ) ],
+		];
 	}
 
 	public function entityRedirectProvider() {

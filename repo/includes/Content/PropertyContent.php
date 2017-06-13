@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\Property;
 class PropertyContent extends EntityContent {
 
 	/**
-	 * @var EntityHolder
+	 * @var EntityHolder|null
 	 */
 	private $propertyHolder;
 
@@ -30,13 +30,15 @@ class PropertyContent extends EntityContent {
 	 *
 	 * @protected
 	 *
-	 * @param EntityHolder $propertyHolder
+	 * @param EntityHolder|null $propertyHolder
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityHolder $propertyHolder ) {
+	public function __construct( EntityHolder $propertyHolder = null ) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
 
-		if ( $propertyHolder->getEntityType() !== Property::ENTITY_TYPE ) {
+		if ( $propertyHolder !== null
+			&& $propertyHolder->getEntityType() !== Property::ENTITY_TYPE
+		) {
 			throw new InvalidArgumentException( '$propertyHolder must contain a Property entity!' );
 		}
 
@@ -75,7 +77,7 @@ class PropertyContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntityHolder
 	 *
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	public function getEntityHolder() {
 		return $this->propertyHolder;

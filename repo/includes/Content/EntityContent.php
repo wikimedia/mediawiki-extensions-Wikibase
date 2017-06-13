@@ -104,29 +104,30 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns a holder for the entity contained in this EntityContent object.
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @return EntityHolder
+	 * @return EntityHolder|null
 	 */
 	abstract protected function getEntityHolder();
 
 	/**
-	 * Returns the ID of the entity represented by this EntityContent;
-	 *
-	 * @throws RuntimeException if no entity ID is set
+	 * @throws RuntimeException if the content object is empty or no entity ID is set
 	 * @return EntityId
 	 */
 	public function getEntityId() {
 		if ( $this->isRedirect() ) {
 			return $this->getEntityRedirect()->getEntityId();
-		} else {
-			$id = $this->getEntityHolder()->getEntityId();
-			if ( !$id ) {
-				// @todo: Force an ID to be present; Entity objects without an ID make sense,
-				// EntityContent objects with no entity ID don't.
-				throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
-			}
-
-			return $id;
 		}
+
+		$holder = $this->getEntityHolder();
+		if ( $holder !== null ) {
+			$id = $holder->getEntityId();
+			if ( $id !== null ) {
+				return $id;
+			}
+		}
+
+		// @todo: Force an ID to be present; Entity objects without an ID make sense,
+		// EntityContent objects with no entity ID don't.
+		throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
 	}
 
 	/**
@@ -503,8 +504,8 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
-		$thisId = $this->getEntityHolder()->getEntityId();
-		$thatId = $that->getEntityHolder()->getEntityId();
+		$thisId = $this->getEntityHolder() ? $this->getEntityHolder()->getEntityId() : null;
+		$thatId = $that->getEntityHolder() ? $that->getEntityHolder()->getEntityId() : null;
 
 		if ( $thisId !== null && $thatId !== null
 			&& !$thisId->equals( $thatId )
@@ -627,22 +628,34 @@ abstract class EntityContent extends AbstractContent {
 	 * @return bool True if this is not a redirect and the page is empty.
 	 */
 	public function isEmpty() {
-		return !$this->isRedirect() && parent::isEmpty();
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
+		$holder = $this->getEntityHolder();
+		return $holder === null || $holder->getEntity()->isEmpty();
 	}
 
 	/**
 	 * @see Content::copy
 	 *
-	 * @return ItemContent
+	 * @return EntityContent
 	 */
 	public function copy() {
 		/* @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
+
 		if ( $this->isRedirect() ) {
 			return $handler->makeEntityRedirectContent( $this->getEntityRedirect() );
-		} else {
-			return $handler->makeEntityContent( new DeferredCopyEntityHolder( $this->getEntityHolder() ) );
 		}
+
+		$holder = $this->getEntityHolder();
+		if ( $holder !== null ) {
+			return $handler->makeEntityContent( new DeferredCopyEntityHolder( $holder ) );
+		}
+
+		// There is nothing mutable on an entirely empty content object.
+		return $this;
 	}
 
 	/**
