@@ -14,6 +14,12 @@ use Wikimedia\Rdbms\LBFactory;
 
 /**
  * (Re)builds term index in the SQL table.
+ * This can add missing information to the SQL table like missing full entity ID. It also removes
+ * possible duplicate terms.
+ * It can also ensure that all expected entity terms are stored in the term index, i.e. add
+ * all possible missing terms of the given entity, and remove all possible no longer valid
+ * terms of the entity, even if there is no other need for rebuilding the index
+ * (i.e. all ID fields are populated, there are no duplicate entries).
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -73,6 +79,11 @@ class TermSqlIndexBuilder {
 	private $batchSize;
 
 	/**
+	 * @var bool
+	 */
+	private $rebuildAllEntityTerms = false;
+
+	/**
 	 * @var int|null
 	 */
 	private $fromId = null;
@@ -129,6 +140,15 @@ class TermSqlIndexBuilder {
 	}
 
 	/**
+	 * Makes the builder rebuild all entity terms, i.e. it will check if any of entity terms
+	 * is missing, and/or any of existing entity terms is no longer "correct".
+	 * Missing terms will be added, and no longer expected terms will be removed.
+	 */
+	public function setRebuildAllEntityTerms() {
+		$this->rebuildAllEntityTerms = true;
+	}
+
+	/**
 	 * @param string $entityType
 	 */
 	private function rebuildForEntityType( $entityType ) {
@@ -162,14 +182,23 @@ class TermSqlIndexBuilder {
 	}
 
 	private function rebuildEntityTerms( EntityId $entityId ) {
-		$serializedId = $entityId->getSerialization();
-
-		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
-		$entity = $entityRevision->getEntity();
-
-		if ( !$this->needsTermRebuild( $entity ) ) {
+		if ( $this->rebuildAllEntityTerms ) {
+			$this->rebuildAllTermsOfEntity( $entityId );
 			return;
 		}
+
+		$existingTerms = $this->termSqlIndex->getTermsOfEntity( $entityId );
+		if ( $this->containsDuplicateTerms( $existingTerms ) ) {
+			$this->removeDuplicateTerms( $entityId, $existingTerms );
+		}
+
+		if ( $this->hasMissingFullEntityId( $entityId ) ) {
+			$this->populateFullEntityIdField( $entityId );
+		}
+	}
+
+	private function rebuildAllTermsOfEntity( EntityId $entityId ) {
+		$serializedId = $entityId->getSerialization();
 
 		$ticket = $this->loadBalancerFactory->getEmptyTransactionTicket( __METHOD__ );
 		$success = $this->termSqlIndex->deleteTermsOfEntity( $entityId );
@@ -183,6 +212,7 @@ class TermSqlIndexBuilder {
 			return;
 		}
 
+		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 		$success = $this->termSqlIndex->saveTermsOfEntity( $entityRevision->getEntity() );
 
 		if ( !$success ) {
@@ -198,32 +228,10 @@ class TermSqlIndexBuilder {
 	}
 
 	/**
-	 * @param EntityDocument $entity
-	 * @return bool
-	 */
-	private function needsTermRebuild( EntityDocument $entity ) {
-		$entityId = $entity->getId();
-
-		$rebuiltTerms = $this->termSqlIndex->getEntityTerms( $entity );
-		$existingTerms = $this->termSqlIndex->getTermsOfEntity( $entityId );
-
-		$termsToInsert = array_udiff( $rebuiltTerms, $existingTerms, [ TermIndexEntry::class, 'compare' ] );
-		$termsToDelete = array_udiff( $existingTerms, $rebuiltTerms, [ TermIndexEntry::class, 'compare' ] );
-
-		$termsChanged = $termsToInsert || $termsToDelete;
-
-		$needToPopulateEntityIdColumn = !$this->readFullEntityIdColumn &&
-			$this->writeFullEntityIdColumn &&
-			$this->hasMissingFullEntityId( $entityId );
-
-		return $termsChanged || $this->containsDuplicates( $existingTerms ) || $needToPopulateEntityIdColumn;
-	}
-
-	/**
 	 * @param TermIndexEntry[] $terms
 	 * @return bool
 	 */
-	private function containsDuplicates( array $terms ) {
+	private function containsDuplicateTerms( array $terms ) {
 		foreach ( $terms as $index => $term ) {
 			foreach ( $terms as $otherIndex => $otherTerm ) {
 				if ( $index === $otherIndex ) {
@@ -240,11 +248,79 @@ class TermSqlIndexBuilder {
 	}
 
 	/**
+	 * TODO: I'm too long, split me up.
+	 *
+	 * @param EntityId $entityId
+	 * @param TermIndexEntry[] $terms
+	 */
+	private function removeDuplicateTerms( EntityId $entityId, array $terms ) {
+		$duplicateTerms = [];
+
+		foreach ( $terms as $index => $term ) {
+			foreach ( $terms as $otherIndex => $otherTerm ) {
+				if ( $index === $otherIndex ) {
+					continue;
+				}
+
+				if ( TermIndexEntry::compare( $term, $otherTerm ) === 0 ) {
+					$duplicateTerms[
+						implode( ':', [ $term->getLanguage(), $term->getTermType(), $term->getText() ] )
+					] = $term;
+				}
+			}
+		}
+
+		if ( !$duplicateTerms ) {
+			return;
+		}
+
+		$duplicateTerms = array_values( $duplicateTerms );
+
+		$idConds = $this->readFullEntityIdColumn ?
+			[ 'term_full_entity_id' => $entityId->getSerialization() ] :
+			[
+				'term_entity_id' => $entityId->getNumericId(),
+				'term_entity_type' => $entityId->getEntityType(),
+			];
+
+		$db = $this->loadBalancerFactory->getMainLB()->getConnection( DB_MASTER );
+
+		/** @var TermIndexEntry $term */
+		foreach ( $duplicateTerms as $term ) {
+			$result = $db->select(
+				self::TABLE_NAME,
+				[ 'term_row_id' ],
+				array_merge(
+					$idConds,
+					[
+						'term_language' => $term->getLanguage(),
+						'term_type' => $term->getTermType(),
+						'term_text' => $term->getText(),
+					]
+				),
+				__METHOD__
+			);
+
+			if ( !$result->numRows() ) {
+				continue;
+			}
+
+			$result->fetchRow();
+
+			while ( $row = $result->fetchRow() ) {
+				$db->delete( self::TABLE_NAME, [ 'term_row_id' => $row['term_row_id'] ] );
+			}
+		}
+
+		$this->loadBalancerFactory->getMainLB()->reuseConnection( $db );
+	}
+
+	/**
 	 * @param EntityId $entityId
 	 * @return bool
 	 */
 	private function hasMissingFullEntityId( EntityId $entityId ) {
-		if ( ! $entityId instanceof Int32EntityId ) {
+		if ( $this->readFullEntityIdColumn || ! $entityId instanceof Int32EntityId ) {
 			return false;
 		}
 
@@ -261,7 +337,31 @@ class TermSqlIndexBuilder {
 			__METHOD__
 		);
 
+		$this->loadBalancerFactory->getMainLB()->reuseConnection( $db );
+
 		return $hasRowWithNullFullId;
+	}
+
+	private function populateFullEntityIdField( EntityId $entityId ) {
+		if ( $this->readFullEntityIdColumn || ! $entityId instanceof Int32EntityId ) {
+			return;
+		}
+
+		$db = $this->loadBalancerFactory->getMainLB()->getConnection( DB_MASTER );
+
+		$db->update(
+			self::TABLE_NAME,
+			[
+				'term_full_entity_id' => $entityId->getSerialization()
+			],
+			[
+				'term_entity_type' => $entityId->getEntityType(),
+				'term_entity_id' => $entityId->getNumericId(),
+			],
+			__METHOD__
+		);
+
+		$this->loadBalancerFactory->getMainLB()->reuseConnection( $db );
 	}
 
 }
