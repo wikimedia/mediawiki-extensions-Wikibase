@@ -125,11 +125,13 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * @see EntityContent::getEntity
+	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
 	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return Item
 	 */
-	public function getItem() {
+	public function getEntity() {
 		$redirect = $this->getRedirectTarget();
 
 		if ( $redirect ) {
@@ -141,17 +143,6 @@ class ItemContent extends EntityContent {
 		}
 
 		return $this->itemHolder->getEntity( Item::class );
-	}
-
-	/**
-	 * @see EntityContent::getEntity
-	 *
-	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @throws LogicException if the content object is empty and does not contain an entity.
-	 * @return Item
-	 */
-	public function getEntity() {
-		return $this->getItem();
 	}
 
 	/**
@@ -174,7 +165,7 @@ class ItemContent extends EntityContent {
 		// TODO: Refactor ItemSearchTextGenerator to share an interface with
 		// FingerprintSearchTextGenerator, so we don't have to re-implement getTextForSearchIndex() here.
 		$searchTextGenerator = new ItemSearchTextGenerator();
-		$text = $searchTextGenerator->generate( $this->getItem() );
+		$text = $searchTextGenerator->generate( $this->getEntity() );
 
 		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
 			return '';
@@ -191,7 +182,7 @@ class ItemContent extends EntityContent {
 	 * @return bool True if this is not a redirect and the item is not empty.
 	 */
 	public function isCountable( $hasLinks = null ) {
-		return !$this->isRedirect() && !$this->getItem()->isEmpty();
+		return !$this->isRedirect() && !$this->getEntity()->isEmpty();
 	}
 
 	/**
@@ -200,7 +191,7 @@ class ItemContent extends EntityContent {
 	 * @return bool True if this is not a redirect and the item is empty.
 	 */
 	public function isEmpty() {
-		return !$this->isRedirect() && $this->getItem()->isEmpty();
+		return !$this->isRedirect() && $this->getEntity()->isEmpty();
 	}
 
 	/**
@@ -215,7 +206,7 @@ class ItemContent extends EntityContent {
 		$properties = parent::getEntityPageProperties();
 
 		if ( !$this->isRedirect() ) {
-			$item = $this->getItem();
+			$item = $this->getEntity();
 			$properties['wb-claims'] = $item->getStatements()->count();
 			$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
 			$properties['wb-identifiers'] = $this->getContentHandler()

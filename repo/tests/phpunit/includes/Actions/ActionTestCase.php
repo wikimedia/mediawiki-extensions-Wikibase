@@ -386,7 +386,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		/** @var ItemContent $content */
 		$content = $page->getContent();
 
-		return $content->getItem();
+		return $content->getEntity();
 	}
 
 	/**

@@ -58,25 +58,17 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @throws LogicException if the content object is empty and does not contain an entity.
-	 * @return Property
-	 */
-	public function getProperty() {
-		if ( !$this->propertyHolder ) {
-			throw new LogicException( 'This content object is empty' );
-		}
-
-		return $this->propertyHolder->getEntity( Property::class );
-	}
-
-	/**
 	 * @see EntityContent::getEntity
 	 *
 	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return Property
 	 */
 	public function getEntity() {
-		return $this->getProperty();
+		if ( !$this->propertyHolder ) {
+			throw new LogicException( 'This content object is empty' );
+		}
+
+		return $this->propertyHolder->getEntity( Property::class );
 	}
 
 	/**
@@ -98,7 +90,7 @@ class PropertyContent extends EntityContent {
 	public function getEntityPageProperties() {
 		$properties = parent::getEntityPageProperties();
 
-		$properties['wb-claims'] = $this->getProperty()->getStatements()->count();
+		$properties['wb-claims'] = $this->getEntity()->getStatements()->count();
 
 		return $properties;
 	}
@@ -112,7 +104,7 @@ class PropertyContent extends EntityContent {
 	 */
 	public function isValid() {
 		//TODO: provide a way to get the data type from the holder directly!
-		return parent::isValid() && $this->getProperty()->getDataTypeId() !== '';
+		return parent::isValid() && $this->getEntity()->getDataTypeId() !== '';
 	}
 
 	/**
@@ -123,7 +115,7 @@ class PropertyContent extends EntityContent {
 	 * @return bool True if this is not a redirect and the property is not empty.
 	 */
 	public function isCountable( $hasLinks = null ) {
-		return !$this->isRedirect() && !$this->getProperty()->isEmpty();
+		return !$this->isRedirect() && !$this->getEntity()->isEmpty();
 	}
 
 	/**
@@ -132,7 +124,7 @@ class PropertyContent extends EntityContent {
 	 * @return bool True if this is not a redirect and the property is empty.
 	 */
 	public function isEmpty() {
-		return !$this->isRedirect() && $this->getProperty()->isEmpty();
+		return !$this->isRedirect() && $this->getEntity()->isEmpty();
 	}
 
 }

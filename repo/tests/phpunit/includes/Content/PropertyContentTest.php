@@ -70,7 +70,7 @@ class PropertyContentTest extends EntityContentTest {
 		$empty = new PropertyContent( new EntityInstanceHolder( Property::newFromType( 'string' ) ) );
 
 		if ( $propertyId !== null ) {
-			$empty->getProperty()->setId( $propertyId );
+			$empty->getEntity()->setId( $propertyId );
 		}
 
 		return $empty;

@@ -131,7 +131,7 @@ class ItemContentTest extends EntityContentTest {
 		$empty = new ItemContent( new EntityInstanceHolder( new Item() ) );
 
 		if ( $itemId !== null ) {
-			$empty->getItem()->setId( $itemId );
+			$empty->getEntity()->setId( $itemId );
 		}
 
 		return $empty;
@@ -214,7 +214,7 @@ class ItemContentTest extends EntityContentTest {
 	 */
 	private function getItemContentWithClaim() {
 		$itemContent = $this->newEmpty();
-		$item = $itemContent->getItem();
+		$item = $itemContent->getEntity();
 
 		$item->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( new PropertyId( 'P11' ) ),
@@ -289,7 +289,7 @@ class ItemContentTest extends EntityContentTest {
 	 */
 	private function getItemContentWithSiteLink() {
 		$itemContent = $this->newEmpty();
-		$item = $itemContent->getItem();
+		$item = $itemContent->getEntity();
 
 		$item->setSiteLinkList( new SiteLinkList( array(
 			new SiteLink( 'enwiki', 'Foo' )

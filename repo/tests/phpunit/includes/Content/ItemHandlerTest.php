@@ -68,7 +68,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$contents[] = [ $content ];
 
 		$content = $content->copy();
-		$content->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
+		$content->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
 		$contents[] = [ $content ];
 
 		return $contents;
