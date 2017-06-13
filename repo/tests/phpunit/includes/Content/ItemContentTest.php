@@ -175,8 +175,8 @@ class ItemContentTest extends EntityContentTest {
 
 	public function getTextForSearchIndexProvider() {
 		$itemContent = $this->newEmpty();
-		$itemContent->getEntity()->setLabel( 'en', "cake" );
-		$itemContent->getEntity()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
+		$itemContent->getItem()->setLabel( 'en', "cake" );
+		$itemContent->getItem()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
 		return array(
 			array( $itemContent, "cake\nBerlin" ),
@@ -187,7 +187,7 @@ class ItemContentTest extends EntityContentTest {
 		$cases = parent::providePageProperties();
 
 		$contentLinkStub = $this->newEmpty( $this->getDummyId() );
-		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$contentLinkStub->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$cases['sitelinks'] = array(
 			$contentLinkStub,
@@ -199,7 +199,7 @@ class ItemContentTest extends EntityContentTest {
 		$contentWithClaim = $this->newEmpty( $this->getDummyId() );
 		$snak = new PropertyNoValueSnak( 83 );
 		$guid = '$testing$';
-		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
+		$contentWithClaim->getItem()->getStatements()->addNewStatement( $snak, null, null, $guid );
 
 		$cases['claims'] = array(
 			$contentWithClaim,
@@ -352,7 +352,7 @@ class ItemContentTest extends EntityContentTest {
 		$empty = $this->newEmpty( $q10 );
 
 		$spam = $this->newEmpty( $q10 );
-		$spam->getEntity()->setLabel( 'en', 'Spam' );
+		$spam->getItem()->setLabel( 'en', 'Spam' );
 
 		$redir = $this->newRedirect( $q10, new ItemId( 'Q17' ) );
 		$redirTarget = 'Q17';
@@ -408,7 +408,7 @@ class ItemContentTest extends EntityContentTest {
 		$empty = $this->newEmpty( $q10 );
 
 		$spam = $this->newEmpty( $q10 );
-		$spam->getEntity()->setLabel( 'en', 'Spam' );
+		$spam->getItem()->setLabel( 'en', 'Spam' );
 
 		$redirTarget = 'Q17';
 		$redir = $this->newRedirect( $q10, new ItemId( $redirTarget ) );
@@ -469,7 +469,7 @@ class ItemContentTest extends EntityContentTest {
 		$redir = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q7' ) );
 
 		$labels1 = $this->newEmpty();
-		$labels1->getEntity()->setLabel( 'en', 'Foo' );
+		$labels1->getItem()->setLabel( 'en', 'Foo' );
 
 		$cases['same redirect'] = array( $redir, $redir, true );
 		$cases['redirect vs labels'] = array( $redir, $labels1, false );

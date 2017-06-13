@@ -175,14 +175,15 @@ class PropertyHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		/** @var PropertyContent $content */
 		$updates = array();
 
-		$info = $this->propertyInfoBuilder->buildPropertyInfo( $content->getProperty() );
+		/** @var PropertyContent $content */
+		$property = $content->getProperty();
+		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 
 		$updates[] = new DataUpdateAdapter(
 			array( $this->infoStore, 'setPropertyInfo' ),
-			$content->getEntity()->getId(),
+			$property->getId(),
 			$info
 		);
 
