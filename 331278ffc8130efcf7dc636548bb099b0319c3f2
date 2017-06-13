@@ -22,6 +22,30 @@
       "revId": "331278ffc8130efcf7dc636548bb099b0319c3f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_f143e6b4",
+        "filename": "client/includes/Hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-06-13T06:57:28Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/#/c/358519/",
+      "parentUuid": "0e81134c_11f22a98",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "331278ffc8130efcf7dc636548bb099b0319c3f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
