@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -43,7 +44,7 @@ class PropertyContentTest extends EntityContentTest {
 	 * @return PropertyContent
 	 */
 	protected function newEmpty( EntityId $propertyId = null ) {
-		$empty = PropertyContent::newEmpty();
+		$empty = new PropertyContent( new EntityInstanceHolder( Property::newFromType( 'string' ) ) );
 
 		if ( $propertyId !== null ) {
 			$empty->getProperty()->setId( $propertyId );

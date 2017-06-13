@@ -64,13 +64,6 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @return self
-	 */
-	public static function newEmpty() {
-		return new static( new EntityInstanceHolder( Property::newFromType( 'string' ) ) );
-	}
-
-	/**
 	 * @see EntityContent::getEntity
 	 *
 	 * @return Property
