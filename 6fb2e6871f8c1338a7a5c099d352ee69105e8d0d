@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_d7825297",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-13T13:43:17Z",
+      "side": 1,
+      "message": "If this shouldn\u0027t be a singleton class, we just need to replace getInstance calls with newFromGlobalState ones.\n\nI should finally explain why I initially made it singleton. I noticed that ChangesList is, in fact, a \"singleton\" (only one instance is created). The dependencies for this class are obtained from this ChangesList class, so I didn\u0027t see any problem in having a single instance during handling because this is what I saw in other hook classes.\n\nOTOH the previous code created a new formatter for each line.",
+      "parentUuid": "0e81134c_748b641c",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_94904848",
         "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
         "patchSetId": 6
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_b7f8ee47",
+        "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-13T13:43:17Z",
+      "side": 1,
+      "message": "yeah, this is another my invention that I should stop doing now ;)\n\n(well, I have just found one or two HTML\u0027s in core, so I\u0027m not the first one)",
+      "parentUuid": "0e81134c_f462f405",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_d4a0109d",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 6
@@ -135,6 +171,24 @@
       "writtenOn": "2017-06-13T11:47:37Z",
       "side": 1,
       "message": "I am not super happy of this method being here. Nothing related to the factory really, is it?\n\nOTOH I understand the intention to have this check in a single place, not duplicated in all classes that possibly need to check this. And I also understand that there might not be a better place in the current code to put such a method.\n\nStill, I wonder, maybe it would be OK to have something similar as a private method in ChangesListLinesHandler, and just an inline check in ChangesListSpecialPageHookHandlers?",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_97212aaf",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-13T13:43:17Z",
+      "side": 1,
+      "message": "Indeed, when I started coding, I created a private method in the new class. And yeah, this is a factory class, so perhaps nothing but factoring objects should happen here.",
+      "parentUuid": "0e81134c_d4a0109d",
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
