@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_48b23f94",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:46:26Z",
+      "side": 1,
+      "message": "So, even if all we do is add full ids, we still have to load the full entity?\n\nOn wikidata.org, that would be true for all entities. So we\u0027d end up doing the full update for all entities in the end.\n\nMaybe we should have a separate script that just inserts the missing full entity ID. That could also be used from update.php instead of the full rebuild.",
+      "revId": "3e63f915f57e5ec30702df57871d6540178ad9e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
