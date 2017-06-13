@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_94912855",
+        "filename": "client/includes/Hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-13T09:49:49Z",
+      "side": 1,
+      "message": "Ugh. Is it possible to set this to an array?\n\n[ NoLangLinkHandler::class, \u0027handle\u0027 ]",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 40
+      },
+      "revId": "aa3120ab11c8e5d84fae06826794bc1d6c4df13c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
