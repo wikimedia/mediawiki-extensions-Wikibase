@@ -1,0 +1,13 @@
+This directory contains test data for RDF format.
+
+Please note that if you need to change any data for existing tests here,
+you have probably made a change that is relevant to Wikidata Query Service
+and other Linked Data/triple store consumers of Wikidata.
+Such change should be announced on Wikidata list and usually the Phabricator
+ticket should be created to update the Wikidata Query Service store.
+
+A change that infuences RDF data is considered a "significant change"
+within the terms of Wikidata Stable Interface Policy[1].
+
+[1] https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
+
