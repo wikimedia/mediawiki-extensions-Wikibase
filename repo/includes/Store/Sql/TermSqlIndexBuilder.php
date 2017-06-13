@@ -14,6 +14,12 @@ use Wikimedia\Rdbms\LBFactory;
 
 /**
  * (Re)builds term index in the SQL table.
+ * This can add missing information to the SQL table like missing full entity ID. It also removes
+ * possible duplicate terms.
+ * It can also ensure that all expected entity terms are stored in the term index, i.e. add
+ * all possible missing terms of the given entity, and remove all possible no longer valid
+ * terms of the entity, even if there is no other need for rebuilding the index
+ * (i.e. all ID fields are populated, there are no duplicate entries).
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -73,6 +79,11 @@ class TermSqlIndexBuilder {
 	private $batchSize;
 
 	/**
+	 * @var bool
+	 */
+	private $rebuildAllEntityTerms = false;
+
+	/**
 	 * @var int|null
 	 */
 	private $fromId = null;
@@ -129,6 +140,15 @@ class TermSqlIndexBuilder {
 	}
 
 	/**
+	 * Makes the builder rebuild all entity terms, i.e. it will check if any of entity terms
+	 * is missing, and/or any of existing entity terms is no longer "correct".
+	 * Missing terms will be added, and no longer expected terms will be removed.
+	 */
+	public function setRebuildAllEntityTerms() {
+		$this->rebuildAllEntityTerms = true;
+	}
+
+	/**
 	 * @param string $entityType
 	 */
 	private function rebuildForEntityType( $entityType ) {
@@ -164,10 +184,7 @@ class TermSqlIndexBuilder {
 	private function rebuildEntityTerms( EntityId $entityId ) {
 		$serializedId = $entityId->getSerialization();
 
-		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
-		$entity = $entityRevision->getEntity();
-
-		if ( !$this->needsTermRebuild( $entity ) ) {
+		if ( !$this->needsTermRebuild( $entityId ) ) {
 			return;
 		}
 
@@ -182,6 +199,8 @@ class TermSqlIndexBuilder {
 
 			return;
 		}
+
+		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 
 		$success = $this->termSqlIndex->saveTermsOfEntity( $entityRevision->getEntity() );
 
@@ -198,19 +217,25 @@ class TermSqlIndexBuilder {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityId $entityId
 	 * @return bool
 	 */
-	private function needsTermRebuild( EntityDocument $entity ) {
-		$entityId = $entity->getId();
-
-		$rebuiltTerms = $this->termSqlIndex->getEntityTerms( $entity );
+	private function needsTermRebuild( EntityId $entityId ) {
 		$existingTerms = $this->termSqlIndex->getTermsOfEntity( $entityId );
 
-		$termsToInsert = array_udiff( $rebuiltTerms, $existingTerms, [ TermIndexEntry::class, 'compare' ] );
-		$termsToDelete = array_udiff( $existingTerms, $rebuiltTerms, [ TermIndexEntry::class, 'compare' ] );
+		$termsChanged = false;
 
-		$termsChanged = $termsToInsert || $termsToDelete;
+		if ( $this->rebuildAllEntityTerms ) {
+			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+			$entity = $entityRevision->getEntity();
+
+			$rebuiltTerms = $this->termSqlIndex->getEntityTerms( $entity );
+
+			$termsToInsert = array_udiff( $rebuiltTerms, $existingTerms, [ TermIndexEntry::class, 'compare' ] );
+			$termsToDelete = array_udiff( $existingTerms, $rebuiltTerms, [ TermIndexEntry::class, 'compare' ] );
+
+			$termsChanged = $termsToInsert || $termsToDelete;
+		}
 
 		$needToPopulateEntityIdColumn = !$this->readFullEntityIdColumn &&
 			$this->writeFullEntityIdColumn &&
