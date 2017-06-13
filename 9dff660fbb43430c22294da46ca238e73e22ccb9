@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_d45b3025",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-13T08:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_d66edb29",
+      "revId": "9dff660fbb43430c22294da46ca238e73e22ccb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_1663033d",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-12T17:49:24Z",
       "side": 1,
       "message": "Please call makeEmptyContent() for clarity.",
+      "revId": "9dff660fbb43430c22294da46ca238e73e22ccb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_749fe4b9",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-13T08:52:16Z",
+      "side": 1,
+      "message": "Solved differently. An entirely empty EntityContent object does not contain anything mutable. No need to create a new empty one. Just return $this.",
+      "parentUuid": "0e81134c_1663033d",
       "revId": "9dff660fbb43430c22294da46ca238e73e22ccb9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e81134c_b45eac15",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-13T08:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_56698b1c",
+      "revId": "9dff660fbb43430c22294da46ca238e73e22ccb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_d6557b53",
         "filename": "repo/includes/Content/EntityHandler.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2017-06-12T17:49:24Z",
       "side": 1,
       "message": "To avoid the optional parameter in the public method, perhaps introduce a protected newEntityContent method, that gets called by makeEntityContent and makeEmptyContent.",
+      "revId": "9dff660fbb43430c22294da46ca238e73e22ccb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_146218d6",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-13T08:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_d6557b53",
       "revId": "9dff660fbb43430c22294da46ca238e73e22ccb9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
