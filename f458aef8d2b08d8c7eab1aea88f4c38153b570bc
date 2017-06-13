@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_2334bcd9",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:59:36Z",
+      "side": 1,
+      "message": "If find ( !$thisHolder || !$thatHolder ) easier to read. DeMorgan for the win!",
+      "revId": "f458aef8d2b08d8c7eab1aea88f4c38153b570bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_a3274cb0",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-13T17:59:36Z",
+      "side": 1,
+      "message": "for clarity, please use $thisHolder-\u003egetEntity and $thatHolder-\u003egetEntity",
+      "revId": "f458aef8d2b08d8c7eab1aea88f4c38153b570bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
