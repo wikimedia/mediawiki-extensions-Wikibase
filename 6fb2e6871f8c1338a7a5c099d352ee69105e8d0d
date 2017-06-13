@@ -52,6 +52,92 @@
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_748b641c",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-13T11:47:37Z",
+      "side": 1,
+      "message": "I believe what avoiding the singleton (kind of) could like would be by using this class in Wikibase\\ClientHooks.\nTwo methods would be added there, and the instance(s) of the hook handler will created there, instead of ChangesListLinesHandler::onOldChangesListRecentChangesLine and ChangesListLinesHandler::onEnhancedChangesListModifyBlockLineData instantiate it.",
+      "parentUuid": "0e81134c_2a633e3d",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_94904848",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-13T11:47:37Z",
+      "side": 1,
+      "message": "@param ChangesList $changesList\n\nCould also be skipped IMO, as there is a type hint in the param list.",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_3495dc35",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-13T11:47:37Z",
+      "side": 1,
+      "message": "@param ChangesList $changesList\n\nCould also add type hint to the param list as above (and possibly phpdoc no longer needed then?)",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_f462f405",
+        "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-13T11:47:37Z",
+      "side": 1,
+      "message": "hmm, shouldn\u0027t this be: string[] Array of HTML strings\n\nor something like this?\n\nI mean that \"HTML\" is not \"standard\" and does not match PHP type, whereas string does.\n\nBTW: are we sure that this always returns two-element array? If so, this could maybe also be documented?",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_d4a0109d",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-13T11:47:37Z",
+      "side": 1,
+      "message": "I am not super happy of this method being here. Nothing related to the factory really, is it?\n\nOTOH I understand the intention to have this check in a single place, not duplicated in all classes that possibly need to check this. And I also understand that there might not be a better place in the current code to put such a method.\n\nStill, I wonder, maybe it would be OK to have something similar as a private method in ChangesListLinesHandler, and just an inline check in ChangesListSpecialPageHookHandlers?",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
