@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee859f59_26c06c2f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T18:00:15Z",
+      "side": 1,
+      "message": "So this needs to be fixed (probably in another patch)",
+      "range": {
+        "startLine": 291,
+        "startChar": 27,
+        "endLine": 291,
+        "endChar": 39
+      },
+      "revId": "635716021b030275629497743a6852f4f16f48fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_c6d2c05d",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 6
@@ -13,6 +36,24 @@
       "writtenOn": "2017-06-14T17:12:00Z",
       "side": 1,
       "message": "wfUrlencode, please. We want a pretty \":\" after the namespace name.",
+      "revId": "635716021b030275629497743a6852f4f16f48fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_26d70cf4",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T18:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee859f59_c6d2c05d",
       "revId": "635716021b030275629497743a6852f4f16f48fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
