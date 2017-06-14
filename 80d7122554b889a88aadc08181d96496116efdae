@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_4b6579a9",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T15:42:21Z",
+      "side": 1,
+      "message": "I highlighted that this needs to be changed to \u0027http://commons.wikimedia.org/data/main/\u0027 when it actually works but for now, it points to a non-existing endpoint if we go this way.",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 71
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_3713c007",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 3
@@ -219,6 +242,24 @@
       "writtenOn": "2017-06-14T15:29:49Z",
       "side": 1,
       "message": "This is not the correct URI! \nThe correct URI would be http://commons.wikimedia.org/data/main/Data:Berlin.map",
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_6bf5ddc6",
+        "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_direct.nt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T15:42:21Z",
+      "side": 1,
+      "message": "I answered in the other file.",
+      "parentUuid": "ee859f59_6bc87dab",
       "revId": "80d7122554b889a88aadc08181d96496116efdae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
