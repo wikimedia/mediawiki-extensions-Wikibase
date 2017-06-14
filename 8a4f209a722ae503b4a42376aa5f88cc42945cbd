@@ -416,6 +416,24 @@
       "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_e6d34463",
+        "filename": "repo/tests/phpunit/includes/Api/ModifyTermTestCase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:09:05Z",
+      "side": 1,
+      "message": "The messages are now localized, we only care about the code or message key, not the actual message text.",
+      "parentUuid": "ce153bd1_bff6b8f4",
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
