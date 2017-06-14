@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_374e603d",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T09:04:17Z",
+      "side": 1,
+      "message": "Yeah, having an instance of the handler for each line does not seem a good idea.\nSo I guess we can keep it as this \"static singleton\" here. It is not very nice, but it makes sense here.",
+      "parentUuid": "0e81134c_d7825297",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_94904848",
         "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
         "patchSetId": 6
