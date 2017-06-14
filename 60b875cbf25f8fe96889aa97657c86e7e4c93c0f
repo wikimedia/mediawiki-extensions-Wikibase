@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_666e7495",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:20:04Z",
+      "side": 1,
+      "message": "The defaults should work with a vanilla install, not with what\u0027s on the cluster. Note that not reading from the new column means reading from the old column. Can we be sure that even exists and has complete data on a fresh vanilla install?",
+      "parentUuid": "ee859f59_f7745898",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_a8696b1f",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 1
