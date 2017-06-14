@@ -61,7 +61,8 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 				->numParams( $count );
 		} else {
 			$msg = $this->getMessageWithAgent( "notification-header-{$this->type}" )
-				->params( $truncated );
+				->params( $truncated )
+				->params( $this->event->getExtraParam( 'entity' ) );
 		}
 
 		return $msg;
