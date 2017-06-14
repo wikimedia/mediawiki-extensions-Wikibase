@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_17523c6b",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T09:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee859f59_97214c4e",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_3713c007",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 3
@@ -83,6 +107,30 @@
       "writtenOn": "2017-06-14T09:15:41Z",
       "side": 1,
       "message": "Whoops. Can you please remove my name here?",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_372180f7",
+        "filename": "repo/includes/Rdf/Values/GeoShapeRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T09:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee859f59_37f2e0ce",
       "range": {
         "startLine": 11,
         "startChar": 11,
