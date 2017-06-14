@@ -135,7 +135,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$entry[$row->eu_entity_id] = [ 'aspects' => [ $row->eu_aspect ] ];
 		if ( $url ) {
 			$entry[$row->eu_entity_id]['url'] = $this->repoLinker->getPageUrl(
-				'Special:EntityData/' . $row->eu_entity_id );
+				'Special:EntityPage/' . $row->eu_entity_id );
 		}
 		ApiResult::setIndexedTagName(
 			$entry[$row->eu_entity_id]['aspects'], 'aspect'
