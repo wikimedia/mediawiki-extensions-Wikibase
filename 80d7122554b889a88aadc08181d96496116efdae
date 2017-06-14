@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_b79fb005",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T09:49:06Z",
+      "side": 1,
+      "message": "Then it\u0027s COMMONS_DATA_BASE_URI. Is this ok for you?\n\nThe one argument I have is that there is not just one way to link to Commons, but \"COMMONS_URI\" gives this impression. It should be more specific. In this case, it is the base URI for direct links to both geo shapes and tabular data, which are both referred to as \"Data:\".",
+      "parentUuid": "ee859f59_77f14892",
+      "range": {
+        "startLine": 75,
+        "startChar": 7,
+        "endLine": 75,
+        "endChar": 18
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_37f2e0ce",
         "filename": "repo/includes/Rdf/Values/GeoShapeRdfBuilder.php",
         "patchSetId": 3
