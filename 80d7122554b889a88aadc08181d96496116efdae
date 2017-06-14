@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_77f14892",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-14T09:34:55Z",
+      "side": 1,
+      "message": "The thing is that it\u0027s possible to have internal mapping too for example maybe we need https://wikidata.org/wiki/Special:PageData/Foo\nSo your suggestion is too generic but I can\u0027t think of anything better. Daniel might have ideas.",
+      "parentUuid": "ee859f59_3713c007",
+      "range": {
+        "startLine": 75,
+        "startChar": 7,
+        "endLine": 75,
+        "endChar": 18
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_37f2e0ce",
         "filename": "repo/includes/Rdf/Values/GeoShapeRdfBuilder.php",
         "patchSetId": 3
