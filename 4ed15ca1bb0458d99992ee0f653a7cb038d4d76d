@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_2b85959f",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-14T16:44:02Z",
+      "side": 1,
+      "message": "this needs b/c (older notifications will never get this param)",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 53
+      },
+      "revId": "4ed15ca1bb0458d99992ee0f653a7cb038d4d76d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
