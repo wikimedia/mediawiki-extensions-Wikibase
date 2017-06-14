@@ -46,6 +46,30 @@
       "revId": "ef88e251215c67f785c1e2ff838bc75fee2472fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_865fd843",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T18:22:27Z",
+      "side": 1,
+      "message": "The $entityType parameter can be set to null. It doesn\u0027t do much. It\u0027s actually not documented at all what it does, but judging from the code it looks like it\u0027s obsolete. It is only used by the \"entity exists validator\", which just works fine without an entity type. So my question is still kind of the same: why do you need access to this parameter? For which patch?",
+      "parentUuid": "0e81134c_8094898e",
+      "range": {
+        "startLine": 158,
+        "startChar": 17,
+        "endLine": 158,
+        "endChar": 38
+      },
+      "revId": "ef88e251215c67f785c1e2ff838bc75fee2472fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
