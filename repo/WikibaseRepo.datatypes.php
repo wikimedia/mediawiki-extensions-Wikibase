@@ -131,8 +131,7 @@ return call_user_func( function() {
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				// TODO: Implement proper RDF mapping, see T159517 and T160535
-				return new GeoShapeRdfBuilder();
+				return new GeoShapeRdfBuilder( $vocab );
 			},
 		),
 		'PT:tabular-data' => array(
