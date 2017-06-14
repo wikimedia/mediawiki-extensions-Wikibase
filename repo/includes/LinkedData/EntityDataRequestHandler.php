@@ -188,6 +188,7 @@ class EntityDataRequestHandler {
 		$id = $request->getText( 'id', $id );
 		$revision = $request->getInt( 'oldid', $revision );
 		$revision = $request->getInt( 'revision', $revision );
+		$redirectMode = $request->getText( 'redirect' );
 		//TODO: malformed revision IDs should trigger a code 400
 
 		// If there is no ID, fail
@@ -231,6 +232,13 @@ class EntityDataRequestHandler {
 		// if the format is HTML, redirect to the entity's wiki page
 		if ( $format === 'html' ) {
 			$url = $this->uriManager->getDocUrl( $entityId, 'html', $revision );
+			$output->redirect( $url, 303 );
+			return;
+		}
+
+		// if redirection was force, redirect
+		if ( $redirectMode === 'force' ) {
+			$url = $this->uriManager->getDocUrl( $entityId, $format, $revision );
 			$output->redirect( $url, 303 );
 			return;
 		}
