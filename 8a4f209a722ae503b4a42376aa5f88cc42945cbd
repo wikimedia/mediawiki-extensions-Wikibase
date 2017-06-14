@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_462d708a",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:08:21Z",
+      "side": 1,
+      "message": "Not unrelated, inlining from throwUsageException() which is no longer called here.",
+      "parentUuid": "ce153bd1_5f13dc05",
+      "range": {
+        "startLine": 139,
+        "startChar": 45,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_3f1628f7",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 13
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_a669bcbe",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce153bd1_bfb798f1",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 148,
+        "endChar": 17
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_9f19742a",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 13
@@ -83,6 +131,30 @@
       "writtenOn": "2017-06-01T20:20:36Z",
       "side": 1,
       "message": "This is not a sufficient name for something that returns an array with two keys.",
+      "range": {
+        "startLine": 150,
+        "startChar": 18,
+        "endLine": 150,
+        "endChar": 26
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_866118d3",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce153bd1_9f19742a",
       "range": {
         "startLine": 150,
         "startChar": 18,
@@ -212,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_465b3027",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:08:21Z",
+      "side": 1,
+      "message": "I don\u0027t remember why I did this :)",
+      "parentUuid": "ce153bd1_9fde546f",
+      "range": {
+        "startLine": 125,
+        "startChar": 35,
+        "endLine": 125,
+        "endChar": 40
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_5fe8bc0b",
         "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
         "patchSetId": 13
@@ -235,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_a67f7c62",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:08:21Z",
+      "side": 1,
+      "message": "The new code ignored the $httpRespCode parameter to ApiErrorReporter::dieStatus(), because ApiBase::dieStatus() dies not support it. So it will always be 0.\nI\u0027ll remove the parameter from the test.",
+      "parentUuid": "ce153bd1_5fe8bc0b",
+      "range": {
+        "startLine": 229,
+        "startChar": 25,
+        "endLine": 229,
+        "endChar": 26
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce153bd1_5f919c9b",
         "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
         "patchSetId": 13
@@ -246,6 +366,30 @@
       "writtenOn": "2017-06-01T20:20:36Z",
       "side": 1,
       "message": "This is a comment about a comment. What should be fixed here?",
+      "range": {
+        "startLine": 906,
+        "startChar": 68,
+        "endLine": 906,
+        "endChar": 73
+      },
+      "revId": "8a4f209a722ae503b4a42376aa5f88cc42945cbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_e6eca428",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-14T17:08:21Z",
+      "side": 1,
+      "message": "There is no longer a way to test the raw message, just the key. Removing.",
+      "parentUuid": "ce153bd1_5f919c9b",
       "range": {
         "startLine": 906,
         "startChar": 68,
