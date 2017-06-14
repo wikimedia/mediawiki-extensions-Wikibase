@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_97214c4e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T09:15:41Z",
+      "side": 1,
+      "message": "Can you please move the new constant up here? I found it a bit confusing to not have these two next to each other.",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_3713c007",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T09:15:41Z",
+      "side": 1,
+      "message": "I wonder. You just found a better name for a generic \"COMMONS_URI\" constant. Why are you introducing the same issue again? Why not go with something more specific, for example PAGE_DATA_BASE_URI for the constant and getPageDataUri() for the function? We don\u0027t have to come up with anything new, we can simply reuse what is already there.",
+      "range": {
+        "startLine": 75,
+        "startChar": 7,
+        "endLine": 75,
+        "endChar": 18
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_37f2e0ce",
+        "filename": "repo/includes/Rdf/Values/GeoShapeRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T09:15:41Z",
+      "side": 1,
+      "message": "Whoops. Can you please remove my name here?",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "80d7122554b889a88aadc08181d96496116efdae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
