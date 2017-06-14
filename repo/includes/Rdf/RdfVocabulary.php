@@ -283,7 +283,7 @@ class RdfVocabulary {
 	 *
 	 * @return string
 	 */
-	public function getCommonsURI( $file ) {
+	public function getMediaURI( $file ) {
 		return self::COMMONS_URI . rawurlencode( $file );
 	}
 

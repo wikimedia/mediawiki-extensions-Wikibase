@@ -29,7 +29,7 @@ class CommonsMediaRdfBuilder extends ObjectUriRdfBuilder {
 	 * @return string the object URI
 	 */
 	protected function getValueUri( DataValue $value ) {
-		return $this->vocabulary->getCommonsURI( $value->getValue() );
+		return $this->vocabulary->getMediaURI( $value->getValue() );
 	}
 
 }
