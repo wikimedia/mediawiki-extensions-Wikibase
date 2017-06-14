@@ -16,6 +16,24 @@
       "revId": "3e63f915f57e5ec30702df57871d6540178ad9e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_f72c5847",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T09:13:44Z",
+      "side": 1,
+      "message": "Yeah, it will be like this if we want to use TermSqlIndex for doing the update.\n\nI was thinking about making a custom code just reading the db table this each time I was touching the script and I think I finally got convinced I will give it a try.",
+      "parentUuid": "0e81134c_48b23f94",
+      "revId": "3e63f915f57e5ec30702df57871d6540178ad9e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
