@@ -52,6 +52,8 @@ class RdfVocabulary {
 	// External URIs
 	//FIXME: get from config
 	const MEDIA_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/';
+	//FIXME: get from config also change to /data/ endpoint when available
+	const COMMONS_DATA_URI = 'http://commons.wikimedia.org/wiki/Special:PageData/';
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
 	// TODO: make the license settable
@@ -70,6 +72,7 @@ class RdfVocabulary {
 	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
 	const WIKIBASE_RANK_BEST = 'BestRank';
+
 	public static $rankMap = array(
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
@@ -286,6 +289,17 @@ class RdfVocabulary {
 	 */
 	public function getMediaFileURI( $file ) {
 		return self::MEDIA_URI . rawurlencode( $file );
+	}
+
+	/**
+	 * Create data entry point URL for geo shapes
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	public function getGeoShapeURI( $file ) {
+		return self::COMMONS_DATA_URI . rawurlencode( $file );
 	}
 
 	/**
