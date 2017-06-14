@@ -50,7 +50,8 @@ class RdfVocabulary {
 	const SCHEMA_ORG_URI = 'http://schema.org/';
 	const CC_URI = 'http://creativecommons.org/ns#';
 	// External URIs
-	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/'; //FIXME: get from config
+	//FIXME: get from config
+	const MEDIA_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/';
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
 	// TODO: make the license settable
@@ -283,8 +284,8 @@ class RdfVocabulary {
 	 *
 	 * @return string
 	 */
-	public function getCommonsURI( $file ) {
-		return self::COMMONS_URI . rawurlencode( $file );
+	public function getMediaURI( $file ) {
+		return self::MEDIA_URI . rawurlencode( $file );
 	}
 
 	/**
