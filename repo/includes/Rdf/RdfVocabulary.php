@@ -70,6 +70,10 @@ class RdfVocabulary {
 	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
 	const WIKIBASE_RANK_BEST = 'BestRank';
+
+	//FIXME: get from config also change to /data/ endpoint when available
+	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/Special:PageData/';
+
 	public static $rankMap = array(
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
@@ -286,6 +290,17 @@ class RdfVocabulary {
 	 */
 	public function getMediaURI( $file ) {
 		return self::MEDIA_URI . rawurlencode( $file );
+	}
+
+	/**
+	 * Create data entry point URL for geo shapes
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	public function getGeoShapeURI( $file ) {
+		return self::COMMONS_URI . rawurlencode( $file );
 	}
 
 	/**
