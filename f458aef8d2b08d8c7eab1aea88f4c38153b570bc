@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_f7dd3818",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T09:29:07Z",
+      "side": 1,
+      "message": "It reads different. Either \"bail out if they aren\u0027t both set\" or \"bail out if either the one or the other is not set\". I know it\u0027s the same, and know how to convert it, but like my version better in this specific case.",
+      "parentUuid": "0e81134c_2334bcd9",
+      "revId": "f458aef8d2b08d8c7eab1aea88f4c38153b570bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_a3274cb0",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-13T17:59:36Z",
       "side": 1,
       "message": "for clarity, please use $thisHolder-\u003egetEntity and $thatHolder-\u003egetEntity",
+      "revId": "f458aef8d2b08d8c7eab1aea88f4c38153b570bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_77caa84c",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-14T09:29:07Z",
+      "side": 1,
+      "message": "Ok, makes sense.",
+      "parentUuid": "0e81134c_a3274cb0",
       "revId": "f458aef8d2b08d8c7eab1aea88f4c38153b570bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
