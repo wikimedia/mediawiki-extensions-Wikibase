@@ -67,7 +67,12 @@
 				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
 				// FIXME: Set statement on this._entity
+
 				deferred.resolve();
+
+				if ( typeof mediaWiki === 'object' && typeof mediaWiki.hook === 'function' ) {
+					mediaWiki.hook( 'wikibase.statement.removed' ).fire( self._entity.getId(), guid );
+				}
 			} )
 			.fail( function( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
@@ -94,16 +99,19 @@
 			)
 			.done( function( result ) {
 				var savedStatement = self._statementDeserializer.deserialize( result.claim ),
+					guid = savedStatement.getClaim().getGuid(),
 					pageInfo = result.pageinfo;
 
 				// Update revision store:
-				self._revisionStore.setClaimRevision(
-					pageInfo.lastrevid, savedStatement.getClaim().getGuid()
-				);
+				self._revisionStore.setClaimRevision( pageInfo.lastrevid, guid );
 
 				// FIXME: Set statement on this._entity
 
 				deferred.resolve( savedStatement );
+
+				if ( typeof mediaWiki === 'object' && typeof mediaWiki.hook === 'function' ) {
+					mediaWiki.hook( 'wikibase.statement.saved' ).fire( self._entity.getId(), guid );
+				}
 			} )
 			.fail( function( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
