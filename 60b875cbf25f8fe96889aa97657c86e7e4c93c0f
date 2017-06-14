@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_f7745898",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T15:17:00Z",
+      "side": 1,
+      "message": "In my understanding it will be set to true when the column is fully populated. As we\u0027re not there yet, false sounds like a more safe default to me.\n\nThis gets constructed in the maint script that reads flag values from settings, so in general this should getting a \"right\" value any way.",
+      "parentUuid": "0e81134c_e878d3ef",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_a8696b1f",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-13T17:41:57Z",
       "side": 1,
       "message": "This is expensive.",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_375bc028",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T15:17:00Z",
+      "side": 1,
+      "message": "Yes. That\u0027s why Ia0409ebfd7c905b178c8ebe17945226a845e010c makes it only done when the update of the table is really needed.",
+      "parentUuid": "0e81134c_a8696b1f",
       "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -106,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_eb6f8dc1",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T15:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_c88f0fd0",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_889107fe",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 1
@@ -117,6 +171,24 @@
       "writtenOn": "2017-06-13T17:41:57Z",
       "side": 1,
       "message": "the name is a bit odd. Perhaps better: hasMissingFullEntityId.",
+      "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_002190ac",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T15:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_889107fe",
       "revId": "60b875cbf25f8fe96889aa97657c86e7e4c93c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
