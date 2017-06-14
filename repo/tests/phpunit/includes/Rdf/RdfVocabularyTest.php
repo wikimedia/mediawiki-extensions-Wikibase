@@ -41,8 +41,8 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( 'de-AT-x-gibberish', $actual );
 	}
 
-	public function testGetCommonsURI() {
-		$actual = $this->newInstance()->getCommonsURI( '!' );
+	public function testGetMediaFileURI() {
+		$actual = $this->newInstance()->getMediaFileURI( '!' );
 		$this->assertSame( 'http://commons.wikimedia.org/wiki/Special:FilePath/%21', $actual );
 	}
 
