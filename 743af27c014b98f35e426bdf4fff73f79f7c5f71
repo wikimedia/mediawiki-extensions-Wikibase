@@ -22,6 +22,30 @@
       "revId": "743af27c014b98f35e426bdf4fff73f79f7c5f71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_3ad405ec",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-14T10:52:01Z",
+      "side": 1,
+      "message": "class constants are only public in PHP\u003c7.1",
+      "parentUuid": "ee859f59_da8a9917",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "743af27c014b98f35e426bdf4fff73f79f7c5f71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
