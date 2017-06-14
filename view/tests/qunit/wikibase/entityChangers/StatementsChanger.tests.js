@@ -8,6 +8,7 @@
 	QUnit.module( 'wikibase.entityChangers.StatementsChanger' );
 
 	var SUBJECT = wikibase.entityChangers.StatementsChanger;
+	var entity = { getId: function() { return 'Q1'; } };
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
@@ -33,7 +34,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; } },
-			'entity'
+			entity
 		);
 
 		statementsChanger.remove(
@@ -61,7 +62,7 @@
 				getClaimRevision: function () { return 0; },
 				setClaimRevision: function () {}
 			},
-			'entity'
+			entity
 		);
 
 		QUnit.stop();
@@ -97,7 +98,7 @@
 				getClaimRevision: function () { return 0; },
 				setClaimRevision: function () {}
 			},
-			'entity'
+			entity
 		);
 
 		QUnit.stop();
@@ -133,7 +134,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; } },
-			'entity',
+			entity,
 			new wb.serialization.StatementSerializer()
 		);
 
@@ -162,7 +163,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
-			'entity',
+			entity,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
@@ -203,7 +204,7 @@
 				getClaimRevision: function () { return 0; },
 				setClaimRevision: function () {}
 			},
-			'entity',
+			entity,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
