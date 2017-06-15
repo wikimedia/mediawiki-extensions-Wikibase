@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_9f82b6a8",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-15T17:39:11Z",
+      "side": 1,
+      "message": "replace startAtomic() with begin() here.",
+      "revId": "90349fb56c4dedd0f94bacde5644982e24dac0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_5f8c4edb",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-15T17:39:11Z",
+      "side": 1,
+      "message": "replace endAtomic() with commit() here.",
+      "revId": "90349fb56c4dedd0f94bacde5644982e24dac0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_ffb74282",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-15T17:39:11Z",
+      "side": 1,
+      "message": "no need for extra begin/commit",
+      "revId": "90349fb56c4dedd0f94bacde5644982e24dac0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
