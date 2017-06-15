@@ -719,8 +719,14 @@
 				}
 				this._referenceAdder[ value ? 'disable' : 'enable']();
 			}
+
 			if ( key === 'value' ) {
 				this.element.toggleClass( 'wb-new', value === null );
+
+				if ( value && value.getClaim().getGuid() ) {
+					this.element.addClass( 'wikibase-statement-' + value.getClaim().getGuid() );
+				}
+
 				// FIXME: set the value!
 			}
 
