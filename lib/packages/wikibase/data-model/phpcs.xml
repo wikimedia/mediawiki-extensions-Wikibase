@@ -14,10 +14,17 @@
 	<rule ref="Generic.Metrics.CyclomaticComplexity" />
 	<rule ref="Generic.Metrics.NestingLevel" />
 
-	<rule ref="Generic.NamingConventions.CamelCapsFunctionName" />
-	<rule ref="PSR1.Files.SideEffects" />
+	<rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
+		<exclude-pattern>tests*Test*\.php</exclude-pattern>
+	</rule>
+	<rule ref="PSR1.Files.SideEffects">
+		<exclude-pattern>WikibaseDataModel\.php</exclude-pattern>
+	</rule>
 	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
-	<rule ref="Squiz.Strings.DoubleQuoteUsage" />
+	<rule ref="Squiz.Strings.DoubleQuoteUsage">
+		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
+	</rule>
 
 	<file>.</file>
 </ruleset>
