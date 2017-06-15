@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_4ec02230",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-15T10:14:20Z",
+      "side": 1,
+      "message": "Isn\u0027t it redundant? In what case it might not be there?",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 78
+      },
+      "revId": "2b0003c8cac2225001ac0494974192001df2d6fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_cef97280",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-15T10:14:20Z",
+      "side": 1,
+      "message": "I suggest to mane it as an event: \u0027wikibase.statement.removED\u0027. It makes sense as soon as user cannot hook into saving process, but can only react after the fact.",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "2b0003c8cac2225001ac0494974192001df2d6fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_eefeb665",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-15T10:14:20Z",
+      "side": 1,
+      "message": "wikibase.statement.saved",
+      "range": {
+        "startLine": 113,
+        "startChar": 22,
+        "endLine": 113,
+        "endChar": 45
+      },
+      "revId": "2b0003c8cac2225001ac0494974192001df2d6fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
