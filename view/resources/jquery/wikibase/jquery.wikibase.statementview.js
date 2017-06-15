@@ -644,6 +644,7 @@
 			// FIXME: Should not be necessary if _setOption would do the right thing for values
 			this._recreateReferences();
 			this._stopEditingQualifiers( dropValue );
+			this._setStatementGuidClass();
 
 			return $.when(
 				this._mainSnakSnakView.stopEditing( dropValue ),
@@ -694,6 +695,15 @@
 			if ( qualifiers.length > 0 ) {
 				// Refill the qualifier listview with the initial (or new initial) qualifiers:
 				this._createQualifiersListview( qualifiers );
+			}
+		},
+
+		/**
+		 * @private
+		 */
+		_setStatementGuidClass: function() {
+			if ( this.options.value ) {
+				this.element.addClass( 'wikibase-statement-' + this.options.value.getClaim().getGuid() );
 			}
 		},
 
