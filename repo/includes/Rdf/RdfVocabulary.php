@@ -303,6 +303,17 @@ class RdfVocabulary {
 	}
 
 	/**
+	 * Create data entry point URL for tabular data
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	public function getTabularDataURI( $file ) {
+		return self::COMMONS_DATA_URI . wfUrlencode( $file );
+	}
+
+	/**
 	 * @param string $languageCode Any non-standard or canonical language code
 	 *
 	 * @return string Canonical language code

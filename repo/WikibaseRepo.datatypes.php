@@ -154,8 +154,7 @@ return call_user_func( function() {
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				// TODO: Implement proper RDF mapping, see T159517
-				return new TabularDataRdfBuilder();
+				return new TabularDataRdfBuilder( $vocab );
 			},
 		),
 		'VT:globecoordinate' => array(
