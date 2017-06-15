@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_2ec83e25",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-15T10:52:27Z",
+      "side": 1,
+      "message": "Do you think it would make sense to use mw.log.deprecate [1] here? The downside is that it would make the object writable…\n\n[1]: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log",
+      "revId": "9c199035f5084364a8ae501d2dbcd1815c61d990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
