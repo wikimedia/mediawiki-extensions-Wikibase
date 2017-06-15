@@ -2,13 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
 use Wikibase\WikibaseSettings;
 
 /**
- * Copyright © 02.07.13 by the authors listed below.
- *
  * @group Wikibase
  * @group WikibaseClient
  *

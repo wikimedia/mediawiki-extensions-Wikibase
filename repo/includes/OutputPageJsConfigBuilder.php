@@ -33,7 +33,6 @@ class OutputPageJsConfigBuilder {
 	 * @return array
 	 */
 	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems ) {
-		$user = $out->getUser();
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
 
