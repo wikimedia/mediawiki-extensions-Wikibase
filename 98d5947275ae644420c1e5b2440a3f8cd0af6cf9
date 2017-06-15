@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_aefbce43",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-15T11:10:13Z",
+      "side": 1,
+      "message": "This is, apart from whitespace changes, exactly my first version of the patch :D\n\nBut I thought that this change is also one of the things where “_setOption [sh]ould do the right thing for values”, and so it should be grouped with the _recreateReferences() and _stopEditingQualifiers() calls?",
+      "revId": "98d5947275ae644420c1e5b2440a3f8cd0af6cf9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
