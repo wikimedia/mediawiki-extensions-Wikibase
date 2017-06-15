@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use LoggedUpdateMaintenance;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -161,15 +160,6 @@ class RebuildTermSqlIndex extends Maintenance  {
 		} );
 
 		return $reporter;
-	}
-
-	/**
-	 * @see LoggedUpdateMaintenance::getUpdateKey
-	 *
-	 * @return string
-	 */
-	public function getUpdateKey() {
-		return 'Wikibase\RebuildTermSqlIndex';
 	}
 
 }
