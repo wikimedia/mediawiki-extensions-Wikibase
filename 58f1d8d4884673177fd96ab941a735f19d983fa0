@@ -22,6 +22,30 @@
       "revId": "58f1d8d4884673177fd96ab941a735f19d983fa0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_24dcdf4a",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-15T15:34:06Z",
+      "side": 1,
+      "message": "Sure. I suggest to add such methods when needed.",
+      "parentUuid": "ee859f59_a4de8f6e",
+      "range": {
+        "startLine": 124,
+        "startChar": 17,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "58f1d8d4884673177fd96ab941a735f19d983fa0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
