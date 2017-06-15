@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_c494f33b",
+        "filename": "client/includes/Hooks/ChangesListLinesHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "No, the old line doesn\u0027t have structured data about used flags because it doesn\u0027t build those blocks. On the other hand, Enhanced RC\u0027s blocks need to collect flags from the collapsed lines separately, so that they know which flags should be put on the top line.",
+      "parentUuid": "ee859f59_09be94d1",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_c46953be",
         "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
         "patchSetId": 6
@@ -183,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_4416c3f7",
+        "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "See for example https://phabricator.wikimedia.org/source/mediawiki/browse/master/includes/changes/EnhancedChangesList.php;4e77caf13400a0a2fe8f06a4fca683f2bf804c33$706 - since the array is concatenated with an empty string, there\u0027s certainly place for a separator.",
+      "parentUuid": "ee859f59_c46953be",
+      "range": {
+        "startLine": 93,
+        "startChar": 26,
+        "endLine": 93,
+        "endChar": 48
+      },
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_e441f70f",
         "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
         "patchSetId": 6
@@ -194,6 +236,24 @@
       "writtenOn": "2017-06-15T15:22:55Z",
       "side": 1,
       "message": "Looking at this method and at formatDataForEnhancedLine I started to wonder whether it would not make sense to have them in some separate Formatter class.\nI get what it makes some sense to put them here together with the old format method. Both are used in similar context, and operate on similar input.\nOn the other hand, the way the produce their output is quite different. That\u0027s why I wonder maybe it would be cleaner to have them separated. Both types of methods are used in different context so if there were two classes there would be no need for common interface (which those methods obviously don\u0027t have).\nWith \"old style\" and \"enhanced\" line formatting split, there would also be no need to change all those user-link-formatting methods, you\u0027ve changed here so they fit both uses.\nThere probably would be some duplicated code and logic, on the flip side.\n\nSo basically this long comment is just a suggestion. I\u0027d be happy to see what do you and others think. Should there be two separate formatters, I\u0027d be fine to have this split done separately.",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_a4cf6f81",
+        "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "You are right that my new methods look and work totally differently from the old one. The reason why I put them here was indeed reducing code duplication as well as evading encapsulation (everything is private).\n\nI\u0027m thinking right now of what we could use instead. Inheritance, interfaces, or even traits?",
+      "parentUuid": "ee859f59_e441f70f",
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -287,6 +347,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_c4e2b3d0",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "thanks for cleaning them up!",
+      "parentUuid": "ee859f59_4947bc50",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_a93ae8be",
         "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
         "patchSetId": 6
@@ -338,6 +416,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_84c6eb4c",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "No strong opinion, I took advantage of method arguments as a \"setting\" for the fake instance.\n\nI\u0027m not sure whether some other arguments would be better:\n* true/false\n* \u0027once\u0027/\u0027never\u0027 (strings)\n* $this-\u003eonce()/$this-\u003enever() (objects)",
+      "parentUuid": "ee859f59_e9e55007",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_4916dcf7",
         "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
         "patchSetId": 6
@@ -349,6 +445,24 @@
       "writtenOn": "2017-06-15T15:22:55Z",
       "side": 1,
       "message": "willReturn probably is not even needed here, as its return value does not really matter. But whatever.",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_04eafb73",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure. If it really isn\u0027t, we may remove it, yes.",
+      "parentUuid": "ee859f59_4916dcf7",
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -372,6 +486,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_e4625737",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "Of course, I could only have this single line:\n\n $handler \u003d $this-\u003egetHandler( ... );\n\nbut I would have to provide some arguments since the fake dependencies are different in each test case. I\u0027m afraid that would make things a bit more complicated.",
+      "parentUuid": "ee859f59_09d77429",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_84e10b2c",
         "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
         "patchSetId": 6
@@ -389,6 +521,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_04919bfb",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "It is very nasty. If someone gave me a hint how I could refactor this test case, I would be glad.",
+      "parentUuid": "ee859f59_84e10b2c",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_04d43b4a",
         "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
         "patchSetId": 6
@@ -400,6 +550,24 @@
       "writtenOn": "2017-06-15T15:22:55Z",
       "side": 1,
       "message": "Maybe it would make sense to move out generating the formatted line of the data table to a private method? Kind of feels a bit bad to do such operations in the middle of test assertions.",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_a4820fa8",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-06-15T16:11:55Z",
+      "side": 1,
+      "message": "I agree, something like $this-\u003ebuildFormattedLineFromData( ... ) should work. The method\u0027s documentation could then make this more clear.",
+      "parentUuid": "ee859f59_04d43b4a",
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
