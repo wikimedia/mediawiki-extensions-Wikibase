@@ -459,6 +459,52 @@ class EntityDataTestProvider {
 			200,       // http code
 		);
 
+		// redirect=force
+
+		// #41: format=application/json with forced redirect
+		$cases[] = array(
+			'',      // subpage
+			array( // parameters
+				'id' => 'Q42',
+				'format' => 'application/json',
+				'redirect' => 'force',
+			),
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!/Q42\.json$!'
+			)
+		);
+
+		// #42: /Q42.json with forced redirect
+		$cases[] = array(
+			'Q42.json',      // subpage
+			array( // parameters
+				'redirect' => 'force',
+			),
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!/Q42\.json!'
+			)
+		);
+
+		// #43: /q42.json with forced redirect triggers a 301, not a 303
+		$cases[] = array(
+			'q42.JSON',      // subpage
+			array( // parameters
+				'redirect' => 'force',
+			),
+			array(), // headers
+			'!!', // output regex
+			301,  // http code
+			array( // headers
+				'Location' => '!/Q42\.json$!'
+			)
+		);
+
 		return $cases;
 	}
 
