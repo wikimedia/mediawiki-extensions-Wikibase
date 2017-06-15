@@ -85,7 +85,7 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 		// For now, it's very simple but can be more complex later
 		return in_array(
 			$property->getDataTypeId(),
-			[ 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ]
+			[ 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia', 'geo-shape' ]
 		);
 	}
 
