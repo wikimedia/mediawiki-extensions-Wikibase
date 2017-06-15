@@ -16,6 +16,24 @@
       "revId": "9c199035f5084364a8ae501d2dbcd1815c61d990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_eee8f679",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-15T11:09:04Z",
+      "side": 1,
+      "message": "We can use that. \nBut I didn\u0027t get what did you mean by \"it would make the object writable\". Can you explain?",
+      "parentUuid": "ee859f59_2ec83e25",
+      "revId": "9c199035f5084364a8ae501d2dbcd1815c61d990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
