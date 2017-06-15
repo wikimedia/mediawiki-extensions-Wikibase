@@ -63,7 +63,7 @@ class FallbackHintHtmlTermRendererTest extends PHPUnit_Framework_TestCase {
 	public function testRenderTerm( Term $term, $expected ) {
 		$result = $this->newHtmlTermRenderer()->renderTerm( $term );
 
-		$this->assertSame( $result, $expected );
+		$this->assertSame( $expected, $result );
 	}
 
 }
