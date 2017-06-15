@@ -25,9 +25,5 @@ return [
 	// local by default. Set to something LBFactory understands.
 	'changesDatabase' => false,
 
-	// list of logical database names of local client wikis.
-	// may contain mappings from site-id to db-name.
-	'localClientDatabases' => [],
-
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
 ];

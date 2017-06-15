@@ -44,6 +44,10 @@ return [
 	// Note: keep that low, because such caches cannot always be purged easily.
 	'dataSquidMaxage' => $GLOBALS['wgSquidMaxage'],
 
+	// list of logical database names of local client wikis.
+	// may contain mappings from site-id to db-name.
+	'localClientDatabases' => [],
+
 	// Settings for change dispatching
 	'dispatchBatchChunkFactor' => 3,
 	'dispatchBatchCacheFactor' => 3,
