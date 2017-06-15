@@ -7,7 +7,6 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-// @codingStandardsIgnoreFile
 
 // For all well known Wikibase namespace constants, check if they are defined.
 // If they are not defined, define them to be something otherwise unusable to get them out of the way.
