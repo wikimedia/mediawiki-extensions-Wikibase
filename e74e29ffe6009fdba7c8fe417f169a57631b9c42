@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_24c37f63",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-15T15:37:42Z",
+      "side": 1,
+      "message": "Would StringValues be common here? I think this would be extremely convenient:\n\n    …-\u003eandPropertyValueSnak( \u0027P31\u0027, \u0027Q5\u0027 )…\n\nPerhaps use EntityIdValue( ItemId( $dataValue ) ) if $dataValue matches ItemId::PATTERN?",
+      "revId": "e74e29ffe6009fdba7c8fe417f169a57631b9c42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
