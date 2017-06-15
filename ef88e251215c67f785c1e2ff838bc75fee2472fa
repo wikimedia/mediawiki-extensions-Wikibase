@@ -70,6 +70,30 @@
       "revId": "ef88e251215c67f785c1e2ff838bc75fee2472fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_335c2b4e",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-15T07:41:35Z",
+      "side": 1,
+      "message": "Iaf005a530286935bc5735d362c92d06022490c76 is not really a ready patch, and it might be that it changes completely in the end, but I believe why this is suggested to be made public is to be able to use this validator when creating the lexeme datatype.\n\nIt seems to me it will probably mostly be used in the first iteration, and maybe in the end validator for lexeme value would become something far more specific.\n\nWhat is different between buildEntityValidators and getEntityValidators is that if the latter gets a class name, it returns a validator that compared to the one returned by the former will check both that the value is the id of the existing entity AND that this id is of given type.\n\nI am not sure if making this method public is the best way to go, but seems to be the most simple thing to do. If this patch blocks introducing the new datatype, I would be fine with showing it, at least temporarily.",
+      "parentUuid": "ee859f59_865fd843",
+      "range": {
+        "startLine": 158,
+        "startChar": 17,
+        "endLine": 158,
+        "endChar": 38
+      },
+      "revId": "ef88e251215c67f785c1e2ff838bc75fee2472fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
