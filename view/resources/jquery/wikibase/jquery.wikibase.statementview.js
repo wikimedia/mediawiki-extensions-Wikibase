@@ -643,8 +643,8 @@
 		_stopEditing: function( dropValue ) {
 			// FIXME: Should not be necessary if _setOption would do the right thing for values
 			this._recreateReferences();
-			this._stopEditingQualifiers( dropValue );
 
+			this._stopEditingQualifiers( dropValue );
 			return $.when(
 				this._mainSnakSnakView.stopEditing( dropValue ),
 				this._rankSelector.stopEditing( dropValue )
@@ -719,9 +719,15 @@
 				}
 				this._referenceAdder[ value ? 'disable' : 'enable']();
 			}
+
 			if ( key === 'value' ) {
 				this.element.toggleClass( 'wb-new', value === null );
-				// FIXME: set the value!
+
+				if ( value && value.getClaim().getGuid() ) {
+					this.element.addClass( 'wikibase-statement-' + value.getClaim().getGuid() );
+				}
+
+				// FIXME: Propagate external changes to all sub-widgets? Not needed at the moment.
 			}
 
 			return response;
