@@ -164,7 +164,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	private function getEntityValidators( $entityType = null ) {
+	public function getEntityValidators( $entityType = null ) {
 		return [
 			new TypeValidator( EntityIdValue::class ),
 			new ForeignEntityValidator( $this->supportedEntityTypes ),
