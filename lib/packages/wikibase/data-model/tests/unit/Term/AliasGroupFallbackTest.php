@@ -22,10 +22,10 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 
 		$group = new AliasGroupFallback( $language, $aliases, $actual, $source );
 
-		$this->assertEquals( $language, $group->getLanguageCode() );
-		$this->assertEquals( $aliases, $group->getAliases() );
-		$this->assertEquals( $actual, $group->getActualLanguageCode() );
-		$this->assertEquals( $source, $group->getSourceLanguageCode() );
+		$this->assertSame( $language, $group->getLanguageCode() );
+		$this->assertSame( $aliases, $group->getAliases() );
+		$this->assertSame( $actual, $group->getActualLanguageCode() );
+		$this->assertSame( $source, $group->getSourceLanguageCode() );
 	}
 
 	public function testConstructorWithNullForSource() {
@@ -36,7 +36,7 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 
 		$group = new AliasGroupFallback( $language, $aliases, $actual, $source );
 
-		$this->assertEquals( $source, $group->getSourceLanguageCode() );
+		$this->assertSame( $source, $group->getSourceLanguageCode() );
 	}
 
 	/**

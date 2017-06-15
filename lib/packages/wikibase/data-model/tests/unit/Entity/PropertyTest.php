@@ -44,7 +44,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( Property::class, $property );
 		$this->assertEquals( new PropertyId( 'P42' ), $property->getId() );
 		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
-		$this->assertEquals( 'string', $property->getDataTypeId() );
+		$this->assertSame( 'string', $property->getDataTypeId() );
 		$this->assertEquals( new StatementList(), $property->getStatements() );
 	}
 
@@ -53,7 +53,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( Property::class, $property );
 		$this->assertNull( $property->getId() );
 		$this->assertEquals( new Fingerprint(), $property->getFingerprint() );
-		$this->assertEquals( '', $property->getDataTypeId() );
+		$this->assertSame( '', $property->getDataTypeId() );
 		$this->assertEquals( new StatementList(), $property->getStatements() );
 	}
 
@@ -67,7 +67,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 	public function testNewFromType() {
 		$property = Property::newFromType( 'string' );
 		$this->assertInstanceOf( Property::class, $property );
-		$this->assertEquals( 'string', $property->getDataTypeId() );
+		$this->assertSame( 'string', $property->getDataTypeId() );
 	}
 
 	public function testSetAndGetDataTypeId() {
@@ -75,7 +75,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 		foreach ( [ 'string', 'foobar', 'nyan', 'string' ] as $typeId ) {
 			$property->setDataTypeId( $typeId );
-			$this->assertEquals( $typeId, $property->getDataTypeId() );
+			$this->assertSame( $typeId, $property->getDataTypeId() );
 		}
 	}
 
@@ -296,11 +296,11 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setLabel( $languageCode, $labelText );
 
-		$this->assertEquals( $labelText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
+		$this->assertSame( $labelText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 
 		$entity->setLabel( $languageCode, $moarText );
 
-		$this->assertEquals( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
+		$this->assertSame( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 	}
 
 	public function descriptionProvider() {
@@ -322,11 +322,11 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setDescription( $languageCode, $description );
 
-		$this->assertEquals( $description, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
+		$this->assertSame( $description, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 
 		$entity->setDescription( $languageCode, $moarText );
 
-		$this->assertEquals( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
+		$this->assertSame( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 	}
 
 	public function aliasesProvider() {
@@ -368,12 +368,8 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
 			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
-			asort( $aliasesList );
-
 			$actual = $entity->getFingerprint()->getAliasGroup( $langCode )->getAliases();
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
+			$this->assertSame( $expected, $actual );
 		}
 	}
 
