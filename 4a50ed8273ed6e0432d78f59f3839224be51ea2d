@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_89c6044d",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-15T16:08:32Z",
+      "side": 1,
+      "message": "Okay, All removed.",
+      "parentUuid": "4e506ba4_28649944",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 81
+      },
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_48348546",
         "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
         "patchSetId": 3
@@ -60,6 +84,24 @@
       "writtenOn": "2017-04-10T12:07:28Z",
       "side": 1,
       "message": "Please avoid passing IContextSource, it\u0027s a horrible kitchen sink *and* it uses global state. I\u0027d really like to get rid of it, see https://phabricator.wikimedia.org/T162594",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_69bde0ac",
+        "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-15T16:08:32Z",
+      "side": 1,
+      "message": "To some extent, fixed.",
+      "parentUuid": "4e506ba4_48348546",
       "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -100,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_29def814",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-15T16:08:32Z",
+      "side": 1,
+      "message": "I\u0027m not totally sure but user language and interface language might be different (e.g. using uselang\u003dfoo)",
+      "parentUuid": "4e506ba4_88eb6da0",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_e886b1df",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -128,6 +188,24 @@
       "writtenOn": "2017-04-10T12:07:28Z",
       "side": 1,
       "message": "That\u0027s not possible here. BasicEntityDiffVisualizer could implement prefetching of all labels needed i9n the diff.",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_0900d46c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-15T16:08:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_c86e552a",
       "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
