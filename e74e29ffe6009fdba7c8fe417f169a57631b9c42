@@ -16,6 +16,24 @@
       "revId": "e74e29ffe6009fdba7c8fe417f169a57631b9c42",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_24913f53",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-15T15:40:43Z",
+      "side": 1,
+      "message": "I was thinking about this, and decided to go with the most simple implementation for now. Your suggestion sounds good to me. Go ahead and add it in a later patch if you feel it helps a lot.",
+      "parentUuid": "ee859f59_24c37f63",
+      "revId": "e74e29ffe6009fdba7c8fe417f169a57631b9c42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
