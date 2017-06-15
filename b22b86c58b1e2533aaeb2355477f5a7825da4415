@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_ae266ec7",
+        "filename": "view/tests/qunit/wikibase/entityChangers/StatementsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-15T11:40:24Z",
+      "side": 1,
+      "message": "Can you just use the Entity?\nThis way you create the same problem for the future developer that might want to get statements (or whatever) form the entity.",
+      "revId": "b22b86c58b1e2533aaeb2355477f5a7825da4415",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
