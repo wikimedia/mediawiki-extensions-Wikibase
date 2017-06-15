@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_44f563b4",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-15T15:37:23Z",
+      "side": 1,
+      "message": "did not specify",
+      "range": {
+        "startLine": 139,
+        "startChar": 428,
+        "endLine": 139,
+        "endChar": 437
+      },
+      "revId": "cbd806032ac8a964c3434fe56e1ddfd4e037cdcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
