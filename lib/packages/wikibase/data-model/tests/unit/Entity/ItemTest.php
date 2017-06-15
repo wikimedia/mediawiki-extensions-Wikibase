@@ -490,29 +490,17 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider aliasesProvider
-	 */
-	public function testSetEmptyAlias( array $aliasesLists ) {
-		$entity = $this->getNewEmpty();
+	public function testSetEmptyAlias() {
+		$item = new Item();
 
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			foreach ( $aliasesList as $aliases ) {
-				$entity->setAliases( $langCode, $aliases );
-			}
-		}
-		$entity->setAliases( 'zh', [ 'wind', 'air', '', 'fire' ] );
-		$entity->setAliases( 'zu', [ '', '' ] );
+		$item->setAliases( 'en', [ 'wind', 'air', '', 'fire' ] );
+		$this->assertSame(
+			[ 'wind', 'air', 'fire' ],
+			$item->getAliasGroups()->getByLanguage( 'en' )->getAliases()
+		);
 
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
-			asort( $aliasesList );
-
-			$actual = $entity->getFingerprint()->getAliasGroup( $langCode )->getAliases();
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
-		}
+		$item->setAliases( 'en', [ '', '' ] );
+		$this->assertFalse( $item->getAliasGroups()->hasGroupForLanguage( 'en' ) );
 	}
 
 	public function instanceProvider() {

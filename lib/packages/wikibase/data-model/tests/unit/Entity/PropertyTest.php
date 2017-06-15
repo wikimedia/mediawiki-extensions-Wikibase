@@ -366,29 +366,17 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider aliasesProvider
-	 */
-	public function testSetEmptyAlias( array $aliasesLists ) {
-		$entity = $this->getNewEmpty();
+	public function testSetEmptyAlias() {
+		$property = Property::newFromType( 'string' );
 
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			foreach ( $aliasesList as $aliases ) {
-				$entity->setAliases( $langCode, $aliases );
-			}
-		}
-		$entity->setAliases( 'zh', [ 'wind', 'air', '', 'fire' ] );
-		$entity->setAliases( 'zu', [ '', '' ] );
+		$property->setAliases( 'en', [ 'wind', 'air', '', 'fire' ] );
+		$this->assertSame(
+			[ 'wind', 'air', 'fire' ],
+			$property->getAliasGroups()->getByLanguage( 'en' )->getAliases()
+		);
 
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
-			asort( $aliasesList );
-
-			$actual = $entity->getFingerprint()->getAliasGroup( $langCode )->getAliases();
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
-		}
+		$property->setAliases( 'en', [ '', '' ] );
+		$this->assertFalse( $property->getAliasGroups()->hasGroupForLanguage( 'en' ) );
 	}
 
 	public function instanceProvider() {
