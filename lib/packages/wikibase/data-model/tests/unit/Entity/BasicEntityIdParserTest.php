@@ -24,7 +24,7 @@ class BasicEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 		$parser = new BasicEntityIdParser();
 		$actual = $parser->parse( $idString );
 
-		$this->assertEquals( $actual, $expected );
+		$this->assertEquals( $expected, $actual );
 	}
 
 	public function entityIdProvider() {

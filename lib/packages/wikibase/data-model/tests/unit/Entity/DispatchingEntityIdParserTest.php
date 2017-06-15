@@ -29,7 +29,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 		$parser = $this->getBasicParser();
 		$actual = $parser->parse( $idString );
 
-		$this->assertEquals( $actual, $expected );
+		$this->assertEquals( $expected, $actual );
 	}
 
 	public function entityIdProvider() {

@@ -22,7 +22,7 @@ class ItemIdParserTest extends PHPUnit_Framework_TestCase {
 		$parser = new ItemIdParser();
 		$actual = $parser->parse( $idString );
 
-		$this->assertEquals( $actual, $expected );
+		$this->assertEquals( $expected, $actual );
 	}
 
 	public function entityIdProvider() {

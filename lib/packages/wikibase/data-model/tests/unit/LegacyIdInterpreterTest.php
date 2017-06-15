@@ -25,7 +25,7 @@ class LegacyIdInterpreterTest extends \PHPUnit_Framework_TestCase {
 	public function testNewIdFromTypeAndNumber( EntityId $expected, $type, $number ) {
 		$actual = LegacyIdInterpreter::newIdFromTypeAndNumber( $type, $number );
 
-		$this->assertEquals( $actual, $expected );
+		$this->assertEquals( $expected, $actual );
 	}
 
 	public function idProvider() {
