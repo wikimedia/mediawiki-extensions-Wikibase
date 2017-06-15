@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_a4de8f6e",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-15T15:15:13Z",
+      "side": 1,
+      "message": "Might be useful to have a withAlias() method as well, to append a single alias instead of replacing them.",
+      "range": {
+        "startLine": 124,
+        "startChar": 17,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "58f1d8d4884673177fd96ab941a735f19d983fa0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
