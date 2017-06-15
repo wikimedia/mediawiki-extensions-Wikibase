@@ -69,6 +69,24 @@
       "revId": "f41b9c078d8a72bd31707a6450d376def475e16d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_bf21ba4d",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-15T17:00:47Z",
+      "side": 1,
+      "message": "Okay, I checked and because there is an already open atomic connection to master, it can\u0027t open a new one using this method. I move it to after -\u003eendAtomic(). Hope that\u0027s fine for you.",
+      "parentUuid": "0e81134c_6f5b9b27",
+      "revId": "f41b9c078d8a72bd31707a6450d376def475e16d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
