@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_8e712a0e",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-15T10:43:27Z",
+      "side": 1,
+      "message": "Yeah, that makes sense.",
+      "parentUuid": "ee859f59_cef97280",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "2b0003c8cac2225001ac0494974192001df2d6fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_eefeb665",
         "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
         "patchSetId": 2
