@@ -52,6 +52,24 @@
       "revId": "9c199035f5084364a8ae501d2dbcd1815c61d990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_ce47327b",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-15T11:29:31Z",
+      "side": 1,
+      "message": "Ah, ok. I don\u0027t think that we will have problems with that.",
+      "parentUuid": "ee859f59_8e85aab3",
+      "revId": "9c199035f5084364a8ae501d2dbcd1815c61d990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
