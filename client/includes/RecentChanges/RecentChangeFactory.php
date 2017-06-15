@@ -19,7 +19,7 @@ use Wikimedia\Assert\Assert;
 class RecentChangeFactory {
 
 	/**
-	 * Classification of Wikibase changss in the rc_source column of the
+	 * Classification of Wikibase changes in the rc_source column of the
 	 * recentchanges table.
 	 */
 	const SRC_WIKIBASE = 'wb';
