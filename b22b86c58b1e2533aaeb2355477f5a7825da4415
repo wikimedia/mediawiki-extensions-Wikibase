@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee859f59_0986946a",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-15T12:52:09Z",
+      "side": 1,
+      "message": "The code is duplicated to a degree. Should be extracted to a private function. But this can easily be done in a later patch.",
+      "revId": "b22b86c58b1e2533aaeb2355477f5a7825da4415",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_ae266ec7",
         "filename": "view/tests/qunit/wikibase/entityChangers/StatementsChanger.tests.js",
         "patchSetId": 4
@@ -13,6 +30,24 @@
       "writtenOn": "2017-06-15T11:40:24Z",
       "side": 1,
       "message": "Can you just use the Entity?\nThis way you create the same problem for the future developer that might want to get statements (or whatever) form the entity.",
+      "revId": "b22b86c58b1e2533aaeb2355477f5a7825da4415",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_a9b0a83f",
+        "filename": "view/tests/qunit/wikibase/entityChangers/StatementsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-15T12:52:09Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment. What problem is meant? To what does \"the Entity\" refer to?\n\nTo add to the discussion about this: The way an object is faked here is exactly how it should be done. It can even be simplified further:\n\n var entity \u003d { getId: function() {} };\n\nThe return value is never used anyway.",
+      "parentUuid": "ee859f59_ae266ec7",
       "revId": "b22b86c58b1e2533aaeb2355477f5a7825da4415",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
