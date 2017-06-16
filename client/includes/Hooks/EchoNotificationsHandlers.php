@@ -234,6 +234,7 @@ class EchoNotificationsHandlers {
 					// maybe also a diff link?
 					'url' => $this->repoLinker->getEntityUrl( $entityId ),
 					'repoSiteName' => $this->repoSiteName,
+					'entity' => $entityId->getSerialization(),
 				],
 				'title' => $title,
 				'type' => self::NOTIFICATION_TYPE
