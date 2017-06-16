@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_ee3d4d2a",
+        "filename": "phpcs.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2017-06-16T11:55:16Z",
+      "side": 1,
+      "message": "This is part of the mediawiki ruleset already",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 54
+      },
+      "revId": "0e2bfc46783b28fe847a9aca57cefc3e61d0a68f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_ce38893d",
+        "filename": "phpcs.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2017-06-16T11:55:16Z",
+      "side": 1,
+      "message": "This is fixed by https://github.com/squizlabs/PHP_CodeSniffer/issues/897",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "0e2bfc46783b28fe847a9aca57cefc3e61d0a68f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
