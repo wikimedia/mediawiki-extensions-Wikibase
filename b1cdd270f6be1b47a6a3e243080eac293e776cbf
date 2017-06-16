@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_aec3c53c",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-16T11:57:55Z",
+      "side": 1,
+      "message": "Hm, the semantics of \"flush\" is a bit confusing... even to me, and I invented it ;)\n\nI\u0027ll remove it, that should fix the test.",
+      "revId": "b1cdd270f6be1b47a6a3e243080eac293e776cbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
