@@ -1,7 +1,7 @@
 <http://wikiba.se/ontology-beta#Dump> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
 <http://wikiba.se/ontology-beta#Dump> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
 <http://wikiba.se/ontology-beta#Dump> <http://creativecommons.org/ns#license> <http://creativecommons.org/publicdomain/zero/1.0/> .
-<http://wikiba.se/ontology-beta#Dump> <http://schema.org/softwareVersion> "0.0.5" .
+<http://wikiba.se/ontology-beta#Dump> <http://schema.org/softwareVersion> "0.1.0" .
 <http://wikiba.se/ontology-beta#Dump> <http://schema.org/dateModified> "2015-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <http://wikiba.se/ontology-beta#Dump> <http://www.w3.org/2002/07/owl#imports> <http://wikiba.se/ontology-1.0.owl> .
 <acme/EntityData/Q1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
@@ -138,11 +138,11 @@ _:genid4 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <acme/EntityData/Q4> <http://schema.org/version> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <acme/EntityData/Q4> <http://schema.org/dateModified> "2000-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <fooUri/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Item> .
-<https://en.wikipedia.org/wiki/San%20Jose> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
-<https://en.wikipedia.org/wiki/San%20Jose> <http://schema.org/about> <fooUri/Q4> .
-<https://en.wikipedia.org/wiki/San%20Jose> <http://schema.org/inLanguage> "en" .
-<https://en.wikipedia.org/wiki/San%20Jose> <http://schema.org/isPartOf> <https://en.wikipedia.org/> .
-<https://en.wikipedia.org/wiki/San%20Jose> <http://schema.org/name> "San Jose"@en .
+<https://en.wikipedia.org/wiki/Category:San_Jose> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
+<https://en.wikipedia.org/wiki/Category:San_Jose> <http://schema.org/about> <fooUri/Q4> .
+<https://en.wikipedia.org/wiki/Category:San_Jose> <http://schema.org/inLanguage> "en" .
+<https://en.wikipedia.org/wiki/Category:San_Jose> <http://schema.org/isPartOf> <https://en.wikipedia.org/> .
+<https://en.wikipedia.org/wiki/Category:San_Jose> <http://schema.org/name> "Category:San Jose"@en .
 <https://de.wikipedia.org/wiki/USA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
 <https://de.wikipedia.org/wiki/USA> <http://schema.org/about> <fooUri/Q4> .
 <https://de.wikipedia.org/wiki/USA> <http://schema.org/inLanguage> "de" .
