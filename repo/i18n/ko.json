@@ -328,7 +328,9 @@
 	"apihelp-wbeditentity-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbgetentities-example-12": "항목 <samp>Q42</samp>의 사이트링크를 가져옵니다",
 	"apihelp-wbmergeitems-description": "여러 항목 병합.",
+	"apihelp-wbmergeitems-summary": "여러 항목을 병합합니다.",
 	"apihelp-wbmergeitems-example-1": "<samp>Q42</samp>의 데이터를 <samp>Q222</samp>로 병합합니다",
+	"apihelp-wbparsevalue-summary": "<code>ValueParser</code>를 사용하여 값의 구문을 분석합니다.",
 	"apihelp-wbremovequalifiers-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbremovereferences-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbsetaliases-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
@@ -337,5 +339,6 @@
 	"apihelp-wbsetdescription-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbsetlabel-param-title": "연결한 파일 이름.\n<var>site</var>과 함께 사용하면 완전한 사이트링크가 됩니다.",
 	"apihelp-wbsetlabel-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
-	"apihelp-wbsetqualifier-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다."
+	"apihelp-wbsetqualifier-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
+	"apihelp-wbsetreference-summary": "각주를 만들고 기존 항목의 값을 설정합니다."
 }

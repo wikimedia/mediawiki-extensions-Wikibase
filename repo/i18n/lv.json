@@ -164,5 +164,6 @@
 	"wikibase-concept-uri": "Jēdziena URI",
 	"wikibase-concept-uri-tooltip": "URI, kas apzīmē šajā vienumā aprakstīto jēdzienu",
 	"datatypes-type-url": "URL",
-	"action-item-merge": "apvienot vienumus"
+	"action-item-merge": "apvienot vienumus",
+	"apihelp-wbmergeitems-summary": "Apvieno vairākus vienumus."
 }

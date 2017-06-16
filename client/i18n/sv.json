@@ -26,7 +26,7 @@
 	"apihelp-query+wikibase-param-prop": "Vilka egenskaper att hämta:\n;<kbd>url</kbd>: Bas-URL, skript-sökväg och artikel-sökväg för Wikibase-centralförvaret.\n;<kbd>siteid</kbd>: siteid för denna webbplats.",
 	"wikibase-after-page-move": "Du bör också uppdatera [$1 det associerade objektet] på {{WBREPONAME}} för att bevara språklänkarna i den flyttade sidan.",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}}objektet] som är associerat med denna sida kommer att uppdateras automatiskt. Notera att detta kanske inte sker omedelbart.",
-	"wikibase-after-page-delete": "Du bör också ta bort länken till den här sidan från det tillhörande [$1 objektet på {{WBREPONAME}}] för att upprätthålla språklänkar.",
+	"wikibase-after-page-delete": "Länken till denna sida skulle ha tagits bort från [$1 det tillhörande objektet på {{WBREPONAME}}]. Vi ber dig att kontrollera att det har åtgärdats.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-objektet] associerat med denna sida kommer att uppdateras automatiskt. Notera att detta kanske inte sker omedelbart.",
 	"wikibase-comment-add": "Ett {{WBREPONAME}}objekt har skapats.",
 	"wikibase-comment-remove": "Tillhörande {{WBREPONAME}}objekt togs bort. Språklänkar togs bort.",
