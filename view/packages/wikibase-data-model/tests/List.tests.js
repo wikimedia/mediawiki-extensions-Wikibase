@@ -226,7 +226,7 @@ QUnit.test( 'indexOf()', function( assert ) {
 		list = new wb.datamodel.List( TestItem, items );
 
 	assert.strictEqual(
-		list.indexOf( items [1] ),
+		list.indexOf( items[1] ),
 		1,
 		'Retrieved correct index.'
 	);

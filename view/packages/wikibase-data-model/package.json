@@ -7,7 +7,8 @@
     "jquery": "^3.2.1"
   },
   "devDependencies": {
-    "jshint": "^2.9.4",
+    "eslint": "^3.19.0",
+    "eslint-config-wikimedia": "0.4.0",
     "karma": "^1.7.0",
     "karma-cli": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
@@ -16,8 +17,8 @@
   },
   "scripts": {
     "postinstall": "composer install",
-    "test": "npm run jshint && npm run run-tests",
-    "jshint": "jshint --show-non-errors --verbose src/ tests/",
+    "test": "npm run eslint && npm run run-tests",
+    "eslint": "eslint .",
     "run-tests": "karma start --single-run"
   }
 }

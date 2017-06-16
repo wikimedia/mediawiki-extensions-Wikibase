@@ -5,6 +5,9 @@ php:
 
 sudo: false
 
+before_script:
+  - nvm install 4
+
 script: npm install && npm test
 
 notifications:

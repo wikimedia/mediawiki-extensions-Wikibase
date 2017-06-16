@@ -153,7 +153,7 @@ QUnit.test( 'getValidMoveIndices()', function( assert ) {
 	}
 
 	snakList = new wb.datamodel.SnakList(
-		[ new wb.datamodel.PropertyValueSnak( 'P1',  new dv.StringValue( 'a' ) ) ]
+		[ new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'a' ) ) ]
 	);
 
 	assert.strictEqual(

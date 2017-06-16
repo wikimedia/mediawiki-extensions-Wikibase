@@ -33,7 +33,7 @@ QUnit.test( 'getPropertyIds()', function( assert ) {
 
 		for( var j = 0; j < testSets[i].length; j++ ) {
 			var propertyId = testSets[i][j].getMainSnak().getPropertyId();
-			if( $.inArray( propertyId , expectedPropertyIds ) === -1 ) {
+			if( $.inArray( propertyId, expectedPropertyIds ) === -1 ) {
 				expectedPropertyIds.push( propertyId );
 			}
 		}

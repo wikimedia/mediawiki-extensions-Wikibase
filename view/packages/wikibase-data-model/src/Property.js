@@ -89,7 +89,6 @@ var SELF = wb.datamodel.Property = util.inherit(
 	}
 } );
 
-
 /**
  * @inheritdoc
  * @property {string} [TYPE='property']
