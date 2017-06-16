@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_5351a6dc",
+        "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-16T07:01:14Z",
+      "side": 1,
+      "message": "Yeah, got it. I am not very convinced this approach in core is perfect. But this has nothing to do with this patch. It is OK as it is now!",
+      "parentUuid": "ee859f59_4416c3f7",
+      "range": {
+        "startLine": 93,
+        "startChar": 26,
+        "endLine": 93,
+        "endChar": 48
+      },
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_e441f70f",
         "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
         "patchSetId": 6
@@ -254,6 +278,24 @@
       "side": 1,
       "message": "You are right that my new methods look and work totally differently from the old one. The reason why I put them here was indeed reducing code duplication as well as evading encapsulation (everything is private).\n\nI\u0027m thinking right now of what we could use instead. Inheritance, interfaces, or even traits?",
       "parentUuid": "ee859f59_e441f70f",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_b344921d",
+        "filename": "client/includes/RecentChanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-16T07:01:14Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re making a very good point here. It does not seem trivial, and I didn\u0027t come up with something good immediately.\n\nAs we said, there are two ways to return the result here, so there could be no common interface here. Inheritance introduced just to avoid writing similar code twice is bad idea IMO and should be avoid. Traits in turn are pure evil.\n\nSo yeah :) I tend to say that bad abstraction is far worse than having similar code in two places, and that there should be two separate classes, and possible \"duplicate\" code will be just repeated there. I am not very convinced on this, though.\n\nI am leaning towards saying let\u0027s get this as it is now as it is not entirely clear how to do this 100% right (tm). Good side of this would be that we have all required behaviour, so we know exactly what should be refactored.",
+      "parentUuid": "ee859f59_a4cf6f81",
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -469,6 +511,24 @@
     },
     {
       "key": {
+        "uuid": "ee859f59_135a3efa",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-16T07:01:14Z",
+      "side": 1,
+      "message": "Without this it will always return null. Not sure any more if this matters actually :)\nNo need to change it from my side.",
+      "parentUuid": "ee859f59_04eafb73",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee859f59_09d77429",
         "filename": "client/tests/phpunit/includes/Hooks/ChangesListLinesHandlerTest.php",
         "patchSetId": 6
@@ -533,6 +593,24 @@
       "side": 1,
       "message": "It is very nasty. If someone gave me a hint how I could refactor this test case, I would be glad.",
       "parentUuid": "ee859f59_84e10b2c",
+      "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_d35356e1",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-16T07:01:14Z",
+      "side": 1,
+      "message": "Right, again no clear suggestion from me. \n\nIt seems to me that those tests simply try to test too much. Maybe they should be split to have smaller tests that test a single thing. But this need some more thought, I don\u0027t have a clear vision how to do it after a brief glance. Might be interesting thing to look at \"when I have some spare time\".\n\nIn any case, restructuring of these tests to make them more clear and nice should not happen in this patch. As such, it was probably not worth mentioning in this review. Just could not stop myself from complaining when I saw this. Sorry for nagging :)",
+      "parentUuid": "ee859f59_04919bfb",
       "revId": "6fb2e6871f8c1338a7a5c099d352ee69105e8d0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
