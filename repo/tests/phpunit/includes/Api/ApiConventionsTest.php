@@ -23,12 +23,12 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	public function wikibaseApiModuleProvider() {
 		$argList = array();
 
-		foreach ( $GLOBALS['wgAPIModules'] as $moduleClass ) {
+		foreach ( $GLOBALS['wgAPIModules'] as $moduleName => $moduleClass ) {
 			// Make sure to only test Wikibase Api modules
 			// This works as long as Wikibase modules are always defined as a class name string.
 			// @todo adjust this if we ever define our api modules differently.
 			if ( is_string( $moduleClass ) && strpos( $moduleClass, 'Wikibase' ) !== false ) {
-				$argList[] = array( $moduleClass );
+				$argList[] = array( $moduleClass, $moduleName );
 			}
 		}
 
@@ -40,14 +40,14 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	 *
 	 * @dataProvider wikibaseApiModuleProvider
 	*/
-	public function testApiConventions( $moduleClass ) {
+	public function testApiConventions( $moduleClass, $moduleName ) {
 		$params = array();
 		$user = $GLOBALS['wgUser'];
 
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 		$main->getContext()->setUser( $user );
-		$module = new $moduleClass( $main, 'moduleClass' );
+		$module = new $moduleClass( $main, $moduleName );
 
 		$this->assertGetFinalParamDescription( $moduleClass, $module );
 		$this->assertGetFinalDescription( $moduleClass, $module );
