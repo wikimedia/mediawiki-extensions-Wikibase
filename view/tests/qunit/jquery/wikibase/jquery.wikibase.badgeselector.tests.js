@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, mw, QUnit ) {
+( function ( $, wb, mw, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.badgeselector', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_badgeselector' ).each( function() {
+		teardown: function () {
+			$( '.test_badgeselector' ).each( function () {
 				var $node = $( this ),
 					badgeselector = $node.data( 'badgeselector' );
 				if ( badgeselector ) {
@@ -29,7 +29,7 @@
 				Q2: 'additionalCssClass-21 additionalCssClass22',
 				Q3: 'additionalCssClass-3'
 			},
-			entityIdPlainFormatter: function( entityId ) {
+			entityIdPlainFormatter: function ( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
 			},
 			languageCode: 'en'
@@ -43,7 +43,7 @@
 		return $badgeselector;
 	}
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 2 );
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
@@ -61,18 +61,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 2, function( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', 2, function ( assert ) {
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 
 		$badgeselector
-		.on( 'badgeselectorafterstartediting', function( event ) {
+		.on( 'badgeselectorafterstartediting', function ( event ) {
 			assert.ok(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'badgeselectorafterstopediting', function( event, dropValue ) {
+		.on( 'badgeselectorafterstopediting', function ( event, dropValue ) {
 			assert.ok(
 				true,
 				'Stopped edit mode.'
@@ -85,7 +85,7 @@
 		badgeselector.stopEditing(); // should not trigger event
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		assert.expect( 2 );
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
@@ -105,7 +105,7 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing and stopEditing add and remove an empty badge', function( assert ) {
+	QUnit.test( 'startEditing and stopEditing add and remove an empty badge', function ( assert ) {
 		assert.expect( 4 );
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
@@ -128,4 +128,4 @@
 
 	} );
 
-} )( jQuery, wikibase, mediaWiki, QUnit );
+}( jQuery, wikibase, mediaWiki, QUnit ) );

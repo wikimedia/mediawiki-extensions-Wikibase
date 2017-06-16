@@ -6,7 +6,7 @@
  * @license GPL-2.0+
  * @author Tobias Gritschacher
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	/**
@@ -31,7 +31,7 @@
 		 *
 		 * @return {number}
 		 */
-		getBaseRevision: function() {
+		getBaseRevision: function () {
 			return this._revisions.baseRevision;
 		},
 
@@ -40,7 +40,7 @@
 		 *
 		 * @return {number}
 		 */
-		getLabelRevision: function() {
+		getLabelRevision: function () {
 			return this._revisions.labelRevision;
 		},
 
@@ -49,7 +49,7 @@
 		 *
 		 * @return {number}
 		 */
-		getDescriptionRevision: function() {
+		getDescriptionRevision: function () {
 			return this._revisions.descriptionRevision;
 		},
 
@@ -58,7 +58,7 @@
 		 *
 		 * @return {number}
 		 */
-		getAliasesRevision: function() {
+		getAliasesRevision: function () {
 			return this._revisions.aliasesRevision;
 		},
 
@@ -67,9 +67,9 @@
 		 *
 		 * @return {number}
 		 */
-		getSitelinksRevision: function( lang ) {
+		getSitelinksRevision: function ( lang ) {
 			if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
-				return this._revisions.sitelinksRevision[lang];
+				return this._revisions.sitelinksRevision[ lang ];
 			}
 			return this._revisions.baseRevision;
 		},
@@ -79,9 +79,9 @@
 		 *
 		 * @return {number}
 		 */
-		getClaimRevision: function( claimGuid ) {
+		getClaimRevision: function ( claimGuid ) {
 			if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
-				return this._revisions.claimRevisions[claimGuid];
+				return this._revisions.claimRevisions[ claimGuid ];
 			}
 			return this._revisions.baseRevision;
 		},
@@ -91,7 +91,7 @@
 		 *
 		 * @param {number} rev
 		 */
-		setLabelRevision: function( rev ) {
+		setLabelRevision: function ( rev ) {
 			this._revisions.labelRevision = rev;
 		},
 
@@ -100,7 +100,7 @@
 		 *
 		 * @param {number} rev
 		 */
-		setDescriptionRevision: function( rev ) {
+		setDescriptionRevision: function ( rev ) {
 			this._revisions.descriptionRevision = rev;
 		},
 
@@ -109,7 +109,7 @@
 		 *
 		 * @param {number} rev
 		 */
-		setAliasesRevision: function( rev ) {
+		setAliasesRevision: function ( rev ) {
 			this._revisions.aliasesRevision = rev;
 		},
 
@@ -119,8 +119,8 @@
 		 * @param {number} rev
 		 * @param {string} lang
 		 */
-		setSitelinksRevision: function( rev, lang ) {
-			this._revisions.sitelinksRevision[lang] = rev;
+		setSitelinksRevision: function ( rev, lang ) {
+			this._revisions.sitelinksRevision[ lang ] = rev;
 		},
 
 		/**
@@ -129,8 +129,8 @@
 		 * @param {number} rev
 		 * @param {string} claimGuid
 		 */
-		setClaimRevision: function( rev, claimGuid ) {
-			this._revisions.claimRevisions[claimGuid] = rev;
+		setClaimRevision: function ( rev, claimGuid ) {
+			this._revisions.claimRevisions[ claimGuid ] = rev;
 		}
 
 	} );

@@ -1,4 +1,4 @@
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -60,17 +60,17 @@
 		options: {
 			template: 'wikibase-statementview',
 			templateParams: [
-				function() { // GUID
+				function () { // GUID
 					return ( this.options.value && this.options.value.getClaim().getGuid() ) || 'new';
 				},
-				function() { // Rank name
+				function () { // Rank name
 					return ( this.options.value && this._getRankName( this.options.value.getRank() ) )
 						|| 'normal';
 				},
-				function() { // Rank selector
+				function () { // Rank selector
 					return $( '<div/>' );
 				},
-				function() { // Main snak
+				function () { // Main snak
 					return $( '<div/>' );
 				},
 				'', // Qualifiers
@@ -142,7 +142,7 @@
 		 *
 		 * @throws {Error} if a required option is not specified properly.
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.getReferenceListItemAdapter
 				|| !this.options.buildSnakView
 				|| !this.options.entityIdPlainFormatter
@@ -174,7 +174,7 @@
 		 *
 		 * @param {number} rank
 		 */
-		_createRankSelector: function( rank ) {
+		_createRankSelector: function ( rank ) {
 			if ( this._rankSelector ) {
 				return;
 			}
@@ -182,7 +182,7 @@
 			var $rankSelector = this.$rankSelector.children().first();
 			this._rankSelector = new $.wikibase.statementview.RankSelector( {
 				value: rank,
-				templateParams: ['ui-state-disabled', '', ''],
+				templateParams: [ 'ui-state-disabled', '', '' ],
 				// TODO: Directionality should be determined on entityview level and forwarded to here
 				isRTL: $( 'html' ).prop( 'dir' ) === 'rtl'
 			}, $rankSelector );
@@ -190,7 +190,7 @@
 			var self = this,
 				changeEvent = ( this._rankSelector.widgetEventPrefix + 'change' ).toLowerCase();
 
-			this.$rankSelector.on( changeEvent + '.' + this.widgetName, function( event ) {
+			this.$rankSelector.on( changeEvent + '.' + this.widgetName, function ( event ) {
 				if ( self.value() ) {
 					self._trigger( 'change' );
 				}
@@ -203,9 +203,9 @@
 		 * @param {number} rank
 		 * @return {string|null}
 		 */
-		_getRankName: function( rank ) {
+		_getRankName: function ( rank ) {
 			for ( var rankName in wb.datamodel.Statement.RANK ) {
-				if ( rank === wb.datamodel.Statement.RANK[rankName] ) {
+				if ( rank === wb.datamodel.Statement.RANK[ rankName ] ) {
 					return rankName.toLowerCase();
 				}
 			}
@@ -216,7 +216,7 @@
 		/**
 		 * @private
 		 */
-		_createMainSnak: function() {
+		_createMainSnak: function () {
 			if ( this.$mainSnak.data( 'snakview' ) ) {
 				this._mainSnakSnakView = this.$mainSnak.data( 'snakview' );
 				return;
@@ -228,7 +228,7 @@
 			var self = this;
 
 			this.$mainSnak
-			.on( 'snakviewchange.' + this.widgetName, function( event, status ) {
+			.on( 'snakviewchange.' + this.widgetName, function ( event, status ) {
 				event.stopPropagation();
 				self._trigger( 'change' );
 			} );
@@ -248,7 +248,7 @@
 		 *
 		 * @param {wikibase.datamodel.SnakList|null} [qualifiers=null]
 		 */
-		_createQualifiersListview: function( qualifiers ) {
+		_createQualifiersListview: function ( qualifiers ) {
 			if ( this._qualifiers ) {
 				return;
 			}
@@ -268,13 +268,13 @@
 				$qualifiers = $( '<div/>' ).prependTo( this.$qualifiers );
 			}
 			$qualifiers.listview( {
-				listItemAdapter: this.options.getQualifiersListItemAdapter( function( snaklistview ) {
+				listItemAdapter: this.options.getQualifiersListItemAdapter( function ( snaklistview ) {
 					self._qualifiers.removeItem( snaklistview.element );
 				} ),
 				value: groupedQualifierSnaks
 			} )
 			.on( 'snaklistviewchange.' + this.widgetName,
-				function( event ) {
+				function ( event ) {
 					event.stopPropagation();
 					self._trigger( 'change' );
 				}
@@ -288,7 +288,7 @@
 		 *
 		 * @param {wikibase.datamodel.Reference[]} [references]
 		 */
-		_createReferencesListview: function( references ) {
+		_createReferencesListview: function ( references ) {
 			var self = this;
 
 			var $listview = this.$references.children( '.wikibase-listview' );
@@ -299,7 +299,7 @@
 			}
 
 			var lia = this.options.getReferenceListItemAdapter(
-				function( referenceview ) {
+				function ( referenceview ) {
 					self._referencesListview.removeItem( referenceview.element );
 					self._drawReferencesCounter();
 					self._trigger( 'change' );
@@ -314,7 +314,7 @@
 			this._referencesListview = $listview.data( 'listview' );
 
 			$listview
-			.on( lia.prefixedEvent( 'change.' + this.widgetName ), function( event ) {
+			.on( lia.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
 				event.stopPropagation();
 				self._drawReferencesCounter();
 				self._trigger( 'change' );
@@ -323,7 +323,7 @@
 			this._createReferencesToggler();
 		},
 
-		_createReferencesToggler: function() {
+		_createReferencesToggler: function () {
 			if ( this._$toggler ) {
 				return;
 			}
@@ -355,7 +355,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		getHelpMessage: function() {
+		getHelpMessage: function () {
 			var deferred = $.Deferred(),
 				helpMessage = this.options.helpMessage;
 
@@ -367,7 +367,7 @@
 					: this.options.predefined.mainSnak.property;
 
 				if ( property ) {
-					this.options.entityIdPlainFormatter.format( property ).done( function( formattedEntityId ) {
+					this.options.entityIdPlainFormatter.format( property ).done( function ( formattedEntityId ) {
 						deferred.resolve( mw.msg( 'wikibase-claimview-snak-tooltip', formattedEntityId ) );
 					} );
 				} else {
@@ -381,7 +381,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( this._rankSelector ) {
 				this._rankSelector.destroy();
 				this.$rankSelector.off( '.' + this.widgetName );
@@ -407,7 +407,7 @@
 		/**
 		 * @private
 		 */
-		_destroyQualifiersListView: function() {
+		_destroyQualifiersListView: function () {
 			this._qualifiers.destroy();
 			this.$qualifiers
 				.off( '.' + this.widgetName );
@@ -422,7 +422,7 @@
 		/**
 		 * @private
 		 */
-		_destroyReferencesListview: function() {
+		_destroyReferencesListview: function () {
 			this._referencesListview.destroy();
 			this.$references
 				.off( '.' + this.widgetName )
@@ -435,7 +435,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		draw: function() {
+		draw: function () {
 			this._createRankSelector( this.options.value
 				? this.options.value.getRank()
 				: wb.datamodel.Statement.RANK.NORMAL
@@ -468,7 +468,7 @@
 		 * @param {string} guid
 		 * @return {wikibase.datamodel.Statement|null}
 		 */
-		_instantiateStatement: function( guid ) {
+		_instantiateStatement: function ( guid ) {
 			if ( !this.isInEditMode() ) {
 				mw.log.warn( 'statementview::_instantiateStatement should only be called in edit mode' );
 				return null;
@@ -496,11 +496,11 @@
 			);
 		},
 
-		_enterNewReference: function() {
+		_enterNewReference: function () {
 			var listview = this._referencesListview,
 				lia = listview.listItemAdapter();
 
-			listview.enterNewItem().done( function( $referenceview ) {
+			listview.enterNewItem().done( function ( $referenceview ) {
 				var referenceview = lia.liInstance( $referenceview );
 
 				// Enter first item into the referenceview.
@@ -513,7 +513,7 @@
 		 *
 		 * @return {wikibase.datamodel.SnakList|null}
 		 */
-		_getQualifiers: function() {
+		_getQualifiers: function () {
 			var qualifiers = new wb.datamodel.SnakList();
 
 			if ( this._qualifiers ) {
@@ -521,7 +521,7 @@
 
 				// Combine qualifiers grouped by property to a single SnakList:
 				for ( var i = 0; i < snaklistviews.length; i++ ) {
-					var value = snaklistviews[i].value();
+					var value = snaklistviews[ i ].value();
 					if ( !value ) {
 						return null;
 					}
@@ -539,10 +539,10 @@
 		 *
 		 * @return {wikibase.datamodel.ReferenceList|null}
 		 */
-		_getReferences: function() {
+		_getReferences: function () {
 			var references = [];
 
-			if ( !this._referencesListview.value().every( function( referenceview ) {
+			if ( !this._referencesListview.value().every( function ( referenceview ) {
 				var value = referenceview.value();
 				references.push( value );
 				return value;
@@ -559,7 +559,7 @@
 		 *
 		 * @return {wikibase.datamodel.Statement|null}
 		 */
-		value: function( newValue ) {
+		value: function ( newValue ) {
 			if ( typeof newValue !== 'undefined' ) {
 				return this.option( 'value', newValue );
 			}
@@ -576,7 +576,7 @@
 		 *
 		 * @private
 		 */
-		_drawReferencesCounter: function() {
+		_drawReferencesCounter: function () {
 			var numberOfValues = 0,
 				numberOfPendingValues = 0;
 
@@ -596,15 +596,15 @@
 			this.$refsHeading.find( '.ui-toggler-label' ).empty().append( $counterMsg );
 		},
 
-		_startEditing: function() {
+		_startEditing: function () {
 			var self = this;
 			this._qualifierAdder = this.options.getAdder(
-				function() {
+				function () {
 					var listview = self._qualifiers;
 					listview.enterNewItem();
 
-					var snaklistview = listview.value()[listview.value().length - 1];
-					snaklistview.enterNewItem().done( function() {
+					var snaklistview = listview.value()[ listview.value().length - 1 ];
+					snaklistview.enterNewItem().done( function () {
 						snaklistview.focus();
 					} );
 				},
@@ -625,7 +625,7 @@
 		/**
 		 * @protected
 		 */
-		_startEditingReferences: function() {
+		_startEditingReferences: function () {
 			this._referencesListview.startEditing();
 			this._expandReferencesToggler();
 		},
@@ -633,14 +633,14 @@
 		/**
 		 * @protected
 		 */
-		_expandReferencesToggler: function() {
+		_expandReferencesToggler: function () {
 			var toggler = this._$toggler.data( 'toggler' );
 			if ( toggler.isCollapsed() ) {
 				toggler.toggle();
 			}
 		},
 
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			// FIXME: Should not be necessary if _setOption would do the right thing for values
 			this._recreateReferences();
 
@@ -654,7 +654,7 @@
 		/**
 		 * @protected
 		 */
-		_recreateReferences: function() {
+		_recreateReferences: function () {
 			this._referencesListview.option( 'value', this.options.value
 					? this.options.value.getReferences().toArray() : [] );
 
@@ -666,7 +666,7 @@
 		 *
 		 * @param {boolean} [dropValue=false]
 		 */
-		_stopEditingQualifiers: function( dropValue ) {
+		_stopEditingQualifiers: function ( dropValue ) {
 			var snaklistviews,
 				i;
 
@@ -674,12 +674,12 @@
 
 			if ( snaklistviews.length ) {
 				for ( i = 0; i < snaklistviews.length; i++ ) {
-					snaklistviews[i].stopEditing( dropValue );
+					snaklistviews[ i ].stopEditing( dropValue );
 
-					if ( dropValue && !snaklistviews[i].value() ) {
+					if ( dropValue && !snaklistviews[ i ].value() ) {
 						// Remove snaklistview from qualifier listview if no snakviews are left in
 						// that snaklistview:
-						this._qualifiers.removeItem( snaklistviews[i].element );
+						this._qualifiers.removeItem( snaklistviews[ i ].element );
 					}
 				}
 			}
@@ -701,7 +701,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
 			if ( key === 'disabled' ) {
@@ -717,7 +717,7 @@
 				if ( this._referencesListview ) {
 					this._referencesListview.option( key, value );
 				}
-				this._referenceAdder[ value ? 'disable' : 'enable']();
+				this._referenceAdder[ value ? 'disable' : 'enable' ]();
 			}
 
 			if ( key === 'value' ) {
@@ -736,7 +736,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			this._mainSnakSnakView.focus();
 		}
 	} );

@@ -4,7 +4,7 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, mw, wb, dataTypeStore, getExpertsStore, getParserStore, performance ) {
+( function ( $, mw, wb, dataTypeStore, getExpertsStore, getParserStore, performance ) {
 	'use strict';
 
 	/**
@@ -66,19 +66,19 @@
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
 			repoApi = new wb.api.RepoApi( mwApi ),
 			userLanguages = getUserLanguages(),
-			entityStore = buildEntityStore( repoApi, userLanguages[0] ),
+			entityStore = buildEntityStore( repoApi, userLanguages[ 0 ] ),
 			contentLanguages = new wikibase.WikibaseContentLanguages(),
 			formatterFactory = new wb.formatters.ApiValueFormatterFactory(
 				new wb.api.FormatValueCaller(
 					repoApi,
 					dataTypeStore
 				),
-				userLanguages[0]
+				userLanguages[ 0 ]
 			),
 			parserStore = getParserStore( repoApi ),
 			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
-			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
+			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
 			viewFactoryClass = wb.view.ReadModeViewFactory,
@@ -96,7 +96,7 @@
 				getExpertsStore( dataTypeStore ),
 				formatterFactory,
 				{
-					getMessage: function( key, params ) {
+					getMessage: function ( key, params ) {
 						return mw.msg.apply( mw, [ key ].concat( params ) );
 					}
 				},
@@ -106,7 +106,7 @@
 				mw.config.get( 'wbGeoShapeStorageApiEndpoint' ),
 				mw.config.get( 'wbTabularDataStorageApiEndpoint' )
 			],
-			startEditingCallback = function() {
+			startEditingCallback = function () {
 				return $.Deferred().resolve().promise();
 			};
 
@@ -146,7 +146,7 @@
 			return;
 		}
 
-		$entityview.on( viewName + 'afterstartediting', function() {
+		$entityview.on( viewName + 'afterstartediting', function () {
 			if ( !$.find( '.mw-notification-content' ).length
 				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
 			) {
@@ -192,16 +192,16 @@
 				prop: 'info',
 				inprop: 'watched',
 				pageids: mw.config.get( 'wgArticleId' )
-			} ).done( function( data ) {
-				var watched = data.query && data.query.pages[0]
-					&& data.query.pages[0].watched;
+			} ).done( function ( data ) {
+				var watched = data.query && data.query.pages[ 0 ]
+					&& data.query.pages[ 0 ].watched;
 				update( $link, watched ? 'unwatch' : 'watch' );
-			} ).fail( function() {
+			} ).fail( function () {
 				update( $link, 'watch' );
 			} );
 		}
 
-		$entityview.on( viewName + 'afterstopediting', function( event, dropValue ) {
+		$entityview.on( viewName + 'afterstopediting', function ( event, dropValue ) {
 			if ( !dropValue ) {
 				updateWatchLink();
 			}
@@ -246,7 +246,7 @@
 		) {
 			editableTemplatedWidget.notification( $message, 'wb-edit' );
 
-			$hideMessage.on( 'click', function( event ) {
+			$hideMessage.on( 'click', function ( event ) {
 				event.preventDefault();
 				editableTemplatedWidget.notification();
 				if ( mw.user.isAnon() ) {
@@ -279,7 +279,7 @@
 				$anchor: edittoolbar.getContainer()
 			} );
 
-		$hideMessage.on( 'click', function( event ) {
+		$hideMessage.on( 'click', function ( event ) {
 			event.preventDefault();
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
 			$( window ).off( '.wbCopyrightTooltip' );
@@ -295,7 +295,7 @@
 
 		// destroy tooltip after edit mode gets closed again:
 		$entityview
-		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function( event, origin ) {
+		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function ( event, origin ) {
 			var tooltip = $messageAnchor.data( 'wbtooltip' );
 			if ( tooltip ) {
 				tooltip.degrade( true );
@@ -305,7 +305,7 @@
 
 		$( window ).one(
 			'scroll.wbCopyrightTooltip touchmove.wbCopyrightTooltip resize.wbCopyrightTooltip',
-			function() {
+			function () {
 				var tooltip = $messageAnchor.data( 'wbtooltip' );
 				if ( tooltip ) {
 					$messageAnchor.data( 'wbtooltip' ).hide();
@@ -321,7 +321,7 @@
 	function attachCopyrightTooltip( $entityview ) {
 		$entityview.on(
 			'entitytermsafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
-			function( event ) {
+			function ( event ) {
 				var $target = $( event.target ),
 					gravity = 'sw';
 
@@ -336,14 +336,14 @@
 		);
 	}
 
-	mw.hook( 'wikipage.content' ).add( function() {
+	mw.hook( 'wikipage.content' ).add( function () {
 		if ( mw.config.get( 'wbEntity' ) === null ) {
 			return;
 		}
 
 		// This is copied from startup.js in MediaWiki core.
 		var mwPerformance = window.performance && performance.mark ? performance : {
-			mark: function() {}
+			mark: function () {}
 		};
 		mwPerformance.mark( 'wbInitStart' );
 
@@ -351,7 +351,7 @@
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
 		var canEdit = isEditable();
 
-		entityInitializer.getEntity().done( function( entity ) {
+		entityInitializer.getEntity().done( function ( entity ) {
 			var viewName = createEntityView( entity, $entityview.first() );
 
 			if ( canEdit ) {
@@ -364,7 +364,7 @@
 
 		if ( canEdit ) {
 			$entityview
-			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event, lang ) {
+			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function ( event, lang ) {
 				var userLanguage = mw.config.get( 'wgUserLanguage' );
 
 				if ( typeof lang === 'string' && lang !== userLanguage ) {
@@ -391,7 +391,7 @@
 		}
 	} );
 
-} )(
+}(
 	jQuery,
 	mediaWiki,
 	wikibase,
@@ -399,4 +399,4 @@
 	wikibase.experts.getStore,
 	wikibase.parsers.getStore,
 	window.performance
-);
+) );

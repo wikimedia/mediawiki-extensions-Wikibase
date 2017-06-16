@@ -1,4 +1,4 @@
-( function( wb ) {
+( function ( wb ) {
 	'use strict';
 
 	var MODULE = wb.view;
@@ -15,12 +15,12 @@
 		this._toolbarFactory = toolbarFactory;
 	};
 
-	SELF.prototype.getAdder = function( add, $dom, label, title ) {
+	SELF.prototype.getAdder = function ( add, $dom, label, title ) {
 		var options = { label: label, title: title };
 		$dom = this._toolbarFactory.getToolbarContainer( $dom );
 		$dom.on(
 			'addtoolbaradd.addtoolbar',
-			function( event ) {
+			function ( event ) {
 				if ( event.target !== $dom.get( 0 ) ) {
 					// This is a different toolbar than we thought
 					return;
@@ -31,7 +31,7 @@
 		return this._toolbarFactory.getAddToolbar( options, $dom );
 	};
 
-	SELF.prototype.getRemover = function( remove, $dom, title ) {
+	SELF.prototype.getRemover = function ( remove, $dom, title ) {
 		var options = { title: title };
 		$dom = this._toolbarFactory.getToolbarContainer( $dom );
 		$dom.on( 'removetoolbarremove.removetoolbar', remove );

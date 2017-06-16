@@ -1,4 +1,4 @@
-( function( $, sinon, QUnit, wb, mw ) {
+( function ( $, sinon, QUnit, wb, mw ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.view.ToolbarViewController' );
@@ -6,40 +6,40 @@
 	function initToolbarViewController() {
 		var controller = new wb.view.ToolbarViewController(
 			{
-				remove: function() {
+				remove: function () {
 					return $.Deferred();
 				},
-				save: function() {
+				save: function () {
 					return $.Deferred();
 				}
 			},
 			{
-				disable: function() {},
-				enable: function() {},
-				getButton: function() {
+				disable: function () {},
+				enable: function () {},
+				getButton: function () {
 					return {
-						disable: function() {},
-						enable: function() {}
+						disable: function () {},
+						enable: function () {}
 					};
 				},
-				toggleActionMessage: function() {},
-				toEditMode: function() {},
-				toNonEditMode: function() {}
+				toggleActionMessage: function () {},
+				toEditMode: function () {},
+				toNonEditMode: function () {}
 			},
 			{
-				disable: function() {},
+				disable: function () {},
 				element: {
-					on: function() {}
+					on: function () {}
 				},
-				enable: function() {},
-				setError: function() {},
-				startEditing: function() {
+				enable: function () {},
+				setError: function () {},
+				startEditing: function () {
 					return $.Deferred();
 				},
-				stopEditing: function() {},
-				value: function() {}
+				stopEditing: function () {},
+				value: function () {}
 			},
-			function() {}
+			function () {}
 		);
 
 		return controller;

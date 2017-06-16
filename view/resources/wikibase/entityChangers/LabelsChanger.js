@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
@@ -41,7 +41,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setLabel: function( label ) {
+		setLabel: function ( label ) {
 			var self = this,
 				deferred = $.Deferred(),
 				language = label.getLanguageCode();
@@ -52,8 +52,8 @@
 				label.getText(),
 				language
 			)
-			.done( function( result ) {
-				var savedText = result.entity.labels[language].value,
+			.done( function ( result ) {
+				var savedText = result.entity.labels[ language ].value,
 					savedTerm = savedText ? new wb.datamodel.Term( language, savedText ) : null;
 
 				// Update revision store:
@@ -65,7 +65,7 @@
 
 				deferred.resolve( savedTerm );
 			} )
-			.fail( function( errorCode, error ) {
+			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 			} );
 

@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -60,7 +60,7 @@
 		 *
 		 * @throws {Error} if a required option is not specified properly.
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.entityIdHtmlFormatter || !this.options.buildStatementListView ) {
 				throw new Error( 'Required option not specified properly' );
 			}
@@ -76,7 +76,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( this.statementlistview ) {
 				this.statementlistview.element.off( this.widgetName );
 				this.statementlistview.destroy();
@@ -87,7 +87,7 @@
 		/**
 		 * @private
 		 */
-		_createPropertyLabel: function() {
+		_createPropertyLabel: function () {
 			if ( this.$propertyLabel.contents().length > 0 ) {
 				return;
 			}
@@ -95,7 +95,7 @@
 			var self = this,
 				propertyId = this.options.value.getKey();
 
-			this.options.entityIdHtmlFormatter.format( propertyId ).done( function( title ) {
+			this.options.entityIdHtmlFormatter.format( propertyId ).done( function ( title ) {
 				self.$propertyLabel.append( title );
 			} );
 		},
@@ -103,7 +103,7 @@
 		/**
 		 * @private
 		 */
-		_createStatementlistview: function() {
+		_createStatementlistview: function () {
 			var self = this,
 				prefix;
 
@@ -120,17 +120,17 @@
 			prefix = this.statementlistview.widgetEventPrefix;
 
 			$statementlistview
-			.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 				self.$property.toggleClass( 'wb-error', Boolean( error ) );
 			} )
-			.on( prefix + 'afterstopediting.' + this.widgetName, function( event, dropValue ) {
+			.on( prefix + 'afterstopediting.' + this.widgetName, function ( event, dropValue ) {
 				self.$property.removeClass( 'wb-error wb-edit' );
-				self._trigger( 'afterstopediting', null, [dropValue] );
+				self._trigger( 'afterstopediting', null, [ dropValue ] );
 			} )
-			.on( prefix + 'afterstartediting.' + this.widgetName, function( event ) {
+			.on( prefix + 'afterstartediting.' + this.widgetName, function ( event ) {
 				self.$property.addClass( 'wb-edit' );
 			} )
-			.on( prefix + 'afterremove.' + this.widgetName, function( event ) {
+			.on( prefix + 'afterremove.' + this.widgetName, function ( event ) {
 				self.$property.removeClass( 'wb-error wb-edit' );
 				self._trigger( 'afterremove' );
 			} );
@@ -143,7 +143,7 @@
 		 * @param {wikibase.datamodel.StatementGroup} [statementGroupView]
 		 * @return {wikibase.datamodel.StatementGroup|null|undefined}
 		 */
-		value: function( statementGroupView ) {
+		value: function ( statementGroupView ) {
 			if ( statementGroupView !== undefined ) {
 				return this.option( 'value', statementGroupView );
 			}
@@ -156,7 +156,7 @@
 			// been initialized without a value (as there is no initial value, the id cannot be
 			// retrieved from this.options.value).
 			return new wb.datamodel.StatementGroup(
-				statementList.toArray()[0].getClaim().getMainSnak().getPropertyId(),
+				statementList.toArray()[ 0 ].getClaim().getMainSnak().getPropertyId(),
 				statementList
 			);
 		},
@@ -168,7 +168,7 @@
 		 * @throws {Error} when trying to set the value passing something different than a
 		 *         `wikibase.datamodel.StatementGroup´ object.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' && !!value ) {
 				if ( !( value instanceof wb.datamodel.StatementGroup ) ) {
 					throw new Error( 'value needs to be a wb.datamodel.StatementGroup instance' );
@@ -188,7 +188,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			this.statementlistview.focus();
 		},
 
@@ -201,7 +201,7 @@
 		 * @return {Function} return.done
 		 * @return {jQuery} return.done.$statementview
 		 */
-		enterNewItem: function() {
+		enterNewItem: function () {
 			return this.statementlistview.enterNewItem();
 		}
 

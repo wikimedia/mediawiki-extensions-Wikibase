@@ -1,4 +1,4 @@
-( function( $, sinon, QUnit, wb, ViewFactory ) {
+( function ( $, sinon, QUnit, wb, ViewFactory ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.view.ViewFactory' );
@@ -34,26 +34,26 @@
 		);
 	}
 
-	QUnit.test( 'is constructable', function( assert ) {
+	QUnit.test( 'is constructable', function ( assert ) {
 		assert.expect( 1 );
 		assert.ok( newViewFactory() instanceof ViewFactory );
 	} );
 
 	function getEntityStub( type ) {
 		return {
-			getType: function() {
+			getType: function () {
 				return type;
 			}
 		};
 	}
 
-	QUnit.test( 'getEntityView constructs correct views', function( assert ) {
+	QUnit.test( 'getEntityView constructs correct views', function ( assert ) {
 		assert.expect( 2 );
 		var viewFactory = newViewFactory(),
 			fooView = {},
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
-		$dom.data = sinon.spy( function() { return fooView; } );
+		$dom.data = sinon.spy( function () { return fooView; } );
 
 		var res = viewFactory.getEntityView( null, getEntityStub( 'foo' ), $dom );
 
@@ -61,19 +61,19 @@
 		sinon.assert.calledOnce( FooView );
 	} );
 
-	QUnit.test( 'getEntityView throws on incorrect views', function( assert ) {
+	QUnit.test( 'getEntityView throws on incorrect views', function ( assert ) {
 		assert.expect( 1 );
 		var viewFactory = newViewFactory();
 
 		assert.throws(
-			function() {
+			function () {
 				viewFactory.getEntityView( null, getEntityStub( 'unknown' ) );
 			},
 			new Error( 'View unknownview does not exist' )
 		);
 	} );
 
-	QUnit.test( 'getEntityView passes correct options to views', function( assert ) {
+	QUnit.test( 'getEntityView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var entity = getEntityStub( 'foo' ),
 			viewFactory = newViewFactory(),
@@ -90,7 +90,7 @@
 		} ) );
 	} );
 
-	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function( assert ) {
+	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var sitelinkSet = new wb.datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
@@ -108,7 +108,7 @@
 		$.wikibase.sitelinkgrouplistview.restore();
 	} );
 
-	QUnit.test( 'getSitelinkGroupView passes correct options to views', function( assert ) {
+	QUnit.test( 'getSitelinkGroupView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var groupName = 'groupid',
 			siteLinks = new wb.datamodel.SiteLinkSet( [] ),
@@ -129,7 +129,7 @@
 		$.wikibase.sitelinkgroupview.restore();
 	} );
 
-	QUnit.test( 'getSiteLinkListView passes correct options to views', function( assert ) {
+	QUnit.test( 'getSiteLinkListView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var siteLinks = [],
 			viewFactory = newViewFactory(),
@@ -148,7 +148,7 @@
 		$.wikibase.sitelinklistview.restore();
 	} );
 
-	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
+	QUnit.test( 'getStatementGroupListView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var entity = new wb.datamodel.Item( 'Q1' ),
 			viewFactory = newViewFactory(),
@@ -165,7 +165,7 @@
 		$.wikibase.statementgrouplistview.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', function( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', function ( assert ) {
 		assert.expect( 3 );
 		var entityId = 'Q1',
 			entityIdHtmlFormatter = {},
@@ -183,7 +183,7 @@
 			} )
 		);
 
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+		var result = ListItemAdapter.args[ 0 ][ 0 ].newItemOptionsFn( value );
 
 		assert.deepEqual(
 			result,
@@ -199,7 +199,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getStatementListView passes correct options to views', function( assert ) {
+	QUnit.test( 'getStatementListView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList( [
 				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
@@ -229,7 +229,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getStatementListView passes null for an empty StatementList', function( assert ) {
+	QUnit.test( 'getStatementListView passes null for an empty StatementList', function ( assert ) {
 		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
@@ -252,7 +252,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function ( assert ) {
 		assert.expect( 2 );
 		var entityId = 'Q1',
 			value = null,
@@ -280,7 +280,7 @@
 			} )
 		);
 
-		ListItemAdapter.args[0][0].getNewItem( value, dom );
+		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -311,7 +311,7 @@
 		viewFactory._getView.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', function( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', function ( assert ) {
 		assert.expect( 1 );
 		var entityId = 'Q1',
 			propertyId = 'propertyId',
@@ -324,7 +324,7 @@
 
 		viewFactory.getListItemAdapterForStatementView( null, entityId, function () {}, propertyId );
 
-		ListItemAdapter.args[0][0].getNewItem( value, dom );
+		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -340,7 +340,7 @@
 		viewFactory._getView.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function ( assert ) {
 		assert.expect( 1 );
 		var propertyId = 'P1',
 			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
@@ -352,7 +352,7 @@
 
 		viewFactory.getListItemAdapterForStatementView( null, 'Q1', function () {}, null );
 
-		ListItemAdapter.args[0][0].getNewItem( value, dom );
+		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -368,10 +368,10 @@
 		viewFactory._getView.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function( assert ) {
+	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function ( assert ) {
 		assert.expect( 1 );
 		var viewFactory = newViewFactory(),
-			removeCallback = function() {},
+			removeCallback = function () {},
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForReferenceView( null, removeCallback );
@@ -387,11 +387,11 @@
 		ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getReferenceView passes correct options to view', function( assert ) {
+	QUnit.test( 'getReferenceView passes correct options to view', function ( assert ) {
 		assert.expect( 1 );
 		var value = null,
 			viewFactory = newViewFactory(),
-			removeCallback = function() {},
+			removeCallback = function () {},
 			$dom = $( '<div/>' ),
 			referenceview = sinon.stub( $dom, 'referenceview' );
 
@@ -411,7 +411,7 @@
 		referenceview.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function( assert ) {
+	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function ( assert ) {
 		assert.expect( 1 );
 		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
@@ -429,7 +429,7 @@
 		ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getSnakListView passes correct options to view', function( assert ) {
+	QUnit.test( 'getSnakListView passes correct options to view', function ( assert ) {
 		assert.expect( 1 );
 
 		var value = null,
@@ -451,7 +451,7 @@
 		stub.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function( assert ) {
+	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function ( assert ) {
 		assert.expect( 1 );
 		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
@@ -469,7 +469,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getSnakView passes correct options to view', function( assert ) {
+	QUnit.test( 'getSnakView passes correct options to view', function ( assert ) {
 		assert.expect( 2 );
 		var contentLanguages = {},
 			value = null,
@@ -514,7 +514,7 @@
 				entityIdHtmlFormatter: entityIdHtmlFormatter,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				entityStore: entityStore,
-				valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
+				valueViewBuilder: wb.ValueViewBuilder.returnValues[ 0 ],
 				drawProperty: false
 			} )
 		);
@@ -523,7 +523,7 @@
 			expertStore,
 			formatterFactory,
 			parserStore,
-			userLanguages[0],
+			userLanguages[ 0 ],
 			messageProvider,
 			contentLanguages
 		);
@@ -533,11 +533,11 @@
 		$.wikibase.snakview.restore();
 	} );
 
-	QUnit.test( 'getEntityTermsView passes correct options to views', function( assert ) {
+	QUnit.test( 'getEntityTermsView passes correct options to views', function ( assert ) {
 		assert.expect( 1 );
 		var fingerprint = new wb.datamodel.Fingerprint(),
 			message = 'message',
-			messageProvider = { getMessage: function() { return message; } },
+			messageProvider = { getMessage: function () { return message; } },
 			userLanguages = [],
 			viewFactory = newViewFactory(
 				null,

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -22,8 +22,8 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.statementview.RankSelector', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_rankselector' ).each( function( i, node ) {
+		teardown: function () {
+			$( '.test_rankselector' ).each( function ( i, node ) {
 				var $node = $( node );
 				$node.data( 'test_rankselector' ).destroy();
 				$node.remove();
@@ -31,7 +31,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Instantiation', function( assert ) {
+	QUnit.test( 'Instantiation', function ( assert ) {
 		assert.expect( 1 );
 		var rankSelector = createTestRankSelector( { value: wb.datamodel.Statement.RANK.DEPRECATED } );
 
@@ -42,7 +42,7 @@
 		);
 	} );
 
-	QUnit.test( 'Set and get rank via value()', function( assert ) {
+	QUnit.test( 'Set and get rank via value()', function ( assert ) {
 		assert.expect( 3 );
 		var rankSelector = createTestRankSelector();
 
@@ -71,7 +71,7 @@
 		);
 	} );
 
-	QUnit.test( 'Set and get rank via option()', function( assert ) {
+	QUnit.test( 'Set and get rank via option()', function ( assert ) {
 		assert.expect( 3 );
 		var rankSelector = createTestRankSelector();
 
@@ -154,4 +154,4 @@
 
 	} );
 
-} )( jQuery, wikibase, QUnit );
+}( jQuery, wikibase, QUnit ) );

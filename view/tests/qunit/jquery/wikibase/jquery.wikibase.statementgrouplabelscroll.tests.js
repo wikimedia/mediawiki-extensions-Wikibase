@@ -4,7 +4,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $, QUnit, StatementGroupLabelScrollWidget ) {
+( function ( $, QUnit, StatementGroupLabelScrollWidget ) {
 	'use strict';
 
 	/**
@@ -24,15 +24,15 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.statementgrouplabelscroll', {
-		teardown: function() {
-			$.each( StatementGroupLabelScrollWidget.activeInstances(), function( i, instance ) {
+		teardown: function () {
+			$.each( StatementGroupLabelScrollWidget.activeInstances(), function ( i, instance ) {
 				instance.destroy();
 				instance.element.remove();
 			} );
 		}
 	} );
 
-	QUnit.test( 'widget definition', function( assert ) {
+	QUnit.test( 'widget definition', function ( assert ) {
 		assert.expect( 3 );
 		assert.ok(
 			$.isFunction( StatementGroupLabelScrollWidget ),
@@ -51,7 +51,7 @@
 		);
 	} );
 
-	QUnit.test( 'widget instantiation and destruction', function( assert ) {
+	QUnit.test( 'widget instantiation and destruction', function ( assert ) {
 		assert.expect( 3 );
 		var $testNode = newTestNode().statementgrouplabelscroll(),
 			instance = $testNode.data( 'statementgrouplabelscroll' );
@@ -62,7 +62,7 @@
 		);
 
 		assert.strictEqual(
-			StatementGroupLabelScrollWidget.activeInstances()[0],
+			StatementGroupLabelScrollWidget.activeInstances()[ 0 ],
 			instance,
 			'Instantiated widget returned by $.wikibase.statementgrouplabelscroll.activeInstances()'
 		);

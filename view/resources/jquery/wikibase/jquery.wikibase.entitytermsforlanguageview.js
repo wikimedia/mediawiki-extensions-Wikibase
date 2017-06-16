@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -41,10 +41,10 @@
 			templateParams: [
 				'tr',
 				'td',
-				function() {
+				function () {
 					return this.options.value.language;
 				},
-				function() {
+				function () {
 					return wb.getLanguageNameByCode( this.options.value.language );
 				},
 				'', // label
@@ -80,7 +80,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
-		_create: function() {
+		_create: function () {
 			this.options.value = this._checkValue( this.options.value );
 
 			PARENT.prototype._create.call( this );
@@ -91,7 +91,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			var self = this;
 
 			function degrade() {
@@ -109,7 +109,7 @@
 			}
 
 			if ( this.isInEditMode() ) {
-				this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
+				this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
 					degrade();
 				} );
 
@@ -122,26 +122,26 @@
 		/**
 		 * Creates labelview, descriptionview and aliasesview widget
 		 */
-		_createWidgets: function() {
+		_createWidgets: function () {
 			var self = this;
 
-			$.each( ['label', 'description', 'aliases'], function( i, subjectName ) {
+			$.each( [ 'label', 'description', 'aliases' ], function ( i, subjectName ) {
 				var widgetName = subjectName + 'view';
 
-				self['$' + widgetName] = self['$' + subjectName].children( '.wikibase-' + widgetName );
+				self[ '$' + widgetName ] = self[ '$' + subjectName ].children( '.wikibase-' + widgetName );
 
-				if ( !self['$' + widgetName].length ) {
-					self['$' + widgetName] = $( '<div/>' ).appendTo( self['$' + subjectName] );
+				if ( !self[ '$' + widgetName ].length ) {
+					self[ '$' + widgetName ] = $( '<div/>' ).appendTo( self[ '$' + subjectName ] );
 				}
 
 				// Fully encapsulate child widgets by suppressing their events:
-				self['$' + widgetName]
-				.on( widgetName + 'change', function( event ) {
+				self[ '$' + widgetName ]
+				.on( widgetName + 'change', function ( event ) {
 					event.stopPropagation();
 					// The only event handler for this is in entitytermsforlanguagelistview.
-					self._trigger( 'change', null, [self.options.value.language] );
+					self._trigger( 'change', null, [ self.options.value.language ] );
 				} )
-				.on( widgetName + 'toggleerror.' + self.widgetName, function( event, error ) {
+				.on( widgetName + 'toggleerror.' + self.widgetName, function ( event, error ) {
 					event.stopPropagation();
 					self.setError( error );
 				} )
@@ -152,27 +152,27 @@
 						widgetName + 'afterstopediting.' + self.widgetName,
 						widgetName + 'disable.' + self.widgetName
 					].join( ' ' ),
-					function( event ) {
+					function ( event ) {
 						event.stopPropagation();
 					}
 				);
 
 				var options = {
-					value: self.options.value[subjectName],
+					value: self.options.value[ subjectName ],
 					helpMessage: mw.msg(
 						'wikibase-' + subjectName + '-input-help-message',
 						wb.getLanguageNameByCode( self.options.value.language )
 					)
 				};
 
-				self['$' + widgetName][widgetName]( options );
+				self[ '$' + widgetName ][ widgetName ]( options );
 			} );
 		},
 
 		/**
 		 * Puts the widget into edit mode.
 		 */
-		_startEditing: function() {
+		_startEditing: function () {
 			this.$labelview.data( 'labelview' ).startEditing();
 			this.$descriptionview.data( 'descriptionview' ).startEditing();
 			this.$aliasesview.data( 'aliasesview' ).startEditing();
@@ -182,7 +182,7 @@
 		/**
 		 * @param {boolean} [dropValue]
 		 */
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			this.$labelview.data( 'labelview' ).stopEditing( dropValue );
 			this.$descriptionview.data( 'descriptionview' ).stopEditing( dropValue );
 			this.$aliasesview.data( 'aliasesview' ).stopEditing( dropValue );
@@ -195,7 +195,7 @@
 		 * @param {Object} [value]
 		 * @return {Object|*}
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value !== undefined ) {
 				return this.option( 'value', value );
 			}
@@ -213,7 +213,7 @@
 		 *
 		 * @throws {Error} when trying to set value with a new language.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' ) {
 				value = this._checkValue( value );
 
@@ -243,7 +243,7 @@
 		 *
 		 * @throws {Error} if value is not defined properly.
 		 */
-		_checkValue: function( value ) {
+		_checkValue: function ( value ) {
 			if ( !$.isPlainObject( value ) ) {
 				throw new Error( 'Value needs to be an object' );
 			} else if ( !value.language ) {
@@ -268,11 +268,11 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
-		focus: function() {
+		focus: function () {
 			this.$labelview.data( 'labelview' ).focus();
 		},
 
-		removeError: function() {
+		removeError: function () {
 			PARENT.prototype.removeError.call( this );
 
 			this.$labelview.data( 'labelview' ).removeError();

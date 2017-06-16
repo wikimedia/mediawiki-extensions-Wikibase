@@ -1,4 +1,4 @@
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	/**
@@ -73,7 +73,7 @@
 
 		if ( !options.getNewItem ) {
 			var self = this;
-			options.getNewItem = function( value, subjectDom ) {
+			options.getNewItem = function ( value, subjectDom ) {
 				return new options.listItemWidget(
 					options.newItemOptionsFn.call( self, value === undefined ? null : value ),
 					subjectDom
@@ -96,7 +96,7 @@
 		 * @param {string} [name]
 		 * @return {string}
 		 */
-		prefixedEvent: function( name ) {
+		prefixedEvent: function ( name ) {
 			return this._options.listItemWidget.prototype.widgetEventPrefix + ( name || '' );
 		},
 
@@ -106,7 +106,7 @@
 		 * @param {jQuery} $node
 		 * @return {*|null}
 		 */
-		liInstance: function( $node ) {
+		liInstance: function ( $node ) {
 			return $node.data( this._options.listItemWidget.prototype.widgetName ) || null;
 		},
 
@@ -119,8 +119,8 @@
 		 *        list item will be an empty one.
 		 * @return {jQuery.Widget}
 		 */
-		newListItem: function( $subject, value ) {
-			var item = this._options.getNewItem( value, $subject[0] );
+		newListItem: function ( $subject, value ) {
+			var item = this._options.getNewItem( value, $subject[ 0 ] );
 			if ( !( item instanceof $.Widget ) ) {
 				throw new Error( 'The "getNewItem" option must return a jQuery.Widget' );
 			}

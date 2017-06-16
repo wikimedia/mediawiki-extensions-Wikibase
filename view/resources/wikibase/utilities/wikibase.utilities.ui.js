@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	/**
@@ -11,7 +11,7 @@
 	 */
 	var IS_RTL = false;
 
-	$( function() {
+	$( function () {
 		// have to wait for document to be loaded for this, otherwise 'rtl' might not yet be there!
 		IS_RTL = $( 'body' ).hasClass( 'rtl' );
 	} );
@@ -39,7 +39,7 @@
 	 * @return {jQuery} The formatted counter output. Does not have a root node, collection of
 	 *         multiple DOM elements.
 	 */
-	wb.utilities.ui.buildPendingCounter = function(
+	wb.utilities.ui.buildPendingCounter = function (
 		fixedQuantity, pendingQuantity, mainMessage, pendingQuantityTooltipMessage
 	) {
 		var fqNumMsg = mw.language.convertNumber( fixedQuantity ),

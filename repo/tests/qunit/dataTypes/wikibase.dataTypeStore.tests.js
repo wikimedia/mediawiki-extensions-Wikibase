@@ -3,12 +3,12 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-( function( QUnit, dataTypeStore, dataTypes ) {
+( function ( QUnit, dataTypeStore, dataTypes ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.dataTypeStore' );
 
-	QUnit.test( 'instance check', function( assert ) {
+	QUnit.test( 'instance check', function ( assert ) {
 		assert.expect( 1 );
 		assert.ok(
 			dataTypeStore instanceof dataTypes.DataTypeStore,

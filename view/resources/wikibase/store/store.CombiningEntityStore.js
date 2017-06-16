@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -39,7 +39,7 @@
 	MODULE.CombiningEntityStore = util.inherit(
 		'WbCombiningEntityStore',
 		wb.store.EntityStore,
-		function( stores ) {
+		function ( stores ) {
 			this._stores = stores;
 		},
 		{
@@ -51,9 +51,9 @@
 			/**
 			 * @see wikibase.store.EntityStore.get
 			 */
-			get: function( entityId ) {
-				return asyncFallback( entityId, $.map( this._stores, function( store ) {
-					return function( entityId ) {
+			get: function ( entityId ) {
+				return asyncFallback( entityId, $.map( this._stores, function ( store ) {
+					return function ( entityId ) {
 						return store.get( entityId );
 					};
 				} ) );

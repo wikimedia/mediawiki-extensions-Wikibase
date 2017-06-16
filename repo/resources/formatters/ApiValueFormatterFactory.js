@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, wb ) {
+( function ( $, wb ) {
 	'use strict';
 
 	var PARENT = wb.ValueFormatterFactory;
@@ -15,7 +15,7 @@
 	 */
 	wb.formatters.ApiValueFormatterFactory = util.inherit(
 		PARENT,
-		function( apiCaller, languageCode ) {
+		function ( apiCaller, languageCode ) {
 			this._apiCaller = apiCaller;
 			this._options = { lang: languageCode };
 		},
@@ -38,7 +38,7 @@
 			 * @param {string} outputType
 			 * @return {valueFormatters.ValueFormatter}
 			 */
-			getFormatter: function( dataTypeId, propertyId, outputType ) {
+			getFormatter: function ( dataTypeId, propertyId, outputType ) {
 				var options = this._options;
 				if ( dataTypeId === 'quantity' && outputType === 'text/plain' ) {
 					options = $.extend( { applyRounding: false, applyUnit: false }, options );

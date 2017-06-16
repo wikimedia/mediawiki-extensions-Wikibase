@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -49,8 +49,8 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.entitytermsforlanguagelistview', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_entitytermsforlanguagelistview' ).each( function() {
+		teardown: function () {
+			$( '.test_entitytermsforlanguagelistview' ).each( function () {
 				var $entitytermsforlanguagelistview = $( this ),
 					entitytermsforlanguagelistview
 						= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -64,10 +64,10 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 3 );
 		assert.throws(
-			function() {
+			function () {
 				createEntitytermsforlanguagelistview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
@@ -90,7 +90,7 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', function( assert ) {
+	QUnit.test( 'setError()', function ( assert ) {
 		assert.expect( 1 );
 		var done = assert.async();
 
@@ -99,7 +99,7 @@
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
 		$entitytermsforlanguagelistview
-		.on( 'entitytermsforlanguagelistviewtoggleerror', function( event, error ) {
+		.on( 'entitytermsforlanguagelistviewtoggleerror', function ( event, error ) {
 			assert.ok(
 				true,
 				'Triggered "toggleerror" event.'
@@ -110,7 +110,7 @@
 		entitytermsforlanguagelistview.setError();
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		assert.expect( 2 );
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview
@@ -122,14 +122,14 @@
 		);
 
 		assert.throws(
-			function() {
+			function () {
 				entitytermsforlanguagelistview.value( [] );
 			},
 			'Throwing error when trying to set a new value.'
 		);
 	} );
 
-	QUnit.test( '_getMoreLanguages()', function( assert ) {
+	QUnit.test( '_getMoreLanguages()', function ( assert ) {
 		assert.expect( 1 );
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview
@@ -141,7 +141,7 @@
 		);
 	} );
 
-	QUnit.test( '_hasMoreLanguages()', function( assert ) {
+	QUnit.test( '_hasMoreLanguages()', function ( assert ) {
 		assert.expect( 2 );
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview

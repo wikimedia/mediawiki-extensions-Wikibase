@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function ( wb, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.utilities.ClaimGuidGenerator' );
 
-	QUnit.test( 'Validate GUID layout', function( assert ) {
+	QUnit.test( 'Validate GUID layout', function ( assert ) {
 		assert.expect( 1 );
 		var generator = new wb.utilities.ClaimGuidGenerator( 'q79' );
 

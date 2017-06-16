@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -38,15 +38,15 @@
 		options: {
 			template: 'wikibase-sitelinkview',
 			templateParams: [
-				function() {
+				function () {
 					var site = this._getSite();
 					return site ? site.getId() : 'new';
 				},
-				function() {
+				function () {
 					var site = this._getSite();
 					return site ? site.getId() : '';
 				},
-				function() {
+				function () {
 					var site = this._getSite();
 					return site ? site.getShortName() : '';
 				},
@@ -58,7 +58,7 @@
 				$link: '.wikibase-sitelinkview-link'
 			},
 			value: null,
-			getAllowedSites: function() { return []; },
+			getAllowedSites: function () { return []; },
 			entityIdPlainFormatter: null
 		},
 
@@ -70,7 +70,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.entityIdPlainFormatter ) {
 				throw new Error( 'Required option(s) missing' );
 			}
@@ -86,7 +86,7 @@
 			this._createBadgeSelector();
 		},
 
-		_createRemover: function() {
+		_createRemover: function () {
 			this._siteLinkRemover = this.options.getSiteLinkRemover( this.$siteIdContainer, mw.msg( 'wikibase-remove' ) );
 			this._siteLinkRemover[ this.options.value ? 'enable' : 'disable' ]();
 
@@ -109,7 +109,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( this._badgeselector ) {
 				this._badgeselector.destroy();
 			}
@@ -122,7 +122,7 @@
 			if ( this.isInEditMode() ) {
 				var self = this;
 
-				this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
+				this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
 					PARENT.prototype.destroy.call( self );
 				} );
 
@@ -132,7 +132,7 @@
 			}
 		},
 
-		_createBadgeSelector: function() {
+		_createBadgeSelector: function () {
 			var self = this,
 				$badgeselector = this.$link.find( '.wikibase-sitelinkview-badges' ),
 				badges = mw.config.get( 'wbBadgeItems' );
@@ -154,7 +154,7 @@
 				},
 				encapsulate: true
 			} )
-			.on( 'badgeselectorchange', function( event ) {
+			.on( 'badgeselectorchange', function ( event ) {
 				// Adding/removing badges decreases/increases available space:
 				self.updatePageNameInputAutoExpand();
 				self._trigger( 'change' );
@@ -167,7 +167,7 @@
 		/**
 		 * Main rendering function.
 		 */
-		_draw: function() {
+		_draw: function () {
 			if ( !this.$link.children().length ) {
 				var siteLink = this.options.value,
 					site = this._getSite();
@@ -195,7 +195,7 @@
 		/**
 		 * Draws the edit mode context.
 		 */
-		_drawEditMode: function() {
+		_drawEditMode: function () {
 			var self = this,
 				pageNameInputOptions = {},
 				dir = $( 'html' ).prop( 'dir' );
@@ -222,7 +222,7 @@
 			var pagesuggester = $pageNameInput.data( 'pagesuggester' );
 
 			$pageNameInput
-			.on( 'pagesuggesterchange.' + this.widgetName, function( event ) {
+			.on( 'pagesuggesterchange.' + this.widgetName, function ( event ) {
 				if ( !pagesuggester.isSearching() ) {
 					self.setError();
 					self._trigger( 'change' );
@@ -264,7 +264,7 @@
 			}
 
 			$siteIdInput
-			.on( 'siteselectorselected.' + this.widgetName, function( event, siteId ) {
+			.on( 'siteselectorselected.' + this.widgetName, function ( event, siteId ) {
 				var site = wb.sites.getSite( siteId );
 
 				if ( site ) {
@@ -277,10 +277,10 @@
 				}
 
 				if ( self._badgeselector ) {
-					self._badgeselector.element[site ? 'show' : 'hide']();
+					self._badgeselector.element[ site ? 'show' : 'hide' ]();
 				}
 
-				pagesuggester[site ? 'enable' : 'disable']();
+				pagesuggester[ site ? 'enable' : 'disable' ]();
 				pagesuggester.option( 'siteId', siteId );
 
 				self._trigger( 'change' );
@@ -288,7 +288,7 @@
 			} )
 			.on(
 				'siteselectorselected.' + this.widgetName + ' siteselectorchange.' + this.widgetName,
-				function( event, siteId ) {
+				function ( event, siteId ) {
 					var inputautoexpand = $siteIdInput.data( 'inputautoexpand' );
 
 					if ( inputautoexpand ) {
@@ -310,7 +310,7 @@
 			this.updatePageNameInputAutoExpand();
 
 			$pageNameInput
-			.on( 'keydown.' + this.widgetName, function( event ) {
+			.on( 'keydown.' + this.widgetName, function ( event ) {
 				if ( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
 					event.stopPropagation();
 					$siteIdInput.val( '' ).focus();
@@ -322,7 +322,7 @@
 		/**
 		 * Updates the maximum width the page name input element may grow to.
 		 */
-		updatePageNameInputAutoExpand: function() {
+		updatePageNameInputAutoExpand: function () {
 			var $pageNameInput = this.$link.find( 'input' );
 
 			if ( !$pageNameInput.length ) {
@@ -341,7 +341,7 @@
 		/**
 		 * @return {boolean}
 		 */
-		isEmpty: function() {
+		isEmpty: function () {
 			if ( !this.isInEditMode() ) {
 				return !this.options.value;
 			}
@@ -354,7 +354,7 @@
 		/**
 		 * Puts the widget into edit mode.
 		 */
-		_startEditing: function() {
+		_startEditing: function () {
 			this._draw();
 
 			if ( this.option( 'disabled' ) ) {
@@ -374,7 +374,7 @@
 		 *         Rejected parameters:
 		 *         - {Error}
 		 */
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			if ( this._badgeselector ) {
 				this._badgeselector.stopEditing( dropValue );
 			}
@@ -385,7 +385,7 @@
 		/**
 		 * @return {wikibase.Site|null}
 		 */
-		_getSite: function() {
+		_getSite: function () {
 			var siteLink = this.value();
 			return siteLink ? wb.sites.getSite( siteLink.getSiteId() ) : null;
 		},
@@ -396,7 +396,7 @@
 		 * @param {wikibase.datamodel.SiteLink|null} [siteLink]
 		 * @return {wikibase.datamodel.SiteLink|undefined}
 		 */
-		value: function( siteLink ) {
+		value: function ( siteLink ) {
 			if ( siteLink === undefined ) {
 				if ( !this.isInEditMode() ) {
 					return this.options.value;
@@ -435,7 +435,7 @@
 		 *
 		 * @throws {Error} when trying to set a site link with a new site id.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value'
 				&& this.options.value
 				&& value.getSiteId() !== this.options.value.getSiteId()
@@ -457,7 +457,7 @@
 		/**
 		 * @param {string} state
 		 */
-		_setState: function( state ) {
+		_setState: function ( state ) {
 			if ( this.isInEditMode() ) {
 				var $siteInput = this.$siteId.find( 'input' ),
 					hasSiteId = !!( this.options.value && this.options.value.getSiteId() );
@@ -465,7 +465,7 @@
 				if ( $siteInput.length ) {
 					var siteselector = $siteInput.data( 'siteselector' );
 					hasSiteId = !!siteselector.getSelectedSite();
-					siteselector[state]();
+					siteselector[ state ]();
 				}
 
 				if ( this._siteLinkRemover ) {
@@ -474,9 +474,9 @@
 
 				// Do not enable page input if no site is set:
 				if ( state === 'disable' || hasSiteId ) {
-					this.$link.find( 'input' ).data( 'pagesuggester' )[state]();
+					this.$link.find( 'input' ).data( 'pagesuggester' )[ state ]();
 					if ( this._badgeselector ) {
-						this._badgeselector[state]();
+						this._badgeselector[ state ]();
 					}
 				}
 			}
@@ -485,7 +485,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
-		focus: function() {
+		focus: function () {
 			var $siteselector = this.element.find( ':wikibase-siteselector' ),
 				$pagesuggester = this.element.find( ':wikibase-pagesuggester' );
 
