@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_6e4abdca",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-16T11:57:55Z",
+      "side": 1,
+      "message": "$dbr is not valid here, we have released it in line 454!\nAlso, if using MySQL locks, we *have* to use the master DB!\n\nPerhaps it would be better to not pass the DB connection as a parameter at all, but let the method grab whatever connection it needs - the MySQL based locking mechanism would grab a master connection, the Redis locking mechanism grabs a Redis lock and doesn\u0027t do anything to DB connections...",
+      "revId": "9138c67770cb5d6c468cc27827f8b93aae2edacc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
