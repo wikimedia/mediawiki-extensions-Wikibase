@@ -55,6 +55,6 @@
 	"wikibase-pageinfo-entity-id-none": "Brez",
 	"wikibase-property-render-error": "Upodobitev lastnosti $1 je spodletela: $2",
 	"wikibase-otherprojects": "V drugih projektih",
-	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} s svojim objektom v {{WBREPONAME}}.",
+	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} z {{PLURAL:$4|objektom v {{WBREPONAME}}}}, ki vsebuje podatke, povezane s temo.",
 	"notification-subject-page-connection": "Stran {{SITENAME}}, ki so jo {{GENDER:$3|ustvaril|ustvarila}}, je bila  {{GENDER:$2|povezana}} s svojim objetom v {{WBREPONAME}}"
 }
