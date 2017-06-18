@@ -100,7 +100,7 @@
 	"wikibase-otherprojects-beta-description": "Lägger till ett \"{{int:wikibase-otherprojects}}\"-avsnitt till sidofältet som innehåller länkar till andra Wikimedia-projekten utifrån {{WBREPONAME}}-data.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Anslutning|Anslutningar}} med {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Meddela mig när någon ansluter en sida som {{GENDER:|jag har skapat}} till ett {{WBREPONAME}}-objekt.",
-	"notification-header-page-connection": "Sidan <strong>$3</strong> {{GENDER:$2|anslöts}} till ett {{WBREPONAME}}-objekt.",
+	"notification-header-page-connection": "Sidan <strong>$3</strong> {{GENDER:$2|anslöts}} till {{PLURAL:$4|-1=ett {{WBREPONAME}}-objekt|{{WBREPONAME}}-objektet $4}}, som innehåller data som är relevant till ämnet.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> och {{PLURAL:$4|en till sida|$4 andra sidor|100=99+ andra sidor}} har {{GENDER:$2|anslutits}} till objekt på {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Visa}} objekt",
 	"notification-subject-page-connection": "En sida på {{SITENAME}} som du {{GENDER:$3|skapade}} har {{GENDER:$2|anslutits}} till ett {{WBREPONAME}}-objekt",
