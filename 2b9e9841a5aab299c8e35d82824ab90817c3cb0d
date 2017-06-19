@@ -22,6 +22,30 @@
       "revId": "2b9e9841a5aab299c8e35d82824ab90817c3cb0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_f3852cb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-19T09:31:24Z",
+      "side": 1,
+      "message": "Conceptually, it\u0027s still an \"Item builder\". :-)",
+      "parentUuid": "ee859f59_33cdf434",
+      "range": {
+        "startLine": 7,
+        "startChar": 33,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "2b9e9841a5aab299c8e35d82824ab90817c3cb0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
