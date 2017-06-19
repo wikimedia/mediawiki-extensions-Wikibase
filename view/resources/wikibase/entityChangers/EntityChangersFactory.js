@@ -13,18 +13,25 @@
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
 	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {Function} [fireHook]
 	 */
-	var SELF = MODULE.EntityChangersFactory = function WbEntityChangersEntityChangersFactory( api, revisionStore, entity ) {
+	var SELF = MODULE.EntityChangersFactory = function WbEntityChangersEntityChangersFactory(
+		api,
+		revisionStore,
+		entity,
+		fireHook
+	) {
 		this._api = api;
 		this._revisionStore = revisionStore;
 		this._entity = entity;
+		this._fireHook = fireHook;
 	};
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {wikibase.api.RepoApi}
 		 */
-		_entity: null,
+		_api: null,
 
 		/**
 		 * @type {wikibase.RevisionStore}
@@ -32,9 +39,14 @@
 		_revisionStore: null,
 
 		/**
-		 * @type {wikibase.api.RepoApi}
+		 * @type {wikibase.datamodel.Entity}
 		 */
-		_api: null,
+		_entity: null,
+
+		/**
+		 * @type {Function}
+		 */
+		_fireHook: null,
 
 		/**
 		 * @return {wikibase.entityChangers.AliasesChanger}
@@ -52,7 +64,8 @@
 				this._revisionStore,
 				this._entity,
 				new wb.serialization.StatementSerializer(),
-				new wb.serialization.StatementDeserializer()
+				new wb.serialization.StatementDeserializer(),
+				this._fireHook
 			);
 		},
 
