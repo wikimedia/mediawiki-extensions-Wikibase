@@ -7,10 +7,10 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use EchoAttributeManager;
 use EchoEvent;
-use MWNamespace;
 use Title;
 use User;
 use Wikibase\Change;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
@@ -36,6 +36,11 @@ class EchoNotificationsHandlers {
 	private $repoLinker;
 
 	/**
+	 * @var NamespaceChecker
+	 */
+	private $namespaceChecker;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -57,6 +62,7 @@ class EchoNotificationsHandlers {
 
 	/**
 	 * @param RepoLinker $repoLinker
+	 * @param NamespaceChecker $namespaceChecker
 	 * @param string $siteId
 	 * @param bool $sendEchoNotification
 	 * @param array|false $echoIcon
@@ -64,12 +70,14 @@ class EchoNotificationsHandlers {
 	 */
 	public function __construct(
 		RepoLinker $repoLinker,
+		NamespaceChecker $namespaceChecker,
 		$siteId,
 		$sendEchoNotification,
 		$echoIcon,
 		$repoSiteName
 	) {
 		$this->repoLinker = $repoLinker;
+		$this->namespaceChecker = $namespaceChecker;
 		$this->siteId = $siteId;
 		$this->sendEchoNotification = $sendEchoNotification;
 		$this->echoIcon = $echoIcon;
@@ -85,6 +93,7 @@ class EchoNotificationsHandlers {
 
 		return new self(
 			$wikibaseClient->newRepoLinker(),
+			$wikibaseClient->getNamespaceChecker(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			$settings->getSetting( 'echoIcon' ),
@@ -303,7 +312,7 @@ class EchoNotificationsHandlers {
 	 */
 	private function canNotifyForTitle( Title $title ) {
 		return $title->exists() && !$title->isRedirect()
-			&& MWNamespace::isContent( $title->getNamespace() );
+			&& $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() );
 	}
 
 }
