@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_33cdf434",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-19T09:21:28Z",
+      "side": 1,
+      "message": "Hrm, I just noticed we didn’t change this to NewItem… :/",
+      "range": {
+        "startLine": 7,
+        "startChar": 33,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "2b9e9841a5aab299c8e35d82824ab90817c3cb0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
