@@ -3,7 +3,8 @@
 		"authors": [
 			"Robin0van0der0vliet",
 			"PiefPafPier",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Sjoerddebruin"
 		]
 	},
 	"wikibase-comment-update": "Item fan {{WBREPONAME}} bywurke",
@@ -18,5 +19,5 @@
 	"wikibase-rc-wikibase-edit-title": "Bewurking fan {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Gjin",
 	"wikibase-pageinfo-entity-usage-L": "Lebel: $1",
-	"wikibase-otherprojects": "Oare projekten"
+	"wikibase-otherprojects": "Yn oare projekten"
 }

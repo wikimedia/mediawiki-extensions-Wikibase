@@ -75,6 +75,7 @@
 	"wikibase-rc-show-wikidata-pref": "Показать изменения {{grammar:genitive|{{WBREPONAME}}}} в списке свежих правок",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Правка {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Правки {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Все правки {{WBREPONAME}} отмечаются как \"малые\", так что фильтр \"правки {{WBREPONAME}}\" конфликтует с фильтром \"Обычные правки\".",
 	"wikibase-replicationnote": "Пожалуйста, обратите внимание, что может пройти несколько минут, пока изменения станут видны во всех вики-проектах",
 	"wikibase-watchlist-show-changes-pref": "Показать изменения в {{grammar:genitive|{{WBREPONAME}}}} в списке наблюдения",
