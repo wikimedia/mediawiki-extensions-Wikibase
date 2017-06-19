@@ -115,7 +115,11 @@
 				entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 					repoApi,
 					revisionStore,
-					entity
+					entity,
+					function ( hookName ) {
+						var hook = mw.hook( hookName );
+						hook.fire.apply( hook, Array.prototype.slice.call( arguments,  1 ) );
+					}
 				);
 
 			var entityNamespace = entity.getType();
