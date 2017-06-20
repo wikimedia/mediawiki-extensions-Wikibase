@@ -251,8 +251,7 @@ class EditEntityTest extends MediaWikiTestCase {
 				true,  // expected conflict
 				true,  // expected fix
 				array( // expected data
-					'label' => array( 'de' => 'bar', 'en' => 'test',
-					                  'nl' => 'test', 'fr' => 'frrrrtt' ),
+					'label' => [ 'de' => 'bar', 'en' => 'test', 'nl' => 'test', 'fr' => 'frrrrtt' ],
 				)
 			),
 			array( // #5: case V: patch failed, expect a conflict

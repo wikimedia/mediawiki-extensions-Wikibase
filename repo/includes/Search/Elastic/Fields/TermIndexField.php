@@ -1,15 +1,17 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use CirrusSearch;
 use SearchEngine;
 use SearchIndexField;
+use SearchIndexFieldDefinition;
 
 /**
  * Generic class for fields that index terms such as labels.
  * This class applies only to ElasticSearch fields currently.
  */
-abstract class TermIndexField extends \SearchIndexFieldDefinition implements WikibaseIndexField  {
+abstract class TermIndexField extends SearchIndexFieldDefinition implements WikibaseIndexField {
 
 	/**
 	 * Produce a plain unindexed string field.

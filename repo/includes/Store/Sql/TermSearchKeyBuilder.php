@@ -115,7 +115,7 @@ class TermSearchKeyBuilder {
 					'term_text',
 				),
 				array(
-					'term_row_id > ' . (int) $rowId,
+					'term_row_id > ' . (int)$rowId,
 					$this->all ? '1' : 'term_search_key = \'\'', // if not $all, only set missing keys
 				),
 				__METHOD__,

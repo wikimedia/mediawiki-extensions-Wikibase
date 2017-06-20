@@ -21,7 +21,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0+
  */
-class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase  {
+class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase {
 
 	public function provideInvalidInteractorConfig() {
 		return [

@@ -55,8 +55,8 @@ class EntityParserOutputDataUpdater {
 	}
 
 	private function registerDataUpdater( $updater ) {
-		if ( !( $updater instanceof StatementDataUpdater ) &&
-		     !( $updater instanceof SiteLinkDataUpdater )
+		if ( !( $updater instanceof StatementDataUpdater )
+			&& !( $updater instanceof SiteLinkDataUpdater )
 		) {
 			throw new InvalidArgumentException(
 				'Each $dataUpdaters element must be a StatementDataUpdater, SiteLinkDataUpdater or both'

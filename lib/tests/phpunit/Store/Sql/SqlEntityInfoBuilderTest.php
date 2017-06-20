@@ -453,17 +453,23 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	public function testCollectTerms_redirectFullEntityId() {
 		$ids = array( new ItemId( 'Q7' ), new ItemId( 'Q1' ) );
 
-		$expected = array(
-			'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-			               'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q1/de' ) ),
-			),
-			'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
-			               'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q2/de' ) ),
-			),
-			'Q7' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
-			               'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q2/de' ) ),
-			)
-		);
+		$expected = [
+			'Q1' => [
+				'id' => 'Q1',
+				'type' => Item::ENTITY_TYPE,
+				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ),
+			],
+			'Q2' => [
+				'id' => 'Q2',
+				'type' => Item::ENTITY_TYPE,
+				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
+			],
+			'Q7' => [
+				'id' => 'Q2',
+				'type' => Item::ENTITY_TYPE,
+				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
+			]
+		];
 
 		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
 

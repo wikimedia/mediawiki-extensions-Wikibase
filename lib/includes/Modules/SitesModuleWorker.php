@@ -75,14 +75,14 @@ class SitesModuleWorker {
 	 */
 	private function getSitesHash() {
 		$data = '';
-		$sites = (array) $this->getSites();
+		$sites = (array)$this->getSites();
 		sort( $sites );
 
 		/**
 		 * @var Site $site
 		 */
 		foreach ( $sites as $site ) {
-			$data .= json_encode( (array) $site );
+			$data .= json_encode( (array)$site );
 		}
 
 		return sha1( $data );

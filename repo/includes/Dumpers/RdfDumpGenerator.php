@@ -65,10 +65,15 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher     $entityPrefetcher
 	 * @param EntityTitleLookup    $titleLookup
 	 */
-	public function __construct( $out, EntityRevisionLookup $lookup, RdfBuilder $rdfBuilder,
-	                             EntityPrefetcher $entityPrefetcher,
-	                             EntityTitleLookup $titleLookup ) {
+	public function __construct(
+		$out,
+		EntityRevisionLookup $lookup,
+		RdfBuilder $rdfBuilder,
+		EntityPrefetcher $entityPrefetcher,
+		EntityTitleLookup $titleLookup
+	) {
 		parent::__construct( $out, $entityPrefetcher );
+
 		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
 			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
 		}

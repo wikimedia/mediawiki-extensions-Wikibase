@@ -245,8 +245,10 @@ class EntityLoadingHelper {
 		}
 
 		if ( $itemId === null ) {
-			$this->errorReporter->dieError( 'No entity found matching site link ' . $site . ':' . $title,
-			                                'no-such-entity-link' );
+			$this->errorReporter->dieError(
+				'No entity found matching site link ' . $site . ':' . $title,
+				'no-such-entity-link'
+			);
 		}
 
 		return $itemId;

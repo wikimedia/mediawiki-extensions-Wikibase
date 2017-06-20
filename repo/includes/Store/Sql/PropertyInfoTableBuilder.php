@@ -172,7 +172,7 @@ class PropertyInfoTableBuilder {
 				$tables,
 				[ 'page_title', 'page_id' ],
 				[
-					'page_id > ' . (int) $pageId,
+					'page_id > ' . (int)$pageId,
 					'page_namespace = ' . $this->entityNamespaceLookup->getEntityNamespace(
 						Property::ENTITY_TYPE
 					),

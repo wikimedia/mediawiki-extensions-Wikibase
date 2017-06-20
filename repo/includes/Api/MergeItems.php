@@ -134,7 +134,7 @@ class MergeItems extends ApiBase {
 			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
-		$this->resultBuilder->setValue( null, 'redirected', (int) $redirected );
+		$this->resultBuilder->setValue( null, 'redirected', (int)$redirected );
 
 		$this->addEntityToOutput( $newRevisionFrom, 'from' );
 		$this->addEntityToOutput( $newRevisionTo, 'to' );

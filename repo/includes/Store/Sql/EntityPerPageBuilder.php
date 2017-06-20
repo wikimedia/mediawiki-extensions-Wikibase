@@ -148,7 +148,7 @@ class EntityPerPageBuilder {
 
 		$conds = array(
 			'page_namespace' => $this->entityNamespaceLookup->getEntityNamespaces(),
-			'page_id > ' . (int) $lastPageSeen,
+			'page_id > ' . (int)$lastPageSeen,
 		);
 
 		if ( $wgContentHandlerUseDB ) {

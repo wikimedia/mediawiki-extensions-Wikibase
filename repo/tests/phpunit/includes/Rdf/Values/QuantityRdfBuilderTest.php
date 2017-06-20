@@ -270,8 +270,12 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddValue
 	 */
-	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected,
-	                              array $units = null ) {
+	public function testAddValue(
+		PropertyValueSnak $snak,
+		$complex,
+		array $expected,
+		array $units = null
+	) {
 		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
 		$snakWriter = $this->newSnakWriter();
 		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, $complex, $units );

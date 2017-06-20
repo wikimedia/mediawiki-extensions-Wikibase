@@ -123,8 +123,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @param RdfVocabulary $vocabulary
 	 * @return RdfBuilder
 	 */
-	private function newRdfBuilder( $produce, DedupeBag $dedup = null,
-	                                RdfVocabulary $vocabulary = null ) {
+	private function newRdfBuilder(
+		$produce,
+		DedupeBag $dedup = null,
+		RdfVocabulary $vocabulary = null
+	) {
 		if ( $dedup === null ) {
 			$dedup = new HashDedupeBag();
 		}
@@ -200,13 +203,15 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	public function testAddEntityStub( $entityName, $dataSetNames ) {
 		$entity = $this->getEntityData( $entityName );
 
-		$builder =
-			$this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
-			                      RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
-			                      RdfProducer::PRODUCE_QUALIFIERS |
-			                      RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS |
-			                      RdfProducer::PRODUCE_VERSION_INFO |
-			                      RdfProducer::PRODUCE_FULL_VALUES );
+		$builder = $this->newRdfBuilder(
+			RdfProducer::PRODUCE_ALL_STATEMENTS |
+			RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+			RdfProducer::PRODUCE_QUALIFIERS |
+			RdfProducer::PRODUCE_REFERENCES |
+			RdfProducer::PRODUCE_SITELINKS |
+			RdfProducer::PRODUCE_VERSION_INFO |
+			RdfProducer::PRODUCE_FULL_VALUES
+		);
 		$builder->addEntityStub( $entity );
 
 		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
@@ -362,21 +367,24 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @return PageProps
 	 */
 	private function getPropsMock() {
-		$propsMock =
-			$this->getMockBuilder( PageProps::class )->disableOriginalConstructor()->getMock();
-		$propsMock->method( 'getProperties' )->willReturnCallback( function ( Title $title,
-		                                                                      $propertyNames ) {
-			$props = [];
-			foreach ( $propertyNames as $prop ) {
-				if ( $prop[0] == 'X' ) {
-					continue;
+		$propsMock = $this->getMockBuilder( PageProps::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$propsMock->method( 'getProperties' )
+			->willReturnCallback( function ( Title $title, $propertyNames ) {
+				$props = [];
+				foreach ( $propertyNames as $prop ) {
+					if ( $prop[0] == 'X' ) {
+						continue;
+					}
+					$props[$prop] = "test$prop";
+					// Numeric one
+					$props["len$prop"] = strlen( $prop );
 				}
-				$props[$prop] = "test$prop";
-				// Numeric one
-				$props["len$prop"] = strlen( $prop );
-			}
-			return [ 'fakeID' => $props ];
-		} );
+				return [ 'fakeID' => $props ];
+			} );
+
 		return $propsMock;
 	}
 

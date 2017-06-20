@@ -43,15 +43,8 @@ use Wikibase\RedirectRevision;
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class MockRepository implements
-	EntityInfoBuilderFactory,
-	EntityLookup,
-	EntityRevisionLookup,
-	EntityRedirectLookup,
-	EntityStore,
-	PropertyDataTypeLookup,
-	SiteLinkLookup
-{
+class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRedirectLookup,
+	EntityRevisionLookup, EntityStore, PropertyDataTypeLookup, SiteLinkLookup {
 
 	/**
 	 * @var SiteLinkStore

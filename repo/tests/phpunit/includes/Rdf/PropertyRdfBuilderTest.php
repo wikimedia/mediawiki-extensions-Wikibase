@@ -68,8 +68,8 @@ class PropertyRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		if ( $expected === null ) {
 			$this->getTestData()->putTestData( $dataSetName, $actual, '.actual' );
-			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
-			             . " the suffix .actual" );
+			$this->fail( "Data set $dataSetName not found!"
+				. ' Created file with the current data using the suffix .actual' );
 		}
 
 		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );

@@ -54,7 +54,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 			throw new EntityIdParsingException( 'Not an Item ID: ' . $startItemOption );
 		}
 
-		$verbose = (bool) $this->getOption( 'verbose', false );
+		$verbose = (bool)$this->getOption( 'verbose', false );
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(

@@ -766,8 +766,11 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param SearchEngine $engine
 	 * @return array Wikibase fields data, map of name=>value for fields
 	 */
-	public function getDataForSearchIndex( WikiPage $page, ParserOutput $output,
-	                                       SearchEngine $engine ) {
+	public function getDataForSearchIndex(
+		WikiPage $page,
+		ParserOutput $output,
+		SearchEngine $engine
+	) {
 		$fieldsData = parent::getDataForSearchIndex( $page, $output, $engine );
 
 		$content = $page->getContent();

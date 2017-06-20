@@ -66,21 +66,18 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityPrefetcher::class, $wikibaseServices->getEntityPrefetcher() );
-
 	}
 
 	public function testGetEntityRevisionLookup() {
 		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityRevisionLookup::class, $wikibaseServices->getEntityRevisionLookup() );
-
 	}
 
 	public function testGetPropertyInfoLookup() {
 		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( PropertyInfoLookup::class, $wikibaseServices->getPropertyInfoLookup() );
-
 	}
 
 	public function testGetTermBuffer() {

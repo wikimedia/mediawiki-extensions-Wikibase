@@ -109,8 +109,8 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$this->assertEquals(
 			// wfTimestamp returns string, assertEquals/$delta requires int
-			(int) wfTimestamp( TS_UNIX, $expected['change_time'] ),
-			(int) wfTimestamp( TS_UNIX, $row['change_time'] ),
+			(int)wfTimestamp( TS_UNIX, $expected['change_time'] ),
+			(int)wfTimestamp( TS_UNIX, $row['change_time'] ),
 			'Change time',
 			60 * 60 // 1 hour
 		);
