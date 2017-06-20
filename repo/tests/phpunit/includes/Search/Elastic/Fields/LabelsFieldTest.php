@@ -88,4 +88,14 @@ class LabelsFieldTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( [], $labels->getMapping( $searchEngine ) );
 	}
 
+	public function testHints() {
+		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->assertEquals( [], $labels->getEngineHints() );
+		} else {
+			$this->assertEquals( [ 'noop' => 'equals' ], $labels->getEngineHints() );
+		}
+	}
+
+
 }
