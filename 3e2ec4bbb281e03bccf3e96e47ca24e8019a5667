@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce8a9b6b_766b8883",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-20T14:21:54Z",
+      "side": 1,
+      "message": "Isn’t that a pretty internal detail of mw.hook, that it doesn’t happen to require the correct `this`?",
+      "parentUuid": "ce8a9b6b_1319ee7e",
+      "range": {
+        "startLine": 121,
+        "startChar": 23,
+        "endLine": 121,
+        "endChar": 27
+      },
+      "revId": "3e2ec4bbb281e03bccf3e96e47ca24e8019a5667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8a9b6b_93539ee2",
         "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
         "patchSetId": 4
