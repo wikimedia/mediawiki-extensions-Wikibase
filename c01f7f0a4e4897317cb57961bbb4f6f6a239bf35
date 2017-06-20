@@ -22,6 +22,30 @@
       "revId": "c01f7f0a4e4897317cb57961bbb4f6f6a239bf35",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_9052b415",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-20T08:41:01Z",
+      "side": 1,
+      "message": "Both are allowed. Though we should perhaps be consistent. I like \"returns x\" and \"throws x\" better than \"return x\" and \"throw x\". Makes more sense grammatically.",
+      "parentUuid": "0e81134c_293593f3",
+      "range": {
+        "startLine": 76,
+        "startChar": 5,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "c01f7f0a4e4897317cb57961bbb4f6f6a239bf35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
