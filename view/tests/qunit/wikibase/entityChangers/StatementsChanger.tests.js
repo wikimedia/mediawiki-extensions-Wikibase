@@ -124,6 +124,41 @@
 		} );
 	} );
 
+	QUnit.test( 'remove fires correct hook', function ( assert ) {
+		assert.expect( 3 );
+		var deferred = $.Deferred();
+		var api = {
+			removeClaim: sinon.spy( function () {
+				return deferred.promise();
+			} )
+		};
+		var fireHook = sinon.spy();
+		var statementsChanger = new SUBJECT(
+			api,
+			{ getClaimRevision: function () { return 0; }, setClaimRevision: function() {} },
+			entity,
+			new wb.serialization.StatementSerializer(),
+			new wb.serialization.StatementDeserializer(),
+			fireHook
+		);
+		var guid = 'Q1$ffbcf247-0c66-4f97-81a0-9d25822104b8';
+
+		statementsChanger.remove(
+			new wb.datamodel.Statement( new wb.datamodel.Claim(
+				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+				null,
+				guid
+			) )
+		);
+
+		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
+
+		deferred.resolve( { pageinfo: { lastrevid: 2 } } );
+
+		assert.ok( fireHook.calledOnce, 'hook should have fired' );
+		assert.ok( fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid ), 'hook should have correct arguments' );
+	} );
+
 	QUnit.test( 'save performs correct API call', function ( assert ) {
 		assert.expect( 1 );
 		var api = {
@@ -230,6 +265,48 @@
 		.always( function () {
 			QUnit.start();
 		} );
+	} );
+
+	QUnit.test( 'save fires correct hook', function ( assert ) {
+		assert.expect( 3 );
+		var deferred = $.Deferred();
+		var api = {
+			setClaim: sinon.spy( function () {
+				return deferred.promise();
+			} )
+		};
+		var fireHook = sinon.spy();
+		var statementsChanger = new SUBJECT(
+			api,
+			{ getClaimRevision: function () { return 0; }, setClaimRevision: function() {} },
+			entity,
+			new wb.serialization.StatementSerializer(),
+			new wb.serialization.StatementDeserializer(),
+			fireHook
+		);
+		var guid = 'Q1$a69d8233-b677-43e6-a7c6-519f525eab0c';
+
+		statementsChanger.save(
+			new wb.datamodel.Statement( new wb.datamodel.Claim(
+				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+				null,
+				guid
+			) )
+		);
+
+		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
+
+		deferred.resolve( {
+			claim: {
+				mainsnak: { snaktype: 'novalue', property: 'P1' },
+				id: guid,
+				rank: 'normal'
+			},
+			pageinfo: {}
+		} );
+
+		assert.ok( fireHook.calledOnce, 'hook should have fired' );
+		assert.ok( fireHook.calledWith( 'wikibase.statement.saved', 'Q1', guid ), 'hook should have correct arguments' );
 	} );
 
 }( sinon, wikibase, jQuery ) );
