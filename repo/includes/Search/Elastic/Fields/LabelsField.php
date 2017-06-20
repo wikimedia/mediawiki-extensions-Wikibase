@@ -82,4 +82,14 @@ class LabelsField extends TermIndexField {
 		return $data;
 	}
 
+	public function getEngineHints() {
+		if ( class_exists( \CirrusSearch\Search\CirrusIndexField::class ) ) {
+			// Needed because the default update strategy is merge fields
+			// In the case of multilanguage field we always send the full list
+			// of language so we force the equals handler.
+			// Not setting this will lead labels not being deleted from the index.
+			return [ \CirrusSearch\Search\CirrusIndexField::NOOP_HINT => "equals" ];
+		}
+		return [];
+	}
 }
