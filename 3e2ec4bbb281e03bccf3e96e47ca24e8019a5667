@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "ce8a9b6b_593d57b7",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-20T15:14:18Z",
+      "side": 1,
+      "message": "Right, so I see this documentation I can provide a callback called \"fire hook\". If I am smarter than I actually am I probably figured this should be a callback firing some hook (whatever it means actually). But I still don\u0027t know when this callback will be called etc. That\u0027s the point I am trying to make here.",
+      "parentUuid": "ce8a9b6b_963e2cd6",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 18,
+        "endChar": 32
+      },
+      "revId": "3e2ec4bbb281e03bccf3e96e47ca24e8019a5667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8a9b6b_93539ee2",
         "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
         "patchSetId": 4
