@@ -15,20 +15,30 @@
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @param {wikibase.serialization.StatementSerializer} statementSerializer
 	 * @param {wikibase.serialization.StatementDeserializer} statementDeserializer
+	 * @param {Function} [fireHook] called after a statement has been saved (wikibase.statement.saved) or deleted (wikibase.statement.deleted), with the hook name (wikibase.…), entity ID and statement ID as arguments.
 	 */
-	var SELF = MODULE.StatementsChanger = function WbEntityChangersStatementsChanger( api, revisionStore, entity, statementSerializer, statementDeserializer ) {
+	var SELF = MODULE.StatementsChanger = function WbEntityChangersStatementsChanger(
+		api,
+		revisionStore,
+		entity,
+		statementSerializer,
+		statementDeserializer,
+		fireHook
+	) {
 		this._api = api;
 		this._revisionStore = revisionStore;
 		this._entity = entity;
 		this._statementSerializer = statementSerializer;
 		this._statementDeserializer = statementDeserializer;
+		this._fireHook = fireHook || function () {
+		};
 	};
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {wikibase.api.RepoApi}
 		 */
-		_entity: null,
+		_api: null,
 
 		/**
 		 * @type {wikibase.RevisionStore}
@@ -36,9 +46,9 @@
 		_revisionStore: null,
 
 		/**
-		 * @type {wikibase.api.RepoApi}
+		 * @type {wikibase.datamodel.Entity}
 		 */
-		_api: null,
+		_entity: null,
 
 		/**
 		 * @type {wikibase.serialization.StatementSerializer}
@@ -49,6 +59,11 @@
 		 * @type {wikibase.serialization.StatementDeserializer}
 		 */
 		_statementDeserializer: null,
+
+		/**
+		 * @type {Function}
+		 */
+		_fireHook: null,
 
 		/**
 		 * @param {wikibase.datamodel.Statement} statement
@@ -70,9 +85,7 @@
 
 				deferred.resolve();
 
-				if ( typeof mediaWiki === 'object' && typeof mediaWiki.hook === 'function' ) {
-					mediaWiki.hook( 'wikibase.statement.removed' ).fire( self._entity.getId(), guid );
-				}
+				self._fireHook( 'wikibase.statement.removed', self._entity.getId(), guid );
 			} )
 			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
@@ -109,9 +122,7 @@
 
 				deferred.resolve( savedStatement );
 
-				if ( typeof mediaWiki === 'object' && typeof mediaWiki.hook === 'function' ) {
-					mediaWiki.hook( 'wikibase.statement.saved' ).fire( self._entity.getId(), guid );
-				}
+				self._fireHook( 'wikibase.statement.saved', self._entity.getId(), guid );
 			} )
 			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
