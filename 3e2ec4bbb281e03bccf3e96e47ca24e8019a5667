@@ -22,6 +22,29 @@
       "revId": "3e2ec4bbb281e03bccf3e96e47ca24e8019a5667",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_93539ee2",
+        "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-20T11:57:59Z",
+      "side": 1,
+      "message": "that\u0027s a bit odd name for such a parameter, or do I miss something? \"fire hook\" sounds to be like some boolean flag (\"yes, fire the hook\" - whatever would this actually mean).\n\nThis thing is a callback that will be called when the statement is changed, right? shouldn\u0027t the name reflect this somehow?",
+      "range": {
+        "startLine": 33,
+        "startChar": 19,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "3e2ec4bbb281e03bccf3e96e47ca24e8019a5667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
