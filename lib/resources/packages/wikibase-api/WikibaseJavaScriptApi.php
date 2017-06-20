@@ -13,7 +13,7 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 if ( defined( 'MEDIAWIKI' ) ) {
-	call_user_func( function() {
+	call_user_func( function () {
 		require_once __DIR__ . '/init.mw.php';
 	} );
 }

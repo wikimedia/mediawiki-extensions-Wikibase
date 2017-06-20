@@ -6,7 +6,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 global $wgHooks;
-$wgHooks['ResourceLoaderTestModules'][] = function(
+$wgHooks['ResourceLoaderTestModules'][] = function (
 		array &$testModules,
 		ResourceLoader &$resourceLoader
 	) {

@@ -6,7 +6,7 @@
  *
  * @codeCoverageIgnoreStart
  */
-return call_user_func( function() {
+return call_user_func( function () {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
@@ -39,5 +39,4 @@ return call_user_func( function() {
 			],
 		],
 	];
-
 } );

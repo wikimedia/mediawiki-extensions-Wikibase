@@ -7,7 +7,7 @@
  *
  * @codeCoverageIgnoreStart
  */
-return call_user_func( function() {
+return call_user_func( function () {
 	global $wgResourceModules;
 
 	$wgResourceModules = array_merge(
