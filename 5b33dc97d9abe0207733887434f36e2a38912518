@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8a9b6b_f6045882",
+        "filename": "view/tests/qunit/wikibase/entityChangers/StatementsChanger.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-20T14:49:55Z",
+      "side": 1,
+      "message": "Probably for the user of the class under test it does not really matter that much at which point in time the callback is triggered exactly, it is more important I guess that it was called, and maybe also that it got expected data.\n\nBut having this assertion probably does not hurt, just old man\u0027s nagging.\n\nWhat in turn appears to me as a possible expected test case would be: if the API fails, the hook is not called. But this is probably something very marginal, so probably not needed.",
+      "revId": "5b33dc97d9abe0207733887434f36e2a38912518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
