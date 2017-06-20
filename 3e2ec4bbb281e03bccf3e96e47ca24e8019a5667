@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ce8a9b6b_f94d2b76",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-20T15:13:18Z",
+      "side": 1,
+      "message": "What do you mean? When you normally call mw.hook(…).fire(…), the this for fire() is the hook object, isn’t it? We’re just emulating this behavior here.",
+      "parentUuid": "ce8a9b6b_165c7c4d",
+      "range": {
+        "startLine": 121,
+        "startChar": 23,
+        "endLine": 121,
+        "endChar": 27
+      },
+      "revId": "3e2ec4bbb281e03bccf3e96e47ca24e8019a5667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8a9b6b_963e2cd6",
         "filename": "view/resources/wikibase/entityChangers/StatementsChanger.js",
         "patchSetId": 4
