@@ -7,13 +7,11 @@
  */
 global $wgHooks;
 $wgHooks['ResourceLoaderTestModules'][] = function (
-		array &$testModules,
-		ResourceLoader &$resourceLoader
-	) {
+	array &$testModules,
+	ResourceLoader &$resourceLoader
+) {
 	$testModules['qunit'] = array_merge(
 		$testModules['qunit'],
-		include 'tests/resources.php'
+		include __DIR__ . '/tests/resources.php'
 	);
-
-	return true;
 };
