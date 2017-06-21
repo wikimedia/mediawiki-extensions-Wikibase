@@ -21,7 +21,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RebuildTermSqlIndex extends Maintenance {
+class RebuildTermSqlIndex extends Maintenance  {
 
 	public function __construct() {
 		parent::__construct();
@@ -38,6 +38,12 @@ class RebuildTermSqlIndex extends Maintenance {
 			'entity-type', "Only rebuild terms for specified entity type (e.g. 'item', 'property')",
 			false,
 			true
+		);
+		$this->addOption(
+			'no-deduplication', 'Do not remove duplicate entries in the index (might speed up the run)'
+		);
+		$this->addOption(
+			'rebuild-all-terms', 'Rebuilds all terms of the entity (requires loading data of each processed entity)'
 		);
 		$this->addOption( 'from-id', "First row (page id) to start updating from", false, true );
 	}
@@ -57,6 +63,8 @@ class RebuildTermSqlIndex extends Maintenance {
 	private function getTermIndexBuilder() {
 		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
 		$fromId = $this->getOption( 'from-id', null );
+		$doNotDeduplicate = $this->getOption( 'no-deduplication', false );
+		$rebuildAllEntityTerms = $this->getOption( 'rebuild-all-terms', false );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$idParser = $wikibaseRepo->getEntityIdParser();
@@ -83,11 +91,18 @@ class RebuildTermSqlIndex extends Maintenance {
 			$this->getEntityTypes(),
 			$this->getReporter(),
 			$this->getErrorReporter(),
-			$batchSize
+			$batchSize,
+			$repoSettings->getSetting( 'readFullEntityIdColumn' )
 		);
 
 		if ( $fromId !== null ) {
 			$builder->setFromId( (int)$fromId );
+		}
+		if ( $doNotDeduplicate ) {
+			$builder->setDoNotRemoveDuplicateTerms();
+		}
+		if ( $rebuildAllEntityTerms ) {
+			$builder->setRebuildAllEntityTerms();
 		}
 
 		return $builder;
