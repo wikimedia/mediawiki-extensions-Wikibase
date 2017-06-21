@@ -7,19 +7,9 @@
 
 	var htmlDir = null;
 
-	QUnit.module( 'jquery.util.getDirectionality', {
-		setup: function () {
-			htmlDir = $( 'html' ).prop( 'dir' );
-		},
-		teardown: function () {
-			$( 'html' ).prop( 'dir', htmlDir );
-		}
-	} );
+	QUnit.module( 'jquery.util.getDirectionality' );
 
 	QUnit.test( 'Basic tests', function ( assert ) {
-		assert.expect( $.uls && $.uls.data ? 1 : 3 );
-		var $html = $( 'html' );
-
 		if ( $.uls && $.uls.data ) {
 			assert.equal(
 				$.util.getDirectionality( 'fa' ),
@@ -32,28 +22,10 @@
 			return;
 		}
 
-		$html.prop( 'dir', 'ltr' );
-
-		assert.equal(
-			$.util.getDirectionality( 'doesNotExist' ),
-			'ltr',
-			'Falling back to HTML "dir" attribute.'
-		);
-
-		$html.prop( 'dir', 'rtl' );
-
-		assert.equal(
-			$.util.getDirectionality( 'doesNotExist' ),
-			'rtl',
-			'Verified falling back to HTML "dir" attribute after changing "dir" attribute.'
-		);
-
-		$html.removeAttr( 'dir' );
-
 		assert.equal(
 			$.util.getDirectionality( 'doesNotExist' ),
 			'auto',
-			'Falling back to HTML "auto" attribute if no "dir" attribute is set on the HTML element.'
+			'Falling back to "auto"'
 		);
 	} );
 
