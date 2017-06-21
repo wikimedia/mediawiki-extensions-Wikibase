@@ -411,8 +411,10 @@ class DatabaseSchemaUpdater {
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getLocalEntityTypes(),
 			$progressReporter,
-			$errorReporter
+			$errorReporter,
+			false // assume full entity id column needs to be populated
 		);
+		$builder->setDoNotRemoveDuplicateTerms();
 
 		$builder->rebuild();
 	}
