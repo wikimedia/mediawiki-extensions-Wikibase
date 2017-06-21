@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8a9b6b_2b69121e",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-21T11:39:40Z",
+      "side": 1,
+      "message": "* What does this mean (not in technical terms)?\n* In what case it is true in what false?",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 62
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_4bf81647",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-21T11:39:40Z",
+      "side": 1,
+      "message": "In case if message exists we loose description which provides useful information for client. \nCan we use it somehow even if message exists?",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 26
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_0b91aefb",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-21T11:39:40Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with this construct. What does it do?",
+      "range": {
+        "startLine": 289,
+        "startChar": 40,
+        "endLine": 289,
+        "endChar": 52
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_2bc83225",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-21T11:39:40Z",
+      "side": 1,
+      "message": "Seems like it is something very different comparing to what it was. And also it is much less explanatory.\nCan you give an argument why is it correct thing to do?",
+      "range": {
+        "startLine": 905,
+        "startChar": 22,
+        "endLine": 905,
+        "endChar": 51
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
