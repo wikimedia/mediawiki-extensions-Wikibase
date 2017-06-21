@@ -232,16 +232,6 @@ class Item implements EntityDocument, FingerprintProvider, StatementListHolder,
 	}
 
 	/**
-	 * @deprecated since 0.8, use getSiteLinkList() instead,
-	 * @since 0.6
-	 *
-	 * @return SiteLink[]
-	 */
-	public function getSiteLinks() {
-		return array_values( iterator_to_array( $this->siteLinks ) );
-	}
-
-	/**
 	 * @deprecated since 0.8, use getSiteLinkList()->getBySiteId() instead.
 	 * @since 0.6
 	 *
