@@ -335,12 +335,12 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	left: 12px;
 }
 
-.wikibase-snakview-unsupportedsnaktype,
-.wikibase-snakview-variation-valuesnak-unsupporteddatavalue,
-.wikibase-snakview-variation-valuesnak-datavaluetypemismatch,
-.wikibase-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
-.wikibase-snakview-variation-somevaluesnak,
-.wikibase-snakview-variation-novaluesnak {
+span.wikibase-snakview-unsupportedsnaktype,
+span.wikibase-snakview-variation-valuesnak-unsupporteddatavalue,
+span.wikibase-snakview-variation-valuesnak-datavaluetypemismatch,
+span.wikibase-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
+span.wikibase-snakview-variation-somevaluesnak,
+span.wikibase-snakview-variation-novaluesnak {
 	color: #54595d;
 	font-style: italic;
 	line-height: 1.2;
