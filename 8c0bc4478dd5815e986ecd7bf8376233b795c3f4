@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce8a9b6b_06b8c373",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-21T14:56:50Z",
+      "side": 1,
+      "message": "* This tests whether the user requested a modern error format, typically by supplying the \u0027errorformat\u0027 parameter in the request with a value other than \u0027bc\u0027 (which is short for \"backward compatibility\"). In the non-bc format warnings are formatted by MediaWiki core in a manner similar to but incompatible with what your code below is doing. See comments on previous patchsets for details.\n* The highlighted test is true when the user requested a modern error format, and false when they either requested the backward-compatible error format explicitly or did not request an error format.",
+      "parentUuid": "ce8a9b6b_2b69121e",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 62
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8a9b6b_4bf81647",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 14
@@ -36,6 +60,30 @@
       "writtenOn": "2017-06-21T11:39:40Z",
       "side": 1,
       "message": "In case if message exists we loose description which provides useful information for client. \nCan we use it somehow even if message exists?",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 26
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_46a6cb51",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-21T14:56:50Z",
+      "side": 1,
+      "message": "The hard-coded English description is being deprecated in favor of an i18n message, as was done last year in MediaWiki core. Any calling code that actually depends on that hard-coded English message needs to be fixed to use an i18n message instead.",
+      "parentUuid": "ce8a9b6b_4bf81647",
       "range": {
         "startLine": 286,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ce8a9b6b_266ce704",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-21T14:56:50Z",
+      "side": 1,
+      "message": "If you\u0027re referring to the \u0027rawmessage\u0027 message, it works like any other i18n message. See https://translatewiki.net/wiki/MediaWiki:Rawmessage/qqq\n\nIf you\u0027re referring to passing an array as the $key parameter to wfMessage, it specifies a fallback list where the first non-empty message in the list will be used. See https://doc.wikimedia.org/mediawiki-core/master/php/classMessage.html#a46f1b5612d7cb28aeab6d302fd64ff25",
+      "parentUuid": "ce8a9b6b_0b91aefb",
+      "range": {
+        "startLine": 289,
+        "startChar": 40,
+        "endLine": 289,
+        "endChar": 52
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8a9b6b_2bc83225",
         "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
         "patchSetId": 14
@@ -82,6 +154,30 @@
       "writtenOn": "2017-06-21T11:39:40Z",
       "side": 1,
       "message": "Seems like it is something very different comparing to what it was. And also it is much less explanatory.\nCan you give an argument why is it correct thing to do?",
+      "range": {
+        "startLine": 905,
+        "startChar": 22,
+        "endLine": 905,
+        "endChar": 51
+      },
+      "revId": "8c0bc4478dd5815e986ecd7bf8376233b795c3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8a9b6b_c6471b7b",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-06-21T14:56:50Z",
+      "side": 1,
+      "message": "Not everyone in the world speaks English. That\u0027s why we have i18n mechanisms instead of hard-coded English strings everywhere. The API lagged behind in this area but was finally fixed in 2016, along with all other extensions in Gerrit (they were easy to fix because they used MediaWiki core\u0027s methods instead of reinventing everything). Now we\u0027re just waiting for Wikibase to be updated so we can hard-deprecate the non-internationalized methods in MediaWiki core.\n\nIf the message being generated here is inadequate, the caller should be updated to use -\u003edieMessage() or -\u003edieMessageObject(), and/or the wikibase-api-not-recognized message should be updated to be more explanatory.",
+      "parentUuid": "ce8a9b6b_2bc83225",
       "range": {
         "startLine": 905,
         "startChar": 22,
