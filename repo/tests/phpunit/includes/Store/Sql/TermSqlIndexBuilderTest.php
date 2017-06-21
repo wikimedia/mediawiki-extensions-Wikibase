@@ -48,6 +48,21 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$this->assertTermIndexRowsHaveFullEntityId( $secondItem->getId(), 2 );
 	}
 
+	public function testGivenRebuildAllFlagSet_rebuildPopulatesFullEntityIdColumn() {
+		$firstItem = $this->createItemWithNTerms( 'Q111', 5 );
+		$secondItem = $this->createItemWithNTerms( 'Q112', 2 );
+		$this->saveEntities( [ $firstItem, $secondItem ] );
+		$this->clearFullEntityIdColumn();
+
+		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
+		$builder->setRebuildAllEntityTerms();
+
+		$builder->rebuild();
+
+		$this->assertTermIndexRowsHaveFullEntityId( $firstItem->getId(), 5 );
+		$this->assertTermIndexRowsHaveFullEntityId( $secondItem->getId(), 2 );
+	}
+
 	public function testRebuildDeletesDuplicateTermTableEntries() {
 		$label = 'cat';
 		$languageCode = 'en';
@@ -58,6 +73,52 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$terms = $this->getLabelTerms( $item, $languageCode );
 		$this->assertCount( 1, $terms );
 		$this->assertSame( $label, $terms[0]->getText() );
+	}
+
+	public function testGivenDontRemoveDupsFlagSet_rebuildDoesNotDeleteDuplicateTermTableEntries() {
+		$label = 'cat';
+		$languageCode = 'en';
+		$item = $this->createItemWithIllegallyDuplicatedTerm( 'Q1', $languageCode, $label );
+
+		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
+		$builder->setDoNotRemoveDuplicateTerms();
+
+		$builder->rebuild();
+
+		$terms = $this->getLabelTerms( $item, $languageCode );
+		$this->assertCount( 2, $terms );
+		$this->assertSame( $label, $terms[0]->getText() );
+		$this->assertSame( $label, $terms[1]->getText() );
+	}
+
+	public function testGivenRebuildAllFlagSet_rebuildDeletesDuplicateTermTableEntries() {
+		$label = 'cat';
+		$languageCode = 'en';
+		$item = $this->createItemWithIllegallyDuplicatedTerm( 'Q1', $languageCode, $label );
+
+		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
+		$builder->setRebuildAllEntityTerms();
+
+		$builder->rebuild();
+
+		$terms = $this->getLabelTerms( $item, $languageCode );
+		$this->assertCount( 1, $terms );
+		$this->assertSame( $label, $terms[0]->getText() );
+	}
+
+	public function testGivenDontRemoveDupsFlagSet_rebuildPopulatesFullEntityIdColumn() {
+		$firstItem = $this->createItemWithNTerms( 'Q111', 5 );
+		$secondItem = $this->createItemWithNTerms( 'Q112', 2 );
+		$this->saveEntities( [ $firstItem, $secondItem ] );
+		$this->clearFullEntityIdColumn();
+
+		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
+		$builder->setDoNotRemoveDuplicateTerms();
+
+		$builder->rebuild();
+
+		$this->assertTermIndexRowsHaveFullEntityId( $firstItem->getId(), 5 );
+		$this->assertTermIndexRowsHaveFullEntityId( $secondItem->getId(), 2 );
 	}
 
 	public function testRebuildOnlyRebuildsTermsOfEntitiesOfGivenType() {
@@ -76,6 +137,43 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$this->assertTermIndexRowsHaveFullEntityId( $property->getId(), 1 );
 	}
 
+	public function testGivenRebuildAllFlag_rebuildAddsNewRowsToIndex() {
+		$item = $this->createItemWithNTerms( 'Q1', 1 );
+		$this->saveEntities( [ $item ] );
+
+		$originalRowIds = $this->getTermRowIdsForEntity( $item->getId() );
+
+		$this->clearFullEntityIdColumn();
+
+		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
+		$builder->setRebuildAllEntityTerms();
+
+		$builder->rebuild();
+
+		$this->assertTermIndexRowsHaveFullEntityId( $item->getId(), 1 );
+
+		$rowIds = $this->getTermRowIdsForEntity( $item->getId() );
+
+		$this->assertNotEquals( $originalRowIds, $rowIds );
+	}
+
+	public function testGivenRebuildAllFlagNotSet_rebuildOnlyUpdatesExistingRows() {
+		$item = $this->createItemWithNTerms( 'Q1', 1 );
+		$this->saveEntities( [ $item ] );
+
+		$originalRowIds = $this->getTermRowIdsForEntity( $item->getId() );
+
+		$this->clearFullEntityIdColumn();
+
+		$this->getBuilder( [ Item::ENTITY_TYPE ] )->rebuild();
+
+		$this->assertTermIndexRowsHaveFullEntityId( $item->getId(), 1 );
+
+		$rowIds = $this->getTermRowIdsForEntity( $item->getId() );
+
+		$this->assertEquals( $originalRowIds, $rowIds );
+	}
+
 	/**
 	 * @return TermSqlIndexBuilder
 	 */
@@ -87,16 +185,18 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 			new BasicEntityIdParser()
 		);
 
-		return new TermSqlIndexBuilder(
+		$builder = new TermSqlIndexBuilder(
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$wikibaseRepo->getStore()->getTermIndex(),
 			$sqlEntityIdPagerFactory,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$entityTypes,
-			new NullMessageReporter(),
-			new NullMessageReporter(),
-			2
+			$entityTypes
 		);
+
+		$builder->setBatchSize( 2 );
+		$builder->setDoNotReadFullEntityIdColumn();
+
+		return $builder;
 	}
 
 	private function saveEntities( array $entities ) {
@@ -210,7 +310,30 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		return $terms;
 	}
 
-	public function provideNonIntegerFromIdValuus() {
+	/**
+	 * @param EntityId $entityId
+	 * @return int[]
+	 */
+	private function getTermRowIdsForEntity( EntityId $entityId ) {
+		$ids = [];
+
+		$db = wfGetDB( DB_MASTER );
+
+		$rows = $db->select(
+			'wb_terms',
+			[ 'term_row_id' ],
+			[ 'term_full_entity_id' => $entityId->getSerialization() ],
+			__METHOD__
+		);
+
+		foreach ( $rows as $row ) {
+			$ids[] = $row->term_row_id;
+		}
+
+		return $ids;
+	}
+
+	public function provideNonIntegerFromIdValues() {
 		return [
 			[ null ],
 			[ '5' ]
@@ -218,7 +341,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideNonIntegerFromIdValuus
+	 * @dataProvider provideNonIntegerFromIdValues
 	 */
 	public function testGivenNotInteger_setFromIdThrowsException( $invalidFromId ) {
 		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
