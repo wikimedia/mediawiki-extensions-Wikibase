@@ -22,7 +22,11 @@
 		 */
 		draw: function () {
 			// display same message in edit and non-edit mode!
-			this.$viewPort.empty().text( mw.msg( 'wikibase-snakview-variations-novalue-label' ) );
+			this.$viewPort.empty().append(
+				$( '<span>' )
+					.addClass( 'wikibase-snakview-variation-novaluesnak' )
+					.text( mw.msg( 'wikibase-snakview-variations-novalue-label' ) )
+			);
 			$( this ).trigger( 'afterdraw' );
 		}
 	} );
