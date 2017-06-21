@@ -409,10 +409,13 @@ class DatabaseSchemaUpdater {
 			$termSqlIndex,
 			$sqlEntityIdPagerFactory,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getLocalEntityTypes(),
-			$progressReporter,
-			$errorReporter
+			$wikibaseRepo->getLocalEntityTypes()
 		);
+		$builder->setProgressReporter( $progressReporter );
+		$builder->setErrorReporter( $errorReporter );
+		$builder->setDoNotReadFullEntityIdColumn();
+
+		$builder->setDoNotRemoveDuplicateTerms();
 
 		$builder->rebuild();
 	}
