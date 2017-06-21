@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8a9b6b_21bdb163",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-21T17:08:33Z",
+      "side": 1,
+      "message": "I don\u0027t like hardcoding the \u003cspan\u003e. I suggest this:\n\n.wikibase-snakview-value \u003e .wikibase-snakview-variation-novaluesnak",
+      "revId": "b0c01e9b6fc9134effe0c209c566447ca4298083",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
