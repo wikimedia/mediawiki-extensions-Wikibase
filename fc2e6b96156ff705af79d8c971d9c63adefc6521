@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae8f277b_352178f7",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "It seems like the last four arguments can be optional, and could use setters, to keep the constructor sane.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_756e202c",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "Negations in configuration and parameter names should be avoided. How about setRemoveDuplicates( false )?",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_354f38c2",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "This is accumulating more and more parameters. Anything that has a sane default can be moved to a setter. That\u0027s probably the last for params.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_d5634c3d",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "There\u0027s a setter for making it false, but none for making it true? Seems a bit odd to me.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_d5c26c06",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "if rebuildAllEntityTerms is true, this is not needed, right?",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_f5c77013",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "if rebuildAllEntityTerms is true, this is not needed, right?",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_35f5f84c",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "This logic is very similar to getDuplicateTerms(). containsDuplicateTerms(() could just return !empty( getDuplicateTerms( $terms ) )",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_15f8f445",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "If you only need a single column, it may be more convenient to use selectFieldValues()",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_75fb8045",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "To avoid this, can\u0027t you just call next( $rows ) once? That should consume the first row. foreach should then start with the second row, I believe. If you have an actual array from selectFieldValues, you could also use array_shift.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_d5902cfa",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "If readFullEntityIdColum is false but $entityId is not an Int32entityId, something is quite wrong. It would probably be better to raise an exception than to silently ignore.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_7582a0ab",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "Grabbing and releasing db connections all the time may add considerable overhead. In particular, releasing the connection will flush transactions. Buffering write operations in a transaction improves performance significantly - and MediaWiki even does it automatically if you let it, see the DBO_TRX flag.\n\nI suggest to keep one replica and one master connection open while processing a batch of entities. Transactions should be committed after each batch.\n\nI often just pass the DB connection as a parameter to private functions.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_959aa416",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "The result will be false or \u00271\u0027. Please turn the \u00271\u0027 into true.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_158f94d2",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "See my comment about keeping DB connections above.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_d5b7cc82",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-22T11:31:37Z",
+      "side": 1,
+      "message": "I basically three modes that are mutually exclusive: \"rebuild all\", \"deduplicate\", and \"populate full IDs\". We could add \"add missing\" at some point.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
