@@ -188,6 +188,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity-link',
+					'message' => 'No entity found matching site link'
 				) )
 			),
 			array( //7
@@ -195,6 +196,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'param-illegal',
+					'message' => 'Either provide the item "id" or pairs'
 				) )
 			),
 			array( //8
@@ -202,6 +204,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'param-illegal',
+					'message' => 'Either provide the item "id" or pairs'
 				) )
 			),
 		);

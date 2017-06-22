@@ -902,6 +902,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'not-recognized',
+					'message' => '"remove" should not be a top-level key',
 					'message-key' => 'wikibase-api-not-recognized',
 				] ],
 			],
