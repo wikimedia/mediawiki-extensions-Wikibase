@@ -167,7 +167,7 @@ return call_user_func( function() {
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
 			// if this is the repo wiki, look up the namespace names based on the entityNamespaces setting
 			$namespaceNames = array_map(
-				'MWNamespace::getCanonicalName',
+				MWNamespace::class . '::getCanonicalName',
 				$settings->getSetting( 'entityNamespaces' )
 			);
 			return $namespaceNames;

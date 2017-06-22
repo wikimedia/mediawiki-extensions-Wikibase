@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MWNamespace;
 use Wikibase\SettingsArray;
 use Wikibase\WikibaseSettings;
 
@@ -163,7 +164,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			$repoSettings = WikibaseSettings::getRepoSettings();
 			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
-			$namespaceNames = array_map( 'MWNamespace::getCanonicalName', $entityNamespaces );
+			$namespaceNames = array_map( MWNamespace::class . '::getCanonicalName', $entityNamespaces );
 
 			$cases[] = [ // #7: default repoNamespaces and entityNamespaces
 				[], // $settings
