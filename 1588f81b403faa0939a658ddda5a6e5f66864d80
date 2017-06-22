@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae8f277b_35c9787c",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-22T10:46:15Z",
+      "side": 1,
+      "message": "Fully qualified names also need fixing, but obviously for another patch",
+      "range": {
+        "startLine": 244,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 22
+      },
+      "revId": "1588f81b403faa0939a658ddda5a6e5f66864d80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
