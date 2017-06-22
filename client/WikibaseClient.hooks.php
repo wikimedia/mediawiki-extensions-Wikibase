@@ -18,6 +18,7 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
+use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
@@ -412,7 +413,7 @@ final class ClientHooks {
 		//
 		// recent changes / watchlist hooks
 		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
-			'\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageStructuredFilters';
+			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
 	}
 
 }

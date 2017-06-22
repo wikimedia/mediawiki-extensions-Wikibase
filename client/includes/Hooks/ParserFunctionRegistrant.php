@@ -36,7 +36,7 @@ class ParserFunctionRegistrant {
 	private function registerNoLangLinkHandler( Parser $parser ) {
 		$parser->setFunctionHook(
 			'noexternallanglinks',
-			NoLangLinkHandler::class . '::handle',
+			[ NoLangLinkHandler::class, 'handle' ],
 			Parser::SFH_NO_HASH
 		);
 	}
