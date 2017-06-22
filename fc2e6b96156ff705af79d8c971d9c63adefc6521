@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_98041919",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T11:46:46Z",
+      "side": 1,
+      "message": "Yeah, it is evil indeed. But as removing duplicates is default, I doubt there is a need for setter that would set this flag to true.\nI personally prefer setters for bool flags that just switch the switch over setX( bool trueOrFalse ).",
+      "parentUuid": "ae8f277b_756e202c",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_354f38c2",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
