@@ -14,7 +14,6 @@ return call_user_func( function () {
 	];
 
 	return [
-
 		'wikibase.api.__namespace' => $moduleTemplate + [
 			'scripts' => [
 				'namespace.js'
@@ -80,6 +79,5 @@ return call_user_func( function () {
 				'wikibase.api.__namespace',
 			],
 		],
-
 	];
 } );
