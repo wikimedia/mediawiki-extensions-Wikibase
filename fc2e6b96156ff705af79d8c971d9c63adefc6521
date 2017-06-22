@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_23c2a289",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8f277b_352178f7",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_756e202c",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 8
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_83c58e92",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8f277b_354f38c2",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_d5634c3d",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -82,6 +118,24 @@
       "writtenOn": "2017-06-22T11:31:37Z",
       "side": 1,
       "message": "There\u0027s a setter for making it false, but none for making it true? Seems a bit odd to me.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_98e3b99c",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Added setter for the \"true\" mode. It was bad to assume user of this class will guess what is the default behaviour by the fact there is only a method to switch this off.\n\nI went with two setters with no bool parameter. I am fine to merge them if you say this would be preferred.",
+      "parentUuid": "ae8f277b_d5634c3d",
       "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -193,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_1816e9f6",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8f277b_9515c44f",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_15f8f445",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -210,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_980ad9d4",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Thanks! Done.",
+      "parentUuid": "ae8f277b_15f8f445",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_75fb8045",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -221,6 +311,24 @@
       "writtenOn": "2017-06-22T11:31:37Z",
       "side": 1,
       "message": "To avoid this, can\u0027t you just call next( $rows ) once? That should consume the first row. foreach should then start with the second row, I believe. If you have an actual array from selectFieldValues, you could also use array_shift.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_b80f9de3",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8f277b_75fb8045",
       "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -262,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_b8755dca",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8f277b_b51a487d",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_7582a0ab",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -279,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_5871d10a",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Did some changes, hopefully right. I am not super comfortable with this transaction stuff in MW db layer.",
+      "parentUuid": "ae8f277b_7582a0ab",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_959aa416",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -290,6 +434,24 @@
       "writtenOn": "2017-06-22T11:31:37Z",
       "side": 1,
       "message": "The result will be false or \u00271\u0027. Please turn the \u00271\u0027 into true.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_d8d6212c",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T14:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8f277b_959aa416",
       "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
