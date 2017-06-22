@@ -117,7 +117,7 @@ class ApiErrorReporter {
 		//XXX: when to prefer $statusCode over $errorCode?
 		list( , $description ) = $this->apiModule->getErrorFromStatus( $status );
 
-		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
+		$this->throwUsageException( $description, $errorCode, $extradata, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -170,15 +170,10 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	public function dieMessage( $errorCode /*...*/ ) {
-		$messageName = "wikibase-api-$errorCode";
+		$messageKey = "wikibase-api-$errorCode";
 		$params = func_get_args();
 		array_shift( $params );
-		$message = wfMessage( $messageName, $params );
-
-		if ( !$message->exists() ) {
-			// TODO: log warning
-			// TODO: replace with generic message
-		}
+		$message = wfMessage( $messageKey, $params );
 
 		$this->dieMessageObject( $message, $errorCode );
 
@@ -207,7 +202,7 @@ class ApiErrorReporter {
 
 		$this->addMessageToResult( $message, $extradata );
 
-		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
+		$this->throwUsageException( $description, $errorCode, $extradata, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -248,7 +243,7 @@ class ApiErrorReporter {
 			}
 		}
 
-		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
+		$this->throwUsageException( $description, $errorCode, $extradata, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -260,17 +255,17 @@ class ApiErrorReporter {
 	 *
 	 * @param string $description
 	 * @param string $errorCode
-	 * @param int $httpRespCode
-	 * @param null|array $extradata
+	 * @param array|null $data See ApiMessage::create()
+	 * @param int $httpCode HTTP error code to use
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	private function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
+	private function throwUsageException( $description, $errorCode, array $data = null, $httpCode = 0 ) {
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
 
-		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpCode, $data );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}

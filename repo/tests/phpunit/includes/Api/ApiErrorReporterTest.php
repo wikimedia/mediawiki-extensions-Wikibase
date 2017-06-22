@@ -39,15 +39,15 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$this->assertArrayHasKey( 'info', $messageArray );
 
 		if ( $info !== null ) {
-			$this->assertRegExp( $info, $messageArray['info'] );
+			$this->assertRegExp( $info, $messageArray['info'], 'error info message' );
 		}
 
 		if ( $code !== null ) {
-			$this->assertEquals( $code, $messageArray['code'] );
+			$this->assertSame( $code, $messageArray['code'], 'error code' );
 		}
 
 		if ( $httpStatusCode ) {
-			$this->assertEquals( $httpStatusCode, $ex->getCode() );
+			$this->assertSame( $httpStatusCode, $ex->getCode(), 'HTTP status code' );
 		}
 
 		foreach ( $expectedDataFields as $path => $value ) {
@@ -68,7 +68,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			$this->assertInternalType( 'string', $data, $name );
 			$this->assertRegExp( $expected, $data, $name );
 		} else {
-			$this->assertEquals( $expected, $data, $name );
+			$this->assertSame( $expected, $data, $name );
 		}
 	}
 
