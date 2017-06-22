@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_1533140c",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T11:42:06Z",
+      "side": 1,
+      "message": "Indeed. With rebuildAllEntityTerms those lines will never be reached.",
+      "parentUuid": "ae8f277b_d5c26c06",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_f5c77013",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -104,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_353098fc",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T11:42:06Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "ae8f277b_f5c77013",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae8f277b_35f5f84c",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 8
@@ -115,6 +151,24 @@
       "writtenOn": "2017-06-22T11:31:37Z",
       "side": 1,
       "message": "This logic is very similar to getDuplicateTerms(). containsDuplicateTerms(() could just return !empty( getDuplicateTerms( $terms ) )",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_9515c44f",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T11:42:06Z",
+      "side": 1,
+      "message": "Ah, right. getDuplicateTerms was factored out later, I didn\u0027t think of it. containsDuplicateTerms is probably slightly faster, but this is getting into micro optimization area, so I\u0027d change it as suggested.",
+      "parentUuid": "ae8f277b_35f5f84c",
       "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -166,6 +220,24 @@
       "writtenOn": "2017-06-22T11:31:37Z",
       "side": 1,
       "message": "If readFullEntityIdColum is false but $entityId is not an Int32entityId, something is quite wrong. It would probably be better to raise an exception than to silently ignore.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_b51a487d",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T11:42:06Z",
+      "side": 1,
+      "message": "Will do!",
+      "parentUuid": "ae8f277b_d5902cfa",
       "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -234,6 +306,24 @@
       "writtenOn": "2017-06-22T11:31:37Z",
       "side": 1,
       "message": "I basically three modes that are mutually exclusive: \"rebuild all\", \"deduplicate\", and \"populate full IDs\". We could add \"add missing\" at some point.",
+      "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_f539b0f0",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-22T11:42:06Z",
+      "side": 1,
+      "message": "Hmm, \"deduplicate\" and \"populate full IDs\" or actually not mutually exclusive. This script does both when run with no options.\n\nWhat would \"add missing\" mean? Add terms which should be there but are not?",
+      "parentUuid": "ae8f277b_d5b7cc82",
       "revId": "fc2e6b96156ff705af79d8c971d9c63adefc6521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
