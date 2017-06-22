@@ -9,9 +9,9 @@
 			"Ans"
 		]
 	},
-	"tooltip-t-wikibase": "ลิงก์ไปยังรายการในคลังเชื่อมโยงข้อมูล",
+	"tooltip-t-wikibase": "ลิงก์ไปยังหน้าสารสนเทศในคลังเชื่อมต่อข้อมูล",
 	"wikibase-comment-update": "{{WBREPONAME}} ไอเท็มถูกเปลี่ยนแปลง",
-	"wikibase-dataitem": "ในรายการ {{WBREPONAME}}",
+	"wikibase-dataitem": "สารสนเทศใน {{WBREPONAME}}",
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-linkitem-addlinks": "เพิ่มลิงก์ข้ามภาษา",

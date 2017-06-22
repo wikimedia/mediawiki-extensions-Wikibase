@@ -61,5 +61,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}ს ობიექტები გამოყენებული ამ გვერდზე",
 	"wikibase-otherprojects": "სხვა პროექტებში",
 	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი",
-	"wikibase-otherprojects-beta-description": "გვერდით პანელზე ამატებს განყოფილებას „{{int:wikibase-otherprojects}}“, რომელიც შეიცავს ფონდ ვიკიმედიის სხვა პროექტების ბმულებს Wikidata-ის მონაცემების საფუძველზე."
+	"wikibase-otherprojects-beta-description": "გვერდით პანელზე ამატებს განყოფილებას „{{int:wikibase-otherprojects}}“, რომელიც შეიცავს ფონდ ვიკიმედიის სხვა პროექტების ბმულებს Wikidata-ის მონაცემების საფუძველზე.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|კავშირი|კავშირები}} {{WBREPONAME}}ს გვერდთან",
+	"echo-pref-tooltip-wikibase-action": "შემატყობინეთ როდესაც {{GENDER:|ჩემ შექმნილ}} გვერდს ვინმე {{WBREPONAME}}ს ელემენტს მიაბამს."
 }
