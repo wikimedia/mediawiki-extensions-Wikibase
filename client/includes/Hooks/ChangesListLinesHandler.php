@@ -6,7 +6,6 @@ use ChangesList;
 use EnhancedChangesList;
 use OldChangesList;
 use RecentChange;
-use ResultWrapper;
 use UnexpectedValueException;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -61,6 +60,7 @@ class ChangesListLinesHandler {
 			$changesList->getLanguage(),
 			$wikibaseClient->newRepoLinker()
 		);
+
 		return new self( $changeFactory, $formatter );
 	}
 
@@ -86,8 +86,6 @@ class ChangesListLinesHandler {
 	 * @param string &$s
 	 * @param RecentChange $rc
 	 * @param string[] &$classes
-	 *
-	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine(
 		OldChangesList &$changesList,
@@ -96,7 +94,7 @@ class ChangesListLinesHandler {
 		&$classes = []
 	) {
 		$self = self::getInstance( $changesList );
-		return $self->doOldChangesListRecentChangesLine( $changesList, $s, $rc, $classes );
+		$self->doOldChangesListRecentChangesLine( $changesList, $s, $rc, $classes );
 	}
 
 	/**
@@ -104,7 +102,6 @@ class ChangesListLinesHandler {
 	 * @param string &$s
 	 * @param RecentChange $rc
 	 * @param string[] &$classes
-	 * @return bool
 	 */
 	public function doOldChangesListRecentChangesLine(
 		OldChangesList &$changesList,
@@ -116,7 +113,7 @@ class ChangesListLinesHandler {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
 			} catch ( UnexpectedValueException $e ) {
-				return false;
+				return;
 			}
 
 			// fixme: inject formatter and flags into a changes list formatter
@@ -136,8 +133,6 @@ class ChangesListLinesHandler {
 	 * @param EnhancedChangesList $changesList
 	 * @param array &$data
 	 * @param RecentChange $rc
-	 *
-	 * @return bool
 	 */
 	public static function onEnhancedChangesListModifyBlockLineData(
 		EnhancedChangesList $changesList,
@@ -145,14 +140,13 @@ class ChangesListLinesHandler {
 		RecentChange $rc
 	) {
 		$self = self::getInstance( $changesList );
-		return $self->doEnhancedChangesListModifyBlockLineData( $changesList, $data, $rc );
+		$self->doEnhancedChangesListModifyBlockLineData( $changesList, $data, $rc );
 	}
 
 	/**
 	 * @param EnhancedChangesList $changesList
 	 * @param array &$data
 	 * @param RecentChange $rc
-	 * @return bool
 	 */
 	public function doEnhancedChangesListModifyBlockLineData(
 		EnhancedChangesList $changesList,
@@ -164,8 +158,9 @@ class ChangesListLinesHandler {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
 			} catch ( UnexpectedValueException $e ) {
-				return false;
+				return;
 			}
+
 			$this->formatter->formatDataForEnhancedBlockLine(
 				$data,
 				$externalChange,
@@ -186,8 +181,6 @@ class ChangesListLinesHandler {
 	 * @param RecentChange[] $block
 	 * @param RecentChange $rc
 	 * @param string[] &$classes
-	 *
-	 * @return bool
 	 */
 	public static function onEnhancedChangesListModifyLineData(
 		EnhancedChangesList $changesList,
@@ -197,7 +190,7 @@ class ChangesListLinesHandler {
 		array &$classes
 	) {
 		$self = self::getInstance( $changesList );
-		return $self->doEnhancedChangesListModifyLineData( $changesList, $data, $block, $rc, $classes );
+		$self->doEnhancedChangesListModifyLineData( $changesList, $data, $block, $rc, $classes );
 	}
 
 	/**
@@ -206,7 +199,6 @@ class ChangesListLinesHandler {
 	 * @param RecentChange[] $block
 	 * @param RecentChange $rc
 	 * @param string[] &$classes
-	 * @return bool
 	 */
 	public function doEnhancedChangesListModifyLineData(
 		EnhancedChangesList $changesList,
@@ -220,8 +212,9 @@ class ChangesListLinesHandler {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
 			} catch ( UnexpectedValueException $e ) {
-				return false;
+				return;
 			}
+
 			$this->formatter->formatDataForEnhancedLine(
 				$data,
 				$externalChange,
