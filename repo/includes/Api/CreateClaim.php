@@ -82,10 +82,7 @@ class CreateClaim extends ApiBase {
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
-			$this->errorReporter->dieError(
-				$propertyId->getSerialization() . ' does not appear to be a property ID',
-				'param-illegal'
-			);
+			$this->errorReporter->dieMessage( 'invalid-property-id' );
 		}
 
 		$snak = $this->modificationHelper->getSnakInstance( $params, $propertyId );
@@ -121,6 +118,7 @@ class CreateClaim extends ApiBase {
 			} else {
 				$this->errorReporter->dieError(
 					'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak',
+					// TODO: This should be a more specific error message instead.
 					'param-illegal'
 				);
 			}

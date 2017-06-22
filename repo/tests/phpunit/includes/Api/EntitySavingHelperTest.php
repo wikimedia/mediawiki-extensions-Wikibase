@@ -185,16 +185,21 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	public function provideLoadEntity_fail() {
 		return [
 			'no params' => [
-				[], 'no-entity-id'
+				[],
+				'no-entity-id'
 			],
 			'baserevid but no entity' => [
-				[ 'baserevid' => 17 ], 'param-illegal'
+				[ 'baserevid' => 17 ],
+				// TODO: This should be a more specific error message instead.
+				'param-illegal'
 			],
 			'new bad' => [
-				[ 'new' => 'bad' ], 'no-such-entity-type'
+				[ 'new' => 'bad' ],
+				'no-such-entity-type'
 			],
 			'unknown entity' => [
-				[ 'entity' => 'Q123' ], 'no-such-entity'
+				[ 'entity' => 'Q123' ],
+				'no-such-entity'
 			],
 		];
 	}

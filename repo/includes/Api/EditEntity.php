@@ -200,16 +200,13 @@ class EditEntity extends ModifyEntity {
 			);
 		}
 		if ( $hasId && $hasSiteLink ) {
-			$this->errorReporter->dieError(
-				'Parameter "id" and "site", "title" combination are not allowed to be both set in'
-					. ' the same request',
-				'param-illegal'
-			);
+			$this->errorReporter->dieMessage( 'illegal-entity-selector' );
 		}
 		if ( ( $hasId || $hasSiteLinkPart ) && $hasNew ) {
 			$this->errorReporter->dieError(
 				'Parameters "id", "site", "title" and "new" are not allowed to be both set in the'
 					. ' same request',
+				// TODO: This should be a more specific error message instead.
 				'param-illegal'
 			);
 		}
@@ -251,13 +248,13 @@ class EditEntity extends ModifyEntity {
 
 		// if we create a new property, make sure we set the datatype
 		if ( !$exists && $entity instanceof Property ) {
-			if ( !isset( $data['datatype'] ) ) {
-				$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
-			} elseif ( !in_array( $data['datatype'], $this->propertyDataTypes ) ) {
-				$this->errorReporter->dieError( 'Invalid datatype given', 'param-illegal' );
-			} else {
-				$entity->setDataTypeId( $data['datatype'] );
+			if ( !isset( $data['datatype'] )
+				|| !in_array( $data['datatype'], $this->propertyDataTypes )
+			) {
+				$this->errorReporter->dieMessage( 'not-recognized-datatype' );
 			}
+
+			$entity->setDataTypeId( $data['datatype'] );
 		}
 
 		$changeOps = $this->getChangeOp( $data, $entity );
@@ -390,10 +387,7 @@ class EditEntity extends ModifyEntity {
 			$this->assertString( $prop, 'Top level structure must be a JSON object (no keys found)' );
 
 			if ( $prop === 'remove' ) {
-				$this->errorReporter->dieError(
-					'"remove" should not be a top-level key',
-					'not-recognized'
-				);
+				$this->errorReporter->dieMessage( 'illegal-entity-remove' );
 			}
 		}
 	}
@@ -408,6 +402,7 @@ class EditEntity extends ModifyEntity {
 		) {
 			$this->errorReporter->dieError(
 				'Illegal field used in call, "pageid", must either be correct or not given',
+				// TODO: This should be a more specific error message instead.
 				'param-illegal'
 			);
 		}
@@ -424,6 +419,7 @@ class EditEntity extends ModifyEntity {
 		) {
 			$this->errorReporter->dieError(
 				'Illegal field used in call: "namespace", must either be correct or not given',
+				// TODO: This should be a more specific error message instead.
 				'param-illegal'
 			);
 		}
@@ -439,6 +435,7 @@ class EditEntity extends ModifyEntity {
 		) {
 			$this->errorReporter->dieError(
 				'Illegal field used in call: "title", must either be correct or not given',
+				// TODO: This should be a more specific error message instead.
 				'param-illegal'
 			);
 		}
@@ -454,6 +451,7 @@ class EditEntity extends ModifyEntity {
 		) {
 			$this->errorReporter->dieError(
 				'Illegal field used in call: "lastrevid", must either be correct or not given',
+				// TODO: This should be a more specific error message instead.
 				'param-illegal'
 			);
 		}
@@ -468,6 +466,7 @@ class EditEntity extends ModifyEntity {
 			if ( !$entityId ) {
 				$this->errorReporter->dieError(
 					'Illegal field used in call: "id", must not be given when creating a new entity',
+					// TODO: This should be a more specific error message instead.
 					'param-illegal'
 				);
 			}

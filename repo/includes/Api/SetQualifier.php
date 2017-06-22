@@ -168,10 +168,7 @@ class SetQualifier extends ApiBase {
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
-			$this->errorReporter->dieError(
-				$propertyId->getSerialization() . ' does not appear to be a property ID',
-				'param-illegal'
-			);
+			$this->errorReporter->dieMessage( 'invalid-property-id' );
 		}
 		$newQualifier = $this->modificationHelper->getSnakInstance( $params, $propertyId );
 

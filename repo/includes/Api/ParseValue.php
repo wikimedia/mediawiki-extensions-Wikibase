@@ -130,14 +130,14 @@ class ParseValue extends ApiBase {
 
 		if ( empty( $name ) ) {
 			// If neither 'datatype' not 'parser' is given, tell the client to use 'datatype'.
-			$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
+			$this->errorReporter->dieMessage( 'not-recognized-datatype' );
 		}
 
 		try {
 			$parser = $this->valueParserFactory->newParser( $name, $options );
 			return $parser;
 		} catch ( OutOfBoundsException $ex ) {
-			$this->errorReporter->dieError( "Unknown datatype `$name`", 'unknown-datatype' );
+			$this->errorReporter->dieMessage( 'not-recognized-datatype' );
 			throw new LogicException( 'dieError() did not throw an exception' );
 		}
 	}
@@ -152,7 +152,7 @@ class ParseValue extends ApiBase {
 
 		if ( empty( $name ) ) {
 			// 'datatype' parameter is required for validation.
-			$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
+			$this->errorReporter->dieMessage( 'not-recognized-datatype' );
 		}
 
 		// Note: For unknown datatype, we'll get an empty list.

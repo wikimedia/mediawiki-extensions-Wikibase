@@ -219,10 +219,12 @@ class LinkTitles extends ApiBase {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( $params['fromsite'] === $params['tosite'] ) {
+			// TODO: This should be a more specific error message instead.
 			$this->errorReporter->dieError( 'The from site cannot match the to site', 'param-illegal' );
 		}
 
 		if ( $params['fromtitle'] === '' || $params['totitle'] === '' ) {
+			// TODO: This should be a more specific error message instead.
 			$this->errorReporter->dieError( 'The from title and to title must have a value', 'param-illegal' );
 		}
 	}

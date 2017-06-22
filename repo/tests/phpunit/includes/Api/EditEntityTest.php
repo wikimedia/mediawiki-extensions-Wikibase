@@ -856,7 +856,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal'
+					'code' => 'not-recognized-datatype'
 				) ) ),
 			'create mediainfo with automatic id' => array(
 				'p' => array( 'new' => 'mediainfo', 'data' => '{}' ),
@@ -902,7 +902,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'not-recognized',
-					'message-key' => 'wikibase-api-not-recognized',
+					'message-key' => 'wikibase-api-illegal-entity-remove',
 				] ],
 			],
 		);
