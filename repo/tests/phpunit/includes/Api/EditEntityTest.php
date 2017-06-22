@@ -697,8 +697,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 					} ] }'
 				),
 				'e' => array( 'exception' => array(
-					// FIXME: Does this also need fixing?
-					'type' => StatementGuidParsingException::class
+					'type' => ApiUsageException::class,
+					'code' => 'modification-failed',
+					'message' => 'Statement GUID can not be parsed',
 				) )
 			),
 			'removing valid claim with no guid fails' => array(
@@ -902,7 +903,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'not-recognized',
-					'message-key' => 'wikibase-api-not-recognized',
+					'message-key' => 'wikibase-api-illegal-entity-remove',
 				] ],
 			],
 		);

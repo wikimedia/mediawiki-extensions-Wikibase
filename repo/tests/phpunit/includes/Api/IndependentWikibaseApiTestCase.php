@@ -61,22 +61,32 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 	/**
 	 * Do the test for exceptions from Api queries.
 	 * @param array $params array of params for the api query
-	 * @param array $exception details of the exception to expect (type,code,message)
+	 * @param array $exception Details of the exception to expect (type, code, message, message-key).
 	 */
 	public function doTestQueryExceptions( $params, $exception ) {
 		try {
 			$this->doApiRequest( $params );
-			$this->fail( 'Failed to throw ApiUsageException' );
 
+			$this->fail( 'Failed to throw ApiUsageException' );
 		} catch ( ApiUsageException $e ) {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
+
 			if ( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
 			}
+
 			if ( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );
+			}
+
+			if ( array_key_exists( 'message-key', $exception ) ) {
+				$status = $e->getStatusValue();
+				$this->assertTrue(
+					$status->hasMessage( $exception['message-key'] ),
+					'Status message key'
+				);
 			}
 		}
 	}

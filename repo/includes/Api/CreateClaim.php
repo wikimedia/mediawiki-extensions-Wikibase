@@ -82,8 +82,8 @@ class CreateClaim extends ApiBase {
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
-			$this->errorReporter->dieError(
-				$propertyId->getSerialization() . ' does not appear to be a property ID',
+			$this->errorReporter->dieWithError(
+				'wikibase-api-invalid-property-id',
 				'param-illegal'
 			);
 		}
