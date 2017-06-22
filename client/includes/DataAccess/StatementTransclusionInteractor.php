@@ -50,14 +50,6 @@ class StatementTransclusionInteractor {
 	 */
 	private $usageAccumulator;
 
-	/**
-	 * @param Language $language
-	 * @param PropertyIdResolver $propertyIdResolver
-	 * @param SnaksFinder $snaksFinder
-	 * @param SnakFormatter $snakFormatter
-	 * @param EntityLookup $entityLookup
-	 * @param UsageAccumulator $usageAccumulator
-	 */
 	public function __construct(
 		Language $language,
 		PropertyIdResolver $propertyIdResolver,

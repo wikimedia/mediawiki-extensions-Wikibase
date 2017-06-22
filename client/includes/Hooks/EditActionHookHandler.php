@@ -81,9 +81,6 @@ class EditActionHookHandler {
 		);
 	}
 
-	/**
-	 * @param EditPage $editor
-	 */
 	public function handle( EditPage $editor ) {
 		// Check if there are usages to show
 		$title = $editor->getTitle();

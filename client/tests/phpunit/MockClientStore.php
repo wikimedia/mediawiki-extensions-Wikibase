@@ -191,9 +191,6 @@ class MockClientStore implements ClientStore {
 		return self::$propertyInfoLookup;
 	}
 
-	/**
-	 * @param PropertyInfoLookup $propertyInfoLookup
-	 */
 	public function setPropertyInfoLookup( PropertyInfoLookup $propertyInfoLookup ) {
 		self::$propertyInfoLookup = $propertyInfoLookup;
 	}

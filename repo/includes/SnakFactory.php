@@ -27,11 +27,6 @@ class SnakFactory {
 	private $dataTypeFactory;
 	private $dataValueFactory;
 
-	/**
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param DataTypeFactory $dataTypeFactory
-	 * @param DataValueFactory $dataValueFactory
-	 */
 	public function __construct(
 		PropertyDataTypeLookup $dataTypeLookup,
 		DataTypeFactory $dataTypeFactory,

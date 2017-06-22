@@ -25,9 +25,6 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 	 */
 	private $urlExpander;
 
-	/**
-	 * @param SnakUrlExpander $urlExpander
-	 */
 	public function __construct( SnakUrlExpander $urlExpander ) {
 		$this->urlExpander = $urlExpander;
 	}

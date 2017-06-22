@@ -23,9 +23,6 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 	 */
 	private $snakFormatterFactory;
 
-	/**
-	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
-	 */
 	public function __construct( OutputFormatSnakFormatterFactory $snakFormatterFactory ) {
 		$this->snakFormatterFactory = $snakFormatterFactory;
 	}

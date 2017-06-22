@@ -85,10 +85,6 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param Title $title
-	 * @param ParserOutput $out
-	 */
 	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ) {
 		$itemId = $this->getItemIdForTitle( $title );
 
@@ -103,10 +99,6 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param Title $title
-	 * @param ParserOutput $out
-	 */
 	public function updateBadgesProperty( Title $title, ParserOutput $out ) {
 		$itemId = $this->getItemIdForTitle( $title );
 

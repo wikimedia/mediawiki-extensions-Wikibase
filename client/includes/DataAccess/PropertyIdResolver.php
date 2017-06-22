@@ -31,11 +31,6 @@ class PropertyIdResolver {
 	 */
 	private $usageAccumulator;
 
-	/**
-	 * @param EntityLookup $entityLookup
-	 * @param PropertyLabelResolver $propertyLabelResolver
-	 * @param UsageAccumulator $usageAccumulator
-	 */
 	public function __construct(
 		EntityLookup $entityLookup,
 		PropertyLabelResolver $propertyLabelResolver,

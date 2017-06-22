@@ -18,9 +18,6 @@ class BeforePageDisplayHandler {
 	 */
 	private $namespaceChecker;
 
-	/**
-	 * @param NamespaceChecker $namespaceChecker
-	 */
 	public function __construct( NamespaceChecker $namespaceChecker ) {
 		$this->namespaceChecker = $namespaceChecker;
 	}

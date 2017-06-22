@@ -187,9 +187,6 @@ class EntityChange extends DiffChange {
 		$this->setMetadata( $metadata );
 	}
 
-	/**
-	 * @param Revision $revision
-	 */
 	public function setRevisionInfo( Revision $revision ) {
 		$this->setFields( array(
 			'revision_id' => $revision->getId(),

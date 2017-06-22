@@ -397,9 +397,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->repoLinker;
 	}
 
-	/**
-	 * @param RepoLinker $repoLinker
-	 */
 	public function setRepoLinker( RepoLinker $repoLinker ) {
 		$this->repoLinker = $repoLinker;
 	}
@@ -588,9 +585,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->propertyOrderProvider;
 	}
 
-	/**
-	 * @param PropertyOrderProvider $propertyOrderProvider
-	 */
 	public function setPropertyOrderProvider( PropertyOrderProvider $propertyOrderProvider ) {
 		$this->propertyOrderProvider = $propertyOrderProvider;
 	}

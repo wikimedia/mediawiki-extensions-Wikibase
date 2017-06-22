@@ -37,11 +37,6 @@ class OtherProjectsSidebarGeneratorFactory {
 	 */
 	private $sidebarLinkBadgeDisplay;
 
-	/**
-	 * @param SettingsArray $settings
-	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param SiteLookup $siteLookup
-	 */
 	public function __construct(
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup,

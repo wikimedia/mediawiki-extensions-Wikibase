@@ -44,11 +44,6 @@ class ItemsPerSiteBuilder {
 	 */
 	private $batchSize = 100;
 
-	/**
-	 * @param SiteLinkTable $siteLinkTable
-	 * @param EntityLookup $entityLookup
-	 * @param EntityPrefetcher $entityPrefetcher
-	 */
 	public function __construct( SiteLinkTable $siteLinkTable, EntityLookup $entityLookup, EntityPrefetcher $entityPrefetcher ) {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->entityLookup = $entityLookup;
@@ -71,9 +66,6 @@ class ItemsPerSiteBuilder {
 		$this->reporter = $reporter;
 	}
 
-	/**
-	 * @param EntityIdPager $entityIdPager
-	 */
 	public function rebuild( EntityIdPager $entityIdPager ) {
 		$this->report( 'Start rebuild...' );
 

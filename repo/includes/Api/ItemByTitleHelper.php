@@ -45,13 +45,6 @@ class ItemByTitleHelper {
 	 */
 	private $stringNormalizer;
 
-	/**
-	 * @param ApiBase $apiModule
-	 * @param ResultBuilder $resultBuilder
-	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param SiteLookup $siteLookup
-	 * @param StringNormalizer $stringNormalizer
-	 */
 	public function __construct(
 		ApiBase $apiModule,
 		ResultBuilder $resultBuilder,

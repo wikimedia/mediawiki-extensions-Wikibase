@@ -12,16 +12,10 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class NullEntityRdfBuilder implements EntityRdfBuilder {
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	public function addEntity( EntityDocument $entity ) {
 		return;
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	public function addEntityStub( EntityDocument $entity ) {
 		return;
 	}

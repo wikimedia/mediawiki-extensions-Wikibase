@@ -20,9 +20,6 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 */
 	private $dbLoadBalancer;
 
-	/**
-	 * @param LoadBalancer $dbLoadBalancer
-	 */
 	public function __construct( LoadBalancer $dbLoadBalancer ) {
 		$this->dbLoadBalancer = $dbLoadBalancer;
 	}

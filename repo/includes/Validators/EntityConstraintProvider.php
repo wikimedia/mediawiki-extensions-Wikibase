@@ -28,10 +28,6 @@ class EntityConstraintProvider {
 	 */
 	private $siteLinkConflictLookup;
 
-	/**
-	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
-	 * @param SiteLinkConflictLookup $siteLinkConflictLookup
-	 */
 	public function __construct(
 		LabelDescriptionDuplicateDetector $duplicateDetector,
 		SiteLinkConflictLookup $siteLinkConflictLookup

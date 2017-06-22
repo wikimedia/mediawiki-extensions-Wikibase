@@ -190,9 +190,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	abstract protected function createSummary( $entity );
 
-	/**
-	 * @param OutputPage $output
-	 */
 	protected function displayBeforeForm( OutputPage $output ) {
 		$output->addModules( 'wikibase.special.newEntity' );
 
@@ -212,9 +209,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		return parent::getCopyrightHTML( 'wikibase-newentity-submit' );
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	private function redirectToEntityPage( EntityDocument $entity ) {
 		$title = $this->getEntityTitle( $entity->getId() );
 		$entityUrl = $title->getFullURL();

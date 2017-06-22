@@ -19,9 +19,6 @@ class EntityIdTitleFormatter implements EntityIdFormatter {
 	 */
 	protected $titleLookup;
 
-	/**
-	 * @param EntityTitleLookup $titleLookup
-	 */
 	public function __construct( EntityTitleLookup $titleLookup ) {
 		$this->titleLookup = $titleLookup;
 	}

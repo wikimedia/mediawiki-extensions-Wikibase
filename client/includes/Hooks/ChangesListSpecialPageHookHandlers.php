@@ -187,9 +187,6 @@ class ChangesListSpecialPageHookHandlers {
 		}
 	}
 
-	/**
-	 * @param ChangesListSpecialPage $specialPage
-	 */
 	public function addFilterIfEnabled( ChangesListSpecialPage $specialPage ) {
 		// The *user-facing* filter is only registered if external changes
 		// are enabled.
@@ -201,9 +198,6 @@ class ChangesListSpecialPageHookHandlers {
 		}
 	}
 
-	/**
-	 * @param ChangesListSpecialPage $specialPage
-	 */
 	protected function addFilter( ChangesListSpecialPage $specialPage ) {
 		$filterName = $this->getFilterName();
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );

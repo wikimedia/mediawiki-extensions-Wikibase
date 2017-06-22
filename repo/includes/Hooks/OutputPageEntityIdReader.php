@@ -26,10 +26,6 @@ class OutputPageEntityIdReader {
 	 */
 	private $entityIdParser;
 
-	/**
-	 * @param EntityContentFactory $entityContentFactory
-	 * @param EntityIdParser $entityIdParser
-	 */
 	public function __construct( EntityContentFactory $entityContentFactory, EntityIdParser $entityIdParser ) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entityIdParser = $entityIdParser;

@@ -24,10 +24,6 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 */
 	private $writer;
 
-	/**
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
-	 */
 	public function __construct(
 		RdfVocabulary $vocabulary,
 		RdfWriter $writer

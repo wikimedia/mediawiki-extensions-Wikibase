@@ -278,11 +278,6 @@ class EntityParserOutputGenerator {
 		return $titleText;
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 * @param EntityDocument $entity
-	 * @param EntityInfo $entityInfo
-	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityDocument $entity,
@@ -360,9 +355,6 @@ class EntityParserOutputGenerator {
 		);
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 */
 	private function addModules( ParserOutput $parserOutput ) {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( array(

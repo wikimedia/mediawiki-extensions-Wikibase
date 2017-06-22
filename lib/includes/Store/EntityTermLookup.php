@@ -17,9 +17,6 @@ class EntityTermLookup extends EntityTermLookupBase {
 	 */
 	private $termIndex;
 
-	/**
-	 * @param TermIndex $termIndex
-	 */
 	public function __construct( TermIndex $termIndex ) {
 		$this->termIndex = $termIndex;
 	}

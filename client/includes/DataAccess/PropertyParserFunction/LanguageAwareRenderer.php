@@ -39,12 +39,6 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	 */
 	private $title;
 
-	/**
-	 * @param Language $language
-	 * @param StatementTransclusionInteractor $statementTransclusionInteractor
-	 * @param ParserOutput $parserOutput
-	 * @param Title $title
-	 */
 	public function __construct(
 		Language $language,
 		StatementTransclusionInteractor $statementTransclusionInteractor,

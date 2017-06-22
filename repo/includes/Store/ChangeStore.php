@@ -14,9 +14,6 @@ use Wikibase\Change;
  */
 interface ChangeStore {
 
-	/**
-	 * @param Change $change
-	 */
 	public function saveChange( Change $change );
 
 }

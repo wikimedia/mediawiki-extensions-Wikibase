@@ -27,10 +27,6 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	 */
 	private $languageNameLookup;
 
-	/**
-	 * @param EntityTitleLookup $titleLookup
-	 * @param LanguageNameLookup $languageNameLookup
-	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup

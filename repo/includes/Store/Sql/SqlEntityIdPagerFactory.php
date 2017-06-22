@@ -24,10 +24,6 @@ class SqlEntityIdPagerFactory {
 	 */
 	private $entityIdParser;
 
-	/**
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param EntityIdParser $entityIdParser
-	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityIdParser $entityIdParser

@@ -25,10 +25,6 @@ class UnionContentLanguages implements ContentLanguages {
 	 */
 	private $languageCodes = null;
 
-	/**
-	 * @param ContentLanguages $a
-	 * @param ContentLanguages $b
-	 */
 	public function __construct( ContentLanguages $a, ContentLanguages $b ) {
 		$this->a = $a;
 		$this->b = $b;

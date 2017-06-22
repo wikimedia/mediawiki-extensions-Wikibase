@@ -24,9 +24,6 @@ class EntityInfoTermLookup implements TermLookup {
 	 */
 	private $entityInfo;
 
-	/**
-	 * @param EntityInfo $entityInfo
-	 */
 	public function __construct( EntityInfo $entityInfo ) {
 		$this->entityInfo = $entityInfo;
 	}

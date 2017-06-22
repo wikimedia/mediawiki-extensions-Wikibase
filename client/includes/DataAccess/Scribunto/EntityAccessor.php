@@ -60,16 +60,6 @@ class EntityAccessor {
 	 */
 	private $termsLanguages;
 
-	/**
-	 * @param EntityIdParser $entityIdParser
-	 * @param EntityLookup $entityLookup
-	 * @param UsageAccumulator $usageAccumulator
-	 * @param Serializer $entitySerializer
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param LanguageFallbackChain $fallbackChain
-	 * @param Language $language
-	 * @param ContentLanguages $termsLanguages
-	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,

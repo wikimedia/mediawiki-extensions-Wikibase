@@ -24,9 +24,6 @@ class EntityIdValueParser extends StringValueParser {
 	 */
 	private $parser;
 
-	/**
-	 * @param EntityIdParser $parser
-	 */
 	public function __construct( EntityIdParser $parser ) {
 		parent::__construct();
 

@@ -21,9 +21,6 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	 */
 	private $entityNamespaceLookup;
 
-	/**
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 */
 	public function __construct( EntityNamespaceLookup $entityNamespaceLookup ) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}

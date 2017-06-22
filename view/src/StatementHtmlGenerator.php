@@ -54,12 +54,6 @@ class StatementHtmlGenerator {
 	 */
 	private $textProvider;
 
-	/**
-	 * @param TemplateFactory $templateFactory
-	 * @param SnakHtmlGenerator $snakHtmlGenerator
-	 * @param NumberLocalizer $numberLocalizer
-	 * @param LocalizedTextProvider $textProvider
-	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SnakHtmlGenerator $snakHtmlGenerator,

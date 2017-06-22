@@ -26,10 +26,6 @@ class DifferenceContentLanguages implements ContentLanguages {
 	 */
 	private $languageCodes = null;
 
-	/**
-	 * @param ContentLanguages $all
-	 * @param ContentLanguages $excluded
-	 */
 	public function __construct( ContentLanguages $all, ContentLanguages $excluded ) {
 		$this->all = $all;
 		$this->excluded = $excluded;

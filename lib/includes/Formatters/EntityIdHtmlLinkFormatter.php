@@ -29,11 +29,6 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 */
 	protected $entityTitleLookup;
 
-	/**
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LanguageNameLookup $languageNameLookup
-	 */
 	public function __construct(
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityTitleLookup $entityTitleLookup,

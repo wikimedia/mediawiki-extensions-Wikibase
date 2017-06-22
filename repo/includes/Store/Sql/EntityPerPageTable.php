@@ -29,10 +29,6 @@ class EntityPerPageTable implements EntityPerPage {
 	 */
 	private $loadBalancer;
 
-	/**
-	 * @param LoadBalancer $loadBalancer
-	 * @param EntityIdParser $entityIdParser
-	 */
 	public function __construct(
 		LoadBalancer $loadBalancer,
 		EntityIdParser $entityIdParser

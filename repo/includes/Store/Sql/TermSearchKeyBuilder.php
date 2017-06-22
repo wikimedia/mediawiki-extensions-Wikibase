@@ -46,9 +46,6 @@ class TermSearchKeyBuilder {
 	 */
 	private $batchSize = 100;
 
-	/**
-	 * @param TermSqlIndex $table
-	 */
 	public function __construct( TermSqlIndex $table ) {
 		$this->table = $table;
 	}

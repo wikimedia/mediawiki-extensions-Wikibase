@@ -37,14 +37,6 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	private $siteLookup;
 
-	/**
-	 * @param SpecialPageCopyrightView $copyrightView
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
-	 * @param SiteLookup $siteLookup
-	 */
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		EntityNamespaceLookup $entityNamespaceLookup,

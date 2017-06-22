@@ -21,9 +21,6 @@ class EntityIdValueFormatter implements ValueFormatter {
 	 */
 	private $entityIdFormatter;
 
-	/**
-	 * @param EntityIdFormatter $entityIdFormatter
-	 */
 	public function __construct( EntityIdFormatter $entityIdFormatter ) {
 		$this->entityIdFormatter = $entityIdFormatter;
 	}

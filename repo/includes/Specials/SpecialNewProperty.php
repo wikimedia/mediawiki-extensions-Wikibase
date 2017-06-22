@@ -30,13 +30,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
-	/**
-	 * @param SpecialPageCopyrightView $specialPageCopyrightView
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
-	 */
 	public function __construct(
 		SpecialPageCopyrightView $specialPageCopyrightView,
 		EntityNamespaceLookup $entityNamespaceLookup,

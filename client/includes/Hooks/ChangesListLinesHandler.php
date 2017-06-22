@@ -37,10 +37,6 @@ class ChangesListLinesHandler {
 	 */
 	private static $instance = null;
 
-	/**
-	 * @param ExternalChangeFactory $changeFactory
-	 * @param ChangeLineFormatter $formatter
-	 */
 	public function __construct( ExternalChangeFactory $changeFactory, ChangeLineFormatter $formatter ) {
 		$this->changeFactory = $changeFactory;
 		$this->formatter = $formatter;

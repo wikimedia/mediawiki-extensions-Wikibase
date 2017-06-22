@@ -322,13 +322,6 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @param SettingsArray $settings
-	 * @param DataTypeDefinitions $dataTypeDefinitions
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param RepositoryDefinitions $repositoryDefinitions
-	 * @param SiteLookup $siteLookup
-	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,

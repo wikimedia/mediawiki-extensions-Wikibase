@@ -26,9 +26,6 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 */
 	private $connectionManager;
 
-	/**
-	 * @param SessionConsistentConnectionManager $connectionManager
-	 */
 	public function __construct( SessionConsistentConnectionManager $connectionManager ) {
 		$this->connectionManager = $connectionManager;
 	}

@@ -66,16 +66,6 @@ class RedirectCreationInteractor {
 	 */
 	private $entityRedirectLookup;
 
-	/**
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param EntityStore $entityStore
-	 * @param EntityPermissionChecker $permissionChecker
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param User $user
-	 * @param EditFilterHookRunner $editFilterHookRunner
-	 * @param EntityRedirectLookup $entityRedirectLookup
-	 * @param EntityTitleStoreLookup $entityTitleLookup
-	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,

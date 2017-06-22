@@ -18,9 +18,6 @@ class DatabaseChangeTransmitter implements ChangeTransmitter {
 	 */
 	private $changeStore;
 
-	/**
-	 * @param ChangeStore $changeStore
-	 */
 	public function __construct( ChangeStore $changeStore ) {
 		$this->changeStore = $changeStore;
 	}

@@ -36,12 +36,6 @@ class SnakSerializationRenderer {
 	 */
 	private $snakListDeserializer;
 
-	/**
-	 * @param SnakFormatter $snakFormatter
-	 * @param Deserializer $snakDeserializer
-	 * @param Language $language
-	 * @param Deserializer $snakListDeserializer
-	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
 		Deserializer $snakDeserializer,

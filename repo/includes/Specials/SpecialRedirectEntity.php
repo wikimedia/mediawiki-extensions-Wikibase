@@ -41,12 +41,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 */
 	private $tokenCheck;
 
-	/**
-	 * @param EntityIdParser $idParser
-	 * @param ExceptionLocalizer $exceptionLocalizer
-	 * @param TokenCheckInteractor $tokenCheck
-	 * @param RedirectCreationInteractor $interactor
-	 */
 	public function __construct(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
@@ -128,10 +122,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		}
 	}
 
-	/**
-	 * @param EntityId $fromId
-	 * @param EntityId $toId
-	 */
 	private function redirectEntity( EntityId $fromId, EntityId $toId ) {
 		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
 

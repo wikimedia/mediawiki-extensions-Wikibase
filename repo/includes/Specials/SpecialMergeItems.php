@@ -52,13 +52,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	private $titleLookup;
 
-	/**
-	 * @param EntityIdParser $idParser
-	 * @param ExceptionLocalizer $exceptionLocalizer
-	 * @param TokenCheckInteractor $tokenCheck
-	 * @param ItemMergeInteractor $interactor
-	 * @param EntityTitleLookup $titleLookup
-	 */
 	public function __construct(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,

@@ -65,14 +65,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $prefetchingTermLookup;
 
-	/**
-	 * @param DataTypeFactory $dataTypeFactory
-	 * @param PropertyInfoLookup $propertyInfoLookup
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param EntityIdFormatter $entityIdFormatter
-	 * @param EntityTitleLookup $titleLookup
-	 * @param PrefetchingTermLookup $prefetchingTermLookup
-	 */
 	public function __construct(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoLookup $propertyInfoLookup,

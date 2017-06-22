@@ -52,9 +52,6 @@ class GetClaimsTest extends ApiTestCase {
 		);
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	private function save( EntityDocument $entity ) {
 		$flags = $entity->getId() ? EDIT_UPDATE : EDIT_NEW;
 
@@ -65,10 +62,6 @@ class GetClaimsTest extends ApiTestCase {
 		$entity->setId( $rev->getEntity()->getId() );
 	}
 
-	/**
-	 * @param Item $item
-	 * @param PropertyId $propertyId
-	 */
 	private function addStatements( Item $item, PropertyId $propertyId ) {
 		if ( !$item->getId() ) {
 			$this->save( $item );

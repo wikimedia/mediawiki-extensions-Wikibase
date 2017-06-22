@@ -69,16 +69,6 @@ class ItemMergeInteractor {
 	 */
 	private $entityTitleLookup;
 
-	/**
-	 * @param MergeChangeOpsFactory $changeOpFactory
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param EntityStore $entityStore
-	 * @param EntityPermissionChecker $permissionChecker
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param User $user
-	 * @param RedirectCreationInteractor $interactorRedirect
-	 * @param EntityTitleStoreLookup $entityTitleLookup
-	 */
 	public function __construct(
 		MergeChangeOpsFactory $changeOpFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -313,10 +303,6 @@ class ItemMergeInteractor {
 		}
 	}
 
-	/**
-	 * @param ItemId $fromId
-	 * @param ItemId $toId
-	 */
 	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ) {
 		$fromTitle = $this->entityTitleLookup->getTitleForId( $fromId );
 		$toTitle = $this->entityTitleLookup->getTitleForId( $toId );

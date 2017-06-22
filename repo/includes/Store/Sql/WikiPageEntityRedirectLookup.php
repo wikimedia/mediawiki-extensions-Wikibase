@@ -32,11 +32,6 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 */
 	private $loadBalancer;
 
-	/**
-	 * @param EntityTitleStoreLookup $entityTitleLookup
-	 * @param EntityIdLookup $entityIdLookup
-	 * @param LoadBalancer $loadBalancer
-	 */
 	public function __construct(
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityIdLookup $entityIdLookup,

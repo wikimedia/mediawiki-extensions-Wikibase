@@ -180,9 +180,6 @@ final class RepoHooks {
 		return true;
 	}
 
-	/**
-	 * @param Revision $revision
-	 */
 	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
 		/** @var EntityContent $content */
 		$content = $revision->getContent();

@@ -28,9 +28,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 */
 	private $languageFallbackChainFactory;
 
-	/**
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {

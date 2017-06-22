@@ -22,9 +22,6 @@ class LanguageLinkBadgeDisplay {
 	 */
 	protected $sidebarLinkBadgeDisplay;
 
-	/**
-	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
-	 */
 	public function __construct( SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay ) {
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 	}

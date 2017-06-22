@@ -42,12 +42,6 @@ class WikibaseSnakFormatterBuilders {
 	 */
 	private $dataTypeFactory;
 
-	/**
-	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
-	 * @param PropertyInfoLookup $propertyInfoLookup
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param DataTypeFactory $dataTypeFactory
-	 */
 	public function __construct(
 		WikibaseValueFormatterBuilders $valueFormatterBuilders,
 		PropertyInfoLookup $propertyInfoLookup,
