@@ -27,8 +27,10 @@ abstract class TermIndexField extends SearchIndexFieldDefinition implements Wiki
 
 	/**
 	 * Create a string field config with specific analyzer fields.
+	 *
 	 * @param string $analyzer
 	 * @param string $search_analyzer
+	 *
 	 * @return array
 	 */
 	protected function getSubfield( $analyzer, $search_analyzer = null ) {
@@ -60,8 +62,10 @@ abstract class TermIndexField extends SearchIndexFieldDefinition implements Wiki
 
 	/**
 	 * Produce specific field mapping
+	 *
 	 * @param SearchEngine $engine
 	 * @param string $name
+	 *
 	 * @return SearchIndexField
 	 */
 	public function getMappingField( SearchEngine $engine, $name ) {

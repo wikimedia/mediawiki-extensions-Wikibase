@@ -121,6 +121,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @param int           $produce One of the RdfProducer::PRODUCE_... constants.
 	 * @param DedupeBag     $dedup
 	 * @param RdfVocabulary $vocabulary
+	 *
 	 * @return RdfBuilder
 	 */
 	private function newRdfBuilder(

@@ -111,6 +111,7 @@ class LinkBeginHookHandler {
 	 * @param array $query
 	 * @param array $options
 	 * @param mixed $ret
+	 *
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, array &$query,
@@ -316,6 +317,7 @@ class LinkBeginHookHandler {
 	 *
 	 * @param Title|null $currentTitle
 	 * @param RequestContext $context
+	 *
 	 * @return bool
 	 */
 	private function shouldConvert( Title $currentTitle = null, RequestContext $context ) {

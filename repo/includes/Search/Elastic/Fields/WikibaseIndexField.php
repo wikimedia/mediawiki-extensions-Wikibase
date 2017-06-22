@@ -20,8 +20,10 @@ interface WikibaseIndexField {
 
 	/**
 	 * Produce specific field mapping
+	 *
 	 * @param SearchEngine $engine
 	 * @param string $name
+	 *
 	 * @return \SearchIndexField|null Null if mapping is not supported
 	 */
 	public function getMappingField( SearchEngine $engine, $name );

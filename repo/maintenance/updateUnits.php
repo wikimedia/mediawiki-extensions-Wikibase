@@ -162,8 +162,10 @@ class UpdateUnits extends Maintenance {
 
 	/**
 	 * Convert unit that does not reduce to a basic unit.
+	 *
 	 * @param string  $unit
 	 * @param array[] $convertUnits List of units already converted
+	 *
 	 * @return string[]|null Converted data for the unit or null if no conversion possible.
 	 */
 	public function convertDerivedUnit( $unit, $convertUnits ) {

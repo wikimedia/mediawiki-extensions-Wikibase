@@ -11,6 +11,7 @@ abstract class WikibaseNumericField implements WikibaseIndexField {
 	/**
 	 * @param SearchEngine $engine
 	 * @param string       $name
+	 *
 	 * @return \SearchIndexField
 	 */
 	public function getMappingField( SearchEngine $engine, $name ) {

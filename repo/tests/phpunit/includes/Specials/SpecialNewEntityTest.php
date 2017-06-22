@@ -67,6 +67,7 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 	/**
 	 * @param array $form
 	 * @param EntityDocument $entity
+	 *
 	 * @return void
 	 * @throws \Exception
 	 */

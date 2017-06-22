@@ -80,6 +80,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @param Diff $siteLinkDiff
 	 * @param Title $title
+	 *
 	 * @return bool
 	 */
 	public function needsTargetSpecificSummary( Diff $siteLinkDiff, Title $title ) {

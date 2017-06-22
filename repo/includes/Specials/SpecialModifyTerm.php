@@ -302,6 +302,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 * @param string $value
+	 *
 	 * @return Summary
 	 */
 	abstract protected function setValue( EntityDocument $entity, $languageCode, $value );

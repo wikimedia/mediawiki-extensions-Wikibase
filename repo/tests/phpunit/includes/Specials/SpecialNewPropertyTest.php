@@ -239,6 +239,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 	/**
 	 * @param array $form
 	 * @param EntityDocument $entity
+	 *
 	 * @return void
 	 * @throws \Exception
 	 */

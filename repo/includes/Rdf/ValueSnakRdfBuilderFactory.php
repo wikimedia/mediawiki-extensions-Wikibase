@@ -39,6 +39,7 @@ class ValueSnakRdfBuilderFactory {
 	 * @param RdfWriter             $writer
 	 * @param EntityMentionListener $mentionedEntityTracker
 	 * @param DedupeBag             $dedupe
+	 *
 	 * @return DispatchingValueSnakRdfBuilder
 	 */
 	public function getValueSnakRdfBuilder(

@@ -39,6 +39,7 @@ class EntityRdfBuilderFactory {
 	 * @param RdfWriter $writer
 	 * @param EntityMentionListener $mentionedEntityTracker
 	 * @param DedupeBag $dedupe
+	 *
 	 * @return EntityRdfBuilder[] array mapping entity types to their EntityRdfBuilders
 	 */
 	public function getEntityRdfBuilders(

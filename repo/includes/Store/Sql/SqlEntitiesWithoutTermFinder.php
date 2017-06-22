@@ -136,6 +136,7 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 	 *
 	 * @param IDatabase $dbr
 	 * @param string[] $entityTypes
+	 *
 	 * @return string
 	 */
 	private function getEntityTypeConditions( IDatabase $dbr, array $entityTypes ) {
@@ -152,6 +153,7 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 	 *
 	 * @param IDatabase $dbr
 	 * @param string $entityType
+	 *
 	 * @return string
 	 */
 	private function getConditionsForEntityType( IDatabase $dbr, $entityType ) {

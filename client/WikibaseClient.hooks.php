@@ -67,6 +67,7 @@ final class ClientHooks {
 	 *
 	 * @param string $engine
 	 * @param array $extraLibraries
+	 *
 	 * @return bool
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {

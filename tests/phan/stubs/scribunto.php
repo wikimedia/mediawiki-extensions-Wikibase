@@ -7,17 +7,21 @@
  */
 
 class Scribunto_LuaEngine {
+
 	/**
 	 * @param string $moduleFileName string
 	 * @param array $interfaceFuncs
 	 * @param array $setupOptions
+	 *
 	 * @return array Lua package
 	 */
 	public function registerInterface( $moduleFileName, $interfaceFuncs, $setupOptions = array() ) {
 	}
+
 }
 
 class Scribunto_LuaLibraryBase {
+
 	/**
 	 * @param string $name
 	 * @param int $argIdx integer
@@ -60,13 +64,16 @@ class Scribunto_LuaLibraryBase {
 	 */
 	function register() {
 	}
+
 }
 
 class ScribuntoException {
+
 	/**
 	 * @param string $messageName
 	 * @param array $params
 	 */
 	function __construct( $messageName, $params = [] ) {
 	}
+
 }

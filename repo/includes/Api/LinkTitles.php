@@ -191,6 +191,7 @@ class LinkTitles extends ApiBase {
 	 * @param Item|null $item
 	 * @param Summary $summary
 	 * @param int $flags
+	 *
 	 * @return Status
 	 */
 	private function getAttemptSaveStatus( Item $item = null, Summary $summary, $flags ) {

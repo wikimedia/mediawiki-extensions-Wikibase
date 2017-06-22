@@ -31,6 +31,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	 *
 	 * @param string $language
 	 * @param string $termValue
+	 *
 	 * @return string
 	 */
 	private function createNewItemWithTerms( $language, $termValue ) {

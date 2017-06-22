@@ -267,6 +267,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param Content $oldContent
 	 * @param Content $newContent
 	 * @param int $flags
+	 *
 	 * @return string Empty string
 	 */
 	public function getAutosummary(
@@ -764,6 +765,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param WikiPage $page
 	 * @param ParserOutput $output
 	 * @param SearchEngine $engine
+	 *
 	 * @return array Wikibase fields data, map of name=>value for fields
 	 */
 	public function getDataForSearchIndex(
