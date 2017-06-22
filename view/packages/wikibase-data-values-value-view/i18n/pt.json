@@ -3,10 +3,14 @@
 		"authors": [
 			"Luckas",
 			"Vitorvicentevalente",
-			"Fúlvio"
+			"Fúlvio",
+			"Hamilton Abreu"
 		]
 	},
+	"valueview-desc": "Componentes da interface para apresentar e editar valores de dados",
 	"valueview-expert-advancedadjustments": "configurações avançadas",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "O tratamento de valores \"$1\" ainda não é suportado.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "O tratamento de valores para o tipo de dados \"$1\" ainda não é suportado.",
 	"valueview-expert-emptyvalue-empty": "vazio",
 	"valueview-expert-globecoordinateinput-precision": "Precisão:",
 	"valueview-expert-globecoordinateinput-nullprecision": "não especificado",
@@ -22,5 +26,7 @@
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Idioma (obrigatório):",
 	"valueview-expertextender-unitsuggester-label": "Unidade (opcional):",
+	"valueview-preview-label": "será apresentado como:",
+	"valueview-preview-novalue": "não foi reconhecido nenhum valor válido",
 	"valueview-listrotator-manually": "definir manualmente"
 }
