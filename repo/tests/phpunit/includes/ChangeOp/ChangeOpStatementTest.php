@@ -248,9 +248,14 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function applyInvalidThrowsExceptionProvider() {
 		$itemEmpty = new Item( new ItemId( 'Q888' ) );
+		$noValueSnak = new PropertyNoValueSnak( new PropertyId( 'P45' ) );
+		$someValueSnak = new PropertySomeValueSnak( new PropertyId( 'P44' ) );
 
-		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
-		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
+		$statementWithInvalidGuid = new Statement( $noValueSnak );
+		$statementWithInvalidGuid->setGuid( 'Q0$' );
+
+		$item777 = $this->makeNewItemWithStatement( 'Q777', $noValueSnak );
+		$item666 = $this->makeNewItemWithStatement( 'Q666', $someValueSnak );
 
 		$item777Statements = $item777->getStatements()->toArray();
 		$item666Statements = $item666->getStatements()->toArray();
@@ -264,6 +269,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		// test adding statements with guids from other items (these shouldn't be added)
 		return array(
+			array( $itemEmpty, $statementWithInvalidGuid ),
 			array( $itemEmpty, $statements[666] ),
 			array( $itemEmpty, $statements[777] ),
 			array( $item666, $statements[777] ),

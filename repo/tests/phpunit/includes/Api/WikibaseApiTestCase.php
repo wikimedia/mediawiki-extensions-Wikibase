@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
-use Exception;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Revision;
@@ -167,7 +166,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * Do the test for exceptions from Api queries.
 	 *
 	 * @param array $params Array of params for the API query.
-	 * @param array $exception Details of the exception to expect (type, code, message).
+	 * @param array $exception Details of the exception to expect (type, code, message, message-key).
 	 */
 	protected function doTestQueryExceptions( array $params, array $exception ) {
 		try {
@@ -184,9 +183,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
+
 			if ( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
 			}
+
 			if ( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );
 			}
@@ -197,16 +198,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 					$status->hasMessage( $exception['message-key'] ),
 					'Status message key'
 				);
-			}
-		} catch ( Exception $e ) {
-			if ( $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
-				throw $e;
-			}
-			if ( array_key_exists( 'type', $exception ) ) {
-				$this->assertInstanceOf( $exception['type'], $e );
-			}
-			if ( array_key_exists( 'message', $exception ) ) {
-				$this->assertContains( $exception['message'], $e->getMessage() );
 			}
 		}
 	}
