@@ -27,6 +27,7 @@ interface EditSectionGenerator {
 	 *
 	 * @param string $languageCode
 	 * @param EntityId|null $entityId
+	 *
 	 * @return string HTML
 	 */
 	public function getLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null );
@@ -44,6 +45,7 @@ interface EditSectionGenerator {
 	 *
 	 * @param PropertyId $propertyId The property of the statement group
 	 * @param EntityId|null $entityId The id of the entity on which to add a statement
+	 *
 	 * @return string HTML
 	 */
 	public function getAddStatementToGroupSection( PropertyId $propertyId, EntityId $entityId = null );

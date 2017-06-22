@@ -123,6 +123,7 @@ class RepositoryDefinitions {
 	/**
 	 * @param array $definition
 	 * @param array $requiredFields
+	 *
 	 * @return bool
 	 */
 	private function definitionContainsAllRequiredFields( array $definition, array $requiredFields ) {

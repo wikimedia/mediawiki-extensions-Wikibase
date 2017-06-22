@@ -256,6 +256,7 @@ class ListSubscribers extends ApiQueryBase {
 	/**
 	 * @param string $subscription
 	 * @param string $entityIdString
+	 *
 	 * @return null|string
 	 */
 	private function getEntityUsageUrl( $subscription, $entityIdString ) {

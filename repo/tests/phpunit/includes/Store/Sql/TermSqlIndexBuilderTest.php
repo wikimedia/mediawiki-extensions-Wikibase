@@ -201,6 +201,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @param Item $item
 	 * @param string $languageCode
+	 *
 	 * @return \Wikibase\TermIndexEntry[]
 	 */
 	private function getLabelTerms( $item, $languageCode ) {

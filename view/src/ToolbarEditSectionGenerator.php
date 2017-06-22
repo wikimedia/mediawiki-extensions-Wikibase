@@ -59,6 +59,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	 *
 	 * @param string $languageCode
 	 * @param EntityId|null $entityId
+	 *
 	 * @return string
 	 */
 	public function getLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null ) {

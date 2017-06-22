@@ -53,8 +53,10 @@ class DateTimeValueCleaner {
 	 * Clean up Wikidata date value in Gregorian calendar
 	 * - remove + from the start - not all data stores like that
 	 * - validate month and date value
+	 *
 	 * @param string $dateValue
 	 * @param int $precision Date precision constant (e.g. TimeValue::PRECISION_SECOND)
+	 *
 	 * @return string|null Value compatible with xsd:dateTime type, null if we failed to parse
 	 */
 	protected function cleanupGregorianValue( $dateValue, $precision ) {

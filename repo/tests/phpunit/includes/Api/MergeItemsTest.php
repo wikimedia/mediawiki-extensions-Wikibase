@@ -147,6 +147,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @param string[] $params
 	 * @param EntityRedirect|null $expectedRedirect
+	 *
 	 * @return MergeItems
 	 */
 	private function newMergeItemsApiModule( array $params, EntityRedirect $expectedRedirect = null ) {

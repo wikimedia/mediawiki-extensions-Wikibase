@@ -116,6 +116,7 @@ class RdfBuilderTestData {
 	 *
 	 * @param string|string[] $dataSetName one or more data set names
 	 * @param string ... more data set names
+	 *
 	 * @return string N-Triples
 	 */
 	public function getNTriples( $dataSetName ) {
