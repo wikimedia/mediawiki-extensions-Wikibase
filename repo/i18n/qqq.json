@@ -373,7 +373,7 @@
 	"wikibase-api-nosuchrevid": "!!DO NOT TRANSLATE!! Page or entity with this revision id could not be found in the database",
 	"wikibase-api-no-such-claim": "!!DO NOT TRANSLATE!! Could not find such a claim on wikidata, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-entity": "!!DO NOT TRANSLATE!! Could not find such an entity, this could be to the user entering the wrong data",
-	"wikibase-api-no-such-entity-link": "!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data",
+	"wikibase-api-no-such-entity-link": "Error message for when the user provides a site and page name combination (usually referred to as a \"sitelink\") not contained in any item.",
 	"wikibase-api-no-such-reference": "!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-site": "!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-sitelink": "Could not find such a sitelink, this could be to the user entering the wrong data\n* $1 - the site id",

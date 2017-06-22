@@ -341,7 +341,7 @@
 	"wikibase-api-nosuchrevid": "Revision with ID not found.",
 	"wikibase-api-no-such-claim": "Could not find such a claim.",
 	"wikibase-api-no-such-entity": "Could not find such an entity.",
-	"wikibase-api-no-such-entity-link": "Could not find such an entity link.",
+	"wikibase-api-no-such-entity-link": "Could not find an item containing a sitelink to the provided site and page name.",
 	"wikibase-api-no-such-reference": "Could not find such a reference.",
 	"wikibase-api-no-such-site": "Could not find such a site.",
 	"wikibase-api-no-such-sitelink": "Could not find a sitelink to \"$1\" when trying to edit badges.",
