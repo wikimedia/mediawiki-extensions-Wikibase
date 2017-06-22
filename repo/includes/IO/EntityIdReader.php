@@ -50,10 +50,7 @@ class EntityIdReader implements EntityIdPager {
 		$this->exceptionHandler = new RethrowingExceptionHandler();
 	}
 
-	/**
-	 * @param ExceptionHandler $exceptionHandler
-	 */
-	public function setExceptionHandler( $exceptionHandler ) {
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 

@@ -121,10 +121,7 @@ class ChangeDispatcher {
 		return $this->messageReporter;
 	}
 
-	/**
-	 * @param MessageReporter $messageReporter
-	 */
-	public function setMessageReporter( $messageReporter ) {
+	public function setMessageReporter( MessageReporter $messageReporter ) {
 		$this->messageReporter = $messageReporter;
 	}
 
@@ -135,10 +132,7 @@ class ChangeDispatcher {
 		return $this->exceptionHandler;
 	}
 
-	/**
-	 * @param ExceptionHandler $exceptionHandler
-	 */
-	public function setExceptionHandler( $exceptionHandler ) {
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
