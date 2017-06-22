@@ -147,6 +147,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
+					// TODO: This should be a more specific error message instead.
 					'code' => 'param-illegal'
 				) )
 			),
@@ -159,6 +160,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
+					// TODO: This should be a more specific error message instead.
 					'code' => 'param-illegal'
 				) )
 			),

@@ -157,6 +157,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			if ( $baseRev > 0 ) {
 				$this->errorReporter->dieError(
 					'Cannot load specific revision ' . $baseRev . ' if no entity is defined.',
+					// TODO: This should be a more specific error message instead.
 					'param-illegal'
 				);
 			}

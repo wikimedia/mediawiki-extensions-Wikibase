@@ -217,14 +217,14 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => array( 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal',
+					'code' => 'illegal-entity-selector',
 				) )
 			),
 			array( //8
 				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal'
+					'code' => 'illegal-entity-selector'
 				) )
 			),
 		);

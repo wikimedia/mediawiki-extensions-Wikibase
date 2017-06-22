@@ -167,6 +167,7 @@ class GetClaims extends ApiBase {
 			if ( isset( $params['entity'] ) && $idString !== $params['entity'] ) {
 				$this->errorReporter->dieError(
 					'If both entity id and claim key are provided they need to point to the same entity',
+					// TODO: This should be a more specific error message instead.
 					'param-illegal'
 				);
 			}
