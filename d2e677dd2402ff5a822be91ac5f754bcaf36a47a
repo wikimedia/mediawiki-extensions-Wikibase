@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_773aa2c2",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-23T14:06:35Z",
+      "side": 1,
+      "message": "that\u0027s good point. it is false by default now but it should actually be true (we want people to use full id column for \"vanilla\" installs). I wanted to change this default after this patch, but maybe this should happen immediately before it?",
+      "parentUuid": "8e742343_f72692b4",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_94b14c90",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 1
