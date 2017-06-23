@@ -364,57 +364,100 @@ class DatabaseSchemaUpdater {
 			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
 		);
 
-		$updater->addExtensionUpdate( [
-			[ __CLASS__, 'populateTermsFullEntityId' ],
-			'wb_terms'
-		] );
+		$wikibaseRepoSettings = WikibaseRepo::getDefaultInstance()->getSettings();
+		if ( $wikibaseRepoSettings->getSetting( 'readFullEntityIdColumn' ) === true ) {
+			$this->populateTermFullEntityIdColumn( $updater, $db );
+
+			// TODO: drop old column as now longer needed
+		}
 	}
 
-	/**
-	 * @param DatabaseUpdater $dbUpdater
-	 * @param string $table
-	 */
-	public static function populateTermsFullEntityId( DatabaseUpdater $dbUpdater, $table ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$idParser = $wikibaseRepo->getEntityIdParser();
+	private function populateTermFullEntityIdColumn( DatabaseUpdater $updater, Database $db ) {
+		// XXX: this encodes internals of DatabaseUpdater::modifyField
+		$updateKey = implode( '-', [
+			'wb_terms',
+			'term_full_entity_id',
+			$this->getUpdateScriptPath( 'PopulateTermFullEntityId', $db->getType() )
+		] );
+		// Update already run in the past, just skip it
+		if ( $updater->updateRowExists( $updateKey ) ) {
+			return;
+		}
 
-		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
-			$wikibaseRepo->getEntityNamespaceLookup(),
-			$idParser
+		if ( $this->termsTableHasTermsForCustomEntityTypes( $db ) ) {
+			// TODO: how to signal an error here?
+			$updater->output(
+				"There are entries for entities other than items and properties in wb_terms which cannot be automatically updated.\n" .
+				"Run rebuildTermSqlIndex (consider --no-deduplication option) maintenance script to have terms of all entities updated.\n" .
+				"You have to set Wikibase 'readFullEntityIdColumn' setting to false until you've run the maintenance script " .
+				"and all terms have been updated.\n"
+			);
+			return;
+		}
+
+		if ( !$db->fieldExists( 'wb_terms', 'term_full_entity_id' ) ) {
+			// term_full_entity_id is not there, so assume it is fine to populate it once it will be added
+			$updater->modifyExtensionField(
+				'wb_terms',
+				'term_full_entity_id',
+				$this->getUpdateScriptPath( 'PopulateTermFullEntityId', $db->getType() )
+			);
+			return;
+		}
+
+		$hasNullFullIdFields = (bool)$db->selectField(
+			'wb_terms',
+			'1',
+			[ 'term_full_entity_id IS NULL' ],
+			__METHOD__
 		);
 
-		$termSqlIndex = new TermSqlIndex(
-			new StringNormalizer(),
-			$entityIdComposer = $wikibaseRepo->getEntityIdComposer(),
-			$idParser,
-			false,
-			'',
-			true
+		if ( !$hasNullFullIdFields ) {
+			$updater->output( "...term_full_entity_id already populated and complete.\n" );
+			return;
+		}
+
+		// TODO: also check for too big wb_terms table? What would be a size limit?
+		$updater->modifyExtensionField(
+			'wb_terms',
+			'term_full_entity_id',
+			$this->getUpdateScriptPath( 'PopulateTermFullEntityId', $db->getType() )
 		);
+	}
 
-		$termSqlIndex->setReadFullEntityIdColumn( false );
+	private function termsTableHasTermsForCustomEntityTypes( Database $db ) {
+		if ( $db->fieldExists( 'wb_terms', 'term_full_entity_id' ) ) {
+			return (bool)$db->selectField(
+				'wb_terms',
+				'1',
+				[
+					$db->makeList(
+						[
+							'term_entity_type != ' . $db->addQuotes( 'item' ),
+							'term_entity_type != ' . $db->addQuotes( 'property' ),
+						],
+						LIST_AND
+					),
+					'term_full_entity_id IS NULL'
+				],
+				__METHOD__
+			);
+		}
 
-		$progressReporter = new ObservableMessageReporter();
-		$progressReporter->registerReporterCallback( function( $message ) use ( $dbUpdater ) {
-			$dbUpdater->output( "\t$message\n" );
-		} );
-
-		$errorReporter = new ObservableMessageReporter();
-		$errorReporter->registerReporterCallback( function( $message ) {
-			wfLogWarning( $message );
-		} );
-
-		$builder = new TermSqlIndexBuilder(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$termSqlIndex,
-			$sqlEntityIdPagerFactory,
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getLocalEntityTypes(),
-			$progressReporter,
-			$errorReporter
+		return (bool)$db->selectField(
+			'wb_terms',
+			'1',
+			[
+				$db->makeList(
+					[
+						'term_entity_type != ' . $db->addQuotes( 'item' ),
+						'term_entity_type != ' . $db->addQuotes( 'property' ),
+					],
+					LIST_AND
+				)
+			],
+			__METHOD__
 		);
-
-		$builder->rebuild();
 	}
 
 }
