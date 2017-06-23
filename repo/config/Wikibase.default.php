@@ -232,5 +232,5 @@ return [
 	},
 
 	// Enable reading of term_full_entity_id column in wb_terms table.
-	'readFullEntityIdColumn' => false,
+	'readFullEntityIdColumn' => true,
 ];
