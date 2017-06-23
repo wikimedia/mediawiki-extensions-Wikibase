@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_94470c7c",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-23T13:20:16Z",
+      "side": 1,
+      "message": "I\u0027ve almost done this but is there a reasonable way to just run a query like those in sql files included here from a separate class? I mean, I would probably end up running Database::query( \u0027MEGA UPDATE\u0027 ) in this script and not match more.\nSomehow it felt bad. Is it OK to do like that?",
+      "parentUuid": "8e742343_94b14c90",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_b4b6c883",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2017-06-23T13:07:22Z",
       "side": 1,
       "message": "if we use LoggedUpdateMaintenance, i don\u0027t think this is needed",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_145c7c4d",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-23T13:20:16Z",
+      "side": 1,
+      "message": "It is also not super critical here I think. I\u0027ve added this to avoid running select when not necessary. But you\u0027re right, if this was separate class, selects will not be run any way.",
+      "parentUuid": "8e742343_b4b6c883",
       "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
