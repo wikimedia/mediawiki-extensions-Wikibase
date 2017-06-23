@@ -19,6 +19,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -84,6 +85,28 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		return $item;
 	}
 
+	private function getTestSiteLinkData() {
+		$badgeId = $this->getBadgeItem()->getId();
+
+		return [
+			'Q1' => [
+				new SiteLink( 'dewiki', 'Sauerstoff', [ $badgeId ] ),
+				new SiteLink( 'enwiki', 'Oxygen' ),
+				new SiteLink( 'commonswiki', 'Oxygen' ),
+			],
+		];
+	}
+
+	private function getTestSiteLinkDataInNotEnabledNamespace() {
+		return [
+			'Q7' => [
+				new SiteLink( 'dewiki', 'User:Foo' ),
+				new SiteLink( 'enwiki', 'User:Foo' ),
+				new SiteLink( 'commonswiki', 'User:Foo' ),
+			],
+		];
+	}
+
 	/**
 	 * @param ItemId $id
 	 * @param SiteLink[] $links
@@ -114,11 +137,9 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array $settings
-	 *
 	 * @return Settings
 	 */
-	private function newSettings( array $settings ) {
+	private function newSettings() {
 		$defaults = array(
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
@@ -128,35 +149,20 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			'otherProjectsLinksByDefault' => false,
 		);
 
-		return new SettingsArray( array_merge( $defaults, $settings ) );
+		return new SettingsArray( $defaults );
 	}
 
-	private function newParserOutputUpdateHookHandlers( array $settings = array() ) {
-		$badgeId = $this->getBadgeItem()->getId();
-
-		$links = array(
-			'Q1' => array(
-				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeId ) ),
-				new SiteLink( 'enwiki', 'Oxygen' ),
-				new SiteLink( 'commonswiki', 'Oxygen' ),
-			),
-			'Q7' => array(
-				new SiteLink( 'dewiki', 'User:Foo' ),
-				new SiteLink( 'enwiki', 'User:Foo' ),
-				new SiteLink( 'commonswiki', 'User:Foo' ),
-			),
-		);
-
-		$settings = $this->newSettings( $settings );
+	private function newParserOutputUpdateHookHandlers( array $siteLinkData ) {
+		$settings = $this->newSettings();
 
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 
-		$mockRepo = $this->getMockRepo( $links );
+		$mockRepo = $this->getMockRepo( $siteLinkData );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
+			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo, $siteLinkData ),
 			$mockRepo,
 			$mockRepo,
 			$settings->getSetting( 'siteGlobalID' )
@@ -195,9 +201,22 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
+	private function getEntityLookup( array $siteLinkData ) {
+		$lookup = new InMemoryEntityLookup();
+
+		foreach ( $siteLinkData as $itemId => $siteLinks ) {
+			$item = new Item( new ItemId( 'Q1' ) );
+			$item->setSiteLinkList( new SiteLinkList( $siteLinks ) );
+			$lookup->addEntity( $item );
+		}
+
+		return $lookup;
+	}
+
 	private function getOtherProjectsSidebarGeneratorFactory(
 		SettingsArray $settings,
-		SiteLinkLookup $siteLinkLookup
+		SiteLinkLookup $siteLinkLookup,
+		array $siteLinkData
 	) {
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
 			$this->getMock( LabelDescriptionLookup::class ),
@@ -209,6 +228,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$settings,
 			$siteLinkLookup,
 			$this->getSiteLookup(),
+			$this->getEntityLookup( $siteLinkData ),
 			$sidebarLinkBadgeDisplay
 		);
 	}
@@ -303,7 +323,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		array $expectedBadges = null
 	) {
 		$parserOutput = $this->newParserOutput( $pagePropsBefore, array() );
-		$handler = $this->newParserOutputUpdateHookHandlers();
+		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
@@ -328,23 +348,28 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$this->assertSame( $expectedBadges, $actualBadges );
 	}
 
-	public function parserAfterParseProvider_noItem() {
-		return array(
-			'no-item' => array(
-				Title::makeTitle( NS_MAIN, 'Plutonium' ),
-			),
-			'ignored-namespace' => array(
-				Title::makeTitle( NS_USER, 'Foo' ),
-			),
-		);
+	public function testDoContentAlterParserOutput_sitelinkOfNoItem() {
+		$title = Title::makeTitle( NS_MAIN, 'Plutonium' );
+
+		$parserOutput = $this->newParserOutput( array(), array() );
+		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
+
+		$handler->doContentAlterParserOutput( $title, $parserOutput );
+
+		$this->assertFalse( $parserOutput->getProperty( 'wikibase_item' ) );
+
+		$this->assertEmpty( $parserOutput->getLanguageLinks() );
+		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
+
+		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
-	/**
-	 * @dataProvider parserAfterParseProvider_noItem
-	 */
-	public function testDoContentAlterParserOutput_noItem( Title $title ) {
+	public function testDoContentAlterParserOutput_sitelinkInNotWikibaseEnabledNamespace() {
+		$title = Title::makeTitle( NS_USER, 'Foo' );
+
 		$parserOutput = $this->newParserOutput( array(), array() );
-		$handler = $this->newParserOutputUpdateHookHandlers();
+		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkDataInNotEnabledNamespace() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
