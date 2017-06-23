@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_148f9cd2",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-23T13:07:22Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be writeFullEntityIdColumn?",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_94b14c90",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-23T13:07:22Z",
+      "side": 1,
+      "message": "think this should be split to it\u0027s own class and extend LoggedUpdateMaintenance",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_b4b6c883",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-23T13:07:22Z",
+      "side": 1,
+      "message": "if we use LoggedUpdateMaintenance, i don\u0027t think this is needed",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
