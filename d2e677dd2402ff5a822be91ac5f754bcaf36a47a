@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_5429a499",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-23T13:23:19Z",
+      "side": 1,
+      "message": "I believe it shouldn\u0027t. My logic was: settings say read from full id column, that means 1) there should be data there for all rows, 2) I don\u0027t care about the old column, and I am even fine with dropping it.\nIf so, this script should make sure there actually is data for all rows before user starts to do anything else.\n\nwriteFullEntityIdColumn only means there is a column there, when writing term data, just put it to the new column (too).\n\nBut those flags are confusing and I have to think what they mean every time.",
+      "parentUuid": "8e742343_148f9cd2",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_94b14c90",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 1
