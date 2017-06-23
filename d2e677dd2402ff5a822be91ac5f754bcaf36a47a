@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e742343_1751dedd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-23T14:20:34Z",
+      "side": 1,
+      "message": "I meant \"that wb_terms is not too big\"",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_148f9cd2",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 1
