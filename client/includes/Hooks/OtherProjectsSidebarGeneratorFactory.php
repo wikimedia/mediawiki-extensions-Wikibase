@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use SiteLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
 
@@ -33,6 +34,11 @@ class OtherProjectsSidebarGeneratorFactory {
 	private $siteLookup;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var SidebarLinkBadgeDisplay
 	 */
 	private $sidebarLinkBadgeDisplay;
@@ -41,11 +47,13 @@ class OtherProjectsSidebarGeneratorFactory {
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup,
 		SiteLookup $siteLookup,
+		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
 		$this->settings = $settings;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLookup = $siteLookup;
+		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 	}
 
@@ -68,6 +76,7 @@ class OtherProjectsSidebarGeneratorFactory {
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->siteLinkLookup,
 			$this->siteLookup,
+			$this->entityLookup,
 			$this->sidebarLinkBadgeDisplay,
 			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
