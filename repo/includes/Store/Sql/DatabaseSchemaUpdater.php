@@ -4,21 +4,19 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
 use HashBagOStuff;
-use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\RebuildTermsSearchKey;
+use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
 use Wikibase\Repo\Maintenance\RebuildEntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\StringNormalizer;
 use Wikimedia\Rdbms\Database;
 
 /**
@@ -364,57 +362,13 @@ class DatabaseSchemaUpdater {
 			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
 		);
 
-		$updater->addExtensionUpdate( [
-			[ __CLASS__, 'populateTermsFullEntityId' ],
-			'wb_terms'
-		] );
-	}
+		$wikibaseRepoSettings = WikibaseRepo::getDefaultInstance()->getSettings();
+		if ( $wikibaseRepoSettings->getSetting( 'writeFullEntityIdColumn' ) === true &&
+			$wikibaseRepoSettings->getSetting( 'readFullEntityIdColumn' ) === true ) {
+			$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 
-	/**
-	 * @param DatabaseUpdater $dbUpdater
-	 * @param string $table
-	 */
-	public static function populateTermsFullEntityId( DatabaseUpdater $dbUpdater, $table ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$idParser = $wikibaseRepo->getEntityIdParser();
-
-		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
-			$wikibaseRepo->getEntityNamespaceLookup(),
-			$idParser
-		);
-
-		$termSqlIndex = new TermSqlIndex(
-			new StringNormalizer(),
-			$entityIdComposer = $wikibaseRepo->getEntityIdComposer(),
-			$idParser,
-			false,
-			'',
-			true
-		);
-
-		$termSqlIndex->setReadFullEntityIdColumn( false );
-
-		$progressReporter = new ObservableMessageReporter();
-		$progressReporter->registerReporterCallback( function( $message ) use ( $dbUpdater ) {
-			$dbUpdater->output( "\t$message\n" );
-		} );
-
-		$errorReporter = new ObservableMessageReporter();
-		$errorReporter->registerReporterCallback( function( $message ) {
-			wfLogWarning( $message );
-		} );
-
-		$builder = new TermSqlIndexBuilder(
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$termSqlIndex,
-			$sqlEntityIdPagerFactory,
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getLocalEntityTypes(),
-			$progressReporter,
-			$errorReporter
-		);
-
-		$builder->rebuild();
+			// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
+		}
 	}
 
 }
