@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use LockManager;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * SQL-based implementation of ChangeDispatchCoordinator when there is a
@@ -23,23 +24,28 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 
 	/**
 	 * @param LockManager $lockManager
+	 * @param LBFactory $LBFactory
 	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
 	 */
-	public function __construct( LockManager $lockManager, $repoDB, $repoSiteId ) {
+	public function __construct(
+		LockManager $lockManager,
+		LBFactory $LBFactory,
+		$repoDB,
+		$repoSiteId
+	) {
 		$this->lockManager = $lockManager;
-		parent::__construct( $repoDB, $repoSiteId );
+		parent::__construct( $repoDB, $repoSiteId, $LBFactory );
 	}
 
 	/**
 	 * @see SqlChangeDispatchCoordinator::engageClientLock()
 	 *
-	 * @param Database $db The database connection to work on.
 	 * @param string $lock The name of the lock to engage.
 	 *
 	 * @return bool whether the lock was engaged successfully.
 	 */
-	protected function engageClientLock( Database $db, $lock ) {
+	protected function engageClientLock( $lock ) {
 		return $this->lockManager->lock( [ $lock ] )->isOK();
 	}
 
