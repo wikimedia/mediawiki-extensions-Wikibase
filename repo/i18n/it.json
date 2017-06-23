@@ -409,6 +409,8 @@
 	"apihelp-wbgetentities-example-4": "Ottieni entità con ID <samp>Q42</samp> con tutti gli attributi disponibili in lingua inglese",
 	"apihelp-wbgetentities-example-5": "Ottieni entità con ID <samp>Q42</samp> con tutti gli attributi disponibili in tutte le lingue di riserva disponibili per la lingua <var>ii</var>",
 	"apihelp-wbgetentities-example-6": "Ottieni entità con ID <samp>Q42</samp> mostrando tutte le etichette in tutte le lingue disponibili",
+	"apihelp-wblinktitles-description": "Associa due pagine su due wiki diversi con un elemento Wikibase.",
+	"apihelp-wblinktitles-summary": "Associa due pagine su due wiki diversi con un elemento Wikibase.",
 	"apihelp-wblinktitles-param-tosite": "Un identificatore per il sito in cui risiede la pagina.\nUtilizza insieme a <var>totitle</var> per creare un sitelink completo.",
 	"apihelp-wblinktitles-param-totitle": "Titolo della pagina da associare.\nUtilizza insieme a <var>tosite</var> per creare un sitelink completo.",
 	"apihelp-wblinktitles-param-fromsite": "Un identificatore per il sito in cui risiede la pagina.\nUtilizza insieme a <var>fromtitle</var> per creare un sitelink completo.",
@@ -483,9 +485,9 @@
 	"apihelp-wbsetsitelink-param-site": "Un identificatore per il sito in cui risiede la pagina.\nUtilizza insieme a <var>title</var> per creare un sitelink completo.",
 	"apihelp-wbsetsitelink-param-title": "Titolo della pagina da associare.\nUtilizza insieme a <var>site</var> per creare un sitelink completo.",
 	"apihelp-wbsetsitelink-param-summary": "Riepilogo per la modifica.\nSarà preceduto da un commento generato automaticamente. Il limite di lunghezza del commento automatico, insieme con il riassunto, è di 260 caratteri. Siate consapevoli del fatto che tutto ciò che supera tale limite verrà tagliato.",
-	"apihelp-wbsetsitelink-example-1": "Aggiunge un sitelink alla voce in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste",
-	"apihelp-wbsetsitelink-example-2": "Aggiunge un sitelink alla voce in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste. Inoltre aggiunge \"Loves Oxygen\" all'oggetto della modifica.",
-	"apihelp-wbsetsitelink-example-3": "Aggiunge un sitelink alla voce in tedesco \"Wasserstoff\", all'elemento che è collegato alla voce in inglese \"Hydrogen\", se il sitelink non esiste",
+	"apihelp-wbsetsitelink-example-1": "Aggiunge un sitelink alla pagina in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste",
+	"apihelp-wbsetsitelink-example-2": "Aggiunge un sitelink alla pagina in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste. Inoltre aggiunge \"Loves Oxygen\" all'oggetto della modifica.",
+	"apihelp-wbsetsitelink-example-3": "Aggiunge un sitelink alla pagina in tedesco \"Wasserstoff\", all'elemento che è collegato alla pagina in inglese \"Hydrogen\", se il sitelink non esiste",
 	"apihelp-wbsetsitelink-example-4": "Rimuove il sitelink tedesco dall'elemento",
-	"apihelp-wbsetsitelink-example-5": "Aggiunge un sitelink alla voce in polacco \"Wodór\", all'elemento che è collegato alla voce in inglese \"Hydrogen\", con un distintivo che punta all'elemento con ID \"Q149\""
+	"apihelp-wbsetsitelink-example-5": "Aggiunge un sitelink alla pagina in polacco \"Wodór\", all'elemento che è collegato alla pagina in inglese \"Hydrogen\", con un distintivo che punta all'elemento con ID \"Q149\""
 }

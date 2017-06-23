@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Amara-Amaziɣ",
-			"ⵕⴰⵊⵉ"
+			"ⵕⴰⵊⵉ",
+			"YesIn"
 		]
 	},
 	"wikibase-editlinks": "ⵙⵏⴼⵍ ⵉⵙⵖⵓⵏⴻⵏ",
 	"wikibase-editlinkstitle": "ⵙⵏⴼⵍ ⵉⵙⵖⵓⵏ ⵏ ⵜⵓⵜⵍⴰⵢⵉⵏ ⵏ ⴱⵕⵕⴰ",
 	"wikibase-rc-hide-wikidata-hide": "ⵙⵙⵏⵜⵍ",
-	"wikibase-rc-hide-wikidata-show": "Sken",
-	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-hide-wikidata-show": "ⵙⵎⴰⵍ",
+	"wikibase-rc-wikibase-edit-letter": "ⴷ",
 	"wikibase-rc-wikibase-edit-title": "ⴰⵙⵏⴼⵍ ⵏ {{WBREPONAME}}",
 	"wikibase-otherprojects": "G isentayen nniḍen"
 }
