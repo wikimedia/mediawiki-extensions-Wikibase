@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_578526b0",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-23T16:44:17Z",
+      "side": 1,
+      "message": "If you comment this line tests still pass.\nI would assume that this entity is not needed, but I\u0027ve failed to understand what these tests actually test.\nIf you understand those well enough it would be nice to improve their readability.",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 31
+      },
+      "revId": "b01f3964cfee5f32a9f62300d8e237781093bb9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
