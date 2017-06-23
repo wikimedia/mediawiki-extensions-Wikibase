@@ -19,6 +19,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -140,11 +141,6 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				new SiteLink( 'enwiki', 'Oxygen' ),
 				new SiteLink( 'commonswiki', 'Oxygen' ),
 			),
-			'Q7' => array(
-				new SiteLink( 'dewiki', 'User:Foo' ),
-				new SiteLink( 'enwiki', 'User:Foo' ),
-				new SiteLink( 'commonswiki', 'User:Foo' ),
-			),
 		);
 
 		$settings = $this->newSettings( $settings );
@@ -195,6 +191,19 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
+	private function getEntityLookup() {
+		$item1 = new Item( new ItemId( 'Q1' ) );
+		$item1->setSiteLinkList( new SiteLinkList( [
+			new SiteLink( 'dewiki', 'Sauerstoff', [ $this->getBadgeItem()->getId() ] ),
+			new SiteLink( 'enwiki', 'Oxygen' ),
+			new SiteLink( 'commonswiki', 'Oxygen' ),
+		] ) );
+
+		$lookup = new InMemoryEntityLookup();
+		$lookup->addEntity( $item1 );
+		return $lookup;
+	}
+
 	private function getOtherProjectsSidebarGeneratorFactory(
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup
@@ -209,6 +218,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$settings,
 			$siteLinkLookup,
 			$this->getSiteLookup(),
+			$this->getEntityLookup(),
 			$sidebarLinkBadgeDisplay
 		);
 	}

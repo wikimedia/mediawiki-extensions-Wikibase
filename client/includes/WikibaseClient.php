@@ -1051,6 +1051,7 @@ final class WikibaseClient {
 			$this->settings,
 			$this->getStore()->getSiteLinkLookup(),
 			$this->siteLookup,
+			$this->getStore()->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay()
 		);
 	}

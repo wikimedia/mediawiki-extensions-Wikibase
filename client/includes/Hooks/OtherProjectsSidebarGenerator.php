@@ -6,6 +6,8 @@ use Hooks;
 use Site;
 use SiteLookup;
 use Title;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -35,6 +37,11 @@ class OtherProjectsSidebarGenerator {
 	private $siteLookup;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var SidebarLinkBadgeDisplay
 	 */
 	private $sidebarLinkBadgeDisplay;
@@ -48,6 +55,7 @@ class OtherProjectsSidebarGenerator {
 	 * @param string $localSiteId
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLookup $siteLookup
+	 * @param EntityLookup $entityLookup
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 * @param string[] $siteIdsToOutput
 	 */
@@ -55,12 +63,14 @@ class OtherProjectsSidebarGenerator {
 		$localSiteId,
 		SiteLinkLookup $siteLinkLookup,
 		SiteLookup $siteLookup,
+		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
 		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLookup = $siteLookup;
+		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 		$this->siteIdsToOutput = $siteIdsToOutput;
 	}
@@ -202,7 +212,13 @@ class OtherProjectsSidebarGenerator {
 	 * @return SiteLink[]
 	 */
 	private function getSiteLinks( ItemId $itemId ) {
-		return $this->siteLinkLookup->getSiteLinksForItem( $itemId );
+		/** @var Item $item */
+		$item = $this->entityLookup->getEntity( $itemId );
+		if ( $item === null ) {
+			return [];
+		}
+
+		return $item->getSiteLinkList()->toArray();
 	}
 
 	/**
