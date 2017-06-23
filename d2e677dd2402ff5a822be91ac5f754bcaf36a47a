@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_b7fb2ade",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-06-23T14:15:17Z",
+      "side": 1,
+      "message": "or maybe just always populate the column? it should have been added already (just above)",
+      "parentUuid": "8e742343_773aa2c2",
+      "revId": "d2e677dd2402ff5a822be91ac5f754bcaf36a47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_94b14c90",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 1
