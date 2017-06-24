@@ -462,6 +462,7 @@
 	"apihelp-wblinktitles-param-bot": "Deze bewerking markeren als gedaan door een robot. Deze URL-markering zal alleen in acht worden genomen indien de gebruiker behoort tot de groep \"bot\".",
 	"apihelp-wblinktitles-example-1": "Voeg een koppeling \"Hydrogen\" van de Engelstalige pagina toe aan \"Wasserstoff\" op de Duitstalige pagina.",
 	"apihelp-wbmergeitems-description": "Meerdere items samenvoegen.",
+	"apihelp-wbmergeitems-summary": "Voegt meerdere items samen.",
 	"apihelp-wbmergeitems-param-fromid": "Het ID waarvan samen te voegen",
 	"apihelp-wbmergeitems-param-toid": "Het ID waarnaar samen te voegen",
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Reeks van elementen van het item waarvoor conflicten worden genegeerd, kan alleen waarden bevatten voor \"<var>beschrijving</var>\", \"<var>sitekoppeling</var>\" en \"<var>verklaring</var>\"",

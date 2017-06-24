@@ -14,11 +14,13 @@
 			"SPQRobin",
 			"McDutchie",
 			"Mbch331",
-			"Xxmarijnw"
+			"Xxmarijnw",
+			"Mainframe98"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
 	"tooltip-t-wikibase": "Koppeling naar item in verbonden gegevensrepository",
+	"apihelp-query+wbentityusage-param-prop": "Eigenschappen om aan het resultaat toe te voegen.",
 	"apihelp-query+pageterms-example-label-en": "Labels en aliassen van de pagina 'London' in het Engels opvragen.",
 	"apihelp-query+pageterms-example-item": "Labels en aliassen voor het item Q84 opvragen.",
 	"wikibase-after-page-move": "U kunt ook het gekoppelde item van {{WBREPONAME}} [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.",
@@ -70,6 +72,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)",
 	"wikibase-unconnectedpages-submit": "Pagina's weergeven",
 	"pageswithbadges": "Pagina's met badges",
+	"pageswithbadges-summary": "Deze pagina toont een lijst van badges (bijv. goed artikel of een uitgelicht artikel). De lijst is aflopend gesorteerd op pagina ID, zodat nieuwere pagina's als eerste in de lijst voorkomen.",
 	"wikibase-pageswithbadges-invalid-id": "$1 is geen geldig item-ID",
 	"wikibase-pageswithbadges-legend": "Lijst van pagina's met een opgegeven badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
