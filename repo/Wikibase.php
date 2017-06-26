@@ -121,18 +121,21 @@ call_user_func( function() {
 	$wgGroupPermissions['*']['property-term'] = true;
 	$wgGroupPermissions['*']['item-merge'] = true;
 	$wgGroupPermissions['*']['item-redirect'] = true;
+	$wgGroupPermissions['*']['item-create'] = true;
 	$wgGroupPermissions['*']['property-create'] = true;
 
 	$wgAvailableRights[] = 'item-term';
 	$wgAvailableRights[] = 'property-term';
 	$wgAvailableRights[] = 'item-merge';
 	$wgAvailableRights[] = 'item-redirect';
+	$wgAvailableRights[] = 'item-create';
 	$wgAvailableRights[] = 'property-create';
 
 	$wgGrantPermissions['editpage']['item-term'] = true;
 	$wgGrantPermissions['editpage']['item-redirect'] = true;
 	$wgGrantPermissions['editpage']['item-merge'] = true;
 	$wgGrantPermissions['editpage']['property-term'] = true;
+	$wgGrantPermissions['createeditmovepage']['item-create'] = true;
 	$wgGrantPermissions['createeditmovepage']['property-create'] = true;
 
 	// i18n
