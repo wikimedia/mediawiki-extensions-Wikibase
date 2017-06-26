@@ -133,6 +133,7 @@ call_user_func( function() {
 	$wgGrantPermissions['editpage']['item-redirect'] = true;
 	$wgGrantPermissions['editpage']['item-merge'] = true;
 	$wgGrantPermissions['editpage']['property-term'] = true;
+	$wgGrantPermissions['createeditmovepage']['item-create'] = true;
 	$wgGrantPermissions['createeditmovepage']['property-create'] = true;
 
 	// i18n
