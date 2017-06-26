@@ -9,7 +9,7 @@
 			"Ans"
 		]
 	},
-	"tooltip-t-wikibase": "ลิงก์ไปยังหน้าสารสนเทศในคลังเชื่อมต่อข้อมูล",
+	"tooltip-t-wikibase": "ลิงก์ไปยังหน้าสารสนเทศในคลังของการเชื่อมต่อข้อมูล",
 	"wikibase-comment-update": "{{WBREPONAME}} ไอเท็มถูกเปลี่ยนแปลง",
 	"wikibase-dataitem": "สารสนเทศใน {{WBREPONAME}}",
 	"wikibase-editlinks": "แก้ไขลิงก์",
