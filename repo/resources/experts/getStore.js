@@ -52,6 +52,10 @@
 			'wikibase-property': wb.experts.Property
 		};
 
+		if ( typeof mediaWiki === 'object' && typeof mediaWiki.hook === 'function' ) {
+			mediaWiki.hook( 'wikibase.experts' ).fire( dataTypeIdToExpertConstructor );
+		}
+
 		for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
 			var dataType = dataTypeStore.getDataType( dataTypeId );
 			if ( dataType ) {
