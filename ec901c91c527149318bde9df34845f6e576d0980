@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_89584a8e",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-26T10:24:40Z",
+      "side": 1,
+      "message": "This is where the removed title is used. This test makes sure no usage information is created, even if the title exists and is linked to an item. This test will succeed no matter what, either because the title does not exist, or because the namespace is not enabled.",
+      "range": {
+        "startLine": 347,
+        "startChar": 22,
+        "endLine": 347,
+        "endChar": 36
+      },
+      "revId": "ec901c91c527149318bde9df34845f6e576d0980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
