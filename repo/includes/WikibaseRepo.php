@@ -85,6 +85,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
@@ -1981,6 +1982,10 @@ class WikibaseRepo {
 	 */
 	public function getConceptBaseUris() {
 		return $this->repositoryDefinitions->getConceptBaseUris();
+	}
+
+	public function getPropertyValueExpertsModule() {
+		return new PropertyValueExpertsModule($this->getDataTypeDefinitions());
 	}
 
 }

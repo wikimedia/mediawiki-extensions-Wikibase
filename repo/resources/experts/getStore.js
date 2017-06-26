@@ -5,6 +5,11 @@
 ( function ( wb, vv, dv ) {
 	'use strict';
 
+	/**
+	 * @type {object} Map from property type to expert module name
+	 */
+	var registeredExperts = require( 'wikibase.experts.modules' );
+
 	var MODULE = wb.experts;
 
 	/**
@@ -41,16 +46,7 @@
 		// Register experts for data types defined in Wikibase. Since those data types are defined by a
 		// setting, it needs to be checked whether they are actually defined.
 
-		var dataTypeIdToExpertConstructor = {
-			commonsMedia: vv.experts.CommonsMediaType,
-			'geo-shape': vv.experts.GeoShape,
-			'tabular-data': vv.experts.TabularData,
-			'external-id': vv.experts.StringValue,
-			monolingualtext: vv.experts.MonolingualText,
-			url: vv.experts.StringValue,
-			'wikibase-item': wb.experts.Item,
-			'wikibase-property': wb.experts.Property
-		};
+		var dataTypeIdToExpertConstructor = resolveExpertModules( registeredExperts );
 
 		for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
 			var dataType = dataTypeStore.getDataType( dataTypeId );
@@ -65,5 +61,16 @@
 		return expertStore;
 
 	};
+
+	function resolveExpertModules( registeredExperts ) {
+		var constructors = {};
+		for ( var dataType in registeredExperts ) {
+			if ( registeredExperts.hasOwnProperty( dataType ) ) {
+				constructors[ dataType ] = require( registeredExperts[ dataType ] );
+			}
+		}
+
+		return constructors;
+	}
 
 }( wikibase, jQuery.valueview, dataValues ) );

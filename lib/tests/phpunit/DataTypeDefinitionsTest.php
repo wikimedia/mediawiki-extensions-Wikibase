@@ -154,4 +154,41 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function test_getExpertModules_GivenPropertyType_ReturnsMapFromTypeIdToExpertModule() {
+		$definitions = [
+			'PT:some-type' => [
+				'expert-module' => 'some-expert-module',
+			]
+		];
+		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
+
+		$this->assertEquals(
+			[ 'some-type' => 'some-expert-module' ],
+			$dataTypeDefinitions->getExpertModules()
+		);
+	}
+
+	public function test_getExpertModules_GivenPropertyTypeWithoutExpertModule_ThrowsAnException() {
+		$definitions = [
+			'PT:some-type' => [
+				'expert-module' => '',
+			]
+		];
+		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
+
+		$this->setExpectedException( \Exception::class );
+		$dataTypeDefinitions->getExpertModules();
+	}
+
+	public function test_getExpertModules_GivenValueTypeWithExpertModuleProperty_IgnoresIt() {
+		$definitions = [
+			'VT:some-type' => [
+				'expert-module' => '',
+			]
+		];
+		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
+
+		$this->assertEquals( [], $dataTypeDefinitions->getExpertModules() );
+	}
+
 }
