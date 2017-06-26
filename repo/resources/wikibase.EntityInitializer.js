@@ -9,11 +9,12 @@
 
 	/**
 	 * Entity initializer.
-	 * Deserializes the entity passed to JavaScript via mw.config variable.
+	 * Deserializes the entity passed to JavaScript via mw.config variable or
+	 * as entity object promise.
 	 *
 	 * @constructor
 	 *
-	 * @param {string} arg
+	 * @param {string|Thenable} arg Config variable name or entity object promise
 	 *
 	 * @throws {Error} if required parameter is not specified properly.
 	 */
@@ -22,10 +23,10 @@
 		if ( typeof arg === 'string' ) {
 			entityPromise = getFromConfig( arg );
 		} else if ( isThenable( arg ) ) {
-			throw new Error( "Not implemented" );
+			entityPromise = arg;
 		} else {
 			throw new Error(
-				'Config variable name needs to be specified'
+				'Config variable name or entity promise needs to be specified'
 			);
 		}
 
