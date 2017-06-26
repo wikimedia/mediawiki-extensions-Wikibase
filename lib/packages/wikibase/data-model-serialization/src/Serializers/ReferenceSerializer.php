@@ -23,9 +23,6 @@ class ReferenceSerializer implements DispatchableSerializer {
 	 */
 	private $snaksSerializer;
 
-	/**
-	 * @param Serializer $snaksSerializer
-	 */
 	public function __construct( Serializer $snaksSerializer ) {
 		$this->snaksSerializer = $snaksSerializer;
 	}

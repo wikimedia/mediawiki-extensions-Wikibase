@@ -21,9 +21,6 @@ class ReferenceListSerializer implements DispatchableSerializer {
 	 */
 	private $referenceSerializer;
 
-	/**
-	 * @param Serializer $referenceSerializer
-	 */
 	public function __construct( Serializer $referenceSerializer ) {
 		$this->referenceSerializer = $referenceSerializer;
 	}

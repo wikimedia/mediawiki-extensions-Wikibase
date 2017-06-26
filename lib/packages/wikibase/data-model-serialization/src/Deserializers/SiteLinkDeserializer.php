@@ -22,9 +22,6 @@ class SiteLinkDeserializer implements Deserializer {
 	 */
 	private $entityIdDeserializer;
 
-	/**
-	 * @param Deserializer $entityIdDeserializer
-	 */
 	public function __construct( Deserializer $entityIdDeserializer ) {
 		$this->entityIdDeserializer = $entityIdDeserializer;
 	}

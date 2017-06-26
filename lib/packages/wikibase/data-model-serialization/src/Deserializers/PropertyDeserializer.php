@@ -40,12 +40,6 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 	 */
 	private $statementListDeserializer;
 
-	/**
-	 * @param Deserializer $entityIdDeserializer
-	 * @param Deserializer $termListDeserializer
-	 * @param Deserializer $aliasGroupListDeserializer
-	 * @param Deserializer $statementListDeserializer
-	 */
 	public function __construct(
 		Deserializer $entityIdDeserializer,
 		Deserializer $termListDeserializer,
