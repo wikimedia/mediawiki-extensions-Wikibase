@@ -19,7 +19,13 @@ $modules = array(
 			'jquery.wikibase.listview',
 			'wikibase.tests',
 		)
-	)
+	),
+	'wikibase.experts.modules.tests' => $moduleBase + [
+		'scripts' => 'experts/wikibase.experts.modules.tests.js',
+		'dependencies' => [
+			'wikibase.experts.modules'
+		]
+	],
 );
 
 return array_merge(

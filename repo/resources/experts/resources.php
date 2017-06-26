@@ -30,6 +30,7 @@ return call_user_func( function() {
 				'getStore.js',
 			),
 			'dependencies' => array(
+				'wikibase.experts.modules',
 				'dataValues.values',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.CommonsMediaType',
