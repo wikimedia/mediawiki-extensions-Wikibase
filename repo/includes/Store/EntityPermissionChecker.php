@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
+use InvalidArgumentException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -14,6 +15,19 @@ use Wikibase\DataModel\Entity\EntityId;
  * @author Daniel Kinzler
  */
 interface EntityPermissionChecker {
+
+	// TODO: Rename to ACTION_...
+	const PERMISSION_READ = 'read';
+
+	const PERMISSION_EDIT = 'edit';
+
+	const PERMISSION_CREATE = 'create';
+
+	const PERMISSION_EDIT_TERMS = 'term';
+
+	const PERMISSION_MERGE = 'merge';
+
+	const PERMISSION_REDIRECT = 'redirect';
 
 	/**
 	 * Check whether the given user has the given permission on an entity.
@@ -29,6 +43,8 @@ interface EntityPermissionChecker {
 	 * would be slow (e.g. checking for cascading protection).
 	 * This is intended as an optimization for non-critical checks,
 	 * e.g. for showing or hiding UI elements.
+	 *
+	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
@@ -46,6 +62,8 @@ interface EntityPermissionChecker {
 	 * would be slow (e.g. checking for cascading protection).
 	 * This is intended as an optimization for non-critical checks,
 	 * e.g. for showing or hiding UI elements.
+	 *
+	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
@@ -66,6 +84,8 @@ interface EntityPermissionChecker {
 	 * would be slow (e.g. checking for cascading protection).
 	 * This is intended as an optimization for non-critical checks,
 	 * e.g. for showing or hiding UI elements.
+	 *
+	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
