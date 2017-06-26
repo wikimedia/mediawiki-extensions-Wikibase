@@ -103,9 +103,6 @@ class OutputPageJsConfigHookHandler {
 		return true;
 	}
 
-	/**
-	 * @param OutputPage &$out
-	 */
 	private function handle( OutputPage $out ) {
 		$outputConfigVars = $this->buildConfigVars( $out );
 
