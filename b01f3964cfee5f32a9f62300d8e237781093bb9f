@@ -22,6 +22,30 @@
       "revId": "b01f3964cfee5f32a9f62300d8e237781093bb9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_4e826899",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-26T07:53:23Z",
+      "side": 1,
+      "message": "You\u0027re right, does not seem needed.\nI\u0027ve automatically put this here, as newParserOutputUpdateHookHandlers was adding those site links on this item. But looking at tests it is never used, if I managed to read this code correct. Maybe it was used in the past and did not get removed or so.\n\nI\u0027ve removed it now.",
+      "parentUuid": "8e742343_578526b0",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 31
+      },
+      "revId": "b01f3964cfee5f32a9f62300d8e237781093bb9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
