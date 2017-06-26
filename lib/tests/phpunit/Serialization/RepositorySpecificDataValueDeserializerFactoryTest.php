@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Serialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\IllegalValueException;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -91,7 +91,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 
 		$deserializer = $factory->getDeserializer( 'foo' );
 
-		$this->setExpectedException( IllegalValueException::class );
+		$this->setExpectedException( DeserializationException::class );
 
 		$deserializer->deserialize( [ 'type' => 'wikibase-entityid', 'value' => [ 'entity-type' => 'item', 'numeric-id' => 3 ] ] );
 	}
