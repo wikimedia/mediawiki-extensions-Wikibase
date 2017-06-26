@@ -54,9 +54,6 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 		$this->dedupeBag = new NullDedupeBag();
 	}
 
-	/**
-	 * @param DedupeBag $dedupeBag
-	 */
 	public function setDedupeBag( DedupeBag $dedupeBag ) {
 		$this->dedupeBag = $dedupeBag;
 	}

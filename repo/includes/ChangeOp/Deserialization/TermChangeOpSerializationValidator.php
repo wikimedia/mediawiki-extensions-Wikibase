@@ -17,9 +17,6 @@ class TermChangeOpSerializationValidator {
 	 */
 	private $termsLanguages;
 
-	/**
-	 * @param ContentLanguages $termsLanguages
-	 */
 	public function __construct( ContentLanguages $termsLanguages ) {
 		$this->termsLanguages = $termsLanguages;
 	}

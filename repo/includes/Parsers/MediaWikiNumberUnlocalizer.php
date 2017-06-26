@@ -22,9 +22,6 @@ class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 	 */
 	private $language;
 
-	/**
-	 * @param Language $language
-	 */
 	public function __construct( Language $language ) {
 		$this->language = $language;
 	}

@@ -22,10 +22,6 @@ class FallbackPropertyOrderProvider implements PropertyOrderProvider {
 	 */
 	private $secondaryProvider;
 
-	/**
-	 * @param PropertyOrderProvider $primaryProvider
-	 * @param PropertyOrderProvider $secondaryProvider
-	 */
 	public function __construct(
 		PropertyOrderProvider $primaryProvider,
 		PropertyOrderProvider $secondaryProvider

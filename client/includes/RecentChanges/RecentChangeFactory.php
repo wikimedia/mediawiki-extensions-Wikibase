@@ -34,10 +34,6 @@ class RecentChangeFactory {
 	 */
 	private $siteLinkCommentCreator;
 
-	/**
-	 * @param Language $language
-	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
-	 */
 	public function __construct( Language $language, SiteLinkCommentCreator $siteLinkCommentCreator ) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;

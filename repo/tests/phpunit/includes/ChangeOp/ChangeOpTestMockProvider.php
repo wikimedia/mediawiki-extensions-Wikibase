@@ -51,9 +51,6 @@ class ChangeOpTestMockProvider {
 	 */
 	private $mockBuilderFactory;
 
-	/**
-	 * @param PHPUnit_Framework_TestCase $mockBuilderFactory
-	 */
 	public function __construct( PHPUnit_Framework_TestCase $mockBuilderFactory ) {
 		$this->mockBuilderFactory = $mockBuilderFactory;
 	}

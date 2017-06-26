@@ -319,9 +319,6 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	private function buildResult( EntityDocument $entity ) {
 		$builder = $this->getResultBuilder();
 

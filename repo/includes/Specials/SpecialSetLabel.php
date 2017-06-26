@@ -19,13 +19,6 @@ use Wikibase\SummaryFormatter;
  */
 class SpecialSetLabel extends SpecialModifyTerm {
 
-	/**
-	 * @param SpecialPageCopyrightView $copyrightView
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
-	 */
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,

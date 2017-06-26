@@ -34,11 +34,6 @@ class ChangeLineFormatter {
 	 */
 	private $repoLinker;
 
-	/**
-	 * @param User $user
-	 * @param Language $lang
-	 * @param RepoLinker $repoLinker
-	 */
 	public function __construct( User $user, Language $lang, RepoLinker $repoLinker ) {
 		$this->user = $user;
 		$this->lang = $lang;

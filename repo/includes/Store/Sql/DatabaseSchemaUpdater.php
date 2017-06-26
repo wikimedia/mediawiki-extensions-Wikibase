@@ -33,9 +33,6 @@ class DatabaseSchemaUpdater {
 	 */
 	private $store;
 
-	/**
-	 * @param Store $store
-	 */
 	public function __construct( Store $store ) {
 		$this->store = $store;
 	}
@@ -61,9 +58,6 @@ class DatabaseSchemaUpdater {
 		return true;
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 */
 	public function doSchemaUpdate( DatabaseUpdater $updater ) {
 		$db = $updater->getDB();
 		$type = $db->getType();
@@ -124,10 +118,6 @@ class DatabaseSchemaUpdater {
 		);
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 * @param Database $db
-	 */
 	private function updateItemsPerSiteTable( DatabaseUpdater $updater, Database $db ) {
 		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
@@ -140,10 +130,6 @@ class DatabaseSchemaUpdater {
 		}
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 * @param Database $db
-	 */
 	private function updateChangesTable( DatabaseUpdater $updater, Database $db ) {
 		// Make wb_changes.change_info MEDIUMBLOB - T108246
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.

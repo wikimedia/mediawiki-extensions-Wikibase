@@ -30,9 +30,6 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 	 */
 	private $urls = array();
 
-	/**
-	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
-	 */
 	public function __construct( PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
 		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
 	}
@@ -48,9 +45,6 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 		}
 	}
 
-	/**
-	 * @param Snak $snak
-	 */
 	private function processSnak( Snak $snak ) {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$id = $snak->getPropertyId();
@@ -68,9 +62,6 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 		}
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		foreach ( $this->urls as $url => $null ) {
 			$parserOutput->addExternalLink( $url );

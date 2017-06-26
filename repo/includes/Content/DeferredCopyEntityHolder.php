@@ -24,9 +24,6 @@ class DeferredCopyEntityHolder implements EntityHolder {
 	 */
 	private $entity = null;
 
-	/**
-	 * @param EntityHolder $entityHolder
-	 */
 	public function __construct( EntityHolder $entityHolder ) {
 		$this->entityHolder = $entityHolder;
 	}

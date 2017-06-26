@@ -96,9 +96,6 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		}
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		$coordinatesOutput = $this->getCoordinatesOutput( $parserOutput );
 		$primaryCoordKey = $this->findPrimaryCoordinateKey();

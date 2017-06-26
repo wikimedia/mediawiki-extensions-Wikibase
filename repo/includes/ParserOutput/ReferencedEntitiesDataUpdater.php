@@ -74,9 +74,6 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		}
 	}
 
-	/**
-	 * @param Snak $snak
-	 */
 	private function processSnak( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 		$this->entityIds[$propertyId->getSerialization()] = $propertyId;
@@ -86,9 +83,6 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		}
 	}
 
-	/**
-	 * @param DataValue $dataValue
-	 */
 	private function processDataValue( DataValue $dataValue ) {
 		if ( $dataValue instanceof EntityIdValue ) {
 			$entityId = $dataValue->getEntityId();
@@ -114,18 +108,12 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		}
 	}
 
-	/**
-	 * @param SiteLink $siteLink
-	 */
 	public function processSiteLink( SiteLink $siteLink ) {
 		foreach ( $siteLink->getBadges() as $badge ) {
 			$this->entityIds[$badge->getSerialization()] = $badge;
 		}
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		/**
 		 * Needed and used in EntityParserOutputGenerator, for getEntityInfo, to allow this data to
@@ -138,9 +126,6 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		$this->addLinksToParserOutput( $parserOutput );
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 */
 	private function addLinksToParserOutput( ParserOutput $parserOutput ) {
 		$linkBatch = new LinkBatch();
 

@@ -22,9 +22,6 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 */
 	private $siteLinkConflictLookup;
 
-	/**
-	 * @param SiteLinkConflictLookup $siteLinkConflictLookup
-	 */
 	public function __construct( SiteLinkConflictLookup $siteLinkConflictLookup ) {
 		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
 	}

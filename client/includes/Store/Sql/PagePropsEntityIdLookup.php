@@ -26,10 +26,6 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	 */
 	private $idParser;
 
-	/**
-	 * @param LoadBalancer $loadBalancer
-	 * @param EntityIdParser $idParser
-	 */
 	public function __construct(
 		LoadBalancer $loadBalancer,
 		EntityIdParser $idParser

@@ -46,12 +46,6 @@ class EditFilterHookRunner {
 	 */
 	private $context;
 
-	/**
-	 * @param EntityNamespaceLookup $namespaceLookup
-	 * @param EntityTitleStoreLookup $titleLookup
-	 * @param EntityContentFactory $entityContentFactory
-	 * @param IContextSource $context
-	 */
 	public function __construct(
 		EntityNamespaceLookup $namespaceLookup,
 		EntityTitleStoreLookup $titleLookup,

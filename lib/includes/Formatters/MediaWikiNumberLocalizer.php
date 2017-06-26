@@ -19,9 +19,6 @@ class MediaWikiNumberLocalizer implements NumberLocalizer {
 	 */
 	private $language;
 
-	/**
-	 * @param Language $language
-	 */
 	public function __construct( Language $language ) {
 		$this->language = $language;
 	}

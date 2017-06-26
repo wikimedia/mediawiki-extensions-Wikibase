@@ -27,10 +27,6 @@ class CachingCommonsMediaFileNameLookup {
 	 */
 	private $cache;
 
-	/**
-	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
-	 * @param BagOStuff $cache
-	 */
 	public function __construct(
 		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
 		BagOStuff $cache

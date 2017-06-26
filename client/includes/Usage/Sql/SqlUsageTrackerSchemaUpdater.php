@@ -20,9 +20,6 @@ class SqlUsageTrackerSchemaUpdater {
 	 */
 	private $dbUpdater;
 
-	/**
-	 * @param DatabaseUpdater $dbUpdater
-	 */
 	public function __construct( DatabaseUpdater $dbUpdater ) {
 		$this->dbUpdater = $dbUpdater;
 	}

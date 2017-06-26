@@ -39,11 +39,6 @@ class DataAccessSnakFormatterFactory {
 	 */
 	private $propertyDataTypeLookup;
 
-	/**
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,

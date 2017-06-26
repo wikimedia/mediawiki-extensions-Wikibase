@@ -43,11 +43,6 @@ class SnakRdfBuilder {
 	 */
 	private $propertyTypes = array();
 
-	/**
-	 * @param RdfVocabulary $vocabulary
-	 * @param ValueSnakRdfBuilder $valueBuilder
-	 * @param PropertyDataTypeLookup $propertyLookup
-	 */
 	public function __construct(
 		RdfVocabulary $vocabulary,
 		ValueSnakRdfBuilder $valueBuilder,
@@ -67,9 +62,6 @@ class SnakRdfBuilder {
 		return $this->mentionedEntityTracker;
 	}
 
-	/**
-	 * @param EntityMentionListener $mentionedEntityTracker
-	 */
 	public function setEntityMentionListener( EntityMentionListener $mentionedEntityTracker ) {
 		$this->mentionedEntityTracker = $mentionedEntityTracker;
 	}

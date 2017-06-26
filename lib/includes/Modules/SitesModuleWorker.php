@@ -35,11 +35,6 @@ class SitesModuleWorker {
 	 */
 	private $cache;
 
-	/**
-	 * @param SettingsArray $settings
-	 * @param SiteLookup $siteLookup
-	 * @param BagOStuff $cache
-	 */
 	public function __construct( SettingsArray $settings, SiteLookup $siteLookup, BagOStuff $cache ) {
 		$this->settings = $settings;
 		$this->siteLookup = $siteLookup;

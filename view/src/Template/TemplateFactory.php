@@ -29,9 +29,6 @@ class TemplateFactory {
 		return self::$instance;
 	}
 
-	/**
-	 * @param TemplateRegistry $templateRegistry
-	 */
 	public function __construct( TemplateRegistry $templateRegistry ) {
 		$this->templateRegistry = $templateRegistry;
 	}

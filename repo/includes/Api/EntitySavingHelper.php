@@ -111,9 +111,6 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		return $this->entityFactory;
 	}
 
-	/**
-	 * @param EntityFactory $entityFactory
-	 */
 	public function setEntityFactory( EntityFactory $entityFactory ) {
 		$this->entityFactory = $entityFactory;
 	}
@@ -125,9 +122,6 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		return $this->entityStore;
 	}
 
-	/**
-	 * @param EntityStore $entityStore
-	 */
 	public function setEntityStore( EntityStore $entityStore ) {
 		$this->entityStore = $entityStore;
 	}

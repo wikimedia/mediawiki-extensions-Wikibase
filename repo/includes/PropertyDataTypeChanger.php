@@ -35,11 +35,6 @@ class PropertyDataTypeChanger {
 	 */
 	private $dataTypeFactory;
 
-	/**
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param EntityStore $entityStore
-	 * @param DataTypeFactory $dataTypeFactory
-	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,

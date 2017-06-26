@@ -25,9 +25,6 @@ class SkinTemplateOutputPageBeforeExecHandler {
 	 */
 	private $repoItemLinkGenerator;
 
-	/**
-	 * @param RepoItemLinkGenerator $repoItemLinkGenerator
-	 */
 	public function __construct( RepoItemLinkGenerator $repoItemLinkGenerator ) {
 		$this->repoItemLinkGenerator = $repoItemLinkGenerator;
 	}

@@ -106,19 +106,6 @@ class EntityDataSerializationService {
 	 */
 	private $entityRdfBuilderFactory;
 
-	/**
-	 * @param EntityLookup $entityLookup
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param PropertyDataTypeLookup $propertyLookup
-	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param EntityRdfBuilderFactory $entityRdfBuilderFactory
-	 * @param SiteList $sites
-	 * @param EntityDataFormatProvider $entityDataFormatProvider
-	 * @param SerializerFactory $serializerFactory
-	 * @param Serializer $entitySerializer
-	 * @param SiteLookup $siteLookup
-	 * @param RdfVocabulary $rdfVocabulary
-	 */
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,

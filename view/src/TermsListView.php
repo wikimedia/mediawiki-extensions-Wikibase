@@ -34,12 +34,6 @@ class TermsListView {
 	 */
 	private $textProvider;
 
-	/**
-	 * @param TemplateFactory $templateFactory
-	 * @param LanguageNameLookup $languageNameLookup
-	 * @param LocalizedTextProvider $textProvider
-	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
-	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,

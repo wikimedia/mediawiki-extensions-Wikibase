@@ -18,9 +18,6 @@ class FingerprintChangeOpFactory {
 	 */
 	private $termValidatorFactory;
 
-	/**
-	 * @param TermValidatorFactory $termValidatorFactory
-	 */
 	public function __construct( TermValidatorFactory $termValidatorFactory ) {
 		$this->termValidatorFactory = $termValidatorFactory;
 	}

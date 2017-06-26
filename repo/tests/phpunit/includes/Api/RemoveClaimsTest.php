@@ -90,9 +90,6 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		}
 	}
 
-	/**
-	 * @param Item $item
-	 */
 	public function doTestValidRequestSingle( Item $item ) {
 		$statements = $item->getStatements()->toArray();
 		$obtainedStatements = null;
@@ -119,9 +116,6 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$this->assertTrue( $obtainedStatements === null || $obtainedStatements->isEmpty() );
 	}
 
-	/**
-	 * @param Item $item
-	 */
 	public function doTestValidRequestMultiple( Item $item ) {
 		$guids = array();
 

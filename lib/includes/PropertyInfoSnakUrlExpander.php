@@ -20,9 +20,6 @@ class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 	 */
 	private $infoProvider;
 
-	/**
-	 * @param PropertyInfoProvider $infoProvider
-	 */
 	public function __construct( PropertyInfoProvider $infoProvider ) {
 		$this->infoProvider = $infoProvider;
 	}

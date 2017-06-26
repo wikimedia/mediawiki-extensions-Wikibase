@@ -29,11 +29,6 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	 */
 	private $textProvider;
 
-	/**
-	 * @param SpecialPageLinker $specialPageLinker
-	 * @param TemplateFactory $templateFactory
-	 * @param LocalizedTextProvider $textProvider
-	 */
 	public function __construct(
 		SpecialPageLinker $specialPageLinker,
 		TemplateFactory $templateFactory,

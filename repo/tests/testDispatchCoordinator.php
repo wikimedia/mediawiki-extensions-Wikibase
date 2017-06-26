@@ -112,9 +112,6 @@ class TestDispatchCoordinator extends Maintenance {
 		return $coordinator;
 	}
 
-	/**
-	 * @param ChangeDispatchCoordinator $coordinator
-	 */
 	private function testCoordinator( ChangeDispatchCoordinator $coordinator ) {
 		$clientId = null;
 		$state = null;

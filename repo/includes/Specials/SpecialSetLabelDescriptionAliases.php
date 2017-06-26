@@ -59,15 +59,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	private $aliases = array();
 
-	/**
-	 * @param SpecialPageCopyrightView $copyrightView
-	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
-	 * @param FingerprintChangeOpFactory $changeOpFactory
-	 * @param ContentLanguages $termsLanguages
-	 */
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,

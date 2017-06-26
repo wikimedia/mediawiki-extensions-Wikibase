@@ -60,11 +60,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 */
 	private $snakBuilder;
 
-	/**
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
-	 * @param SnakRdfBuilder $snakBuilder
-	 */
 	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SnakRdfBuilder $snakBuilder ) {
 		$this->vocabulary = $vocabulary;
 
@@ -78,9 +73,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$this->dedupeBag = new NullDedupeBag();
 	}
 
-	/**
-	 * @param DedupeBag $dedupeBag
-	 */
 	public function setDedupeBag( DedupeBag $dedupeBag ) {
 		$this->dedupeBag = $dedupeBag;
 	}

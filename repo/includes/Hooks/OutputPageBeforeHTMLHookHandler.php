@@ -63,15 +63,6 @@ class OutputPageBeforeHTMLHookHandler {
 	 */
 	private $entityFactory;
 
-	/**
-	 * @param TemplateFactory $templateFactory
-	 * @param UserLanguageLookup $userLanguageLookup
-	 * @param ContentLanguages $termsLanguages
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param LanguageNameLookup $languageNameLookup
-	 * @param OutputPageEntityIdReader $outputPageEntityIdReader
-	 * @param EntityFactory $entityFactory
-	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,

@@ -24,9 +24,6 @@ class LabelDescriptionDuplicateDetector {
 	 */
 	private $conflictFinder;
 
-	/**
-	 * @param LabelConflictFinder $conflictFinder
-	 */
 	public function __construct( LabelConflictFinder $conflictFinder ) {
 		$this->conflictFinder = $conflictFinder;
 	}

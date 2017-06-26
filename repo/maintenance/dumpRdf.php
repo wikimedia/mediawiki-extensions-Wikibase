@@ -82,17 +82,6 @@ class DumpRdf extends DumpScript {
 		$this->addOption( 'redirect-only', 'Whether to only dump information about redirects.', false, false );
 	}
 
-	/**
-	 * @param SqlEntityIdPagerFactory $sqlEntityIdPagerFactory
-	 * @param EntityPrefetcher $entityPrefetcher
-	 * @param SiteLookup $siteLookup
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param EntityRdfBuilderFactory $entityRdfBuilderFactory
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param RdfVocabulary $rdfVocabulary
-	 * @param EntityTitleLookup $titleLookup
-	 */
 	public function setServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
 		EntityPrefetcher $entityPrefetcher,

@@ -69,13 +69,6 @@ class PropertyInfoTableBuilder {
 	 */
 	private $batchSize = 100;
 
-	/**
-	 * @param PropertyInfoTable $propertyInfoTable
-	 * @param EntityLookup $entityLookup
-	 * @param PropertyInfoBuilder $propertyInfoBuilder
-	 * @param EntityIdComposer $entityIdComposer
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 */
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,

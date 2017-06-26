@@ -72,9 +72,6 @@ class EntityParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	public function processEntity( EntityDocument $entity ) {
 		if ( $entity instanceof StatementListProvider && $this->statementDataUpdaters ) {
 			$this->processStatements( $entity->getStatements() );
@@ -85,9 +82,6 @@ class EntityParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param StatementList $statements
-	 */
 	private function processStatements( StatementList $statements ) {
 		foreach ( $statements as $statement ) {
 			foreach ( $this->statementDataUpdaters as $updater ) {
@@ -96,9 +90,6 @@ class EntityParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param SiteLinkList $siteLinks
-	 */
 	private function processSiteLinks( SiteLinkList $siteLinks ) {
 		foreach ( $siteLinks as $siteLink ) {
 			foreach ( $this->siteLinkDataUpdaters as $updater ) {

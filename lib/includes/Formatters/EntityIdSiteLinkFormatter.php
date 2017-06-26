@@ -29,10 +29,6 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 	 */
 	private $labelLookup;
 
-	/**
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LabelDescriptionLookup $labelLookup
-	 */
 	public function __construct(
 		EntityTitleLookup $entityTitleLookup,
 		LabelDescriptionLookup $labelLookup

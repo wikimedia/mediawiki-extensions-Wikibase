@@ -42,10 +42,6 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	private $repositoryServiceContainers = [];
 
-	/**
-	 * @param RepositoryServiceContainerFactory $repositoryServiceContainerFactory
-	 * @param RepositoryDefinitions $repositoryDefinitions
-	 */
 	public function __construct(
 		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
 		RepositoryDefinitions $repositoryDefinitions

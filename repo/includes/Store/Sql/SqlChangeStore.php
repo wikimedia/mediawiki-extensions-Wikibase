@@ -20,9 +20,6 @@ class SqlChangeStore implements ChangeStore {
 	 */
 	private $loadBalancer;
 
-	/**
-	 * @param LoadBalancer $loadBalancer
-	 */
 	public function __construct( LoadBalancer $loadBalancer ) {
 		$this->loadBalancer = $loadBalancer;
 	}

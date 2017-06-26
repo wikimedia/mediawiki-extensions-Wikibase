@@ -41,13 +41,6 @@ class StatementGroupListView {
 	 */
 	private $statementHtmlGenerator;
 
-	/**
-	 * @param PropertyOrderProvider $propertyOrderProvider
-	 * @param TemplateFactory $templateFactory
-	 * @param EntityIdFormatter $propertyIdFormatter
-	 * @param EditSectionGenerator $sectionEditLinkGenerator
-	 * @param StatementHtmlGenerator $statementHtmlGenerator
-	 */
 	public function __construct(
 		PropertyOrderProvider $propertyOrderProvider,
 		TemplateFactory $templateFactory,

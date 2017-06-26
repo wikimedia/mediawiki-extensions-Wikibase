@@ -44,11 +44,6 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 	 */
 	private $snakBuilder;
 
-	/**
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
-	 * @param SnakRdfBuilder $snakBuilder
-	 */
 	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SnakRdfBuilder $snakBuilder ) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;

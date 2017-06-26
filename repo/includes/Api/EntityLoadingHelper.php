@@ -98,9 +98,6 @@ class EntityLoadingHelper {
 		return $this->siteLinkLookup;
 	}
 
-	/**
-	 * @param SiteLinkLookup $siteLinkLookup
-	 */
 	public function setSiteLinkLookup( SiteLinkLookup $siteLinkLookup ) {
 		$this->siteLinkLookup = $siteLinkLookup;
 	}

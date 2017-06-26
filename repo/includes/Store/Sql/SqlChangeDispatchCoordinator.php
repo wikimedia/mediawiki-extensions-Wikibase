@@ -135,9 +135,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->batchSize = $batchSize;
 	}
 
-	/**
-	 * @param MessageReporter $messageReporter
-	 */
 	public function setMessageReporter( MessageReporter $messageReporter ) {
 		$this->messageReporter = $messageReporter;
 	}

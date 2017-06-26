@@ -24,9 +24,6 @@ class CommonsMediaExistsValidator implements ValueValidator {
 	 */
 	private $fileNameLookup;
 
-	/**
-	 * @param CachingCommonsMediaFileNameLookup $fileNameLookup
-	 */
 	public function __construct( CachingCommonsMediaFileNameLookup $fileNameLookup ) {
 		$this->fileNameLookup = $fileNameLookup;
 	}

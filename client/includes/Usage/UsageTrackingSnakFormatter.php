@@ -65,9 +65,6 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 		return $this->snakFormatter->formatSnak( $snak );
 	}
 
-	/**
-	 * @param EntityId $id
-	 */
 	private function addLabelUsage( EntityId $id ) {
 		foreach ( $this->languages as $lang ) {
 			$this->usageAccumulator->addLabelUsage( $id, $lang );

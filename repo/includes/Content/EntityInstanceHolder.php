@@ -19,9 +19,6 @@ class EntityInstanceHolder implements EntityHolder {
 	 */
 	private $entity;
 
-	/**
-	 * @param EntityDocument $entity
-	 */
 	public function __construct( EntityDocument $entity ) {
 		$this->entity = $entity;
 	}

@@ -25,9 +25,6 @@ class ParserFunctionRegistrant {
 		$this->allowDataTransclusion = $allowDataTransclusion;
 	}
 
-	/**
-	 * @param Parser $parser
-	 */
 	public function register( Parser $parser ) {
 		$this->registerNoLangLinkHandler( $parser );
 		$this->registerParserFunctions( $parser );

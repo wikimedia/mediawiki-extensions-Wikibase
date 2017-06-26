@@ -73,9 +73,6 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 		$this->termSearchOptions = new TermSearchOptions();
 	}
 
-	/**
-	 * @param TermSearchOptions $termSearchOptions
-	 */
 	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ) {
 		$this->termSearchOptions = $termSearchOptions;
 	}

@@ -30,11 +30,6 @@ class MergeChangeOpsFactory {
 	 */
 	private $siteLookup;
 
-	/**
-	 * @param EntityConstraintProvider $constraintProvider
-	 * @param ChangeOpFactoryProvider $factoryProvider
-	 * @param SiteLookup $siteLookup
-	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
 		ChangeOpFactoryProvider $factoryProvider,

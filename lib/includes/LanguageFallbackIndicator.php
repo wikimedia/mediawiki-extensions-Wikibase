@@ -21,9 +21,6 @@ class LanguageFallbackIndicator {
 	 */
 	private $languageNameLookup;
 
-	/**
-	 * @param LanguageNameLookup $languageNameLookup
-	 */
 	public function __construct( LanguageNameLookup $languageNameLookup ) {
 		$this->languageNameLookup = $languageNameLookup;
 	}

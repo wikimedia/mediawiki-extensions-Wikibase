@@ -25,9 +25,6 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	 */
 	private $duplicateDetector;
 
-	/**
-	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
-	 */
 	public function __construct( LabelDescriptionDuplicateDetector $duplicateDetector ) {
 		$this->duplicateDetector = $duplicateDetector;
 	}

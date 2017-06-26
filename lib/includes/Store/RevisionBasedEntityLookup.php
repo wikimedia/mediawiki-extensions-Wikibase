@@ -22,9 +22,6 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 */
 	private $lookup;
 
-	/**
-	 * @param EntityRevisionLookup $lookup
-	 */
 	public function __construct( EntityRevisionLookup $lookup ) {
 		$this->lookup = $lookup;
 	}

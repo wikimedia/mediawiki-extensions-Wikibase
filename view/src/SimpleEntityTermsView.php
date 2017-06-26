@@ -47,14 +47,6 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 */
 	private $textProvider;
 
-	/**
-	 * @param HtmlTermRenderer $htmlTermRenderer
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param TemplateFactory $templateFactory
-	 * @param EditSectionGenerator $sectionEditLinkGenerator
-	 * @param TermsListView $termsListView
-	 * @param LocalizedTextProvider $textProvider
-	 */
 	public function __construct(
 		HtmlTermRenderer $htmlTermRenderer,
 		LabelDescriptionLookup $labelDescriptionLookup,

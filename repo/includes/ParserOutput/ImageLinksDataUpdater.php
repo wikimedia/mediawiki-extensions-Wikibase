@@ -30,9 +30,6 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 	 */
 	private $fileNames = array();
 
-	/**
-	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
-	 */
 	public function __construct( PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
 		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
 	}
@@ -48,9 +45,6 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 		}
 	}
 
-	/**
-	 * @param Snak $snak
-	 */
 	private function processSnak( Snak $snak ) {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$id = $snak->getPropertyId();

@@ -16,10 +16,6 @@ class ItemFieldDefinitions implements FieldDefinitions {
 	 */
 	private $descriptionsProviderFieldDefinitions;
 
-	/**
-	 * @param LabelsProviderFieldDefinitions $labelsProviderFieldDefinitions
-	 * @param DescriptionsProviderFieldDefinitions $descriptionsProviderFieldDefinitions
-	 */
 	public function __construct(
 		LabelsProviderFieldDefinitions $labelsProviderFieldDefinitions,
 		DescriptionsProviderFieldDefinitions $descriptionsProviderFieldDefinitions

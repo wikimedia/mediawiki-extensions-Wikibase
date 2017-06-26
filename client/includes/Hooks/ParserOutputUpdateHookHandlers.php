@@ -65,11 +65,6 @@ class ParserOutputUpdateHookHandlers {
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 	}
 
-	/**
-	 * @param NamespaceChecker $namespaceChecker
-	 * @param LangLinkHandler $langLinkHandler
-	 * @param ClientParserOutputDataUpdater $parserOutputDataUpdater
-	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,

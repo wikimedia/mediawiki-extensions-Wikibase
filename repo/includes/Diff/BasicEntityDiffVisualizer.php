@@ -50,13 +50,6 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 	 */
 	private $entityIdFormatter;
 
-	/**
-	 * @param IContextSource $contextSource
-	 * @param ClaimDiffer $claimDiffer
-	 * @param ClaimDifferenceVisualizer $claimDiffView
-	 * @param SiteLookup $siteLookup
-	 * @param EntityIdFormatter $entityIdFormatter
-	 */
 	public function __construct(
 		IContextSource $contextSource,
 		ClaimDiffer $claimDiffer,

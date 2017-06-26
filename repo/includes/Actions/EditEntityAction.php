@@ -406,9 +406,6 @@ class EditEntityAction extends ViewEntityAction {
 		) )->toString();
 	}
 
-	/**
-	 * @param EntityContentDiff $diff
-	 */
 	private function displayUndoDiff( EntityContentDiff $diff ) {
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 

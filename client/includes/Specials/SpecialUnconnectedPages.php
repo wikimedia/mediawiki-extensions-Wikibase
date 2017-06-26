@@ -60,9 +60,6 @@ class SpecialUnconnectedPages extends QueryPage {
 		return false;
 	}
 
-	/**
-	 * @param NamespaceChecker $namespaceChecker
-	 */
 	public function setNamespaceChecker( NamespaceChecker $namespaceChecker ) {
 		$this->namespaceChecker = $namespaceChecker;
 	}

@@ -27,10 +27,6 @@ class EntityIdRdfBuilder implements ValueSnakRdfBuilder {
 	 */
 	private $mentionedEntityTracker;
 
-	/**
-	 * @param RdfVocabulary $vocabulary
-	 * @param EntityMentionListener $mentionedEntityTracker
-	 */
 	public function __construct(
 		RdfVocabulary $vocabulary,
 		EntityMentionListener $mentionedEntityTracker
