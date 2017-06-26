@@ -122,19 +122,20 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
+	 * @return ItemContent
+	 */
+	protected function newEmpty() {
+		return new ItemContent();
+	}
+
+	/**
 	 * @param ItemId|null $itemId
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ItemContent
 	 */
-	protected function newEmpty( EntityId $itemId = null ) {
-		$empty = new ItemContent( new EntityInstanceHolder( new Item() ) );
-
-		if ( $itemId !== null ) {
-			$empty->getItem()->setId( $itemId );
-		}
-
-		return $empty;
+	protected function newBlank( EntityId $itemId = null ) {
+		return new ItemContent( new EntityInstanceHolder( new Item( $itemId ) ) );
 	}
 
 	/**
@@ -174,7 +175,7 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	public function getTextForSearchIndexProvider() {
-		$itemContent = $this->newEmpty();
+		$itemContent = $this->newBlank();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
 		$itemContent->getEntity()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
@@ -186,7 +187,7 @@ class ItemContentTest extends EntityContentTest {
 	public function providePageProperties() {
 		$cases = parent::providePageProperties();
 
-		$contentLinkStub = $this->newEmpty( $this->getDummyId() );
+		$contentLinkStub = $this->newBlank( $this->getDummyId() );
 		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$cases['sitelinks'] = array(
@@ -196,7 +197,7 @@ class ItemContentTest extends EntityContentTest {
 
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
-		$contentWithClaim = $this->newEmpty( $this->getDummyId() );
+		$contentWithClaim = $this->newBlank( $this->getDummyId() );
 		$snak = new PropertyNoValueSnak( 83 );
 		$guid = '$testing$';
 		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
@@ -213,7 +214,7 @@ class ItemContentTest extends EntityContentTest {
 	 * @return EntityContent
 	 */
 	private function getItemContentWithClaim() {
-		$itemContent = $this->newEmpty();
+		$itemContent = $this->newBlank();
 		$item = $itemContent->getItem();
 
 		$item->getStatements()->addNewStatement(
@@ -288,7 +289,7 @@ class ItemContentTest extends EntityContentTest {
 	 * @return EntityContent
 	 */
 	private function getItemContentWithSiteLink() {
-		$itemContent = $this->newEmpty();
+		$itemContent = $this->newBlank();
 		$item = $itemContent->getItem();
 
 		$item->setSiteLinkList( new SiteLinkList( array(
@@ -349,9 +350,9 @@ class ItemContentTest extends EntityContentTest {
 		$cases = parent::diffProvider();
 
 		$q10 = new ItemId( 'Q10' );
-		$empty = $this->newEmpty( $q10 );
+		$empty = $this->newBlank( $q10 );
 
-		$spam = $this->newEmpty( $q10 );
+		$spam = $this->newBlank( $q10 );
 		$spam->getEntity()->setLabel( 'en', 'Spam' );
 
 		$redir = $this->newRedirect( $q10, new ItemId( 'Q17' ) );
@@ -405,9 +406,9 @@ class ItemContentTest extends EntityContentTest {
 		$cases = parent::patchedCopyProvider();
 
 		$q10 = new ItemId( 'Q10' );
-		$empty = $this->newEmpty( $q10 );
+		$empty = $this->newBlank( $q10 );
 
-		$spam = $this->newEmpty( $q10 );
+		$spam = $this->newBlank( $q10 );
 		$spam->getEntity()->setLabel( 'en', 'Spam' );
 
 		$redirTarget = 'Q17';
@@ -468,7 +469,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$redir = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q7' ) );
 
-		$labels1 = $this->newEmpty();
+		$labels1 = $this->newBlank();
 		$labels1->getEntity()->setLabel( 'en', 'Foo' );
 
 		$cases['same redirect'] = array( $redir, $redir, true );
@@ -496,7 +497,7 @@ class ItemContentTest extends EntityContentTest {
 		$q12 = new ItemId( 'Q12' );
 
 		$cases = array();
-		$cases['entity id'] = array( $this->newEmpty( $q11 ), $q11 );
+		$cases['entity id'] = array( $this->newBlank( $q11 ), $q11 );
 		$cases['redirect id'] = array( $this->newRedirect( $q11, $q12 ), $q11 );
 
 		return $cases;

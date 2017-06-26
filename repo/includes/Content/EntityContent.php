@@ -54,11 +54,10 @@ abstract class EntityContent extends AbstractContent {
 	const EDIT_IGNORE_CONSTRAINTS = 1024;
 
 	/**
-	 * Checks if this EntityContent is valid for saving.
-	 *
-	 * Returns false if the entity does not have an ID set.
-	 *
 	 * @see Content::isValid()
+	 *
+	 * @return bool True if this content object is valid for saving. False if there is no entity, or
+	 *  the entity does not have an ID set.
 	 */
 	public function isValid() {
 		if ( $this->isRedirect() ) {
@@ -69,7 +68,8 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getContentHandler()->supportsRedirects();
 		}
 
-		return $this->getEntityId() !== null;
+		$holder = $this->getEntityHolder();
+		return $holder !== null && $holder->getEntityId() !== null;
 	}
 
 	/**
@@ -503,19 +503,21 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
-		$thisId = $this->getEntityHolder() ? $this->getEntityHolder()->getEntityId() : null;
-		$thatId = $that->getEntityHolder() ? $that->getEntityHolder()->getEntityId() : null;
-
-		if ( $thisId !== null && $thatId !== null
-			&& !$thisId->equals( $thatId )
-		) {
+		$thisHolder = $this->getEntityHolder();
+		$thatHolder = $that->getEntityHolder();
+		if ( !$thisHolder && !$thatHolder ) {
+			return true;
+		} elseif ( !$thisHolder || !$thatHolder ) {
 			return false;
 		}
 
-		$thisEntity = $this->getEntity();
-		$thatEntity = $that->getEntity();
+		$thisId = $thisHolder->getEntityId();
+		$thatId = $thatHolder->getEntityId();
+		if ( $thisId && $thatId && !$thisId->equals( $thatId ) ) {
+			return false;
+		}
 
-		return $thisEntity->equals( $thatEntity );
+		return $thisHolder->getEntity()->equals( $thatHolder->getEntity() );
 	}
 
 	/**

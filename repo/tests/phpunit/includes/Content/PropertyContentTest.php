@@ -61,26 +61,29 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	/**
+	 * @return PropertyContent
+	 */
+	protected function newEmpty() {
+		return new PropertyContent();
+	}
+
+	/**
 	 * @param PropertyId|null $propertyId
 	 *
 	 * @throws InvalidArgumentException
 	 * @return PropertyContent
 	 */
-	protected function newEmpty( EntityId $propertyId = null ) {
-		$empty = new PropertyContent( new EntityInstanceHolder( Property::newFromType( 'string' ) ) );
-
-		if ( $propertyId !== null ) {
-			$empty->getProperty()->setId( $propertyId );
-		}
-
-		return $empty;
+	protected function newBlank( EntityId $propertyId = null ) {
+		$property = Property::newFromType( 'string' );
+		$property->setId( $propertyId );
+		return new PropertyContent( new EntityInstanceHolder( $property ) );
 	}
 
 	public function provideGetEntityId() {
 		$p11 = new PropertyId( 'P11' );
 
 		return array(
-			'property id' => array( $this->newEmpty( $p11 ), $p11 ),
+			'property id' => array( $this->newBlank( $p11 ), $p11 ),
 		);
 	}
 
