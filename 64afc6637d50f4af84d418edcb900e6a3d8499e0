@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_49f82247",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-26T10:25:45Z",
+      "side": 1,
+      "message": "Why moving it down here, it makes the line too long.",
+      "range": {
+        "startLine": 1017,
+        "startChar": 12,
+        "endLine": 1017,
+        "endChar": 74
+      },
+      "revId": "64afc6637d50f4af84d418edcb900e6a3d8499e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0991bafb",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-26T10:25:45Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 1392,
+        "startChar": 13,
+        "endLine": 1392,
+        "endChar": 76
+      },
+      "revId": "64afc6637d50f4af84d418edcb900e6a3d8499e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
