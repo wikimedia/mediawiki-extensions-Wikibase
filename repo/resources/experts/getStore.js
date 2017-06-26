@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb, vv, dv ) {
+( function ( $, wb, vv, dv ) {
 	'use strict';
 
 	var MODULE = wb.experts;
@@ -52,6 +52,10 @@
 			'wikibase-property': wb.experts.Property
 		};
 
+		var extendedExperts = {};
+		mediaWiki.hook( 'wikibase.experts' ).fire( extendedExperts );
+		$.extend( dataTypeIdToExpertConstructor, extendedExperts );
+
 		for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
 			var dataType = dataTypeStore.getDataType( dataTypeId );
 			if ( dataType ) {
@@ -66,4 +70,4 @@
 
 	};
 
-}( wikibase, jQuery.valueview, dataValues ) );
+}( jQuery, wikibase, jQuery.valueview, dataValues ) );
