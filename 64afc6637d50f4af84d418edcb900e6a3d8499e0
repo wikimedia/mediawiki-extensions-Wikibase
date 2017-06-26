@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_c4b717f1",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-26T11:54:28Z",
+      "side": 1,
+      "message": "Technically this line is exactly 100 characters long. But the one in WikibaseRepo is longer. I split all of them.",
+      "parentUuid": "8e742343_49f82247",
+      "range": {
+        "startLine": 1017,
+        "startChar": 12,
+        "endLine": 1017,
+        "endChar": 74
+      },
+      "revId": "64afc6637d50f4af84d418edcb900e6a3d8499e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0991bafb",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
