@@ -142,6 +142,19 @@ class DataTypeDefinitions {
 		return array_keys( $ptDefinitions );
 	}
 
+	public function getExpertModules() {
+		$ptDefinitions = $this->getFilteredByPrefix( $this->dataTypeDefinitions, 'PT:' );
+
+		return array_map(
+			function ( array $d ) {
+				return $d['expert-module'];
+			},
+			$ptDefinitions
+		);
+
+		return $this->getMapForDefinitionField( 'expert-module' );
+	}
+
 	/**
 	 * @param string $field
 	 *

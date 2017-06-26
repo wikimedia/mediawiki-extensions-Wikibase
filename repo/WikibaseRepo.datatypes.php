@@ -110,6 +110,7 @@ return call_user_func( function() {
 			) {
 				return new CommonsMediaRdfBuilder( $vocab );
 			},
+			'expert-module' => 'jquery.valueview.experts.CommonsMediaType',
 		),
 		'PT:geo-shape' => array(
 			'validator-factory-callback' => function() {
