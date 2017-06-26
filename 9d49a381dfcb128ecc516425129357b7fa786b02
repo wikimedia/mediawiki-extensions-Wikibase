@@ -22,6 +22,30 @@
       "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_7a1cbe18",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-26T16:08:45Z",
+      "side": 1,
+      "message": "It could be replaced with something like:\n```\nmw.hook( \u0027wikibase.entityPage.entityLoaded\u0027 ).promise()\n```\n\nBut it\u0027s just an idea...",
+      "parentUuid": "8e742343_ba522615",
+      "range": {
+        "startLine": 355,
+        "startChar": 22,
+        "endLine": 359,
+        "endChar": 15
+      },
+      "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
