@@ -89,6 +89,7 @@ return call_user_func( function() {
 			}
 		),
 		'PT:commonsMedia' => array(
+			'expert-module' => 'jquery.valueview.experts.CommonsMediaType',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				// Don't go for commons during unit tests.
@@ -112,6 +113,7 @@ return call_user_func( function() {
 			},
 		),
 		'PT:geo-shape' => array(
+			'expert-module' => 'jquery.valueview.experts.GeoShape',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				// Don't go for commons during unit tests.
@@ -135,6 +137,7 @@ return call_user_func( function() {
 			},
 		),
 		'PT:tabular-data' => array(
+			'expert-module' => 'jquery.valueview.experts.TabularData',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				// Don't go for commons during unit tests.
@@ -279,6 +282,7 @@ return call_user_func( function() {
 			},
 		),
 		'PT:url' => array(
+			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
@@ -299,6 +303,7 @@ return call_user_func( function() {
 			},
 		),
 		'PT:external-id' => array(
+			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
@@ -331,13 +336,30 @@ return call_user_func( function() {
 				return new EntityIdRdfBuilder( $vocab, $tracker );
 			},
 		),
+		'PT:globe-coordinate'  => array(
+			'expert-module' => 'jquery.valueview.experts.GlobeCoordinateInput',
+		),
+		'PT:monolingualtext'   => array(
+			'expert-module' => 'jquery.valueview.experts.MonolingualText',
+		),
+		'PT:quantity'          => array(
+			'expert-module' => 'jquery.valueview.experts.QuantityInput',
+		),
+		'PT:string'            => array(
+			'expert-module' => 'jquery.valueview.experts.StringValue',
+		),
+		'PT:time'              => array(
+			'expert-module' => 'jquery.valueview.experts.TimeInput',
+		),
 		'PT:wikibase-item' => array(
+			'expert-module' => 'wikibase.experts.Item',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildItemValidators();
 			},
 		),
 		'PT:wikibase-property' => array(
+			'expert-module' => 'wikibase.experts.Property',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildPropertyValidators();
