@@ -125,10 +125,8 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Returns the Item that makes up this ItemContent.
-	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @throws LogicException
+	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return Item
 	 */
 	public function getItem() {
@@ -139,7 +137,7 @@ class ItemContent extends EntityContent {
 		}
 
 		if ( !$this->itemHolder ) {
-			throw new LogicException( 'Neither redirect nor item found in ItemContent!' );
+			throw new LogicException( 'This content object is empty' );
 		}
 
 		return $this->itemHolder->getEntity( Item::class );
@@ -149,6 +147,7 @@ class ItemContent extends EntityContent {
 	 * @see EntityContent::getEntity
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
+	 * @throws LogicException if the content object is empty and does not contain an entity.
 	 * @return Item
 	 */
 	public function getEntity() {
