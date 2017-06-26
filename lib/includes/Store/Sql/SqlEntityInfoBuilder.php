@@ -603,8 +603,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		if ( isset( $this->pageInfoByType[$entityType] ) ) {
 			return $this->pageInfoByType[$entityType];
 		}
-		$entityIds = $this->numericIdsByType[$entityType];
-
+		$entityIds = [];
+		foreach ( $this->numericIdsByType[$entityType] as $entityIdSerialization => $value ) {
+			$parts = EntityId::splitSerialization( $entityIdSerialization );
+			$entityIds[] = EntityId::joinSerialization( [ '', $parts[1], $parts[2] ] );
+		}
 		$dbr = $this->getConnection( DB_REPLICA );
 
 		$fields = [
@@ -619,7 +622,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$fields,
 			[
 				'page_namespace' => $this->entityNamespaceLookup->getEntityNamespace( $entityType ),
-				'page_title' => array_keys( $entityIds ),
+				'page_title' => $entityIds,
 			],
 			__METHOD__,
 			[],
