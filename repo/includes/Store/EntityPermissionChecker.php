@@ -15,6 +15,19 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 interface EntityPermissionChecker {
 
+	// TODO: Rename to ACTION_...
+	const PERMISSION_READ = 'read';
+
+	const PERMISSION_EDIT = 'edit';
+
+	const PERMISSION_CREATE = 'create';
+
+	const PERMISSION_EDIT_TERMS = 'term';
+
+	const PERMISSION_MERGE = 'merge';
+
+	const PERMISSION_REDIRECT = 'redirect';
+
 	/**
 	 * Check whether the given user has the given permission on an entity.
 	 * This will perform a check based on the entity's ID if the entity has an ID set
