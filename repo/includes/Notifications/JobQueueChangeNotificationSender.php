@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use JobQueueGroup;
 use JobSpecification;
 use Wikibase\Change;
 
@@ -49,8 +50,7 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 		$this->repoDB = $repoDB;
 		$this->wikiDBNames = $wikiDBNames;
 		$this->batchSize = $batchSize;
-		$this->jobQueueGroupFactory =
-			$jobQueueGroupFactory === null ? 'JobQueueGroup::singleton' : $jobQueueGroupFactory;
+		$this->jobQueueGroupFactory = $jobQueueGroupFactory ?: [ JobQueueGroup::class, 'singleton' ];
 	}
 
 	/**

@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use EchoAttributeManager;
 use EchoEvent;
+use EchoUserLocator;
 use Title;
 use User;
 use Wikibase\Change;
@@ -142,7 +143,7 @@ class EchoNotificationsHandlers {
 
 		$notifications[self::NOTIFICATION_TYPE] = [
 			EchoAttributeManager::ATTR_LOCATORS => [
-				'EchoUserLocator::locateArticleCreator',
+				EchoUserLocator::class . '::locateArticleCreator',
 			],
 			'category' => 'wikibase-action',
 			'group' => 'neutral',

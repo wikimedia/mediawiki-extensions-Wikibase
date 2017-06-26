@@ -5,6 +5,8 @@ namespace Wikibase\Client\Tests\Usage;
 use JobRunner;
 use MediaWikiTestCase;
 use Title;
+use Wikibase\Client\Hooks\DataUpdateHookHandlers;
+use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
@@ -62,21 +64,21 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->templateTitle = Title::makeTitle( NS_TEMPLATE, 'UsageTrackingIntegrationTest_Template' );
 
 		// Register the necessary hook handlers. Registration of these handlers is normally skipped for unit test runs.
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'ArticleDeleteComplete' => array(
-				'Wikibase\Client\Hooks\DataUpdateHookHandlers::onArticleDeleteComplete',
-				'Wikibase\Client\Hooks\UpdateRepoHookHandlers::onArticleDeleteComplete',
-			),
-			'LinksUpdateComplete' => array(
-				'Wikibase\Client\Hooks\DataUpdateHookHandlers::onLinksUpdateComplete',
-			),
-			'ParserCacheSaveComplete' => array(
-				'Wikibase\Client\Hooks\DataUpdateHookHandlers::onParserCacheSaveComplete',
-			),
-			'TitleMoveComplete' => array(
-				'Wikibase\Client\Hooks\UpdateRepoHookHandlers::onTitleMoveComplete',
-			),
-		) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'ArticleDeleteComplete' => [
+				DataUpdateHookHandlers::class . '::onArticleDeleteComplete',
+				UpdateRepoHookHandlers::class . '::onArticleDeleteComplete',
+			],
+			'LinksUpdateComplete' => [
+				DataUpdateHookHandlers::class . '::onLinksUpdateComplete',
+			],
+			'ParserCacheSaveComplete' => [
+				DataUpdateHookHandlers::class . '::onParserCacheSaveComplete',
+			],
+			'TitleMoveComplete' => [
+				UpdateRepoHookHandlers::class . '::onTitleMoveComplete',
+			],
+		] );
 	}
 
 	protected function tearDown() {
