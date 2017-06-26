@@ -1,4 +1,4 @@
-( function( $, vv ) {
+module.exports = ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -45,5 +45,7 @@
 			} );
 		}
 	} );
+
+	return vv.experts.TabularData;
 
 }( jQuery, jQuery.valueview ) );

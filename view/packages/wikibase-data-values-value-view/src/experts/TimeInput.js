@@ -1,4 +1,4 @@
-( function( $, vv, TimeValue ) {
+module.exports = ( function( $, vv, TimeValue ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -185,5 +185,7 @@
 			return options;
 		}
 	} );
+
+	return vv.experts.TimeInput;
 
 }( jQuery, jQuery.valueview, dataValues.TimeValue ) );

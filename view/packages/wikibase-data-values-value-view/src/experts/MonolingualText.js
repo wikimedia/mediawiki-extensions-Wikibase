@@ -1,4 +1,4 @@
-( function( vv, LanguageSelector ) {
+module.exports = ( function( vv, LanguageSelector ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -59,5 +59,7 @@
 			this._languageSelector = null;
 		}
 	} );
+
+	return vv.experts.MonolingualText;
 
 }( jQuery.valueview, jQuery.valueview.ExpertExtender.LanguageSelector ) );

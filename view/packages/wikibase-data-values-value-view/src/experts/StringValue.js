@@ -1,4 +1,4 @@
-( function( $, vv ) {
+module.exports = ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -108,5 +108,7 @@
 			this.$input.blur();
 		}
 	} );
+
+	return vv.experts.StringValue;
 
 }( jQuery, jQuery.valueview ) );

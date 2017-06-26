@@ -1,4 +1,4 @@
-( function( $, vv ) {
+module.exports = ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -44,5 +44,7 @@
 			} );
 		}
 	} );
+
+	return vv.experts.CommonsMediaType;
 
 }( jQuery, jQuery.valueview ) );

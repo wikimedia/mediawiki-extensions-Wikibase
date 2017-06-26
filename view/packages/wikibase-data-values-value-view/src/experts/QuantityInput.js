@@ -1,4 +1,4 @@
-( function( $, vv, UnitSelector ) {
+module.exports = ( function( $, vv, UnitSelector ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -67,5 +67,7 @@
 			this._unitSelector = null;
 		}
 	} );
+
+	return vv.experts.QuantityInput;
 
 }( jQuery, jQuery.valueview, jQuery.valueview.ExpertExtender.UnitSelector ) );

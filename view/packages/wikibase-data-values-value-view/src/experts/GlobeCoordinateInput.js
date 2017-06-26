@@ -1,4 +1,4 @@
-( function( $, vv, Formatter ) {
+module.exports = ( function( $, vv, Formatter ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -187,5 +187,7 @@
 			PARENT.prototype.destroy.call( this );
 		}
 	} );
+
+	return vv.experts.GlobeCoordinateInput;
 
 }( jQuery, jQuery.valueview, globeCoordinate.Formatter ) );
