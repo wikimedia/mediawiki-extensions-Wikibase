@@ -22,6 +22,30 @@
       "revId": "ec901c91c527149318bde9df34845f6e576d0980",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_24f29b04",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-26T11:21:42Z",
+      "side": 1,
+      "message": "Right, I missed that.\n\nI did something different than what was suggested (arguable choice, I agree). Instead of having unrelated items in all tests because one test needs it, I changed those tests slightly, so that a test defines which data is relevant for it.\n\nStill very far from beautiful but maybe a bit better than what\u0027s there now?",
+      "parentUuid": "8e742343_89584a8e",
+      "range": {
+        "startLine": 347,
+        "startChar": 22,
+        "endLine": 347,
+        "endChar": 36
+      },
+      "revId": "ec901c91c527149318bde9df34845f6e576d0980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
