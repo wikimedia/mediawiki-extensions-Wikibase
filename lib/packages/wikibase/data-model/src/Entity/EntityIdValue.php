@@ -39,8 +39,6 @@ class EntityIdValue extends DataValueObject {
 	/**
 	 * @see Serializable::unserialize
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $serialized
 	 *
 	 * @throws IllegalValueException
@@ -67,8 +65,6 @@ class EntityIdValue extends DataValueObject {
 	/**
 	 * @see DataValue::getType
 	 *
-	 * @since 0.5
-	 *
 	 * @return string
 	 */
 	public static function getType() {
@@ -77,8 +73,6 @@ class EntityIdValue extends DataValueObject {
 
 	/**
 	 * @see DataValue::getSortKey
-	 *
-	 * @since 0.5
 	 *
 	 * @return string|float|int
 	 */
@@ -89,8 +83,6 @@ class EntityIdValue extends DataValueObject {
 	/**
 	 * @see DataValue::getValue
 	 *
-	 * @since 0.5
-	 *
 	 * @return self
 	 */
 	public function getValue() {
@@ -98,8 +90,6 @@ class EntityIdValue extends DataValueObject {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityId
 	 */
 	public function getEntityId() {
@@ -108,8 +98,6 @@ class EntityIdValue extends DataValueObject {
 
 	/**
 	 * @see DataValue::getArrayValue
-	 *
-	 * @since 0.5
 	 *
 	 * @return array
 	 */
@@ -127,15 +115,19 @@ class EntityIdValue extends DataValueObject {
 	}
 
 	/**
-	 * Constructs a new instance of the DataValue from the provided data.
-	 * This can round-trip with
-	 * @see getArrayValue
+	 * Constructs a new instance from the provided data. Required for @see DataValueDeserializer.
+	 * This is expected to round-trip with @see getArrayValue.
 	 *
-	 * @since 0.5
+	 * @deprecated since 7.1. Static DataValue::newFromArray constructors like this are
+	 *  underspecified (not in the DataValue interface), and misleadingly named (should be named
+	 *  newFromArrayValue). Instead, use DataValue builder callbacks in @see DataValueDeserializer.
 	 *
-	 * @param mixed $data
+	 * @param mixed $data Warning! Even if this is expected to be a value as returned by
+	 *  @see getArrayValue, callers of this specific newFromArray implementation can not guarantee
+	 *  this. This is not even guaranteed to be an array!
 	 *
-	 * @throws IllegalValueException
+	 * @throws IllegalValueException if $data is not in the expected format. Subclasses of
+	 *  InvalidArgumentException are expected and properly handled by @see DataValueDeserializer.
 	 * @return self
 	 */
 	public static function newFromArray( $data ) {
