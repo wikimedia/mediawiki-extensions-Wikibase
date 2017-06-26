@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_ba046618",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-26T15:35:47Z",
+      "side": 1,
+      "message": "I think the more generic dependencies should go to the front, and include mediaWiki:\n\n jQuery, mediaWiki, wikibase, jQuery.valueview, dataValues",
+      "revId": "434a6a899b5b9ec6503c66f792bdfaa336d1c031",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
