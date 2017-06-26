@@ -5,6 +5,8 @@
 ( function ( wb, vv, dv ) {
 	'use strict';
 
+	var registeredExperts = require( 'wikibase.experts.modules' );
+
 	var MODULE = wb.experts;
 
 	/**
@@ -41,8 +43,10 @@
 		// Register experts for data types defined in Wikibase. Since those data types are defined by a
 		// setting, it needs to be checked whether they are actually defined.
 
+		//TODO After fixing all expert modules and PT declarations `dataTypeIdToExpertConstructor` should be built dynamically
+
 		var dataTypeIdToExpertConstructor = {
-			commonsMedia: vv.experts.CommonsMediaType,
+			commonsMedia: require(registeredExperts['commonsMedia']), // Comment this line to test that it is failing
 			'geo-shape': vv.experts.GeoShape,
 			'tabular-data': vv.experts.TabularData,
 			'external-id': vv.experts.StringValue,
