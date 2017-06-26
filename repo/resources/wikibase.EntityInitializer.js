@@ -13,28 +13,35 @@
 	 *
 	 * @constructor
 	 *
-	 * @param {string} configVarName
+	 * @param {string} arg
 	 *
 	 * @throws {Error} if required parameter is not specified properly.
 	 */
-	var EntityInitializer = wb.EntityInitializer = function ( configVarName ) {
-		if ( typeof configVarName !== 'string' ) {
-			throw new Error( 'Config variable name needs to be specified' );
+	var EntityInitializer = wb.EntityInitializer = function ( arg ) {
+		var entityPromise;
+		if ( typeof arg === 'string' ) {
+			entityPromise = getFromConfig( arg );
+		} else if ( isThenable( arg ) ) {
+			throw new Error( "Not implemented" );
+		} else {
+			throw new Error(
+				'Config variable name needs to be specified'
+			);
 		}
-		this._configVarName = configVarName;
+
+		this._deserializedEntityPromise = entityPromise.then( function ( entity ) {
+			return getDeserializer().then( function ( entityDeserializer ) {
+				return entityDeserializer.deserialize( entity );
+			} );
+		} );
 	};
 
 	$.extend( EntityInitializer.prototype, {
-		/**
-		 * Name of the mw.config variable featuring the serialized entity.
-		 * @type {string}
-		 */
-		_configVarName: null,
 
 		/**
-		 * @type {wikibase.datamodel.Entity|null}
+		 * @type {jQuery.Promise} Promise for wikibase.datamodel.Entity
 		 */
-		_value: null,
+		_deserializedEntityPromise: null,
 
 		/**
 		 * Retrieves an entity from mw.config.
@@ -45,79 +52,68 @@
 		 *         No rejected parameters.
 		 */
 		getEntity: function () {
-			var self = this,
-				deferred = $.Deferred();
+			return this._deserializedEntityPromise;
+		}
+	} );
 
-			if ( this._value ) {
-				return deferred.resolve( this._value ).promise();
-			}
+	function isThenable( arg ) {
+		return typeof arg === 'object' && typeof arg.then === 'function';
+	}
 
-			this._getFromConfig()
-			.done( function ( value ) {
-				self._value = value;
-				deferred.resolve( self._value );
-			} )
-			.fail( $.proxy( deferred.reject, deferred ) );
-
-			return deferred.promise();
-		},
-
-		/**
-		 * @return {Object} jQuery promise
-		 *         Resolved parameters:
-		 *         - {wikibase.datamodel.Entity}
-		 *         No rejected parameters.
-		 */
-		_getFromConfig: function () {
-			var self = this,
-				deferred = $.Deferred();
-
+	/**
+	 * Get entity from config
+	 * @param configVarName
+	 * @return {jQuery.Promise}
+	 *         Resolved parameters:
+	 *         - {object} Entity object
+	 *         No rejected parameters.
+	 */
+	function getFromConfig( configVarName ) {
+		return $.Deferred( function ( deferred ) {
 			mw.hook( 'wikipage.content' ).add( function () {
-				var serializedEntity = mw.config.get( self._configVarName );
+				var serializedEntity = mw.config.get( configVarName );
 
 				if ( serializedEntity === null ) {
 					deferred.reject();
 					return;
 				}
 
-				self._getDeserializer().done( function ( entityDeserializer ) {
-					var entity = entityDeserializer.deserialize( JSON.parse( serializedEntity ) );
-					deferred.resolve( entity );
-				} );
+				deferred.resolve( JSON.parse( serializedEntity ) );
+			} );
+		} ).promise();
+	}
+
+	/**
+	 * @return {Object} jQuery promise
+	 *         Resolved parameters:
+	 *         - {wikibase.serialization.EntityDeserializer}
+	 *         No rejected parameters.
+	 */
+	function getDeserializer() {
+		var entityDeserializer = new wb.serialization.EntityDeserializer(),
+			deferred = $.Deferred();
+
+		var entityTypes = mw.config.get( 'wbEntityTypes' );
+		var modules = [];
+		var typeNames = [];
+		entityTypes.types.forEach( function ( type ) {
+			var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
+			if ( deserializerFactoryFunction ) {
+				modules.push( deserializerFactoryFunction );
+				typeNames.push( type );
+			}
+		} );
+		mw.loader.using( modules, function () {
+			modules.forEach( function ( module, index ) {
+				entityDeserializer.registerStrategy(
+					mw.loader.require( module )(),
+					typeNames[ index ]
+				);
 			} );
 
-			return deferred.promise();
-		},
-
-		/**
-		 * @return {Object} jQuery promise
-		 *         Resolved parameters:
-		 *         - {wikibase.serialization.EntityDeserializer}
-		 *         No rejected parameters.
-		 */
-		_getDeserializer: function () {
-			var entityDeserializer = new wb.serialization.EntityDeserializer(),
-				deferred = $.Deferred();
-
-			var entityTypes = mw.config.get( 'wbEntityTypes' );
-			var modules = [];
-			var typeNames = [];
-			entityTypes.types.forEach( function ( type ) {
-				var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
-				if ( deserializerFactoryFunction ) {
-					modules.push( deserializerFactoryFunction );
-					typeNames.push( type );
-				}
-			} );
-			mw.loader.using( modules, function () {
-				modules.forEach( function ( module, index ) {
-					entityDeserializer.registerStrategy( mw.loader.require( module )(), typeNames[ index ] );
-				} );
-
-				deferred.resolve( entityDeserializer );
-			} );
-			return deferred.promise();
-		}
-	} );
+			deferred.resolve( entityDeserializer );
+		} );
+		return deferred.promise();
+	}
 
 }( jQuery, mediaWiki, wikibase ) );
