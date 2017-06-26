@@ -6,6 +6,7 @@
 	},
 	"globals": {
 		"mediaWiki": false,
+		"module": false,
 		"dataTypes": false,
 		"dataValues": false,
 		"OO": false,
