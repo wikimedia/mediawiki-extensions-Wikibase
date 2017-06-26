@@ -22,6 +22,30 @@
       "revId": "015f809239318dab5eebd653963cad23ef90ba7e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9f787cc1",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-26T15:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e742343_1f1b2cd6",
+      "range": {
+        "startLine": 56,
+        "startChar": 46,
+        "endLine": 56,
+        "endChar": 75
+      },
+      "revId": "015f809239318dab5eebd653963cad23ef90ba7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
