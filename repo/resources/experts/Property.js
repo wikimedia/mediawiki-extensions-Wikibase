@@ -1,4 +1,4 @@
-( function ( wb, vv ) {
+module.exports = ( function ( wb, vv ) {
 	'use strict';
 
 	var MODULE = wb.experts,
@@ -27,5 +27,7 @@
 	 * @inheritdoc
 	 */
 	SELF.TYPE = 'property';
+
+	return SELF;
 
 }( wikibase, jQuery.valueview ) );

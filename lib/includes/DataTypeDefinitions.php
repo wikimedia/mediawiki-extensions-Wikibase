@@ -142,6 +142,23 @@ class DataTypeDefinitions {
 		return array_keys( $ptDefinitions );
 	}
 
+	public function getExpertModules() {
+		$ptDefinitions = $this->getFilteredByPrefix( $this->dataTypeDefinitions, 'PT:' );
+
+		$result = [];
+		foreach ( $ptDefinitions as $typeId => $definition ) {
+			if ( empty( $definition['expert-module'] ) ) {
+				throw new \UnexpectedValueException(
+					"Type definition for '{$typeId}' doesn't contain 'expert-module' property"
+				);
+			}
+
+			$result[$typeId] = $definition['expert-module'];
+		}
+
+		return $result;
+	}
+
 	/**
 	 * @param string $field
 	 *
