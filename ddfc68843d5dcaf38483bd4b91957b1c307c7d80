@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_5afc62b1",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-26T16:05:50Z",
+      "side": 1,
+      "message": "This change doesn\u0027t look right. This test case is probably missing the \"message-key\" argument.",
+      "revId": "ddfc68843d5dcaf38483bd4b91957b1c307c7d80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9af2cade",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-26T16:05:50Z",
+      "side": 1,
+      "message": "This probably needs to be \"illegal-entity-remove\".",
+      "range": {
+        "startLine": 904,
+        "startChar": 16,
+        "endLine": 904,
+        "endChar": 30
+      },
+      "revId": "ddfc68843d5dcaf38483bd4b91957b1c307c7d80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
