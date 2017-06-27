@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_7644d24a",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T14:44:51Z",
+      "side": 1,
+      "message": "As below, I have a hard time understanding the expected format of the value this is supposed to return.",
+      "range": {
+        "startLine": 8,
+        "startChar": 25,
+        "endLine": 8,
+        "endChar": 32
+      },
+      "revId": "6e30ca9e163926bf79ec4424061481dcc752a5ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_56475650",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T14:44:51Z",
+      "side": 1,
+      "message": "I wonder where the documentation is of how this \"require\" here should behave, and what exactly it is supposed to return. It appears there is no interface or dedicated file that describes this.",
+      "range": {
+        "startLine": 49,
+        "startChar": 17,
+        "endLine": 49,
+        "endChar": 24
+      },
+      "revId": "6e30ca9e163926bf79ec4424061481dcc752a5ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_1649ce6a",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T14:44:51Z",
+      "side": 1,
+      "message": "How does this code know there is a \"commonsMedia\" expert in the list of experts?",
+      "range": {
+        "startLine": 49,
+        "startChar": 25,
+        "endLine": 49,
+        "endChar": 58
+      },
+      "revId": "6e30ca9e163926bf79ec4424061481dcc752a5ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
