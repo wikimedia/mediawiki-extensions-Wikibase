@@ -54,6 +54,47 @@
     },
     {
       "key": {
+        "uuid": "8e742343_abde536e",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T11:51:32Z",
+      "side": 1,
+      "message": "I investigated and understand the concern, but no, what you found here is not a bug.",
+      "parentUuid": "8e742343_eb6e9bc3",
+      "revId": "23793ddb7181177173f70e3323d6161e80b4e8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_8be1172c",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T11:51:32Z",
+      "side": 1,
+      "message": "Here is the relevant line. The $serializerFactory above is *not* used to serialize entities, and therefore does *not* need to support other entity types.",
+      "range": {
+        "startLine": 101,
+        "startChar": 18,
+        "endLine": 101,
+        "endChar": 45
+      },
+      "revId": "23793ddb7181177173f70e3323d6161e80b4e8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_4b47af50",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
