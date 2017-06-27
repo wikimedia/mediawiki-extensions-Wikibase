@@ -16,6 +16,24 @@
       "revId": "35cc4ff1a9ba87580b5f06b85c5f0ca9175b4675",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_901ce619",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T09:16:56Z",
+      "side": 1,
+      "message": "What the callback *represents* was not obvious before. The old variable name said \"…callback\", which is the technical format of the thing, and \"$deserializerFactory…\", which is the place where the thing is meant to be used.\n\nIn contrast, the new variable name describes what the callback does: it builds a deserializer.\n\nThe short scope is key here. I don\u0027t suggest to name the public getter \"get…Builders\" if it returns callbacks. But here the scope of the short \"$builder\" variable is literally 2 lines of code, and the scope of the longer \"$deserializerBuilders\" 4 lines. It\u0027s still entirely obvious we are dealing with callbacks here, both because the getter is called \"get…Callbacks\", and because of the \"call_user_func\" call 4 lines later.",
+      "parentUuid": "8e742343_b06b2282",
+      "revId": "35cc4ff1a9ba87580b5f06b85c5f0ca9175b4675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
