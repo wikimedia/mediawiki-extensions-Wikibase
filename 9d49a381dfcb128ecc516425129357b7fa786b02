@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_4b19ef7d",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-27T11:20:43Z",
+      "side": 1,
+      "message": "I meant those docs: https://doc.wikimedia.org/Wikibase/master/js/\n\nAFAIR they\u0027re generated with jsduck (see jsduck.json file in git repo). Still, I am not putting any money on the fact that this documentation build is running with no warnings.\nMight be something rather non critical if this Thenable is not recognized, I was just curious.",
+      "parentUuid": "8e742343_b00d6243",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_ba522615",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
