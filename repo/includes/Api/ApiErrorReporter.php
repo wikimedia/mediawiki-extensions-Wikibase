@@ -277,6 +277,10 @@ class ApiErrorReporter {
 			$params = $description === null ? [] : [ $description ];
 			// TODO: Should we use the ApiRawMessage class instead?
 			$msg = wfMessage( [ $messageKey, 'rawmessage' ], $params );
+		} elseif ( $description ) {
+			throw new LogicException(
+				"Localized message \"$messageKey\" exists, unlocalized \"$description\" omitted!"
+			);
 		}
 
 		return ApiMessage::create( $msg, $errorCode, $extraData );
