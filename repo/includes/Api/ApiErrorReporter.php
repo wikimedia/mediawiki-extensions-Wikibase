@@ -287,6 +287,10 @@ class ApiErrorReporter {
 			// NOTE: Use key fallback, so the nominal message key will be the original.
 			$params = $description === null ? [] : [ $description ];
 			$message = wfMessage( [ $messageKey, 'rawmessage' ], $params );
+		} elseif ( $description ) {
+			throw new LogicException(
+				"Localized message \"$messageKey\" exists, unlocalized \"$description\" omitted!"
+			);
 		}
 
 		return ApiMessage::create( $message, $errorCode, $data );
