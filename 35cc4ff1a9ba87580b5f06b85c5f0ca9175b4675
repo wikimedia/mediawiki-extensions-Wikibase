@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_b06b2282",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-27T09:03:34Z",
+      "side": 1,
+      "message": "Why rename these?\n\nI don\u0027t feel like bikesheding about names and don\u0027t mind the change if others like the new name better.\nTo me \"builder\" kind of suggests the thing is an object, here we have callables.\nAlso, I know in Wikibase multiple kind of things are called builders but when I hear builder I always think about https://en.wikipedia.org/wiki/Builder_pattern too.",
+      "revId": "35cc4ff1a9ba87580b5f06b85c5f0ca9175b4675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
