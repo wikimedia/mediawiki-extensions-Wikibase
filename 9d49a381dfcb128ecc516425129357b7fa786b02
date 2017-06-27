@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_b00d6243",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-27T11:16:28Z",
+      "side": 1,
+      "message": "I don\u0027t know. Can you point me to the place where those docs are?",
+      "parentUuid": "8e742343_10ed5622",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_ba522615",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
