@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_cb04ff19",
+        "filename": "repo/resources/wikibase.entityPage.entityLoaded.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T11:23:34Z",
+      "side": 1,
+      "message": "Is this a JSON structure, or an actual JavaScript DataModel object? I think adding the word \"native JavaScript object\" or something like this might help.",
+      "range": {
+        "startLine": 6,
+        "startChar": 35,
+        "endLine": 6,
+        "endChar": 78
+      },
+      "revId": "7017a441f1ee76f335a6689383a563330eccd572",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_ab0c133e",
+        "filename": "repo/resources/wikibase.entityPage.entityLoaded.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T11:23:34Z",
+      "side": 1,
+      "message": "Options! Wow, I love this so much! \\o/",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 7
+      },
+      "revId": "7017a441f1ee76f335a6689383a563330eccd572",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_6b162b4f",
+        "filename": "repo/resources/wikibase.entityPage.entityLoaded.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-27T11:23:34Z",
+      "side": 1,
+      "message": "This is not necessary and should be removed. It does nothing but possibly wasting a few nanoseconds. The ….get( … ) below will return null in case a config variable does not exist.",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "7017a441f1ee76f335a6689383a563330eccd572",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
