@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_ebad3be8",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-06-27T11:37:26Z",
+      "side": 1,
+      "message": "I’m a bit lost in this comment thread – Leszek, I assume your comment was “is it common to use (vertical bar character) in docs”? Because all I see is “to use in docs”. Perhaps Gerrit ate the character.\n\nIf that assumption is correct: AFAIK jsduck uses the same type syntax as jsdoc, which supports union types (http://usejsdoc.org/tags-type.html).",
+      "parentUuid": "8e742343_4b19ef7d",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_ba522615",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
