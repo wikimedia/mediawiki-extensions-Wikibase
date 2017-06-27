@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_655c1a4f",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-27T08:15:16Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be also extended to push mediaWiki/mw to the scope of this IIFE? Seems like it now \"magically\" works.\n\nOh, I see Thiemo has already mentioned this already in on of this comments.",
+      "revId": "a141e042f06a57071553ab56f27a3b75c38adbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
