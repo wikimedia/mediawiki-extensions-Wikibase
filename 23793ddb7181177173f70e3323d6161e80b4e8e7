@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_eb6e9bc3",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-27T11:32:20Z",
+      "side": 1,
+      "message": "...we need getAllTypesSerializerFactory, I guess.",
+      "parentUuid": "8e742343_8b3d97ba",
+      "revId": "23793ddb7181177173f70e3323d6161e80b4e8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_4b47af50",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
