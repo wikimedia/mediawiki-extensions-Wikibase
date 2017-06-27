@@ -67,9 +67,6 @@ class SidebarLinkBadgeDisplay {
 			$sidebarLink['class'] = $badgeClass;
 		}
 
-		if ( !$badgeInfo['label'] ) {
-			wfLogWarning( "Label for badge class $badgeClass could not be found." );
-		}
 		$sidebarLink['itemtitle'] = $badgeInfo['label'];
 	}
 
