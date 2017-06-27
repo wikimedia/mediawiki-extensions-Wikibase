@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_eb20db98",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-27T11:31:54Z",
+      "side": 1,
+      "message": "Does this really need to be public? Such an \"incomplete\" factory should never be used by application logic, right?",
+      "revId": "23793ddb7181177173f70e3323d6161e80b4e8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_8b3d97ba",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-27T11:31:54Z",
+      "side": 1,
+      "message": "Uh... this only supports Property and Item? That would be bad, no?",
+      "revId": "23793ddb7181177173f70e3323d6161e80b4e8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_4b47af50",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-27T11:31:54Z",
+      "side": 1,
+      "message": "If it only supports base types, why should it be public?",
+      "revId": "23793ddb7181177173f70e3323d6161e80b4e8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
