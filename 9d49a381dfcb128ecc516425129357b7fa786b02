@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_abc5f391",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-27T11:56:45Z",
+      "side": 1,
+      "message": "I think Leszek\u0027s concern was about `Thenable` type which is not an actual symbol in JS.",
+      "parentUuid": "8e742343_ebad3be8",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_ba522615",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
