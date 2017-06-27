@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e742343_10ed5622",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-27T08:45:20Z",
+      "side": 1,
+      "message": "is it common to use in docs? Not opposing, just asking.\nWasn\u0027t the tool we use to generate JS autodocs somewhat strict  what types are used in docs?",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "9d49a381dfcb128ecc516425129357b7fa786b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_ba522615",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 4
