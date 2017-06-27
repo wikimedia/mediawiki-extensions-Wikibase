@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_e3a9df22",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1864,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-06-27T20:17:15Z",
+      "side": 1,
+      "message": "Missing space between comment sign and comment.",
+      "range": {
+        "startLine": 1864,
+        "startChar": 7,
+        "endLine": 1864,
+        "endChar": 9
+      },
+      "revId": "fe12959b332d997c16597cec2d5f8b83ed6c0198",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_83a6db4e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-06-27T20:17:15Z",
+      "side": 1,
+      "message": "Missing space between comment sign and comment.",
+      "range": {
+        "startLine": 1867,
+        "startChar": 7,
+        "endLine": 1867,
+        "endChar": 9
+      },
+      "revId": "fe12959b332d997c16597cec2d5f8b83ed6c0198",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
