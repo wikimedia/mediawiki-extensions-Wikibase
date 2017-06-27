@@ -1860,6 +1860,12 @@ class WikibaseRepo {
 
 						// T161983
 						'lag',
+
+						// T167745
+						'nxm',
+
+						// T167811
+						'xpu',
 					] )
 				),
 
