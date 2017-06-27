@@ -2,11 +2,12 @@
  * @module wikibase.entityPage.entityLoaded
  * @fires "wikibase.entityPage.entityLoaded"
  *
- * Module fires "wikibase.entityPage.entityLoaded" mediawiki hook as soon as entity JSON is loaded.
- * Listener callback should expect entity object (parsed entity serialization)
- * passed as a first argument.
+ * This module fires a MediaWiki hook named "wikibase.entityPage.entityLoaded" as soon as the JSON
+ * representing the entity stored on the current entity page is loaded. Listener callbacks should
+ * expect the entity as a native JavaScript object (the parsed JSON serialization) passed as the
+ * first argument.
  *
- * Note: Entity object is completely frozen (readonly) to avoid the case when one of clients
+ * Note: The entity object is completely frozen (read-only) to avoid the case when one of clients
  *       accidentally change it and break other clients.
  *
  * @example <caption>Basic usage</caption>
@@ -33,11 +34,10 @@
 ( function ( mw ) {
 	'use strict';
 
-	var wbEntity;
-	if ( mw.config.exists( 'wbEntity' ) ) {
-		wbEntity = mw.config.get( 'wbEntity' );
-		// TODO Add deprecation warning
-	}
+	var wbEntity = mw.config.get( 'wbEntity' );
+
+	// TODO: Add deprecation warning. All later access to the "wbEntity" configuration variable
+	// should be replaced with the hook.
 
 	/**
 	 * Copied from https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
@@ -64,6 +64,7 @@
 	}
 
 	if ( wbEntity ) {
+		// Note this assumes "wbEntity" contains valid JSON, and will throw an error otherwise.
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( deepFreeze( JSON.parse( wbEntity ) ) );
 	}
 
