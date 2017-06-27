@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_a34af7c6",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-06-27T19:57:40Z",
+      "side": 1,
+      "message": "Bad whitespaces.",
+      "range": {
+        "startLine": 1863,
+        "startChar": 0,
+        "endLine": 1863,
+        "endChar": 9
+      },
+      "revId": "b4cec7f5e39e61cfe41473aa4de9556b7db1dd23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_4316b3ad",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1866,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-06-27T19:57:40Z",
+      "side": 1,
+      "message": "Bad whitespaces.",
+      "range": {
+        "startLine": 1866,
+        "startChar": 0,
+        "endLine": 1866,
+        "endChar": 9
+      },
+      "revId": "b4cec7f5e39e61cfe41473aa4de9556b7db1dd23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
