@@ -51,12 +51,9 @@ final class RepoHooks {
 	 *
 	 * @param OutputPage $out
 	 * @param Skin $skin
-	 *
-	 * @return bool
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		$out->addModules( 'wikibase.ui.entitysearch' );
-		return true;
 	}
 
 	/**
@@ -66,7 +63,6 @@ final class RepoHooks {
 	 * setting.
 	 *
 	 * @throws MWException
-	 * @return bool
 	 */
 	public static function onSetupAfterCache() {
 		global $wgContentHandlers,
@@ -93,8 +89,6 @@ final class RepoHooks {
 				return $entityContentFactory->getContentHandlerForType( $entityType );
 			};
 		}
-
-		return true;
 	}
 
 	/**
@@ -102,13 +96,9 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
 	 * @param string[] &$paths
-	 *
-	 * @return bool
 	 */
 	public static function registerUnitTests( array &$paths ) {
 		$paths[] = __DIR__ . '/tests/phpunit/';
-
-		return true;
 	}
 
 	/**
@@ -116,16 +106,12 @@ final class RepoHooks {
 	 *
 	 * @param array &$testModules
 	 * @param ResourceLoader &$resourceLoader
-	 *
-	 * @return boolean
 	 */
 	public static function registerQUnitTests( array &$testModules, ResourceLoader &$resourceLoader ) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			include __DIR__ . '/tests/qunit/resources.php'
 		);
-
-		return true;
 	}
 
 	/**
@@ -137,8 +123,6 @@ final class RepoHooks {
 	 *
 	 * @param int $ns Namespace ID
 	 * @param bool $movable
-	 *
-	 * @return bool
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
@@ -146,8 +130,6 @@ final class RepoHooks {
 		if ( $namespaceLookup->isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
-
-		return true;
 	}
 
 	/**
@@ -158,8 +140,6 @@ final class RepoHooks {
 	 * @param Revision $revision
 	 * @param int $baseID
 	 * @param User $user
-	 *
-	 * @return bool
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -176,8 +156,6 @@ final class RepoHooks {
 				$notifier->notifyOnPageModified( $revision, $parent );
 			}
 		}
-
-		return true;
 	}
 
 	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
@@ -246,8 +224,6 @@ final class RepoHooks {
 	 * @param Title $title
 	 * @param bool $created
 	 * @param string $comment
-	 *
-	 * @return bool
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -255,7 +231,7 @@ final class RepoHooks {
 
 		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
-			return true;
+			return;
 		}
 
 		$revisionId = $title->getLatestRevID();
@@ -263,7 +239,7 @@ final class RepoHooks {
 		$content = $revision ? $revision->getContent() : null;
 
 		if ( !( $content instanceof EntityContent ) ) {
-			return true;
+			return;
 		}
 
 		//XXX: EntityContent::save() also does this. Why are we doing this twice?
@@ -274,8 +250,6 @@ final class RepoHooks {
 
 		$notifier = $wikibaseRepo->getChangeNotifier();
 		$notifier->notifyOnPageUndeleted( $revision );
-
-		return true;
 	}
 
 	/**
@@ -287,7 +261,6 @@ final class RepoHooks {
 	 * @todo: find a better way to do this!
 	 *
 	 * @param RecentChange $recentChange
-	 * @return bool
 	 */
 	public static function onRecentChangeSave( RecentChange $recentChange ) {
 		$logType = $recentChange->getAttribute( 'rc_log_type' );
@@ -297,7 +270,7 @@ final class RepoHooks {
 		if ( $revId <= 0 ) {
 			// If we don't have a revision ID, we have no chance to find the right change to update.
 			// NOTE: As of February 2015, RC entries for undeletion have rc_this_oldid = 0.
-			return true;
+			return;
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
@@ -312,8 +285,6 @@ final class RepoHooks {
 				$changeStore->saveChange( $change );
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -325,8 +296,6 @@ final class RepoHooks {
 	 *
 	 * @param User $user
 	 * @param array &$preferences
-	 *
-	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		$preferences['wb-acknowledgedcopyrightversion'] = array(
@@ -340,8 +309,6 @@ final class RepoHooks {
 			'section' => 'rendering/advancedrendering',
 			'default' => '1',
 		);
-
-		return true;
 	}
 
 	/**
@@ -349,15 +316,11 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UserGetDefaultOptions
 	 *
 	 * @param array &$defaultOptions
-	 *
-	 * @return bool
 	 */
 	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
 		// pre-select default language in the list of fallback languages
 		$defaultLang = $defaultOptions['language'];
 		$defaultOptions[ 'wb-languages-' . $defaultLang ] = 1;
-
-		return true;
 	}
 
 	/**
@@ -368,8 +331,6 @@ final class RepoHooks {
 	 * @param object &$row
 	 * @param string &$s
 	 * @param array &$classes
-	 *
-	 * @return bool
 	 */
 	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes ) {
 		// Note: This assumes that HistoryPager::getTitle returns a Title.
@@ -396,8 +357,6 @@ final class RepoHooks {
 
 			$s .= ' ' . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
 		}
-
-		return true;
 	}
 
 	/**
@@ -406,8 +365,6 @@ final class RepoHooks {
 	 *
 	 * @param SkinTemplate $skinTemplate
 	 * @param array $links
-	 *
-	 * @return bool
 	 */
 	public static function onPageTabs( SkinTemplate &$skinTemplate, array &$links ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -456,8 +413,6 @@ final class RepoHooks {
 				}
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -465,12 +420,9 @@ final class RepoHooks {
 	 *
 	 * @param array &$groups
 	 * @param bool &$moveOther
-	 *
-	 * @return bool
 	 */
 	public static function onSpecialPageReorderPages( &$groups, &$moveOther ) {
 		$groups = array_merge( array( 'wikibaserepo' => null ), $groups );
-		return true;
 	}
 
 	/**
@@ -480,8 +432,6 @@ final class RepoHooks {
 	 * @param OutputPage $out
 	 * @param Skin $sk
 	 * @param array $bodyAttrs
-	 *
-	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -493,7 +443,7 @@ final class RepoHooks {
 		$entityId = $outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 
 		if ( $entityId === null ) {
-			return true;
+			return;
 		}
 
 		// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
@@ -511,8 +461,6 @@ final class RepoHooks {
 		if ( $out->getTitle() && $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
 			$bodyAttrs['class'] .= ' wb-oldrevpage';
 		}
-
-		return true;
 	}
 
 	/**
@@ -582,8 +530,6 @@ final class RepoHooks {
 	 * @param string &$date
 	 * @param string &$related
 	 * @param string &$html
-	 *
-	 * @return bool
 	 */
 	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result, $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
@@ -614,8 +560,6 @@ final class RepoHooks {
 
 			$extract = ''; // TODO: set this to something useful.
 		}
-
-		return true;
 	}
 
 	/**
@@ -656,8 +600,6 @@ final class RepoHooks {
 	 *
 	 * @param Title $title
 	 * @param array $types The types of protection available
-	 *
-	 * @return bool
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
@@ -666,8 +608,6 @@ final class RepoHooks {
 			// Remove create and move protection for Wikibase namespaces
 			$types = array_diff( $types, array( 'create', 'move' ) );
 		}
-
-		return true;
 	}
 
 	/**
@@ -699,8 +639,6 @@ final class RepoHooks {
 	 * @param bool $post true if there is content after the autocomment
 	 * @param Title|null $title use for further information
 	 * @param bool $local shall links be generated locally or globally
-	 *
-	 * @return bool
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local ) {
 		global $wgLang, $wgTitle;
@@ -745,8 +683,6 @@ final class RepoHooks {
 	 *
 	 * @param OutputPage $out
 	 * @param ParserOutput $parserOutput
-	 *
-	 * @return bool
 	 */
 	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
 		// Set in EntityParserOutputGenerator.
@@ -775,8 +711,6 @@ final class RepoHooks {
 				$out->addLink( $link );
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -846,6 +780,7 @@ final class RepoHooks {
 
 	/**
 	 * Helper for onAPIQuerySiteInfoStatisticsInfo
+	 *
 	 * @param object $row
 	 * @return array
 	 */
@@ -869,8 +804,8 @@ final class RepoHooks {
 
 	/**
 	 * Adds DispatchStats info to the API
+	 *
 	 * @param array $data
-	 * @return bool
 	 */
 	public static function onAPIQuerySiteInfoStatisticsInfo( array &$data ) {
 		$stats = new DispatchStats();
@@ -891,8 +826,6 @@ final class RepoHooks {
 				'average' => self::formatDispatchRow( $stats->getAverage() ),
 			);
 		}
-
-		return true;
 	}
 
 	/**
@@ -903,7 +836,6 @@ final class RepoHooks {
 	 * @param array $revisionInfo
 	 *
 	 * @throws MWException
-	 * @return bool
 	 */
 	public static function onImportHandleRevisionXMLTag( $importer, $pageInfo, $revisionInfo ) {
 		if ( isset( $revisionInfo['model'] ) ) {
@@ -920,8 +852,6 @@ final class RepoHooks {
 				);
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -930,8 +860,6 @@ final class RepoHooks {
 	 *
 	 * @param SkinTemplate $skinTemplate
 	 * @param array $navigationUrls
-	 *
-	 * @return bool
 	 */
 	public static function onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink(
 		SkinTemplate $skinTemplate,
@@ -941,7 +869,7 @@ final class RepoHooks {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		if ( !$title || !$namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
-			return true;
+			return;
 		}
 
 		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
@@ -950,8 +878,6 @@ final class RepoHooks {
 			'href' => $baseUri . $title->getDBkey(),
 			'title' => $skinTemplate->msg( 'wikibase-concept-uri-tooltip' )
 		);
-
-		return true;
 	}
 
 	/**
@@ -959,18 +885,14 @@ final class RepoHooks {
 	 *
 	 * @param BaseTemplate $baseTemplate
 	 * @param array $toolbox
-	 *
-	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		if ( !isset( $baseTemplate->data['nav_urls']['wb-concept-uri'] ) ) {
-			return true;
+			return;
 		}
 
 		$toolbox['wb-concept-uri'] = $baseTemplate->data['nav_urls']['wb-concept-uri'];
 		$toolbox['wb-concept-uri']['id'] = 't-wb-concept-uri';
-
-		return true;
 	}
 
 	/**
@@ -979,8 +901,6 @@ final class RepoHooks {
 	 *
 	 * @param Skin $skin
 	 * @param array &$modules associative array of resource loader modules
-	 *
-	 * @return bool
 	 */
 	public static function onSkinMinervaDefaultModules( Skin $skin, array &$modules ) {
 		$title = $skin->getTitle();
@@ -990,16 +910,12 @@ final class RepoHooks {
 		if ( $title && $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			unset( $modules['editor'] );
 		}
-
-		return true;
 	}
 
 	/**
 	 * Register ResourceLoader modules with dynamic dependencies.
 	 *
 	 * @param ResourceLoader $resourceLoader
-	 *
-	 * @return bool
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
@@ -1047,8 +963,6 @@ final class RepoHooks {
 		}
 
 		$resourceLoader->register( $modules );
-
-		return true;
 	}
 
 	/**
@@ -1056,8 +970,6 @@ final class RepoHooks {
 	 *
 	 * @param IContextSource $context
 	 * @param array $pageInfo
-	 *
-	 * @return bool
 	 */
 	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -1067,7 +979,7 @@ final class RepoHooks {
 
 		if ( !$title || !$namespaceChecker->isEntityNamespace( $title->getNamespace() ) ) {
 			// shorten out
-			return true;
+			return;
 		}
 
 		$mediaWikiServices = MediaWikiServices::getInstance();
@@ -1086,8 +998,6 @@ final class RepoHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
-
-		return true;
 	}
 
 }
