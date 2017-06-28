@@ -93,7 +93,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true ] ] );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true ] ] );
 
 		if ( !self::$badgeId ) {
 			self::$matchers = self::createMatchers();
