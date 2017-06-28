@@ -131,6 +131,7 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -1200,7 +1201,13 @@ class WikibaseRepo {
 	 * @return EntityPermissionChecker
 	 */
 	public function getEntityPermissionChecker() {
-		return $this->getEntityContentFactory();
+		global $wgAvailableRights;
+
+		return new WikiPageEntityStorePermissionChecker(
+			$this->getEntityNamespaceLookup(),
+			$this->getEntityTitleLookup(),
+			$wgAvailableRights
+		);
 	}
 
 	/**
