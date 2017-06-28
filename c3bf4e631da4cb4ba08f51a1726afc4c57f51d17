@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_a8cdee63",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-28T16:58:12Z",
+      "side": 1,
+      "message": "I don\u0027t think the error code should be allowed to be null. What this patch original did (before PS4) was simply using the full message key as error code. I reintroduced the previous defacto-standard of message key and error code being the same, but with the prefix \"wikibase-api-\" stripped.\n\nI think both is to much magic and should not be done. Better always require both.",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_88d4b2ed",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-28T16:58:12Z",
+      "side": 1,
+      "message": "I kept this for now, but I think this was a mistake.",
+      "range": {
+        "startLine": 210,
+        "startChar": 15,
+        "endLine": 210,
+        "endChar": 19
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_083e8226",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-28T16:58:12Z",
+      "side": 1,
+      "message": "I wonder what the actual benefit of this is. Do we plan to actually resolve all the warning that will show up? Where will they show up anyway?",
+      "range": {
+        "startLine": 224,
+        "startChar": 3,
+        "endLine": 224,
+        "endChar": 9
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
