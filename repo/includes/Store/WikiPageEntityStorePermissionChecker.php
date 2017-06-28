@@ -167,7 +167,10 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	}
 
 	private function getMediaWikiPermissionsToCheck( $permission, $entityType ) {
-		if ( $permission === EntityPermissionChecker::PERMISSION_CREATE ) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_CREATE ||
+
+			$permission === 'createpage' || $permission === 'property-create'
+		) {
 			$entityTypeSpecificCreatePermission = $entityType . '-create';
 
 			$permissions = [ 'read', 'edit', 'createpage' ];
@@ -177,7 +180,10 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			return $permissions;
 		}
 
-		if ( $permission === EntityPermissionChecker::PERMISSION_EDIT_TERMS ) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_EDIT_TERMS ||
+			// TODO: temporarily handle MW create permissions here, until all users are adjusted
+			$permission === 'item-term' || $permission === 'property-term'
+		) {
 			$entityTypeSpecificEditTermsPermission = $entityType . '-term';
 
 			$permissions = [ 'read', 'edit' ];
@@ -187,7 +193,10 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			return $permissions;
 		}
 
-		if ( $permission === EntityPermissionChecker::PERMISSION_MERGE ) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_MERGE ||
+			// TODO: temporarily handle MW create permissions here, until all users are adjusted
+			$permission === 'item-merge'
+		) {
 			$entityTypeSpecificMergePermission = $entityType . '-merge';
 
 			$permissions = [ 'read', 'edit' ];
@@ -197,7 +206,10 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			return $permissions;
 		}
 
-		if ( $permission === EntityPermissionChecker::PERMISSION_REDIRECT ) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_REDIRECT ||
+			// TODO: temporarily handle MW create permissions here, until all users are adjusted
+			$permission === 'item-redirect'
+		) {
 			$entityTypeSpecificRedirectPermission = $entityType . '-redirect';
 
 			$permissions = [ 'read', 'edit' ];
