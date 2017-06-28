@@ -17,7 +17,6 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
@@ -29,7 +28,7 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, EntityPermissionChecker {
+class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 
 	/**
 	 * @var string[] Entity type ID to content model ID mapping.
@@ -278,113 +277,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	public function newFromRedirect( EntityRedirect $redirect ) {
 		$handler = $this->getContentHandlerForType( $redirect->getEntityId()->getEntityType() );
 		return $handler->makeEntityRedirectContent( $redirect );
-	}
-
-	/**
-	 * @param User $user
-	 * @param string $permission
-	 * @param Title $entityPage
-	 * @param string $quick
-	 *
-	 * //XXX: would be nice to be able to pass the $short flag too,
-	 *        as used by getUserPermissionsErrorsInternal. But Title doesn't expose that.
-	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
-	 *
-	 * @return Status a status object representing the check's result.
-	 */
-	protected function getPermissionStatus( User $user, $permission, Title $entityPage, $quick = '' ) {
-		$errors = $entityPage->getUserPermissionsErrors( $permission, $user, $quick !== 'quick' );
-		return $this->getStatusForPermissionErrors( $errors );
-	}
-
-	/**
-	 * @param string[] $errors
-	 *
-	 * @return Status
-	 */
-	protected function getStatusForPermissionErrors( array $errors ) {
-		$status = Status::newGood();
-
-		foreach ( $errors as $error ) {
-			call_user_func_array( [ $status, 'fatal' ], $error );
-			$status->setResult( false );
-		}
-
-		return $status;
-	}
-
-	/**
-	 * @see EntityPermissionChecker::getPermissionStatusForEntityId
-	 *
-	 * @param User $user
-	 * @param string $permission
-	 * @param EntityId $entityId
-	 * @param string $quick
-	 *
-	 * @return Status a status object representing the check's result.
-	 *
-	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
-	 */
-	public function getPermissionStatusForEntityId( User $user, $permission, EntityId $entityId, $quick = '' ) {
-		$title = $this->getTitleForId( $entityId );
-		return $this->getPermissionStatus( $user, $permission, $title, $quick );
-	}
-
-	/**
-	 * @see EntityPermissionChecker::getPermissionStatusForEntityType
-	 *
-	 * @param User $user
-	 * @param string $permission
-	 * @param string $entityType
-	 * @param string $quick
-	 *
-	 * @return Status a status object representing the check's result.
-	 *
-	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
-	 */
-	public function getPermissionStatusForEntityType( User $user, $permission, $entityType, $quick = '' ) {
-		$ns = $this->getNamespaceForType( $entityType );
-		$dummyTitle = Title::makeTitle( $ns, '/' );
-
-		return $this->getPermissionStatus( $user, $permission, $dummyTitle, $quick );
-	}
-
-	/**
-	 * @see EntityPermissionChecker::getPermissionStatusForEntity
-	 *
-	 * @note When checking for the 'edit' permission, this will check the 'createpage'
-	 * permission first in case the entity does not yet exist (i.e. if $entity->getId()
-	 * returns null).
-	 *
-	 * @param User $user
-	 * @param string $permission
-	 * @param EntityDocument $entity
-	 * @param string $quick
-	 *
-	 * @return Status a status object representing the check's result.
-	 *
-	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
-	 */
-	public function getPermissionStatusForEntity( User $user, $permission, EntityDocument $entity, $quick = '' ) {
-		$id = $entity->getId();
-		$status = null;
-
-		if ( !$id ) {
-			$entityType = $entity->getType();
-
-			if ( $permission === 'edit' ) {
-				// for editing a non-existing page, check the createpage permission
-				$status = $this->getPermissionStatusForEntityType( $user, 'createpage', $entityType, $quick );
-			}
-
-			if ( !$status || $status->isOK() ) {
-				$status = $this->getPermissionStatusForEntityType( $user, $permission, $entityType, $quick );
-			}
-		} else {
-			$status = $this->getPermissionStatusForEntityId( $user, $permission, $id, $quick );
-		}
-
-		return $status;
 	}
 
 }
