@@ -61,7 +61,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId $entityId
 	 * @param string $expectedClass
 	 */
-	public function testNewForEntity( $action, $entityId, $expectedClass ) {
+	public function testNewForEntity( $action, EntityId $entityId, $expectedClass ) {
 		$factory = $this->getEntityChangeFactory();
 
 		$change = $factory->newForEntity( $action, $entityId );
@@ -77,7 +77,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId $entityId
 	 * @param string $expectedClass
 	 */
-	public function testNewForChangeType( $action, $entityId, $expectedClass ) {
+	public function testNewForChangeType( $action, EntityId $entityId, $expectedClass ) {
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$factory = $this->getEntityChangeFactory();
 

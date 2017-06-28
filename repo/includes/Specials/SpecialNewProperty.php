@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use OutputPage;
 use Status;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
@@ -197,7 +198,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 *
 	 * @return Summary
 	 */
-	protected function createSummary( $property ) {
+	protected function createSummary( EntityDocument $property ) {
 		$uiLanguageCode = $this->getLanguage()->getCode();
 
 		$summary = new Summary( 'wbeditentity', 'create' );

@@ -6,6 +6,7 @@ use OutputPage;
 use SiteLookup;
 use Status;
 use WebRequest;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\EditEntityFactory;
@@ -232,7 +233,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 *
 	 * @return Summary
 	 */
-	protected function createSummary( $item ) {
+	protected function createSummary( EntityDocument $item ) {
 		$uiLanguageCode = $this->getLanguage()->getCode();
 
 		$summary = new Summary( 'wbeditentity', 'create' );

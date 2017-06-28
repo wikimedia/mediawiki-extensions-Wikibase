@@ -176,7 +176,7 @@ class SqlEntityIdPager implements EntityIdPager {
 	 *
 	 * @return array Tuple with ( EntityId[], int|null )
 	 */
-	private function processRows( $rows ) {
+	private function processRows( ResultWrapper $rows ) {
 		$entityIds = [];
 		$position = null;
 

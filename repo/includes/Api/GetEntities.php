@@ -86,7 +86,7 @@ class GetEntities extends ApiBase {
 	 * @see ApiBase::__construct
 	 */
 	public function __construct(
-		$mainModule,
+		ApiMain $mainModule,
 		$moduleName,
 		StringNormalizer $stringNormalizer,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,

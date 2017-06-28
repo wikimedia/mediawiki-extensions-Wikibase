@@ -334,7 +334,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @return EntityRedirect
 	 * @throws RuntimeException
 	 */
-	private function createTestRedirect( EntityId $entityId, $targetHandle, $comment, $user, $flags ) {
+	private function createTestRedirect( EntityId $entityId, $targetHandle, $comment, User $user, $flags ) {
 		$targetId = $this->getTestItemId( $targetHandle );
 		$redirect = new EntityRedirect( $entityId, $targetId );
 

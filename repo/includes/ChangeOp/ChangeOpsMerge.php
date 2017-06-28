@@ -320,7 +320,7 @@ class ChangeOpsMerge {
 	 *
 	 * @return Statement|false Statement to merge reference into or false
 	 */
-	private function findEquivalentStatement( $fromStatement ) {
+	private function findEquivalentStatement( Statement $fromStatement ) {
 		$fromHash = $this->getStatementHash( $fromStatement );
 
 		/** @var Statement $statement */

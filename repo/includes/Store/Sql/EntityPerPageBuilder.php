@@ -184,7 +184,7 @@ class EntityPerPageBuilder {
 	 *
 	 * @return int
 	 */
-	protected function rebuildPages( $pages ) {
+	protected function rebuildPages( ResultWrapper $pages ) {
 		$lastPageSeen = 0;
 
 		foreach ( $pages as $pageRow ) {

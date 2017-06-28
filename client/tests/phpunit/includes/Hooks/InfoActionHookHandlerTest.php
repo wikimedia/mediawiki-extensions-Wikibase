@@ -33,8 +33,15 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider handleProvider
 	 */
-	public function testHandle( $expected, $context, $pageInfo, $enabled, $entityId, $message ) {
-		$hookHandler = $this->newHookHandler( $enabled, $entityId );
+	public function testHandle(
+		array $expected,
+		IContextSource $context,
+		array $pageInfo,
+		$enabled,
+		ItemId $itemId = null,
+		$message
+	) {
+		$hookHandler = $this->newHookHandler( $enabled, $itemId );
 		$pageInfo = $hookHandler->handle( $context, $pageInfo );
 
 		$this->assertEquals( $expected, $pageInfo, $message );
@@ -45,80 +52,82 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$labeledLink = '<a href="https://www.wikidata.org/wiki/Q4" class="external">Berlin</a>';
 		$unLabeledLink = '<a href="https://www.wikidata.org/wiki/Q4" class="external">Q4</a>';
 		$q5Link = '<a href="https://www.wikidata.org/wiki/Q5" class="external">Q5</a>';
-		$cases = [];
 
-		$cases[] = [
+		return [
 			[
-				'header-basic' => [
-					[
-						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
-						$unLabeledLink
+				[
+					'header-basic' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
+							$unLabeledLink
+						],
 					],
-				],
-				'header-properties' => [
-					[
-						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
-						"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
-					],
-				]
-			],
-			$context, [ 'header-basic' => [] ], true, new ItemId( 'Q4' ),
-			'item id link'
-		];
-
-		$cases[] = [
-			[ 'header-properties' => [
-					[
-						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
-						"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
-					],
-				]
-			],
-			$context,
-			[ 'header-properties' => [] ],
-			false,
-			new ItemId( 'Q4' ),
-			'namespace does not have wikibase enabled'
-		];
-
-		$cases[] = [
-			[
-				'header-basic' => [
-					[
-						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
-						$context->msg( 'wikibase-pageinfo-entity-id-none' )->escaped()
+					'header-properties' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+							"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
+						],
 					]
-				]
+				],
+				$context,
+				[ 'header-basic' => [] ],
+				true,
+				new ItemId( 'Q4' ),
+				'item id link'
 			],
-			$context, [ 'header-basic' => [] ], true, false,
-			'page is not connected to an item'
-		];
-
-		$cases[] = [
-			[ 'header-properties' => [
-					[
-						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
-						"<ul><li>$q5Link</li><ul><li>Sitelink</li></ul></ul>",
-					],
-				]
+			[
+				[ 'header-properties' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+							"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
+						],
+					]
+				],
+				$context,
+				[ 'header-properties' => [] ],
+				false,
+				new ItemId( 'Q4' ),
+				'namespace does not have wikibase enabled'
 			],
-			$context,
-			[ 'header-properties' => [] ],
-			false,
-			new ItemId( 'Q5' ),
-			'No label for Q5'
+			[
+				[
+					'header-basic' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
+							$context->msg( 'wikibase-pageinfo-entity-id-none' )->escaped()
+						]
+					]
+				],
+				$context,
+				[ 'header-basic' => [] ],
+				true,
+				null,
+				'page is not connected to an item'
+			],
+			[
+				[ 'header-properties' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+							"<ul><li>$q5Link</li><ul><li>Sitelink</li></ul></ul>",
+						],
+					]
+				],
+				$context,
+				[ 'header-properties' => [] ],
+				false,
+				new ItemId( 'Q5' ),
+				'No label for Q5'
+			]
 		];
-
-		return $cases;
 	}
 
 	/**
 	 * @param bool $enabled
-	 * @param ItemId $entityId
+	 * @param ItemId|null $itemId
 	 *
 	 * @return InfoActionHookHandler
 	 */
-	private function newHookHandler( $enabled, $entityId ) {
+	private function newHookHandler( $enabled, ItemId $itemId = null ) {
 		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -149,14 +158,14 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )
-			->will( $this->returnValue( $entityId ) );
+			->will( $this->returnValue( $itemId ) );
 
 		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		if ( $entityId ) {
-			$entityUsage = array( new EntityUsage( $entityId, 'S' ) );
+		if ( $itemId ) {
+			$entityUsage = array( new EntityUsage( $itemId, 'S' ) );
 			$sqlUsageTracker->expects( $this->any() )
 				->method( 'getUsagesForPage' )
 				->will( $this->returnValue( $entityUsage ) );

@@ -152,19 +152,25 @@ final class RepoHooks {
 
 	/**
 	 * Called when a revision was inserted due to an edit.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NewRevisionFromEditComplete
 	 *
-	 * @param WikiPage $article A WikiPage object as of MediaWiki 1.19, an Article one before.
+	 * @param WikiPage $wikiPage
 	 * @param Revision $revision
 	 * @param int $baseID
 	 * @param User $user
 	 *
 	 * @return bool
 	 */
-	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
+	public static function onNewRevisionFromEditComplete(
+		WikiPage $wikiPage,
+		Revision $revision,
+		$baseID,
+		User $user
+	) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
+		if ( $entityContentFactory->isEntityContentModel( $wikiPage->getContent()->getModel() ) ) {
 			self::notifyEntityStoreWatcherOnUpdate( $revision );
 
 			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();

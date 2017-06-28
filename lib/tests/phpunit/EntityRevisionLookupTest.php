@@ -117,7 +117,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	 * @param bool            $shouldExist
 	 * @param string|null     $expectException
 	 */
-	public function testGetEntityRevision( $id, $revision, $shouldExist, $expectException = null ) {
+	public function testGetEntityRevision( EntityId $id, $revision, $shouldExist, $expectException = null ) {
 		if ( $expectException !== null ) {
 			$this->setExpectedException( $expectException );
 		}

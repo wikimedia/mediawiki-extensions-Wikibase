@@ -119,9 +119,10 @@ class SnakHtmlGenerator {
 	 * localised exception messages.
 	 *
 	 * @param Snak $snak
+	 *
 	 * @return string HTML
 	 */
-	private function getFormattedSnakValue( $snak ) {
+	private function getFormattedSnakValue( Snak $snak ) {
 		try {
 			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {

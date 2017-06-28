@@ -111,19 +111,15 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider atomicClaimDifferenceProvider
-	 *
-	 * @param ClaimDifference $claimDifference
 	 */
-	public function testIsAtomic( $claimDifference ) {
+	public function testIsAtomic( ClaimDifference $claimDifference ) {
 		$this->assertTrue( $claimDifference->isAtomic(), "isAtomic reports claimDifference as non-atomic, although it is" );
 	}
 
 	/**
 	 * @dataProvider nonAtomicClaimDifferenceProvider
-	 *
-	 * @param ClaimDifference $claimDifference
 	 */
-	public function testIsNotAtomic( $claimDifference ) {
+	public function testIsNotAtomic( ClaimDifference $claimDifference ) {
 		$this->assertFalse( $claimDifference->isAtomic(), "isAtomic reports claimDifference as atomic, although it is not" );
 	}
 

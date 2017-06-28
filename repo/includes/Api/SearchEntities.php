@@ -114,7 +114,7 @@ class SearchEntities extends ApiBase {
 	 *
 	 * @return array
 	 */
-	private function buildTermSearchMatchEntry( $match ) {
+	private function buildTermSearchMatchEntry( TermSearchResult $match ) {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
 		$entityId = $match->getEntityId();
 		$title = $this->titleLookup->getTitleForId( $entityId );
