@@ -1,7 +1,9 @@
 # ValueView release notes
 
-## 0.19.2 (dev)
-* Raised required PHP version from 5.3 to 5.5.
+## 0.19.2 (2017-06-28)
+* All relevant `jQuery.valueview.experts.…` classes are now exported via `module.exports`.
+* Raised required PHP version from 5.3 to 5.5.9.
+* Replaces JSCS and JSLint with ESLint.
 
 ## 0.19.1 (2017-04-18)
 * Added support for the `tabular-data` data type.

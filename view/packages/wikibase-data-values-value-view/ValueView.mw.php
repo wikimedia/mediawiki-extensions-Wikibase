@@ -35,6 +35,7 @@ $wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
  *
  * @param array &$testModules
  * @param ResourceLoader &$resourceLoader
+ *
  * @return boolean
  */
 $wgHooks['ResourceLoaderTestModules'][] = function(
