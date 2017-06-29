@@ -38,12 +38,12 @@ class RecentChangesDuplicateDetector {
 
 		$res = $db->select(
 			'recentchanges',
-			array( 'rc_id', 'rc_timestamp', 'rc_type', 'rc_params' ),
+			array( 'rc_id', 'rc_timestamp', 'rc_source', 'rc_params' ),
 			array(
 				'rc_namespace' => $attribs['rc_namespace'],
 				'rc_title' => $attribs['rc_title'],
 				'rc_timestamp' => $attribs['rc_timestamp'],
-				'rc_type' => RC_EXTERNAL
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE
 			),
 			__METHOD__
 		);
