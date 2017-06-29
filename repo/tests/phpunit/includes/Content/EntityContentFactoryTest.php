@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Tests\PermissionsHelper;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentFactory
@@ -204,119 +203,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		$this->setExpectedException( OutOfBoundsException::class );
 		$factory->getEntityHandlerForContentModel( 'foo' );
-	}
-
-	public function provideGetPermissionStatusForEntity() {
-		return array(
-			'read allowed for non-existing entity' => array(
-				'read',
-				array( 'read' => true ),
-				null,
-				array(
-					'getPermissionStatusForEntity' => true,
-					'getPermissionStatusForEntityType' => true,
-				),
-			),
-			'edit and createpage allowed for new entity' => array(
-				'edit',
-				array( 'read' => true, 'edit' => true, 'createpage' => true ),
-				null,
-				array(
-					'getPermissionStatusForEntity' => true,
-					'getPermissionStatusForEntityType' => true,
-				),
-			),
-			'implicit createpage not allowed for new entity' => array(
-				'edit',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
-				null,
-				array(
-					'getPermissionStatusForEntity' => false, // "createpage" is implicitly needed
-					'getPermissionStatusForEntityType' => true, // "edit" is allowed for type
-				),
-			),
-			'createpage not allowed' => array(
-				'createpage',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
-				null,
-				array(
-					'getPermissionStatusForEntity' => false, // "createpage" is implicitly needed
-					'getPermissionStatusForEntityType' => false, // "createpage" is not allowed
-				),
-			),
-			'edit allowed for existing item' => array(
-				'edit',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
-				'Q23',
-				array(
-					'getPermissionStatusForEntity' => true,
-					'getPermissionStatusForEntityType' => true,
-					'getPermissionStatusForEntityId' => true,
-				),
-			),
-			'edit not allowed' => array(
-				'edit',
-				array( 'read' => true, 'edit' => false ),
-				'Q23',
-				array(
-					'getPermissionStatusForEntity' => false,
-					'getPermissionStatusForEntityType' => false,
-					'getPermissionStatusForEntityId' => false,
-				),
-			),
-			'delete not allowed' => array(
-				'delete',
-				array( 'read' => true, 'delete' => false ),
-				null,
-				array(
-					'getPermissionStatusForEntity' => false,
-					'getPermissionStatusForEntityType' => false,
-				),
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetPermissionStatusForEntity
-	 */
-	public function testGetPermissionStatusForEntity( $action, array $permissions, $id, array $expectations ) {
-		global $wgUser;
-
-		$entity = new Item();
-
-		if ( $id ) {
-			// "exists"
-			$entity->setId( new ItemId( $id ) );
-		}
-
-		$this->stashMwGlobals( 'wgUser' );
-		$this->stashMwGlobals( 'wgGroupPermissions' );
-
-		PermissionsHelper::applyPermissions(
-			// set permissions for implicit groups
-			array( '*' => $permissions,
-					'user' => $permissions,
-					'autoconfirmed' => $permissions,
-					'emailconfirmed' => $permissions ),
-			array() // remove all groups not implied
-		);
-
-		$factory = $this->newFactory();
-
-		if ( isset( $expectations['getPermissionStatusForEntity'] ) ) {
-			$status = $factory->getPermissionStatusForEntity( $wgUser, $action, $entity );
-			$this->assertEquals( $expectations['getPermissionStatusForEntity'], $status->isOK() );
-		}
-
-		if ( isset( $expectations['getPermissionStatusForEntityType'] ) ) {
-			$status = $factory->getPermissionStatusForEntityType( $wgUser, $action, $entity->getType() );
-			$this->assertEquals( $expectations['getPermissionStatusForEntityType'], $status->isOK() );
-		}
-
-		if ( isset( $expectations['getPermissionStatusForEntityId'] ) ) {
-			$status = $factory->getPermissionStatusForEntityId( $wgUser, $action, $entity->getId() );
-			$this->assertEquals( $expectations['getPermissionStatusForEntityId'], $status->isOK() );
-		}
 	}
 
 	public function newFromEntityProvider() {
