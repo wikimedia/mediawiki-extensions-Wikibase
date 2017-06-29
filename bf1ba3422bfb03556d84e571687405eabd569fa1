@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_8f94ae8e",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "It\u0027s probably unnecessary to do this anew for every batch, but it shouldn\u0027t be a problem either.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_efde926f",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "Two levels of loops in a method is smelly, the body of the outer loop should probably be factored out. Oh well, whatever.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_6ff2a205",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "IIRC, this flushes any transactions. But we still need to wait for replication later. Not a problem.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_afe88a0c",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "I *think* you can just do $db-\u003edelete( self::TABLE_NAME, [ \u0027term_row_id\u0027 \u003d\u003e $rowIds ] ), and it will Just Work(tm). But don\u0027t trust me on this.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_6fd94283",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0f543ec8",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "This error message corresponds to the case of $entityId not being a Int32EntityId. It\u0027s incorrect for the case when readFullEntityIdColumn is true. \n\nI think if readFullEntityIdColumn is true, this method should either just return false immediately, or throw a LogicException, because it shouldn\u0027t even be called in that case.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_af65eaab",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "Like above, I think the two cases should be distinguished.\n\nIf $this-\u003ereadFullEntityIdColumn is true, just do nothing. If it\u0027s false but $entityId isn\u0027t a Int32EntityId, at least output a warning, or maybe even fail.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_4f01e6b8",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "negatives are generally discouraged in parameters, and options.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_6f2dc240",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "This is why I\u0027d prefer simple setters :)",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_2f27ba60",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "and otherwise, do nothing, and rely on knowing what the default is?",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_cf1cf61a",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-29T19:21:52Z",
+      "side": 1,
+      "message": "and otherwise, do nothing, and rely on knowing what the default is?",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
