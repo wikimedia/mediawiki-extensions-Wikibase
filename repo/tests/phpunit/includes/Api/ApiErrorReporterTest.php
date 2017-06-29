@@ -159,7 +159,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 	public function messageProvider() {
 		$code = 'no-such-sitelink';
-		$param = 'Foo';
 
 		return array(
 			// The appropriate message should be included in the extra data.
@@ -167,7 +166,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			// while the HTML should be in German. Any Message parameters must be present.
 			'known error code' => array(
 				'$code' => $code,
-				'$param' => $param,
+				'$msg' => [ 'wikibase-api-no-such-sitelink', 'Foo' ],
 				'$infoPattern' => '/sitelink/',
 				'$expectedDataFields' => array(
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
@@ -181,13 +180,13 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider messageProvider
 	 */
-	public function testDieMessage( $code, $param, $infoPattern, array $expectedDataFields ) {
+	public function testDieWithError( $code, $msg, $infoPattern, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
-			$reporter->dieMessage( $code, $param );
+			$reporter->dieWithError( $msg, $code );
 			$this->fail( 'ApiUsageException was not thrown!' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertUsageException( $infoPattern, $code, null, $expectedDataFields, $ex );

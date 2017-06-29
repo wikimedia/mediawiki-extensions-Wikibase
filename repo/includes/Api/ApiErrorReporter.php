@@ -197,18 +197,17 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Aborts the request with an error message derived from the error code.
+	 * @see ApiBase::dieWithError
 	 *
-	 * @param string $errorCode A code identifying the error.
-	 * @param string [$param,...] Parameters for the Message.
+	 * @param string|string[] $msg See ApiErrorFormatter::addError()
+	 * @param string $errorCode See ApiErrorFormatter::addError()
 	 *
-	 * @throws ApiUsageException
+	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
-	public function dieMessage( $errorCode /*...*/ ) {
-		$messageKey = "wikibase-api-$errorCode";
-		$params = func_get_args();
-		array_shift( $params );
+	public function dieWithError( $msg, $errorCode ) {
+		$params = (array)$msg;
+		$messageKey = array_shift( $params );
 		$message = wfMessage( $messageKey, $params );
 
 		$this->dieMessageObject( $message, $errorCode );
@@ -230,7 +229,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
-	 * @throws ApiUsageException
+	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
 	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -257,7 +256,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
-	 * @throws ApiUsageException
+	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
 	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -303,7 +302,7 @@ class ApiErrorReporter {
 	 * @param array|null $data See ApiMessage::create()
 	 * @param int $httpCode HTTP error code to use
 	 *
-	 * @throws ApiUsageException
+	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
 	private function throwUsageException( $msg, $code, array $data = null, $httpCode = 0 ) {

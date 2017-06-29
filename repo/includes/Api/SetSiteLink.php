@@ -161,7 +161,10 @@ class SetSiteLink extends ModifyEntity {
 				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
 				if ( $page === false ) {
-					$this->errorReporter->dieMessage( 'no-external-page', $linksite, $params['linktitle'] );
+					$this->errorReporter->dieWithError(
+						[ 'wikibase-api-no-external-page', $linksite, $params['linktitle'] ],
+						'no-external-page'
+					);
 				}
 			} else {
 				$page = null;
