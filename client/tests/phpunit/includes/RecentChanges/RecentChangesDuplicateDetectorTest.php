@@ -122,6 +122,25 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 					)
 				),
 			) ),
+			'external change exists but not from repo' => array( false, array(
+				'rc_id' => 17,
+				'rc_timestamp' => '20121212121212',
+				'rc_user' => 23,
+				'rc_user_text' => 'Test',
+				'rc_namespace' => 0,
+				'rc_title' => 'Kittens',
+				'rc_comment' => 'Testing',
+				'rc_type' => RC_EXTERNAL,
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
+				'rc_last_oldid' => 11,
+				'rc_this_oldid' => 12,
+				'rc_params' => array(
+					'wikibase-repo-change' => array(
+						'parent_id' => 11,
+						'rev_id' => 12,
+					)
+				),
+			) ),
 		);
 	}
 
@@ -222,7 +241,27 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				)
 			)
 		) );
+		$change->save();
 
+		$change = $this->newChange( array(
+			'rc_id' => 19,
+			'rc_timestamp' => '20121212121212',
+			'rc_user' => 23,
+			'rc_user_text' => 'Test',
+			'rc_namespace' => 0,
+			'rc_title' => 'Test',
+			'rc_comment' => 'Testing',
+			'rc_type' => RC_EXTERNAL,
+			'rc_source' => 'foo', // different source
+			'rc_last_oldid' => 11,
+			'rc_this_oldid' => 12,
+			'rc_params' => array(
+				'wikibase-repo-change' => array(
+					'parent_id' => 11,
+					'rev_id' => 12,
+				)
+			)
+		) );
 		$change->save();
 	}
 
