@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_3c6ffac1",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-29T17:25:02Z",
+      "side": 1,
+      "message": "oh wait, does it really hit database? I thought so, because all Title and User stuff but now I am actually no longer sure this is true.",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
