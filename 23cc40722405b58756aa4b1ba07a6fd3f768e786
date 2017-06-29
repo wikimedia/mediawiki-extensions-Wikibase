@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_d93608e4",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:23:19Z",
+      "side": 1,
+      "message": "I introduced this one, which is extremely close to the new \"need-ids-or-titles-and-sites\" below. One is singular, the other one is plural. Can we merge these into one message? If not, they should at least be next to each other, and much more consistently named.",
+      "range": {
+        "startLine": 333,
+        "startChar": 15,
+        "endLine": 333,
+        "endChar": 38
+      },
+      "revId": "23cc40722405b58756aa4b1ba07a6fd3f768e786",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_f933c4f1",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:23:19Z",
+      "side": 1,
+      "message": "Can\u0027t we just add a parameter to this one and not introduce a new duplicate?",
+      "range": {
+        "startLine": 364,
+        "startChar": 15,
+        "endLine": 364,
+        "endChar": 28
+      },
+      "revId": "23cc40722405b58756aa4b1ba07a6fd3f768e786",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
