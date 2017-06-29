@@ -187,7 +187,7 @@ class ApiErrorReporter {
 			// NOTE: Ignore generic error messages, rely on the code instead!
 			// XXX: No better way to do this?
 			if ( $key !== 'wikibase-error-unexpected' ) {
-				$this->dieMessageObject( $message, $errorCode, $httpRespCode, $extradata );
+				$this->dieWithError( $message, $errorCode, $httpRespCode, $extradata );
 			}
 		}
 
@@ -199,43 +199,24 @@ class ApiErrorReporter {
 	/**
 	 * @see ApiBase::dieWithError
 	 *
-	 * @param string|string[] $msg See ApiErrorFormatter::addError()
+	 * @param string|string[]|MessageSpecifier $msg See ApiErrorFormatter::addError()
 	 * @param string $errorCode See ApiErrorFormatter::addError()
-	 *
-	 * @throws ApiUsageException always
-	 * @throws LogicException
-	 */
-	public function dieWithError( $msg, $errorCode ) {
-		$params = (array)$msg;
-		$messageKey = array_shift( $params );
-		$message = wfMessage( $messageKey, $params );
-
-		$this->dieMessageObject( $message, $errorCode );
-
-		throw new LogicException( 'ApiUsageException not thrown' );
-	}
-
-	/**
-	 * Aborts the request with an error message. The given message is included in
-	 * the error's extra data.
-	 *
-	 * @see ApiBase::dieUsage()
-	 *
-	 * @param Message $message The error message. Will be used to generate the free form description
-	 * of the error (as plain text in the content language) and included in the extra data (as
-	 * HTML in the user's language, and as a data structure including the message key and
-	 * parameters).
-	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
 	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
-	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
-		$this->addMessageToResult( $message, $extradata );
+	public function dieWithError( $msg, $errorCode, $httpRespCode = 0, $extradata = [] ) {
+		if ( !( $msg instanceof MessageSpecifier ) ) {
+			$params = (array)$msg;
+			$messageKey = array_shift( $params );
+			$msg = wfMessage( $messageKey, $params );
+		}
 
-		$this->throwUsageException( $message, $errorCode, $extradata, $httpRespCode );
+		$this->addMessageToResult( $msg, $extradata );
+
+		$this->throwUsageException( $msg, $errorCode, $extradata, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
