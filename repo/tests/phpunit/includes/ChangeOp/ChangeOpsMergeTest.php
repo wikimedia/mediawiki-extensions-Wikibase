@@ -22,6 +22,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Tests\NewItem;
+use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 
@@ -497,9 +498,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	}
 
 	public function testExceptionThrownWhenFromHasLink() {
-
 		$from = NewItem::withId( 'Q111' )
-			->andPropertyValueSnak( 'P42', new ItemId( 'Q222' ) )
+			->andStatement(
+				NewStatement::forProperty( 'P42' )->withValue( new ItemId( 'Q222' ) )
+			)
 			->build();
 
 		$to = NewItem::withId( 'Q222' )
@@ -519,7 +521,9 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->build();
 
 		$to = NewItem::withId( 'Q222' )
-			->andPropertyValueSnak( 'P42', new ItemId( 'Q111' ) )
+			->andStatement(
+				NewStatement::forProperty( 'P42' )->withValue( new ItemId( 'Q111' ) )
+			)
 			->build();
 
 		$changeOps = $this->makeChangeOpsMerge( $from, $to );
