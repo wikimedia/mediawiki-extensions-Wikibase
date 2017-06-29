@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_39fcecd4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:43:30Z",
+      "side": 1,
+      "message": "This is expensive. I think this should not be done, and does not need to be done at this point. Just set the lang\u003d\"…\" attribute to what is in $termData, and set dir\u003d\"auto\".",
+      "range": {
+        "startLine": 559,
+        "startChar": 15,
+        "endLine": 559,
+        "endChar": 32
+      },
+      "revId": "750e7ae34271e474a2a3156d9fcb51250ab7d34d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
