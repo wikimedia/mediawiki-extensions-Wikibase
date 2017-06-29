@@ -6,7 +6,6 @@ use ApiBase;
 use ApiErrorFormatter;
 use ApiErrorFormatter_BackCompat;
 use ApiMessage;
-use ApiRawMessage;
 use ApiResult;
 use Exception;
 use InvalidArgumentException;
@@ -116,25 +115,25 @@ class ApiErrorReporter {
 	 * to generate the error's free form description.
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode Currently ignored!
-	 * @param array|null $extradata Any extra data to include in the error report
+	 * @param array|null $extraData Any extra data to include in the error report
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	public function dieStatus( StatusValue $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	public function dieStatus( StatusValue $status, $errorCode, $httpRespCode = 0, $extraData = [] ) {
 		if ( $status->isOK() ) {
 			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal StatusValue!' );
 		}
 
 		$error = $this->getPlainErrorMessageFromStatus( $status );
-		$msg = $this->getMessageForCode( $errorCode, $error, $extradata );
+		$msg = $this->getMessageForCode( $errorCode, $error, $extraData );
 
 		$extendedStatus = StatusValue::newFatal( $msg );
 		$extendedStatus->merge( $status, true );
 		$status = $extendedStatus;
 
-		$this->addStatusToResult( $status, $extradata );
-		$msg->setApiData( $extradata );
+		$this->addStatusToResult( $status, $extraData );
+		$msg->setApiData( $extraData );
 
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
@@ -174,12 +173,12 @@ class ApiErrorReporter {
 	 * free form description.
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
-	 * @param array|null $extradata Any extra data to include in the error report
+	 * @param array|null $extraData Any extra data to include in the error report
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	public function dieException( Exception $ex, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	public function dieException( Exception $ex, $errorCode, $httpRespCode = 0, $extraData = [] ) {
 		if ( $this->localizer->hasExceptionMessage( $ex ) ) {
 			$message = $this->localizer->getExceptionMessage( $ex );
 			$key = $message->getKey();
@@ -187,11 +186,11 @@ class ApiErrorReporter {
 			// NOTE: Ignore generic error messages, rely on the code instead!
 			// XXX: No better way to do this?
 			if ( $key !== 'wikibase-error-unexpected' ) {
-				$this->dieWithError( $message, $errorCode, $httpRespCode, $extradata );
+				$this->dieWithError( $message, $errorCode, $httpRespCode, $extraData );
 			}
 		}
 
-		$this->dieError( $ex->getMessage(), $errorCode, $httpRespCode, $extradata );
+		$this->dieError( $ex->getMessage(), $errorCode, $httpRespCode, $extraData );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -200,23 +199,23 @@ class ApiErrorReporter {
 	 * @see ApiBase::dieWithError
 	 *
 	 * @param string|string[]|MessageSpecifier $msg See ApiErrorFormatter::addError()
-	 * @param string $errorCode See ApiErrorFormatter::addError()
+	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
-	 * @param array|null $extradata Any extra data to include in the error report
+	 * @param array|null $extraData Any extra data to include in the error report
 	 *
 	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
-	public function dieWithError( $msg, $errorCode, $httpRespCode = 0, $extradata = [] ) {
+	public function dieWithError( $msg, $errorCode, $httpRespCode = 0, $extraData = [] ) {
 		if ( !( $msg instanceof MessageSpecifier ) ) {
 			$params = (array)$msg;
 			$messageKey = array_shift( $params );
 			$msg = wfMessage( $messageKey, $params );
 		}
 
-		$this->addMessageToResult( $msg, $extradata );
+		$this->addMessageToResult( $msg, $extraData );
 
-		$this->throwUsageException( $msg, $errorCode, $extradata, $httpRespCode );
+		$this->trackAndDieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -235,66 +234,60 @@ class ApiErrorReporter {
 	 * for use in logs.
 	 * @param string $errorCode A code identifying the error
 	 * @param int $httpRespCode The HTTP error code to send to the client
-	 * @param array|null $extradata Any extra data to include in the error report
+	 * @param array|null $extraData Any extra data to include in the error report
 	 *
 	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
-	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
-		$message = $this->getMessageForCode( $errorCode, $description, $extradata );
+	public function dieError( $description, $errorCode, $httpRespCode = 0, $extraData = [] ) {
+		$msg = $this->getMessageForCode( $errorCode, $description, $extraData );
 
-		$this->addMessageToResult( $message, $extradata );
-		$message->setApiData( $extradata );
+		$this->addMessageToResult( $msg, $extraData );
+		$msg->setApiData( $extraData );
 
-		$this->throwUsageException( $message, $errorCode, $extradata, $httpRespCode );
+		$this->trackAndDieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
-	 * @param string $errorCode
+	 * @param string $errorCode A code identifying the error.
 	 * @param string|null $description Plain text english message
-	 * @param array|null $data
+	 * @param array|null $extraData Any extra data to include in the error report
 	 *
 	 * @return ApiMessage
 	 */
-	private function getMessageForCode( $errorCode, $description = null, array $data = null ) {
+	private function getMessageForCode( $errorCode, $description, array $extraData = null ) {
 		$messageKey = "wikibase-api-$errorCode";
 
-		$message = wfMessage( $messageKey );
+		$msg = wfMessage( $messageKey );
 
-		if ( !$message->exists() ) {
+		if ( !$msg->exists() ) {
 			// NOTE: Use key fallback, so the nominal message key will be the original.
 			$params = $description === null ? [] : [ $description ];
-			$message = wfMessage( [ $messageKey, 'rawmessage' ], $params );
+			// TODO: Should we use the ApiRawMessage class instead?
+			$msg = wfMessage( [ $messageKey, 'rawmessage' ], $params );
 		}
 
-		return ApiMessage::create( $message, $errorCode, $data );
+		return ApiMessage::create( $msg, $errorCode, $extraData );
 	}
 
 	/**
-	 * Throws a ApiUsageException by calling ApiBase::dieUsage().
-	 *
 	 * @see ApiBase::dieWithError()
 	 *
-	 * @param string|array|MessageSpecifier $msg A plain text (English) message, or a message key
-	 *        and parameters as an array, or a MessageSpecifier object.
-	 * @param string|null $code See ApiMessage::create()
-	 * @param array|null $data See ApiMessage::create()
-	 * @param int $httpCode HTTP error code to use
+	 * @param MessageSpecifier $msg
+	 * @param string $errorCode A code identifying the error.
+	 * @param array|null $extraData Any extra data to include in the error report
+	 * @param int $httpRespCode The HTTP error code to send to the client
 	 *
 	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
-	private function throwUsageException( $msg, $code, array $data = null, $httpCode = 0 ) {
+	private function trackAndDieWithError( MessageSpecifier $msg, $errorCode, array $extraData = null, $httpRespCode ) {
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
 
-		if ( is_string( $msg ) ) {
-			$msg = new ApiRawMessage( $msg, $code, $data );
-		}
-
-		$this->apiModule->getMain()->dieWithError( $msg, $code, $data, $httpCode );
+		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -313,7 +306,7 @@ class ApiErrorReporter {
 		}
 
 		if ( !is_array( $data ) ) {
-			throw new InvalidArgumentException( '$extradata must be an array' );
+			throw new InvalidArgumentException( '$data must be an array' );
 		}
 
 		$messageData = $this->convertMessageToResult( $message );
