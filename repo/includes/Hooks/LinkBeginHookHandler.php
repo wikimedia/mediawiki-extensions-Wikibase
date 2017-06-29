@@ -104,7 +104,7 @@ class LinkBeginHookHandler {
 	 * This is only handling special pages right now and gets disabled in normal pages.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
 	 *
-	 * @param DummyLinker $skin
+	 * @param DummyLinker $dummy Used to be a skin, but that eliminated.
 	 * @param Title $target
 	 * @param string $html
 	 * @param array $customAttribs
@@ -114,8 +114,14 @@ class LinkBeginHookHandler {
 	 *
 	 * @return bool true
 	 */
-	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, array &$query,
-		&$options, &$ret
+	public static function onLinkBegin(
+		$dummy,
+		Title $target,
+		&$html,
+		array &$customAttribs,
+		array &$query,
+		&$options,
+		&$ret
 	) {
 		$context = RequestContext::getMain();
 		if ( !$context->hasTitle() ) {

@@ -75,6 +75,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 				$this->languageFallbackChainFactory->newFromContext( $this->getContext() )
 			);
 		}
+
 		return $this->chain;
 	}
 
@@ -82,9 +83,10 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 * Set a new chain for display and return the original one.
 	 *
 	 * @param LanguageFallbackChain $chain
+	 *
 	 * @return LanguageFallbackChain
 	 */
-	public function setLanguageFallbackChain( $chain ) {
+	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
 		return wfSetVar( $this->chain, $chain );
 	}
 

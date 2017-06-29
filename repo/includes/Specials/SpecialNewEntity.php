@@ -188,7 +188,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @return Summary
 	 */
-	abstract protected function createSummary( $entity );
+	abstract protected function createSummary( EntityDocument $entity );
 
 	protected function displayBeforeForm( OutputPage $output ) {
 		$output->addModules( 'wikibase.special.newEntity' );

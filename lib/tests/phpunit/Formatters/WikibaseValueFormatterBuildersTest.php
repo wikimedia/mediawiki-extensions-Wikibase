@@ -133,7 +133,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 *
 	 * @return mixed
 	 */
-	private function callFactoryFunction( $functionName, $format, $options ) {
+	private function callFactoryFunction( $functionName, $format, FormatterOptions $options ) {
 		$builders = $this->newWikibaseValueFormatterBuilders(
 			$this->getTitleLookup()
 		);

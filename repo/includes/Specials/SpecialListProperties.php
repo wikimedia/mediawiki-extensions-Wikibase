@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use DataTypes\DataTypeFactory;
 use HTMLForm;
 use Html;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -162,7 +163,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 *
 	 * @return string
 	 */
-	protected function formatRow( $propertyId ) {
+	protected function formatRow( EntityId $propertyId ) {
 		$title = $this->titleLookup->getTitleForId( $propertyId );
 		if ( !$title->exists() ) {
 			return $this->entityIdFormatter->formatEntityId( $propertyId );

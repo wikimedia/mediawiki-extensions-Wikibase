@@ -64,7 +64,7 @@ class OutputPageJsConfigBuilder {
 	 *
 	 * @return array[]
 	 */
-	private function getCopyrightVar( $copyrightMessage, $language ) {
+	private function getCopyrightVar( Message $copyrightMessage, Language $language ) {
 		// non-translated message
 		$versionMessage = new Message( 'wikibase-shortcopyrightwarning-version' );
 

@@ -82,7 +82,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @return string HTML
 	 */
-	protected function formatRow( $entityId ) {
+	protected function formatRow( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 		return $this->getLinkRenderer()->makeKnownLink( $title );
 	}
