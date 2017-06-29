@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_e7655cab",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-06-29T13:05:58Z",
+      "side": 1,
+      "message": "I think we can use a type hint for Message here.",
+      "range": {
+        "startLine": 289,
+        "startChar": 39,
+        "endLine": 289,
+        "endChar": 42
+      },
+      "revId": "12b1b12dbb0e96ee60c24afee0863bfb3c6a74b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
