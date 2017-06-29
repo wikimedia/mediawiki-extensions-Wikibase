@@ -70,7 +70,7 @@ class EntityRedirectTest extends \PHPUnit_Framework_TestCase {
 	 * @param mixed $b
 	 * @param bool $expected
 	 */
-	public function testEquals( $a, $b, $expected ) {
+	public function testEquals( EntityRedirect $a, $b, $expected ) {
 		$this->assertEquals( $expected, $a->equals( $b ), '$a->equals( $b )' );
 
 		if ( $b instanceof EntityRedirect ) {

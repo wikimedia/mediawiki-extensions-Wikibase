@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Statement;
 
-use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Entity\EntityId;
@@ -21,65 +20,56 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideConstructionData
-	 * @param EntityId $entityId
-	 * @param string $guid
-	 * @param string $expected
 	 */
 	public function testConstructor( EntityId $entityId, $guid, $expected ) {
 		$statementGuid = new StatementGuid( $entityId, $guid );
 
-		$this->assertEquals( $expected, $statementGuid->getSerialization() );
+		$this->assertSame( $expected, $statementGuid->getSerialization() );
 		$this->assertEquals( $entityId, $statementGuid->getEntityId() );
 	}
 
 	public function provideConstructionData() {
-		$argLists = [];
-
-		$argLists[] = [
-			new ItemId( 'q42' ),
-			'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ,
-			'Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N'
+		return [
+			[
+				new ItemId( 'q42' ),
+				'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ,
+				'Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N'
+			],
+			[
+				new ItemId( 'Q1234567' ),
+				'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
+				'Q1234567$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF'
+			],
+			[
+				new ItemId( 'Q1' ),
+				'foo',
+				'Q1$foo'
+			],
 		];
-		$argLists[] = [
-			new ItemId( 'Q1234567' ),
-			'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF',
-			'Q1234567$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF'
-		];
-		$argLists[] = [
-			new ItemId( 'Q1' ),
-			'foo',
-			'Q1$foo'
-		];
-
-		return $argLists;
 	}
 
 	/**
 	 * @dataProvider provideBadConstruction
 	 */
-	public function testBadConstruction( $entityId, $guid ) {
+	public function testBadConstruction( EntityId $entityId, $guid ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 		new StatementGuid( $entityId, $guid );
 	}
 
 	public function provideBadConstruction() {
-		$argLists = [];
+		$id = new ItemId( 'Q1' );
 
-		$argLists[] = [ 'foobar', 'foobar' ];
-		$argLists[] = [ 'q123', 'foo' ];
-		$argLists[] = [ [], 'foo' ];
-		$argLists[] = [ new Exception(), 'foo' ];
-		$argLists[] = [ 'bar', 12345 ];
-
-		return $argLists;
+		return [
+			[ $id, null ],
+			[ $id, 12345 ],
+		];
 	}
 
 	public function provideStatementGuids() {
-		$constructionDatas = $this->provideConstructionData();
 		$argLists = [];
 
-		foreach ( $constructionDatas as $constructionData ) {
-			$argLists[] = [ new StatementGuid( $constructionData[0], $constructionData[1] ) ];
+		foreach ( $this->provideConstructionData() as $data ) {
+			$argLists[] = [ new StatementGuid( $data[0], $data[1] ) ];
 		}
 
 		return $argLists;
@@ -87,8 +77,6 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideStatementGuids
-	 *
-	 * @param StatementGuid $statementGuid
 	 */
 	public function testEquals( StatementGuid $statementGuid ) {
 		$statementGuidCopy = clone $statementGuid;
@@ -98,8 +86,6 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideStatementGuids
-	 *
-	 * @param StatementGuid $statementGuid
 	 */
 	public function testNotEquals( StatementGuid $statementGuid ) {
 		$notEqualStatementGuid = new StatementGuid( new ItemId( 'q9999' ), 'someguid' );
