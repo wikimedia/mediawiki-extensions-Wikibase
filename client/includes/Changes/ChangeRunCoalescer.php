@@ -103,12 +103,12 @@ class ChangeRunCoalescer {
 	}
 
 	/**
-	 * Combines a set of changes into one change. All changes are assume to have been performed
+	 * Combines a set of changes into one change. All changes are assumed to have been performed
 	 * by the same user on the same entity. They are further assumed to be UPDATE actions
 	 * and sorted in causal (chronological) order.
 	 *
-	 * If $changes is empty, this method returns null. If $changes contains exactly one change,
-	 * that change is returned. Otherwise, a combined change is returned.
+	 * If $changes contains exactly one change, that change is returned. Otherwise, a combined
+	 * change is returned.
 	 *
 	 * @param EntityId $entityId
 	 * @param EntityChange[] $changes The changes to combine.
