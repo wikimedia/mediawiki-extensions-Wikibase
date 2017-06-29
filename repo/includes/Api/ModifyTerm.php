@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -43,9 +44,7 @@ abstract class ModifyTerm extends ModifyEntity {
 	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
-		$permissions[] = $entity->getType() . '-term';
-		return $permissions;
+		return [ EntityPermissionChecker::PERMISSION_EDIT_TERMS ];
 	}
 
 	/**

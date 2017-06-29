@@ -167,10 +167,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	}
 
 	private function getMediaWikiPermissionsToCheck( $permission, $entityType ) {
-		if ( $permission === EntityPermissionChecker::PERMISSION_CREATE ||
-			// TODO: temporarily handle MW create permissions here, until all users are adjusted
-			$permission === 'createpage' || $permission === 'property-create'
-		) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_CREATE ) {
 			$entityTypeSpecificCreatePermission = $entityType . '-create';
 
 			$permissions = [ 'read', 'edit', 'createpage' ];
@@ -180,10 +177,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			return $permissions;
 		}
 
-		if ( $permission === EntityPermissionChecker::PERMISSION_EDIT_TERMS ||
-			// TODO: temporarily handle MW permissions here, until all users are adjusted
-			$permission === 'item-term' || $permission === 'property-term'
-		) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_EDIT_TERMS ) {
 			$entityTypeSpecificEditTermsPermission = $entityType . '-term';
 
 			$permissions = [ 'read', 'edit' ];

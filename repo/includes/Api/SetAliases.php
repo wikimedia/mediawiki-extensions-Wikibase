@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiMain;
 use ApiUsageException;
 use InvalidArgumentException;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpAliases;
@@ -66,9 +67,7 @@ class SetAliases extends ModifyEntity {
 	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
-		$permissions[] = $entity->getType() . '-term';
-		return $permissions;
+		return [ EntityPermissionChecker::PERMISSION_EDIT_TERMS ];
 	}
 
 	/**

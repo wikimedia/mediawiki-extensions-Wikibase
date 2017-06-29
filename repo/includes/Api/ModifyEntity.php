@@ -287,7 +287,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return string[]
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
+		return [ EntityPermissionChecker::PERMISSION_EDIT ];
 	}
 
 	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {
