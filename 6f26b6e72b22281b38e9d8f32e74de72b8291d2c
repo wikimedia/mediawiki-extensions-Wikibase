@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_a74e7470",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-29T12:16:04Z",
+      "side": 1,
+      "message": "You should not use master for select, no matter how rare is the query.",
+      "revId": "6f26b6e72b22281b38e9d8f32e74de72b8291d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_2734c4d9",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-06-29T12:16:04Z",
+      "side": 1,
+      "message": "There is lots of code duplication here, can\u0027t we send \"Q\" and \"item\" as parameters?",
+      "revId": "6f26b6e72b22281b38e9d8f32e74de72b8291d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
