@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_79a4b404",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 1,
+      "message": "The types on the actual Snak classes are \"novalue\", \"somevalue\", and \"value\". Can we stick to this convention, please?",
+      "range": {
+        "startLine": 18,
+        "startChar": 26,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_d9b3684b",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 1,
+      "message": "string|null",
+      "range": {
+        "startLine": 27,
+        "startChar": 9,
+        "endLine": 27,
+        "endChar": 15
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_19a9f0dc",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 1,
+      "message": "DataValue|null",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5986986b",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 1,
+      "message": "I wish we could name this \"for\", but this is not allowed.",
+      "range": {
+        "startLine": 40,
+        "startChar": 24,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_b95bfc25",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 1,
+      "message": "Uh. I think tests should behave consistent. Let\u0027s just use \"novalue\" then, ok?",
+      "range": {
+        "startLine": 103,
+        "startChar": 26,
+        "endLine": 103,
+        "endChar": 36
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_39ae2ce5",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 1,
+      "message": "$snak\n\nBut this line can be removed entirely.",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 8
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_d99a88bd",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:38:23Z",
+      "side": 0,
+      "message": "I would not kill the \"no\" and \"some\" variations here, and only introduce a statement builder for statements with an actual value. These methods here are nothing but shortcuts, and I find them very, very convenient. Why kill them?\n\nMaybe rename them to \"andNoValueStatement\" and \"andSomeValueStatement\", to make them more compatible with the existing \"andStatement\"?",
+      "range": {
+        "startLine": 224,
+        "startChar": 17,
+        "endLine": 224,
+        "endChar": 39
+      },
+      "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
