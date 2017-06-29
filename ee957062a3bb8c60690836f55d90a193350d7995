@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_8c703fa5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-29T09:44:37Z",
+      "side": 1,
+      "message": "this dependency should be the other way round, shouldn\u0027t it?",
+      "revId": "ee957062a3bb8c60690836f55d90a193350d7995",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c10a9029",
+        "filename": "repo/includes/Modules/PropertyValueExpertsModule.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-29T09:44:37Z",
+      "side": 1,
+      "message": "not sure if adding @license tag is actually required or not for legal reasons but noting there isn\u0027t one here.",
+      "revId": "ee957062a3bb8c60690836f55d90a193350d7995",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0111785f",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-06-29T09:44:37Z",
+      "side": 1,
+      "message": "proabably not needed but whatever",
+      "revId": "ee957062a3bb8c60690836f55d90a193350d7995",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
