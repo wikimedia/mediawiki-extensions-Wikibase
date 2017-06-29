@@ -12,6 +12,7 @@ use ExtensionRegistry;
 use HistoryPager;
 use Html;
 use IContextSource;
+use Language;
 use LogEntry;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -546,15 +547,22 @@ final class RepoHooks {
 
 			if ( $content && !$content->isRedirect() ) {
 				$entity = $content->getEntity();
-				$languageCode = $searchPage->getLanguage()->getCode(); // TODO: language fallback!
-
-				if ( $entity instanceof DescriptionsProvider &&
-					$entity->getDescriptions()->hasTermForLanguage( $languageCode )
-				) {
-					$description = $entity->getDescriptions()->getByLanguage( $languageCode )->getText();
-					$attr = array( 'class' => 'wb-itemlink-description' );
-					$link .= $searchPage->msg( 'colon-separator' )->text();
-					$link .= Html::element( 'span', $attr, $description );
+				if ( $entity instanceof DescriptionsProvider ) {
+					$language = $searchPage->getLanguage();
+					$chain = ( new LanguageFallbackChainFactory() )->newFromLanguage( $language );
+					$terms = $entity->getDescriptions()->toTextArray();
+					$termData = $chain->extractPreferredValue( $terms );
+					if ( $termData !== null ) {
+						$description = $termData['value'];
+						$attr = array( 'class' => 'wb-itemlink-description' );
+						if ( $termData['language'] !== $language->getCode() ) {
+							$lang = Language::factory( $termData['language'] );
+							$attr['lang'] = $lang->getHtmlCode();
+							$attr['dir'] = $lang->getDir();
+						}
+						$link .= $searchPage->msg( 'colon-separator' )->text();
+						$link .= Html::element( 'span', $attr, $description );
+					}
 				}
 			}
 
