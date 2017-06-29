@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e742343_79d91483",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-29T15:46:10Z",
+      "side": 1,
+      "message": "What you can do here and with some other \"if\" below is to invert them:\n\nif ( !… ) {\n    return;\n}\n\nThis is called the \"guard pattern\". This might save multiple indention levels, I believe.",
+      "range": {
+        "startLine": 543,
+        "startChar": 2,
+        "endLine": 543,
+        "endChar": 4
+      },
+      "revId": "750e7ae34271e474a2a3156d9fcb51250ab7d34d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_39fcecd4",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
