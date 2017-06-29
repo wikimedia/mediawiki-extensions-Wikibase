@@ -29,7 +29,6 @@ use SpecialSearch;
 use StubUserLang;
 use Title;
 use User;
-use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
@@ -540,53 +539,6 @@ final class RepoHooks {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Format the output when the search result contains entities
-	 *
-	 * @param SpecialSearch $searchPage
-	 * @param SearchResult $result
-	 * @param array $terms
-	 * @param string &$link
-	 * @param string &$redirect
-	 * @param string &$section
-	 * @param string &$extract
-	 * @param string &$score
-	 * @param string &$size
-	 * @param string &$date
-	 * @param string &$related
-	 * @param string &$html
-	 */
-	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result, $terms,
-		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
-	) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		$title = $result->getTitle();
-		$contentModel = $title->getContentModel();
-
-		if ( $entityContentFactory->isEntityContentModel( $contentModel ) ) {
-			/** @var EntityContent $content */
-			$page = WikiPage::factory( $title );
-			$content = $page->getContent();
-
-			if ( $content && !$content->isRedirect() ) {
-				$entity = $content->getEntity();
-				$languageCode = $searchPage->getLanguage()->getCode(); // TODO: language fallback!
-
-				if ( $entity instanceof DescriptionsProvider &&
-					$entity->getDescriptions()->hasTermForLanguage( $languageCode )
-				) {
-					$description = $entity->getDescriptions()->getByLanguage( $languageCode )->getText();
-					$attr = array( 'class' => 'wb-itemlink-description' );
-					$link .= $searchPage->msg( 'colon-separator' )->text();
-					$link .= Html::element( 'span', $attr, $description );
-				}
-			}
-
-			$extract = ''; // TODO: set this to something useful.
-		}
 	}
 
 	/**
