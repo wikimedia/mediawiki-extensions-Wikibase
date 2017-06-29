@@ -150,28 +150,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string[] A list of permissions
-	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
-
-		if ( !$this->entityExists( $entity->getId() ) ) {
-			$permissions[] = 'createpage';
-
-			switch ( $entity->getType() ) {
-				case 'property':
-					$permissions[] = $entity->getType() . '-create'; //property-create
-					break;
-			}
-		}
-
-		return $permissions;
-	}
-
-	/**
 	 * @param EntityId $entityId
 	 *
 	 * @return bool
