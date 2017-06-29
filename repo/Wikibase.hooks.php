@@ -553,7 +553,7 @@ final class RepoHooks {
 				) {
 					$description = $entity->getDescriptions()->getByLanguage( $languageCode )->getText();
 					$attr = array( 'class' => 'wb-itemlink-description' );
-					$link .= wfMessage( 'colon-separator' )->text();
+					$link .= $searchPage->msg( 'colon-separator' )->text();
 					$link .= Html::element( 'span', $attr, $description );
 				}
 			}
