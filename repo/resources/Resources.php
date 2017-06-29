@@ -2,6 +2,7 @@
 
 use DataTypes\Modules\DataTypesModule;
 use Wikibase\Repo\Modules\MediaWikiConfigModule;
+use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -177,6 +178,12 @@ return call_user_func( function() {
 				'wikibase.special/wikibase.special.css'
 			),
 		),
+
+		'wikibase.experts.modules' => $moduleTemplate + [
+				'factory' => function () {
+					return WikibaseRepo::getDefaultInstance()->getPropertyValueExpertsModule();
+				}
+		],
 
 	);
 
