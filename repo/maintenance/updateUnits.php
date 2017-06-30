@@ -59,6 +59,7 @@ class UpdateUnits extends Maintenance {
 		$this->addOption( 'unit-class', 'Class for units.', false, true );
 		$this->addOption( 'format', 'Output format "json" (default) or "csv".', false, true );
 		$this->addOption( 'sparql', 'SPARQL endpoint URL.', false, true );
+		$this->addOption( 'check-usage', 'Check whether unit is in use?', false );
 	}
 
 	public function execute() {
@@ -67,10 +68,11 @@ class UpdateUnits extends Maintenance {
 				1 );
 		}
 		$format = $this->getOption( 'format', 'json' );
+		$checkUsage = $this->hasOption( 'check-usage' );
 
 		$repo = WikibaseRepo::getDefaultInstance();
-		$endPoint =
-			$this->getOption( 'sparql', $repo->getSettings()->getSetting( 'sparqlEndpoint' ) );
+		$endPoint = $this->getOption( 'sparql',
+			$repo->getSettings()->getSetting( 'sparqlEndpoint' ) );
 		if ( !$endPoint ) {
 			$this->error( 'SPARQL endpoint not defined', 1 );
 		}
@@ -87,11 +89,19 @@ class UpdateUnits extends Maintenance {
 
 		// Get units usage stats. We don't care about units
 		// That have been used less than 10 times, for now
-		$unitUsage = $this->getUnitUsage( 10 );
+		if ( $checkUsage ) {
+			$unitUsage = $this->getUnitUsage( 10 );
+		} else {
+			$unitUsage = null;
+		}
 		$baseUnits = $this->getBaseUnits( $filter );
 
 		$convertUnits = [];
 		$reconvert = [];
+
+		if ( $checkUsage ) {
+			$filter .= "FILTER EXISTS { [] wikibase:quantityUnit ?unit }\n";
+		}
 
 		$convertableUnits = $this->getConvertableUnits( $filter );
 		foreach ( $convertableUnits as $unit ) {
@@ -103,7 +113,45 @@ class UpdateUnits extends Maintenance {
 			}
 		}
 
-		// try to convert some units that reduce to other units
+		$this->reduceUnits( $reconvert, $convertUnits );
+
+		// Add base units
+		foreach ( $baseUnits as $base => $baseData ) {
+			$convertUnits[$base] = [
+				'factor' => "1",
+				'unit' => $base,
+				'label' => $baseData['unitLabel'],
+				'siLabel' => $baseData['unitLabel']
+			];
+		}
+
+		// Sort units by Q-id, as number, to have predictable order
+		uksort( $convertUnits,
+			function ( $x, $y ) {
+				return (int)substr( $x, 1 ) - (int)substr( $y, 1 );
+			}
+		);
+
+		switch ( strtolower( $format ) ) {
+			case 'csv':
+				echo $this->formatCSV( $convertUnits );
+				break;
+			case 'json':
+				echo $this->formatJSON( $convertUnits );
+				break;
+			default:
+				$this->error( 'Invalid format', 1 );
+		}
+	}
+
+	/**
+	 * Reduce units that are not in term of base units into base units.
+	 * If some units are not reducible to base units, warning will be issued.
+	 * @param array $reconvert List of units to be reduced
+	 * @param array &$convertUnits List of unit conversion configs, will be modified if
+	 *                             it is possible to reduce the unit to base units.
+	 */
+	private function reduceUnits( $reconvert, &$convertUnits ) {
 		while ( $reconvert ) {
 			$converted = false;
 			foreach ( $reconvert as $name => $unit ) {
@@ -127,27 +175,6 @@ class UpdateUnits extends Maintenance {
 			foreach ( $reconvert as $name => $unit ) {
 				$this->error( "Weird base unit: {$unit['unit']} reduces to {$unit['siUnit']} which is not base!" );
 			}
-		}
-
-		// Add base units
-		foreach ( $baseUnits as $base => $baseData ) {
-			$convertUnits[$base] = [
-				'factor' => "1",
-				'unit' => $base,
-				'label' => $baseData['unitLabel'],
-				'siLabel' => $baseData['unitLabel']
-			];
-		}
-
-		switch ( strtolower( $format ) ) {
-			case 'csv':
-				echo $this->formatCSV( $convertUnits );
-				break;
-			case 'json':
-				echo $this->formatJSON( $convertUnits );
-				break;
-			default:
-				$this->error( 'Invalid format', 1 );
 		}
 	}
 
@@ -191,7 +218,7 @@ class UpdateUnits extends Maintenance {
 	 * @param string[] $unit Unit data
 	 * @param string[] $convertUnits Already converted data
 	 * @param array[] $baseUnits Base unit list
-	 * @param string[] $unitUsage Unit usage data
+	 * @param string[]|null $unitUsage Unit usage data
 	 * @param string[] &$reconvert Array collecting units that require re-conversion later,
 	 *                 due to their target unit not being base.
 	 * @return string[]|null Produces conversion data for the unit or null if not possible.
@@ -223,7 +250,7 @@ class UpdateUnits extends Maintenance {
 			}
 		}
 
-		if ( !isset( $baseUnits[$unit['unit']] ) && !isset( $unitUsage[$unit['unit']] ) ) {
+		if ( $unitUsage && !isset( $baseUnits[$unit['unit']] ) && !isset( $unitUsage[$unit['unit']] ) ) {
 			$this->error( "Low usage unit {$unit['unit']}, skipping..." );
 			return null;
 		}
@@ -328,7 +355,6 @@ SELECT REDUCED ?unit ?si ?siUnit ?unitLabel ?siUnitLabel WHERE {
     bd:serviceParam wikibase:language "en" .
   }
 # Enable this to select only units that are actually used
-  FILTER EXISTS { [] wikibase:quantityUnit ?unit }
 }
 QUERY;
 		return $this->client->query( $unitsQuery );
