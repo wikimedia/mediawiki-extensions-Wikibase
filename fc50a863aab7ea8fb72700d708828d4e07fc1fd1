@@ -46,6 +46,30 @@
       "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c377ed33",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-30T10:50:47Z",
+      "side": 0,
+      "message": "Ok. They need to be rewritten anyway to avoid duplication with the new NewStatement builder.",
+      "parentUuid": "8e742343_3ce61a14",
+      "range": {
+        "startLine": 224,
+        "startChar": 17,
+        "endLine": 224,
+        "endChar": 39
+      },
+      "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
