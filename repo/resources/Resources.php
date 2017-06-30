@@ -2,7 +2,6 @@
 
 use DataTypes\Modules\DataTypesModule;
 use Wikibase\Repo\Modules\MediaWikiConfigModule;
-use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

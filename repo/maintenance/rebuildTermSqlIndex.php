@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use LoggedUpdateMaintenance;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
