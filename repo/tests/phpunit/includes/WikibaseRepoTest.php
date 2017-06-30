@@ -33,7 +33,6 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
-use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -57,7 +56,6 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
-use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -437,11 +435,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( EntityContentDataCodec::class, $codec );
 	}
 
-	public function testGetInternalFormatDeserializerFactory() {
-		$deserializerFactory = $this->getWikibaseRepo()->getInternalFormatDeserializerFactory();
-		$this->assertInstanceOf( InternalDeserializerFactory::class, $deserializerFactory );
-	}
-
 	public function testGetExternalFormatDeserializerFactory() {
 		$deserializerFactory = $this->getWikibaseRepo()->getBaseDataModelDeserializerFactory();
 		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
@@ -450,11 +443,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetSerializerFactory() {
 		$serializerFactory = $this->getWikibaseRepo()->getBaseDataModelSerializerFactory();
 		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
-	}
-
-	public function testGetExternalFormatEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getAllTypesEntityDeserializer();
-		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
 	public function testGetInternalFormatEntityDeserializer() {
@@ -629,11 +617,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetRdfVocabulary() {
 		$factory = $this->getWikibaseRepo()->getRdfVocabulary();
 		$this->assertInstanceOf( RdfVocabulary::class, $factory );
-	}
-
-	public function testGetCachingCommonsMediaFileNameLookup() {
-		$lookup = $this->getWikibaseRepo()->getCachingCommonsMediaFileNameLookup();
-		$this->assertInstanceOf( CachingCommonsMediaFileNameLookup::class, $lookup );
 	}
 
 	/**
