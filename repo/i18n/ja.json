@@ -18,7 +18,8 @@
 			"ネイ",
 			"おはぐろ蜻蛉",
 			"Dgstranz",
-			"Omotecho"
+			"Omotecho",
+			"Wicklo"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -57,6 +58,7 @@
 	"wikibase-aliases-edit-placeholder": "いくつかの別名を入力",
 	"wikibase-aliases-edit-placeholder-language-aware": "別名をいくつか$1で入力してください",
 	"wikibase-aliases-edit-label": "別名（複数ある場合、縦線|で区切り）:",
+	"wikibase-content-language-edit-label": "言語:",
 	"wikibase-content-language-edit-not-recognized-language": "入力された言語コードが認識できません。",
 	"wikibase-diffview-reference": "情報源",
 	"wikibase-diffview-rank": "ランク",
@@ -68,6 +70,8 @@
 	"wikibase-diffview-alias": "別名",
 	"wikibase-diffview-description": "説明",
 	"wikibase-diffview-link": "リンク",
+	"wikibase-diffview-link-name": "名前",
+	"wikibase-diffview-link-badges": "バッジ",
 	"wikibase-sitelink-site-edit-placeholder": "ウィキ",
 	"wikibase-sitelink-page-edit-placeholder": "ページ",
 	"wikibase-alias-edit-placeholder": "別名を入力",

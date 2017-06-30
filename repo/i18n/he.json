@@ -373,6 +373,8 @@
 	"action-property-create": "ליצור מאפיינים",
 	"wikibase-pageinfo-subscription": "אתרי ויקי שמנויים לישות הזאת",
 	"wikibase-pageinfo-subscription-none": "אין",
+	"wikibase-search-bad-entity-type": "סוג ישות רע: $1",
+	"wikibase-search-bad-profile-name": "שם פרופיל חיפוש רע: $1",
 	"apihelp-wbavailablebadges-description": "שאילת של פריטי סמלים זמינים.",
 	"apihelp-wbavailablebadges-summary": "שאילתה עבור פריטי סמלים זמינים.",
 	"apihelp-wbavailablebadges-example-1": "שאילת של כל פריטי סמלים זמינים.",

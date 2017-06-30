@@ -400,7 +400,7 @@
 	"apihelp-wbgetentities-example-11": "Hangi üksus, mis vastab võrgukohas \"<var>enwiki</var>\" leheküljele \"<var>Berlin</var>\", kui enne normaliseerimist oli pealkiri \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Hangi üksuse <samp>Q42</samp> võrgukohalingid",
 	"apihelp-wbgetentities-example-13": "Hangi olemid identifikaatoriga <samp>Q42</samp> ja näita ainult võrgukoha \"<var>enwiki</var>\" linke",
-	"apihelp-wblinktitles-description": "Seostab kahe erineva viki kaks erinevat artiklit Vikibaasi üksusega.",
+	"apihelp-wblinktitles-description": "Seostab kahe erineva viki kaks erinevat lehekülge Vikibaasi üksusega.",
 	"apihelp-wblinktitles-param-tosite": "Võrgukoht, kus lehekülg asub, identifikaator.\nKasuta parameetriga <var>totitle</var>, et koostada täielik võrgukohalink.",
 	"apihelp-wblinktitles-param-totitle": "Seostatava lehekülje pealkiri.\nKasuta parameetriga <var>tosite</var>, et koostada täielik võrgukohalink.",
 	"apihelp-wblinktitles-param-fromsite": "Võrgukoht, kus lehekülg asub, identifikaator.\nKasuta parameetriga <var>fromtitle</var>, et koostada täielik võrgukohalink.",

@@ -53,7 +53,7 @@
 	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
 	"wikibase-comment-remove": "تم حذف بند {{WBREPONAME}} المرتبطة. و تم إزالة ارتباطات اللغة.",
-	"wikibase-comment-linked": "تم ربط عنصر ويكيبيانات مع هذه الصفحة.",
+	"wikibase-comment-linked": "تم ربط عنصر {{WBREPONAME}} مع هذه الصفحة.",
 	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من بند {{WBREPONAME}}. تم إزالة روابط اللغة.",
 	"wikibase-comment-restore": "تم استرجاع بند {{WBREPONAME}} المرتبط. روابط اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",

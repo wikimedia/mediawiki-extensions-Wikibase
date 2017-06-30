@@ -388,6 +388,8 @@
 	"action-property-create": "创建属性",
 	"wikibase-pageinfo-subscription": "订阅至此实体的Wiki",
 	"wikibase-pageinfo-subscription-none": "无",
+	"wikibase-search-bad-entity-type": "错误实体类型：$1",
+	"wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-summary": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-example-1": "查询所有可用的徽章项",

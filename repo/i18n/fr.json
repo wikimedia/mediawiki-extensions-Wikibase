@@ -413,6 +413,8 @@
 	"action-property-create": "créer des propriétés",
 	"wikibase-pageinfo-subscription": "Wikis abonnés à cette entité",
 	"wikibase-pageinfo-subscription-none": "Aucun",
+	"wikibase-search-bad-entity-type": "Type invalide d'entité: $1",
+	"wikibase-search-bad-profile-name": "Nom de profil recherché invalide: $1",
 	"apihelp-wbavailablebadges-description": "Recherche les éléments de badge disponibles.",
 	"apihelp-wbavailablebadges-summary": "Recherche les éléments de badge disponibles.",
 	"apihelp-wbavailablebadges-example-1": "Recherche tous les éléments de badge disponibles",

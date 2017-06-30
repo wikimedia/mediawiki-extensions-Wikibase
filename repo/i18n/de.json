@@ -386,6 +386,8 @@
 	"action-property-create": "Eigenschaften zu erstellen",
 	"wikibase-pageinfo-subscription": "Wikis, die mit diesem Objekt verbunden sind",
 	"wikibase-pageinfo-subscription-none": "Keines",
+	"wikibase-search-bad-entity-type": "Ungültiger Objekttyp: $1",
+	"wikibase-search-bad-profile-name": "Ungültiger Suchprofilname: $1",
 	"apihelp-wbavailablebadges-description": "Fragt verfügbare Auszeichnungs-Datenobjekte ab.",
 	"apihelp-wbavailablebadges-example-1": "Fragt alle verfügbaren Auszeichnungs-Datenobjekte ab",
 	"apihelp-wbcreateclaim-description": "Erstellt Wikibase-Behauptungen.",
