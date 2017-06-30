@@ -16,6 +16,24 @@
       "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_834ec570",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-30T09:44:55Z",
+      "side": 1,
+      "message": "It\u0027s not safe to use Title if no DB access is configured. It may work now, but it may break any moment. It may also depend on the order in which tests are executed, because Title objects are cached.",
+      "parentUuid": "8e742343_3c6ffac1",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
