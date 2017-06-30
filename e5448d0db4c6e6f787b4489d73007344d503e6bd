@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_2386f118",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-30T10:45:51Z",
+      "side": 1,
+      "message": "They are not exposed as constants so I cannot use them.\nAny way, these values can be replaced with meaningless integers and they are strings mostly for debugging purposes.",
+      "parentUuid": "8e742343_79a4b404",
+      "range": {
+        "startLine": 18,
+        "startChar": 26,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "e5448d0db4c6e6f787b4489d73007344d503e6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_d9b3684b",
         "filename": "repo/tests/phpunit/includes/NewStatement.php",
         "patchSetId": 1
