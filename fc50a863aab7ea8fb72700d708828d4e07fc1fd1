@@ -22,6 +22,30 @@
       "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3ce61a14",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-06-30T10:42:53Z",
+      "side": 0,
+      "message": "I killed them because they were never used (except `andPropertyValueSnak` - this I replaced).\nI can understand that it may be more convenient to have a shorthand at some point, but new syntax is quiet readable and more flexible.\nWe can reintroduce them later if it will make some test much more readable.",
+      "parentUuid": "8e742343_d99a88bd",
+      "range": {
+        "startLine": 224,
+        "startChar": 17,
+        "endLine": 224,
+        "endChar": 39
+      },
+      "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
