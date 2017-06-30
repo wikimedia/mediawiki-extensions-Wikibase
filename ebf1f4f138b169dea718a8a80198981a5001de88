@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e742343_838245cc",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-30T11:24:33Z",
+      "side": 1,
+      "message": "All \"special\" permissions, like \"-term\" or \"-redirect\" or \"-merge\" conceptually imply the need for the \"edit\" permission. Should this be modeled here, or handled by the caller?",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c34fedbe",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-06-30T11:24:33Z",
+      "side": 1,
+      "message": "This is a bit confusing. I think it would be best to clearly distinguish between MW permissions and WB permissions, and make sure we never mix them. I believe lack of this distinction has caused the present confusion.\n\nIf we do that, callers would ask for \"create\" for an Item or \"term\" for a Property or \"merge\" for a Lexeme, and it would be this classe\u0027s responsibility to determine which MW permissions to check.\n\nE.g. \"merge\" for a Lexeme will check \"lexeme-merge\" and \"edit\". \"redirect\" for a Lexeme will check \"lexeme-redirect\" and \"edit\". We could also have \"entity-redirect\".",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3c6ffac1",
         "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
         "patchSetId": 6
