@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_e39f8953",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-06-30T10:50:47Z",
+      "side": 1,
+      "message": "I like this idea, but I think this is inconsistent at the moment and PS2 is now broken. Are you willing to replace all self::TYPE_… constants like this? I would support this.",
+      "range": {
+        "startLine": 56,
+        "startChar": 18,
+        "endLine": 56,
+        "endChar": 42
+      },
+      "revId": "ebf07d71a26e22bce0ff1e157490ec6ced7866d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
