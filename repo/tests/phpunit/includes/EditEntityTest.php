@@ -11,6 +11,7 @@ use RequestContext;
 use Status;
 use Title;
 use User;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -646,17 +647,11 @@ class EditEntityTest extends MediaWikiTestCase {
 		);
 
 		// make sure we have a working cache
-		$services = \MediaWiki\MediaWikiServices::getInstance();
-		if ( method_exists( $services, 'getLocalClusterObjectCache' ) ) {
-			$services->resetServiceForTesting( 'LocalClusterObjectCache' );
-			$services->redefineService( 'LocalClusterObjectCache', function () {
-				return new \HashBagOStuff();
-			} );
-		} else {
-			$this->setMwGlobals( 'wgMainCacheType', CACHE_ANYTHING );
-			// make sure we have a fresh cache
-			ObjectCache::clear();
-		}
+		$services = MediaWikiServices::getInstance();
+		$services->resetServiceForTesting( 'LocalClusterObjectCache' );
+		$services->redefineService( 'LocalClusterObjectCache', function () {
+			return new \HashBagOStuff();
+		} );
 
 		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
@@ -688,11 +683,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		}
 
 		// make sure nobody else has to work with our cache
-		if ( method_exists( $services, 'getLocalClusterObjectCache' ) ) {
-			$services->resetServiceForTesting( 'LocalClusterObjectCache' );
-		} else {
-			ObjectCache::clear();
-		}
+		$services->resetServiceForTesting( 'LocalClusterObjectCache' );
 	}
 
 	public function provideIsTokenOk() {
