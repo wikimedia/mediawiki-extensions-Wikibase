@@ -323,6 +323,8 @@
 	"action-item-merge": "항목 병합",
 	"action-property-create": "속성을 만들",
 	"wikibase-pageinfo-subscription-none": "없음",
+	"wikibase-search-bad-entity-type": "잘못된 엔티티 유형: $1",
+	"wikibase-search-bad-profile-name": "잘못된 검색 프로파일 이름: $1",
 	"apihelp-wbcreateclaim-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbcreateredirect-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbeditentity-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
