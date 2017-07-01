@@ -24,7 +24,7 @@ class SitesModule extends ResourceLoaderModule {
 		$this->worker = new SitesModuleWorker(
 			Settings::singleton(),
 			MediaWikiServices::getInstance()->getSiteStore(),
-			wfGetCache( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING )
+			MediaWikiServices::getInstance()->getLocalServerObjectCache()
 		);
 	}
 
