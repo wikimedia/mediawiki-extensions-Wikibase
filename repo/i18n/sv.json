@@ -374,6 +374,8 @@
 	"action-property-create": "skapa egenskaper",
 	"wikibase-pageinfo-subscription": "Wikis som prenumererar på denna entitet",
 	"wikibase-pageinfo-subscription-none": "Ingen",
+	"wikibase-search-bad-entity-type": "Trasig entitetstyp: $1",
+	"wikibase-search-bad-profile-name": "Trasig sökning av profilnamn: $1",
 	"apihelp-wbavailablebadges-description": "Frågar efter tillgängliga emblemföremål.",
 	"apihelp-wbavailablebadges-summary": "Frågar efter tillgängliga emblemföremål.",
 	"apihelp-wbavailablebadges-example-1": "Frågar efter alla tillgängliga emblemföremål",
