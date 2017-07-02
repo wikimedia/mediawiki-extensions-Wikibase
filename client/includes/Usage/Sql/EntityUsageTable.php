@@ -34,7 +34,7 @@ class EntityUsageTable {
 	/**
 	 * @var Database
 	 */
-	private $connection;
+	private $writeConnection;
 
 	/**
 	 * @var string
@@ -48,7 +48,7 @@ class EntityUsageTable {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param Database $connection
+	 * @param Database $writeConnection
 	 * @param int $batchSize defaults to 100
 	 * @param string|null $tableName defaults to wbc_entity_usage
 	 *
@@ -56,7 +56,7 @@ class EntityUsageTable {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		Database $connection,
+		Database $writeConnection,
 		$batchSize = 100,
 		$tableName = null
 	) {
@@ -69,7 +69,7 @@ class EntityUsageTable {
 		}
 
 		$this->idParser = $idParser;
-		$this->connection = $connection;
+		$this->writeConnection = $writeConnection;
 		$this->batchSize = $batchSize;
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
 	}
@@ -84,7 +84,7 @@ class EntityUsageTable {
 	 */
 	private function getAffectedRowIds( $pageId, array $usages ) {
 		$usageConditions = array();
-		$db = $this->connection;
+		$db = $this->writeConnection;
 
 		foreach ( $usages as $usage ) {
 			$usageConditions[] = $db->makeList( array(
@@ -146,14 +146,14 @@ class EntityUsageTable {
 
 		$c = 0;
 
-		$this->connection->startAtomic( __METHOD__ );
+		$this->writeConnection->startAtomic( __METHOD__ );
 
 		foreach ( $batches as $rows ) {
-			$this->connection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
-			$c += $this->connection->affectedRows();
+			$this->writeConnection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
+			$c += $this->writeConnection->affectedRows();
 		}
 
-		$this->connection->endAtomic( __METHOD__ );
+		$this->writeConnection->endAtomic( __METHOD__ );
 
 		return $c;
 	}
@@ -169,7 +169,8 @@ class EntityUsageTable {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		$res = $this->connection->select(
+		$dbr = wfGetDb( DB_REPLICA );
+		$res = $dbr->select(
 			$this->tableName,
 			[ 'eu_aspect', 'eu_entity_id' ],
 			[ 'eu_page_id' => $pageId ],
@@ -247,10 +248,10 @@ class EntityUsageTable {
 		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
 		$rowIdChunks = array_chunk( $rowIds, $this->batchSize );
 
-		$this->connection->startAtomic( __METHOD__ );
+		$this->writeConnection->startAtomic( __METHOD__ );
 
 		foreach ( $rowIdChunks as $chunk ) {
-			$this->connection->delete(
+			$this->writeConnection->delete(
 				$this->tableName,
 				[
 					'eu_row_id' => $chunk,
@@ -259,7 +260,7 @@ class EntityUsageTable {
 			);
 		}
 
-		$this->connection->endAtomic( __METHOD__ );
+		$this->writeConnection->endAtomic( __METHOD__ );
 	}
 
 	/**
@@ -282,7 +283,8 @@ class EntityUsageTable {
 			$where['eu_aspect'] = $aspects;
 		}
 
-		$res = $this->connection->select(
+		$dbr = wfGetDB( DB_REPLICA );
+		$res = $dbr->select(
 			$this->tableName,
 			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
 			$where,
@@ -360,17 +362,18 @@ class EntityUsageTable {
 		$subQueries = $this->getUsedEntityIdStringsQueries( $idStrings );
 
 		$values = [];
-		if ( $this->connection->getType() === 'mysql' ) {
+		$dbr = wfGetDB( DB_REPLICA );
+		if ( $dbr->getType() === 'mysql' ) {
 			// On MySQL we can UNION all queries and run them at once
-			$sql = $this->connection->unionQueries( $subQueries, true );
+			$sql = $dbr->unionQueries( $subQueries, true );
 
-			$res = $this->connection->query( $sql, __METHOD__ );
+			$res = $dbr->query( $sql, __METHOD__ );
 			foreach ( $res as $row ) {
 				$values[] = $row->eu_entity_id;
 			}
 		} else {
 			foreach ( $subQueries as $sql ) {
-				$res = $this->connection->query( $sql, __METHOD__ );
+				$res = $dbr->query( $sql, __METHOD__ );
 				if ( $res->numRows() ) {
 					$values[] = $res->current()->eu_entity_id;
 				}
@@ -388,8 +391,9 @@ class EntityUsageTable {
 	private function getUsedEntityIdStringsQueries( array $idStrings ) {
 		$subQueries = [];
 
+		$dbr = wfGetDB( DB_REPLICA );
 		foreach ( $idStrings as $idString ) {
-			$subQueries[] = $this->connection->selectSQLText(
+			$subQueries[] = $dbr->selectSQLText(
 				$this->tableName,
 				'eu_entity_id',
 				[ 'eu_entity_id' => $idString ],
@@ -410,7 +414,8 @@ class EntityUsageTable {
 	 * @return int[]
 	 */
 	private function getPrimaryKeys( array $where, $method ) {
-		$rowIds = $this->connection->selectFieldValues(
+		$dbr = wfGetDB( DB_REPLICA );
+		$rowIds = $dbr->selectFieldValues(
 			$this->tableName,
 			'eu_row_id',
 			$where,
