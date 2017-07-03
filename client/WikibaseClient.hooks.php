@@ -12,7 +12,6 @@ use Parser;
 use Skin;
 use StubObject;
 use Title;
-use UnexpectedValueException;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;

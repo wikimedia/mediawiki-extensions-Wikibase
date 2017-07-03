@@ -9,8 +9,6 @@ use Elastica\Query\Match;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
 use Language;
-use RequestContext;
-use Status;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;

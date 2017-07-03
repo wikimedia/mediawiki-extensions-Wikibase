@@ -2,7 +2,6 @@
 
 use DataValues\MonolingualTextValue;
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityContent;

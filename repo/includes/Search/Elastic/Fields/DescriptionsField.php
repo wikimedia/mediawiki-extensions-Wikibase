@@ -2,7 +2,6 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use SearchEngine;
-use SearchIndexFieldDefinition;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 
