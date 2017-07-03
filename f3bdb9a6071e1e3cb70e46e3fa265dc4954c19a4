@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_f6a3bb3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T07:32:57Z",
+      "side": 1,
+      "message": "This commit message does not fully match to what the patch actually does. It does not \"allow\" including units without usage, it *always* includes units without units, except specified otherwise. Either this commit message or the default should be adjusted.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_36aaa317",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T07:32:57Z",
+      "side": 1,
+      "message": "This patch inverts the default. Is this necessary?",
+      "range": {
+        "startLine": 62,
+        "startChar": 68,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_96b83776",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T07:32:57Z",
+      "side": 1,
+      "message": "\"In use\" where?",
+      "range": {
+        "startLine": 62,
+        "startChar": 58,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_b6bd3365",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T07:32:57Z",
+      "side": 1,
+      "message": "There is a closing bracket missing here.",
+      "range": {
+        "startLine": 221,
+        "startChar": 11,
+        "endLine": 221,
+        "endChar": 18
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
