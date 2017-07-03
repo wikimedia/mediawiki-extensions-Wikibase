@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_6cf4d750",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-03T19:49:56Z",
+      "side": 1,
+      "message": "That\u0027s what T168585 is about. I\u0027m not sure I understand - why is this a problem?",
+      "parentUuid": "8e742343_f6a3bb3d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_36aaa317",
         "filename": "repo/maintenance/updateUnits.php",
         "patchSetId": 3
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "8e742343_2c956fe6",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-03T19:49:56Z",
+      "side": 1,
+      "message": "In use in the database, as a unit for some quantity.",
+      "parentUuid": "8e742343_96b83776",
+      "range": {
+        "startLine": 62,
+        "startChar": 58,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_8c86e3bc",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-03T19:49:56Z",
+      "side": 1,
+      "message": "According to T168582, yes. If you have objections to that, please state them in the ticket.",
+      "parentUuid": "8e742343_36aaa317",
+      "range": {
+        "startLine": 62,
+        "startChar": 68,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_b6bd3365",
         "filename": "repo/maintenance/updateUnits.php",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2017-07-03T07:32:57Z",
       "side": 1,
       "message": "There is a closing bracket missing here.",
+      "range": {
+        "startLine": 221,
+        "startChar": 11,
+        "endLine": 221,
+        "endChar": 18
+      },
+      "revId": "f3bdb9a6071e1e3cb70e46e3fa265dc4954c19a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_8cad8330",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-03T19:49:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e742343_b6bd3365",
       "range": {
         "startLine": 221,
         "startChar": 11,
