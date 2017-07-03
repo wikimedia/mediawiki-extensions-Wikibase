@@ -1802,7 +1802,7 @@ class WikibaseRepo {
 						'tzl',
 
 						// T125066
-						'ett', 'fkv', 'koy', 'lkt', 'lld', 'smj',
+						'ett', 'fkv', 'koy', 'lkt', 'lld',
 
 						// T137115
 						'non',
