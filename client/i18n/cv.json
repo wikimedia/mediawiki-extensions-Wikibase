@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chuvash2014"
+			"Chuvash2014",
+			"Chuvash"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "кăтартмалла мар",
 	"wikibase-rc-hide-wikidata-show": "кăтартмалла",
