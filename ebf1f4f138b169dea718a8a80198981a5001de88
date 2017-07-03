@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_ec4f6abe",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T12:46:49Z",
+      "side": 1,
+      "message": "Changed so it is now handled here. All be changing callers to let the checker do the work in the next patches which makes actually use of it.",
+      "parentUuid": "8e742343_838245cc",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_c34fedbe",
         "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-30T11:24:33Z",
       "side": 1,
       "message": "This is a bit confusing. I think it would be best to clearly distinguish between MW permissions and WB permissions, and make sure we never mix them. I believe lack of this distinction has caused the present confusion.\n\nIf we do that, callers would ask for \"create\" for an Item or \"term\" for a Property or \"merge\" for a Lexeme, and it would be this classe\u0027s responsibility to determine which MW permissions to check.\n\nE.g. \"merge\" for a Lexeme will check \"lexeme-merge\" and \"edit\". \"redirect\" for a Lexeme will check \"lexeme-redirect\" and \"edit\". We could also have \"entity-redirect\".",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_8cc3460a",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T12:46:49Z",
+      "side": 1,
+      "message": "Yeah, I was initially about doing something along these lines, but then I\u0027ve noticed many users of the Checker interface actually pass MW permissions to it, so I thought it was somehow intended like this.\nChanged now, I think it make sense to make the general interface not aware of whatever are MW permissions called.",
+      "parentUuid": "8e742343_c34fedbe",
       "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +101,24 @@
       "side": 1,
       "message": "It\u0027s not safe to use Title if no DB access is configured. It may work now, but it may break any moment. It may also depend on the order in which tests are executed, because Title objects are cached.",
       "parentUuid": "8e742343_3c6ffac1",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_167c47b3",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T12:46:49Z",
+      "side": 1,
+      "message": "Thanks. So @group Database must be kept.",
+      "parentUuid": "8e742343_834ec570",
       "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
