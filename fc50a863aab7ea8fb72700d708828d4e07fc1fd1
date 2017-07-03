@@ -93,6 +93,30 @@
       "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_e6fa26da",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T13:44:39Z",
+      "side": 0,
+      "message": "I did not wanted to remove this. Feel free to upload a patch that reintroduces this method, I will merge it.",
+      "parentUuid": "8e742343_0cad162e",
+      "range": {
+        "startLine": 266,
+        "startChar": 17,
+        "endLine": 266,
+        "endChar": 37
+      },
+      "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
