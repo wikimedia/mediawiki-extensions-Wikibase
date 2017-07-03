@@ -70,6 +70,29 @@
       "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0cad162e",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-07-03T13:02:19Z",
+      "side": 0,
+      "message": "This method was already used in the WikibaseQualityConstraints tests, so it would’ve been nice to wait with merging this change until those were updated… I’ll fix it",
+      "range": {
+        "startLine": 266,
+        "startChar": 17,
+        "endLine": 266,
+        "endChar": 37
+      },
+      "revId": "fc50a863aab7ea8fb72700d708828d4e07fc1fd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
