@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_0cff5632",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T12:55:23Z",
+      "side": 1,
+      "message": "\u003e what you said about prefixing error codes with \"wikibase-api-\" […]\n\nI removed this already from PS5.\n\n\u003e taking first element from array as a message key seems like something that brings confusion […]\n\nThis is a defacto-standard from core, and not invented in this patch.",
+      "parentUuid": "8e742343_ccc06e32",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
