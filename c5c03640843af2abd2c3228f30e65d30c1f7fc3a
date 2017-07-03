@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_0623b2a7",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T13:43:23Z",
+      "side": 1,
+      "message": "batchSize is before the two new bool arguments in all other cases, except here.",
+      "range": {
+        "startLine": 73,
+        "startChar": 10,
+        "endLine": 73,
+        "endChar": 19
+      },
+      "revId": "c5c03640843af2abd2c3228f30e65d30c1f7fc3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_66b95629",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T13:43:23Z",
+      "side": 1,
+      "message": "The two default values are not used, not needed, and should be removed to avoid confusion.",
+      "range": {
+        "startLine": 101,
+        "startChar": 29,
+        "endLine": 102,
+        "endChar": 33
+      },
+      "revId": "c5c03640843af2abd2c3228f30e65d30c1f7fc3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_06873267",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T13:43:23Z",
+      "side": 1,
+      "message": "I know it does not make a difference, but please be consistent and either use \"$entityRevision-\u003egetEntity()\" or \"$entity\" everywhere.",
+      "range": {
+        "startLine": 186,
+        "startChar": 53,
+        "endLine": 186,
+        "endChar": 81
+      },
+      "revId": "c5c03640843af2abd2c3228f30e65d30c1f7fc3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_46953a88",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-03T13:43:23Z",
+      "side": 1,
+      "message": "It looks like this SQL query can be skipped when $termsChanged is true. Please rework the code above so we avoid querying the database if not needed.\n\nif ( $termsToInsert || $termsToDelete ) {\n    return true;\n}",
+      "range": {
+        "startLine": 217,
+        "startChar": 3,
+        "endLine": 217,
+        "endChar": 32
+      },
+      "revId": "c5c03640843af2abd2c3228f30e65d30c1f7fc3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
