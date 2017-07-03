@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -128,7 +129,11 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	private function validateStatementGuid( EntityId $entityId ) {
-		$guid = $this->guidParser->parse( $this->statement->getGuid() );
+		try {
+			$guid = $this->guidParser->parse( $this->statement->getGuid() );
+		} catch ( StatementGuidParsingException $ex ) {
+			throw new ChangeOpException( 'Statement GUID can not be parsed' );
+		}
 
 		if ( !$this->guidValidator->validate( $guid->getSerialization() ) ) {
 			throw new ChangeOpException( 'Statement does not have a valid GUID' );

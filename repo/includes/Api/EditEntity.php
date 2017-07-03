@@ -200,9 +200,8 @@ class EditEntity extends ModifyEntity {
 			);
 		}
 		if ( $hasId && $hasSiteLink ) {
-			$this->errorReporter->dieError(
-				'Parameter "id" and "site", "title" combination are not allowed to be both set in'
-					. ' the same request',
+			$this->errorReporter->dieWithError(
+				'wikibase-api-illegal-entity-selector',
 				'param-illegal'
 			);
 		}
@@ -251,13 +250,16 @@ class EditEntity extends ModifyEntity {
 
 		// if we create a new property, make sure we set the datatype
 		if ( !$exists && $entity instanceof Property ) {
-			if ( !isset( $data['datatype'] ) ) {
-				$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
-			} elseif ( !in_array( $data['datatype'], $this->propertyDataTypes ) ) {
-				$this->errorReporter->dieError( 'Invalid datatype given', 'param-illegal' );
-			} else {
-				$entity->setDataTypeId( $data['datatype'] );
+			if ( !isset( $data['datatype'] )
+				|| !in_array( $data['datatype'], $this->propertyDataTypes )
+			) {
+				$this->errorReporter->dieWithError(
+					'wikibase-api-not-recognized-datatype',
+					'param-illegal'
+				);
 			}
+
+			$entity->setDataTypeId( $data['datatype'] );
 		}
 
 		$changeOps = $this->getChangeOp( $data, $entity );
@@ -387,8 +389,8 @@ class EditEntity extends ModifyEntity {
 			$this->assertString( $prop, 'Top level structure must be a JSON object (no keys found)' );
 
 			if ( $prop === 'remove' ) {
-				$this->errorReporter->dieError(
-					'"remove" should not be a top-level key',
+				$this->errorReporter->dieWithError(
+					'wikibase-api-illegal-entity-remove',
 					'not-recognized'
 				);
 			}

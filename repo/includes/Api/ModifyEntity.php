@@ -207,8 +207,8 @@ abstract class ModifyEntity extends ApiBase {
 		if ( ( isset( $params['id'] ) || isset( $params['new'] ) )
 			=== ( isset( $params['site'] ) && isset( $params['title'] ) )
 		) {
-			$this->errorReporter->dieError(
-				'Either provide the item "id" or pairs of "site" and "title" for a corresponding page',
+			$this->errorReporter->dieWithError(
+				'wikibase-api-illegal-entity-selector',
 				'param-illegal'
 			);
 		}

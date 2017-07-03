@@ -130,14 +130,20 @@ class ParseValue extends ApiBase {
 
 		if ( empty( $name ) ) {
 			// If neither 'datatype' not 'parser' is given, tell the client to use 'datatype'.
-			$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
+			$this->errorReporter->dieWithError(
+				'wikibase-api-not-recognized-datatype',
+				'param-illegal'
+			);
 		}
 
 		try {
 			$parser = $this->valueParserFactory->newParser( $name, $options );
 			return $parser;
 		} catch ( OutOfBoundsException $ex ) {
-			$this->errorReporter->dieError( "Unknown datatype `$name`", 'unknown-datatype' );
+			$this->errorReporter->dieWithError(
+				'wikibase-api-not-recognized-datatype',
+				'unknown-datatype'
+			);
 			throw new LogicException( 'dieError() did not throw an exception' );
 		}
 	}
@@ -152,7 +158,10 @@ class ParseValue extends ApiBase {
 
 		if ( empty( $name ) ) {
 			// 'datatype' parameter is required for validation.
-			$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
+			$this->errorReporter->dieWithError(
+				'wikibase-api-not-recognized-datatype',
+				'param-illegal'
+			);
 		}
 
 		// Note: For unknown datatype, we'll get an empty list.
