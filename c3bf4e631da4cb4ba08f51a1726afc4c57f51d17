@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_061732a9",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-03T14:50:11Z",
+      "side": 1,
+      "message": "\u003e May be introduce some Error class with the error code, message key and needed parameters and just pass it as an argument?\n\nThe ApiMessage class already exists in core, and contains the error code, message key, and needed parameters. Don\u0027t needlessly invent your own thing again.",
+      "parentUuid": "8e742343_ccc06e32",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
