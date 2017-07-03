@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
-use Exception;
 use InvalidArgumentException;
 use Traversable;
 use Wikimedia\Rdbms\Database;
@@ -145,9 +144,8 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
 	 *
-	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 * @throws UsageTrackerException
-	 * @throws Exception
 	 */
 	public function addUsedEntities( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
@@ -174,16 +172,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 			// Actually add the new entries
 			$usageTable->addUsages( $pageId, $added );
-
+		} catch ( DBError $ex ) {
+			throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
+		} finally {
 			$this->connectionManager->releaseConnection( $db );
-		} catch ( Exception $ex ) {
-			$this->connectionManager->releaseConnection( $db );
-
-			if ( $ex instanceof DBError ) {
-				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-			} else {
-				throw $ex;
-			}
 		}
 	}
 
@@ -195,9 +187,8 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return EntityUsage[] Usages that have been removed
 	 *
-	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 * @throws UsageTrackerException
-	 * @throws Exception
 	 */
 	public function replaceUsedEntities( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
@@ -222,17 +213,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			$usageTable->removeUsages( $pageId, $removed );
 			$usageTable->addUsages( $pageId, $added );
 
-			$this->connectionManager->releaseConnection( $db );
-
 			return $removed;
-		} catch ( Exception $ex ) {
+		} catch ( DBError $ex ) {
+			throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
+		} finally {
 			$this->connectionManager->releaseConnection( $db );
-
-			if ( $ex instanceof DBError ) {
-				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-			} else {
-				throw $ex;
-			}
 		}
 	}
 
@@ -242,7 +227,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 *
 	 * @return EntityUsage[]
-	 * @throws Exception
 	 * @throws UsageTrackerException
 	 */
 	public function pruneUsages( $pageId ) {
@@ -254,16 +238,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			$usageTable = $this->newUsageTable( $db );
 			$pruned = $usageTable->pruneUsages( $pageId );
 
-			$this->connectionManager->releaseConnection( $db );
 			return $pruned;
-		} catch ( Exception $ex ) {
+		} catch ( DBError $ex ) {
+			throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
+		} finally {
 			$this->connectionManager->releaseConnection( $db );
-
-			if ( $ex instanceof DBError ) {
-				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-			} else {
-				throw $ex;
-			}
 		}
 	}
 
