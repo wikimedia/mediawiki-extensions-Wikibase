@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_ccc06e32",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-03T12:51:51Z",
+      "side": 1,
+      "message": "I agree. Should not be null.\n\nI can also relate to what you said about prefixing error codes with \"wikibase-api-\", but on the other hand, having `string|string[]|MessageSpecifier` as a type-hint for `$msg` and taking first element from array as a message key seems like something that brings confusion (it confused me, at least).\nI would prefer to have more \"strict\" method interface. May be introduce some Error class with the error code, message key and needed parameters and just pass it as an argument?",
+      "parentUuid": "8e742343_a8cdee63",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
@@ -59,6 +83,30 @@
       "writtenOn": "2017-06-28T16:58:12Z",
       "side": 1,
       "message": "I wonder what the actual benefit of this is. Do we plan to actually resolve all the warning that will show up? Where will they show up anyway?",
+      "range": {
+        "startLine": 224,
+        "startChar": 3,
+        "endLine": 224,
+        "endChar": 9
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_ecd44aee",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-03T12:51:51Z",
+      "side": 1,
+      "message": "I think we should resolve all, but I don\u0027t know where they will show up.\nI would suggest to remove `$this-\u003ewarnOnMissingMessage` flag at all.",
+      "parentUuid": "8e742343_083e8226",
       "range": {
         "startLine": 224,
         "startChar": 3,
