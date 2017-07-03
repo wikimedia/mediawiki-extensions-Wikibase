@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_f1fc25b3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T09:11:20Z",
+      "side": 1,
+      "message": "ID?",
+      "range": {
+        "startLine": 331,
+        "startChar": 84,
+        "endLine": 331,
+        "endChar": 86
+      },
+      "revId": "0c47d4adce44d0de0a50b61a5c472ccc507e05a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_f16505ab",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T09:11:20Z",
+      "side": 1,
+      "message": "that was meant to be \"too\" I guess?",
+      "range": {
+        "startLine": 362,
+        "startChar": 102,
+        "endLine": 362,
+        "endChar": 105
+      },
+      "revId": "0c47d4adce44d0de0a50b61a5c472ccc507e05a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_510bb9d9",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T09:11:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this one also start with \"Error message when...\"?",
+      "revId": "0c47d4adce44d0de0a50b61a5c472ccc507e05a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_910121bc",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-03T09:11:20Z",
+      "side": 1,
+      "message": "known",
+      "range": {
+        "startLine": 386,
+        "startChar": 102,
+        "endLine": 386,
+        "endChar": 106
+      },
+      "revId": "0c47d4adce44d0de0a50b61a5c472ccc507e05a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
