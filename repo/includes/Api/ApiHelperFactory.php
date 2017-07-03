@@ -94,8 +94,6 @@ class ApiHelperFactory {
 	private $entityStore;
 
 	/**
-	 * ApiHelperFactory constructor.
-	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param ExceptionLocalizer $exceptionLocalizer
 	 * @param PropertyDataTypeLookup $dataTypeLookup

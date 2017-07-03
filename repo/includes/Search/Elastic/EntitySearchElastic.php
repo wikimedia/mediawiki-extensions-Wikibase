@@ -117,15 +117,22 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 	/**
 	 * Produce ES query that matches the arguments.
+	 *
 	 * @param $text
 	 * @param $languageCode
 	 * @param $entityType
 	 * @param $strictLanguage
 	 * @param SearchContext $context
+	 *
 	 * @return AbstractQuery
 	 */
-	protected function getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
-	                                          SearchContext $context ) {
+	protected function getElasticSearchQuery(
+		$text,
+		$languageCode,
+		$entityType,
+		$strictLanguage,
+		SearchContext $context
+	) {
 		$query = new BoolQuery();
 
 		$context->setOriginalSearchTerm( $text );
@@ -229,10 +236,16 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * @param string $entityType
 	 * @param int $limit
 	 * @param bool $strictLanguage
+	 *
 	 * @return TermSearchResult[]
 	 */
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit,
-	                                        $strictLanguage ) {
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage
+	) {
 		$searcher = new WikibasePrefixSearcher( 0, $limit );
 		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
 				$searcher->getSearchContext() );

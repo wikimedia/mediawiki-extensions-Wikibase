@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Api;
 
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -19,7 +20,12 @@ interface EntitySearchHelper {
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit,
-	                                        $strictLanguage );
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage
+	);
 
 }
