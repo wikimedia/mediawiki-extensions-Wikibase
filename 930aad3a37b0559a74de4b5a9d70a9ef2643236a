@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_efb2f9f8",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-03T20:45:17Z",
+      "side": 1,
+      "message": "I can add setter for $repo, no problem. But I really don\u0027t want to make this into 10-parameter method that needs another class of similar size just to boot it up. I see that nearly every script in repo/maintenance is using repo in the same way, even without variable and setter.",
+      "parentUuid": "8e742343_560bafd9",
+      "revId": "930aad3a37b0559a74de4b5a9d70a9ef2643236a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_76590b01",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 25
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-02T20:51:17Z",
       "side": 1,
       "message": "$displayLabel \u003d\u003d\u003d null ? \u0027\u0027 : $displayLabel",
+      "revId": "930aad3a37b0559a74de4b5a9d70a9ef2643236a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_8fd33530",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-03T20:45:17Z",
+      "side": 1,
+      "message": "$displayLabel is a Term, if it\u0027s either null or truthy",
+      "parentUuid": "8e742343_76590b01",
       "revId": "930aad3a37b0559a74de4b5a9d70a9ef2643236a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
