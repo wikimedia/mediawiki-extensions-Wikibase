@@ -167,7 +167,7 @@ abstract class EntityHandler extends ContentHandler {
 		$text = wfMessage( 'wikibase-noentity' )->setContext( $context )->plain();
 
 		$dir = $context->getLanguage()->getDir();
-		$lang = $context->getLanguage()->getCode();
+		$lang = $context->getLanguage()->getHtmlCode();
 
 		$outputPage = $context->getOutput();
 		$outputPage->addWikiText( Html::openElement( 'div', [
