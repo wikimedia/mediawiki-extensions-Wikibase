@@ -35,14 +35,14 @@ class ElasticTermResult implements ResultsType {
 	private $fallbackChain;
 
 	/**
-	 * ElasticTermResult constructor.
 	 * @param EntityIdParser $idParser
 	 * @param string[] $searchLanguageCodes Language fallback chain for search
 	 * @param LanguageFallbackChain $displayFallbackChain Fallback chain for display
 	 */
-	public function __construct( EntityIdParser $idParser,
-	                             array $searchLanguageCodes,
-	                             LanguageFallbackChain $displayFallbackChain
+	public function __construct(
+		EntityIdParser $idParser,
+		array $searchLanguageCodes,
+		LanguageFallbackChain $displayFallbackChain
 	) {
 		$this->idParser = $idParser;
 		$this->searchLanguageCodes = $searchLanguageCodes;
@@ -216,8 +216,8 @@ class ElasticTermResult implements ResultsType {
 				$displayDescription
 			);
 		}
-		return $results;
 
+		return $results;
 	}
 
 	/**

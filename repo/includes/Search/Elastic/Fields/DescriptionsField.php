@@ -17,7 +17,6 @@ class DescriptionsField implements WikibaseIndexField {
 	private $languages;
 
 	/**
-	 * DescriptionsField constructor.
 	 * @param string[] $languages Available languages list.
 	 */
 	public function __construct( array $languages ) {

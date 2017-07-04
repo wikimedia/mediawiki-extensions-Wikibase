@@ -58,13 +58,13 @@ class SpecialEntityPage extends SpecialWikibasePage {
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new HttpError( 400, wfMessage( 'wikibase-entitypage-bad-id', $id ) );
+			throw new HttpError( 400, $this->msg( 'wikibase-entitypage-bad-id', $id ) );
 		}
 
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
 		if ( $title === null ) {
-			throw new HttpError( 400, wfMessage( 'wikibase-entitypage-bad-id', $id ) );
+			throw new HttpError( 400, $this->msg( 'wikibase-entitypage-bad-id', $id ) );
 		}
 
 		$this->getOutput()->redirect( $title->getFullURL(), 301 );

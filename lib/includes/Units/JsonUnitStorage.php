@@ -26,7 +26,6 @@ class JsonUnitStorage extends BaseUnitStorage {
 	private $sourceFile;
 
 	/**
-	 * JsonUnitStorage constructor.
 	 * @param string $fileName Filename of the storage file.
 	 */
 	public function __construct( $fileName ) {
