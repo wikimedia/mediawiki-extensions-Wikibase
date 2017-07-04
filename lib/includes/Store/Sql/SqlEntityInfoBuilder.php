@@ -80,6 +80,18 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $numericIdsByType = [];
 
 	/**
+	 * Maps of ID strings to local ID parts (i.e. excluding the repository prefix, if the
+	 * instance is handling entities "foreign" to the local repo (i.e. input entities are prefixed),
+	 * group by entity type.
+	 * Used to build database queries on tables that use entity ID (as a string). Database used by
+	 * the "foreign" repo does not contain prefix in the ID columns that the local repo might be
+	 * using for the other repo's entity IDs.
+	 *
+	 * @var array[]
+	 */
+	private $localIdsByType = [];
+
+	/**
 	 * Maps of id strings to page info records, grouped by entity type.
 	 * This uses the same basic structure as $this->numericIdsByType.
 	 * Each page info record is an associative array with keys page_id
@@ -195,6 +207,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityIds = [];
 		$this->entityInfo = [];
 		$this->numericIdsByType = [];
+		$this->localIdsByType = [];
 
 		foreach ( $ids as $id ) {
 			$this->updateEntityInfo( $id );
@@ -283,6 +296,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		unset( $this->entityInfo[$idString] );
 		unset( $this->numericIdsByType[$type][$idString] );
+		unset( $this->localIdsByType[$type][$idString] );
 	}
 
 	/**
@@ -315,6 +329,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityInfo[$key]['id'] = $key;
 		// FIXME: this will fail for IDs that do not have a numeric form
 		$this->numericIdsByType[$type][$key] = $id->getNumericId();
+		$this->localIdsByType[$type][$key] = $id->getLocalPart();
 	}
 
 	/**
@@ -356,7 +371,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the term_entity_type field.
-		foreach ( array_keys( $this->numericIdsByType ) as $type ) {
+		foreach ( array_keys( $this->localIdsByType ) as $type ) {
 			$this->collectTermsForEntities( $type, $termTypes, $languages );
 		}
 
@@ -377,14 +392,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string[]|null $languages
 	 */
 	private function collectTermsForEntities( $entityType, array $termTypes = null, array $languages = null ) {
-		$entityIds = $this->numericIdsByType[$entityType];
-
 		$where = [];
 
 		if ( $this->readFullEntityIdColumn === true ) {
-			$where['term_full_entity_id'] = array_keys( $entityIds );
+			$where['term_full_entity_id'] = $this->localIdsByType[$entityType];
 		} else {
-			$where['term_entity_id'] = $entityIds;
+			$where['term_entity_id'] = $this->numericIdsByType[$entityType];
 			$where['term_entity_type'] = $entityType;
 		}
 
@@ -582,12 +595,16 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityInfo = array_diff_key( $this->entityInfo, array_flip( $ids ) );
 		$this->entityIds = array_diff_key( $this->entityIds, array_flip( $ids ) );
 
-		foreach ( $this->numericIdsByType as &$numeridIds ) {
-			$numeridIds = array_diff_key( $numeridIds, array_flip( $ids ) );
+		foreach ( $this->numericIdsByType as &$numericIds ) {
+			$numericIds = array_diff_key( $numericIds, array_flip( $ids ) );
+		}
+		foreach ( $this->localIdsByType as &$idsByType ) {
+			$idsByType = array_diff_key( $idsByType, array_flip( $ids ) );
 		}
 
 		// remove empty entries
 		$this->numericIdsByType = array_filter( $this->numericIdsByType );
+		$this->localIdsByType = array_filter( $this->localIdsByType );
 	}
 
 	/**
@@ -603,7 +620,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		if ( isset( $this->pageInfoByType[$entityType] ) ) {
 			return $this->pageInfoByType[$entityType];
 		}
-		$entityIds = $this->numericIdsByType[$entityType];
 
 		$dbr = $this->getConnection( DB_REPLICA );
 
@@ -619,7 +635,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$fields,
 			[
 				'page_namespace' => $this->entityNamespaceLookup->getEntityNamespace( $entityType ),
-				'page_title' => array_keys( $entityIds ),
+				'page_title' => $this->localIdsByType[$entityType],
 			],
 			__METHOD__,
 			[],
@@ -629,7 +645,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->pageInfoByType[$entityType] = [];
 
 		foreach ( $res as $row ) {
-			$this->pageInfoByType[$entityType][$row->page_title] = [
+			$id = $this->idParser->parse( $row->page_title );
+			$idKey = $id->getSerialization();
+			$this->pageInfoByType[$entityType][$idKey] = [
 				'page_id' => $row->page_id,
 				'redirect_target' => $row->rd_title,
 			];
@@ -648,7 +666,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function getPageInfo() {
 		$info = [];
 
-		foreach ( $this->numericIdsByType as $type => $ids ) {
+		foreach ( $this->localIdsByType as $type => $ids ) {
 			$info[$type] = $this->getPageInfoForType( $type );
 		}
 
