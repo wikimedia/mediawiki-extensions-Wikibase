@@ -14,7 +14,8 @@
 			"Àlex",
 			"Macofe",
 			"Joan manel",
-			"Jaumeortola"
+			"Jaumeortola",
+			"Ssola"
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",
@@ -82,6 +83,7 @@
 	"wikibase-entityusage-submit": "Mostra les pàgines",
 	"wikibase-pageinfo-entity-id": "ID de l'element de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Cap",
+	"wikibase-pageinfo-entity-usage": "Elements {{WBREPONAME}} utilitzats en aquesta pàgina",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
 	"wikibase-pageinfo-entity-usage-T": "Títol",
 	"wikibase-pageinfo-entity-usage-X": "Totes les dades de l'entitat",
