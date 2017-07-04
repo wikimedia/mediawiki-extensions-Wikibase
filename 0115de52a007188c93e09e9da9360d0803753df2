@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_23da5522",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-04T22:58:36Z",
+      "side": 1,
+      "message": "It would be nice to flip the condition so we would end up with less nesting.",
+      "revId": "0115de52a007188c93e09e9da9360d0803753df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
