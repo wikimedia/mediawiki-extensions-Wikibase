@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -253,18 +254,12 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
 	}
 
-	public function testEntityIdsArePrefixedWithRepositoryName() {
-		$itemId = new ItemId( 'foo:Q1' );
-
+	private function saveFakeForeignItemTerm( ItemId $itemId, $termType, $termLanguage, $termText ) {
 		// Inserting a dummy label for item with numeric ID part equal to 1.
 		// In this test local database is used to pretend to be a databse of
 		// repository "foo". Terms fetched from the database should be
 		// matched to entity IDs using correct repository prefixes (this
 		// builder's responsibility as this information is not stored in wb_terms table).
-
-		$label = 'dummy label';
-		$languageCode = 'en';
-
 		$this->insertRows(
 			'wb_terms',
 			[
@@ -279,16 +274,25 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 				[
 					$itemId->getEntityType(),
 					$itemId->getNumericId(),
-					'label',
-					$languageCode,
-					$label,
-					$label
+					$termType,
+					$termLanguage,
+					$termText,
+					$termText
 				]
 			]
 		);
+	}
+
+	public function testEntityIdsArePrefixedWithRepositoryName() {
+		$itemId = new ItemId( 'foo:Q1' );
+
+		$label = 'dummy label';
+		$languageCode = 'en';
+
+		$this->saveFakeForeignItemTerm( $itemId, 'label', $languageCode, $label );
 
 		$builder = new SqlEntityInfoBuilder(
-			new BasicEntityIdParser(),
+			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
 					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
@@ -305,6 +309,31 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$entityInfo = $builder->getEntityInfo()->getEntityInfo( $itemId );
 
 		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
+	}
+
+	public function testRemoveMissingConsidersForeignEntities() {
+		$itemId = new ItemId( 'foo:Q1' );
+
+		$this->saveFakeForeignItemTerm( $itemId, 'label', 'en', 'dummy label' );
+
+		$builder = new SqlEntityInfoBuilder(
+			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
+			new EntityIdComposer( [
+				'item' => function( $repositoryName, $uniquePart ) {
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+				},
+			] ),
+			$this->getEntityNamespaceLookup(),
+			[ $itemId ],
+			false,
+			'foo'
+		);
+
+		$builder->removeMissing();
+
+		$entityInfo = $builder->getEntityInfo();
+
+		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
 	}
 
 	public function testConstructorIgnoresEntityIdsFromOtherRepositoriesFullEntityId() {
@@ -325,18 +354,12 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
 	}
 
-	public function testEntityIdsArePrefixedWithRepositoryNameFullEntityId() {
-		$itemId = new ItemId( 'foo:Q1' );
-
+	private function saveFakeForeignItemTermUsingFullItemId( ItemId $itemId, $termType, $termLanguage, $termText ) {
 		// Inserting a dummy label for item with numeric ID part equal to 1.
 		// In this test local database is used to pretend to be a databse of
 		// repository "foo". Terms fetched from the database should be
 		// matched to entity IDs using correct repository prefixes (this
 		// builder's responsibility as this information is not stored in wb_terms table).
-
-		$label = 'dummy label';
-		$languageCode = 'en';
-
 		$this->insertRows(
 			'wb_terms',
 			[
@@ -352,17 +375,26 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 				[
 					$itemId->getEntityType(),
 					$itemId->getNumericId(),
-					$itemId->getSerialization(),
-					'label',
-					$languageCode,
-					$label,
-					$label
+					$itemId->getLocalPart(),
+					$termType,
+					$termLanguage,
+					$termText,
+					$termText
 				]
 			]
 		);
+	}
+
+	public function testEntityIdsArePrefixedWithRepositoryNameFullEntityId() {
+		$itemId = new ItemId( 'foo:Q1' );
+
+		$label = 'dummy label';
+		$languageCode = 'en';
+
+		$this->saveFakeForeignItemTermUsingFullItemId( $itemId, 'label', $languageCode, $label );
 
 		$builder = new SqlEntityInfoBuilder(
-			new BasicEntityIdParser(),
+			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
 					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
@@ -381,6 +413,33 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$entityInfo = $builder->getEntityInfo()->getEntityInfo( $itemId );
 
 		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
+	}
+
+	public function testRemoveMissingConsidersForeignEntities_fullEntityId() {
+		$itemId = new ItemId( 'foo:Q1' );
+
+		$this->saveFakeForeignItemTermUsingFullItemId( $itemId, 'label', 'en', 'dummy label' );
+
+		$builder = new SqlEntityInfoBuilder(
+			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
+			new EntityIdComposer( [
+				'item' => function( $repositoryName, $uniquePart ) {
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+				},
+			] ),
+			$this->getEntityNamespaceLookup(),
+			[ $itemId ],
+			false,
+			'foo'
+		);
+
+		$builder->setReadFullEntityIdColumn( true );
+
+		$builder->removeMissing();
+
+		$entityInfo = $builder->getEntityInfo();
+
+		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
 	}
 
 	/**
