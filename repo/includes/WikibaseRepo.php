@@ -31,6 +31,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -326,6 +327,12 @@ class WikibaseRepo {
 		$repositoryDefinitions = self::getRepositoryDefinitionsFromSettings( $settings );
 
 		$dataRetrievalServices = null;
+
+		// If client functionality is enabled, use it to enable federation.
+		if ( WikibaseSettings::isClientEnabled() ) {
+			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getEntityDataRetrievalServiceFactory();
+			$repositoryDefinitions = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
+		}
 
 		return new self(
 			$settings,
