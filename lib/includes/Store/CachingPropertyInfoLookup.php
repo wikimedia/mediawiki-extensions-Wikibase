@@ -98,7 +98,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
 		$propertyInfo = $this->getAllPropertyInfo();
-		$propertyInfoForDataType = array();
+		$propertyInfoForDataType = [];
 
 		foreach ( $propertyInfo as $id => $info ) {
 			if ( $info[PropertyInfoLookup::KEY_DATA_TYPE] === $dataType ) {

@@ -37,29 +37,29 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getEditCommentProvider() {
-		$changes = array();
+		$changes = [];
 
 		$updates = $this->getUpdates();
 
 		foreach ( $updates as $update ) {
-			$changes[] = array(
+			$changes[] = [
 				$update[0],
 				EntityChange::UPDATE,
 				$update[1]
-			);
+			];
 		}
 
-		$changes[] = array(
+		$changes[] = [
 			$this->getDeleteDiff(),
 			EntityChange::REMOVE,
 			'(wikibase-comment-remove)'
-		);
+		];
 
-		$changes[] = array(
+		$changes[] = [
 			$this->getRestoreDiff(),
 			EntityChange::RESTORE,
 			'(wikibase-comment-restore)'
-		);
+		];
 
 		return $changes;
 	}
@@ -80,33 +80,33 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$bar = $this->getTitle( 'Bar' );
 		$japan = $this->getTitle( 'Japan' );
 
-		return array(
-			'Sitelink change that does affect the current page' => array(
+		return [
+			'Sitelink change that does affect the current page' => [
 				true,
 				$this->getChangeLinkDiff( 'Foo', 'Foo1' ),
 				$foo
-			),
-			'Sitelink change that does not affect current page' => array(
+			],
+			'Sitelink change that does not affect current page' => [
 				false,
 				$this->getChangeLinkDiff( 'Foo', 'Foo1' ),
 				$bar
-			),
-			'Badge changes are not target specific' => array(
+			],
+			'Badge changes are not target specific' => [
 				false,
 				$this->getBadgeChangeDiff(),
 				$japan
-			),
-			'Remove link changes are not target specific' => array(
+			],
+			'Remove link changes are not target specific' => [
 				false,
 				$this->getRemoveLinkDiff(),
 				$japan
-			),
-			'Add link changes are not target specific' => array(
+			],
+			'Add link changes are not target specific' => [
 				false,
 				$this->getAddLinkDiff(),
 				$japan
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -160,9 +160,9 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function getOldLinkChangeDiff() {
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'enwiki' => new DiffOpChange( 'Japan', 'Tokyo' )
-		) );
+		] );
 
 		return $diff;
 	}
@@ -172,7 +172,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
 		$item2 = $this->getNewItem();
-		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) );
+		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan', [ new ItemId( 'Q17' ) ] );
 
 		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
@@ -262,67 +262,67 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getUpdates() {
-		$updates = array();
+		$updates = [];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getConnectDiff(),
 			'(wikibase-comment-linked)',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getUnlinkDiff(),
 			'(wikibase-comment-unlink)',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getLinkChangeDiff(),
 			'(wikibase-comment-sitelink-change: [[:en:Japan]], [[:en:Tokyo]])',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getOldLinkChangeDiff(),
 			'(wikibase-comment-sitelink-change: [[:en:Japan]], [[:en:Tokyo]])',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getBadgeChangeDiff(),
 			null, // changes to badges do not get a special message
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getAddLinkDiff(),
 			'(wikibase-comment-sitelink-add: [[:de:Japan]])',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getAddSisterProjectLinkDiff(),
 			'(wikibase-comment-sitelink-add: enwiktionary:Japan)',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getAddMultipleLinksDiff(),
 			null, // currently multi-link diffs are not supported
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getRemoveLinkDiff(),
 			'(wikibase-comment-sitelink-remove: [[:de:Japan]])',
-		);
+		];
 
-		$updates[] = array(
+		$updates[] = [
 			$this->getChangeLinkDiff(),
 			'(wikibase-comment-sitelink-change: [[:de:Japan]], [[:de:Tokyo]])',
-		);
+		];
 
-		$updates['Current page gets linked via link change'] = array(
+		$updates['Current page gets linked via link change'] = [
 			$this->getChangeLinkDiff( 'Japan', 'A fancy page' ),
 			'(wikibase-comment-linked)',
-		);
+		];
 
-		$updates['Current page gets unlinked via link change'] = array(
+		$updates['Current page gets unlinked via link change'] = [
 			$this->getChangeLinkDiff( 'A fancy page', 'Japan' ),
 			'(wikibase-comment-unlink)',
-		);
+		];
 
 		return $updates;
 	}

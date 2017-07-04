@@ -57,7 +57,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @var string[]
 	 */
-	private $aliases = array();
+	private $aliases = [];
 
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
@@ -145,18 +145,18 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				$languageName
 			)->parse();
 
-			$formDescriptor = array(
-				'id' => array(
+			$formDescriptor = [
+				'id' => [
 					'name' => 'id',
 					'type' => 'hidden',
 					'default' => $entity->getId()->getSerialization()
-				),
-				'language' => array(
+				],
+				'language' => [
 					'name' => 'language',
 					'type' => 'hidden',
 					'default' => $this->languageCode
-				)
-			);
+				]
+			];
 			$formDescriptor = array_merge(
 				$formDescriptor,
 				$this->getLabeledInputField( 'label', $this->label ),
@@ -169,18 +169,18 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$languageCode = $this->languageCode ?: $this->getLanguage()->getCode();
 
 			$formDescriptor = $this->getFormElements( $entity );
-			$formDescriptor['language'] = array(
+			$formDescriptor['language'] = [
 				'name' => 'language',
 				'default' => $languageCode,
 				'type' => 'text',
 				'cssclass' => 'wb-input',
 				'id' => $fieldId,
 				'label-message' => 'wikibase-modifyterm-language'
-			);
+			];
 		}
 
 		return HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
-			->setHeaderText( Html::rawElement( 'p', array(), $intro ) );
+			->setHeaderText( Html::rawElement( 'p', [], $intro ) );
 	}
 
 	/**
@@ -198,8 +198,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		// wikibase-setlabeldescriptionaliases-label-label
 		// wikibase-setlabeldescriptionaliases-description-label
 		// wikibase-setlabeldescriptionaliases-aliases-label
-		return array(
-			$termType => array(
+		return [
+			$termType => [
 				'name' => $termType,
 				'default' => $value,
 				'type' => 'text',
@@ -207,8 +207,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'id' => $fieldId,
 				'placeholder' => $value,
 				'label-message' => $fieldId . '-label'
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -247,7 +247,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private function extractInput( $subPage ) {
 		$request = $this->getRequest();
 
-		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
 
 		$label = $request->getVal( 'label', '' );
@@ -258,7 +258,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$aliases = $request->getVal( 'aliases', '' );
 		$aliases = $this->stringNormalizer->trimToNFC( $aliases );
-		$this->aliases = $aliases === '' ? array() : explode( '|', $aliases );
+		$this->aliases = $aliases === '' ? [] : explode( '|', $aliases );
 		foreach ( $this->aliases as &$alias ) {
 			$alias = $this->stringNormalizer->trimToNFC( $alias );
 		}
@@ -350,7 +350,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	private function getChangeOps( Fingerprint $fingerprint ) {
 		$changeOpFactory = $this->changeOpFactory;
-		$changeOps = array();
+		$changeOps = [];
 
 		if ( $this->label !== '' ) {
 			if ( !$fingerprint->hasLabel( $this->languageCode )

@@ -56,7 +56,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @var array[]
 	 */
-	private $entities = array();
+	private $entities = [];
 
 	/**
 	 * Log entries. Each entry has the following fields:
@@ -64,21 +64,21 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @var array[]
 	 */
-	private $log = array();
+	private $log = [];
 
 	/**
 	 * Entity id serialization => EntityRedirect
 	 *
 	 * @var RedirectRevision[]
 	 */
-	private $redirects = array();
+	private $redirects = [];
 
 	/**
 	 * User ID + Entity Id -> bool
 	 *
 	 * @var bool[]
 	 */
-	private $watchlist = array();
+	private $watchlist = [];
 
 	/**
 	 * @var int
@@ -274,7 +274,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 		unset( $this->redirects[$key] );
 
 		if ( !array_key_exists( $key, $this->entities ) ) {
-			$this->entities[$key] = array();
+			$this->entities[$key] = [];
 		}
 		$this->entities[$key][$revisionId] = $revision;
 		ksort( $this->entities[$key] );
@@ -348,7 +348,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @return array[]
 	 */
-	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
+	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] ) {
 		return $this->siteLinkStore->getLinks( $numericIds, $siteIds, $pageNames );
 	}
 
@@ -366,7 +366,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 * @return EntityDocument[]|null[]
 	 */
 	public function getEntities( array $entityIds ) {
-		$entities = array();
+		$entities = [];
 
 		foreach ( $entityIds as $entityId ) {
 			if ( is_string( $entityId ) ) {
@@ -659,12 +659,12 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 			$user = $user->getName();
 		}
 
-		$this->log[$revisionId] = array(
+		$this->log[$revisionId] = [
 			'revision' => $revisionId,
 			'entity' => $entityId,
 			'summary' => $summary,
 			'user' => $user,
-		);
+		];
 	}
 
 	/**
@@ -714,7 +714,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 * @return EntityId[]
 	 */
 	public function getRedirectIds( EntityId $targetId ) {
-		$redirects = array();
+		$redirects = [];
 
 		foreach ( $this->redirects as $redirRev ) {
 			$redir = $redirRev->getRedirect();

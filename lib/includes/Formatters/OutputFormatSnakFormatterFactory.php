@@ -106,11 +106,11 @@ class OutputFormatSnakFormatterFactory {
 			$this->dataTypeFactory
 		);
 
-		$formattersBySnakType = array(
+		$formattersBySnakType = [
 			'novalue' => $noValueSnakFormatter,
 			'somevalue' => $someValueSnakFormatter,
 			// for 'value' snaks, rely on $formattersByDataType
-		);
+		];
 
 		$formattersByDataType = $this->createSnakFormatters( $format, $options );
 
@@ -154,7 +154,7 @@ class OutputFormatSnakFormatterFactory {
 	 * @return SnakFormatter[]
 	 */
 	private function createSnakFormatters( $format, FormatterOptions $options ) {
-		$formatters = array();
+		$formatters = [];
 
 		foreach ( $this->snakFormatterConstructorCallbacks as $key => $callback ) {
 			$instance = call_user_func( $callback, $format, $options );

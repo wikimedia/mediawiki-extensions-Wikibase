@@ -93,7 +93,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true ] ] );
 
 		if ( !self::$badgeId ) {
 			self::$matchers = self::createMatchers();
@@ -107,7 +107,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
-		$settings->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
+		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 	}
 
 	protected function tearDown() {
@@ -125,7 +125,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata', [ $badge->getId() ] );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q12345678' ), $item->getId() );
@@ -233,11 +233,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostPreserveSiteLinkWhenNothingEntered() {
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => '',
-		), true );
+		], true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
@@ -250,11 +250,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function testExecutePostModifySiteLink() {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => 'Wikipedia',
-		), true );
+		], true );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
@@ -273,12 +273,12 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function testExecutePostRemoveSiteLink() {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => '',
 			'remove' => true,
-		), true );
+		], true );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;

@@ -34,7 +34,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 * @return Result
 	 */
 	public function validateEntity( EntityDocument $entity ) {
-		$errors = array();
+		$errors = [];
 
 		if ( $entity instanceof Item ) {
 			// TODO: do not use global state
@@ -62,10 +62,10 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 			$conflict['itemId'],
 			'SiteLink conflict',
 			'sitelink-conflict',
-			array(
+			[
 				new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
 				$conflict['itemId'],
-			)
+			]
 		);
 	}
 

@@ -131,7 +131,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 				)->parse();
 			}
 
-			$this->getOutput()->addHTML( Html::rawElement( 'li', array(), $msgHtml ) );
+			$this->getOutput()->addHTML( Html::rawElement( 'li', [], $msgHtml ) );
 		}
 
 		$this->getOutput()->addHTML( Html::closeElement( 'ul' ) );

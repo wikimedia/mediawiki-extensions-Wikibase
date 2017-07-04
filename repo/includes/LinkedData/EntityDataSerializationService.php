@@ -150,7 +150,7 @@ class EntityDataSerializationService {
 		$format,
 		EntityRevision $entityRevision,
 		RedirectRevision $followedRedirect = null,
-		array $incomingRedirects = array(),
+		array $incomingRedirects = [],
 		$flavor = null
 	) {
 
@@ -178,7 +178,7 @@ class EntityDataSerializationService {
 			$contentType = reset( $mimeTypes );
 		}
 
-		return array( $data, $contentType );
+		return [ $data, $contentType ];
 	}
 
 	/**
@@ -273,9 +273,9 @@ class EntityDataSerializationService {
 	private function newApiMain( $format ) {
 		// Fake request params to ApiMain, with forced format parameters.
 		// We can override additional parameters here, as needed.
-		$params = array(
+		$params = [
 			'format' => $format,
-		);
+		];
 
 		$context = new DerivativeContext( RequestContext::getMain() ); //XXX: ugly
 

@@ -95,10 +95,10 @@ class ItemMergeInteractor {
 	 * @param EntityId $entityId
 	 */
 	private function checkPermissions( EntityId $entityId ) {
-		$permissions = array(
+		$permissions = [
 			'edit',
 			$entityId->getEntityType() . '-merge'
-		);
+		];
 
 		foreach ( $permissions as $permission ) {
 			$this->checkPermission( $entityId, $permission );
@@ -146,7 +146,7 @@ class ItemMergeInteractor {
 	public function mergeItems(
 		ItemId $fromId,
 		ItemId $toId,
-		array $ignoreConflicts = array(),
+		array $ignoreConflicts = [],
 		$summary = null,
 		$bot = false
 	) {
@@ -255,7 +255,7 @@ class ItemMergeInteractor {
 	 * @return Summary
 	 */
 	private function getSummary( $direction, ItemId $getId, $customSummary = null ) {
-		$summary = new Summary( 'wbmergeitems', $direction, null, array( $getId->getSerialization() ) );
+		$summary = new Summary( 'wbmergeitems', $direction, null, [ $getId->getSerialization() ] );
 		if ( $customSummary !== null ) {
 			$summary->setUserSummary( $customSummary );
 		}
@@ -278,7 +278,7 @@ class ItemMergeInteractor {
 		$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
 		$toRev = $this->saveItem( $toItem, $fromSummary, $bot );
 
-		return array( $fromRev, $toRev );
+		return [ $fromRev, $toRev ];
 	}
 
 	private function saveItem( Item $item, Summary $summary, $bot ) {

@@ -75,7 +75,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		);
 
 		$statement1->setQualifiers(
-			new SnakList( array( $qualifierSnak1, $qualifierSnak2 ) )
+			new SnakList( [ $qualifierSnak1, $qualifierSnak2 ] )
 		);
 
 		$statement1->addNewReference( $referenceSnak );
@@ -100,27 +100,27 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement3 = $this->getTestStatement( $itemSnak );
 		$statement3->setRank( Statement::RANK_NORMAL );
 
-		$siteLinks = array( $siteLink );
+		$siteLinks = [ $siteLink ];
 		$siteLinks[] = new SiteLink(
 			'fooSiteId',
 			'FooBarFoo'
 		);
 
-		$labels = array(
+		$labels = [
 			'de' => 'Lua Test Item',
 			'en' => 'Test all the code paths'
-		);
+		];
 
-		$this->createTestItem( new ItemId( 'Q32487' ), $labels, array( $statement1, $statement2 ), $siteLinks );
+		$this->createTestItem( new ItemId( 'Q32487' ), $labels, [ $statement1, $statement2 ], $siteLinks );
 
-		$this->createTestItem( new ItemId( 'Q32488' ), array(), array( $statement1, $statement3 ), array() );
+		$this->createTestItem( new ItemId( 'Q32488' ), [], [ $statement1, $statement3 ], [] );
 
-		$this->createTestItem( new ItemId( 'Q32489' ), array(), array( $statement1, $statement1 ), array() );
+		$this->createTestItem( new ItemId( 'Q32489' ), [], [ $statement1, $statement1 ], [] );
 
 		// Create another test item to test arbitrary access
-		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
+		$this->createTestItem( new ItemId( 'Q199024' ), [ 'de' => 'Arbitrary access \o/' ] );
 
-		$this->createTestItem( new ItemId( 'Q885588' ), array( 'ku-latn' => 'Pisîk' ) );
+		$this->createTestItem( new ItemId( 'Q885588' ), [ 'ku-latn' => 'Pisîk' ] );
 	}
 
 	/**

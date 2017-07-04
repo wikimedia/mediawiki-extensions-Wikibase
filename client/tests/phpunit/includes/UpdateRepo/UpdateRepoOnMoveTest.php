@@ -39,14 +39,14 @@ class UpdateRepoOnMoveTest extends PHPUnit_Framework_TestCase {
 			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $entityId ) );
 
-		return array(
+		return [
 			'repoDB' => 'wikidata',
 			'siteLinkLookup' => $siteLinkLookupMock,
 			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => 'whatever',
 			'oldTitle' => Title::newFromText( 'ThisOneDoesntExist' ),
 			'newTitle' => Title::newFromText( 'Bar' )
-		);
+		];
 	}
 
 	/**

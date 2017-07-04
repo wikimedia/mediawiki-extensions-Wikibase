@@ -50,14 +50,14 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return SettingsArray
 	 */
 	private function newSettings( array $settings ) {
-		$defaults = array(
+		$defaults = [
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
-			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
-			'otherProjectsLinks' => array( 'commonswiki' ),
+			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
+			'otherProjectsLinks' => [ 'commonswiki' ],
 			'otherProjectsLinksBeta' => true,
 			'otherProjectsLinksByDefault' => false,
-		);
+		];
 
 		return new SettingsArray( array_merge( $defaults, $settings ) );
 	}
@@ -100,12 +100,12 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return $otherProjectsSidebarGeneratorFactory;
 	}
 
-	private function newSidebarHookHandlers( array $settings = array() ) {
+	private function newSidebarHookHandlers( array $settings = [] ) {
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
 		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
+		$namespaceChecker = new NamespaceChecker( [], $namespaces );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
 			new SidebarLinkBadgeDisplay(
@@ -118,7 +118,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$badgeDisplay,
-			$this->getOtherProjectsSidebarGeneratorFactory( array( 'dummy' => 'xyz' ) ),
+			$this->getOtherProjectsSidebarGeneratorFactory( [ 'dummy' => 'xyz' ] ),
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
@@ -149,28 +149,28 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	public function testDoOutputPageParserOutput() {
 		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
 
-		$sisterLinks = array(
-			array(
+		$sisterLinks = [
+			[
 				'msg' => 'wikibase-otherprojects-test',
 				'class' => 'wb-otherproject-link wb-otherproject-test',
 				'href' => 'http://acme.tests.com/wiki/Foo'
-			),
-		);
+			],
+		];
 
-		$pageProps = array(
-			'noexternallanglinks' => serialize( array( '*' ) ),
+		$pageProps = [
+			'noexternallanglinks' => serialize( [ '*' ] ),
 			'wikibase_item' => 'Q1',
-		);
+		];
 
-		$extData = array(
+		$extData = [
 			'wikibase-otherprojects-sidebar' => $sisterLinks,
-		);
+		];
 
-		$outputProps = array(
-			'noexternallanglinks' => array( '*' ),
+		$outputProps = [
+			'noexternallanglinks' => [ '*' ],
 			'wikibase_item' => 'Q1',
 			'wikibase-otherprojects-sidebar' => $sisterLinks,
-		);
+		];
 
 		$handler = $this->newSidebarHookHandlers();
 
@@ -188,23 +188,23 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function testDoSkinTemplateGetLanguageLink() {
-		$badges = array(
-			'en' => array(
+		$badges = [
+			'en' => [
 				'class' => 'badge-Q3',
 				'label' => 'Lesenswerter Artikel',
-			)
-		);
+			]
+		];
 
-		$link = array(
+		$link = [
 			'href' => 'http://acme.com',
 			'class' => 'foo',
-		);
+		];
 
-		$expected = array(
+		$expected = [
 			'href' => 'http://acme.com',
 			'class' => 'foo badge-Q3',
 			'itemtitle' => 'Lesenswerter Artikel',
-		);
+		];
 
 		$languageLinkTitle = Title::makeTitle( NS_MAIN, 'Test', '', 'en' );
 
@@ -259,18 +259,18 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$context->setOutput( $output );
 		$skin = $this->newSkin( $context );
 
-		$sidebar = array();
+		$sidebar = [];
 
-		$handler = $this->newSidebarHookHandlers( array(
+		$handler = $this->newSidebarHookHandlers( [
 			'otherProjectsLinksByDefault' => $enabled
-		) );
+		] );
 
 		$handler->doSidebarBeforeOutput( $skin, $sidebar );
 		return $sidebar;
 	}
 
 	public function testDoSidebarBeforeOutput() {
-		$projects = array( 'foo' => 'bar' );
+		$projects = [ 'foo' => 'bar' ];
 		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
 
 		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
@@ -284,14 +284,14 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function testDoSidebarBeforeOutput_empty() {
-		$projects = array();
+		$projects = [];
 		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
 
 		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
 	}
 
 	public function testDoSidebarBeforeOutput_disabled() {
-		$projects = array( 'foo' => 'bar' );
+		$projects = [ 'foo' => 'bar' ];
 		$sidebar = $this->callDoSidebarBeforeOutput( false, $projects );
 
 		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );

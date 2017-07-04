@@ -18,13 +18,13 @@ use Wikibase\Repo\Parsers\MonolingualTextParser;
 class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 
 	public function textProvider() {
-		return array(
-			'empty' => array( 'en', '' ),
-			'space' => array( 'en', ' ' ),
-			'hello' => array( 'en', 'hello' ),
-			'hallo' => array( 'de', 'hallo' ),
-			'trim' => array( 'de ', 'hallo ' ),
-		);
+		return [
+			'empty' => [ 'en', '' ],
+			'space' => [ 'en', ' ' ],
+			'hello' => [ 'en', 'hello' ],
+			'hallo' => [ 'de', 'hallo' ],
+			'trim' => [ 'de ', 'hallo ' ],
+		];
 	}
 
 	/**
@@ -33,7 +33,7 @@ class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $text
 	 */
 	public function testParse( $languageCode, $text ) {
-		$options = new ParserOptions( array( 'valuelang' => $languageCode ) );
+		$options = new ParserOptions( [ 'valuelang' => $languageCode ] );
 		$parser = new MonolingualTextParser( $options );
 		$value = $parser->parse( $text );
 
@@ -50,10 +50,10 @@ class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidLanguageCodeProvider() {
-		return array(
-			array( null ),
-			array( '' ),
-		);
+		return [
+			[ null ],
+			[ '' ],
+		];
 	}
 
 	/**
@@ -61,7 +61,7 @@ class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParse_invalidLanguageOption( $languageCode ) {
-		$options = new ParserOptions( array( 'valuelang' => $languageCode ) );
+		$options = new ParserOptions( [ 'valuelang' => $languageCode ] );
 		$parser = new MonolingualTextParser( $options );
 		$parser->parse( 'Text' );
 	}
@@ -70,7 +70,7 @@ class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParse_invalidText() {
-		$options = new ParserOptions( array( 'valuelang' => 'en' ) );
+		$options = new ParserOptions( [ 'valuelang' => 'en' ] );
 		$parser = new MonolingualTextParser( $options );
 		$parser->parse( null );
 	}

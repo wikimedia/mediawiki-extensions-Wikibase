@@ -47,7 +47,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			->willReturn( new EntityRevision( $foreignItem, 100 ) );
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup(
-			array( '' => $localLookup, 'foo' => $fooLookup, )
+			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
 		$revision = $dispatchingLookup->getEntityRevision( new ItemId( 'Q123' ) );
@@ -76,7 +76,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			->willReturn( null );
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup(
-			array( '' => $localLookup, 'foo' => $fooLookup, )
+			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
 		$this->assertNull( $dispatchingLookup->getEntityRevision( new ItemId( 'Q124' ) ) );
@@ -87,7 +87,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 		$localLookup = $this->getDummyEntityRevisionLookup();
 		$localLookup->expects( $this->never() )->method( 'getEntityRevision' );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup( array( '' => $localLookup, ) );
+		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
 		$this->assertNull( $dispatchingLookup->getEntityRevision( new ItemId( 'foo:Q123' ) ) );
 	}
@@ -106,7 +106,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			->willReturn( 100 );
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup(
-			array( '' => $localLookup, 'foo' => $fooLookup, )
+			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
 		$this->assertEquals( 123, $dispatchingLookup->getLatestRevisionId( new ItemId( 'Q123' ) ) );
@@ -127,7 +127,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			->willReturn( false );
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup(
-			array( '' => $localLookup, 'foo' => $fooLookup, )
+			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
 		$this->assertFalse( $dispatchingLookup->getLatestRevisionId( new ItemId( 'Q123' ) ) );
@@ -138,7 +138,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 		$localLookup = $this->getDummyEntityRevisionLookup();
 		$localLookup->expects( $this->never() )->method( 'getLatestRevisionId' );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup( array( '' => $localLookup, ) );
+		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
 		$this->assertFalse( $dispatchingLookup->getLatestRevisionId( new ItemId( 'foo:Q123' ) ) );
 	}
@@ -149,7 +149,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			->method( $this->anything() )
 			->willThrowException( new StorageException( 'No such revision for entity Q123: 124' ) );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup( array( '' => $localLookup, ) );
+		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
 		$this->setExpectedException( StorageException::class );
 		$dispatchingLookup->getEntityRevision( new ItemId( 'Q123' ), 124 );
@@ -164,24 +164,24 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideInvalidForeignLookups() {
-		return array(
-			'no lookups given' => array( array() ),
-			'not an implementation of EntityRevisionLookup given as a lookup' => array(
-				array( '' => new ItemId( 'Q123' ) ),
-			),
-			'non-string keys' => array(
-				array(
+		return [
+			'no lookups given' => [ [] ],
+			'not an implementation of EntityRevisionLookup given as a lookup' => [
+				[ '' => new ItemId( 'Q123' ) ],
+			],
+			'non-string keys' => [
+				[
 					'' => $this->getDummyEntityRevisionLookup(),
 					100 => $this->getDummyEntityRevisionLookup(),
-				),
-			),
-			'repo name containing colon' => array(
-				array(
+				],
+			],
+			'repo name containing colon' => [
+				[
 					'' => $this->getDummyEntityRevisionLookup(),
 					'fo:oo' => $this->getDummyEntityRevisionLookup(),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 }

@@ -129,7 +129,7 @@ class PropertyInfoTableBuilder {
 
 		$total = 0;
 
-		$join = array();
+		$join = [];
 		$tables = [ 'page' ];
 
 		if ( !$this->shouldUpdateAllEntities ) {
@@ -172,11 +172,11 @@ class PropertyInfoTableBuilder {
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				],
 				__METHOD__,
-				array(
+				[
 					'LIMIT' => $this->batchSize,
 					'ORDER BY' => 'page_id ASC',
 					'FOR UPDATE'
-				),
+				],
 				$join
 			);
 

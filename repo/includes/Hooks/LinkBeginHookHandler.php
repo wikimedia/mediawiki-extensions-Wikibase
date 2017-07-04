@@ -253,7 +253,7 @@ class LinkBeginHookHandler {
 		);
 
 		// add wikibase styles in all cases, so we can format the link properly:
-		$out->addModuleStyles( array( 'wikibase.common' ) );
+		$out->addModuleStyles( [ 'wikibase.common' ] );
 	}
 
 	/**
@@ -365,15 +365,15 @@ class LinkBeginHookHandler {
 	 */
 	private function extractTextAndLanguage( array $termData = null ) {
 		if ( $termData ) {
-			return array(
+			return [
 				$termData['value'],
 				Language::factory( $termData['language'] )
-			);
+			];
 		} else {
-			return array(
+			return [
 				'',
 				$this->pageLanguage
-			);
+			];
 		}
 	}
 

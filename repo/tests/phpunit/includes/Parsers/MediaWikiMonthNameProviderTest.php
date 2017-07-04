@@ -40,10 +40,10 @@ class MediaWikiMonthNameProviderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function languageCodeProvider() {
-		return array(
-			array( 'en' ),
-			array( 'de' ),
-		);
+		return [
+			[ 'en' ],
+			[ 'de' ],
+		];
 	}
 
 }

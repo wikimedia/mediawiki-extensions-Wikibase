@@ -30,11 +30,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @var string[]
 	 */
-	private static $termTypeFields = array(
+	private static $termTypeFields = [
 		'label' => 'labels',
 		'description' => 'descriptions',
 		'alias' => 'aliases',
-	);
+	];
 
 	/**
 	 * @var string The name of the database table holding terms.
@@ -77,7 +77,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @var array[] map of entity types to maps of id-strings to numeric ids:
 	 *      type => id-string => id-int
 	 */
-	private $numericIdsByType = array();
+	private $numericIdsByType = [];
 
 	/**
 	 * Maps of id strings to page info records, grouped by entity type.
@@ -192,9 +192,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			throw new RuntimeException( 'EntityIds have already been initialized' );
 		}
 
-		$this->entityIds = array();
-		$this->entityInfo = array();
-		$this->numericIdsByType = array();
+		$this->entityIds = [];
+		$this->entityInfo = [];
+		$this->numericIdsByType = [];
 
 		foreach ( $ids as $id ) {
 			$this->updateEntityInfo( $id );
@@ -309,7 +309,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$key = $id->getSerialization();
 
 		// NOTE: we assume that the type of entity never changes.
-		$this->initEntityInfo( $key, array( 'type' => $type ) );
+		$this->initEntityInfo( $key, [ 'type' => $type ] );
 
 		$this->entityIds[$key] = $id;
 		$this->entityInfo[$key]['id'] = $key;
@@ -349,7 +349,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string[]|null $languages Which languages to include
 	 */
 	public function collectTerms( array $termTypes = null, array $languages = null ) {
-		if ( $termTypes === array() || $languages === array() ) {
+		if ( $termTypes === [] || $languages === [] ) {
 			// nothing to do
 			return;
 		}
@@ -365,7 +365,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		}
 
 		foreach ( $termTypes as $type ) {
-			$this->setDefaultValue( self::$termTypeFields[$type], array() );
+			$this->setDefaultValue( self::$termTypeFields[$type], [] );
 		}
 	}
 
@@ -480,10 +480,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string $text
 	 */
 	private function injectLabel( &$termList, $language, $text ) {
-		$termList[$language] = array(
+		$termList[$language] = [
 			'language' => $language,
 			'value' => $text,
-		);
+		];
 	}
 
 	/**
@@ -492,10 +492,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string $text
 	 */
 	private function injectDescription( &$termList, $language, $text ) {
-		$termList[$language] = array(
+		$termList[$language] = [
 			'language' => $language,
 			'value' => $text,
-		);
+		];
 	}
 
 	/**
@@ -504,10 +504,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string $text
 	 */
 	private function injectAlias( &$termGroupList, $language, $text ) {
-		$termGroupList[$language][] = array( // note that we are appending here.
+		$termGroupList[$language][] = [ // note that we are appending here.
 			'language' => $language,
 			'value' => $text,
-		);
+		];
 	}
 
 	/**
@@ -527,8 +527,8 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$res = $dbw->select(
 			$this->propertyInfoTable,
-			array( 'pi_property_id', 'pi_type' ),
-			array( 'pi_property_id' => $numericPropertyIds ),
+			[ 'pi_property_id', 'pi_type' ],
+			[ 'pi_property_id' => $numericPropertyIds ],
 			__METHOD__
 		);
 
@@ -646,7 +646,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *         page_id and redirect_target. Redirects are included.
 	 */
 	private function getPageInfo() {
-		$info = array();
+		$info = [];
 
 		foreach ( $this->numericIdsByType as $type => $ids ) {
 			$info[$type] = $this->getPageInfoForType( $type );
@@ -688,7 +688,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			function ( $acc, $next ) {
 				return array_merge( $acc, $next );
 			},
-			array()
+			[]
 		);
 
 		return $merged;
@@ -702,7 +702,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function getMissingIds( $includeRedirects = false ) {
 		$pageInfo = $this->getPageInfo();
-		$missingIds = array();
+		$missingIds = [];
 
 		foreach ( $this->entityInfo as $key => $info ) {
 			if ( isset( $pageInfo[$key] ) ) {
@@ -726,7 +726,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function findRedirects() {
 		$pageInfo = $this->getPageInfo();
-		$redirects = array();
+		$redirects = [];
 
 		foreach ( $pageInfo as $key => $pageRecord ) {
 			if ( $pageInfo[$key]['redirect_target'] !== null ) {

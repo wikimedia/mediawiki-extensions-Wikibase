@@ -28,7 +28,7 @@ class AutoCommentFormatter {
 	 *
 	 * @var Message[]
 	 */
-	private $messages = array();
+	private $messages = [];
 
 	/**
 	 * @param Language $language
@@ -90,7 +90,7 @@ class AutoCommentFormatter {
 		}
 
 		// turn the args to the message into an array
-		$args = isset( $matches[3] ) ? explode( '|', $matches[3] ) : array();
+		$args = isset( $matches[3] ) ? explode( '|', $matches[3] ) : [];
 
 		// look up the message
 		$msg = $this->getSummaryMessage( $matches[1] );

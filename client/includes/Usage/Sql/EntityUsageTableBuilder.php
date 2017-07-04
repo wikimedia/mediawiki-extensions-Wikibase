@@ -152,15 +152,15 @@ class EntityUsageTableBuilder {
 		foreach ( $entityPerPage as $pageId => $entityId ) {
 			$db->insert(
 				$this->usageTableName,
-				array(
+				[
 					'eu_page_id' => (int)$pageId,
 					'eu_aspect' => EntityUsage::ALL_USAGE,
 					'eu_entity_id' => $entityId->getSerialization()
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'IGNORE'
-				)
+				]
 			);
 
 			$c++;
@@ -179,16 +179,16 @@ class EntityUsageTableBuilder {
 	private function getUsageBatch( Database $db, $fromPageId = 0 ) {
 		$res = $db->select(
 			'page_props',
-			array( 'pp_page', 'pp_value' ),
-			array(
+			[ 'pp_page', 'pp_value' ],
+			[
 				'pp_propname' => 'wikibase_item',
 				'pp_page >= ' . (int)$fromPageId
-			),
+			],
 			__METHOD__,
-			array(
+			[
 				'LIMIT' => $this->batchSize,
 				'ORDER BY pp_page'
-			)
+			]
 		);
 
 		return $this->slurpEntityIds( $res );
@@ -200,7 +200,7 @@ class EntityUsageTableBuilder {
 	 * @return EntityId[] An associative array mapping page IDs to Entity IDs.
 	 */
 	private function slurpEntityIds( ResultWrapper $res ) {
-		$entityPerPage = array();
+		$entityPerPage = [];
 
 		foreach ( $res as $row ) {
 			try {

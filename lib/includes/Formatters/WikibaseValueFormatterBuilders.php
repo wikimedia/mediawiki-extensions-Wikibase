@@ -72,10 +72,10 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @var string[]
 	 */
-	private $unitOneUris = array(
+	private $unitOneUris = [
 		'http://www.wikidata.org/entity/Q199',
 		'http://qudt.org/vocab/unit#Unitless',
-	);
+	];
 
 	/**
 	 * @var string
@@ -374,9 +374,9 @@ class WikibaseValueFormatterBuilders {
 			);
 		} else {
 			$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
-			$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array(
+			$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, [
 				GeoCoordinateFormatter::OPT_SPACE_LATLONG
-			) );
+			] );
 			$options->setOption( GeoCoordinateFormatter::OPT_DIRECTIONAL, true );
 
 			$plainFormatter = new GlobeCoordinateFormatter( $options );

@@ -101,7 +101,7 @@ class SitesModuleWorker {
 			array_splice( $groups, $specialPos, 1, $specialGroups );
 		}
 
-		$siteDetails = array();
+		$siteDetails = [];
 		/**
 		 * @var MediaWikiSite $site
 		 */
@@ -115,7 +115,7 @@ class SitesModuleWorker {
 			}
 		}
 
-		return ResourceLoader::makeConfigSetScript( array( 'wbSiteDetails' => $siteDetails ) );
+		return ResourceLoader::makeConfigSetScript( [ 'wbSiteDetails' => $siteDetails ] );
 	}
 
 	/**
@@ -144,17 +144,17 @@ class SitesModuleWorker {
 		list( $pageUrl, $apiUrl ) = preg_replace(
 			"/^https?:/i",
 			'',
-			array(
+			[
 				$site->getPageUrl(),
 				$site->getFileUrl( 'api.php' )
-			)
+			]
 		);
 
 		//TODO: figure out which name is best
 		//$localIds = $site->getLocalIds();
 		//$name = empty( $localIds['equivalent'] ) ? $site->getGlobalId() : $localIds['equivalent'][0];
 
-		return array(
+		return [
 				'shortName' => $languageName,
 				'name' => $languageName, // use short name for both, for now
 				'id' => $site->getGlobalId(),
@@ -162,7 +162,7 @@ class SitesModuleWorker {
 				'apiUrl' => $apiUrl,
 				'languageCode' => $site->getLanguageCode(),
 				'group' => $groupName
-		);
+		];
 	}
 
 	/**
@@ -197,11 +197,11 @@ class SitesModuleWorker {
 	 * @return string
 	 */
 	private function computeModifiedHash() {
-		$data = array(
+		$data = [
 			$this->getSiteLinkGroups(),
 			$this->getSpecialSiteLinkGroups(),
 			$this->getSitesHash()
-		);
+		];
 
 		return sha1( json_encode( $data ) );
 	}
@@ -225,9 +225,9 @@ class SitesModuleWorker {
 			$this->cache->set( $cacheKey, $hash, self::SITES_HASH_CACHE_DURATION );
 		}
 
-		return array(
+		return [
 			'dataHash' => $hash
-		);
+		];
 	}
 
 }

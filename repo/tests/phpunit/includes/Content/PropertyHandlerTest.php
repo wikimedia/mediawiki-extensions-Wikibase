@@ -86,9 +86,9 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	}
 
 	public function entityIdProvider() {
-		return array(
-			array( 'P7' )
-		);
+		return [
+			[ 'P7' ]
+		];
 	}
 
 	/**

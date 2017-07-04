@@ -23,35 +23,35 @@ use Wikibase\TermIndexEntry;
 class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getWorld() {
-		$world = array();
+		$world = [];
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
 			'termText' => 'item label',
-		) );
+		] );
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
 			'termText' => 'item description',
-		) );
+		] );
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_ALIAS,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
 			'termText' => 'item alias',
-		) );
+		] );
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => new PropertyId( 'P42' ),
 			'termText' => 'property label',
-		) );
+		] );
 
 		return $world;
 	}
@@ -63,41 +63,41 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			new ItemId( 'Q42' ),
 			'Conflicting term!',
 			'label-with-description-conflict',
-			array(
+			[
 				'item label',
 				'en',
 				new ItemId( 'Q42' )
-			)
+			]
 		);
 
-		return array(
-			'no label/description conflict' => array(
+		return [
+			'no label/description conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
-				array(),
+				[ 'en' => 'item label' ],
+				[],
 				null,
-				array()
-			),
+				[]
+			],
 
-			'label/description conflict' => array(
+			'label/description conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
-				array( 'en' => 'item description' ),
+				[ 'en' => 'item label' ],
+				[ 'en' => 'item description' ],
 				null,
-				array( $labelError )
-			),
+				[ $labelError ]
+			],
 
-			'ignored label/description conflict' => array(
+			'ignored label/description conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
-				array( 'en' => 'item description' ),
+				[ 'en' => 'item label' ],
+				[ 'en' => 'item description' ],
 				new ItemId( 'Q42' ),
-				array()
-			),
-		);
+				[]
+			],
+		];
 	}
 
 	/**
@@ -125,124 +125,124 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			new ItemId( 'Q42' ),
 			'Conflicting term!',
 			'label-conflict',
-			array(
+			[
 				'item label',
 				'en',
 				new ItemId( 'Q42' )
-			)
+			]
 		);
 
 		$aliasError = new UniquenessViolation(
 			new ItemId( 'Q42' ),
 			'Conflicting term!',
 			'label-conflict',
-			array(
+			[
 				'item alias',
 				'en',
 				new ItemId( 'Q42' )
-			)
+			]
 		);
 
-		return array(
-			'labels only: no conflict' => array(
+		return [
+			'labels only: no conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item alias' ),
+				[ 'en' => 'item alias' ],
 				null,
 				null,
-				array()
-			),
+				[]
+			],
 
-			'labels only: conflict' => array(
+			'labels only: conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
+				[ 'en' => 'item label' ],
 				null,
 				new ItemId( 'Q55' ), // ignores Q55, but conflict is with Q42
-				array( $labelError )
-			),
+				[ $labelError ]
+			],
 
-			'labels only: other entity type' => array(
+			'labels only: other entity type' => [
 				$world,
 				Property::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
+				[ 'en' => 'item label' ],
 				null,
 				null,
-				array()
-			),
+				[]
+			],
 
-			'labels only: ignored conflict' => array(
+			'labels only: ignored conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
+				[ 'en' => 'item label' ],
 				null,
 				new ItemId( 'Q42' ),
-				array()
-			),
+				[]
+			],
 
-			'labels+aliases: no conflict' => array(
+			'labels+aliases: no conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'foo' ),
-				array( 'en' => array( 'bar' ) ),
+				[ 'en' => 'foo' ],
+				[ 'en' => [ 'bar' ] ],
 				null,
-				array()
-			),
+				[]
+			],
 
-			'labels+aliases: empty' => array(
+			'labels+aliases: empty' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array(),
-				array(),
+				[],
+				[],
 				null,
-				array()
-			),
+				[]
+			],
 
-			'labels+aliases: label conflict' => array(
+			'labels+aliases: label conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
-				array(),
+				[ 'en' => 'item label' ],
+				[],
 				null,
-				array( $labelError )
-			),
+				[ $labelError ]
+			],
 
-			'labels+aliases: alias conflict' => array(
+			'labels+aliases: alias conflict' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array(),
-				array( 'en' => array( 'item alias' ) ),
+				[],
+				[ 'en' => [ 'item alias' ] ],
 				new ItemId( 'Q55' ), // ignores Q55, but conflict is with Q42
-				array( $aliasError )
-			),
+				[ $aliasError ]
+			],
 
-			'labels+aliases: label conflicts with alias' => array(
+			'labels+aliases: label conflicts with alias' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array( 'en' => 'item alias' ),
-				array(), // aliases must be enabled
+				[ 'en' => 'item alias' ],
+				[], // aliases must be enabled
 				null,
-				array( $aliasError )
-			),
+				[ $aliasError ]
+			],
 
-			'labels+aliases: alias conflicts with label' => array(
+			'labels+aliases: alias conflicts with label' => [
 				$world,
 				Item::ENTITY_TYPE,
-				array(),
-				array( 'en' => array( 'item label' ) ),
+				[],
+				[ 'en' => [ 'item label' ] ],
 				null,
-				array( $labelError )
-			),
+				[ $labelError ]
+			],
 
-			'labels+aliases: other entity type' => array(
+			'labels+aliases: other entity type' => [
 				$world,
 				Property::ENTITY_TYPE,
-				array( 'en' => 'item label' ),
-				array( 'en' => array( 'item alias' ) ),
+				[ 'en' => 'item label' ],
+				[ 'en' => [ 'item alias' ] ],
 				null,
-				array()
-			),
-		);
+				[]
+			],
+		];
 	}
 
 	/**

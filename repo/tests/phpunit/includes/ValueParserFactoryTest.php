@@ -69,15 +69,15 @@ class ValueParserFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideFactoryFunctions() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'foo' => function() {
 						return new NullParser();
 					}
-				),
-			)
-		);
+				],
+			]
+		];
 	}
 
 	/**

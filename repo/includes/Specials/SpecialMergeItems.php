@@ -109,7 +109,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private function getStringListParam( $name ) {
 		$list = $this->getTextParam( $name );
 
-		return $list === '' ? array() : explode( '|', $list );
+		return $list === '' ? [] : explode( '|', $list );
 	}
 
 	private function getTextParam( $name ) {
@@ -207,7 +207,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * Creates the HTML form for merging two items.
 	 */
 	protected function createForm() {
-		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
+		$this->getOutput()->addModuleStyles( [ 'wikibase.special' ] );
 
 		$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
 
@@ -215,7 +215,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		if ( $this->getUser()->isAnon() ) {
 			$pre = Html::rawElement(
 				'p',
-				array( 'class' => 'warning' ),
+				[ 'class' => 'warning' ],
 				$this->msg(
 					'wikibase-anonymouseditwarning',
 					$this->msg( 'wikibase-entity-item' )->text()
@@ -239,22 +239,22 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * @return array[]
 	 */
 	protected function getFormElements() {
-		return array(
-			'fromid' => array(
+		return [
+			'fromid' => [
 				'name' => 'fromid',
 				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
 				'id' => 'wb-mergeitems-fromid',
 				'label-message' => 'wikibase-mergeitems-fromid'
-			),
-			'toid' => array(
+			],
+			'toid' => [
 				'name' => 'toid',
 				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
 				'id' => 'wb-mergeitems-toid',
 				'label-message' => 'wikibase-mergeitems-toid'
-			)
-		);
+			]
+		];
 		// TODO: Selector for ignoreconflicts
 	}
 

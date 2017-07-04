@@ -109,9 +109,9 @@ class EntityParserOutputGeneratorFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $externalEntityIdParser,
 		Serializer $entitySerializer,
-		array $preferredGeoDataProperties = array(),
-		array $preferredPageImagesProperties = array(),
-		array $globeUris = array()
+		array $preferredGeoDataProperties = [],
+		array $preferredPageImagesProperties = [],
+		array $globeUris = []
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -179,14 +179,14 @@ class EntityParserOutputGeneratorFactory {
 	private function getDataUpdaters() {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
-		$updaters = array(
+		$updaters = [
 			new ReferencedEntitiesDataUpdater(
 				$this->entityTitleLookup,
 				$this->externalEntityIdParser
 			),
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
-		);
+		];
 
 		if ( !empty( $this->preferredPageImagesProperties ) && class_exists( PageImages::class ) ) {
 			$updaters[] = new PageImagesDataUpdater(

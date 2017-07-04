@@ -30,10 +30,10 @@ class SiteLinkCountFieldTest extends WikibaseNumericFieldTest {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'eswiki', 'Gato' );
 
-		return array(
-			array( 2, $item ),
-			array( 0, Property::newFromType( 'string' ) )
-		);
+		return [
+			[ 2, $item ],
+			[ 0, Property::newFromType( 'string' ) ]
+		];
 	}
 
 }

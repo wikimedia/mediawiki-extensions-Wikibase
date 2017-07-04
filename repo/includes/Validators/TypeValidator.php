@@ -50,9 +50,9 @@ class TypeValidator implements ValueValidator {
 			}
 		}
 
-		return Result::newError( array(
-			Error::newError( 'Bad type, expected ' . $this->type, null, 'bad-type', array( $this->type, $type ) )
-		) );
+		return Result::newError( [
+			Error::newError( 'Bad type, expected ' . $this->type, null, 'bad-type', [ $this->type, $type ] )
+		] );
 	}
 
 	/**

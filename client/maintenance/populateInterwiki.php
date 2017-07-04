@@ -72,13 +72,13 @@ TEXT
 	 * @return array[]|bool The 'interwikimap' sub-array or false on failure.
 	 */
 	protected function fetchLinks() {
-		$url = wfArrayToCgi( array(
+		$url = wfArrayToCgi( [
 			'action' => 'query',
 			'meta' => 'siteinfo',
 			'siprop' => 'interwikimap',
 			'sifilteriw' => 'local',
 			'format' => 'json'
-		) );
+		] );
 
 		if ( !empty( $this->source ) ) {
 			$url = rtrim( $this->source, '?' ) . '?' . $url;
@@ -107,7 +107,7 @@ TEXT
 			$row = $dbw->selectRow(
 				'updatelog',
 				'1',
-				array( 'ul_key' => 'populate interwiki' ),
+				[ 'ul_key' => 'populate interwiki' ],
 				__METHOD__
 			);
 
@@ -125,18 +125,18 @@ TEXT
 			$row = $dbw->selectRow(
 				'interwiki',
 				'1',
-				array( 'iw_prefix' => $prefix ),
+				[ 'iw_prefix' => $prefix ],
 				__METHOD__
 			);
 
 			if ( ! $row ) {
 				$dbw->insert(
 					'interwiki',
-					array(
+					[
 						'iw_prefix' => $prefix,
 						'iw_url' => $d['url'],
 						'iw_local' => 1
-					),
+					],
 					__METHOD__,
 					'IGNORE'
 				);

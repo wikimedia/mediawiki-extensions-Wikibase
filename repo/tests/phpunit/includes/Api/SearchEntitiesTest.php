@@ -85,7 +85,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getContentLanguages() {
 		return new StaticContentLanguages(
-			array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' )
+			[ 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ]
 		);
 	}
 
@@ -95,14 +95,14 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return EntitySearchTermIndex
 	 */
-	private function getMockEntitySearchHelper( array $params, array $returnResults = array() ) {
+	private function getMockEntitySearchHelper( array $params, array $returnResults = [] ) {
 		// defaults from SearchEntities
-		$params = array_merge( array(
+		$params = array_merge( [
 			'strictlanguage' => false,
 			'type' => 'item',
 			'limit' => 7,
 			'continue' => 0
-		), $params );
+		], $params );
 
 		$mock = $this->getMockBuilder( EntitySearchTermIndex::class )
 			->disableOriginalConstructor()
@@ -154,21 +154,21 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$module->execute();
 
 		$result = $module->getResult();
-		return $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		return $result->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 	}
 
 	public function testSearchStrictLanguage_passedToSearchInteractor() {
-		$params = array(
+		$params = [
 			'action' => 'wbsearchentities',
 			'search' => 'Foo',
 			'type' => 'item',
 			'language' => 'de-ch',
 			'strictlanguage' => true
-		);
+		];
 
 		$this->callApiModule( $params );
 	}
@@ -211,7 +211,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			new Term( 'en', 'PropertyLabel' )
 		);
 
-		$q111Result = array(
+		$q111Result = [
 			'repository' => '',
 			'id' => 'Q111',
 			'concepturi' => 'http://acme.test/concept/Q111',
@@ -220,14 +220,14 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'pageid' => 42,
 			'label' => 'ptLabel',
 			'description' => 'ptDescription',
-			'aliases' => array( 'Q111' ),
-			'match' => array(
+			'aliases' => [ 'Q111' ],
+			'match' => [
 				'type' => 'entityId',
 				'text' => 'Q111',
-			),
-		);
+			],
+		];
 
-		$q222Result = array(
+		$q222Result = [
 			'repository' => '',
 			'id' => 'Q222',
 			'concepturi' => 'http://acme.test/concept/Q222',
@@ -236,15 +236,15 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'pageid' => 42,
 			'label' => 'FooHeHe',
 			'description' => 'FooHeHe en description',
-			'aliases' => array( 'Fooooo' ),
-			'match' => array(
+			'aliases' => [ 'Fooooo' ],
+			'match' => [
 				'type' => 'label',
 				'language' => 'en-gb',
 				'text' => 'Fooooo',
-			),
-		);
+			],
+		];
 
-		$q333Result = array(
+		$q333Result = [
 			'repository' => '',
 			'id' => 'Q333',
 			'concepturi' => 'http://acme.test/concept/Q333',
@@ -252,13 +252,13 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'ADisplayLabel',
-			'aliases' => array( 'AMatchedTerm' ),
-			'match' => array(
+			'aliases' => [ 'AMatchedTerm' ],
+			'match' => [
 				'type' => 'alias',
 				'language' => 'de',
 				'text' => 'AMatchedTerm',
-			),
-		);
+			],
+		];
 
 		$foreignItemResult = [
 			'repository' => 'foreign',
@@ -291,32 +291,32 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			],
 		];
 
-		return array(
-			'No exact match' => array(
-				array( 'search' => 'Q999' ),
-				array(),
-				array(),
-			),
-			'Exact EntityId match' => array(
-				array( 'search' => 'Q111' ),
-				array( $q111Match ),
-				array( $q111Result ),
-			),
-			'Multiple Results' => array(
-				array(),
-				array( $q222Match, $q333Match ),
-				array( $q222Result, $q333Result ),
-			),
-			'Multiple Results (limited)' => array(
-				array( 'limit' => 1 ),
-				array( $q222Match, $q333Match ),
-				array( $q222Result ),
-			),
-			'Multiple Results (limited-continue)' => array(
-				array( 'limit' => 1, 'continue' => 1 ),
-				array( $q222Match, $q333Match ),
-				array( $q333Result ),
-			),
+		return [
+			'No exact match' => [
+				[ 'search' => 'Q999' ],
+				[],
+				[],
+			],
+			'Exact EntityId match' => [
+				[ 'search' => 'Q111' ],
+				[ $q111Match ],
+				[ $q111Result ],
+			],
+			'Multiple Results' => [
+				[],
+				[ $q222Match, $q333Match ],
+				[ $q222Result, $q333Result ],
+			],
+			'Multiple Results (limited)' => [
+				[ 'limit' => 1 ],
+				[ $q222Match, $q333Match ],
+				[ $q222Result ],
+			],
+			'Multiple Results (limited-continue)' => [
+				[ 'limit' => 1, 'continue' => 1 ],
+				[ $q222Match, $q333Match ],
+				[ $q333Result ],
+			],
 			'Foreign entity matched' => [
 				[ 'search' => 'SomeText' ],
 				[ $foreignItemMatch ],
@@ -327,19 +327,19 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				[ $propertyMatch ],
 				[ $propertyResult ],
 			]
-		);
+		];
 	}
 
 	/**
 	 * @dataProvider provideTestSearchEntities
 	 */
 	public function testSearchEntities( array $overrideParams, array $interactorReturn, array $expected ) {
-		$params = array_merge( array(
+		$params = array_merge( [
 			'action' => 'wbsearchentities',
 			'search' => 'Foo',
 			'type' => 'item',
 			'language' => 'en'
-		), $overrideParams );
+		], $overrideParams );
 
 		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, $interactorReturn );
 
@@ -403,11 +403,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 		$module->execute();
 
-		$result = $module->getResult()->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		$result = $module->getResult()->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 
 		$this->assertEquals( 'http://acme.test/concept/%5B,,_,,%5D;3', $result['search'][0]['concepturi'] );
 	}

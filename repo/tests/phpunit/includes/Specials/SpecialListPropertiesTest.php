@@ -35,11 +35,11 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	private function getDataTypeFactory() {
-		$dataTypeFactory = new DataTypeFactory( array(
+		$dataTypeFactory = new DataTypeFactory( [
 			'wikibase-item' => 'wikibase-item',
 			'string' => 'string',
 			'quantity' => 'quantity',
-		) );
+		] );
 
 		return $dataTypeFactory;
 	}
@@ -66,7 +66,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$lookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
-				return array( 'en' => 'Property with label ' . $id->getSerialization() );
+				return [ 'en' => 'Property with label ' . $id->getSerialization() ];
 			} ) );
 		return $lookup;
 	}
@@ -138,7 +138,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testOffsetAndLimit() {
-		$request = new \FauxRequest( array( 'limit' => '1', 'offset' => '1' ) );
+		$request = new \FauxRequest( [ 'limit' => '1', 'offset' => '1' ] );
 		list( $output, ) = $this->executeSpecialPage( '', $request, 'qqx' );
 
 		$this->assertNotContains( 'P45', $output );
@@ -185,11 +185,11 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$specialPage->prefixSearchSubpages( 'g', 10, 0 )
 		);
 		$this->assertEquals(
-			array( 'string' ),
+			[ 'string' ],
 			$specialPage->prefixSearchSubpages( 'st', 10, 0 )
 		);
 		$this->assertEquals(
-			array( 'wikibase-item' ),
+			[ 'wikibase-item' ],
 			$specialPage->prefixSearchSubpages( 'wik', 10, 0 )
 		);
 	}

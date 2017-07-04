@@ -83,22 +83,22 @@ class EntityUsageTable {
 	 * @throws MWException
 	 */
 	private function getAffectedRowIds( $pageId, array $usages ) {
-		$usageConditions = array();
+		$usageConditions = [];
 		$db = $this->connection;
 
 		foreach ( $usages as $usage ) {
-			$usageConditions[] = $db->makeList( array(
+			$usageConditions[] = $db->makeList( [
 				'eu_aspect' => $usage->getAspectKey(),
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
-			), LIST_AND );
+			], LIST_AND );
 		}
 
 		// Collect affected row IDs, so we can use them for an
 		// efficient update query on the master db.
-		$where = array(
+		$where = [
 			'eu_page_id' => (int)$pageId,
 			$db->makeList( $usageConditions, LIST_OR )
-		);
+		];
 		return $this->getPrimaryKeys( $where, __METHOD__ );
 	}
 
@@ -110,18 +110,18 @@ class EntityUsageTable {
 	 * @return array[]
 	 */
 	private function makeUsageRows( $pageId, array $usages ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $usages as $usage ) {
 			if ( !( $usage instanceof EntityUsage ) ) {
 				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
 			}
 
-			$rows[] = array(
+			$rows[] = [
 				'eu_page_id' => (int)$pageId,
 				'eu_aspect' => $usage->getAspectKey(),
 				'eu_entity_id' => $usage->getEntityId()->getSerialization()
-			);
+			];
 		}
 
 		return $rows;
@@ -149,7 +149,7 @@ class EntityUsageTable {
 		$this->connection->startAtomic( __METHOD__ );
 
 		foreach ( $batches as $rows ) {
-			$this->connection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
+			$this->connection->insert( $this->tableName, $rows, __METHOD__, [ 'IGNORE' ] );
 			$c += $this->connection->affectedRows();
 		}
 
@@ -196,7 +196,7 @@ class EntityUsageTable {
 	 * @return EntityUsage[]
 	 */
 	private function convertRowsToUsages( Traversable $rows ) {
-		$usages = array();
+		$usages = [];
 
 		foreach ( $rows as $object ) {
 			$entityId = $this->idParser->parse( $object->eu_entity_id );
@@ -270,13 +270,13 @@ class EntityUsageTable {
 	 *
 	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 */
-	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+	public function getPagesUsing( array $entityIds, array $aspects = [] ) {
 		if ( empty( $entityIds ) ) {
 			return new ArrayIterator();
 		}
 
 		$idStrings = $this->getEntityIdStrings( $entityIds );
-		$where = array( 'eu_entity_id' => $idStrings );
+		$where = [ 'eu_entity_id' => $idStrings ];
 
 		if ( !empty( $aspects ) ) {
 			$where['eu_aspect'] = $aspects;
@@ -284,7 +284,7 @@ class EntityUsageTable {
 
 		$res = $this->connection->select(
 			$this->tableName,
-			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
+			[ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ],
 			$where,
 			__METHOD__
 		);
@@ -301,7 +301,7 @@ class EntityUsageTable {
 	 * @return PageEntityUsages[]
 	 */
 	private function foldRowsIntoPageEntityUsages( Traversable $rows ) {
-		$usagesPerPage = array();
+		$usagesPerPage = [];
 
 		foreach ( $rows as $row ) {
 			$pageId = (int)$row->eu_page_id;
@@ -316,7 +316,7 @@ class EntityUsageTable {
 			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $row->eu_aspect );
 
 			$usage = new EntityUsage( $entityId, $aspect, $modifier );
-			$pageEntityUsages->addUsages( array( $usage ) );
+			$pageEntityUsages->addUsages( [ $usage ] );
 
 			$usagesPerPage[$pageId] = $pageEntityUsages;
 		}
@@ -333,10 +333,10 @@ class EntityUsageTable {
 	 */
 	public function getUnusedEntities( array $entityIds ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return [];
 		}
 
-		$entityIdMap = array();
+		$entityIdMap = [];
 
 		foreach ( $entityIds as $entityId ) {
 			$idString = $entityId->getSerialization();
@@ -417,7 +417,7 @@ class EntityUsageTable {
 			$method
 		);
 
-		return array_map( 'intval', $rowIds ?: array() );
+		return array_map( 'intval', $rowIds ?: [] );
 	}
 
 }

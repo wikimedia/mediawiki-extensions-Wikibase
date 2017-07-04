@@ -33,28 +33,28 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	public function provideGetLabels() {
 		$q116 = new ItemId( 'Q116' );
 
-		return array(
-			'all languages' => array(
+		return [
+			'all languages' => [
 				$q116,
-				array( 'en', 'es' ),
-				array(
+				[ 'en', 'es' ],
+				[
 					'en' => 'New York City',
 					'es' => 'Nueva York'
-				)
-			),
-			'some languages' => array(
+				]
+			],
+			'some languages' => [
 				$q116,
-				array( 'en' ),
-				array(
+				[ 'en' ],
+				[
 					'en' => 'New York City',
-				)
-			),
-			'no languages' => array(
+				]
+			],
+			'no languages' => [
 				$q116,
-				array(),
-				array()
-			),
-		);
+				[],
+				[]
+			],
+		];
 	}
 
 	/**
@@ -84,28 +84,28 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	public function provideGetDescriptions() {
 		$q116 = new ItemId( 'Q116' );
 
-		return array(
-			'all languages' => array(
+		return [
+			'all languages' => [
 				$q116,
-				array( 'de', 'en' ),
-				array(
+				[ 'de', 'en' ],
+				[
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
 					'en' => 'largest city in New York and the United States of America',
-				)
-			),
-			'some languages' => array(
+				]
+			],
+			'some languages' => [
 				$q116,
-				array( 'de' ),
-				array(
+				[ 'de' ],
+				[
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
-				)
-			),
-			'no languages' => array(
+				]
+			],
+			'no languages' => [
 				$q116,
-				array(),
-				array()
-			),
-		);
+				[],
+				[]
+			],
+		];
 	}
 
 	/**
@@ -124,32 +124,32 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	protected function getTermIndex() {
-		$terms = array(
-			new TermIndexEntry( array(
+		$terms = [
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'Nueva York'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'largest city in New York and the United States of America'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
 				'termType' => 'description',
 				'termLanguage' => 'de',
 				'termText' => 'Metropole an der Ostküste der Vereinigten Staaten'
-			) ),
-		);
+			] ),
+		];
 
 		return new MockTermIndex( $terms );
 	}

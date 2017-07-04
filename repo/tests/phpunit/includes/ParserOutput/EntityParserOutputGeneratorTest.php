@@ -90,7 +90,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$parserOutput->getExtensionData( 'wikibase-terms-list-items' )
 		);
 
-		$this->assertSame( array( '<JS>' ), $parserOutput->getJsConfigVars(), 'config vars' );
+		$this->assertSame( [ '<JS>' ], $parserOutput->getJsConfigVars(), 'config vars' );
 
 		$this->assertSame(
 			[
@@ -187,14 +187,14 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$entityIdParser = new ItemIdParser();
 
-		$dataUpdaters = array(
+		$dataUpdaters = [
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ReferencedEntitiesDataUpdater(
 				$entityTitleLookup,
 				$entityIdParser
 			)
-		);
+		];
 
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory( $createView ),
@@ -227,11 +227,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( $labels ) {
 				if ( array_key_exists( 'en', $labels ) ) {
-					return array(
+					return [
 						'value' => $labels['en'],
 						'language' => 'en',
 						'source' => 'en'
-					);
+					];
 				}
 
 				return null;
@@ -253,8 +253,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:This is a file.pdf' ) ) );
 		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:Selfie.jpg' ) ) );
 
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'kitten', array( new ItemId( 'Q42' ) ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'meow', array( new ItemId( 'Q42' ), new ItemId( 'Q35' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'kitten', [ new ItemId( 'Q42' ) ] );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'meow', [ new ItemId( 'Q42' ), new ItemId( 'Q35' ) ] );
 
 		return $item;
 	}
@@ -281,10 +281,10 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	 */
 	private function getEntityView() {
 		$entityView = $this->getMockBuilder( EntityView::class )
-			->setMethods( array(
+			->setMethods( [
 				'getTitleHtml',
 				'getHtml',
-			) )
+			] )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
 
@@ -309,7 +309,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$configBuilder->expects( $this->any() )
 			->method( 'build' )
-			->will( $this->returnValue( array( '<JS>' ) ) );
+			->will( $this->returnValue( [ '<JS>' ] ) );
 
 		return $configBuilder;
 	}

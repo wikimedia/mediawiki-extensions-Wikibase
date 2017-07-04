@@ -21,7 +21,7 @@ class PageEntityUsages {
 	/**
 	 * @var EntityUsage[]
 	 */
-	private $usages = array();
+	private $usages = [];
 
 	/**
 	 * @param int $pageId
@@ -29,7 +29,7 @@ class PageEntityUsages {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $pageId, array $usages = array() ) {
+	public function __construct( $pageId, array $usages = [] ) {
 		if ( !is_int( $pageId ) || $pageId < 1 ) {
 			throw new InvalidArgumentException( '$pageId must be an integer > 0' );
 		}
@@ -88,7 +88,7 @@ class PageEntityUsages {
 	 * @return string[] Sorted list of aspect names (without modifiers).
 	 */
 	public function getAspects() {
-		$aspects = array();
+		$aspects = [];
 
 		foreach ( $this->usages as $usage ) {
 			$aspect = $usage->getAspect();
@@ -108,7 +108,7 @@ class PageEntityUsages {
 	 * @return string[] Sorted list of full aspect names with modifiers.
 	 */
 	public function getAspectKeys() {
-		$aspects = array();
+		$aspects = [];
 
 		foreach ( $this->usages as $usage ) {
 			$aspect = $usage->getAspectKey();
@@ -140,7 +140,7 @@ class PageEntityUsages {
 	 * @return EntityId[] List of EntityIde objects, keyed and sorted by their identity string.
 	 */
 	public function getEntityIds() {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $this->usages as $usage ) {
 			$id = $usage->getEntityId();
@@ -162,7 +162,7 @@ class PageEntityUsages {
 	 * @return string[] List of aspect keys, sorted.
 	 */
 	public function getUsageAspectKeys( EntityId $id ) {
-		$aspects = array();
+		$aspects = [];
 
 		foreach ( $this->usages as $usage ) {
 			if ( $id->equals( $usage->getEntityId() ) ) {

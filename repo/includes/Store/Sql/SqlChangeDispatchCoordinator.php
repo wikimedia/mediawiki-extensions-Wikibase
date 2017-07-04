@@ -241,7 +241,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @return Database A connection to the repo's master database
 	 */
 	private function getRepoMaster() {
-		return $this->getRepoLB()->getConnection( DB_MASTER, array(), $this->repoDB );
+		return $this->getRepoLB()->getConnection( DB_MASTER, [], $this->repoDB );
 	}
 
 	/**
@@ -330,7 +330,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$row = $dbr->selectRow(
 			$this->changesTable,
 			'max( change_id ) as maxid',
-			array(),
+			[],
 			__METHOD__ );
 
 		$maxId = $row ? $row->maxid : 0;
@@ -357,10 +357,10 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			'chd_site',
 			$where,
 			__METHOD__,
-			array(
+			[
 				'ORDER BY' => 'chd_seen ASC',
 				'LIMIT' => (int)$this->randomness
-			)
+			]
 		);
 
 		$this->releaseRepoDb( $dbr );
@@ -382,7 +382,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$trackedSiteIds = $dbr->selectFieldValues(
 			$this->stateTable,
 			'chd_site',
-			array(),
+			[],
 			__METHOD__
 		);
 
@@ -395,20 +395,20 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		$dbw = $this->getRepoMaster();
 		foreach ( $untracked as $siteID => $wikiDB ) {
-			$state = array(
+			$state = [
 				'chd_site' => $siteID,
 				'chd_db' => $wikiDB,
 				'chd_seen' => 0,
 				'chd_touched' => '00000000000000',
 				'chd_lock' => null,
 				'chd_disabled' => 0,
-			);
+			];
 
 			$dbw->insert(
 				$this->stateTable,
 				$state,
 				__METHOD__,
-				array( 'IGNORE' )
+				[ 'IGNORE' ]
 			);
 
 			$this->log( "Initialized dispatch state for $siteID" );
@@ -442,8 +442,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			// get client state
 			$state = $dbr->selectRow(
 				$this->stateTable,
-				array( 'chd_site', 'chd_db', 'chd_seen', 'chd_touched', 'chd_lock', 'chd_disabled' ),
-				array( 'chd_site' => $siteID ),
+				[ 'chd_site', 'chd_db', 'chd_seen', 'chd_touched', 'chd_lock', 'chd_disabled' ],
+				[ 'chd_site' => $siteID ],
 				__METHOD__
 			);
 
@@ -517,7 +517,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			$db->update(
 				$this->stateTable,
 				$state,
-				array( 'chd_site' => $state['chd_site'] ),
+				[ 'chd_site' => $state['chd_site'] ],
 				__METHOD__
 			);
 		} catch ( Exception $ex ) {

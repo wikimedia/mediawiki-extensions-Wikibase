@@ -111,7 +111,7 @@ class SetReference extends ApiBase {
 		if ( isset( $params['snaks-order' ] ) ) {
 			$snaksOrder = $this->getArrayFromParam( $params['snaks-order'], 'snaks-order' );
 		} else {
-			$snaksOrder = array();
+			$snaksOrder = [];
 		}
 
 		$deserializer = $this->deserializerFactory->newSnakListDeserializer();
@@ -214,33 +214,33 @@ class SetReference extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'statement' => array(
+			[
+				'statement' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
-				),
-				'snaks' => array(
+				],
+				'snaks' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => true,
-				),
-				'snaks-order' => array(
+				],
+				'snaks-order' => [
 					self::PARAM_TYPE => 'string',
-				),
-				'reference' => array(
+				],
+				'reference' => [
 					self::PARAM_TYPE => 'string',
-				),
-				'index' => array(
+				],
+				'index' => [
 					self::PARAM_TYPE => 'integer',
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -249,7 +249,7 @@ class SetReference extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks='
 				. '{"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string",'
 				. '"value":"foo"}}]}&baserevid=7201010&token=foobar'
@@ -263,7 +263,7 @@ class SetReference extends ApiBase {
 				. '{"P212":[{"snaktype":"novalue","property":"P212"}]}'
 				. '&index=0&baserevid=7201010&token=foobar'
 				=> 'apihelp-wbsetreference-example-3',
-		);
+		];
 	}
 
 }

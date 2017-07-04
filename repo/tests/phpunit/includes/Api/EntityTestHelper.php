@@ -15,7 +15,7 @@ class EntityTestHelper {
 	/**
 	 * @var string[] List of currently active handles and their current ids
 	 */
-	private static $activeHandles = array();
+	private static $activeHandles = [];
 
 	/**
 	 * @var string[] List of currently active ids and their current handles
@@ -25,206 +25,206 @@ class EntityTestHelper {
 	/**
 	 * @var array[] Handles and any registered default output data
 	 */
-	private static $entityOutput = array();
+	private static $entityOutput = [];
 
 	/**
 	 * @var array[] Set of pre defined entity data for use in tests
 	 */
-	private static $entityData = array(
-		'Empty' => array(
+	private static $entityData = [
+		'Empty' => [
 			"new" => "item",
-			"data" => array(),
-		),
-		'Empty2' => array(
+			"data" => [],
+		],
+		'Empty2' => [
 			"new" => "item",
-			"data" => array(),
-		),
-		'StringProp' => array(
+			"data" => [],
+		],
+		'StringProp' => [
 			"new" => "property",
-			"data" => array(
+			"data" => [
 				'datatype' => 'string'
-			),
-		),
-		'Berlin' => array(
+			],
+		],
+		'Berlin' => [
 			"new" => "item",
-			"data" => array(
-				"sitelinks" => array(
-					array( "site" => "dewiki", "title" => "Berlin" ),
-					array( "site" => "enwiki", "title" => "Berlin" ),
-					array( "site" => "nlwiki", "title" => "Berlin" ),
-					array( "site" => "nnwiki", "title" => "Berlin" ),
-				),
-				"labels" => array(
-					array( "language" => "de", "value" => "Berlin" ),
-					array( "language" => "en", "value" => "Berlin" ),
-					array( "language" => "nb", "value" => "Berlin" ),
-					array( "language" => "nn", "value" => "Berlin" ),
-				),
-				"aliases" => array(
-					array( array( "language" => "de", "value" => "Dickes B" ) ),
-					array( array( "language" => "en", "value" => "Dickes B" ) ),
-					array( array( "language" => "nl", "value" => "Dickes B" ) ),
-				),
-				"descriptions" => array(
-					array( "language" => "de", "value" => "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." ),
-					array( "language" => "en", "value" => "Capital city and a federated state of the Federal Republic of Germany." ),
-					array( "language" => "nb", "value" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland." ),
-					array( "language" => "nn", "value" => "Hovudstad og delstat i Forbundsrepublikken Tyskland." ),
-				),
-				"claims" => array(
-					array( 'mainsnak' => array(
+			"data" => [
+				"sitelinks" => [
+					[ "site" => "dewiki", "title" => "Berlin" ],
+					[ "site" => "enwiki", "title" => "Berlin" ],
+					[ "site" => "nlwiki", "title" => "Berlin" ],
+					[ "site" => "nnwiki", "title" => "Berlin" ],
+				],
+				"labels" => [
+					[ "language" => "de", "value" => "Berlin" ],
+					[ "language" => "en", "value" => "Berlin" ],
+					[ "language" => "nb", "value" => "Berlin" ],
+					[ "language" => "nn", "value" => "Berlin" ],
+				],
+				"aliases" => [
+					[ [ "language" => "de", "value" => "Dickes B" ] ],
+					[ [ "language" => "en", "value" => "Dickes B" ] ],
+					[ [ "language" => "nl", "value" => "Dickes B" ] ],
+				],
+				"descriptions" => [
+					[ "language" => "de", "value" => "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." ],
+					[ "language" => "en", "value" => "Capital city and a federated state of the Federal Republic of Germany." ],
+					[ "language" => "nb", "value" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland." ],
+					[ "language" => "nn", "value" => "Hovudstad og delstat i Forbundsrepublikken Tyskland." ],
+				],
+				"claims" => [
+					[ 'mainsnak' => [
 						'snaktype' => 'value',
 						'property' => '%StringProp%',
-						'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ),
-					),
+						'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ],
+					],
 						'type' => 'statement',
-						'rank' => 'normal' )
-				),
-			)
-		),
-		'London' => array(
+						'rank' => 'normal' ]
+				],
+			]
+		],
+		'London' => [
 			"new" => "item",
-			"data" => array(
-				"sitelinks" => array(
-					array( "site" => "enwiki", "title" => "London" ),
-					array( "site" => "dewiki", "title" => "London" ),
-					array( "site" => "nlwiki", "title" => "London" ),
-					array( "site" => "nnwiki", "title" => "London" ),
-				),
-				"labels" => array(
-					array( "language" => "de", "value" => "London" ),
-					array( "language" => "en", "value" => "London" ),
-					array( "language" => "nb", "value" => "London" ),
-					array( "language" => "nn", "value" => "London" ),
-				),
-				"aliases" => array(
-					array(
-						array( "language" => "de", "value" => "City of London" ),
-						array( "language" => "de", "value" => "Greater London" ),
-					),
-					array(
-						array( "language" => "en", "value" => "City of London" ),
-						array( "language" => "en", "value" => "Greater London" ),
-					),
-					array(
-						array( "language" => "nl", "value" => "City of London" ),
-						array( "language" => "nl", "value" => "Greater London" ),
-					),
-				),
-				"descriptions" => array(
-					array( "language" => "de", "value" => "Hauptstadt Englands und des Vereinigten Königreiches." ),
-					array( "language" => "en", "value" => "Capital city of England and the United Kingdom." ),
-					array( "language" => "nb", "value" => "Hovedsted i England og Storbritannia." ),
-					array( "language" => "nn", "value" => "Hovudstad i England og Storbritannia." ),
-				),
-			)
-		),
-		'Oslo' => array(
+			"data" => [
+				"sitelinks" => [
+					[ "site" => "enwiki", "title" => "London" ],
+					[ "site" => "dewiki", "title" => "London" ],
+					[ "site" => "nlwiki", "title" => "London" ],
+					[ "site" => "nnwiki", "title" => "London" ],
+				],
+				"labels" => [
+					[ "language" => "de", "value" => "London" ],
+					[ "language" => "en", "value" => "London" ],
+					[ "language" => "nb", "value" => "London" ],
+					[ "language" => "nn", "value" => "London" ],
+				],
+				"aliases" => [
+					[
+						[ "language" => "de", "value" => "City of London" ],
+						[ "language" => "de", "value" => "Greater London" ],
+					],
+					[
+						[ "language" => "en", "value" => "City of London" ],
+						[ "language" => "en", "value" => "Greater London" ],
+					],
+					[
+						[ "language" => "nl", "value" => "City of London" ],
+						[ "language" => "nl", "value" => "Greater London" ],
+					],
+				],
+				"descriptions" => [
+					[ "language" => "de", "value" => "Hauptstadt Englands und des Vereinigten Königreiches." ],
+					[ "language" => "en", "value" => "Capital city of England and the United Kingdom." ],
+					[ "language" => "nb", "value" => "Hovedsted i England og Storbritannia." ],
+					[ "language" => "nn", "value" => "Hovudstad i England og Storbritannia." ],
+				],
+			]
+		],
+		'Oslo' => [
 			"new" => "item",
-			"data" => array(
-				"sitelinks" => array(
-					array( "site" => "dewiki", "title" => "Oslo" ),
-					array( "site" => "enwiki", "title" => "Oslo" ),
-					array( "site" => "nlwiki", "title" => "Oslo" ),
-					array( "site" => "nnwiki", "title" => "Oslo" ),
-				),
-				"labels" => array(
-					array( "language" => "de", "value" => "Oslo" ),
-					array( "language" => "en", "value" => "Oslo" ),
-					array( "language" => "nb", "value" => "Oslo" ),
-					array( "language" => "nn", "value" => "Oslo" ),
-				),
-				"aliases" => array(
-					array(
-						array( "language" => "nb", "value" => "Christiania" ),
-						array( "language" => "nb", "value" => "Kristiania" ),
-					),
-					array(
-						array( "language" => "nn", "value" => "Christiania" ),
-						array( "language" => "nn", "value" => "Kristiania" ),
-					),
-					array( "language" => "de", "value" => "Oslo City" ),
-					array( "language" => "en", "value" => "Oslo City" ),
-					array( "language" => "nl", "value" => "Oslo City" ),
-				),
-				"descriptions" => array(
-					array( "language" => "de", "value" => "Hauptstadt der Norwegen." ),
-					array( "language" => "en", "value" => "Capital city in Norway." ),
-					array( "language" => "nb", "value" => "Hovedsted i Norge." ),
-					array( "language" => "nn", "value" => "Hovudstad i Noreg." ),
-				),
-			)
-		),
-		'Episkopi' => array(
+			"data" => [
+				"sitelinks" => [
+					[ "site" => "dewiki", "title" => "Oslo" ],
+					[ "site" => "enwiki", "title" => "Oslo" ],
+					[ "site" => "nlwiki", "title" => "Oslo" ],
+					[ "site" => "nnwiki", "title" => "Oslo" ],
+				],
+				"labels" => [
+					[ "language" => "de", "value" => "Oslo" ],
+					[ "language" => "en", "value" => "Oslo" ],
+					[ "language" => "nb", "value" => "Oslo" ],
+					[ "language" => "nn", "value" => "Oslo" ],
+				],
+				"aliases" => [
+					[
+						[ "language" => "nb", "value" => "Christiania" ],
+						[ "language" => "nb", "value" => "Kristiania" ],
+					],
+					[
+						[ "language" => "nn", "value" => "Christiania" ],
+						[ "language" => "nn", "value" => "Kristiania" ],
+					],
+					[ "language" => "de", "value" => "Oslo City" ],
+					[ "language" => "en", "value" => "Oslo City" ],
+					[ "language" => "nl", "value" => "Oslo City" ],
+				],
+				"descriptions" => [
+					[ "language" => "de", "value" => "Hauptstadt der Norwegen." ],
+					[ "language" => "en", "value" => "Capital city in Norway." ],
+					[ "language" => "nb", "value" => "Hovedsted i Norge." ],
+					[ "language" => "nn", "value" => "Hovudstad i Noreg." ],
+				],
+			]
+		],
+		'Episkopi' => [
 			"new" => "item",
-			"data" => array(
-				"sitelinks" => array(
-					array( "site" => "dewiki", "title" => "Episkopi Cantonment" ),
-					array( "site" => "enwiki", "title" => "Episkopi Cantonment" ),
-					array( "site" => "nlwiki", "title" => "Episkopi Cantonment" ),
-				),
-				"labels" => array(
-					array( "language" => "de", "value" => "Episkopi Cantonment" ),
-					array( "language" => "en", "value" => "Episkopi Cantonment" ),
-					array( "language" => "nl", "value" => "Episkopi Cantonment" ),
-				),
-				"aliases" => array(
-					array( "language" => "de", "value" => "Episkopi" ),
-					array( "language" => "en", "value" => "Episkopi" ),
-					array( "language" => "nl", "value" => "Episkopi" ),
-				),
-				"descriptions" => array(
-					array( "language" => "de", "value" => "Sitz der Verwaltung der Mittelmeerinsel Zypern." ),
-					array( "language" => "en", "value" => "The capital of Akrotiri and Dhekelia." ),
-					array( "language" => "nl", "value" => "Het bestuurlijke centrum van Akrotiri en Dhekelia." ),
-				),
-			)
-		),
-		'Osaka' => array(
+			"data" => [
+				"sitelinks" => [
+					[ "site" => "dewiki", "title" => "Episkopi Cantonment" ],
+					[ "site" => "enwiki", "title" => "Episkopi Cantonment" ],
+					[ "site" => "nlwiki", "title" => "Episkopi Cantonment" ],
+				],
+				"labels" => [
+					[ "language" => "de", "value" => "Episkopi Cantonment" ],
+					[ "language" => "en", "value" => "Episkopi Cantonment" ],
+					[ "language" => "nl", "value" => "Episkopi Cantonment" ],
+				],
+				"aliases" => [
+					[ "language" => "de", "value" => "Episkopi" ],
+					[ "language" => "en", "value" => "Episkopi" ],
+					[ "language" => "nl", "value" => "Episkopi" ],
+				],
+				"descriptions" => [
+					[ "language" => "de", "value" => "Sitz der Verwaltung der Mittelmeerinsel Zypern." ],
+					[ "language" => "en", "value" => "The capital of Akrotiri and Dhekelia." ],
+					[ "language" => "nl", "value" => "Het bestuurlijke centrum van Akrotiri en Dhekelia." ],
+				],
+			]
+		],
+		'Osaka' => [
 			"new" => "item",
-			"data" => array(
-				"labels" => array(
-					array( "language" => "en", "value" => "Osaka" )
-				)
-			)
-		),
-		'Leipzig' => array(
+			"data" => [
+				"labels" => [
+					[ "language" => "en", "value" => "Osaka" ]
+				]
+			]
+		],
+		'Leipzig' => [
 			"new" => "item",
-			"data" => array(
-				"labels" => array(
-					array( "language" => "de", "value" => "Leipzig" ),
-				),
-				"descriptions" => array(
-					array( "language" => "de", "value" => "Stadt in Sachsen." ),
-					array( "language" => "en", "value" => "City in Saxony." ),
-				),
-			)
-		),
-		'Guangzhou' => array(
+			"data" => [
+				"labels" => [
+					[ "language" => "de", "value" => "Leipzig" ],
+				],
+				"descriptions" => [
+					[ "language" => "de", "value" => "Stadt in Sachsen." ],
+					[ "language" => "en", "value" => "City in Saxony." ],
+				],
+			]
+		],
+		'Guangzhou' => [
 			"new" => "item",
-			"data" => array(
-				"labels" => array(
-					array( "language" => "de", "value" => "Guangzhou" ),
-					array( "language" => "yue", "value" => "廣州" ),
-					array( "language" => "zh-cn", "value" => "广州市" ),
-				),
-				"descriptions" => array(
-					array( "language" => "en", "value" => "Capital of Guangdong." ),
-					array( "language" => "zh-hk", "value" => "廣東的省會。" ),
-				),
-			)
-		),
+			"data" => [
+				"labels" => [
+					[ "language" => "de", "value" => "Guangzhou" ],
+					[ "language" => "yue", "value" => "廣州" ],
+					[ "language" => "zh-cn", "value" => "广州市" ],
+				],
+				"descriptions" => [
+					[ "language" => "en", "value" => "Capital of Guangdong." ],
+					[ "language" => "zh-hk", "value" => "廣東的省會。" ],
+				],
+			]
+		],
 
-	);
+	];
 
 	/**
 	 * Provides default values for the placeholders used in $entityData.
 	 *
 	 * @var string[] An associative array mapping placeholders to default values.
 	 */
-	public static $defaultPlaceholderValues = array(
+	public static $defaultPlaceholderValues = [
 		'%StringProp%' => 'P56'
-	);
+	];
 
 	/**
 	 * Get the entity with the given handle
@@ -261,7 +261,7 @@ class EntityTestHelper {
 		}
 		$id = self::$activeHandles[ $handle ];
 		self::unRegisterEntity( $handle );
-		return array( 'id' => $id, 'data' => '{}', 'clear' => '' );
+		return [ 'id' => $id, 'data' => '{}', 'clear' => '' ];
 	}
 
 	/**
@@ -314,7 +314,7 @@ class EntityTestHelper {
 		array $props,
 		array $languageCodes = null
 	) {
-		$entityProps = array();
+		$entityProps = [];
 		$props[] = 'type'; // always return the type so we can demobilize
 		foreach ( $props as $prop ) {
 			if ( array_key_exists( $prop, $entityOutput ) ) {
@@ -325,13 +325,13 @@ class EntityTestHelper {
 			if ( ( $prop === 'labels' || $prop === 'descriptions' || $prop === 'aliases' )
 				&& $languageCodes !== null
 			) {
-				$langValues = array();
+				$langValues = [];
 				foreach ( $languageCodes as $langCode ) {
 					if ( array_key_exists( $langCode, $value ) ) {
 						$langValues[ $langCode ] = $value[ $langCode ];
 					}
 				}
-				if ( $langValues === array() ) {
+				if ( $langValues === [] ) {
 					unset( $entityProps[ $prop ] );
 				} else {
 					$entityProps[ $prop ] = $langValues;

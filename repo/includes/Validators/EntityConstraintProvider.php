@@ -47,7 +47,7 @@ class EntityConstraintProvider {
 	 * @return EntityValidator[]
 	 */
 	public function getUpdateValidators( $entityType ) {
-		$validators = array();
+		$validators = [];
 
 		switch ( $entityType ) {
 			case Property::ENTITY_TYPE:

@@ -25,7 +25,7 @@ class SiteLinkTargetProvider {
 	 * @param SiteLookup $siteLookup
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteLookup $siteLookup, array $specialSiteGroups = array() ) {
+	public function __construct( SiteLookup $siteLookup, array $specialSiteGroups = [] ) {
 		$this->siteLookup = $siteLookup;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
@@ -63,7 +63,7 @@ class SiteLinkTargetProvider {
 			return;
 		}
 
-		$groups = array_diff( $groups, array( 'special' ) );
+		$groups = array_diff( $groups, [ 'special' ] );
 		$groups = array_merge( $groups, $this->specialSiteGroups );
 	}
 

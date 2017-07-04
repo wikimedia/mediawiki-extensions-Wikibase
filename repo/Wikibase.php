@@ -52,7 +52,7 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
  * @note: that parsers are also registered under their old names for backwards compatibility,
  * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
  */
-$GLOBALS['wgValueParsers'] = array();
+$GLOBALS['wgValueParsers'] = [];
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
@@ -88,17 +88,17 @@ call_user_func( function() {
 		$wgWBRepoDataTypes,
 		$wgWBRepoSettings;
 
-	$wgExtensionCredits['wikibase'][] = array(
+	$wgExtensionCredits['wikibase'][] = [
 		'path' => __DIR__,
 		'name' => 'Wikibase Repository',
 		'version' => WB_VERSION,
-		'author' => array(
+		'author' => [
 			'The Wikidata team',
-		),
+		],
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase',
 		'descriptionmsg' => 'wikibase-desc',
 		'license-name' => 'GPL-2.0+'
-	);
+	];
 
 	// Registry and definition of data types
 	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
@@ -107,7 +107,7 @@ call_user_func( function() {
 
 	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
 	foreach ( $repoDataTypes as $type => $repoDef ) {
-		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
+		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : [];
 		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
 	}
 
@@ -882,14 +882,14 @@ call_user_func( function() {
 			$siteLinkChangeOpFactory
 		);
 	};
-	$wgSpecialPages['EntitiesWithoutLabel'] = array(
+	$wgSpecialPages['EntitiesWithoutLabel'] = [
 		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutLabel'
-	);
-	$wgSpecialPages['EntitiesWithoutDescription'] = array(
+	];
+	$wgSpecialPages['EntitiesWithoutDescription'] = [
 		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutDescription'
-	);
+	];
 	$wgSpecialPages['ListDatatypes'] = Wikibase\Repo\Specials\SpecialListDatatypes::class;
 	$wgSpecialPages['ListProperties'] = function () {
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();

@@ -49,29 +49,29 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$value = QuantityValue::newFromNumber( '+23.5', 'http://acme/' . $unitId->getSerialization(), '+23.6', '+23.4' );
 		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
 
-		return array(
-			'simple unbounded' => array(
+		return [
+			'simple unbounded' => [
 				$unboundedSnak,
 				false,
-				array(
+				[
 					'<http://www/Q1>'
 					. ' <http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-				)
-			),
-			'simple' => array(
+				]
+			],
+			'simple' => [
 				$snak,
 				false,
-				array(
+				[
 					'<http://www/Q1> '
 					. '<http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-				)
-			),
-			'complex unbounded' => array(
+				]
+			],
+			'complex unbounded' => [
 				$unboundedSnak,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 					. '<http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -87,12 +87,12 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/d0488ea37befd2940d39a1dbf47eebc0> '
 					. '<http://acme/onto/quantityUnit> '
 					. '<http://www.wikidata.org/entity/Q199> .',
-				)
-			),
-			'complex' => array(
+				]
+			],
+			'complex' => [
 				$snak,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -114,12 +114,12 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/1ac4bb05a87bfd5fde2740bbb6941533> '
 						. '<http://acme/onto/quantityUnit> '
 						. '<http://www.wikidata.org/entity/Q199> .',
-				)
-			),
-			'units' => array(
+				]
+			],
+			'units' => [
 				$snak2,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 					. '<http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -141,12 +141,12 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
 					. '<http://acme/onto/quantityUnit> '
 					. '<http://acme/Q2> .',
-				),
-			),
-			'units_primary' => array(
+				],
+			],
+			'units_primary' => [
 				$snak2,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 					. '<http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -174,13 +174,13 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
 					. '<http://acme/onto/quantityNormalized> '
 					. '<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> .',
-				),
-				array( 'factor' => '1', 'unit' => 'Q2' )
-			),
-			'units_convert' => array(
+				],
+				[ 'factor' => '1', 'unit' => 'Q2' ]
+			],
+			'units_convert' => [
 				$snak2,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 					. '<http://acme/statement/P7> '
 					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -226,10 +226,10 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					. '<http://acme/onto/quantityNormalized> '
 					. '<http://acme/value/e80660d9a958a139230804dacf35a6ea> .',
 
-				),
-				array( 'factor' => '124.7', 'unit' => 'Q1' )
-			),
-		);
+				],
+				[ 'factor' => '124.7', 'unit' => 'Q1' ]
+			],
+		];
 	}
 
 	private function getConverter( $result ) {
@@ -304,7 +304,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$valueWriter = $snakWriter->sub();
 		$builder = $this->newQuantityRdfBuilder( $valueWriter, $vocab, true, null );
 
-		$expected = array(
+		$expected = [
 			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
 			. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 			. '<http://acme/onto/QuantityValue> .',
@@ -320,7 +320,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
 			. '<http://acme/onto/quantityUnit> '
 			. '<http://acme/Q2> .'
-		);
+		];
 
 		/** @var QuantityValue $value */
 		$valueLName = $value->getHash();

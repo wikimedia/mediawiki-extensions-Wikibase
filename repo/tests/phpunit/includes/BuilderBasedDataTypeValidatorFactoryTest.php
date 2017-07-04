@@ -21,45 +21,45 @@ class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCas
 
 	public function testInvalidConstructorArgument() {
 		$this->setExpectedException( ParameterElementTypeException::class );
-		new BuilderBasedDataTypeValidatorFactory( array( 'invalid' ) );
+		new BuilderBasedDataTypeValidatorFactory( [ 'invalid' ] );
 	}
 
 	public function testUnknownPropertyType() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( array() );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [] );
 		$this->setExpectedException( OutOfBoundsException::class );
 		$factory->getValidators( 'unknown' );
 	}
 
 	public function testInvalidValidatorsArray() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( array( 'id' => function() {
+		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
 			return 'invalid';
-		} ) );
+		} ] );
 		$this->setExpectedException( PostconditionException::class );
 		$factory->getValidators( 'id' );
 	}
 
 	public function testEmptyValidatorsArray() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( array( 'id' => function() {
-			return array();
-		} ) );
-		$this->assertSame( array(), $factory->getValidators( 'id' ) );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
+			return [];
+		} ] );
+		$this->assertSame( [], $factory->getValidators( 'id' ) );
 	}
 
 	public function testInvalidValidatorObject() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( array( 'id' => function() {
-			return array( 'invalid' );
-		} ) );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
+			return [ 'invalid' ];
+		} ] );
 		$this->setExpectedException( PostconditionException::class );
 		$factory->getValidators( 'id' );
 	}
 
 	public function testGetValidators() {
 		$validators = [ new CompositeValidator( [] ) ];
-		$factory = new BuilderBasedDataTypeValidatorFactory( array(
+		$factory = new BuilderBasedDataTypeValidatorFactory( [
 			'id' => function() use ( $validators ) {
 				return $validators;
 			},
-		) );
+		] );
 		$this->assertSame( $validators, $factory->getValidators( 'id' ) );
 	}
 

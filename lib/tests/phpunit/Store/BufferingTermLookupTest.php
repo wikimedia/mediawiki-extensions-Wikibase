@@ -31,9 +31,9 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 		$q116 = new ItemId( 'Q116' );
 		$q117 = new ItemId( 'Q117' );
 
-		$items = array( $q116, $q117 );
-		$types = array( 'label' );
-		$languages = array( 'en', 'de' );
+		$items = [ $q116, $q117 ];
+		$types = [ 'label' ];
+		$languages = [ 'en', 'de' ];
 
 		$termLookup->prefetchTerms( $items, $types, $languages );
 
@@ -59,26 +59,26 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 	 * @return TermIndex
 	 */
 	private function getRestrictedTermIndex( $getTermsOfEntityCalls, $getTermsOfEntitiesCalls ) {
-		$terms = array(
-			'en' => new TermIndexEntry( array(
+		$terms = [
+			'en' => new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'Vienna',
 				'entityId' => new ItemId( 'Q123' ),
-			) ),
-			'de' => new TermIndexEntry( array(
+			] ),
+			'de' => new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'termText' => 'Wien',
 				'entityId' => new ItemId( 'Q123' ),
-			) ),
-			'fr' => new TermIndexEntry( array(
+			] ),
+			'fr' => new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'fr',
 				'termText' => 'Vienne',
 				'entityId' => new ItemId( 'Q123' ),
-			) ),
-		);
+			] ),
+		];
 
 		$termIndex = $this->getMock( TermIndex::class );
 
@@ -111,19 +111,19 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 		// This should trigger a call to getTermsOfEntities
 		$q116 = new ItemId( 'Q123' );
-		$lookup->prefetchTerms( array( $q116 ), array( 'label' ), array( 'en', 'de' ) );
+		$lookup->prefetchTerms( [ $q116 ], [ 'label' ], [ 'en', 'de' ] );
 
 		// This should trigger no call to the TermIndex
-		$expected = array( 'de' => 'Wien' );
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de' ) ) );
+		$expected = [ 'de' => 'Wien' ];
+		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de' ] ) );
 
 		// This should trigger a call to getTermsOfEntity
-		$expected = array( 'de' => 'Wien', 'en' => 'Vienna', 'fr' => 'Vienne' );
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de', 'en', 'fr' ) ) );
+		$expected = [ 'de' => 'Wien', 'en' => 'Vienna', 'fr' => 'Vienne' ];
+		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'en', 'fr' ] ) );
 
 		// This should trigger no more calls, since all languages are in the buffer now.
-		$expected = array( 'de' => 'Wien', 'fr' => 'Vienne' );
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de', 'fr' ) ) );
+		$expected = [ 'de' => 'Wien', 'fr' => 'Vienne' ];
+		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'fr' ] ) );
 	}
 
 	public function testGetLabels_buffer() {
@@ -132,23 +132,23 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 		$q116 = new ItemId( 'Q123' );
 
 		// This should trigger one call to getTermsOfEntity
-		$expected = array( 'de' => 'Wien', 'en' => 'Vienna' );
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de', 'en', 'it' ) ) );
+		$expected = [ 'de' => 'Wien', 'en' => 'Vienna' ];
+		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'en', 'it' ] ) );
 
 		// This should trigger no more calls, since the label for 'en' is in the buffer
 		$this->assertEquals( 'Vienna', $lookup->getLabel( $q116, 'en' ) );
 
 		// This should trigger no more calls to the TermIndex, since the label for 'it' is in the
 		// buffer as a negative entry.
-		$this->assertEquals( array(), $lookup->getLabels( $q116, array( 'it' ) ) );
+		$this->assertEquals( [], $lookup->getLabels( $q116, [ 'it' ] ) );
 
 		// This should trigger one call to getTermsOfEntity
 		$this->assertEquals( 'Vienne', $lookup->getLabel( $q116, 'fr' ) );
 
 		// This should trigger no more calls to the TermIndex, since all languages are in the buffer
 		// now.
-		$expected = array( 'de' => 'Wien', 'fr' => 'Vienne' );
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de', 'fr' ) ) );
+		$expected = [ 'de' => 'Wien', 'fr' => 'Vienne' ];
+		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'fr' ] ) );
 	}
 
 }

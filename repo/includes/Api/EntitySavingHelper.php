@@ -415,7 +415,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	private function handleStatus(
 		Status $status,
 		$errorCode,
-		array $extradata = array(),
+		array $extradata = [],
 		$httpRespCode = 0
 	) {
 		if ( $status->isGood() ) {

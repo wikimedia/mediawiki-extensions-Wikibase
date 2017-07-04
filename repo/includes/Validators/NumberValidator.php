@@ -26,14 +26,14 @@ class NumberValidator implements ValueValidator {
 			return Result::newSuccess();
 		}
 
-		return Result::newError( array(
+		return Result::newError( [
 			Error::newError(
 				'Bad type, expected an integer or float value',
 				null,
 				'bad-type',
-				array( 'number', gettype( $value ) )
+				[ 'number', gettype( $value ) ]
 			)
-		) );
+		] );
 	}
 
 	/**

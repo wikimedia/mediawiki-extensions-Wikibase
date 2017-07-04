@@ -36,10 +36,10 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbgetentities',
 			'ids' => $entityId
-		);
+		];
 
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
@@ -52,10 +52,10 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbgetclaims',
 			'entity' => $entityId
-		);
+		];
 
 		$module = $this->getApiModule( GetClaims::class, 'wbgetclaims', $params );
 		$actual = $this->executeApiModule( $module );
@@ -67,12 +67,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetlabel',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'value' => 'enGbLabel',
-		);
+		];
 
 		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -80,12 +80,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setlabel' ), $actual );
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetlabel',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'value' => '',
-		);
+		];
 
 		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -98,12 +98,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetdescription',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'value' => 'enGbDescription',
-		);
+		];
 
 		$module = $this->getApiModule( SetDescription::class, 'wbsetdescription', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -111,12 +111,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setdescription' ), $actual );
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetdescription',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'value' => '',
-		);
+		];
 
 		$module = $this->getApiModule( SetDescription::class, 'wbsetdescription', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -129,12 +129,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetaliases',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'set' => 'AA|BB|CC',
-		);
+		];
 
 		$module = $this->getApiModule( SetAliases::class, 'wbsetaliases', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -142,12 +142,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setaliases' ), $actual );
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetaliases',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'remove' => 'BB|CC',
-		);
+		];
 
 		$module = $this->getApiModule( SetAliases::class, 'wbsetaliases', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -160,17 +160,17 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetsitelink',
 			'id' => $entityId,
 			'linksite' => 'enwiki',
 			'linktitle' => 'Japan',
 			// TODO: Test badges in output.
-		);
+		];
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), array() );
+		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), [] );
 		$module->setServices( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
@@ -179,12 +179,12 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setsitelink' ), $actual );
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetsitelink',
 			'id' => $entityId,
 			'linksite' => 'enwiki',
 			//TODO test badges in output
-		);
+		];
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
@@ -200,10 +200,10 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$json = file_get_contents( __DIR__ . '/../../data/api/setclaim.json' );
 		$json = $this->replaceIdsInString( $json );
-		$params = array(
+		$params = [
 			'action' => 'wbsetclaim',
 			'claim' => $json,
-		);
+		];
 
 		$module = $this->getApiModule( SetClaim::class, 'wbsetclaim', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -218,11 +218,11 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$json = file_get_contents( __DIR__ . '/../../data/api/setreference.json' );
 		$json = $this->replaceIdsInString( $json );
-		$params = array(
+		$params = [
 			'action' => 'wbsetreference',
 			'statement' => $entityId . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee',
 			'snaks' => $json,
-		);
+		];
 
 		$module = $this->getApiModule( SetReference::class, 'wbsetreference', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -236,13 +236,13 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetqualifier',
 			'claim' => $entityId . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee',
 			'property' => $this->lastPropertyId->getSerialization(),
 			'value' => '"QualiValue"',
 			'snaktype' => 'value',
-		);
+		];
 
 		$module = $this->getApiModule( SetQualifier::class, 'wbsetqualifier', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -260,11 +260,11 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$json = file_get_contents( __DIR__ . '/../../data/api/editentity.json' );
 		$json = $this->replaceIdsInString( $json );
 
-		$params = array(
+		$params = [
 			'action' => 'wbeditentity',
 			'id' => $entityId,
 			'data' => $json,
-		);
+		];
 
 		$module = $this->getApiModule( EditEntity::class, 'wbeditentity', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -313,7 +313,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			$element = $xpath->query( "//pageinfo" )->item( 0 );
 		}
 
-		$attributesToRemove = array( 'pageid', 'lastrevid', 'modified', 'title', 'ns' );
+		$attributesToRemove = [ 'pageid', 'lastrevid', 'modified', 'title', 'ns' ];
 
 		foreach ( $attributesToRemove as $attributeToRemove ) {
 			$element->removeAttribute( $attributeToRemove );

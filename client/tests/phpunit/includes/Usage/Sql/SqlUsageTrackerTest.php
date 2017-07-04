@@ -52,8 +52,8 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 			[]
 		);
 
-		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker, array( $this, 'getUsages' ) );
-		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, array( $this, 'putUsages' ) );
+		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker, [ $this, 'getUsages' ] );
+		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, [ $this, 'putUsages' ] );
 	}
 
 	public function getUsages( $pageId ) {

@@ -82,10 +82,10 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 	}
 
 	public function getLabelProvider() {
-		return array(
-			array( array( 'LabelString', 'lang-code' ), 'Q123' ),
-			array( array( null, null ), 'DoesntExist' )
-		);
+		return [
+			[ [ 'LabelString', 'lang-code' ], 'Q123' ],
+			[ [ null, null ], 'DoesntExist' ]
+		];
 	}
 
 	/**
@@ -126,10 +126,10 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 	}
 
 	public function getDescriptionProvider() {
-		return array(
-			array( array( 'DescriptionString', 'lang-code' ), 'Q123' ),
-			array( array( null, null ), 'DoesntExist' )
-		);
+		return [
+			[ [ 'DescriptionString', 'lang-code' ], 'Q123' ],
+			[ [ null, null ], 'DoesntExist' ]
+		];
 	}
 
 	/**

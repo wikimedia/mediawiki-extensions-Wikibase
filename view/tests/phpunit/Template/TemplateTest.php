@@ -21,17 +21,17 @@ use Wikibase\View\Template\TemplateRegistry;
 class TemplateTest extends PHPUnit_Framework_TestCase {
 
 	public function testRender() {
-		$instance = new Template( new TemplateRegistry( array( 'empty' => '' ) ), 'empty' );
+		$instance = new Template( new TemplateRegistry( [ 'empty' => '' ] ), 'empty' );
 		$rendered = $instance->render();
 		$this->assertSame( '', $rendered );
 	}
 
 	public function testText() {
-		$registry = new TemplateRegistry( array(
+		$registry = new TemplateRegistry( [
 			'tmpl1' => '<div>$1</div>',
-		) );
+		] );
 
-		$template = new Template( $registry, 'tmpl1', array( 'param' ) );
+		$template = new Template( $registry, 'tmpl1', [ 'param' ] );
 		$this->assertSame( '<div>param</div>', $template->text() );
 	}
 

@@ -45,18 +45,18 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 		$options = new FormatterOptions();
 		$options->setOption( ValueFormatter::OPT_LANG, 'en' );
 
-		return array(
-			'formatting' => array(
+		return [
+			'formatting' => [
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				$options,
 				'@^<span lang="de".*?>Hallo Welt<\/span>.*\Deutsch.*$@'
-			),
-			'html/wikitext escaping' => array(
+			],
+			'html/wikitext escaping' => [
 				new MonolingualTextValue( 'de', '[[Hallo&Welt]]' ),
 				$options,
 				'@^<span .*?>(\[\[|&#91;&#91;)Hallo(&amp;|&#38;)Welt(\]\]|&#93;&#93;)<\/span>.*$@'
-			),
-			'evil html' => array(
+			],
+			'evil html' => [
 				new MonolingualTextValue(
 					'" onclick="alert(\'gotcha!\')"',
 					'Hallo<script>alert(\'gotcha!\')</script>Welt'
@@ -65,8 +65,8 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 				$options,
 				'@ onclick="alert|<script|<a @',
 				'not'
-			),
-		);
+			],
+		];
 	}
 
 }

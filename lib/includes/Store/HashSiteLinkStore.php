@@ -18,12 +18,12 @@ class HashSiteLinkStore implements SiteLinkStore {
 	/**
 	 * @var SiteLink[] indexed by prefixed ItemId
 	 */
-	private $linksByItemId = array();
+	private $linksByItemId = [];
 
 	/**
 	 * @var ItemId[] indexed by SiteLink link text "siteid:title"
 	 */
-	private $itemIdsByLink = array();
+	private $itemIdsByLink = [];
 
 	/**
 	 * @see SiteLinkStore::getItemIdForLink
@@ -53,11 +53,11 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @return array[]
 	 */
 	public function getLinks(
-		array $numericIds = array(),
-		array $siteIds = array(),
-		array $pageNames = array()
+		array $numericIds = [],
+		array $siteIds = [],
+		array $pageNames = []
 	) {
-		$links = array();
+		$links = [];
 
 		foreach ( $this->linksByItemId as $prefixedId => $siteLinks ) {
 			/** @var SiteLink $siteLink */
@@ -65,11 +65,11 @@ class HashSiteLinkStore implements SiteLinkStore {
 				$itemId = new ItemId( $prefixedId );
 
 				if ( $this->linkMatches( $itemId, $siteLink, $numericIds, $siteIds, $pageNames ) ) {
-					$links[] = array(
+					$links[] = [
 						$siteLink->getSiteId(),
 						$siteLink->getPageName(),
 						$itemId->getNumericId(),
-					);
+					];
 				}
 			}
 		}
@@ -114,7 +114,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 			return $this->linksByItemId[$prefixedId];
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -179,8 +179,8 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @see SiteLinkStore::clear
 	 */
 	public function clear() {
-		$this->linksByItemId = array();
-		$this->itemIdsByLink = array();
+		$this->linksByItemId = [];
+		$this->itemIdsByLink = [];
 	}
 
 	private function indexByLink( ItemId $itemId, SiteLink $siteLink ) {

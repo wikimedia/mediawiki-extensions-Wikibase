@@ -181,7 +181,7 @@ class EntityInfo {
 			$languages = array_flip( $languages );
 		}
 
-		$values = array();
+		$values = [];
 
 		foreach ( $entityInfo[$termField] as $key => $term ) {
 			if ( !is_array( $term ) || !array_key_exists( 'value', $term ) ) {

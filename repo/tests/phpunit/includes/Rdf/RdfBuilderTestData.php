@@ -222,17 +222,17 @@ class RdfBuilderTestData {
 	 *         of an PropertyId and a data type ID.
 	 */
 	public static function getTestProperties() {
-		return array(
-			array( new PropertyId( 'P2' ), 'wikibase-item' ),
-			array( new PropertyId( 'P3' ), 'commonsMedia' ),
-			array( new PropertyId( 'P4' ), 'globe-coordinate' ),
-			array( new PropertyId( 'P5' ), 'monolingualtext' ),
-			array( new PropertyId( 'P6' ), 'quantity' ),
-			array( new PropertyId( 'P7' ), 'string' ),
-			array( new PropertyId( 'P8' ), 'time' ),
-			array( new PropertyId( 'P9' ), 'url' ),
-			array( new PropertyId( 'P10' ), 'geo-shape' ),
-		);
+		return [
+			[ new PropertyId( 'P2' ), 'wikibase-item' ],
+			[ new PropertyId( 'P3' ), 'commonsMedia' ],
+			[ new PropertyId( 'P4' ), 'globe-coordinate' ],
+			[ new PropertyId( 'P5' ), 'monolingualtext' ],
+			[ new PropertyId( 'P6' ), 'quantity' ],
+			[ new PropertyId( 'P7' ), 'string' ],
+			[ new PropertyId( 'P8' ), 'time' ],
+			[ new PropertyId( 'P9' ), 'url' ],
+			[ new PropertyId( 'P10' ), 'geo-shape' ],
+		];
 	}
 
 	/**

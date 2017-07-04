@@ -97,12 +97,12 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	private function runJobs() {
 		$runner = new JobRunner();
 
-		$runner->run( array(
+		$runner->run( [
 			'type'     => 'refreshLinks',
 			'maxJobs'  => false,
 			'maxTime'  => false,
 			'throttle' => false,
-		) );
+		] );
 	}
 
 	private function deletePage( Title $title ) {
@@ -134,9 +134,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->updatePage( $this->articleTitle, $text );
 
 		// Check that the usage of Q11 is tracked.
-		$expected = array(
+		$expected = [
 			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::OTHER_USAGE ),
-		);
+		];
 
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
@@ -167,9 +167,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		// Check that Q22, used via the template, is now tracked.
 		// Check that Q11 is no longer tracked, due to timestamp-based pruning.
-		$expected = array(
+		$expected = [
 			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::OTHER_USAGE ),
-		);
+		];
 
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
@@ -188,9 +188,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		// Check that Q33, now used via the template, is tracked.
 		// Check that Q22 is no longer tracked, due to timestamp-based pruning.
-		$expected = array(
+		$expected = [
 			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::OTHER_USAGE ),
-		);
+		];
 
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
@@ -206,7 +206,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->deletePage( $this->articleTitle );
 
 		// Make sure tracking has been removed for all usages on the deleted page.
-		$this->assertTrackedUsages( array(), $this->articleTitle );
+		$this->assertTrackedUsages( [], $this->articleTitle );
 	}
 
 	/**

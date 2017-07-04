@@ -58,7 +58,7 @@ class ClaimDifference implements Comparable {
 	 * @return Diff
 	 */
 	public function getReferenceChanges() {
-		return $this->referenceChanges ?: new Diff( array(), false );
+		return $this->referenceChanges ?: new Diff( [], false );
 	}
 
 	/**
@@ -79,7 +79,7 @@ class ClaimDifference implements Comparable {
 	 * @return Diff
 	 */
 	public function getQualifierChanges() {
-		return $this->qualifierChanges ?: new Diff( array(), false );
+		return $this->qualifierChanges ?: new Diff( [], false );
 	}
 
 	/**

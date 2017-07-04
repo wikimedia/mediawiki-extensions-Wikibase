@@ -52,7 +52,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 	}
 
 	public function testNoResults() {
-		$html = $this->newInstance()->getHTML( array() );
+		$html = $this->newInstance()->getHTML( [] );
 
 		$this->assertSame( '<ul class="wikibase-disambiguation"></ul>', $html );
 	}
@@ -65,7 +65,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 			new Term( 'en', '<LABEL>' ),
 			new Term( 'en', '<DESC>' )
 		);
-		$html = $this->newInstance()->getHTML( array( $searchResult ) );
+		$html = $this->newInstance()->getHTML( [ $searchResult ] );
 
 		$this->assertContains( '<ul class="wikibase-disambiguation">', $html );
 		$this->assertSame( 1, substr_count( $html, '<li ' ) );
@@ -79,7 +79,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 	}
 
 	public function testTwoResults() {
-		$searchResults = array(
+		$searchResults = [
 			new TermSearchResult(
 				new Term( 'de', '<MATCH1>' ),
 				'<TYPE1>',
@@ -93,7 +93,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 				new ItemId( 'Q2' ),
 				new Term( 'en', '<LABEL2>' )
 			),
-		);
+		];
 		$html = $this->newInstance()->getHTML( $searchResults );
 
 		$this->assertContains( '<ul class="wikibase-disambiguation">', $html );

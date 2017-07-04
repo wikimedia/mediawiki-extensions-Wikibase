@@ -68,7 +68,7 @@ class UpdateSubscriptions extends Maintenance {
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
-			array( $this, 'report' )
+			[ $this, 'report' ]
 		);
 
 		$updater = new BulkSubscriptionUpdater(

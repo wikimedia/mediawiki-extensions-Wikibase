@@ -38,7 +38,7 @@ class PropertyViewTest extends EntityViewTest {
 	 *
 	 * @return Property
 	 */
-	protected function makeEntity( EntityId $id, array $statements = array() ) {
+	protected function makeEntity( EntityId $id, array $statements = [] ) {
 		$property = Property::newFromType( 'string' );
 		$property->setId( $id );
 
@@ -87,17 +87,17 @@ class PropertyViewTest extends EntityViewTest {
 			$this->getMock( LocalizedTextProvider::class )
 		);
 
-		return array(
-			array(
+		return [
+			[
 				$propertyView,
-				$this->newEntityForStatements( array() ),
+				$this->newEntityForStatements( [] ),
 				'/wb-property/'
-			)
-		);
+			]
+		];
 	}
 
 	private function getDataTypeFactory() {
-		return new DataTypeFactory( array( 'type' => 'datavalue', 'string' => 'string' ) );
+		return new DataTypeFactory( [ 'type' => 'datavalue', 'string' => 'string' ] );
 	}
 
 }

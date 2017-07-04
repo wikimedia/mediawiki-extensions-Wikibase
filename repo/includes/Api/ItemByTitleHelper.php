@@ -71,7 +71,7 @@ class ItemByTitleHelper {
 	 *         List containing valid ItemIds and MissingItem site title combinations
 	 */
 	public function getItemIds( array $sites, array $titles, $normalize ) {
-		$ids = array();
+		$ids = [];
 		$numSites = count( $sites );
 		$numTitles = count( $titles );
 
@@ -99,19 +99,19 @@ class ItemByTitleHelper {
 			);
 		}
 
-		$missingItems = array();
+		$missingItems = [];
 		foreach ( $sites as $siteId ) {
 			foreach ( $titles as $title ) {
 				$itemId = $this->getItemId( $siteId, $title, $normalize );
 				if ( !is_null( $itemId ) ) {
 					$ids[] = $itemId;
 				} else {
-					$missingItems[] = array( 'site' => $siteId, 'title' => $title );
+					$missingItems[] = [ 'site' => $siteId, 'title' => $title ];
 				}
 			}
 		}
 
-		return array( $ids, $missingItems );
+		return [ $ids, $missingItems ];
 	}
 
 	/**

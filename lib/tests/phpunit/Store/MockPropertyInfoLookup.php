@@ -19,7 +19,7 @@ class MockPropertyInfoLookup implements PropertyInfoLookup {
 	 *
 	 * @var array[]
 	 */
-	protected $propertyInfo = array();
+	protected $propertyInfo = [];
 
 	/**
 	 * @param array $info Array mapping properties (id serialization) to info arrays
@@ -56,7 +56,7 @@ class MockPropertyInfoLookup implements PropertyInfoLookup {
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
 		$propertyInfo = $this->getAllPropertyInfo();
-		$propertyInfoForDataType = array();
+		$propertyInfoForDataType = [];
 
 		foreach ( $propertyInfo as $id => $info ) {
 			if ( $info[PropertyInfoLookup::KEY_DATA_TYPE] === $dataType ) {

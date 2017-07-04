@@ -22,9 +22,9 @@ class Scribunto_LuaWikibaseLibraryNoLinkedEntityTest extends Scribunto_LuaWikiba
 	protected static $moduleName = 'LuaWikibaseLibraryNoLinkedEntityTests';
 
 	protected function getTestModules() {
-		return parent::getTestModules() + array(
+		return parent::getTestModules() + [
 			'LuaWikibaseLibraryNoLinkedEntityTests' => __DIR__ . '/LuaWikibaseLibraryNoLinkedEntityTests.lua',
-		);
+		];
 	}
 
 	/**

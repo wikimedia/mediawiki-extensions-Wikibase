@@ -40,7 +40,7 @@ class CreateBlacklistedItems extends Maintenance {
 			echo $message . "\n";
 		};
 
-		$items = array(
+		$items = [
 			//'Q0' => 'Off-by-one error',
 			'Q1' => 'Universe',
 			'Q2' => 'Earth',
@@ -60,7 +60,7 @@ class CreateBlacklistedItems extends Maintenance {
 			'Q2001' => 'Stanley Kubrick',
 			'Q2012' => 'Maya calendar',
 			'Q2013' => 'Wikidata',
-		);
+		];
 
 		$report( 'Starting import...' );
 

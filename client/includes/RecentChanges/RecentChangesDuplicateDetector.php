@@ -38,13 +38,13 @@ class RecentChangesDuplicateDetector {
 
 		$res = $db->select(
 			'recentchanges',
-			array( 'rc_id', 'rc_timestamp', 'rc_source', 'rc_params' ),
-			array(
+			[ 'rc_id', 'rc_timestamp', 'rc_source', 'rc_params' ],
+			[
 				'rc_namespace' => $attribs['rc_namespace'],
 				'rc_title' => $attribs['rc_title'],
 				'rc_timestamp' => $attribs['rc_timestamp'],
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE
-			),
+			],
 			__METHOD__
 		);
 
@@ -87,10 +87,10 @@ class RecentChangesDuplicateDetector {
 		if ( is_array( $rc_params ) && array_key_exists( 'wikibase-repo-change', $rc_params ) ) {
 			$metadata = $rc_params['wikibase-repo-change'];
 		} else {
-			$metadata = array();
+			$metadata = [];
 		}
 
-		$metadata = array_merge( array( 'parent_id' => 0, 'rev_id' => 0 ), $metadata );
+		$metadata = array_merge( [ 'parent_id' => 0, 'rev_id' => 0 ], $metadata );
 		return $metadata;
 	}
 

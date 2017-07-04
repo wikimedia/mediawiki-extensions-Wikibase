@@ -32,16 +32,16 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	private function initProperties() {
-		$infos = array(
-			array( PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'one' ),
-			array( PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'two', PropertyInfoLookup::KEY_FORMATTER_URL => 'foo' ),
-			array( PropertyInfoLookup::KEY_DATA_TYPE => 'time', 'test' => 'three' ),
-			array( PropertyInfoLookup::KEY_DATA_TYPE => 'time', 'test' => 'four' ),
-			array( PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'five', PropertyInfoLookup::KEY_FORMATTER_URL => 'bar' ),
-		);
+		$infos = [
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'one' ],
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'two', PropertyInfoLookup::KEY_FORMATTER_URL => 'foo' ],
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'time', 'test' => 'three' ],
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'time', 'test' => 'four' ],
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'five', PropertyInfoLookup::KEY_FORMATTER_URL => 'bar' ],
+		];
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$properties = array();
+		$properties = [];
 
 		foreach ( $infos as $info ) {
 			$property = Property::newFromType( $info[PropertyInfoLookup::KEY_DATA_TYPE] );

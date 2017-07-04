@@ -112,7 +112,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @param ItemId|null $startItem The item to start with.
 	 */
 	public function fillSubscriptionTable( ItemId $startItem = null ) {
-		$continuation = $startItem === null ? null : array( $startItem->getNumericId(), 0 );
+		$continuation = $startItem === null ? null : [ $startItem->getNumericId(), 0 ];
 
 		while ( true ) {
 			$count = $this->processSubscriptionBatch( $continuation );
@@ -131,7 +131,7 @@ class ChangesSubscriptionTableBuilder {
 	 *
 	 * @return int The number of subscriptions inserted.
 	 */
-	private function processSubscriptionBatch( &$continuation = array() ) {
+	private function processSubscriptionBatch( &$continuation = [] ) {
 		$db = $this->loadBalancer->getConnection( DB_MASTER );
 
 		$subscriptionsPerItemBatch = $this->getSubscriptionsPerItemBatch( $db, $continuation );
@@ -164,9 +164,9 @@ class ChangesSubscriptionTableBuilder {
 				$this->tableName,
 				$rows,
 				__METHOD__,
-				array(
+				[
 					'IGNORE'
-				)
+				]
 			);
 
 			if ( $this->verbosity === 'verbose' ) {
@@ -187,7 +187,7 @@ class ChangesSubscriptionTableBuilder {
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
-	private function getSubscriptionsPerItemBatch( Database $db, &$continuation = array() ) {
+	private function getSubscriptionsPerItemBatch( Database $db, &$continuation = [] ) {
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
@@ -202,13 +202,13 @@ class ChangesSubscriptionTableBuilder {
 
 		$res = $db->select(
 			'wb_items_per_site',
-			array( 'ips_row_id', 'ips_item_id', 'ips_site_id' ),
+			[ 'ips_row_id', 'ips_item_id', 'ips_site_id' ],
 			$continuationCondition,
 			__METHOD__,
-			array(
+			[
 				'LIMIT' => $this->batchSize,
 				'ORDER BY' => 'ips_item_id, ips_row_id'
-			)
+			]
 		);
 
 		if ( $this->verbosity === 'verbose' ) {
@@ -228,9 +228,9 @@ class ChangesSubscriptionTableBuilder {
 	 */
 	private function getSubscriptionsPerItemFromRows(
 		ResultWrapper $res,
-		&$continuation = array()
+		&$continuation = []
 	) {
-		$subscriptionsPerItem = array();
+		$subscriptionsPerItem = [];
 
 		$currentItemId = 0;
 		$itemId = null;
@@ -244,7 +244,7 @@ class ChangesSubscriptionTableBuilder {
 			}
 
 			$subscriptionsPerItem[$itemId][] = $row->ips_site_id;
-			$continuation = array( $currentItemId, $row->ips_row_id );
+			$continuation = [ $currentItemId, $row->ips_row_id ];
 		}
 
 		return $subscriptionsPerItem;
@@ -260,13 +260,13 @@ class ChangesSubscriptionTableBuilder {
 	 * @return array[] rows
 	 */
 	private function makeSubscriptionRows( $itemId, array $subscribers ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $subscribers as $subscriber ) {
-			$rows[] = array(
+			$rows[] = [
 				'cs_entity_id' => $itemId,
 				'cs_subscriber_id' => $subscriber
-			);
+			];
 		}
 
 		return $rows;

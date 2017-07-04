@@ -24,8 +24,8 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	public function testBuildSites( array $sites, $group, $wikiId, array $expected ) {
 		$store = new HashSiteStore();
 
-		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
-			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' );
+		$validGroups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 
 		$sitesBuilder = new SitesBuilder( $store, $validGroups );
 		$sitesBuilder->buildStore( $sites, $group, $wikiId );
@@ -47,13 +47,13 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 			}
 		}
 
-		$data = array();
+		$data = [];
 
-		$data[] = array( $sites, 'wikidata', null, $expectedSites );
-		$data[] = array( $sites, 'commons', null, $expectedSites );
-		$data[] = array( $sites, 'wikipedia', null, $expectedSites );
-		$data[] = array( $sites, null, 'enwiki', $expectedSites );
-		$data[] = array( $sites, null, 'commonswiki', $expectedSites );
+		$data[] = [ $sites, 'wikidata', null, $expectedSites ];
+		$data[] = [ $sites, 'commons', null, $expectedSites ];
+		$data[] = [ $sites, 'wikipedia', null, $expectedSites ];
+		$data[] = [ $sites, null, 'enwiki', $expectedSites ];
+		$data[] = [ $sites, null, 'commonswiki', $expectedSites ];
 
 		$expectedSites2 = $sites;
 
@@ -64,62 +64,62 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 			}
 		}
 
-		$data[] = array( $sites, 'wikivoyage', null, $expectedSites2 );
-		$data[] = array( $sites, null, 'enwikivoyage', $expectedSites2 );
-		$data[] = array( $sites, 'wikivoyage', 'enwiki', $expectedSites2 );
+		$data[] = [ $sites, 'wikivoyage', null, $expectedSites2 ];
+		$data[] = [ $sites, null, 'enwikivoyage', $expectedSites2 ];
+		$data[] = [ $sites, 'wikivoyage', 'enwiki', $expectedSites2 ];
 
-		$data[] = array( $sites, 'kittens', null, $sites );
-		$data[] = array( $sites, 'kittens', 'enwiki', $sites );
-		$data[] = array( $sites, null, 'kittenswiki', $sites );
+		$data[] = [ $sites, 'kittens', null, $sites ];
+		$data[] = [ $sites, 'kittens', 'enwiki', $sites ];
+		$data[] = [ $sites, null, 'kittenswiki', $sites ];
 
 		return $data;
 	}
 
 	private function getSitesData() {
-		$sitesData = array(
-			array(
+		$sitesData = [
+			[
 				'siteid' => 'enwiki',
 				'group' => 'wikipedia',
 				'url' => 'en.wikipedia.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'dewiki',
 				'group' => 'wikipedia',
 				'url' => 'de.wikipedia.org',
 				'lang' => 'de'
-			),
-			array(
+			],
+			[
 				'siteid' => 'enwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'en.wikivoyage.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'frwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'fr.wikivoyage.org',
 				'lang' => 'fr'
-			),
-			array(
+			],
+			[
 				'siteid' => 'enwikiquote',
 				'group' => 'wikiquote',
 				'url' => 'en.wikiquote.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'commonswiki',
 				'group' => 'commons',
 				'url' => 'commons.wikimedia.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'wikidatawiki',
 				'group' => 'wikidata',
 				'url' => 'www.wikidata.org',
 				'lang' => 'en'
-			),
-		);
+			],
+		];
 
 		return $sitesData;
 	}
@@ -130,26 +130,26 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	 * @return MediaWikiSite[]
 	 */
 	private function getSites( array $sitesData ) {
-		$sites = array();
+		$sites = [];
 
 		foreach ( $sitesData as $siteData ) {
-			$fields = array(
+			$fields = [
 				'globalid' => $siteData['siteid'],
 				'type' => 'mediawiki',
 				'group' => $siteData['group'],
 				'source' => 'local',
 				'language' => $siteData['lang'],
-				'localids' => array(),
+				'localids' => [],
 				'internalid' => null,
-				'data' => array(
-					'paths' => array(
+				'data' => [
+					'paths' => [
 						'file_path' => '//' . $siteData['url'] . '/w/$1',
 						'page_path' => '//' . $siteData['url'] . '/wiki/$1'
-					)
-				),
+					]
+				],
 				'forward' => false,
-				'config' => array()
-			);
+				'config' => []
+			];
 
 			$site = new MediaWikiSite();
 			$site->unserialize( serialize( $fields ) );

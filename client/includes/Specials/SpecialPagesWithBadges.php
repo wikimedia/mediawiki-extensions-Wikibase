@@ -85,9 +85,9 @@ class SpecialPagesWithBadges extends QueryPage {
 				$this->getOutput()->addHTML(
 					Html::element(
 						'p',
-						array(
+						[
 							'class' => 'error'
-						),
+						],
 						$this->msg( 'wikibase-pageswithbadges-invalid-id', $badge )
 					)
 				);
@@ -101,22 +101,22 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return string
 	 */
 	public function getPageHeader() {
-		$formDescriptor = array(
-			'badge' => array(
+		$formDescriptor = [
+			'badge' => [
 				'name' => 'badge',
 				'type' => 'select',
 				'id' => 'wb-pageswithbadges-badge',
 				'cssclass' => 'wb-select',
 				'label-message' => 'wikibase-pageswithbadges-badge',
 				'options' => $this->getOptionsArray()
-			),
-			'submit' => array(
+			],
+			'submit' => [
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-pageswithbadges-submit',
 				'default' => $this->msg( 'wikibase-pageswithbadges-submit' )->text()
-			)
-		);
+			]
+		];
 
 		if ( $this->badgeId !== null ) {
 			$formDescriptor['badge']['default'] = $this->badgeId->getSerialization();
@@ -144,7 +144,7 @@ class SpecialPagesWithBadges extends QueryPage {
 			$badgeItemIds
 		);
 
-		$options = array();
+		$options = [];
 
 		foreach ( $this->badgeIds as $badgeId ) {
 			$label = $labelLookup->getLabel( new ItemId( $badgeId ) );
@@ -164,24 +164,24 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		return array(
-			'tables' => array(
+		return [
+			'tables' => [
 				'page',
 				'page_props'
-			),
-			'fields' => array(
+			],
+			'fields' => [
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-			),
-			'conds' => array(
+			],
+			'conds' => [
 				'pp_propname' => 'wikibase-badge-' . $this->badgeId->getSerialization()
-			),
-			'options' => array(), // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
-			'join_conds' => array(
-				'page_props' => array( 'JOIN', array( 'page_id = pp_page' ) )
-			)
-		);
+			],
+			'options' => [], // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
+			'join_conds' => [
+				'page_props' => [ 'JOIN', [ 'page_id = pp_page' ] ]
+			]
+		];
 	}
 
 	/**
@@ -224,7 +224,7 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return array
 	 */
 	public function linkParameters() {
-		return array( 'badge' => $this->badgeId->getSerialization() );
+		return [ 'badge' => $this->badgeId->getSerialization() ];
 	}
 
 	/**

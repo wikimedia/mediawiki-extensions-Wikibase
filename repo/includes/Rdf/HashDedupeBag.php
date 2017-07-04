@@ -60,7 +60,7 @@ class HashDedupeBag implements DedupeBag {
 	public function __construct( $cutoff = 5 ) {
 		$this->cutoff = $cutoff;
 
-		$this->bag = array();
+		$this->bag = [];
 	}
 
 	/**

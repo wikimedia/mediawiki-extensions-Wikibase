@@ -451,7 +451,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	}
 
 	public function testCollectTerms_redirectFullEntityId() {
-		$ids = array( new ItemId( 'Q7' ), new ItemId( 'Q1' ) );
+		$ids = [ new ItemId( 'Q7' ), new ItemId( 'Q1' ) ];
 
 		$expected = [
 			'Q1' => [
@@ -474,7 +474,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
 
 		$builder->resolveRedirects();
-		$builder->collectTerms( array( 'label' ), array( 'de' ) );
+		$builder->collectTerms( [ 'label' ], [ 'de' ] );
 		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertEquals( array_keys( $expected ), array_keys( $entityInfo ) );

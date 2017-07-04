@@ -24,10 +24,10 @@ class UniquenessViolationTest extends \PHPUnit_Framework_TestCase {
 			$conflictingEntity,
 			'Just a Test',
 			'test',
-			array(
+			[
 				'stuff',
 				$conflictingEntity
-			)
+			]
 		);
 
 		$this->assertEquals( $conflictingEntity, $violation->getConflictingEntity(), 'getConflictingEntity' );

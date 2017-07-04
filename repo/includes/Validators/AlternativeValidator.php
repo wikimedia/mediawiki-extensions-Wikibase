@@ -51,13 +51,13 @@ class AlternativeValidator implements ValueValidator {
 		}
 
 		if ( !$result ) {
-			$result = Result::newError( array(
+			$result = Result::newError( [
 				Error::newError(
 					"No validators",
 					null,
 					'no-validators'
 				)
-			) );
+			] );
 		}
 
 		return $result;

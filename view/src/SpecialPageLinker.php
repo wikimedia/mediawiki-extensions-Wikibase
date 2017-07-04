@@ -18,6 +18,6 @@ interface SpecialPageLinker {
 	 *
 	 * @return string
 	 */
-	public function getLink( $pageName, array $subPageParams = array() );
+	public function getLink( $pageName, array $subPageParams = [] );
 
 }

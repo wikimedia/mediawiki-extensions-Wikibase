@@ -79,9 +79,9 @@ class DeletePageNoticeCreator {
 
 		$html = Html::rawElement(
 			'div',
-			array(
+			[
 				'class' => 'plainlinks'
-			),
+			],
 			wfMessage( $msg, $itemLink )->parse()
 		);
 

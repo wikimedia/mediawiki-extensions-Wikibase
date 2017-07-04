@@ -17,11 +17,11 @@ use Wikibase\Lib\Interactors\TermSearchOptions;
 class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
 
 	public function provideLimitInputAndExpected() {
-		return array(
-			array( 1, 1 ),
-			array( 2500, 2500 ),
-			array( 999999, 2500 ),
-		);
+		return [
+			[ 1, 1 ],
+			[ 2500, 2500 ],
+			[ 999999, 2500 ],
+		];
 	}
 
 	/**
@@ -34,10 +34,10 @@ class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideBooleanOptions() {
-		return array(
-			array( true ),
-			array( false ),
-		);
+		return [
+			[ true ],
+			[ false ],
+		];
 	}
 
 	/**

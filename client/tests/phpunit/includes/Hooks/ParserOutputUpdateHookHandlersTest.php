@@ -67,12 +67,12 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup() {
-		$siteLookup = new HashSiteStore( array(
+		$siteLookup = new HashSiteStore( [
 			$this->newSite( 'wikidatawiki', 'wikidata', 'en' ),
 			$this->newSite( 'commonswiki', 'commons', 'en' ),
 			$this->newSite( 'enwiki', 'wikipedia', 'en' ),
 			$this->newSite( 'dewiki', 'wikipedia', 'de' ),
-		) );
+		] );
 
 		return $siteLookup;
 	}
@@ -140,14 +140,14 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	 * @return Settings
 	 */
 	private function newSettings() {
-		$defaults = array(
+		$defaults = [
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
-			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
-			'otherProjectsLinks' => array( 'commonswiki' ),
+			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
+			'otherProjectsLinks' => [ 'commonswiki' ],
 			'otherProjectsLinksBeta' => true,
 			'otherProjectsLinksByDefault' => false,
-		);
+		];
 
 		return new SettingsArray( $defaults );
 	}
@@ -156,7 +156,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$settings = $this->newSettings();
 
 		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
+		$namespaceChecker = new NamespaceChecker( [], $namespaces );
 
 		$mockRepo = $this->getMockRepo( $siteLinkData );
 		$mockRepo->putEntity( $this->getBadgeItem() );
@@ -260,55 +260,55 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	}
 
 	public function parserAfterParseProvider() {
-		$commonsOxygen = array(
+		$commonsOxygen = [
 			'msg' => 'wikibase-otherprojects-commons',
 			'class' => 'wb-otherproject-link wb-otherproject-commons',
 			'href' => 'http://commonswiki.test.com/wiki/Oxygen',
 			'hreflang' => 'en',
-		);
+		];
 
-		$badgesQ1 = array(
+		$badgesQ1 = [
 			'class' => 'badge-Q17 featured',
 			'label' => 'featured',
-		);
+		];
 
-		return array(
-			'repo-links' => array(
+		return [
+			'repo-links' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				array(),
-				array( 'de:Sauerstoff' ),
-				array( $commonsOxygen ),
-				array( 'de' => $badgesQ1 ),
-			),
+				[],
+				[ 'de:Sauerstoff' ],
+				[ $commonsOxygen ],
+				[ 'de' => $badgesQ1 ],
+			],
 
-			'noexternallanglinks=*' => array(
+			'noexternallanglinks=*' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				array( 'noexternallanglinks' => serialize( array( '*' ) ) ),
-				array(),
-				array( $commonsOxygen ),
+				[ 'noexternallanglinks' => serialize( [ '*' ] ) ],
+				[],
+				[ $commonsOxygen ],
 				null,
-			),
+			],
 
-			'noexternallanglinks=de' => array(
+			'noexternallanglinks=de' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				array( 'noexternallanglinks' => serialize( array( 'de' ) ) ),
-				array(),
-				array( $commonsOxygen ),
-				array(),
-			),
+				[ 'noexternallanglinks' => serialize( [ 'de' ] ) ],
+				[],
+				[ $commonsOxygen ],
+				[],
+			],
 
-			'noexternallanglinks=ja' => array(
+			'noexternallanglinks=ja' => [
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				array( 'noexternallanglinks' => serialize( array( 'ja' ) ) ),
-				array( 'de:Sauerstoff' ),
-				array( $commonsOxygen ),
-				array( 'de' => $badgesQ1 ),
-			),
-		);
+				[ 'noexternallanglinks' => serialize( [ 'ja' ] ) ],
+				[ 'de:Sauerstoff' ],
+				[ $commonsOxygen ],
+				[ 'de' => $badgesQ1 ],
+			],
+		];
 	}
 
 	/**
@@ -322,17 +322,17 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		array $expectedSisterLinks,
 		array $expectedBadges = null
 	) {
-		$parserOutput = $this->newParserOutput( $pagePropsBefore, array() );
+		$parserOutput = $this->newParserOutput( $pagePropsBefore, [] );
 		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$expectedUsage = array(
+		$expectedUsage = [
 			new EntityUsage(
 				new ItemId( $expectedItem ),
 				EntityUsage::SITELINK_USAGE
 			)
-		);
+		];
 
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
@@ -351,7 +351,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	public function testDoContentAlterParserOutput_sitelinkOfNoItem() {
 		$title = Title::makeTitle( NS_MAIN, 'Plutonium' );
 
-		$parserOutput = $this->newParserOutput( array(), array() );
+		$parserOutput = $this->newParserOutput( [], [] );
 		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
@@ -368,7 +368,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	public function testDoContentAlterParserOutput_sitelinkInNotWikibaseEnabledNamespace() {
 		$title = Title::makeTitle( NS_USER, 'Foo' );
 
-		$parserOutput = $this->newParserOutput( array(), array() );
+		$parserOutput = $this->newParserOutput( [], [] );
 		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkDataInNotEnabledNamespace() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );

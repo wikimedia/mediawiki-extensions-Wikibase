@@ -230,23 +230,23 @@ class SetClaim extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'claim' => array(
+			[
+				'claim' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => true,
-				),
-				'index' => array(
+				],
+				'index' => [
 					self::PARAM_TYPE => 'integer',
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -255,7 +255,7 @@ class SetClaim extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
 				. '"type":"claim","mainsnak":{"snaktype":"value","property":"P1",'
 				. '"datavalue":{"value":"City","type":"string"}}}'
@@ -271,7 +271,7 @@ class SetClaim extends ApiBase {
 				. '"datavalue":{"value":"The Economy of Cities","type":"string"}}]},'
 				. '"snaks-order":["P2"]}],"rank":"normal"}'
 				=> 'apihelp-wbsetclaim-example-3',
-		);
+		];
 	}
 
 }

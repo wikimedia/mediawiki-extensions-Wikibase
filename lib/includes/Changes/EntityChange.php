@@ -89,7 +89,7 @@ class EntityChange extends DiffChange {
 			return $info['metadata'];
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -99,14 +99,14 @@ class EntityChange extends DiffChange {
 	 * @param array $metadata
 	 */
 	public function setMetadata( array $metadata ) {
-		$validKeys = array(
+		$validKeys = [
 			'page_id',
 			'bot',
 			'rev_id',
 			'parent_id',
 			'user_text',
 			'comment'
-		);
+		];
 
 		// strip extra fields from metadata
 		$metadata = array_intersect_key( $metadata, array_flip( $validKeys ) );
@@ -147,20 +147,20 @@ class EntityChange extends DiffChange {
 	 * @todo rename to setRecentChangeInfo
 	 */
 	public function setMetadataFromRC( RecentChange $rc ) {
-		$this->setFields( array(
+		$this->setFields( [
 			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'user_id' => $rc->getAttribute( 'rc_user' ),
 			'time' => $rc->getAttribute( 'rc_timestamp' ),
-		) );
+		] );
 
-		$this->setMetadata( array(
+		$this->setMetadata( [
 			'user_text' => $rc->getAttribute( 'rc_user_text' ),
 			'bot' => $rc->getAttribute( 'rc_bot' ),
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
 			'comment' => $rc->getAttribute( 'rc_comment' ),
-		) );
+		] );
 	}
 
 	/**
@@ -169,16 +169,16 @@ class EntityChange extends DiffChange {
 	 * @todo rename to setUserInfo
 	 */
 	public function setMetadataFromUser( User $user ) {
-		$this->setFields( array(
+		$this->setFields( [
 			'user_id' => $user->getId(),
-		) );
+		] );
 
 		// TODO: init page_id etc in getMetadata, not here!
-		$metadata = array_merge( array(
+		$metadata = array_merge( [
 				'page_id' => 0,
 				'rev_id' => 0,
 				'parent_id' => 0,
-			),
+			],
 			$this->getMetadata()
 		);
 
@@ -188,29 +188,29 @@ class EntityChange extends DiffChange {
 	}
 
 	public function setRevisionInfo( Revision $revision ) {
-		$this->setFields( array(
+		$this->setFields( [
 			'revision_id' => $revision->getId(),
 			'user_id' => $revision->getUser(),
 			'time' => $revision->getTimestamp(),
-		) );
+		] );
 
 		if ( !$this->hasField( 'object_id' ) ) {
 			/* @var EntityContent $content */
 			$content = $revision->getContent(); // potentially expensive!
 			$entityId = $content->getEntityId();
 
-			$this->setFields( array(
+			$this->setFields( [
 				'object_id' => $entityId->getSerialization(),
-			) );
+			] );
 		}
 
-		$this->setMetadata( array(
+		$this->setMetadata( [
 			'user_text' => $revision->getUserText(),
 			'page_id' => $revision->getPage(),
 			'parent_id' => $revision->getParentId(),
 			'comment' => $revision->getComment(),
 			'rev_id' => $revision->getId(),
-		) );
+		] );
 	}
 
 	/**

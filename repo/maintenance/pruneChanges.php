@@ -102,7 +102,7 @@ class PruneChanges extends Maintenance {
 	 */
 	private function newMessageReporter() {
 		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback( array( $this, 'log' ) );
+		$reporter->registerReporterCallback( [ $this, 'log' ] );
 
 		return $reporter;
 	}

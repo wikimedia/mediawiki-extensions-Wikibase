@@ -43,25 +43,25 @@ class NumberRangeValidator implements ValueValidator {
 	public function validate( $value ) {
 		if ( $value < $this->min ) {
 			// XXX: having to provide an array is quite inconvenient
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Value out of range, the minimum value is ' . $this->min,
 					null,
 					'too-low',
-					array( $this->min, $value )
+					[ $this->min, $value ]
 				),
-			) );
+			] );
 		}
 
 		if ( $value > $this->max ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Value out of range, the maximum value is ' . $this->max,
 					null,
 					'too-high',
-					array( $this->max, $value )
+					[ $this->max, $value ]
 				),
-			) );
+			] );
 		}
 
 		return Result::newSuccess();

@@ -58,7 +58,7 @@ class RecentChangeFactory {
 		$targetSpecificAttributes = $this->buildTargetSpecificAttributes( $change, $target );
 		$attribs = array_merge( $preparedAttribs, $targetSpecificAttributes );
 		$rc = RecentChange::newFromRow( (object)$attribs );
-		$rc->setExtra( array( 'pageStatus' => 'changed' ) );
+		$rc->setExtra( [ 'pageStatus' => 'changed' ] );
 
 		return $rc;
 	}
@@ -98,11 +98,11 @@ class RecentChangeFactory {
 
 		$time = isset( $metadata['time'] ) ? $metadata['time'] : wfTimestamp( TS_MW );
 
-		$params = array(
+		$params = [
 			'wikibase-repo-change' => $metadata,
-		);
+		];
 
-		return array(
+		return [
 			'rc_user' => 0,
 			'rc_user_text' => $userText,
 			'rc_comment' => $this->getEditCommentMulti( $change ),
@@ -117,7 +117,7 @@ class RecentChangeFactory {
 			'rc_source' => self::SRC_WIKIBASE,
 			'rc_deleted' => false,
 			'rc_new' => false,
-		);
+		];
 	}
 
 	/**
@@ -129,7 +129,7 @@ class RecentChangeFactory {
 	 * @return array
 	 */
 	private function buildTargetSpecificAttributes( EntityChange $change, Title $target ) {
-		$attribs = array(
+		$attribs = [
 			'rc_namespace' => $target->getNamespace(),
 			'rc_title' => $target->getDBkey(),
 			'rc_old_len' => $target->getLength(),
@@ -137,7 +137,7 @@ class RecentChangeFactory {
 			'rc_this_oldid' => $target->getLatestRevID(),
 			'rc_last_oldid' => $target->getLatestRevID(),
 			'rc_cur_id' => $target->getArticleID(),
-		);
+		];
 
 		$comment = $this->buildTargetSpecificComment( $change, $target );
 		if ( $comment !== null ) {

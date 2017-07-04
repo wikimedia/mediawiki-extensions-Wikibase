@@ -25,7 +25,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	public function provideEntityTypes() {
 		return array_map(
 			function( $entityType ) {
-				return array( $entityType );
+				return [ $entityType ];
 			},
 			array_keys( $this->getRegistry() )
 		);
@@ -34,8 +34,8 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	public function testKnownEntityTypesSupported() {
 		$entityTypes = $this->provideEntityTypes();
 
-		$this->assertContains( array( 'item' ), $entityTypes );
-		$this->assertContains( array( 'property' ), $entityTypes );
+		$this->assertContains( [ 'item' ], $entityTypes );
+		$this->assertContains( [ 'property' ], $entityTypes );
 	}
 
 	/**

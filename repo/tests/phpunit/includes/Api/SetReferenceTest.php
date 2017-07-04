@@ -55,7 +55,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$store = $wikibaseRepo->getEntityStore();
 
 		if ( !self::$propertyIds ) {
-			self::$propertyIds = array();
+			self::$propertyIds = [];
 
 			for ( $i = 0; $i < 4; $i++ ) {
 				$property = Property::newFromType( 'string' );
@@ -64,7 +64,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 				self::$propertyIds[] = $property->getId();
 			}
 
-			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
+			$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
 		}
 
 		$this->serializerFactory = new SerializerFactory(
@@ -79,7 +79,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 *
 	 * @return Statement
 	 */
-	private function getNewStatement( array $references = array() ) {
+	private function getNewStatement( array $references = [] ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		// Create a new empty item
 		$item = new Item();
@@ -99,15 +99,15 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function testRequests() {
-		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
+		$reference = new Reference( [ new PropertySomeValueSnak( 100 ) ] );
 		$referenceHash = $reference->getHash();
-		$statement = $this->getNewStatement( array( $reference ) );
+		$statement = $this->getNewStatement( [ $reference ] );
 		$guid = $statement->getGuid();
 
 		// Replace the reference with this new one
-		$newReference = new Reference( new SnakList( array(
+		$newReference = new Reference( new SnakList( [
 			new PropertyNoValueSnak( self::$propertyIds[1] )
-		) ) );
+		] ) );
 		$serializedReferenceResult = $this->makeValidRequest(
 			$guid,
 			$referenceHash,
@@ -126,10 +126,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		// Replace the previous reference with a reference with 2 snaks
 		$aditionalReference = new Reference( new SnakList(
-			array(
+			[
 				new PropertyNoValueSnak( self::$propertyIds[0] ),
 				new PropertyNoValueSnak( self::$propertyIds[1] ),
-			)
+			]
 		) );
 		$serializedReferenceResult = $this->makeValidRequest(
 			$guid,
@@ -148,8 +148,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function testRequestWithInvalidProperty() {
-		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
-		$statement = $this->getNewStatement( array( $reference ) );
+		$reference = new Reference( [ new PropertySomeValueSnak( 100 ) ] );
+		$statement = $this->getNewStatement( [ $reference ] );
 		$guid = $statement->getGuid();
 
 		$this->makeInvalidRequest(
@@ -163,11 +163,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 	public function testSettingIndex() {
 		/** @var Reference[] $references */
-		$references = array(
-			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[0] ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[1] ) ) ) ),
-			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[2] ) ) ) ),
-		);
+		$references = [
+			new Reference( new SnakList( [ new PropertySomeValueSnak( self::$propertyIds[0] ) ] ) ),
+			new Reference( new SnakList( [ new PropertySomeValueSnak( self::$propertyIds[1] ) ] ) ),
+			new Reference( new SnakList( [ new PropertySomeValueSnak( self::$propertyIds[2] ) ] ) ),
+		];
 		$statement = $this->getNewStatement( $references );
 
 		$this->makeValidRequest(
@@ -295,11 +295,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$referenceHash = null,
 		$index = null
 	) {
-		$params = array(
+		$params = [
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'snaks' => $snaksJson,
-		);
+		];
 
 		if ( !is_null( $snaksOrderJson ) ) {
 			$params['snaks-order'] = $snaksOrderJson;
@@ -321,17 +321,17 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidSerialization( $snaksSerialization ) {
 		$this->setExpectedException( ApiUsageException::class );
-		$params = array(
+		$params = [
 			'action' => 'wbsetreference',
 			'statement' => 'Foo$Guid',
 			'snaks' => $snaksSerialization
-		);
+		];
 		$this->doApiRequestWithToken( $params );
 	}
 
 	public function provideInvalidSerializations() {
-		return array(
-			array( '{
+		return [
+			[ '{
 				 "P813":[
 						{
 							 "snaktype":"value",
@@ -349,8 +349,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 							 }
 						}
 				 ]
-			}' ),
-			array( '{
+			}' ],
+			[ '{
 				 "P813":[
 						{
 							 "snaktype":"wubbledubble",
@@ -368,8 +368,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 							 }
 						}
 				 ]
-			}' ),
-		);
+			}' ],
+		];
 	}
 
 	/**
@@ -389,16 +389,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$prop = new PropertyId( EntityTestHelper::getId( 'StringProp' ) );
 		$snak = new PropertyValueSnak( $prop, new StringValue( $referenceValue ) );
-		$reference = new Reference( new SnakList( array( $snak ) ) );
+		$reference = new Reference( new SnakList( [ $snak ] ) );
 
 		$serializedReference = $this->serializeReference( $reference );
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetreference',
 			'statement' => $guid,
 			'snaks' => json_encode( $serializedReference['snaks'] ),
 			'snaks-order' => json_encode( $serializedReference['snaks-order'] ),
-		);
+		];
 
 		if ( $referenceHash ) {
 			$params['reference'] = $referenceHash;
@@ -413,16 +413,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		return array(
+		return [
 			'bad guid 1' =>
-				array( 'Berlin', 'xyz', 'good', '', 'invalid-guid' ),
+				[ 'Berlin', 'xyz', 'good', '', 'invalid-guid' ],
 			'bad guid 2' =>
-				array( 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ),
+				[ 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ],
 			'bad guid 3' =>
-				array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ),
+				[ 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ],
 			'bad snak value' =>
-				array( 'Berlin', null, '    ', '', 'modification-failed' ),
-		);
+				[ 'Berlin', null, '    ', '', 'modification-failed' ],
+		];
 	}
 
 }

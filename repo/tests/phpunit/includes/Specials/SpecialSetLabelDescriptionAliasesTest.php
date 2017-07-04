@@ -41,7 +41,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	use HtmlAssertionHelpers;
 
-	private static $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
+	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
 
 	const USER_LANGUAGE = 'en';
 
@@ -83,7 +83,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$runner->expects( $this->any() )
@@ -124,7 +124,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				array $descriptions,
 				EntityId $ignoreEntityId = null
 			) {
-				$errors = array();
+				$errors = [];
 
 				$errors = array_merge( $errors, $this->detectDupes( $labels ) );
 				$errors = array_merge( $errors, $this->detectDupes( $descriptions ) );
@@ -144,7 +144,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return UniquenessViolation[]
 	 */
 	public function detectDupes( array $terms ) {
-		$errors = array();
+		$errors = [];
 
 		foreach ( $terms as $languageCode => $term ) {
 			if ( $term === 'DUPE' ) {
@@ -154,11 +154,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					$q666,
 					'found conflicting terms',
 					'test-conflict',
-					array(
+					[
 						$term,
 						$languageCode,
 						$q666,
-					)
+					]
 				);
 			}
 		}
@@ -174,9 +174,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return Fingerprint
 	 */
 	private function makeFingerprint(
-		array $labels = array(),
-		array $descriptions = array(),
-		array $aliases = array()
+		array $labels = [],
+		array $descriptions = [],
+		array $aliases = []
 	) {
 		$fingerprint = new Fingerprint();
 
@@ -198,52 +198,52 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	public function executeProvider() {
 
 		$fooFingerprint = $this->makeFingerprint(
-			array( 'de' => 'foo' )
+			[ 'de' => 'foo' ]
 		);
 
-		return array(
-			'add label' => array(
+		return [
+			'add label' => [
 				$fooFingerprint,
-				new FauxRequest( array(
+				new FauxRequest( [
 					'language' => 'en',
 					'label' => "FOO\xE2\x80\x82",
 					'aliases' => "\xE2\x80\x82",
-				), true ),
+				], true ),
 				$this->makeFingerprint(
-					array( 'de' => 'foo', 'en' => 'FOO' )
+					[ 'de' => 'foo', 'en' => 'FOO' ]
 				),
-			),
+			],
 
-			'replace label' => array(
+			'replace label' => [
 				$fooFingerprint,
-				new FauxRequest( array( 'language' => 'de', 'label' => 'FOO' ), true ),
+				new FauxRequest( [ 'language' => 'de', 'label' => 'FOO' ], true ),
 				$this->makeFingerprint(
-					array( 'de' => 'FOO' )
+					[ 'de' => 'FOO' ]
 				),
-			),
+			],
 
-			'add description, keep label' => array(
+			'add description, keep label' => [
 				$fooFingerprint,
-				new FauxRequest( array( 'language' => 'de', 'description' => 'Lorem Ipsum' ), true ),
+				new FauxRequest( [ 'language' => 'de', 'description' => 'Lorem Ipsum' ], true ),
 				$this->makeFingerprint(
-					array( 'de' => 'foo' ),
-					array( 'de' => 'Lorem Ipsum' )
+					[ 'de' => 'foo' ],
+					[ 'de' => 'Lorem Ipsum' ]
 				),
-			),
+			],
 
-			'set aliases' => array(
+			'set aliases' => [
 				$fooFingerprint,
-				new FauxRequest( array(
+				new FauxRequest( [
 					'language' => 'de',
 					'aliases' => "foo\xE2\x80\x82|bar",
-				), true ),
+				], true ),
 				$this->makeFingerprint(
-					array( 'de' => 'foo' ),
-					array(),
-					array( 'de' => array( 'foo', 'bar' ) )
+					[ 'de' => 'foo' ],
+					[],
+					[ 'de' => [ 'foo', 'bar' ] ]
 				),
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -341,7 +341,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function testLanguageCodeEscaping() {
-		$request = new FauxRequest( array( 'language' => '<sup>' ), true );
+		$request = new FauxRequest( [ 'language' => '<sup>' ], true );
 		list( $output, ) = $this->executeSpecialPage( null, $request );
 
 		$this->assertContains( '<p class="error">', $output );

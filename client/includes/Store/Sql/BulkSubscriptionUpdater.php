@@ -119,7 +119,7 @@ class BulkSubscriptionUpdater {
 	public function updateSubscriptions( EntityId $startEntity = null ) {
 		$this->repoConnectionManager->prepareForUpdates();
 
-		$continuation = $startEntity === null ? null : array( $startEntity->getSerialization() );
+		$continuation = $startEntity === null ? null : [ $startEntity->getSerialization() ];
 
 		while ( true ) {
 			wfWaitForSlaves( null, $this->repoWiki );
@@ -166,9 +166,9 @@ class BulkSubscriptionUpdater {
 			'wb_changes_subscription',
 			$rows,
 			__METHOD__,
-			array(
+			[
 				'IGNORE'
-			)
+			]
 		);
 
 		$count = $dbw->affectedRows();
@@ -194,13 +194,13 @@ class BulkSubscriptionUpdater {
 
 		$res = $dbr->select(
 			EntityUsageTable::DEFAULT_TABLE_NAME,
-			array( 'DISTINCT eu_entity_id' ),
+			[ 'DISTINCT eu_entity_id' ],
 			$continuationCondition,
 			__METHOD__,
-			array(
+			[
 				'ORDER BY' => 'eu_entity_id',
 				'LIMIT' => $this->batchSize,
-			)
+			]
 		);
 
 		$this->localConnectionManager->releaseConnection( $dbr );
@@ -216,13 +216,13 @@ class BulkSubscriptionUpdater {
 	 * @return array[] rows
 	 */
 	private function makeSubscriptionRows( array $entities ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $entities as $id ) {
-			$rows[] = array(
+			$rows[] = [
 				'cs_entity_id' => $id,
 				'cs_subscriber_id' => $this->subscriberWikiId
-			);
+			];
 		}
 
 		return $rows;
@@ -240,14 +240,14 @@ class BulkSubscriptionUpdater {
 	 * @return string[] A list of entity ids strings.
 	 */
 	private function getEntityIdsFromRows( ResultWrapper $res, $entityIdField, array &$continuation = null ) {
-		$entities = array();
+		$entities = [];
 
 		foreach ( $res as $row ) {
 			$entities[] = $row->$entityIdField;
 		}
 
 		if ( isset( $row ) ) {
-			$continuation = array( $row->$entityIdField );
+			$continuation = [ $row->$entityIdField ];
 		}
 
 		return $entities;
@@ -259,7 +259,7 @@ class BulkSubscriptionUpdater {
 	 * @param EntityId|null $startEntity The entity to start with.
 	 */
 	public function purgeSubscriptions( EntityId $startEntity = null ) {
-		$continuation = $startEntity === null ? null : array( $startEntity->getSerialization() );
+		$continuation = $startEntity === null ? null : [ $startEntity->getSerialization() ];
 
 		$this->repoConnectionManager->prepareForUpdates();
 
@@ -305,9 +305,9 @@ class BulkSubscriptionUpdater {
 	private function getDeletionRange( array &$continuation = null ) {
 		$dbr = $this->repoConnectionManager->getReadConnection();
 
-		$conditions = array(
+		$conditions = [
 			'cs_subscriber_id' => $this->subscriberWikiId,
-		);
+		];
 
 		if ( !empty( $continuation ) ) {
 			list( $fromEntityId ) = $continuation;
@@ -329,13 +329,13 @@ class BulkSubscriptionUpdater {
 
 		$res = $dbr->select(
 			'wb_changes_subscription',
-			array( 'cs_entity_id' ),
+			[ 'cs_entity_id' ],
 			$conditions,
 			__METHOD__,
-			array(
+			[
 				'ORDER BY' => 'cs_entity_id',
 				'LIMIT' => $this->batchSize,
-			)
+			]
 		);
 
 		$this->repoConnectionManager->releaseConnection( $dbr );
@@ -349,7 +349,7 @@ class BulkSubscriptionUpdater {
 		$maxId = end( $subscriptions );
 		$count = count( $subscriptions );
 
-		return array( $minId, $maxId, $count );
+		return [ $minId, $maxId, $count ];
 	}
 
 	/**
@@ -362,11 +362,11 @@ class BulkSubscriptionUpdater {
 		$dbw = $this->repoConnectionManager->getWriteConnectionRef();
 		$dbw->startAtomic( __METHOD__ );
 
-		$conditions = array(
+		$conditions = [
 			'cs_subscriber_id' => $this->subscriberWikiId,
 			'cs_entity_id >= ' . $dbw->addQuotes( $minId ),
 			'cs_entity_id <= ' . $dbw->addQuotes( $maxId ),
-		);
+		];
 
 		$dbw->delete(
 			'wb_changes_subscription',

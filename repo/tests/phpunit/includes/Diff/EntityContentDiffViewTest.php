@@ -60,35 +60,35 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q11' ) );
 		$item->setDescription( 'en', 'ohi there' );
 		$item->setLabel( 'de', 'o_O' );
-		$item->setAliases( 'nl', array( 'foo', 'bar' ) );
+		$item->setAliases( 'nl', [ 'foo', 'bar' ] );
 
 		$item2 = new Item( new ItemId( 'Q12' ) );
 		$item2->setLabel( 'de', 'o_O' );
 		$item2->setLabel( 'en', 'O_o' );
-		$item2->setAliases( 'nl', array( 'daaaah' ) );
+		$item2->setAliases( 'nl', [ 'daaaah' ] );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q21' ) );
 		$redirect2 = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q22' ) );
 
-		$insTags = array(
+		$insTags = [
 			'has <td>label / de</td>' => '>label / de</td>',
 			'has <ins>foo</ins>' => '>foo</ins>',
 			'has <td>aliases / nl / 0</td>' => '>aliases / nl / 0</td>',
 			'has <ins>bar</ins>' => '>bar</ins>',
 			'has <td>description / en</td>' => '>description / en</td>',
 			'has <ins>ohi there</ins>' => '>ohi there</ins>',
-		);
+		];
 
-		$delTags = array(
+		$delTags = [
 			'has <td>label / de</td>' => '>label / de</td>',
 			'has <del>foo</del>' => '>foo</del>',
 			'has <td>aliases / nl / 0</td>' => '>aliases / nl / 0</td>',
 			'has <del>bar</del>' => '>bar</del>',
 			'has <td>description / en</td>' => '>description / en</td>',
 			'has <del>ohi there</del>' => '>ohi there</del>',
-		);
+		];
 
-		$changeTags = array(
+		$changeTags = [
 			'has <td>label / en</td>' => '>label / en</td>',
 			'has <ins>O_o</ins>' => '>O_o</ins>',
 			'has <td>aliases / nl / 0</td>' => '>aliases / nl / 0</td>',
@@ -99,29 +99,29 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 			'has <del>bar</del>' => '>bar</del>',
 			'has <td>description / en</td>' => '>description / en</td>',
 			'has <del>ohi there</del>' => '>ohi there</del>',
-		);
+		];
 
-		$fromRedirTags = array(
+		$fromRedirTags = [
 			'has <td>label / de</td>' => '>label / de</td>',
 			'has <ins>foo</ins>' => '>foo</ins>',
 
 			'has <td>redirect</td>' => '>redirect</td>',
 			'has <del>Q21</del>' => '>Q21</del>',
-		);
+		];
 
-		$toRedirTags = array(
+		$toRedirTags = [
 			'has <td>label / de</td>' => '>label / de</td>',
 			'has <del>foo</del>' => '>foo</del>',
 
 			'has <td>redirect</td>' => '>redirect</td>',
 			'has <ins>Q21</ins>' => '>Q21</ins>',
-		);
+		];
 
-		$changeRedirTags = array(
+		$changeRedirTags = [
 			'has <td>redirect</td>' => '>redirect</td>',
 			'has <del>Q21</del>' => '>Q21</del>',
 			'has <ins>Q22</del>' => '>Q22</ins>',
-		);
+		];
 
 		$empty = ItemContent::newFromItem( $emptyItem );
 		$itemContent = ItemContent::newFromItem( $item );
@@ -136,14 +136,14 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 			$this->getMock( Title::class )
 		);
 
-		return array(
-			'from emtpy' => array( $empty, $itemContent, $insTags ),
-			'to empty' => array( $itemContent, $empty, $delTags ),
-			'changed' => array( $itemContent, $itemContent2, $changeTags ),
-			'to redirect' => array( $itemContent, $redirectContent, $toRedirTags ),
-			'from redirect' => array( $redirectContent, $itemContent, $fromRedirTags ),
-			'redirect changed' => array( $redirectContent, $redirectContent2, $changeRedirTags ),
-		);
+		return [
+			'from emtpy' => [ $empty, $itemContent, $insTags ],
+			'to empty' => [ $itemContent, $empty, $delTags ],
+			'changed' => [ $itemContent, $itemContent2, $changeTags ],
+			'to redirect' => [ $itemContent, $redirectContent, $toRedirTags ],
+			'from redirect' => [ $redirectContent, $itemContent, $fromRedirTags ],
+			'redirect changed' => [ $redirectContent, $redirectContent2, $changeRedirTags ],
+		];
 	}
 
 	/**

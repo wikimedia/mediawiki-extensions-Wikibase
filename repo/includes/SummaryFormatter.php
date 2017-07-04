@@ -99,7 +99,7 @@ class SummaryFormatter {
 		$summaryArgCount = count( $summary->getAutoSummaryArgs() );
 
 		$commentArgs = array_merge(
-			array( $summaryArgCount, $summary->getLanguageCode() ),
+			[ $summaryArgCount, $summary->getLanguageCode() ],
 			$summary->getCommentArgs()
 		);
 
@@ -153,7 +153,7 @@ class SummaryFormatter {
 			$args = $this->formatKeyValuePairs( $args );
 		}
 
-		$strings = array();
+		$strings = [];
 
 		foreach ( $args as $key => $arg ) {
 			$strings[$key] = $this->formatArg( $arg );
@@ -207,7 +207,7 @@ class SummaryFormatter {
 	 * @return string[]
 	 */
 	protected function formatKeyValuePairs( array $pairs ) {
-		$list = array();
+		$list = [];
 
 		foreach ( $pairs as $key => $value ) {
 			if ( is_string( $key ) ) {
@@ -251,7 +251,7 @@ class SummaryFormatter {
 		}
 
 		if ( $autoSummary !== '' && $userSummary !== '' ) {
-			$mergedString .= $this->language->commaList( array( $autoSummary, $userSummary ) );
+			$mergedString .= $this->language->commaList( [ $autoSummary, $userSummary ] );
 		} elseif ( $autoSummary !== '' ) {
 			$mergedString .= $autoSummary;
 		} elseif ( $userSummary !== '' ) {

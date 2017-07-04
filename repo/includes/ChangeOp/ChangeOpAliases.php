@@ -78,7 +78,7 @@ class ChangeOpAliases extends ChangeOpBase {
 		if ( $aliases->hasGroupForLanguage( $this->languageCode ) ) {
 			$oldAliases = $aliases->getByLanguage( $this->languageCode )->getAliases();
 		} else {
-			$oldAliases = array();
+			$oldAliases = [];
 		}
 
 		if ( $this->action === 'set' || $this->action === '' ) {

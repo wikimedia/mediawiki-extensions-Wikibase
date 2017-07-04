@@ -82,12 +82,12 @@ class EntityPerPageTable implements EntityPerPage {
 
 		$redirectTarget = $targetId ? $targetId->getSerialization() : null;
 
-		$values = array(
+		$values = [
 			'epp_entity_id' => $entityId->getNumericId(),
 			'epp_entity_type' => $entityId->getEntityType(),
 			'epp_page_id' => $pageId,
 			'epp_redirect_target' => $redirectTarget
-		);
+		];
 
 		if ( !$this->rowExists( $values ) ) {
 			$this->addRowInternal( $values );
@@ -145,7 +145,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
 		$indexes = $this->getUniqueIndexes();
 
-		$conditions = array();
+		$conditions = [];
 
 		foreach ( $indexes as $indexFields ) {
 			$indexValues = array_intersect_key( $values, array_flip( $indexFields ) );
@@ -165,10 +165,10 @@ class EntityPerPageTable implements EntityPerPage {
 		// CREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id, epp_entity_type);
 		// CREATE UNIQUE INDEX /*i*/wb_epp_page ON /*_*/wb_entity_per_page (epp_page_id);
 
-		return array(
-			'wb_epp_entity' => array( 'epp_entity_id', 'epp_entity_type' ),
-			'wb_epp_page' => array( 'epp_page_id' ),
-		);
+		return [
+			'wb_epp_entity' => [ 'epp_entity_id', 'epp_entity_type' ],
+			'wb_epp_page' => [ 'epp_page_id' ],
+		];
 	}
 
 	/**
@@ -197,10 +197,10 @@ class EntityPerPageTable implements EntityPerPage {
 
 		return $dbw->delete(
 			'wb_entity_per_page',
-			array(
+			[
 				'epp_entity_id' => $entityId->getNumericId(),
 				'epp_entity_type' => $entityId->getEntityType()
-			),
+			],
 			__METHOD__
 		);
 	}

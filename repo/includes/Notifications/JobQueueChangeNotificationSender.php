@@ -43,7 +43,7 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	 */
 	public function __construct(
 		$repoDB,
-		array $wikiDBNames = array(),
+		array $wikiDBNames = [],
 		$batchSize = 50,
 		$jobQueueGroupFactory = null
 	) {

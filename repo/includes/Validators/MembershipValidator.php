@@ -65,14 +65,14 @@ class MembershipValidator implements ValueValidator {
 		}
 
 		if ( !in_array( $value, $this->allowed, true ) ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Not a legal value: ' . $value,
 					null,
 					$this->errorCode,
-					array( $value )
+					[ $value ]
 				)
-			) );
+			] );
 		}
 
 		return Result::newSuccess();

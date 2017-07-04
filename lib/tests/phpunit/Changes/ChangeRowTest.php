@@ -68,26 +68,26 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testGetInfoUnserializesInfo() {
 		$json = '{"field":"value"}';
-		$expected = array( 'field' => 'value' );
+		$expected = [ 'field' => 'value' ];
 		$change = $this->newChangeRow( [ 'info' => $json ] );
 		$this->assertSame( $expected, $change->getInfo() );
 	}
 
 	public function testReturnsFields() {
 		$change = $this->newChangeRow( [ 'field' => 'value' ] );
-		$this->assertSame( array( 'id' => null, 'field' => 'value' ), $change->getFields() );
+		$this->assertSame( [ 'id' => null, 'field' => 'value' ], $change->getFields() );
 	}
 
 	public function testGetFieldsUnserializesInfo() {
 		$json = '{"field":"value"}';
-		$expected = array( 'field' => 'value' );
+		$expected = [ 'field' => 'value' ];
 		$change = $this->newChangeRow( [ 'info' => $json ] );
-		$this->assertSame( array( 'id' => null, 'info' => $expected ), $change->getFields() );
+		$this->assertSame( [ 'id' => null, 'info' => $expected ], $change->getFields() );
 	}
 
 	public function testUnserializesJson() {
 		$json = '{"field":"value"}';
-		$expected = array( 'field' => 'value' );
+		$expected = [ 'field' => 'value' ];
 		$change = $this->newChangeRow( [ 'info' => $json ] );
 		$this->assertSame( $expected, $change->getInfo() );
 	}
@@ -108,7 +108,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$info = $change->getInfo();
 		\MediaWiki\restoreWarnings();
 
-		$this->assertSame( array(), $info );
+		$this->assertSame( [], $info );
 	}
 
 	public function testSetsField() {
@@ -119,13 +119,13 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testSetsFields() {
 		$change = $this->newChangeRow();
-		$change->setFields( array( 'field' => 'value' ) );
+		$change->setFields( [ 'field' => 'value' ] );
 		$this->assertSame( 'value', $change->getField( 'field' ) );
 	}
 
 	public function testOverridesFieldsByDefault() {
 		$change = $this->newChangeRow( [ 'field' => 'old' ] );
-		$change->setFields( array( 'field' => 'new' ) );
+		$change->setFields( [ 'field' => 'new' ] );
 		$this->assertSame( 'new', $change->getField( 'field' ) );
 	}
 

@@ -388,7 +388,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	public function provideDataTypeValidation() {
 		$wikidataUri = 'http://www.wikidata.org/entity/';
 
-		$cases = array(
+		$cases = [
 			//wikibase-item
 			'Expected item, string supplied' => [ 'wikibase-item', 'q8', false ],
 			'Expected item, StringValue supplied' => [ 'wikibase-item', new StringValue( 'q8' ), false ],
@@ -457,7 +457,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			//monolingual text
 			'Simple value' => [ 'monolingualtext', new MonolingualTextValue( 'contentlanguage', 'text' ), true ],
 			'Not a valid language' => [ 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false ],
-		);
+		];
 
 		return $cases;
 	}
@@ -468,20 +468,20 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	public function testDataTypeValidation( $typeId, $value, $expected ) {
 		$builders = $this->newValidatorBuilders();
 
-		$validatorMap = array(
-			'commonsMedia'      => array( $builders, 'buildMediaValidators' ),
-			'geo-shape'         => array( $builders, 'buildGeoShapeValidators' ),
-			'globe-coordinate'  => array( $builders, 'buildCoordinateValidators' ),
-			'monolingualtext'   => array( $builders, 'buildMonolingualTextValidators' ),
-			'quantity'          => array( $builders, 'buildQuantityValidators' ),
-			'string'            => array( $builders, 'buildStringValidators' ),
-			'tabular-data'      => array( $builders, 'buildTabularDataValidators' ),
-			'time'              => array( $builders, 'buildTimeValidators' ),
-			'url'               => array( $builders, 'buildUrlValidators' ),
-			'wikibase-entity'   => array( $builders, 'buildEntityValidators' ),
-			'wikibase-item'     => array( $builders, 'buildItemValidators' ),
-			'wikibase-property' => array( $builders, 'buildPropertyValidators' ),
-		);
+		$validatorMap = [
+			'commonsMedia'      => [ $builders, 'buildMediaValidators' ],
+			'geo-shape'         => [ $builders, 'buildGeoShapeValidators' ],
+			'globe-coordinate'  => [ $builders, 'buildCoordinateValidators' ],
+			'monolingualtext'   => [ $builders, 'buildMonolingualTextValidators' ],
+			'quantity'          => [ $builders, 'buildQuantityValidators' ],
+			'string'            => [ $builders, 'buildStringValidators' ],
+			'tabular-data'      => [ $builders, 'buildTabularDataValidators' ],
+			'time'              => [ $builders, 'buildTimeValidators' ],
+			'url'               => [ $builders, 'buildUrlValidators' ],
+			'wikibase-entity'   => [ $builders, 'buildEntityValidators' ],
+			'wikibase-item'     => [ $builders, 'buildItemValidators' ],
+			'wikibase-property' => [ $builders, 'buildPropertyValidators' ],
+		];
 
 		$validators = call_user_func( $validatorMap[$typeId] );
 

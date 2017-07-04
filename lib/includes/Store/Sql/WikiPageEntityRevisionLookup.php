@@ -82,7 +82,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		if ( $revisionId > 0 ) {
 			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
 		} else {
-			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
+			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 			$row = $rows[$entityId->getSerialization()];
 		}
 
@@ -136,7 +136,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
-		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
+		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 		$row = $rows[$entityId->getSerialization()];
 
 		if ( $row && $row->page_latest && !$row->page_is_redirect ) {
@@ -165,7 +165,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		if ( $entity ) {
 			$entityRevision = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
-			$result = array( $entityRevision, null );
+			$result = [ $entityRevision, null ];
 		} else {
 			$redirect = $this->contentCodec->decodeRedirect( $blob, $row->rev_content_format );
 
@@ -175,7 +175,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 				);
 			}
 
-			$result = array( null, $redirect );
+			$result = [ null, $redirect ];
 		}
 
 		return $result;

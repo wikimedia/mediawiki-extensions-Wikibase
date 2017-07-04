@@ -139,7 +139,7 @@ class ChangeOpLabel extends ChangeOpBase {
 				$labels,
 				$entity->getDescriptions(),
 				$entity->getId(),
-				array( $this->languageCode )
+				[ $this->languageCode ]
 			);
 		}
 

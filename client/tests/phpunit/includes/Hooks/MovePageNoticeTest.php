@@ -85,10 +85,10 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 		$newTitle2->wikibasePushedMoveToRepo = true;
 		$expected2 = $this->getParsedMessage( 'wikibase-after-page-move-queued' );
 
-		return array(
-			'after page move' => array( $expected, $oldTitle, $newTitle ),
-			'page move queued' => array( $expected2, $oldTitle, $newTitle2 )
-		);
+		return [
+			'after page move' => [ $expected, $oldTitle, $newTitle ],
+			'page move queued' => [ $expected2, $oldTitle, $newTitle2 ]
+		];
 	}
 
 	protected function getParsedMessage( $messageKey ) {

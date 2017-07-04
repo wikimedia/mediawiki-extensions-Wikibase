@@ -49,8 +49,8 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 	}
 
 	public function getHtmlProvider() {
-		return array(
-			array(
+		return [
+			[
 				'<div>(wikibase-shortcopyrightwarning: wikibase-submit, copyrightpage, copyrightlink)</div>',
 				wfMessage(
 					'wikibase-shortcopyrightwarning',
@@ -59,8 +59,8 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 					'copyrightlink'
 				),
 				'qqx'
-			)
-		);
+			]
+		];
 	}
 
 }

@@ -24,8 +24,8 @@ use Wikibase\DataModel\Services\Diff\ItemPatcher;
 use Wikibase\DataModel\Services\Diff\PropertyDiffer;
 use Wikibase\DataModel\Services\Diff\PropertyPatcher;
 
-return array(
-	'item' => array(
+return [
+	'item' => [
 		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newItemSerializer();
 		},
@@ -45,8 +45,8 @@ return array(
 		'entity-patcher-strategy-builder' => function() {
 			return new ItemPatcher();
 		},
-	),
-	'property' => array(
+	],
+	'property' => [
 		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newPropertySerializer();
 		},
@@ -66,5 +66,5 @@ return array(
 		'entity-patcher-strategy-builder' => function() {
 			return new PropertyPatcher();
 		},
-	)
-);
+	]
+];

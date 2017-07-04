@@ -77,7 +77,7 @@ class PropertyIdResolver {
 	 */
 	private function findPropertyByLabel( $propertyLabel, $languageCode ) {
 		$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels(
-			array( $propertyLabel )
+			[ $propertyLabel ]
 		);
 
 		if ( empty( $propertyIds ) ) {

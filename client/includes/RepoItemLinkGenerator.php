@@ -124,11 +124,11 @@ class RepoItemLinkGenerator {
 	 * @return string HTML
 	 */
 	private function getEditLinksLink( EntityId $entityId ) {
-		$link = array(
+		$link = [
 			'href' => $this->getEntityUrl( $entityId ),
 			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 			'class' => 'wbc-editpage',
-		);
+		];
 
 		$text = wfMessage( 'wikibase-editlinks' )->text();
 		return $this->formatLink( $link, 'edit', $text );
@@ -150,11 +150,11 @@ class RepoItemLinkGenerator {
 			$href = $this->getNewItemUrl( $title );
 		}
 
-		$link = array(
+		$link = [
 			'href' => $href,
 			'title' => wfMessage( 'wikibase-addlinkstitle' )->text(),
 			'class' => 'wbc-editpage',
-		);
+		];
 
 		$text = wfMessage( 'wikibase-linkitem-addlinks' )->text();
 		return $this->formatLink( $link, 'add', $text );
@@ -166,10 +166,10 @@ class RepoItemLinkGenerator {
 	 * @return string
 	 */
 	private function getNewItemUrl( Title $title ) {
-		$params = array(
+		$params = [
 			'site' => $this->siteGlobalId,
 			'page' => $title->getPrefixedText()
-		);
+		];
 
 		$url = $this->repoLinker->getPageUrl( 'Special:NewItem' );
 		$url = $this->repoLinker->addQueryParams( $url, $params );
@@ -199,9 +199,9 @@ class RepoItemLinkGenerator {
 
 		$html = Html::rawElement(
 			'span',
-			array(
+			[
 				'class' => "wb-langlinks-$action wb-langlinks-link"
-			),
+			],
 			$link
 		);
 

@@ -36,7 +36,7 @@ interface UsageLookup {
 	 *  entities. If $aspects is given, only usages of these aspects are included in the result.
 	 * @throws UsageTrackerException
 	 */
-	public function getPagesUsing( array $entityIds, array $aspects = array() );
+	public function getPagesUsing( array $entityIds, array $aspects = [] );
 
 	/**
 	 * Returns the elements of $entityIds that are currently not used as

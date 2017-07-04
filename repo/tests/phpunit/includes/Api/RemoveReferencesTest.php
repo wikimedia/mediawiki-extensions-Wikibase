@@ -35,7 +35,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	 * @return Snak[]
 	 */
 	protected function snakProvider() {
-		$snaks = array();
+		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
 		$snaks[] = new PropertySomeValueSnak( 9001 );
@@ -48,7 +48,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	 * @return Statement[]
 	 */
 	protected function statementProvider() {
-		$statements = array();
+		$statements = [];
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
 		$statement = new Statement( $mainSnak );
@@ -56,7 +56,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new SnakList( array( $snak ) );
+			$snaks = new SnakList( [ $snak ] );
 			$statement->getReferences()->addReference( new Reference( $snaks ) );
 			$statements[] = $statement;
 		}
@@ -96,7 +96,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			if ( $references->isEmpty() ) {
 				$this->makeInvalidRequest(
 					$statement->getGuid(),
-					array( '~=[,,_,,]:3' ),
+					[ '~=[,,_,,]:3' ],
 					'no-such-reference'
 				);
 			} else {
@@ -109,11 +109,11 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeValidRequest( $statementGuid, array $hashes ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => implode( '|', $hashes ),
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -124,11 +124,11 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeInvalidRequest( $statementGuid, array $hashes, $expectedError = null ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => implode( '|', $hashes ),
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -146,11 +146,11 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	 * @dataProvider invalidGuidProvider
 	 */
 	public function testInvalidStatementGuid( $statementGuid, $hash ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => $hash,
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -164,10 +164,10 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		$snak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $snak->getHash();
 
-		return array(
-			array( 'xyz', $hash ),
-			array( 'x$y$z', $hash )
-		);
+		return [
+			[ 'xyz', $hash ],
+			[ 'x$y$z', $hash ]
+		];
 	}
 
 }

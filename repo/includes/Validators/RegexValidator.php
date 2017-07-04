@@ -53,26 +53,26 @@ class RegexValidator implements ValueValidator {
 
 		if ( $match === 0 && !$this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Pattern match failed: ' . $this->expression,
 					null,
 					$this->errorCode,
-					array( $value )
+					[ $value ]
 				),
-			) );
+			] );
 		}
 
 		if ( $match === 1 && $this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Negative pattern matched: ' . $this->expression,
 					null,
 					$this->errorCode,
-					array( $value )
+					[ $value ]
 				),
-			) );
+			] );
 		}
 
 		return Result::newSuccess();

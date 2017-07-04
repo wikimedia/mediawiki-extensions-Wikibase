@@ -54,13 +54,13 @@ class UpdateRepoOnMove extends UpdateRepo {
 	 * @return array
 	 */
 	protected function getJobParameters() {
-		return array(
+		return [
 			'siteId' => $this->siteId,
 			'entityId' => $this->getEntityId()->getSerialization(),
 			'oldTitle' => $this->title->getPrefixedText(),
 			'newTitle' => $this->newTitle->getPrefixedText(),
 			'user' => $this->user->getName()
-		);
+		];
 	}
 
 }

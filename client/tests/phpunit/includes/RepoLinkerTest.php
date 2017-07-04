@@ -20,23 +20,23 @@ use Wikibase\DataModel\Entity\PropertyId;
 class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getRepoSettings() {
-		return array(
-			array(
+		return [
+			[
 				'baseUrl' => '//www.example.com',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
-			),
-			array(
+			],
+			[
 				'baseUrl' => '//example.com/',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
-			),
-			array(
+			],
+			[
 				'baseUrl' => 'http://www.example.com',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
-			)
-		);
+			]
+		];
 	}
 
 	private function getRepoLinkerForSettings( array $settings ) {
@@ -79,14 +79,14 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function getPageUrlProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array( '//www.example.com/wiki/Cat', $settings[0], 'Cat' ),
-			array( 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' ),
-			array( '//www.example.com/wiki/Kategorie:Drei%C3%9Figj%C3%A4hriger_Krieg', $settings[0],
-				'Kategorie:Dreißigjähriger_Krieg' ),
-			array( '//www.example.com/wiki/Why%3F_(American_band)', $settings[0],
-				'Why? (American band)' )
-		);
+		return [
+			[ '//www.example.com/wiki/Cat', $settings[0], 'Cat' ],
+			[ 'http://www.example.com/wiki/Frog', $settings[2], 'Frog' ],
+			[ '//www.example.com/wiki/Kategorie:Drei%C3%9Figj%C3%A4hriger_Krieg', $settings[0],
+				'Kategorie:Dreißigjähriger_Krieg' ],
+			[ '//www.example.com/wiki/Why%3F_(American_band)', $settings[0],
+				'Why? (American band)' ]
+		];
 	}
 
 	/**
@@ -101,9 +101,9 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function getPageUrlInvalidProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array( $settings[0], array() )
-		);
+		return [
+			[ $settings[0], [] ]
+		];
 	}
 
 	/**
@@ -118,25 +118,25 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function formatLinkProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'<a class="extiw" href="//example.com/wiki/Special:Log/delete">delete</a>',
 				$settings[1],
 				'//example.com/wiki/Special:Log/delete',
 				'delete',
-				array()
-			),
-			array(
+				[]
+			],
+			[
 				'<a tabindex="1" class="extiw" href="http://www.example.com/w/index.php'
 					. '?title=Item%3AQ60&amp;diff=prev&amp;oldid=778">diff</a>',
 				$settings[2],
 				'http://www.example.com/w/index.php?title=Item%3AQ60&diff=prev&oldid=778',
 				'diff',
-				array(
+				[
 					'tabindex' => 1
-				)
-			)
-		);
+				]
+			]
+		];
 	}
 
 	/**
@@ -151,26 +151,26 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function buildEntityLinkProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'<a class="extiw wb-entity-link" href="//example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[1],
 				new ItemId( 'Q730' ),
-				array()
-			),
-			array(
+				[]
+			],
+			[
 				'<a class="extiw wb-entity-link" href="http://www.example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
-				array()
-			),
-			array(
+				[]
+			],
+			[
 				'<a class="extiw wb-entity-link kittens" href="http://www.example.com/wiki/Special:EntityPage/Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
-				array( 'kittens' )
-			)
-		);
+				[ 'kittens' ]
+			]
+		];
 	}
 
 	/**
@@ -185,18 +185,18 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function getEntityUrlProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'//example.com/wiki/Special:EntityPage/Q730',
 				$settings[1],
 				new ItemId( 'Q730' )
-			),
-			array(
+			],
+			[
 				'http://www.example.com/wiki/Special:EntityPage/Q1234',
 				$settings[2],
 				new ItemId( 'Q1234' )
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -211,16 +211,16 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function getBaseUrlProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'http://www.example.com',
 				$settings[2]
-			),
-			array(
+			],
+			[
 				'//example.com',
 				$settings[1]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -235,12 +235,12 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function getApiUrlProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'http://www.example.com/w/api.php',
 				$settings[2]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -255,12 +255,12 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function getIndexUrlProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'http://www.example.com/w/index.php',
 				$settings[2]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -275,28 +275,28 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function addQueryParamsProvider() {
 		$settings = $this->getRepoSettings();
 
-		return array(
-			array(
+		return [
+			[
 				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Item%3AQ60',
 				$settings[2],
 				'http://www.example.com/w/api.php',
-				array(
+				[
 					'action' => 'query',
 					'prop' => 'revisions',
 					'titles' => 'Item:Q60'
-				)
-			),
-			array(
+				]
+			],
+			[
 				'http://www.example.com/w/api.php?action=query&prop=revisions&titles=Q60',
 				$settings[2],
 				'http://www.example.com/w/api.php',
-				array(
+				[
 					'action' => 'query',
 					'prop' => 'revisions',
 					'titles' => 'Q60'
-				)
-			)
-		);
+				]
+			]
+		];
 	}
 
 }

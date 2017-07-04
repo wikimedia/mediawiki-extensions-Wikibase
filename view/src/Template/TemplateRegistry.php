@@ -17,7 +17,7 @@ class TemplateRegistry {
 	/**
 	 * @var string[]
 	 */
-	private $templates = array();
+	private $templates = [];
 
 	/**
 	 * @param string[] $templates

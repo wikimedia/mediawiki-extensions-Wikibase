@@ -68,10 +68,10 @@ class EntityContentDiffView extends DifferenceEngine {
 		$langCode = $this->getLanguage()->getCode();
 
 		//TODO: proper injection
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			//TODO: fallback chain
 			ValueFormatter::OPT_LANG => $langCode
-		) );
+		] );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -82,7 +82,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		);
 		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$this->getLanguage(),
-			array() // TODO: populate ids of entities to prefetch
+			[] // TODO: populate ids of entities to prefetch
 		);
 
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
@@ -156,26 +156,26 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
-		$header = $linkRenderer->makeKnownLink( $title, $headerMsg->text(), array(),
-			array( 'oldid' => $rev->getId() ) );
+		$header = $linkRenderer->makeKnownLink( $title, $headerMsg->text(), [],
+			[ 'oldid' => $rev->getId() ] );
 
 		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
 			if ( $title->quickUserCan( 'edit', $user ) && !$rev->isCurrent() ) {
-				$editQuery = array(
+				$editQuery = [
 					'action' => 'edit',
 					'restore' => $rev->getId()
-				);
+				];
 				$msg = $this->msg( 'wikibase-restoreold' )->text();
 				$header .= ' ' . $this->msg( 'parentheses' )->rawParams(
-					$linkRenderer->makeKnownLink( $title, $msg, array(), $editQuery )
+					$linkRenderer->makeKnownLink( $title, $msg, [], $editQuery )
 				)->escaped();
 			}
 
 			if ( $rev->isDeleted( Revision::DELETED_TEXT ) ) {
-				$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
+				$header = Html::rawElement( 'span', [ 'class' => 'history-deleted' ], $header );
 			}
 		} else {
-			$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
+			$header = Html::rawElement( 'span', [ 'class' => 'history-deleted' ], $header );
 		}
 
 		return $header;

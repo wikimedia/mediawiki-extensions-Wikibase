@@ -59,9 +59,9 @@ class UrlValidator implements ValueValidator {
 
 		// See RFC 3986, section-3.1.
 		if ( !preg_match( '/^([-+.a-z\d]+):/i', $url, $matches ) ) {
-			return Result::newError( array(
-				Error::newError( 'Malformed URL, can\'t find scheme name.', null, 'url-scheme-missing', array( $url ) )
-			) );
+			return Result::newError( [
+				Error::newError( 'Malformed URL, can\'t find scheme name.', null, 'url-scheme-missing', [ $url ] )
+			] );
 		}
 
 		// Should we also check for and fail on whitespace in $value?
@@ -73,9 +73,9 @@ class UrlValidator implements ValueValidator {
 		} elseif ( isset( $this->validators['*'] ) ) {
 			$validator = $this->validators['*'];
 		} else {
-			return Result::newError( array(
-				Error::newError( 'Unsupported URL scheme', null, 'bad-url-scheme', array( $scheme ) )
-			) );
+			return Result::newError( [
+				Error::newError( 'Unsupported URL scheme', null, 'bad-url-scheme', [ $scheme ] )
+			] );
 		}
 
 		return $validator->validate( $url );

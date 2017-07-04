@@ -37,8 +37,8 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntitiesWithoutTermFinder(),
-			array( 'item', 'property' ),
-			new StaticContentLanguages( array( 'acceptedlanguage' ) ),
+			[ 'item', 'property' ],
+			new StaticContentLanguages( [ 'acceptedlanguage' ] ),
 			new LanguageNameLookup()
 		);
 	}
@@ -61,10 +61,10 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testRequestParameters() {
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'language' => "''LANGUAGE''",
 			'type' => "''TYPE''",
-		) );
+		] );
 		list( $html, ) = $this->executeSpecialPage( '', $request );
 
 		$this->assertContains( '&#39;&#39;LANGUAGE&#39;&#39;', $html );

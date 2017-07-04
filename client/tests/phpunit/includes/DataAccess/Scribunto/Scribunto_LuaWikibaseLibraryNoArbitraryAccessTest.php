@@ -20,9 +20,9 @@ class Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest extends Scribunto_LuaWik
 	protected static $moduleName = 'LuaWikibaseLibraryNoArbitraryAccessTests';
 
 	protected function getTestModules() {
-		return parent::getTestModules() + array(
+		return parent::getTestModules() + [
 			'LuaWikibaseLibraryNoArbitraryAccessTests' => __DIR__ . '/LuaWikibaseLibraryNoArbitraryAccessTests.lua',
-		);
+		];
 	}
 
 	/**

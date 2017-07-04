@@ -40,7 +40,7 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 	/**
 	 * @var EntityId[] Associative array mapping entity id serializations to EntityId objects.
 	 */
-	private $entityIds = array();
+	private $entityIds = [];
 
 	/**
 	 * @param EntityTitleLookup $entityTitleLookup

@@ -92,9 +92,9 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGetUsagesForPage() {
-		$links = $this->getSiteLinkLookup( array(
+		$links = $this->getSiteLinkLookup( [
 			'23' => new ItemId( 'Q23' ),
-		) );
+		] );
 
 		$titleFactory = $this->getTitleFactory();
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
@@ -112,18 +112,18 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$q42 = new ItemId( 'Q42' );
 		$p11 = new PropertyId( 'P11' );
 
-		$links = $this->getSiteLinkLookup( array(
+		$links = $this->getSiteLinkLookup( [
 			'23' => $q23,
-		) );
+		] );
 
 		$titleFactory = $this->getTitleFactory();
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
-		$actual = $lookup->getPagesUsing( array( $q42, $p11 ) );
+		$actual = $lookup->getPagesUsing( [ $q42, $p11 ] );
 		$this->assertInstanceOf( Traversable::class, $actual );
 		$this->assertCount( 0, $actual );
 
-		$actual = $lookup->getPagesUsing( array( $q23 ), array( EntityUsage::OTHER_USAGE ) );
+		$actual = $lookup->getPagesUsing( [ $q23 ], [ EntityUsage::OTHER_USAGE ] );
 		$this->assertInstanceOf( Traversable::class, $actual );
 		$this->assertContainsOnlyInstancesOf( PageEntityUsages::class, $actual );
 		$this->assertCount( 1, $actual );
@@ -141,7 +141,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$this->assertEquals( EntityUsage::ALL_USAGE, $usage->getAspect() );
 		$this->assertEquals( $q23, $usage->getEntityId() );
 
-		$actual = $lookup->getPagesUsing( array( $q42, $q23, $p11 ) );
+		$actual = $lookup->getPagesUsing( [ $q42, $q23, $p11 ] );
 		$this->assertInstanceOf( Traversable::class, $actual );
 		$this->assertContainsOnlyInstancesOf( PageEntityUsages::class, $actual );
 		$this->assertCount( 1, $actual );
@@ -164,24 +164,24 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$q42 = new ItemId( 'Q42' );
 		$p11 = new PropertyId( 'P11' );
 
-		$links = $this->getSiteLinkLookup( array(
+		$links = $this->getSiteLinkLookup( [
 			'23' => $q23,
-		) );
+		] );
 
 		$titleFactory = $this->getTitleFactory();
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
-		$actual = $lookup->getUnusedEntities( array() );
+		$actual = $lookup->getUnusedEntities( [] );
 		$this->assertEmpty( $actual );
 
-		$actual = $lookup->getUnusedEntities( array( $q23 ) );
+		$actual = $lookup->getUnusedEntities( [ $q23 ] );
 		$this->assertEmpty( $actual );
 
-		$actual = $lookup->getUnusedEntities( array( $q42, $q23 ) );
+		$actual = $lookup->getUnusedEntities( [ $q42, $q23 ] );
 		$this->assertCount( 1, $actual );
 		$this->assertEquals( $q42, $actual[0] );
 
-		$actual = $lookup->getUnusedEntities( array( $q23, $p11 ) );
+		$actual = $lookup->getUnusedEntities( [ $q23, $p11 ] );
 		$this->assertCount( 1, $actual );
 		$this->assertEquals( $p11, $actual[0] );
 	}
@@ -190,15 +190,15 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$itemId = new ItemId( 'Q23' );
 
 		$links = $this->getSiteLinkLookup(
-			array(
+			[
 				'randomkitten2u8!kgxhkl4v3' => $itemId
-			)
+			]
 		);
 
 		$titleFactory = new TitleFactory();
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
-		$usages = $lookup->getPagesUsing( array( $itemId ), array() );
+		$usages = $lookup->getPagesUsing( [ $itemId ], [] );
 
 		$this->assertInstanceOf( Traversable::class, $usages );
 		$this->assertCount( 0, $usages );

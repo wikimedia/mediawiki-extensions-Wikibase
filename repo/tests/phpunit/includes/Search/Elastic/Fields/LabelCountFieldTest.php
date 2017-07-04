@@ -22,10 +22,10 @@ class LabelCountFieldTest extends WikibaseNumericFieldTest {
 		$item = new Item();
 		$item->setLabel( 'es', 'Gato' );
 
-		return array(
-			array( 1, $item ),
-			array( 0, Property::newFromType( 'string' ) )
-		);
+		return [
+			[ 1, $item ],
+			[ 0, Property::newFromType( 'string' ) ]
+		];
 	}
 
 	/**

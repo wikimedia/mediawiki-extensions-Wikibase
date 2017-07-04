@@ -57,25 +57,25 @@ class StringLengthValidator implements ValueValidator {
 
 		if ( $length < $this->minLength ) {
 			// XXX: having to provide an array is quite inconvenient
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Too short, minimum length is ' . $this->minLength,
 					null,
 					'too-short',
-					array( $this->minLength, $value )
+					[ $this->minLength, $value ]
 				),
-			) );
+			] );
 		}
 
 		if ( $length > $this->maxLength ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Too long, maximum length is ' . $this->maxLength,
 					null,
 					'too-long',
-					array( $this->maxLength, $this->truncateValue( $value ) )
+					[ $this->maxLength, $this->truncateValue( $value ) ]
 				),
-			) );
+			] );
 		}
 
 		return Result::newSuccess();

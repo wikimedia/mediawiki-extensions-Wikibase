@@ -92,7 +92,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
 		$html = $title->getFullText();
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
@@ -132,24 +132,24 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
 		$titleText = $title->getFullText();
 		$html = $titleText;
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
-		$this->assertEquals( array(), $customAttribs );
+		$this->assertEquals( [], $customAttribs );
 	}
 
 	public function overrideSpecialNewEntityLinkProvider() {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$linkTitles = array();
+		$linkTitles = [];
 
 		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {
 			$entityHandler = $entityContentFactory->getContentHandlerForType( $entityType );
 			$specialPage = $entityHandler->getSpecialPageForCreation();
 
 			if ( $specialPage !== null ) {
-				$linkTitles[] = array( $specialPage );
+				$linkTitles[] = [ $specialPage ];
 			}
 		}
 
@@ -166,7 +166,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$title = Title::makeTitle( NS_MAIN, $linkTitle );
 		$html = $title->getFullText();
 		$context = $this->newContext();
-		$attribs = array();
+		$attribs = [];
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $context );
 
@@ -191,13 +191,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = $this->newContext();
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
-		$this->assertEquals( array(), $customAttribs );
+		$this->assertEquals( [], $customAttribs );
 	}
 
 	public function testDoOnLinkBegin_unknownEntityTitle() {
@@ -206,13 +206,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$title = $this->newTitle( self::ITEM_DELETED, false );
 		$titleText = $title->getFullText();
 		$html = $titleText;
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = $this->newContext();
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
-		$this->assertEquals( array(), $customAttribs );
+		$this->assertEquals( [], $customAttribs );
 	}
 
 	public function testDoOnLinkBegin_itemHasNoLabel() {
@@ -220,7 +220,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$title = $this->newTitle( self::ITEM_WITHOUT_LABEL );
 		$html = $title->getFullText();
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = $this->newContext();
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
@@ -238,7 +238,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$title = $this->newTitle( self::ITEM_LABEL_NO_DESCRIPTION );
 		$html = $title->getFullText();
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = $this->newContext();
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
@@ -402,10 +402,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntityNamespaceLookup() {
-		$entityNamespaces = array(
+		$entityNamespaces = [
 			'item' => 0,
 			'property' => 102
-		);
+		];
 
 		return new EntityNamespaceLookup( $entityNamespaces );
 	}
@@ -423,11 +423,11 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	private function getLinkBeginHookHandler() {
-		$languageFallback = new LanguageFallbackChain( array(
+		$languageFallback = new LanguageFallbackChain( [
 			LanguageWithConversion::factory( 'de-ch' ),
 			LanguageWithConversion::factory( 'de' ),
 			LanguageWithConversion::factory( 'en' ),
-		) );
+		] );
 
 		return new LinkBeginHookHandler(
 			$this->getEntityIdLookup(),

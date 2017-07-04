@@ -41,10 +41,10 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	 * @return LanguageFallbackLabelDescriptionLookupFactory
 	 */
 	private function getLabelDescriptionLookupFactory() {
-		$itemIds = array(
+		$itemIds = [
 			new ItemId( 'Q123' ),
 			new ItemId( 'Q456' )
-		);
+		];
 
 		$labelDescriptionLookupFactory = $this->getMockBuilder(
 				LanguageFallbackLabelDescriptionLookupFactory::class

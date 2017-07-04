@@ -26,38 +26,38 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 	public function provideConstructor_failure() {
 		$pageId = 17;
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
-		$usages = array( $usageQ5X->asArray() );
+		$usages = [ $usageQ5X->asArray() ];
 
-		return array(
-			'empty' => array( array() ),
+		return [
+			'empty' => [ [] ],
 
-			'$pageId is missing' => array( array(
+			'$pageId is missing' => [ [
 				'usages' => $usages,
-			) ),
-			'$pageId is not an int' => array( array(
+			] ],
+			'$pageId is not an int' => [ [
 				'pageId' => 'foo',
 				'usages' => $usages,
-			) ),
-			'$pageId is zero' => array( array(
+			] ],
+			'$pageId is zero' => [ [
 				'pageId' => 0,
 				'usages' => $usages,
-			) ),
-			'$usages is missing' => array( array(
+			] ],
+			'$usages is missing' => [ [
 				'pageId' => $pageId,
-			) ),
-			'$usages is not an array' => array( array(
+			] ],
+			'$usages is not an array' => [ [
 				'pageId' => $pageId,
 				'usages' => 'xxx',
-			) ),
-			'$usages is empty' => array( array(
+			] ],
+			'$usages is empty' => [ [
 				'pageId' => $pageId,
-				'usages' => array(),
-			) ),
-			'$usages contains crap' => array( array(
+				'usages' => [],
+			] ],
+			'$usages contains crap' => [ [
 				'pageId' => $pageId,
-				'usages' => array( 1, 2, 3 ),
-			) ),
-		);
+				'usages' => [ 1, 2, 3 ],
+			] ],
+		];
 	}
 
 	/**
@@ -72,22 +72,22 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 	public function testDeduplicationInfo() {
 		$usage = new EntityUsage( new ItemId( 'Q100' ), 'X' );
 
-		$params = array(
+		$params = [
 			'pageId' => 18,
-			'usages' => array( $usage->asArray() )
-		);
+			'usages' => [ $usage->asArray() ]
+		];
 
 		$title = Title::makeTitle( NS_MAIN, 'Bar' );
 
-		$expected = array(
+		$expected = [
 			'type' => 'wikibase-addUsagesForPage',
 			'namespace' => NS_MAIN,
 			'title' => 'Bar',
-			'params' => array(
+			'params' => [
 				'pageId' => 18,
-				'usages' => array( $usage->asArray() )
-			),
-		);
+				'usages' => [ $usage->asArray() ]
+			],
+		];
 
 		$job = new AddUsagesForPageJob( $title, $params );
 
@@ -96,10 +96,10 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 
 	public function testRun() {
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
-		$params = array(
+		$params = [
 			'pageId' => 17,
-			'usages' => array( $usageQ5X->asArray() )
-		);
+			'usages' => [ $usageQ5X->asArray() ]
+		];
 
 		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
 			->disableOriginalConstructor()
@@ -109,7 +109,7 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 			->method( 'addUsagesForPage' )
 			->with(
 				$params['pageId'],
-				array( $usageQ5X )
+				[ $usageQ5X ]
 			);
 
 		$job = new AddUsagesForPageJob( $this->getMock( Title::class ), $params );
@@ -126,14 +126,14 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 			->method( 'getArticleId' )
 			->will( $this->returnValue( 17 ) );
 
-		$usages = array( $usageQ5X );
+		$usages = [ $usageQ5X ];
 
 		$spec = AddUsagesForPageJob::newSpec( $title, $usages );
 
-		$expected = array(
+		$expected = [
 			'pageId' => 17,
-			'usages' => array( $usageQ5X->asArray() ),
-		);
+			'usages' => [ $usageQ5X->asArray() ],
+		];
 
 		$this->assertEquals( 'wikibase-addUsagesForPage', $spec->getType() );
 		$this->assertSame( $title, $spec->getTitle() );

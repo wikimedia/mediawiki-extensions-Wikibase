@@ -31,8 +31,8 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 
 		$dbw = wfGetDB( DB_MASTER ); // writes to dummy tables
 
-		$dbw->delete( 'wb_changes', array( "1" ) );
-		$dbw->delete( 'wb_changes_dispatch', array( "1" ) );
+		$dbw->delete( 'wb_changes', [ "1" ] );
+		$dbw->delete( 'wb_changes_dispatch', [ "1" ] );
 
 		foreach ( $changes as $row ) {
 			if ( $row === null ) {
@@ -74,91 +74,91 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	}
 
 	private function getTestData() {
-		return array(
-			'states' => array(
-				array(
+		return [
+			'states' => [
+				[
 					'chd_site' => 'xywiki',
 					'chd_db' => 'xywiki',
 					'chd_seen' => 1,
 					'chd_touched' => '20130303000110',
 					'chd_lock' => null,
 					'chd_disabled' => 1,
-				),
-				array(
+				],
+				[
 					'chd_site' => 'enwiki',
 					'chd_db' => 'enwiki',
 					'chd_seen' => 3,
 					'chd_touched' => '20130303000330',
 					'chd_lock' => null,
 					'chd_disabled' => 0,
-				),
-				array(
+				],
+				[
 					'chd_site' => 'dewiki',
 					'chd_db' => 'dewiki',
 					'chd_seen' => 2,
 					'chd_touched' => '20130303000220',
 					'chd_lock' => 'LOCK',
 					'chd_disabled' => 0,
-				),
-				array(
+				],
+				[
 					'chd_site' => 'frwiki',
 					'chd_db' => 'frwiki',
 					'chd_seen' => 1,
 					'chd_touched' => '20130303000110',
 					'chd_lock' => null,
 					'chd_disabled' => 0,
-				),
-			),
-			'changes' => array(
-				2 => array(
+				],
+			],
+			'changes' => [
+				2 => [
 					'change_id' => 2,
 					'change_time' => '20130303000200',
 					'change_type' => 'test',
 					'change_object_id' => 'test',
-				),
-				3 => array(
+				],
+				3 => [
 					'change_id' => 3,
 					'change_time' => '20130303000300',
 					'change_type' => 'test',
 					'change_object_id' => 'test',
-				),
-				1 => array(
+				],
+				1 => [
 					'change_id' => 1,
 					'change_time' => '20130303000100',
 					'change_type' => 'test',
 					'change_object_id' => 'test',
-				),
-			),
+				],
+			],
 
 			'now' => '20130303000400',
 
-			'expected' => array(
-				'getClientStates' => array(
-					array(
+			'expected' => [
+				'getClientStates' => [
+					[
 						'chd_site' => 'frwiki',
 						'chd_seen' => 1,
 						'chd_touched' => '20130303000110',
 						'chd_untouched' => 170,
 						'chd_pending' => 2,
 						'chd_lag' => 170,
-					),
-					array(
+					],
+					[
 						'chd_site' => 'dewiki',
 						'chd_seen' => 2,
 						'chd_touched' => '20130303000220',
 						'chd_untouched' => 100,
 						'chd_pending' => 1,
 						'chd_lag' => 100,
-					),
-					array(
+					],
+					[
 						'chd_site' => 'enwiki',
 						'chd_seen' => 3,
 						'chd_touched' => '20130303000330',
 						'chd_untouched' => 30,
 						'chd_pending' => 0,
 						'chd_lag' => 30,
-					),
-				),
+					],
+				],
 
 				'getClientCount' => 3,
 				'getLockedCount' => 1,
@@ -168,47 +168,47 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 				'getMaxChangeTimestamp' => '20130303000300',
 				'getMinChangeTimestamp' => '20130303000100',
 
-				'getFreshest' => array(
+				'getFreshest' => [
 					'chd_site' => 'enwiki',
 					'chd_seen' => 3,
 					'chd_touched' => '20130303000330',
 					'chd_untouched' => 30,
 					'chd_pending' => 0,
 					'chd_lag' => 30,
-				),
-				'getStalest' => array(
+				],
+				'getStalest' => [
 					'chd_site' => 'frwiki',
 					'chd_seen' => 1,
 					'chd_touched' => '20130303000110',
 					'chd_untouched' => 170,
 					'chd_pending' => 2,
 					'chd_lag' => 170,
-				),
-				'getMedian' => array(
+				],
+				'getMedian' => [
 					'chd_site' => 'frwiki',
 					'chd_seen' => 1,
 					'chd_touched' => '20130303000110',
 					'chd_untouched' => 100,
 					'chd_pending' => 1,
 					'chd_lag' => 170,
-				),
-				'getAverage' => array(
+				],
+				'getAverage' => [
 					'chd_untouched' => 100,
 					'chd_pending' => 1,
 					'chd_lag' => 170,
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	public function provideGetClientStates() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getClientStates'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -262,11 +262,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetClientCount() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getClientCount'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -282,11 +282,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetLockedCount() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getLockedCount'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -302,11 +302,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetMinChangeId() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getMinChangeId'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -322,11 +322,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetMaxChangeId() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getMaxChangeId'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -342,11 +342,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetMinChangeTimestamp() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getMinChangeTimestamp'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -362,11 +362,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetMaxChangeTimestamp() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getMaxChangeTimestamp'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -382,11 +382,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetFreshest() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getFreshest'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -402,11 +402,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetStalest() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getStalest'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -422,11 +422,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetAverage() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getAverage'],
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -442,11 +442,11 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	public function provideGetMedian() {
 		$data = $this->getTestData();
 
-		return array(
-			array(
+		return [
+			[
 				$data['expected']['getMedian'],
-			)
-		);
+			]
+		];
 	}
 
 	/**

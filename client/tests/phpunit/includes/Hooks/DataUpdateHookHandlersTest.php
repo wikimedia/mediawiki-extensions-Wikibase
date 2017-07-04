@@ -100,26 +100,26 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 				return $usage->asArray();
 			}, $expectedUsages );
 
-			$params = array(
-				'jobsByWiki' => array(
-					wfWikiID() => array(
-						array(
+			$params = [
+				'jobsByWiki' => [
+					wfWikiID() => [
+						[
 							'type' => 'wikibase-addUsagesForPage',
-							'params' => array(
+							'params' => [
 								'pageId' => $title->getArticleID(),
 								'usages' => $expectedUsageArray
-							),
-							'opts' => array(
+							],
+							'opts' => [
 								'removeDuplicates' => true
-							),
-							'title' => array(
+							],
+							'title' => [
 								'ns' => NS_MAIN,
 								'key' => 'Oxygen'
-							)
-						)
-					)
-				)
-			);
+							]
+						]
+					]
+				]
+			];
 
 			$jobScheduler->expects( $this->once() )
 				->method( 'lazyPush' )
@@ -239,19 +239,19 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function provideEntityUsages() {
-		return array(
-			'usage' => array(
-				array(
+		return [
+			'usage' => [
+				[
 					'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
 					'Q2#T' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::TITLE_USAGE ),
 					'Q2#L' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::LABEL_USAGE ),
-				),
-			),
+				],
+			],
 
-			'no usage' => array(
-				array(),
-			),
-		);
+			'no usage' => [
+				[],
+			],
+		];
 	}
 
 	/**

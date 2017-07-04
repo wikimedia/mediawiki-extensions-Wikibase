@@ -43,7 +43,7 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
-			array( $this, 'report' )
+			[ $this, 'report' ]
 		);
 
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );

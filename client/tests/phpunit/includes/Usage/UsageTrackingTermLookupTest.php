@@ -62,24 +62,24 @@ class UsageTrackingTermLookupTest extends \MediaWikiTestCase {
 
 	public function testGetLabels() {
 		$q1 = new ItemId( 'Q1' );
-		$mockLookup = $this->getMockTermLookup( 'getLabels', $q1, array( 'en', 'de' ) );
+		$mockLookup = $this->getMockTermLookup( 'getLabels', $q1, [ 'en', 'de' ] );
 
 		$acc = new HashUsageAccumulator();
 
 		$lookup = new UsageTrackingTermLookup( $mockLookup, $acc );
-		$lookup->getLabels( $q1, array( 'en', 'de' ) );
+		$lookup->getLabels( $q1, [ 'en', 'de' ] );
 
 		$this->assertCount( 2, $acc->getUsages() );
 	}
 
 	public function testGetDescriptions() {
 		$q1 = new ItemId( 'Q1' );
-		$mockLookup = $this->getMockTermLookup( 'getDescriptions', $q1, array( 'en', 'de' ) );
+		$mockLookup = $this->getMockTermLookup( 'getDescriptions', $q1, [ 'en', 'de' ] );
 
 		$acc = new HashUsageAccumulator();
 
 		$lookup = new UsageTrackingTermLookup( $mockLookup, $acc );
-		$lookup->getDescriptions( $q1, array( 'en', 'de' ) );
+		$lookup->getDescriptions( $q1, [ 'en', 'de' ] );
 
 		$this->assertCount( 0, $acc->getUsages() );
 	}

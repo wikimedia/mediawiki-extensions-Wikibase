@@ -34,10 +34,10 @@ class ParserOutputJsConfigBuilder {
 			$entityId = $entityId->getSerialization();
 		}
 
-		$configVars = array(
+		$configVars = [
 			'wbEntityId' => $entityId,
 			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity ) )
-		);
+		];
 
 		return $configVars;
 	}

@@ -137,7 +137,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$request = $this->getRequest();
 		// explode the sub page from the format Special:SetSitelink/q123/enwiki
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 
 		// check if id belongs to an item
 		if ( $this->entityRevision !== null
@@ -166,7 +166,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->badges = array_intersect(
 			array_keys( $this->badgeItems ),
-			$request->getArray( 'badges', array() )
+			$request->getArray( 'badges', [] )
 		);
 	}
 
@@ -244,10 +244,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
 		if ( empty( $this->badges ) ) {
-			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
+			$this->badges = $this->site === null ? [] : $this->getBadges( $entity, $this->site );
 		}
-		$pageinput = array(
-			'page' => array(
+		$pageinput = [
+			'page' => [
 				'name' => 'page',
 				'label-message' => 'wikibase-setsitelink-label',
 				'type' => 'text',
@@ -255,8 +255,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'nodata' => true,
 				'cssclass' => 'wb-input wb-input-text',
 				'id' => 'wb-setsitelink-page'
-			)
-		);
+			]
+		];
 
 		if ( !empty( $this->badgeItems ) ) {
 			$pageinput['badges'] = $this->getMultiSelectForBadges();
@@ -271,23 +271,23 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
 				'[' . $site->getPageUrl( '' ) . ' ' . $this->site . ']'
 			)->parse();
-			$formDescriptor = array(
-				'site' => array(
+			$formDescriptor = [
+				'site' => [
 					'name' => 'site',
 					'type' => 'hidden',
 					'default' => $this->site
-				),
-				'id' => array(
+				],
+				'id' => [
 					'name' => 'id',
 					'type' => 'hidden',
 					'default' => $this->entityRevision->getEntity()->getId()->getSerialization()
-				),
-				'remove' => array(
+				],
+				'remove' => [
 					'name' => 'remove',
 					'type' => 'hidden',
 					'default' => 'remove'
-				)
-			);
+				]
+			];
 		} else {
 			$intro = $this->msg( 'wikibase-setsitelink-intro' )->text();
 
@@ -296,19 +296,19 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 
 			$formDescriptor = $this->getFormElements( $entity );
-			$formDescriptor['site'] = array(
+			$formDescriptor['site'] = [
 				'name' => 'site',
 				'label-message' => 'wikibase-setsitelink-site',
 				'type' => 'text',
 				'default' => $this->getRequest()->getVal( 'site' ) ?: $this->site,
 				'cssclass' => 'wb-input',
 				'id' => 'wb-setsitelink-site'
-			);
+			];
 		}
 		$formDescriptor = array_merge( $formDescriptor, $pageinput );
 
 		return HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
-			->setHeaderText( Html::rawElement( 'p', array(), $intro ) );
+			->setHeaderText( Html::rawElement( 'p', [], $intro ) );
 	}
 
 	/**
@@ -317,8 +317,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return array
 	 */
 	private function getMultiSelectForBadges() {
-		$options = array();
-		$default = array();
+		$options = [];
+		$default = [];
 
 		/** @var ItemId[] $badgeItemIds */
 		$badgeItemIds = array_map(
@@ -345,13 +345,13 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 		}
 
-		return array(
+		return [
 			'name' => 'badges',
 			'type' => 'multiselect',
 			'label-message' => 'wikibase-setsitelink-badges',
 			'options' => $options,
 			'default' => $default
-		);
+		];
 	}
 
 	/**
@@ -382,7 +382,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	private function getBadges( Item $item = null, $siteId ) {
 		if ( $item === null || !$item->getSiteLinkList()->hasLinkWithSiteId( $siteId ) ) {
-			return array();
+			return [];
 		}
 
 		return array_map(
@@ -402,7 +402,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return ItemId[]|boolean
 	 */
 	private function parseBadges( array $badges, Status $status ) {
-		$badgesObjects = array();
+		$badgesObjects = [];
 
 		foreach ( $badges as $badge ) {
 			try {

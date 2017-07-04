@@ -82,10 +82,10 @@ class ClaimDiffer {
 		}
 
 		$oldQualifiers = $oldStatement === null
-			? array()
+			? []
 			: iterator_to_array( $oldStatement->getQualifiers() );
 		$newQualifiers = $newStatement === null
-			? array()
+			? []
 			: iterator_to_array( $newStatement->getQualifiers() );
 
 		if ( $oldQualifiers === $newQualifiers ) {
@@ -130,10 +130,10 @@ class ClaimDiffer {
 		}
 
 		$oldReferences = $oldStatement === null
-			? array()
+			? []
 			: iterator_to_array( $oldStatement->getReferences() );
 		$newReferences = $newStatement === null
-			? array()
+			? []
 			: iterator_to_array( $newStatement->getReferences() );
 
 		if ( $oldReferences === $newReferences ) {

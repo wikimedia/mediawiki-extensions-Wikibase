@@ -20,36 +20,36 @@ use Wikibase\Repo\Content\EntityContentDiff;
 class EntityContentDiffTest extends \MediaWikiTestCase {
 
 	public function provideConstruction() {
-		return array(
-			'empty' => array(
+		return [
+			'empty' => [
 				new EntityDiff(),
 				new Diff()
-			),
-			'entity diff' => array(
-				new EntityDiff( array(
-					'label' => new Diff( array(
+			],
+			'entity diff' => [
+				new EntityDiff( [
+					'label' => new Diff( [
 						'en' => new DiffOpAdd( 'Spam' ),
-					) )
-				) ),
+					] )
+				] ),
 				new Diff()
-			),
-			'redirect diff' => array(
+			],
+			'redirect diff' => [
 				new EntityDiff(),
-				new Diff( array(
+				new Diff( [
 					'redirect' => new DiffOpAdd( 'Spam' ),
-				) )
-			),
-			'entity and redirect diff' => array(
-				new EntityDiff( array(
-					'label' => new Diff( array(
+				] )
+			],
+			'entity and redirect diff' => [
+				new EntityDiff( [
+					'label' => new Diff( [
 							'en' => new DiffOpAdd( 'Spam' ),
-						) )
-				) ),
-				new Diff( array(
+						] )
+				] ),
+				new Diff( [
 					'redirect' => new DiffOpRemove( 'Spam' ),
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	/**

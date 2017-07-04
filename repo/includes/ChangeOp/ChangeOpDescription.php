@@ -141,7 +141,7 @@ class ChangeOpDescription extends ChangeOpBase {
 				$entity->getLabels(),
 				$descriptions,
 				$entity->getId(),
-				array( $this->languageCode )
+				[ $this->languageCode ]
 			);
 		}
 

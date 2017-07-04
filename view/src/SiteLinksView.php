@@ -203,7 +203,7 @@ class SiteLinksView {
 		if ( $group === 'special' ) {
 			$groups = $this->specialSiteLinkGroups;
 		} else {
-			$groups = array( $group );
+			$groups = [ $group ];
 		}
 
 		foreach ( $groups as $group ) {
@@ -223,7 +223,7 @@ class SiteLinksView {
 	 * @return array[]
 	 */
 	private function getSiteLinksForTable( SiteList $sites, array $itemSiteLinks ) {
-		$siteLinksForTable = array(); // site links of the currently handled site group
+		$siteLinksForTable = []; // site links of the currently handled site group
 
 		foreach ( $itemSiteLinks as $siteLink ) {
 			if ( !$sites->hasSite( $siteLink->getSiteId() ) ) {
@@ -233,10 +233,10 @@ class SiteLinksView {
 
 			$site = $sites->getSite( $siteLink->getSiteId() );
 
-			$siteLinksForTable[] = array(
+			$siteLinksForTable[] = [
 				'siteLink' => $siteLink,
 				'site' => $site
-			);
+			];
 		}
 
 		// Sort the sitelinks according to their global id

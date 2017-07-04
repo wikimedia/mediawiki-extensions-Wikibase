@@ -31,7 +31,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getEntityInfo( array $entities ) {
 		$entityRevisionLookup = new MockRepository();
-		$ids = array();
+		$ids = [];
 
 		foreach ( $entities as $entity ) {
 			$entityRevisionLookup->putEntity( $entity );
@@ -77,25 +77,25 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function asArrayProvider() {
-		return array(
-			'empty' => array( array() ),
-			'labels' => array( array(
-				'Q11' => array(
+		return [
+			'empty' => [ [] ],
+			'labels' => [ [
+				'Q11' => [
 					'id' => 'Q11',
 					'type' => 'item',
-					'labels' => array(
-						'de' => array(
+					'labels' => [
+						'de' => [
 							'language' => 'de',
 							'value' => 'London'
-						),
-						'la' => array(
+						],
+						'la' => [
 							'language' => 'la',
 							'value' => 'Londinium'
-						),
-					)
-				)
-			) ),
-		);
+						],
+					]
+				]
+			] ],
+		];
 	}
 
 	/**
@@ -109,10 +109,10 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testHasEntityInfo() {
-		$info = $this->getEntityInfo( array(
+		$info = $this->getEntityInfo( [
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
-		) );
+		] );
 
 		$this->assertTrue( $info->hasEntityInfo( new ItemId( 'Q11' ) ) );
 		$this->assertTrue( $info->hasEntityInfo( new ItemId( 'Q33' ) ) );
@@ -120,10 +120,10 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetEntityInfo() {
-		$info = $this->getEntityInfo( array(
+		$info = $this->getEntityInfo( [
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
-		) );
+		] );
 
 		$record = $info->getEntityInfo( new ItemId( 'Q11' ) );
 		$this->assertInternalType( 'array', $record );
@@ -139,10 +139,10 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLabel() {
-		$info = $this->getEntityInfo( array(
+		$info = $this->getEntityInfo( [
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
-		) );
+		] );
 
 		$this->assertEquals( 'London', $info->getLabel( new ItemId( 'Q11' ), 'en' ) );
 		$this->assertEquals( 'Berlin', $info->getLabel( new ItemId( 'Q33' ), 'en' ) );
@@ -150,23 +150,23 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLabels() {
-		$info = $this->getEntityInfo( array(
+		$info = $this->getEntityInfo( [
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
 			$this->makeItemWithDescription( 'Q66', 'Barcelona' ),
-		) );
+		] );
 
-		$this->assertEquals( array( 'en' => 'London' ), $info->getLabels( new ItemId( 'Q11' ) ) );
-		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getLabels( new ItemId( 'Q33' ) ) );
-		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q33' ), array( 'de' ) ) );
-		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q66' ) ) );
+		$this->assertEquals( [ 'en' => 'London' ], $info->getLabels( new ItemId( 'Q11' ) ) );
+		$this->assertEquals( [ 'en' => 'Berlin' ], $info->getLabels( new ItemId( 'Q33' ) ) );
+		$this->assertEquals( [], $info->getLabels( new ItemId( 'Q33' ), [ 'de' ] ) );
+		$this->assertEquals( [], $info->getLabels( new ItemId( 'Q66' ) ) );
 	}
 
 	public function testGetDescription() {
-		$info = $this->getEntityInfo( array(
+		$info = $this->getEntityInfo( [
 			$this->makeItemWithDescription( 'Q11', 'London' ),
 			$this->makeItemWithDescription( 'Q33', 'Berlin' ),
-		) );
+		] );
 
 		$this->assertEquals( 'London', $info->getDescription( new ItemId( 'Q11' ), 'en' ) );
 		$this->assertEquals( 'Berlin', $info->getDescription( new ItemId( 'Q33' ), 'en' ) );
@@ -174,30 +174,30 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDescriptions() {
-		$info = $this->getEntityInfo( array(
+		$info = $this->getEntityInfo( [
 			$this->makeItemWithDescription( 'Q11', 'London' ),
 			$this->makeItemWithDescription( 'Q33', 'Berlin' ),
 			$this->makeItemWithLabel( 'Q66', 'Barcelona' ),
-		) );
+		] );
 
-		$this->assertEquals( array( 'en' => 'London' ), $info->getDescriptions( new ItemId( 'Q11' ) ) );
-		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getDescriptions( new ItemId( 'Q33' ) ) );
-		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q33' ), array( 'de' ) ) );
-		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q66' ) ) );
+		$this->assertEquals( [ 'en' => 'London' ], $info->getDescriptions( new ItemId( 'Q11' ) ) );
+		$this->assertEquals( [ 'en' => 'Berlin' ], $info->getDescriptions( new ItemId( 'Q33' ) ) );
+		$this->assertEquals( [], $info->getDescriptions( new ItemId( 'Q33' ), [ 'de' ] ) );
+		$this->assertEquals( [], $info->getDescriptions( new ItemId( 'Q66' ) ) );
 	}
 
 	public function provideBlankInfo() {
-		return array(
-			'unknown item' => array( array() ),
-			'unknown terms' => array(
-				array(
-					'Q99' => array(
+		return [
+			'unknown item' => [ [] ],
+			'unknown terms' => [
+				[
+					'Q99' => [
 						'id' => 'Q99',
 						'type' => 'item',
-					)
-				)
-			),
-		);
+					]
+				]
+			],
+		];
 	}
 
 	/**
@@ -237,20 +237,20 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArrayProvider() {
-		return array(
-			'value incomplete' => array(
-				array( 'Q99' => array( 'labels' => array( 'en' => array() ) ) )
-			),
-			'value invalid' => array(
-				array( 'Q99' => array( 'labels' => array( 'en' => 'not an array' ) ) )
-			),
-			'labels invalid' => array(
-				array( 'Q99' => array( 'labels' => 'not an array' ) )
-			),
-			'entity invalid' => array(
-				array( 'Q99' => 'not an array' )
-			),
-		);
+		return [
+			'value incomplete' => [
+				[ 'Q99' => [ 'labels' => [ 'en' => [] ] ] ]
+			],
+			'value invalid' => [
+				[ 'Q99' => [ 'labels' => [ 'en' => 'not an array' ] ] ]
+			],
+			'labels invalid' => [
+				[ 'Q99' => [ 'labels' => 'not an array' ] ]
+			],
+			'entity invalid' => [
+				[ 'Q99' => 'not an array' ]
+			],
+		];
 	}
 
 	/**

@@ -67,22 +67,22 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		$item->getStatements()->addStatement( $statement2 );
 		$item->getStatements()->addStatement( $statement3 );
 
-		$snaksNormal = array(
+		$snaksNormal = [
 			new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
 			new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
-		);
-		$snakDeprecated = array( new PropertyValueSnak( $propertyId, new StringValue( 'three kittens!!!' ) ) );
+		];
+		$snakDeprecated = [ new PropertyValueSnak( $propertyId, new StringValue( 'three kittens!!!' ) ) ];
 
-		return array(
-			array( $snaksNormal, $item, new PropertyId( 'P1337' ) ),
-			array( array(), $item, new PropertyId( 'P90001' ) ),
-			array(
+		return [
+			[ $snaksNormal, $item, new PropertyId( 'P1337' ) ],
+			[ [], $item, new PropertyId( 'P90001' ) ],
+			[
 				$snakDeprecated,
 				$item,
 				new PropertyId( 'P1337' ),
-				array( Statement::RANK_DEPRECATED )
-			),
-		);
+				[ Statement::RANK_DEPRECATED ]
+			],
+		];
 	}
 
 }

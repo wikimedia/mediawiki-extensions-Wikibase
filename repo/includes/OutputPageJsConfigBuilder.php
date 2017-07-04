@@ -68,12 +68,12 @@ class OutputPageJsConfigBuilder {
 		// non-translated message
 		$versionMessage = new Message( 'wikibase-shortcopyrightwarning-version' );
 
-		return array(
-			'wbCopyright' => array(
+		return [
+			'wbCopyright' => [
 				'version' => $versionMessage->parse(),
 				'messageHtml' => $copyrightMessage->inLanguage( $language )->parse()
-			)
-		);
+			]
+		];
 	}
 
 	/**

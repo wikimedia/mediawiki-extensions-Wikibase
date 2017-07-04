@@ -69,7 +69,7 @@ class SerializationModifier {
 	 * @return array
 	 */
 	private function getElementsMatchingPath( array $array, array $pathElements, $currentPath = '' ) {
-		$elements = array();
+		$elements = [];
 
 		if ( empty( $pathElements ) ) {
 			$elements[$currentPath] = $array;
@@ -100,7 +100,7 @@ class SerializationModifier {
 	 * @return array
 	 */
 	private function getElementsForAllKeys( array $array, array $pathElements, $currentPath ) {
-		$elements = array();
+		$elements = [];
 
 		foreach ( array_keys( $array ) as $arrayKey ) {
 			$elements = array_merge(
@@ -121,7 +121,7 @@ class SerializationModifier {
 	 * @return array
 	 */
 	private function getElementsForKey( array $array, array $pathElements, $currentPath, $key ) {
-		$elements = array();
+		$elements = [];
 
 		if ( isset( $array[$key] ) ) {
 			$thisPath = $this->getJoinedPath( $currentPath, $key );
@@ -161,7 +161,7 @@ class SerializationModifier {
 	 */
 	private function getPathParts( $path ) {
 		if ( $path === null || $path === '' ) {
-			return array();
+			return [];
 		}
 
 		return explode( '/', $path );

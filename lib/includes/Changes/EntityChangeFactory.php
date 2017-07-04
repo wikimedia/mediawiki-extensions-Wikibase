@@ -38,7 +38,7 @@ class EntityChangeFactory {
 	 */
 	public function __construct(
 		EntityDiffer $entityDiffer,
-		array $changeClasses = array()
+		array $changeClasses = []
 	) {
 		$this->entityDiffer = $entityDiffer;
 		$this->changeClasses = $changeClasses;
@@ -51,7 +51,7 @@ class EntityChangeFactory {
 	 *
 	 * @return EntityChange
 	 */
-	public function newForEntity( $action, EntityId $entityId, array $fields = array() ) {
+	public function newForEntity( $action, EntityId $entityId, array $fields = [] ) {
 		$entityType = $entityId->getEntityType();
 
 		if ( isset( $this->changeClasses[ $entityType ] ) ) {

@@ -30,7 +30,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $helper;
 
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->helper = new NTriplesRdfTestHelper(
@@ -63,7 +63,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	private function newBuilder(
 		RdfWriter $writer,
 		$flavor,
-		array &$mentioned = array(),
+		array &$mentioned = [],
 		DedupeBag $dedupe = null
 	) {
 		$vocabulary = $this->getTestData()->getVocabulary();
@@ -133,17 +133,17 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$q7_no_refs = [ 'Q7_statements' ];
 		$q7_refs = [ 'Q7_statements', 'Q7_reference_refs', 'Q7_references' ];
 
-		return array(
-			array( 'Q4', 0, $q4_minimal, array() ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL, $q4_all, $props ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, array() ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, array() ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, array() ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, array() ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, array() ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, array() ),
-		);
+		return [
+			[ 'Q4', 0, $q4_minimal, [] ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL, $q4_all, $props ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ],
+		];
 	}
 
 	/**
@@ -153,7 +153,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$mentioned = array();
+		$mentioned = [];
 		$this->newBuilder( $writer, $flavor, $mentioned )->addEntity( $entity );
 
 		$this->assertTriples( $dataSetNames, $writer );
@@ -161,9 +161,9 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddEntity_seen() {
-		return array(
-			array( 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], array( 'd2412760c57cacd8c8f24d9afde3b20c87161cca' ) ),
-		);
+		return [
+			[ 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], [ 'd2412760c57cacd8c8f24d9afde3b20c87161cca' ] ],
+		];
 	}
 
 	/**
@@ -179,7 +179,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$mentioned = array();
+		$mentioned = [];
 		$this->newBuilder( $writer, RdfProducer::PRODUCE_ALL, $mentioned, $dedupe )
 			->addEntity( $entity );
 
@@ -187,9 +187,9 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddStatements() {
-		return array(
-			array( 'Q4', [ 'Q4_statements', 'Q4_values' ] ),
-		);
+		return [
+			[ 'Q4', [ 'Q4_statements', 'Q4_values' ] ],
+		];
 	}
 
 	/**

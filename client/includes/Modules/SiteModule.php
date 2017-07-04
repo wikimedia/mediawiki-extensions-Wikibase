@@ -33,13 +33,13 @@ class SiteModule extends ResourceLoaderModule {
 		 */
 		$site = $wikibaseClient->getSite();
 
-		$currentSite = array();
+		$currentSite = [];
 		if ( $site ) {
-			$currentSite = array(
+			$currentSite = [
 				'globalSiteId' => $site->getGlobalId(),
 				'languageCode' => $site->getLanguageCode(),
 				'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
-			);
+			];
 		}
 
 		return ResourceLoader::makeConfigSetScript( [ 'wbCurrentSite' => $currentSite ] );

@@ -54,12 +54,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		}
 
 		if ( empty( $labels ) && empty( $aliases ) ) {
-			return array();
+			return [];
 		}
 
 		$termTypes = ( $aliases === null )
-			? array( TermIndexEntry::TYPE_LABEL )
-			: array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS );
+			? [ TermIndexEntry::TYPE_LABEL ]
+			: [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ];
 
 		$termTexts = ( $aliases === null )
 			? $labels
@@ -94,7 +94,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		$descriptions = array_intersect_key( $descriptions, $labels );
 
 		if ( empty( $descriptions ) || empty( $labels ) ) {
-			return array();
+			return [];
 		}
 
 		$labelConflicts = $this->getLabelConflicts(
@@ -103,10 +103,10 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		);
 
 		if ( empty( $labelConflicts ) ) {
-			return array();
+			return [];
 		}
 
-		$templates = $this->makeTemplateTerms( $descriptions, array( TermIndexEntry::TYPE_DESCRIPTION ) );
+		$templates = $this->makeTemplateTerms( $descriptions, [ TermIndexEntry::TYPE_DESCRIPTION ] );
 
 		$descriptionConflicts = $this->getMatchingTerms(
 			$templates,
@@ -126,18 +126,18 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @return TermIndexSearchCriteria[]
 	 */
 	private function makeTemplateTerms( array $textsByLanguage, array $types ) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $textsByLanguage as $lang => $texts ) {
 			$texts = (array)$texts;
 
 			foreach ( $texts as $text ) {
 				foreach ( $types as $type ) {
-					$terms[] = new TermIndexSearchCriteria( array(
+					$terms[] = new TermIndexSearchCriteria( [
 						'termText' => $text,
 						'termLanguage' => $lang,
 						'termType' => $type,
-					) );
+					] );
 				}
 			}
 		}
@@ -156,7 +156,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null,
 		$fuzzySearch = false
 	) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $this->terms as $term ) {
 			if ( $languageCode !== null && $term->getLanguage() !== $languageCode ) {
@@ -217,7 +217,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
-		$matchingTerms = array();
+		$matchingTerms = [];
 
 		if ( is_array( $termTypes ) ) {
 			$termTypes = array_flip( $termTypes );
@@ -255,7 +255,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $entityIds as $id ) {
 			$terms = array_merge(
@@ -285,9 +285,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		array $criteria,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	) {
-		$matchingTerms = array();
+		$matchingTerms = [];
 
 		$termType = $termType === null ? null : (array)$termType;
 		$entityType = $entityType === null ? null : (array)$entityType;
@@ -326,12 +326,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		array $criteria,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	) {
 		$options['orderByWeight'] = true;
 		$terms = $this->getMatchingTerms( $criteria, $termType, $entityType, $options );
-		$previousEntityIdSerializations = array();
-		$returnTerms = array();
+		$previousEntityIdSerializations = [];
+		$returnTerms = [];
 		foreach ( $terms as $termIndexEntry ) {
 			if ( !in_array( $termIndexEntry->getEntityId()->getSerialization(), $previousEntityIdSerializations ) ) {
 				$returnTerms[] = $termIndexEntry;
@@ -345,7 +345,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @throws Exception always
 	 */
 	public function clear() {
-		$this->terms = array();
+		$this->terms = [];
 	}
 
 	/**
@@ -356,7 +356,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @return TermIndexEntry[]
 	 */
 	private function rekeyConflicts( array $conflicts ) {
-		$rekeyed = array();
+		$rekeyed = [];
 
 		foreach ( $conflicts as $term ) {
 			$key = $term->getEntityId()->getSerialization();
@@ -390,7 +390,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return bool
 	 */
-	private function termMatchesTemplates( TermIndexEntry $term, array $templates, array $options = array() ) {
+	private function termMatchesTemplates( TermIndexEntry $term, array $templates, array $options = [] ) {
 		foreach ( $templates as $template ) {
 			if ( $template->getTermType() !== null && $template->getTermType() !== $term->getTermType() ) {
 				continue;
@@ -417,7 +417,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return bool
 	 */
-	private function textMatches( $find, $text, array $options = array() ) {
+	private function textMatches( $find, $text, array $options = [] ) {
 		if ( isset( $options[ 'caseSensitive' ] ) && !$options[ 'caseSensitive' ] ) {
 			$find = strtolower( $find );
 			$text = strtolower( $text );

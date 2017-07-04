@@ -16,9 +16,9 @@ use Wikibase\Repo\WikibaseRepo;
 class IdGeneratorTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator() );
+		$instances = [ WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator() ];
 
-		return array( $instances );
+		return [ $instances ];
 	}
 
 	/**
@@ -46,7 +46,7 @@ class IdGeneratorTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'integer', $id3 );
 
-		$this->assertTrue( !in_array( $id3, array( $id, $id1 ), true ) );
+		$this->assertTrue( !in_array( $id3, [ $id, $id1 ], true ) );
 	}
 
 }

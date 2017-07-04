@@ -22,7 +22,7 @@ class ValueParserFactory {
 	 *
 	 * @var callable[]
 	 */
-	private $parsers = array();
+	private $parsers = [];
 
 	/**
 	 * @param callable[] $valueParsers An associative array mapping parser ids to

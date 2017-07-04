@@ -74,42 +74,42 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	public function getHtmlForStatementProvider() {
 		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
 
-		$testCases = array();
+		$testCases = [];
 
-		$testCases[] = array(
+		$testCases[] = [
 			$snakHtmlGenerator,
 			new Statement( new PropertySomeValueSnak( 42 ) ),
-			array(
+			[
 				'snak html' => '/SNAK HTML/',
-			)
-		);
+			]
+		];
 
-		$testCases[] = array(
+		$testCases[] = [
 			$snakHtmlGenerator,
 			new Statement(
 				new PropertySomeValueSnak( 42 ),
-				new SnakList( array(
+				new SnakList( [
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) ),
-				) )
+				] )
 			),
-			array(
+			[
 				'snak html' => '/SNAK HTML.*SNAK HTML/s',
-			)
-		);
+			]
+		];
 
-		$testCases[] = array(
+		$testCases[] = [
 			$snakHtmlGenerator,
 			new Statement(
 				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
-				new ReferenceList( array( new Reference( new SnakList( array(
+				new ReferenceList( [ new Reference( new SnakList( [
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
-				) ) ) ) )
+				] ) ) ] )
 			),
-			array(
+			[
 				'snak html' => '/SNAK HTML.*SNAK HTML/s',
-			)
-		);
+			]
+		];
 
 		return $testCases;
 	}

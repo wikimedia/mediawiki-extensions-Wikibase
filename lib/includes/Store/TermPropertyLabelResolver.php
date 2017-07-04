@@ -121,23 +121,23 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	}
 
 	protected function loadProperties() {
-		$termTemplate = new TermIndexSearchCriteria( array(
+		$termTemplate = new TermIndexSearchCriteria( [
 			'termType' => 'label',
 			'termLanguage' => $this->languageCode,
-		) );
+		] );
 
 		$terms = $this->termIndex->getMatchingTerms(
-			array( $termTemplate ),
+			[ $termTemplate ],
 			'label',
 			Property::ENTITY_TYPE,
-			array(
+			[
 				'caseSensitive' => true,
 				'prefixSearch' => false,
 				'LIMIT' => false,
-			)
+			]
 		);
 
-		$propertiesByLabel = array();
+		$propertiesByLabel = [];
 
 		foreach ( $terms as $term ) {
 			$label = $term->getText();

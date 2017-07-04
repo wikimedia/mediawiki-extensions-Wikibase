@@ -31,7 +31,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		$property = Property::newFromType( 'commonsMedia' );
 		$store->saveEntity( $property, 'test', $GLOBALS['wgUser'], EDIT_NEW );
 
-		return array( $item, $property );
+		return [ $item, $property ];
 	}
 
 	protected function assertRequestValidity( $resultArray ) {
@@ -51,13 +51,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 */
 		list( $item, $property ) = self::getNewItemAndProperty();
 
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Foo.png"',
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -65,7 +65,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$claim = $resultArray['claim'];
 
-		foreach ( array( 'id', 'mainsnak', 'type', 'rank' ) as $requiredKey ) {
+		foreach ( [ 'id', 'mainsnak', 'type', 'rank' ] as $requiredKey ) {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 
@@ -79,110 +79,110 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		//0
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => 'q123456789',
 			'snaktype' => 'value',
 			'property' => '-',
 			'value' => '"Foo.png"',
-		);
-		$argLists[] = array( 'no-such-entity', $params );
+		];
+		$argLists[] = [ 'no-such-entity', $params ];
 
 		//1
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => 'i123',
 			'snaktype' => 'value',
 			'property' => '-',
 			'value' => '"Foo.png"',
-		);
-		$argLists[] = array( 'invalid-entity-id', $params );
+		];
+		$argLists[] = [ 'invalid-entity-id', $params ];
 
 		//2
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'i123',
 			'value' => '"Foo.png"',
-		);
-		$argLists[] = array( 'invalid-entity-id', $params );
+		];
+		$argLists[] = [ 'invalid-entity-id', $params ];
 
 		//3
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'p1',
 			'value' => 'Foo.png',
-		);
-		$argLists[] = array( 'invalid-snak', $params );
+		];
+		$argLists[] = [ 'invalid-snak', $params ];
 
 		//4
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'hax',
 			'property' => '-',
 			'value' => '"Foo.png"',
-		);
-		$argLists[] = array( 'unknown_snaktype', $params );
+		];
+		$argLists[] = [ 'unknown_snaktype', $params ];
 
 		//5, 6
-		foreach ( array( 'entity', 'snaktype' ) as $requiredParam ) {
-			$params = array(
+		foreach ( [ 'entity', 'snaktype' ] as $requiredParam ) {
+			$params = [
 				'action' => 'wbcreateclaim',
 				'entity' => '-',
 				'snaktype' => 'value',
 				'property' => '-',
 				'value' => '"Foo.png"',
-			);
+			];
 
 			unset( $params[$requiredParam] );
 
-			$argLists[] = array( 'no' . $requiredParam, $params );
+			$argLists[] = [ 'no' . $requiredParam, $params ];
 		}
 
 		//7
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'value' => '"Foo.png"',
-		);
-		$argLists[] = array( 'param-missing', $params );
+		];
+		$argLists[] = [ 'param-missing', $params ];
 
 		//8
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => '-',
-		);
-		$argLists[] = array( 'param-missing', $params );
+		];
+		$argLists[] = [ 'param-missing', $params ];
 
 		//9
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => '-',
 			'value' => '{"x":"foo", "y":"bar"}',
-		);
-		$argLists[] = array( 'invalid-snak', $params );
+		];
+		$argLists[] = [ 'invalid-snak', $params ];
 
 		//10
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => '-',
 			'value' => '"   "', //blank is invalid
-		);
-		$argLists[] = array( 'modification-failed', $params );
+		];
+		$argLists[] = [ 'modification-failed', $params ];
 
 		return $argLists;
 	}
@@ -241,13 +241,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 */
 		list( $item, $property ) = self::getNewItemAndProperty();
 
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Foo.png"',
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -257,14 +257,14 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$firstGuid = $resultArray['claim']['id'];
 
-		$params = array(
+		$params = [
 			'action' => 'wbcreateclaim',
 			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Bar.jpg"',
 			'baserevid' => $revId
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 

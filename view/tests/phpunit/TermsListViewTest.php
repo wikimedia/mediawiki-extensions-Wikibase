@@ -171,7 +171,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		$labels = $this->getTermList( '<LABEL>' );
 		$descriptions = $this->getTermList( '<DESCRIPTION>' );
 		$view = $this->getTermsListView( 1 );
-		$html = $view->getHtml( $labels, $descriptions, null, array( 'en' ) );
+		$html = $view->getHtml( $labels, $descriptions, null, [ 'en' ] );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );

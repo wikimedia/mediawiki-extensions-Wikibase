@@ -98,11 +98,11 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$descriptions = $this->getTermList( '<DESCRIPTION>' );
 		$emptyAliases = new AliasGroupList();
 
-		return array(
-			'empty' => array( new TermList(), new TermList(), $emptyAliases, new ItemId( 'Q42' ), 'en' ),
-			'other language' => array( $labels, $descriptions, $emptyAliases, new ItemId( 'Q42' ), 'de' ),
-			'other id' => array( $labels, $descriptions, $emptyAliases, new ItemId( 'Q12' ), 'en' ),
-		);
+		return [
+			'empty' => [ new TermList(), new TermList(), $emptyAliases, new ItemId( 'Q42' ), 'en' ],
+			'other language' => [ $labels, $descriptions, $emptyAliases, new ItemId( 'Q42' ), 'de' ],
+			'other id' => [ $labels, $descriptions, $emptyAliases, new ItemId( 'Q12' ), 'en' ],
+		];
 	}
 
 	/**

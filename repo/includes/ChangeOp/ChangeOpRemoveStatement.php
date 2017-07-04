@@ -79,7 +79,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	 */
 	private function getSummaryArgs( Snak $mainSnak ) {
 		$propertyId = $mainSnak->getPropertyId();
-		return array( array( $propertyId->getSerialization() => $mainSnak ) );
+		return [ [ $propertyId->getSerialization() => $mainSnak ] ];
 	}
 
 	/**

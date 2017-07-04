@@ -53,7 +53,7 @@ class RepositorySpecificDataValueDeserializerFactory {
 	private function newDeserializerForRepository( $repositoryName ) {
 		$parser = $this->idParserFactory->getIdParser( $repositoryName );
 
-		return new DataValueDeserializer( array(
+		return new DataValueDeserializer( [
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
@@ -70,7 +70,7 @@ class RepositorySpecificDataValueDeserializerFactory {
 					? new EntityIdValue( $parser->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
 			},
-		) );
+		] );
 	}
 
 }

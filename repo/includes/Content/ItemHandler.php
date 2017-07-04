@@ -112,7 +112,7 @@ class ItemHandler extends EntityHandler {
 	 * @return string[]
 	 */
 	public function getActionOverrides() {
-		return array(
+		return [
 			'history' => function( Page $page, IContextSource $context = null ) {
 				return new HistoryEntityAction(
 					$page,
@@ -124,7 +124,7 @@ class ItemHandler extends EntityHandler {
 			'view' => ViewEntityAction::class,
 			'edit' => EditEntityAction::class,
 			'submit' => SubmitEntityAction::class,
-		);
+		];
 	}
 
 	/**
@@ -156,10 +156,10 @@ class ItemHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$updates[] = new DataUpdateAdapter(
-			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
+			[ $this->siteLinkStore, 'deleteLinksOfItem' ],
 			$content->getEntityId()
 		);
 
@@ -180,16 +180,16 @@ class ItemHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		if ( $content->isRedirect() ) {
 			$updates[] = new DataUpdateAdapter(
-				array( $this->siteLinkStore, 'deleteLinksOfItem' ),
+				[ $this->siteLinkStore, 'deleteLinksOfItem' ],
 				$content->getEntityId()
 			);
 		} else {
 			$updates[] = new DataUpdateAdapter(
-				array( $this->siteLinkStore, 'saveLinksOfItem' ),
+				[ $this->siteLinkStore, 'saveLinksOfItem' ],
 				$content->getEntity()
 			);
 		}

@@ -292,11 +292,11 @@ class SqlStore implements Store {
 		// TODO: refactor selection code out (relevant for other stores)
 
 		$pages = $dbw->select(
-			array( 'page' ),
-			array( 'page_id', 'page_latest' ),
-			array( 'page_content_model' => WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getEntityContentModels() ),
+			[ 'page' ],
+			[ 'page_id', 'page_latest' ],
+			[ 'page_content_model' => WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getEntityContentModels() ],
 			__METHOD__,
-			array( 'LIMIT' => 1000 ) // TODO: continuation
+			[ 'LIMIT' => 1000 ] // TODO: continuation
 		);
 
 		foreach ( $pages as $pageRow ) {
@@ -506,7 +506,7 @@ class SqlStore implements Store {
 		$hashCachingLookup->setVerifyRevision( false );
 		$dispatcher->registerWatcher( $hashCachingLookup );
 
-		return array( $nonCachingLookup, $hashCachingLookup );
+		return [ $nonCachingLookup, $hashCachingLookup ];
 	}
 
 	private function getRawEntityRevisionLookup( WikiPageEntityMetaDataAccessor $metaDataFetcher ) {

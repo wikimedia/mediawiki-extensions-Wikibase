@@ -138,8 +138,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		$wikibaseClient = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
 			$this->getSiteLookup()
 		);
@@ -159,8 +159,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
 			$siteLookup
 		);
@@ -182,10 +182,10 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings2->setSetting( 'languageLinkSiteGroup', 'wikivoyage' );
 
-		return array(
-			array( 'wikipedia', $settings, $siteLookup ),
-			array( 'wikivoyage', $settings2, $siteLookup )
-		);
+		return [
+			[ 'wikipedia', $settings, $siteLookup ],
+			[ 'wikivoyage', $settings2, $siteLookup ]
+		];
 	}
 
 	/**
@@ -194,8 +194,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
 			$siteLookup
 		);
@@ -229,10 +229,10 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		$siteLookup = $this->getSiteLookup();
 
-		return array(
-			array( 'wikipedia', $settings, $siteLookup ),
-			array( 'wikivoyage', $settings2, $siteLookup )
-		);
+		return [
+			[ 'wikipedia', $settings, $siteLookup ],
+			[ 'wikivoyage', $settings2, $siteLookup ]
+		];
 	}
 
 	public function testGetLanguageLinkBadgeDisplay() {
@@ -348,8 +348,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	private function getWikibaseClient() {
 		return new WikibaseClient(
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
 			new HashSiteStore()
 		);

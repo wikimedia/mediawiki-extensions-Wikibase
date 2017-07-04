@@ -21,9 +21,9 @@ use Wikibase\View\Template\TemplateRegistry;
 class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
-		return new TemplateFactory( new TemplateRegistry( array(
+		return new TemplateFactory( new TemplateRegistry( [
 			'basic' => '$1',
-		) ) );
+		] ) );
 	}
 
 	public function testGetDefaultInstance() {
@@ -33,13 +33,13 @@ class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetTemplates() {
 		$templates = $this->newInstance()->getTemplates();
-		$this->assertSame( array( 'basic' => '$1' ), $templates );
+		$this->assertSame( [ 'basic' => '$1' ], $templates );
 	}
 
 	public function testGet() {
-		$template = $this->newInstance()->get( 'basic', array( '<PARAM>' ) );
+		$template = $this->newInstance()->get( 'basic', [ '<PARAM>' ] );
 		$this->assertSame( 'basic', $template->getKey() );
-		$this->assertSame( array( '<PARAM>' ), $template->getParams() );
+		$this->assertSame( [ '<PARAM>' ], $template->getParams() );
 		$this->assertSame( '<PARAM>', $template->plain() );
 	}
 
@@ -52,12 +52,12 @@ class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function renderParamsProvider() {
-		return array(
-			array( '<PARAM>', '<PARAM>' ),
-			array( array(), '$1' ),
-			array( array( '<PARAM>' ), '<PARAM>' ),
-			array( array( '<PARAM>', 'ignored' ), '<PARAM>' ),
-		);
+		return [
+			[ '<PARAM>', '<PARAM>' ],
+			[ [], '$1' ],
+			[ [ '<PARAM>' ], '<PARAM>' ],
+			[ [ '<PARAM>', 'ignored' ], '<PARAM>' ],
+		];
 	}
 
 }

@@ -156,7 +156,7 @@ class EditEntity extends ModifyEntity {
 	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
+		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
 
 		if ( !$this->entityExists( $entity->getId() ) ) {
 			$permissions[] = 'createpage';
@@ -502,16 +502,16 @@ class EditEntity extends ModifyEntity {
 	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			array(
-				'data' => array(
+			[
+				'data' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => true,
-				),
-				'clear' => array(
+				],
+				'clear' => [
 					self::PARAM_TYPE => 'boolean',
 					self::PARAM_DFLT => false
-				),
-			)
+				],
+			]
 		);
 	}
 
@@ -519,7 +519,7 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			// Creating new entites
 			'action=wbeditentity&new=item&data={}'
 				=> 'apihelp-wbeditentity-example-1',
@@ -566,7 +566,7 @@ class EditEntity extends ModifyEntity {
 				. '"property":"P56","datavalue":{"value":"ChangedString","type":"string"}},'
 				. '"type":"statement","rank":"normal"}]}'
 				=> 'apihelp-wbeditentity-example-10',
-		);
+		];
 	}
 
 	/**

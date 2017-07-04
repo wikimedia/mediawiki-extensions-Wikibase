@@ -64,7 +64,7 @@ class SetLabel extends ModifyTerm {
 		$resultBuilder = $this->getResultBuilder();
 
 		if ( $labels->hasTermForLanguage( $language ) ) {
-			$termList = $labels->getWithLanguages( array( $language ) );
+			$termList = $labels->getWithLanguages( [ $language ] );
 			$resultBuilder->addLabels( $termList, 'entity' );
 		} else {
 			$resultBuilder->addRemovedLabel( $language, 'entity' );
@@ -117,12 +117,12 @@ class SetLabel extends ModifyTerm {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetlabel&id=Q42&language=en&value=Wikimedia&format=jsonfm'
 				=> 'apihelp-wbsetlabel-example-1',
 			'action=wbsetlabel&site=enwiki&title=Earth&language=en&value=Earth'
 				=> 'apihelp-wbsetlabel-example-2',
-		);
+		];
 	}
 
 }

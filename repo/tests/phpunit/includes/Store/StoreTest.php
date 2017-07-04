@@ -36,7 +36,7 @@ class StoreTest extends \MediaWikiTestCase {
 	public function instanceProvider() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$instances = array(
+		$instances = [
 			new SqlStore(
 				$wikibaseRepo->getEntityChangeFactory(),
 				$wikibaseRepo->getEntityContentDataCodec(),
@@ -46,9 +46,9 @@ class StoreTest extends \MediaWikiTestCase {
 				$this->getMock( EntityTitleStoreLookup::class ),
 				new EntityNamespaceLookup( [] )
 			)
-		);
+		];
 
-		return array( $instances );
+		return [ $instances ];
 	}
 
 	/**

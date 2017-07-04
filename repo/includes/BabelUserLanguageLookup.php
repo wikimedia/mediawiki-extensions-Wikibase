@@ -23,7 +23,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	 *
 	 * @var array[]
 	 */
-	private $babelLanguages = array();
+	private $babelLanguages = [];
 
 	/**
 	 * @param User $user The current user.
@@ -38,7 +38,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 			if ( class_exists( Babel::class ) && !$user->isAnon() ) {
 				$this->babelLanguages[$key] = Babel::getUserLanguages( $user );
 			} else {
-				$this->babelLanguages[$key] = array();
+				$this->babelLanguages[$key] = [];
 			}
 		}
 
@@ -79,7 +79,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	 * @return string[] List of all the user's language codes.
 	 */
 	public function getAllUserLanguages( User $user ) {
-		$languages = array();
+		$languages = [];
 
 		// Start with the user's UI language
 		$userLanguage = $user->getOption( 'language' );

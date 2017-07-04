@@ -35,7 +35,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 */
 	public function getSubscriptions( $siteId, array $entityIds ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return [];
 		}
 
 		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
@@ -46,7 +46,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 		$subscribedIds = $this->querySubscriptions( $dbr, $siteId, array_keys( $entityIds ) );
 
 		// collect the item IDs present in these links
-		$linkedEntityIds = array();
+		$linkedEntityIds = [];
 		foreach ( $subscribedIds as $id ) {
 			$linkedEntityIds[$id] = $entityIds[$id];
 		}
@@ -89,9 +89,9 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is subscribed to.
 	 */
 	private function querySubscriptions( Database $db, $subscriber, array $idsToCheck = null ) {
-		$where = array(
+		$where = [
 			'cs_subscriber_id' => $subscriber,
-		);
+		];
 
 		if ( $idsToCheck ) {
 			$where['cs_entity_id'] = $idsToCheck;
@@ -111,7 +111,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @return EntityId[] The ItemIds from EntityId[], keyed by numeric id.
 	 */
 	private function reIndexEntityIds( array $entityIds ) {
-		$reindexed = array();
+		$reindexed = [];
 
 		foreach ( $entityIds as $id ) {
 			$key = $id->getSerialization();

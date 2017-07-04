@@ -14,48 +14,48 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'mw.config.values.wbSiteDetails' => $moduleTemplate + array(
+		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
 			'class' => SitesModule::class,
-		),
+		],
 
-		'mw.config.values.wbRepo' => $moduleTemplate + array(
+		'mw.config.values.wbRepo' => $moduleTemplate + [
 			'class' => RepoAccessModule::class,
-		),
+		],
 
-		'wikibase' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.js',
-			),
-		),
+			],
+		],
 
-		'wikibase.buildErrorOutput' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.buildErrorOutput' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.buildErrorOutput.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			),
-		),
+			],
+		],
 
-		'wikibase.sites' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.sites' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.sites.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'mw.config.values.wbSiteDetails',
 				'wikibase',
 				'wikibase.Site',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	$modules = array_merge(
 		$modules,

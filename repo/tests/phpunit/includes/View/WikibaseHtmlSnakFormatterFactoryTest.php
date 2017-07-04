@@ -24,7 +24,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetSnakFormatter() {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
-		$languageFallbackChain = new LanguageFallbackChain( array() );
+		$languageFallbackChain = new LanguageFallbackChain( [] );
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 
 		$outputFormatSnakFormatterFactory = $this->getMockBuilder(
@@ -37,11 +37,11 @@ class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 			->method( 'getSnakFormatter' )
 			->with(
 				SnakFormatter::FORMAT_HTML_WIDGET,
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'en',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
 					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup
-				) )
+				] )
 			)
 			->will( $this->returnValue( $snakFormatter ) );
 

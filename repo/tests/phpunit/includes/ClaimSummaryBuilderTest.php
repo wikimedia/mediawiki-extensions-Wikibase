@@ -31,7 +31,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return Snak[]
 	 */
 	protected function snakProvider() {
-		$snaks = array();
+		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
 		$snaks[] = new PropertySomeValueSnak( 9001 );
@@ -44,7 +44,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return Statement[]
 	 */
 	protected function statementProvider() {
-		$statements = array();
+		$statements = [];
 
 		$mainSnak = new PropertyValueSnak( 112358, new StringValue( "don't panic" ) );
 		$statement = new Statement( $mainSnak );
@@ -52,7 +52,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new SnakList( array( $snak ) );
+			$snaks = new SnakList( [ $snak ] );
 			$statement->getReferences()->addReference( new Reference( $snaks ) );
 			$statements[] = $statement;
 		}
@@ -79,10 +79,10 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function buildUpdateClaimSummaryProvider() {
-		$arguments = array();
+		$arguments = [];
 
 		foreach ( $this->statementProvider() as $statement ) {
-			$testCaseArgs = array();
+			$testCaseArgs = [];
 
 			//change mainsnak
 			$modifiedStatement = clone $statement;

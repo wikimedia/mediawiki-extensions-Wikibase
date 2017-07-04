@@ -45,14 +45,14 @@ class CommonsMediaExistsValidator implements ValueValidator {
 
 		$actualName = $this->fileNameLookup->lookupFileName( $value );
 
-		$errors = array();
+		$errors = [];
 
 		if ( $actualName === null ) {
 			$errors[] = Error::newError(
 				"File does not exist: " . $value,
 				null,
 				'no-such-media',
-				array( $value )
+				[ $value ]
 			);
 		}
 

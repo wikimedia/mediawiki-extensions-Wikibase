@@ -45,12 +45,12 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	}
 
 	public function constructorErrorsProvider() {
-		return array(
-			'format must be a string' => array(
+		return [
+			'format must be a string' => [
 				17,
 				InvalidArgumentException::class
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -113,9 +113,9 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		$typeLookup = $this->getMockDataTypeLookup( $dataType );
 		$typeFactory = $this->getMockDataTypeFactory( $dataType, $valueType );
 
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			PropertyValueSnakFormatter::OPT_LANG => 'en',
-		) );
+		] );
 
 		$formatter = new PropertyValueSnakFormatter(
 			$targetFormat,
@@ -145,43 +145,43 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	}
 
 	public function formatSnakProvider() {
-		$formatters = array(
+		$formatters = [
 			'VT:bad' => new UnDeserializableValueFormatter( new FormatterOptions() ),
 			'VT:string' => $this->getMockFormatter( 'VT:string' ),
 			'PT:commonsMedia' => $this->getMockFormatter( 'PT:commonsMedia' )
-		);
+		];
 
 		$dispatchingFormatter = new DispatchingValueFormatter( $formatters );
 
-		return array(
-			'match PT' => array(
+		return [
+			'match PT' => [
 				new PropertyValueSnak( 17, new StringValue( 'Foo.jpg' ) ),
 				'commonsMedia',
 				'string',
 				SnakFormatter::FORMAT_PLAIN,
 				$dispatchingFormatter,
 				'/^PT:commonsMedia$/'
-			),
+			],
 
-			'match VT' => array(
+			'match VT' => [
 				new PropertyValueSnak( 33, new StringValue( 'something' ) ),
 				'someStuff',
 				'string',
 				SnakFormatter::FORMAT_WIKI,
 				$dispatchingFormatter,
 				'/^VT:string$/'
-			),
+			],
 
-			'use plain value formatter' => array(
+			'use plain value formatter' => [
 				new PropertyValueSnak( 33, new StringValue( 'something' ) ),
 				'url',
 				'string',
 				SnakFormatter::FORMAT_WIKI,
 				new StringFormatter(),
 				'/^something$/'
-			),
+			],
 
-			'UnDeserializableValue, fail' => array(
+			'UnDeserializableValue, fail' => [
 				new PropertyValueSnak( 7,
 					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
 				),
@@ -191,9 +191,9 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				$dispatchingFormatter,
 				null,
 				MismatchingDataValueTypeException::class
-			),
+			],
 
-			'VT mismatching PT, fail' => array(
+			'VT mismatching PT, fail' => [
 				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
 				'url',
 				'iri', // url expects an iri, but will get a string
@@ -201,9 +201,9 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				$dispatchingFormatter,
 				null,
 				MismatchingDataValueTypeException::class
-			),
+			],
 
-			'property not found, fail' => array(
+			'property not found, fail' => [
 				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
 				'', // triggers an exception from the mock DataTypeFactory
 				'', // should not be used
@@ -211,9 +211,9 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				$dispatchingFormatter,
 				null,
 				PropertyDataTypeLookupException::class
-			),
+			],
 
-			'data type not found, fail' => array(
+			'data type not found, fail' => [
 				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
 				'url',
 				'', // triggers an exception from the mock DataTypeFactory
@@ -221,8 +221,8 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				$dispatchingFormatter,
 				null,
 				FormattingException::class
-			),
-		);
+			],
+		];
 	}
 
 	private function getDummyPropertyValueSnakFormatter( $format = 'test' ) {
@@ -235,9 +235,9 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 		$typeFactory->expects( $this->never() )->method( 'getType' );
 
-		$valueFormatter = new DispatchingValueFormatter( array() );
+		$valueFormatter = new DispatchingValueFormatter( [] );
 
-		$options = new FormatterOptions( array() );
+		$options = new FormatterOptions( [] );
 
 		$formatter = new PropertyValueSnakFormatter( $format, $options, $valueFormatter, $typeLookup, $typeFactory );
 		return $formatter;

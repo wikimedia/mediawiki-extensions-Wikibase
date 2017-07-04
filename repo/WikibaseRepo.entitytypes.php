@@ -32,8 +32,8 @@ use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikimedia\Purtle\RdfWriter;
 
-return array(
-	'item' => array(
+return [
+	'item' => [
 		'view-factory-callback' => function(
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
@@ -81,8 +81,8 @@ return array(
 			}
 			return new NullEntityRdfBuilder();
 		}
-	),
-	'property' => array(
+	],
+	'property' => [
 		'view-factory-callback' => function(
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
@@ -124,5 +124,5 @@ return array(
 				$writer
 			);
 		}
-	)
-);
+	]
+];

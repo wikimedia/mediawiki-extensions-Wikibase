@@ -17,34 +17,34 @@ use Wikibase\View\Template\TemplateRegistry;
 class TemplateRegistryTest extends PHPUnit_Framework_TestCase {
 
 	public function testCanConstructWithEmptyArray() {
-		$registry = new TemplateRegistry( array() );
-		$this->assertSame( array(), $registry->getTemplates() );
+		$registry = new TemplateRegistry( [] );
+		$this->assertSame( [], $registry->getTemplates() );
 	}
 
 	public function testRemovesTabs() {
-		$registry = new TemplateRegistry( array( 'key' => "no\ttabs" ) );
+		$registry = new TemplateRegistry( [ 'key' => "no\ttabs" ] );
 		$this->assertSame( 'notabs', $registry->getTemplate( 'key' ) );
 	}
 
 	public function testRemovesComments() {
-		$registry = new TemplateRegistry( array(
+		$registry = new TemplateRegistry( [
 			'key' => "no<!--[if IE]>IE<![endif]-->comments<!-- <div>\n</div> -->",
-		) );
+		] );
 		$this->assertSame( 'nocomments', $registry->getTemplate( 'key' ) );
 	}
 
 	public function testGetTemplates() {
-		$registry = new TemplateRegistry( array( 'key' => 'html' ) );
-		$this->assertSame( array( 'key' => 'html' ), $registry->getTemplates() );
+		$registry = new TemplateRegistry( [ 'key' => 'html' ] );
+		$this->assertSame( [ 'key' => 'html' ], $registry->getTemplates() );
 	}
 
 	public function testGetKnownTemplate() {
-		$registry = new TemplateRegistry( array( 'key' => 'html' ) );
+		$registry = new TemplateRegistry( [ 'key' => 'html' ] );
 		$this->assertSame( 'html', $registry->getTemplate( 'key' ) );
 	}
 
 	public function testGetUnknownTemplate() {
-		$registry = new TemplateRegistry( array() );
+		$registry = new TemplateRegistry( [] );
 
 		\MediaWiki\suppressWarnings();
 		$html = $registry->getTemplate( 'unknown' );

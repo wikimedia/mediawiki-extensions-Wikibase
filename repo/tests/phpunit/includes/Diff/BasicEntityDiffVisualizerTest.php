@@ -37,28 +37,28 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 
 	public function diffProvider() {
 		$fingerprintDiff = new EntityContentDiff(
-			new EntityDiff( array(
-				'label' => new Diff( array(
+			new EntityDiff( [
+				'label' => new Diff( [
 					'en' => new DiffOpAdd( 'O_o' ),
-				), true ),
+				], true ),
 
-				'description' => new Diff( array(
+				'description' => new Diff( [
 					'en' => new DiffOpRemove( 'ohi there' ),
-				), true ),
+				], true ),
 
-				'aliases' => new Diff( array(
-					'nl' => new Diff( array(
+				'aliases' => new Diff( [
+					'nl' => new Diff( [
 						new DiffOpAdd( 'daaaah' ),
 						new DiffOpRemove( 'foo' ),
 						new DiffOpRemove( 'bar' ),
-					) )
-				), true ),
-			) ),
+					] )
+				], true ),
+			] ),
 			new Diff(),
 			'item'
 		);
 
-		$fingerprintTags = array(
+		$fingerprintTags = [
 			'has <td>label / en</td>' => '>(wikibase-diffview-label) / en</td>',
 			'has <ins>O_o</ins>' => '>O_o</ins>',
 			'has <td>aliases / nl / 0</td>' => '>(wikibase-diffview-alias) / nl / 0</td>',
@@ -69,7 +69,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 			'has <del>bar</del>' => '>bar</del>',
 			'has <td>description / en</td>' => '>(wikibase-diffview-description) / en</td>',
 			'has <del>ohi there</del>' => '>ohi there</del>',
-		);
+		];
 
 		$redirectDiff = new EntityContentDiff(
 			new EntityDiff(),
@@ -77,15 +77,15 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 			'item'
 		);
 
-		$redirectTags = array(
+		$redirectTags = [
 			'has <td>redirect</td>' => '>redirect</td>',
 			'has <ins>Q1234</ins>' => '>Q1234</ins>',
-		);
+		];
 
-		return array(
-			'fingerprint changed' => array( $fingerprintDiff, $fingerprintTags ),
-			'redirect changed' => array( $redirectDiff, $redirectTags ),
-		);
+		return [
+			'fingerprint changed' => [ $fingerprintDiff, $fingerprintTags ],
+			'redirect changed' => [ $redirectDiff, $redirectTags ],
+		];
 	}
 
 	/**
@@ -134,7 +134,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockContext(),
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
-			new HashSiteStore( array( $enwiki ) ),
+			new HashSiteStore( [ $enwiki ] ),
 			$this->getMock( EntityIdFormatter::class )
 		);
 	}

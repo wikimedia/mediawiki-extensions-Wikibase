@@ -33,17 +33,17 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 		$siteLink = new SiteLink( 'acme', 'Foo' );
 		$badSiteLink = new SiteLink( 'bad', 'Foo' );
 
-		return array(
-			'string' => array( 'Hello', 'en', 'Hello' ),
-			'int' => array( 456, 'en', '456' ),
-			'float en' => array( 123.456, 'en', '123.456' ),
-			'float de' => array( 123.456, 'de', '123,456' ),
-			'DecimalValue en' => array( $decimal, 'en', 'DataValues\DecimalValue:+123.456' ),
-			'EntityId' => array( $entityId, 'en', '[[ENTITYID]]' ),
-			'SiteLink' => array( $siteLink, 'en', '[http://acme.com/Foo acme:Foo]' ),
-			'SiteLink bad' => array( $badSiteLink, 'en', '[bad:Foo]' ),
-			'list of floats' => array( array( 1.2, 0.5 ), 'en', '1.2, 0.5' ),
-		);
+		return [
+			'string' => [ 'Hello', 'en', 'Hello' ],
+			'int' => [ 456, 'en', '456' ],
+			'float en' => [ 123.456, 'en', '123.456' ],
+			'float de' => [ 123.456, 'de', '123,456' ],
+			'DecimalValue en' => [ $decimal, 'en', 'DataValues\DecimalValue:+123.456' ],
+			'EntityId' => [ $entityId, 'en', '[[ENTITYID]]' ],
+			'SiteLink' => [ $siteLink, 'en', '[http://acme.com/Foo acme:Foo]' ],
+			'SiteLink bad' => [ $badSiteLink, 'en', '[bad:Foo]' ],
+			'list of floats' => [ [ 1.2, 0.5 ], 'en', '1.2, 0.5' ],
+		];
 	}
 
 	/**

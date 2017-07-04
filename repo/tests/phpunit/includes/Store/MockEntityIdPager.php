@@ -16,12 +16,12 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * @var EntityId[]
 	 */
-	private $pageIdToEntityId = array();
+	private $pageIdToEntityId = [];
 
 	/**
 	 * @var string[]
 	 */
-	private $redirects = array();
+	private $redirects = [];
 
 	/**
 	 * @var EntityId|null

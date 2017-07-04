@@ -29,7 +29,7 @@ class ChunkCache implements ChunkAccess {
 	 *
 	 * @var array
 	 */
-	private $entries = array();
+	private $entries = [];
 
 	/**
 	 * @var int
@@ -138,7 +138,7 @@ class ChunkCache implements ChunkAccess {
 	 * @return array the desired chunk of rows/objects
 	 */
 	public function loadChunk( $start, $size ) {
-		$result = array();
+		$result = [];
 		$remaining = $size;
 
 		while ( $remaining > 0 ) {
@@ -234,16 +234,16 @@ class ChunkCache implements ChunkAccess {
 
 		reset( $data );
 
-		$entry = array(
+		$entry = [
 			'start' => $start,
 			'data' => $data,
 			'next' => $next,
 			'touched' => ++$this->modCount,
-		);
+		];
 
 		$this->entries = array_merge(
 			array_slice( $this->entries, 0, $before ),
-			array( $entry ),
+			[ $entry ],
 			array_slice( $this->entries, $before )
 		);
 

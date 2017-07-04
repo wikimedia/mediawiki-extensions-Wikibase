@@ -57,7 +57,7 @@ class ItemDisambiguation {
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					array( $this, 'getResultHtml' ),
+					[ $this, 'getResultHtml' ],
 					$searchResults
 				) ).
 			'</ul>';
@@ -109,7 +109,7 @@ class ItemDisambiguation {
 			$result .= $matchHtml;
 		}
 
-		$result = Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
+		$result = Html::rawElement( 'li', [ 'class' => 'wikibase-disambiguation' ], $result );
 		return $result;
 	}
 
@@ -125,11 +125,11 @@ class ItemDisambiguation {
 
 		$idElement = Html::element(
 			'a',
-			array(
+			[
 				'title' => $title ? $title->getPrefixedText() : '',
 				'href' => $title ? $title->getLocalURL() : '',
 				'class' => 'wb-itemlink-id'
-			),
+			],
 			$entityId->getSerialization()
 		);
 
@@ -151,7 +151,7 @@ class ItemDisambiguation {
 		//TODO: include actual language if $label is a FallbackTerm
 		$labelElement = Html::element(
 			'span',
-			array( 'class' => 'wb-itemlink-label' ),
+			[ 'class' => 'wb-itemlink-label' ],
 			$label->getText()
 		);
 		return $labelElement;
@@ -172,7 +172,7 @@ class ItemDisambiguation {
 		//TODO: include actual language if $description is a FallbackTerm
 		$descriptionElement = Html::element(
 			'span',
-			array( 'class' => 'wb-itemlink-description' ),
+			[ 'class' => 'wb-itemlink-description' ],
 			$description->getText()
 		);
 		return $descriptionElement;
@@ -202,7 +202,7 @@ class ItemDisambiguation {
 
 		$matchElement = $descriptionElement = Html::element(
 			'span',
-			array( 'class' => 'wb-itemlink-match' ),
+			[ 'class' => 'wb-itemlink-match' ],
 			wfMessage( 'wikibase-itemlink-userlang-wrapper', $language, $text )->text()
 		);
 

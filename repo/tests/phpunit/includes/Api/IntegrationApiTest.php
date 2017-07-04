@@ -29,40 +29,40 @@ class IntegrationApiTest extends ApiTestCase {
 	}
 
 	public function apiRequestProvider() {
-		return array(
-			'wbgetentities-id' => array(
-				array(
+		return [
+			'wbgetentities-id' => [
+				[
 					'action' => 'wbgetentities',
 					'ids' => 'Q2147483647',
-				),
-				array(
-					'entities' => array(
-						'Q2147483647' => array(
+				],
+				[
+					'entities' => [
+						'Q2147483647' => [
 							'id' => 'Q2147483647',
 							'missing' => '',
-						),
-					),
+						],
+					],
 					'success' => 1,
-				),
-			),
-			'wbgetentities-sitetitle' => array(
-				array(
+				],
+			],
+			'wbgetentities-sitetitle' => [
+				[
 					'action' => 'wbgetentities',
 					'sites' => 'enwiki',
 					'titles' => 'FooBarBazBazBaz1111211',
-				),
-				array(
-					'entities' => array(
-						'-1' => array(
+				],
+				[
+					'entities' => [
+						'-1' => [
 							'site' => 'enwiki',
 							'title' => 'FooBarBazBazBaz1111211',
 							'missing' => '',
-						),
-					),
+						],
+					],
 					'success' => 1,
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**

@@ -110,7 +110,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
 		// build a mapping of formats to file extensions and include HTML
-		$supportedExtensions = array();
+		$supportedExtensions = [];
 		$supportedExtensions['html'] = 'html';
 		foreach ( $this->entityDataFormatProvider->getSupportedFormats() as $format ) {
 			$ext = $this->entityDataFormatProvider->getExtension( $format );

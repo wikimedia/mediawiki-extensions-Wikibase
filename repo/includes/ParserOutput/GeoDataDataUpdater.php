@@ -47,7 +47,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	/**
 	 * @var array[]
 	 */
-	private $coordinates = array();
+	private $coordinates = [];
 
 	/**
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher

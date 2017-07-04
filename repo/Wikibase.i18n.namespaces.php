@@ -12,11 +12,11 @@
 // If they are not defined, define them to be something otherwise unusable to get them out of the way.
 // In effect this means that namespace translations apply only if the user defined the corresponding
 // namespace constant.
-$namespaceConstants = array(
+$namespaceConstants = [
 	'WB_NS_ITEM',     'WB_NS_ITEM_TALK',
 	'WB_NS_PROPERTY', 'WB_NS_PROPERTY_TALK',
 	'WB_NS_QUERY',    'WB_NS_QUERY_TALK',
-);
+];
 
 //@todo: relying on these constants to be defined or not is a pretty horrible hack.
 //      these constants are not used anywhere else, they are expected to come from LocalSettings,
@@ -30,9 +30,9 @@ foreach ( $namespaceConstants as $const ) {
 	}
 }
 
-$namespaceNames = array();
+$namespaceNames = [];
 
-$namespaceNames['en'] = array(
+$namespaceNames['en'] = [
 	WB_NS_ITEM      => 'Item',
 	WB_NS_ITEM_TALK => 'Item_talk',
 
@@ -41,9 +41,9 @@ $namespaceNames['en'] = array(
 
 	WB_NS_QUERY      => 'Query',
 	WB_NS_QUERY_TALK => 'Query_talk',
-);
+];
 
-$namespaceNames['be-tarask'] = array(
+$namespaceNames['be-tarask'] = [
 	WB_NS_ITEM      => 'Аб’ект',
 	WB_NS_ITEM_TALK => 'Абмеркаваньне_аб’екта',
 
@@ -52,9 +52,9 @@ $namespaceNames['be-tarask'] = array(
 
 	WB_NS_QUERY      => 'Запыт',
 	WB_NS_QUERY_TALK => 'Абмеркаваньне_запыту',
-);
+];
 
-$namespaceNames['cs'] = array(
+$namespaceNames['cs'] = [
 	WB_NS_ITEM      => 'Položka',
 	WB_NS_ITEM_TALK => 'Diskuse k položce',
 
@@ -63,9 +63,9 @@ $namespaceNames['cs'] = array(
 
 	WB_NS_QUERY      => 'Dotaz',
 	WB_NS_QUERY_TALK => 'Diskuse k dotazu',
-);
+];
 
-$namespaceNames['de'] = array(
+$namespaceNames['de'] = [
 	WB_NS_ITEM      => 'Thema',
 	WB_NS_ITEM_TALK => 'Themendiskussion',
 
@@ -74,9 +74,9 @@ $namespaceNames['de'] = array(
 
 	WB_NS_QUERY      => 'Abfrage',
 	WB_NS_QUERY_TALK => 'Abfragediskussion',
-);
+];
 
-$namespaceNames['he'] = array(
+$namespaceNames['he'] = [
 	WB_NS_ITEM      => 'פריט',
 	WB_NS_ITEM_TALK => 'שיחת_פריט',
 
@@ -85,9 +85,9 @@ $namespaceNames['he'] = array(
 
 	WB_NS_QUERY      => 'שאילתה',
 	WB_NS_QUERY_TALK => 'שיחת_שאילתה',
-);
+];
 
-$namespaceNames['it'] = array(
+$namespaceNames['it'] = [
 	WB_NS_ITEM      => 'Elemento',
 	WB_NS_ITEM_TALK => 'Discussioni_elemento',
 
@@ -96,9 +96,9 @@ $namespaceNames['it'] = array(
 
 	WB_NS_QUERY      => 'Query',
 	WB_NS_QUERY_TALK => 'Discussioni_query',
-);
+];
 
-$namespaceNames['nl'] = array(
+$namespaceNames['nl'] = [
 	WB_NS_ITEM      => 'Item',
 	WB_NS_ITEM_TALK => 'Overleg_item',
 
@@ -107,9 +107,9 @@ $namespaceNames['nl'] = array(
 
 	WB_NS_QUERY      => 'Zoekopdracht',
 	WB_NS_QUERY_TALK => 'Overleg_zoekopdracht',
-);
+];
 
-$namespaceNames['ru'] = array(
+$namespaceNames['ru'] = [
 	WB_NS_ITEM      => 'Предмет',
 	WB_NS_ITEM_TALK => 'Обсуждение_предмета',
 
@@ -118,9 +118,9 @@ $namespaceNames['ru'] = array(
 
 	WB_NS_QUERY      => 'Запрос',
 	WB_NS_QUERY_TALK => 'Обсуждение_запроса',
-);
+];
 
-$namespaceNames['vi'] = array(
+$namespaceNames['vi'] = [
 	WB_NS_ITEM      => 'Khoản_mục',
 	WB_NS_ITEM_TALK => 'Thảo_luận_Khoản_mục',
 
@@ -129,4 +129,4 @@ $namespaceNames['vi'] = array(
 
 	WB_NS_QUERY      => 'Truy_vấn',
 	WB_NS_QUERY_TALK => 'Thảo_luận_Truy_vấn',
-);
+];

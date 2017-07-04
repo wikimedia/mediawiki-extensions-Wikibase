@@ -82,9 +82,9 @@ class PropertyContentTest extends EntityContentTest {
 	public function provideGetEntityId() {
 		$p11 = new PropertyId( 'P11' );
 
-		return array(
-			'property id' => array( $this->newBlank( $p11 ), $p11 ),
-		);
+		return [
+			'property id' => [ $this->newBlank( $p11 ), $p11 ],
+		];
 	}
 
 	public function provideContentObjectsWithoutId() {

@@ -126,7 +126,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param string|null $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
-		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$idString = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
 
@@ -193,7 +193,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	private function setForm( EntityDocument $entity = null ) {
 		$this->getOutput()->addHTML( $this->getCopyrightHTML() );
 
-		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
+		$this->getOutput()->addModuleStyles( [ 'wikibase.special' ] );
 
 		if ( $this->getUser()->isAnon() ) {
 			$this->getOutput()->addHTML( Html::rawElement(
@@ -227,16 +227,16 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected function getFormElements( EntityDocument $entity = null ) {
 		$id = 'wb-modifyentity-id';
 
-		return array(
-			'id' => array(
+		return [
+			'id' => [
 				'name' => 'id',
 				'label-message' => 'wikibase-modifyentity-id',
 				'type' => 'text',
 				'cssclass' => 'wb-input',
 				'id' => $id,
 				'default' => $entity === null ? '' : $entity->getId(),
-			),
-		);
+			],
+		];
 	}
 
 	/**

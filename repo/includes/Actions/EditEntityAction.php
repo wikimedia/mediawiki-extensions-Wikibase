@@ -58,10 +58,10 @@ class EditEntityAction extends ViewEntityAction {
 		$languageCode = $this->getContext()->getLanguage()->getCode();
 
 		//TODO: proper injection
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			//TODO: fallback chain
 			ValueFormatter::OPT_LANG => $languageCode
-		) );
+		] );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -72,7 +72,7 @@ class EditEntityAction extends ViewEntityAction {
 		);
 		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$this->getContext()->getLanguage(),
-			array() // TODO: populate ids of entities to prefetch
+			[] // TODO: populate ids of entities to prefetch
 		);
 
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
@@ -229,7 +229,7 @@ class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $latestRevision->getId() );
 		}
 
-		return Status::newGood( array( $olderRevision, $newerRevision, $latestRevision ) );
+		return Status::newGood( [ $olderRevision, $newerRevision, $latestRevision ] );
 	}
 
 	/**
@@ -409,7 +409,7 @@ class EditEntityAction extends ViewEntityAction {
 	private function displayUndoDiff( EntityContentDiff $diff ) {
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
-		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'table', [ 'class' => $tableClass ] ) );
 
 		$this->getOutput()->addHTML( '<colgroup>'
 			. '<col class="diff-marker"><col class="diff-content">'
@@ -420,15 +420,15 @@ class EditEntityAction extends ViewEntityAction {
 		$old = $this->msg( 'currentrev' )->parse();
 		$new = $this->msg( 'yourtext' )->parse(); //XXX: better message?
 
-		$this->getOutput()->addHTML( Html::openElement( 'tr', array( 'style' => 'vertical-align: top;' ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'tr', [ 'style' => 'vertical-align: top;' ] ) );
 		$this->getOutput()->addHTML(
-			Html::rawElement( 'td', array( 'colspan' => '2' ),
-				Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old )
+			Html::rawElement( 'td', [ 'colspan' => '2' ],
+				Html::rawElement( 'div', [ 'id' => 'mw-diff-otitle1' ], $old )
 			)
 		);
 		$this->getOutput()->addHTML(
-			Html::rawElement( 'td', array( 'colspan' => '2' ),
-				Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new )
+			Html::rawElement( 'td', [ 'colspan' => '2' ],
+				Html::rawElement( 'div', [ 'id' => 'mw-diff-ntitle1' ], $new )
 			)
 		);
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
@@ -464,9 +464,9 @@ class EditEntityAction extends ViewEntityAction {
 	private function showConfirmationForm( $undidRevision = 0 ) {
 		$req = $this->getRequest();
 
-		$args = array(
+		$args = [
 			'action' => 'submit',
-		);
+		];
 
 		if ( $req->getInt( 'undo' ) ) {
 			$args[ 'undo' ] = $req->getInt( 'undo' );
@@ -482,14 +482,14 @@ class EditEntityAction extends ViewEntityAction {
 
 		$actionUrl = $this->getTitle()->getLocalURL( $args );
 
-		$this->getOutput()->addHTML( Html::openElement( 'div', array( 'style' => 'margin-top: 1em;' ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'div', [ 'style' => 'margin-top: 1em;' ] ) );
 
-		$this->getOutput()->addHTML( Html::openElement( 'form', array(
+		$this->getOutput()->addHTML( Html::openElement( 'form', [
 			'id' => 'undo',
 			'name' => 'undo',
 			'method' => 'post',
 			'action' => $actionUrl,
-			'enctype' => 'multipart/form-data' ) ) );
+			'enctype' => 'multipart/form-data' ] ) );
 
 		$this->getOutput()->addHTML( "<div class='editOptions'>\n" );
 
@@ -502,10 +502,10 @@ class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "</div><!-- editButtons -->\n</div><!-- editOptions -->\n" );
 
-		$hidden = array(
+		$hidden = [
 			'wpEditToken' => $this->getUser()->getEditToken(),
 			'wpBaseRev' => $this->getTitle()->getLatestRevID(),
-		);
+		];
 		if ( !empty( $undidRevision ) ) {
 			$hidden['wpUndidRevision'] = $undidRevision;
 		}

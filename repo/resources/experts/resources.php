@@ -10,26 +10,26 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
-		'wikibase.experts.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+	return [
+		'wikibase.experts.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'__namespace.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			)
-		),
+			]
+		],
 
-		'wikibase.experts.getStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.experts.getStore' => $moduleTemplate + [
+			'scripts' => [
 				'getStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.experts.modules',
 				'dataValues.values',
 				'jquery.valueview.ExpertStore',
@@ -39,14 +39,14 @@ return call_user_func( function() {
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.experts.UnDeserializableValue',
 				'jquery.valueview.experts.UnsupportedValue',
-			),
-		),
+			],
+		],
 
-		'wikibase.experts.Entity' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.experts.Entity' => $moduleTemplate + [
+			'scripts' => [
 				'Entity.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.valueview.Expert',
 				'jquery.valueview.experts.StringValue',
@@ -54,29 +54,29 @@ return call_user_func( function() {
 				'mw.config.values.wbRepo',
 				'util.inherit',
 				'wikibase.experts.__namespace',
-			),
-		),
+			],
+		],
 
-		'wikibase.experts.Item' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.experts.Item' => $moduleTemplate + [
+			'scripts' => [
 				'Item.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.valueview.Expert',
 				'wikibase.experts.__namespace',
 				'wikibase.experts.Entity',
-			),
-		),
+			],
+		],
 
-		'wikibase.experts.Property' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.experts.Property' => $moduleTemplate + [
+			'scripts' => [
 				'Property.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.valueview.Expert',
 				'wikibase.experts.__namespace',
 				'wikibase.experts.Entity',
-			),
-		),
-	);
+			],
+		],
+	];
 } );

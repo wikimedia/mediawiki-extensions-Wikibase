@@ -61,7 +61,7 @@ class ChangeRunCoalescer {
 	 * @return EntityChange[]
 	 */
 	public function transformChangeList( array $changes ) {
-		$coalesced = array();
+		$coalesced = [];
 
 		$changesByEntity = $this->groupChangesByEntity( $changes );
 		/** @var EntityChange[] $entityChanges */
@@ -70,7 +70,7 @@ class ChangeRunCoalescer {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, array( $this, 'compareChangesByTimestamp' ) );
+		usort( $coalesced, [ $this, 'compareChangesByTimestamp' ] );
 
 		wfDebugLog( __CLASS__, __METHOD__ . ': coalesced '
 			. count( $changes ) . ' into ' . count( $coalesced ) . ' changes' );
@@ -87,13 +87,13 @@ class ChangeRunCoalescer {
 	 *         entity ID is the list of changes performed on that entity.
 	 */
 	private function groupChangesByEntity( array $changes ) {
-		$groups = array();
+		$groups = [];
 
 		foreach ( $changes as $change ) {
 			$id = $change->getEntityId()->getSerialization();
 
 			if ( !isset( $groups[$id] ) ) {
-				$groups[$id] = array();
+				$groups[$id] = [];
 			}
 
 			$groups[$id][] = $change;
@@ -132,7 +132,7 @@ class ChangeRunCoalescer {
 		$minor = true;
 		$bot = true;
 
-		$ids = array();
+		$ids = [];
 
 		foreach ( $changes as $change ) {
 			$ids[] = $change->getId();
@@ -169,20 +169,20 @@ class ChangeRunCoalescer {
 		);
 
 		$change->setFields(
-			array(
+			[
 				'revision_id' => $last->getField( 'revision_id' ),
 				'user_id' => $last->getField( 'user_id' ),
 				'time' => $last->getField( 'time' ),
-			)
+			]
 		);
 
 		$change->setMetadata( array_merge(
 			$lastmeta,
-			array(
+			[
 				'parent_id' => $parentRevId,
 				'minor' => $minor,
 				'bot' => $bot,
-			)
+			]
 		//FIXME: size before & size after
 		//FIXME: size before & size after
 		) );
@@ -209,9 +209,9 @@ class ChangeRunCoalescer {
 	 * @return Change[] grouped changes
 	 */
 	private function coalesceRuns( EntityId $entityId, array $changes ) {
-		$coalesced = array();
+		$coalesced = [];
 
-		$currentRun = array();
+		$currentRun = [];
 		$currentUser = null;
 		$currentAction = null;
 		$breakNext = false;
@@ -249,7 +249,7 @@ class ChangeRunCoalescer {
 						}
 					}
 
-					$currentRun = array();
+					$currentRun = [];
 					$currentUser = $user;
 					$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;
 				}

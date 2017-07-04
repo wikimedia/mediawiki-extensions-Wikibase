@@ -38,7 +38,7 @@ class EntityContentDiff extends Diff {
 		Diff $redirectDiff,
 		$entityType
 	) {
-		$operations = array();
+		$operations = [];
 
 		$this->entityDiff = $entityDiff;
 		$this->redirectDiff = $redirectDiff;

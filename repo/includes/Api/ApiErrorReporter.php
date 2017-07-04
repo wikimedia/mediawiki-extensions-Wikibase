@@ -92,7 +92,7 @@ class ApiErrorReporter {
 		$moduleName = $this->apiModule->getModuleName();
 
 		$result->addValue(
-			array( 'warnings', $moduleName ),
+			[ 'warnings', $moduleName ],
 			$key,
 			$warningData,
 			ApiResult::NO_SIZE_CHECK
@@ -302,7 +302,7 @@ class ApiErrorReporter {
 	 */
 	private function addMessageToResult( Message $message, &$data ) {
 		if ( $data === null ) {
-			$data = array();
+			$data = [];
 		}
 
 		if ( !is_array( $data ) ) {
@@ -311,7 +311,7 @@ class ApiErrorReporter {
 
 		$messageData = $this->convertMessageToResult( $message );
 
-		$messageList = isset( $data['messages'] ) ? $data['messages'] : array();
+		$messageList = isset( $data['messages'] ) ? $data['messages'] : [];
 		ApiResult::setIndexedTagName( $messageList, 'message' );
 
 		$messageList[] = $messageData;
@@ -374,7 +374,7 @@ class ApiErrorReporter {
 	 *         was already present in the $messages parameter.
 	 */
 	private function convertMessagesToResult( array $messageSpecs ) {
-		$result = array();
+		$result = [];
 
 		foreach ( $messageSpecs as $message ) {
 			$type = null;
@@ -417,7 +417,7 @@ class ApiErrorReporter {
 	 *         was already present in the $messages parameter.
 	 */
 	private function convertToMessageList( array $messageSpecs ) {
-		$messages = array();
+		$messages = [];
 
 		foreach ( $messageSpecs as $message ) {
 			if ( !( $message instanceof Message ) ) {
@@ -445,7 +445,7 @@ class ApiErrorReporter {
 		$name = $message->getKey();
 		$params = $message->getParams();
 
-		$row = array();
+		$row = [];
 		ApiResult::setValue( $row, 'name', $name );
 
 		ApiResult::setValue( $row, 'parameters', $params );

@@ -37,11 +37,11 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		// these are required because Linker is used in ChangeLineFormatter
 		// @todo eliminate Linker or at least use of Linker in Wikibase :)
-		$this->setMwGlobals( array(
+		$this->setMwGlobals( [
 			'wgScriptPath' => '',
 			'wgScript' => '/index.php',
 			'wgArticlePath' => '/wiki/$1'
-		) );
+		] );
 
 		$this->repoLinker = new RepoLinker(
 			'http://www.wikidata.org',
@@ -74,7 +74,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$externalChange,
 			$recentChange->getTitle(),
 			$recentChange->counter,
-			$changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' )
+			$changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' )
 		);
 
 		foreach ( $expectedTags as $key => $tagMatcher ) {
@@ -256,70 +256,70 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	public function formatProvider() {
 		$commentHtml = '<span><a href="http://acme.test">Linky</a> <script>we can run scripts here</script><span/>';
 
-		return array(
-			'edit-change' => array(
+		return [
+			'edit-change' => [
 				$this->getEditSiteLinkChangeTagMatchers(),
 				$this->getEditSiteLinkPatterns(),
 				$this->getEditSiteLinkRecentChange(
 					'/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]'
 				)
-			),
-			'log-change' => array(
+			],
+			'log-change' => [
 				$this->getLogChangeTagMatchers(),
-				array(
+				[
 					'/Log Change Comment/',
-				),
+				],
 				$this->getLogRecentChange()
-			),
-			'comment-fallback' => array(
-				array(),
-				array(
+			],
+			'comment-fallback' => [
+				[],
+				[
 					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/'
-				),
+				],
 				$this->getEditSiteLinkRecentChange(
 					'',
 					null,
-					array(
+					[
 						'message' => 'wikibase-comment-remove',
-					),
+					],
 					null
 				)
-			),
-			'comment-injection' => array(
-				array(),
-				array(
+			],
+			'comment-injection' => [
+				[],
+				[
 					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/'
-				),
+				],
 				$this->getEditSiteLinkRecentChange(
 					'<script>evil</script>'
 				)
-			),
-			'comment-html' => array(
-				array(),
-				array(
+			],
+			'comment-html' => [
+				[],
+				[
 					'/<span class=\"comment\">.*' . preg_quote( $commentHtml, '/' ) . '/',
-				),
+				],
 				$this->getEditSiteLinkRecentChange(
 					'this shall be ignored',
 					$commentHtml,
-					array(
+					[
 						'message' => 'this-shall-be-ignored',
-					),
+					],
 					null
 				)
-			),
-		);
+			],
+		];
 	}
 
 	public function getEditSiteLinkPatterns() {
-		return array(
+		return [
 			'/title=Special%3AEntityPage%2FQ4&amp;curid=5&amp;action=history/',
 			'/title=Special%3AEntityPage%2FQ4&amp;curid=5&amp;diff=92&amp;oldid=90/',
 			'/<span class="comment">\('
 				. '‎<span dir="auto"><span class="autocomment">Changed claim: <\/span><\/span> '
 				. '<a .*?>Property:P213<\/a>: <a .*?>Q850<\/a>'
 				. '\)<\/span>/',
-		);
+		];
 	}
 
 	public function getEditSiteLinkChangeTagMatchers() {
@@ -382,8 +382,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$legacyComment = null,
 		$compositeLegacyComment = null
 	) {
-		$params = array(
-			'wikibase-repo-change' => array(
+		$params = [
+			'wikibase-repo-change' => [
 				'id' => 4,
 				'type' => 'wikibase-item~update',
 				'time' => '20130819111741',
@@ -396,8 +396,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
-			)
-		);
+			]
+		];
 
 		if ( $legacyComment ) {
 			$params['wikibase-repo-change']['comment'] = $legacyComment;
@@ -455,8 +455,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	protected function getLogRecentChange() {
-		$params = array(
-			'wikibase-repo-change' => array(
+		$params = [
+			'wikibase-repo-change' => [
 				'id' => 20,
 				'type' => 'wikibase-item~remove',
 				'time' => '20130820151835',
@@ -469,8 +469,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				'rev_id' => 0,
 				'parent_id' => 0,
 				'bot' => false
-			)
-		);
+			]
+		];
 
 		$title = $this->makeTitle( NS_MAIN, 'Canada', 12, 53 );
 		return $this->makeRecentChange( $params, $title, 'Log Change Comment' );
@@ -515,7 +515,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	private function makeRecentChange( array $params, Title $title, $comment ) {
-		$attribs = array(
+		$attribs = [
 			'rc_id' => 1234,
 			'rc_timestamp' => $params['wikibase-repo-change']['time'],
 			'rc_user' => 0,
@@ -540,7 +540,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_log_type' => null,
 			'rc_log_action' => '',
 			'rc_params' => serialize( $params ),
-		);
+		];
 
 		$recentChange = RecentChange::newFromRow( (object)$attribs );
 		$recentChange->counter = 1;

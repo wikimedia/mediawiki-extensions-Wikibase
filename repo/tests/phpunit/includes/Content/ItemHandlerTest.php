@@ -149,9 +149,9 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	public function entityIdProvider() {
-		return array(
-			array( 'Q7' ),
-		);
+		return [
+			[ 'Q7' ],
+		];
 	}
 
 	protected function newEntity( EntityId $id = null ) {

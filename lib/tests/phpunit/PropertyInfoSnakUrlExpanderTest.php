@@ -58,43 +58,43 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 		$value = new StringValue( 'X&Y' );
 		$url = new StringValue( 'http://acme.info/&?&foo/' );
 
-		return array(
-			'unknown property' => array(
+		return [
+			'unknown property' => [
 				$infoProvider,
 				new PropertyValueSnak( $p66, $value ),
 				null
-			),
-			'no url pattern' => array(
+			],
+			'no url pattern' => [
 				$infoProvider,
 				new PropertyValueSnak( $p2, $value ),
 				null
-			),
-			'url pattern defined' => array(
+			],
+			'url pattern defined' => [
 				$infoProvider,
 				new PropertyValueSnak( $p3, $value ),
 				'http://acme.info/foo/X%26Y'
-			),
-			'value with slash' => array(
+			],
+			'value with slash' => [
 				$infoProvider,
 				new PropertyValueSnak( $p3, new StringValue( 'X/Y' ) ),
 				'http://acme.info/foo/X/Y'
-			),
-			'pattern with url parameter' => array(
+			],
+			'pattern with url parameter' => [
 				$infoProvider,
 				new PropertyValueSnak( $p4, $value ),
 				'http://acme.info/foo?m=test&q=X%26Y'
-			),
-			'pattern with fragment' => array(
+			],
+			'pattern with fragment' => [
 				$infoProvider,
 				new PropertyValueSnak( $p5, $value ),
 				'http://acme.info/foo#X%26Y'
-			),
-			'minimal url pattern' => array(
+			],
+			'minimal url pattern' => [
 				$infoProvider,
 				new PropertyValueSnak( $p523, $url ),
 				'http://acme.info/%26%3F%26foo/'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -112,14 +112,14 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideExpandUrl_ParameterTypeException() {
-		return array(
-			'bad value type' => array(
+		return [
+			'bad value type' => [
 				new PropertyValueSnak(
 					new PropertyId( 'P7' ),
 					new EntityIdValue( new PropertyId( 'P18' ) )
 				)
-			),
-		);
+			],
+		];
 	}
 
 	/**

@@ -53,7 +53,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( $p1, 'external-id' );
 
-		$dataTypeFactory = new DataTypeFactory( array( 'external-id' => 'string' ) );
+		$dataTypeFactory = new DataTypeFactory( [ 'external-id' => 'string' ] );
 
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
@@ -67,11 +67,11 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$p1 = new PropertyId( 'P1' );
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'AB123' ) );
 
-		return array(
-			array( $snak, SnakFormatter::FORMAT_PLAIN, 'AB123' ),
-			array( $snak, SnakFormatter::FORMAT_WIKI, '[http://acme.com/vocab/AB123 AB123]' ),
-			array( $snak, SnakFormatter::FORMAT_HTML, '<a class="wb-external-id" href="http://acme.com/vocab/AB123">AB123</a>' ),
-		);
+		return [
+			[ $snak, SnakFormatter::FORMAT_PLAIN, 'AB123' ],
+			[ $snak, SnakFormatter::FORMAT_WIKI, '[http://acme.com/vocab/AB123 AB123]' ],
+			[ $snak, SnakFormatter::FORMAT_HTML, '<a class="wb-external-id" href="http://acme.com/vocab/AB123">AB123</a>' ],
+		];
 	}
 
 	/**

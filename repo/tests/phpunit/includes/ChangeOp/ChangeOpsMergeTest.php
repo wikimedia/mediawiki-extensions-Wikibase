@@ -48,7 +48,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -57,7 +57,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	protected function makeChangeOpsMerge(
 		Item $fromItem,
 		Item $toItem,
-		array $ignoreConflicts = array(),
+		array $ignoreConflicts = [],
 		$siteLookup = null
 	) {
 		if ( $siteLookup === null ) {
@@ -70,7 +70,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function( Item $item ) {
 				foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 					if ( $siteLink->getPageName() === 'DUPE' ) {
-						return Result::newError( array( Error::newError( 'SiteLink conflict' ) ) );
+						return Result::newError( [ Error::newError( 'SiteLink conflict' ) ] );
 					}
 				}
 				return Result::newSuccess();
@@ -81,7 +81,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->getMock();
 		$constraintProvider->expects( $this->any() )
 			->method( 'getUpdateValidators' )
-			->will( $this->returnValue( array( $siteLinkUniquenessValidator ) ) );
+			->will( $this->returnValue( [ $siteLinkUniquenessValidator ] ) );
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
@@ -119,13 +119,13 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	public function provideValidConstruction() {
 		$from = $this->newItemWithId( 'Q111' );
 		$to = $this->newItemWithId( 'Q222' );
-		return array(
-			array( $from, $to, array() ),
-			array( $from, $to, array( 'sitelink' ) ),
-			array( $from, $to, array( 'statement' ) ),
-			array( $from, $to, array( 'description' ) ),
-			array( $from, $to, array( 'description', 'sitelink' ) ),
-		);
+		return [
+			[ $from, $to, [] ],
+			[ $from, $to, [ 'sitelink' ] ],
+			[ $from, $to, [ 'statement' ] ],
+			[ $from, $to, [ 'description' ] ],
+			[ $from, $to, [ 'description', 'sitelink' ] ],
+		];
 	}
 
 	/**
@@ -143,11 +143,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	public function provideInvalidConstruction() {
 		$from = $this->newItemWithId( 'Q111' );
 		$to = $this->newItemWithId( 'Q222' );
-		return array(
-			array( $from, $to, array( 'label' ) ),
-			array( $from, $to, array( 'foo' ) ),
-			array( $from, $to, array( 'description', 'foo' ) ),
-		);
+		return [
+			[ $from, $to, [ 'label' ] ],
+			[ $from, $to, [ 'foo' ] ],
+			[ $from, $to, [ 'description', 'foo' ] ],
+		];
 	}
 
 	private function newItemWithId( $idString ) {
@@ -163,7 +163,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		Item $to,
 		Item $expectedFrom,
 		Item $expectedTo,
-		array $ignoreConflicts = array()
+		array $ignoreConflicts = []
 	) {
 		$from->setId( new ItemId( 'Q111' ) );
 		$to->setId( new ItemId( 'Q222' ) );
@@ -196,23 +196,23 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @return array 1=>from 2=>to 3=>expectedFrom 4=>expectedTo
 	 */
 	public function provideData() {
-		$testCases = array();
+		$testCases = [];
 
 		$itemWithEnLabel = NewItem::withLabel( 'en', 'foo' )
 			->build();
 
-		$testCases['labelMerge'] = array(
+		$testCases['labelMerge'] = [
 			$itemWithEnLabel->copy(),
 			new Item(),
 			new Item(),
 			$itemWithEnLabel->copy(),
-		);
-		$testCases['identicalLabelMerge'] = array(
+		];
+		$testCases['identicalLabelMerge'] = [
 			$itemWithEnLabel->copy(),
 			$itemWithEnLabel->copy(),
 			new Item(),
 			$itemWithEnLabel->copy(),
-		);
+		];
 
 		$itemWithEnBarLabel = NewItem::withLabel( 'en', 'bar' )
 			->build();
@@ -221,118 +221,118 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->andAliases( 'en', [ 'foo' ] )
 			->build();
 
-		$testCases['labelAsAliasMerge'] = array(
+		$testCases['labelAsAliasMerge'] = [
 			$itemWithEnLabel->copy(),
 			$itemWithEnBarLabel->copy(),
 			new Item(),
 			$itemWithLabelAndAlias->copy()
-		);
+		];
 
 		$itemWithDescription = NewItem::withDescription( 'en', 'foo' )
 			->build();
 
-		$testCases['descriptionMerge'] = array(
+		$testCases['descriptionMerge'] = [
 			$itemWithDescription->copy(),
 			new Item(),
 			new Item(),
 			$itemWithDescription->copy(),
-		);
-		$testCases['identicalDescriptionMerge'] = array(
+		];
+		$testCases['identicalDescriptionMerge'] = [
 			$itemWithDescription->copy(),
 			$itemWithDescription->copy(),
 			new Item(),
 			$itemWithDescription->copy(),
-		);
+		];
 
 		$itemWithBarDescription = NewItem::withDescription( 'en', 'bar' )
 			->build();
-		$testCases['ignoreConflictDescriptionMerge'] = array(
+		$testCases['ignoreConflictDescriptionMerge'] = [
 			$itemWithDescription->copy(),
 			$itemWithBarDescription->copy(),
 			$itemWithDescription->copy(),
 			$itemWithBarDescription->copy(),
-			array( 'description' )
-		);
+			[ 'description' ]
+		];
 
 		$itemWithFooBarAliases = NewItem::withAliases( 'en', [ 'foo', 'bar' ] )
 			->build();
 
-		$testCases['aliasMerge'] = array(
+		$testCases['aliasMerge'] = [
 			$itemWithFooBarAliases->copy(),
 			new Item(),
 			new Item(),
 			$itemWithFooBarAliases->copy(),
-		);
+		];
 
 		$itemWithFooBarBazAliases = NewItem::withAliases( 'en', [ 'foo', 'bar', 'baz' ] )
 			->build();
 
-		$testCases['duplicateAliasMerge'] = array(
+		$testCases['duplicateAliasMerge'] = [
 			$itemWithFooBarAliases->copy(),
 			$itemWithFooBarBazAliases->copy(),
 			new Item(),
 			$itemWithFooBarBazAliases->copy(),
-		);
+		];
 
 		$itemWithLink = NewItem::withSiteLink( 'enwiki', 'foo' )
 			->build();
 
-		$testCases['linkMerge'] = array(
+		$testCases['linkMerge'] = [
 			$itemWithLink->copy(),
 			new Item(),
 			new Item(),
 			$itemWithLink->copy(),
-		);
+		];
 
-		$testCases['sameLinkLinkMerge'] = array(
+		$testCases['sameLinkLinkMerge'] = [
 			$itemWithLink->copy(),
 			$itemWithLink->copy(),
 			new Item(),
 			$itemWithLink->copy(),
-		);
+		];
 
 		$itemWithBarLink = NewItem::withSiteLink( 'enwiki', 'bar' )
 			->build();
 
-		$testCases['ignoreConflictLinkMerge'] = array(
+		$testCases['ignoreConflictLinkMerge'] = [
 			$itemWithLink->copy(),
 			$itemWithBarLink->copy(),
 			$itemWithLink->copy(),
 			$itemWithBarLink->copy(),
-			array( 'sitelink' ),
-		);
+			[ 'sitelink' ],
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) );
 		$statement->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithStatement = NewItem::withStatement( $statement )
 			->build();
-		$testCases['statementMerge'] = array(
+		$testCases['statementMerge'] = [
 			$itemWithStatement->copy(),
 			new Item(),
 			new Item(),
 			$itemWithStatement->copy()
-		);
+		];
 
 		$qualifiedStatement = new Statement(
 			new PropertyNoValueSnak( new PropertyId( 'P56' ) ),
-			new SnakList( array( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) ) )
+			new SnakList( [ new PropertyNoValueSnak( new PropertyId( 'P56' ) ) ] )
 		);
 		$qualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithQualifiedStatement = NewItem::withStatement( $qualifiedStatement )
 			->build();
 
-		$testCases['statementWithQualifierMerge'] = array(
+		$testCases['statementWithQualifierMerge'] = [
 			$itemWithQualifiedStatement->copy(),
 			new Item(),
 			new Item(),
 			$itemWithQualifiedStatement->copy()
-		);
+		];
 
 		$anotherQualifiedStatement = new Statement(
 			new PropertyNoValueSnak( new PropertyId( 'P88' ) ),
-			new SnakList( array( new PropertyNoValueSnak( new PropertyId( 'P88' ) ) ) )
+			new SnakList( [ new PropertyNoValueSnak( new PropertyId( 'P88' ) ) ] )
 		);
 		$anotherQualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F' );
 
@@ -352,12 +352,12 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->andStatement( $anotherQualifiedStatement )
 			->andStatement( $selfReferencingStatement );
 
-		$testCases['itemMerge'] = array(
+		$testCases['itemMerge'] = [
 			$bigItemBuilder->build(),
 			new Item(),
 			new Item(),
 			$bigItemBuilder->build(),
-		);
+		];
 
 		$referencingStatement = new Statement(
 			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q222' ) ) )
@@ -393,13 +393,13 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->andStatement( $referencingStatement )
 			->build();
 
-		$testCases['ignoreConflictItemMerge'] = array(
+		$testCases['ignoreConflictItemMerge'] = [
 			$anotherBigItem,
 			$smallerItem,
 			$smallerMergedItem,
 			$bigMergedItem,
-			array( 'description', 'sitelink', 'statement' )
-		);
+			[ 'description', 'sitelink', 'statement' ]
+		];
 
 		return $testCases;
 	}
@@ -420,8 +420,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$enwiki->expects( $this->exactly( 2 ) )
 			->method( 'normalizePageName' )
 			->withConsecutive(
-				array( $this->equalTo( 'FOo' ) ),
-				array( $this->equalTo( 'Foo' ) )
+				[ $this->equalTo( 'FOo' ) ],
+				[ $this->equalTo( 'Foo' ) ]
 			)
 			->will( $this->returnValue( 'Foo' ) );
 
@@ -431,7 +431,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			array(),
+			[],
 			$mockSiteStore
 		);
 
@@ -453,7 +453,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			array(),
+			[],
 			new HashSiteStore()
 		);
 
@@ -490,7 +490,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			array( 'sitelink' )
+			[ 'sitelink' ]
 		);
 
 		$changeOps->apply();

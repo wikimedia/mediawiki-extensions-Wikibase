@@ -288,7 +288,7 @@ class ChangeDispatcher {
 		//      that will no longer work once we have a client side usage tracking table
 		//      for free-form use.
 
-		$batch = array();
+		$batch = [];
 		$batchSize = 0;
 		$chunkSize = $this->batchSize * $this->batchChunkFactor;
 		$chunksExamined = 0;
@@ -324,7 +324,7 @@ class ChangeDispatcher {
 
 		$this->trace( "Got " . count( $batch ) . " pending changes. " );
 
-		return array( $batch, $lastIdSeen );
+		return [ $batch, $lastIdSeen ];
 	}
 
 	/**
@@ -369,7 +369,7 @@ class ChangeDispatcher {
 	 */
 	private function filterChanges( $siteID, array $changes, $limit ) {
 		// collect all item IDs mentioned in the changes
-		$entitySet = array();
+		$entitySet = [];
 		foreach ( $changes as $change ) {
 			if ( !( $change instanceof EntityChange ) ) {
 				continue;
@@ -388,7 +388,7 @@ class ChangeDispatcher {
 		$this->trace( "Retaining changes for " . count( $subscribedEntities ) . " relevant entities." );
 
 		// find all changes that relate to an item that has a sitelink to $siteID.
-		$filteredChanges = array();
+		$filteredChanges = [];
 		$numberOfChangesFound = 0;
 		$lastIdSeen = 0;
 		foreach ( $changes as $change ) {
@@ -415,7 +415,7 @@ class ChangeDispatcher {
 
 		$this->trace( "Found $numberOfChangesFound relevant Entity changes." );
 
-		return array( $filteredChanges, $lastIdSeen );
+		return [ $filteredChanges, $lastIdSeen ];
 	}
 
 	/**
@@ -424,7 +424,7 @@ class ChangeDispatcher {
 	 * @return EntityId[] $entityIds re-keyed by id string.
 	 */
 	private function reIndexEntityIds( array $entityIds ) {
-		$reindexed = array();
+		$reindexed = [];
 
 		foreach ( $entityIds as $id ) {
 			$key = $id->getSerialization();

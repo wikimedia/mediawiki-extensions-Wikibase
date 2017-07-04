@@ -136,7 +136,7 @@ class GetClaims extends ApiBase {
 		}
 
 		$statement = $statements->getFirstStatementWithGuid( $guid );
-		return new StatementList( $statement === null ? array() : $statement );
+		return new StatementList( $statement === null ? [] : $statement );
 	}
 
 	private function newRequestParamsBasedFilter() {
@@ -174,7 +174,7 @@ class GetClaims extends ApiBase {
 			$idString = $params['entity'];
 		}
 
-		return array( $idString, $guid );
+		return [ $idString, $guid ];
 	}
 
 	private function getEntityIdFromStatementGuid( $guid ) {
@@ -189,34 +189,34 @@ class GetClaims extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'entity' => array(
+		return [
+			'entity' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'property' => array(
+			],
+			'property' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'claim' => array(
+			],
+			'claim' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'rank' => array(
+			],
+			'rank' => [
 				self::PARAM_TYPE => StatementRankSerializer::getRanks(),
-			),
-			'props' => array(
-				self::PARAM_TYPE => array(
+			],
+			'props' => [
+				self::PARAM_TYPE => [
 					'references',
-				),
+				],
 				self::PARAM_DFLT => 'references',
 				self::PARAM_ISMULTI => true,
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			"action=wbgetclaims&entity=Q42" =>
 				"apihelp-wbgetclaims-example-1",
 			"action=wbgetclaims&entity=Q42&property=P31" =>
@@ -225,7 +225,7 @@ class GetClaims extends ApiBase {
 				"apihelp-wbgetclaims-example-3",
 			'action=wbgetclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' =>
 				'apihelp-wbgetclaims-example-4',
-		);
+		];
 	}
 
 }

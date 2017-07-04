@@ -124,27 +124,27 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			$this->getLanguage()->getCode()
 		);
 
-		$options = array(
+		$options = [
 			$this->msg( 'wikibase-listproperties-all' )->text() => ''
-		);
+		];
 		$options = array_merge( $options, $dataTypeSelect->getOptionsArray() );
 
-		$formDescriptor = array(
-			'datatype' => array(
+		$formDescriptor = [
+			'datatype' => [
 				'name' => 'datatype',
 				'type' => 'select',
 				'id' => 'wb-listproperties-datatype',
 				'label-message' => 'wikibase-listproperties-datatype',
 				'options' => $options,
 				'default' => $this->dataType
-			),
-			'submit' => array(
+			],
+			'submit' => [
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-listproperties-submit',
 				'default' => $this->msg( 'wikibase-listproperties-submit' )->text()
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-listproperties-form' )
@@ -173,25 +173,25 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$row = Html::rawElement(
 			'a',
-			array(
+			[
 				'title' => $title ? $title->getPrefixedText() : $propertyId->getSerialization(),
 				'href' => $title ? $title->getLocalURL() : ''
-			),
+			],
 			Html::rawElement(
 				'span',
-				array( 'class' => 'wb-itemlink' ),
+				[ 'class' => 'wb-itemlink' ],
 				Html::element(
 					'span',
-					array(
+					[
 						'class' => 'wb-itemlink-label',
 						'lang' => $labelTerm ? $labelTerm->getActualLanguageCode() : '',
-					),
+					],
 					$labelTerm ? $labelTerm->getText() : ''
 				) .
 				( $labelTerm ? ' ' : '' ) .
 				Html::element(
 					'span',
-					array( 'class' => 'wb-itemlink-id' ),
+					[ 'class' => 'wb-itemlink-id' ],
 					'(' . $propertyId->getSerialization() . ')'
 				)
 			)

@@ -19,7 +19,7 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 	/**
 	 * @var StatementGrouper[]
 	 */
-	private $statementGroupers = array();
+	private $statementGroupers = [];
 
 	/**
 	 * @var StatementGuidParser

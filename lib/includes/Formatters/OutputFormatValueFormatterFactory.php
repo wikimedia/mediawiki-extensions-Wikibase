@@ -154,7 +154,7 @@ class OutputFormatValueFormatterFactory {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	private function buildDefinedFormatters( $format, FormatterOptions $options ) {
-		$formatters = array();
+		$formatters = [];
 
 		foreach ( $this->factoryFunctions as $type => $func ) {
 			$formatter = call_user_func( $func, $format, $options );

@@ -54,113 +54,113 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetPropertyIdsForLabels() {
-		$terms = array(
+		$terms = [
 			// de
-			new TermIndexEntry( array(
+			new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P1' ),
 				'termText' => 'Eins',
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P2' ),
 				'termText' => 'Zwei',
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P3' ),
 				'termText' => 'Drei',
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P4' ),
 				'termText' => 'vier', // lower case
-			) ),
+			] ),
 
 			// en
-			new TermIndexEntry( array(
+			new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => new PropertyId( 'P1' ),
 				'termText' => 'One',
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => new ItemId( 'Q2' ), // not a property
 				'termText' => 'Two',
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'termType' => 'alias', // not a label
 				'termLanguage' => 'en',
 				'entityId' => new PropertyId( 'P3' ),
 				'termText' => 'Three',
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'termType' => 'description', // not a label
 				'termLanguage' => 'en',
 				'entityId' => new PropertyId( 'P4' ),
 				'termText' => 'Four',
-			) ),
-		);
+			] ),
+		];
 
-		return array(
-			array( // #0
+		return [
+			[ // #0
 				'de',
 				$terms,
-				array(), // labels
-				array(), // expected
-			),
-			array( // #1
+				[], // labels
+				[], // expected
+			],
+			[ // #1
 				'de',
 				$terms,
-				array( // labels
+				[ // labels
 					'Eins',
 					'Zwei'
-				),
-				array( // expected
+				],
+				[ // expected
 					'Eins' => new PropertyId( 'P1' ),
 					'Zwei' => new PropertyId( 'P2' ),
-				)
-			),
-			array( // #2
+				]
+			],
+			[ // #2
 				'de',
 				$terms,
-				array( // labels
+				[ // labels
 					'Drei',
 					'Vier'
-				),
-				array( // expected
+				],
+				[ // expected
 					'Drei' => new PropertyId( 'P3' ),
-				)
-			),
-			array( // #3
+				]
+			],
+			[ // #3
 				'en',
 				$terms,
-				array( // labels
+				[ // labels
 					'Eins',
 					'Zwei'
-				),
-				array() // expected
-			),
-			array( // #4
+				],
+				[] // expected
+			],
+			[ // #4
 				'en',
 				$terms,
-				array( // labels
+				[ // labels
 					'One',
 					'Two',
 					'Three',
 					'Four'
-				),
-				array( // expected
+				],
+				[ // expected
 					'One' => new PropertyId( 'P1' ),
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 }

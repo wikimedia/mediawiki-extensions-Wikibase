@@ -17,7 +17,7 @@ class GenericEventDispatcher {
 	/**
 	 * @var array
 	 */
-	private $watchers = array();
+	private $watchers = [];
 
 	/**
 	 * @var int
@@ -91,7 +91,7 @@ class GenericEventDispatcher {
 		$event = array_shift( $args );
 
 		foreach ( $this->watchers as $watcher ) {
-			call_user_func_array( array( $watcher, $event ), $args );
+			call_user_func_array( [ $watcher, $event ], $args );
 		}
 	}
 

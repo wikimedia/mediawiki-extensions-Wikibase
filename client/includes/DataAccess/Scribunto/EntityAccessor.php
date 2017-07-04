@@ -143,9 +143,9 @@ class EntityAccessor {
 			array_unique( array_merge(
 				$this->termsLanguages->getLanguages(),
 				$this->fallbackChain->getFetchLanguageCodes(),
-				array( $this->language->getCode() )
+				[ $this->language->getCode() ]
 			) ),
-			array( $this->language->getCode() => $this->fallbackChain )
+			[ $this->language->getCode() => $this->fallbackChain ]
 		);
 	}
 

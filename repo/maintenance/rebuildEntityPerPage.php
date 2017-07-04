@@ -46,7 +46,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
-			array( $this, 'report' )
+			[ $this, 'report' ]
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

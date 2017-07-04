@@ -46,7 +46,7 @@ class MockChunkAccess implements ChunkAccess {
 		} while ( next( $this->data ) );
 
 		$c = 0;
-		$chunk = array();
+		$chunk = [];
 		do {
 			if ( $c >= $size ) {
 				break;
