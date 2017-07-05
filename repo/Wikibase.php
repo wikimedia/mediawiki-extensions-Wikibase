@@ -791,7 +791,8 @@ call_user_func( function() {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getEntityPermissionChecker()
 		);
 	};
 	$wgSpecialPages['SetDescription'] = function() {
@@ -809,7 +810,8 @@ call_user_func( function() {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getEntityPermissionChecker()
 		);
 	};
 	$wgSpecialPages['SetAliases'] = function() {
@@ -827,7 +829,8 @@ call_user_func( function() {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getEntityPermissionChecker()
 		);
 	};
 	$wgSpecialPages['SetLabelDescriptionAliases'] = function() {
@@ -847,7 +850,8 @@ call_user_func( function() {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),
-			$wikibaseRepo->getTermsLanguages()
+			$wikibaseRepo->getTermsLanguages(),
+			$wikibaseRepo->getEntityPermissionChecker()
 		);
 	};
 	$wgSpecialPages['SetSiteLink'] = function() {

@@ -74,7 +74,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner()
 			),
 			$this->getFingerprintChangeOpsFactory(),
-			new StaticContentLanguages( self::$languageCodes )
+			new StaticContentLanguages( self::$languageCodes ),
+			$this->getEntityPermissionChecker()
 		);
 	}
 
