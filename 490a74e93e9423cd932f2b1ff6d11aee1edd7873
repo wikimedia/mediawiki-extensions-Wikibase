@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_972ca390",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-05T16:38:07Z",
+      "side": 1,
+      "message": "As long as only one message is used, yes.",
+      "parentUuid": "8e742343_5cdd0216",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3cda7622",
         "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_97434343",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-05T16:38:07Z",
+      "side": 1,
+      "message": "Almost all our code uses …-\u003ewill( $this-\u003ereturn… ) for compatibility reasons. The more specific …-\u003ewillReturn… don\u0027t exist in older PHPUnit versions, and I believe they got removed again from more recent versions.\n\nBut since you started using …-\u003ewillReturn( … ) in this code, I figured this file should be consistent and use the shortcuts everywhere.",
+      "parentUuid": "8e742343_3cda7622",
+      "range": {
+        "startLine": 81,
+        "startChar": 5,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_5cb662d8",
         "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2017-07-05T15:16:21Z",
       "side": 1,
       "message": "note that my intention really was to have all labels in the first item, en \u0026 fr label in the second one and so on",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_1784335d",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-05T16:38:07Z",
+      "side": 1,
+      "message": "I will fix this, thanks for pointing it out. I just think the way you did this before with fall-through switch cases was confusing. Having no \"break\" is always a mistake, except in very rare cases that are explicitly explained in a comment.",
+      "parentUuid": "8e742343_5cb662d8",
       "range": {
         "startLine": 131,
         "startChar": 4,
