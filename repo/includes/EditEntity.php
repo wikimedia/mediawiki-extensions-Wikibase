@@ -165,7 +165,7 @@ class EditEntity {
 	/**
 	 * @var string[]
 	 */
-	private $requiredPermissions = [ 'edit' ];
+	private $requiredPermissions = [ EntityPermissionChecker::PERMISSION_EDIT ];
 
 	/**
 	 * @param EntityTitleStoreLookup $titleLookup
