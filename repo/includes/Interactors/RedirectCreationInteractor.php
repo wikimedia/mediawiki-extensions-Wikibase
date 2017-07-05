@@ -117,33 +117,18 @@ class RedirectCreationInteractor {
 	}
 
 	/**
-	 * Check all applicable permissions for redirecting the given $entityId.
+	 * Check user's permissions for the given entity ID.
 	 *
 	 * @param EntityId $entityId
-	 *
-	 * @throws RedirectCreationException if a permission check fails
-	 */
-	private function checkPermissions( EntityId $entityId ) {
-		$permissions = [
-			'edit',
-			$entityId->getEntityType() . '-redirect'
-		];
-
-		foreach ( $permissions as $permission ) {
-			$this->checkPermission( $entityId, $permission );
-		}
-	}
-
-	/**
-	 * Check the given permissions for the given $entityId.
-	 *
-	 * @param EntityId $entityId
-	 * @param string $permission
 	 *
 	 * @throws RedirectCreationException if the permission check fails
 	 */
-	private function checkPermission( EntityId $entityId, $permission ) {
-		$status = $this->permissionChecker->getPermissionStatusForEntityId( $this->user, $permission, $entityId );
+	private function checkPermissions( EntityId $entityId ) {
+		$status = $this->permissionChecker->getPermissionStatusForEntityId(
+			$this->user,
+			EntityPermissionChecker::ACTION_REDIRECT,
+			$entityId
+		);
 
 		if ( !$status->isOK() ) {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
