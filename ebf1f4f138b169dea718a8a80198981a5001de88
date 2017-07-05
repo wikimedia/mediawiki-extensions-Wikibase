@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_92f4b151",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-05T20:01:21Z",
+      "side": 1,
+      "message": "Thanks.\nIt was indeed intended like this, but that was a bad idea :)\nKeeping WB permissions separate from MW permission makes things a lot clearer I think. Can you confirm this from your experience with the followup patches?",
+      "parentUuid": "8e742343_8cc3460a",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3c6ffac1",
         "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
         "patchSetId": 6
