@@ -189,8 +189,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
-				$name = 'UserWithoutPermission-' . $permission;
+			->will( $this->returnCallback( function( User $user ) {
+				$name = 'UserWithoutPermission';
 				if ( $user->getName() === $name ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
@@ -283,27 +283,13 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:no-such-entity', $html );
 	}
 
-	public function permissionProvider() {
-		return [
-			'edit' => [ 'edit' ],
-			'item-redirect' => [ 'item-redirect' ],
-		];
-	}
-
-	/**
-	 * @dataProvider permissionProvider
-	 */
-	public function testNoPermission( $permission ) {
+	public function testNoPermission() {
 		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2'
 		];
-		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
-			'item-redirect' => $permission !== 'item-redirect',
-			'edit' => $permission !== 'edit'
-		] ] );
 
-		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
+		$user = User::newFromName( 'UserWithoutPermission' );
 
 		$html = $this->executeSpecialEntityRedirect( $params, $user );
 		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:permissiondenied', $html );
