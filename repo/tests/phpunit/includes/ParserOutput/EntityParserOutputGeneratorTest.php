@@ -6,11 +6,11 @@ use DataValues\StringValue;
 use MediaWikiTestCase;
 use SpecialPage;
 use Title;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -185,7 +185,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 
-		$entityIdParser = new ItemIdParser();
+		$entityIdParser = new BasicEntityIdParser();
 
 		$dataUpdaters = [
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
