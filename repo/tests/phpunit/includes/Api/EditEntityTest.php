@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -862,8 +860,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'create mediainfo with automatic id' => [
 				'p' => [ 'new' => 'mediainfo', 'data' => '{}' ],
 				'e' => [ 'exception' => [
-					'type' => StorageException::class,
-					'message' => 'mediainfo entities do not support automatic IDs'
+					'type' => ApiUsageException::class,
+					'code' => 'invalid-entity-id',
 				] ],
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			],
