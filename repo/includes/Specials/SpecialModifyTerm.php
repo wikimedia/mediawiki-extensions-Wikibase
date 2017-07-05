@@ -14,6 +14,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -52,12 +53,18 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	private $termsLanguages;
 
 	/**
+	 * @var EntityPermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * @param string $title The title of the special page
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
+	 * @param EntityPermissionChecker $permissionChecker
 	 */
 	public function __construct(
 		$title,
@@ -65,7 +72,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory
+		EditEntityFactory $editEntityFactory,
+		EntityPermissionChecker $permissionChecker
 	) {
 		parent::__construct(
 			$title,
@@ -80,6 +88,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	public function doesWrites() {
@@ -142,7 +151,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		try {
 			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
 		} catch ( PermissionsError $e ) {
-			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $e->permission );
+			$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
 			return false;
 		}
 
@@ -179,13 +188,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param EntityDocument $entity
 	 *
 	 * @throws PermissionsError
-	 * @throws InvalidArgumentException
 	 */
 	private function checkTermChangePermissions( EntityDocument $entity ) {
-		$restriction = $entity->getType() . '-term';
+		$status = $this->permissionChecker->getPermissionStatusForEntity(
+			$this->getUser(),
+			EntityPermissionChecker::PERMISSION_EDIT_TERMS,
+			$entity
+		);
 
-		if ( !$this->getUser()->isAllowed( $restriction ) ) {
-			throw new PermissionsError( $restriction );
+		if ( !$status->isOK() ) {
+			throw new PermissionsError( null, $status->getErrors() );
 		}
 	}
 
