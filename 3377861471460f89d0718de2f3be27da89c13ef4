@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_1c41ba0e",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-05T14:20:00Z",
+      "side": 1,
+      "message": "I think this section can be simplified because the test does not really need it. The method might as well just return a string or always the same message, and that might also be a real Message object for the sake of simplicity.",
+      "range": {
+        "startLine": 44,
+        "startChar": 5,
+        "endLine": 51,
+        "endChar": 16
+      },
+      "revId": "3377861471460f89d0718de2f3be27da89c13ef4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
