@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_5cdd0216",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-07-05T15:16:21Z",
+      "side": 1,
+      "message": "ah, so this does the job as well",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3cda7622",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-07-05T15:16:21Z",
+      "side": 1,
+      "message": "I should finally find somewhere what will\u0027s are available...",
+      "range": {
+        "startLine": 81,
+        "startChar": 5,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5cb662d8",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-07-05T15:16:21Z",
+      "side": 1,
+      "message": "note that my intention really was to have all labels in the first item, en \u0026 fr label in the second one and so on",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
