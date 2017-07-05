@@ -85,13 +85,13 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	/**
 	 * @return EntityPermissionChecker
 	 */
-	private function getPermissionCheckers() {
+	private function getPermissionChecker() {
 		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
-				$userWithoutPermissionName = 'UserWithoutPermission-' . $permission;
+			->will( $this->returnCallback( function( User $user ) {
+				$userWithoutPermissionName = 'UserWithoutPermission';
 
 				if ( $user->getName() === $userWithoutPermissionName ) {
 					return Status::newFatal( 'permissiondenied' );
@@ -143,13 +143,13 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 			$changeOpsFactory,
 			$this->mockRepository,
 			$this->mockRepository,
-			$this->getPermissionCheckers(),
+			$this->getPermissionChecker(),
 			$summaryFormatter,
 			$user,
 			new RedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
-				$this->getPermissionCheckers(),
+				$this->getPermissionChecker(),
 				$summaryFormatter,
 				$user,
 				$this->getMockEditFilterHookRunner(),
@@ -442,20 +442,10 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		}
 	}
 
-	public function permissionProvider() {
-		return [
-			'edit' => [ 'edit' ],
-			'item-merge' => [ 'item-merge' ],
-		];
-	}
-
-	/**
-	 * @dataProvider permissionProvider
-	 */
-	public function testSetRedirect_noPermission( $permission ) {
+	public function testSetRedirect_noPermission() {
 		$this->setExpectedException( ItemMergeException::class );
 
-		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
+		$user = User::newFromName( 'UserWithoutPermission' );
 
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
