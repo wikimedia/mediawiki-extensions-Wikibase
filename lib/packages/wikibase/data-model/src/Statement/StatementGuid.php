@@ -60,6 +60,10 @@ class StatementGuid implements Comparable {
 
 	/**
 	 * @return string
+	 * @deprecated The value returned by this method might differ in case from the original, unparsed statement GUID
+	 * (the entity ID part might have been lowercase originally, but is always normalized in the return value here),
+	 * which means that the value should not be compared to other statement GUID serializations,
+	 * e.g. to look up a statement in a StatementList.
 	 */
 	public function getSerialization() {
 		return $this->serialization;
