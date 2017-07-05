@@ -4,14 +4,14 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpQualifierRemove;
+use Wikibase\Repo\ChangeOp\ChangeOpQualifierRemove;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpQualifierRemove
+ * @covers Wikibase\Repo\ChangeOp\ChangeOpQualifierRemove
  *
  * @group Wikibase
  * @group ChangeOp

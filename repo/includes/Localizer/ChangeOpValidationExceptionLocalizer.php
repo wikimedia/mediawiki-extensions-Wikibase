@@ -6,7 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Message;
 use ValueFormatters\ValueFormatter;
-use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**

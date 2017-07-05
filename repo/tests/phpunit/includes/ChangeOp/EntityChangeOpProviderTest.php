@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
 use LogicException;
-use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;

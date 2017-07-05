@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use SiteList;
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;

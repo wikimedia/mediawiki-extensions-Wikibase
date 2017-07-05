@@ -5,16 +5,16 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use HashSiteStore;
 use PHPUnit_Framework_TestCase;
 use TestSites;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
+use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\ChangeOp\MergeChangeOpsFactory
+ * @covers Wikibase\Repo\ChangeOp\MergeChangeOpsFactory
  *
  * @group Wikibase
  * @group ChangeOp

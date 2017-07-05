@@ -13,7 +13,7 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;

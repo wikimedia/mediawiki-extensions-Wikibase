@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 
 /**
- * @covers Wikibase\ChangeOp\FingerprintChangeOpFactory
+ * @covers Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory
  *
  * @group Wikibase
  * @group ChangeOp

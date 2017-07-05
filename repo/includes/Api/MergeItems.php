@@ -8,7 +8,7 @@ use Exception;
 use InvalidArgumentException;
 use LogicException;
 use ApiUsageException;
-use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;

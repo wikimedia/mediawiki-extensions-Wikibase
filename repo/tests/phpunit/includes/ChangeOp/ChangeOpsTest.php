@@ -6,11 +6,11 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpDescription;
-use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
-use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpDescription;
+use Wikibase\Repo\ChangeOp\ChangeOpLabel;
+use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
+use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOps
+ * @covers Wikibase\Repo\ChangeOp\ChangeOps
  *
  * @group Wikibase
  * @group ChangeOp

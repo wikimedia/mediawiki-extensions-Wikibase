@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
-use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\StringNormalizer;
 

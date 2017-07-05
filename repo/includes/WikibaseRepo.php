@@ -30,7 +30,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
 use Wikibase\DataModel\DeserializerFactory;
