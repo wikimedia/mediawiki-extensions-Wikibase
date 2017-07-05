@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_92dd91e3",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-05T19:56:36Z",
+      "side": 1,
+      "message": "That code doesn\u0027t really indicate the problem that was described by the old message. If the old message was correct, then we are losing useful information here.",
+      "revId": "1d267e4097cc48b0b658d404c8e32d776c393480",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
