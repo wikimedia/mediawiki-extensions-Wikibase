@@ -90,33 +90,16 @@ class ItemMergeInteractor {
 	}
 
 	/**
-	 * Check all applicable permissions for redirecting the given $entityId.
+	 * Check user's for the given entity ID.
 	 *
 	 * @param EntityId $entityId
-	 */
-	private function checkPermissions( EntityId $entityId ) {
-		$permissions = [
-			'edit',
-			$entityId->getEntityType() . '-merge'
-		];
-
-		foreach ( $permissions as $permission ) {
-			$this->checkPermission( $entityId, $permission );
-		}
-	}
-
-	/**
-	 * Check the given permissions for the given $entityId.
-	 *
-	 * @param EntityId $entityId
-	 * @param string $permission
 	 *
 	 * @throws ItemMergeException if the permission check fails
 	 */
-	private function checkPermission( EntityId $entityId, $permission ) {
+	private function checkPermissions( EntityId $entityId ) {
 		$status = $this->permissionChecker->getPermissionStatusForEntityId(
 			$this->user,
-			$permission,
+			EntityPermissionChecker::ACTION_MERGE,
 			$entityId
 		);
 
