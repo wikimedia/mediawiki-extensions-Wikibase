@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_97ea639b",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:23:23Z",
+      "side": 1,
+      "message": "Do we really need this check?\nWhat if we are not in write mode? Why should it matter in terms of permissions?",
+      "range": {
+        "startLine": 290,
+        "startChar": 9,
+        "endLine": 290,
+        "endChar": 29
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_d7f0eb90",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:23:23Z",
+      "side": 1,
+      "message": "This looks strange. I believe that READ should be subset of EDIT. \nHow can it be that user is allowed to edit data, but not to read it?",
+      "range": {
+        "startLine": 291,
+        "startChar": 7,
+        "endLine": 291,
+        "endChar": 89
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3717efa9",
+        "filename": "repo/includes/Api/ModifyTerm.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:23:23Z",
+      "side": 1,
+      "message": "Similar to previous comments:\n* How can it be that user cannot read if she can edit?\n* If user is granted EDIT_TERMS privilege, and wants to edit a term, why checking EDIT? In other words: what is subset of what? How are they related? Is it possible that user can EDIT but not EDIT_TERMS (or other way around)?",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
