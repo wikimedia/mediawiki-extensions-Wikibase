@@ -16,6 +16,29 @@
       "revId": "0115de52a007188c93e09e9da9360d0803753df2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_211a4d7f",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-05T15:10:34Z",
+      "side": 1,
+      "message": "Text keys",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 3
+      },
+      "revId": "0115de52a007188c93e09e9da9360d0803753df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
