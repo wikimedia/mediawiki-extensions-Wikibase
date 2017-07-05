@@ -1,8 +1,8 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 /**
- *
  * Definitions for any entity that has descriptions.
  */
 class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
