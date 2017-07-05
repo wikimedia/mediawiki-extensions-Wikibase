@@ -69,13 +69,13 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return EntityPermissionChecker
 	 */
-	private function getPermissionCheckers() {
+	private function getPermissionChecker() {
 		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
-				$userWithoutPermissionName = 'UserWithoutPermission-' . $permission;
+			->will( $this->returnCallback( function( User $user ) {
+				$userWithoutPermissionName = 'UserWithoutPermission';
 
 				if ( $user->getName() === $userWithoutPermissionName ) {
 					return Status::newFatal( 'permissiondenied' );
@@ -137,7 +137,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		$interactor = new RedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
-			$this->getPermissionCheckers(),
+			$this->getPermissionChecker(),
 			$summaryFormatter,
 			$user,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
@@ -218,20 +218,10 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function permissionProvider() {
-		return [
-			'edit' => [ 'edit' ],
-			'item-redirect' => [ 'item-redirect' ],
-		];
-	}
-
-	/**
-	 * @dataProvider permissionProvider
-	 */
-	public function testSetRedirect_noPermission( $permission ) {
+	public function testSetRedirect_noPermission() {
 		$this->setExpectedException( RedirectCreationException::class );
 
-		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
+		$user = User::newFromName( 'UserWithoutPermission' );
 
 		$interactor = $this->newInteractor( null, null, $user );
 		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false );
