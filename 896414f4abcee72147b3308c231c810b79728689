@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_1714339f",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:26:09Z",
+      "side": 1,
+      "message": "If method `addRequiredPermission` is deleted, then this property can be inlined and `checkEditPermissions()` can be simplified",
+      "range": {
+        "startLine": 165,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 77
+      },
+      "revId": "896414f4abcee72147b3308c231c810b79728689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_f71087af",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:26:09Z",
+      "side": 1,
+      "message": "Seems that it is unused and can be deleted.",
+      "range": {
+        "startLine": 496,
+        "startChar": 1,
+        "endLine": 504,
+        "endChar": 2
+      },
+      "revId": "896414f4abcee72147b3308c231c810b79728689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
