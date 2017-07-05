@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kirsan"
+			"Kirsan",
+			"Kaszeba"
 		]
 	},
 	"wikibase-timedetails-isotime": "Czasowô sygnatura",
-	"wikibase-sitelinks-wikipedia": "Wikipediô"
+	"wikibase-sitelinks-wikipedia": "Wikipedijô"
 }

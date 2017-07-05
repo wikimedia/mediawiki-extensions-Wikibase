@@ -15,7 +15,8 @@
 			"McDutchie",
 			"Mbch331",
 			"Xxmarijnw",
-			"Mainframe98"
+			"Mainframe98",
+			"Effeietsanders"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -95,7 +96,7 @@
 	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",
 	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie toe aan de zijbalk welke toegang biedt tot andere Wikimedia-projecten op basis van gegevens van {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connectie|Connecties}} met {{WBREPONAME}}",
-	"echo-pref-tooltip-wikibase-action": "Informeer mij wanneer iemand een een pagina die {{GENDER:|ik aangemaakt heb}} verbindt met een {{WBREPONAME}} item.",
+	"echo-pref-tooltip-wikibase-action": "Informeer mij wanneer iemand een een pagina die {{GENDER:|ik aangemaakt heb}}, verbindt met een {{WBREPONAME}} item.",
 	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
 	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen"
 }

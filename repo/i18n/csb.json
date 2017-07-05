@@ -1,10 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kirsan"
+			"Kirsan",
+			"Kaszeba"
 		]
 	},
-	"wikibase-edit": "edituj",
+	"wikibase-edit": "editëjë",
 	"wikibase-add": "dodôj",
+	"wikibase-label-empty": "Eticzéta nie òsta dodónô",
+	"wikibase-description-empty": "Felënk òpisënka",
+	"wikibase-sitelinks-special": "Jinne ùdbë",
+	"wikibase-statementview-rank-normal": "Zwëczajnô ranga",
 	"wikibase-dispatchstats-change-timestamp": "Czasowô sygnatura"
 }

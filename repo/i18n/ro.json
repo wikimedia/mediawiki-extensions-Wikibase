@@ -7,7 +7,8 @@
 			"Danutz",
 			"Macofe",
 			"Wintereu",
-			"Strainu"
+			"Strainu",
+			"XXN"
 		]
 	},
 	"wikibase-desc": "Depozit de date structurate",
@@ -22,6 +23,8 @@
 	"wikibase-addreference": "adaugă referință",
 	"wikibase-save-inprogress": "Se salvează...",
 	"wikibase-remove-inprogress": "Se elimină...",
+	"wikibase-entitytermsforlanguagelistview-description": "Descriere",
+	"wikibase-entitytermsforlanguagelistview-language": "Limbă",
 	"wikibase-label-empty": "Nicio etichetă definită",
 	"wikibase-label-edit-placeholder": "introduceți o etichetă",
 	"wikibase-label-edit-placeholder-language-aware": "introduceți o etichetă în $1",
@@ -173,7 +176,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Obțineți lista entităților fără etichetă",
 	"wikibase-entitieswithoutlabel-label-language": "Codul limbii:",
 	"wikibase-entitieswithoutlabel-label-type": "Tip:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "toate",
 	"wikibase-entitieswithoutlabel-submit": "Găsește",
 	"wikibase-entitieswithoutlabel-invalid-language": "„$1” nu este un cod de limbă valid.",
 	"wikibase-entitieswithoutlabel-invalid-type": "„$1” nu este un tip de entitate valid.",
