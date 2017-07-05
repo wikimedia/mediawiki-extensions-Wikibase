@@ -246,8 +246,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
-				$name = 'UserWithoutPermission-' . $permission;
+			->will( $this->returnCallback( function( User $user ) {
+				$name = 'UserWithoutPermission';
 				if ( $user->getName() === $name ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
@@ -441,35 +441,30 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertContains( '<p class="error">(wikibase-itemmerge-redirect)</p>', $html );
 	}
 
-	public function permissionProvider() {
-		return [
-			'edit' => [ 'edit' ],
-			'item-merge' => [ 'item-merge' ],
-		];
-	}
-
-	/**
-	 * @dataProvider permissionProvider
-	 */
-	public function testNoPermission( $permission ) {
+	public function testNoSpecialPagePermission() {
 		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2'
 		];
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
-			'item-merge' => $permission !== 'item-merge',
-			'edit' => $permission !== 'edit'
+			'item-merge' => false,
 		] ] );
 
-		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
+		$this->setExpectedException( PermissionsError::class );
 
-		if ( $permission === 'item-merge' ) {
-			$this->setExpectedException( PermissionsError::class );
-		}
+		$html = $this->executeSpecialMergeItems( $params, $GLOBALS['wgUser'] );
+	}
+
+	public function testMergePermission() {
+		$params = [
+			'fromid' => 'Q1',
+			'toid' => 'Q2'
+		];
+
+		$user = User::newFromName( 'UserWithoutPermission' );
+
 		$html = $this->executeSpecialMergeItems( $params, $user );
-		if ( $permission === 'edit' ) {
-			$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-permissiondenied', $html );
-		}
+		$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-permissiondenied', $html );
 	}
 
 }
