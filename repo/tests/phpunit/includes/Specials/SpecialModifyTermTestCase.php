@@ -23,7 +23,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true, 'item-term' => true ] ] );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true, 'item-term' => true ] ] );
 	}
 
 	/**

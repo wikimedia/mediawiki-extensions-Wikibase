@@ -8,6 +8,7 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -24,7 +25,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory
+		EditEntityFactory $editEntityFactory,
+		EntityPermissionChecker $entityPermissionChecker
 	) {
 		parent::__construct(
 			'SetAliases',
@@ -32,7 +34,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$entityPermissionChecker
 		);
 	}
 
