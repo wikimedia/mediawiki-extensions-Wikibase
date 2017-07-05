@@ -200,10 +200,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			return $permissions;
 		}
 
-		if ( $permission === EntityPermissionChecker::PERMISSION_REDIRECT ||
-			// TODO: temporarily handle MW permissions here, until all users are adjusted
-			$permission === 'item-redirect'
-		) {
+		if ( $permission === EntityPermissionChecker::PERMISSION_REDIRECT ) {
 			$entityTypeSpecificRedirectPermission = $entityType . '-redirect';
 
 			$permissions = [ 'read', 'edit' ];
