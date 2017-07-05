@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_37012f72",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:15:07Z",
+      "side": 1,
+      "message": "I would suggest to throw an exception.",
+      "range": {
+        "startLine": 211,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 69
+      },
+      "revId": "0107bba15fe3d5815338cf52ef1fb1c65990c6e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
