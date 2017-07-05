@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_777c97e2",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-05T17:35:37Z",
+      "side": 1,
+      "message": "A bit inconsistent with previous patch, where in API module 3 permissions were checked: EDIT_TERMS, EDIT and READ.\n\nIs it ok?",
+      "range": {
+        "startLine": 195,
+        "startChar": 28,
+        "endLine": 195,
+        "endChar": 49
+      },
+      "revId": "7ec37322a78887450b111e09274795c0a0e7b67f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
