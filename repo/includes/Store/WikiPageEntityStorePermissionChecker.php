@@ -187,10 +187,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			return $permissions;
 		}
 
-		if ( $action === EntityPermissionChecker::ACTION_MERGE ||
-			// TODO: temporarily handle MW permissions here, until all users are adjusted
-			$action === 'item-merge'
-		) {
+		if ( $action === EntityPermissionChecker::ACTION_MERGE ) {
 			$entityTypeSpecificMergePermission = $entityType . '-merge';
 
 			$permissions = [ 'read', 'edit' ];
