@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_e889817a",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T09:18:42Z",
+      "side": 1,
+      "message": "Do you really think it makes the code better to have a loop and the condition here instead of two if statements?",
+      "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
