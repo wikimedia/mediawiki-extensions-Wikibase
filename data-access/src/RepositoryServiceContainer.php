@@ -180,6 +180,10 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 		return $this->getService( 'EntityRevisionLookup' );
 	}
 
+	public function getEntityStoreWatcher() {
+		return $this->getService( 'EntityStoreWatcher' );
+	}
+
 	public function getPropertyInfoLookup() {
 		return $this->getService( 'PropertyInfoLookup' );
 	}

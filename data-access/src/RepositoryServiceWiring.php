@@ -2,10 +2,12 @@
 
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\MultiEntityStoreWatcher;
 use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -74,6 +76,20 @@ return [
 			$metaDataAccessor,
 			$services->getDatabaseName()
 		);
+	},
+
+	'EntityStoreWatcher' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
+
+		Assert::postcondition(
+			$metaDataAccessor instanceof EntityStoreWatcher,
+			'The WikiPageEntityMetaDataAccessor service is expected to implement EntityStoreWatcher interface.'
+		);
+
+		return new MultiEntityStoreWatcher( [ $metaDataAccessor ] );
 	},
 
 	'PrefetchingTermLookup' => function(
