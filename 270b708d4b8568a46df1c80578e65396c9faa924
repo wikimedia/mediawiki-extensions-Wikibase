@@ -34,6 +34,24 @@
       "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_e85d01f0",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T09:32:55Z",
+      "side": 1,
+      "message": "I didn\u0027t get the part about \"depending on each other\" and \"unfolded loop\".\n\nWhen I look at the old extractPreferredValue I see two conditions being checked and that\u0027s it.\n\n- the \u0027en\u0027 is there case kinds of depend on the \u0027de\u0027 is there case, as the latter is checked first, but really wouldn\u0027t call it \"depending\".\n\n- how the old code is a loop?",
+      "parentUuid": "8e742343_88f79df1",
+      "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
