@@ -22,6 +22,30 @@
       "revId": "7ec37322a78887450b111e09274795c0a0e7b67f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_287789fe",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T12:13:11Z",
+      "side": 1,
+      "message": "Change other patches to what is done here. I believe checking a single permission/action is right, checking 2 or 3 was wrong.",
+      "parentUuid": "8e742343_777c97e2",
+      "range": {
+        "startLine": 195,
+        "startChar": 28,
+        "endLine": 195,
+        "endChar": 49
+      },
+      "revId": "7ec37322a78887450b111e09274795c0a0e7b67f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
