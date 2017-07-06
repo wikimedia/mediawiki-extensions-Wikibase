@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_3dea6d9d",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T07:50:03Z",
+      "side": 1,
+      "message": "Yeah, I guess I should not have followed what was here before. I agree pure EDIT should be fine here. In turn, the WikiPage-based Permission checker should probably check that for EDIT both MW permissions \"read\" and \"edit\" are there (if this is needed, I am also not sure if this is even needed - allowing edit but not read for some user group seems a clear misconfiguration, no?)",
+      "parentUuid": "8e742343_d7f0eb90",
+      "range": {
+        "startLine": 291,
+        "startChar": 7,
+        "endLine": 291,
+        "endChar": 89
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3717efa9",
         "filename": "repo/includes/Api/ModifyTerm.php",
         "patchSetId": 5
