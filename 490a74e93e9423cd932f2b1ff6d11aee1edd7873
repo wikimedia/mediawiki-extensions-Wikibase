@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_88a9ddde",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T09:16:47Z",
+      "side": 1,
+      "message": "OK, thanks!",
+      "parentUuid": "8e742343_680b5127",
+      "range": {
+        "startLine": 81,
+        "startChar": 5,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_5cb662d8",
         "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
         "patchSetId": 1
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "Depends. I find it the easiest and most obvious solution to return three different arrays, and not construct them dynamically.",
       "parentUuid": "8e742343_9d87e1db",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c89fe5b7",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T09:16:47Z",
+      "side": 1,
+      "message": "Agreed with that. But looking at this switch case block in the latest patchset, having ifs there seems more appealing to me. But yeah, matter of taste I guess. I believe I\u0027ve already shown multiple times I simply hate switch construct.",
+      "parentUuid": "8e742343_e82501a9",
       "range": {
         "startLine": 131,
         "startChar": 4,
