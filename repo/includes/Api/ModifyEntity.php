@@ -270,24 +270,16 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return Status the check's result
 	 */
 	private function checkPermissions( EntityDocument $entity, User $user ) {
-		$permissions = $this->getRequiredPermissions( $entity );
-		$status = Status::newGood();
+		$permission = $this->getRequiredPermission();
 
-		foreach ( array_unique( $permissions ) as $perm ) {
-			$permStatus = $this->permissionChecker->getPermissionStatusForEntity( $user, $perm, $entity );
-			$status->merge( $permStatus );
-		}
-
-		return $status;
+		return $this->permissionChecker->getPermissionStatusForEntity( $user, $permission, $entity );
 	}
 
 	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string[]
+	 * @return string One of EntityPermissionChecker::PERMISSION_ constants
 	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return [ EntityPermissionChecker::PERMISSION_EDIT ];
+	protected function getRequiredPermission() {
+		return EntityPermissionChecker::PERMISSION_EDIT;
 	}
 
 	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {
