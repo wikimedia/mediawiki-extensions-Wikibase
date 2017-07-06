@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
@@ -19,6 +20,11 @@ class RepositoryServiceContainerFactory {
 	 * @var PrefixMappingEntityIdParserFactory
 	 */
 	private $idParserFactory;
+
+	/**
+	 * @var EntityIdComposer
+	 */
+	private $idComposer;
 
 	/**
 	 * @var RepositorySpecificDataValueDeserializerFactory
@@ -52,6 +58,7 @@ class RepositoryServiceContainerFactory {
 	 * rather be getting some other service container, not the whole top-level factory.
 	 *
 	 * @param PrefixMappingEntityIdParserFactory $idParserFactory
+	 * @param EntityIdComposer $idComposer
 	 * @param RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory
 	 * @param array $repositoryDatabaseNames
 	 * @param string[] $wiringFiles
@@ -59,12 +66,14 @@ class RepositoryServiceContainerFactory {
 	 */
 	public function __construct(
 		PrefixMappingEntityIdParserFactory $idParserFactory,
+		EntityIdComposer $idComposer, //  TODO: change ID Composer and pass a factory of prefixing composer (T165589)
 		RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory,
 		array $repositoryDatabaseNames,
 		array $wiringFiles,
 		WikibaseClient $client
 	) {
 		$this->idParserFactory = $idParserFactory;
+		$this->idComposer = $idComposer;
 		$this->dataValueDeserializerFactory = $dataValueDeserializerFactory;
 		$this->databaseNames = $repositoryDatabaseNames;
 		$this->wiringFiles = $wiringFiles;
@@ -87,6 +96,7 @@ class RepositoryServiceContainerFactory {
 			$this->databaseNames[$repositoryName],
 			$repositoryName,
 			$this->idParserFactory->getIdParser( $repositoryName ),
+			$this->idComposer,
 			$this->dataValueDeserializerFactory->getDeserializer( $repositoryName ),
 			$this->client
 		);

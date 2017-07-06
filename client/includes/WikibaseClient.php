@@ -409,6 +409,7 @@ final class WikibaseClient {
 
 		return new RepositoryServiceContainerFactory(
 			$idParserFactory,
+			$this->getEntityIdComposer(),
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$this->repositoryDefinitions->getDatabaseNames(),
 			$this->getSettings()->getSetting( 'perRepositoryServiceWiringFiles' ),
