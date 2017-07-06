@@ -38,13 +38,10 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string[] A list of permissions
+	 * @return string One of EntityPermissionChecker::ACTION_ constants
 	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
+	protected function getRequiredPermission() {
+		return EntityPermissionChecker::ACTION_EDIT_TERMS;
 	}
 
 	/**
