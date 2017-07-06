@@ -30,7 +30,7 @@ return [
 	) {
 		$factory = new SqlEntityInfoBuilderFactory(
 			$services->getEntityIdParser(),
-			$client->getEntityIdComposer(),
+			$services->getEntityIdComposer(),
 			$client->getEntityNamespaceLookup(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
@@ -91,7 +91,7 @@ return [
 		WikibaseClient $client
 	) {
 		return new PropertyInfoTable(
-			$client->getEntityIdComposer(),
+			$services->getEntityIdComposer(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
@@ -110,7 +110,7 @@ return [
 	) {
 		$index = new TermSqlIndex(
 			$client->getStringNormalizer(),
-			$client->getEntityIdComposer(),
+			$services->getEntityIdComposer(),
 			$services->getEntityIdParser(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
