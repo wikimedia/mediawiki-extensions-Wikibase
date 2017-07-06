@@ -22,6 +22,30 @@
       "revId": "0107bba15fe3d5815338cf52ef1fb1c65990c6e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5dce5960",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T07:46:42Z",
+      "side": 1,
+      "message": "I agree. I was thinking about doing this after all possible places in the code were changed to use this class. If nothing explodes at this point, this means I didn\u0027t miss anything. But can be also done in this patch, why not. Probably even better than defer it. Will do.",
+      "parentUuid": "8e742343_37012f72",
+      "range": {
+        "startLine": 211,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 69
+      },
+      "revId": "0107bba15fe3d5815338cf52ef1fb1c65990c6e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
