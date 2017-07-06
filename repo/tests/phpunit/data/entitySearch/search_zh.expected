@@ -26,7 +26,7 @@
                                             "labels.zh.near_match^40",
                                             "labels.zh.near_match_folded^30",
                                             "labels.zh.prefix^15",
-                                            "labels_all.near_match^1",
+                                            "labels_all.near_match_folded^1",
                                             "labels.zh-hans.near_match^25",
                                             "labels.zh-hans.near_match_folded^20",
                                             "labels.zh-hans.prefix^10",

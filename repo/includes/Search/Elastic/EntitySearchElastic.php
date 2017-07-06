@@ -164,7 +164,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$langChain = $this->languageChainFactory->newFromLanguageCode( $languageCode );
 		$this->searchLanguageCodes = $langChain->getFetchLanguageCodes();
 		if ( !$strictLanguage ) {
-			$fields[] = "labels_all.near_match^{$profile['any']}";
+			$fields[] = "labels_all.near_match_folded^{$profile['any']}";
 			$discount = 1;
 			foreach ( $this->searchLanguageCodes as $fallbackCode ) {
 				if ( $fallbackCode === $languageCode ) {
