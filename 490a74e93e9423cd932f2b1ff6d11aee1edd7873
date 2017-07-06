@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_1d253103",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T08:07:30Z",
+      "side": 1,
+      "message": "Can you tell more about those compatibility reasons? I remember being told once by someone I should always do will( $this-\u003ereturn...) because old phpunit version we support. I was not super sure, but I followed what was said.\n\nNow I see that it seems that willReturn has been there from PHPUnit 4.0, and is in both 5 and 6, so no need to worry about this any more, right?",
+      "parentUuid": "8e742343_97434343",
+      "range": {
+        "startLine": 81,
+        "startChar": 5,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_5cb662d8",
         "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
         "patchSetId": 1
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "I will fix this, thanks for pointing it out. I just think the way you did this before with fall-through switch cases was confusing. Having no \"break\" is always a mistake, except in very rare cases that are explicitly explained in a comment.",
       "parentUuid": "8e742343_5cb662d8",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "490a74e93e9423cd932f2b1ff6d11aee1edd7873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9d87e1db",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T08:07:30Z",
+      "side": 1,
+      "message": "Random comment: if those are not mutually exclusive cases wouldn\u0027t it be more clear there were just three if statements?",
+      "parentUuid": "8e742343_1784335d",
       "range": {
         "startLine": 131,
         "startChar": 4,
