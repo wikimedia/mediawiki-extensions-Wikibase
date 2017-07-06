@@ -16,6 +16,24 @@
       "revId": "1d267e4097cc48b0b658d404c8e32d776c393480",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9de361d4",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T07:42:08Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve the issue the other day but didn\u0027t make it to create a fix myself, but I was thinking that possibly a new message should be introduced for this case? I guess it cannot be saying explicitly about automatic ID support, as StorageException can be thrown because of other issues too, but maybe something like \"Could not automatically assign an ID for the entity of type: $1\" or something?",
+      "parentUuid": "8e742343_92dd91e3",
+      "revId": "1d267e4097cc48b0b658d404c8e32d776c393480",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
