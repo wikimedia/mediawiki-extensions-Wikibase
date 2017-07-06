@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_28d30907",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T11:02:47Z",
+      "side": 1,
+      "message": "Good point. I checked that all classes extending ModifyEntity are always \"write mode\" so this is not needed.",
+      "parentUuid": "8e742343_97ea639b",
+      "range": {
+        "startLine": 290,
+        "startChar": 9,
+        "endLine": 290,
+        "endChar": 29
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_d7f0eb90",
         "filename": "repo/includes/Api/ModifyEntity.php",
         "patchSetId": 5
@@ -83,6 +107,30 @@
       "writtenOn": "2017-07-05T17:23:23Z",
       "side": 1,
       "message": "Similar to previous comments:\n* How can it be that user cannot read if she can edit?\n* If user is granted EDIT_TERMS privilege, and wants to edit a term, why checking EDIT? In other words: what is subset of what? How are they related? Is it possible that user can EDIT but not EDIT_TERMS (or other way around)?",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_08c16d33",
+        "filename": "repo/includes/Api/ModifyTerm.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T11:02:47Z",
+      "side": 1,
+      "message": "Changed so it now only checks EntityPermissionChecker::PERMISSION_EDIT_TERMS.\n\nI think it is OK to assume EntityPermissionChecker::PERMISSION_EDIT_TERMS is a subset of EntityPermissionChecker::PERMISSION_EDIT which in turn is a subset of EntityPermissionChecker::PERMISSION_READ. Calling this relationship \"subsets\" might not be super accurate, but I hope others get what we meant here.\n\nWikiPageEntityStorePermissionChecker has been adjusted in a way that EntityPermissionChecker::PERMISSION_EDIT_TERMS translates to mediawiki rights: item-term/property-term, edit, and read.\nI am not sure if this makes sense, but I hope it is at least not wrong to do it that way.\nIf we are certain that cases where a user group can MW \"edit\" but cannot MW \"read\" are only cases of huge misconfiguration, than WikiPageEntityStorePermissionChecker could be simplified too I guess. I simply have not enough insight here.",
+      "parentUuid": "8e742343_3717efa9",
       "range": {
         "startLine": 48,
         "startChar": 3,
