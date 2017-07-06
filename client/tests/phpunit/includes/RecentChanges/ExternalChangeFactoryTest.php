@@ -341,6 +341,8 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			'rc_namespace' => 0,
 			'rc_title' => 'Canada',
 			'rc_comment' => '',
+			'rc_comment_text' => '', // For Ic3a434c0
+			'rc_comment_data' => null,
 			'rc_minor' => 1,
 			'rc_bot' => $bot ? 1 : 0,
 			'rc_new' => 0,

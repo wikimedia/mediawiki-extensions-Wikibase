@@ -523,6 +523,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_namespace' => $title->getNamespace(),
 			'rc_title' => $title->getDBkey(),
 			'rc_comment' => $comment,
+			'rc_comment_text' => $comment, // For Ic3a434c0
+			'rc_comment_data' => null,
 			'rc_minor' => true,
 			'rc_bot' => $params['wikibase-repo-change']['bot'],
 			'rc_new' => false,

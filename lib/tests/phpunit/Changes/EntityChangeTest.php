@@ -146,7 +146,11 @@ class EntityChangeTest extends ChangeRowTest {
 		$row->rc_cur_id = 6;
 		$row->rc_bot = 1;
 		$row->rc_deleted = 0;
+		// The faked-up RecentChange row needs to have the proper fields for
+		// MediaWiki core change Ic3a434c0.
 		$row->rc_comment = 'Test!';
+		$row->rc_comment_text = 'Test!';
+		$row->rc_comment_data = null;
 
 		$rc = RecentChange::newFromRow( $row );
 
