@@ -26,7 +26,7 @@
                                             "labels.en.near_match^40",
                                             "labels.en.near_match_folded^30",
                                             "labels.en.prefix^15",
-                                            "labels_all.near_match^1"
+                                            "labels_all.near_match_folded^1"
                                         ]
                                     }
                                 }

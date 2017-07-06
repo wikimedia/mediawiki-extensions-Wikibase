@@ -26,7 +26,7 @@
                                             "labels.de-ch.near_match^40",
                                             "labels.de-ch.near_match_folded^30",
                                             "labels.de-ch.prefix^15",
-                                            "labels_all.near_match^1",
+                                            "labels_all.near_match_folded^1",
                                             "labels.de.near_match^25",
                                             "labels.de.near_match_folded^20",
                                             "labels.de.prefix^10",
