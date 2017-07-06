@@ -234,7 +234,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$rc = $factory->newRecentChange( $change, $target, $preparedAttribs );
 
-		$this->assertRCEquals( $expected, $rc->getAttributes() );
+		$this->assertRCEquals( $expected, array_intersect_key( $rc->getAttributes(), $expected ) );
 	}
 
 	private function assertRCEquals( array $expected, array $actual ) {
