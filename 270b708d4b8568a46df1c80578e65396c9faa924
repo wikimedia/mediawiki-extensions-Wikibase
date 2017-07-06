@@ -16,6 +16,24 @@
       "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_88f79df1",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-06T09:22:22Z",
+      "side": 1,
+      "message": "Yes. Note that it was not just \"two if statements\". The two depended on each other. It was quite literally an unfolded loop. All I did was folding it into a loop again.",
+      "parentUuid": "8e742343_e889817a",
+      "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
