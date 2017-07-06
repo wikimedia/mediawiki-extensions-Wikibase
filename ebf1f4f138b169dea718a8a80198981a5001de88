@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_dd000970",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T07:46:42Z",
+      "side": 1,
+      "message": "Yeah, seems like it was good thing to make. I still was too closely following what was done before in several of patches, which Aleksey pointed out, so I will be clearing those up, but in general it seems like a good idea for me!\n\nAleksey also came up with a possible change to the PermissionChecker interface that would go even further, which is promising. I guess he will outline it soon.",
+      "parentUuid": "8e742343_92f4b151",
+      "revId": "ebf1f4f138b169dea718a8a80198981a5001de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3c6ffac1",
         "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityStorePermissionCheckerTest.php",
         "patchSetId": 6
