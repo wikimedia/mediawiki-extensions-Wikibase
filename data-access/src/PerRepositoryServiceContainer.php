@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
@@ -39,6 +40,11 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	private $entityIdParser;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @var DataValueDeserializer
 	 */
 	private $dataValueDeserializer;
@@ -52,6 +58,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 * @param string|false $databaseName
 	 * @param string $repositoryName
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param DataValueDeserializer $dataValueDeserializer
 	 * @param WikibaseClient $client Top-level factory passed to service instantiators // TODO: fix this!
 	 */
@@ -59,6 +66,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		$databaseName,
 		$repositoryName,
 		EntityIdParser $entityIdParser,
+		EntityIdComposer $entityIdComposer,
 		DataValueDeserializer $dataValueDeserializer,
 		WikibaseClient $client
 	) {
@@ -67,6 +75,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		$this->databaseName = $databaseName;
 		$this->repositoryName = $repositoryName;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->deserializerFactoryCallbacks = $client->getEntityDeserializerFactoryCallbacks();
 	}
@@ -90,6 +99,13 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 */
 	public function getEntityIdParser() {
 		return $this->entityIdParser;
+	}
+
+	/**
+	 * @return EntityIdComposer
+	 */
+	public function getEntityIdComposer() {
+		return $this->entityIdComposer;
 	}
 
 	/**
