@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_bd3c1d2e",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-06T11:08:19Z",
+      "side": 1,
+      "message": "I was thinking about dropping addRequiredPermission separately, as it is a public method, and not some changing of internal stuff.\nWill make it a separate commit but immediately following this one, so they are submitted to master together.",
+      "parentUuid": "8e742343_1714339f",
+      "range": {
+        "startLine": 165,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 77
+      },
+      "revId": "896414f4abcee72147b3308c231c810b79728689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_f71087af",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
