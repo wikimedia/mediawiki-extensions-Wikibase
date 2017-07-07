@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e742343_25cd6788",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-07T14:34:00Z",
+      "side": 1,
+      "message": "All a custom message can say at this point is \"can not assign a fresh ID for an unknown reason\". I don\u0027t think this is that more useful than the current message, and not really worth introducing a new one. If you think it is, feel free to upload a follow up patch. But please don\u0027t block this one, and in turn block all patches on the MediaInfo extension that are currently failing.",
+      "range": {
+        "startLine": 273,
+        "startChar": 46,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "1d267e4097cc48b0b658d404c8e32d776c393480",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_92dd91e3",
         "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
         "patchSetId": 2
