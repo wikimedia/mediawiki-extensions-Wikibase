@@ -1336,7 +1336,7 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->getAllTypesEntitySerializer(),
+			$this->getAllTypesEntitySerializer( SerializerFactory::OPTION_OBJECTS_FOR_MAPS ),
 			$this->getInternalFormatEntityDeserializer(),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
