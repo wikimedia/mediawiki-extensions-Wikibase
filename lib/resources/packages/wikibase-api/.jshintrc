@@ -3,11 +3,11 @@
 	"camelcase": true, // Force variable names to be camelcase
 	"curly": true, // Require {} for every new block or scope.
 	"eqeqeq": true, // Require triple equals i.e. `===`.
-	"es3": true, // Prohibit trailing comma in object literals (breaks older versions of IE)
+	"esversion": 5,
 	"forin": false, // Don't expect `for in` loops to call `hasOwnPrototype`.
 	"freeze": true, // Prohibit overwriting prototypes of native objects such as Array, Date and so on.
 	"immed": true, // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
-	"latedef": true, // Prohibit variable use before definition.
+	"latedef": "nofunc", // Prohibit variable use before definition.
 	"newcap": true, // Require capitalization of all constructor functions e.g. `new F()`.
 	"noarg": true, // Prohibit use of `arguments.caller` and `arguments.callee`.
 	"noempty": true, // Prohibit use of empty blocks.
@@ -24,8 +24,6 @@
 	"boss": false, // Don't tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.
 	"debug": false, // Don't allow debugger statements e.g. browser breakpoints.
 	"eqnull": false, // Don't tolerate use of `== null`.
-	"es5": false, // Don't allow EcmaScript 5 syntax.
-	"esnext": false, // Don't allow ES.next specific features such as `const` and `let`.
 	"evil": false, // Don't tolerate use of `eval`.
 	"expr": false, // Don't tolerate `ExpressionStatement` as Programs.
 	"funcscope": false, // Don't tolerate declarations of variables inside of control structures while accessing them later from the outside.
