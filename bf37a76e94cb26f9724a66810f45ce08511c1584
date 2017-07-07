@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_a55e3779",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-07T15:05:00Z",
+      "side": 1,
+      "message": "I introduced this one just recently. This is sooo close to the \"need-ids-or-titles-and-sites\" message Daniel introduces in this patch, the two should be moved next to each other and get similar names. Note that one is singular and one is plural.",
+      "range": {
+        "startLine": 333,
+        "startChar": 15,
+        "endLine": 333,
+        "endChar": 38
+      },
+      "revId": "bf37a76e94cb26f9724a66810f45ce08511c1584",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_051aabd0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-07T15:05:00Z",
+      "side": 1,
+      "message": "These two should be merged. All occurrences of \"no-such-entity\" should get the entity ID string as their first parameter. I had a quick look, and even if this message is used very often in our code, it looks like there is a usable ID string parameter in all cases.",
+      "range": {
+        "startLine": 348,
+        "startChar": 15,
+        "endLine": 349,
+        "endChar": 31
+      },
+      "revId": "bf37a76e94cb26f9724a66810f45ce08511c1584",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c51343b8",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-07T15:05:00Z",
+      "side": 1,
+      "message": "As above, I believe these two should be merged. The original \"param-missing\" message should get a parameter, and all usages should pass the name of the missing parameter as the first argument. It might be necessary to use {{PLURAL:…}} in case the same message is also used for more than one parameter. Ask Lucas, he came up with a nice way to do this: Pass the number of parameters as $1, and the individual parameters as $2 and so on. You can then use {{PLURAL:$1|\\\"$2\\\"|\\\"$2\\\" and \\\"$3\\\"|multiple}}.",
+      "range": {
+        "startLine": 364,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 30
+      },
+      "revId": "bf37a76e94cb26f9724a66810f45ce08511c1584",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
