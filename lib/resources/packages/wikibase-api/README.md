@@ -6,10 +6,11 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
-### 2.2.1 (2017-06-20)
+### 2.2.1 (2017-07-07)
 
-* Fixed certain API calls (most notably `parseValue` and `setAliases`) not properly accepting values
-  that contain pipe characters.
+* Fixed certain `wikibase.api.RepoApi` methods (most notably `parseValue` and `setAliases`) not
+  properly accepting values that contain pipe characters.
+* ECMAScript 5 is now required. This most notably excludes Internet Explorer 8.
 
 ### 2.2.0 (2016-10-31)
 
