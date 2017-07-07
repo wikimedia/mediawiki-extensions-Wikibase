@@ -1409,7 +1409,7 @@ class WikibaseRepo {
 	 *
 	 * @return Serializer
 	 */
-	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_OBJECTS_FOR_MAPS ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory( $options );
