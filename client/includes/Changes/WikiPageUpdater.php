@@ -10,6 +10,7 @@ use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * Service object for triggering different kinds of page updates
@@ -33,6 +34,11 @@ class WikiPageUpdater implements PageUpdater {
 	private $recentChangeFactory;
 
 	/**
+	 * @var LBFactory
+	 */
+	private $LBFactory;
+
+	/**
 	 * @var RecentChangesDuplicateDetector|null
 	 */
 	private $recentChangesDuplicateDetector;
@@ -45,17 +51,20 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param RecentChangeFactory $recentChangeFactory
+	 * @param LBFactory $LBFactory
 	 * @param RecentChangesDuplicateDetector|null $recentChangesDuplicateDetector
 	 * @param StatsdDataFactoryInterface|null $stats
 	 */
 	public function __construct(
 		JobQueueGroup $jobQueueGroup,
 		RecentChangeFactory $recentChangeFactory,
-		RecentChangesDuplicateDetector $recentChangesDuplicateDetector  = null,
+		LBFactory $LBFactory,
+		RecentChangesDuplicateDetector $recentChangesDuplicateDetector = null,
 		StatsdDataFactoryInterface $stats = null
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->recentChangeFactory = $recentChangeFactory;
+		$this->LBFactory = $LBFactory;
 		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
 		$this->stats = $stats;
 	}
@@ -76,6 +85,7 @@ class WikiPageUpdater implements PageUpdater {
 		foreach ( $titles as $title ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
 			$title->invalidateCache();
+			$this->LBFactory->waitForReplication();
 		}
 		$this->incrementStats( 'ParserCache', count( $titles ) );
 	}
@@ -142,6 +152,7 @@ class WikiPageUpdater implements PageUpdater {
 			} else {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
 				$rc->save();
+				$this->LBFactory->waitForReplication();
 			}
 		}
 		$this->incrementStats( 'InjectRCRecords', count( $titles ) );
