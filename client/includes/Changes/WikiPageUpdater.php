@@ -10,6 +10,7 @@ use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * Service object for triggering different kinds of page updates
@@ -33,6 +34,16 @@ class WikiPageUpdater implements PageUpdater {
 	private $recentChangeFactory;
 
 	/**
+	 * @var LBFactory
+	 */
+	private $LBFactory;
+
+	/**
+	 * @var int Batch size for database operations
+	 */
+	private $dbBatchSize = 100;
+
+	/**
 	 * @var RecentChangesDuplicateDetector|null
 	 */
 	private $recentChangesDuplicateDetector;
@@ -45,19 +56,36 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param RecentChangeFactory $recentChangeFactory
+	 * @param LBFactory $LBFactory
 	 * @param RecentChangesDuplicateDetector|null $recentChangesDuplicateDetector
 	 * @param StatsdDataFactoryInterface|null $stats
 	 */
 	public function __construct(
 		JobQueueGroup $jobQueueGroup,
 		RecentChangeFactory $recentChangeFactory,
-		RecentChangesDuplicateDetector $recentChangesDuplicateDetector  = null,
+		LBFactory $LBFactory,
+		RecentChangesDuplicateDetector $recentChangesDuplicateDetector = null,
 		StatsdDataFactoryInterface $stats = null
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->recentChangeFactory = $recentChangeFactory;
+		$this->LBFactory = $LBFactory;
 		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
 		$this->stats = $stats;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDbBatchSize() {
+		return $this->dbBatchSize;
+	}
+
+	/**
+	 * @param int $dbBatchSize
+	 */
+	public function setDbBatchSize( $dbBatchSize ) {
+		$this->dbBatchSize = $dbBatchSize;
 	}
 
 	private function incrementStats( $updateType, $delta ) {
@@ -75,6 +103,8 @@ class WikiPageUpdater implements PageUpdater {
 		/* @var Title $title */
 		foreach ( $titles as $title ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
+
+			// TODO: This queues a database update for each title separately. Batch it.
 			$title->invalidateCache();
 		}
 		$this->incrementStats( 'ParserCache', count( $titles ) );
@@ -127,6 +157,9 @@ class WikiPageUpdater implements PageUpdater {
 	public function injectRCRecords( array $titles, EntityChange $change ) {
 		$rcAttribs = $this->recentChangeFactory->prepareChangeAttributes( $change );
 
+		$c = 0;
+		$trxToken = $this->LBFactory->getEmptyTransactionTicket( __METHOD__ );
+
 		// TODO: do this via the job queue, in batches, see T107722
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
@@ -143,7 +176,18 @@ class WikiPageUpdater implements PageUpdater {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
 				$rc->save();
 			}
+
+			if ( ++$c >= $this->dbBatchSize ) {
+				$this->LBFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
+				$trxToken = $this->LBFactory->getEmptyTransactionTicket( __METHOD__ );
+				$c = 0;
+			}
 		}
+
+		if ( $c > 0 ) {
+			$this->LBFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
+		}
+
 		$this->incrementStats( 'InjectRCRecords', count( $titles ) );
 	}
 
