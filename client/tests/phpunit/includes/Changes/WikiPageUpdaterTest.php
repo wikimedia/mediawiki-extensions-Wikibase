@@ -11,6 +11,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * @covers Wikibase\Client\Changes\WikiPageUpdater
@@ -110,10 +111,22 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		return $change;
 	}
 
+	/**
+	 * @return LBFactory
+	 */
+	private function getLBFactoryMock() {
+		$LBFactory = $this->getMockBuilder( LBFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return $LBFactory;
+	}
+
 	public function testPurgeParserCache() {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
 			$this->getRCFactoryMock(),
+			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock()
 		);
 
@@ -131,6 +144,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
 			$this->getRCFactoryMock(),
+			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock()
 		);
 
@@ -172,6 +186,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
+			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock()
 		);
 
@@ -201,6 +216,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
 			$rcFactory,
+			$this->getLBFactoryMock(),
 			$rcDupeDetector
 		);
 
