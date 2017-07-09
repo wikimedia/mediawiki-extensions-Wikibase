@@ -11,6 +11,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * @covers Wikibase\Client\Changes\WikiPageUpdater
@@ -110,10 +111,22 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		return $change;
 	}
 
+	/**
+	 * @return LBFactory
+	 */
+	private function getLBFactoryMock() {
+		$LBFactory = $this->getMockBuilder( LBFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return $LBFactory;
+	}
+
 	public function testPurgeParserCache() {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
 			$this->getRCFactoryMock(),
+			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock()
 		);
 
@@ -131,6 +144,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
 			$this->getRCFactoryMock(),
+			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock()
 		);
 
@@ -172,6 +186,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
+			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock()
 		);
 
@@ -201,12 +216,48 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
 			$rcFactory,
+			$this->getLBFactoryMock(),
 			$rcDupeDetector
 		);
 
 		$updater->injectRCRecords( [
 			$title
 		], $change );
+	}
+
+	public function testInjectRCRecords_batch() {
+		$titleFoo = $this->getTitleMock( 'Foo' );
+		$titleBar = $this->getTitleMock( 'Bar' );
+		$titleCuzz = $this->getTitleMock( 'Cuzz' );
+
+		$change = $this->getEntityChangeMock();
+		$rc = $this->getRecentChangeMock();
+
+		$rcFactory = $this->getRCFactoryMock();
+
+		$rcFactory->expects( $this->any() )
+			->method( 'newRecentChange' )
+			->will( $this->returnValue( $rc ) );
+
+		$rcDupeDetector = $this->getRCDupeDetectorMock();
+
+		$lbFactory = $this->getLBFactoryMock();
+		$lbFactory->expects( $this->exactly( 2 ) )
+			->method( 'commitAndWaitForReplication' );
+
+		$updater = new WikiPageUpdater(
+			$this->getJobQueueGroupMock(),
+			$rcFactory,
+			$lbFactory,
+			$rcDupeDetector
+		);
+
+		$updater->setDbBatchSize( 2 );
+
+		$updater->injectRCRecords(
+			[ $titleFoo, $titleBar, $titleCuzz ],
+			$change
+		);
 	}
 
 }
