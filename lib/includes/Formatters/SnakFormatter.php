@@ -23,12 +23,6 @@ interface SnakFormatter {
 	const FORMAT_PLAIN = 'text/plain';
 	const FORMAT_WIKI = 'text/x-wiki';
 	const FORMAT_HTML = 'text/html';
-
-	/**
-	 * @deprecated Just use FORMAT_HTML.
-	 */
-	const FORMAT_HTML_WIDGET = self::FORMAT_HTML;
-
 	const FORMAT_HTML_DIFF = 'text/html; disposition=diff';
 
 	/**
