@@ -6,6 +6,7 @@ use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
@@ -39,14 +40,21 @@ class DataAccessSnakFormatterFactory {
 	 */
 	private $propertyDataTypeLookup;
 
+	/**
+	 * @var EntityIdParser
+	 */
+	private $repoItemUriParser;
+
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
-		PropertyDataTypeLookup $propertyDataTypeLookup
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityIdParser $repoItemUriParser
 	) {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->repoItemUriParser = $repoItemUriParser;
 	}
 
 	/**
@@ -83,7 +91,8 @@ class DataAccessSnakFormatterFactory {
 		return new UsageTrackingSnakFormatter(
 			$snakFormatter,
 			$usageAccumulator,
-			$fallbackChain->getFetchLanguageCodes()
+			$fallbackChain->getFetchLanguageCodes(),
+			$this->repoItemUriParser
 		);
 	}
 

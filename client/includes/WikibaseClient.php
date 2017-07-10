@@ -1107,7 +1107,8 @@ final class WikibaseClient {
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
-			$this->getPropertyDataTypeLookup()
+			$this->getPropertyDataTypeLookup(),
+			$this->getRepoItemUriParser()
 		);
 	}
 

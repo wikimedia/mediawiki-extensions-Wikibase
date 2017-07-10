@@ -3,8 +3,10 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use DataValues\StringValue;
+use DataValues\UnboundedQuantityValue;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -47,7 +49,8 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
 		$acc = new HashUsageAccumulator();
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
+		$formatter = new UsageTrackingSnakFormatter(
+			$mockFormatter, $acc, [ 'ru', 'en' ], $this->getMock( EntityIdParser::class ) );
 
 		$formatter->formatSnak( $itemSnak );
 
@@ -57,13 +60,53 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 		$this->assertArrayHasKey( 'Q1#T', $usages );
 	}
 
+	/**
+	 * @return EntityIdParser
+	 */
+	private function getRepoItemUriParser() {
+		$parser = $this->getMock( EntityIdParser::class );
+		$parser->expects( $this->once() )
+			->method( 'parse' )
+			->will( $this->returnCallback( function ( $id ) {
+				return $id === '1' ? null : new ItemId( $id );
+			} ) );
+
+		return $parser;
+	}
+
+	public function formatSnakQuantityProvider() {
+		return [
+			[ '1', [] ],
+			[ 'Q1', [ 'Q1#L.ru', 'Q1#L.en' ] ],
+		];
+	}
+
+	/**
+	 * @dataProvider formatSnakQuantityProvider
+	 */
+	public function testFormatSnak_quantity( $unit, array $usages ) {
+		$p1 = new PropertyId( 'P1' );
+		$itemSnak = new PropertyValueSnak(
+			$p1, UnboundedQuantityValue::newFromNumber( '1', $unit ) );
+
+		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
+		$acc = new HashUsageAccumulator();
+		$formatter = new UsageTrackingSnakFormatter(
+			$mockFormatter, $acc, [ 'ru', 'en' ], $this->getRepoItemUriParser() );
+
+		$formatter->formatSnak( $itemSnak );
+
+		$this->assertEquals( $usages, array_keys( $acc->getUsages() ) );
+	}
+
 	public function testFormatSnak_novalue() {
 		$p1 = new PropertyId( 'P1' );
 		$novalueSnak = new PropertyNoValueSnak( $p1 );
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
 		$acc = new HashUsageAccumulator();
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
+		$formatter = new UsageTrackingSnakFormatter(
+			$mockFormatter, $acc, [ 'ru', 'en' ], $this->getMock( EntityIdParser::class ) );
 
 		$formatter->formatSnak( $novalueSnak );
 		$this->assertEmpty( $acc->getUsages(), 'novalue' );
@@ -75,7 +118,8 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
 		$acc = new HashUsageAccumulator();
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
+		$formatter = new UsageTrackingSnakFormatter(
+			$mockFormatter, $acc, [ 'ru', 'en' ], $this->getMock( EntityIdParser::class ) );
 
 		$formatter->formatSnak( $stringSnak );
 		$this->assertEmpty( $acc->getUsages(), 'string value' );
@@ -86,7 +130,8 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$acc = new HashUsageAccumulator();
 
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
+		$formatter = new UsageTrackingSnakFormatter(
+			$mockFormatter, $acc, [ 'ru', 'en' ], $this->getMock( EntityIdParser::class ) );
 
 		$this->assertEquals( 'TEST', $formatter->getFormat(), 'getFormat' );
 		$this->assertCount( 0, $acc->getUsages() );
