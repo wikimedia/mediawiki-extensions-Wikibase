@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
+use HTMLCacheUpdateJob;
 use Job;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
@@ -54,6 +55,11 @@ class WikiPageUpdater implements PageUpdater {
 	private $stats;
 
 	/**
+	 * @var callable
+	 */
+	private $getTimestamp = 'wfTimestampNow';
+
+	/**
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param RecentChangeFactory $recentChangeFactory
 	 * @param LBFactory $LBFactory
@@ -72,6 +78,16 @@ class WikiPageUpdater implements PageUpdater {
 		$this->LBFactory = $LBFactory;
 		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
 		$this->stats = $stats;
+	}
+
+	/**
+	 * Set callback for getting the current system time.
+	 * Intended for testing only!
+	 *
+	 * @param callable $callback takes no parameter, returns a timestamp string.
+	 */
+	public function setTimestampCallback( callable $callback ) {
+		$this->getTimestamp = $callback;
 	}
 
 	/**
@@ -95,33 +111,40 @@ class WikiPageUpdater implements PageUpdater {
 	}
 
 	/**
-	 * Invalidates local cached of the given pages.
-	 *
-	 * @param Title[] $titles The Titles of the pages to update
-	 */
-	public function purgeParserCache( array $titles ) {
-		/* @var Title $title */
-		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
-
-			// TODO: This queues a database update for each title separately. Batch it.
-			$title->invalidateCache();
-		}
-		$this->incrementStats( 'ParserCache', count( $titles ) );
-	}
-
-	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
 	 */
 	public function purgeWebCache( array $titles ) {
-		/* @var Title $title */
-		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging web cache for " . $title->getText() );
-			$title->purgeSquid();
+		if ( empty( $titles ) ) {
+			return;
 		}
-		$this->incrementStats( 'WebCache', count( $titles ) );
+
+		$jobs = [];
+		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
+
+		/* @var Title[] $batch */
+		foreach ( $titleBatches as $batch ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling HTMLCacheUpdateJob for "
+			                     . count( $batch ) . " titles" );
+
+			// NOTE: nominal title, will be ignored because the 'pages' parameter is set.
+			$title = reset( $batch );
+			$pages = $this->getPageParamForRefreshLinksJob( $batch );
+
+			// TODO: add root job timestamp?
+			$jobs[] = new HTMLCacheUpdateJob(
+				$title,
+				[
+					'pages' => $pages,
+					'rootJobTimestamp' => wfTimestampNow()
+				]
+			);
+		}
+
+		$this->jobQueueGroup->lazyPush( $jobs );
+		$this->incrementStats( 'WebCache.jobs', count( $jobs ) );
+		$this->incrementStats( 'WebCache.titles', count( $titles ) );
 	}
 
 	/**
@@ -135,19 +158,24 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$jobs = [];
+		$purgeTime = call_user_func( $this->getTimestamp );
 		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling refresh links for "
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling RefreshLinksJob for "
 				. count( $batch ) . " titles" );
 
 			// NOTE: nominal title, will be ignored because the 'pages' parameter is set.
 			$title = reset( $batch );
+			$pages = $this->getPageParamForRefreshLinksJob( $batch );
 
 			$jobs[] = new RefreshLinksJob(
 				$title,
-				[ 'pages' => $this->getPageParamForRefreshLinksJob( $batch ) ]
+				[
+					'pages' => $pages,
+					'rootJobTimestamp' => $purgeTime
+				]
 			);
 		}
 
