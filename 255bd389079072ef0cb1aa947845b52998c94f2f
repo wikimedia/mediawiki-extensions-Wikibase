@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_0a3f0cb2",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-10T15:36:34Z",
+      "side": 1,
+      "message": "Note that I am not sure should this be dyingError or dyingException, and if dieError is the right way, what should be the value of the first parameter. Please suggest changes if what\u0027s done here is wrong.",
+      "revId": "255bd389079072ef0cb1aa947845b52998c94f2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
