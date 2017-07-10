@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "8e742343_aa8a786c",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-10T15:41:56Z",
+      "side": 1,
+      "message": "Why `lazyPush` instead of `push`?",
+      "range": {
+        "startLine": 154,
+        "startChar": 24,
+        "endLine": 154,
+        "endChar": 32
+      },
+      "revId": "da7b5e209440ef712b61c7b93fdfc2b2fd26ed5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_aa74b896",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 2
