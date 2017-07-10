@@ -242,7 +242,7 @@ class LanguageFallbackChainFactory {
 				// Make the current language at the top of the chain.
 				$levelBabel = array_unique( array_merge(
 					[ $languageCode ],
-					Babel::getUserLanguages( $user, $level )
+					Babel::getCachedUserLanguages( $user, $level )
 				) );
 
 				$babel[$level] = array_diff( $levelBabel, $previousLevelBabel );
