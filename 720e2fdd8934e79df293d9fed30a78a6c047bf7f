@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_4ace7432",
+        "filename": "repo/includes/Store/EntityPermissionChecker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-10T16:50:44Z",
+      "side": 1,
+      "message": "Yeah, I was wondering about this. OTOH: is it really that e.g. ACTION_CREATE is a subset of ACTION_EDIT (I mean conceptually), or is it more of a detail of MW-permission implementation?\n\nGonna add some notes here any way, just wondering.",
+      "parentUuid": "8e742343_caefc4ab",
+      "revId": "720e2fdd8934e79df293d9fed30a78a6c047bf7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0af62c8c",
         "filename": "repo/includes/Store/EntityPermissionChecker.php",
         "patchSetId": 19
