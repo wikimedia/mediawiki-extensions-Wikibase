@@ -54,6 +54,11 @@ class WikiPageUpdater implements PageUpdater {
 	private $stats;
 
 	/**
+	 * @var callable
+	 */
+	private $getTimestamp = 'wfTimestampNow';
+
+	/**
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param RecentChangeFactory $recentChangeFactory
 	 * @param LBFactory $LBFactory
@@ -95,22 +100,6 @@ class WikiPageUpdater implements PageUpdater {
 	}
 
 	/**
-	 * Invalidates local cached of the given pages.
-	 *
-	 * @param Title[] $titles The Titles of the pages to update
-	 */
-	public function purgeParserCache( array $titles ) {
-		/* @var Title $title */
-		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
-
-			// TODO: This queues a database update for each title separately. Batch it.
-			$title->invalidateCache();
-		}
-		$this->incrementStats( 'ParserCache', count( $titles ) );
-	}
-
-	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
@@ -135,6 +124,7 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$jobs = [];
+		$purgeTime = call_user_func( $this->getTimestamp );
 		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
 
 		/* @var Title[] $batch */
@@ -144,16 +134,51 @@ class WikiPageUpdater implements PageUpdater {
 
 			// NOTE: nominal title, will be ignored because the 'pages' parameter is set.
 			$title = reset( $batch );
+			$pages = $this->getPageParamForRefreshLinksJob( $batch );
+			$ids = array_keys( $pages );
 
+			// touch, then schedule re-parsing via the job queue.
+			$this->touchPages( $ids, $purgeTime );
+
+			// TODO: add root job timestamp?
 			$jobs[] = new RefreshLinksJob(
 				$title,
-				[ 'pages' => $this->getPageParamForRefreshLinksJob( $batch ) ]
+				[
+					'pages' => $pages,
+					'rootJobTimestamp' => $purgeTime
+				]
 			);
 		}
 
 		$this->jobQueueGroup->lazyPush( $jobs );
 		$this->incrementStats( 'RefreshLinks-jobs', count( $jobs ) );
 		$this->incrementStats( 'RefreshLinks-titles', count( $titles ) );
+	}
+
+	/**
+	 * Marks the parser cache for the given page IDs as dirty by setting
+	 * the page_touched field to $purgeTime.
+	 *
+	 * @param int[] $ids
+	 * @param string $purgeTime
+	 */
+	private function touchPages( $ids, $purgeTime ) {
+		$trxToken = $this->LBFactory->getEmptyTransactionTicket( __METHOD__ );
+		$dbw = $this->LBFactory->getMainLB()->getConnection( DB_MASTER );
+
+		$dbTimestamp = $dbw->timestamp( $purgeTime );
+		$dbw->update(
+			'page',
+			[ 'page_touched' => $dbTimestamp ],
+			[
+				'page_id' => $ids,
+				'page_touched < ' . $dbw->addQuotes( $dbTimestamp )
+			],
+			__METHOD__
+		);
+
+		$this->LBFactory->getMainLB()->reuseConnection( $dbw );
+		$this->LBFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
 	}
 
 	/**
@@ -216,6 +241,16 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$this->incrementStats( 'InjectRCRecords', count( $titles ) );
+	}
+
+	/**
+	 * Set callback for getting the current system time.
+	 * Intended for testing only!
+	 *
+	 * @param callable $callback takes no parameter, returns a timestamp string.
+	 */
+	public function setTimestampCallback( callable $callback ) {
+		$this->getTimestamp = $callback;
 	}
 
 }

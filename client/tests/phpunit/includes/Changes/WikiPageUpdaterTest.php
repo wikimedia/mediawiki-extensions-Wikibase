@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use Job;
 use JobQueueGroup;
+use MediaWiki\MediaWikiServices;
 use RecentChange;
 use RefreshLinksJob;
 use Title;
@@ -138,24 +139,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		return $LBFactory;
 	}
 
-	public function testPurgeParserCache() {
-		$updater = new WikiPageUpdater(
-			$this->getJobQueueGroupMock(),
-			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
-			$this->getRCDupeDetectorMock()
-		);
-
-		$title = $this->getTitleMock( 'Foo' );
-
-		$title->expects( $this->once() )
-			->method( 'invalidateCache' );
-
-		$updater->purgeParserCache( [
-			$title,
-		] );
-	}
-
 	public function testPurgeWebCache() {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
@@ -178,6 +161,8 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$titleBar = $this->getTitleMock( 'Bar', 22 );
 		$titleCuzz = $this->getTitleMock( 'Cuzz', 23 );
 
+		$this->insertPageRows( [ $titleFoo, $titleBar, $titleCuzz ] );
+
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
 		$pages = [];
@@ -195,9 +180,14 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$this->getRCDupeDetectorMock()
 		);
+
+		$now = '20121020112233';
+		$updater->setTimestampCallback( function () use ( $now ) {
+			return $now;
+		} );
 
 		$updater->scheduleRefreshLinks( [
 			$titleFoo, $titleBar, $titleCuzz,
@@ -207,6 +197,38 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
 		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
 		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
+
+		$touched = $this->db->selectFieldValues(
+			'page',
+			'page_touched',
+			[ 'page_id' => [ 21, 22, 23 ] ]
+		);
+
+		$this->assertEquals( [ $now, $now, $now ], $touched, 'page_touched' );
+	}
+
+	/**
+	 * @param array $titles
+	 */
+	private function insertPageRows( array $titles ) {
+		$this->tablesUsed[] = 'page';
+
+		/** @var Title $t */
+		foreach ( $titles as $t ) {
+			$this->db->insert(
+				'page',
+				[
+					'page_id' => $t->getArticleID(),
+					'page_namespace' => $t->getNamespace(),
+					'page_title' => $t->getDBkey(),
+					'page_restrictions' => 0,
+					'page_random' => $t->getArticleID(),
+					'page_touched' => '00000000000000',
+					'page_latest' => 0,
+					'page_len' => 0,
+				]
+			);
+		}
 	}
 
 	public function testInjectRCRecords() {
