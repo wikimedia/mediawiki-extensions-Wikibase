@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_47118db0",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-10T15:05:13Z",
+      "side": 1,
+      "message": "\u003e  this class was otherwise isolated from MW stuff\n\nIt would be nice if it was true and it is in our hands to do so, isn\u0027t it?\nAll we need is to start somewhere.",
+      "parentUuid": "8e742343_2796c14f",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
