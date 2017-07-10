@@ -5,7 +5,8 @@
 			"Ebraminio",
 			"Reza1615",
 			"Rtemis",
-			"AzorAhai"
+			"AzorAhai",
+			"Mahdy Saffar"
 		]
 	},
 	"valueview-desc": "اجزای رابط کاربر برای نمایش و ویرایش مقادیر داده‌ها",
@@ -19,6 +20,8 @@
 	"valueview-expert-timeinput-precision": "دقت:",
 	"valueview-expert-timeinput-calendar": "تقویم:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-unitsuggester-label": "یکا (اختیاری):",
 	"valueview-preview-label": "پیش‌نمایش:",
-	"valueview-preview-novalue": "مقدار وارد شده معتبر نیست"
+	"valueview-preview-novalue": "مقدار وارد شده معتبر نیست",
+	"valueview-listrotator-manually": "تنظیم دستی"
 }
