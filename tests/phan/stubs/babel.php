@@ -14,7 +14,7 @@ class Babel {
 	 *
 	 * @return string[] List of language codes
 	 */
-	public static function getUserLanguages( User $user, $level = null ) {
+	public static function getCachedUserLanguages( User $user, $level = null ) {
 	}
 
 }
