@@ -149,7 +149,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->method( 'invalidateCache' );
 
 		$updater->purgeParserCache( [
-			$title
+			$title,
 		] );
 	}
 
@@ -166,35 +166,28 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->method( 'purgeSquid' );
 
 		$updater->purgeWebCache( [
-			$title
+			$title,
 		] );
 	}
 
 	public function testScheduleRefreshLinks() {
-		$title = $this->getTitleMock( 'Foo' );
+		$titleFoo = $this->getTitleMock( 'Foo', 21 );
+		$titleBar = $this->getTitleMock( 'Bar', 22 );
+		$titleCuzz = $this->getTitleMock( 'Cuzz', 23 );
 
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
-		$jobMatcher = function( RefreshLinksJob $job ) {
-			$this->assertSame( 'Foo', $job->getTitle()->getPrefixedDBkey() );
-
-			$expectedSignature = Job::newRootJobParams( 'Foo' );
-			$actualSignature = $job->getRootJobParams();
-			$this->assertSame(
-				$expectedSignature['rootJobSignature'],
-				$actualSignature['rootJobSignature']
-			);
-
-			return true;
-		};
-
-		$jobQueueGroup->expects( $this->any() )
-			->method( 'push' )
-			->with( $this->callback( $jobMatcher ) );
-
-		$jobQueueGroup->expects( $this->any() )
-			->method( 'deduplicateRootJob' )
-			->with( $this->callback( $jobMatcher ) );
+		$pages = [];
+		$jobQueueGroup->expects( $this->atLeastOnce() )
+			->method( 'lazyPush' )
+			->will( $this->returnCallback( function( array $jobs ) use ( &$pages ) {
+				/** @var Job $job */
+				foreach ( $jobs as $job ) {
+					$params = $job->getParams();
+					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
+					$pages += $params['pages']; // addition uses keys, array_merge does not
+				}
+			} ) );
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
@@ -204,8 +197,13 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		);
 
 		$updater->scheduleRefreshLinks( [
-			$title
+			$titleFoo, $titleBar, $titleCuzz,
 		] );
+
+		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
+		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
+		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
+		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
 	}
 
 	public function testInjectRCRecords() {
