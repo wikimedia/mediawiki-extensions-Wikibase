@@ -189,35 +189,32 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			],
 			'sitelink usage' => [
 				[ EntityUsage::SITELINK_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
+				[ ChangeHandler::LINKS_UPDATE_ACTION,
 					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ],
 			],
 			'label usage' => [
 				[ EntityUsage::LABEL_USAGE ],
-				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
 					ChangeHandler::RC_ENTRY_ACTION ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION ]
 			],
 			'title usage' => [
 				[ EntityUsage::TITLE_USAGE ],
-				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
 					ChangeHandler::RC_ENTRY_ACTION ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION ]
 			],
 			'other usage' => [
 				[ EntityUsage::OTHER_USAGE ],
-				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
 					ChangeHandler::RC_ENTRY_ACTION ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION ]
 			],
 			'all usage' => [
 				[ EntityUsage::ALL_USAGE ],
-				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
 					ChangeHandler::RC_ENTRY_ACTION ],
 			],
 			'sitelink and other usage (does links update)' => [
 				[ EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
+				[ ChangeHandler::LINKS_UPDATE_ACTION,
 					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ],
 			],
 		];
@@ -390,42 +387,36 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getPrefixedText();
 
 		$empty = [
-			'purgeParserCache' => [],
 			'scheduleRefreshLinks' => [],
 			'purgeWebCache' => [],
 			'injectRCRecord' => [],
 		];
 
 		$emmy2PurgeParser = [
-			'purgeParserCache' => [ 'Emmy2' => true ],
-			'scheduleRefreshLinks' => [],
+			'scheduleRefreshLinks' => [ 'Emmy2' => true ],
 			'purgeWebCache' => [ 'Emmy2' => true ],
 			'injectRCRecord' => [ 'Emmy2' => true ],
 		];
 
 		$userEmmy2PurgeParser = [
-			'purgeParserCache' => [ $userEmmy2 => true ],
-			'scheduleRefreshLinks' => [],
+			'scheduleRefreshLinks' => [ $userEmmy2 => true ],
 			'purgeWebCache' => [ $userEmmy2 => true ],
 			'injectRCRecord' => [ $userEmmy2 => true ],
 		];
 
 		$emmyUpdateLinks = [
-			'purgeParserCache' => [ 'Emmy' => true ],
 			'scheduleRefreshLinks' => [ 'Emmy' => true ],
 			'purgeWebCache' => [ 'Emmy' => true ],
 			'injectRCRecord' => [ 'Emmy' => true ],
 		];
 
 		$emmy2UpdateLinks = [
-			'purgeParserCache' => [ 'Emmy2' => true ],
 			'scheduleRefreshLinks' => [ 'Emmy2' => true ],
 			'purgeWebCache' => [ 'Emmy2' => true ],
 			'injectRCRecord' => [ 'Emmy2' => true ],
 		];
 
 		$emmy2UpdateAll = [
-			'purgeParserCache' => [ 'Emmy2' => true ],
 			'scheduleRefreshLinks' => [ 'Emmy2' => true ],
 			'purgeWebCache' => [ 'Emmy2' => true ],
 			'injectRCRecord' => [ 'Emmy2' => true ],
@@ -516,7 +507,6 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 				$changes['change-enwiki-sitelink'],
 				[ 'q100' => [ 'enwiki' => 'Emmy' ], 'q200' => [ 'enwiki' => 'Emmy2' ] ],
 				[
-					'purgeParserCache' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'scheduleRefreshLinks' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'purgeWebCache' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'injectRCRecord' => [ 'Emmy' => true, 'Emmy2' => true ],
