@@ -151,7 +151,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			SnakFormatter::FORMAT_WIKI,
 			SnakFormatter::FORMAT_HTML,
 			SnakFormatter::FORMAT_HTML_DIFF,
-			SnakFormatter::FORMAT_HTML_WIDGET
 		];
 
 		$functionNames = [

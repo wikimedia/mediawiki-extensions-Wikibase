@@ -62,7 +62,7 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelDescriptionLookup );
 
 		return $this->snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_HTML_WIDGET,
+			SnakFormatter::FORMAT_HTML,
 			$formatterOptions
 		);
 	}

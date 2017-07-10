@@ -97,7 +97,6 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 			[ SnakFormatter::FORMAT_PLAIN, 'plain' ],
 			[ SnakFormatter::FORMAT_WIKI, 'text' ],
 			[ SnakFormatter::FORMAT_HTML, 'parse' ],
-			[ SnakFormatter::FORMAT_HTML_WIDGET, 'parse' ],
 			[ SnakFormatter::FORMAT_HTML_DIFF, 'parse' ],
 		];
 	}
