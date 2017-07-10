@@ -22,6 +22,29 @@
       "revId": "da7b5e209440ef712b61c7b93fdfc2b2fd26ed5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_aa74b896",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-10T15:37:49Z",
+      "side": 1,
+      "message": "Calls `expects( $this-\u003eany() )` don\u0027t really do anything. \nCan be safely removed.",
+      "range": {
+        "startLine": 89,
+        "startChar": 10,
+        "endLine": 89,
+        "endChar": 33
+      },
+      "revId": "da7b5e209440ef712b61c7b93fdfc2b2fd26ed5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
