@@ -22,6 +22,30 @@
       "revId": "6ecc1e01bc86a16fb2789286cda54822e023d411",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c70b3d2c",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-10T15:42:25Z",
+      "side": 1,
+      "message": "Tests are failing without it.\n\nBelieve assumption you\u0027re mentioning actually holds for standard MediaWiki setup but I guess those tests somehow override it by changing wgGroupPermissions, therefore it must be explicitly set.\n\nThe actual read check happens in Title::checkReadPermissions\nI believe User::isAllowed( \u0027read\u0027 ) is the condition that requires \u0027read\u0027 in wgGroupPermissions.\n\nBut all this is rather guessing.",
+      "parentUuid": "8e742343_07cf055c",
+      "range": {
+        "startLine": 26,
+        "startChar": 56,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "6ecc1e01bc86a16fb2789286cda54822e023d411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
