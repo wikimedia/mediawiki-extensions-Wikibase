@@ -95,22 +95,6 @@ class WikiPageUpdater implements PageUpdater {
 	}
 
 	/**
-	 * Invalidates local cached of the given pages.
-	 *
-	 * @param Title[] $titles The Titles of the pages to update
-	 */
-	public function purgeParserCache( array $titles ) {
-		/* @var Title $title */
-		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
-
-			// TODO: This queues a database update for each title separately. Batch it.
-			$title->invalidateCache();
-		}
-		$this->incrementStats( 'ParserCache', count( $titles ) );
-	}
-
-	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
@@ -145,6 +129,7 @@ class WikiPageUpdater implements PageUpdater {
 			// NOTE: nominal title, will be ignored because the 'pages' parameter is set.
 			$title = reset( $batch );
 
+			// TODO: add root job timestamp?
 			$jobs[] = new RefreshLinksJob(
 				$title,
 				[ 'pages' => $this->getPageParamForRefreshLinksJob( $batch ) ]

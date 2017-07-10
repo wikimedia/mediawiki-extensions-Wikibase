@@ -138,24 +138,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		return $LBFactory;
 	}
 
-	public function testPurgeParserCache() {
-		$updater = new WikiPageUpdater(
-			$this->getJobQueueGroupMock(),
-			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
-			$this->getRCDupeDetectorMock()
-		);
-
-		$title = $this->getTitleMock( 'Foo' );
-
-		$title->expects( $this->once() )
-			->method( 'invalidateCache' );
-
-		$updater->purgeParserCache( [
-			$title,
-		] );
-	}
-
 	public function testPurgeWebCache() {
 		$updater = new WikiPageUpdater(
 			$this->getJobQueueGroupMock(),
