@@ -6,6 +6,10 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 2.2.2 (2017-07-10)
+
+* Fixed inconsistencies in `wikibase.api.RepoApi` introduced in 2.2.1.
+
 ### 2.2.1 (2017-07-07)
 
 * Fixed certain `wikibase.api.RepoApi` methods (most notably `parseValue` and `setAliases`) not
