@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_07cf055c",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-10T14:54:45Z",
+      "side": 1,
+      "message": "Is it needed?\nI thought if permission is not set it is assumed to be `true`",
+      "range": {
+        "startLine": 26,
+        "startChar": 56,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "6ecc1e01bc86a16fb2789286cda54822e023d411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
