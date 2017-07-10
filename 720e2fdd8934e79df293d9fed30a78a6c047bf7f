@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_caefc4ab",
+        "filename": "repo/includes/Store/EntityPermissionChecker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T16:48:19Z",
+      "side": 1,
+      "message": "should it be noted that edit requires read, and all other actions require edit?",
+      "revId": "720e2fdd8934e79df293d9fed30a78a6c047bf7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0af62c8c",
+        "filename": "repo/includes/Store/EntityPermissionChecker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T16:48:19Z",
+      "side": 1,
+      "message": "\"perform ... action on\" or \"apply ... action to\".",
+      "revId": "720e2fdd8934e79df293d9fed30a78a6c047bf7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_aa33585e",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T16:48:19Z",
+      "side": 1,
+      "message": "actions are \"performed\" or \"applied\", not \"made\" or \"done\".",
+      "revId": "720e2fdd8934e79df293d9fed30a78a6c047bf7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
