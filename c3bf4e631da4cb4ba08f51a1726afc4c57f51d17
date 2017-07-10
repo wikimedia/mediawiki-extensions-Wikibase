@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_2796c14f",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T14:42:19Z",
+      "side": 1,
+      "message": "\"framework isolation vs avoiding duplication\" is an old issue, and a tradeoff that needs to be decided on a case by case basis. \n\nThis this class is strongly coupled to MediaWiki\u0027s API facilities anyway, I would re-use ApiMessage from core, even if it\u0027s quite heavy. If this was code in a library, or at least this class was otherwise isolated from MW stuff, I\u0027d agree with Aleksey: create a narrow interface and an adapter implementation instead of binding to the framework.",
+      "parentUuid": "8e742343_c7001db2",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "I think we should resolve all, but I don\u0027t know where they will show up.\nI would suggest to remove `$this-\u003ewarnOnMissingMessage` flag at all.",
       "parentUuid": "8e742343_083e8226",
+      "range": {
+        "startLine": 224,
+        "startChar": 3,
+        "endLine": 224,
+        "endChar": 9
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_07d4e515",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T14:42:19Z",
+      "side": 1,
+      "message": "The warnings make tests fail. This flag allows us to turn on \"strict\" behavior in tests for modules we have fully converted to new style errors. Once all modules have been converted, the flag can go.",
+      "parentUuid": "8e742343_ecd44aee",
       "range": {
         "startLine": 224,
         "startChar": 3,
