@@ -140,6 +140,30 @@
       "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0a006c38",
+        "filename": "repo/includes/Api/ModifyTerm.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T16:57:30Z",
+      "side": 1,
+      "message": "If you want to edit terms, you need the terms permission, and the edit permission, and the read permission. That is, terms requires edit, and edit requires read. \"Subset\" is a bit unclear, but if you think of the sets of users who have this permission, it\u0027s clear that the set of users who can edit terms is a subset of users who can edit. This is because some terms (such as property labels) are used as identifiers.\n\nBUT. Should this relationship be explicit here, or should it be hidden inside the PermissionChecker class? I tend to think that here, we only need to ask for EDIT_TERMS.",
+      "parentUuid": "8e742343_08c16d33",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "597d959742872e46336cf33586deb2ffb431bfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
