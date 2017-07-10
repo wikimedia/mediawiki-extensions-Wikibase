@@ -2,7 +2,10 @@
 
 namespace Wikibase\Client\Usage;
 
+use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -34,14 +37,26 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 	private $languages;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $repoItemUriParser;
+
+	/**
 	 * @param SnakFormatter $snakFormatter
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param string[] $languages language codes to consider used for formatting
+	 * @param EntityIdParser $repoItemUriParser
 	 */
-	public function __construct( SnakFormatter $snakFormatter, UsageAccumulator $usageAccumulator, array $languages ) {
+	public function __construct(
+		SnakFormatter $snakFormatter,
+		UsageAccumulator $usageAccumulator,
+		array $languages,
+		EntityIdParser $repoItemUriParser
+	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->languages = $languages;
+		$this->repoItemUriParser = $repoItemUriParser;
 	}
 
 	/**
@@ -57,8 +72,18 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 
 			if ( $value instanceof EntityIdValue ) {
 				$entityId = $value->getEntityId();
-				$this->addLabelUsage( $value->getEntityId() );
+				$this->addLabelUsage( $entityId );
 				$this->usageAccumulator->addTitleUsage( $entityId );
+			} elseif ( $value instanceof UnboundedQuantityValue ) {
+				$unit = $value->getUnit();
+				try {
+					$entityId = $this->repoItemUriParser->parse( $unit );
+				} catch ( EntityIdParsingException $e ) {
+					$entityId = null;
+				}
+				if ( $entityId ) {
+					$this->addLabelUsage( $entityId );
+				}
 			}
 		}
 
