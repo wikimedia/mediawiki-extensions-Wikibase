@@ -17,13 +17,6 @@ use Wikibase\EntityChange;
 interface PageUpdater {
 
 	/**
-	 * Invalidates local cached of the given pages.
-	 *
-	 * @param Title[] $titles The Titles of the pages to update
-	 */
-	public function purgeParserCache( array $titles );
-
-	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
