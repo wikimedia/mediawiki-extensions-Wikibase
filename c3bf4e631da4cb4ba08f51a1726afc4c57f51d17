@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_c7001db2",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-10T14:24:40Z",
+      "side": 1,
+      "message": "\u003e Don\u0027t needlessly invent your own thing again.\n\n`ApiMessage` extends `Message` (~1400 lines) and uses `ApiMessageTrait`(~120 lines) which means that it already has around 50 public methods (+ 7 protected methods).\nIf we add some code depending on this class we start implicitly depending on all those methods as well as external resources access (caches, etc.).\n\nAvoiding unnecessary dependency is not something that I would call \"needless\"",
+      "parentUuid": "8e742343_061732a9",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
