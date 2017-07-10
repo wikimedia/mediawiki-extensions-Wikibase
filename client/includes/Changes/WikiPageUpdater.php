@@ -130,22 +130,51 @@ class WikiPageUpdater implements PageUpdater {
 	 * @param Title[] $titles The Titles of the pages to update
 	 */
 	public function scheduleRefreshLinks( array $titles ) {
-		/* @var Title $title */
-		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling refresh links for "
-				. $title->getText() );
-
-			$job = new RefreshLinksJob(
-				$title,
-				Job::newRootJobParams(
-					$title->getPrefixedDBkey()
-				)
-			);
-
-			$this->jobQueueGroup->push( $job );
-			$this->jobQueueGroup->deduplicateRootJob( $job );
+		if ( $titles === [] ) {
+			return;
 		}
-		$this->incrementStats( 'RefreshLinksJob', count( $titles ) );
+
+		$jobs = [];
+		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
+
+		/* @var Title[] $batch */
+		foreach ( $titleBatches as $batch ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling refresh links for "
+				. count( $batch ) . " titles" );
+
+			$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
+
+			$jobs[] = new RefreshLinksJob(
+				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
+				[
+					'pages' => $this->getPageParamForRefreshLinksJob( $batch ),
+					'rootJobTimestamp' => wfTimestampNow(),
+				]
+			);
+		}
+
+		$this->jobQueueGroup->lazyPush( $jobs );
+		$this->incrementStats( 'RefreshLinks.jobs', count( $jobs ) );
+		$this->incrementStats( 'RefreshLinks.titles', count( $titles ) );
+	}
+
+	/**
+	 * @param Title[] $titles
+	 *
+	 * @returns array[] string $pageId => [ int $namespace, string $dbKey ]
+	 */
+	private function getPageParamForRefreshLinksJob( array $titles ) {
+		$pages = [];
+
+		foreach ( $titles as $t ) {
+			$id = $t->getArticleID();
+			$pages[$id] = [
+				$t->getNamespace(),
+				$t->getDBkey()
+			];
+		}
+
+		return $pages;
 	}
 
 	/**
