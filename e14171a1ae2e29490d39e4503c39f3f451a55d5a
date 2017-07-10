@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_2ad448bd",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-10T16:52:30Z",
+      "side": 1,
+      "message": "This should be there per default. But of course, it may be overwritten locally on some wikis.",
+      "revId": "e14171a1ae2e29490d39e4503c39f3f451a55d5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
