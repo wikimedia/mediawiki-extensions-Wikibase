@@ -26,11 +26,6 @@ use Wikibase\EntityChange;
 class ChangeHandler {
 
 	/**
-	 * The change requites any rendered version of the page to be purged from the parser cache.
-	 */
-	const PARSER_PURGE_ACTION = 'parser';
-
-	/**
 	 * The change requites a LinksUpdate job to be scheduled to update any links
 	 * associated with the page.
 	 */
@@ -157,7 +152,13 @@ class ChangeHandler {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
 			. " page(s) for change #$changeId." );
 
-		$actionBuckets = [];
+		// Pre-populate the bucket array, so the actions are processed in the correct order.
+		$actionBuckets = [
+			self::LINKS_UPDATE_ACTION => [],
+			self::WEB_PURGE_ACTION => [],
+			self::RC_ENTRY_ACTION => [],
+			self::HISTORY_ENTRY_ACTION => [],
+		];
 
 		/** @var PageEntityUsages $usages */
 		foreach ( $usagesPerPage as $usages ) {
@@ -183,28 +184,26 @@ class ChangeHandler {
 		$all = isset( $aspects[EntityUsage::ALL_USAGE] );
 
 		if ( isset( $aspects[EntityUsage::SITELINK_USAGE] ) || $all ) {
-			$actions[self::LINKS_UPDATE_ACTION] = true;
-
 			// TODO: introduce an update action that updates just the metadata
 			// in the cached ParserOutput, without re-parsing the page!
-			$actions[self::PARSER_PURGE_ACTION] = true;
+			$actions[self::LINKS_UPDATE_ACTION] = true;
 		}
 
 		if ( isset( $aspects[EntityUsage::LABEL_USAGE] ) || $all ) {
-			$actions[self::PARSER_PURGE_ACTION] = true;
+			$actions[self::LINKS_UPDATE_ACTION] = true;
 		}
 
 		if ( isset( $aspects[EntityUsage::TITLE_USAGE] ) || $all ) {
-			$actions[self::PARSER_PURGE_ACTION] = true;
+			$actions[self::LINKS_UPDATE_ACTION] = true;
 		}
 
 		if ( isset( $aspects[EntityUsage::OTHER_USAGE] ) || $all ) {
-			$actions[self::PARSER_PURGE_ACTION] = true;
+			$actions[self::LINKS_UPDATE_ACTION] = true;
 		}
 
 		// Purge caches and inject log entries if we have reason
 		// to update the cached ParserOutput object in some way.
-		if ( isset( $actions[self::PARSER_PURGE_ACTION] ) || isset( $actions[self::LINKS_UPDATE_ACTION] ) ) {
+		if ( isset( $actions[self::LINKS_UPDATE_ACTION] ) ) {
 			$actions[self::WEB_PURGE_ACTION] = true;
 			$actions[self::RC_ENTRY_ACTION] = true;
 			$actions[self::HISTORY_ENTRY_ACTION] = true;
@@ -233,10 +232,6 @@ class ChangeHandler {
 		$titlesToUpdate = $this->getTitlesForPageIds( $pageIds );
 
 		switch ( $action ) {
-			case self::PARSER_PURGE_ACTION:
-				$this->updater->purgeParserCache( $titlesToUpdate );
-				break;
-
 			case self::WEB_PURGE_ACTION:
 				$this->updater->purgeWebCache( $titlesToUpdate );
 				break;
