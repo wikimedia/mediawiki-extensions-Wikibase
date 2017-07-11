@@ -10,6 +10,13 @@
 	user-select: none;
 }
 
+@media print {
+	.wikibase-toolbar {
+		display: none;
+	}
+}
+
+
 .mw-content-rtl .wikibase-toolbar {
 	padding-top: 5px;
 }
