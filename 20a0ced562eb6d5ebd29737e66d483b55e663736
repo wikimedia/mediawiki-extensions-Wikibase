@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_fb58545b",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-11T00:02:28Z",
+      "side": 1,
+      "message": "Why the modulo operation? The following would be clearer.\n\n $c++;\n if ( $c \u003d\u003d\u003d this-\u003edbBatchSize ) {\n }\n\nThe current code goes through here on every operation. If in the future that won\u0027t be the case, a better defence would be to instead evaluate \"$c \u003e\u003d $batchSize\". Given it will reset to 0 in this block, matching only the exact iteration seems fragile, which is at odds with the purpose of catching an iteration that may\u0027ve skipped the logic.\n\nWhat am I missing :)",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 43
+      },
+      "revId": "20a0ced562eb6d5ebd29737e66d483b55e663736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
