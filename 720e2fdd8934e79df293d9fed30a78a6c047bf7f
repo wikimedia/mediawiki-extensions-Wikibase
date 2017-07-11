@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_fbfff12e",
+        "filename": "repo/includes/Store/EntityPermissionChecker.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-11T11:01:34Z",
+      "side": 1,
+      "message": "It could be part of the interface\u0027s contract, and thus implementations would be required to conform to it. There could be a compliance test for checking it.\n\nOn the other hand: perhaps this is really an implementation detail. The caller just asks for permission to change a term. What other permissions are required should be of no concern to the caller.",
+      "parentUuid": "8e742343_1bde7d70",
+      "revId": "720e2fdd8934e79df293d9fed30a78a6c047bf7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0af62c8c",
         "filename": "repo/includes/Store/EntityPermissionChecker.php",
         "patchSetId": 19
