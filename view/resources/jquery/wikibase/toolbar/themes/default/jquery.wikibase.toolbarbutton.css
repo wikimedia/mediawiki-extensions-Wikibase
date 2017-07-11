@@ -112,3 +112,9 @@
 	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/add.svg );
 }
+
+@media print {
+	.wikibase-toolbarbutton {
+		display: none;
+	}
+}
