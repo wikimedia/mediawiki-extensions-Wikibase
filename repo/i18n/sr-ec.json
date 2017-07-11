@@ -94,7 +94,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Прихватам ове услове за све моје будуће измене. Не приказуј више ову поруку.",
 	"wikibase-entityselector-more": "још",
 	"wikibase-anonymouseditwarning": "Напомена: Нисте пријављени.\nВаша ИП адреса ће бити забележена у историји измена овог ентитета.",
-	"wikibase-validator-sitelink-conflict": "Веза $1 је већ прикачена за ставку $2. Можете је уклонити из $2 ако неприпада тој ставци или је спојити ако се ради о истој теми.",
+	"wikibase-validator-sitelink-conflict": "Веза $1 је већ прикачена за ставку $2. Можете је уклонити из $2 ако ту не припада или спојити ставке ако су о баш истој теми.",
 	"wikibase-validator-label-conflict": "Својство $3 већ има назив „$1“ повезан са језичким кодом $2.",
 	"wikibase-validator-label-with-description-conflict": "Ставка $3 већ има назив „$1“ повезан са језичким кодом $2, са истим описом",
 	"wikibase-validator-illegal-geo-shape-title": "Вредност мора да почиње са <code>Data:</code> и завршава са <code>.map</code>. Додатно, наслов не треба да садржи карактере као што је двотачка, тараба или усправна црта.",

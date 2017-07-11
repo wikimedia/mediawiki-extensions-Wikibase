@@ -35,7 +35,7 @@
 	"wikibase-validator-unknown-unit": "Nezināma vienība: $1",
 	"wikibase-validator-not-allowed": "Neatļauta vērtība: $1",
 	"wikibase-validator-no-validators": "Aizliegts",
-	"datatypes-type-wikibase-item": "Ieraksts",
+	"datatypes-type-wikibase-item": "Vienums",
 	"datatypes-type-wikibase-property": "Īpašība",
 	"datatypes-type-commonsMedia": "Commons multivides fails",
 	"datatypes-type-tabular-data": "Tabulāri dati",

@@ -77,7 +77,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Prihvatam ove uslove za sve moje buduće izmene. Ne prikazuj više ovu poruku.",
 	"wikibase-entityselector-more": "još",
 	"wikibase-anonymouseditwarning": "Napomena: Niste prijavljeni.\nVaša IP adresa će biti zabeležena u istoriji izmena ovog entiteta.",
-	"wikibase-validator-sitelink-conflict": "Veza $1 je već prikačena za stavku $2. Možete je ukloniti iz $2 ako nepripada toj stavci ili je spojiti ako se radi o istoj temi.",
+	"wikibase-validator-sitelink-conflict": "Veza $1 je već prikačena za stavku $2. Možete je ukloniti iz $2 ako tu ne pripada ili spojiti stavke ako su o baš istoj temi.",
 	"wikibase-validator-label-conflict": "Svojstvo $3 već ima naziv „$1“ povezan sa jezičkim kodom $2.",
 	"wikibase-validator-label-with-description-conflict": "Stavka $3 već ima naziv „$1“ povezan sa jezičkim kodom $2, sa istim opisom",
 	"wikibase-wikibaserepopage-invalid-langcode": "Jezički kod „$1“ je nepoznat. Molimo koristite jezičke kodove poznate sistemu, kao što je „sr“.",

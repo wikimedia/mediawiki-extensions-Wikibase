@@ -49,6 +49,8 @@
 	"wikibase-description-empty": "설명이 없습니다.",
 	"wikibase-description-edit-placeholder": "설명 입력",
 	"wikibase-description-edit-placeholder-language-aware": "$1로 설명 입력",
+	"wikibase-aliases-edit-placeholder": "별칭을 입력하세요",
+	"wikibase-aliases-edit-placeholder-language-aware": "$1로 별칭을 입력하세요",
 	"wikibase-aliases-edit-label": "별칭, 파이프로 구분:",
 	"wikibase-content-language-edit-label": "언어:",
 	"wikibase-content-language-edit-not-recognized-language": "지정된 언어 코드를 인식하지 못했습니다.",
