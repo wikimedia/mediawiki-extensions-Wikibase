@@ -291,6 +291,21 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			],
 		];
 
+		$q333ResultWithoutUrl = [
+			'repository' => '',
+			'id' => 'Q333',
+			'concepturi' => 'http://acme.test/concept/Q333',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'ADisplayLabel',
+			'aliases' => [ 'AMatchedTerm' ],
+			'match' => [
+				'type' => 'alias',
+				'language' => 'de',
+				'text' => 'AMatchedTerm',
+			],
+		];
+
 		return [
 			'No exact match' => [
 				[ 'search' => 'Q999' ],
@@ -326,7 +341,12 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				[ 'search' => 'PropertyLabel', 'type' => 'property' ],
 				[ $propertyMatch ],
 				[ $propertyResult ],
-			]
+			],
+			'URL is omitted' => [
+				[ 'search' => 'Q333', 'props' => '' ],
+				[ $q333Match ],
+				[ $q333ResultWithoutUrl ],
+			],
 		];
 	}
 
@@ -359,7 +379,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->assertArrayHasKey( 'repository', $searchresult );
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'concepturi', $searchresult );
-			$this->assertArrayHasKey( 'url', $searchresult );
 			$this->assertArrayHasKey( 'title', $searchresult );
 			$this->assertArrayHasKey( 'pageid', $searchresult );
 		}

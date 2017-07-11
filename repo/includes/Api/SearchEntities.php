@@ -103,7 +103,7 @@ class SearchEntities extends ApiBase {
 		$entries = [];
 
 		foreach ( $searchResults as $match ) {
-			$entries[] = $this->buildTermSearchMatchEntry( $match );
+			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['props'] );
 		}
 
 		return $entries;
@@ -111,10 +111,11 @@ class SearchEntities extends ApiBase {
 
 	/**
 	 * @param TermSearchResult $match
+	 * @param string[] $props
 	 *
 	 * @return array
 	 */
-	private function buildTermSearchMatchEntry( TermSearchResult $match ) {
+	private function buildTermSearchMatchEntry( TermSearchResult $match, array $props = null ) {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
 		$entityId = $match->getEntityId();
 		$title = $this->titleLookup->getTitleForId( $entityId );
@@ -123,11 +124,13 @@ class SearchEntities extends ApiBase {
 			'repository' => $entityId->getRepositoryName(),
 			'id' => $entityId->getSerialization(),
 			'concepturi' => $this->getConceptUri( $entityId ),
-			'url' => $title->getFullURL(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
 		];
 
+		if ( $props !== null && in_array( 'url', $props ) ) {
+			$entry['url'] = $title->getFullUrl();
+		}
 		if ( $entityId instanceof PropertyId ) {
 			$entry['datatype'] = $this->propertyDataTypeLookup
 				->getDataTypeIdForProperty( $entityId );
@@ -290,6 +293,11 @@ class SearchEntities extends ApiBase {
 				self::PARAM_REQUIRED => false,
 				self::PARAM_DFLT => 0
 			],
+			'props' => [
+				self::PARAM_TYPE => [ 'url' ],
+				ApiBase::PARAM_ISMULTI => true,
+				self::PARAM_DFLT => 'url',
+		    ]
 		];
 	}
 
@@ -306,6 +314,8 @@ class SearchEntities extends ApiBase {
 				'apihelp-wbsearchentities-example-4',
 			'action=wbsearchentities&search=alphabet&language=en&type=property' =>
 				'apihelp-wbsearchentities-example-3',
+			'action=wbsearchentities&search=alphabet&language=en&props=' =>
+				'apihelp-wbsearchentities-example-5',
 		];
 	}
 
