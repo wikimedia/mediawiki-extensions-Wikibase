@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_f8113760",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-11T09:25:44Z",
+      "side": 1,
+      "message": "Nothing, I changed my mind about how to do this, but only changed the implementation half way. I started out with modulo logic, then changed it to reset to $c \u003d 0 later, and didn\u0027t bother to remove the modulo... Will fix :)",
+      "parentUuid": "8e742343_fb58545b",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 43
+      },
+      "revId": "20a0ced562eb6d5ebd29737e66d483b55e663736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_5b40885b",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-11T00:03:18Z",
       "side": 1,
       "message": "if $c \u003e 0.",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 38
+      },
+      "revId": "20a0ced562eb6d5ebd29737e66d483b55e663736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_581acb7f",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-11T09:25:44Z",
+      "side": 1,
+      "message": "ha, right :)",
+      "parentUuid": "8e742343_5b40885b",
       "range": {
         "startLine": 187,
         "startChar": 7,
