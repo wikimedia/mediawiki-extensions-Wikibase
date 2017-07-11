@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_ccea799c",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-11T16:47:14Z",
+      "side": 1,
+      "message": "Can\u0027t we show the error messages in $e here?",
+      "revId": "55f7c11bb0342df3492e0d539d14393754253918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_4cfe8967",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-11T16:47:14Z",
+      "side": 1,
+      "message": "Can\u0027t we show the errors from $status here?",
+      "revId": "55f7c11bb0342df3492e0d539d14393754253918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
