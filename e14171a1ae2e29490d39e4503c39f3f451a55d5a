@@ -16,6 +16,24 @@
       "revId": "e14171a1ae2e29490d39e4503c39f3f451a55d5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9b2cad46",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-11T09:55:43Z",
+      "side": 1,
+      "message": "test were failing without this, I believe the default got somewhat overwritten by this setMwGlobals call or so.",
+      "parentUuid": "8e742343_2ad448bd",
+      "revId": "e14171a1ae2e29490d39e4503c39f3f451a55d5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
