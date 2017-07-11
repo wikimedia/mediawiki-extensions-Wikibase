@@ -45,6 +45,17 @@
 	margin-left: 0.4em;
 	vertical-align: super;
 }
+
+@media print {
+	.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-toggler {
+		display: none;
+	}
+
+	.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-configure {
+		display: none;
+	}
+}
+
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-configure-hidden {
 	display: none;
 }
