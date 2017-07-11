@@ -236,6 +236,11 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				'id' => $id,
 				'default' => $entity === null ? '' : $entity->getId(),
 			],
+			'revid' => [
+				'name' => 'revid',
+				'type' => 'hidden',
+				'default' => $entity === null ? '' : $this->entityRevision->getRevisionId(),
+			]
 		];
 	}
 
