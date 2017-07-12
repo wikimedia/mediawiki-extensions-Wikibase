@@ -1,0 +1,25 @@
+{
+	"extends": "wikimedia",
+	"env": {
+		"browser": true,
+		"jquery": true
+	},
+	"globals": {
+		"mediaWiki": false,
+		"module": false,
+		"util": false,
+		"wikibase": false
+	},
+	"rules": {
+		"computed-property-spacing": "off",
+		"indent": "off",
+		"keyword-spacing": "off",
+		"no-underscore-dangle": "off",
+		"no-use-before-define": [ "error", "nofunc" ],
+		"one-var": "off",
+		"operator-linebreak": "off",
+		"space-before-function-paren": "off",
+		"spaced-comment": "off",
+		"vars-on-top": "off"
+	}
+}

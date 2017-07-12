@@ -1,0 +1,15 @@
+{
+        "extends": "../.eslintrc.json",
+        "env": {
+                "qunit": true
+        },
+        "globals": {
+                "sinon": false
+        },
+        "rules": {
+		"array-bracket-spacing": "off",
+		"object-curly-spacing": "off",
+		"quotes": "off",
+		"valid-jsdoc": "off"
+        }
+}
