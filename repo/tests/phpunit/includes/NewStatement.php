@@ -31,6 +31,11 @@ class NewStatement {
 	private $dataValue;
 
 	/**
+	 * @var int
+	 */
+	private $rank = Statement::RANK_NORMAL;
+
+	/**
 	 * @param PropertyId|string $propertyId
 	 * @return self
 	 */
@@ -88,6 +93,30 @@ class NewStatement {
 		return $result;
 	}
 
+	/**
+	 * @param int $rank
+	 * @return self
+	 */
+	public function withRank( $rank ) {
+		$result = clone $this;
+
+		$result->rank = $rank;
+
+		return $result;
+	}
+
+	public function withDeprecatedRank() {
+		return $this->withRank( Statement::RANK_DEPRECATED );
+	}
+
+	public function withNormalRank() {
+		return $this->withRank( Statement::RANK_NORMAL );
+	}
+
+	public function withPreferredRank() {
+		return $this->withRank( Statement::RANK_PREFERRED );
+	}
+
 	private function __construct() {
 	}
 
@@ -116,7 +145,10 @@ class NewStatement {
 				throw new \LogicException( "Unknown statement type: '{$this->type}'" );
 		}
 
-		return new Statement( $snack );
+		$result = new Statement( $snack );
+		$result->setRank( $this->rank );
+
+		return $result;
 	}
 
 }
