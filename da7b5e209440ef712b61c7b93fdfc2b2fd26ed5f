@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_d8c79048",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-12T11:45:56Z",
+      "side": 1,
+      "message": "Root job parameters are used for deduplication. Duplicates are likely for jobs that target individual pages, but very unlikely for batches of pages.",
+      "parentUuid": "8e742343_aa4d9876",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 66
+      },
+      "revId": "da7b5e209440ef712b61c7b93fdfc2b2fd26ed5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_aa8a786c",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_78b69cd8",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-12T11:45:56Z",
+      "side": 1,
+      "message": "lazyPush will collect all jobs to be queued and do so with a single call at the end of the web request. This allows writes to the job queue to be batched, reducing communication overhead.",
+      "parentUuid": "8e742343_aa8a786c",
+      "range": {
+        "startLine": 154,
+        "startChar": 24,
+        "endLine": 154,
+        "endChar": 32
+      },
+      "revId": "da7b5e209440ef712b61c7b93fdfc2b2fd26ed5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_aa74b896",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2017-07-10T15:37:49Z",
       "side": 1,
       "message": "Calls `expects( $this-\u003eany() )` don\u0027t really do anything. \nCan be safely removed.",
+      "range": {
+        "startLine": 89,
+        "startChar": 10,
+        "endLine": 89,
+        "endChar": 33
+      },
+      "revId": "da7b5e209440ef712b61c7b93fdfc2b2fd26ed5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_b8bc04b2",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-12T11:45:56Z",
+      "side": 1,
+      "message": "I like to have them for symmetry, at least if other methods use once() or exactly(). I agree that they are not very useful here, since all methods currently use any().",
+      "parentUuid": "8e742343_aa74b896",
       "range": {
         "startLine": 89,
         "startChar": 10,
