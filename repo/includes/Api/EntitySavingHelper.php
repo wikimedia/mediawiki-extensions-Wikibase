@@ -16,6 +16,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -265,8 +266,18 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 			$entity->setId( $customId );
 		} else {
-			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
-			$this->entityStore->assignFreshId( $entity );
+			try {
+				// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
+				$this->entityStore->assignFreshId( $entity );
+			} catch ( StorageException $e ) {
+				$this->errorReporter->dieError(
+					'Cannot automatically assign ID: ' . $e->getMessage(),
+					'no-automatic-entity-id'
+				);
+
+				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+			}
+
 		}
 
 		return $entity;

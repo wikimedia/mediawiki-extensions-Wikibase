@@ -862,8 +862,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'create mediainfo with automatic id' => [
 				'p' => [ 'new' => 'mediainfo', 'data' => '{}' ],
 				'e' => [ 'exception' => [
-					'type' => StorageException::class,
-					'message' => 'mediainfo entities do not support automatic IDs'
+					'type' => ApiUsageException::class,
+					'message' => 'Cannot automatically assign ID: mediainfo entities do not support automatic IDs',
+					'code' => 'no-automatic-entity-id',
 				] ],
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			],

@@ -74,10 +74,11 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param EntityDocument $entity
 	 *
 	 * @throws StorageException
+	 * @throws InvalidArgumentException
 	 */
 	public function assignFreshId( EntityDocument $entity ) {
 		if ( $entity->getId() !== null ) {
-			throw new StorageException( 'This entity already has an ID: ' . $entity->getId() . '!' );
+			throw new InvalidArgumentException( 'This entity already has an ID: ' . $entity->getId() . '!' );
 		}
 
 		$type = $entity->getType();
