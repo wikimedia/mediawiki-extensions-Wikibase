@@ -16,6 +16,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -167,7 +168,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
 				$formatterFactory,
-				$this->getMock( PropertyDataTypeLookup::class )
+				$this->getMock( PropertyDataTypeLookup::class ),
+				$this->getMock( EntityIdParser::class )
 			),
 			$allowDataAccessInUserLanguage
 		);
@@ -193,7 +195,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
 				$this->getSnakFormatterFactory(),
-				$this->getMock( PropertyDataTypeLookup::class )
+				$this->getMock( PropertyDataTypeLookup::class ),
+				$this->getMock( EntityIdParser::class )
 			),
 			$allowDataAccessInUserLanguage
 		);
