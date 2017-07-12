@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_c9b4a035",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2017-07-12T16:13:32Z",
+      "side": 1,
+      "message": "You can reuse the above token (it\u0027s the same)",
+      "revId": "e0e1e06c66ff1cd25e0473774cba2d63bdc51357",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
