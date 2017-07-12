@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Units;
 
 /**
  * Storage interface for Unit conversion information.

@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
 use MediaWikiLangTestCase;
-use Wikibase\Lib\UnitConverter;
+use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Repo\Maintenance\SPARQLClient;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;

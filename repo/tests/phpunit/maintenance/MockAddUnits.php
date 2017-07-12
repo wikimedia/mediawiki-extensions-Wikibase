@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\AddUnitConversions;
-use Wikibase\Lib\UnitConverter;
+use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Repo\Maintenance\SPARQLClient;
 
 class MockAddUnits extends AddUnitConversions {
