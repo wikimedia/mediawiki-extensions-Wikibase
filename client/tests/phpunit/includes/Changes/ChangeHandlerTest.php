@@ -181,63 +181,6 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$this->assertEquals( 1, $spy->handleChangesCallCount );
 	}
 
-	public function provideGetUpdateActions() {
-		return [
-			'empty' => [
-				[],
-				[],
-			],
-			'sitelink usage' => [
-				[ EntityUsage::SITELINK_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION,
-					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ],
-			],
-			'label usage' => [
-				[ EntityUsage::LABEL_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ],
-			],
-			'title usage' => [
-				[ EntityUsage::TITLE_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ],
-			],
-			'other usage' => [
-				[ EntityUsage::OTHER_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ],
-			],
-			'all usage' => [
-				[ EntityUsage::ALL_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ],
-			],
-			'sitelink and other usage (does links update)' => [
-				[ EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ],
-				[ ChangeHandler::LINKS_UPDATE_ACTION,
-					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ],
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider provideGetUpdateActions
-	 */
-	public function testGetUpdateActions( array $aspects, array $expected, array $not = [] ) {
-		$handler = $this->getChangeHandler();
-		$actions = $handler->getUpdateActions( $aspects );
-
-		sort( $expected );
-		sort( $actions );
-
-		// check that $actions contains AT LEAST $expected
-		$actual = array_intersect( $actions, $expected );
-		$this->assertEquals( array_values( $expected ), array_values( $actual ), 'expected actions' );
-
-		$unexpected = array_intersect( $actions, $not );
-		$this->assertEmpty( array_values( $unexpected ), 'unexpected actions: ' . implode( '|', $unexpected ) );
-	}
-
 	/**
 	 * Returns a map of fake local page IDs to the corresponding local page names.
 	 * The fake page IDs are the IDs of the items that have a sitelink to the
