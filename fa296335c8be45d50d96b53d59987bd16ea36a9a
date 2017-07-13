@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_846bda15",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-13T04:34:29Z",
+      "side": 1,
+      "message": "This job bumps page_touched and purges cdn/filecache.\n\nTo merely purge the CDN, calling purgeSquid is fine. Or if you want to batch it, use CdnCacheUpdate::newFromTitles()-\u003edoUpdate() or some such -  which is what Title::purgeSquid does per-title.",
+      "range": {
+        "startLine": 137,
+        "startChar": 17,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "fa296335c8be45d50d96b53d59987bd16ea36a9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
