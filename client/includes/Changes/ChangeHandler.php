@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use MWException;
 use SiteLookup;
 use Title;
+use Traversable;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
@@ -24,27 +25,6 @@ use Wikibase\EntityChange;
  * @author Daniel Kinzler
  */
 class ChangeHandler {
-
-	/**
-	 * The change requites a LinksUpdate job to be scheduled to update any links
-	 * associated with the page.
-	 */
-	const LINKS_UPDATE_ACTION = 'links';
-
-	/**
-	 * The change requites any HTML output generated from the page to be purged from web cached.
-	 */
-	const WEB_PURGE_ACTION = 'web';
-
-	/**
-	 * The change requites an entry to be injected into the recentchanges table.
-	 */
-	const RC_ENTRY_ACTION = 'rc';
-
-	/**
-	 * The change requites an entry to be injected into the revision table.
-	 */
-	const HISTORY_ENTRY_ACTION = 'history';
 
 	/**
 	 * @var AffectedPagesFinder
@@ -152,117 +132,26 @@ class ChangeHandler {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
 			. " page(s) for change #$changeId." );
 
-		// Pre-populate the bucket array, so the actions are processed in the correct order.
-		$actionBuckets = [
-			self::LINKS_UPDATE_ACTION => [],
-			self::WEB_PURGE_ACTION => [],
-			self::RC_ENTRY_ACTION => [],
-			self::HISTORY_ENTRY_ACTION => [],
-		];
+		// Run all updates on all affected pages
+		$titlesToUpdate = $this->getTitlesForUsages( $usagesPerPage );
 
-		/** @var PageEntityUsages $usages */
-		foreach ( $usagesPerPage as $usages ) {
-			$actions = $this->getUpdateActions( $usages->getAspects() );
-			$this->updateActionBuckets( $actionBuckets, $usages->getPageId(), $actions );
-		}
-
-		foreach ( $actionBuckets as $action => $bucket ) {
-			$this->applyUpdateAction( $action, $bucket, $change );
-		}
+		$this->updater->purgeWebCache( $titlesToUpdate );
+		$this->updater->scheduleRefreshLinks( $titlesToUpdate );
+		$this->updater->injectRCRecords( $titlesToUpdate, $change );
+		// TODO: inject dummy revisions
 	}
 
 	/**
-	 * @param string[] $aspects List of usage aspects (without modifiers), as defined by the
-	 * EntityUsage::..._USAGE constants.
-	 *
-	 * @return string[] List of actions, as defined by the ChangeHandler::..._ACTION constants.
-	 */
-	public function getUpdateActions( array $aspects ) {
-		$actions = [];
-		$aspects = array_flip( $aspects );
-
-		$all = isset( $aspects[EntityUsage::ALL_USAGE] );
-
-		if ( isset( $aspects[EntityUsage::SITELINK_USAGE] ) || $all ) {
-			// TODO: introduce an update action that updates just the metadata
-			// in the cached ParserOutput, without re-parsing the page!
-			$actions[self::LINKS_UPDATE_ACTION] = true;
-		}
-
-		if ( isset( $aspects[EntityUsage::LABEL_USAGE] ) || $all ) {
-			$actions[self::LINKS_UPDATE_ACTION] = true;
-		}
-
-		if ( isset( $aspects[EntityUsage::TITLE_USAGE] ) || $all ) {
-			$actions[self::LINKS_UPDATE_ACTION] = true;
-		}
-
-		if ( isset( $aspects[EntityUsage::OTHER_USAGE] ) || $all ) {
-			$actions[self::LINKS_UPDATE_ACTION] = true;
-		}
-
-		// Purge caches and inject log entries if we have reason
-		// to update the cached ParserOutput object in some way.
-		if ( isset( $actions[self::LINKS_UPDATE_ACTION] ) ) {
-			$actions[self::WEB_PURGE_ACTION] = true;
-			$actions[self::RC_ENTRY_ACTION] = true;
-			$actions[self::HISTORY_ENTRY_ACTION] = true;
-		}
-
-		return array_keys( $actions );
-	}
-
-	/**
-	 * @param array[] &$buckets Map of action names to lists of page IDs. To be updated.
-	 * @param int $pageId The page ID
-	 * @param string[] $actions Actions to perform on the page
-	 */
-	private function updateActionBuckets( array &$buckets, $pageId, array $actions ) {
-		foreach ( $actions as $action ) {
-			$buckets[$action][] = $pageId;
-		}
-	}
-
-	/**
-	 * @param string $action
-	 * @param int[] $pageIds
-	 * @param EntityChange $change
-	 */
-	private function applyUpdateAction( $action, array $pageIds, EntityChange $change ) {
-		$titlesToUpdate = $this->getTitlesForPageIds( $pageIds );
-
-		switch ( $action ) {
-			case self::WEB_PURGE_ACTION:
-				$this->updater->purgeWebCache( $titlesToUpdate );
-				break;
-
-			case self::LINKS_UPDATE_ACTION:
-				$this->updater->scheduleRefreshLinks( $titlesToUpdate );
-				break;
-
-			case self::RC_ENTRY_ACTION:
-				if ( $this->injectRecentChanges ) {
-					$this->updater->injectRCRecords( $titlesToUpdate, $change );
-				}
-
-				break;
-
-			//TODO: handling for self::HISTORY_ENTRY_ACTION goes here.
-			//      should probably be $this->updater->injectHistoryRecords() or some such.
-		}
-	}
-
-	/**
-	 * @param int[] $pageIds
+	 * @param Traversable $usagesPerPage A sequence of PageEntityUsages objects
 	 *
 	 * @return Title[]
 	 */
-	private function getTitlesForPageIds( array $pageIds ) {
+	private function getTitlesForUsages( $usagesPerPage ) {
 		$titles = [];
 
-		foreach ( $pageIds as $id ) {
+		foreach ( $usagesPerPage as $usages ) {
 			try {
-				$title = $this->titleFactory->newFromID( $id );
+				$title = $this->titleFactory->newFromID( $usages->getPageId() );
 				$titles[] = $title;
 			} catch ( Exception $ex ) {
 				// No title for that ID, maybe the page got deleted just now.
