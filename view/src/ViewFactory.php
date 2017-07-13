@@ -278,6 +278,35 @@ class ViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
+		$statementGroupListView = $this->newStatementGroupListView(
+			$languageCode,
+			$labelDescriptionLookup,
+			$fallbackChain,
+			$editSectionGenerator
+		);
+
+		return new StatementSectionsView(
+			$this->templateFactory,
+			$this->statementGrouper,
+			$statementGroupListView,
+			$this->textProvider
+		);
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param EditSectionGenerator $editSectionGenerator
+	 *
+	 * @return StatementGroupListView
+	 */
+	public function newStatementGroupListView(
+		$languageCode,
+		LabelDescriptionLookup $labelDescriptionLookup,
+		LanguageFallbackChain $fallbackChain,
+		EditSectionGenerator $editSectionGenerator
+	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
 			$fallbackChain,
@@ -298,19 +327,13 @@ class ViewFactory {
 			$this->numberLocalizer,
 			$this->textProvider
 		);
-		$statementGroupListView = new StatementGroupListView(
+
+		return new StatementGroupListView(
 			$this->propertyOrderProvider,
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$editSectionGenerator,
 			$statementHtmlGenerator
-		);
-
-		return new StatementSectionsView(
-			$this->templateFactory,
-			$this->statementGrouper,
-			$statementGroupListView,
-			$this->textProvider
 		);
 	}
 
