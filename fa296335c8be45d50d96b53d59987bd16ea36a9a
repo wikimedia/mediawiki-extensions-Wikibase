@@ -22,6 +22,30 @@
       "revId": "fa296335c8be45d50d96b53d59987bd16ea36a9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_44617231",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-13T04:36:35Z",
+      "side": 1,
+      "message": "I guess that is intentional as going forward you\u0027ll do purgeWebCache instead of purgeParserCache+purgeWebCache. It\u0027s just that the name of the method becomes somewhat confusing in that case. Given that will purge both parser cache and CDN (\"web cache\").",
+      "parentUuid": "8e742343_846bda15",
+      "range": {
+        "startLine": 137,
+        "startChar": 17,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "fa296335c8be45d50d96b53d59987bd16ea36a9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
