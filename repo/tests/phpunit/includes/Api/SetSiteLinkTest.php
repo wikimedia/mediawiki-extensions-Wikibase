@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
@@ -562,6 +563,78 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$warning = $result['warnings']['wbsetsitelink']['warnings'];
 		$this->assertContains( 'Unrecognized value for parameter "badges"', $warning );
+	}
+
+	public function testUserCanEditWhenTheyHaveSufficientPermission() {
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'all-permission' => [ 'edit' => true, ],
+			'*' => [ 'read' => true, 'writeapi' => true ]
+		] );
+
+		$newItem = $this->createItemUsing( $userWithAllPermissions );
+
+		list ( $result, ) = $this->doApiRequestWithToken(
+			$this->getSetSiteLinkRequestParams( $newItem->getId() ),
+			null,
+			$userWithAllPermissions
+		);
+
+		$this->assertEquals( 1, $result['success'] );
+	}
+
+	public function testUserCannotSetLabelWhenTheyLackPermission() {
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'edit' => false ],
+			'all-permission' => [ 'edit' => true, ],
+			'*' => [ 'read' => true, 'writeapi' => true ]
+		] );
+
+		// And an item
+		$newItem = $this->createItemUsing( $userWithAllPermissions );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
+			$this->getSetSiteLinkRequestParams( $newItem->getId() ),
+			$expected,
+			$userWithInsufficientPermissions
+		);
+	}
+
+	/**
+	 * @param User $user
+	 * @return Item
+	 */
+	private function createItemUsing( User $user ) {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
+		return $itemRevision->getEntity();
+	}
+
+	private function createUserWithGroup( $groupName ) {
+		$user = $this->createTestUser()->getUser();
+		$user->addGroup( $groupName );
+		return $user;
+
+	}
+
+	private function getSetSiteLinkRequestParams( ItemId $id ) {
+		return [
+			'action' => 'wbsetsitelink',
+			'id' => $id->getSerialization(),
+			'linksite' => 'enwiki',
+			'linktitle' => 'Come Cool Page',
+		];
 	}
 
 }
