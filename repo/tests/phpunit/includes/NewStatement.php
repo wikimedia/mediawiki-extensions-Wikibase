@@ -15,6 +15,8 @@ use Wikibase\DataModel\Statement\Statement;
 
 class NewStatement {
 
+	const GENERATE_GUID = true;
+
 	/**
 	 * @var PropertyId
 	 */
@@ -34,6 +36,8 @@ class NewStatement {
 	 * @var int
 	 */
 	private $rank = Statement::RANK_NORMAL;
+
+	private $guid;
 
 	/**
 	 * @param PropertyId|string $propertyId
@@ -117,6 +121,35 @@ class NewStatement {
 		return $this->withRank( Statement::RANK_PREFERRED );
 	}
 
+	/**
+	 * @param string $guid
+	 * @return self
+	 */
+	public function withGuid( $guid ) {
+		$result = clone $this;
+		if ( $result->guid !== null ) {
+			throw new \LogicException( 'Cannot redefine GUID' );
+		}
+
+		$result->guid = (string)$guid;
+
+		return $result;
+	}
+
+	/**
+	 * @return self
+	 */
+	public function withSomeGuid() {
+		$result = clone $this;
+		if ( $result->guid !== null ) {
+			throw new \LogicException( 'Cannot redefine GUID' );
+		}
+
+		$result->guid = self::GENERATE_GUID;
+
+		return $result;
+	}
+
 	private function __construct() {
 	}
 
@@ -148,7 +181,29 @@ class NewStatement {
 		$result = new Statement( $snack );
 		$result->setRank( $this->rank );
 
+		if ( $this->guid ) {
+			if ( $this->guid === self::GENERATE_GUID ) {
+				$result->setGuid( $this->generateUuidV4() );
+			} else {
+				$result->setGuid( $this->guid );
+			}
+		}
+
 		return $result;
+	}
+
+	private function generateUuidV4() {
+		return sprintf(
+			'%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0x0fff ) | 0x4000,
+			mt_rand( 0, 0x3fff ) | 0x8000,
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff )
+		);
 	}
 
 }
