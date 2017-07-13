@@ -47,14 +47,18 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 	}
 
+	protected function createTestUser() {
+		return new TestUser(
+			'Apitesteditor',
+			'Api Test Editor',
+			'api_test_editor@example.com',
+			[ 'wbeditor' ]
+		);
+	}
+
 	private function setupUser() {
 		if ( !self::$wbTestUser ) {
-			self::$wbTestUser = new TestUser(
-				'Apitesteditor',
-				'Api Test Editor',
-				'api_test_editor@example.com',
-				[ 'wbeditor' ]
-			);
+			self::$wbTestUser = $this->createTestUser();
 		}
 
 		ApiTestCase::$users['wbeditor'] = self::$wbTestUser;
@@ -167,15 +171,16 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 *
 	 * @param array $params Array of params for the API query.
 	 * @param array $exception Details of the exception to expect (type, code, message, message-key).
+	 * @param User $user
 	 */
-	protected function doTestQueryExceptions( array $params, array $exception ) {
+	protected function doTestQueryExceptions( array $params, array $exception, User $user = null ) {
 		try {
 			if ( array_key_exists( 'code', $exception )
 				&& preg_match( '/^(no|bad)token$/', $exception['code'] )
 			) {
-				$this->doApiRequest( $params );
+				$this->doApiRequest( $params, null, false, $user );
 			} else {
-				$this->doApiRequestWithToken( $params );
+				$this->doApiRequestWithToken( $params, null, $user );
 			}
 
 			$this->fail( 'Failed to throw ApiUsageException' );
