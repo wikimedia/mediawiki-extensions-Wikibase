@@ -1,10 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robin0van0der0vliet"
+			"Robin0van0der0vliet",
+			"Ooswesthoesbes",
+			"Robin van der Vliet"
 		]
 	},
+	"tooltip-t-wikibase": "Link nao item inne verbónje gegaevesvergaoring",
+	"wikibase-comment-update": "Item van {{WBREPONAME}} biegewirk",
+	"wikibase-dataitem": "{{WBREPONAME}}-item",
+	"wikibase-editlinks": "Bewirk links",
+	"wikibase-editlinkstitle": "Bewirk interwiki's",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Versjtaek",
 	"wikibase-rc-hide-wikidata-show": "Toean",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-bewirking",
+	"wikibase-otherprojects": "In anger projekte"
 }

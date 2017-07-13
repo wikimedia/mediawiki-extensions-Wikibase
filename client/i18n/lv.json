@@ -7,7 +7,11 @@
 			"Silraks"
 		]
 	},
+	"wikibase-client-desc": "Klients Wikibase paplašinājumam",
 	"tooltip-t-wikibase": "Saite uz pievienoto datu krātuves vienumu",
+	"apihelp-query+wbentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
+	"apihelp-query+wblistentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
+	"wikibase-comment-add": "{{WBREPONAME}} vienums izveidots.",
 	"wikibase-comment-update": "{{WBREPONAME}} vienums izmainīts",
 	"wikibase-comment-sitelink-add": "Valodas saite pievienota: $1",
 	"wikibase-comment-sitelink-change": "Valodas saite mainīta no $1 uz $2",
@@ -25,17 +29,24 @@
 	"wikibase-linkitem-input-page": "Lapa:",
 	"wikibase-linkitem-confirmitem-button": "Apstiprināt",
 	"wikibase-linkitem-not-loggedin-title": "Jums ir jāpieslēdzas",
+	"wikibase-property-notfound": "$1 īpašība nav atrasta.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Slēpt",
 	"wikibase-rc-hide-wikidata-show": "Rādīt",
 	"wikibase-rc-show-wikidata-pref": "Rādīt labojumos {{WBREPONAME}} pēdējās izmaiņās",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Labojums {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} labojumi",
 	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus {{WBREPONAME}} uzraugāmo lapu sarakstā",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",
+	"wikibase-entityusage-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
+	"wikibase-pageinfo-entity-usage-T": "Nosaukums",
+	"wikibase-pageinfo-entity-usage-C": "Apgalvojums: $1",
+	"wikibase-pageinfo-entity-usage-O": "Citi (apgalvojumi)",
 	"wikibase-otherprojects": "Citos projektos",
-	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem."
+	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem.",
+	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu"
 }

@@ -428,7 +428,7 @@
 	"apihelp-wbgetentities-example-11": "Obtener el elemento de la página «<var>Berlín</var>» en el sitio «<var>enwiki</var>» después de normalizar el título desde «<var>berlin</var>»",
 	"apihelp-wbgetentities-example-12": "Obtener los enlaces de sitio del elemento <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Obtener las entidades con el identificador <samp>Q42</samp>, mostrando solamente los enlaces de sitio de «<var>enwiki</var>»",
-	"apihelp-wblinktitles-description": "Asocia dos artículos en dos wikis distintos con un elemento de Wikibase.",
+	"apihelp-wblinktitles-description": "Asocia dos páginas en dos wikis distintos con un elemento de Wikibase.",
 	"apihelp-wblinktitles-param-tosite": "Un identificador para el sitio en el que reside la página.\nÚsalo junto con <var>totitle</var> para crear un enlace de sitio completo.",
 	"apihelp-wblinktitles-param-fromsite": "Un identificador para el sitio en el que reside la página.\nÚsalo junto con <var>fromtitle</var> para crear un enlace de sitio completo.",
 	"apihelp-wblinktitles-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",

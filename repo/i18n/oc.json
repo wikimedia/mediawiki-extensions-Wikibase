@@ -3,7 +3,8 @@
 		"authors": [
 			"Cedric31",
 			"Shirayuki",
-			"Zolo"
+			"Zolo",
+			"OpenStreetMap-oc"
 		]
 	},
 	"wikibase-desc": "Referencial de donadas estructuradas",
@@ -13,7 +14,7 @@
 	"wikibase-edit": "modificar",
 	"wikibase-save": "enregistrar",
 	"wikibase-cancel": "anullar",
-	"wikibase-add": "apondre",
+	"wikibase-add": "ajustar",
 	"wikibase-addqualifier": "apondre un qualificatiu",
 	"wikibase-addreference": "apondre una referéncia",
 	"wikibase-save-inprogress": "Salvament en cors...",
@@ -175,7 +176,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Recuperar la lista de las entitats sens libellat",
 	"wikibase-entitieswithoutlabel-label-language": "Còdi de lenga :",
 	"wikibase-entitieswithoutlabel-label-type": "Tipe :",
-	"wikibase-entitieswithoutlabel-label-alltypes": "totes",
 	"wikibase-entitieswithoutlabel-submit": "Recercar",
 	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » es pas un còdi de lenga valid.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" es pas un tipe d’entitat valid.",
