@@ -418,6 +418,60 @@ class EditEntityTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testUserCannotEditWhenTheyLackPermission() {
+		// Given there is a user without edit permission
+		$userWithInsufficientPermissions = $this->createTestUser()->getUser();
+		$userWithAllPermissions = $GLOBALS['wgUser'];
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'*' => ['read' => true, 'edit' => false]
+		]);
+
+		// And an existing item
+		$createItemParams = [ 'action' => 'wbeditentity',
+							  'new' => 'item',
+							  'data' =>
+							  '{"labels":{"en":{"language":"en","value":"something"}}}' ];
+		$this->doApiRequestWithToken($createItemParams, null, $userWithAllPermissions);
+		$newItemId = $result['entity']['id'];
+
+		// When I try to edit the item via API
+		$removeLabelParams = [ 'action' => 'wbeditentity',
+							  'data' =>
+							  '{"labels":{"en":{"language":"en","value":""}}}' ];
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'writeapidenied'
+		];
+
+		$this->doTestQueryExceptions( $removeLabelParams, $expected, $userWithInsufficientPermissions);
+	}
+
+	// public function testUserCanEditWhenTheyHaveSufficientPermission () {
+	// 	// Given there is a userWithInsufficientPermissions with read AND edit permission
+	// 	$userWithInsufficientPermissions = $this->createTestUser()->getUser();
+	// 	$this->setMwGlobals( 'wgGroupPermissions', [
+	// 		'*' => ['read' => true, 'edit' => true]
+	// 	]);
+
+	// 	// And an existing item
+	// 	$createItemParams = [ 'action' => 'wbeditentity',
+	// 						  'new' => 'item',
+	// 						  'data' =>
+	// 						  '{"labels":{"en":{"language":"en","value":"something"}}}' ];
+	// 	$newItemId = $result['entity']['id'];
+
+	// 	// When I try to edit the item via API
+	// 	$removeLabelParams = [ 'action' => 'wbeditentity',
+	// 						   'data' =>
+	// 						   '{"labels":{"en":{"language":"en","value":""}}}' ];
+	// 	// Then it is updated
+	// 	list ($result,) = $this->doApiRequestWithToken($removeLabelParams, null, $userWithInsufficientPermissions);
+	// 	$this->assertEquals($result, "foo");
+	// }
+
 	/**
 	 * @dataProvider provideData
 	 */
