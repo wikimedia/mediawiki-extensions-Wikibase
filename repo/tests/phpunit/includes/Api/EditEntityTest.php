@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use User;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -416,6 +417,67 @@ class EditEntityTest extends WikibaseApiTestCase {
 		if ( !in_array( $requiredEntityType, $enabledTypes ) ) {
 			$this->markTestSkipped( 'Entity type not enabled: ' . $requiredEntityType );
 		}
+	}
+
+	public function testUserCanEditWhenTheyHaveSufficientPermission() {
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'all-permission' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
+		] );
+
+		$newItem = $this->createItemUsing( $userWithAllPermissions );
+		$this->assertArrayHasKey( 'id', $newItem );
+	}
+
+	public function testUserCannotEditWhenTheyLackPermission() {
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'read' => true, 'edit' => false ],
+			'all-permission' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
+		] );
+
+		// And an existing item
+		$newItem = $this->createItemUsing( $userWithAllPermissions );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
+			$this->removeLabel( $newItem['id'] ),
+			$expected,
+			$userWithInsufficientPermissions );
+	}
+
+	private function createItemUsing( User $user ) {
+		$createItemParams = [ 'action' => 'wbeditentity',
+							  'new' => 'item',
+							  'data' =>
+							  '{"labels":{"en":{"language":"en","value":"something"}}}' ];
+		list ( $result, ) = $this->doApiRequestWithToken( $createItemParams, null, $user );
+		return $result['entity'];
+	}
+
+	private function createUserWithGroup( $groupName ) {
+		$user = $this->createTestUser()->getUser();
+		$user->addGroup( $groupName );
+		return $user;
+
+	}
+
+	private function removeLabel( $id ) {
+		return [
+			'action' => 'wbeditentity',
+			'id' => $id,
+			'data' => '{"labels":{"en":{"language":"en","value":""}}}'
+		];
 	}
 
 	/**
