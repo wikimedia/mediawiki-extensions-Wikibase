@@ -46,6 +46,30 @@
       "revId": "fa296335c8be45d50d96b53d59987bd16ea36a9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_38a7a909",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-13T14:34:53Z",
+      "side": 1,
+      "message": "Yes, this was intentional. The method name is historical. I told myself I should not mess with it here, but clean up the names in a follow-up.",
+      "parentUuid": "8e742343_44617231",
+      "range": {
+        "startLine": 137,
+        "startChar": 17,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "fa296335c8be45d50d96b53d59987bd16ea36a9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
