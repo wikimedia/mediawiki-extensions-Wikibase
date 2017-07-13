@@ -22,6 +22,30 @@
       "revId": "9f27e304b7b4cf6fbbca018edc205d4df83d9dda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_b892b9a0",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-13T14:34:53Z",
+      "side": 1,
+      "message": "That patch removes the PARSER_PURGE_ACTION constant and the corresponding method in the PageUpdater interface. It has been conflated with LINKS_UDPATE_ACTION. There is simply no use case for doing one but not the other. The change in WikiPageUpdater is a consequence of this.\n\nAnyway, all the4se flags are not really needed, I\u0027ll get rid of it soon.",
+      "parentUuid": "8e742343_04584a8a",
+      "range": {
+        "startLine": 193,
+        "startChar": 17,
+        "endLine": 201,
+        "endChar": 38
+      },
+      "revId": "9f27e304b7b4cf6fbbca018edc205d4df83d9dda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
