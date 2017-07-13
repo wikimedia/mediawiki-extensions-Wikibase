@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_738d522d",
+        "filename": "repo/tests/phpunit/includes/Api/SetSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-13T17:10:24Z",
+      "side": 1,
+      "message": "This method has the wrong name.\nI guess I just merged a few patches where it also has the wrong name... my bad.",
+      "revId": "eeebfb038ab200c007300d858f82e67d53cbb03f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
