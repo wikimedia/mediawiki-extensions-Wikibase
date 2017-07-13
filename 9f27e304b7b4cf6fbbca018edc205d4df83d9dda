@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_04584a8a",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-13T04:39:17Z",
+      "side": 1,
+      "message": "For these three it seems like they should be changed from PARSER_PURGE_ACTION to WEB_PURGE_ACTION given that \u0027web purge\u0027 now does \u0027parser purge\u0027 aand \u0027web purge\u0027, and below parser purge previously resulted in also doing \u0027web purge\u0027 already.\n\nChanging these three to \u0027links update\u0027, however, seems like a logical change unrelated to this commit.",
+      "range": {
+        "startLine": 193,
+        "startChar": 17,
+        "endLine": 201,
+        "endChar": 38
+      },
+      "revId": "9f27e304b7b4cf6fbbca018edc205d4df83d9dda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
