@@ -168,7 +168,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param Summary $summary
 	 * @param string $token
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
-	 * @param int $baseRev the base revision, for conflict detection
 	 *
 	 * @return Status
 	 */
@@ -176,8 +175,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		EntityDocument $entity,
 		Summary $summary,
 		$token,
-		$flags = EDIT_UPDATE,
-		$baseRev = 0
+		$flags = EDIT_UPDATE
 	) {
 		$status = $this->getEditEntity()->attemptSave(
 			$entity,
