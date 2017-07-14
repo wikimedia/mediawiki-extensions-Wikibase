@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_f4804590",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-14T18:07:15Z",
+      "side": 1,
+      "message": "This is added, only to be removed again in the next commit. Do the commits still make sense as separate? Perhaps worth combining for easier review and potential revertability in case of issues.",
+      "range": {
+        "startLine": 155,
+        "startChar": 2,
+        "endLine": 161,
+        "endChar": 4
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
