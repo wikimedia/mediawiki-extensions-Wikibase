@@ -64,7 +64,6 @@ class WikibaseSnakFormatterBuilders {
 		switch ( $format ) {
 			case SnakFormatter::FORMAT_HTML:
 			case SnakFormatter::FORMAT_HTML_DIFF:
-			case SnakFormatter::FORMAT_HTML_WIDGET:
 				return SnakFormatter::FORMAT_HTML;
 			case SnakFormatter::FORMAT_WIKI:
 			case SnakFormatter::FORMAT_PLAIN:

@@ -172,7 +172,6 @@ class ViewFactory {
 
 			case SnakFormatter::FORMAT_HTML:
 			case SnakFormatter::FORMAT_HTML_DIFF:
-			case SnakFormatter::FORMAT_HTML_WIDGET:
 				return $expected === 'text/html';
 		}
 

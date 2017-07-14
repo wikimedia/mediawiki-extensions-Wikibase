@@ -42,7 +42,6 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			[ SnakFormatter::FORMAT_PLAIN, 'a kitten!, two kittens!!' ],
 			[ SnakFormatter::FORMAT_WIKI, '<span>a kitten!, two kittens!!</span>' ],
 			[ SnakFormatter::FORMAT_HTML, '<span>a kitten!, two kittens!!</span>' ],
-			[ SnakFormatter::FORMAT_HTML_WIDGET, '<span>a kitten!, two kittens!!</span>' ],
 			[ SnakFormatter::FORMAT_HTML_DIFF, '<span>a kitten!, two kittens!!</span>' ],
 		];
 	}

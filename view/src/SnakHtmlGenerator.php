@@ -51,8 +51,7 @@ class SnakHtmlGenerator {
 		EntityIdFormatter $propertyIdFormatter,
 		LocalizedTextProvider $textProvider
 	) {
-		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
+		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML ) {
 			throw new InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
 					. $snakFormatter->getFormat() );
 		}

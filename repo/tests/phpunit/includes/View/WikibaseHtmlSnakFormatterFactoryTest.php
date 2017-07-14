@@ -36,7 +36,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 		$outputFormatSnakFormatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
 			->with(
-				SnakFormatter::FORMAT_HTML_WIDGET,
+				SnakFormatter::FORMAT_HTML,
 				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'en',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
