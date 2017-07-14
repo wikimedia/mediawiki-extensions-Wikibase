@@ -284,6 +284,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 					'name' => 'remove',
 					'type' => 'hidden',
 					'default' => 'remove'
+				],
+				'revid' => [
+					'name' => 'revid',
+					'type' => 'hidden',
+					'default' => $this->getBaseRevisionId(),
 				]
 			];
 		} else {
