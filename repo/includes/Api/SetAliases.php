@@ -62,11 +62,12 @@ class SetAliases extends ModifyEntity {
 
 	/**
 	 * @param EntityDocument $entity
+	 * @param array $params
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string[] A list of permissions
 	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
+	protected function getRequiredPermissions( EntityDocument $entity, array $params ) {
 		return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
 	}
 

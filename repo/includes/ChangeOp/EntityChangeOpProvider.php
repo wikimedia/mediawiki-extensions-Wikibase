@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
+use Wikibase\Repo\ChangeOp\Deserialization\PermissionAwareChangeOpDeserializer;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -51,6 +52,17 @@ class EntityChangeOpProvider {
 		$deserializer = $this->getDeserializerForEntityType( $entityType );
 
 		return $deserializer->createEntityChangeOp( $changeRequest );
+	}
+
+	public function includesChangesToEntityTerms( $entityType, array $changeRequest ) {
+		$deserializer = $this->getDeserializerForEntityType( $entityType );
+
+		// TODO: make newDeserializerForEntityType assert that $deserializer is
+		// a PermissionAwareChangeOpDeserializer?
+		if ( ! $deserializer instanceof PermissionAwareChangeOpDeserializer ) {
+			return false;
+		}
+		return $deserializer->includesChangesToEntityTerms( $changeRequest );
 	}
 
 	/**

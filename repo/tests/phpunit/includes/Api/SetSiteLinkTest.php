@@ -610,6 +610,45 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		);
 	}
 
+	public function testUserCanCreateItemWithSiteLinkWhenTheyHaveSufficientPermissions() {
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'all-permission' => [ 'edit' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'writeapi' => true ]
+		] );
+
+		list ( $result, ) = $this->doApiRequestWithToken(
+			$this->getCreateItemAndSetSiteLinkRequestParams(),
+			null,
+			$userWithAllPermissions
+		);
+
+		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 'Another Cool Page', $result['entity']['sitelinks']['enwiki']['title'] );
+	}
+
+	public function testUserCannotCreateItemWhenTheyLackPermission() {
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'createpage' => false ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+		] );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
+			$this->getCreateItemAndSetSiteLinkRequestParams(),
+			$expected,
+			$userWithInsufficientPermissions
+		);
+	}
+
 	/**
 	 * @param User $user
 	 * @return Item
@@ -633,7 +672,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'action' => 'wbsetsitelink',
 			'id' => $id->getSerialization(),
 			'linksite' => 'enwiki',
-			'linktitle' => 'Come Cool Page',
+			'linktitle' => 'Some Cool Page',
+		];
+	}
+
+	private function getCreateItemAndSetSiteLinkRequestParams() {
+		return [
+			'action' => 'wbsetsitelink',
+			'new' => 'item',
+			'linksite' => 'enwiki',
+			'linktitle' => 'Another Cool Page',
 		];
 	}
 

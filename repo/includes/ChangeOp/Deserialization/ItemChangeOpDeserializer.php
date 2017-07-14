@@ -4,14 +4,13 @@ namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOps;
-use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 
 /**
  * Constructs ChangeOps for item change requests
  *
  * @license GPL-2.0+
  */
-class ItemChangeOpDeserializer implements ChangeOpDeserializer {
+class ItemChangeOpDeserializer implements PermissionAwareChangeOpDeserializer {
 
 	/**
 	 * @var ChangeOpDeserializerFactory
@@ -75,6 +74,11 @@ class ItemChangeOpDeserializer implements ChangeOpDeserializer {
 		}
 
 		return $changeOps;
+	}
+
+	public function includesChangesToEntityTerms( array $changeRequest ) {
+		return array_key_exists( 'labels', $changeRequest ) || array_key_exists( 'descriptions', $changeRequest ) ||
+			array_key_exists( 'aliases', $changeRequest );
 	}
 
 }

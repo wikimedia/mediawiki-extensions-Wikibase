@@ -20,6 +20,10 @@ interface EntityPermissionChecker {
 
 	const ACTION_EDIT = 'edit';
 
+	// TODO: should this be a separate action? No class asks explicitly for "create-only" permissions. And
+	// There is no way to just create an entity, some of its properties must set, so it is at least some
+	// kind of an "edit" action too. Maybe implementation should take care of specifics of "create" case
+	// and this would be irrelevant here?
 	const ACTION_CREATE = 'create';
 
 	const ACTION_EDIT_TERMS = 'term';

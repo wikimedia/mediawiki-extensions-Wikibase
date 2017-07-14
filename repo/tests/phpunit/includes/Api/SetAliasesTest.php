@@ -303,6 +303,45 @@ class SetAliasesTest extends ModifyTermTestCase {
 		);
 	}
 
+	public function testUserCanCreateItemWithAliasWhenTheyHaveSufficientPermissions() {
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'all-permission' => [ 'item-term' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+		] );
+
+		list ( $result, ) = $this->doApiRequestWithToken(
+			$this->getCreateItemAndSetAliasRequestParams(),
+			null,
+			$userWithAllPermissions
+		);
+
+		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 'an alias', $result['entity']['aliases']['en'][0]['value'] );
+	}
+
+	public function testUserCannotCreateItemWhenTheyLackPermission() {
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'createpage' => false ],
+			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
+		] );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
+			$this->getCreateItemAndSetAliasRequestParams(),
+			$expected,
+			$userWithInsufficientPermissions
+		);
+	}
+
 	/**
 	 * @param User $user
 	 * @return Item
@@ -327,6 +366,15 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'id' => $id->getSerialization(),
 			'language' => 'en',
 			'add' => 'something else',
+		];
+	}
+
+	private function getCreateItemAndSetAliasRequestParams() {
+		return [
+			'action' => 'wbsetaliases',
+			'new' => 'item',
+			'language' => 'en',
+			'add' => 'an alias',
 		];
 	}
 

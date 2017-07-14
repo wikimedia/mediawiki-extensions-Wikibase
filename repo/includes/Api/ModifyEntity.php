@@ -232,7 +232,7 @@ abstract class ModifyEntity extends ApiBase {
 		}
 
 		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $entity, $user );
+		$status = $this->checkPermissions( $entity, $user, $params );
 
 		if ( !$status->isOK() ) {
 			// Was …->dieError( 'You do not have sufficient permissions', … ) before T150512.
@@ -266,11 +266,12 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @param EntityDocument $entity the entity to check
 	 * @param User $user User doing the action
+	 * @param array $params
 	 *
 	 * @return Status the check's result
 	 */
-	private function checkPermissions( EntityDocument $entity, User $user ) {
-		$permissions = $this->getRequiredPermissions( $entity );
+	private function checkPermissions( EntityDocument $entity, User $user, array $params ) {
+		$permissions = $this->getRequiredPermissions( $entity, $params );
 		$status = Status::newGood();
 
 		foreach ( array_unique( $permissions ) as $perm ) {
@@ -283,10 +284,11 @@ abstract class ModifyEntity extends ApiBase {
 
 	/**
 	 * @param EntityDocument $entity
+	 * @param array $params
 	 *
 	 * @return string[]
 	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
+	protected function getRequiredPermissions( EntityDocument $entity, array $params ) {
 		return [ EntityPermissionChecker::ACTION_EDIT ];
 	}
 

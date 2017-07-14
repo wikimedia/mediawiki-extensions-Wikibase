@@ -25,6 +25,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
@@ -150,6 +151,24 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string[] A list of permissions
+	 */
+	protected function getRequiredPermissions( EntityDocument $entity, array $params ) {
+		$data = json_decode( $params['data'], true );
+		if ( $this->entityChangeOpProvider->includesChangesToEntityTerms( $entity->getType(), $data ) ) {
+			return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
+		}
+		// TODO: if "clear" parameter provided, always assume $entity might have some terms that will be removed?
+		// TODO: or do it 100% right and check if there are any terms on $entity that would change? That'd be
+		// becoming a bit of an overkill...
+
+		return [ EntityPermissionChecker::ACTION_EDIT ];
+	}
+
+	/**
 	 * @param EntityId $entityId
 	 *
 	 * @return bool
@@ -190,6 +209,9 @@ class EditEntity extends ModifyEntity {
 				'param-illegal'
 			);
 		}
+
+		$this->validateDataParameter( $params );
+		$this->checkValidJson( json_decode( $params['data'], true ) );
 	}
 
 	/**
@@ -202,7 +224,6 @@ class EditEntity extends ModifyEntity {
 	 * @return Summary
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
-		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
@@ -341,7 +362,6 @@ class EditEntity extends ModifyEntity {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
-		$this->checkValidJson( $data );
 		$this->checkEntityId( $data, $entityId );
 		$this->checkEntityType( $data, $entity );
 		$this->checkPageIdProp( $data, $title );
