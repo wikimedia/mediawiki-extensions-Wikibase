@@ -48,7 +48,7 @@
 		/**
 		 * The DOM elements this `listview`'s element contained when it was initialized. These DOM
 		 * elements are reused in `this._addLiValue` until the array is empty.
-		 * @property [HTMLElement[]]
+		 * @property {HTMLElement[]|null}
 		 * @private
 		 */
 		_reusedItems: null,
