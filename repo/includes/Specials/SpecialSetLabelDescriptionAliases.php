@@ -164,6 +164,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 					'name' => 'language',
 					'type' => 'hidden',
 					'default' => $this->languageCode
+				],
+				'revid' => [
+					'name' => 'revid',
+					'type' => 'hidden',
+					'default' => $this->getBaseRevisionId(),
 				]
 			];
 			$formDescriptor = array_merge(
