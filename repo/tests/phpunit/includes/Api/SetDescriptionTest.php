@@ -53,7 +53,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
 
-	public function testUserCanEditWhenTheyHaveSufficientPermission() {
+	public function testUserCanSetDescriptionWhenTheyHaveSufficientPermission() {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
@@ -72,7 +72,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		$this->assertEquals( 1, $result['success'] );
 	}
 
-	public function testUserCannotSetLabelWhenTheyLackPermission() {
+	public function testUserCannotSetDescriptionWhenTheyLackPermission() {
 		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 

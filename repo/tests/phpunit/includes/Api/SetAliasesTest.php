@@ -258,7 +258,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$this->doTestSetTermExceptions( $params, $expected );
 	}
 
-	public function testUserCanEditWhenTheyHaveSufficientPermission() {
+	public function testUserCanSetAliasesWhenTheyHaveSufficientPermission() {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
@@ -277,7 +277,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$this->assertEquals( 1, $result['success'] );
 	}
 
-	public function testUserCannotSetLabelWhenTheyLackPermission() {
+	public function testUserCannotSetAliasesWhenTheyLackPermission() {
 		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
