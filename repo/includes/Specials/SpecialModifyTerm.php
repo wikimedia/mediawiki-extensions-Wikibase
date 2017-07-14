@@ -237,7 +237,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 					'type' => 'hidden',
 					'default' => 'remove'
 				],
-				'value' => $valueinput
+				'value' => $valueinput,
+				'revid' => [
+					'name' => 'revid',
+					'type' => 'hidden',
+					'default' => $this->entityRevision->getRevisionId(),
+				],
 			];
 		} else {
 			// Messages:
