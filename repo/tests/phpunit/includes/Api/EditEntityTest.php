@@ -451,6 +451,34 @@ class EditEntityTest extends WikibaseApiTestCase {
 		];
 
 		$this->doTestQueryExceptions(
+			$this->addSiteLink( $newItem['id'] ),
+			$expected,
+			$userWithInsufficientPermissions
+		);
+	}
+
+	public function testEditingLabelRequiresEntityTermEditPermissions() {
+		$this->markTestSkipped( 'Api\EditEntity currently does not check term edit permissions when editing terms!' );
+
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'read' => true, 'edit' => true, 'item-term' => false, ],
+			'all-permission' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
+		] );
+
+		// And an existing item
+		$newItem = $this->createItemUsing( $userWithAllPermissions );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
 			$this->removeLabel( $newItem['id'] ),
 			$expected,
 			$userWithInsufficientPermissions );
@@ -470,6 +498,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$user->addGroup( $groupName );
 		return $user;
 
+	}
+
+	private function addSiteLink( $id ) {
+		return [
+			'action' => 'wbeditentity',
+			'id' => $id,
+			'data' => '{"sitelinks":{"site":"enwiki","title":"Hello World"}}'
+		];
 	}
 
 	private function removeLabel( $id ) {
