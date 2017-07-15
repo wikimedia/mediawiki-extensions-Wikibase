@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_32401a39",
+        "filename": "repo/includes/ChangeOp/Deserialization/PermissionAwareChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-15T17:18:33Z",
+      "side": 1,
+      "message": "It seems odd to me to have knowledge about specific permissions encoded here. Why not just allow each ChangeOp to say which permission it requires?",
+      "revId": "c919c3e52711b92e4d35a94355685f71081ee179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
