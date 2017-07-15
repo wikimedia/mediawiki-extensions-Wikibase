@@ -16,6 +16,24 @@
       "revId": "a72c9f73d3185fdafc5836d5ec2a102e62f5b7da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_f2bb7221",
+        "filename": "repo/tests/phpunit/includes/Api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-15T17:58:37Z",
+      "side": 1,
+      "message": "The word \"props\" is really, really misleading here. The \"output\" in this context is an entity serialization in array form. What is called \"props\" here are keys of specific elements in the first layer of this nested array structure, e.g. \"type\", \"claims\", \"labels\", and so on.\n\nI updated the comments to make this more obvious.",
+      "parentUuid": "8e742343_4a6890b8",
+      "revId": "a72c9f73d3185fdafc5836d5ec2a102e62f5b7da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
