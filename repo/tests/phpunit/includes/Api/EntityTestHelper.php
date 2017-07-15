@@ -283,11 +283,12 @@ class EntityTestHelper {
 	 * Get the data of the entity with the given handle we received after creation
 	 *
 	 * @param string $handle
-	 * @param null|array $props array of props we want the output to have
-	 * @param null|array $langs array of langs we want the output to have
+	 * @param string[]|null $props Keys of entity elements we want the output to have.
+	 * @param string[]|null $langs Language codes of labels, descriptions, and aliases we want the
+	 *  output to have.
 	 *
 	 * @throws OutOfBoundsException
-	 * @return mixed
+	 * @return array
 	 */
 	public static function getEntityOutput( $handle, array $props = null, array $langs = null ) {
 		if ( !array_key_exists( $handle, self::$entityOutput ) ) {
@@ -304,8 +305,9 @@ class EntityTestHelper {
 	 * Remove props and langs that are not included in $props or $langs from the $entityOutput array
 	 *
 	 * @param array $entityOutput Array of entity output
-	 * @param array $props Props to keep in the output
-	 * @param null|array $languageCodes Languages to keep in the output
+	 * @param string[] $props Keys of entity elements to keep in the output.
+	 * @param string[]|null $languageCodes Language codes of labels, descriptions, and aliases to
+	 *  keep in the output.
 	 *
 	 * @return array Array of entity output with props and langs removed
 	 */
