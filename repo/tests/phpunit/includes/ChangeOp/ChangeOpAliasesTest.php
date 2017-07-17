@@ -9,6 +9,7 @@ use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpAliases
@@ -161,6 +162,12 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( InvalidArgumentException::class );
 		$changeOp->apply( $entity );
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpAliases( 'en', [ 'Foo' ], 'set', $this->getTermValidatorFactory() );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT_TERMS ], $changeOp->getActions() );
 	}
 
 }

@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpReference
@@ -355,6 +356,17 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $changeOpReference->validate( $entity );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpReference(
+			'guid',
+			new Reference( new SnakList( [] ) ),
+			'refhash',
+			$this->mockProvider->getMockSnakValidator()
+		);
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }
