@@ -1,11 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ibrahim"
+			"Ibrahim",
+			"ToJack"
 		]
 	},
-	"wikibase-comment-update": "{{WBREPONAME}} тағийр ёфт",
-	"wikibase-rc-hide-wikidata-hide": "Пинҳон",
+	"wikibase-comment-update": "Элементи {{WBREPONAME}} тағийр ёфт",
+	"wikibase-comment-sitelink-change": "Пайванди забонӣ аз $1 ба $2 иваз шуд",
+	"wikibase-dataitem": "Элементи {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-editlinks": "Вироиши пайвандҳо",
+	"wikibase-editlinkstitle": "Таҳрири пайвандҳои байнизабонӣ",
+	"wikibase-addlinkstitle": "Иловаи пайвандҳои байнизабонӣ",
+	"wikibase-linkitem-addlinks": "Иловаи пайвандҳо",
+	"wikibase-linkitem-input-site": "Забон:",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Пинҳон кардани",
 	"wikibase-rc-hide-wikidata-show": "Намоиш",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} вироиш",
 	"wikibase-otherprojects": "Дигар лоиҳаҳо"

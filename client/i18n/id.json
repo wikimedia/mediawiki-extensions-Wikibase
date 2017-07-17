@@ -5,7 +5,8 @@
 			"Kenrick95",
 			"Snidata",
 			"MF-Warburg",
-			"Beeyan"
+			"Beeyan",
+			"Farras"
 		]
 	},
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
@@ -14,7 +15,7 @@
 	"apihelp-query+pageterms-example-simple": "Tambahkan semua istilah yang terkait dengan halaman 'London', dalam bahasa pengguna.",
 	"apihelp-query+pageterms-example-label-en": "Tambahkan label dan nama lain terkait dengan halaman 'London', dalam bahasa Inggris.",
 	"apihelp-query+pageterms-example-item": "Dapatkan label dan nama lain dari butir Q84.",
-	"apihelp-query+pageterms-param-terms": "Jenis istilah untuk ditambahkan, contoh: 'pemerian'. Jika tidak ditentukan, semua jenis akan dikembalikan seperti semula",
+	"apihelp-query+pageterms-param-terms": "Jenis istilah untuk ditambahkan, contoh: 'deskripsi'. Jika tidak ditentukan, semua jenis akan dikembalikan seperti semula",
 	"apihelp-query+wikibase-description": "Dapatkan informasi tentang klien Wikibase dan ruang penyimpanan Wikibase terkait.",
 	"wikibase-after-page-move": "Anda juga perlu [$1 memperbarui item] yang terkait di {{WBREPONAME}} dalam hal interwiki saat pemindahan halaman",
 	"wikibase-after-page-move-queued": "[$1 Item {{WBREPONAME}}] yang terkait dengan halaman ini akan secara otomatis diperbarui secepatnya.",
@@ -48,7 +49,6 @@
 	"wikibase-linkitem-not-loggedin-title": "Anda harus masuk log",
 	"wikibase-linkitem-not-loggedin": "Anda harus masuk log pada wiki ini dan pada [$1 pusat penyimpanan data] untuk menggunakan fitur ini.",
 	"wikibase-linkitem-success-link": "Laman telah berhasil ditautkan. Anda dapat menemukan butir berisi pranala tersebut pada [$1 ruang penyimpanan data terpusat] kami.",
-	"wikibase-limitreport-entities-accessed": "Jumlah entitas Wikibase yang termuat",
 	"wikibase-property-notfound": "Properti $1 tidak ditemukan.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sembunyikan",
