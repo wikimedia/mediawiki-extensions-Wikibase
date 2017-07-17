@@ -48,17 +48,7 @@ class ParserOutputJsConfigBuilder {
 	 * @return string
 	 */
 	private function getSerializedEntity( EntityDocument $entity ) {
-		$serialization = $this->entitySerializer->serialize( $entity );
-
-		// Remove empty parts of the serialization (Added when Lib Serializers were removed)
-		// We could allow parts if we are sure it would not break anything
-		foreach ( $serialization as $key => $serializationPart ) {
-			if ( is_array( $serializationPart ) && empty( $serializationPart ) ) {
-				unset( $serialization[$key] );
-			}
-		}
-
-		return $serialization;
+		return $this->entitySerializer->serialize( $entity );
 	}
 
 }
