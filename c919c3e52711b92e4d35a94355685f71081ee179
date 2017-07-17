@@ -16,6 +16,24 @@
       "revId": "c919c3e52711b92e4d35a94355685f71081ee179",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_bbe065c9",
+        "filename": "repo/includes/ChangeOp/Deserialization/PermissionAwareChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-17T11:21:37Z",
+      "side": 1,
+      "message": "Yeah, I was thinking maybe individual ChangeOp classes should not know there are even permissions and this should be a responsibility of some other service.\nBut I failed to think how would this alternative really look like. And also, ChangeOps are not that generic, they do exists to allow editing in the first place. So having them say what permissions are required seems reasonable. I\u0027ll make a patch for this.\n\nNote: this will change a bit how API classes behave (wbeditentity in particular): it will probably first check if the request is fine (i.e. all required params are provided etc), and then it will get change ops and check permissions. So far it has been checking permissions first. But I guess we could live with that.",
+      "parentUuid": "8e742343_32401a39",
+      "revId": "c919c3e52711b92e4d35a94355685f71081ee179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
