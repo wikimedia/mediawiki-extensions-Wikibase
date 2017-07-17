@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_49e41439",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-17T20:34:34Z",
+      "side": 1,
+      "message": "I\u0027ll have to look into why I did this, and whether it makes sense to change getEditCommentMulti() as suggested. At the time it seemed to be necessary to prevent something from failing, but now I can\u0027t remember what that was.",
+      "parentUuid": "8e742343_9e6ee9c2",
+      "range": {
+        "startLine": 118,
+        "startChar": 19,
+        "endLine": 118,
+        "endChar": 23
+      },
+      "revId": "3ac4313e7cb11595a52616ea993719832bb6c10b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3e66d5ea",
         "filename": "client/tests/phpunit/includes/RecentChanges/RecentChangeFactoryTest.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-08T07:43:06Z",
       "side": 1,
       "message": "Note this changes what this test is actually testing. Instead of doing an \"equality\" check it only does a \"contains\" check now.",
+      "range": {
+        "startLine": 237,
+        "startChar": 36,
+        "endLine": 237,
+        "endChar": 55
+      },
+      "revId": "3ac4313e7cb11595a52616ea993719832bb6c10b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_e9f4e0ef",
+        "filename": "client/tests/phpunit/includes/RecentChanges/RecentChangeFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-17T20:34:34Z",
+      "side": 1,
+      "message": "No, it still does an equality check. The change here merely causes it to ignore any keys returned by $rc-\u003egetAttributes() that aren\u0027t in $expected.",
+      "parentUuid": "8e742343_3e66d5ea",
       "range": {
         "startLine": 237,
         "startChar": 36,
