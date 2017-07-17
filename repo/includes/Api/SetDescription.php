@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -44,12 +45,12 @@ class SetDescription extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
 	 * @param array $params
-	 * @param int $baseRevId
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $params ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
 		}
@@ -57,7 +58,6 @@ class SetDescription extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$changeOp = $this->getChangeOp( $params );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		$descriptions = $entity->getDescriptions();
@@ -75,10 +75,11 @@ class SetDescription extends ModifyTerm {
 
 	/**
 	 * @param array $params
+	 * @param EntityDocument $entity
 	 *
 	 * @return ChangeOpDescription
 	 */
-	private function getChangeOp( array $params ) {
+	protected function getChangeOp( array $params, EntityDocument $entity ) {
 		$description = "";
 		$language = $params['language'];
 
