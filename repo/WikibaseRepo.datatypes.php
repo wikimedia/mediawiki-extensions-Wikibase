@@ -161,6 +161,7 @@ return call_user_func( function() {
 			},
 		],
 		'VT:globecoordinate' => [
+			'expert-module' => 'jquery.valueview.experts.GlobeCoordinateInput',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildCoordinateValidators();
@@ -185,6 +186,7 @@ return call_user_func( function() {
 			},
 		],
 		'VT:monolingualtext' => [
+			'expert-module' => 'jquery.valueview.experts.MonolingualText',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildMonolingualTextValidators();
@@ -207,6 +209,7 @@ return call_user_func( function() {
 			},
 		],
 		'VT:quantity' => [
+			'expert-module' => 'jquery.valueview.experts.QuantityInput',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildQuantityValidators();
@@ -235,6 +238,7 @@ return call_user_func( function() {
 			},
 		],
 		'VT:string' => [
+			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
@@ -255,6 +259,7 @@ return call_user_func( function() {
 			},
 		],
 		'VT:time' => [
+			'expert-module' => 'jquery.valueview.experts.TimeInput',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildTimeValidators();
@@ -282,7 +287,6 @@ return call_user_func( function() {
 			},
 		],
 		'PT:url' => [
-			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
@@ -303,7 +307,6 @@ return call_user_func( function() {
 			},
 		],
 		'PT:external-id' => [
-			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
@@ -335,21 +338,6 @@ return call_user_func( function() {
 			) {
 				return new EntityIdRdfBuilder( $vocab, $tracker );
 			},
-		],
-		'PT:globe-coordinate'  => [
-			'expert-module' => 'jquery.valueview.experts.GlobeCoordinateInput',
-		],
-		'PT:monolingualtext'   => [
-			'expert-module' => 'jquery.valueview.experts.MonolingualText',
-		],
-		'PT:quantity'          => [
-			'expert-module' => 'jquery.valueview.experts.QuantityInput',
-		],
-		'PT:string'            => [
-			'expert-module' => 'jquery.valueview.experts.StringValue',
-		],
-		'PT:time'              => [
-			'expert-module' => 'jquery.valueview.experts.TimeInput',
 		],
 		'PT:wikibase-item' => [
 			'expert-module' => 'wikibase.experts.Item',

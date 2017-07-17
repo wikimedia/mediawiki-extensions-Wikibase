@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use UnexpectedValueException;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -143,20 +144,9 @@ class DataTypeDefinitions {
 	}
 
 	public function getExpertModules() {
-		$ptDefinitions = $this->getFilteredByPrefix( $this->dataTypeDefinitions, 'PT:' );
-
-		$result = [];
-		foreach ( $ptDefinitions as $typeId => $definition ) {
-			if ( empty( $definition['expert-module'] ) ) {
-				throw new \UnexpectedValueException(
-					"Type definition for '{$typeId}' doesn't contain 'expert-module' property"
-				);
-			}
-
-			$result[$typeId] = $definition['expert-module'];
-		}
-
-		return $result;
+		return $this->resolveValueTypeFallback(
+			$this->getMapForDefinitionField( 'expert-module' )
+		);
 	}
 
 	/**
@@ -179,28 +169,30 @@ class DataTypeDefinitions {
 	}
 
 	/**
-	 * Resolves value type fallbacks on the given callback map. For each property data type,
-	 * the corresponding value type is determined. Then, any data type missing from $callbackMap
-	 * is filled in with the value for the corrsponding value type. The resulting array will
+	 * Resolves value type fallbacks on the given definition map. For each property data type,
+	 * the corresponding value type is determined. Then, any data type missing from $definitions
+	 * is filled in with the value for the corresponding value type. The resulting array will
 	 * have no PT or VT prefixes.
 	 *
-	 * @param array $callbackMap The callback map to process.
+	 * @param array $definitions The map to process.
 	 *
-	 * @return array An associative array mapping data type IDs to the value of $field
-	 * given in the original property data type definition provided to the constructor.
+	 * @throw UnexpectedValueException
+	 * @return array An associative array mapping data type IDs to one of the $definitions values.
 	 * The keys in this array are plain property data type IDs without a prefix.
 	 */
-	private function resolveValueTypeFallback( array $callbackMap ) {
+	private function resolveValueTypeFallback( array $definitions ) {
 		$resolved = [];
 
 		foreach ( $this->getValueTypes() as $propertyType => $valueType ) {
-			$vtKey = "VT:$valueType";
 			$ptKey = "PT:$propertyType";
+			$vtKey = "VT:$valueType";
 
-			if ( isset( $callbackMap[$ptKey] ) ) {
-				$resolved[ $propertyType ] = $callbackMap[$ptKey];
-			} elseif ( isset( $callbackMap[$vtKey] ) ) {
-				$resolved[ $propertyType ] = $callbackMap[$vtKey];
+			if ( isset( $definitions[$ptKey] ) ) {
+				$resolved[$propertyType] = $definitions[$ptKey];
+			} elseif ( isset( $definitions[$vtKey] ) ) {
+				$resolved[$propertyType] = $definitions[$vtKey];
+			} else {
+				throw new UnexpectedValueException( "Missing definition for $ptKey or $vtKey" );
 			}
 		}
 
