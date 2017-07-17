@@ -98,6 +98,45 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		);
 	}
 
+	public function testUserCanCreateItemWithDescriptionWhenTheyHaveSufficientPermissions() {
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'all-permission' => [ 'item-term' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+		] );
+
+		list ( $result, ) = $this->doApiRequestWithToken(
+			$this->getCreateItemAndSetDescriptionRequestParams(),
+			null,
+			$userWithAllPermissions
+		);
+
+		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 'some description', $result['entity']['descriptions']['en']['value'] );
+	}
+
+	public function testUserCannotCreateItemWhenTheyLackPermission() {
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'createpage' => false ],
+			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
+		] );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
+			$this->getCreateItemAndSetDescriptionRequestParams(),
+			$expected,
+			$userWithInsufficientPermissions
+		);
+	}
+
 	/**
 	 * @param User $user
 	 * @return Item
@@ -120,6 +159,15 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		return [
 			'action' => 'wbsetdescription',
 			'id' => $id->getSerialization(),
+			'language' => 'en',
+			'value' => 'some description',
+		];
+	}
+
+	private function getCreateItemAndSetDescriptionRequestParams() {
+		return [
+			'action' => 'wbsetdescription',
+			'new' => 'item',
 			'language' => 'en',
 			'value' => 'some description',
 		];

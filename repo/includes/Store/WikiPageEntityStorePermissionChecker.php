@@ -64,12 +64,9 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		$id = $entity->getId();
 
 		if ( $id === null ) {
-			$entityType = $entity->getType();
-
-			if ( $action === EntityPermissionChecker::ACTION_EDIT ) {
-				// for editing a non-existing page, check the create permission
-				return $this->getPermissionStatusForEntityType( $user, EntityPermissionChecker::ACTION_CREATE, $entityType, $quick );
-			}
+			throw new \InvalidArgumentException(
+				'You can not request permissions for an entity without an ID'
+			);
 
 			return $this->getPermissionStatusForEntityType( $user, $action, $entityType, $quick );
 		}
@@ -93,15 +90,6 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 
 		if ( $title === null || !$title->exists() ) {
-			if ( $action === EntityPermissionChecker::ACTION_EDIT ) {
-				return $this->getPermissionStatusForEntityType(
-					$user,
-					EntityPermissionChecker::ACTION_CREATE,
-					$entityId->getEntityType(),
-					$quick
-				);
-			}
-
 			return $this->getPermissionStatusForEntityType(
 				$user,
 				$action,
@@ -110,7 +98,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			);
 		}
 
-		return $this->checkPermissionsForAction( $user, $action, $title, $entityId->getEntityType(), $quick );
+		return $this->checkPermissionsForActions( $user, [ $action ], $title, $entityId->getEntityType(), $quick );
 	}
 
 	/**
@@ -128,18 +116,27 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	public function getPermissionStatusForEntityType( User $user, $action, $type, $quick = '' ) {
 		$title = $this->getPageTitleInEntityNamespace( $type );
 
-		if ( $action === EntityPermissionChecker::ACTION_EDIT ) {
+		if ( $this->isEditAction( $action ) ) {
 			// Note: No entity ID given, assuming creating new entity, i.e. create permissions will be checked
-			return $this->checkPermissionsForAction(
+			return $this->checkPermissionsForActions(
 				$user,
-				EntityPermissionChecker::ACTION_CREATE,
+				[ $action, EntityPermissionChecker::ACTION_CREATE ],
 				$title,
 				$type,
 				$quick
 			);
 		}
 
-		return $this->checkPermissionsForAction( $user, $action, $title, $type, $quick );
+		return $this->checkPermissionsForActions( $user, [ $action ], $title, $type, $quick );
+	}
+
+	/**
+	 * @param string $action
+	 *
+	 * @return bool
+	 */
+	private function isEditAction( $action ) {
+		return $action === EntityPermissionChecker::ACTION_EDIT || $action === EntityPermissionChecker::ACTION_EDIT_TERMS;
 	}
 
 	/**
@@ -153,10 +150,19 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		return Title::makeTitle( $namespace, '/' );
 	}
 
-	private function checkPermissionsForAction( User $user, $action, Title $title, $entityType, $quick ='' ) {
+	private function checkPermissionsForActions( User $user, array $actions, Title $title, $entityType, $quick ='' ) {
 		$status = Status::newGood();
 
-		$mediaWikiPermissions = $this->getMediaWikiPermissionsToCheck( $action, $entityType );
+		$mediaWikiPermissions = [];
+
+		foreach ( $actions as $action ) {
+			$mediaWikiPermissions = array_merge(
+				$mediaWikiPermissions,
+				$this->getMediaWikiPermissionsToCheck( $action, $entityType )
+			);
+		}
+
+		$mediaWikiPermissions = array_unique( $mediaWikiPermissions );
 
 		foreach ( $mediaWikiPermissions as $mwPermission ) {
 			$partialStatus = $this->getPermissionStatus( $user, $mwPermission, $title, $quick );
@@ -171,9 +177,11 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 			$entityTypeSpecificCreatePermission = $entityType . '-create';
 
 			$permissions = [ 'read', 'edit', 'createpage' ];
+
 			if ( $this->mediawikiPermissionExists( $entityTypeSpecificCreatePermission ) ) {
 				$permissions[] = $entityTypeSpecificCreatePermission;
 			}
+
 			return $permissions;
 		}
 
