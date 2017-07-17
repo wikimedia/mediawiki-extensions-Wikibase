@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 
 class NewStatement {
@@ -38,6 +39,11 @@ class NewStatement {
 	private $rank = Statement::RANK_NORMAL;
 
 	private $guid;
+
+	/**
+	 * @var Snak[]
+	 */
+	private $qualifiers = [];
 
 	/**
 	 * @param PropertyId|string $propertyId
@@ -83,15 +89,7 @@ class NewStatement {
 	public function withValue( $dataValue ) {
 		$result = clone $this;
 
-		if ( $dataValue instanceof EntityId ) {
-			$dataValue = new EntityIdValue( $dataValue );
-		} elseif ( is_string( $dataValue ) ) {
-			$dataValue = new StringValue( $dataValue );
-		} elseif ( !( $dataValue instanceof DataValue ) ) {
-			throw new InvalidArgumentException( 'Unsupported $dataValue type' );
-		}
-
-		$result->dataValue = $dataValue;
+		$result->dataValue = $this->createDataValueObject( $dataValue );
 		$result->type = PropertyValueSnak::class;
 
 		return $result;
@@ -150,6 +148,26 @@ class NewStatement {
 		return $result;
 	}
 
+	/**
+	 * @param string|PropertyId $propertyId
+	 * @param DataValue|EntityId|string $value If not a DataValue object, the builder tries to
+	 *  guess the type and turns it into a DataValue object.
+	 *
+	 * @return self
+	 */
+	public function withQualifier( $propertyId, $value ) {
+		$result = clone $this;
+		if ( is_string( $propertyId ) ) {
+			$propertyId = new PropertyId( $propertyId );
+		}
+
+		$value = $this->createDataValueObject( $value );
+
+		$result->qualifiers[] = new PropertyValueSnak( $propertyId, $value );
+
+		return $result;
+	}
+
 	private function __construct() {
 	}
 
@@ -189,6 +207,10 @@ class NewStatement {
 			}
 		}
 
+		foreach ( $this->qualifiers as $qualifier ) {
+			$result->getQualifiers()->addSnak( $qualifier );
+		}
+
 		return $result;
 	}
 
@@ -204,6 +226,23 @@ class NewStatement {
 			mt_rand( 0, 0xffff ),
 			mt_rand( 0, 0xffff )
 		);
+	}
+
+	/**
+	 * @param DataValue|EntityId|string $dataValue If not a DataValue object, the builder tries to
+	 *  guess the type and turns it into a DataValue object.
+	 * @return DataValue
+	 */
+	private function createDataValueObject( $dataValue ) {
+		if ( $dataValue instanceof EntityId ) {
+			$dataValue = new EntityIdValue( $dataValue );
+		} elseif ( is_string( $dataValue ) ) {
+			$dataValue = new StringValue( $dataValue );
+		} elseif ( !( $dataValue instanceof DataValue ) ) {
+			throw new InvalidArgumentException( 'Unsupported $dataValue type' );
+		}
+
+		return $dataValue;
 	}
 
 }
