@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_a6312859",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-17T14:29:12Z",
+      "side": 1,
+      "message": "These two selectors should have been combined into one.",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 54,
+        "endChar": 93
+      },
+      "revId": "2137c1c8ef3576c2278554f68135f80602bb0616",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
