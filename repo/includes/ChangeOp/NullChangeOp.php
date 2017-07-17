@@ -5,6 +5,7 @@ namespace Wikibase\Repo\ChangeOp;
 use ValueValidators\Result;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
@@ -31,6 +32,15 @@ class NullChangeOp implements ChangeOp {
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		// no op
+	}
+
+	/**
+	 * @see ChangeOp::getActions
+	 *
+	 * @return string[]
+	 */
+	public function getActions() {
+		return [];
 	}
 
 }

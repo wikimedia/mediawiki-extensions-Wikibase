@@ -8,6 +8,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
@@ -156,6 +157,12 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( InvalidArgumentException::class );
 		$changeOp->apply( $entity );
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpLabel( 'en', 'Foo', $this->getTermValidatorFactory() );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT_TERMS ], $changeOp->getActions() );
 	}
 
 }

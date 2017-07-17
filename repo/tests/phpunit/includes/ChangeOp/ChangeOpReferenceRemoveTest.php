@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove
@@ -84,6 +85,12 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $item;
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpReferenceRemove( 'guid', 'refhash' );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }

@@ -26,6 +26,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpStatement
@@ -406,6 +407,12 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $changeOpStatement->validate( $item );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
+	}
+
+	public function testGetActions() {
+		$changeOp = $this->newChangeOpStatement( new Statement( new PropertyNoValueSnak( 1 ) ) );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }
