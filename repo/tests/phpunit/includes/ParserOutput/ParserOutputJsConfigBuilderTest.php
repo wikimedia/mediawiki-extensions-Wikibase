@@ -136,7 +136,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	private function getSerialization( EntityDocument $entity, PropertyId $propertyId ) {
-		return [
+		$serialization = [
 			'id' => $entity->getId()->getSerialization(),
 			'type' => $entity->getType(),
 			'labels' => [
@@ -149,6 +149,8 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 					'value' => 'Cake'
 				]
 			],
+			'descriptions' => [],
+			'aliases' => [],
 			'claims' => [
 				$propertyId->getSerialization() => [
 					[
@@ -167,6 +169,11 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 				],
 			],
 		];
+
+		if ( $entity instanceof Item ) {
+			$serialization['sitelinks'] = [];
+		}
+		return $serialization;
 	}
 
 }
