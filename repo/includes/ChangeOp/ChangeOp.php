@@ -19,6 +19,15 @@ use Wikibase\Summary;
 interface ChangeOp {
 
 	/**
+	 * Returns a list of actions, defined as EntityPermissionChecker::ACTION_ constants,
+	 * that the change op involves, so user permissions can be checked accordingly prior
+	 * to validating and/or applying the change op.
+	 *
+	 * @return string[] Array of EntityPermissionChecker::ACTION_ constants
+	 */
+	public function getActions();
+
+	/**
 	 * Validates the current ChangeOp. This indicates whether this ChangeOp is valid
 	 * with respect to the given entity.
 	 *
