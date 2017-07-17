@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_53712572",
+        "filename": "repo/includes/ChangeOp/ChangeOp.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-17T17:19:08Z",
+      "side": 1,
+      "message": "To avoid breakage of extensions implementing this interface, the new method could go into a new interface. But that\u0027s probably overkill in our case.",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9309cde2",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-17T17:19:08Z",
+      "side": 1,
+      "message": "We could do array_unique after array_reduce. Oh, whatever.",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_b30e49e6",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-17T17:19:08Z",
+      "side": 1,
+      "message": "We should also have such tests for each ChangeOp implementation, no? The code is trivial, but still...",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
