@@ -22,6 +22,30 @@
       "revId": "287a39971bd693c016cf22f231e4316d9563c898",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_212c42a9",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-17T16:42:57Z",
+      "side": 1,
+      "message": "They work separately, and the address different concerns. This code was added to ensure that this patch leaves the code base in a functional state even if the next patch is not applied.\n\nI personally find it easier to review smaller patches that address a single concern. I also find that smaller patches are easier to revert. That of course only works if the codebase is functional after each individual patch - which is why I added this code.\n\nI can squash the patches if you prefer, but I find that counter to the goals of easy review and revertability.",
+      "parentUuid": "8e742343_f4804590",
+      "range": {
+        "startLine": 155,
+        "startChar": 2,
+        "endLine": 161,
+        "endChar": 4
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
