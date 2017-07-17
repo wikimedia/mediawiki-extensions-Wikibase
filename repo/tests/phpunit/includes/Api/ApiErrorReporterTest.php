@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiErrorFormatter;
 use ApiMain;
 use DataValues\IllegalValueException;
 use Language;
@@ -12,6 +13,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\ApiErrorReporter
@@ -33,27 +35,28 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		array $expectedDataFields,
 		ApiUsageException $ex
 	) {
-		// Using deprecated getMessageArray() because ApiUsageException::getApiMessage() isn't public.
-		$messageArray = $ex->getMessageArray();
-
-		$this->assertArrayHasKey( 'code', $messageArray );
-		$this->assertArrayHasKey( 'info', $messageArray );
+		$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
 
 		if ( $info !== null ) {
-			$this->assertRegExp( $info, $messageArray['info'], 'error info message' );
+			// @todo: Change this to check the message key instead of the parsed text
+			$expectedInfo = ApiErrorFormatter::stripMarkup(
+				$msg->inLanguage( 'en' )->useDatabase( false )->text()
+			);
+			$this->assertRegExp( $info, $expectedInfo, 'error info message' );
 		}
 
 		if ( $code !== null ) {
-			$this->assertSame( $code, $messageArray['code'], 'error code' );
+			$this->assertSame( $code, $msg->getApiCode(), 'error code' );
 		}
 
 		if ( $httpStatusCode ) {
 			$this->assertSame( $httpStatusCode, $ex->getCode(), 'HTTP status code' );
 		}
 
+		$data = $msg->getApiData();
 		foreach ( $expectedDataFields as $path => $value ) {
 			$path = explode( '/', $path );
-			$this->assertValueAtPath( $value, $path, $messageArray );
+			$this->assertValueAtPath( $value, $path, $data );
 		}
 	}
 
@@ -85,7 +88,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$extradata' => [],
 				'$infoPattern' => '/ugh!/',
 				'$expectedData' => [
-					'code' => 'errorreporter-test-ugh',
 				],
 			],
 
@@ -265,8 +267,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$extradata' => [],
 				'$infoPattern' => '/^Ugh!$/',
 				'$expectedData' => [
-					'info' => 'Ugh!',
-					'code' => 'errorreporter-test-ugh',
 				],
 			],
 

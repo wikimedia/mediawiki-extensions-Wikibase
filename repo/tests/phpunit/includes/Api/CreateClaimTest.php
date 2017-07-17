@@ -6,6 +6,7 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\CreateClaim
@@ -222,9 +223,10 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request should raise an exception' );
 		} catch ( ApiUsageException $ex ) {
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
 			$this->assertEquals(
 				$errorCode,
-				$ex->getCodeString(), 'Invalid request raised correct error: ' . $ex->getMessage()
+				$msg->getApiCode(), 'Invalid request raised correct error: ' . $ex->getMessage()
 			);
 		}
 
