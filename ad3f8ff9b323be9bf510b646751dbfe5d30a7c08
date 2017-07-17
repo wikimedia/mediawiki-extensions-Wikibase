@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_419f0e54",
+        "filename": "lib/tests/phpunit/DataTypeDefinitionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-17T16:06:56Z",
+      "side": 1,
+      "message": "Lots of unrelated changes here. Makes the patch hard to review.",
+      "revId": "ad3f8ff9b323be9bf510b646751dbfe5d30a7c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
