@@ -16,6 +16,24 @@
       "revId": "ad3f8ff9b323be9bf510b646751dbfe5d30a7c08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_01bca6af",
+        "filename": "lib/tests/phpunit/DataTypeDefinitionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-17T16:09:39Z",
+      "side": 1,
+      "message": "Sorry. I could have split of the \"Same\" changes. Everything else is related.\n\nI could have split of the introduction of the exception into a separate patch. This would also make the changes to the tests here much more obvious. Please tell me if this helps.",
+      "parentUuid": "8e742343_419f0e54",
+      "revId": "ad3f8ff9b323be9bf510b646751dbfe5d30a7c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
