@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -44,20 +45,19 @@ class SetDescription extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
-	 * @param array $params
-	 * @param int $baseRevId
+	 * @param ChangeOp $changeOp
+	 * @param array $preparedParameters
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
 		}
 
-		$summary = $this->createSummary( $params );
-		$language = $params['language'];
+		$summary = $this->createSummary( $preparedParameters );
+		$language = $preparedParameters['language'];
 
-		$changeOp = $this->getChangeOp( $params );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		$descriptions = $entity->getDescriptions();
@@ -74,16 +74,17 @@ class SetDescription extends ModifyTerm {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
+	 * @param EntityDocument $entity
 	 *
 	 * @return ChangeOpDescription
 	 */
-	private function getChangeOp( array $params ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
 		$description = "";
-		$language = $params['language'];
+		$language = $preparedParameters['language'];
 
-		if ( isset( $params['value'] ) ) {
-			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
+		if ( isset( $preparedParameters['value'] ) ) {
+			$description = $this->stringNormalizer->trimToNFC( $preparedParameters['value'] );
 		}
 
 		if ( $description === "" ) {

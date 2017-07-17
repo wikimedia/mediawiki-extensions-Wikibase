@@ -192,30 +192,26 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param array $params
-	 * @param int $baseRevId
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+	protected function prepareParameters( array $params ) {
 		$this->validateDataParameter( $params );
-		$data = json_decode( $params['data'], true );
-		$this->validateDataProperties( $data, $entity, $baseRevId );
+		$params['data'] = json_decode( $params['data'], true );
+		return parent::prepareParameters( $params );
+	}
+
+	protected function validateEntitySpecificParameters( array $preparedParameters, EntityDocument $entity, $entityRevId ) {
+		$data = $preparedParameters['data'];
+		$this->validateDataProperties( $data, $entity, $entityRevId );
 
 		$exists = $this->entityExists( $entity->getId() );
 
-		if ( $params['clear'] ) {
-			if ( $params['baserevid'] && $exists ) {
+		if ( $preparedParameters['clear'] ) {
+			if ( $preparedParameters['baserevid'] && $exists ) {
 				$latestRevision = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
 
-				if ( !$baseRevId === $latestRevision ) {
+				if ( !$entityRevId === $latestRevision ) {
 					$this->errorReporter->dieError(
 						'Tried to clear entity using baserevid of entity not equal to current revision',
 						'editconflict'
@@ -223,29 +219,46 @@ class EditEntity extends ModifyEntity {
 				}
 			}
 
-			$entity = $this->clearEntity( $entity );
 		}
 
 		// if we create a new property, make sure we set the datatype
 		if ( !$exists && $entity instanceof Property ) {
-			if ( !isset( $data['datatype'] )
-				|| !in_array( $data['datatype'], $this->propertyDataTypes )
-			) {
+			if ( !isset( $data['datatype'] ) || !in_array( $data['datatype'], $this->propertyDataTypes ) ) {
 				$this->errorReporter->dieWithError(
 					'wikibase-api-not-recognized-datatype',
 					'param-illegal'
 				);
 			}
+		}
+	}
 
+	/**
+	 * @see ModifyEntity::modifyEntity
+	 *
+	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
+	 * @param array $preparedParameters
+	 *
+	 * @return Summary
+	 */
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
+		$data = $preparedParameters['data'];
+
+		$exists = $this->entityExists( $entity->getId() );
+
+		if ( $preparedParameters['clear'] ) {
+			$entity = $this->clearEntity( $entity );
+		}
+
+		// if we create a new property, make sure we set the datatype
+		if ( !$exists && $entity instanceof Property ) {
 			$entity->setDataTypeId( $data['datatype'] );
 		}
 
-		$changeOps = $this->getChangeOp( $data, $entity );
-
-		$this->applyChangeOp( $changeOps, $entity );
+		$this->applyChangeOp( $changeOp, $entity );
 
 		$this->buildResult( $entity );
-		return $this->getSummary( $params );
+		return $this->getSummary( $preparedParameters );
 	}
 
 	/**
@@ -291,9 +304,11 @@ class EditEntity extends ModifyEntity {
 	 * @throws ApiUsageException
 	 * @return ChangeOp
 	 */
-	private function getChangeOp( array $changeRequest, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+		$data = $preparedParameters['data'];
+
 		try {
-			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $changeRequest );
+			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $data );
 		} catch ( ChangeOpDeserializationException $exception ) {
 			$this->errorReporter->dieException( $exception, $exception->getErrorCode() );
 		}
