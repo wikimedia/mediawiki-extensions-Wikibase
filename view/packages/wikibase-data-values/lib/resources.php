@@ -10,33 +10,30 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0]
-	);
+	];
 
-	return array(
-
-		'globeCoordinate.js' => $moduleTemplate + array(
-			'scripts' => array(
+	return [
+		'globeCoordinate.js' => $moduleTemplate + [
+			'scripts' => [
 				'globeCoordinate/globeCoordinate.js',
 				'globeCoordinate/globeCoordinate.Formatter.js',
 				'globeCoordinate/globeCoordinate.GlobeCoordinate.js',
-			),
-		),
+			],
+		],
 
-		'qunit.parameterize' => $moduleTemplate + array(
-			'scripts' => array(
+		'qunit.parameterize' => $moduleTemplate + [
+			'scripts' => [
 				'qunit.parameterize/qunit.parameterize.js',
-			),
-		),
+			],
+		],
 
-		'util.inherit' => $moduleTemplate + array(
-			'scripts' => array(
+		'util.inherit' => $moduleTemplate + [
+			'scripts' => [
 				'util/util.inherit.js',
-			),
-		),
-
-	);
-
+			],
+		],
+	];
 } );
