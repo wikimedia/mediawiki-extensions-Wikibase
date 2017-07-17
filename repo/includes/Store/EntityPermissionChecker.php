@@ -68,26 +68,4 @@ interface EntityPermissionChecker {
 	 */
 	public function getPermissionStatusForEntityId( User $user, $action, EntityId $entityId, $quick = '' );
 
-	/**
-	 * Check whether the given user has the permission to perform the given action on a given entity type.
-	 * This does not require an entity to exist.
-	 *
-	 * Useful especially for checking whether the user is allowed to create an entity
-	 * of a given type.
-	 *
-	 * @param User $user
-	 * @param string $action
-	 * @param string $type
-	 * @param string $quick Flag for allowing quick permission checking. If set to
-	 * 'quick', implementations may return inaccurate results if determining the accurate result
-	 * would be slow (e.g. checking for cascading protection).
-	 * This is intended as an optimization for non-critical checks,
-	 * e.g. for showing or hiding UI elements.
-	 *
-	 * @throws InvalidArgumentException if unknown permission is requested
-	 *
-	 * @return Status a status object representing the check's result.
-	 */
-	public function getPermissionStatusForEntityType( User $user, $action, $type, $quick = '' );
-
 }

@@ -519,6 +519,136 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider provideNonExistingEntitiesAndPermissionsThatAllowEditingTerms
+	 */
+	public function testAllRequiredPermissionsAreNeededToEditTermsOfNonExistingEntity(
+		EntityDocument $nonExistingEntity,
+		array $groupPermissions
+	) {
+		$this->anyUserHasPermissions( $groupPermissions );
+
+		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_EDIT_TERMS, $nonExistingEntity );
+	}
+
+	public function provideNonExistingEntitiesAndPermissionsThatAllowEditingTerms() {
+		return [
+			'non-existing item, createpage permission' => [
+				$this->getNonExistingItem(),
+				[ 'createpage' => true ]
+			],
+			'non-existing item (null ID), createpage permission' => [
+				$this->getNonExistingItemWithNullId(),
+				[ 'createpage' => true ]
+			],
+			'non-existing property, createpage and property-create permission' => [
+				$this->getNonExistingProperty(),
+				[ 'createpage' => true, 'property-create' => true, ]
+			],
+			'non-existing property (null ID), createpage and property-create permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'createpage' => true, 'property-create' => true, ]
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideNonExistingEntitiesAndPermissionsThatDisallowEditingTerms
+	 */
+	public function testAllRequiredPermissionsAreNeededToEditTermsOfNonExistingEntity_failures(
+		EntityDocument $nonExistingEntity,
+		array $groupPermissions
+	) {
+		$this->anyUserHasPermissions( $groupPermissions );
+
+		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_EDIT_TERMS, $nonExistingEntity );
+	}
+
+	public function provideNonExistingEntitiesAndPermissionsThatDisallowEditingTerms() {
+		return [
+			'non-existing item, no createpage permission' => [
+				$this->getNonExistingItem(),
+				[ 'createpage' => false ]
+			],
+			'non-existing item, no item-term permission' => [
+				$this->getNonExistingItem(),
+				[ 'item-term' => false, 'createpage' => true ]
+			],
+			'non-existing item, no edit permission' => [
+				$this->getNonExistingItem(),
+				[ 'edit' => false, 'item-term' => true, 'createpage' => true ]
+			],
+			'non-existing item, no read permission' => [
+				$this->getNonExistingItem(),
+				[ 'read' => false, 'edit' => true, 'item-term' => true, 'createpage' => true ]
+			],
+			'non-existing item (null ID), no createpage permission' => [
+				$this->getNonExistingItemWithNullId(),
+				[ 'createpage' => false ]
+			],
+			'non-existing item (null ID), no item-term permission' => [
+				$this->getNonExistingItemWithNullId(),
+				[ 'item-term' => false, 'createpage' => true ]
+			],
+			'non-existing item (null ID), no edit permission' => [
+				$this->getNonExistingItemWithNullId(),
+				[ 'edit' => false, 'item-term' => true, 'createpage' => true ]
+			],
+			'non-existing item (null ID), no read permission' => [
+				$this->getNonExistingItemWithNullId(),
+				[ 'read' => false, 'edit' => true, 'item-term' => true, 'createpage' => true ]
+			],
+			'non-existing property, no property-create permission' => [
+				$this->getNonExistingProperty(),
+				[ 'createpage' => true, 'property-create' => false, ]
+			],
+			'non-existing property, no createpage permission' => [
+				$this->getNonExistingProperty(),
+				[ 'createpage' => false, 'property-create' => true, ]
+			],
+			'non-existing property, no createpage nor property-create permission' => [
+				$this->getNonExistingProperty(),
+				[ 'createpage' => false, 'property-create' => false, ]
+			],
+			'non-existing property, no property-term permission' => [
+				$this->getNonExistingProperty(),
+				[ 'property-term' => false, 'createpage' => true, 'property-create' => true, ]
+			],
+			'non-existing property, no edit permission' => [
+				$this->getNonExistingProperty(),
+				[ 'edit' => false, 'property-term' => true, 'createpage' => true, 'property-create' => true, ]
+			],
+			'non-existing property, no read permission' => [
+				$this->getNonExistingProperty(),
+				[ 'read' => false, 'edit' => true, 'property-term' => true, 'createpage' => true, 'property-create' => true, ]
+			],
+			'non-existing property (null ID), no property-create permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'createpage' => true, 'property-create' => false, ]
+			],
+			'non-existing property (null ID), no createpage permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'createpage' => false, 'property-create' => true, ]
+			],
+			'non-existing property (null ID), no createpage nor property-create permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'createpage' => false, 'property-create' => false, ]
+			],
+			'non-existing property (null ID), no property-term permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'property-term' => false, 'createpage' => true, 'property-create' => true, ]
+			],
+			'non-existing property (null ID), no edit permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'edit' => false, 'property-term' => true, 'createpage' => true, 'property-create' => true, ]
+			],
+			'non-existing property (null ID), no read permission' => [
+				$this->getNonExistingPropertyWithNullId(),
+				[ 'read' => false, 'edit' => true, 'property-term' => true, 'createpage' => true, 'property-create' => true, ]
+			],
+		];
+	}
+
 	public function testGivenUnknownPermission_getPermissionStatusForEntityThrowsException() {
 		$checker = $this->getPermissionChecker();
 
@@ -540,18 +670,6 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 			$this->getTestUser()->getUser(),
 			'turn-into-an-elephant',
 			$this->getExistingItem()->getId()
-		);
-	}
-
-	public function testGivenUnknownPermission_getPermissionStatusForEntityTypeThrowsException() {
-		$checker = $this->getPermissionChecker();
-
-		$this->setExpectedException( InvalidArgumentException::class );
-
-		$checker->getPermissionStatusForEntityType(
-			$this->getTestUser()->getUser(),
-			'turn-into-an-elephant',
-			$this->getExistingItem()->getType()
 		);
 	}
 
@@ -652,11 +770,6 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 			$action,
 			$entity
 		);
-		$statusForType = $permissionChecker->getPermissionStatusForEntityType(
-			$user,
-			$action,
-			$entity->getType()
-		);
 
 		if ( $entity->getId() !== null ) {
 			$statusForId = $permissionChecker->getPermissionStatusForEntityId(
@@ -668,7 +781,6 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 		}
 
 		$this->assertTrue( $statusForEntity->isOK() );
-		$this->assertTrue( $statusForType->isOK() );
 	}
 
 	/**
@@ -684,11 +796,6 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 			$action,
 			$entity
 		);
-		$statusForType = $permissionChecker->getPermissionStatusForEntityType(
-			$user,
-			$action,
-			$entity->getType()
-		);
 
 		if ( $entity->getId() !== null ) {
 			$statusForId = $permissionChecker->getPermissionStatusForEntityId(
@@ -700,7 +807,6 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 		}
 
 		$this->assertFalse( $statusForEntity->isOK() );
-		$this->assertFalse( $statusForType->isOK() );
 	}
 
 }
