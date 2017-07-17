@@ -423,7 +423,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
-			'all-permission' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
@@ -437,7 +437,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'read' => true, 'edit' => false ],
-			'all-permission' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
@@ -458,14 +458,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	public function testEditingLabelRequiresEntityTermEditPermissions() {
-		$this->markTestSkipped( 'Api\EditEntity currently does not check term edit permissions when editing terms!' );
-
 		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'read' => true, 'edit' => true, 'item-term' => false, ],
-			'all-permission' => [ 'read' => true, 'edit' => true, 'createpage' => true ],
+			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
@@ -504,7 +502,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		return [
 			'action' => 'wbeditentity',
 			'id' => $id,
-			'data' => '{"sitelinks":{"site":"enwiki","title":"Hello World"}}'
+			'data' => '{"sitelinks":{"enwiki":{"site":"enwiki","title":"Hello World"}}}'
 		];
 	}
 
