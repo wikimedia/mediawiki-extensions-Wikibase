@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_06e7dc3b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-17T13:42:26Z",
+      "side": 1,
+      "message": "The code should not assume all errors are the same and guaranteed to conform to this interface.",
+      "range": {
+        "startLine": 434,
+        "startChar": 24,
+        "endLine": 434,
+        "endChar": 31
+      },
+      "revId": "15084b0e74de1d783aace6ef6d7e07f09ddb60be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_26e45838",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-17T13:42:26Z",
+      "side": 1,
+      "message": "Note that the error objects created here and above are not guaranteed to even contain an \"action\" element.",
+      "range": {
+        "startLine": 227,
+        "startChar": 3,
+        "endLine": 227,
+        "endChar": 8
+      },
+      "revId": "15084b0e74de1d783aace6ef6d7e07f09ddb60be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

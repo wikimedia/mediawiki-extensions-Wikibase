@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_46e16427",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-17T13:42:26Z",
+      "side": 0,
+      "message": "This was undefined if the error object did not contained an \"action\" element, or the \"action\" element was not \"save\" or \"remove\". All this could easily happen, see above. I tried to make the displayError() method robust and accept undefined, but this did not worked out.",
+      "range": {
+        "startLine": 249,
+        "startChar": 38,
+        "endLine": 249,
+        "endChar": 45
+      },
+      "revId": "b039b09e91ff5b9d369102c7acda8b5185af889b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
