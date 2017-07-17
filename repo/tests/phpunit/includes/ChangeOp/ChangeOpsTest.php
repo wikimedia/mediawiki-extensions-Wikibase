@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**
@@ -180,6 +181,21 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( $result->isValid(), 'Validate must fail with this mock' );
 		$this->assertTrue( $item->isEmpty(), 'Item must still be empty' );
+	}
+
+	public function testGetActions() {
+		$editChangeOp = $this->getMock( ChangeOp::class );
+		$editChangeOp->method( 'getActions' )->willReturn( [ EntityPermissionChecker::ACTION_EDIT ] );
+
+		$editTermsChangeOp = $this->getMock( ChangeOp::class );
+		$editTermsChangeOp->method( 'getActions' )->willReturn( [ EntityPermissionChecker::ACTION_EDIT_TERMS ] );
+
+		$changeOps = new ChangeOps( [ $editChangeOp, $editTermsChangeOp ] );
+
+		$actions = $changeOps->getActions();
+		$this->assertCount( 2, $actions );
+		$this->assertContains( EntityPermissionChecker::ACTION_EDIT_TERMS, $actions );
+		$this->assertContains( EntityPermissionChecker::ACTION_EDIT, $actions );
 	}
 
 }

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
@@ -225,6 +226,12 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$expectedArguments,
 			$summary->getAutoSummaryArgs()
 		);
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpSiteLink( 'enwiki', 'Berlin' );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }

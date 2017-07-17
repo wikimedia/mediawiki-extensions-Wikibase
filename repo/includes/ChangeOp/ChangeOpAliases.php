@@ -7,6 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -148,6 +149,15 @@ class ChangeOpAliases extends ChangeOpBase {
 
 		//XXX: Do we want to check the updated fingerprint, as we do for labels and descriptions?
 		return $result;
+	}
+
+	/**
+	 * @see ChangeOp::getActions
+	 *
+	 * @return string[]
+	 */
+	public function getActions() {
+		return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
 	}
 
 }

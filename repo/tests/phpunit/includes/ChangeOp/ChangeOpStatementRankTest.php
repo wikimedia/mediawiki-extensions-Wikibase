@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpStatementRank
@@ -86,6 +87,12 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $item;
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpStatementRank( 'guid', 1 );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpQualifierRemove
@@ -78,6 +79,12 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $item;
+	}
+
+	public function testGetActions() {
+		$changeOp = new ChangeOpQualifierRemove( 'guid', 'snakhash' );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }

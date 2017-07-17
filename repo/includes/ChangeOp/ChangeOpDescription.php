@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -146,6 +147,15 @@ class ChangeOpDescription extends ChangeOpBase {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @see ChangeOp::getActions
+	 *
+	 * @return string[]
+	 */
+	public function getActions() {
+		return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
 	}
 
 }
