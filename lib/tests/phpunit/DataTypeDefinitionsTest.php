@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use PHPUnit_Framework_TestCase;
+use UnexpectedValueException;
 use Wikibase\Lib\DataTypeDefinitions;
 
 /**
@@ -30,6 +31,11 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
 				'snak-formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooSnakFormatter',
 			],
+			'VT:BAR' => [
+				'validator-factory-callback' => 'DataTypeDefinitionsTest::getBarValueValidator',
+				'parser-factory-callback' => 'DataTypeDefinitionsTest::getBarValueParser',
+				'rdf-builder-factory-callback' => 'DataTypeDefinitionsTest::getBarValueRdfBuilder',
+			],
 			'PT:bar' => [
 				'value-type' => 'BAR',
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getBarFormatter',
@@ -43,40 +49,50 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 	public function testTypeIds() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertEquals( [ 'foo', 'bar' ], $defs->getTypeIds() );
+		$this->assertSame( [ 'foo', 'bar' ], $defs->getTypeIds() );
 	}
 
 	public function testGetValueTypes() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertEquals( [ 'foo' => 'FOO', 'bar' => 'BAR' ], $defs->getValueTypes() );
+		$this->assertSame( [ 'foo' => 'FOO', 'bar' => 'BAR' ], $defs->getValueTypes() );
 	}
 
 	public function testGetRdfTypeUris() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertEquals( [ 'foo' => 'http://acme.test/vocab/Foo' ], $defs->getRdfTypeUris() );
+		$this->assertSame( [ 'foo' => 'http://acme.test/vocab/Foo' ], $defs->getRdfTypeUris() );
 	}
 
 	public function testGetValidatorFactoryCallbacks() {
 		$defs = $this->getDataTypeDefinitions();
 
-		$expected = [ 'foo' => 'DataTypeDefinitionsTest::getFooValidators' ];
-		$this->assertEquals( $expected, $defs->getValidatorFactoryCallbacks() );
+		$expected = [
+			'foo' => 'DataTypeDefinitionsTest::getFooValidators',
+			'bar' => 'DataTypeDefinitionsTest::getBarValueValidator',
+		];
+		$this->assertSame( $expected, $defs->getValidatorFactoryCallbacks() );
 
-		$expected = [ 'PT:foo' => 'DataTypeDefinitionsTest::getFooValidators' ];
-		$this->assertEquals( $expected, $defs->getValidatorFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
+		$expected = [
+			'PT:foo' => 'DataTypeDefinitionsTest::getFooValidators',
+			'VT:BAR' => 'DataTypeDefinitionsTest::getBarValueValidator',
+		];
+		$this->assertSame( $expected, $defs->getValidatorFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
 	}
 
 	public function testGetParserFactoryCallbacks() {
 		$defs = $this->getDataTypeDefinitions();
 
-		$expected = [ 'foo' => 'DataTypeDefinitionsTest::getFooParser' ];
-		$this->assertEquals( $expected, $defs->getParserFactoryCallbacks() );
+		$expected = [
+			'foo' => 'DataTypeDefinitionsTest::getFooParser',
+			'bar' => 'DataTypeDefinitionsTest::getBarValueParser',
+		];
+		$this->assertSame( $expected, $defs->getParserFactoryCallbacks() );
 
 		$expected = [
-			'PT:foo' => 'DataTypeDefinitionsTest::getFooParser',
 			'VT:FOO' => 'DataTypeDefinitionsTest::getFooValueParser',
+			'PT:foo' => 'DataTypeDefinitionsTest::getFooParser',
+			'VT:BAR' => 'DataTypeDefinitionsTest::getBarValueParser',
 		];
-		$this->assertEquals( $expected, $defs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
+		$this->assertSame( $expected, $defs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
 	}
 
 	public function testGetFormatterFactoryCallbacks() {
@@ -86,13 +102,13 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			'foo' => 'DataTypeDefinitionsTest::getFooValueFormatter',
 			'bar' => 'DataTypeDefinitionsTest::getBarFormatter',
 		];
-		$this->assertEquals( $expected, $defs->getFormatterFactoryCallbacks() );
+		$this->assertSame( $expected, $defs->getFormatterFactoryCallbacks() );
 
 		$expected = [
 			'VT:FOO' => 'DataTypeDefinitionsTest::getFooValueFormatter',
 			'PT:bar' => 'DataTypeDefinitionsTest::getBarFormatter',
 		];
-		$this->assertEquals( $expected, $defs->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
+		$this->assertSame( $expected, $defs->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
 	}
 
 	public function testRegisterDataTypes() {
@@ -103,8 +119,8 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValueValidator',
 			],
 			'PT:bar' => [
-				'validator-factory-callback' => 'DataTypeDefinitionsTest::getBarValidators',
-				'parser-factory-callback' => 'DataTypeDefinitionsTest::getBarParser',
+				'validator-factory-callback' => 'DataTypeDefinitionsTest::getBarValueValidators',
+				'parser-factory-callback' => 'DataTypeDefinitionsTest::getBarValueParser',
 			],
 			'PT:fuzz' => [
 				'value-type' => 'FOO',
@@ -113,26 +129,34 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 		$defs->registerDataTypes( $extraTypes );
 
-		$this->assertEquals( [ 'foo', 'bar', 'fuzz' ], $defs->getTypeIds() );
-		$this->assertEquals( [ 'foo' => 'FOO', 'bar' => 'BAR', 'fuzz' => 'FOO' ], $defs->getValueTypes() );
+		$this->assertSame( [ 'foo', 'bar', 'fuzz' ], $defs->getTypeIds() );
+		$this->assertSame( [ 'foo' => 'FOO', 'bar' => 'BAR', 'fuzz' => 'FOO' ], $defs->getValueTypes() );
 
 		$actual = $defs->getValidatorFactoryCallbacks();
-		$this->assertEquals(
-			[ 'foo' => 'DataTypeDefinitionsTest::getFooValidators',
-				'bar' => 'DataTypeDefinitionsTest::getBarValidators',
-				'fuzz' => 'DataTypeDefinitionsTest::getFooValueValidator' ],
+		$this->assertSame(
+			[
+				'foo' => 'DataTypeDefinitionsTest::getFooValidators',
+				'bar' => 'DataTypeDefinitionsTest::getBarValueValidators',
+				'fuzz' => 'DataTypeDefinitionsTest::getFooValueValidator'
+			],
 			$actual
 		);
 	}
 
 	public function testGetRdfBuilderFactoryCallbacks() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertEquals(
-			[ 'foo' => 'DataTypeDefinitionsTest::getFooRdfBuilder' ],
+		$this->assertSame(
+			[
+				'foo' => 'DataTypeDefinitionsTest::getFooRdfBuilder',
+				'bar' => 'DataTypeDefinitionsTest::getBarValueRdfBuilder',
+			],
 			$defs->getRdfBuilderFactoryCallbacks()
 		);
-		$this->assertEquals(
-			[ 'VT:FOO' => 'DataTypeDefinitionsTest::getFooRdfBuilder' ],
+		$this->assertSame(
+			[
+				'VT:FOO' => 'DataTypeDefinitionsTest::getFooRdfBuilder',
+				'VT:BAR' => 'DataTypeDefinitionsTest::getBarValueRdfBuilder',
+			],
 			$defs->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
 		);
 	}
@@ -157,12 +181,13 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 	public function test_getExpertModules_GivenPropertyType_ReturnsMapFromTypeIdToExpertModule() {
 		$definitions = [
 			'PT:some-type' => [
+				'value-type' => 'some-value-type',
 				'expert-module' => 'some-expert-module',
 			]
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 
-		$this->assertEquals(
+		$this->assertSame(
 			[ 'some-type' => 'some-expert-module' ],
 			$dataTypeDefinitions->getExpertModules()
 		);
@@ -171,12 +196,13 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 	public function test_getExpertModules_GivenPropertyTypeWithoutExpertModule_ThrowsAnException() {
 		$definitions = [
 			'PT:some-type' => [
+				'value-type' => 'some-value-type',
 				'expert-module' => '',
 			]
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 
-		$this->setExpectedException( \Exception::class );
+		$this->setExpectedException( UnexpectedValueException::class );
 		$dataTypeDefinitions->getExpertModules();
 	}
 
@@ -188,7 +214,7 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 
-		$this->assertEquals( [], $dataTypeDefinitions->getExpertModules() );
+		$this->assertSame( [], $dataTypeDefinitions->getExpertModules() );
 	}
 
 }
