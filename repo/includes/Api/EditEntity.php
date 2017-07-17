@@ -241,11 +241,12 @@ class EditEntity extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
 		$data = $preparedParameters['data'];
 
 		$exists = $this->entityExists( $entity->getId() );
@@ -267,9 +268,7 @@ class EditEntity extends ModifyEntity {
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
 		}
 
-		$changeOps = $this->getChangeOp( $data, $entity );
-
-		$this->applyChangeOp( $changeOps, $entity );
+		$this->applyChangeOp( $changeOp, $entity );
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $preparedParameters );
@@ -311,16 +310,17 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $changeRequest an array of data to apply. For example:
-	 *        [ 'label' => [ 'zh' => [ 'remove' ], 'de' => [ 'value' => 'Foo' ] ] ]
+	 * @param array $preparedParameters
 	 * @param EntityDocument $entity
 	 *
 	 * @throws ApiUsageException
 	 * @return ChangeOp
 	 */
-	private function getChangeOp( array $changeRequest, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+		$data = $preparedParameters['data'];
+
 		try {
-			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $changeRequest );
+			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $data );
 		} catch ( ChangeOpDeserializationException $exception ) {
 			$this->errorReporter->dieException( $exception, $exception->getErrorCode() );
 		}

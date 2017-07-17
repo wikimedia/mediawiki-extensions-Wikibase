@@ -61,16 +61,6 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string[] A list of permissions
-	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
-	}
-
-	/**
 	 * @see ModifyEntity::validateParameters
 	 *
 	 * @param array $params
@@ -90,34 +80,13 @@ class SetAliases extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param array $preparedParameters
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
-		if ( !( $entity instanceof AliasesProvider ) ) {
-			$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
-		}
+	private function createSummaryForAliases( array $params, AliasesProvider $entity ) {
+		$summary = $this->createSummary( $params );
 
-		$summary = $this->createSummary( $preparedParameters );
-		$language = $preparedParameters['language'];
+		if ( !empty( $params['add'] ) && !empty( $params['remove'] ) ) {
+			$language = $params['language'];
 
-		/** @var ChangeOp[] $aliasesChangeOps */
-		$aliasesChangeOps = $this->getChangeOps( $preparedParameters );
-
-		$aliasGroups = $entity->getAliasGroups();
-
-		if ( count( $aliasesChangeOps ) == 1 ) {
-			$this->applyChangeOp( $aliasesChangeOps[0], $entity, $summary );
-		} else {
-			$changeOps = new ChangeOps();
-			$changeOps->add( $aliasesChangeOps );
-
-			$this->applyChangeOp( $changeOps, $entity );
+			$aliasGroups = $entity->getAliasGroups();
 
 			// Set the action to 'set' in case we add and remove aliases in a single edit
 			$summary->setAction( 'set' );
@@ -129,6 +98,34 @@ class SetAliases extends ModifyEntity {
 				$summary->addAutoSummaryArgs( $aliases );
 			}
 		}
+
+		return $summary;
+	}
+
+	/**
+	 * @see ModifyEntity::modifyEntity
+	 *
+	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
+	 * @param array $preparedParameters
+	 *
+	 * @return Summary
+	 */
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
+		if ( !( $entity instanceof AliasesProvider ) ) {
+			$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
+		}
+
+		$language = $preparedParameters['language'];
+
+		$aliasGroups = $entity->getAliasGroups();
+
+		// FIXME: if we have ADD and REMOVE operations in the same call,
+		// we will also have two ChangeOps updating the same edit summary.
+		// This will cause the edit summary to be overwritten by the last ChangeOp being applied.
+		$summary = $this->createSummaryForAliases( $preparedParameters, $entity );
+
+		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		if ( $aliasGroups->hasGroupForLanguage( $language ) ) {
 			$aliasGroupList = $aliasGroups->getWithLanguages( [ $language ] );
@@ -164,11 +161,14 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $preparedParameters
+	 * @see ModifyEntity::getChangeOp
 	 *
-	 * @return ChangeOpAliases[]
+	 * @param array $preparedParameters
+	 * @param EntityDocument $entity
+	 *
+	 * @return ChangeOp
 	 */
-	private function getChangeOps( array $preparedParameters ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
 		$changeOps = [];
 		$language = $preparedParameters['language'];
 
@@ -200,7 +200,7 @@ class SetAliases extends ModifyEntity {
 			}
 		}
 
-		return $changeOps;
+		return new ChangeOps( $changeOps );
 	}
 
 	/**
