@@ -430,7 +430,7 @@
 		 * @inheritdoc
 		 */
 		setError: function ( error ) {
-			if ( error ) {
+			if ( error && error.context ) {
 				var context = error.context;
 				var viewType = 'wikibase-' + context.type + 'view';
 				this.element.find( '.wikibase-entitytermsforlanguageview-' + context.value.getLanguageCode() )
