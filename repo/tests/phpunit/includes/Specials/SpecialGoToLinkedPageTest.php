@@ -144,6 +144,10 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 				'XXwiki/Q23', null, 'XXwiki', 'Q23',
 				'(wikibase-gotolinkedpage-error-page-not-found)'
 			],
+			'notFound3' => [
+				'XXwiki,enwiki,zhwiki/Q23', null, 'XXwiki,enwiki,zhwiki', 'Q23',
+				'(wikibase-gotolinkedpage-error-page-not-found)'
+			],
 		];
 	}
 
@@ -171,6 +175,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$cases['found'] = [ 'dewiki/Q23', 'http://dewiki.com/TestPageName' ];
 		$cases['foundEntityRedirect'] = [ 'dewiki/Q24', 'http://dewiki.com/TestPageName' ];
 		$cases['foundWithSiteIdHack'] = [ 'de/Q23', 'http://dewiki.com/TestPageName' ];
+		$cases['foundInFallbackChain'] = [ 'enwiki,dewiki,fawiki/Q23', 'http://dewiki.com/TestPageName' ];
 		return $cases;
 	}
 

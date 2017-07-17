@@ -79,15 +79,18 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	/**
 	 * @param string|null $subPage
 	 *
-	 * @return array array( string $site, string $itemString )
+	 * @return array array( string[] $sites, string $itemString )
 	 */
 	private function getArguments( $subPage ) {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
-		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
+		$sites = explode(
+			',',
+			trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) )
+		);
 		$itemString = trim( $request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 ) );
 
-		return [ $site, $itemString ];
+		return [ $sites, $itemString ];
 	}
 
 	/**
@@ -186,32 +189,34 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
-		list( $site, $itemString ) = $this->getArguments( $subPage );
+		list( $sites, $itemString ) = $this->getArguments( $subPage );
 
-		if ( !empty( $site ) || !empty( $itemString ) ) {
-			$url = $this->getTargetUrl( $site, $itemString );
-			if ( null !== $url ) {
-				$this->getOutput()->redirect( $url );
-				return;
+		if ( !empty( $sites ) || !empty( $itemString ) ) {
+			foreach ( $sites as $site ) {
+				$url = $this->getTargetUrl( $site, $itemString );
+				if ( $url !== null ) {
+					$this->getOutput()->redirect( $url );
+					return;
+				}
 			}
 		}
 
 		$this->outputError();
-		$this->outputForm( $site, $itemString );
+		$this->outputForm( $sites, $itemString );
 	}
 
 	/**
 	 * Output a form via the context's OutputPage object to go to a
 	 * sitelink (linked page) for an item and site id.
 	 *
-	 * @param string $site
+	 * @param string[] $sites
 	 * @param string $itemString
 	 */
-	private function outputForm( $site, $itemString ) {
+	private function outputForm( array $sites, $itemString ) {
 		$formDescriptor = [
 			'site' => [
 				'name' => 'site',
-				'default' => $site ?: '',
+				'default' => implode( ',', $sites ),
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-sitename',
 				'size' => 12,
