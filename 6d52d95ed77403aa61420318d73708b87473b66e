@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_5b85c1d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5104
+      },
+      "writtenOn": "2017-07-17T12:32:07Z",
+      "side": 1,
+      "message": "Yeah, I should fix that.",
+      "parentUuid": "8e742343_0006e422",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "6d52d95ed77403aa61420318d73708b87473b66e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_9bfd6906",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-17T09:32:48Z",
       "side": 1,
       "message": "Is there a ticket that describes the plan that drives this change? Or a follow-up patch where we can see it in action?",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "6d52d95ed77403aa61420318d73708b87473b66e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_7b8afde5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5104
+      },
+      "writtenOn": "2017-07-17T12:32:07Z",
+      "side": 1,
+      "message": "Okay, I will make a ticket for now.",
+      "parentUuid": "8e742343_9bfd6906",
       "range": {
         "startLine": 9,
         "startChar": 5,
