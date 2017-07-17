@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
@@ -27,6 +28,15 @@ abstract class ChangeOpBase implements ChangeOp {
 			$summary->setLanguage( $language );
 			$summary->addAutoSummaryArgs( $args );
 		}
+	}
+
+	/**
+	 * @see ChangeOp::getActions
+	 *
+	 * @return string[]
+	 */
+	public function getActions() {
+		return [ EntityPermissionChecker::ACTION_EDIT ];
 	}
 
 }
