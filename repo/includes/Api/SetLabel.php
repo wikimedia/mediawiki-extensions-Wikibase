@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -44,11 +45,12 @@ class SetLabel extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
 		}
@@ -56,7 +58,6 @@ class SetLabel extends ModifyTerm {
 		$summary = $this->createSummary( $preparedParameters );
 		$language = $preparedParameters['language'];
 
-		$changeOp = $this->getChangeOp( $preparedParameters );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		$labels = $entity->getLabels();
@@ -73,16 +74,17 @@ class SetLabel extends ModifyTerm {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
+	 * @param EntityDocument $entity
 	 *
 	 * @return ChangeOpLabel
 	 */
-	private function getChangeOp( array $params ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
 		$label = "";
-		$language = $params['language'];
+		$language = $preparedParameters['language'];
 
-		if ( isset( $params['value'] ) ) {
-			$label = $this->stringNormalizer->trimToNFC( $params['value'] );
+		if ( isset( $preparedParameters['value'] ) ) {
+			$label = $this->stringNormalizer->trimToNFC( $preparedParameters['value'] );
 		}
 
 		if ( $label === "" ) {

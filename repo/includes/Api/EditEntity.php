@@ -201,8 +201,7 @@ class EditEntity extends ModifyEntity {
 	protected function validateEntitySpecificParameters(
 		array $preparedParameters,
 		EntityDocument $entity,
-		$entityRevId
-	) {
+		$entityRevId ) {
 		$data = $preparedParameters['data'];
 		$this->validateDataProperties( $data, $entity, $entityRevId );
 
@@ -222,13 +221,12 @@ class EditEntity extends ModifyEntity {
 					);
 				}
 			}
+
 		}
 
 		// if we create a new property, make sure we set the datatype
 		if ( !$exists && $entity instanceof Property ) {
-			if ( !isset( $data['datatype'] )
-				|| !in_array( $data['datatype'], $this->propertyDataTypes )
-			) {
+			if ( !isset( $data['datatype'] ) || !in_array( $data['datatype'], $this->propertyDataTypes ) ) {
 				$this->errorReporter->dieWithError(
 					'wikibase-api-not-recognized-datatype',
 					'param-illegal'
@@ -241,11 +239,12 @@ class EditEntity extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
 		$data = $preparedParameters['data'];
 
 		$exists = $this->entityExists( $entity->getId() );
@@ -259,9 +258,7 @@ class EditEntity extends ModifyEntity {
 			$entity->setDataTypeId( $data['datatype'] );
 		}
 
-		$changeOps = $this->getChangeOp( $data, $entity );
-
-		$this->applyChangeOp( $changeOps, $entity );
+		$this->applyChangeOp( $changeOp, $entity );
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $preparedParameters );
@@ -286,16 +283,16 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $preparedParameters
+	 * @param array $params
 	 *
 	 * @return Summary
 	 */
-	private function getSummary( array $preparedParameters ) {
+	private function getSummary( array $params ) {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?
-		$summary = $this->createSummary( $preparedParameters );
-		if ( isset( $preparedParameters['id'] ) xor ( isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] ) ) ) {
-			$summary->setAction( $preparedParameters['clear'] === false ? 'update' : 'override' );
+		$summary = $this->createSummary( $params );
+		if ( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
+			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
 		} else {
 			$summary->setAction( 'create' );
 		}
@@ -310,9 +307,11 @@ class EditEntity extends ModifyEntity {
 	 * @throws ApiUsageException
 	 * @return ChangeOp
 	 */
-	private function getChangeOp( array $changeRequest, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+		$data = $preparedParameters['data'];
+
 		try {
-			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $changeRequest );
+			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $data );
 		} catch ( ChangeOpDeserializationException $exception ) {
 			$this->errorReporter->dieException( $exception, $exception->getErrorCode() );
 		}
