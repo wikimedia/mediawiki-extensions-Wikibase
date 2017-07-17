@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
@@ -88,33 +89,30 @@ class SetSiteLink extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
-	 * @param array $params
-	 * @param int $baseRevId
+	 * @param ChangeOp $changeOp
+	 * @param array $preparedParameters
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
 		if ( !( $entity instanceof Item ) ) {
 			$this->errorReporter->dieError( "The given entity is not an item", "not-item" );
 		}
 
 		$item = $entity;
-		$summary = $this->createSummary( $params );
-		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+		$summary = $this->createSummary( $preparedParameters );
+		$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 		$hasLinkWithSiteId = $item->getSiteLinkList()->hasLinkWithSiteId( $linksite );
 		$resultBuilder = $this->getResultBuilder();
 
-		if ( $this->shouldRemove( $params ) ) {
+		if ( $this->shouldRemove( $preparedParameters ) ) {
 			if ( $hasLinkWithSiteId ) {
-				$changeOp = $this->getChangeOp( $params );
 				$siteLink = $item->getSiteLinkList()->getBySiteId( $linksite );
 				$this->applyChangeOp( $changeOp, $entity, $summary );
 				$resultBuilder->addRemovedSiteLinks( new SiteLinkList( [ $siteLink ] ), 'entity' );
 			}
 		} else {
 			try {
-				$changeOp = $this->getChangeOp( $params );
-
 				$result = $changeOp->validate( $entity );
 				if ( !$result->isValid() ) {
 					throw new ChangeOpValidationException( $result );
@@ -137,16 +135,16 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
 	 *
 	 * @return ChangeOpSiteLink
 	 */
-	private function getChangeOp( array $params ) {
-		if ( $this->shouldRemove( $params ) ) {
-			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+		if ( $this->shouldRemove( $preparedParameters ) ) {
+			$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 			return $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
-			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+			$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 			$site = $sites->getSite( $linksite );
 
@@ -157,12 +155,12 @@ class SetSiteLink extends ModifyEntity {
 				);
 			}
 
-			if ( isset( $params['linktitle'] ) ) {
-				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
+			if ( isset( $preparedParameters['linktitle'] ) ) {
+				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $preparedParameters['linktitle'] ) );
 
 				if ( $page === false ) {
 					$this->errorReporter->dieWithError(
-						[ 'wikibase-api-no-external-page', $linksite, $params['linktitle'] ],
+						[ 'wikibase-api-no-external-page', $linksite, $preparedParameters['linktitle'] ],
 						'no-external-page'
 					);
 				}
@@ -170,8 +168,8 @@ class SetSiteLink extends ModifyEntity {
 				$page = null;
 			}
 
-			$badges = ( isset( $params['badges'] ) )
-				? $this->parseSiteLinkBadges( $params['badges'] )
+			$badges = ( isset( $preparedParameters['badges'] ) )
+				? $this->parseSiteLinkBadges( $preparedParameters['badges'] )
 				: null;
 
 			return $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
