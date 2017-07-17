@@ -156,11 +156,16 @@ abstract class ModifyEntity extends ApiBase {
 	 * Actually modify the entity.
 	 *
 	 * @param EntityDocument &$entity
+	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
-	abstract protected function modifyEntity( EntityDocument &$entity, array $preparedParameters );
+	abstract protected function modifyEntity(
+		EntityDocument &$entity,
+		ChangeOp $changeOp,
+		array $preparedParameters
+	);
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
@@ -252,20 +257,21 @@ abstract class ModifyEntity extends ApiBase {
 			throw new LogicException( 'The Entity should have an ID at this point!' );
 		}
 
-		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $entity, $user );
+		$preparedParameters = $this->prepareParameters( $params );
+		unset( $params );
+
+		$this->validateEntitySpecificParameters( $preparedParameters, $entity, $entityRevId );
+
+		$changeOp = $this->getChangeOp( $preparedParameters, $entity );
+
+		$status = $this->checkPermissions( $entity, $user, $changeOp );
 
 		if ( !$status->isOK() ) {
 			// Was …->dieError( 'You do not have sufficient permissions', … ) before T150512.
 			$this->errorReporter->dieStatus( $status, 'permissiondenied' );
 		}
 
-		$preparedParameters = $this->prepareParameters( $params );
-		unset( $params );
-
-		$this->validateEntitySpecificParameters( $preparedParameters, $entity, $entityRevId );
-
-		$summary = $this->modifyEntity( $entity, $preparedParameters, $entityRevId );
+		$summary = $this->modifyEntity( $entity, $changeOp, $preparedParameters );
 
 		if ( !$summary ) {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
@@ -288,32 +294,29 @@ abstract class ModifyEntity extends ApiBase {
 	}
 
 	/**
+	 * @param array $preparedParameters
+	 * @return ChangeOp
+	 */
+	abstract protected function getChangeOp( array $preparedParameters, EntityDocument $entity );
+
+	/**
 	 * Check the rights for the user accessing the module.
 	 *
 	 * @param EntityDocument $entity the entity to check
 	 * @param User $user User doing the action
+	 * @param ChangeOp $changeOp
 	 *
 	 * @return Status the check's result
 	 */
-	private function checkPermissions( EntityDocument $entity, User $user ) {
-		$permissions = $this->getRequiredPermissions( $entity );
+	private function checkPermissions( EntityDocument $entity, User $user, ChangeOp $changeOp ) {
 		$status = Status::newGood();
 
-		foreach ( array_unique( $permissions ) as $perm ) {
+		foreach ( $changeOp->getActions() as $perm ) {
 			$permStatus = $this->permissionChecker->getPermissionStatusForEntity( $user, $perm, $entity );
 			$status->merge( $permStatus );
 		}
 
 		return $status;
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string[]
-	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return [ EntityPermissionChecker::ACTION_EDIT ];
 	}
 
 	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {
