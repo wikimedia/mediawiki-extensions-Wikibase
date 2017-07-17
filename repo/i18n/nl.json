@@ -23,7 +23,8 @@
 			"HanV",
 			"MrLeopold",
 			"Hex",
-			"Mainframe98"
+			"Mainframe98",
+			"Festina90"
 		]
 	},
 	"wikibase-desc": "Opslagplaats voor gestructureerde gegevens",
@@ -506,12 +507,14 @@
 	"apihelp-wbsearchentities-param-language": "Zoeken in deze taal.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Of de taalterugvalketen moet worden uitgeschakeld",
 	"apihelp-wbsearchentities-param-type": "Zoek naar dit type entiteit.",
+	"apihelp-wbsearchentities-param-props": "Geef deze eigenschappen voor elke entiteit terug.",
 	"apihelp-wbsearchentities-param-limit": "Maximum aantal resultaten",
 	"apihelp-wbsearchentities-param-continue": "Startpositie waarvandaan het zoeken te vervolgen",
 	"apihelp-wbsearchentities-example-1": "Zoeken naar \"abc\" in de Engelse taal, met de standaard instellingen voor type en limiet",
 	"apihelp-wbsearchentities-example-2": "Zoeken naar \"abc\" in de Engelse taal met een maximum van 50 resultaten",
 	"apihelp-wbsearchentities-example-3": "Zoeken naar \"alphabet\" in de Engelse taal voor type eigenschap",
 	"apihelp-wbsearchentities-example-4": "Zoeken naar \"abc\" in de Engelse taal met een maximum van 2 resultaten en een startpositie van 2",
+	"apihelp-wbsearchentities-example-5": "Zoeken naar \"alphabet\" in de Engelse taal voor type-eigenschap",
 	"apihelp-query+wbsearch-description": "Zoekt naar entiteiten met behulp van labels en aliassen.\nDit kan worden gebruikt als een generator voor andere zoekopdrachten.\nGeeft de overeenkomende term terug die moet worden weergegeven.",
 	"apihelp-query+wbsearch-param-search": "Naar deze tekst zoeken.",
 	"apihelp-query+wbsearch-param-language": "In deze taal zoeken.",

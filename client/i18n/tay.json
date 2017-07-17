@@ -5,7 +5,10 @@
 			"Hitaypayan"
 		]
 	},
+	"tooltip-t-wikibase": "P’buzyun squw biru’ na pin’buzyan nquw wal sr’ tun lmlamu’ na blnkgan",
 	"wikibase-dataitem": "{{WBREPONAME}} binkgan lmlamu’",
+	"wikibase-editlinks": "Smr’zyut miru’ sa ’ubuy",
+	"wikibase-editlinkstitle": "’Ubuy sa smr’zyut ini’ ptnaq na kay’",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "smbbaq",
 	"wikibase-rc-hide-wikidata-show": "Show",

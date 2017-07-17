@@ -8,7 +8,8 @@
 			"Subi",
 			"Macofe",
 			"Sator",
-			"Theklan"
+			"Theklan",
+			"Mikel Ibaiba"
 		]
 	},
 	"wikibase-entity": "entitatea",
@@ -103,6 +104,7 @@
 	"right-property-term": "Aldatu propietatearen terminoak  (etiketak, deskribapenak, goitizenak)",
 	"wikibase-pageinfo-subscription-none": "Bat ere ez",
 	"apihelp-wbsearchentities-param-language": "Bilatu hizkuntza honetan.",
+	"apihelp-wbsearchentities-example-5": "Bilatu \"alphabet\" ingelesez url parametroa omititu",
 	"apihelp-query+wbsearch-param-language": "Bilatu hizkuntza honetan.",
 	"apihelp-wbsetdescription-param-language": "Deskribapenaren hizkuntza",
 	"apihelp-wbsetlabel-param-language": "Etiketaren hizkuntza"

@@ -1,8 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ibrahim"
+			"Ibrahim",
+			"ToJack"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Википедиа"
+	"wikibase-deletedentity-item": "Элементи ҳазфшуда",
+	"wikibase-deletedentity-property": "Хусусияти ҳазфшуда",
+	"wikibase-sitelinks-wikipedia": "Википедиа",
+	"wikibase-sitelinks-sitename-columnheading": "Забон",
+	"wikibase-entity-summary-wbsetreference-add": "Ба тасдиқ манбаъ илова шуд",
+	"wikibase-entity-summary-wbsetdescription-add": "Тавзеҳоти [$2] илова шуд",
+	"wikibase-entity-summary-wbsetsitelink-add": "Пайванд ба [$2] илова шуд",
+	"wikibase-entity-summary-wbsetsitelink-set": "Пайванд ба [$2] тағйир ёфт",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Пайванд ба [$2] ҳазф шуд",
+	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$3|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$3|шуд|шуданд}}",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$1|шуд|шуданд}}",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$3|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$3|шуд|шуданд}}",
+	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$3|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$3|шуд|шуданд}}",
+	"wikibase-entity-summary-wbcreateclaim-create": "Тасдиқ эҷод шуд",
+	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$3|шуд|шуданд}}",
+	"wikibase-item-summary-wbeditentity-create": "Элементи нав сохта шуд"
 }
