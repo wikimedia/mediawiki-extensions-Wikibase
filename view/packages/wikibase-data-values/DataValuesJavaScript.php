@@ -14,23 +14,23 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
-$GLOBALS['wgExtensionCredits']['datavalues'][] = array(
+$GLOBALS['wgExtensionCredits']['datavalues'][] = [
 	'path' => __DIR__,
 	'name' => 'DataValues JavaScript',
 	'version' => DATA_VALUES_JAVASCRIPT_VERSION,
-	'author' => array(
+	'author' => [
 		'[https://www.mediawiki.org/wiki/User:Danwe Daniel Werner]',
 		'[http://www.snater.com H. Snater]',
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
-	),
+	],
 	'url' => 'https://github.com/wmde/DataValuesJavascript',
 	'description' => 'JavaScript related to the DataValues library',
 	'license-name' => 'GPL-2.0+'
-);
+];
 
 // Resource Loader module registration
 $GLOBALS['wgResourceModules'] = array_merge(
-	isset( $GLOBALS['wgResourceModules'] ) ? $GLOBALS['wgResourceModules'] : array(),
+	isset( $GLOBALS['wgResourceModules'] ) ? $GLOBALS['wgResourceModules'] : [],
 	include __DIR__ . '/lib/resources.php',
 	include __DIR__ . '/src/resources.php'
 );
@@ -42,6 +42,7 @@ $GLOBALS['wgResourceModules'] = array_merge(
  *
  * @param array &$testModules
  * @param \ResourceLoader &$resourceLoader
+ *
  * @return boolean
  */
 $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
@@ -51,36 +52,34 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__ . '/tests',
 		'remoteExtPath' => '..' . $remoteExtPath[0] . DIRECTORY_SEPARATOR . 'tests',
-	);
+	];
 
-	$testModuleTemplates = array(
-
-		'valueFormatters.tests' => $moduleTemplate + array(
-			'scripts' => array(
+	$testModuleTemplates = [
+		'valueFormatters.tests' => $moduleTemplate + [
+			'scripts' => [
 				'src/valueFormatters/valueFormatters.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.DataValue',
 				'util.inherit',
 				'valueFormatters',
-			),
-		),
+			],
+		],
 
-		'valueParsers.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'valueParsers.tests' => $moduleTemplate + [
+			'scripts' => [
 				'src/valueParsers/valueParsers.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.DataValue',
 				'util.inherit',
 				'valueParsers',
-			),
-		),
-
-	);
+			],
+		],
+	];
 
 	$testModules['qunit'] = array_merge( $testModules['qunit'], $testModuleTemplates );
 

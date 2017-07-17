@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="DataValuesJavaScript">
-	<rule ref="vendor/wikibase/wikibase-codesniffer/Wikibase">
-		<exclude name="Generic.Arrays.DisallowLongArraySyntax" />
-	</rule>
+	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase" />
+
+	<file>.</file>
 </ruleset>

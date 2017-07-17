@@ -10,53 +10,50 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
-
-		'valueParsers' => $moduleTemplate + array(
-			'scripts' => array(
+	return [
+		'valueParsers' => $moduleTemplate + [
+			'scripts' => [
 				'valueParsers.js',
-			),
-		),
+			],
+		],
 
-		'valueParsers.ValueParser' => $moduleTemplate + array(
-			'scripts' => array(
+		'valueParsers.ValueParser' => $moduleTemplate + [
+			'scripts' => [
 				'parsers/ValueParser.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'valueParsers',
-			),
-		),
+			],
+		],
 
-		'valueParsers.ValueParserStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'valueParsers.ValueParserStore' => $moduleTemplate + [
+			'scripts' => [
 				'ValueParserStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'valueParsers',
-			),
-		),
+			],
+		],
 
-		'valueParsers.parsers' => $moduleTemplate + array(
-			'scripts' => array(
+		'valueParsers.parsers' => $moduleTemplate + [
+			'scripts' => [
 				'parsers/BoolParser.js',
 				'parsers/FloatParser.js',
 				'parsers/IntParser.js',
 				'parsers/NullParser.js',
 				'parsers/StringParser.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.values',
 				'util.inherit',
 				'valueParsers.ValueParser',
-			),
-		),
-
-	);
-
+			],
+		],
+	];
 } );

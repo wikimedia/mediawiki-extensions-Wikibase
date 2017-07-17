@@ -10,31 +10,30 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
-
-		'dataValues' => $moduleTemplate + array(
-			'scripts' => array(
+	$modules = [
+		'dataValues' => $moduleTemplate + [
+			'scripts' => [
 				'dataValues.js',
-			),
-		),
+			],
+		],
 
-		'dataValues.DataValue' => $moduleTemplate + array(
-			'scripts' => array(
+		'dataValues.DataValue' => $moduleTemplate + [
+			'scripts' => [
 				'DataValue.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues',
 				'util.inherit',
-			),
-		),
+			],
+		],
 
-		'dataValues.values' => $moduleTemplate + array(
-			'scripts' => array(
+		'dataValues.values' => $moduleTemplate + [
+			'scripts' => [
 				// Note: The order here is relevant, scripts should be places after the ones they
 				//  depend on.
 				'values/BoolValue.js',
@@ -48,26 +47,26 @@ return call_user_func( function() {
 				'values/QuantityValue.js',
 				'values/UnknownValue.js',
 				'values/UnDeserializableValue.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.DataValue',
 				'dataValues.TimeValue',
 				'globeCoordinate.js', // required by GlobeCoordinateValue
 				'util.inherit',
-			),
-		),
+			],
+		],
 
-		'dataValues.TimeValue' => $moduleTemplate + array(
-			'scripts' => array(
+		'dataValues.TimeValue' => $moduleTemplate + [
+			'scripts' => [
 				'values/TimeValue.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.DataValue',
 				'util.inherit',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	$modules = array_merge(
 		$modules,
@@ -76,5 +75,4 @@ return call_user_func( function() {
 	);
 
 	return $modules;
-
 } );
