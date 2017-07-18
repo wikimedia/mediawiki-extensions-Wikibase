@@ -12,6 +12,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 ## Release notes
 
 ### 0.9.0 (dev)
+* Removed `valueFormatters.ValueFormatterStore`.
 * Removed `dataValues.TimeValue.getYear`, `getMonth`, `getDay`, `getHour`, `getMinute`, and
   `getSecond`.
 * Declared `globeCoordinate.GlobeCoordinate.getDecimal` private.

@@ -107,10 +107,6 @@ this.config = ( function() {
 			'valueFormatters/valueFormatters': {
 				exports: 'valueFormatters'
 			},
-			'valueFormatters/ValueFormatterStore': {
-				exports: 'valueFormatters.ValueFormatterStore',
-				deps: [ 'valueFormatters/valueFormatters', 'jquery' ]
-			},
 
 			'formatters/NullFormatter': [
 				'valueFormatters/valueFormatters',
@@ -219,7 +215,6 @@ this.config = ( function() {
 			'tests/src/values/UnDeserializableValue.tests',
 
 			'tests/src/valueFormatters/valueFormatters.tests',
-			'tests/src/valueFormatters/ValueFormatterStore.tests',
 
 			'tests/src/valueFormatters/formatters/NullFormatter.tests',
 			'tests/src/valueFormatters/formatters/StringFormatter.tests',
