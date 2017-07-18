@@ -93,9 +93,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 		$this->assertHtmlContainsErrorMessage( $html, "already has label" );
 	}
 
-	/**
-	 * @return array[][]
-	 */
 	public function provideValidEntityCreationRequests() {
 		$labelIndex = 1;
 
@@ -228,12 +225,12 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 
 	/**
 	 * @param string $url
-	 * @return EntityId
+	 *
+	 * @return PropertyId
 	 */
 	protected function extractEntityIdFromUrl( $url ) {
-		$itemIdSerialization = preg_replace( '@^.*(P\d+)$@', '$1', $url );
-
-		return new PropertyId( $itemIdSerialization );
+		preg_match( '/\bP\d+$/i', $url, $matches );
+		return new PropertyId( $matches[0] );
 	}
 
 	/**

@@ -45,7 +45,6 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
-		/* @var $entity EntityDocument */
 		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
 		$this->assertEntityMatchesFormData( $formData, $entity );
@@ -54,12 +53,13 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 	/**
 	 * Data provider method
 	 *
-	 * @return array[][]
+	 * @return array[]
 	 */
 	abstract public function provideValidEntityCreationRequests();
 
 	/**
 	 * @param string $url
+	 *
 	 * @return EntityId
 	 */
 	abstract protected function extractEntityIdFromUrl( $url );
