@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_8b70a970",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-18T16:50:51Z",
+      "side": 1,
+      "message": "Don\u0027t you think that this is very strange behavior for this class? \nHow can we assume that we want to create something if we just asking for certain permission?",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 56
+      },
+      "revId": "f2b90fe5fb429c5b91d8f150527408203b8c3c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
