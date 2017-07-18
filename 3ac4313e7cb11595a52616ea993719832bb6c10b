@@ -189,6 +189,30 @@
       "revId": "3ac4313e7cb11595a52616ea993719832bb6c10b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_56310800",
+        "filename": "client/tests/phpunit/includes/RecentChanges/RecentChangeFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-18T19:59:59Z",
+      "side": 1,
+      "message": "IMO there shouldn\u0027t even be a public method that returns \"all the stuff that gets written to the database\", there should be accessors of some sort for each piece that hide the implementation details.\n\nBut isn\u0027t that usually your side of the argument? ;)",
+      "parentUuid": "8e742343_2b6bb517",
+      "range": {
+        "startLine": 237,
+        "startChar": 36,
+        "endLine": 237,
+        "endChar": 55
+      },
+      "revId": "3ac4313e7cb11595a52616ea993719832bb6c10b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
