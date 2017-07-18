@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_82116e59",
+        "filename": "repo/includes/ChangeOp/ChangeOp.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T10:50:48Z",
+      "side": 1,
+      "message": "So we would go with PermissionAwareChangeOp interface extending ChangeOp and use it in API classes etc instead the ChangeOp interface? That would work I guess but would break extensions too I think.\n\nAnd as said in some other comment, I believe that by accident MediaInfo and Lexeme will not be broken with what\u0027s done here.",
+      "parentUuid": "8e742343_53712572",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_9309cde2",
         "filename": "repo/includes/ChangeOp/ChangeOps.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_58105c5a",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T10:50:48Z",
+      "side": 1,
+      "message": "probably better that way, will change",
+      "parentUuid": "8e742343_9309cde2",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_b30e49e6",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2017-07-17T17:19:08Z",
       "side": 1,
       "message": "We should also have such tests for each ChangeOp implementation, no? The code is trivial, but still...",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3813106a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T10:50:48Z",
+      "side": 1,
+      "message": "yeah, will add.",
+      "parentUuid": "8e742343_b30e49e6",
       "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
