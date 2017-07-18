@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_65756c2b",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-18T14:13:19Z",
+      "side": 1,
+      "message": "You\u0027re right, that should be fixed.",
+      "parentUuid": "8e742343_182c148e",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_e2f952e6",
         "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
         "patchSetId": 1
@@ -65,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_85a17893",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-18T14:13:19Z",
+      "side": 1,
+      "message": "As Thiemo mentioned above, it\u0027s already being checked.\n\nWhat happened here is that $ex-\u003egetMessageArray() returns what is basically\n\n array_merge( [\n     \u0027code\u0027 \u003d\u003e $code,\n     \u0027info\u0027 \u003d\u003e $info,\n ], $msg-\u003egetData() );\n\nI changed the test to test only $msg-\u003egetData() against $expectedData instead of the merged array, so I had to remove the extraneous \u0027code\u0027 here and the \u0027code\u0027 and \u0027info\u0027 below that aren\u0027t actually in -\u003egetData()\u0027s output.",
+      "parentUuid": "8e742343_62b80226",
+      "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_82e3ae31",
         "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
         "patchSetId": 1
@@ -99,6 +141,24 @@
       "writtenOn": "2017-07-18T11:14:58Z",
       "side": 1,
       "message": "again here... this effectively removes the relevant assertions!",
+      "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_25b9a4c7",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-18T14:13:19Z",
+      "side": 1,
+      "message": "(see above)",
+      "parentUuid": "8e742343_02881e75",
       "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
