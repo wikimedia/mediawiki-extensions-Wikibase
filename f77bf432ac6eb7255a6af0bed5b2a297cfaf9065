@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_56ca6872",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-18T19:02:56Z",
+      "side": 1,
+      "message": "empty() has the downside of being both isset() and !(bool). The latter is the empty-ness check you want. The former also suppresses run-time warnings if the variable name is misspelled, which you don\u0027t want.\n\nhttps://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP#empty.28.29\n\nI don\u0027t have a preference between `!$titles`, `!count( titles )` and `$titles \u003d\u003d\u003d []`.",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 23
+      },
+      "revId": "f77bf432ac6eb7255a6af0bed5b2a297cfaf9065",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
