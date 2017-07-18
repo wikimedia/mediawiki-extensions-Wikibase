@@ -22,6 +22,30 @@
       "revId": "f2b90fe5fb429c5b91d8f150527408203b8c3c69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0b311957",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T17:32:16Z",
+      "side": 1,
+      "message": "Oh, true, I missed that! At some point of the refactoring, this code got moved away from the \"this entity doesn\u0027t exist yet\" conditional... I think it\u0027s currently only called if the entity does not yet exists, but it\u0027s a public method, so we don\u0027t know!\n\nPerhaps the easiest solution would be to make this method private, and rename it to getPermissionStatusForNewEntity",
+      "parentUuid": "8e742343_8b70a970",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 56
+      },
+      "revId": "f2b90fe5fb429c5b91d8f150527408203b8c3c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
