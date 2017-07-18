@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_d88d2c86",
+        "filename": "repo/tests/phpunit/includes/NewStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T09:07:42Z",
+      "side": 1,
+      "message": "I would have preferred a consistent naming here, namely \"$dataValue\".",
+      "range": {
+        "startLine": 153,
+        "startChar": 37,
+        "endLine": 153,
+        "endChar": 43
+      },
+      "revId": "614d5772e40eb2416bcf9b61d85c2bfec70e65af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
