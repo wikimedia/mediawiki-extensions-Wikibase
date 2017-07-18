@@ -193,6 +193,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_4b788126",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T17:07:24Z",
+      "side": 1,
+      "message": "@Aleksey a helper class for constructing results for the mediawiki API is probably the last place I\u0027d start with isolating our code from MediaWIki.\n\nWikibase is a MediaWiki extension. It depends on the think it extends, there\u0027S no way around that.\n\nIt\u0027s good if we can isolate most of our code, but we\u0027ll have to have some glue between \"our\" side and MW. This class belongs in the glue category, and so do all our API modules (which should ideally just be thin wrappers). They *have* to depend on MediaWiki in order to function.",
+      "parentUuid": "8e742343_6848e3cf",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
