@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_182c148e",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T09:01:39Z",
+      "side": 1,
+      "message": "Isn\u0027t this the *actual* message?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
