@@ -89,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_68f3036a",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:25:28Z",
+      "side": 1,
+      "message": "PARSER_PURGE and LINKS_UPDATE were consolidated, btu the idea is still valid: we could update language links in the cached ParserOutput without actually re-parsing the page.",
+      "parentUuid": "8e742343_45787026",
+      "range": {
+        "startLine": 188,
+        "startChar": 34,
+        "endLine": 188,
+        "endChar": 61
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_65a48c9e",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 6
@@ -100,6 +124,30 @@
       "writtenOn": "2017-07-18T14:44:26Z",
       "side": 1,
       "message": "I prefer if ( $titles \u003d\u003d\u003d [] ) nowadays that we have the short array syntax.",
+      "range": {
+        "startLine": 119,
+        "startChar": 7,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c898f720",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:25:28Z",
+      "side": 1,
+      "message": "This always feels wrong to me - I guess because I think of arrays as objects, not values. Does it matter?",
+      "parentUuid": "8e742343_65a48c9e",
       "range": {
         "startLine": 119,
         "startChar": 7,
@@ -135,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_08ba7f6d",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:25:28Z",
+      "side": 1,
+      "message": "That describes the value, not the purpose. And it\u0027s a lie immediately after the assignment. I\u0027ll try to find a better name.",
+      "parentUuid": "8e742343_05db4826",
+      "range": {
+        "startLine": 124,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 8
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_05026876",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 6
@@ -146,6 +218,30 @@
       "writtenOn": "2017-07-18T14:44:26Z",
       "side": 1,
       "message": "Is it a problem that you changed \"WebCache\" to \"WebCache-titles\"? Also isn\u0027t the common naming scheme to use dots?",
+      "range": {
+        "startLine": 148,
+        "startChar": 26,
+        "endLine": 148,
+        "endChar": 34
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_88ae6f29",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:25:28Z",
+      "side": 1,
+      "message": "You are right, we should use dots. \nChanging the name shouldn\u0027t be a problem as such, but we may have to update a dashboard somewhere. I\u0027ll ask Adam.",
+      "parentUuid": "8e742343_05026876",
       "range": {
         "startLine": 148,
         "startChar": 26,
