@@ -11,6 +11,11 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.8.4 (2017-07-18)
+* Updated JSDoc tags mistakenly requiring objects.
+* Removed an unused dependency on `composer/installers`.
+* Raised required PHP version from 5.3 to 5.5.9.
+
 ### 0.8.3 (2016-11-07)
 * `QuantityValue` now supports unknown upper and lower bounds, required for compatibility with
   DataValues Number 0.8.0.
