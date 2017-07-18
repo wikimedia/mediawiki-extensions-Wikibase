@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_6848e3cf",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-07-18T15:54:20Z",
+      "side": 1,
+      "message": "I\u0027ll just note that it took 8 months and counting after every other extension in Gerrit was updated for the i18n change for Wikibase to be updated, thanks to the fact that you reinvented all your own stuff here and I couldn\u0027t understand it well enough to do it for you.",
+      "parentUuid": "8e742343_47118db0",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "c3bf4e631da4cb4ba08f51a1726afc4c57f51d17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_88d4b2ed",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 4
