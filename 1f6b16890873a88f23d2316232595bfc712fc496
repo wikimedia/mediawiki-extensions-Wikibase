@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_eb07ed18",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:24:11Z",
+      "side": 1,
+      "message": "I prefer empty(). I guess it\u0027s because I think of arrays as objects.",
+      "parentUuid": "8e742343_a899ebc8",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 23
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_68e6a340",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_8b118959",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:24:11Z",
+      "side": 1,
+      "message": "I\u0027ll use dots and add a DEPLOY note",
+      "parentUuid": "8e742343_68e6a340",
+      "range": {
+        "startLine": 156,
+        "startChar": 26,
+        "endLine": 156,
+        "endChar": 45
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_e8f933e6",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2017-07-18T15:06:31Z",
       "side": 1,
       "message": "Could say \"string $pageId \u003d\u003e [ int $namespace, string $dbKey ]\".",
+      "range": {
+        "startLine": 162,
+        "startChar": 30,
+        "endLine": 162,
+        "endChar": 60
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_6b145d44",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T16:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e742343_e8f933e6",
       "range": {
         "startLine": 162,
         "startChar": 30,
