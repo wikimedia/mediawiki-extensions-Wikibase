@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e742343_25920450",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:44:26Z",
+      "side": 1,
+      "message": "I find this commit message not sufficient. What I see happening in ChangeHandler, for example, is not described by this headline.\n\nCan you please expand this commit message and describe in more detail what it does, and why?",
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_f4804590",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 6
@@ -42,6 +59,121 @@
         "startChar": 2,
         "endLine": 161,
         "endChar": 4
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_45787026",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:44:26Z",
+      "side": 1,
+      "message": "It looks like this comment is obsolete now because the \"PARSER_PURGE\" action is not there any more.",
+      "range": {
+        "startLine": 188,
+        "startChar": 34,
+        "endLine": 188,
+        "endChar": 61
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_65a48c9e",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:44:26Z",
+      "side": 1,
+      "message": "I prefer if ( $titles \u003d\u003d\u003d [] ) nowadays that we have the short array syntax.",
+      "range": {
+        "startLine": 119,
+        "startChar": 7,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_05db4826",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:44:26Z",
+      "side": 1,
+      "message": "I find this a weird name for this variable. It represents the current time, and should say that.",
+      "range": {
+        "startLine": 124,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 8
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_05026876",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:44:26Z",
+      "side": 1,
+      "message": "Is it a problem that you changed \"WebCache\" to \"WebCache-titles\"? Also isn\u0027t the common naming scheme to use dots?",
+      "range": {
+        "startLine": 148,
+        "startChar": 26,
+        "endLine": 148,
+        "endChar": 34
+      },
+      "revId": "287a39971bd693c016cf22f231e4316d9563c898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_c536a04d",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:44:26Z",
+      "side": 1,
+      "message": "You could even say \"@var HTMLCacheUpdateJob $job\" when you move this line below the assertInstanceOf.",
+      "range": {
+        "startLine": 154,
+        "startChar": 13,
+        "endLine": 154,
+        "endChar": 16
       },
       "revId": "287a39971bd693c016cf22f231e4316d9563c898",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
