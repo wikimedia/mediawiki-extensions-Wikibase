@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "8e742343_e2f952e6",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T11:24:12Z",
+      "side": 1,
+      "message": "Still checked here. That below was a meaningless duplicate.",
+      "range": {
+        "startLine": 86,
+        "startChar": 16,
+        "endLine": 86,
+        "endChar": 38
+      },
+      "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_62b80226",
         "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
         "patchSetId": 1
@@ -36,6 +59,29 @@
       "writtenOn": "2017-07-18T11:14:58Z",
       "side": 1,
       "message": "uh, we are not checking the error message here?",
+      "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_82e3ae31",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T11:24:12Z",
+      "side": 1,
+      "message": "Still checked here. That below was a meaningless duplicate.",
+      "range": {
+        "startLine": 264,
+        "startChar": 23,
+        "endLine": 265,
+        "endChar": 38
+      },
       "revId": "022d4d0135d2f715d3a23e557b67144c457fef06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
