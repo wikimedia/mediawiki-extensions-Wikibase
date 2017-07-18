@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_4b222152",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-18T22:04:59Z",
+      "side": 1,
+      "message": "\"Why not accept a LocalIdLookup\" is discussed in EntityChange.php .\n\nIn the next patch set, I\u0027ll change it to be done in the caller.",
+      "parentUuid": "2e4df70f_07b42ce3",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_67cc108d",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-28T12:10:13Z",
       "side": 1,
       "message": "How do other parts of MediaWiki react to -1 as the user ID? It would be bad if -1 was assumed to be a valid user ID, just because it\u0027s !\u003d 0. IRC, other code generally uses 0 for unknown users, e.g. when importing revisions. \n\nIt would indeed be nice to be able to distinguish between anons and unknown users, but introducing this distinction here will not work, if it is not done in the same way in the rest of the code base. \n\nAm I missing something?",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8bbef9cf",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-18T22:04:59Z",
+      "side": 1,
+      "message": "I was trying to do it for the reason you observed (to always distinguish between logged in and anon, even for unknown).  Also under the theory that the consequences aren\u0027t as dire since recentchanges is a rolling table that is constantly replaced.\n\nBut I think you\u0027re right, it\u0027s still too messy, so I\u0027ll have to go 0.\n\n\u003e How do other parts of MediaWiki react to -1 as the user ID?\n\nYou\u0027re right, this is at least a potential issue.  With a little fiddling in the shell, I was able to find an inconsistency:\n\nhphpd\u003e $u \u003d User::newFromId( 0 ); var_export( $u-\u003eloadFromId() );\n$u \u003d User::newFromId( 0 ); var_export( $u-\u003eloadFromId() );\nfalse\nhphpd\u003e $u \u003d User::newFromId( -1 ); var_export( $u-\u003eloadFromId() );\n$u \u003d User::newFromId( -1 ); var_export( $u-\u003eloadFromId() );\ntrue\n\n(You get different results with READ_LATEST)\n\nI\u0027m not sure if it\u0027s a feature or a bug (but I guess feature), but loadFromCache returns true regardless of whether the ID exists, and it caches \"misses\" (user IDs that are not in the DB).\n\nThis is really an issue for any user ID not in the DB, but that is more likely to happen with -1 than a real ID mysteriously missing.\n\n---\nAlso, e.g. AFAICT dumps (WikiRevision) try to match on user name (which I don\u0027t want to do here, since they may not be the same user), and if it fails store a user ID of 0 and the username (it already stores the user name).",
+      "parentUuid": "2e4df70f_67cc108d",
       "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -98,6 +134,24 @@
       "writtenOn": "2017-04-28T12:10:13Z",
       "side": 1,
       "message": "So, the idea here is to say \"if we are using LocalIdLookup, we don\u0027t set the central_user_id, instead of setting it to the local id\"?\n\nBut that means this feature isn\u0027t usable with a \"shared user table\" setup. I see the problem, but it\u0027s still a bit sad...",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_17effa1b",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-18T22:04:59Z",
+      "side": 1,
+      "message": "Yes.\n\nI also agree with you it\u0027s unfortunate.  I believe part of the solution is that shared user tables should be its own provider.  See https://phabricator.wikimedia.org/T163277 and https://phabricator.wikimedia.org/T170996 .",
+      "parentUuid": "2e4df70f_67a3b0a9",
       "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
