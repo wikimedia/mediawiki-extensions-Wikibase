@@ -9,6 +9,7 @@ use FauxRequest;
 use PHPUnit_Framework_Assert as Assert;
 use ApiUsageException;
 use User;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @license GPL-2.0+
@@ -71,7 +72,8 @@ class ApiModuleTestHelper {
 		}
 
 		if ( isset( $expected['code'] ) ) {
-			Assert::assertEquals( $expected['code'], $ex->getCodeString() );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			Assert::assertEquals( $expected['code'], $msg->getApiCode() );
 		}
 
 		if ( isset( $expected['message'] ) ) {

@@ -17,6 +17,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\SetQualifier
@@ -230,7 +231,8 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertEquals( $error, $ex->getCodeString(), 'Invalid request raised correct error' );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			$this->assertEquals( $error, $msg->getApiCode(), 'Invalid request raised correct error' );
 		}
 	}
 

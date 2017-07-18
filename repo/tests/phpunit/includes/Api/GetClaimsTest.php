@@ -19,6 +19,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StatementRankSerializer;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\GetClaims
@@ -189,7 +190,8 @@ class GetClaimsTest extends ApiTestCase {
 			$this->doApiRequest( $params );
 			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( ApiUsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(), 'Invalid claim guid raised correct error' );
+			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
+			$this->assertEquals( 'invalid-guid', $msg->getApiCode(), 'Invalid claim guid raised correct error' );
 		}
 	}
 
@@ -222,7 +224,8 @@ class GetClaimsTest extends ApiTestCase {
 			$this->doApiRequest( $params );
 			$this->fail( 'Invalid entity id did not throw an error' );
 		} catch ( ApiUsageException $e ) {
-			$this->assertEquals( 'param-invalid', $e->getCodeString(), 'Invalid entity id raised correct error' );
+			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
+			$this->assertEquals( 'param-invalid', $msg->getApiCode(), 'Invalid entity id raised correct error' );
 		}
 	}
 

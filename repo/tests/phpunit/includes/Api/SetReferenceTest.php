@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\SetReference
@@ -239,9 +240,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
 		} catch ( ApiUsageException $e ) {
+			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
 			$this->assertEquals(
 				$expectedErrorCode,
-				$e->getCodeString(),
+				$msg->getApiCode(),
 				'Invalid request raised correct error'
 			);
 		}
@@ -408,7 +410,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertEquals( $error, $ex->getCodeString(), 'Invalid request raised correct error' );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			$this->assertEquals( $error, $msg->getApiCode(), 'Invalid request raised correct error' );
 		}
 	}
 

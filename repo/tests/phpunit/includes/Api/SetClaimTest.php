@@ -21,6 +21,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\SetClaim
@@ -341,7 +342,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 			}
 		} catch ( ApiUsageException $ex ) {
 			if ( $error ) {
-				$this->assertEquals( $error, $ex->getCodeString(), 'expected error' );
+				$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+				$this->assertEquals( $error, $msg->getApiCode(), 'expected error' );
 			} else {
 				$this->fail( "Caused unexpected error!" . $ex );
 			}
@@ -457,7 +459,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Changed main snak property did not raise an error' );
 		} catch ( ApiUsageException $e ) {
-			$this->assertEquals( 'modification-failed', $e->getCodeString(), 'Changed main snak property' );
+			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
+			$this->assertEquals( 'modification-failed', $msg->getApiCode(), 'Changed main snak property' );
 		}
 	}
 

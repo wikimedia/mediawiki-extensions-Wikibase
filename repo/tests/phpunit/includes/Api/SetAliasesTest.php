@@ -7,6 +7,7 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\SetAliases
@@ -50,7 +51,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Implicit creation of Property should fail.' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertEquals( 'failed-save', $ex->getCodeString() );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			$this->assertEquals( 'failed-save', $msg->getApiCode() );
 		}
 	}
 

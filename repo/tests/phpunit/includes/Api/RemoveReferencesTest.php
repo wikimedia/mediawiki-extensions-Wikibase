@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\RemoveReferences
@@ -137,7 +138,8 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			if ( $expectedError === null ) {
 				$this->assertTrue( true, 'Invalid request raised error' );
 			} else {
-				$this->assertEquals( $expectedError, $e->getCodeString(), 'Invalid request raised correct error' );
+				$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
+				$this->assertEquals( $expectedError, $msg->getApiCode(), 'Invalid request raised correct error' );
 			}
 		}
 	}
@@ -156,7 +158,8 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid guid did not throw an error' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertEquals( 'invalid-guid', $ex->getCodeString(), 'Invalid guid raised correct error' );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			$this->assertEquals( 'invalid-guid', $msg->getApiCode(), 'Invalid guid raised correct error' );
 		}
 	}
 

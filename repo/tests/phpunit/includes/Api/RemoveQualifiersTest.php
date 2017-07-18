@@ -13,6 +13,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\RemoveQualifiers
@@ -137,9 +138,10 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 			if ( $expectedError === null ) {
 				$this->assertTrue( true, 'Invalid request raised error' );
 			} else {
+				$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
 				$this->assertEquals(
 					$expectedError,
-					$e->getCodeString(),
+					$msg->getApiCode(),
 					'Invalid request raised correct error'
 				);
 			}
@@ -160,8 +162,9 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid claim guid did not throw an error' );
 		} catch ( ApiUsageException $e ) {
+			$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
 			$this->assertEquals(
-				$e->getCodeString(),
+				$msg->getApiCode(),
 				'invalid-guid',
 				'Invalid claim guid raised correct error'
 			);
