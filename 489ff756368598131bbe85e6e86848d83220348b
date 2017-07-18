@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_8ba18993",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T17:17:25Z",
+      "side": 1,
+      "message": "You didn\u0027t invert the default value. was that intentional?",
+      "revId": "489ff756368598131bbe85e6e86848d83220348b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_2bb975c7",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T17:17:25Z",
+      "side": 1,
+      "message": "shouldn\u0027t this also become a regular boolean setter, like the ones used below?",
+      "revId": "489ff756368598131bbe85e6e86848d83220348b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
