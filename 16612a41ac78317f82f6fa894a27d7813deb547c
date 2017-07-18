@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_22f43aed",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T11:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e742343_58105c5a",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_b30e49e6",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "yeah, will add.",
       "parentUuid": "8e742343_b30e49e6",
+      "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_62f002c5",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T11:36:26Z",
+      "side": 1,
+      "message": "Done, hopefully I didn\u0027t miss any class. Will also add tests to WikibaseLexeme.",
+      "parentUuid": "8e742343_3813106a",
       "revId": "16612a41ac78317f82f6fa894a27d7813deb547c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
