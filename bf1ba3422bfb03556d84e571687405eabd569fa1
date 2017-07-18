@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_e5fcfc6e",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Nothing changed here (yet).",
+      "parentUuid": "8e742343_8f94ae8e",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_efde926f",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-29T19:21:52Z",
       "side": 1,
       "message": "Two levels of loops in a method is smelly, the body of the outer loop should probably be factored out. Oh well, whatever.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_68146344",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Tried that in PS14, although not super happy about the result because of progress reporting, transaction commiting etc. Could possibly be improved further.",
+      "parentUuid": "8e742343_efde926f",
       "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_85f6588a",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Nothing changed here (yet).",
+      "parentUuid": "8e742343_6ff2a205",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_afe88a0c",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2017-06-29T19:21:52Z",
       "side": 1,
       "message": "I *think* you can just do $db-\u003edelete( self::TABLE_NAME, [ \u0027term_row_id\u0027 \u003d\u003e $rowIds ] ), and it will Just Work(tm). But don\u0027t trust me on this.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_45ecf0b7",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Nothing changed here (yet).",
+      "parentUuid": "8e742343_afe88a0c",
       "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_8545f8ba",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Extracted to variable and chopped down",
+      "parentUuid": "8e742343_6fd94283",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0f543ec8",
         "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
         "patchSetId": 10
@@ -98,6 +188,24 @@
       "writtenOn": "2017-06-29T19:21:52Z",
       "side": 1,
       "message": "This error message corresponds to the case of $entityId not being a Int32EntityId. It\u0027s incorrect for the case when readFullEntityIdColumn is true. \n\nI think if readFullEntityIdColumn is true, this method should either just return false immediately, or throw a LogicException, because it shouldn\u0027t even be called in that case.",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0566e84d",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e742343_0f543ec8",
       "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_6576cc02",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e742343_af65eaab",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_4f01e6b8",
         "filename": "repo/maintenance/rebuildTermSqlIndex.php",
         "patchSetId": 10
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_058d882d",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "I agree. Flipped.",
+      "parentUuid": "8e742343_4f01e6b8",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_6f2dc240",
         "filename": "repo/maintenance/rebuildTermSqlIndex.php",
         "patchSetId": 10
@@ -149,6 +293,24 @@
       "writtenOn": "2017-06-29T19:21:52Z",
       "side": 1,
       "message": "This is why I\u0027d prefer simple setters :)",
+      "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_a59ef455",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-18T15:04:09Z",
+      "side": 1,
+      "message": "Switched to setters with bool argument.",
+      "parentUuid": "8e742343_6f2dc240",
       "revId": "bf1ba3422bfb03556d84e571687405eabd569fa1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
