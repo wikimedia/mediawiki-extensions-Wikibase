@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_a899ebc8",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T15:06:31Z",
+      "side": 1,
+      "message": "I prefer if ( $titles \u003d\u003d\u003d [] ) now that we have the short array syntax.",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 23
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_68e6a340",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T15:06:31Z",
+      "side": 1,
+      "message": "I already wrote this on the other patch: I wonder if it\u0027s ok to change the name of an existing metric, or just reuse the name. And isn\u0027t the common naming scheme with dots?",
+      "range": {
+        "startLine": 156,
+        "startChar": 26,
+        "endLine": 156,
+        "endChar": 45
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_e8f933e6",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T15:06:31Z",
+      "side": 1,
+      "message": "Could say \"string $pageId \u003d\u003e [ int $namespace, string $dbKey ]\".",
+      "range": {
+        "startLine": 162,
+        "startChar": 30,
+        "endLine": 162,
+        "endChar": 60
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
