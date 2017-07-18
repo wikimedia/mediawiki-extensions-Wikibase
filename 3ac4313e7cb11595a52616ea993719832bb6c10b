@@ -93,6 +93,30 @@
       "revId": "3ac4313e7cb11595a52616ea993719832bb6c10b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_4817274a",
+        "filename": "client/tests/phpunit/includes/RecentChanges/RecentChangeFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-18T14:42:51Z",
+      "side": 1,
+      "message": "That\u0027s what I meant. It now only checks if the output *contains* the expected elements, but not if expected and actual output are equal.\n\nI mention this because I wonder if this is the right way to fix this code. We can also add the new elements to the data provider above.",
+      "parentUuid": "8e742343_e9f4e0ef",
+      "range": {
+        "startLine": 237,
+        "startChar": 36,
+        "endLine": 237,
+        "endChar": 55
+      },
+      "revId": "3ac4313e7cb11595a52616ea993719832bb6c10b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
