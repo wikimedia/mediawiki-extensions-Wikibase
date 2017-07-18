@@ -6,6 +6,7 @@
 			"ToJack"
 		]
 	},
+	"wikibase-entity-item": "элемент",
 	"wikibase-entity-property": "хусусият",
 	"wikibase-edit": "вироиш",
 	"wikibase-add": "илова",
@@ -27,5 +28,6 @@
 	"wikibase-label-helppage": "Маълумот:Голограмма",
 	"wikibase-newentity-language": "Забон:",
 	"wikibase-setlabel-label": "Унвон (ном):",
-	"wikibase-setlabeldescriptionaliases-label-label": "Унвон (ном):"
+	"wikibase-setlabeldescriptionaliases-label-label": "Унвон (ном):",
+	"wikibase-listdatatypes-wikibase-item-head": "Элемент"
 }

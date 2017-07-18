@@ -7,7 +7,7 @@
 	},
 	"wikibase-comment-update": "Элементи {{WBREPONAME}} тағийр ёфт",
 	"wikibase-comment-sitelink-change": "Пайванди забонӣ аз $1 ба $2 иваз шуд",
-	"wikibase-dataitem": "Элементи {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-dataitem": "Элементи {{WBREPONAME}}",
 	"wikibase-editlinks": "Вироиши пайвандҳо",
 	"wikibase-editlinkstitle": "Таҳрири пайвандҳои байнизабонӣ",
 	"wikibase-addlinkstitle": "Иловаи пайвандҳои байнизабонӣ",

@@ -98,6 +98,7 @@
 	"wikibase-modifyterm-language": "Hizkuntza kodea:",
 	"wikibase-entitieswithoutlabel-label-language": "Hizkuntza kodea:",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" ez da hizkuntza kode erabilgarria.",
+	"wikibase-api-not-recognized-datatype": "Datu mota espero zen, baina falta da edo ez da antzematen.",
 	"wikibase-restoreold": "leheneratu",
 	"wikibase-listdatatypes-wikibase-property-head": "Propietatea",
 	"content-model-wikibase-property": "Wikibase propietatea",
