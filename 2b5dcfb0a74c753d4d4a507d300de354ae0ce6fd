@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_0bdb5926",
+        "filename": "repo/tests/phpunit/includes/Api/ApiModuleTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-18T17:20:51Z",
+      "side": 1,
+      "message": "Why not just make getApiMessage public?",
+      "revId": "2b5dcfb0a74c753d4d4a507d300de354ae0ce6fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
