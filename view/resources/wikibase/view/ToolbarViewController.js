@@ -235,14 +235,11 @@ wikibase.view.ToolbarViewController = ( function ( $, wb, mw ) {
 			this._toolbar.enable();
 			this._toolbar.toggleActionMessage();
 		} else {
-			// Use the toolbar for notification
-			var $anchor;
-
-			if ( error.action === 'save' ) {
-				$anchor = this._toolbar.getButton( 'save' ).element;
-			} else if ( error.action === 'remove' ) {
-				$anchor = this._toolbar.getButton( 'remove' ).element;
-			}
+			// By default, use the save button on the toolbar to display the error.
+			var $anchor = this._toolbar.getButton( error.action === 'remove'
+				? 'remove'
+				: 'save'
+			).element;
 
 			this._toolbar.enable();
 			this._toolbar.toggleActionMessage();
