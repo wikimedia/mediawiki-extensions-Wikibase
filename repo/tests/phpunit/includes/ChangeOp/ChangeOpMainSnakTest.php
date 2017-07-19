@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOpMainSnak
@@ -234,6 +235,12 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $changeOpMainSnak->validate( $entity );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
+	}
+
+	public function testGetActions() {
+		$changeOp = $this->newChangeOpMainSnak( 'guid', $this->makeSnak( 'P11', 'test' ) );
+
+		$this->assertEquals( [ EntityPermissionChecker::ACTION_EDIT ], $changeOp->getActions() );
 	}
 
 }

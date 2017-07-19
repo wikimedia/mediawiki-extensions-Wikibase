@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\NullChangeOp
@@ -35,6 +36,12 @@ class NullChangeOpTest extends \PHPUnit_Framework_TestCase {
 
 	private function expectNoMethodWillBeEverCalledOn( PHPUnit_Framework_MockObject_MockObject $entityMock ) {
 		$entityMock->expects( $this->never() )->method( self::anything() );
+	}
+
+	public function testGetActions() {
+		$changeOp = new NullChangeOp();
+
+		$this->assertEmpty( $changeOp->getActions() );
 	}
 
 }

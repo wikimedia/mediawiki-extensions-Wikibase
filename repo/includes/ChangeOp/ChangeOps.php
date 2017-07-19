@@ -103,4 +103,19 @@ class ChangeOps implements ChangeOp {
 		return $result;
 	}
 
+	/**
+	 * @see ChangeOp::getActions
+	 *
+	 * @return string[]
+	 */
+	public function getActions() {
+		return array_unique( array_reduce(
+			$this->changeOps,
+			function( array $actions, ChangeOp $changeOp ) {
+				return array_merge( $actions, $changeOp->getActions() );
+			},
+			[]
+		) );
+	}
+
 }
