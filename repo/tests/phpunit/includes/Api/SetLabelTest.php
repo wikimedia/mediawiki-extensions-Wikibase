@@ -98,6 +98,45 @@ class SetLabelTest extends ModifyTermTestCase {
 		);
 	}
 
+	public function testUserCanCreateItemWithLabelWhenTheyHaveSufficientPermissions() {
+		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'all-permission' => [ 'item-term' => true, 'createpage' => true ],
+			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
+		] );
+
+		list ( $result, ) = $this->doApiRequestWithToken(
+			$this->getCreateItemAndSetLabelRequestParams(),
+			null,
+			$userWithAllPermissions
+		);
+
+		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 'a label', $result['entity']['labels']['en']['value'] );
+	}
+
+	public function testUserCannotCreateItemWhenTheyLackPermission() {
+		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
+
+		$this->setMwGlobals( 'wgGroupPermissions', [
+			'no-permission' => [ 'createpage' => false ],
+			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
+		] );
+
+		// Then the request is denied
+		$expected = [
+			'type' => ApiUsageException::class,
+			'code' => 'permissiondenied'
+		];
+
+		$this->doTestQueryExceptions(
+			$this->getCreateItemAndSetLabelRequestParams(),
+			$expected,
+			$userWithInsufficientPermissions
+		);
+	}
+
 	/**
 	 * @param User $user
 	 * @return Item
@@ -114,6 +153,15 @@ class SetLabelTest extends ModifyTermTestCase {
 		$user->addGroup( $groupName );
 		return $user;
 
+	}
+
+	private function getCreateItemAndSetLabelRequestParams() {
+		return [
+			'action' => 'wbsetlabel',
+			'new' => 'item',
+			'language' => 'en',
+			'value' => 'a label',
+		];
 	}
 
 	private function getSetLabelRequestParams( ItemId $id ) {
