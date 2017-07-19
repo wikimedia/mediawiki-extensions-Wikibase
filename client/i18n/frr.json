@@ -54,6 +54,7 @@
 	"wikibase-unconnectedpages-submit": "Widjer",
 	"pageswithbadges": "Sidjen mä ütjtiaknangen",
 	"pageswithbadges-summary": "Detdiar sidj feert sidjen mä ütjtiaknangen (t.b. 'gud artiikel' of 'auer a miaten artiikel') Neier sidjen wurd tuiarst uunwiset.",
+	"entityusage": "Brük faan objekten",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-käännumer (ID)",
 	"wikibase-pageinfo-entity-id-none": "Nian",
 	"wikibase-property-render-error": "Eegenskap „$1“ küd ei ferwerket wurd: $2",

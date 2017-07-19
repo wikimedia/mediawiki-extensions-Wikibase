@@ -194,7 +194,7 @@
 	"wikibase-description-helppage": "Help:Descrição",
 	"wikibase-label-helppage": "Help:Rótulo",
 	"special-newitem": "Criar um novo item",
-	"wikibase-newitem-summary": "[[Special:Search|Confira se o item já existe]]!<br />Você deve criar um [[{{int:Wikibase-label-helppage}}|rótulo]] e uma  [[{{int:Wikibase-description-helppage}}|descrição]] para todos os novos itens.",
+	"wikibase-newitem-summary": "[[Special:Search|Confira se o item já existe]]!<br />Você deve criar um [[{{int:Wikibase-label-helppage}}|rótulo]] e uma [[{{int:Wikibase-description-helppage}}|descrição]] para todos os novos itens.",
 	"wikibase-newitem-fieldset": "Criar um novo item",
 	"wikibase-newitem-site": "Nome da primeira página vinculada",
 	"wikibase-newitem-page": "Nome da primeira página vinculada",

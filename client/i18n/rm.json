@@ -5,6 +5,8 @@
 			"Terfili"
 		]
 	},
+	"wikibase-comment-update": "Il object {{WBREPONAME}} è vegnì midà",
+	"wikibase-dataitem": "{{WBREPONAME}} object",
 	"wikibase-editlinks": "Modifitgar colliaziuns",
 	"wikibase-editlinkstitle": "Modifitgar las colliaziuns tar autras linguas",
 	"wikibase-linkitem-addlinks": "Agiunscher colliaziuns",

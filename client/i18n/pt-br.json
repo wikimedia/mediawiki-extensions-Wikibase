@@ -28,7 +28,7 @@
 	"wikibase-comment-remove": "O item {{WBREPONAME}} associado foi excluído. Os links de idiomas foram removidos.",
 	"wikibase-comment-linked": "Um item {{WBREPONAME}} foi associado a esta página.",
 	"wikibase-comment-unlink": "Esta página foi desassociada de {{WBREPONAME}}. Os links de idiomas foram removidos.",
-	"wikibase-comment-restore": "O item {{WBREPONAME}} associado foi restaurado.  Os links de idiomas foram restaurados.",
+	"wikibase-comment-restore": "O item {{WBREPONAME}} associado foi restaurado. Os links de idiomas foram restaurados.",
 	"wikibase-comment-update": "Item {{WBREPONAME}} modificado",
 	"wikibase-comment-sitelink-add": "Link de idioma adicionado: $1",
 	"wikibase-comment-sitelink-change": "Link de idioma alterado de $1 para $2",
@@ -76,6 +76,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Sitelink:",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
+	"wikibase-pageinfo-entity-usage-C": "Declaração: $1",
 	"wikibase-property-render-error": "Erro ao renderizar a propriedade $1: $2",
 	"wikibase-otherprojects": "Em outros projetos",
 	"unresolved-property-category": "Páginas que referenciam propriedades inexistentes"
