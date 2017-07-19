@@ -17,6 +17,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -38,6 +39,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @var ContentLanguages
 	 */
 	private $termsLanguages;
+
+	/**
+	 * @var EntityPermissionChecker
+	 */
+	private $permissionChecker;
 
 	/**
 	 * @var string
@@ -66,7 +72,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
 		FingerprintChangeOpFactory $changeOpFactory,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		EntityPermissionChecker $permissionChecker
 	) {
 		parent::__construct(
 			'SetLabelDescriptionAliases',
@@ -79,6 +86,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$this->changeOpFactory = $changeOpFactory;
 		$this->termsLanguages = $termsLanguages;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	public function doesWrites() {
@@ -117,10 +125,14 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isAllowedToChangeTerms( EntityDocument $entity ) {
-		$action = $entity->getType() . '-term';
+		$status = $this->permissionChecker->getPermissionStatusForEntity(
+			$this->getUser(),
+			EntityPermissionChecker::ACTION_EDIT_TERMS,
+			$entity
+		);
 
-		if ( !$this->getUser()->isAllowed( $action ) ) {
-			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $action );
+		if ( !$status->isOK() ) {
+			$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
 			return false;
 		}
 
