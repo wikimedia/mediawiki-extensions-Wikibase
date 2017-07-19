@@ -81,8 +81,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
-			->will( $this->returnCallback( function( User $user, $permission ) {
-				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
+			->will( $this->returnCallback( function( User $user ) {
+				if ( $user->getName() === 'UserWithoutPermission' ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
 					return Status::newGood();
