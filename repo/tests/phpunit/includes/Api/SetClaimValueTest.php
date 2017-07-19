@@ -20,6 +20,7 @@ use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 use WikiPage;
 
 /**
@@ -195,7 +196,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertEquals( $error, $ex->getCodeString(), 'Invalid request raised correct error' );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			$this->assertEquals( $error, $msg->getApiCode(), 'Invalid request raised correct error' );
 		}
 	}
 

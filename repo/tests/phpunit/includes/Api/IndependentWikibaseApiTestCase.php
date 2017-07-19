@@ -8,6 +8,7 @@ use FauxRequest;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use ApiUsageException;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * This class can be used instead of the Mediawiki Api TestCase.
@@ -74,7 +75,8 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 			}
 
 			if ( array_key_exists( 'code', $exception ) ) {
-				$this->assertEquals( $exception['code'], $e->getCodeString() );
+				$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
+				$this->assertEquals( $exception['code'], $msg->getApiCode() );
 			}
 
 			if ( array_key_exists( 'message', $exception ) ) {

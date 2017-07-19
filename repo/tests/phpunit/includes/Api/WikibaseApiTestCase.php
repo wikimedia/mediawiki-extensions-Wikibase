@@ -12,6 +12,7 @@ use Title;
 use ApiUsageException;
 use User;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 use WikiPage;
 
 /**
@@ -190,7 +191,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 
 			if ( array_key_exists( 'code', $exception ) ) {
-				$this->assertEquals( $exception['code'], $e->getCodeString() );
+				$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
+				$this->assertEquals( $exception['code'], $msg->getApiCode() );
 			}
 
 			if ( array_key_exists( 'message', $exception ) ) {

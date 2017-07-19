@@ -39,10 +39,10 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 		if ( $info !== null ) {
 			// @todo: Change this to check the message key instead of the parsed text
-			$expectedInfo = ApiErrorFormatter::stripMarkup(
+			$actualInfo = ApiErrorFormatter::stripMarkup(
 				$msg->inLanguage( 'en' )->useDatabase( false )->text()
 			);
-			$this->assertRegExp( $info, $expectedInfo, 'error info message' );
+			$this->assertRegExp( $info, $actualInfo, 'error info message' );
 		}
 
 		if ( $code !== null ) {

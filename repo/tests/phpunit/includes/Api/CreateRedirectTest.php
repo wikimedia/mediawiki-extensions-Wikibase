@@ -25,6 +25,7 @@ use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Api\CreateRedirect
@@ -246,7 +247,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 			$this->callApiModule( $params );
 			$this->fail( 'API did not fail with error ' . $expectedCode . ' as expected!' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertEquals( $expectedCode, $ex->getCodeString() );
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			$this->assertEquals( $expectedCode, $msg->getApiCode() );
 		}
 	}
 
