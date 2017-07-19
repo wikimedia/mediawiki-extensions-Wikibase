@@ -22,6 +22,161 @@
       "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3d9214a3",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "Talked with Daniel. This here is critical. LINKS_UPDATE includes WEB_PURGE. Before this was not always the case. SITELINK update did not included a WEB_PURGE. Daniel explained why this is an intended change. Unfortunately not mentioned in the commit message.",
+      "range": {
+        "startLine": 206,
+        "startChar": 29,
+        "endLine": 206,
+        "endChar": 48
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3d5c541d",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "I think you wanted to remove this.",
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_dd1e7061",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "Should be renamed to \"schedule…\", similar to below.\n\nJust a note to clean this up later, after everything here is merged.",
+      "range": {
+        "startLine": 118,
+        "startChar": 17,
+        "endLine": 118,
+        "endChar": 30
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_fd87ac63",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "Can you rename this to $firstTitleInTheBatch or something like this please?\n\nOr $dummyTitle if you are sure the job does not use it in any way.",
+      "range": {
+        "startLine": 132,
+        "startChar": 3,
+        "endLine": 132,
+        "endChar": 9
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_fd71eca7",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "But isn\u0027t this already there, a few lines below?",
+      "range": {
+        "startLine": 135,
+        "startChar": 16,
+        "endLine": 135,
+        "endChar": 34
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5d428040",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "So *this* here is the essence of this patch. This is a single job for an entire batch. Before it was a loop that called something (which also created jobs) for each individual page.",
+      "range": {
+        "startLine": 139,
+        "startChar": 16,
+        "endLine": 139,
+        "endChar": 22
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5d59202c",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:56:20Z",
+      "side": 1,
+      "message": "It looks like the changes made down here should have been done in the previous patch, because the previous patch introduced this code. I don\u0027t think this is critical, I just wanted to let you know.",
+      "range": {
+        "startLine": 161,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
