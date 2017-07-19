@@ -79,34 +79,34 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	/**
 	 * @param string|null $subPage
 	 *
-	 * @return array array( string[] $sites, string $itemString )
+	 * @return array [ string[] $sites, string $itemString ]
 	 */
 	private function getArguments( $subPage ) {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
-		$sites = explode(
-			',',
-			trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) )
+		$sites = array_map(
+			[ $this->stringNormalizer, 'trimToNFC' ],
+			explode( ',', $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) )
 		);
-		$itemString = trim( $request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 ) );
+		$itemString = $this->stringNormalizer->trimToNFC(
+			$request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 )
+		);
 
 		return [ $sites, $itemString ];
 	}
 
 	/**
 	 * @param string $site
-	 * @param string|null $itemString
+	 * @param string $itemString
 	 *
 	 * @return string|null the URL to redirect to or null if the sitelink does not exist
 	 */
-	private function getTargetUrl( $site, $itemString = null ) {
+	private function getTargetUrl( $site, $itemString ) {
 		$itemId = $this->getItemId( $itemString );
 
 		if ( $site === '' || $itemId === null ) {
 			return null;
 		}
-
-		$site = $this->stringNormalizer->trimToNFC( $site );
 
 		if ( !$this->siteLookup->getSite( $site ) ) {
 			// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia
@@ -191,7 +191,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		parent::execute( $subPage );
 		list( $sites, $itemString ) = $this->getArguments( $subPage );
 
-		if ( !empty( $sites ) || !empty( $itemString ) ) {
+		if ( $itemString !== '' ) {
 			foreach ( $sites as $site ) {
 				$url = $this->getTargetUrl( $site, $itemString );
 				if ( $url !== null ) {

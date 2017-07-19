@@ -313,7 +313,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 			],
 			'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
 				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
-		]
+			],
 		];
 
 		$builder = $this->newEntityInfoBuilder( $ids );

@@ -171,12 +171,12 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	public function requestWithRedirectProvider() {
-		$cases = [];
-		$cases['found'] = [ 'dewiki/Q23', 'http://dewiki.com/TestPageName' ];
-		$cases['foundEntityRedirect'] = [ 'dewiki/Q24', 'http://dewiki.com/TestPageName' ];
-		$cases['foundWithSiteIdHack'] = [ 'de/Q23', 'http://dewiki.com/TestPageName' ];
-		$cases['foundInFallbackChain'] = [ 'enwiki,dewiki,fawiki/Q23', 'http://dewiki.com/TestPageName' ];
-		return $cases;
+		return [
+			'found' => [ 'dewiki/Q23', 'http://dewiki.com/TestPageName' ],
+			'foundEntityRedirect' => [ 'dewiki/Q24', 'http://dewiki.com/TestPageName' ],
+			'foundWithSiteIdHack' => [ 'de/Q23', 'http://dewiki.com/TestPageName' ],
+			'foundInFallbackChain' => [ 'enwiki, dewiki,fawiki/Q23', 'http://dewiki.com/TestPageName' ],
+		];
 	}
 
 	/**
