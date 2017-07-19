@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_5d8a80c1",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:15:16Z",
+      "side": 1,
+      "message": "In PHP trailing commas are valid (an encouraged). In JavaScript and JSON, it\u0027s an actual error, not just a linter warning. If JS allowed it, we\u0027d probably do it there too.\n\nBut looking at the inner arrays in the code above, they are inconsistent about this, too. So, whatever ;)",
+      "parentUuid": "8e742343_bf735ce4",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 163,
+        "endChar": 5
+      },
+      "revId": "0a445c07004d0ed6f76a5004bb54e84e24caaa38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_bb986520",
         "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
         "patchSetId": 4
