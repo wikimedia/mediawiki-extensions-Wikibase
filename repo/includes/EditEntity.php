@@ -163,11 +163,6 @@ class EditEntity {
 	const ANY_ERROR = 0xFFFFFFFF;
 
 	/**
-	 * @var string[]
-	 */
-	private $requiredPermissions = [ EntityPermissionChecker::ACTION_EDIT ];
-
-	/**
 	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
@@ -494,33 +489,22 @@ class EditEntity {
 	}
 
 	/**
-	 * Adds another permission (action) to be checked by checkEditPermissions().
-	 * Per default, the 'edit' permission is checked.
-	 *
-	 * @param string $permission
-	 */
-	public function addRequiredPermission( $permission ) {
-		$this->requiredPermissions[] = $permission;
-	}
-
-	/**
 	 * Checks the necessary permissions to perform this edit.
 	 * Per default, the 'edit' permission is checked.
 	 * Use addRequiredPermission() to check more permissions.
 	 */
 	public function checkEditPermissions() {
-		foreach ( $this->requiredPermissions as $action ) {
-			$permissionStatus = $this->permissionChecker->getPermissionStatusForEntity(
-				$this->user,
-				$action,
-				$this->newEntity );
+		$permissionStatus = $this->permissionChecker->getPermissionStatusForEntity(
+			$this->user,
+			EntityPermissionChecker::ACTION_EDIT,
+			$this->newEntity
+		);
 
-			$this->status->merge( $permissionStatus );
+		$this->status->merge( $permissionStatus );
 
-			if ( !$this->status->isOK() ) {
-				$this->errorType |= self::PERMISSION_ERROR;
-				$this->status->fatal( 'no-permission' );
-			}
+		if ( !$this->status->isOK() ) {
+			$this->errorType |= self::PERMISSION_ERROR;
+			$this->status->fatal( 'no-permission' );
 		}
 	}
 
