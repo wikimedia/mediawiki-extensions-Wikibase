@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_78118a56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:32:46Z",
+      "side": 1,
+      "message": "That\u0027s not a justification for this change. Please explain your rationale. What should be consistent with what? Is this about empty arrays? Should they be present, or omitted? Why?",
+      "revId": "9a9b85245f03171e5d6efd808de867a44f24cd66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
