@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_bf735ce4",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-19T13:18:51Z",
+      "side": 1,
+      "message": "IDK. eslint will error if we add trailing comma in javascript files and phpcs doesn\u0027t care about it in php files.",
+      "parentUuid": "8e742343_9b932904",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 163,
+        "endChar": 5
+      },
+      "revId": "0a445c07004d0ed6f76a5004bb54e84e24caaa38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_bb986520",
         "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
         "patchSetId": 4
