@@ -22,6 +22,30 @@
       "revId": "9e4fbfcf57c8d7a26d43d5264ddbca5959cf978f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_fd01ec71",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T16:49:30Z",
+      "side": 1,
+      "message": "The old order was actually wrong. We want to purge first, and then schedule re-parse.",
+      "parentUuid": "8e742343_3dc0d47e",
+      "range": {
+        "startLine": 139,
+        "startChar": 18,
+        "endLine": 139,
+        "endChar": 38
+      },
+      "revId": "9e4fbfcf57c8d7a26d43d5264ddbca5959cf978f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
