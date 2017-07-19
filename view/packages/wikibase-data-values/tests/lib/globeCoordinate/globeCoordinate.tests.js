@@ -13,7 +13,7 @@ define( [
 	 * Values that are used in combination with the "precisions" object.
 	 * @property {number[]}
 	 */
-	var values = [0, 0.06, 0.4, 0.5, 1, 10, 17];
+	var values = [ 0, 0.06, 0.4, 0.5, 1, 10, 17 ];
 
 	/**
 	 * Keyed by the precision to apply, this object contains the results for the values specified in
@@ -22,7 +22,7 @@ define( [
 	 */
 	var precisions = {
 		0: {
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
+			toDecimal: [ 0, 0.06, 0.4, 0.5, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
 				{ degree: 0, minute: 3, second: 36 },
@@ -34,7 +34,7 @@ define( [
 			]
 		},
 		1: {
-			toDecimal: [0, 0, 0, 1, 1, 10, 17],
+			toDecimal: [ 0, 0, 0, 1, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
@@ -46,7 +46,7 @@ define( [
 			]
 		},
 		2: {
-			toDecimal: [0, 0, 0, 1, 1, 10, 17],
+			toDecimal: [ 0, 0, 0, 1, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
@@ -58,7 +58,7 @@ define( [
 			]
 		},
 		1.00000001: {
-			toDecimal: [0, 0, 0, 1, 1, 10, 17],
+			toDecimal: [ 0, 0, 0, 1, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
@@ -70,7 +70,7 @@ define( [
 			]
 		},
 		0.016666666666666666: {
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
+			toDecimal: [ 0, 0.06, 0.4, 0.5, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: 0, second: undefined },
 				{ degree: 0, minute: 3, second: undefined },
@@ -82,7 +82,7 @@ define( [
 			]
 		},
 		2.7777777777777776e-7: {
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
+			toDecimal: [ 0, 0.06, 0.4, 0.5, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
 				{ degree: 0, minute: 3, second: 36 },
@@ -94,7 +94,7 @@ define( [
 			]
 		},
 		1.0000000001e-10: {
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
+			toDecimal: [ 0, 0.06, 0.4, 0.5, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
 				{ degree: 0, minute: 3, second: 36 },
@@ -106,7 +106,7 @@ define( [
 			]
 		},
 		1.0000001: {
-			toDecimal: [0, 0, 0, 1, 1, 10, 17],
+			toDecimal: [ 0, 0, 0, 1, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
@@ -118,7 +118,7 @@ define( [
 			]
 		},
 		1.1: {
-			toDecimal: [0, 0, 0, 1, 1, 10, 17],
+			toDecimal: [ 0, 0, 0, 1, 1, 10, 17 ],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
@@ -130,7 +130,7 @@ define( [
 			]
 		},
 		10: {
-			toDecimal: [0, 0, 0, 0, 0, 10, 20],
+			toDecimal: [ 0, 0, 0, 0, 0, 10, 20 ],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },

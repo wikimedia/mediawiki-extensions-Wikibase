@@ -102,7 +102,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 		if( key === 'calendarModel' && !SELF.getCalendarModelKeyByUri( value ) ) {
 			throw new Error( 'Setting ' + key + ': No valid calendar model URI provided' );
 		}
-		if( $.inArray( key, ['precision', 'before', 'after', 'timezone'] ) !== -1
+		if( $.inArray( key, [ 'precision', 'before', 'after', 'timezone' ] ) !== -1
 			&& typeof value !== 'number'
 		) {
 			throw new Error( 'Setting ' + key + ': Expected "number" type' );

@@ -2,9 +2,10 @@
 
 set -x
 
-if [[ $RUNJOB == jshint ]]; then
-	npm install jshint
-	jshint src/ lib/ tests/
+if [[ $RUNJOB == eslint ]]; then
+	npm install eslint
+        npm install --save eslint-config-wikimedia
+	./node_modules/.bin/eslint .
 	exit $?
 fi
 

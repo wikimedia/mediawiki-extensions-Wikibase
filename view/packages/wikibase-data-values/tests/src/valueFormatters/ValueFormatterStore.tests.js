@@ -65,7 +65,7 @@ define( [
 	QUnit.test( 'registerDataTypeFormatter(): Error handling', function( assert ) {
 		var formatterStore = new vf.ValueFormatterStore();
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				formatterStore.registerDataTypeFormatter( 'invalid', stringType.getId() );
 			},
@@ -74,7 +74,7 @@ define( [
 
 		formatterStore.registerDataTypeFormatter( StringFormatter, stringType.getId() );
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				formatterStore.getFormatter( stringType );
 			},
@@ -85,7 +85,7 @@ define( [
 	QUnit.test( 'registerDataValueFormatter(): Error handling', function( assert ) {
 		var formatterStore = new vf.ValueFormatterStore();
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				formatterStore.registerDataValueFormatter( 'invalid', StringValue.TYPE );
 			},
@@ -94,7 +94,7 @@ define( [
 
 		formatterStore.registerDataValueFormatter( StringFormatter, StringValue.TYPE );
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				formatterStore.getFormatter( StringValue );
 			},
@@ -133,7 +133,7 @@ define( [
 		);
 
 		assert.equal(
-			formatterStore.getFormatter( numberType.getDataValueType(), numberType.getId()  ),
+			formatterStore.getFormatter( numberType.getDataValueType(), numberType.getId() ),
 			NullFormatter,
 			'Still returning default formatter if no formatter is registered for a specific data '
 				+ 'type.'
@@ -220,7 +220,7 @@ define( [
 	 *        parameter. Each inner array should contain a data type, data value or data value
 	 *        constructor and a ValueFormatter which is expected to be registered for it.
 	 */
-	function valueFormatterStoreRegistrationTest( assert, toRegister, toExpect  ) {
+	function valueFormatterStoreRegistrationTest( assert, toRegister, toExpect ) {
 		var formatterStore = new vf.ValueFormatterStore();
 
 		// Register ValueFormatters as per definition:

@@ -7,5 +7,6 @@ composer.lock
 !.*
 .idea/
 
+node_modules/
 vendor/
 build/

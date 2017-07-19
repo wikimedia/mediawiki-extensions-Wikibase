@@ -38,7 +38,7 @@ this.config = ( function() {
 			},
 			'qunit.parameterize': {
 				exports: 'QUnit.cases',
-				deps: ['qunit']
+				deps: [ 'qunit' ]
 			},
 
 			'util/util.inherit': {
@@ -50,17 +50,17 @@ this.config = ( function() {
 			},
 			'globeCoordinate/globeCoordinate.GlobeCoordinate': {
 				exports: 'globeCoordinate.GlobeCoordinate',
-				deps: ['globeCoordinate/globeCoordinate']
+				deps: [ 'globeCoordinate/globeCoordinate' ]
 			},
 			'globeCoordinate/globeCoordinate.Formatter': {
 				exports: 'globeCoordinate.Formatter',
-				deps: ['globeCoordinate/globeCoordinate']
+				deps: [ 'globeCoordinate/globeCoordinate' ]
 			},
 
 			'dataValues/dataValues': {
 				exports: 'dataValues'
 			},
-			'dataValues/DataValue': ['dataValues/dataValues', 'jquery', 'util/util.inherit'],
+			'dataValues/DataValue': [ 'dataValues/dataValues', 'jquery', 'util/util.inherit' ],
 
 			'values/BoolValue': [
 				'dataValues/dataValues', 'jquery', 'dataValues/DataValue', 'util/util.inherit'
@@ -109,7 +109,7 @@ this.config = ( function() {
 			},
 			'valueFormatters/ValueFormatterStore': {
 				exports: 'valueFormatters.ValueFormatterStore',
-				deps: ['valueFormatters/valueFormatters', 'jquery']
+				deps: [ 'valueFormatters/valueFormatters', 'jquery' ]
 			},
 
 			'formatters/NullFormatter': [
@@ -136,7 +136,7 @@ this.config = ( function() {
 			},
 			'valueParsers/ValueParserStore': {
 				exports: 'valueParsers.ValueParserStore',
-				deps: ['valueParsers/valueParsers', 'jquery']
+				deps: [ 'valueParsers/valueParsers', 'jquery' ]
 			},
 
 			'parsers/BoolParser': [
@@ -163,7 +163,7 @@ this.config = ( function() {
 				'parsers/ValueParser',
 				'values/StringValue'
 			],
-			'parsers/ValueParser': ['valueParsers/valueParsers', 'util/util.inherit', 'jquery'],
+			'parsers/ValueParser': [ 'valueParsers/valueParsers', 'util/util.inherit', 'jquery' ],
 
 			// TODO: These tests should not require any specific DataValue constructor but rather
 			// use mocks. Properly define the module after removing the dependencies:
@@ -232,4 +232,4 @@ this.config = ( function() {
 		]
 	};
 
-} )();
+}() );

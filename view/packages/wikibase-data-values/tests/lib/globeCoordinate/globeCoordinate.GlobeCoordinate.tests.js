@@ -17,22 +17,22 @@ define( [
 		assert.expect( 10 );
 		var c;
 
-		assert.throws(
+		assert['throws'](
 			function() { c = new globeCoordinate.GlobeCoordinate( '' ); },
 			'Trying to instantiate with an empty value throws an error.'
 		);
 
-		assert.throws(
+		assert['throws'](
 			function() { c = new globeCoordinate.GlobeCoordinate( 'some string' ); },
 			'Trying to instantiate with an invalid value (some string) throws an error.'
 		);
 
-		assert.throws(
+		assert['throws'](
 			function() { c = new globeCoordinate.GlobeCoordinate( '190° 30" 1.123\'' ); },
 			'Trying to instantiate with an invalid value (190° 30" 1.123\') throws an error.'
 		);
 
-		assert.throws(
+		assert['throws'](
 			function() { c = new globeCoordinate.GlobeCoordinate( { latitude: 20 } ); },
 			'Trying to instantiate with an invalid value ({ latitude: 20 }) throws an error.'
 		);

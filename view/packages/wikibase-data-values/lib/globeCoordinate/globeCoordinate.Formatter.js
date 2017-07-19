@@ -91,8 +91,7 @@
 				longitude = globeCoordinate.toDecimal( longitude, precision );
 			}
 
-			return ''
-				+ latitude
+			return String( latitude )
 				+ this._options.latLongCombinator
 				+ longitude;
 		},
@@ -112,14 +111,13 @@
 				if( number === undefined ) {
 					return '';
 				}
-				return number + sign;
+				return String( number ) + sign;
 			};
 
 			var latDeg = globeCoordinate.toDegree( lat, precision ),
 				longDeg = globeCoordinate.toDegree( lon, precision );
 
-			return ''
-				+ text( Math.abs( latDeg.degree ), this._options.degree )
+			return text( Math.abs( latDeg.degree ), this._options.degree )
 				+ text( latDeg.minute, this._options.minute )
 				+ text( latDeg.second, this._options.second )
 				+ ( ( lat < 0 ) ? this._options.south : this._options.north )
