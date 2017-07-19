@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_f887ba63",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:39:05Z",
+      "side": 1,
+      "message": "when and where is it called with this default?",
+      "revId": "1257269f5e34e5440d08056a173277ce8b3a1a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
