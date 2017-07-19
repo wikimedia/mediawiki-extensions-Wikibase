@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e742343_5f3fd8b0",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T11:21:30Z",
+      "side": 1,
+      "message": "I also used to prefer empty() for arrays because I found \"if ( $titles \u003d\u003d\u003d array() )\" ugly and confusing because of the many round brackets. This is not an issue and more with \"if ( $titles \u003d\u003d\u003d [] )\". I find it much more expressive than anything, including \"if ( !$titles )\".",
+      "parentUuid": "8e742343_eb07ed18",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 23
+      },
+      "revId": "1f6b16890873a88f23d2316232595bfc712fc496",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_68e6a340",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 4
