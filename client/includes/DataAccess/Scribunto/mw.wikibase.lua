@@ -69,8 +69,10 @@ function wikibase.setupInterface()
 
 	-- Get the mw.wikibase.entity object for a given id. Cached.
 	local getEntityObject = function( id )
-		if getCachedEntity( id ) == nil then
-			local entity = php.getEntity( id )
+		local entity = getCachedEntity( id )
+
+		if entity == nil then
+			entity = php.getEntity( id )
 
 			if id ~= wikibase.getEntityIdForCurrentPage() then
 				-- Accessing an arbitrary item is supposed to increment the expensive function count
@@ -78,20 +80,18 @@ function wikibase.setupInterface()
 			end
 
 			if type( entity ) ~= 'table' then
-				cacheEntity( id, false )
-				return nil
+				entity = false
 			end
 
 			cacheEntity( id, entity )
 		end
 
-		if type( getCachedEntity( id ) ) == 'table' then
-			return wikibase.entity.create(
-				mw.clone( getCachedEntity( id ) ) -- Use a clone here, so that people can't modify the entity
-			)
-		else
+		if type( entity ) ~= 'table' then
 			return nil
 		end
+
+		-- Use a deep clone here, so that people can't modify the entity
+		return wikibase.entity.create( mw.clone( entity ) )
 	end
 
 	-- Get the entity id for the current page. Cached.
