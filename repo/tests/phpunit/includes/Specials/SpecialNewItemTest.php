@@ -248,14 +248,13 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 	}
 
 	/**
-	 * @param string $itemUrl
+	 * @param string $url
+	 *
 	 * @return ItemId
 	 */
-	protected function extractEntityIdFromUrl( $itemUrl ) {
-		$itemIdSerialization = preg_replace( '@^.*(Q\d+)$@', '$1', $itemUrl );
-		$itemId = new ItemId( $itemIdSerialization );
-
-		return $itemId;
+	protected function extractEntityIdFromUrl( $url ) {
+		preg_match( '/\bQ\d+$/i', $url, $matches );
+		return new ItemId( $matches[0] );
 	}
 
 	/**
