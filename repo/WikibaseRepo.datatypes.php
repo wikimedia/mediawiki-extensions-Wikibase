@@ -70,17 +70,6 @@ return call_user_func( function() {
 	// NOTE: Factory callbacks are registered below by value type (using the prefix "VT:") or by
 	// property data type (prefix "PT:").
 
-	$newEntityIdParser = function( ParserOptions $options ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		return new EntityIdValueParser( $repo->getEntityIdParser() );
-	};
-
-	$newStringParser = function( ParserOptions $options ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$normalizer = new WikibaseStringValueNormalizer( $repo->getStringNormalizer() );
-		return new StringParser( $normalizer );
-	};
-
 	return [
 		'VT:bad' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
@@ -97,7 +86,6 @@ return call_user_func( function() {
 					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
 				);
 			},
-			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newCommonsMediaFormatter( $format, $options );
@@ -121,7 +109,6 @@ return call_user_func( function() {
 					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
 				);
 			},
-			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newGeoShapeFormatter( $format, $options );
@@ -145,7 +132,6 @@ return call_user_func( function() {
 					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
 				);
 			},
-			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newTabularDataFormatter( $format, $options );
@@ -243,7 +229,10 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
 			},
-			'parser-factory-callback' => $newStringParser,
+			'parser-factory-callback' => function ( ParserOptions $options ) {
+				$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+				return new StringParser( new WikibaseStringValueNormalizer( $normalizer ) );
+			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newStringFormatter( $format, $options );
@@ -291,7 +280,6 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
 			},
-			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newUrlFormatter( $format, $options );
@@ -307,11 +295,6 @@ return call_user_func( function() {
 			},
 		],
 		'PT:external-id' => [
-			'validator-factory-callback' => function() {
-				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildStringValidators();
-			},
-			'parser-factory-callback' => $newStringParser,
 			// NOTE: for 'formatter-factory-callback', we fall back to plain text formatting
 			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultSnakFormatterBuilders();
@@ -324,7 +307,10 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildEntityValidators();
 			},
-			'parser-factory-callback' => $newEntityIdParser,
+			'parser-factory-callback' => function ( ParserOptions $options ) {
+				$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+				return new EntityIdValueParser( $entityIdParser );
+			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newEntityIdFormatter( $format, $options );
