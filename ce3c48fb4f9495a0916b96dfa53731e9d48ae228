@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_7d5adc86",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:10:06Z",
+      "side": 1,
+      "message": "Decoding twice seems like a bad idea. This method could either require $data as input, or return $data upon success.",
+      "revId": "ce3c48fb4f9495a0916b96dfa53731e9d48ae228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3d50d460",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:10:06Z",
+      "side": 1,
+      "message": "A third time? This thing may be big, eating nor just cycles, but memory!",
+      "revId": "ce3c48fb4f9495a0916b96dfa53731e9d48ae228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_dde670aa",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:10:06Z",
+      "side": 1,
+      "message": "Making a distinction between getSummary and createSummary is confusing. Just override createSummary itself.",
+      "revId": "ce3c48fb4f9495a0916b96dfa53731e9d48ae228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_3df6945a",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:10:06Z",
+      "side": 1,
+      "message": "This comment seems to belong inside getSummary/createSummary.",
+      "revId": "ce3c48fb4f9495a0916b96dfa53731e9d48ae228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
