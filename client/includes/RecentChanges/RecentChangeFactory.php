@@ -57,6 +57,16 @@ class RecentChangeFactory {
 
 		$targetSpecificAttributes = $this->buildTargetSpecificAttributes( $change, $target );
 		$attribs = array_merge( $preparedAttribs, $targetSpecificAttributes );
+
+		// Creating a RecentChange by passing a faked-up row needs the correct
+		// fields, which are changing in Ic3a434c0.
+		if ( class_exists( \CommentStore::class ) ) {
+			$attribs += [
+				'rc_comment_text' => $attribs['rc_comment'],
+				'rc_comment_data' => null,
+			];
+		}
+
 		$rc = RecentChange::newFromRow( (object)$attribs );
 		$rc->setExtra( [ 'pageStatus' => 'changed' ] );
 
@@ -102,7 +112,7 @@ class RecentChangeFactory {
 			'wikibase-repo-change' => $metadata,
 		];
 
-		return [
+		$attribs = [
 			'rc_user' => 0,
 			'rc_user_text' => $userText,
 			'rc_comment' => $this->getEditCommentMulti( $change ),
@@ -118,6 +128,17 @@ class RecentChangeFactory {
 			'rc_deleted' => false,
 			'rc_new' => false,
 		];
+
+		// Creating a RecentChange by passing a faked-up row needs the correct
+		// fields, which are changing in Ic3a434c0.
+		if ( class_exists( \CommentStore::class ) ) {
+			$attribs += [
+				'rc_comment_text' => $attribs['rc_comment'],
+				'rc_comment_data' => null,
+			];
+		}
+
+		return $attribs;
 	}
 
 	/**

@@ -192,6 +192,16 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 
 		$changeData = array_merge( $defaults, $changeData );
 
+		// The faked-up RecentChange row needs to have the proper fields for
+		// MediaWiki core change Ic3a434c0. And can't have them without that
+		// patch or the ->save() in initRecentChanges() will fail.
+		if ( class_exists( \CommentStore::class ) ) {
+			$changeData += [
+				'rc_comment_text' => $changeData['rc_comment'],
+				'rc_comment_data' => null,
+			];
+		}
+
 		$change = RecentChange::newFromRow( (object)$changeData );
 		$change->setExtra( [
 			'pageStatus' => 'changed'
