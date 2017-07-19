@@ -30,10 +30,12 @@ entity.claimRanks = {
 --
 -- @param {table} data
 entity.create = function( data )
-	if type( data ) ~= 'table' or type( data.schemaVersion ) ~= 'number' then
-		error( 'The entity data must be a table obtained via mw.wikibase.getEntityObject' )
+	if type( data ) ~= 'table' then
+		error( 'Expected a table obtained via mw.wikibase.getEntityObject, got ' .. type( data ) .. ' instead' )
 	end
-
+	if type( data.schemaVersion ) ~= 'number' then
+		error( 'data.schemaVersion must be a number, got ' .. type( data.schemaVersion ) .. ' instead' )
+	end
 	if data.schemaVersion < 2 then
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
