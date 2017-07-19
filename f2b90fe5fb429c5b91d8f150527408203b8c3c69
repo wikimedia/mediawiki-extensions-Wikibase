@@ -46,6 +46,30 @@
       "revId": "f2b90fe5fb429c5b91d8f150527408203b8c3c69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5f66f8ea",
+        "filename": "repo/includes/Store/WikiPageEntityStorePermissionChecker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-19T11:26:59Z",
+      "side": 1,
+      "message": "I\u0027ve refactored this code a bit. Introduced some duplication, but intention became more clear. \nAlso, both duplicated pieces of code covered by tests, so should be ok.\nSee PS4",
+      "parentUuid": "8e742343_0b311957",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 56
+      },
+      "revId": "f2b90fe5fb429c5b91d8f150527408203b8c3c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
