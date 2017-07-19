@@ -16,6 +16,24 @@
       "revId": "9a9b85245f03171e5d6efd808de867a44f24cd66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_f8025abd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-07-19T19:56:30Z",
+      "side": 1,
+      "message": "They should be present but as JSON objects, not arrays.",
+      "parentUuid": "8e742343_78118a56",
+      "revId": "9a9b85245f03171e5d6efd808de867a44f24cd66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
