@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_dd73d0e3",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:19:19Z",
+      "side": 1,
+      "message": "We are losing all information about the failed permission check here. Can\u0027t we do better?",
+      "revId": "c792ba8321055156f5dfbb09a3cdb41446886cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_9d7a28b7",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:19:19Z",
+      "side": 1,
+      "message": "Can we use the Status directly, instead of throwing an exception? We are potentially losing information here.",
+      "revId": "c792ba8321055156f5dfbb09a3cdb41446886cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_bd45a474",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-19T17:19:19Z",
+      "side": 1,
+      "message": "We are losing all information about the failed permission check here. Can\u0027t we do better?",
+      "revId": "c792ba8321055156f5dfbb09a3cdb41446886cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
