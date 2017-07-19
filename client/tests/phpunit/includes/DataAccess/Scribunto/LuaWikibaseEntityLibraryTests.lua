@@ -198,7 +198,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.create 1', func = testCreate,
 	  args = { {} },
-	  expect = 'The entity data must be a table obtained via mw.wikibase.getEntityObject'
+	  expect = 'data.schemaVersion must be a number, got nil instead'
 	},
 	{ name = 'mw.wikibase.entity.create 2', func = testCreate, type='ToString',
 	  args = { testItem },
@@ -210,7 +210,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.create (no table)', func = testCreate, type='ToString',
 	  args = { nil },
-	  expect = 'The entity data must be a table obtained via mw.wikibase.getEntityObject'
+	  expect = 'Expected a table obtained via mw.wikibase.getEntityObject, got nil instead'
 	},
 	{ name = 'mw.wikibase.entity.getLabel 1', func = testGetLabel, type='ToString',
 	  args = { 'de' },
