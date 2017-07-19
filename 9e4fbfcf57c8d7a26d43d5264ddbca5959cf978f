@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_3dc0d47e",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T15:59:38Z",
+      "side": 1,
+      "message": "The comment introduced in a previous patch talks about a \"correct order\". That order was LINKS_UPDATE first, but now it is second. Is this a mistake? I will set a temporary -1 to make sure this is seen and intentional.",
+      "range": {
+        "startLine": 139,
+        "startChar": 18,
+        "endLine": 139,
+        "endChar": 38
+      },
+      "revId": "9e4fbfcf57c8d7a26d43d5264ddbca5959cf978f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
