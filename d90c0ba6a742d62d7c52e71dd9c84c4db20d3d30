@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_dfa0a8f3",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-19T11:29:08Z",
+      "side": 1,
+      "message": "I still don\u0027t understand these changes here. From what is now explained in the commit message (thanks a lot for this!), I expect all former PARSER_PURGE_… usages to become WEB_PURGE_…. Why is LINKS_UPDATE_… used instead? I feel something is off here. I might be wrong, but will set a -1 anyway to get your attention and avoid an accidental merge.",
+      "range": {
+        "startLine": 189,
+        "startChar": 18,
+        "endLine": 189,
+        "endChar": 37
+      },
+      "revId": "d90c0ba6a742d62d7c52e71dd9c84c4db20d3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
