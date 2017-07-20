@@ -9,6 +9,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EditEntity;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
@@ -45,6 +46,11 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $editEntityFactory;
 
 	/**
+	 * @var EditEntity
+	 */
+	private $editEntity = null;
+
+	/**
 	 * @param string $title The title of the special page
 	 * @param string $restriction The required user right
 	 * @param SpecialPageCopyrightView $copyrightView
@@ -65,6 +71,36 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->editEntityFactory = $editEntityFactory;
+	}
+
+	/**
+	 * @param EntityId|null $id
+	 * @param int $baseRev
+	 * @return EditEntity
+	 */
+	protected function prepareEditEntity( EntityId $id = null, $baseRev = 0 ) {
+		$this->editEntity = $this->editEntityFactory->newEditEntity(
+			$this->getUser(),
+			$id,
+			$baseRev
+		);
+
+		return $this->editEntity;
+	}
+
+	/**
+	 * Returns the EditEntity interactor.
+	 *
+	 * @note Call only after calling prepareEditEntity() first.
+	 *
+	 * @return EditEntity
+	 */
+	protected function getEditEntity() {
+		if ( !$this->editEntity ) {
+			throw new RuntimeException( 'Call prepareEditEntity() before calling getEditEntity()' );
+		}
+
+		return $this->editEntity;
 	}
 
 	/**
@@ -126,6 +162,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * Saves the entity using the given summary.
 	 *
+	 * @note Call prepareEditEntity() first.
+	 *
 	 * @param EntityDocument $entity
 	 * @param Summary $summary
 	 * @param string $token
@@ -141,13 +179,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$flags = EDIT_UPDATE,
 		$baseRev = 0
 	) {
-		$editEntity = $this->editEntityFactory->newEditEntity(
-			$this->getUser(),
-			$entity->getId(),
-			$baseRev
-		);
-
-		$status = $editEntity->attemptSave(
+		$status = $this->getEditEntity()->attemptSave(
 			$entity,
 			$this->summaryFormatter->formatSummary( $summary ),
 			$flags,
