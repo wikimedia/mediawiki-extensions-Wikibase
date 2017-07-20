@@ -7,12 +7,12 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use PermissionsError;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -55,7 +55,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param string $title The title of the special page
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
@@ -63,7 +62,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$title,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory
 	) {
@@ -71,7 +69,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$title,
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
@@ -140,7 +137,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 
 		try {
-			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
+			$this->checkTermChangePermissions( $this->getEntityId() );
 		} catch ( PermissionsError $e ) {
 			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $e->permission );
 			return false;
@@ -176,13 +173,13 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityId $entityId
 	 *
 	 * @throws PermissionsError
 	 * @throws InvalidArgumentException
 	 */
-	private function checkTermChangePermissions( EntityDocument $entity ) {
-		$restriction = $entity->getType() . '-term';
+	private function checkTermChangePermissions( EntityId $entityId ) {
+		$restriction = $entityId->getEntityType() . '-term';
 
 		if ( !$this->getUser()->isAllowed( $restriction ) ) {
 			throw new PermissionsError( $restriction );
