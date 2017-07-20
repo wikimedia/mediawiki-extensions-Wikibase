@@ -35,7 +35,6 @@ class SpecialSetLabelTest extends SpecialModifyTermTestCase {
 		return new SpecialSetLabel(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
