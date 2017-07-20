@@ -6,12 +6,12 @@ use HTMLForm;
 use Html;
 use Language;
 use Status;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
@@ -60,7 +60,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param string $title The title of the special page
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 * @param EntityPermissionChecker $permissionChecker
@@ -69,7 +68,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$title,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $permissionChecker
@@ -78,7 +76,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$title,
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
@@ -147,10 +144,15 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
-		$status = $this->checkTermChangePermissions( $this->entityRevision->getEntity() );
-		if ( !$status->isOK() ) {
-			$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
-			return false;
+		$entityId = $this->getEntityId();
+
+		if ( $entityId ) {
+			$status = $this->checkTermChangePermissions( $entityId );
+
+			if ( !$status->isOK() ) {
+				$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
+				return false;
+			}
 		}
 
 		// If the user just enters an item id and a language, dont remove the term.
@@ -183,15 +185,15 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityId $entityId
 	 *
 	 * @return Status
 	 */
-	private function checkTermChangePermissions( EntityDocument $entity ) {
-		return $this->permissionChecker->getPermissionStatusForEntity(
+	private function checkTermChangePermissions( EntityId $entityId ) {
+		return $this->permissionChecker->getPermissionStatusForEntityId(
 			$this->getUser(),
 			EntityPermissionChecker::ACTION_EDIT_TERMS,
-			$entity
+			$entityId
 		);
 	}
 

@@ -153,6 +153,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 					$summary = $this->createSummary( $entity );
 
+					$this->prepareEditEntity();
 					$saveStatus = $this->saveEntity(
 						$entity,
 						$summary,

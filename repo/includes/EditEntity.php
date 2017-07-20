@@ -325,7 +325,11 @@ class EditEntity {
 				$this->baseRev = $this->getLatestRevision();
 			} else {
 				$id = $this->getEntityId();
-				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $id, $baseRevId );
+				$this->baseRev = $this->entityRevisionLookup->getEntityRevision(
+					$id,
+					$baseRevId,
+					EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+				);
 
 				if ( $this->baseRev === null ) {
 					throw new MWException( 'Base revision ID not found: rev ' . $baseRevId
