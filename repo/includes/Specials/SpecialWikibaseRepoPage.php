@@ -143,11 +143,12 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	) {
 		$editEntity = $this->editEntityFactory->newEditEntity(
 			$this->getUser(),
-			$entity,
+			$entity->getId(),
 			$baseRev
 		);
 
 		$status = $editEntity->attemptSave(
+			$entity,
 			$this->summaryFormatter->formatSummary( $summary ),
 			$flags,
 			$token
