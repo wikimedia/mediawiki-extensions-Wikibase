@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\EditEntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -22,7 +21,6 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory
 	) {
@@ -30,7 +28,6 @@ class SpecialSetDescription extends SpecialModifyTerm {
 			'SetDescription',
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
@@ -50,7 +47,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 			return false;
 		}
 
-		return $this->entityRevision->getEntity() instanceof DescriptionsProvider;
+		return $this->getBaseRevision()->getEntity() instanceof DescriptionsProvider;
 	}
 
 	/**

@@ -4,15 +4,15 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
+use MWException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\MessageException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -30,20 +30,14 @@ use Wikibase\SummaryFormatter;
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var EntityDocument|null
 	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var EntityRevision|null
-	 */
-	protected $entityRevision = null;
+	private $entity = null;
 
 	/**
 	 * @param string $title The title of the special page
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
@@ -51,7 +45,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$title,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory
 	) {
@@ -63,11 +56,114 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$entityTitleLookup,
 			$editEntityFactory
 		);
-		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
 	public function doesWrites() {
 		return true;
+	}
+
+	/**
+	 * Returns the ID of the Entity being modified.
+	 *
+	 * @return null|EntityId
+	 * @throws \MWException
+	 */
+	protected function getEntityId() {
+		return $this->getEditEntity()->getEntityId();
+	}
+
+	/**
+	 * Returns the base revision. If no base revision ID was passed to prepareEditEntity(),
+	 * this returns the latest revision.
+	 *
+	 * @throws UserInputException
+	 *
+	 * @return null|EntityRevision
+	 */
+	protected function getBaseRevision() {
+		$id = $this->getEntityId();
+		try {
+			$baseRev = $this->getEditEntity()->getBaseRevision();
+
+			if ( $baseRev === null ) {
+				$baseRev = $this->getEditEntity()->getLatestRevision();
+			}
+
+			if ( $baseRev === null ) {
+				throw new UserInputException(
+					'wikibase-wikibaserepopage-invalid-id',
+					[ $id->getSerialization() ],
+					'Entity ID "' . $id->getSerialization() . '" is unknown'
+				);
+			}
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			throw new UserInputException(
+				'wikibase-wikibaserepopage-unresolved-redirect',
+				[ $id->getSerialization() ],
+				'Entity ID "' . $id->getSerialization() . '"" refers to a redirect'
+			);
+		} catch ( StorageException $ex ) {
+			throw new UserInputException(
+				'wikibase-wikibaserepopage-storage-exception',
+				[ $id->getSerialization(), $ex->getMessage() ],
+				'Entity "' . $id->getSerialization() . '" could not be loaded'
+			);
+		}
+
+		return $baseRev;
+	}
+
+	/**
+	 * Returns the current revision.
+	 *
+	 * @throws UserInputException
+	 *
+	 * @return null|EntityRevision
+	 */
+	protected function getLatestRevision() {
+		$id = $this->getEntityId();
+		try {
+			return $this->getEditEntity()->getLatestRevision();
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			throw new UserInputException(
+				'wikibase-wikibaserepopage-unresolved-redirect',
+				[ $id->getSerialization() ],
+				'Entity ID "' . $id->getSerialization() . '"" refers to a redirect'
+			);
+		} catch ( StorageException $ex ) {
+			throw new UserInputException(
+				'wikibase-wikibaserepopage-storage-exception',
+				[ $id->getSerialization(), $ex->getMessage() ],
+				'Entity "' . $id->getSerialization() . '" could not be loaded'
+			);
+		}
+	}
+
+	/**
+	 * Convenience function for getting the ID of the revision the edit is based on.
+	 *
+	 * @return int
+	 */
+	protected function getBaseRevisionId() {
+		$baseRev = $this->getBaseRevision();
+		return $baseRev === null ? 0 : $baseRev->getRevisionId();
+	}
+
+	/**
+	 * Returns the EntityDocument that is to be modified by code in this class (or subclasses).
+	 * The first call to this method calls loadEntity().
+	 *
+	 * @throws MessageException
+	 * @throws UserInputException
+	 *
+	 * @return EntityDocument
+	 */
+	protected function getEntityForModification() {
+		if ( !$this->entity ) {
+			$this->entity = $this->loadEntity();
+		}
+
+		return $this->entity;
 	}
 
 	/**
@@ -85,28 +181,26 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->setHeaders();
 		$this->outputHeader();
 
+		$summary = false;
+		$entity = null;
+
 		try {
 			$this->prepareArguments( $subPage );
+
+			$valid = $this->validateInput();
+			$entity = $this->getEntityForModification();
+
+			if ( $valid ) {
+				$summary = $this->modifyEntity( $entity );
+			}
 		} catch ( UserInputException $ex ) {
 			$error = $this->msg( $ex->getKey(), $ex->getParams() )->parse();
 			$this->showErrorHTML( $error );
 		}
 
-		$summary = false;
-		$valid = $this->validateInput();
-		$entity = $this->entityRevision === null ? null : $this->entityRevision->getEntity();
-
-		if ( $valid ) {
-			$summary = $this->modifyEntity( $entity );
-		}
-
-		if ( !$summary ) {
+		if ( !$entity || !$summary ) {
 			$this->setForm( $entity );
 		} else {
-			//TODO: Add conflict detection. All we need to do is to provide the base rev from
-			// $this->entityRevision to the saveEntity() call. But we need to make sure
-			// conflicts are reported in a nice way first. In particular, we'd want to
-			// show the form again.
 			$status = $this->saveEntity( $entity, $summary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 			if ( !$status->isOK() && $status->getErrorsArray() ) {
@@ -129,28 +223,31 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$idString = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
+		$baseRevId = $this->getRequest()->getInt( 'revid', 0 );
 
 		if ( !$idString ) {
 			return;
 		}
 
-		$entityId = $this->parseEntityId( $idString );
-		$this->entityRevision = $this->loadEntity( $entityId );
+		$entityId = $idString === null ? null : $this->parseEntityId( $idString );
+
+		$this->prepareEditEntity( $entityId, $baseRevId );
 	}
 
 	/**
-	 * Loads the entity for this entity id.
-	 *
-	 * @param EntityId $id
+	 * Loads the entity for modification.
+	 * This will be a copy of the base revision.
 	 *
 	 * @throws MessageException
 	 * @throws UserInputException
-	 * @return EntityRevision
+	 * @return EntityDocument
 	 */
-	protected function loadEntity( EntityId $id ) {
+	private function loadEntity() {
+		$id = $this->getEntityId();
+
 		try {
-			$entity = $this->entityRevisionLookup
-				->getEntityRevision( $id, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$revision = $this->getBaseRevision();
+			$entity = $revision === null ? null : $revision->getEntity()->copy();
 
 			if ( $entity === null ) {
 				throw new UserInputException(
@@ -249,7 +346,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * continue by calling modifyEntity().
 	 */
 	protected function validateInput() {
-		return $this->entityRevision !== null && $this->getRequest()->wasPosted();
+		return $this->getBaseRevision() !== null && $this->getRequest()->wasPosted();
 	}
 
 	/**
@@ -274,11 +371,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		// NOTE: always validate modification against the current revision!
 		// TODO: this should be re-engineered, see T126231
-		$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision(
-			$entity->getId(),
-			0,
-			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
-		);
+		$currentEntityRevision = $this->getLatestRevision();
 		$result = $changeOp->validate( $currentEntityRevision->getEntity() );
 
 		if ( !$result->isValid() ) {
