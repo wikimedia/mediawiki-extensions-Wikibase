@@ -15,7 +15,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -62,7 +61,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
 		FingerprintChangeOpFactory $changeOpFactory,
@@ -72,7 +70,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			'SetLabelDescriptionAliases',
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
@@ -92,10 +89,10 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	protected function validateInput() {
 		return parent::validateInput()
-			&& $this->entityRevision->getEntity() instanceof FingerprintProvider
+			&& $this->getBaseRevision()->getEntity() instanceof FingerprintProvider
 			&& $this->isValidLanguageCode( $this->languageCode )
 			&& $this->wasPostedWithLabelDescriptionOrAliases()
-			&& $this->isAllowedToChangeTerms( $this->entityRevision->getEntity() );
+			&& $this->isAllowedToChangeTerms( $this->getBaseRevision()->getEntity() );
 	}
 
 	/**
@@ -232,9 +229,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$this->languageCode = null;
 		}
 
-		if ( $this->languageCode !== null && $this->entityRevision !== null ) {
-			$entity = $this->entityRevision->getEntity();
-
+		$entity = $this->getEntityForModification();
+		if ( $this->languageCode !== null && $entity !== null ) {
 			if ( $entity instanceof FingerprintProvider ) {
 				$this->setFingerprintFields( $entity->getFingerprint() );
 			}
