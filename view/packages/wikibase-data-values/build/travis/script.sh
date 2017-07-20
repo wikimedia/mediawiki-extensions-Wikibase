@@ -4,7 +4,7 @@ set -x
 
 if [[ $RUNJOB == eslint ]]; then
 	npm install eslint
-        npm install --save eslint-config-wikimedia
+	npm install --save eslint-config-wikimedia
 	./node_modules/.bin/eslint .
 	exit $?
 fi
