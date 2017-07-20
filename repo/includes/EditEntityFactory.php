@@ -5,6 +5,7 @@ namespace Wikibase;
 use IContextSource;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -91,7 +92,7 @@ class EditEntityFactory {
 
 	/**
 	 * @param User $user the user performing the edit
-	 * @param EntityDocument $entity the new entity object
+	 * @param EntityId|null $entityId the id of the entity to edit
 	 * @param int|bool $baseRevId the base revision ID for conflict checking.
 	 *        Defaults to false, disabling conflict checks.
 	 *        `true` can be used to set the base revision to the latest revision:
@@ -101,7 +102,7 @@ class EditEntityFactory {
 	 *
 	 * @return EditEntity
 	 */
-	public function newEditEntity( User $user, EntityDocument $entity, $baseRevId = false ) {
+	public function newEditEntity( User $user, EntityId $entityId = null, $baseRevId = false ) {
 		return new EditEntity(
 			$this->titleLookup,
 			$this->entityRevisionLookup,
@@ -109,7 +110,7 @@ class EditEntityFactory {
 			$this->permissionChecker,
 			$this->entityDiffer,
 			$this->entityPatcher,
-			$entity,
+			$entityId,
 			$user,
 			$this->editFilterHookRunner,
 			$baseRevId,
