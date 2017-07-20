@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.20.0 (dev)
+* Removed `jQuery.valueview.ExpertExtender.Toggler`.
+
 ## 0.19.2 (2017-06-28)
 * All relevant `jQuery.valueview.experts.…` classes are now exported via `module.exports`.
 * Raised required PHP version from 5.3 to 5.5.9.
