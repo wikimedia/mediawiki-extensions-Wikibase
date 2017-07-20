@@ -99,6 +99,7 @@
 	"wikibase-entitieswithoutlabel-label-language": "Hizkuntza kodea:",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" ez da hizkuntza kode erabilgarria.",
 	"wikibase-api-illegal-entity-remove": "Entitateak ezin dira ezabatu goi-maila <var>remove</var> giltza eskeintzen.",
+	"wikibase-api-illegal-entity-selector": "Hautako bat eman behar duzu: <var>id</var>, edo <var>site</var> eta <var>page</var> konbinazioa, baina ez biak.",
 	"wikibase-api-not-recognized-datatype": "Datu mota espero zen, baina falta da edo ez da antzematen.",
 	"wikibase-restoreold": "leheneratu",
 	"wikibase-listdatatypes-wikibase-property-head": "Propietatea",

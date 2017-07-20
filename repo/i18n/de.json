@@ -458,6 +458,7 @@
 	"apihelp-wblinktitles-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „Bot“ angehört.",
 	"apihelp-wblinktitles-example-1": "Ergänzt den Link „Hydrogen“ von der englischen Seite bei „Wasserstoff“ auf der deutschen Seite",
 	"apihelp-wbmergeitems-description": "Führt mehrere Objekte zusammen.",
+	"apihelp-wbmergeitems-summary": "Führt mehrere Objekte zusammen.",
 	"apihelp-wbmergeitems-param-fromid": "Die Kennung des Objekts, von dem zusammengeführt werden soll",
 	"apihelp-wbmergeitems-param-toid": "Die Kennung des Objekts, in das zusammengeführt werden soll:",
 	"apihelp-wbmergeitems-param-summary": "Zusammenfassung für die Bearbeitung. \nEs wird ein automatisch generierter Kommentar vorangestellt. Die maximale Länge des automatischen Kommentars und der Zusammenfassung darf 260 Zeichen nicht überschreiten. Alles über dieser Begrenzung wird abgeschnitten.",
