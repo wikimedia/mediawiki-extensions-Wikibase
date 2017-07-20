@@ -168,8 +168,8 @@ class GetEntities extends ApiBase {
 				try {
 					$ids[] = $this->idParser->parse( $id );
 				} catch ( EntityIdParsingException $e ) {
-					$this->errorReporter->dieError(
-						"Invalid id: $id", 'no-such-entity', 0, [ 'id' => $id ] );
+					$this->errorReporter->dieWithError( [ 'no-such-entity', $id ], 'no-such-entity',
+						0, [ 'id' => $id ] );
 				}
 			}
 		}
