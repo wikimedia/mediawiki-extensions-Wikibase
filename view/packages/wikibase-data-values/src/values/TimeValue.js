@@ -48,18 +48,24 @@ var PARENT = dv.DataValue;
  * @throws {Error} if `timestamp` is not a valid YMD-ordered timestamp string resembling ISO 8601.
  */
 var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timestamp, options ) {
-	this._time = {};
-
 	try {
 		var matches = /^([-+]?\d+)-(\d+)-(\d+)T(?:(\d+):(\d+)(?::(\d+))?Z?)?$/.exec( timestamp );
 
 		// Strip additional leading zeros from the year, but keep 4 digits.
-		this._time.year = matches[1].replace( /\b0+(?=\d{4})/, '' );
-		this._time.month = parseInt( matches[2], 10 );
-		this._time.day = parseInt( matches[3], 10 );
-		this._time.hour = parseInt( matches[4] || 0, 10 );
-		this._time.minute = parseInt( matches[5] || 0, 10 );
-		this._time.second = parseInt( matches[6] || 0, 10 );
+		var year = matches[1].replace( /\b0+(?=\d{4})/, '' ),
+			month = parseInt( matches[2], 10 ),
+			day = parseInt( matches[3], 10 ),
+			hour = parseInt( matches[4] || 0, 10 ),
+			minute = parseInt( matches[5] || 0, 10 ),
+			second = parseInt( matches[6] || 0, 10 );
+
+		this.timestamp = ( year.charAt( 0 ) === '-' ? '-' : '+' )
+			+ pad( year, 4 ) + '-'
+			+ pad( month, 2 ) + '-'
+			+ pad( day, 2 ) + 'T'
+			+ pad( hour, 2 ) + ':'
+			+ pad( minute, 2 ) + ':'
+			+ pad( second, 2 ) + 'Z';
 	} catch( e ) {
 		throw new Error( 'Unable to process timestamp "' + timestamp + '"' );
 	}
@@ -79,10 +85,10 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	} );
 }, {
 	/**
-	 * @property {Object}
+	 * @property {string}
 	 * @private
 	 */
-	_time: null,
+	timestamp: null,
 
 	/**
 	 * @property {Object}
@@ -130,7 +136,9 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	 * @return {string}
 	 */
 	getSortKey: function() {
-		return this._getTimestamp( true );
+		return this.timestamp.replace( /^([+-])(\d+)/, function ( $0, sign, year ) {
+			return sign + pad( year, 16 );
+		} );
 	},
 
 	/**
@@ -140,60 +148,6 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	 */
 	getValue: function() {
 		return this.toJSON();
-	},
-
-	/**
-	 * @since 0.7
-	 *
-	 * @return {string}
-	 */
-	getYear: function() {
-		return this._time.year;
-	},
-
-	/**
-	 * @since 0.7
-	 *
-	 * @return {number}
-	 */
-	getMonth: function() {
-		return this._time.month;
-	},
-
-	/**
-	 * @since 0.7
-	 *
-	 * @return {number}
-	 */
-	getDay: function() {
-		return this._time.day;
-	},
-
-	/**
-	 * @since 0.7
-	 *
-	 * @return {number}
-	 */
-	getHour: function() {
-		return this._time.hour;
-	},
-
-	/**
-	 * @since 0.7
-	 *
-	 * @return {number}
-	 */
-	getMinute: function() {
-		return this._time.minute;
-	},
-
-	/**
-	 * @since 0.7
-	 *
-	 * @return {number}
-	 */
-	getSecond: function() {
-		return this._time.second;
 	},
 
 	/**
@@ -218,24 +172,6 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	},
 
 	/**
-	 * @private
-	 *
-	 * @param {boolean} [padYear=false] True if the year should be padded to the maximum length of
-	 *  16 digits, false for the default padding to 4 digits.
-	 *
-	 * @return {string} A YMD-ordered timestamp string resembling ISO 8601.
-	 */
-	_getTimestamp: function( padYear ) {
-		return ( this._time.year.charAt( 0 ) === '-' ? '-' : '+' )
-			+ pad( this._time.year, padYear ? 16 : 4 ) + '-'
-			+ pad( this._time.month, 2 ) + '-'
-			+ pad( this._time.day, 2 ) + 'T'
-			+ pad( this._time.hour, 2 ) + ':'
-			+ pad( this._time.minute, 2 ) + ':'
-			+ pad( this._time.second, 2 ) + 'Z';
-	},
-
-	/**
 	 * @inheritdoc
 	 *
 	 * @return {Object}
@@ -246,7 +182,7 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 			before: this._options.before,
 			calendarmodel: this._options.calendarModel,
 			precision: this._options.precision,
-			time: this._getTimestamp(),
+			time: this.timestamp,
 			timezone: this._options.timezone
 		};
 	}
