@@ -153,8 +153,9 @@ abstract class UpdateRepoJob extends Job {
 
 		$summaryString = $this->summaryFormatter->formatSummary( $summary );
 
-		$editEntity = $this->editEntityFactory->newEditEntity( $user, $item, true );
+		$editEntity = $this->editEntityFactory->newEditEntity( $user, $item->getId(), true );
 		$status = $editEntity->attemptSave(
+			$item,
 			$summaryString,
 			EDIT_UPDATE,
 			false,
