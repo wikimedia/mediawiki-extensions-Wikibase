@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use Language;
 use MediaWikiTestCase;
-use Message;
+use RawMessage;
 use SearchResult;
 use SpecialSearch;
 use Title;
@@ -41,15 +41,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$searchPage->method( 'msg' )
-			->with( $this->equalTo( 'colon-separator' ) )
-			->will( $this->returnCallback( function ( $key ) {
-				$msg = $this->getMockBuilder( Message::class )
-					->disableOriginalConstructor()
-					->getMock();
-				$msg->method( 'escaped' )->willReturn( ': ' );
-
-				return $msg;
-			} ) );
+			->willReturn( new RawMessage( ': ' ) );
 		$searchPage->method( 'getLanguage' )
 			->willReturn( Language::factory( 'de' ) );
 
@@ -58,41 +50,24 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @param string $title
+	 *
 	 * @return SearchResult
 	 */
 	private function getSearchResult( $title ) {
 		$mockTitle = $this->getMock( Title::class );
-		$mockTitle->method( 'getText' )->willReturn( $title );
+		$mockTitle->method( 'getText' )
+			->willReturn( $title );
 		// hack: content model equals title/id
-		$mockTitle->method( 'getContentModel' )->willReturn( $title );
+		$mockTitle->method( 'getContentModel' )
+			->willReturn( $title );
 
 		$searchResult = $this->getMockBuilder( SearchResult::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$searchResult->method( 'getTitle' )->willReturn( $mockTitle );
+		$searchResult->method( 'getTitle' )
+			->willReturn( $mockTitle );
 
 		return $searchResult;
-	}
-
-	/**
-	 * @see LanguageFallbackChain::extractPreferredValue
-	 * @param array $terms
-	 * @return array|null
-	 */
-	private function extractPreferredValue( array $terms ) {
-		if ( array_key_exists( 'de', $terms ) ) {
-			return [
-				'value' => $terms['de'],
-				'language' => 'de',
-			];
-		} elseif ( array_key_exists( 'en', $terms ) ) {
-			return [
-				'value' => $terms['en'],
-				'language' => 'en',
-			];
-		}
-
-		return null;
 	}
 
 	/**
@@ -103,9 +78,14 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$languageFallbackChain->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function ( array $terms ) {
-				return $this->extractPreferredValue( $terms );
-			} ) );
+			->willReturnCallback( function ( array $terms ) {
+				if ( isset( $terms['de'] ) ) {
+					return [ 'value' => $terms['de'], 'language' => 'de' ];
+				} elseif ( isset( $terms['en'] ) ) {
+					return [ 'value' => $terms['en'], 'language' => 'en' ];
+				}
+				return null;
+			} );
 
 		return $languageFallbackChain;
 	}
@@ -118,10 +98,10 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$entityContentFactory->method( 'isEntityContentModel' )
-			->will( $this->returnCallback( function ( $contentModel ) {
+			->willReturnCallback( function ( $contentModel ) {
 				// hack: content model equals title/id
 				return $contentModel !== self::NON_ENTITY_TITLE;
-			} ) );
+			} );
 
 		return $entityContentFactory;
 	}
@@ -132,34 +112,42 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	private function getEntityIdLookup() {
 		$entityIdLookup = $this->getMock( EntityIdLookup::class );
 		$entityIdLookup->method( 'getEntityIdForTitle' )
-			->will( $this->returnCallback( function ( Title $title ) {
+			->willReturnCallback( function ( Title $title ) {
 				return new ItemId( $title->getText() );
-			} ) );
+			} );
 
 		return $entityIdLookup;
 	}
 
 	/**
 	 * @param ItemId $itemId
+	 *
 	 * @return string[]
 	 */
 	private function getDescriptionsArray( ItemId $itemId ) {
-		$terms = [];
 		switch ( $itemId->getSerialization() ) {
 			case self::DE_DESCRIPTION_ITEM_ID:
-				$terms['de'] = '<b>German description</b>';
+				return [
+					'de' => '<b>German description</b>',
+					'en' => 'fallback description',
+				];
+
 			case self::FALLBACK_DESCRIPTION_ITEM_ID:
-				$terms['en'] = 'fallback description';
-			case self::NO_FALLBACK_DESCRIPTION_ITEM_ID:
-				$terms['fr'] = 'unused description';
-			case self::EMPTY_ITEM_ID:
-				break;
+				return [
+					'en' => 'fallback description',
+					'fr' => 'unused description',
+				];
+
+			default:
+				return [
+					'fr' => 'unused description',
+				];
 		}
-		return $terms;
 	}
 
 	/**
 	 * @param ItemId $itemId
+	 *
 	 * @return Item $item
 	 */
 	private function getEntity( ItemId $itemId ) {
@@ -172,7 +160,8 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$item = $this->getMockBuilder( Item::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$item->method( 'getDescriptions' )->willReturn( $termList );
+		$item->method( 'getDescriptions' )
+			->willReturn( $termList );
 
 		return $item;
 	}
@@ -183,9 +172,9 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	private function getEntityLookup() {
 		$entityLookup = $this->getMock( EntityLookup::class );
 		$entityLookup->method( 'getEntity' )
-			->will( $this->returnCallback( function ( ItemId $itemId ) {
+			->willReturnCallback( function ( ItemId $itemId ) {
 				return $this->getEntity( $itemId );
-			} ) );
+			} );
 
 		return $entityLookup;
 	}
