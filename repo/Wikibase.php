@@ -789,7 +789,6 @@ call_user_func( function() {
 		return new Wikibase\Repo\Specials\SpecialSetLabel(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getEntityPermissionChecker()
@@ -808,7 +807,6 @@ call_user_func( function() {
 		return new Wikibase\Repo\Specials\SpecialSetDescription(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getEntityPermissionChecker()
@@ -827,7 +825,6 @@ call_user_func( function() {
 		return new Wikibase\Repo\Specials\SpecialSetAliases(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getEntityPermissionChecker()
@@ -846,7 +843,6 @@ call_user_func( function() {
 		return new Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),
@@ -875,7 +871,6 @@ call_user_func( function() {
 		return new Wikibase\Repo\Specials\SpecialSetSiteLink(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,

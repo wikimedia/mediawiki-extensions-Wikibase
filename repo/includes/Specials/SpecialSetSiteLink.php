@@ -83,7 +83,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 * @param SiteLookup $siteLookup
@@ -96,7 +95,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
 		SiteLookup $siteLookup,
@@ -110,7 +108,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			'SetSiteLink',
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
@@ -139,14 +136,14 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		// explode the sub page from the format Special:SetSitelink/q123/enwiki
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 
+		$entityId = $this->getEntityId();
+
 		// check if id belongs to an item
-		if ( $this->entityRevision !== null
-			&& !( $this->entityRevision->getEntity() instanceof Item )
+		if ( $entityId !== null
+			&& $entityId->getEntityType() !== Item::ENTITY_TYPE
 		) {
-			$itemId = $this->entityRevision->getEntity()->getId();
-			$msg = $this->msg( 'wikibase-setsitelink-not-item', $itemId->getSerialization() );
+			$msg = $this->msg( 'wikibase-setsitelink-not-item', $entityId->getSerialization() );
 			$this->showErrorHTML( $msg->parse() );
-			$this->entityRevision = null;
 		}
 
 		$this->site = trim( $request->getVal( 'site', isset( $parts[1] ) ? $parts[1] : '' ) );
@@ -280,7 +277,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'id' => [
 					'name' => 'id',
 					'type' => 'hidden',
-					'default' => $this->entityRevision->getEntity()->getId()->getSerialization()
+					'default' => $this->getEntityId()->getSerialization()
 				],
 				'remove' => [
 					'name' => 'remove',

@@ -78,7 +78,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		return new SpecialSetSiteLink(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,
