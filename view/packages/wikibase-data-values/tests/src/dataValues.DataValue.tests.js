@@ -124,7 +124,7 @@ define( [
 					'is instance of actual data value implementation\'s constructor'
 				);
 				assert.equal(
-					typeof( instance.getType() ),
+					typeof instance.getType(),
 					'string',
 					'getType method is present and returns string'
 				);
@@ -144,7 +144,7 @@ define( [
 				keyType;
 
 			for ( i in instances ) {
-				keyType = typeof( instances[i].getSortKey() );
+				keyType = typeof instances[i].getSortKey();
 
 				assert.ok(
 					keyType === 'string' || keyType === 'number',
@@ -288,7 +288,7 @@ define( [
 				instance = this.getInstance( constructorArgs[i] );
 
 				QUnit.assert.strictEqual(
-					instance[functionName].call( instance ),
+					instance[functionName](),
 					constructorArgs[i][argNumber],
 					functionName + ' must return the value that was provided as argument ' + argNumber + ' in the constructor'
 				);

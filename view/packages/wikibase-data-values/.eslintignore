@@ -1,0 +1,6 @@
+lib/jquery/**
+lib/qunit/**
+lib/qunit.parameterize/**
+lib/require/**
+node_modules/**
+vendor/**

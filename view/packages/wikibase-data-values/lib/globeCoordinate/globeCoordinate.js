@@ -76,8 +76,8 @@ this.globeCoordinate = ( function() {
 				// JavaScript may cause some disturbance regarding rounding and precision. The
 				// result should not have a higher floating point number precision than the
 				// applied precision.
-				var degreeFloat = ( '' + result.degree ).split( '.' ),
-					precisionFloat = ( '' + precision ).split( '.' );
+				var degreeFloat = String( result.degree ).split( '.' ),
+					precisionFloat = String( precision ).split( '.' );
 
 				if(
 					degreeFloat[1] && precisionFloat[1]
@@ -128,21 +128,20 @@ this.globeCoordinate = ( function() {
 					return string;
 				}
 
-				return ''
-					+ new Array( length - exploded[0].length + 1 ).join( '0' )
+				return new Array( length - exploded[0].length + 1 ).join( '0' )
 					+ exploded[0]
 					+ ( ( exploded[1] ) ? '.' + exploded[1] : '' );
 			}
 
-			latISO = ''
-				+ ( ( ( latitude < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
-				+ ( ( precision < 1 ) ? pad( lat.minute, 2 ) : '' )
-				+ ( ( precision < 1 / 60 ) ? pad( lat.second, 2 ) : '' );
+			latISO = ( latitude < 0 ? '-' : '+' )
+				+ pad( lat.degree, 2 )
+				+ ( precision < 1 ? pad( lat.minute, 2 ) : '' )
+				+ ( precision < 1 / 60 ? pad( lat.second, 2 ) : '' );
 
-			lonISO = ''
-				+ ( ( ( longitude < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
-				+ ( ( precision < 1 ) ? pad( lon.minute, 2 ) : '' )
-				+ ( ( precision < 1 / 60 ) ? pad( lon.second, 2 ) : '' );
+			lonISO = ( longitude < 0 ? '-' : '+' )
+				+ pad( lon.degree, 3 )
+				+ ( precision < 1 ? pad( lon.minute, 2 ) : '' )
+				+ ( precision < 1 / 60 ? pad( lon.second, 2 ) : '' );
 
 			// Synchronize precision (longitude degree needs to be 1 digit longer):
 			if( lonISO.indexOf( '.' ) !== -1 && latISO.indexOf( '.' ) === -1 ) {
@@ -163,4 +162,4 @@ this.globeCoordinate = ( function() {
 
 	};
 
-} )();
+}() );

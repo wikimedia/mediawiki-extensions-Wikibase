@@ -65,7 +65,7 @@ define( [
 	QUnit.test( 'registerDataTypeParser(): Error handling', function( assert ) {
 		var parserStore = new vp.ValueParserStore();
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				parserStore.registerDataTypeParser( 'invalid', stringType.getId() );
 			},
@@ -74,7 +74,7 @@ define( [
 
 		parserStore.registerDataTypeParser( StringParser, stringType.getId() );
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				parserStore.getParser( stringType );
 			},
@@ -85,7 +85,7 @@ define( [
 	QUnit.test( 'registerDataValueParser(): Error handling', function( assert ) {
 		var parserStore = new vp.ValueParserStore();
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				parserStore.registerDataValueParser( 'invalid', StringValue.TYPE );
 			},
@@ -94,7 +94,7 @@ define( [
 
 		parserStore.registerDataValueParser( StringParser, StringValue.TYPE );
 
-		assert.throws(
+		assert['throws'](
 			function() {
 				parserStore.getParser( StringValue );
 			},
@@ -217,7 +217,7 @@ define( [
 	 *        parameter. Each inner array should contain a data type, data value or data value
 	 *        constructor and a ValueParser which is expected to be registered for it.
 	 */
-	function valueParserStoreRegistrationTest( assert, toRegister, toExpect  ) {
+	function valueParserStoreRegistrationTest( assert, toRegister, toExpect ) {
 		var parserStore = new vp.ValueParserStore();
 
 		// Register ValueParsers as per definition:

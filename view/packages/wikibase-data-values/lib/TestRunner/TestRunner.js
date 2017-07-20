@@ -169,11 +169,11 @@ this.TestRunner = ( function( console ) {
 				}
 			}
 			return params;
-		} )( window.location.search.substr( 1 ).split( '&' ) );
+		}( window.location.search.substr( 1 ).split( '&' ) ) );
 
 		for( var i = 0; i < testModules.length; i++ ) {
 			if( testModules[i] === queryString.test ) {
-				return [queryString.test];
+				return [ queryString.test ];
 			}
 		}
 

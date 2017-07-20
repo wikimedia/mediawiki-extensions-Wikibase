@@ -4,8 +4,11 @@ php:
 - 5.5
 
 env:
-- RUNJOB=jshint
+- RUNJOB=eslint
 - RUNJOB=qunit
+
+before_script:
+  - nvm install 4
 
 script: bash ./build/travis/script.sh
 
