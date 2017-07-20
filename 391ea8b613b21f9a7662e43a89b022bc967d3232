@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_96e3929c",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-20T14:42:19Z",
+      "side": 1,
+      "message": "Also throws StorageException and EntityLookupException.",
+      "revId": "391ea8b613b21f9a7662e43a89b022bc967d3232",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_76fb8645",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-20T14:42:19Z",
+      "side": 1,
+      "message": "What motivates this change? Changing this to LATEST_FROM_MASTER is conceptually unrelated to avoiding master connections in GET requests, which this patch purports to do. \n\nI see no good reason to do this at all.",
+      "revId": "391ea8b613b21f9a7662e43a89b022bc967d3232",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
