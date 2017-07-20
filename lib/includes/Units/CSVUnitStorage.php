@@ -25,7 +25,7 @@ class CSVUnitStorage extends BaseUnitStorage {
 
 	/**
 	 * Load data from concrete storage
-	 * @return array|null
+	 * @return array[]|null
 	 */
 	protected function loadStorageData() {
 		if ( !is_readable( $this->sourceFile ) ) {

@@ -10,8 +10,7 @@ namespace Wikibase\Lib\Units;
 abstract class BaseUnitStorage implements UnitStorage {
 
 	/**
-	 * Storage data.
-	 * @var
+	 * @var array[]
 	 */
 	private $storageData;
 
@@ -20,14 +19,14 @@ abstract class BaseUnitStorage implements UnitStorage {
 	 * The method should return array indexed by source unit.
 	 * Each row should be either [<factor>, <unit>] or
 	 * ['factor' => <factor>, 'unit' => <unit>]
-	 * @return array|null null when loading failed.
+	 * @return array[]|null null when loading failed.
 	 */
 	abstract protected function loadStorageData();
 
 	/**
 	 * Load data from storage.
 	 */
-	protected function loadData() {
+	private function loadData() {
 		if ( is_null( $this->storageData ) ) {
 			$this->storageData = $this->loadStorageData();
 			if ( !$this->storageData ) {
