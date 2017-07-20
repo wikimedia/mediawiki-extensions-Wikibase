@@ -16,6 +16,24 @@
       "revId": "1257269f5e34e5440d08056a173277ce8b3a1a57",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_d6591a06",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-20T13:26:35Z",
+      "side": 1,
+      "message": "I removed this unused in PS7 and tried to minify the diff a little bit, without changing anything that was done in PS6. There is not much left now in PS7. I can not tell if these remaining changes are what this patch was originally intended to do.",
+      "parentUuid": "8e742343_f887ba63",
+      "revId": "1257269f5e34e5440d08056a173277ce8b3a1a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
