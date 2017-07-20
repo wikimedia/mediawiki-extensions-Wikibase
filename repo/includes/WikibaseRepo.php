@@ -1951,23 +1951,11 @@ class WikibaseRepo {
 			return null;
 		}
 
-		try {
-			// FIXME: Remove when configuration no longer references full qualified class names!
-			$storage = \ObjectFactory::getObjectFromSpec( (array)$fileName );
-		} catch ( \InvalidArgumentException $ex ) {
-			if ( substr( $fileName, -5 ) === '.json' ) {
-				$storage = new JsonUnitStorage( $fileName );
-			} else {
-				$storage = new CSVUnitStorage( $fileName );
-			}
+		if ( substr( $fileName, -5 ) === '.json' ) {
+			return new JsonUnitStorage( $fileName );
+		} else {
+			return new CSVUnitStorage( $fileName );
 		}
-
-		if ( !( $storage instanceof UnitStorage ) ) {
-			wfWarn( 'Bad "unitStorage" configuration, ignoring' );
-			return null;
-		}
-
-		return $storage;
 	}
 
 	/**
