@@ -175,8 +175,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 						'no-entity-id'
 					);
 				} else {
-					$this->errorReporter->dieError(
-						'Could not find entity ' . $entityId,
+					$this->errorReporter->dieWithError( [ 'no-such-entity', $entityId ],
 						'no-such-entity'
 					);
 				}
@@ -190,8 +189,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			}
 
 			if ( $entityId && !$this->entityStore->canCreateWithCustomId( $entityId ) ) {
-				$this->errorReporter->dieError(
-					'Could not find entity ' . $entityId . ', and it cannot be created from this ID.',
+				$this->errorReporter->dieWithError( [ 'no-such-entity', $entityId ],
 					'no-such-entity'
 				);
 			}
