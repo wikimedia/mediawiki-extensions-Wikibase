@@ -368,7 +368,7 @@ QUERY;
 	private function formatCSV( array $convertUnits ) {
 		$str = '';
 		foreach ( $convertUnits as $name => $data ) {
-			$str .= "$name,$data[0],$data[1]\n";
+			$str .= "$name,{$data['unit']},{$data['factor']}\n";
 		}
 		return $str;
 	}
