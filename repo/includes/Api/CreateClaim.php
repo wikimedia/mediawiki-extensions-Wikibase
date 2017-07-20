@@ -114,8 +114,7 @@ class CreateClaim extends ApiBase {
 	private function validateParameters( array $params ) {
 		if ( $params['snaktype'] === 'value' xor isset( $params['value'] ) ) {
 			if ( $params['snaktype'] === 'value' ) {
-				$this->errorReporter->dieError(
-					'A value needs to be provided when creating a claim with PropertyValueSnak snak',
+				$this->errorReporter->dieWithError( [ 'param-missing', 'value' ],
 					'param-missing'
 				);
 			} else {
@@ -127,8 +126,7 @@ class CreateClaim extends ApiBase {
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->errorReporter->dieError(
-				'A property ID needs to be provided when creating a claim with a Snak',
+			$this->errorReporter->dieWithError( [ 'param-missing', 'property' ],
 				'param-missing'
 			);
 		}

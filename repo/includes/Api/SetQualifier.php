@@ -123,23 +123,20 @@ class SetQualifier extends ApiBase {
 
 		if ( !isset( $params['snakhash'] ) ) {
 			if ( !isset( $params['snaktype'] ) ) {
-				$this->errorReporter->dieError(
-					'When creating a new qualifier (ie when not providing a snakhash) a snaktype should be specified',
+				$this->errorReporter->dieWithError( [ 'param-missing', 'snaktype' ],
 					'param-missing'
 				);
 			}
 
 			if ( !isset( $params['property'] ) ) {
-				$this->errorReporter->dieError(
-					'When creating a new qualifier (ie when not providing a snakhash) a property should be specified',
+				$this->errorReporter->dieWithError( [ 'param-missing', 'property' ],
 					'param-missing'
 				);
 			}
 		}
 
 		if ( isset( $params['snaktype'] ) && $params['snaktype'] === 'value' && !isset( $params['value'] ) ) {
-			$this->errorReporter->dieError(
-				'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided',
+			$this->errorReporter->dieWithError( [ 'param-missing', 'value' ],
 				'param-missing'
 			);
 		}
