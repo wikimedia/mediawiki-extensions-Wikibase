@@ -97,22 +97,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.ExpertExtender.Toggler' => $moduleTemplate + array(
-			'scripts' => array(
-				'ExpertExtender.Toggler.js',
-			),
-			'styles' => array(
-				'ExpertExtender.Toggler.css',
-			),
-			'dependencies' => array(
-				'jquery.ui.toggler',
-				'jquery.valueview.ExpertExtender',
-			),
-			'messages' => array(
-				'valueview-expert-advancedadjustments',
-			),
-		),
-
 		'jquery.valueview.ExpertExtender.UnitSelector' => $moduleTemplate + array(
 			'scripts' => array(
 				'ExpertExtender.UnitSelector.js',

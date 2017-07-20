@@ -89,17 +89,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.ExpertExtender.Toggler.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'ExpertExtender.Toggler.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.ExpertExtender.Toggler',
-				'jquery.valueview.test.testExpertExtenderExtension',
-				'util.HashMessageProvider'
-			),
-		),
-
 		'jquery.valueview.test.testExpertExtenderExtension' => $moduleTemplate + array(
 			'scripts' => array(
 				'testExpertExtenderExtension.js',
