@@ -14,28 +14,14 @@
 
 	/**
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
+	 * @returns {jQuery.valueview.ExpertStore}
 	 */
 	MODULE.getStore = function ( dataTypeStore ) {
 		var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
 
 		expertStore.registerDataValueExpert(
-			vv.experts.GlobeCoordinateInput,
-			dv.GlobeCoordinateValue.TYPE
-		);
-
-		expertStore.registerDataValueExpert(
-			vv.experts.QuantityInput,
-			dv.QuantityValue.TYPE
-		);
-
-		expertStore.registerDataValueExpert(
 			vv.experts.StringValue,
 			dv.StringValue.TYPE
-		);
-
-		expertStore.registerDataValueExpert(
-			vv.experts.TimeInput,
-			dv.TimeValue.TYPE
 		);
 
 		expertStore.registerDataValueExpert(
@@ -59,11 +45,15 @@
 		}
 
 		return expertStore;
-
 	};
 
+	/**
+	 * @param {object} registeredExperts Map from property type to expert module name
+	 * @returns {object} Map from property type to expert constructor
+	 */
 	function resolveExpertModules( registeredExperts ) {
 		var constructors = {};
+
 		for ( var dataType in registeredExperts ) {
 			if ( registeredExperts.hasOwnProperty( dataType ) ) {
 				constructors[ dataType ] = require( registeredExperts[ dataType ] );
