@@ -30,6 +30,8 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\Units\CSVUnitStorage;
+use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
@@ -1938,21 +1940,33 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Creates configured unit storage. Configuration is in unitStorage parameter,
-	 * in getObjectFromSpec format.
-	 * @see \ObjectFactory::getObjectFromSpec
-	 * @return null|UnitStorage Configured unit storage, or null
+	 * @return UnitStorage|null
 	 */
 	private function getUnitStorage() {
-		if ( !$this->settings->hasSetting( 'unitStorage' ) ) {
+		$fileName = $this->settings->hasSetting( 'unitStorage' )
+			? $this->settings->getSetting( 'unitStorage' )
+			: null;
+
+		if ( !$fileName ) {
 			return null;
 		}
-		$storage =
-			\ObjectFactory::getObjectFromSpec( $this->settings->getSetting( 'unitStorage' ) );
+
+		try {
+			// FIXME: Remove when configuration no longer references full qualified class names!
+			$storage = \ObjectFactory::getObjectFromSpec( (array)$fileName );
+		} catch ( \InvalidArgumentException $ex ) {
+			if ( substr( $fileName, -5 ) === '.json' ) {
+				$storage = new JsonUnitStorage( $fileName );
+			} else {
+				$storage = new CSVUnitStorage( $fileName );
+			}
+		}
+
 		if ( !( $storage instanceof UnitStorage ) ) {
-			wfWarn( "Bad unit storage configuration, ignoring" );
+			wfWarn( 'Bad "unitStorage" configuration, ignoring' );
 			return null;
 		}
+
 		return $storage;
 	}
 
