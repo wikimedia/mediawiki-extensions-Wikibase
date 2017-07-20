@@ -338,13 +338,14 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		$editEntityHandler = $this->editEntityFactory->newEditEntity(
 			$user,
-			$entity,
+			$entity->getId(),
 			$this->baseRevisionId
 		);
 
 		$token = $this->evaluateTokenParam( $params );
 
 		$status = $editEntityHandler->attemptSave(
+			$entity,
 			$summary,
 			$this->entitySavingFlags | $flags,
 			$token
