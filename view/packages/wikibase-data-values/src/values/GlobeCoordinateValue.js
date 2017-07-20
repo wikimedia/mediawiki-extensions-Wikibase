@@ -75,7 +75,6 @@ var SELF
 			longitude: globeCoordinate.getLongitude(),
 			globe: globeCoordinate.getGlobe(),
 			precision: globeCoordinate.getPrecision()
-			// altitude: ...
 		};
 	}
 } );
@@ -91,7 +90,6 @@ SELF.newFromJSON = function( json ) {
 		longitude: json.longitude,
 		globe: json.globe,
 		precision: json.precision
-		// altitude: json.altitude, // TODO: make globeCoordinate.js support altitude
 	} );
 
 	return new SELF( gc );

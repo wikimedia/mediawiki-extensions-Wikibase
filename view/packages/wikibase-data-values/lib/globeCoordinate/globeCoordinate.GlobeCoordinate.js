@@ -30,8 +30,6 @@
 		this._longitude = gcDef.longitude;
 		this._precision = gcDef.precision || null;
 
-		// TODO: Capture altitude and globe
-
 		// TODO: Implement globe specific restrictions. The restrictions below
 		// allow coordinates for Mars and other globes.
 		if( Math.abs( this._latitude ) > 360 ) {
@@ -44,6 +42,9 @@
 		this._globe = gcDef.globe || 'http://www.wikidata.org/entity/Q2';
 	};
 
+	/**
+	 * @class globeCoordinate.GlobeCoordinate
+	 */
 	SELF.prototype = {
 		// Don't forget about "constructor" since we are overwriting the whole prototype here:
 		constructor: SELF,
@@ -107,9 +108,8 @@
 		getPrecision: function() { return this._precision; },
 
 		/**
-		 * Returns an object with decimal latitude, longitude and precision.
-		 *
 		 * @return {Object}
+		 * @private
 		 */
 		getDecimal: function() {
 			return {
