@@ -62,7 +62,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		return new SpecialSetLabelDescriptionAliases(
 			$copyrightView,
 			$this->getSummaryFormatter(),
-			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
 			new EditEntityFactory(
 				$this->getEntityTitleLookup(),
