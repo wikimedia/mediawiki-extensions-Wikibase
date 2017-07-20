@@ -39,17 +39,6 @@ $.extend( SELF.prototype, {
 	getValue: util.abstractMember,
 
 	/**
-	 * Returns a key that can be used for sorting the data value.
-	 * Can be either numeric or a string.
-	 * NOTE: this could very well be set by the API, together with the value. Since the value is
-	 *       immutable, this won't change as well and there is no need for having the logic here.
-	 * @abstract
-	 *
-	 * @return {string|number}
-	 */
-	getSortKey: util.abstractMember,
-
-	/**
 	 * Returns a simple JSON structure representing this data value.
 	 * @abstract
 	 *

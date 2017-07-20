@@ -132,28 +132,6 @@ define( [
 		},
 
 		/**
-		 * Tests the getSortKey method.
-		 *
-		 * @since 0.1
-		 *
-		 * @param {QUnit.assert} assert
-		 */
-		testGetSortKey: function( assert ) {
-			var instances = this.getInstances(),
-				i,
-				keyType;
-
-			for ( i in instances ) {
-				keyType = typeof instances[i].getSortKey();
-
-				assert.ok(
-					keyType === 'string' || keyType === 'number',
-					'return value is a string or number'
-				);
-			}
-		},
-
-		/**
 		 * Tests whether the data value's constructor has a newFromJSON function.
 		 *
 		 * @since 0.1

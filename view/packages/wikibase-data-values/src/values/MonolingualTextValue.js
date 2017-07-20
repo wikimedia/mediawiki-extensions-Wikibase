@@ -41,15 +41,6 @@ var SELF
 	/**
 	 * @inheritdoc
 	 *
-	 * @return string
-	 */
-	getSortKey: function() {
-		return this._languageCode + this._text;
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {dataValues.MonolingualTextValue}
 	 */
 	getValue: function() {

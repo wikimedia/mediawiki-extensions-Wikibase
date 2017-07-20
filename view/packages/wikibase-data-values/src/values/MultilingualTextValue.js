@@ -33,15 +33,6 @@ var SELF
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {string}
-	 */
-	getSortKey: function() {
-		return this._texts.length < 1 ? '' : this._texts[0].getSortKey();
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {dataValues.MultilingualTextValue}
 	 */
 	getValue: function() {

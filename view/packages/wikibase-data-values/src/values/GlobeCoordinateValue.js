@@ -37,15 +37,6 @@ var SELF
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {string}
-	 */
-	getSortKey: function() {
-		return this.getValue().iso6709();
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {globeCoordinate.GlobeCoordinate}
 	 */
 	getValue: function() {
