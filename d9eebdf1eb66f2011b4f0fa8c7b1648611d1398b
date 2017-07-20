@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_36e89e0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-20T13:19:20Z",
+      "side": 1,
+      "message": "I don\u0027t think the autoloader is in place by the time that is run. For a personal installation that will probably work, though.",
+      "parentUuid": "0e81134c_000ae424",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_9e263ac8",
         "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 27
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_d6d35a63",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-20T13:19:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_9e263ac8",
+      "range": {
+        "startLine": 134,
+        "startChar": 60,
+        "endLine": 134,
+        "endChar": 75
+      },
+      "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e81134c_debcc2d7",
         "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
         "patchSetId": 27
@@ -59,6 +107,30 @@
       "writtenOn": "2017-06-09T20:19:48Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "d9eebdf1eb66f2011b4f0fa8c7b1648611d1398b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_f6d8d681",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-20T13:19:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e81134c_debcc2d7",
       "range": {
         "startLine": 117,
         "startChar": 4,
