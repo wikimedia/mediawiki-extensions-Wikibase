@@ -7,12 +7,12 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use PermissionsError;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
@@ -61,7 +61,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param string $title The title of the special page
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 * @param EntityPermissionChecker $permissionChecker
@@ -70,7 +69,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$title,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $permissionChecker
@@ -79,7 +77,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$title,
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
@@ -149,7 +146,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 
 		try {
-			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
+			$this->checkTermChangePermissions( $this->getEntityId() );
 		} catch ( PermissionsError $e ) {
 			$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
 			return false;
@@ -185,15 +182,15 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityId $entityId
 	 *
 	 * @throws PermissionsError
 	 */
-	private function checkTermChangePermissions( EntityDocument $entity ) {
-		$status = $this->permissionChecker->getPermissionStatusForEntity(
+	private function checkTermChangePermissions( EntityId $entityId ) {
+		$status = $this->permissionChecker->getPermissionStatusForEntityId(
 			$this->getUser(),
 			EntityPermissionChecker::ACTION_EDIT_TERMS,
-			$entity
+			$entityId
 		);
 
 		if ( !$status->isOK() ) {
