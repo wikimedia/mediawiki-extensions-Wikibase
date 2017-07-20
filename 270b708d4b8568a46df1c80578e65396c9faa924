@@ -52,6 +52,24 @@
       "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_73c3983e",
+        "filename": "repo/tests/phpunit/includes/Hooks/ShowSearchHitHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-20T11:11:44Z",
+      "side": 1,
+      "message": "There is a dependency in so far that the \"en\" value can only be returned if there is no \"de\" value.\n\nImagine an third language, then it becomes more obvious that a sequence of \"if-elseif-elseif-elseif\" is nothing but an unfolded version of the loop I constructed here.\n\nBut there are only two languages, and it\u0027s unlikely more are added, which makes my loop an over-engineered thingy. I will remove it.",
+      "parentUuid": "8e742343_e85d01f0",
+      "revId": "270b708d4b8568a46df1c80578e65396c9faa924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
