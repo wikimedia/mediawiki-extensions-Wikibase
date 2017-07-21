@@ -16,6 +16,24 @@
       "revId": "8d79b8b4d2d5317cd38f2a067b6d466b6efd7903",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_2f8fd8d2",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-21T11:47:47Z",
+      "side": 1,
+      "message": "I really don\u0027t know what this means. This is nothing but a string comparison.",
+      "parentUuid": "6e71af52_013afae4",
+      "revId": "8d79b8b4d2d5317cd38f2a067b6d466b6efd7903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
