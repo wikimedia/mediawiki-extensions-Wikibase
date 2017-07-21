@@ -163,7 +163,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					if ( !$saveStatus->isGood() ) {
 						return $saveStatus;
 					}
-
+E
 					return Status::newGood( $entity );
 				}
 			);
