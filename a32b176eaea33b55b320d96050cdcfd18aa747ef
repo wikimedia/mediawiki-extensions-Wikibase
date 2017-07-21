@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_6f71600b",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-21T11:34:10Z",
+      "side": 0,
+      "message": "Doesn\u0027t seem related but meh.",
+      "revId": "a32b176eaea33b55b320d96050cdcfd18aa747ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_ef63103d",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-21T11:34:10Z",
+      "side": 0,
+      "message": "Definitely outside scope of this patch but it\u0027s too nested, we definitely need to get this cleaned up. I do it right now.",
+      "revId": "a32b176eaea33b55b320d96050cdcfd18aa747ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
