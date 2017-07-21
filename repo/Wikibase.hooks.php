@@ -57,6 +57,22 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Handler for the BeforePageDisplayMobile hook that adds the wikibase mobile styles.
+	 *
+	 * @param OutputPage $out
+	 * @param Skin $skin
+	 */
+	public static function onBeforePageDisplayMobile( OutputPage &$out, Skin &$skin ) {
+		$title = $out->getTitle();
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$isEntityTitle = $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() );
+
+		if ( $isEntityTitle ) {
+			$out->addModuleStyles( 'wikibase.mobile' );
+		}
+	}
+
+	/**
 	 * Handler for the SetupAfterCache hook, completing the content and namespace setup.
 	 * This updates the $wgContentHandlers and $wgNamespaceContentModels registries
 	 * according to information provided by entity type definitions and the entityNamespaces

@@ -11,6 +11,7 @@ use MWException;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
+use SkinTemplate;
 use stdClass;
 use Title;
 use Wikibase\Repo\WikibaseRepo;
@@ -51,6 +52,49 @@ class RepoHooksTest extends MediaWikiTestCase {
 	 */
 	private function getSettings() {
 		return WikibaseRepo::getDefaultInstance()->getSettings();
+	}
+
+	public function onBeforePageDisplayProviderMobile() {
+		$wikibaseMobile = [ 'wikibase.mobile' ];
+
+		return [
+			'Mobile entity page' => [
+				$wikibaseMobile,
+				true,
+			],
+			'Mobile non-entity page' => [
+				[],
+				false
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider onBeforePageDisplayProviderMobile
+	 */
+	public function testOnBeforePageDisplayMobile( $expectedModuleStyles, $isEntityNamespace ) {
+		if ( $isEntityNamespace ) {
+			$namespace = reset( WikibaseRepo::getDefaultInstance()->getEntityNamespaces() );
+		} else {
+			$namespace = NS_TALK;
+		}
+
+		$title = $this->getMock( Title::class );
+		$title->expects( $this->once() )
+			->method( 'getNamespace' )
+			->willReturn( $namespace );
+
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setTitle( $title );
+
+		$outputPage = new OutputPage( $context );
+
+		RepoHooks::onBeforePageDisplayMobile(
+			$outputPage,
+			$this->getMock( SkinTemplate::class )
+		);
+
+		$this->assertSame( $expectedModuleStyles, $outputPage->getModuleStyles() );
 	}
 
 	public function testOnAPIQuerySiteInfoGeneralInfo() {
