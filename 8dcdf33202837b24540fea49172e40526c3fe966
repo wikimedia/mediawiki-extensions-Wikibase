@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_2a5fc6e9",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-21T13:11:01Z",
+      "side": 1,
+      "message": "I guess this can go below the if().",
+      "range": {
+        "startLine": 165,
+        "startChar": 2,
+        "endLine": 165,
+        "endChar": 12
+      },
+      "revId": "8dcdf33202837b24540fea49172e40526c3fe966",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
