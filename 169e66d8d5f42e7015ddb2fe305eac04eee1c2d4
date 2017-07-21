@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_967dcd19",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_4b222152",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_67cc108d",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 4
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_36d739f4",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_8bbef9cf",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_87f27ccc",
         "filename": "lib/includes/Changes/EntityChange.php",
         "patchSetId": 4
@@ -83,6 +119,24 @@
       "writtenOn": "2017-04-28T12:10:13Z",
       "side": 1,
       "message": "Please declare the type.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_574fc238",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "2e4df70f_87f27ccc",
       "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -106,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_774c3e43",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "2e4df70f_67f5f0b4",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_27be08d2",
         "filename": "lib/includes/Changes/EntityChange.php",
         "patchSetId": 4
@@ -117,6 +189,24 @@
       "writtenOn": "2017-04-28T12:10:13Z",
       "side": 1,
       "message": "We are currently trying to refactor EntityCHange and friends to a true value object. That means it should not know about any services. Any data transformation will need to be done by the code that constructs or modifies the EntityChange object from the outside.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_175cdaf2",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Removed.  Now passing in central user ID everywhere.",
+      "parentUuid": "2e4df70f_27be08d2",
       "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -175,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_3091869d",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "I think it should be required.\n\nBecause EntityChange is not immutable and there are so many entry points for addUserMetadata, if it were a default it would be too easy to accidentally (by omitting the parameter) replace a correct value with 0.\n\nSo I\u0027ve changed all of the callers to pass it in, but it\u0027s still okay to pass in 0 if that\u0027s the correct value per docs/change-propagation.wiki (or we know it will get set correctly immediately after).",
+      "parentUuid": "2e4df70f_07bd0cd1",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_e785800c",
         "filename": "lib/tests/phpunit/Changes/EntityChangeTest.php",
         "patchSetId": 4
@@ -186,6 +294,24 @@
       "writtenOn": "2017-04-28T12:10:13Z",
       "side": 1,
       "message": "This black magic would not be needed if the central ID lookup was done in the factory code (resp in ChangeNotifier).",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_764381b7",
+        "filename": "lib/tests/phpunit/Changes/EntityChangeTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_e785800c",
       "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
