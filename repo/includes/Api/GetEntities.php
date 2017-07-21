@@ -163,14 +163,20 @@ class GetEntities extends ApiBase {
 	 */
 	private function getEntityIdsFromIdParam( array $params ) {
 		$ids = [];
-		if ( isset( $params['ids'] ) ) {
-			foreach ( $params['ids'] as $id ) {
-				try {
-					$ids[] = $this->idParser->parse( $id );
-				} catch ( EntityIdParsingException $e ) {
-					$this->errorReporter->dieWithError( [ 'no-such-entity', $id ], 'no-such-entity',
-						0, [ 'id' => $id ] );
-				}
+		if ( !isset( $params['ids'] ) ) {
+			return [];
+		}
+
+		foreach ( $params['ids'] as $id ) {
+			try {
+				$ids[] = $this->idParser->parse( $id );
+			} catch ( EntityIdParsingException $e ) {
+				$this->errorReporter->dieWithError(
+					[ 'no-such-entity', $id ],
+					'no-such-entity',
+					0,
+					[ 'id' => $id ]
+				);
 			}
 		}
 		return $ids;
