@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_60ebafa1",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2017-07-21T19:59:11Z",
+      "side": 1,
+      "message": "Is it correct the message can be translated now? You removed \"!DO NOT TRANSLATE!!\"",
+      "revId": "14ab303f61b7a537bd381f86a6b6d2eeeb166631",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
