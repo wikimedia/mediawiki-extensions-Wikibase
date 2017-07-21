@@ -82,7 +82,7 @@ class MergeItems extends ApiBase {
 	 */
 	private function getItemIdParam( array $parameters, $name ) {
 		if ( !isset( $parameters[$name] ) ) {
-			$this->errorReporter->dieError( 'Missing parameter: ' . $name, 'param-missing' );
+			$this->errorReporter->dieWithError( [ 'param-missing', $name ], 'param-missing' );
 		}
 
 		$value = $parameters[$name];

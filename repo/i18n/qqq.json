@@ -390,7 +390,7 @@
 	"wikibase-api-not-recognized-array": "!!DO NOT TRANSLATE!! An array was expected, but not recognized. The user probably passed the API a malformed parameter",
 	"wikibase-api-not-recognized-language": "!!DO NOT TRANSLATE!! The supplied language identifier was not recognized. The user probably passed the API a malformed parameter",
 	"wikibase-api-not-recognized-string": "!!DO NOT TRANSLATE!! A string was expected, but not recognized. The user probably passed the API a malformed parameter",
-	"wikibase-api-param-missing": "!!DO NOT TRANSLATE!! A parameter that is required was missing, General message for when a parameter is missing from a request",
+	"wikibase-api-param-missing": "Error message when an API parameter that is required was missing from a request.\n* $1 - name of the parameter",
 	"wikibase-api-param-illegal": "!!DO NOT TRANSLATE!! An illegal set of parameters have been used, General message for when the parameters passed in a request conflict or do not pass the initial tests",
 	"wikibase-api-permissiondenied": "!!DO NOT TRANSLATE!! the user making the request does not have the correct permissions or rights to carry out the request",
 	"wikibase-api-wrong-class": "!!DO NOT TRANSLATE!! The wrong class type has been detected when trying to make the request, this could be and item isntead of a property.",

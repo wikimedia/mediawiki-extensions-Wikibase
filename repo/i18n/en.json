@@ -357,7 +357,7 @@
 	"wikibase-api-not-recognized-array": "An array was expected, but not recognized.",
 	"wikibase-api-not-recognized-language": "The supplied language code was not recognized.",
 	"wikibase-api-not-recognized-string": "A string was expected, but not recognized.",
-	"wikibase-api-param-missing": "A parameter that is required was missing.",
+	"wikibase-api-param-missing": "The required parameter \"$1\" was missing.",
 	"wikibase-api-param-illegal": "An illegal set of parameters have been used.",
 	"wikibase-api-permissiondenied": "You do not have the permissions needed to carry out this action.",
 	"wikibase-api-wrong-class": "Wrong class type detected.",
