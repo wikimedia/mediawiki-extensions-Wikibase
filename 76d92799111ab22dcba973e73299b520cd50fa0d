@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_96406daa",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "Yes.  Done.",
+      "parentUuid": "8e742343_7d2bbc93",
+      "revId": "76d92799111ab22dcba973e73299b520cd50fa0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_5d2e00a1",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-19T17:24:33Z",
       "side": 1,
       "message": "I count 7 paths through this method. Do all cases have tests?",
+      "revId": "76d92799111ab22dcba973e73299b520cd50fa0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_f690d1f9",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-07-21T03:22:34Z",
+      "side": 1,
+      "message": "I only count 6, taking into account if it goes into the $centralUserId \u003d 0, it will always continue to $centralUserId \u003d\u003d\u003d 0 (so it\u0027s one path).\n\nI\u0027ve added the one missing test (for the lookup being null); thanks for raising this.",
+      "parentUuid": "8e742343_5d2e00a1",
       "revId": "76d92799111ab22dcba973e73299b520cd50fa0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
