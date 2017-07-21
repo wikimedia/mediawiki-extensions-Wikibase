@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_ea6e9ec3",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-07-21T12:50:23Z",
+      "side": 0,
+      "message": "I wonder why this was removed. I assume this was done to get a better summary line instead of a generic \"something changed\" when multiple ChangeOps are applied. But it could be this already happens without this special case handling here. I hope this is covered by a test.",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 45
+      },
+      "revId": "8c097288a2445284f296abc84e8262139b51e200",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
