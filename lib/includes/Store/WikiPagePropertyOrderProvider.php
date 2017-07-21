@@ -20,8 +20,6 @@ class WikiPagePropertyOrderProvider extends WikiTextPropertyOrderProvider implem
 	private $pageTitle;
 
 	/**
-	 * Constructor of the WikiPageOrderProvider
-	 *
 	 * @param Title $pageTitle page name the ordered property list is on
 	 */
 	public function __construct( Title $pageTitle ) {
