@@ -357,17 +357,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		];
 	}
 
-	public function provideAttemptSaveWithLateConflict() {
-		return [
-			[ true, true ],
-			[ false, false ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideAttemptSaveWithLateConflict
-	 */
-	public function testAttemptSaveWithLateConflict( $baseRevId, $expectedConflict ) {
+	public function testAttemptSaveWithLateConflict() {
 		$repo = $this->getMockRepository();
 
 		$user = $this->getUser( 'EditEntityTestUser' );
@@ -383,10 +373,8 @@ class EditEntityTest extends MediaWikiTestCase {
 		$entity->setLabel( 'en', 'Trust' );
 
 		$titleLookup = $this->getEntityTitleLookup();
-		$editEntity = $this->makeEditEntity( $repo, $entity->getId(), $titleLookup, $user, $baseRevId );
+		$editEntity = $this->makeEditEntity( $repo, $entity->getId(), $titleLookup, $user, true );
 		$editEntity->getLatestRevision(); // make sure EditEntity has page and revision
-
-		$this->assertEquals( $baseRevId !== false, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
 
 		// create independent Entity instance for the same entity, and modify and save it
 		$entity2 = new Item( new ItemId( 'Q42' ) );
@@ -407,14 +395,14 @@ class EditEntityTest extends MediaWikiTestCase {
 			$statusMessage = "Status ($id): " . $status->getWikiText();
 		}
 
-		$this->assertNotEquals( $expectedConflict, $status->isOK(),
-			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
+		$this->assertFalse( $status->isOK(),
+			"Saving should have failed late\n$statusMessage" );
 
-		$this->assertEquals( $expectedConflict, $editEntity->hasError(),
-			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
+		$this->assertTrue( $editEntity->hasError(),
+			"Saving should have failed late\n$statusMessage" );
 
-		$this->assertEquals( $expectedConflict, $status->hasMessage( 'edit-conflict' ),
-			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
+		$this->assertTrue( $status->hasMessage( 'edit-conflict' ),
+			"Saving should have failed late\n$statusMessage" );
 	}
 
 	public function dataCheckEditPermissions() {

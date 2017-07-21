@@ -85,12 +85,12 @@ class EditEntityFactory {
 	/**
 	 * @param User $user the user performing the edit
 	 * @param EntityId|null $entityId the id of the entity to edit
-	 * @param int|bool $baseRevId the base revision ID for conflict checking.
-	 *        Defaults to false, disabling conflict checks.
-	 *        `true` can be used to set the base revision to the latest revision:
-	 *        This will detect "late" edit conflicts, i.e. someone squeezing in an edit
-	 *        just before the actual database transaction for saving beings.
-	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
+	 * @param int $baseRevId the base revision ID for conflict checking.
+	 *        Use 0 to indicate that the current revision should be used as the base revision,
+	 *        effectively disabling conflict detections. true and false will be accepted for
+	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
+	 *        of EditEntity was changed so that "late" conflicts that arise between edit conflict
+	 *        detection and database update are always detected, and result in the update to fail.
 	 *
 	 * @return EditEntity
 	 */
