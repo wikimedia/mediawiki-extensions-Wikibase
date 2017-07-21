@@ -34,6 +34,24 @@
       "revId": "8d79b8b4d2d5317cd38f2a067b6d466b6efd7903",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_2075a792",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-07-21T19:04:53Z",
+      "side": 1,
+      "message": "Not the string comparison, but the code in InvalidArgumentException catch. Looks like the InvalidArgumentException here is used just as a branch condition, which is an anti-pattern. Moreover, as it suggested by the patch, the exception is actually meant to be the common case, as you target to always use the filename. This is even more of an anti-pattern. Exception should be when something is going wrong, not when there\u0027s a different configuration. Check for fileName being a string or something, instead.",
+      "parentUuid": "6e71af52_2f8fd8d2",
+      "revId": "8d79b8b4d2d5317cd38f2a067b6d466b6efd7903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
