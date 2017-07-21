@@ -16,6 +16,24 @@
       "revId": "fd13c210a41883e85088eaececbc2955e23794b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_7929329a",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-21T01:58:47Z",
+      "side": 1,
+      "message": "Indeed. A common pattern is to use Title::makeTitle( NS_SPECIAL, \u0027Badtitle/\u0027 . __CLASS__ )",
+      "parentUuid": "6e71af52_16bd5d63",
+      "revId": "fd13c210a41883e85088eaececbc2955e23794b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
