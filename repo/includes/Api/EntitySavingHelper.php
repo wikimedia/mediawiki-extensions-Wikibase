@@ -333,7 +333,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		}
 
 		if ( !$this->baseRevisionId ) {
-			$this->baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
+			$this->baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : 0;
 		}
 
 		$editEntityHandler = $this->editEntityFactory->newEditEntity(
