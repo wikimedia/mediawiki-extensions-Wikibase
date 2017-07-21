@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_dbd136d2",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 94
+      },
+      "writtenOn": "2017-07-21T20:59:46Z",
+      "side": 1,
+      "message": "This is a mobile only module. Why are you loading it unconditionally? Where\u0027s the check to see if you are on mobile?",
+      "revId": "03bf0fbfde841717a17c999456a329e69441aeeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
