@@ -65,7 +65,8 @@ class SiteLinkBadgeChangeOpSerializationValidator {
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
 				throw new ChangeOpDeserializationException(
 					'Badges: no item found matching id "' . $badgeSerialization . '"',
-					'no-such-entity'
+					'no-such-entity',
+					[ $badgeSerialization ]
 				);
 			}
 		}

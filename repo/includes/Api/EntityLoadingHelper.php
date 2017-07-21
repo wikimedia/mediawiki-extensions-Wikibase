@@ -181,8 +181,7 @@ class EntityLoadingHelper {
 		$entityRevision = $this->loadEntityRevision( $entityId );
 
 		if ( !$entityRevision ) {
-			$this->errorReporter->dieError(
-				'Entity ' . $entityId->getSerialization() . ' not found',
+			$this->errorReporter->dieWithError( [ 'no-such-entity', $entityId ],
 				'no-such-entity' );
 		}
 

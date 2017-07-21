@@ -216,7 +216,6 @@ class ApiErrorReporter {
 		$this->addMessageToResult( $msg, $extraData );
 
 		$this->trackAndDieWithError( $msg, $errorCode, $extraData, $httpRespCode );
-
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 

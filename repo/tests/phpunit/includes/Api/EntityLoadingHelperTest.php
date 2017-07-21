@@ -90,31 +90,29 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		$mock = $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
+		$apiUsageException = ApiUsageException::newWithMessage( null, 'mockApiUsageException' );
 
 		if ( $expectedExceptionCode ) {
 			$mock->expects( $this->once() )
 				->method( 'dieException' )
 				->with( $this->isInstanceOf( Exception::class ), $expectedExceptionCode )
-				->will( $this->throwException( ApiUsageException::newWithMessage(
-					null,
-					'mockApiUsageException'
-				) ) );
+				->will( $this->throwException( $apiUsageException ) );
 		} else {
 			$mock->expects( $this->never() )
 				->method( 'dieException' );
 		}
 
+		// TODO: Remove the deprecated dieError when it is not used any more.
+		$dieWithErrorCodeMethods = $this->logicalOr( 'dieWithError', 'dieError' );
+
 		if ( $expectedErrorCode ) {
 			$mock->expects( $this->once() )
-				->method( 'dieError' )
-				->with( $this->isType( 'string' ), $expectedErrorCode )
-				->will( $this->throwException( ApiUsageException::newWithMessage(
-					null,
-					'mockApiUsageException'
-				) ) );
+				->method( $dieWithErrorCodeMethods )
+				->with( $this->anything(), $expectedErrorCode )
+				->will( $this->throwException( $apiUsageException ) );
 		} else {
 			$mock->expects( $this->never() )
-				->method( 'dieError' );
+				->method( $dieWithErrorCodeMethods );
 		}
 
 		return $mock;
