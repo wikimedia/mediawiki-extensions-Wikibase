@@ -444,7 +444,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			return '';
 		} elseif ( $status->isOK() ) {
 			$warnings = $status->getErrorsByType( 'warning' );
-			return "\nStatus (OK): Warnings: " . var_dump( $warnings );
+			return "\nStatus (OK): Warnings: " . var_export( $warnings );
 		} else {
 			return "\n" . $status->getWikiText();
 		}
