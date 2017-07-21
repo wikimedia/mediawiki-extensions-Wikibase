@@ -374,7 +374,7 @@ class EntityParserOutputGenerator {
 
 		// Load mobile styles, which have targets => mobile
 		// and will only be loaded on mobile devices
-		$parserOutput->addModules( 'wikibase.mobile' );
+		$parserOutput->addModuleStyles( 'wikibase.mobile' );
 	}
 
 	/**
