@@ -22,6 +22,7 @@
 	},
 	"require": {
 		"php": ">=5.5.9",
+		"composer/installers": ">=1.0.1",
 		"data-values/data-values": "^1.0.0",
 		"data-values/common": "^0.3.0",
 		"data-values/geo": "^2.0.1",
