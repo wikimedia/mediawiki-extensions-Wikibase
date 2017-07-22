@@ -221,15 +221,15 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::prepareArguments
+	 * @see SpecialModifyEntity::processArguments
 	 *
 	 * @param string|null $subPage
 	 */
-	protected function prepareArguments( $subPage ) {
+	protected function processArguments( $subPage ) {
 		$this->extractInput( $subPage );
 
 		// Parse the 'id' parameter and throw an exception if the entity cannot be loaded
-		parent::prepareArguments( $subPage );
+		parent::processArguments( $subPage );
 
 		if ( $this->languageCode === '' ) {
 			$this->languageCode = $this->getLanguage()->getCode();
@@ -241,8 +241,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$this->languageCode = null;
 		}
 
-		if ( $this->languageCode !== null && $this->getEntityId() ) {
-			$entity = $this->getEntityForModification();
+		$entity = $this->getEntityForDisplay();
+		if ( $this->languageCode !== null && $entity ) {
 			if ( $entity instanceof FingerprintProvider ) {
 				$this->setFingerprintFields( $entity->getFingerprint() );
 			}

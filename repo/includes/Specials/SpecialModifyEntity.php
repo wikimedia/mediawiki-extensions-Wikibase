@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use HTMLForm;
 use Html;
 use MWException;
+use Status;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
@@ -32,7 +33,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @var EntityDocument|null
 	 */
-	private $entity = null;
+	private $entityForModification = null;
 
 	/**
 	 * @var EntityId|null
@@ -163,12 +164,30 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @return EntityDocument
 	 */
 	protected function getEntityForModification() {
-		if ( !$this->entity ) {
+		if ( !$this->entityForModification ) {
 			$revision = $this->getBaseRevision();
-			$this->entity = $revision->getEntity()->copy();
+			$this->entityForModification = $revision->getEntity()->copy();
 		}
 
-		return $this->entity;
+		return $this->entityForModification;
+	}
+
+	/**
+	 * Returns the EntityDocument that is to be shown by code in this class (or subclasses).
+	 * The returns null if no entity ID was specified in the request.
+	 *
+	 * @throws MessageException
+	 * @throws UserInputException
+	 *
+	 * @return EntityDocument|null
+	 */
+	protected function getEntityForDisplay() {
+		if ( $this->entityId ) {
+			$revision = $this->getBaseRevision();
+			return $revision->getEntity();
+		}
+
+		return null;
 	}
 
 	/**
@@ -186,36 +205,41 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->setHeaders();
 		$this->outputHeader();
 
-		$summary = false;
-		$entity = null;
-
 		try {
-			$this->prepareArguments( $subPage );
-
+			$this->processArguments( $subPage );
 			$valid = $this->validateInput();
-			$entity = $this->getEntityId() ? $this->getEntityForModification() : null;
+			$status = null;
 
-			if ( $valid && $entity ) {
-				$summary = $this->modifyEntity( $entity );
+			if ( $valid && $this->isModificationRequested() ) {
+				$updatedEntity = $this->getEntityForModification();
+				$summary = $this->modifyEntity( $updatedEntity );
+
+				if ( $summary ) {
+					$token = $this->getRequest()->getVal( 'wpEditToken' );
+					$status = $this->saveEntity( $updatedEntity, $summary, $token );
+
+					$this->handleStatus( $status, $updatedEntity );
+				}
+			}
+
+			if ( !$status || !$status->isOK() ) {
+				$entity = $this->getEntityForDisplay();
+				$this->setForm( $entity );
 			}
 		} catch ( UserInputException $ex ) {
 			$error = $this->msg( $ex->getKey(), $ex->getParams() )->parse();
 			$this->showErrorHTML( $error );
 		}
+	}
 
-		if ( !$entity || !$summary ) {
-			$this->setForm( $entity );
+	private function handleStatus( Status $status, EntityDocument $entity ) {
+		if ( $status->isOK() ) {
+			$entityUrl = $this->getEntityTitle( $this->getEntityId() )->getFullURL();
+			$this->getOutput()->redirect( $entityUrl );
 		} else {
-			$status = $this->saveEntity( $entity, $summary, $this->getRequest()->getVal( 'wpEditToken' ) );
-
-			if ( !$status->isOK() && $status->getErrorsArray() ) {
-				$errors = $status->getErrorsArray();
-				$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
-				$this->setForm( $entity );
-			} else {
-				$entityUrl = $this->getEntityTitle( $entity->getId() )->getFullURL();
-				$this->getOutput()->redirect( $entityUrl );
-			}
+			$errors = $status->getErrorsArray();
+			$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
+			$this->setForm( $entity );
 		}
 	}
 
@@ -224,7 +248,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @param string|null $subPage
 	 */
-	protected function prepareArguments( $subPage ) {
+	protected function processArguments( $subPage ) {
 		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$idString = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
@@ -305,14 +329,40 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Validates form input.
 	 *
-	 * The default implementation just checks whether a target entity was specified via a POST request.
+	 * The default implementation does nothing.
 	 * Subclasses should override this to detect otherwise incomplete or erroneous input.
 	 *
-	 * @return bool true if the form input is ok and normal processing should
-	 * continue by calling modifyEntity().
+	 * If this method returns false, the entity should not be updated and the user should be
+	 * presented with an input form. Only if it returns true, and isModificationRequested() also
+	 * returns true, the entity should be updated in the storage backend.
+	 *
+	 * @throws UserInputException if any of the provided input is invalid. If the input is
+	 *         merely incomplete, no exception should be raised.
+	 *
+	 * @return bool true if all input needed for modification has been supplied.
+	 *         false if the input is valid but incomplete, or if the input is invalid and
+	 *         showErrorHTML() has already been called to notify the user of the problem.
+	 *         The preferred way of indicating invalid input is however to throw a
+	 *         UserInputException.
 	 */
 	protected function validateInput() {
-		return $this->getEntityId() !== null && $this->getRequest()->wasPosted();
+		return $this->getEntityId() !== null;
+	}
+
+	/**
+	 * Whether the current request is a request for modification (as opposed to a
+	 * request for showing the input form).
+	 *
+	 * If this method returns false, the entity should not be updated and the user should be
+	 * presented with an input form. Only if it returns true, and validateInput() also
+	 * returns true, the entity should be updated in the storage backend.
+	 *
+	 * Undefined before processArguments() was called.
+	 *
+	 * @return bool
+	 */
+	protected function isModificationRequested() {
+		return $this->getRequest()->wasPosted();
 	}
 
 	/**

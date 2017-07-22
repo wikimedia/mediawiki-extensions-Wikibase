@@ -130,7 +130,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		$id = $this->createNewItemWithTerms( $language = 'de', $termValue = 'foo' );
 
-		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => '' ], true );
+		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => 'test' ], true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request, self::USER_LANGUAGE );
 
