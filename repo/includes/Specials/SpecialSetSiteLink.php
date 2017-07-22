@@ -125,12 +125,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::prepareArguments()
+	 * @see SpecialModifyEntity::processArguments()
 	 *
 	 * @param string|null $subPage
 	 */
-	protected function prepareArguments( $subPage ) {
-		parent::prepareArguments( $subPage );
+	protected function processArguments( $subPage ) {
+		parent::processArguments( $subPage );
 
 		$request = $this->getRequest();
 		// explode the sub page from the format Special:SetSitelink/q123/enwiki
@@ -161,6 +161,13 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->page = $request->getVal( 'page' );
 
+		// If the user just enters an item id and a site, dont remove the site link.
+		// The user can remove the site link in the second form where it has to be
+		// actually removed. This prevents users from removing site links accidentally.
+		if ( !$request->getCheck( 'remove' ) && $this->page === '' ) {
+			$this->page = null;
+		}
+
 		$this->badges = array_intersect(
 			array_keys( $this->badgeItems ),
 			$request->getArray( 'badges', [] )
@@ -173,21 +180,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	protected function validateInput() {
-		$request = $this->getRequest();
-
 		if ( !$this->isValidSiteId( $this->site ) ) {
 			return false;
 		}
 
-		if ( !parent::validateInput() ) {
+		if ( $this->page === null ) {
 			return false;
 		}
 
-		// If the user just enters an item id and a site, dont remove the site link.
-		// The user can remove the site link in the second form where it has to be
-		// actually removed. This prevents users from removing site links accidentally.
-		if ( !$request->getCheck( 'remove' ) && $this->page === '' ) {
-			$this->page = null;
+		if ( !parent::validateInput() ) {
 			return false;
 		}
 
