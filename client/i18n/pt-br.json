@@ -68,6 +68,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|links interlíngua}} na página)",
 	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"pageswithbadges": "Páginas com emblemas",
+	"wikibase-pageswithbadges-invalid-id": "$1 não é um ID de um item válido",
 	"wikibase-pageswithbadges-badge": "Emblema:",
 	"wikibase-pageswithbadges-submit": "Mostrar páginas",
 	"entityusage": "Uso da entidade",
