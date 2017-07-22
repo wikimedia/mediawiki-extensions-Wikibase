@@ -233,6 +233,9 @@ class DispatchChanges extends Maintenance {
 				} else {
 					$this->log( "ERROR: $ex" );
 				}
+				if ( $wikiState ) {
+					$dispatcher->getDispatchCoordinator()->releaseClient( $wikiState );
+				}
 			}
 
 			$t = ( microtime( true ) - $startTime );
