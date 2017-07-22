@@ -1,6 +1,16 @@
 {
-    "@metadata": {
-        "authors": []
-    },
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "A(z) „$1” típusú adatokat még nem támogatjuk."
+	"@metadata": {
+		"authors": [
+			"Bencemac",
+			"Wolf Rex"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A(z) „$1” típusú adatokat még nem támogatjuk.",
+	"valueview-expert-emptyvalue-empty": "üres",
+	"valueview-expert-timevalue-calendar-gregorian": "Gergely",
+	"valueview-expert-timeinput-calendar": "Naptár:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gergely-naptár)",
+	"valueview-expertextender-calendarhint-julian": "(Juliánus-naptár)",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Nyelv (kötelező):"
 }

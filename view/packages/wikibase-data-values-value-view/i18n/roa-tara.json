@@ -10,12 +10,20 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "'A gestione de valore pu tipe de date \"$1\" non g'è angore mandenute.",
 	"valueview-expert-emptyvalue-empty": "vacande",
 	"valueview-expert-globecoordinateinput-precision": "Precisione:",
+	"valueview-expert-globecoordinateinput-nullprecision": "Non specificate",
+	"valueview-expert-globecoordinateinput-customprecision": "speciale ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriane",
 	"valueview-expert-timevalue-calendar-julian": "Giuliane",
 	"valueview-expert-timeinput-precision": "Precisione:",
 	"valueview-expert-timeinput-calendar": "Calendarije:",
 	"valueview-expertextender-calendarhint-gregorian": "(calendarije gregoriane)",
+	"valueview-expertextender-calendarhint-julian": "(Calendarije giugliane)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; cange jndr'à 'u gregoriane",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; cange jndr'à 'u giugliane",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Lènghe (obbligatorie):",
+	"valueview-expertextender-unitsuggester-label": "Aunità (opzionale):",
 	"valueview-preview-label": "avène fatte vedè cumme:",
-	"valueview-preview-novalue": "nisciune valore valore acchiate"
+	"valueview-preview-novalue": "nisciune valore valore acchiate",
+	"valueview-listrotator-manually": "'mboste a màne"
 }
