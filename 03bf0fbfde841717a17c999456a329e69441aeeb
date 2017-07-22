@@ -16,6 +16,24 @@
       "revId": "03bf0fbfde841717a17c999456a329e69441aeeb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_fee5ff06",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-22T11:11:15Z",
+      "side": 1,
+      "message": "https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/22c655666a651864674826be72c4f697d9281e6c/view/resources/wikibase/resources.php#L50 ?",
+      "parentUuid": "6e71af52_dbd136d2",
+      "revId": "03bf0fbfde841717a17c999456a329e69441aeeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
