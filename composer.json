@@ -40,7 +40,7 @@
 		"wikibase/javascript-api": "^2.2.2",
 		"wikibase/serialization-javascript": "^2.0.8",
 		"diff/diff": "^2.0.0",
-		"wikimedia/purtle": "^1.0.3"
+		"wikimedia/purtle": "^1.0.6"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
