@@ -200,6 +200,7 @@ class DispatchChanges extends Maintenance {
 				break;
 			}
 
+			$wikiState = null;
 			$runStartTime = microtime( true );
 			$c++;
 
@@ -232,6 +233,9 @@ class DispatchChanges extends Maintenance {
 					sleep( $delay );
 				} else {
 					$this->log( "ERROR: $ex" );
+				}
+				if ( $wikiState ) {
+					$dispatcher->getDispatchCoordinator()->releaseClient( $wikiState );
 				}
 			}
 
