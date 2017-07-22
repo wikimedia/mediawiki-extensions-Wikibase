@@ -108,7 +108,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 				]
 			),
-			new SqlIdGenerator( wfGetLB() )
+			new SqlIdGenerator( wfGetLB() ),
+			$wikibaseRepo->getEntityIdComposer()
 		);
 
 		return [ $store, $lookup ];

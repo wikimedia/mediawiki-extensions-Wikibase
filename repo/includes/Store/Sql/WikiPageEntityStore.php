@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\StorageException;
@@ -47,14 +48,22 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private $dispatcher;
 
+	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
 	public function __construct(
 		EntityContentFactory $contentFactory,
-		IdGenerator $idGenerator
+		IdGenerator $idGenerator,
+		EntityIdComposer $entityIdComposer
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
 
 		$this->dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
+
+		$this->entityIdComposer = $entityIdComposer;
 	}
 
 	/**
@@ -92,8 +101,8 @@ class WikiPageEntityStore implements EntityStore {
 		$contentModelId = $handler->getModelID();
 		$numericId = $this->idGenerator->getNewId( $contentModelId );
 
-		// FIXME: this relies on setId() accepting numeric IDs! Use an EntityIdComposer instead.
-		$entity->setId( $numericId );
+		$entityId = $this->entityIdComposer->composeEntityId( '', $type, $numericId );
+		$entity->setId( $entityId );
 	}
 
 	/**
