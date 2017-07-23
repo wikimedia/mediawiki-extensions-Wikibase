@@ -350,28 +350,4 @@
 		sitelinklistview.enterNewItem();
 	} );
 
-	QUnit.test( 'remove empty sitelinkview when hitting backspace', function ( assert ) {
-		assert.expect( 2 );
-		var $sitelinklistview = createSitelinklistview(),
-			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
-
-		// Have to create two because the last empty item is never removed
-		sitelinklistview.enterNewItem();
-		sitelinklistview.enterNewItem();
-
-		var listview = sitelinklistview.$listview.data( 'listview' ),
-			sitelinkview = listview.value()[ 0 ];
-
-		sitelinkview.isEmpty = function () {
-			return true;
-		};
-
-		assert.equal( listview.items().length, 2 );
-		var e = $.Event( 'keydown' );
-		e.which = e.keyCode = $.ui.keyCode.BACKSPACE;
-		sitelinkview.element.trigger( e );
-
-		assert.equal( listview.items().length, 1 );
-	} );
-
 }( jQuery, wikibase, QUnit ) );
