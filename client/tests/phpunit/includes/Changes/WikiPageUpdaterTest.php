@@ -2,9 +2,10 @@
 
 namespace Wikibase\Client\Tests\Changes;
 
+use IJobSpecification;
 use Job;
 use JobQueueGroup;
-use RecentChange;
+use PHPUnit_Framework_MockObject_MockObject;
 use RefreshLinksJob;
 use Title;
 use Wikibase\Client\Changes\WikiPageUpdater;
@@ -28,7 +29,7 @@ use Wikimedia\Rdbms\LBFactory;
 class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return JobQueueGroup
+	 * @return JobQueueGroup|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getJobQueueGroupMock() {
 		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
@@ -66,17 +67,18 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $text
+	 * @param int $id
 	 *
-	 * @return Title
+	 * @return Title|PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getTitleMock( $text ) {
+	private function getTitleMock( $text, $id = 23 ) {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$title->expects( $this->any() )
 			->method( 'getArticleID' )
-			->will( $this->returnValue( 23 ) );
+			->will( $this->returnValue( $id ) );
 
 		$title->expects( $this->any() )
 			->method( 'exists' )
@@ -86,27 +88,38 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->method( 'getPrefixedDBkey' )
 			->will( $this->returnValue( $text ) );
 
+		$title->expects( $this->any() )
+			->method( 'getDBkey' )
+			->will( $this->returnValue( $text ) );
+
+		$title->expects( $this->any() )
+			->method( 'getText' )
+			->will( $this->returnValue( $text ) );
+
+		$title->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( 0 ) );
+
+		$title->expects( $this->any() )
+			->method( 'getNsText' )
+			->will( $this->returnValue( '' ) );
+
 		return $title;
 	}
 
 	/**
-	 * @return EntityChange
+	 * @param int $id
+	 *
+	 * @return PHPUnit_Framework_MockObject_MockObject|EntityChange
 	 */
-	private function getEntityChangeMock() {
+	private function getEntityChangeMock( $id = 77 ) {
 		$change = $this->getMockBuilder( EntityChange::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		return $change;
-	}
-
-	/**
-	 * @return RecentChange
-	 */
-	private function getRecentChangeMock() {
-		$change = $this->getMockBuilder( RecentChange::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$change->expects( $this->any() )
+			->method( 'getId' )
+			->will( $this->returnValue( $id ) );
 
 		return $change;
 	}
@@ -196,68 +209,43 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testInjectRCRecords() {
-		$title = $this->getTitleMock( 'Foo' );
+		$titleFoo = $this->getTitleMock( 'Foo', 21 );
+		$titleBar = $this->getTitleMock( 'Bar', 22 );
+		$titleCuzz = $this->getTitleMock( 'Cuzz', 23 );
+
 		$change = $this->getEntityChangeMock();
-		$rc = $this->getRecentChangeMock();
 
-		$rcFactory = $this->getRCFactoryMock();
+		$jobQueueGroup = $this->getJobQueueGroupMock();
 
-		$rcFactory->expects( $this->once() )
-			->method( 'newRecentChange' )
-			->with( $change, $title, [] )
-			->will( $this->returnValue( $rc ) );
+		$pages = [];
+		$jobQueueGroup->expects( $this->atLeastOnce() )
+			->method( 'lazyPush' )
+			->will( $this->returnCallback( function( IJobSpecification $job ) use ( &$pages, $change ) {
+				$params = $job->getParams();
 
-		$rcDupeDetector = $this->getRCDupeDetectorMock();
+				$this->assertArrayHasKey( 'change', $params, '$params["change"]' );
+				$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
 
-		$rcDupeDetector->expects( $this->once() )
-			->method( 'changeExists' )
-			->with( $rc );
+				$this->assertSame( $change->getId(), $params["change"] );
+
+				$pages += $params['pages']; // addition uses keys, array_merge does not
+			} ) );
 
 		$updater = new WikiPageUpdater(
-			$this->getJobQueueGroupMock(),
-			$rcFactory,
+			$jobQueueGroup,
+			$this->getRCFactoryMock(),
 			$this->getLBFactoryMock(),
-			$rcDupeDetector
+			$this->getRCDupeDetectorMock()
 		);
 
 		$updater->injectRCRecords( [
-			$title
+			$titleFoo, $titleBar, $titleCuzz,
 		], $change );
-	}
 
-	public function testInjectRCRecords_batch() {
-		$titleFoo = $this->getTitleMock( 'Foo' );
-		$titleBar = $this->getTitleMock( 'Bar' );
-		$titleCuzz = $this->getTitleMock( 'Cuzz' );
-
-		$change = $this->getEntityChangeMock();
-		$rc = $this->getRecentChangeMock();
-
-		$rcFactory = $this->getRCFactoryMock();
-
-		$rcFactory->expects( $this->any() )
-			->method( 'newRecentChange' )
-			->will( $this->returnValue( $rc ) );
-
-		$rcDupeDetector = $this->getRCDupeDetectorMock();
-
-		$lbFactory = $this->getLBFactoryMock();
-		$lbFactory->expects( $this->exactly( 2 ) )
-			->method( 'commitAndWaitForReplication' );
-
-		$updater = new WikiPageUpdater(
-			$this->getJobQueueGroupMock(),
-			$rcFactory,
-			$lbFactory,
-			$rcDupeDetector
-		);
-
-		$updater->setDbBatchSize( 2 );
-
-		$updater->injectRCRecords(
-			[ $titleFoo, $titleBar, $titleCuzz ],
-			$change
-		);
+		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
+		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
+		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
+		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
 	}
 
 }

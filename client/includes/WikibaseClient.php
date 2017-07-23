@@ -1186,7 +1186,7 @@ final class WikibaseClient {
 	/**
 	 * @return RecentChangeFactory
 	 */
-	private function getRecentChangeFactory() {
+	public function getRecentChangeFactory() {
 		return new RecentChangeFactory(
 			$this->getContentLanguage(),
 			new SiteLinkCommentCreator(
