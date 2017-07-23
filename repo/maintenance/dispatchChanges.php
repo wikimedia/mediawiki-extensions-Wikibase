@@ -8,6 +8,7 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use MWExceptionHandler;
+use UnexpectedValueException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -17,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikimedia\Assert\Assert;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -64,18 +66,34 @@ class DispatchChanges extends Maintenance {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param string[] $clientWikis as defined in the localClientDatabases config setting.
 	 *
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
-	private function getClientWikis( SettingsArray $settings ) {
-		$clientWikis = $settings->getSetting( 'localClientDatabases' );
+	private function getClientWikis( array $clientWikis ) {
+		Assert::parameterElementType( 'string', $clientWikis, '$clientWikis' );
 
 		// make sure we have a mapping from siteId to database name in clientWikis:
 		foreach ( $clientWikis as $siteID => $dbName ) {
 			if ( is_int( $siteID ) ) {
 				unset( $clientWikis[$siteID] );
-				$clientWikis[$dbName] = $dbName;
+				$siteID = $dbName;
+			}
+			$clientWikis[$siteID] = $dbName;
+		}
+
+		// If this repo is also a client, make sure it dispatches also to itself.
+		if ( WikibaseSettings::isClientEnabled() ) {
+			$clientSettings = WikibaseSettings::getClientSettings();
+			$repoName = $clientSettings->getSetting( 'repoSiteId' );
+			$repoDb = $clientSettings->getSetting( 'repoDatabase' );
+
+			if ( $repoDb === false ) {
+				$repoDb = MediaWikiServices::getInstance()->getMainConfig()->get( 'DBname' );
+			}
+
+			if ( !isset( $clientWikis[$repoName] ) ) {
+				$clientWikis[$repoName] = $repoDb;
 			}
 		}
 
@@ -165,7 +183,10 @@ class DispatchChanges extends Maintenance {
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$clientWikis = $this->getClientWikis( $wikibaseRepo->getSettings() );
+
+		$clientWikis = $this->getClientWikis(
+			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' )
+		);
 
 		if ( empty( $clientWikis ) ) {
 			throw new MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
