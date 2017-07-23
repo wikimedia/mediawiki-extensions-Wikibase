@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_247db6e4",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2017-07-23T02:06:29Z",
+      "side": 1,
+      "message": "__METHOD__ here must either be from the calling job\u0027s run() method or that job must pass the ticket itself to this Updater instance and use that in commitAndWaitForReplication.",
+      "revId": "24d45d6d0cfcf3eba443a1e47a88e444adf76d36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
