@@ -158,7 +158,6 @@
 				// Adding/removing badges decreases/increases available space:
 				self.updatePageNameInputAutoExpand();
 				self._trigger( 'change' );
-				self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
 			} );
 
 			this._badgeselector = $badgeselector.data( 'badgeselector' );
