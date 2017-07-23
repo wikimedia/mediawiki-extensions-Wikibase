@@ -182,6 +182,24 @@ call_user_func( function() {
 	// job classes
 	$wgJobClasses['wikibase-addUsagesForPage'] = Wikibase\Client\Store\AddUsagesForPageJob::class;
 	$wgJobClasses['ChangeNotification'] = Wikibase\Client\ChangeNotificationJob::class;
+	$wgJobClasses['wikibase-InjectRCRecords'] = function ( Title $unused, array $params ) {
+		$mwServices = \MediaWiki\MediaWikiServices::getInstance();
+		$wbServices = Wikibase\Client\WikibaseClient::getDefaultInstance();
+
+		$job = new \Wikibase\Client\Changes\InjectRCRecordsJob(
+			$mwServices->getDBLoadBalancerFactory(),
+			$wbServices->getStore()->getEntityChangeLookup(),
+			$wbServices->getRecentChangeFactory(),
+			$params
+		);
+
+		$job->setRecentChangesDuplicateDetector( $wbServices->getStore()->getRecentChangesDuplicateDetector() );
+
+		$job->setLogger( \MediaWiki\Logger\LoggerFactory::getInstance( 'wikibase.client.pageupdates' ) );
+		$job->setStats( $mwServices->getStatsdDataFactory() );
+
+		return $job;
+	};
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
