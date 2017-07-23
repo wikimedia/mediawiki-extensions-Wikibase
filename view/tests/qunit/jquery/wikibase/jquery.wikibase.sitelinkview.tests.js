@@ -271,20 +271,4 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', 1, function ( assert ) {
-		var $sitelinkview = createSitelinkview(),
-			sitelinkview = $sitelinkview.data( 'sitelinkview' );
-
-		$sitelinkview
-		.addClass( 'wb-error' )
-		.on( 'sitelinkviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered toggleerror event.'
-			);
-		} );
-
-		sitelinkview.setError();
-	} );
-
 }( jQuery, wikibase, QUnit ) );
