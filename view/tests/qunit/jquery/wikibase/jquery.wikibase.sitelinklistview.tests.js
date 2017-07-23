@@ -351,7 +351,7 @@
 	} );
 
 	QUnit.test( 'remove empty sitelinkview when hitting backspace', function ( assert ) {
-		assert.expect( 2 );
+		assert.expect( 1 );
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -366,7 +366,7 @@
 			return true;
 		};
 
-		assert.equal( listview.items().length, 2 );
+		assert.equal( listview.items().length, 1 );
 		var e = $.Event( 'keydown' );
 		e.which = e.keyCode = $.ui.keyCode.BACKSPACE;
 		sitelinkview.element.trigger( e );
