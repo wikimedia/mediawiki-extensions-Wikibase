@@ -351,7 +351,7 @@
 	} );
 
 	QUnit.test( 'remove empty sitelinkview when hitting backspace', function ( assert ) {
-		assert.expect( 2 );
+		assert.expect( 1 );
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
