@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_154ea69b",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-23T11:49:49Z",
+      "side": 1,
+      "message": "If selectClient() throws, $wikiState is undefined here, triggering a warning.\nAlso, if something throws after dispatchTo(), the lock may already have been released. But that shouldn\u0027t be a problem.",
+      "revId": "38410df2358698e4baa7d22e3c519c9d85d46cf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
