@@ -155,40 +155,16 @@ class WikiPageUpdater implements PageUpdater {
 	 * @param EntityChange $change
 	 */
 	public function injectRCRecords( array $titles, EntityChange $change ) {
-		$rcAttribs = $this->recentChangeFactory->prepareChangeAttributes( $change );
-
-		$c = 0;
-		$trxToken = $this->LBFactory->getEmptyTransactionTicket( __METHOD__ );
-
-		// TODO: do this via the job queue, in batches, see T107722
-		foreach ( $titles as $title ) {
-			if ( !$title->exists() ) {
-				continue;
-			}
-
-			$rc = $this->recentChangeFactory->newRecentChange( $change, $title, $rcAttribs );
-
-			if ( $this->recentChangesDuplicateDetector
-				&& $this->recentChangesDuplicateDetector->changeExists( $rc )
-			) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": skipping duplicate RC entry for " . $title->getFullText() );
-			} else {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
-				$rc->save();
-			}
-
-			if ( ++$c >= $this->dbBatchSize ) {
-				$this->LBFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
-				$trxToken = $this->LBFactory->getEmptyTransactionTicket( __METHOD__ );
-				$c = 0;
-			}
+		if ( $titles === [] ) {
+			return;
 		}
 
-		if ( $c > 0 ) {
-			$this->LBFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
-		}
+		$jobSpec = InjectRCRecordsJob::makeJobSpecification( $titles, $change );
 
-		$this->incrementStats( 'InjectRCRecords', count( $titles ) );
+		$this->jobQueueGroup->lazyPush( $jobSpec );
+
+		$this->incrementStats( 'InjectRCRecords.jobs', 1 );
+		$this->incrementStats( 'InjectRCRecords.titles', count( $titles ) );
 	}
 
 }
