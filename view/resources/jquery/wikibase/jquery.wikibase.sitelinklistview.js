@@ -152,65 +152,21 @@
 				}
 				self._trigger( 'change' );
 			} )
-			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function ( event, error ) {
-				event.stopPropagation();
-			} )
-			.on( 'keydown.' + this.widgetName, function ( event ) {
-				if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
-					var $sitelinkview = $( event.target ).parentsUntil( this ).addBack().filter( '.listview-item' ),
-						sitelinkview = listItemAdapter.liInstance( $sitelinkview );
-
-					if ( sitelinkview ) {
-						self._removeSitelinkviewIfEmpty( sitelinkview, event ); // FIXME: Move to sitelinkview
-					}
-				}
+			.on( 'removetoolbarremove.' + this.widgetName, function ( event ) {
+				self._updateAutoInput();
 			} )
 			.on(
 				[
 					listItemAdapter.prefixedEvent( 'create.' + this.widgetName ),
 					listItemAdapter.prefixedEvent( 'afterstartediting.' + this.widgetName ),
 					listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
-					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
+					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ),
+					listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName )
 				].join( ' ' ),
 				function ( event ) {
 					event.stopPropagation();
 				}
 			);
-		},
-
-		/**
-		 * @param {jQuery.wikibase.sitelinkview} sitelinkview
-		 * @param {jQuery.Event} event
-		 */
-		_removeSitelinkviewIfEmpty: function ( sitelinkview, event ) {
-			var $sitelinkview = sitelinkview.element,
-				listview = this.$listview.data( 'listview' ),
-				lia = listview.listItemAdapter(),
-				$items = listview.items(),
-				isLast = $sitelinkview.get( 0 ) === $items.last().get( 0 ),
-				isEmpty = sitelinkview.isEmpty()
-					|| sitelinkview.option( 'value' ) && !sitelinkview.value();
-
-			if ( isEmpty ) {
-				event.preventDefault();
-				event.stopPropagation();
-
-				// Shift focus to previous line or to following line if there is no previous:
-				$items.each( function ( i ) {
-					if ( this === $sitelinkview.get( 0 ) ) {
-						if ( i > 0 ) {
-							lia.liInstance( $items.eq( i - 1 ) ).focus();
-						} else if ( $items.length > 1 ) {
-							lia.liInstance( $items.eq( i + 1 ) ).focus();
-						}
-						return false;
-					}
-				} );
-
-				if ( !isLast ) {
-					listview.removeItem( $sitelinkview );
-				}
-			}
 		},
 
 		_updateAutoInput: function () {
