@@ -16,6 +16,24 @@
       "revId": "24d45d6d0cfcf3eba443a1e47a88e444adf76d36",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_44bebdd2",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-23T13:42:11Z",
+      "side": 1,
+      "message": "Neither of these options seems appealing.\nI think I\u0027ll factor this into a separate job class.\n\nShould i schedule one job per batch, or do batching and waiting inside the job?\n\nIf I schedule one job per batch, does waiting for replication actually keep the \"next\" job from running until the changes have been replicated? How does that work?\n\nIt would be nice if we could better model causal relationships between jobs...",
+      "parentUuid": "6e71af52_247db6e4",
+      "revId": "24d45d6d0cfcf3eba443a1e47a88e444adf76d36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
