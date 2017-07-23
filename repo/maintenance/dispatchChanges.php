@@ -8,6 +8,7 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use MWExceptionHandler;
+use UnexpectedValueException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -64,18 +65,40 @@ class DispatchChanges extends Maintenance {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param array $clientWikis
 	 *
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
-	private function getClientWikis( SettingsArray $settings ) {
-		$clientWikis = $settings->getSetting( 'localClientDatabases' );
-
+	private function getClientWikis( array $clientWikis ) {
 		// make sure we have a mapping from siteId to database name in clientWikis:
 		foreach ( $clientWikis as $siteID => $dbName ) {
+
+			// Don't support `false` as a representation of the local database here.
+			if ( !is_string( $dbName ) ) {
+				throw new UnexpectedValueException(
+					'Encountered a non-string in the list of client databases.'
+				);
+			}
+
 			if ( is_int( $siteID ) ) {
 				unset( $clientWikis[$siteID] );
-				$clientWikis[$dbName] = $dbName;
+				$siteID = $dbName;
+			}
+			$clientWikis[$siteID] = $dbName;
+		}
+
+		// If this repo is also a client, make sure it dispatches also to itself.
+		if ( WikibaseSettings::isClientEnabled() ) {
+			$clientSettings = WikibaseSettings::getClientSettings();
+			$repoName = $clientSettings->getSetting( 'repoSiteId' );
+			$repoDb = $clientSettings->getSetting( 'repoDatabase' );
+
+			if ( $repoDb === false ) {
+				$repoDb = MediaWikiServices::getInstance()->getMainConfig()->get( 'DBname' );
+			}
+
+			if ( !isset( $clientWikis[$repoName] ) ) {
+				$clientWikis[$repoName] = $repoDb;
 			}
 		}
 
@@ -165,7 +188,10 @@ class DispatchChanges extends Maintenance {
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$clientWikis = $this->getClientWikis( $wikibaseRepo->getSettings() );
+
+		$clientWikis = $this->getClientWikis(
+			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' )
+		);
 
 		if ( empty( $clientWikis ) ) {
 			throw new MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
