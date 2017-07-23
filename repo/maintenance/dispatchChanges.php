@@ -64,19 +64,23 @@ class DispatchChanges extends Maintenance {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param array $clientWikis
+	 * @param string $localDBname
 	 *
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
-	private function getClientWikis( SettingsArray $settings ) {
-		$clientWikis = $settings->getSetting( 'localClientDatabases' );
-
+	private function getClientWikis( array $clientWikis, $localDBname ) {
 		// make sure we have a mapping from siteId to database name in clientWikis:
 		foreach ( $clientWikis as $siteID => $dbName ) {
+			if ( $dbName === false ) {
+				// resolve local DB name
+				$dbName = $localDBname;
+			}
 			if ( is_int( $siteID ) ) {
 				unset( $clientWikis[$siteID] );
-				$clientWikis[$dbName] = $dbName;
+				$siteID = $dbName;
 			}
+			$clientWikis[$siteID] = $dbName;
 		}
 
 		return $clientWikis;
@@ -165,7 +169,12 @@ class DispatchChanges extends Maintenance {
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$clientWikis = $this->getClientWikis( $wikibaseRepo->getSettings() );
+		$mediaWikiServices = MediaWikiServices::getInstance();
+
+		$clientWikis = $this->getClientWikis(
+			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' ),
+			$mediaWikiServices->getMainConfig()->get( 'DBname' )
+		);
 
 		if ( empty( $clientWikis ) ) {
 			throw new MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
@@ -179,7 +188,7 @@ class DispatchChanges extends Maintenance {
 
 		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );
 
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$stats = $mediaWikiServices->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.dispatchChanges.start' );
 
 		$passes = $maxPasses === PHP_INT_MAX ? "unlimited" : $maxPasses;
