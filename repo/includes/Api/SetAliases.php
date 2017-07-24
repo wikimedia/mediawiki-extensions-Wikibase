@@ -164,38 +164,38 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
 	 *
 	 * @return ChangeOpAliases[]
 	 */
-	private function getChangeOps( array $params ) {
+	private function getChangeOps( array $preparedParameters ) {
 		$changeOps = [];
-		$language = $params['language'];
+		$language = $preparedParameters['language'];
 
 		// Set the list of aliases to a user given one OR add/ remove certain entries
-		if ( isset( $params['set'] ) ) {
+		if ( isset( $preparedParameters['set'] ) ) {
 			$changeOps[] =
 				$this->termChangeOpFactory->newSetAliasesOp(
 					$language,
-					$this->normalizeAliases( $params['set'] )
+					$this->normalizeAliases( $preparedParameters['set'] )
 				);
 		} else {
 			// FIXME: if we have ADD and REMOVE operations in the same call,
 			// we will also have two ChangeOps updating the same edit summary.
 			// This will cause the edit summary to be overwritten by the last ChangeOp beeing applied.
-			if ( !empty( $params['add'] ) ) {
+			if ( !empty( $preparedParameters['add'] ) ) {
 				$changeOps[] =
 					$this->termChangeOpFactory->newAddAliasesOp(
 						$language,
-						$this->normalizeAliases( $params['add'] )
+						$this->normalizeAliases( $preparedParameters['add'] )
 					);
 			}
 
-			if ( !empty( $params['remove'] ) ) {
+			if ( !empty( $preparedParameters['remove'] ) ) {
 				$changeOps[] =
 					$this->termChangeOpFactory->newRemoveAliasesOp(
 						$language,
-						$this->normalizeAliases( $params['remove'] )
+						$this->normalizeAliases( $preparedParameters['remove'] )
 					);
 			}
 		}

@@ -136,16 +136,16 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
 	 *
 	 * @return ChangeOpSiteLink
 	 */
-	private function getChangeOp( array $params ) {
-		if ( $this->shouldRemove( $params ) ) {
-			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+	private function getChangeOp( array $preparedParameters ) {
+		if ( $this->shouldRemove( $preparedParameters ) ) {
+			$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 			return $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
-			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+			$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 			$site = $sites->getSite( $linksite );
 
@@ -156,12 +156,12 @@ class SetSiteLink extends ModifyEntity {
 				);
 			}
 
-			if ( isset( $params['linktitle'] ) ) {
-				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
+			if ( isset( $preparedParameters['linktitle'] ) ) {
+				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $preparedParameters['linktitle'] ) );
 
 				if ( $page === false ) {
 					$this->errorReporter->dieWithError(
-						[ 'wikibase-api-no-external-page', $linksite, $params['linktitle'] ],
+						[ 'wikibase-api-no-external-page', $linksite, $preparedParameters['linktitle'] ],
 						'no-external-page'
 					);
 				}
@@ -169,8 +169,8 @@ class SetSiteLink extends ModifyEntity {
 				$page = null;
 			}
 
-			$badges = ( isset( $params['badges'] ) )
-				? $this->parseSiteLinkBadges( $params['badges'] )
+			$badges = ( isset( $preparedParameters['badges'] ) )
+				? $this->parseSiteLinkBadges( $preparedParameters['badges'] )
 				: null;
 
 			return $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
