@@ -88,32 +88,32 @@ class SetSiteLink extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
-	 * @param array $params
+	 * @param array $preparedParameters
 	 * @param int $baseRevId
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId ) {
 		if ( !( $entity instanceof Item ) ) {
 			$this->errorReporter->dieError( "The given entity is not an item", "not-item" );
 		}
 
 		$item = $entity;
-		$summary = $this->createSummary( $params );
-		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+		$summary = $this->createSummary( $preparedParameters );
+		$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 		$hasLinkWithSiteId = $item->getSiteLinkList()->hasLinkWithSiteId( $linksite );
 		$resultBuilder = $this->getResultBuilder();
 
-		if ( $this->shouldRemove( $params ) ) {
+		if ( $this->shouldRemove( $preparedParameters ) ) {
 			if ( $hasLinkWithSiteId ) {
-				$changeOp = $this->getChangeOp( $params );
+				$changeOp = $this->getChangeOp( $preparedParameters );
 				$siteLink = $item->getSiteLinkList()->getBySiteId( $linksite );
 				$this->applyChangeOp( $changeOp, $entity, $summary );
 				$resultBuilder->addRemovedSiteLinks( new SiteLinkList( [ $siteLink ] ), 'entity' );
 			}
 		} else {
 			try {
-				$changeOp = $this->getChangeOp( $params );
+				$changeOp = $this->getChangeOp( $preparedParameters );
 
 				$result = $changeOp->validate( $entity );
 				if ( !$result->isValid() ) {

@@ -192,24 +192,29 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
+	protected function prepareParameters( array $params ) {
+		$this->validateDataParameter( $params );
+		$params['data'] = json_decode( $params['data'], true );
+		return parent::prepareParameters( $params );
+	}
+
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
-	 * @param array $params
+	 * @param array $preparedParameters
 	 * @param int $baseRevId
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
-		$this->validateDataParameter( $params );
-		$data = json_decode( $params['data'], true );
+	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId ) {
+		$data = $preparedParameters['data'];
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
 		$exists = $this->entityExists( $entity->getId() );
 
-		if ( $params['clear'] ) {
-			if ( $params['baserevid'] && $exists ) {
+		if ( $preparedParameters['clear'] ) {
+			if ( $preparedParameters['baserevid'] && $exists ) {
 				$latestRevision = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
@@ -245,7 +250,7 @@ class EditEntity extends ModifyEntity {
 		$this->applyChangeOp( $changeOps, $entity );
 
 		$this->buildResult( $entity );
-		return $this->getSummary( $params );
+		return $this->getSummary( $preparedParameters );
 	}
 
 	/**
@@ -267,16 +272,16 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
 	 *
 	 * @return Summary
 	 */
-	private function getSummary( array $params ) {
+	private function getSummary( array $preparedParameters ) {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?
-		$summary = $this->createSummary( $params );
-		if ( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
-			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
+		$summary = $this->createSummary( $preparedParameters );
+		if ( isset( $preparedParameters['id'] ) xor ( isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] ) ) ) {
+			$summary->setAction( $preparedParameters['clear'] === false ? 'update' : 'override' );
 		} else {
 			$summary->setAction( 'create' );
 		}

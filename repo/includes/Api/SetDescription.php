@@ -44,20 +44,20 @@ class SetDescription extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 *
 	 * @param EntityDocument &$entity
-	 * @param array $params
+	 * @param array $preparedParameters
 	 * @param int $baseRevId
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
 		}
 
-		$summary = $this->createSummary( $params );
-		$language = $params['language'];
+		$summary = $this->createSummary( $preparedParameters );
+		$language = $preparedParameters['language'];
 
-		$changeOp = $this->getChangeOp( $params );
+		$changeOp = $this->getChangeOp( $preparedParameters );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		$descriptions = $entity->getDescriptions();

@@ -156,12 +156,12 @@ abstract class ModifyEntity extends ApiBase {
 	 * Actually modify the entity.
 	 *
 	 * @param EntityDocument &$entity
-	 * @param array $params
+	 * @param array $preparedParameters
 	 * @param int $baseRevId
 	 *
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
-	abstract protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId );
+	abstract protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId );
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
@@ -196,6 +196,14 @@ abstract class ModifyEntity extends ApiBase {
 		} catch ( ChangeOpException $ex ) {
 			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}
+	}
+
+	/**
+	 * @param array $params
+	 * @return array
+	 */
+	protected function prepareParameters( array $params ) {
+		return $params;
 	}
 
 	/**
@@ -246,7 +254,10 @@ abstract class ModifyEntity extends ApiBase {
 			$this->errorReporter->dieStatus( $status, 'permissiondenied' );
 		}
 
-		$summary = $this->modifyEntity( $entity, $params, $entityRevId );
+		$preparedParameters = $this->prepareParameters( $params );
+		unset( $params );
+
+		$summary = $this->modifyEntity( $entity, $preparedParameters, $entityRevId );
 
 		if ( !$summary ) {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
