@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e71af52_6e8f10d2",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-24T19:40:13Z",
+      "side": 1,
+      "message": "This seems redundant with the signature typehint.",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 55
+      },
+      "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_475a3ffb",
         "filename": "client/includes/Changes/InjectRCRecordsJob.php",
         "patchSetId": 2
