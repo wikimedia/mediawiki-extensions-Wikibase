@@ -79,13 +79,6 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testWhenIdSetWithNumber_GetIdReturnsPropertyId() {
-		$property = Property::newFromType( 'string' );
-		$property->setId( 42 );
-
-		$this->assertHasCorrectIdType( $property );
-	}
-
 	protected function assertHasCorrectIdType( Property $property ) {
 		$this->assertInstanceOf( PropertyId::class, $property->getId() );
 	}
@@ -103,7 +96,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 	public function testPropertyWithIdIsEmpty() {
 		$property = Property::newFromType( 'string' );
-		$property->setId( 1337 );
+		$property->setId( new PropertyId( 'P1337' ) );
 		$this->assertTrue( $property->isEmpty() );
 	}
 
@@ -144,10 +137,10 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$secondProperty->setStatements( $this->newNonEmptyStatementList() );
 
 		$secondPropertyWithId = $secondProperty->copy();
-		$secondPropertyWithId->setId( 42 );
+		$secondPropertyWithId->setId( new PropertyId( 'P42' ) );
 
 		$differentId = $secondPropertyWithId->copy();
-		$differentId->setId( 43 );
+		$differentId->setId( new PropertyId( 'P43' ) );
 
 		return [
 			[ Property::newFromType( 'string' ), Property::newFromType( 'string' ) ],
@@ -168,7 +161,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 	private function getBaseProperty() {
 		$property = Property::newFromType( 'string' );
 
-		$property->setId( 42 );
+		$property->setId( new PropertyId( 'P42' ) );
 		$property->setLabel( 'en', 'Same' );
 		$property->setDescription( 'en', 'Same' );
 		$property->setAliases( 'en', [ 'Same' ] );
@@ -407,7 +400,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 		// ID only
 		$entity = clone $entity;
-		$entity->setId( 44 );
+		$entity->setId( new PropertyId( 'P44' ) );
 
 		$entities[] = $entity;
 
@@ -421,7 +414,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 		// with labels etc and ID
 		$entity = clone $entity;
-		$entity->setId( 42 );
+		$entity->setId( new PropertyId( 'P42' ) );
 
 		$entities[] = $entity;
 
