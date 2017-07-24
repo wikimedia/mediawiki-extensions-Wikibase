@@ -198,6 +198,45 @@ class EditEntity extends ModifyEntity {
 		return parent::prepareParameters( $params );
 	}
 
+	protected function validateEntitySpecificParameters(
+		array $preparedParameters,
+		EntityDocument $entity,
+		$entityRevId
+	) {
+		$data = $preparedParameters['data'];
+		$this->validateDataProperties( $data, $entity, $entityRevId );
+
+		$exists = $this->entityExists( $entity->getId() );
+
+		if ( $preparedParameters['clear'] ) {
+			if ( $preparedParameters['baserevid'] && $exists ) {
+				$latestRevision = $this->revisionLookup->getLatestRevisionId(
+					$entity->getId(),
+					EntityRevisionLookup::LATEST_FROM_MASTER
+				);
+
+				if ( !$entityRevId === $latestRevision ) {
+					$this->errorReporter->dieError(
+						'Tried to clear entity using baserevid of entity not equal to current revision',
+						'editconflict'
+					);
+				}
+			}
+		}
+
+		// if we create a new property, make sure we set the datatype
+		if ( !$exists && $entity instanceof Property ) {
+			if ( !isset( $data['datatype'] )
+				|| !in_array( $data['datatype'], $this->propertyDataTypes )
+			) {
+				$this->errorReporter->dieWithError(
+					'wikibase-api-not-recognized-datatype',
+					'param-illegal'
+				);
+			}
+		}
+	}
+
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 *
@@ -214,34 +253,11 @@ class EditEntity extends ModifyEntity {
 		$exists = $this->entityExists( $entity->getId() );
 
 		if ( $preparedParameters['clear'] ) {
-			if ( $preparedParameters['baserevid'] && $exists ) {
-				$latestRevision = $this->revisionLookup->getLatestRevisionId(
-					$entity->getId(),
-					EntityRevisionLookup::LATEST_FROM_MASTER
-				);
-
-				if ( !$baseRevId === $latestRevision ) {
-					$this->errorReporter->dieError(
-						'Tried to clear entity using baserevid of entity not equal to current revision',
-						'editconflict'
-					);
-				}
-			}
-
 			$entity = $this->clearEntity( $entity );
 		}
 
 		// if we create a new property, make sure we set the datatype
 		if ( !$exists && $entity instanceof Property ) {
-			if ( !isset( $data['datatype'] )
-				|| !in_array( $data['datatype'], $this->propertyDataTypes )
-			) {
-				$this->errorReporter->dieWithError(
-					'wikibase-api-not-recognized-datatype',
-					'param-illegal'
-				);
-			}
-
 			$entity->setDataTypeId( $data['datatype'] );
 		}
 

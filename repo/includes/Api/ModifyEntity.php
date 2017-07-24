@@ -206,6 +206,13 @@ abstract class ModifyEntity extends ApiBase {
 		return $params;
 	}
 
+	protected function validateEntitySpecificParameters(
+		array $preparedParameters,
+		EntityDocument $entity,
+		$entityRevId
+	) {
+	}
+
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
@@ -256,6 +263,8 @@ abstract class ModifyEntity extends ApiBase {
 
 		$preparedParameters = $this->prepareParameters( $params );
 		unset( $params );
+
+		$this->validateEntitySpecificParameters( $preparedParameters, $entity, $entityRevId );
 
 		$summary = $this->modifyEntity( $entity, $preparedParameters, $entityRevId );
 
