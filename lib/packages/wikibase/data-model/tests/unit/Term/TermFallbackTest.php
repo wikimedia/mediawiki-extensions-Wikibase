@@ -16,10 +16,10 @@ class TermFallbackTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorSetsFields() {
 		$term = new TermFallback( 'foor', 'bar', 'fooa', 'foos' );
-		$this->assertEquals( 'foor', $term->getLanguageCode() );
-		$this->assertEquals( 'bar', $term->getText() );
-		$this->assertEquals( 'fooa', $term->getActualLanguageCode() );
-		$this->assertEquals( 'foos', $term->getSourceLanguageCode() );
+		$this->assertSame( 'foor', $term->getLanguageCode() );
+		$this->assertSame( 'bar', $term->getText() );
+		$this->assertSame( 'fooa', $term->getActualLanguageCode() );
+		$this->assertSame( 'foos', $term->getSourceLanguageCode() );
 	}
 
 	public function testConstructorWithNullAsSource() {

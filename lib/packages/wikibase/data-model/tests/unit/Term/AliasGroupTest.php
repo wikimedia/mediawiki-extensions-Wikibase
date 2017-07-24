@@ -20,8 +20,8 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 
 		$group = new AliasGroup( $language, $aliases );
 
-		$this->assertEquals( $language, $group->getLanguageCode() );
-		$this->assertEquals( $aliases, $group->getAliases() );
+		$this->assertSame( $language, $group->getLanguageCode() );
+		$this->assertSame( $aliases, $group->getAliases() );
 	}
 
 	public function testIsEmpty() {

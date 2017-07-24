@@ -16,8 +16,8 @@ class TermTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorSetsFields() {
 		$term = new Term( 'foo', 'bar' );
-		$this->assertEquals( 'foo', $term->getLanguageCode() );
-		$this->assertEquals( 'bar', $term->getText() );
+		$this->assertSame( 'foo', $term->getLanguageCode() );
+		$this->assertSame( 'bar', $term->getText() );
 	}
 
 	/**

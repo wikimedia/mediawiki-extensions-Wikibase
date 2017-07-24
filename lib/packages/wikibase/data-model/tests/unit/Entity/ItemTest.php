@@ -418,11 +418,11 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setLabel( $languageCode, $labelText );
 
-		$this->assertEquals( $labelText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
+		$this->assertSame( $labelText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 
 		$entity->setLabel( $languageCode, $moarText );
 
-		$this->assertEquals( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
+		$this->assertSame( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 	}
 
 	public function descriptionProvider() {
@@ -444,11 +444,11 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setDescription( $languageCode, $description );
 
-		$this->assertEquals( $description, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
+		$this->assertSame( $description, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 
 		$entity->setDescription( $languageCode, $moarText );
 
-		$this->assertEquals( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
+		$this->assertSame( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 	}
 
 	public function aliasesProvider() {
@@ -490,12 +490,8 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
 			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
-			asort( $aliasesList );
-
 			$actual = $entity->getFingerprint()->getAliasGroup( $langCode )->getAliases();
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
+			$this->assertSame( $expected, $actual );
 		}
 	}
 
