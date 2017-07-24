@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_18e9f67b",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:11:55Z",
+      "side": 1,
+      "message": "Passing $preparedParameters in here seems wrong. Anything it does can and should be in the ChangeOp, no? The datatype at least should be covered by T166694. And \"clear\" could be covered by the code that loads or constructs the entity.\n\nDoes any other API module use $preparedParameters?",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_f8866adf",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:11:55Z",
+      "side": 1,
+      "message": "This is now incorrect.",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_1863363d",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:11:55Z",
+      "side": 1,
+      "message": "Should perhaps be renamed to processParameters, compare https://gerrit.wikimedia.org/r/#/c/367045/1/repo/includes/Specials/SpecialModifyEntity.php",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_f8cc2a3a",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:11:55Z",
+      "side": 1,
+      "message": "The purpose of this change is to make this a lie...",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_d8d4cec0",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:11:55Z",
+      "side": 1,
+      "message": "see my comments on PS5",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_78e11a97",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:11:55Z",
+      "side": 1,
+      "message": "see my comments on PS5",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
