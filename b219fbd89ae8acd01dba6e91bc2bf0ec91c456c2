@@ -88,6 +88,40 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_1815769c",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:00:08Z",
+      "side": 1,
+      "message": "We should be able to avoid having this, see my comment below.",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_387dd2e4",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:00:08Z",
+      "side": 1,
+      "message": "Losing that information is not acceptable. But if we make sure we construct the correct ChangeOp, this problem should just go away, see below.",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_aa3ad6be",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
@@ -105,6 +139,40 @@
         "endLine": 171,
         "endChar": 82
       },
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_784d9adf",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:00:08Z",
+      "side": 1,
+      "message": "Suggestion: if both \"add\" and \"remove\" are specified, construct a \"set\" operation instead (and do the appropriate array modifications here). This will fix the problem with the summaries.",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_581bfed4",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:00:08Z",
+      "side": 1,
+      "message": "If the suggestion above is followed, this will always be a single atomic ChangeOp.",
       "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
