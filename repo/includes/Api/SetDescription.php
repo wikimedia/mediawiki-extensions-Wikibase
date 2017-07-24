@@ -73,16 +73,16 @@ class SetDescription extends ModifyTerm {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
 	 *
 	 * @return ChangeOpDescription
 	 */
-	private function getChangeOp( array $params ) {
+	private function getChangeOp( array $preparedParameters ) {
 		$description = "";
-		$language = $params['language'];
+		$language = $preparedParameters['language'];
 
-		if ( isset( $params['value'] ) ) {
-			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
+		if ( isset( $preparedParameters['value'] ) ) {
+			$description = $this->stringNormalizer->trimToNFC( $preparedParameters['value'] );
 		}
 
 		if ( $description === "" ) {

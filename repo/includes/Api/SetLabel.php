@@ -73,16 +73,16 @@ class SetLabel extends ModifyTerm {
 	}
 
 	/**
-	 * @param array $params
+	 * @param array $preparedParameters
 	 *
 	 * @return ChangeOpLabel
 	 */
-	private function getChangeOp( array $params ) {
+	private function getChangeOp( array $preparedParameters ) {
 		$label = "";
-		$language = $params['language'];
+		$language = $preparedParameters['language'];
 
-		if ( isset( $params['value'] ) ) {
-			$label = $this->stringNormalizer->trimToNFC( $params['value'] );
+		if ( isset( $preparedParameters['value'] ) ) {
+			$label = $this->stringNormalizer->trimToNFC( $preparedParameters['value'] );
 		}
 
 		if ( $label === "" ) {
