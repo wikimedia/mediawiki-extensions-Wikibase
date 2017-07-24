@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_475a3ffb",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-07-24T00:16:47Z",
+      "side": 1,
+      "message": "why the NullLogger here?",
+      "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
