@@ -198,16 +198,11 @@ class EditEntity extends ModifyEntity {
 		return parent::prepareParameters( $params );
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param array $preparedParameters
-	 * @param int $baseRevId
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId ) {
+	protected function validateEntitySpecificParameters(
+		array $preparedParameters,
+		EntityDocument $entity,
+		$baseRevId
+	) {
 		$data = $preparedParameters['data'];
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
@@ -227,8 +222,6 @@ class EditEntity extends ModifyEntity {
 					);
 				}
 			}
-
-			$entity = $this->clearEntity( $entity );
 		}
 
 		// if we create a new property, make sure we set the datatype
@@ -241,7 +234,28 @@ class EditEntity extends ModifyEntity {
 					'param-illegal'
 				);
 			}
+		}
+	}
 
+	/**
+	 * @see ModifyEntity::modifyEntity
+	 *
+	 * @param EntityDocument &$entity
+	 * @param array $preparedParameters
+	 *
+	 * @return Summary
+	 */
+	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
+		$data = $preparedParameters['data'];
+
+		$exists = $this->entityExists( $entity->getId() );
+
+		if ( $preparedParameters['clear'] ) {
+			$entity = $this->clearEntity( $entity );
+		}
+
+		// if we create a new property, make sure we set the datatype
+		if ( !$exists && $entity instanceof Property ) {
 			$entity->setDataTypeId( $data['datatype'] );
 		}
 

@@ -95,11 +95,10 @@ class SetAliases extends ModifyEntity {
 	 *
 	 * @param EntityDocument &$entity
 	 * @param array $preparedParameters
-	 * @param int $baseRevId
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
 		if ( !( $entity instanceof AliasesProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
 		}
