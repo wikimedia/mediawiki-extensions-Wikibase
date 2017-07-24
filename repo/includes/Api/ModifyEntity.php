@@ -204,9 +204,16 @@ abstract class ModifyEntity extends ApiBase {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		if ( ( isset( $params['id'] ) || isset( $params['new'] ) )
-			=== ( isset( $params['site'] ) && isset( $params['title'] ) )
-		) {
+		$entityReferenceBySiteLinkGiven = isset( $params['site'] ) && isset( $params['title'] );
+		$entityIdGiven = isset( $params['id'] );
+		$shouldCreateNewWithSomeType = isset( $params['new'] );
+
+		$createNew_AndOr_IdIsGiven = $entityIdGiven || $shouldCreateNewWithSomeType;
+
+		$noReferenceIsGiven = !$createNew_AndOr_IdIsGiven && !$entityReferenceBySiteLinkGiven;
+		$bothReferencesAreGiven = $createNew_AndOr_IdIsGiven && $entityReferenceBySiteLinkGiven;
+
+		if ( $noReferenceIsGiven || $bothReferencesAreGiven ) {
 			$this->errorReporter->dieWithError(
 				'wikibase-api-illegal-entity-selector',
 				'param-illegal'
