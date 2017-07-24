@@ -116,6 +116,7 @@
                 }
             }
         },
+        "size": 7,
         "rescore": [
             {
                 "window_size": 8192,
