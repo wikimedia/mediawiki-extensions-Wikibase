@@ -34,6 +34,24 @@
       "revId": "137ce129f02ae5e5083beb3d1e060ebc1ef360a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_f4fe7234",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T22:47:57Z",
+      "side": 1,
+      "message": "Oh damn! Good catch, thank you!\n\nNo unit test for this? ugh... will fix...",
+      "parentUuid": "6e71af52_5127585f",
+      "revId": "137ce129f02ae5e5083beb3d1e060ebc1ef360a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
