@@ -14,9 +14,6 @@ namespace Wikibase\DataModel\Statement;
  */
 interface StatementListHolder extends StatementListProvider {
 
-	/**
-	 * @param StatementList $statements
-	 */
 	public function setStatements( StatementList $statements );
 
 }
