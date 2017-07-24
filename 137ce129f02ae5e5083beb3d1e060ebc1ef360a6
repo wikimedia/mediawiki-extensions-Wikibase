@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_b1eb1c09",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-24T21:00:02Z",
+      "side": 1,
+      "message": "The call doesn\u0027t change $newEntity (it operates on a copy), and we also no longer have a member with the entity in, thus edit conflicts are not checked anymore.",
+      "revId": "137ce129f02ae5e5083beb3d1e060ebc1ef360a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
