@@ -54,6 +54,12 @@ class WikibasePrefixSearcher extends Searcher {
 		if ( $highlight ) {
 			$searchQuery->setHighlight( $highlight );
 		}
+		if ( $this->offset ) {
+			$searchQuery->setFrom( $this->offset );
+		}
+		if ( $this->limit ) {
+			$searchQuery->setSize( $this->limit );
+		}
 		$searchQuery->setParam( 'rescore', $this->searchContext->getRescore() );
 
 		return $pageType->createSearch( $searchQuery, $queryOptions );
