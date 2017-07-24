@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_31b88ce2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-24T21:09:39Z",
+      "side": 1,
+      "message": "This \"breaks\" caching for non-existing entities (given we might re-compute this, as \"getLatestRevisionId\" can return 0), but I guess that\u0027s ok (might even be better?)",
+      "revId": "8f448be6269b6167fe9d71c365f2ae67c0a44750",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
