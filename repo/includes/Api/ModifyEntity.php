@@ -157,11 +157,10 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @param EntityDocument &$entity
 	 * @param array $preparedParameters
-	 * @param int $baseRevId
 	 *
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
-	abstract protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId );
+	abstract protected function modifyEntity( EntityDocument &$entity, array $preparedParameters );
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
@@ -204,6 +203,13 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function prepareParameters( array $params ) {
 		return $params;
+	}
+
+	protected function validateEntitySpecificParameters(
+		array $preparedParameters,
+		EntityDocument $entity,
+		$entityRevId
+	) {
 	}
 
 	/**
@@ -256,6 +262,8 @@ abstract class ModifyEntity extends ApiBase {
 
 		$preparedParameters = $this->prepareParameters( $params );
 		unset( $params );
+
+		$this->validateEntitySpecificParameters( $preparedParameters, $entity, $entityRevId );
 
 		$summary = $this->modifyEntity( $entity, $preparedParameters, $entityRevId );
 

@@ -89,11 +89,10 @@ class SetSiteLink extends ModifyEntity {
 	 *
 	 * @param EntityDocument &$entity
 	 * @param array $preparedParameters
-	 * @param int $baseRevId
 	 *
 	 * @return Summary
 	 */
-	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $preparedParameters ) {
 		if ( !( $entity instanceof Item ) ) {
 			$this->errorReporter->dieError( "The given entity is not an item", "not-item" );
 		}
