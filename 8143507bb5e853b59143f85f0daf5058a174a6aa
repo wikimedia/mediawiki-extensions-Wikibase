@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_78335a0b",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:28:18Z",
+      "side": 1,
+      "message": "Please keep \"$baseRevId\". The \"base revision\" of an edit is an established concept in the MW code base.",
+      "revId": "8143507bb5e853b59143f85f0daf5058a174a6aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_d80dae42",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-24T16:28:18Z",
+      "side": 1,
+      "message": "This is kind of silly. If \"clear\" is given, we shouldn\u0027t load the entity in the first place. Just construct a new one instead of loading the old one.",
+      "revId": "8143507bb5e853b59143f85f0daf5058a174a6aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
