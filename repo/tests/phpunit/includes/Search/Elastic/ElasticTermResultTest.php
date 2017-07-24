@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Result;
 use Elastica\ResultSet;
@@ -15,6 +16,14 @@ use Wikibase\Repo\Search\Elastic\ElasticTermResult;
  * @group Wikibase
  */
 class ElasticTermResultTest extends MediaWikiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch needed.' );
+		}
+	}
 
 	public function termResultsProvider() {
 		return [
