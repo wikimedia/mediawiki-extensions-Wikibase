@@ -980,7 +980,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity',
-					'message-key' => 'wikibase-api-no-such-entity'
+					'message-key' => 'no-such-entity'
 				] ],
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			],
