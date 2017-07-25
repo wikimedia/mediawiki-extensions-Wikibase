@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_6644106f",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-25T18:56:16Z",
+      "side": 1,
+      "message": "This can be more precise.",
+      "revId": "91d2d38237ed1530da55c6101dae16d1e7b2cb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
