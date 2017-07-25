@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e71af52_66ff3063",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-25T18:22:29Z",
+      "side": 1,
+      "message": "Consistently use or not use the leading slash.",
+      "range": {
+        "startLine": 187,
+        "startChar": 16,
+        "endLine": 189,
+        "endChar": 14
+      },
+      "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_6e8f10d2",
         "filename": "client/includes/Changes/InjectRCRecordsJob.php",
         "patchSetId": 2
