@@ -48,12 +48,6 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( new ItemId( 'Q2' ), $item->getId() );
 	}
 
-	public function testSetIdUsingNumber() {
-		$item = new Item();
-		$item->setId( 42 );
-		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
-	}
-
 	public function testGetSiteLinkWithNonSetSiteId() {
 		$item = new Item();
 
@@ -257,10 +251,10 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		$secondItemWithId = $secondItem->copy();
-		$secondItemWithId->setId( 42 );
+		$secondItemWithId->setId( new ItemId( 'Q42' ) );
 
 		$differentId = $secondItemWithId->copy();
-		$differentId->setId( 43 );
+		$differentId->setId( new ItemId( 'Q43' ) );
 
 		return [
 			[ new Item(), new Item() ],
@@ -529,7 +523,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		// ID only
 		$entity = clone $entity;
-		$entity->setId( 44 );
+		$entity->setId( new ItemId( 'Q44' ) );
 
 		$entities[] = $entity;
 
@@ -543,7 +537,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		// with labels etc and ID
 		$entity = clone $entity;
-		$entity->setId( 42 );
+		$entity->setId( new ItemId( 'Q42' ) );
 
 		$entities[] = $entity;
 
