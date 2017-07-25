@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_656f2ac1",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 28
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-25T10:59:49Z",
+      "side": 1,
+      "message": "\"in order to\"",
+      "revId": "e96b4a4f95ca4102baeed658386cdc760839f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_65ae4ae6",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 28
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-25T10:59:49Z",
+      "side": 1,
+      "message": "why is propertyExists relevant? The PHP method doesn\u0027t seem to know that parameter. Also, shouldn\u0027t it be claimExists?",
+      "revId": "e96b4a4f95ca4102baeed658386cdc760839f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
