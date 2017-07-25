@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_1a9b201d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-25T20:18:38Z",
+      "side": 1,
+      "message": "Commenting this line doesn\u0027t make the tests fail, that\u0027s bad :/",
+      "revId": "4ff9db8f770e0c2265c5456a2f3abac36f4525bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
