@@ -4,8 +4,10 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Prophecy\Argument;
 use ValueValidators\Error;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\ChangeOp\ChangeOpLabel;
@@ -16,7 +18,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Validators\SnakValidator;
+use Wikibase\Summary;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\ChangeOps
@@ -196,6 +200,60 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertCount( 2, $actions );
 		$this->assertContains( EntityPermissionChecker::ACTION_EDIT_TERMS, $actions );
 		$this->assertContains( EntityPermissionChecker::ACTION_EDIT, $actions );
+	}
+
+	public function testApply_HasTwoChangeOps_DoesNotPassSummaryObject() {
+		$changeOp1 = $this->prophesize( ChangeOp::class );
+		$changeOp2 = $this->prophesize( ChangeOp::class );
+
+		$changeOps = new ChangeOps( [ $changeOp1->reveal(), $changeOp2->reveal() ] );
+		$changeOps->apply(
+			$this->prophesize( EntityDocument::class )->reveal(),
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$changeOp1->apply( Argument::any(), null )->shouldHaveBeenCalled();
+		$changeOp2->apply( Argument::any(), null )->shouldHaveBeenCalled();
+	}
+
+	public function testApply_HasOneChangeOp_PassesSummaryObject() {
+		$changeOp = $this->prophesize( ChangeOp::class );
+
+		$changeOps = new ChangeOps( [ $changeOp->reveal() ] );
+		$changeOps->apply(
+			$this->prophesize( EntityDocument::class )->reveal(),
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$changeOp->apply( Argument::any(), Argument::type( Summary::class ) )
+			->shouldHaveBeenCalled();
+	}
+
+	public function testApply_HasTwoChangeOps_SetsGenericSummaryMessage() {
+		$changeOps = new ChangeOps( [
+			$this->prophesize( ChangeOp::class )->reveal(),
+			$this->prophesize( ChangeOp::class )->reveal()
+		] );
+
+		$summary = $this->prophesize( Summary::class );
+		$changeOps->apply(
+			$this->prophesize( EntityDocument::class )->reveal(),
+			$summary->reveal()
+		);
+
+		$summary->setAction( 'update' )->shouldHaveBeenCalled();
+	}
+
+	public function testApply_HasZeroChangeOps_DoesNotUpdateSummaryAction() {
+		$changeOps = new ChangeOps( [] );
+
+		$summary = $this->prophesize( Summary::class );
+		$changeOps->apply(
+			$this->prophesize( EntityDocument::class )->reveal(),
+			$summary->reveal()
+		);
+
+		$summary->setAction( Argument::any() )->shouldNotHaveBeenCalled();
 	}
 
 }

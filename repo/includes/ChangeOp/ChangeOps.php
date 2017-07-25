@@ -71,8 +71,17 @@ class ChangeOps implements ChangeOp {
 	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		foreach ( $this->changeOps as $changeOp ) {
-			$changeOp->apply( $entity, $summary );
+		if ( count( $this->changeOps ) === 1 ) {
+			reset( $this->changeOps )->apply( $entity, $summary );
+		} elseif ( count( $this->changeOps ) === 0 ) {
+			return;
+		} else {
+			foreach ( $this->changeOps as $changeOp ) {
+				$changeOp->apply( $entity, null );
+			}
+			if ( $summary ) {
+				$summary->setAction( 'update' );
+			}
 		}
 	}
 
