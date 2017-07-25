@@ -16,6 +16,24 @@
       "revId": "8f448be6269b6167fe9d71c365f2ae67c0a44750",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_0bb43532",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-25T16:12:38Z",
+      "side": 1,
+      "message": "We still have caching in getLatestRevisionId() and getLatestRevision().",
+      "parentUuid": "6e71af52_31b88ce2",
+      "revId": "8f448be6269b6167fe9d71c365f2ae67c0a44750",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
