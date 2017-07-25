@@ -252,11 +252,19 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters['clear'] ) {
 			$entity = $this->clearEntity( $entity );
+
+			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
+		} else {
+			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.no-clear' );
 		}
 
-		// if we create a new property, make sure we set the datatype
-		if ( !$exists && $entity instanceof Property ) {
-			$entity->setDataTypeId( $data['datatype'] );
+		if ( !$exists ) {
+			// if we create a new property, make sure we set the datatype
+			if ( $entity instanceof Property ) {
+				$entity->setDataTypeId( $data['datatype'] );
+			}
+
+			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
 		}
 
 		$changeOps = $this->getChangeOp( $data, $entity );
