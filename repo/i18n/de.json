@@ -329,6 +329,7 @@
 	"wikibase-api-unresolved-redirect": "Die angegebene Objektkennung bezieht sich auf eine Weiterleitung, die in diesem Kontext nicht unterstützt wird.",
 	"wikibase-api-illegal-entity-remove": "Objekte können durch die Angabe des Top-Level-Schlüssels <var>remove</var> nicht gelöscht werden.",
 	"wikibase-api-illegal-entity-selector": "Du musst entweder das Objekt <var>id</var> oder eine Kombination aus <var>site</var> und <var>page</var> angeben, aber nicht beides.",
+	"wikibase-api-no-such-entity": "Es konnte kein Objekt mit der Kennung „$1“ gefunden werden.",
 	"wikibase-api-no-such-sitelink": "Beim Versuch, Auszeichnungen zu bearbeiten, konnte der Websitelink zu „$1“ nicht gefunden werden.",
 	"wikibase-api-not-recognized-datatype": "Es wurde ein Datentyp erwartet, jedoch fehlt dieser oder er wurde nicht erkannt.",
 	"wikibase-api-target-not-empty": "Die Weiterleitung kann nur am Anfang eines leeren oder gelöschten Objekts erstellt werden.",

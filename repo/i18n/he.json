@@ -316,6 +316,7 @@
 	"wikibase-api-unresolved-redirect": "מזהה הישות ID מתייחס להפניה, וזה לא נתמך בהקשר הנוכחי.",
 	"wikibase-api-illegal-entity-remove": "לא ניתן למחוק ישויות באמצעות אספקת מפתח <var>remove</var> ברמה עליונה.",
 	"wikibase-api-illegal-entity-selector": "יש לספק או <var>id</var> של ישות, או שילוב של <var>site</var> ו־<var>page</var>, אבל לא את שניהם.",
+	"wikibase-api-no-such-entity": "לא נמצאה ישות עם המזהה \"$1\".",
 	"wikibase-api-no-such-sitelink": "לא נמצא קישור אתר ל־\"$1\" בעת ניסיון לערוך סמלים.",
 	"wikibase-api-not-recognized-datatype": "היה אמור להיות פה סוג נתונים, אבל הוא חסר או בלתי־מוכר.",
 	"wikibase-api-target-not-empty": "אפשר ליצור הפניה רק על גבי ישות ריקה או מחוקה.",

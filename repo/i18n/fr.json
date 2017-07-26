@@ -356,6 +356,7 @@
 	"wikibase-api-unresolved-redirect": "L'identifiant de l'entité fait référence à une redirection, ce qui n'est pas pris en charge dans ce contexte.",
 	"wikibase-api-illegal-entity-remove": "Les entités ne peuvent pas être supprimées en fournissant une clé <var>remove</var> de niveau supérieur.",
 	"wikibase-api-illegal-entity-selector": "Vous pouvez fournir soit l'<var>id</var> d'une entité, ou une combinaison de <var>site</var> et <var>page</var>, mais pas les deux.",
+	"wikibase-api-no-such-entity": "Impossible de trouver une entité avec l’ID « $1 ».",
 	"wikibase-api-no-such-sitelink": "Impossible de trouver un lien de site vers « $1 » en essayant de modifier les badges.",
 	"wikibase-api-not-recognized-datatype": "Un type de donnée est attendu, mais il est absent ou non reconnu.",
 	"wikibase-api-target-not-empty": "La redirection ne peut être créée qu’au-dessus d’une entité vide ou supprimée.",
