@@ -16,6 +16,23 @@
       "revId": "91d2d38237ed1530da55c6101dae16d1e7b2cb6f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_124d6ce0",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-26T20:55:09Z",
+      "side": 1,
+      "message": "Maybe also say what we encountered (Type)?",
+      "revId": "91d2d38237ed1530da55c6101dae16d1e7b2cb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
