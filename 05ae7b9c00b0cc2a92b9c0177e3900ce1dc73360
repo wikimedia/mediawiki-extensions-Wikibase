@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_8496cff1",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:18:35Z",
+      "side": 1,
+      "message": "Please bring back the type hint, but make the parameter null per default. Or initialized to null and define a setter.",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_64b88375",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:18:35Z",
+      "side": 1,
+      "message": "We probably need this, but how is it related to this patch? Shouldn\u0027t it be separate?",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_e4ac7334",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:18:35Z",
+      "side": 1,
+      "message": "Refactoring like this is fine, but makes it hard to read the patch. It\u0027s not related to what you are trying to achieve, right?",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_c4a3773e",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:18:35Z",
+      "side": 1,
+      "message": "Unrelated side note: should the \"source\" indicate the software (wikibase), or the project (wikidata)? In the future, a singe wiki can be a client to multiple wikibase repos. Should all of them use the same value in the soruce field?",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
