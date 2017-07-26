@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e71af52_7f000e05",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:36:05Z",
+      "side": 1,
+      "message": "The selenium failure indicates that current() returns false here. I have no idea why. Bit I usually use reset() instead, which always returns the first element.",
+      "revId": "f58323ed0cb996a0b03ca2e43bc9d0d16bbddca8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_c6c2a488",
         "filename": "repo/includes/ChangeOp/ChangeOps.php",
         "patchSetId": 1
