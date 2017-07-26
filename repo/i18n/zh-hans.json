@@ -331,6 +331,7 @@
 	"wikibase-api-unresolved-redirect": "提供的实体ID指向重定向，在此文本中不支持。",
 	"wikibase-api-illegal-entity-remove": "实体不能通过提供顶级<var>remove</var>关键词来删除。",
 	"wikibase-api-illegal-entity-selector": "您需要提供实体<var>id</var>，或是<var>site</var>和<var>page</var>组合之一，但不是两个都需要。",
+	"wikibase-api-no-such-entity": "找不到任何ID为“$1”的实体。",
 	"wikibase-api-no-such-sitelink": "尝试编辑徽章时无法找到至“$1”的网站链接。",
 	"wikibase-api-not-recognized-datatype": "应有数据类型，但实际缺少或未受认可。",
 	"wikibase-api-target-not-empty": "重定向只能在空的或已删除的实体顶部创建。",

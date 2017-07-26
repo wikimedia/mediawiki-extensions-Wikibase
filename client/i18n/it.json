@@ -47,7 +47,7 @@
 	"apihelp-query+wikibase-description": "Ottieni informazioni sul client Wikibase ed il repository Wikibase associato.",
 	"apihelp-query+wikibase-example": "Ottieni il percorso URL e altre informazioni sul client e repository Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Quali proprietà ottenere:\n;<kbd>url</kbd>: URL base, percorso di script e delle voci del repository Wikibase\n;<kbd>siteid</kbd>: l'identificatore di questo sito.",
-	"wikibase-after-page-move": "Il tuo spostamento ora dovrebbe essere riflesso anche [$1 nell'elemento {{WBREPONAME}} associato]. Ti chiediamo di verificare che ciò sia avvenuto.",
+	"wikibase-after-page-move": "Verifica che [$1 l'elemento {{WBREPONAME}} associato] sia stato aggiornato automaticamente per mantenere i collegamenti linguistici sulla pagina.",
 	"wikibase-after-page-move-queued": "L'[$1 elemento {{WBREPONAME}}] associato a questa pagina sarà presto aggiornato automaticamente. Si noti che potrebbe non accadere istantaneamente.",
 	"wikibase-after-page-delete": "I collegamenti a questa pagina dovrebbero essere stati rimossi [$1 dall'elemento {{WBREPONAME}} associato]. Ti chiediamo di verificare che ciò sia avvenuto.",
 	"wikibase-after-page-delete-queued": "L'[$1 elemento {{WBREPONAME}}] associato con questa pagina sarà aggiornato automaticamente. Nota che questo potrebbe non accadere istantaneamente.",
@@ -128,5 +128,6 @@
 	"notification-header-page-connection": "La pagina <strong>$3</strong> è {{GENDER:$2|stata connessa}} a {{PLURAL:$4|-1=un elemento {{WBREPONAME}}|l'elemento {{WBREPONAME}} $4}}, che contiene i dati rilevanti sull'argomento.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un'altra pagina|altre $4 pagine|100=99+ altre pagine}} sono {{GENDER:$2|state connesse}} a elementi {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vedi}} elemento",
-	"notification-subject-page-connection": "Una pagina su {{SITENAME}} che {{GENDER:$3|hai creato}} è {{GENDER:$2|stata connessa}} a un elemento {{WBREPONAME}}"
+	"notification-subject-page-connection": "Una pagina su {{SITENAME}} che {{GENDER:$3|hai creato}} è {{GENDER:$2|stata connessa}} a un elemento {{WBREPONAME}}",
+	"unresolved-property-category": "Pagine che utilizzano proprietà non esistenti"
 }

@@ -6,7 +6,8 @@
 			"Aviator",
 			"SNN95",
 			"Pizza1016",
-			"Muhdnurhidayat"
+			"Muhdnurhidayat",
+			"Jeluang Terluang"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
@@ -36,7 +37,7 @@
 	"wikibase-linkitem-selectlink": "Sila pilih tapak dan halaman yang mana ingin anda pautkan halaman ini.",
 	"wikibase-linkitem-input-site": "Bahasa:",
 	"wikibase-linkitem-input-page": "Laman:",
-	"wikibase-linkitem-confirmitem-text": "Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa {{PLURAL:$2|halaman|halaman-halaman}} yang ditunjukkan seperti berikut adalah yang ingin anda pautkan dengan halaman ini.",
+	"wikibase-linkitem-confirmitem-text": "Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa {{PLURAL:$2|halaman|halaman-halaman}} yang ditunjukkan seperti berikut ialah yang ingin anda pautkan dengan halaman ini.",
 	"wikibase-linkitem-confirmitem-button": "Sahkan",
 	"wikibase-linkitem-not-loggedin-title": "Anda perlu log masuk",
 	"wikibase-linkitem-not-loggedin": "Anda perlu log masuk ke dalam wiki ini dan juga ke dalam [$1 repositori data pusat] untuk menggunakan ciri ini.",
