@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_1f530a1c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:45:29Z",
+      "side": 1,
+      "message": "Any usages of this message with no parameter will now have a $1 in the output.",
+      "revId": "559dc714e3f3242c6bbe36d24548dce2114988e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_7f4ece73",
+        "filename": "repo/includes/Api/CreateClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:45:29Z",
+      "side": 1,
+      "message": "this wrapping style looks odd. the array should be in the next line.",
+      "revId": "559dc714e3f3242c6bbe36d24548dce2114988e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
