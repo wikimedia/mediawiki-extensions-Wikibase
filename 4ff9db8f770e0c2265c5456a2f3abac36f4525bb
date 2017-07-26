@@ -34,6 +34,24 @@
       "revId": "4ff9db8f770e0c2265c5456a2f3abac36f4525bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_0e0e7e3e",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T10:23:47Z",
+      "side": 1,
+      "message": "Oh? When I made fixEditConflict do nothing, the tests failed... Let me double check.\n\nI\u0027m not surprised that other tests are uneffected. There\u0027s no concurrent access, so there are no unexpected conflicts. And we probably don\u0027t have other tests that try to provoke an edit conflict. Perhaps we should have more integration tests that check that.",
+      "parentUuid": "6e71af52_fd5f2e42",
+      "revId": "4ff9db8f770e0c2265c5456a2f3abac36f4525bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
