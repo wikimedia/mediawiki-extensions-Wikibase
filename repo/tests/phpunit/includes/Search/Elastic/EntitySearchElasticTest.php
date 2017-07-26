@@ -78,9 +78,13 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		$search = $this->newEntitySearch( Language::factory( $params['userLang'] ) );
 		$search->setRequest( $this->getMockRequest() );
 		$search->setReturnResult( true );
+		$limit = 10;
+		if ( isset( $params['limit'] ) ) {
+			$limit = $params['limit'];
+		}
 		$elasticQuery = $search->getRankedSearchResults(
 			$params['search'], $params['language'],
-			$params['type'], 10, $params['strictlanguage']
+			$params['type'], $limit, $params['strictlanguage']
 		);
 		$decodedQuery = json_decode( $elasticQuery, true );
 		unset( $decodedQuery['path'] );
