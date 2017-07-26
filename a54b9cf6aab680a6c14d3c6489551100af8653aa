@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_ae5c0a4f",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T10:19:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e71af52_66ff3063",
+      "range": {
+        "startLine": 187,
+        "startChar": 16,
+        "endLine": 189,
+        "endChar": 14
+      },
+      "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_6e8f10d2",
         "filename": "client/includes/Changes/InjectRCRecordsJob.php",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6e71af52_2e3fbad4",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T10:19:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e71af52_6e8f10d2",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 55
+      },
+      "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_475a3ffb",
         "filename": "client/includes/Changes/InjectRCRecordsJob.php",
         "patchSetId": 2
@@ -59,6 +107,24 @@
       "writtenOn": "2017-07-24T00:16:47Z",
       "side": 1,
       "message": "why the NullLogger here?",
+      "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_8e3a6ee3",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T10:19:31Z",
+      "side": 1,
+      "message": "Because it allows the logger to be optional, without clumsy null-checks in the code. To my mind, this is why null-implementations exist.",
+      "parentUuid": "6e71af52_475a3ffb",
       "revId": "a54b9cf6aab680a6c14d3c6489551100af8653aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
