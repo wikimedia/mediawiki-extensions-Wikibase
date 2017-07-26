@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e71af52_8e690e20",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-07-26T09:29:05Z",
+      "side": 1,
+      "message": "wikibase.api.EditEntity.modifyEntity constant?",
+      "range": {
+        "startLine": 256,
+        "startChar": 34,
+        "endLine": 267,
+        "endChar": 70
+      },
+      "revId": "970e7fe052e7ed5a137ae927c090d3ab2464400b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
