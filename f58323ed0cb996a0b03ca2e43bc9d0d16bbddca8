@@ -22,6 +22,30 @@
       "revId": "f58323ed0cb996a0b03ca2e43bc9d0d16bbddca8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e71af52_a40aeb27",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-26T16:31:35Z",
+      "side": 1,
+      "message": "I think it should indeed just work...",
+      "parentUuid": "6e71af52_c6c2a488",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "f58323ed0cb996a0b03ca2e43bc9d0d16bbddca8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
