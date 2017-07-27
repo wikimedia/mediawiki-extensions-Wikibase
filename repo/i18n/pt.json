@@ -319,6 +319,7 @@
 	"wikibase-api-unresolved-redirect": "O identificador de entidade fornecido refere-se a um redirecionamento, o que não é suportado neste contexto.",
 	"wikibase-api-illegal-entity-remove": "As entidades não podem ser eliminadas fornecendo uma chave <var>remove</var> do nível de topo.",
 	"wikibase-api-illegal-entity-selector": "Precisa de fornecer um identificador (<var>id</var>) de entidade, ou uma combinação de <var>site</var> e página (<var>page</var>), mas não ambos em simultâneo.",
+	"wikibase-api-no-such-entity": "Não foi possível encontrar uma entidade com o identificador \"$1\".",
 	"wikibase-api-no-such-sitelink": "Não foi possível encontrar um ''link intersites'' para \"$1\" ao tentar editar emblemas.",
 	"wikibase-api-not-recognized-datatype": "Era esperado um tipo de dados, mas está em falta ou não foi reconhecido.",
 	"wikibase-api-target-not-empty": "O redirecionamento só pode ser criado sobre uma entidade vazia ou eliminada.",
