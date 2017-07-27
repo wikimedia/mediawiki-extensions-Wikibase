@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_26e14a98",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-27T10:41:41Z",
+      "side": 1,
+      "message": "Can it be `null` at all?",
+      "range": {
+        "startLine": 340,
+        "startChar": 6,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
