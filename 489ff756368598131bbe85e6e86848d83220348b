@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_bbb6b383",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T08:22:30Z",
+      "side": 1,
+      "message": "Yeah, that was the intention. It might make sense to have this on by default though. Should be easy to change whatever way is preferred whenever we want.",
+      "parentUuid": "6e71af52_654dea9a",
+      "revId": "489ff756368598131bbe85e6e86848d83220348b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_2bb975c7",
         "filename": "repo/maintenance/rebuildTermSqlIndex.php",
         "patchSetId": 14
@@ -48,6 +66,24 @@
       "writtenOn": "2017-07-18T17:17:25Z",
       "side": 1,
       "message": "shouldn\u0027t this also become a regular boolean setter, like the ones used below?",
+      "revId": "489ff756368598131bbe85e6e86848d83220348b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_9bb17790",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T08:22:30Z",
+      "side": 1,
+      "message": "It probably should have. Missed that one while I was rushing. Will fix.",
+      "parentUuid": "8e742343_2bb975c7",
       "revId": "489ff756368598131bbe85e6e86848d83220348b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
