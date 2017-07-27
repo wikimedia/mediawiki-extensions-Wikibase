@@ -1,9 +1,8 @@
 BROWSER:
-  - chrome
+  - firefox
 
 MEDIAWIKI_ENVIRONMENT:
   - beta
-  - test
 
 PLATFORM:
   - Linux
