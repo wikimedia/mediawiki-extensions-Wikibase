@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_33474752",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T15:00:45Z",
+      "side": 1,
+      "message": "Other classes also use it. It part of the signature of abstract ModifyEntity::modifyEntity, not added here.\n\nIt is not beautiful I agree, but I think not something that could be easily avoided.\n\nFor the datatype part, I think this could not be moved to ChangeOpDeserializer, as it does not now the Entity (and also does not know if it exists or not).\n\nI didn\u0027t fully get what you meant about the \"clear\" part: ModifyEntity could be possibly changed so it clears the loaded entity on relevant condition. But as \"clear\" is only relevant for wbeditentity I believe this is why this was done here. Could be changed, and would be a slight improvement but I believe it will not make us get rid of $params here.",
+      "parentUuid": "6e71af52_18e9f67b",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_f8866adf",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 13
