@@ -36,7 +36,7 @@
 		}
 	} );
 
-	QUnit.test( 'Initialization and destruction', 3, function( assert ) {
+	QUnit.test( 'Initialization and destruction', function( assert ) {
 		var preview = newTestPreview(),
 			widgetBaseClass = preview.widgetBaseClass;
 
@@ -60,7 +60,7 @@
 		);
 	} );
 
-	QUnit.test( 'Update value', 6, function( assert ) {
+	QUnit.test( 'Update value', function( assert ) {
 		var preview = newTestPreview();
 
 		preview.update( 'test' );

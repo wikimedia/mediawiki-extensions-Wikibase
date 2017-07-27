@@ -10,17 +10,17 @@
 
 	QUnit.test( 'special start callback execution before options.start', function( assert ) {
 		assert.expect( 3 );
+		var done = assert.async();
 		var optionsStartCallbackDone = 0;
 		var specialStartCallbackDone = 0;
 
-		QUnit.stop();
 		$( '<div/>' ).animateWithEvent(
 			'fooeventpurpose',
 			'fadeOut',
 			{
 				start: function( animation ) {
 					optionsStartCallbackDone++;
-					QUnit.start();
+					done();
 				}
 			}, function( animationEvent ) {
 				assert.ok(
@@ -45,9 +45,8 @@
 
 	QUnit.test( 'special start callback', function( assert ) {
 		assert.expect( 2 );
+		var done = assert.async();
 		var $elem = $( '<div/>' );
-
-		QUnit.stop();
 
 		$elem.animateWithEvent(
 			'foopurpose',
@@ -65,15 +64,15 @@
 
 			}
 		).promise().done( function() {
-			QUnit.start();
+			done();
 		} );
 	} );
 
-	QUnit.test( 'options.start callback', 2, function( assert ) {
+	QUnit.test( 'options.start callback', function( assert ) {
+		assert.expect( 2 );
 		var $elem = $( '<div/>' );
+		var done = assert.async();
 		var animationEventsAnimation;
-
-		QUnit.stop();
 
 		$elem.animateWithEvent(
 			'foopurpose',
@@ -96,17 +95,16 @@
 				animationEventsAnimation = animationEvent.animation;
 			}
 		).promise().done( function() {
-			QUnit.start();
+			done();
 		} );
 	} );
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
 		assert.expect( 2 );
+		var done = assert.async( 2 );
 		var $elems = $( '<div/>' ).add( $( '<span/> ' ) ).add( $( '<div/> ' ) );
 		var $confirmedElems = $();
 		var animationEventInstances = [];
-
-		QUnit.stop( 2 );
 
 		$elems.animateWithEvent( 'fadesomethingin', 'fadeIn', function( animationEvent ) {
 			var elem = animationEvent.animation.elem;
@@ -117,10 +115,10 @@
 			}
 
 			if ( $confirmedElems.length >= $elems.length ) {
-				QUnit.start();
+				done();
 			}
 		} ).promise().done( function() {
-			QUnit.start();
+			done();
 		} );
 
 		assert.ok(
@@ -156,16 +154,16 @@
 		);
 	} );
 
-	QUnit.test( 'Two arguments are sufficient', 2, function( assert ) {
+	QUnit.test( 'Two arguments are sufficient', function( assert ) {
+		assert.expect( 2 );
 		var $node = $( '<div/>' );
-
-		QUnit.stop();
+		var done = assert.async( 2 );
 
 		$node.animateWithEvent(
 			'fooeventpurpose',
 			{ width: 200 }
 		).promise().done( function() {
-			QUnit.start();
+			done();
 
 			assert.ok(
 				true,
@@ -175,12 +173,10 @@
 
 		$node = $( '<div/>' );
 
-		QUnit.stop();
-
 		$node.animateWithEvent(
 			'xxxevent'
 		).promise().done( function() {
-			QUnit.start();
+			done();
 
 			assert.ok(
 				true,

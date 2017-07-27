@@ -38,7 +38,7 @@
 		}
 	} );
 
-	QUnit.test( 'Initialization and destruction', 3, function( assert ) {
+	QUnit.test( 'Initialization and destruction', function( assert ) {
 		var toggler = newTestToggler();
 
 		assert.equal(
@@ -61,7 +61,7 @@
 		);
 	} );
 
-	QUnit.test( 'Toggle toggler', 2, function( assert ) {
+	QUnit.test( 'Toggle toggler', function( assert ) {
 		var toggler = newTestToggler();
 
 		assert.equal(

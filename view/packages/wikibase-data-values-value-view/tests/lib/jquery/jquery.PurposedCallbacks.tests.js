@@ -171,7 +171,8 @@
 		);
 	} );
 
-	QUnit.test( 'fire() with custom arguments', 1, function( assert ) {
+	QUnit.test( 'fire() with custom arguments', function( assert ) {
+		assert.expect( 1 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 		var args = [ {}, [] ];

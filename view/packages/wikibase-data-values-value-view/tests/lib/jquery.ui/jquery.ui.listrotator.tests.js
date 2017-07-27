@@ -39,7 +39,7 @@
 		}
 	} );
 
-	QUnit.test( 'Initialize and destroy', 4, function( assert ) {
+	QUnit.test( 'Initialize and destroy', function( assert ) {
 		var listrotator = newTestListrotator(),
 			widgetBaseClass = listrotator.widgetBaseClass;
 
@@ -69,7 +69,7 @@
 		);
 	} );
 
-	QUnit.test( 'value()', 3, function( assert ) {
+	QUnit.test( 'value()', function( assert ) {
 		var listrotator = newTestListrotator();
 
 		assert.strictEqual(

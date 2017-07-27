@@ -402,7 +402,8 @@
 		);
 	} );
 
-	QUnit.test( 'select() on Item instances', 2, function( assert ) {
+	QUnit.test( 'select() on Item instances', function( assert ) {
+		assert.expect( 2 );
 		var $menu = newTestMenu( { items: menuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
@@ -430,7 +431,8 @@
 		menu.select();
 	} );
 
-	QUnit.test( 'select() on CustomInstance instances', 2, function( assert ) {
+	QUnit.test( 'select() on CustomInstance instances', function( assert ) {
+		assert.expect( 2 );
 		var check = false;
 
 		var customItem = new $.ui.ooMenu.CustomItem(
@@ -467,7 +469,8 @@
 		menu.select();
 	} );
 
-	QUnit.test( 'activate()', 4, function( assert ) {
+	QUnit.test( 'activate()', function( assert ) {
+		assert.expect( 4 );
 		var $menu = newTestMenu( { items: menuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
@@ -500,7 +503,8 @@
 		menu.activate( $menu.children( '.ui-ooMenu-item' ) );
 	} );
 
-	QUnit.test( 'deactivate()', 2, function( assert ) {
+	QUnit.test( 'deactivate()', function( assert ) {
+		assert.expect( 2 );
 		var $menu = newTestMenu( { items: menuItems } ),
 			menu = $menu.data( 'ooMenu' );
 

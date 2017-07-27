@@ -41,12 +41,13 @@
 		sinon.assert.calledOnce( destroy );
 	} );
 
-	QUnit.asyncTest( 'init calls extensions', function( assert ) {
+	QUnit.test( 'init calls extensions', function( assert ) {
 		assert.expect( 3 );
 		var $input = $( '<input/>' ).appendTo( 'body' ),
 			init = sinon.spy(),
 			onInitialShow = sinon.spy(),
 			draw = sinon.spy(),
+			done = assert.async(),
 			expertExtender = new ExpertExtender( $input, [ {
 				init: init,
 				onInitialShow: onInitialShow,
@@ -69,7 +70,7 @@
 
 			$input.remove();
 
-			QUnit.start();
+			done();
 		}, 0 );
 	} );
 

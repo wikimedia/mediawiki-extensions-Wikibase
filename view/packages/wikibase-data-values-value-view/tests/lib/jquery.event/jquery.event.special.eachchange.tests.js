@@ -79,7 +79,8 @@
 		}
 	);
 
-	QUnit.test( 'Triggering on a single input element', 2, function( assert ) {
+	QUnit.test( 'Triggering on a single input element', function( assert ) {
+		assert.expect( 2 );
 		var $subject = generateInputElement( { value: 'a' } );
 
 		$subject.on( 'eachchange', iIncr );
@@ -185,7 +186,7 @@
 		);
 	} );
 
-	QUnit.test( 'Bubbling up the DOM tree', 1, function( assert ) {
+	QUnit.test( 'Bubbling up the DOM tree', function( assert ) {
 		var $subject = generateInputElement(),
 			$parent = $( '<div/>' );
 
@@ -218,7 +219,8 @@
 		}
 	);
 
-	QUnit.test( 'Setting prevVal', 4, function( assert ) {
+	QUnit.test( 'Setting prevVal', function( assert ) {
+		assert.expect( 4 );
 		var $subject = generateInputElement();
 		var expectedPrevVal = 'a';
 

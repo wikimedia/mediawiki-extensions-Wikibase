@@ -23,14 +23,14 @@
 				getTextValue: 'value'
 			} )
 		);
+		var done = assert.async();
 		expert.init();
 		expert.draw();
 		expert.focus();
-		QUnit.stop();
 		window.setTimeout( function() {
-			QUnit.start();
 			assert.ok( true );
 			$div.remove();
+			done();
 		}, 300 );
 	} );
 

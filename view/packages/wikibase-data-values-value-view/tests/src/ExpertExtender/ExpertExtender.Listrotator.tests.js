@@ -39,8 +39,9 @@
 		assert.equal( listrotator.getValue(), 'custom value' );
 	} );
 
-	QUnit.asyncTest( 'supports switching away from custom values', function( assert ) {
+	QUnit.test( 'supports switching away from custom values', function( assert ) {
 		assert.expect( 2 );
+		var done = assert.async();
 		var onValueChange = sinon.spy();
 		var upstreamValue = {
 			custom: true,
@@ -67,7 +68,7 @@
 			sinon.assert.calledOnce( onValueChange );
 			assert.equal( listrotator.getValue(), 'fixed value' );
 
-			QUnit.start();
+			done();
 		}, 200 );
 
 	} );

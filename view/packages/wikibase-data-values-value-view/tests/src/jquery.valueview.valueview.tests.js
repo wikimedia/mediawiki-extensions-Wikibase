@@ -125,6 +125,7 @@
 
 	QUnit.test( 'getFormattedValue with DOM', function( assert ) {
 		assert.expect( 4 );
+		var done = assert.async();
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
@@ -137,8 +138,6 @@
 			},
 			vvArgs: vvArgs
 		} );
-
-		QUnit.stop();
 
 		vvInst.draw()
 		.done( function() {
@@ -157,13 +156,12 @@
 				'draw() returned rejected promise.'
 			);
 		} )
-		.always( function() {
-			QUnit.start();
-		} );
+		.always( done );
 	} );
 
 	QUnit.test( 'getFormattedValue without DOM', function( assert ) {
 		assert.expect( 4 );
+		var done = assert.async();
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
@@ -173,8 +171,6 @@
 		initVv( {
 			vvArgs: vvArgs
 		} );
-
-		QUnit.stop();
 
 		vvInst.draw()
 		.done( function() {
@@ -193,9 +189,7 @@
 				'draw() returned rejected promise.'
 			);
 		} )
-		.always( function() {
-			QUnit.start();
-		} );
+		.always( done );
 	} );
 
 } )(

@@ -64,6 +64,7 @@
 	} );
 
 	QUnit.test( '"menu" option', 2, function( assert ) {
+		var done = assert.async();
 		var customMenu = createCustomMenu();
 
 		var $suggester = newTestSuggester( {
@@ -72,8 +73,6 @@
 
 		var suggester = $suggester.data( 'suggester' );
 
-		QUnit.stop();
-
 		$suggester
 		.one( 'suggesteropen', function() {
 			assert.equal(
@@ -81,7 +80,7 @@
 				customMenu
 			);
 
-			QUnit.start();
+			done();
 		} );
 
 		$suggester.val( 'a' );
@@ -91,8 +90,6 @@
 
 		suggester.option( 'menu', customMenu );
 
-		QUnit.stop();
-
 		$suggester
 		.one( 'suggesteropen', function() {
 			assert.equal(
@@ -100,7 +97,7 @@
 				customMenu
 			);
 
-			QUnit.start();
+			done();
 		} );
 
 		suggester.search();
@@ -112,24 +109,12 @@
 
 		$suggester.val( 'a' );
 
-		QUnit.stop();
-
-		suggester.search()
-		.done( function( suggestions ) {
+		return suggester.search().then( function( suggestions ) {
 			assert.equal(
 				suggestions.length,
 				3,
 				'Gathered suggestions from array.'
 			);
-		} )
-		.fail( function() {
-			assert.ok(
-				false,
-				'Failed gathering suggestions from array.'
-			);
-		} )
-		.always( function() {
-			QUnit.start();
 		} );
 	} );
 
@@ -147,24 +132,12 @@
 
 		$suggester.val( 'a' );
 
-		QUnit.stop();
-
-		suggester.search()
-		.done( function( suggestions ) {
+		return suggester.search().then( function( suggestions ) {
 			assert.equal(
 				suggestions.length,
 				2,
 				'Gathered suggestions from function.'
 			);
-		} )
-		.fail( function() {
-			assert.ok(
-				false,
-				'Failed gathering suggestions from array.'
-			);
-		} )
-		.always( function() {
-			QUnit.start();
 		} );
 	} );
 
@@ -192,29 +165,19 @@
 
 		$suggester.val( 'a' );
 
-		QUnit.stop();
-
-		suggester.search()
-		.done( function( suggestions ) {
-			assert.ok(
-				!suggester.isSearching(),
-				'Returning FALSE after search has finished.'
-			);
-		} )
-		.fail( function() {
-			assert.ok(
-				false,
-				'Searching failed.'
-			);
-		} )
-		.always( function() {
-			QUnit.start();
-		} );
+		var promise = suggester.search();
 
 		assert.ok(
 			suggester.isSearching(),
 			'Returning TRUE while search is in progress.'
 		);
+
+		return promise.then( function( suggestions ) {
+			assert.ok(
+				!suggester.isSearching(),
+				'Returning FALSE after search has finished.'
+			);
+		} );
 	} );
 
 	QUnit.test( 'isSearching() - triggering with "key" event', 3, function( assert ) {
@@ -232,7 +195,8 @@
 					return deferred.promise();
 				}
 			} ),
-			suggester = $suggester.data( 'suggester' );
+			suggester = $suggester.data( 'suggester' ),
+			done = assert.async();
 
 		assert.ok(
 			!suggester.isSearching(),
@@ -240,8 +204,6 @@
 		);
 
 		$suggester.val( 'a' );
-
-		QUnit.stop();
 
 		// First "change" event is triggered directly on "key" event.
 		$suggester.one( 'suggesterchange', function() {
@@ -252,7 +214,7 @@
 					'Returning FALSE after search has finished.'
 				);
 
-				QUnit.start();
+				done();
 			} );
 		} );
 
@@ -271,7 +233,8 @@
 					return deferred.reject( 'error string' ).promise();
 				}
 			} ),
-			suggester = $suggester.data( 'suggester' );
+			suggester = $suggester.data( 'suggester' ),
+			done = assert.async();
 
 		$suggester.on( 'suggestererror', function( event, errorString ) {
 			assert.equal(
@@ -282,8 +245,6 @@
 		} );
 
 		$suggester.val( 'a' );
-
-		QUnit.stop();
 
 		suggester.search()
 		.done( function( suggestions ) {
@@ -298,9 +259,7 @@
 				'Searching failed as expected.'
 			);
 		} )
-		.always( function() {
-			QUnit.start();
-		} );
+		.always( done );
 	} );
 
 }( jQuery, QUnit ) );

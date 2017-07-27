@@ -38,7 +38,7 @@
 	 * Convenience function for testing behavior before/after/during showing and hiding extension.
 	 *
 	 *     @example
-	 *     showAndHideExtensionAgain( newTestInputextender(), {
+	 *     showAndHideExtensionAgain( assert, newTestInputextender(), {
 	 *         afterCallingShowExtension: function( instance ) {},
 	 *         whenFullyShown: function() { instance },
 	 *         afterCallingHideExtension: function( instance ) {},
@@ -53,8 +53,9 @@
 	 * @return {Object} jQuery.Promise Resolved after final hiding is done. Can be rejected in case
 	 *         a hideControl has been injected and gets rejected.
 	 */
-	function showAndHideExtensionAgain( instance, hideControl, callbacks ) {
+	function showAndHideExtensionAgain( assert, instance, hideControl, callbacks ) {
 		var deferred = $.Deferred();
+		var done = assert.async( 2 );
 		if ( !hideControl.done ) {
 			callbacks = hideControl;
 			// We will do the hideExtension() immediately in this case:
@@ -69,22 +70,18 @@
 					( callbacks.whenFullyHiddenAgain || $.noop )( instance );
 
 					deferred.resolve();
-					QUnit.start(); // *2*
+					done(); // *2*
 				} );
 				( callbacks.afterCallingHideExtension || $.noop )( instance );
-
-				QUnit.stop(); // wait for hideExtension() callback *2*
 			} )
 			.fail( function() {
 				deferred.reject();
 			} )
 			.always( function() {
-				QUnit.start(); // *1*
+				done(); // *1*
 			} );
 		} );
 		( callbacks.afterCallingShowExtension || $.noop )( instance );
-
-		QUnit.stop(); // wait for showExtension() callback *1*
 
 		return deferred.promise();
 	}
@@ -101,7 +98,7 @@
 		}
 	} );
 
-	QUnit.test( 'Initialization', 2, function( assert ) {
+	QUnit.test( 'Initialization', function( assert ) {
 		var extender = newTestInputextender();
 
 		assert.ok(
@@ -128,7 +125,7 @@
 		assert.ok( isOk, 'Extension active initially because input has focus.' );
 	} );
 
-	QUnit.test( 'Destruction', 2, function( assert ) {
+	QUnit.test( 'Destruction', function( assert ) {
 		var extender = newTestInputextender(),
 			widgetBaseClass = extender.widgetBaseClass;
 
@@ -147,8 +144,8 @@
 		);
 	} );
 
-	QUnit.test( 'showExtension and extensionIsVisible/extensionIsActive', 4, function( assert ) {
-		showAndHideExtensionAgain( newTestInputextender(), {
+	QUnit.test( 'showExtension and extensionIsVisible/extensionIsActive', function( assert ) {
+		showAndHideExtensionAgain( assert, newTestInputextender(), {
 			afterCallingShowExtension: function( instance ) {
 				assert.ok(
 					instance.extensionIsActive(),
@@ -176,8 +173,8 @@
 		} );
 	} );
 
-	QUnit.test( 'hideExtension and extensionIsVisible/extensionIsActive', 6, function( assert ) {
-		showAndHideExtensionAgain( newTestInputextender(), {
+	QUnit.test( 'hideExtension and extensionIsVisible/extensionIsActive', function( assert ) {
+		showAndHideExtensionAgain( assert, newTestInputextender(), {
 			afterCallingShowExtension: function( instance ) {},
 			whenFullyShown: function( instance ) {},
 			afterCallingHideExtension: function( instance ) {
@@ -265,7 +262,7 @@
 		var remainingInactiveExtenders = inactiveExtenders.slice();
 		var testSubject = remainingInactiveExtenders.splice( 0, 1 )[0];
 
-		return showAndHideExtensionAgain( testSubject, hideControl.promise(), {
+		return showAndHideExtensionAgain( assert, testSubject, hideControl.promise(), {
 			afterCallingShowExtension: function( instance ) {
 				var nowActiveExtenders = activeExtenders.slice();
 				nowActiveExtenders.push( instance );
