@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_f3d3ff62",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T15:15:57Z",
+      "side": 1,
+      "message": "Removed the incorrect description, and adjusted the parameter name in the doc.",
+      "parentUuid": "6e71af52_f8866adf",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_1863363d",
         "filename": "repo/includes/Api/ModifyEntity.php",
         "patchSetId": 13
@@ -82,6 +100,24 @@
       "writtenOn": "2017-07-24T16:11:55Z",
       "side": 1,
       "message": "The purpose of this change is to make this a lie...",
+      "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_33ebc70b",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T15:15:57Z",
+      "side": 1,
+      "message": "True. Removed.",
+      "parentUuid": "6e71af52_f8cc2a3a",
       "revId": "3b24c64859e88735ae8c8b1f01e22f2000993166",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
