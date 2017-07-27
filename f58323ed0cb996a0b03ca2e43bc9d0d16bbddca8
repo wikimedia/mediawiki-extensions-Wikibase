@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_7364efe1",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-07-27T14:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e71af52_7f000e05",
+      "revId": "f58323ed0cb996a0b03ca2e43bc9d0d16bbddca8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_c6c2a488",
         "filename": "repo/includes/ChangeOp/ChangeOps.php",
         "patchSetId": 1
