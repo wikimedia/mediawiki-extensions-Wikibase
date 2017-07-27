@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e7eab26_a10f648c",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "this is now always an int, and uses the same convention that is used by EditPage in core: 0 means current.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_c114f0a2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "This is just for backwards compat. Should probably go away.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_612adcd9",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "Always an int now. Always defined.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2124d406",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "This now always returns an EntityRevision, unless the entity doesn\u0027t exist yet. Previously, it would return null if no base revision was defined explicitly. But it\u0027s more straight forward to have it always return the effective base revision - if none was defined in the constructor, this returns the current revision, which is consistent with the behavior of core.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_26e14a98",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 5
@@ -43,6 +111,57 @@
         "endLine": 340,
         "endChar": 22
       },
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4121e0f5",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "Callers no longer need to do null checks.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e17c8cea",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "clarified contract.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a18684de",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 1,
+      "message": "No more special cases. Provide the id of the effective base revision, and let EntityStore do the thinking.",
       "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_c18b90e7",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:50:22Z",
+      "side": 0,
+      "message": "It now always checks for edit conflicts. If no base revision is given, that check is trivial, but the caller shouldn\u0027t care.",
+      "revId": "4ff9db8f770e0c2265c5456a2f3abac36f4525bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
