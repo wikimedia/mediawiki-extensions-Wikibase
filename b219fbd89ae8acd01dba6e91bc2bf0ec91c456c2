@@ -180,6 +180,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_53ba1320",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T15:04:52Z",
+      "side": 1,
+      "message": "That would mean loading existing aliases, checking what (if at all) \"add\" and \"reemove\") would do, and generating the new array with all expected result aliases, not only those mention in \"add\" and \"remove\". Seems a bit of an overkill to me. But doable if this makes sense.",
+      "parentUuid": "6e71af52_784d9adf",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_581bfed4",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
