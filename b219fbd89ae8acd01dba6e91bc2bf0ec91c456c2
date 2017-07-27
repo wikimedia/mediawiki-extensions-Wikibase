@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4107a01f",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T14:39:53Z",
+      "side": 1,
+      "message": "Just a note: this code should not be changing anything compared to the existing behaviour of wbsetaliases.\n\nThis FIXME is copied from createSummary (compare below).",
+      "parentUuid": "6e71af52_387dd2e4",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_aa3ad6be",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
