@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_93c5db92",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-27T15:15:57Z",
+      "side": 1,
+      "message": "Now this method has been renamed so hopefully it is more clear. Could be all moved to createSummary as well. Would be simpler but means changing a signature of createSummary which is a method from parent classes and other subclasses of ModifyEntity don\u0027t need the $entity. Would this be better?",
+      "parentUuid": "8e742343_dde670aa",
+      "revId": "ce3c48fb4f9495a0916b96dfa53731e9d48ae228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_3df6945a",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 4
