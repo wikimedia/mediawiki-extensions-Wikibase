@@ -22,6 +22,30 @@
       "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_21ee14b2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-27T13:42:46Z",
+      "side": 1,
+      "message": "It\u0027s always null initially. This is a lazy initialization mechanism.\n\nNote that $this-\u003ebaseRev is not $this-\u003ebaseRevId.",
+      "parentUuid": "4e7eab26_26e14a98",
+      "range": {
+        "startLine": 340,
+        "startChar": 6,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
