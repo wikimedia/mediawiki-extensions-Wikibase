@@ -20,9 +20,6 @@ class TypedSnakSerializer implements Serializer {
 	 */
 	private $snakSerializer;
 
-	/**
-	 * @param Serializer $snakSerializer
-	 */
 	public function __construct( Serializer $snakSerializer ) {
 		$this->snakSerializer = $snakSerializer;
 	}

@@ -47,13 +47,6 @@ class ItemDeserializer extends TypedObjectDeserializer {
 	 */
 	private $siteLinkDeserializer;
 
-	/**
-	 * @param Deserializer $entityIdDeserializer
-	 * @param Deserializer $termListDeserializer
-	 * @param Deserializer $aliasGroupListDeserializer
-	 * @param Deserializer $statementListDeserializer
-	 * @param Deserializer $siteLinkDeserializer
-	 */
 	public function __construct(
 		Deserializer $entityIdDeserializer,
 		Deserializer $termListDeserializer,

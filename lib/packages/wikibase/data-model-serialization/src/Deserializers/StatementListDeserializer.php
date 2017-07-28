@@ -21,9 +21,6 @@ class StatementListDeserializer implements Deserializer {
 	 */
 	private $statementDeserializer;
 
-	/**
-	 * @param Deserializer $statementDeserializer
-	 */
 	public function __construct( Deserializer $statementDeserializer ) {
 		$this->statementDeserializer = $statementDeserializer;
 	}

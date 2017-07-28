@@ -79,10 +79,6 @@ class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
-	/**
-	 * @param ReferenceList $expected
-	 * @param ReferenceList $actual
-	 */
 	public function assertReferenceListEquals( ReferenceList $expected, ReferenceList $actual ) {
 		$this->assertTrue( $actual->equals( $expected ), 'The two ReferenceList are different' );
 	}

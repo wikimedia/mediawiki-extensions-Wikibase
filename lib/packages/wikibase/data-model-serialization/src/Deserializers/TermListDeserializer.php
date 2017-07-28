@@ -22,9 +22,6 @@ class TermListDeserializer implements Deserializer {
 	 */
 	private $termDeserializer;
 
-	/**
-	 * @param Deserializer $termDeserializer
-	 */
 	public function __construct( Deserializer $termDeserializer ) {
 		$this->termDeserializer = $termDeserializer;
 	}

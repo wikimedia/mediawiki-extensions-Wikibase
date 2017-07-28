@@ -21,9 +21,6 @@ class EntityIdDeserializer implements Deserializer {
 	 */
 	private $entityIdParser;
 
-	/**
-	 * @param EntityIdParser $entityIdParser
-	 */
 	public function __construct( EntityIdParser $entityIdParser ) {
 		$this->entityIdParser = $entityIdParser;
 	}

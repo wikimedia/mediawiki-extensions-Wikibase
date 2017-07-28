@@ -22,9 +22,6 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 	 */
 	private $snaksDeserializer;
 
-	/**
-	 * @param Deserializer $snaksDeserializer
-	 */
 	public function __construct( Deserializer $snaksDeserializer ) {
 		$this->snaksDeserializer = $snaksDeserializer;
 	}

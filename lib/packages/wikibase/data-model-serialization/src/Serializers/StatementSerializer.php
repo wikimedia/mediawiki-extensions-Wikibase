@@ -39,11 +39,6 @@ class StatementSerializer implements DispatchableSerializer {
 	 */
 	private $referencesSerializer;
 
-	/**
-	 * @param Serializer $mainSnakSerializer
-	 * @param Serializer $qualifierSnaksSerializer
-	 * @param Serializer $referencesSerializer
-	 */
 	public function __construct(
 		Serializer $mainSnakSerializer,
 		Serializer $qualifierSnaksSerializer,

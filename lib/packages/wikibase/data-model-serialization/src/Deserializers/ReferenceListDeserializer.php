@@ -20,9 +20,6 @@ class ReferenceListDeserializer implements Deserializer {
 	 */
 	private $referenceDeserializer;
 
-	/**
-	 * @param Deserializer $referenceDeserializer
-	 */
 	public function __construct( Deserializer $referenceDeserializer ) {
 		$this->referenceDeserializer = $referenceDeserializer;
 	}

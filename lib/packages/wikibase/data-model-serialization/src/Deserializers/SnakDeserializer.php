@@ -34,10 +34,6 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 */
 	private $entityIdDeserializer;
 
-	/**
-	 * @param Deserializer $dataValueDeserializer
-	 * @param Deserializer $entityIdDeserializer
-	 */
 	public function __construct(
 		Deserializer $dataValueDeserializer,
 		Deserializer $entityIdDeserializer

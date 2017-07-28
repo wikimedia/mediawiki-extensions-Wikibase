@@ -21,9 +21,6 @@ class SnakListDeserializer implements Deserializer {
 	 */
 	private $snakDeserializer;
 
-	/**
-	 * @param Deserializer $snakDeserializer
-	 */
 	public function __construct( Deserializer $snakDeserializer ) {
 		$this->snakDeserializer = $snakDeserializer;
 	}
