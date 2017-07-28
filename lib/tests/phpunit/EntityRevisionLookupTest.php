@@ -39,7 +39,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
 
 		$prop = Property::newFromType( "string" );
-		$prop->setId( 753 );
+		$prop->setId( new PropertyId( 'P753' ) );
 
 		$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
 
