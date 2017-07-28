@@ -22,6 +22,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -50,6 +51,11 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 * @var SiteLinkStore
 	 */
 	private $siteLinkStore;
+
+	/**
+	 * @var EntityIdComposer
+	 */
+	private $idComposer;
 
 	/**
 	 * Entity id serialization => array of EntityRevision
@@ -92,6 +98,14 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 
 	public function __construct() {
 		$this->siteLinkStore = new HashSiteLinkStore();
+		$this->idComposer = new EntityIdComposer( [
+			'item' => function( $repo, $number ) {
+				return new ItemId( 'Q' . $number );
+			},
+			'property' => function( $repo, $number ) {
+				return new PropertyId( 'P' . $number );
+			},
+		] );
 	}
 
 	/**
@@ -631,7 +645,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 		//TODO: Find a canonical way to generate an EntityId from the maxId number.
 		//XXX: Using setId() with an integer argument is deprecated!
 		$numericId = ++$this->maxEntityId;
-		$entity->setId( $numericId );
+		$entity->setId($this->idComposer->composeEntityId( '', $entity->getType(), $numericId ) );
 	}
 
 	/**
