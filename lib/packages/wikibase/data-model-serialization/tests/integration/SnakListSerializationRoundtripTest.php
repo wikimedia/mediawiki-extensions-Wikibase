@@ -34,29 +34,29 @@ class SnakListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function snakListProvider() {
-		return array(
-			array(
-				new SnakList( array() )
-			),
-			array(
-				new SnakList( array(
+		return [
+			[
+				new SnakList( [] )
+			],
+			[
+				new SnakList( [
 					new PropertyNoValueSnak( 42 )
-				) )
-			),
-			array(
-				new SnakList( array(
+				] )
+			],
+			[
+				new SnakList( [
 					new PropertyNoValueSnak( 42 ),
 					new PropertyNoValueSnak( 43 )
-				) )
-			),
-			array(
-				new SnakList( array(
+				] )
+			],
+			[
+				new SnakList( [
 					new PropertyNoValueSnak( 42 ),
 					new PropertySomeValueSnak( 42 ),
 					new PropertyNoValueSnak( 43 ),
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 }

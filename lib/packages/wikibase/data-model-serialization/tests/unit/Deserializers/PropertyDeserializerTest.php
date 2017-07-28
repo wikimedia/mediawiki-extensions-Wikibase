@@ -33,24 +33,24 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 		$termListDeserializerMock = $this->getMock( Deserializer::class );
 		$termListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'en' => array(
+			->with( $this->equalTo( [
+				'en' => [
 					'lang' => 'en',
 					'value' => 'foo'
-				)
-			) ) )
-			->will( $this->returnValue( new TermList( array( new Term( 'en', 'foo' ) ) ) ) );
+				]
+			] ) )
+			->will( $this->returnValue( new TermList( [ new Term( 'en', 'foo' ) ] ) ) );
 
 		$aliasGroupListDeserializerMock = $this->getMock( Deserializer::class );
 		$aliasGroupListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'en' => array(
+			->with( $this->equalTo( [
+				'en' => [
 					'lang' => 'en',
-					'values' => array( 'foo', 'bar' )
-				)
-			) ) )
-			->will( $this->returnValue( new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) ) ) );
+					'values' => [ 'foo', 'bar' ]
+				]
+			] ) )
+			->will( $this->returnValue( new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
@@ -58,19 +58,19 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 		$statementListDeserializerMock = $this->getMock( Deserializer::class );
 		$statementListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'P42' => array(
-					array(
-						'mainsnak' => array(
+			->with( $this->equalTo( [
+				'P42' => [
+					[
+						'mainsnak' => [
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						),
+						],
 						'type' => 'statement',
 						'rank' => 'normal'
-					)
-				)
-			) ) )
-			->will( $this->returnValue( new StatementList( array( $statement ) ) ) );
+					]
+				]
+			] ) )
+			->will( $this->returnValue( new StatementList( [ $statement ] ) ) );
 
 		return new PropertyDeserializer(
 			$entityIdDeserializerMock,
@@ -81,145 +81,145 @@ class PropertyDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'type' => 'property'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
-				array(
+			],
+			[
+				[]
+			],
+			[
+				[
 					'type' => 'item'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function deserializationProvider() {
 		$property = Property::newFromType( 'string' );
 
-		$provider = array(
-			array(
+		$provider = [
+			[
 				$property,
-				array(
+				[
 					'type' => 'property',
 					'datatype' => 'string'
-				)
-			),
-		);
+				]
+			],
+		];
 
 		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
-		$provider[] = array(
+		$provider[] = [
 			$property,
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string',
 				'id' => 'P42'
-			)
-		);
+			]
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setLabel( 'en', 'foo' );
-		$provider[] = array(
+		$provider[] = [
 			$property,
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'labels' => array(
-					'en' => array(
+				'labels' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setDescription( 'en', 'foo' );
-		$provider[] = array(
+		$provider[] = [
 			$property,
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'descriptions' => array(
-					'en' => array(
+				'descriptions' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setAliases( 'en', [ 'foo', 'bar' ] );
-		$provider[] = array(
+		$provider[] = [
 			$property,
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'aliases' => array(
-					'en' => array(
+				'aliases' => [
+					'en' => [
 						'lang' => 'en',
-						'values' => array( 'foo', 'bar' )
-					)
-				)
-			)
-		);
+						'values' => [ 'foo', 'bar' ]
+					]
+				]
+			]
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
-		$provider[] = array(
+		$provider[] = [
 			$property,
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'claims' => array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				'claims' => [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				)
-			)
-		);
+						]
+					]
+				]
+			]
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
-		$provider[] = array(
+		$provider[] = [
 			$property,
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'claims' => array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				'claims' => [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				)
-			)
-		);
+						]
+					]
+				]
+			]
+		];
 
 		return $provider;
 	}

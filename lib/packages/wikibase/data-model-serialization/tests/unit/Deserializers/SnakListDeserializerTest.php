@@ -22,10 +22,10 @@ class SnakListDeserializerTest extends PHPUnit_Framework_TestCase {
 
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
+			->with( $this->equalTo( [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-			) ) )
+			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
 		return new SnakListDeserializer( $snakDeserializerMock );
@@ -42,21 +42,21 @@ class SnakListDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				42
-			),
-			array(
-				array(
+			],
+			[
+				[
 					'id' => 'P10'
-				)
-			),
-			array(
-				array(
+				]
+			],
+			[
+				[
 					'snaktype' => '42value'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -67,25 +67,25 @@ class SnakListDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function deserializationProvider() {
-		return array(
-			array(
+		return [
+			[
 				new SnakList(),
-				array()
-			),
-			array(
-				new SnakList( array(
+				[]
+			],
+			[
+				new SnakList( [
 					new PropertyNoValueSnak( 42 )
-				) ),
-				array(
-					'P42' => array(
-						array(
+				] ),
+				[
+					'P42' => [
+						[
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						)
-					)
-				)
-			),
-		);
+						]
+					]
+				]
+			],
+		];
 	}
 
 }

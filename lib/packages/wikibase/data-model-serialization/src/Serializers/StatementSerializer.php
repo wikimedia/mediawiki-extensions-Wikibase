@@ -18,11 +18,11 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementSerializer implements DispatchableSerializer {
 
-	private $rankLabels = array(
+	private $rankLabels = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
 		Statement::RANK_PREFERRED => 'preferred'
-	);
+	];
 
 	/**
 	 * @var Serializer
@@ -85,10 +85,10 @@ class StatementSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( Statement $statement ) {
-		$serialization = array(
+		$serialization = [
 			'mainsnak' => $this->mainSnakSerializer->serialize( $statement->getMainSnak() ),
 			'type' => 'statement'
-		);
+		];
 
 		$this->addQualifiersToSerialization( $statement, $serialization );
 		$this->addGuidToSerialization( $statement, $serialization );
@@ -129,7 +129,7 @@ class StatementSerializer implements DispatchableSerializer {
 	}
 
 	private function buildQualifiersOrderList( SnakList $snaks ) {
-		$list = array();
+		$list = [];
 
 		/**
 		 * @var Snak $snak

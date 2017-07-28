@@ -59,7 +59,7 @@ class ReferenceListSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( ReferenceList $references ) {
-		$serialization = array();
+		$serialization = [];
 
 		foreach ( $references as $reference ) {
 			$serialization[] = $this->referenceSerializer->serialize( $reference );

@@ -19,64 +19,64 @@ class SiteLinkSerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function serializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				new SiteLink( 'enwiki', 'Nyan Cat' )
-			),
-			array(
-				new SiteLink( 'enwiki', 'Nyan Cat', array(
+			],
+			[
+				new SiteLink( 'enwiki', 'Nyan Cat', [
 					new ItemId( 'Q42' )
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new ItemId( 'Q42' )
-			),
-		);
+			],
+		];
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'site' => 'enwiki',
 					'title' => 'Nyan Cat',
-					'badges' => array()
-				),
+					'badges' => []
+				],
 				new SiteLink( 'enwiki', 'Nyan Cat' )
-			),
-			array(
-				array(
+			],
+			[
+				[
 					'site' => 'enwiki',
 					'title' => 'Nyan Cat',
-					'badges' => array( 'Q42' )
-				),
-				new SiteLink( 'enwiki', 'Nyan Cat', array(
+					'badges' => [ 'Q42' ]
+				],
+				new SiteLink( 'enwiki', 'Nyan Cat', [
 					new ItemId( 'Q42' )
-				) )
-			),
-			array(
-				array(
+				] )
+			],
+			[
+				[
 					'site' => 'frwikisource',
 					'title' => 'Nyan Cat',
-					'badges' => array( 'Q42', 'Q43' )
-				),
-				new SiteLink( 'frwikisource', 'Nyan Cat', array(
+					'badges' => [ 'Q42', 'Q43' ]
+				],
+				new SiteLink( 'frwikisource', 'Nyan Cat', [
 					new ItemId( 'Q42' ),
 					new ItemId( 'q43' )
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 }

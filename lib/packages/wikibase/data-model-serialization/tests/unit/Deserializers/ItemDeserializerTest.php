@@ -34,24 +34,24 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 		$termListDeserializerMock = $this->getMock( Deserializer::class );
 		$termListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'en' => array(
+			->with( $this->equalTo( [
+				'en' => [
 					'lang' => 'en',
 					'value' => 'foo'
-				)
-			) ) )
-			->will( $this->returnValue( new TermList( array( new Term( 'en', 'foo' ) ) ) ) );
+				]
+			] ) )
+			->will( $this->returnValue( new TermList( [ new Term( 'en', 'foo' ) ] ) ) );
 
 		$aliasGroupListDeserializerMock = $this->getMock( Deserializer::class );
 		$aliasGroupListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'en' => array(
+			->with( $this->equalTo( [
+				'en' => [
 					'lang' => 'en',
-					'values' => array( 'foo', 'bar' )
-				)
-			) ) )
-			->will( $this->returnValue( new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) ) ) );
+					'values' => [ 'foo', 'bar' ]
+				]
+			] ) )
+			->will( $this->returnValue( new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
@@ -59,28 +59,28 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 		$statementListDeserializerMock = $this->getMock( Deserializer::class );
 		$statementListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'P42' => array(
-					array(
-						'mainsnak' => array(
+			->with( $this->equalTo( [
+				'P42' => [
+					[
+						'mainsnak' => [
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						),
+						],
 						'type' => 'statement',
 						'rank' => 'normal'
-					)
-				)
-			) ) )
-			->will( $this->returnValue( new StatementList( array( $statement ) ) ) );
+					]
+				]
+			] ) )
+			->will( $this->returnValue( new StatementList( [ $statement ] ) ) );
 
 		$siteLinkDeserializerMock = $this->getMock( Deserializer::class );
 		$siteLinkDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
+			->with( $this->equalTo( [
 				'site' => 'enwiki',
 				'title' => 'Nyan Cat',
-				'badges' => array()
-			) ) )
+				'badges' => []
+			] ) )
 			->will( $this->returnValue( new SiteLink( 'enwiki', 'Nyan Cat' ) ) );
 
 		return new ItemDeserializer(
@@ -93,131 +93,131 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'type' => 'item'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
-				array(
+			],
+			[
+				[]
+			],
+			[
+				[
 					'type' => 'property'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function deserializationProvider() {
-		$provider = array(
-			array(
+		$provider = [
+			[
 				new Item(),
-				array(
+				[
 					'type' => 'item'
-				)
-			),
-		);
+				]
+			],
+		];
 
 		$item = new Item( new ItemId( 'Q42' ) );
-		$provider[] = array(
+		$provider[] = [
 			$item,
-			array(
+			[
 				'type' => 'item',
 				'id' => 'Q42'
-			)
-		);
+			]
+		];
 
 		$item = new Item();
 		$item->setLabel( 'en', 'foo' );
-		$provider[] = array(
+		$provider[] = [
 			$item,
-			array(
+			[
 				'type' => 'item',
-				'labels' => array(
-					'en' => array(
+				'labels' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$item = new Item();
 		$item->setDescription( 'en', 'foo' );
-		$provider[] = array(
+		$provider[] = [
 			$item,
-			array(
+			[
 				'type' => 'item',
-				'descriptions' => array(
-					'en' => array(
+				'descriptions' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$item = new Item();
 		$item->setAliases( 'en', [ 'foo', 'bar' ] );
-		$provider[] = array(
+		$provider[] = [
 			$item,
-			array(
+			[
 				'type' => 'item',
-				'aliases' => array(
-					'en' => array(
+				'aliases' => [
+					'en' => [
 						'lang' => 'en',
-						'values' => array( 'foo', 'bar' )
-					)
-				)
-			)
-		);
+						'values' => [ 'foo', 'bar' ]
+					]
+				]
+			]
+		];
 
 		$item = new Item();
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
-		$provider[] = array(
+		$provider[] = [
 			$item,
-			array(
+			[
 				'type' => 'item',
-				'claims' => array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				'claims' => [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				)
-			)
-		);
+						]
+					]
+				]
+			]
+		];
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
-		$provider[] = array(
+		$provider[] = [
 			$item,
-			array(
+			[
 				'type' => 'item',
-				'sitelinks' => array(
-					'enwiki' => array(
+				'sitelinks' => [
+					'enwiki' => [
 						'site' => 'enwiki',
 						'title' => 'Nyan Cat',
-						'badges' => array()
-					)
-				)
-			)
-		);
+						'badges' => []
+					]
+				]
+			]
+		];
 
 		return $provider;
 	}

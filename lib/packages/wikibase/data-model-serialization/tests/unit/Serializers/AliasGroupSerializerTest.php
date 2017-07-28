@@ -28,17 +28,17 @@ class AliasGroupSerializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new AliasGroupList()
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -50,32 +50,32 @@ class AliasGroupSerializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				array(),
-				new AliasGroup( 'en', array() )
-			),
-			array(
-				array(
-					array( 'language' => 'en', 'value' => 'One' )
-				),
-				new AliasGroup( 'en', array( 'One' ) )
-			),
-			array(
-				array(
-					array( 'language' => 'en', 'value' => 'One' ),
-					array( 'language' => 'en', 'value' => 'Pony' )
-				),
-				new AliasGroup( 'en', array( 'One', 'Pony' ) )
-			),
-			array(
-				array(
-					array( 'language' => 'de', 'value' => 'One', 'source' => 'fr' ),
-					array( 'language' => 'de', 'value' => 'Pony', 'source' => 'fr' ),
-				),
-				new AliasGroupFallback( 'en', array( 'One', 'Pony' ), 'de', 'fr' )
-			)
-		);
+		return [
+			[
+				[],
+				new AliasGroup( 'en', [] )
+			],
+			[
+				[
+					[ 'language' => 'en', 'value' => 'One' ]
+				],
+				new AliasGroup( 'en', [ 'One' ] )
+			],
+			[
+				[
+					[ 'language' => 'en', 'value' => 'One' ],
+					[ 'language' => 'en', 'value' => 'Pony' ]
+				],
+				new AliasGroup( 'en', [ 'One', 'Pony' ] )
+			],
+			[
+				[
+					[ 'language' => 'de', 'value' => 'One', 'source' => 'fr' ],
+					[ 'language' => 'de', 'value' => 'Pony', 'source' => 'fr' ],
+				],
+				new AliasGroupFallback( 'en', [ 'One', 'Pony' ], 'de', 'fr' )
+			]
+		];
 	}
 
 }

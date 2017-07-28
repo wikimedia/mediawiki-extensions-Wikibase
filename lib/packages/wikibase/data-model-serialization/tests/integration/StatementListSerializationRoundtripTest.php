@@ -39,22 +39,22 @@ class StatementListSerializationRoundtripTest extends \PHPUnit_Framework_TestCas
 		$statement2 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement2->setGuid( 'test2' );
 
-		return array(
-			array(
+		return [
+			[
 				new StatementList()
-			),
-			array(
-				new StatementList( array(
+			],
+			[
+				new StatementList( [
 					$statement
-				) )
-			),
-			array(
-				new StatementList( array(
+				] )
+			],
+			[
+				new StatementList( [
 					$statement,
 					$statement2
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 }

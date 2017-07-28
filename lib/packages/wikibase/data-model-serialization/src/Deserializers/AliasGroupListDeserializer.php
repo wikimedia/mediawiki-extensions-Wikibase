@@ -58,7 +58,7 @@ class AliasGroupListDeserializer implements Deserializer {
 	 * @return AliasGroup
 	 */
 	private function deserializeAliasGroup( array $serialization, $languageCode ) {
-		$aliases = array();
+		$aliases = [];
 
 		foreach ( $serialization as $aliasSerialization ) {
 			$this->assertIsValidAliasSerialization( $aliasSerialization, $languageCode );

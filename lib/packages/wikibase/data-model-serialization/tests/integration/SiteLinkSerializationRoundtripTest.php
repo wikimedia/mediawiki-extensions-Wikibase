@@ -32,22 +32,22 @@ class SiteLinkSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function siteLinkProvider() {
-		return array(
-			array(
+		return [
+			[
 				new SiteLink( 'enwiki', 'Nyan Cat' )
-			),
-			array(
-				new SiteLink( 'enwiki', 'Nyan Cat', array(
+			],
+			[
+				new SiteLink( 'enwiki', 'Nyan Cat', [
 					new ItemId( 'Q42' )
-				) )
-			),
-			array(
-				new SiteLink( 'frwikisource', 'Nyan Cat', array(
+				] )
+			],
+			[
+				new SiteLink( 'frwikisource', 'Nyan Cat', [
 					new ItemId( 'Q42' ),
 					new ItemId( 'q43' )
-				) )
-			)
-		);
+				] )
+			]
+		];
 	}
 
 }

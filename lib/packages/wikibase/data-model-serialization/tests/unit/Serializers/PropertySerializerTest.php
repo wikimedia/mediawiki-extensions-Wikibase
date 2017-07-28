@@ -26,12 +26,12 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( TermList $termList ) {
 				if ( $termList->isEmpty() ) {
-					return array();
+					return [];
 				}
 
-				return array(
-					'en' => array( 'lang' => 'en', 'value' => 'foo' )
-				);
+				return [
+					'en' => [ 'lang' => 'en', 'value' => 'foo' ]
+				];
 			} ) );
 
 		$aliasGroupListSerializerMock = $this->getMock( Serializer::class );
@@ -39,12 +39,12 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
 				if ( $aliasGroupList->isEmpty() ) {
-					return array();
+					return [];
 				}
 
-				return array(
-					'en' => array( 'lang' => 'en', 'values' => array( 'foo', 'bar' ) )
-				);
+				return [
+					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ]
+				];
 			} ) );
 
 		$statementListSerializerMock = $this->getMock( Serializer::class );
@@ -52,21 +52,21 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( StatementList $statementList ) {
 				if ( $statementList->isEmpty() ) {
-					return array();
+					return [];
 				}
 
-				return array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				return [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				);
+						]
+					]
+				];
 			} ) );
 
 		return new PropertySerializer(
@@ -77,140 +77,140 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function serializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				Property::newFromType( 'string' )
-			),
-		);
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new Item()
-			),
-		);
+			],
+		];
 	}
 
 	public function serializationProvider() {
 		$property = Property::newFromType( 'string' );
 
-		$provider = array(
-			array(
-				array(
+		$provider = [
+			[
+				[
 					'type' => 'property',
 					'datatype' => 'string',
-					'labels' => array(),
-					'descriptions' => array(),
-					'aliases' => array(),
-					'claims' => array(),
-				),
+					'labels' => [],
+					'descriptions' => [],
+					'aliases' => [],
+					'claims' => [],
+				],
 				$property
-			),
-		);
+			],
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setId( 42 );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'property',
 				'datatype' => 'string',
 				'id' => 'P42',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(),
-			),
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [],
+			],
 			$property
-		);
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setLabel( 'en', 'foo' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'labels' => array(
-					'en' => array(
+				'labels' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(),
-			),
+					]
+				],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [],
+			],
 			$property
-		);
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setDescription( 'en', 'foo' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'labels' => array(),
-				'descriptions' => array(
-					'en' => array(
+				'labels' => [],
+				'descriptions' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				),
-				'aliases' => array(),
-				'claims' => array(),
-			),
+					]
+				],
+				'aliases' => [],
+				'claims' => [],
+			],
 			$property
-		);
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->setAliases( 'en', [ 'foo', 'bar' ] );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(
-					'en' => array(
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [
+					'en' => [
 						'lang' => 'en',
-						'values' => array( 'foo', 'bar' )
-					)
-				),
-				'claims' => array(),
-			),
+						'values' => [ 'foo', 'bar' ]
+					]
+				],
+				'claims' => [],
+			],
 			$property
-		);
+		];
 
 		$property = Property::newFromType( 'string' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'property',
 				'datatype' => 'string',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				),
-			),
+						]
+					]
+				],
+			],
 			$property
-		);
+		];
 
 		return $provider;
 	}

@@ -101,7 +101,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewSnakListSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newSnakListSerializer(),
-			new SnakList( array() )
+			new SnakList( [] )
 		);
 	}
 
@@ -140,21 +140,21 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewTermListSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newTermListSerializer(),
-			new TermList( array( new Term( 'de', 'Foo' ) ) )
+			new TermList( [ new Term( 'de', 'Foo' ) ] )
 		);
 	}
 
 	public function testNewAliasGroupSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newAliasGroupSerializer(),
-			new AliasGroup( 'en', array( 'foo', 'bar' ) )
+			new AliasGroup( 'en', [ 'foo', 'bar' ] )
 		);
 	}
 
 	public function testNewAliasGroupListSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newAliasGroupListSerializer(),
-			new AliasGroupList( array( new AliasGroup( 'de', array( 'AA', 'BB' ) ) ) )
+			new AliasGroupList( [ new AliasGroup( 'de', [ 'AA', 'BB' ] ) ] )
 		);
 	}
 

@@ -22,10 +22,10 @@ class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {
 
 		$referenceDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
+			->with( $this->equalTo( [
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-				'snaks' => array()
-			) ) )
+				'snaks' => []
+			] ) )
 			->will( $this->returnValue( new Reference() ) );
 
 		return new ReferenceListDeserializer( $referenceDeserializerMock );
@@ -42,11 +42,11 @@ class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				42
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -60,23 +60,23 @@ class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function deserializationProvider() {
-		return array(
-			array(
+		return [
+			[
 				new ReferenceList(),
-				array()
-			),
-			array(
-				new ReferenceList( array(
+				[]
+			],
+			[
+				new ReferenceList( [
 					new Reference()
-				) ),
-				array(
-					array(
+				] ),
+				[
+					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					)
-				)
-			),
-		);
+						'snaks' => []
+					]
+				]
+			],
+		];
 	}
 
 	/**

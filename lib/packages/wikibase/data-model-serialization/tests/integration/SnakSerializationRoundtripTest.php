@@ -27,7 +27,7 @@ class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		return $factory->newSnakSerializer();
 	}
 
-	private function getSnakDeserializer( array $dataValueClasses = array() ) {
+	private function getSnakDeserializer( array $dataValueClasses = [] ) {
 		$factory = new DeserializerFactory(
 			new DataValueDeserializer( $dataValueClasses ),
 			new BasicEntityIdParser()
@@ -40,9 +40,9 @@ class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSnakSerializationRoundtrips( Snak $snak ) {
 		$serializer = $this->getSnakSerializer();
-		$deserializer = $this->getSnakDeserializer( array(
+		$deserializer = $this->getSnakDeserializer( [
 			'string' => StringValue::class,
-		) );
+		] );
 
 		$serialization = $serializer->serialize( $snak );
 		$newSnak = $deserializer->deserialize( $serialization );
@@ -51,24 +51,24 @@ class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function snakProvider() {
-		return array(
-			array(
+		return [
+			[
 				new PropertyNoValueSnak( 42 ),
-			),
-			array(
+			],
+			[
 				new PropertySomeValueSnak( 42 ),
-			),
-			array(
+			],
+			[
 				new PropertyValueSnak( 42, new StringValue( 'hax' ) ),
-			),
-		);
+			],
+		];
 	}
 
 	public function testUnDeserializableValueToStringValueRoundtrip() {
 		$serializer = $this->getSnakSerializer();
-		$deserializer = $this->getSnakDeserializer( array(
+		$deserializer = $this->getSnakDeserializer( [
 			'string' => StringValue::class,
-		) );
+		] );
 
 		$badSnak = new PropertyValueSnak( 42, new UnDeserializableValue( 'Yay', 'string', '' ) );
 		$serialization = $serializer->serialize( $badSnak );

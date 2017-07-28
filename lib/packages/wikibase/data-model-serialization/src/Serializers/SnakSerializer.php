@@ -68,10 +68,10 @@ class SnakSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( Snak $snak ) {
-		$serialization = array(
+		$serialization = [
 			'snaktype' => $snak->getType(),
 			'property' => $snak->getPropertyId()->getSerialization(),
-		);
+		];
 
 		if ( $this->serializeWithHash ) {
 			$serialization['hash'] = $snak->getHash();

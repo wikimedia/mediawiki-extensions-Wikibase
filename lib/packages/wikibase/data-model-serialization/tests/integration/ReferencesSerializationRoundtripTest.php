@@ -34,26 +34,26 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function referencesProvider() {
-		return array(
-			array(
-				new ReferenceList( array() )
-			),
-			array(
-				new ReferenceList( array(
+		return [
+			[
+				new ReferenceList( [] )
+			],
+			[
+				new ReferenceList( [
 					new Reference()
-				) )
-			),
-			array(
-				new ReferenceList( array(
-					new Reference( new SnakList( array(
+				] )
+			],
+			[
+				new ReferenceList( [
+					new Reference( new SnakList( [
 						new PropertyNoValueSnak( 42 )
-					) ) ),
-					new Reference( new SnakList( array(
+					] ) ),
+					new Reference( new SnakList( [
 						new PropertyNoValueSnak( 43 )
-					) ) )
-				) )
-			),
-		);
+					] ) )
+				] )
+			],
+		];
 	}
 
 	/**

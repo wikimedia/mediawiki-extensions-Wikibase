@@ -24,211 +24,211 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 		$snakDeserializerMock = $this->getMock( Deserializer::class );
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
+			->with( $this->equalTo( [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-			) ) )
+			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
 		$snaksDeserializerMock = $this->getMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'P42' => array(
-					array(
+			->with( $this->equalTo( [
+				'P42' => [
+					[
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					)
-				)
-			) ) )
-			->will( $this->returnValue( new SnakList( array(
+					]
+				]
+			] ) )
+			->will( $this->returnValue( new SnakList( [
 				new PropertyNoValueSnak( 42 )
-			) ) ) );
+			] ) ) );
 
 		$referencesDeserializerMock = $this->getMock( Deserializer::class );
 		$referencesDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array() ) )
+			->with( $this->equalTo( [] ) )
 			->will( $this->returnValue( new ReferenceList() ) );
 
 		return new StatementDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array(
-					'mainsnak' => array(
+		return [
+			[
+				[
+					'mainsnak' => [
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					),
+					],
 					'type' => 'claim'
-				)
-			),
-			array(
-				array(
-					'mainsnak' => array(
+				]
+			],
+			[
+				[
+					'mainsnak' => [
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					),
+					],
 					'type' => 'statement',
 					'rank' => 'normal'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				42
-			),
-			array(
-				array(
+			],
+			[
+				[
 					'id' => 'P10'
-				)
-			),
-			array(
-				array(
+				]
+			],
+			[
+				[
 					'type' => '42'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function deserializationProvider() {
-		$serializations = array();
+		$serializations = [];
 
-		$serializations[] = array(
+		$serializations[] = [
 			new Statement( new PropertyNoValueSnak( 42 ) ),
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'claim'
-			)
-		);
+			]
+		];
 
-		$serializations[] = array(
+		$serializations[] = [
 			new Statement( new PropertyNoValueSnak( 42 ) ),
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'q42' );
-		$serializations[] = array(
+		$serializations[] = [
 			$statement,
-			array(
+			[
 				'id' => 'q42',
-				'mainsnak' => array(
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'claim'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_PREFERRED );
-		$serializations[] = array(
+		$serializations[] = [
 			$statement,
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'preferred'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_NORMAL );
-		$serializations[] = array(
+		$serializations[] = [
 			$statement,
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_DEPRECATED );
-		$serializations[] = array(
+		$serializations[] = [
 			$statement,
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'deprecated'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array() ) );
-		$serializations[] = array(
+		$statement->setQualifiers( new SnakList( [] ) );
+		$serializations[] = [
 			$statement,
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertyNoValueSnak( 42 )
-		) ) );
-		$serializations[] = array(
+		] ) );
+		$serializations[] = [
 			$statement,
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
-				'qualifiers' => array(
-					'P42' => array(
-						array(
+				],
+				'qualifiers' => [
+					'P42' => [
+						[
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						)
-					)
-				),
+						]
+					]
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			)
-		);
+			]
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setReferences( new ReferenceList() );
-		$serializations[] = array(
+		$serializations[] = [
 			$statement,
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => "P42"
-				),
-				'references' => array(),
+				],
+				'references' => [],
 				'type' => 'statement',
 				'rank' => 'normal'
-			)
-		);
+			]
+		];
 
 		return $serializations;
 	}
@@ -242,72 +242,72 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function invalidDeserializationProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'type' => 'claim'
-				)
-			),
-			array(
-				array(
+				]
+			],
+			[
+				[
 					'id' => 42,
-					'mainsnak' => array(
+					'mainsnak' => [
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					),
+					],
 					'type' => 'claim'
-				)
-			),
-			array(
-				array(
-					'mainsnak' => array(
+				]
+			],
+			[
+				[
+					'mainsnak' => [
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					),
+					],
 					'type' => 'statement',
 					'rank' => 'nyan-cat'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function testQualifiersOrderDeserialization() {
 		$snakDeserializerMock = $this->getMock( Deserializer::class );
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
+			->with( $this->equalTo( [
 				'snaktype' => 'novalue',
 				'property' => 'P42'
-			) ) )
+			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
 		$snaksDeserializerMock = $this->getMock( Deserializer::class );
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-					'P24' => array(
-						array(
+			->with( $this->equalTo( [
+					'P24' => [
+						[
 							'snaktype' => 'novalue',
 							'property' => 'P24'
-						)
-					),
-					'P42' => array(
-						array(
+						]
+					],
+					'P42' => [
+						[
 							'snaktype' => 'somevalue',
 							'property' => 'P42'
-						),
-						array(
+						],
+						[
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						)
-					)
-				)
+						]
+					]
+				]
 			) )
-			->will( $this->returnValue( new SnakList( array(
+			->will( $this->returnValue( new SnakList( [
 				new PropertyNoValueSnak( 24 ),
 				new PropertySomeValueSnak( 42 ),
 				new PropertyNoValueSnak( 42 )
-			) ) ) );
+			] ) ) );
 
 		$referencesDeserializerMock = $this->getMock( Deserializer::class );
 		$statementDeserializer = new StatementDeserializer(
@@ -317,62 +317,62 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 		);
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertySomeValueSnak( 42 ),
 			new PropertyNoValueSnak( 42 ),
 			new PropertyNoValueSnak( 24 )
-		) ) );
+		] ) );
 
-		$serialization = array(
-			'mainsnak' => array(
+		$serialization = [
+			'mainsnak' => [
 				'snaktype' => 'novalue',
 				'property' => 'P42'
-			),
-			'qualifiers' => array(
-				'P24' => array(
-					array(
+			],
+			'qualifiers' => [
+				'P24' => [
+					[
 						'snaktype' => 'novalue',
 						'property' => 'P24'
-					)
-				),
-				'P42' => array(
-					array(
+					]
+				],
+				'P42' => [
+					[
 						'snaktype' => 'somevalue',
 						'property' => 'P42'
-					),
-					array(
+					],
+					[
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					)
-				)
-			),
-			'qualifiers-order' => array(
+					]
+				]
+			],
+			'qualifiers-order' => [
 				'P42',
 				'P24'
-			),
+			],
 			'type' => 'claim'
-		);
+		];
 
 		$this->assertEquals( $statement->getHash(), $statementDeserializer->deserialize( $serialization )->getHash() );
 	}
 
 	public function testQualifiersOrderDeserializationWithTypeError() {
-		$serialization = array(
-			'mainsnak' => array(
+		$serialization = [
+			'mainsnak' => [
 				'snaktype' => 'novalue',
 				'property' => 'P42'
-			),
-			'qualifiers' => array(
-				'P42' => array(
-					array(
+			],
+			'qualifiers' => [
+				'P42' => [
+					[
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					)
-				)
-			),
+					]
+				]
+			],
 			'qualifiers-order' => 'stringInsteadOfArray',
 			'type' => 'claim'
-		);
+		];
 
 		$deserializer = $this->buildDeserializer();
 

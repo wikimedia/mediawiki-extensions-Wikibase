@@ -35,35 +35,35 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function entityProvider() {
-		$entities = array();
+		$entities = [];
 
 		$entity = new Item( new ItemId( 'Q42' ) );
-		$entities[] = array( $entity );
+		$entities[] = [ $entity ];
 
 		$entity = new Item();
 		$entity->setLabel( 'en', 'Nyan Cat' );
 		$entity->setLabel( 'fr', 'Nyan Cat' );
-		$entities[] = array( $entity );
+		$entities[] = [ $entity ];
 
 		$entity = new Item();
 		$entity->setDescription( 'en', 'Nyan Cat' );
 		$entity->setDescription( 'fr', 'Nyan Cat' );
-		$entities[] = array( $entity );
+		$entities[] = [ $entity ];
 
 		$entity = new Item();
-		$entity->setAliases( 'en', array( 'Cat', 'My cat' ) );
-		$entity->setAliases( 'fr', array( 'Cat' ) );
-		$entities[] = array( $entity );
+		$entity->setAliases( 'en', [ 'Cat', 'My cat' ] );
+		$entity->setAliases( 'fr', [ 'Cat' ] );
+		$entities[] = [ $entity ];
 
 		$entity = new Item();
 		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'guid' );
-		$entities[] = array( $entity );
+		$entities[] = [ $entity ];
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
-		$entities[] = array( $item );
+		$entities[] = [ $item ];
 
-		$entities[] = array( Property::newFromType( 'string' ) );
+		$entities[] = [ Property::newFromType( 'string' ) ];
 
 		return $entities;
 	}

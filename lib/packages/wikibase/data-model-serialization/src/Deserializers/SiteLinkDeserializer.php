@@ -58,11 +58,11 @@ class SiteLinkDeserializer implements Deserializer {
 
 	private function getDeserializeBadges( array $serialization ) {
 		if ( !array_key_exists( 'badges', $serialization ) ) {
-			return array();
+			return [];
 		}
 		$this->assertBadgesIsArray( $serialization );
 
-		$badges = array();
+		$badges = [];
 		foreach ( $serialization['badges'] as $badgeSerialization ) {
 			$badges[] = $this->deserializeItemId( $badgeSerialization );
 		}

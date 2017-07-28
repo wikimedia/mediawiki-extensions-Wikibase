@@ -38,14 +38,14 @@ class EntityIdDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				42
-			),
-			array(
-				array()
-			),
-		);
+			],
+			[
+				[]
+			],
+		];
 	}
 
 	/**
@@ -57,12 +57,12 @@ class EntityIdDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function deserializationProvider() {
-		return array(
-			array(
+		return [
+			[
 				new ItemId( 'Q42' ),
 				'Q42'
-			),
-		);
+			],
+		];
 	}
 
 	public function testDeserializeWithEntityIdParsingException() {

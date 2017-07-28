@@ -22,80 +22,80 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 		$snakListSerializerMock = $this->getMock( Serializer::class );
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new SnakList( array() ) ) )
-			->will( $this->returnValue( array() ) );
+			->with( $this->equalTo( new SnakList( [] ) ) )
+			->will( $this->returnValue( [] ) );
 
 		return new ReferenceSerializer( $snakListSerializerMock );
 	}
 
 	public function serializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				new Reference()
-			),
-			array(
-				new Reference( new SnakList( array(
+			],
+			[
+				new Reference( new SnakList( [
 					new PropertyNoValueSnak( 42 )
-				) ) )
-			),
-		);
+				] ) )
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
-				new SnakList( array() )
-			),
-		);
+			],
+			[
+				[]
+			],
+			[
+				new SnakList( [] )
+			],
+		];
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-					'snaks' => array(),
-					'snaks-order' => array()
-				),
+					'snaks' => [],
+					'snaks-order' => []
+				],
 				new Reference()
-			),
-		);
+			],
+		];
 	}
 
 	public function testSnaksOrderSerialization() {
 		$snakListSerializerMock = $this->getMock( Serializer::class );
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new SnakList( array(
+			->with( $this->equalTo( new SnakList( [
 				new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
 				new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
 				new PropertyNoValueSnak( new PropertyId( 'P24' ) )
-			) ) ) )
-			->will( $this->returnValue( array() ) );
+			] ) ) )
+			->will( $this->returnValue( [] ) );
 
 		$referenceSerializer = new ReferenceSerializer( $snakListSerializerMock );
 
-		$reference = new Reference( new SnakList( array(
+		$reference = new Reference( new SnakList( [
 			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
 			new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
 			new PropertyNoValueSnak( new PropertyId( 'P24' ) )
-		) ) );
+		] ) );
 
 		$this->assertEquals(
-			array(
+			[
 				'hash' => $reference->getHash(),
-				'snaks' => array(),
-				'snaks-order' => array(
+				'snaks' => [],
+				'snaks-order' => [
 					'P42',
 					'P24'
-				)
-			),
+				]
+			],
 			$referenceSerializer->serialize( $reference )
 		);
 	}

@@ -25,14 +25,14 @@ class StatementListDeserializerTest extends PHPUnit_Framework_TestCase {
 		$statementDeserializerMock = $this->getMock( Deserializer::class );
 		$statementDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->with( $this->equalTo( array(
-				'mainsnak' => array(
+			->with( $this->equalTo( [
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			) ) )
+			] ) )
 			->will( $this->returnValue( $statement ) );
 
 		return new StatementListDeserializer( $statementDeserializerMock );
@@ -49,21 +49,21 @@ class StatementListDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				42
-			),
-			array(
-				array(
+			],
+			[
+				[
 					'id' => 'P10'
-				)
-			),
-			array(
-				array(
+				]
+			],
+			[
+				[
 					'type' => '42'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -77,29 +77,29 @@ class StatementListDeserializerTest extends PHPUnit_Framework_TestCase {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		return array(
-			array(
+		return [
+			[
 				new StatementList(),
-				array()
-			),
-			array(
-				new StatementList( array(
+				[]
+			],
+			[
+				new StatementList( [
 					$statement
-				) ),
-				array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				] ),
+				[
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				)
-			),
-		);
+						]
+					]
+				]
+			],
+		];
 	}
 
 }

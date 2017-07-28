@@ -59,7 +59,7 @@ class AliasGroupListSerializer implements Serializer {
 	 * @return array[]
 	 */
 	private function getSerialized( AliasGroupList $aliasGroupList ) {
-		$serialization = array();
+		$serialization = [];
 
 		foreach ( $aliasGroupList->getIterator() as $aliasGroup ) {
 			$serialization[$aliasGroup->getLanguageCode()] = $this->aliasGroupSerializer->serialize( $aliasGroup );

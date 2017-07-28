@@ -35,23 +35,23 @@ class ReferenceSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function referenceProvider() {
-		return array(
-			array(
+		return [
+			[
 				new Reference()
-			),
-			array(
-				new Reference( new SnakList( array(
+			],
+			[
+				new Reference( new SnakList( [
 					new PropertyNoValueSnak( 42 )
-				) ) )
-			),
-			array(
-				new Reference( new SnakList( array(
+				] ) )
+			],
+			[
+				new Reference( new SnakList( [
 					new PropertyNoValueSnak( 42 ),
 					new PropertySomeValueSnak( 24 ),
 					new PropertyNoValueSnak( 24 )
-				) ) )
-			),
-		);
+				] ) )
+			],
+		];
 	}
 
 }
