@@ -74,7 +74,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// set up a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setLabel( 'en', 'foo' );
-		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
+		$prop->setId( PropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
 		$this->repo->putEntity( $prop );
@@ -113,7 +113,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// set up a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setLabel( 'en', 'foo' );
-		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
+		$prop->setId( PropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
 		$this->repo->putEntity( $prop );
@@ -301,7 +301,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$three->setDescription( 'en', 'the third' );
 
 		$prop = Property::newFromType( 'string' );
-		$prop->setId( 4 );
+		$prop->setId( new PropertyId( 'P4' ) );
 		$prop->setLabel( 'en', 'property!' );
 
 		$this->repo->putEntity( $one, 1001 );
