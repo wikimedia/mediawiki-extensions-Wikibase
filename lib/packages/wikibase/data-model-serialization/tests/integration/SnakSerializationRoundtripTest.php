@@ -40,7 +40,7 @@ class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSnakSerializationRoundtrips( Snak $snak ) {
 		$serializer = $this->getSnakSerializer();
-		$deserializer = $this->getSnakDeserializer( array (
+		$deserializer = $this->getSnakDeserializer( array(
 			'string' => StringValue::class,
 		) );
 
@@ -66,7 +66,7 @@ class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	public function testUnDeserializableValueToStringValueRoundtrip() {
 		$serializer = $this->getSnakSerializer();
-		$deserializer = $this->getSnakDeserializer( array (
+		$deserializer = $this->getSnakDeserializer( array(
 			'string' => StringValue::class,
 		) );
 

@@ -16,7 +16,7 @@ abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return DispatchableDeserializer
 	 */
-	protected abstract function buildDeserializer();
+	abstract protected function buildDeserializer();
 
 	public function testImplementsDispatchableDeserializerInterface() {
 		$this->assertInstanceOf( DispatchableDeserializer::class, $this->buildDeserializer() );
@@ -32,7 +32,7 @@ abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array[] things that are deserialized by the deserializer
 	 */
-	public abstract function deserializableProvider();
+	abstract public function deserializableProvider();
 
 	/**
 	 * @dataProvider nonDeserializableProvider
@@ -54,7 +54,7 @@ abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array[] things that aren't deserialized by the deserializer
 	 */
-	public abstract function nonDeserializableProvider();
+	abstract public function nonDeserializableProvider();
 
 	/**
 	 * @dataProvider deserializationProvider
@@ -66,6 +66,6 @@ abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array[] an array of array( object deserialized, serialization )
 	 */
-	public abstract function deserializationProvider();
+	abstract public function deserializationProvider();
 
 }

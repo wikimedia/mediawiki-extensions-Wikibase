@@ -31,7 +31,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
 
 		return new SnakDeserializer(
-			new DataValueDeserializer( array (
+			new DataValueDeserializer( array(
 				'string' => StringValue::class,
 			) ),
 			$entityIdDeserializerMock

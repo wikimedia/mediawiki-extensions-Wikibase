@@ -215,7 +215,11 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 			->will( $this->returnValue( array() ) );
 
 		$referencesSerializerMock = $this->getMock( Serializer::class );
-		$statementSerializer = new StatementSerializer( $snakSerializerMock, $snaksSerializerMock, $referencesSerializerMock );
+		$statementSerializer = new StatementSerializer(
+			$snakSerializerMock,
+			$snaksSerializerMock,
+			$referencesSerializerMock
+		);
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setQualifiers( new SnakList( array(

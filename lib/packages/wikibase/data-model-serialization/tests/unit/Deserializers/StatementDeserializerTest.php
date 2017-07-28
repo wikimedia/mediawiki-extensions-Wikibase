@@ -310,7 +310,11 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			) ) ) );
 
 		$referencesDeserializerMock = $this->getMock( Deserializer::class );
-		$statementDeserializer = new StatementDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
+		$statementDeserializer = new StatementDeserializer(
+			$snakDeserializerMock,
+			$snaksDeserializerMock,
+			$referencesDeserializerMock
+		);
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setQualifiers( new SnakList( array(
