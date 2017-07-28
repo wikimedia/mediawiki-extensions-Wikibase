@@ -51,17 +51,17 @@ final class TestChanges {
 
 		if ( empty( $changes ) ) {
 			$empty = Property::newFromType( 'string' );
-			$empty->setId( 100 );
+			$empty->setId( new PropertyId( 'P100' ) );
 
 			$changes['property-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
 			$old = Property::newFromType( 'string' );
-			$old->setId( 100 );
+			$old->setId( new PropertyId( 'P100' ) );
 
 			$new = Property::newFromType( 'string' );
-			$new->setId( 100 );
+			$new->setId( new PropertyId( 'P100' ) );
 			$new->setLabel( "de", "dummy" );
 			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
