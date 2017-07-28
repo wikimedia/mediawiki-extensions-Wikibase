@@ -31,7 +31,7 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
 		$p8 = Property::newFromType( 'string' );
-		$p8->setId( 8 );
+		$p8->setId( new PropertyId( 'P8' ) );
 
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );

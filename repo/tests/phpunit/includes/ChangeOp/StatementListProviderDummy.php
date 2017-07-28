@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -35,7 +36,7 @@ class StatementListProviderDummy implements EntityDocument, StatementListProvide
 		return $this->id;
 	}
 
-	public function setId( $id ) {
+	public function setId( EntityId $id ) {
 		$this->id = $id;
 	}
 
