@@ -29,7 +29,7 @@ class TermSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function serializationProvider() {
 		return array(
 			array(
-				new Term ( 'en', 'SomeValue' ),
+				new Term( 'en', 'SomeValue' ),
 				array(
 					'language' => 'en',
 					'value' => 'SomeValue',

@@ -16,7 +16,7 @@ abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return DispatchableSerializer
 	 */
-	protected abstract function buildSerializer();
+	abstract protected function buildSerializer();
 
 	public function testImplementsDispatchableSerializerInterface() {
 		$this->assertInstanceOf( DispatchableSerializer::class, $this->buildSerializer() );
@@ -32,7 +32,7 @@ abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array[] things that are serialized by the serializer
 	 */
-	public abstract function serializableProvider();
+	abstract public function serializableProvider();
 
 	/**
 	 * @dataProvider nonSerializableProvider
@@ -52,7 +52,7 @@ abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array[] things that aren't serialized by the serializer
 	 */
-	public abstract function nonSerializableProvider();
+	abstract public function nonSerializableProvider();
 
 	/**
 	 * @dataProvider serializationProvider
@@ -64,6 +64,6 @@ abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array[] an array of array( serialization, object to serialize)
 	 */
-	public abstract function serializationProvider();
+	abstract public function serializationProvider();
 
 }

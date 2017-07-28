@@ -120,7 +120,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewSnakListSerializerWithUseObjectsForMaps() {
 		$factory = new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS );
 		$serializer = $factory->newSnakListSerializer();
-		$this->assertAttributeSame( true, 'useObjectsForMaps' , $serializer );
+		$this->assertAttributeSame( true, 'useObjectsForMaps', $serializer );
 	}
 
 	public function testNewTypedSnakSerializer() {

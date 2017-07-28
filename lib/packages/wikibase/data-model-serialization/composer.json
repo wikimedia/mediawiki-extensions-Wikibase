@@ -36,7 +36,8 @@
 		"data-values/geo": "~2.0|~1.0|~0.1",
 		"data-values/number": ">=0.1 <0.9",
 		"data-values/time": "~0.2",
-		"phpunit/phpunit": "~4.8"
+		"phpunit/phpunit": "~4.8",
+		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},
 	"suggest": {
 		"data-values/geo": "Needed for deserialization of geographical values",
@@ -62,7 +63,15 @@
 			"vendor/bin/phpunit"
 		],
 		"ci": [
-			"@test"
+			"@test",
+			"@cs"
+		],
+		"cs": [
+			"@phpcs"
+		],
+		"phpcs": [
+			"phpcs -ps"
 		]
+
 	}
 }

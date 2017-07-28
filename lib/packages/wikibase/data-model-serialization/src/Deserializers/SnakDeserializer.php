@@ -120,8 +120,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	private function deserializeDataValue( $serialization ) {
 		try {
 			return $this->dataValueDeserializer->deserialize( $serialization );
-		}
-		catch ( DeserializationException $ex ) {
+		} catch ( DeserializationException $ex ) {
 			$error = isset( $serialization['error'] ) ? $serialization['error'] : $ex->getMessage();
 			return new UnDeserializableValue( $serialization['value'], $serialization['type'], $error );
 		}
