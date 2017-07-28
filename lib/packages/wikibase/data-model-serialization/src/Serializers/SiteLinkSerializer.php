@@ -47,11 +47,11 @@ class SiteLinkSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( SiteLink $siteLink ) {
-		return array(
+		return [
 			'site' => $siteLink->getSiteId(),
 			'title' => $siteLink->getPageName(),
 			'badges' => $this->serializeBadges( $siteLink->getBadges() )
-		);
+		];
 	}
 
 	/**
@@ -60,7 +60,7 @@ class SiteLinkSerializer implements DispatchableSerializer {
 	 * @return string[]
 	 */
 	private function serializeBadges( array $badges ) {
-		$serialization = array();
+		$serialization = [];
 
 		foreach ( $badges as $badge ) {
 			$serialization[] = $badge->getSerialization();

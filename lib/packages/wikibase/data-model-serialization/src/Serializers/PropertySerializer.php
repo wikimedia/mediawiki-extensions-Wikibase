@@ -79,10 +79,10 @@ class PropertySerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( Property $property ) {
-		$serialization = array(
+		$serialization = [
 			'type' => $property->getType(),
 			'datatype' => $property->getDataTypeId(),
-		);
+		];
 
 		$this->addIdToSerialization( $property, $serialization );
 		$this->addTermsToSerialization( $property, $serialization );

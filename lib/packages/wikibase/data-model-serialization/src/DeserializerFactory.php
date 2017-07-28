@@ -59,10 +59,10 @@ class DeserializerFactory {
 	 * @return DispatchableDeserializer
 	 */
 	public function newEntityDeserializer() {
-		return new DispatchingDeserializer( array(
+		return new DispatchingDeserializer( [
 			$this->newItemDeserializer(),
 			$this->newPropertyDeserializer()
-		) );
+		] );
 	}
 
 	/**

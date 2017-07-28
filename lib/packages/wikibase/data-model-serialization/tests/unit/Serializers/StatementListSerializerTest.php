@@ -25,14 +25,14 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )
-			->will( $this->returnValue( array(
-				'mainsnak' => array(
+			->will( $this->returnValue( [
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			) ) );
+			] ) );
 
 		return new StatementListSerializer( $statementSerializerMock, false );
 	}
@@ -41,59 +41,59 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		return array(
-			array(
+		return [
+			[
 				new StatementList()
-			),
-			array(
-				new StatementList( array(
+			],
+			[
+				new StatementList( [
 					$statement
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new Statement( new PropertyNoValueSnak( 42 ) )
-			),
-		);
+			],
+		];
 	}
 
 	public function serializationProvider() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		return array(
-			array(
-				array(),
+		return [
+			[
+				[],
 				new StatementList()
-			),
-			array(
-				array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+			],
+			[
+				[
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				),
-				new StatementList( array(
+						]
+					]
+				],
+				new StatementList( [
 					$statement
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function testStatementListSerializerWithOptionObjectsForMaps() {
@@ -103,19 +103,19 @@ class StatementListSerializerTest extends DispatchableSerializerTest {
 		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )
-			->will( $this->returnValue( array(
-				'mockedsuff' => array(),
+			->will( $this->returnValue( [
+				'mockedsuff' => [],
 				'type' => 'statement',
-			) ) );
+			] ) );
 		$serializer = new StatementListSerializer( $statementSerializerMock, true );
 
-		$statementList = new StatementList( array( $statement ) );
+		$statementList = new StatementList( [ $statement ] );
 
 		$serial = new stdClass();
-		$serial->P42 = array( array(
-			'mockedsuff' => array(),
+		$serial->P42 = [ [
+			'mockedsuff' => [],
 			'type' => 'statement',
-		) );
+		] ];
 		$this->assertEquals( $serial, $serializer->serialize( $statementList ) );
 	}
 

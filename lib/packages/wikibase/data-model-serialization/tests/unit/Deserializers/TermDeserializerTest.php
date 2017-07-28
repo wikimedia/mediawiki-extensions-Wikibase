@@ -29,28 +29,28 @@ class TermDeserializerTest extends PHPUnit_Framework_TestCase {
 	 * @return array[] things that aren't deserialized by the deserializer
 	 */
 	public function nonDeserializableProvider() {
-		return array(
-			'must be an array' => array( new \stdClass() ),
-			'must contain language' => array( array(
+		return [
+			'must be an array' => [ new \stdClass() ],
+			'must contain language' => [ [
 				'value' => 'FooBar',
-			) ),
-			'must contain value' => array( array(
+			] ],
+			'must contain value' => [ [
 				'language' => 'de',
-			) ),
-			'language must be string' => array( array(
+			] ],
+			'language must be string' => [ [
 				'language' => 123,
 				'value' => 'FooBar',
-			) ),
-			'value must be string' => array( array(
+			] ],
+			'value must be string' => [ [
 				'language' => 'de',
 				'value' => 999,
-			) ),
-			'must not contain source' => array( array(
+			] ],
+			'must not contain source' => [ [
 				'language' => 'fr',
 				'value' => 'Fr to DE hehe',
 				'source' => 'de',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -65,15 +65,15 @@ class TermDeserializerTest extends PHPUnit_Framework_TestCase {
 	 * @return array[] an array of array( object deserialized, serialization )
 	 */
 	public function deserializationProvider() {
-		return array(
-			array(
+		return [
+			[
 				new Term( 'en', 'Value' ),
-				array(
+				[
 					'language' => 'en',
 					'value' => 'Value',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 }

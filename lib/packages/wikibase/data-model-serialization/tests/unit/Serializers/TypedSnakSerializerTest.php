@@ -27,10 +27,10 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$snakSerializer->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'foo' => 'bar',
 				'baz' => 42
-			) ) );
+			] ) );
 
 		$this->serializer = new TypedSnakSerializer( $snakSerializer );
 	}
@@ -45,27 +45,27 @@ class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$mockSnak = $this->getMock( Snak::class );
 
-		$argLists[] = array(
+		$argLists[] = [
 			new TypedSnak( $mockSnak, 'string' ),
-			array(
+			[
 				'foo' => 'bar',
 				'baz' => 42,
 				'datatype' => 'string',
-			)
-		);
+			]
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			new TypedSnak( $mockSnak, 'kittens' ),
-			array(
+			[
 				'foo' => 'bar',
 				'baz' => 42,
 				'datatype' => 'kittens',
-			)
-		);
+			]
+		];
 
 		return $argLists;
 	}

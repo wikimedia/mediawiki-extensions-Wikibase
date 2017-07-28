@@ -20,64 +20,64 @@ class ReferenceListSerializerTest extends DispatchableSerializerTest {
 		$referenceSerializerFake = $this->getMock( Serializer::class );
 		$referenceSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-				'snaks' => array()
-			) ) );
+				'snaks' => []
+			] ) );
 
 		return new ReferenceListSerializer( $referenceSerializerFake );
 	}
 
 	public function serializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				new ReferenceList()
-			),
-			array(
-				new ReferenceList( array(
+			],
+			[
+				new ReferenceList( [
 					new Reference()
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new Reference()
-			),
-		);
+			],
+		];
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				array(),
+		return [
+			[
+				[],
 				new ReferenceList()
-			),
-			array(
-				array(
-					array(
+			],
+			[
+				[
+					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					),
-					array(
+						'snaks' => []
+					],
+					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					)
-				),
-				new ReferenceList( array(
-					new Reference( array( new PropertyNoValueSnak( 1 ) ) ),
-					new Reference( array( new PropertyNoValueSnak( 1 ) ) )
-				) )
-			),
-		);
+						'snaks' => []
+					]
+				],
+				new ReferenceList( [
+					new Reference( [ new PropertyNoValueSnak( 1 ) ] ),
+					new Reference( [ new PropertyNoValueSnak( 1 ) ] )
+				] )
+			],
+		];
 	}
 
 }

@@ -8,9 +8,5 @@
 		</properties>
 	</rule>
 
-	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
-		<exclude name="Generic.Arrays.DisallowLongArraySyntax.Found" />
-	</rule>
-
 	<file>.</file>
 </ruleset>

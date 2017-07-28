@@ -40,10 +40,10 @@ class TermSerializer implements Serializer {
 	 * @return string[]
 	 */
 	private function getSerialized( Term $term ) {
-		$result = array(
+		$result = [
 			'language' => $term->getLanguageCode(),
 			'value' => $term->getText(),
-		);
+		];
 
 		if ( $term instanceof TermFallback ) {
 			$result['language'] = $term->getActualLanguageCode();

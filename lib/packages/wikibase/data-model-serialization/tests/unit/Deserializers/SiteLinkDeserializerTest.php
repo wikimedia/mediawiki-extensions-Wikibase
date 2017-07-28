@@ -40,29 +40,29 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function nonDeserializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				42
-			),
-			array(
-				array()
-			),
-			array(
-				array(
+			],
+			[
+				[]
+			],
+			[
+				[
 					'id' => 'P10'
-				)
-			),
-			array(
-				array(
+				]
+			],
+			[
+				[
 					'site' => '42value'
-				)
-			),
-			array(
-				array(
+				]
+			],
+			[
+				[
 					'title' => '42value'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -73,25 +73,25 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function deserializationProvider() {
-		return array(
-			array(
+		return [
+			[
 				new SiteLink( 'enwiki', 'Nyan Cat' ),
-				array(
+				[
 					'site' => 'enwiki',
 					'title' => 'Nyan Cat'
-				)
-			),
-			array(
-				new SiteLink( 'enwiki', 'Nyan Cat', array(
+				]
+			],
+			[
+				new SiteLink( 'enwiki', 'Nyan Cat', [
 					new ItemId( 'Q42' )
-				) ),
-				array(
+				] ),
+				[
 					'site' => 'enwiki',
 					'title' => 'Nyan Cat',
-					'badges' => array( 'Q42' )
-				)
-			),
-		);
+					'badges' => [ 'Q42' ]
+				]
+			],
+		];
 	}
 
 	public function testDeserializeItemIdFilterPropertyId() {
@@ -103,11 +103,11 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
 		$this->setExpectedException( InvalidAttributeException::class );
-		$deserializer->deserialize( array(
+		$deserializer->deserialize( [
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
-			'badges' => array( 'P42' )
-		) );
+			'badges' => [ 'P42' ]
+		] );
 	}
 
 	public function testAssertBadgesIsArray() {
@@ -115,11 +115,11 @@ class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
 		$this->setExpectedException( InvalidAttributeException::class );
-		$deserializer->deserialize( array(
+		$deserializer->deserialize( [
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
 			'badges' => 'Q42'
-		) );
+		] );
 	}
 
 }

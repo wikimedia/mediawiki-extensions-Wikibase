@@ -99,10 +99,10 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newEntitySerializer() {
-		return new DispatchingSerializer( array(
+		return new DispatchingSerializer( [
 			$this->newItemSerializer(),
 			$this->newPropertySerializer()
-		) );
+		] );
 	}
 
 	/**

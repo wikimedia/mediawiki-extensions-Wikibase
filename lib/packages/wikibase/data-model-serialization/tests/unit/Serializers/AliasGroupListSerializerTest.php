@@ -47,39 +47,39 @@ class AliasGroupListSerializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				new AliasGroupList( array( new AliasGroup( 'en', array() ) ) ),
+		return [
+			[
+				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),
 				false,
-				array(),
-			),
-			array(
-				new AliasGroupList( array( new AliasGroup( 'en', array() ) ) ),
+				[],
+			],
+			[
+				new AliasGroupList( [ new AliasGroup( 'en', [] ) ] ),
 				true,
 				new \stdClass()
-			),
-			array(
-				new AliasGroupList( array( new AliasGroup( 'en', array( 'One' ) ) ) ),
+			],
+			[
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'One' ] ) ] ),
 				false,
-				array( 'en' => array( 'One' ) )
-			),
-			array(
-				new AliasGroupList( array( new AliasGroup( 'en', array( 'One', 'Pony' ) ) ) ),
+				[ 'en' => [ 'One' ] ]
+			],
+			[
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'One', 'Pony' ] ) ] ),
 				false,
-				array( 'en' => array( 'One', 'Pony' ) )
-			),
-			array(
-				new AliasGroupList( array(
-					new AliasGroup( 'en', array( 'One', 'Pony' ) ),
-					new AliasGroup( 'de', array( 'foo', 'bar' ) )
-				) ),
+				[ 'en' => [ 'One', 'Pony' ] ]
+			],
+			[
+				new AliasGroupList( [
+					new AliasGroup( 'en', [ 'One', 'Pony' ] ),
+					new AliasGroup( 'de', [ 'foo', 'bar' ] )
+				] ),
 				false,
-				array(
-					'en' => array( 'One', 'Pony' ),
-					'de' => array( 'foo', 'bar' ),
-				)
-			),
-		);
+				[
+					'en' => [ 'One', 'Pony' ],
+					'de' => [ 'foo', 'bar' ],
+				]
+			],
+		];
 	}
 
 	public function testWithUnsupportedObject() {
@@ -92,10 +92,10 @@ class AliasGroupListSerializerTest extends PHPUnit_Framework_TestCase {
 	public function testAliasGroupListSerializerWithOptionObjectsForMaps() {
 		$serializer = $this->buildSerializer( true );
 
-		$aliases = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
+		$aliases = new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] );
 
 		$serial = new \stdClass();
-		$serial->en = array( 'foo', 'bar' );
+		$serial->en = [ 'foo', 'bar' ];
 
 		$this->assertEquals( $serial, $serializer->serialize( $aliases ) );
 	}

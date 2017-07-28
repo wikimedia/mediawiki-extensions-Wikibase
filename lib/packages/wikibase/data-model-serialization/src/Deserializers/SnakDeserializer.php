@@ -64,7 +64,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	}
 
 	private function hasCorrectSnakType( $serialization ) {
-		return in_array( $serialization['snaktype'], array( 'novalue', 'somevalue', 'value' ) );
+		return in_array( $serialization['snaktype'], [ 'novalue', 'somevalue', 'value' ] );
 	}
 
 	/**

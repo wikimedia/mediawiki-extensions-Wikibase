@@ -95,9 +95,9 @@ class ItemSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( Item $item ) {
-		$serialization = array(
+		$serialization = [
 			'type' => $item->getType()
-		);
+		];
 
 		$this->addIdToSerialization( $item, $serialization );
 		$this->addTermsToSerialization( $item, $serialization );
@@ -128,7 +128,7 @@ class ItemSerializer implements DispatchableSerializer {
 	}
 
 	private function addSiteLinksToSerialization( Item $item, array &$serialization ) {
-		$serialization['sitelinks'] = array();
+		$serialization['sitelinks'] = [];
 
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$serialization['sitelinks'][$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );

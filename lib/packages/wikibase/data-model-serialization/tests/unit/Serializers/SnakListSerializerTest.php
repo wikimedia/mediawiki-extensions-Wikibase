@@ -21,61 +21,61 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new PropertyNoValueSnak( 42 ) ) )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'snaktype' => 'novalue',
 				'property' => "P42"
-			) ) );
+			] ) );
 
 		return new SnakListSerializer( $snakSerializerMock, false );
 	}
 
 	public function serializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				new SnakList()
-			),
-			array(
-				new SnakList( array(
+			],
+			[
+				new SnakList( [
 					new PropertyNoValueSnak( 42 )
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new PropertyNoValueSnak( 42 )
-			),
-		);
+			],
+		];
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				array(),
+		return [
+			[
+				[],
 				new SnakList()
-			),
-			array(
-				array(
-					'P42' => array(
-						array(
+			],
+			[
+				[
+					'P42' => [
+						[
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						)
-					)
-				),
-				new SnakList( array(
+						]
+					]
+				],
+				new SnakList( [
 					new PropertyNoValueSnak( 42 )
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	public function testSnakListSerializerWithOptionObjectsForMaps() {
@@ -83,19 +83,19 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new PropertyNoValueSnak( 42 ) ) )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'snaktype' => 'novalue',
 				'property' => "P42"
-			) ) );
+			] ) );
 		$serializer = new SnakListSerializer( $snakSerializerMock, true );
 
-		$snaklist = new SnakList( array( new PropertyNoValueSnak( 42 ) ) );
+		$snaklist = new SnakList( [ new PropertyNoValueSnak( 42 ) ] );
 
 		$serial = new stdClass();
-		$serial->P42 = array( array(
+		$serial->P42 = [ [
 			'snaktype' => 'novalue',
 			'property' => 'P42',
-	 ) );
+	 ] ];
 		$this->assertEquals( $serial, $serializer->serialize( $snaklist ) );
 	}
 

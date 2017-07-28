@@ -28,12 +28,12 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( TermList $termList ) {
 				if ( $termList->isEmpty() ) {
-					return array();
+					return [];
 				}
 
-				return array(
-					'en' => array( 'lang' => 'en', 'value' => 'foo' )
-				);
+				return [
+					'en' => [ 'lang' => 'en', 'value' => 'foo' ]
+				];
 			} ) );
 
 		$aliasGroupListSerializerMock = $this->getMock( Serializer::class );
@@ -41,12 +41,12 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
 				if ( $aliasGroupList->isEmpty() ) {
-					return array();
+					return [];
 				}
 
-				return array(
-					'en' => array( 'lang' => 'en', 'values' => array( 'foo', 'bar' ) )
-				);
+				return [
+					'en' => [ 'lang' => 'en', 'values' => [ 'foo', 'bar' ] ]
+				];
 			} ) );
 
 		$statementListSerializerMock = $this->getMock( Serializer::class );
@@ -54,32 +54,32 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( StatementList $statementList ) {
 				if ( $statementList->isEmpty() ) {
-					return array();
+					return [];
 				}
 
-				return array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				return [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				);
+						]
+					]
+				];
 			} ) );
 
 		$siteLinkSerializerMock = $this->getMock( Serializer::class );
 		$siteLinkSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new SiteLink( 'enwiki', 'Nyan Cat' ) ) )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'site' => 'enwiki',
 				'title' => 'Nyan Cat',
-				'badges' => array()
-			) ) );
+				'badges' => []
+			] ) );
 
 		return new ItemSerializer(
 			$termListSerializerMock,
@@ -91,150 +91,150 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function serializableProvider() {
-		return array(
-			array( new Item() ),
-		);
+		return [
+			[ new Item() ],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array( 5 ),
-			array( array() ),
-			array( Property::newFromType( 'string' ) ),
-		);
+		return [
+			[ 5 ],
+			[ [] ],
+			[ Property::newFromType( 'string' ) ],
+		];
 	}
 
 	public function serializationProvider() {
-		$provider = array(
-			array(
-				array(
+		$provider = [
+			[
+				[
 					'type' => 'item',
-					'labels' => array(),
-					'descriptions' => array(),
-					'aliases' => array(),
-					'claims' => array(),
-					'sitelinks' => array(),
-				),
+					'labels' => [],
+					'descriptions' => [],
+					'aliases' => [],
+					'claims' => [],
+					'sitelinks' => [],
+				],
 				new Item()
-			),
-		);
+			],
+		];
 
 		$entity = new Item();
 		$entity->setId( 42 );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'item',
 				'id' => 'Q42',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(),
-				'sitelinks' => array(),
-			),
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [],
+				'sitelinks' => [],
+			],
 			$entity
-		);
+		];
 
 		$entity = new Item();
 		$entity->setLabel( 'en', 'foo' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'item',
-				'labels' => array(
-					'en' => array(
+				'labels' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(),
-				'sitelinks' => array(),
-			),
+					]
+				],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [],
+				'sitelinks' => [],
+			],
 			$entity
-		);
+		];
 
 		$entity = new Item();
 		$entity->setDescription( 'en', 'foo' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'item',
-				'labels' => array(),
-				'descriptions' => array(
-					'en' => array(
+				'labels' => [],
+				'descriptions' => [
+					'en' => [
 						'lang' => 'en',
 						'value' => 'foo'
-					)
-				),
-				'aliases' => array(),
-				'claims' => array(),
-				'sitelinks' => array(),
-			),
+					]
+				],
+				'aliases' => [],
+				'claims' => [],
+				'sitelinks' => [],
+			],
 			$entity
-		);
+		];
 
 		$entity = new Item();
 		$entity->setAliases( 'en', [ 'foo', 'bar' ] );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'item',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(
-					'en' => array(
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [
+					'en' => [
 						'lang' => 'en',
-						'values' => array( 'foo', 'bar' )
-					)
-				),
-				'claims' => array(),
-				'sitelinks' => array(),
-			),
+						'values' => [ 'foo', 'bar' ]
+					]
+				],
+				'claims' => [],
+				'sitelinks' => [],
+			],
 			$entity
-		);
+		];
 
 		$entity = new Item();
 		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'item',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [
+					'P42' => [
+						[
+							'mainsnak' => [
 								'snaktype' => 'novalue',
 								'property' => 'P42'
-							),
+							],
 							'type' => 'statement',
 							'rank' => 'normal'
-						)
-					)
-				),
-				'sitelinks' => array(),
-			),
+						]
+					]
+				],
+				'sitelinks' => [],
+			],
 			$entity
-		);
+		];
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
-		$provider[] = array(
-			array(
+		$provider[] = [
+			[
 				'type' => 'item',
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(),
-				'claims' => array(),
-				'sitelinks' => array(
-					'enwiki' => array(
+				'labels' => [],
+				'descriptions' => [],
+				'aliases' => [],
+				'claims' => [],
+				'sitelinks' => [
+					'enwiki' => [
 						'site' => 'enwiki',
 						'title' => 'Nyan Cat',
-						'badges' => array()
-					)
-				),
-			),
+						'badges' => []
+					]
+				],
+			],
 			$item
-		);
+		];
 
 		return $provider;
 	}
@@ -246,20 +246,20 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
 
 		$sitelinks = new \stdClass();
-		$sitelinks->enwiki = array(
+		$sitelinks->enwiki = [
 			'site' => 'enwiki',
 			'title' => 'Nyan Cat',
-			'badges' => array(),
-		);
+			'badges' => [],
+		];
 
-		$serial = array(
+		$serial = [
 			'type' => 'item',
-			'labels' => array(),
-			'descriptions' => array(),
-			'aliases' => array(),
-			'claims' => array(),
+			'labels' => [],
+			'descriptions' => [],
+			'aliases' => [],
+			'claims' => [],
 			'sitelinks' => $sitelinks,
-		);
+		];
 
 		$this->assertEquals( $serial, $serializer->serialize( $item ) );
 	}

@@ -24,178 +24,178 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 		$snakSerializerFake = $this->getMock( Serializer::class );
 		$snakSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'snaktype' => 'novalue',
 				'property' => "P42"
-			) ) );
+			] ) );
 
 		$snaksSerializerFake = $this->getMock( Serializer::class );
 		$snaksSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array(
-				'P42' => array(
-					array(
+			->will( $this->returnValue( [
+				'P42' => [
+					[
 						'snaktype' => 'novalue',
 						'property' => 'P42'
-					)
-				)
-			) ) );
+					]
+				]
+			] ) );
 
 		$referencesSerializerFake = $this->getMock( Serializer::class );
 		$referencesSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array(
-				array(
+			->will( $this->returnValue( [
+				[
 					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-					'snaks' => array()
-				)
-			) ) );
+					'snaks' => []
+				]
+			] ) );
 
 		return new StatementSerializer( $snakSerializerFake, $snaksSerializerFake, $referencesSerializerFake );
 	}
 
 	public function serializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				new Statement( new PropertyNoValueSnak( 42 ) )
-			),
-		);
+			],
+		];
 	}
 
 	public function nonSerializableProvider() {
-		return array(
-			array(
+		return [
+			[
 				5
-			),
-			array(
-				array()
-			),
-			array(
+			],
+			[
+				[]
+			],
+			[
 				new ItemId( 'Q42' )
-			),
-		);
+			],
+		];
 	}
 
 	public function serializationProvider() {
-		$serializations = array();
+		$serializations = [];
 
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			),
+			],
 			new Statement( new PropertyNoValueSnak( 42 ) )
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'q42' );
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'id' => 'q42',
 				'rank' => 'normal'
-			),
+			],
 			$statement
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_PREFERRED );
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'preferred'
-			),
+			],
 			$statement
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_DEPRECATED );
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'deprecated'
-			),
+			],
 			$statement
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array() ) );
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		$statement->setQualifiers( new SnakList( [] ) );
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => "P42"
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			),
+			],
 			$statement
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertyNoValueSnak( 42 )
-		) ) );
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		] ) );
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => "P42"
-				),
+				],
 				'type' => 'statement',
-				'qualifiers' => array(
-					'P42' => array(
-						array(
+				'qualifiers' => [
+					'P42' => [
+						[
 							'snaktype' => 'novalue',
 							'property' => 'P42'
-						)
-					)
-				),
-				'qualifiers-order' => array(
+						]
+					]
+				],
+				'qualifiers-order' => [
 					'P42'
-				),
+				],
 				'rank' => 'normal'
-			),
+			],
 			$statement
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setReferences( new ReferenceList( array(
-			new Reference( array( new PropertyNoValueSnak( 1 ) ) )
-		) ) );
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
+		$statement->setReferences( new ReferenceList( [
+			new Reference( [ new PropertyNoValueSnak( 1 ) ] )
+		] ) );
+		$serializations[] = [
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => "P42"
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal',
-				'references' => array(
-					array(
+				'references' => [
+					[
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					)
-				),
-			),
+						'snaks' => []
+					]
+				],
+			],
 			$statement
-		);
+		];
 
 		return $serializations;
 	}
@@ -204,15 +204,15 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 		$snakSerializerMock = $this->getMock( Serializer::class );
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				'snaktype' => 'novalue',
 				'property' => 'P42'
-			) ) );
+			] ) );
 
 		$snaksSerializerMock = $this->getMock( Serializer::class );
 		$snaksSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$referencesSerializerMock = $this->getMock( Serializer::class );
 		$statementSerializer = new StatementSerializer(
@@ -222,25 +222,25 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 		);
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertyNoValueSnak( 42 ),
 			new PropertySomeValueSnak( 24 ),
 			new PropertyNoValueSnak( 24 )
-		) ) );
+		] ) );
 		$this->assertEquals(
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
-				'qualifiers' => array(),
-				'qualifiers-order' => array(
+				],
+				'qualifiers' => [],
+				'qualifiers-order' => [
 					'P42',
 					'P24'
-				),
+				],
 				'type' => 'statement',
 				'rank' => 'normal'
-			),
+			],
 			$statementSerializer->serialize( $statement )
 		);
 	}

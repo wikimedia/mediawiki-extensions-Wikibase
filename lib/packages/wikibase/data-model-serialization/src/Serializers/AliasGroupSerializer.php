@@ -40,14 +40,14 @@ class AliasGroupSerializer implements Serializer {
 	 * @return array[]
 	 */
 	private function getSerialized( AliasGroup $aliasGroup ) {
-		$serialization = array();
+		$serialization = [];
 		$language = $aliasGroup->getLanguageCode();
 
 		foreach ( $aliasGroup->getAliases() as $value ) {
-			$result = array(
+			$result = [
 				'language' => $language,
 				'value' => $value
-			);
+			];
 
 			if ( $aliasGroup instanceof AliasGroupFallback ) {
 				$result['language'] = $aliasGroup->getActualLanguageCode();

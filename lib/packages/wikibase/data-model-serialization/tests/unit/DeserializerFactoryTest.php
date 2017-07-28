@@ -28,97 +28,97 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewEntityDeserializer() {
 		$this->assertTrue( $this->buildDeserializerFactory()->newEntityDeserializer()->isDeserializerFor(
-			array(
+			[
 				'type' => 'item'
-			)
+			]
 		) );
 		$this->assertTrue( $this->buildDeserializerFactory()->newEntityDeserializer()->isDeserializerFor(
-			array(
+			[
 				'type' => 'property'
-			)
+			]
 		) );
 	}
 
 	public function testNewItemDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newItemDeserializer(),
-			array(
+			[
 				'type' => 'item'
-			)
+			]
 		);
 	}
 
 	public function testNewPropertyDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newPropertyDeserializer(),
-			array(
+			[
 				'type' => 'property',
 				'datatype' => 'string'
-			)
+			]
 		);
 	}
 
 	public function testNewSiteLinkDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newSiteLinkDeserializer(),
-			array(
+			[
 				'site' => 'enwiki',
 				'title' => 'Nyan Cat'
-			)
+			]
 		);
 	}
 
 	public function testNewStatementDeserializer() {
 		$this->assertTrue( $this->buildDeserializerFactory()->newStatementDeserializer()->isDeserializerFor(
-			array(
-				'mainsnak' => array(
+			[
+				'mainsnak' => [
 					'snaktype' => 'novalue',
 					'property' => 'P42'
-				),
+				],
 				'type' => 'claim'
-			)
+			]
 		) );
 	}
 
 	public function testStatementListDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newStatementListDeserializer(),
-			array(
-				'P42' => array(
-				)
-			)
+			[
+				'P42' => [
+				]
+			]
 		);
 	}
 
 	public function testNewReferencesDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newReferencesDeserializer(),
-			array(
-				array(
+			[
+				[
 					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-					'snaks' => array()
-				)
-			)
+					'snaks' => []
+				]
+			]
 		);
 	}
 
 	public function testNewReferenceDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newReferenceDeserializer(),
-			array(
+			[
 				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-				'snaks' => array()
-			)
+				'snaks' => []
+			]
 		);
 	}
 
 	public function testNewSnakDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newSnakDeserializer(),
-			array(
+			[
 				'snaktype' => 'novalue',
 				'property' => 'P42'
-			)
+			]
 		);
 	}
 
@@ -132,24 +132,24 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewTermDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newTermDeserializer(),
-			array( 'language' => 'en', 'value' => 'Some Term' )
+			[ 'language' => 'en', 'value' => 'Some Term' ]
 		);
 	}
 
 	public function testNewTermListDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newTermListDeserializer(),
-			array(
-				'en' => array( 'language' => 'en', 'value' => 'Some Term' ),
-				'de' => array( 'language' => 'de', 'value' => 'Some Term' ),
-			)
+			[
+				'en' => [ 'language' => 'en', 'value' => 'Some Term' ],
+				'de' => [ 'language' => 'de', 'value' => 'Some Term' ],
+			]
 		);
 	}
 
 	public function testNewAliasGroupListDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newAliasGroupListDeserializer(),
-			array( 'en' => array( array( 'language' => 'en', 'value' => 'Some Term' ) ) )
+			[ 'en' => [ [ 'language' => 'en', 'value' => 'Some Term' ] ] ]
 		);
 	}
 

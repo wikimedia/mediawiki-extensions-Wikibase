@@ -36,45 +36,45 @@ class StatementSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function snaksProvider() {
-		$statements = array();
+		$statements = [];
 
-		$statements[] = array(
+		$statements[] = [
 			new Statement( new PropertyNoValueSnak( 42 ) )
-		);
+		];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'q42' );
-		$statements[] = array( $statement );
+		$statements[] = [ $statement ];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_PREFERRED );
-		$statements[] = array( $statement );
+		$statements[] = [ $statement ];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_DEPRECATED );
-		$statements[] = array( $statement );
+		$statements[] = [ $statement ];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array() ) );
-		$statements[] = array( $statement );
+		$statement->setQualifiers( new SnakList( [] ) );
+		$statements[] = [ $statement ];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertySomeValueSnak( 42 ),
 			new PropertyNoValueSnak( 42 ),
 			new PropertySomeValueSnak( 24 )
-		) ) );
-		$statements[] = array( $statement );
+		] ) );
+		$statements[] = [ $statement ];
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setReferences( new ReferenceList( array(
-			new Reference( array(
+		$statement->setReferences( new ReferenceList( [
+			new Reference( [
 				new PropertySomeValueSnak( 42 ),
 				new PropertyNoValueSnak( 42 ),
 				new PropertySomeValueSnak( 24 )
-			) )
-		) ) );
-		$statements[] = array( $statement );
+			] )
+		] ) );
+		$statements[] = [ $statement ];
 
 		return $statements;
 	}

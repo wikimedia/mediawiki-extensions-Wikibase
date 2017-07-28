@@ -66,13 +66,13 @@ class StatementListSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( StatementList $statementList ) {
-		$serialization = array();
+		$serialization = [];
 
 		foreach ( $statementList->toArray() as $statement ) {
 			$idSerialization = $statement->getPropertyId()->getSerialization();
 
 			if ( !array_key_exists( $idSerialization, $serialization ) ) {
-				$serialization[$idSerialization] = array();
+				$serialization[$idSerialization] = [];
 			}
 
 			$serialization[$idSerialization][] = $this->statementSerializer->serialize( $statement );

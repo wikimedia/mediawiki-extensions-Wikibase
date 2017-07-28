@@ -39,31 +39,31 @@ class TermListSerializerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
-				new TermList( array() ),
+		return [
+			[
+				new TermList( [] ),
 				false,
-				array()
-			),
-			array(
-				new TermList( array() ),
+				[]
+			],
+			[
+				new TermList( [] ),
 				true,
 				new \stdClass()
-			),
-			array(
-				new TermList( array(
+			],
+			[
+				new TermList( [
 					new Term( 'en', 'Water' ),
 					new Term( 'it', 'Lama' ),
 					new TermFallback( 'pt', 'Lama', 'de', 'zh' ),
-				) ),
+				] ),
 				false,
-				array(
-					'en' => array( 'language' => 'en', 'value' => 'Water' ),
-					'it' => array( 'language' => 'it', 'value' => 'Lama' ),
-					'pt' => array( 'language' => 'de', 'value' => 'Lama', 'source' => 'zh' ),
-				)
-			),
-		);
+				[
+					'en' => [ 'language' => 'en', 'value' => 'Water' ],
+					'it' => [ 'language' => 'it', 'value' => 'Lama' ],
+					'pt' => [ 'language' => 'de', 'value' => 'Lama', 'source' => 'zh' ],
+				]
+			],
+		];
 	}
 
 	public function testWithUnsupportedObject() {
@@ -76,13 +76,13 @@ class TermListSerializerTest extends PHPUnit_Framework_TestCase {
 	public function testTermListSerializerWithOptionObjectsForMaps() {
 		$serializer = $this->buildSerializer( true );
 
-		$terms = new TermList( array( new Term( 'en', 'foo' ) ) );
+		$terms = new TermList( [ new Term( 'en', 'foo' ) ] );
 
 		$serial = new \stdClass();
-		$serial->en = array(
+		$serial->en = [
 			'language' => 'en',
 			'value' => 'foo'
-		);
+		];
 
 		$this->assertEquals( $serial, $serializer->serialize( $terms ) );
 	}

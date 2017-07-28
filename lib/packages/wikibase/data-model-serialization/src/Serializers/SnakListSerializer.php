@@ -67,7 +67,7 @@ class SnakListSerializer implements DispatchableSerializer {
 	}
 
 	private function getSerialized( SnakList $snaks ) {
-		$serialization = array();
+		$serialization = [];
 
 		/**
 		 * @var Snak $snak

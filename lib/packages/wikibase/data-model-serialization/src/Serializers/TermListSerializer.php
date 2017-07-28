@@ -62,7 +62,7 @@ class TermListSerializer implements Serializer {
 	 * @return array[]
 	 */
 	private function getSerialized( TermList $termList ) {
-		$serialization = array();
+		$serialization = [];
 
 		foreach ( $termList->getIterator() as $term ) {
 			$serialization[$term->getLanguageCode()] = $this->termSerializer->serialize( $term );

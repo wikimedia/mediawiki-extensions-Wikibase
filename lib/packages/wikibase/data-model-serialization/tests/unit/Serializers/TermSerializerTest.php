@@ -27,23 +27,23 @@ class TermSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationProvider() {
-		return array(
-			array(
+		return [
+			[
 				new Term( 'en', 'SomeValue' ),
-				array(
+				[
 					'language' => 'en',
 					'value' => 'SomeValue',
-				)
-			),
-			array(
+				]
+			],
+			[
 				new TermFallback( 'en', 'SomeValue', 'en-gb', 'en' ),
-				array(
+				[
 					'language' => 'en-gb',
 					'value' => 'SomeValue',
 					'source' => 'en',
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function testWithUnsupportedObject() {
