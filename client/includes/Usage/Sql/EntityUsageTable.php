@@ -27,6 +27,8 @@ class EntityUsageTable {
 
 	const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
 
+	const UNION_CHUNK_SIZE = 50;
+
 	/**
 	 * @var EntityIdParser
 	 */
@@ -371,13 +373,7 @@ class EntityUsageTable {
 
 		$values = [];
 		if ( $this->readConnection->getType() === 'mysql' ) {
-			// On MySQL we can UNION all queries and run them at once
-			$sql = $this->readConnection->unionQueries( $subQueries, true );
-
-			$res = $this->readConnection->query( $sql, __METHOD__ );
-			foreach ( $res as $row ) {
-				$values[] = $row->eu_entity_id;
-			}
+			$this->getUsedEntityIdStringsMySql( $subQueries, $values );
 		} else {
 			foreach ( $subQueries as $sql ) {
 				$res = $this->readConnection->query( $sql, __METHOD__ );
@@ -428,6 +424,22 @@ class EntityUsageTable {
 		);
 
 		return array_map( 'intval', $rowIds ?: [] );
+	}
+
+	/**
+	 * @param string[] $subQueries
+	 * @param string[] $values
+	 */
+	private function getUsedEntityIdStringsMySql( array $subQueries, array &$values ) {
+		// On MySQL we can UNION all queries and run them at once
+		foreach ( array_chunk( $subQueries, self::UNION_CHUNK_SIZE ) as $queryChunks ) {
+			$sql = $this->readConnection->unionQueries( $queryChunks, true );
+
+			$res = $this->readConnection->query( $sql, __METHOD__ );
+			foreach ( $res as $row ) {
+				$values[] = $row->eu_entity_id;
+			}
+		}
 	}
 
 }
