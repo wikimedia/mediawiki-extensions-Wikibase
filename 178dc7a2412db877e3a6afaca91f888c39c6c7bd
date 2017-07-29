@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_edb313fc",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-29T17:19:19Z",
+      "side": 1,
+      "message": "Good question... While it\u0027s quite possible that we\u0027d want dofferent limits for different kinds of queries, I\u0027d go with $this-\u003ebatchSize until we have a concrete reason no to. \n\nEven if we want different limits, they may be relative to each other - e.g. union chunk size could be batchSize/3+1 or something.",
+      "parentUuid": "4e7eab26_0d01bfb9",
+      "range": {
+        "startLine": 30,
+        "startChar": 7,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "178dc7a2412db877e3a6afaca91f888c39c6c7bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_2d383b9b",
         "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-29T13:43:15Z",
       "side": 1,
       "message": "I can see why you want to do this on a reference, but it still seems weird to me. Usually get* functions return something in our code.",
+      "range": {
+        "startLine": 433,
+        "startChar": 66,
+        "endLine": 433,
+        "endChar": 80
+      },
+      "revId": "178dc7a2412db877e3a6afaca91f888c39c6c7bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8d992f83",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-29T17:19:19Z",
+      "side": 1,
+      "message": "I was thinking the same thing... one reason to use a reference here is memory footprint when there is many IDs. No idea if that\u0027s really a problem though.",
+      "parentUuid": "4e7eab26_2d383b9b",
       "range": {
         "startLine": 433,
         "startChar": 66,
