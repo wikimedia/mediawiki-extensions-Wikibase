@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_2d383b9b",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-29T13:43:15Z",
+      "side": 1,
+      "message": "I can see why you want to do this on a reference, but it still seems weird to me. Usually get* functions return something in our code.",
+      "range": {
+        "startLine": 433,
+        "startChar": 66,
+        "endLine": 433,
+        "endChar": 80
+      },
+      "revId": "178dc7a2412db877e3a6afaca91f888c39c6c7bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_cd3c1791",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-07-29T13:43:15Z",
+      "side": 1,
+      "message": "s/all/up to self::UNION_CHUNK_SIZE/",
+      "range": {
+        "startLine": 434,
+        "startChar": 27,
+        "endLine": 434,
+        "endChar": 30
+      },
+      "revId": "178dc7a2412db877e3a6afaca91f888c39c6c7bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
