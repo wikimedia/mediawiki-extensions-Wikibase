@@ -2,11 +2,12 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use InvalidArgumentException;
 use Language;
 use RecentChange;
 use UnexpectedValueException;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * @license GPL-2.0+
@@ -26,12 +27,23 @@ class ExternalChangeFactory {
 	private $summaryLanguage;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
 	 * @param string $repoSiteId
 	 * @param Language $summaryLanguage Language to use when generating edit summaries
+	 * @param EntityIdParser $idParser
 	 */
-	public function __construct( $repoSiteId, Language $summaryLanguage ) {
+	public function __construct(
+		$repoSiteId,
+		Language $summaryLanguage,
+		EntityIdParser $idParser
+	) {
 		$this->repoSiteId = $repoSiteId;
 		$this->summaryLanguage = $summaryLanguage;
+		$this->idParser = $idParser;
 	}
 
 	/**
@@ -52,11 +64,11 @@ class ExternalChangeFactory {
 		// If a pre-formatted comment exists, pass it on.
 		$changeHtml = isset( $rc_params['comment-html'] ) ? $rc_params['comment-html'] : null;
 
-		$itemId = $this->extractItemId( $changeParams['object_id'] );
+		$entityId = $this->extractEntityId( $changeParams['object_id'] );
 		$changeType = $this->extractChangeType( $changeParams['type'] );
 		$rev = $this->newRevisionData( $recentChange, $changeParams, $changeHtml );
 
-		return new ExternalChange( $itemId, $rev, $changeType );
+		return new ExternalChange( $entityId, $rev, $changeType );
 	}
 
 	/**
@@ -144,13 +156,13 @@ class ExternalChangeFactory {
 	 * @param string $prefixedId
 	 *
 	 * @throws UnexpectedValueException
-	 * @return ItemId
+	 * @return EntityId
 	 */
-	private function extractItemId( $prefixedId ) {
+	private function extractEntityId( $prefixedId ) {
 		try {
-			return new ItemId( $prefixedId );
-		} catch ( InvalidArgumentException $ex ) {
-			throw new UnexpectedValueException( 'Invalid $itemId found for change.' );
+			return $this->idParser->parse( $prefixedId );
+		} catch ( EntityIdParsingException $ex ) {
+			throw new UnexpectedValueException( 'Invalid $entityId found for change.' );
 		}
 	}
 
