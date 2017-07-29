@@ -105,11 +105,20 @@ class EntityUsageTable {
 
 		// Collect affected row IDs, so we can use them for an
 		// efficient update query on the master db.
-		$where = [
-			'eu_page_id' => (int)$pageId,
-			$db->makeList( $usageConditions, LIST_OR )
-		];
-		return $this->getPrimaryKeys( $where, __METHOD__ );
+		$rowIds = [];
+		foreach ( array_chunk( $usageConditions, $this->batchSize ) as $usageConditionChunk ) {
+			$where = [
+				'eu_page_id' => (int)$pageId,
+				$db->makeList( $usageConditionChunk, LIST_OR )
+			];
+
+			$rowIds = array_merge(
+				$this->getPrimaryKeys( $where, __METHOD__ ),
+				$rowIds
+			);
+		}
+
+		return $rowIds;
 	}
 
 	/**

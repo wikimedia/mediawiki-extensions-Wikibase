@@ -130,11 +130,13 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 		$usages = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' ),
+			new EntityUsage( $q3, EntityUsage::OTHER_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 		];
 
-		$usageTable = $this->getEntityUsageTable();
+		$usageTable = $this->getEntityUsageTable( /* $batchSize = */ 2 );
 
 		// Adding usages should put them into the database
 		$usageTable->addUsages( 23, $usages );
@@ -142,10 +144,12 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$rows = $this->getUsageRows( 23, $usages );
 		$this->assertUsageTableContains( $rows );
 
-		$usageTable->removeUsages( 23, [ $usages[0] ] );
+		// Test batching by removing more usages than $batchSize
+		$usageTable->removeUsages( 23, [ $usages[0], $usages[2], $usages[3] ] );
 
-		$this->assertUsageTableDoesNotContain( array_slice( $rows, 0, 1 ) );
-		$this->assertUsageTableContains( array_slice( $rows, 1 ) );
+		$rows = array_values( $rows );
+		$this->assertUsageTableDoesNotContain( [ $rows[0], $rows[2], $rows[3] ] );
+		$this->assertUsageTableContains( [ $rows[1], $rows[4] ] );
 	}
 
 	private function getUsageStrings( array $usages ) {
