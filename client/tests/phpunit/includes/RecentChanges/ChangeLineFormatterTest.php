@@ -16,6 +16,7 @@ use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\RecentChanges\ChangeLineFormatter
@@ -61,7 +62,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
 
 		$changesList = ChangesList::newFromContext( $context );
-		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ) );
+		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ), new BasicEntityIdParser() );
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$formatter = new ChangeLineFormatter(
@@ -105,7 +106,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		// the wiki id against this setting.
 		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
 
-		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ) );
+		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ), new BasicEntityIdParser() );
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$data = [
@@ -181,7 +182,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		// the wiki id against this setting.
 		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
 
-		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ) );
+		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ), new BasicEntityIdParser() );
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$data = [

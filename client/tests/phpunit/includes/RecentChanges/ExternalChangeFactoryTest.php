@@ -7,6 +7,7 @@ use RecentChange;
 use Wikibase\Client\RecentChanges\ExternalChange;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RevisionData;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -24,7 +25,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 	private function getExternalChangeFactory() {
-		return new ExternalChangeFactory( 'testrepo', Language::factory( 'qqx' ) );
+		return new ExternalChangeFactory( 'testrepo', Language::factory( 'qqx' ), new BasicEntityIdParser() );
 	}
 
 	public function testNewFromRecentChange_itemUpdated() {
