@@ -218,7 +218,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$usageTable = $this->getEntityUsageTable( 3 );
+		$usageTable = $this->getEntityUsageTable( 2 );
 		$usageTable->addUsages( 23, [ $u3s, $u3l, $u4l ] );
 		$usageTable->addUsages( 42, [ $u4l, $u4t ] );
 
@@ -298,7 +298,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 		$usages = [ $u3i, $u3l, $u4l ];
 
-		$usageTable = $this->getEntityUsageTable( 3 );
+		$usageTable = $this->getEntityUsageTable( 2 );
 		$usageTable->addUsages( 23, $usages );
 
 		$this->assertEmpty( $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
