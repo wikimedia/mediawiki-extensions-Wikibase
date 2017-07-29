@@ -49,7 +49,8 @@ class ChangesListLinesHandler {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$changeFactory = new ExternalChangeFactory(
 			$wikibaseClient->getSettings()->getSetting( 'repoSiteId' ),
-			$wikibaseClient->getContentLanguage()
+			$wikibaseClient->getContentLanguage(),
+			$wikibaseClient->getEntityIdParser()
 		);
 		$formatter = new ChangeLineFormatter(
 			$changesList->getUser(),
