@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_f8d2ef5c",
+        "filename": "client/includes/RecentChanges/ExternalChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-30T08:47:30Z",
+      "side": 1,
+      "message": "Long line, please split it to each argument per line.",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b8c54792",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-30T08:47:30Z",
+      "side": 1,
+      "message": "Long line, please split to one argument per line",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_78bfdff6",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-30T08:47:30Z",
+      "side": 1,
+      "message": "Long line, please split to one argument per line",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_18333bc2",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-30T08:47:30Z",
+      "side": 1,
+      "message": "Long line, please split to one argument per line",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_98c88bac",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ExternalChangeFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-07-30T08:47:30Z",
+      "side": 1,
+      "message": "Long line, please split to one argument per line",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
