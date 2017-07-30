@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_78fcbfb1",
+        "filename": "client/includes/RecentChanges/ExternalChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-07-30T09:20:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_f8d2ef5c",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_b8c54792",
         "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-30T08:47:30Z",
       "side": 1,
       "message": "Long line, please split to one argument per line",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_18281b32",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-07-30T09:20:36Z",
+      "side": 1,
+      "message": "Done all",
+      "parentUuid": "4e7eab26_b8c54792",
       "revId": "100baa7113ff685d60544163c645b8635414e382",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +117,24 @@
       "writtenOn": "2017-07-30T08:47:30Z",
       "side": 1,
       "message": "Long line, please split to one argument per line",
+      "revId": "100baa7113ff685d60544163c645b8635414e382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_382dd741",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ExternalChangeFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-07-30T09:20:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_98c88bac",
       "revId": "100baa7113ff685d60544163c645b8635414e382",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
