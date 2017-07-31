@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_e544871e",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T10:40:30Z",
+      "side": 1,
+      "message": "I actually realized that this change is invalid, see below.",
+      "parentUuid": "8e742343_dd73d0e3",
+      "revId": "c792ba8321055156f5dfbb09a3cdb41446886cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_9d7a28b7",
         "filename": "repo/includes/Specials/SpecialModifyTerm.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-19T17:19:19Z",
       "side": 1,
       "message": "Can we use the Status directly, instead of throwing an exception? We are potentially losing information here.",
+      "revId": "c792ba8321055156f5dfbb09a3cdb41446886cad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_855103e0",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T10:40:30Z",
+      "side": 1,
+      "message": "This is change was wrong. Array returned by getErrors has different structure PermissionError/Message:newFromSpecifier expect. I\u0027ll try to fix this.\nI apparently assumed there is a unit test for the error case without checking. There is no test.\n\nTo your question: using Status will not help as long as the status does not contain information on which particular permission(s) is/are missing. This has not been a part of EntityPermissionChecker interface. If we want to keep the information that was there before, this should be added to the status somehow.",
+      "parentUuid": "8e742343_9d7a28b7",
       "revId": "c792ba8321055156f5dfbb09a3cdb41446886cad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
