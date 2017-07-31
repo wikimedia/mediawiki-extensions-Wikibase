@@ -16,6 +16,24 @@
       "revId": "c8de362c3dd92b694df95e773dfd33dfdac0194f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3b5aaefa",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T12:59:40Z",
+      "side": 1,
+      "message": "I think it would always be set but there might be cases where it is of different type than PermissionError would expect.\n\nSo this would be an issue. BUT: this method is not used and not needed, forgot to remove it from the initial version I\u0027ve been working on where I still was keeping the PermissionError.\n\nRemoved now.",
+      "parentUuid": "4e7eab26_fbf666f5",
+      "revId": "c8de362c3dd92b694df95e773dfd33dfdac0194f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
