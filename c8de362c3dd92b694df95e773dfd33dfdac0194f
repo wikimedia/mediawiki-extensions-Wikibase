@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_fbf666f5",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T12:55:10Z",
+      "side": 1,
+      "message": "Status allows several ways to specify a message. Are we sure this field is always set?",
+      "revId": "c8de362c3dd92b694df95e773dfd33dfdac0194f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
