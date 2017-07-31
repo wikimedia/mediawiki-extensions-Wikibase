@@ -11,29 +11,29 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'wikibase.serialization.DeserializerFactory.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.DeserializerFactory.tests' => $moduleTemplate + [
+			'scripts' => [
 				'DeserializerFactory.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.DeserializerFactory',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.MockEntity.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.MockEntity.tests' => $moduleTemplate + [
+			'scripts' => [
 				'MockEntity.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.MultiTerm',
@@ -41,50 +41,50 @@ return call_user_func( function() {
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermMap',
 				'wikibase.serialization.tests.MockEntity',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.SerializerFactory.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.SerializerFactory.tests' => $moduleTemplate + [
+			'scripts' => [
 				'SerializerFactory.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.SerializerFactory',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.StrategyProvider.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.StrategyProvider.tests' => $moduleTemplate + [
+			'scripts' => [
 				'StrategyProvider.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.serialization.StrategyProvider',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.tests.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.tests.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'__namespace.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.serialization.__namespace',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.tests.MockEntity' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.tests.MockEntity' => $moduleTemplate + [
+			'scripts' => [
 				'MockEntity.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel.Entity',
 				'wikibase.serialization.tests.__namespace',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return array_merge(
 		$modules,

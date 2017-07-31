@@ -11,35 +11,35 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'wikibase.serialization' => $moduleTemplate + array(
-			'dependencies' => array(
+		'wikibase.serialization' => $moduleTemplate + [
+			'dependencies' => [
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.DeserializerFactory',
 				'wikibase.serialization.SerializerFactory',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'__namespace.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.DeserializerFactory' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.DeserializerFactory' => $moduleTemplate + [
+			'scripts' => [
 				'DeserializerFactory.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.StrategyProvider',
@@ -64,14 +64,14 @@ return call_user_func( function() {
 				'wikibase.serialization.StatementListDeserializer',
 				'wikibase.serialization.TermDeserializer',
 				'wikibase.serialization.TermMapDeserializer',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.SerializerFactory' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.SerializerFactory' => $moduleTemplate + [
+			'scripts' => [
 				'SerializerFactory.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.StrategyProvider',
@@ -96,19 +96,19 @@ return call_user_func( function() {
 				'wikibase.serialization.StatementSerializer',
 				'wikibase.serialization.TermMapSerializer',
 				'wikibase.serialization.TermSerializer',
-			),
-		),
+			],
+		],
 
-		'wikibase.serialization.StrategyProvider' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.serialization.StrategyProvider' => $moduleTemplate + [
+			'scripts' => [
 				'StrategyProvider.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.serialization.__namespace',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return array_merge(
 		$modules,
