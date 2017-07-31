@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
+use Language;
+use Message;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContent;
@@ -120,6 +122,21 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		assertThat( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value' value='$termValue'/>" )
+		) ) ) );
+	}
+
+	public function testGivenUserHasInsufficientPermissions_errorIsShown() {
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true, 'item-term' => false ] ] );
+
+		$id = $this->createNewItemWithTerms( $language = 'de', $termValue = 'foo' );
+
+		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => '' ], true );
+
+		list( $output, ) = $this->executeSpecialPage( '', $request );
+
+		assertThat( $output, is( htmlPiece( havingChild(
+			both( tagMatchingOutline( "<p class='error'/>" ) )
+			->andAlso( havingTextContents( new Message( 'permissionserrors', [], new Language( self::USER_LANGUAGE ) ) ) )
 		) ) ) );
 	}
 
