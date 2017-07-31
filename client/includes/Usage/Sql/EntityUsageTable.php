@@ -378,16 +378,10 @@ class EntityUsageTable {
 		// Note: We need to use one (sub)query per entity here, per T116404
 		$subQueries = $this->getUsedEntityIdStringsQueries( $idStrings );
 
-		$values = [];
 		if ( $this->readConnection->getType() === 'mysql' ) {
-			// On MySQL we can UNION all queries and run them at once
-			$sql = $this->readConnection->unionQueries( $subQueries, true );
-
-			$res = $this->readConnection->query( $sql, __METHOD__ );
-			foreach ( $res as $row ) {
-				$values[] = $row->eu_entity_id;
-			}
+			 return $this->getUsedEntityIdStringsMySql( $subQueries );
 		} else {
+			$values = [];
 			foreach ( $subQueries as $sql ) {
 				$res = $this->readConnection->query( $sql, __METHOD__ );
 				if ( $res->numRows() ) {
@@ -437,6 +431,26 @@ class EntityUsageTable {
 		);
 
 		return array_map( 'intval', $rowIds ?: [] );
+	}
+
+	/**
+	 * @param string[] $subQueries
+	 * @return string[]
+	 */
+	private function getUsedEntityIdStringsMySql( array $subQueries ) {
+		$values = [];
+
+		// On MySQL we can UNION up queries and run them at once
+		foreach ( array_chunk( $subQueries, $this->batchSize ) as $queryChunks ) {
+			$sql = $this->readConnection->unionQueries( $queryChunks, true );
+
+			$res = $this->readConnection->query( $sql, __METHOD__ );
+			foreach ( $res as $row ) {
+				$values[] = $row->eu_entity_id;
+			}
+		}
+
+		return $values;
 	}
 
 }

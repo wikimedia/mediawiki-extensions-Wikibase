@@ -222,7 +222,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$usageTable = $this->getEntityUsageTable( 3 );
+		$usageTable = $this->getEntityUsageTable( 2 );
 		$usageTable->addUsages( 23, [ $u3s, $u3l, $u4l ] );
 		$usageTable->addUsages( 42, [ $u4l, $u4t ] );
 
@@ -294,6 +294,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	public function testGetUnusedEntities() {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
+		$q5 = new ItemId( 'Q5' );
 		$q6 = new ItemId( 'Q6' );
 
 		$u3i = new EntityUsage( $q3, EntityUsage::SITELINK_USAGE );
@@ -302,22 +303,23 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 		$usages = [ $u3i, $u3l, $u4l ];
 
-		$usageTable = $this->getEntityUsageTable( 3 );
+		$usageTable = $this->getEntityUsageTable( 2 );
 		$usageTable->addUsages( 23, $usages );
 
 		$this->assertEmpty( $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
-		$entityIds = [ $q4, $q6 ];
 		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
 			$entityIds = [ $q6 ];
+			$unused = $usageTable->getUnusedEntities( $entityIds );
+			$this->assertEquals( [ $q6 ], array_values( $unused ), 'Q6 should be unused' );
+		} else {
+			$entityIds = [ $q4, $q5, $q6 ];
+			$unused = $usageTable->getUnusedEntities( $entityIds );
+			$this->assertEquals( [ $q5, $q6 ], array_values( $unused ), 'Q5 and Q6 should be unused' );
 		}
-
-		$unused = $usageTable->getUnusedEntities( $entityIds );
-		$this->assertCount( 1, $unused );
-		$this->assertEquals( $q6, reset( $unused ), 'Q6 should be unused' );
 	}
 
 	/**
