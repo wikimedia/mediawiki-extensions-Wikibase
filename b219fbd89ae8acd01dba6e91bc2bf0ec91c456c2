@@ -306,6 +306,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_7924be07",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T16:41:22Z",
+      "side": 1,
+      "message": "Depends on how often this happens. If it\u0027s rare, we don\u0027t need to bether. If it happens all the time, it\u0027s bad to lose the information. Sadly, I have no idea how frequent this is.",
+      "parentUuid": "4e7eab26_fe94143b",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_581bfed4",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
