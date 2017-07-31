@@ -87,6 +87,24 @@
       "revId": "489ff756368598131bbe85e6e86848d83220348b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b326c8c7",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T09:42:07Z",
+      "side": 1,
+      "message": "Done in https://gerrit.wikimedia.org/r/368626",
+      "parentUuid": "4e7eab26_9bb17790",
+      "revId": "489ff756368598131bbe85e6e86848d83220348b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
