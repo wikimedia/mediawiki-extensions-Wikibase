@@ -194,7 +194,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		);
 
 		$builder->setBatchSize( 2 );
-		$builder->setDoNotReadFullEntityIdColumn();
+		$builder->setReadFullEntityIdColumn( false );
 
 		return $builder;
 	}
