@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5eb768d3",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:35:35Z",
+      "side": 1,
+      "message": "I guess this was added to avoid $params being used further in this method.",
+      "parentUuid": "6e71af52_6a5b8e27",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 7
+      },
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_caa882db",
         "filename": "repo/includes/Api/ModifyEntity.php",
         "patchSetId": 5
@@ -76,6 +100,30 @@
       "writtenOn": "2017-07-21T12:50:23Z",
       "side": 1,
       "message": "Actions are permissions? Don\u0027t they have a prefix the actions don\u0027t have?",
+      "range": {
+        "startLine": 315,
+        "startChar": 23,
+        "endLine": 315,
+        "endChar": 33
+      },
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1eb1e0dc",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:35:35Z",
+      "side": 1,
+      "message": "Actions are meant as concept of different domain than permission.\nAction like \"edit item terms\" might require some permission or permission (i.e. MW permissions if using MW permission mechanism). This is still all too mixed up but that was the concept introduced some time ago.\n\nI didn\u0027t get the prefix part of your question, so I cannot answer it, sorry.",
+      "parentUuid": "6e71af52_caa882db",
       "range": {
         "startLine": 315,
         "startChar": 23,
@@ -140,6 +188,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_1e8b2022",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:35:35Z",
+      "side": 1,
+      "message": "I.e. I meant this should not be losing information compared to what was done before.",
+      "parentUuid": "4e7eab26_4107a01f",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_aa3ad6be",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
@@ -151,6 +217,30 @@
       "writtenOn": "2017-07-21T12:50:23Z",
       "side": 1,
       "message": "I guess this is needed for one of the subclasses, but unused here.",
+      "range": {
+        "startLine": 171,
+        "startChar": 75,
+        "endLine": 171,
+        "endChar": 82
+      },
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_becd2c64",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:35:35Z",
+      "side": 1,
+      "message": "Indeed, see Api\\EditEntity",
+      "parentUuid": "6e71af52_aa3ad6be",
       "range": {
         "startLine": 171,
         "startChar": 75,
@@ -192,6 +282,24 @@
       "side": 1,
       "message": "That would mean loading existing aliases, checking what (if at all) \"add\" and \"reemove\") would do, and generating the new array with all expected result aliases, not only those mention in \"add\" and \"remove\". Seems a bit of an overkill to me. But doable if this makes sense.",
       "parentUuid": "6e71af52_784d9adf",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_fe94143b",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:35:35Z",
+      "side": 1,
+      "message": "So me and Aleksey were thinking about not doing this here. Daniel, do you think the existing behaviour should be changed and this should become smarter and figure out which aliases were actually added/deleted when both add and remove were provided?",
+      "parentUuid": "4e7eab26_53ba1320",
       "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
