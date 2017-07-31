@@ -112,7 +112,7 @@ return call_user_func( function() {
 
 	return array_merge(
 		$modules,
-		include( __DIR__ . '/Serializers/resources.php' ),
-		include( __DIR__ . '/Deserializers/resources.php' )
+		include __DIR__ . '/Serializers/resources.php',
+		include __DIR__ . '/Deserializers/resources.php'
 	);
 } );
