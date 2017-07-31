@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_99308afe",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T17:45:13Z",
+      "side": 1,
+      "message": "Since we mock the permission checker, this isn\u0027t needed at all.",
+      "revId": "12c5d462129b1731863991a1f6988b9d3d6d11b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
