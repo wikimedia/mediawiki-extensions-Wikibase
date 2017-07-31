@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Belkacem77"
+		]
+	},
+	"tooltip-t-wikibase": "Aseɣwen ɣer uferdis n temsisɣelt n isefka yeqqnen",
+	"wikibase-comment-update": "Aferdis {{WBREPONAME}} ibeddel",
+	"wikibase-dataitem": "Aferdis {{WBREPONAME}}",
+	"wikibase-editlinks": "Ẓreg iseɣwan",
+	"wikibase-editlinkstitle": "Ẓreg iseɣwan n gar tutlayin",
+	"wikibase-rc-hide-wikidata-show": "Sken",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Taẓrigt n {{WBREPONAME}}"
+}
