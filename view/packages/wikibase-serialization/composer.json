@@ -29,6 +29,7 @@
 		]
 	},
 	"scripts": {
+		"fix": "phpcbf",
 		"test": [
 			"vendor/bin/phpcs . -p -s"
 		]
