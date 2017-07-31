@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_1ebd60d1",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:59:05Z",
+      "side": 1,
+      "message": "Maybe worth adding a in-code comment, FIXME, TODO, something to indicate this?",
+      "parentUuid": "4e7eab26_c114f0a2",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_612adcd9",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 5
@@ -47,6 +65,29 @@
       "writtenOn": "2017-07-27T13:50:22Z",
       "side": 1,
       "message": "Always an int now. Always defined.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3ec37c0c",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:59:05Z",
+      "side": 1,
+      "message": "https://en.wikipedia.org/wiki/The_The",
+      "range": {
+        "startLine": 332,
+        "startChar": 10,
+        "endLine": 332,
+        "endChar": 18
+      },
       "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -151,6 +192,23 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5e6c4805",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:59:05Z",
+      "side": 1,
+      "message": "Is it really needed to call it here?",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_a18684de",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 5
@@ -162,6 +220,29 @@
       "writtenOn": "2017-07-27T13:50:22Z",
       "side": 1,
       "message": "No more special cases. Provide the id of the effective base revision, and let EntityStore do the thinking.",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3e7dbce4",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-07-31T14:59:05Z",
+      "side": 1,
+      "message": "why not 0?",
+      "range": {
+        "startLine": 377,
+        "startChar": 85,
+        "endLine": 377,
+        "endChar": 89
+      },
       "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
