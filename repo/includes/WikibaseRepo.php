@@ -1647,10 +1647,6 @@ class WikibaseRepo {
 	 * @return EditEntityFactory
 	 */
 	public function newEditEntityFactory( IContextSource $context = null ) {
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
-
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( 'uncached' ),
@@ -1658,8 +1654,7 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
 			$this->getEntityPatcher(),
-			$this->newEditFilterHookRunner( $context ),
-			$context
+			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() )
 		);
 	}
 

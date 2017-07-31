@@ -106,11 +106,6 @@ class EditEntity {
 	private $title = null;
 
 	/**
-	 * @var IContextSource
-	 */
-	private $context;
-
-	/**
 	 * @var EditFilterHookRunner
 	 */
 	private $editFilterHookRunner;
@@ -178,10 +173,6 @@ class EditEntity {
 	 *        This will detect "late" edit conflicts, i.e. someone squeezing in an edit
 	 *        just before the actual database transaction for saving beings.
 	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
-	 * @param IContextSource|null $context the context to use while processing
-	 *        the edit; defaults to RequestContext::getMain().
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
@@ -193,8 +184,7 @@ class EditEntity {
 		EntityDocument $newEntity,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
-		$baseRevId = false,
-		IContextSource $context = null
+		$baseRevId = false
 	) {
 		$this->newEntity = $newEntity;
 
@@ -211,12 +201,6 @@ class EditEntity {
 
 		$this->errorType = 0;
 		$this->status = Status::newGood();
-
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
-
-		$this->context = $context;
 
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -678,56 +662,6 @@ class EditEntity {
 	 */
 	public function doesCheckForEditConflicts() {
 		return $this->getBaseRevisionId() !== false;
-	}
-
-	/**
-	 * Shows an error page showing the errors that occurred during attemptSave(), if any.
-	 *
-	 * If $titleMessage is set it is made an assumption that the page is still the original
-	 * one, and there should be no link back from a special error page.
-	 *
-	 * @param string|null $titleMessage Message key for the page title.
-	 *
-	 * @return bool true if an error page was shown, false if there were no errors to show.
-	 */
-	public function showErrorPage( $titleMessage = null ) {
-		$out = $this->context->getOutput();
-
-		if ( $this->status === null || $this->status->isOK() ) {
-			return false;
-		}
-
-		if ( $titleMessage === null ) {
-			$out->prepareErrorPage( wfMessage( 'errorpagetitle' ) );
-		} else {
-			$out->prepareErrorPage( wfMessage( $titleMessage ), wfMessage( 'errorpagetitle' ) );
-		}
-
-		$this->showStatus();
-
-		if ( !isset( $titleMessage ) ) {
-			$out->returnToMain( '', $this->getTitle() );
-		}
-
-		return true;
-	}
-
-	/**
-	 * Shows any errors or warnings from attemptSave().
-	 *
-	 * @return bool true if any message was shown, false if there were no errors to show.
-	 */
-	private function showStatus() {
-		if ( $this->status === null || $this->status->isGood() ) {
-			return false;
-		}
-
-		$out = $this->context->getOutput();
-		$text = $this->status->getHTML();
-
-		$out->addHTML( Html::rawElement( 'div', [ 'class' => 'error' ], $text ) );
-
-		return true;
 	}
 
 	/**
