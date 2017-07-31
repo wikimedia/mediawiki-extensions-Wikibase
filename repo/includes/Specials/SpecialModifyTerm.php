@@ -4,9 +4,8 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
-use InvalidArgumentException;
 use Language;
-use PermissionsError;
+use Status;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -148,9 +147,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
-		try {
-			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
-		} catch ( PermissionsError $e ) {
+		$status = $this->checkTermChangePermissions( $this->entityRevision->getEntity() );
+		if ( !$status->isOK() ) {
 			$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
 			return false;
 		}
@@ -187,18 +185,14 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @throws PermissionsError
+	 * @return Status
 	 */
 	private function checkTermChangePermissions( EntityDocument $entity ) {
-		$status = $this->permissionChecker->getPermissionStatusForEntity(
+		return $this->permissionChecker->getPermissionStatusForEntity(
 			$this->getUser(),
 			EntityPermissionChecker::ACTION_EDIT_TERMS,
 			$entity
 		);
-
-		if ( !$status->isOK() ) {
-			throw new PermissionsError( null, $status->getErrors() );
-		}
 	}
 
 	/**
