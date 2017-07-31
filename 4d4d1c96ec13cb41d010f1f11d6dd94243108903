@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_b90f8632",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T15:43:26Z",
+      "side": 1,
+      "message": "Well, there\u0027s this in the doxygen block: \"true and false will be accepted for backwards compatibility, but both will be treated like 0.\"",
+      "parentUuid": "4e7eab26_1ebd60d1",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_612adcd9",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 5
@@ -227,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_592782b1",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T15:43:26Z",
+      "side": 1,
+      "message": "It provides a well defined point at which the \"current\" revision is well defined. It may already be defined earlier, but it\u0027s definitely defined after this call. I think that is a useful reference point to have in this code.",
+      "parentUuid": "4e7eab26_5e6c4805",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_a18684de",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 5
@@ -244,6 +280,23 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_b936a6e2",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T15:43:26Z",
+      "side": 1,
+      "message": "should default to 0",
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_3e7dbce4",
         "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
         "patchSetId": 5
@@ -255,6 +308,30 @@
       "writtenOn": "2017-07-31T14:59:05Z",
       "side": 1,
       "message": "why not 0?",
+      "range": {
+        "startLine": 377,
+        "startChar": 85,
+        "endLine": 377,
+        "endChar": 89
+      },
+      "revId": "4d4d1c96ec13cb41d010f1f11d6dd94243108903",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f91bce71",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-07-31T15:43:26Z",
+      "side": 1,
+      "message": "yes, should probably be 0",
+      "parentUuid": "4e7eab26_3e7dbce4",
       "range": {
         "startLine": 377,
         "startChar": 85,
