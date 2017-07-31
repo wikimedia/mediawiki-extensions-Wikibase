@@ -93,11 +93,7 @@ class RebuildTermSqlIndex extends Maintenance  {
 		$builder->setProgressReporter( $this->getReporter() );
 		$builder->setErrorReporter( $this->getErrorReporter() );
 		$builder->setBatchSize( $batchSize );
-		if ( $repoSettings->getSetting( 'readFullEntityIdColumn' ) ) {
-			$builder->setReadFullEntityIdColumn();
-		} else {
-			$builder->setDoNotReadFullEntityIdColumn();
-		}
+		$builder->setReadFullEntityIdColumn( $repoSettings->getSetting( 'readFullEntityIdColumn' ) );
 
 		if ( $fromId !== null ) {
 			$builder->setFromId( (int)$fromId );

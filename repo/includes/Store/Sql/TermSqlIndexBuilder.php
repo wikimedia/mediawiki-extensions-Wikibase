@@ -130,12 +130,11 @@ class TermSqlIndexBuilder {
 		$this->batchSize = $size;
 	}
 
-	public function setReadFullEntityIdColumn() {
-		$this->readFullEntityIdColumn = true;
-	}
-
-	public function setDoNotReadFullEntityIdColumn() {
-		$this->readFullEntityIdColumn = false;
+	/**
+	 * @param bool $readFullEntityIdColumn
+	 */
+	public function setReadFullEntityIdColumn( $readFullEntityIdColumn ) {
+		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 	public function rebuild() {
