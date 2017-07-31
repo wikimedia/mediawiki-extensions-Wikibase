@@ -4,6 +4,9 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use FauxResponse;
+use Language;
+use Message;
+use SpecialPageExecutor;
 use Status;
 use ValueValidators\Result;
 use WebRequest;
@@ -21,6 +24,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
@@ -354,6 +358,53 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	private function assetFingerprintEquals( Fingerprint $expected, Fingerprint $actual ) {
 		// TODO: Compare serializations.
 		$this->assertTrue( $expected->equals( $actual ), 'Fingerprint mismatches' );
+	}
+
+	public function testGivenUserHasInsufficientPermissions_errorIsShown() {
+		$inputEntity = new Item( null, $this->makeFingerprint( [ 'en' => 'a label' ] ) );
+
+		$this->mockRepository->putEntity( $inputEntity );
+		$id = $inputEntity->getId();
+
+		$specialPage = $this->newSpecialPageWithForbiddingPermissionChecker();
+
+		$request = new FauxRequest( [ 'language' => 'en', 'label' => 'new label' ], true );
+
+		list( $output, ) = ( new SpecialPageExecutor() )->executeSpecialPage( $specialPage, $id->getSerialization(), $request );
+
+		assertThat( $output, is( htmlPiece( havingChild(
+			both( tagMatchingOutline( "<p class='error'/>" ) )
+				->andAlso( havingTextContents( new Message( 'permissionserrors', [], new Language( self::USER_LANGUAGE ) ) ) )
+		) ) ) );
+	}
+
+	private function newSpecialPageWithForbiddingPermissionChecker() {
+		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
+
+		$error = Status::newFatal( 'permission error' );
+
+		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker->method( $this->anything() )
+			->willReturn( $error );
+
+		return new SpecialSetLabelDescriptionAliases(
+			$copyrightView,
+			$this->getSummaryFormatter(),
+			$this->getEntityRevisionLookup(),
+			$this->getEntityTitleLookup(),
+			new EditEntityFactory(
+				$this->getEntityTitleLookup(),
+				$this->getEntityRevisionLookup(),
+				$this->getEntityStore(),
+				$this->getEntityPermissionChecker(),
+				new EntityDiffer(),
+				new EntityPatcher(),
+				$this->getMockEditFitlerHookRunner()
+			),
+			$this->getFingerprintChangeOpsFactory(),
+			new StaticContentLanguages( self::$languageCodes ),
+			$permissionChecker
+		);
 	}
 
 }
