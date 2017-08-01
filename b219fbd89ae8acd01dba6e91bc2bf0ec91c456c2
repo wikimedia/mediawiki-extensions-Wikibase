@@ -324,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_1698e0c2",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-01T07:21:33Z",
+      "side": 1,
+      "message": "Right. So maybe let\u0027s keep the existing behaviour for now (or, alternatively, just rely on \"new\" way of generating summary by  ChangeOps given you\u0027ve merged I8f73a0c292b3d7ecefb8d1cb7eab74d09366f4bd), and try to find out is this a common case, or an edge case? Should we add tracking here, or maybe by any chance it would be possible to find this out using some web logs etc? I clearly don\u0027t know this stuff so it might be totally rubbish remark, I admit.",
+      "parentUuid": "4e7eab26_7924be07",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_581bfed4",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
