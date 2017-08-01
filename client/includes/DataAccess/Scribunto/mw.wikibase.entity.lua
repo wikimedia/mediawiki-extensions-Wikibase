@@ -33,6 +33,9 @@ entity.create = function( data )
 	if type( data ) ~= 'table' then
 		error( 'Expected a table obtained via mw.wikibase.getEntityObject, got ' .. type( data ) .. ' instead' )
 	end
+	if next( data ) == nil then
+		error( 'Expected a non-empty table obtained via mw.wikibase.getEntityObject' )
+	end
 	if type( data.schemaVersion ) ~= 'number' then
 		error( 'data.schemaVersion must be a number, got ' .. type( data.schemaVersion ) .. ' instead' )
 	end
