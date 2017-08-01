@@ -22,6 +22,30 @@
       "revId": "d3c3673ca3957ede04f847b3c19ae49ca475f559",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_faf2d2de",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-01T17:37:01Z",
+      "side": 1,
+      "message": "it could - i decided against it, because find it more readable (and more symmetric to other stats lines) this way...",
+      "parentUuid": "4e7eab26_9a514ee0",
+      "range": {
+        "startLine": 235,
+        "startChar": 27,
+        "endLine": 235,
+        "endChar": 56
+      },
+      "revId": "d3c3673ca3957ede04f847b3c19ae49ca475f559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
