@@ -142,9 +142,6 @@ class EditEntityTest extends MediaWikiTestCase {
 		array $permissions = null,
 		$editFilterHookRunner = null
 	) {
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest() );
-
 		if ( $user === null ) {
 			$user = User::newFromName( 'EditEntityTestUser' );
 		}
@@ -164,8 +161,7 @@ class EditEntityTest extends MediaWikiTestCase {
 			$entity,
 			$user,
 			$editFilterHookRunner,
-			$baseRevId,
-			$context
+			$baseRevId
 		);
 	}
 
@@ -410,36 +406,6 @@ class EditEntityTest extends MediaWikiTestCase {
 
 		$this->assertEquals( $expectedConflict, $status->hasMessage( 'edit-conflict' ),
 			"Saving should have failed late if and only if a base rev was provided.\n$statusMessage" );
-
-		$this->assertEquals( $expectedConflict, $editEntity->showErrorPage(),
-			"If and only if there was an error, an error page should be shown.\n$statusMessage" );
-	}
-
-	public function testErrorPage_DoesNotDoubleEscapeHtmlCharacters() {
-		$repo = $this->getMockRepository();
-		$permissions = [];
-		$context = new RequestContext();
-		// Cannot reuse makeEditEntity because we need the access the context
-		$editEntity = new EditEntity(
-			$this->getEntityTitleLookup(),
-			$repo,
-			$repo,
-			$this->getEntityPermissionChecker( $permissions ),
-			new EntityDiffer(),
-			new EntityPatcher(),
-			new Item(),
-			$this->getUser( 'EditEntityTestUser' ),
-			$this->getMockEditFitlerHookRunner(),
-			false,
-			$context
-		);
-
-		$editEntity->checkEditPermissions();
-		$editEntity->showErrorPage();
-		$html = $context->getOutput()->getHTML();
-
-		$this->assertContains( '<li>', $html, 'Unescaped HTML' );
-		$this->assertNotContains( '&amp;lt;', $html, 'No double escaping' );
 	}
 
 	public function dataCheckEditPermissions() {
@@ -724,7 +690,6 @@ class EditEntityTest extends MediaWikiTestCase {
 
 		$this->assertEquals( $shouldWork, $edit->getStatus()->isOK() );
 		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
-		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
 	}
 
 	public function provideAttemptSaveWatch() {

@@ -55,11 +55,6 @@ class EditEntityFactory {
 	private $editFilterHookRunner;
 
 	/**
-	 * @var IContextSource|null
-	 */
-	private $context;
-
-	/**
 	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
@@ -67,7 +62,6 @@ class EditEntityFactory {
 	 * @param EntityDiffer $entityDiffer
 	 * @param EntityPatcher $entityPatcher
 	 * @param EditFilterHookRunner $editFilterHookRunner
-	 * @param IContextSource|null $context
 	 */
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
@@ -76,8 +70,7 @@ class EditEntityFactory {
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
-		EditFilterHookRunner $editFilterHookRunner,
-		IContextSource $context = null
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -86,7 +79,6 @@ class EditEntityFactory {
 		$this->entityDiffer = $entityDiffer;
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
-		$this->context = $context;
 	}
 
 	/**
@@ -112,8 +104,7 @@ class EditEntityFactory {
 			$entity,
 			$user,
 			$this->editFilterHookRunner,
-			$baseRevId,
-			$this->context
+			$baseRevId
 		);
 	}
 
