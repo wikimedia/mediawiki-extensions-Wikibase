@@ -4,8 +4,6 @@
 		"qunit": true
 	},
 	"rules": {
-		"array-bracket-spacing": "off",
-		"dot-notation": "off",
-		"space-unary-ops": "off"
+		"dot-notation": "off"
 	}
 }

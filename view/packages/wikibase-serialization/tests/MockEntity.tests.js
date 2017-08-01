@@ -21,7 +21,7 @@ var testSets = [
 			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-label' ) } ),
 			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-description' ) } ),
 			new wb.datamodel.MultiTermMap( {
-				de: new wb.datamodel.MultiTerm( 'de', ['de-alias'] )
+				de: new wb.datamodel.MultiTerm( 'de', [ 'de-alias' ] )
 			} )
 		)
 	]

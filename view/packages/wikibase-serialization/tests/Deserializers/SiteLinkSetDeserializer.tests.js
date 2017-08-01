@@ -19,7 +19,7 @@ var testSets = [
 				badges: []
 			}
 		},
-		new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'site', 'page' )] )
+		new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'site', 'page' ) ] )
 	]
 ];
 

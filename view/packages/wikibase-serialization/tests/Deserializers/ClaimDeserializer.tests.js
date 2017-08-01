@@ -26,17 +26,17 @@ var testSets = [
 				property: 'P1'
 			},
 			qualifiers: {
-				P1: [{
+				P1: [ {
 					snaktype: 'novalue',
 					property: 'P1'
-				}]
+				} ]
 			},
-			'qualifiers-order': ['P1'],
+			'qualifiers-order': [ 'P1' ],
 			type: 'claim'
 		},
 		new wb.datamodel.Claim(
 			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-			new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
+			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 			'Q1$1'
 		)
 	]

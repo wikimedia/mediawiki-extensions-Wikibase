@@ -12,12 +12,12 @@ var testSets = [
 		new wb.datamodel.SnakList(),
 		{}
 	], [
-		new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
+		new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 		{
-			P1: [{
+			P1: [ {
 				snaktype: 'novalue',
 				property: 'P1'
-			}]
+			} ]
 		}
 	], [
 		new wb.datamodel.SnakList( [
@@ -26,17 +26,17 @@ var testSets = [
 			new wb.datamodel.PropertySomeValueSnak( 'P1' )
 		] ),
 		{
-			P1: [{
+			P1: [ {
 				snaktype: 'novalue',
 				property: 'P1'
 			}, {
 				snaktype: 'somevalue',
 				property: 'P1'
-			}],
-			P2: [{
+			} ],
+			P2: [ {
 				snaktype: 'novalue',
 				property: 'P2'
-			}]
+			} ]
 		}
 	]
 ];

@@ -25,7 +25,7 @@ var testSets = [
 	], [
 		new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			new wb.datamodel.ReferenceList( [new wb.datamodel.Reference()] ),
+			new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] ),
 			wb.datamodel.Statement.RANK.PREFERRED
 		),
 		{
@@ -36,7 +36,7 @@ var testSets = [
 			references: [ {
 				snaks: {},
 				'snaks-order': []
-			}],
+			} ],
 			type: 'statement',
 			rank: 'preferred'
 		}

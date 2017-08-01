@@ -9,7 +9,7 @@ QUnit.module( 'wikibase.serialization.StrategyProvider' );
 
 var testSets = [
 	{
-		strategies: [[0, 'key1'], [1, 'key2']]
+		strategies: [ [ 0, 'key1' ], [ 1, 'key2' ] ]
 	}
 ];
 
