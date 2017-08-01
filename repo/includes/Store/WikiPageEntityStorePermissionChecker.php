@@ -18,6 +18,8 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 
+	const ACTION_MW_CREATE = 'create';
+
 	/**
 	 * @var EntityNamespaceLookup
 	 */
@@ -71,7 +73,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		if ( $id === null ) {
 			return $this->getPermissionStatusForEntityType(
 				$user,
-				[ $action, self::ACTION_CREATE ],
+				[ $action, self::ACTION_MW_CREATE ],
 				$entity->getType(),
 				$quick
 			);
@@ -103,7 +105,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		if ( $title === null || !$title->exists() ) {
 			return $this->getPermissionStatusForEntityType(
 				$user,
-				[ $action, self::ACTION_CREATE ],
+				[ $action, self::ACTION_MW_CREATE ],
 				$entityId->getEntityType(),
 				$quick
 			);
@@ -178,7 +180,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	}
 
 	private function getMediaWikiPermissionsToCheck( $action, $entityType ) {
-		if ( $action === EntityPermissionChecker::ACTION_CREATE ) {
+		if ( $action === self::ACTION_MW_CREATE ) {
 			$entityTypeSpecificCreatePermission = $entityType . '-create';
 
 			$permissions = [ 'read', 'edit', 'createpage' ];
