@@ -132,7 +132,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => '' ], true );
 
-		list( $output, ) = $this->executeSpecialPage( '', $request );
+		list( $output, ) = $this->executeSpecialPage( '', $request, self::USER_LANGUAGE );
 
 		assertThat( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
