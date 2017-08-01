@@ -20,8 +20,6 @@ interface EntityPermissionChecker {
 
 	const ACTION_EDIT = 'edit';
 
-	const ACTION_CREATE = 'create';
-
 	const ACTION_EDIT_TERMS = 'term';
 
 	const ACTION_MERGE = 'merge';
