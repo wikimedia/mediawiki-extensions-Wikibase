@@ -16,6 +16,8 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory
@@ -32,11 +34,24 @@ use Wikibase\Lib\SnakFormatter;
 class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	private function getDataAccessSnakFormatterFactory( $expectedFormat ) {
+		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$languageFallbackLabelDescriptionLookupFactory = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookupFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$languageFallbackLabelDescriptionLookupFactory->expects( $this->once() )
+			->method( 'newLabelDescriptionLookup' )
+			->will( $this->returnValue( $languageFallbackLabelDescriptionLookup ) );
+
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
 			$this->getOutputFormatSnakFormatterFactory( $expectedFormat ),
 			$this->getMock( PropertyDataTypeLookup::class ),
-			$this->getMock( EntityIdParser::class )
+			$this->getMock( EntityIdParser::class ),
+			$languageFallbackLabelDescriptionLookupFactory
 		);
 	}
 

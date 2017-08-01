@@ -1127,7 +1127,8 @@ final class WikibaseClient {
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getRepoItemUriParser()
+			$this->getRepoItemUriParser(),
+			$this->getLanguageFallbackLabelDescriptionLookupFactory()
 		);
 	}
 

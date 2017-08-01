@@ -11,7 +11,7 @@ use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\Usage\UsageTrackingTermLookup;
+use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -248,16 +248,19 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$usageAccumulator = $this->getUsageAccumulator();
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			new UsageTrackingTermLookup(
-				$wikibaseClient->getTermLookup(),
-				$usageAccumulator
-			),
+			$wikibaseClient->getTermLookup(),
+			$this->getLanguageFallbackChain()
+		);
+
+		$usageTrackingLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
+			$labelDescriptionLookup,
+			$usageAccumulator,
 			$this->getLanguageFallbackChain()
 		);
 
 		return new WikibaseLanguageDependentLuaBindings(
 			$this->getEntityIdParser(),
-			$labelDescriptionLookup,
+			$usageTrackingLabelDescriptionLookup,
 			$usageAccumulator
 		);
 	}
