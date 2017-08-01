@@ -232,6 +232,8 @@ class DispatchChanges extends Maintenance {
 				if ( $wikiState ) {
 					$dispatchedChanges = $dispatcher->dispatchTo( $wikiState );
 					$stats->updateCount( 'wikibase.repo.dispatchChanges.changes', $dispatchedChanges );
+					$stats->updateCount( 'wikibase.repo.dispatchChanges.changes-per-client.'
+											. $wikiState['chd_site'], $dispatchedChanges );
 				} else {
 					$stats->increment( 'wikibase.repo.dispatchChanges.noclient' );
 					// Try again later, unless we have already reached the limit.
