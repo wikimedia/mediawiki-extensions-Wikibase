@@ -3,9 +3,11 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use IJobSpecification;
+use HTMLCacheUpdateJob;
 use Job;
 use JobQueueGroup;
 use PHPUnit_Framework_MockObject_MockObject;
+use MediaWiki\MediaWikiServices;
 use RefreshLinksJob;
 use Title;
 use Wikibase\Client\Changes\WikiPageUpdater;
@@ -135,39 +137,41 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		return $LBFactory;
 	}
 
-	public function testPurgeParserCache() {
-		$updater = new WikiPageUpdater(
-			$this->getJobQueueGroupMock(),
-			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
-			$this->getRCDupeDetectorMock()
-		);
-
-		$title = $this->getTitleMock( 'Foo' );
-
-		$title->expects( $this->once() )
-			->method( 'invalidateCache' );
-
-		$updater->purgeParserCache( [
-			$title,
-		] );
-	}
-
 	public function testPurgeWebCache() {
+		$titleFoo = $this->getTitleMock( 'Foo', 21 );
+		$titleBar = $this->getTitleMock( 'Bar', 22 );
+		$titleCuzz = $this->getTitleMock( 'Cuzz', 23 );
+
+		$jobQueueGroup = $this->getJobQueueGroupMock();
+
+		$pages = [];
+		$jobQueueGroup->expects( $this->atLeastOnce() )
+			->method( 'lazyPush' )
+			->will( $this->returnCallback( function( array $jobs ) use ( &$pages ) {
+				/** @var Job $job */
+				foreach ( $jobs as $job ) {
+					$this->assertInstanceOf( HTMLCacheUpdateJob::class, $job );
+					$params = $job->getParams();
+					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
+					$pages += $params['pages']; // addition uses keys, array_merge does not
+				}
+			} ) );
+
 		$updater = new WikiPageUpdater(
-			$this->getJobQueueGroupMock(),
+			$jobQueueGroup,
 			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$this->getRCDupeDetectorMock()
 		);
-
-		$title = $this->getTitleMock( 'Foo' );
-		$title->expects( $this->once() )
-			->method( 'purgeSquid' );
 
 		$updater->purgeWebCache( [
-			$title,
+			$titleFoo, $titleBar, $titleCuzz,
 		] );
+
+		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
+		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
+		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
+		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
 	}
 
 	public function testScheduleRefreshLinks() {
@@ -183,6 +187,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->will( $this->returnCallback( function( array $jobs ) use ( &$pages ) {
 				/** @var Job $job */
 				foreach ( $jobs as $job ) {
+					$this->assertInstanceOf( RefreshLinksJob::class, $job );
 					$params = $job->getParams();
 					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
 					$pages += $params['pages']; // addition uses keys, array_merge does not
@@ -192,7 +197,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$this->getRCDupeDetectorMock()
 		);
 
