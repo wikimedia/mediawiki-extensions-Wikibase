@@ -84,14 +84,16 @@ function wikibase.setupInterface()
 			end
 
 			cacheEntity( id, entity )
+		else
+			-- Use deep clones for subsequent calls, so that people can't modify the entity
+			entity = mw.clone( entity )
 		end
 
 		if type( entity ) ~= 'table' then
 			return nil
 		end
 
-		-- Use a deep clone here, so that people can't modify the entity
-		return wikibase.entity.create( mw.clone( entity ) )
+		return wikibase.entity.create( entity )
 	end
 
 	-- Get the entity id for the current page. Cached.
