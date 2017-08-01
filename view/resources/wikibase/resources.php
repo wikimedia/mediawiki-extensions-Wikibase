@@ -23,7 +23,7 @@ return call_user_func( function() {
 			'position' => 'top',
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
-				'wikibase.css',
+				'wikibase.less',
 				'../jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'../jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'../jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
