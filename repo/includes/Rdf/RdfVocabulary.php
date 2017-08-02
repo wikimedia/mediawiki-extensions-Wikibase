@@ -53,7 +53,7 @@ class RdfVocabulary {
 	//FIXME: get from config
 	const MEDIA_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/';
 	//FIXME: get from config
-	const COMMONS_DATA_URI = 'http://commons.wikimedia.org/data/main/';
+	const MEDIA_DATA_URI = 'http://commons.wikimedia.org/data/main/';
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
 	// TODO: make the license settable
@@ -299,7 +299,7 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getGeoShapeURI( $file ) {
-		return self::COMMONS_DATA_URI . wfUrlencode( $file );
+		return self::MEDIA_DATA_URI . wfUrlencode( $file );
 	}
 
 	/**
@@ -310,7 +310,7 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getTabularDataURI( $file ) {
-		return self::COMMONS_DATA_URI . wfUrlencode( $file );
+		return self::MEDIA_DATA_URI . wfUrlencode( $file );
 	}
 
 	/**
