@@ -224,9 +224,19 @@ final class WikibaseClient {
 	private $repositoryDefinitions;
 
 	/**
-	 * @var PrefetchingTermLookup|null
+	 * @var TermLookup|null
 	 */
 	private $termLookup = null;
+
+	/**
+	 * @var TermBuffer|null
+	 */
+	private $termBuffer = null;
+
+	/**
+	 * @var PrefetchingTermLookup|null
+	 */
+	private $prefetchingTermLookup = null;
 
 	/**
 	 * @var EntityNamespaceLookup|null
@@ -423,25 +433,34 @@ final class WikibaseClient {
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getPrefetchingTermLookup();
+		if ( !$this->termBuffer ) {
+			$this->termBuffer = $this->getPrefetchingTermLookup();
+		}
+
+		return $this->termBuffer;
 	}
 
 	/**
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return $this->getPrefetchingTermLookup();
+		if ( !$this->termLookup ) {
+			$this->termLookup = $this->getPrefetchingTermLookup();
+		}
+
+		return $this->termLookup;
 	}
 
 	/**
 	 * @return PrefetchingTermLookup
 	 */
 	private function getPrefetchingTermLookup() {
-		if ( !$this->termLookup ) {
-			$this->termLookup = $this->getEntityDataRetrievalServiceFactory()->getTermBuffer();
+		if ( !$this->prefetchingTermLookup ) {
+			// TODO: This should not assume the TermBuffer instance to be a PrefetchingTermLookup
+			$this->prefetchingTermLookup = $this->getEntityDataRetrievalServiceFactory()->getTermBuffer();
 		}
 
-		return $this->termLookup;
+		return $this->prefetchingTermLookup;
 	}
 
 	/**
