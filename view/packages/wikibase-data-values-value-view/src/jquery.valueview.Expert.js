@@ -136,6 +136,9 @@ jQuery.valueview = jQuery.valueview || {};
 		this._extendable = new util.Extendable();
 	};
 
+	/**
+	 * @class jQuery.valueview.Expert
+	 */
 	vv.Expert.prototype = {
 		/**
 		 * A unique UI class for this `Expert` definition. Should be used to prefix classes on DOM

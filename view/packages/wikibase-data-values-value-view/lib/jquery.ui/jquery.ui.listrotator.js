@@ -341,9 +341,9 @@ $.widget( 'ui.listrotator', {
 	 * Sets/Gets the widget's value. Setting the value involves setting the rotator to the
 	 * specified value without any animation.
 	 *
-	 * @param [value] The value to assign. (Has to match a value actually existing in the widget's
+	 * @param {*} [value] The value to assign. (Has to match a value actually existing in the widget's
 	 *        options.)
-	 * @return {string} Current value.
+	 * @return {*} Current value.
 	 */
 	value: function( value ) {
 		// Get the current value:

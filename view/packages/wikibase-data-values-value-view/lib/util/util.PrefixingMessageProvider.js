@@ -21,6 +21,9 @@ util.PrefixingMessageProvider = ( function() {
 		this._messageProvider = messageProvider;
 	}
 
+	/**
+	 * @class util.PrefixingMessageProvider
+	 */
 	PrefixingMessageProvider.prototype = {
 		constructor: PrefixingMessageProvider,
 

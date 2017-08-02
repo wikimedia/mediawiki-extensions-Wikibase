@@ -17,6 +17,9 @@ this.util = this.util || {};
 	util.ContentLanguages = function() {
 	};
 
+	/**
+	 * @class util.ContentLanguages
+	 */
 	util.ContentLanguages.prototype = {
 		/**
 		 * Returns all registered language codes or `null` if no information about accepted

@@ -166,7 +166,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 *
 		 * @param {*} context
 		 * @param {string|string[]} purposes
-		 * @param [args]
+		 * @param {array} [args]
 		 * @return {*}
 		 *
 		 * @throws {Error} in case `purposes` were defined in the constructor and a purpose given

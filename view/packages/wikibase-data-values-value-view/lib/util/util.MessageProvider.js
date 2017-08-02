@@ -12,6 +12,9 @@ util.MessageProvider = ( function( util ) {
 	function MessageProvider() {
 	}
 
+	/**
+	 * @class util.MessageProvider
+	 */
 	MessageProvider.prototype = {
 		/**
 		 * Tries to get a message

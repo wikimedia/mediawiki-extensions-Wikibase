@@ -16,6 +16,9 @@ this.util = this.util || {};
 		this._extensions = [];
 	};
 
+	/**
+	 * @class util.Extendable
+	 */
 	util.Extendable.prototype = {
 		/**
 		 * The list of registered extensions.

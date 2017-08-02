@@ -19,6 +19,9 @@ util.HashMessageProvider = ( function() {
 		this._messages = messages;
 	}
 
+	/**
+	 * @class util.HashMessageProvider
+	 */
 	HashMessageProvider.prototype = {
 		constructor: HashMessageProvider,
 

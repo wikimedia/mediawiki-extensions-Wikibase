@@ -21,6 +21,9 @@ util.CombiningMessageProvider = ( function() {
 		this._b = alternativeMessageProvider;
 	}
 
+	/**
+	 * @class util.CombiningMessageProvider
+	 */
 	CombiningMessageProvider.prototype = {
 		constructor: CombiningMessageProvider,
 
