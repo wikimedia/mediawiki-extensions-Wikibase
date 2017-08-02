@@ -81,6 +81,8 @@ function wikibase.setupInterface()
 
 			if type( entity ) ~= 'table' then
 				entity = false
+			elseif next( entity ) == nil then
+				error( 'php.getEntity returned an empty table' )
 			end
 
 			cacheEntity( id, entity )
@@ -88,6 +90,8 @@ function wikibase.setupInterface()
 
 		if type( entity ) ~= 'table' then
 			return nil
+		elseif next( entity ) == nil then
+			error( 'getCachedEntity returned an empty table' )
 		end
 
 		-- Use a deep clone here, so that people can't modify the entity
