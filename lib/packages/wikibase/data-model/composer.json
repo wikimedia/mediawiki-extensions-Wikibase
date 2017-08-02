@@ -62,18 +62,12 @@
 			"covers-validator"
 		],
 		"cs": [
-			"@phpcs",
-			"@phpmd"
+			"phpcs -p -s",
+			"phpmd src/ text phpmd.xml"
 		],
 		"ci": [
-			"@test",
-			"@cs"
-		],
-		"phpcs": [
-			"phpcs -p -s"
-		],
-		"phpmd": [
-			"phpmd src/ text phpmd.xml"
+			"@cs",
+			"@test"
 		]
 	}
 }
