@@ -6,9 +6,12 @@ php:
 sudo: false
 
 before_script:
+  - composer install --prefer-source
   - nvm install 4
 
-script: npm install && npm run eslint
+script:
+  - composer test
+  - npm install && npm run eslint
 
 notifications:
   irc:

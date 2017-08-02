@@ -1,6 +1,6 @@
 <?php
 
-define( 'WIKIBASE_SERIALIZATION_JAVASCRIPT_VERSION', '2.0.8' );
+define( 'WIKIBASE_SERIALIZATION_JAVASCRIPT_VERSION', '2.1.0' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {

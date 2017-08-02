@@ -1,0 +1,12 @@
+{
+	"name": "Wikibase Serialization JavaScript",
+	"version": "2.1.0",
+	"author": [
+		"[http://www.snater.com H. Snater]"
+	],
+	"url": "https://github.com/wmde/WikibaseSerializationJavaScript",
+	"description": "JavaScript library containing serializers and deserializers for the Wikibase DataModel.",
+	"license-name": "GPL-2.0+",
+	"type": "wikibase",
+	"manifest_version": 1
+}
