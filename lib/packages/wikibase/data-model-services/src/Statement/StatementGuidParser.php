@@ -24,9 +24,6 @@ class StatementGuidParser {
 	 */
 	private $entityIdParser;
 
-	/**
-	 * @param EntityIdParser $entityIdParser
-	 */
 	public function __construct( EntityIdParser $entityIdParser ) {
 		$this->entityIdParser = $entityIdParser;
 	}

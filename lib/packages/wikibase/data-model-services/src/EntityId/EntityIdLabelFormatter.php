@@ -22,9 +22,6 @@ class EntityIdLabelFormatter implements EntityIdFormatter {
 	 */
 	private $labelDescriptionLookup;
 
-	/**
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 */
 	public function __construct( LabelDescriptionLookup $labelDescriptionLookup ) {
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
