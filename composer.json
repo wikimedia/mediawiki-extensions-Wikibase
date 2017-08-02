@@ -82,8 +82,7 @@
 			"@cs"
 		],
 		"cs": [
-			"@phpcs"
-		],
-		"phpcs": "phpcs -p -s"
+			"phpcs -p -s"
+		]
 	}
 }
