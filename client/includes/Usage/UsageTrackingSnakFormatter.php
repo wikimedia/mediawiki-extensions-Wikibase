@@ -13,6 +13,8 @@ use Wikibase\Lib\SnakFormatter;
 
 /**
  * SnakFormatter decorator that records entity usage.
+ * This uses an UsageTrackingLanguageFallbackLabelDescriptionLookup internally in order
+ * to track label usage.
  *
  * @see UsageAccumulator
  *
@@ -32,31 +34,31 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 	private $usageAccumulator;
 
 	/**
-	 * @var string[]
-	 */
-	private $languages;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $repoItemUriParser;
 
 	/**
+	 * @var UsageTrackingLanguageFallbackLabelDescriptionLookup
+	 */
+	private $usageTrackingLabelDescriptionLookup;
+
+	/**
 	 * @param SnakFormatter $snakFormatter
 	 * @param UsageAccumulator $usageAccumulator
-	 * @param string[] $languages language codes to consider used for formatting
 	 * @param EntityIdParser $repoItemUriParser
+	 * @param UsageTrackingLanguageFallbackLabelDescriptionLookup $usageTrackingLabelDescriptionLookup
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
 		UsageAccumulator $usageAccumulator,
-		array $languages,
-		EntityIdParser $repoItemUriParser
+		EntityIdParser $repoItemUriParser,
+		UsageTrackingLanguageFallbackLabelDescriptionLookup $usageTrackingLabelDescriptionLookup
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->languages = $languages;
 		$this->repoItemUriParser = $repoItemUriParser;
+		$this->usageTrackingLabelDescriptionLookup = $usageTrackingLabelDescriptionLookup;
 	}
 
 	/**
@@ -90,10 +92,13 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 		return $this->snakFormatter->formatSnak( $snak );
 	}
 
+	/**
+	 * @param EntityId $id
+	 */
 	private function addLabelUsage( EntityId $id ) {
-		foreach ( $this->languages as $lang ) {
-			$this->usageAccumulator->addLabelUsage( $id, $lang );
-		}
+		// Just get the label from UsageTrackingLanguageFallbackLabelDescriptionLookup::getLabel,
+		// which will record the appropriate usage(s) for us.
+		$this->usageTrackingLabelDescriptionLookup->getLabel( $id );
 	}
 
 	/**

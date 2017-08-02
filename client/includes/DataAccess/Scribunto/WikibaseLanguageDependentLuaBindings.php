@@ -5,7 +5,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\Lib\Store\StorageException;
 
@@ -25,7 +25,7 @@ class WikibaseLanguageDependentLuaBindings {
 	private $entityIdParser;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookup
+	 * @var LabelDescriptionLookup
 	 */
 	private $labelDescriptionLookup;
 
@@ -36,7 +36,7 @@ class WikibaseLanguageDependentLuaBindings {
 
 	/**
 	 * @param EntityIdParser $entityIdParser
-	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator for tracking title usage via getEntityId.
 	 *
 	 * @note: label usage is not tracked in $usageAccumulator. This should be done inside
@@ -44,7 +44,7 @@ class WikibaseLanguageDependentLuaBindings {
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
-		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator
 	) {
 		$this->entityIdParser = $entityIdParser;

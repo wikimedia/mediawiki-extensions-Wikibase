@@ -5,6 +5,7 @@ namespace Wikibase\Client\DataAccess;
 use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -14,6 +15,7 @@ use Wikibase\Lib\EscapingSnakFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
  * A factory for SnakFormatters in a client context, to be reused in different methods that "access
@@ -45,16 +47,23 @@ class DataAccessSnakFormatterFactory {
 	 */
 	private $repoItemUriParser;
 
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $languageFallbackLabelDescriptionLookupFactory;
+
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityIdParser $repoItemUriParser
+		EntityIdParser $repoItemUriParser,
+		LanguageFallbackLabelDescriptionLookupFactory $languageFallbackLabelDescriptionLookupFactory
 	) {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
+		$this->languageFallbackLabelDescriptionLookupFactory = $languageFallbackLabelDescriptionLookupFactory;
 	}
 
 	/**
@@ -91,8 +100,12 @@ class DataAccessSnakFormatterFactory {
 		return new UsageTrackingSnakFormatter(
 			$snakFormatter,
 			$usageAccumulator,
-			$fallbackChain->getFetchLanguageCodes(),
-			$this->repoItemUriParser
+			$this->repoItemUriParser,
+			new UsageTrackingLanguageFallbackLabelDescriptionLookup(
+				$this->languageFallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language ),
+				$usageAccumulator,
+				$fallbackChain
+			)
 		);
 	}
 

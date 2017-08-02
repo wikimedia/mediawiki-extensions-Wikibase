@@ -29,6 +29,8 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory
@@ -169,7 +171,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 				$this->getLanguageFallbackChainFactory(),
 				$formatterFactory,
 				$this->getMock( PropertyDataTypeLookup::class ),
-				$this->getMock( EntityIdParser::class )
+				$this->getMock( EntityIdParser::class ),
+				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
 			$allowDataAccessInUserLanguage
 		);
@@ -196,7 +199,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 				$this->getLanguageFallbackChainFactory(),
 				$this->getSnakFormatterFactory(),
 				$this->getMock( PropertyDataTypeLookup::class ),
-				$this->getMock( EntityIdParser::class )
+				$this->getMock( EntityIdParser::class ),
+				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
 			$allowDataAccessInUserLanguage
 		);
@@ -304,6 +308,22 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$parserOptions->disableTitleConversion( $disableTitleConversion );
 
 		return $parserOptions;
+	}
+
+	private function getLanguageFallbackLabelDescriptionLookupFactory() {
+		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$languageFallbackLabelDescriptionLookupFactory = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookupFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$languageFallbackLabelDescriptionLookupFactory->expects( $this->any() )
+			->method( 'newLabelDescriptionLookup' )
+			->will( $this->returnValue( $languageFallbackLabelDescriptionLookup ) );
+
+		return $languageFallbackLabelDescriptionLookupFactory;
 	}
 
 }

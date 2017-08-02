@@ -146,11 +146,8 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$label = $luaWikibaseLibrary->getLabel( 'Q885588' );
 		$this->assertEquals( [ 'پسیک', 'ku-arab' ], $label, 'getLabel' );
 
-		// All languages in the fallback chain for 'ku-arab' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertArrayHasKey( 'Q885588#L.ku', $usage );
 		$this->assertArrayHasKey( 'Q885588#L.ku-arab', $usage );
-		$this->assertArrayHasKey( 'Q885588#L.ku-latn', $usage );
 	}
 
 	public function testGetEntityInvalidIdType() {
@@ -295,11 +292,13 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			$luaWikibaseLibrary->renderSnak( $snak )
 		);
 
-		// All languages in the fallback chain for 'ku-arab' count as "used".
+		// All languages in the fallback chain from 'ku' to 'ku-latn' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 		$this->assertArrayHasKey( 'Q885588#L.ku', $usage );
 		$this->assertArrayHasKey( 'Q885588#L.ku-arab', $usage );
 		$this->assertArrayHasKey( 'Q885588#L.ku-latn', $usage );
+		$this->assertArrayNotHasKey( 'Q885588#L.en', $usage );
+
 		$this->assertArrayHasKey( 'Q885588#T', $usage );
 
 		$this->assertSame( true, $cacheSplit );
