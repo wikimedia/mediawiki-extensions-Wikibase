@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_6bc4cf44",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-02T18:07:13Z",
+      "side": 1,
+      "message": "But this is not the message key. It looks like this bug was fixed on the wrong end, and should have been fixed in the MediaInfo repository.",
+      "range": {
+        "startLine": 983,
+        "startChar": 23,
+        "endLine": 983,
+        "endChar": 37
+      },
+      "revId": "5a3eed4b2a7989b9d0fb5711f5ac6ee749f3734a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
