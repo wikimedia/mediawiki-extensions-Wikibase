@@ -47,18 +47,12 @@
 			"phpunit --coverage-php /dev/null"
 		],
 		"cs": [
-			"@phpcs",
-			"@phpmd"
+			"phpcs -p -s",
+			"phpmd src/,tests/unit/ text phpmd.xml"
 		],
 		"ci": [
-			"@test",
-			"@cs"
-		],
-		"phpcs": [
-			"phpcs -p -s"
-		],
-		"phpmd": [
-			"phpmd src/,tests/unit/ text phpmd.xml"
+			"@cs",
+			"@test"
 		]
 	}
 }
