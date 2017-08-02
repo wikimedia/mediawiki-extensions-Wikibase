@@ -12,7 +12,7 @@ var testSets = [
 		new wb.datamodel.ReferenceList(),
 		[]
 	], [
-		new wb.datamodel.ReferenceList( [new wb.datamodel.Reference()] ),
+		new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] ),
 		[
 			{
 				snaks: {},

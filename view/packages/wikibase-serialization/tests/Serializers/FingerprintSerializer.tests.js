@@ -19,12 +19,12 @@ var testSets = [
 		new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'label' ) } ),
 			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'description' ) } ),
-			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', ['alias'] ) } )
+			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
 		),
 		{
 			labels: { en: { language: 'en', value: 'label' } },
 			descriptions: { en: { language: 'en', value: 'description' } },
-			aliases: { en: [{ language: 'en', value: 'alias' }] }
+			aliases: { en: [ { language: 'en', value: 'alias' } ] }
 		}
 	]
 ];

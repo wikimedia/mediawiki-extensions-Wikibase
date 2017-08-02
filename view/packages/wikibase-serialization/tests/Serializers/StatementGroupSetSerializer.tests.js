@@ -14,14 +14,14 @@ var testSets = [
 	], [
 		new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1',
-				new wb.datamodel.StatementList( [new wb.datamodel.Statement(
+				new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
 					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-				)] )
+				) ] )
 			),
 			new wb.datamodel.StatementGroup( 'P2',
-				new wb.datamodel.StatementList( [new wb.datamodel.Statement(
+				new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
 					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
-				)] )
+				) ] )
 			)
 		] ),
 		{

@@ -22,9 +22,9 @@ var testSets = [
 				rank: 'normal'
 			}
 		],
-		new wb.datamodel.StatementList( [new wb.datamodel.Statement(
+		new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		)] )
+		) ] )
 	]
 ];
 

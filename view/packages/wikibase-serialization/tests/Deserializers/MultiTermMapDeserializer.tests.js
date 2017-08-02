@@ -13,21 +13,21 @@ var testSets = [
 		new wb.datamodel.MultiTermMap()
 	], [
 		{
-			en: [{ language: 'en', value: 'en-test' }],
-			de: [{ language: 'de', value: 'de-test' }]
+			en: [ { language: 'en', value: 'en-test' } ],
+			de: [ { language: 'de', value: 'de-test' } ]
 		},
 		new wb.datamodel.MultiTermMap( {
-			en: new wb.datamodel.MultiTerm( 'en', ['en-test'] ),
-			de: new wb.datamodel.MultiTerm( 'de', ['de-test'] )
+			en: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] ),
+			de: new wb.datamodel.MultiTerm( 'de', [ 'de-test' ] )
 		} )
 	], [
 		{
-			en: [{ language: 'en', value: 'en-test' }],
-			de: [{ language: 'en', value: 'en-test' }]
+			en: [ { language: 'en', value: 'en-test' } ],
+			de: [ { language: 'en', value: 'en-test' } ]
 		},
 		new wb.datamodel.MultiTermMap( {
-			en: new wb.datamodel.MultiTerm( 'en', ['en-test'] ),
-			de: new wb.datamodel.MultiTerm( 'en', ['en-test'] )
+			en: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] ),
+			de: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] )
 		} )
 	]
 ];

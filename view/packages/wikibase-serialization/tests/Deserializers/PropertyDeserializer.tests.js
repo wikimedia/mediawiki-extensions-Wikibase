@@ -12,7 +12,7 @@ var defaults = [
 		fingerprint: {
 			labels: { en: { language: 'en', value: 'label' } },
 			descriptions: { en: { language: 'en', value: 'description' } },
-			aliases: { en: [{ language: 'en', value: 'alias' }] }
+			aliases: { en: [ { language: 'en', value: 'alias' } ] }
 		},
 		statementGroupSet: {
 			P1: [ {
@@ -29,7 +29,7 @@ var defaults = [
 		fingerprint: new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'label' ) } ),
 			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'description' ) } ),
-			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', ['alias'] ) } )
+			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
 		),
 		statementGroupSet: new wb.datamodel.StatementGroupSet( [
 			new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [

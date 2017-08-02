@@ -12,7 +12,7 @@ var testSets = [
 		new wb.datamodel.SiteLinkSet(),
 		{}
 	], [
-		new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'site', 'page' )] ),
+		new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'site', 'page' ) ] ),
 		{
 			site: {
 				site: 'site',

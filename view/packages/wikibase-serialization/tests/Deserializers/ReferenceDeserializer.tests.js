@@ -12,34 +12,34 @@ var testSets = [
 		{
 			hash: 'i am a hash',
 			snaks: {
-				P1: [{
+				P1: [ {
 					snaktype: 'novalue',
 					property: 'P1'
-				}]
+				} ]
 			},
-			'snaks-order': ['P1']
+			'snaks-order': [ 'P1' ]
 		},
 		new wb.datamodel.Reference(
-			new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
+			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 			'i am a hash'
 		)
 	], [
 		{
 			hash: 'i am a hash',
 			snaks: {
-				P1: [{
+				P1: [ {
 					snaktype: 'novalue',
 					property: 'P1'
 				}, {
 					snaktype: 'somevalue',
 					property: 'P1'
-				}],
-				P2: [{
+				} ],
+				P2: [ {
 					snaktype: 'novalue',
 					property: 'P2'
-				}]
+				} ]
 			},
-			'snaks-order': ['P2', 'P1']
+			'snaks-order': [ 'P2', 'P1' ]
 		},
 		new wb.datamodel.Reference(
 			new wb.datamodel.SnakList( [

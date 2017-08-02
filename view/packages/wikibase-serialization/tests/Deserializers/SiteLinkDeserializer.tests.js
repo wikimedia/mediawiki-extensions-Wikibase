@@ -12,9 +12,9 @@ var testSets = [
 		{
 			site: 'site-id',
 			title: 'page-title',
-			badges: ['badge-1', 'badge-2']
+			badges: [ 'badge-1', 'badge-2' ]
 		},
-		new wb.datamodel.SiteLink( 'site-id', 'page-title', ['badge-1', 'badge-2'] )
+		new wb.datamodel.SiteLink( 'site-id', 'page-title', [ 'badge-1', 'badge-2' ] )
 	]
 ];
 
