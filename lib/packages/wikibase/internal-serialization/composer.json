@@ -53,21 +53,15 @@
 	"scripts": {
 		"test": [
 			"@validate --no-interaction",
-			"vendor/bin/phpunit"
+			"phpunit"
 		],
 		"cs": [
-			"@phpcs",
-			"@phpmd"
+			"phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp",
+			"phpmd src/ text phpmd.xml"
 		],
 		"ci": [
-			"@test",
-			"@cs"
-		],
-		"phpcs": [
-			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
-		],
-		"phpmd": [
-			"vendor/bin/phpmd src/ text phpmd.xml"
+			"@cs",
+			"@test"
 		]
 	}
 }
