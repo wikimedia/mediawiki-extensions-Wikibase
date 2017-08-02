@@ -196,8 +196,12 @@ local tests = {
 	{ name = 'mw.wikibase.entity exists', func = testExists, type='ToString',
 	  expect = { 'table' }
 	},
-	{ name = 'mw.wikibase.entity.create 1', func = testCreate,
+	{ name = 'mw.wikibase.entity.create with empty table', func = testCreate,
 	  args = { {} },
+	  expect = 'Expected a non-empty table obtained via mw.wikibase.getEntityObject'
+	},
+	{ name = 'mw.wikibase.entity.create without schemaVersion', func = testCreate,
+	  args = { { id = 'Q1' } },
 	  expect = 'data.schemaVersion must be a number, got nil instead'
 	},
 	{ name = 'mw.wikibase.entity.create 2', func = testCreate, type='ToString',
