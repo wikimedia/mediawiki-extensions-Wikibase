@@ -21,6 +21,12 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.1.0 (dev)
+
+* Updated the MediaWiki entry point to use the extension.json format.
+* Added code sniffers for JavaScript as well as PHP.
+* Dropped compatibility with PHP 5.3.
+
 ### 2.0.8 (2016-09-09)
 
 * Fix an issue with MediaWiki loading (init.mw.php)

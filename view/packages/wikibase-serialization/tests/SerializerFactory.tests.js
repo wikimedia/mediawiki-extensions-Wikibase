@@ -46,7 +46,7 @@ QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
 	);
 
 	assert.ok(
-		serializerFactory.newSerializerFor( new ( testSets[0].Constructor ) ).constructor
+		serializerFactory.newSerializerFor( new testSets[0].Constructor() ).constructor
 			=== testSets[0].Serializer,
 		'Retrieved serializer by object.'
 	);
