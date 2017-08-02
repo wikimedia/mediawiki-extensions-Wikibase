@@ -62,6 +62,10 @@ class WikibasePrefixSearcher extends Searcher {
 		}
 		$searchQuery->setParam( 'rescore', $this->searchContext->getRescore() );
 
+		if ( $this->returnExplain ) {
+			$searchQuery->setExplain( true );
+		}
+
 		return $pageType->createSearch( $searchQuery, $queryOptions );
 	}
 
