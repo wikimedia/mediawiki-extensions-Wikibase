@@ -342,6 +342,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_e88205cd",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-02T16:28:22Z",
+      "side": 1,
+      "message": "According to Addshore\u0027s analysis, 70% of all calls to this module use add AND remove at once. Assuming both parameters were non-empty, this would mean that we lose information on about 2500 edits per day. That does not seem acceptable to me.\n\nHowever, I find it surprising that 70% of all calls would be adding and removing. Maybe the parameters are given, but empty. We should double-check this.",
+      "parentUuid": "4e7eab26_1698e0c2",
+      "revId": "b219fbd89ae8acd01dba6e91bc2bf0ec91c456c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_581bfed4",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 5
