@@ -47,7 +47,11 @@ interface EntityDocument extends Comparable {
 	public function setId( $id );
 
 	/**
-	 * Returns true if the entity has no content. Having an id set does not count as having content.
+	 * An entity is considered empty if it does not contain any content that can be removed. Having
+	 * an ID set never counts as having content.
+	 *
+	 * Knowing if an entity is empty is relevant when, for example, moving or merging entities and
+	 * code wants to make sure all content is transferred from the old to the new entity.
 	 *
 	 * @since 4.3
 	 *
