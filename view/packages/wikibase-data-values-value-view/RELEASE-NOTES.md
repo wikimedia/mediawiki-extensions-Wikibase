@@ -1,6 +1,6 @@
 # ValueView release notes
 
-## 0.20.0 (dev)
+## 0.20.0 (2017-08-02)
 * Removed `jQuery.valueview.ExpertExtender.Toggler`.
 
 ## 0.19.2 (2017-06-28)
