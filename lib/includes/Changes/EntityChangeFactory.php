@@ -5,12 +5,14 @@ namespace Wikibase\Lib\Changes;
 use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityChange;
+use Wikimedia\Assert\Assert;
 
 /**
  * Factory for EntityChange objects
@@ -32,15 +34,23 @@ class EntityChangeFactory {
 	private $changeClasses;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
 	 * @param EntityDiffer $entityDiffer
+	 * @param EntityIdParser $idParser
 	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
 	 */
 	public function __construct(
 		EntityDiffer $entityDiffer,
+		EntityIdParser $idParser,
 		array $changeClasses = []
 	) {
 		$this->entityDiffer = $entityDiffer;
+		$this->idParser = $idParser;
 		$this->changeClasses = $changeClasses;
 	}
 
@@ -86,6 +96,20 @@ class EntityChangeFactory {
 	 */
 	public function newForChangeType( $changeType, EntityId $entityId, array $fields ) {
 		$action = explode( '~', $changeType )[1];
+		return $this->newForEntity( $action, $entityId, $fields );
+	}
+
+	/**
+	 * @param array $fields all data fields, including at least 'type' and 'object_id'.
+	 * @return EntityChange
+	 */
+	public function newFromFieldData( array $fields ) {
+		Assert::parameter( isset( $fields['type'] ), '$fields[\'type\']', 'must be set' );
+		Assert::parameter( isset( $fields['object_id'] ), '$fields[\'object_id\']', 'must be set' );
+
+		$action = explode( '~', $fields['type'] )[1];
+		$entityId = $this->idParser->parse( $fields['object_id'] );
+
 		return $this->newForEntity( $action, $entityId, $fields );
 	}
 

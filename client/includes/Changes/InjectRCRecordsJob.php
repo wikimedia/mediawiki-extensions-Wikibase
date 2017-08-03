@@ -14,6 +14,7 @@ use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\LBFactory;
@@ -37,6 +38,11 @@ class InjectRCRecordsJob extends Job {
 	 * @var EntityChangeLookup
 	 */
 	private $changeLookup;
+
+	/**
+	 * @var EntityChangeFactory
+	 */
+	private $changeFactory;
 
 	/**
 	 * @var RecentChangeFactory
@@ -83,7 +89,7 @@ class InjectRCRecordsJob extends Job {
 		}
 
 		$params = [
-			'change' => $change->getId(),
+			'change' => $change->getFields(),
 			'pages' => $pages
 		];
 
@@ -91,7 +97,6 @@ class InjectRCRecordsJob extends Job {
 			'wikibase-InjectRCRecords',
 			$params
 		);
-
 	}
 
 	/**
@@ -100,6 +105,7 @@ class InjectRCRecordsJob extends Job {
 	 *
 	 * @param LBFactory $lbFactory
 	 * @param EntityChangeLookup $changeLookup
+	 * @param EntityChangeFactory $changeFactory
 	 * @param RecentChangeFactory $rcFactory
 	 * @param array $params Needs to have two keys: "change": the id of the change,
 	 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
@@ -107,6 +113,7 @@ class InjectRCRecordsJob extends Job {
 	public function __construct(
 		LBFactory $lbFactory,
 		EntityChangeLookup $changeLookup,
+		EntityChangeFactory $changeFactory,
 		RecentChangeFactory $rcFactory,
 		array $params
 	) {
@@ -118,19 +125,31 @@ class InjectRCRecordsJob extends Job {
 			'$params',
 			'$params[\'change\'] not set.'
 		);
+
+		// TODO: disallow integer once T172394 has been deployed and old jobs have cleared the queue.
+		Assert::parameterType(
+			'integer|array',
+			$params['change'],
+			'$params[\'change\']'
+		);
+
 		Assert::parameter(
 			isset( $params['pages'] ),
 			'$params',
 			'$params[\'pages\'] not set.'
 		);
+
 		Assert::parameterElementType(
 			'array',
 			$params['pages'],
 			'$params[\'pages\']'
 		);
 
-		$this->lbFactory = $lbFactory;
+		// TODO: remove changeLookup once T172394 has been deployed and old jobs have cleared the queue.
 		$this->changeLookup = $changeLookup;
+		$this->changeFactory = $changeFactory;
+
+		$this->lbFactory = $lbFactory;
 		$this->rcFactory = $rcFactory;
 
 		$this->titleFactory = new TitleFactory();
@@ -182,16 +201,21 @@ class InjectRCRecordsJob extends Job {
 	 */
 	private function getChange() {
 		$params = $this->getParams();
-		$changeId = $params['change'];
+		$changeData = $params['change'];
 
-		$this->logger->debug( __FUNCTION__ . ": loading change $changeId." );
+		if ( is_int( $changeData ) ) {
+			// TODO: remove this once T172394 has been deployed and old jobs have cleared the queue.
+			$this->logger->debug( __FUNCTION__ . ": loading change $changeData." );
 
-		$changes = $this->changeLookup->loadByChangeIds( [ $changeId ] );
+			$changes = $this->changeLookup->loadByChangeIds( [ $changeData ] );
 
-		$change = reset( $changes );
+			$change = reset( $changes );
 
-		if ( !$change ) {
-			$this->logger->error( __FUNCTION__ . ": failed to load change $changeId." );
+			if ( !$change ) {
+				$this->logger->error( __FUNCTION__ . ": failed to load change $changeData." );
+			}
+		} else {
+			$change = $this->changeFactory->newFromFieldData( $params['change'] );
 		}
 
 		return $change;
@@ -209,7 +233,7 @@ class InjectRCRecordsJob extends Job {
 		$titles = [];
 
 		foreach ( $pages as $pageId => list( $namespace, $dbKey ) ) {
-			$titles[] = $this->titleFactory->makeTitle( $namespace, $dbKey );
+			$titles[$pageId] = $this->titleFactory->makeTitle( $namespace, $dbKey );
 		}
 
 		return $titles;
