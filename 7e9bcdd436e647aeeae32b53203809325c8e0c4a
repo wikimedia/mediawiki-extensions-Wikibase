@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_ac8c0a3b",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-03T13:18:25Z",
+      "side": 1,
+      "message": "How about not using any global state in any new code? That would help to at least not make the situation worse.",
+      "parentUuid": "8e742343_afe7110c",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_949fd561",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 20
