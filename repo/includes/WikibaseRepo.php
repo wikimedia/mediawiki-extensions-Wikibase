@@ -1830,6 +1830,9 @@ class WikibaseRepo {
 						// T151129
 						'moe',
 
+						// T151186
+						'fr-CA',
+
 						// T155369
 						'brx',
 
