@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_acfbaa10",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-03T12:40:42Z",
+      "side": 1,
+      "message": "Would be nice, but would require a database query - if the revision is very new, even a query on master. That\u0027s seems like overkill to me, and shouldn\u0027t be done in a constructor anyway.",
+      "parentUuid": "4e7eab26_178d28d7",
+      "revId": "9617b0b50f34fff1c82e6af51ec69e0b0bc504bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_57aad017",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2017-08-03T09:10:55Z",
       "side": 1,
       "message": "This should probably check the ID of $newEntity (if not null) is the same as $this-\u003eentityId. Otherwise this could lead to some huge mess I believe.",
+      "revId": "9617b0b50f34fff1c82e6af51ec69e0b0bc504bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6c05c212",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-03T12:40:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_57aad017",
       "revId": "9617b0b50f34fff1c82e6af51ec69e0b0bc504bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
