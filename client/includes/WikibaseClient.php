@@ -1061,6 +1061,13 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	public function getEntitySerializerFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+	}
+
+	/**
 	 * @return DataValueDeserializer
 	 */
 	private function getDataValueDeserializer() {

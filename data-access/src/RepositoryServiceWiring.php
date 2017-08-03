@@ -63,18 +63,11 @@ return [
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
-		$codec = new EntityContentDataCodec(
-			$services->getEntityIdParser(),
-			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
-			$services->getEntityDeserializer(),
-			$settings->maxSerializedEntitySizeInBytes()
-		);
-
 		/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
 		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
 
 		return new WikiPageEntityRevisionLookup(
-			$codec,
+			$services->getEntityContentDataCodec(),
 			$metaDataAccessor,
 			$services->getDatabaseName()
 		);
