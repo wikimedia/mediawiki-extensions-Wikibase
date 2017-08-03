@@ -14,14 +14,17 @@ module.exports = function ( grunt ) {
 			all: [
 				'**/*.json',
 				'.stylelintrc',
-				'!node_modules/**'
+				'!node_modules/**',
+				'!vendor/**'
 			]
 		},
 		stylelint: {
 			all: [
 				'**/*.css',
+				'**/*.less',
 				'!view/resources/jquery/ui/**',
-				'!node_modules/**'
+				'!node_modules/**',
+				'!vendor/**'
 			]
 		},
 		banana: {

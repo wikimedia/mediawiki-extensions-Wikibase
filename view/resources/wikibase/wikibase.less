@@ -1,4 +1,4 @@
-/**
+/* *
  * Common styles independent from JavaScript being enabled or disabled.
  *
  * @license GNU GPL v2+
@@ -18,7 +18,7 @@ h1 .wikibase-title .wikibase-title-id {
 	unicode-bidi: embed;
 }
 
-/**
+/* *
  * Make the title's fallback hint look the same as other fallback hints
  * This is hacky and vector-specific
  * It basically overrides MediaWiki's h1 styling with Vector's .mw-body styling
@@ -48,7 +48,7 @@ h1 .wikibase-title .wikibase-title-id:before {
 
 /* Overwrite colour for element that are in edit mode although their container element is not */
 .wb-entitypage .ui-state-disabled .wb-edit input:not( .ui-state-disabled ),
-.wb-entitypage .ui-state-disabled .wb-edit textarea {
+	.wb-entitypage .ui-state-disabled .wb-edit textarea {
 	background-color: #fff;
 	color: inherit;
 }
@@ -87,7 +87,7 @@ span.wb-itemlink-id { /* item id within a link to an item (especially on special
 	unicode-bidi: embed;
 }
 
-/********** BASIC LAYOUT **********/
+/* ********* BASIC LAYOUT ********* */
 
 #bodyContent {
 	clear: both; /* to not overlay success message */
@@ -149,9 +149,9 @@ h2.wb-section-heading {
 	font-style: italic;
 }
 
-/********** /BASIC LAYOUT **********/
+/* ********* /BASIC LAYOUT ********* */
 
-/********** CLAIMS **********/
+/* ********* CLAIMS ********* */
 
 div.wikibase-statementview textarea {
 	margin: 0;
@@ -254,7 +254,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	float: right;
 }
 
-/***** ENTITY ID VALUES *****/
+/* **** ENTITY ID VALUES **** */
 
 .wb-language-fallback-indicator {
 	font-style: italic;
@@ -263,9 +263,9 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	font-size: 0.8em;
 }
 
-/***** /ENTITY ID VALUES *****/
+/* **** /ENTITY ID VALUES **** */
 
-/***** TIME VALUES *****/
+/* **** TIME VALUES **** */
 
 .wb-calendar-name {
 	font-style: italic;
@@ -273,9 +273,9 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	line-height: 1;
 }
 
-/***** /TIME VALUES *****/
+/* **** /TIME VALUES **** */
 
-/***** EDIT/NEW CLAIM *****/
+/* **** EDIT/NEW CLAIM **** */
 
 .wikibase-statementgrouplistview .wb-new > .wikibase-statementlistview > .wikibase-toolbar-wrapper .wikibase-addtoolbar-container {
 	display: none;
@@ -359,9 +359,9 @@ span.wikibase-snakview-variation-novaluesnak {
 	width: 100%;
 }
 
-/***** /EDIT/NEW CLAIM *****/
+/* **** /EDIT/NEW CLAIM **** */
 
-/***** QUALIFIERS *****/
+/* **** QUALIFIERS **** */
 
 .wikibase-statementview-qualifiers {
 	padding-left: 17em;
@@ -430,16 +430,16 @@ span.wikibase-snakview-variation-novaluesnak {
 	display: block;
 }
 
-/***** /QUALIFIERS *****/
+/* **** /QUALIFIERS **** */
 
 .wikibase-statementgrouplistview > .wikibase-toolbar-container {
 	float: right;
 	position: static;
 }
 
-/********** /CLAIMS **********/
+/* ********* /CLAIMS ********* */
 
-/********** STATEMENTS **********/
+/* ********* STATEMENTS ********* */
 
 /* Container for a single statement */
 .wikibase-statementview {
@@ -475,7 +475,7 @@ span.wikibase-snakview-variation-novaluesnak {
 	white-space: nowrap;
 }
 
-/***** REFERENCES *****/
+/* **** REFERENCES **** */
 
 .wikibase-statementview-references-heading {
 	color: #72777d;
@@ -608,11 +608,11 @@ span.wikibase-snakview-variation-novaluesnak {
 	position: static;
 }
 
-/***** /REFERENCES *****/
+/* **** /REFERENCES **** */
 
-/********** /STATEMENTS **********/
+/* ********* /STATEMENTS ********* */
 
-/********** SITE LINKS **********/
+/* ********* SITE LINKS ********* */
 
 .wikibase-sitelinks {
 	display: none;
@@ -624,9 +624,9 @@ span.wikibase-snakview-variation-novaluesnak {
 	line-height: 100%; /* prevent white space below heading */
 }
 
-/********** /SITE LINKS **********/
+/* ********* /SITE LINKS ********* */
 
-/********** PROPERTY PAGE **********/
+/* ********* PROPERTY PAGE ********* */
 
 .wb-propertypage .wikibase-propertyview-datatype {
 	background-color: #f8f9fa;
@@ -641,9 +641,9 @@ span.wikibase-snakview-variation-novaluesnak {
 	padding: 10px;
 }
 
-/********** /PROPERTY PAGE **********/
+/* ********* /PROPERTY PAGE ********* */
 
-/***** DIFF VIEW *****/
+/* **** DIFF VIEW **** */
 table.diff h4.wb-details {
 	padding: 0;
 }
@@ -670,9 +670,9 @@ table.diff table.wb-details td {
 	margin: 0;
 	border: 0;
 }
-/***** /DIFF VIEW *****/
+/* **** /DIFF VIEW **** */
 
-/********** PAGE IMAGE **********/
+/* ********* PAGE IMAGE ********* */
 
 .wikibase-pageImage {
 	display: none;
@@ -693,4 +693,4 @@ table.diff table.wb-details td {
 	display: block;
 }
 
-/********** /PAGEIMAGE **********/
+/* ********* /PAGEIMAGE ********* */
