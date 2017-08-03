@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use HashSiteStore;
 use stdClass;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -54,13 +55,16 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 		/** @var EntityIdParser $idParser */
 		$idParser = $this->getMock( EntityIdParser::class );
 
+		$client = $this->getWikibaseClient();
+
 		return new RepositoryServiceContainer(
 			'foowiki',
 			'foo',
 			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $idParser ),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			$this->getWikibaseClient()
+			new GenericServices( $client->getEntityNamespaceLookup() ),
+			$client
 		);
 	}
 
@@ -70,7 +74,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	private function getRepositoryServiceContainer() {
 		$container = $this->newRepositoryServiceContainer();
 
-		$container->defineService( 'EntityRevisionLookup', function() {
+		$container->defineService( 'EntityRevisionLookup', function () {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );
 
