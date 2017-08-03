@@ -44,6 +44,11 @@ class RepositoryServiceContainerFactory {
 	private $wiringFiles;
 
 	/**
+	 * @var GenericServices
+	 */
+	private $genericServices;
+
+	/**
 	 * @var WikibaseClient
 	 */
 	private $client;
@@ -62,6 +67,7 @@ class RepositoryServiceContainerFactory {
 	 * @param RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory
 	 * @param array $repositoryDatabaseNames
 	 * @param string[] $wiringFiles
+	 * @param GenericServices $genericServices
 	 * @param WikibaseClient $client
 	 */
 	public function __construct(
@@ -70,6 +76,7 @@ class RepositoryServiceContainerFactory {
 		RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory,
 		array $repositoryDatabaseNames,
 		array $wiringFiles,
+		GenericServices $genericServices,
 		WikibaseClient $client
 	) {
 		$this->idParserFactory = $idParserFactory;
@@ -77,6 +84,7 @@ class RepositoryServiceContainerFactory {
 		$this->dataValueDeserializerFactory = $dataValueDeserializerFactory;
 		$this->databaseNames = $repositoryDatabaseNames;
 		$this->wiringFiles = $wiringFiles;
+		$this->genericServices = $genericServices;
 		$this->client = $client;
 	}
 
@@ -98,6 +106,7 @@ class RepositoryServiceContainerFactory {
 			$this->idParserFactory->getIdParser( $repositoryName ),
 			$this->idComposer,
 			$this->dataValueDeserializerFactory->getDeserializer( $repositoryName ),
+			$this->genericServices,
 			$this->client
 		);
 		$container->loadWiringFiles( $this->wiringFiles );

@@ -46,6 +46,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
@@ -407,12 +408,15 @@ final class WikibaseClient {
 			$this->repositoryDefinitions->getPrefixMappings()
 		);
 
+		$genericServices = new GenericServices( $this->getEntityNamespaceLookup() );
+
 		return new RepositoryServiceContainerFactory(
 			$idParserFactory,
 			$this->getEntityIdComposer(),
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$this->repositoryDefinitions->getDatabaseNames(),
 			$this->getSettings()->getSetting( 'repositoryServiceWiringFiles' ),
+			$genericServices,
 			$this
 		);
 	}
@@ -1060,7 +1064,7 @@ final class WikibaseClient {
 			'monolingualtext' => MonolingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
-			'wikibase-entityid' => function( $value ) {
+			'wikibase-entityid' => function ( $value ) {
 				return isset( $value['id'] )
 					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );

@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -30,13 +31,15 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	 * @return RepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainer() {
+		$client = WikibaseClient::getDefaultInstance();
 		$container = new RepositoryServiceContainer(
 			false,
 			'',
 			new PrefixMappingEntityIdParser( [ '' => '' ], $this->getMock( EntityIdParser::class ) ),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			WikibaseClient::getDefaultInstance()
+			new GenericServices( $client->getEntityNamespaceLookup() ),
+			$client
 		);
 
 		$container->loadWiringFiles( [ __DIR__ . '/../../src/RepositoryServiceWiring.php' ] );
@@ -93,7 +96,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 		// Make 'WikiPageEntityMetaDataAccessor' service not an implementation
 		// of EntityPrefetcher interface
-		$container->redefineService( 'WikiPageEntityMetaDataAccessor', function() {
+		$container->redefineService( 'WikiPageEntityMetaDataAccessor', function () {
 			return $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		} );
 
