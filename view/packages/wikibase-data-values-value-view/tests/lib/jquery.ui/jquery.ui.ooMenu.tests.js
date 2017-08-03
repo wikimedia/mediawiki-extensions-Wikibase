@@ -526,7 +526,8 @@
 		menu.deactivate();
 	} );
 
-	QUnit.test( 'Triggering "focus" event', 2, function( assert ) {
+	QUnit.test( 'Triggering "focus" event', function( assert ) {
+		assert.expect( 2 );
 		var customItem = new $.ui.ooMenu.CustomItem( 'label' );
 
 		var $menu = newTestMenu( {

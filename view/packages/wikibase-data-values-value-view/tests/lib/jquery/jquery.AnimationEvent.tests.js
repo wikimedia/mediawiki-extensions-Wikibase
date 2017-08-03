@@ -164,8 +164,8 @@
 	$.each( AnimationEvent.ANIMATION_STEPS, function( i, step ) {
 		QUnit.test(
 			'animationOptions(). ' + step + ' callbacks test',
-			4,
 			function( assert ) {
+				assert.expect( 4 );
 				testAnimationOptionsGeneratedCallbacks( assert, step );
 			} );
 	} );

@@ -63,8 +63,8 @@
 		);
 	} );
 
-	QUnit.test( '"menu" option', 2, function( assert ) {
-		var done = assert.async();
+	QUnit.test( '"menu" option', function( assert ) {
+		var done = assert.async( 2 );
 		var customMenu = createCustomMenu();
 
 		var $suggester = newTestSuggester( {
@@ -103,7 +103,8 @@
 		suggester.search();
 	} );
 
-	QUnit.test( 'search() gathering suggestions from an array', 1, function( assert ) {
+	QUnit.test( 'search() gathering suggestions from an array', function( assert ) {
+		assert.expect( 1 );
 		var $suggester = newTestSuggester(),
 			suggester = $suggester.data( 'suggester' );
 
@@ -118,7 +119,8 @@
 		} );
 	} );
 
-	QUnit.test( 'search() gathering suggestions from a function', 1, function( assert ) {
+	QUnit.test( 'search() gathering suggestions from a function', function( assert ) {
+		assert.expect( 1 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -141,7 +143,8 @@
 		} );
 	} );
 
-	QUnit.test( 'isSearching() - triggering search() programmatically', 3, function( assert ) {
+	QUnit.test( 'isSearching() - triggering search() programmatically', function( assert ) {
+		assert.expect( 3 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -180,7 +183,8 @@
 		} );
 	} );
 
-	QUnit.test( 'isSearching() - triggering with "key" event', 3, function( assert ) {
+	QUnit.test( 'isSearching() - triggering with "key" event', function( assert ) {
+		assert.expect( 3 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -226,7 +230,8 @@
 		);
 	} );
 
-	QUnit.test( 'Error', 2, function( assert ) {
+	QUnit.test( 'Error', function( assert ) {
+		assert.expect( 2 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();

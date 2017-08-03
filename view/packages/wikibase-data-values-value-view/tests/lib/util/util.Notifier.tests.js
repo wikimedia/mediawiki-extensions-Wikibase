@@ -59,7 +59,8 @@
 		} );
 	} );
 
-	QUnit.test( 'Notifier.prototype.notify', 10, function( assert ) {
+	QUnit.test( 'Notifier.prototype.notify', function( assert ) {
+		assert.expect( 10 );
 		var notifier;
 
 		// callback with tests for notify() calls:

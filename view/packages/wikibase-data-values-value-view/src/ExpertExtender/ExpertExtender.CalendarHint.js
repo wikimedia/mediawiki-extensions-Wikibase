@@ -89,6 +89,7 @@
 		 * Callback for the `ExpertExtender` draw event.
 		 */
 		draw: function() {
+			/** @var {dataValues.TimeValue} value */
 			var value = this._getUpstreamValue();
 			if ( !value ) {
 				return;

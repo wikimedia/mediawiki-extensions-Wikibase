@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.20.1 (2017-08-03)
+* Fixed `jQuery.ui.suggester` and `jQuery.animateWithEvent` tests.
+
 ## 0.20.0 (2017-08-02)
 * Removed `jQuery.valueview.ExpertExtender.Toggler`.
 

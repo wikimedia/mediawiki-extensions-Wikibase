@@ -203,8 +203,8 @@
 	} );
 
 	QUnit.test( 'Triggering event on an object that does not have a dedicated value',
-		1,
 		function( assert ) {
+			assert.expect( 1 );
 			var $subject = $( {} );
 
 			$subject.on( 'eachchange', function( event, prevVal ) {

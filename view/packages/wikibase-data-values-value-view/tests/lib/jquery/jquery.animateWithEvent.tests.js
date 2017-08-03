@@ -10,7 +10,7 @@
 
 	QUnit.test( 'special start callback execution before options.start', function( assert ) {
 		assert.expect( 3 );
-		var done = assert.async();
+		var done = assert.async( 2 );
 		var optionsStartCallbackDone = 0;
 		var specialStartCallbackDone = 0;
 
@@ -41,6 +41,8 @@
 			1,
 			'Last argument start callback got fired.'
 		);
+
+		done();
 	} );
 
 	QUnit.test( 'special start callback', function( assert ) {
@@ -101,7 +103,7 @@
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
 		assert.expect( 2 );
-		var done = assert.async( 2 );
+		var done = assert.async( 3 );
 		var $elems = $( '<div/>' ).add( $( '<span/> ' ) ).add( $( '<div/> ' ) );
 		var $confirmedElems = $();
 		var animationEventInstances = [];
@@ -132,6 +134,8 @@
 			$elems.length,
 			'Each callback got its own instance of jQuery.AnimationEvent.'
 		);
+
+		done();
 	} );
 
 	QUnit.test( 'Error cases', function( assert ) {
@@ -163,12 +167,11 @@
 			'fooeventpurpose',
 			{ width: 200 }
 		).promise().done( function() {
-			done();
-
 			assert.ok(
 				true,
 				'Can call with only first two arguments'
 			);
+			done();
 		} );
 
 		$node = $( '<div/>' );
@@ -176,12 +179,11 @@
 		$node.animateWithEvent(
 			'xxxevent'
 		).promise().done( function() {
-			done();
-
 			assert.ok(
 				true,
 				'Can call with only first argument'
 			);
+			done();
 		} );
 	} );
 
