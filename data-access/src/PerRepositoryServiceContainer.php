@@ -60,6 +60,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param DataValueDeserializer $dataValueDeserializer
+	 * @param GenericServices $genericServices
 	 * @param WikibaseClient $client Top-level factory passed to service instantiators // TODO: fix this!
 	 */
 	public function __construct(
@@ -68,9 +69,10 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		DataValueDeserializer $dataValueDeserializer,
+		GenericServices $genericServices,
 		WikibaseClient $client
 	) {
-		parent::__construct( [ $client ] );
+		parent::__construct( [ $genericServices, $client ] );
 
 		$this->databaseName = $databaseName;
 		$this->repositoryName = $repositoryName;
