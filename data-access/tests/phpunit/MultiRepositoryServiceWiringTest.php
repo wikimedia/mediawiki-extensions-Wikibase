@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
@@ -42,6 +43,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			[ '' => false ],
 			[ __DIR__ . '/../../src/PerRepositoryServiceWiring.php' ],
 			new GenericServices( $client->getEntityNamespaceLookup() ),
+			new DataAccessSettings( 0, false ),
 			$client
 		);
 	}

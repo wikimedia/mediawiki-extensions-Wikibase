@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
@@ -35,6 +36,7 @@ class RepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase 
 			[ '' => false ],
 			[],
 			new GenericServices( $client->getEntityNamespaceLookup() ),
+			new DataAccessSettings( 0, false ),
 			$client
 		);
 	}
