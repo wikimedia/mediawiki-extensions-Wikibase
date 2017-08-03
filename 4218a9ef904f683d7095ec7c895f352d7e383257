@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_a21c117d",
+        "filename": "data-access/src/DataAccessSettings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:57:21Z",
+      "side": 1,
+      "message": "In contrast to the previous patch: I like this class name a lot. :-)\n\nA short class level documentation would be nice.",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "4218a9ef904f683d7095ec7c895f352d7e383257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_42276dc5",
+        "filename": "data-access/src/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:57:21Z",
+      "side": 1,
+      "message": "Can you check if this is unused now?",
+      "range": {
+        "startLine": 4,
+        "startChar": 20,
+        "endLine": 4,
+        "endChar": 34
+      },
+      "revId": "4218a9ef904f683d7095ec7c895f352d7e383257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_623f09d4",
+        "filename": "data-access/tests/phpunit/DataAccessSettingsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:57:21Z",
+      "side": 1,
+      "message": "This should use assertSame, otherwise floats and strings will be accepted, but should not (in my opinion).",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "4218a9ef904f683d7095ec7c895f352d7e383257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_c23a7de4",
+        "filename": "data-access/tests/phpunit/RepositoryServiceWiringTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:57:21Z",
+      "side": 1,
+      "message": "Could we use a key-value array here? This does have two advantages:\n* It makes code like this readable. Currently I only see \"0\" and \"false\" and can not tell what it means. I know your IDE shows the parameter names. But Gerrit, Vim, and many other editors and IDEs don\u0027t.\n* It makes it easier to add additional keys in the future.",
+      "range": {
+        "startLine": 43,
+        "startChar": 27,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "4218a9ef904f683d7095ec7c895f352d7e383257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
