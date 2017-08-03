@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_178d28d7",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-03T09:10:55Z",
+      "side": 1,
+      "message": "should it be checked that baseRevId, if provided, actually is a revision of $entityId, just a sanity check?",
+      "revId": "9617b0b50f34fff1c82e6af51ec69e0b0bc504bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_57aad017",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-03T09:10:55Z",
+      "side": 1,
+      "message": "This should probably check the ID of $newEntity (if not null) is the same as $this-\u003eentityId. Otherwise this could lead to some huge mess I believe.",
+      "revId": "9617b0b50f34fff1c82e6af51ec69e0b0bc504bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
