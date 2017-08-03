@@ -189,6 +189,7 @@ call_user_func( function() {
 		$job = new Wikibase\Client\Changes\InjectRCRecordsJob(
 			$mwServices->getDBLoadBalancerFactory(),
 			$wbServices->getStore()->getEntityChangeLookup(),
+			$wbServices->getEntityChangeFactory(),
 			$wbServices->getRecentChangeFactory(),
 			$params
 		);
