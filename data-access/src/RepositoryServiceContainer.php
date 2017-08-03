@@ -3,18 +3,24 @@
 namespace Wikibase\DataAccess;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use MediaWiki\Services\ServiceContainer;
+use Serializers\DispatchingSerializer;
+use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\WikibaseSettings;
 
 /**
  * A service locator for services configured for a particular repository.
@@ -52,7 +58,14 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 	/**
 	 * @var callable[]
 	 */
+	private $serializerFactoryCallbacks;
+
+	/**
+	 * @var callable[]
+	 */
 	private $deserializerFactoryCallbacks;
+
+	private $maxSerializedEntitySize;
 
 	/**
 	 * @param string|false $databaseName
@@ -77,7 +90,10 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
+		// TODO: pass EntityTypeDefinitions to get those callbacks? or two arrays at least?
+		$this->serializerFactoryCallbacks = $client->getEntitySerializerFactoryCallbacks();
 		$this->deserializerFactoryCallbacks = $client->getEntityDeserializerFactoryCallbacks();
+		$this->maxSerializedEntitySize = $client->getSettings()->getSetting( 'maxSerializedEntitySize' );
 	}
 
 	/**
@@ -113,6 +129,21 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 	 */
 	public function getDataValueDeserializer() {
 		return $this->dataValueDeserializer;
+	}
+
+	public function getEntitySerializer() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			return new ForbiddenSerializer( 'Entity serialization is not supported on the client!' );
+		}
+
+		$baseSerializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$serializers = [];
+
+		foreach ( $this->serializerFactoryCallbacks as $callback ) {
+			$serializers[] = call_user_func( $callback, $baseSerializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
 	}
 
 	/**
@@ -182,6 +213,18 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 				$service->redirectUpdated( $entityRedirect, $revisionId );
 			}
 		}
+	}
+
+	/**
+	 * @return EntityContentDataCodec
+	 */
+	public function getEntityContentDataCodec() {
+		return new EntityContentDataCodec(
+			$this->getEntityIdParser(),
+			$this->getEntitySerializer(),
+			$this->getEntityDeserializer(),
+			$this->maxSerializedEntitySize * 1024
+		);
 	}
 
 	public function getEntityInfoBuilderFactory() {
