@@ -54,7 +54,7 @@ class NoReverseDependencyTest extends \PHPUnit_Framework_TestCase {
 				}
 			}
 		}
-
+		sort( $paths );
 		return $paths;
 	}
 
