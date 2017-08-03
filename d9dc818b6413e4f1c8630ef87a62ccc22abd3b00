@@ -16,6 +16,24 @@
       "revId": "d9dc818b6413e4f1c8630ef87a62ccc22abd3b00",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8c6fcebf",
+        "filename": "repo/tests/phpunit/includes/Parsers/MwTimeIsoParserTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T12:42:46Z",
+      "side": 1,
+      "message": "Yes, thanks!",
+      "parentUuid": "4e7eab26_09c0b07d",
+      "revId": "d9dc818b6413e4f1c8630ef87a62ccc22abd3b00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
