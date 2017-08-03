@@ -29,7 +29,7 @@
 	"wikibase-error-remove-connection": "Ocorreu um erro de ligação ao tentar remover. Verifique a sua ligação à Internet, por favor.",
 	"wikibase-error-save-timeout": "Estamos a ter dificuldades técnicas. Tente novamente por favor.",
 	"wikibase-error-remove-timeout": "Estamos a ter dificuldades técnicas. Tente novamente por favor.",
-	"wikibase-error-autocomplete-connection": "Não foi possível consultar a API do sítio. Por favor, tente novamente mais tarde.",
+	"wikibase-error-autocomplete-connection": "Não foi possível consultar a API do site. Tente novamente mais tarde, por favor.",
 	"wikibase-error-autocomplete-response": "O servidor respondeu: $1",
 	"wikibase-error-ui-no-external-page": "Não foi possível encontrar uma página \"$2\" em \"$1\".",
 	"wikibase-error-ui-edit-conflict": "O mesmo valor foi entretanto alterado, causando um conflito de edições. Volte a carregar a página, por favor.",

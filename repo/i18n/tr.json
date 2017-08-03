@@ -19,7 +19,8 @@
 			"McAang",
 			"Nemo bis",
 			"HakanIST",
-			"Vito Genovese"
+			"Vito Genovese",
+			"Botansahin"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -35,9 +36,9 @@
 	"wikibase-addreference": "kaynak ekle",
 	"wikibase-save-inprogress": "Kaydediliyor...",
 	"wikibase-remove-inprogress": "Kaldırılıyor...",
-	"wikibase-statementlistview-add": "ekle",
+	"wikibase-statementlistview-add": "değer ekle",
 	"wikibase-statementlistview-add-tooltip": "Yeni bir değer ekle",
-	"wikibase-statementgrouplistview-add": "ekle",
+	"wikibase-statementgrouplistview-add": "görüş ekle",
 	"wikibase-statementgrouplistview-add-tooltip": "Yeni bir ifade ekle",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Daha fazla dilde",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Yapılandır",

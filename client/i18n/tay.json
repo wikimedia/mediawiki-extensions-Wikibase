@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Corainn",
-			"Hitaypayan"
+			"Hitaypayan",
+			"Translatealcd"
 		]
 	},
 	"tooltip-t-wikibase": "P’buzyun squw biru’ na pin’buzyan nquw wal sr’ tun lmlamu’ na blnkgan",
@@ -14,5 +15,6 @@
 	"wikibase-rc-hide-wikidata-hide": "smbbaq",
 	"wikibase-rc-hide-wikidata-show": "Show",
 	"wikibase-rc-wikibase-edit-letter": "b",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} Smr’zyut miru’"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} Smr’zyut miru’",
+	"wikibase-otherprojects": "Bzinah Cwan’an"
 }

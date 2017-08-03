@@ -129,5 +129,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un'altra pagina|altre $4 pagine|100=99+ altre pagine}} sono {{GENDER:$2|state connesse}} a elementi {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vedi}} elemento",
 	"notification-subject-page-connection": "Una pagina su {{SITENAME}} che {{GENDER:$3|hai creato}} è {{GENDER:$2|stata connessa}} a un elemento {{WBREPONAME}}",
-	"unresolved-property-category": "Pagine che utilizzano proprietà non esistenti"
+	"unresolved-property-category": "Pagine che utilizzano proprietà non esistenti",
+	"unresolved-property-category-desc": "Questa categoria elenca le pagine che contengono riferimenti a proprietà {{WBREPONAME}} che non possono essere trovate né dal loro ID proprietà né dall'etichetta."
 }
