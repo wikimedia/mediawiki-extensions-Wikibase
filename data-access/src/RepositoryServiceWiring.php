@@ -59,18 +59,11 @@ return [
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
-		$codec = new EntityContentDataCodec(
-			$services->getEntityIdParser(),
-			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
-			$services->getEntityDeserializer(),
-			$client->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
-		);
-
 		/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
 		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
 
 		return new WikiPageEntityRevisionLookup(
-			$codec,
+			$services->getEntityContentDataCodec(),
 			$metaDataAccessor,
 			$services->getDatabaseName()
 		);
