@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_e95c4450",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-08-03T12:24:03Z",
+      "side": 1,
+      "message": "why?  the commit message doesn\u0027t explain ...",
+      "revId": "3bc1023af821a1c2436edfc12450e668693cb040",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
