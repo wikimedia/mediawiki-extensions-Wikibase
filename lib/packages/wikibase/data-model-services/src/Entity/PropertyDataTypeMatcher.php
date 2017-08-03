@@ -21,9 +21,6 @@ class PropertyDataTypeMatcher {
 	 */
 	private $propertyDataTypeLookup;
 
-	/**
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 */
 	public function __construct( PropertyDataTypeLookup $propertyDataTypeLookup ) {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 	}

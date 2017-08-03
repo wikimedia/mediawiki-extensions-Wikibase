@@ -16,9 +16,6 @@ class FakeEntityDocument implements EntityDocument {
 	 */
 	private $id;
 
-	/**
-	 * @param EntityId $id
-	 */
 	public function __construct( EntityId $id ) {
 		$this->id = $id;
 	}

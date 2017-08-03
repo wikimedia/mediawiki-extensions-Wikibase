@@ -32,9 +32,6 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 */
 	private $descriptions;
 
-	/**
-	 * @param EntityLookup $entityLookup
-	 */
 	public function __construct( EntityLookup $entityLookup ) {
 		$this->entityLookup = $entityLookup;
 	}
