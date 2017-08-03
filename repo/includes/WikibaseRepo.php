@@ -639,6 +639,7 @@ class WikibaseRepo {
 
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
+			$this->getEntityIdParser(),
 			$changeClasses
 		);
 	}

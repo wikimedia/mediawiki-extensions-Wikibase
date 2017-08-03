@@ -280,6 +280,13 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertSame( $expected, $change->getSerializedInfo() );
 	}
 
+	public function testSerializeSkips() {
+		$info = [ 'field' => 'value', 'evil' => 'nope!' ];
+		$expected = '{"field":"value"}';
+		$change = new EntityChange( [ 'info' => $info ] );
+		$this->assertSame( $expected, $change->getSerializedInfo( [ 'evil' ] ) );
+	}
+
 	public function testDoesNotSerializeObjects() {
 		$info = [ 'array' => [ 'object' => new EntityChange() ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
