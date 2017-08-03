@@ -14,6 +14,7 @@ use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\LBFactory;
@@ -37,6 +38,11 @@ class InjectRCRecordsJob extends Job {
 	 * @var EntityChangeLookup
 	 */
 	private $changeLookup;
+
+	/**
+	 * @var EntityChangeFactory
+	 */
+	private $changeFactory;
 
 	/**
 	 * @var RecentChangeFactory
@@ -82,8 +88,13 @@ class InjectRCRecordsJob extends Job {
 			$pages[$id] = [ $t->getNamespace(), $t->getDBkey() ];
 		}
 
+		// Note: Avoid serializing Change objects. Original changes can be restored
+		// from $changeData['info']['change-ids'], see getChange().
+		$changeData = $change->getFields();
+		$changeData['info'] = $change->getSerializedInfo( [ 'changes' ] );
+
 		$params = [
-			'change' => $change->getId(),
+			'change' => $changeData,
 			'pages' => $pages
 		];
 
@@ -91,7 +102,6 @@ class InjectRCRecordsJob extends Job {
 			'wikibase-InjectRCRecords',
 			$params
 		);
-
 	}
 
 	/**
@@ -100,6 +110,7 @@ class InjectRCRecordsJob extends Job {
 	 *
 	 * @param LBFactory $lbFactory
 	 * @param EntityChangeLookup $changeLookup
+	 * @param EntityChangeFactory $changeFactory
 	 * @param RecentChangeFactory $rcFactory
 	 * @param array $params Needs to have two keys: "change": the id of the change,
 	 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
@@ -107,6 +118,7 @@ class InjectRCRecordsJob extends Job {
 	public function __construct(
 		LBFactory $lbFactory,
 		EntityChangeLookup $changeLookup,
+		EntityChangeFactory $changeFactory,
 		RecentChangeFactory $rcFactory,
 		array $params
 	) {
@@ -118,6 +130,13 @@ class InjectRCRecordsJob extends Job {
 			'$params',
 			'$params[\'change\'] not set.'
 		);
+		// TODO: disallow integer once T172394 has been deployed and old jobs have cleared the queue.
+		Assert::parameterType(
+			'integer|array',
+			$params['change'],
+			'$params[\'change\']'
+		);
+
 		Assert::parameter(
 			isset( $params['pages'] ),
 			'$params',
@@ -131,6 +150,7 @@ class InjectRCRecordsJob extends Job {
 
 		$this->lbFactory = $lbFactory;
 		$this->changeLookup = $changeLookup;
+		$this->changeFactory = $changeFactory;
 		$this->rcFactory = $rcFactory;
 
 		$this->titleFactory = new TitleFactory();
@@ -182,16 +202,31 @@ class InjectRCRecordsJob extends Job {
 	 */
 	private function getChange() {
 		$params = $this->getParams();
-		$changeId = $params['change'];
+		$changeData = $params['change'];
 
-		$this->logger->debug( __FUNCTION__ . ": loading change $changeId." );
+		if ( is_int( $changeData ) ) {
+			// TODO: this can be removed once T172394 has been deployed
+			//       and old jobs have cleared the queue.
+			$this->logger->debug( __FUNCTION__ . ": loading change $changeData." );
 
-		$changes = $this->changeLookup->loadByChangeIds( [ $changeId ] );
+			$changes = $this->changeLookup->loadByChangeIds( [ $changeData ] );
 
-		$change = reset( $changes );
+			$change = reset( $changes );
 
-		if ( !$change ) {
-			$this->logger->error( __FUNCTION__ . ": failed to load change $changeId." );
+			if ( !$change ) {
+				$this->logger->error( __FUNCTION__ . ": failed to load change $changeData." );
+			}
+		} else {
+			$change = $this->changeFactory->newFromFieldData( $params['change'] );
+
+			// If the current change was composed of other child changes, restore the
+			// child objects.
+			$info = $change->getInfo();
+			if ( isset( $info['change-ids'] ) && !isset( $info['changes'] ) ) {
+				$children = $this->changeLookup->loadByChangeIds( $info['change-ids'] );
+				$info['changes'] = $children;
+				$change->setField( 'info', $info );
+			}
 		}
 
 		return $change;
@@ -209,7 +244,7 @@ class InjectRCRecordsJob extends Job {
 		$titles = [];
 
 		foreach ( $pages as $pageId => list( $namespace, $dbKey ) ) {
-			$titles[] = $this->titleFactory->makeTitle( $namespace, $dbKey );
+			$titles[$pageId] = $this->titleFactory->makeTitle( $namespace, $dbKey );
 		}
 
 		return $titles;

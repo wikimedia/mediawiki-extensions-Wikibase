@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Changes;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -41,6 +42,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$factory = new EntityChangeFactory(
 			new EntityDiffer(),
+			new BasicEntityIdParser(),
 			$changeClasses
 		);
 
@@ -84,6 +86,26 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $factory->newForChangeType( $type, $entityId, [] );
 		$this->assertInstanceOf( $expectedClass, $change );
 		$this->assertEquals( $type, $change->getType() );
+		$this->assertEquals( $action, $change->getAction() );
+		$this->assertEquals( $entityId, $change->getEntityId() );
+	}
+
+	/**
+	 * @dataProvider newForEntityProvider
+	 *
+	 * @param string $action
+	 * @param EntityId $entityId
+	 * @param string $expectedClass
+	 */
+	public function testNewFromFieldData( $action, EntityId $entityId, $expectedClass ) {
+		$fields = [];
+		$fields['type'] = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
+		$fields['object_id'] = $entityId->getSerialization();
+
+		$factory = $this->getEntityChangeFactory();
+
+		$change = $factory->newFromFieldData( $fields );
+		$this->assertInstanceOf( $expectedClass, $change );
 		$this->assertEquals( $action, $change->getAction() );
 		$this->assertEquals( $entityId, $change->getEntityId() );
 	}

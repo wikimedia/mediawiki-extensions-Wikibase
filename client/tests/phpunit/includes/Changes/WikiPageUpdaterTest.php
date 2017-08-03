@@ -123,6 +123,14 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->method( 'getId' )
 			->will( $this->returnValue( $id ) );
 
+		$change->expects( $this->any() )
+			->method( 'getFields' )
+			->will( $this->returnValue( [ 'id' => $id, 'info' => [] ] ) );
+
+		$change->expects( $this->any() )
+			->method( 'getSerializedInfo' )
+			->will( $this->returnValue( '{}' ) );
+
 		return $change;
 	}
 
@@ -229,7 +237,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 				$this->assertArrayHasKey( 'change', $params, '$params["change"]' );
 				$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
 
-				$this->assertSame( $change->getId(), $params["change"] );
+				$this->assertSame( $change->getId(), $params['change']['id'] );
 
 				$pages += $params['pages']; // addition uses keys, array_merge does not
 			} ) );

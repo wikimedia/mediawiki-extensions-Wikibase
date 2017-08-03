@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Changes;
 
 use Wikibase\ChangeRow;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -37,6 +38,7 @@ final class TestChanges {
 
 		$factory = new EntityChangeFactory(
 			new EntityDiffer(),
+			new BasicEntityIdParser(),
 			$changeClasses
 		);
 
