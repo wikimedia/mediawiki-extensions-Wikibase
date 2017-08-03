@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_a2673121",
+        "filename": "data-access/src/GenericServices.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:51:25Z",
+      "side": 1,
+      "message": "This is really not a nice class name. Can we please try to find a better name for this?\n\nCurrently this only contains the EntityNamespaceLookup, which even is a MediaWiki-specific thing. So it might also be called \"MediaWikiEntityStorageServices\" or something like that.\n\nCan you please add class level documentation and describe what this class is supposed to represent, so we only add appropriate services to it in the future?",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0283a59c",
+        "filename": "data-access/src/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:51:25Z",
+      "side": 1,
+      "message": "When looking at this file here, I wonder why the new service can not be added to this class?\n\nThe two class names \"RepositoryServiceContainer\" and \"GenericServices\" should reflect what they represent, and what the difference between the two is. Currently I can not tell.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4279adc2",
+        "filename": "data-access/src/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:51:25Z",
+      "side": 1,
+      "message": "This should be removed, right? I can see it is still used below, and I assume the plan is to remove this dependency in a later patch. Is this correct?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_824d559d",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T16:51:25Z",
+      "side": 1,
+      "message": "Unused.",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
