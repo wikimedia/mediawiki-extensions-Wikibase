@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -39,6 +40,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( $client->getEntityNamespaceLookup() ),
+			new DataAccessSettings( 0, false ),
 			$client
 		);
 
