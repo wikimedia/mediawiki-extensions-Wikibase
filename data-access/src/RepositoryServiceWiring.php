@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -25,6 +26,25 @@ use Wikimedia\Assert\Assert;
  */
 
 return [
+
+	'EntityContentDataCodec' => function (
+		RepositoryServiceContainer $services,
+		GenericServices $genericServices,
+		DataAccessSettings $settings
+	) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$serializer = new ForbiddenSerializer( 'Entity serialization is not supported on the client!' );
+		} else {
+			$serializer = $genericServices->getEntitySerializer();
+		}
+
+		return new EntityContentDataCodec(
+			$services->getEntityIdParser(),
+			$serializer,
+			$services->getEntityDeserializer(),
+			$settings->maxSerializedEntitySizeInBytes()
+		);
+	},
 
 	'EntityInfoBuilderFactory' => function (
 		RepositoryServiceContainer $services,
@@ -63,15 +83,10 @@ return [
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
-		$codec = new EntityContentDataCodec(
-			$services->getEntityIdParser(),
-			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
-			$services->getEntityDeserializer(),
-			$settings->maxSerializedEntitySizeInBytes()
-		);
-
 		/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
 		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
+		/** @var EntityContentDataCodec $codec */
+		$codec = $services->getService( 'EntityContentDataCodec' );
 
 		return new WikiPageEntityRevisionLookup(
 			$codec,
