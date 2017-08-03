@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
@@ -42,7 +43,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new RepositorySpecificDataValueDeserializerFactory( $idParser ),
 			[ '' => false ],
 			[ __DIR__ . '/../../src/PerRepositoryServiceWiring.php' ],
-			new GenericServices( $client->getEntityNamespaceLookup() ),
+			new GenericServices( $client->getEntityNamespaceLookup(), new EntityTypeDefinitions( [] ) ),
 			new DataAccessSettings( 0, false ),
 			$client
 		);
