@@ -16,6 +16,24 @@
       "revId": "3bc1023af821a1c2436edfc12450e668693cb040",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2911ec5f",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-03T12:28:49Z",
+      "side": 1,
+      "message": "As a test before I create the actual 0.20.1 tag, which is done now.",
+      "parentUuid": "4e7eab26_e95c4450",
+      "revId": "3bc1023af821a1c2436edfc12450e668693cb040",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
