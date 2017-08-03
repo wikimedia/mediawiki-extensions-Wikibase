@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_6c95c234",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-03T13:18:25Z",
+      "side": 1,
+      "message": "I actually prefer direct static access to WikibaseRepo to injecting it - static access is an obvious problem. Injecting the repo is a more subtle problem. I prefer obvious problems...",
+      "parentUuid": "8e742343_efb2f9f8",
+      "revId": "930aad3a37b0559a74de4b5a9d70a9ef2643236a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_76590b01",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 25
