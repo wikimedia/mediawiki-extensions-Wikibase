@@ -10,7 +10,6 @@ use Content;
 use ContentHandler;
 use ExtensionRegistry;
 use HistoryPager;
-use Html;
 use IContextSource;
 use LogEntry;
 use MediaWiki\MediaWikiServices;

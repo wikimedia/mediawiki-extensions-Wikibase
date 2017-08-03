@@ -3,9 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use ValueValidators\Result;
-use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**

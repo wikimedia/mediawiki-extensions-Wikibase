@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
 

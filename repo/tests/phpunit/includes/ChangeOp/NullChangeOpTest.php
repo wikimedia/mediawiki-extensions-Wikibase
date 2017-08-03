@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\NullChangeOp

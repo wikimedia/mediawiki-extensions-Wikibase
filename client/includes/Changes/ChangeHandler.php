@@ -11,8 +11,6 @@ use Title;
 use Traversable;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\EntityChange;
 
 /**

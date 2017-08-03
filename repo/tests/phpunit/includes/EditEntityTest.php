@@ -2,12 +2,10 @@
 
 namespace Wikibase\Repo\Tests;
 
-use FauxRequest;
 use MediaWikiTestCase;
 use ObjectCache;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
-use RequestContext;
 use Status;
 use Title;
 use User;
