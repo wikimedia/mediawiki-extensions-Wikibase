@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_37114460",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-03T09:36:23Z",
+      "side": 1,
+      "message": "Couldn\u0027t this patch also change this line (and makeEditEntity) so it passes an int instead of a bool? makeEditEntity passes it then to EditEntity. I know there is b/c code in EditEntity which handles that but why leave those bools around which are nothing but confusing?",
+      "revId": "d5d1f4ee640eed87ea065a084bff2aee335abf29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
