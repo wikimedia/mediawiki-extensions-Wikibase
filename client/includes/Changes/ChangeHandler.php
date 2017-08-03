@@ -123,7 +123,8 @@ class ChangeHandler {
 	 * @param EntityChange[] $changes
 	 */
 	public function handleChanges( array $changes ) {
-		$changes = $this->changeRunCoalescer->transformChangeList( $changes );
+		// FIXME: Commented out as a HOT FIX for T172320
+		// $changes = $this->changeRunCoalescer->transformChangeList( $changes );
 
 		if ( !Hooks::run( 'WikibaseHandleChanges', [ $changes ] ) ) {
 			return;

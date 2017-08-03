@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
+use InvalidArgumentException;
 use Job;
 use JobSpecification;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
@@ -75,6 +76,10 @@ class InjectRCRecordsJob extends Job {
 	 * @return JobSpecification
 	 */
 	public static function makeJobSpecification( array $titles, EntityChange $change ) {
+		if ( $change->getId() === null ) {
+			throw new InvalidArgumentException( 'The given Change does not have an ID defined' );
+		}
+
 		$pages = [];
 
 		foreach ( $titles as $t ) {
@@ -91,7 +96,6 @@ class InjectRCRecordsJob extends Job {
 			'wikibase-InjectRCRecords',
 			$params
 		);
-
 	}
 
 	/**
