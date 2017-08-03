@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use IContextSource;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;

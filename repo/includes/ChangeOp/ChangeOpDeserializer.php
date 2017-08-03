@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\ChangeOp;
 
-use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 
 /**

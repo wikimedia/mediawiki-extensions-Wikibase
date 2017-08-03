@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use RuntimeException;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\Reporting\MessageReporter;

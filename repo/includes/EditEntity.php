@@ -2,12 +2,8 @@
 
 namespace Wikibase;
 
-use Html;
-use IContextSource;
-use InvalidArgumentException;
 use MWException;
 use ReadOnlyError;
-use RequestContext;
 use Status;
 use Title;
 use User;

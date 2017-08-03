@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use Deserializers\Deserializer;
-use InvalidArgumentException;
 use Title;
 use ApiUsageException;
 use Wikibase\Repo\ChangeOp\ChangeOp;

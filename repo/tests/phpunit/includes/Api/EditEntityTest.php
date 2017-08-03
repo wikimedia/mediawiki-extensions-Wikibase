@@ -6,8 +6,6 @@ use User;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
