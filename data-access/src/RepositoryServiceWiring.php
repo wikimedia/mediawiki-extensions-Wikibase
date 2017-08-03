@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -63,9 +64,17 @@ return [
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$serializer = new ForbiddenSerializer( 'Entity serialization is not supported on the client!' );
+		} elseif ( $services->getRepositoryName() !== '' ) {
+			$serializer = new ForbiddenSerializer( 'Serialization of foreign entities is not supported!' );
+		} else {
+			$serializer = $genericServices->getEntitySerializer();
+		}
+
 		$codec = new EntityContentDataCodec(
 			$services->getEntityIdParser(),
-			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
+			$serializer,
 			$services->getEntityDeserializer(),
 			$settings->maxSerializedEntitySizeInBytes()
 		);
