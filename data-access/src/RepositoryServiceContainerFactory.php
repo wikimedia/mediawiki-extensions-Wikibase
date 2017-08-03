@@ -52,6 +52,10 @@ class RepositoryServiceContainerFactory {
 	 * @var WikibaseClient
 	 */
 	private $client;
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $settings;
 
 	/**
 	 * FIXME: injecting of the top-level factory (WikibaseClient) here is only a temporary solution.
@@ -68,6 +72,7 @@ class RepositoryServiceContainerFactory {
 	 * @param array $repositoryDatabaseNames
 	 * @param string[] $wiringFiles
 	 * @param GenericServices $genericServices
+	 * @param DataAccessSettings $settings
 	 * @param WikibaseClient $client
 	 */
 	public function __construct(
@@ -77,6 +82,7 @@ class RepositoryServiceContainerFactory {
 		array $repositoryDatabaseNames,
 		array $wiringFiles,
 		GenericServices $genericServices,
+		DataAccessSettings $settings,
 		WikibaseClient $client
 	) {
 		$this->idParserFactory = $idParserFactory;
@@ -85,6 +91,7 @@ class RepositoryServiceContainerFactory {
 		$this->databaseNames = $repositoryDatabaseNames;
 		$this->wiringFiles = $wiringFiles;
 		$this->genericServices = $genericServices;
+		$this->settings = $settings;
 		$this->client = $client;
 	}
 
@@ -107,6 +114,7 @@ class RepositoryServiceContainerFactory {
 			$this->idComposer,
 			$this->dataValueDeserializerFactory->getDeserializer( $repositoryName ),
 			$this->genericServices,
+			$this->settings,
 			$this->client
 		);
 		$container->loadWiringFiles( $this->wiringFiles );

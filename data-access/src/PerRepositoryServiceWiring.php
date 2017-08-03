@@ -2,6 +2,7 @@
 
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -28,7 +29,7 @@ return [
 	'EntityInfoBuilderFactory' => function (
 		RepositoryServiceContainer $services,
 		GenericServices $genericServices,
-		WikibaseClient $client
+		DataAccessSettings $settings
 	) {
 		$factory = new SqlEntityInfoBuilderFactory(
 			$services->getEntityIdParser(),
@@ -38,7 +39,7 @@ return [
 			$services->getRepositoryName()
 		);
 
-		$factory->setReadFullEntityIdColumn( $client->getSettings()->getSetting( 'readFullEntityIdColumn' ) );
+		$factory->setReadFullEntityIdColumn( $settings->readFullEntityIdColumn() );
 
 		return $factory;
 	},
@@ -60,13 +61,13 @@ return [
 	'EntityRevisionLookup' => function (
 		RepositoryServiceContainer $services,
 		GenericServices $genericServices,
-		WikibaseClient $client
+		DataAccessSettings $settings
 	) {
 		$codec = new EntityContentDataCodec(
 			$services->getEntityIdParser(),
 			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
 			$services->getEntityDeserializer(),
-			$client->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
+			$settings->maxSerializedEntitySizeInBytes()
 		);
 
 		/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
@@ -110,6 +111,7 @@ return [
 	'TermIndex' => function (
 		RepositoryServiceContainer $services,
 		GenericServices $genericServices,
+		DataAccessSettings $settings,
 		WikibaseClient $client
 	) {
 		$index = new TermSqlIndex(
@@ -119,13 +121,14 @@ return [
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
-		$index->setReadFullEntityIdColumn( $client->getSettings()->getSetting( 'readFullEntityIdColumn' ) );
+		$index->setReadFullEntityIdColumn( $settings->readFullEntityIdColumn() );
 		return $index;
 	},
 
 	'TermSearchInteractorFactory' => function (
 		RepositoryServiceContainer $services,
 		GenericServices $genericServices,
+		DataAccessSettings $settings,
 		WikibaseClient $client
 	) {
 		/** @var TermIndex $termIndex */

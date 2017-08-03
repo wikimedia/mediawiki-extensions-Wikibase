@@ -61,6 +61,7 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param DataValueDeserializer $dataValueDeserializer
 	 * @param GenericServices $genericServices
+	 * @param DataAccessSettings $settings
 	 * @param WikibaseClient $client Top-level factory passed to service instantiators // TODO: fix this!
 	 */
 	public function __construct(
@@ -70,9 +71,10 @@ class RepositoryServiceContainer extends ServiceContainer implements DataAccessS
 		EntityIdComposer $entityIdComposer,
 		DataValueDeserializer $dataValueDeserializer,
 		GenericServices $genericServices,
+		DataAccessSettings $settings,
 		WikibaseClient $client
 	) {
-		parent::__construct( [ $genericServices, $client ] );
+		parent::__construct( [ $genericServices, $settings, $client ] );
 
 		$this->databaseName = $databaseName;
 		$this->repositoryName = $repositoryName;
