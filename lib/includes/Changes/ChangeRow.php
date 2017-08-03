@@ -114,9 +114,12 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
+	 * @param string[] $skipKeys Keys of the info array to skip during serialization. Useful for
+	 *        omitting undesired or unserializable data from the serialization.
+	 *
 	 * @return string JSON
 	 */
-	abstract public function getSerializedInfo();
+	abstract public function getSerializedInfo( $skipKeys = [] );
 
 	/**
 	 * Unserializes the info field using json_decode.
