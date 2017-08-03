@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use Language;
-use LogicException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use ValueParsers\Test\StringValueParserTest;
@@ -22,13 +21,6 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
  * @author Marius Hoch
  */
 class MwTimeIsoParserTest extends StringValueParserTest {
-
-	/**
-	 * @deprecated since DataValues Common 0.3, just use getInstance.
-	 */
-	protected function getParserClass() {
-		throw new LogicException( 'Should not be called, use getInstance' );
-	}
 
 	/**
 	 * @see ValueParserTestBase::getInstance
