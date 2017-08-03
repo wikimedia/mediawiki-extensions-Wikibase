@@ -409,7 +409,7 @@ final class WikibaseClient {
 			$this->repositoryDefinitions->getPrefixMappings()
 		);
 
-		$genericServices = new GenericServices( $this->getEntityNamespaceLookup() );
+		$genericServices = new GenericServices( $this->getEntityNamespaceLookup(), $this->entityTypeDefinitions );
 		$clientSettings = $this->getSettings();
 		$dataAccessSettings = new DataAccessSettings(
 			$clientSettings->getSetting( 'maxSerializedEntitySize' ),
@@ -1058,6 +1058,13 @@ final class WikibaseClient {
 		}
 
 		return $this->entitySerializers[$options];
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntitySerializerFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 	}
 
 	/**
