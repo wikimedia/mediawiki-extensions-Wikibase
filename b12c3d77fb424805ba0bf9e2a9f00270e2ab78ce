@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_8c858e5c",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-03T12:55:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_a9c39c09",
+      "revId": "b12c3d77fb424805ba0bf9e2a9f00270e2ab78ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_29cecc5f",
         "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2017-08-03T12:17:28Z",
       "side": 1,
       "message": "this is no longer used. Probably should be removed to not add to confusion.",
+      "revId": "b12c3d77fb424805ba0bf9e2a9f00270e2ab78ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ec94528f",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-03T12:55:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_29cecc5f",
       "revId": "b12c3d77fb424805ba0bf9e2a9f00270e2ab78ce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
