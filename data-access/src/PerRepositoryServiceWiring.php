@@ -2,6 +2,7 @@
 
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
@@ -24,14 +25,15 @@ use Wikimedia\Assert\Assert;
 
 return [
 
-	'EntityInfoBuilderFactory' => function(
+	'EntityInfoBuilderFactory' => function (
 		RepositoryServiceContainer $services,
+		GenericServices $genericServices,
 		WikibaseClient $client
 	) {
 		$factory = new SqlEntityInfoBuilderFactory(
 			$services->getEntityIdParser(),
 			$services->getEntityIdComposer(),
-			$client->getEntityNamespaceLookup(),
+			$genericServices->getEntityNamespaceLookup(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
@@ -41,9 +43,9 @@ return [
 		return $factory;
 	},
 
-	'EntityPrefetcher' => function(
+	'EntityPrefetcher' => function (
 		RepositoryServiceContainer $services,
-		WikibaseClient $client
+		GenericServices $genericServices
 	) {
 		$prefetcher = $services->getService( 'WikiPageEntityMetaDataAccessor' );
 
@@ -55,8 +57,9 @@ return [
 		return $prefetcher;
 	},
 
-	'EntityRevisionLookup' => function(
+	'EntityRevisionLookup' => function (
 		RepositoryServiceContainer $services,
+		GenericServices $genericServices,
 		WikibaseClient $client
 	) {
 		$codec = new EntityContentDataCodec(
@@ -76,9 +79,9 @@ return [
 		);
 	},
 
-	'PrefetchingTermLookup' => function(
+	'PrefetchingTermLookup' => function (
 		RepositoryServiceContainer $services,
-		WikibaseClient $client
+		GenericServices $genericServices
 	) {
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
@@ -86,9 +89,9 @@ return [
 		return new BufferingTermLookup( $termIndex, 1000 ); // TODO: customize buffer sizes
 	},
 
-	'PropertyInfoLookup' => function(
+	'PropertyInfoLookup' => function (
 		RepositoryServiceContainer $services,
-		WikibaseClient $client
+		GenericServices $genericServices
 	) {
 		return new PropertyInfoTable(
 			$services->getEntityIdComposer(),
@@ -97,15 +100,16 @@ return [
 		);
 	},
 
-	'TermBuffer' => function(
+	'TermBuffer' => function (
 		RepositoryServiceContainer $services,
-		WikibaseClient $client
+		GenericServices $genericServices
 	) {
 		return $services->getService( 'PrefetchingTermLookup' );
 	},
 
-	'TermIndex' => function(
+	'TermIndex' => function (
 		RepositoryServiceContainer $services,
+		GenericServices $genericServices,
 		WikibaseClient $client
 	) {
 		$index = new TermSqlIndex(
@@ -119,8 +123,9 @@ return [
 		return $index;
 	},
 
-	'TermSearchInteractorFactory' => function(
+	'TermSearchInteractorFactory' => function (
 		RepositoryServiceContainer $services,
+		GenericServices $genericServices,
 		WikibaseClient $client
 	) {
 		/** @var TermIndex $termIndex */
@@ -135,13 +140,13 @@ return [
 		);
 	},
 
-	'WikiPageEntityMetaDataAccessor' => function(
+	'WikiPageEntityMetaDataAccessor' => function (
 		RepositoryServiceContainer $services,
-		WikibaseClient $client
+		GenericServices $genericServices
 	) {
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new WikiPageEntityMetaDataLookup(
-				$client->getEntityNamespaceLookup(),
+				$genericServices->getEntityNamespaceLookup(),
 				$services->getDatabaseName(),
 				$services->getRepositoryName()
 			)
