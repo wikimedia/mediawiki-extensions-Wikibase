@@ -35,9 +35,7 @@
 
 		var promise = entityStore.get( 'id' );
 
-		QUnit.stop();
-		promise.done( function ( entity ) {
-			QUnit.start();
+		return promise.done( function ( entity ) {
 			sinon.assert.calledOnce( store.get );
 			sinon.assert.calledWith( store.get, 'id' );
 		} );
@@ -52,12 +50,10 @@
 
 		var promise = entityStore.get( 'id' );
 
-		QUnit.stop();
-		promise.done( function ( entity ) {
+		return promise.done( function ( entity ) {
 			var promise = entityStore.get( 'id' );
 
-			promise.done( function ( entity ) {
-				QUnit.start();
+			return promise.done( function ( entity ) {
 				sinon.assert.calledOnce( store.get );
 			} );
 		} );
@@ -77,9 +73,7 @@
 		var promise1 = entityStore.get( 'id' );
 		var promise2 = entityStore.get( 'id' );
 
-		QUnit.stop();
-		$.when( promise1, promise2 ).done( function () {
-			QUnit.start();
+		return $.when( promise1, promise2 ).done( function () {
 			sinon.assert.calledOnce( store.get );
 		} );
 	} );

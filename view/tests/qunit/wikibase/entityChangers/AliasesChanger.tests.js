@@ -59,15 +59,9 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
-
-		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
+		return aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
 		.done( function ( savedAliases ) {
-			QUnit.start();
 			assert.ok( true, 'setAliases succeeded' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setAliases failed' );
 		} );
 	} );
 
@@ -89,22 +83,21 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
 		.done( function ( savedAliases ) {
 			assert.ok( false, 'setAliases succeeded' );
 		} )
 		.fail( function ( error ) {
-			QUnit.start();
-
 			assert.ok(
 				error instanceof wb.api.RepoApiError,
 				'setAliases failed with a RepoApiError'
 			);
 
 			assert.equal( error.code, 'errorCode' );
-		} );
+		} )
+		.always( done );
 	} );
 
 	QUnit.test( 'setAliases correctly removes aliases', function ( assert ) {
@@ -134,12 +127,8 @@
 			item
 		);
 
-		QUnit.stop();
-
-		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
+		return aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
 		.done( function () {
-			QUnit.start();
-
 			assert.ok( true, 'setAliases succeeded' );
 
 			assert.ok(
@@ -156,9 +145,6 @@
 				sinon.match( [ 'alias' ] ),
 				'language'
 			);
-		} )
-		.fail( function () {
-			assert.ok( false, 'setAliases failed' );
 		} );
 	} );
 
