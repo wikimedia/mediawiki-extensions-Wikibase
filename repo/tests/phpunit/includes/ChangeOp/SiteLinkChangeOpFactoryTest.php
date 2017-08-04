@@ -36,12 +36,10 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param string[] $allowedBadgeItemIds
-	 *
 	 * @return SiteLinkChangeOpFactory
 	 */
-	private function newChangeOpFactory( $allowedBadgeItemIds = [] ) {
-		return new SiteLinkChangeOpFactory( $allowedBadgeItemIds );
+	private function newChangeOpFactory() {
+		return new SiteLinkChangeOpFactory( [] );
 	}
 
 	public function testNewSetSiteLinkOpReturnsChangeOpInstance() {
