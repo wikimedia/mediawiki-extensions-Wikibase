@@ -151,6 +151,16 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	},
 
 	/**
+	 * @since 0.7
+	 * @deprecated since 0.9
+	 *
+	 * @return {string}
+	 */
+	getYear: function() {
+		return /^[+-]\d+/.exec( this.timestamp )[0];
+	},
+
+	/**
 	 * @inheritdoc
 	 */
 	equals: function( value ) {
