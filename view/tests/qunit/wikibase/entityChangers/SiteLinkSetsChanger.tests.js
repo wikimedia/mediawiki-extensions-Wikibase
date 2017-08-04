@@ -70,18 +70,11 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		var done = assert.async();
-
-		siteLinksChanger.save(
+		return siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
 		).done( function ( savedSiteLinkSet ) {
 			assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
 		} );
 	} );
 
@@ -108,18 +101,11 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		var done = assert.async();
-
-		siteLinksChanger.save(
+		return siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] ),
 			new wb.datamodel.SiteLinkSet()
 		).done( function ( savedSiteLinkSet ) {
 			assert.deepEqual( savedSiteLinkSet.getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
 		} );
 	} );
 
@@ -197,18 +183,11 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		var done = assert.async();
-
-		siteLinksChanger.save(
+		return siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] )
 		).done( function ( savedSiteLinkSet ) {
 			assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
 		} );
 	} );
 
@@ -234,18 +213,11 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		var done = assert.async();
-
-		siteLinksChanger.save(
+		return siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] )
 		).done( function ( savedSiteLinkSet ) {
 			assert.strictEqual( savedSiteLinkSet.getItemByKey( 'siteId' ), null );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
 		} );
 	} );
 

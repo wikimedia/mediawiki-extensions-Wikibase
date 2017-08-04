@@ -63,15 +63,9 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
-
-		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
+		return descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
 		.done( function ( savedDescription ) {
-			QUnit.start();
 			assert.equal( savedDescription.getText(), 'description' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setDescription failed' );
 		} );
 	} );
 
@@ -88,17 +82,17 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
 		.done( function ( savedDescription ) {
 			assert.ok( false, 'setDescription should have failed' );
 		} )
 		.fail( function ( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
-		} );
+		} )
+		.always( done );
 	} );
 
 }( sinon, wikibase, jQuery ) );

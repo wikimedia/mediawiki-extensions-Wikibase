@@ -137,10 +137,10 @@
 				expectingEvent = true;
 			}
 			$queue.queue( 'tests', function ( next ) {
-				QUnit.stop();
+				var done = assert.async();
 				testEditModeChange( func, expectingEvent ).always( function () {
-					QUnit.start();
 					next();
+					done();
 				} );
 			} );
 		}
