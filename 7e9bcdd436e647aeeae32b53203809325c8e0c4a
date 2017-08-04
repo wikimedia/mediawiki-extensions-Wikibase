@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_93f6fed2",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-04T21:17:19Z",
+      "side": 1,
+      "message": "Insisting on that would be silly of course. \n\nBut I do find it strange that this script should need a way to override *any* global from the command line. And if such a mechanism is really needed, why only for this script?\n\nI\u0027d prefer a mechanism that was either very restrictive (e.g. only allowing specific settings to be overwritten), or clearly defined to be a testing mechanism (e.g. allowing scripts ot be run using different config files).\n\nIn any case - I don\u0027t consider this a blocker. In a maintenance script, this isn\u0027t very nice, but if it\u0027s needed, we can love with it. A few fat warnings or TODOs would be nice, though.",
+      "parentUuid": "4e7eab26_d8cee5b8",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_949fd561",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 20
