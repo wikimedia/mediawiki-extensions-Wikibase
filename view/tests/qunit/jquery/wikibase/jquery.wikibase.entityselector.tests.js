@@ -62,10 +62,9 @@
 	} );
 
 	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', function ( assert ) {
-		assert.expect( 2 );
 		var $entitySelector = newTestEntitySelector(),
-			entitySelector = $entitySelector.data( 'entityselector' );
-
+			entitySelector = $entitySelector.data( 'entityselector' ),
+			done = assert.async();
 		$entitySelector.val( 'abc' );
 
 		$entitySelector
@@ -82,18 +81,17 @@
 				'Verified selected entity using selectedEntity().'
 			);
 
-			QUnit.start();
+			done();
 		} );
-
-		QUnit.stop();
 
 		$entitySelector.trigger( 'eachchange.entityselector' );
 	} );
 
 	QUnit.test( 'Don\'t implicitly select entity by matching alias / selectedEntity()', function ( assert ) {
-		QUnit.expect( 0 );
+		assert.expect( 0 );
 
-		var $entitySelector = newTestEntitySelector();
+		var $entitySelector = newTestEntitySelector(),
+			done = assert.async();
 
 		$entitySelector.val( 'yz' );
 
@@ -102,13 +100,9 @@
 			assert.ok( false, 'entity should not automatically be selected based on the alias' );
 		} );
 
-		QUnit.stop();
-
 		$entitySelector.trigger( 'eachchange.entityselector' );
 
-		window.setTimeout( function () {
-			QUnit.start();
-		}, 100 );
+		window.setTimeout( done, 100 );
 	} );
 
 	QUnit.test( 'Item constructor', function ( assert ) {
@@ -138,16 +132,12 @@
 			} ),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		QUnit.stop();
-
-		entitySelector._getSuggestions().then( function ( suggestions ) {
+		return entitySelector._getSuggestions().then( function ( suggestions ) {
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should cache' );
 
 			return entitySelector._getSuggestions();
-		} ).done( function ( suggestions, term ) {
+		} ).then( function ( suggestions, term ) {
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should not concat on existing cache' );
-
-			QUnit.start();
 		} );
 	} );
 
