@@ -43,7 +43,7 @@
 		var $pageSuggester = newTestPageSuggester(),
 			pageSuggester = $pageSuggester.data( 'pagesuggester' );
 
-		QUnit.stop();
+		var done = assert.async();
 
 		pageSuggester.search()
 		.done( function () {
@@ -58,9 +58,7 @@
 				'Searching failed as expected.'
 			);
 		} )
-		.always( function () {
-			QUnit.start();
-		} );
+		.always( done );
 
 	} );
 

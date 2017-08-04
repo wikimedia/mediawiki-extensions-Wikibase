@@ -146,9 +146,7 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		QUnit.stop();
-		statementview.startEditing().done( function () {
-			QUnit.start();
+		return statementview.startEditing().done( function () {
 			assert.ok( statementview.value(), 'value() should return a value' );
 		} );
 	} );
@@ -164,9 +162,7 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		QUnit.stop();
-		statementview.startEditing().done( function () {
-			QUnit.start();
+		return statementview.startEditing().done( function () {
 			assert.strictEqual( statementview.value(), null, 'value should return null' );
 		} );
 	} );
@@ -212,9 +208,7 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		QUnit.stop();
-		statementview.startEditing().done( function () {
-			QUnit.start();
+		return statementview.startEditing().done( function () {
 			statementview._referencesListview.enterNewItem();
 			assert.strictEqual( statementview.value(), null, 'value should not return a value' );
 		} );

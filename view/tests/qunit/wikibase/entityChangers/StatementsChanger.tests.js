@@ -65,21 +65,13 @@
 			entity
 		);
 
-		QUnit.stop();
-
-		statementsChanger.remove(
+		return statementsChanger.remove(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
 		.done( function () {
 			assert.ok( true, 'remove succeeded' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'remove failed' );
-		} )
-		.always( function () {
-			QUnit.start();
 		} );
 	} );
 
@@ -101,7 +93,7 @@
 			entity
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		statementsChanger.remove(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
@@ -119,9 +111,7 @@
 
 			assert.equal( error.code, 'errorCode' );
 		} )
-		.always( function () {
-			QUnit.start();
-		} );
+		.always( done );
 	} );
 
 	QUnit.test( 'remove fires correct hook', function ( assert ) {
@@ -203,9 +193,7 @@
 			new wb.serialization.StatementDeserializer()
 		);
 
-		QUnit.stop();
-
-		statementsChanger.save(
+		return statementsChanger.save(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
@@ -215,12 +203,6 @@
 				savedStatement instanceof wb.datamodel.Statement,
 				'save did not resolve with a Statement'
 			);
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-		} )
-		.always( function () {
-			QUnit.start();
 		} );
 	} );
 
@@ -244,7 +226,7 @@
 			new wb.serialization.StatementDeserializer()
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		statementsChanger.save(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
@@ -262,9 +244,7 @@
 
 			assert.equal( error.code, 'errorCode' );
 		} )
-		.always( function () {
-			QUnit.start();
-		} );
+		.always( done );
 	} );
 
 	QUnit.test( 'save fires correct hook', function ( assert ) {

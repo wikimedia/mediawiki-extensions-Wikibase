@@ -236,7 +236,7 @@
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
-		QUnit.stop();
+		var done = assert.async( 3 );
 
 		$node.on( 'snaklistviewafterstartediting', function ( e ) {
 			assert.ok(
@@ -244,7 +244,7 @@
 				'Triggered "afterstartediting" event.'
 			);
 
-			QUnit.start();
+			done();
 		} );
 
 		snaklistview.startEditing();
@@ -258,15 +258,13 @@
 		// Should not trigger any events since in edit mode already:
 		snaklistview.startEditing();
 
-		QUnit.stop( 1 );
-
 		$node.on( 'snaklistviewafterstopediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstopediting" event.'
 			);
 
-			QUnit.start();
+			done();
 		} );
 
 		snaklistview.stopEditing();
@@ -285,6 +283,7 @@
 
 		// Should not trigger any events since not in edit mode:
 		snaklistview.stopEditing();
+		done();
 	} );
 
 	QUnit.test( 'Basic start and stop editing of filled snaklistview', function ( assert ) {
@@ -292,7 +291,7 @@
 		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
 
-		QUnit.stop();
+		var done = assert.async( 3 );
 
 		$node.on( 'snaklistviewafterstartediting', function ( e ) {
 			assert.ok(
@@ -300,7 +299,7 @@
 				'Triggered "afterstartediting" event.'
 			);
 
-			QUnit.start();
+			done();
 		} );
 
 		// We need to make sure the snaklistview is visible before startEditing,
@@ -318,15 +317,13 @@
 		// Should not trigger any events since in edit mode already:
 		snaklistview.startEditing();
 
-		QUnit.stop( 1 );
-
 		$node.on( 'snaklistviewafterstopediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstopediting" event.'
 			);
 
-			QUnit.start();
+			done();
 		} );
 
 		snaklistview.stopEditing();
@@ -347,6 +344,7 @@
 		snaklistview.stopEditing();
 
 		$node.remove();
+		done();
 	} );
 
 	QUnit.test( 'enterNewItem()', function ( assert ) {
@@ -354,14 +352,14 @@
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
-		QUnit.stop( 2 );
+		var done = assert.async( 3 );
 
 		$node.on( 'snaklistviewafterstartediting', function ( e ) {
 			assert.ok(
 				true,
 				'Triggered "afterstartediting" event.'
 			);
-			QUnit.start();
+			done();
 		} );
 
 		$node.on( 'snaklistviewchange', function ( e ) {
@@ -369,7 +367,7 @@
 				true,
 				'Triggered "change" event.'
 			);
-			QUnit.start();
+			done();
 		} );
 
 		snaklistview.enterNewItem();
@@ -384,6 +382,8 @@
 			null,
 			'Snaklistview is not valid due to pending value.'
 		);
+
+		done();
 	} );
 
 	QUnit.test( 'Stopping edit mode dropping value', function ( assert ) {
@@ -515,6 +515,7 @@
 	} );
 
 	QUnit.test( 'Dis- and enabling', function ( assert ) {
+		var done = assert.async( 3 );
 		assert.expect( 5 );
 		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
@@ -555,7 +556,7 @@
 				true,
 				'Triggered "disable" event.'
 			);
-			QUnit.start();
+			done();
 		} );
 
 		$node.on( 'snaklistviewenable', function ( e ) {
@@ -563,10 +564,8 @@
 				true,
 				'Triggered "enable" event.'
 			);
-			QUnit.start();
+			done();
 		} );
-
-		QUnit.stop();
 
 		snaklistview.disable();
 
@@ -576,8 +575,6 @@
 			'Disabled snaklistview\'s snakviews.'
 		);
 
-		QUnit.stop();
-
 		snaklistview.enable();
 
 		assert.equal(
@@ -585,6 +582,8 @@
 			'enabled',
 			'Eabled snaklistview\'s snakviews.'
 		);
+
+		done();
 	} );
 
 	QUnit.test( 'singleProperty option', function ( assert ) {
