@@ -543,7 +543,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @return array[]
 	 */
-	public function orderProperties( $propertyIds ) {
+	public function orderProperties( array $propertyIds ) {
 		if ( $propertyIds === [] ) {
 			return [ [] ];
 		}

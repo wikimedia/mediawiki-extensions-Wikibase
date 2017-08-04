@@ -193,7 +193,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	/**
 	 * @dataProvider getEntityUrlProvider
 	 */
-	public function testGetEntityUrl( $expected, $entityIdSerialization ) {
+	public function testGetEntityUrl( array $expected, $entityIdSerialization ) {
 		$cacheSplit = false;
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 		$luaWikibaseLibrary->setRepoLinker( $this->getRepoLinker() );
@@ -427,7 +427,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	/**
 	 * @dataProvider provideOrderProperties
 	 */
-	public function testOrderProperties( $propertyIds, $providedPropertyOrder, $expected ) {
+	public function testOrderProperties( array $propertyIds, array $providedPropertyOrder, array $expected ) {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$luaWikibaseLibrary->setPropertyOrderProvider(
@@ -441,7 +441,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	/**
 	 * @dataProvider provideGetPropertyOrder
 	 */
-	public function testGetPropertyOrder( $providedPropertyOrder, $expected ) {
+	public function testGetPropertyOrder( array $providedPropertyOrder, array $expected ) {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$luaWikibaseLibrary->setPropertyOrderProvider(
@@ -456,7 +456,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @param string[] $propertyOrder
 	 * @return PropertyOrderProvider $propertyOrderProvider
 	 */
-	private function getPropertyOrderProvider( $propertyOrder ) {
+	private function getPropertyOrderProvider( array $propertyOrder ) {
 		$propertyOrderProvider = $this->getMock( PropertyOrderProvider::class );
 
 		$propertyOrderProvider->method( 'getPropertyOrder' )

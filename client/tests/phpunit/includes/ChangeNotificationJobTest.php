@@ -38,7 +38,7 @@ class ChangeNotificationJobTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideToString
 	 */
-	public function testToString( $changeIds, $regex ) {
+	public function testToString( array $changeIds, $regex ) {
 		$job = new ChangeNotificationJob(
 			Title::newMainPage(),
 			[ 'repo' => 'repo-db', 'changeIds' => $changeIds ]
