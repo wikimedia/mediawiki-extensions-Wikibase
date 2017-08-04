@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;

@@ -11,7 +11,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntityFactory;
-use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;

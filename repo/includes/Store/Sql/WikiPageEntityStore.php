@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
-use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityStore;
