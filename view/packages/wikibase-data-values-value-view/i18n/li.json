@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ooswesthoesbes"
+		]
+	},
+	"valueview-desc": "Gebroekersinterface-elemente veure waergaaf en 't bewirke van gegaeveswaerd",
+	"valueview-expert-advancedadjustments": "geavanceerde aanpassinge",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "'t Verwirke van waerd van 't typ \"$1\" weurt nag neet óngersteundj.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "'t Verwirke van waerd van 't gegaevestyp \"$1\" weurt nag neet óngersteundj.",
+	"valueview-expert-emptyvalue-empty": "laeg",
+	"valueview-expert-globecoordinateinput-precision": "Precisie:",
+	"valueview-expert-globecoordinateinput-nullprecision": "óngespecificeerd",
+	"valueview-expert-globecoordinateinput-customprecision": "speciaal ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriaans",
+	"valueview-expert-timevalue-calendar-julian": "Juliaans",
+	"valueview-expert-timeinput-precision": "Precisie:",
+	"valueview-expert-timeinput-calendar": "Klender:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregoriaanse klender)",
+	"valueview-expertextender-calendarhint-julian": "(Juliaanse klender)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; veranger nao Gregoriaans",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; veranger nao Juliaans",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Spraok (verplich):",
+	"valueview-expertextender-unitsuggester-label": "Einheid (optioneel):",
+	"valueview-preview-label": "weurt waergaove es:",
+	"valueview-preview-novalue": "gein geljige waerd herkèndj",
+	"valueview-listrotator-manually": "stèl handjmaesig in"
+}
