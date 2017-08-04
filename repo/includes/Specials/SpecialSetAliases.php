@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\EditEntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
@@ -23,7 +22,6 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
-		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $entityPermissionChecker
@@ -32,7 +30,6 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			'SetAliases',
 			$copyrightView,
 			$summaryFormatter,
-			$entityRevisionLookup,
 			$entityTitleLookup,
 			$editEntityFactory,
 			$entityPermissionChecker
@@ -53,7 +50,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			return false;
 		}
 
-		return $this->entityRevision->getEntity() instanceof AliasesProvider;
+		return $this->getBaseRevision()->getEntity() instanceof AliasesProvider;
 	}
 
 	/**
