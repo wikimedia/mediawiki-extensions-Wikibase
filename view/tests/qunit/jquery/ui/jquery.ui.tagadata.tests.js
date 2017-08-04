@@ -96,19 +96,17 @@
 	} );
 
 	QUnit.test( 'removeTag()', function ( assert ) {
-		assert.expect( 2 );
 		var $tagadata = createTagadata(),
-			tagadata = $tagadata.data( 'tagadata' );
-
-		QUnit.stop();
+			tagadata = $tagadata.data( 'tagadata' ),
+			done = assert.async( 2 );
 
 		$tagadata.one( 'tagadatatagremoved', function () {
-			QUnit.start();
-
 			assert.ok(
 				true,
 				'Removed tag.'
 			);
+
+			done();
 		} );
 
 		tagadata.removeTag( tagadata.getTag( 'B' ) );
@@ -118,23 +116,23 @@
 			false,
 			'Trying to remove non-existent tag returns "false".'
 		);
+
+		done();
 	} );
 
-	QUnit.test( 'removeAll()', 1, function ( assert ) {
+	QUnit.test( 'removeAll()', function ( assert ) {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' ),
+			done = assert.async(),
 			i = tagadata.getTags().length;
-
-		QUnit.stop();
 
 		$tagadata.on( 'tagadatatagremoved', function () {
 			if ( --i === 0 ) {
-				QUnit.start();
-
 				assert.ok(
 					true,
 					'Removed all tags.'
 				);
+				done();
 			}
 		} );
 

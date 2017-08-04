@@ -68,33 +68,23 @@
 	} );
 
 	QUnit.test( 'Instantiating tagadata widget on startEditing()', function ( assert ) {
-		assert.expect( 1 );
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
-		QUnit.stop();
-
-		aliasesview.startEditing()
-		.done( function () {
+		return aliasesview.startEditing().done( function () {
 			assert.ok(
 				aliasesview.$list.data( 'tagadata' ) !== undefined,
 				'Instantiated tagadata widget.'
 			);
-		} )
-		.fail( function () {
-			assert.ok(
-				false,
-				'Failed to start edit mode.'
-			);
-		} )
-		.always( function () {
-			QUnit.start();
 		} );
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 6, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
 		var $aliasesview = createAliasesview(),
-			aliasesview = $aliasesview.data( 'aliasesview' );
+			aliasesview = $aliasesview.data( 'aliasesview' ),
+			done = assert.async();
+
+		assert.expect( 6 );
 
 		$aliasesview
 		.on( 'aliasesviewafterstartediting', function ( event ) {
@@ -150,10 +140,10 @@
 				expectingEvent = true;
 			}
 			$queue.queue( 'tests', function ( next ) {
-				QUnit.stop();
+				var changeDone = assert.async();
 				testEditModeChange( func, expectingEvent ).always( function () {
-					QUnit.start();
 					next();
+					changeDone();
 				} );
 			} );
 		}
@@ -198,6 +188,8 @@
 		} );
 
 		$queue.dequeue( 'tests' );
+
+		done();
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {
