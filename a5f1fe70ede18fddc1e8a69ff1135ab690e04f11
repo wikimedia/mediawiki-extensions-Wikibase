@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_07c41010",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1834,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-04T09:48:20Z",
+      "side": 1,
+      "message": "The current list contains \"en-ca\" with a lower case \"ca\". I think this should be consistent to what MediaWiki core currently does.\n\nI know the standard says it must be upper case. I believe this is not that relevant here. There is normalization code that will restore the upper case \"CA\" later.\n\nAt least we must make sure we never end up with duplicate entries for \"fr-CA\" and \"fr-ca\".",
+      "range": {
+        "startLine": 1834,
+        "startChar": 10,
+        "endLine": 1834,
+        "endChar": 12
+      },
+      "revId": "a5f1fe70ede18fddc1e8a69ff1135ab690e04f11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
