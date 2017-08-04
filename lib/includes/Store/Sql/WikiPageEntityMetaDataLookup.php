@@ -59,12 +59,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @throws DBQueryError
 	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
 	 *
-	 * @return array Array of entity id serialization => object or false if entity id is not found.
+	 * @return stdClass[] Array of entity id serialization => object
 	 */
-	public function loadRevisionInformation(
-		array $entityIds,
-		$mode
-	) {
+	public function loadRevisionInformation( array $entityIds, $mode ) {
 		$rows = [];
 
 		foreach ( $entityIds as $entityId ) {
@@ -206,7 +203,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_REPLICA or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return array Array of entity id serialization => object or false (if not found).
+	 * @return stdClass[] Array of entity id serialization => object
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
@@ -238,8 +235,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param EntityId[] $entityIds
 	 * @param ResultWrapper $res
 	 *
-	 * @return array Array of entity id serialization => object or false if entity id
-	 *               serialization is not present in $res.
+	 * @return stdClass[] Array of entity id serialization => object
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
 		$rows = [];
