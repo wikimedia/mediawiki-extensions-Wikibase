@@ -130,7 +130,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param Summary $summary
 	 * @param string $token
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
-	 * @param bool|int $baseRev the base revision, for conflict detection
+	 * @param int $baseRev the base revision, for conflict detection
 	 *
 	 * @return Status
 	 */
@@ -139,7 +139,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		Summary $summary,
 		$token,
 		$flags = EDIT_UPDATE,
-		$baseRev = false
+		$baseRev = 0
 	) {
 		$editEntity = $this->editEntityFactory->newEditEntity(
 			$this->getUser(),

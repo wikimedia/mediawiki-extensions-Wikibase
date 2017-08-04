@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use MWException;
 use ReadOnlyError;
+use RuntimeException;
 use Status;
 use Title;
 use User;
@@ -165,12 +166,12 @@ class EditEntity {
 	 *        May be null when creating a new entity.
 	 * @param User $user the user performing the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
-	 * @param int|bool $baseRevId the base revision ID for conflict checking.
-	 *        Defaults to false, disabling conflict checks.
-	 *        `true` can be used to set the base revision to the latest revision:
-	 *        This will detect "late" edit conflicts, i.e. someone squeezing in an edit
-	 *        just before the actual database transaction for saving beings.
-	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
+	 * @param int $baseRevId the base revision ID for conflict checking.
+	 *        Use 0 to indicate that the current revision should be used as the base revision,
+	 *        effectively disabling conflict detections. true and false will be accepted for
+	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
+	 *        of this class changed so that "late" conflicts that arise between edit conflict
+	 *        detection and database update are always detected, and result in the update to fail.
 	 */
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
@@ -182,7 +183,7 @@ class EditEntity {
 		EntityId $entityId = null,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
-		$baseRevId = false
+		$baseRevId = 0
 	) {
 		$this->entityId = $entityId;
 
@@ -190,8 +191,8 @@ class EditEntity {
 			$baseRevId = (int)$baseRevId;
 		}
 
-		if ( $baseRevId === 0 ) {
-			$baseRevId = false;
+		if ( is_bool( $baseRevId ) ) {
+			$baseRevId = 0;
 		}
 
 		$this->user = $user;
@@ -294,13 +295,14 @@ class EditEntity {
 	}
 
 	/**
-	 * If no base revision was supplied to the constructor, this will return false.
-	 * In the trivial non-conflicting case, this will be the same as $this->getLatestRevisionId().
+	 * Return the ID of the base revision for the edit. If no base revision ID was supplied to
+	 * the constructor, this returns the ID of the latest revision. If the entity does not exist
+	 * yet, this returns 0.
 	 *
-	 * @return int|bool
+	 * @return int
 	 */
 	private function getBaseRevisionId() {
-		if ( $this->baseRevId === null || $this->baseRevId === true ) {
+		if ( $this->baseRevId === 0 ) {
 			$this->baseRevId = $this->getLatestRevisionId();
 		}
 
@@ -308,9 +310,9 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns the edits base revision.
-	 * If no base revision was supplied to the constructor, this will return null.
-	 * In the trivial non-conflicting case, this will be the same as $this->getLatestRevision().
+	 * Return the the base revision for the edit. If no base revision ID was supplied to
+	 * the constructor, this returns the latest revision. If the entity does not exist
+	 * yet, this returns null.
 	 *
 	 * @return EntityRevision|null
 	 * @throws MWException
@@ -319,9 +321,7 @@ class EditEntity {
 		if ( $this->baseRev === null ) {
 			$baseRevId = $this->getBaseRevisionId();
 
-			if ( $baseRevId === false ) {
-				return null;
-			} elseif ( $baseRevId === $this->getLatestRevisionId() ) {
+			if ( $baseRevId === $this->getLatestRevisionId() ) {
 				$this->baseRev = $this->getLatestRevision();
 			} else {
 				$id = $this->getEntityId();
@@ -348,9 +348,13 @@ class EditEntity {
 	 *  - revision: Revision the new revision object
 	 *  - errorFlags: bit field indicating errors, see the XXX_ERROR constants.
 	 *
-	 * @return Status|null
+	 * @return Status
 	 */
 	public function getStatus() {
+		if ( $this->status === null ) {
+			throw new RuntimeException( 'The status is undefined until attemptSave() has been called' );
+		}
+
 		return $this->status;
 	}
 
@@ -376,14 +380,19 @@ class EditEntity {
 	}
 
 	/**
-	 * Determines whether an edit conflict exists, that is, whether another user has edited the same item
-	 * after the base revision was created.
+	 * Determines whether an edit conflict exists, that is, whether another user has edited the
+	 * same item after the base revision was created. In other words, this method checks whether
+	 * the base revision (as provided to the constructor) is still current. If no base revision
+	 * was provided to the constructor, this will always return false.
+	 *
+	 * If the base revision is different from the current revision, this will return true even if
+	 * the edit conflict is resolvable. Indeed, it is used to determine whether conflict resolution
+	 * should be attempted.
 	 *
 	 * @return bool
 	 */
 	public function hasEditConflict() {
-		return $this->doesCheckForEditConflicts()
-			&& !$this->isNew()
+		return !$this->isNew()
 			&& $this->getBaseRevisionId() !== $this->getLatestRevisionId();
 	}
 
@@ -569,7 +578,12 @@ class EditEntity {
 	}
 
 	/**
-	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
+	 * Attempts to save the given Entity object.
+	 *
+	 * This method performs entity level permission checks, checks the edit toke, enforces rate
+	 * limits, resolves edit conflicts, and updates user watchlists if appropriate.
+	 *
+	 * Success or failure are reported via the STatus object returned by this method.
 	 *
 	 * @param EntityDocument $newEntity
 	 * @param string $summary The edit summary.
@@ -579,10 +593,14 @@ class EditEntity {
 	 *                                Null will fail the token text, as will the empty string.
 	 * @param bool|null $watch Whether the user wants to watch the entity.
 	 *                                Set to null to apply default according to getWatchDefault().
+	 *
 	 * @return Status
+	 *
 	 * @throws MWException
 	 * @throws ReadOnlyError
+	 *
 	 * @see    WikiPage::doEditContent
+	 * @see    EntityStore::saveEntity
 	 */
 	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null ) {
 		$this->checkReadOnly();
@@ -613,10 +631,20 @@ class EditEntity {
 		}
 
 		//NOTE: Make sure the latest revision is loaded and cached.
-		//      Would happen on demand anyway, but we want a well-defined point at which "latest" is frozen
-		//      to a specific revision, just before the first check for edit conflicts.
+		//      Would happen on demand anyway, but we want a well-defined point at which "latest" is
+		//      frozen to a specific revision, just before the first check for edit conflicts.
+		//      We can use the ID of the latest revision to protect against race conditions:
+		//      if getLatestRevision() was called earlier by application logic, saving will fail
+		//      if any new revisions were created between then and now.
+		//      Note that this protection against "late" conflicts is unrelated to the detection
+		//      of edit conflicts during user interaction, which use the base revision supplied
+		//      to the constructor.
 		$this->getLatestRevision();
-		$this->getLatestRevisionId();
+		$raceProtectionRevId = $this->getLatestRevisionId();
+
+		if ( $raceProtectionRevId === 0 ) {
+			$raceProtectionRevId = false;
+		}
 
 		if ( $this->hasEditConflict() ) {
 			$newEntity = $this->fixEditConflict( $newEntity );
@@ -656,7 +684,7 @@ class EditEntity {
 				$summary,
 				$this->user,
 				$flags | EDIT_AUTOSUMMARY,
-				$this->doesCheckForEditConflicts() ? $this->getLatestRevisionId() : false
+				$raceProtectionRevId
 			);
 
 			$this->entityId = $newEntity->getId();
@@ -687,12 +715,6 @@ class EditEntity {
 	}
 
 	/**
-	 * Whether this EditEntity will check for edit conflicts
-	 *
-	 * @return bool
-	 */
-	public function doesCheckForEditConflicts() {
-		return $this->getBaseRevisionId() !== false;
 	}
 
 	/**
