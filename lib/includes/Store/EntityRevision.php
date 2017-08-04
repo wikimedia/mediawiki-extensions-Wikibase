@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
