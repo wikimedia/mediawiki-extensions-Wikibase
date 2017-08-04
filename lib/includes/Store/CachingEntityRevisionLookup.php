@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Store;
 use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\EntityRevision;
 use Wikimedia\Assert\Assert;
 
 /**

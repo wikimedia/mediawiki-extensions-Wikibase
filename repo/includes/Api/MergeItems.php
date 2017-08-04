@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
