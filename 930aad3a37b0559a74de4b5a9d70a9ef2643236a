@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_f8d16159",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-08-04T18:10:01Z",
+      "side": 1,
+      "message": "OK, I can switch to direct static calls.",
+      "parentUuid": "4e7eab26_6c95c234",
+      "revId": "930aad3a37b0559a74de4b5a9d70a9ef2643236a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_76590b01",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 25
