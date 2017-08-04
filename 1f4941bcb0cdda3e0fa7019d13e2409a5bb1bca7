@@ -16,6 +16,24 @@
       "revId": "1f4941bcb0cdda3e0fa7019d13e2409a5bb1bca7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b8c43995",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-08-04T18:10:44Z",
+      "side": 1,
+      "message": "hm, good point, no idea why.",
+      "parentUuid": "4e7eab26_cc34f648",
+      "revId": "1f4941bcb0cdda3e0fa7019d13e2409a5bb1bca7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
