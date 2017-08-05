@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use InvalidArgumentException;
 use MediaWikiTestCase;
 use stdClass;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
@@ -46,6 +47,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $wgUser, EDIT_NEW );
 			}
 
+			/** @var Item $entity */
 			$entity = $this->data[2]->getEntity();
 			$entity->getFingerprint()->setLabel( 'en', 'Updated' );
 			$this->data[2] = $store->saveEntity( $entity, 'WikiPageEntityMetaDataLookupTest', $wgUser );
@@ -213,7 +215,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->assertFalse( $result );
 	}
 
-	private function assertRevisionInformation( $entityIds, $result ) {
+	/**
+	 * @param EntityId[] $entityIds
+	 * @param stdClass[] $result
+	 */
+	private function assertRevisionInformation( array $entityIds, array $result ) {
 		$serializedEntityIds = [];
 		foreach ( $entityIds as $entityId ) {
 			$serializedEntityIds[] = $entityId->getSerialization();

@@ -604,7 +604,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	 *
 	 * @return SqlEntityInfoBuilder
 	 */
-	private function newEntityInfoBuilderFullEntityId( $ids ) {
+	private function newEntityInfoBuilderFullEntityId( array $ids ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 		$builder->setReadFullEntityIdColumn( true );
 

@@ -54,7 +54,7 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorArgumentsProvider
 	 */
-	public function testConstructor( $propertyIds ) {
+	public function testConstructor( array $propertyIds ) {
 		$instance = $this->newInstance( $propertyIds );
 		$this->assertInstanceOf( PageImagesDataUpdater::class, $instance );
 	}

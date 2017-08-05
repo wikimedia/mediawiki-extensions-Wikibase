@@ -51,7 +51,7 @@ class DispatchingTermBufferTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider entityIdsFromDifferentReposProvider
 	 */
-	public function testPrefetchTermsGroupsEntityIdsByRepo( $ids, $callsPerRepo ) {
+	public function testPrefetchTermsGroupsEntityIdsByRepo( array $ids, array $callsPerRepo ) {
 		$fooTermBuffer = $this->getMock( TermBuffer::class );
 		$fooTermBuffer->expects( $this->exactly( $callsPerRepo['foo'] ) )
 			->method( 'prefetchTerms' )
