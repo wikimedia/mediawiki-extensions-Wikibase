@@ -1839,6 +1839,9 @@ class WikibaseRepo {
 						// T155371
 						'cop',
 
+						// T155372
+						'eya',
+
 						// T155373
 						'gez',
 
@@ -1848,8 +1851,23 @@ class WikibaseRepo {
 						// T155377
 						'kjh',
 
+						// T155423
+						'ood',
+
+						// T155426
+						'pjt',
+
+						// T155429
+						'fuf',
+
 						// T155430
 						'nr',
+
+						// T155433
+						'yap',
+
+						// T155435
+						'zun',
 
 						// T160531
 						'umu',
