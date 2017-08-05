@@ -35,7 +35,8 @@
 			"Lemondoge",
 			"Rubentl134",
 			"Dgstranz",
-			"Luzcaru"
+			"Luzcaru",
+			"MarcoAurelio"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -51,9 +52,9 @@
 	"wikibase-addreference": "añadir referencia",
 	"wikibase-save-inprogress": "Guardando...",
 	"wikibase-remove-inprogress": "Eliminando...",
-	"wikibase-statementlistview-add": "añadir",
+	"wikibase-statementlistview-add": "añadir valor",
 	"wikibase-statementlistview-add-tooltip": "Añadir un valor nuevo",
-	"wikibase-statementgrouplistview-add": "añadir",
+	"wikibase-statementgrouplistview-add": "añadir declaración",
 	"wikibase-statementgrouplistview-add-tooltip": "Añadir una nueva declaración",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En más idiomas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
