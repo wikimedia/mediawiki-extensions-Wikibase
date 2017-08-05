@@ -10,6 +10,7 @@
 	"wikibase-deletedentity-item": "Deleted item",
 	"wikibase-deletedentity-property": "Deleted property",
 	"wikibase-deletedentity-query": "Deleted query",
+	"wikibase-entity-link-hover-text": "$1 ($2)",
 	"wikibase-error-unexpected": "Error: $1.",
 	"wikibase-error-save-generic": "Could not save due to an error.",
 	"wikibase-error-remove-generic": "Could not remove due to an error.",

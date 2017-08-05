@@ -54,18 +54,29 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
 
-		$term = $this->lookupEntityLabel( $entityId );
+		$label = $this->lookupEntityLabel( $entityId );
+		$description = $this->lookupEntityDescription( $entityId );
+
+		if ( $description === null ) {
+			$titleText = $entityId->getSerialization();
+		} else {
+			$titleText = wfMessage(
+				'wikibase-entity-link-hover-text',
+				$description->getText(),
+				$entityId->getSerialization()
+			)->text();
+		}
 
 		$url = $title->isLocal() ? $title->getLocalURL() : $title->getFullURL();
 
-		if ( $term ) {
-			return $this->getHtmlForTerm( $url, $term, $title->getPrefixedText() );
+		if ( $label ) {
+			return $this->getHtmlForTerm( $url, $label, $titleText );
 		} elseif ( $title->isLocal() && !$title->exists() ) {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
 
 		$attributes = [
-			'title' => $title->getPrefixedText(),
+			'title' => $titleText,
 			'href' => $url
 		];
 

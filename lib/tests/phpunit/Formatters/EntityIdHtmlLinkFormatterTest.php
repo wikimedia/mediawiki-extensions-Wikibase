@@ -36,6 +36,9 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getDescription' )
+			->will( $this->returnValue( $term ?: new Term( 'xy', 'A description' ) ) );
 
 		return $labelDescriptionLookup;
 	}
@@ -50,6 +53,12 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->will( $this->throwException( new LabelDescriptionLookupException(
 				new ItemId( 'Q100' ),
 				'meep'
+			) ) );
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getDescription' )
+			->will( $this->throwException( new LabelDescriptionLookupException(
+				new ItemId( 'Q100' ),
+				'mööp'
 			) ) );
 
 		return $labelDescriptionLookup;
@@ -84,6 +93,13 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			],
 			"has no label" => [
 				'expectedRegex' => '/' . $escapedItemUrl . '.*>Q42</',
+				'hasLabel' => false
+			],
+			'has a description' => [
+				'expectedRegex' => '/title="A description \(Q42\)"/',
+			],
+			"has no description" => [
+				'expectedRegex' => '/title="Q42"/',
 				'hasLabel' => false
 			],
 			"doesn't exist, lookup labels" => [

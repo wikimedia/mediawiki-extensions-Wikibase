@@ -20,6 +20,7 @@
 	"wikibase-deletedentity-item": "Message displayed instead of an Item's label if the Item has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-item}}\n* {{msg-mw|Wikibase-deletedentity-property}}\n* {{msg-mw|Wikibase-deletedentity-query}}",
 	"wikibase-deletedentity-property": "Message displayed instead of a Property's label if the Property has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-property}}\n* {{msg-mw|Wikibase-deletedentity-item}}\n* {{msg-mw|Wikibase-deletedentity-query}}",
 	"wikibase-deletedentity-query": "Message displayed instead of a Query's label if the Query has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-query}}\n* {{msg-mw|Wikibase-deletedentity-item}}\n* {{msg-mw|Wikibase-deletedentity-property}}",
+	"wikibase-entity-link-hover-text": "Text shown hovering over a link to an entity, if the link shows the entity's label. This message is used to generate the title `attribute` of the HTML `link` element.\n* $1 - the entity's disambiguating description\n* $1 - the entity's ID",
 	"wikibase-error-unexpected": "Generic error messaged used for reporting unknown exception.\n\nParameters:\n* $1 - the raw, unlocalized error message\n{{Identical|Error}}",
 	"wikibase-error-save-generic": "Generic error message for an error happening during a save operation.",
 	"wikibase-error-remove-generic": "Generic error message for an error happening during a remove operation",
