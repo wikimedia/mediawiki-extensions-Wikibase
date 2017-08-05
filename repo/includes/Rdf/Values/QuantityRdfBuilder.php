@@ -52,7 +52,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		PropertyValueSnak $snak
+		PropertyValueSnak $snakN
 	) {
 		/** @var UnboundedQuantityValue $value */
 		$value = $snak->getDataValue();

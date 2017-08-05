@@ -6,6 +6,7 @@ use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -18,6 +19,12 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Thiemo Mättig
  */
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
+
+	/**
+	 * @todo remove once lookupEntityDescription has been pushed up to the base class
+	 * @var LabelDescriptionLookup
+	 */
+	private $labelDescriptionLookup;
 
 	/**
 	 * @var LanguageFallbackIndicator
@@ -36,6 +43,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	) {
 		parent::__construct( $labelDescriptionLookup );
 
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackIndicator = new LanguageFallbackIndicator( $languageNameLookup );
 	}
@@ -54,18 +62,29 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
 
-		$term = $this->lookupEntityLabel( $entityId );
+		$label = $this->lookupEntityLabel( $entityId );
+		$description = $this->lookupEntityDescription( $entityId );
+
+		if ( $description === null ) {
+			$titleText = $entityId->getSerialization();
+		} else {
+			$titleText = wfMessage(
+				'wikibase-entity-link-hover-text',
+				$description->getText(),
+				$entityId->getSerialization()
+			)->text();
+		}
 
 		$url = $title->isLocal() ? $title->getLocalURL() : $title->getFullURL();
 
-		if ( $term ) {
-			return $this->getHtmlForTerm( $url, $term, $title->getPrefixedText() );
+		if ( $label ) {
+			return $this->getHtmlForTerm( $url, $label, $titleText );
 		} elseif ( $title->isLocal() && !$title->exists() ) {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
 
 		$attributes = [
-			'title' => $title->getPrefixedText(),
+			'title' => $titleText,
 			'href' => $url
 		];
 
@@ -119,6 +138,23 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$separator = wfMessage( 'word-separator' )->text();
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
+	}
+
+	/**
+	 * Lookup a description for an entity
+	 *
+	 * @todo Push this up to EntityIdLabelFormattre
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return Term|null Null if no label was found or the entity does not exist
+	 */
+	protected function lookupEntityDescription( EntityId $entityId ) {
+		try {
+			return $this->labelDescriptionLookup->getDescription( $entityId );
+		} catch ( LabelDescriptionLookupException $e ) {
+			return null;
+		}
 	}
 
 }
