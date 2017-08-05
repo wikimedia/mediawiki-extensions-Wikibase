@@ -92,7 +92,8 @@
 		} );
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 6, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+		assert.expect( 6 );
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' );
 

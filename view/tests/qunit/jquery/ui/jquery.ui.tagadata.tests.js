@@ -120,7 +120,7 @@
 		);
 	} );
 
-	QUnit.test( 'removeAll()', 1, function ( assert ) {
+	QUnit.test( 'removeAll()', function ( assert ) {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' ),
 			i = tagadata.getTags().length;

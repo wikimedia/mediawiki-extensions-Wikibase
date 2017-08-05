@@ -61,7 +61,8 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 2, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+		assert.expect( 2 );
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 

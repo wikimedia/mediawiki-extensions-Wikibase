@@ -69,7 +69,8 @@
 		);
 	} );
 
-	QUnit.test( 'setContent()', 7, function ( assert ) {
+	QUnit.test( 'setContent()', function ( assert ) {
+		assert.expect( 7 );
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' ),
 			$content = $( '<span>test</span>' );

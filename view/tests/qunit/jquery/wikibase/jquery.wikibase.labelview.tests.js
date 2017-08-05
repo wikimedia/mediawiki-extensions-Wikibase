@@ -64,7 +64,8 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 5, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+		assert.expect( 5 );
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' );
 

@@ -123,7 +123,8 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 3, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+		assert.expect( 3 );
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
 				value: new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ] )
@@ -222,7 +223,7 @@
 		$queue.dequeue( 'tests' );
 	} );
 
-	QUnit.test( 'setError()', 1, function ( assert ) {
+	QUnit.test( 'setError()', function ( assert ) {
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
 				value: new wb.datamodel.SiteLinkSet( [] )

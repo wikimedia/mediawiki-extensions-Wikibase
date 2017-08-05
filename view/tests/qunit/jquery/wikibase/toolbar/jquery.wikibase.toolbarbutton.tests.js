@@ -48,7 +48,7 @@
 		);
 	} );
 
-	QUnit.test( 'action event', 1, function ( assert ) {
+	QUnit.test( 'action event', function ( assert ) {
 		var $button = createTestButton(),
 			button = $button.data( 'toolbarbutton' );
 

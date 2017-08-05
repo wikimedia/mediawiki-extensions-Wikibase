@@ -39,7 +39,7 @@
 		);
 	} );
 
-	QUnit.test( 'Try searching for suggestions without a site', 1, function ( assert ) {
+	QUnit.test( 'Try searching for suggestions without a site', function ( assert ) {
 		var $pageSuggester = newTestPageSuggester(),
 			pageSuggester = $pageSuggester.data( 'pagesuggester' );
 
