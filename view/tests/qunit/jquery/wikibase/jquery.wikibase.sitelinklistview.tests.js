@@ -184,7 +184,8 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 4, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+		assert.expect( 4 );
 		var $sitelinklistview = createSitelinklistview( {
 				value: [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
 			} ),
@@ -291,7 +292,7 @@
 		$queue.dequeue( 'tests' );
 	} );
 
-	QUnit.test( 'setError()', 1, function ( assert ) {
+	QUnit.test( 'setError()', function ( assert ) {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -335,7 +336,7 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem()', 1, function ( assert ) {
+	QUnit.test( 'enterNewItem()', function ( assert ) {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 

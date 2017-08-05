@@ -169,7 +169,7 @@
 		} );
 	} );
 
-	QUnit.test( 'Using the generic tooltip for new claims', 1, function ( assert ) {
+	QUnit.test( 'Using the generic tooltip for new claims', function ( assert ) {
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
@@ -180,7 +180,7 @@
 		} );
 	} );
 
-	QUnit.test( 'Using tooltip specific for existing claims', 1, function ( assert ) {
+	QUnit.test( 'Using tooltip specific for existing claims', function ( assert ) {
 		var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1', new dv.StringValue( 'g' ) )

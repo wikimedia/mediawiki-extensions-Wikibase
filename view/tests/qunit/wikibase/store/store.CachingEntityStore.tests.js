@@ -25,7 +25,8 @@
 		assert.ok( promise.done, 'done() method exists.' );
 	} );
 
-	QUnit.test( 'upstream store is called', 2, function ( assert ) {
+	QUnit.test( 'upstream store is called', function ( assert ) {
+		assert.expect( 2 );
 		var store = new wb.store.EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			return $.Deferred().resolve();
@@ -42,7 +43,7 @@
 		} );
 	} );
 
-	QUnit.test( 'upstream store is called once', 1, function ( assert ) {
+	QUnit.test( 'upstream store is called once', function ( assert ) {
 		var store = new wb.store.EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			return $.Deferred().resolve();
@@ -62,7 +63,7 @@
 		} );
 	} );
 
-	QUnit.test( 'upstream store is called once for parallel calls', 1, function ( assert ) {
+	QUnit.test( 'upstream store is called once for parallel calls', function ( assert ) {
 		var store = new wb.store.EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			var deferred = $.Deferred();

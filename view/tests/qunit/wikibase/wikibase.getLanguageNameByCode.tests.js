@@ -8,7 +8,7 @@
 
 	QUnit.module( 'wikibase.getLanguageNameByCode' );
 
-	QUnit.test( 'wikibase.getLanguageNameByCode()', 2, function ( assert ) {
+	QUnit.test( 'wikibase.getLanguageNameByCode()', function ( assert ) {
 		// TODO: Don't assume global state, control what languages are available for this test!
 		// Better might be to turn this into a LanguageNameLookup service and set language
 		// name in getEntityTermsView in ViewFactory. Then, all places that need language name

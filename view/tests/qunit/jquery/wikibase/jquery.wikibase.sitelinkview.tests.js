@@ -113,7 +113,8 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 4, function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+		assert.expect( 4 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -151,7 +152,8 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'startEditing(), stopEditing() with initial value', 5, function ( assert ) {
+	QUnit.test( 'startEditing(), stopEditing() with initial value', function ( assert ) {
+		assert.expect( 5 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -271,7 +273,7 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', 1, function ( assert ) {
+	QUnit.test( 'setError()', function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 

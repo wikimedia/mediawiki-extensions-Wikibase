@@ -231,7 +231,8 @@
 		);
 	} );
 
-	QUnit.test( 'Basic start and stop editing', 5, function ( assert ) {
+	QUnit.test( 'Basic start and stop editing', function ( assert ) {
+		assert.expect( 5 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -286,7 +287,8 @@
 		snaklistview.stopEditing();
 	} );
 
-	QUnit.test( 'Basic start and stop editing of filled snaklistview', 5, function ( assert ) {
+	QUnit.test( 'Basic start and stop editing of filled snaklistview', function ( assert ) {
+		assert.expect( 5 );
 		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
 

@@ -7,7 +7,8 @@
 
 	QUnit.module( 'jquery.util.EventSingletonManager' );
 
-	QUnit.test( 'register() & unregister() (single source)', 2, function ( assert ) {
+	QUnit.test( 'register() & unregister() (single source)', function ( assert ) {
+		assert.expect( 2 );
 		var manager = new $.util.EventSingletonManager(),
 			$source = $( '<div/>' ),
 			$target = $( '<div/>' ),
@@ -38,7 +39,8 @@
 		$target.trigger( event );
 	} );
 
-	QUnit.test( 'register() & unregister() (multiple sources)', 4, function ( assert ) {
+	QUnit.test( 'register() & unregister() (multiple sources)', function ( assert ) {
+		assert.expect( 4 );
 		var manager = new $.util.EventSingletonManager(),
 			$sources = $( '<div/><div/>' ),
 			sources = $sources.map( function () { return this; } ),
@@ -83,7 +85,8 @@
 		manager.unregister( $sources.get( 0 ), $target.get( 0 ), '.namespace' );
 	} );
 
-	QUnit.test( 'unregister() & unregister() (multiple events)', 8, function ( assert ) {
+	QUnit.test( 'unregister() & unregister() (multiple events)', function ( assert ) {
+		assert.expect( 8 );
 		var manager = new $.util.EventSingletonManager(),
 			$source = $( '<div/>' ),
 			$target = $( '<div/>' ),

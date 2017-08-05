@@ -61,7 +61,8 @@
 		);
 	} );
 
-	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', 2, function ( assert ) {
+	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', function ( assert ) {
+		assert.expect( 2 );
 		var $entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 

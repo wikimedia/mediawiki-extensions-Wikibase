@@ -23,8 +23,8 @@
 
 	QUnit.test(
 		'Promise is resolved asynchronously, even if the entity is cached',
-		2,
 		function ( assert ) {
+			assert.expect( 2 );
 			var store = new wb.store.EntityStore();
 			store.get = function ( entityId ) {
 				return $.Deferred().resolve();
