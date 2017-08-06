@@ -16,7 +16,8 @@
 			"Mbch331",
 			"Xxmarijnw",
 			"Mainframe98",
-			"Effeietsanders"
+			"Effeietsanders",
+			"Romaine"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -70,6 +71,7 @@
 	"wikibase-error-invalid-entity-id": "Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.",
 	"wikibase-error-exceeded-entity-access-limit": "Te veel {{WBREPONAME}}-entiteiten opgevraagd.",
 	"unconnectedpages": "Pagina's die niet gekoppeld zijn aan items",
+	"unconnectedpages-summary": "Deze pagina toont de pagina's die niet gekoppeld zijn aan een item op Wikidata (in een naamruimte die gekoppelde items toestaat). De lijst is op volgorde van pagina ID, zodat de nieuwste pagina's bovenaan in de lijst staan.",
 	"wikibase-unconnectedpages-format-row": "($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)",
 	"wikibase-unconnectedpages-submit": "Pagina's weergeven",
 	"pageswithbadges": "Pagina's met badges",

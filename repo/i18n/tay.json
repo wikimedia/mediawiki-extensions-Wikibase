@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Corainn",
-			"Translatealcd"
+			"Translatealcd",
+			"Akamycoco"
 		]
 	},
 	"wikibase-edit": "Smr’zyut miru’",
@@ -10,5 +11,7 @@
 	"wikibase-label-empty": "Ini’ srhgiy smi na’ qinlaq lalu’",
 	"wikibase-description-empty": "Ini’ naha’ inblayqiy pinqzyu’ smi’ kay’ na’",
 	"wikibase-sitelinks-special": "Bzinah na wangcan",
-	"wikibase-statementview-rank-normal": "Mtnaq kwara’ iyat spzyang krahu’ na kinkrahu’ na sinpngan niya’"
+	"wikibase-statementview-rank-normal": "Mtnaq kwara’ iyat spzyang krahu’ na kinkrahu’ na sinpngan niya’",
+	"wikibase-itembytitle-submit": "Hhkangi’",
+	"wikibase-itemdisambiguation-submit": "Hhkangi’"
 }
