@@ -7,6 +7,7 @@ use Html;
 use Language;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -92,12 +93,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::prepareArguments()
+	 * @see SpecialModifyEntity::processArguments()
 	 *
 	 * @param string|null $subPage
 	 */
-	protected function prepareArguments( $subPage ) {
-		parent::prepareArguments( $subPage );
+	protected function processArguments( $subPage ) {
+		parent::processArguments( $subPage );
 
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
@@ -115,6 +116,13 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$this->value = $this->getPostedValue();
 		if ( $this->value === null ) {
 			$this->value = $request->getVal( 'value' );
+		}
+
+		// If the user just enters an item id and a language, dont remove the term.
+		// The user can remove the term in the second form where it has to be
+		// actually removed. This prevents users from removing terms accidentally.
+		if ( !$request->getCheck( 'remove' ) && $this->value === '' ) {
+			$this->value = null;
 		}
 	}
 
@@ -138,14 +146,15 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	protected function validateInput() {
-		$request = $this->getRequest();
-
 		if ( !parent::validateInput() ) {
 			return false;
 		}
 
-		$entityId = $this->getEntityId();
+		if ( $this->value === null ) {
+			return false;
+		}
 
+		$entityId = $this->getEntityId();
 		if ( $entityId ) {
 			$status = $this->checkTermChangePermissions( $entityId );
 
@@ -153,14 +162,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
 				return false;
 			}
-		}
-
-		// If the user just enters an item id and a language, dont remove the term.
-		// The user can remove the term in the second form where it has to be
-		// actually removed. This prevents users from removing terms accidentally.
-		if ( !$request->getCheck( 'remove' ) && $this->value === '' ) {
-			$this->value = null;
-			return false;
 		}
 
 		return true;
