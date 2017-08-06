@@ -3,7 +3,7 @@
 This component is in alpha state and not suitable for reuse yet.
 It contains various JavaScript related to the DataValues library.
 
-[![Build Status](https://secure.travis-ci.org/wmde/DataValuesJavascript.png?branch=master)](http://travis-ci.org/wmde/DataValuesJavascript)
+[![Build Status](https://secure.travis-ci.org/wmde/DataValuesJavaScript.png?branch=master)](http://travis-ci.org/wmde/DataValuesJavaScript)
 
 On [Packagist](https://packagist.org/packages/data-values/javascript):
 [![Latest Stable Version](https://poser.pugx.org/data-values/javascript/version.png)](https://packagist.org/packages/data-values/javascript)
