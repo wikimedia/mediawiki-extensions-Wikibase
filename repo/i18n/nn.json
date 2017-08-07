@@ -217,6 +217,8 @@
 	"wikibase-listdatatypes-multilingualtext-head": "Fleirspråkleg tekst",
 	"wikibase-listdatatypes-string-head": "Streng",
 	"wikibase-listdatatypes-time-head": "Tid",
+	"wikibase-concept-uri": "Omgreps-URI",
+	"wikibase-concept-uri-tooltip": "URI som identifiserer omgrepet skildra av dette elementet",
 	"content-model-wikibase-item": "Wikibase-element",
 	"content-model-wikibase-property": "Wikibase-eigenskap",
 	"content-model-wikibase-query": "Wikibase-spørjing",
