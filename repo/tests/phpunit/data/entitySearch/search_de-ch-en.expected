@@ -143,6 +143,9 @@
                     }
                 }
             }
+        ],
+        "stats": [
+            "wikibase-prefix"
         ]
     },
     "options": {

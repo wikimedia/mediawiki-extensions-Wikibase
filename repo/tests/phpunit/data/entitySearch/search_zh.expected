@@ -238,6 +238,9 @@
                     }
                 }
             }
+        ],
+        "stats": [
+            "wikibase-prefix"
         ]
     },
     "options": {

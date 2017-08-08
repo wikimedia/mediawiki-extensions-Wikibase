@@ -121,6 +121,9 @@
                     }
                 }
             }
+        ],
+        "stats": [
+            "wikibase-prefix"
         ]
     },
     "options": {

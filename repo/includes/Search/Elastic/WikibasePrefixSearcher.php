@@ -61,6 +61,8 @@ class WikibasePrefixSearcher extends Searcher {
 			$searchQuery->setSize( $this->limit );
 		}
 		$searchQuery->setParam( 'rescore', $this->searchContext->getRescore() );
+		// Mark wikibase prefix searches for statistics
+		$searchQuery->addParam( 'stats', 'wikibase-prefix' );
 
 		if ( $this->returnExplain ) {
 			$searchQuery->setExplain( true );

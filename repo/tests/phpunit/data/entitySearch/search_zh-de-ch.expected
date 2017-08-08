@@ -224,6 +224,9 @@
                     }
                 }
             }
+        ],
+        "stats": [
+            "wikibase-prefix"
         ]
     },
     "options": {
