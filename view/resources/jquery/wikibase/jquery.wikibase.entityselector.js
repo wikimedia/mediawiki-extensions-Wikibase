@@ -154,7 +154,33 @@
 			.off( 'blur' )
 			.on( 'eachchange.' + this.widgetName, function ( event ) {
 				self._search( event );
-			} );
+			} )
+			.on( 'focusout', function () {
+				self._indicateRecognizedInput();
+			} )
+			.on( 'focusin', function () {
+				self._inEditMode();
+			});
+		},
+
+		_indicateRecognizedInput: function () {
+			this._resetInputHighlighting();
+
+			if ( this._selectedEntity !== null ) {
+				this.element.addClass( 'ui-entityselector-input-recognized' );
+			} else if ( this.element.val() !== '' ) {
+				this.element.addClass( 'ui-entityselector-input-unrecognized' );
+			}
+		},
+
+		_inEditMode: function () {
+			this._resetInputHighlighting();
+		},
+
+		_resetInputHighlighting: function () {
+			this.element.removeClass(
+				'ui-entityselector-input-recognized ui-entityselector-input-unrecognized'
+			);
 		},
 
 		/**

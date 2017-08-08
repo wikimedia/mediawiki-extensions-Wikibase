@@ -69,3 +69,10 @@
 	text-align: right;
 	padding-right: 1.2em;
 }
+
+.ui-entityselector-input-recognized {
+	background-color: #0f0 !important; /* TODO: !important because valueview overrides background-color */
+}
+.ui-entityselector-input-unrecognized {
+	background-color: #f00 !important; /* TODO: !important because valueview overrides background-color */
+}
