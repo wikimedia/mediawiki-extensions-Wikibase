@@ -110,20 +110,36 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 		$lookup = new BufferingTermLookup( $termIndex, 10 );
 
 		// This should trigger a call to getTermsOfEntities
-		$q116 = new ItemId( 'Q123' );
-		$lookup->prefetchTerms( [ $q116 ], [ 'label' ], [ 'en', 'de' ] );
+		$q123 = new ItemId( 'Q123' );
+		$lookup->prefetchTerms( [ $q123 ], [ 'label' ], [ 'en', 'de' ] );
 
-		// This should trigger no call to the TermIndex
+		// This shouldn't trigger a call to the TermIndex
 		$expected = [ 'de' => 'Wien' ];
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de' ] ) );
+		$this->assertEquals( $expected, $lookup->getLabels( $q123, [ 'de' ] ) );
 
 		// This should trigger a call to getTermsOfEntity
 		$expected = [ 'de' => 'Wien', 'en' => 'Vienna', 'fr' => 'Vienne' ];
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'en', 'fr' ] ) );
+		$this->assertEquals( $expected, $lookup->getLabels( $q123, [ 'de', 'en', 'fr' ] ) );
 
 		// This should trigger no more calls, since all languages are in the buffer now.
 		$expected = [ 'de' => 'Wien', 'fr' => 'Vienne' ];
-		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'fr' ] ) );
+		$this->assertEquals( $expected, $lookup->getLabels( $q123, [ 'de', 'fr' ] ) );
+	}
+
+	public function testGetLabels_onlyPrefetchOnce() {
+		$termIndex = $this->getRestrictedTermIndex( 0, 1 );
+		$lookup = new BufferingTermLookup( $termIndex, 10 );
+
+		// This should trigger a call to getTermsOfEntities
+		$q123 = new ItemId( 'Q123' );
+		$lookup->prefetchTerms( [ $q123 ], [ 'label', 'description' ], [ 'en', 'de' ] );
+
+		// The following should not trigger a call to getTermsOfEntity/ getTermsOfEntities
+		$lookup->prefetchTerms( [ $q123 ], [ 'label' ], [ 'de' ] );
+		$lookup->prefetchTerms( [ $q123 ], [ 'description' ], [ 'en', 'de' ] );
+
+		$expected = [ 'de' => 'Wien' ];
+		$this->assertEquals( $expected, $lookup->getLabels( $q123, [ 'de' ] ) );
 	}
 
 	public function testGetLabels_buffer() {

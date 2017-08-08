@@ -114,12 +114,22 @@ class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTer
 			return;
 		}
 
-		// We could first check what's already in the buffer, but it's hard to determine which
-		// entities are actually "fully covered" by the cached terms. Also, our current use case
-		// (the ChangesListInitRows hook) would generally, trigger only one call to prefetchTerms,
-		// before any call to getTermsOfType().
+		// Try to detect whether the entities in question have already been prefetched, in case we
+		// know the needed term types and language codes.
+		// If they are not/ only partially prefetched or we don't know whether our prefetched data on
+		// them is complete, we just resort to fetching them (again).
+		$entityIdsToFetch = [];
+		if ( $termTypes !== null && $languageCodes !== null ) {
+			$entityIdsToFetch = $this->getIncompletelyPrefetchedEntityIds( $entityIds, $termTypes, $languageCodes );
+		} else {
+			$entityIdsToFetch = $entityIds;
+		}
 
-		$entityIdsByType = $this->groupEntityIds( $entityIds );
+		if ( empty( $entityIdsToFetch ) ) {
+			return;
+		}
+
+		$entityIdsByType = $this->groupEntityIds( $entityIdsToFetch );
 		$terms = [];
 
 		foreach ( $entityIdsByType as $entityIdGroup ) {
@@ -131,8 +141,50 @@ class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTer
 		$bufferedKeys = $this->setBufferedTermObjects( $terms );
 
 		if ( !empty( $languageCodes ) ) {
-			$this->setUndefinedTerms( $entityIds, $termTypes, $languageCodes, $bufferedKeys );
+			$this->setUndefinedTerms( $entityIdsToFetch, $termTypes, $languageCodes, $bufferedKeys );
 		}
+	}
+
+	/**
+	 * Get a list of EntityIds for which we don't have all the needed data prefetched for.
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string[] $termTypes
+	 * @param string[] $languageCodes
+	 *
+	 * @return EntityId[]
+	 */
+	private function getIncompletelyPrefetchedEntityIds( array $entityIds, array $termTypes, array $languageCodes ) {
+		$entityIdsToFetch = [];
+
+		foreach ( $entityIds as $entityId ) {
+			if ( $this->isIncompletelyPrefetched( $entityId, $termTypes, $languageCodes ) ) {
+				$entityIdsToFetch[] = $entityId;
+			}
+		}
+
+		return $entityIdsToFetch;
+	}
+
+	/**
+	 * Has the term type and language code combination from the given entity already been prefeteched?
+	 *
+	 * @param EntityId $entityId
+	 * @param string[] $termTypes
+	 * @param string[] $languageCodes
+	 *
+	 * @return bool
+	 */
+	private function isIncompletelyPrefetched( EntityId $entityId, array $termTypes, array $languageCodes ) {
+		foreach ( $termTypes as $termType ) {
+			foreach ( $languageCodes as $lang ) {
+				if ( $this->getPrefetchedTerm( $entityId, $termType, $lang ) === null ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**
