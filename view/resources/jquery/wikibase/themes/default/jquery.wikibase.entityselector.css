@@ -69,3 +69,13 @@
 	text-align: right;
 	padding-right: 1.2em;
 }
+
+.ui-entityselector-input-recognized {
+	/* NOTE: !important because valueview styles */
+	border-color: #14866d !important;
+}
+.ui-entityselector-input-unrecognized {
+	/* NOTE: !important because valueview styles */
+	background-color: #fee7e6 !important;
+	border-color: #b32424 !important;
+}
