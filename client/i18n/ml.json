@@ -64,7 +64,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ഇനം ഐ.ഡി.",
 	"wikibase-pageinfo-entity-id-none": "ഒന്നുമില്ല",
 	"wikibase-property-render-error": "$1 എന്ന ഗുണഗണം പ്രദർശനസജ്ജമാക്കൽ പരാജയപ്പെട്ടു: $2",
-	"wikibase-otherprojects": "ഇതരപദ്ധതികൾ",
+	"wikibase-otherprojects": "ഇതരപദ്ധതികളിൽ",
 	"wikibase-otherprojects-beta-message": "ഇതരപദ്ധതികൾ സൈഡ്‌ബാർ",
 	"wikibase-otherprojects-beta-description": "{{WBREPONAME}} വിവരങ്ങൾക്കനുസരിച്ച്, സൈഡ്ബാറിൽ മറ്റ് വിക്കിമീഡിയ പദ്ധതികളിലേക്ക് കണ്ണികൾ നൽകുന്ന \"{{int:wikibase-otherprojects}}\" ഭാഗം ചേർക്കുന്നു."
 }
