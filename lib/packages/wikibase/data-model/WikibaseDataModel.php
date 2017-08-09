@@ -12,7 +12,3 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 }
 
 define( 'WIKIBASE_DATAMODEL_VERSION', '7.0.0' );
-
-if ( defined( 'MEDIAWIKI' ) && function_exists( 'wfLoadExtension' ) ) {
-	wfLoadExtension( 'WikibaseDataModel', __DIR__ . '/mediawiki-extension.json' );
-}
