@@ -168,9 +168,6 @@ call_user_func( function() {
 		$wgHooks['ArticleDeleteComplete'][] = '\Wikibase\Client\Hooks\UpdateRepoHookHandlers::onArticleDeleteComplete';
 	}
 
-	// recent changes / watchlist hooks
-	$wgHooks['ChangesListSpecialPageQuery'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery';
-
 	// magic words
 	$wgHooks['MagicWordwgVariableIDs'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onMagicWordwgVariableIDs';
 	$wgHooks['ParserGetVariableValueSwitch'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onParserGetVariableValueSwitch';

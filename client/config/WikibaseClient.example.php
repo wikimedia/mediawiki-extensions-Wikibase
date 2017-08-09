@@ -20,8 +20,6 @@ if ( !defined( 'WBC_VERSION' ) ) {
 // Defaults to $wgDBname.
 // $wgWBClientSettings['siteGlobalID'] = "mywiki";
 
-$wgWBClientSettings['showExternalRecentChanges'] = true;
-
 // If this wiki also runs the Wikibase repo extension,
 // use the automatic defaults for repo-related settings.
 // If this wiki isn't running the repo extension,

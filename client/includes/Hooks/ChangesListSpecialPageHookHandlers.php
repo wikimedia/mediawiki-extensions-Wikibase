@@ -5,10 +5,8 @@ namespace Wikibase\Client\Hooks;
 use ChangesListBooleanFilter;
 use ChangesListSpecialPage;
 use ExtensionRegistry;
-use FormOptions;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
-use RequestContext;
 use User;
 use WebRequest;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -44,11 +42,6 @@ class ChangesListSpecialPageHookHandlers {
 	private $pageName;
 
 	/**
-	 * @var bool
-	 */
-	private $showExternalChanges;
-
-	/**
 	 * @var self
 	 */
 	private static $instance = null;
@@ -58,20 +51,17 @@ class ChangesListSpecialPageHookHandlers {
 	 * @param User $user
 	 * @param LoadBalancer $loadBalancer
 	 * @param string $pageName
-	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
 		WebRequest $request,
 		User $user,
 		LoadBalancer $loadBalancer,
-		$pageName,
-		$showExternalChanges
+		$pageName
 	) {
 		$this->request = $request;
 		$this->user = $user;
 		$this->loadBalancer = $loadBalancer;
 		$this->pageName = $pageName;
-		$this->showExternalChanges = $showExternalChanges;
 	}
 
 	/**
@@ -86,14 +76,11 @@ class ChangesListSpecialPageHookHandlers {
 	) {
 		Assert::parameterType( 'string', $specialPageName, '$specialPageName' );
 
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
 		return new self(
 			$context->getRequest(),
 			$context->getUser(),
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$specialPageName,
-			$settings->getSetting( 'showExternalRecentChanges' )
+			$specialPageName
 		);
 	}
 
@@ -130,75 +117,12 @@ class ChangesListSpecialPageHookHandlers {
 			$specialPage->getName()
 		);
 
-		$hookHandler->addFilterIfEnabled( $specialPage );
+		$hookHandler->addFilter( $specialPage );
 
 		return true;
 	}
 
-	/**
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageQuery
-	 *
-	 * @param string $specialPageName
-	 * @param array &$tables
-	 * @param array &$fields
-	 * @param array &$conds
-	 * @param array &$query_options
-	 * @param array &$join_conds
-	 * @param FormOptions $opts
-	 *
-	 * @return bool
-	 */
-	public static function onChangesListSpecialPageQuery(
-		$specialPageName,
-		array &$tables,
-		array &$fields,
-		array &$conds,
-		array &$query_options,
-		array &$join_conds,
-		FormOptions $opts
-	) {
-		$hookHandler = self::getInstance(
-			RequestContext::getMain(),
-			$specialPageName
-		);
-
-		$hookHandler->addWikibaseConditionsIfFilterUnavailable( $conds );
-
-		return true;
-	}
-
-	// This is separate so hasWikibaseChangesEnabled can be mocked
-
-	/**
-	 * This is used to force-hide Wikibase changes if hasWikibaseChangesEnabled returns
-	 * false.  The user will not even see the option in that case.
-	 *
-	 * @param array &$conds
-	 */
-	protected function addWikibaseConditionsIfFilterUnavailable( array &$conds ) {
-		if ( !$this->hasWikibaseChangesEnabled() ) {
-			// Force-hide if hasWikibaseChangesEnabled is false
-			// The user-facing hideWikibase is handled by
-			// ChangesListSpecialPageStructuredFilters and connected code.
-			$this->addWikibaseConditions(
-				$this->loadBalancer->getConnection( DB_REPLICA ),
-				$conds
-			);
-		}
-	}
-
-	public function addFilterIfEnabled( ChangesListSpecialPage $specialPage ) {
-		// The *user-facing* filter is only registered if external changes
-		// are enabled.
-		//
-		// If the user-facing filter is not registered, it's always *hidden*.
-		// (See ChangesListSpecialPageQuery).
-		if ( $this->hasWikibaseChangesEnabled() ) {
-			$this->addFilter( $specialPage );
-		}
-	}
-
-	protected function addFilter( ChangesListSpecialPage $specialPage ) {
+	public function addFilter( ChangesListSpecialPage $specialPage ) {
 		$filterName = $this->getFilterName();
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
 
@@ -263,13 +187,6 @@ class ChangesListSpecialPageHookHandlers {
 	 */
 	public function addWikibaseConditions( IDatabase $dbr, array &$conds ) {
 		$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function hasWikibaseChangesEnabled() {
-		return $this->showExternalChanges;
 	}
 
 	/**

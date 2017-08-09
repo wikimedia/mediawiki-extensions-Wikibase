@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use ExtensionRegistry;
 use FauxRequest;
-use FormOptions;
 use SpecialPageFactory;
+use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikimedia\Rdbms\IDatabase;
@@ -55,13 +55,15 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			]
 		);
 
-		/** @var \ChangesListSpecialPage $specialPage */
+		/** @var SpecialRecentChanges $specialPage */
 		$specialPage = SpecialPageFactory::getPage( 'Recentchanges' );
 
+		/** @var SpecialRecentChanges $wrappedSpecialPage */
 		$wrappedSpecialPage = TestingAccessWrapper::newFromObject(
 			$specialPage
 		);
 
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
@@ -106,33 +108,10 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 
-	public function testOnChangesListSpecialPageQuery() {
-		$tables = [ 'recentchanges' ];
-		$fields = [ 'rc_id' ];
-		$conds = [];
-		$query_options = [];
-		$join_conds = [];
-
-		$opts = new FormOptions();
-
-		ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery(
-			'RecentChanges',
-			$tables,
-			$fields,
-			$conds,
-			$query_options,
-			$join_conds,
-			$opts
-		);
-
-		// this is just a sanity check
-		$this->assertInternalType( 'array', $conds );
-	}
-
 	/**
 	 * @dataProvider addWikibaseConditionsIfFilterUnavailableProvider
 	 */
-	public function testAddWikibaseConditionsIfFilterUnavailable( $expectedAddConditionsCalls, $hasWikibaseChangesEnabled ) {
+	public function testAddWikibaseConditionsIfFilterUnavailable( $expectedAddConditionsCalls ) {
 		$hookHandlerMock = $this->getMockBuilder( ChangesListSpecialPageHookHandlers::class )
 			->setConstructorArgs(
 				[
@@ -144,14 +123,9 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 				]
 			)
 			->setMethods( [
-					'hasWikibaseChangesEnabled',
 					'addWikibaseConditions'
 				] )
 			->getMock();
-
-		$hookHandlerMock->method( 'hasWikibaseChangesEnabled' )->will(
-			$this->returnValue( $hasWikibaseChangesEnabled )
-		);
 
 		$hookHandlerMock->expects( $this->exactly( $expectedAddConditionsCalls ) )
 			->method( 'addWikibaseConditions' )
@@ -170,12 +144,10 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		return [
 			[
 				0,
-				true
 			],
 
 			[
 				1,
-				false
 			],
 		];
 	}
@@ -184,6 +156,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	 * @dataProvider getOptionNameProvider
 	 */
 	public function testGetOptionName( $expected, $pageName ) {
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
@@ -235,232 +208,6 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		$expected = [ "rc_source != 'wb'" ];
 
 		$this->assertEquals( $expected, $conds );
-	}
-
-	/**
-	 * @dataProvider hasWikibaseChangesEnabledWhenUsingEnhancedChangesProvider
-	 */
-	public function testHasWikibaseChangesEnabledWhenUsingEnhancedChanges(
-		array $requestParams,
-		array $userOptions,
-		$pageName,
-		$message
-	) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( $requestParams ),
-			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
-			$pageName,
-			true
-		) );
-
-		$this->assertSame(
-			true,
-			$hookHandler->hasWikibaseChangesEnabled(),
-			$message
-		);
-	}
-
-	public function hasWikibaseChangesEnabledWhenUsingEnhancedChangesProvider() {
-		return [
-			[
-				[],
-				[ 'usenewrc' => 1 ],
-				'Watchlist',
-				'enhanced default pref for Watchlist'
-			],
-			[
-				[],
-				[ 'usenewrc' => 1 ],
-				'RecentChanges',
-				'enhanced default pref for RecentChanges'
-			],
-			[
-				[ 'enhanced' => 1 ],
-				[ 'usenewrc' => 0 ],
-				'Watchlist',
-				'enhanced not default but has enhanced=1 req param'
-			],
-			[
-				[ 'enhanced' => 1 ],
-				[ 'usenewrc' => 0 ],
-				'RecentChanges',
-				'enhanced not default but has enhanced=1 req param'
-			],
-			[
-				[ 'enhanced' => 1 ],
-				[ 'usenewrc' => 1 ],
-				'Watchlist',
-				'enhanced default and has enhanced=1 req param'
-			],
-			[
-				[ 'enhanced' => 1 ],
-				[ 'usenewrc' => 1 ],
-				'RecentChangesLinked',
-				'enhanced default and has enhanced=1 req param'
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider hasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreferenceProvider
-	 */
-	public function testHasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreference(
-		array $requestParams,
-		array $userOptions,
-		$expectedFilterName,
-		$expectedToggleDefault,
-		$specialPageName
-	) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( $requestParams ),
-			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
-			$specialPageName,
-			true
-		) );
-
-		$this->assertSame(
-			true,
-			$hookHandler->hasWikibaseChangesEnabled()
-		);
-	}
-
-	public function hasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreferenceProvider() {
-		return [
-			[
-				[],
-				[ 'usenewrc' => 0 ],
-				'hideWikibase',
-				true,
-				'Watchlist'
-			],
-			[
-				[ 'enhanced' => 0 ],
-				[ 'usenewrc' => 1 ],
-				'hideWikibase',
-				true,
-				'RecentChanges'
-			],
-			[
-				[],
-				[ 'usenewrc' => 0 ],
-				'hideWikibase',
-				true,
-				'RecentChangesLinked'
-			],
-			[
-				[ 'action' => 'submit', 'hideWikibase' => 0 ],
-				[ 'usenewrc' => 0 ],
-				'hideWikibase',
-				false,
-				'Watchlist'
-			],
-			[
-				[ 'action' => 'submit', 'hideWikibase' => 1 ],
-				[ 'usenewrc' => 0 ],
-				'hideWikibase',
-				true,
-				'Watchlist'
-			],
-			[
-				[ 'action' => 'submit' ],
-				[ 'usenewrc' => 0 ],
-				'hideWikibase',
-				false,
-				'Watchlist'
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider hasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreferenceProvider
-	 */
-	public function testHasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreference(
-		array $requestParams,
-		array $userOptions,
-		$expectedFilterName,
-		$expectedToggleDefault,
-		$specialPageName
-	) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( $requestParams ),
-			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
-			$specialPageName,
-			true
-		) );
-
-		$this->assertSame(
-			true,
-			$hookHandler->hasWikibaseChangesEnabled()
-		);
-	}
-
-	public function hasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreferenceProvider() {
-		return [
-			[
-				[],
-				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
-				'hideWikibase',
-				false,
-				'Watchlist'
-			],
-			[
-				[ 'enhanced' => 0 ],
-				[ 'rcshowwikidata' => 1, 'usenewrc' => 1 ],
-				'hideWikibase',
-				false,
-				'RecentChanges'
-			],
-			[
-				[],
-				[ 'rcshowwikidata' => 1, 'usenewrc' => 0 ],
-				'hideWikibase',
-				false,
-				'RecentChangesLinked'
-			],
-			[
-				[ 'action' => 'submit', 'hideWikibase' => 0 ],
-				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
-				'hideWikibase',
-				false,
-				'Watchlist'
-			],
-			[
-				[ 'action' => 'submit' ],
-				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
-				'hideWikibase',
-				false,
-				'Watchlist'
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
-	 */
-	public function testHasWikibaseChangesEnabledWhenExternalRecentChangesDisabled( $specialPageName ) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( [] ),
-			$this->getUser( [ 'usenewrc' => 0 ] ),
-			$this->getLoadBalancer(),
-			$specialPageName,
-			/* $showExternalChanges= */ false
-		) );
-
-		$this->assertSame(
-			false,
-			$hookHandler->hasWikibaseChangesEnabled()
-		);
-	}
-
-	public function hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
-		return [
-			[ 'Watchlist' ],
-			[ 'Recentchanges' ],
-			[ 'Recentchangeslinked' ]
-		];
 	}
 
 	private function getRequest( array $requestParams ) {
