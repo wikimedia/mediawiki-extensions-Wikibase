@@ -22,6 +22,16 @@ local function testGetEntityObjectType()
 	return type( mw.wikibase.getEntityObject() )
 end
 
+local function testGetStatementsType()
+	return type( mw.wikibase.getStatements( 'Q199024', 'P342' ) )
+end
+
+local function testGetStatementsFormat()
+	local directAccess = mw.dumpObject( mw.wikibase.getStatements( 'Q199024', 'P342' ) )
+	local entityAccess = mw.dumpObject( mw.wikibase.getEntity( 'Q199024' ):getBestStatements( 'P342' ) )
+	return directAccess == entityAccess
+end
+
 local function testGetEntityObjectIsCloned()
 	mw.wikibase.getEntityObject( 'Q199024' ).id = 'a'
 
@@ -91,6 +101,12 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getEntityObject (type)', func = testGetEntityObjectType, type='ToString',
 	  expect = { 'table' }
+	},
+	{ name = 'mw.wikibase.getStatements (type)', func = testGetStatementsType, type='ToString',
+	  expect = { 'table' }
+	},
+	{ name = 'mw.wikibase.getStatements (format)', func = testGetStatementsFormat,
+	  expect = { true }
 	},
 	{ name = 'mw.wikibase.getEntityObject (is cloned)', func = testGetEntityObjectIsCloned, type='ToString',
 	  expect = { 'Q199024' }

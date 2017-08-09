@@ -210,6 +210,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 			),
+			$wikibaseClient->getSerializerFactory(
+				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+			)->newStatementListSerializer(),
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$this->getLanguageFallbackChain(),
 			$this->getLanguage(),
@@ -299,6 +303,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$lib = [
 			'getLabel' => [ $this, 'getLabel' ],
 			'getEntity' => [ $this, 'getEntity' ],
+			'getEntityStatement' => [ $this, 'getEntityStatement' ],
 			'getSetting' => [ $this, 'getSetting' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
 			'renderSnak' => [ $this, 'renderSnak' ],
@@ -344,6 +349,34 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		} catch ( Exception $ex ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
+	}
+
+	/**
+	 * Wrapper for getEntityStatement in EntityAccessor
+	 *
+	 * @param string $prefixedEntityId
+	 * @param string $propertyId
+	 *
+	 * @throws ScribuntoException
+	 * @return array
+	 */
+	public function getEntityStatement( $prefixedEntityId, $propertyId ) {
+		$this->checkType( 'getEntityStatement', 1, $prefixedEntityId, 'string' );
+		$this->checkType( 'getEntityStatement', 2, $propertyId, 'string' );
+
+		try {
+			$statements = $this->getEntityAccessor()->getEntityStatement( $prefixedEntityId, $propertyId );
+		} catch ( EntityAccessLimitException $ex ) {
+			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
+		} catch ( EntityIdParsingException $ex ) {
+			throw new ScribuntoException(
+				'wikibase-error-invalid-entity-id',
+				[ 'args' => [ $prefixedEntityId ] ]
+			);
+		} catch ( Exception $ex ) {
+			throw new ScribuntoException( 'wikibase-error-serialize-error' );
+		}
+		return [ $statements ];
 	}
 
 	/**
