@@ -174,6 +174,16 @@ propertyIds = { 'P1', 'P5', 'P31' }
 mw.wikibase.orderProperties( propertyIds ) -- Returns a table with ordered property IDs such as { 'P5', 'P1', 'P31' }
 </source>
 
+=== mw.wikibase.getBestStatements ===
+<code>wikibase.getBestStatements( entityId, propertyId )</code><br>
+Returns a table with the best statements for the given entity ID and property ID.
+
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getBestStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12 of Q1
+</source>
+
 == mw.wikibase.entity ==
 <code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntity|<code>mw.wikibase.getEntity</code>]].
 
