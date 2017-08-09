@@ -152,21 +152,16 @@
 				}
 				self._trigger( 'change' );
 			} )
-			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function ( event, error ) {
-				event.stopPropagation();
-			} )
-			.on( 'keydown.' + this.widgetName, function ( event ) {
-				if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
-					var $sitelinkview = $( event.target ).parentsUntil( this ).addBack().filter( '.listview-item' ),
-						sitelinkview = listItemAdapter.liInstance( $sitelinkview );
-				}
+			.on( 'removetoolbarremove.' + this.widgetName, function ( event ) {
+				self._updateAutoInput();
 			} )
 			.on(
 				[
 					listItemAdapter.prefixedEvent( 'create.' + this.widgetName ),
 					listItemAdapter.prefixedEvent( 'afterstartediting.' + this.widgetName ),
 					listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
-					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
+					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ),
+					listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName )
 				].join( ' ' ),
 				function ( event ) {
 					event.stopPropagation();
