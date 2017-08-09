@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_cb2fdff1",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T20:28:47Z",
+      "side": 1,
+      "message": "I assume Daniel did this for debugging. It doesn\u0027t hurt, but it\u0027s unused and potentially confusing. I will remove it in my follow up.",
+      "parentUuid": "4e7eab26_b04bde87",
+      "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_eb041bca",
         "filename": "client/tests/phpunit/includes/Changes/InjectRCRecordsJobTest.php",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2017-08-09T20:04:45Z",
       "side": 1,
       "message": "do we care checking that $fields[type] is of expected format or is it so unlikely that not worth checking?",
+      "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6ba82b1e",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T20:28:47Z",
+      "side": 1,
+      "message": "Done in my follow up.",
+      "parentUuid": "4e7eab26_2b6463ad",
       "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
