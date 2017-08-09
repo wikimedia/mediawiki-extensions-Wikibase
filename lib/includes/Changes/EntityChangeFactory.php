@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Changes;
 
+use InvalidArgumentException;
 use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -47,7 +48,7 @@ class EntityChangeFactory {
 	public function __construct(
 		EntityDiffer $entityDiffer,
 		EntityIdParser $idParser,
-		array $changeClasses = []
+		array $changeClasses
 	) {
 		$this->entityDiffer = $entityDiffer;
 		$this->idParser = $idParser;
@@ -92,25 +93,33 @@ class EntityChangeFactory {
 	 * @param EntityId $entityId
 	 * @param array $fields additional fields to set
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityChange
 	 */
 	public function newForChangeType( $changeType, EntityId $entityId, array $fields ) {
-		$action = explode( '~', $changeType )[1];
+		$changeType = explode( '~', $changeType, 2 );
+		Assert::parameter(
+			isset( $changeType[1] ),
+			'$changeType',
+			'must conform to the format "wikibase-<entityType>~<action>"'
+		);
+
+		$action = $changeType[1];
 		return $this->newForEntity( $action, $entityId, $fields );
 	}
 
 	/**
 	 * @param array $fields all data fields, including at least 'type' and 'object_id'.
+	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityChange
 	 */
 	public function newFromFieldData( array $fields ) {
 		Assert::parameter( isset( $fields['type'] ), '$fields[\'type\']', 'must be set' );
 		Assert::parameter( isset( $fields['object_id'] ), '$fields[\'object_id\']', 'must be set' );
 
-		$action = explode( '~', $fields['type'] )[1];
 		$entityId = $this->idParser->parse( $fields['object_id'] );
-
-		return $this->newForEntity( $action, $entityId, $fields );
+		return $this->newForChangeType( $fields['type'], $entityId, $fields );
 	}
 
 	/**
@@ -148,8 +157,7 @@ class EntityChangeFactory {
 			$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 		}
 
-		/** @var EntityChange $instance */
-		$instance = self::newForEntity( $action, $id );
+		$instance = $this->newForEntity( $action, $id );
 		$instance->setDiff( $diff );
 
 		return $instance;

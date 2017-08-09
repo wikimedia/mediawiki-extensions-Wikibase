@@ -2,17 +2,16 @@
 
 namespace Wikibase\Client\Changes;
 
+use InvalidArgumentException;
 use Job;
 use JobSpecification;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
-use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -114,6 +113,8 @@ class InjectRCRecordsJob extends Job {
 	 * @param RecentChangeFactory $rcFactory
 	 * @param array $params Needs to have two keys: "change": the id of the change,
 	 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		LBFactory $lbFactory,
@@ -125,11 +126,6 @@ class InjectRCRecordsJob extends Job {
 		$title = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
 		parent::__construct( 'wikibase-InjectRCRecords', $title, $params );
 
-		Assert::parameter(
-			isset( $params['change'] ),
-			'$params',
-			'$params[\'change\'] not set.'
-		);
 		// TODO: disallow integer once T172394 has been deployed and old jobs have cleared the queue.
 		Assert::parameterType(
 			'integer|array',
@@ -137,11 +133,6 @@ class InjectRCRecordsJob extends Job {
 			'$params[\'change\']'
 		);
 
-		Assert::parameter(
-			isset( $params['pages'] ),
-			'$params',
-			'$params[\'pages\'] not set.'
-		);
 		Assert::parameterElementType(
 			'array',
 			$params['pages'],
@@ -187,6 +178,8 @@ class InjectRCRecordsJob extends Job {
 
 	/**
 	 * @param int $dbBatchSize
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setDbBatchSize( $dbBatchSize ) {
 		Assert::parameterType( 'integer', $dbBatchSize, '$dbBatchSize' );
@@ -244,7 +237,7 @@ class InjectRCRecordsJob extends Job {
 		$titles = [];
 
 		foreach ( $pages as $pageId => list( $namespace, $dbKey ) ) {
-			$titles[$pageId] = $this->titleFactory->makeTitle( $namespace, $dbKey );
+			$titles[] = $this->titleFactory->makeTitle( $namespace, $dbKey );
 		}
 
 		return $titles;
