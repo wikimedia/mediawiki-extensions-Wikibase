@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
 use PHPUnit_Framework_TestCase;
-use Wikibase\Client\Serializer\ClientEntitySerializer;
+use Wikibase\Client\Serializer\ClientSerializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\LanguageFallbackChain;
 
 /**
- * @covers Wikibase\Client\Serializer\ClientEntitySerializer
+ * @covers Wikibase\Client\Serializer\ClientSerializer
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -20,7 +20,7 @@ use Wikibase\LanguageFallbackChain;
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
-class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
+class ClientSerializerTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
 		$serializerFactory = new SerializerFactory(
@@ -41,8 +41,9 @@ class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( '<DATATYPE>' ) );
 
-		return new ClientEntitySerializer(
+		return new ClientSerializer(
 			$serializerFactory->newItemSerializer(),
+			$serializerFactory->newStatementListSerializer(),
 			$dataTypeLookup,
 			[ 'en' ],
 			[ 'en' => $fallbackChain ]

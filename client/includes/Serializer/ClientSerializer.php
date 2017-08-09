@@ -14,12 +14,17 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  * @license GPL-2.0+
  * @author Addshore
  */
-class ClientEntitySerializer implements Serializer {
+class ClientSerializer implements Serializer {
 
 	/**
 	 * @var Serializer
 	 */
 	private $entitySerializer;
+
+	/**
+	 * @var Serializer
+	 */
+	private $statementSerializer;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -54,11 +59,13 @@ class ClientEntitySerializer implements Serializer {
 	 */
 	public function __construct(
 		Serializer $entitySerializer,
+		Serializer $statementSerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $filterLangCodes,
 		array $fallbackChains
 	) {
 		$this->entitySerializer = $entitySerializer;
+		$this->statementSerializer = $statementSerializer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->filterLangCodes = $filterLangCodes;
 		$this->fallbackChains = $fallbackChains;
@@ -82,7 +89,24 @@ class ClientEntitySerializer implements Serializer {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization );
 		}
 
-		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
+		$serialization = $this->injectSerializationWithDataTypes( $serialization, 'claims/' );
+		$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization );
+
+		return $this->omitEmptyArrays( $serialization );
+	}
+
+	/**
+	 * Adds data types to serialization
+	 *
+	 * @param StatementList $statementList
+	 *
+	 * @throws SerializationException
+	 * @return array
+	 */
+	public function serializeStatementList( $statementList ) {
+		$serialization = $this->statementSerializer->serialize( $statementList );
+
+		$serialization = $this->injectSerializationWithDataTypes( $serialization, '' );
 		$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization );
 
 		return $this->omitEmptyArrays( $serialization );
@@ -116,24 +140,25 @@ class ClientEntitySerializer implements Serializer {
 
 	/**
 	 * @param array $serialization
+	 * @param string $pathPrefix
 	 *
 	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
-	private function injectEntitySerializationWithDataTypes( array $serialization ) {
+	private function injectSerializationWithDataTypes( array $serialization, string $pathPrefix ) {
 		$serialization = $this->modifier->modifyUsingCallback(
 			$serialization,
-			'claims/*/*/mainsnak',
+			"$pathPrefix*/*/mainsnak",
 			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
 		);
 		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$serialization,
-			'claims/*/*/qualifiers'
+			"$pathPrefix*/*/qualifiers"
 		);
 		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$serialization,
-			'claims/*/*/references/*/snaks'
+			"$pathPrefix*/*/references/*/snaks"
 		);
 		return $serialization;
 	}
