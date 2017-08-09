@@ -4,11 +4,13 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
 use Serializers\Serializer;
-use Wikibase\Client\Serializer\ClientEntitySerializer;
+use Wikibase\Client\Serializer\ClientSerializer;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -41,6 +43,11 @@ class EntityAccessor {
 	private $entitySerializer;
 
 	/**
+	 * @var Serializer
+	 */
+	private $statementSerializer;
+
+	/**
 	 * @var PropertyDataTypeLookup
 	 */
 	private $dataTypeLookup;
@@ -65,6 +72,7 @@ class EntityAccessor {
 		EntityLookup $entityLookup,
 		UsageAccumulator $usageAccumulator,
 		Serializer $entitySerializer,
+		Serializer $statementSerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		LanguageFallbackChain $fallbackChain,
 		Language $language,
@@ -74,6 +82,7 @@ class EntityAccessor {
 		$this->entityLookup = $entityLookup;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->entitySerializer = $entitySerializer;
+		$this->statementSerializer = $statementSerializer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->fallbackChain = $fallbackChain;
 		$this->language = $language;
@@ -127,7 +136,7 @@ class EntityAccessor {
 			return null;
 		}
 
-		$entityArr = $this->newClientEntitySerializer()->serialize( $entityObject );
+		$entityArr = $this->newClientSerializer()->serialize( $entityObject );
 
 		// Renumber the entity as Lua uses 1-based array indexing
 		$this->renumber( $entityArr );
@@ -136,9 +145,50 @@ class EntityAccessor {
 		return $entityArr;
 	}
 
-	private function newClientEntitySerializer() {
-		return new ClientEntitySerializer(
+	/**
+	 * Get statement list from prefixed ID (e.g. "Q23") and property (e.g "P123") and return it as serialized array.
+	 *
+	 * @param string $prefixedEntityId
+	 * @param string $propertyId
+	 *
+	 * @return array|null
+	 */
+	public function getEntityStatement( $prefixedEntityId, $propertyId ) {
+		$prefixedEntityId = trim( $prefixedEntityId );
+		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+
+		$propertyIdObj = new PropertyId( $propertyId );
+		$this->usageAccumulator->addStatementUsage( $entityId, $propertyIdObj );
+
+		try {
+			$entityObject = $this->entityLookup->getEntity( $entityId );
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			// We probably hit a double redirect
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to load ' . $prefixedEntityId
+			);
+
+			return null;
+		}
+
+		if ( $entityObject === null ) {
+			return null;
+		}
+
+		$statements = $entityObject->getStatements();
+
+		$statementsProp = $statements->getByPropertyId( $propertyIdObj );
+		$statementsRanked = $statementsProp->getBestStatements();
+		$statementArr = $this->newClientSerializer()->serializeStatementList( $statementsRanked );
+		$this->renumber( $statementArr );
+
+		return $statementArr;
+	}
+
+	private function newClientSerializer() {
+		return new ClientSerializer(
 			$this->entitySerializer,
+			$this->statementSerializer,
 			$this->dataTypeLookup,
 			array_unique( array_merge(
 				$this->termsLanguages->getLanguages(),
