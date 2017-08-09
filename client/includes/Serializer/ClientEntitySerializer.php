@@ -88,6 +88,23 @@ class ClientEntitySerializer implements Serializer {
 		return $this->omitEmptyArrays( $serialization );
 	}
 
+	/**
+	 * Adds data types to serialization
+	 *
+	 * @param StatementList $statementList
+	 *
+	 * @throws SerializationException
+	 * @return array
+	 */
+	public function serializeStatementList( $statementList ) {
+		$serialization = $this->entitySerializer->serialize( $statementList );
+
+		$serialization = $this->injectStatementListSerializationWithDataTypes( $serialization );
+		$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization );
+
+		return $this->omitEmptyArrays( $serialization );
+	}
+
 	private function omitEmptyArrays( array $serialization ) {
 		return array_filter(
 			$serialization,
@@ -134,6 +151,30 @@ class ClientEntitySerializer implements Serializer {
 		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$serialization,
 			'claims/*/*/references/*/snaks'
+		);
+		return $serialization;
+	}
+
+	/**
+	 * @param array $serialization
+	 *
+	 * @TODO FIXME very similar functions with the above and the Repo ResultBuilder
+	 *
+	 * @return array
+	 */
+	private function injectStatementListSerializationWithDataTypes( array $serialization ) {
+		$serialization = $this->modifier->modifyUsingCallback(
+			$serialization,
+			'*/*/mainsnak',
+			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+		);
+		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+			$serialization,
+			'*/*/qualifiers'
+		);
+		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+			$serialization,
+			'*/*/references/*/snaks'
 		);
 		return $serialization;
 	}
