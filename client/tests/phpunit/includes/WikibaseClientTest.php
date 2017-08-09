@@ -29,6 +29,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\LangLinkHandler;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -297,6 +298,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetRestrictedEntityLookup() {
 		$restrictedEntityLookup = $this->getWikibaseClient()->getRestrictedEntityLookup();
 		$this->assertInstanceOf( RestrictedEntityLookup::class, $restrictedEntityLookup );
+	}
+
+	public function testGetEntityChangeFactory() {
+		$entityChangeFactory = $this->getWikibaseClient()->getEntityChangeFactory();
+		$this->assertInstanceOf( EntityChangeFactory::class, $entityChangeFactory );
 	}
 
 	public function propertyOrderUrlProvider() {

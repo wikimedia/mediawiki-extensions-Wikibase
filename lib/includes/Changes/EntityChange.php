@@ -223,10 +223,14 @@ class EntityChange extends DiffChange {
 	/**
 	 * @see ChangeRow::getSerializedInfo
 	 *
+	 * @param string[] $skipKeys
+	 *
 	 * @return string JSON
 	 */
-	public function getSerializedInfo() {
+	public function getSerializedInfo( $skipKeys = [] ) {
 		$info = $this->getInfo();
+
+		$info = array_diff_key( $info, array_flip( $skipKeys ) );
 
 		if ( isset( $info['diff'] ) ) {
 			$diff = $info['diff'];
