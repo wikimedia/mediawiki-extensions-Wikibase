@@ -63,7 +63,7 @@
 		);
 	} );
 
-	QUnit.test( 'animationOptions()', AnimationEvent.ANIMATION_STEPS.length + 2, function( assert ) {
+	QUnit.test( 'animationOptions()', function( assert ) {
 		assert.expect( 9 );
 		var event = AnimationEvent( 'animationpurpose' );
 		var predefined = {
