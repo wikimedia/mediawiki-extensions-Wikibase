@@ -1,0 +1,318 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_bd9bb61a",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Member declaration missing",
+      "range": {
+        "startLine": 80,
+        "startChar": 9,
+        "endLine": 80,
+        "endChar": 28
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5d8bb2c4",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Note: Are parsing errors checked for?",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3d9026f1",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Note: Are parsing errors checked for?",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3da7c64d",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 196,
+        "startChar": 33,
+        "endLine": 196,
+        "endChar": 36
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5da2d23c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Could also use checkType here",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_fd67fe1f",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Could also use checkType here",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_9d259abe",
+        "filename": "client/includes/Serializer/ClientEntitySerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "I think this should be called ClientSerializer",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3d34a6f0",
+        "filename": "client/includes/Serializer/ClientEntitySerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "This should have both an EntitySerializer and a StatementListSerializer and not just one",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1d520a40",
+        "filename": "client/includes/Serializer/ClientEntitySerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Could be one, see below",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_fd4e1e9a",
+        "filename": "client/includes/Serializer/ClientEntitySerializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "This could be a $pathPrefix function argument",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 5
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5d2f329c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "could use $this-\u003egetSerializerFactory()",
+      "range": {
+        "startLine": 1037,
+        "startChar": 28,
+        "endLine": 1037,
+        "endChar": 89
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1d20caa7",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "dataProvider unused",
+      "range": {
+        "startLine": 329,
+        "startChar": 3,
+        "endLine": 329,
+        "endChar": 35
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_00fce106",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Missing test case if there\u0027s no Statement and if ids are invalid.",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_dd19e28a",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Numeric entity ids are discouraged, use \u0027P65\u0027 instead.",
+      "range": {
+        "startLine": 333,
+        "startChar": 9,
+        "endLine": 333,
+        "endChar": 11
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_9d0cba46",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3d0b462f",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-09T22:25:48Z",
+      "side": 1,
+      "message": "Putting this into a data provider might actually be a good idea… the declaration is very large and doesn\u0027t really fit into this function.",
+      "range": {
+        "startLine": 357,
+        "startChar": 2,
+        "endLine": 357,
+        "endChar": 11
+      },
+      "revId": "4debb9f910ac565e1377209a3b49addc10a1a190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
