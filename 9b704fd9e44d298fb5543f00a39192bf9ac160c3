@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_e008b52d",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-09T22:28:10Z",
+      "side": 0,
+      "message": "removing this will cause an ugly php error if $params[\u0027change\u0027] isn\u0027t set. why do that?",
+      "revId": "9b704fd9e44d298fb5543f00a39192bf9ac160c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_401ae974",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-09T22:28:10Z",
+      "side": 0,
+      "message": "like above.",
+      "revId": "9b704fd9e44d298fb5543f00a39192bf9ac160c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

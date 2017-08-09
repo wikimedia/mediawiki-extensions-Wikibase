@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_c0057914",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-09T22:28:10Z",
+      "side": 1,
+      "message": "This will make unit tests fail.",
+      "revId": "e5bc4728d1a89f76a860e5ff3d18241978600eae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
