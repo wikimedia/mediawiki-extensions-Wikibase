@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_20ff9dfd",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-09T22:27:08Z",
+      "side": 1,
+      "message": "It\u0027s used to make the unit test simpler.",
+      "parentUuid": "4e7eab26_cb2fdff1",
+      "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_eb041bca",
         "filename": "client/tests/phpunit/includes/Changes/InjectRCRecordsJobTest.php",
         "patchSetId": 5
