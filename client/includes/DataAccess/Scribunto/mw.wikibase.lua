@@ -135,6 +135,28 @@ function wikibase.setupInterface()
 	-- getEntityObject is an alias for getEntity as these used to be different.
 	wikibase.getEntityObject = wikibase.getEntity
 
+	-- Get the statement list array for the specified id.
+	--
+	-- @param {string} [id]
+	-- @param {string} [propertyId]
+	wikibase.getStatements = function( id, propertyId )
+		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= wikibase.getEntityIdForCurrentPage() then
+			error( 'Access to arbitrary items has been disabled.', 2 )
+		end
+
+		checkType( 'getStatements', 1, id, 'string' )
+		checkType( 'getStatements', 2, propertyId, 'string' )
+
+		statements = php.getEntityStatement( id, propertyId )
+		if statements == nil or statements[propertyId] == nil then
+			statements = {}
+		elseif statements ~= nil then
+			statements = statements[propertyId]
+		end
+
+		return statements
+	end
+
 	-- Get the URL for the given entity id, if specified, or of the
 	-- connected entity, if exists.
 	--
