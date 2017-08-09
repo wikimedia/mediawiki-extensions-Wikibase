@@ -49,13 +49,13 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$langCode = 'en'
 	) {
 		$language = new Language( $langCode );
-
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 		$entitySerializer = $serializerFactory->newItemSerializer();
+		$statementSerializer = $serializerFactory->newStatementListSerializer();
 
 		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
@@ -72,6 +72,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup ?: new MockRepository(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			$entitySerializer,
+			$statementSerializer,
 			$propertyDataTypeLookup,
 			$fallbackChain,
 			$language,
@@ -321,6 +322,106 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		];
 
 		$this->assertEquals( $expected, $entityAccessor->getEntity( 'Q123098' ) );
+	}
+
+
+	/**
+	 * @dataProvider getEntityProvider
+	 */
+	public function testGetEntityStatement( ) {
+		$qid = 'Q123099';
+		$pid = 65;
+		$item = new Item( new ItemId( $qid ) );
+		$snak = new PropertyValueSnak( $pid, new StringValue( 'snakStringValue' ) );
+
+		$qualifiers = new SnakList();
+		$qualifiers->addSnak( new PropertyValueSnak( $pid, new StringValue( 'string!' ) ) );
+		$qualifiers->addSnak( new PropertySomeValueSnak( $pid ) );
+
+		$references = new ReferenceList();
+		$references->addNewReference( [
+			new PropertySomeValueSnak( 65 ),
+			new PropertySomeValueSnak( 68 )
+		] );
+
+		$guid = 'imaguid';
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$entityAccessor = $this->getEntityAccessor( $entityLookup );
+		$entityArr = $entityAccessor->getEntityStatement( "Q123099", "P65" );
+		$actual = is_array( $entityArr ) ? $entityArr : [];
+
+		$expected = [
+			'P65' => [
+				1 => [
+					'id' => 'imaguid',
+					'type' => 'statement',
+					'mainsnak' => [
+						'snaktype' => 'value',
+						'property' => 'P65',
+						'datatype' => 'structured-cat',
+						'datavalue' => [
+							'value' => 'snakStringValue',
+							'type' => 'string',
+						],
+					],
+					'qualifiers' => [
+						'P65' => [
+							1 => [
+								'hash' => '3ea0f5404dd4e631780b3386d17a15a583e499a6',
+								'snaktype' => 'value',
+								'property' => 'P65',
+								'datavalue' => [
+									'value' => 'string!',
+									'type' => 'string',
+								],
+								'datatype' => 'structured-cat',
+							],
+							2 => [
+								'hash' => 'aa9a5f05e20d7fa5cda7d98371e44c0bdd5de35e',
+								'snaktype' => 'somevalue',
+								'property' => 'P65',
+								'datatype' => 'structured-cat',
+							],
+						],
+					],
+					'rank' => 'normal',
+					'qualifiers-order' => [
+						1 => 'P65'
+					],
+					'references' => [
+						1 => [
+							'hash' => '8445204eb74e636cb53687e2f947c268d5186075',
+							'snaks' => [
+								'P65' => [
+									1 => [
+										'snaktype' => 'somevalue',
+										'property' => 'P65',
+										'datatype' => 'structured-cat',
+									]
+								],
+								'P68' => [
+									1 => [
+										'snaktype' => 'somevalue',
+										'property' => 'P68',
+										'datatype' => 'structured-cat',
+									]
+								],
+							],
+							'snaks-order' => [
+								1 => 'P65',
+								2 => 'P68'
+							],
+						],
+					],
+				],
+			]
+		];
+		$this->assertSameSize( $expected, $actual );
+		$this->assertEquals( $expected, $actual );
 	}
 
 }
