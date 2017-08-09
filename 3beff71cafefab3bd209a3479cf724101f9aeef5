@@ -22,6 +22,30 @@
       "revId": "3beff71cafefab3bd209a3479cf724101f9aeef5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6b9b4b69",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-08-09T20:01:42Z",
+      "side": 1,
+      "message": "Yeah, wasn’t quite sure which would be better (since L596/593 is commented).",
+      "parentUuid": "4e7eab26_ab837356",
+      "range": {
+        "startLine": 586,
+        "startChar": 6,
+        "endLine": 586,
+        "endChar": 23
+      },
+      "revId": "3beff71cafefab3bd209a3479cf724101f9aeef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
