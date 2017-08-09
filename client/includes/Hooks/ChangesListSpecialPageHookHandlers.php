@@ -44,11 +44,6 @@ class ChangesListSpecialPageHookHandlers {
 	private $pageName;
 
 	/**
-	 * @var bool
-	 */
-	private $showExternalChanges;
-
-	/**
 	 * @var self
 	 */
 	private static $instance = null;
@@ -58,20 +53,17 @@ class ChangesListSpecialPageHookHandlers {
 	 * @param User $user
 	 * @param LoadBalancer $loadBalancer
 	 * @param string $pageName
-	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
 		WebRequest $request,
 		User $user,
 		LoadBalancer $loadBalancer,
-		$pageName,
-		$showExternalChanges
+		$pageName
 	) {
 		$this->request = $request;
 		$this->user = $user;
 		$this->loadBalancer = $loadBalancer;
 		$this->pageName = $pageName;
-		$this->showExternalChanges = $showExternalChanges;
 	}
 
 	/**
@@ -92,8 +84,7 @@ class ChangesListSpecialPageHookHandlers {
 			$context->getRequest(),
 			$context->getUser(),
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$specialPageName,
-			$settings->getSetting( 'showExternalRecentChanges' )
+			$specialPageName
 		);
 	}
 
@@ -162,40 +153,9 @@ class ChangesListSpecialPageHookHandlers {
 			$specialPageName
 		);
 
-		$hookHandler->addWikibaseConditionsIfFilterUnavailable( $conds );
+		// FIXME: now the hook hander is unused - can this entire method go away?
 
 		return true;
-	}
-
-	// This is separate so hasWikibaseChangesEnabled can be mocked
-
-	/**
-	 * This is used to force-hide Wikibase changes if hasWikibaseChangesEnabled returns
-	 * false.  The user will not even see the option in that case.
-	 *
-	 * @param array &$conds
-	 */
-	protected function addWikibaseConditionsIfFilterUnavailable( array &$conds ) {
-		if ( !$this->hasWikibaseChangesEnabled() ) {
-			// Force-hide if hasWikibaseChangesEnabled is false
-			// The user-facing hideWikibase is handled by
-			// ChangesListSpecialPageStructuredFilters and connected code.
-			$this->addWikibaseConditions(
-				$this->loadBalancer->getConnection( DB_REPLICA ),
-				$conds
-			);
-		}
-	}
-
-	public function addFilterIfEnabled( ChangesListSpecialPage $specialPage ) {
-		// The *user-facing* filter is only registered if external changes
-		// are enabled.
-		//
-		// If the user-facing filter is not registered, it's always *hidden*.
-		// (See ChangesListSpecialPageQuery).
-		if ( $this->hasWikibaseChangesEnabled() ) {
-			$this->addFilter( $specialPage );
-		}
 	}
 
 	protected function addFilter( ChangesListSpecialPage $specialPage ) {
@@ -263,13 +223,6 @@ class ChangesListSpecialPageHookHandlers {
 	 */
 	public function addWikibaseConditions( IDatabase $dbr, array &$conds ) {
 		$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function hasWikibaseChangesEnabled() {
-		return $this->showExternalChanges;
 	}
 
 	/**

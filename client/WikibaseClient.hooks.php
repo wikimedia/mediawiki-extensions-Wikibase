@@ -252,10 +252,6 @@ final class ClientHooks {
 	public static function onGetPreferences( User $user, array &$prefs ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
-		if ( !$settings->getSetting( 'showExternalRecentChanges' ) ) {
-			return true;
-		}
-
 		$prefs['rcshowwikidata'] = [
 			'type' => 'toggle',
 			'label-message' => 'wikibase-rc-show-wikidata-pref',
