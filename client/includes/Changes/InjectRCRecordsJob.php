@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
+use InvalidArgumentException;
 use Job;
 use JobSpecification;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
@@ -113,6 +114,8 @@ class InjectRCRecordsJob extends Job {
 	 * @param RecentChangeFactory $rcFactory
 	 * @param array $params Needs to have two keys: "change": the id of the change,
 	 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		LBFactory $lbFactory,
@@ -224,9 +227,7 @@ class InjectRCRecordsJob extends Job {
 	}
 
 	/**
-	 * Returns the list of Titles to inject RC entries for.
-	 *
-	 * @return Title[]
+	 * @return Title[] List of Titles to inject RC entries for, indexed by page ID
 	 */
 	private function getTitles() {
 		$params = $this->getParams();
@@ -280,6 +281,10 @@ class InjectRCRecordsJob extends Job {
 		return true;
 	}
 
+	/**
+	 * @param string $updateType
+	 * @param int $delta
+	 */
 	private function incrementStats( $updateType, $delta ) {
 		if ( $this->stats ) {
 			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
