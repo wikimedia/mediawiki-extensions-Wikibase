@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
@@ -155,7 +155,7 @@ class MergeItems extends ApiBase {
 		}
 	}
 
-	private function addEntityToOutput( EntityRevision $entityRevision, $name ) {
+	private function addEntityToOutput( TheEntityRevision $entityRevision, $name ) {
 		$entityId = $entityRevision->getEntity()->getId();
 		$revisionId = $entityRevision->getRevisionId();
 

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -131,7 +131,7 @@ class EntityLoadingHelper {
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
-	 * @return EntityRevision|null
+	 * @return TheEntityRevision|null
 	 */
 	protected function loadEntityRevision(
 		EntityId $entityId,

@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 
@@ -63,7 +63,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
-	 * @return EntityRevision|null
+	 * @return TheEntityRevision|null
 	 */
 	public function getEntityRevision(
 		EntityId $entityId,
@@ -76,7 +76,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
 
-		/** @var EntityRevision $entityRevision */
+		/** @var TheEntityRevision $entityRevision */
 		$entityRevision = null;
 
 		if ( $revisionId > 0 ) {
@@ -163,7 +163,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
 
 		if ( $entity ) {
-			$entityRevision = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+			$entityRevision = new TheEntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
 			$result = [ $entityRevision, null ];
 		} else {

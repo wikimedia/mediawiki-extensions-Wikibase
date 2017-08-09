@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntityFactory;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -87,7 +87,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @throws UserInputException
 	 *
-	 * @return EntityRevision
+	 * @return TheEntityRevision
 	 */
 	protected function getBaseRevision() {
 		$id = $this->getEntityId();
@@ -123,7 +123,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @throws UserInputException
 	 *
-	 * @return null|EntityRevision
+	 * @return null|TheEntityRevision
 	 */
 	protected function getLatestRevision() {
 		$id = $this->getEntityId();

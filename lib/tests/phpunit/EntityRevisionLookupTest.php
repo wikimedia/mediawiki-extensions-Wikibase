@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -24,24 +24,24 @@ use Wikibase\Lib\Store\StorageException;
 abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return EntityRevision[]
+	 * @return TheEntityRevision[]
 	 */
 	protected function getTestRevisions() {
 		$entities = [];
 
 		$item = new Item( new ItemId( 'Q42' ) );
 
-		$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
+		$entities[11] = new TheEntityRevision( $item, 11, '20130101001100' );
 
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', "Foo" );
 
-		$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
+		$entities[12] = new TheEntityRevision( $item, 12, '20130101001200' );
 
 		$prop = Property::newFromType( "string" );
 		$prop->setId( 753 );
 
-		$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
+		$entities[13] = new TheEntityRevision( $prop, 13, '20130101001300' );
 
 		return $entities;
 	}
@@ -74,7 +74,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityRevision[] $entityRevisions
+	 * @param TheEntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityRevisionLookup
@@ -191,7 +191,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result );
 
 		$entityRev = $lookup->getEntityRevision( $id );
-		$this->assertInstanceOf( EntityRevision::class, $entityRev );
+		$this->assertInstanceOf( TheEntityRevision::class, $entityRev );
 	}
 
 	public function testGetLatestRevisionForMissing() {

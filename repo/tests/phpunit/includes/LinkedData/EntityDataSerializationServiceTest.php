@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
@@ -323,7 +323,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	 */
 	public function testGetSerializedData(
 		$format,
-		EntityRevision $entityRev,
+		TheEntityRevision $entityRev,
 		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects,
 		$flavor,

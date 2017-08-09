@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase;
 use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
@@ -39,7 +39,7 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 				$this->isInstanceOf( User::class ),
 				EDIT_UPDATE, 6789
 			)
-			->will( $this->returnValue( new EntityRevision( $expectedProperty, 6790 ) ) );
+			->will( $this->returnValue( new TheEntityRevision( $expectedProperty, 6790 ) ) );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
@@ -114,7 +114,7 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 						'rustydata'
 					);
 
-					return new EntityRevision( $property, 6789, '20151015195144' );
+					return new TheEntityRevision( $property, 6789, '20151015195144' );
 				} else {
 					return null;
 				}

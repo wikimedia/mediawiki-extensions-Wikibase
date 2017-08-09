@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
@@ -138,7 +138,7 @@ class EntityDataSerializationService {
 	 * Output entity data.
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
-	 * @param EntityRevision $entityRevision The entity
+	 * @param TheEntityRevision $entityRevision The entity
 	 * @param RedirectRevision|null $followedRedirect The redirect that led to the entity, or null
 	 * @param EntityId[] $incomingRedirects Incoming redirects to include in the output
 	 * @param string|null $flavor The type of the output provided by serializer
@@ -148,7 +148,7 @@ class EntityDataSerializationService {
 	 */
 	public function getSerializedData(
 		$format,
-		EntityRevision $entityRevision,
+		TheEntityRevision $entityRevision,
 		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects = [],
 		$flavor = null
@@ -182,7 +182,7 @@ class EntityDataSerializationService {
 	}
 
 	/**
-	 * @param EntityRevision $entityRevision
+	 * @param TheEntityRevision $entityRevision
 	 * @param RedirectRevision|null $followedRedirect a redirect leading to the entity for use in the output
 	 * @param EntityId[] $incomingRedirects Incoming redirects to include in the output
 	 * @param RdfBuilder $rdfBuilder
@@ -191,7 +191,7 @@ class EntityDataSerializationService {
 	 * @return string RDF
 	 */
 	private function rdfSerialize(
-		EntityRevision $entityRevision,
+		TheEntityRevision $entityRevision,
 		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects,
 		RdfBuilder $rdfBuilder,
@@ -385,14 +385,14 @@ class EntityDataSerializationService {
 	 * result, if $printer was generated from that same ApiMain module, as
 	 * createApiPrinter() does.
 	 *
-	 * @param EntityRevision $entityRevision The entity to convert ot an ApiResult
+	 * @param TheEntityRevision $entityRevision The entity to convert ot an ApiResult
 	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
 	 *   Used to provide context for generating the ApiResult, and may also be manipulated
 	 *   to fine-tune the output.
 	 *
 	 * @return ApiResult
 	 */
-	private function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ) {
+	private function generateApiResult( TheEntityRevision $entityRevision, ApiFormatBase $printer ) {
 		$res = $printer->getResult();
 
 		// Make sure result is empty. May still be full if this
@@ -420,13 +420,13 @@ class EntityDataSerializationService {
 	 * representation of data entities. Using the ContentHandler to serialize the entity would
 	 * expose internal implementation details.
 	 *
-	 * @param EntityRevision $entityRevision the entity to output.
+	 * @param TheEntityRevision $entityRevision the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
 	 *
 	 * @return string the serialized data
 	 */
 	private function getApiSerialization(
-		EntityRevision $entityRevision,
+		TheEntityRevision $entityRevision,
 		ApiFormatBase $printer
 	) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat

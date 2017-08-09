@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -189,7 +189,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 				if ( !$entity ) {
 					return null;
 				}
-				return new EntityRevision( $entity, 12, wfTimestamp( TS_MW, 1000000 ) );
+				return new TheEntityRevision( $entity, 12, wfTimestamp( TS_MW, 1000000 ) );
 			}
 		) );
 

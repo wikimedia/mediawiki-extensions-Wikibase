@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityStore;
@@ -166,7 +166,7 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
-	 * @return EntityRevision
+	 * @return TheEntityRevision
 	 */
 	public function saveEntity(
 		EntityDocument $entity,
@@ -188,7 +188,7 @@ class WikiPageEntityStore implements EntityStore {
 		$content = $this->contentFactory->newFromEntity( $entity );
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
-		$entityRevision = new EntityRevision(
+		$entityRevision = new TheEntityRevision(
 			$entity,
 			$revision->getId(),
 			$revision->getTimestamp()

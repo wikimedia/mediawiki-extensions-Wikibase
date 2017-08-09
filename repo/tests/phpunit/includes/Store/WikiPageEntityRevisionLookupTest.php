@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -30,7 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
 class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 	/**
-	 * @var EntityRevision[]
+	 * @var TheEntityRevision[]
 	 */
 	private static $testEntities = [];
 
@@ -55,7 +55,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
-	 * @param EntityRevision[] $entityRevisions
+	 * @param TheEntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityLookup

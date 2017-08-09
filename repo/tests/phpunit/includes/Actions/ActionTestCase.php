@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -260,7 +260,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	private function createTestContent( $handle, array $revisions ) {
 		global $wgUser;
 
-		/** @var EntityRevision $rev */
+		/** @var TheEntityRevision $rev */
 		$id = null;
 		$result = null;
 

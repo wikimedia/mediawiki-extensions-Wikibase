@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 
@@ -121,14 +121,14 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// test latest item
 		$itemRev = $this->repo->getEntityRevision( $itemId );
 		$this->assertNotNull( $item, 'Entity ' . $itemId );
-		$this->assertInstanceOf( EntityRevision::class, $itemRev, 'Entity ' . $itemId );
+		$this->assertInstanceOf( TheEntityRevision::class, $itemRev, 'Entity ' . $itemId );
 		$this->assertInstanceOf( Item::class, $itemRev->getEntity(), 'Entity ' . $itemId );
 		$this->assertEquals( 24, $itemRev->getRevisionId() );
 
 		// test item by rev id
 		$itemRev = $this->repo->getEntityRevision( $itemId, 23 );
 		$this->assertNotNull( $item, 'Entity ' . $itemId . '@23' );
-		$this->assertInstanceOf( EntityRevision::class, $itemRev, 'Entity ' . $itemId );
+		$this->assertInstanceOf( TheEntityRevision::class, $itemRev, 'Entity ' . $itemId );
 		$this->assertInstanceOf( Item::class, $itemRev->getEntity(), 'Entity ' . $itemId );
 		$this->assertEquals( 23, $itemRev->getRevisionId() );
 		$this->assertEquals( '20130101000000', $itemRev->getTimestamp() );
@@ -136,7 +136,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// test latest prop
 		$propRev = $this->repo->getEntityRevision( $propId );
 		$this->assertNotNull( $propRev, 'Entity ' . $propId );
-		$this->assertInstanceOf( EntityRevision::class, $propRev, 'Entity ' . $propId );
+		$this->assertInstanceOf( TheEntityRevision::class, $propRev, 'Entity ' . $propId );
 		$this->assertInstanceOf( Property::class, $propRev->getEntity(), 'Entity ' . $propId );
 	}
 

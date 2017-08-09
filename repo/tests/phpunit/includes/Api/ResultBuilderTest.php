@@ -28,7 +28,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ResultBuilder;
@@ -385,7 +385,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$guid = 'imaguid';
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
 
-		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
+		$entityRevision = new TheEntityRevision( $item, 33, '20131126202923' );
 
 		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision );
@@ -398,7 +398,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntityRevisionKey() {
 		$item = new Item( new ItemId( 'Q11' ) );
 
-		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
+		$entityRevision = new TheEntityRevision( $item, 33, '20131126202923' );
 
 		$props = [];
 		$result = $this->getDefaultResult();
@@ -497,7 +497,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->getFingerprint()->setLabel( 'en', 'Oslo-en' );
 		$item->getFingerprint()->setDescription( 'es', 'desc-es' );
 		$item->getFingerprint()->setDescription( 'zh-sg', 'desc-zh-sg' );
-		$entityRevision = new EntityRevision( $item );
+		$entityRevision = new TheEntityRevision( $item );
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
 		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
@@ -533,7 +533,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'de', 'text' );
 		$item->setAliases( 'en', [ 'text' ] );
 		$item->setAliases( 'de', [ 'text' ] );
-		$entityRevision = new EntityRevision( $item );
+		$entityRevision = new TheEntityRevision( $item );
 
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
@@ -585,7 +585,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item = new Item( new ItemId( 'Q123099' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
-		$entityRevision = new EntityRevision( $item );
+		$entityRevision = new TheEntityRevision( $item );
 
 		$props = [ 'sitelinks' ];
 		$siteIds = [ 'enwiki' ];
@@ -624,7 +624,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item = new Item( new ItemId( 'Q123100' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
-		$entityRevision = new EntityRevision( $item );
+		$entityRevision = new TheEntityRevision( $item );
 
 		$props = [ 'sitelinks' ];
 		$siteIds = [ 'enwiki' ];

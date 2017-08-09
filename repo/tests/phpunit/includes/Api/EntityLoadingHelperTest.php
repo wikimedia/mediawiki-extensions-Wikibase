@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -50,14 +50,14 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId|null $entityId Entity ID getEntityRevision() should expect.
-	 * @param EntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
+	 * @param TheEntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
 	 * @param Exception|null $exception The Exception getEntityRevision() should throw.
 	 *
 	 * @return EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockEntityRevisionLookup(
 		EntityId $entityId = null,
-		EntityRevision $entityRevision = null,
+		TheEntityRevision $entityRevision = null,
 		Exception $exception = null
 	) {
 		$mock = $this->getMock( EntityRevisionLookup::class );
@@ -119,12 +119,12 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityRevision|PHPUnit_Framework_MockObject_MockObject
+	 * @return TheEntityRevision|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockRevision() {
 		$entity = $this->getMock( EntityDocument::class );
 
-		$revision = $this->getMockBuilder( EntityRevision::class )
+		$revision = $this->getMockBuilder( TheEntityRevision::class )
 			->disableOriginalConstructor()
 			->getMock();
 

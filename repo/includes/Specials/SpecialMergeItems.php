@@ -9,7 +9,7 @@ use Message;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\UserInputException;
@@ -175,8 +175,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
 		$toTitle = $this->titleLookup->getTitleForId( $toId );
 
-		/** @var EntityRevision $newRevisionFrom  */
-		/** @var EntityRevision $newRevisionTo */
+		/** @var TheEntityRevision $newRevisionFrom  */
+		/** @var TheEntityRevision $newRevisionTo */
 		list( $newRevisionFrom, $newRevisionTo, )
 			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
 

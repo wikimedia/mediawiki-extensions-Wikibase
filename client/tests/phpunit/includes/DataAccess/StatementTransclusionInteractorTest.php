@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -231,7 +231,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				switch ( $entityId->getSerialization() ) {
 					case 'Q42':
-						return new EntityRevision( new Item( new ItemId( 'Q42' ) ) );
+						return new TheEntityRevision( new Item( new ItemId( 'Q42' ) ) );
 					case 'Q43':
 						throw new RevisionedUnresolvedRedirectException(
 							$entityId,

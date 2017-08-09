@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -35,7 +35,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 		$localLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->with( $itemId )
-			->willReturn( new EntityRevision( $item, 123 ) );
+			->willReturn( new TheEntityRevision( $item, 123 ) );
 
 		$foreignItemId = new ItemId( 'foo:Q303' );
 		$foreignItem = new Item( $foreignItemId );
@@ -44,7 +44,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 		$fooLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->with( $foreignItemId )
-			->willReturn( new EntityRevision( $foreignItem, 100 ) );
+			->willReturn( new TheEntityRevision( $foreignItem, 100 ) );
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup(
 			[ '' => $localLookup, 'foo' => $fooLookup, ]

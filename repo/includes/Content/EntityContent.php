@@ -27,7 +27,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
@@ -284,19 +284,19 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * @param int|null $revisionId
 	 *
-	 * @return EntityRevision
+	 * @return TheEntityRevision
 	 */
 	private function getEntityRevision( $revisionId = null ) {
 		$entity = $this->getEntity();
 
 		if ( $revisionId !== null ) {
-			return new EntityRevision( $entity, $revisionId );
+			return new TheEntityRevision( $entity, $revisionId );
 		}
 
 		// Revision defaults to 0 (latest), which is desired and suitable in cases where
 		// getParserOutput specifies no revision. (e.g. is called during save process
 		// when revision id is unknown or not assigned yet)
-		return new EntityRevision( $entity );
+		return new TheEntityRevision( $entity );
 	}
 
 	/**
