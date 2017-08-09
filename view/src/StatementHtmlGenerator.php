@@ -198,9 +198,6 @@ class StatementHtmlGenerator {
 				'wikibase-statementview-references-counter',
 				[
 					$this->numberLocalizer->localizeNumber( $referenceCount ),
-					$this->numberLocalizer->localizeNumber( 0 ),
-					'',
-					''
 				]
 			) );
 		}

@@ -577,20 +577,17 @@
 		 * @private
 		 */
 		_drawReferencesCounter: function () {
-			var numberOfValues = 0,
-				numberOfPendingValues = 0;
+			var numberOfValues = 0;
 
 			if ( this._referencesListview ) {
-				numberOfPendingValues = this._referencesListview.items().filter( '.wb-reference-new' ).length;
-				numberOfValues = this._referencesListview.items().length - numberOfPendingValues;
+				numberOfValues = this._referencesListview.items().length;
 			}
 
 			// build a nice counter, displaying fixed and pending values:
-			var $counterMsg = wb.utilities.ui.buildPendingCounter(
-				numberOfValues,
-				numberOfPendingValues,
+			var $counterMsg = wb.utilities.ui.buildCounter(
 				'wikibase-statementview-references-counter',
-				'wikibase-statementview-referencesheading-pendingcountertooltip' );
+				numberOfValues
+			);
 
 			// update counter, don't touch the toggle!
 			this.$refsHeading.find( '.ui-toggler-label' ).empty().append( $counterMsg );
