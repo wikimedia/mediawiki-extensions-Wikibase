@@ -23,7 +23,7 @@ use OutOfBoundsException;
 class WikibaseSettings {
 
 	/**
-	 * @returns true if and only if the Wikibase repository component is enabled on this wiki.
+	 * @return bool True if and only if the Wikibase repository component is enabled on this wiki.
 	 */
 	public static function isRepoEnabled() {
 		return defined( 'WB_VERSION' );
@@ -35,7 +35,7 @@ class WikibaseSettings {
 	 *
 	 * @throws MWException
 	 *
-	 * @returns SettingsArray
+	 * @return SettingsArray
 	 */
 	public static function getRepoSettings() {
 		if ( !self::isRepoEnabled() ) {
@@ -48,7 +48,7 @@ class WikibaseSettings {
 	}
 
 	/**
-	 * @returns true if and only if the Wikibase client component is enabled on this wiki.
+	 * @return bool True if and only if the Wikibase client component is enabled on this wiki.
 	 */
 	public static function isClientEnabled() {
 		return defined( 'WBC_VERSION' );
@@ -57,7 +57,7 @@ class WikibaseSettings {
 	/**
 	 * @throws MWException
 	 *
-	 * @returns SettingsArray
+	 * @return SettingsArray
 	 */
 	public static function getClientSettings() {
 		if ( !self::isClientEnabled() ) {

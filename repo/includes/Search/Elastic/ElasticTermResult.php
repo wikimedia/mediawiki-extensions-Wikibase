@@ -52,7 +52,7 @@ class ElasticTermResult implements ResultsType {
 	/**
 	 * Get the source filtering to be used loading the result.
 	 *
-	 * @return false|string|array corresponding to Elasticsearch source filtering syntax
+	 * @return string[]
 	 */
 	public function getSourceFiltering() {
 		$fields = [ 'namespace', 'title' ];
