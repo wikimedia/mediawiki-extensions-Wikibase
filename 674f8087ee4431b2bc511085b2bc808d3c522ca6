@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_8176a537",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T14:32:30Z",
+      "side": 1,
+      "message": "This is all dead code now and should be removed as well.",
+      "range": {
+        "startLine": 158,
+        "startChar": 3,
+        "endLine": 163,
+        "endChar": 6
+      },
+      "revId": "674f8087ee4431b2bc511085b2bc808d3c522ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
