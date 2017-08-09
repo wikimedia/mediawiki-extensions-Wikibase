@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b04bde87",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-09T20:04:45Z",
+      "side": 1,
+      "message": "is this change needed? does not seem to make a difference?",
+      "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_eb041bca",
+        "filename": "client/tests/phpunit/includes/Changes/InjectRCRecordsJobTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-09T20:04:45Z",
+      "side": 1,
+      "message": "oh yeah :)",
+      "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2b6463ad",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-09T20:04:45Z",
+      "side": 1,
+      "message": "do we care checking that $fields[type] is of expected format or is it so unlikely that not worth checking?",
+      "revId": "309f09c0bde3229c11fc1930490ab09fecf518f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
