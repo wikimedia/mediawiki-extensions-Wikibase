@@ -165,7 +165,7 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * @param Title[] $titles
 	 *
-	 * @returns array[] string $pageId => [ int $namespace, string $dbKey ]
+	 * @return array[] string $pageId => [ int $namespace, string $dbKey ]
 	 */
 	private function getPageParamForRefreshLinksJob( array $titles ) {
 		$pages = [];
