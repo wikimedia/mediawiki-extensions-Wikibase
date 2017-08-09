@@ -22,6 +22,8 @@
  * and join the open data revolution.              <>
  */
 
+use Wikibase\Lib\Store\EntityRevision;
+
 /**
  * Entry point for the WikibaseLib extension.
  *
@@ -51,6 +53,8 @@ define( 'WBL_VERSION', '0.5 alpha' );
 if ( is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/../vendor/autoload.php';
 }
+
+class_alias( EntityRevision::class, 'Wikibase\EntityRevision' );
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
