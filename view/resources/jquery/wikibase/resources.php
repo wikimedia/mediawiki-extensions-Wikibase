@@ -356,7 +356,6 @@ return call_user_func( function() {
 			'messages' => [
 				'parentheses',
 				'wikibase-sitelinks-counter',
-				'wikibase-propertyedittool-counter-pending-tooltip',
 			],
 		],
 
@@ -433,7 +432,6 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-rank-tooltip-deprecated',
 				'wikibase-statementview-references-counter',
-				'wikibase-statementview-referencesheading-pendingcountertooltip',
 			],
 		],
 
