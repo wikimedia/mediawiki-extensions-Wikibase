@@ -96,18 +96,6 @@ module.exports = ( function( $, vv, TimeValue ) {
 			this.$input,
 			[
 				this.preview,
-				new vv.ExpertExtender.CalendarHint(
-					this._messageProvider,
-					function() {
-						return self.viewState().value();
-					},
-					function( value ) {
-						// FIXME: Do not use private function:
-						self.calendarRotator.rotator._setValue( value );
-						self.calendarRotator.rotator.value( value );
-						self.calendarRotator.rotator.activate();
-					}
-				),
 				new vv.ExpertExtender.Container(
 					$precisionContainer,
 					this.precisionRotator

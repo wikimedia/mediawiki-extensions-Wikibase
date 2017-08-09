@@ -25,25 +25,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.ExpertExtender.CalendarHint' => $moduleTemplate + array(
-			'scripts' => array(
-				'ExpertExtender.CalendarHint.js',
-			),
-			'styles' => array(
-				'ExpertExtender.CalendarHint.css',
-			),
-			'dependencies' => array(
-				'dataValues.TimeValue',
-				'jquery.valueview.ExpertExtender',
-			),
-			'messages' => array(
-				'valueview-expertextender-calendarhint-gregorian',
-				'valueview-expertextender-calendarhint-julian',
-				'valueview-expertextender-calendarhint-switch-gregorian',
-				'valueview-expertextender-calendarhint-switch-julian'
-			)
-		),
-
 		'jquery.valueview.ExpertExtender.Container' => $moduleTemplate + array(
 			'scripts' => array(
 				'ExpertExtender.Container.js',
