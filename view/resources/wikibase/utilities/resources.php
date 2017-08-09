@@ -46,7 +46,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase',
-				'jquery.tipsy',
 				'mediawiki.language',
 				'mediawiki.jqueryMsg'
 			],

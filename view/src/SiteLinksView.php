@@ -173,9 +173,6 @@ class SiteLinksView {
 					'wikibase-sitelinks-counter',
 					[
 						$this->numberLocalizer->localizeNumber( $count ),
-						$this->numberLocalizer->localizeNumber( 0 ),
-						'',
-						''
 					]
 				)
 			] ) ),
