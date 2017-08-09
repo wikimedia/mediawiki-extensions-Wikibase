@@ -9,7 +9,6 @@ use Wikibase\Client\Changes\InjectRCRecordsJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,7 +18,6 @@ use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Tests\Changes\EntityChangeFactoryTest;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
 
@@ -294,20 +292,21 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		$changeFactory = $this->getEntityChangeFactory();
 		$rcFactory = $this->getRCFactoryMock();
 
-		$job = new InjectRCRecordsJob(
+		/** @var InjectRCRecordsJob $job */
+		$job = TestingAccessWrapper::newFromObject( new InjectRCRecordsJob(
 			$this->getLBFactoryMock(),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
 			$spec->getParams()
-		);
+		) );
 
-		$actualChange = TestingAccessWrapper::newFromObject( $job )->getChange();
+		$actualChange = $job->getChange();
 
 		$this->assertEquals( $change->getId(), $actualChange->getId(), 'Change ID' );
 		$this->assertEquals( $change->getFields(), $actualChange->getFields(), 'Change Fields' );
 
-		$actualTitles = TestingAccessWrapper::newFromObject( $job )->getTitles();
+		$actualTitles = $job->getTitles();
 
 		$this->assertEquals(
 			$this->getTitleIDs( $titles ),
@@ -384,20 +383,21 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		$changeFactory = $this->getEntityChangeFactory();
 		$rcFactory = $this->getRCFactoryMock();
 
-		$job = new InjectRCRecordsJob(
+		/** @var InjectRCRecordsJob $job */
+		$job = TestingAccessWrapper::newFromObject( new InjectRCRecordsJob(
 			$this->getLBFactoryMock(),
 			$changeLookup,
 			$changeFactory,
 			$rcFactory,
 			$params
-		);
+		) );
 
-		$actualChange = TestingAccessWrapper::newFromObject( $job )->getChange();
+		$actualChange = $job->getChange();
 
 		$this->assertEquals( $expectedChange->getId(), $actualChange->getId(), 'Change ID' );
 		$this->assertEquals( $expectedChange->getFields(), $actualChange->getFields(), 'Change Fields' );
 
-		$actualTitles = TestingAccessWrapper::newFromObject( $job )->getTitles();
+		$actualTitles = $job->getTitles();
 
 		$this->assertEquals(
 			$this->getTitleIDs( $expectedTitles ),
