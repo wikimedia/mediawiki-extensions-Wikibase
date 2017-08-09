@@ -75,3 +75,5 @@ class EntityRevision {
 	}
 
 }
+
+class_alias( 'Wikibase\EntityRevision', EntityRevision::class );
