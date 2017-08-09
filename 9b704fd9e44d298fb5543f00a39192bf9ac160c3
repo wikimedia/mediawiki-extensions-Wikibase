@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_80a0d18e",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T23:42:34Z",
+      "side": 0,
+      "message": "Why not? That PHP info (it\u0027s not an error) will only show up if the code is going to crash hard anyway. So why should we care?",
+      "parentUuid": "4e7eab26_e008b52d",
+      "revId": "9b704fd9e44d298fb5543f00a39192bf9ac160c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_401ae974",
         "filename": "client/includes/Changes/InjectRCRecordsJob.php",
         "patchSetId": 1

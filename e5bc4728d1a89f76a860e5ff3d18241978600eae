@@ -16,6 +16,24 @@
       "revId": "e5bc4728d1a89f76a860e5ff3d18241978600eae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_40aae96e",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T23:42:34Z",
+      "side": 1,
+      "message": "Which tests. Why? How? I don\u0027t understand. This is a private method. The only caller is up there in run(), and the only thing run() does with this array is iterating it *without* using the array keys. How is it possible this is visible in a test? Why should an implementation detail be tested?",
+      "parentUuid": "4e7eab26_c0057914",
+      "revId": "e5bc4728d1a89f76a860e5ff3d18241978600eae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
