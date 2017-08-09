@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_cb227fa2",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T19:29:07Z",
+      "side": 1,
+      "message": "This is redundant and can be removed with the new check below. I know the assertion below will trigger an \"unknown array key\" warning then, but this doesn\u0027t matter much, because the assertion makes the code fail hard anyway.",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 4
+      },
+      "revId": "9b704fd9e44d298fb5543f00a39192bf9ac160c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_eb25fba8",
+        "filename": "client/includes/Changes/InjectRCRecordsJob.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T19:29:07Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 140,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 4
+      },
+      "revId": "9b704fd9e44d298fb5543f00a39192bf9ac160c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
