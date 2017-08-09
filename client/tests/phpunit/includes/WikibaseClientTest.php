@@ -21,6 +21,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -273,6 +274,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetInternalFormatStatementDeserializer() {
 		$deserializer = $this->getWikibaseClient()->getInternalFormatStatementDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
+	}
+
+	public function testGetSerializerFactory() {
+		$serializerFactory = $this->getWikibaseClient()->getSerializerFactory();
+		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
 	}
 
 	public function testGetChangeHandler() {
