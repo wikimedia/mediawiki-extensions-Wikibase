@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_20dd5d17",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T23:48:22Z",
+      "side": 0,
+      "message": "Uh, this was already unused. Good catch!",
+      "range": {
+        "startLine": 55,
+        "startChar": 9,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "7e61f25ab95a03e14f91be6f679bfc005693f7e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_80f53181",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-09T23:48:22Z",
+      "side": 0,
+      "message": "Uh, what? This call was broken. The setting never had an effect, because if was passed in as the unused $repoId parameter. This means it was always true.",
+      "revId": "7e61f25ab95a03e14f91be6f679bfc005693f7e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
