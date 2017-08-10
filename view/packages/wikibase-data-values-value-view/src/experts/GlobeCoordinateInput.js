@@ -1,4 +1,4 @@
-module.exports = ( function( $, vv, Formatter ) {
+module.exports = ( function( $, vv ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -31,6 +31,29 @@ module.exports = ( function( $, vv, Formatter ) {
 	}
 
 	/**
+	 * @param {number} precision
+	 * @return {string}
+	 */
+	function getPrecisionLabel( precision ) {
+		var presets = {
+			'to an arcminute': 1 / 60,
+			'to an arcsecond': 1 / 3600,
+			'to 1/10 of an arcsecond': 1 / 36000,
+			'to 1/100 of an arcsecond': 1 / 360000,
+			'to 1/1000 of an arcsecond': 1 / 3600000,
+			'1/10000\'': 1 / 36000000
+		};
+
+		for ( var label in presets ) {
+			if ( Math.abs( precision - presets[label] ) < 0.000000000001 ) {
+				return label;
+			}
+		}
+
+		return '±' + roundPrecision( precision ) + '°';
+	}
+
+	/**
 	 * Returns the original precision level for an unrounded precision.
 	 * @ignore
 	 *
@@ -59,10 +82,9 @@ module.exports = ( function( $, vv, Formatter ) {
 	function getPrecisionValues() {
 		var precisionValues = [];
 		$.each( PRECISIONS, function( i, precision ) {
-			var label = Formatter.PRECISIONTEXT( precision );
 			precisionValues.unshift( {
 				value: roundPrecision( precision ),
-				label: label
+				label: getPrecisionLabel( precision )
 			} );
 		} );
 		return precisionValues;
@@ -124,7 +146,7 @@ module.exports = ( function( $, vv, Formatter ) {
 					value: precision,
 					label: self._messageProvider.getMessage(
 						'valueview-expert-globecoordinateinput-customprecision',
-						[ Formatter.PRECISIONTEXT( precision ) ]
+						[ getPrecisionLabel( precision ) ]
 					)
 				};
 			}
@@ -190,4 +212,4 @@ module.exports = ( function( $, vv, Formatter ) {
 
 	return vv.experts.GlobeCoordinateInput;
 
-}( jQuery, jQuery.valueview, globeCoordinate.Formatter ) );
+}( jQuery, jQuery.valueview ) );
