@@ -137,17 +137,23 @@
 		 * @return {boolean}
 		 */
 		equals: function( otherGlobeCoordinate ) {
-			if( !( otherGlobeCoordinate instanceof globeCoordinate.GlobeCoordinate ) ) {
+			if ( !( otherGlobeCoordinate instanceof SELF )
+				|| otherGlobeCoordinate._globe !== this._globe
+			) {
 				return false;
 			}
 
-			var gc1Iso6709 = globeCoordinate.iso6709( this.getDecimal() ),
-				gc2Iso6709 = globeCoordinate.iso6709( otherGlobeCoordinate.getDecimal() );
+			// 0.00000001° corresponds to approx. 1 mm on Earth and can always be considered equal.
+			var oneMillimeter = 0.00000001,
+				epsilon = Math.max(
+					// A change worth 1/2 precision might already become a visible change
+					Math.min( this._precision, otherGlobeCoordinate._precision ) / 2,
+					oneMillimeter
+				);
 
-			return ( this._precision === otherGlobeCoordinate._precision
-				|| Math.abs( this._precision - otherGlobeCoordinate._precision ) < 0.00000001 )
-				&& gc1Iso6709 === gc2Iso6709
-				&& this._globe === otherGlobeCoordinate._globe;
+			return Math.abs( otherGlobeCoordinate._precision - this._precision ) < oneMillimeter
+				&& Math.abs( otherGlobeCoordinate._latitude - this._latitude ) < epsilon
+				&& Math.abs( otherGlobeCoordinate._longitude - this._longitude ) < epsilon;
 		}
 	};
 
