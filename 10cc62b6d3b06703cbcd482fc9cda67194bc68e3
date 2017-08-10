@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_564dcf3d",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "We don\u0027t usually use this naming style. Just use $propertyId, and use something like $propertyIdSerialization for the function argument.",
+      "range": {
+        "startLine": 160,
+        "startChar": 13,
+        "endLine": 160,
+        "endChar": 16
+      },
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_966a577d",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "This should catch and react to EntityIdParsingExceptions in some way (maybe throw ScribuntoExceptions)\n\nAlso need to catch EntityAccessLimitExceptions here, in case the entity access limit has been exceeded.",
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5664efad",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Having just \"id\" and \"propertyId\" sounds confusing to me. Maybe use \"entityId\" and \"propertyId\"?",
+      "range": {
+        "startLine": 142,
+        "startChar": 36,
+        "endLine": 142,
+        "endChar": 38
+      },
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_967c971c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Need to clarify with Lydia: Should this call php.incrementExpensiveFunctionCount()? Probably not, but we should talk about this.",
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_160507c4",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Should just be an else (the if is not needed AFAIS)",
+      "range": {
+        "startLine": 153,
+        "startChar": 2,
+        "endLine": 153,
+        "endChar": 8
+      },
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f6287b34",
+        "filename": "client/includes/Serializer/ClientSerializer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Sorry for not spotting this:\nWe should have on Serializer for Entities and one for StatementLists… they should probably both have a common base class and just overwrite serialize.",
+      "range": {
+        "startLine": 17,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_162c2744",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Should have a (trivial) test for this in client/tests/phpunit/includes/WikibaseClientTest.php",
+      "range": {
+        "startLine": 1024,
+        "startChar": 17,
+        "endLine": 1024,
+        "endChar": 37
+      },
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3617e3f3",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseLibraryTests.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Missing spaces in type function call",
+      "range": {
+        "startLine": 26,
+        "startChar": 12,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_56c86f77",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseLibraryTests.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T13:50:19Z",
+      "side": 1,
+      "message": "Another test which actually tests the format and two for invalid entity ids would be nice.\nMaybe also one for entity not found and one for statement not existing.",
+      "revId": "10cc62b6d3b06703cbcd482fc9cda67194bc68e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
