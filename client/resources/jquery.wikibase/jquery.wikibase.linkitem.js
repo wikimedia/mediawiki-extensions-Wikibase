@@ -279,7 +279,7 @@
 				apiUrl = $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ).getApi();
 			} catch ( e ) {
 				// Invalid input (likely incomplete). Disable the page input an re-disable to button
-				$page.attr( 'disabled', 'disabled' );
+				$page.prop( 'disabled', true );
 				this.$goButton.button( 'disable' );
 				return;
 			}
@@ -288,7 +288,7 @@
 			// input element. Furthermore, we remove the old suggestor (if there's one) and create a new
 			// one working on the right wiki.
 			$page
-			.removeAttr( 'disabled' )
+			.prop( 'disabled', false )
 			.suggester( {
 				source: function ( term ) {
 					var deferred = $.Deferred();
@@ -330,9 +330,9 @@
 				.attr( {
 					name: 'wbclient-linkItem-page',
 					id: 'wbclient-linkItem-page',
-					disabled: 'disabled',
 					'class': 'wbclient-linkItem-input'
 				} )
+				.prop( 'disabled', true )
 				.on( 'eachchange', function () {
 					// Enable the button if the field has a value
 					self.$goButton.button( $( this ).val() === '' ? 'disable' : 'enable' );
