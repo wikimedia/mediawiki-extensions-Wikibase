@@ -12,9 +12,9 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 ## Release notes
 
 ### 0.9.0 (dev)
-* Deprecated `dataValues.TimeValue.getYear`.
-* Removed `dataValues.TimeValue.getMonth`, `getDay`, `getHour`, `getMinute`, and `getSecond`.
-* Made `globeCoordinate.GlobeCoordinate.getDecimal` private.
+* Removed `dataValues.TimeValue.getYear`, `getMonth`, `getDay`, `getHour`, `getMinute`, and
+  `getSecond`.
+* Declared `globeCoordinate.GlobeCoordinate.getDecimal` private.
 
 ### 0.8.4 (2017-07-18)
 * Updated JSDoc tags mistakenly requiring objects.
