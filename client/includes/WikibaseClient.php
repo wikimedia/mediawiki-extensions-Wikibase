@@ -1199,8 +1199,7 @@ final class WikibaseClient {
 			new TitleFactory(),
 			$pageUpdater,
 			$changeListTransformer,
-			$this->siteLookup,
-			$this->settings->getSetting( 'injectRecentChanges' )
+			$this->siteLookup
 		);
 	}
 
