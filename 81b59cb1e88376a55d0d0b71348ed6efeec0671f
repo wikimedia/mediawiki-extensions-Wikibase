@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_47b99b28",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-10T17:37:46Z",
+      "side": 1,
+      "message": "I think this must be \"mw.wikibase.entity.claims\".\n\nSame a few more times below.",
+      "range": {
+        "startLine": 233,
+        "startChar": 11,
+        "endLine": 233,
+        "endChar": 29
+      },
+      "revId": "81b59cb1e88376a55d0d0b71348ed6efeec0671f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
