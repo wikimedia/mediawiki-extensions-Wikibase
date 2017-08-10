@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Formatters;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
@@ -8,9 +8,9 @@ use ValueFormatters\ValueFormatterBase;
 
 /**
  * @license GPL-2.0+
- * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
-class MonolingualTextFormatter extends ValueFormatterBase {
+class MonolingualWikitextFormatter extends ValueFormatterBase {
 
 	/**
 	 * Intentional override because this formatter does not consume any options.
@@ -25,14 +25,18 @@ class MonolingualTextFormatter extends ValueFormatterBase {
 	 * @param MonolingualTextValue $value
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string Text
+	 * @return string Wikitext
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof MonolingualTextValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a MonolingualTextValue.' );
+			throw new InvalidArgumentException( '$value must be a MonolingualTextValue' );
 		}
 
-		return $value->getText();
+		$text = $value->getText();
+		$languageCode = $value->getLanguageCode();
+
+		return '<span lang="' . wfEscapeWikiText( $languageCode ) . '">'
+			. wfEscapeWikiText( $text ) . '</span>';
 	}
 
 }
