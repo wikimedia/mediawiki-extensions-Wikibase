@@ -26,7 +26,7 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\RedirectRevision;
+use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikimedia\Purtle\RdfWriterFactory;
 

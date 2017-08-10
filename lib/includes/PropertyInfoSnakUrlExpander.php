@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Store\PropertyInfoProvider;
 use Wikimedia\Assert\Assert;
 
 /**

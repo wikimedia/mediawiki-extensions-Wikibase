@@ -31,7 +31,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\RedirectRevision;
+use Wikibase\Lib\Store\RedirectRevision;
 
 /**
  * @deprecated Try to use a simpler fake. The complexity and coupling of this

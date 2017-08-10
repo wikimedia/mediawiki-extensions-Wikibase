@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndex;
-use Wikibase\TermPropertyLabelResolver;
+use Wikibase\Lib\Store\TermPropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
