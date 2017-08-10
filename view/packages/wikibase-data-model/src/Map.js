@@ -35,6 +35,9 @@ var SELF = wb.datamodel.Map = function WbDataModelMap( ItemConstructor, map ) {
 	}
 };
 
+/**
+ * @class wikibase.datamodel.Map
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {Function}

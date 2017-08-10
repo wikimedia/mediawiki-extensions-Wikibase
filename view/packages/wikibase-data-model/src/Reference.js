@@ -30,6 +30,9 @@ var SELF = wb.datamodel.Reference = function WbDataModelReference( snaks, hash )
 	this._hash = hash || null;
 };
 
+/**
+ * @class wikibase.datamodel.Reference
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {string|null}

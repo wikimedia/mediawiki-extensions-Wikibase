@@ -36,6 +36,9 @@ var SELF
 		this._aliases = aliases;
 	};
 
+/**
+ * @class wikibase.datamodel.Fingerprint
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {wikibase.datamodel.TermMap}

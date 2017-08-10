@@ -26,6 +26,9 @@ var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageNam
 	this._badges = badges || [];
 };
 
+/**
+ * @class wikibase.datamodel.SiteLink
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {string}

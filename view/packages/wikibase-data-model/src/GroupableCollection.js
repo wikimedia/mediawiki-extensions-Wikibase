@@ -13,6 +13,9 @@
  */
 var SELF = wb.datamodel.GroupableCollection = function WbDataModelGroupableCollection() {};
 
+/**
+ * @class wikibase.datamodel.GroupableCollection
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * Returns the collection items as list.

@@ -41,6 +41,9 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	this.setItemContainer( groupableCollection || new GroupableCollectionConstructor() );
 };
 
+/**
+ * @class wikibase.datamodel.Group
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {*}

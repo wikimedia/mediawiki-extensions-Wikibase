@@ -21,6 +21,9 @@ var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers,
 	this._guid = guid || null;
 };
 
+/**
+ * @class wikibase.datamodel.Claim
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {wikibase.datamodel.Snak}
