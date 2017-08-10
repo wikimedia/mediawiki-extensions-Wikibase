@@ -46,6 +46,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->tablesUsed[] = 'page';
 		$this->tablesUsed[] = 'redirect';
 		$this->tablesUsed[] = 'revision';
+		$this->tablesUsed[] = 'ip_changes';
 
 		$termRows = [];
 		$infoRows = [];
