@@ -32,6 +32,9 @@ var SELF = vp.ValueParserStore = function VpValueParserStore( DefaultParser ) {
 	this._parsersForDataValueTypes = {};
 };
 
+/**
+ * @class valueParsers.ValueParserStore
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * Default parser constructor to be returned when no parser is registered for a specific
