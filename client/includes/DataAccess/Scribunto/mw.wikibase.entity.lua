@@ -26,6 +26,13 @@ entity.claimRanks = {
 	RANK_DEPRECATED = 0
 }
 
+-- Is this a valid property id (Pnnn)?
+--
+-- @param {string} propertyId
+local isValidPropertyId = function( propertyId )
+	return type( propertyId ) == 'string' and propertyId:match( '^P[1-9]%d*$' )
+end
+
 -- Function to mask an entity's claims table in order to log access
 -- to individual claims of an entity.
 -- Code for logging based on: http://www.lua.org/pil/13.4.4.html
@@ -39,20 +46,24 @@ local maskClaimsTable = function( entity )
 	entity.claims = {}
 
 	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( emptyTable, propertyID )
-		php.addStatementUsage(entity.id, propertyID)
-		return actualEntityClaims[propertyID]
+	pseudoClaimsMetatable.__index = function( emptyTable, propertyId )
+		if isValidPropertyId( propertyId ) then
+			-- Only attempt to track the usage if we have a valid property id.
+			php.addStatementUsage( entity.id, propertyId )
+		end
+
+		return actualEntityClaims[propertyId]
 	end
 
-	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyID, data )
+	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data )
 		error( 'Entity cannot be modified' )
 	end
 
-	local logNext = function( emptyTable, propertyID )
-		if propertyID ~= nil then
-			php.addStatementUsage(entity.id, propertyID)
+	local logNext = function( emptyTable, propertyId )
+		if isValidPropertyId( propertyId ) then
+			php.addStatementUsage( entity.id, propertyId )
 		end
-		return next( actualEntityClaims, propertyID )
+		return next( actualEntityClaims, propertyId )
 	end
 
 	pseudoClaimsMetatable.__pairs = function( emptyTable )
@@ -187,6 +198,12 @@ end
 --
 -- @param {string} propertyId
 methodtable.getBestStatements = function( entity, propertyId )
+	checkType( 'getBestStatements', 1, propertyId, 'string' )
+
+	if not isValidPropertyId( propertyId ) then
+		error( 'Invalid property id passed to mw.wikibase.entity.getBestStatements: "' .. propertyId .. '"' )
+	end
+
 	if entity.claims == nil or not entity.claims[propertyId] then
 		return {}
 	end
@@ -240,7 +257,7 @@ local formatValuesByPropertyId = function( entity, phpFormatterFunction, propert
 	)
 
 	local label
-	if propertyLabelOrId:match( '^P%d+$' ) then
+	if isValidPropertyId( propertyLabelOrId ) then
 		label = mw.wikibase.label( propertyLabelOrId )
 	end
 
