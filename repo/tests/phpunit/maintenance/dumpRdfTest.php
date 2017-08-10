@@ -205,6 +205,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 * @dataProvider getRedirectModeProvider
 	 */
 	public function testGetRedirectMode( $expected, $redirectOnly ) {
+		/** @var DumpRdf $dumpScript */
 		$dumpScript = TestingAccessWrapper::newFromObject( new DumpRdf() );
 
 		$dumpArgv = [ 0 => 'foo' ];

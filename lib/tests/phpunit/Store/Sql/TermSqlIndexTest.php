@@ -652,6 +652,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex = $this->getTermIndex();
 		$termIndex->setReadFullEntityIdColumn( true );
+		/** @var TermSqlIndex $termIndex */
 		$termIndex = TestingAccessWrapper::newFromObject( $termIndex );
 
 		$this->assertTrue(

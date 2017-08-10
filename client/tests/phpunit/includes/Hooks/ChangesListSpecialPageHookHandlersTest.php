@@ -2,10 +2,12 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use ChangesListBooleanFilter;
 use ExtensionRegistry;
 use FauxRequest;
 use FormOptions;
 use SpecialPageFactory;
+use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikimedia\Rdbms\IDatabase;
@@ -23,8 +25,15 @@ use Wikimedia\TestingAccessWrapper;
  * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
 class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var ExtensionRegistry
+	 */
 	protected $extensionRegistry;
 
+	/**
+	 * @var array
+	 */
 	protected $oldExtensionRegistryLoaded;
 
 	public function setUp() {
@@ -55,13 +64,13 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			]
 		);
 
-		/** @var \ChangesListSpecialPage $specialPage */
+		/** @var SpecialRecentChanges $specialPage */
 		$specialPage = SpecialPageFactory::getPage( 'Recentchanges' );
 
-		$wrappedSpecialPage = TestingAccessWrapper::newFromObject(
-			$specialPage
-		);
+		/** @var SpecialRecentChanges $wrappedSpecialPage */
+		$wrappedSpecialPage = TestingAccessWrapper::newFromObject( $specialPage );
 
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
@@ -77,11 +86,10 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			$wrappedSpecialPage->filterGroupDefinitions
 		);
 
-		$hookHandler->addFilter(
-			$specialPage
-		);
+		$hookHandler->addFilter( $specialPage );
 
 		$changeType = $specialPage->getFilterGroup( 'changeType' );
+		/** @var ChangesListBooleanFilter $filter */
 		$filter = $changeType->getFilter( 'hideWikibase' );
 
 		// I could do all of getJsData(), but that would make it brittle to
@@ -184,6 +192,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	 * @dataProvider getOptionNameProvider
 	 */
 	public function testGetOptionName( $expected, $pageName ) {
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
@@ -246,6 +255,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		$pageName,
 		$message
 	) {
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
@@ -312,6 +322,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		$expectedToggleDefault,
 		$specialPageName
 	) {
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
@@ -383,6 +394,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		$expectedToggleDefault,
 		$specialPageName
 	) {
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
@@ -441,6 +453,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	 * @dataProvider hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
 	 */
 	public function testHasWikibaseChangesEnabledWhenExternalRecentChangesDisabled( $specialPageName ) {
+		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [ 'usenewrc' => 0 ] ),

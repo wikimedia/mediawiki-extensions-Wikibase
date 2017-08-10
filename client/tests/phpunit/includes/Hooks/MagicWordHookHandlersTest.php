@@ -29,9 +29,8 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'repoSiteName', $siteName );
 
-		$handler = TestingAccessWrapper::newFromObject(
-			new MagicWordHookHandlers( $settings )
-		);
+		/** @var MagicWordHookHandlers $handler */
+		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandlers( $settings ) );
 
 		$actual = $handler->getRepoName(
 			Language::factory( $langCode )
@@ -82,9 +81,8 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'repoSiteName', 'wikibase-client-desc' );
 
-		$handler = TestingAccessWrapper::newFromObject(
-			new MagicWordHookHandlers( $settings )
-		);
+		/** @var MagicWordHookHandlers $handler */
+		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandlers( $settings ) );
 
 		$cache = [];
 		$word = 'wbreponame';
@@ -109,6 +107,7 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$parser->method( 'getTitle' )
 			->willReturn( Title::newMainPage() );
 
+		/** @var MagicWordHookHandlers $handler */
 		$handler = TestingAccessWrapper::newFromObject(
 			new MagicWordHookHandlers( new SettingsArray() )
 		);
