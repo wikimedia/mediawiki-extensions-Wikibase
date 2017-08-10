@@ -160,7 +160,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'dataValues.TimeValue',
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.ExpertExtender.CalendarHint',
 				'jquery.valueview.ExpertExtender.Container',
 				'jquery.valueview.ExpertExtender.Listrotator',
 				'jquery.valueview.ExpertExtender.Preview',

@@ -27,18 +27,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.ExpertExtender.CalendarHint.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'ExpertExtender.CalendarHint.tests.js',
-			),
-			'dependencies' => array(
-				'dataValues.TimeValue',
-				'jquery.valueview.ExpertExtender.CalendarHint',
-				'jquery.valueview.test.testExpertExtenderExtension',
-				'util.HashMessageProvider',
-			),
-		),
-
 		'jquery.valueview.ExpertExtender.Container.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ExpertExtender.Container.tests.js',
