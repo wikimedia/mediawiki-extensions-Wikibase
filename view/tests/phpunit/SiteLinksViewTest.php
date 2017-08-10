@@ -47,7 +47,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
 			. '<GROUP data="wikipedia" class="">'
 			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)'
-			. '(parentheses: (wikibase-sitelinks-counter: 0, 0, , ))</h3>'
+			. '(parentheses: (wikibase-sitelinks-counter: 0))</h3>'
 			. '</GROUP>',
 			$html
 		);
@@ -63,7 +63,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
 			. '<GROUP data="wikipedia" class="">'
 			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)'
-			. '(parentheses: (wikibase-sitelinks-counter: 1, 0, , ))</h3>'
+			. '(parentheses: (wikibase-sitelinks-counter: 1))</h3>'
 			. '<LINK id="enwiki" title="&lt;LANG&gt;">'
 			. 'enwiki: <PAGE href="#enwiki" lang="en" dir="auto">Title</PAGE>'
 			. '</LINK>'
@@ -82,7 +82,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
 			. '<GROUP data="special" class="">'
 			. '<h3 id="sitelinks-special">(wikibase-sitelinks-special)'
-			. '(parentheses: (wikibase-sitelinks-counter: 1, 0, , ))</h3>'
+			. '(parentheses: (wikibase-sitelinks-counter: 1))</h3>'
 			. '<LINK id="specialwiki" title="(wikibase-sitelinks-sitename-specialwiki)">'
 			. 'specialwiki: <PAGE href="#specialwiki" lang="en" dir="auto">Title</PAGE>'
 			. '</LINK>'

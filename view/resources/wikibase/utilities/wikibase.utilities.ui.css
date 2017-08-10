@@ -48,15 +48,7 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 
 /****** /TOGGLE ******/
 
-/****** PENDING-COUNTER: wb.utilities.ui.buildPendingCounter ******/
-
+/* TODO: Legacy name kept for compatibility reasons. It's not "pending" any more. */
 .wb-ui-pendingcounter {
 	white-space: nowrap;
 }
-.wb-ui-pendingcounter span { /* the +1 part in the counter */
-	margin-left: 0.25em;
-	color: #36c;
-	font-weight: bold;
-}
-
-/****** /PENDING-COUNTER ******/

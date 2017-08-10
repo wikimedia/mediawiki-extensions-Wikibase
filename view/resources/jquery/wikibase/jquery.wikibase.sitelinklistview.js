@@ -282,14 +282,11 @@
 				$items = listview.items().filter( function () {
 					var sitelinkview = lia.liInstance( $( this ) );
 					return !sitelinkview.isEmpty();
-				} ),
-				$pendingItems = $items.filter( '.wb-new' );
+				} );
 
-			var $counterMsg = wb.utilities.ui.buildPendingCounter(
-				$items.length - $pendingItems.length,
-				$pendingItems.length,
+			var $counterMsg = wb.utilities.ui.buildCounter(
 				'wikibase-sitelinks-counter',
-				'wikibase-propertyedittool-counter-pending-tooltip'
+				$items.length
 			);
 
 			// Counter result should be wrapped in parentheses, which is another message. Since the
