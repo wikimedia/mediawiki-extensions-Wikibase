@@ -12,6 +12,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\EntityFactory' => __DIR__ . '/includes/EntityFactory.php',
 	'Wikibase\\Formatters\\MonolingualHtmlFormatter' => __DIR__ . '/includes/Formatters/MonolingualHtmlFormatter.php',
 	'Wikibase\\Formatters\\MonolingualTextFormatter' => __DIR__ . '/includes/Formatters/MonolingualTextFormatter.php',
+	'Wikibase\\Formatters\\MonolingualWikitextFormatter' => __DIR__ . '/includes/Formatters/MonolingualWikitextFormatter.php',
 	'Wikibase\\ItemChange' => __DIR__ . '/includes/Changes/ItemChange.php',
 	'Wikibase\\LanguageFallbackChain' => __DIR__ . '/includes/LanguageFallbackChain.php',
 	'Wikibase\\LanguageFallbackChainFactory' => __DIR__ . '/includes/LanguageFallbackChainFactory.php',
