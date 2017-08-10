@@ -3,8 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 
@@ -24,13 +22,13 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider monolingualHtmlFormatProvider
 	 */
-	public function testFormat( $value, $options, $pattern, $not = '' ) {
+	public function testFormat( MonolingualTextValue $value, $pattern, $not = '' ) {
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );
 
-		$formatter = new MonolingualHtmlFormatter( $options, $languageNameLookup );
+		$formatter = new MonolingualHtmlFormatter( $languageNameLookup );
 
 		$text = $formatter->format( $value );
 
@@ -42,18 +40,13 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 	}
 
 	public function monolingualHtmlFormatProvider() {
-		$options = new FormatterOptions();
-		$options->setOption( ValueFormatter::OPT_LANG, 'en' );
-
 		return [
 			'formatting' => [
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				$options,
 				'@^<span lang="de".*?>Hallo Welt<\/span>.*\Deutsch.*$@'
 			],
 			'html/wikitext escaping' => [
 				new MonolingualTextValue( 'de', '[[Hallo&Welt]]' ),
-				$options,
 				'@^<span .*?>(\[\[|&#91;&#91;)Hallo(&amp;|&#38;)Welt(\]\]|&#93;&#93;)<\/span>.*$@'
 			],
 			'evil html' => [
@@ -62,7 +55,6 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 					'Hallo<script>alert(\'gotcha!\')</script>Welt'
 						.'<a href="javascript:alert(\'gotcha!\')">evil</a>'
 				),
-				$options,
 				'@ onclick="alert|<script|<a @',
 				'not'
 			],

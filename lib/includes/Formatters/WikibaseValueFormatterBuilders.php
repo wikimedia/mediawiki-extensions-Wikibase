@@ -20,6 +20,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
+use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\Assert;
 
@@ -385,16 +386,17 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
-	 * @param FormatterOptions $options
 	 *
 	 * @return MonolingualHtmlFormatter
 	 */
-	public function newMonolingualFormatter( $format, FormatterOptions $options ) {
-		// TODO: Add a wikitext formatter that shows the language name
-		if ( $this->isHtmlFormat( $format ) ) {
-			return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
-		} else {
-			return $this->escapeValueFormatter( $format, new MonolingualTextFormatter( $options ) );
+	public function newMonolingualFormatter( $format ) {
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new MonolingualHtmlFormatter( $this->languageNameLookup );
+			case SnakFormatter::FORMAT_WIKI:
+				return new MonolingualWikitextFormatter();
+			default:
+				return new MonolingualTextFormatter();
 		}
 	}
 
