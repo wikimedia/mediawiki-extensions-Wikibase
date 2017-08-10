@@ -211,7 +211,13 @@ end
 
 local function testClaimsNewIndex()
 	local entity = mw.wikibase.getEntityObject( 'Q32487' )
-	entity['claims']['P321'] = ""
+	entity.claims['P321'] = ""
+end
+
+local function testClaimsAccessIndex( propertyId )
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+
+	return entity.claims[propertyId]
 end
 
 
@@ -221,14 +227,18 @@ local tests = {
 	{ name = 'mw.wikibase.entity exists', func = testExists, type='ToString',
 	  expect = { 'table' }
 	},
-	{ name = 'mw.wikibase.testClaimsPairSize', func = testClaimsPairSize,
+	{ name = 'mw.wikibase.entity.claims pair size', func = testClaimsPairSize,
 	  expect = { 1 }
 	},
-	{ name = 'mw.wikibase.testClaimsPairContent', func = testClaimsPairContent,
+	{ name = 'mw.wikibase.claims pair content', func = testClaimsPairContent,
 	  expect = { {P321={}, P4321={}}, }
 	},
-	{ name = 'mw.wikibase.testClaimsNewIndex', func = testClaimsNewIndex,
+	{ name = 'mw.wikibase.claims new index', func = testClaimsNewIndex,
 	  expect = 'Entity cannot be modified'
+	},
+	{ name = 'mw.wikibase.claims access invalid index', func = testClaimsAccessIndex,
+	  args = { 'something' },
+	  expect = { nil }
 	},
 	{ name = 'mw.wikibase.entity.create with empty table', func = testCreate,
 	  args = { {} },
@@ -331,6 +341,14 @@ local tests = {
 	{ name = 'mw.wikibase.entity.getSitelink 3', func = testGetSitelink, type='ToString',
 	  args = { {} },
 	  expect = "bad argument #1 to 'getSitelink' (string, number or nil expected, got table)"
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements bad property id 1', func = testGetBestStatements, type='ToString',
+	  args = { function() end },
+	  expect = "bad argument #1 to 'getBestStatements' (string expected, got function)"
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements bad property id 2', func = testGetBestStatements, type='ToString',
+	  args = { 'P01' },
+	  expect = 'Invalid property id passed to mw.wikibase.entity.getBestStatements: "P01"'
 	},
 	{ name = 'mw.wikibase.entity.getBestStatements 1', func = testGetBestStatements,
 	  args = { 'P321' },
