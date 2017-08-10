@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_6c86febf",
+        "filename": "client/includes/Serializer/ClientSerializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_ecd98e2d",
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0cddfa16",
         "filename": "client/includes/Serializer/ClientStatementListSerializer.php",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_ecb8ae76",
+        "filename": "client/includes/Serializer/ClientStatementListSerializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_0cddfa16",
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_ace386d3",
         "filename": "client/includes/Serializer/ClientStatementListSerializer.php",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2017-08-10T16:36:54Z",
       "side": 1,
       "message": "I think this is not needed here, just for the entity serializer, is it?",
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4c8b02c5",
+        "filename": "client/includes/Serializer/ClientStatementListSerializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_ace386d3",
       "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_acb2a690",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_0c33ba60",
+      "range": {
+        "startLine": 355,
+        "startChar": 49,
+        "endLine": 355,
+        "endChar": 50
+      },
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_ec2f4ef1",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 7
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_27480f60",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_ec2f4ef1",
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_2cd8f621",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 7
@@ -104,6 +200,30 @@
       "writtenOn": "2017-08-10T16:36:54Z",
       "side": 1,
       "message": "Rather use single quotes",
+      "range": {
+        "startLine": 438,
+        "startChar": 49,
+        "endLine": 438,
+        "endChar": 50
+      },
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2ca7964d",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_2cd8f621",
       "range": {
         "startLine": 438,
         "startChar": 49,
@@ -139,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4ca2223d",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_4cd30206",
+      "range": {
+        "startLine": 447,
+        "startChar": 49,
+        "endLine": 447,
+        "endChar": 50
+      },
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_6ccefe60",
         "filename": "client/tests/phpunit/includes/Serializer/ClientStatementListSerializerTest.php",
         "patchSetId": 7
@@ -150,6 +294,24 @@
       "writtenOn": "2017-08-10T16:36:54Z",
       "side": 1,
       "message": "Setting labels/ descriptions/ aliases is not needed… maybe you don\u0027t even need an item, but just a StatementList?",
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e75a07f9",
+        "filename": "client/tests/phpunit/includes/Serializer/ClientStatementListSerializerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-10T17:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_6ccefe60",
       "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
