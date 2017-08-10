@@ -390,11 +390,10 @@ class WikibaseValueFormatterBuilders {
 	 * @return MonolingualHtmlFormatter
 	 */
 	public function newMonolingualFormatter( $format, FormatterOptions $options ) {
-		// TODO: Add a wikitext formatter that shows the language name
-		if ( $this->isHtmlFormat( $format ) ) {
-			return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
+		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
+			return new MonolingualTextFormatter( $options );
 		} else {
-			return $this->escapeValueFormatter( $format, new MonolingualTextFormatter( $options ) );
+			return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
 		}
 	}
 
