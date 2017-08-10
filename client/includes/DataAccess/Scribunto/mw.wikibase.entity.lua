@@ -39,20 +39,25 @@ local maskClaimsTable = function( entity )
 	entity.claims = {}
 
 	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( emptyTable, propertyID )
-		php.addStatementUsage(entity.id, propertyID)
-		return actualEntityClaims[propertyID]
+	pseudoClaimsMetatable.__index = function( emptyTable, propertyId )
+		if not propertyId:match( '^P[1-9]%d+$' ) then
+			-- Don't even attempt to track the usage if we don't have a valid property id.
+			return actualEntityClaims[propertyId]
+		end
+
+		php.addStatementUsage(entity.id, propertyId)
+		return actualEntityClaims[propertyId]
 	end
 
-	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyID, data )
+	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data )
 		error( 'Entity cannot be modified' )
 	end
 
-	local logNext = function( emptyTable, propertyID )
-		if propertyID ~= nil then
-			php.addStatementUsage(entity.id, propertyID)
+	local logNext = function( emptyTable, propertyId )
+		if propertyId ~= nil then
+			php.addStatementUsage( entity.id, propertyId )
 		end
-		return next( actualEntityClaims, propertyID )
+		return next( actualEntityClaims, propertyId )
 	end
 
 	pseudoClaimsMetatable.__pairs = function( emptyTable )
@@ -187,6 +192,12 @@ end
 --
 -- @param {string} propertyId
 methodtable.getBestStatements = function( entity, propertyId )
+	checkType( 'getBestStatements', 1, propertyId, 'string' )
+
+	if not propertyId:match( '^P[1-9]%d+$' ) then
+		error( 'Invalid property id passed to mw.wikibase.entity.getBestStatements: "' .. propertyId .. '"' )
+	end
+
 	if entity.claims == nil or not entity.claims[propertyId] then
 		return {}
 	end
@@ -240,7 +251,7 @@ local formatValuesByPropertyId = function( entity, phpFormatterFunction, propert
 	)
 
 	local label
-	if propertyLabelOrId:match( '^P%d+$' ) then
+	if propertyLabelOrId:match( '^P[1-9]%d+$' ) then
 		label = mw.wikibase.label( propertyLabelOrId )
 	end
 
