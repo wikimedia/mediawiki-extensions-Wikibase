@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_a7807f4c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-10T17:37:46Z",
+      "side": 1,
+      "message": "This mus be a * now.\n\nSome below two more times.",
+      "range": {
+        "startLine": 43,
+        "startChar": 37,
+        "endLine": 43,
+        "endChar": 38
+      },
+      "revId": "5e93aa04718bfcdbb7ba56ce8d923edfa007f86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a7f71ff1",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-10T17:37:46Z",
+      "side": 1,
+      "message": "I would have wrapped the tracking in the condition, and not duplicated this. Matter of taste, but I find the current way you do this here a little confusing.",
+      "range": {
+        "startLine": 45,
+        "startChar": 3,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "5e93aa04718bfcdbb7ba56ce8d923edfa007f86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8796a395",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-10T17:37:46Z",
+      "side": 1,
+      "message": "This is now repeated 3 times. Looks like this can be wrapped in a private \"isPropertyId\" function.",
+      "range": {
+        "startLine": 254,
+        "startChar": 21,
+        "endLine": 254,
+        "endChar": 44
+      },
+      "revId": "5e93aa04718bfcdbb7ba56ce8d923edfa007f86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
