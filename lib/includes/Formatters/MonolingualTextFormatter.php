@@ -13,6 +13,13 @@ use ValueFormatters\ValueFormatterBase;
 class MonolingualTextFormatter extends ValueFormatterBase {
 
 	/**
+	 * Intentional override because this formatter does not consume any options.
+	 */
+	public function __construct() {
+		parent::__construct();
+	}
+
+	/**
 	 * @see ValueFormatter::format
 	 *
 	 * @param MonolingualTextValue $value

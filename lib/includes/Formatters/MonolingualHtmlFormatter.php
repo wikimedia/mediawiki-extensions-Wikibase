@@ -4,7 +4,6 @@ namespace Wikibase\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 use Wikibase\Lib\LanguageNameLookup;
 
@@ -20,11 +19,10 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 	private $languageNameLookup;
 
 	/**
-	 * @param FormatterOptions|null $options
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
-	public function __construct( FormatterOptions $options = null, LanguageNameLookup $languageNameLookup ) {
-		parent::__construct( $options );
+	public function __construct( LanguageNameLookup $languageNameLookup ) {
+		parent::__construct();
 
 		$this->languageNameLookup = $languageNameLookup;
 	}
