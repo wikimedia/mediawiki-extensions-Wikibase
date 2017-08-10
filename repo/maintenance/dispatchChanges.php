@@ -10,6 +10,7 @@ use MWException;
 use MWExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\Store\ChunkCache;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
