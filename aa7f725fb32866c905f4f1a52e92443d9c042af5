@@ -53,6 +53,46 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_0c33ba60",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T16:39:34Z",
+      "side": 1,
+      "message": "should use single quotes",
+      "range": {
+        "startLine": 355,
+        "startChar": 49,
+        "endLine": 355,
+        "endChar": 50
+      },
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ec2f4ef1",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-10T16:39:34Z",
+      "side": 1,
+      "message": "This should also make sure the correct usages have been added.",
+      "revId": "aa7f725fb32866c905f4f1a52e92443d9c042af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_2cd8f621",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 7
