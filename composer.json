@@ -75,6 +75,9 @@
 			"Wikibase\\View\\Tests\\": "view/tests/phpunit"
 		}
 	},
+	"extra": {
+		"phan-version": "0.8.5"
+	},
 	"scripts": {
 		"fix": "phpcbf",
 		"test": [
