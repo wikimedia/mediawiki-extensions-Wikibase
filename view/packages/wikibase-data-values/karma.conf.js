@@ -7,7 +7,6 @@ module.exports = function ( config ) {
 			'lib/util/util.inherit.js',
 			'lib/globeCoordinate/globeCoordinate.js',
 			'lib/globeCoordinate/globeCoordinate.GlobeCoordinate.js',
-			'lib/globeCoordinate/globeCoordinate.Formatter.js',
 			'src/dataValues.js',
 			'src/DataValue.js',
 			'src/values/*.js',

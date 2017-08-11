@@ -8,6 +8,8 @@ It contains various JavaScript related to the DataValues library.
 ## Release notes
 
 ### 1.0.0 (dev)
+* Removed `globeCoordinate.Formatter`.
+* Removed the `globeCoordinate` utility class.
 * The library is now a pure JavaScript library.
 * Removed MediaWiki ResourceLoader module definitions.
 
