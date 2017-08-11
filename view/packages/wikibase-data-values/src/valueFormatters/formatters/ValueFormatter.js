@@ -17,6 +17,9 @@ var SELF = vf.ValueFormatter = function VpValueFormatter( options ) {
 	this._options = $.extend( {}, options || {} );
 };
 
+/**
+ * @class valueFormatters.ValueFormatter
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * Formatter options.

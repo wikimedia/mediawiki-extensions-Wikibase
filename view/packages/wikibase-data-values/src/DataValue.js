@@ -28,6 +28,9 @@ var SELF = dv.DataValue = function DvDataValue() {
  */
 SELF.TYPE = null;
 
+/**
+ * @class dataValues.DataValue
+ */
 $.extend( SELF.prototype, {
 
 	/**

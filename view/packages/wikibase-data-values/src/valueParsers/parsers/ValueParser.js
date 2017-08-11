@@ -17,6 +17,9 @@ var SELF = vp.ValueParser = function VpValueParser( options ) {
 	this._options = $.extend( {}, options || {} );
 };
 
+/**
+ * @class valueParsers.ValueParser
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * Parser options.
