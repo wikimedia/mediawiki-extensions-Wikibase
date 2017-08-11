@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_a3870565",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T21:52:27Z",
+      "side": 1,
+      "message": "Ok with me. Done.",
+      "parentUuid": "4e7eab26_285a1f86",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 41
+      },
+      "revId": "d1bc14cf9dbc3365dcd41e8a00641df258318f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_68e26702",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 5
