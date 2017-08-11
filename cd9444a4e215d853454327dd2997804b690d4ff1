@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_17bada1e",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "could just be \"return {}\" here",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b7874665",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "could just be \"return statements[propertyId]\" here",
+      "range": {
+        "startLine": 154,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 15
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b7a0a6f2",
+        "filename": "client/includes/Serializer/ClientSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "Has been removed",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_7781de4e",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "Using numbers here is discouraged, rather just pass in a PropertyId object or at least \"P65\".",
+      "range": {
+        "startLine": 336,
+        "startChar": 33,
+        "endLine": 336,
+        "endChar": 35
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f7be2e12",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "This seems overly complex, yet it is not testing for the other usage to get registered. How about:\n\n$this-\u003eassertEquals( [ \u0027Q123099#S.P65\u0027, \u0027Q123099#O\u0027 ], array_keys( $usages-\u003egetUsages() );",
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d7a3f2fb",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "Rather use single quotes",
+      "range": {
+        "startLine": 450,
+        "startChar": 60,
+        "endLine": 450,
+        "endChar": 61
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_57b0623e",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-11T05:20:06Z",
+      "side": 1,
+      "message": "Rather use single quotes",
+      "range": {
+        "startLine": 459,
+        "startChar": 60,
+        "endLine": 459,
+        "endChar": 61
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
