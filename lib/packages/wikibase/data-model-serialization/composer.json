@@ -47,10 +47,7 @@
 	"autoload": {
 		"psr-4": {
 			"Wikibase\\DataModel\\": "src/"
-		},
-		"files" : [
-			"mediawiki.php"
-		]
+		}
 	},
 	"extra": {
 		"branch-alias": {
