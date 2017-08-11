@@ -95,7 +95,6 @@ class WikibaseSnakFormatterBuilders {
 		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
 			return new PropertyValueSnakFormatter(
 				$format,
-				$options,
 				$this->valueFormatterBuilders->newStringFormatter( $format, $options ),
 				$this->dataTypeLookup,
 				$this->dataTypeFactory

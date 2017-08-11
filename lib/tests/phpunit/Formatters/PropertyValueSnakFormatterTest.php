@@ -113,13 +113,8 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		$typeLookup = $this->getMockDataTypeLookup( $dataType );
 		$typeFactory = $this->getMockDataTypeFactory( $dataType, $valueType );
 
-		$options = new FormatterOptions( [
-			PropertyValueSnakFormatter::OPT_LANG => 'en',
-		] );
-
 		$formatter = new PropertyValueSnakFormatter(
 			$targetFormat,
-			$options,
 			$formatter,
 			$typeLookup,
 			$typeFactory
@@ -237,9 +232,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 		$valueFormatter = new DispatchingValueFormatter( [] );
 
-		$options = new FormatterOptions( [] );
-
-		$formatter = new PropertyValueSnakFormatter( $format, $options, $valueFormatter, $typeLookup, $typeFactory );
+		$formatter = new PropertyValueSnakFormatter( $format, $valueFormatter, $typeLookup, $typeFactory );
 		return $formatter;
 	}
 

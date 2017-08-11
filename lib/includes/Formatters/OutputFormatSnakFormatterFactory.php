@@ -100,7 +100,6 @@ class OutputFormatSnakFormatterFactory {
 		$valueFormatter = $this->valueFormatterFactory->getValueFormatter( $format, $options );
 		$valueSnakFormatter = new PropertyValueSnakFormatter(
 			$format,
-			$options,
 			$valueFormatter,
 			$this->propertyDataTypeLookup,
 			$this->dataTypeFactory

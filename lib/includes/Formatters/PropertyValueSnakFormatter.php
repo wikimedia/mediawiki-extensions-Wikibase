@@ -6,10 +6,8 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
-use Message;
 use OutOfBoundsException;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -33,11 +31,6 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	private $format;
 
 	/**
-	 * @var FormatterOptions
-	 */
-	private $options;
-
-	/**
 	 * @var ValueFormatter
 	 */
 	private $valueFormatter;
@@ -55,7 +48,6 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	/**
 	 * @param string $format The name of this formatter's output format.
 	 *        Use the FORMAT_XXX constants defined in SnakFormatter.
-	 * @param FormatterOptions|null $options
 	 * @param ValueFormatter $valueFormatter
 	 * @param PropertyDataTypeLookup $typeLookup
 	 * @param DataTypeFactory $dataTypeFactory
@@ -64,7 +56,6 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 */
 	public function __construct(
 		$format,
-		FormatterOptions $options = null,
 		ValueFormatter $valueFormatter,
 		PropertyDataTypeLookup $typeLookup,
 		DataTypeFactory $dataTypeFactory
@@ -74,7 +65,6 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 		}
 
 		$this->format = $format;
-		$this->options = $options ?: new FormatterOptions();
 		$this->valueFormatter = $valueFormatter;
 		$this->typeLookup = $typeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -100,7 +90,6 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 			throw new InvalidArgumentException( "Not a PropertyValueSnak: " . get_class( $snak ) );
 		}
 
-		$propertyType = null;
 		$value = $snak->getDataValue();
 
 		try {
@@ -112,46 +101,17 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 			throw new FormattingException( $ex->getMessage(), 0, $ex );
 		}
 
-		$this->checkValueType( $value, $expectedDataValueType );
-
-		return $this->formatValue( $value, $propertyType );
-	}
-
-	/**
-	 * @param DataValue $value
-	 *
-	 * @return boolean
-	 */
-	private function isUnDeserializableValue( DataValue $value ) {
-		return $value->getType() === UnDeserializableValue::getType();
-	}
-
-	/**
-	 * @param DataValue $value
-	 * @param string $expectedDataValueType
-	 *
-	 * @throws PropertyDataTypeLookupException
-	 * @throws MismatchingDataValueTypeException
-	 * @return Message|null
-	 */
-	private function checkValueType( DataValue $value, $expectedDataValueType ) {
-		$warning = null;
-
-		if ( $this->isUnDeserializableValue( $value ) ) {
+		if ( $expectedDataValueType !== $value->getType() ) {
 			throw new MismatchingDataValueTypeException(
 				$expectedDataValueType,
 				$value->getType(),
-				'Encountered undeserializable value'
-			);
-		} elseif ( $expectedDataValueType !== $value->getType() ) {
-			throw new MismatchingDataValueTypeException(
-				$expectedDataValueType,
-				$value->getType(),
-				'The DataValue\'s type mismatches the property\'s DataType.'
+				$value instanceof UnDeserializableValue
+					? 'Encountered undeserializable value'
+					: 'The DataValue\'s type mismatches the property\'s DataType.'
 			);
 		}
 
-		return $warning;
+		return $this->formatValue( $value, $propertyType );
 	}
 
 	/**
@@ -170,24 +130,22 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * Calls the TypedValueFormatter passed to the constructor.
 	 *
 	 * @param DataValue $value
-	 * @param string|null $dataTypeId
+	 * @param string $dataTypeId
 	 *
 	 * @throws FormattingException
 	 * @return string Either plain text, wikitext or HTML, depending on the ValueFormatter
 	 *  provided.
 	 */
-	private function formatValue( DataValue $value, $dataTypeId = null ) {
-		if ( !$this->isUnDeserializableValue( $value ) ) {
-			if ( $this->valueFormatter instanceof TypedValueFormatter ) {
-				$text = $this->valueFormatter->formatValue( $value, $dataTypeId );
-			} else {
-				$text = $this->valueFormatter->format( $value );
-			}
-		} else {
-			$text = '';
+	private function formatValue( DataValue $value, $dataTypeId ) {
+		if ( $value instanceof UnDeserializableValue ) {
+			return '';
 		}
 
-		return $text;
+		if ( $this->valueFormatter instanceof TypedValueFormatter ) {
+			return $this->valueFormatter->formatValue( $value, $dataTypeId );
+		} else {
+			return $this->valueFormatter->format( $value );
+		}
 	}
 
 	/**
