@@ -1,0 +1,19 @@
+{
+	"name": "DataValuesJavaScript",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wmde/DataValuesJavaScript"
+	},
+	"license": "GPL-2.0+",
+	"dependencies": {
+		"jquery": "^3.2.1"
+	},
+	"devDependencies": {
+		"eslint": "^3.19.0",
+		"eslint-config-wikimedia": "0.4.0"
+	},
+	"scripts": {
+		"test": "npm run eslint",
+		"eslint": "eslint ."
+	}
+}
