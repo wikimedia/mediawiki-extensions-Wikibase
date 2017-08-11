@@ -32,6 +32,9 @@ var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId ) {
  */
 SELF.TYPE = null;
 
+/**
+ * @class wikibase.datamodel.Snak
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {string}

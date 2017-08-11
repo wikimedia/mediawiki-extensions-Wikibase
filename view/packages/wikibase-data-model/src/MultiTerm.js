@@ -18,6 +18,9 @@ var SELF = wb.datamodel.MultiTerm = function WbDataModelMultiTerm( languageCode,
 	this.setTexts( texts );
 };
 
+/**
+ * @class wikibase.datamodel.MultiTerm
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {string}

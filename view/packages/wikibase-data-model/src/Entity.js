@@ -24,6 +24,9 @@ var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
  */
 SELF.TYPE = null;
 
+/**
+ * @class wikibase.datamodel.Entity
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {string}

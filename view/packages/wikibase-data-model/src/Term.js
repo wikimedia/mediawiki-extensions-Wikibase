@@ -18,6 +18,9 @@ var SELF = wb.datamodel.Term = function WbDataModelTerm( languageCode, text ) {
 	this.setText( text );
 };
 
+/**
+ * @class wikibase.datamodel.Term
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {string}
