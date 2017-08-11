@@ -2,19 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-define( [
-	'valueParsers/valueParsers',
-	'dataValues/dataValues',
-	'jquery',
-	'qunit',
-	'values/NumberValue',
-	'values/StringValue',
-	'values/UnknownValue',
-	'parsers/NullParser',
-	'parsers/StringParser',
-	'valueParsers/ValueParserStore',
-	'qunit.parameterize'
-], function( vp, dv, $, QUnit ) {
+( function( vp, dv, $, QUnit ) {
 	'use strict';
 
 	var DataTypeMock = function( dataTypeId, DataValue ) {
@@ -260,13 +248,14 @@ define( [
 		} );
 	}
 
-	QUnit
-	.cases( valueParserStoreRegistrationTestCases )
-		.test(
-			'registerDataTypeParser() / registerDataValueParser() & getParser() ',
-			function( params, assert ) {
+	QUnit.test(
+		'registerDataTypeParser() / registerDataValueParser() & getParser(): ',
+		function( assert ) {
+			for ( var i = 0; i < valueParserStoreRegistrationTestCases.length; i++ ) {
+				var params = valueParserStoreRegistrationTestCases[ i ];
 				valueParserStoreRegistrationTest( assert, params.register, params.expect );
 			}
-		);
+		}
+	);
 
-} );
+}( valueParsers, dataValues, jQuery, QUnit ) );

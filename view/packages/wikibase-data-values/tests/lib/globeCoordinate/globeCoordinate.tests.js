@@ -2,11 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-define( [
-	'globeCoordinate/globeCoordinate',
-	'jquery',
-	'qunit'
-], function( globeCoordinate, $, QUnit ) {
+( function( globeCoordinate, $, QUnit ) {
 	'use strict';
 
 	/**
@@ -213,4 +209,4 @@ define( [
 
 	} );
 
-} );
+}( globeCoordinate, jQuery, QUnit ) );

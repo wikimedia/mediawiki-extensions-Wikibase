@@ -2,12 +2,7 @@
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'jquery',
-	'qunit'
-], function( dv, util, $, QUnit ) {
+( function( dv, util, $, QUnit ) {
 	'use strict';
 
 	dv.tests = {};
@@ -274,4 +269,4 @@ define( [
 		};
 	};
 
-} );
+}( dataValues, util, jQuery, QUnit ) );

@@ -2,14 +2,7 @@
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-define( [
-	'valueParsers/valueParsers',
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'parsers/BoolParser',
-	'tests/src/valueParsers/valueParsers.tests',
-	'values/BoolValue'
-], function( vp, dv, util ) {
+( function( vp, dv, util ) {
 	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest;
@@ -63,4 +56,4 @@ define( [
 
 	test.runTests( 'valueParsers.BoolParser' );
 
-} );
+}( valueParsers, dataValues, util ) );

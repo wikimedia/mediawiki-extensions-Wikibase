@@ -88,12 +88,7 @@
 		 */
 		testFormat: function( assert ) {
 			var formatArguments = this.getFormatArguments(),
-				formatter = this.getInstance(),
-				requests = [];
-
-			// Prevent continuing with subsequent tests until all formatter procedures have
-			// finished:
-			QUnit.stop();
+				formatter = this.getInstance();
 
 			$.each( formatArguments, function( i, args ) {
 				var formatInput = args[0],
@@ -103,7 +98,8 @@
 					inputDetailMsg = typeof formatInput === 'string'
 						? 'for input "' + formatInput + '" '
 						: '',
-					request;
+					request,
+					done = assert.async();
 
 				if( $.isArray( expected ) ) {
 					expectedValue = expected[0];
@@ -112,7 +108,7 @@
 					expectedDataValue = formatInput;
 				}
 
-				request = formatter.format( formatInput )
+				formatter.format( formatInput )
 				.done( function( formattedValue, dataValue ) {
 					assert.ok( true, 'Formatting succeeded.' );
 
@@ -149,14 +145,8 @@
 					);
 				} );
 
-				requests.push( request );
+				done();
 			} );
-
-			// Only continue with next test after all formatter procedures are finished:
-			$.when.apply( null, requests ).always( function() {
-				QUnit.start();
-			} );
-
 		}
 
 	};

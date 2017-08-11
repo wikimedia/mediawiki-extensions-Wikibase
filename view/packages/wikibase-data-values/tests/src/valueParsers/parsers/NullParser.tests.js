@@ -2,19 +2,10 @@
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-define( [
-	'valueParsers/valueParsers',
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'parsers/NullParser',
-	'tests/src/valueParsers/valueParsers.tests',
-	'values/UnknownValue'
-], function( vp, dv, util ) {
+( function( vp, dv, util ) {
 	'use strict';
 
-	var PARENT = vp.tests.ValueParserTest,
-		constructor = function() {
-		};
+	var PARENT = vp.tests.ValueParserTest;
 
 	/**
 	 * Constructor for creating a test object holding tests for the NullParser.
@@ -23,7 +14,7 @@ define( [
 	 * @extends dv.tests.ValueParserTest
 	 * @since 0.1
 	 */
-	vp.tests.NullParserTest = util.inherit( PARENT, constructor, {
+	vp.tests.NullParserTest = util.inherit( PARENT, {
 
 		/**
 		 * @inheritdoc
@@ -56,4 +47,4 @@ define( [
 
 	test.runTests( 'valueParsers.NullParser' );
 
-} );
+}( valueParsers, dataValues, util ) );

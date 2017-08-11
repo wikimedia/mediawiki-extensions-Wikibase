@@ -2,12 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < danweetz@web.de >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'tests/src/dataValues.DataValue.tests',
-	'values/NumberValue'
-], function( dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -47,4 +42,4 @@ define( [
 
 	test.runTests( 'dataValues.NumberValue' );
 
-} );
+}( dataValues, util ) );

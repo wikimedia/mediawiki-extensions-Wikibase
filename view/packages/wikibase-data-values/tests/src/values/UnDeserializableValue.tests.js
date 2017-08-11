@@ -2,13 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'jquery',
-	'tests/src/dataValues.DataValue.tests',
-	'values/UnDeserializableValue'
-], function( dv, util, $ ) {
+( function( dv, util, $ ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -79,4 +73,4 @@ define( [
 
 	test.runTests( 'dataValues.UnDeserializableValue' );
 
-} );
+}( dataValues, util, jQuery ) );

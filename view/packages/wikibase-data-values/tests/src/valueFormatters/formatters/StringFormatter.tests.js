@@ -2,14 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-define( [
-	'valueFormatters/valueFormatters',
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'tests/src/valueFormatters/valueFormatters.tests',
-	'formatters/StringFormatter',
-	'values/StringValue'
-], function( vf, dv, util ) {
+( function( vf, dv, util ) {
 	'use strict';
 
 	var PARENT = vf.tests.ValueFormatterTest;
@@ -48,4 +41,4 @@ define( [
 
 	test.runTests( 'valueFormatters.StringFormatter' );
 
-} );
+}( valueFormatters, dataValues, util ) );

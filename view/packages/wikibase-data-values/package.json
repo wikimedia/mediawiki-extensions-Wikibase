@@ -10,10 +10,16 @@
 	},
 	"devDependencies": {
 		"eslint": "^3.19.0",
-		"eslint-config-wikimedia": "0.4.0"
+		"eslint-config-wikimedia": "0.4.0",
+		"karma": "^1.7.0",
+		"karma-cli": "^1.0.1",
+		"karma-phantomjs-launcher": "^1.0.4",
+		"karma-qunit": "^1.2.1",
+		"qunitjs": "^2.3.2"
 	},
 	"scripts": {
-		"test": "npm run eslint",
-		"eslint": "eslint ."
+		"test": "npm run eslint && npm run run-tests",
+		"eslint": "eslint .",
+		"run-tests": "karma start --single-run"
 	}
 }

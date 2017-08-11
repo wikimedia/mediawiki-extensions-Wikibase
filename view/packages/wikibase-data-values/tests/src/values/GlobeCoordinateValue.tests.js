@@ -2,13 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'globeCoordinate/globeCoordinate.GlobeCoordinate',
-	'tests/src/dataValues.DataValue.tests',
-	'values/GlobeCoordinateValue'
-], function( dv, util, GlobeCoordinate ) {
+( function( dv, util, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -45,4 +39,4 @@ define( [
 
 	test.runTests( 'dataValues.GlobeCoordinateValue' );
 
-} );
+}( dataValues, util, globeCoordinate.GlobeCoordinate ) );
