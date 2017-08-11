@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_43de6171",
+        "filename": "lib/includes/Formatters/MonolingualWikitextFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-11T22:24:50Z",
+      "side": 1,
+      "message": "I just realized that all I need to do is to get rid of this. All the base class does has to do with options. If no options are needed, this base class is not needed. I will fix this.",
+      "range": {
+        "startLine": 13,
+        "startChar": 57,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "e39f136c9376b583f30ab1ba77e32a4b51557be0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
