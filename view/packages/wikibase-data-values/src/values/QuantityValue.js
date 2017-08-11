@@ -74,15 +74,6 @@ var SELF
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {string}
-	 */
-	getSortKey: function() {
-		return this._amount.getValue();
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {dataValues.QuantityValue}
 	 */
 	getValue: function() {

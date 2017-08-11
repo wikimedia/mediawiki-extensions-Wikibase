@@ -120,16 +120,6 @@
 		},
 
 		/**
-		 * Returns a coordinate's ISO 6709 string representation.
-		 * (see globeCoordinate.iso6709)
-		 *
-		 * @return {string}
-		 */
-		iso6709: function() {
-			return globeCoordinate.iso6709( this.getDecimal() );
-		},
-
-		/**
 		 * Compares the object to another GlobeCoordinate object and returns whether both represent
 		 * the same information.
 		 *

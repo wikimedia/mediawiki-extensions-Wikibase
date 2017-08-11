@@ -60,15 +60,6 @@ var SELF = dv.UnDeserializableValue = util.inherit(
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {string}
-	 */
-	getSortKey: function() {
-		return this.getReason();
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {dataValues.UnDeserializableValue}
 	 */
 	getValue: function() {

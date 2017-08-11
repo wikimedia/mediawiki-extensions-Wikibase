@@ -32,15 +32,6 @@ var SELF = dv.BoolValue = util.inherit( 'DvBoolValue', PARENT, function( value )
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {number}
-	 */
-	getSortKey: function() {
-		return this._value ? 1 : 0;
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {boolean}
 	 */
 	getValue: function() {

@@ -27,15 +27,6 @@ var SELF = dv.UnknownValue = util.inherit( 'DvUnknownValue', PARENT, function( v
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {number}
-	 */
-	getSortKey: function() {
-		return 0;
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {*}
 	 */
 	getValue: function() {

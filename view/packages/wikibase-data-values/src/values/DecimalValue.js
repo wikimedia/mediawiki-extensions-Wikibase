@@ -124,15 +124,6 @@ var SELF = dv.DecimalValue = util.inherit( 'DvDecimalValue', PARENT, function( v
 	 *
 	 * @return {string}
 	 */
-	getSortKey: function() {
-		return this._value;
-	},
-
-	/**
-	 * @inheritdoc
-	 *
-	 * @return {string}
-	 */
 	getValue: function() {
 		return this._value;
 	},

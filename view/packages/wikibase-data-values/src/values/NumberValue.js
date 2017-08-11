@@ -30,15 +30,6 @@ var SELF = dv.NumberValue = util.inherit( 'DvNumberValue', PARENT, function( val
 	 *
 	 * @return {number}
 	 */
-	getSortKey: function() {
-		return this._value;
-	},
-
-	/**
-	 * @inheritdoc
-	 *
-	 * @return {number}
-	 */
 	getValue: function() {
 		return this._value;
 	},

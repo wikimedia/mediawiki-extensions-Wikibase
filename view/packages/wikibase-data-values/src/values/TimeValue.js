@@ -133,17 +133,6 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {string}
-	 */
-	getSortKey: function() {
-		return this.timestamp.replace( /^([+-])(\d+)/, function ( $0, sign, year ) {
-			return sign + pad( year, 16 );
-		} );
-	},
-
-	/**
-	 * @inheritdoc
-	 *
 	 * @return {Object}
 	 */
 	getValue: function() {
