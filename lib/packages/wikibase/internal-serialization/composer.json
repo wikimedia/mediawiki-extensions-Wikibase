@@ -40,10 +40,7 @@
 	"autoload": {
 		"psr-4": {
 			"Wikibase\\InternalSerialization\\": "src/"
-		},
-		"files" : [
-			"mediawiki.php"
-		]
+		}
 	},
 	"extra": {
 		"branch-alias": {
