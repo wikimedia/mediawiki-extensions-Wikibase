@@ -183,9 +183,47 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFullEntityGetEntityResponse() {
-		$item = new Item( new ItemId( 'Q123098' ) );
+		$item = $this->getItemWithStatements();
 
-		//Basic
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$entityAccessor = $this->getEntityAccessor( $entityLookup, null, 'qug' );
+
+		$this->assertEquals(
+			$this->getItemWithStatementsClientSerialization(),
+			$entityAccessor->getEntity( $item->getId()->getSerialization() )
+		);
+	}
+
+	public function testGetEntityStatement() {
+		$item = $this->getItemWithStatements();
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$usages = new HashUsageAccumulator();
+		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages );
+		$actual = $entityAccessor->getEntityStatement( 'Q123099', 'P65' );
+
+		$expected = $this->getItemWithStatementsClaimClientSerialization();
+		$this->assertSameSize( $expected, $actual );
+		$this->assertEquals( $expected, $actual );
+
+		$this->assertEquals( [ 'Q123099#C.P65', 'Q123099#O' ], array_keys( $usages->getUsages() ) );
+		$this->assertFalse(
+			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
+		);
+	}
+
+	/**
+	 * @return Item
+	 */
+	private function getItemWithStatements() {
+		$p65 = new PropertyId( 'P65' );
+		$p68 = new PropertyId( 'P68' );
+
+		$item = new Item( new ItemId( 'Q123099' ) );
 		$item->setLabel( 'de', 'foo-de' );
 		$item->setLabel( 'qu', 'foo-qu' );
 		$item->setAliases( 'en', [ 'bar', 'baz' ] );
@@ -195,28 +233,27 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q333' ) ] );
 		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
 
-		$snak = new PropertyValueSnak( 65, new StringValue( 'snakStringValue' ) );
+		$snak = new PropertyValueSnak( $p65, new StringValue( 'snakStringValue' ) );
 
 		$qualifiers = new SnakList();
-		$qualifiers->addSnak( new PropertyValueSnak( 65, new StringValue( 'string!' ) ) );
-		$qualifiers->addSnak( new PropertySomeValueSnak( 65 ) );
+		$qualifiers->addSnak( new PropertyValueSnak( $p65, new StringValue( 'string!' ) ) );
+		$qualifiers->addSnak( new PropertySomeValueSnak( $p65 ) );
 
 		$references = new ReferenceList();
 		$references->addNewReference( [
-			new PropertySomeValueSnak( 65 ),
-			new PropertySomeValueSnak( 68 )
+			new PropertySomeValueSnak( $p65 ),
+			new PropertySomeValueSnak( $p68 )
 		] );
 
 		$guid = 'imaguid';
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
+		return $item;
+	}
 
-		$entityAccessor = $this->getEntityAccessor( $entityLookup, null, 'qug' );
-
-		$expected = [
-			'id' => 'Q123098',
+	private function getItemWithStatementsClientSerialization() {
+		return [
+			'id' => 'Q123099',
 			'type' => 'item',
 			'labels' => [
 				'de' => [
@@ -242,72 +279,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 					],
 				],
 			],
-			'claims' => [
-				'P65' => [
-					1 => [
-						'id' => 'imaguid',
-						'type' => 'statement',
-						'mainsnak' => [
-							'snaktype' => 'value',
-							'property' => 'P65',
-							'datatype' => 'structured-cat',
-							'datavalue' => [
-								'value' => 'snakStringValue',
-								'type' => 'string',
-							],
-						],
-						'qualifiers' => [
-							'P65' => [
-								1 => [
-									'hash' => '3ea0f5404dd4e631780b3386d17a15a583e499a6',
-									'snaktype' => 'value',
-									'property' => 'P65',
-									'datavalue' => [
-										'value' => 'string!',
-										'type' => 'string',
-									],
-									'datatype' => 'structured-cat',
-								],
-								2 => [
-									'hash' => 'aa9a5f05e20d7fa5cda7d98371e44c0bdd5de35e',
-									'snaktype' => 'somevalue',
-									'property' => 'P65',
-									'datatype' => 'structured-cat',
-								],
-							],
-						],
-						'rank' => 'normal',
-						'qualifiers-order' => [
-							1 => 'P65'
-						],
-						'references' => [
-							1 => [
-								'hash' => '8445204eb74e636cb53687e2f947c268d5186075',
-								'snaks' => [
-									'P65' => [
-										1 => [
-											'snaktype' => 'somevalue',
-											'property' => 'P65',
-											'datatype' => 'structured-cat',
-										]
-									],
-									'P68' => [
-										1 => [
-											'snaktype' => 'somevalue',
-											'property' => 'P68',
-											'datatype' => 'structured-cat',
-										]
-									],
-								],
-								'snaks-order' => [
-									1 => 'P65',
-									2 => 'P68'
-								],
-							],
-						],
-					],
-				],
-			],
+			'claims' => $this->getItemWithStatementsClaimClientSerialization(),
 			'sitelinks' => [
 				'enwiki' => [
 					'site' => 'enwiki',
@@ -322,117 +294,73 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			],
 			'schemaVersion' => 2,
 		];
-
-		$this->assertEquals( $expected, $entityAccessor->getEntity( 'Q123098' ) );
 	}
 
-	/**
-	 * @dataProvider getEntityStatementProvider
-	 */
-	public function testGetEntityStatement( array $expected ) {
-		$qid = 'Q123099';
-		$pid = 'P65';
-		$item = new Item( new ItemId( $qid ) );
-		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
-
-		$qualifiers = new SnakList();
-		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( $pid ), new StringValue( 'string!' ) ) );
-		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( $pid ) ) );
-
-		$references = new ReferenceList();
-		$references->addNewReference( [
-			new PropertySomeValueSnak( new PropertyId( 'P65' ) ),
-			new PropertySomeValueSnak( new PropertyId( 'P68' ) )
-		] );
-
-		$guid = 'imaguid';
-		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
-
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
-
-		$usages = new HashUsageAccumulator();
-		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages );
-		$actual = $entityAccessor->getEntityStatement( 'Q123099', $pid );
-
-		$this->assertSameSize( $expected, $actual );
-		$this->assertEquals( $expected, $actual );
-
-		$this->assertEquals( [ 'Q123099#C.P65', 'Q123099#O' ], array_keys( $usages->getUsages() ) );
-		$this->assertFalse(
-			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
-		);
-	}
-
-	public function getEntityStatementProvider() {
+	private function getItemWithStatementsClaimClientSerialization() {
 		return [
-			[
-				[
-					'P65' => [
-						1 => [
-							'id' => 'imaguid',
-							'type' => 'statement',
-							'mainsnak' => [
+			'P65' => [
+				1 => [
+					'id' => 'imaguid',
+					'type' => 'statement',
+					'mainsnak' => [
+						'snaktype' => 'value',
+						'property' => 'P65',
+						'datatype' => 'structured-cat',
+						'datavalue' => [
+							'value' => 'snakStringValue',
+							'type' => 'string',
+						],
+					],
+					'qualifiers' => [
+						'P65' => [
+							1 => [
+								'hash' => '3ea0f5404dd4e631780b3386d17a15a583e499a6',
 								'snaktype' => 'value',
 								'property' => 'P65',
-								'datatype' => 'structured-cat',
 								'datavalue' => [
-									'value' => 'snakStringValue',
+									'value' => 'string!',
 									'type' => 'string',
 								],
+								'datatype' => 'structured-cat',
 							],
-							'qualifiers' => [
+							2 => [
+								'hash' => 'aa9a5f05e20d7fa5cda7d98371e44c0bdd5de35e',
+								'snaktype' => 'somevalue',
+								'property' => 'P65',
+								'datatype' => 'structured-cat',
+							],
+						],
+					],
+					'rank' => 'normal',
+					'qualifiers-order' => [
+						1 => 'P65'
+					],
+					'references' => [
+						1 => [
+							'hash' => '8445204eb74e636cb53687e2f947c268d5186075',
+							'snaks' => [
 								'P65' => [
 									1 => [
-										'hash' => '3ea0f5404dd4e631780b3386d17a15a583e499a6',
-										'snaktype' => 'value',
-										'property' => 'P65',
-										'datavalue' => [
-											'value' => 'string!',
-											'type' => 'string',
-										],
-										'datatype' => 'structured-cat',
-									],
-									2 => [
-										'hash' => 'aa9a5f05e20d7fa5cda7d98371e44c0bdd5de35e',
 										'snaktype' => 'somevalue',
 										'property' => 'P65',
 										'datatype' => 'structured-cat',
-									],
+									]
+								],
+								'P68' => [
+									1 => [
+										'snaktype' => 'somevalue',
+										'property' => 'P68',
+										'datatype' => 'structured-cat',
+									]
 								],
 							],
-							'rank' => 'normal',
-							'qualifiers-order' => [
-								1 => 'P65'
-							],
-							'references' => [
-								1 => [
-									'hash' => '8445204eb74e636cb53687e2f947c268d5186075',
-									'snaks' => [
-										'P65' => [
-											1 => [
-												'snaktype' => 'somevalue',
-												'property' => 'P65',
-												'datatype' => 'structured-cat',
-											]
-										],
-										'P68' => [
-											1 => [
-												'snaktype' => 'somevalue',
-												'property' => 'P68',
-												'datatype' => 'structured-cat',
-											]
-										],
-									],
-									'snaks-order' => [
-										1 => 'P65',
-										2 => 'P68'
-									],
-								],
+							'snaks-order' => [
+								1 => 'P65',
+								2 => 'P68'
 							],
 						],
-					]
-				]
+					],
+				],
 			]
 		];
 	}
