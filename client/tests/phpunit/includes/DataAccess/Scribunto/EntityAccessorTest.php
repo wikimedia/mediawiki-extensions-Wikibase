@@ -114,7 +114,8 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages );
 
 		$entityAccessor->getEntity( $itemId->getSerialization() );
-		$this->assertTrue(
+		# Only access to specific labels/claims/etc will result in actual usage
+		$this->assertFalse(
 			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
 		);
 	}
