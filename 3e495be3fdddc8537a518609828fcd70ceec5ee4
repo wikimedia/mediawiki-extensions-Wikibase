@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_94eebd1d",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T21:10:44Z",
+      "side": 1,
+      "message": "Language::isValidCode( $langCode )",
+      "parentUuid": "4e7eab26_74ad51e6",
+      "range": {
+        "startLine": 133,
+        "startChar": 3,
+        "endLine": 133,
+        "endChar": 51
+      },
+      "revId": "3e495be3fdddc8537a518609828fcd70ceec5ee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_14b5ed2e",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 1
