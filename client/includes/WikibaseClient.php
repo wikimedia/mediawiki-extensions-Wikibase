@@ -1019,12 +1019,22 @@ final class WikibaseClient {
 	/**
 	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
 	 *
+	 * @return SerializerFactory
+	 */
+	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
+		$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+		return $baseSerializerFactory;
+	}
+
+	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
 	 * @return Serializer
 	 */
 	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$baseSerializerFactory = $this->getSerializerFactory( $options );
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
