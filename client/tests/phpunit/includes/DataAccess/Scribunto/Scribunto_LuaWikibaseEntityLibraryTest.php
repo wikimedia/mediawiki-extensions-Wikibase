@@ -218,6 +218,28 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
+	public function testAddLabelUsage() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->addLabelUsage( 'Q32488', 'he' );
+		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+
+		$this->assertArrayHasKey( 'Q32488#L.he', $usages );
+	}
+
+	public function testAddSitelinksUsage() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->addSiteLinksUsage( 'Q32488' );
+		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q32488#S', $usages );
+	}
+
+	public function testAddOtherUsage() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->addOtherUsage( 'Q32488' );
+		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q32488#O', $usages );
+	}
+
 	/**
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 * @param Language|null $userLang The user's language
