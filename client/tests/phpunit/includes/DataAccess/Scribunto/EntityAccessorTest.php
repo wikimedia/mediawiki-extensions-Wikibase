@@ -16,13 +16,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Tests\MockRepository;
@@ -231,22 +230,20 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'en', 'en-desc' );
 		$item->setDescription( 'pt', 'ptDesc' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q333' ) ] );
-		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore' );
 
-		$snak = new PropertyValueSnak( $p65, new StringValue( 'snakStringValue' ) );
+		$statement = new Statement( new PropertyValueSnak( $p65, new StringValue( 'snakStringValue' ) ) );
 
-		$qualifiers = new SnakList();
-		$qualifiers->addSnak( new PropertyValueSnak( $p65, new StringValue( 'string!' ) ) );
-		$qualifiers->addSnak( new PropertySomeValueSnak( $p65 ) );
+		$statement->getQualifiers()->addSnak( new PropertyValueSnak( $p65, new StringValue( 'string!' ) ) );
+		$statement->getQualifiers()->addSnak( new PropertySomeValueSnak( $p65 ) );
 
-		$references = new ReferenceList();
-		$references->addNewReference( [
+		$statement->addNewReference( [
 			new PropertySomeValueSnak( $p65 ),
 			new PropertySomeValueSnak( $p68 )
 		] );
 
-		$guid = 'imaguid';
-		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
+		$statement->setGuid( 'imaguid' );
+		$item->getStatements()->addStatement( $statement );
 
 		return $item;
 	}
@@ -368,18 +365,20 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEntityStatementBadProperty() {
 		$entityLookup = new MockRepository();
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
+
 		$this->setExpectedException( InvalidArgumentException::class );
-		$actual = $entityAccessor->getEntityStatement( 'Q123099', 'ffsdfs' );
+		$entityAccessor->getEntityStatement( 'Q123099', 'ffsdfs' );
 	}
 
 	public function testGetEntityStatementMissingStatement() {
-		$entityLookup = new MockRepository();
 		$item = new Item( new ItemId( 'Q123099' ) );
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
+
 		$actual = $entityAccessor->getEntityStatement( 'Q123099', 'P13' );
-		$this->assertEquals( [], $actual );
+
+		$this->assertSame( [], $actual );
 	}
 
 }
