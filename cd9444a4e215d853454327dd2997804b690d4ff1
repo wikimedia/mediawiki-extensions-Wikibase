@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_03eb79a1",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_17bada1e",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_b7874665",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2017-08-11T05:20:06Z",
       "side": 1,
       "message": "could just be \"return statements[propertyId]\" here",
+      "range": {
+        "startLine": 154,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 15
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a3306554",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_b7874665",
       "range": {
         "startLine": 154,
         "startChar": 3,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_833d292b",
+        "filename": "client/includes/Serializer/ClientSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_b7a0a6f2",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_7781de4e",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 8
@@ -82,6 +154,30 @@
       "writtenOn": "2017-08-11T05:20:06Z",
       "side": 1,
       "message": "Using numbers here is discouraged, rather just pass in a PropertyId object or at least \"P65\".",
+      "range": {
+        "startLine": 336,
+        "startChar": 33,
+        "endLine": 336,
+        "endChar": 35
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4340a1a8",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_7781de4e",
       "range": {
         "startLine": 336,
         "startChar": 33,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_a37e25df",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Good catch. Actually it is only statement usage (Q123099#C.P65). Should I add O usage as well?\n\ncurrently EntityAccessor only does:\n$this-\u003eusageAccumulator-\u003eaddStatementUsage( $entityId, $propertyId );\n\nIf O isn\u0027t needed. This imply I should also fix the documentation in EntityUsage (remove \"STATEMENT_USAGE is never used alone\")?",
+      "parentUuid": "4e7eab26_f7be2e12",
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_d7a3f2fb",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 8
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_838be9e7",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_d7a3f2fb",
+      "range": {
+        "startLine": 450,
+        "startChar": 60,
+        "endLine": 450,
+        "endChar": 61
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_57b0623e",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 8
@@ -145,6 +283,30 @@
       "writtenOn": "2017-08-11T05:20:06Z",
       "side": 1,
       "message": "Rather use single quotes",
+      "range": {
+        "startLine": 459,
+        "startChar": 60,
+        "endLine": 459,
+        "endChar": 61
+      },
+      "revId": "cd9444a4e215d853454327dd2997804b690d4ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_23731516",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T03:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_57b0623e",
       "range": {
         "startLine": 459,
         "startChar": 60,
