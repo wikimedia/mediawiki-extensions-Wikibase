@@ -104,21 +104,6 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testGetEntity_usage() {
-		$item = $this->getItem();
-		$itemId = $item->getId();
-
-		$entityLookup = new MockRepository();
-
-		$usages = new HashUsageAccumulator();
-		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages );
-
-		$entityAccessor->getEntity( $itemId->getSerialization() );
-		$this->assertTrue(
-			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
-		);
-	}
-
 	public function getEntityProvider() {
 		$item = $this->getItem();
 

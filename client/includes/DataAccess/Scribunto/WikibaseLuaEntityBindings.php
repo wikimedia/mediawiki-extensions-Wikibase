@@ -123,6 +123,39 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * Add a label usage (called once specific labels are accessed).
+	 *
+	 * @param string $entityId The Entity from which the labels were accessed.
+	 * @param string $langCode Language code the labels accessed.
+	 */
+	public function addLabelUsage( $entityId, $langCode ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		if ( Language::isValidCode( $langCode ) ) {
+			$this->usageAccumulator->addLabelUsage( $entityId, $langCode );
+		}
+	}
+
+	/**
+	 * Add a other usage.
+	 *
+	 * @param string $entityId The Entity from which something was accessed.
+	 */
+	public function addOtherUsage( $entityId ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		$this->usageAccumulator->addOtherUsage( $entityId );
+	}
+
+	/**
+	 * Add a sitelink usage (called once specific sitelink are accessed).
+	 *
+	 * @param string $entityId The Entity from which the sitelinks were accessed.
+	 */
+	public function addSiteLinksUsage( $entityId ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		$this->usageAccumulator->addSiteLinksUsage( $entityId );
+	}
+
+	/**
 	 * Get global site ID (e.g. "enwiki")
 	 * This is basically a helper function.
 	 * @TODO: Make this part of mw.site in the Scribunto extension.
