@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_19cf685c",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-12T18:59:34Z",
+      "side": 1,
+      "message": "You confused the quotes. Should be \"`title` attribute\".",
+      "range": {
+        "startLine": 23,
+        "startChar": 158,
+        "endLine": 23,
+        "endChar": 175
+      },
+      "revId": "cf9039b843184ce5c0333a9a3fd0a51dafe8bc16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f9d37c03",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-12T18:59:34Z",
+      "side": 1,
+      "message": "Is this about \u003ca\u003e elements or literally about \u003clink\u003e elements? Even if \u003clink\u003e can have a title\u003d\"…\", users will typically not see it in their browsers because it is hidden in the header.",
+      "range": {
+        "startLine": 23,
+        "startChar": 189,
+        "endLine": 23,
+        "endChar": 193
+      },
+      "revId": "cf9039b843184ce5c0333a9a3fd0a51dafe8bc16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b9041481",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-12T18:59:34Z",
+      "side": 1,
+      "message": "Whoops.",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 26
+      },
+      "revId": "cf9039b843184ce5c0333a9a3fd0a51dafe8bc16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
