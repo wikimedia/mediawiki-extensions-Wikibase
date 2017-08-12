@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4382e1aa",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T04:29:56Z",
+      "side": 1,
+      "message": "Done. note: the __index lua doesn\u0027t do it (WikibaseLuaEntityBinding -\u003e addStatementUsage).",
+      "parentUuid": "4e7eab26_235a3586",
+      "revId": "f2491203d12253712a93c9f1c1d7f0e9b1ac617c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_63e59d9e",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 9
@@ -30,6 +48,30 @@
       "writtenOn": "2017-08-12T03:55:19Z",
       "side": 1,
       "message": "I talked to this with Daniel and we concluded that this should be \"getBestStatements\", in order for this to be consistent with mw.wikibase.entity:getBestStatements.\nAlso need to adopt the docs.",
+      "range": {
+        "startLine": 142,
+        "startChar": 10,
+        "endLine": 142,
+        "endChar": 23
+      },
+      "revId": "f2491203d12253712a93c9f1c1d7f0e9b1ac617c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e3a74d4a",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T04:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_63e59d9e",
       "range": {
         "startLine": 142,
         "startChar": 10,
