@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b4a3b9fc",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T21:04:36Z",
+      "side": 0,
+      "message": "is it OK to xkill? ;)",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 52
+      },
+      "revId": "3e559943b1123d06be2f2165e87ef624d0970141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f4b9412a",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-12T21:04:36Z",
+      "side": 0,
+      "message": "once we don\u0027t assume all usage and lazy do it, how should we test it?",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 120,
+        "endChar": 2
+      },
+      "revId": "3e559943b1123d06be2f2165e87ef624d0970141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
