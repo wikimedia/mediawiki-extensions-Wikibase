@@ -123,6 +123,28 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * Add a label usage (called once specific labels are accessed).
+	 *
+	 * @param string $entityId The Entity from which the statements were accessed.
+	 * @param string $langCode Language code the labels accessed.
+	 */
+	public function addLabelUsage( $entityId, $langCode ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		//TODO Eran: need to parse langcode for validity?
+		$this->usageAccumulator->addLabelUsage( $entityId, $langCode );
+	}
+
+	/**
+	 * Add a statement usage (called once specific statements are accessed).
+	 *
+	 * @param string $entityId The Entity from which the statements were accessed.
+	 */
+	public function addSiteLinksUsage( $entityId ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		$this->usageAccumulator->addSiteLinksUsage( $entityId );
+	}
+
+	/**
 	 * Get global site ID (e.g. "enwiki")
 	 * This is basically a helper function.
 	 * @TODO: Make this part of mw.site in the Scribunto extension.
