@@ -294,7 +294,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		// All languages in the fallback chain from 'ku' to 'ku-latn' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertSame( [ 'Q32488#X', 'Q885588#L', 'Q885588#T' ], array_keys( $usage ) );
+		$this->assertSame( [ 'Q885588#L', 'Q885588#T' ], array_keys( $usage ) );
 
 		$this->assertSame( true, $cacheSplit );
 	}
