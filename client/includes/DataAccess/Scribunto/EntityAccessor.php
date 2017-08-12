@@ -69,6 +69,11 @@ class EntityAccessor {
 	 */
 	private $termsLanguages;
 
+	/**
+	 * @var bool
+	 */
+	private $fineGrainedLuaTracking;
+
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
@@ -78,7 +83,8 @@ class EntityAccessor {
 		PropertyDataTypeLookup $dataTypeLookup,
 		LanguageFallbackChain $fallbackChain,
 		Language $language,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		$fineGrainedLuaTracking
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
@@ -89,6 +95,7 @@ class EntityAccessor {
 		$this->fallbackChain = $fallbackChain;
 		$this->language = $language;
 		$this->termsLanguages = $termsLanguages;
+		$this->fineGrainedLuaTracking = $fineGrainedLuaTracking;
 	}
 
 	/**
@@ -121,8 +128,9 @@ class EntityAccessor {
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
-		$this->usageAccumulator->addAllUsage( $entityId );
-
+		if ( !$this->fineGrainedLuaTracking ) {
+			$this->usageAccumulator->addAllUsage( $entityId );
+		}
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
