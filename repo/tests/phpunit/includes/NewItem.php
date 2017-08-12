@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 
@@ -33,7 +34,7 @@ class NewItem {
 	private $aliases = [];
 
 	/**
-	 * @var string[] Indexed by global site ID
+	 * @var SiteLink[]
 	 */
 	private $siteLinks = [];
 
@@ -72,8 +73,8 @@ class NewItem {
 		foreach ( $this->aliases as $language => $aliases ) {
 			$item->setAliases( $language, $aliases );
 		}
-		foreach ( $this->siteLinks as $siteId => $pageName ) {
-			$item->getSiteLinkList()->addNewSiteLink( $siteId, $pageName );
+		foreach ( $this->siteLinks as $siteLink ) {
+			$item->getSiteLinkList()->addSiteLink( $siteLink );
 		}
 		foreach ( $this->statements as $statement ) {
 			$item->getStatements()->addStatement( $statement );
@@ -163,19 +164,26 @@ class NewItem {
 	/**
 	 * @see andSiteLink
 	 */
-	public static function withSiteLink( $siteId, $pageName ) {
-		return ( new self() )->andSiteLink( $siteId, $pageName );
+	public static function withSiteLink( $siteId, $pageName, $badges = null ) {
+		return ( new self() )->andSiteLink( $siteId, $pageName, $badges );
 	}
 
 	/**
 	 * @param string $siteId
 	 * @param string $pageName
+	 * @param ItemId[]|string[]|ItemId|string|null $badges Zero or more item ID references as either
+	 *  strings or ItemId objects. Can be an array or a single value.
 	 *
 	 * @return self
 	 */
-	public function andSiteLink( $siteId, $pageName ) {
+	public function andSiteLink( $siteId, $pageName, $badges = null ) {
 		$copy = clone $this;
-		$copy->siteLinks[$siteId] = $pageName;
+		if ( $badges !== null ) {
+			$badges = array_map( function ( $badge ) {
+				return $badge instanceof ItemId ? $badge : new ItemId( $badge );
+			}, (array)$badges );
+		}
+		$copy->siteLinks[] = new SiteLink( $siteId, $pageName, $badges );
 		return $copy;
 	}
 
