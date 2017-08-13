@@ -110,6 +110,24 @@
       "revId": "f8168c3d66c3037d93ed9bf48da9ac171f640887",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1a0d1741",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-13T14:59:15Z",
+      "side": 1,
+      "message": "I thought about this some more. Please make it an other usage.",
+      "parentUuid": "4e7eab26_5a1abf7f",
+      "revId": "f8168c3d66c3037d93ed9bf48da9ac171f640887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
