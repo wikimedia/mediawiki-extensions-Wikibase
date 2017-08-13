@@ -93,6 +93,23 @@
       "revId": "f8168c3d66c3037d93ed9bf48da9ac171f640887",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5a1abf7f",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-13T14:56:25Z",
+      "side": 1,
+      "message": "What about aliases? That should probably track an other usage (or a label usage???)",
+      "revId": "f8168c3d66c3037d93ed9bf48da9ac171f640887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
