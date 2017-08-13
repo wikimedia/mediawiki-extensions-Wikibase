@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_fd65a5dd",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-13T15:28:20Z",
+      "side": 1,
+      "message": "This should also add an other usage once aliases are access… or maybe whenever something not explicitly handled otherwise is accessed?",
+      "revId": "0c1be79594d380b5d949f989da7dd7be90c0415f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
