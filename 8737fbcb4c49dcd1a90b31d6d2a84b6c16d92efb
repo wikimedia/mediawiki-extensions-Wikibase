@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_f44e21c3",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-13T03:37:32Z",
+      "side": 1,
+      "message": "Given this is new functionality, can\u0027t we stick with maybe ItemId[]|null or something like that? This looks odd.",
+      "range": {
+        "startLine": 174,
+        "startChar": 11,
+        "endLine": 174,
+        "endChar": 47
+      },
+      "revId": "8737fbcb4c49dcd1a90b31d6d2a84b6c16d92efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
