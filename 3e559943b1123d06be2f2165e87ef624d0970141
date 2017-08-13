@@ -45,6 +45,23 @@
       "revId": "3e559943b1123d06be2f2165e87ef624d0970141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_74e791df",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-08-13T03:25:10Z",
+      "side": 0,
+      "message": "maybe this test should still exist and make sure that no usage is recorded?",
+      "revId": "3e559943b1123d06be2f2165e87ef624d0970141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
