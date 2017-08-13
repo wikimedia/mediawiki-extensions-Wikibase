@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_1a78b7be",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-13T14:32:59Z",
+      "side": 1,
+      "message": "ID",
+      "range": {
+        "startLine": 38,
+        "startChar": 59,
+        "endLine": 38,
+        "endChar": 61
+      },
+      "revId": "c0dfb3a6d9ddf1e11a7594b4c88a993dbfd875b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ba8643aa",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-13T14:32:59Z",
+      "side": 1,
+      "message": "item",
+      "range": {
+        "startLine": 38,
+        "startChar": 69,
+        "endLine": 38,
+        "endChar": 73
+      },
+      "revId": "c0dfb3a6d9ddf1e11a7594b4c88a993dbfd875b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
