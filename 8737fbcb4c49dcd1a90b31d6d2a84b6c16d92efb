@@ -46,6 +46,30 @@
       "revId": "8737fbcb4c49dcd1a90b31d6d2a84b6c16d92efb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5a095f2e",
+        "filename": "repo/tests/phpunit/includes/NewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-08-13T03:58:41Z",
+      "side": 1,
+      "message": "If we were on PHP 5.6+ I would suggest a variadic parameter…",
+      "parentUuid": "4e7eab26_741a3180",
+      "range": {
+        "startLine": 174,
+        "startChar": 11,
+        "endLine": 174,
+        "endChar": 47
+      },
+      "revId": "8737fbcb4c49dcd1a90b31d6d2a84b6c16d92efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
