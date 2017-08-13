@@ -62,6 +62,24 @@
       "revId": "3e559943b1123d06be2f2165e87ef624d0970141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1a82f7a9",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-13T14:49:04Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "4e7eab26_74e791df",
+      "revId": "3e559943b1123d06be2f2165e87ef624d0970141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

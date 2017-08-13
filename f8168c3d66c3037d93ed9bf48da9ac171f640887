@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_7ab9bb77",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-13T14:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_34ca694b",
+      "range": {
+        "startLine": 133,
+        "startChar": 17,
+        "endLine": 133,
+        "endChar": 28
+      },
+      "revId": "f8168c3d66c3037d93ed9bf48da9ac171f640887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_14cf2d5c",
         "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-08-13T03:25:10Z",
       "side": 1,
       "message": "Actually it\u0027s called once **any** sitelink has been used.",
+      "range": {
+        "startLine": 149,
+        "startChar": 38,
+        "endLine": 149,
+        "endChar": 46
+      },
+      "revId": "f8168c3d66c3037d93ed9bf48da9ac171f640887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3ab33398",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-13T14:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_14cf2d5c",
       "range": {
         "startLine": 149,
         "startChar": 38,
