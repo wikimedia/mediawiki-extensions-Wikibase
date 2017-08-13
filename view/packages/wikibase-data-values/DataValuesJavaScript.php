@@ -14,6 +14,10 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
+if ( !defined( 'MEDIAWIKI' ) ) {
+	return 1;
+}
+
 $GLOBALS['wgExtensionCredits']['datavalues'][] = [
 	'path' => __DIR__,
 	'name' => 'DataValues JavaScript',

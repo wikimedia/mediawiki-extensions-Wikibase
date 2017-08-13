@@ -6,9 +6,11 @@ php:
 before_script:
   - nvm install 4
   - npm install
+  - composer install
 
 script:
   - npm test
+  - composer test
 
 notifications:
   irc:
