@@ -21,7 +21,8 @@
 			"Alexsh",
 			"烈羽",
 			"和平奮鬥救地球",
-			"Wwycheuk"
+			"Wwycheuk",
+			"Translatealcd"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -94,7 +95,6 @@
 	"wikibase-undo-badpage": "錯誤修訂：修訂 $2 並不屬於 [[$1]]。",
 	"wikibase-undo-firstrev": "無法還原頁面建立動作",
 	"wikibase-undo-nocontent": "無法讀取頁面 $1 修訂 $2 的內容",
-	"wikibase-propertyedittool-counter-pending-tooltip": "$1 個數值尚未儲存",
 	"wikibase-disambiguation-title": "\"$1\" 的消歧義",
 	"wb-special-newitem-new-item-notification": "已建立新項目 $1 並重新導向至該頁面。 返回 $2。",
 	"wikibase-aliases-input-help-message": "要該此項目易於搜尋，您可以輸入別名。",
@@ -106,7 +106,6 @@
 	"wikibase-statementview-rank-normal": "一般等級",
 	"wikibase-statementview-rank-deprecated": "不適用等級",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|參考文獻}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|1 個參考文獻|$1 個參考文獻}}尚未儲存",
 	"wikibase-snakview-property-input-placeholder": "屬性",
 	"wikibase-snakview-unsupportedsnaktype": "敘述句類型 \"$1\"。尚未支援處理這種敘述句類型。",
 	"wikibase-snakview-choosesnaktype": "請選擇數值型態。",
@@ -325,7 +324,7 @@
 	"wikibase-listdatatypes-url-body": "一個 URL 的文字字元。URL 被限制於外部連結的方式寫於維基文字中。",
 	"wikibase-listdatatypes-external-id-head": "外部識別符",
 	"wikibase-concept-uri": "概念 URI",
-	"wikibase-concept-uri-tooltip": "URI 用來辦識此項目所描述的概念",
+	"wikibase-concept-uri-tooltip": "URI 用來辨識此項目所描述的概念",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase 項目",
 	"content-model-wikibase-property": "Wikibase 屬性",
@@ -346,7 +345,7 @@
 	"apihelp-wbformatvalue-description": "格式化數據值。",
 	"apihelp-wbformatvalue-param-generate": "預期得輸出格式",
 	"apihelp-wbgetclaims-description": "取得 Wikibase 主張。",
-	"apihelp-wbgetclaims-param-entity": "用來取得主帳的實體 ID。 除非提供主張 GUID，否則為必填。",
+	"apihelp-wbgetclaims-param-entity": "用來取得主張的實體 ID。 除非提供主張 GUID，否則為必填。",
 	"apihelp-wbgetclaims-param-rank": "選填的篩選條件，只回傳達到指定等級的主張",
 	"apihelp-wbgetclaims-example-1": "取得項目 ID Q42 的主張",
 	"apihelp-wbgetclaims-example-3": "取得項目 ID Q42 等級為一般的主張",

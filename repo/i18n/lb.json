@@ -71,7 +71,7 @@
 	"wikibase-statementview-rank-tooltip-preferred": "Valabelen an aktuelle Wäert",
 	"wikibase-statementview-rank-normal": "Normal Bewäertung",
 	"wikibase-statementview-rank-tooltip-deprecated": "De Wäert ass als falsch bekannt awer (gouf) allgemeng gegleeft",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|Referenz|Referenzen}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|Referenz|Referenzen}}",
 	"wikibase-snakview-property-input-placeholder": "Eegenschaft",
 	"wikibase-snakview-choosesnaktype": "Sicht en Typ vu Wäert eraus.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "De Wäert entsprécht net der Definitioun vun der Eegenschaft.",

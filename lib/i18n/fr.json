@@ -24,7 +24,8 @@
 			"Zolo",
 			"Wladek92",
 			"Urhixidur",
-			"AntonierCH"
+			"AntonierCH",
+			"Envlh"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -154,14 +155,14 @@
 	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Affirmation supprimée|Affirmations supprimées}}",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Affirmation modifiée|Affirmations modifiées}}",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|affirmation créée|Affirmations créées}}",
-	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Un qualifieur|$4 qualifieurs}} d’{{PLURAL:$3|affirmation|affirmations}} {{PLURAL:$4|modifié|modifiés}}",
+	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Un qualificatif|$4 qualificatifs}} de {{PLURAL:$3|déclaration|déclarations}} {{PLURAL:$4|modifié|modifiés}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|Une référence|$4 références}} d’{{PLURAL:$3|affirmation|affirmations}} {{PLURAL:$4|modifiée|modifiées}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Rang {{PLURAL:$3|de l’affirmation|des affirmations}} modifié",
 	"wikibase-entity-summary-clientsitelink-update": "Page déplacée de [$3] à [$4]",
 	"wikibase-entity-summary-clientsitelink-remove": "Page de [$3] supprimée",
-	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|qualifieur ajouté|qualifieurs ajoutés}}",
-	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|qualifieur modifié|qualifieurs modifiés}}",
-	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|qualifieur supprimé|qualifieurs supprimés}}",
+	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|Qualificatif ajouté|Qualificatifs ajoutés}}",
+	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|Qualificatif modifié|Qualificatifs modifiés}}",
+	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|Qualificatif supprimé|Qualificatifs supprimés}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "Suppression {{PLURAL:$3|d'une référénce|de réferences}} dans une affirmation",
 	"wikibase-entity-summary-wbmergeitems-from": "Élément fusionné depuis $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Élément fusionné avec $3",

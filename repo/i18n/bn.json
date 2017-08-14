@@ -66,7 +66,7 @@
 	"wikibase-entitytermsview-input-help-message": "ভাষা অনুযায়ী এই ভুক্তির জন্য একটি লেবেল, একটি সংক্ষিপ্ত বিবরণ এবং উপনাম লিখুন।",
 	"wikibase-statementsection-statements": "বিবৃতিসমূহ",
 	"wikibase-sitelinks": "সাইট লিংক",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|টি ভুক্তি}}",
+	"wikibase-sitelinks-counter": "$1টি {{PLURAL:$1|ভুক্তি}}",
 	"wikibase-sitelinks-empty": "এই আইটেমে কোন পাতা সংযোগ করা নেই।",
 	"wikibase-sitelinks-special": "অন্যান্য সাইট",
 	"wikibase-badgeselector-badge-placeholder-title": "একটি ব্যাজ ধার্য করতে ক্লিক করুন।",

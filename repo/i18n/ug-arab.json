@@ -2,16 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Sahran",
-			"Macofe"
+			"Macofe",
+			"Uzdil"
 		]
 	},
 	"wikibase-entity-query": "سۈرۈشتۈر",
-	"wikibase-edit": "تەھرىر",
+	"wikibase-edit": "تەھرىرلەش",
 	"wikibase-add": "قوش",
+	"wikibase-label-empty": "خەتكۈچكە ئېنىقلىما بېرىلمىگەن",
+	"wikibase-description-empty": "ئېنىقلىما بېرىلگەن ئىزاھات يوق",
 	"wikibase-sitelink-site-edit-placeholder": "site",
 	"wikibase-sitelink-page-edit-placeholder": "ماقالىلەر",
+	"wikibase-sitelinks-special": "باشقا بېكەتلەر",
 	"wikibase-remove": "چىقىرىۋەت",
 	"wikibase-propertypage-datatype": "سانلىق-مەلۇمات تىپى",
+	"wikibase-statementview-rank-normal": "نورمال دەرىجە",
 	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-itembytitle-lookup-site": "تور بېكەت:",
 	"wikibase-itembytitle-lookup-page": "بەت:",

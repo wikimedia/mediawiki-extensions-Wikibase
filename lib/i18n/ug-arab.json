@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sahran"
+			"Sahran",
+			"Uzdil"
 		]
 	},
+	"wikibase-sitelinks-wikipedia": "ۋىكىقامۇس",
 	"wikibase-sitelinks-sitename-columnheading": "تىل",
 	"wikibase-tooltip-error-details": "تەپسىلاتى",
 	"datatypes-type-wikibase-item": "تۈر"
