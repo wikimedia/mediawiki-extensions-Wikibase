@@ -12,8 +12,6 @@
 	"valueview-expert-timevalue-calendar-julian": "יוליאניש",
 	"valueview-expert-timeinput-precision": "גענויקייט:",
 	"valueview-expert-timeinput-calendar": "קאלאענדאר:",
-	"valueview-expertextender-calendarhint-gregorian": "(גרעגאריאנישער קאלענדאר)",
-	"valueview-expertextender-calendarhint-julian": "(יוליאנישער קאלענדאר)",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "שפראך (פֿליכטלעך)",
 	"valueview-expertextender-unitsuggester-label": "איינהייט (אפציאנאַל):"

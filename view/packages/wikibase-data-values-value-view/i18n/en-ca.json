@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amqui"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "empty",
+	"valueview-expert-globecoordinateinput-precision": "Precision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "unspecified",
+	"valueview-expert-globecoordinateinput-customprecision": "special ($1)",
+	"valueview-expert-timeinput-precision": "Precision:",
+	"valueview-expert-timeinput-calendar": "Calendar:",
+	"valueview-expertextender-unitsuggester-label": "Unit (optional):"
+}

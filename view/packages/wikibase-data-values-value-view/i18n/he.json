@@ -19,8 +19,6 @@
 	"valueview-expert-timevalue-calendar-julian": "יוליאני",
 	"valueview-expert-timeinput-precision": "דיוק:",
 	"valueview-expert-timeinput-calendar": "לוח שנה:",
-	"valueview-expertextender-calendarhint-gregorian": "(לוח שנה גרגוריאני)",
-	"valueview-expertextender-calendarhint-julian": "(לוח השנה היוליאני)",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "שפה (חובה):",
 	"valueview-expertextender-unitsuggester-label": "יחידה (אופציונלי):",
