@@ -81,7 +81,6 @@ return call_user_func( function() {
 				'GlobeCoordinateInput.css',
 			),
 			'dependencies' => array(
-				'globeCoordinate.js',
 				'jquery.valueview.ExpertExtender',
 				'jquery.valueview.ExpertExtender.Container',
 				'jquery.valueview.ExpertExtender.Listrotator',
