@@ -350,8 +350,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function testGetParserOutputIncludesLabelsOfRedirectEntity() {
-		$this->markTestSkipped( 'Redirected entity terms are currently not fetched (see: T96553), so this test fails.' );
-
 		$item = new Item( new ItemId( 'Q303' ) );
 
 		$redirectSourceId = new ItemId( 'Q809' );
