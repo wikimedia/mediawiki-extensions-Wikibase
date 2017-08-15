@@ -215,13 +215,13 @@ class EntityParserOutputGenerator {
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
 		$entityInfoBuilder->resolveRedirects();
-		$entityInfoBuilder->removeMissing();
 
 		$entityInfoBuilder->collectTerms(
 			[ 'label', 'description' ],
 			$this->languageFallbackChain->getFetchLanguageCodes()
 		);
 
+		$entityInfoBuilder->removeMissing();
 		$entityInfoBuilder->collectDataTypes();
 		$entityInfoBuilder->retainEntityInfo( $entityIds );
 
