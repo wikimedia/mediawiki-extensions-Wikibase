@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_3741010f",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-15T14:52:10Z",
+      "side": 1,
+      "message": "From what I can see in the implementations this is the call that removes the redirects, not \"removeMissing\". In fact, both do, so I guess both should be moved below.",
+      "range": {
+        "startLine": 217,
+        "startChar": 22,
+        "endLine": 217,
+        "endChar": 38
+      },
+      "revId": "5eef6e849be0543b5925f755403b16b0673abb41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
