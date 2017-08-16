@@ -360,6 +360,7 @@
 	"wikibase-api-failed-save": "This is an error message for a situation where the API tries to save an item (e.g. on Wikidata) but the operation could not be completed.",
 	"wikibase-api-illegal-entity-remove": "Error message when the user misplaced a <var>remove</var> key too high in the JSON structure they provided.",
 	"wikibase-api-illegal-entity-selector": "Error message when the user fails to provide one of the parameter combinations allowed to address entities.",
+	"wikibase-api-illegal-entities-selector": "Error message when the user fails to provide one of the parameter combinations allowed to address entities.",
 	"wikibase-api-inconsistent-language": "!!DO NOT TRANSLATE!! Inconsistent language detected",
 	"wikibase-api-inconsistent-site": "!!DO NOT TRANSLATE!! Inconsistent site detected",
 	"wikibase-api-invalid-guid": "!!DO NOT TRANSLATE!! Invalid uniquie identifying provided for a claim",
