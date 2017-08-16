@@ -16,6 +16,24 @@
       "revId": "b00a42c4e50729da9047eea4c5148aff29ab4bd7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_10f88be1",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-16T09:58:29Z",
+      "side": 1,
+      "message": "I was thinking the same. As this is a private method used after isKnownRepositoryName it will be fine for the current implementation. I guess it would not hurt to have a check for this method to be more \"universal\" over micro optimizing but whatever.",
+      "parentUuid": "4e7eab26_3084a75d",
+      "revId": "b00a42c4e50729da9047eea4c5148aff29ab4bd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
