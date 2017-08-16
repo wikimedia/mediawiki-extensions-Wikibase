@@ -46,6 +46,30 @@
       "revId": "5eef6e849be0543b5925f755403b16b0673abb41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_70330f60",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:24:40Z",
+      "side": 1,
+      "message": "This just raises an other question: Why does removeMissing remove *targets*? This seems wrong.",
+      "parentUuid": "4e7eab26_b5d3a904",
+      "range": {
+        "startLine": 217,
+        "startChar": 22,
+        "endLine": 217,
+        "endChar": 38
+      },
+      "revId": "5eef6e849be0543b5925f755403b16b0673abb41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
