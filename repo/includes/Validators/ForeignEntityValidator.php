@@ -16,12 +16,12 @@ use Wikimedia\Assert\Assert;
 class ForeignEntityValidator implements ValueValidator {
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	private $supportedEntityTypes;
 
 	/**
-	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
+	 * @param array[] $supportedEntityTypes map of repository names to lists of supported entity types
 	 */
 	public function __construct( array $supportedEntityTypes ) {
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames(
@@ -73,21 +73,27 @@ class ForeignEntityValidator implements ValueValidator {
 		return Result::newSuccess();
 	}
 
+	/**
+	 * @param string $repository
+	 *
+	 * @return bool
+	 */
 	private function isKnownRepositoryName( $repository ) {
-		return in_array( $repository, array_keys( $this->supportedEntityTypes ) );
+		return array_key_exists( $repository, $this->supportedEntityTypes );
 	}
 
+	/**
+	 * @param EntityId $id
+	 *
+	 * @return bool
+	 */
 	private function supportsEntityTypeFromRepository( EntityId $id ) {
 		$repository = $id->getRepositoryName();
 
-		if ( isset( $this->supportedEntityTypes[$repository] ) ) {
-			return in_array(
-				$id->getEntityType(),
-				$this->supportedEntityTypes[$repository]
-			);
-		}
-
-		return false;
+		return in_array(
+			$id->getEntityType(),
+			$this->supportedEntityTypes[$repository]
+		);
 	}
 
 	/**
