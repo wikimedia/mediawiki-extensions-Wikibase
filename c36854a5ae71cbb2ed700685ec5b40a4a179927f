@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_8bf9b04c",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T15:44:44Z",
+      "side": 1,
+      "message": "I don\u0027t think this message can be used, because it talks about singular \"id\" and singular \"site\" + \"page\" pairs. But this here is about plural \"ids\", \"sites\", and \"titles\".",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 41
+      },
+      "revId": "c36854a5ae71cbb2ed700685ec5b40a4a179927f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
