@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_7081cfc7",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:38:42Z",
+      "side": 1,
+      "message": "This message is not needed any more. The message above already has a parameter now.",
+      "range": {
+        "startLine": 347,
+        "startChar": 29,
+        "endLine": 347,
+        "endChar": 31
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_10888beb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:38:42Z",
+      "side": 1,
+      "message": "This message is not needed any more. The message above already has a parameter now.",
+      "range": {
+        "startLine": 363,
+        "startChar": 28,
+        "endLine": 363,
+        "endChar": 30
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_507e13e2",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:38:42Z",
+      "side": 1,
+      "message": "This message is not needed any more. The message above already has a parameter now.",
+      "range": {
+        "startLine": 380,
+        "startChar": 29,
+        "endLine": 380,
+        "endChar": 31
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b02097f3",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:38:42Z",
+      "side": 1,
+      "message": "This message is not needed any more. The message above already has a parameter now.",
+      "range": {
+        "startLine": 396,
+        "startChar": 28,
+        "endLine": 396,
+        "endChar": 30
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_90255b05",
+        "filename": "repo/includes/Api/CreateClaim.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:38:42Z",
+      "side": 1,
+      "message": "The …-1 message does not exist any more.",
+      "range": {
+        "startLine": 131,
+        "startChar": 33,
+        "endLine": 131,
+        "endChar": 35
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f0261f10",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T11:38:42Z",
+      "side": 1,
+      "message": "The …-1 message does not exist any more.",
+      "range": {
+        "startLine": 174,
+        "startChar": 35,
+        "endLine": 174,
+        "endChar": 37
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
