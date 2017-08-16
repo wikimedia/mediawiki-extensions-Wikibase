@@ -22,6 +22,30 @@
       "revId": "5eef6e849be0543b5925f755403b16b0673abb41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b5d3a904",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-16T07:17:14Z",
+      "side": 1,
+      "message": "Removing redirects is not a problem, removing targets are. This line adds targets and if you move it down, it won\u0027t work. I tested this in localhost.",
+      "parentUuid": "4e7eab26_3741010f",
+      "range": {
+        "startLine": 217,
+        "startChar": 22,
+        "endLine": 217,
+        "endChar": 38
+      },
+      "revId": "5eef6e849be0543b5925f755403b16b0673abb41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
