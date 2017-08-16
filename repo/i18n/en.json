@@ -317,6 +317,8 @@
 	"wikibase-mylanguagefallbackchain-babel": "You can edit it by putting <nowiki>{{#babel: }}</nowiki> on {{GENDER:$1|your}} [[Special:MyPage|user page]].",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, converted from $3 - $4",
+	"wikibase-api-claim-value-missing": "A value needs to be provided when creating a claim with PropertyValueSnak snak.",
+	"wikibase-api-claim-value-unexpected": "You cannot provide a value when creating a claim with no PropertyValueSnak as main snak.",
 	"wikibase-api-common-item": "Common item detected.",
 	"wikibase-api-badtoken": "Bad token detected.",
 	"wikibase-api-cant-load-entity-content": "Cannot access content, revision may be deleted.",
