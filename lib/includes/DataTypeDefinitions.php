@@ -176,7 +176,7 @@ class DataTypeDefinitions {
 	 *
 	 * @param array $definitions The map to process.
 	 *
-	 * @throw UnexpectedValueException
+	 * @throws UnexpectedValueException
 	 * @return array An associative array mapping data type IDs to one of the $definitions values.
 	 * The keys in this array are plain property data type IDs without a prefix.
 	 */

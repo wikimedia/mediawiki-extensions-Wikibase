@@ -17,7 +17,6 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 
 /**
- * @property mixed getMockValueFormatter
  * @covers Wikibase\Repo\Localizer\MessageParameterFormatter
  *
  * @group Wikibase
