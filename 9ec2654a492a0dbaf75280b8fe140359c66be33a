@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b08bb7c3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T12:24:45Z",
+      "side": 0,
+      "message": "This revert is a rebase mistake and should not be done. The additional …-1 message is not needed any more because of this.",
+      "range": {
+        "startLine": 343,
+        "startChar": 72,
+        "endLine": 343,
+        "endChar": 74
+      },
+      "revId": "9ec2654a492a0dbaf75280b8fe140359c66be33a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_50b93377",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T12:24:45Z",
+      "side": 0,
+      "message": "This revert is a rebase mistake and should not be done. The additional …-1 message is not needed any more because of this.",
+      "range": {
+        "startLine": 358,
+        "startChar": 57,
+        "endLine": 358,
+        "endChar": 59
+      },
+      "revId": "9ec2654a492a0dbaf75280b8fe140359c66be33a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f0a85f1f",
+        "filename": "repo/includes/Api/CreateClaim.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T12:24:45Z",
+      "side": 0,
+      "message": "Looks like I did quite a lot of these mistakes in I3900f0b. This first parameter here is meant to be a message key, and must start with \"wikibase-api-…\".\n\nI suggest to fix these in a separate patch.",
+      "range": {
+        "startLine": 117,
+        "startChar": 42,
+        "endLine": 117,
+        "endChar": 57
+      },
+      "revId": "9ec2654a492a0dbaf75280b8fe140359c66be33a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_506853f2",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T12:24:45Z",
+      "side": 0,
+      "message": "Here is the same mistake on an other message, this time from I9b75296.",
+      "range": {
+        "startLine": 175,
+        "startChar": 7,
+        "endLine": 175,
+        "endChar": 23
+      },
+      "revId": "9ec2654a492a0dbaf75280b8fe140359c66be33a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

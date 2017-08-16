@@ -48,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_70bc6f67",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T12:24:45Z",
+      "side": 1,
+      "message": "This revert is a rebase mistake and should not be done. The additional …-1 message is not needed any more because of this.",
+      "range": {
+        "startLine": 379,
+        "startChar": 33,
+        "endLine": 379,
+        "endChar": 134
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_507e13e2",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 10
@@ -64,6 +87,29 @@
         "startChar": 29,
         "endLine": 380,
         "endChar": 31
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d0ad232f",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-16T12:24:45Z",
+      "side": 1,
+      "message": "This revert is a rebase mistake and should not be done. The additional …-1 message is not needed any more because of this.",
+      "range": {
+        "startLine": 395,
+        "startChar": 32,
+        "endLine": 395,
+        "endChar": 157
       },
       "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
