@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_3084a75d",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-08-16T09:52:39Z",
+      "side": 1,
+      "message": "This works technically but `$this-\u003esupportedEntityTypes[$repository]` might not exist and throw some warnings for not existing index and unexpected parameter. Not sure if this is intended.",
+      "revId": "b00a42c4e50729da9047eea4c5148aff29ab4bd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
