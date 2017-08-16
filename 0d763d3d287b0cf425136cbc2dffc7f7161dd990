@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e7eab26_10496b90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-08-16T12:46:11Z",
+      "side": 1,
+      "message": "I guess you mean\n\n dieWithError",
+      "range": {
+        "startLine": 7,
+        "startChar": 37,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "0d763d3d287b0cf425136cbc2dffc7f7161dd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_7081cfc7",
         "filename": "repo/i18n/en.json",
         "patchSetId": 10
