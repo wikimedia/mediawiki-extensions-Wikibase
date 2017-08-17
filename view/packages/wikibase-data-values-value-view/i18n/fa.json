@@ -6,7 +6,8 @@
 			"Reza1615",
 			"Rtemis",
 			"AzorAhai",
-			"Mahdy Saffar"
+			"Mahdy Saffar",
+			"Alirezaaa"
 		]
 	},
 	"valueview-desc": "اجزای رابط کاربر برای نمایش و ویرایش مقادیر داده‌ها",
@@ -15,11 +16,14 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.",
 	"valueview-expert-emptyvalue-empty": "خالی",
 	"valueview-expert-globecoordinateinput-precision": "دقت:",
+	"valueview-expert-globecoordinateinput-nullprecision": "مشخص‌نشده",
+	"valueview-expert-globecoordinateinput-customprecision": "ویژه ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "میلادی",
 	"valueview-expert-timevalue-calendar-julian": "ژولینی",
 	"valueview-expert-timeinput-precision": "دقت:",
 	"valueview-expert-timeinput-calendar": "تقویم:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "زبان (اجباری):",
 	"valueview-expertextender-unitsuggester-label": "یکا (اختیاری):",
 	"valueview-preview-label": "پیش‌نمایش:",
 	"valueview-preview-novalue": "مقدار وارد شده معتبر نیست",

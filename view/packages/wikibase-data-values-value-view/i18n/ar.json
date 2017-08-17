@@ -3,9 +3,11 @@
 		"authors": [
 			"BAB ZAA",
 			"Mido",
-			"Claw eg"
+			"Claw eg",
+			"ديفيد"
 		]
 	},
+	"valueview-desc": "مكونات واجهة المستخدم لعرض وتحرير قيم البيانات",
 	"valueview-expert-advancedadjustments": "تعديلات متقدمة",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "معالجة قيم \"$1\" ليس مدعمًا حتى الآن.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "معالجة قيم بيانات \"$1\" ليس مدعمًا حتى الآن.",
