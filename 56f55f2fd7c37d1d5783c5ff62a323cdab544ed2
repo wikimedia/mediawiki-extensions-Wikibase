@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b0df30da",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-17T11:42:34Z",
+      "side": 1,
+      "message": "As the change shrank, I am not really sure why this is changed. Just for clarification of the message? Probably could be separate change then. But I believe not worth to split it now.",
+      "revId": "56f55f2fd7c37d1d5783c5ff62a323cdab544ed2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
