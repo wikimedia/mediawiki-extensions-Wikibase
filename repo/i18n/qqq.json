@@ -351,6 +351,8 @@
 	"wikibase-mylanguagefallbackchain-verbatim-item": "A \"verbatim\" (taken from database and displayed as-is) fallback chain item.\n\nParameters:\n* $1 - Language code\n* $2 - Language name",
 	"wikibase-mylanguagefallbackchain-converted-item": "A \"converted\" (taken from data in another language and converted to another language on display) fallback chain item.\n\nParameters:\n* $1 - Language code\n* $2 - Language name\n* $3 - Source language code\n* $4 - Source language name",
 	"wikibase-api-common-item": "!!DO NOT TRANSLATE!! This is an error message for a situation where a common item detected that should not",
+	"wikibase-api-claim-value-missing": "Error message returned from the API when attempting to create a claim with no value.",
+	"wikibase-api-claim-value-unexpected": "Error message returned from the API when attempting to specify a value while creating a non-value claim.",
 	"wikibase-api-badtoken": "!!DO NOT TRANSLATE!! This is an error message for a situation where there are no or bad token given in the API call and it is expected. Usually this should never be shown to the user, unless there are some exceptional error conditions. The message can be shown after misconfiguration of the system.",
 	"wikibase-api-cant-load-entity-content": "!!DO NOT TRANSLATE!! Shown when we can't access the content revision. This could be because it has been deleted, or because it belongs to a different entity.",
 	"wikibase-api-unresolved-redirect": "Error message returned from the API when trying to use an entity ID that refers to a redirect in a context where redirects are not supported.",
