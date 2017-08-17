@@ -16,6 +16,24 @@
       "revId": "56f55f2fd7c37d1d5783c5ff62a323cdab544ed2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6bfd5d03",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T12:34:18Z",
+      "side": 1,
+      "message": "It was introduced by Daniel in PS2 https://gerrit.wikimedia.org/r/#/c/354141/2/repo/i18n/en.json I think it\u0027s for better clarification and isn\u0027t worth a dedicated patch.",
+      "parentUuid": "4e7eab26_b0df30da",
+      "revId": "56f55f2fd7c37d1d5783c5ff62a323cdab544ed2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
