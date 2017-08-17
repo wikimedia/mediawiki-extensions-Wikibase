@@ -46,6 +46,30 @@
       "revId": "c36854a5ae71cbb2ed700685ec5b40a4a179927f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_65690cf6",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-17T07:55:15Z",
+      "side": 1,
+      "message": "Rebase mistake? I can\u0027t tell any more.\n\nDaniel introduced \"wikibase-api-need-ids-or-titles-and-sites\". I introduced \"wikibase-api-illegal-entity-selector\". Both are very close together and should follow a common naming scheme, as well as appear next to each other in en.json. I wrote a comment about this back in https://gerrit.wikimedia.org/r/#/c/354141/5/repo/i18n/en.json .\n\nSuggestion for the two message keys:\n* wikibase-api-illegal-id-or-site-page-selector\n* wikibase-api-illegal-ids-or-sites-titles-selector",
+      "parentUuid": "4e7eab26_c58a40c0",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 41
+      },
+      "revId": "c36854a5ae71cbb2ed700685ec5b40a4a179927f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
