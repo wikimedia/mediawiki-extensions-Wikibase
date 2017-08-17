@@ -110,10 +110,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * Initialized lazily by resolveRedirects().
 	 *
-	 * @var string[]|null map of id-string to EntityId objects:
+	 * @var EntityId[]|null map of id-string to EntityId objects:
 	 *      id-string => EntityId
 	 */
 	private $redirects = null;
+
+	private $redirectedByTargets = [];
 
 	/**
 	 * @var EntityIdParser
@@ -255,6 +257,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		if ( $idString === $targetKey ) {
 			// Sanity check: self-redirect, nothing to do.
 			return;
+		}
+
+		if ( !isset( $targetKey, $this->redirectedByTargets ) ) {
+			$this->redirectedByTargets[$targetKey] = [ $idString ];
+		} else {
+			$this->redirectedByTargets[$targetKey][] = $idString;
 		}
 
 		// Copy the record for the old key to the target key.
@@ -463,26 +471,32 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 					continue;
 				}
 
-			$key = $entityId->getSerialization();
-
-			if ( !isset( $this->entityInfo[$key] ) ) {
-				continue;
+			$id = $entityId->getSerialization();
+			$keys = [ $id ];
+			if ( array_key_exists( $id, $this->redirectedByTargets ) ) {
+				$keys = array_merge( $keys, $this->redirectedByTargets[$id] );
 			}
 
-			$field = self::$termTypeFields[$row->term_type];
+			foreach ( $keys as $key ) {
+				if ( !isset( $this->entityInfo[$key] ) ) {
+					continue;
+				}
 
-			switch ( $row->term_type ) {
-				case 'label':
-					$this->injectLabel( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
-					break;
-				case 'description':
-					$this->injectDescription( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
-					break;
-				case 'alias':
-					$this->injectAlias( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
-					break;
-				default:
-					wfDebugLog( __CLASS__, __FUNCTION__ . ': unknown term type: ' . $row->term_type );
+				$field = self::$termTypeFields[$row->term_type];
+
+				switch ( $row->term_type ) {
+					case 'label':
+						$this->injectLabel( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
+						break;
+					case 'description':
+						$this->injectDescription( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
+						break;
+					case 'alias':
+						$this->injectAlias( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
+						break;
+					default:
+						wfDebugLog( __CLASS__, __FUNCTION__ . ': unknown term type: ' . $row->term_type );
+				}
 			}
 		}
 	}
@@ -728,6 +742,8 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 				if ( !$includeRedirects || $pageInfo[$key]['redirect_target'] === null ) {
 					continue;
 				}
+			} elseif ( !$includeRedirects && isset( $this->redirectedByTargets[$key] ) ) {
+					continue;
 			}
 
 			$missingIds[] = $key;

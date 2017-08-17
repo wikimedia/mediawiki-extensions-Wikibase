@@ -562,4 +562,19 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
 	}
 
+	public function testOrderOfRemoveMissingCallIsIrrelevantForResultsOfCollectTerms() {
+		$builder = $this->newEntityInfoBuilder( [ new ItemId( 'Q7' ) ] );
+
+		$builder->resolveRedirects();
+		$builder->removeMissing();
+		$builder->collectTerms( [ 'label' ], [ 'en' ] );
+
+		$info = $builder->getEntityInfo()->asArray();
+
+		$this->assertEquals(
+			[ 'type' => 'item', 'id' => 'Q2', 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'label:Q2/en' ] ] ],
+			$info['Q7']
+		);
+	}
+
 }

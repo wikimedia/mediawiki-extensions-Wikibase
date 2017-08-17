@@ -600,6 +600,21 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->assertArrayEquals( $expected, $actual, false, true );
 	}
 
+	public function testOrderOfRemoveMissingCallIsIrrelevantForResultsOfCollectTermsFullEntityId() {
+		$builder = $this->newEntityInfoBuilderFullEntityId( [ new ItemId( 'Q7' ) ] );
+
+		$builder->resolveRedirects();
+		$builder->removeMissing();
+		$builder->collectTerms( [ 'label' ], [ 'en' ] );
+
+		$info = $builder->getEntityInfo()->asArray();
+
+		$this->assertEquals(
+			[ 'type' => 'item', 'id' => 'Q2', 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'label:Q2/en' ] ] ],
+			$info['Q7']
+		);
+	}
+
 	/**
 	 * @param EntityId[] $ids
 	 *
