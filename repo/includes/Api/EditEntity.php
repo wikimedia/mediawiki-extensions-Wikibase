@@ -178,7 +178,7 @@ class EditEntity extends ModifyEntity {
 		}
 		if ( $hasId && $hasSiteLink ) {
 			$this->errorReporter->dieWithError(
-				'wikibase-api-illegal-entity-selector',
+				'wikibase-api-illegal-id-or-site-page-selector',
 				'param-illegal'
 			);
 		}
