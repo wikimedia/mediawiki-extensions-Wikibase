@@ -91,7 +91,6 @@ call_user_func( function() {
 	$wgExtensionCredits['wikibase'][] = [
 		'path' => __DIR__,
 		'name' => 'Wikibase Repository',
-		'version' => WB_VERSION,
 		'author' => [
 			'The Wikidata team',
 		],
