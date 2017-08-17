@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_838e6d31",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-17T19:25:52Z",
+      "side": 1,
+      "message": "The conditional is not needed, $x[$y][] \u003d $z is valid even if  $x[$z] is not yet declared.",
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_b07970f4",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -36,6 +53,30 @@
       "writtenOn": "2017-08-17T11:37:31Z",
       "side": 1,
       "message": "Stuff in this is better to be moved to another method, too big and too indented.",
+      "range": {
+        "startLine": 480,
+        "startChar": 3,
+        "endLine": 499,
+        "endChar": 5
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a393695a",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-17T19:25:52Z",
+      "side": 1,
+      "message": "indeed",
+      "parentUuid": "4e7eab26_b07970f4",
       "range": {
         "startLine": 480,
         "startChar": 3,
