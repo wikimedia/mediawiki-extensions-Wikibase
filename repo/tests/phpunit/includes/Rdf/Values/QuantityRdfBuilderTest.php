@@ -334,7 +334,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @ticket T150877
+	 * @see http://phabricator.wikimedia.org/T150877
 	 */
 	public function testWriteTwice() {
 		$unboundedValue = UnboundedQuantityValue::newFromNumber( '-79.1', 'Q2' );

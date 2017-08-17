@@ -12,7 +12,7 @@ use TestSites;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @gorup WikibaseRepo
+ * @group WikibaseRepo
  * @group BreakingTheSlownessBarrier
  * @group Database
  * @group medium
