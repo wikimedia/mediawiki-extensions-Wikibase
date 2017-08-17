@@ -327,6 +327,7 @@
 	"wikibase-api-failed-save": "The save has failed.",
 	"wikibase-api-illegal-entity-remove": "Entities can not be deleted by providing a top-level <var>remove</var> key.",
 	"wikibase-api-illegal-entity-selector": "You need to provide either an entity <var>id</var>, or a <var>site</var> and <var>page</var> combination, but not both.",
+	"wikibase-api-illegal-entities-selector": "Either provide the item \"ids\" or pairs of \"sites\" and \"titles\" for corresponding page",
 	"wikibase-api-inconsistent-language": "Inconsistent language detected.",
 	"wikibase-api-inconsistent-site": "Inconsistent site detected.",
 	"wikibase-api-invalid-guid": "Invalid claim guid.",
