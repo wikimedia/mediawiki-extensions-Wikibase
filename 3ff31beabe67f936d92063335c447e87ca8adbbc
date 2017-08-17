@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_f0737812",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T11:37:31Z",
+      "side": 1,
+      "message": "PHPDoc missing.",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 35
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b07970f4",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T11:37:31Z",
+      "side": 1,
+      "message": "Stuff in this is better to be moved to another method, too big and too indented.",
+      "range": {
+        "startLine": 480,
+        "startChar": 3,
+        "endLine": 499,
+        "endChar": 5
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d0767c00",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T11:37:31Z",
+      "side": 1,
+      "message": "One extra indentation",
+      "range": {
+        "startLine": 746,
+        "startChar": 4,
+        "endLine": 746,
+        "endChar": 5
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_50612c31",
+        "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T11:37:31Z",
+      "side": 1,
+      "message": "This can be moved to a provider or gets broken to several lines.",
+      "range": {
+        "startLine": 575,
+        "startChar": 3,
+        "endLine": 575,
+        "endChar": 112
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f05a9884",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T11:37:31Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 613,
+        "startChar": 3,
+        "endLine": 613,
+        "endChar": 112
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
