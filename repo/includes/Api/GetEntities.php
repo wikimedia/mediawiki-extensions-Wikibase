@@ -121,7 +121,7 @@ class GetEntities extends ApiBase {
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
 			$this->errorReporter->dieWithError(
-				'wikibase-api-illegal-entities-selector',
+				'wikibase-api-illegal-ids-or-sites-titles-selector',
 				'param-missing'
 			);
 		}

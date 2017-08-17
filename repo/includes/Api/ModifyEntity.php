@@ -229,7 +229,7 @@ abstract class ModifyEntity extends ApiBase {
 
 		if ( $noReferenceIsGiven || $bothReferencesAreGiven ) {
 			$this->errorReporter->dieWithError(
-				'wikibase-api-illegal-entity-selector',
+				'wikibase-api-illegal-id-or-site-page-selector',
 				'param-illegal'
 			);
 		}
