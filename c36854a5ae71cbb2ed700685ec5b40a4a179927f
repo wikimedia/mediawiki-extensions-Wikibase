@@ -22,6 +22,30 @@
       "revId": "c36854a5ae71cbb2ed700685ec5b40a4a179927f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_c58a40c0",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-17T07:43:41Z",
+      "side": 1,
+      "message": "This is your change: https://gerrit.wikimedia.org/r/#/c/354141/10/repo/includes/Api/GetEntities.php. I make another key in i18n files.",
+      "parentUuid": "4e7eab26_8bf9b04c",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 41
+      },
+      "revId": "c36854a5ae71cbb2ed700685ec5b40a4a179927f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
