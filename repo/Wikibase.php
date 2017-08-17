@@ -40,7 +40,7 @@ if ( defined( 'WB_VERSION' ) ) {
 	return 1;
 }
 
-define( 'WB_VERSION', '0.5 alpha' );
+define( 'WB_VERSION', '1.0.0' );
 
 // Needs to be 1.26c because version_compare() works in confusing ways.
 if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {

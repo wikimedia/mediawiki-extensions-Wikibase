@@ -5,7 +5,7 @@ if ( defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 	return 1;
 }
 
-define( 'WIKIBASE_VIEW_VERSION', '0.1-dev' );
+define( 'WIKIBASE_VIEW_VERSION', '1.0.0' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
