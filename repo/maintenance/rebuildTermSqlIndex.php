@@ -46,6 +46,7 @@ class RebuildTermSqlIndex extends Maintenance  {
 			'rebuild-all-terms', 'Rebuilds all terms of the entity (requires loading data of each processed entity)'
 		);
 		$this->addOption( 'from-id', "First row (page id) to start updating from", false, true );
+		$this->addOption( 'sleep', "Sleep time (in seconds) between every batch", false, true );
 	}
 
 	public function execute() {
@@ -88,7 +89,8 @@ class RebuildTermSqlIndex extends Maintenance  {
 			$termIndex,
 			$sqlEntityIdPagerFactory,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$this->getEntityTypes()
+			$this->getEntityTypes(),
+			$this->getOption( 'sleep', 10 )
 		);
 		$builder->setProgressReporter( $this->getReporter() );
 		$builder->setErrorReporter( $this->getErrorReporter() );
