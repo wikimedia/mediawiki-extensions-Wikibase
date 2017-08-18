@@ -8,7 +8,7 @@ use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
@@ -116,9 +116,9 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	/**
 	 * @see EntityStoreWatcher::entityDeleted
 	 *
-	 * @param TheEntityRevision $entityRevision
+	 * @param EntityRevision $entityRevision
 	 */
-	public function entityUpdated( TheEntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision ) {
 		$this->purge( $entityRevision->getEntity()->getId() );
 	}
 
