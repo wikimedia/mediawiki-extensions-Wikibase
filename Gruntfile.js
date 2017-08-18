@@ -13,7 +13,6 @@ module.exports = function ( grunt ) {
 		jsonlint: {
 			all: [
 				'**/*.json',
-				'.stylelintrc',
 				'!node_modules/**',
 				'!vendor/**'
 			]
