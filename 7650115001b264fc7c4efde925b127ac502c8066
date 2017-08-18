@@ -22,6 +22,30 @@
       "revId": "7650115001b264fc7c4efde925b127ac502c8066",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d750ab63",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-18T12:38:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_03a13291",
+      "range": {
+        "startLine": 113,
+        "startChar": 59,
+        "endLine": 113,
+        "endChar": 60
+      },
+      "revId": "7650115001b264fc7c4efde925b127ac502c8066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
