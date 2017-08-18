@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -28,7 +28,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
-	 * @param TheEntityRevision[] $entityRevisions
+	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityLookup

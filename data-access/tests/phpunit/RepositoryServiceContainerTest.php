@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
@@ -158,7 +158,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	public function testEntityUpdatedDelegatesEventToAllWatchersThatHaveAlreadyBeenUsed() {
 		$container = $this->getRepositoryServiceContainerForEventTest( 'entityUpdated' );
 
-		$container->entityUpdated( new TheEntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
+		$container->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
 	}
 
 	public function testEntityDeletedDelegatesEventToAllWatchersThatHaveAlreadyBeenUsed() {

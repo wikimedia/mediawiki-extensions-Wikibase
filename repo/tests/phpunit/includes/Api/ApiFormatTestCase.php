@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -94,7 +94,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 		return $entityRevision;
 	}
 
-	private function storePresetDataInStatement( TheEntityRevision $entityRevision, PropertyId $propertyId ) {
+	private function storePresetDataInStatement( EntityRevision $entityRevision, PropertyId $propertyId ) {
 		global $wgUser;
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
