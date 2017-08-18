@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_bc4b86cc",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-08-18T08:18:07Z",
+      "side": 1,
+      "message": "This is not a real issue, but I guess some old Lua modules in production wikis may use the old convention of lower case p - so now instead of silent fail (p123 not found in table) it will be a (good) noisy fail.\n\nConsider to include it in the release notes/tech news (e.g Reminder: use P and not p to access properties...)",
+      "range": {
+        "startLine": 33,
+        "startChar": 63,
+        "endLine": 33,
+        "endChar": 64
+      },
+      "revId": "f9d00c5da2b0aaa064770778f0506ab5ce12362b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
