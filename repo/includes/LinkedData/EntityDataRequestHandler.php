@@ -4,7 +4,7 @@ namespace Wikibase\Repo\LinkedData;
 
 use HttpError;
 use OutputPage;
-use SquidUpdate;
+use CdnCacheUpdate;
 use WebRequest;
 use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
@@ -283,7 +283,7 @@ class EntityDataRequestHandler {
 		$urls = $this->uriManager->getCacheableUrls( $id );
 
 		//TODO: use a factory or service, so we can mock & test this
-		$update = new SquidUpdate( $urls );
+		$update = new CdnCacheUpdate( $urls );
 		$update->doUpdate();
 	}
 
