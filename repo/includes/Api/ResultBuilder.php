@@ -17,7 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
@@ -252,7 +252,7 @@ class ResultBuilder {
 	 *        Used as the key for the entity in the 'entities' structure and for adding redirect
 	 *     info Will default to the entity's serialized ID if null. If given this must be the
 	 *     entity id before any redirects were resolved.
-	 * @param TheEntityRevision $entityRevision
+	 * @param EntityRevision $entityRevision
 	 * @param string[]|string $props a list of fields to include, or "all"
 	 * @param string[]|null $filterSiteIds A list of site IDs to filter by
 	 * @param string[] $filterLangCodes A list of language codes to filter by
@@ -260,7 +260,7 @@ class ResultBuilder {
 	 */
 	public function addEntityRevision(
 		$sourceEntityIdSerialization,
-		TheEntityRevision $entityRevision,
+		EntityRevision $entityRevision,
 		$props = 'all',
 		array $filterSiteIds = null,
 		array $filterLangCodes = [],
@@ -1080,7 +1080,7 @@ class ResultBuilder {
 	private function getRevisionId( $revision ) {
 		if ( $revision instanceof Revision ) {
 			$revisionId = $revision->getId();
-		} elseif ( $revision instanceof TheEntityRevision ) {
+		} elseif ( $revision instanceof EntityRevision ) {
 			$revisionId = $revision->getRevisionId();
 		}
 

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\RepositoryDefinitions;
 
 /**
@@ -116,10 +116,10 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 
-		$factory->entityUpdated( new TheEntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
+		$factory->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
 
 		$fooContainer->entityUpdated(
-			new TheEntityRevision( new Item( new ItemId( 'foo:Q123' ) ) )
+			new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) )
 		)->shouldHaveBeenCalled();
 		$localContainer->entityUpdated( Argument::any() )->shouldNotHaveBeenCalled();
 	}

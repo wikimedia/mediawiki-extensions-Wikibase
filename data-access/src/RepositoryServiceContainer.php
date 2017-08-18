@@ -11,7 +11,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
@@ -128,9 +128,9 @@ class RepositoryServiceContainer extends ServiceContainer implements EntityStore
 	/**
 	 * @see EntityStoreWatcher::entityUpdated
 	 *
-	 * @param TheEntityRevision $entityRevision
+	 * @param EntityRevision $entityRevision
 	 */
-	public function entityUpdated( TheEntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision ) {
 		foreach ( $this->getServiceNames() as $serviceName ) {
 			$service = $this->peekService( $serviceName );
 			if ( $service instanceof EntityStoreWatcher ) {

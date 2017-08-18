@@ -21,7 +21,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -118,7 +118,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
-	 * @return TheEntityRevision|null
+	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision(
 		EntityId $entityId,
@@ -146,7 +146,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 			$revisionId = 0;
 		}
 
-		/** @var TheEntityRevision[] $revisions */
+		/** @var EntityRevision[] $revisions */
 		$revisions = $this->entities[$key];
 
 		if ( $revisionId === 0 ) {
@@ -157,7 +157,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 		}
 
 		$revision = $revisions[$revisionId];
-		$revision = new TheEntityRevision( // return a copy!
+		$revision = new EntityRevision( // return a copy!
 			$revision->getEntity()->copy(), // return a copy!
 			$revision->getRevisionId(),
 			$revision->getTimestamp()
@@ -229,7 +229,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 * @param User|string|null $user
 	 *
 	 * @throws StorageException
-	 * @return TheEntityRevision
+	 * @return EntityRevision
 	 */
 	public function putEntity( EntityDocument $entity, $revisionId = 0, $timestamp = 0, $user = null ) {
 		if ( $entity->getId() === null ) {
@@ -255,7 +255,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 		$this->updateMaxNumericId( $entity->getId() );
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
-		$revision = new TheEntityRevision(
+		$revision = new EntityRevision(
 			$entity->copy(), // note: always clone
 			$revisionId,
 			wfTimestamp( TS_MW, $timestamp )
@@ -479,7 +479,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @see WikiPage::doEditContent
 	 *
-	 * @return TheEntityRevision
+	 * @return EntityRevision
 	 * @throws StorageException
 	 */
 	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
@@ -568,7 +568,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 			return false;
 		}
 
-		/** @var TheEntityRevision $revision */
+		/** @var EntityRevision $revision */
 		foreach ( $this->entities[$key] as $revision ) {
 			if ( $revision->getRevisionId() >= $lastRevisionId ) {
 				if ( isset( $revision->user ) && $revision->user !== $user->getName() ) {
