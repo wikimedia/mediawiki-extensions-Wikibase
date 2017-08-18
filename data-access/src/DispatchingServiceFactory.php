@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -88,9 +88,9 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	/**
 	 * @see EntityStoreWatcher::entityUpdated
 	 *
-	 * @param TheEntityRevision $entityRevision
+	 * @param EntityRevision $entityRevision
 	 */
-	public function entityUpdated( TheEntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision ) {
 		$container = $this->getContainerForRepository(
 			$entityRevision->getEntity()->getId()->getRepositoryName()
 		);

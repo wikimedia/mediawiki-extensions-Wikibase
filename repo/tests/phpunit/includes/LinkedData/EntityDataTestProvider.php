@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\LinkedData;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -19,13 +19,13 @@ use Wikibase\Lib\Tests\MockRepository;
 class EntityDataTestProvider {
 
 	/**
-	 * @return TheEntityRevision[]
+	 * @return EntityRevision[]
 	 */
 	public static function getEntityRevisions() {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', 'Raarrr!' );
 
-		$itemRev = new TheEntityRevision( $item, 4242, '20131211100908' );
+		$itemRev = new EntityRevision( $item, 4242, '20131211100908' );
 
 		return [ $itemRev ];
 	}

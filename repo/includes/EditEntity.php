@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -70,7 +70,7 @@ class EditEntity {
 	private $entityId = null;
 
 	/**
-	 * @var TheEntityRevision|null
+	 * @var EntityRevision|null
 	 */
 	private $baseRev = null;
 
@@ -80,7 +80,7 @@ class EditEntity {
 	private $baseRevId;
 
 	/**
-	 * @var TheEntityRevision|null
+	 * @var EntityRevision|null
 	 */
 	private $latestRev = null;
 
@@ -242,7 +242,7 @@ class EditEntity {
 	/**
 	 * Returns the latest revision of the entity.
 	 *
-	 * @return TheEntityRevision|null
+	 * @return EntityRevision|null
 	 */
 	public function getLatestRevision() {
 		if ( $this->latestRev === null ) {
@@ -315,7 +315,7 @@ class EditEntity {
 	 * the constructor, this returns the latest revision. If the entity does not exist
 	 * yet, this returns null.
 	 *
-	 * @return TheEntityRevision|null
+	 * @return EntityRevision|null
 	 * @throws MWException
 	 */
 	public function getBaseRevision() {
