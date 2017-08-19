@@ -99,7 +99,7 @@
 	"wikibase-statementview-rank-preferred": "선호하는 등급",
 	"wikibase-statementview-rank-normal": "일반 등급",
 	"wikibase-statementview-rank-deprecated": "비사용 등급",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|각주}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|각주}}",
 	"wikibase-snakview-property-input-placeholder": "속성",
 	"wikibase-snakview-unsupportedsnaktype": "\"$1\"의 유형의 Snak입니다. Snak의 이 유형에 대한 처리는 아직 지원하지 않습니다.",
 	"wikibase-snakview-choosesnaktype": "값 유형을 선택하세요.",

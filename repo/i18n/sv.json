@@ -314,7 +314,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, konverterade från $3 - $4",
 	"wikibase-api-unresolved-redirect": "Angiven entitets-ID hänvisar till en omdirigering, som inte stöds i detta sammanhang.",
 	"wikibase-api-illegal-entity-remove": "Entiteter med toppnivånyckeln <var>remove</var> kan inte raderas.",
-	"wikibase-api-illegal-entity-selector": "Du måste ange antingen en <var>id</var>-entitet eller en kombination av <var>site</var> och <var>page</var>, men inte båda.",
+	"wikibase-api-illegal-id-or-site-page-selector": "Du måste ange antingen en <var>id</var>-entitet eller en kombination av <var>site</var> och <var>page</var>, men inte båda.",
 	"wikibase-api-no-such-entity": "Kunde inte hitta en entitet med ID \"$1\".",
 	"wikibase-api-no-such-sitelink": "Kunde inte hitta en webbplatslänk till \"$1\" när du försökte redigera emblem.",
 	"wikibase-api-not-recognized-datatype": "En datatyp förväntades, men saknades eller kändes inte igen.",

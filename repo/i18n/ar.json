@@ -324,7 +324,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "يمكنك تعديلها بإضافة &lrm; <nowiki>{{#babel: }}</nowiki>&lrm; على [[Special:MyPage|صفحة المستخدم]] {{GENDER:$1|الخاصة بك}}.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, تم تحويله من $3 - $4",
 	"wikibase-api-unresolved-redirect": "يشير معرِّف الكائن المحدد إلى تحويلة، وهذا غير مدعوم في السياق الحالي.",
-	"wikibase-api-illegal-entity-selector": "تحتاج إلى تقديم أي كيان <var>id</var>، أو موقع <var>site</var> و صفحة <var>page</var>، ولكن ليس على حد سواء.",
+	"wikibase-api-illegal-id-or-site-page-selector": "تحتاج إلى تقديم أي كيان <var>id</var>، أو موقع <var>site</var> و صفحة <var>page</var>، ولكن ليس على حد سواء.",
 	"wikibase-api-no-such-entity": "تعذر العثور على كيان يحمل المعرف \"$1\".",
 	"wikibase-api-no-such-sitelink": "لم يمكن العثور على وصلة موقع إلى \"$1\" عند محاولة تعديل الشارات.",
 	"wikibase-api-not-recognized-datatype": "نوع البيانات كان متوقع، ولكنها إما مفقودة أو غير معروفه.",

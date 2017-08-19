@@ -94,7 +94,7 @@
 	"wikibase-statementview-rank-normal": "সাধারন র‍্যাঙ্ক",
 	"wikibase-statementview-rank-tooltip-normal": "বৈধ মান, যদিও সম্ভবত ঐতিহাসিক",
 	"wikibase-statementview-rank-deprecated": "অবচিত ক্রম",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|টি তথ্যসূত্র}}",
+	"wikibase-statementview-references-counter": "$1টি {{PLURAL:$1|তথ্যসূত্র}}",
 	"wikibase-snakview-property-input-placeholder": "বৈশিষ্ট্য",
 	"wikibase-snakview-choosesnaktype": "একটি মানের ধরন নির্বাচন করুন।",
 	"wikibase-snakview-variations-somevalue-label": "অজানা মান",

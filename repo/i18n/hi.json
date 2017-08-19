@@ -9,7 +9,8 @@
 			"రహ్మానుద్దీన్",
 			"NehalDaveND",
 			"Sfic",
-			"Upendradutt93"
+			"Upendradutt93",
+			"Sachinkatiyar"
 		]
 	},
 	"wikibase-entity": "इकाई",
@@ -139,6 +140,9 @@
 	"wikibase-entitypage-bad-id": "अमान्य आईडी: $1",
 	"special-redirectentity": "इकाई अनुप्रेषित",
 	"wikibase-redirectentity-submit": "पुनर्निर्देशन",
+	"wikibase-api-claim-value-missing": "PropertyValueSnak snak के साथ दावे का निर्माण करते समय एक मूल्य प्रदान किया जाना चाहिए।",
+	"wikibase-api-claim-value-unexpected": "मुख्य Snak के रूप में बिना PropertyValueSnak के दावे का निर्माण करते समय आप मूल्य प्रदान नहीं कर सकते हैं।",
+	"wikibase-api-illegal-ids-or-sites-titles-selector": "या तो संबंधित पृष्ठ के लिए आइटम \"आईडी\" या \"साइटों\" और \"शीर्षक\" के जोड़े प्रदान करें",
 	"wikibase-restoreold": "पुनःस्थापित करें",
 	"wikibase-noentity-createone": "आप भी [[$1|नया बना सकते हैं]]",
 	"wikibase-special-mergeitems-error-prefix": "निम्न त्रुटि के कारण वस्तु का मिलन संभव नहीं है:",

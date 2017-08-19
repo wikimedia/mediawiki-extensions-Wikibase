@@ -65,6 +65,7 @@
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Mediefil frå Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-snakformatter-property-not-found": "Fann ikkje eigenskapen $1, kan ikkje avgjera kva datatype som skal nyttast.",
 	"wikibase-entity-summary-wbsetitem": "Oppretta eit nytt element",
 	"wikibase-entity-summary-wbcreateredirect": "Omdirigert til $4",
 	"wikibase-entity-summary-wbsetreference": "Sette ei kjelde",
