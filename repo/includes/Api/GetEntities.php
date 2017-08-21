@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -239,7 +239,7 @@ class GetEntities extends ApiBase {
 	 * @param EntityId[] $entityIds
 	 * @param bool $resolveRedirects
 	 *
-	 * @return TheEntityRevision[]
+	 * @return EntityRevision[]
 	 */
 	private function getEntityRevisionsFromEntityIds( array $entityIds, $resolveRedirects = false ) {
 		$revisionArray = [];
@@ -260,7 +260,7 @@ class GetEntities extends ApiBase {
 	 * @param EntityId $entityId
 	 * @param bool $resolveRedirects
 	 *
-	 * @return null|TheEntityRevision
+	 * @return null|EntityRevision
 	 */
 	private function getEntityRevision( EntityId $entityId, $resolveRedirects = false ) {
 		$entityRevision = null;
@@ -286,12 +286,12 @@ class GetEntities extends ApiBase {
 	 * Adds the given EntityRevision to the API result.
 	 *
 	 * @param string|null $sourceEntityId
-	 * @param TheEntityRevision|null $entityRevision
+	 * @param EntityRevision|null $entityRevision
 	 * @param array $params
 	 */
 	private function handleEntity(
 		$sourceEntityId,
-		TheEntityRevision $entityRevision = null,
+		EntityRevision $entityRevision = null,
 		array $params = []
 	) {
 		if ( $entityRevision === null ) {

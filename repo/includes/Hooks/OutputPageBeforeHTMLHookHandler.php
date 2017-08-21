@@ -7,7 +7,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\Store\EntityRevision as TheEntityRevision;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -188,7 +188,7 @@ class OutputPageBeforeHTMLHookHandler {
 			// The parser cache content is too old to contain the terms list items
 			// Pass the correct entity to generate terms list items on the fly
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
-			if ( !( $entityRev instanceof TheEntityRevision ) ) {
+			if ( !( $entityRev instanceof EntityRevision ) ) {
 				return null;
 			}
 			$entity = $entityRev->getEntity();
