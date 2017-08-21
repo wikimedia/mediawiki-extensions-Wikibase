@@ -97,19 +97,22 @@ class TermSqlIndexBuilder {
 	 * @param SqlEntityIdPagerFactory $entityIdPagerFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param string[] $entityTypes
+	 * @param int $sleep Sleep time between each batch
 	 */
 	public function __construct(
 		LBFactory $loadBalancerFactory,
 		TermSqlIndex $termSqlIndex,
 		SqlEntityIdPagerFactory $entityIdPagerFactory,
 		EntityRevisionLookup $entityRevisionLookup,
-		array $entityTypes
+		array $entityTypes,
+		$sleep = 10
 	) {
 		$this->loadBalancerFactory = $loadBalancerFactory;
 		$this->termSqlIndex = $termSqlIndex;
 		$this->entityIdPagerFactory = $entityIdPagerFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTypes = $entityTypes;
+		$this->sleep = $sleep;
 		$this->progressReporter = new NullMessageReporter();
 		$this->errorReporter = new NullMessageReporter();
 	}
@@ -200,6 +203,7 @@ class TermSqlIndexBuilder {
 				$this->progressReporter->reportMessage( "Processed up to page "
 					. $idPager->getPosition() . " ($lastIdProcessed)" );
 			}
+			sleep( $this->sleep );
 		}
 
 		$this->progressReporter->reportMessage( "Done rebuilding $entityType terms" );
