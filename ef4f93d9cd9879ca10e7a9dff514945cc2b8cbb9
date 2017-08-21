@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_5d5295df",
+        "filename": "lib/includes/Store/EntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-21T09:30:06Z",
+      "side": 1,
+      "message": "I guess it would potentially make sense to have some back compat grace period when \u0027slave\u0027 is also recognized. OTOH, let\u0027s hope this interface is not really used outside of Wikibase, so there should be no problem with this change.",
+      "revId": "ef4f93d9cd9879ca10e7a9dff514945cc2b8cbb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
