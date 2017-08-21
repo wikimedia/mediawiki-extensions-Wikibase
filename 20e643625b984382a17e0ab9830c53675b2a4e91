@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_c8bfa55a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-21T15:24:21Z",
+      "side": 1,
+      "message": "maybe this should become \"PerRepositoryServiceWiring\"",
+      "revId": "20e643625b984382a17e0ab9830c53675b2a4e91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_48ac1531",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-21T15:24:21Z",
+      "side": 1,
+      "message": "Perhaps the setting should be renamed to \u0027multiRepositoryServiceWiringFiles\u0027",
+      "revId": "20e643625b984382a17e0ab9830c53675b2a4e91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e8a4e148",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-21T15:24:21Z",
+      "side": 1,
+      "message": "Perhaps the setting should be renamed, too",
+      "revId": "20e643625b984382a17e0ab9830c53675b2a4e91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
