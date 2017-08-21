@@ -23,7 +23,7 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	 */
 	const FROM_MASTER = 'master';
 
-	const FROM_SLAVE = 'slave';
+	const FROM_REPLICA = 'replica';
 
 	/**
 	 * @var EntityChangeFactory
@@ -106,7 +106,7 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	 *
 	 * @return EntityChange|null
 	 */
-	public function loadByRevisionId( $revisionId, $mode = self::FROM_SLAVE ) {
+	public function loadByRevisionId( $revisionId, $mode = self::FROM_REPLICA ) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 
 		$change = $this->loadChanges(

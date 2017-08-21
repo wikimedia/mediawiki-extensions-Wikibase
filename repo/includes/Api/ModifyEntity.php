@@ -182,7 +182,7 @@ abstract class ModifyEntity extends ApiBase {
 			$currentEntityRevision = $this->revisionLookup->getEntityRevision(
 				$entity->getId(),
 				0,
-				EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+				EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 			);
 			$currentEntity = $currentEntityRevision ? $currentEntityRevision->getEntity() : $entity;
 			$result = $changeOp->validate( $currentEntity );

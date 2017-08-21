@@ -44,7 +44,7 @@ class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
-	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
@@ -53,7 +53,7 @@ class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_SLAVE
+		$mode = self::LATEST_FROM_REPLICA
 	) {
 		$lookup = $this->getLookupForEntityId( $entityId );
 		return $lookup !== null ? $lookup->getEntityRevision( $entityId, $revisionId, $mode ) : null;
@@ -64,11 +64,11 @@ class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	 * Returns false also when $entityId does not belong to the repository with the configured lookup.
 	 *
 	 * @param EntityId $entityId
-	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		$lookup = $this->getLookupForEntityId( $entityId );
 		return $lookup !== null ? $lookup->getLatestRevisionId( $entityId, $mode ) : false;
 	}

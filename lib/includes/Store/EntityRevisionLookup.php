@@ -17,14 +17,14 @@ interface EntityRevisionLookup {
 	 * but a slightly lagged version is acceptable. This would generally be the case when fetching
 	 * entities for display.
 	 */
-	const LATEST_FROM_SLAVE = 'slave';
+	const LATEST_FROM_REPLICA = 'replica';
 
 	/**
 	 * Flag used to indicate that loading slightly lagged data is fine (like
-	 * LATEST_FROM_SLAVE), but in case an entity or revision couldn't be found,
+	 * LATEST_FROM_REPLICA), but in case an entity or revision couldn't be found,
 	 * we try loading it from master.
 	 */
-	const LATEST_FROM_SLAVE_WITH_FALLBACK = 'master_fallback';
+	const LATEST_FROM_REPLICA_WITH_FALLBACK = 'master_fallback';
 
 	/**
 	 * Flag to use instead of a revision ID to indicate that the latest revision is desired,
@@ -44,7 +44,7 @@ interface EntityRevisionLookup {
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
-	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
@@ -54,7 +54,7 @@ interface EntityRevisionLookup {
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_SLAVE
+		$mode = self::LATEST_FROM_REPLICA
 	);
 
 	/**
@@ -63,11 +63,11 @@ interface EntityRevisionLookup {
 	 * Implementations of this method must not silently resolve redirects.
 	 *
 	 * @param EntityId $entityId
-	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER.
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER.
 	 *        LATEST_FROM_MASTER would force the revision to be determined from the canonical master database.
 	 *
 	 * @return int|false Returns false in case the entity doesn't exist (this includes redirects).
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE );
+	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA );
 
 }

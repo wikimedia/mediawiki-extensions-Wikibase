@@ -112,7 +112,7 @@ class ItemsPerSiteBuilder {
 
 			$c++;
 		}
-		// Wait for the slaves, just in case we e.g. hit a range of ids which need a lot of writes.
+		// Wait for the replicas, just in case we e.g. hit a range of ids which need a lot of writes.
 		wfWaitForSlaves();
 
 		return $c;

@@ -49,7 +49,7 @@ class EntityLoadingHelper {
 	/**
 	 * @var string See the LATEST_XXX constants defined in EntityRevisionLookup
 	 */
-	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_SLAVE;
+	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
 	/**
 	 * @var SiteLinkLookup|null
@@ -126,7 +126,7 @@ class EntityLoadingHelper {
 	 *
 	 * @param EntityId $entityId EntityId of the page to load the revision for
 	 * @param int $revId The desired revision id, or 0 for the latest revision.
-	 * @param string|null $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string|null $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *        LATEST_FROM_MASTER (from EntityRevisionLookup). Null for the default.
 	 *
 	 * @throws ApiUsageException

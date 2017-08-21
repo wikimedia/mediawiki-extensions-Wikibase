@@ -136,8 +136,8 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 * @see WikiPageEntityMetaDataAccessor::loadRevisionInformation
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
-	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
+	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @return stdClass[] Array of entity id serialization => object.
@@ -175,8 +175,8 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
-	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
+	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @return stdClass|bool false if no such entity exists

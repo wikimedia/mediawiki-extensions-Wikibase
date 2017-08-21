@@ -113,7 +113,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
-	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
@@ -123,7 +123,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_SLAVE
+		$mode = self::LATEST_FROM_REPLICA
 	) {
 		$key = $entityId->getSerialization();
 
@@ -457,7 +457,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		try {
 			$revision = $this->getEntityRevision( $entityId, 0, $mode );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {

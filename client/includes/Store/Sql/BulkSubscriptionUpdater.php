@@ -38,7 +38,7 @@ class BulkSubscriptionUpdater {
 	private $subscriberWikiId;
 
 	/**
-	 * @var string|false The repo wiki's id, as used by the LoadBalancer. Used for wait for slaves.
+	 * @var string|false The repo wiki's id, as used by the LoadBalancer. Used for wait for replicas.
 	 *                   False indicates to use the local wiki's database, and is the default
 	 *                   for the repoWiki setting.
 	 */

@@ -151,7 +151,7 @@ class ChangeRunCoalescer {
 		$entityRev = $this->entityRevisionLookup->getEntityRevision(
 			$entityId,
 			$latestRevId,
-			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		if ( !$entityRev ) {

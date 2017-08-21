@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPrefetch() {
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -38,7 +38,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 					$q3->getSerialization() => $q3,
 					$q2->getSerialization() => $q2
 				],
-				$fromSlave
+				$fromReplica
 			)
 			->will( $this->returnValue( [
 				'Q1' => 'Nyan',
@@ -54,13 +54,13 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$accessor->prefetch( [ $q1 ] );
 
 		// This will trigger all three to be loaded
-		$rows = $accessor->loadRevisionInformation( [ $q2 ], $fromSlave );
+		$rows = $accessor->loadRevisionInformation( [ $q2 ], $fromReplica );
 		$result = $rows[$q2->getSerialization()];
 
 		$this->assertSame( 'cat', $result );
 
 		// No need to load this, already in cache
-		$rows = $accessor->loadRevisionInformation( [ $q3 ], $fromSlave );
+		$rows = $accessor->loadRevisionInformation( [ $q3 ], $fromReplica );
 		$result = $rows[$q3->getSerialization()];
 
 		$this->assertSame( '~=[,,_,,]:3', $result );
@@ -71,7 +71,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 	 * automatically resizes the cache to handle that.
 	 */
 	public function testPrefetch_moreAtOnce() {
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -93,7 +93,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, 2 );
 
 		// This will trigger all three to be loaded
-		$result = $accessor->loadRevisionInformation( [ $q1, $q2, $q3 ], $fromSlave );
+		$result = $accessor->loadRevisionInformation( [ $q1, $q2, $q3 ], $fromReplica );
 
 		$this->assertSame( $expected, $result );
 	}
@@ -103,7 +103,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 	 * discard some entities in order to store the ones that are immediately needed.
 	 */
 	public function testPrefetch_discardPrefetch() {
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -126,7 +126,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$accessor->prefetch( [ $q1, $q3 ] );
 
 		// Load $q1 and $q2... should not load $q3 as we don't have space to cache that data.
-		$result = $accessor->loadRevisionInformation( [ $q1, $q2 ], $fromSlave );
+		$result = $accessor->loadRevisionInformation( [ $q1, $q2 ], $fromReplica );
 
 		$this->assertSame( $expected, $result );
 	}
@@ -139,7 +139,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$q5 = new ItemId( 'Q5' );
 
 		$fromMaster = EntityRevisionLookup::LATEST_FROM_MASTER;
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
 		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 3 ) )
@@ -162,23 +162,23 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$accessor->prefetch( [ $q1, $q3 ] );
 
 		// This will trigger loading Q1, Q2 and Q3
-		$result = $accessor->loadRevisionInformation( [ $q2 ], $fromSlave );
+		$result = $accessor->loadRevisionInformation( [ $q2 ], $fromReplica );
 
-		$this->assertSame( [ 'Q2' => "$fromSlave:Q2" ], $result );
+		$this->assertSame( [ 'Q2' => "$fromReplica:Q2" ], $result );
 
 		// This can be served entirely from cache
-		$result = $accessor->loadRevisionInformation( [ $q1, $q3 ], $fromSlave );
+		$result = $accessor->loadRevisionInformation( [ $q1, $q3 ], $fromReplica );
 
 		$this->assertSame(
-			[ 'Q1' => "$fromSlave:Q1", 'Q3' => "$fromSlave:Q3" ],
+			[ 'Q1' => "$fromReplica:Q1", 'Q3' => "$fromReplica:Q3" ],
 			$result
 		);
 
 		// Fetch Q2 and Q5. Q2 is already cached Q5 needs to be loaded
-		$result = $accessor->loadRevisionInformation( [ $q2, $q5 ], $fromSlave );
+		$result = $accessor->loadRevisionInformation( [ $q2, $q5 ], $fromReplica );
 
 		$this->assertSame(
-			[ 'Q2' => "$fromSlave:Q2", 'Q5' => "$fromSlave:Q5" ],
+			[ 'Q2' => "$fromReplica:Q2", 'Q5' => "$fromReplica:Q5" ],
 			$result
 		);
 
@@ -188,10 +188,10 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$this->assertSame( [ 'Q4' => "$fromMaster:Q4" ], $result );
 
 		// Fetch Q2 and Q4, both from cache
-		$result = $accessor->loadRevisionInformation( [ $q2, $q4 ], $fromSlave );
+		$result = $accessor->loadRevisionInformation( [ $q2, $q4 ], $fromReplica );
 
 		$this->assertSame(
-			[ 'Q2' => "$fromSlave:Q2", 'Q4' => "$fromMaster:Q4" ],
+			[ 'Q2' => "$fromReplica:Q2", 'Q4' => "$fromMaster:Q4" ],
 			$result
 		);
 	}
@@ -245,7 +245,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 	 * @param array $params
 	 */
 	private function purgeMethodTest( $method, array $params ) {
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 
 		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
@@ -264,7 +264,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
 
-		$rows = $accessor->loadRevisionInformation( [ $q1 ], $fromSlave );
+		$rows = $accessor->loadRevisionInformation( [ $q1 ], $fromReplica );
 		$result = $rows[$q1->getSerialization()];
 
 		$this->assertSame( 'Foo', $result );
@@ -272,7 +272,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		call_user_func_array( [ $accessor, $method ], $params );
 
 		// Load it again after purge
-		$rows = $accessor->loadRevisionInformation( [ $q1 ], $fromSlave );
+		$rows = $accessor->loadRevisionInformation( [ $q1 ], $fromReplica );
 		$result = $rows[$q1->getSerialization()];
 
 		$this->assertSame( 'Bar', $result );

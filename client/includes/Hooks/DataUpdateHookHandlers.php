@@ -162,7 +162,7 @@ class DataUpdateHookHandlers {
 		// schedule the usage updates in the job queue, to avoid writing to the database
 		// during a GET request.
 
-		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
+		//TODO: Before posting a job, check replica database. If no changes are needed, skip update.
 
 		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages() );
 		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );

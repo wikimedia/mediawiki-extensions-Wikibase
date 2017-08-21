@@ -150,13 +150,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$entityRevision = $this->data[0];
 
 		// Make sure we have two calls to getConnection: One that asks for a
-		// slave and one that asks for the master.
+		// replica and one that asks for the master.
 		$lookup = $this->getLookupWithLaggedConnection( 0, 1, 2 );
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
 			$entityRevision ->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
@@ -172,7 +172,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
 			$entityRevision ->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_SLAVE
+			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 
 		// No fallback: Lagged data is omitted.
@@ -254,7 +254,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformation(
 				$entityIds,
-				EntityRevisionLookup::LATEST_FROM_SLAVE
+				EntityRevisionLookup::LATEST_FROM_REPLICA
 			);
 
 		$this->assertRevisionInformation( $entityIds, $result );
@@ -269,12 +269,12 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		];
 
 		// Make sure we have two calls to getConnection: One that asks for a
-		// slave and one that asks for the master.
+		// replica and one that asks for the master.
 		$lookup = $this->getLookupWithLaggedConnection( 1, 0, 2 );
 
 		$result = $lookup->loadRevisionInformation(
 			$entityIds,
-			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		$this->assertRevisionInformation( $entityIds, $result );
@@ -287,7 +287,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$lookup->loadRevisionInformation(
 			[ new ItemId( 'foo:Q123' ) ],
-			EntityRevisionLookup::LATEST_FROM_SLAVE
+			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 	}
 
@@ -299,7 +299,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$lookup->loadRevisionInformationByRevisionId(
 			new ItemId( 'foo:Q123' ),
 			1,
-			EntityRevisionLookup::LATEST_FROM_SLAVE
+			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 	}
 
@@ -311,7 +311,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$prefixedId = 'foo:' . $unprefixedId;
 
-		$result = $lookup->loadRevisionInformation( [ new ItemId( $prefixedId ) ], EntityRevisionLookup::LATEST_FROM_SLAVE );
+		$result = $lookup->loadRevisionInformation( [ new ItemId( $prefixedId ) ], EntityRevisionLookup::LATEST_FROM_REPLICA );
 
 		$this->assertCount( 1, $result );
 		$this->assertArrayHasKey( $prefixedId, $result );
@@ -336,7 +336,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			new ItemId( $prefixedId ),
 			$revision->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_SLAVE
+			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 
 		$this->assertInstanceOf( stdClass::class, $result );

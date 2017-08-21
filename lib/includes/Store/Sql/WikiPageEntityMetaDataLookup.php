@@ -52,8 +52,8 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
-	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
+	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
@@ -77,7 +77,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_REPLICA );
 		}
 
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
+		if ( $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
 			// Attempt to load (missing) rows from master if the caller asked for that.
 			$loadFromMaster = [];
 			/** @var EntityId $entityId */
@@ -101,8 +101,8 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	/**
 	 * @param EntityId $entityId
 	 * @param int $revisionId
-	 * @param string $mode (WikiPageEntityMetaDataAccessor::LATEST_FROM_SLAVE,
-	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 * @param string $mode (WikiPageEntityMetaDataAccessor::LATEST_FROM_REPLICA,
+	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
@@ -123,8 +123,8 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_REPLICA );
 
-		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
-			// Try loading from master, unless the caller only wants slave data.
+		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
+			// Try loading from master, unless the caller only wants replica data.
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
 				. " with $revisionId from DB_MASTER." );
 

@@ -98,7 +98,7 @@ class TermSearchKeyBuilder {
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
 		while ( true ) {
-			// Make sure we are not running too far ahead of the slaves,
+			// Make sure we are not running too far ahead of the replicas,
 			// as that would cause the site to be rendered read only.
 			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 

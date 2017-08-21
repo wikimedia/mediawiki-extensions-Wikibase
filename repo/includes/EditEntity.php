@@ -329,7 +329,7 @@ class EditEntity {
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision(
 					$id,
 					$baseRevId,
-					EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+					EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 				);
 
 				if ( $this->baseRev === null ) {

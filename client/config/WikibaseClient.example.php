@@ -119,7 +119,7 @@ if ( false ) {
 			'local3' => '127.0.2.3',
 		],
 
-		// Set up as fake master, because there are no slaves.
+		// Set up as fake master, because there are no replicas.
 		'masterTemplateOverrides' => [ 'fakeMaster' => true ],
 	];
 
