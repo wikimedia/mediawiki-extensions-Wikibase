@@ -142,9 +142,7 @@ return [
 
 	'TermSearchInteractorFactory' => function (
 		RepositoryServiceContainer $services,
-		GenericServices $genericServices,
-		DataAccessSettings $settings,
-		WikibaseClient $client
+		GenericServices $genericServices
 	) {
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
@@ -153,7 +151,7 @@ return [
 
 		return new TermIndexSearchInteractorFactory(
 			$termIndex,
-			$client->getLanguageFallbackChainFactory(),
+			$genericServices->getLanguageFallbackChainFactory(),
 			$prefetchingTermLookup
 		);
 	},
