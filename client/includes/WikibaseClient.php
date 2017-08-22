@@ -48,10 +48,7 @@ use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\GenericServices;
-use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
-use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -61,7 +58,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -86,7 +82,6 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -392,41 +387,53 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$multiRepositoryServices = new MultiRepositoryServices(
-				$this->getRepositoryServiceContainerFactory(),
-				$this->repositoryDefinitions
+			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
+				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
+				$this->getEntityNamespaceLookup(),
+				$this->repositoryDefinitions,
+				$this->entityTypeDefinitions,
+				$this->getDataAccessSettings(),
+				$this->getMultiRepositoryServiceWiring(),
+				$this->getPerRepositoryServiceWiring()
 			);
-			$multiRepositoryServices->loadWiringFiles( $this->settings->getSetting( 'multiRepositoryServiceWiringFiles' ) );
-
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $multiRepositoryServices );
 		}
 
 		return $this->wikibaseServices;
 	}
 
-	private function getRepositoryServiceContainerFactory() {
-		$idParserFactory = new PrefixMappingEntityIdParserFactory(
-			$this->getEntityIdParser(),
-			$this->repositoryDefinitions->getPrefixMappings()
-		);
-
-		$genericServices = new GenericServices( $this->getEntityNamespaceLookup(), $this->entityTypeDefinitions );
+	private function getDataAccessSettings() {
 		$clientSettings = $this->getSettings();
-		$dataAccessSettings = new DataAccessSettings(
+		return new DataAccessSettings(
 			$clientSettings->getSetting( 'maxSerializedEntitySize' ),
 			$clientSettings->getSetting( 'readFullEntityIdColumn' )
 		);
+	}
 
-		return new PerRepositoryServiceContainerFactory(
-			$idParserFactory,
-			$this->getEntityIdComposer(),
-			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
-			$this->repositoryDefinitions->getDatabaseNames(),
-			$clientSettings->getSetting( 'perRepositoryServiceWiringFiles' ),
-			$genericServices,
-			$dataAccessSettings,
-			$this->entityTypeDefinitions
-		);
+	private function getMultiRepositoryServiceWiring() {
+		global $wgWikibaseMultiRepositoryServiceWiringFiles;
+
+		$wiring = [];
+		foreach ( $wgWikibaseMultiRepositoryServiceWiringFiles as $file ) {
+			$wiring = array_merge(
+				$wiring,
+				require $file
+			);
+		}
+		return $wiring;
+	}
+
+	private function getPerRepositoryServiceWiring() {
+		global $wgWikibasePerRepositoryServiceWiringFiles;
+
+		$wiring = [];
+		foreach ( $wgWikibasePerRepositoryServiceWiringFiles as $file ) {
+			$wiring = array_merge(
+				$wiring,
+				require $file
+			);
+		}
+		return $wiring;
 	}
 
 	/**
