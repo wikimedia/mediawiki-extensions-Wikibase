@@ -162,11 +162,6 @@ final class WikibaseClient {
 	private $store = null;
 
 	/**
-	 * @var StringNormalizer|null
-	 */
-	private $stringNormalizer = null;
-
-	/**
 	 * @var Site|null
 	 */
 	private $site = null;
@@ -494,11 +489,7 @@ final class WikibaseClient {
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer() {
-		if ( $this->stringNormalizer === null ) {
-			$this->stringNormalizer = new StringNormalizer();
-		}
-
-		return $this->stringNormalizer;
+		return $this->getWikibaseServices()->getStringNormalizer();
 	}
 
 	/**
