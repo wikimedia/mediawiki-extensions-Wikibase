@@ -39,9 +39,9 @@ class RepositoryServiceContainerFactory {
 	private $databaseNames;
 
 	/**
-	 * @var string[]
+	 * @var callable[]
 	 */
-	private $wiringFiles;
+	private $serviceWiring;
 
 	/**
 	 * @var GenericServices
@@ -63,7 +63,7 @@ class RepositoryServiceContainerFactory {
 	 * @param EntityIdComposer $idComposer
 	 * @param RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory
 	 * @param array $repositoryDatabaseNames
-	 * @param string[] $wiringFiles
+	 * @param string[] $serviceWiring
 	 * @param GenericServices $genericServices
 	 * @param DataAccessSettings $settings
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
@@ -73,7 +73,7 @@ class RepositoryServiceContainerFactory {
 		EntityIdComposer $idComposer, //  TODO: change ID Composer and pass a factory of prefixing composer (T165589)
 		RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory,
 		array $repositoryDatabaseNames,
-		array $wiringFiles,
+		array $serviceWiring,
 		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		EntityTypeDefinitions $entityTypeDefinitions
@@ -82,7 +82,7 @@ class RepositoryServiceContainerFactory {
 		$this->idComposer = $idComposer;
 		$this->dataValueDeserializerFactory = $dataValueDeserializerFactory;
 		$this->databaseNames = $repositoryDatabaseNames;
-		$this->wiringFiles = $wiringFiles;
+		$this->serviceWiring = $serviceWiring;
 		$this->genericServices = $genericServices;
 		$this->settings = $settings;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
@@ -110,7 +110,7 @@ class RepositoryServiceContainerFactory {
 			$this->settings,
 			$this->entityTypeDefinitions->getDeserializerFactoryCallbacks()
 		);
-		$container->loadWiringFiles( $this->wiringFiles );
+		$container->applyWiring( $this->serviceWiring );
 
 		return $container;
 	}

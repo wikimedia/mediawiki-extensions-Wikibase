@@ -110,9 +110,3 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;sendEchoNotification: If true, allows users on the client wiki to get a notification when a page they created is connected to a repo item. This requires the Echo extension.
 ;echoIcon: If <code>sendEchoNotification</code> is set to <code>true</code>, you can also provide what icon the user will see. The correct syntax is <code>[ 'url' => '...' ]</code> or <code>[ 'path' => '...' ]</code> where <code>path</code> is relative to <code>$wgExtensionAssetsPath</code>. Defaults to <code>false</code> which means that there will be the default Echo icon.
 ;disabledUsageAspects: Array of usage aspects that should not be saved in the <code>wbc_entity_usage</code> table. This currently only supports aspect codes (like "T", "L" or "X"), but not full aspect keys (like "L.de").
-
-=== Pseudo-configuration ===
-Settings mentioned in this section are not really configuration. They are used to pass definitions of services to service locators. Wiring files should generally not be replaced with other files, neither should be their content (PHP code) editted by users, as the usual configuration.
-The way location of wiring files is defined is subject to change (see T153437).
-;repositoryServiceWiringFiles: A list of wiring files used by RepositoryServiceContainer. Defaults to only use <code>data-access/src/RepositoryServiceWiring.php</code>.
-;dispatchingServiceWiringFiles: A list of wiring files used by DispatchingServiceFactory. Defaults to only use <code>data-access/src/MultiRepositoryServiceWiring.php</code>.

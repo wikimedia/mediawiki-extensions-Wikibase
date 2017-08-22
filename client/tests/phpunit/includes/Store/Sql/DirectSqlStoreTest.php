@@ -7,9 +7,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\MultiRepositoryServices;
-use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
-use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
@@ -18,7 +16,6 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -48,30 +45,14 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$client = WikibaseClient::getDefaultInstance();
 
-		/** @var RepositoryServiceContainerFactory $containerFactory */
-		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$wikibaseServices = $this->getMock( WikibaseServices::class );
 
-		/** @var RepositoryDefinitions $repositoryDefinitions */
-		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$multiRepositoryServices = new MultiRepositoryServices(
-			$containerFactory,
-			$repositoryDefinitions
-		);
-
-		$multiRepositoryServices->defineService( 'EntityPrefetcher', function() {
-			return new NullEntityPrefetcher();
-		} );
-		$multiRepositoryServices->defineService( 'EntityRevisionLookup', function() {
-			return $this->getMock( EntityRevisionLookup::class );
-		} );
-		$multiRepositoryServices->defineService( 'PropertyInfoLookup', function() {
-			return new MockPropertyInfoLookup();
-		} );
+		$wikibaseServices->method( 'getEntityPrefetcher' )
+			->willReturn( new NullEntityPrefetcher() );
+		$wikibaseServices->method( 'getEntityRevisionLookup' )
+			->willReturn( $this->getMock( EntityRevisionLookup::class ) );
+		$wikibaseServices->method( 'getPropertyInfoLookup' )
+			->willReturn( new MockPropertyInfoLookup() );
 
 		return new DirectSqlStore(
 			$entityChangeFactory,
@@ -79,7 +60,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			new ItemIdParser(),
 			new EntityIdComposer( [] ),
 			new EntityNamespaceLookup( [] ),
-			new MultipleRepositoryAwareWikibaseServices( $multiRepositoryServices ),
+			$wikibaseServices,
 			wfWikiID(),
 			'en'
 		);
