@@ -1,7 +1,6 @@
 <?php
 
 use Wikibase\Client\Serializer\ForbiddenSerializer;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
@@ -126,11 +125,10 @@ return [
 	'TermIndex' => function (
 		RepositoryServiceContainer $services,
 		GenericServices $genericServices,
-		DataAccessSettings $settings,
-		WikibaseClient $client
+		DataAccessSettings $settings
 	) {
 		$index = new TermSqlIndex(
-			$client->getStringNormalizer(),
+			$genericServices->getStringNormalizer(),
 			$services->getEntityIdComposer(),
 			$services->getEntityIdParser(),
 			$services->getDatabaseName(),
