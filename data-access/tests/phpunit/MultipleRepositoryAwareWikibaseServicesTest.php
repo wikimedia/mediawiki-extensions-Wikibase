@@ -124,18 +124,24 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		);
 	}
 
-	public function testGetServicesIncludesServicesProvidedByMultiRepositoryServiceContainer() {
+	public function testGetServiceNames() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
 		$serviceNames = $wikibaseServices->getServiceNames();
 
-		$this->assertContains( 'EntityInfoBuilderFactory', $serviceNames );
-		$this->assertContains( 'EntityPrefetcher', $serviceNames );
-		$this->assertContains( 'EntityRevisionLookup', $serviceNames );
-		$this->assertContains( 'EntityStoreWatcher', $serviceNames );
-		$this->assertContains( 'PropertyInfoLookup', $serviceNames );
-		$this->assertContains( 'TermBuffer', $serviceNames );
-		$this->assertContains( 'TermSearchInteractorFactory', $serviceNames );
+		$this->assertEquals(
+			[
+				'EntityInfoBuilderFactory',
+				'EntityPrefetcher',
+				'EntityRevisionLookup',
+				'EntityStoreWatcher',
+				'PropertyInfoLookup',
+				'StringNormalizer',
+				'TermBuffer',
+				'TermSearchInteractorFactory',
+			],
+			$serviceNames
+		);
 	}
 
 }
