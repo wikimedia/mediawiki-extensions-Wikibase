@@ -7,6 +7,7 @@ use Html;
 use MWException;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
@@ -91,8 +92,15 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 */
 	protected function getBaseRevision() {
 		$id = $this->getEntityId();
+
+		if ( $this->getRequest()->wasPosted() ) {
+			$mode = EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK;
+		} else {
+			$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		}
+
 		try {
-			$baseRev = $this->getEditEntity()->getBaseRevision();
+			$baseRev = $this->getEditEntity()->getBaseRevision( $mode );
 
 			if ( $baseRev === null ) {
 				throw new UserInputException(

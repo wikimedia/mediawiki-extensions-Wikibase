@@ -315,10 +315,13 @@ class EditEntity {
 	 * the constructor, this returns the latest revision. If the entity does not exist
 	 * yet, this returns null.
 	 *
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER.
+	 *
 	 * @return EntityRevision|null
 	 * @throws MWException
 	 */
-	public function getBaseRevision() {
+	public function getBaseRevision( $mode ) {
 		if ( $this->baseRev === null ) {
 			$baseRevId = $this->getBaseRevisionId();
 
@@ -329,7 +332,7 @@ class EditEntity {
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision(
 					$id,
 					$baseRevId,
-					EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+					$mode
 				);
 
 				if ( $this->baseRev === null ) {
@@ -411,7 +414,7 @@ class EditEntity {
 	 * @return null|EntityDocument The patched Entity, or null if patching failed.
 	 */
 	private function fixEditConflict( EntityDocument $newEntity ) {
-		$baseRev = $this->getBaseRevision();
+		$baseRev = $this->getBaseRevision( EntityRevisionLookup::LATEST_FROM_MASTER );
 		$latestRev = $this->getLatestRevision();
 
 		if ( !$latestRev ) {

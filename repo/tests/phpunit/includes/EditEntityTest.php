@@ -16,6 +16,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -320,7 +321,9 @@ class EditEntityTest extends MediaWikiTestCase {
 		$editEntity = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user, $baseRevisionId );
 
 		if ( $baseRevisionId > 0 ) {
-			$baseRevision = $editEntity->getBaseRevision();
+			$baseRevision = $editEntity->getBaseRevision(
+				EntityRevisionLookup::LATEST_FROM_REPLICA
+			);
 			$this->assertSame( $baseRevisionId, $baseRevision->getRevisionId() );
 			$this->assertEquals( $entityId, $baseRevision->getEntity()->getId() );
 		}
