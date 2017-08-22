@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use Serializers\Serializer;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
@@ -50,6 +51,21 @@ class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame( $defaultSerializerOne, $defaultSerializerTwo );
 		$this->assertNotSame( $defaultSerializerOne, $otherSerializer );
+	}
+
+	public function testGetLanguageFallbackChainFactory() {
+		$services = $this->newGenericServices();
+
+		$this->assertInstanceOf( LanguageFallbackChainFactory::class, $services->getLanguageFallbackChainFactory() );
+	}
+
+	public function testGetLanguageFallbackChainFactoryReusesTheInstanceForMultipleCalls() {
+		$services = $this->newGenericServices();
+
+		$serviceOne = $services->getLanguageFallbackChainFactory();
+		$serviceTwo = $services->getLanguageFallbackChainFactory();
+
+		$this->assertSame( $serviceOne, $serviceTwo );
 	}
 
 	private function newGenericServices() {
