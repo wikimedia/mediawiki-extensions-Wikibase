@@ -391,41 +391,35 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$multiRepositoryServices = new MultiRepositoryServices(
-				$this->getRepositoryServiceContainerFactory(),
-				$this->repositoryDefinitions
+			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
+				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
+				$this->getEntityNamespaceLookup(),
+				$this->repositoryDefinitions,
+				$this->entityTypeDefinitions,
+				$this->getDataAccessSettings(),
+				$this->getMultiRepositoryServiceWiring(),
+				$this->getPerRepositoryServiceWiring()
 			);
-			$multiRepositoryServices->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
-
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $multiRepositoryServices );
 		}
 
 		return $this->wikibaseServices;
 	}
 
-	private function getRepositoryServiceContainerFactory() {
-		$idParserFactory = new PrefixMappingEntityIdParserFactory(
-			$this->getEntityIdParser(),
-			$this->repositoryDefinitions->getPrefixMappings()
-		);
-
-		$genericServices = new GenericServices( $this->getEntityNamespaceLookup(), $this->entityTypeDefinitions );
+	private function getDataAccessSettings() {
 		$clientSettings = $this->getSettings();
-		$dataAccessSettings = new DataAccessSettings(
+		return new DataAccessSettings(
 			$clientSettings->getSetting( 'maxSerializedEntitySize' ),
 			$clientSettings->getSetting( 'readFullEntityIdColumn' )
 		);
+	}
 
-		return new RepositoryServiceContainerFactory(
-			$idParserFactory,
-			$this->getEntityIdComposer(),
-			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
-			$this->repositoryDefinitions->getDatabaseNames(),
-			$clientSettings->getSetting( 'repositoryServiceWiringFiles' ),
-			$genericServices,
-			$dataAccessSettings,
-			$this->entityTypeDefinitions
-		);
+	private function getMultiRepositoryServiceWiring() {
+		return require __DIR__ . '/../../data-access/src/MultiRepositoryServiceWiring.php';
+	}
+
+	private function getPerRepositoryServiceWiring() {
+		return require __DIR__ . '/../../data-access/src/RepositoryServiceWiring.php';
 	}
 
 	/**

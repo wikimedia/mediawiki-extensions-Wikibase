@@ -43,7 +43,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new EntityIdComposer( [] ),
 			new RepositorySpecificDataValueDeserializerFactory( $idParser ),
 			[ '' => false ],
-			[ __DIR__ . '/../../src/RepositoryServiceWiring.php' ],
+			require __DIR__ . '/../../src/RepositoryServiceWiring.php',
 			new GenericServices( $client->getEntityNamespaceLookup(), $entityTypeDefinitions ),
 			new DataAccessSettings( 0, false ),
 			$entityTypeDefinitions
