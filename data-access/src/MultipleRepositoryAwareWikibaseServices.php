@@ -4,10 +4,17 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
+use Wikibase\Lib\RepositoryDefinitions;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -21,9 +28,95 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  */
 class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices {
 
-	public function __construct( MultiRepositoryServices $multiRepositoryServices ) {
+	/**
+	 * @param EntityIdParser $idParser
+	 * @param EntityIdComposer $idComposer
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param RepositoryDefinitions $repositoryDefinitions
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param DataAccessSettings $settings
+	 * @param callable[] $multiRepositoryServiceWiring
+	 * @param callable[] $perRepositoryServiceWiring
+	 */
+	public function __construct(
+		EntityIdParser $idParser,
+		EntityIdComposer $idComposer,
+		EntityNamespaceLookup $entityNamespaceLookup,
+		RepositoryDefinitions $repositoryDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
+		DataAccessSettings $settings,
+		array $multiRepositoryServiceWiring,
+		array $perRepositoryServiceWiring
+	) {
 		parent::__construct();
 
+		$multiRepositoryServices = $this->getMultiRepositoryServices(
+			$idParser,
+			$idComposer,
+			$entityNamespaceLookup,
+			$repositoryDefinitions,
+			$entityTypeDefinitions,
+			$settings,
+			$perRepositoryServiceWiring
+
+		);
+		$multiRepositoryServices->applyWiring( $multiRepositoryServiceWiring );
+
+		$this->defineServices( $multiRepositoryServices );
+	}
+
+	private function getMultiRepositoryServices(
+		EntityIdParser $idParser,
+		EntityIdComposer $idComposer,
+		EntityNamespaceLookup $entityNamespaceLookup,
+		RepositoryDefinitions $repositoryDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
+		DataAccessSettings $settings,
+		array $perRepositoryServiceWiring
+	) {
+		return new MultiRepositoryServices(
+			$this->getRepositoryServiceContainerFactory(
+				$idParser,
+				$idComposer,
+				$entityNamespaceLookup,
+				$repositoryDefinitions,
+				$entityTypeDefinitions,
+				$settings,
+				$perRepositoryServiceWiring
+			),
+			$repositoryDefinitions
+		);
+	}
+
+	private function getRepositoryServiceContainerFactory(
+		EntityIdParser $idParser,
+		EntityIdComposer $idComposer,
+		EntityNamespaceLookup $entityNamespaceLookup,
+		RepositoryDefinitions $repositoryDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
+		DataAccessSettings $settings,
+		array $perRepositoryServiceWiring
+	) {
+		$idParserFactory = new PrefixMappingEntityIdParserFactory(
+			$idParser,
+			$repositoryDefinitions->getPrefixMappings()
+		);
+
+		$genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
+
+		return new RepositoryServiceContainerFactory(
+			$idParserFactory,
+			$idComposer,
+			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
+			$repositoryDefinitions->getDatabaseNames(),
+			$perRepositoryServiceWiring,
+			$genericServices,
+			$settings,
+			$entityTypeDefinitions
+		);
+	}
+
+	private function defineServices( MultiRepositoryServices $multiRepositoryServices ) {
 		$this->applyWiring( [
 			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityInfoBuilderFactory();
