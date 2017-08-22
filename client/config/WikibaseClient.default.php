@@ -88,8 +88,6 @@ return call_user_func( function() {
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
-		'perRepositoryServiceWiringFiles' => [ __DIR__ . '/../../data-access/src/PerRepositoryServiceWiring.php' ],
-		'multiRepositoryServiceWiringFiles' => [ __DIR__ . '/../../data-access/src/MultiRepositoryServiceWiring.php' ],
 		'foreignRepositories' => [],
 
 		// Enable writing of term_full_entity_id column in wb_terms table.
