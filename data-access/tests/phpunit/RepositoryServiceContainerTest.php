@@ -66,7 +66,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 			new DataValueDeserializer( [] ),
 			new GenericServices( $client->getEntityNamespaceLookup(), new EntityTypeDefinitions( [] ) ),
 			new DataAccessSettings( 0, false ),
-			$client
+			[]
 		);
 	}
 
