@@ -3,7 +3,6 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -17,6 +16,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\StringNormalizer;
 
 /**
  * @covers Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices
@@ -109,6 +109,12 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertInstanceOf( PropertyInfoLookup::class, $wikibaseServices->getPropertyInfoLookup() );
 	}
 
+	public function testGetStringNormalizer() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( StringNormalizer::class, $wikibaseServices->getStringNormalizer() );
+	}
+
 	public function testGetTermBuffer() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
@@ -124,18 +130,24 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		);
 	}
 
-	public function testGetServicesIncludesServicesProvidedByMultiRepositoryServiceContainer() {
+	public function testGetServiceNames() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
 		$serviceNames = $wikibaseServices->getServiceNames();
 
-		$this->assertContains( 'EntityInfoBuilderFactory', $serviceNames );
-		$this->assertContains( 'EntityPrefetcher', $serviceNames );
-		$this->assertContains( 'EntityRevisionLookup', $serviceNames );
-		$this->assertContains( 'EntityStoreWatcher', $serviceNames );
-		$this->assertContains( 'PropertyInfoLookup', $serviceNames );
-		$this->assertContains( 'TermBuffer', $serviceNames );
-		$this->assertContains( 'TermSearchInteractorFactory', $serviceNames );
+		$this->assertEquals(
+			[
+				'EntityInfoBuilderFactory',
+				'EntityPrefetcher',
+				'EntityRevisionLookup',
+				'EntityStoreWatcher',
+				'PropertyInfoLookup',
+				'StringNormalizer',
+				'TermBuffer',
+				'TermSearchInteractorFactory',
+			],
+			$serviceNames
+		);
 	}
 
 }

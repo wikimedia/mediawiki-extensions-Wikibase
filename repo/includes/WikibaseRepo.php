@@ -779,6 +779,10 @@ class WikibaseRepo {
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getStringNormalizer();
+		}
+
 		if ( $this->stringNormalizer === null ) {
 			$this->stringNormalizer = new StringNormalizer();
 		}
