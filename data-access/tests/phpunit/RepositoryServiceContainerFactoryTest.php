@@ -29,6 +29,7 @@ class RepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase 
 		);
 
 		$client = WikibaseClient::getDefaultInstance();
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 
 		return new RepositoryServiceContainerFactory(
 			$idParserFactory,
@@ -36,9 +37,9 @@ class RepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase 
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			[ '' => false ],
 			[],
-			new GenericServices( $client->getEntityNamespaceLookup(), new EntityTypeDefinitions( [] ) ),
+			new GenericServices( $client->getEntityNamespaceLookup(), $entityTypeDefinitions ),
 			new DataAccessSettings( 0, false ),
-			$client
+			$entityTypeDefinitions
 		);
 	}
 

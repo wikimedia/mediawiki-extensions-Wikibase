@@ -19,8 +19,6 @@ class NoReverseDependencyTest extends \PHPUnit_Framework_TestCase {
 	public function testNoClientDependency() {
 		$this->assertEquals(
 			[
-				'RepositoryServiceContainer.php',
-				'RepositoryServiceContainerFactory.php',
 				'RepositoryServiceWiring.php',
 			],
 			$this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' )

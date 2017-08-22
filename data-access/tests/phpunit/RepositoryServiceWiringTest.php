@@ -43,7 +43,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new DataValueDeserializer( [] ),
 			new GenericServices( $client->getEntityNamespaceLookup(), new EntityTypeDefinitions( [] ) ),
 			new DataAccessSettings( 0, false ),
-			$client
+			[]
 		);
 
 		$container->loadWiringFiles( [ __DIR__ . '/../../src/RepositoryServiceWiring.php' ] );

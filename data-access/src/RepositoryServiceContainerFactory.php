@@ -2,10 +2,10 @@
 
 namespace Wikibase\DataAccess;
 
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
@@ -49,23 +49,14 @@ class RepositoryServiceContainerFactory {
 	private $genericServices;
 
 	/**
-	 * @var WikibaseClient
-	 */
-	private $client;
-	/**
 	 * @var DataAccessSettings
 	 */
 	private $settings;
 
+
+	private $entityTypeDefinitions;
+
 	/**
-	 * FIXME: injecting of the top-level factory (WikibaseClient) here is only a temporary solution.
-	 * The instance of the top-level factory is being passed to instantiators of services
-	 * stored in the RepositoryServiceContainer so they can get the service they depend on.
-	 *
-	 * This approach is not clean, the class should not depend on the top-level factory.
-	 * This should be changed after some refactoring: Instantiators in RepositoryServiceWiring should
-	 * rather be getting some other service container, not the whole top-level factory.
-	 *
 	 * @param PrefixMappingEntityIdParserFactory $idParserFactory
 	 * @param EntityIdComposer $idComposer
 	 * @param RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory
@@ -73,7 +64,7 @@ class RepositoryServiceContainerFactory {
 	 * @param string[] $wiringFiles
 	 * @param GenericServices $genericServices
 	 * @param DataAccessSettings $settings
-	 * @param WikibaseClient $client
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 */
 	public function __construct(
 		PrefixMappingEntityIdParserFactory $idParserFactory,
@@ -83,7 +74,7 @@ class RepositoryServiceContainerFactory {
 		array $wiringFiles,
 		GenericServices $genericServices,
 		DataAccessSettings $settings,
-		WikibaseClient $client
+		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->idParserFactory = $idParserFactory;
 		$this->idComposer = $idComposer;
@@ -92,7 +83,7 @@ class RepositoryServiceContainerFactory {
 		$this->wiringFiles = $wiringFiles;
 		$this->genericServices = $genericServices;
 		$this->settings = $settings;
-		$this->client = $client;
+		$this->entityTypeDefinitions = $entityTypeDefinitions;
 	}
 
 	/**
@@ -115,7 +106,7 @@ class RepositoryServiceContainerFactory {
 			$this->dataValueDeserializerFactory->getDeserializer( $repositoryName ),
 			$this->genericServices,
 			$this->settings,
-			$this->client
+			$this->entityTypeDefinitions->getDeserializerFactoryCallbacks()
 		);
 		$container->loadWiringFiles( $this->wiringFiles );
 
