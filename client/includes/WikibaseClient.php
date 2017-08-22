@@ -424,7 +424,7 @@ final class WikibaseClient {
 			$clientSettings->getSetting( 'repositoryServiceWiringFiles' ),
 			$genericServices,
 			$dataAccessSettings,
-			$this
+			$this->entityTypeDefinitions
 		);
 	}
 
