@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Benel"
+			"Benel",
+			"Bunukwiki"
 		]
 	},
-	"wikibase-edit": "mikawaway tu kalumyiti"
+	"wikibase-edit": "mikawaway tu kalumyiti",
+	"wikibase-add": "cunusen",
+	"wikibase-label-empty": "caay henay misaheci aazihen paya",
+	"wikibase-description-empty": "caay henay misaheci ku patahkalay",
+	"wikibase-sitelinks-special": "zuma wangcan",
+	"wikibase-statementview-rank-normal": "habutud kasaselel"
 }

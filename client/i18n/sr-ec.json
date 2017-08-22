@@ -84,7 +84,7 @@
 	"wikibase-otherprojects": "Остали пројекти",
 	"wikibase-otherprojects-beta-message": "Остали пројекти на бочној траци",
 	"wikibase-otherprojects-beta-description": "Додаје одломак „{{int:wikibase-otherprojects}}“ на бочној траци с везама на остале Викимедијине пројекте на основу података из Викибазе.",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Веза|Везе}} са {{WBREPONAME}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Повезивање|Повезивања}} с Википодацима",
 	"echo-pref-tooltip-wikibase-action": "Обавештава вас када неко повеже страницу коју сте направили на ставку Википодатака.",
 	"notification-header-page-connection": "{{GENDER:$2|Корисник|Корисница|Корисник}} $2 је {{GENDER:$2|повезао|повезала|повезао}} страницу <strong>$3</strong> на ставку на Википодацима.",
 	"notification-subject-page-connection": "{{GENDER:$2|Корисник|Корисница|Корисник}} $2 је страницу <strong>$3</strong> коју сте Ви {{GENDER:$3|направили}} на пројекту {{SITENAME}} {{GENDER:$2|повезао|повезала|повезао}} на ставку на Википодацима"

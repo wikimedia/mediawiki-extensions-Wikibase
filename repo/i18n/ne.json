@@ -5,7 +5,8 @@
 			"Nirjal stha",
 			"NehalDaveND",
 			"राम प्रसाद जोशी",
-			"सरोज कुमार ढकाल"
+			"सरोज कुमार ढकाल",
+			"Nirajan pant"
 		]
 	},
 	"wikibase-entity-property": "गुणधर्म",
@@ -39,7 +40,7 @@
 	"wikibase-move-up": "माथि पठाउने",
 	"wikibase-move-down": "तल पठाउने",
 	"wikibase-statementview-rank-normal": "सामान्य ओहदा",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|सन्दर्भहरू}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|सन्दर्भ|सन्दर्भहरू}}",
 	"wikibase-snakview-property-input-placeholder": "गुणधर्म",
 	"wikibase-entityselector-more": "थप",
 	"wikibase-itembytitle-lookup-site": "स्थान :",

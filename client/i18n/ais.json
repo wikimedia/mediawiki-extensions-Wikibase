@@ -10,8 +10,10 @@
 	"wikibase-dataitem": "{{WBREPONAME}} kasacacay",
 	"wikibase-editlinks": "mikawaway tu kalumyiti misiket",
 	"wikibase-editlinkstitle": "mikawaway tu kalumyiti caliway han ku kamu misiket",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "midimut",
 	"wikibase-rc-hide-wikidata-show": "paazih",
 	"wikibase-rc-wikibase-edit-letter": "sueyi",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawaway tu kalumyiti"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawaway tu kalumyiti",
+	"wikibase-otherprojects": "zuma cwanan"
 }

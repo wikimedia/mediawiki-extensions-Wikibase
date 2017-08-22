@@ -75,7 +75,7 @@
 	"wikibase-propertypage-datatype": "Datatype",
 	"wikibase-propertypage-bad-datatype": "Ukjend datatype: $1",
 	"wikibase-statementview-rank-normal": "Normal rang",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referanse|referansar}}",
+	"wikibase-statementview-references-counter": "{{PLURAL:$1|éin referanse|$1 referansar}}",
 	"wikibase-snakview-property-input-placeholder": "eigenskap",
 	"wikibase-snakview-choosesnaktype": "Vel ein verditype",
 	"wikibase-snakview-variations-somevalue-label": "ukjend verdi",

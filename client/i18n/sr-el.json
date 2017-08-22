@@ -64,5 +64,6 @@
 	"wikibase-otherprojects": "Ostali projekti",
 	"wikibase-otherprojects-beta-message": "Ostali projekti na bočnoj traci",
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovu podataka iz Vikibaze.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s Vikipodacima",
 	"echo-pref-tooltip-wikibase-action": "Obaveštava vas kada neko poveže stranicu koju ste napravili na stavku Vikipodataka."
 }
