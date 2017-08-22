@@ -81,6 +81,8 @@ call_user_func( function() {
 		$wgSpecialPages,
 		$wgTrackingCategories,
 		$wgWBClientDataTypes,
+		$wgWikibaseMultiRepositoryServiceWiringFiles,
+		$wgWikibasePerRepositoryServiceWiringFiles,
 		$wgWBClientSettings;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -104,6 +106,9 @@ call_user_func( function() {
 		$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
 		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
 	}
+
+	$wgWikibaseMultiRepositoryServiceWiringFiles = [ __DIR__ . '/../data-access/src/MultiRepositoryServiceWiring.php' ];
+	$wgWikibasePerRepositoryServiceWiringFiles = [ __DIR__ . '/../data-access/src/PerRepositoryServiceWiring.php' ];
 
 	// i18n
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
