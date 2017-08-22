@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\StringNormalizer;
 
 /**
  * Top-level container/factory of data access services making use of the "dispatching" pattern of
@@ -50,27 +51,29 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	) {
 		parent::__construct();
 
+		$genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
+
 		$multiRepositoryServices = $this->getMultiRepositoryServices(
 			$idParser,
 			$idComposer,
-			$entityNamespaceLookup,
 			$repositoryDefinitions,
 			$entityTypeDefinitions,
+			$genericServices,
 			$settings,
 			$perRepositoryServiceWiring
 
 		);
 		$multiRepositoryServices->applyWiring( $multiRepositoryServiceWiring );
 
-		$this->defineServices( $multiRepositoryServices );
+		$this->defineServices( $multiRepositoryServices, $genericServices );
 	}
 
 	private function getMultiRepositoryServices(
 		EntityIdParser $idParser,
 		EntityIdComposer $idComposer,
-		EntityNamespaceLookup $entityNamespaceLookup,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
+		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $perRepositoryServiceWiring
 	) {
@@ -78,9 +81,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			$this->getRepositoryServiceContainerFactory(
 				$idParser,
 				$idComposer,
-				$entityNamespaceLookup,
 				$repositoryDefinitions,
 				$entityTypeDefinitions,
+				$genericServices,
 				$settings,
 				$perRepositoryServiceWiring
 			),
@@ -91,9 +94,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	private function getRepositoryServiceContainerFactory(
 		EntityIdParser $idParser,
 		EntityIdComposer $idComposer,
-		EntityNamespaceLookup $entityNamespaceLookup,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
+		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $perRepositoryServiceWiring
 	) {
@@ -101,8 +104,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			$idParser,
 			$repositoryDefinitions->getPrefixMappings()
 		);
-
-		$genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
 
 		return new RepositoryServiceContainerFactory(
 			$idParserFactory,
@@ -116,7 +117,7 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		);
 	}
 
-	private function defineServices( MultiRepositoryServices $multiRepositoryServices ) {
+	private function defineServices( MultiRepositoryServices $multiRepositoryServices, GenericServices $genericServices ) {
 		$this->applyWiring( [
 			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityInfoBuilderFactory();
@@ -132,6 +133,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			},
 			'PropertyInfoLookup' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getPropertyInfoLookup();
+			},
+			'StringNormalizer' => function() use ( $genericServices ) {
+				return $genericServices->getStringNormalizer();
 			},
 			'TermBuffer' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getTermBuffer();
@@ -175,6 +179,13 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getPropertyInfoLookup() {
 		return $this->getService( 'PropertyInfoLookup' );
+	}
+
+	/**
+	 * @return StringNormalizer
+	 */
+	public function getStringNormalizer() {
+		return $this->getService( 'StringNormalizer' );
 	}
 
 	/**
