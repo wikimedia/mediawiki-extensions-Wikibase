@@ -9,6 +9,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\StringNormalizer;
 
 class GenericServices {
 
@@ -31,6 +32,11 @@ class GenericServices {
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
+
+	/**
+	 * @var StringNormalizer
+	 */
+	private $stringNormalizer;
 
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -85,6 +91,17 @@ class GenericServices {
 		}
 
 		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * @return StringNormalizer
+	 */
+	public function getStringNormalizer() {
+		if ( $this->stringNormalizer === null ) {
+			$this->stringNormalizer = new StringNormalizer();
+		}
+
+		return $this->stringNormalizer;
 	}
 
 }

@@ -8,6 +8,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\StringNormalizer;
 
 /**
  * @covers Wikibase\DataAccess\GenericServices
@@ -64,6 +65,21 @@ class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 
 		$serviceOne = $services->getLanguageFallbackChainFactory();
 		$serviceTwo = $services->getLanguageFallbackChainFactory();
+
+		$this->assertSame( $serviceOne, $serviceTwo );
+	}
+
+	public function testGetStringNormalizer() {
+		$services = $this->newGenericServices();
+
+		$this->assertInstanceOf( StringNormalizer::class, $services->getStringNormalizer() );
+	}
+
+	public function testGetStringNormalizerReusesTheInstanceForMultipleCalls() {
+		$services = $this->newGenericServices();
+
+		$serviceOne = $services->getStringNormalizer();
+		$serviceTwo = $services->getStringNormalizer();
 
 		$this->assertSame( $serviceOne, $serviceTwo );
 	}
