@@ -1443,6 +1443,10 @@ class WikibaseRepo {
 	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
 	 */
 	public function getAllTypesEntitySerializer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getEntitySerializer();
+		}
+
 		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
@@ -1462,6 +1466,10 @@ class WikibaseRepo {
 	 * @return Serializer Entity serializer that generates the most compact serialization.
 	 */
 	public function getCompactEntitySerializer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getCompactEntitySerializer();
+		}
+
 		if ( !isset( $this->compactEntitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getCompactSerializerFactory();

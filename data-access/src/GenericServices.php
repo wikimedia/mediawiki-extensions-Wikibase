@@ -34,6 +34,11 @@ class GenericServices {
 	private $entitySerializer;
 
 	/**
+	 * @var Serializer|null
+	 */
+	private $compactEntitySerializer;
+
+	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
@@ -75,6 +80,25 @@ class GenericServices {
 		}
 
 		return $this->entitySerializer;
+	}
+
+	/**
+	 * @return Serializer Entity serializer that that generates the most compact serialization
+	 */
+	public function getCompactEntitySerializer() {
+		if ( !isset( $this->compactEntitySerializer ) ) {
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$baseSerializerFactory = $this->getSerializerFactory();
+			$serializers = [];
+
+			foreach ( $serializerFactoryCallbacks as $callback ) {
+				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
+			}
+
+			$this->compactEntitySerializer = new DispatchingSerializer( $serializers );
+		}
+
+		return $this->compactEntitySerializer;
 	}
 
 	/**
