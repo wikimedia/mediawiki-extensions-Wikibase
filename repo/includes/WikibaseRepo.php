@@ -1747,6 +1747,10 @@ class WikibaseRepo {
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getEntityNamespaceLookup();
+		}
+
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
 				$this->getEntityNamespaces()

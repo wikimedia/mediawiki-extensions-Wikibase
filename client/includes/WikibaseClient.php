@@ -224,11 +224,6 @@ final class WikibaseClient {
 	private $prefetchingTermLookup = null;
 
 	/**
-	 * @var EntityNamespaceLookup|null
-	 */
-	private $entityNamespaceLookup = null;
-
-	/**
 	 * @var PropertyOrderProvider|null
 	 */
 	private $propertyOrderProvider = null;
@@ -376,10 +371,10 @@ final class WikibaseClient {
 			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
-				$this->getEntityNamespaceLookup(),
 				$this->repositoryDefinitions,
 				$this->entityTypeDefinitions,
 				$this->getDataAccessSettings(),
+				$this->getSettings()->getSetting( 'entityNamespaces' ),
 				$this->getMultiRepositoryServiceWiring(),
 				$this->getPerRepositoryServiceWiring()
 			);
@@ -1252,13 +1247,7 @@ final class WikibaseClient {
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
-		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->settings->getSetting( 'entityNamespaces' )
-			);
-		}
-
-		return $this->entityNamespaceLookup;
+		return $this->getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
 	/**
