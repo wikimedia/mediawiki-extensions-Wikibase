@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess;
 
 use Serializers\Serializer;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
@@ -73,6 +74,19 @@ interface WikibaseServices {
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup();
+
+	/**
+	 * TODO: is getBaseDataModelSerializerFactory a better name for this method?
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Snak hashes are included in the serialization.
+	 */
+	public function getSerializerFactory();
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Snak hashes are omitted in the serialization.
+	 */
+	public function getCompactSerializerFactory();
 
 	/**
 	 * @return StringNormalizer
