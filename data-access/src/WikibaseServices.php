@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataAccess;
 
+use Serializers\Serializer;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
@@ -36,6 +38,13 @@ interface WikibaseServices {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup();
+
+	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
+	 * @return Serializer
+	 */
+	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT );
 
 	/**
 	 * Returns a service that can be registered as a watcher to changes to entity data.

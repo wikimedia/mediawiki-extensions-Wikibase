@@ -31,7 +31,7 @@ class GenericServices {
 	/**
 	 * @var Serializer[]
 	 */
-	private $entitySerializers;
+	private $entitySerializers = [];
 
 	/**
 	 * @var LanguageFallbackChainFactory
