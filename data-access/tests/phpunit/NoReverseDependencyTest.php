@@ -13,16 +13,8 @@ use SplFileInfo;
  */
 class NoReverseDependencyTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * TODO: Make it impossible to use a class from Wikibase\\Client\\ once the only dependency is removed
-	 */
 	public function testNoClientDependency() {
-		$this->assertEquals(
-			[
-				'RepositoryServiceWiring.php',
-			],
-			$this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' )
-		);
+		$this->assertEmpty( $this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' ) );
 	}
 
 	public function testNoRepoDependency() {

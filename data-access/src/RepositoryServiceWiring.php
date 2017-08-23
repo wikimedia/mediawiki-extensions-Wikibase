@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\Client\Serializer\ForbiddenSerializer;
+use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\RepositoryServiceContainer;
