@@ -78,7 +78,7 @@ class GenericServices {
 	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
 	 * @return SerializerFactory
 	 */
-	private function getSerializerFactory( $options ) {
+	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
 		return new SerializerFactory( new DataValueSerializer(), $options );
 	}
 

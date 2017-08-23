@@ -70,6 +70,15 @@ interface WikibaseServices {
 	public function getPropertyInfoLookup();
 
 	/**
+	 * TODO: is getBaseDataModelSerializerFactory a better name for this method?
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types.
+	 */
+	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT );
+
+	/**
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer();
