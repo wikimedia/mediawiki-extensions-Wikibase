@@ -88,7 +88,7 @@ class GenericServices {
 	public function getCompactEntitySerializer() {
 		if ( !isset( $this->compactEntitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getSerializerFactory();
+			$baseSerializerFactory = $this->getCompactSerializerFactory();
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
@@ -102,10 +102,17 @@ class GenericServices {
 	}
 
 	/**
-	 * @return SerializerFactory
+	 * @return SerializerFactory Factory creating serializers that generate the full (expanded) serialization.
 	 */
-	private function getSerializerFactory() {
+	public function getSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
+	}
+
+	/**
+	 * @return SerializerFactory Factory creating serializers that generate the most compact serialization.
+	 */
+	public function getCompactSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
 	}
 
 	/**

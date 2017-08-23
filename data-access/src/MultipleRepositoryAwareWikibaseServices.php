@@ -183,7 +183,7 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	}
 
 	/**
-	 * Returns the entity serializer instance that includes snak hashes in the serialization.
+	 * Returns the entity serializer instance that generates the full (expanded) serialization.
 	 *
 	 * @return Serializer
 	 */
@@ -192,7 +192,7 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	}
 
 	/**
-	 * Returns the entity serializer instance that omits snak hashes in the serialization.
+	 * Returns the entity serializer instance that generates the most compact serialization.
 	 *
 	 * @return Serializer
 	 */
@@ -219,6 +219,24 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getPropertyInfoLookup() {
 		return $this->getService( 'PropertyInfoLookup' );
+	}
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Returns serializers that generate the full
+	 *  (expanded) serialization.
+	 */
+	public function getSerializerFactory() {
+		return $this->genericServices->getSerializerFactory();
+	}
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types.  Returns serializers that generate the most
+	 *  compact serialization.
+	 */
+	public function getCompactSerializerFactory() {
+		return $this->genericServices->getCompactSerializerFactory();
 	}
 
 	/**

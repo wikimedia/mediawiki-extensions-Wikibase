@@ -8,7 +8,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
-use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
@@ -1006,7 +1005,7 @@ final class WikibaseClient {
 	 * @return SerializerFactory
 	 */
 	public function getCompactSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
+		return $this->getWikibaseServices()->getCompactSerializerFactory();
 	}
 
 	/**
