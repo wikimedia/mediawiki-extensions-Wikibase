@@ -258,14 +258,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance() );
 	}
 
-	public function testGetEntityContentDataCodec() {
-		$codec = $this->getWikibaseClient()->getEntityContentDataCodec();
-		$this->assertInstanceOf( EntityContentDataCodec::class, $codec );
-
-		$this->setExpectedException( RuntimeException::class );
-		$codec->encodeEntity( new Item(), CONTENT_FORMAT_JSON );
-	}
-
 	public function testGetExternalFormatDeserializerFactory() {
 		$deserializerFactory = $this->getWikibaseClient()->getBaseDataModelDeserializerFactory();
 		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );

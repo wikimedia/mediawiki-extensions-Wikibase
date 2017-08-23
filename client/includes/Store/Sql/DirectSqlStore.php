@@ -30,7 +30,6 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -48,11 +47,6 @@ use Wikibase\Store\EntityIdLookup;
  * @author Daniel Kinzler
  */
 class DirectSqlStore implements ClientStore {
-
-	/**
-	 * @var EntityContentDataCodec
-	 */
-	private $contentCodec;
 
 	/**
 	 * @var EntityChangeFactory
@@ -181,7 +175,6 @@ class DirectSqlStore implements ClientStore {
 
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
-	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -192,7 +185,6 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
-		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -200,7 +192,6 @@ class DirectSqlStore implements ClientStore {
 		$repoWiki = false,
 		$languageCode
 	) {
-		$this->contentCodec = $contentCodec;
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
