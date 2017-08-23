@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess\Tests;
 
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
@@ -35,7 +34,6 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new BasicEntityIdParser(), []
 		);
 
-		$client = WikibaseClient::getDefaultInstance();
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 
 		return new PerRepositoryServiceContainerFactory(
@@ -44,7 +42,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new RepositorySpecificDataValueDeserializerFactory( $idParser ),
 			[ '' => false ],
 			require __DIR__ . '/../../src/PerRepositoryServiceWiring.php',
-			new GenericServices( $client->getEntityNamespaceLookup(), $entityTypeDefinitions ),
+			new GenericServices( $entityTypeDefinitions, [] ),
 			new DataAccessSettings( 0, false ),
 			$entityTypeDefinitions
 		);

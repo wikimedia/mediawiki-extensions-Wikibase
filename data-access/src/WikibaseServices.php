@@ -27,6 +27,11 @@ interface WikibaseServices {
 	public function getEntityInfoBuilderFactory();
 
 	/**
+	 * @return EntityNamespaceLookup
+	 */
+	public function getEntityNamespaceLookup();
+
+	/**
 	 * @return EntityPrefetcher
 	 */
 	public function getEntityPrefetcher();
