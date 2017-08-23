@@ -7,7 +7,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
-use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
@@ -982,8 +981,7 @@ final class WikibaseClient {
 	 * @return SerializerFactory
 	 */
 	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
-		$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-		return $baseSerializerFactory;
+		return $this->getWikibaseServices()->getSerializerFactory( $options );
 	}
 
 	/**
