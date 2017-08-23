@@ -18,6 +18,11 @@ use Wikibase\StringNormalizer;
  */
 class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 
+	public function testGetEntityNamespaceLookup() {
+		$services = $this->newGenericServices();
+		$this->assertInstanceOf( EntityNamespaceLookup::class, $services->getEntityNamespaceLookup() );
+	}
+
 	public function testGetEntitySerializer() {
 		$services = $this->newGenericServices();
 		$this->assertInstanceOf( Serializer::class, $services->getEntitySerializer() );
@@ -77,7 +82,7 @@ class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newGenericServices() {
-		return new GenericServices( new EntityNamespaceLookup( [] ), new EntityTypeDefinitions( [] ) );
+		return new GenericServices( new EntityTypeDefinitions( [] ), [] );
 	}
 
 }

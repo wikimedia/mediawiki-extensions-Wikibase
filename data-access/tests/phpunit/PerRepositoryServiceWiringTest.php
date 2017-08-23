@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
@@ -33,14 +32,13 @@ class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	 * @return PerRepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainer() {
-		$client = WikibaseClient::getDefaultInstance();
 		$container = new PerRepositoryServiceContainer(
 			false,
 			'',
 			new PrefixMappingEntityIdParser( [ '' => '' ], $this->getMock( EntityIdParser::class ) ),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			new GenericServices( $client->getEntityNamespaceLookup(), new EntityTypeDefinitions( [] ) ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
 			new DataAccessSettings( 0, false ),
 			[]
 		);
