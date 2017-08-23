@@ -1441,6 +1441,10 @@ class WikibaseRepo {
 	 * @return Serializer Entity serializer that includes snak hashes in the serialization
 	 */
 	public function getAllTypesEntitySerializer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getEntitySerializer();
+		}
+
 		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
@@ -1460,6 +1464,10 @@ class WikibaseRepo {
 	 * @return Serializer Entity serializer that omits snak hashes from the serialization
 	 */
 	public function getCompactEntitySerializer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getCompactEntitySerializer();
+		}
+
 		if ( !isset( $this->compactEntitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getCompactSerializerFactory();

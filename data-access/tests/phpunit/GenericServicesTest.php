@@ -23,11 +23,25 @@ class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( Serializer::class, $services->getEntitySerializer() );
 	}
 
-	public function testGetEntitySerializerReturnsSingleInstanceForSameOptions() {
+	public function testGetEntitySerializerReusesTheInstanceForMultipleCalls() {
 		$services = $this->newGenericServices();
 
 		$serializerOne = $services->getEntitySerializer();
 		$serializerTwo = $services->getEntitySerializer();
+
+		$this->assertSame( $serializerOne, $serializerTwo );
+	}
+
+	public function testGetCompactEntitySerializer() {
+		$services = $this->newGenericServices();
+		$this->assertInstanceOf( Serializer::class, $services->getCompactEntitySerializer() );
+	}
+
+	public function testGetCompactEntitySerializerReusesTheInstanceForMultipleCalls() {
+		$services = $this->newGenericServices();
+
+		$serializerOne = $services->getCompactEntitySerializer();
+		$serializerTwo = $services->getCompactEntitySerializer();
 
 		$this->assertSame( $serializerOne, $serializerTwo );
 	}
