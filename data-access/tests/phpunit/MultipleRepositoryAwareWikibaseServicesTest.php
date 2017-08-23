@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use Serializers\Serializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -98,6 +99,12 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertInstanceOf( EntityRevisionLookup::class, $wikibaseServices->getEntityRevisionLookup() );
 	}
 
+	public function testGetEntitySerializer() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( Serializer::class, $wikibaseServices->getEntitySerializer() );
+	}
+
 	public function testGetEntityStoreWatcher() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
@@ -142,6 +149,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 
 		$serviceNames = $wikibaseServices->getServiceNames();
 
+		// TODO: how to include EnititySerializer here?
 		$this->assertEquals(
 			[
 				'EntityInfoBuilderFactory',

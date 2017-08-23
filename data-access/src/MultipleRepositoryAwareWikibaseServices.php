@@ -4,7 +4,9 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -31,6 +33,11 @@ use Wikibase\StringNormalizer;
 class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices {
 
 	/**
+	 * @var GenericServices
+	 */
+	private $genericServices;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param EntityIdComposer $idComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -52,21 +59,20 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	) {
 		parent::__construct();
 
-		$genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
+		$this->genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
 
 		$multiRepositoryServices = $this->getMultiRepositoryServices(
 			$idParser,
 			$idComposer,
 			$repositoryDefinitions,
 			$entityTypeDefinitions,
-			$genericServices,
 			$settings,
 			$perRepositoryServiceWiring
 
 		);
 		$multiRepositoryServices->applyWiring( $multiRepositoryServiceWiring );
 
-		$this->defineServices( $multiRepositoryServices, $genericServices );
+		$this->defineServices( $multiRepositoryServices );
 	}
 
 	private function getMultiRepositoryServices(
@@ -74,7 +80,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		EntityIdComposer $idComposer,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $perRepositoryServiceWiring
 	) {
@@ -84,7 +89,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 				$idComposer,
 				$repositoryDefinitions,
 				$entityTypeDefinitions,
-				$genericServices,
 				$settings,
 				$perRepositoryServiceWiring
 			),
@@ -97,7 +101,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		EntityIdComposer $idComposer,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $perRepositoryServiceWiring
 	) {
@@ -112,13 +115,15 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$repositoryDefinitions->getDatabaseNames(),
 			$perRepositoryServiceWiring,
-			$genericServices,
+			$this->genericServices,
 			$settings,
 			$entityTypeDefinitions
 		);
 	}
 
-	private function defineServices( MultiRepositoryServices $multiRepositoryServices, GenericServices $genericServices ) {
+	private function defineServices( MultiRepositoryServices $multiRepositoryServices ) {
+		$genericServices = $this->genericServices;
+
 		$this->applyWiring( [
 			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityInfoBuilderFactory();
@@ -169,6 +174,15 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getService( 'EntityRevisionLookup' );
+	}
+
+	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
+	 * @return Serializer
+	 */
+	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+		return $this->genericServices->getEntitySerializer( $options );
 	}
 
 	/**

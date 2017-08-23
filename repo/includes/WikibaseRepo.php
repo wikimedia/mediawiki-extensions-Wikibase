@@ -1427,6 +1427,10 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getEntitySerializer( $options );
+		}
+
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory( $options );

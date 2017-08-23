@@ -7,6 +7,7 @@ use Deserializers\Deserializer;
 use HashSiteStore;
 use Language;
 use RuntimeException;
+use Serializers\Serializer;
 use Site;
 use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
@@ -344,6 +345,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSidebarLinkBadgeDisplay() {
 		$sidebarLinkBadgeDisplay = $this->getWikibaseClient()->getSidebarLinkBadgeDisplay();
 		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
+	}
+
+	public function testGetEntitySerializer() {
+		$serializer = $this->getWikibaseClient()->getAllTypesEntitySerializer();
+		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 
 	/**
