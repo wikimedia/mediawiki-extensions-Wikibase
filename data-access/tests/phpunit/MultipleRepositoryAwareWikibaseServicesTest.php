@@ -34,10 +34,10 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		return new MultipleRepositoryAwareWikibaseServices(
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [] ),
-			new EntityNamespaceLookup( [] ),
 			$this->getRepositoryDefinitions(),
 			new EntityTypeDefinitions( [] ),
 			new DataAccessSettings( 1, true ),
+			[],
 			$this->getMultiRepoServiceWiring(),
 			[]
 		);
@@ -86,6 +86,12 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
 		$this->assertInstanceOf( EntityInfoBuilderFactory::class, $wikibaseServices->getEntityInfoBuilderFactory() );
+	}
+
+	public function testGetEntityNamespaceLookup() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( EntityNamespaceLookup::class, $wikibaseServices->getEntityNamespaceLookup() );
 	}
 
 	public function testGetEntityPrefetcher() {
@@ -161,6 +167,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertEquals(
 			[
 				'EntityInfoBuilderFactory',
+				'EntityNamespaceLookup',
 				'EntityPrefetcher',
 				'EntityRevisionLookup',
 				'EntityStoreWatcher',
