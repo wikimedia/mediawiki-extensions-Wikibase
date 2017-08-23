@@ -4,7 +4,9 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -36,6 +38,11 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	private $multiRepositoryServices;
 
 	/**
+	 * @var GenericServices
+	 */
+	private $genericServices;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param EntityIdComposer $idComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -57,21 +64,20 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	) {
 		parent::__construct();
 
-		$genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
+		$this->genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
 
 		$this->multiRepositoryServices = $this->createMultiRepositoryServices(
 			$idParser,
 			$idComposer,
 			$repositoryDefinitions,
 			$entityTypeDefinitions,
-			$genericServices,
 			$settings,
 			$perRepositoryServiceWiring
 
 		);
 		$this->multiRepositoryServices->applyWiring( $multiRepositoryServiceWiring );
 
-		$this->defineServices( $genericServices );
+		$this->defineServices();
 	}
 
 	private function createMultiRepositoryServices(
@@ -79,7 +85,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		EntityIdComposer $idComposer,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $perRepositoryServiceWiring
 	) {
@@ -89,7 +94,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 				$idComposer,
 				$repositoryDefinitions,
 				$entityTypeDefinitions,
-				$genericServices,
 				$settings,
 				$perRepositoryServiceWiring
 			),
@@ -102,7 +106,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		EntityIdComposer $idComposer,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $perRepositoryServiceWiring
 	) {
@@ -117,14 +120,15 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$repositoryDefinitions->getDatabaseNames(),
 			$perRepositoryServiceWiring,
-			$genericServices,
+			$this->genericServices,
 			$settings,
 			$entityTypeDefinitions
 		);
 	}
 
-	private function defineServices( GenericServices $genericServices ) {
+	private function defineServices() {
 		$multiRepositoryServices = $this->multiRepositoryServices;
+		$genericServices = $this->genericServices;
 
 		$this->applyWiring( [
 			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
@@ -176,6 +180,24 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getService( 'EntityRevisionLookup' );
+	}
+
+	/**
+	 * Returns the entity serializer instance that includes snak hashes in the serialization.
+	 *
+	 * @return Serializer
+	 */
+	public function getEntitySerializer() {
+		return $this->genericServices->getEntitySerializer();
+	}
+
+	/**
+	 * Returns the entity serializer instance that omits snak hashes in the serialization.
+	 *
+	 * @return Serializer
+	 */
+	public function getCompactEntitySerializer() {
+		return $this->genericServices->getCompactEntitySerializer();
 	}
 
 	/**
