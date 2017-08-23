@@ -43,7 +43,6 @@ use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -82,7 +81,6 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
@@ -530,7 +528,6 @@ final class WikibaseClient {
 			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
-				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
@@ -916,21 +913,6 @@ final class WikibaseClient {
 	public function getLanguageLinkBadgeDisplay() {
 		return new LanguageLinkBadgeDisplay(
 			$this->getSidebarLinkBadgeDisplay()
-		);
-	}
-
-	/**
-	 * @return EntityContentDataCodec
-	 */
-	public function getEntityContentDataCodec() {
-		// Serialization is not supported on the client, since the client never stores entities.
-		$forbiddenSerializer = new ForbiddenSerializer( 'Entity serialization is not supported on the client!' );
-
-		return new EntityContentDataCodec(
-			$this->getEntityIdParser(),
-			$forbiddenSerializer,
-			$this->getInternalFormatEntityDeserializer(),
-			$this->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
 
