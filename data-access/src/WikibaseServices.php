@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess;
 
+use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
@@ -36,6 +37,20 @@ interface WikibaseServices {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup();
+
+	/**
+	 * Returns the entity serializer instance that includes snak hashes in the serialization.
+	 *
+	 * @return Serializer
+	 */
+	public function getEntitySerializer();
+
+	/**
+	 * Returns the entity serializer instance that omits snak hashes in the serialization.
+	 *
+	 * @return Serializer
+	 */
+	public function getCompactEntitySerializer();
 
 	/**
 	 * Returns a service that can be registered as a watcher to changes to entity data.
