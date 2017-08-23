@@ -222,6 +222,22 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	}
 
 	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Snak hashes are included in the serialization.
+	 */
+	public function getSerializerFactory() {
+		return $this->genericServices->getSerializerFactory();
+	}
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Snak hashes are omitted in the serialization.
+	 */
+	public function getCompactSerializerFactory() {
+		return $this->genericServices->getCompactSerializerFactory();
+	}
+
+	/**
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer() {

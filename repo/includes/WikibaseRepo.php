@@ -1397,6 +1397,10 @@ class WikibaseRepo {
 	 *  (expanded) serialization.
 	 */
 	public function getBaseDataModelSerializerFactory() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getSerializerFactory();
+		}
+
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
 	}
 
@@ -1406,6 +1410,10 @@ class WikibaseRepo {
 	 *  compact serialization.
 	 */
 	public function getCompactSerializerFactory() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getCompactSerializerFactory();
+		}
+
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
 	}
 
