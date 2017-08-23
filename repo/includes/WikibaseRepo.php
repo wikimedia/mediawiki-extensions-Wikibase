@@ -912,6 +912,10 @@ class WikibaseRepo {
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getLanguageFallbackChainFactory();
+		}
+
 		if ( $this->languageFallbackChainFactory === null ) {
 			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		}
