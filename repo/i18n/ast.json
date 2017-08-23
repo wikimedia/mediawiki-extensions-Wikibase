@@ -305,6 +305,7 @@
 	"wikibase-api-unresolved-redirect": "La ID d'entidá proporcionada refierse a una redireición, lo que nun tien sofitu nesti contestu.",
 	"wikibase-api-illegal-entity-remove": "Les entidaes nun pueden desaniciase dando una clave <var>remove</var> de nivel superior.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Tienes de dar o un <var>id</var> d'entidá, o una combinación de <var>site</var> y <var>page</var>, pero non les dos.",
+	"wikibase-api-illegal-ids-or-sites-titles-selector": "Tienes de dar o los «id» del elementu o pares de «sitios» y «títulos» pa la páxina correspondientes",
 	"wikibase-api-no-such-entity": "Nun s'alcontró nenguna entidá con ID «$1».",
 	"wikibase-api-no-such-sitelink": "Nun pudo alcontrase l'enllaz a «$1» al intentar editar insinies.",
 	"wikibase-api-not-recognized-datatype": "Esperábase un tipu de datu, pero falta o nun se reconoció.",

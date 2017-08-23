@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Akamycoco"
+			"Akamycoco",
+			"Translatealcd"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipidia"
+	"wikibase-globedetails-longitude": "Cingtu’",
+	"wikibase-sitelinks-wikipedia": "Wikipidia",
+	"datatypes-type-wikibase-item": "Binkgan lmlamu’"
 }
