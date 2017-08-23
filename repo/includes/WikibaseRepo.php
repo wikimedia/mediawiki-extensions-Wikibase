@@ -1388,6 +1388,10 @@ class WikibaseRepo {
 	 *  they are made of, but no other entity types.
 	 */
 	public function getBaseDataModelSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getSerializerFactory( $options );
+		}
+
 		return new SerializerFactory( new DataValueSerializer(), $options );
 	}
 
