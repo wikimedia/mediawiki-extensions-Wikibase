@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess;
 
 use Serializers\Serializer;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
@@ -73,6 +74,20 @@ interface WikibaseServices {
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup();
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Returns serializers that generate the full
+	 *  (expanded) serialization.
+	 */
+	public function getBaseDataModelSerializerFactory();
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Returns serializers that generate the most
+	 *  compact serialization.
+	 */
+	public function getCompactBaseDataModelSerializerFactory();
 
 	/**
 	 * @return StringNormalizer

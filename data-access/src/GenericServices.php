@@ -69,7 +69,7 @@ class GenericServices {
 	public function getEntitySerializer() {
 		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getSerializerFactory();
+			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
@@ -88,7 +88,7 @@ class GenericServices {
 	public function getCompactEntitySerializer() {
 		if ( !isset( $this->compactEntitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getSerializerFactory();
+			$baseSerializerFactory = $this->getCompactBaseDataModelSerializerFactory();
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
@@ -102,10 +102,21 @@ class GenericServices {
 	}
 
 	/**
-	 * @return SerializerFactory
+	 * @return SerializerFactory Factory creating serializers that generate the full (expanded) serialization.
+	 * The factory returned has the knowledge about items, properties, and the elements they are made of,
+	 * but not about other entity types.
 	 */
-	private function getSerializerFactory() {
+	public function getBaseDataModelSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
+	}
+
+	/**
+	 * @return SerializerFactory Factory creating serializers that generate the most compact serialization.
+	 * The factory returned has the knowledge about items, properties, and the elements they are made of,
+	 * but not about other entity types.
+	 */
+	public function getCompactBaseDataModelSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
 	}
 
 	/**

@@ -8,7 +8,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
-use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
@@ -976,15 +975,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns a deserializer to deserialize entities in both current and legacy serialization.
-	 *
-	 * @return Deserializer
-	 */
-	private function getInternalFormatEntityDeserializer() {
-		return $this->getInternalFormatDeserializerFactory()->newEntityDeserializer();
-	}
-
-	/**
 	 * Returns a deserializer to deserialize statements in both current and legacy serialization.
 	 *
 	 * @return Deserializer
@@ -1002,11 +992,13 @@ final class WikibaseClient {
 
 	/**
 	 * Returns a SerializerFactory creating serializers that generate the most compact serialization.
+	 * A factory returned has knowledge about items, properties, and the elements they are made of,
+	 * but no other entity types.
 	 *
 	 * @return SerializerFactory
 	 */
-	public function getCompactSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
+	public function getCompactBaseDataModelSerializerFactory() {
+		return $this->getWikibaseServices()->getCompactBaseDataModelSerializerFactory();
 	}
 
 	/**
