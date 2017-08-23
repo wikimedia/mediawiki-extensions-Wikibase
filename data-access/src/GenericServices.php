@@ -14,6 +14,11 @@ use Wikibase\StringNormalizer;
 class GenericServices {
 
 	/**
+	 * @var int[]
+	 */
+	private $entityNamespaces;
+
+	/**
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
@@ -38,18 +43,26 @@ class GenericServices {
 	 */
 	private $stringNormalizer;
 
+	/**
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param int[] $entityNamespaces
+	 */
 	public function __construct(
-		EntityNamespaceLookup $entityNamespaceLookup,
-		EntityTypeDefinitions $entityTypeDefinitions
+		EntityTypeDefinitions $entityTypeDefinitions,
+		array $entityNamespaces
 	) {
-		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		$this->entityNamespaces = $entityNamespaces;
 	}
 
 	/**
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
+		if ( $this->entityNamespaceLookup === null ) {
+			$this->entityNamespaceLookup = new EntityNamespaceLookup( $this->entityNamespaces );
+		}
+
 		return $this->entityNamespaceLookup;
 	}
 
