@@ -153,11 +153,6 @@ final class WikibaseClient {
 	private $entityIdComposer = null;
 
 	/**
-	 * @var LanguageFallbackChainFactory|null
-	 */
-	private $languageFallbackChainFactory = null;
-
-	/**
 	 * @var ClientStore|null
 	 */
 	private $store = null;
@@ -526,11 +521,7 @@ final class WikibaseClient {
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
-		if ( $this->languageFallbackChainFactory === null ) {
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		}
-
-		return $this->languageFallbackChainFactory;
+		return $this->getWikibaseServices()->getLanguageFallbackChainFactory();
 	}
 
 	/**

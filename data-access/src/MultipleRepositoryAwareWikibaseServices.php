@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
@@ -138,6 +139,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			'EntityStoreWatcher' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices;
 			},
+			'LanguageFallbackChainFactory' => function () use ( $genericServices ) {
+				return $genericServices->getLanguageFallbackChainFactory();
+			},
 			'PropertyInfoLookup' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getPropertyInfoLookup();
 			},
@@ -179,6 +183,13 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getEntityStoreWatcher() {
 		return $this->getService( 'EntityStoreWatcher' );
+	}
+
+	/**
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory() {
+		return $this->getService( 'LanguageFallbackChainFactory' );
 	}
 
 	/**
