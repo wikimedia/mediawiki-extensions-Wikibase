@@ -8,6 +8,7 @@ use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
@@ -104,6 +105,12 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertInstanceOf( EntityStoreWatcher::class, $wikibaseServices->getEntityStoreWatcher() );
 	}
 
+	public function testGetLanguageFallbackChainFactory() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( LanguageFallbackChainFactory::class, $wikibaseServices->getLanguageFallbackChainFactory() );
+	}
+
 	public function testGetPropertyInfoLookup() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
@@ -142,6 +149,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 				'EntityPrefetcher',
 				'EntityRevisionLookup',
 				'EntityStoreWatcher',
+				'LanguageFallbackChainFactory',
 				'PropertyInfoLookup',
 				'StringNormalizer',
 				'TermBuffer',

@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -44,6 +45,11 @@ interface WikibaseServices {
 	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher();
+
+	/**
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory();
 
 	/**
 	 * Note: Instance returned is not guaranteed to be a caching decorator.
