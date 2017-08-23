@@ -23,7 +23,6 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
-use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
@@ -1002,7 +1001,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns a SerializerFactory creating serializers that omit hashes of snaks.
+	 * Returns a SerializerFactory creating serializers that generate the most compact serialization.
 	 *
 	 * @return SerializerFactory
 	 */
@@ -1011,24 +1010,12 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns an entity serializer that omits hashes of snaks.
+	 * Returns an entity serializer that generates the most compact serialization.
 	 *
 	 * @return Serializer
 	 */
 	public function getCompactEntitySerializer() {
-		if ( $this->compactEntitySerializer === null ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getCompactSerializerFactory();
-			$serializers = [];
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
-			}
-
-			$this->compactEntitySerializer = new DispatchingSerializer( $serializers );
-		}
-
-		return $this->compactEntitySerializer;
+		return $this->getWikibaseServices()->getCompactEntitySerializer();
 	}
 
 	/**

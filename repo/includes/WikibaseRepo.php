@@ -1393,7 +1393,8 @@ class WikibaseRepo {
 
 	/**
 	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
-	 *  they are made of, but no other entity types. Snak hashes are serialized.
+	 *  they are made of, but no other entity types. Returns serializers that generate the full
+	 *  (expanded) serialization.
 	 */
 	public function getBaseDataModelSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
@@ -1401,7 +1402,8 @@ class WikibaseRepo {
 
 	/**
 	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
-	 *  they are made of, but no other entity types. Snak hashes are omitted in the serialization.
+	 *  they are made of, but no other entity types. Returns serializers that generate the most
+	 *  compact serialization.
 	 */
 	public function getCompactSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
@@ -1438,9 +1440,13 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return Serializer Entity serializer that includes snak hashes in the serialization
+	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
 	 */
 	public function getAllTypesEntitySerializer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getEntitySerializer();
+		}
+
 		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
@@ -1457,9 +1463,13 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return Serializer Entity serializer that omits snak hashes from the serialization
+	 * @return Serializer Entity serializer that generates the most compact serialization.
 	 */
 	public function getCompactEntitySerializer() {
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getCompactEntitySerializer();
+		}
+
 		if ( !isset( $this->compactEntitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getCompactSerializerFactory();
