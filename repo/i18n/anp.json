@@ -13,5 +13,5 @@
 	"wikibase-sitelinks-special": "अन्य वेबसाइट",
 	"wikibase-aliases-empty": "कोय उर्फ परिभाषित नै",
 	"wikibase-statementview-rank-normal": "सामान्य पद",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|स्रोत}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|स्रोत}}"
 }

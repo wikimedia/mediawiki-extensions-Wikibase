@@ -21,7 +21,7 @@
 	"wikibase-move-up": "nosta ylembä",
 	"wikibase-move-down": "siirrä alemba",
 	"wikibase-statementview-rank-normal": "Normuali listusijoitus",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|lähteh|lähtehty}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|lähteh|lähtehty}}",
 	"wikibase-itembytitle-lookup-site": "Saitu:",
 	"wikibase-itembytitle-lookup-page": "Sivu:",
 	"wikibase-itembytitle-submit": "Eči",

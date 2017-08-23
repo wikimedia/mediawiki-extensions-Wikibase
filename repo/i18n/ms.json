@@ -69,7 +69,7 @@
 	"wikibase-claimview-snak-tooltip": "Isikan nilai yang berkenaan dengan sifat yang bernama \"$1\". Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
 	"wikibase-claimview-snak-new-tooltip": "Setelah menyatakan sifat, anda boleh mengisikan nilai yang berkenaan. Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
 	"wikibase-statementview-rank-normal": "Pangkat normal",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rujukan|rujukan-rujukan}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|rujukan|rujukan-rujukan}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Satu|$1}} sumber belum disimpan",
 	"wikibase-snakview-property-input-placeholder": "sifat",
 	"wikibase-snakview-unsupportedsnaktype": "Snak jenis \"$1\". Pengelolaan untuk jenis Snak ini belum disokong.",

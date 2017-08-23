@@ -11,5 +11,5 @@
 	"wikibase-statementsection-statements": "واتاں",
 	"wikibase-sitelinks-special": "ہور سائیٹاں",
 	"wikibase-statementview-rank-normal": "نارمل رینک",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|اتہ پتہ|اتے پتے}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}"
 }

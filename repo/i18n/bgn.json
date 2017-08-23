@@ -12,7 +12,7 @@
 	"wikibase-statementsection-statements": "اظهارهان",
 	"wikibase-sitelinks-special": "دیگرین سایٹ ئان",
 	"wikibase-statementview-rank-normal": "نورمالین رتبه",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|منشا|منشائان}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|منشا|منشائان}}",
 	"wikibase-entitieswithoutlabel-label-alltypes": "موچین",
 	"wikibase-mylanguagefallbackchain-babel": "گۆ ایشی <nowiki>{{#babel: }}</nowiki> قرار داتین به ائ  {{GENDER:$1|قسمت}} [[Special:MyPage|شه وتي کار زوروکین تاکدیما]] توانێت ایشیرا ایڈیٹ بکنێت."
 }

@@ -27,7 +27,7 @@
 	"wikibase-sitelinks-special": "نور وېبځايونه",
 	"wikibase-remove": "غورځول",
 	"wikibase-statementview-rank-normal": "عادي پوړ",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|سرچينه|سرچينې}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|سرچينه|سرچينې}}",
 	"wikibase-snakview-property-input-placeholder": "ځانتيا",
 	"wikibase-snakview-variations-novalue-label": "بې ارزښته",
 	"wikibase-entityselector-more": "نور",

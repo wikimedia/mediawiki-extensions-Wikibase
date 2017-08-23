@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "Iba nga mga sityo",
 	"wikibase-aliases-empty": "Waray alyas nga gin-define",
 	"wikibase-statementview-rank-normal": "Normal nga ranggo",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|binasaran|pinanbasaran}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|binasaran|pinanbasaran}}"
 }

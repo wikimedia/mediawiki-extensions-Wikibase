@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "سایتل دیە",
 	"wikibase-aliases-empty": "بدۉن نام مستعار تعریف ۉابیدھ",
 	"wikibase-statementview-rank-normal": "رتبه عادی",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|سأرچیشمە|سأرچیشمل}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|سأرچیشمە|سأرچیشمل}}"
 }

@@ -31,7 +31,7 @@
 	"wikibase-move-down": "ਹੇਠਾਂ ਘੱਲੋ",
 	"wikibase-undo-title": "\"$1\" ਦੀ ਸੋਧ ਨਕਾਰੀ ਜਾ ਰਹੀ ਹੈ",
 	"wikibase-statementview-rank-normal": "ਆਮ ਦਰਜਾ",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ਹਵਾਲਾ|ਹਵਾਲੇ}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ਹਵਾਲਾ|ਹਵਾਲੇ}}",
 	"wikibase-itembytitle-lookup-site": "ਸਾਈਟ:",
 	"wikibase-itembytitle-lookup-page": "ਸਫ਼ਾ:",
 	"wikibase-itembytitle-submit": "ਭਾਲ਼",

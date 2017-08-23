@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "Tõõsõq võrgokotusõq",
 	"wikibase-aliases-empty": "Tõisi nimmi olõ-õi määrät",
 	"wikibase-statementview-rank-normal": "Harilik tasõq",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|näütämine|näütämist}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|näütämine|näütämist}}"
 }

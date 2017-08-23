@@ -24,5 +24,5 @@
 	"wikibase-remove": "uuseneh",
 	"wikibase-aliases-empty": "S kei Alias definiert wore.",
 	"wikibase-statementview-rank-normal": "Normale Rang",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|Fueßnote}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|Fueßnote}}"
 }

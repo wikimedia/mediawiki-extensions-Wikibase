@@ -41,7 +41,7 @@
 	"wikibase-disambiguation-title": "\"$1\" සඳහා අනේකාර්ථය",
 	"wikibase-propertypage-datatype": "දත්ත වර්ගය",
 	"wikibase-statementview-rank-normal": "සාමාන්‍ය ස්ථානය",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|යොමුව|යොමු}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|යොමුව|යොමු}}",
 	"wikibase-snakview-property-input-placeholder": "ගුණාංගය",
 	"special-itembytitle": "ශීර්ෂය අනුව අයිතමය",
 	"wikibase-itembytitle-lookup-fieldset": "අඩවිය සහ ශීර්ෂය අනුව අයිතමයන් සඳහා සොයන්න",

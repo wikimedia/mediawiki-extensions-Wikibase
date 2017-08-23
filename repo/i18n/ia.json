@@ -42,7 +42,7 @@
 	"wb-special-newitem-new-item-notification": "Nove elemento $1 create e redirigite a su pagina. Retornar a $2.",
 	"wikibase-aliases-input-help-message": "Pro render iste entitate plus facile a trovar, tu pote entrar nomines alternative.",
 	"wikibase-statementview-rank-normal": "Rango normal",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referentia|referentias}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referentia|referentias}}",
 	"wikibase-move-error": "Tu non pote renominar paginas que es in un spatio de nomines de datos, ni renominar altere paginas verso un tal spatio.",
 	"special-itembytitle": "Elemento per titulo",
 	"special-itemdisambiguation": "Disambiguation de elementos",

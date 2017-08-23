@@ -15,5 +15,5 @@
 	"wikibase-statementsection-statements": "बयान",
 	"wikibase-sitelinks-special": "और साइटअन",
 	"wikibase-statementview-rank-normal": "सानतिनो ओहदा",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|सन्दर्भहरू}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|reference|सन्दर्भहरू}}"
 }

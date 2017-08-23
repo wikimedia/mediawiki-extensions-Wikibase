@@ -17,7 +17,7 @@
 	"wikibase-remove": "qichuy",
 	"wikibase-aliases-empty": "Huqari qillqakunaqa manam sut'ichasqachu",
 	"wikibase-statementview-rank-normal": "Chhasku ñiqi",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|willay pukyu|willay pukyukuna}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|willay pukyu|willay pukyukuna}}",
 	"wikibase-itembytitle-lookup-page": "P'anqa:",
 	"wikibase-modifyterm-language": "Rimay tuyru:",
 	"wikibase-dispatchstats-change-timestamp": "Pacha q'illpay"

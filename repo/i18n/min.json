@@ -25,7 +25,7 @@
 	"wikibase-sitelinks-empty": "Alun ado interwiki untuak item ko.",
 	"wikibase-remove": "hapuih",
 	"wikibase-propertypage-datatype": "Jenis data",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|sumber}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|sumber}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1 sumber}} alun disimpan",
 	"wikibase-snakview-property-input-placeholder": "properti",
 	"wikibase-snakview-choosesnaktype": "Piliah jenis nilai",

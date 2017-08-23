@@ -11,5 +11,5 @@
 	"wikibase-statementsection-statements": "Kàddu",
 	"wikibase-sitelinks-special": "Yeneeni dal",
 	"wikibase-aliases-empty": "Xamaleesufi genn turandoo.",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|delluwaay}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|delluwaay}}"
 }

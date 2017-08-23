@@ -87,7 +87,7 @@
 	"wikibase-partial-undo": "Düzenleme kısmen geri alınabilir.",
 	"wikibase-propertypage-datatype": "Veri türü",
 	"wikibase-statementview-rank-normal": "Normal oran",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|kaynak|kaynak}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|kaynak|kaynak}}",
 	"wikibase-snakview-property-input-placeholder": "özellik",
 	"wikibase-snakview-unsupportedsnaktype": "\"$1\" türü Snak. Bu tür Snak ile ilgili işlemler henüz desteklenmiyor.",
 	"wikibase-snakview-choosesnaktype": "Bir değer türü seçin.",

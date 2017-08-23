@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "دیگر ویب سائٹ",
 	"wikibase-aliases-empty": "ھیچ کیہ مثال موجود نیکی",
 	"wikibase-statementview-rank-normal": "عام درجہ بندی",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|حوالہ|حوالہ جات}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالہ|حوالہ جات}}"
 }

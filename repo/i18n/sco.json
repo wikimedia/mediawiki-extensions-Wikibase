@@ -35,7 +35,7 @@
 	"wikibase-statementview-rank-preferred": "Preferred rank",
 	"wikibase-statementview-rank-normal": "Normal rank",
 	"wikibase-statementview-rank-deprecated": "Deprecatit rank",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|references}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|reference|references}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Ane reference|$1 references}} nae saved yet",
 	"wikibase-snakview-variations-somevalue-label": "unkent value",
 	"wikibase-snakformat-invalid-value": "Onvalid value.",

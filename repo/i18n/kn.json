@@ -23,7 +23,7 @@
 	"wikibase-move-up": "ಮೇಲೆ ಕಳಿಸು",
 	"wikibase-move-down": "ಕೆಳಗೆ ಕಳಿಸು",
 	"wikibase-statementview-rank-normal": "ಸಾಧಾರಣ ಶ್ರೇಣಿ",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ಉಲ್ಲೇಖ|ಉಲ್ಲೇಖಗಳು}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ಉಲ್ಲೇಖ|ಉಲ್ಲೇಖಗಳು}}",
 	"wikibase-entityselector-more": "ಹೆಚ್ಚು",
 	"wikibase-itembytitle-lookup-page": "ಪುಟ:",
 	"wikibase-itembytitle-submit": "ಹುಡುಕು",

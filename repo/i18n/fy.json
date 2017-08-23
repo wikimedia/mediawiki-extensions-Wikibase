@@ -19,7 +19,7 @@
 	"wikibase-statementsection-statements": "Ferklearringen",
 	"wikibase-sitelinks-special": "Oare webstees",
 	"wikibase-statementview-rank-normal": "Normale rang",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|boarne|boarnen}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|boarne|boarnen}}",
 	"wikibase-snakview-property-input-placeholder": "eigenskip",
 	"wikibase-entityselector-more": "mear",
 	"wikibase-itembytitle-submit": "Sykje",

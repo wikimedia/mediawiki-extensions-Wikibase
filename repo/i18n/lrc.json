@@ -32,7 +32,7 @@
 	"wikibase-move-down": "رو وه هار",
 	"wikibase-aliases-empty": "هیچ هومیاری مشخص نبیه.",
 	"wikibase-statementview-rank-normal": "گرینج کاری نرمال",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|سرچشمه|سرچشمه یا}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|سرچشمه|سرچشمه یا}}",
 	"wikibase-snakview-variations-somevalue-label": "ارزایشت نادیار",
 	"wikibase-snakview-variations-novalue-label": "حالی",
 	"wikibase-snakformat-invalid-value": "ارزایشت نامعتور",

@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "Inksze projekty",
 	"wikibase-aliases-empty": "Ńy zdefińowano aljasůw.",
 	"wikibase-statementview-rank-normal": "Normalno ranga",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|przipisy|przipisy|przipisůw}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|przipisy|przipisy|przipisůw}}"
 }

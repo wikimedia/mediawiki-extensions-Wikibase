@@ -62,5 +62,5 @@
 	"wikibase-move-up": "lëvize lart",
 	"wikibase-move-down": "lëvize poshtë",
 	"wikibase-statementview-rank-normal": "Rangimi normal",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referencë|referenca}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencë|referenca}}"
 }
