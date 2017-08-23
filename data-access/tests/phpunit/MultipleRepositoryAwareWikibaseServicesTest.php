@@ -7,6 +7,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
@@ -130,6 +131,18 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertInstanceOf( PropertyInfoLookup::class, $wikibaseServices->getPropertyInfoLookup() );
 	}
 
+	public function testGetSerializerFactory() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( SerializerFactory::class, $wikibaseServices->getSerializerFactory() );
+	}
+
+	public function testGetCompactSerializerFactory() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( SerializerFactory::class, $wikibaseServices->getCompactSerializerFactory() );
+	}
+
 	public function testGetStringNormalizer() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
@@ -156,15 +169,18 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 
 		$serviceNames = $wikibaseServices->getServiceNames();
 
-		// TODO: how to include EnititySerializer here?
 		$this->assertEquals(
 			[
 				'EntityInfoBuilderFactory',
 				'EntityPrefetcher',
 				'EntityRevisionLookup',
+				'EntitySerializer',
+				'CompactEntitySerializer',
 				'EntityStoreWatcher',
 				'LanguageFallbackChainFactory',
 				'PropertyInfoLookup',
+				'SerializerFactory',
+				'CompactSerializerFactory',
 				'StringNormalizer',
 				'TermBuffer',
 				'TermSearchInteractorFactory',

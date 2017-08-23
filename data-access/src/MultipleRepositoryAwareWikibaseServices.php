@@ -140,6 +140,12 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			'EntityRevisionLookup' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityRevisionLookup();
 			},
+			'EntitySerializer' => function() use ( $genericServices ) {
+				return $genericServices->getEntitySerializer();
+			},
+			'CompactEntitySerializer' => function() use ( $genericServices ) {
+				return $genericServices->getCompactEntitySerializer();
+			},
 			'EntityStoreWatcher' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices;
 			},
@@ -148,6 +154,12 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			},
 			'PropertyInfoLookup' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getPropertyInfoLookup();
+			},
+			'SerializerFactory' => function() use ( $genericServices ) {
+				return $genericServices->getSerializerFactory();
+			},
+			'CompactSerializerFactory' => function() use ( $genericServices ) {
+				return $genericServices->getCompactSerializerFactory();
 			},
 			'StringNormalizer' => function() use ( $genericServices ) {
 				return $genericServices->getStringNormalizer();
@@ -183,21 +195,21 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	}
 
 	/**
-	 * Returns the entity serializer instance that includes snak hashes in the serialization.
+	 * Returns the entity serializer instance that generates the full (expanded) serialization.
 	 *
 	 * @return Serializer
 	 */
 	public function getEntitySerializer() {
-		return $this->genericServices->getEntitySerializer();
+		return $this->getService( 'EntitySerializer' );
 	}
 
 	/**
-	 * Returns the entity serializer instance that omits snak hashes in the serialization.
+	 * Returns the entity serializer instance that generates the most compact serialization.
 	 *
 	 * @return Serializer
 	 */
 	public function getCompactEntitySerializer() {
-		return $this->genericServices->getCompactEntitySerializer();
+		return $this->getService( 'CompactEntitySerializer' );
 	}
 
 	/**
@@ -219,6 +231,24 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getPropertyInfoLookup() {
 		return $this->getService( 'PropertyInfoLookup' );
+	}
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Returns serializers that generate the full
+	 *  (expanded) serialization.
+	 */
+	public function getSerializerFactory() {
+		return $this->getService( 'SerializerFactory' );
+	}
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types.  Returns serializers that generate the most
+	 *  compact serialization.
+	 */
+	public function getCompactSerializerFactory() {
+		return $this->getService( 'CompactSerializerFactory' );
 	}
 
 	/**
