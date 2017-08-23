@@ -45,26 +45,26 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	/**
 	 * @param EntityIdParser $idParser
 	 * @param EntityIdComposer $idComposer
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param RepositoryDefinitions $repositoryDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param DataAccessSettings $settings
+	 * @param int[] $entityNamespaces
 	 * @param callable[] $multiRepositoryServiceWiring
 	 * @param callable[] $perRepositoryServiceWiring
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
 		EntityIdComposer $idComposer,
-		EntityNamespaceLookup $entityNamespaceLookup,
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		DataAccessSettings $settings,
+		array $entityNamespaces,
 		array $multiRepositoryServiceWiring,
 		array $perRepositoryServiceWiring
 	) {
 		parent::__construct();
 
-		$this->genericServices = new GenericServices( $entityNamespaceLookup, $entityTypeDefinitions );
+		$this->genericServices = new GenericServices( $entityTypeDefinitions, $entityNamespaces );
 
 		$this->multiRepositoryServices = $this->createMultiRepositoryServices(
 			$idParser,
@@ -134,6 +134,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityInfoBuilderFactory();
 			},
+			'EntityNamespaceLookup' => function() use ( $genericServices ) {
+				return $genericServices->getEntityNamespaceLookup();
+			},
 			'EntityPrefetcher' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityPrefetcher();
 			},
@@ -166,6 +169,13 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getEntityInfoBuilderFactory() {
 		return $this->getService( 'EntityInfoBuilderFactory' );
+	}
+
+	/**
+	 * @return EntityNamespaceLookup
+	 */
+	public function getEntityNamespaceLookup() {
+		return $this->getService( 'EntityNamespaceLookup' );
 	}
 
 	/**
