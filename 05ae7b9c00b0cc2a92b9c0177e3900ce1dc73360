@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_9a2b1193",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-23T17:02:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e71af52_8496cff1",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_64b88375",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-26T16:18:35Z",
       "side": 1,
       "message": "We probably need this, but how is it related to this patch? Shouldn\u0027t it be separate?",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ba284d96",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-23T17:02:19Z",
+      "side": 1,
+      "message": "I didn\u0027t change this part.",
+      "parentUuid": "6e71af52_64b88375",
       "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5a312900",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-23T17:02:19Z",
+      "side": 1,
+      "message": "I didn\u0027t change this part.",
+      "parentUuid": "6e71af52_e4ac7334",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_c4a3773e",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2017-07-26T16:18:35Z",
       "side": 1,
       "message": "Unrelated side note: should the \"source\" indicate the software (wikibase), or the project (wikidata)? In the future, a singe wiki can be a client to multiple wikibase repos. Should all of them use the same value in the soruce field?",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_7a2e65a1",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-23T17:02:19Z",
+      "side": 1,
+      "message": "Probably software (probably shouldn\u0027t define a constant for every site like Wikidata), but ideally there would be a way to query (so an additional separate column) to filter on original source website (wikidata.org, commons, etc.) too.\n\nI also didn\u0027t change this part.",
+      "parentUuid": "6e71af52_c4a3773e",
       "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
