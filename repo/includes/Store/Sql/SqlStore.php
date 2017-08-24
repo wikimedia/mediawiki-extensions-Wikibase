@@ -35,10 +35,6 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
@@ -106,11 +102,6 @@ class SqlStore implements Store {
 	private $entityStoreWatcher = null;
 
 	/**
-	 * @var EntityInfoBuilderFactory|null
-	 */
-	private $entityInfoBuilderFactory = null;
-
-	/**
 	 * @var PropertyInfoLookup|null
 	 */
 	private $propertyInfoLookup = null;
@@ -156,9 +147,9 @@ class SqlStore implements Store {
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var WikibaseServices|null
+	 * @var WikibaseServices
 	 */
-	private $wikibaseServices = null;
+	private $wikibaseServices;
 
 	/**
 	 * @var string
@@ -198,7 +189,7 @@ class SqlStore implements Store {
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param WikibaseServices|null $wikibaseServices Optional service container providing data access services
+	 * @param WikibaseServices $wikibaseServices Service container providing data access services
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
@@ -208,7 +199,7 @@ class SqlStore implements Store {
 		EntityIdLookup $entityIdLookup,
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
-		WikibaseServices $wikibaseServices = null
+		WikibaseServices $wikibaseServices
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->contentCodec = $contentCodec;
@@ -473,15 +464,8 @@ class SqlStore implements Store {
 		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
 
-		if ( $this->wikibaseServices !== null ) {
-			$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
-			$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
-		} else {
-			// Watch for entity changes
-			$metaDataFetcher = $this->getEntityPrefetcher();
-			$dispatcher->registerWatcher( $metaDataFetcher );
-			$nonCachingLookup = $this->getRawEntityRevisionLookup( $metaDataFetcher );
-		}
+		$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
+		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
@@ -506,46 +490,13 @@ class SqlStore implements Store {
 		return [ $nonCachingLookup, $hashCachingLookup ];
 	}
 
-	private function getRawEntityRevisionLookup( WikiPageEntityMetaDataAccessor $metaDataFetcher ) {
-		return new WikiPageEntityRevisionLookup(
-			$this->contentCodec,
-			$metaDataFetcher,
-			false
-		);
-	}
-
 	/**
 	 * @see Store::getEntityInfoBuilderFactory
 	 *
 	 * @return EntityInfoBuilderFactory
 	 */
 	public function getEntityInfoBuilderFactory() {
-		if ( !$this->entityInfoBuilderFactory ) {
-			$this->entityInfoBuilderFactory = $this->newEntityInfoBuilderFactory();
-		}
-
-		return $this->entityInfoBuilderFactory;
-	}
-
-	/**
-	 * Creates a new EntityInfoBuilderFactory
-	 *
-	 * @return EntityInfoBuilderFactory
-	 */
-	private function newEntityInfoBuilderFactory() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getEntityInfoBuilderFactory();
-		}
-
-		$factory = new SqlEntityInfoBuilderFactory(
-			$this->entityIdParser,
-			$this->entityIdComposer,
-			$this->entityNamespaceLookup
-		);
-
-		$factory->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
-
-		return $factory;
+		return $this->wikibaseServices->getEntityInfoBuilderFactory();
 	}
 
 	/**
@@ -569,16 +520,12 @@ class SqlStore implements Store {
 	 * @return PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
-		if ( $this->wikibaseServices !== null ) {
-			$table = $this->wikibaseServices->getPropertyInfoLookup();
-		} else {
-			$table = $this->getPropertyInfoTable();
-		}
+		$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
 
 		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 		return new CachingPropertyInfoLookup(
-			$table,
+			$nonCachingLookup,
 			ObjectCache::getInstance( $this->cacheType ),
 			$this->cacheDuration,
 			$cacheKey
@@ -659,12 +606,7 @@ class SqlStore implements Store {
 	 * @return EntityPrefetcher
 	 */
 	private function newEntityPrefetcher() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getEntityPrefetcher();
-		}
-		return new PrefetchingWikiPageEntityMetaDataAccessor(
-			new WikiPageEntityMetaDataLookup( $this->entityNamespaceLookup )
-		);
+		return $this->wikibaseServices->getEntityPrefetcher();
 	}
 
 	/**
