@@ -8,6 +8,12 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 3.1.0 (dev)
+
+* Added a `hash` parameter to the constructors of
+  `Snak`, `PropertyValueSnak`, `PropertySomeValueSnak` and `PropertyNoValueSnak`,
+  as well as a `getHash()` function to the `Snak` class.
+
 ### 3.0.1 (2016-09-09)
 
 * Fix an issue with MediaWiki loading (init.php)

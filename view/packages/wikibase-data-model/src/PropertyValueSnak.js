@@ -15,17 +15,18 @@ var PARENT = wb.datamodel.Snak;
  *
  * @param {string} propertyId
  * @param {dataValues.DataValue} value
+ * @param {string|null} [hash=null]
  *
  * @throws {Error} value is not a dataValues.DataValue instance.
  */
 var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
 	'WbDataModelPropertyValueSnak',
 	PARENT,
-	function( propertyId, value ) {
+	function( propertyId, value, hash ) {
 		if( !( value instanceof dv.DataValue ) ) {
 			throw new Error( 'The value has to be an instance of dataValues.DataValue' );
 		}
-		PARENT.call( this, propertyId );
+		PARENT.call( this, propertyId, hash );
 		this._value = value;
 	},
 {

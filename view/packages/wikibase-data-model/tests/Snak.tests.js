@@ -8,11 +8,11 @@
 QUnit.module( 'wikibase.datamodel.Snak' );
 
 var testSets = [
-	[wb.datamodel.PropertyNoValueSnak, ['P1']],
-	[wb.datamodel.PropertyNoValueSnak, ['P2']],
-	[wb.datamodel.PropertySomeValueSnak, ['P1']],
-	[wb.datamodel.PropertyValueSnak, ['P1', new dv.StringValue( 'test' )]],
-	[wb.datamodel.PropertyValueSnak, ['P2', new dv.StringValue( 'test' )]]
+	[wb.datamodel.PropertyNoValueSnak, ['P1', undefined]],
+	[wb.datamodel.PropertyNoValueSnak, ['P2', 'hash']],
+	[wb.datamodel.PropertySomeValueSnak, ['P1', 'hash']],
+	[wb.datamodel.PropertyValueSnak, ['P1', new dv.StringValue( 'test' ), undefined]],
+	[wb.datamodel.PropertyValueSnak, ['P2', new dv.StringValue( 'test' ), 'hash']]
 ];
 
 /**
@@ -21,11 +21,11 @@ var testSets = [
  * @return {wikibase.datamodel.Snak}
  */
 function constructSnak( SnakConstructor, params ) {
-	return new SnakConstructor( params[0], params[1] );
+	return new SnakConstructor( params[0], params[1], params[2] );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
-	assert.expect( 15 );
+	assert.expect( 20 );
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		var SnakConstructor = testSets[i][0],
@@ -47,6 +47,12 @@ QUnit.test( 'Constructor', function( assert ) {
 			snak.getType(),
 			SnakConstructor.TYPE,
 			'Test set #' + i + ': Snak type "' + snak.getType() + '" was set correctly.'
+		);
+
+		assert.strictEqual(
+			snak.getHash(),
+			snakParams[snakParams.length - 1] || null,
+			'Test set #' + i + ': Snak hash was set correctly.'
 		);
 	}
 } );
