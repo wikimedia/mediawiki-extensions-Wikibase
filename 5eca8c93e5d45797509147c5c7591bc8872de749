@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_3289da27",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T18:04:16Z",
+      "side": 1,
+      "message": "treating this as a service interface is a little strange, but ok, whatever...",
+      "revId": "5eca8c93e5d45797509147c5c7591bc8872de749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
