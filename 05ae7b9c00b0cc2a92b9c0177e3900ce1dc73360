@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_0c2368b6",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:28:54Z",
+      "side": 1,
+      "message": "Huh, I must have been looking at a diff against something strange...",
+      "parentUuid": "4e7eab26_ba284d96",
+      "revId": "05ae7b9c00b0cc2a92b9c0177e3900ce1dc73360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e71af52_e4ac7334",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 10
