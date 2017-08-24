@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_12037e11",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:28:54Z",
+      "side": 1,
+      "message": "Hm... this field is in the database, but not documented in the interface. Would probably be nice to give it a getter, like we have for the timestamp, etc.",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_922e8e87",
+        "filename": "lib/includes/Changes/CentralIdLookupFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:28:54Z",
+      "side": 1,
+      "message": "Fair enough, but overkill. The logic in this class could simply live in a private method in WikibaseClient.",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_92452e49",
+        "filename": "lib/tests/phpunit/Changes/MockRepoClientCentralIdLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:28:54Z",
+      "side": 1,
+      "message": "Why not use a PHPUnit mock builder?",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_527266ad",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:28:54Z",
+      "side": 1,
+      "message": "In that case, please assert manually:\nAssert::parameterType( \u0027CentralIdLookup|null\u0027, $centralIdLookup, \u0027$centralIdLookup\u0027 )",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
