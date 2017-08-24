@@ -120,8 +120,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$valueToValidate = new EntityIdValue( $kittenId );
 
 		$repo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'entity-types' => [ 'item', 'property' ] ] ),
-			$this->getRepositoryDefinition( 'other', [ 'entity-types' => [ 'kitten' ] ] )
+			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'item' => 200, 'property' => 300 ] ] ),
+			$this->getRepositoryDefinition( 'other', [ 'entity-namespaces' => [ 'kitten' => 666 ] ] )
 		) );
 
 		$builders = $repo->newValidatorBuilders();
@@ -385,7 +385,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				[
 					'database' => '',
 					'base-uri' => 'http://acme.test/concept/',
-					'entity-types' => [ 'item', 'property' ],
+					'entity-namespaces' => [ 'item' => 200, 'property' => 300 ],
 					'prefix-mapping' => [],
 				],
 				$customSettings
@@ -413,9 +413,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		}
 
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'entity-types' => [ 'foo', 'bar' ] ] ),
-			$this->getRepositoryDefinition( 'repo1', [ 'entity-types' => [ 'baz' ] ] ),
-			$this->getRepositoryDefinition( 'repo2', [ 'entity-types' => [ 'foobar' ] ] )
+			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 200, 'bar' => 220 ] ] ),
+			$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 250 ] ] ),
+			$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'foobar' => 280 ] ] )
 		) );
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
@@ -537,7 +537,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-types' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
 		);
 	}
 
@@ -700,9 +700,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetEntityTypeToRepositoryMapping() {
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'entity-types' => [ 'foo', 'bar' ] ] ),
-			$this->getRepositoryDefinition( 'repo1', [ 'entity-types' => [ 'baz' ] ] ),
-			$this->getRepositoryDefinition( 'repo2', [ 'entity-types' => [ 'foobar' ] ] )
+			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 100, 'bar' => 200 ] ] ),
+			$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 300 ] ] ),
+			$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'foobar' => 400 ] ] )
 		) );
 
 		$this->assertEquals(
@@ -719,7 +719,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetConceptBaseUris() {
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
 			$this->getRepositoryDefinition( '', [ 'base-uri' => 'http://acme.test/concept/' ] ),
-			$this->getRepositoryDefinition( 'other', [ 'base-uri' => 'http://other.wiki/concept/', 'entity-types' => [ 'foo' ] ] )
+			$this->getRepositoryDefinition( 'other', [ 'base-uri' => 'http://other.wiki/concept/', 'entity-namespaces' => [ 'foo' => 123 ] ] )
 		) );
 
 		$this->assertEquals(

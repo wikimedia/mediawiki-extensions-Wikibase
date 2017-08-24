@@ -15,7 +15,8 @@ use Wikimedia\Assert\Assert;
  *  - database: symbolic name of the database (string or false),
  *  - base-uri: Base URI of concept URIs (e.g. used in RDF output). This should include
  *    scheme and authority part of the URI. Only entity ID will be added to the base URI.
- *  - entity-types: list of entity names the repository provides (array of strings).
+ *  - entity-namespaces: map of names of entity types (strings) the repository provides to namespaces IDs (ints)
+ *    related to the given entity type on the repository's wiki.
  *  - prefix-mapping: map of repository prefixes used in the repository (@see docs/foreign-entity-ids.wiki
  *    in the Data Model component for documention on prefix mapping).
  *
@@ -40,6 +41,16 @@ class RepositoryDefinitions {
 	private $entityTypeToRepositoryMapping = [];
 
 	/**
+	 * @var array
+	 */
+	private $entityTypesPerRepository = [];
+
+	/**
+	 * @var int[]
+	 */
+	private $entityNamespaces;
+
+	/**
 	 * @param array $repositoryDefinitions Associative array mapping repository names to an array of
 	 * repository settings. Empty-string key stands for local repository.
 	 * See class description for information on the expected format of $repositoryDefinitions
@@ -47,7 +58,7 @@ class RepositoryDefinitions {
 	 * @throws InvalidArgumentException if $repositoryDefinitions has invalid format
 	 */
 	public function __construct( array $repositoryDefinitions ) {
-		$requiredFields = [ 'database', 'base-uri', 'entity-types', 'prefix-mapping' ];
+		$requiredFields = [ 'database', 'base-uri', 'entity-namespaces', 'prefix-mapping' ];
 
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $repositoryDefinitions, '$repositoryDefinitions' );
 		Assert::parameterElementType( 'array', $repositoryDefinitions, '$repositoryDefinitions' );
@@ -66,7 +77,7 @@ class RepositoryDefinitions {
 
 		$this->repositoryDefinitions = $repositoryDefinitions;
 
-		$this->entityTypeToRepositoryMapping = $this->buildEntityTypeToRepositoryMapping( $repositoryDefinitions );
+		$this->buildEntityTypeMappings( $repositoryDefinitions );
 	}
 
 	/**
@@ -102,7 +113,7 @@ class RepositoryDefinitions {
 	 * provided by each repository.
 	 */
 	public function getEntityTypesPerRepository() {
-		return $this->getMapForDefinitionField( 'entity-types' );
+		return $this->entityTypesPerRepository;
 	}
 
 	/**
@@ -121,6 +132,14 @@ class RepositoryDefinitions {
 	}
 
 	/**
+	 * @return int[] Associative array (string => int) mapping entity type names to namespace IDs (numbers) related
+	 * namespace on the wiki of the repository that provides entities of the given type.
+	 */
+	public function getEntityNamespaces() {
+		return $this->entityNamespaces;
+	}
+
+	/**
 	 * @param array $definition
 	 * @param array $requiredFields
 	 *
@@ -134,31 +153,27 @@ class RepositoryDefinitions {
 	 * @param array $repositoryDefinitions
 	 *
 	 * @throws InvalidArgumentException
-	 *
-	 * @return string[]
 	 */
-	private function buildEntityTypeToRepositoryMapping( array $repositoryDefinitions ) {
-		$mapping = [];
+	private function buildEntityTypeMappings( array $repositoryDefinitions ) {
+		$this->entityTypeToRepositoryMapping = [];
+		$this->entityTypesPerRepository = [];
+		$this->entityNamespaces = [];
 
 		foreach ( $repositoryDefinitions as $repositoryName => $definition ) {
-			if ( !isset( $definition['entity-types'] ) ) {
-				continue;
-			}
-
-			foreach ( $definition['entity-types'] as $entityType ) {
-				if ( isset( $mapping[$entityType] ) ) {
+			foreach ( $definition['entity-namespaces'] as $type => $namespace ) {
+				if ( isset( $this->entityTypeToRepositoryMapping[$type] ) ) {
 					throw new InvalidArgumentException(
 						'Using same entity types on multiple repositories is not supported yet. '
-						. '"' . $entityType . '" has already be defined for repository '
-						. '"' . $mapping[$entityType] .'"'
+						. '"' . $type . '" has already be defined for repository '
+						. '"' . $this->entityTypeToRepositoryMapping[$type] .'"'
 					);
 				}
 
-				$mapping[$entityType] = $repositoryName;
+				$this->entityTypeToRepositoryMapping[$type] = $repositoryName;
+				$this->entityTypesPerRepository[$repositoryName][] = $type;
+				$this->entityNamespaces[$type] = $namespace;
 			}
 		}
-
-		return $mapping;
 	}
 
 	/**

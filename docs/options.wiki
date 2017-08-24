@@ -13,7 +13,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :'''Note''' that this setting replaces the old ''siteLinkGroup'' setting, which only allowed for a single group.
 ;specialSiteLinkGroups: This maps one or more site groups into a single "special" group. This is useful if sites from multiple site groups should be shown in a single "special" section on item pages, instead of one section per site group. To show these site-groups you have to add the group "special" to the '''siteLinkGroups''' setting (see above).
 ;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
-:;'supportedEntityTypes': A list of entity type identifiers (strings) that the local wiki supports from the foreign repository.
+:;'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces identifiers (numbers) related to pages of entities of the given type on foreign repository's wiki..
 :;'repoDatabase': A symbolic database identifier (string) that MediaWiki's LBFactory class understands.
 :;'baseUri': A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
 :;'prefixMapping': A prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.

@@ -321,14 +321,14 @@ class WikibaseRepo {
 			'database' => $settings->getSetting( 'changesDatabase' ),
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
-			'entity-types' => array_keys( $settings->getSetting( 'entityNamespaces' ) ),
+			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ];
 
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
-				'entity-types' => $repositorySettings['supportedEntityTypes'],
+				'entity-namespaces' => $repositorySettings['entityNamespaces'],
 				'prefix-mapping' => $repositorySettings['prefixMapping'],
 			];
 		}
@@ -1596,6 +1596,9 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * TODO: rename to getLocalEntityNamespaces as the result does not include namespaces
+	 * used by "foreign" entity types?
+	 *
 	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
 	public function getEntityNamespaces() {
@@ -1925,7 +1928,6 @@ class WikibaseRepo {
 				$this->repositoryDefinitions,
 				$this->entityTypeDefinitions,
 				$this->getDataAccessSettings(),
-				$this->getSettings()->getSetting( 'entityNamespaces' ),
 				$this->getMultiRepositoryServiceWiring(),
 				$this->getPerRepositoryServiceWiring()
 			);

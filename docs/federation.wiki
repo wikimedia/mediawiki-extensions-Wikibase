@@ -20,10 +20,10 @@ Note that as only foreign properties from the repository "prop" are to be used, 
 $wgWBRepoSettings['foreignRepositories'] = [
 	'prop' => [
 		'repoDatabase' => 'propwiki',
-		'supportedEntityTypes' => [ 'property' ],
+		'entityNamespaces' => [ 'property' => WB_NS_PROPERTY ],
 		'prefixMapping' => [],
 		'baseUri' => 'http://prop.wiki/entity/',
 	],
 ];
-$wgWBRepoSettings['entityNamespaces'] = [ 'item' => WB_NS_DATA ];
+$wgWBRepoSettings['entityNamespaces'] = [ 'item' => WB_NS_ITEM ];
 </pre>

@@ -74,7 +74,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-types' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
 		);
 	}
 
