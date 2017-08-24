@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -277,7 +278,7 @@ class EntitySearchTermIndexTest extends \PHPUnit_Framework_TestCase {
 
 		$entitySearchHelper = $this->newEntitySearchHelper(
 			$mockSearchInteractor,
-			[ 'item' => 'foreign' ]
+			[ 'item' => [ [ 'foreign', 123 ] ] ]
 		);
 
 		$this->assertEquals(
@@ -290,6 +291,16 @@ class EntitySearchTermIndexTest extends \PHPUnit_Framework_TestCase {
 				false
 			)
 		);
+	}
+
+	public function testGivenEntityTypeDefinedInMultipleRepos_constructorThrowsException() {
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$mockSearchInteractor = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$mockSearchInteractor->method( 'searchForEntities' )
+			->will( $this->returnValue( [] ) );
+
+		$this->newEntitySearchHelper( $mockSearchInteractor, [ 'item' => [ '', 'foreign' ] ] );
 	}
 
 }

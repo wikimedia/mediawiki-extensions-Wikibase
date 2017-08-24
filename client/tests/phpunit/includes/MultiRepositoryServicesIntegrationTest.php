@@ -39,7 +39,7 @@ class MultiRepositoryServicesIntegrationTest extends \MediaWikiTestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			new RepositoryDefinitions(
-				[ '' => [ 'database' => '', 'base-uri' => '', 'entity-types' => [], 'prefix-mapping' => [] ] ]
+				[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
 			),
 			new HashSiteStore()
 		);
