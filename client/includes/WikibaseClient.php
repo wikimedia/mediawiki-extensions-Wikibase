@@ -374,7 +374,6 @@ final class WikibaseClient {
 				$this->repositoryDefinitions,
 				$this->entityTypeDefinitions,
 				$this->getDataAccessSettings(),
-				$this->getSettings()->getSetting( 'entityNamespaces' ),
 				$this->getMultiRepositoryServiceWiring(),
 				$this->getPerRepositoryServiceWiring()
 			);
@@ -680,14 +679,14 @@ final class WikibaseClient {
 			'database' => $settings->getSetting( 'repoDatabase' ),
 			'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
-			'entity-types' => array_keys( $settings->getSetting( 'repoNamespaces' ) ),
+			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ];
 
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
-				'entity-types' => $repositorySettings['supportedEntityTypes'],
+				'entity-namespaces' => $repositorySettings['entityNamespaces'],
 				'prefix-mapping' => $repositorySettings['prefixMapping'],
 			];
 		}

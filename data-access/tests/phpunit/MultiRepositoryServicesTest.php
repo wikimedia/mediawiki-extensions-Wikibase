@@ -27,7 +27,7 @@ class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
 			[
 				'database' => '',
 				'base-uri' => 'http://acme.test/concept/',
-				'entity-types' => [],
+				'entity-namespaces' => [],
 				'prefix-mapping' => []
 			],
 			$customSettings
@@ -54,8 +54,8 @@ class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
 		return new MultiRepositoryServices(
 			$containerFactory,
 			new RepositoryDefinitions( array_merge(
-				$this->getRepositoryDefinition( '', [ 'entity-types' => [ Item::ENTITY_TYPE ] ] ),
-				$this->getRepositoryDefinition( 'foo', [ 'entity-types' => [ Property::ENTITY_TYPE ] ] )
+				$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ Item::ENTITY_TYPE => 100 ] ] ),
+				$this->getRepositoryDefinition( 'foo', [ 'entity-namespaces' => [ Property::ENTITY_TYPE => 300 ] ] )
 			) )
 		);
 	}
