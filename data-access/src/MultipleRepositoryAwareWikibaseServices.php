@@ -48,7 +48,6 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 * @param RepositoryDefinitions $repositoryDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param DataAccessSettings $settings
-	 * @param int[] $entityNamespaces
 	 * @param callable[] $multiRepositoryServiceWiring
 	 * @param callable[] $perRepositoryServiceWiring
 	 */
@@ -58,13 +57,15 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		DataAccessSettings $settings,
-		array $entityNamespaces,
 		array $multiRepositoryServiceWiring,
 		array $perRepositoryServiceWiring
 	) {
 		parent::__construct();
 
-		$this->genericServices = new GenericServices( $entityTypeDefinitions, $entityNamespaces );
+		$this->genericServices = new GenericServices(
+			$entityTypeDefinitions,
+			$repositoryDefinitions->getEntityNamespaces()
+		);
 
 		$this->multiRepositoryServices = $this->createMultiRepositoryServices(
 			$idParser,
