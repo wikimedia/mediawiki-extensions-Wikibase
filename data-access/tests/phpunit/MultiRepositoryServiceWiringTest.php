@@ -57,7 +57,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new RepositoryDefinitions( [ '' => [
 				'database' => false,
 				'base-uri' => '',
-				'entity-types' => [],
+				'entity-namespaces' => [],
 				'prefix-mapping' => [],
 			] ] )
 		);
