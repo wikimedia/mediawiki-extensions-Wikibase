@@ -32,6 +32,10 @@ MODULE.SnakSerializer = util.inherit( 'WbSnakSerializer', PARENT, {
 			property: snak.getPropertyId()
 		};
 
+		if( snak.getHash() !== null ) {
+			serialization.hash = snak.getHash();
+		}
+
 		if( snak instanceof wikibase.datamodel.PropertyValueSnak ) {
 			var dataValue = snak.getValue();
 
