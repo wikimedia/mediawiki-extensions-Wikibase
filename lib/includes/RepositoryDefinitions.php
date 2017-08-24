@@ -23,7 +23,7 @@ use Wikimedia\Assert\Assert;
  * Note: currently single entity type is mapped to a single repository. This might change in the future
  * and a particular entity type might be provided by multiple repositories.
  *
- * @see docs/options.wiki for documentation on Client's "foreignRepositories" settings defining configuration
+ * @see docs/options.wiki for documentation on "foreignRepositories" settings defining configuration
  * of foreign repositories..
  *
  * @license GPL-2.0+
