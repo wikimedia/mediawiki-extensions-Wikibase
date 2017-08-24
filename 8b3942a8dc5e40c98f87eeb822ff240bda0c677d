@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_d2cf3659",
+        "filename": "data-access/src/DataAccessSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T18:11:13Z",
+      "side": 1,
+      "message": "why use KB in the constructor, but bytes here? That\u0027s confusing...",
+      "revId": "8b3942a8dc5e40c98f87eeb822ff240bda0c677d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
