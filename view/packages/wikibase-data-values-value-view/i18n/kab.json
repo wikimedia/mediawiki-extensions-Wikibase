@@ -4,6 +4,10 @@
 			"Belkacem77"
 		]
 	},
+	"valueview-desc": "Isuddisen udlifen n ugrudem n useqdac i uskan akked ubeddel n isefka.",
+	"valueview-expert-advancedadjustments": "iɣewwaṛen leqqayen",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Asexdem n wazalen n isefka \"$1\" ur yettwasefrak ara yakan.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Aseqdec n wazalen i wanaw n isefka \"$1\" ur yettwasefrak ara yakan.",
 	"valueview-expert-emptyvalue-empty": "ilem",
 	"valueview-expert-globecoordinateinput-precision": "Tiseddi:",
 	"valueview-expert-globecoordinateinput-nullprecision": "ur yettwammel ara",
