@@ -363,7 +363,7 @@ class WikibaseRepo {
 			'database' => $settings->getSetting( 'changesDatabase' ),
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
-			'entity-types' => array_keys( $settings->getSetting( 'entityNamespaces' ) ),
+			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ] );
 	}
 
@@ -1354,7 +1354,7 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->getEntityNamespaces() );
+		return array_keys( $this->getLocalEntityNamespaces() );
 	}
 
 	/**
@@ -1739,7 +1739,7 @@ class WikibaseRepo {
 	/**
 	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
-	public function getEntityNamespaces() {
+	public function getLocalEntityNamespaces() {
 		return $this->settings->getSetting( 'entityNamespaces' );
 	}
 
@@ -1753,7 +1753,7 @@ class WikibaseRepo {
 
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->getEntityNamespaces()
+				$this->getLocalEntityNamespaces()
 			);
 		}
 

@@ -12,6 +12,7 @@ use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
+use Wikimedia\Assert\Assert;
 
 /**
  * Helper class to search for entities.
@@ -52,8 +53,8 @@ class EntitySearchTermIndex implements EntitySearchHelper {
 	 * @param EntityIdParser $idParser
 	 * @param ConfigurableTermSearchInteractor $termSearchInteractor
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param string[] $entityTypeToRepositoryMapping Associative array mapping entity type names (strings) to
-	 *        names of repositories providing entities of this type.
+	 * @param array $entityTypeToRepositoryMapping Associative array (string => string[]) mapping entity types to a list of repository names
+	 *              which provide entities of the given type.
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,
@@ -62,6 +63,14 @@ class EntitySearchTermIndex implements EntitySearchHelper {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		array $entityTypeToRepositoryMapping
 	) {
+		foreach ( $entityTypeToRepositoryMapping as $entityType => $repositoryNames ) {
+			Assert::parameter(
+				count( $repositoryNames ) === 1,
+				'$entityTypeToRepositoryMapping',
+				'Expected entities of type: "' . $entityType . '" to only be provided by single repository.'
+			);
+		}
+
 		$this->entityLookup = $entityLookup;
 		$this->idParser = $idParser;
 		$this->termSearchInteractor = $termSearchInteractor;
@@ -187,7 +196,9 @@ class EntitySearchTermIndex implements EntitySearchHelper {
 			return $entityIds;
 		}
 
-		$repositoryPrefix = $this->entityTypeToRepositoryMapping[$entityType];
+		// FIXME: this assumes entities of the particular type are only provided by a single repository
+		// This assumption is currently valid but might change in the future.
+		$repositoryPrefix = $this->entityTypeToRepositoryMapping[$entityType][0];
 
 		try {
 			$id = $this->idParser->parse( EntityId::joinSerialization( [

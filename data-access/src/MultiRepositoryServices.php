@@ -130,7 +130,7 @@ class MultiRepositoryServices extends ServiceContainer implements DataAccessServ
 	}
 
 	/**
-	 * @return string[]
+	 * @return array
 	 */
 	public function getEntityTypeToRepoMapping() {
 		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
