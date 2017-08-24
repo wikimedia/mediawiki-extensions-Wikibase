@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
@@ -16,6 +17,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -53,6 +55,23 @@ class SqlStoreTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
+		$prefetchingAccessor = $this->getMockBuilder( PrefetchingWikiPageEntityMetaDataAccessor::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$wikibaseServices = $this->getMock( WikibaseServices::class );
+
+		$wikibaseServices->method( 'getEntityInfoBuilderFactory' )
+			->willReturn( $this->getMock( EntityInfoBuilderFactory::class ) );
+		$wikibaseServices->method( 'getEntityPrefetcher' )
+			->willReturn( $prefetchingAccessor );
+		$wikibaseServices->method( 'getEntityRevisionLookup' )
+			->willReturn( $this->getMock( EntityRevisionLookup::class ) );
+		$wikibaseServices->method( 'getEntityStoreWatcher' )
+			->willReturn( $this->getMock( EntityStoreWatcher::class ) );
+		$wikibaseServices->method( 'getPropertyInfoLookup' )
+			->willReturn( new MockPropertyInfoLookup() );
+
 		return new SqlStore(
 			$changeFactory,
 			$contentCodec,
@@ -60,7 +79,8 @@ class SqlStoreTest extends MediaWikiTestCase {
 			$entityIdComposer,
 			$this->getMock( EntityIdLookup::class ),
 			$this->getMock( EntityTitleStoreLookup::class ),
-			new EntityNamespaceLookup( [] )
+			new EntityNamespaceLookup( [] ),
+			$wikibaseServices
 		);
 	}
 
