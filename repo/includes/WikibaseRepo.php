@@ -357,7 +357,7 @@ class WikibaseRepo {
 			'database' => $settings->getSetting( 'changesDatabase' ),
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
-			'entity-types' => array_keys( $settings->getSetting( 'entityNamespaces' ) ),
+			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ] );
 	}
 
@@ -1697,6 +1697,9 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * TODO: rename to getLocalEntityNamespaces as the result does not include namespaces
+	 * used by "foreign" entity types?
+	 *
 	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
 	public function getEntityNamespaces() {

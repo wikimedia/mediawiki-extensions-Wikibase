@@ -37,7 +37,6 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 			$this->getRepositoryDefinitions(),
 			new EntityTypeDefinitions( [] ),
 			new DataAccessSettings( 1, true ),
-			[],
 			$this->getMultiRepoServiceWiring(),
 			[]
 		);
@@ -48,7 +47,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 			'' => [
 				'database' => false,
 				'base-uri' => 'http://foo',
-				'entity-types' => [],
+				'entity-namespaces' => [],
 				'prefix-mapping' => [],
 			],
 		] );
