@@ -22,12 +22,15 @@ use Wikibase\Lib\RepositoryDefinitions;
  */
 class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
 
+	const ITEM_NAMESPACE = 100;
+	const PROPERTY_NAMESPACE = 300;
+
 	private function getRepositoryDefinition( $repositoryName, array $customSettings ) {
 		return [ $repositoryName => array_merge(
 			[
 				'database' => '',
 				'base-uri' => 'http://acme.test/concept/',
-				'entity-types' => [],
+				'entity-namespaces' => [],
 				'prefix-mapping' => []
 			],
 			$customSettings
@@ -54,8 +57,8 @@ class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
 		return new MultiRepositoryServices(
 			$containerFactory,
 			new RepositoryDefinitions( array_merge(
-				$this->getRepositoryDefinition( '', [ 'entity-types' => [ Item::ENTITY_TYPE ] ] ),
-				$this->getRepositoryDefinition( 'foo', [ 'entity-types' => [ Property::ENTITY_TYPE ] ] )
+				$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ Item::ENTITY_TYPE => self::ITEM_NAMESPACE ] ] ),
+				$this->getRepositoryDefinition( 'foo', [ 'entity-namespaces' => [ Property::ENTITY_TYPE => self::PROPERTY_NAMESPACE ] ] )
 			) )
 		);
 	}
@@ -171,8 +174,8 @@ class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			[
-				Item::ENTITY_TYPE => '',
-				Property::ENTITY_TYPE => 'foo',
+				Item::ENTITY_TYPE => [ [ '', self::ITEM_NAMESPACE ] ],
+				Property::ENTITY_TYPE => [ [ 'foo', self::PROPERTY_NAMESPACE ] ],
 			],
 			$services->getEntityTypeToRepoMapping()
 		);
