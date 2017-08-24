@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_32831a59",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:35:59Z",
+      "side": 1,
+      "message": "Same problem here!",
+      "revId": "020cf303c00dc1636ea0cc19576bcce3fa935d37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_92bbee22",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-24T17:35:59Z",
+      "side": 1,
+      "message": "Could use LATEST_FROM_REPLICA as the default.\nOr... maybe it would be better if the EditEntity object just knew whether it was posted?\n\nThe class could have a field called allowMasterConnection, and that would be used to decide the mode. Also, if false, attemptSave would fail.",
+      "revId": "020cf303c00dc1636ea0cc19576bcce3fa935d37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
