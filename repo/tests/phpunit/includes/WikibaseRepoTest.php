@@ -18,6 +18,7 @@ use MediaWikiTestCase;
 use RequestContext;
 use Serializers\Serializer;
 use User;
+use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -38,7 +39,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\RepositoryDefinitions;
@@ -244,7 +244,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testNewTermSearchInteractorReturnType() {
 		$returnValue = $this->getWikibaseRepo()->newTermSearchInteractor( '' );
-		$this->assertInstanceOf( TermIndexSearchInteractor::class, $returnValue );
+		$this->assertInstanceOf( TermSearchInteractor::class, $returnValue );
 	}
 
 	public function testGetEntityStoreReturnType() {
@@ -523,17 +523,21 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = [] ) {
-		/** @var RepositoryDefinitions $repositoryDefinitions */
-		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$repositoryDefinitions
+			$this->getRepositoryDefinitions()
+		);
+	}
+
+	/**
+	 * @return RepositoryDefinitions
+	 */
+	private function getRepositoryDefinitions() {
+		return new RepositoryDefinitions(
+			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
 		);
 	}
 
