@@ -9,7 +9,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
-use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
@@ -23,7 +22,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use RequestContext;
-use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use SiteLookup;
 use StubObject;
@@ -31,9 +29,10 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -143,7 +142,6 @@ use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\SettingsArray;
 use Wikibase\SqlStore;
 use Wikibase\Store;
-use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
@@ -187,11 +185,6 @@ class WikibaseRepo {
 	private $propertyDataTypeLookup = null;
 
 	/**
-	 * @var LanguageFallbackChainFactory|null
-	 */
-	private $languageFallbackChainFactory = null;
-
-	/**
 	 * @var StatementGuidValidator|null
 	 */
 	private $statementGuidValidator = null;
@@ -202,16 +195,6 @@ class WikibaseRepo {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var Serializer|null
-	 */
-	private $entitySerializer = null;
-
-	/**
-	 * @var Serializer|null
-	 */
-	private $compactEntitySerializer = null;
-
-	/**
 	 * @var EntityIdParser|null
 	 */
 	private $entityIdParser = null;
@@ -220,11 +203,6 @@ class WikibaseRepo {
 	 * @var EntityIdComposer|null
 	 */
 	private $entityIdComposer = null;
-
-	/**
-	 * @var StringNormalizer|null
-	 */
-	private $stringNormalizer = null;
 
 	/**
 	 * @var OutputFormatSnakFormatterFactory|null
@@ -255,16 +233,6 @@ class WikibaseRepo {
 	 * @var Store|null
 	 */
 	private $store = null;
-
-	/**
-	 * @var EntityNamespaceLookup|null
-	 */
-	private $entityNamespaceLookup = null;
-
-	/**
-	 * @var TermLookup|null
-	 */
-	private $termLookup = null;
 
 	/**
 	 * @var ContentLanguages|null
@@ -333,16 +301,6 @@ class WikibaseRepo {
 
 		$settings = WikibaseSettings::getRepoSettings();
 
-		$repositoryDefinitions = self::getRepositoryDefinitionsFromSettings( $settings );
-
-		$dataRetrievalServices = null;
-
-		// If client functionality is enabled, use it to enable federation.
-		if ( WikibaseSettings::isClientEnabled() ) {
-			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getWikibaseServices();
-			$repositoryDefinitions = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
-		}
-
 		return new self(
 			$settings,
 			new DataTypeDefinitions(
@@ -350,8 +308,7 @@ class WikibaseRepo {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$repositoryDefinitions,
-			$dataRetrievalServices
+			self::getRepositoryDefinitionsFromSettings( $settings )
 		);
 	}
 
@@ -361,12 +318,25 @@ class WikibaseRepo {
 	 * @return RepositoryDefinitions
 	 */
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
-		return new RepositoryDefinitions( [ '' => [
+		// FIXME: It might no longer be needed to check different settings (e.g. changesDatabase vs foreignRepositories)
+		// once repository-related settings are unified, see: T153767.
+		$definitions = [ '' => [
 			'database' => $settings->getSetting( 'changesDatabase' ),
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
 			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-		] ] );
+		] ];
+
+		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+			$definitions[$repository] = [
+				'database' => $repositorySettings['repoDatabase'],
+				'base-uri' => $repositorySettings['baseUri'],
+				'entity-namespaces' => $repositorySettings['entityNamespaces'],
+				'prefix-mapping' => $repositorySettings['prefixMapping'],
+			];
+		}
+
+		return new RepositoryDefinitions( $definitions );
 	}
 
 	/**
@@ -508,35 +478,21 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * FIXME: Optional $wikibaseServices makes it possible to access
-	 * entities from foreign repositories from Repo component but they also introduce the optional
-	 * dependency on the Client component. Such dependency is bad and in the long run it should be removed
-	 * by making WikibaseServices implementation provided to WikibaseRepo not be bound to WikibaseClient.
-	 * WikibaseServices provided by WikibaseClient instance is only used in the transition period until
-	 * WikibaseServices no longer depends on services from Wikibase\Client namespace.
-	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param RepositoryDefinitions $repositoryDefinitions
-	 * @param WikibaseServices|null $wikibaseServices optional container of service providing the
-	 *        access to the entity data that will be used by the Repo instead of it creating
-	 *        instances of those services itself.
-	 *        This container could be provided in order to allow Repo make use of Dispatching services
-	 *        and access data of entities from foreign repositories.
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		RepositoryDefinitions $repositoryDefinitions,
-		WikibaseServices $wikibaseServices = null
+		RepositoryDefinitions $repositoryDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
-		$this->wikibaseServices = $wikibaseServices;
 	}
 
 	/**
@@ -746,16 +702,7 @@ class WikibaseRepo {
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getTermSearchInteractorFactory()->newInteractor(
-				$displayLanguageCode
-			);
-		}
-
-		return new TermIndexSearchInteractor(
-			$this->getStore()->getTermIndex(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getPrefetchingTermLookup(),
+		return $this->getWikibaseServices()->getTermSearchInteractorFactory()->newInteractor(
 			$displayLanguageCode
 		);
 	}
@@ -787,15 +734,7 @@ class WikibaseRepo {
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getStringNormalizer();
-		}
-
-		if ( $this->stringNormalizer === null ) {
-			$this->stringNormalizer = new StringNormalizer();
-		}
-
-		return $this->stringNormalizer;
+		return $this->getWikibaseServices()->getStringNormalizer();
 	}
 
 	/**
@@ -920,15 +859,7 @@ class WikibaseRepo {
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getLanguageFallbackChainFactory();
-		}
-
-		if ( $this->languageFallbackChainFactory === null ) {
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		}
-
-		return $this->languageFallbackChainFactory;
+		return $this->getWikibaseServices()->getLanguageFallbackChainFactory();
 	}
 
 	/**
@@ -973,7 +904,7 @@ class WikibaseRepo {
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
-				$this->wikibaseServices
+				$this->getWikibaseServices()
 			);
 		}
 
@@ -1017,24 +948,7 @@ class WikibaseRepo {
 	 * @return PrefetchingTermLookup
 	 */
 	public function getPrefetchingTermLookup() {
-		if ( !$this->termLookup ) {
-			$this->termLookup = $this->newPrefetchingTermLookup();
-		}
-
-		return $this->termLookup;
-	}
-
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	private function newPrefetchingTermLookup() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getTermBuffer();
-		}
-		return new BufferingTermLookup(
-			$this->getStore()->getTermIndex(),
-			1000 // @todo: configure buffer size
-		);
+		return $this->getWikibaseServices()->getTermBuffer();
 	}
 
 	/**
@@ -1399,11 +1313,7 @@ class WikibaseRepo {
 	 *  (expanded) serialization.
 	 */
 	public function getBaseDataModelSerializerFactory() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getBaseDataModelSerializerFactory();
-		}
-
-		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
+		return $this->getWikibaseServices()->getBaseDataModelSerializerFactory();
 	}
 
 	/**
@@ -1411,16 +1321,8 @@ class WikibaseRepo {
 	 *  they are made of, but no other entity types. Returns serializers that generate the most
 	 *  compact serialization.
 	 */
-	public function getCompactSerializerFactory() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getCompactBaseDataModelSerializerFactory();
-		}
-
-		return new SerializerFactory(
-			new DataValueSerializer(),
-			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
-		);
+	public function getCompactBaseDataModelSerializerFactory() {
+		return $this->getWikibaseServices()->getCompactBaseDataModelSerializerFactory();
 	}
 
 	/**
@@ -1457,46 +1359,14 @@ class WikibaseRepo {
 	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
 	 */
 	public function getAllTypesEntitySerializer() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getFullEntitySerializer();
-		}
-
-		if ( !isset( $this->entitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
-			$serializers = [];
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
-			}
-
-			$this->entitySerializer = new DispatchingSerializer( $serializers );
-		}
-
-		return $this->entitySerializer;
+		return $this->getWikibaseServices()->getFullEntitySerializer();
 	}
 
 	/**
 	 * @return Serializer Entity serializer that generates the most compact serialization.
 	 */
 	public function getCompactEntitySerializer() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getCompactEntitySerializer();
-		}
-
-		if ( !isset( $this->compactEntitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getCompactSerializerFactory();
-			$serializers = [];
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
-			}
-
-			$this->compactEntitySerializer = new DispatchingSerializer( $serializers );
-		}
-
-		return $this->compactEntitySerializer;
+		return $this->getWikibaseServices()->getCompactEntitySerializer();
 	}
 
 	/**
@@ -1535,7 +1405,7 @@ class WikibaseRepo {
 			'monolingualtext' => MonolingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
-			'wikibase-entityid' => function( $value ) {
+			'wikibase-entityid' => function ( $value ) {
 				return isset( $value['id'] )
 					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
@@ -1683,7 +1553,7 @@ class WikibaseRepo {
 		 *
 		 * @return bool True if $blob seems to be using a legacy serialization format.
 		 */
-		return function( $blob, $format ) {
+		return function ( $blob, $format ) {
 			// The legacy serialization uses something like "entity":["item",21] or
 			// even "entity":"p21" for the entity ID.
 			return preg_match( '/"entity"\s*:/', $blob ) > 0;
@@ -1761,17 +1631,7 @@ class WikibaseRepo {
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
-		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getEntityNamespaceLookup();
-		}
-
-		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->getLocalEntityNamespaces()
-			);
-		}
-
-		return $this->entityNamespaceLookup;
+		return $this->getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
 	/**
@@ -1852,7 +1712,6 @@ class WikibaseRepo {
 	 * @return DataTypeValidatorFactory
 	 */
 	public function getDataTypeValidatorFactory() {
-
 		return new BuilderBasedDataTypeValidatorFactory(
 			$this->dataTypeDefinitions->getValidatorFactoryCallbacks()
 		);
@@ -2077,6 +1936,41 @@ class WikibaseRepo {
 
 	public function getPropertyValueExpertsModule() {
 		return new PropertyValueExpertsModule( $this->getDataTypeDefinitions() );
+	}
+
+	/**
+	 * @return WikibaseServices
+	 */
+	public function getWikibaseServices() {
+		if ( $this->wikibaseServices === null ) {
+			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
+				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
+				$this->repositoryDefinitions,
+				$this->entityTypeDefinitions,
+				$this->getDataAccessSettings(),
+				$this->getMultiRepositoryServiceWiring(),
+				$this->getPerRepositoryServiceWiring()
+			);
+		}
+
+		return $this->wikibaseServices;
+	}
+
+	private function getDataAccessSettings() {
+		$repoSettings = $this->getSettings();
+		return new DataAccessSettings(
+			$repoSettings->getSetting( 'maxSerializedEntitySize' ),
+			$repoSettings->getSetting( 'readFullEntityIdColumn' )
+		);
+	}
+
+	private function getMultiRepositoryServiceWiring() {
+		return require __DIR__ . '/../../data-access/src/MultiRepositoryServiceWiring.php';
+	}
+
+	private function getPerRepositoryServiceWiring() {
+		return require __DIR__ . '/../../data-access/src/PerRepositoryServiceWiring.php';
 	}
 
 }
