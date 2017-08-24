@@ -41,7 +41,7 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * @var int Batch size for database operations
 	 */
-	private $dbBatchSize = 100;
+	private $dbBatchSize = 50;
 
 	/**
 	 * @var RecentChangesDuplicateDetector|null
