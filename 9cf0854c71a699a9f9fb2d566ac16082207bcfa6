@@ -16,6 +16,24 @@
       "revId": "9cf0854c71a699a9f9fb2d566ac16082207bcfa6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_994c6e44",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T14:10:23Z",
+      "side": 1,
+      "message": "I was considering similar approach. Will happily do it already in this patch!",
+      "parentUuid": "4e7eab26_7917424a",
+      "revId": "9cf0854c71a699a9f9fb2d566ac16082207bcfa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
