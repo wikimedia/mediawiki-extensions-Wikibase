@@ -71,7 +71,7 @@
 		 */
 		options: {
 			template: 'wikibase-snakview',
-			templateParams: [ '', '', '' ],
+			templateParams: [ '', '', '', new Array( 41 ).join( '0' ) ],
 			templateShortCuts: {
 				$property: '.wikibase-snakview-property',
 				$snakValue: '.wikibase-snakview-value',
@@ -447,6 +447,10 @@
 				}
 			}
 
+			if ( serialization.hash ) {
+				value.hash = serialization.hash;
+			}
+
 			return this._variation ? $.extend( this._variation.value(), value ) : value;
 		},
 
@@ -609,9 +613,33 @@
 		 * (Re-)renders the widget.
 		 */
 		draw: function () {
+			this.updateHash();
 			this.drawProperty();
 			this.drawSnakTypeSelector();
 			this.drawVariation();
+		},
+
+		/**
+		 * Updates the class list of the DOM element
+		 * to contain the right wikibase-snakview-{hash} class if a hash is configured,
+		 * and no other wikibase-snakview-{otherHash} classes.
+		 */
+		updateHash: function () {
+			var index,
+				classList = this.element[ 0 ].classList,
+				classes = Array.from( classList ),
+				klass,
+				hash;
+			for ( index = 0; index < classes.length; index++ ) {
+				klass = classes[ index ];
+				if ( klass.match( /^wikibase-snakview-[0-9a-fA-F]{40}$/ ) ) {
+					classList.remove( klass );
+				}
+			}
+			hash = this.snak() && this.snak().getHash();
+			if ( hash ) {
+				classList.add( 'wikibase-snakview-' + hash );
+			}
 		},
 
 		/**
