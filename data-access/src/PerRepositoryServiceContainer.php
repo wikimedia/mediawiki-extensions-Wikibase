@@ -81,6 +81,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
+		// TODO: pass EntityTypeDefinitions to get those callbacks? or two arrays at least?
 		$this->deserializerFactoryCallbacks = $client->getEntityDeserializerFactoryCallbacks();
 	}
 
