@@ -34,6 +34,24 @@
       "revId": "5eca8c93e5d45797509147c5c7591bc8872de749",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6c08e5dd",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T09:10:47Z",
+      "side": 1,
+      "message": "Sure, no big deal. It is a nice and easy solution. I just stumbled over it during review. I mentioned it especially since I\u0027s having a hard time clearly explaining to myself why it\u0027s not a service interface. I just know it isn\u0027t :)",
+      "parentUuid": "4e7eab26_213c262c",
+      "revId": "5eca8c93e5d45797509147c5c7591bc8872de749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
