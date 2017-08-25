@@ -16,6 +16,24 @@
       "revId": "8b3942a8dc5e40c98f87eeb822ff240bda0c677d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6c078585",
+        "filename": "data-access/src/DataAccessSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T10:23:30Z",
+      "side": 1,
+      "message": "I believe the confusion was already there. maxSerializedEntitySize settings gets a number of kilobytes (which makes sense as) but services that actually use the value of it (e.g. EntityContentDataCodec as seen in this patch) expect number of bytes.\nPossibly the services could be changed to also expect number of KBs instead. But given the status quo, I think the approach here is nice.",
+      "parentUuid": "4e7eab26_d2cf3659",
+      "revId": "8b3942a8dc5e40c98f87eeb822ff240bda0c677d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
