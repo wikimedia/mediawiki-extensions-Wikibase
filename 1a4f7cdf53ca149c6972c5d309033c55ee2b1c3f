@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_aca1ed37",
+        "filename": "data-access/tests/phpunit/NoReverseDependencyTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T11:06:47Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "1a4f7cdf53ca149c6972c5d309033c55ee2b1c3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
