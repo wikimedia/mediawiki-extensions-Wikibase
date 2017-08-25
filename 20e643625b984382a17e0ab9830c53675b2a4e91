@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_0cf84179",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T10:18:54Z",
+      "side": 1,
+      "message": "PerRepositoryServiceContainer sounds kind of clunky, but it\u0027s less ambiguous than RepositoryServiceContainer. That sounds like a ServiceContainer on the repo, while it is really about services that act as a client for a specific repo...\n\nI\u0027m for renaming the classes as well.",
+      "parentUuid": "4e7eab26_ecea95d5",
+      "revId": "20e643625b984382a17e0ab9830c53675b2a4e91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_48ac1531",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 12
