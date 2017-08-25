@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_7917424a",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T13:40:13Z",
+      "side": 1,
+      "message": "I really don\u0027t like parameters on a factory function of a service container. How about having to factory methods, one for compact serializers, and one for fully expanded serializers? We don\u0027t need to full range of possibilities here, right?",
+      "revId": "9cf0854c71a699a9f9fb2d566ac16082207bcfa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
