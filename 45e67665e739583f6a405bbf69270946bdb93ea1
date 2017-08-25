@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_39245aac",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T13:42:38Z",
+      "side": 1,
+      "message": "If the serializer returned here cannot be expected to work for all kinds of Entities, the name should make that absolutely clear. But that shouldn\u0027t be the case here. Is it?!",
+      "revId": "45e67665e739583f6a405bbf69270946bdb93ea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
