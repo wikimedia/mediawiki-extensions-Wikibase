@@ -1623,9 +1623,6 @@ class WikibaseRepo {
 	 * @return ApiHelperFactory
 	 */
 	public function getApiHelperFactory( IContextSource $context ) {
-		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH
-			+ SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
-
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
@@ -1634,8 +1631,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
-			$this->getBaseDataModelSerializerFactory( $serializerOptions ),
-			$this->getAllTypesEntitySerializer( $serializerOptions ),
+			$this->getBaseDataModelSerializerFactory(),
+			$this->getAllTypesEntitySerializer(),
 			$this->getEntityIdParser(),
 			$this->getStore()->newSiteLinkStore(),
 			$this->getEntityFactory(),
