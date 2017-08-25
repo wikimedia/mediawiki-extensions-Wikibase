@@ -16,6 +16,24 @@
       "revId": "118ea139e08661cdeaf9c8988f47dc15fbb9f75e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ccd9d9f9",
+        "filename": "docs/options.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T10:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_2cfdfd68",
+      "revId": "118ea139e08661cdeaf9c8988f47dc15fbb9f75e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
