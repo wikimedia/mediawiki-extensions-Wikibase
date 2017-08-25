@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_8ca751a3",
+        "filename": "data-access/src/GenericServices.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T09:57:36Z",
+      "side": 1,
+      "message": "Added a simple description.\n\nRegarding the class name: agreed that the class name is not the most beautiful one. But otoh, I am struggling to find some more accurate yet short and catchy alternative.\nIn my understanding (and to be clear: might be not what Aleksey had in mind originally), on which I\u0027ve also added some services to this class in later patches, this is meant as a container of services which do not have a repository-specific configuration. For instance, they operation does not depend on a specific repo, or is repo-agnostic. As such, they\u0027re kind of generic indeed!\n\nIf there are better name suggestions, please go ahead. Renames can also be always done at any time, I don\u0027t see much of an issue with a later rename.\n\n\u003e So it might also be called \"MediaWikiEntityStorageServices\" or something like that.\n\nRegarding this, I actually think it would not be the worst idea to have those services grouped in some \"dedicated\" containers if this makes sense. That said, I personally cannot at this point off top of my head say what exactly would be ALL the services required here, so my personal take on this is/was to move all what\u0027s needed first and then (or on the go if any clear patterns start to emerge early) structure as desired.\n\nIf anyone has a clear idea they are sure will be 100% accurate and nice, please say so!\n\nAs I move e.g. StringNormalizer to this container, MediaWikiEntityStorageServices would be too narrow name as string normalizer has nothing to do with mediawiki neither entity storage :)",
+      "parentUuid": "4e7eab26_a2673121",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0283a59c",
         "filename": "data-access/src/RepositoryServiceWiring.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-08-03T16:51:25Z",
       "side": 1,
       "message": "When looking at this file here, I wonder why the new service can not be added to this class?\n\nThe two class names \"RepositoryServiceContainer\" and \"GenericServices\" should reflect what they represent, and what the difference between the two is. Currently I can not tell.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_aca48d9e",
+        "filename": "data-access/src/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T09:57:36Z",
+      "side": 1,
+      "message": "As I said in the other comment, the distinction is Repository-specific container provides services that rely on repo-specific configuration etc while the other container is about services that are either repo-agnostic or don\u0027t even bother there are any repositories existing.",
+      "parentUuid": "4e7eab26_0283a59c",
       "range": {
         "startLine": 29,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_6c93055c",
+        "filename": "data-access/src/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T09:57:36Z",
+      "side": 1,
+      "message": "It is not used in this callback but is still used in several other ones. Removed that one although it does not change much in the end.",
+      "parentUuid": "4e7eab26_4279adc2",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_824d559d",
         "filename": "data-access/src/WikibaseServices.php",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2017-08-03T16:51:25Z",
       "side": 1,
       "message": "Unused.",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "debfc27e60bf562cdd9a40fb66c03f536a218472",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4cb409cf",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T09:57:36Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "4e7eab26_824d559d",
       "range": {
         "startLine": 9,
         "startChar": 23,
