@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_8c5af151",
+        "filename": "data-access/src/GenericServices.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T11:12:06Z",
+      "side": 1,
+      "message": "This is probably fine for now, but could become a \"crud magnet\", accumulating random services. We have to look out for that.\n\nAlso, this could perhaps just be an interface which WikibaseClient implements.",
+      "revId": "7c97b937b8af778e880cfde451f14277dff534a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
