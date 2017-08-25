@@ -6,6 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
@@ -30,6 +31,11 @@ class GenericServices {
 	 * @var Serializer[]
 	 */
 	private $entitySerializers;
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackChainFactory;
 
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -73,6 +79,17 @@ class GenericServices {
 	 */
 	private function getSerializerFactory( $options ) {
 		return new SerializerFactory( new DataValueSerializer(), $options );
+	}
+
+	/**
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory() {
+		if ( $this->languageFallbackChainFactory === null ) {
+			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		}
+
+		return $this->languageFallbackChainFactory;
 	}
 
 }
