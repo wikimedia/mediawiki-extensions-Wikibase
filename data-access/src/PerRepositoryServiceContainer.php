@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use MediaWiki\Services\ServiceContainer;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -62,7 +61,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 * @param DataValueDeserializer $dataValueDeserializer
 	 * @param GenericServices $genericServices
 	 * @param DataAccessSettings $settings
-	 * @param WikibaseClient $client Top-level factory passed to service instantiators // TODO: fix this!
+	 * @param callable[] $deserializerFactoryCallbacks
 	 */
 	public function __construct(
 		$databaseName,
@@ -72,7 +71,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		DataValueDeserializer $dataValueDeserializer,
 		GenericServices $genericServices,
 		DataAccessSettings $settings,
-		WikibaseClient $client
+		array $deserializerFactoryCallbacks
 	) {
 		parent::__construct( [ $genericServices, $settings ] );
 
@@ -81,8 +80,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
-		// TODO: pass EntityTypeDefinitions to get those callbacks? or two arrays at least?
-		$this->deserializerFactoryCallbacks = $client->getEntityDeserializerFactoryCallbacks();
+		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 	}
 
 	/**
