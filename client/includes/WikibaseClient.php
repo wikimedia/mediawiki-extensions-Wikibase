@@ -46,6 +46,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -409,14 +410,20 @@ final class WikibaseClient {
 		);
 
 		$genericServices = new GenericServices( $this->getEntityNamespaceLookup() );
+		$clientSettings = $this->getSettings();
+		$dataAccessSettings = new DataAccessSettings(
+			$clientSettings->getSetting( 'maxSerializedEntitySize' ),
+			$clientSettings->getSetting( 'readFullEntityIdColumn' )
+		);
 
 		return new PerRepositoryServiceContainerFactory(
 			$idParserFactory,
 			$this->getEntityIdComposer(),
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$this->repositoryDefinitions->getDatabaseNames(),
-			$this->getSettings()->getSetting( 'perRepositoryServiceWiringFiles' ),
+			$clientSettings->getSetting( 'perRepositoryServiceWiringFiles' ),
 			$genericServices,
+			$dataAccessSettings,
 			$this
 		);
 	}

@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use HashSiteStore;
 use stdClass;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -64,6 +65,7 @@ class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( $client->getEntityNamespaceLookup() ),
+			new DataAccessSettings( 0, false ),
 			$client
 		);
 	}
