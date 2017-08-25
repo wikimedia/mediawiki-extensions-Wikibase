@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_076fbaf9",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T13:27:55Z",
+      "side": 1,
+      "message": "Hardcoding the default wiring file is fine, but extensions like WikibaseLexeme will need a way to add services.",
+      "revId": "d02b3ba6524d4c4a65fc833e2b514b9b9adaaaf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

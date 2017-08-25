@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_67555e25",
+        "filename": "docs/options.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-25T13:27:55Z",
+      "side": 0,
+      "message": "We need to have some kind of extension point for this, ideally one that can be used from extension.json",
+      "revId": "3fa77b3ff02b736dbd50ccc4957cf7612a037e38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
