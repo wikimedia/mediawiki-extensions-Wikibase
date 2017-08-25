@@ -25,12 +25,12 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
+class MultiRepositoryServices extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
 
 	/**
-	 * @var RepositoryServiceContainerFactory
+	 * @var PerRepositoryServiceContainerFactory
 	 */
-	private $repositoryServiceContainerFactory;
+	private $serviceContainerFactory;
 
 	/**
 	 * @var RepositoryDefinitions
@@ -38,17 +38,17 @@ class DispatchingServiceFactory extends ServiceContainer implements DataAccessSe
 	private $repositoryDefinitions;
 
 	/**
-	 * @var RepositoryServiceContainer[]
+	 * @var PerRepositoryServiceContainer[]
 	 */
 	private $repositoryServiceContainers = [];
 
 	public function __construct(
-		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
+		PerRepositoryServiceContainerFactory $serviceContainerFactory,
 		RepositoryDefinitions $repositoryDefinitions
 	) {
 		parent::__construct();
 
-		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
+		$this->serviceContainerFactory = $serviceContainerFactory;
 		$this->repositoryDefinitions = $repositoryDefinitions;
 	}
 
@@ -70,13 +70,13 @@ class DispatchingServiceFactory extends ServiceContainer implements DataAccessSe
 	/**
 	 * @param string $repositoryName
 	 *
-	 * @return RepositoryServiceContainer|null
+	 * @return PerRepositoryServiceContainer|null
 	 */
 	private function getContainerForRepository( $repositoryName ) {
 		if ( !array_key_exists( $repositoryName, $this->repositoryServiceContainers ) ) {
 			try {
 				$this->repositoryServiceContainers[$repositoryName] =
-					$this->repositoryServiceContainerFactory->newContainer( $repositoryName );
+					$this->serviceContainerFactory->newContainer( $repositoryName );
 			} catch ( UnknownForeignRepositoryException $exception ) {
 				$this->repositoryServiceContainers[$repositoryName] = null;
 			}

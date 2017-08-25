@@ -3,9 +3,9 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Prophecy\Argument;
-use Wikibase\DataAccess\DispatchingServiceFactory;
-use Wikibase\DataAccess\RepositoryServiceContainer;
-use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\MultiRepositoryServices;
+use Wikibase\DataAccess\PerRepositoryServiceContainer;
+use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,13 +14,13 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\RepositoryDefinitions;
 
 /**
- * @covers Wikibase\DataAccess\DispatchingServiceFactory
+ * @covers Wikibase\DataAccess\MultiRepositoryServices
  *
  * @group Wikibase
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
+class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
 
 	private function getRepositoryDefinition( $repositoryName, array $customSettings ) {
 		return [ $repositoryName => array_merge(
@@ -35,23 +35,23 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetServiceNames_ReturnsNameOfDefinedService() {
-		$factory = new DispatchingServiceFactory(
-			$this->dummy( RepositoryServiceContainerFactory::class ),
+		$services = new MultiRepositoryServices(
+			$this->dummy( PerRepositoryServiceContainerFactory::class ),
 			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
 		);
 
-		$factory->defineService(
+		$services->defineService(
 			'SomeService',
 			function () {
 				return $this->someService( 'does not matter' );
 			}
 		);
 
-		$this->assertContains( 'SomeService', $factory->getServiceNames() );
+		$this->assertContains( 'SomeService', $services->getServiceNames() );
 	}
 
-	private function newDispatchingServiceFactory( RepositoryServiceContainerFactory $containerFactory ) {
-		return new DispatchingServiceFactory(
+	private function newMultiRepositoryServices( PerRepositoryServiceContainerFactory $containerFactory ) {
+		return new MultiRepositoryServices(
 			$containerFactory,
 			new RepositoryDefinitions( array_merge(
 				$this->getRepositoryDefinition( '', [ 'entity-types' => [ Item::ENTITY_TYPE ] ] ),
@@ -66,18 +66,18 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$localService = $this->someService( 'local' );
 		$fooService = $this->someService( 'foo' );
 
-		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$localContainer = $this->prophesize( PerRepositoryServiceContainer::class );
 		$localContainer->getService( $someServiceName )->willReturn( $localService );
 
-		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( PerRepositoryServiceContainer::class );
 		$fooContainer->getService( $someServiceName )->willReturn( $fooService );
 
-		$rscFactory = $this->prophesize( RepositoryServiceContainerFactory::class );
-		$rscFactory->newContainer( '' )->willReturn( $localContainer );
-		$rscFactory->newContainer( 'foo' )->willReturn( $fooContainer );
-		$dispatchingFactory = $this->newDispatchingServiceFactory( $rscFactory->reveal() );
+		$containerFactory = $this->prophesize( PerRepositoryServiceContainerFactory::class );
+		$containerFactory->newContainer( '' )->willReturn( $localContainer );
+		$containerFactory->newContainer( 'foo' )->willReturn( $fooContainer );
+		$multiRepositoryServices = $this->newMultiRepositoryServices( $containerFactory->reveal() );
 
-		$serviceMap = $dispatchingFactory->getServiceMap( $someServiceName );
+		$serviceMap = $multiRepositoryServices->getServiceMap( $someServiceName );
 
 		$expectedServiceMap = [
 			'' => $localService,
@@ -87,36 +87,36 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetService_AlwaysReturnsTheSameService() {
-		$factory = new DispatchingServiceFactory(
-			$this->dummy( RepositoryServiceContainerFactory::class ),
+		$services = new MultiRepositoryServices(
+			$this->dummy( PerRepositoryServiceContainerFactory::class ),
 			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
 		);
 
 		$someService = $this->someService( 'some service instance' );
-		$factory->defineService(
+		$services->defineService(
 			'some-service',
 			function () use ( $someService ) {
 				return $someService;
 			}
 		);
 
-		$serviceOne = $factory->getService( 'some-service' );
-		$serviceTwo = $factory->getService( 'some-service' );
+		$serviceOne = $services->getService( 'some-service' );
+		$serviceTwo = $services->getService( 'some-service' );
 
 		$this->assertSame( $someService, $serviceOne );
 		$this->assertSame( $someService, $serviceTwo );
 	}
 
 	public function testEntityUpdatedDelegatesEventToContainerOfRelevantRepository() {
-		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$factory = $this->newDispatchingServiceFactory(
+		$localContainer = $this->prophesize( PerRepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( PerRepositoryServiceContainer::class );
+		$multiRepositoryServices = $this->newMultiRepositoryServices(
 			$this->createRepositoryServiceContainerFactory(
 				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
 			)
 		);
 
-		$factory->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
+		$multiRepositoryServices->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
 
 		$fooContainer->entityUpdated(
 			new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) )
@@ -125,30 +125,30 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEntityDeletedDelegatesEventToContainerOfRelevantRepository() {
-		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$factory = $this->newDispatchingServiceFactory(
+		$localContainer = $this->prophesize( PerRepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( PerRepositoryServiceContainer::class );
+		$multiRepositoryServices = $this->newMultiRepositoryServices(
 			$this->createRepositoryServiceContainerFactory(
 				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
 			)
 		);
 
-		$factory->entityDeleted( new ItemId( 'foo:Q123' ) );
+		$multiRepositoryServices->entityDeleted( new ItemId( 'foo:Q123' ) );
 
 		$fooContainer->entityDeleted( new ItemId( 'foo:Q123' ) )->shouldHaveBeenCalled();
 		$localContainer->entityDeleted( Argument::any() )->shouldNotHaveBeenCalled();
 	}
 
 	public function testRedirectUpdatedDelegatesEventToContainerOfRelevantRepository() {
-		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$factory = $this->newDispatchingServiceFactory(
+		$localContainer = $this->prophesize( PerRepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( PerRepositoryServiceContainer::class );
+		$multiRepositoryServices = $this->newMultiRepositoryServices(
 			$this->createRepositoryServiceContainerFactory(
 				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
 			)
 		);
 
-		$factory->redirectUpdated(
+		$multiRepositoryServices->redirectUpdated(
 			new EntityRedirect( new ItemId( 'foo:Q1' ), new ItemId( 'foo:Q2' ) ),
 			100
 		);
@@ -165,8 +165,8 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetEntityTypeToRepoMapping() {
-		$factory = $this->newDispatchingServiceFactory(
-			$this->dummy( RepositoryServiceContainerFactory::class )
+		$services = $this->newMultiRepositoryServices(
+			$this->dummy( PerRepositoryServiceContainerFactory::class )
 		);
 
 		$this->assertEquals(
@@ -174,17 +174,17 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 				Item::ENTITY_TYPE => '',
 				Property::ENTITY_TYPE => 'foo',
 			],
-			$factory->getEntityTypeToRepoMapping()
+			$services->getEntityTypeToRepoMapping()
 		);
 	}
 
 	/**
 	 * @param array $containers Assoc array [ '<repo name>' => RepositoryServiceContainer, ... ]
 	 *
-	 * @return RepositoryServiceContainerFactory
+	 * @return PerRepositoryServiceContainerFactory
 	 */
 	private function createRepositoryServiceContainerFactory( array $containers ) {
-		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
+		$containerFactory = $this->getMockBuilder( PerRepositoryServiceContainerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$containerFactory->method( 'newContainer' )

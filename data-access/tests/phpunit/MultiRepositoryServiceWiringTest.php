@@ -3,8 +3,8 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\DispatchingServiceFactory;
-use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\MultiRepositoryServices;
+use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
@@ -21,31 +21,31 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
+class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return RepositoryServiceContainerFactory
+	 * @return PerRepositoryServiceContainerFactory
 	 */
-	private function getRepositoryServiceContainerFactory() {
+	private function getPerRepositoryServiceContainerFactory() {
 		$idParser = new PrefixMappingEntityIdParserFactory(
 			new BasicEntityIdParser(), []
 		);
 
-		return new RepositoryServiceContainerFactory(
+		return new PerRepositoryServiceContainerFactory(
 			$idParser,
 			new RepositorySpecificDataValueDeserializerFactory( $idParser ),
 			[ '' => false ],
-			[ __DIR__ . '/../../src/RepositoryServiceWiring.php' ],
+			[ __DIR__ . '/../../src/PerRepositoryServiceWiring.php' ],
 			WikibaseClient::getDefaultInstance()
 		);
 	}
 
 	/**
-	 * @return DispatchingServiceFactory
+	 * @return MultiRepositoryServices
 	 */
-	private function getDispatchingServiceFactory() {
-		$factory = new DispatchingServiceFactory(
-			$this->getRepositoryServiceContainerFactory(),
+	private function getMultiRepositoryServices() {
+		$services = new MultiRepositoryServices(
+			$this->getPerRepositoryServiceContainerFactory(),
 			new RepositoryDefinitions( [ '' => [
 				'database' => false,
 				'base-uri' => '',
@@ -54,8 +54,8 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			] ] )
 		);
 
-		$factory->loadWiringFiles( [ __DIR__ . '/../../src/DispatchingServiceWiring.php' ] );
-		return $factory;
+		$services->loadWiringFiles( [ __DIR__ . '/../../src/MultiRepositoryServiceWiring.php' ] );
+		return $services;
 	}
 
 	public function provideServices() {
@@ -73,15 +73,15 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideServices
 	 */
 	public function testGetService( $serviceName, $expectedClass ) {
-		$factory = $this->getDispatchingServiceFactory();
+		$services = $this->getMultiRepositoryServices();
 
-		$service = $factory->getService( $serviceName );
+		$service = $services->getService( $serviceName );
 
 		$this->assertInstanceOf( $expectedClass, $service );
 	}
 
 	public function testGetServiceNames() {
-		$factory = $this->getDispatchingServiceFactory();
+		$services = $this->getMultiRepositoryServices();
 
 		$this->assertEquals(
 			[
@@ -92,7 +92,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 				'TermBuffer',
 				'TermSearchInteractorFactory',
 			],
-			$factory->getServiceNames()
+			$services->getServiceNames()
 		);
 	}
 

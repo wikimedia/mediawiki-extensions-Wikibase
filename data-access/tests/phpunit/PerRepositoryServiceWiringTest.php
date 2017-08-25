@@ -5,7 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\RepositoryServiceContainer;
+use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
@@ -23,13 +23,13 @@ use Wikibase\TermIndex;
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
+class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return RepositoryServiceContainer
+	 * @return PerRepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainer() {
-		$container = new RepositoryServiceContainer(
+		$container = new PerRepositoryServiceContainer(
 			false,
 			'',
 			new PrefixMappingEntityIdParser( [ '' => '' ], $this->getMock( EntityIdParser::class ) ),
@@ -37,7 +37,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance()
 		);
 
-		$container->loadWiringFiles( [ __DIR__ . '/../../src/RepositoryServiceWiring.php' ] );
+		$container->loadWiringFiles( [ __DIR__ . '/../../src/PerRepositoryServiceWiring.php' ] );
 
 		return $container;
 	}

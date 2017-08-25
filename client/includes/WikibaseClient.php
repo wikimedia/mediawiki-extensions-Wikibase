@@ -46,9 +46,9 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
-use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -389,13 +389,13 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$factory = new DispatchingServiceFactory(
+			$multiRepositoryServices = new MultiRepositoryServices(
 				$this->getRepositoryServiceContainerFactory(),
 				$this->repositoryDefinitions
 			);
-			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
+			$multiRepositoryServices->loadWiringFiles( $this->settings->getSetting( 'multiRepositoryServiceWiringFiles' ) );
 
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $factory );
+			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $multiRepositoryServices );
 		}
 
 		return $this->wikibaseServices;
@@ -407,11 +407,11 @@ final class WikibaseClient {
 			$this->repositoryDefinitions->getPrefixMappings()
 		);
 
-		return new RepositoryServiceContainerFactory(
+		return new PerRepositoryServiceContainerFactory(
 			$idParserFactory,
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$this->repositoryDefinitions->getDatabaseNames(),
-			$this->getSettings()->getSetting( 'repositoryServiceWiringFiles' ),
+			$this->getSettings()->getSetting( 'perRepositoryServiceWiringFiles' ),
 			$this
 		);
 	}
