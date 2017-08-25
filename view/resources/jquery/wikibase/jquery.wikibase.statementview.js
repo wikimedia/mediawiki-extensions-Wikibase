@@ -723,7 +723,18 @@
 					this.element.addClass( 'wikibase-statement-' + value.getClaim().getGuid() );
 				}
 
-				// FIXME: Propagate external changes to all sub-widgets? Not needed at the moment.
+				if ( this._mainSnakSnakView && value.getClaim().getMainSnak() ) {
+					this._mainSnakSnakView.option( key, value.getClaim().getMainSnak() );
+				}
+				if ( this._qualifiers && value.getClaim().getQualifiers() ) {
+					this._qualifiers.option( key, value.getClaim().getQualifiers() );
+				}
+				if ( this._rankSelector ) {
+					this._rankSelector.option( key, value.getRank() );
+				}
+				if ( this._referencesListview && value.getReferences() ) {
+					this._referencesListview.option( key, value.getReferences() );
+				}
 			}
 
 			return response;
