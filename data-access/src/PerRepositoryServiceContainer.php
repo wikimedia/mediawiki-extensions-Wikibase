@@ -74,7 +74,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		DataAccessSettings $settings,
 		WikibaseClient $client
 	) {
-		parent::__construct( [ $genericServices, $settings, $client ] );
+		parent::__construct( [ $genericServices, $settings ] );
 
 		$this->databaseName = $databaseName;
 		$this->repositoryName = $repositoryName;
