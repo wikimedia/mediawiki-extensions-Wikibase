@@ -20,7 +20,8 @@
 			"Dgstranz",
 			"Omotecho",
 			"Wicklo",
-			"Translatealcd"
+			"Translatealcd",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -81,7 +82,7 @@
 	"wikibase-statementsection-statements": "文",
 	"wikibase-sitelinks": "サイトリンク",
 	"wikibase-sitelinkgroupview-input-help-message": "サイトとそのサイトのページを指定することによりサイトリンクを追加し、既存のサイトへのリンクを編集または削除します。",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|エントリ}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|エントリ}}",
 	"wikibase-sitelinks-empty": "この項目にリンクしているページはありません。",
 	"wikibase-sitelinks-special": "他のサイト",
 	"wikibase-badgeselector-badge-placeholder-title": "クリックしてバッジを割り当てます。",

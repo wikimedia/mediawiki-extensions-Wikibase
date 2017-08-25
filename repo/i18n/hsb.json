@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Michawiki",
-			"Macofe"
+			"Macofe",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturowanych datow",
@@ -30,7 +31,7 @@
 	"wikibase-label-input-help-message": "Zapodaj mjeno tuteje datoweje sadźby w $1.",
 	"wikibase-statementsection-statements": "Wuprajenja",
 	"wikibase-sitelinks": "Lisćina stronow, kotrež su z tutym elementom zwjazane",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|zapisk|zapiskaj|zapiski|zapiskow}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|zapisk|zapiskaj|zapiski|zapiskow}}",
 	"wikibase-sitelinks-empty": "Dotal žadyn wotkaz sydła za tutón element njeje.",
 	"wikibase-sitelinks-special": "Druhe sydła",
 	"wikibase-remove": "wotstronić",
@@ -45,7 +46,6 @@
 	"wikibase-undo-samerev": "Změna njeda so cofnyć, dokelž wuchadna wersija je identiska z cilowej wersiju.",
 	"wikibase-undo-badpage": "Wopačna wersija: Wersija $2 k [[$1]] njesłuša.",
 	"wikibase-undo-firstrev": "Wutworjenje strony njeda so cofnyć",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Jedna hódnota hišće njeskładowana|$1 hódnoće hišće njeskładowanej|$1 hódnoty hišće njeskładowane|$1 hódnotow hišće njeskładowanych}}",
 	"wikibase-disambiguation-title": "Strona wjacezmyslnosće za \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nowy element $1 je so wutworił a k swojej stronje dale sposrědokował. Wróćo k $2.",
 	"wikibase-aliases-input-help-message": "Jeli tuta datowa sadźba je pod wjacorymi mjenami znata, móžeš aliasy a synonymy zapodać, zo by da so pod swojimi alternatiwnymi mjenami namakać.",
@@ -54,7 +54,6 @@
 	"wikibase-claimview-snak-new-tooltip": "Po podawanju kajkosće móžeš wotpowědnu hódnotu zapodać. Jeli kajkosć nima wěstu hódnotu abo tuchwilna hódnota znata njeje, móžeš alternatiwu wubrać, zo by swójsku hódnotu podał, kliknjo na symbol pódla zapodawanskeho kašćika za hódnoty.",
 	"wikibase-statementview-rank-normal": "Normalny rjad",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|žórło|žórle|žórła}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jedne žórło hišće njeskładowane|$1 žórle hišće njeskładowanej|$1 žórła hišće njeskładowane|$1 žórłow hišće njeskładowanych}}",
 	"wikibase-snakview-property-input-placeholder": "kajkosć",
 	"wikibase-snakview-unsupportedsnaktype": "Snak typa \"$1\". Wobdźěłowanje za tutu družinu Snak hišće so njepodpěruje.",
 	"wikibase-snakview-choosesnaktype": "Wubjer hódnotowy typ.",
@@ -146,7 +145,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Lisćinu entitow bjez pomjenowanja wotwołać",
 	"wikibase-entitieswithoutlabel-label-language": "Rěčny kod:",
 	"wikibase-entitieswithoutlabel-label-type": "Typ:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "wšě",
 	"wikibase-entitieswithoutlabel-submit": "Pytać",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" płaćiwy rěčny kod njeje.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" płaćiwy entitowy typ njeje.",

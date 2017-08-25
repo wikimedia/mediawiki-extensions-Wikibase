@@ -6,7 +6,8 @@
 			"Милан Јелисавчић",
 			"Srdjan m",
 			"Сербијана",
-			"Obsuser"
+			"Obsuser",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -60,7 +61,7 @@
 	"wikibase-entitytermsview-input-help-message": "Унесите назив овог ентитета, кратак опис и алтернативне називе, према језику.",
 	"wikibase-statementsection-statements": "Изјаве",
 	"wikibase-sitelinks": "Везе странице",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|унос|уноса}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|унос|уноса}}",
 	"wikibase-sitelinks-empty": "Ниједна страница није повезана са овом ставком.",
 	"wikibase-sitelinks-special": "Други сајтови",
 	"wikibase-badgeselector-badge-placeholder-title": "Додели значку.",

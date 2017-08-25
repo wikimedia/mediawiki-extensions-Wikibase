@@ -3,7 +3,8 @@
 		"authors": [
 			"Derbeth",
 			"Michawiki",
-			"Macofe"
+			"Macofe",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repozitorium strukturěrowanych datow",
@@ -30,7 +31,7 @@
 	"wikibase-label-input-help-message": "Zapódaj mě toś teje datoweje sajźby w $1.",
 	"wikibase-statementsection-statements": "Wugronjenja",
 	"wikibase-sitelinks": "Lisćina bokow, kótarež su z toś tym elementom zwězane",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|zapisk|zapiska|zapiski}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|zapisk|zapiska|zapiski}}",
 	"wikibase-sitelinks-empty": "Až doněnta žeden sedłowy wótkaz za toś ten element.",
 	"wikibase-remove": "wótpóraś",
 	"wikibase-undo-title": "Změnu za \"$1\" anulěrowaś",
@@ -42,7 +43,6 @@
 	"wikibase-undo-samerev": "Změna njedajo se anulěrowaś, dokulaž wuchadna wersija jo identiska z celoweju wersiju.",
 	"wikibase-undo-badpage": "Wopacna wersija: Wersija $2 njesłuša k [[$1]].",
 	"wikibase-undo-firstrev": "Napóranje boka njedajo se anulěrowaś",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Jadna gódnota hyšći njeskładowana|$1 gódnośe hyšći njeskładowanej|$1 gódnoty hyšći njeskładowane|$1 gódnotow hyšći njeskładowane}}",
 	"wikibase-disambiguation-title": "Bok wěcejzmysłowosći za \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nowy element $1 jo se napórał a k swójomu bokoju dalej pósrědnił. Slědk k $2.",
 	"wikibase-aliases-input-help-message": "Jolic toś ta datowa sajźba jo znata pó někotarymi mjenjami, móžoš aliase a synonymy zapódaś, aby dajo se pód swójimi alternatiwnymi mjenjami namakaś.",
@@ -50,7 +50,6 @@
 	"wikibase-claimview-snak-tooltip": "Zapódaj gódnotu pó kakosći z mjenim \"$1\". Jolic kakosć njama wěstu gódnotu abo tuchylna gódnota njejo znata, móžoš alternatiwu wubraś, aby swójsku gódnotu pódał, z tym až kliknjoš na symbol pódla zapódawańskego kašćika za gódnoty.",
 	"wikibase-claimview-snak-new-tooltip": "Pó zapódawanju kakosći, móžoš wótpowědnu gódnotu zapódaś. Jolic kakosć njama wěstu gódnotu abo tuchylna gódnota njejo znata, móžoš alternatiwu wubraś, aby swójsku gódnotu pódał, z tym až kliknjoš na symbol pódla zapódawańskego kašćika za gódnoty.",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|žrědło|žrědle|žrědła}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jadne žrědło hyšći njeskładowane|$1 žrědle hyšći njeskładowanej|$1 žrědła hyšći njeskładowane|$1 žrědłow hyšći njeskładowanych}}",
 	"wikibase-snakview-property-input-placeholder": "kakosć",
 	"wikibase-snakview-unsupportedsnaktype": "Snak typa \"$1\". Wobźěłowanje za toś tu družynu Snak hyšći se njepódpěra.",
 	"wikibase-snakview-choosesnaktype": "Wubjeŕ gódnotowy typ.",
@@ -124,7 +123,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Lisćinu entitow bźez pomjenjenja wótwołaś",
 	"wikibase-entitieswithoutlabel-label-language": "Rěcny kod:",
 	"wikibase-entitieswithoutlabel-label-type": "Typ:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "wšykne",
 	"wikibase-entitieswithoutlabel-submit": "Pytaś",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" njejo płaśiwy rěcny code.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" njejo płaśiwy entitowy typ.",

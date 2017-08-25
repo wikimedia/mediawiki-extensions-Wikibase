@@ -4,7 +4,8 @@
 			"Borichèt",
 			"Dragonòt",
 			"පසිඳු කාවින්ද",
-			"Macofe"
+			"Macofe",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Depòsit ëd dat struturà",
@@ -41,7 +42,7 @@
 	"wikibase-label-input-help-message": "Anseriss ël tìtol dë st'ansem ëd dat an $1.",
 	"wikibase-statementsection-statements": "Istrussion",
 	"wikibase-sitelinks": "Lista ëd le pàgine gropà a st'element",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|vos}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|vos}}",
 	"wikibase-sitelinks-empty": "Ancor gnun-a liura a 'n sit për cost element.",
 	"wikibase-sitelinks-special": "D'àutri sit",
 	"wikibase-remove": "gava",
@@ -57,7 +58,6 @@
 	"wikibase-undo-badpage": "Revision pa bon-a: la revision $2 a aparten pa a [[$1]].",
 	"wikibase-undo-firstrev": "As peul pa anulesse la creassion dla pàgina",
 	"wikibase-undo-nocontent": "Impossìbil carié ël contnù ëd la revision $2 dla pàgina $1",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valor|$1 valor}} ancor nen salvà",
 	"wikibase-disambiguation-title": "Omonimìa për «$1»",
 	"wb-special-newitem-new-item-notification": "N'element neuv $1 creà e ridiressionà vers soa pàgina. André a $2.",
 	"wikibase-aliases-input-help-message": "Se cost ansem ëd dat a l'é conossù con pi che un nòm particolar, a peul anserì dj'alternative e dij sinònim, parèj a peul esse trovà con ij sò nòm alternativ.",
@@ -68,7 +68,6 @@
 	"wikibase-statementview-rank-normal": "Rangh normal",
 	"wikibase-statementview-rank-deprecated": "Rangh frust",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rëspondensa|rëspondense}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Na sorgiss|$1 sorgiss}} ancor nen argistrà",
 	"wikibase-snakview-property-input-placeholder": "propietà",
 	"wikibase-snakview-unsupportedsnaktype": "Snak ëd sòrt «$1». La gestion për sta sòrt dë Snak a l'é pa anco' mantnùa.",
 	"wikibase-snakview-choosesnaktype": "Serne na seurt ëd valor.",
@@ -183,7 +182,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Arcuperé la lista dj'entità sensa tichëtta",
 	"wikibase-entitieswithoutlabel-label-language": "Còdes ëd lenga:",
 	"wikibase-entitieswithoutlabel-label-type": "Sòrt:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "tuti",
 	"wikibase-entitieswithoutlabel-submit": "Treuva",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" a l'é pa un còdes ëd lenga bon.",
 	"wikibase-entitieswithoutlabel-invalid-type": "«$1» a l'é pa na sòrt d'identità bon-a.",

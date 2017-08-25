@@ -24,7 +24,8 @@
 			"MrLeopold",
 			"Hex",
 			"Mainframe98",
-			"Festina90"
+			"Festina90",
+			"Mbch331"
 		]
 	},
 	"wikibase-desc": "Opslagplaats voor gestructureerde gegevens",
@@ -85,7 +86,7 @@
 	"wikibase-statementsection-statements": "Verklaringen",
 	"wikibase-sitelinks": "Sitekoppelingen",
 	"wikibase-sitelinkgroupview-input-help-message": "Voeg een sitelink toe door een site en een pagina op die site op te geven, bewerk of verwijder bestaande sitelinks.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|item|items}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|item|items}}",
 	"wikibase-sitelinks-empty": "Er is geen pagina gekoppeld aan dit item.",
 	"wikibase-sitelinks-special": "Andere sites",
 	"wikibase-badgeselector-badge-placeholder-title": "Klik om een badge toe te wijzen.",
@@ -116,7 +117,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "Correcte waarde, wellicht niet actueel",
 	"wikibase-statementview-rank-deprecated": "Afgekeurde rang",
 	"wikibase-statementview-rank-tooltip-deprecated": "Het is bekend dat de waarde niet klopt, maar het wordt (of werd vroeger) vaak verondersteld",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|bron|bronnen}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|bron|bronnen}}",
 	"wikibase-snakview-property-input-placeholder": "eigenschap",
 	"wikibase-snakview-unsupportedsnaktype": "Snak van het type \"$1\". Het verwerken van dit type Snak wordt nog niet ondersteund.",
 	"wikibase-snakview-choosesnaktype": "Kies een waardetype.",

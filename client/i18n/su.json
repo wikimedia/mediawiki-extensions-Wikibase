@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kandar"
+			"Kandar",
+			"Uchup19"
 		]
 	},
 	"tooltip-t-wikibase": "Tutumbu ka item gudang data anu nyambung",
 	"wikibase-comment-update": "Item {{WBREPONAME}} robah",
+	"wikibase-comment-sitelink-remove": "Tutumbu basa dipupus: $1",
 	"wikibase-dataitem": "Item {{WBREPONAME}}",
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",

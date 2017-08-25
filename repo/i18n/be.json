@@ -4,7 +4,8 @@
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў",
 			"Macofe",
-			"Mechanizatar"
+			"Mechanizatar",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных дадзеных",
@@ -57,7 +58,7 @@
 	"wikibase-entitytermsview-input-help-message": "Увядзіце метку гэтай сутнасці, кароткае апісанне і альтэрнатыўныя назвы для кожнай мовы.",
 	"wikibase-statementsection-statements": "Факты",
 	"wikibase-sitelinks": "Спіс спасылак на сайты",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|запіс|запісы|запісаў}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запіс|запісы|запісаў}}",
 	"wikibase-sitelinks-empty": "Няма старонак, якія б спасылаліся на гэты элемент.",
 	"wikibase-sitelinks-special": "Іншыя сайты",
 	"wikibase-badgeselector-badge-placeholder-title": "Пстрыкніце, каб прызначыць значок.",
@@ -73,7 +74,6 @@
 	"wikibase-undo-samerev": "Адмена немагчыма, з прычыны таго, што ў якасці зыходнай і мэтавай версій указаны версіі з ідэнтычным зместам.",
 	"wikibase-undo-badpage": "Некарэктна ўказана версія: Версія $2 не адносіцца да старонкі [[$1]].",
 	"wikibase-undo-firstrev": "Стварэнне старонкі адмяніць немагчыма",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Яшчэ не запісана адно значэнне|Незапісаных значэнняў: $1}}",
 	"wikibase-disambiguation-title": "Значэнні для «$1»",
 	"wb-special-newitem-new-item-notification": "Новы элемент «$1» створаны і перанакіраваны на яго старонку. Вярнуцца да «$2».",
 	"wikibase-aliases-input-help-message": "Калі гэты набор дадзеных вядомы пад больш чым пад адной назвай, вы можаце ўвесці тут псеўданімы, альтэрнатыўныя назвы і сінонімы, каб гэты элемент можна было знайсці па яго альтэрнатыўных імёнах.",
@@ -83,7 +83,6 @@
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
 	"wikibase-statementview-rank-deprecated": "Нерэкамендаваны ранг",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|крыніца|крыніцы|крыніц}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "Крыніцы:",
 	"wikibase-snakview-property-input-placeholder": "уласцівасць",
 	"wikibase-snakview-choosesnaktype": "Выберыце тып значэння.",
 	"wikibase-snakview-variations-somevalue-label": "невядомае значэнне",
@@ -146,7 +145,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Атрымаць спіс сутнасцяў без назваў",
 	"wikibase-entitieswithoutlabel-label-language": "Код мовы:",
 	"wikibase-entitieswithoutlabel-label-type": "Тып:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "усе",
 	"wikibase-entitieswithoutlabel-submit": "Пошук",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» — некарэктны код мовы.",
 	"special-entitydata": "Дадзеныя сутнасці",

@@ -9,7 +9,8 @@
 			"Macofe",
 			"Fraxinus",
 			"MaGa",
-			"Srdjan m"
+			"Srdjan m",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturiranih podataka",
@@ -52,7 +53,7 @@
 	"wikibase-statementsection-statements": "Izvadci",
 	"wikibase-sitelinks": "Poveznice na mrežna mjesta",
 	"wikibase-sitelinkgroupview-input-help-message": "Dodajte poveznicu navodeći mrežno mjesto na kojem se nalazi stranica, uređujte ili uklonite postojeće poveznice.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|unos|unosa}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|unos|unosa}}",
 	"wikibase-sitelinks-empty": "Nema stranica koje su povezane s ovom stavkom.",
 	"wikibase-sitelinks-special": "Druge lokacije",
 	"wikibase-badgeselector-badge-placeholder-title": "Kliknite za dodjelu značke.",
@@ -65,7 +66,6 @@
 	"wikibase-statementview-rank-normal": "Normalni raspon",
 	"wikibase-statementview-rank-deprecated": "Zastarjeli raspon",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|izvor|izvora}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Izvor još nije spremljen|$1 izvora još nisu spremljena|$1 izvora još nije spremljeno}}",
 	"wikibase-snakview-property-input-placeholder": "svojstvo",
 	"wikibase-snakview-choosesnaktype": "Odaberite vrstu vrijednosti.",
 	"wikibase-snakview-variations-somevalue-label": "nepoznata vrijednost",

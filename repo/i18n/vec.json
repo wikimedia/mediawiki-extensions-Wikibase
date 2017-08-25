@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Candalua",
-			"Macofe"
+			"Macofe",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Archivio de dati struturati",
@@ -34,7 +35,7 @@
 	"wikibase-label-input-help-message": "Inserissi el titolo de sto insieme de dati in $1.",
 	"wikibase-statementsection-statements": "Dichiarassioni",
 	"wikibase-sitelinks": "Elenco dele pagine colegà a sto elemento",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|sito|siti}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|sito|siti}}",
 	"wikibase-sitelinks-empty": "Nissuna pagina xe gnancora colegà a sto elemento.",
 	"wikibase-sitelinks-special": "Altri siti",
 	"wikibase-remove": "cava",
@@ -48,7 +49,6 @@
 	"wikibase-undo-badpage": "Version sbalià: la version $2 no la apartien mia a [[$1]].",
 	"wikibase-undo-firstrev": "No se pol anular la creasion de la pagina",
 	"wikibase-undo-nocontent": "No se pol cargar el contegnùo de la version $2 de la pagina $1",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valore gnancora salvà|$1 valori gnancora salvà}}",
 	"wikibase-disambiguation-title": "Disanbigua par \"$1\"",
 	"wb-special-newitem-new-item-notification": "L'elemento novo $1 el xe stà creà e el rimanda a la so pagina. Torna a $2.",
 	"wikibase-aliases-input-help-message": "Se sto insieme de dati el xe conosesto con pi de un nome, te pol inserir alias e sinonimi, in modo che se possa catarlo anca tramite i so nomi alternativi.",
@@ -57,7 +57,6 @@
 	"wikibase-claimview-snak-new-tooltip": "Dopo ver specificà na proprietà se pol inserir el valor corispondente. Se la proprietà no la ga nisun valor designà o se no se sa el valor efetivo, se pol sieliere n'alternativa a la specifica de un valor personalizà strucando su l'icona in parte a la casèla de input del valor.",
 	"wikibase-statementview-rank-normal": "Rango normal",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|riferimento|riferimenti}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Una fonte gnancora salvà|$1 fonti gnancora salvà}}",
 	"wikibase-snakview-property-input-placeholder": "proprietà",
 	"wikibase-snakview-unsupportedsnaktype": "Snak de tipo \"$1\". La gestion par sto tipo de snak no la xe gnancora suportà.",
 	"wikibase-snakview-choosesnaktype": "Siegli un tipo de valor.",
@@ -150,7 +149,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Recuperar la lista de le entità sensa eticheta",
 	"wikibase-entitieswithoutlabel-label-language": "Còdese lengoa:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "tuti",
 	"wikibase-entitieswithoutlabel-submit": "Serca",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" no xe un còdese de lengua valido.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" no'l xe un tipo de entità valido",

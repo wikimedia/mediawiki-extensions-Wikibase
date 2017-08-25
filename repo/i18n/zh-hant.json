@@ -22,7 +22,8 @@
 			"烈羽",
 			"和平奮鬥救地球",
 			"Wwycheuk",
-			"Translatealcd"
+			"Translatealcd",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -78,7 +79,7 @@
 	"wikibase-statementsection-statements": "陳述",
 	"wikibase-sitelinks": "網站連結",
 	"wikibase-sitelinkgroupview-input-help-message": "加入網站連結透過指定網站與頁面，編輯或移除已存在的網站連結。",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|條目}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|條目}}",
 	"wikibase-sitelinks-empty": "尚無頁面連結至此項目。",
 	"wikibase-sitelinks-special": "其他網站",
 	"wikibase-badgeselector-badge-placeholder-title": "點選以指定一個徽章。",

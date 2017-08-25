@@ -24,7 +24,8 @@
 			"Moud hosny",
 			"Mr. Ibrahem",
 			"BAB ZAA",
-			"Mido"
+			"Mido",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -85,7 +86,7 @@
 	"wikibase-statementsection-statements": "بيانات",
 	"wikibase-sitelinks": "وصلات الموقع",
 	"wikibase-sitelinkgroupview-input-help-message": "أضف وصلة موقع عن طريق تحديد موقع وصفحة من ذلك الموقع، عدل أو أزل وصلات الموقع الموجودة.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|لا مدخلات|مدخلة واحدة|مدخلتان|$1 مدخلات|$1 مدخلة}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|لا مدخلات|مدخلة واحدة|مدخلتان|$1 مدخلات|$1 مدخلة}}",
 	"wikibase-sitelinks-empty": "لا ترتبط أي صفحات بهذا العنصر بعد.",
 	"wikibase-sitelinks-special": "مواقع أخرى",
 	"wikibase-badgeselector-badge-placeholder-title": "انقر لتعيين شارة.",

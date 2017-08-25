@@ -3,7 +3,8 @@
 		"authors": [
 			"Lam-ang",
 			"아라",
-			"Macofe"
+			"Macofe",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Nabalabala a pagidulinan ti datos",
@@ -56,7 +57,7 @@
 	"wikibase-statementsection-statements": "Insasao",
 	"wikibase-sitelinks": "Dagiti silpo ti sitio",
 	"wikibase-sitelinkgroupview-input-help-message": "Manginayon ti silpo ti sitio babaen ti pananginagan ti sitio ken ti panid ti dayta a sitio, urnosen wenno ikkaten dagiti addan a silpo ti sitio.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|a naikabil|a naikabkabil}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|a naikabil|a naikabkabil}}",
 	"wikibase-sitelinks-empty": "Awan ti panid a naisilpo iti daytoy a banag.",
 	"wikibase-sitelinks-special": "Dadduma a sitio",
 	"wikibase-badgeselector-badge-placeholder-title": "Pinduten tapno makedngan ti usong.",

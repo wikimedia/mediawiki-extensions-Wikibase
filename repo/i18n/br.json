@@ -6,7 +6,8 @@
 			"Y-M D",
 			"Macofe",
 			"Gwenn-Ael",
-			"Pymouss"
+			"Pymouss",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "kemmañ",
@@ -31,7 +32,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "pajenn",
 	"wikibase-alias-edit-placeholder": "skrivañ un anv all",
 	"wikibase-statementsection-statements": "Disklêriadurioù",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|enmont}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|enmont}}",
 	"wikibase-sitelinks-special": "Lec'hiennoù all",
 	"wikibase-remove": "Dilemel",
 	"wikibase-disambiguation-title": "Diforc'hañ evit \"$1\"",
@@ -57,6 +58,5 @@
 	"wikibase-modifyterm-language": "Kod yezh :",
 	"wikibase-history-title-with-label": "Istor stummoù disheñvel \"$2\" ($1)",
 	"wikibase-entitieswithoutlabel-label-language": "Kod yezh :",
-	"wikibase-entitieswithoutlabel-label-type": "Seurt :",
-	"wikibase-entitieswithoutlabel-label-alltypes": "pep tra"
+	"wikibase-entitieswithoutlabel-label-type": "Seurt :"
 }

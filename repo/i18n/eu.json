@@ -9,7 +9,8 @@
 			"Macofe",
 			"Sator",
 			"Theklan",
-			"Mikel Ibaiba"
+			"Mikel Ibaiba",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-entity": "entitatea",
@@ -58,7 +59,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "orrialdea",
 	"wikibase-alias-edit-placeholder": "idatzi goitizen bat",
 	"wikibase-statementsection-statements": "Adierazpenak",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entry|sarrera}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entry|sarrera}}",
 	"wikibase-sitelinks-special": "Beste guneak",
 	"wikibase-remove": "kendu",
 	"wikibase-move-up": "goratu",

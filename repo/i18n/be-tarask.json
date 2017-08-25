@@ -5,7 +5,8 @@
 			"Wizardist",
 			"Red Winged Duck",
 			"Macofe",
-			"Kareyac"
+			"Kareyac",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных зьвестак",
@@ -22,7 +23,7 @@
 	"wikibase-save-inprogress": "Захаваньне…",
 	"wikibase-remove-inprogress": "Выдаленьне…",
 	"wikibase-statementlistview-add": "дадаць значэньне",
-	"wikibase-statementgrouplistview-add": "дадаць",
+	"wikibase-statementgrouplistview-add": "дадаць сьцьверджаньне",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На іншых мовах",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Наладзіць",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Паказваць меткі, сынонімы і апісаньні на ўсіх маіх мовах пры загрузцы старонкі",
@@ -60,7 +61,7 @@
 	"wikibase-statementsection-statements": "Факты",
 	"wikibase-sitelinks": "Спасылкі на сайт",
 	"wikibase-sitelinkgroupview-input-help-message": "Дадайце спасылку на сайт, пазначыўшы сайт і старонку гэтага сайту, рэдагуйце ці выдаляйце існыя спасылкі на сайт.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|запіс|запісы|запісаў}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запіс|запісы|запісаў}}",
 	"wikibase-sitelinks-empty": "З гэтым аб’ектам не зьвязаная ніводная старонка.",
 	"wikibase-sitelinks-special": "Іншыя сайты",
 	"wikibase-badgeselector-badge-placeholder-title": "Націсьніце, каб прызначыць статус",
@@ -87,7 +88,7 @@
 	"wikibase-statementview-rank-preferred": "Прыярытэтны ранг",
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
 	"wikibase-statementview-rank-deprecated": "Састарэлы ранг",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|крыніца|крыніцы|крыніцаў}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|крыніца|крыніцы|крыніцаў}}",
 	"wikibase-snakview-property-input-placeholder": "уласьцівасьць",
 	"wikibase-snakview-unsupportedsnaktype": "Злучнік тыпу «$1». Апрацоўка падобнага злучніка яшчэ не падтрымліваецца.",
 	"wikibase-snakview-choosesnaktype": "Выберыце тып значэньня.",

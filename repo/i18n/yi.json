@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"פוילישער",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "סטרוקטורירטער דאטן רעפאזיטאריום",
@@ -61,7 +62,7 @@
 	"wikibase-entitytermsview-input-help-message": "איינגעבן א באצייכענונג פאר דעם אביעקט, א קורצע באשרייבונג און אליאסן לויט דער שפראך.",
 	"wikibase-statementsection-statements": "אַרויסזאָגן",
 	"wikibase-sitelinks": "וועבזײַטל לינקען",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|פארשרייב|פארשרייבן}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|פארשרייב|פארשרייבן}}",
 	"wikibase-sitelinks-empty": "קיין בלאט איז נישט פארלינקט מיט דעם דאטנאביעקט.",
 	"wikibase-sitelinks-special": "אנדערע וועבזייטלעך",
 	"wikibase-remove": "אַראָפּנעמען",

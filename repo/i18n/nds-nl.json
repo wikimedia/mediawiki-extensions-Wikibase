@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Servien"
+			"Servien",
+			"Sjoerddebruin"
 		]
 	},
 	"wikibase-edit": "bewarken",
@@ -10,9 +11,8 @@
 	"wikibase-description-empty": "Gien beschrieving in-esteld",
 	"wikibase-statementsection-statements": "Verklaoringen",
 	"wikibase-sitelinks-special": "Aandere websteeën",
-	"wikibase-aliases-empty": "Der bin gien aliassen in-esteld.",
 	"wikibase-statementview-rank-normal": "Normale rang",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|bron|bronnen}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|bron|bronnen}}",
 	"special-itembytitle": "Onderwarp op naam",
 	"special-newitem": "Niej onderwarp anmaken"
 }

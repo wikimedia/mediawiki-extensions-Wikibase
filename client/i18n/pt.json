@@ -17,7 +17,8 @@
 			"Fúlvio",
 			"Macofe",
 			"Mansil",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"MokaAkashiyaPT"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -68,7 +69,7 @@
 	"wikibase-editlinks": "Editar ligações",
 	"wikibase-editlinkstitle": "Editar links interlínguas",
 	"wikibase-addlinkstitle": "Adicionar links interlínguas",
-	"wikibase-linkitem-addlinks": "Adicionar links",
+	"wikibase-linkitem-addlinks": "Adicionar ligações",
 	"wikibase-linkitem-alreadylinked": "A página que pretende ligar a esta já está associada a um [$1 elemento] no repositório central de dados, o qual liga à página $2 neste site. Os elementos só podem ter associada uma página por cada site. Por favor, escolha uma página diferente com a qual ligar.",
 	"wikibase-linkitem-close": "Fechar caixa de diálogo e recarregar a página",
 	"wikibase-linkitem-failure": "Ocorreu um erro desconhecido enquanto tentava ligar a determinada página.",

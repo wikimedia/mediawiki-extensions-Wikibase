@@ -10,7 +10,8 @@
 			"Steenth",
 			"아라",
 			"Macofe",
-			"Sarrus"
+			"Sarrus",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -56,7 +57,7 @@
 	"wikibase-label-input-help-message": "Angiv titlen på dette datasæt på $1.",
 	"wikibase-statementsection-statements": "Udsagn",
 	"wikibase-sitelinks": "Liste over sider, der er knyttet til dette emne",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|værdi|værdier}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|værdi|værdier}}",
 	"wikibase-sitelinks-empty": "Der er endnu ingen webstedshenvisninger for dette emne.",
 	"wikibase-sitelinks-special": "Andre websteder",
 	"wikibase-remove": "fjern",
@@ -72,7 +73,6 @@
 	"wikibase-undo-badpage": "Ugyldig version: Version $2 hører ikke til [[$1]].",
 	"wikibase-undo-firstrev": "Kan ikke omgøre sidens oprettelse",
 	"wikibase-undo-nocontent": "Kan ikke læse indholdet af version $2 af siden $1",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|En værdi|$1 værdier}} ikke gemt endnu",
 	"wikibase-disambiguation-title": "Flertydigside for \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nyt emne $1 oprettet og omdirigeret til dets side. Tilbage til $2.",
 	"wikibase-aliases-input-help-message": "Hvis dette datasæt er kendt under mere end ét bestemt navn, kan du angive alias og synonymer, så det kan findes ved de alternative navne.",
@@ -83,7 +83,6 @@
 	"wikibase-statementview-rank-normal": "Normal rang",
 	"wikibase-statementview-rank-deprecated": "Forældet rang",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|referencer}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|En kilde|$1 kilder}} er endnu ikke gemt",
 	"wikibase-snakview-property-input-placeholder": "egenskab",
 	"wikibase-snakview-unsupportedsnaktype": "Snak af typen \"$1\". Håndtering af denne slags Snak understøttes ikke endnu.",
 	"wikibase-snakview-choosesnaktype": "Vælg en værditype.",

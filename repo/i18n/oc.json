@@ -4,7 +4,8 @@
 			"Cedric31",
 			"Shirayuki",
 			"Zolo",
-			"OpenStreetMap-oc"
+			"OpenStreetMap-oc",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Referencial de donadas estructuradas",
@@ -48,7 +49,7 @@
 	"wikibase-alias-edit-placeholder": "entrar un aliàs",
 	"wikibase-label-input-help-message": "Picatz lo libellat d'aquesta entitat en $1.",
 	"wikibase-statementsection-statements": "Declaracions",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entrada|entradas}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinks-empty": "Cap de pagina pas ligada a aqueste element.",
 	"wikibase-sitelinks-special": "Autres sites",
 	"wikibase-remove": "suprimir",
@@ -64,7 +65,6 @@
 	"wikibase-undo-badpage": "Numèro de version erronèu&nbsp;: la revision $2 aparten pas a [[$1]].",
 	"wikibase-undo-firstrev": "Impossible d'anullar la creacion de la pagina",
 	"wikibase-undo-nocontent": "Impossible de cargar lo contengut de la modificacion $2 de la pagina $1",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Una valor pas encara enregistrada|$1&nbsp;valors pas encara enregistradas}}",
 	"wikibase-disambiguation-title": "Omonimia per «&nbsp;$1&nbsp;»",
 	"wb-special-newitem-new-item-notification": "Un novèl element $1 creat e redirigit cap a sa pagina. Retorn a $2.",
 	"wikibase-aliases-input-help-message": "Per rendre aquesta entitat de melhor trobar, podètz entrar de noms de remplaçament.",
@@ -74,7 +74,6 @@
 	"wikibase-statementview-rank-normal": "Reng normal",
 	"wikibase-statementview-rank-deprecated": "Reng depreciat",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referéncia|referéncias}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Una referéncia|$1 referéncias}} pas encara enregistrada{{PLURAL:$1||s}}",
 	"wikibase-snakview-property-input-placeholder": "proprietat",
 	"wikibase-snakview-unsupportedsnaktype": "Snak de tipe « $1 ». La gestion d'aqueste tipe de Snak es pas encara presa en carga.",
 	"wikibase-snakview-choosesnaktype": "Causir un tipe de valor.",

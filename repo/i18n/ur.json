@@ -7,7 +7,8 @@
 			"عثمان خان شاہ",
 			"Macofe",
 			"Obaid Raza",
-			"Muhammad Shuaib"
+			"Muhammad Shuaib",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-entity": "وجود",
@@ -54,7 +55,7 @@
 	"wikibase-statementsection-statements": "بیانات",
 	"wikibase-sitelinks": "روابط سائٹس",
 	"wikibase-sitelinkgroupview-input-help-message": "سائٹ اور اُس سائٹ کا صفحہ تحریر کر کے سائٹ ربط درج کریں، نیز موجود روابط سائٹس میں ترمیم یا حذف کریں۔",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|اندراج|اندرجات}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|اندراج|اندرجات}}",
 	"wikibase-sitelinks-empty": "اس آئٹم سے کوئی صفحہ مربوط نہیں ہے۔",
 	"wikibase-sitelinks-special": "دیگر ویب سائٹ",
 	"wikibase-badgeselector-badge-placeholder-title": "نشان زد کرنے کے لیے کلک کریں۔",
@@ -69,7 +70,6 @@
 	"wikibase-statementview-rank-preferred": "ترجیح شدہ درجہ",
 	"wikibase-statementview-rank-normal": "عام درجہ",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|حوالہ|حوالہ جات}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|ایک حوالہ|$1 حوالہ جات}} اب تک محفوظ نہیں ہوئے",
 	"wikibase-snakview-property-input-placeholder": "پراپرٹی",
 	"wikibase-snakview-choosesnaktype": "قدر کی نوع منتخب کریں۔",
 	"wikibase-snakview-variations-somevalue-label": "نا معلوم قدر",

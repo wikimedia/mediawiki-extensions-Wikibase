@@ -5,7 +5,8 @@
 			"Gmelfi",
 			"Macofe",
 			"Amire80",
-			"Sarvaturi"
+			"Sarvaturi",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Dipòsitu di dati strutturati",
@@ -52,7 +53,7 @@
 	"wikibase-entitytermsview-input-help-message": "Scrivi n'etichetta, na discrizzioni brevi e alias di sta ntità p'ogniduna lingua.",
 	"wikibase-statementsection-statements": "Dichiarazzioni",
 	"wikibase-sitelinkgroupview-input-help-message": "Agghiunci nu culligamentu ôn situ spicificannu lu situ e na sò pàggina, o puru cancia o cancella li culligamenti esistenti.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|vuci}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|vuci}}",
 	"wikibase-sitelinks-empty": "Nudda pàggina è culligata a stu suggettu.",
 	"wikibase-sitelinks-special": "Àutri siti",
 	"wikibase-badgeselector-badge-placeholder-title": "Clicca p'assignari un distintivu.",
@@ -69,7 +70,6 @@
 	"wikibase-undo-badpage": "Virsioni sbagghiata: La virsioni $2 nun apparteni a [[$1]].",
 	"wikibase-undo-firstrev": "Nun si pò annullari la criazzioni dâ pàggina",
 	"wikibase-undo-nocontent": "Nun si potti carricari lu cuntinutu dâ virsioni $2 dâ pàggina $1",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valuri|$1 valuri}} nun ancora {{PLURAL:$1|sarvatu|sarvati}}",
 	"wikibase-disambiguation-title": "Disambiguazzioni pi \"$1\"",
 	"wb-special-newitem-new-item-notification": "Lu suggettu novu $1 fu criatu e rimannatu â sò pàggina. Torna a $2.",
 	"wikibase-aliases-input-help-message": "Pi fari sta ntità cchiù fàcili a attruvari, poi agghiùnciri àutri nomi.",
@@ -80,7 +80,6 @@
 	"wikibase-statementview-rank-normal": "Rangu nurmali",
 	"wikibase-statementview-rank-deprecated": "Rangu scunzigghiatu",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rifirimentu|rifirimenti}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Nu rifirimentu ancora nun sarvatu|$1 rifirimenti ancora nun sarvati}}",
 	"wikibase-snakview-property-input-placeholder": "prupità",
 	"wikibase-snakview-unsupportedsnaktype": "Snak di tipu \"$1\". La manipulazzioni di stu tipu di Snak ancora nun è suppurtata.",
 	"wikibase-snakview-choosesnaktype": "Scegghi un tipu di valuri.",
@@ -235,7 +234,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Duna na lista dâ ntità chi nun hannu etichetta",
 	"wikibase-entitieswithoutlabel-label-language": "Còdici dâ lingua:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipu:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "tutti",
 	"wikibase-entitieswithoutlabel-submit": "Attrova",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nun è nu còdici di lingua vàlidu.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" nun è nu tipu di ntità vàlidu.",

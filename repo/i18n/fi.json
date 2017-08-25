@@ -18,7 +18,8 @@
 			"Pxos",
 			"Pitke",
 			"Valtlait",
-			"Pyscowicz"
+			"Pyscowicz",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Säilö jäsennetylle datalle",
@@ -76,7 +77,7 @@
 	"wikibase-label-input-help-message": "Kirjoita tämän aiheen nimi kielellä $1.",
 	"wikibase-statementsection-statements": "Esitykset",
 	"wikibase-sitelinks": "Sivuston linkit",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|linkki|linkkiä}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|linkki|linkkiä}}",
 	"wikibase-sitelinks-empty": "Tässä kohteessa ei ole sivua linkitettynä.",
 	"wikibase-sitelinks-special": "Muut sivustot",
 	"wikibase-badgeselector-badge-placeholder-title": "Napsauta lisätäksesi merkin.",
@@ -93,7 +94,6 @@
 	"wikibase-undo-badpage": "Virheellinen versio: Versio $2 ei kuulu sivulle [[$1]].",
 	"wikibase-undo-firstrev": "Sivun luomista ei voi kumota",
 	"wikibase-undo-nocontent": "Sivun $1 version $2 sisältöä ei voitu ladata",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Yhtä|$1}} arvoa ei ole vielä tallennettu.",
 	"wikibase-disambiguation-title": "Täsmennyssivu nimelle ”$1”",
 	"wb-special-newitem-new-item-notification": "Luotiin uusi kohde $1 ja sinut ohjattiin sen sivulle. Palaa sivulle $2.",
 	"wikibase-aliases-input-help-message": "Jotta tämä aihe löytyisi helpommin, voit lisätä vaihtoehtoisia nimiä.",
@@ -105,7 +105,6 @@
 	"wikibase-statementview-rank-normal": "Tavallinen asema",
 	"wikibase-statementview-rank-deprecated": "Vanhentunut asema",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|lähde|lähdettä}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Lähdettä|$1 lähdettä}} ei ole vielä tallennettu",
 	"wikibase-snakview-property-input-placeholder": "ominaisuus",
 	"wikibase-snakview-unsupportedsnaktype": "Snak on tyyppiä \"$1\". Tällaisen snakin käsittelyä ei vielä tueta.",
 	"wikibase-snakview-choosesnaktype": "Valitse arvon tyyppi.",

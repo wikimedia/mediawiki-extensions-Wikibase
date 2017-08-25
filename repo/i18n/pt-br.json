@@ -17,7 +17,8 @@
 			"Almondega",
 			"Peter Fernando",
 			"Hamilton Abreu",
-			"Felipe L. Ewald"
+			"Felipe L. Ewald",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -78,7 +79,7 @@
 	"wikibase-statementsection-statements": "Declarações",
 	"wikibase-sitelinks": "Sitelinks",
 	"wikibase-sitelinkgroupview-input-help-message": "Adicione uma ligação para site, especificando um site e uma página deste site, edite ou remova ligações para sites existentes.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entrada|entradas}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinks-empty": "Nenhuma página está vinculada a este item.",
 	"wikibase-sitelinks-special": "Outros sites",
 	"wikibase-badgeselector-badge-placeholder-title": "Clique para atribuir um emblema.",
@@ -96,7 +97,6 @@
 	"wikibase-undo-firstrev": "Não é possível desfazer a criação da página",
 	"wikibase-undo-nocontent": "Não foi possível carregar o conteúdo da revisão $2 da página $1",
 	"wikibase-summary-generated": "Resumo (será anexado a um resumo gerado automaticamente):",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Um valor ainda não salvo|$1 valores ainda não salvos}}",
 	"wikibase-disambiguation-title": "Desambiguação para \"$1\"",
 	"wb-special-newitem-new-item-notification": "Novo item $1 criado e redirecionado para sua página. Voltar à $2.",
 	"wikibase-aliases-input-help-message": "Para tornar esta entidade mais fácil de ser encontrada, você pode inserir nomes alternativos.",
@@ -111,7 +111,6 @@
 	"wikibase-statementview-rank-deprecated": "Classificação obsoleta",
 	"wikibase-statementview-rank-tooltip-deprecated": "Valor é conhecido por ser errado, mas costumava ser comumente aceito",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referência|referências}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Uma referência ainda não salva|$1 referências ainda não salvas}}",
 	"wikibase-snakview-property-input-placeholder": "propriedade",
 	"wikibase-snakview-unsupportedsnaktype": "Snak (''conector'') de tipo \"$1\". A manipulação deste tipo de snak ainda não é suportada.",
 	"wikibase-snakview-choosesnaktype": "Escolha um tipo de valor.",
@@ -325,7 +324,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertido de $3 - $4",
 	"wikibase-api-unresolved-redirect": "O ID de entidade dado refere-se a um redirecionamento, que não é suportado neste contexto.",
 	"wikibase-api-illegal-entity-remove": "As entidades não podem ser excluídas fornecendo uma chave <var>remove</var> de nível superior.",
-	"wikibase-api-illegal-entity-selector": "Você precisa fornecer uma entidade <var>id</var>, ou uma combinação <var>site</var> e <var>page</var>, mas não ambas.",
+	"wikibase-api-illegal-id-or-site-page-selector": "Você precisa fornecer uma entidade <var>id</var>, ou uma combinação <var>site</var> e <var>page</var>, mas não ambas.",
 	"wikibase-api-no-such-sitelink": "Não foi possível encontrar um sitelink para \"$1\" ao tentar editar emblemas.",
 	"wikibase-api-not-recognized-datatype": "Um tipo de dados era esperado, mas está faltando ou não foi reconhecido.",
 	"wikibase-api-target-not-empty": "O redirecionamento só pode ser criado em cima de uma entidade vazia ou excluída.",

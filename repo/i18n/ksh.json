@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Purodha",
-			"TMg"
+			"TMg",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Brängk en Sammlong vun Daate met en Schtroktuur en et Wiki.",
@@ -25,13 +26,14 @@
 	"wikibase-label-edit-placeholder": "donn heh enjävve, wi mer doför säht",
 	"wikibase-description-empty": "Nix enjejovve",
 	"wikibase-description-edit-placeholder": "heh verklohre un beschrieve",
+	"wikibase-content-language-edit-not-recognized-language": "De Kännong för di Schprohch känne mer nit.",
 	"wikibase-diffview-link": "Lengks",
 	"wikibase-sitelink-site-edit-placeholder": "Wikki",
 	"wikibase-sitelink-page-edit-placeholder": "Sigg",
 	"wikibase-alias-edit-placeholder": "jiv en, wi mer noch doför säht",
 	"wikibase-label-input-help-message": "Donn dä Tittel för dä Saz Daate en $1 enjävve.",
 	"wikibase-statementsection-statements": "Behouptonge udder Ußsahre",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|Endraach|Endrääsch|Endraach}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|Endraach|Endrääsch|Endraach}}",
 	"wikibase-sitelinks-special": "Sönst wat för Wäbßaits",
 	"wikibase-remove": "fott nämme",
 	"wikibase-move-up": "noh bovve deue",
@@ -74,7 +76,6 @@
 	"wikibase-newproperty-fieldset": "En neuje Eijeschaff aanlähje",
 	"wikibase-newproperty-datatype": "Daate_Zoot:",
 	"special-newitem": "Donn ene neue Jääjeschtand aanjelääje",
-	"wikibase-newitem-not-recognized-language": "De Kännong för di Schprohch känne mer nit.",
 	"wikibase-newentity-label": "Bezeijschnong",
 	"wikibase-newentity-submit": "Aanlähje",
 	"wikibase-setlabel-intro": "Met heh däm Fommolaa kam_mer enem Objäk sing Bezeischnong faßlähje. Mer moss en Kännong för dät Objäk aanjävve (för e Beijschpell „Q23“), e Schprohcheköözel (för e Beijschpell „ksh“ för Kölsch) un de Bezeischnong.",
@@ -107,7 +108,6 @@
 	"wikibase-listproperties-invalid-datatype": "„$1“ es keine jöltije Zoot Dahte",
 	"wikibase-entitieswithoutlabel-label-language": "Et Köözel för di Schprohch:",
 	"wikibase-entitieswithoutlabel-label-type": "Zoot:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "all",
 	"wikibase-entitieswithoutlabel-submit": "Lohß Jonn!",
 	"wikibase-entitieswithoutlabel-invalid-language": "„$1“ es kei jöltesch Köözel för en Schprohch.",
 	"wikibase-entitieswithoutlabel-invalid-type": "„$1“ es keine jöltije Name för ene Jääjeschtand",

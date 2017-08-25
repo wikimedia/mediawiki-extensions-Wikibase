@@ -4,7 +4,8 @@
 			"Kaganer",
 			"Умар",
 			"Macofe",
-			"Исмаил Садуев"
+			"Исмаил Садуев",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Хаамаш латтабо меттиг",
@@ -59,7 +60,7 @@
 	"wikibase-label-input-help-message": "ДӀаязъе цӀе хӀокху $1 маттахь.",
 	"wikibase-statementsection-statements": "ТIечIагIдалар",
 	"wikibase-sitelinks": "Сайтийн тӀе йолу хьажоргийн могӀам",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|дӀаяздар}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|дӀаяздар}}",
 	"wikibase-sitelinks-empty": "Цхьа агӀо кхуза хьажорг йолуш яц.",
 	"wikibase-sitelinks-special": "ХӀокху элементах тесна йолу кхечу сайташкара агӀонаш",
 	"wikibase-remove": "дӀаяккха",
@@ -71,7 +72,6 @@
 	"wikibase-undo-revision-error": "Юху яккха цаелира",
 	"wikibase-undo-firstrev": "АгӀо кхоллар юхадаккха цало",
 	"wikibase-undo-nocontent": "«$1» агӀона $2 версин чулацам чубаккха цало",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|1=Цхьа маьӀна хӀинца а Ӏалашдина дац|Ӏалашдаза маьӀнаш: $1}}",
 	"wikibase-aliases-input-help-message": "ХӀара элемент атта кара яйта язъе кхуза йогӀуш йолу цӀе.",
 	"wikibase-propertypage-datatype": "Хаамийн тайп",
 	"wikibase-claimview-snak-new-tooltip": "Билгало язйича цуна маьӀна яздан мегар ду. Билгалонан маьӀна дацахь я карара маьӀна хууш дацахь, яздечу меттиган уллера хьаьркан тӀетаӀӀина альтернативан маьӀна харжа йиш ю.",
@@ -79,7 +79,6 @@
 	"wikibase-statementview-rank-normal": "ЛартӀахь йолу ранг",
 	"wikibase-statementview-rank-deprecated": "Мегаш йоцу ранг",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|1=хьост|хьосташ}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Цхьаъ хьост Ӏалашйина яц|$1 хьост Ӏалашйина яц|$1 хьосташ Ӏалашйина яц}}",
 	"wikibase-snakview-property-input-placeholder": "билгало",
 	"wikibase-snakview-choosesnaktype": "Харжа маьӀан тайп.",
 	"wikibase-snakview-variations-somevalue-label": "маьӀна хууш дац",

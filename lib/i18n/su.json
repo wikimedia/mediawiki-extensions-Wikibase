@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kandar"
+			"Kandar",
+			"Uchup19"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipédia"
+	"wikibase-sitelinks-wikipedia": "Wikipédia",
+	"wikibase-entity-summary-wbsetlabel-remove": "Label [$2] dipupus",
+	"wikibase-entity-summary-wbsetdescription-remove": "Déskripsi [$2] dipupus",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Ngaran lian}} [$2] dipupus sarta ditambah",
+	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Ngaran lian}} [$2] dipupus"
 }

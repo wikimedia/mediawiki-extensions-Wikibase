@@ -12,7 +12,8 @@
 			"Mirws",
 			"Beeyan",
 			"Rachmat.Wahidi",
-			"Rachmat04"
+			"Rachmat04",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data terstruktur",
@@ -73,7 +74,7 @@
 	"wikibase-statementsection-statements": "Pernyataan",
 	"wikibase-sitelinks": "Pranala interwiki",
 	"wikibase-sitelinkgroupview-input-help-message": "Tambah sebuah pranala interwiki dengan menentukan sebuah situs dan sebuah laman dari situs tersebut, sunting atau hapus pranala antarwiki yang ada.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entri|entri}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entri|entri}}",
 	"wikibase-sitelinks-empty": "Tidak ada laman yang terpranalakan dengan butir ini.",
 	"wikibase-sitelinks-special": "Situs lain",
 	"wikibase-badgeselector-badge-placeholder-title": "Klik untuk menetapkan lencana.",

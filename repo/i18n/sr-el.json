@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"Macofe",
 			"Srdjan m",
-			"Obsuser"
+			"Obsuser",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Skladište struktuiranih podataka",
@@ -42,7 +43,7 @@
 	"wikibase-entitytermsview-input-help-message": "Unesite naziv ovog entiteta, kratak opis i alternativne nazive, prema jeziku.",
 	"wikibase-statementsection-statements": "Izjave",
 	"wikibase-sitelinks": "Veze stranice",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|unos|unosa}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|unos|unosa}}",
 	"wikibase-sitelinks-empty": "Nijedna stranica nije povezana sa ovom stavkom.",
 	"wikibase-sitelinks-special": "Drugi sajtovi",
 	"wikibase-badgeselector-badge-placeholder-title": "Dodeli značku.",
@@ -55,7 +56,6 @@
 	"wikibase-empty-undo": "Ne postoji ništa što može biti poništeno ovde.",
 	"wikibase-undo-revision-error": "Poništavanje nije uspelo",
 	"wikibase-undo-firstrev": "Ne može se poništiti pravljenje stranice",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Jedna vrednost|$1 vrednosti}} još nije sačuvano",
 	"wikibase-disambiguation-title": "Višeznačnost za „$1“",
 	"wb-special-newitem-new-item-notification": "Nova stavka $1 je napravljena i preusmerena na ovu stranicu. Povratak na $2.",
 	"wikibase-aliases-input-help-message": "Da bi olakšali pronalaženje entiteta možete uneti alternativne nazive.",
@@ -63,7 +63,6 @@
 	"wikibase-claimview-snak-new-tooltip": "Posle navođenja svojstva možete uneti odgovarajuću vrednost. Ako svojstvo nema određenu vrednost ili tačna vrednost nije poznata, umesto navođenja prilagođene vrednosti možete izabrati alternativne vrednosti klikom na ikonu pored polja za unos vrednosti.",
 	"wikibase-statementview-rank-normal": "Normalni rang",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referenca|reference}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jedna referenca nije sačuvana|$1 reference nisu sačuvane|$1 referenci nije sačuvano}}",
 	"wikibase-snakview-property-input-placeholder": "svojstvo",
 	"wikibase-snakview-choosesnaktype": "Izaberite vrstu vrednosti.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "Vrednost nije u skladu sa definicijom svojstva.",

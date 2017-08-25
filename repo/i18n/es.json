@@ -36,7 +36,8 @@
 			"Rubentl134",
 			"Dgstranz",
 			"Luzcaru",
-			"MarcoAurelio"
+			"MarcoAurelio",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -97,7 +98,7 @@
 	"wikibase-statementsection-statements": "Declaraciones",
 	"wikibase-sitelinks": "Enlaces a sitios",
 	"wikibase-sitelinkgroupview-input-help-message": "Añadir un enlace de sitio mediante la especificación de un sitio web y una página de ese sitio, editar o eliminar enlaces de sitio existente.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entrada|entradas}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinks-empty": "Ninguna página está enlazada con este elemento.",
 	"wikibase-sitelinks-special": "Otros sitios",
 	"wikibase-badgeselector-badge-placeholder-title": "Haz clic para asignar una insignia.",

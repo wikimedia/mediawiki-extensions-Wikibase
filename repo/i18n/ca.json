@@ -16,7 +16,8 @@
 			"Macofe",
 			"Joan manel",
 			"F3RaN",
-			"Ssola"
+			"Ssola",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repositori de dades estructurades",
@@ -76,7 +77,7 @@
 	"wikibase-entitytermsview-input-help-message": "Introduïu una etiqueta, una descripció breu i els àlies d'aquesta entitat per llengua.",
 	"wikibase-statementsection-statements": "Declaracions",
 	"wikibase-sitelinks": "Enllaços de llocs",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entrada|entrades}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entrades}}",
 	"wikibase-sitelinks-empty": "Cap pàgina està enllaçada a aquest element.",
 	"wikibase-sitelinks-special": "Altres llocs",
 	"wikibase-badgeselector-badge-placeholder-title": "Cliqueu per assignar un distintiu.",

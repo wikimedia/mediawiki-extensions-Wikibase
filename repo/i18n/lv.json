@@ -6,7 +6,8 @@
 			"Edgars2007",
 			"Macofe",
 			"Nitalynx",
-			"Silraks"
+			"Silraks",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-entity-item": "vienums",
@@ -51,7 +52,7 @@
 	"wikibase-alias-edit-placeholder": "ievadiet citu nosaukumu",
 	"wikibase-label-input-help-message": "Ievadiet šīs datu kopas $1 nosaukumu.",
 	"wikibase-statementsection-statements": "Apgalvojumi",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|vienumi|vienums|vienumi}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|vienumi|vienums|vienumi}}",
 	"wikibase-sitelinks-special": "Citas vietnes",
 	"wikibase-remove": "dzēst",
 	"wikibase-move-up": "pārvietot augšup",
@@ -61,7 +62,6 @@
 	"wikibase-undo-revision-error": "Atcelšana neizdevās",
 	"wikibase-undo-firstrev": "Nevar atcelt lapas izveidi",
 	"wikibase-undo-nocontent": "Nevar ielādēt $2 pārskatīšana no $1 lapas.",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|$1 vērtības vēl nav saglabātas|$1 vērtība vēl nav saglabāta|$1 vērtības vēl nav saglabātas}}",
 	"wikibase-disambiguation-title": "\"$1\" nozīmju atdalīšana",
 	"wikibase-propertypage-datatype": "Datu tips",
 	"wikibase-propertypage-bad-datatype": "Nezināms datu tips: $1",
@@ -69,7 +69,6 @@
 	"wikibase-statementview-rank-normal": "Normāls rangs",
 	"wikibase-statementview-rank-deprecated": "Novecojis rangs",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|atsauces|atsauce|atsauces}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1 atsauces vēl nav saglabātas|$1 atsauce vēl nav saglabāta|$1 atsauces vēl nav saglabātas}}",
 	"wikibase-snakview-property-input-placeholder": "īpašība",
 	"wikibase-snakview-choosesnaktype": "Izvēlieties vērtības tipu.",
 	"wikibase-snakview-variations-somevalue-label": "nezināma vērtība",

@@ -32,7 +32,7 @@
 	"wikibase-tooltip-error-details": "Rerincèn",
 	"wikibase-entity-summary-wbsetitem": "Nggawé wiji anyar",
 	"wikibase-entity-summary-wbcreate-new": "Nggawé èntitas anyar",
-	"wikibase-entity-summary-wbcreateredirect": "Ngalih nyang $4",
+	"wikibase-entity-summary-wbcreateredirect": "Ngeneraké menyang $4",
 	"wikibase-entity-summary-wbeditentity": "Nggawé èntitas anyar",
 	"wikibase-entity-summary-wbeditentity-create": "Nggawé èntitas anyar",
 	"wikibase-entity-summary-wbeditentity-update": "Ngowahi èntitas",
@@ -51,5 +51,5 @@
 	"wikibase-entity-summary-wbsetaliases-add": "Nambah {{PLURAL:$1|aliyas}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "Mbusak {{PLURAL:$1|aliyas}} [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Ngowahi labèl, wedhara, lan aliyas [$2]",
-	"wikibase-entity-summary-wbsetsitelink-add": "Nambah pranala nyang [$2]"
+	"wikibase-entity-summary-wbsetsitelink-add": "Nambah pranala ing [$2]"
 }
