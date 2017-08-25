@@ -74,7 +74,7 @@ HTML;
 
 	$templates['wikibase-snakview'] =
 <<<HTML
-<div class="wikibase-snakview">
+<div class="wikibase-snakview wikibase-snakview-$4">
 	<div class="wikibase-snakview-property-container">
 		<div class="wikibase-snakview-property" dir="auto">$1</div>
 	</div>
