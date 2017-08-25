@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -57,6 +58,7 @@ class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 			'foowiki',
 			'foo',
 			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $idParser ),
+			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getWikibaseClient()
 		);

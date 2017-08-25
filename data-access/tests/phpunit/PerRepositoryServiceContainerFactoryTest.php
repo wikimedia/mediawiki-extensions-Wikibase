@@ -8,6 +8,7 @@ use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
@@ -26,6 +27,7 @@ class PerRepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCa
 
 		return new PerRepositoryServiceContainerFactory(
 			$idParserFactory,
+			new EntityIdComposer( [] ),
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			[ '' => false ],
 			[],
