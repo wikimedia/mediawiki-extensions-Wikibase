@@ -86,7 +86,8 @@ class SnakHtmlGenerator {
 			// Display property link only once for snaks featuring the same property:
 			$propertyLink,
 			$snakViewCssClass,
-			$formattedValue
+			$formattedValue,
+			$snak->getHash()
 		);
 
 		return $html;
