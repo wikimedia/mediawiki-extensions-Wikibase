@@ -16,6 +16,24 @@
       "revId": "1a4f7cdf53ca149c6972c5d309033c55ee2b1c3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ac800d8f",
+        "filename": "data-access/tests/phpunit/NoReverseDependencyTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-25T11:08:55Z",
+      "side": 1,
+      "message": "I don\u0027t know how exactly assertEquals considers the order of arrays but it when I removed three files listed in testNoClientDependency I got tests failing with message saying  PerRepositoryServiceWiring.php should be first in the array. So I guess it is better to have a fixed order returned by the method here and be sure tests will not randomly fail.",
+      "parentUuid": "4e7eab26_aca1ed37",
+      "revId": "1a4f7cdf53ca149c6972c5d309033c55ee2b1c3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
