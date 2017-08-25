@@ -719,11 +719,24 @@
 			if ( key === 'value' ) {
 				this.element.toggleClass( 'wb-new', value === null );
 
-				if ( value && value.getClaim().getGuid() ) {
-					this.element.addClass( 'wikibase-statement-' + value.getClaim().getGuid() );
-				}
+				if ( value !== null ) {
+					if ( value.getClaim().getGuid() ) {
+						this.element.addClass( 'wikibase-statement-' + value.getClaim().getGuid() );
+					}
 
-				// FIXME: Propagate external changes to all sub-widgets? Not needed at the moment.
+					if ( this._mainSnakSnakView ) {
+						this._mainSnakSnakView.option( key, value.getClaim().getMainSnak() );
+					}
+					if ( this._qualifiers ) {
+						this._qualifiers.option( key, value.getClaim().getQualifiers() );
+					}
+					if ( this._rankSelector ) {
+						this._rankSelector.option( key, value.getRank() );
+					}
+					if ( this._referencesListview ) {
+						this._referencesListview.option( key, value.getReferences() );
+					}
+				}
 			}
 
 			return response;
