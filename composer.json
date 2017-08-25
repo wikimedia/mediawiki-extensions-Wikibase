@@ -37,9 +37,9 @@
 		"wikibase/data-model-serialization": "^2.5.0",
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.7.0",
-		"wikibase/data-model-javascript": "^3.0.1",
+		"wikibase/data-model-javascript": "^3.1.0",
 		"wikibase/javascript-api": "^2.2.2",
-		"wikibase/serialization-javascript": "^2.0.8",
+		"wikibase/serialization-javascript": "^2.1.0",
 		"diff/diff": "^2.0.0",
 		"wikimedia/purtle": "^1.0.6"
 	},
