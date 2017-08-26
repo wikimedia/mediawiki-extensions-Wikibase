@@ -1882,6 +1882,9 @@ class WikibaseRepo {
 
 						// T167811
 						'xpu',
+
+						// T174238
+						'ami',
 					] )
 				),
 
