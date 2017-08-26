@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_08b58677",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1885,
+      "author": {
+        "id": 3214
+      },
+      "writtenOn": "2017-08-26T19:00:43Z",
+      "side": 1,
+      "message": "They need to be in reverse order (lowest phabricator id first)",
+      "revId": "80867b6bc38a2ca623cace536af469c3cec68345",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
