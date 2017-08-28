@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_084c9f41",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-28T13:21:59Z",
+      "side": 1,
+      "message": "could be private?",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_68a8c3d8",
+        "filename": "lib/includes/Changes/CentralIdLookupFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-28T13:21:59Z",
+      "side": 1,
+      "message": "minor nit: could be also put in a PSR-4-compliant namespace.",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_922e8e87",
         "filename": "lib/includes/Changes/CentralIdLookupFactory.php",
         "patchSetId": 14
@@ -30,6 +64,40 @@
       "writtenOn": "2017-08-24T17:28:54Z",
       "side": 1,
       "message": "Fair enough, but overkill. The logic in this class could simply live in a private method in WikibaseClient.",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a85d4bf1",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-28T13:21:59Z",
+      "side": 1,
+      "message": "could be private?",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_08bd7ffc",
+        "filename": "lib/tests/phpunit/Changes/EntityChangeTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-28T13:21:59Z",
+      "side": 1,
+      "message": "this is not relevant here, or is it?",
       "revId": "144e37435f68dba6ec2966116f3e199735d43776",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
