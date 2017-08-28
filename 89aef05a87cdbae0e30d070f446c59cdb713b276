@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_7a8969ee",
+        "filename": "view/resources/wikibase/wikibase.less",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-28T10:48:37Z",
+      "side": 1,
+      "message": "Looks good, but I don\u0027t speak LESS :)",
+      "revId": "89aef05a87cdbae0e30d070f446c59cdb713b276",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
