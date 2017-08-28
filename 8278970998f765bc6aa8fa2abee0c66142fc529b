@@ -34,6 +34,24 @@
       "revId": "8278970998f765bc6aa8fa2abee0c66142fc529b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_97bbce70",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-28T09:41:13Z",
+      "side": 1,
+      "message": "That should be just one, right?",
+      "parentUuid": "4e7eab26_99630ea7",
+      "revId": "8278970998f765bc6aa8fa2abee0c66142fc529b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
