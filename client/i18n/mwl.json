@@ -4,7 +4,18 @@
 			"MokaAkashiyaPT"
 		]
 	},
+	"wikibase-comment-update": "Eilemiento {{WBREPONAME}} altarado",
+	"wikibase-dataitem": "Eilemiento {{WBREPONAME}}",
+	"wikibase-editlinks": "Eiditar lhigaçones",
+	"wikibase-editlinkstitle": "Eiditar lhigaçones anterlhenguísticas",
 	"wikibase-linkitem-addlinks": "Poner lhigaçones",
 	"wikibase-rc-show-wikidata-pref": "Amostrar las eidiçones {{WBREPONAME}} nas mudanças recentes",
-	"wikibase-watchlist-show-changes-pref": "Amostrar las eidiçones {{WBREPONAME}} na sue lhista de páiginas bigiadas"
+	"wikibase-watchlist-show-changes-pref": "Amostrar las eidiçones {{WBREPONAME}} na sue lhista de páiginas begiadas",
+	"unconnectedpages": "Páiginas sin lhigaçones a eilemientos associados",
+	"unconnectedpages-summary": "Esta páigina lhista las páiginas sin nanhun eilemiento de dados lhigado (ne ls spácios nominales que suportan eilemientos lhigados). La lhista ye apersentada por orde decrecente de l'eidantificador de la páigina, antoce las páiginas mais recentes son amostradas purmeiro.",
+	"wikibase-unconnectedpages-submit": "Amostrar páiginas",
+	"wikibase-pageinfo-entity-id": "ID de l eilemiento {{WBREPONAME}}",
+	"wikibase-otherprojects": "Noutros porjetos",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Lhigaçon|Lhigaçones}} cun {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Abisar-me quando alguien lhigar ua páigina que {{GENDER:|you tenga criado}} pa un eilemiento {{WBREPONAME}}."
 }

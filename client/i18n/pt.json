@@ -67,7 +67,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|alteração|alterações}}",
 	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
 	"wikibase-editlinks": "Editar ligações",
-	"wikibase-editlinkstitle": "Editar links interlínguas",
+	"wikibase-editlinkstitle": "Editar ligações interlínguas",
 	"wikibase-addlinkstitle": "Adicionar links interlínguas",
 	"wikibase-linkitem-addlinks": "Adicionar ligações",
 	"wikibase-linkitem-alreadylinked": "A página que pretende ligar a esta já está associada a um [$1 elemento] no repositório central de dados, o qual liga à página $2 neste site. Os elementos só podem ter associada uma página por cada site. Por favor, escolha uma página diferente com a qual ligar.",

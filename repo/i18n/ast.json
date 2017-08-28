@@ -302,6 +302,8 @@
 	"wikibase-mylanguagefallbackchain-text": "La cadena predeterminada de llingua que s'usa p'amosa-y les etiquetes apaez abaxo.",
 	"wikibase-mylanguagefallbackchain-babel": "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|so}} [[Special:MyPage|páxina d'usuariu]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertíu del $3 - $4",
+	"wikibase-api-claim-value-missing": "Tien de dase un valor al crear una afirmación col snak PropertyValueSnak.",
+	"wikibase-api-claim-value-unexpected": "Nun puedes dar un valor al crear una afirmación sin PropertyValueSnak como snak principal.",
 	"wikibase-api-unresolved-redirect": "La ID d'entidá proporcionada refierse a una redireición, lo que nun tien sofitu nesti contestu.",
 	"wikibase-api-illegal-entity-remove": "Les entidaes nun pueden desaniciase dando una clave <var>remove</var> de nivel superior.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Tienes de dar o un <var>id</var> d'entidá, o una combinación de <var>site</var> y <var>page</var>, pero non les dos.",

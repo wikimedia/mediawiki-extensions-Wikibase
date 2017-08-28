@@ -207,6 +207,7 @@
 	"special-setsitelink": "사이트 링크 설정",
 	"wikibase-setsitelink-introfull": "[[$1]]에 대한 $2의 사이트 링크를 설정합니다.",
 	"wikibase-setsitelink-intro": "이 양식은 항목의 사이트 링크를 설정할 수 있습니다. 항목의 ID(예를 들어 Q23), 사이트 id(예를 들어 \"kowiki\")와 설정하는 사이트 링크를 입력해야 합니다.",
+	"wikibase-setsitelink-intro-badges": "추가적으로 아래에 나열된 사이트링크를 위한 배지를 설정할 수 있습니다.",
 	"wikibase-setsitelink-site": "사이트 id:",
 	"wikibase-setsitelink-label": "사이트 링크:",
 	"wikibase-setsitelink-badges": "배지:",

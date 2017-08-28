@@ -2,14 +2,36 @@
 	"@metadata": {
 		"authors": [
 			"Horus",
-			"Pon44695"
+			"Pon44695",
+			"Aefgh39622"
 		]
 	},
 	"wikibase-edit": "แก้ไข",
 	"wikibase-add": "เพิ่ม",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ในภาษาอื่น",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "กำหนดค่า",
+	"wikibase-entitytermsforlanguagelistview-description": "คำอธิบาย",
+	"wikibase-entitytermsforlanguagelistview-label": "ป้าย",
+	"wikibase-entitytermsforlanguagelistview-language": "ภาษา",
+	"wikibase-entitytermsforlanguagelistview-more": "ภาษาที่ป้อนเข้ามาทั้งหมด",
 	"wikibase-label-empty": "ไม่มีการกำหนดป้าย",
+	"wikibase-label-edit-placeholder": "ป้อนป้าย",
 	"wikibase-description-empty": "ไม่มีการกำหนดคำอธิบาย",
+	"wikibase-content-language-edit-label": "ภาษา:",
+	"wikibase-diffview-label": "ป้าย",
 	"wikibase-sitelinks-special": "เว็บอื่น",
 	"wikibase-statementview-rank-normal": "พิสัยปกติ",
-	"wikibase-statementview-references-counter": "อ้างอิง"
+	"wikibase-statementview-references-counter": "อ้างอิง",
+	"wikibase-itemdisambiguation-lookup-label": "ป้าย:",
+	"special-newitem": "สร้างสารสนเทศใหม่",
+	"wikibase-newitem-fieldset": "สร้างสารสนเทศใหม่",
+	"wikibase-newentity-language": "ภาษา:",
+	"wikibase-newentity-label": "ป้าย:",
+	"wikibase-newentity-description": "คำอธิบาย:",
+	"special-setlabel": "ตั้งป้าย",
+	"wikibase-setlabel-submit": "ตั้งป้าย",
+	"wikibase-modifyterm-language": "รหัสภาษา:",
+	"wikibase-entitieswithoutlabel-label-language": "รหัสภาษา:",
+	"wikibase-concept-uri": "URI แนวคิด",
+	"apihelp-wbeditentity-example-2": "สร้างสารสนเทศใหม่และตั้งป้ายสำหรับ <var>de</var> และ <var>en</var>"
 }
