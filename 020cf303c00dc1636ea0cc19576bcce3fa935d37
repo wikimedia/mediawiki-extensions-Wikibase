@@ -33,6 +33,24 @@
       "revId": "020cf303c00dc1636ea0cc19576bcce3fa935d37",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4fcce6bd",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-08-29T09:29:50Z",
+      "side": 1,
+      "message": "I thought about it but then decided to do this because I think it\u0027s better to do the validation specially regarding the type of the connection in upper layers. EditEntity is not a really low level class though. So I\u0027m not sure.",
+      "parentUuid": "4e7eab26_92bbee22",
+      "revId": "020cf303c00dc1636ea0cc19576bcce3fa935d37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
