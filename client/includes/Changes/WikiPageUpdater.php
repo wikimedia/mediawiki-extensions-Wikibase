@@ -10,6 +10,7 @@ use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\LBFactory;
 
 /**
@@ -85,6 +86,8 @@ class WikiPageUpdater implements PageUpdater {
 	 * @param int $dbBatchSize
 	 */
 	public function setDbBatchSize( $dbBatchSize ) {
+		Assert::parameterType( 'integer', $dbBatchSize, 'dbBatchSize' );
+
 		$this->dbBatchSize = $dbBatchSize;
 	}
 
