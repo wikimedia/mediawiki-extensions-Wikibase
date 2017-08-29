@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
@@ -1295,7 +1296,11 @@ class WikibaseRepo {
 			$transmitters[] = new DatabaseChangeTransmitter( $this->getStore()->getChangeStore() );
 		}
 
-		return new ChangeNotifier( $this->getEntityChangeFactory(), $transmitters );
+		return new ChangeNotifier(
+			$this->getEntityChangeFactory(),
+			$transmitters,
+			CentralIdLookupFactory::getInstance()->getCentralIdLookup()
+		);
 	}
 
 	/**

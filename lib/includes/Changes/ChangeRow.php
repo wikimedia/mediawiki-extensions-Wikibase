@@ -39,6 +39,15 @@ abstract class ChangeRow implements Change {
 		return $this->getField( 'time' );
 	}
 
+	/**
+	 * Original (repository) user id, or 0 for logged out users.
+	 *
+	 * @return int
+	 */
+	public function getUserId() {
+		return $this->getField( 'user_id' );
+	}
+
 	public function __construct( array $fields = [] ) {
 		$this->setFields( $fields );
 	}
