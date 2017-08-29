@@ -90,6 +90,36 @@
 		$entitySelector.trigger( 'eachchange.entityselector' );
 	} );
 
+	QUnit.test( 'Indicate unrecognized input', function ( assert ) {
+		var $entitySelector = newTestEntitySelector();
+		$entitySelector.data( 'entityselector' );
+
+		assert.notOk( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
+
+		$entitySelector.val( 'does-not-exist' );
+		$entitySelector.blur();
+		assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
+	} );
+
+	QUnit.test( 'Indicate recognized input', function ( assert ) {
+		var done = assert.async(),
+			$entitySelector = newTestEntitySelector();
+
+		$entitySelector.data( 'entityselector' );
+
+		assert.notOk( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
+		$entitySelector.val( 'abc' );
+
+		$entitySelector
+			.one( 'entityselectorselected', function ( event, id ) {
+				$entitySelector.blur();
+				assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
+				done();
+			} );
+
+		$entitySelector.trigger( 'eachchange.entityselector' );
+	} );
+
 	QUnit.test( 'Don\'t implicitly select entity by matching alias / selectedEntity()', function ( assert ) {
 		QUnit.expect( 0 );
 
