@@ -51,6 +51,24 @@
       "revId": "020cf303c00dc1636ea0cc19576bcce3fa935d37",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a524895a",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-29T14:53:09Z",
+      "side": 1,
+      "message": "It\u0027s ok to leave it like this for now, if it doesn\u0027t make calling code too complicated.\n\nBut getLatestRevisionId() still needs fixing, I think...",
+      "parentUuid": "4e7eab26_4fcce6bd",
+      "revId": "020cf303c00dc1636ea0cc19576bcce3fa935d37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
