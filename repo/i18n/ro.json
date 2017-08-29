@@ -70,7 +70,7 @@
 	"wikibase-statementview-rank-preferred": "Rang preferat",
 	"wikibase-statementview-rank-normal": "Rang normal",
 	"wikibase-statementview-rank-deprecated": "Rang perimat",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referință|referințe}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referință|referințe|de referințe}}",
 	"wikibase-snakview-property-input-placeholder": "proprietate",
 	"wikibase-snakview-choosesnaktype": "Alegeți un tip de valoare.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "Valoarea nu este conformă cu definiția proprietății.",

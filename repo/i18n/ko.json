@@ -72,6 +72,7 @@
 	"wikibase-entitytermsview-input-help-message": "이 개체의 레이블과 간단한 설명, 다른 이름을 언어별로 입력하십시오.",
 	"wikibase-statementsection-statements": "서술",
 	"wikibase-sitelinks": "사이트 링크",
+	"wikibase-sitelinkgroupview-input-help-message": "사이트와 사이트의 문서를 지정하여 사이트링크를 추가한 다음 기존의 사이트링크를 편집하거나 제거합니다.",
 	"wikibase-sitelinks-counter": "$1개의 {{PLURAL:$1|항목}}",
 	"wikibase-sitelinks-empty": "이 항목에 연결된 페이지가 없습니다.",
 	"wikibase-sitelinks-special": "다른 사이트",
