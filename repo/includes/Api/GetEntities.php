@@ -100,6 +100,11 @@ class GetEntities extends ApiBase {
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
+		// Would be of course injected!
+		$this->requestParser = new GetEntitiesRequestParser();
+		$this->requestHandler = new GetEntitiesRequestHandler();
+		$this->responsePresenter = new GetEntitiesResponsePresenter();
+
 		$this->stringNormalizer = $stringNormalizer;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
@@ -128,6 +133,11 @@ class GetEntities extends ApiBase {
 
 		$resolveRedirects = $params['redirects'] === 'yes';
 
+		$request = $this->requestParser->getRequest( $params );
+		$response = $this->requestHandler->handle( $request );
+		$this->responsePresenter->present( $response );
+
+		// All other stuff gets removed from here!
 		$entityIds = $this->getEntityIdsFromParams( $params );
 
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
