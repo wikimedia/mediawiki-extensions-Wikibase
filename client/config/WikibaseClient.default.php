@@ -97,6 +97,9 @@ return call_user_func( function() {
 			return $settings->hasSetting( 'hasFullEntityIdColumn' ) ?
 				$settings->getSetting( 'hasFullEntityIdColumn' ) : true;
 		},
+
+		// Database batch size in WikiPageUpdater which ChangeHandler uses
+		'wikiPageUpdaterDbBatchSize' => 50,
 	];
 
 	// Some defaults depend on information not available at this time.
