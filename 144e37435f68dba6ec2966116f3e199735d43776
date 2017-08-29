@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e7eab26_31145f4e",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "Should be the same as ChangeNotifier.php (see suggestion there).\n\nDone",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_12037e11",
         "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
         "patchSetId": 14
@@ -13,6 +30,24 @@
       "writtenOn": "2017-08-24T17:28:54Z",
       "side": 1,
       "message": "Hm... this field is in the database, but not documented in the interface. Would probably be nice to give it a getter, like we have for the timestamp, etc.",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5161ebfe",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_12037e11",
       "revId": "144e37435f68dba6ec2966116f3e199735d43776",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_f15b3755",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_084c9f41",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_68a8c3d8",
         "filename": "lib/includes/Changes/CentralIdLookupFactory.php",
         "patchSetId": 14
@@ -47,6 +100,24 @@
       "writtenOn": "2017-08-28T13:21:59Z",
       "side": 1,
       "message": "minor nit: could be also put in a PSR-4-compliant namespace.",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1157e329",
+        "filename": "lib/includes/Changes/CentralIdLookupFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_68a8c3d8",
       "revId": "144e37435f68dba6ec2966116f3e199735d43776",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_b1384fed",
+        "filename": "lib/includes/Changes/CentralIdLookupFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "It\u0027s used from WikibaseClient, RepoHooks, and WikibaseRepo.",
+      "parentUuid": "4e7eab26_922e8e87",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_a85d4bf1",
         "filename": "lib/includes/Changes/EntityChange.php",
         "patchSetId": 14
@@ -81,6 +170,24 @@
       "writtenOn": "2017-08-28T13:21:59Z",
       "side": 1,
       "message": "could be private?",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d13b9be6",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_a85d4bf1",
       "revId": "144e37435f68dba6ec2966116f3e199735d43776",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_51280b95",
+        "filename": "lib/tests/phpunit/Changes/EntityChangeTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "I think I was trying to ensure the mock was realistic enough not to break other code.  (It has any(), so I wasn\u0027t testing how many times getType is called.)\n\nBut indeed it turns out this is not necessary (not sure if it was before).",
+      "parentUuid": "4e7eab26_08bd7ffc",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_92452e49",
         "filename": "lib/tests/phpunit/Changes/MockRepoClientCentralIdLookup.php",
         "patchSetId": 14
@@ -121,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_d122bbb0",
+        "filename": "lib/tests/phpunit/Changes/MockRepoClientCentralIdLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure I can, since it\u0027s used from two different tests.\n\nIt\u0027s probably more readable this way, anyway.",
+      "parentUuid": "4e7eab26_92452e49",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_527266ad",
         "filename": "repo/includes/Notifications/ChangeNotifier.php",
         "patchSetId": 14
@@ -132,6 +275,24 @@
       "writtenOn": "2017-08-24T17:28:54Z",
       "side": 1,
       "message": "In that case, please assert manually:\nAssert::parameterType( \u0027CentralIdLookup|null\u0027, $centralIdLookup, \u0027$centralIdLookup\u0027 )",
+      "revId": "144e37435f68dba6ec2966116f3e199735d43776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1105a315",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2017-08-29T02:42:22Z",
+      "side": 1,
+      "message": "Cool, I didn\u0027t know about that.",
+      "parentUuid": "4e7eab26_527266ad",
       "revId": "144e37435f68dba6ec2966116f3e199735d43776",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
