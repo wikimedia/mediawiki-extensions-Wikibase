@@ -82,7 +82,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$this->editEntity = $this->editEntityFactory->newEditEntity(
 			$this->getUser(),
 			$id,
-			$baseRev
+			$baseRev,
+			$this->getRequest()->wasPosted()
 		);
 
 		return $this->editEntity;
