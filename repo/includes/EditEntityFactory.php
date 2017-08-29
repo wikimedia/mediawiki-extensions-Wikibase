@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use User;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -84,16 +83,22 @@ class EditEntityFactory {
 	/**
 	 * @param User $user the user performing the edit
 	 * @param EntityId|null $entityId the id of the entity to edit
-	 * @param int $baseRevId the base revision ID for conflict checking.
+	 * @param bool|int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
 	 *        effectively disabling conflict detections. true and false will be accepted for
 	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
 	 *        of EditEntity was changed so that "late" conflicts that arise between edit conflict
 	 *        detection and database update are always detected, and result in the update to fail.
 	 *
+	 * @param bool $allowMasterConnection Can use a master connection or not
 	 * @return EditEntity
 	 */
-	public function newEditEntity( User $user, EntityId $entityId = null, $baseRevId = false ) {
+	public function newEditEntity(
+		User $user,
+		EntityId $entityId = null,
+		$baseRevId = false,
+		$allowMasterConnection = true
+	) {
 		return new EditEntity(
 			$this->titleLookup,
 			$this->entityRevisionLookup,
@@ -104,7 +109,8 @@ class EditEntityFactory {
 			$entityId,
 			$user,
 			$this->editFilterHookRunner,
-			$baseRevId
+			$baseRevId,
+			$allowMasterConnection
 		);
 	}
 

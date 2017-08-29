@@ -115,6 +115,11 @@ class EditEntity {
 	private $errorType = 0;
 
 	/**
+	 * @var bool Can use a master connection or not
+	 */
+	private $allowMasterConnection;
+
+	/**
 	 * indicates a permission error
 	 */
 	const PERMISSION_ERROR = 1;
@@ -184,7 +189,8 @@ class EditEntity {
 		EntityId $entityId = null,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
-		$baseRevId = 0
+		$baseRevId = 0,
+		$allowMasterConnection
 	) {
 		$this->entityId = $entityId;
 
@@ -210,6 +216,7 @@ class EditEntity {
 		$this->entityPatcher = $entityPatcher;
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->allowMasterConnection = $allowMasterConnection;
 	}
 
 	/**
@@ -276,7 +283,7 @@ class EditEntity {
 			} elseif ( $id !== null ) {
 				$this->latestRevId = (int)$this->entityRevisionLookup->getLatestRevisionId(
 					$id,
-					EntityRevisionLookup::LATEST_FROM_MASTER
+					$this->getReplicaMode()
 				);
 			}
 		}
@@ -326,10 +333,11 @@ class EditEntity {
 				$this->baseRev = $this->getLatestRevision();
 			} else {
 				$id = $this->getEntityId();
+
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision(
 					$id,
 					$baseRevId,
-					EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+					$this->getReplicaMode()
 				);
 
 				if ( $this->baseRev === null ) {
@@ -340,6 +348,17 @@ class EditEntity {
 		}
 
 		return $this->baseRev;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getReplicaMode() {
+		if ( $this->allowMasterConnection === true ) {
+			return EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK;
+		} else {
+			return EntityRevisionLookup::LATEST_FROM_REPLICA;
+		}
 	}
 
 	/**
