@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_7b015907",
+        "filename": "data-access/src/PerRepositoryServiceContainerFactory.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-30T15:10:42Z",
+      "side": 1,
+      "message": "callable[]",
+      "revId": "82e043174edc6e44a55c6d0f3062a879316b1853",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
