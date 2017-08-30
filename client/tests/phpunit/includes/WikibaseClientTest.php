@@ -7,6 +7,7 @@ use Deserializers\Deserializer;
 use HashSiteStore;
 use Language;
 use RuntimeException;
+use Serializers\Serializer;
 use Site;
 use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
@@ -268,9 +269,14 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
-	public function testGetSerializerFactory() {
-		$serializerFactory = $this->getWikibaseClient()->getSerializerFactory();
+	public function testGetCompactSerializerFactory() {
+		$serializerFactory = $this->getWikibaseClient()->getCompactSerializerFactory();
 		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
+	}
+
+	public function testGetCompactEntitySerializer() {
+		$serializer = $this->getWikibaseClient()->getCompactEntitySerializer();
+		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 
 	public function testGetChangeHandler() {

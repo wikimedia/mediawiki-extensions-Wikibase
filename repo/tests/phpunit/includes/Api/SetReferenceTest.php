@@ -214,6 +214,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			foreach ( $propertyGroup as &$snak ) {
 				$this->assertArrayHasKey( 'datatype', $snak );
 				unset( $snak['datatype'] );
+				$this->assertArrayHasKey( 'hash', $snak );
+				unset( $snak['hash'] );
 			}
 		}
 

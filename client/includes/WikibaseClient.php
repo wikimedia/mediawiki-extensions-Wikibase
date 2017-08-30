@@ -136,9 +136,9 @@ final class WikibaseClient {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var Serializer[]
+	 * @var Serializer|null
 	 */
-	private $entitySerializers = [];
+	private $compactEntitySerializer = null;
 
 	/**
 	 * @var EntityIdParser|null
@@ -1002,34 +1002,33 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 * Returns a SerializerFactory creating serializers that generate the most compact serialization.
 	 *
 	 * @return SerializerFactory
 	 */
-	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
-		$baseSerializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-		return $baseSerializerFactory;
+	public function getCompactSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 * Returns an entity serializer that generates the most compact serialization.
 	 *
 	 * @return Serializer
 	 */
-	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
-		if ( !isset( $this->entitySerializers[$options] ) ) {
+	public function getCompactEntitySerializer() {
+		if ( $this->compactEntitySerializer === null ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getSerializerFactory( $options );
+			$baseSerializerFactory = $this->getCompactSerializerFactory();
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
 				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
 			}
 
-			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+			$this->compactEntitySerializer = new DispatchingSerializer( $serializers );
 		}
 
-		return $this->entitySerializers[$options];
+		return $this->compactEntitySerializer;
 	}
 
 	/**

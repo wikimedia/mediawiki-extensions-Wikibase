@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess\Tests;
 
 use Serializers\Serializer;
 use Wikibase\DataAccess\GenericServices;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -19,39 +18,18 @@ use Wikibase\StringNormalizer;
  */
 class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @dataProvider provideSerializerFactoryOptions
-	 */
-	public function testGetEntitySerializer( $options ) {
+	public function testGetEntitySerializer() {
 		$services = $this->newGenericServices();
-		$this->assertInstanceOf( Serializer::class, $services->getEntitySerializer( $options ) );
-	}
-
-	public function provideSerializerFactoryOptions() {
-		return [
-			[ SerializerFactory::OPTION_DEFAULT ],
-			[ SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH ],
-			[ SerializerFactory::OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH ],
-			[ SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH ],
-			[ SerializerFactory::OPTION_OBJECTS_FOR_MAPS ],
-			[
-				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH
-			]
-		];
+		$this->assertInstanceOf( Serializer::class, $services->getEntitySerializer() );
 	}
 
 	public function testGetEntitySerializerReturnsSingleInstanceForSameOptions() {
 		$services = $this->newGenericServices();
 
-		$defaultSerializerOne = $services->getEntitySerializer( SerializerFactory::OPTION_DEFAULT );
-		$defaultSerializerTwo = $services->getEntitySerializer( SerializerFactory::OPTION_DEFAULT );
+		$serializerOne = $services->getEntitySerializer();
+		$serializerTwo = $services->getEntitySerializer();
 
-		$otherSerializer = $services->getEntitySerializer( SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH );
-
-		$this->assertSame( $defaultSerializerOne, $defaultSerializerTwo );
-		$this->assertNotSame( $defaultSerializerOne, $otherSerializer );
+		$this->assertSame( $serializerOne, $serializerTwo );
 	}
 
 	public function testGetLanguageFallbackChainFactory() {

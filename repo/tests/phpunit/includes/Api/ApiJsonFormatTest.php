@@ -107,6 +107,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
+		$actual = $this->replaceHashesWithPlaceholder( $actual );
 
 		$this->assertEquals( $this->getExpectedJson( 'getentities' ), $actual );
 	}
@@ -140,6 +141,18 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$actual = $this->removePageInfoAttributes( $result );
 
 		$this->assertEquals( $this->getExpectedJson( 'setlabel-removed' ), $actual );
+	}
+
+	private function replaceHashesWithPlaceholder( array $json ) {
+		array_walk_recursive(
+			$json,
+			function( &$value, $key ) {
+				if ( $key === 'hash' ) {
+					$value = 'XXX';
+				}
+			}
+		);
+		return $json;
 	}
 
 }
