@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_f5455818",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-08-30T10:34:56Z",
+      "side": 1,
+      "message": "Use lowercase here, too.",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "8be0f0ac912aff51ac23dbf8247fb75fdc6ed979",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
