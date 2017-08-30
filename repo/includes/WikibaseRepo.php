@@ -200,9 +200,14 @@ class WikibaseRepo {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var Serializer[]
+	 * @var Serializer|null
 	 */
-	private $entitySerializers = [];
+	private $entitySerializer = null;
+
+	/**
+	 * @var Serializer|null
+	 */
+	private $compactEntitySerializer = null;
 
 	/**
 	 * @var EntityIdParser|null
@@ -1387,13 +1392,19 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
-	 *
 	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
-	 *  they are made of, but no other entity types.
+	 *  they are made of, but no other entity types. Snak hashes are serialized.
 	 */
-	public function getBaseDataModelSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
-		return new SerializerFactory( new DataValueSerializer(), $options );
+	public function getBaseDataModelSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
+	}
+
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Snak hashes are omitted in the serialization.
+	 */
+	public function getCompactSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
 	}
 
 	/**
@@ -1427,24 +1438,41 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
-	 *
-	 * @return Serializer
+	 * @return Serializer Entity serializer that includes snak hashes in the serialization
 	 */
-	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
-		if ( !isset( $this->entitySerializers[$options] ) ) {
+	public function getAllTypesEntitySerializer() {
+		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory( $options );
+			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
 				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
 			}
 
-			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+			$this->entitySerializer = new DispatchingSerializer( $serializers );
 		}
 
-		return $this->entitySerializers[$options];
+		return $this->entitySerializer;
+	}
+
+	/**
+	 * @return Serializer Entity serializer that omits snak hashes from the serialization
+	 */
+	public function getCompactEntitySerializer() {
+		if ( !isset( $this->compactEntitySerializer ) ) {
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$baseSerializerFactory = $this->getCompactSerializerFactory();
+			$serializers = [];
+
+			foreach ( $serializerFactoryCallbacks as $callback ) {
+				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
+			}
+
+			$this->compactEntitySerializer = new DispatchingSerializer( $serializers );
+		}
+
+		return $this->compactEntitySerializer;
 	}
 
 	/**
@@ -1636,9 +1664,6 @@ class WikibaseRepo {
 	 * @return ApiHelperFactory
 	 */
 	public function getApiHelperFactory( IContextSource $context ) {
-		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH
-			+ SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
-
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
@@ -1647,8 +1672,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
-			$this->getBaseDataModelSerializerFactory( $serializerOptions ),
-			$this->getAllTypesEntitySerializer( $serializerOptions ),
+			$this->getBaseDataModelSerializerFactory(),
+			$this->getAllTypesEntitySerializer(),
 			$this->getEntityIdParser(),
 			$this->getStore()->newSiteLinkStore(),
 			$this->getEntityFactory(),
@@ -1742,10 +1767,7 @@ class WikibaseRepo {
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->getLocalItemUriParser(),
-			$this->getAllTypesEntitySerializer(
-				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
-			),
+			$this->getCompactEntitySerializer(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )

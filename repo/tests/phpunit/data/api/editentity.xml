@@ -18,7 +18,7 @@
 			<property id="$propertyIdUnderTest">
 				<claim type="statement" id="$itemIdUnderTest$26D08148-75F5-4AD1-B340-3A6A2F32C202"
 					   rank="normal">
-					<mainsnak snaktype="value" property="$propertyIdUnderTest" datatype="string">
+					<mainsnak snaktype="value" hash="XXX" property="$propertyIdUnderTest" datatype="string">
 						<datavalue value="SomeMainVal" type="string"/>
 					</mainsnak>
 					<qualifiers>
@@ -37,7 +37,7 @@
 							<snaks>
 								<property id="$propertyIdUnderTest">
 									<snak snaktype="value" property="$propertyIdUnderTest"
-										  datatype="string">
+										  hash="XXX" datatype="string">
 										<datavalue value="SomeRefVal" type="string"/>
 									</snak>
 								</property>

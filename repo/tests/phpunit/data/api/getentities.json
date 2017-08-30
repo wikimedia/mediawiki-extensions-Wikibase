@@ -51,7 +51,8 @@
 						"mainsnak": {
 							"snaktype": "novalue",
 							"property": "$propertyIdUnderTest",
-							"datatype": "string"
+							"datatype": "string",
+							"hash": "XXX"
 						},
 						"type": "statement",
 						"id": "$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee",
