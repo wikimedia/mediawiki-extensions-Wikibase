@@ -337,7 +337,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$editEntityHandler = $this->editEntityFactory->newEditEntity(
 			$user,
 			$entity->getId(),
-			$this->baseRevisionId
+			$this->baseRevisionId,
+			true
 		);
 
 		$token = $this->evaluateTokenParam( $params );
