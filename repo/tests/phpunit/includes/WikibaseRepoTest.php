@@ -445,6 +445,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
 	}
 
+	public function testGetCompactSerializerFactory() {
+		$serializerFactory = $this->getWikibaseRepo()->getCompactSerializerFactory();
+		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
+	}
+
 	public function testGetInternalFormatEntityDeserializer() {
 		$deserializer = $this->getWikibaseRepo()->getInternalFormatEntityDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
@@ -452,6 +457,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetEntitySerializer() {
 		$serializer = $this->getWikibaseRepo()->getAllTypesEntitySerializer();
+		$this->assertInstanceOf( Serializer::class, $serializer );
+	}
+
+	public function testGetCompactEntitySerializer() {
+		$serializer = $this->getWikibaseRepo()->getCompactEntitySerializer();
 		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 

@@ -206,14 +206,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getEntityIdParser(),
 			$wikibaseClient->getRestrictedEntityLookup(),
 			$this->getUsageAccumulator(),
-			$wikibaseClient->getAllTypesEntitySerializer(
-				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
-			),
-			$wikibaseClient->getSerializerFactory(
-				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
-			)->newStatementListSerializer(),
+			$wikibaseClient->getCompactEntitySerializer(),
+			$wikibaseClient->getCompactSerializerFactory()->newStatementListSerializer(),
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$this->getLanguageFallbackChain(),
 			$this->getLanguage(),
