@@ -29,9 +29,9 @@ class GenericServices {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var Serializer[]
+	 * @var Serializer|null
 	 */
-	private $entitySerializers;
+	private $entitySerializer;
 
 	/**
 	 * @var LanguageFallbackChainFactory
@@ -59,32 +59,29 @@ class GenericServices {
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
-	 *
-	 * @return Serializer
+	 * @return Serializer Entity serializer that includes snak hashes in the serialization
 	 */
-	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
-		if ( !isset( $this->entitySerializers[$options] ) ) {
+	public function getEntitySerializer() {
+		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$baseSerializerFactory = $this->getSerializerFactory( $options );
+			$baseSerializerFactory = $this->getSerializerFactory();
 			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
 				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
 			}
 
-			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+			$this->entitySerializer = new DispatchingSerializer( $serializers );
 		}
 
-		return $this->entitySerializers[$options];
+		return $this->entitySerializer;
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
 	 * @return SerializerFactory
 	 */
-	private function getSerializerFactory( $options ) {
-		return new SerializerFactory( new DataValueSerializer(), $options );
+	private function getSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT );
 	}
 
 	/**
