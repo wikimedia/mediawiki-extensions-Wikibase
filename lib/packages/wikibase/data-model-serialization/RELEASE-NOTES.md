@@ -1,5 +1,13 @@
 # Wikibase DataModel Serialization release notes
 
+## 2.5.0 (dev)
+
+* Deprecated `SerializerFactory` options
+  `OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH`,
+  `OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH` and
+  `OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH`,
+  and added `OPTION_SERIALIZE_SNAKS_WITHOUT_HASH` instead
+
 ## 2.4.0 (2017-03-16)
 
 * Added compatibility with Wikibase DataModel 7.x
