@@ -16,6 +16,24 @@
       "revId": "d02b3ba6524d4c4a65fc833e2b514b9b9adaaaf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_15382439",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-30T11:58:00Z",
+      "side": 1,
+      "message": "Done in PS6.",
+      "parentUuid": "4e7eab26_076fbaf9",
+      "revId": "d02b3ba6524d4c4a65fc833e2b514b9b9adaaaf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
