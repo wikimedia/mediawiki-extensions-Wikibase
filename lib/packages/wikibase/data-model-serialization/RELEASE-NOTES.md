@@ -1,7 +1,9 @@
 # Wikibase DataModel Serialization release notes
 
-## 2.5.0 (dev)
+## 2.5.0 (2017-08-30)
 
+* Removed MediaWiki integration files
+* Added compatibility with DataValues Geo 2.x
 * Deprecated `SerializerFactory` options
   `OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH`,
   `OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH` and
