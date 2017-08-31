@@ -105,14 +105,20 @@ class ElasticTermResult implements ResultsType {
 				'type' => 'experimental',
 				'fragmenter' => "none",
 				'number_of_fragments' => 0,
-				'options' => [ 'skip_if_last_matched' => true ],
+				'options' => [
+					'skip_if_last_matched' => true,
+					'return_snippets_and_offsets' => true
+				],
 			];
 		}
-		$config['fields']['labels_all.prefix'] = [
+		$config['fields']['labels.*.prefix'] = [
 			'type' => 'experimental',
 			'fragmenter' => "none",
 			'number_of_fragments' => 0,
-			'options' => [ 'skip_if_last_matched' => true ],
+			'options' => [
+				'skip_if_last_matched' => true,
+				'return_snippets_and_offsets' => true
+			],
 		];
 
 		return $config;
@@ -172,7 +178,6 @@ class ElasticTermResult implements ResultsType {
 
 			// Highlight part contains information about what has actually been matched.
 			$highlight = $r->getHighlights();
-			$matchedTermType = 'label';
 			$displayLabel = $this->findTermForDisplay( $sourceData, 'labels' );
 			$displayDescription = $this->findTermForDisplay( $sourceData, 'descriptions' );
 
@@ -184,25 +189,8 @@ class ElasticTermResult implements ResultsType {
 				// Something went wrong, we don't have any highlighting data
 				continue;
 			} else {
-				// We matched the actual label - find which language it is and
-				// whether it's main label (always first) or alias (not first)
-				$term = reset( $highlight );
-				$term = $term[0]; // Highlighter returns array
-				$field = key( $highlight );
-				if ( preg_match( '/^labels\.(.+?)\.prefix$/', $field, $match ) ) {
-					$langCode = $match[1];
-					if ( !empty( $sourceData['labels'][$langCode] ) ) {
-						// Primary label always comes first, so if it's not the first one,
-						// it's an alias.
-						if ( $sourceData['labels'][$langCode][0] !== $term ) {
-							$matchedTermType = 'alias';
-						}
-					}
-				} else {
-					// This is weird since we didn't ask to match anything else,
-					// but we'll return it anyway for debugging.
-					$langCode = 'unknown';
-				}
+				list( $matchedTermType, $langCode, $term ) =
+					$this->extractTermFromHighlight( $highlight, $sourceData );
 				$matchedTerm = new Term( $langCode, $term );
 			}
 
@@ -218,6 +206,60 @@ class ElasticTermResult implements ResultsType {
 		}
 
 		return $results;
+	}
+
+	/**
+	 * New highlighter pattern.
+	 * The new highlighter can return offsets as: 1:1-XX:YY|Text Snippet
+	 * or even SNIPPET_START:MATCH1_START-MATCH1_END,MATCH2_START-MATCH2_END,...:SNIPPET_END|Text
+	 */
+	const HIGHLIGHT_PATTERN = '/^\d+:(?:\d+-\d+)(?:,\d+-\d+)*:\d+\|(.+)/';
+
+	/**
+	 * Extract term, language and type from highlighter results.
+	 * @param array $highlight Data from highlighter
+	 * @param array $sourceData Data from _source
+	 * @return array [ type, language, term ]
+	 */
+	private function extractTermFromHighlight( array $highlight, $sourceData ) {
+		/**
+		 * Highlighter returns:
+		 * {
+		 *   labels.en.prefix: [
+		 *	  "metre"  // or "0:0-5:5|metre"
+		 *   ]
+		 * }
+		 */
+		$matchedTermType = 'label';
+		$term = reset( $highlight ); // Take the first one
+		$term = $term[0]; // Highlighter returns array
+		$field = key( $highlight );
+		if ( preg_match( '/^labels\.(.+?)\.prefix$/', $field, $match ) ) {
+			$langCode = $match[1];
+			if ( preg_match( self::HIGHLIGHT_PATTERN, $term, $termMatch ) ) {
+				$isFirst = ( $term[0] === '0' );
+				$term = $termMatch[1];
+			} else {
+				$isFirst = true;
+			}
+			if ( !empty( $sourceData['labels'][$langCode] ) ) {
+				// Here we have match in one of the languages we asked for.
+				// Primary label always comes first, so if it's not the first one,
+				// it's an alias.
+				if ( $sourceData['labels'][$langCode][0] !== $term ) {
+					$matchedTermType = 'alias';
+				}
+			} else {
+				// Here we have match in one of the "other" languages.
+				// If it's the first one in the list, it's label, otherwise it is alias.
+				$matchedTermType = $isFirst ? 'label' : 'alias';
+			}
+		} else {
+			// This is weird since we didn't ask to match anything else,
+			// but we'll return it anyway for debugging.
+			$langCode = 'unknown';
+		}
+		return [ $matchedTermType, $langCode, $term ];
 	}
 
 	/**

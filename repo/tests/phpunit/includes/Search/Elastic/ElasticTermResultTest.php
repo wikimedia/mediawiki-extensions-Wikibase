@@ -208,6 +208,120 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 					'matchedType' => 'alias'
 				],
 			],
+		    'other language, label' => [
+			    [ 'en' ],
+			    [ 'en' ],
+			    [
+				    '_source' => [
+					    'title' => 'Q56',
+					    'labels' => [
+						    'en' => [ 'Name', 'And alias' ],
+					    ],
+				    ],
+				    'highlight' => [ 'labels.de.prefix' => [ 'Something else' ] ]
+			    ],
+			    [
+				    'id' => 'Q56',
+				    'label' => [ 'en', 'Name' ],
+				    'matched' => [ 'de', 'Something else' ],
+				    'matchedType' => 'label'
+			    ],
+		    ],
+			'simple, new highlighter' => [
+				[ 'en' ],
+				[ 'en' ],
+				[
+					'_source' => [
+						'title' => 'Q71',
+						'labels' => [ 'en' => [ 'Test 1', 'Test 1 alias' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
+					],
+					'highlight' => [ 'labels.en.prefix' => [ '0:0-5:5|Test 1' ] ]
+				],
+				[
+					'id' => 'Q71',
+					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
+					'matched' => [ 'en', 'Test 1' ],
+					'matchedType' => 'label'
+				]
+			],
+			'alias, new highlighter' => [
+				[ 'en' ],
+				[ 'en' ],
+				[
+					'_source' => [
+						'title' => 'Q82',
+						'labels' => [ 'en' => [ 'Test 1', 'Alias', 'Another' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
+					],
+					'highlight' => [ 'labels.en.prefix' => [ '10:10-15:15|Another' ] ]
+				],
+				[
+					'id' => 'Q82',
+					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
+					'matched' => [ 'en', 'Another' ],
+					'matchedType' => 'alias'
+				]
+			],
+			'other language, new hl' => [
+				[ 'en' ],
+				[ 'en' ],
+				[
+					'_source' => [
+						'title' => 'Q96',
+						'labels' => [
+							'en' => [ 'Name', 'And alias' ],
+						],
+					],
+					'highlight' => [ 'labels.de.prefix' => [ '0:0-7:7|Something else' ] ]
+				],
+				[
+					'id' => 'Q96',
+					'label' => [ 'en', 'Name' ],
+					'matched' => [ 'de', 'Something else' ],
+					'matchedType' => 'label'
+				],
+			],
+			'other language, alias, new hl' => [
+				[ 'en' ],
+				[ 'en' ],
+				[
+					'_source' => [
+						'title' => 'Q106',
+						'labels' => [
+							'en' => [ 'Name', 'And alias' ],
+						],
+					],
+					'highlight' => [ 'labels.de.prefix' => [ '1:1-8:8|Something else' ] ]
+				],
+				[
+					'id' => 'Q106',
+					'label' => [ 'en', 'Name' ],
+					'matched' => [ 'de', 'Something else' ],
+					'matchedType' => 'alias'
+				],
+			],
+			'alias, new highlighter, extended' => [
+				[ 'en' ],
+				[ 'en' ],
+				[
+					'_source' => [
+						'title' => 'Q117',
+						'labels' => [ 'en' => [ 'Test 1', 'Alias', 'Another' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
+					],
+					'highlight' => [ 'labels.en.prefix' => [ '10:10-15,20-30,40-45:15|Another' ] ]
+				],
+				[
+					'id' => 'Q117',
+					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
+					'matched' => [ 'en', 'Another' ],
+					'matchedType' => 'alias'
+				]
+			],
 
 		];
 	}
