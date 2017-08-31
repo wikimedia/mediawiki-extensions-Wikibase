@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Uchup19"
+		]
+	},
+	"valueview-expert-advancedadjustments": "paluyuan lanjutan",
+	"valueview-expert-emptyvalue-empty": "kosong",
+	"valueview-expert-globecoordinateinput-precision": "Kapersisan:",
+	"valueview-expert-globecoordinateinput-nullprecision": "teu tangtu",
+	"valueview-expert-globecoordinateinput-customprecision": "husus ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Grégorian",
+	"valueview-expert-timevalue-calendar-julian": "Julian",
+	"valueview-expert-timeinput-precision": "Kapersisan:",
+	"valueview-expert-timeinput-calendar": "Kalénder:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Basa (diperlukeun):",
+	"valueview-expertextender-unitsuggester-label": "Unit (opsional):",
+	"valueview-preview-label": "bakal ditempokeun minangka:",
+	"valueview-listrotator-manually": "atur manual"
+}
