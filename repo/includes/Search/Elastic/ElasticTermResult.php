@@ -105,14 +105,20 @@ class ElasticTermResult implements ResultsType {
 				'type' => 'experimental',
 				'fragmenter' => "none",
 				'number_of_fragments' => 0,
-				'options' => [ 'skip_if_last_matched' => true ],
+				'options' => [
+					'skip_if_last_matched' => true,
+					'return_snippets_and_offsets' => true
+				],
 			];
 		}
-		$config['fields']['labels_all.prefix'] = [
+		$config['fields']['labels.*.prefix'] = [
 			'type' => 'experimental',
 			'fragmenter' => "none",
 			'number_of_fragments' => 0,
-			'options' => [ 'skip_if_last_matched' => true ],
+			'options' => [
+				'skip_if_last_matched' => true,
+				'return_snippets_and_offsets' => true
+			],
 		];
 
 		return $config;
