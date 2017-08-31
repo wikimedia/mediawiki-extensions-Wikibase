@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Search\Elastic;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\ConstantScore;
+use Elastica\Query\DisMax;
 use Elastica\Query\Match;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
@@ -142,11 +144,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$labelsFilter = new Match( 'labels_all.prefix', $text );
 
-		$labelsMulti = new MultiMatch();
-		$labelsMulti->setType( 'best_fields' );
-		$labelsMulti->setTieBreaker( 0 );
-		$labelsMulti->setQuery( $text );
-
 		$profileName = $this->request->getVal( 'cirrusWBProfile', $this->settings['defaultPrefixProfile'] );
 		$profile = $this->loadProfile( $profileName );
 		if ( !$profile ) {
@@ -155,38 +152,44 @@ class EntitySearchElastic implements EntitySearchHelper {
 			return $query;
 		}
 
+		$dismax = new DisMax();
+		$dismax->setTieBreaker( 0 );
+
 		$fields = [
-			"labels.{$languageCode}.near_match^{$profile['lang-exact']}",
-			"labels.{$languageCode}.near_match_folded^{$profile['lang-folded']}",
-			"labels.{$languageCode}.prefix^{$profile['lang-prefix']}",
+			[ "labels.{$languageCode}.near_match", $profile['lang-exact'] ],
+			[ "labels.{$languageCode}.near_match_folded", $profile['lang-folded'] ],
+			[ "labels.{$languageCode}.prefix", $profile['lang-prefix'] ],
 		];
 
 		$langChain = $this->languageChainFactory->newFromLanguageCode( $languageCode );
 		$this->searchLanguageCodes = $langChain->getFetchLanguageCodes();
 		if ( !$strictLanguage ) {
-			$fields[] = "labels_all.near_match_folded^{$profile['any']}";
-			$discount = 1;
+			$fields[] = [ "labels_all.near_match_folded", $profile['any'] ];
+			$discount = $profile['fallback-discount'];
 			foreach ( $this->searchLanguageCodes as $fallbackCode ) {
 				if ( $fallbackCode === $languageCode ) {
 					continue;
 				}
 				$weight = $profile['fallback-exact'] * $discount;
-				$fields[] = "labels.{$fallbackCode}.near_match^$weight";
+				$fields[] = [ "labels.{$fallbackCode}.near_match", $weight ];
 				$weight = $profile['fallback-folded'] * $discount;
-				$fields[] = "labels.{$fallbackCode}.near_match_folded^$weight";
+				$fields[] = [ "labels.{$fallbackCode}.near_match_folded", $weight ];
 				$weight = $profile['fallback-prefix'] * $discount;
-				$fields[] = "labels.{$fallbackCode}.prefix^$weight";
+				$fields[] = [ "labels.{$fallbackCode}.prefix", $weight ];
 				$discount *= $profile['fallback-discount'];
 			}
 		}
-		$labelsMulti->setFields( $fields );
+
+		foreach ($fields as $field) {
+			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $text ) );
+		}
 
 		$labelsQuery = new BoolQuery();
 		$labelsQuery->addFilter( $labelsFilter );
 		if ( $strictLanguage ) {
-			$labelsQuery->addMust( $labelsMulti );
+			$labelsQuery->addMust( $dismax );
 		} else {
-			$labelsQuery->addShould( $labelsMulti );
+			$labelsQuery->addShould( $dismax );
 		}
 		$titleMatch = new Term( [ 'title.keyword' => $text ] );
 
@@ -199,6 +202,20 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query->addFilter( new Term( [ 'content_model' => $this->contentModelMap[$entityType] ] ) );
 
 		return $query;
+	}
+
+	/**
+	 * Create constant score query for a field.
+	 * @param string $field
+	 * @param string|double $boost
+	 * @param string $text
+	 * @return ConstantScore
+	 */
+	private function makeConstScoreQuery( $field, $boost, $text ) {
+		$csquery = new ConstantScore();
+		$csquery->setFilter( new Match ( $field, $text ) );
+		$csquery->setBoost( $boost );
+		return $csquery;
 	}
 
 	/**

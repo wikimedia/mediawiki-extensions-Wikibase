@@ -1,17 +1,17 @@
 <?php
 // ElasticSearch function for entity weight
-// TODO: this will be amended with better criteria after we ensure the implementation works.
 return [
 	'entity_weight' => [
-		'score_mode' => 'max',
+		'score_mode' => 'sum',
 		'functions' => [
 			[
-				'type' => 'custom_field',
-				'params' => [ 'field' => 'label_count', 'missing' => 0 ]
+				'type' => 'satu',
+				'weight' => '1.2',
+				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 2 , 'k' => 50 ]
 			],
 			[
-				'type' => 'custom_field',
-				'params' => [ 'field' => 'sitelink_count', 'missing' => 0 ]
+				'type' => 'satu',
+				'params' => [ 'field' => 'sitelink_count', 'missing' => 0, 'a' => 2, 'k' => 20 ]
 			],
 		],
 	],
