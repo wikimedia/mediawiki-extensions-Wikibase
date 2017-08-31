@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_d213875b",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-31T14:32:00Z",
+      "side": 1,
+      "message": "You\u0027re right. This here is not new though. Currently the only place where it is relevant is the dispatching term search interactor factory which does require for now to have a single entity type per repo.\nAlso the loop below guards against the \"conflict\".\n\nI will make this generic in the interface but the implementation here plus the code instantiating DispatchingTermSearchInteractorFactory will still protest when there is two repos with the same entity type.",
+      "parentUuid": "4e7eab26_1798217a",
+      "revId": "2e81b9823bd2296064afe194f0155e498352f458",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_9792d155",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 6
