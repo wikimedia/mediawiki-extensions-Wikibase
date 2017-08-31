@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_d713795b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-08-31T12:47:21Z",
+      "side": 1,
+      "message": "I think I meant for this to look like line 722, but you’re right, it’s not necessary (where as the GUID can be null).",
+      "parentUuid": "4e7eab26_fc653c0d",
+      "range": {
+        "startLine": 726,
+        "startChar": 32,
+        "endLine": 726,
+        "endChar": 65
+      },
+      "revId": "9b9a28b994fa06d3bad363d6ca95da1d3b76ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_bc8494a3",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 1
