@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b7ed8db5",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T13:55:28Z",
+      "side": 1,
+      "message": "Do we really need to have these in this interface? They should never be used by application logic! \n\nIf we must have them, make the name a very clear warning, like getBaseModelSerializerFactory.",
+      "revId": "43caadbe88b93742136a342b197172b4c911c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_573b0936",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T13:55:28Z",
+      "side": 1,
+      "message": "that only returns base model serializers? why?",
+      "revId": "43caadbe88b93742136a342b197172b4c911c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
