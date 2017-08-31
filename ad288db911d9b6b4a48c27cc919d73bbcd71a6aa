@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_d2b70733",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T14:47:26Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s necessary to rename this string key. Sure, it\u0027s more consistent. But is there a chance we are ever going to implement an other \"…EntitySerializer\" in the same service map?",
+      "range": {
+        "startLine": 143,
+        "startChar": 4,
+        "endLine": 143,
+        "endChar": 8
+      },
+      "revId": "ad288db911d9b6b4a48c27cc919d73bbcd71a6aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
