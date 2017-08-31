@@ -20,7 +20,7 @@ class SnaksFinder {
 	 * @param PropertyId $propertyId The PropertyId for which we want the formatted Snaks
 	 * @param int[]|null $acceptableRanks
 	 *
-	 * @return Snak[]
+	 * @return Snak[] List of main snaks, all guaranteed to belong to the same property ID.
 	 */
 	public function findSnaks(
 		StatementListProvider $statementListProvider,
