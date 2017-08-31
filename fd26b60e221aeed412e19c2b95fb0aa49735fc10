@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5c7330e5",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-08-31T12:32:50Z",
+      "side": 1,
+      "message": "CSS class missing isn’t possible, since the non-hash part is (at least in the current version) part of the template. But I guess empty string is okay.",
+      "parentUuid": "4e7eab26_9c6af810",
+      "range": {
+        "startLine": 74,
+        "startChar": 33,
+        "endLine": 74,
+        "endChar": 60
+      },
+      "revId": "fd26b60e221aeed412e19c2b95fb0aa49735fc10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_5ce6d0ab",
         "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
         "patchSetId": 1
