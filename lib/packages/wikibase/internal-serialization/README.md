@@ -106,6 +106,11 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
+### 2.5.0 (2017-08-30)
+
+* Added compatibility with DataValues Geo 2.x
+* Removed MediaWiki integration files
+
 ### 2.4.0 (2017-03-16)
 
 * Added compatibility with Wikibase DataModel 7.x
