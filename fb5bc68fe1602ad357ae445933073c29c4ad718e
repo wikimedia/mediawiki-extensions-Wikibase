@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_f76795e3",
+        "filename": "data-access/src/GenericServices.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T13:07:29Z",
+      "side": 1,
+      "message": "should this be called getCompactSerializerFactory? The usage above seems to assume that this is guaranteed to be a factory for compact serializers.",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d758592b",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T13:07:29Z",
+      "side": 1,
+      "message": "I\u0027s like to have more explicit contrast to \"compact\" in the name. getFullEntitySerializer? getExpandedEntitySerializer? getVerboseEntitySerializer?",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_77a2c5fb",
+        "filename": "data-access/tests/phpunit/MultipleRepositoryAwareWikibaseServicesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T13:07:29Z",
+      "side": 1,
+      "message": "Isn\u0027t it part of the list returned by getServiceNames()? Should it be?",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_37a8bdd7",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1444,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T13:07:29Z",
+      "side": 1,
+      "message": "At some point, this should no longer be optional.",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
