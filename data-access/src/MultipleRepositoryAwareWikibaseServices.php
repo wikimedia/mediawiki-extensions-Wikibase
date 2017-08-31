@@ -140,8 +140,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			'EntityRevisionLookup' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getEntityRevisionLookup();
 			},
-			'EntitySerializer' => function() use ( $genericServices ) {
-				return $genericServices->getEntitySerializer();
+			'FullEntitySerializer' => function() use ( $genericServices ) {
+				return $genericServices->getFullEntitySerializer();
 			},
 			'CompactEntitySerializer' => function() use ( $genericServices ) {
 				return $genericServices->getCompactEntitySerializer();
@@ -199,8 +199,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer() {
-		return $this->getService( 'EntitySerializer' );
+	public function getFullEntitySerializer() {
+		return $this->getService( 'FullEntitySerializer' );
 	}
 
 	/**

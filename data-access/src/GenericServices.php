@@ -66,7 +66,7 @@ class GenericServices {
 	/**
 	 * @return Serializer Entity serializer that generates the full (expanded) serialization.
 	 */
-	public function getEntitySerializer() {
+	public function getFullEntitySerializer() {
 		if ( !isset( $this->entitySerializer ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();

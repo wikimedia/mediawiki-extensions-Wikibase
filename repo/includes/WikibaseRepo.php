@@ -1452,7 +1452,7 @@ class WikibaseRepo {
 	 */
 	public function getAllTypesEntitySerializer() {
 		if ( $this->wikibaseServices !== null ) {
-			return $this->wikibaseServices->getEntitySerializer();
+			return $this->wikibaseServices->getFullEntitySerializer();
 		}
 
 		if ( !isset( $this->entitySerializer ) ) {

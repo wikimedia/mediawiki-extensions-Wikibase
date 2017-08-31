@@ -21,14 +21,14 @@ class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntitySerializer() {
 		$services = $this->newGenericServices();
-		$this->assertInstanceOf( Serializer::class, $services->getEntitySerializer() );
+		$this->assertInstanceOf( Serializer::class, $services->getFullEntitySerializer() );
 	}
 
 	public function testGetEntitySerializerReusesTheInstanceForMultipleCalls() {
 		$services = $this->newGenericServices();
 
-		$serializerOne = $services->getEntitySerializer();
-		$serializerTwo = $services->getEntitySerializer();
+		$serializerOne = $services->getFullEntitySerializer();
+		$serializerTwo = $services->getFullEntitySerializer();
 
 		$this->assertSame( $serializerOne, $serializerTwo );
 	}

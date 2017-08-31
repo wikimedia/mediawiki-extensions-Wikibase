@@ -44,7 +44,7 @@ interface WikibaseServices {
 	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer();
+	public function getFullEntitySerializer();
 
 	/**
 	 * Returns the entity serializer instance that generates the most compact serialization.
