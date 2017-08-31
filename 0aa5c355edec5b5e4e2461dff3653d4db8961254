@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_52f9d7e3",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T15:09:32Z",
+      "side": 1,
+      "message": "The use of \"!important\" should really, really be limited to an absolute minimum, with \"never\" being the optimum.\n\nHow strong are the actual \"valueview styles\" mentioned here? I do see a \".wikibase-entityview input\" selector for the border, but none for a background color. Which means the same can be achieved by making this selector a little more specific.\n\nFixed in I5f7ee8c.",
+      "range": {
+        "startLine": 74,
+        "startChar": 10,
+        "endLine": 74,
+        "endChar": 45
+      },
+      "revId": "0aa5c355edec5b5e4e2461dff3653d4db8961254",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
