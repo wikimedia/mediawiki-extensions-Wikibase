@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_9e58a92a",
+        "filename": "repo/config/ElasticSearchRescoreProfiles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-08-31T20:45:22Z",
+      "side": 1,
+      "message": "doesn\u0027t need to be resolved in this patch, but this reminds me that this query profile will be offered up as a valid option for api search requests with the `qiprofile` parameter, except this profile probably isn\u0027t valid for full text search. Probably needs a level of filters or some such to \"hide\" filters from ApiQuerySearch?",
+      "revId": "a7628125652dd15a6d96f57abd0fd88510b37210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
