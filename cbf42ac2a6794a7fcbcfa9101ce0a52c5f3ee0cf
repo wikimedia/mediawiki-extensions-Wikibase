@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_57e6a9ab",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T14:17:43Z",
+      "side": 1,
+      "message": "There is \\d in Ecmascript.",
+      "range": {
+        "startLine": 630,
+        "startChar": 55,
+        "endLine": 630,
+        "endChar": 58
+      },
+      "revId": "cbf42ac2a6794a7fcbcfa9101ce0a52c5f3ee0cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_379afd17",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T14:17:43Z",
+      "side": 1,
+      "message": "matches",
+      "range": {
+        "startLine": 630,
+        "startChar": 8,
+        "endLine": 630,
+        "endChar": 13
+      },
+      "revId": "cbf42ac2a6794a7fcbcfa9101ce0a52c5f3ee0cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_979731ee",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T14:17:43Z",
+      "side": 1,
+      "message": "return match ? match.join( \u0027 \u0027 ) : \u0027\u0027;",
+      "range": {
+        "startLine": 631,
+        "startChar": 4,
+        "endLine": 635,
+        "endChar": 5
+      },
+      "revId": "cbf42ac2a6794a7fcbcfa9101ce0a52c5f3ee0cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
