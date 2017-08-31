@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_77bba571",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-31T14:17:39Z",
+      "side": 1,
+      "message": "it uses it get serializers for statements, references, terms, alias groups, site links and this kind of stuff. It does not use for serializer of items or properties. Clearly it gets too wide service.",
+      "parentUuid": "4e7eab26_b7f7cd54",
+      "revId": "43caadbe88b93742136a342b197172b4c911c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_573b0936",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 8
