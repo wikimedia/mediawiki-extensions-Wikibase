@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Serializer;
+namespace Wikibase\DataAccess\Serializer;
 
 use RuntimeException;
 use Serializers\Serializer;
