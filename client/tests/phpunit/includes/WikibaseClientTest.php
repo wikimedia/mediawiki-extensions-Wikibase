@@ -270,7 +270,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetCompactSerializerFactory() {
-		$serializerFactory = $this->getWikibaseClient()->getCompactSerializerFactory();
+		$serializerFactory = $this->getWikibaseClient()->getCompactBaseDataModelSerializerFactory();
 		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
 	}
 
