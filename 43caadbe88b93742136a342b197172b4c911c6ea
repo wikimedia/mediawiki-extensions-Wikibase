@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_b7f7cd54",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-31T14:13:10Z",
+      "side": 1,
+      "message": "I can\u0027t think of a good reason for ResultBuilder to use the \"Item/Property only\" serializers.... or is it because these also expose methods for serializing statements, etc?\n\nIn that case, there should be an interface for that functionality, and a service name to go with it.",
+      "parentUuid": "4e7eab26_d71e19bd",
+      "revId": "43caadbe88b93742136a342b197172b4c911c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_573b0936",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 8
