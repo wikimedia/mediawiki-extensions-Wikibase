@@ -68,7 +68,7 @@ return [
 		} elseif ( $services->getRepositoryName() !== '' ) {
 			$serializer = new ForbiddenSerializer( 'Serialization of foreign entities is not supported!' );
 		} else {
-			$serializer = $genericServices->getEntitySerializer();
+			$serializer = $genericServices->getFullEntitySerializer();
 		}
 
 		$codec = new EntityContentDataCodec(
