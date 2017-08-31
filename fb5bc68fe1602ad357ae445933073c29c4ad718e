@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_976091a1",
+        "filename": "data-access/src/GenericServices.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-31T13:40:32Z",
+      "side": 1,
+      "message": "this is actually wrong here, as it is indeed meant as an \"compact\" one but it returns the \"full\" one. Will fix. Can rename. This class gets two public methods returning each of factory types any way in: I80d4a175caa9820e2dee7e8653ed71baec3fb5fe  so I guess it does not matter how it would be called here.",
+      "parentUuid": "4e7eab26_f76795e3",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_d758592b",
         "filename": "data-access/src/WikibaseServices.php",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_370afdd5",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-31T13:40:32Z",
+      "side": 1,
+      "message": "I thought it will be contrasted as this one is \"normal\" as in \"complete\" one, and the other one is compact. But will make this one getFullEntitySerializer, sure.",
+      "parentUuid": "4e7eab26_d758592b",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_77a2c5fb",
         "filename": "data-access/tests/phpunit/MultipleRepositoryAwareWikibaseServicesTest.php",
         "patchSetId": 9
@@ -47,6 +83,24 @@
       "writtenOn": "2017-08-31T13:07:29Z",
       "side": 1,
       "message": "Isn\u0027t it part of the list returned by getServiceNames()? Should it be?",
+      "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d7f939c2",
+        "filename": "data-access/tests/phpunit/MultipleRepositoryAwareWikibaseServicesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-08-31T13:40:32Z",
+      "side": 1,
+      "message": "meh, it was a leftover from the previous version. it was not. it should be. will add.",
+      "parentUuid": "4e7eab26_77a2c5fb",
       "revId": "fb5bc68fe1602ad357ae445933073c29c4ad718e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
