@@ -6,6 +6,7 @@ use Language;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -146,7 +147,7 @@ class StatementTransclusionInteractor {
 	}
 
 	/**
-	 * @param Snak[] $snaks
+	 * @param Snak[] $snaks List of main snaks, all guaranteed to belong to the same property ID.
 	 *
 	 * @return string wikitext
 	 */
