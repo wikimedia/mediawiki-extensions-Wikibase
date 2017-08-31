@@ -14,7 +14,7 @@ return [
 				'window_size_override' => 'EntitySearchRescoreWindowSize',
 				'query_weight' => 1.0,
 				'rescore_query_weight' => 1.0,
-				'score_mode' => 'multiply',
+				'score_mode' => 'total',
 				'type' => 'function_score',
 				'function_chain' => 'entity_weight'
 			],
