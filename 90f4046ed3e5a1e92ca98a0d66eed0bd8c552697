@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_d2a38795",
+        "filename": "repo/tests/phpunit/includes/Api/WikibaseApiTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-08-31T15:30:51Z",
+      "side": 1,
+      "message": "Haha, and I was going painstakingly through each test and adding a hash to all the expected values :D",
+      "revId": "90f4046ed3e5a1e92ca98a0d66eed0bd8c552697",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
