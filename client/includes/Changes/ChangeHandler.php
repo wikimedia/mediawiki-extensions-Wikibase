@@ -5,6 +5,7 @@ namespace Wikibase\Client\Changes;
 use Exception;
 use Hooks;
 use InvalidArgumentException;
+use LinkBatch;
 use MWException;
 use SiteLookup;
 use Title;
@@ -112,6 +113,8 @@ class ChangeHandler {
 
 		// Run all updates on all affected pages
 		$titlesToUpdate = $this->getTitlesForUsages( $usagesPerPage );
+
+		( new LinkBatch( $titlesToUpdate ) )->execute();
 
 		$this->updater->purgeWebCache( $titlesToUpdate );
 		$this->updater->scheduleRefreshLinks( $titlesToUpdate );
