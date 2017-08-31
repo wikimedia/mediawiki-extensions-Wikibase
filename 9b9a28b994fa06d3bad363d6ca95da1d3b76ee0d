@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_fc653c0d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T12:36:32Z",
+      "side": 1,
+      "message": "How can this ever return a falsy value? As far as I can see this is guaranteed to return a Snak object.\n\nI guess this was meant to be \"\u0026\u0026 value\", because that can be null.",
+      "range": {
+        "startLine": 726,
+        "startChar": 32,
+        "endLine": 726,
+        "endChar": 65
+      },
+      "revId": "9b9a28b994fa06d3bad363d6ca95da1d3b76ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_bc8494a3",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T12:36:32Z",
+      "side": 1,
+      "message": "I think this is pointless because this method is guaranteed to return a SnakList object.\n\nMaybe this is meant to stop propagation if there are no qualifiers. This would be wrong. The sub-widget would not update if the last qualifier was removed.\n\nI guess this was meant to be \"\u0026\u0026 value\", because that can be null.",
+      "range": {
+        "startLine": 729,
+        "startChar": 26,
+        "endLine": 729,
+        "endChar": 61
+      },
+      "revId": "9b9a28b994fa06d3bad363d6ca95da1d3b76ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_bc5b3456",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T12:36:32Z",
+      "side": 1,
+      "message": "A check for \"\u0026\u0026 value\" is missing here, too.",
+      "range": {
+        "startLine": 732,
+        "startChar": 27,
+        "endLine": 732,
+        "endChar": 28
+      },
+      "revId": "9b9a28b994fa06d3bad363d6ca95da1d3b76ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3c47447d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T12:36:32Z",
+      "side": 1,
+      "message": "Same issue here.",
+      "range": {
+        "startLine": 735,
+        "startChar": 34,
+        "endLine": 735,
+        "endChar": 58
+      },
+      "revId": "9b9a28b994fa06d3bad363d6ca95da1d3b76ee0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
