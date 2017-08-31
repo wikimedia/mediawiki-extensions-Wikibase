@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_d756192c",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-08-31T14:28:05Z",
+      "side": 1,
+      "message": "I wasn’t sure if it’s also available within brackets… but that aside: I’m actually not sure if I prefer it with \\d. Looking at it, I feel like the version with 0-9 is more readable.",
+      "parentUuid": "4e7eab26_57e6a9ab",
+      "range": {
+        "startLine": 630,
+        "startChar": 55,
+        "endLine": 630,
+        "endChar": 58
+      },
+      "revId": "cbf42ac2a6794a7fcbcfa9101ce0a52c5f3ee0cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_979731ee",
         "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
         "patchSetId": 2
