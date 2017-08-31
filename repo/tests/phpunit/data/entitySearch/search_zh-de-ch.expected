@@ -385,7 +385,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-hans.prefix": {
@@ -393,7 +394,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-hant.prefix": {
@@ -401,7 +403,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-cn.prefix": {
@@ -409,7 +412,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-tw.prefix": {
@@ -417,7 +421,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-hk.prefix": {
@@ -425,7 +430,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-sg.prefix": {
@@ -433,7 +439,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-mo.prefix": {
@@ -441,7 +448,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.zh-my.prefix": {
@@ -449,7 +457,8 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
                 "labels.en.prefix": {
@@ -457,15 +466,17 @@
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 },
-                "labels_all.prefix": {
+                "labels.*.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
                     "number_of_fragments": 0,
                     "options": {
-                        "skip_if_last_matched": true
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
                     }
                 }
             }
