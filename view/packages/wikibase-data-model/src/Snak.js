@@ -12,17 +12,19 @@
  * @constructor
  *
  * @param {string} propertyId
+ * @param {string|null} [hash=null]
  *
  * @throws {Error} when trying to instantiate an abstract Snak object.
  * @throws {Error} when the property id is omitted.
  */
-var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId ) {
+var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId, hash ) {
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );
 	} else if( !propertyId ) {
 		throw new Error( 'Property ID is required for constructing new Snak' );
 	}
 	this._propertyId = propertyId;
+	this._hash = hash || null;
 };
 
 /**
@@ -43,6 +45,12 @@ $.extend( SELF.prototype, {
 	_propertyId: null,
 
 	/**
+	 * @property {string|null}
+	 * @private
+	 */
+	_hash: null,
+
+	/**
 	 * Returns the Snak type.
 	 *
 	 * @return {string}
@@ -58,6 +66,17 @@ $.extend( SELF.prototype, {
 	 */
 	getPropertyId: function() {
 		return this._propertyId;
+	},
+
+	/**
+	 * Returns the hash of this Snak.
+	 * Can be null if this Snak was constructed client-side,
+	 * since hashes can only be computed server-side.
+	 *
+	 * @return {string|null}
+	 */
+	getHash: function() {
+		return this._hash;
 	},
 
 	/**

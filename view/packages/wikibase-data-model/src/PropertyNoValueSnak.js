@@ -14,6 +14,7 @@ var PARENT = wb.datamodel.Snak;
  * @constructor
  *
  * @param {string} propertyId
+ * @param {string|null} [hash=null]
  */
 var SELF
 	= wb.datamodel.PropertyNoValueSnak
