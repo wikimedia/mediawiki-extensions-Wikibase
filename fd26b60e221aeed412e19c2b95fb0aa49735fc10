@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_9c6af810",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T12:26:41Z",
+      "side": 1,
+      "message": "This is quite awkward. The default should be nothing (either an empty string or the CSS class missing). A series of zeros is a valid hash and should not be used as a \"dummy\" value.",
+      "range": {
+        "startLine": 74,
+        "startChar": 33,
+        "endLine": 74,
+        "endChar": 60
+      },
+      "revId": "fd26b60e221aeed412e19c2b95fb0aa49735fc10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5ce6d0ab",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-08-31T12:26:41Z",
+      "side": 1,
+      "message": "Are we still supporting IE9? I think we do. If this is the case, we can not use this.\n\nTrivial replacement:\n\nvar e \u003d this.element[0];\ne.className \u003d e.className.replace(\n    /\\bwikibase-snakview-[\\dA-F]{40}\\b/i,\n    \u0027\u0027\n);\ne.className +\u003d …;\n\nOr:\n\nvar $e \u003d $( this.element );\n$e.removeClass( function ( index, className ) {\n    return className.match( /\\bwikibase-snakview-[\\dA-F]{40}\\b/gi ).join( \u0027 \u0027 );\n} )\n$e.addClass( … );",
+      "range": {
+        "startLine": 629,
+        "startChar": 34,
+        "endLine": 629,
+        "endChar": 43
+      },
+      "revId": "fd26b60e221aeed412e19c2b95fb0aa49735fc10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
