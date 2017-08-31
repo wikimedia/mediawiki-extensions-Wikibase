@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\StringNormalizer;
 
 /**
  * Interface of the top-level container/factory of data access services.
@@ -51,6 +52,11 @@ interface WikibaseServices {
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup();
+
+	/**
+	 * @return StringNormalizer
+	 */
+	public function getStringNormalizer();
 
 	/**
 	 * @return TermBuffer
