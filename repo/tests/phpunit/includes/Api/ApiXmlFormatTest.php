@@ -44,6 +44,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
+		$actual = $this->replaceHashWithMock( $actual );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getentities' ), $actual );
 	}
@@ -59,6 +60,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		$module = $this->getApiModule( GetClaims::class, 'wbgetclaims', $params );
 		$actual = $this->executeApiModule( $module );
+		$actual = $this->replaceHashWithMock( $actual );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getclaims' ), $actual );
 	}
@@ -208,6 +210,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$module = $this->getApiModule( SetClaim::class, 'wbsetclaim', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
+		$actual = $this->replaceHashWithMock( $actual );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setclaim' ), $actual );
 	}

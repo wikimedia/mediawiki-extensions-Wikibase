@@ -4,10 +4,10 @@
 	<reference hash="XXX">
 		<snaks>
 			<property id="$propertyIdUnderTest">
-				<snak snaktype="value" property="$propertyIdUnderTest" datatype="string">
+				<snak snaktype="value" hash="XXX" property="$propertyIdUnderTest" datatype="string">
 					<datavalue value="Val1" type="string"/>
 				</snak>
-				<snak snaktype="value" property="$propertyIdUnderTest" datatype="string">
+				<snak snaktype="value" hash="XXX" property="$propertyIdUnderTest" datatype="string">
 					<datavalue value="Val2" type="string"/>
 				</snak>
 			</property>
