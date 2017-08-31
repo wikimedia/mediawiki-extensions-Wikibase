@@ -16,6 +16,24 @@
       "revId": "a7628125652dd15a6d96f57abd0fd88510b37210",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_7eea9d06",
+        "filename": "repo/config/ElasticSearchRescoreProfiles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-08-31T20:50:10Z",
+      "side": 1,
+      "message": "yes, we probably would have more than one type of profile in the future, which won\u0027t work for other types. Probably need some kind of types maybe? I dunno.",
+      "parentUuid": "4e7eab26_9e58a92a",
+      "revId": "a7628125652dd15a6d96f57abd0fd88510b37210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
