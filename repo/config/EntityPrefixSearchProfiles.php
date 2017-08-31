@@ -15,13 +15,13 @@ return [
 	// FIXME: right now these weights are completely arbitrary. We need
 	// to do some work to validate them.
 	'default' => [
-		'any' => 1,
-		'lang-exact' => 40,
-		'lang-folded' => 30,
-		'lang-prefix' => 15,
-		'fallback-exact' => 25,
-		'fallback-folded' => 20,
-		'fallback-prefix' => 10,
+		'any' => 0.01,
+		'lang-exact' => 2.5,
+		'lang-folded' => 1.1,
+		'lang-prefix' => 0.9,
+		'fallback-exact' => 1.7,
+		'fallback-folded' => 1.1,
+		'fallback-prefix' => 0.9,
 		'fallback-discount' => 0.9,
 	]
 ];

@@ -16,23 +16,111 @@
                                     }
                                 }
                             ],
-                            "should": [
+                            "must": [
                                 {
-                                    "multi_match": {
-                                        "type": "best_fields",
+                                    "dis_max": {
                                         "tie_breaker": 0,
-                                        "query": "Wien",
-                                        "fields": [
-                                            "labels.de-ch.near_match^40",
-                                            "labels.de-ch.near_match_folded^30",
-                                            "labels.de-ch.prefix^15",
-                                            "labels_all.near_match_folded^1",
-                                            "labels.de.near_match^25",
-                                            "labels.de.near_match_folded^20",
-                                            "labels.de.prefix^10",
-                                            "labels.en.near_match^22.5",
-                                            "labels.en.near_match_folded^18",
-                                            "labels.en.prefix^9"
+                                        "queries": [
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de-ch.near_match": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 2.5
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de-ch.near_match_folded": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 1.1
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de-ch.prefix": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.9
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels_all.near_match_folded": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.01
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.near_match": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 1.53
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.near_match_folded": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.99
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.prefix": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.81
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.near_match": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 1.377
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.near_match_folded": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.891
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.prefix": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.729
+                                                }
+                                            }
                                         ]
                                     }
                                 }
@@ -117,24 +205,28 @@
             {
                 "window_size": 8192,
                 "query": {
-                    "query_weight": 1,
+                    "query_weight": 0.2,
                     "rescore_query_weight": 1,
-                    "score_mode": "multiply",
+                    "score_mode": "total",
                     "rescore_query": {
                         "function_score": {
-                            "score_mode": "max",
+                            "score_mode": "sum",
                             "functions": [
                                 {
-                                    "field_value_factor": {
-                                        "field": "label_count",
-                                        "missing": 0
+                                    "script_score": {
+                                        "script": {
+                                            "inline": "pow(doc['incoming_links'].value , 2) \/ ( pow(doc['incoming_links'].value, 2) + pow(50,2))",
+                                            "lang": "expression"
+                                        }
                                     },
-                                    "weight": 1
+                                    "weight": 1.2
                                 },
                                 {
-                                    "field_value_factor": {
-                                        "field": "sitelink_count",
-                                        "missing": 0
+                                    "script_score": {
+                                        "script": {
+                                            "inline": "pow(doc['sitelink_count'].value , 2) \/ ( pow(doc['sitelink_count'].value, 2) + pow(20,2))",
+                                            "lang": "expression"
+                                        }
                                     },
                                     "weight": 1
                                 }
