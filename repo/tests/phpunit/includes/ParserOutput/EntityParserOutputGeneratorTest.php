@@ -9,11 +9,14 @@ use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdComposer;
@@ -27,6 +30,8 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -237,6 +242,9 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				return null;
 			} ) );
 
+		$fallbackChain->method( 'getFetchLanguageCodes' )
+			->willReturn( [ 'en' ] );
+
 		return $fallbackChain;
 	}
 
@@ -339,6 +347,101 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
 
 		return $dataTypeLookup;
+	}
+
+	public function testGetParserOutputIncludesLabelsOfRedirectEntity() {
+		$this->markTestSkipped( 'Redirected entity terms are currently not fetched (see: T96553), so this test fails.' );
+
+		$item = new Item( new ItemId( 'Q303' ) );
+
+		$redirectSourceId = new ItemId( 'Q809' );
+		$redirectSource = new Item( $redirectSourceId );
+		$redirectSource->setLabel( 'en', 'redirect label' );
+
+		$redirectTargetId = new ItemId( 'Q808' );
+		$redirectTarget = new Item( $redirectTargetId );
+		$redirectTarget->setLabel( 'en', 'target label' );
+
+		$item->getStatements()->addNewStatement( new PropertyValueSnak( new PropertyId( 'P11' ), new EntityIdValue( $redirectSourceId ) ) );
+
+		$user = $this->getTestUser()->getUser();
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $item, 'test item', $user );
+		$store->saveEntity( $redirectSource, 'test item', $user );
+		$store->saveEntity( $redirectTarget, 'test item', $user );
+		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
+
+		$entityParserOutputGenerator = $this->getGeneratorForRedirectTest();
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
+
+		$foo = $parserOutput->getText();
+
+		$this->assertContains( 'target label', $foo );
+	}
+
+	private function getGeneratorForRedirectTest() {
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'ntriples' ] );
+
+		$entityTitleLookup = $this->getEntityTitleLookupMock();
+
+		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
+
+		$entityIdParser = new BasicEntityIdParser();
+
+		$dataUpdaters = [
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ReferencedEntitiesDataUpdater(
+				$entityTitleLookup,
+				$entityIdParser
+			)
+		];
+
+		return new EntityParserOutputGenerator(
+			$this->getViewFactoryForRedirectTest(),
+			$this->getConfigBuilderMock(),
+			$entityTitleLookup,
+			new SqlEntityInfoBuilderFactory(
+				$entityIdParser,
+				new EntityIdComposer( [
+					'item' => function( $ignore, $idPart ) {
+						return new ItemId( 'Q' . $idPart );
+					}
+				] ),
+				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+			),
+			$this->newLanguageFallbackChain(),
+			TemplateFactory::getDefaultInstance(),
+			$this->getMock( LocalizedTextProvider::class ),
+			$entityDataFormatProvider,
+			$dataUpdaters,
+			'en',
+			true
+		);
+	}
+
+	private function getViewFactoryForRedirectTest() {
+		$repo = WikibaseRepo::getDefaultInstance();
+		return new DispatchingEntityViewFactory( [
+			'item' => function(
+				$languageCode,
+				LabelDescriptionLookup $labelDescriptionLookup,
+				LanguageFallbackChain $fallbackChain,
+				EditSectionGenerator $editSectionGenerator,
+				EntityTermsView $entityTermsView
+			) use ( $repo ) {
+				$viewFactory = $repo->getViewFactory();
+				return $viewFactory->newItemView(
+					$languageCode,
+					$labelDescriptionLookup,
+					$fallbackChain,
+					$editSectionGenerator,
+					$entityTermsView
+				);
+			},
+		] );
 	}
 
 }
