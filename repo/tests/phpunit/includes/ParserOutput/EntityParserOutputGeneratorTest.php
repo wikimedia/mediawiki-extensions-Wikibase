@@ -379,22 +379,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function getGeneratorForRedirectTest() {
-		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'ntriples' ] );
-
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
-
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
-
 		$entityIdParser = new BasicEntityIdParser();
 
 		$dataUpdaters = [
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ReferencedEntitiesDataUpdater(
-				$entityTitleLookup,
-				$entityIdParser
-			)
+			new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityIdParser )
 		];
 
 		return new EntityParserOutputGenerator(
@@ -413,7 +402,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
-			$entityDataFormatProvider,
+			new EntityDataFormatProvider(),
 			$dataUpdaters,
 			'en',
 			true
