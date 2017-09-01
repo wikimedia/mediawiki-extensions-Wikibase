@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_e9032e0e",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-01T22:58:40Z",
+      "side": 1,
+      "message": "\u003e And if such a mechanism is really needed, why only for this script?\n\nIt is not. See the maintenance/runSearch.php is CirrusSearch. It is doing exactly the same. In fact, that\u0027s the whole point to do the same - this way we can use relforge scripts that were written for CirrusSearch script. \nIt is possible to refactor it to make profiles more controllable with options etc. but that would be mostly waster effort - nobody really needs to do anything with those but these scripts. Not unless we can find a way to let users tune profiles, but so far we have absolutely no idea how to do this in a way that makes sense for a common user.",
+      "parentUuid": "4e7eab26_93f6fed2",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_949fd561",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 20
