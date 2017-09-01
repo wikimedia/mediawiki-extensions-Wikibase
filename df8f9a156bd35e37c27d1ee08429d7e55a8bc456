@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_9fd50015",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-01T09:23:02Z",
+      "side": 1,
+      "message": "I don\u0027t think it should default to 10 at this point. Thats an arbitrary number, and belongs to the maintenance script (and it\u0027s already there). Should be 0 here.\n\nOr not optional at all, because no caller needs this to be optional.",
+      "range": {
+        "startLine": 108,
+        "startChar": 11,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "df8f9a156bd35e37c27d1ee08429d7e55a8bc456",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_bfd0fc22",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-01T09:23:02Z",
+      "side": 1,
+      "message": "There is no class property declared with this name.",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 14
+      },
+      "revId": "df8f9a156bd35e37c27d1ee08429d7e55a8bc456",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
