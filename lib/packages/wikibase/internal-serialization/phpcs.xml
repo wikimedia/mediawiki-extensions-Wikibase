@@ -103,4 +103,8 @@
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
     <rule ref="Zend.Files.ClosingTag" />
+
+    <arg name="extensions" value="php" />
+    <exclude-pattern type="relative">^vendor/</exclude-pattern>
+    <file>.</file>
 </ruleset>

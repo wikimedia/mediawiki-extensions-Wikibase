@@ -53,7 +53,7 @@
 			"phpunit"
 		],
 		"cs": [
-			"phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp",
+			"phpcs -p -s",
 			"phpmd src/ text phpmd.xml"
 		],
 		"ci": [
