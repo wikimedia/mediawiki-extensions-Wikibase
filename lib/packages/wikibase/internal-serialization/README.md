@@ -110,6 +110,7 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 * Added compatibility with DataValues Geo 2.x
 * Removed MediaWiki integration files
+* Updated minimal required PHP version from 5.3 to 5.5.9
 
 ### 2.4.0 (2017-03-16)
 
