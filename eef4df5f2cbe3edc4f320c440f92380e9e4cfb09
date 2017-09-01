@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e7eab26_f5cea32e",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-01T14:15:13Z",
+      "side": 1,
+      "message": "here the new format is pretty simple to parse:\n  // 1:1-XX:YY|Text Snippet\n  // First is offset info, everything after the first | is the text\n  // For us we only care about the start of the snippet (the \nfirst number, if it\u0027s 0 it\u0027s a label)\n  $matchedType \u003d $term-\u003estart_with(\u00270\u0027) ? \u0027label\u0027 : \u0027alias\u0027;\n  $term \u003d explode( \u0027|\u0027, $term, 2 )[1];",
+      "revId": "eef4df5f2cbe3edc4f320c440f92380e9e4cfb09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_8df4fdb9",
         "filename": "repo/tests/phpunit/data/entitySearch/search_de-ch-en.expected",
         "patchSetId": 3
