@@ -9,7 +9,7 @@ before_script:
   - nvm install 4
 
 script:
-  - npm install && npm run eslint
+  - npm install && npm test
 
 notifications:
   irc:

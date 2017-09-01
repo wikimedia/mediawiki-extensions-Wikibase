@@ -6,6 +6,7 @@
 	},
 	"globals": {
 		"dataValues": false,
+		"module": false,
 		"util": false,
 		"wikibase": false
 	},
