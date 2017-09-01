@@ -43,4 +43,5 @@
 
 	<file>.</file>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
+	<exclude-pattern type="relative">^view/lib/</exclude-pattern> <!-- temporarily skip those -->
 </ruleset>
