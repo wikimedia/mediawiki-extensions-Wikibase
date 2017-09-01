@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_8df4fdb9",
+        "filename": "repo/tests/phpunit/data/entitySearch/search_de-ch-en.expected",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-01T07:08:57Z",
+      "side": 1,
+      "message": "Looks good, especially when comparing to the \"labels.en.prefix\" above.",
+      "range": {
+        "startLine": 196,
+        "startChar": 23,
+        "endLine": 196,
+        "endChar": 25
+      },
+      "revId": "eef4df5f2cbe3edc4f320c440f92380e9e4cfb09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
