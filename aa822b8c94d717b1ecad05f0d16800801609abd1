@@ -45,6 +45,23 @@
       "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8dd63df4",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-01T07:47:43Z",
+      "side": 1,
+      "message": "Thinking about it twice dismax might still be better than a bool query.\nIn fact setting TieBreaker to 1 should be equivalent to using a boolean (which will sum everything)\nSo probably still most flexible to use dismax vs boolean here.\nBasically the formula is : best_score + (sum of remaining_scores)*tie_breaker;\nThe question now would be: should we make tie breaker configurable?",
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
