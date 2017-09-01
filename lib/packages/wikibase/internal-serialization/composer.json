@@ -29,13 +29,13 @@
 		"serialization/serialization": "~3.2"
 	},
 	"require-dev": {
-		"squizlabs/php_codesniffer": "~2.3",
 		"phpmd/phpmd": "~2.3",
 		"phpunit/phpunit": "~4.8",
 		"data-values/common": "~0.3.0|~0.2.0",
 		"data-values/geo": "~1.1|~2.0",
 		"data-values/number": ">=0.1 <0.9",
-		"data-values/time": "~0.7.0"
+		"data-values/time": "~0.7.0",
+		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},
 	"autoload": {
 		"psr-4": {
