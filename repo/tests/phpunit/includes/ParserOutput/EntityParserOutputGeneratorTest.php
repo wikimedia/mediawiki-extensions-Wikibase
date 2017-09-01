@@ -6,13 +6,13 @@ use DataValues\StringValue;
 use MediaWikiTestCase;
 use SpecialPage;
 use Title;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -190,7 +190,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 
-		$entityIdParser = new BasicEntityIdParser();
+		$entityIdParser = new ItemIdParser();
 
 		$dataUpdaters = [
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
@@ -379,22 +379,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function getGeneratorForRedirectTest() {
-		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'ntriples' ] );
-
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
-
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
-
-		$entityIdParser = new BasicEntityIdParser();
+		$entityIdParser = new ItemIdParser();
 
 		$dataUpdaters = [
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ReferencedEntitiesDataUpdater(
-				$entityTitleLookup,
-				$entityIdParser
-			)
+			new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityIdParser )
 		];
 
 		return new EntityParserOutputGenerator(
@@ -413,7 +402,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
-			$entityDataFormatProvider,
+			new EntityDataFormatProvider(),
 			$dataUpdaters,
 			'en',
 			true
