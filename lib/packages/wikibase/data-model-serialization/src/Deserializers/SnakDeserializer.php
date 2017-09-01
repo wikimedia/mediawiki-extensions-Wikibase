@@ -83,6 +83,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param array $serialization
 	 *
+	 * @throws InvalidAttributeException
 	 * @return PropertyNoValueSnak|PropertySomeValueSnak|PropertyValueSnak
 	 */
 	private function getDeserialized( array $serialization ) {
@@ -125,7 +126,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	/**
 	 * @param string $serialization
 	 *
-	 * @throw InvalidAttributeException
+	 * @throws InvalidAttributeException
 	 * @return PropertyId
 	 */
 	private function deserializePropertyId( $serialization ) {
