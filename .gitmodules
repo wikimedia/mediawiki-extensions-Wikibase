@@ -1,0 +1,3 @@
+[submodule "view/lib/wikibase/serialization-javascript"]
+	path = view/lib/wikibase/serialization-javascript
+	url = https://github.com/wmde/WikibaseSerializationJavaScript.git
