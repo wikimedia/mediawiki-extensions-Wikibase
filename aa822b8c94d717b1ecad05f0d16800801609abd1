@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_0e9d600c",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-01T22:12:50Z",
+      "side": 1,
+      "message": "These are parameters for saturation function. Mainly guesses of how the function shape should look like.",
+      "parentUuid": "4e7eab26_0db7adf2",
+      "range": {
+        "startLine": 10,
+        "startChar": 63,
+        "endLine": 10,
+        "endChar": 83
+      },
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_2dbaa9da",
         "filename": "repo/config/EntityPrefixSearchProfiles.php",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_0ee6c0aa",
+        "filename": "repo/config/EntityPrefixSearchProfiles.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-01T22:12:50Z",
+      "side": 1,
+      "message": "They come from mostly guesswork about which numbers give better results.",
+      "parentUuid": "4e7eab26_2dbaa9da",
+      "range": {
+        "startLine": 15,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_8dd63df4",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 4
@@ -59,6 +107,24 @@
       "writtenOn": "2017-09-01T07:47:43Z",
       "side": 1,
       "message": "Thinking about it twice dismax might still be better than a bool query.\nIn fact setting TieBreaker to 1 should be equivalent to using a boolean (which will sum everything)\nSo probably still most flexible to use dismax vs boolean here.\nBasically the formula is : best_score + (sum of remaining_scores)*tie_breaker;\nThe question now would be: should we make tie breaker configurable?",
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4e97e8ee",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-01T22:12:50Z",
+      "side": 1,
+      "message": "I don\u0027t think non-best scores should matter too much. I mean, if you already matched exact one in primary language, nobody cares if a secondary language matches. Match in two languages is not better than match in one. \nOTOH, match in primary language on a so-so article should be much better than match in secondary one on a good one. So, the entity weight (rescore) should be very important within the same language, but if you match in different language, that should be less imoortant even if the article is good.",
+      "parentUuid": "4e7eab26_8dd63df4",
       "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
