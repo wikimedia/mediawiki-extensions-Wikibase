@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_0db7adf2",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-01T07:21:27Z",
+      "side": 1,
+      "message": "Can you briefly explain (ideally in the commit message) what these numbers represent? Thanks!",
+      "range": {
+        "startLine": 10,
+        "startChar": 63,
+        "endLine": 10,
+        "endChar": 83
+      },
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2dbaa9da",
+        "filename": "repo/config/EntityPrefixSearchProfiles.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-01T07:21:27Z",
+      "side": 1,
+      "message": "Indeed. Can you please add a short sentence to the commit message that explains where the new numbers in this patch come from? Thanks.",
+      "range": {
+        "startLine": 15,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
