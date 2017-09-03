@@ -9,7 +9,8 @@
 			"Csega",
 			"Dorgan",
 			"Grin",
-			"Urbalazs"
+			"Urbalazs",
+			"Bencemac"
 		]
 	},
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
@@ -68,6 +69,10 @@
 	"wikibase-unconnectedpages-submit": "Lapok megjelenítése",
 	"wikibase-pageswithbadges-invalid-id": "$1 nem egy érvényes elemazonosító",
 	"wikibase-pageswithbadges-submit": "Lapok megjelenítése",
+	"entityusage": "Állítások használata",
+	"entityusage-summary": "Ez az oldal kilistázza azokat a lapokat, amelyek használják a megadott állítást (pl. Q1). A lista a lapok azonosítója szerint csökkenő sorrendbe van rendezve, azaz a legújabb lapok legelöl szerepelnek.",
+	"wikibase-entityusage-legend": "A megadott állítást használó lapok listázása",
+	"wikibase-entityusage-entity": "Állítás:",
 	"wikibase-entityusage-submit": "Lapok megjelenítése",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-elemazonosító",
 	"wikibase-pageinfo-entity-id-none": "Nincs",

@@ -4,5 +4,18 @@
 			"Bunukwiki"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wyici-payke"
+	"wikibase-quantitydetails-amount": "pulung",
+	"wikibase-quantitydetails-upperbound": "sakapabaway a sausi",
+	"wikibase-quantitydetails-lowerbound": "makasasa’ay a sausi",
+	"wikibase-quantitydetails-unit": "sacacaycacay",
+	"wikibase-timedetails-time": "tuki",
+	"wikibase-timedetails-calendar": "kuyami",
+	"wikibase-timedetails-before": "nuayawan",
+	"wikibase-timedetails-after": "nazikuzan",
+	"wikibase-globedetails-longitude": "cintu",
+	"wikibase-globedetails-latitude": "wyitu",
+	"wikibase-sitelinks-wikipedia": "Wyici-payke",
+	"wikibase-sitelinks-sitename-columnheading": "kamu",
+	"wikibase-validator-no-validators": "satezep",
+	"datatypes-type-wikibase-item": "kasacacay"
 }

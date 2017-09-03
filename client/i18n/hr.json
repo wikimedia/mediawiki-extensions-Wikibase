@@ -10,6 +10,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikipodatci",
+	"wikibase-after-page-move": "Također biste trebali ažurirati [$1 pridruženu stavku na projektu {{WBREPONAME}}] radi održavanja jezičnih međuwikipoveznica na premještenoj stranici. Molimo Vas, provjerite jeste li to učinili.",
 	"wikibase-after-page-move-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-after-page-delete": "Trebali biste izbrisati i poveznicu na ovu stranicu na pripadajućoj stavci [$1 {{WBREPONAME}}].",
 	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
@@ -43,7 +44,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "uređivanje ({{WBREPONAME}})",
 	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.",
-	"wikibase-watchlist-show-changes-pref": "Prikaži {{WBREPONAME}} promjene na mom popisu praćenja",
+	"wikibase-watchlist-show-changes-pref": "Prikaži promjene na projektu {{WBREPONAME}} u Vašem popisu praćenja",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-submit": "Prikaži stranice",
 	"pageswithbadges": "Stranice sa značkama",

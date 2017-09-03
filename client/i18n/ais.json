@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Benel",
-			"Bunukwiki"
+			"Bunukwiki",
+			"Tokoabibi"
 		]
 	},
 	"tooltip-t-wikibase": "masasiket tayza i papatunay a kalunasulitan pisupeday a kakitizaan tu kasacacay",
@@ -10,10 +11,18 @@
 	"wikibase-dataitem": "{{WBREPONAME}} kasacacay",
 	"wikibase-editlinks": "mikawaway tu kalumyiti misiket",
 	"wikibase-editlinkstitle": "mikawaway tu kalumyiti caliway han ku kamu misiket",
+	"wikibase-linkitem-input-site": "kamu:",
+	"wikibase-linkitem-input-page": "kasabelih:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "midimut",
 	"wikibase-rc-hide-wikidata-show": "paazih",
 	"wikibase-rc-wikibase-edit-letter": "sueyi",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawaway tu kalumyiti",
+	"wikibase-pageswithbadges-badge": "kunpay:",
+	"wikibase-entityusage-entity": "masaheciay a tuutuud:",
+	"wikibase-pageinfo-entity-id-none": "nayi’",
+	"wikibase-pageinfo-entity-usage-S": "Calay-kakacawan(C-wangcan)",
+	"wikibase-pageinfo-entity-usage-L": "aazihen paya: $1",
+	"wikibase-pageinfo-entity-usage-T": "satangahan",
 	"wikibase-otherprojects": "zuma cwanan"
 }

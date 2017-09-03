@@ -10,7 +10,8 @@
 			"Fraxinus",
 			"MaGa",
 			"Srdjan m",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Bugoslav"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturiranih podataka",
@@ -76,6 +77,7 @@
 	"wikibase-shortcopyrightwarning": "Klikom na \"$1\" suglasni ste s [[$2|Uvjetima uporabe]] i neopozivo ste suglasni da svoje doprinose objavljujete pod uvjetima licencije $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Pristajem na ove uvjete u mojim budućim uređivanjima. Ne prikazuj mi više ovu poruku.",
 	"wikibase-entityselector-more": "više",
+	"wikibase-entityselector-notfound": "Podudarnost nije pronađena",
 	"special-itembytitle": "Stavka prema naslovu",
 	"wikibase-itembytitle-lookup-site": "Projekt:",
 	"wikibase-itembytitle-lookup-page": "Stranica:",

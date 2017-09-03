@@ -104,7 +104,7 @@
 	"wikibase-statementview-rank-normal": "Rang normal",
 	"wikibase-statementview-rank-deprecated": "Rang obsolet",
 	"wikibase-statementview-rank-tooltip-deprecated": "Se sap que el valor és equivocat, però és o era suposat habitualment",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referència|referències}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referència|referències}}",
 	"wikibase-snakview-property-input-placeholder": "propietat",
 	"wikibase-snakview-choosesnaktype": "Trieu un tipus de valor.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "El valor no s'adiu amb la definició de la propietat.",

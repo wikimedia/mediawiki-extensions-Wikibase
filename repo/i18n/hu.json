@@ -12,10 +12,12 @@
 			"Csega",
 			"Dj",
 			"Macofe",
-			"Máté"
+			"Máté",
+			"Bencemac"
 		]
 	},
 	"wikibase-desc": "Strukturált adattár",
+	"wikibase-entity": "Állítás",
 	"wikibase-entity-item": "elem",
 	"wikibase-entity-property": "tulajdonság",
 	"wikibase-entity-query": "lekérdezés",

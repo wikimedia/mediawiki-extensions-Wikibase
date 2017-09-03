@@ -117,7 +117,7 @@
 	"wikibase-entityusage-submit": "Mostrar páginas",
 	"wikibase-pageinfo-entity-id": "ID do item {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nenhum",
-	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} entidades usadas nesta página",
+	"wikibase-pageinfo-entity-usage": "Entidades {{WBREPONAME}} usadas nesta página",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",

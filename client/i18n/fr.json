@@ -23,7 +23,8 @@
 			"Zebulon84",
 			"Urhixidur",
 			"Dgstranz",
-			"Thibaut120094"
+			"Thibaut120094",
+			"DePlusJean"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -72,7 +73,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|modification|modifications}}",
 	"wikibase-dataitem": "Élément {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifier les liens",
-	"wikibase-editlinkstitle": "Modifier les liens interlangue",
+	"wikibase-editlinkstitle": "Modifier les liens interlangues",
 	"wikibase-addlinkstitle": "Ajoutez les liens interlangues",
 	"wikibase-linkitem-addlinks": "Ajouter des liens",
 	"wikibase-linkitem-alreadylinked": "La page à laquelle vous voulez vous lier est déjà attachée à un [$1 élément] du dépôt de données central qui se lie à $2 sur ce site. Les éléments ne peuvent avoir qu’une page attachée par site. Veuillez choisir une autre page pour vous lier avec.",

@@ -4,5 +4,7 @@
 			"MokaAkashiyaPT"
 		]
 	},
-	"wikibase-timedetails-timezone": "Fuso hourário"
+	"wikibase-timedetails-timezone": "Fuso hourário",
+	"wikibase-sitelinks-sitename-columnheading": "Lhéngua",
+	"wikibase-sitelinks-link-columnheading": "Páigina associada"
 }

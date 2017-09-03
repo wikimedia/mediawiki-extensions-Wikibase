@@ -266,7 +266,7 @@
 	"wikibase-restoreold": "palauta",
 	"wikibase-entity-summary-restore": "Käyttäjän [[Special:Contributions/$4|{{GENDER:$4|$4}}]] tekemän muokkauksen $3 palautus",
 	"wikibase-no-direct-editing": "Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1",
-	"wikibase-noentity": "Valitsemaasi aihetta ei löytynyt.\nVoit [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} selata sivuun liittyviä lokeja]</span> ottaaksesi selvää, mitä sille on tapahtunut.",
+	"wikibase-noentity": "Valitsemaasi aihetta ei löytynyt. Voit [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} selata sivuun liittyviä lokeja] ottaaksesi selvää, mitä sille on tapahtunut.",
 	"wikibase-noentity-createone": "Voit myös [[$1|luoda uuden]].",
 	"wikibase-special-mergeitems-error-prefix": "Kohteita ei voitu yhdistää. Tapahtui seuraava virhe:",
 	"wikibase-listdatatypes-wikibase-item-head": "Kohde",
