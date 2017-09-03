@@ -24,7 +24,7 @@
 		"php": ">=5.5.9",
 		"composer/installers": ">=1.0.1",
 		"data-values/data-values": "^2.0.0|^1.0.0",
-		"data-values/common": "^0.4.0",
+		"data-values/common": "^0.3.0|^0.4.0",
 		"data-values/geo": "^2.0.1",
 		"data-values/interfaces": "^0.2.0",
 		"data-values/number": "^0.9.0",
