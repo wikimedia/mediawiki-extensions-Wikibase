@@ -2,10 +2,12 @@
 
 ## Version 8.0.0 (dev)
 
+This release removes integers as acceptable entity IDs.
+
 #### Breaking changes
-* `Item:setId` as well as `Property::setId` do not accept integers any more.
+* `Item::setId` and `Property::setId` do not accept integers any more.
 * Removed `Item::getSiteLinks` and `Item::hasSiteLinks`.
-* `RepositoryNameAssert` now also disallows periods, in addition to colons.
+* Added periods to the list of disallowed characters in `RepositoryNameAssert`.
 
 #### Other changes
 * Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
