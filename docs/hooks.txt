@@ -57,10 +57,12 @@ May be used to define additional entity types. See also the WikibaseRepoEntityTy
 'WikibaseHandleChanges': Called by ChangeHandler::handleChange() to allow pre-processing
 of changes.
 $changes: A list of Change objects
+$rootJobParams: any relevant root job parameters to be inherited by child jobs.
 
 'WikibaseHandleChange': Called by ChangeHandler::handleChange() to allow alternative
 processing of changes.
 $change: A Change object
+$rootJobParams: any relevant root job parameters to be inherited by child jobs.
 
 'WikibaseClientOtherProjectsSidebar' Called by OtherProjectsSidebarGenerator to allow altering
 the other projects sidebar. Only called in case the page we're on is linked with an item.

@@ -366,87 +366,87 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		return [
 			[ // #0
 				$changes['property-creation'],
-				[ 'q100' => [] ],
+				[ 'Q100' => [] ],
 				$empty
 			],
 			[ // #1
 				$changes['property-deletion'],
-				[ 'q100' => [] ],
+				[ 'Q100' => [] ],
 				$empty
 			],
 			[ // #2
 				$changes['property-set-label'],
-				[ 'q100' => [] ],
+				[ 'Q100' => [] ],
 				$empty
 			],
 
 			[ // #3
 				$changes['item-creation'],
-				[ 'q100' => [] ],
+				[ 'Q100' => [] ],
 				$empty
 			],
 			[ // #4
 				$changes['item-deletion'],
-				[ 'q100' => [] ],
+				[ 'Q100' => [] ],
 				$empty
 			],
 			[ // #5
 				$changes['item-deletion-linked'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateAll
 			],
 
 			[ // #6
 				$changes['set-de-label'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty, // For the dummy page, only label and sitelink usage is defined.
 			],
 			[ // #7
 				$changes['set-en-label'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2PurgeParser
 			],
 			[ // #8
 				$changes['set-en-label'],
-				[ 'q100' => [ 'enwiki' => 'User:Emmy2' ] ], // user namespace
+				[ 'Q100' => [ 'enwiki' => 'User:Emmy2' ] ], // user namespace
 				$userEmmy2PurgeParser
 			],
 			[ // #9
 				$changes['set-en-aliases'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty, // For the dummy page, only label and sitelink usage is defined.
 			],
 
 			[ // #10
 				$changes['add-claim'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty // statements are ignored
 			],
 			[ // #11
 				$changes['remove-claim'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty // statements are ignored
 			],
 
 			[ // #12
 				$changes['set-dewiki-sitelink'],
-				[ 'q100' => [] ],
+				[ 'Q100' => [] ],
 				$empty // not yet linked
 			],
 			[ // #13
 				$changes['set-enwiki-sitelink'],
-				[ 'q100' => [ 'enwiki' => 'Emmy' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
 				$emmyUpdateLinks
 			],
 
 			[ // #14
 				$changes['change-dewiki-sitelink'],
-				[ 'q100' => [ 'enwiki' => 'Emmy' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
 				$emmyUpdateLinks
 			],
 			[ // #15
 				$changes['change-enwiki-sitelink'],
-				[ 'q100' => [ 'enwiki' => 'Emmy' ], 'q200' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy' ], 'Q200' => [ 'enwiki' => 'Emmy2' ] ],
 				[
 					'scheduleRefreshLinks' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'purgeWebCache' => [ 'Emmy' => true, 'Emmy2' => true ],
@@ -455,18 +455,18 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			],
 			[ // #16
 				$changes['change-enwiki-sitelink-badges'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateLinks
 			],
 
 			[ // #17
 				$changes['remove-dewiki-sitelink'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateLinks
 			],
 			[ // #18
 				$changes['remove-enwiki-sitelink'],
-				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateLinks
 			],
 		];
@@ -475,7 +475,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideHandleChange
 	 */
-	public function testHandleChange( Change $change, array $pageNamesPerItemId, array $expected ) {
+	public function testHandleChange( EntityChange $change, array $pageNamesPerItemId, array $expected ) {
 		$updater = new MockPageUpdater();
 		$handler = $this->getChangeHandler( $pageNamesPerItemId, $updater );
 
@@ -487,6 +487,120 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		foreach ( $expected as $k => $exp ) {
 			$up = $updates[$k];
 			$this->assertEquals( array_keys( $exp ), array_keys( $up ), $k );
+		}
+	}
+
+	/**
+	 * @param int|null $id
+	 * @param string $type
+	 * @param string $objectId
+	 * @param array $info
+	 *
+	 * @return EntityChange
+	 */
+	private function newChange( $id, $type, $objectId, $info = [] ) {
+		$fields = [
+			'id' => $id,
+			'time' => '20121212121212',
+			'type' => $type,
+			'objectid' => $objectId,
+			'info' => $info,
+		];
+
+		return new EntityChange( $fields );
+	}
+
+	public function provideHandleChange_rootJobParams() {
+		$ids = [ 18, 19, 17 ]; // note: provide these out of order, to check canonical sorting!
+		$regularChange = $this->newChange( 17, 'x', 'Q100', [] );
+		$coalescedChange = $this->newChange( 0, 'x', 'Q100', [ 'change-ids' => $ids ] );
+		$strangeChange = $this->newChange( 0, 'x', 'Q100', [ 'kittens' => 13 ] );
+
+		$q100 = new ItemId( 'Q100' );
+		$usages = [ // note: provide these out of order, to check canonical sorting!
+			102 => new PageEntityUsages( 102, [ new EntityUsage( $q100, 'X' ) ] ),
+			101 => new PageEntityUsages( 101, [ new EntityUsage( $q100, 'X' ) ] ),
+		];
+
+		$titleBatchHash = '0f89093daf80eabc67b8369a6ca88d58f2abcc80';
+		$strangeHash = '97c72edc416a2b659492401306e31c2dd8ffcc49';
+
+		$regularRootJobParams = [
+			'purgeWebCache' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],
+			'scheduleRefreshLinks' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],
+			'injectRCRecord' => [ 'rootJobSignature' => "title-batch:$titleBatchHash&change-id:17" ],
+		];
+
+		$coalescedRootJobParams = [
+			'purgeWebCache' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],
+			'scheduleRefreshLinks' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],
+			'injectRCRecord' => [ 'rootJobSignature' => "title-batch:$titleBatchHash&change-batch:17,18,19" ],
+		];
+
+		$strangeRootJobParams = [
+			'purgeWebCache' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],
+			'scheduleRefreshLinks' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],
+			'injectRCRecord' => [ 'rootJobSignature' => "title-batch:$titleBatchHash&change-hash:$strangeHash" ],
+		];
+
+		return [
+			[ $regularChange, $usages, $regularRootJobParams ],
+			[ $coalescedChange, $usages, $coalescedRootJobParams ],
+			[ $strangeChange, $usages, $strangeRootJobParams ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideHandleChange_rootJobParams
+	 */
+	public function testHandleChange_rootJobParams(
+		EntityChange $change,
+		array $usages,
+		array $expectedRootJobParams
+	) {
+		$updater = new MockPageUpdater();
+
+		$affectedPagesFinder = $this->getMockBuilder( AffectedPagesFinder::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$affectedPagesFinder->expects( $this->any() )
+			->method( 'getAffectedUsagesByPage' )
+			->will( $this->returnValue( $usages ) );
+
+		$titleFactory = $this->getMockBuilder( TitleFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$titleFactory->expects( $this->any() )
+			->method( 'newFromID' )
+			->will( $this->returnCallback(
+				function( $id ) {
+					// NOTE: the fake title construction influences the expected hash values
+					// defined in provideHandleChange_rootJobParams!
+					$title = Title::makeTitle( NS_MAIN, 'Page_No_' . $id );
+					$title->resetArticleID( $id );
+					return $title;
+				}
+			) );
+
+		$handler = new ChangeHandler(
+			$affectedPagesFinder,
+			$titleFactory,
+			$updater,
+			$this->getChangeRunCoalescer(),
+			$this->getMock( SiteLookup::class )
+		);
+
+		$inputRootJobParams = [ 'rootJobTimestamp' => '20171122040506' ];
+
+		$handler->handleChange( $change, $inputRootJobParams );
+		$actualRootJobParams = $updater->getRootJobParams();
+
+		$this->assertSameSize( $expectedRootJobParams, $actualRootJobParams );
+
+		foreach ( $expectedRootJobParams as $k => $exp ) {
+			$act = $actualRootJobParams[$k];
+			$this->assertEquals( '20171122040506', $act['rootJobTimestamp'], "$k/rootJobTimestamp" );
+			$this->assertEquals( $exp['rootJobSignature'], $act['rootJobSignature'], "$k/rootJobSignature" );
 		}
 	}
 
