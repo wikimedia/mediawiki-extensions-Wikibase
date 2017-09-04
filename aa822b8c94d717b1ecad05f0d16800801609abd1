@@ -128,6 +128,24 @@
       "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_240714ce",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-04T12:43:52Z",
+      "side": 1,
+      "message": "Is it possible to score \"no match\" and \"mismatch\" differently? I mean - if you have a match on a secondary language with a mediocre score, the score should be high, unless you have an explicit mismatch in the primary language. Then it\u0027s probably a false friend.",
+      "parentUuid": "4e7eab26_4e97e8ee",
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
