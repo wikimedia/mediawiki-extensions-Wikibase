@@ -75,20 +75,21 @@ class ChangeHandler {
 
 	/**
 	 * @param EntityChange[] $changes
+	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.
 	 */
-	public function handleChanges( array $changes ) {
+	public function handleChanges( array $changes, array $rootJobParams = [] ) {
 		$changes = $this->changeRunCoalescer->transformChangeList( $changes );
 
-		if ( !Hooks::run( 'WikibaseHandleChanges', [ $changes ] ) ) {
+		if ( !Hooks::run( 'WikibaseHandleChanges', [ $changes, $rootJobParams ] ) ) {
 			return;
 		}
 
 		foreach ( $changes as $change ) {
-			if ( !Hooks::run( 'WikibaseHandleChange', [ $change ] ) ) {
+			if ( !Hooks::run( 'WikibaseHandleChange', [ $change, $rootJobParams ] ) ) {
 				continue;
 			}
 
-			$this->handleChange( $change );
+			$this->handleChange( $change, $rootJobParams );
 		}
 	}
 
@@ -98,10 +99,9 @@ class ChangeHandler {
 	 * @todo: process multiple changes at once!
 	 *
 	 * @param EntityChange $change
-	 *
-	 * @throws MWException
+	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.
 	 */
-	public function handleChange( EntityChange $change ) {
+	public function handleChange( EntityChange $change, array $rootJobParams = [] ) {
 		$changeId = $this->getChangeIdForLog( $change );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
 			. ' (' . $change->getType() . ')' );
@@ -116,9 +116,9 @@ class ChangeHandler {
 
 		( new LinkBatch( $titlesToUpdate ) )->execute();
 
-		$this->updater->purgeWebCache( $titlesToUpdate );
-		$this->updater->scheduleRefreshLinks( $titlesToUpdate );
-		$this->updater->injectRCRecords( $titlesToUpdate, $change );
+		$this->updater->purgeWebCache( $titlesToUpdate, $rootJobParams );
+		$this->updater->scheduleRefreshLinks( $titlesToUpdate, $rootJobParams );
+		$this->updater->injectRCRecords( $titlesToUpdate, $change, $rootJobParams );
 		// TODO: inject dummy revisions
 	}
 
