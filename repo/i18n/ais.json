@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Benel",
-			"Bunukwiki"
+			"Bunukwiki",
+			"Tokoabibi"
 		]
 	},
 	"wikibase-entity": "masaheciay a tuutuud",
 	"wikibase-entity-item": "kasacacay",
 	"wikibase-entity-query": "palalitemuh tu kawaw",
-	"wikibase-edit": "mikawaway tu kalumyiti",
+	"wikibase-edit": "mikawaway-kalumyiti",
 	"wikibase-save": "suped",
 	"wikibase-cancel": "palawpes",
 	"wikibase-add": "cunusen",
@@ -40,14 +41,17 @@
 	"wikibase-itemdisambiguation-lookup-label": "aazihen paya:",
 	"wikibase-itemdisambiguation-submit": "kilim",
 	"wikibase-newentity-language": "kamu:",
+	"wikibase-newentity-label": "aazihen paya:",
 	"wikibase-newentity-description": "patahkal:",
 	"wikibase-newentity-submit": "patizeng",
+	"wikibase-setlabel-label": "aazihen paya:",
 	"wikibase-setdescription-label": "patahkal:",
+	"wikibase-setlabeldescriptionaliases-label-label": "aazihen paya:",
 	"wikibase-setlabeldescriptionaliases-description-label": "patahkal:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "pacimilay a ngangan:",
 	"wikibase-setsitelink-badges": "kunpay:",
-	"wikibase-modifyentity-id": "sakatinengay a kodo nu tademaw:",
-	"wikibase-dispatchstats-change-id": "sakatinengay a kodo nu tademaw",
+	"wikibase-modifyentity-id": "ID:",
+	"wikibase-dispatchstats-change-id": "ID",
 	"wikibase-dispatchstats-oldest-change": "sakasumamadan",
 	"wikibase-dispatchstats-newest-change": "sabaluhay",
 	"wikibase-dispatchstats-pos": "kakitizaan",

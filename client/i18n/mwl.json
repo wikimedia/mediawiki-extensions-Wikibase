@@ -24,6 +24,8 @@
 	"unconnectedpages": "Páiginas sin lhigaçones a eilemientos associados",
 	"unconnectedpages-summary": "Esta páigina lhista las páiginas sin nanhun eilemiento de dados lhigado (ne ls spácios nominales que suportan eilemientos lhigados). La lhista ye apersentada por orde decrecente de l'eidantificador de la páigina, antoce las páiginas mais recentes son amostradas purmeiro.",
 	"wikibase-unconnectedpages-submit": "Amostrar páiginas",
+	"pageswithbadges": "Páiginas cun amblemas",
+	"entityusage": "Páiginas que outelizan ua antidade",
 	"wikibase-pageinfo-entity-id": "ID de l eilemiento {{WBREPONAME}}",
 	"wikibase-otherprojects": "Noutros porjetos",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Lhigaçon|Lhigaçones}} cun {{WBREPONAME}}",

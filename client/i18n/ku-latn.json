@@ -4,7 +4,8 @@
 			"George Animal",
 			"Ghybu",
 			"Gomada",
-			"Bikarhêner"
+			"Bikarhêner",
+			"Cûndûllah el-Kurdî"
 		]
 	},
 	"wikibase-after-page-move": "Tu dikarî beşa têkilîdar a {{WBREPONAME}}'yê, ku girêdanên zimanan ên li ser rûpela gerandî têde ne, [$1 rojane bikî].",
@@ -21,6 +22,7 @@
 	"wikibase-rc-hide-wikidata-hide": "veşêre",
 	"wikibase-rc-hide-wikidata-show": "nîşan bide",
 	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Guherandina {{WBREPONAME}}",
 	"wikibase-unconnectedpages-submit": "Rûpelan nîşan bide",
 	"wikibase-pageswithbadges-submit": "Rûpelan nîşan bide",
 	"wikibase-otherprojects": "Di projeyên din de"

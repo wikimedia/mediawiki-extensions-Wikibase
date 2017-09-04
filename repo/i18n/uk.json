@@ -111,7 +111,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "Дійсне значення, однак, можливо, історичне",
 	"wikibase-statementview-rank-deprecated": "Застарілий ранг",
 	"wikibase-statementview-rank-tooltip-deprecated": "Відомо, що значення є хибним, але загал його вважав/вважає правдивим",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|посилання на джерело|посилання на джерела}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|посилання на джерело|посилання на джерела|посилань на джерела}}",
 	"wikibase-snakview-property-input-placeholder": "властивість",
 	"wikibase-snakview-unsupportedsnaktype": "Подробиця типу «$1». Обробка подробиць такого типу ще не підтримується.",
 	"wikibase-snakview-choosesnaktype": "Виберіть тип значення.",
