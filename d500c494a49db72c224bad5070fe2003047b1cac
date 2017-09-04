@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_5ef22f66",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1419,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T08:14:21Z",
+      "side": 1,
+      "message": "Should be | in my opinion, but does not make a difference in this case.\n\nI see it was a + before (see Ia143563 where this issue was introduced).",
+      "range": {
+        "startLine": 1419,
+        "startChar": 63,
+        "endLine": 1419,
+        "endChar": 64
+      },
+      "revId": "d500c494a49db72c224bad5070fe2003047b1cac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
