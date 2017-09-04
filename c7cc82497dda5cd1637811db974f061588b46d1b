@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_3f515d65",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-04T15:08:36Z",
+      "side": 1,
+      "message": "This is unrelated, but came up during testing:\n\npush() doesn\u0027t throw an exception if no job queue is defined for $wikiDB, causing the misconfiguration to go unnoticed. lazyPush() does throw in that case. For command line scripts, lazyPush() otherwise behaves just like plain push().\n\nIf you don\u0027t like it here, make a separate patch :)",
+      "revId": "c7cc82497dda5cd1637811db974f061588b46d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
