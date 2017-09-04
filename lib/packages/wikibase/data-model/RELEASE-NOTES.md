@@ -1,5 +1,12 @@
 # Wikibase DataModel release notes
 
+
+## Version 7.1.0 (2017-09-01)
+
+* Changed `EntityIdValue::getArrayValue` to allow it handle foreign entity IDs and entity IDs that do not have a numeric representation
+* Deprecated `StatementGuid::getSerialization`
+* Removed MediaWiki integration files
+
 ## Version 7.0.0 (2017-03-15)
 
 This release adds support for custom entity types to `EntityIdValue`, and thus changes the hashes of

@@ -11,4 +11,4 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 	return;
 }
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '7.0.0' );
+define( 'WIKIBASE_DATAMODEL_VERSION', '7.1.0' );
