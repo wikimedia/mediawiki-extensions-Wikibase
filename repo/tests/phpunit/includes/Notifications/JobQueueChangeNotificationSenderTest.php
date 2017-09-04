@@ -29,7 +29,7 @@ class JobQueueChangeNotificationSenderTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$jobQueueGroup->expects( $this->exactly( $expectedChunks ? 1 : 0 ) )
-			->method( 'push' )
+			->method( 'lazyPush' )
 			->with( $this->isType( 'array' ) )
 			->will( $this->returnCallback(
 				function( array $jobs ) use ( $expectedChunks ) {
