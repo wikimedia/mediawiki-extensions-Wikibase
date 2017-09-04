@@ -3,9 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use HashSiteStore;
 use stdClass;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
@@ -15,10 +13,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
@@ -32,31 +28,11 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return WikibaseClient
-	 */
-	private function getWikibaseClient() {
-		/** @var RepositoryDefinitions $repositoryDefinitions */
-		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return new WikibaseClient(
-			WikibaseClient::getDefaultInstance()->getSettings(),
-			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
-			$repositoryDefinitions,
-			new HashSiteStore()
-		);
-	}
-
-	/**
 	 * @return PerRepositoryServiceContainer
 	 */
 	private function newRepositoryServiceContainer() {
 		/** @var EntityIdParser $idParser */
 		$idParser = $this->getMock( EntityIdParser::class );
-
-		$client = $this->getWikibaseClient();
 
 		return new PerRepositoryServiceContainer(
 			'foowiki',
@@ -64,7 +40,7 @@ class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $idParser ),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
-			new GenericServices( $client->getEntityNamespaceLookup(), new EntityTypeDefinitions( [] ) ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
 			new DataAccessSettings( 0, false ),
 			[]
 		);
