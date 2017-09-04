@@ -51,7 +51,7 @@ return call_user_func( function() {
 		'VT:monolingualtext' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
-				return $factory->newMonolingualFormatter( $format, $options );
+				return $factory->newMonolingualFormatter( $format );
 			},
 		],
 		'VT:quantity' => [

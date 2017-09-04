@@ -385,16 +385,15 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
-	 * @param FormatterOptions $options
 	 *
 	 * @return MonolingualHtmlFormatter
 	 */
-	public function newMonolingualFormatter( $format, FormatterOptions $options ) {
+	public function newMonolingualFormatter( $format ) {
 		// TODO: Add a wikitext formatter that shows the language name
 		if ( $this->isHtmlFormat( $format ) ) {
-			return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
+			return new MonolingualHtmlFormatter( $this->languageNameLookup );
 		} else {
-			return $this->escapeValueFormatter( $format, new MonolingualTextFormatter( $options ) );
+			return $this->escapeValueFormatter( $format, new MonolingualTextFormatter() );
 		}
 	}
 
