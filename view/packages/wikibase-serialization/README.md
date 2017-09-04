@@ -26,6 +26,7 @@ version 2.0 of this package:
 * Updated the MediaWiki entry point to use the extension.json format.
 * Added code sniffers for JavaScript as well as PHP.
 * Dropped compatibility with PHP 5.3.
+* Added support for deserializing snak hashes.
 
 ### 2.0.8 (2016-09-09)
 
