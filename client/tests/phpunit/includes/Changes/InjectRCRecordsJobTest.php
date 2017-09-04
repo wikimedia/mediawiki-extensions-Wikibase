@@ -321,6 +321,24 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testMakeJobSpecification_rootJobParams() {
+		$titles = [ $this->getTitleMock( 'Foo', 21 ) ];
+		$change = $this->getEntityChangeFactory()->newForEntity(
+			'change',
+			new ItemId( 'Q7' ),
+			[ 'id' => 7 ]
+		);
+
+		$rootJobParams = [
+			'rootJobSignature' => 'kittens',
+			'rootJobTimestamp' => '20170808010203',
+		];
+
+		$spec = InjectRCRecordsJob::makeJobSpecification( $titles, $change, $rootJobParams );
+
+		$this->assertEquals( $rootJobParams, $spec->getRootJobParams() );
+	}
+
 	public function provideConstruction() {
 		$change = $this->getEntityChangeMock(
 			17,
