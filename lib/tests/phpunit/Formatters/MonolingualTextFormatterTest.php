@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Formatters\MonolingualTextFormatter;
 
 /**
@@ -21,25 +20,21 @@ class MonolingualTextFormatterTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider monolingualTextFormatProvider
 	 */
-	public function testFormat( $value, $options, $pattern ) {
-		$formatter = new MonolingualTextFormatter( $options );
+	public function testFormat( $value, $pattern ) {
+		$formatter = new MonolingualTextFormatter();
 
 		$text = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $text );
 	}
 
 	public function monolingualTextFormatProvider() {
-		$options = new FormatterOptions();
-
 		return [
 			[
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				$options,
 				'@^Hallo Welt$@'
 			],
 			[
 				new MonolingualTextValue( 'de', 'Hallo&Welt' ),
-				$options,
 				'@^Hallo&Welt$@'
 			],
 		];

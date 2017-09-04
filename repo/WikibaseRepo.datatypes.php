@@ -182,7 +182,7 @@ return call_user_func( function() {
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
-				return $factory->newMonolingualFormatter( $format, $options );
+				return $factory->newMonolingualFormatter( $format );
 			},
 			'rdf-builder-factory-callback' => function (
 				$flags,
