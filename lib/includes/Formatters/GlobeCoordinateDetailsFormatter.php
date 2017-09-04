@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use DataValues\Geo\Formatters\GeoCoordinateFormatter;
+use DataValues\Geo\Formatters\LatLongFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use Html;
@@ -41,7 +41,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		parent::__construct( $options );
 
 		// TODO: What's a good default? Should this be locale dependant? Configurable?
-		$this->defaultOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
+		$this->defaultOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
 
 		$this->coordinateFormatter = new GlobeCoordinateFormatter( $this->options );
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use DataValues\Geo\Formatters\GeoCoordinateFormatter;
+use DataValues\Geo\Formatters\LatLongFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use InvalidArgumentException;
 use Language;
@@ -372,11 +372,11 @@ class WikibaseValueFormatterBuilders {
 				$options
 			);
 		} else {
-			$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
-			$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, [
-				GeoCoordinateFormatter::OPT_SPACE_LATLONG
+			$options->setOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
+			$options->setOption( LatLongFormatter::OPT_SPACING_LEVEL, [
+				LatLongFormatter::OPT_SPACE_LATLONG
 			] );
-			$options->setOption( GeoCoordinateFormatter::OPT_DIRECTIONAL, true );
+			$options->setOption( LatLongFormatter::OPT_DIRECTIONAL, true );
 
 			$plainFormatter = new GlobeCoordinateFormatter( $options );
 			return $this->escapeValueFormatter( $format, $plainFormatter );
