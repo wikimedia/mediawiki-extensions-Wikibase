@@ -77,7 +77,7 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 		foreach ( $chunks as $chunk ) {
 			$jobs[] = $this->getJobSpecification( $chunk );
 		}
-		$qgroup->push( $jobs );
+		$qgroup->lazyPush( $jobs );
 
 		wfDebugLog(
 			__METHOD__,
@@ -96,7 +96,12 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 
 		$params = [
 			'repo' => $this->repoDB,
-			'changeIds' => $changeIds
+			'changeIds' => $changeIds,
+
+			// Set root job parameters for deduplication.
+			// Compare WikiPageUpdater::addRootJobParameters
+			// and InjectRCRecordsJob::makeJobSpecification.
+			'rootJobTimestamp' => wfTimestampNow(),
 		];
 
 		return new JobSpecification(
