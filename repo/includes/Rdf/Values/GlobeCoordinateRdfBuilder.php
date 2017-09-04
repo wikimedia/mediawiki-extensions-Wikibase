@@ -110,7 +110,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$precision = $value->getPrecision();
 		if ( is_null( $precision ) ) {
 			$valueWriter->a( RdfVocabulary::NS_ONTOLOGY, 'GeoAutoPrecision' );
-			// 1/3600 comes from GeoCoordinateFormatter.php default value for no prcision
+			// 1/3600 comes from LatLongFormatter.php default value for no precision
 			$precision = 1 / 3600;
 		}
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoPrecision' )
