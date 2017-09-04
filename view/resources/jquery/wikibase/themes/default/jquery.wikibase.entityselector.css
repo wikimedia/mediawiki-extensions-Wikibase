@@ -70,12 +70,12 @@
 	padding-right: 1.2em;
 }
 
-.ui-entityselector-input-recognized {
-	/* NOTE: !important because valueview styles */
-	border-color: #14866d !important;
+/* Specificity must be a little higher because of a valueview selector */
+.ui-entityselector-input.ui-entityselector-input-recognized {
+	border-color: #14866d;
 }
-.ui-entityselector-input-unrecognized {
-	/* NOTE: !important because valueview styles */
-	background-color: #fee7e6 !important;
-	border-color: #b32424 !important;
+
+.ui-entityselector-input.ui-entityselector-input-unrecognized {
+	background-color: #fee7e6;
+	border-color: #b32424;
 }
