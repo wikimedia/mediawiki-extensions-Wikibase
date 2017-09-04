@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_e4e4acdb",
+        "filename": "lib/includes/Store/PropertyInfoStore.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T13:31:30Z",
+      "side": 1,
+      "message": "Why is this constant in the …Store interface, and not in PropertyInfoProvider interface, or in the FieldPropertyInfoProvider class? Is it really *stored*, or only retrieved?",
+      "range": {
+        "startLine": 13,
+        "startChar": 10,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_84f7e886",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T13:31:30Z",
+      "side": 1,
+      "message": "This is not helpful documentation and can as well be removed.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 23
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e4882ced",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T13:31:30Z",
+      "side": 1,
+      "message": "This is not true. It\u0027s not a full URI.",
+      "range": {
+        "startLine": 66,
+        "startChar": 19,
+        "endLine": 66,
+        "endChar": 33
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_842da8ef",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T13:31:30Z",
+      "side": 1,
+      "message": "Why protected? Who is going to override this?",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 10
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0419b8db",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T13:31:30Z",
+      "side": 1,
+      "message": "I think I complained about this trimming before. I think it is bad to do this here. This will hide errors. This should either be a validator that disallows untrimmed values, or trimming should be enforced on save.",
+      "range": {
+        "startLine": 69,
+        "startChar": 9,
+        "endLine": 69,
+        "endChar": 13
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_241cf4c9",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-04T13:31:30Z",
+      "side": 1,
+      "message": "Casting a string to a string is pointless. The value you get from a StringValue object is guaranteed to be a string already.",
+      "range": {
+        "startLine": 69,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
