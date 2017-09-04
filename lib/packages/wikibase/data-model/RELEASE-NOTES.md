@@ -1,10 +1,24 @@
 # Wikibase DataModel release notes
 
+## Version 8.0.0 (dev)
+
+#### Breaking changes
+* `Item:setId` as well as `Property::setId` do not accept integers any more.
+* Removed `Item::getSiteLinks` and `Item::hasSiteLinks`.
+* `RepositoryNameAssert` now also disallows periods, in addition to colons.
+
+#### Other changes
+* Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
+  `hasLinkToSite`, and `removeSiteLink`.
 
 ## Version 7.1.0 (2017-09-01)
 
-* Changed `EntityIdValue::getArrayValue` to allow it handle foreign entity IDs and entity IDs that do not have a numeric representation
+* Changed `EntityIdValue::getArrayValue` to allow it handle foreign entity IDs and entity IDs that
+  do not have a numeric representation.
+* Fixed exception handling in `EntityIdValue` not always forwarding the full stack trace.
+* Deprecated `EntityIdValue::newFromArray`
 * Deprecated `StatementGuid::getSerialization`
+* Improved documentation of `EntityDocument::isEmpty`
 * Removed MediaWiki integration files
 
 ## Version 7.0.0 (2017-03-15)
