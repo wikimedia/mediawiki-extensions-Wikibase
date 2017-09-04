@@ -8,11 +8,16 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 3.1.0 (dev)
+### 4.0.0 (dev)
 
-* Added a `hash` parameter to the constructors of
-  `Snak`, `PropertyValueSnak`, `PropertySomeValueSnak` and `PropertyNoValueSnak`,
-  as well as a `getHash()` function to the `Snak` class.
+* Added an optional `hash` constructor parameter and a `getHash` method to `Snak`,
+  `PropertyValueSnak`, `PropertySomeValueSnak`, and `PropertyNoValueSnak`.
+* Removed all move-related methods from `SnakList`: `moveUp`, `moveDown`, `move`, as well as
+  `getValidMoveIndices`.
+* Removed dysfunctional `addStatement` and `removeStatement` methods from both `Item` and `Property`
+  classes.
+* Declared `SnakList.getFilteredSnakList` private.
+* Travis now runs the QUnit tests.
 
 ### 3.0.1 (2016-09-09)
 
