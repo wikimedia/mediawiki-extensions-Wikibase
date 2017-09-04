@@ -129,7 +129,11 @@ class GenericServices {
 	 * but not about other entity types.
 	 */
 	public function getCompactBaseDataModelSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
+		return new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
 	}
 
 	/**
