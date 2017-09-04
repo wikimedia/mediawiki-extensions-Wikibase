@@ -75,10 +75,15 @@ class InjectRCRecordsJob extends Job {
 	/**
 	 * @param Title[] $titles
 	 * @param EntityChange $change
+	 * @param array $rootJobParams
 	 *
 	 * @return JobSpecification
 	 */
-	public static function makeJobSpecification( array $titles, EntityChange $change ) {
+	public static function makeJobSpecification(
+		array $titles,
+		EntityChange $change,
+		array $rootJobParams = []
+	) {
 		$pages = [];
 
 		foreach ( $titles as $t ) {
@@ -91,10 +96,10 @@ class InjectRCRecordsJob extends Job {
 		$changeData = $change->getFields();
 		$changeData['info'] = $change->getSerializedInfo( [ 'changes' ] );
 
-		$params = [
+		$params = array_merge( $rootJobParams, [
 			'change' => $changeData,
 			'pages' => $pages
-		];
+		] );
 
 		return new JobSpecification(
 			'wikibase-InjectRCRecords',

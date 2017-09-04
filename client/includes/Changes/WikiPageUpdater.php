@@ -98,11 +98,27 @@ class WikiPageUpdater implements PageUpdater {
 	}
 
 	/**
+	 * @param array $params
+	 * @param array $rootJobParams
+	 * @return array
+	 */
+	private function addRootJobParameters( array $params, array $rootJobParams ) {
+		if ( isset( $rootJobParams['rootJobTimestamp'] ) ) {
+			$params['rootJobTimestamp'] = $rootJobParams['rootJobTimestamp'];
+		} else {
+			$params['rootJobTimestamp'] = wfTimestampNow();
+		}
+
+		return $params;
+	}
+
+	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
+	 * @param array $rootJobParams
 	 */
-	public function purgeWebCache( array $titles ) {
+	public function purgeWebCache( array $titles, array $rootJobParams = [] ) {
 		if ( $titles === [] ) {
 			return;
 		}
@@ -119,10 +135,9 @@ class WikiPageUpdater implements PageUpdater {
 
 			$jobs[] = new HTMLCacheUpdateJob(
 				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
-				[
-					'pages' => $this->getPageParamForRefreshLinksJob( $batch ),
-					'rootJobTimestamp' => wfTimestampNow()
-				]
+				$this->addRootJobParameters( [
+					'pages' => $this->getPageParamForRefreshLinksJob( $batch )
+				], $rootJobParams )
 			);
 		}
 
@@ -135,8 +150,9 @@ class WikiPageUpdater implements PageUpdater {
 	 * Schedules RefreshLinks jobs for the given titles
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
+	 * @param array $rootJobParams
 	 */
-	public function scheduleRefreshLinks( array $titles ) {
+	public function scheduleRefreshLinks( array $titles, array $rootJobParams = [] ) {
 		if ( $titles === [] ) {
 			return;
 		}
@@ -153,10 +169,9 @@ class WikiPageUpdater implements PageUpdater {
 
 			$jobs[] = new RefreshLinksJob(
 				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
-				[
+				$this->addRootJobParameters( [
 					'pages' => $this->getPageParamForRefreshLinksJob( $batch ),
-					'rootJobTimestamp' => wfTimestampNow(),
-				]
+				], $rootJobParams )
 			);
 		}
 
@@ -189,13 +204,14 @@ class WikiPageUpdater implements PageUpdater {
 	 *
 	 * @param Title[] $titles
 	 * @param EntityChange $change
+	 * @param array $rootJobParams
 	 */
-	public function injectRCRecords( array $titles, EntityChange $change ) {
+	public function injectRCRecords( array $titles, EntityChange $change, array $rootJobParams = [] ) {
 		if ( $titles === [] ) {
 			return;
 		}
 
-		$jobSpec = InjectRCRecordsJob::makeJobSpecification( $titles, $change );
+		$jobSpec = InjectRCRecordsJob::makeJobSpecification( $titles, $change, $rootJobParams );
 
 		$this->jobQueueGroup->lazyPush( $jobSpec );
 
