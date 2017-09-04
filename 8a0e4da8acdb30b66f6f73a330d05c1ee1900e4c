@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_84d5a814",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-04T13:01:21Z",
+      "side": 1,
+      "message": "It copy-pastes four lines of PropertyInfoSnakUrlExpander::expandUrl() I don\u0027t think it\u0027s worth building a brand new service just for four lines.",
+      "parentUuid": "0e0e73b5_ba108bae",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 61
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_9dff6662",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 3
@@ -105,6 +129,30 @@
       "writtenOn": "2016-08-08T15:13:08Z",
       "side": 1,
       "message": "StringValue",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 41
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_04c1b858",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-04T13:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_9dff6662",
       "range": {
         "startLine": 68,
         "startChar": 32,
@@ -145,6 +193,30 @@
       "writtenOn": "2016-12-29T15:45:44Z",
       "side": 1,
       "message": "`PropertyInfoProvider::class` syntax would be better, because that way IDE can easily track class\u0027 usages.",
+      "range": {
+        "startLine": 36,
+        "startChar": 40,
+        "endLine": 36,
+        "endChar": 75
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a4d0e422",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/ExternalIdentifierRdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-04T13:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_7ace9360",
       "range": {
         "startLine": 36,
         "startChar": 40,
