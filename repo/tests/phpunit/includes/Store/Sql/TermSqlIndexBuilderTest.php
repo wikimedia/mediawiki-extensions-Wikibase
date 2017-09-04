@@ -15,6 +15,7 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Sql\TermSqlIndexBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\TermSqlIndexBuilder
@@ -174,6 +175,8 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param string[] $entityTypes
+	 *
 	 * @return TermSqlIndexBuilder
 	 */
 	private function getBuilder( array $entityTypes ) {
@@ -198,6 +201,9 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		return $builder;
 	}
 
+	/**
+	 * @param EntityDocument[] $entities
+	 */
 	private function saveEntities( array $entities ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -301,9 +307,9 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	 * @param Item $item
 	 * @param string $languageCode
 	 *
-	 * @return \Wikibase\TermIndexEntry[]
+	 * @return TermIndexEntry[]
 	 */
-	private function getLabelTerms( $item, $languageCode ) {
+	private function getLabelTerms( Item $item, $languageCode ) {
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$terms = $termIndex->getTermsOfEntity( $item->getId(), [ 'label' ], [ $languageCode ] );
 		return $terms;
@@ -311,25 +317,18 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId $entityId
+	 *
 	 * @return int[]
 	 */
 	private function getTermRowIdsForEntity( EntityId $entityId ) {
-		$ids = [];
-
 		$db = wfGetDB( DB_MASTER );
 
-		$rows = $db->select(
+		return $db->selectFieldValues(
 			'wb_terms',
-			[ 'term_row_id' ],
+			'term_row_id',
 			[ 'term_full_entity_id' => $entityId->getSerialization() ],
 			__METHOD__
 		);
-
-		foreach ( $rows as $row ) {
-			$ids[] = $row->term_row_id;
-		}
-
-		return $ids;
 	}
 
 	public function provideNonIntegerFromIdValues() {

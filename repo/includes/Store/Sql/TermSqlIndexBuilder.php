@@ -57,6 +57,11 @@ class TermSqlIndexBuilder {
 	private $entityTypes;
 
 	/**
+	 * @var int
+	 */
+	private $sleep;
+
+	/**
 	 * @var MessageReporter
 	 */
 	private $progressReporter;
@@ -105,7 +110,7 @@ class TermSqlIndexBuilder {
 		SqlEntityIdPagerFactory $entityIdPagerFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		array $entityTypes,
-		$sleep = 10
+		$sleep = 0
 	) {
 		$this->loadBalancerFactory = $loadBalancerFactory;
 		$this->termSqlIndex = $termSqlIndex;
@@ -113,6 +118,7 @@ class TermSqlIndexBuilder {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTypes = $entityTypes;
 		$this->sleep = $sleep;
+
 		$this->progressReporter = new NullMessageReporter();
 		$this->errorReporter = new NullMessageReporter();
 	}
@@ -197,13 +203,13 @@ class TermSqlIndexBuilder {
 				break;
 			}
 
-			$lastIdProcessed = $this->rebuildTermsForBatch( $entityIds, $loadBalancer, $ticket );
+			$this->rebuildTermsForBatch( $entityIds, $loadBalancer, $ticket );
+			$this->progressReporter->reportMessage( 'Processed up to page '
+				. $idPager->getPosition() . ' (' . end( $entityIds ) . ')' );
 
-			if ( $lastIdProcessed !== null ) {
-				$this->progressReporter->reportMessage( "Processed up to page "
-					. $idPager->getPosition() . " ($lastIdProcessed)" );
+			if ( $this->sleep > 0 ) {
+				sleep( $this->sleep );
 			}
-			sleep( $this->sleep );
 		}
 
 		$this->progressReporter->reportMessage( "Done rebuilding $entityType terms" );
@@ -213,18 +219,12 @@ class TermSqlIndexBuilder {
 	 * @param EntityId[] $entityIds
 	 * @param LoadBalancer $loadBalancer
 	 * @param mixed $transactionTicket
-	 *
-	 * @return EntityId|null ID of entity which terms where last processed or null if no entity was processed.
 	 */
 	private function rebuildTermsForBatch( array $entityIds, LoadBalancer $loadBalancer, $transactionTicket ) {
 		$dbr = $loadBalancer->getConnection( DB_REPLICA );
 		$dbw = $loadBalancer->getConnection( DB_MASTER );
 
-		$lastIdProcessed = null;
-
 		foreach ( $entityIds as $entityId ) {
-			$lastIdProcessed = $entityId;
-
 			$this->rebuildEntityTerms( $dbr, $dbw, $entityId );
 		}
 
@@ -232,8 +232,6 @@ class TermSqlIndexBuilder {
 		$loadBalancer->reuseConnection( $dbr );
 
 		$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $transactionTicket );
-
-		return $lastIdProcessed;
 	}
 
 	private function rebuildEntityTerms( IDatabase $dbr, IDatabase $dbw, EntityId $entityId ) {
@@ -277,8 +275,6 @@ class TermSqlIndexBuilder {
 			$this->errorReporter->reportMessage(
 				"Failed to save terms of entity: $serializedId"
 			);
-
-			return;
 		}
 	}
 
@@ -324,6 +320,7 @@ class TermSqlIndexBuilder {
 
 	/**
 	 * @param TermIndexEntry[] $terms
+	 *
 	 * @return TermIndexEntry[]
 	 */
 	private function getDuplicateTerms( array $terms ) {
