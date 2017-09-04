@@ -153,15 +153,17 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
 		$pages = [];
+		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( array $jobs ) use ( &$pages ) {
+			->will( $this->returnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams  ) {
 				/** @var Job $job */
 				foreach ( $jobs as $job ) {
 					$this->assertInstanceOf( HTMLCacheUpdateJob::class, $job );
 					$params = $job->getParams();
 					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
 					$pages += $params['pages']; // addition uses keys, array_merge does not
+					$rootJobParams = $job->getRootJobParams();
 				}
 			} ) );
 
@@ -174,12 +176,23 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$updater->purgeWebCache( [
 			$titleFoo, $titleBar, $titleCuzz,
+		], [
+			'rootJobTimestamp' => '20202211060708',
 		] );
 
 		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
 		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
 		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
 		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
+
+		$this->assertEquals(
+			[
+				'rootJobTimestamp' => '20202211060708',
+				'rootJobSignature' => null,
+			],
+			$rootJobParams,
+			'$rootJobParams'
+		);
 	}
 
 	public function testScheduleRefreshLinks() {
@@ -190,15 +203,17 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
 		$pages = [];
+		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( array $jobs ) use ( &$pages ) {
+			->will( $this->returnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams ) {
 				/** @var Job $job */
 				foreach ( $jobs as $job ) {
 					$this->assertInstanceOf( RefreshLinksJob::class, $job );
 					$params = $job->getParams();
 					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
 					$pages += $params['pages']; // addition uses keys, array_merge does not
+					$rootJobParams = $job->getRootJobParams();
 				}
 			} ) );
 
@@ -211,12 +226,23 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$updater->scheduleRefreshLinks( [
 			$titleFoo, $titleBar, $titleCuzz,
+		], [
+			'rootJobTimestamp' => '20202211060708',
 		] );
 
 		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
 		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
 		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
 		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
+
+		$this->assertEquals(
+			[
+				'rootJobTimestamp' => '20202211060708',
+				'rootJobSignature' => null,
+			],
+			$rootJobParams,
+			'$rootJobParams'
+		);
 	}
 
 	public function testInjectRCRecords() {
@@ -229,18 +255,22 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
 		$pages = [];
+		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( IJobSpecification $job ) use ( &$pages, $change ) {
-				$params = $job->getParams();
+			->will( $this->returnCallback(
+				function( IJobSpecification $job ) use ( &$pages, $change, &$rootJobParams ) {
+					$params = $job->getParams();
 
-				$this->assertArrayHasKey( 'change', $params, '$params["change"]' );
-				$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
+					$this->assertArrayHasKey( 'change', $params, '$params["change"]' );
+					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
 
-				$this->assertSame( $change->getId(), $params['change']['id'] );
+					$this->assertSame( $change->getId(), $params['change']['id'] );
 
-				$pages += $params['pages']; // addition uses keys, array_merge does not
-			} ) );
+					$pages += $params['pages']; // addition uses keys, array_merge does not
+					$rootJobParams = $job->getRootJobParams();
+				}
+			) );
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
@@ -249,14 +279,25 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$this->getRCDupeDetectorMock()
 		);
 
-		$updater->injectRCRecords( [
-			$titleFoo, $titleBar, $titleCuzz,
-		], $change );
+		$updater->injectRCRecords(
+			[ $titleFoo, $titleBar, $titleCuzz, ],
+			$change,
+			[ 'rootJobTimestamp' => '20202211060708', ]
+		);
 
 		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
 		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
 		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
 		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
+
+		$this->assertEquals(
+			[
+				'rootJobTimestamp' => '20202211060708',
+				'rootJobSignature' => null,
+			],
+			$rootJobParams,
+			'$rootJobParams'
+		);
 	}
 
 }

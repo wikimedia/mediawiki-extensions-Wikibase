@@ -96,7 +96,7 @@ class ChangeNotificationJob extends Job {
 		$changes = $this->getChanges();
 
 		$changeHandler = $this->getChangeHandler();
-		$changeHandler->handleChanges( $changes );
+		$changeHandler->handleChanges( $changes, $this->getRootJobParams() );
 
 		if ( $changes ) {
 			/* @var EntityChange $last */
