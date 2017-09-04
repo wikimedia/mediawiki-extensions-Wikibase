@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_e4b90ce6",
+        "filename": "data-access/src/MultiRepositoryServices.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-04T13:38:04Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0467784a",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-04T13:38:04Z",
+      "side": 1,
+      "message": "is this correct?",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_049458e9",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-04T13:38:04Z",
+      "side": 1,
+      "message": "mixing the namespace mappings for multiple repos in a single array will work for now, but it seems like asking for trouble to me.\n\nAn alternative would be to have entityTypeToRepositoryMapping contain pairs of repo/namespace, instead of just the repo name.",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_848848cb",
+        "filename": "repo/includes/Api/EntitySearchTermIndex.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-04T13:38:04Z",
+      "side": 1,
+      "message": "I prefer to reserve FIXME for stuff that should not be merged without resolving the issue. In this case, I\u0027d use NOTE or XXX.",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
