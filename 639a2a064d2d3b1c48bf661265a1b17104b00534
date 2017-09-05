@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b6b9efe6",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-05T15:59:38Z",
+      "side": 1,
+      "message": "I really don\u0027t remember what\u0027s happening here :D",
+      "revId": "639a2a064d2d3b1c48bf661265a1b17104b00534",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_7697074b",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-05T15:59:38Z",
+      "side": 1,
+      "message": "So: we have a URL for display, and a URI for identification. If only one of them is defined, the other one falls back on that.",
+      "revId": "639a2a064d2d3b1c48bf661265a1b17104b00534",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
