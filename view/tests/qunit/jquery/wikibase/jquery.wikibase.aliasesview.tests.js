@@ -75,21 +75,21 @@
 		QUnit.stop();
 
 		aliasesview.startEditing()
-		.done( function () {
-			assert.ok(
-				aliasesview.$list.data( 'tagadata' ) !== undefined,
-				'Instantiated tagadata widget.'
-			);
-		} )
-		.fail( function () {
-			assert.ok(
-				false,
-				'Failed to start edit mode.'
-			);
-		} )
-		.always( function () {
-			QUnit.start();
-		} );
+			.done( function () {
+				assert.ok(
+					aliasesview.$list.data( 'tagadata' ) !== undefined,
+					'Instantiated tagadata widget.'
+				);
+			} )
+			.fail( function () {
+				assert.ok(
+					false,
+					'Failed to start edit mode.'
+				);
+			} )
+			.always( function () {
+				QUnit.start();
+			} );
 	} );
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
@@ -98,18 +98,18 @@
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
 		$aliasesview
-		.on( 'aliasesviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'aliasesviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'aliasesviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'aliasesviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		/**
 		 * @param {Function} func
@@ -125,14 +125,14 @@
 			}
 
 			$aliasesview
-			.one( 'aliasesviewafterstartediting.aliasesviewtest', function ( event ) {
-				$aliasesview.off( '.aliasesviewtest' );
-				deferred.resolve();
-			} )
-			.one( 'aliasesviewafterstopediting.aliasesviewtest', function ( event, dropValue ) {
-				$aliasesview.off( '.aliasesviewtest' );
-				deferred.resolve();
-			} );
+				.one( 'aliasesviewafterstartediting.aliasesviewtest', function ( event ) {
+					$aliasesview.off( '.aliasesviewtest' );
+					deferred.resolve();
+				} )
+				.one( 'aliasesviewafterstopediting.aliasesviewtest', function ( event, dropValue ) {
+					$aliasesview.off( '.aliasesviewtest' );
+					deferred.resolve();
+				} );
 
 			func();
 
@@ -207,12 +207,12 @@
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
 		$aliasesview
-		.on( 'aliasesviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered "toggleerror" event.'
-			);
-		} );
+			.on( 'aliasesviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered "toggleerror" event.'
+				);
+			} );
 
 		aliasesview.setError();
 	} );

@@ -46,21 +46,21 @@
 		QUnit.stop();
 
 		pageSuggester.search()
-		.done( function () {
-			assert.ok(
-				false,
-				'Searching successful although supposed to fail.'
-			);
-		} )
-		.fail( function () {
-			assert.ok(
-				true,
-				'Searching failed as expected.'
-			);
-		} )
-		.always( function () {
-			QUnit.start();
-		} );
+			.done( function () {
+				assert.ok(
+					false,
+					'Searching successful although supposed to fail.'
+				);
+			} )
+			.fail( function () {
+				assert.ok(
+					true,
+					'Searching failed as expected.'
+				);
+			} )
+			.always( function () {
+				QUnit.start();
+			} );
 
 	} );
 

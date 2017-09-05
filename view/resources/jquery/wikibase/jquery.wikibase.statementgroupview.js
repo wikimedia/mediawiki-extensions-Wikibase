@@ -120,20 +120,20 @@
 			prefix = this.statementlistview.widgetEventPrefix;
 
 			$statementlistview
-			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
-				self.$property.toggleClass( 'wb-error', Boolean( error ) );
-			} )
-			.on( prefix + 'afterstopediting.' + this.widgetName, function ( event, dropValue ) {
-				self.$property.removeClass( 'wb-error wb-edit' );
-				self._trigger( 'afterstopediting', null, [ dropValue ] );
-			} )
-			.on( prefix + 'afterstartediting.' + this.widgetName, function ( event ) {
-				self.$property.addClass( 'wb-edit' );
-			} )
-			.on( prefix + 'afterremove.' + this.widgetName, function ( event ) {
-				self.$property.removeClass( 'wb-error wb-edit' );
-				self._trigger( 'afterremove' );
-			} );
+				.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
+					self.$property.toggleClass( 'wb-error', Boolean( error ) );
+				} )
+				.on( prefix + 'afterstopediting.' + this.widgetName, function ( event, dropValue ) {
+					self.$property.removeClass( 'wb-error wb-edit' );
+					self._trigger( 'afterstopediting', null, [ dropValue ] );
+				} )
+				.on( prefix + 'afterstartediting.' + this.widgetName, function ( event ) {
+					self.$property.addClass( 'wb-edit' );
+				} )
+				.on( prefix + 'afterremove.' + this.widgetName, function ( event ) {
+					self.$property.removeClass( 'wb-error wb-edit' );
+					self._trigger( 'afterremove' );
+				} );
 		},
 
 		/**

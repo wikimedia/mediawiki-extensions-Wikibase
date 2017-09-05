@@ -111,8 +111,8 @@
 					};
 
 				this.element
-				.off( event, updateAutoInput )
-				.on( event, updateAutoInput );
+					.off( event, updateAutoInput )
+					.on( event, updateAutoInput );
 			}
 
 			return $.Deferred().resolve().promise();
@@ -138,44 +138,44 @@
 
 			// Encapsulate sitelinkviews by suppressing their events:
 			this.$listview
-			.listview( {
-				listItemAdapter: listItemAdapter,
-				value: self.options.value || null,
-				listItemNodeName: 'LI',
-				encapsulate: true
-			} )
-			.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
-				event.stopPropagation();
-				if ( self.options.autoInput ) {
-					self._updateAutoInput();
-					self._refreshCounter();
-				}
-				self._trigger( 'change' );
-			} )
-			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function ( event, error ) {
-				event.stopPropagation();
-			} )
-			.on( 'keydown.' + this.widgetName, function ( event ) {
-				if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
-					var $sitelinkview = $( event.target ).parentsUntil( this ).addBack().filter( '.listview-item' ),
-						sitelinkview = listItemAdapter.liInstance( $sitelinkview );
-
-					if ( sitelinkview ) {
-						self._removeSitelinkviewIfEmpty( sitelinkview, event ); // FIXME: Move to sitelinkview
-					}
-				}
-			} )
-			.on(
-				[
-					listItemAdapter.prefixedEvent( 'create.' + this.widgetName ),
-					listItemAdapter.prefixedEvent( 'afterstartediting.' + this.widgetName ),
-					listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
-					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
-				].join( ' ' ),
-				function ( event ) {
+				.listview( {
+					listItemAdapter: listItemAdapter,
+					value: self.options.value || null,
+					listItemNodeName: 'LI',
+					encapsulate: true
+				} )
+				.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
 					event.stopPropagation();
-				}
-			);
+					if ( self.options.autoInput ) {
+						self._updateAutoInput();
+						self._refreshCounter();
+					}
+					self._trigger( 'change' );
+				} )
+				.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function ( event, error ) {
+					event.stopPropagation();
+				} )
+				.on( 'keydown.' + this.widgetName, function ( event ) {
+					if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
+						var $sitelinkview = $( event.target ).parentsUntil( this ).addBack().filter( '.listview-item' ),
+							sitelinkview = listItemAdapter.liInstance( $sitelinkview );
+
+						if ( sitelinkview ) {
+							self._removeSitelinkviewIfEmpty( sitelinkview, event ); // FIXME: Move to sitelinkview
+						}
+					}
+				} )
+				.on(
+					[
+						listItemAdapter.prefixedEvent( 'create.' + this.widgetName ),
+						listItemAdapter.prefixedEvent( 'afterstartediting.' + this.widgetName ),
+						listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
+						listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
+					].join( ' ' ),
+					function ( event ) {
+						event.stopPropagation();
+					}
+				);
 		},
 
 		/**
@@ -266,9 +266,9 @@
 			}
 
 			this.options.$counter
-			.addClass( this.widgetName + '-counter' )
-			.empty()
-			.append( this._getFormattedCounterText() );
+				.addClass( this.widgetName + '-counter' )
+				.empty()
+				.append( this._getFormattedCounterText() );
 		},
 
 		/**

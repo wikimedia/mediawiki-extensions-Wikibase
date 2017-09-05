@@ -70,18 +70,18 @@
 			labelview = $labelview.data( 'labelview' );
 
 		$labelview
-		.on( 'labelviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'labelviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'labelviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'labelviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		labelview.startEditing();
 
@@ -107,12 +107,12 @@
 			labelview = $labelview.data( 'labelview' );
 
 		$labelview
-		.on( 'labelviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered "toggleerror" event.'
-			);
-		} );
+			.on( 'labelviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered "toggleerror" event.'
+				);
+			} );
 
 		labelview.setError();
 	} );

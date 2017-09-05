@@ -228,10 +228,10 @@
 			var self = this;
 
 			this.$mainSnak
-			.on( 'snakviewchange.' + this.widgetName, function ( event, status ) {
-				event.stopPropagation();
-				self._trigger( 'change' );
-			} );
+				.on( 'snakviewchange.' + this.widgetName, function ( event, status ) {
+					event.stopPropagation();
+					self._trigger( 'change' );
+				} );
 
 			this._mainSnakSnakView = this.options.buildSnakView(
 				{
@@ -273,12 +273,12 @@
 				} ),
 				value: groupedQualifierSnaks
 			} )
-			.on( 'snaklistviewchange.' + this.widgetName,
-				function ( event ) {
-					event.stopPropagation();
-					self._trigger( 'change' );
-				}
-			);
+				.on( 'snaklistviewchange.' + this.widgetName,
+					function ( event ) {
+						event.stopPropagation();
+						self._trigger( 'change' );
+					}
+				);
 
 			this._qualifiers = $qualifiers.data( 'listview' );
 		},
@@ -314,11 +314,11 @@
 			this._referencesListview = $listview.data( 'listview' );
 
 			$listview
-			.on( lia.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
-				event.stopPropagation();
-				self._drawReferencesCounter();
-				self._trigger( 'change' );
-			} );
+				.on( lia.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
+					event.stopPropagation();
+					self._drawReferencesCounter();
+					self._trigger( 'change' );
+				} );
 
 			this._createReferencesToggler();
 		},
@@ -651,8 +651,10 @@
 		 * @protected
 		 */
 		_recreateReferences: function () {
-			this._referencesListview.option( 'value', this.options.value
-					? this.options.value.getReferences().toArray() : [] );
+			this._referencesListview.option(
+				'value',
+				this.options.value ? this.options.value.getReferences().toArray() : []
+			);
 
 			this._drawReferencesCounter();
 		},

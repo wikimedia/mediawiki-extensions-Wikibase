@@ -136,26 +136,26 @@
 
 				// Fully encapsulate child widgets by suppressing their events:
 				self[ '$' + widgetName ]
-				.on( widgetName + 'change', function ( event ) {
-					event.stopPropagation();
-					// The only event handler for this is in entitytermsforlanguagelistview.
-					self._trigger( 'change', null, [ self.options.value.language ] );
-				} )
-				.on( widgetName + 'toggleerror.' + self.widgetName, function ( event, error ) {
-					event.stopPropagation();
-					self.setError( error );
-				} )
-				.on(
-					[
-						widgetName + 'create.' + self.widgetName,
-						widgetName + 'afterstartediting.' + self.widgetName,
-						widgetName + 'afterstopediting.' + self.widgetName,
-						widgetName + 'disable.' + self.widgetName
-					].join( ' ' ),
-					function ( event ) {
+					.on( widgetName + 'change', function ( event ) {
 						event.stopPropagation();
-					}
-				);
+						// The only event handler for this is in entitytermsforlanguagelistview.
+						self._trigger( 'change', null, [ self.options.value.language ] );
+					} )
+					.on( widgetName + 'toggleerror.' + self.widgetName, function ( event, error ) {
+						event.stopPropagation();
+						self.setError( error );
+					} )
+					.on(
+						[
+							widgetName + 'create.' + self.widgetName,
+							widgetName + 'afterstartediting.' + self.widgetName,
+							widgetName + 'afterstopediting.' + self.widgetName,
+							widgetName + 'disable.' + self.widgetName
+						].join( ' ' ),
+						function ( event ) {
+							event.stopPropagation();
+						}
+					);
 
 				var options = {
 					value: self.options.value[ subjectName ],

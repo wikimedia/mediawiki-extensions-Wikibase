@@ -66,13 +66,13 @@
 		QUnit.stop();
 
 		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
-		.done( function ( savedDescription ) {
-			QUnit.start();
-			assert.equal( savedDescription.getText(), 'description' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setDescription failed' );
-		} );
+			.done( function ( savedDescription ) {
+				QUnit.start();
+				assert.equal( savedDescription.getText(), 'description' );
+			} )
+			.fail( function () {
+				assert.ok( false, 'setDescription failed' );
+			} );
 	} );
 
 	QUnit.test( 'setDescription correctly handles API failures', function ( assert ) {
@@ -91,14 +91,14 @@
 		QUnit.stop();
 
 		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
-		.done( function ( savedDescription ) {
-			assert.ok( false, 'setDescription should have failed' );
-		} )
-		.fail( function ( error ) {
-			QUnit.start();
-			assert.ok( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-		} );
+			.done( function ( savedDescription ) {
+				assert.ok( false, 'setDescription should have failed' );
+			} )
+			.fail( function ( error ) {
+				QUnit.start();
+				assert.ok( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+			} );
 	} );
 
 }( sinon, wikibase, jQuery ) );

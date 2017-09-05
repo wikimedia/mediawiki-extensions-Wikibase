@@ -39,17 +39,19 @@
 			template: 'wikibase-entitytermsview',
 			templateParams: [
 				function () {
-					return $( mw.wbTemplate(
+					return $(
+						mw.wbTemplate(
 							'wikibase-entitytermsview-heading-part',
 							'description',
 							'',
 							''
-						) ).add( mw.wbTemplate(
-							'wikibase-entitytermsview-heading-part',
-							'aliases',
-							'',
-							''
-						) );
+						)
+					).add( mw.wbTemplate(
+						'wikibase-entitytermsview-heading-part',
+						'aliases',
+						'',
+						''
+					) );
 				}, // header content
 				'', // entitytermsforlanguagelistview
 				'', // additional entitytermsforlanguagelistview container class(es)
@@ -94,8 +96,7 @@
 
 			var self = this;
 
-			this.element
-			.on(
+			this.element.on(
 				this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
 				this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
 				function ( event, lang ) {
@@ -230,12 +231,12 @@
 							'wikibase-entitytermsview-showEntitytermslistview',
 							params.visible ? '1' : '0'
 						)
-						.done( function () {
-							mw.user.options.set(
-								'wikibase-entitytermsview-showEntitytermslistview',
-								params.visible ? '1' : '0'
-							);
-						} );
+							.done( function () {
+								mw.user.options.set(
+									'wikibase-entitytermsview-showEntitytermslistview',
+									params.visible ? '1' : '0'
+								);
+							} );
 					}
 
 					// Show "help" link only if the toggler content is visible (decided by Product
@@ -267,20 +268,20 @@
 
 			this.$entitytermsforlanguagelistviewHelp =
 				$( '<span/>' )
-				.addClass( 'wikibase-entitytermsview-entitytermsforlanguagelistview-configure' )
-				.append(
-					$( '<a/>' )
-					.attr(
-						'href',
-						mw.msg(
-							'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link'
-						)
+					.addClass( 'wikibase-entitytermsview-entitytermsforlanguagelistview-configure' )
+					.append(
+						$( '<a/>' )
+							.attr(
+								'href',
+								mw.msg(
+									'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link'
+								)
+							)
+							.text( mw.msg(
+								'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label'
+							) )
 					)
-					.text( mw.msg(
-						'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label'
-					) )
-				)
-				.insertAfter( this.$entitytermsforlanguagelistviewToggler );
+					.insertAfter( this.$entitytermsforlanguagelistviewToggler );
 
 			if ( !toggler.option( '$subject' ).is( ':visible' ) ) {
 				this.$entitytermsforlanguagelistviewHelp
@@ -306,28 +307,28 @@
 				prefix = $.wikibase.entitytermsforlanguagelistview.prototype.widgetEventPrefix;
 
 			this.$entitytermsforlanguagelistview
-			.on( prefix + 'change.' + this.widgetName, function ( event, lang ) {
-				event.stopPropagation();
-				// Event handlers for this are in the entitytermsview toolbar controller (for enabling
-				// the save button), in entityViewInit (for updating the title) and in this file (for
-				// updating description and aliases).
-				self._trigger( 'change', null, [ lang ] );
-			} )
-			.on(
-				[
-					prefix + 'create.' + this.widgetName,
-					prefix + 'afterstartediting.' + this.widgetName,
-					prefix + 'afterstopediting.' + this.widgetName,
-					prefix + 'disable.' + this.widgetName
-				].join( ' ' ),
-				function ( event ) {
+				.on( prefix + 'change.' + this.widgetName, function ( event, lang ) {
 					event.stopPropagation();
-				}
-			)
-			.entitytermsforlanguagelistview( {
-				value: this.options.value,
-				userLanguages: this.options.userLanguages
-			} );
+					// Event handlers for this are in the entitytermsview toolbar controller (for enabling
+					// the save button), in entityViewInit (for updating the title) and in this file (for
+					// updating description and aliases).
+					self._trigger( 'change', null, [ lang ] );
+				} )
+				.on(
+					[
+						prefix + 'create.' + this.widgetName,
+						prefix + 'afterstartediting.' + this.widgetName,
+						prefix + 'afterstopediting.' + this.widgetName,
+						prefix + 'disable.' + this.widgetName
+					].join( ' ' ),
+					function ( event ) {
+						event.stopPropagation();
+					}
+				)
+				.entitytermsforlanguagelistview( {
+					value: this.options.value,
+					userLanguages: this.options.userLanguages
+				} );
 
 			this.$entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' )
 				.$header.sticknode( {

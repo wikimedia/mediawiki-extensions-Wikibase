@@ -137,12 +137,13 @@
 				.css( 'visibility', 'hidden' )
 				.insertBefore( this.$node );
 
-			this.$node
-			.css( 'left', this._initialAttributes.offset.left + 'px' )
-			.css( 'top', this.$node.outerHeight() - this.$node.outerHeight( true ) )
-			.css( 'width', width )
-			.css( 'position', 'fixed' )
-			.css( 'z-index', this._options.zIndex );
+			this.$node.css( {
+				left: this._initialAttributes.offset.left + 'px',
+				top: this.$node.outerHeight() - this.$node.outerHeight( true ),
+				width: width,
+				position: 'fixed',
+				'z-index': this._options.zIndex
+			} );
 
 			if ( this._$clone.css( 'display' ) === 'table-header-group' ) {
 				var $original = this._$clone.find( '*' );
@@ -166,11 +167,12 @@
 				this._$clone = null;
 			}
 
-			this.$node
-			.css( 'left', this._initialAttributes.left )
-			.css( 'top', this._initialAttributes.top )
-			.css( 'width', this._options.autoWidth ? 'auto' : this._initialAttributes.width )
-			.css( 'position', this._initialAttributes.position );
+			this.$node.css( {
+				left: this._initialAttributes.left,
+				top: this._initialAttributes.top,
+				width: this._options.autoWidth ? 'auto' : this._initialAttributes.width,
+				position: this._initialAttributes.position
+			} );
 
 			this._initialAttributes.offset = null;
 		},

@@ -12,8 +12,8 @@
 			$linkItemLink = $( elem );
 
 		$linkItemLink
-		.hide()
-		.after( $spinner );
+			.hide()
+			.after( $spinner );
 
 		mw.loader.using(
 			[
@@ -28,34 +28,34 @@
 				var repoConfig = mw.config.get( 'wbRepo' );
 
 				$linkItemLink
-				.show()
-				.linkitem( {
-					mwApiForRepo: wikibase.client.getMwApiForRepo(),
-					pageTitle: ( new mw.Title(
-						mw.config.get( 'wgPageName' )
-					) ).getPrefixedText(),
-					globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
-					namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
-					repoArticlePath: repoConfig.url + repoConfig.articlePath,
-					langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
-				} );
+					.show()
+					.linkitem( {
+						mwApiForRepo: wikibase.client.getMwApiForRepo(),
+						pageTitle: ( new mw.Title(
+							mw.config.get( 'wgPageName' )
+						) ).getPrefixedText(),
+						globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
+						namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
+						repoArticlePath: repoConfig.url + repoConfig.articlePath,
+						langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
+					} );
 
 				var widgetName = $linkItemLink.data( 'linkitem' ).widgetName;
 
 				$linkItemLink
-				.on( 'linkitemdialogclose.' + widgetName, function ( event ) {
-					$linkItemLink
-					.off( '.' + widgetName )
-					.data( 'linkitem' ).destroy();
-				} )
-				.on( 'linkitemsuccess.' + widgetName, function ( event ) {
-					// Don't reshow the "Add links" link but reload the page on dialog close:
-					$linkItemLink
-					.off( '.' + widgetName )
-					.on( 'linkitemdialogclose.' + widgetName, function () {
-						window.location.reload( true );
+					.on( 'linkitemdialogclose.' + widgetName, function ( event ) {
+						$linkItemLink
+							.off( '.' + widgetName )
+							.data( 'linkitem' ).destroy();
+					} )
+					.on( 'linkitemsuccess.' + widgetName, function ( event ) {
+						// Don't reshow the "Add links" link but reload the page on dialog close:
+						$linkItemLink
+							.off( '.' + widgetName )
+							.on( 'linkitemdialogclose.' + widgetName, function () {
+								window.location.reload( true );
+							} );
 					} );
-				} );
 			},
 			function () {
 				// Failure: This isn't very likely, but who knows
@@ -77,9 +77,9 @@
 		}
 
 		$( '.wb-langlinks-link > a' ).eq( 0 )
-		.click( function ( event ) {
-			event.preventDefault();
-			initLinkItem( this );
-		} );
+			.click( function ( event ) {
+				event.preventDefault();
+				initLinkItem( this );
+			} );
 	} );
 }( mediaWiki, jQuery ) );

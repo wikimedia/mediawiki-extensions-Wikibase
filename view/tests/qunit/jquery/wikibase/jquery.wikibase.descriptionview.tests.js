@@ -70,18 +70,18 @@
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
 		$descriptionview
-		.on( 'descriptionviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'descriptionviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'descriptionviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'descriptionviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		descriptionview.startEditing();
 
@@ -107,12 +107,12 @@
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
 		$descriptionview
-		.on( 'descriptionviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered "toggleerror" event.'
-			);
-		} );
+			.on( 'descriptionviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered "toggleerror" event.'
+				);
+			} );
 
 		descriptionview.setError();
 	} );

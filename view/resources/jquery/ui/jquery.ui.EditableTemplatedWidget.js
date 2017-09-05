@@ -77,9 +77,9 @@
 			this.element.addClass( 'wb-edit' );
 
 			return this._startEditing()
-			.done( function () {
-				self._trigger( 'afterstartediting' );
-			} );
+				.done( function () {
+					self._trigger( 'afterstartediting' );
+				} );
 		},
 
 		_startEditing: function () {
@@ -105,13 +105,13 @@
 
 			var self = this;
 			return this._stopEditing( dropValue )
-			.done( function () {
-				self.enable();
-				self._trigger( 'afterstopediting', null, [ dropValue ] );
-			} )
-			.fail( function ( error ) {
-				self.setError( error );
-			} );
+				.done( function () {
+					self.enable();
+					self._trigger( 'afterstopediting', null, [ dropValue ] );
+				} )
+				.fail( function ( error ) {
+					self.setError( error );
+				} );
 		},
 
 		_stopEditing: function ( dropValue ) {

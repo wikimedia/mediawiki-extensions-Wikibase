@@ -75,14 +75,15 @@
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
-		).done( function ( savedSiteLinkSet ) {
-			assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
-		} );
+		)
+			.done( function ( savedSiteLinkSet ) {
+				assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
+				done();
+			} )
+			.fail( function () {
+				assert.ok( false, 'save failed' );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'save correctly passes badges', function ( assert ) {
@@ -113,14 +114,15 @@
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] ),
 			new wb.datamodel.SiteLinkSet()
-		).done( function ( savedSiteLinkSet ) {
-			assert.deepEqual( savedSiteLinkSet.getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
-		} );
+		)
+			.done( function ( savedSiteLinkSet ) {
+				assert.deepEqual( savedSiteLinkSet.getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
+				done();
+			} )
+			.fail( function () {
+				assert.ok( false, 'save failed' );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'save correctly handles API failures', function ( assert ) {
@@ -141,15 +143,16 @@
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
-		).done( function ( savedSiteLinkSet ) {
-			assert.ok( false, 'save should have failed' );
-			done();
-		} )
-		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			done();
-		} );
+		)
+			.done( function ( savedSiteLinkSet ) {
+				assert.ok( false, 'save should have failed' );
+				done();
+			} )
+			.fail( function ( error ) {
+				assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'save performs correct API call for removal', function ( assert ) {
@@ -202,14 +205,15 @@
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).done( function ( savedSiteLinkSet ) {
-			assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
-		} );
+		)
+			.done( function ( savedSiteLinkSet ) {
+				assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
+				done();
+			} )
+			.fail( function () {
+				assert.ok( false, 'save failed' );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'save correctly passes badges for removal', function ( assert ) {
@@ -239,14 +243,15 @@
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] )
-		).done( function ( savedSiteLinkSet ) {
-			assert.strictEqual( savedSiteLinkSet.getItemByKey( 'siteId' ), null );
-			done();
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-			done();
-		} );
+		)
+			.done( function ( savedSiteLinkSet ) {
+				assert.strictEqual( savedSiteLinkSet.getItemByKey( 'siteId' ), null );
+				done();
+			} )
+			.fail( function () {
+				assert.ok( false, 'save failed' );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'save correctly handles API failures for removal', function ( assert ) {
@@ -267,15 +272,16 @@
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).done( function ( savedSiteLinkSet ) {
-			assert.ok( false, 'save should have failed' );
-			done();
-		} )
-		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			done();
-		} );
+		)
+			.done( function ( savedSiteLinkSet ) {
+				assert.ok( false, 'save should have failed' );
+				done();
+			} )
+			.fail( function ( error ) {
+				assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+				done();
+			} );
 	} );
 
 }( sinon, wikibase, jQuery ) );

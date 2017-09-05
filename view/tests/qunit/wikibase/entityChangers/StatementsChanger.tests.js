@@ -72,15 +72,15 @@
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
-		.done( function () {
-			assert.ok( true, 'remove succeeded' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'remove failed' );
-		} )
-		.always( function () {
-			QUnit.start();
-		} );
+			.done( function () {
+				assert.ok( true, 'remove succeeded' );
+			} )
+			.fail( function () {
+				assert.ok( false, 'remove failed' );
+			} )
+			.always( function () {
+				QUnit.start();
+			} );
 	} );
 
 	QUnit.test( 'remove correctly handles API failures', function ( assert ) {
@@ -108,20 +108,20 @@
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
-		.done( function () {
-			assert.ok( false, 'remove should have failed' );
-		} )
-		.fail( function ( error ) {
-			assert.ok(
-				error instanceof wb.api.RepoApiError,
-				'remove did not fail with a RepoApiError'
-			);
+			.done( function () {
+				assert.ok( false, 'remove should have failed' );
+			} )
+			.fail( function ( error ) {
+				assert.ok(
+					error instanceof wb.api.RepoApiError,
+					'remove did not fail with a RepoApiError'
+				);
 
-			assert.equal( error.code, 'errorCode' );
-		} )
-		.always( function () {
-			QUnit.start();
-		} );
+				assert.equal( error.code, 'errorCode' );
+			} )
+			.always( function () {
+				QUnit.start();
+			} );
 	} );
 
 	QUnit.test( 'remove fires correct hook', function ( assert ) {
@@ -210,18 +210,18 @@
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
-		.done( function ( savedStatement ) {
-			assert.ok(
-				savedStatement instanceof wb.datamodel.Statement,
-				'save did not resolve with a Statement'
-			);
-		} )
-		.fail( function () {
-			assert.ok( false, 'save failed' );
-		} )
-		.always( function () {
-			QUnit.start();
-		} );
+			.done( function ( savedStatement ) {
+				assert.ok(
+					savedStatement instanceof wb.datamodel.Statement,
+					'save did not resolve with a Statement'
+				);
+			} )
+			.fail( function () {
+				assert.ok( false, 'save failed' );
+			} )
+			.always( function () {
+				QUnit.start();
+			} );
 	} );
 
 	QUnit.test( 'save correctly handles API failures', function ( assert ) {
@@ -251,20 +251,20 @@
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
-		.done( function ( savedStatement ) {
-			assert.ok( false, 'save should have failed' );
-		} )
-		.fail( function ( error ) {
-			assert.ok(
-				error instanceof wb.api.RepoApiError,
-				'save failed with a RepoApiError'
-			);
+			.done( function ( savedStatement ) {
+				assert.ok( false, 'save should have failed' );
+			} )
+			.fail( function ( error ) {
+				assert.ok(
+					error instanceof wb.api.RepoApiError,
+					'save failed with a RepoApiError'
+				);
 
-			assert.equal( error.code, 'errorCode' );
-		} )
-		.always( function () {
-			QUnit.start();
-		} );
+				assert.equal( error.code, 'errorCode' );
+			} )
+			.always( function () {
+				QUnit.start();
+			} );
 	} );
 
 	QUnit.test( 'save fires correct hook', function ( assert ) {

@@ -164,8 +164,8 @@
 	 */
 	$.wikibase.entityview.TYPES = [];
 
-	$.expr[ ':' ][ $.wikibase.entityview.prototype.widgetFullName ]
-		= $.expr.createPseudo( function ( fullName ) {
+	$.expr[ ':' ][ $.wikibase.entityview.prototype.widgetFullName ] =
+		$.expr.createPseudo( function ( fullName ) {
 			return function ( elem ) {
 				for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
 					if ( $.data( elem, $.wikibase.entityview.TYPES[ i ] ) ) {
@@ -174,7 +174,6 @@
 				}
 				return false;
 			};
-		}
-	);
+		} );
 
 }( jQuery ) );

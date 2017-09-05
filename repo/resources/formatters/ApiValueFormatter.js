@@ -75,12 +75,12 @@
 				this._formatValueCaller.formatValue(
 					dataValue, this._dataTypeId, this._outputType, this._propertyId, this._options
 				)
-				.done( function ( formattedValue ) {
-					deferred.resolve( formattedValue, dataValue );
-				} )
-				.fail( function ( error ) {
-					deferred.reject( error.detailedMessage || error.code );
-				} );
+					.done( function ( formattedValue ) {
+						deferred.resolve( formattedValue, dataValue );
+					} )
+					.fail( function ( error ) {
+						deferred.reject( error.detailedMessage || error.code );
+					} );
 
 				return deferred.promise();
 			}

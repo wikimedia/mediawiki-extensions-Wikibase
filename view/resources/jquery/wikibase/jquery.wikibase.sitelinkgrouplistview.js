@@ -142,8 +142,8 @@
 
 		_createListview: function () {
 			var value = this.element.is( ':empty' )
-					? orderSiteLinksByGroup( this.options.value )
-					: scrapeSiteLinks( this.element, this.options.value );
+				? orderSiteLinksByGroup( this.options.value )
+				: scrapeSiteLinks( this.element, this.options.value );
 
 			this.$listview = this.element.find( '.wikibase-listview' );
 
@@ -152,14 +152,14 @@
 			}
 
 			this.$listview
-			.listview( {
-				listItemAdapter: this.options.listItemAdapter,
-				value: value,
-				encapsulate: true
-			} )
-			.on( this.options.listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ), function ( event ) {
-				event.stopPropagation();
-			} );
+				.listview( {
+					listItemAdapter: this.options.listItemAdapter,
+					value: value,
+					encapsulate: true
+				} )
+				.on( this.options.listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ), function ( event ) {
+					event.stopPropagation();
+				} );
 		},
 
 		/**

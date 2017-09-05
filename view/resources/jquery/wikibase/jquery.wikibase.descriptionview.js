@@ -48,22 +48,22 @@
 
 			var self = this;
 
-			this.element
-			.on(
-				'descriptionviewafterstartediting.' + this.widgetName
-				+ ' eachchange.' + this.widgetName,
-			function ( event ) {
-				if ( self.value().getText() === '' ) {
-					// Since the widget shall not be in view mode when there is no value, triggering
-					// the event without a proper value is only done when creating the widget. Disabling
-					// other edit buttons shall be avoided.
-					// TODO: Move logic to a sensible place.
-					self.element.addClass( 'wb-empty' );
-					return;
-				}
+			this.element.on(
+				'descriptionviewafterstartediting.' + this.widgetName +
+				' eachchange.' + this.widgetName,
+				function ( event ) {
+					if ( self.value().getText() === '' ) {
+						// Since the widget shall not be in view mode when there is no value, triggering
+						// the event without a proper value is only done when creating the widget. Disabling
+						// other edit buttons shall be avoided.
+						// TODO: Move logic to a sensible place.
+						self.element.addClass( 'wb-empty' );
+						return;
+					}
 
-				self.element.removeClass( 'wb-empty' );
-			} );
+					self.element.removeClass( 'wb-empty' );
+				}
+			);
 
 			PARENT.prototype._create.call( this );
 
@@ -110,14 +110,14 @@
 				// instead language of that row
 				var userLanguage = mw.config.get( 'wgUserLanguage' );
 				this.element
-				.attr( 'lang', userLanguage )
-				.attr( 'dir', $.util.getDirectionality( userLanguage ) );
+					.attr( 'lang', userLanguage )
+					.attr( 'dir', $.util.getDirectionality( userLanguage ) );
 				return done;
 			}
 
 			this.element
-			.attr( 'lang', languageCode )
-			.attr( 'dir', $.util.getDirectionality( languageCode ) );
+				.attr( 'lang', languageCode )
+				.attr( 'dir', $.util.getDirectionality( languageCode ) );
 
 			if ( !this.isInEditMode() ) {
 				this.$text.text( descriptionText );
@@ -127,23 +127,22 @@
 			var $input = $( document.createElement( this.options.inputNodeName ) );
 
 			$input
-			.addClass( this.widgetFullName + '-input' )
-			// TODO: Inject correct placeholder via options
-			.attr( 'placeholder', mw.msg(
+				.addClass( this.widgetFullName + '-input' )
+				// TODO: Inject correct placeholder via options
+				.attr( 'placeholder', mw.msg(
 					'wikibase-description-edit-placeholder-language-aware',
 					wb.getLanguageNameByCode( languageCode )
-				)
-			)
-			.attr( 'lang', languageCode )
-			.attr( 'dir', $.util.getDirectionality( languageCode ) )
-			.on( 'keydown.' + this.widgetName, function ( event ) {
-				if ( event.keyCode === $.ui.keyCode.ENTER ) {
-					event.preventDefault();
-				}
-			} )
-			.on( 'eachchange.' + this.widgetName, function ( event ) {
-				self._trigger( 'change' );
-			} );
+				) )
+				.attr( 'lang', languageCode )
+				.attr( 'dir', $.util.getDirectionality( languageCode ) )
+				.on( 'keydown.' + this.widgetName, function ( event ) {
+					if ( event.keyCode === $.ui.keyCode.ENTER ) {
+						event.preventDefault();
+					}
+				} )
+				.on( 'eachchange.' + this.widgetName, function ( event ) {
+					self._trigger( 'change' );
+				} );
 
 			if ( descriptionText ) {
 				$input.val( descriptionText );

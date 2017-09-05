@@ -111,16 +111,16 @@
 			var self = this;
 
 			this.$list
-			.tagadata( {
-				placeholderText: mw.msg( 'wikibase-alias-edit-placeholder' )
-			} )
-			.on(
-				'tagadatatagremoved.' + this.widgetName
-				+ ' tagadatatagchanged.' + this.widgetName
-				+ ' tagadatatagremoved.' + this.widgetName, function ( event ) {
-					self._trigger( 'change' );
-				}
-			);
+				.tagadata( {
+					placeholderText: mw.msg( 'wikibase-alias-edit-placeholder' )
+				} )
+				.on(
+					'tagadatatagremoved.' + this.widgetName
+					+ ' tagadatatagchanged.' + this.widgetName
+					+ ' tagadatatagremoved.' + this.widgetName, function ( event ) {
+						self._trigger( 'change' );
+					}
+				);
 
 			var expansionOptions = {
 				expandOnResize: false,

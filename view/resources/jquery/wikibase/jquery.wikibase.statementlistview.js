@@ -98,24 +98,24 @@
 				toggleErrorEvent = lia.prefixedEvent( 'toggleerror.' + this.widgetName );
 
 			this.element
-			.on( afterStartEditingEvent, function ( event ) {
-				// Forward "afterstartediting" event for higher components (e.g. statementgrouplistview)
-				// to recognize that edit mode has been started.
-				self._trigger( 'afterstartediting' );
-			} )
-			.on( afterStopEditingEvent, function ( event, dropValue ) {
-				var $statementview = $( event.target ),
-					statementview = lia.liInstance( $statementview );
+				.on( afterStartEditingEvent, function ( event ) {
+					// Forward "afterstartediting" event for higher components (e.g. statementgrouplistview)
+					// to recognize that edit mode has been started.
+					self._trigger( 'afterstartediting' );
+				} )
+				.on( afterStopEditingEvent, function ( event, dropValue ) {
+					var $statementview = $( event.target ),
+						statementview = lia.liInstance( $statementview );
 
-				// Cancelling edit mode or having stopped edit mode after saving an existing (not
-				// pending) statement.
-				if ( dropValue || !statementview || statementview.value() ) {
-					self._trigger( 'afterstopediting', null, [ dropValue ] );
-				}
-			} )
-			.on( toggleErrorEvent, function ( event, error ) {
-				self._trigger( 'toggleerror', null, [ error ] );
-			} );
+					// Cancelling edit mode or having stopped edit mode after saving an existing (not
+					// pending) statement.
+					if ( dropValue || !statementview || statementview.value() ) {
+						self._trigger( 'afterstopediting', null, [ dropValue ] );
+					}
+				} )
+				.on( toggleErrorEvent, function ( event, error ) {
+					self._trigger( 'toggleerror', null, [ error ] );
+				} );
 
 			var $containerWrapper = this.element.children( '.wikibase-toolbar-wrapper' );
 			if ( $containerWrapper.length === 0 ) {
@@ -123,10 +123,11 @@
 			}
 
 			this._statementAdder = this.options.getAdder(
-					this.enterNewItem.bind( this ),
-					$containerWrapper,
-					mw.msg( 'wikibase-statementlistview-add' ),
-					mw.msg( 'wikibase-statementlistview-add-tooltip' ) );
+				this.enterNewItem.bind( this ),
+				$containerWrapper,
+				mw.msg( 'wikibase-statementlistview-add' ),
+				mw.msg( 'wikibase-statementlistview-add-tooltip' )
+			);
 		},
 
 		/**

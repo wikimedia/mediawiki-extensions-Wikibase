@@ -66,13 +66,13 @@
 		QUnit.stop();
 
 		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName' ) )
-		.done( function ( savedSiteLink ) {
-			QUnit.start();
-			assert.ok( savedSiteLink instanceof wb.datamodel.SiteLink );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setSiteLink failed' );
-		} );
+			.done( function ( savedSiteLink ) {
+				QUnit.start();
+				assert.ok( savedSiteLink instanceof wb.datamodel.SiteLink );
+			} )
+			.fail( function () {
+				assert.ok( false, 'setSiteLink failed' );
+			} );
 	} );
 
 	QUnit.test( 'setSiteLink correctly passes badges', function ( assert ) {
@@ -101,13 +101,13 @@
 		QUnit.stop();
 
 		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) )
-		.done( function ( savedSiteLink ) {
-			QUnit.start();
-			assert.deepEqual( savedSiteLink.getBadges(), [ 'Q2' ] );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setSiteLink failed' );
-		} );
+			.done( function ( savedSiteLink ) {
+				QUnit.start();
+				assert.deepEqual( savedSiteLink.getBadges(), [ 'Q2' ] );
+			} )
+			.fail( function () {
+				assert.ok( false, 'setSiteLink failed' );
+			} );
 	} );
 
 	QUnit.test( 'setSiteLink correctly handles API failures', function ( assert ) {
@@ -126,14 +126,14 @@
 		QUnit.stop();
 
 		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName' ) )
-		.done( function ( savedSiteLink ) {
-			assert.ok( false, 'setSiteLink should have failed' );
-		} )
-		.fail( function ( error ) {
-			QUnit.start();
-			assert.ok( error instanceof wb.api.RepoApiError, 'setSiteLink did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-		} );
+			.done( function ( savedSiteLink ) {
+				assert.ok( false, 'setSiteLink should have failed' );
+			} )
+			.fail( function ( error ) {
+				QUnit.start();
+				assert.ok( error instanceof wb.api.RepoApiError, 'setSiteLink did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+			} );
 	} );
 
 	QUnit.test( 'setSiteLink performs correct API call for remove', function ( assert ) {
@@ -180,13 +180,13 @@
 		QUnit.stop();
 
 		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', '' ) )
-		.done( function ( savedSiteLink ) {
-			QUnit.start();
-			assert.strictEqual( savedSiteLink, null );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setSiteLink failed' );
-		} );
+			.done( function ( savedSiteLink ) {
+				QUnit.start();
+				assert.strictEqual( savedSiteLink, null );
+			} )
+			.fail( function () {
+				assert.ok( false, 'setSiteLink failed' );
+			} );
 	} );
 
 }( sinon, wikibase, jQuery ) );

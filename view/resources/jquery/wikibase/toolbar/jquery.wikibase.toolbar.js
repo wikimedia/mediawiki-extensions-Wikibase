@@ -42,7 +42,7 @@
 			}
 
 			this.getContainer()
-			.addClass( this.widgetBaseClass + '-container wikibase-toolbar-container' );
+				.addClass( this.widgetBaseClass + '-container wikibase-toolbar-container' );
 		},
 
 		/**
@@ -58,9 +58,9 @@
 			var $container = this.getContainer();
 
 			$container
-			.removeClass( this.widgetBaseClass
-				+ '-container wikibase-toolbar-container ui-state-disabled' )
-			.off( '.' + this.widgetName );
+				.removeClass( this.widgetBaseClass
+					+ '-container wikibase-toolbar-container ui-state-disabled' )
+				.off( '.' + this.widgetName );
 
 			if ( $container.get( 0 ) !== this.element.get( 0 ) ) {
 				$container.remove();

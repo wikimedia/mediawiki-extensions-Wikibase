@@ -90,12 +90,12 @@
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
 		$entitytermsview
-		.on( 'entitytermsviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered "toggleerror" event.'
-			);
-		} );
+			.on( 'entitytermsviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered "toggleerror" event.'
+				);
+			} );
 
 		entitytermsview.setError();
 	} );

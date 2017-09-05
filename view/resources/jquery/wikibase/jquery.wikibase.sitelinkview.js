@@ -142,24 +142,24 @@
 			}
 
 			$badgeselector
-			.badgeselector( {
-				value: this.options.value ? this.options.value.getBadges() : [],
-				badges: badges,
-				entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-				isRtl: $( 'body' ).hasClass( 'rtl' ),
-				messages: {
-					'badge-placeholder-title': mw.msg(
-						'wikibase-badgeselector-badge-placeholder-title'
-					)
-				},
-				encapsulate: true
-			} )
-			.on( 'badgeselectorchange', function ( event ) {
-				// Adding/removing badges decreases/increases available space:
-				self.updatePageNameInputAutoExpand();
-				self._trigger( 'change' );
-				self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
-			} );
+				.badgeselector( {
+					value: this.options.value ? this.options.value.getBadges() : [],
+					badges: badges,
+					entityIdPlainFormatter: this.options.entityIdPlainFormatter,
+					isRtl: $( 'body' ).hasClass( 'rtl' ),
+					messages: {
+						'badge-placeholder-title': mw.msg(
+							'wikibase-badgeselector-badge-placeholder-title'
+						)
+					},
+					encapsulate: true
+				} )
+				.on( 'badgeselectorchange', function ( event ) {
+					// Adding/removing badges decreases/increases available space:
+					self.updatePageNameInputAutoExpand();
+					self._trigger( 'change' );
+					self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
+				} );
 
 			this._badgeselector = $badgeselector.data( 'badgeselector' );
 		},
@@ -222,13 +222,13 @@
 			var pagesuggester = $pageNameInput.data( 'pagesuggester' );
 
 			$pageNameInput
-			.on( 'pagesuggesterchange.' + this.widgetName, function ( event ) {
-				if ( !pagesuggester.isSearching() ) {
-					self.setError();
-					self._trigger( 'change' );
-				}
-				self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
-			} );
+				.on( 'pagesuggesterchange.' + this.widgetName, function ( event ) {
+					if ( !pagesuggester.isSearching() ) {
+						self.setError();
+						self._trigger( 'change' );
+					}
+					self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
+				} );
 
 			this.$link.find( '.wikibase-sitelinkview-page' )
 				.attr( 'dir', dir )
@@ -264,40 +264,40 @@
 			}
 
 			$siteIdInput
-			.on( 'siteselectorselected.' + this.widgetName, function ( event, siteId ) {
-				var site = wb.sites.getSite( siteId );
+				.on( 'siteselectorselected.' + this.widgetName, function ( event, siteId ) {
+					var site = wb.sites.getSite( siteId );
 
-				if ( site ) {
-					$pageNameInput
-					.attr( 'lang', site.getLanguageCode() )
-					.attr( 'dir', site.getLanguageDirection() )
-					.show();
-				} else {
-					$pageNameInput.hide();
-				}
-
-				if ( self._badgeselector ) {
-					self._badgeselector.element[ site ? 'show' : 'hide' ]();
-				}
-
-				pagesuggester[ site ? 'enable' : 'disable' ]();
-				pagesuggester.option( 'siteId', siteId );
-
-				self._trigger( 'change' );
-				self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
-			} )
-			.on(
-				'siteselectorselected.' + this.widgetName + ' siteselectorchange.' + this.widgetName,
-				function ( event, siteId ) {
-					var inputautoexpand = $siteIdInput.data( 'inputautoexpand' );
-
-					if ( inputautoexpand ) {
-						inputautoexpand.expand();
+					if ( site ) {
+						$pageNameInput
+							.attr( 'lang', site.getLanguageCode() )
+							.attr( 'dir', site.getLanguageDirection() )
+							.show();
+					} else {
+						$pageNameInput.hide();
 					}
 
-					self.updatePageNameInputAutoExpand();
-				}
-			);
+					if ( self._badgeselector ) {
+						self._badgeselector.element[ site ? 'show' : 'hide' ]();
+					}
+
+					pagesuggester[ site ? 'enable' : 'disable' ]();
+					pagesuggester.option( 'siteId', siteId );
+
+					self._trigger( 'change' );
+					self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
+				} )
+				.on(
+					'siteselectorselected.' + this.widgetName + ' siteselectorchange.' + this.widgetName,
+					function ( event, siteId ) {
+						var inputautoexpand = $siteIdInput.data( 'inputautoexpand' );
+
+						if ( inputautoexpand ) {
+							inputautoexpand.expand();
+						}
+
+						self.updatePageNameInputAutoExpand();
+					}
+				);
 
 			this.$siteId.append( $siteIdInput );
 
@@ -310,13 +310,13 @@
 			this.updatePageNameInputAutoExpand();
 
 			$pageNameInput
-			.on( 'keydown.' + this.widgetName, function ( event ) {
-				if ( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
-					event.stopPropagation();
-					$siteIdInput.val( '' ).focus();
-					$siteIdInput.data( 'siteselector' ).setSelectedSite( null );
-				}
-			} );
+				.on( 'keydown.' + this.widgetName, function ( event ) {
+					if ( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
+						event.stopPropagation();
+						$siteIdInput.val( '' ).focus();
+						$siteIdInput.data( 'siteselector' ).setSelectedSite( null );
+					}
+				} );
 		},
 
 		/**

@@ -145,42 +145,42 @@
 
 			// Fully encapsulate child widgets by suppressing their events:
 			this.element
-			.on( prefix + 'change.' + this.widgetName, function ( event, lang ) {
-				event.stopPropagation();
-				// The only event handler for this is in entitytermsview.
-				self._trigger( 'change', null, [ lang ] );
-			} )
-			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
-				event.stopPropagation();
-				self.setError( error );
-			} )
-			.on(
-				[
-					prefix + 'create.' + this.widgetName,
-					prefix + 'afterstartediting.' + this.widgetName,
-					prefix + 'afterstopediting.' + this.widgetName,
-					prefix + 'disable.' + this.widgetName
-				].join( ' ' ),
-				function ( event ) {
+				.on( prefix + 'change.' + this.widgetName, function ( event, lang ) {
 					event.stopPropagation();
-				}
-			);
+					// The only event handler for this is in entitytermsview.
+					self._trigger( 'change', null, [ lang ] );
+				} )
+				.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
+					event.stopPropagation();
+					self.setError( error );
+				} )
+				.on(
+					[
+						prefix + 'create.' + this.widgetName,
+						prefix + 'afterstartediting.' + this.widgetName,
+						prefix + 'afterstopediting.' + this.widgetName,
+						prefix + 'disable.' + this.widgetName
+					].join( ' ' ),
+					function ( event ) {
+						event.stopPropagation();
+					}
+				);
 
 			this.$listview
-			.listview( {
-				listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-					listItemWidget: listItemWidget,
-					newItemOptionsFn: function ( value ) {
-						return {
-							value: value
-						};
-					}
-				} ),
-				value: $.map( this.options.userLanguages, function ( lang ) {
-					return self._getValueForLanguage( lang );
-				} ),
-				listItemNodeName: 'TR'
-			} );
+				.listview( {
+					listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
+						listItemWidget: listItemWidget,
+						newItemOptionsFn: function ( value ) {
+							return {
+								value: value
+							};
+						}
+					} ),
+					value: $.map( this.options.userLanguages, function ( lang ) {
+						return self._getValueForLanguage( lang );
+					} ),
+					listItemNodeName: 'TR'
+				} );
 
 			if ( !this.element.find( '.wikibase-entitytermsforlanguagelistview-more' ).length ) {
 				this._createEntitytermsforlanguagelistviewMore();

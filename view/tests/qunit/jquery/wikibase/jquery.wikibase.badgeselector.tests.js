@@ -67,18 +67,18 @@
 			badgeselector = $badgeselector.data( 'badgeselector' );
 
 		$badgeselector
-		.on( 'badgeselectorafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'badgeselectorafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'badgeselectorafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'badgeselectorafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		badgeselector.startEditing();
 		badgeselector.startEditing(); // should not trigger event

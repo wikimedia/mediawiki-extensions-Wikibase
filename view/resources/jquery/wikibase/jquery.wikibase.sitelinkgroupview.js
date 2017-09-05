@@ -123,13 +123,13 @@
 
 			if ( !this._$notification ) {
 				this.notification()
-				.appendTo( this.$headingSection )
-				.on( 'closeableupdate.' + this.widgetName, function () {
-					var sticknode = self.element.data( 'sticknode' );
-					if ( sticknode ) {
-						sticknode.refresh();
-					}
-				} );
+					.appendTo( this.$headingSection )
+					.on( 'closeableupdate.' + this.widgetName, function () {
+						var sticknode = self.element.data( 'sticknode' );
+						if ( sticknode ) {
+							sticknode.refresh();
+						}
+					} );
 			}
 
 			if ( !this.$sitelinklistview.data( 'sitelinklistview' ) ) {
@@ -158,12 +158,12 @@
 
 			var self = this;
 			this.$sitelinklistview
-			.on( prefix + 'change.' + this.widgetName, function ( event ) {
-				self._trigger( 'change' );
-			} )
-			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
-				self.setError( error );
-			} );
+				.on( prefix + 'change.' + this.widgetName, function ( event ) {
+					self._trigger( 'change' );
+				} )
+				.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
+					self.setError( error );
+				} );
 		},
 
 		/**
@@ -207,9 +207,9 @@
 		_stopEditing: function ( dropValue ) {
 			var self = this;
 			return this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue )
-			.done( function () {
-				self.notification();
-			} );
+				.done( function () {
+					self.notification();
+				} );
 		},
 
 		/**
@@ -260,7 +260,7 @@
 
 			if ( key === 'value' ) {
 				this.$sitelinklistview.data( 'sitelinklistview' )
-				.value( this._getSiteLinksArray() );
+					.value( this._getSiteLinksArray() );
 
 				this.draw();
 			} else if ( key === 'disabled' ) {

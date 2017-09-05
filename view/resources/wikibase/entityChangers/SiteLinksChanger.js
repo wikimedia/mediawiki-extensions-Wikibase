@@ -52,33 +52,33 @@
 				siteLink.getPageName(),
 				siteLink.getBadges()
 			)
-			.done( function ( result ) {
-				var siteId = siteLink.getSiteId(),
-					resultData = result.entity.sitelinks[ siteId ];
+				.done( function ( result ) {
+					var siteId = siteLink.getSiteId(),
+						resultData = result.entity.sitelinks[ siteId ];
 
-				// Update revision store
-				self._revisionStore.setSitelinksRevision( result.entity.lastrevid, siteId );
+					// Update revision store
+					self._revisionStore.setSitelinksRevision( result.entity.lastrevid, siteId );
 
-				// FIXME: Maybe check API's return value?
+					// FIXME: Maybe check API's return value?
 
-				// FIXME: Introduce Item.setSiteLinks
+					// FIXME: Introduce Item.setSiteLinks
 
-				deferred.resolve(
-					typeof resultData.removed !== 'undefined'
-						? null
-						: new wb.datamodel.SiteLink(
-							siteId,
-							resultData.title,
-							resultData.badges
-						)
-				);
-			} )
-			.fail( function ( errorCode, error ) {
-				deferred.reject( wb.api.RepoApiError.newFromApiResponse(
-					error,
-					siteLink.getPageName() === '' ? 'remove' : 'save' )
-				);
-			} );
+					deferred.resolve(
+						typeof resultData.removed !== 'undefined'
+							? null
+							: new wb.datamodel.SiteLink(
+								siteId,
+								resultData.title,
+								resultData.badges
+							)
+					);
+				} )
+				.fail( function ( errorCode, error ) {
+					deferred.reject( wb.api.RepoApiError.newFromApiResponse(
+						error,
+						siteLink.getPageName() === '' ? 'remove' : 'save' )
+					);
+				} );
 
 			return deferred.promise();
 		}

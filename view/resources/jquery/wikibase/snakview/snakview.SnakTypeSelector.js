@@ -61,41 +61,41 @@
 			this._hoverable( this.element );
 
 			this.element
-			.addClass( 'ui-state-default ' + this.widgetBaseClass )
-			.on( 'click.' + widgetName, function ( event ) {
-				// don't show menu if selector is disabled!
-				// otherwise, simply toggle menu's visibility
-				if ( self.options.disabled || $menu.is( ':visible' ) ) {
-					$menu.hide();
-					return;
-				}
-
-				$menu.show();
-				self.repositionMenu();
-
-				self.element.addClass( 'ui-state-active' );
-
-				// close the menu when clicking, regardless of whether the click is performed on the
-				// menu itself or outside of it:
-				var degrade = function ( event ) {
-					if ( event.target !== self.element[ 0 ] ) {
+				.addClass( 'ui-state-default ' + this.widgetBaseClass )
+				.on( 'click.' + widgetName, function ( event ) {
+					// don't show menu if selector is disabled!
+					// otherwise, simply toggle menu's visibility
+					if ( self.options.disabled || $menu.is( ':visible' ) ) {
 						$menu.hide();
-						self.element.removeClass( 'ui-state-active' );
+						return;
 					}
-					self._unbindGlobalListenersFn();
-				};
-				var repositionMenu = function ( event ) { self.repositionMenu(); };
-				// also make this available for destroy() function!
-				self._unbindGlobalListenersFn = function () {
-					// unbind event after closing menu, explicitly unbind specific handler to
-					// support instantiation of multiple snaktypeselector widgets.
-					$( document ).off( 'mouseup.' + widgetName, degrade );
-					$( window ).off( 'resize.' + widgetName, repositionMenu );
-					self._unbindGlobalListenersFn = $.noop;
-				};
-				$( document ).on( 'mouseup.' + widgetName, degrade );
-				$( window ).on( 'resize.' + widgetName, repositionMenu );
-			} );
+
+					$menu.show();
+					self.repositionMenu();
+
+					self.element.addClass( 'ui-state-active' );
+
+					// close the menu when clicking, regardless of whether the click is performed on the
+					// menu itself or outside of it:
+					var degrade = function ( event ) {
+						if ( event.target !== self.element[ 0 ] ) {
+							$menu.hide();
+							self.element.removeClass( 'ui-state-active' );
+						}
+						self._unbindGlobalListenersFn();
+					};
+					var repositionMenu = function ( event ) { self.repositionMenu(); };
+					// also make this available for destroy() function!
+					self._unbindGlobalListenersFn = function () {
+						// unbind event after closing menu, explicitly unbind specific handler to
+						// support instantiation of multiple snaktypeselector widgets.
+						$( document ).off( 'mouseup.' + widgetName, degrade );
+						$( window ).off( 'resize.' + widgetName, repositionMenu );
+						self._unbindGlobalListenersFn = $.noop;
+					};
+					$( document ).on( 'mouseup.' + widgetName, degrade );
+					$( window ).on( 'resize.' + widgetName, repositionMenu );
+				} );
 
 			this._$icon = $( '<span/>' )
 				.addClass( 'ui-icon ui-icon-snaktypeselector' )
@@ -161,15 +161,15 @@
 			$.each( snakTypes, function ( i, type ) {
 				$menu.append(
 					$( '<li/>' )
-					.addClass( classPrefix + type ) // type should only be lower case string anyhow!
-					.data( 'snaktypeselector-menuitem-type', type )
-					.append(
-						$( '<a/>' )
-						.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
-						.on( 'click.' + this.widgetName, function ( event ) {
-							event.preventDefault();
-						} )
-					)
+						.addClass( classPrefix + type ) // type should only be lower case string anyhow!
+						.data( 'snaktypeselector-menuitem-type', type )
+						.append(
+							$( '<a/>' )
+								.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
+								.on( 'click.' + this.widgetName, function ( event ) {
+									event.preventDefault();
+								} )
+						)
 				);
 			} );
 

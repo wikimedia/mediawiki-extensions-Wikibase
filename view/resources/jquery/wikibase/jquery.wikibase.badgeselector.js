@@ -100,8 +100,7 @@
 		_attachEventHandlers: function () {
 			var self = this;
 
-			this.element
-			.on( 'click.' + this.widgetName, function ( event ) {
+			this.element.on( 'click.' + this.widgetName, function ( event ) {
 				if ( !self.isInEditMode() || self.option( 'disabled' ) ) {
 					return;
 				}
@@ -112,8 +111,7 @@
 					return;
 				}
 
-				self._initMenu()
-				.done( function () {
+				self._initMenu().done( function () {
 					if ( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
 						$menu.hide();
 						return;
@@ -209,23 +207,23 @@
 			self.repositionMenu();
 
 			this._fillMenu()
-			.done( function () {
-				$menu.children( 'li' ).each( function () {
-					var $li = $( this ),
-						badgeId = $li.data( self.widgetName + '-menuitem-badge' );
+				.done( function () {
+					$menu.children( 'li' ).each( function () {
+						var $li = $( this ),
+							badgeId = $li.data( self.widgetName + '-menuitem-badge' );
 
-					$li
-					.addClass( 'ui-menu-item' )
-					.toggleClass( 'ui-state-active', $.inArray( badgeId, self.value() ) !== -1 );
+						$li
+							.addClass( 'ui-menu-item' )
+							.toggleClass( 'ui-state-active', $.inArray( badgeId, self.value() ) !== -1 );
+					} );
+
+					$menu.hide();
+
+					deferred.resolve();
+				} )
+				.fail( function () {
+					deferred.reject();
 				} );
-
-				$menu.hide();
-
-				deferred.resolve();
-			} )
-			.fail( function () {
-				deferred.reject();
-			} );
 
 			return deferred.promise();
 		},
@@ -259,24 +257,24 @@
 						.text( badgeLabel );
 
 					$( '<li/>' )
-					.addClass( self.widgetFullName + '-menuitem-' + itemId )
-					.data( self.widgetName + '-menuitem-badge', itemId )
-					.append( $item
-						.prepend( mw.wbTemplate( 'wb-badge',
-							itemId + ' ' + self.options.badges[ itemId ],
-							badgeLabel,
-							itemId
-						) )
-					)
-					.appendTo( $menu );
+						.addClass( self.widgetFullName + '-menuitem-' + itemId )
+						.data( self.widgetName + '-menuitem-badge', itemId )
+						.append( $item
+							.prepend( mw.wbTemplate( 'wb-badge',
+								itemId + ' ' + self.options.badges[ itemId ],
+								badgeLabel,
+								itemId
+							) )
+						)
+						.appendTo( $menu );
 				} );
 
 				deferred.resolve();
 			} )
-			.fail( function () {
-				// TODO: Display error message.
-				deferred.reject();
-			} );
+				.fail( function () {
+					// TODO: Display error message.
+					deferred.reject();
+				} );
 
 			return deferred.promise();
 		},
