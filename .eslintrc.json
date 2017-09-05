@@ -21,7 +21,7 @@
 		"new-cap": "off",
 		"no-underscore-dangle": "off",
 		"no-use-before-define": [ "error", "nofunc" ],
-		"no-unused-vars": "off",
+		"no-unused-vars": [ "error", { "args": "none" } ],
 		"no-useless-concat": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",
