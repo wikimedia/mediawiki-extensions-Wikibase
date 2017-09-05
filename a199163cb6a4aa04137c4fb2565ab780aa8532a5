@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_16cb2376",
+        "filename": "lib/includes/Store/PropertyInfoStore.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-05T15:57:35Z",
+      "side": 1,
+      "message": "See https://gerrit.wikimedia.org/r/#/c/258523/1/repo/includes/PropertyInfoBuilder.php",
+      "parentUuid": "4e7eab26_761aa71d",
+      "range": {
+        "startLine": 13,
+        "startChar": 10,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_84f7e886",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 6
