@@ -226,19 +226,19 @@
 				url: repoApiUrl,
 				type: 'property'
 			} )
-			.prop( 'placeholder', mw.msg( 'wikibase-snakview-property-input-placeholder' ) )
-			.on( 'eachchange', function ( event, oldValue ) {
-				// remove out-dated variations
-				if ( self._variation ) {
-					self.drawSnakTypeSelector();
-					self.updateVariation();
-					self.drawVariation();
-					self._trigger( 'change' );
-				}
-			} )
-			.on( 'entityselectorselected', function ( event, entityId ) {
-				self._selectProperty();
-			} );
+				.prop( 'placeholder', mw.msg( 'wikibase-snakview-property-input-placeholder' ) )
+				.on( 'eachchange', function ( event, oldValue ) {
+					// remove out-dated variations
+					if ( self._variation ) {
+						self.drawSnakTypeSelector();
+						self.updateVariation();
+						self.drawVariation();
+						self._trigger( 'change' );
+					}
+				} )
+				.on( 'entityselectorselected', function ( event, entityId ) {
+					self._selectProperty();
+				} );
 		},
 
 		/**
@@ -657,14 +657,14 @@
 			}
 
 			this._getPropertyDOM( propertyId )
-			.done( function ( $property ) {
-				self.$property.empty().append( $property );
-				deferred.resolve();
-			} )
-			.fail( function () {
-				self.$property.empty().text( propertyId );
-				deferred.reject();
-			} );
+				.done( function ( $property ) {
+					self.$property.empty().append( $property );
+					deferred.resolve();
+				} )
+				.fail( function () {
+					self.$property.empty().text( propertyId );
+					deferred.reject();
+				} );
 
 			return deferred.promise();
 		},
@@ -805,8 +805,8 @@
 				if ( propertyId ) {
 					// property ID selected but apparently no variation available to handle it
 					$( '<span/>' ).text( mw.msg( 'wikibase-snakview-choosesnaktype' ) )
-					.addClass( this.widgetBaseClass + '-unsupportedsnaktype' )
-					.appendTo( this.$snakValue );
+						.addClass( this.widgetBaseClass + '-unsupportedsnaktype' )
+						.appendTo( this.$snakValue );
 					// NOTE: instead of doing this here and checking everywhere whether this._variation
 					//  is set, we could as well use variations for displaying system messages like
 					//  this, e.g. having a UnsupportedSnakType variation which is not registered for a

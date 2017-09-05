@@ -31,8 +31,7 @@
 
 			PARENT.prototype._create.call( this );
 
-			this.element
-			.on( 'eachchange.' + this.widgetName, function () {
+			this.element.on( 'eachchange.' + this.widgetName, function () {
 				var menu = self.options.menu;
 				if ( self.options.suggestionsPlaceholder
 					&& ( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
@@ -90,15 +89,15 @@
 			ooMenu.element.addClass( 'wikibase-entitysearch-list' );
 
 			$( ooMenu )
-			.off( 'selected' )
-			.on( 'selected.entitysearch', function ( event, item ) {
-				if ( event.originalEvent
-					&& /^key/.test( event.originalEvent.type )
-					&& !( item instanceof $.ui.ooMenu.CustomItem )
-				) {
-					window.location.href = item.getEntityStub().url;
-				}
-			} );
+				.off( 'selected' )
+				.on( 'selected.entitysearch', function ( event, item ) {
+					if ( event.originalEvent
+						&& /^key/.test( event.originalEvent.type )
+						&& !( item instanceof $.ui.ooMenu.CustomItem )
+					) {
+						window.location.href = item.getEntityStub().url;
+					}
+				} );
 
 			return ooMenu;
 		},

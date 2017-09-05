@@ -89,41 +89,41 @@
 				$dialogSpinner = $.createSpinner();
 
 			this.element
-			.hide()
-			.after( $dialogSpinner );
+				.hide()
+				.after( $dialogSpinner );
 
 			this.options.mwApiForRepo.get( {
 				action: 'query',
 				meta: 'userinfo'
 			} )
-			.done( function ( data ) {
-				$dialogSpinner.remove();
+				.done( function ( data ) {
+					$dialogSpinner.remove();
 
-				if ( data.query.userinfo.anon !== undefined ) {
-					// User isn't logged into the repo
-					self._notLoggedIn();
-					return;
-				}
+					if ( data.query.userinfo.anon !== undefined ) {
+						// User isn't logged into the repo
+						self._notLoggedIn();
+						return;
+					}
 
-				self._createDialog();
-				$( '#wbclient-linkItem-site' ).focus();
-			} )
-			.fail( function ( errorCode, errorInfo ) {
-				$dialogSpinner.remove();
-				self.element.show();
+					self._createDialog();
+					$( '#wbclient-linkItem-site' ).focus();
+				} )
+				.fail( function ( errorCode, errorInfo ) {
+					$dialogSpinner.remove();
+					self.element.show();
 
-				self.element.wbtooltip( {
-					content: mw.msg( 'wikibase-error-unexpected',
-						( errorInfo.error && errorInfo.error.info ) || errorInfo.exception ),
-					gravity: 'w'
+					self.element.wbtooltip( {
+						content: mw.msg( 'wikibase-error-unexpected',
+							( errorInfo.error && errorInfo.error.info ) || errorInfo.exception ),
+						gravity: 'w'
+					} );
+
+					self.element.data( 'wbtooltip' ).show();
+					self.element.one( 'click.' + self.widgetName, function () {
+						// Remove the tooltip by the time the user clicks the link again.
+						self.element.data( 'wbtooltip' ).destroy();
+					} );
 				} );
-
-				self.element.data( 'wbtooltip' ).show();
-				self.element.one( 'click.' + self.widgetName, function () {
-					// Remove the tooltip by the time the user clicks the link again.
-					self.element.data( 'wbtooltip' ).destroy();
-				} );
-			} );
 		},
 
 		/**
@@ -134,20 +134,20 @@
 
 			var userLogin = this._linkRepoTitle( 'Special:UserLogin' );
 			$( '<div>' )
-			.dialog( {
-				title: mw.message( 'wikibase-linkitem-not-loggedin-title' ).escaped(),
-				width: 400,
-				height: 200,
-				resizable: true
-			} )
-			.on( 'dialogclose', function () {
-				self._trigger( 'dialogclose' );
-			} )
-			.append(
-				$( '<p>' )
-				.addClass( 'wbclient-linkItem-not-loggedin-message' )
-				.html( mw.message( 'wikibase-linkitem-not-loggedin', userLogin ).parse() )
-			);
+				.dialog( {
+					title: mw.message( 'wikibase-linkitem-not-loggedin-title' ).escaped(),
+					width: 400,
+					height: 200,
+					resizable: true
+				} )
+				.on( 'dialogclose', function () {
+					self._trigger( 'dialogclose' );
+				} )
+				.append(
+					$( '<p>' )
+						.addClass( 'wbclient-linkItem-not-loggedin-message' )
+						.html( mw.message( 'wikibase-linkitem-not-loggedin', userLogin ).parse() )
+				);
 		},
 
 		/**
@@ -210,10 +210,10 @@
 		 */
 		_createSiteLinkForm: function () {
 			return $( '<form>' )
-			.attr( 'name', 'wikibase-linkItem-form' )
-			.append( this._createSiteInput() )
-			.append( $( '<br />' ) )
-			.append( this._createPageInput() );
+				.attr( 'name', 'wikibase-linkItem-form' )
+				.append( this._createSiteInput() )
+				.append( $( '<br />' ) )
+				.append( this._createPageInput() );
 		},
 
 		/**
@@ -223,23 +223,23 @@
 		 */
 		_createSiteInput: function () {
 			return $( '<label>' )
-			.attr( 'for', 'wbclient-linkItem-site' )
-			.text( mw.msg( 'wikibase-linkitem-input-site' ) )
-			.add(
-				$( '<input />' )
-				.attr( {
-					name: 'wbclient-linkItem-site',
-					id: 'wbclient-linkItem-site',
-					'class': 'wbclient-linkItem-input'
-				} )
-				.siteselector( {
-					source: this._getLinkableSites()
-				} )
-				.on(
-					'siteselectoropen siteselectorclose siteselectorautocomplete blur',
-					$.proxy( this._onSiteSelectorChangeHandler, this )
-				)
-			);
+				.attr( 'for', 'wbclient-linkItem-site' )
+				.text( mw.msg( 'wikibase-linkitem-input-site' ) )
+				.add(
+					$( '<input />' )
+						.attr( {
+							name: 'wbclient-linkItem-site',
+							id: 'wbclient-linkItem-site',
+							'class': 'wbclient-linkItem-input'
+						} )
+						.siteselector( {
+							source: this._getLinkableSites()
+						} )
+						.on(
+							'siteselectoropen siteselectorclose siteselectorautocomplete blur',
+							$.proxy( this._onSiteSelectorChangeHandler, this )
+						)
+				);
 		},
 
 		/**
@@ -288,30 +288,30 @@
 			// input element. Furthermore, we remove the old suggestor (if there's one) and create a new
 			// one working on the right wiki.
 			$page
-			.prop( 'disabled', false )
-			.suggester( {
-				source: function ( term ) {
-					var deferred = $.Deferred();
+				.prop( 'disabled', false )
+				.suggester( {
+					source: function ( term ) {
+						var deferred = $.Deferred();
 
-					$.ajax( {
-						url: apiUrl,
-						dataType: 'jsonp',
-						data: {
-							search: term,
-							action: 'opensearch'
-						},
-						timeout: 8000
-					} )
-					.done( function ( response ) {
-						deferred.resolve( response[ 1 ], response[ 0 ] );
-					} )
-					.fail( function ( jqXHR, textStatus ) {
-						deferred.reject( textStatus );
-					} );
+						$.ajax( {
+							url: apiUrl,
+							dataType: 'jsonp',
+							data: {
+								search: term,
+								action: 'opensearch'
+							},
+							timeout: 8000
+						} )
+							.done( function ( response ) {
+								deferred.resolve( response[ 1 ], response[ 0 ] );
+							} )
+							.fail( function ( jqXHR, textStatus ) {
+								deferred.reject( textStatus );
+							} );
 
-					return deferred.promise();
-				}
-			} );
+						return deferred.promise();
+					}
+				} );
 		},
 
 		/**
@@ -323,27 +323,27 @@
 			var self = this;
 
 			return $( '<label>' )
-			.attr( 'for', 'wbclient-linkItem-page' )
-			.text( mw.msg( 'wikibase-linkitem-input-page' ) )
-			.add(
-				$( '<input />' )
-				.attr( {
-					name: 'wbclient-linkItem-page',
-					id: 'wbclient-linkItem-page',
-					'class': 'wbclient-linkItem-input'
-				} )
-				.prop( 'disabled', true )
-				.on( 'eachchange', function () {
-					// Enable the button if the field has a value
-					self.$goButton.button( $( this ).val() === '' ? 'disable' : 'enable' );
-				} )
-				.on( 'keydown', function ( e ) {
-					if ( !self.$goButton.prop( 'disabled' ) && e.which === 13 ) {
-						// Enter should submit
-						self.$goButton.trigger( 'click' );
-					}
-				} )
-			);
+				.attr( 'for', 'wbclient-linkItem-page' )
+				.text( mw.msg( 'wikibase-linkitem-input-page' ) )
+				.add(
+					$( '<input />' )
+						.attr( {
+							name: 'wbclient-linkItem-page',
+							id: 'wbclient-linkItem-page',
+							'class': 'wbclient-linkItem-input'
+						} )
+						.prop( 'disabled', true )
+						.on( 'eachchange', function () {
+							// Enable the button if the field has a value
+							self.$goButton.button( $( this ).val() === '' ? 'disable' : 'enable' );
+						} )
+						.on( 'keydown', function ( e ) {
+							if ( !self.$goButton.prop( 'disabled' ) && e.which === 13 ) {
+								// Enter should submit
+								self.$goButton.trigger( 'click' );
+							}
+						} )
+				);
 		},
 
 		/**
@@ -366,9 +366,9 @@
 			this._showSpinner();
 
 			this._pageConnector.getNewlyLinkedPages()
-			.done( $.proxy( this._onConfirmationDataLoad, this ) )
-			// This will (as a side effect) also catch errors where the target page doesn't exist:
-			.fail( $.proxy( this._onError, this ) );
+				.done( $.proxy( this._onConfirmationDataLoad, this ) )
+				// This will (as a side effect) also catch errors where the target page doesn't exist:
+				.fail( $.proxy( this._onError, this ) );
 		},
 
 		/**
@@ -428,8 +428,8 @@
 					// The item we want to link with only has a single sitelink so we don't have to ask
 					// for confirmation:
 					this._pageConnector.linkPages()
-					.done( $.proxy( this._onSuccess, this ) )
-					.fail( $.proxy( this._onError, this ) );
+						.done( $.proxy( this._onSuccess, this ) )
+						.fail( $.proxy( this._onError, this ) );
 				} else {
 					// Let the user verify this is indeed the entity to link with and link it after.
 					this._removeSpinner();
@@ -437,8 +437,8 @@
 				}
 			} else {
 				this._pageConnector.linkPages()
-				.done( $.proxy( this._onSuccess, this ) )
-				.fail( $.proxy( this._onError, this ) );
+					.done( $.proxy( this._onSuccess, this ) )
+					.fail( $.proxy( this._onError, this ) );
 			}
 		},
 
@@ -470,8 +470,8 @@
 					// The user confirmed that this is the right item...
 					self._showSpinner();
 					self._pageConnector.linkPages()
-					.done( $.proxy( self._onSuccess, self ) )
-					.fail( $.proxy( self._onError, self ) );
+						.done( $.proxy( self._onSuccess, self ) )
+						.fail( $.proxy( self._onError, self ) );
 				} );
 		},
 
@@ -491,25 +491,25 @@
 
 			// Table head
 			$( '<thead>' )
-			.append(
-				$( '<tr>' )
-				.append( $( '<th>' ).text( mw.msg( 'wikibase-sitelinks-sitename-columnheading' ) ) )
-				.append( $( '<th>' ).text( mw.msg( 'wikibase-sitelinks-link-columnheading' ) ) )
-			)
-			.appendTo( $siteLinks.find( 'table' ) );
+				.append(
+					$( '<tr>' )
+						.append( $( '<th>' ).text( mw.msg( 'wikibase-sitelinks-sitename-columnheading' ) ) )
+						.append( $( '<th>' ).text( mw.msg( 'wikibase-sitelinks-link-columnheading' ) ) )
+				)
+				.appendTo( $siteLinks.find( 'table' ) );
 
 			// Table body
 			for ( i in entity.sitelinks ) {
 				if ( entity.sitelinks[ i ].site ) {
 					// Show a row for each page that is linked with the current entity
 					$siteLinks
-					.find( 'table' )
-					.append(
-						this._createSiteLinkRow(
-							wb.sites.getSite( entity.sitelinks[ i ].site ),
-							entity.sitelinks[ i ]
-						)
-					);
+						.find( 'table' )
+						.append(
+							this._createSiteLinkRow(
+								wb.sites.getSite( entity.sitelinks[ i ].site ),
+								entity.sitelinks[ i ]
+							)
+						);
 				}
 			}
 			return $siteLinks;
@@ -527,15 +527,15 @@
 			return $( '<tr>' )
 				.append(
 					$( '<td>' )
-					.addClass( 'wbclient-linkItem-column-site' )
-					.text( site.getName() )
-					.css( 'direction', site.getLanguageDirection() )
+						.addClass( 'wbclient-linkItem-column-site' )
+						.text( site.getName() )
+						.css( 'direction', site.getLanguageDirection() )
 				)
 				.append(
 					$( '<td>' )
-					.addClass( 'wbclient-linkItem-column-page' )
-					.append( site.getLinkTo( entitySitelinks.title ) )
-					.css( 'direction', site.getLanguageDirection() )
+						.addClass( 'wbclient-linkItem-column-page' )
+						.append( site.getLinkTo( entitySitelinks.title ) )
+						.css( 'direction', site.getLanguageDirection() )
 				);
 		},
 
@@ -553,8 +553,8 @@
 				.empty()
 				.append(
 					$( '<p>' )
-					.addClass( 'wbclient-linkItem-success-message' )
-					.html( mw.message( 'wikibase-linkitem-success-link', itemUri ).parse() )
+						.addClass( 'wbclient-linkItem-success-message' )
+						.html( mw.message( 'wikibase-linkitem-success-link', itemUri ).parse() )
 				)
 				.append( $( '<p>' ).text( mw.msg( 'wikibase-replicationnote' ) ) );
 

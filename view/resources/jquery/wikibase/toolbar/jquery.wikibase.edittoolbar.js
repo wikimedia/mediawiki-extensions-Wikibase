@@ -204,19 +204,19 @@
 			var self = this;
 
 			this.getContainer()
-			.on( 'toolbarbuttonaction.' + this.widgetName, function ( event ) {
-				if ( self._buttons.edit && event.target === self._buttons.edit.get( 0 ) ) {
-					self._controller.startEditing();
-				} else if ( self._buttons.save && event.target === self._buttons.save.get( 0 ) ) {
-					self._controller.stopEditing();
-				} else if ( self._buttons.remove && event.target === self._buttons.remove.get( 0 ) ) {
-					self.disable();
-					self.toggleActionMessage( mw.msg( 'wikibase-remove-inprogress' ) );
-					self.options.onRemove();
-				} else if ( self._buttons.cancel && event.target === self._buttons.cancel.get( 0 ) ) {
-					self._controller.cancelEditing();
-				}
-			} );
+				.on( 'toolbarbuttonaction.' + this.widgetName, function ( event ) {
+					if ( self._buttons.edit && event.target === self._buttons.edit.get( 0 ) ) {
+						self._controller.startEditing();
+					} else if ( self._buttons.save && event.target === self._buttons.save.get( 0 ) ) {
+						self._controller.stopEditing();
+					} else if ( self._buttons.remove && event.target === self._buttons.remove.get( 0 ) ) {
+						self.disable();
+						self.toggleActionMessage( mw.msg( 'wikibase-remove-inprogress' ) );
+						self.options.onRemove();
+					} else if ( self._buttons.cancel && event.target === self._buttons.cancel.get( 0 ) ) {
+						self._controller.cancelEditing();
+					}
+				} );
 		},
 
 		/**
@@ -244,8 +244,8 @@
 			subToolbar.option( '$content', $buttons );
 
 			this.getContainer()
-			.append( this._getTooltipAnchor() )
-			.addClass( this.widgetBaseClass + '-ineditmode' );
+				.append( this._getTooltipAnchor() )
+				.addClass( this.widgetBaseClass + '-ineditmode' );
 		},
 
 		/**
@@ -379,17 +379,17 @@
 			var self = this;
 
 			$anchor
-			.wbtooltip( {
-				content: error,
-				permanent: true
-			} )
-			.one( 'wbtooltipafterhide.' + this.widgetName, function () {
-				self._controller.setError();
-				var wbtooltip = $anchor.data( 'wbtooltip' );
-				if ( wbtooltip ) {
-					wbtooltip.destroy();
-				}
-			} );
+				.wbtooltip( {
+					content: error,
+					permanent: true
+				} )
+				.one( 'wbtooltipafterhide.' + this.widgetName, function () {
+					self._controller.setError();
+					var wbtooltip = $anchor.data( 'wbtooltip' );
+					if ( wbtooltip ) {
+						wbtooltip.destroy();
+					}
+				} );
 
 			$anchor.data( 'wbtooltip' ).show();
 		},

@@ -49,20 +49,20 @@
 					self = this;
 
 				this._repoApi.getEntities( [ entityId ], null, this._languages )
-				.done( function ( result ) {
-					var entityData = result.entities[ entityId ];
-					var entity = null;
+					.done( function ( result ) {
+						var entityData = result.entities[ entityId ];
+						var entity = null;
 
-					if ( entityData.missing !== '' ) {
-						entity = self._entityDeserializer.deserialize( entityData );
-					}
+						if ( entityData.missing !== '' ) {
+							entity = self._entityDeserializer.deserialize( entityData );
+						}
 
-					deferred.resolve( entity );
-				} )
-				// FIXME: Evaluate failing promise
-				.fail( function () {
-					deferred.reject();
-				} );
+						deferred.resolve( entity );
+					} )
+					// FIXME: Evaluate failing promise
+					.fail( function () {
+						deferred.reject();
+					} );
 
 				return deferred.promise();
 			}

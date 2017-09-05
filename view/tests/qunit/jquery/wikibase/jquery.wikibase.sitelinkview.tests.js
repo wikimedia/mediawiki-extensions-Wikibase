@@ -119,18 +119,18 @@
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'sitelinkviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		sitelinkview.startEditing();
 		sitelinkview.startEditing(); // should not trigger event
@@ -161,18 +161,18 @@
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'sitelinkviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		sitelinkview.startEditing();
 
@@ -278,13 +278,13 @@
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.addClass( 'wb-error' )
-		.on( 'sitelinkviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered toggleerror event.'
-			);
-		} );
+			.addClass( 'wb-error' )
+			.on( 'sitelinkviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered toggleerror event.'
+				);
+			} );
 
 		sitelinkview.setError();
 	} );

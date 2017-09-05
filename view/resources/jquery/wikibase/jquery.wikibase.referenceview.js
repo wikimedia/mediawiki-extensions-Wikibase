@@ -107,10 +107,10 @@
 			];
 
 			this.$listview
-			.on( changeEvents.join( ' ' ), function ( event ) {
-				// Propagate "change" event.
-				self._trigger( 'change' );
-			} );
+				.on( changeEvents.join( ' ' ), function ( event ) {
+					// Propagate "change" event.
+					self._trigger( 'change' );
+				} );
 		},
 
 		/**
@@ -236,13 +236,13 @@
 
 			return listview.enterNewItem().done( function ( $snaklistview ) {
 				lia.liInstance( $snaklistview ).enterNewItem()
-				.done( function ( $snakview ) {
-					// Since the new snakview will be initialized empty which invalidates the
-					// snaklistview, external components using the snaklistview will be noticed via
-					// the "change" event.
-					self._trigger( 'change' );
-					$snakview.data( 'snakview' ).focus();
-				} );
+					.done( function ( $snakview ) {
+						// Since the new snakview will be initialized empty which invalidates the
+						// snaklistview, external components using the snaklistview will be noticed via
+						// the "change" event.
+						self._trigger( 'change' );
+						$snakview.data( 'snakview' ).focus();
+					} );
 			} );
 		},
 

@@ -71,7 +71,7 @@
 		var done = assert.async();
 		var api = {
 			setLabel: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID )
-					.withLabel( 'some-lang', 'new label' ) )
+				.withLabel( 'some-lang', 'new label' ) )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -162,16 +162,17 @@
 		entityTermsChanger.save(
 			newFingerprint().withLabel( 'language', 'label' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.ok( false, 'save should have failed' );
-		} )
-		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			assert.equal( error.context.type, 'label' );
-			assert.ok( error.context.value.equals( new Term( 'language', 'label' ) ) );
-		} )
-		.always( done );
+		)
+			.done( function ( savedFingerprint ) {
+				assert.ok( false, 'save should have failed' );
+			} )
+			.fail( function ( error ) {
+				assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+				assert.equal( error.context.type, 'label' );
+				assert.ok( error.context.value.equals( new Term( 'language', 'label' ) ) );
+			} )
+			.always( done );
 	} );
 
 	QUnit.test( 'save performs correct API calls for new description', function ( assert ) {
@@ -193,16 +194,19 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'some-lang', 'description' ),
 			currentFingerprint().empty()
-		).then( function () {
-			assert.ok( api.setDescription.calledOnce );
-			sinon.assert.calledWith(
-				api.setDescription,
-				'Q1',
-				revisionId,
-				'description',
-				'some-lang'
-			);
-		} ).fail( failOnError( assert ) ).always( done );
+		)
+			.then( function () {
+				assert.ok( api.setDescription.calledOnce );
+				sinon.assert.calledWith(
+					api.setDescription,
+					'Q1',
+					revisionId,
+					'description',
+					'some-lang'
+				);
+			} )
+			.fail( failOnError( assert ) )
+			.always( done );
 	} );
 
 	QUnit.test( 'save performs correct API calls for changed description', function ( assert ) {
@@ -287,9 +291,11 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.equal( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
-		} ).fail( failOnError( assert ) ).always( done );
+		)
+			.done( function ( savedFingerprint ) {
+				assert.equal( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
+			} )
+			.fail( failOnError( assert ) ).always( done );
 	} );
 
 	QUnit.test( 'save correctly handles API failures for descriptions', function ( assert ) {
@@ -310,15 +316,16 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.ok( false, 'save should have failed' );
-		} )
-		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			assert.equal( error.context.type, 'description' );
-			assert.ok( error.context.value.equals( new Term( 'language', 'description' ) ) );
-		} ).always( done );
+		)
+			.done( function ( savedFingerprint ) {
+				assert.ok( false, 'save should have failed' );
+			} )
+			.fail( function ( error ) {
+				assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+				assert.equal( error.context.type, 'description' );
+				assert.ok( error.context.value.equals( new Term( 'language', 'description' ) ) );
+			} ).always( done );
 	} );
 
 	QUnit.test( 'save performs correct API calls for new aliases', function ( assert ) {
@@ -364,17 +371,18 @@
 		entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'new alias' ] ),
 			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
-		).then( function () {
-			assert.ok( api.setAliases.calledOnce );
-			sinon.assert.calledWith(
-				api.setAliases,
-				'Q1',
-				REVISION_ID,
-				[ 'new alias' ],
-				[ 'old alias' ],
-				'language'
-			);
-		} ).fail( failOnError( assert ) ).always( done );
+		)
+			.then( function () {
+				assert.ok( api.setAliases.calledOnce );
+				sinon.assert.calledWith(
+					api.setAliases,
+					'Q1',
+					REVISION_ID,
+					[ 'new alias' ],
+					[ 'old alias' ],
+					'language'
+				);
+			} ).fail( failOnError( assert ) ).always( done );
 	} );
 
 	QUnit.test( 'save performs correct API calls for removed aliases', function ( assert ) {
@@ -392,17 +400,18 @@
 		entityTermsChanger.save(
 			newFingerprint().empty(),
 			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
-		).then( function () {
-			assert.ok( api.setAliases.calledOnce );
-			sinon.assert.calledWith(
-				api.setAliases,
-				'Q1',
-				REVISION_ID,
-				[],
-				[ 'old alias' ],
-				'language'
-			);
-		} ).fail( failOnError( assert ) ).always( done );
+		)
+			.then( function () {
+				assert.ok( api.setAliases.calledOnce );
+				sinon.assert.calledWith(
+					api.setAliases,
+					'Q1',
+					REVISION_ID,
+					[],
+					[ 'old alias' ],
+					'language'
+				);
+			} ).fail( failOnError( assert ) ).always( done );
 	} );
 
 	QUnit.test( 'save correctly handles API response for aliases', function ( assert ) {
@@ -446,15 +455,16 @@
 		entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
-			assert.ok( false, 'save should have failed' );
-		} )
-		.fail( function ( error ) {
-			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			assert.equal( error.context.type, 'aliases' );
-			assert.ok( error.context.value.equals( new wb.datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
-		} ).always( done );
+		)
+			.done( function ( savedFingerprint ) {
+				assert.ok( false, 'save should have failed' );
+			} )
+			.fail( function ( error ) {
+				assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
+				assert.equal( error.code, 'errorCode' );
+				assert.equal( error.context.type, 'aliases' );
+				assert.ok( error.context.value.equals( new wb.datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
+			} ).always( done );
 	} );
 
 	function failOnError( assert ) {

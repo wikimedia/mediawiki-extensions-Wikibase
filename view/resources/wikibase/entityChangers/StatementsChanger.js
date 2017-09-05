@@ -78,18 +78,18 @@
 				guid = statement.getClaim().getGuid();
 
 			this._api.removeClaim( guid, this._revisionStore.getClaimRevision( guid ) )
-			.done( function ( response ) {
-				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
+				.done( function ( response ) {
+					self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
-				// FIXME: Set statement on this._entity
+					// FIXME: Set statement on this._entity
 
-				deferred.resolve();
+					deferred.resolve();
 
-				self._fireHook( 'wikibase.statement.removed', self._entity.getId(), guid );
-			} )
-			.fail( function ( errorCode, error ) {
-				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
-			} );
+					self._fireHook( 'wikibase.statement.removed', self._entity.getId(), guid );
+				} )
+				.fail( function ( errorCode, error ) {
+					deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
+				} );
 
 			return deferred.promise();
 		},
@@ -110,23 +110,23 @@
 				this._statementSerializer.serialize( statement ),
 				this._revisionStore.getClaimRevision( statement.getClaim().getGuid() )
 			)
-			.done( function ( result ) {
-				var savedStatement = self._statementDeserializer.deserialize( result.claim ),
-					guid = savedStatement.getClaim().getGuid(),
-					pageInfo = result.pageinfo;
+				.done( function ( result ) {
+					var savedStatement = self._statementDeserializer.deserialize( result.claim ),
+						guid = savedStatement.getClaim().getGuid(),
+						pageInfo = result.pageinfo;
 
-				// Update revision store:
-				self._revisionStore.setClaimRevision( pageInfo.lastrevid, guid );
+					// Update revision store:
+					self._revisionStore.setClaimRevision( pageInfo.lastrevid, guid );
 
-				// FIXME: Set statement on this._entity
+					// FIXME: Set statement on this._entity
 
-				deferred.resolve( savedStatement );
+					deferred.resolve( savedStatement );
 
-				self._fireHook( 'wikibase.statement.saved', self._entity.getId(), guid );
-			} )
-			.fail( function ( errorCode, error ) {
-				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
-			} );
+					self._fireHook( 'wikibase.statement.saved', self._entity.getId(), guid );
+				} )
+				.fail( function ( errorCode, error ) {
+					deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
+				} );
 
 			return deferred.promise();
 		}

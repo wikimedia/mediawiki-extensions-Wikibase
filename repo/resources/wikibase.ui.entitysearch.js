@@ -85,30 +85,30 @@
 		$input.before( $hiddenInput );
 
 		$input
-		.one( 'eachchange.entitysearch', function () {
-			removeSuggestionContext( this );
-		} )
-		.entitysearch( {
-			url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
-			menu: $searchMenu.data( 'ooMenu' ),
-			position: $.extend(
-				{},
-				$.wikibase.entityselector.prototype.options.position,
-				{ offset: '-1 2' }
-			),
-			confineMinWidthTo: $form,
-			suggestionsPlaceholder: suggestionsPlaceholder
-		} )
-		.on( 'entityselectoropen', function ( event ) {
-			updateSuggestionSpecial( searchContaining );
-		} )
-		.on( 'eachchange', function ( event, oldVal ) {
-			$hiddenInput.val( '' );
-			updateSuggestionSpecial( searchContaining );
-		} )
-		.on( 'entityselectorselected', function ( event, entityId ) {
-			$hiddenInput.val( entityId );
-		} );
+			.one( 'eachchange.entitysearch', function () {
+				removeSuggestionContext( this );
+			} )
+			.entitysearch( {
+				url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
+				menu: $searchMenu.data( 'ooMenu' ),
+				position: $.extend(
+					{},
+					$.wikibase.entityselector.prototype.options.position,
+					{ offset: '-1 2' }
+				),
+				confineMinWidthTo: $form,
+				suggestionsPlaceholder: suggestionsPlaceholder
+			} )
+			.on( 'entityselectoropen', function ( event ) {
+				updateSuggestionSpecial( searchContaining );
+			} )
+			.on( 'eachchange', function ( event, oldVal ) {
+				$hiddenInput.val( '' );
+				updateSuggestionSpecial( searchContaining );
+			} )
+			.on( 'entityselectorselected', function ( event, entityId ) {
+				$hiddenInput.val( entityId );
+			} );
 
 		// TODO: Re-evaluate entity selector input (e.g. hitting "Go" after having hit "Search"
 		// before. However, this will require triggering the entity selector's API call and waiting

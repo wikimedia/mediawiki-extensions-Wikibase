@@ -299,13 +299,13 @@
 
 		// destroy tooltip after edit mode gets closed again:
 		$entityview
-		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function ( event, origin ) {
-			var tooltip = $messageAnchor.data( 'wbtooltip' );
-			if ( tooltip ) {
-				tooltip.degrade( true );
-			}
-			$( window ).off( '.wbCopyrightTooltip' );
-		} );
+			.one( 'entityviewafterstopediting.wbCopyRightTooltip', function ( event, origin ) {
+				var tooltip = $messageAnchor.data( 'wbtooltip' );
+				if ( tooltip ) {
+					tooltip.degrade( true );
+				}
+				$( window ).off( '.wbCopyrightTooltip' );
+			} );
 
 		$( window ).one(
 			'scroll.wbCopyrightTooltip touchmove.wbCopyrightTooltip resize.wbCopyrightTooltip',
@@ -373,8 +373,7 @@
 		} );
 
 		if ( canEdit ) {
-			$entityview
-			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function ( event, lang ) {
+			$entityview.on( 'entitytermsviewchange entitytermsviewafterstopediting', function ( event, lang ) {
 				var userLanguage = mw.config.get( 'wgUserLanguage' );
 
 				if ( typeof lang === 'string' && lang !== userLanguage ) {

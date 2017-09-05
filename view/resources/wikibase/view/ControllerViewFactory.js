@@ -57,11 +57,11 @@ wikibase.view.ControllerViewFactory = ( function ( mw, wb, $ ) {
 			autoWidth: true,
 			zIndex: 2
 		} )
-		.on( 'sticknodeupdate', function ( event ) {
-			if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
-				$container.css( 'width', 'auto' );
-			}
-		} );
+			.on( 'sticknodeupdate', function ( event ) {
+				if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
+					$container.css( 'width', 'auto' );
+				}
+			} );
 
 		view.element.on( 'entitytermsviewchange', function () {
 			$container.data( 'sticknode' ).refresh();

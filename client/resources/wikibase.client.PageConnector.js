@@ -68,22 +68,22 @@
 				deferred = new $.Deferred();
 
 			this._getEntityForPage( this._secondSiteId, this._secondPageName )
-			.fail( deferred.reject )
-			.done( function ( data ) {
-				var entity, siteLinkCount;
+				.fail( deferred.reject )
+				.done( function ( data ) {
+					var entity, siteLinkCount;
 
-				if ( data.entities[ '-1' ] ) {
-					deferred.resolve( {} );
-					return;
-				}
+					if ( data.entities[ '-1' ] ) {
+						deferred.resolve( {} );
+						return;
+					}
 
-				entity = self._extractEntity( data );
+					entity = self._extractEntity( data );
 
-				// Count site links
-				siteLinkCount = self._countSiteLinks( entity );
+					// Count site links
+					siteLinkCount = self._countSiteLinks( entity );
 
-				deferred.resolve( siteLinkCount ? entity : {} );
-			} );
+					deferred.resolve( siteLinkCount ? entity : {} );
+				} );
 
 			return deferred.promise();
 		},
@@ -151,28 +151,28 @@
 				deferred = new $.Deferred();
 
 			this._getEntityForPage( self._firstSiteId, self._firstPageName )
-			.done( function ( data ) {
-				// Use the normalized title from now on (e.g. for creating a new item with proper
-				// titles).
-				if ( data.normalized ) {
-					self._firstPageName = data.normalized.n.to;
-				}
+				.done( function ( data ) {
+					// Use the normalized title from now on (e.g. for creating a new item with proper
+					// titles).
+					if ( data.normalized ) {
+						self._firstPageName = data.normalized.n.to;
+					}
 
-				if ( !data.entities[ '-1' ] ) {
-					var entity = self._extractEntity( data );
+					if ( !data.entities[ '-1' ] ) {
+						var entity = self._extractEntity( data );
 
-					// The first page has an entity attached, so link/ merge the second page with it
-					self._linkOrMergeSecondPage( entity )
-					.done( deferred.resolve )
-					.fail( deferred.reject );
-				} else {
-					// There is no item for the first page ... maybe there's one for the second
-					self._linkFirstPageOrCreateItem()
-					.done( deferred.resolve )
-					.fail( deferred.reject );
-				}
-			} )
-			.fail( deferred.reject );
+						// The first page has an entity attached, so link/ merge the second page with it
+						self._linkOrMergeSecondPage( entity )
+							.done( deferred.resolve )
+							.fail( deferred.reject );
+					} else {
+						// There is no item for the first page ... maybe there's one for the second
+						self._linkFirstPageOrCreateItem()
+							.done( deferred.resolve )
+							.fail( deferred.reject );
+					}
+				} )
+				.fail( deferred.reject );
 
 			return deferred.promise();
 		},
@@ -190,26 +190,26 @@
 				deferred = new $.Deferred();
 
 			this._getEntityForPage( self._secondSiteId, self._secondPageName )
-			.done( function ( data ) {
-				if ( data.normalized ) {
-					// Use the normalized title from now on (e.g. for creating a new item with proper
-					// titles).
-					self._secondPageName = data.normalized.n.to;
-				}
+				.done( function ( data ) {
+					if ( data.normalized ) {
+						// Use the normalized title from now on (e.g. for creating a new item with proper
+						// titles).
+						self._secondPageName = data.normalized.n.to;
+					}
 
-				if ( data.entities[ '-1' ] ) {
-					// The second page has no item yet, so just link it with the given entity
-					self._setSiteLink( entity, self._secondSiteId, self._secondPageName )
-					.done( deferred.resolve )
-					.fail( deferred.reject );
-				} else {
-					// The page already has an item... this means we have to perform a merge
-					self._mergeEntities( entity, self._extractEntity( data ) )
-					.done( deferred.resolve )
-					.fail( deferred.reject );
-				}
-			} )
-			.fail( deferred.reject );
+					if ( data.entities[ '-1' ] ) {
+						// The second page has no item yet, so just link it with the given entity
+						self._setSiteLink( entity, self._secondSiteId, self._secondPageName )
+							.done( deferred.resolve )
+							.fail( deferred.reject );
+					} else {
+						// The page already has an item... this means we have to perform a merge
+						self._mergeEntities( entity, self._extractEntity( data ) )
+							.done( deferred.resolve )
+							.fail( deferred.reject );
+					}
+				} )
+				.fail( deferred.reject );
 
 			return deferred.promise();
 		},
@@ -225,34 +225,34 @@
 				deferred = new $.Deferred();
 
 			this._getEntityForPage( self._secondSiteId, self._secondPageName )
-			.fail( deferred.reject )
-			.done( function ( data ) {
-				// Use the normalized title from now on (e.g. for creating a new item with proper
-				// titles).
-				if ( data.normalized ) {
-					self._secondPageName = data.normalized.n.to;
-				}
+				.fail( deferred.reject )
+				.done( function ( data ) {
+					// Use the normalized title from now on (e.g. for creating a new item with proper
+					// titles).
+					if ( data.normalized ) {
+						self._secondPageName = data.normalized.n.to;
+					}
 
-				if ( data.entities[ '-1' ] ) {
-					// Neither the first nor the second page have an item yet, create one
-					self._createItem(
-						self._firstSiteId,
-						self._firstPageName,
-						self._secondSiteId,
-						self._secondPageName
-					)
-					.done( deferred.resolve )
-					.fail( deferred.reject );
-				} else {
-					// There already is an entity with the second page linked, so just link the first
-					// one
-					var entity = self._extractEntity( data );
+					if ( data.entities[ '-1' ] ) {
+						// Neither the first nor the second page have an item yet, create one
+						self._createItem(
+							self._firstSiteId,
+							self._firstPageName,
+							self._secondSiteId,
+							self._secondPageName
+						)
+							.done( deferred.resolve )
+							.fail( deferred.reject );
+					} else {
+						// There already is an entity with the second page linked, so just link the first
+						// one
+						var entity = self._extractEntity( data );
 
-					self._setSiteLink( entity, self._firstSiteId, self._firstPageName )
-					.done( deferred.resolve )
-					.fail( deferred.reject );
-				}
-			} );
+						self._setSiteLink( entity, self._firstSiteId, self._firstPageName )
+							.done( deferred.resolve )
+							.fail( deferred.reject );
+					}
+				} );
 
 			return deferred.promise();
 		},

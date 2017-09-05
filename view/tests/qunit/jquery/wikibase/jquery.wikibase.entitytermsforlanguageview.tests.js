@@ -78,18 +78,18 @@
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
 		$entitytermsforlanguageview
-		.on( 'entitytermsforlanguageviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'entitytermsforlanguageviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'entitytermsforlanguageviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'entitytermsforlanguageviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		/**
 		 * @param {Function} func
@@ -105,20 +105,20 @@
 			}
 
 			$entitytermsforlanguageview
-			.one(
-				'entitytermsforlanguageviewafterstartediting.entitytermsforlanguageviewtest',
-				function ( event ) {
-					$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
-					deferred.resolve();
-				}
-			)
-			.one(
-				'entitytermsforlanguageviewafterstopediting.entitytermsforlanguageviewtest',
-				function ( event, dropValue ) {
-					$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
-					deferred.resolve();
-				}
-			);
+				.one(
+					'entitytermsforlanguageviewafterstartediting.entitytermsforlanguageviewtest',
+					function ( event ) {
+						$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
+						deferred.resolve();
+					}
+				)
+				.one(
+					'entitytermsforlanguageviewafterstopediting.entitytermsforlanguageviewtest',
+					function ( event, dropValue ) {
+						$entitytermsforlanguageview.off( '.entitytermsforlanguageviewtest' );
+						deferred.resolve();
+					}
+				);
 
 			func();
 
@@ -193,12 +193,12 @@
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
 		$entitytermsforlanguageview
-		.on( 'entitytermsforlanguageviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered "toggleerror" event.'
-			);
-		} );
+			.on( 'entitytermsforlanguageviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered "toggleerror" event.'
+				);
+			} );
 
 		entitytermsforlanguageview.setError();
 	} );

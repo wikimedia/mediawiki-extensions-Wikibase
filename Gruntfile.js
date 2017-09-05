@@ -22,6 +22,7 @@ module.exports = function ( grunt ) {
 				'**/*.css',
 				'**/*.less',
 				'!view/resources/jquery/ui/**',
+				'!extensions/ValueView/**',
 				'!node_modules/**',
 				'!vendor/**'
 			]

@@ -20,8 +20,8 @@
 				return;
 			}
 			handlers[ index++ ]( item )
-			.fail( tryNext )
-			.done( deferred.resolve );
+				.fail( tryNext )
+				.done( deferred.resolve );
 		}
 
 		window.setTimeout( tryNext, 0 );

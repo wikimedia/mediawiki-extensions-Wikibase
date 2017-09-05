@@ -69,21 +69,21 @@
 		$entitySelector.val( 'abc' );
 
 		$entitySelector
-		.one( 'entityselectorselected', function ( event, id ) {
-			assert.deepEqual(
-				id,
-				entityStubs[ 0 ].id,
-				'Selected first entity.'
-			);
+			.one( 'entityselectorselected', function ( event, id ) {
+				assert.deepEqual(
+					id,
+					entityStubs[ 0 ].id,
+					'Selected first entity.'
+				);
 
-			assert.deepEqual(
-				entitySelector.selectedEntity(),
-				entityStubs[ 0 ],
-				'Verified selected entity using selectedEntity().'
-			);
+				assert.deepEqual(
+					entitySelector.selectedEntity(),
+					entityStubs[ 0 ],
+					'Verified selected entity using selectedEntity().'
+				);
 
-			QUnit.start();
-		} );
+				QUnit.start();
+			} );
 
 		QUnit.stop();
 
@@ -128,9 +128,9 @@
 		$entitySelector.val( 'yz' );
 
 		$entitySelector
-		.one( 'entityselectorselected', function ( event, id ) {
-			assert.ok( false, 'entity should not automatically be selected based on the alias' );
-		} );
+			.one( 'entityselectorselected', function ( event, id ) {
+				assert.ok( false, 'entity should not automatically be selected based on the alias' );
+			} );
 
 		QUnit.stop();
 

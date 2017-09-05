@@ -52,22 +52,22 @@
 				description.getText(),
 				language
 			)
-			.done( function ( result ) {
-				var savedText = result.entity.descriptions[ language ].value,
-					savedTerm = savedText ? new wb.datamodel.Term( language, savedText ) : null;
+				.done( function ( result ) {
+					var savedText = result.entity.descriptions[ language ].value,
+						savedTerm = savedText ? new wb.datamodel.Term( language, savedText ) : null;
 
-				// Update revision store:
-				self._revisionStore.setDescriptionRevision( result.entity.lastrevid );
+					// Update revision store:
+					self._revisionStore.setDescriptionRevision( result.entity.lastrevid );
 
-				// FIXME: Maybe check API's return value?
+					// FIXME: Maybe check API's return value?
 
-				// FIXME: Introduce Item.setDescriptions
+					// FIXME: Introduce Item.setDescriptions
 
-				deferred.resolve( savedTerm );
-			} )
-			.fail( function ( errorCode, error ) {
-				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
-			} );
+					deferred.resolve( savedTerm );
+				} )
+				.fail( function ( errorCode, error ) {
+					deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
+				} );
 
 			return deferred.promise();
 		}

@@ -61,15 +61,15 @@
 			}
 
 			this.$link
-			.on( 'click.toolbarbutton keydown.toolbarbutton', function ( event ) {
-				if ( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
-					event.preventDefault();
+				.on( 'click.toolbarbutton keydown.toolbarbutton', function ( event ) {
+					if ( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
+						event.preventDefault();
 
-					if ( !self.options.disabled ) {
-						self._trigger( 'action' );
+						if ( !self.options.disabled ) {
+							self._trigger( 'action' );
+						}
 					}
-				}
-			} );
+				} );
 		},
 
 		/**
@@ -87,7 +87,7 @@
 			if ( key === 'cssClassSuffix' ) {
 				if ( this.options.cssClassSuffix ) {
 					this.element
-					.removeClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
+						.removeClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 				}
 				this.element.addClass( 'wikibase-toolbar-button-' + value );
 			} else if ( key === 'disabled' ) {

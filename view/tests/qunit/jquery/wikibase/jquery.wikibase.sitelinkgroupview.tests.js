@@ -132,18 +132,18 @@
 			sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
 		$sitelinkgroupview
-		.on( 'sitelinkgroupviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'sitelinkgroupviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'sitelinkgroupviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'sitelinkgroupviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		/**
 		 * @param {Function} func
@@ -159,17 +159,17 @@
 			}
 
 			$sitelinkgroupview
-			.one( 'sitelinkgroupviewafterstartediting.sitelinkgroupviewtest', function ( event ) {
-				$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
-				deferred.resolve();
-			} )
-			.one(
-				'sitelinkgroupviewafterstopediting.sitelinkgroupviewtest',
-				function ( event, dropValue ) {
+				.one( 'sitelinkgroupviewafterstartediting.sitelinkgroupviewtest', function ( event ) {
 					$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
 					deferred.resolve();
-				}
-			);
+				} )
+				.one(
+					'sitelinkgroupviewafterstopediting.sitelinkgroupviewtest',
+					function ( event, dropValue ) {
+						$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
+						deferred.resolve();
+					}
+				);
 
 			func();
 
@@ -231,13 +231,13 @@
 			sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
 		$sitelinkgroupview
-		.addClass( 'wb-error' )
-		.on( 'sitelinkgroupviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered toggleerror event.'
-			);
-		} );
+			.addClass( 'wb-error' )
+			.on( 'sitelinkgroupviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered toggleerror event.'
+				);
+			} );
 
 		sitelinkgroupview.setError();
 	} );

@@ -156,11 +156,11 @@
 								actualDataValueType, intendedDataValueType
 							)
 						} )
-						.append( $( '<div/>', {
-							text: mw.msg(
-								'wikibase-snakview-variation-datavaluetypemismatch-details',
-								actualDataValueType, intendedDataValueType )
-						} ) )
+							.append( $( '<div/>', {
+								text: mw.msg(
+									'wikibase-snakview-variation-datavaluetypemismatch-details',
+									actualDataValueType, intendedDataValueType )
+							} ) )
 					);
 					self.$viewPort.addClass( self.variationBaseClass + '-datavaluetypemismatch' );
 					// TODO: display value nonetheless (if any valueview can handle it) and move
@@ -173,62 +173,62 @@
 			if ( newValue !== false ) { // newValue could also be null for empty value
 				this.__currentNewValue = newValue;
 				this._entityStore
-				.get( this._viewState.propertyId() )
-				.done( function ( fetchedProperty ) {
-					if ( self.isDestroyed() ) {
-						return;
-					}
+					.get( this._viewState.propertyId() )
+					.done( function ( fetchedProperty ) {
+						if ( self.isDestroyed() ) {
+							return;
+						}
 
-					if ( newValue !== self.__currentNewValue ) {
-						// If the API response is not for the most recent newValue, discard it
-						return;
-					}
+						if ( newValue !== self.__currentNewValue ) {
+							// If the API response is not for the most recent newValue, discard it
+							return;
+						}
 
-					var dataType = _getDataType( fetchedProperty ),
-						propertyId = fetchedProperty ? fetchedProperty.getId() : null;
+						var dataType = _getDataType( fetchedProperty ),
+							propertyId = fetchedProperty ? fetchedProperty.getId() : null;
 
-					if ( fetchedProperty && !dataType ) {
-						mw.log.warn(
-							'Found property ' + fetchedProperty.getId() + ' in entityStore but couldn\'t find ' +
-							'the datatype "' + fetchedProperty.getDataTypeId() + '" in dataTypeStore. ' +
-							'This is a bug or a configuration issue.'
+						if ( fetchedProperty && !dataType ) {
+							mw.log.warn(
+								'Found property ' + fetchedProperty.getId() + ' in entityStore but couldn\'t find ' +
+								'the datatype "' + fetchedProperty.getDataTypeId() + '" in dataTypeStore. ' +
+								'This is a bug or a configuration issue.'
+							);
+							return;
+						}
+
+						// If the new value's type is not the data value type used by the Snak's
+						// property data type, something is very wrong. Display warning!
+						if ( newValue && dataType && newValue.getType() !== dataType.getDataValueType()
+							&& newValue.getType() !== dv.UnDeserializableValue.TYPE ) {
+							handleDataValueTypeMismatch(
+								newValue.getType(),
+								dataType.getDataValueType()
+							);
+							return; // do not change this._newDataValue as long as value is invalid
+						}
+
+						// Check whether valueview exists and if so, whether it is suitable for creating
+						// a new data value valid against the given data type.
+						if ( self._valueView
+							// can't check whether current valueview is most suitable for empty value if
+							// no indication for what kind of value (specified by the data type) is
+							// available
+							&& ( dataType || newValue !== null )
+						) {
+							// display current Snak's data value in existing valueview:
+							self._valueView.value( newValue );
+						} else {
+							// remove old view, create a new one or display message if unsupported data
+							// type or other issue which would prevent from creating a valueview
+							self._createNewValueView( newValue, dataType, propertyId );
+						}
+
+						self.$viewPort.removeClass(
+							self.variationBaseClass + '-datavaluetypemismatch'
 						);
-						return;
-					}
 
-					// If the new value's type is not the data value type used by the Snak's
-					// property data type, something is very wrong. Display warning!
-					if ( newValue && dataType && newValue.getType() !== dataType.getDataValueType()
-						&& newValue.getType() !== dv.UnDeserializableValue.TYPE ) {
-						handleDataValueTypeMismatch(
-							newValue.getType(),
-							dataType.getDataValueType()
-						);
-						return; // do not change this._newDataValue as long as value is invalid
-					}
-
-					// Check whether valueview exists and if so, whether it is suitable for creating
-					// a new data value valid against the given data type.
-					if ( self._valueView
-						// can't check whether current valueview is most suitable for empty value if
-						// no indication for what kind of value (specified by the data type) is
-						// available
-						&& ( dataType || newValue !== null )
-					) {
-						// display current Snak's data value in existing valueview:
-						self._valueView.value( newValue );
-					} else {
-						// remove old view, create a new one or display message if unsupported data
-						// type or other issue which would prevent from creating a valueview
-						self._createNewValueView( newValue, dataType, propertyId );
-					}
-
-					self.$viewPort.removeClass(
-						self.variationBaseClass + '-datavaluetypemismatch'
-					);
-
-					_render();
-				} );
+						_render();
+					} );
 			} else {
 				_render();
 			}
@@ -279,12 +279,12 @@
 			this._removeEventHandlers();
 
 			this._valueView.element
-			.on( 'valueviewparse.' + this.variationBaseClass, function ( event ) {
-				self._viewState.notify( 'invalid' );
-			} )
-			.on( 'valueviewchange.' + this.variationBaseClass, function ( event ) {
-				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
-			} );
+				.on( 'valueviewparse.' + this.variationBaseClass, function ( event ) {
+					self._viewState.notify( 'invalid' );
+				} )
+				.on( 'valueviewchange.' + this.variationBaseClass, function ( event ) {
+					self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
+				} );
 
 			/* FIXME: Temporarily disabled for user testing. Either re-enable or remove.
 			var $viewPort = this.$viewPort,
@@ -376,8 +376,8 @@
 				// any sense since we have no indicator for what kind of value should be entered
 				// if the Property doesn't provide us with that info.
 				$valueViewDom
-				.text( mw.msg( 'wikibase-snakview-variation-nonewvaluefordeletedproperty' ) )
-				.addClass( this.variationBaseClass + '-nonewvaluefordeletedproperty' );
+					.text( mw.msg( 'wikibase-snakview-variation-nonewvaluefordeletedproperty' ) )
+					.addClass( this.variationBaseClass + '-nonewvaluefordeletedproperty' );
 
 				return false; // no valueview created!
 			}

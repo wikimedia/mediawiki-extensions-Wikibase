@@ -147,12 +147,12 @@
 	function positionElementInOneLineWithAnother( $element, $target, $within ) {
 		var side = $( 'html' ).prop( 'dir' ) === 'ltr' ? 'left' : 'right';
 		$element
-		.position( {
-			my: side + ' top',
-			at: side + ' top',
-			of: $target,
-			within: $within
-		} );
+			.position( {
+				my: side + ' top',
+				at: side + ' top',
+				of: $target,
+				within: $within
+			} );
 	}
 
 	/**
@@ -200,8 +200,8 @@
 				var $visibleClaim = $visibleStatementviews.eq( i ),
 					$statementGroup = $visibleClaim.closest( '.wikibase-statementgroupview' ),
 					$statementGroupLabel = $statementGroup.find(
-							'.wikibase-statementgroupview-property-label'
-						);
+						'.wikibase-statementgroupview-property-label'
+					);
 
 				if ( $statementGroupLabel.length !== 1 ) {
 					continue;

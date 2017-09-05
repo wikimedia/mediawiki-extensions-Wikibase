@@ -56,22 +56,22 @@
 				this._getRemovedAliasesTexts( aliases, initialAliases ),
 				language
 			)
-			.done( function ( response ) {
-				self._revisionStore.setAliasesRevision( response.entity.lastrevid );
+				.done( function ( response ) {
+					self._revisionStore.setAliasesRevision( response.entity.lastrevid );
 
-				self._entity.getFingerprint().setAliases( language, aliases );
+					self._entity.getFingerprint().setAliases( language, aliases );
 
-				var texts = [];
-				if ( response.entity.aliases && response.entity.aliases[ language ] ) {
-					texts = response.entity.aliases[ language ].map( function ( value ) {
-						return value.value;
-					} );
-				}
-				deferred.resolve( new wb.datamodel.MultiTerm( language, texts ) );
-			} )
-			.fail( function ( errorCode, errorObject ) {
-				deferred.reject( wb.api.RepoApiError.newFromApiResponse( errorObject, 'save' ) );
-			} );
+					var texts = [];
+					if ( response.entity.aliases && response.entity.aliases[ language ] ) {
+						texts = response.entity.aliases[ language ].map( function ( value ) {
+							return value.value;
+						} );
+					}
+					deferred.resolve( new wb.datamodel.MultiTerm( language, texts ) );
+				} )
+				.fail( function ( errorCode, errorObject ) {
+					deferred.reject( wb.api.RepoApiError.newFromApiResponse( errorObject, 'save' ) );
+				} );
 
 			return deferred.promise();
 		},

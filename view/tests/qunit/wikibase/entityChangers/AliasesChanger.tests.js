@@ -62,13 +62,13 @@
 		QUnit.stop();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
-		.done( function ( savedAliases ) {
-			QUnit.start();
-			assert.ok( true, 'setAliases succeeded' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setAliases failed' );
-		} );
+			.done( function ( savedAliases ) {
+				QUnit.start();
+				assert.ok( true, 'setAliases succeeded' );
+			} )
+			.fail( function () {
+				assert.ok( false, 'setAliases failed' );
+			} );
 	} );
 
 	QUnit.test( 'setAliases correctly handles API failure', function ( assert ) {
@@ -92,19 +92,19 @@
 		QUnit.stop();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
-		.done( function ( savedAliases ) {
-			assert.ok( false, 'setAliases succeeded' );
-		} )
-		.fail( function ( error ) {
-			QUnit.start();
+			.done( function ( savedAliases ) {
+				assert.ok( false, 'setAliases succeeded' );
+			} )
+			.fail( function ( error ) {
+				QUnit.start();
 
-			assert.ok(
-				error instanceof wb.api.RepoApiError,
-				'setAliases failed with a RepoApiError'
-			);
+				assert.ok(
+					error instanceof wb.api.RepoApiError,
+					'setAliases failed with a RepoApiError'
+				);
 
-			assert.equal( error.code, 'errorCode' );
-		} );
+				assert.equal( error.code, 'errorCode' );
+			} );
 	} );
 
 	QUnit.test( 'setAliases correctly removes aliases', function ( assert ) {
@@ -137,29 +137,29 @@
 		QUnit.stop();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
-		.done( function () {
-			QUnit.start();
+			.done( function () {
+				QUnit.start();
 
-			assert.ok( true, 'setAliases succeeded' );
+				assert.ok( true, 'setAliases succeeded' );
 
-			assert.ok(
-				item.getFingerprint().getAliasesFor( 'language' ) === null ||
-				item.getFingerprint().getAliasesFor( 'language' ).isEmpty(),
-				'Verified aliases being empty or removed.'
-			);
+				assert.ok(
+					item.getFingerprint().getAliasesFor( 'language' ) === null ||
+					item.getFingerprint().getAliasesFor( 'language' ).isEmpty(),
+					'Verified aliases being empty or removed.'
+				);
 
-			sinon.assert.calledWith(
-				api.setAliases,
-				'Q1',
-				0,
-				sinon.match( [] ),
-				sinon.match( [ 'alias' ] ),
-				'language'
-			);
-		} )
-		.fail( function () {
-			assert.ok( false, 'setAliases failed' );
-		} );
+				sinon.assert.calledWith(
+					api.setAliases,
+					'Q1',
+					0,
+					sinon.match( [] ),
+					sinon.match( [ 'alias' ] ),
+					'language'
+				);
+			} )
+			.fail( function () {
+				assert.ok( false, 'setAliases failed' );
+			} );
 	} );
 
 }( sinon, wikibase, jQuery ) );

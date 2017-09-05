@@ -151,16 +151,16 @@
 			this.options.menu.element.addClass( 'ui-entityselector-list' );
 
 			this.element
-			.off( 'blur' )
-			.on( 'eachchange.' + this.widgetName, function ( event ) {
-				self._search( event );
-			} )
-			.on( 'focusout', function () {
-				self._indicateRecognizedInput();
-			} )
-			.on( 'focusin', function () {
-				self._inEditMode();
-			} );
+				.off( 'blur' )
+				.on( 'eachchange.' + this.widgetName, function ( event ) {
+					self._search( event );
+				} )
+				.on( 'focusout', function () {
+					self._indicateRecognizedInput();
+				} )
+				.on( 'focusin', function () {
+					self._inEditMode();
+				} );
 		},
 
 		_indicateRecognizedInput: function () {
@@ -207,15 +207,15 @@
 			clearTimeout( this._searching );
 			this._searching = setTimeout( function () {
 				self.search( event )
-				.done( function ( suggestions, requestTerm ) {
-					if ( !suggestions.length || self.element.val() !== requestTerm ) {
-						return;
-					}
+					.done( function ( suggestions, requestTerm ) {
+						if ( !suggestions.length || self.element.val() !== requestTerm ) {
+							return;
+						}
 
-					if ( self._termMatchesSuggestion( requestTerm, suggestions[ 0 ] ) ) {
-						self._select( suggestions[ 0 ] );
-					}
-				} );
+						if ( self._termMatchesSuggestion( requestTerm, suggestions[ 0 ] ) ) {
+							self._select( suggestions[ 0 ] );
+						}
+					} );
 			}, this.options.delay );
 		},
 
@@ -285,21 +285,21 @@
 					dataType: 'json',
 					data: self._getSearchApiParameters( term )
 				} )
-				.done( function ( response ) {
-					if ( response.error ) {
-						deferred.reject( response.error.info );
-						return;
-					}
+					.done( function ( response ) {
+						if ( response.error ) {
+							deferred.reject( response.error.info );
+							return;
+						}
 
-					deferred.resolve(
-						response.search,
-						response.searchinfo.search,
-						response[ 'search-continue' ]
-					);
-				} )
-				.fail( function ( jqXHR, textStatus ) {
-					deferred.reject( textStatus );
-				} );
+						deferred.resolve(
+							response.search,
+							response.searchinfo.search,
+							response[ 'search-continue' ]
+						);
+					} )
+					.fail( function ( jqXHR, textStatus ) {
+						deferred.reject( textStatus );
+					} );
 
 				return deferred.promise();
 			};
@@ -331,7 +331,7 @@
 
 			if ( entityStub.aliases ) {
 				$label.append(
-						$( '<span class="ui-entityselector-aliases"/>' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
+					$( '<span class="ui-entityselector-aliases"/>' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
 				);
 			}
 
@@ -340,7 +340,7 @@
 			if ( entityStub.description ) {
 				$suggestion.append(
 					$( '<span class="ui-entityselector-description"/>' )
-					.text( entityStub.description )
+						.text( entityStub.description )
 				);
 			}
 
@@ -371,27 +371,27 @@
 			$.ui.suggester.prototype._initMenu.apply( this, arguments );
 
 			$( this.options.menu )
-			.off( 'selected.suggester' )
-			.on( 'selected.entityselector', function ( event, item ) {
-				if ( item.getEntityStub ) {
-					if ( !self.options.caseSensitive
-						&& item.getValue().toLowerCase() === self._term.toLowerCase()
-					) {
-						self._term = item.getValue();
-					} else {
-						self.element.val( item.getValue() );
+				.off( 'selected.suggester' )
+				.on( 'selected.entityselector', function ( event, item ) {
+					if ( item.getEntityStub ) {
+						if ( !self.options.caseSensitive
+							&& item.getValue().toLowerCase() === self._term.toLowerCase()
+						) {
+							self._term = item.getValue();
+						} else {
+							self.element.val( item.getValue() );
+						}
+
+						self._close();
+						self._trigger( 'change' );
+
+						var entityStub = item.getEntityStub();
+
+						if ( !self._selectedEntity || entityStub.id !== self._selectedEntity.id ) {
+							self._select( entityStub );
+						}
 					}
-
-					self._close();
-					self._trigger( 'change' );
-
-					var entityStub = item.getEntityStub();
-
-					if ( !self._selectedEntity || entityStub.id !== self._selectedEntity.id ) {
-						self._select( entityStub );
-					}
-				}
-			} );
+				} );
 
 			var customItems = ooMenu.option( 'customItems' );
 
@@ -437,23 +437,23 @@
 			var self = this;
 
 			return $.ui.suggester.prototype._getSuggestions.apply( this, arguments )
-			.then( function ( suggestions, searchTerm, nextSuggestionOffset ) {
-				var deferred = $.Deferred();
+				.then( function ( suggestions, searchTerm, nextSuggestionOffset ) {
+					var deferred = $.Deferred();
 
-				if ( self._cache.term === searchTerm && self._cache.nextSuggestionOffset ) {
-					self._cache.suggestions = self._cache.suggestions.concat( suggestions );
-					self._cache.nextSuggestionOffset = nextSuggestionOffset;
-				} else {
-					self._cache = {
-						term: searchTerm,
-						suggestions: suggestions,
-						nextSuggestionOffset: nextSuggestionOffset
-					};
-				}
+					if ( self._cache.term === searchTerm && self._cache.nextSuggestionOffset ) {
+						self._cache.suggestions = self._cache.suggestions.concat( suggestions );
+						self._cache.nextSuggestionOffset = nextSuggestionOffset;
+					} else {
+						self._cache = {
+							term: searchTerm,
+							suggestions: suggestions,
+							nextSuggestionOffset: nextSuggestionOffset
+						};
+					}
 
-				deferred.resolve( self._cache.suggestions, searchTerm );
-				return deferred.promise();
-			} );
+					deferred.resolve( self._cache.suggestions, searchTerm );
+					return deferred.promise();
+				} );
 		},
 
 		/**

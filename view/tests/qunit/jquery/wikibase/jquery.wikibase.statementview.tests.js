@@ -106,17 +106,19 @@
 	} );
 
 	QUnit.test( 'Create & destroy with value', function ( assert ) {
+		var $statementview, statementview;
 		assert.expect( 2 );
-		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-						null,
-						'guid'
-					),
-					new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
-				)
-			} ),
-			statementview = $statementview.data( 'statementview' );
+		$statementview = createStatementview( {
+			value: new wb.datamodel.Statement(
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+					null,
+					'guid'
+				),
+				new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
+			)
+		} );
+		statementview = $statementview.data( 'statementview' );
 
 		assert.ok(
 			statementview !== undefined,
@@ -132,17 +134,19 @@
 	} );
 
 	QUnit.test( 'value after startEditing with value', function ( assert ) {
+		var $statementview, statementview;
 		assert.expect( 1 );
-		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-						null,
-						'guid'
-					),
-					new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
-				)
-			} ),
-			statementview = $statementview.data( 'statementview' );
+		$statementview = createStatementview( {
+			value: new wb.datamodel.Statement(
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+					null,
+					'guid'
+				),
+				new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
+			)
+		} );
+		statementview = $statementview.data( 'statementview' );
 
 		QUnit.stop();
 		statementview.startEditing().done( function () {
@@ -152,15 +156,16 @@
 	} );
 
 	QUnit.test( 'value after startEditing on new statementview', function ( assert ) {
+		var $statementview, statementview;
 		assert.expect( 1 );
-		var $statementview = createStatementview( {
-				guidGenerator: {
-					newGuid: function () {
-						return 'guid';
-					}
+		$statementview = createStatementview( {
+			guidGenerator: {
+				newGuid: function () {
+					return 'guid';
 				}
-			} ),
-			statementview = $statementview.data( 'statementview' );
+			}
+		} );
+		statementview = $statementview.data( 'statementview' );
 
 		QUnit.stop();
 		statementview.startEditing().done( function () {
@@ -197,17 +202,19 @@
 	} );
 
 	QUnit.test( 'value with empty reference', function ( assert ) {
+		var $statementview, statementview;
 		assert.expect( 1 );
-		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-						null,
-						'guid'
-					),
-					new wb.datamodel.ReferenceList( [ ] )
-				)
-			} ),
-			statementview = $statementview.data( 'statementview' );
+		$statementview = createStatementview( {
+			value: new wb.datamodel.Statement(
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+					null,
+					'guid'
+				),
+				new wb.datamodel.ReferenceList( [ ] )
+			)
+		} );
+		statementview = $statementview.data( 'statementview' );
 
 		QUnit.stop();
 		statementview.startEditing().done( function () {
@@ -218,13 +225,15 @@
 	} );
 
 	QUnit.test( 'wb-new', function ( assert ) {
+		var $statementview, statementview;
 		assert.expect( 2 );
-		var $statementview = createStatementview(),
-			statementview = $statementview.data( 'statementview' );
+		$statementview = createStatementview();
+		statementview = $statementview.data( 'statementview' );
 
 		assert.ok( $statementview.hasClass( 'wb-new' ) );
 
-		statementview.value( new wb.datamodel.Statement( new wb.datamodel.Claim(
+		statementview.value( new wb.datamodel.Statement(
+			new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 				null,
 				'guid'

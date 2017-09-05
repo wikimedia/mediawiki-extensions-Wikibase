@@ -99,13 +99,13 @@
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
 		$entitytermsforlanguagelistview
-		.on( 'entitytermsforlanguagelistviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered "toggleerror" event.'
-			);
-			done();
-		} );
+			.on( 'entitytermsforlanguagelistviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered "toggleerror" event.'
+				);
+				done();
+			} );
 
 		entitytermsforlanguagelistview.setError();
 	} );

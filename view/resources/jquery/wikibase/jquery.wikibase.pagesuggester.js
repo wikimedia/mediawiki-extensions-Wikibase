@@ -38,12 +38,12 @@
 			$.ui.suggester.prototype._create.call( this );
 
 			this.element
-			.on( this.widgetEventPrefix + 'change.' + this.widgetName, function ( event ) {
-				var value = $.trim( self.element.val() );
-				if ( value !== self.option( 'pageName' ) ) {
-					self.option( 'pageName', value );
-				}
-			} );
+				.on( this.widgetEventPrefix + 'change.' + this.widgetName, function ( event ) {
+					var value = $.trim( self.element.val() );
+					if ( value !== self.option( 'pageName' ) ) {
+						self.option( 'pageName', value );
+					}
+				} );
 		},
 
 		/**
@@ -99,13 +99,13 @@
 					},
 					timeout: 8000
 				} )
-				.done( function ( response ) {
-					deferred.resolve( response[ 1 ], response[ 0 ] );
-				} )
-				.fail( function ( jqXHR, textStatus ) {
-					// Since this is a JSONP request, this will always fail with a timeout...
-					deferred.reject( textStatus );
-				} );
+					.done( function ( response ) {
+						deferred.resolve( response[ 1 ], response[ 0 ] );
+					} )
+					.fail( function ( jqXHR, textStatus ) {
+						// Since this is a JSONP request, this will always fail with a timeout...
+						deferred.reject( textStatus );
+					} );
 
 				return deferred.promise();
 			};

@@ -30,8 +30,8 @@
 		_create: function () {
 			PARENT.prototype._create.call( this );
 			this.element
-			.addClass( 'wikibase-toolbar-item' )
-			.data( 'wikibase-toolbar-item', this );
+				.addClass( 'wikibase-toolbar-item' )
+				.data( 'wikibase-toolbar-item', this );
 		},
 
 		/**
@@ -39,8 +39,8 @@
 		 */
 		destroy: function () {
 			this.element
-			.removeClass( 'wikibase-toolbar-item' )
-			.removeData( 'wikibase-toolbar-item' );
+				.removeClass( 'wikibase-toolbar-item' )
+				.removeData( 'wikibase-toolbar-item' );
 			PARENT.prototype.destroy.call( this );
 		}
 	} );

@@ -44,13 +44,13 @@
 			this.$input.data( 'entityselector' ).selectedEntity( entityId );
 
 			this.$input
-			.on( 'eachchange.' + this.uiBaseClass, function ( e ) {
-				$( this ).data( 'entityselector' ).repositionMenu();
-			} )
-			.on( 'entityselectorselected.' + this.uiBaseClass, function ( e ) {
-				self._resizeInput();
-				notifier.notify( 'change' );
-			} );
+				.on( 'eachchange.' + this.uiBaseClass, function ( e ) {
+					$( this ).data( 'entityselector' ).repositionMenu();
+				} )
+				.on( 'entityselectorselected.' + this.uiBaseClass, function ( e ) {
+					self._resizeInput();
+					notifier.notify( 'change' );
+				} );
 		},
 
 		/**

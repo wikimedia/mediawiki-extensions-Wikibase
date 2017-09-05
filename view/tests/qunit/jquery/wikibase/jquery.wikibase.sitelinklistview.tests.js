@@ -192,18 +192,18 @@
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		$sitelinklistview
-		.on( 'sitelinklistviewafterstartediting', function ( event ) {
-			assert.ok(
-				true,
-				'Started edit mode.'
-			);
-		} )
-		.on( 'sitelinklistviewafterstopediting', function ( event, dropValue ) {
-			assert.ok(
-				true,
-				'Stopped edit mode.'
-			);
-		} );
+			.on( 'sitelinklistviewafterstartediting', function ( event ) {
+				assert.ok(
+					true,
+					'Started edit mode.'
+				);
+			} )
+			.on( 'sitelinklistviewafterstopediting', function ( event, dropValue ) {
+				assert.ok(
+					true,
+					'Stopped edit mode.'
+				);
+			} );
 
 		/**
 		 * @param {Function} func
@@ -219,17 +219,17 @@
 			}
 
 			$sitelinklistview
-			.one( 'sitelinklistviewafterstartediting.sitelinklistviewtest', function ( event ) {
-				$sitelinklistview.off( '.sitelinklistviewtest' );
-				deferred.resolve();
-			} )
-			.one(
-				'sitelinklistviewafterstopediting.sitelinklistviewtest',
-				function ( event, dropValue ) {
+				.one( 'sitelinklistviewafterstartediting.sitelinklistviewtest', function ( event ) {
 					$sitelinklistview.off( '.sitelinklistviewtest' );
 					deferred.resolve();
-				}
-			);
+				} )
+				.one(
+					'sitelinklistviewafterstopediting.sitelinklistviewtest',
+					function ( event, dropValue ) {
+						$sitelinklistview.off( '.sitelinklistviewtest' );
+						deferred.resolve();
+					}
+				);
 
 			func();
 
@@ -297,13 +297,13 @@
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		$sitelinklistview
-		.addClass( 'wb-error' )
-		.on( 'sitelinklistviewtoggleerror', function ( event, error ) {
-			assert.ok(
-				true,
-				'Triggered toggleerror event.'
-			);
-		} );
+			.addClass( 'wb-error' )
+			.on( 'sitelinklistviewtoggleerror', function ( event, error ) {
+				assert.ok(
+					true,
+					'Triggered toggleerror event.'
+				);
+			} );
 
 		sitelinklistview.setError();
 	} );
@@ -341,12 +341,12 @@
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		$sitelinklistview
-		.on( 'sitelinklistviewafterstartediting', function () {
-			assert.ok(
-				true,
-				'Started sitelinklistview edit mode.'
-			);
-		} );
+			.on( 'sitelinklistviewafterstartediting', function () {
+				assert.ok(
+					true,
+					'Started sitelinklistview edit mode.'
+				);
+			} );
 
 		sitelinklistview.enterNewItem();
 	} );

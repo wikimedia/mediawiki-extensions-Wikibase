@@ -103,43 +103,43 @@
 			}
 
 			this.element
-			.addClass( this.widgetFullName )
-			.on( 'mouseover.' + this.widgetName, function ( event ) {
-				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
-					self.element.addClass( 'ui-state-hover' );
-				}
-			} )
-			.on( 'mouseout.' + this.widgetName, function ( event ) {
-				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
-					self.element.removeClass( 'ui-state-hover' );
-				}
-			} )
-			.on( 'click.' + this.widgetName, function ( event ) {
-				if ( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
-					$menu.hide();
-					return;
-				}
-
-				$menu.data( self.widgetName, self );
-				$menu.show();
-				self._updateMenuCss();
-				self.repositionMenu();
-
-				self.element.addClass( 'ui-state-active' );
-
-				// Close the menu when clicking, regardless of whether the click is performed on the
-				// menu itself or outside of it:
-				var degrade = function ( event ) {
-					if ( event.target !== self.element.get( 0 ) ) {
-						$menu.hide();
-						self.element.removeClass( 'ui-state-active' );
+				.addClass( this.widgetFullName )
+				.on( 'mouseover.' + this.widgetName, function ( event ) {
+					if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
+						self.element.addClass( 'ui-state-hover' );
 					}
-					self._unbindGlobalEventListeners();
-				};
+				} )
+				.on( 'mouseout.' + this.widgetName, function ( event ) {
+					if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
+						self.element.removeClass( 'ui-state-hover' );
+					}
+				} )
+				.on( 'click.' + this.widgetName, function ( event ) {
+					if ( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
+						$menu.hide();
+						return;
+					}
 
-				$( document ).on( 'mouseup.' + self.widgetName, degrade );
-				$( window ).on( 'resize.' + self.widgetName, function ( event ) { self.repositionMenu(); } );
-			} );
+					$menu.data( self.widgetName, self );
+					$menu.show();
+					self._updateMenuCss();
+					self.repositionMenu();
+
+					self.element.addClass( 'ui-state-active' );
+
+					// Close the menu when clicking, regardless of whether the click is performed on the
+					// menu itself or outside of it:
+					var degrade = function ( event ) {
+						if ( event.target !== self.element.get( 0 ) ) {
+							$menu.hide();
+							self.element.removeClass( 'ui-state-active' );
+						}
+						self._unbindGlobalEventListeners();
+					};
+
+					$( document ).on( 'mouseup.' + self.widgetName, degrade );
+					$( window ).on( 'resize.' + self.widgetName, function ( event ) { self.repositionMenu(); } );
+				} );
 
 			this._setRank( this.options.value );
 		},
@@ -202,16 +202,16 @@
 
 				$menu.append(
 					$( '<li/>' )
-					.addClass( self.widgetFullName + '-menuitem-' + rankName )
-					.data( self.widgetName + '-menuitem-rank', rank )
-					.append(
-						$( '<a/>' )
-						.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
-						.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
-						.on( 'click.' + self.widgetName, function ( event ) {
-							event.preventDefault();
-						} )
-					)
+						.addClass( self.widgetFullName + '-menuitem-' + rankName )
+						.data( self.widgetName + '-menuitem-rank', rank )
+						.append(
+							$( '<a/>' )
+								.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
+								.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
+								.on( 'click.' + self.widgetName, function ( event ) {
+									event.preventDefault();
+								} )
+						)
 				);
 			} );
 
@@ -260,8 +260,8 @@
 		_updateMenuCss: function () {
 			$menu.children().removeClass( 'ui-state-active' );
 			$menu
-			.children( '.' + this.widgetFullName + '-menuitem-' + getRankName( this._rank ) )
-			.addClass( 'ui-state-active' );
+				.children( '.' + this.widgetFullName + '-menuitem-' + getRankName( this._rank ) )
+				.addClass( 'ui-state-active' );
 		},
 
 		/**
@@ -301,12 +301,12 @@
 		draw: function () {
 			if ( this.isInEditMode() ) {
 				this.element
-				.addClass( 'ui-state-default' )
-				.removeClass( 'ui-state-disabled' );
+					.addClass( 'ui-state-default' )
+					.removeClass( 'ui-state-disabled' );
 			} else {
 				this.element
-				.removeClass( 'ui-state-default ui-state-active ui-state-hover' )
-				.addClass( 'ui-state-disabled' );
+					.removeClass( 'ui-state-default ui-state-active ui-state-hover' )
+					.addClass( 'ui-state-disabled' );
 			}
 
 			return $.Deferred().resolve().promise();

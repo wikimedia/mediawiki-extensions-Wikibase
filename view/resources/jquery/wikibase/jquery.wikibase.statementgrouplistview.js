@@ -62,14 +62,14 @@
 				lia = listview.listItemAdapter();
 
 			this.element
-			.on( lia.prefixedEvent( 'afterremove.' + this.widgetName ), function ( event ) {
-				var $statementgroupview = $( event.target ),
-					statementgroupview = lia.liInstance( $statementgroupview );
+				.on( lia.prefixedEvent( 'afterremove.' + this.widgetName ), function ( event ) {
+					var $statementgroupview = $( event.target ),
+						statementgroupview = lia.liInstance( $statementgroupview );
 
-				if ( !statementgroupview.value() ) {
-					listview.removeItem( $statementgroupview );
-				}
-			} );
+					if ( !statementgroupview.value() ) {
+						listview.removeItem( $statementgroupview );
+					}
+				} );
 
 			this.element.statementgrouplabelscroll();
 
@@ -141,22 +141,22 @@
 			return this.listview.enterNewItem()
 				.done( function ( $statementgroupview ) {
 					$statementgroupview
-					.addClass( 'wb-new' )
-					.one(
-						lia.prefixedEvent( 'afterstopediting.' + self.widgetName ),
-						function ( event, dropValue ) {
-							var $statementgroupview = $( event.target ),
-								statementGroup = lia.liInstance( $statementgroupview ).value();
+						.addClass( 'wb-new' )
+						.one(
+							lia.prefixedEvent( 'afterstopediting.' + self.widgetName ),
+							function ( event, dropValue ) {
+								var $statementgroupview = $( event.target ),
+									statementGroup = lia.liInstance( $statementgroupview ).value();
 
-							self.listview.removeItem( $statementgroupview );
+								self.listview.removeItem( $statementgroupview );
 
-							if ( dropValue ) {
-								return;
+								if ( dropValue ) {
+									return;
+								}
+
+								self._addStatementGroup( statementGroup );
 							}
-
-							self._addStatementGroup( statementGroup );
-						}
-					);
+						);
 
 					var statementgroupview = lia.liInstance( $statementgroupview );
 					statementgroupview.enterNewItem();
