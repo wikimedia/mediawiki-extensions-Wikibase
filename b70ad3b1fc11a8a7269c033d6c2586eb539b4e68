@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_7b0db237",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-05T13:33:28Z",
+      "side": 1,
+      "message": "The people who wrote this code disagree with this indention style. Can you please disable the specific rule that is responsible for this, and revert all changes that are solely made because of this? Thank you.",
+      "range": {
+        "startLine": 92,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 4
+      },
+      "revId": "b70ad3b1fc11a8a7269c033d6c2586eb539b4e68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
