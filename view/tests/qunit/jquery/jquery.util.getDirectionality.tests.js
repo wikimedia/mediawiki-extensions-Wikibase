@@ -5,8 +5,6 @@
 ( function ( $, QUnit ) {
 	'use strict';
 
-	var htmlDir = null;
-
 	QUnit.module( 'jquery.util.getDirectionality' );
 
 	QUnit.test( 'Basic tests', function ( assert ) {
