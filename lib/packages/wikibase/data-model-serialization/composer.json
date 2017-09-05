@@ -34,7 +34,7 @@
 	},
 	"require-dev": {
 		"data-values/geo": "~2.0|~1.0|~0.1",
-		"data-values/number": ">=0.1 <0.9",
+		"data-values/number": ">=0.1 <0.10",
 		"data-values/time": "~0.2",
 		"phpunit/phpunit": "~4.8",
 		"wikibase/wikibase-codesniffer": "^0.1.0"
