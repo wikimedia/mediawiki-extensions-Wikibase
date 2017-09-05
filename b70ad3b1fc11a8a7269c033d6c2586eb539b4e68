@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_1b46ee53",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-05T13:42:40Z",
+      "side": 1,
+      "message": "sorry, ignore above comment, see comment further down",
+      "parentUuid": "4e7eab26_fb4e8270",
+      "range": {
+        "startLine": 92,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 4
+      },
+      "revId": "b70ad3b1fc11a8a7269c033d6c2586eb539b4e68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_db4b8661",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 1
@@ -60,6 +84,24 @@
       "writtenOn": "2017-09-05T13:37:31Z",
       "side": 1,
       "message": "Here is the same style being used in the same file.",
+      "revId": "b70ad3b1fc11a8a7269c033d6c2586eb539b4e68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3b416a3a",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-05T13:42:40Z",
+      "side": 1,
+      "message": "This style is seen in plenty of places throughout the code (I didn\u0027t do a count), in the absence of an existing consistency, it would be helpful to resolve it with the upstream default, for increased portability of code/coders.",
+      "parentUuid": "4e7eab26_db4b8661",
       "revId": "b70ad3b1fc11a8a7269c033d6c2586eb539b4e68",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
