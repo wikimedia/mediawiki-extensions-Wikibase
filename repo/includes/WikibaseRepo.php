@@ -86,6 +86,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
@@ -1639,13 +1640,19 @@ class WikibaseRepo {
 	 * @return PropertyInfoBuilder
 	 */
 	public function newPropertyInfoBuilder() {
-		$formatterUrlProperty = $this->settings->getSetting( 'formatterUrlProperty' );
+		$propertyIdMap = [];
 
+		$formatterUrlProperty = $this->getSettings()->getSetting( 'formatterUrlProperty' );
 		if ( $formatterUrlProperty !== null ) {
-			$formatterUrlProperty = new PropertyId( $formatterUrlProperty );
+			$propertyIdMap[PropertyInfoStore::KEY_FORMATTER_URL] = new PropertyId( $formatterUrlProperty );
 		}
 
-		return new PropertyInfoBuilder( $formatterUrlProperty );
+		$canonicalUriProperty = $this->getSettings()->getSetting( 'canonicalUriProperty' );
+		if ( $canonicalUriProperty !== null ) {
+			$propertyIdMap[PropertyInfoStore::KEY_CANONICAL_URI] = new PropertyId( $canonicalUriProperty );
+		}
+
+		return new PropertyInfoBuilder( $propertyIdMap );
 	}
 
 	private function getLegacyFormatDetectorCallback() {
