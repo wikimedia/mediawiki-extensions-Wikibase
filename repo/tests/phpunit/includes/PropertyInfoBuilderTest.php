@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyInfoBuilder;
 
 /**
@@ -19,7 +20,9 @@ use Wikibase\PropertyInfoBuilder;
 class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyInfoBuilder() {
-		return new PropertyInfoBuilder( new PropertyId( 'P42' ) );
+		return new PropertyInfoBuilder( [
+			PropertyInfoStore::KEY_FORMATTER_URL => new PropertyId( 'P42' )
+		] );
 	}
 
 	public function provideBuildPropertyInfo() {

@@ -8,25 +8,28 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikimedia\Assert\Assert;
 
 /**
  * Class to build the information about a property.
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Daniel Kinzler
  */
 class PropertyInfoBuilder {
 
 	/**
-	 * @var PropertyId|null
+	 * @var PropertyId[] Maps PropertyInfoStore keys to PropertyIds
 	 */
-	private $formatterUrlProperty;
+	private $propertyIdMap;
 
 	/**
-	 * @param PropertyId|null $formatterUrlProperty
+	 * @param PropertyId[] Maps PropertyInfoStore keys to PropertyIds
 	 */
-	public function __construct( PropertyId $formatterUrlProperty = null ) {
-		$this->formatterUrlProperty = $formatterUrlProperty;
+	public function __construct( $propertyIdMap = [] ) {
+		Assert::parameterElementType( 'Wikibase\DataModel\Entity\PropertyId', $propertyIdMap, '$propertyIdMap' );
+		$this->propertyIdMap = $propertyIdMap;
 	}
 
 	/**
@@ -42,26 +45,40 @@ class PropertyInfoBuilder {
 			PropertyInfoLookup::KEY_DATA_TYPE => $property->getDataTypeId()
 		];
 
-		$formatterUrl = $this->getFormatterUrl( $property->getStatements() );
+		$formatterUrl = $this->getStringFromStatements(
+			PropertyInfoStore::KEY_FORMATTER_URL,
+			$property->getStatements()
+		);
 		if ( $formatterUrl !== null ) {
 			$info[PropertyInfoLookup::KEY_FORMATTER_URL] = $formatterUrl;
+		}
+
+		$canonicalUri = $this->getStringFromStatements(
+			PropertyInfoStore::KEY_CANONICAL_URI,
+			$property->getStatements()
+		);
+		if ( $canonicalUri !== null ) {
+			$info[PropertyInfoStore::KEY_CANONICAL_URI] = $canonicalUri;
 		}
 
 		return $info;
 	}
 
 	/**
+	 * @param string $propertyInfoKey
 	 * @param StatementList $statements
 	 *
-	 * @return string|null The string value of the main snak of the first best
-	 * "formatterUrlProperty" statements, if such exists. Null otherwise.
+	 * @return string The string value of the property associated with the given
+	 *         $propertyInfoKey via the array provided to the constructor.
 	 */
-	private function getFormatterUrl( StatementList $statements ) {
-		if ( $this->formatterUrlProperty === null ) {
+	private function getStringFromStatements( $propertyInfoKey, StatementList $statements ) {
+		if ( !isset( $this->propertyIdMap[$propertyInfoKey] ) ) {
 			return null;
 		}
 
-		$bestStatements = $statements->getByPropertyId( $this->formatterUrlProperty )->getBestStatements();
+		$propertyId = $this->propertyIdMap[$propertyInfoKey];
+
+		$bestStatements = $statements->getByPropertyId( $propertyId )->getBestStatements();
 		if ( $bestStatements->isEmpty() ) {
 			return null;
 		}

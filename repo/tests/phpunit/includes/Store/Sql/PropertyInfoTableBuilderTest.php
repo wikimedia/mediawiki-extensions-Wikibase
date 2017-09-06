@@ -76,7 +76,9 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		//       so we should also use the EntityLookup from WikibaseRepo.
 		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
 
-		$propertyInfoBuilder = new PropertyInfoBuilder( new PropertyId( 'P1630' ) );
+		$propertyInfoBuilder = new PropertyInfoBuilder( [
+			PropertyInfoStore::KEY_FORMATTER_URL => new PropertyId( 'P1630' )
+		] );
 		$builder = new PropertyInfoTableBuilder(
 			$table,
 			$entityLookup,
