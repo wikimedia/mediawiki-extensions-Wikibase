@@ -2,10 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Akamycoco",
-			"Translatealcd"
+			"Translatealcd",
+			"Hitaypayan"
 		]
 	},
 	"wikibase-globedetails-longitude": "Cingtu’",
 	"wikibase-sitelinks-wikipedia": "Wikipidia",
-	"datatypes-type-wikibase-item": "Binkgan lmlamu’"
+	"wikibase-sitelinks-link-columnheading": "Wal p’ubuy na zzngayan",
+	"datatypes-type-wikibase-item": "Binkgan lmlamu’",
+	"datatypes-type-external-id": "Biru’ na sinbbaq sa cyux mtzyuwaw squw taylnglingay",
+	"wikibase-entity-summary-wbsetitem": "Wal ps’rux giqas na binkgan lmlamu’",
+	"wikibase-entity-summary-wbsetreference": "Syaniy qutux sa kkita’ su’ sa bunkeng",
+	"wikibase-item-summary-wbcreate-new": "Wal ps’rux giqas na binkgan lmlamu’",
+	"wikibase-item-summary-wbeditentity-create": "Wal ps’rux giqas na binkgan lmlamu’",
+	"wikibase-property-summary-wbcreate-new": "Wal ps’rux giqas na ubuy gluw na"
 }

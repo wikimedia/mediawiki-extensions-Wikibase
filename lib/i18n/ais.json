@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bunukwiki"
+			"Bunukwiki",
+			"Benel"
 		]
 	},
 	"wikibase-quantitydetails-amount": "pulung",
@@ -16,6 +17,7 @@
 	"wikibase-globedetails-latitude": "wyitu",
 	"wikibase-sitelinks-wikipedia": "Wyici-payke",
 	"wikibase-sitelinks-sitename-columnheading": "kamu",
+	"wikibase-snakview-snaktypeselector-novalue": "inayi’ ku sulyang",
 	"wikibase-validator-no-validators": "satezep",
 	"datatypes-type-wikibase-item": "kasacacay"
 }

@@ -47,6 +47,7 @@
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Викихаамашкахь бина хийцам",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} нисдарш",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} чохь бина хийцамаш.",
 	"wikibase-replicationnote": "Дехар до, тидам бар бина хийцам гучу ца болуш маситта минот яла там бу массо вики-проекташкахь.",
 	"wikibase-watchlist-show-changes-pref": "Викихаамаш чохь хийла хийцамаш гайта тергаме могӀам чохь",
 	"wikibase-error-deserialize-error": "Хаамашна десериализаци ян цаделира.",
@@ -79,6 +80,7 @@
 	"wikibase-otherprojects": "Кхин проекташкахь",
 	"wikibase-otherprojects-beta-message": "Кхечу проектийн агӀонгара панель",
 	"wikibase-otherprojects-beta-description": "АгӀорар панель тӀетуху дакъа «{{int:wikibase-otherprojects}}», цуна тӀехь хьулу Викимедиа фондан кхечу проекташка хьажоргаш {{WBREPONAME}}кара.",
+	"echo-category-title-wikibase-action": "{{grammar:genitive|{{WBREPONAME}}}} {{PLURAL:$1|тӀетасадалар}}",
 	"notification-link-text-view-item": "{{GENDER:$1|Хьажа}} элемент",
 	"unresolved-property-category": "Мегаш йоцу билгалонаш йолу агӀонаш"
 }

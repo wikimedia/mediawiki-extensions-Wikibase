@@ -11,10 +11,14 @@
 	"wikibase-dataitem": "{{WBREPONAME}} binkgan lmlamu’",
 	"wikibase-editlinks": "Smr’zyut miru’ sa ’ubuy",
 	"wikibase-editlinkstitle": "’Ubuy sa smr’zyut ini’ ptnaq na kay’",
+	"wikibase-linkitem-addlinks": "Misan tnwang na ’ubuy",
+	"wikibase-linkitem-not-loggedin-title": "Siga mzyup su’ han",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "smbbaq",
 	"wikibase-rc-hide-wikidata-show": "Show",
 	"wikibase-rc-wikibase-edit-letter": "Suwe",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} Smr’zyut miru’",
+	"entityusage": "Zyuwaw na spzyuang balay sptzyuwaw",
+	"wikibase-pageinfo-entity-usage-X": "Kwara’ qu  spzyang qbuci’ na snli’ kwara’ biru’ na ana nanu’",
 	"wikibase-otherprojects": "Bzinah Cwan’an"
 }

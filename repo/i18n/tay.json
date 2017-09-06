@@ -3,18 +3,38 @@
 		"authors": [
 			"Corainn",
 			"Translatealcd",
-			"Akamycoco"
+			"Akamycoco",
+			"Hitaypayan"
 		]
 	},
 	"wikibase-entity-item": "binkgan lmlamu’",
 	"wikibase-edit": "Smr’zyut miru’",
 	"wikibase-save": "cucun",
 	"wikibase-add": "tnwang",
-	"wikibase-label-empty": "Ini’ srhgiy smi na’ qinlaq lalu’",
-	"wikibase-description-empty": "Ini’ naha’ inblayqiy pinqzyu’ smi’ kay’ na’",
+	"wikibase-addqualifier": "misan tnwang na llpgan sa pira’ nanu’",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Pzyux na’ quw bzinah na kay’",
+	"wikibase-label-empty": "Ini’ syaniy na’ imi’ na ’ lalu’ na qinlah",
+	"wikibase-description-empty": "Ini’ syaniy na’ imi’ na pinqzyuwan’",
+	"wikibase-diffview-rank-normal": "Kinblayqan kwara’ na",
 	"wikibase-sitelinks-special": "Bzinah na wangcan",
 	"wikibase-statementview-rank-normal": "Mtnaq kwara’ iyat spzyang krahu’ na kinkrahu’ na sinpngan niya’",
 	"wikibase-itembytitle-submit": "Hhkangi’",
 	"wikibase-gotolinkedpage-lookup-item": "Binkgan lmlamu’ ID:",
-	"wikibase-itemdisambiguation-submit": "Hhkangi’"
+	"wikibase-itemdisambiguation-submit": "Hhkangi’",
+	"special-setdescription": "Syaniy qutux musa’ minblaq kmayal sa pinqzyuwan",
+	"special-setsitelink": "Syaniy qutux ’ubuy sa wancan",
+	"wikibase-setsitelink-site": "Wangcan ID：",
+	"wikibase-setsitelink-submit": "Syaniy qutux ’ubuy sa wancan",
+	"special-mergeitems": "Psqunun sazing binkgan lmlamu’",
+	"wikibase-dispatchstats-stats": "Kaylaniy kwara’ squliq quw pinsqun pllpuw na ggalan kinbaq zayzyuwaw",
+	"wikibase-listproperties-all": "Zyuwaw na kwara’ qu snli’ kwara’ biru’ ana nanu’",
+	"special-entitieswithoutdescription": "Ungat quw spzuang balay qbuci’ na pinqzyuwan",
+	"special-entitieswithoutlabel": "Ungat quw qbuci’ balay na qinlah na lalu’",
+	"special-redirectentity": "T’ringun pglaing  spzyang qbuci’ na nnanu’",
+	"wikibase-listdatatypes-external-id-head": "Biru’ na sinbbaq sa cyux mtzyuwaw squw taylnglingay",
+	"wikibase-concept-uri": "Kinbaq na zyuwaw URI",
+	"apihelp-wbeditentity-example-12": "Laxan qutux lalu’ na qinlah",
+	"apihelp-wbsearchentities-param-search": "Hkangi’ biru’ qaniy.",
+	"apihelp-wbsearchentities-param-language": "Hkangi’ kay’ qaniy.",
+	"apihelp-query+wbsearch-param-language": "Hkangi’ kay’ qaniy."
 }
