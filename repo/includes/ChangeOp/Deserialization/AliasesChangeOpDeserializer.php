@@ -69,18 +69,28 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 	}
 
 	/**
-	 * @param array[] $aliases
+	 * @param array[] $aliasGroups
 	 *
 	 * @return array[]
 	 */
-	private function getIndexedAliases( array $aliases ) {
+	private function getIndexedAliases( array $aliasGroups ) {
 		$indexedAliases = [];
 
-		foreach ( $aliases as $langCode => $serialization ) {
-			if ( !is_string( $langCode ) ) {
-				$indexedAliases[] = ( array_values( $serialization ) === $serialization ) ? $serialization : [ $serialization ];
+		foreach ( $aliasGroups as $languageCode => $aliases ) {
+			if ( $aliases === null ) {
+				continue;
+			}
+
+			$this->assertIsArray( $aliases );
+
+			if ( array_values( $aliases ) !== $aliases ) {
+				$aliases = [ $aliases ];
+			}
+
+			if ( is_string( $languageCode ) ) {
+				$indexedAliases[$languageCode] = $aliases;
 			} else {
-				$indexedAliases[$langCode] = ( array_values( $serialization ) === $serialization ) ? $serialization : [ $serialization ];
+				$indexedAliases[] = $aliases;
 			}
 		}
 
