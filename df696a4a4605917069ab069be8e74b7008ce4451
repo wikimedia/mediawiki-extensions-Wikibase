@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_a1cc44c1",
+        "filename": "repo/tests/phpunit/includes/PropertyInfoBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-06T11:35:22Z",
+      "side": 1,
+      "message": "should probably also test KEY_CANONICAL_URI",
+      "revId": "df696a4a4605917069ab069be8e74b7008ce4451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_c1d1505a",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-06T11:35:22Z",
+      "side": 1,
+      "message": "Shold probably also test KEY_CANONICAL_URI",
+      "revId": "df696a4a4605917069ab069be8e74b7008ce4451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
