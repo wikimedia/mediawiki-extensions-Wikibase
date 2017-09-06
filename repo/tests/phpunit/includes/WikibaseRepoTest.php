@@ -18,6 +18,9 @@ use MediaWikiTestCase;
 use RequestContext;
 use Serializers\Serializer;
 use User;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -590,8 +593,25 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testNewPropertyInfoBuilder() {
-		$builder = $this->getWikibaseRepo()->newPropertyInfoBuilder();
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting(
+			'formatterUrlProperty',
+			'P123'
+		);
+
+		$wikibaseRepo->getSettings()->setSetting(
+			'canonicalUriProperty',
+			'P321'
+		);
+
+		$builder = $wikibaseRepo->newPropertyInfoBuilder();
+
 		$this->assertInstanceOf( PropertyInfoBuilder::class, $builder );
+		$expected = [
+			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P123' ),
+			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P321' )
+		];
+		$this->assertEquals( $expected,  $builder->getPropertyIdMap() );
 	}
 
 	public function testGetEntityNamespaceLookup() {

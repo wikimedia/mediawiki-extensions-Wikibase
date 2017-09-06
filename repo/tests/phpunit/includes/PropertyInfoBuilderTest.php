@@ -6,6 +6,8 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyInfoBuilder;
 
 /**
@@ -19,7 +21,10 @@ use Wikibase\PropertyInfoBuilder;
 class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyInfoBuilder() {
-		return new PropertyInfoBuilder( new PropertyId( 'P42' ) );
+		return new PropertyInfoBuilder( [
+			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P42' ),
+			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P142' )
+		] );
 	}
 
 	public function provideBuildPropertyInfo() {
@@ -36,11 +41,15 @@ class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'test' ) );
 		$property->getStatements()->addNewStatement( $snak );
 
+		$snak = new PropertyValueSnak( new PropertyId( 'P142' ), new StringValue( 'Heya' ) );
+		$property->getStatements()->addNewStatement( $snak );
+
 		$cases[] = [
 			$property,
 			[
 				'type' => 'foo',
-				'formatterURL' => 'test'
+				'formatterURL' => 'test',
+				'canonicalURI' => 'Heya'
 			]
 		];
 

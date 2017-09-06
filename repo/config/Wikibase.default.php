@@ -92,6 +92,9 @@ return [
 	// Property used as formatter to link identifiers
 	'formatterUrlProperty' => null,
 
+	// Property used as formatter to link identifiers in JSON/RDF
+	'canonicalUriProperty' => null,
+
 	'allowEntityImport' => false,
 
 	/**
