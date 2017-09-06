@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_49b90629",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-06T17:27:40Z",
+      "side": 1,
+      "message": "We could also construct a Title that corresponds to the Wikidata item that triggered the ChangeNotification job that called this method, from the information in $change. But what would we do with it, then?",
+      "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
