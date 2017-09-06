@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_c642c663",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-06T11:00:49Z",
+      "side": 1,
+      "message": "This inserts an RC row for each page that was affected by an edit on Wikidata. You are right, deduplication does not make sense here, I\u0027ll remove it.",
+      "parentUuid": "4e7eab26_75c29a3b",
+      "revId": "a3c8297cdea65e363afca8f565db75fd4c991337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_550e7e38",
         "filename": "docs/hooks.txt",
         "patchSetId": 5
