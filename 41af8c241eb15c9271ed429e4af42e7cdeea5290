@@ -34,6 +34,24 @@
       "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_69d16227",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-06T17:42:46Z",
+      "side": 1,
+      "message": "We already put batches of 50 changes into a single ChangeNotification job, and apply coalescing to consecutive edits, see line 81 above.",
+      "parentUuid": "4e7eab26_c925f657",
+      "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
