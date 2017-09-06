@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_e6f9021a",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-06T08:22:39Z",
+      "side": 1,
+      "message": "The saturation function is taken from cirrus code (https://github.com/wikimedia/mediawiki-extensions-CirrusSearch/blob/60edf9b8c5a27e53dd954c349dfa8e958259108a/includes/Search/RescoreBuilders.php#L830)\n\nBasically it produces a normalized score between 0 and 1,\n   - k controls the midpoint: when incoming links \u003d\u003d k the score is always 0.5.\n   - a controls the shape with a sigmoid, basically it controls how steep the curve is at the midpoint. With high value of \"a\" it\u0027ll be on/off (inclinks \u003c k \u003d\u003e 0, 1 otherwize)\n\nThis function is very similar to https://en.wikipedia.org/wiki/Logistic_function\n\nNote that the max value is always 1 but the weight param is applied on the function result making the max value equals to the weight set.\n\nIn this example the result score of incoming_links will be bounded between 0 and 1.2.",
+      "parentUuid": "4e7eab26_0e9d600c",
+      "range": {
+        "startLine": 10,
+        "startChar": 63,
+        "endLine": 10,
+        "endChar": 83
+      },
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_2dbaa9da",
         "filename": "repo/config/EntityPrefixSearchProfiles.php",
         "patchSetId": 4
@@ -143,6 +167,24 @@
       "side": 1,
       "message": "Is it possible to score \"no match\" and \"mismatch\" differently? I mean - if you have a match on a secondary language with a mediocre score, the score should be high, unless you have an explicit mismatch in the primary language. Then it\u0027s probably a false friend.",
       "parentUuid": "4e7eab26_4e97e8ee",
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_9b141753",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-06T08:22:39Z",
+      "side": 1,
+      "message": "What do you mean by \"match on a secondary language with a mediocre score\" ?\n\nHere we use constant scores so that a match will always have a score equals to the boost set. Basically it\u0027s binary: score on a particular field is 0 or equals to the boost set in the profile.",
+      "parentUuid": "4e7eab26_240714ce",
       "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
