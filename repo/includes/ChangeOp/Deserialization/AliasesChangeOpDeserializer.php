@@ -77,6 +77,10 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 		$indexedAliases = [];
 
 		foreach ( $aliases as $langCode => $serialization ) {
+			if ( $serialization === null ) {
+				continue;
+			}
+
 			if ( !is_string( $langCode ) ) {
 				$indexedAliases[] = ( array_values( $serialization ) === $serialization ) ? $serialization : [ $serialization ];
 			} else {
