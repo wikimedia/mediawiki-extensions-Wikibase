@@ -16,6 +16,24 @@
       "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_c925f657",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2017-09-06T17:37:58Z",
+      "side": 1,
+      "message": "That would let you de-duplicate jobs earlier on when consecutive edits happen to an entity. Last I checked, bots sometimes do 2+ edits to change different statements/claims of an entity, so it might still be useful.",
+      "parentUuid": "4e7eab26_49b90629",
+      "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
