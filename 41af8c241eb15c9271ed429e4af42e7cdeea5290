@@ -52,6 +52,23 @@
       "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e2424763",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-06T22:31:55Z",
+      "side": 1,
+      "message": "Note to self: RefreshLinksJobs are *way* slow, because they parse the page. We perhaps don\u0027t want to batch them at all (also helps with deduplication), and instead use larger batches in the the HtmlCacheUpdateJobs.",
+      "revId": "41af8c241eb15c9271ed429e4af42e7cdeea5290",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
