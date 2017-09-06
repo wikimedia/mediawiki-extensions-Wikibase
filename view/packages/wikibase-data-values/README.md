@@ -11,7 +11,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.9.0 (2017-09-01)
+### 0.9.0 (2017-09-06)
 * Removed `valueFormatters.ValueFormatterStore`.
 * Removed the `options` constructor parameter as well as the `getOptions` method from
   `valueFormatters.ValueFormatter`.
