@@ -89,7 +89,7 @@ define( [
 			for ( i = 0; i < invalidTimestamps.length; i++ ) {
 				invalidTimestamp = invalidTimestamps[i];
 
-				assert['throws'](
+				assert.throws(
 					function() {
 						dv.TimeValue( invalidTimestamp );
 					},
