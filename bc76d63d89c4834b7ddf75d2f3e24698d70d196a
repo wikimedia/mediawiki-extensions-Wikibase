@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_38a5de43",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-07T09:37:22Z",
+      "side": 1,
+      "message": "if you want to do exact matching this one can potentially be repeated:\n   /^\\d+:(?:\\d+-\\d+)(?:,\\d+-\\d+)*(:\\d+\\|(.+)/\nI don\u0027t think it could happen but it\u0027s what the plugin can write.\n  SNIPPET_START:MATCH1_START-MATCH1_END,MATCH2_START-MATCH2_END,...:SNIPPET_END",
+      "range": {
+        "startLine": 215,
+        "startChar": 34,
+        "endLine": 215,
+        "endChar": 41
+      },
+      "revId": "bc76d63d89c4834b7ddf75d2f3e24698d70d196a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_a2819fa6",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/ElasticTermResultTest.php",
         "patchSetId": 5
