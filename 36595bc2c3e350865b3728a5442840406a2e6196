@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_bece9784",
+        "filename": "data-access/src/MultiRepositoryServices.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-07T12:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_e4b90ce6",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0467784a",
         "filename": "docs/federation.wiki",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2017-09-04T13:38:04Z",
       "side": 1,
       "message": "is this correct?",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5ecbf375",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-07T12:31:49Z",
+      "side": 1,
+      "message": "No, it was a mistake. Fixed now.",
+      "parentUuid": "4e7eab26_0467784a",
       "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_b8146e52",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-07T12:31:49Z",
+      "side": 1,
+      "message": "Done.\nPassing those arrays/pairs around is a not super nice but have no better option to suggest.\nSome super simple value object would probably be better.",
+      "parentUuid": "4e7eab26_049458e9",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_848848cb",
         "filename": "repo/includes/Api/EntitySearchTermIndex.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2017-09-04T13:38:04Z",
       "side": 1,
       "message": "I prefer to reserve FIXME for stuff that should not be merged without resolving the issue. In this case, I\u0027d use NOTE or XXX.",
+      "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f833d60e",
+        "filename": "repo/includes/Api/EntitySearchTermIndex.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-07T12:31:49Z",
+      "side": 1,
+      "message": "I don\u0027t really care but I believe I remember being told not to use TODO for stuff which is going to be merged, and also seeing FIXMEs in the existing code.\n\nChanged now. I any case I believe it would be good to make those kind of conventions clear. I cannot tell without knowing what is the difference between FIXME, TODO, XXX, XYZ, 666, etc.",
+      "parentUuid": "4e7eab26_848848cb",
       "revId": "36595bc2c3e350865b3728a5442840406a2e6196",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
