@@ -12,7 +12,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor and getters', function( assert ) {
-	assert.expect( 8 );
+	assert.expect( 6 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var entityId = new wb.datamodel.EntityId( testSets[i] );
 
@@ -31,11 +31,6 @@ QUnit.test( 'Constructor and getters', function( assert ) {
 			entityId.getValue(),
 			entityId,
 			'Test set #' + i + ': Verified getValue() returning original object.'
-		);
-
-		assert.ok(
-			typeof entityId.getSortKey() === 'string',
-			'Test set #' + i + ': getSortKey() returns a string.'
 		);
 	}
 } );

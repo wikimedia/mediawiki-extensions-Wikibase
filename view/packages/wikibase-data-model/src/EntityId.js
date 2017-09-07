@@ -64,13 +64,6 @@ wb.datamodel.EntityId = util.inherit(
 	/**
 	 * @inheritdoc
 	 */
-	getSortKey: function() {
-		return this._serialization;
-	},
-
-	/**
-	 * @inheritdoc
-	 */
 	toJSON: function() {
 		return {
 			'id': this._serialization
