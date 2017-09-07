@@ -989,4 +989,26 @@ final class RepoHooks {
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
 	}
 
+	/**
+	 * Add Wikibase-specific analyzer configs.
+	 * @param array $config
+	 */
+	public static function onCirrusSearchAnalysisConfig( &$config ) {
+		// Analyzer for splitting statements and extracting properties:
+		// P31:Q1234 => P31
+		$config['analyzer']['extract_property'] = [
+			'type' => 'custom',
+		    'tokenizer' => 'split_statements',
+			'filter' => [ 'first_token' ],
+		];
+		$config['tokenizer']['split_statements'] = [
+			'type' => 'pattern',
+			'pattern' => ':',
+		];
+		$config['filter']['first_token'] = [
+			'type' => 'limit',
+		    'max_token_count' => 1
+		];
+	}
+
 }
