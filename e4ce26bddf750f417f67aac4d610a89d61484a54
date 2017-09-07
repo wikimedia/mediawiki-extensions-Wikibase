@@ -46,6 +46,30 @@
       "revId": "e4ce26bddf750f417f67aac4d610a89d61484a54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d8193a8b",
+        "filename": "repo/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-07T09:56:29Z",
+      "side": 1,
+      "message": "What does `null` mean in this context? Why is it special?",
+      "parentUuid": "4e7eab26_c119508b",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 31
+      },
+      "revId": "e4ce26bddf750f417f67aac4d610a89d61484a54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
