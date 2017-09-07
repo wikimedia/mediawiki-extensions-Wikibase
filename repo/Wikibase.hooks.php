@@ -35,6 +35,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use WikiPage;
@@ -987,6 +988,28 @@ final class RepoHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
+	}
+
+	/**
+	 * Add Wikibase-specific analyzer configs.
+	 * @param array $config
+	 */
+	public static function onCirrusSearchAnalysisConfig( &$config ) {
+		// Analyzer for splitting statements and extracting properties:
+		// P31:Q1234 => P31
+		$config['analyzer']['extract_wb_property'] = [
+			'type' => 'custom',
+			'tokenizer' => 'split_wb_statements',
+			'filter' => [ 'first_token' ],
+		];
+		$config['tokenizer']['split_wb_statements'] = [
+			'type' => 'pattern',
+			'pattern' => StatementsField::STATEMENT_SEPARATOR,
+		];
+		$config['filter']['first_token'] = [
+			'type' => 'limit',
+			'max_token_count' => 1
+		];
 	}
 
 }
