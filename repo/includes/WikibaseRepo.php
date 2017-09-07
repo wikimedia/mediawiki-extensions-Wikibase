@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
@@ -98,6 +99,7 @@ use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -1587,11 +1589,19 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return StatementProviderFieldDefinitions
+	 */
+	public function getStatementProviderDefinitions() {
+		return new StatementProviderFieldDefinitions( $this->settings->getSetting( 'indexedProperties' ) );
+	}
+
+	/**
 	 * @return ItemFieldDefinitions
 	 */
 	private function getItemFieldDefinitions() {
 		return new ItemFieldDefinitions(
-			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions()
+			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions(),
+			$this->getStatementProviderDefinitions()
 		);
 	}
 
@@ -1600,7 +1610,8 @@ class WikibaseRepo {
 	 */
 	private function getPropertyFieldDefinitions() {
 		return new PropertyFieldDefinitions(
-			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions()
+			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions(),
+			$this->getStatementProviderDefinitions()
 		);
 	}
 

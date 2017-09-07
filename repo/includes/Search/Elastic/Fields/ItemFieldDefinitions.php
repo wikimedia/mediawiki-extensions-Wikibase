@@ -16,12 +16,19 @@ class ItemFieldDefinitions implements FieldDefinitions {
 	 */
 	private $descriptionsProviderFieldDefinitions;
 
+	/**
+	 * @var StatementProviderFieldDefinitions
+	 */
+	private $statementProviderFieldDefinitions;
+
 	public function __construct(
 		LabelsProviderFieldDefinitions $labelsProviderFieldDefinitions,
-		DescriptionsProviderFieldDefinitions $descriptionsProviderFieldDefinitions
+		DescriptionsProviderFieldDefinitions $descriptionsProviderFieldDefinitions,
+		StatementProviderFieldDefinitions $statementProviderFieldDefinitions
 	) {
 		$this->labelsProviderFieldDefinitions = $labelsProviderFieldDefinitions;
 		$this->descriptionsProviderFieldDefinitions = $descriptionsProviderFieldDefinitions;
+		$this->statementProviderFieldDefinitions = $statementProviderFieldDefinitions;
 	}
 
 	/**
@@ -37,11 +44,11 @@ class ItemFieldDefinitions implements FieldDefinitions {
 		 */
 		$fields = array_merge(
 			$this->labelsProviderFieldDefinitions->getFields(),
-			$this->descriptionsProviderFieldDefinitions->getFields()
+			$this->descriptionsProviderFieldDefinitions->getFields(),
+			$this->statementProviderFieldDefinitions->getFields()
 		);
 
 		$fields['sitelink_count'] = new SiteLinkCountField();
-		$fields['statement_count'] = new StatementCountField();
 
 		return $fields;
 	}
