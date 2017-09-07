@@ -375,7 +375,7 @@
 	"wikibase-entity-not-viewable": "Det angivna innehållet av typen \"$1\" är inte en entitet och kan inte visas av Wikibase.",
 	"action-item-merge": "sammanfoga objekt",
 	"action-property-create": "skapa egenskaper",
-	"wikibase-pageinfo-subscription": "Wikis som prenumererar på denna entitet",
+	"wikibase-pageinfo-subscription": "Projekt som använder denna entitet",
 	"wikibase-pageinfo-subscription-none": "Ingen",
 	"wikibase-search-bad-entity-type": "Trasig entitetstyp: $1",
 	"wikibase-search-bad-profile-name": "Trasig sökning av profilnamn: $1",

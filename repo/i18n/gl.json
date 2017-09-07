@@ -309,6 +309,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Pode modificala incluíndo <nowiki>{{#babel: }}</nowiki> na súa [[Special:MyPage|páxina de {{GENDER:$1|usuario|usuaria}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traducido do $3 - $4",
 	"wikibase-api-unresolved-redirect": "O identificador indicado refírese a unha redirección, o que non está soportado neste contexto.",
+	"wikibase-api-no-such-entity": "Non foi posible atopar unha entidade co identificador \"$1\".",
 	"wikibase-api-no-such-sitelink": "Non se puido atopar a ligazón de sitio a \"$1\" ó tentar editar identificacións.",
 	"wikibase-api-not-recognized-datatype": "Esperábase un tipo de dato, pero non se atopa ou non é recoñecido.",
 	"wikibase-api-target-not-empty": "Só se pode crear a redirección sobre unha entidade vacía ou borrada.",
