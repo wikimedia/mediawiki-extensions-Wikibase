@@ -9,6 +9,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\SiteLinkCountField;
 use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
+use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 
 /**
  * @covers Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions
@@ -24,7 +25,8 @@ class ItemFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 		$fieldDefinitions = new ItemFieldDefinitions(
 			$this->newLabelsProviderFieldDefinitions( $languageCodes ),
-			$this->newDescriptionsProviderFieldDefinitions( $languageCodes )
+			$this->newDescriptionsProviderFieldDefinitions( $languageCodes ),
+			new StatementProviderFieldDefinitions( [], [] )
 		);
 
 		$fields = $fieldDefinitions->getFields();
