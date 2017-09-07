@@ -256,4 +256,7 @@ return [
 		// Rescore profiles, loaded by Wikibase.php
 		'rescoreProfiles' => [],
 	],
+
+	// List of properties to be indexed
+	'searchIndexProperties' => []
 ];

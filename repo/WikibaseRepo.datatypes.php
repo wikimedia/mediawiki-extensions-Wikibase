@@ -25,11 +25,13 @@
  */
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
+use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Rdf\DedupeBag;
@@ -249,6 +251,11 @@ return call_user_func( function() {
 			) {
 				return new LiteralValueRdfBuilder( null, null );
 			},
+			'search-index-data-formatter' => function(
+				StringValue $value
+			) {
+				return $value->getValue();
+			},
 		],
 		'VT:time' => [
 			'expert-module' => 'jquery.valueview.experts.TimeInput',
@@ -339,6 +346,11 @@ return call_user_func( function() {
 				DedupeBag $dedupe
 			) {
 				return new EntityIdRdfBuilder( $vocab, $tracker );
+			},
+			'search-index-data-formatter' => function(
+				EntityIdValue $value
+			) {
+				return $value->getEntityId()->getSerialization();
 			},
 		],
 		'PT:wikibase-item' => [
