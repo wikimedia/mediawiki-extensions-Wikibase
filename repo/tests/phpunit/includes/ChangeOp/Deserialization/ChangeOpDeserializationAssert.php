@@ -13,17 +13,14 @@ class ChangeOpDeserializationAssert {
 	 * @param string $errorCode
 	 */
 	public static function assertThrowsChangeOpDeserializationException( callable $callback, $errorCode ) {
-		$exception = null;
-
 		try {
 			call_user_func( $callback );
-		} catch ( Exception $e ) {
-			$exception = $e;
+		} catch ( ChangeOpDeserializationException $ex ) {
+			Assert::assertSame( $errorCode, $ex->getErrorCode() );
+			return;
 		}
 
-		/** @var $exception ChangeOpDeserializationException */
-		Assert::assertInstanceOf( ChangeOpDeserializationException::class, $exception );
-		Assert::assertSame( $errorCode, $exception->getErrorCode() );
+		Assert::fail( 'Expected ChangeOpDeserializationException not thrown' );
 	}
 
 }
