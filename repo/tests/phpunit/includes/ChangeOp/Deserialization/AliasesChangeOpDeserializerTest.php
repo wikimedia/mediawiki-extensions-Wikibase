@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;
@@ -27,6 +28,22 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 			function() {
 				$deserializer = $this->newAliasesChangeOpDeserializer( $this->getTermChangeOpValidator() );
 				$deserializer->createEntityChangeOp( [ 'aliases' => null ] );
+			},
+			'not-recognized-array'
+		);
+	}
+
+	public function testGivenAliasesAsNull_isIgnored() {
+		$deserializer = $this->newAliasesChangeOpDeserializer( $this->getTermChangeOpValidator() );
+		$changeOp = $deserializer->createEntityChangeOp( [ 'aliases' => [ 'en' => null ] ] );
+		$this->assertEquals( new ChangeOps(), $changeOp );
+	}
+
+	public function testGivenAliasesNotAsArray_createEntityChangeOpThrowsError() {
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+			function() {
+				$deserializer = $this->newAliasesChangeOpDeserializer( $this->getTermChangeOpValidator() );
+				$deserializer->createEntityChangeOp( [ 'aliases' => [ 'en' => 'alias1|alias2' ] ] );
 			},
 			'not-recognized-array'
 		);
