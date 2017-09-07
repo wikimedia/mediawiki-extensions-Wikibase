@@ -188,6 +188,24 @@
       "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0ce0f792",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-07T17:34:53Z",
+      "side": 1,
+      "message": "Not sure I understand that completely, but we\u0027re using only the best score now. And fallback languages get discounted, so match in secondary language would not go very high. I\u0027m not sure what the difference between \"no match\" and \"mismatch\" though.",
+      "parentUuid": "4e7eab26_240714ce",
+      "revId": "aa822b8c94d717b1ecad05f0d16800801609abd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
