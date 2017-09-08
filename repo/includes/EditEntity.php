@@ -261,7 +261,7 @@ class EditEntity {
 				$this->latestRev = $this->entityRevisionLookup->getEntityRevision(
 					$id,
 					0,
-					EntityRevisionLookup::LATEST_FROM_MASTER
+					$this->getReplicaMode()
 				);
 			}
 		}
