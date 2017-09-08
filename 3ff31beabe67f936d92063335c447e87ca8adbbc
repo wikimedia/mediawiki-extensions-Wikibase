@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_6d064325",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-08T08:28:09Z",
+      "side": 1,
+      "message": "This is not how isset works. It looks like it got confused with array_key_exists.",
+      "range": {
+        "startLine": 262,
+        "startChar": 15,
+        "endLine": 262,
+        "endChar": 53
+      },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_838e6d31",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -112,6 +135,23 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4d090734",
+        "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-08T08:28:09Z",
+      "side": 1,
+      "message": "There are two tests about \"removeMissing\" up here. The new one should be close to these. I suggest to move it to this position.",
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_50612c31",
         "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTest.php",
         "patchSetId": 1
@@ -129,6 +169,23 @@
         "endLine": 575,
         "endChar": 112
       },
+      "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ad0c2b46",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-08T08:28:09Z",
+      "side": 1,
+      "message": "Same problem in this file. Please move the new test case up here, close to the others about \"removeMissing\".",
       "revId": "3ff31beabe67f936d92063335c447e87ca8adbbc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
