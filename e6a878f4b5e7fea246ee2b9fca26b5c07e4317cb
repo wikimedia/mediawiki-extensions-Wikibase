@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_88bcba1b",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-08T17:38:26Z",
+      "side": 1,
+      "message": "\u003e I do miss TimeValue here.\nThat\u0027s because I don\u0027t want to index TimeValue for now, I don\u0027t see any useful search that would use it. But if you find a use case, we could add it.\n\n\u003e This introduces technical depth that is, in my opinion, so significant that it should not be accepted as it is now. \n\nSorry, I do not understand what do you mean here.\n\n\u003e ValueSnakRdfBuilder\n\nI don\u0027t really want to introduce yet another system of 40 classes to just convert string value to a string.",
+      "parentUuid": "4e7eab26_8d612f04",
+      "range": {
+        "startLine": 90,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_ad5e6b46",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
@@ -82,6 +106,30 @@
       "writtenOn": "2017-09-08T08:01:01Z",
       "side": 1,
       "message": "Could you add a comment with all possible string types you may receive here?\nI mean can it be written text (MonolingualTextValue)?\nDepending on what we do later with this field we may need to separate them based on the string type we receive here since it may be hard to build an analysis chain if we mix IDs/text/date/... altogether.",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 22
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4885725c",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-08T17:38:26Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to analyze the values. It\u0027s not supposed to be fullext search based on values, at least not in this iteration. It\u0027s just an opaque string. I kinda doubted we really need to include strings even, but I included them because it\u0027s easy.",
+      "parentUuid": "4e7eab26_ad5e6b46",
       "range": {
         "startLine": 125,
         "startChar": 16,
