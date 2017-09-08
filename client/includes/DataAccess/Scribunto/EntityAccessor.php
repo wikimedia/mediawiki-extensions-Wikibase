@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
+use InvalidArgumentException;
 use Language;
 use Serializers\Serializer;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
@@ -151,10 +152,11 @@ class EntityAccessor {
 	 *
 	 * @param string $prefixedEntityId
 	 * @param string $propertyIdSerialization
+	 * @param string $rank Either "best" or "all".
 	 *
 	 * @return array|null
 	 */
-	public function getEntityStatement( $prefixedEntityId, $propertyIdSerialization ) {
+	public function getEntityStatement( $prefixedEntityId, $propertyIdSerialization, $rank ) {
 		$prefixedEntityId = trim( $prefixedEntityId );
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
@@ -173,18 +175,21 @@ class EntityAccessor {
 			return null;
 		}
 
-		if ( $entityObject === null ) {
+		if ( !( $entityObject instanceof StatementListProvider ) ) {
 			return null;
 		}
 
-		$statements = $entityObject->getStatements();
+		$statements = $entityObject->getStatements()->getByPropertyId( $propertyId );
 
-		$statementsProp = $statements->getByPropertyId( $propertyId );
-		$statementsRanked = $statementsProp->getBestStatements();
-		$statementArr = $this->newClientStatementListSerializer()->serialize( $statementsRanked );
-		$this->renumber( $statementArr );
+		if ( $rank === 'best' ) {
+			$statements = $statements->getBestStatements();
+		} elseif ( $rank !== 'all' ) {
+			throw new InvalidArgumentException( "Invalid rank \"$rank\"" );
+		}
 
-		return $statementArr;
+		$serialization = $this->newClientStatementListSerializer()->serialize( $statements );
+		$this->renumber( $serialization );
+		return $serialization;
 	}
 
 	private function newClientEntitySerializer() {
