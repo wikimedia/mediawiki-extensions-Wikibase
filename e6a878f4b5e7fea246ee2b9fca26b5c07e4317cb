@@ -95,6 +95,23 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_88935aa6",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-09-08T17:42:09Z",
+      "side": 1,
+      "message": "could we add a test that makes clear what the data coming out of this is?",
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_ad5e6b46",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
