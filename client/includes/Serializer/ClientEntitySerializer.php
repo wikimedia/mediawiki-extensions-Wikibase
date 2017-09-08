@@ -7,7 +7,6 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
  * @license GPL-2.0+
@@ -43,6 +42,7 @@ class ClientEntitySerializer extends ClientSerializer {
 		array $fallbackChains
 	) {
 		parent::__construct( $dataTypeLookup );
+
 		$this->filterLangCodes = $filterLangCodes;
 		$this->entitySerializer = $entitySerializer;
 		$this->fallbackChains = $fallbackChains;
@@ -83,6 +83,7 @@ class ClientEntitySerializer extends ClientSerializer {
 		$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
 			$serialization['descriptions']
 		);
+
 		return $serialization;
 	}
 
@@ -107,6 +108,7 @@ class ClientEntitySerializer extends ClientSerializer {
 				}
 			}
 		}
+
 		return $newSerialization;
 	}
 
@@ -141,6 +143,7 @@ class ClientEntitySerializer extends ClientSerializer {
 				}
 			}
 		}
+
 		return $serialization;
 	}
 

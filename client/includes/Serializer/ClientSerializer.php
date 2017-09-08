@@ -28,18 +28,18 @@ abstract class ClientSerializer implements Serializer {
 	 */
 	private $callbackFactory;
 
-	/**
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 */
-	public function __construct(
-		PropertyDataTypeLookup $dataTypeLookup
-	) {
+	public function __construct( PropertyDataTypeLookup $dataTypeLookup ) {
 		$this->dataTypeLookup = $dataTypeLookup;
 
 		$this->modifier = new SerializationModifier();
 		$this->callbackFactory = new CallbackFactory();
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return array
+	 */
 	protected function omitEmptyArrays( array $serialization ) {
 		return array_filter(
 			$serialization,
