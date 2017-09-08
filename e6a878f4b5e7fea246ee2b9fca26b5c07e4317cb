@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_ad5e6b46",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-08T08:01:01Z",
+      "side": 1,
+      "message": "Could you add a comment with all possible string types you may receive here?\nI mean can it be written text (MonolingualTextValue)?\nDepending on what we do later with this field we may need to separate them based on the string type we receive here since it may be hard to build an analysis chain if we mix IDs/text/date/... altogether.",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 22
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
