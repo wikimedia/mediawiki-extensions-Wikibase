@@ -298,6 +298,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getLabel' => [ $this, 'getLabel' ],
 			'getEntity' => [ $this, 'getEntity' ],
 			'getEntityStatement' => [ $this, 'getEntityStatement' ],
+			'getAllStatements' => [ $this, 'getAllStatements' ],
 			'getSetting' => [ $this, 'getSetting' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
 			'renderSnak' => [ $this, 'renderSnak' ],
@@ -350,16 +351,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $prefixedEntityId
 	 * @param string $propertyId
+	 * @param string $rank Either "best" (default) or "all".
 	 *
 	 * @throws ScribuntoException
 	 * @return array
 	 */
-	public function getEntityStatement( $prefixedEntityId, $propertyId ) {
+	public function getEntityStatement( $prefixedEntityId, $propertyId, $rank = 'best' ) {
 		$this->checkType( 'getEntityStatement', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getEntityStatement', 2, $propertyId, 'string' );
 
 		try {
-			$statements = $this->getEntityAccessor()->getEntityStatement( $prefixedEntityId, $propertyId );
+			$statements = $this->getEntityAccessor()->getEntityStatement( $prefixedEntityId, $propertyId, $rank );
 		} catch ( EntityAccessLimitException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( EntityIdParsingException $ex ) {
@@ -371,6 +373,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
 		return [ $statements ];
+	}
+
+	/**
+	 * @param string $prefixedEntityId
+	 * @param string $propertyId
+	 *
+	 * @throws ScribuntoException
+	 * @return array
+	 */
+	public function getAllStatements( $prefixedEntityId, $propertyId ) {
+		return $this->getEntityStatement( $prefixedEntityId, $propertyId, 'all' );
 	}
 
 	/**

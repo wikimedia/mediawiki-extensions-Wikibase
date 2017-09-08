@@ -137,8 +137,8 @@ function wikibase.setupInterface()
 
 	-- Get the statement list array for the specified entityId and propertyId.
 	--
-	-- @param {string} [entityId]
-	-- @param {string} [propertyId]
+	-- @param {string} entityId
+	-- @param {string} propertyId
 	wikibase.getBestStatements = function( entityId, propertyId )
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary items has been disabled.', 2 )
@@ -153,6 +153,32 @@ function wikibase.setupInterface()
 		else
 			return statements[propertyId]
 		end
+	end
+
+	-- Returns a table with all statements (including all ranks, even deprecated) matching the given
+	-- property ID on the given entity ID. If no entity ID is given, the entity connected to the
+	-- current page will be used.
+	--
+	-- @param {string} propertyId
+	-- @param {string} [entityId]
+	wikibase.getAllStatements = function( propertyId, entityId )
+		checkType( 'getAllStatements', 1, propertyId, 'string' )
+		checkTypeMulti( 'getAllStatements', 2, entityId, { 'string', 'nil' } )
+
+		if entityId
+			and entityId ~= wikibase.getEntityIdForCurrentPage()
+			and not php.getSetting( 'allowArbitraryDataAccess' )
+		then
+			error( 'Access to arbitrary items has been disabled.', 2 )
+		end
+
+		entityId = getIdOfConnectedItemIfNil( entityId )
+		statements = php.getAllStatements( entityId, propertyId )
+		if statements and statements[propertyId] then
+			return statements[propertyId]
+		end
+
+		return {}
 	end
 
 	-- Get the URL for the given entity id, if specified, or of the

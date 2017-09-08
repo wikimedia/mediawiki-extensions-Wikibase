@@ -182,10 +182,19 @@ mw.wikibase.orderProperties( propertyIds ) -- Returns a table with ordered prope
 <code>wikibase.getBestStatements( entityId, propertyId )</code><br>
 Returns a table with the best statements for the given entity ID and property ID.
 
-
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.getBestStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12 of Q1
+</source>
+
+=== mw.wikibase.getAllStatements ===
+<code>wikibase.getAllStatements( propertyId )</code><br>
+<code>wikibase.getAllStatements( propertyId, entityId )</code><br>
+Returns a table with all statements (including all ranks, even deprecated) matching the given property ID on the given entity ID. If no entity ID is given, the entity connected to the current page will be used.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getAllStatements( 'P12', 'Q1' )
 </source>
 
 == mw.wikibase.entity ==
