@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e7eab26_0d4d3f9e",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-08T08:05:41Z",
+      "side": 1,
+      "message": "I find this name insufficient. I understand what is is, and I do not suggest to mention Elastic here, as this is a specific implementation and this configuration might be used by other implementations in the future. But it should at least mention what kind of \"indexing\" is meant here.",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ed4b1387",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-08T08:05:41Z",
+      "side": 1,
+      "message": "This is correct. The fact that one extends the other should be considered an implementation detail.",
+      "range": {
+        "startLine": 79,
+        "startChar": 49,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8d612f04",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-08T08:05:41Z",
+      "side": 1,
+      "message": "I do miss TimeValue here.\n\nThis demonstrates a quite significant design flaw with this code. This class hard-codes a list of supported value types. This should not be done. This introduces technical depth that is, in my opinion, so significant that it should not be accepted as it is now. We already have to many places that do this, and struggle to replace them with something that is expandable.\n\nValueSnakRdfBuilder demonstrates how it should be done.\n\nNote that we tried to build something very close to this as a separate component in the past, called WikibaseQuery. See https://github.com/wmde/WikibaseQueryEngine/tree/master/src/SQLStore/DVHandler.",
+      "range": {
+        "startLine": 90,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_ad5e6b46",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
