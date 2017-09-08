@@ -26,7 +26,7 @@
 	"wikibase-error-remove-timeout": "Meillä on teknisiä ongelmia. Yritä myöhemmin uudelleen.",
 	"wikibase-error-autocomplete-connection": "Kysely sivuston rajapinnalta epäonnistui. Yritä myöhemmin uudelleen.",
 	"wikibase-error-autocomplete-response": "Palvelin vastasi: $1",
-	"wikibase-error-ui-no-external-page": "Määritettyä artikkelia \"$2\" ei löytynyt sivustolta \"$1\".",
+	"wikibase-error-ui-no-external-page": "Sivua ”$2” ei löytynyt sivustolta ”$1”.",
 	"wikibase-error-ui-edit-conflict": "Tapahtui muokkausristiriita. Tallenna muutoksesi paikallisesti, lataa uudelleen tämä sivu ja tallenna muokkaukset uudelleen.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitteroitu)",
 	"wikibase-quantitydetails-amount": "Summa",
