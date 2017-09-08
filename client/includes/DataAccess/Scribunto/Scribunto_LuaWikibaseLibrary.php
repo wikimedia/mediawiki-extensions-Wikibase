@@ -15,7 +15,6 @@ use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -350,18 +349,18 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $prefixedEntityId
 	 * @param string $propertyId
-	 * @param string $bestStatementsOnly Either 'best' or 'all'
+	 * @param string $rank Which statements to include. Either "best" or "all".
 	 *
 	 * @throws ScribuntoException
 	 * @return array
 	 */
-	public function getEntityStatements( $prefixedEntityId, $propertyId, $bestStatementsOnly ) {
-		$this->checkType( 'getEntityStatement', 1, $prefixedEntityId, 'string' );
-		$this->checkType( 'getEntityStatement', 2, $propertyId, 'string' );
-		$this->checkType( 'getEntityStatement', 3, $bestStatementsOnly, 'string' );
+	public function getEntityStatements( $prefixedEntityId, $propertyId, $rank ) {
+		$this->checkType( 'getEntityStatements', 1, $prefixedEntityId, 'string' );
+		$this->checkType( 'getEntityStatements', 2, $propertyId, 'string' );
+		$this->checkType( 'getEntityStatements', 3, $rank, 'string' );
 
 		try {
-			$statements = $this->getEntityAccessor()->getEntityStatements( $prefixedEntityId, $propertyId, $bestStatementsOnly );
+			$statements = $this->getEntityAccessor()->getEntityStatements( $prefixedEntityId, $propertyId, $rank );
 		} catch ( EntityAccessLimitException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( EntityIdParsingException $ex ) {

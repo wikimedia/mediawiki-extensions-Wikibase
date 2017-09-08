@@ -5,7 +5,7 @@ namespace Wikibase\Client\Serializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\Serialization\SerializationModifier;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @license GPL-2.0+
@@ -16,18 +16,19 @@ class ClientStatementListSerializer extends ClientSerializer {
 	/**
 	 * @var Serializer
 	 */
-	private $statementSerializer;
+	private $statementListSerializer;
 
 	/**
-	 * @param Serializer $entitySerializer
+	 * @param Serializer $statementListSerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 */
 	public function __construct(
-		Serializer $statementSerializer,
+		Serializer $statementListSerializer,
 		PropertyDataTypeLookup $dataTypeLookup
 	) {
 		parent::__construct( $dataTypeLookup );
-		$this->statementSerializer = $statementSerializer;
+
+		$this->statementListSerializer = $statementListSerializer;
 	}
 
 	/**
@@ -39,7 +40,7 @@ class ClientStatementListSerializer extends ClientSerializer {
 	 * @return array
 	 */
 	public function serialize( $statementList ) {
-		$serialization = $this->statementSerializer->serialize( $statementList );
+		$serialization = $this->statementListSerializer->serialize( $statementList );
 
 		$serialization = $this->injectSerializationWithDataTypes( $serialization, '' );
 

@@ -75,7 +75,7 @@ function wikibase.setupInterface()
 			entity = php.getEntity( id )
 
 			if id ~= wikibase.getEntityIdForCurrentPage() then
-				-- Accessing an arbitrary item is supposed to increment the expensive function count
+				-- Accessing an arbitrary entity is supposed to increment the expensive function count
 				php.incrementExpensiveFunctionCount()
 			end
 
@@ -126,7 +126,7 @@ function wikibase.setupInterface()
 		end
 
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= wikibase.getEntityIdForCurrentPage() then
-			error( 'Access to arbitrary items has been disabled.', 2 )
+			error( 'Access to arbitrary entities has been disabled.', 2 )
 		end
 
 		return getEntityObject( id )
@@ -135,39 +135,41 @@ function wikibase.setupInterface()
 	-- getEntityObject is an alias for getEntity as these used to be different.
 	wikibase.getEntityObject = wikibase.getEntity
 
-	-- Get statements for the specified entityId and propertyId.
-	--
 	-- @param {string} entityId
 	-- @param {string} propertyId
-	-- @param {string} bestStatementsOnly Which statements to include: Either "best" or "all"
-	local getEntityStatements = function( entityId, propertyId, funcName, bestStatementsOnly )
+	-- @param {string} rank Which statements to include. Either "best" or "all".
+	local getEntityStatements = function( entityId, propertyId, funcName, rank )
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
-			error( 'Access to arbitrary items has been disabled.', 2 )
+			error( 'Access to arbitrary entities has been disabled.', 2 )
 		end
 
 		checkType( funcName, 1, entityId, 'string' )
 		checkType( funcName, 2, propertyId, 'string' )
 
-		local statements = php.getEntityStatements( entityId, propertyId, bestStatementsOnly )
-		if statements == nil or statements[propertyId] == nil then
-			return {}
-		else
+		local statements = php.getEntityStatements( entityId, propertyId, rank )
+		if statements and statements[propertyId] then
 			return statements[propertyId]
 		end
+
+		return {}
 	end
 
-	-- Get the best statements for the specified entityId and propertyId.
+	-- Returns a table with the "best" statements matching the given property ID on the given entity
+	-- ID. The definition of "best" is that the function will return "preferred" statements, if
+	-- there are any, otherwise "normal" ranked statements. It will never return "deprecated"
+	-- statements. This is what you usually want when surfacing values to an ordinary reader.
 	--
-	-- @param {string} [entityId]
-	-- @param {string} [propertyId]
+	-- @param {string} entityId
+	-- @param {string} propertyId
 	wikibase.getBestStatements = function( entityId, propertyId )
 		return getEntityStatements( entityId, propertyId, 'getBestStatements', 'best' )
 	end
 
-	-- Get all statements for the specified entityId and propertyId.
+	-- Returns a table with all statements (including all ranks, even "deprecated") matching the
+	-- given property ID on the given entity ID.
 	--
-	-- @param {string} [entityId]
-	-- @param {string} [propertyId]
+	-- @param {string} entityId
+	-- @param {string} propertyId
 	wikibase.getAllStatements = function( entityId, propertyId )
 		return getEntityStatements( entityId, propertyId, 'getAllStatements', 'all' )
 	end
