@@ -635,7 +635,7 @@ abstract class EntityHandler extends ContentHandler {
 		// Call the WikibaseEntityDeletionUpdate hook.
 		// Do this before doing any well-known updates.
 		$updates[] = new DataUpdateAdapter(
-			'wfRunHooks',
+			'Hooks::run',
 			'WikibaseEntityDeletionUpdate',
 			[ $content, $title ]
 		);
@@ -708,7 +708,7 @@ abstract class EntityHandler extends ContentHandler {
 		// Call the WikibaseEntityModificationUpdate hook.
 		// Do this after doing all well-known updates.
 		$updates[] = new DataUpdateAdapter(
-			'wfRunHooks',
+			'Hooks::run',
 			'WikibaseEntityModificationUpdate',
 			[ $content, $title ]
 		);
