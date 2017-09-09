@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_d96a927e",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-09T10:10:12Z",
+      "side": 1,
+      "message": "Is it ok if I update this patch to use [ Hooks::class, \u0027run\u0027 ]? That wood avoid hiding a class name in a string and makes future refactorings easier. I updated the entire Wikibase code base a while ago to use this style consistently.",
+      "revId": "6837b92f55b59205f494bc61e18a72fa97419e77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
