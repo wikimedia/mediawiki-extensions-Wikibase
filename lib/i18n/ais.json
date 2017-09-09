@@ -5,11 +5,15 @@
 			"Benel"
 		]
 	},
+	"wikibase-deletedentity-item": "masiputu tu kasacacay",
+	"wikibase-deletedentity-property": "masiputu tu susin",
+	"wikibase-deletedentity-query": "masiputu tu palalitemuh tu kawaw",
 	"wikibase-quantitydetails-amount": "pulung",
 	"wikibase-quantitydetails-upperbound": "sakapabaway a sausi",
 	"wikibase-quantitydetails-lowerbound": "makasasa’ay a sausi",
 	"wikibase-quantitydetails-unit": "sacacaycacay",
 	"wikibase-timedetails-time": "tuki",
+	"wikibase-timedetails-timezone": "kakitizaan nu tatukian",
 	"wikibase-timedetails-calendar": "kuyami",
 	"wikibase-timedetails-before": "nuayawan",
 	"wikibase-timedetails-after": "nazikuzan",
@@ -18,11 +22,20 @@
 	"wikibase-globedetails-globe": "taenengan nu lala’-liwliw",
 	"wikibase-sitelinks-wikipedia": "Wyici-payke",
 	"wikibase-sitelinks-sitename-columnheading": "kamu",
+	"wikibase-snakview-snaktypeselector-somevalue": "caay kapulita ku sulyang",
 	"wikibase-snakview-snaktypeselector-novalue": "inayi’ ku sulyang",
 	"wikibase-tooltip-error-details": "pulitaay a kalunasulitan",
+	"wikibase-validator-invalid": "la’cusay a sulyang",
+	"wikibase-validator-no-such-entity": "caykatepa $1",
 	"wikibase-validator-no-validators": "satezep",
 	"datatypes-type-wikibase-item": "kasacacay",
 	"datatypes-type-geo-shape": "hekal nu lala’-liwliw",
+	"wikibase-time-precision-millennium": "$1 malebut a mihca",
+	"wikibase-time-precision-century": "$1. lasubu a mihca",
 	"wikibase-time-precision-10annum": "$1 kasamihca",
-	"wikibase-entity-summary-wbcreateclaim-create": "patizeng tu saleku"
+	"wikibase-entity-summary-wbcreateclaim-create": "patizeng tu saleku",
+	"wikibase-item-summary-wbeditentity-update": "masumad tuway kasacacay",
+	"wikibase-item-summary-wbeditentity-override": "palwpes tuway ku kasacacay",
+	"wikibase-property-summary-wbeditentity-update": "susin masumad tuway",
+	"wikibase-property-summary-wbeditentity-override": "palawpes tuway ku susin"
 }
