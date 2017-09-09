@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_8f159c42",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-09T20:42:22Z",
+      "side": 1,
+      "message": "Hm... as long as we only want to index a few properties, a list makes sense. Once we want to support something like prop:P180:Q64 as a keyword, I agree - we shouldn\u0027t have a list of properties, just supported data types.",
+      "parentUuid": "4e7eab26_998baac4",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_399076f7",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
