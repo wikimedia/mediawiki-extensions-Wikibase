@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_998baac4",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-09-09T15:47:09Z",
+      "side": 1,
+      "message": "we might want to index all statements with a given property type.\n\nnot sure we would want to maintain config with a list of such properties, when we could just look at the data type",
+      "parentUuid": "4e7eab26_5990e24e",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_399076f7",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
