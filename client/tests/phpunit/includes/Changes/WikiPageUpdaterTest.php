@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Changes;
 
-use IJobSpecification;
 use HTMLCacheUpdateJob;
+use IJobSpecification;
 use Job;
 use JobQueueGroup;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -207,15 +207,13 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams ) {
-				/** @var Job $job */
-				foreach ( $jobs as $job ) {
-					$this->assertInstanceOf( RefreshLinksJob::class, $job );
-					$params = $job->getParams();
-					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
-					$pages += $params['pages']; // addition uses keys, array_merge does not
-					$rootJobParams = $job->getRootJobParams();
-				}
+			->will( $this->returnCallback( function( IJobSpecification $job  ) use ( &$pages, &$rootJobParams ) {
+				$this->assertInstanceOf( RefreshLinksJob::class, $job );
+				$title = $job->getTitle();
+
+				$id = $title->getArticleID();
+				$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
+				$rootJobParams = $job->getRootJobParams();
 			} ) );
 
 		$updater = new WikiPageUpdater(
@@ -261,16 +259,15 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
 			->will( $this->returnCallback(
-				function( IJobSpecification $job ) use ( &$pages, $change, &$rootJobParams ) {
-					$params = $job->getParams();
-
-					$this->assertArrayHasKey( 'change', $params, '$params["change"]' );
-					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
-
-					$this->assertSame( $change->getId(), $params['change']['id'] );
-
-					$pages += $params['pages']; // addition uses keys, array_merge does not
-					$rootJobParams = $job->getRootJobParams();
+				function( array $jobs ) use ( &$pages, $change, &$rootJobParams ) {
+					/** @var Job $job */
+					foreach ( $jobs as $job ) {
+						$this->assertSame( 'wikibase-InjectRCRecords', $job->getType() );
+						$params = $job->getParams();
+						$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
+						$pages += $params['pages']; // addition uses keys, array_merge does not
+						$rootJobParams = $job->getRootJobParams();
+					}
 				}
 			) );
 

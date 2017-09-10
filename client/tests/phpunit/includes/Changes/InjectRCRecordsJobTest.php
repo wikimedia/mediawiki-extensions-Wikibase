@@ -9,7 +9,6 @@ use Wikibase\Client\Changes\InjectRCRecordsJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,7 +18,6 @@ use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Tests\Changes\EntityChangeFactoryTest;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
 
@@ -467,45 +465,6 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 
 		$job->setTitleFactory( $this->getTitleFactoryMock() );
 		$job->setRecentChangesDuplicateDetector( $rcDupeDetector );
-
-		$job->run();
-	}
-
-	public function testRun_batch() {
-		$change = $this->getEntityChangeMock();
-		$rc = $this->getRecentChangeMock();
-		$changeLookup = $this->getEntityChangeLookupMock( [ $change ] );
-		$changeFactory = $this->getEntityChangeFactory();
-
-		$rcFactory = $this->getRCFactoryMock();
-
-		$rcFactory->expects( $this->any() )
-			->method( 'newRecentChange' )
-			->will( $this->returnValue( $rc ) );
-
-		$lbFactory = $this->getLBFactoryMock();
-		$lbFactory->expects( $this->exactly( 2 ) )
-			->method( 'commitAndWaitForReplication' );
-
-		$params = [
-			'change' => $change->getId(),
-			'pages' => [
-				21 => [ 0, 'Foo' ],
-				22 => [ 0, 'Bar' ],
-				23 => [ 0, 'Cuzz' ],
-			]
-		];
-
-		$job = new InjectRCRecordsJob(
-			$lbFactory,
-			$changeLookup,
-			$changeFactory,
-			$rcFactory,
-			$params
-		);
-
-		$job->setTitleFactory( $this->getTitleFactoryMock() );
-		$job->setDbBatchSize( 2 );
 
 		$job->run();
 	}

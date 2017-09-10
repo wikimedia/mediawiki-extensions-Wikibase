@@ -68,14 +68,10 @@ class InjectRCRecordsJob extends Job {
 	private $stats = null;
 
 	/**
-	 * @var int Batch size for database operations
-	 */
-	private $dbBatchSize = 100;
-
-	/**
 	 * @param Title[] $titles
 	 * @param EntityChange $change
 	 * @param array $rootJobParams
+	 * @param int $batchSize
 	 *
 	 * @return JobSpecification
 	 */
@@ -99,7 +95,7 @@ class InjectRCRecordsJob extends Job {
 		// See JobQueueChangeNotificationSender::getJobSpecification for relevant root job parameters.
 		$params = array_merge( $rootJobParams, [
 			'change' => $changeData,
-			'pages' => $pages
+			'pages' => $pages,
 		] );
 
 		return new JobSpecification(
@@ -190,14 +186,6 @@ class InjectRCRecordsJob extends Job {
 	}
 
 	/**
-	 * @param int $dbBatchSize
-	 */
-	public function setDbBatchSize( $dbBatchSize ) {
-		Assert::parameterType( 'integer', $dbBatchSize, '$dbBatchSize' );
-		$this->dbBatchSize = $dbBatchSize;
-	}
-
-	/**
 	 * Returns the change that should be processed.
 	 *
 	 * EntityChange objects are loaded using a EntityChangeLookup.
@@ -267,7 +255,6 @@ class InjectRCRecordsJob extends Job {
 
 		$rcAttribs = $this->rcFactory->prepareChangeAttributes( $change );
 
-		$c = 0;
 		$trxToken = $this->lbFactory->getEmptyTransactionTicket( __METHOD__ );
 
 		foreach ( $titles as $title ) {
@@ -285,17 +272,9 @@ class InjectRCRecordsJob extends Job {
 				$this->logger->debug( __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
 				$rc->save();
 			}
-
-			if ( ++$c >= $this->dbBatchSize ) {
-				$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
-				$trxToken = $this->lbFactory->getEmptyTransactionTicket( __METHOD__ );
-				$c = 0;
-			}
 		}
 
-		if ( $c > 0 ) {
-			$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
-		}
+		$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
 
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
 
