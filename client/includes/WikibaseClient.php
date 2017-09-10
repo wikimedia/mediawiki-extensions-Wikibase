@@ -1156,7 +1156,9 @@ final class WikibaseClient {
 			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 
-		$pageUpdater->setDbBatchSize( $this->settings->getSetting( 'wikiPageUpdaterDbBatchSize' ) );
+		$pageUpdater->setPurgeCacheBatchSize( $this->settings->getSetting( 'purgeCacheBatchSize' ) );
+		$pageUpdater->setRefreshLinksBatchSize( $this->settings->getSetting( 'refreshLinksBatchSize' ) );
+		$pageUpdater->setRecentChangesBatchSize( $this->settings->getSetting( 'recentChangesBatchSize' ) );
 
 		$changeListTransformer = new ChangeRunCoalescer(
 			$this->getStore()->getEntityRevisionLookup(),

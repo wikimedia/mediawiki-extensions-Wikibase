@@ -10,7 +10,6 @@ use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\LBFactory;
 
 /**
@@ -40,9 +39,19 @@ class WikiPageUpdater implements PageUpdater {
 	private $LBFactory;
 
 	/**
-	 * @var int Batch size for database operations
+	 * @var int Batch size for UpdateHtmlCacheJob
 	 */
-	private $dbBatchSize = 50;
+	private $purgeCacheBatchSize = 100;
+
+	/**
+	 * @var int Batch size for InjectRCRecordsJob
+	 */
+	private $rcBatchSize = 100;
+
+	/**
+	 * @var int Batch size for RefreshLinksJobs
+	 */
+	private $refreshLinksBatchSize = 5;
 
 	/**
 	 * @var RecentChangesDuplicateDetector|null
@@ -78,17 +87,43 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * @return int
 	 */
-	public function getDbBatchSize() {
-		return $this->dbBatchSize;
+	public function getPurgeCacheBatchSize() {
+		return $this->purgeCacheBatchSize;
 	}
 
 	/**
-	 * @param int $dbBatchSize
+	 * @param int $purgeCacheBatchSize
 	 */
-	public function setDbBatchSize( $dbBatchSize ) {
-		Assert::parameterType( 'integer', $dbBatchSize, 'dbBatchSize' );
+	public function setPurgeCacheBatchSize( $purgeCacheBatchSize ) {
+		$this->purgeCacheBatchSize = $purgeCacheBatchSize;
+	}
 
-		$this->dbBatchSize = $dbBatchSize;
+	/**
+	 * @return int
+	 */
+	public function getRefreshLinksBatchSize() {
+		return $this->refreshLinksBatchSize;
+	}
+
+	/**
+	 * @param int $refreshLinksBatchSize
+	 */
+	public function setRefreshLinksBatchSize( $refreshLinksBatchSize ) {
+		$this->refreshLinksBatchSize = $refreshLinksBatchSize;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getRecentChangesBatchSize() {
+		return $this->rcBatchSize;
+	}
+
+	/**
+	 * @param int $rcBatchSize
+	 */
+	public function setRecentChangesBatchSize( $rcBatchSize ) {
+		$this->rcBatchSize = $rcBatchSize;
 	}
 
 	private function incrementStats( $updateType, $delta ) {
@@ -133,7 +168,7 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$jobs = [];
-		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
+		$titleBatches = array_chunk( $titles, $this->getPurgeCacheBatchSize() );
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
@@ -167,7 +202,7 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$jobs = [];
-		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
+		$titleBatches = array_chunk( $titles, $this->getRefreshLinksBatchSize() );
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
@@ -220,7 +255,12 @@ class WikiPageUpdater implements PageUpdater {
 			return;
 		}
 
-		$jobSpec = InjectRCRecordsJob::makeJobSpecification( $titles, $change, $rootJobParams );
+		$jobSpec = InjectRCRecordsJob::makeJobSpecification(
+			$titles,
+			$change,
+			$rootJobParams,
+			$this->getRecentChangesBatchSize()
+		);
 
 		$this->jobQueueGroup->lazyPush( $jobSpec );
 

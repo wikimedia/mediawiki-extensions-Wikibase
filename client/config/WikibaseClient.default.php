@@ -96,8 +96,23 @@ return call_user_func( function() {
 				$settings->getSetting( 'hasFullEntityIdColumn' ) : true;
 		},
 
-		// Database batch size in WikiPageUpdater which ChangeHandler uses
-		'wikiPageUpdaterDbBatchSize' => 50,
+		// Batch size for UpdateHtmlCacheJob
+		'purgeCacheBatchSize' => function ( SettingsArray $settings ) {
+			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' ) ?
+				$settings->getSetting( 'wikiPageUpdaterDbBatchSize' ) : 100;
+		},
+
+		// Batch size for InjectRCRecordsJob
+		'recentChangesBatchSize' => function ( SettingsArray $settings ) {
+			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' ) ?
+				$settings->getSetting( 'wikiPageUpdaterDbBatchSize' ) : 100;
+		},
+
+		// Batch size for RefreshLinksJobs
+		'refreshLinksBatchSize' => function ( SettingsArray $settings ) {
+			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' ) ?
+				$settings->getSetting( 'wikiPageUpdaterDbBatchSize' ) : 5;
+		},
 	];
 
 	// Some defaults depend on information not available at this time.
