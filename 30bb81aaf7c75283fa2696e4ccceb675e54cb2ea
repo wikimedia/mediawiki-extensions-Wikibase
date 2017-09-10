@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b9f3069c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-09-10T11:25:37Z",
+      "side": 1,
+      "message": "perhaps this and other instances of this message could be updated to \"entities\"",
+      "range": {
+        "startLine": 172,
+        "startChar": 31,
+        "endLine": 172,
+        "endChar": 36
+      },
+      "revId": "30bb81aaf7c75283fa2696e4ccceb675e54cb2ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d9f05291",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-09-10T11:25:37Z",
+      "side": 1,
+      "message": "local",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 12
+      },
+      "revId": "30bb81aaf7c75283fa2696e4ccceb675e54cb2ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
