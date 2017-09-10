@@ -3,8 +3,10 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use HTMLCacheUpdateJob;
+use IJobSpecification;
 use Job;
 use JobQueueGroup;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PHPUnit_Framework_MockObject_MockObject;
 use MediaWiki\MediaWikiServices;
 use RefreshLinksJob;
@@ -144,6 +146,22 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		return $LBFactory;
 	}
 
+	/**
+	 * @return StatsdDataFactoryInterface
+	 */
+	private function getStatsdDataFactoryMock( array $expectedStats ) {
+		$stats = $this->getMock( StatsdDataFactoryInterface::class );
+
+		$i = 0;
+		foreach ( $expectedStats as $updateType => $delta ) {
+			$stats->expects( $this->at( $i++ ) )
+				->method( 'updateCount' )
+				->with( 'wikibase.client.pageupdates.' . $updateType, $delta );
+		}
+
+		return $stats;
+	}
+
 	public function testPurgeWebCache() {
 		$titleFoo = $this->getTitleMock( 'Foo', 21 );
 		$titleBar = $this->getTitleMock( 'Bar', 22 );
@@ -170,8 +188,13 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$this->getRCDupeDetectorMock()
+			$this->getRCDupeDetectorMock(),
+			$this->getStatsdDataFactoryMock( [
+				'WebCache.jobs' => 2, // 2 batches (batch size 2, 3 titles)
+				'WebCache.titles' => 3,
+			] )
 		);
+		$updater->setPurgeCacheBatchSize( 2 );
 
 		$updater->purgeWebCache( [
 			$titleFoo, $titleBar, $titleCuzz,
@@ -206,22 +229,24 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams ) {
-				/** @var Job $job */
-				foreach ( $jobs as $job ) {
-					$this->assertInstanceOf( RefreshLinksJob::class, $job );
-					$params = $job->getParams();
-					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
-					$pages += $params['pages']; // addition uses keys, array_merge does not
-					$rootJobParams = $job->getRootJobParams();
-				}
+			->will( $this->returnCallback( function( IJobSpecification $job ) use ( &$pages, &$rootJobParams ) {
+				$this->assertInstanceOf( RefreshLinksJob::class, $job );
+				$title = $job->getTitle();
+
+				$id = $title->getArticleID();
+				$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
+				$rootJobParams = $job->getRootJobParams();
 			} ) );
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$this->getRCDupeDetectorMock()
+			$this->getRCDupeDetectorMock(),
+			$this->getStatsdDataFactoryMock( [
+				'RefreshLinks.jobs' => 3, // no batching
+				'RefreshLinks.titles' => 3,
+			] )
 		);
 
 		$updater->scheduleRefreshLinks( [
@@ -276,8 +301,13 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
 			$this->getLBFactoryMock(),
-			$this->getRCDupeDetectorMock()
+			$this->getRCDupeDetectorMock(),
+			$this->getStatsdDataFactoryMock( [
+				'InjectRCRecords.jobs' => 2, // 2 batches (batch size 2, 3 titles)
+				'InjectRCRecords.titles' => 3,
+			] )
 		);
+		$updater->setRecentChangesBatchSize( 2 );
 
 		$updater->injectRCRecords(
 			[ $titleFoo, $titleBar, $titleCuzz, ],
