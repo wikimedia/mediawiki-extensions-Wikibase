@@ -207,15 +207,13 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( array $jobs ) use ( &$pages, &$rootJobParams ) {
-				/** @var Job $job */
-				foreach ( $jobs as $job ) {
-					$this->assertInstanceOf( RefreshLinksJob::class, $job );
-					$params = $job->getParams();
-					$this->assertArrayHasKey( 'pages', $params, '$params["pages"]' );
-					$pages += $params['pages']; // addition uses keys, array_merge does not
-					$rootJobParams = $job->getRootJobParams();
-				}
+			->will( $this->returnCallback( function( IJobSpecification $job  ) use ( &$pages, &$rootJobParams ) {
+				$this->assertInstanceOf( RefreshLinksJob::class, $job );
+				$title = $job->getTitle();
+
+				$id = $title->getArticleID();
+				$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
+				$rootJobParams = $job->getRootJobParams();
 			} ) );
 
 		$updater = new WikiPageUpdater(

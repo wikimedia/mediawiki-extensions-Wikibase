@@ -493,7 +493,8 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 				21 => [ 0, 'Foo' ],
 				22 => [ 0, 'Bar' ],
 				23 => [ 0, 'Cuzz' ],
-			]
+			],
+			'batchSize' => 2
 		];
 
 		$job = new InjectRCRecordsJob(
@@ -505,7 +506,6 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		);
 
 		$job->setTitleFactory( $this->getTitleFactoryMock() );
-		$job->setDbBatchSize( 2 );
 
 		$job->run();
 	}

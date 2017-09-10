@@ -68,21 +68,18 @@ class InjectRCRecordsJob extends Job {
 	private $stats = null;
 
 	/**
-	 * @var int Batch size for database operations
-	 */
-	private $dbBatchSize = 100;
-
-	/**
 	 * @param Title[] $titles
 	 * @param EntityChange $change
 	 * @param array $rootJobParams
+	 * @param int $batchSize
 	 *
 	 * @return JobSpecification
 	 */
 	public static function makeJobSpecification(
 		array $titles,
 		EntityChange $change,
-		array $rootJobParams = []
+		array $rootJobParams = [],
+		$batchSize = 100
 	) {
 		$pages = [];
 
@@ -99,7 +96,8 @@ class InjectRCRecordsJob extends Job {
 		// See JobQueueChangeNotificationSender::getJobSpecification for relevant root job parameters.
 		$params = array_merge( $rootJobParams, [
 			'change' => $changeData,
-			'pages' => $pages
+			'pages' => $pages,
+			'batchSize' => $batchSize,
 		] );
 
 		return new JobSpecification(
@@ -190,11 +188,11 @@ class InjectRCRecordsJob extends Job {
 	}
 
 	/**
-	 * @param int $dbBatchSize
+	 * @return int
 	 */
-	public function setDbBatchSize( $dbBatchSize ) {
-		Assert::parameterType( 'integer', $dbBatchSize, '$dbBatchSize' );
-		$this->dbBatchSize = $dbBatchSize;
+	private function getBatchSize() {
+		$params = $this->getParams();
+		return isset( $params['batchSize'] ) ? intval( $params['batchSize'] ) : 100;
 	}
 
 	/**
@@ -286,7 +284,7 @@ class InjectRCRecordsJob extends Job {
 				$rc->save();
 			}
 
-			if ( ++$c >= $this->dbBatchSize ) {
+			if ( ++$c >= $this->getBatchSize() ) {
 				$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
 				$trxToken = $this->lbFactory->getEmptyTransactionTicket( __METHOD__ );
 				$c = 0;
