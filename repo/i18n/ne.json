@@ -24,7 +24,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "विवरण",
 	"wikibase-entitytermsforlanguagelistview-label": "नामपत्र",
 	"wikibase-entitytermsforlanguagelistview-language": "भाषा",
-	"wikibase-label-empty": "नामपत्र परिभाषित कुनै",
+	"wikibase-label-empty": "कुनै परिभाषित नामपत्र छैन",
 	"wikibase-label-edit-placeholder": "नामपत्र लेख्नुहोस्",
 	"wikibase-label-edit-placeholder-language-aware": "$1 मा नामपत्र लेख्नुहोस्",
 	"wikibase-description-empty": "कुनै विवरण परिभाषित छैन ।",
