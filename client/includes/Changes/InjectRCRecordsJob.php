@@ -71,6 +71,7 @@ class InjectRCRecordsJob extends Job {
 	 * @param Title[] $titles
 	 * @param EntityChange $change
 	 * @param array $rootJobParams
+	 * @param int $batchSize
 	 *
 	 * @return JobSpecification
 	 */
@@ -94,7 +95,7 @@ class InjectRCRecordsJob extends Job {
 		// See JobQueueChangeNotificationSender::getJobSpecification for relevant root job parameters.
 		$params = array_merge( $rootJobParams, [
 			'change' => $changeData,
-			'pages' => $pages
+			'pages' => $pages,
 		] );
 
 		return new JobSpecification(
