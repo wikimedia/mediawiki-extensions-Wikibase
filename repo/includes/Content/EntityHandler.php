@@ -6,6 +6,7 @@ use Content;
 use ContentHandler;
 use DataUpdate;
 use Diff\Patcher\PatcherException;
+use Hooks;
 use Html;
 use IContextSource;
 use InvalidArgumentException;
@@ -635,7 +636,7 @@ abstract class EntityHandler extends ContentHandler {
 		// Call the WikibaseEntityDeletionUpdate hook.
 		// Do this before doing any well-known updates.
 		$updates[] = new DataUpdateAdapter(
-			'wfRunHooks',
+			[ Hooks::class, 'run' ],
 			'WikibaseEntityDeletionUpdate',
 			[ $content, $title ]
 		);
@@ -708,7 +709,7 @@ abstract class EntityHandler extends ContentHandler {
 		// Call the WikibaseEntityModificationUpdate hook.
 		// Do this after doing all well-known updates.
 		$updates[] = new DataUpdateAdapter(
-			'wfRunHooks',
+			[ Hooks::class, 'run' ],
 			'WikibaseEntityModificationUpdate',
 			[ $content, $title ]
 		);
