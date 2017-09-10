@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
 use Wikibase\WikibaseSettings;
@@ -96,8 +97,21 @@ return call_user_func( function() {
 				$settings->getSetting( 'hasFullEntityIdColumn' ) : true;
 		},
 
-		// Database batch size in WikiPageUpdater which ChangeHandler uses
-		'wikiPageUpdaterDbBatchSize' => 50,
+		// Batch size for UpdateHtmlCacheJob
+		'purgeCacheBatchSize' => function ( SettingsArray $settings ) {
+			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
+			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' )
+				? $settings->getSetting( 'wikiPageUpdaterDbBatchSize' )
+				: $mainConfig->get( 'UpdateRowsPerJob' );
+		},
+
+		// Batch size for InjectRCRecordsJob
+		'recentChangesBatchSize' => function ( SettingsArray $settings ) {
+			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
+			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' )
+				? $settings->getSetting( 'wikiPageUpdaterDbBatchSize' )
+				: $mainConfig->get( 'UpdateRowsPerJob' );
+		},
 	];
 
 	// Some defaults depend on information not available at this time.
