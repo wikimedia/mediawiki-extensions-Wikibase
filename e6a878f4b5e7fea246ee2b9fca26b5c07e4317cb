@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_d0e7c039",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-09-10T15:13:24Z",
+      "side": 1,
+      "message": "for property / value types that are simple key-\u003evalue pairs without language-specific stuff, should be easy to include them. (things like external identifiers, wikibase-item property/values)",
+      "parentUuid": "4e7eab26_8f159c42",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_399076f7",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
