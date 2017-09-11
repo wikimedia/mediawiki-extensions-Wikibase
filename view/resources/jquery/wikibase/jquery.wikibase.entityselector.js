@@ -495,11 +495,18 @@
 		},
 
 		/**
-		 * Gets the selected entity.
+		 * Gets and sets the current state. The optional parameter can be used to let the initial
+		 * state of the selector reflect what can be seen in the input field the selector is
+		 * attached to.
 		 *
+		 * @param {string} [entityId]
 		 * @return {Object} Plain object featuring `Entity` stub data.
 		 */
-		selectedEntity: function () {
+		selectedEntity: function ( entityId ) {
+			if ( typeof entityId === 'string' ) {
+				this._selectedEntity = { id: entityId };
+			}
+
 			return this._selectedEntity;
 		}
 	} );

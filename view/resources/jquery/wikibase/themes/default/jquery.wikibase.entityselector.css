@@ -71,11 +71,11 @@
 }
 
 /* Specificity must be a little higher because of a valueview selector */
-.ui-entityselector-input.ui-entityselector-input-recognized {
+.ui-suggester-input.ui-entityselector-input.ui-entityselector-input-recognized {
 	border-color: #14866d;
 }
 
-.ui-entityselector-input.ui-entityselector-input-unrecognized {
+.ui-suggester-input.ui-entityselector-input.ui-entityselector-input-unrecognized {
 	background-color: #fee7e6;
 	border-color: #b32424;
 }
