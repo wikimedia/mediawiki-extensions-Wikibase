@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_1678e0be",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-11T08:31:06Z",
+      "side": 1,
+      "message": "what are PropertyInfoStore keys?",
+      "range": {
+        "startLine": 29,
+        "startChar": 29,
+        "endLine": 29,
+        "endChar": 51
+      },
+      "revId": "7e1e475746fcedbb65ebbd8d1206a9fcb04221e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_564c289f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-11T08:31:06Z",
+      "side": 1,
+      "message": "This constant is defined in PropertyInfoLookup. How does PHP figure this out that does code actually works?\n\nOh, I see, in tests those settings are defaults (i.e. nulls), so this code is actually not tested :)",
+      "range": {
+        "startLine": 1647,
+        "startChar": 18,
+        "endLine": 1647,
+        "endChar": 35
+      },
+      "revId": "7e1e475746fcedbb65ebbd8d1206a9fcb04221e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
