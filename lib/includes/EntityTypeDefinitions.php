@@ -76,6 +76,13 @@ class EntityTypeDefinitions {
 	/**
 	 * @return callable[]
 	 */
+	public function getStorageSerializerFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'storage-serializer-factory-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
 	public function getDeserializerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'deserializer-factory-callback' );
 	}

@@ -150,6 +150,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			'CompactEntitySerializer' => function() use ( $genericServices ) {
 				return $genericServices->getCompactEntitySerializer();
 			},
+			'StorageEntitySerializer' => function() use ( $genericServices ) {
+				return $genericServices->getStorageEntitySerializer();
+			},
 			'EntityStoreWatcher' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices;
 			},
@@ -221,6 +224,15 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getCompactEntitySerializer() {
 		return $this->getService( 'CompactEntitySerializer' );
+	}
+
+	/**
+	 * Returns the entity serializer that generates serialization that is used in the storage layer.
+	 *
+	 * @return Serializer
+	 */
+	public function getStorageEntitySerializer() {
+		return $this->getService( 'StorageEntitySerializer' );
 	}
 
 	/**

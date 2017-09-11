@@ -118,6 +118,12 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertInstanceOf( Serializer::class, $wikibaseServices->getCompactEntitySerializer() );
 	}
 
+	public function testGetStorageEntitySerializer() {
+		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
+
+		$this->assertInstanceOf( Serializer::class, $wikibaseServices->getStorageEntitySerializer() );
+	}
+
 	public function testGetEntityStoreWatcher() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
@@ -182,6 +188,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 				'EntityRevisionLookup',
 				'FullEntitySerializer',
 				'CompactEntitySerializer',
+				'StorageEntitySerializer',
 				'EntityStoreWatcher',
 				'LanguageFallbackChainFactory',
 				'PropertyInfoLookup',

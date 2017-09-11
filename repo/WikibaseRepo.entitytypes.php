@@ -18,6 +18,7 @@
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Rdf\NullEntityRdfBuilder;
@@ -34,6 +35,9 @@ use Wikimedia\Purtle\RdfWriter;
 
 return [
 	'item' => [
+		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
+			return $serializerFactory->newItemSerializer();
+		},
 		'view-factory-callback' => function(
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
@@ -83,6 +87,9 @@ return [
 		}
 	],
 	'property' => [
+		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
+			return $serializerFactory->newPropertySerializer();
+		},
 		'view-factory-callback' => function(
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
