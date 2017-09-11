@@ -497,9 +497,14 @@
 		/**
 		 * Gets the selected entity.
 		 *
+		 * @param {string} [entityId]
 		 * @return {Object} Plain object featuring `Entity` stub data.
 		 */
-		selectedEntity: function () {
+		selectedEntity: function ( entityId ) {
+			if ( typeof entityId === 'string' ) {
+				this._selectedEntity = { id: entityId };
+			}
+
 			return this._selectedEntity;
 		}
 	} );
