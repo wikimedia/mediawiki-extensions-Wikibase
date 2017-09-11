@@ -83,21 +83,18 @@ class Item implements EntityDocument, FingerprintProvider, StatementListHolder,
 	}
 
 	/**
-	 * Can be integer since 0.1.
-	 * Can be ItemId since 0.5.
-	 * Can be null since 1.0.
+	 * @since 0.5, can be null since 1.0
 	 *
 	 * @param ItemId|null $id
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function setId( $id ) {
-		if ( $id === null || $id instanceof ItemId ) {
-			$this->id = $id;
-		} else {
-			throw new InvalidArgumentException( '$id must be an instance of ItemId, an integer,'
-				. ' or null' );
+		if ( !( $id instanceof ItemId ) && $id !== null ) {
+			throw new InvalidArgumentException( '$id must be an ItemId or null' );
 		}
+
+		$this->id = $id;
 	}
 
 	/**
