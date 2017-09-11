@@ -76,6 +76,5 @@
 }
 
 .ui-entityselector-input.ui-entityselector-input-unrecognized {
-	background-color: #fee7e6;
-	border-color: #b32424;
+	/* FIXME */
 }
