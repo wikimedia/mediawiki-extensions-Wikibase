@@ -41,7 +41,10 @@ associated with a function having the dedicated signature:
 
 ; serializer-factory-callback (repo and client)
 : a callable that returns a DispatchableSerializer instance, with the first and only argument being
-  a SerialierFactory
+  a SerialierFactory. The returned serializer is used to produce the output visible to the user.
+; storage-serializer-factory-callback (repo only)
+: a callable that returns a DispatchableSerializer instance, with the first and only argument being
+  a SerialierFactory. The returned serializer is used when storing entity data internally.
 ; deserializer-factory-callback (repo and client)
 : a callable that returns a DispatchableDeserializer instance, with the first and only argument
   being a DeserializerFactory
