@@ -46,6 +46,30 @@
       "revId": "828f3bf53d5bcfaf1e5bcddcd56b3b537b9c6303",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ca938ba5",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-11T14:39:11Z",
+      "side": 1,
+      "message": "It describes only half the function. If I just look at the documentation, how am I supposed to know what it will do with the entityId argument?",
+      "parentUuid": "4e7eab26_0a6433e0",
+      "range": {
+        "startLine": 498,
+        "startChar": 5,
+        "endLine": 498,
+        "endChar": 30
+      },
+      "revId": "828f3bf53d5bcfaf1e5bcddcd56b3b537b9c6303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
