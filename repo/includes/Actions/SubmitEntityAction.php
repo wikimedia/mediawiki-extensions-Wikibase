@@ -157,11 +157,6 @@ class SubmitEntityAction extends EditEntityAction {
 		$newerContent = $newerRevision->getContent();
 		$latestContent = $latestRevision->getContent();
 
-		// Skip diffing and patching when possible for performance reasons
-		if ( $newerRevision->getId() === $latestRevision->getId() ) {
-			return $olderContent;
-		}
-
 		return $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) );
 	}
 
