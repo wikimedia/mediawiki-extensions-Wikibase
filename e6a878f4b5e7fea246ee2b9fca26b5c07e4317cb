@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_baf44a51",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-09-11T22:01:02Z",
+      "side": 1,
+      "message": "https://phabricator.wikimedia.org/T99899\n\npossibly this could be done via the query service but would be easy to support with elasticsearch / cirrus",
+      "parentUuid": "4e7eab26_7663643f",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_399076f7",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
