@@ -367,7 +367,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function exportTransformProvider() {
 		$entity = $this->newEntity();
 
-		$internalSerializer = WikibaseRepo::getDefaultInstance()->getAllTypesEntitySerializer();
+		$internalSerializer = WikibaseRepo::getDefaultInstance()->getStorageEntitySerializer();
 		$oldBlob = json_encode( $internalSerializer->serialize( $entity ) );
 
 		// fake several old formats
@@ -422,7 +422,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$settings->setSetting( 'transformLegacyFormatOnExport', true );
 
 		$entity = $this->newEntity();
-		$entitySerializer = $this->getWikibaseRepo( $settings )->getAllTypesEntitySerializer();
+		$entitySerializer = $this->getWikibaseRepo( $settings )->getStorageEntitySerializer();
 		$expected = json_encode( $entitySerializer->serialize( $entity ) );
 
 		$handler = $this->getHandler( $settings );

@@ -465,6 +465,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 
+	public function testGetStorageEntitySerializer() {
+		$serializer = $this->getWikibaseRepo()->getStorageEntitySerializer();
+		$this->assertInstanceOf( Serializer::class, $serializer );
+	}
+
 	public function testGetExternalFormatStatementDeserializer() {
 		$deserializer = $this->getWikibaseRepo()->getExternalFormatStatementDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );

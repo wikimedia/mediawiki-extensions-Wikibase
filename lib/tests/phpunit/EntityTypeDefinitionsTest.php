@@ -36,6 +36,7 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			],
 			'bar' => [
 				'serializer-factory-callback' => 'bar-serializer',
+				'storage-serializer-factory-callback' => 'bar-storage-serializer',
 				'deserializer-factory-callback' => 'bar-deserializer',
 				'view-factory-callback' => 'bar-view',
 				'content-model-id' => 'bar-model',
@@ -55,6 +56,18 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'bar' => 'bar-serializer'
 			],
 			$definitions->getSerializerFactoryCallbacks()
+		);
+	}
+
+	public function testGetStorageSerializerFactoryCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertEquals(
+			[
+				'foo' => 'foo-serializer',
+				'bar' => 'bar-storage-serializer'
+			],
+			$definitions->getStorageSerializerFactoryCallbacks()
 		);
 	}
 

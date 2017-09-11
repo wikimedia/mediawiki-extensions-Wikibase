@@ -76,6 +76,22 @@ class EntityTypeDefinitions {
 	/**
 	 * @return callable[]
 	 */
+	public function getStorageSerializerFactoryCallbacks() {
+		$storageSerializerInstantiators = $this->getMapForDefinitionField( 'storage-serializer-factory-callback' );
+		$fallbackSerializerInstantiators = $this->getMapForDefinitionField( 'serializer-factory-callback' );
+
+		foreach ( $fallbackSerializerInstantiators as $type => $instantiator ) {
+			if ( !array_key_exists( $type, $storageSerializerInstantiators ) ) {
+				$storageSerializerInstantiators[$type] = $fallbackSerializerInstantiators[$type];
+			}
+		}
+
+		return $storageSerializerInstantiators;
+	}
+
+	/**
+	 * @return callable[]
+	 */
 	public function getDeserializerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'deserializer-factory-callback' );
 	}
