@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -60,11 +59,6 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 class SqlStore implements Store {
-
-	/**
-	 * @var EntityContentDataCodec
-	 */
-	private $contentCodec;
 
 	/**
 	 * @var EntityChangeFactory
@@ -183,7 +177,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
-	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdLookup $entityIdLookup
@@ -193,7 +186,6 @@ class SqlStore implements Store {
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
-		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityIdLookup $entityIdLookup,
@@ -202,7 +194,6 @@ class SqlStore implements Store {
 		WikibaseServices $wikibaseServices
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
-		$this->contentCodec = $contentCodec;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdLookup = $entityIdLookup;
