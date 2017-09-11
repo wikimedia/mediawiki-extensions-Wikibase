@@ -33,17 +33,23 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenAliasesAsNull_isIgnored() {
-		$deserializer = $this->newAliasesChangeOpDeserializer( $this->getTermChangeOpValidator() );
-		$changeOp = $deserializer->createEntityChangeOp( [ 'aliases' => [ 'en' => null ] ] );
-		$this->assertEquals( new ChangeOps(), $changeOp );
+	public function provideInvalidAliasesArray() {
+		return [
+			[ null ],
+			[ false ],
+			[ 1 ],
+			[ 'alias1|alias2' ],
+		];
 	}
 
-	public function testGivenAliasesNotAsArray_createEntityChangeOpThrowsError() {
+	/**
+	 * @dataProvider provideInvalidAliasesArray
+	 */
+	public function testGivenAliasesForLanguageNotAnArray_createEntityChangeOpThrowsError( $aliases ) {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
-			function() {
+			function () use ( $aliases ) {
 				$deserializer = $this->newAliasesChangeOpDeserializer( $this->getTermChangeOpValidator() );
-				$deserializer->createEntityChangeOp( [ 'aliases' => [ 'en' => 'alias1|alias2' ] ] );
+				$deserializer->createEntityChangeOp( [ 'aliases' => [ 'en' => $aliases ] ] );
 			},
 			'not-recognized-array'
 		);

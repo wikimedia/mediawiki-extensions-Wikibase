@@ -77,10 +77,6 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 		$indexedAliases = [];
 
 		foreach ( $aliasGroups as $languageCode => $aliases ) {
-			if ( $aliases === null ) {
-				continue;
-			}
-
 			$this->assertIsArray( $aliases );
 
 			if ( array_values( $aliases ) !== $aliases ) {
