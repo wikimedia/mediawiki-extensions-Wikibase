@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_7663643f",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-11T07:32:06Z",
+      "side": 1,
+      "message": "\u003e we might want to index all statements with a given property type.\n\nI\u0027m not sure why. It certainly makes sense to index, say, P31, but indexing all item-types statements makes much less sense, what that would be useful for? I.e. what is the use case for such indexing?",
+      "parentUuid": "4e7eab26_998baac4",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_399076f7",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
@@ -243,6 +267,54 @@
       "writtenOn": "2017-09-09T15:48:19Z",
       "side": 1,
       "message": "just to note, we already index coordinate values (via GeoData extension)",
+      "parentUuid": "4e7eab26_f9842e11",
+      "range": {
+        "startLine": 90,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b67a2ce6",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-11T07:32:06Z",
+      "side": 1,
+      "message": "\u003e we already index coordinate values \n\nThat\u0027s one of the reasons why they aren\u0027t here :)",
+      "parentUuid": "4e7eab26_59bc6267",
+      "range": {
+        "startLine": 90,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_166ea02a",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-11T07:32:06Z",
+      "side": 1,
+      "message": "\u003e But if there are properties configured for indexing that have an un-supported value type, this should not be ignored silently. It should at least generate a log entry.\n\nOK, that makes sense, will do.\n\n\u003e the documentation for the configuration variable needs to clearly state\n\nSure, docs and tests are TBD.",
       "parentUuid": "4e7eab26_f9842e11",
       "range": {
         "startLine": 90,
