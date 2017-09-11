@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_3784f35d",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-11T18:50:19Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I was relying on :) if that changes, we\u0027ll have to add an option.",
+      "parentUuid": "4e7eab26_02e9937e",
+      "revId": "bc76d63d89c4834b7ddf75d2f3e24698d70d196a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_38a5de43",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 5
