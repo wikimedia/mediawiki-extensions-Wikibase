@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Bunukwiki",
-			"Benel"
+			"Benel",
+			"Tokoabibi"
 		]
 	},
 	"wikibase-deletedentity-item": "masiputu tu kasacacay",
 	"wikibase-deletedentity-property": "masiputu tu susin",
 	"wikibase-deletedentity-query": "masiputu tu palalitemuh tu kawaw",
 	"wikibase-error-unexpected": "mungangaw: $1.",
-	"wikibase-quantitydetails-amount": "pulung",
+	"wikibase-quantitydetails-amount": "pulung sausi",
 	"wikibase-quantitydetails-upperbound": "sakapabaway a sausi",
 	"wikibase-quantitydetails-lowerbound": "makasasa’ay a sausi",
 	"wikibase-quantitydetails-unit": "sacacaycacay",

@@ -15,11 +15,12 @@
 			"Macofe",
 			"Joan manel",
 			"Jaumeortola",
-			"Ssola"
+			"Ssola",
+			"Abella"
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",
-	"tooltip-t-wikibase": "Enllaç a l'element del repositori de dades connectades",
+	"tooltip-t-wikibase": "Enllaç a l'element del repositori de dades connectat",
 	"apihelp-query+wbentityusage-param-prop": "Propietats que s'afegiran al resultat.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si s’habilita, s’hi afegirà l’URL de l’entitat",
 	"apihelp-query+wblistentityusage-param-prop": "Propietats per afegir al resultat.",

@@ -309,6 +309,8 @@
 	"wikibase-mylanguagefallbackchain-babel": "Pode modificala incluíndo <nowiki>{{#babel: }}</nowiki> na súa [[Special:MyPage|páxina de {{GENDER:$1|usuario|usuaria}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traducido do $3 - $4",
 	"wikibase-api-unresolved-redirect": "O identificador indicado refírese a unha redirección, o que non está soportado neste contexto.",
+	"wikibase-api-illegal-entity-remove": "As entidades non se poden eliminar proporcionando unha chave <var>remove</var> de nivel superior.",
+	"wikibase-api-illegal-id-or-site-page-selector": "Precisa proporcionar un identificador (<var>id</var>) de entidade, ou unha combinación de <var>site</var> e páxina (<var>page</var>), pero non os dous ó mesmo tempo.",
 	"wikibase-api-no-such-entity": "Non foi posible atopar unha entidade co identificador \"$1\".",
 	"wikibase-api-no-such-sitelink": "Non se puido atopar a ligazón de sitio a \"$1\" ó tentar editar identificacións.",
 	"wikibase-api-not-recognized-datatype": "Esperábase un tipo de dato, pero non se atopa ou non é recoñecido.",

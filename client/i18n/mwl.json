@@ -4,6 +4,8 @@
 			"MokaAkashiyaPT"
 		]
 	},
+	"tooltip-t-wikibase": "Lhigaçon pa l eilemiento de l repositório de dados",
+	"wikibase-after-page-move": "L sou arrastramiento deberie aora ser [$1 refletido na lhigaçon anterlhenguística de l eilemiento {{WBREPONAME}}]. Solicitamos que berifique se esto acunteciu.",
 	"wikibase-comment-update": "Eilemiento {{WBREPONAME}} altarado",
 	"wikibase-dataitem": "Eilemiento {{WBREPONAME}}",
 	"wikibase-editlinks": "Eiditar lhigaçones",
@@ -18,7 +20,11 @@
 	"wikibase-linkitem-confirmitem-text": "La páigina que scuolheu yá stá associada a un [$1 eilemiento ne l nuosso repositório central de dados]. Por fabor, cunfirme que {{PLURAL:$2|la páigina amostrada|las páiginas amostradas}} ambaixo {{PLURAL:$2|ye la|son las}} que deseia lhigar la esta.",
 	"wikibase-linkitem-confirmitem-button": "Cunfirmar",
 	"wikibase-linkitem-success-link": "Las páiginas fúrun lhigadas. Puode ancuontrar l'eilemiento que cuntén las lhigaçones ne l nuosso [$1 repositório central de dados].",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Amostrar",
 	"wikibase-rc-show-wikidata-pref": "Amostrar las eidiçones {{WBREPONAME}} nas mudanças recentes",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Eidiçon {{WBREPONAME}}",
 	"wikibase-replicationnote": "Note que puode demorar bários minutos anté que las altaraçones séian besibles an todas las wikis.",
 	"wikibase-watchlist-show-changes-pref": "Amostrar las eidiçones {{WBREPONAME}} na sue lhista de páiginas begiadas",
 	"unconnectedpages": "Páiginas sin lhigaçones a eilemientos associados",

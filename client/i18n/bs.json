@@ -20,7 +20,7 @@
 	"wikibase-comment-restore": "Pridružena stavka na {{GRAMMAR:dativ|{{WBREPONAME}}}} je vraćena. Jezičke veze su vraćene.",
 	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
 	"wikibase-comment-sitelink-add": "Jezička veza dodana: $1",
-	"wikibase-comment-sitelink-change": "Jezična veza izmjenjena sa $1 u $2",
+	"wikibase-comment-sitelink-change": "Jezička veza izmijenjena sa $1 na $2",
 	"wikibase-comment-sitelink-remove": "Jezička veza uklonjena: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmjena|izmjene}}",
 	"wikibase-dataitem": "Na Wikipodacima",
