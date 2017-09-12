@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_285b2d28",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/ElasticTermResultTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-09-12T20:28:35Z",
+      "side": 1,
+      "message": "your editor loves mixing tabs and spaces :P",
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
