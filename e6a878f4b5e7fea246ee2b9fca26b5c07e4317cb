@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_abb63783",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-12T23:17:56Z",
+      "side": 1,
+      "message": "I see the point here but I\u0027d prefer postponing this for now. This is a different use case which we\u0027re not even 100% sure we want in the search. If we decide yes, we can add this, but for now I\u0027d like to start with limited set of properties. We could always expand it later.",
+      "parentUuid": "4e7eab26_baf44a51",
+      "range": {
+        "startLine": 258,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "e6a878f4b5e7fea246ee2b9fca26b5c07e4317cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_399076f7",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 4
