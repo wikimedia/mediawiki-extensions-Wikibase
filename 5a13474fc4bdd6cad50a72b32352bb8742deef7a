@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_2207cc20",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-12T19:02:13Z",
+      "side": 1,
+      "message": "PropertyRdfBuilder::writePropertyPredicates needs to declare these normalized predicates.",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a5098631",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-12T19:02:13Z",
+      "side": 1,
+      "message": "$normalizedPropertyValueNamespace, or $propertyValueNamespaceNormalized\n\nAlso: would be nice to have a method for getting the normalized predicate LName. Otoh, this is a performance hotspot, and we may want to avid the extra function call.",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2544b649",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-12T19:02:13Z",
+      "side": 1,
+      "message": "Could be done inside RdfVocabulary, if we don\u0027t mind the extra function call.",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
