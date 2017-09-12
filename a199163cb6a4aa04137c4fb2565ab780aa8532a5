@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_ab4cfee4",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-12T11:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_84f7e886",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 23
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_3662dfa3",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 6
@@ -113,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4be79adf",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-12T11:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_3662dfa3",
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_b60c8fef",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 6
@@ -124,6 +166,24 @@
       "writtenOn": "2017-09-05T15:54:34Z",
       "side": 1,
       "message": "This uses the SAME predicate for the URI and the string value. That will break consistency, since the predicate can either be declared an object property, or not.\n\nInstead, we have to use different predicates. we\u0027d have to have a way to derived the predicate LName for the full URI from the predicate LName for the plain value. This will require a mapping to be passed to the constructor. The mapping can be provided by RdfVocabulary.\n\nI think that is the issue this patch got stuck on.",
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6b15b69e",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-12T11:33:49Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand RDF but after lots of reading code and your comments I changed some stuff, please take a look.",
+      "parentUuid": "4e7eab26_b60c8fef",
       "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -177,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_2be24ed1",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-12T11:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_1667a3b4",
+      "range": {
+        "startLine": 66,
+        "startChar": 19,
+        "endLine": 66,
+        "endChar": 33
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_842da8ef",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 6
@@ -212,6 +296,30 @@
       "side": 1,
       "message": "can be private, you are right.",
       "parentUuid": "4e7eab26_842da8ef",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 10
+      },
+      "revId": "a199163cb6a4aa04137c4fb2565ab780aa8532a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8bdd8219",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-12T11:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_9652b3dc",
       "range": {
         "startLine": 68,
         "startChar": 1,
