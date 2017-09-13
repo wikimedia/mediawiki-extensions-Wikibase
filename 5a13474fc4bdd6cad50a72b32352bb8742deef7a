@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4c19e626",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-13T15:04:56Z",
+      "side": 1,
+      "message": "I’m confused too, but I think this seems to be blurring the distinction between simple values and full values (aka deep values, apparently).\n\nFor value types with a full value representation (globecoordinate, quantity, time), psv: and psn: both map to full value nodes, and for value types with only a simple value representation, there is no psv: triple, and, so far, no psn: triple either because only quantities could be normalized.\n\nBut with this change, psn: could link to both simple values (external identifiers) and full values (quantities), and in the case of external identifiers there would be psn: triples but no psv: triples. That doesn’t feel right to me.\n\nPerhaps we should introduce full value nodes for external identifiers, with the property, prefix, identifier, and full URI as triples on that node?",
+      "parentUuid": "4e7eab26_ac9e4abb",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0cbafe1e",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 7
