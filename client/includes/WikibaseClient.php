@@ -258,10 +258,9 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
-		$settings = $this->getSettings();
 		$entityTitleLookup = new ClientSiteLinkTitleLookup(
 			$this->getStore()->getSiteLinkLookup(),
-			$settings->getSetting( 'siteGlobalID' )
+			$this->settings->getSetting( 'siteGlobalID' )
 		);
 
 		return new WikibaseValueFormatterBuilders(
@@ -269,8 +268,8 @@ final class WikibaseClient {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 			$this->getRepoItemUriParser(),
-			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
-			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
+			$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
+			$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$entityTitleLookup
 		);
 	}
@@ -374,7 +373,7 @@ final class WikibaseClient {
 				$this->repositoryDefinitions,
 				$this->entityTypeDefinitions,
 				$this->getDataAccessSettings(),
-				$this->getSettings()->getSetting( 'entityNamespaces' ),
+				$this->settings->getSetting( 'entityNamespaces' ),
 				$this->getMultiRepositoryServiceWiring(),
 				$this->getPerRepositoryServiceWiring()
 			);
@@ -384,10 +383,9 @@ final class WikibaseClient {
 	}
 
 	private function getDataAccessSettings() {
-		$clientSettings = $this->getSettings();
 		return new DataAccessSettings(
-			$clientSettings->getSetting( 'maxSerializedEntitySize' ),
-			$clientSettings->getSetting( 'readFullEntityIdColumn' )
+			$this->settings->getSetting( 'maxSerializedEntitySize' ),
+			$this->settings->getSetting( 'readFullEntityIdColumn' )
 		);
 	}
 
@@ -846,7 +844,7 @@ final class WikibaseClient {
 	 */
 	private function getRepoItemUriParser() {
 		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
+			$this->settings->getSetting( 'repoConceptBaseUri' ),
 			new ItemIdParser()
 		);
 	}
@@ -1084,7 +1082,7 @@ final class WikibaseClient {
 			new SnaksFinder(),
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
-			$this->getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
+			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 
