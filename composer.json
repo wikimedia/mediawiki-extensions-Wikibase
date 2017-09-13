@@ -46,7 +46,8 @@
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
 		"wikibase/wikibase-codesniffer": "^0.1.0",
-		"jakub-onderka/php-console-highlighter": "0.3.2"
+		"jakub-onderka/php-console-highlighter": "0.3.2",
+		"mediawiki/minus-x": "0.1.0"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
@@ -80,7 +81,8 @@
 		"test": [
 			"@validate --no-interaction",
 			"parallel-lint . --exclude vendor",
-			"@cs"
+			"@cs",
+			"minus-x check ."
 		],
 		"cs": [
 			"phpcs -p -s"
