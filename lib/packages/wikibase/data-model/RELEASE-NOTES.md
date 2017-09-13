@@ -7,6 +7,11 @@ This release removes integers as acceptable entity IDs.
 #### Breaking changes
 * `Item::setId` and `Property::setId` do not accept integers any more.
 * Removed `Item::getSiteLinks` and `Item::hasSiteLinks`.
+* Removed `HashArray`.
+* `SnakList` does not extend `HashArray` any more. This removes the following public and protected
+  methods, or makes them private: `addElement`, `getByElementHash`, `getNewOffset`, `getObjectType`,
+  `hasElement`, `hasElementHash`, `hasValidType`, `preSetElement`, `removeByElementHash`,
+  `removeElement`, and `setElement`.
 * Added periods to the list of disallowed characters in `RepositoryNameAssert`.
 
 #### Other changes
