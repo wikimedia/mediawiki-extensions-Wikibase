@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
@@ -38,6 +39,11 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'time', 'test' => 'three' ],
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'time', 'test' => 'four' ],
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'five', PropertyInfoLookup::KEY_FORMATTER_URL => 'bar' ],
+			[
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
+				'test' => 'six',
+				PropertyInfoStore::KEY_CANONICAL_URI => 'zoo'
+			],
 		];
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
@@ -49,6 +55,14 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 			if ( isset( $info[PropertyInfoLookup::KEY_FORMATTER_URL] ) ) {
 				$mainSnak = new PropertyValueSnak( 1630, new StringValue( $info[PropertyInfoLookup::KEY_FORMATTER_URL] ) );
+				$property->getStatements()->addNewStatement( $mainSnak );
+			}
+
+			if ( isset( $info[PropertyInfoStore::KEY_CANONICAL_URI] ) ) {
+				$mainSnak = new PropertyValueSnak(
+					1640,
+					new StringValue( $info[PropertyInfoStore::KEY_CANONICAL_URI] )
+				);
 				$property->getStatements()->addNewStatement( $mainSnak );
 			}
 
@@ -76,7 +90,10 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		//       so we should also use the EntityLookup from WikibaseRepo.
 		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
 
-		$propertyInfoBuilder = new PropertyInfoBuilder( new PropertyId( 'P1630' ) );
+		$propertyInfoBuilder = new PropertyInfoBuilder( [
+			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
+			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P1640' )
+		] );
 		$builder = new PropertyInfoTableBuilder(
 			$table,
 			$entityLookup,
@@ -109,6 +126,15 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 				);
 			} else {
 				$this->assertArrayNotHasKey( PropertyInfoLookup::KEY_FORMATTER_URL, $info );
+			}
+
+			if ( isset( $expected[PropertyInfoStore::KEY_CANONICAL_URI] ) ) {
+				$this->assertEquals(
+					$expected[PropertyInfoStore::KEY_CANONICAL_URI],
+					$info[PropertyInfoStore::KEY_CANONICAL_URI]
+				);
+			} else {
+				$this->assertArrayNotHasKey( PropertyInfoStore::KEY_CANONICAL_URI, $info );
 			}
 		}
 	}
