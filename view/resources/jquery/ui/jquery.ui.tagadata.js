@@ -391,7 +391,7 @@
 					var equalTags = self._getTags( oldValue ).add( $tag );
 					( equalTags.length <= 2
 						? equalTags // only two tags WERE equal, so the conflict is resolved for both
-						: $tag       // the other nodes still have the conflict, but this one doesn't
+						: $tag // the other nodes still have the conflict, but this one doesn't
 					).removeClass( 'tagadata-choice-equal' );
 
 					equalTags = tagLabel !== ''

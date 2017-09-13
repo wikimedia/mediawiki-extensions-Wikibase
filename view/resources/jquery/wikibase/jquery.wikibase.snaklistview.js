@@ -139,13 +139,14 @@
 
 			this.$listview
 			.off( '.' + this.widgetName )
-			.on( this._lia.prefixedEvent( 'change.' ) + this.widgetName
-					// FIXME: Remove all itemremoved events, see https://gerrit.wikimedia.org/r/298766.
-					+ ' listviewitemremoved.' + this.widgetName,
-					function ( event ) {
-						// Forward the "change" event to external components (e.g. the edit toolbar).
-						self._trigger( 'change' );
-					}
+			.on(
+				this._lia.prefixedEvent( 'change.' ) + this.widgetName
+				// FIXME: Remove all itemremoved events, see https://gerrit.wikimedia.org/r/298766.
+				+ ' listviewitemremoved.' + this.widgetName,
+				function ( event ) {
+					// Forward the "change" event to external components (e.g. the edit toolbar).
+					self._trigger( 'change' );
+				}
 			);
 		},
 

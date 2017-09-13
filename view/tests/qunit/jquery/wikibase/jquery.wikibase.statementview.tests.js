@@ -108,7 +108,8 @@
 	QUnit.test( 'Create & destroy with value', function ( assert ) {
 		assert.expect( 2 );
 		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
+				value: new wb.datamodel.Statement(
+					new wb.datamodel.Claim(
 						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 						null,
 						'guid'
@@ -134,7 +135,8 @@
 	QUnit.test( 'value after startEditing with value', function ( assert ) {
 		assert.expect( 1 );
 		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
+				value: new wb.datamodel.Statement(
+					new wb.datamodel.Claim(
 						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 						null,
 						'guid'
@@ -199,7 +201,8 @@
 	QUnit.test( 'value with empty reference', function ( assert ) {
 		assert.expect( 1 );
 		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
+				value: new wb.datamodel.Statement(
+					new wb.datamodel.Claim(
 						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 						null,
 						'guid'
@@ -224,7 +227,8 @@
 
 		assert.ok( $statementview.hasClass( 'wb-new' ) );
 
-		statementview.value( new wb.datamodel.Statement( new wb.datamodel.Claim(
+		statementview.value( new wb.datamodel.Statement(
+			new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 				null,
 				'guid'

@@ -142,8 +142,8 @@
 
 		_createListview: function () {
 			var value = this.element.is( ':empty' )
-					? orderSiteLinksByGroup( this.options.value )
-					: scrapeSiteLinks( this.element, this.options.value );
+				? orderSiteLinksByGroup( this.options.value )
+				: scrapeSiteLinks( this.element, this.options.value );
 
 			this.$listview = this.element.find( '.wikibase-listview' );
 

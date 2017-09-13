@@ -200,8 +200,8 @@
 				var $visibleClaim = $visibleStatementviews.eq( i ),
 					$statementGroup = $visibleClaim.closest( '.wikibase-statementgroupview' ),
 					$statementGroupLabel = $statementGroup.find(
-							'.wikibase-statementgroupview-property-label'
-						);
+						'.wikibase-statementgroupview-property-label'
+					);
 
 				if ( $statementGroupLabel.length !== 1 ) {
 					continue;

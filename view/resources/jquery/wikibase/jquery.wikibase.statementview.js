@@ -652,7 +652,7 @@
 		 */
 		_recreateReferences: function () {
 			this._referencesListview.option( 'value', this.options.value
-					? this.options.value.getReferences().toArray() : [] );
+				? this.options.value.getReferences().toArray() : [] );
 
 			this._drawReferencesCounter();
 		},

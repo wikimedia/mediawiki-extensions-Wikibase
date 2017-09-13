@@ -123,10 +123,11 @@
 			}
 
 			this._statementAdder = this.options.getAdder(
-					this.enterNewItem.bind( this ),
-					$containerWrapper,
-					mw.msg( 'wikibase-statementlistview-add' ),
-					mw.msg( 'wikibase-statementlistview-add-tooltip' ) );
+				this.enterNewItem.bind( this ),
+				$containerWrapper,
+				mw.msg( 'wikibase-statementlistview-add' ),
+				mw.msg( 'wikibase-statementlistview-add-tooltip' )
+			);
 		},
 
 		/**

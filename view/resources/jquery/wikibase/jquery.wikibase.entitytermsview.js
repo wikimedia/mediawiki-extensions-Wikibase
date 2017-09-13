@@ -40,16 +40,16 @@
 			templateParams: [
 				function () {
 					return $( mw.wbTemplate(
-							'wikibase-entitytermsview-heading-part',
-							'description',
-							'',
-							''
-						) ).add( mw.wbTemplate(
-							'wikibase-entitytermsview-heading-part',
-							'aliases',
-							'',
-							''
-						) );
+						'wikibase-entitytermsview-heading-part',
+						'description',
+						'',
+						''
+					) ).add( mw.wbTemplate(
+						'wikibase-entitytermsview-heading-part',
+						'aliases',
+						'',
+						''
+					) );
 				}, // header content
 				'', // entitytermsforlanguagelistview
 				'', // additional entitytermsforlanguagelistview container class(es)
