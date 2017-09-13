@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_493a38c2",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T13:23:09Z",
+      "side": 1,
+      "message": "I believe this addition must be documented in the file docs/ontology.owl, and then uploaded to wikiba.se.",
+      "range": {
+        "startLine": 42,
+        "startChar": 51,
+        "endLine": 42,
+        "endChar": 72
+      },
+      "revId": "306a7550d7ae98632c7d99df48e11b6f9acc4fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4961d8cf",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T13:23:09Z",
+      "side": 1,
+      "message": "I said this two times (!) already:\n* Casting a value that is known to be a string to a string does not do anything, but appears to be confusing because it raises the question why this cast was added. So please remove the strval.\n* Trimming should not be done here, but in a validator or in the DataValue itself. Please remove the trim.",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 21
+      },
+      "revId": "306a7550d7ae98632c7d99df48e11b6f9acc4fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
