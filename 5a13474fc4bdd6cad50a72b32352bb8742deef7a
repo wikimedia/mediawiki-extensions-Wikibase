@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_3fb03a3e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-13T16:19:18Z",
+      "side": 1,
+      "message": "Reading tickets helps… Stas has pointed this out before:\n\n\u003e Note: we already have psn:, prn: and pqn: used for full normalized values. So if we want prefixes for short normalized values, we need new ones.\n\nI left a comment in T121274 explaining the situation in some more detail. I think we should go for Daniel’s second suggestion instead.",
+      "parentUuid": "4e7eab26_4c19e626",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0cbafe1e",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 7
