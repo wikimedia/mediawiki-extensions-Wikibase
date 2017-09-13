@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_2c36dae4",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-13T14:41:13Z",
+      "side": 1,
+      "message": "The example is indeed a bit confusing, it would apply only when treating Wikidata entities IDs as external IDs. The example is even worse for the line above.\n\nThis is about \"identifiers\" in that is allows values of the data type ExternalId to be mapped to full URIs. It\u0027s the ID of the property that is used to attach the base URI to ExternalId properties using a statement.",
+      "parentUuid": "4e7eab26_c98f0825",
+      "range": {
+        "startLine": 51,
+        "startChar": 106,
+        "endLine": 51,
+        "endChar": 117
+      },
+      "revId": "7b466fac6da1b6ac9b68b86f563ce716929c235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_c9b628d7",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 6
