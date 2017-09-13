@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e7eab26_a934fcf7",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T14:37:17Z",
+      "side": 1,
+      "message": "The (?: ) brackets here are unused and can be removed.",
+      "range": {
+        "startLine": 216,
+        "startChar": 34,
+        "endLine": 216,
+        "endChar": 45
+      },
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0930b0fb",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T14:37:17Z",
+      "side": 1,
+      "message": "The code below uses this as a language code. So it should not be a \"match all\" dot, but maybe [^.]+ or even [\\w-]+\n\nFastest:\n\n /^labels\\.([^.]+)\\.prefix$/",
+      "range": {
+        "startLine": 237,
+        "startChar": 31,
+        "endLine": 237,
+        "endChar": 32
+      },
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2929ec9a",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T14:37:17Z",
+      "side": 1,
+      "message": "As far as I can see there is no benefit in making this ungreedy. Probably makes it slower, even.",
+      "range": {
+        "startLine": 237,
+        "startChar": 33,
+        "endLine": 237,
+        "endChar": 34
+      },
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_285b2d28",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/ElasticTermResultTest.php",
         "patchSetId": 7
