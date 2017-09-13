@@ -2,11 +2,11 @@
 
 namespace Wikibase\DataModel\Snak;
 
+use ArrayObject;
 use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\HashArray;
 use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
@@ -19,7 +19,19 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class SnakList extends HashArray implements Comparable, Hashable {
+class SnakList extends ArrayObject implements Comparable, Hashable {
+
+	/**
+	 * Maps snak hashes to their offsets.
+	 *
+	 * @var array [ snak hash (string) => snak offset (string|int) ]
+	 */
+	private $offsetHashes = [];
+
+	/**
+	 * @var int
+	 */
+	private $indexOffset = 0;
 
 	/**
 	 * @param Snak[]|Traversable $snaks
@@ -37,17 +49,6 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	}
 
 	/**
-	 * @see GenericArrayObject::getObjectType
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getObjectType() {
-		return Snak::class;
-	}
-
-	/**
 	 * @since 0.1
 	 *
 	 * @param string $snakHash
@@ -55,7 +56,7 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @return boolean
 	 */
 	public function hasSnakHash( $snakHash ) {
-		return $this->hasElementHash( $snakHash );
+		return array_key_exists( $snakHash, $this->offsetHashes );
 	}
 
 	/**
@@ -64,7 +65,10 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @param string $snakHash
 	 */
 	public function removeSnakHash( $snakHash ) {
-		$this->removeByElementHash( $snakHash );
+		if ( $this->hasSnakHash( $snakHash ) ) {
+			$offset = $this->offsetHashes[$snakHash];
+			$this->offsetUnset( $offset );
+		}
 	}
 
 	/**
@@ -75,7 +79,12 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @return boolean Indicates if the snak was added or not.
 	 */
 	public function addSnak( Snak $snak ) {
-		return $this->addElement( $snak );
+		if ( $this->hasSnak( $snak ) ) {
+			return false;
+		}
+
+		$this->append( $snak );
+		return true;
 	}
 
 	/**
@@ -86,7 +95,7 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @return boolean
 	 */
 	public function hasSnak( Snak $snak ) {
-		return $this->hasElementHash( $snak->getHash() );
+		return $this->hasSnakHash( $snak->getHash() );
 	}
 
 	/**
@@ -95,7 +104,7 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @param Snak $snak
 	 */
 	public function removeSnak( Snak $snak ) {
-		$this->removeByElementHash( $snak->getHash() );
+		$this->removeSnakHash( $snak->getHash() );
 	}
 
 	/**
@@ -106,7 +115,12 @@ class SnakList extends HashArray implements Comparable, Hashable {
 	 * @return Snak|bool
 	 */
 	public function getSnak( $snakHash ) {
-		return $this->getByElementHash( $snakHash );
+		if ( !$this->hasSnakHash( $snakHash ) ) {
+			return false;
+		}
+
+		$offset = $this->offsetHashes[$snakHash];
+		return $this->offsetGet( $offset );
 	}
 
 	/**
@@ -191,6 +205,126 @@ class SnakList extends HashArray implements Comparable, Hashable {
 		}
 
 		return $snaksByProperty;
+	}
+
+	/**
+	 * Finds a new offset for when appending an element.
+	 * The base class does this, so it would be better to integrate,
+	 * but there does not appear to be any way to do this...
+	 *
+	 * @return int
+	 */
+	private function getNewOffset() {
+		while ( $this->offsetExists( $this->indexOffset ) ) {
+			$this->indexOffset++;
+		}
+
+		return $this->indexOffset;
+	}
+
+	/**
+	 * @see ArrayObject::offsetUnset
+	 *
+	 * @since 0.1
+	 *
+	 * @param int|string $index
+	 */
+	public function offsetUnset( $index ) {
+		if ( $this->offsetExists( $index ) ) {
+			/**
+			 * @var Hashable $element
+			 */
+			$element = $this->offsetGet( $index );
+			$hash = $element->getHash();
+			unset( $this->offsetHashes[$hash] );
+
+			parent::offsetUnset( $index );
+		}
+	}
+
+	/**
+	 * @see ArrayObject::append
+	 *
+	 * @param Snak $value
+	 */
+	public function append( $value ) {
+		$this->setElement( null, $value );
+	}
+
+	/**
+	 * @see ArrayObject::offsetSet()
+	 *
+	 * @param int|string $index
+	 * @param Snak $value
+	 */
+	public function offsetSet( $index, $value ) {
+		$this->setElement( $index, $value );
+	}
+
+	/**
+	 * Method that actually sets the element and holds
+	 * all common code needed for set operations, including
+	 * type checking and offset resolving.
+	 *
+	 * @param int|string $index
+	 * @param Snak $value
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function setElement( $index, $value ) {
+		if ( !( $value instanceof Snak ) ) {
+			throw new InvalidArgumentException( '$value must be a Snak' );
+		}
+
+		if ( $this->hasSnak( $value ) ) {
+			return;
+		}
+
+		if ( $index === null ) {
+			$index = $this->getNewOffset();
+		}
+
+		$hash = $value->getHash();
+		$this->offsetHashes[$hash] = $index;
+		parent::offsetSet( $index, $value );
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		return serialize( [
+			'data' => $this->getArrayCopy(),
+			'index' => $this->indexOffset,
+		] );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @param string $serialized
+	 */
+	public function unserialize( $serialized ) {
+		$serializationData = unserialize( $serialized );
+
+		foreach ( $serializationData['data'] as $offset => $value ) {
+			// Just set the element, bypassing checks and offset resolving,
+			// as these elements have already gone through this.
+			parent::offsetSet( $offset, $value );
+		}
+
+		$this->indexOffset = $serializationData['index'];
+	}
+
+	/**
+	 * Returns if the ArrayObject has no elements.
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return !$this->getIterator()->valid();
 	}
 
 }
