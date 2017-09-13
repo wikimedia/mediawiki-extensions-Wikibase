@@ -427,8 +427,8 @@ class WikibaseRepo {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getLocalItemUriParser(),
-			$this->getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
-			$this->getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
+			$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
+			$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -1512,14 +1512,14 @@ class WikibaseRepo {
 	public function newPropertyInfoBuilder() {
 		$propertyIdMap = [];
 
-		$formatterUrlProperty = $this->getSettings()->getSetting( 'formatterUrlProperty' );
+		$formatterUrlProperty = $this->settings->getSetting( 'formatterUrlProperty' );
 		if ( $formatterUrlProperty !== null ) {
 			$propertyIdMap[PropertyInfoLookup::KEY_FORMATTER_URL] = new PropertyId(
 				$formatterUrlProperty
 			);
 		}
 
-		$canonicalUriProperty = $this->getSettings()->getSetting( 'canonicalUriProperty' );
+		$canonicalUriProperty = $this->settings->getSetting( 'canonicalUriProperty' );
 		if ( $canonicalUriProperty !== null ) {
 			$propertyIdMap[PropertyInfoStore::KEY_CANONICAL_URI] = new PropertyId( $canonicalUriProperty );
 		}
@@ -1869,7 +1869,7 @@ class WikibaseRepo {
 	}
 
 	public function getSettingsValueProvider( $jsSetting, $phpSetting ) {
-		return new SettingsValueProvider( $this->getSettings(), $jsSetting, $phpSetting );
+		return new SettingsValueProvider( $this->settings, $jsSetting, $phpSetting );
 	}
 
 	/**
@@ -1957,10 +1957,9 @@ class WikibaseRepo {
 	}
 
 	private function getDataAccessSettings() {
-		$repoSettings = $this->getSettings();
 		return new DataAccessSettings(
-			$repoSettings->getSetting( 'maxSerializedEntitySize' ),
-			$repoSettings->getSetting( 'readFullEntityIdColumn' )
+			$this->settings->getSetting( 'maxSerializedEntitySize' ),
+			$this->settings->getSetting( 'readFullEntityIdColumn' )
 		);
 	}
 
