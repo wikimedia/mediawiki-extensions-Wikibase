@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_ac63aa3d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-13T15:56:56Z",
+      "side": 1,
+      "message": "Can there be a case when `repoDatabase` is not defined (i.e. WikibaseRepo is not enabled)?",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 683,
+        "endChar": 6
+      },
+      "revId": "1408b24b6d41d901063954e4a4afac92e5ab7184",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
