@@ -8,10 +8,15 @@
         <exclude name="ExcessiveClassComplexity" />
         <exclude name="TooManyPublicMethods" />
     </rule>
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
+        <properties>
+            <property name="maximum" value="57" />
+        </properties>
+    </rule>
     <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
         <properties>
             <property name="ignorepattern" value="(^(set|get|test))i" />
-            <property name="maxmethods" value="16" />
+            <property name="maxmethods" value="14" />
         </properties>
     </rule>
 
