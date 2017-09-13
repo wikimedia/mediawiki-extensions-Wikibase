@@ -21,7 +21,7 @@
 	"wikibase-error-save-timeout": "Тренутно имамо техничке потешкоће. Покушајте касније.",
 	"wikibase-error-remove-timeout": "Тренутно имамо техничких потешкоћа. Покушајте касније.",
 	"wikibase-error-autocomplete-response": "Одговор сервера: $1",
-	"wikibase-error-ui-no-external-page": "Страница „$2” није пронађен на „$1”.",
+	"wikibase-error-ui-no-external-page": "Страница „$2” није пронађена на „$1”.",
 	"wikibase-error-ui-edit-conflict": "Дошло је до сукоба измена. Сачувате измене на локалном нивоу, поново учитајте страницу и сачувајте их.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерација)",
 	"wikibase-quantitydetails-amount": "количина",

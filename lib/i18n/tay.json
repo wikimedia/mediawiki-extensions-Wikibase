@@ -6,11 +6,14 @@
 			"Hitaypayan"
 		]
 	},
+	"wikibase-timedetails-before": "Zik na",
 	"wikibase-globedetails-longitude": "Cingtu’",
 	"wikibase-sitelinks-wikipedia": "Wikipidia",
 	"wikibase-sitelinks-link-columnheading": "Wal p’ubuy na zzngayan",
+	"wikibase-validator-invalid": "ungat zyuwaw na llpgan",
 	"datatypes-type-wikibase-item": "Binkgan lmlamu’",
 	"datatypes-type-external-id": "Biru’ na sinbbaq sa cyux mtzyuwaw squw taylnglingay",
+	"wikibase-time-precision-millennium": "pira’ $1 syan kawas",
 	"wikibase-entity-summary-wbsetitem": "Wal ps’rux giqas na binkgan lmlamu’",
 	"wikibase-entity-summary-wbsetreference": "Syaniy qutux sa kkita’ su’ sa bunkeng",
 	"wikibase-item-summary-wbcreate-new": "Wal ps’rux giqas na binkgan lmlamu’",

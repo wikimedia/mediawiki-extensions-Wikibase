@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Milicevic01"
+			"Milicevic01",
+			"Obsuser"
 		]
 	},
 	"wikibase-lib-desc": "Sadrži zajedničke funkcionalnosti za Vikibazu i proširenja za klijenta Vikibaze",
@@ -15,7 +16,7 @@
 	"wikibase-error-save-timeout": "Trenutno imamo tehničkih poteškoća i zbog toga vaša izmena nije sačuvana.",
 	"wikibase-error-remove-timeout": "Trenutno imamo tehničkih poteškoća i zbog toga vaše brisanje nije izvršeno.",
 	"wikibase-error-autocomplete-response": "Odgovor servera: $1",
-	"wikibase-error-ui-no-external-page": "Navedeni članak nije pronađen na odgovarajućem sajtu.",
+	"wikibase-error-ui-no-external-page": "Stranica „$2” nije pronađena na „$1”.",
 	"wikibase-error-ui-edit-conflict": "Došlo je do sukoba izmena. Molimo učitajte i sačuvajte ponovo stranu.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteracija)",
 	"wikibase-timedetails-time": "Vreme",
