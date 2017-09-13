@@ -7,6 +7,7 @@ use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\DispatchingTermBuffer;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0+
@@ -49,8 +50,13 @@ return [
 		$entityTypeToRepoMapping = $multiRepositoryServices->getEntityTypeToRepoMapping();
 
 		$factories = [];
-		foreach ( $entityTypeToRepoMapping as $entityType => $repositoryName ) {
-			$factories[$entityType] = $repoSpecificFactories[$repositoryName];
+		foreach ( $entityTypeToRepoMapping as $entityType => $repositoryNameAndNamespace ) {
+			Assert::precondition(
+				count( $repositoryNameAndNamespace ) === 1,
+				'Expected entities of type: "' . $entityType . '" to only be provided by single repository.'
+			);
+			list( $repository, ) = $repositoryNameAndNamespace[0];
+			$factories[$entityType] = $repoSpecificFactories[$repository];
 		}
 
 		return new DispatchingTermSearchInteractorFactory( $factories );

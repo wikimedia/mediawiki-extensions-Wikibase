@@ -74,7 +74,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 	 */
 	public function testOnBeforePageDisplayMobile( $expectedModules, $isEntityNamespace ) {
 		if ( $isEntityNamespace ) {
-			$namespace = array_values( WikibaseRepo::getDefaultInstance()->getEntityNamespaces() )[0];
+			$namespace = array_values( WikibaseRepo::getDefaultInstance()->getLocalEntityNamespaces() )[0];
 		} else {
 			$namespace = NS_TALK;
 		}
