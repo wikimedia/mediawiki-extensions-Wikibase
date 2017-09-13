@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4c26c6ca",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-13T15:57:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_a934fcf7",
+      "range": {
+        "startLine": 216,
+        "startChar": 34,
+        "endLine": 216,
+        "endChar": 45
+      },
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0930b0fb",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 7
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_ec321206",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-13T15:57:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_2929ec9a",
+      "range": {
+        "startLine": 237,
+        "startChar": 33,
+        "endLine": 237,
+        "endChar": 34
+      },
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_285b2d28",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/ElasticTermResultTest.php",
         "patchSetId": 7
@@ -82,6 +130,24 @@
       "writtenOn": "2017-09-12T20:28:35Z",
       "side": 1,
       "message": "your editor loves mixing tabs and spaces :P",
+      "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ac340af8",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/ElasticTermResultTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-13T15:57:23Z",
+      "side": 1,
+      "message": "doh :(",
+      "parentUuid": "4e7eab26_285b2d28",
       "revId": "040f2f1d433bc698672a2e30cc74fae80235f4af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
