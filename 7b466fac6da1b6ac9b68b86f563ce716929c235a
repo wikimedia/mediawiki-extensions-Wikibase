@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_c98f0825",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T14:12:43Z",
+      "side": 1,
+      "message": "Why is this about \"identifiers\" (and what \"identifiers\"?), and then uses the wikidata.org concept URI as an example? These two things don\u0027t have anything to do with each other. Or is it me confusing something here? Either way, the commit message does not explain what is going on in this patch.",
+      "range": {
+        "startLine": 51,
+        "startChar": 106,
+        "endLine": 51,
+        "endChar": 117
+      },
+      "revId": "7b466fac6da1b6ac9b68b86f563ce716929c235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_c9b628d7",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1646,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-13T14:12:43Z",
+      "side": 1,
+      "message": "Why is this patch re-introducing these calls of getters that don\u0027t do anything but returning a private property? I replaced them all with a direct access to said private property in a patch months ago. Now I see them coming back. Why?",
+      "range": {
+        "startLine": 1646,
+        "startChar": 33,
+        "endLine": 1646,
+        "endChar": 46
+      },
+      "revId": "7b466fac6da1b6ac9b68b86f563ce716929c235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
