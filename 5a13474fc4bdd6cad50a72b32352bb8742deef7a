@@ -37,6 +37,58 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4c61e6cf",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-13T14:48:16Z",
+      "side": 1,
+      "message": "That question exactly is why i stopped working on this. I don\u0027t know.",
+      "parentUuid": "4e7eab26_bc2e7bf5",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ac9e4abb",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-13T14:48:16Z",
+      "side": 1,
+      "message": "Wait, NSP_QUALIFIER_VALUE and NSP_QUALIFIER both map to  NSP_QUALIFIER_VALUE_NORM? That can\u0027t be right, can it?\n\nTo be honest, I get confused about the RDF mapping myself. Can you get input from Stas and Lucas on this?",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0cbafe1e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-13T14:48:16Z",
+      "side": 1,
+      "message": "Same here - NSP_REFERENCE_VALUE and NSP_REFERENCE both map to  NSP_REFERENCE_VALUE_NORM? That does not seem right. Don\u0027t we need NSP_REFERENCE_NORM?",
+      "revId": "5a13474fc4bdd6cad50a72b32352bb8742deef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_a5098631",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 7
