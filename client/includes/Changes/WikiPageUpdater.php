@@ -113,7 +113,7 @@ class WikiPageUpdater implements PageUpdater {
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling HTMLCacheUpdateJob for "
-			                     . count( $batch ) . " titles" );
+				. count( $batch ) . " titles" );
 
 			$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
 
@@ -195,11 +195,19 @@ class WikiPageUpdater implements PageUpdater {
 			return;
 		}
 
-		$jobSpec = InjectRCRecordsJob::makeJobSpecification( $titles, $change );
+		$jobs = [];
+		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
 
-		$this->jobQueueGroup->lazyPush( $jobSpec );
+		/* @var Title[] $batch */
+		foreach ( $titleBatches as $batch ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling InjectRCRecords for "
+				. count( $batch ) . " titles" );
 
-		$this->incrementStats( 'InjectRCRecords.jobs', 1 );
+			$jobs[] = InjectRCRecordsJob::makeJobSpecification( $batch, $change );
+		}
+
+		$this->jobQueueGroup->lazyPush( $jobs );
+		$this->incrementStats( 'InjectRCRecords.jobs', count( $jobs ) );
 		$this->incrementStats( 'InjectRCRecords.titles', count( $titles ) );
 	}
 
