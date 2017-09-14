@@ -79,7 +79,6 @@
 	"scripts": {
 		"fix": "phpcbf",
 		"test": [
-			"@validate --no-interaction",
 			"parallel-lint . --exclude vendor",
 			"@cs",
 			"minus-x.php check ."
