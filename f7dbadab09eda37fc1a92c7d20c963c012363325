@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_2ddc8d1a",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "Here I would prefer more generic name, in case we\u0027d want to reuse it for other derived values.",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0dd9912c",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "I would prefer reusing normalized value here. Same for other two instances, of course.",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_8dcd8164",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "I\u0027d prefer something like \"wdtn\" to rhyme with psn, etc.",
+      "range": {
+        "startLine": 32,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_adc87d52",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "Comment here describing what these do won\u0027t hurt. Also, if we decide to keep \"resource\" naming, $normalizedPropertyValueNamespace is way to generic name for that, since this table is specific for resources. OTOH, if we reuse the normalized ones, we should just add self::NSP_DIRECT_CLAIM to the table above I think and use that table.",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_0db2f1e4",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "this parameter is not documented. It\u0027s not that its definition is unclear, but if we have @param for one parameter, should have also for another.",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_edae857b",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "This only would accept StringValue. Are we sure  $snak-\u003egetDataValue() is a StringValue here?",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4dc0f92f",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T18:50:51Z",
+      "side": 1,
+      "message": "How can it be null? Either it\u0027s not set - and then there should be isset() check (which is probably the case) or it is set and then it would not be null. So I assume isset (or maybe !empty) check here would be appropriate.",
+      "range": {
+        "startLine": 66,
+        "startChar": 31,
+        "endLine": 66,
+        "endChar": 50
+      },
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
