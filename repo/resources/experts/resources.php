@@ -30,6 +30,7 @@ return call_user_func( function() {
 				'getStore.js',
 			],
 			'dependencies' => [
+				'wikibase.experts.__namespace',
 				'wikibase.experts.modules',
 				'dataValues.values',
 				'jquery.valueview.ExpertStore',
