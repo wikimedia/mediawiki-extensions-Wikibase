@@ -76,6 +76,40 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_788a51c2",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T20:54:02Z",
+      "side": 1,
+      "message": "$propUri is missing here",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_18b8ed73",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T20:54:02Z",
+      "side": 1,
+      "message": "$propUri is missing here",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0db2f1e4",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 11
