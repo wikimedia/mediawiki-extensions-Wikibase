@@ -170,6 +170,29 @@
       "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_58a67551",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-14T21:00:14Z",
+      "side": 1,
+      "message": "This encodes spaces as \"+\". Is that what we want to happen?",
+      "range": {
+        "startLine": 67,
+        "startChar": 29,
+        "endLine": 67,
+        "endChar": 40
+      },
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
