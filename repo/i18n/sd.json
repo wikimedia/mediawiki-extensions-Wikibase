@@ -6,6 +6,7 @@
 			"Mehtab ahmed"
 		]
 	},
+	"wikibase-entity-item": "جزو",
 	"wikibase-edit": "سنواريو",
 	"wikibase-save": "سانڍيو",
 	"wikibase-cancel": "رد",
@@ -18,5 +19,6 @@
 	"wikibase-statementsection-statements": "بيانات",
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
 	"wikibase-statementview-rank-normal": "عام درجو",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالو|حوالا}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالو|حوالا}}",
+	"wikibase-listdatatypes-wikibase-item-head": "جزو"
 }

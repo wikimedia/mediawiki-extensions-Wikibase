@@ -6,6 +6,7 @@
 	},
 	"tooltip-t-wikibase": "Lhigaçon pa l eilemiento de l repositório de dados",
 	"wikibase-after-page-move": "L sou arrastramiento deberie aora ser [$1 refletido na lhigaçon anterlhenguística de l eilemiento {{WBREPONAME}}]. Solicitamos que berifique se esto acunteciu.",
+	"wikibase-after-page-delete": "La lhigaçon pa esta páigina deberie tener sido retirada [$1 de l eilemiento {{WBREPONAME}} associado]. Pedimos que berifique se esto acunteciu.",
 	"wikibase-comment-update": "Eilemiento {{WBREPONAME}} altarado",
 	"wikibase-dataitem": "Eilemiento {{WBREPONAME}}",
 	"wikibase-editlinks": "Eiditar lhigaçones",
