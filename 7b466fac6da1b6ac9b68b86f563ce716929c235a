@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_84855eb3",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-14T13:32:32Z",
+      "side": 1,
+      "message": "Fixed in Ie135f8a.",
+      "parentUuid": "4e7eab26_2c36dae4",
+      "range": {
+        "startLine": 51,
+        "startChar": 106,
+        "endLine": 51,
+        "endChar": 117
+      },
+      "revId": "7b466fac6da1b6ac9b68b86f563ce716929c235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_c9b628d7",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 6
