@@ -43,7 +43,7 @@
 	},
 	"scripts": {
 		"test": [
-			"@validate --no-interaction",
+			"composer validate --no-interaction",
 			"phpunit --coverage-php /dev/null"
 		],
 		"cs": [
