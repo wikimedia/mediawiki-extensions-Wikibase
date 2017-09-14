@@ -28,6 +28,7 @@ notifications:
   email:
     recipients:
       - wikidata-ci-status@wikimedia.de
+      - leszek.manicki@wikimedia.de
     on_success: change
     on_failure: always
   irc:
