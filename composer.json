@@ -81,8 +81,7 @@
 		"test": [
 			"composer validate --no-interaction",
 			"parallel-lint . --exclude vendor",
-			"@cs",
-			"minus-x.php check ."
+			"@cs"
 		],
 		"cs": [
 			"phpcs -p -s"
