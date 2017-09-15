@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_abe1422b",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-15T11:31:11Z",
+      "side": 1,
+      "message": "As soon as we are having this discussion, for me it means that having correct value in \"RefreshLinks.jobs\" counter is important, so the test is needed.\n\nRegarding correctness of the test it then should check that counter is equal to the number of jobs that were pushed. Then the test will fail if the code is changed and someone forgot to make change to the counter.",
+      "parentUuid": "4e7eab26_2b86b26a",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f94ac383",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 1
