@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_6b5efa18",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T11:20:08Z",
+      "side": 1,
+      "message": "The unit test currently does not check the stats updates, since they are essentially logging. Unit tests rarely cover logging output - ideally they should, but it\u0027s not common, and perhaps would be overkill.\n\nIn the case at hand, $c and count( $titles ) will be the same; Them being the same is not part of the contract, though.",
+      "parentUuid": "4e7eab26_8b42463e",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f94ac383",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 1
