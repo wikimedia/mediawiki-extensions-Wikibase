@@ -31,10 +31,10 @@
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
 		"phpunit/phpunit": "~4.8",
-		"data-values/common": "~0.3.0|~0.2.0",
-		"data-values/geo": "~1.1|~2.0",
+		"data-values/common": ">=0.1 <0.5",
+		"data-values/geo": ">=1.0 <3.0",
 		"data-values/number": ">=0.1 <0.10",
-		"data-values/time": "~0.7.0",
+		"data-values/time": ">=0.1 <0.9",
 		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},
 	"autoload": {
