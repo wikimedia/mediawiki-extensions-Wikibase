@@ -41,12 +41,12 @@ class WikiPageUpdater implements PageUpdater {
 	/**
 	 * @var int Batch size for UpdateHtmlCacheJob
 	 */
-	private $purgeCacheBatchSize = 100;
+	private $purgeCacheBatchSize = 300;
 
 	/**
 	 * @var int Batch size for InjectRCRecordsJob
 	 */
-	private $rcBatchSize = 100;
+	private $rcBatchSize = 300;
 
 	/**
 	 * @var RecentChangesDuplicateDetector|null
@@ -107,6 +107,10 @@ class WikiPageUpdater implements PageUpdater {
 		$this->rcBatchSize = $rcBatchSize;
 	}
 
+	/**
+	 * @param string $updateType
+	 * @param int $delta
+	 */
 	private function incrementStats( $updateType, $delta ) {
 		if ( $this->stats ) {
 			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
@@ -149,7 +153,7 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$jobs = [];
-		$titleBatches = array_chunk( $titles, $this->getPurgeCacheBatchSize() );
+		$titleBatches = array_chunk( $titles, $this->purgeCacheBatchSize );
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
@@ -182,13 +186,10 @@ class WikiPageUpdater implements PageUpdater {
 			return;
 		}
 
-		$c = 0;
-
 		// NOTE: no batching here, since RefreshLinksJobs are slow, and benefit more from
 		// deduplication and checking against page_touched than from reducing overhead
 		// through batching.
 
-		/* @var Title $title */
 		foreach ( $titles as $title ) {
 			$job = new RefreshLinksJob(
 				$title, // the title will be ignored because the 'pages' parameter is set.
@@ -196,10 +197,9 @@ class WikiPageUpdater implements PageUpdater {
 			);
 
 			$this->jobQueueGroup->lazyPush( $job );
-			$c++;
 		}
 
-		$this->incrementStats( 'RefreshLinks.jobs', $c );
+		$this->incrementStats( 'RefreshLinks.jobs', count( $titles ) );
 		$this->incrementStats( 'RefreshLinks.titles', count( $titles ) );
 	}
 
