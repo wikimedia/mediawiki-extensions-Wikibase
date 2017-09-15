@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_8b42463e",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-15T11:15:52Z",
+      "side": 1,
+      "message": "Is there a test for this?\nIf there is I don\u0027t think it needs discussion. \nIf there is none (as far as I found it is the case), then one should be added in this patch. Refactoring untested code is very dangerous, so it shouldn\u0027t be done (with exception to minimal refactorings that are needed to be able to write tests).",
+      "parentUuid": "4e7eab26_d947c77a",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f94ac383",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 1
