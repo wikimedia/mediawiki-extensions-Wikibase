@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_2b86b26a",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T11:23:50Z",
+      "side": 1,
+      "message": "...also, a unit test checking the stats increment would not detect the problem i mentioned: if the code changes, incrementStats would get the wrong number if we use count( $titles ). Burt since the wrong number is the same as before, the unit test would still pass (i assume that if updating stats was forgotten here, it was also forgotten in the unit test).\n\nWhen using $c and changing the code so there is no longer one job per title, a unit test asserting the stats increment would actually fail, and would have to be adjusted.",
+      "parentUuid": "4e7eab26_6b5efa18",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f94ac383",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 1
