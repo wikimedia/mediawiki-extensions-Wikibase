@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_9985bfb3",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T09:52:01Z",
+      "side": 1,
+      "message": "In production, nothing will change, because we have wikiPageUpdaterDbBatchSize \u003d 20 set there.\n\nBut the low number was set because of RefreshLinksJob. RefreshLinksJob now has no batching at all, so the number can probably be raised again. Maybe even to 300.",
+      "parentUuid": "4e7eab26_791fb3ba",
+      "range": {
+        "startLine": 105,
+        "startChar": 25,
+        "endLine": 105,
+        "endChar": 41
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_992a9fd6",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-15T09:39:41Z",
       "side": 1,
       "message": "Why did the default changed from 50 to 100?\n\nThe two \"100\" here are never used, except in tests (maybe?). I suggest to either set the two defaults to 300, which is what UpdateRowsPerJob defaults to. Or set it to something super-small like 10 for test-scenarios.",
+      "range": {
+        "startLine": 44,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 35
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b980bba1",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T09:52:01Z",
+      "side": 1,
+      "message": "They are not used by the code that currently instantiates the service. There should be sensible values here anyway.\n\nI can change them to 300. The value is higher, because the batching no longer applies to the heavy RefreshLinksJobs.",
+      "parentUuid": "4e7eab26_992a9fd6",
       "range": {
         "startLine": 44,
         "startChar": 32,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_19b8ef73",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T09:52:01Z",
+      "side": 1,
+      "message": "I had that at first, and then decided against it. If this code is changed so it\u0027s no longer one job per title, it\u0027s easy to miss count( $titles ) below, especiall since it won\u0027t cause any errors, just misleading statistics. In contrast, it\u0027s obvious when $c is incremented. This avoids errors.",
+      "parentUuid": "4e7eab26_39192bdc",
+      "range": {
+        "startLine": 199,
+        "startChar": 3,
+        "endLine": 199,
+        "endChar": 7
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_b9c8bb52",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 7
@@ -105,6 +177,30 @@
       "writtenOn": "2017-09-15T09:39:41Z",
       "side": 1,
       "message": "\"Job[] $jobs\" also works, if you like.",
+      "range": {
+        "startLine": 263,
+        "startChar": 14,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_99acdf33",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T09:52:01Z",
+      "side": 1,
+      "message": "I just wanted to do the same as in line 160. Does it matter?",
+      "parentUuid": "4e7eab26_b9c8bb52",
       "range": {
         "startLine": 263,
         "startChar": 14,
@@ -163,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_19678f23",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T09:52:01Z",
+      "side": 1,
+      "message": "Mentioning the actual default value would be potentially bad -  if the default of $wgUpdateRowsPerJob changes, who is going to change this documentation? Also, on a system that has $wgUpdateRowsPerJob set, this default would not be 300.",
+      "parentUuid": "4e7eab26_19d9cf2c",
+      "range": {
+        "startLine": 115,
+        "startChar": 56,
+        "endLine": 115,
+        "endChar": 74
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f9e5e3d6",
         "filename": "docs/options.wiki",
         "patchSetId": 7
@@ -174,6 +294,30 @@
       "writtenOn": "2017-09-15T09:39:41Z",
       "side": 1,
       "message": "Same as above. This does not really explain what effect this setting haves.",
+      "range": {
+        "startLine": 116,
+        "startChar": 63,
+        "endLine": 116,
+        "endChar": 81
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_79a1f335",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T09:52:01Z",
+      "side": 1,
+      "message": "Batch size means: higher value means fewer jobs but longer run-time per job. Do I really have to say that? What else can I say?",
+      "parentUuid": "4e7eab26_f9e5e3d6",
       "range": {
         "startLine": 116,
         "startChar": 63,
