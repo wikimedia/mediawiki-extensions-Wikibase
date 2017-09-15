@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_391feb71",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T10:09:40Z",
+      "side": 1,
+      "message": "I think \"normalized\" is not the same as \"resource\" (URI expansion). See the ISBN example below.",
+      "parentUuid": "4e7eab26_2ddc8d1a",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_0dd9912c",
         "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_792ed3a1",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T10:09:40Z",
+      "side": 1,
+      "message": "I\u0027m not convinced. The normalized value of an identifier is not the same as its URI expansion. E.g. ISBNs have a normalized form and a URN, they are not the same.",
+      "parentUuid": "4e7eab26_0dd9912c",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_8dcd8164",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 11
@@ -47,6 +83,30 @@
       "writtenOn": "2017-09-14T18:50:51Z",
       "side": 1,
       "message": "I\u0027d prefer something like \"wdtn\" to rhyme with psn, etc.",
+      "range": {
+        "startLine": 32,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_d915874e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-15T10:09:40Z",
+      "side": 1,
+      "message": "That causes confusion, because some of the \"natural\" prefixes are already taken. Keeping *rc and *n separate fixes that.",
+      "parentUuid": "4e7eab26_8dcd8164",
       "range": {
         "startLine": 32,
         "startChar": 43,
