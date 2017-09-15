@@ -72,9 +72,9 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @param string $text
 	 * @param int $id
 	 *
-	 * @return Title|PHPUnit_Framework_MockObject_MockObject
+	 * @return Title
 	 */
-	private function getTitleMock( $text, $id = 23 ) {
+	private function getTitleMock( $text, $id ) {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -108,31 +108,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( '' ) );
 
 		return $title;
-	}
-
-	/**
-	 * @param int $id
-	 *
-	 * @return PHPUnit_Framework_MockObject_MockObject|EntityChange
-	 */
-	private function getEntityChangeMock( $id = 77 ) {
-		$change = $this->getMockBuilder( EntityChange::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$change->expects( $this->any() )
-			->method( 'getId' )
-			->will( $this->returnValue( $id ) );
-
-		$change->expects( $this->any() )
-			->method( 'getFields' )
-			->will( $this->returnValue( [ 'id' => $id, 'info' => [] ] ) );
-
-		$change->expects( $this->any() )
-			->method( 'getSerializedInfo' )
-			->will( $this->returnValue( '{}' ) );
-
-		return $change;
 	}
 
 	/**
@@ -276,8 +251,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$titleBar = $this->getTitleMock( 'Bar', 22 );
 		$titleCuzz = $this->getTitleMock( 'Cuzz', 23 );
 
-		$change = $this->getEntityChangeMock();
-
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
 		$pages = [];
@@ -311,7 +284,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$updater->injectRCRecords(
 			[ $titleFoo, $titleBar, $titleCuzz, ],
-			$change,
+			new EntityChange(),
 			[ 'rootJobTimestamp' => '20202211060708', 'rootJobSignature' => 'Kittens!', ]
 		);
 
