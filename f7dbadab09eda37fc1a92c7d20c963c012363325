@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_ce7b7c23",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-15T18:27:22Z",
+      "side": 1,
+      "message": "Would like to know more about this, I didn\u0027t know ISBNs have separate normalized form. Could you explain about that? Maybe in the phabricator so it\u0027s easier to find.",
+      "parentUuid": "4e7eab26_792ed3a1",
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_8dcd8164",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 11
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "That causes confusion, because some of the \"natural\" prefixes are already taken. Keeping *rc and *n separate fixes that.",
       "parentUuid": "4e7eab26_8dcd8164",
+      "range": {
+        "startLine": 32,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "f7dbadab09eda37fc1a92c7d20c963c012363325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6e7a8821",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-15T18:27:22Z",
+      "side": 1,
+      "message": "I don\u0027t like \"resource\" prefixes as it is specific to one data type, and with name like \"resource\" it\u0027s not even very clear what exactly it is, and I don\u0027t want to have 4 prefixes per data type - it\u0027s really too much. I\u0027d like something more generic, that works for other data types too if possible. Maybe we should have IRC meeting or something to discuss it?",
+      "parentUuid": "4e7eab26_d915874e",
       "range": {
         "startLine": 32,
         "startChar": 43,
