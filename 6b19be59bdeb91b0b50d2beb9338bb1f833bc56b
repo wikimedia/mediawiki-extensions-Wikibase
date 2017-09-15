@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_791fb3ba",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "It looks like this will change the default from 50 to 300 (not sure if the 300 I found is used in production).",
+      "range": {
+        "startLine": 105,
+        "startChar": 25,
+        "endLine": 105,
+        "endChar": 41
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_992a9fd6",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "Why did the default changed from 50 to 100?\n\nThe two \"100\" here are never used, except in tests (maybe?). I suggest to either set the two defaults to 300, which is what UpdateRowsPerJob defaults to. Or set it to something super-small like 10 for test-scenarios.",
+      "range": {
+        "startLine": 44,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 35
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_594d17df",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary because $titles is already properly type hinted.",
+      "range": {
+        "startLine": 191,
+        "startChar": 5,
+        "endLine": 191,
+        "endChar": 22
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_39192bdc",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "I find this a bit awkward because it doesn\u0027t do anything special (there is no way to skip an element or something like that). This manual counting can be replaced with a straightforward count( $titles ). Please do that.",
+      "range": {
+        "startLine": 199,
+        "startChar": 3,
+        "endLine": 199,
+        "endChar": 7
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b9c8bb52",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "\"Job[] $jobs\" also works, if you like.",
+      "range": {
+        "startLine": 263,
+        "startChar": 14,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_19d9cf2c",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "This does not really describe what effect this setting haves. Can you please add a sentence that tries to explain under which circumstances this setting needs to be touched? And does it make sense to mention the actual default value?",
+      "range": {
+        "startLine": 115,
+        "startChar": 56,
+        "endLine": 115,
+        "endChar": 74
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b9c19b36",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "of",
+      "range": {
+        "startLine": 115,
+        "startChar": 29,
+        "endLine": 115,
+        "endChar": 30
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f9e5e3d6",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-15T09:39:41Z",
+      "side": 1,
+      "message": "Same as above. This does not really explain what effect this setting haves.",
+      "range": {
+        "startLine": 116,
+        "startChar": 63,
+        "endLine": 116,
+        "endChar": 81
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
