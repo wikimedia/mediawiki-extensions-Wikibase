@@ -3,7 +3,8 @@
 		"authors": [
 			"Sindhu",
 			"Mehtab ahmed",
-			"Aursani"
+			"Aursani",
+			"Indus Asia"
 		]
 	},
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
@@ -16,7 +17,7 @@
 	"wikibase-linkitem-close": "بند ڪري صفحي کي تازو ڪريو",
 	"wikibase-linkitem-title": "صفحي سان ڳنڍيو",
 	"wikibase-linkitem-linkpage": "صفحي سان ڳنڍيو",
-	"wikibase-linkitem-selectlink": "ھن صفحي کي توھان جنھن سائيٽ ۽ صفحي سان ڳنڍڻ چاھيو ٿا، مھرباني ان کي چونڊيو.",
+	"wikibase-linkitem-selectlink": "ھن صفحي کي توھان جنھن سائيٽ ۽ صفحي سان ڳنڍڻ چاھيو ٿا، مھرباني ڪري ان کي چونڊيو.",
 	"wikibase-linkitem-confirmitem-button": "پڪ ڪريو",
 	"wikibase-linkitem-success-link": "صفحا ڳنڍيا ويا آھن. توھان انھن ڳنڍڻ تي مشتمل آئٽم اسان جي [$1 مرڪزي ڊيٽا ذخيري] ۾ ڏسي سگھو ٿا.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -24,7 +25,7 @@
 	"wikibase-rc-hide-wikidata-show": "ڏيکاريو",
 	"wikibase-rc-wikibase-edit-letter": "ڊ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ترميم",
-	"wikibase-replicationnote": "براءِ مھرباني اھو يادر رھي تہ سڀني وڪين تي تبديليون نظر اچڻ ۾ چند منٽن جو وقت لڳي سگھي ٿو.",
+	"wikibase-replicationnote": "مھرباني ڪري اھو ياد رھي تہ سڀني وڪين تي تبديليون نظر اچڻ ۾ ڪجهه منٽن جو وقت لڳي سگھي ٿو.",
 	"wikibase-unconnectedpages-submit": "صفحا ڏيکاريو",
 	"wikibase-otherprojects": "ٻين رٿائن ۾"
 }
