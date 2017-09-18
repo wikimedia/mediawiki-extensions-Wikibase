@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_fcdb8722",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T09:52:54Z",
+      "side": 1,
+      "message": "\u003e If there is no [unit test], then one should be added in this patch. Refactoring untested code is very dangerous, so it shouldn\u0027t be done […]\n\nI believe we talked about this multiple times before, and I continue to disagree with such absolute statements. It\u0027s like saying \"every human should be good\". Yea. Sure. How could anyone disagree with this? Nobody can. Such a sentence is meaningless. It\u0027s a fantasy, disconnected from reality.\n\nBy saying this you are blaming the guy who wants to make a situation better. It must be allowed to do clean ups in small steps. If we accept uncovered code (and to make this clear: I believe we must accept uncovered code for a multitude of different reasons), we also must accept refactorings of uncovered code.\n\nWhat you did here is downvoting my patch not because of the code *I* wrote, but because the code I want to improve was not good enough.",
+      "parentUuid": "4e7eab26_8bfa46b5",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f94ac383",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 1
@@ -143,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_bc889f24",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T09:52:54Z",
+      "side": 1,
+      "message": "This does not make much of a difference. I suggested this style because I believe it does have a few minor benefits:\n* Instead of describing the individual elements only, this describes the entire array. Sure, this is more philosophical than anything. It only makes a difference if $jobs is not an array but a Traversable.\n* With this the $job variable name becomes an implementation detail of the loop, and can be changed without the need to change the documentation the same time.",
+      "parentUuid": "4e7eab26_f94ac383",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_99629f05",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -154,6 +190,24 @@
       "writtenOn": "2017-09-15T09:56:46Z",
       "side": 1,
       "message": "Who is going to update the 300 if it changes?",
+      "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1ca3f3a9",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T09:52:54Z",
+      "side": 1,
+      "message": "Everybody can. It\u0027s an open source project, you know? ;-) But seriously: I believe the benefit of mentioning the actual default value here is much higher than the issue this little duplication introduces.",
+      "parentUuid": "4e7eab26_99629f05",
       "revId": "a3137f1063a5788a2d66b251907c67ba661a9a57",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
