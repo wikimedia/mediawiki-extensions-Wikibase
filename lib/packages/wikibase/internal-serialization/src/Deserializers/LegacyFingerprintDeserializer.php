@@ -37,8 +37,7 @@ class LegacyFingerprintDeserializer implements Deserializer {
 				$this->getDescriptions( $serialization ),
 				$this->getAliases( $serialization )
 			);
-		}
-		catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException(
 				'Could not deserialize fingerprint: ' . $ex->getMessage(),
 				$ex

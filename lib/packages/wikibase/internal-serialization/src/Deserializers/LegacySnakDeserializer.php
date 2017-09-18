@@ -76,8 +76,7 @@ class LegacySnakDeserializer implements Deserializer {
 
 		if ( $serialization[0] === 'value' ) {
 			$this->assertIsValueSnak( $serialization );
-		}
-		else {
+		} else {
 			$this->assertIsNonValueSnak( $serialization );
 		}
 

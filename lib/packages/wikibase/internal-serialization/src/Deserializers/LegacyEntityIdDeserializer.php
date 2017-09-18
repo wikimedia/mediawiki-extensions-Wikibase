@@ -34,11 +34,9 @@ class LegacyEntityIdDeserializer implements Deserializer {
 	public function deserialize( $serialization ) {
 		if ( is_string( $serialization ) ) {
 			return $this->getParsedId( $serialization );
-		}
-		elseif ( $this->isLegacyFormat( $serialization ) ) {
+		} elseif ( $this->isLegacyFormat( $serialization ) ) {
 			return $this->getIdFromLegacyFormat( $serialization );
-		}
-		else {
+		} else {
 			throw new DeserializationException( 'Entity id format not recognized' );
 		}
 	}
@@ -51,8 +49,7 @@ class LegacyEntityIdDeserializer implements Deserializer {
 	private function getParsedId( $serialization ) {
 		try {
 			return $this->idParser->parse( $serialization );
-		}
-		catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException $ex ) {
 			throw new DeserializationException( $ex->getMessage(), $ex );
 		}
 	}
@@ -60,8 +57,7 @@ class LegacyEntityIdDeserializer implements Deserializer {
 	private function getIdFromLegacyFormat( array $serialization ) {
 		try {
 			return LegacyIdInterpreter::newIdFromTypeAndNumber( $serialization[0], $serialization[1] );
-		}
-		catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException( $ex->getMessage(), $ex );
 		}
 	}

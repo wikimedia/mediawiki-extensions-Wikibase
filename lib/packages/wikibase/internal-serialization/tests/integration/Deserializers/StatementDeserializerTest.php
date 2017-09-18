@@ -31,7 +31,8 @@ class StatementDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $currentSerializer;
 
 	protected function setUp() {
-		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()->newStatementDeserializer();
+		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()
+			->newStatementDeserializer();
 		$this->currentSerializer = TestFactoryBuilder::newSerializerFactory()->newStatementSerializer();
 	}
 

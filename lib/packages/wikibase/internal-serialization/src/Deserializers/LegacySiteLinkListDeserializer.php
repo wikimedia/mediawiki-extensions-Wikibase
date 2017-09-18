@@ -90,8 +90,7 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 	private function newSiteLinkFromSerialization( $siteId, $siteLinkData ) {
 		try {
 			return $this->tryNewSiteLinkFromSerialization( $siteId, $siteLinkData );
-		}
-		catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException( $ex->getMessage(), $ex );
 		}
 	}
@@ -106,8 +105,7 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		if ( is_array( $siteLinkData ) ) {
 			$pageName = $siteLinkData['name'];
 			$badges = $this->getDeserializedBadges( $siteLinkData['badges'] );
-		}
-		else {
+		} else {
 			$pageName = $siteLinkData;
 			$badges = array();
 		}

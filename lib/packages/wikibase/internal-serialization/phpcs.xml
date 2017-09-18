@@ -1,15 +1,13 @@
 <?xml version="1.0"?>
 <ruleset name="WikibaseInternalSerialization">
-	<rule ref="vendor/wikibase/wikibase-codesniffer/Wikibase">
+	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase">
 		<exclude name="Generic.Arrays.DisallowLongArraySyntax" />
-		<exclude name="MediaWiki.ControlStructures.IfElseStructure" />
-		<exclude name="Squiz.ControlStructures.ControlSignature" />
 	</rule>
 
 	<rule ref="Generic.CodeAnalysis" />
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<property name="lineLimit" value="117" />
+			<property name="lineLimit" value="114" />
 		</properties>
 	</rule>
 

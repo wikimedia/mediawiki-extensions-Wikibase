@@ -10,7 +10,7 @@
     </rule>
     <rule ref="rulesets/codesize.xml/TooManyMethods">
         <properties>
-            <property name="maxmethods" value="20" />
+            <property name="maxmethods" value="11" />
         </properties>
     </rule>
 
@@ -22,7 +22,7 @@
     </rule>
     <rule ref="rulesets/design.xml/CouplingBetweenObjects">
         <properties>
-            <property name="minimum" value="14" />
+            <property name="minimum" value="13" />
         </properties>
     </rule>
 
