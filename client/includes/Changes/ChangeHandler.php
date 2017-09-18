@@ -6,12 +6,11 @@ use Exception;
 use Hooks;
 use InvalidArgumentException;
 use LinkBatch;
-use MWException;
 use SiteLookup;
 use Title;
-use Traversable;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\EntityChange;
 
 /**
@@ -139,21 +138,16 @@ class ChangeHandler {
 	 * @return string a signature based on the hash of the given titles
 	 */
 	private function getTitleBatchSignature( array $titles ) {
-		usort( $titles, function ( Title $a, Title $b ) {
-			return $a->getArticleID() - $b->getArticleID();
-		} );
+		$pages = [];
 
-		return 'title-batch:' . sha1(
-			join(
-				"\n",
-				array_map(
-					function( Title $title ) {
-						return $title->getPrefixedDBkey();
-					},
-					$titles
-				)
-			)
-		);
+		/** @see WikiPageUpdater::getPageParamForRefreshLinksJob */
+		foreach ( $titles as $title ) {
+			$id = $title->getArticleID();
+			$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
+		}
+
+		ksort( $pages );
+		return 'title-batch:' . sha1( json_encode( $pages ) );
 	}
 
 	/**
@@ -180,7 +174,7 @@ class ChangeHandler {
 	}
 
 	/**
-	 * @param Traversable $usagesPerPage A sequence of PageEntityUsages objects
+	 * @param PageEntityUsages[] $usagesPerPage
 	 *
 	 * @return Title[]
 	 */

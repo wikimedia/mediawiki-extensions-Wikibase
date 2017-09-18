@@ -91,6 +91,10 @@ class WikiPageUpdater implements PageUpdater {
 		$this->dbBatchSize = $dbBatchSize;
 	}
 
+	/**
+	 * @param string $updateType
+	 * @param int $delta
+	 */
 	private function incrementStats( $updateType, $delta ) {
 		if ( $this->stats ) {
 			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
@@ -98,27 +102,37 @@ class WikiPageUpdater implements PageUpdater {
 	}
 
 	/**
-	 * @param array $params
+	 * @param Title[] $titles
 	 * @param array $rootJobParams
+	 *
 	 * @return array
 	 */
-	private function addRootJobParameters( array $params, array $rootJobParams ) {
-		// See JobQueueChangeNotificationSender::getJobSpecification for relevant root job parameters.
+	private function buildJobParams( array $titles, array $rootJobParams ) {
+		$pages = $this->getPageParamForRefreshLinksJob( $titles );
 
+		/**
+		 * @see JobQueueChangeNotificationSender::getJobSpecification for relevant root job
+		 * parameters.
+		 */
 		if ( isset( $rootJobParams['rootJobSignature'] ) ) {
-			$params['rootJobSignature'] = $rootJobParams['rootJobSignature'];
+			$signature = $rootJobParams['rootJobSignature'];
 		} else {
-			ksort( $params ); // apply canonical ordering before hashing
-			$params['rootJobSignature'] = 'params:' . sha1( json_encode( $params ) );
+			// Apply canonical ordering before hashing
+			ksort( $pages );
+			$signature = 'params:' . sha1( json_encode( $pages ) );
 		}
 
 		if ( isset( $rootJobParams['rootJobTimestamp'] ) ) {
-			$params['rootJobTimestamp'] = $rootJobParams['rootJobTimestamp'];
+			$timestamp = $rootJobParams['rootJobTimestamp'];
 		} else {
-			$params['rootJobTimestamp'] = wfTimestampNow();
+			$timestamp = wfTimestampNow();
 		}
 
-		return $params;
+		return [
+			'pages' => $pages,
+			'rootJobSignature' => $signature,
+			'rootJobTimestamp' => $timestamp,
+		];
 	}
 
 	/**
@@ -134,19 +148,16 @@ class WikiPageUpdater implements PageUpdater {
 
 		$jobs = [];
 		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
+		$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling HTMLCacheUpdateJob for "
 				. count( $batch ) . " titles" );
 
-			$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
-
 			$jobs[] = new HTMLCacheUpdateJob(
 				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
-				$this->addRootJobParameters( [
-					'pages' => $this->getPageParamForRefreshLinksJob( $batch )
-				], $rootJobParams )
+				$this->buildJobParams( $batch, $rootJobParams )
 			);
 		}
 
@@ -168,19 +179,16 @@ class WikiPageUpdater implements PageUpdater {
 
 		$jobs = [];
 		$titleBatches = array_chunk( $titles, $this->dbBatchSize );
+		$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling refresh links for "
 				. count( $batch ) . " titles" );
 
-			$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
-
 			$jobs[] = new RefreshLinksJob(
 				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
-				$this->addRootJobParameters( [
-					'pages' => $this->getPageParamForRefreshLinksJob( $batch ),
-				], $rootJobParams )
+				$this->buildJobParams( $batch, $rootJobParams )
 			);
 		}
 
@@ -197,12 +205,10 @@ class WikiPageUpdater implements PageUpdater {
 	private function getPageParamForRefreshLinksJob( array $titles ) {
 		$pages = [];
 
-		foreach ( $titles as $t ) {
-			$id = $t->getArticleID();
-			$pages[$id] = [
-				$t->getNamespace(),
-				$t->getDBkey()
-			];
+		/** @see ChangeHandler::getTitleBatchSignature */
+		foreach ( $titles as $title ) {
+			$id = $title->getArticleID();
+			$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
 		}
 
 		return $pages;
