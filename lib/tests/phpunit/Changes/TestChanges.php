@@ -52,18 +52,15 @@ final class TestChanges {
 		$changeFactory = self::getEntityChangeFactory();
 
 		if ( empty( $changes ) ) {
-			$empty = Property::newFromType( 'string' );
-			$empty->setId( 100 );
+			$empty = new Property( new PropertyId( 'P100' ), null, 'string' );
 
 			$changes['property-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
-			$old = Property::newFromType( 'string' );
-			$old->setId( 100 );
+			$old = new Property( new PropertyId( 'P100' ), null, 'string' );
 
-			$new = Property::newFromType( 'string' );
-			$new->setId( 100 );
+			$new = new Property( new PropertyId( 'P100' ), null, 'string' );
 			$new->setLabel( "de", "dummy" );
 			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 

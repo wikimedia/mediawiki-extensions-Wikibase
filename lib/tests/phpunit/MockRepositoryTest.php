@@ -300,8 +300,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$three->setLabel( 'de', 'drei' );
 		$three->setDescription( 'en', 'the third' );
 
-		$prop = Property::newFromType( 'string' );
-		$prop->setId( 4 );
+		$prop = new Property( new PropertyId( 'P4' ), null, 'string' );
 		$prop->setLabel( 'en', 'property!' );
 
 		$this->repo->putEntity( $one, 1001 );
