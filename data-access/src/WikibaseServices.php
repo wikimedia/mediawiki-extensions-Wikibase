@@ -59,6 +59,13 @@ interface WikibaseServices {
 	public function getCompactEntitySerializer();
 
 	/**
+	 * Returns the entity serializer that generates serialization that is used in the storage layer.
+	 *
+	 * @return Serializer
+	 */
+	public function getStorageEntitySerializer();
+
+	/**
 	 * Returns a service that can be registered as a watcher to changes to entity data.
 	 * Such watcher gets notified when entity is updated or deleted, or when the entity
 	 * redirect is updated.
