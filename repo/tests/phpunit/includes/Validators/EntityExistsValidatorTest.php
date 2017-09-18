@@ -30,8 +30,7 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	private function getEntityLookup() {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
-		$p8 = Property::newFromType( 'string' );
-		$p8->setId( 8 );
+		$p8 = new Property( new PropertyId( 'P8' ), null, 'string' );
 
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $q8 );
