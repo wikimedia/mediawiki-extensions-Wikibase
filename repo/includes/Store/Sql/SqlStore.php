@@ -19,6 +19,8 @@ use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
+use Wikibase\Lib\Store\HierarchicalEntityRevisionLookup;
+use Wikibase\Lib\Store\HierarchicalEntityStore;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionCache;
@@ -413,7 +415,8 @@ class SqlStore implements Store {
 
 		$store = new WikiPageEntityStore( $contentFactory, $idGenerator, $this->entityIdComposer );
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
-		return $store;
+
+		return new HierarchicalEntityStore( $store, $this->getEntityRevisionLookup() );
 	}
 
 	/**
@@ -461,6 +464,8 @@ class SqlStore implements Store {
 
 		$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
 		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
+
+		$nonCachingLookup = new HierarchicalEntityRevisionLookup( $nonCachingLookup );
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
