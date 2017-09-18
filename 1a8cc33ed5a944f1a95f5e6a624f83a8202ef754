@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_8a3c758f",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T15:15:34Z",
+      "side": 1,
+      "message": "This is reusing a variable. Having this code split into two methods would be better, but can be done in later refactorings.",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 16
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_aa829151",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T15:15:34Z",
+      "side": 1,
+      "message": "This relies on the internal knowledge that newlines arte forbidden in titles. I would like to avoid this. Can we use json_encode on an array of title strings instead?\n\nThat would also be more consistent to what WikiPageUpdater does.",
+      "range": {
+        "startLine": 147,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 8
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_ff6939f6",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T15:15:34Z",
+      "side": 1,
+      "message": "In the code below this array is guaranteed to have one element only. Which makes this call dead code.\n\nInstead you might want to give a guarantee about the order the pages in the $params array, which is not given at the moment.\n\nI will upload a follow up and propose a refactoring for this.",
+      "range": {
+        "startLine": 111,
+        "startChar": 3,
+        "endLine": 111,
+        "endChar": 8
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_bf4ad182",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T15:15:34Z",
+      "side": 1,
+      "message": "If the original $params array already contains a timestamp, that timestamp will be silently overridden below, but interfere with this hash calculation here. Not a problem at the moment, just a potential source of errors in future refactorings.\n\nMy refactoring will avoid this, too.",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 75
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_4a80cdf9",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T15:15:34Z",
+      "side": 1,
+      "message": "This is technically encoding a private implementation detail, namely the hash calculation. The problem with this is that I have to touch these two example hashes every time I change something in the hash calculation. Protecting against such changes is not the job of this test (in my opinion).",
+      "range": {
+        "startLine": 525,
+        "startChar": 21,
+        "endLine": 526,
+        "endChar": 58
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
