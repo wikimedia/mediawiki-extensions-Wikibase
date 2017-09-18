@@ -20,22 +20,25 @@ interface PageUpdater {
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
+	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.
 	 */
-	public function purgeWebCache( array $titles );
+	public function purgeWebCache( array $titles, array $rootJobParams = [] );
 
 	/**
 	 * Schedules RefreshLinks jobs for the given titles
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
+	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.
 	 */
-	public function scheduleRefreshLinks( array $titles );
+	public function scheduleRefreshLinks( array $titles, array $rootJobParams = [] );
 
 	/**
 	 * Injects an RC entry into the recentchanges, using the the given title and attribs
 	 *
 	 * @param Title[] $titles
 	 * @param EntityChange $change
+	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.
 	 */
-	public function injectRCRecords( array $titles, EntityChange $change );
+	public function injectRCRecords( array $titles, EntityChange $change, array $rootJobParams = [] );
 
 }
