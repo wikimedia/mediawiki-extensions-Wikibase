@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_05687683",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-18T15:56:12Z",
+      "side": 1,
+      "message": "*shrug*",
+      "parentUuid": "4e7eab26_8a3c758f",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 16
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_aa829151",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-18T15:15:34Z",
       "side": 1,
       "message": "This relies on the internal knowledge that newlines arte forbidden in titles. I would like to avoid this. Can we use json_encode on an array of title strings instead?\n\nThat would also be more consistent to what WikiPageUpdater does.",
+      "range": {
+        "startLine": 147,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 8
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_a50de2ec",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-18T15:56:12Z",
+      "side": 1,
+      "message": "We have no guarantee that the output of json_encode stays stable across versions. Relying on newlines being forbidden in titles is probably more robust. We are dealing with code that uses Title objects. It\u0027s reasonable to assume this code has knowledge about the constraints of titles.\n\nIn any case - this hash is used to detect redundant jobs being scheduled over a matter of minutes (sometimes hours or even days). False positives due to ambiguities of the the title encoding are very unlikely, and would not be catastrophic.\n\nIn the end, I don\u0027t care much. I just don\u0027t see a reason to change this.",
+      "parentUuid": "4e7eab26_aa829151",
       "range": {
         "startLine": 147,
         "startChar": 3,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_45d2fe2d",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-18T15:56:12Z",
+      "side": 1,
+      "message": "The fact that $params currently only has one parameter is really a coincidence, and was not the case in earlier iterations of this patch. This code should not rely on that assumption.",
+      "parentUuid": "4e7eab26_ff6939f6",
+      "range": {
+        "startLine": 111,
+        "startChar": 3,
+        "endLine": 111,
+        "endChar": 8
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_bf4ad182",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_a5888224",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-18T15:56:12Z",
+      "side": 1,
+      "message": "The assumption is that $params does not contain any rootJob* keys yet.\n\nThe idea is really to not include the root job params in the hash. They are magic meta params, not \"real\" params.",
+      "parentUuid": "4e7eab26_bf4ad182",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 75
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_4a80cdf9",
         "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
         "patchSetId": 8
@@ -105,6 +201,30 @@
       "writtenOn": "2017-09-18T15:15:34Z",
       "side": 1,
       "message": "This is technically encoding a private implementation detail, namely the hash calculation. The problem with this is that I have to touch these two example hashes every time I change something in the hash calculation. Protecting against such changes is not the job of this test (in my opinion).",
+      "range": {
+        "startLine": 525,
+        "startChar": 21,
+        "endLine": 526,
+        "endChar": 58
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_459f5e55",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-18T15:56:12Z",
+      "side": 1,
+      "message": "True, but mocking the hash function seemed more pain.",
+      "parentUuid": "4e7eab26_4a80cdf9",
       "range": {
         "startLine": 525,
         "startChar": 21,
