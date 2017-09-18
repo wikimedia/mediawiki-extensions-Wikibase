@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_bc3f3f81",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T08:58:38Z",
+      "side": 1,
+      "message": "The implication of this is that the order of the elements in the $expectedStats array does matter. But this is not visible or documented anywhere.\n\nCould have been avoided like this:\n\n$this-\u003egetStatsdDataFactoryMock( [\n    [ \u0027WebCache.jobs\u0027, 2 ],\n    [ \u0027WebCache.titles\u0027, 3 ],\n] )\n\nBut this is not that much of a problem. Just a suggestion.",
+      "range": {
+        "startLine": 157,
+        "startChar": 27,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "7d4007dbbcf4aaa963d2eb0a0d7b6d99c2fc7928",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
