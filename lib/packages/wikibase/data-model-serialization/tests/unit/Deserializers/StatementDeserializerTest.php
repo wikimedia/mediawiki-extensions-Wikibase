@@ -21,8 +21,8 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$snakDeserializerMock = $this->getMock( Deserializer::class );
-		$snakDeserializerMock->expects( $this->any() )
+		$snakDeserializer = $this->getMock( Deserializer::class );
+		$snakDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
 					'snaktype' => 'novalue',
@@ -30,8 +30,8 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			] ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
 
-		$snaksDeserializerMock = $this->getMock( Deserializer::class );
-		$snaksDeserializerMock->expects( $this->any() )
+		$snakListDeserializer = $this->getMock( Deserializer::class );
+		$snakListDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
 				'P42' => [
@@ -45,13 +45,17 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 				new PropertyNoValueSnak( 42 )
 			] ) ) );
 
-		$referencesDeserializerMock = $this->getMock( Deserializer::class );
-		$referencesDeserializerMock->expects( $this->any() )
+		$referenceListDeserializer = $this->getMock( Deserializer::class );
+		$referenceListDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [] ) )
 			->will( $this->returnValue( new ReferenceList() ) );
 
-		return new StatementDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
+		return new StatementDeserializer(
+			$snakDeserializer,
+			$snakListDeserializer,
+			$referenceListDeserializer
+		);
 	}
 
 	public function deserializableProvider() {
@@ -353,7 +357,10 @@ class StatementDeserializerTest extends DispatchableDeserializerTest {
 			'type' => 'claim'
 		];
 
-		$this->assertEquals( $statement->getHash(), $statementDeserializer->deserialize( $serialization )->getHash() );
+		$this->assertSame(
+			$statement->getHash(),
+			$statementDeserializer->deserialize( $serialization )->getHash()
+		);
 	}
 
 	public function testQualifiersOrderDeserializationWithTypeError() {

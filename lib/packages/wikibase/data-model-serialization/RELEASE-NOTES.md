@@ -1,5 +1,9 @@
 # Wikibase DataModel Serialization release notes
 
+## 2.6.0 (2017-09-18)
+
+* Added compatibility with DataValues Number 0.9
+
 ## 2.5.0 (2017-08-30)
 
 * Removed MediaWiki integration files
@@ -7,8 +11,8 @@
 * Deprecated `SerializerFactory` options
   `OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH`,
   `OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH` and
-  `OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH`,
-  and added `OPTION_SERIALIZE_SNAKS_WITHOUT_HASH` instead
+  `OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH`.
+* Added `SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH`.
 
 ## 2.4.0 (2017-03-16)
 
