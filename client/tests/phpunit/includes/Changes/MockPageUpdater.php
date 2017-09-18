@@ -17,12 +17,18 @@ use Wikibase\EntityChange;
  */
 class MockPageUpdater implements PageUpdater {
 
+	/**
+	 * @var array[] Collections of affected objects as provided to the individual methods
+	 */
 	private $updates = [
 		'purgeWebCache' => [],
 		'scheduleRefreshLinks' => [],
 		'injectRCRecord' => [],
 	];
 
+	/**
+	 * @var array[] Collections of root job parameters as provided to the individual methods
+	 */
 	private $rootJobParams = [
 		'purgeWebCache' => [],
 		'scheduleRefreshLinks' => [],
@@ -69,10 +75,16 @@ class MockPageUpdater implements PageUpdater {
 		$this->rootJobParams['injectRCRecord'] += $rootJobParams;
 	}
 
+	/**
+	 * @return array[]
+	 */
 	public function getUpdates() {
 		return $this->updates;
 	}
 
+	/**
+	 * @return array[]
+	 */
 	public function getRootJobParams() {
 		return $this->rootJobParams;
 	}

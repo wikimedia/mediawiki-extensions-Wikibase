@@ -86,6 +86,11 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 		);
 	}
 
+	/**
+	 * @param Change[] $changes
+	 *
+	 * @return JobSpecification
+	 */
 	private function getJobSpecification( array $changes ) {
 		$changeIds = array_map(
 			function ( Change $change ) {
@@ -98,9 +103,11 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 			'repo' => $this->repoDB,
 			'changeIds' => $changeIds,
 
-			// Set root job parameters for deduplication.
-			// Compare WikiPageUpdater::addRootJobParameters
-			// and InjectRCRecordsJob::makeJobSpecification.
+			/**
+			 * Set root job parameters for deduplication. Compare
+			 * @see WikiPageUpdater::buildJobParams and
+			 * @see InjectRCRecordsJob::makeJobSpecification.
+			 */
 			'rootJobTimestamp' => wfTimestampNow(),
 		];
 
