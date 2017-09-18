@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5c6e5b94",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T08:58:38Z",
+      "side": 1,
+      "message": "I find this code arbitrarily over-engineered, partly because of the 1-letter variable name that does not tell me anything. Why are the elements of an array counted like this? You just explained it and I\u0027m thankful for that. But:\n* The code does not explain itself.\n* You made the code more complex for a hypothetical future scenario that might or might not happen. There is a good chance what you did here will do the exact oposit of what you intended. YAGNI.",
+      "parentUuid": "4e7eab26_19b8ef73",
+      "range": {
+        "startLine": 199,
+        "startChar": 3,
+        "endLine": 199,
+        "endChar": 7
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_b9c8bb52",
         "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
         "patchSetId": 7
@@ -283,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_dc000bb8",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T08:58:38Z",
+      "side": 1,
+      "message": "Fine. What I care more about is an explanation of what \"UpdateHtmlCacheJob\" is, what it does, and why a user should care fiddling with this setting.",
+      "parentUuid": "4e7eab26_19678f23",
+      "range": {
+        "startLine": 115,
+        "startChar": 56,
+        "endLine": 115,
+        "endChar": 74
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_f9e5e3d6",
         "filename": "docs/options.wiki",
         "patchSetId": 7
@@ -318,6 +366,30 @@
       "side": 1,
       "message": "Batch size means: higher value means fewer jobs but longer run-time per job. Do I really have to say that? What else can I say?",
       "parentUuid": "4e7eab26_f9e5e3d6",
+      "range": {
+        "startLine": 116,
+        "startChar": 63,
+        "endLine": 116,
+        "endChar": 81
+      },
+      "revId": "6b19be59bdeb91b0b50d2beb9338bb1f833bc56b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_1c68d383",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-18T08:58:38Z",
+      "side": 1,
+      "message": "That addition sounds incredibly helpful. What I also meant is: What is this \"InjectRCRecordsJob\" thing? What does it do? Why should a user care fiddling with this setting?",
+      "parentUuid": "4e7eab26_79a1f335",
       "range": {
         "startLine": 116,
         "startChar": 63,
