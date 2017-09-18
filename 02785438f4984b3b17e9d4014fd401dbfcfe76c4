@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_c5210e9f",
+        "filename": "data-access/tests/phpunit/GenericServicesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-18T15:33:58Z",
+      "side": 1,
+      "message": "I don\u0027t think it is useful to have a test like that in this case.\n\nI know that there are some services for which it is important to always have the same instance and having a test for those would make perfect sense for me, but I guess serializer is no one of those. It should be the same only because \"we always do it that way\" as far as I am concerned.\n\nSo I next time I would suggest to skip writing this test.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 2
+      },
+      "revId": "02785438f4984b3b17e9d4014fd401dbfcfe76c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
