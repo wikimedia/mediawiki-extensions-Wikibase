@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e7b3738_dfa4cbb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-19T11:08:22Z",
+      "side": 1,
+      "message": "typo, also first line should not be bigger than 100 chars.",
+      "range": {
+        "startLine": 7,
+        "startChar": 101,
+        "endLine": 7,
+        "endChar": 103
+      },
+      "revId": "02785438f4984b3b17e9d4014fd401dbfcfe76c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_c5210e9f",
         "filename": "data-access/tests/phpunit/GenericServicesTest.php",
         "patchSetId": 3
