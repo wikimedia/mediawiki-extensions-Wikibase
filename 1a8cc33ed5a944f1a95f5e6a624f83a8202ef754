@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_a521b24d",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-19T15:54:02Z",
+      "side": 1,
+      "message": "The problem is more that the join() in this code can potentially create the same hashes for different lists of titles.\n\nWhat you said about a potentially instable JSON encoding does not have this problem. It that case it would create *different* hashes for identical input. This is much less of a problem.",
+      "parentUuid": "4e7eab26_a50de2ec",
+      "range": {
+        "startLine": 147,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 8
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_ff6939f6",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 8
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_651c2a19",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-19T15:54:02Z",
+      "side": 1,
+      "message": "Thats not really what I was talking about. See my follow up patch where I solved all this.",
+      "parentUuid": "4e7eab26_45d2fe2d",
+      "range": {
+        "startLine": 111,
+        "startChar": 3,
+        "endLine": 111,
+        "endChar": 8
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_bf4ad182",
         "filename": "client/includes/Changes/WikiPageUpdater.php",
         "patchSetId": 8
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "The assumption is that $params does not contain any rootJob* keys yet.\n\nThe idea is really to not include the root job params in the hash. They are magic meta params, not \"real\" params.",
       "parentUuid": "4e7eab26_bf4ad182",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 75
+      },
+      "revId": "1a8cc33ed5a944f1a95f5e6a624f83a8202ef754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_e5d6da2b",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-19T15:54:02Z",
+      "side": 1,
+      "message": "That\u0027s all fine. The problem with this code is that it is a little fragile when people start to refactor it without knowing what you just explained. Again, my refactoring avoids all this.",
+      "parentUuid": "4e7eab26_a5888224",
       "range": {
         "startLine": 112,
         "startChar": 45,
