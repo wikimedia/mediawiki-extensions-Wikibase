@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel\Serializers;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\SiteLink;
@@ -119,8 +120,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 			],
 		];
 
-		$entity = new Item();
-		$entity->setId( 42 );
+		$entity = new Item( new ItemId( 'Q42' ) );
 		$provider[] = [
 			[
 				'type' => 'item',
