@@ -25,7 +25,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return SerializerFactory
 	 */
-	private function getSerializerFactroy( $entityType ) {
+	private function getSerializerFactory( $entityType ) {
 		$serializerFactory = $this->getMockBuilder( SerializerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -42,7 +42,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return DeserializerFactory
 	 */
-	private function getDeserializerFactroy( $entityType ) {
+	private function getDeserializerFactory( $entityType ) {
 		$deserializerFactory = $this->getMockBuilder( DeserializerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -75,7 +75,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSerializerFactory( $entityType ) {
 		$registry = $this->getRegistry();
-		$serializerFactory = $this->getSerializerFactroy( $entityType );
+		$serializerFactory = $this->getSerializerFactory( $entityType );
 
 		$this->assertArrayHasKey( $entityType, $registry );
 		$this->assertArrayHasKey( 'serializer-factory-callback', $registry[$entityType] );
@@ -95,7 +95,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testDeserializerFactory( $entityType ) {
 		$registry = $this->getRegistry();
-		$deserializerFactroy = $this->getDeserializerFactroy( $entityType );
+		$deserializerFactory = $this->getDeserializerFactory( $entityType );
 
 		$this->assertArrayHasKey( $entityType, $registry );
 		$this->assertArrayHasKey( 'deserializer-factory-callback', $registry[$entityType] );
@@ -106,7 +106,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertInstanceOf(
 			Deserializer::class,
-			call_user_func( $callback, $deserializerFactroy )
+			call_user_func( $callback, $deserializerFactory )
 		);
 	}
 
