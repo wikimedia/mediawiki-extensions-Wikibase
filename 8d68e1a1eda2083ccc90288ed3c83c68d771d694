@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_edc23c06",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-09-19T23:28:32Z",
+      "side": 1,
+      "message": "perhaps extract_wb_property, and below split_wb_statements? I\u0027m sure this is fine for now, but i worry that since any extension can change this at will there is potential for overlapped/conflicting names",
+      "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_adcc3439",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-09-19T23:28:32Z",
+      "side": 1,
+      "message": "This class seems an exact duplicate of ItemFieldDefinitions, also edited in this patch to have the exact same changes. Do we need both? Not familiar with wikibase enough to say.",
+      "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_ade3d49b",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-09-19T23:28:32Z",
+      "side": 1,
+      "message": "$this-\u003edefinitions is never set",
+      "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
