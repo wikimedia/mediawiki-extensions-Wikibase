@@ -7,7 +7,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'path' => __FILE__,
 	'name' => 'Wikibase View',
-	'version' => WIKIBASE_VIEW_VERSION,
 	'author' => [
 		'[http://www.snater.com H. Snater]',
 	],
