@@ -232,7 +232,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			'known error code' => [
 				'$status' => $status,
 				'$code' => 'errorreporter-test-ugh',
-				'$extradata' => null,
 				'$infoPattern' => '/sitelink/',
 				'$expectedData' => [
 					'messages/0/name' => 'wikibase-api-errorreporter-test-ugh',
@@ -248,7 +247,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			'extradata' => [
 				'$status' => $status,
 				'$code' => 'errorreporter-test-ugh',
-				'$extradata' => [ 'fruit' => 'Banana' ],
 				'$infoPattern' => null,
 				'$expectedData' => [
 					'fruit' => 'Banana',
@@ -263,7 +261,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	public function testDieStatus(
 		Status $status,
 		$code,
-		array $extradata = null,
 		$infoPattern,
 		array $expectedDataFields
 	) {
@@ -272,7 +269,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
-			$reporter->dieStatus( $status, $code, 0, $extradata );
+			$reporter->dieStatus( $status, $code );
 			$this->fail( 'ApiUsageException was not thrown!' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertUsageException( $infoPattern, $code, 0, $expectedDataFields, $ex );

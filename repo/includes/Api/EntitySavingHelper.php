@@ -416,26 +416,17 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *
 	 * @param Status $status The status to report
 	 * @param string  $errorCode The API error code to use in case $status->isOK() returns false
-	 * @param array   $extradata Additional data to include the the error report,
-	 *                if $status->isOK() returns false
-	 * @param int     $httpRespCode the HTTP response code to use in case
-	 *                $status->isOK() returns false.+
 	 *
 	 * @throws ApiUsageException If $status->isOK() returns false.
 	 */
-	private function handleStatus(
-		Status $status,
-		$errorCode,
-		array $extradata = [],
-		$httpRespCode = 0
-	) {
+	private function handleStatus( Status $status, $errorCode ) {
 		if ( $status->isGood() ) {
 			return;
 		} elseif ( $status->isOK() ) {
 			$this->errorReporter->reportStatusWarnings( $status );
 		} else {
 			$this->errorReporter->reportStatusWarnings( $status );
-			$this->errorReporter->dieStatus( $status, $errorCode, $httpRespCode, $extradata );
+			$this->errorReporter->dieStatus( $status, $errorCode );
 		}
 	}
 
