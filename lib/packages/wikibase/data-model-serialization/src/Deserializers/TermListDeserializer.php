@@ -66,7 +66,7 @@ class TermListDeserializer implements Deserializer {
 		array $serialization,
 		$requestedLanguage
 	) {
-		if ( $serialization['language'] !== $requestedLanguage ) {
+		if ( strcmp( $serialization['language'], $requestedLanguage ) !== 0 ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'
 					. ' that is not matching the language key (requested) is not supported: '

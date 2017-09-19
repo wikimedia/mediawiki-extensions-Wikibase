@@ -89,6 +89,10 @@ class TermListDeserializerTest extends PHPUnit_Framework_TestCase {
 					'de' => [ 'language' => 'de', 'value' => 'Delama' ],
 				],
 			],
+			'Matching numeric keys' => [
+				new TermList( [ new Term( '8', 'Eight' ) ] ),
+				[ '8' => [ 'language' => '8', 'value' => 'Eight' ] ],
+			],
 		];
 	}
 

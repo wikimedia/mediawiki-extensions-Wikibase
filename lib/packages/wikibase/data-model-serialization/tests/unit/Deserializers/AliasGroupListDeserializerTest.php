@@ -87,6 +87,10 @@ class AliasGroupListDeserializerTest extends PHPUnit_Framework_TestCase {
 					[ 'language' => 'en', 'value' => 'B' ],
 				] ],
 			],
+			'Matching numeric keys' => [
+				new AliasGroupList( [ new AliasGroup( '8', [ 'Eight' ] ) ] ),
+				[ '8' => [ [ 'language' => '8', 'value' => 'Eight' ] ] ],
+			],
 		];
 	}
 
