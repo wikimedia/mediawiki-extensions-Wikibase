@@ -571,6 +571,7 @@ abstract class EntityContent extends AbstractContent {
 
 		if ( $this->isRedirect() ) {
 			$entityAfterPatch = $this->makeEmptyEntity();
+			$entityAfterPatch->setId( $this->getEntityId() );
 		} else {
 			$entityAfterPatch = $this->getEntity()->copy();
 		}

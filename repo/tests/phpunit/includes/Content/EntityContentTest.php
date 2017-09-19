@@ -362,6 +362,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		if ( $expected !== null ) {
 			$this->assertTrue( $expected->equals( $actual ), 'equals()' );
+			// Warning, the equals above does not compare the IDs of non-redirects!
+			$this->assertEquals( $expected->getEntityId(), $actual->getEntityId() );
 		}
 	}
 
