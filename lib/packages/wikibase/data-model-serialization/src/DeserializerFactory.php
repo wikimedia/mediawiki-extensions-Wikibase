@@ -71,7 +71,7 @@ class DeserializerFactory {
 	 *
 	 * @since 2.1
 	 *
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	public function newItemDeserializer() {
 		return new ItemDeserializer(
@@ -88,7 +88,7 @@ class DeserializerFactory {
 	 *
 	 * @since 2.1
 	 *
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	public function newPropertyDeserializer() {
 		return new PropertyDeserializer(
