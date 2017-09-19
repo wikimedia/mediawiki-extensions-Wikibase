@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_4d59105d",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-19T23:11:38Z",
+      "side": 1,
+      "message": "Still want phpdoc here. Also, why the above is static and this one is not?",
+      "revId": "4c0fceec04dba90961d3a8ff99ade15c3cd06299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_88b3664c",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-19T23:11:38Z",
+      "side": 1,
+      "message": "PHPdoc missing for this parameter. Also, most likely, it is not needed since $normalizedPropertyValueNamespace in RdfVocabulary probably should be static as $claimToValueNormalized is.",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "4c0fceec04dba90961d3a8ff99ade15c3cd06299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
