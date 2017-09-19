@@ -43,7 +43,8 @@
 			"JadeMaveric",
 			"Beeyan",
 			"Dgstranz",
-			"Obsuser"
+			"Obsuser",
+			"Ans"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]] in the Wikidata glossary.\n\n\"Structured\" refers to \"data\", not to \"repository\".",
@@ -202,7 +203,7 @@
 	"special-itemdisambiguation": "{{doc-special|ItemDisambiguation}}\nThis special page returns all items with a given label. It provides an interface to disambiguate them. See also the Wikidata glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	"wikibase-itemdisambiguation-lookup-fieldset": "This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.",
 	"wikibase-itemdisambiguation-lookup-language": "Label for the textfield holding the language id.\n{{Identical|Language code}}",
-	"wikibase-itemdisambiguation-lookup-label": "Label for the textfield holding the language specific label. See also the Wikidata glossary for [[d:Wikidata:Glossary#label|label]].\n{{Identical|Label}}",
+	"wikibase-itemdisambiguation-lookup-label": "Label for the textfield holding the language specific label. See also the Wikidata glossary for [[d:Wikidata:Glossary#Label|Label]].\n{{Identical|Label}}",
 	"wikibase-itemdisambiguation-submit": "Text for the submit button in the search form.\n{{Identical|Search}}",
 	"wikibase-itemdisambiguation-form-hints": "Informative text shown in the query form of Special:ItemDisambiguation, below the input fields.\n\nParameters:\n* $1 - the maximum number of results show.",
 	"wikibase-itemdisambiguation-nothing-found": "Response if the search failed because no such items have been found.",

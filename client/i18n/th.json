@@ -44,6 +44,11 @@
 	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไข {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id": "หมายเลขสารสนเทศใน {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-usage": "รายการ {{WBREPONAME}} ที่ใช้ในหน้านี้",
+	"wikibase-pageinfo-entity-usage-S": "การเชื่อมโยงข้ามไซต์",
+	"wikibase-pageinfo-entity-usage-L": "ป้ายชื่อ: $1",
+	"wikibase-pageinfo-entity-usage-T": "ชื่อเรื่อง",
+	"wikibase-pageinfo-entity-usage-X": "ข้อมูลทั้งหมด",
+	"wikibase-pageinfo-entity-usage-O": "อื่นๆ (Statements)",
 	"wikibase-otherprojects": "ในโครงการอื่น",
 	"echo-category-title-wikibase-action": "มี{{PLURAL:$1|การเชื่อมโยง}}เข้ากับ {{WBREPONAME}}"
 }
