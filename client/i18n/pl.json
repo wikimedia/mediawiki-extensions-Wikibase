@@ -86,7 +86,7 @@
 	"wikibase-watchlist-show-changes-pref": "Pokazuj edycje w Wikidanych na liście obserwowanych",
 	"wikibase-error-deserialize-error": "Nieudana serializacja danych.",
 	"wikibase-error-serialize-error": "Nieudana serializacja danych.",
-	"wikibase-error-invalid-entity-id": "Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.",
+	"wikibase-error-invalid-entity-id": "Identyfikator „$2” jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.",
 	"wikibase-error-exceeded-entity-access-limit": "Za dużo wywołań elementów z Wikidanych.",
 	"unconnectedpages": "Strony niepowiązane z elementami",
 	"unconnectedpages-summary": "Ta strona wymienia strony, które nie są powiązane z elementem z danymi (z przestrzeni nazw obsługujących powiązania z elementami). Ta lista jest sortowana malejąco według ID strony, więc nowsze strony są na początku.",

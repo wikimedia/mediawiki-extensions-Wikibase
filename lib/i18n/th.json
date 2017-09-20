@@ -1,8 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Horus"
+			"Horus",
+			"Ans"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "วิกิพีเดีย"
+	"wikibase-timedetails-isotime": "วัน-เวลา",
+	"wikibase-timedetails-timezone": "เขตเวลา",
+	"wikibase-timedetails-calendar": "ปฏิทิน",
+	"wikibase-timedetails-precision": "ระดับความแม่นยำ",
+	"wikibase-sitelinks-wikipedia": "วิกิพีเดีย",
+	"wikibase-snakview-snaktypeselector-somevalue": "ไม่ทราบ",
+	"wikibase-snakview-snaktypeselector-novalue": "ค่าว่าง",
+	"datatypes-type-wikibase-property": "คุณลักษณะ",
+	"wikibase-entity-summary-wbcreateclaim-create": "สร้างการกล่าวอ้าง",
+	"wikibase-entity-summary-wbremoveclaims-remove": "ลบ{{PLURAL:$1|การกล่าวอ้าง}}",
+	"wikibase-entity-summary-wbsetclaim-update": "เปลี่ยน{{PLURAL:$3|การกล่าวอ้าง}}"
 }

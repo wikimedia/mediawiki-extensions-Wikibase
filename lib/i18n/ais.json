@@ -51,6 +51,7 @@
 	"wikibase-time-precision-millennium": "$1 malebut a mihca",
 	"wikibase-time-precision-century": "$1. lasubu a mihca",
 	"wikibase-time-precision-10annum": "$1 kasamihca",
+	"wikibase-time-precision-BCE-Mannum": "$1 cacay lasubu a mang BCE",
 	"wikibase-time-precision-BCE-millennium": "ayaw nu Yis mihca $1 malebut a mihca",
 	"wikibase-time-precision-BCE-century": "ayaw nu Yis mihca $1 lasubu a mihca",
 	"wikibase-entity-summary-wbsetitem": "patizeng tuway baluhay kasacacay",
