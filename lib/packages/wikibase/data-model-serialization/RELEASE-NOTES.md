@@ -1,5 +1,10 @@
 # Wikibase DataModel Serialization release notes
 
+## 2.7.0 (dev)
+
+* Improved documentation of `SerializerFactory::newEntitySerializer` as well as
+  `DeserializerFactory::newEntityDeserializer`.
+
 ## 2.6.0 (2017-09-18)
 
 * Added compatibility with DataValues Number 0.9

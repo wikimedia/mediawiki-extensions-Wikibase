@@ -54,9 +54,10 @@ class DeserializerFactory {
 	}
 
 	/**
-	 * Returns a Deserializer that can deserialize Item and Property objects.
-	 *
-	 * @return DispatchableDeserializer
+	 * @return DispatchableDeserializer A deserializer that can only deserialize Item and Property
+	 *  objects, but no other entity types. In contexts with custom entity types other than items
+	 *  and properties this is not what you want. If in doubt, favor a custom
+	 *  `DispatchingDeserializer` containing the exact entity deserializers you need.
 	 */
 	public function newEntityDeserializer() {
 		return new DispatchingDeserializer( [
