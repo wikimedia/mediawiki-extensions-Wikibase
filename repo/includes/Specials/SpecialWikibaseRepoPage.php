@@ -14,7 +14,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -166,7 +166,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @note Call prepareEditEntity() first.
 	 *
 	 * @param EntityDocument $entity
-	 * @param Summary $summary
+	 * @param FormatableSummary $summary
 	 * @param string $token
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
@@ -174,7 +174,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 */
 	protected function saveEntity(
 		EntityDocument $entity,
-		Summary $summary,
+		FormatableSummary $summary,
 		$token,
 		$flags = EDIT_UPDATE
 	) {

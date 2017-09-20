@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -78,7 +78,7 @@ abstract class UpdateRepoJob extends Job {
 	/**
 	 * Get a Summary object for the edit
 	 *
-	 * @return Summary
+	 * @return FormatableSummary
 	 */
 	abstract public function getSummary();
 

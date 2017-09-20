@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\Lib\FormatableSummary;
+
 /**
  * A Summary object can be used to build complex, translatable summaries.
  *
@@ -10,7 +12,7 @@ namespace Wikibase;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class Summary {
+class Summary implements FormatableSummary {
 
 	/**
 	 * @var string|null
@@ -38,7 +40,7 @@ class Summary {
 	private $summaryArgs;
 
 	/**
-	 * @var string
+	 * @var string|null The user-provided edit summary, or null if none was given.
 	 */
 	private $userSummary;
 
@@ -64,9 +66,7 @@ class Summary {
 	}
 
 	/**
-	 * Set the user provided edit summary
-	 *
-	 * @param string|null $summary edit summary provided by the user
+	 * @param string|null $summary The user-provided edit summary, or null if none was given.
 	 */
 	public function setUserSummary( $summary = null ) {
 		$this->userSummary = $summary === null ? null : (string)$summary;
