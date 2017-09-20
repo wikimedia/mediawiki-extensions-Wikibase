@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_e03ebed6",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-20T16:15:06Z",
+      "side": 1,
+      "message": "makes sense.",
+      "parentUuid": "2e7b3738_edc23c06",
+      "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_adcc3439",
         "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_2035a6f3",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-20T16:15:06Z",
+      "side": 1,
+      "message": "Property doesn\u0027t have sitelinks. So I think we need both.",
+      "parentUuid": "2e7b3738_adcc3439",
+      "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_ade3d49b",
         "filename": "repo/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php",
         "patchSetId": 11
@@ -47,6 +83,24 @@
       "writtenOn": "2017-09-19T23:28:32Z",
       "side": 1,
       "message": "$this-\u003edefinitions is never set",
+      "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_403a32e6",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-20T16:15:06Z",
+      "side": 1,
+      "message": "oops, you are right, good catch! Certainly should be!",
+      "parentUuid": "2e7b3738_ade3d49b",
       "revId": "8d68e1a1eda2083ccc90288ed3c83c68d771d694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
