@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -264,7 +265,7 @@ class ItemMergeInteractor {
 		return [ $fromRev, $toRev ];
 	}
 
-	private function saveItem( Item $item, Summary $summary, $bot ) {
+	private function saveItem( Item $item, FormatableSummary $summary, $bot ) {
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
