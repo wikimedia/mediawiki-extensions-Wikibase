@@ -90,11 +90,11 @@ class SummaryFormatter {
 	 * and the second one is always the language code supplied via setLanguage()
 	 * (or the constructor).
 	 *
-	 * @param Summary $summary
+	 * @param SummaryDescription $summary
 	 *
 	 * @return string with a formatted comment, or possibly an empty string
 	 */
-	public function formatAutoComment( Summary $summary ) {
+	public function formatAutoComment( SummaryDescription $summary ) {
 		$composite = $summary->getMessageKey();
 		$summaryArgCount = count( $summary->getAutoSummaryArgs() );
 
@@ -117,12 +117,12 @@ class SummaryFormatter {
 	/**
 	 * Formats the auto summary part of a full summary.
 	 *
-	 * @param Summary $summary
+	 * @param SummaryDescription $summary
 	 *
 	 * @throws MWException
 	 * @return string The auto summary arguments comma-separated
 	 */
-	public function formatAutoSummary( Summary $summary ) {
+	public function formatAutoSummary( SummaryDescription $summary ) {
 		$summaryArgs = $summary->getAutoSummaryArgs();
 		$parts = $this->formatArgList( $summaryArgs );
 
@@ -265,11 +265,11 @@ class SummaryFormatter {
 	/**
 	 * Format the given summary
 	 *
-	 * @param Summary $summary
+	 * @param SummaryDescription $summary
 	 *
 	 * @return string to be used for the summary
 	 */
-	public function formatSummary( Summary $summary ) {
+	public function formatSummary( SummaryDescription $summary ) {
 		$userSummary = $summary->getUserSummary();
 
 		return $this->assembleSummaryString(

@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
+use Wikibase\SummaryDescription;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -219,12 +220,12 @@ class RedirectCreationInteractor {
 
 	/**
 	 * @param EntityRedirect $redirect
-	 * @param Summary $summary
+	 * @param SummaryDescription $summary
 	 * @param bool $bot Whether the edit should be marked as bot
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function saveRedirect( EntityRedirect $redirect, Summary $summary, $bot ) {
+	private function saveRedirect( EntityRedirect $redirect, SummaryDescription $summary, $bot ) {
 		$summary = $this->summaryFormatter->formatSummary( $summary );
 		$flags = 0;
 		if ( $bot ) {

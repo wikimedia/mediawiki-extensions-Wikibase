@@ -10,7 +10,7 @@ namespace Wikibase;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class Summary {
+class Summary implements SummaryDescription {
 
 	/**
 	 * @var string|null
