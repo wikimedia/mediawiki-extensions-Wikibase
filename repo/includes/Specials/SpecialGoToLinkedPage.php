@@ -89,7 +89,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			explode( ',', $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) )
 		);
 		$itemString = $this->stringNormalizer->trimToNFC(
-			$request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 )
+			$request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : '' )
 		);
 
 		return [ $sites, $itemString ];
