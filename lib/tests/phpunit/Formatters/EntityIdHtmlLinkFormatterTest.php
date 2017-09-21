@@ -57,16 +57,18 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 	/**
 	 * @param bool $exists
+	 * @param bool $isRedirect
 	 *
 	 * @return EntityTitleLookup
 	 */
-	private function newEntityTitleLookup( $exists = true ) {
+	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
 		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists ) {
+			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists, $isRedirect ) {
 				$title = Title::newFromText( $id->getSerialization() );
 				$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
+				$title->mRedirect = $isRedirect;
 
 				return $title;
 			} )
@@ -256,6 +258,19 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 		$this->assertRegExp( '|"http://foo.wiki/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'foo:Q42' ) ) );
 		$this->assertRegExp( '|"/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'Q42' ) ) );
+	}
+
+	public function testFormat_redirectHasClass() {
+		$entityTitleLookup = $this->newEntityTitleLookup( true, true );
+		$formatter = new EntityIdHtmlLinkFormatter(
+			$this->getLabelDescriptionLookup(),
+			$entityTitleLookup,
+			$this->getMock( LanguageNameLookup::class )
+		);
+		$this->assertContains(
+			' class="mw-redirect"',
+			$formatter->formatEntityId( new ItemId( 'Q42' ) )
+		);
 	}
 
 }
