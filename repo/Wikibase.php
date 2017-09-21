@@ -91,6 +91,7 @@ call_user_func( function() {
 	$wgExtensionCredits['wikibase'][] = [
 		'path' => __DIR__,
 		'name' => 'Wikibase Repository',
+		'version' => WB_VERSION,
 		'author' => [
 			'The Wikidata team',
 		],
@@ -686,6 +687,42 @@ call_user_func( function() {
 				$apiHelper->getErrorReporter( $apiQuery ),
 				$wikibaseRepo->getEntityIdParser(),
 				$mediaWikiServices->getSiteLookup()
+			);
+		}
+	];
+
+	$wgAPIModules['wbcopyclaim'] = [
+		'class' => Wikibase\Repo\Api\CopyClaim::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+			$modificationHelper = new Wikibase\Repo\Api\StatementModificationHelper(
+				$wikibaseRepo->getSnakFactory(),
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getStatementGuidValidator(),
+				$apiHelperFactory->getErrorReporter( $mainModule )
+			);
+
+			return new Wikibase\Repo\Api\CopyClaim(
+				$mainModule,
+				$moduleName,
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$modificationHelper,
+				$wikibaseRepo->getStatementGuidValidator(),
+				$wikibaseRepo->getStatementGuidParser(),
+				$wikibaseRepo->getEntityIdParser(),
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getResultBuilder( $module );
+				},
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getEntitySavingHelper( $module );
+				},
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getEntityLoadingHelper( $module );
+				}
 			);
 		}
 	];
