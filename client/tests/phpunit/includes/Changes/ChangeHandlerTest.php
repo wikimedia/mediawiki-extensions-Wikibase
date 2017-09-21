@@ -522,7 +522,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			101 => new PageEntityUsages( 101, [ new EntityUsage( $q100, 'X' ) ] ),
 		];
 
-		$titleBatchHash = '0f89093daf80eabc67b8369a6ca88d58f2abcc80';
+		$titleBatchHash = 'f0b873699a63c858667e54cd071f7d9209faeda1';
 		$strangeHash = '97c72edc416a2b659492401306e31c2dd8ffcc49';
 
 		$regularRootJobParams = [
