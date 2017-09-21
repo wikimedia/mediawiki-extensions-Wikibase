@@ -136,8 +136,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $newStatements as $newStatement ) {
 			$summary = $claimSummaryBuilder->buildClaimSummary( null, $newStatement );
 			$this->assertInstanceOf( Summary::class, $summary, 'this should return a Summary object' );
-			$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
-			$this->assertEquals( 'create', $summary->getActionName() );
+			$this->assertEquals( 'wbsetclaim-create', $summary->getMessageKey() );
 		}
 	}
 
@@ -156,8 +155,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$summary = $claimSummaryBuilder->buildClaimSummary( $originalStatement, $modifiedStatement );
 		$this->assertInstanceOf( Summary::class, $summary, 'this should return a Summary object' );
-		$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
-		$this->assertEquals( $action, $summary->getActionName() );
+		$this->assertEquals( 'wbsetclaim-' . $action, $summary->getMessageKey() );
 	}
 
 }

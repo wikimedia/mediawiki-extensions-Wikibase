@@ -30,14 +30,14 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary = new Summary( 'summarytest' );
 		$summary->setLanguage( "xyz" );
 
-		$this->assertEquals( 'xyz', $summary->getLanguageCode() );
+		$this->assertSame( 'xyz', $summary->getLanguageCode() );
 	}
 
 	public function testSetUserSummary() {
 		$summary = new Summary( 'summarytest' );
 		$summary->setUserSummary( "xyz" );
 
-		$this->assertEquals( 'xyz', $summary->getUserSummary() );
+		$this->assertSame( 'xyz', $summary->getUserSummary() );
 	}
 
 	public function testAddAutoSummaryArgs() {
@@ -54,23 +54,18 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary = new Summary( 'summarytest' );
 
 		$summary->setAction( "testing" );
-		$this->assertEquals( "testing", $summary->getActionName() );
+		$this->assertSame( 'summarytest-testing', $summary->getMessageKey() );
 
 		$summary->setAction( "besting" );
-		$this->assertEquals( "besting", $summary->getActionName() );
-
-		$this->assertEquals( "summarytest-besting", $summary->getMessageKey() );
+		$this->assertSame( 'summarytest-besting', $summary->getMessageKey() );
 	}
 
 	public function testGetMessageKey() {
 		$summary = new Summary( 'summarytest' );
-		$this->assertEquals( "summarytest", $summary->getMessageKey() );
+		$this->assertSame( 'summarytest', $summary->getMessageKey() );
 
 		$summary->setAction( "testing" );
-		$this->assertEquals( "summarytest-testing", $summary->getMessageKey() );
-
-		$summary->setModuleName( "" );
-		$this->assertEquals( "testing", $summary->getMessageKey() );
+		$this->assertSame( 'summarytest-testing', $summary->getMessageKey() );
 	}
 
 }
