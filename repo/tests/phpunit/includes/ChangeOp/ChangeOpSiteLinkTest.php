@@ -206,7 +206,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider summaryTestProvider
 	 */
 	public function testApplySummary(
-		$expectedAction,
+		$expectedMessageKey,
 		array $expectedArguments,
 		array $sitelinks,
 		ChangeOpSiteLink $changeOpSiteLink
@@ -217,10 +217,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$summary = new Summary();
 		$changeOpSiteLink->apply( $item, $summary );
 
-		$this->assertSame(
-			$expectedAction,
-			$summary->getActionName()
-		);
+		$this->assertSame( $expectedMessageKey, $summary->getMessageKey() );
 
 		$this->assertEquals(
 			$expectedArguments,

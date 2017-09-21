@@ -60,14 +60,14 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 			[ 'summary' => $customSummary ],
 			$this->createCreateClaimApiModule()
 		);
-		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
+		$this->assertSame( 'wbcreateclaim', $summary->getMessageKey() );
 		$this->assertEquals( $customSummary, $summary->getUserSummary() );
 
 		$summary = $helper->createSummary(
 			[],
 			$this->createCreateClaimApiModule()
 		);
-		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
+		$this->assertSame( 'wbcreateclaim', $summary->getMessageKey() );
 		$this->assertNull( $summary->getUserSummary() );
 	}
 

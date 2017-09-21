@@ -54,10 +54,10 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary = new Summary( 'summarytest' );
 
 		$summary->setAction( "testing" );
-		$this->assertEquals( "testing", $summary->getActionName() );
+		$this->assertSame( 'testing', $summary->getMessageKey() );
 
 		$summary->setAction( "besting" );
-		$this->assertEquals( "besting", $summary->getActionName() );
+		$this->assertSame( 'besting', $summary->getMessageKey() );
 
 		$this->assertEquals( "summarytest-besting", $summary->getMessageKey() );
 	}
@@ -68,9 +68,6 @@ class SummaryTest extends \MediaWikiTestCase {
 
 		$summary->setAction( "testing" );
 		$this->assertEquals( "summarytest-testing", $summary->getMessageKey() );
-
-		$summary->setModuleName( "" );
-		$this->assertEquals( "testing", $summary->getMessageKey() );
 	}
 
 }

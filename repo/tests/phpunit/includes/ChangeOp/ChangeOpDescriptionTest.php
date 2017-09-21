@@ -145,7 +145,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp->apply( $entity, $summary );
 
-		$this->assertEquals( $summaryExpectedAction, $summary->getActionName() );
+		$this->assertSame( $summaryExpectedAction, $summary->getMessageKey() );
 		$this->assertEquals( $summaryExpectedLanguage, $summary->getLanguageCode() );
 	}
 

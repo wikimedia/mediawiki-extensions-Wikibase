@@ -82,24 +82,6 @@ class Summary implements FormatableSummary {
 	}
 
 	/**
-	 * Set the module part of the autocomment
-	 *
-	 * @param string $name
-	 */
-	public function setModuleName( $name ) {
-		$this->moduleName = (string)$name;
-	}
-
-	/**
-	 * Get the module part of the autocomment
-	 *
-	 * @return string|null
-	 */
-	public function getModuleName() {
-		return $this->moduleName;
-	}
-
-	/**
 	 * Set the action part of the autocomment
 	 *
 	 * @param string|null $name
@@ -109,18 +91,7 @@ class Summary implements FormatableSummary {
 	}
 
 	/**
-	 * Get the action part of the autocomment
-	 *
-	 * @return string|null
-	 */
-	public function getActionName() {
-		return $this->actionName;
-	}
-
-	/**
-	 * Get the user-provided edit summary
-	 *
-	 * @return string|null
+	 * @return string|null The user-provided edit summary, or null if none was given.
 	 */
 	public function getUserSummary() {
 		return $this->userSummary;
