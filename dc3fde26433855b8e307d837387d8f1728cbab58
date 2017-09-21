@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_5c91b251",
+        "filename": "lib/includes/SummaryDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-21T15:06:37Z",
+      "side": 1,
+      "message": "doc telling what this is would be nice.",
+      "revId": "dc3fde26433855b8e307d837387d8f1728cbab58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_9ca63aa6",
+        "filename": "lib/includes/SummaryDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-21T15:06:37Z",
+      "side": 1,
+      "message": "Indentation looks awry here",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "dc3fde26433855b8e307d837387d8f1728cbab58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_fc389e3c",
+        "filename": "lib/includes/SummaryDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-21T15:06:37Z",
+      "side": 1,
+      "message": "Should probably rather be \"string[] or …\"",
+      "range": {
+        "startLine": 51,
+        "startChar": 18,
+        "endLine": 51,
+        "endChar": 23
+      },
+      "revId": "dc3fde26433855b8e307d837387d8f1728cbab58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_1cffaa63",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-21T15:06:37Z",
+      "side": 1,
+      "message": "Formatter for SummaryDescriptions",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "dc3fde26433855b8e307d837387d8f1728cbab58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
