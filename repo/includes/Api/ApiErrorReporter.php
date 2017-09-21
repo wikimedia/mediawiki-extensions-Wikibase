@@ -114,19 +114,17 @@ class ApiErrorReporter {
 	 * @param StatusValue $status The status to report. $status->getMessage() will be used
 	 * to generate the error's free form description.
 	 * @param string $errorCode A code identifying the error.
-	 * @param int $httpRespCode Currently ignored!
-	 * @param array|null $extraData Any extra data to include in the error report
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	public function dieStatus( StatusValue $status, $errorCode, $httpRespCode = 0, $extraData = [] ) {
+	public function dieStatus( StatusValue $status, $errorCode ) {
 		if ( $status->isOK() ) {
 			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal StatusValue!' );
 		}
 
 		$error = $this->getPlainErrorMessageFromStatus( $status );
-		$msg = $this->getMessageForCode( $errorCode, $error, $extraData );
+		$msg = $this->getMessageForCode( $errorCode, $error );
 
 		$extendedStatus = StatusValue::newFatal( $msg );
 		$extendedStatus->merge( $status, true );
