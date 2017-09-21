@@ -61,6 +61,7 @@
 	"wikibase-entity-summary-wbeditentity-update": "masumaday tu ku cacay masaheciay",
 	"wikibase-entity-summary-wbeditentity-override": "malamadac tu ku cacay masaheciay",
 	"wikibase-entity-summary-wbsetreference": "misetin miazih tu tatenga’ay nasulitan",
+	"wikibase-entity-summary-wbsetreference-set": "misumad saleku a miazih tu tatenga’ay nasulitan tuway",
 	"wikibase-entity-summary-wbcreateclaim-create": "patizeng tu saleku",
 	"wikibase-entity-summary-wbmergeitems-from": "makabu kasacacay nay $3",
 	"wikibase-entity-summary-wbmergeitems-to": "makabu kasacacay ta $3",

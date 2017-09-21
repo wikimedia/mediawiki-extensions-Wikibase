@@ -10,13 +10,13 @@
 			"Aefgh39622"
 		]
 	},
-	"tooltip-t-wikibase": "ลิงก์ไปยังหน้าสารสนเทศในคลังของการเชื่อมต่อข้อมูล",
+	"tooltip-t-wikibase": "ลิงก์ไปยังสิ่งนี้ในคลังซึ่งเก็บข้อมูลที่มีการเชื่อมโยงกัน",
 	"wikibase-comment-update": "เปลี่ยนแปลงสารสนเทศใน {{WBREPONAME}} แล้ว",
 	"wikibase-comment-sitelink-add": "เพิ่มลิงก์ข้ามภาษาแล้ว: $1",
 	"wikibase-comment-sitelink-change": "เปลี่ยนลิงก์ข้ามภาษาจาก $1 เป็น $2 แล้ว",
 	"wikibase-comment-sitelink-remove": "ลบลิงก์ข้ามภาษาแล้ว: $1",
 	"wikibase-comment-multi": "$1 การเปลี่ยนแปลง",
-	"wikibase-dataitem": "สารสนเทศใน {{WBREPONAME}}",
+	"wikibase-dataitem": "สิ่งนี้ใน {{WBREPONAME}}",
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-addlinkstitle": "เพิ่มลิงก์ข้ามภาษา",
@@ -43,12 +43,13 @@
 	"wikibase-rc-wikibase-edit-title": "การแก้ไข {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไข {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id": "หมายเลขสารสนเทศใน {{WBREPONAME}}",
-	"wikibase-pageinfo-entity-usage": "รายการ {{WBREPONAME}} ที่ใช้ในหน้านี้",
+	"wikibase-pageinfo-entity-usage": "รายการสนเทศจาก {{WBREPONAME}} ที่ใช้ในหน้านี้",
 	"wikibase-pageinfo-entity-usage-S": "การเชื่อมโยงข้ามไซต์",
 	"wikibase-pageinfo-entity-usage-L": "ป้ายชื่อ: $1",
-	"wikibase-pageinfo-entity-usage-T": "ชื่อเรื่อง",
-	"wikibase-pageinfo-entity-usage-X": "ข้อมูลทั้งหมด",
-	"wikibase-pageinfo-entity-usage-O": "อื่นๆ (Statements)",
+	"wikibase-pageinfo-entity-usage-T": "รหัสชื่อหรือชื่อประจำหน้า",
+	"wikibase-pageinfo-entity-usage-C": "ประพจน์: $1",
+	"wikibase-pageinfo-entity-usage-X": "ข้อมูลทั้งหมดของสนเทศรายการนี้",
+	"wikibase-pageinfo-entity-usage-O": "อื่นๆ (ประพจน์)",
 	"wikibase-otherprojects": "ในโครงการอื่น",
 	"echo-category-title-wikibase-action": "มี{{PLURAL:$1|การเชื่อมโยง}}เข้ากับ {{WBREPONAME}}"
 }

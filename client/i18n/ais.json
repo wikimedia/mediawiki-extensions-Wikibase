@@ -8,6 +8,7 @@
 	},
 	"tooltip-t-wikibase": "masasiket tayza i papatunay a kalunasulitan pisupeday a kakitizaan tu kasacacay",
 	"wikibase-comment-update": "masumad tuway {{WBREPONAME}} kasacacay",
+	"wikibase-comment-sitelink-remove": "misipu kamu masasiket：$1",
 	"wikibase-dataitem": "{{WBREPONAME}} kasacacay",
 	"wikibase-editlinks": "mikawaway-kalumyiti misiket",
 	"wikibase-editlinkstitle": "mikawaway tu kalumyiti caliway han ku kamu misiket",
