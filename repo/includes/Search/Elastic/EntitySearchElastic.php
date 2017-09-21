@@ -90,16 +90,16 @@ class EntitySearchElastic implements EntitySearchHelper {
 	) {
 		$this->languageChainFactory = $languageChainFactory;
 		$this->idParser = $idParser;
+		$this->userLang = $userLang;
 		$this->contentModelMap = $contentModelMap;
 		$this->settings = $settings;
-		$this->userLang = $userLang;
 	}
 
 	/**
 	 * Set web request context.
 	 * @param WebRequest $request
 	 */
-	public function setRequest( WebRequest $request = null ) {
+	public function setRequest( WebRequest $request ) {
 		$this->request = $request;
 	}
 
