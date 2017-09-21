@@ -119,10 +119,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider providerFormatAutoComment
 	 */
 	public function testFormatAutoComment( $module, $action, $language, array $parts, $expected ) {
-		$summary = new Summary();
-		$summary->setModuleName( $module );
-		$summary->setAction( $action );
-		$summary->setLanguage( $language );
+		$summary = new Summary( $module, $action, $language );
 
 		if ( !empty( $parts ) ) {
 			call_user_func_array( [ $summary, 'addAutoCommentArgs' ], $parts );
