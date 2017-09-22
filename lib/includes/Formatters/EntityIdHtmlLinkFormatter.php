@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use Html;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -20,14 +21,14 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
-	 * @var LanguageFallbackIndicator
-	 */
-	private $languageFallbackIndicator;
-
-	/**
 	 * @var EntityTitleLookup
 	 */
 	protected $entityTitleLookup;
+
+	/**
+	 * @var LanguageFallbackIndicator
+	 */
+	private $languageFallbackIndicator;
 
 	public function __construct(
 		LabelDescriptionLookup $labelDescriptionLookup,
@@ -56,60 +57,48 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$term = $this->lookupEntityLabel( $entityId );
 
-		$url = $title->isLocal() ? $title->getLocalURL() : $title->getFullURL();
-		$isRedirect = $title->isLocal() && $title->isRedirect();
-
-		if ( $term ) {
-			return $this->getHtmlForTerm( $url, $term, $title->getPrefixedText(), $isRedirect );
+		// We can skip the expensive exists() check if we found a term.
+		if ( $term !== null ) {
+			$label = $term->getText();
 		} elseif ( $title->isLocal() && !$title->exists() ) {
 			return $this->getHtmlForNonExistent( $entityId );
+		} else {
+			$label = $entityId->getSerialization();
 		}
 
-		$attributes = [
-			'title' => $title->getPrefixedText(),
-			'href' => $url
-		];
-		if ( $isRedirect ) {
-			$attributes['class'] = 'mw-redirect';
-		}
+		$html = Html::element( 'a', $this->getAttributes( $title, $term ), $label );
 
-		$html = Html::element( 'a', $attributes, $entityId->getSerialization() );
+		if ( $term instanceof TermFallback ) {
+			$html .= $this->languageFallbackIndicator->getHtml( $term );
+		}
 
 		return $html;
 	}
 
 	/**
-	 * @param string $targetUrl
-	 * @param Term $term
-	 * @param string $titleText
-	 * @param bool $isRedirect
+	 * @param Title $title
+	 * @param Term|null $term
 	 *
-	 * @return string HTML
+	 * @return string[]
 	 */
-	private function getHtmlForTerm( $targetUrl, Term $term, $titleText = '', $isRedirect = false ) {
-		$fallbackIndicatorHtml = '';
-
+	private function getAttributes( Title $title, Term $term = null ) {
 		$attributes = [
-			'title' => $titleText,
-			'href' => $targetUrl
+			'title' => $title->getPrefixedText(),
+			'href' => $title->isLocal() ? $title->getLocalURL() : $title->getFullURL()
 		];
 
-		if ( $term instanceof TermFallback ) {
-			$fallbackIndicatorHtml = $this->languageFallbackIndicator->getHtml( $term );
-
-			if ( $term->getActualLanguageCode() !== $term->getLanguageCode() ) {
-				$attributes['lang'] = $term->getActualLanguageCode();
-				//TODO: mark as rtl/ltr if appropriate.
-			}
+		if ( $term instanceof TermFallback
+			&& $term->getActualLanguageCode() !== $term->getLanguageCode()
+		) {
+			$attributes['lang'] = $term->getActualLanguageCode();
+			// TODO: Mark as RTL/LTR if appropriate.
 		}
 
-		if ( $isRedirect ) {
+		if ( $title->isLocal() && $title->isRedirect() ) {
 			$attributes['class'] = 'mw-redirect';
 		}
 
-		$html = Html::element( 'a', $attributes, $term->getText() );
-
-		return $html . $fallbackIndicatorHtml;
+		return $attributes;
 	}
 
 	/**
