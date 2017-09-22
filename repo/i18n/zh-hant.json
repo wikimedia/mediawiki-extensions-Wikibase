@@ -194,6 +194,7 @@
 	"wikibase-setaliases-label": "別名：",
 	"wikibase-setaliases-submit": "設定別名",
 	"special-setlabeldescriptionaliases": "設定標籤、描述與別名",
+	"wikibase-setlabeldescriptionaliases-introfull": "您正在設定 [[$1]] 的$2標籤、描述與別名。數個別名請透過縱線字元(<code>|</code>)分隔。",
 	"wikibase-setlabeldescriptionaliases-intro": "此表格允許您設定標籤、描述與別名。你需要提供實體 ID (如 \"Q23\") 、一個語言代碼 (例如 \"zh\")。",
 	"wikibase-setlabeldescriptionaliases-label-label": "標籤：",
 	"wikibase-setlabeldescriptionaliases-description-label": "描述：",

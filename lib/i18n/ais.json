@@ -37,6 +37,7 @@
 	"wikibase-snakview-snaktypeselector-novalue": "inayi’ ku sulyang",
 	"wikibase-tooltip-error-details": "pulitaay a kalunasulitan",
 	"wikibase-validator-invalid": "la’cusay a sulyang",
+	"wikibase-validator-malformed-value": "sulit kese caay katatenga’: $1",
 	"wikibase-validator-no-such-entity": "caykatepa $1",
 	"wikibase-validator-bad-value": "kalunasulitan sulyang mungangaw: $1",
 	"wikibase-validator-bad-data-type": "mungangaway a kalunasulitan nikalahizaan: $1",
