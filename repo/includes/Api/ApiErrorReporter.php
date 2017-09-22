@@ -124,14 +124,16 @@ class ApiErrorReporter {
 		}
 
 		$error = $this->getPlainErrorMessageFromStatus( $status );
-		$msg = $this->getMessageForCode( $errorCode, $error );
+
+		$extraData = $this->convertStatusErrorsToExtraData( $status );
+
+		$msg = $this->getMessageForCode( $errorCode, $error, $extraData );
 
 		$extendedStatus = StatusValue::newFatal( $msg );
 		$extendedStatus->merge( $status, true );
 		$status = $extendedStatus;
 
-		$this->addStatusToResult( $status, $extraData );
-		$msg->setApiData( $extraData );
+		$this->addStatusToResult( $status, $_ignore );
 
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
@@ -241,7 +243,6 @@ class ApiErrorReporter {
 		$msg = $this->getMessageForCode( $errorCode, $description, $extraData );
 
 		$this->addMessageToResult( $msg, $extraData );
-		$msg->setApiData( $extraData );
 
 		$this->trackAndDieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
@@ -266,6 +267,11 @@ class ApiErrorReporter {
 			// TODO: Should we use the ApiRawMessage class instead?
 			$msg = wfMessage( [ $messageKey, 'rawmessage' ], $params );
 		}
+
+		$this->addMessageToResult( $msg, $extraData );
+
+		$thisMessage = array_pop( $extraData['messages'] );
+		array_unshift( $extraData['messages'], $thisMessage );
 
 		return ApiMessage::create( $msg, $errorCode, $extraData );
 	}
@@ -519,6 +525,20 @@ class ApiErrorReporter {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param StatusValue $status
+	 * @return array
+	 */
+	private function convertStatusErrorsToExtraData( StatusValue $status ) {
+		$errors = $status->getErrorsByType( 'error' );
+		$errorMessages = $this->convertToMessageList( $errors );
+		$extraData = [];
+		foreach ( $errorMessages as $errorMessage ) {
+			$this->addMessageToResult( $errorMessage, $extraData );
+		}
+		return $extraData;
 	}
 
 }
