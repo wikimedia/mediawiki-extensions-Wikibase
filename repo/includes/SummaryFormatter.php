@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\FormatableSummary;
 
 /**
  * Formatter for Summary objects
@@ -90,11 +91,11 @@ class SummaryFormatter {
 	 * and the second one is always the language code supplied via setLanguage()
 	 * (or the constructor).
 	 *
-	 * @param Summary $summary
+	 * @param FormatableSummary $summary
 	 *
 	 * @return string with a formatted comment, or possibly an empty string
 	 */
-	public function formatAutoComment( Summary $summary ) {
+	public function formatAutoComment( FormatableSummary $summary ) {
 		$composite = $summary->getMessageKey();
 		$summaryArgCount = count( $summary->getAutoSummaryArgs() );
 
@@ -117,12 +118,12 @@ class SummaryFormatter {
 	/**
 	 * Formats the auto summary part of a full summary.
 	 *
-	 * @param Summary $summary
+	 * @param FormatableSummary $summary
 	 *
 	 * @throws MWException
 	 * @return string The auto summary arguments comma-separated
 	 */
-	public function formatAutoSummary( Summary $summary ) {
+	public function formatAutoSummary( FormatableSummary $summary ) {
 		$summaryArgs = $summary->getAutoSummaryArgs();
 		$parts = $this->formatArgList( $summaryArgs );
 
@@ -265,11 +266,11 @@ class SummaryFormatter {
 	/**
 	 * Format the given summary
 	 *
-	 * @param Summary $summary
+	 * @param FormatableSummary $summary
 	 *
 	 * @return string to be used for the summary
 	 */
-	public function formatSummary( Summary $summary ) {
+	public function formatSummary( FormatableSummary $summary ) {
 		$userSummary = $summary->getUserSummary();
 
 		return $this->assembleSummaryString(

@@ -17,7 +17,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Summary;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -296,7 +296,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * handleStatus()).
 	 *
 	 * @param EntityDocument $entity The entity to save
-	 * @param string|Summary $summary The edit summary
+	 * @param string|FormatableSummary $summary The edit summary
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @throws LogicException if not in write mode
@@ -319,7 +319,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			);
 		}
 
-		if ( $summary instanceof Summary ) {
+		if ( $summary instanceof FormatableSummary ) {
 			$summary = $this->summaryFormatter->formatSummary( $summary );
 		}
 
