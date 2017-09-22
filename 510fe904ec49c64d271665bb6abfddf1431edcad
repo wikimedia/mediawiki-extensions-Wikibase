@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_c3eb7a08",
+        "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_all.nt",
+        "patchSetId": 17
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-22T18:32:49Z",
+      "side": 1,
+      "message": "correct, this is wrong, wdtn: is a prefix, this should contain the full URL",
+      "parentUuid": "2e7b3738_8f2d9943",
+      "revId": "510fe904ec49c64d271665bb6abfddf1431edcad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_cffc01b4",
         "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_all.nt",
         "patchSetId": 17
