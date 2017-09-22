@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_8f2d9943",
+        "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_all.nt",
+        "patchSetId": 17
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-22T09:20:05Z",
+      "side": 1,
+      "message": "The URI should contain \"direct-normalized\", not \"wdtn\", right?",
+      "revId": "510fe904ec49c64d271665bb6abfddf1431edcad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_cffc01b4",
+        "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_all.nt",
+        "patchSetId": 17
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-22T09:20:05Z",
+      "side": 1,
+      "message": "This seems like a breaking change - and not correct. The prefix is not supposed to be part of the expanded URI, is it?",
+      "revId": "510fe904ec49c64d271665bb6abfddf1431edcad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_6f286d33",
+        "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_all.nt",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-22T09:20:05Z",
+      "side": 1,
+      "message": "Same as above",
+      "revId": "510fe904ec49c64d271665bb6abfddf1431edcad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_0f1a091d",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-22T09:20:05Z",
+      "side": 1,
+      "message": "please do...",
+      "revId": "510fe904ec49c64d271665bb6abfddf1431edcad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_4fe6d114",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-22T09:20:05Z",
+      "side": 1,
+      "message": "Why do we need an extra loop here? Shouldn\u0027t getNamespaces() also include the normalized namespaces already?",
+      "revId": "510fe904ec49c64d271665bb6abfddf1431edcad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
