@@ -8,12 +8,14 @@
 	},
 	"wikibase-edit": "redaktə",
 	"wikibase-add": "əlavə et",
+	"wikibase-addreference": "mənbə əlavə et",
+	"wikibase-statementlistview-add": "dəyər əlavə et",
+	"wikibase-statementgrouplistview-add": "müddəa əlavə et",
 	"wikibase-label-empty": "Yarlıq (etiket) yoxdur",
 	"wikibase-description-empty": "İzah verilməyib",
 	"wikibase-sitelink-page-edit-placeholder": "səhifə",
-	"wikibase-statementsection-statements": "İddialar",
+	"wikibase-statementsection-statements": "Müddəalar",
 	"wikibase-sitelinks-special": "Digər saytlar",
-	"wikibase-aliases-empty": "Alternativ adlar müəyyən deyil.",
 	"wikibase-statementview-rank-normal": "Normal dərəcə",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|mənbə|mənbələr}}"
 }

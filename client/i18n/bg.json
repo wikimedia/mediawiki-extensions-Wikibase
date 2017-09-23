@@ -8,7 +8,8 @@
 			"Borislav",
 			"Vodnokon4e",
 			"Лорд Бъмбъри",
-			"Termininja"
+			"Termininja",
+			"ShockD"
 		]
 	},
 	"tooltip-t-wikibase": "Препратка към свързаният обект от хранилището за данни",
@@ -62,5 +63,6 @@
 	"wikibase-pageinfo-entity-usage-L": "етикет: $1",
 	"wikibase-pageinfo-entity-usage-T": "заглавие",
 	"wikibase-pageinfo-entity-usage-O": "други (изявления)",
-	"wikibase-otherprojects": "В други проекти"
+	"wikibase-otherprojects": "В други проекти",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Свързване|Свързвания}} с {{WBREPONAME}}"
 }
