@@ -59,7 +59,9 @@ class ChangeLineFormatter {
 
 		$line .= $this->changeSeparator();
 		$line .= $flag . ' ';
-		$line .= Linker::link( $title );
+		// @fixme: deprecated method, use \LinkRenderer
+		$link = Linker::link( $title );
+		$line .= "<span class=\"mw-title\">$link</span>";
 
 		if ( $changeType !== 'remove' ) {
 			$line .= $this->formatEntityLink( $entityId );
