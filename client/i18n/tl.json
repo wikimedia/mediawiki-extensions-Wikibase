@@ -3,7 +3,8 @@
 		"authors": [
 			"AnakngAraw",
 			"Sky Harbor",
-			"Jojit fb"
+			"Jojit fb",
+			"Ianlopez1115"
 		]
 	},
 	"wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
@@ -17,5 +18,5 @@
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Pagbabagong ginawa sa pamamagitan ng {{WBREPONAME}}",
-	"wikibase-otherprojects": "Iba pang mga proyekto"
+	"wikibase-otherprojects": "Sa iba pang mga proyekto"
 }
