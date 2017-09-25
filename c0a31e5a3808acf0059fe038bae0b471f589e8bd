@@ -180,6 +180,30 @@
       "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_4a454817",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/ExternalIdentifierRdfBuilderTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-09-25T18:03:00Z",
+      "side": 1,
+      "message": "Oh, I think the guys at acme.com won\u0027t mind ;)\n\nTheir website has this:\n\n\u003e  Note: the only affiliation between ACME Laboratories and Warner Brothers is that I\u0027ve been a fan of Wile E. Coyote for decades.",
+      "parentUuid": "2e7b3738_ea5e7416",
+      "range": {
+        "startLine": 42,
+        "startChar": 54,
+        "endLine": 42,
+        "endChar": 63
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
