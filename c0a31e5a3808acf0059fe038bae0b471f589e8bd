@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_ca75b893",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-25T17:50:13Z",
+      "side": 1,
+      "message": "Well, it\u0027s a good point, since we output it for external IDs only it\u0027s not a big issue but once we start doing it for other types it should be under condition like $isObjectProperty. The tricky part is that we can\u0027t use $isObjectProperty since for external IDs the property is data but normalized value is URL. So we\u0027d need a different one. Maybe makes sense to do it as part of general refactoring where we move such things into config?\nMy opinion though this patch is ok to go even with this issue (provided other issues are fixed of course :)",
+      "parentUuid": "2e7b3738_f6bd0017",
+      "range": {
+        "startLine": 65,
+        "startChar": 80,
+        "endLine": 65,
+        "endChar": 94
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_44ff8631",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 19
@@ -53,6 +77,30 @@
       "writtenOn": "2017-09-25T16:36:17Z",
       "side": 1,
       "message": "I think we started the whole discussion with this, but – why does this point from _VALUE to _VALUE_NORM? I think for consistency with $claimToValueNormalized, it should point from just NSP_QUALIFIER to NSP_QUALIFIER_VALUE_NORM. (After all, for external identifier properties NSP_QUALIFIER_VALUE isn’t even used.)",
+      "range": {
+        "startLine": 98,
+        "startChar": 22,
+        "endLine": 98,
+        "endChar": 27
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_8a6fb0bf",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-25T17:50:13Z",
+      "side": 1,
+      "message": "I wonder if we can\u0027t add NSP_DIRECT_CLAIM to $claimToValueNormalized and use them for both maybe? Not sure whether it\u0027s ok or not but would be nice to.",
+      "parentUuid": "2e7b3738_369b88c3",
       "range": {
         "startLine": 98,
         "startChar": 22,
@@ -99,6 +147,30 @@
       "writtenOn": "2017-09-25T16:36:17Z",
       "side": 1,
       "message": "This is a real domain… I would feel more comfortable with some example domain. IETF has kindly reserved the entire .example TLD, so we can make up as many domains as we want there :)\n\n(Same goes for www and acme below, which we could turn into www.example and acme.example.)",
+      "range": {
+        "startLine": 42,
+        "startChar": 54,
+        "endLine": 42,
+        "endChar": 63
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_ea5e7416",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/ExternalIdentifierRdfBuilderTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-25T17:50:13Z",
+      "side": 1,
+      "message": "Agree, we probably shouldn\u0027t be using real domains belonging to third parties in tests...",
+      "parentUuid": "2e7b3738_f6ebc007",
       "range": {
         "startLine": 42,
         "startChar": 54,
