@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
-			"عثمان خان شاہ"
+			"عثمان خان شاہ",
+			"Baloch Khan"
 		]
 	},
 	"tooltip-t-wikibase": "د نښلېدلي اومتوک زېرمتون توکي سره تړنه",
@@ -35,7 +36,7 @@
 	"wikibase-replicationnote": "لطفاً پام کې وساتئ چې په ټولو ويکي گانو کې ستاسې د بدلونونو په ښکاره کېدلو کې يو څو دقيقې وخت لگېږي.",
 	"unconnectedpages": "توکو سره ناتړلي مخونه",
 	"unconnectedpages-summary": "په دې مخ د هغو مخونو لړليک دی چې بل اومتوک سره لا نه دي تړل شوي (په نومتشيالونو کې چې د تړل شويو توکو ملاتړ کوي). دا لړليک د مخښکته مخ پېژند له مخې اوډل شوی چې نوي مخونه په سر کې راشي.",
-	"wikibase-unconnectedpages-submit": "ورځه",
+	"wikibase-unconnectedpages-submit": "مخونه ښکاره کول",
 	"pageswithbadges": "نښان لرونکي مخونه",
 	"wikibase-pageswithbadges-legend": "د نښان لرونکيو مخونو لړليک",
 	"wikibase-pageswithbadges-submit": "مخونه ښکاره کول",
