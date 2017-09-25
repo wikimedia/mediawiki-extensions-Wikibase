@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"David1010"
+			"David1010",
+			"BRUTE"
 		]
 	},
+	"valueview-expert-emptyvalue-empty": "ცარიელი",
+	"valueview-expert-globecoordinateinput-precision": "სიზუსტე:",
+	"valueview-expert-globecoordinateinput-nullprecision": "არ არის მითითებული",
 	"valueview-expert-timevalue-calendar-gregorian": "გრიგორიანული",
 	"valueview-expert-timevalue-calendar-julian": "იულიუსის",
 	"valueview-expert-timeinput-precision": "სიზუსტე:",
