@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_fb8f29cf",
+        "filename": "lib/includes/Store/HierarchicalEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "This can return `null` and in that case `null` should be returned instead of a revision",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 47
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_3badb12e",
+        "filename": "lib/includes/Store/HierarchicalEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "Here we also need to check if parent entity contains sub-entity, and if not, then return `false`",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 64
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_9b1b8582",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "Potential issue: if we\u0027re going to support \u0027wbeditentity\u0027 to create Lexeme with Forms, then neither LexemeId nor FormId will present at this point. \n\nThen what to do?",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 41
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_dbc82d28",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "Is it Lexeme or Form in our case?",
+      "range": {
+        "startLine": 108,
+        "startChar": 29,
+        "endLine": 108,
+        "endChar": 51
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_3b593191",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "I would say that this is already a big warning regarding treating sub-entities as entities.\n\nWe might have similar corner cases in other parts of the system as well.",
+      "range": {
+        "startLine": 148,
+        "startChar": 2,
+        "endLine": 148,
+        "endChar": 107
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_5b60bdfc",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "This implementation is incorrect because it will give result for the parent entity, but not for the sub-entity.\n\nImplementing it correctly will take some effort and might require to fetch multiple revisions from DB.",
+      "range": {
+        "startLine": 179,
+        "startChar": 2,
+        "endLine": 183,
+        "endChar": 67
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_7b3fb9d3",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "Similar to `userWasLastToEdit`: this will add parent entity to watch list but not sub-entity.\n\nMight not be critical though.",
+      "range": {
+        "startLine": 197,
+        "startChar": 2,
+        "endLine": 201,
+        "endChar": 54
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_fb33a908",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-25T16:16:32Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it always return `false`?",
+      "range": {
+        "startLine": 228,
+        "startChar": 2,
+        "endLine": 233,
+        "endChar": 3
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
