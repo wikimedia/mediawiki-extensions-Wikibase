@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_8787b0db",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-25T08:15:42Z",
+      "side": 1,
+      "message": "If we\u0027re not certain that the size of the data we\u0027ll index here is limited should we add \"ignore_above\" \u003d\u003e 512 here for extra safety?",
+      "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
