@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e7b3738_f6bd0017",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-25T16:36:17Z",
+      "side": 1,
+      "message": "I’m not at all familiar with OWL, but this doesn’t look right to me. For external identifier properties, it’s probably correct, but not for other property types. In those cases, I think we shouldn’t emit this triple yet, so that we can still declare e. g. wdtn:P2067 a owl:DatatypeProperty (mass normalized to kilograms).",
+      "range": {
+        "startLine": 65,
+        "startChar": 80,
+        "endLine": 65,
+        "endChar": 94
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_44ff8631",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 19
@@ -13,6 +36,29 @@
       "writtenOn": "2017-09-25T01:24:08Z",
       "side": 1,
       "message": "The above is static, but this one is not. Why?",
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_369b88c3",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-25T16:36:17Z",
+      "side": 1,
+      "message": "I think we started the whole discussion with this, but – why does this point from _VALUE to _VALUE_NORM? I think for consistency with $claimToValueNormalized, it should point from just NSP_QUALIFIER to NSP_QUALIFIER_VALUE_NORM. (After all, for external identifier properties NSP_QUALIFIER_VALUE isn’t even used.)",
+      "range": {
+        "startLine": 98,
+        "startChar": 22,
+        "endLine": 98,
+        "endChar": 27
+      },
       "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -35,6 +81,29 @@
         "startChar": 16,
         "endLine": 40,
         "endChar": 30
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_f6ebc007",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/ExternalIdentifierRdfBuilderTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-25T16:36:17Z",
+      "side": 1,
+      "message": "This is a real domain… I would feel more comfortable with some example domain. IETF has kindly reserved the entire .example TLD, so we can make up as many domains as we want there :)\n\n(Same goes for www and acme below, which we could turn into www.example and acme.example.)",
+      "range": {
+        "startLine": 42,
+        "startChar": 54,
+        "endLine": 42,
+        "endChar": 63
       },
       "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
