@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7b3738_44ff8631",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-25T01:24:08Z",
+      "side": 1,
+      "message": "The above is static, but this one is not. Why?",
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e7b3738_64fc023c",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-25T01:24:08Z",
+      "side": 1,
+      "message": "PHPdoc missing. Alternatively, just use the static one and remove this argument.",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
