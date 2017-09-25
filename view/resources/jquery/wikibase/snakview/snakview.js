@@ -627,7 +627,7 @@
 		updateHash: function () {
 			var hash;
 			this.element.removeClass( function ( index, className ) {
-				var matches = className.match( /\bwikibase-snakview-[0-9a-fA-F]{40}\b/g );
+				var matches = className.match( /\bwikibase-snakview-([0-9a-fA-F]{40})?(\s|$)/g );
 				return matches ? matches.join( ' ' ) : '';
 			} );
 			hash = this.snak() && this.snak().getHash();
