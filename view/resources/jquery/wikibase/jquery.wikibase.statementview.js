@@ -728,13 +728,13 @@
 						this._mainSnakSnakView.option( key, value.getClaim().getMainSnak() );
 					}
 					if ( this._qualifiers ) {
-						this._qualifiers.option( key, value.getClaim().getQualifiers() );
+						this._qualifiers.option( key, value.getClaim().getQualifiers().getGroupedSnakLists() );
 					}
 					if ( this._rankSelector ) {
 						this._rankSelector.option( key, value.getRank() );
 					}
 					if ( this._referencesListview ) {
-						this._referencesListview.option( key, value.getReferences() );
+						this._referencesListview.option( key, value.getReferences().toArray() );
 					}
 				}
 			}
