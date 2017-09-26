@@ -137,6 +137,7 @@
 			this._cachedValues = {};
 
 			this.updateVariation();
+			this.updateHash();
 
 			// Re-render on previously generated DOM should be avoided. However, when regenerating the
 			// whole snakview, every component needs to be drawn.
