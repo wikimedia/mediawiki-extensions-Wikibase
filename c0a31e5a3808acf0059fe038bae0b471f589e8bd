@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_d9ffd0a5",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-09-26T08:48:43Z",
+      "side": 1,
+      "message": "\u003e since we output it for external IDs only\n\nThis method is called for all properties. I just tried it out locally, and `wdtn:… a owl:ObjectProperty` seems to be emitted for all properties, including at least one quantity-type entity. (Similarly, we have already for a long time been declaring psn:/pqn:/prn: predicates even for non-quantity properties, where those predicates are never used.)",
+      "parentUuid": "2e7b3738_ca75b893",
+      "range": {
+        "startLine": 65,
+        "startChar": 80,
+        "endLine": 65,
+        "endChar": 94
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_44ff8631",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 19
