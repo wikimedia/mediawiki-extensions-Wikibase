@@ -57,9 +57,10 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$term = $this->lookupEntityLabel( $entityId );
 
 		$url = $title->isLocal() ? $title->getLocalURL() : $title->getFullURL();
+		$isRedirect = $title->isLocal() && $title->isRedirect();
 
 		if ( $term ) {
-			return $this->getHtmlForTerm( $url, $term, $title->getPrefixedText() );
+			return $this->getHtmlForTerm( $url, $term, $title->getPrefixedText(), $isRedirect );
 		} elseif ( $title->isLocal() && !$title->exists() ) {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
@@ -68,6 +69,9 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			'title' => $title->getPrefixedText(),
 			'href' => $url
 		];
+		if ( $isRedirect ) {
+			$attributes['class'] = 'mw-redirect';
+		}
 
 		$html = Html::element( 'a', $attributes, $entityId->getSerialization() );
 
@@ -78,10 +82,11 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @param string $targetUrl
 	 * @param Term $term
 	 * @param string $titleText
+	 * @param bool $isRedirect
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForTerm( $targetUrl, Term $term, $titleText = '' ) {
+	private function getHtmlForTerm( $targetUrl, Term $term, $titleText = '', $isRedirect = false ) {
 		$fallbackIndicatorHtml = '';
 
 		$attributes = [
@@ -96,6 +101,10 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 				$attributes['lang'] = $term->getActualLanguageCode();
 				//TODO: mark as rtl/ltr if appropriate.
 			}
+		}
+
+		if ( $isRedirect ) {
+			$attributes['class'] = 'mw-redirect';
 		}
 
 		$html = Html::element( 'a', $attributes, $term->getText() );
