@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "2e7b3738_b92d2443",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-26T08:49:51Z",
+      "side": 1,
+      "message": "What I meant we output actual data only for external IDs.",
+      "parentUuid": "2e7b3738_d9ffd0a5",
+      "range": {
+        "startLine": 65,
+        "startChar": 80,
+        "endLine": 65,
+        "endChar": 94
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_44ff8631",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 19
