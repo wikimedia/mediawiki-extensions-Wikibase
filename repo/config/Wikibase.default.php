@@ -257,8 +257,14 @@ return [
 		'rescoreProfiles' => [],
 		// Type (de)boosts for rescoring functions
 		'statementBoost' => [],
+		// List of languages that we want to have stemming analyzers
+		// 'index' means we generate stemmed field on index
+		// 'query' means we use it on query
+		// See https://phabricator.wikimedia.org/T180169 for discussion.
+		'useStemming' => [],
 	],
 
 	// List of properties to be indexed
-	'searchIndexProperties' => []
+	'searchIndexProperties' => [],
+
 ];

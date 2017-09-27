@@ -8,7 +8,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\LabelCountField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\LabelCountField
  *
  * @group WikibaseElastic
  * @group Wikibase
