@@ -141,7 +141,7 @@
                                 {
                                     "script_score": {
                                         "script": {
-                                            "inline": "pow(doc['incoming_links'].value , 2) \/ ( pow(doc['incoming_links'].value, 2) + pow(50,2))",
+                                            "inline": "pow(doc['incoming_links'].value , 1) \/ ( pow(doc['incoming_links'].value, 1) + pow(100,1))",
                                             "lang": "expression"
                                         }
                                     },
