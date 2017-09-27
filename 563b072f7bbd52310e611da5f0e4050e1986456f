@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_91a95b24",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-27T22:15:29Z",
+      "side": 1,
+      "message": "Do we need labels_all if we already have all which includes labels? It\u0027s a last-resort match anyway, we do not expect it to be competing with specialized matches. \n\nAlso, I thought descriptions would go in the same place as labels? Why put them in different place?\n\nAlso, all seems to include descriptions, so should we have description_all at all?",
+      "parentUuid": "0e6af365_8d3e25d6",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_0df8f545",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2017-09-27T08:37:57Z",
       "side": 1,
       "message": "there are no reasons to run a special degraded query here.\nThis method is here to catch-up query_string syntax errors we failed to detect on our side that failed on elastic.\nSince here we do not send any query that can potentially fail on elastic if we enter this code it means that you\u0027ve built the query with your delegate and it\u0027s wise to use the delegate again in that case.",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_71ace732",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-27T22:15:29Z",
+      "side": 1,
+      "message": "Makes sense. So then I just call delegate and be fine with it.",
+      "parentUuid": "0e6af365_0df8f545",
       "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
