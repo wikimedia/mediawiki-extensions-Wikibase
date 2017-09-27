@@ -18,6 +18,10 @@ class LabelsField extends TermIndexField {
 	 */
 	private $languages;
 
+	/**
+	 * LabelsField constructor.
+	 * @param string[] $languages
+	 */
 	public function __construct( $languages ) {
 		$this->languages = $languages;
 		parent::__construct( "", \SearchIndexField::INDEX_TYPE_NESTED );
