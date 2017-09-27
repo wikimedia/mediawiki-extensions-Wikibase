@@ -6,6 +6,7 @@ use ApiBase;
 use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
+use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use Content;
@@ -38,6 +39,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
+use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
@@ -1002,11 +1004,17 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Adds Wikibase-specific ElasticSearch analyzer configurations.
-	 *
+	 * Add Wikibase-specific ElasticSearch analyzer configurations.
 	 * @param array &$config
+	 * @param AnalysisConfigBuilder $builder
 	 */
-	public static function onCirrusSearchAnalysisConfig( &$config ) {
+	public static function onCirrusSearchAnalysisConfig( &$config, AnalysisConfigBuilder $builder ) {
+		static $inHook;
+		if ( $inHook ) {
+			// Do not call this hook repeatedly, since ConfigBuilder calls AnalysisConfigBuilder
+			return;
+		}
+
 		// Analyzer for splitting statements and extracting properties:
 		// P31:Q1234 => P31
 		$config['analyzer']['extract_wb_property'] = [
@@ -1022,6 +1030,19 @@ final class RepoHooks {
 			'type' => 'limit',
 			'max_token_count' => 1
 		];
+
+		// Language analyzers for descriptions
+		$repo = WikibaseRepo::getDefaultInstance();
+		$wbBuilder = new ConfigBuilder( $repo->getTermsLanguages()->getLanguages(),
+			$repo->getSettings()->getSetting( 'entitySearch' ),
+			$builder
+		);
+		$inHook = true;
+		try {
+			$wbBuilder->buildConfig( $config );
+		} finally {
+			$inHook = false;
+		}
 	}
 
 	/**
