@@ -11,7 +11,7 @@ use Wikibase\Repo\Search\Elastic\Fields\SiteLinkCountField;
 use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions
  *
  * @group WikibaseElastic
  * @group WikibaseRepo
