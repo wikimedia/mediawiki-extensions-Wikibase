@@ -5,7 +5,6 @@ use HtmlArmor;
 use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * Utility class to format Wikidata links for usage in hooks.
