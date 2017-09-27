@@ -13,7 +13,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions
  *
  * @group WikibaseElastic
  * @group WikibaseRepo
