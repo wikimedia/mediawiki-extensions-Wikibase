@@ -22,12 +22,6 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * Requires CirrusSearch extension and $wgEntitySearchUseCirrus to be on.
  */
 class EntitySearchElastic implements EntitySearchHelper {
-
-	/**
-	 * Default rescore profile
-	 */
-	const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
-
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
@@ -144,7 +138,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$labelsFilter = new Match( 'labels_all.prefix', $text );
 
-		$profileName = $this->request->getVal( 'cirrusWBProfile', $this->settings['defaultPrefixProfile'] );
+		$profileName = $this->request->getVal( 'cirrusWBProfile', $this->settings['prefixSearchProfile'] );
 		$profile = $this->loadProfile( $profileName );
 		if ( !$profile ) {
 			$context->setResultsPossible( false );
@@ -181,7 +175,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		}
 
 		foreach ( $fields as $field ) {
-			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $text ) );
+			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $text ) );
 		}
 
 		$labelsQuery = new BoolQuery();
@@ -198,40 +192,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query->addFilter( new Term( [ 'content_model' => $this->contentModelMap[$entityType] ] ) );
 
 		return $query;
-	}
-
-	/**
-	 * Create constant score query for a field.
-	 * @param string $field
-	 * @param string|double $boost
-	 * @param string $text
-	 * @return ConstantScore
-	 */
-	private function makeConstScoreQuery( $field, $boost, $text ) {
-		$csquery = new ConstantScore();
-		$csquery->setFilter( new Match( $field, $text ) );
-		$csquery->setBoost( $boost );
-		return $csquery;
-	}
-
-	/**
-	 * Get suitable rescore profile.
-	 * If internal config has non, return just the name and let RescoureBuilder handle it.
-	 * @return string|array
-	 */
-	private function getRescoreProfile() {
-
-		$rescoreProfile = $this->request->getVal( 'cirrusRescoreProfile' );
-		if ( !$rescoreProfile && isset( $this->settings['defaultPrefixRescoreProfile'] ) ) {
-			$rescoreProfile = $this->settings['defaultPrefixRescoreProfile'];
-		}
-		if ( !$rescoreProfile ) {
-			$rescoreProfile = self::DEFAULT_RESCORE_PROFILE;
-		}
-		if ( $this->settings['rescoreProfiles'][$rescoreProfile] ) {
-			return $this->settings['rescoreProfiles'][$rescoreProfile];
-		}
-		return $rescoreProfile;
 	}
 
 	/**
@@ -268,7 +228,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		) );
 
 		$searcher->setOptionsFromRequest( $this->request );
-		$searcher->setRescoreProfile( $this->getRescoreProfile() );
+		$searcher->setRescoreProfile( EntitySearchUtils::getRescoreProfile( $this->settings,
+			'prefixRescoreProfile' ) );
 
 		$result = $searcher->performSearch( $query );
 
