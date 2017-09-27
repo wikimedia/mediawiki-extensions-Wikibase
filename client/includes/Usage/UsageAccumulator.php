@@ -61,6 +61,16 @@ abstract class UsageAccumulator {
 	}
 
 	/**
+	 * Registers the usage of an entity's description (in the given language).
+	 *
+	 * @param EntityId $id
+	 * @param string|null $languageCode
+	 */
+	public function addDescriptionUsage( EntityId $id, $languageCode = null ) {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::DESCRIPTION_USAGE, $languageCode ) );
+	}
+
+	/**
 	 * Registers the usage of other (i.e. not label, sitelink, or title) of an
 	 * entity (e.g. access to statements or labels in labels a language other
 	 * than the content language).

@@ -27,7 +27,7 @@ class EntityUsage {
 	const SITELINK_USAGE = 'S';
 
 	/**
-	 * Usage flag indicating that the entity's label in the local content language was used.
+	 * Usage flag indicating that one of the entity's labels were used.
 	 * This would be the case when showing the label of a referenced entity. Note that
 	 * label usage is typically tracked with a modifier specifying the label's language code.
 	 */
@@ -49,6 +49,13 @@ class EntityUsage {
 	const STATEMENT_USAGE = 'C';
 
 	/**
+	 * Usage flag indicating that one of the entity's descriptions were used.
+	 * This would be the case when showing the descriptions of a referenced entity. Note that
+	 * descriptions usage is typically tracked with a modifier specifying the language code.
+	 */
+	const DESCRIPTION_USAGE = 'D';
+
+	/**
 	 * Usage flag indicating that any and all aspects of the entity
 	 * were (or may have been) used.
 	 */
@@ -59,6 +66,9 @@ class EntityUsage {
 	 * which is not covered by any other usage flag (except "all"). That is,
 	 * the specific usage flags together with the "other" flag are equivalent
 	 * to the "all" flag ( S + T + L + O = X or rather O = X - S - T - L ).
+	 *
+	 * Due to migration efforts, this is currently used redundantly with
+	 * STATEMENT_USAGE or DESCRIPTION_USAGE, as they were only added later.
 	 */
 	const OTHER_USAGE = 'O';
 
@@ -72,6 +82,7 @@ class EntityUsage {
 		self::LABEL_USAGE => null,
 		self::TITLE_USAGE => null,
 		self::STATEMENT_USAGE => null,
+		self::DESCRIPTION_USAGE => null,
 		self::OTHER_USAGE => null,
 		self::ALL_USAGE => null,
 	];
