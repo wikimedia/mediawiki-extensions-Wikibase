@@ -2,7 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use ContextSource;
 use Language;
+use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RawMessage;
 use SearchResult;
@@ -10,15 +13,20 @@ use SpecialSearch;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Hooks\LinkBeginHookHandler;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
+use Wikibase\Repo\Search\Elastic\EntityResult;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @covers Wikibase\Repo\Hooks\ShowSearchHitHandler
+ * @covers \Wikibase\Repo\Hooks\ShowSearchHitHandler
  *
  * @group Wikibase
  *
@@ -26,24 +34,259 @@ use Wikibase\Store\EntityIdLookup;
  * @author Matěj Suchánek
  */
 class ShowSearchHitHandlerTest extends MediaWikiTestCase {
+	/**
+	 * @var Item[]
+	 */
+	private $entities;
+	/**
+	 * Test cases that should be covered:
+	 * - non-Entity result
+	 * - name+description
+	 * - name missing
+	 * - description missing
+	 * - both missing
+	 * - name+description with extra data
+	 * - name + description in different language
+	 * - name + description + extra data in different language
+	 */
 
-	const NON_ENTITY_TITLE = 'foo';
-	const DE_DESCRIPTION_ITEM_ID = 'Q1';
-	const FALLBACK_DESCRIPTION_ITEM_ID = 'Q2';
-	const NO_FALLBACK_DESCRIPTION_ITEM_ID = 'Q3';
-	const EMPTY_ITEM_ID = 'Q4';
+	public function showSearchHitProvider() {
+		return [
+			'label hit' => [
+				// label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// Highlighted label
+				[ 'language' => 'en', 'value' => 'Hit !HERE! item' ],
+				// Highlighted description
+				[ 'language' => 'en', 'value' => 'Hit !HERE! description' ],
+				// extra
+				null,
+				// statements
+				1,
+				// links
+				2,
+				// test name
+				'labelHit'
+			],
+			'desc hit other language' => [
+				// label
+				[ 'language' => 'en', 'value' => 'Hit <escape me> item' ],
+				// description
+				[ 'language' => 'de', 'value' => 'Hit <here> "some" description' ],
+				// Highlighted label
+				[ 'language' => 'en', 'value' => 'Hit <escape me> item' ],
+				// Highlighted description
+				[ 'language' => 'de', 'value' => new \HtmlArmor( 'Hit <b>!HERE!</b> "some" description' ) ],
+				// extra
+				null,
+				// statements
+				1,
+				// links
+				2,
+				// test name
+				'descHit'
+			],
+			'label hit in other language' => [
+				// label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// Highlighted label
+				[ 'language' => 'de', 'value' => 'Der hit !HERE! item' ],
+				// Highlighted description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// extra
+				null,
+				// statements
+				1,
+				// links
+				2,
+				// test name
+				'labelHitDe'
+			],
+			'description from fallback' => [
+				// label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'de', 'value' => 'Beschreibung <"here">' ],
+				// Highlighted label
+				[ 'language' => 'de', 'value' => 'Der hit !HERE! item' ],
+				// Highlighted description
+				[ 'language' => 'de', 'value' => 'Beschreibung <"here">' ],
+				// extra
+				null,
+				// statements
+				3,
+				// links
+				4,
+				// test name
+				'labelHitDescDe'
+			],
+			'no label and desc' => [
+				// label
+				[ 'language' => 'en', 'value' => '' ],
+				// description
+				[ 'language' => 'de', 'value' => '' ],
+				// Highlighted label
+				[ 'language' => 'en', 'value' => '' ],
+				// Highlighted description
+				[ 'language' => 'de', 'value' => '' ],
+				// extra
+				null,
+				// statements
+				0,
+				// links
+				0,
+				// test name
+				'emptyLabel'
+			],
+			'extra data' => [
+				// label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// Highlighted label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// Highlighted description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// extra
+				[ 'language' => 'en', 'value' => 'Look <what> I found!' ],
+				// statements
+				1,
+				// links
+				2,
+				// test name
+				'extra'
+			],
+			'extra data different language' => [
+				// label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// Highlighted label
+				[ 'language' => 'en', 'value' => 'Hit item' ],
+				// Highlighted description
+				[ 'language' => 'en', 'value' => 'Hit description' ],
+				// extra
+				[ 'language' => 'ru', 'value' => new \HtmlArmor( 'Look <b>what</b> I found!' ) ],
+				// statements
+				1,
+				// links
+				2,
+				// test name
+				'extraLang'
+			],
+			'all languages' => [
+				// label
+				[ 'language' => 'ar', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'he', 'value' => 'Hit description' ],
+				// Highlighted label
+				[ 'language' => 'es', 'value' => 'Hit !HERE! item' ],
+				// Highlighted description
+				[ 'language' => 'ru', 'value' => 'Hit !HERE! description' ],
+				// extra
+				[ 'language' => 'de', 'value' => 'Look <what> I found!' ],
+				// statements
+				100,
+				// links
+				200,
+				// test name
+				'manyLang'
+			],
+			'all languages 2' => [
+				// label
+				[ 'language' => 'de', 'value' => 'Hit item' ],
+				// description
+				[ 'language' => 'ru', 'value' => 'Hit description' ],
+				// Highlighted label
+				[ 'language' => 'fa', 'value' => 'Hit !HERE! item' ],
+				// Highlighted description
+				[ 'language' => 'he', 'value' => 'Hit !HERE! description' ],
+				// extra
+				[ 'language' => 'ar', 'value' => 'Look <what> I found!' ],
+				// statements
+				100,
+				// links
+				200,
+				// test name
+				'manyLang2'
+			],
+		];
+	}
 
 	/**
-	 * @return SpecialSearch
+	 * @param string[] $labelData Source label, best match for display language
+	 * @param string[] $descriptionData Source description, best match for display language
+	 * @param string[] $labelHighlightedData Actual label match, with highlighting
+	 * @param string[] $descriptionHighlightedData Actual description match, with highlighting
+	 * @param string[] $extra Extra match data
+	 * @param int $statementCount
+	 * @param int $linkCount
+	 * @return EntityResult
 	 */
-	private function getSearchPage() {
+	private function getEntityResult(
+		$labelData,
+		$descriptionData,
+		$labelHighlightedData,
+		$descriptionHighlightedData,
+		$extra,
+		$statementCount,
+		$linkCount
+	) {
+		$result = $this->getMockBuilder( EntityResult::class )
+			->disableOriginalConstructor()->setMethods( [
+				'getExtraDisplay',
+				'getStatementCount',
+				'getSitelinkCount',
+				'getDescriptionData',
+				'getLabelData',
+				'getDescriptionHighlightedData',
+				'getLabelHighlightedData',
+			] )
+			->getMock();
+
+		$result->method( 'getExtraDisplay' )->willReturn( $extra );
+		$result->method( 'getStatementCount' )->willReturn( $statementCount );
+		$result->method( 'getSitelinkCount' )->willReturn( $linkCount );
+		$result->method( 'getLabelData' )->willReturn( $labelData );
+		$result->method( 'getDescriptionData' )->willReturn( $descriptionData );
+		$result->method( 'getLabelHighlightedData' )->willReturn( $labelHighlightedData );
+		$result->method( 'getDescriptionHighlightedData' )
+			->willReturn( $descriptionHighlightedData );
+
+		return $result;
+	}
+
+	/**
+	 * @param string $language
+	 * @return SpecialSearch
+	 * @throws \MWException
+	 */
+	private function getSearchPage( $language ) {
 		$searchPage = $this->getMockBuilder( SpecialSearch::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$searchPage->method( 'msg' )
-			->willReturn( new RawMessage( ': ' ) );
+			->willReturnCallback(
+				function () {
+					return new RawMessage( implode( ",", func_get_args() ) );
+				}
+			);
 		$searchPage->method( 'getLanguage' )
-			->willReturn( Language::factory( 'de' ) );
+			->willReturn( Language::factory( $language ) );
+
+		$context = $this->getMockBuilder( ContextSource::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$context->method( 'getLanguage' )
+			->willReturn( Language::factory( $language ) );
+		$context->method( 'getUser' )
+			->willReturn( MediaWikiTestCase::getTestUser()->getUser() );
+
+		$searchPage->method( 'getContext' )->willReturn( $context );
 
 		return $searchPage;
 	}
@@ -55,146 +298,27 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 */
 	private function getSearchResult( $title ) {
 		$mockTitle = $this->getMock( Title::class );
-		$mockTitle->method( 'getText' )
-			->willReturn( $title );
+		$mockTitle->method( 'getText' )->willReturn( $title );
 		// hack: content model equals title/id
-		$mockTitle->method( 'getContentModel' )
-			->willReturn( $title );
+		$mockTitle->method( 'getContentModel' )->willReturn( $title );
+		$mockTitle->method( 'getPrefixedText' )->willReturn( "Prefix:$title" );
 
 		$searchResult = $this->getMockBuilder( SearchResult::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$searchResult->method( 'getTitle' )
-			->willReturn( $mockTitle );
+		$searchResult->method( 'getTitle' )->willReturn( $mockTitle );
 
 		return $searchResult;
 	}
 
-	/**
-	 * @return LanguageFallbackChain
-	 */
-	private function getLanguageFallbackChain() {
-		$languageFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$languageFallbackChain->method( 'extractPreferredValue' )
-			->willReturnCallback( function ( array $terms ) {
-				if ( isset( $terms['de'] ) ) {
-					return [ 'value' => $terms['de'], 'language' => 'de' ];
-				} elseif ( isset( $terms['en'] ) ) {
-					return [ 'value' => $terms['en'], 'language' => 'en' ];
-				}
-				return null;
-			} );
-
-		return $languageFallbackChain;
-	}
-
-	/**
-	 * @return EntityContentFactory
-	 */
-	private function getEntityContentFactory() {
-		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$entityContentFactory->method( 'isEntityContentModel' )
-			->willReturnCallback( function ( $contentModel ) {
-				// hack: content model equals title/id
-				return $contentModel !== self::NON_ENTITY_TITLE;
-			} );
-
-		return $entityContentFactory;
-	}
-
-	/**
-	 * @return EntityIdLookup
-	 */
-	private function getEntityIdLookup() {
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
-		$entityIdLookup->method( 'getEntityIdForTitle' )
-			->willReturnCallback( function ( Title $title ) {
-				return new ItemId( $title->getText() );
-			} );
-
-		return $entityIdLookup;
-	}
-
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return string[]
-	 */
-	private function getDescriptionsArray( ItemId $itemId ) {
-		switch ( $itemId->getSerialization() ) {
-			case self::DE_DESCRIPTION_ITEM_ID:
-				return [
-					'de' => '<b>German description</b>',
-					'en' => 'fallback description',
-				];
-
-			case self::FALLBACK_DESCRIPTION_ITEM_ID:
-				return [
-					'en' => 'fallback description',
-					'fr' => 'unused description',
-				];
-
-			default:
-				return [
-					'fr' => 'unused description',
-				];
-		}
-	}
-
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return Item $item
-	 */
-	private function getEntity( ItemId $itemId ) {
-		$termList = $this->getMockBuilder( TermList::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$termList->method( 'toTextArray' )
-			->willReturn( $this->getDescriptionsArray( $itemId ) );
-
-		$item = $this->getMockBuilder( Item::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$item->method( 'getDescriptions' )
-			->willReturn( $termList );
-
-		return $item;
-	}
-
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
-		$entityLookup = $this->getMock( EntityLookup::class );
-		$entityLookup->method( 'getEntity' )
-			->willReturnCallback( function ( ItemId $itemId ) {
-				return $this->getEntity( $itemId );
-			} );
-
-		return $entityLookup;
-	}
-
-	/**
-	 * @dataProvider showSearchHitProvider
-	 */
-	public function testShowSearchHit( $title, $expected, $newExtract ) {
-		$searchPage = $this->getSearchPage();
-		$searchResult = $this->getSearchResult( $title );
-		$handler = new ShowSearchHitHandler(
-			$this->getEntityContentFactory(),
-			$this->getLanguageFallbackChain(),
-			$this->getEntityIdLookup(),
-			$this->getEntityLookup()
-		);
+	public function testShowSearchHitNonEntity() {
+		$searchPage = $this->getSearchPage( 'en' );
 		$link = '<a>link</a>';
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
-		$handler->doShowSearchHit(
+		$searchResult = $this->getMock( SearchResult::class );
+		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
+		ShowSearchHitHandler::onShowSearchHit(
 			$searchPage,
 			$searchResult,
 			[],
@@ -208,38 +332,293 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			$related,
 			$html
 		);
-		$this->assertEquals( $expected, $link );
-		$this->assertEquals( $newExtract, $extract );
+		$this->assertEquals( '<a>link</a>', $link );
+		$this->assertEquals( '<span>extract</span>', $extract );
 	}
 
-	public function showSearchHitProvider() {
+	/**
+	 * @dataProvider showSearchHitProvider
+	 * @param $labelData
+	 * @param $descriptionData
+	 * @param $labelHighlightedData
+	 * @param $descriptionHighlightedData
+	 * @param $extra
+	 * @param $statementCount
+	 * @param $linkCount
+	 * @param $expected
+	 */
+	public function testShowSearchHit(
+		$labelData,
+		$descriptionData,
+		$labelHighlightedData,
+		$descriptionHighlightedData,
+		$extra,
+		$statementCount,
+		$linkCount,
+		$expected
+	) {
+		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".html";
+		$displayLanguage = 'en';
+
+		$searchPage = $this->getSearchPage( $displayLanguage );
+		$searchResult = $this->getEntityResult(
+			$labelData,
+			$descriptionData,
+			$labelHighlightedData,
+			$descriptionHighlightedData,
+			$extra,
+			$statementCount,
+			$linkCount
+		);
+
+		$this->assertInstanceOf( EntityResult::class, $searchResult );
+
+		$link = '<a>link</a>';
+		$extract = '<span>extract</span>';
+		$redirect = $section = $score = $size = $date = $related = $html = '';
+		$title = "TITLE";
+		$attributes = [ 'previous' => 'attrib' ];
+		$query = [];
+
+		ShowSearchHitHandler::getLink(
+			$this->getLinkBeginHookHandler(),
+			$searchResult,
+			Title::newFromText( 'Q1' ),
+			$title,
+			$attributes,
+			$displayLanguage
+		);
+
+		ShowSearchHitHandler::onShowSearchHit(
+			$searchPage,
+			$searchResult,
+			[],
+			$link,
+			$redirect,
+			$section,
+			$extract,
+			$score,
+			$size,
+			$date,
+			$related,
+			$html
+		);
+		$output = \HtmlArmor::getHtml( $title ) . "\n" .
+				json_encode( $attributes, JSON_PRETTY_PRINT ) . "\n" .
+				$section . "\n" .
+				$extract . "\n" .
+				$size;
+
+		$this->assertFileContains( $testFile, $output );
+	}
+
+	/**
+	 * @return LinkBeginHookHandler
+	 * @throws \MWException
+	 */
+	private function getLinkBeginHookHandler() {
+		$languageFallback = new LanguageFallbackChain( [
+			LanguageWithConversion::factory( 'de-ch' ),
+			LanguageWithConversion::factory( 'de' ),
+			LanguageWithConversion::factory( 'en' ),
+		] );
+
+		return new LinkBeginHookHandler(
+			$this->getEntityIdLookup(),
+			new ItemIdParser(),
+			$this->getMock( TermLookup::class ),
+			$this->getMockBuilder( EntityNamespaceLookup::class )
+				->disableOriginalConstructor()
+				->getMock(),
+			$languageFallback,
+			Language::factory( 'en' ),
+			MediaWikiServices::getInstance()->getLinkRenderer(),
+			$this->getMock( InterwikiLookup::class )
+		);
+	}
+
+	/**
+	 * @return EntityIdLookup
+	 */
+	private function getEntityIdLookup() {
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getEntityIdForTitle' )
+			->will( $this->returnCallback( function( Title $title ) {
+				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
+					return new ItemId( $m[0] );
+				}
+
+				return null;
+			} ) );
+
+		return $entityIdLookup;
+	}
+
+	/**
+	 * @param array $languages
+	 * @param $entities
+	 * @return ShowSearchHitHandler
+	 */
+	private function getShowSearchHitHandler( array $languages, $entities ) {
+		return new ShowSearchHitHandler(
+			$this->getEntityContentFactory(),
+			$this->getMockFallbackChain( $languages ),
+			$this->getEntityIdLookup(),
+			$this->getEntityLookup( $entities )
+		);
+	}
+
+	/**
+	 * @param array $languages
+	 * @return LanguageFallbackChain
+	 */
+	private function getMockFallbackChain( array $languages ) {
+		$mock = $this->getMockBuilder( LanguageFallbackChain::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getFetchLanguageCodes' )
+			->will( $this->returnValue( $languages ) );
+		$mock->expects( $this->atLeastOnce() )
+			->method( 'extractPreferredValue' )
+			->will( $this->returnCallback( function ( $sourceData ) use ( $languages ) {
+				foreach ( $languages as $language ) {
+					if ( isset( $sourceData[$language] ) ) {
+						return [ 'language' => $language, 'value' => $sourceData[$language] ];
+					}
+				}
+				return null;
+			} ) );
+		return $mock;
+	}
+
+	/**
+	 * @param Item[] $entities
+	 * @return EntityLookup
+	 */
+	private function getEntityLookup( $entities ) {
+		$entityLookup = $this->getMock( EntityLookup::class );
+		$entityLookup->expects( $this->any() )
+			->method( 'getEntity' )
+			->will( $this->returnCallback( function ( ItemId $id ) use ( $entities ) {
+				$key = $id->getSerialization();
+				return $entities[$key];
+			} ) );
+		return $entityLookup;
+	}
+
+	/**
+	 * @return EntityContentFactory
+	 */
+	private function getEntityContentFactory() {
+		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityContentFactory->expects( $this->any() )
+			->method( 'isEntityContentModel' )
+			->willReturn( true );
+
+		return $entityContentFactory;
+	}
+
+	public function getPlainSearches() {
 		return [
-			'non-entity' => [
-				self::NON_ENTITY_TITLE,
-				'<a>link</a>',
-				'<span>extract</span>',
+			"simple" => [
+				'Q1',
+				[ 'en' => 'Test 1', 'de' => 'Test DE' ],
+				'en',
+				[ 'en' ],
+				'en'
 			],
-			'German description' => [
-				self::DE_DESCRIPTION_ITEM_ID,
-				'<a>link</a>: <span class="wb-itemlink-description">&lt;b>German description&lt;/b></span>',
-				'',
+			"de" => [
+				'Q2',
+				[ 'en' => 'Test 1', 'de' => 'Test DE' ],
+				'de',
+				[ 'de' ],
+				'de'
 			],
-			'fallback description' => [
-				self::FALLBACK_DESCRIPTION_ITEM_ID,
-				'<a>link</a>: <span class="wb-itemlink-description" dir="auto" lang="en">fallback description</span>',
-				'',
+			"fallback" => [
+				'Q3',
+				[ 'ru' => 'Test RU', 'en' => 'Test 1' ],
+				'de',
+				[ 'de', 'ru', 'en' ],
+				'de-ru'
 			],
-			'no available fallback description' => [
-				self::NO_FALLBACK_DESCRIPTION_ITEM_ID,
-				'<a>link</a>',
-				'',
-			],
-			'description-less item' => [
-				self::EMPTY_ITEM_ID,
-				'<a>link</a>',
-				'',
+			"no fallback" => [
+				'Q3',
+				[ 'ru' => 'Test RU', 'en' => 'Test 1' ],
+				'de',
+				[ 'de', 'es' ],
+				'de-none'
 			],
 		];
+	}
+
+	/**
+	 * @dataProvider getPlainSearches
+	 * @param $title
+	 * @param $labels
+	 * @param string $displayLanguage
+	 * @param string[] $languages
+	 * @param string $expected
+	 * @throws \MWException
+	 */
+	public function testShowSearchHitPlain( $title, $labels, $displayLanguage, $languages, $expected ) {
+
+		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".plain.html";
+
+		$entities[$title] = $this->makeItem( $title, $labels );
+		$showHandler = $this->getShowSearchHitHandler( $languages, $entities );
+		$searchPage = $this->getSearchPage( $displayLanguage );
+
+		$searchResult = $this->getSearchResult( $title );
+
+		$link = '<a>link</a>';
+		$extract = '<span>extract</span>';
+		$redirect = $section = $score = $size = $date = $related = $html = '';
+		$title = "TITLE";
+		$attributes = [ 'previous' => 'attrib' ];
+		$query = [];
+
+		$showHandler->showPlainSearchHit(
+			$searchPage,
+			$searchResult,
+			[],
+			$link,
+			$redirect,
+			$section,
+			$extract,
+			$score,
+			$size,
+			$date,
+			$related,
+			$html
+		);
+
+		$showHandler->showPlainSearchTitle( $searchResult->getTitle(), $title );
+
+		$output = \HtmlArmor::getHtml( $title ) . "\n" .
+		          $extract . "\n" .
+		          $size;
+
+		$this->assertFileContains( $testFile, $output );
+	}
+
+	/**
+	 * @param string $id
+	 * @param string[] $labels
+	 * @return Item
+	 */
+	protected function makeItem( $id, $labels ) {
+		$item = new Item( new ItemId( $id ) );
+		foreach ( $labels as $l => $v ) {
+			$item->setLabel( $l, $v );
+			$item->setDescription( $l, "Desc: $v" );
+		}
+		return $item;
 	}
 
 }
