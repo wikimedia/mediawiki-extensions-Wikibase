@@ -34,6 +34,24 @@
       "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_13681684",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-27T13:07:42Z",
+      "side": 1,
+      "message": "for autocomplete queries on wikipedias we limit at 255 chars and I never received any complaints about ambiguous results where more than 255 chars would help to disambiguate.",
+      "parentUuid": "2e7b3738_29ffa1fd",
+      "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
