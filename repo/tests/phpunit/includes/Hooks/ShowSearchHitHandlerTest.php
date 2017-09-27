@@ -194,7 +194,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$link = '<a>link</a>';
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
-		$handler->doShowSearchHit(
+		$handler->onShowSearchHit(
 			$searchPage,
 			$searchResult,
 			[],

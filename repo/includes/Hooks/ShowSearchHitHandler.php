@@ -3,17 +3,13 @@
 namespace Wikibase\Repo\Hooks;
 
 use Html;
-use IContextSource;
+use HtmlArmor;
+use LanguageCode;
+use RequestContext;
 use SearchResult;
 use SpecialSearch;
 use Title;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Repo\Search\Elastic\EntityResult;
 
 /**
  * Handler to format entities in the search results
@@ -23,54 +19,6 @@ use Wikibase\Store\EntityIdLookup;
  * @author Daniel Kinzler
  */
 class ShowSearchHitHandler {
-
-	/**
-	 * @var EntityContentFactory
-	 */
-	private $entityContentFactory;
-
-	/**
-	 * @var LanguageFallbackChain
-	 */
-	private $languageFallbackChain;
-
-	/**
-	 * @var EntityIdLookup
-	 */
-	private $entityIdLookup;
-
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	public function __construct(
-		EntityContentFactory $entityContentFactory,
-		LanguageFallbackChain $languageFallbackChain,
-		EntityIdLookup $entityIdLookup,
-		EntityLookup $entityLookup
-	) {
-		$this->entityContentFactory = $entityContentFactory;
-		$this->languageFallbackChain = $languageFallbackChain;
-		$this->entityIdLookup = $entityIdLookup;
-		$this->entityLookup = $entityLookup;
-	}
-
-	/**
-	 * @param IContextSource $context
-	 * @return self
-	 */
-	private static function newFromGlobalState( IContextSource $context ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-
-		return new self(
-			$wikibaseRepo->getEntityContentFactory(),
-			$languageFallbackChainFactory->newFromContext( $context ),
-			$wikibaseRepo->getEntityIdLookup(),
-			$wikibaseRepo->getEntityLookup()
-		);
-	}
 
 	/**
 	 * Format the output when the search result contains entities
@@ -93,55 +41,117 @@ class ShowSearchHitHandler {
 	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result, array $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
 	) {
-		$self = self::newFromGlobalState( $searchPage->getContext() );
-		$self->doShowSearchHit( $searchPage, $result, $terms, $link, $redirect, $section, $extract,
-			$score, $size, $date, $related, $html );
-	}
-
-	public function doShowSearchHit( SpecialSearch $searchPage, SearchResult $result, array $terms,
-		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
-	) {
-		$title = $result->getTitle();
-		$contentModel = $title->getContentModel();
-
-		if ( !$this->entityContentFactory->isEntityContentModel( $contentModel ) ) {
+		if ( !( $result instanceof EntityResult ) ) {
 			return;
 		}
 
-		$extract = ''; // TODO: set this to something useful.
-
-		$entity = $this->getEntity( $title );
-		if ( !( $entity instanceof DescriptionsProvider ) ) {
-			return;
+		$extract = '';
+		// Put highlighted description of the item as the extract
+		self::addDescription( $extract, $result, $searchPage );
+		RequestContext::getMain()->getOutput()->addModuleStyles( [ 'wikibase.common' ] );
+		// Add extra data
+		$extra = $result->getExtraDisplay();
+		if ( $extra ) {
+			$attr = [ 'class' => 'wb-itemlink-description' ];
+			$extra = $result->withLanguage( $extra );
+			self::addLanguageAttrs( $attr, $searchPage->getLanguage()->getCode(), $extra );
+			$section = $searchPage->msg( 'colon-separator' )->escaped();
+			$section .= Html::rawElement( 'span', $attr, HtmlArmor::getHtml( $extra['value'] ) );
 		}
-
-		$terms = $entity->getDescriptions()->toTextArray();
-		$termData = $this->languageFallbackChain->extractPreferredValue( $terms );
-		if ( $termData !== null ) {
-			$this->addDescription( $link, $termData, $searchPage );
-		}
-	}
-
-	private function addDescription( &$link, array $termData, SpecialSearch $searchPage ) {
-		$description = $termData['value'];
-		$attr = [ 'class' => 'wb-itemlink-description' ];
-		if ( $termData['language'] !== $searchPage->getLanguage()->getCode() ) {
-			$attr += [ 'dir' => 'auto', 'lang' => wfBCP47( $termData['language'] ) ];
-		}
-		$link .= $searchPage->msg( 'colon-separator' )->escaped();
-		$link .= Html::element( 'span', $attr, $description );
+		// set $size to size metrics
+		$size = $searchPage->msg(
+			'wikibase-search-result-stats',
+			$result->getStatementCount(),
+			$result->getSitelinkCount()
+		)->escaped();
 	}
 
 	/**
-	 * @param Title $title
-	 * @return EntityDocument|null
+	 * Add attributes appropriate for language of this text.
+	 * @param array $attr
+	 * @param string $displayLanguage
+	 * @param array $text
 	 */
-	private function getEntity( Title $title ) {
-		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
-		if ( $entityId ) {
-			return $this->entityLookup->getEntity( $entityId );
+	private static function addLanguageAttrs( array &$attr, $displayLanguage, array $text ) {
+		if ( $text['language'] !== $displayLanguage ) {
+			$attr += [ 'dir' => 'auto', 'lang' => LanguageCode::bcp47( $text['language'] ) ];
 		}
-		return null;
+	}
+
+	/**
+	 * Add HTML description to search result.
+	 * @param string &$html The html of the description will be appended here.
+	 * @param EntityResult $result
+	 * @param SpecialSearch $searchPage
+	 */
+	private static function addDescription( &$html, EntityResult $result, SpecialSearch $searchPage ) {
+		$description = $result->withLanguage( $result->getDescriptionHighlightedData() );
+		$attr = [ 'class' => 'wb-itemlink-description' ];
+		self::addLanguageAttrs( $attr, $searchPage->getLanguage()->getCode(), $description );
+		// Wrap with searchresult div, as original code does
+		$html .= Html::rawElement( 'div', [ 'class' => 'searchresult' ],
+			Html::rawElement( 'span', $attr, HtmlArmor::getHtml( $description['value'] ) )
+		);
+	}
+
+	/**
+	 * Remove span tag (added by Cirrus) placed around title search hit for entity titles
+	 * to highlight matches in bold.
+	 *
+	 * @todo Add highlighting when Q##-id matches and not label text.
+	 *
+	 * @param Title $title
+	 * @param string &$titleSnippet
+	 * @param SearchResult $result
+	 * @param string $terms
+	 * @param SpecialSearch $specialSearch
+	 * @param string[] &$query
+	 * @param string[] $attributes
+	 */
+	public static function onShowSearchHitTitle(
+		Title $title,
+		&$titleSnippet,
+		SearchResult $result,
+		$terms,
+		SpecialSearch $specialSearch,
+		array &$query,
+		array &$attributes
+	) {
+		if ( !( $result instanceof EntityResult ) ) {
+			return;
+		}
+
+		self::getLink( $result, $title, $titleSnippet, $attributes );
+	}
+
+	/**
+	 * Generate link text for Title link in search hit.
+	 * This reuses code from LinkBeginHookHandler to do actual work.
+	 * @param EntityResult $result
+	 * @param Title $title
+	 * @param string|HtmlArmor &$html Variable where HTML will be placed
+	 * @param array &$attributes Link tag attributes, can add more
+	 */
+	private static function getLink( EntityResult $result, Title $title, &$html, &$attributes ) {
+		$linkHandler = LinkBeginHookHandler::newFromGlobalState();
+		// TODO: can we assume the title is always local?
+		$entityId = $linkHandler->lookupLocalId( $title );
+		if ( !$entityId ) {
+			return;
+		}
+
+		// Highlighter already encodes and marks up the HTML
+		$html = new HtmlArmor(
+			$linkHandler->getHtml( $entityId,
+				$result->withLanguage( $result->getLabelHighlightedData() )
+			)
+		);
+
+		$attributes['title'] = $linkHandler->getTitleAttribute(
+			$title,
+			$result->getLabelData(),
+			$result->getDescriptionData()
+		);
 	}
 
 }
