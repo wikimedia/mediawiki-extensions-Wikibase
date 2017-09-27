@@ -25,12 +25,6 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * @author Stas Malyshev
  */
 class EntitySearchElastic implements EntitySearchHelper {
-
-	/**
-	 * Default rescore profile
-	 */
-	const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
-
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
@@ -150,7 +144,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$labelsFilter = new Match( 'labels_all.prefix', $text );
 
-		$profileName = $this->request->getVal( 'cirrusWBProfile', $this->settings['defaultPrefixProfile'] );
+		$profileName = $this->request->getVal( 'cirrusWBProfile', $this->settings['prefixSearchProfile'] );
 		$profile = $this->loadProfile( $profileName );
 		if ( !$profile ) {
 			$context->setResultsPossible( false );
@@ -187,7 +181,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		}
 
 		foreach ( $fields as $field ) {
-			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $text ) );
+			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $text ) );
 		}
 
 		$labelsQuery = new BoolQuery();
@@ -315,7 +309,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		) );
 
 		$searcher->setOptionsFromRequest( $this->request );
-		$searcher->setRescoreProfile( $this->getRescoreProfile() );
+		$searcher->setRescoreProfile( EntitySearchUtils::getRescoreProfile( $this->settings,
+			'prefixRescoreProfile' ) );
 
 		$result = $searcher->performSearch( $query );
 
