@@ -12,7 +12,6 @@ use Elastica\Query\Term;
 use Language;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -25,7 +24,6 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * @author Stas Malyshev
  */
 class EntitySearchElastic implements EntitySearchHelper {
-
 	/**
 	 * Default rescore profile
 	 */
@@ -35,6 +33,11 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * Name of the context for profile name resolution
 	 */
 	const CONTEXT_WIKIBASE_PREFIX = 'wikibase_prefix_search';
+
+	/**
+	 * Name of the context for profile name resolution
+	 */
+	const CONTEXT_WIKIBASE_FULLTEXT = 'wikibase_fulltext_search';
 
 	/**
 	 * Name of the profile type used to build the elastic query
@@ -206,7 +209,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		}
 
 		foreach ( $fields as $field ) {
-			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $text ) );
+			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $text ) );
 		}
 
 		foreach ( $fieldsExact as $field ) {
@@ -216,7 +219,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery = new BoolQuery();
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addShould( $dismax );
-		$titleMatch = new Term( [ 'title.keyword' => $this->normalizeId( $text ) ] );
+		$titleMatch = new Term( [ 'title.keyword' => EntitySearchUtils::normalizeId( $text, $this->idParser ) ] );
 
 		// Match either labels or exact match to title
 		$query->addShould( $labelsQuery );

@@ -8,8 +8,10 @@ use ApiQuerySiteinfo;
 use BaseTemplate;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use CirrusSearch\Profile\SearchProfileService;
+use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
+use CirrusSearch\SearchConfig;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -26,10 +28,8 @@ use RecentChange;
 use RequestContext;
 use ResourceLoader;
 use Revision;
-use SearchResult;
 use Skin;
 use SkinTemplate;
-use SpecialSearch;
 use StubUserLang;
 use Title;
 use User;
@@ -40,6 +40,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Search\Elastic\EntityFullTextQueryBuilder;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
@@ -132,7 +133,6 @@ final class RepoHooks {
 			global $wgCirrusSearchExtraIndexSettings;
 			// Bump max fields so that labels/descriptions fields fit in.
 			$wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
-
 		}
 
 		return true;
@@ -583,34 +583,6 @@ final class RepoHooks {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Remove span tag (added by Cirrus) placed around title search hit for entity titles
-	 * to highlight matches in bold.
-	 *
-	 * @todo highlight the Q## part of the entity link formatting and highlight label matches
-	 *
-	 * @param Title &$title
-	 * @param string &$titleSnippet
-	 * @param SearchResult $result
-	 * @param string $terms
-	 * @param SpecialSearch $specialSearch
-	 * @param string[] &$query
-	 */
-	public static function onShowSearchHitTitle(
-		Title &$title,
-		&$titleSnippet,
-		SearchResult $result,
-		$terms,
-		SpecialSearch $specialSearch,
-		array &$query
-	) {
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
-			$titleSnippet = $title->getPrefixedText();
-		}
 	}
 
 	/**
@@ -1104,6 +1076,8 @@ final class RepoHooks {
 			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreFunctions.php' );
 		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			'wikibase_base', __DIR__ . '/config/EntityPrefixSearchProfiles.php' );
+		$service->registerFileRepository( SearchProfileService::FT_QUERY_BUILDER,
+			'wikibase_base', __DIR__ . '/config/EntitySearchProfiles.php' );
 
 		// register custom profiles provided in the wikibase config
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -1115,6 +1089,10 @@ final class RepoHooks {
 		if ( isset( $entitySearchConfig['prefixSearchProfiles'] ) ) {
 			$service->registerArrayRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 				'wikibase_config', $entitySearchConfig['prefixSearchProfiles'] );
+		}
+		if ( isset( $entitySearchConfig['fulltextSearchProfiles'] ) ) {
+			$service->registerArrayRepository( SearchProfileService::FT_QUERY_BUILDER,
+				'wikibase_config', $entitySearchConfig['fulltextSearchProfiles'] );
 		}
 
 		// Determine the default rescore profile to use for entity autocomplete search
@@ -1131,13 +1109,50 @@ final class RepoHooks {
 
 		// Determine the default query builder profile to use for entity autocomplete search
 		$defaultQB = EntitySearchElastic::DEFAULT_QUERY_BUILDER_PROFILE;
-		if ( isset( $entitySearchConfig['defaultPrefixProfile'] ) ) {
-			$defaultQB = $entitySearchConfig['defaultPrefixProfile'];
+		if ( isset( $entitySearchConfig['prefixSearchProfile'] ) ) {
+			$defaultQB = $entitySearchConfig['prefixSearchProfile'];
 		}
 		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, $defaultQB );
 		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusWBProfile' );
+
+		// Determine query builder profile for fulltext search
+		$defaultFQB = EntitySearchElastic::DEFAULT_QUERY_BUILDER_PROFILE;
+		if ( isset( $entitySearchConfig['fulltextSearchProfile'] ) ) {
+			$defaultFQB = $entitySearchConfig['fulltextSearchProfile'];
+		}
+		$service->registerDefaultProfile( SearchProfileService::FT_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, $defaultFQB );
+		$service->registerUriParamOverride( SearchProfileService::FT_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, 'cirrusWBProfile' );
+
+		// Determine the default rescore profile to use for fulltext search
+		$defaultFTRescore = EntitySearchElastic::DEFAULT_RESCORE_PROFILE;
+		if ( isset( $entitySearchConfig['defaultFulltextRescoreProfile'] ) ) {
+			// If set in config use it
+			$defaultFTRescore = $entitySearchConfig['defaultFulltextRescoreProfile'];
+		}
+		$service->registerDefaultProfile( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, $defaultFTRescore );
+		// add the possibility to override the profile by setting the URI param cirrusRescoreProfile
+		$service->registerUriParamOverride( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, 'cirrusRescoreProfile' );
+
+	}
+
+	/**
+	 * @param FullTextQueryBuilder $builder
+	 * @param SearchContext $context
+	 */
+	public static function onCirrusSearchFulltextQueryBuilder(
+		FullTextQueryBuilder &$builder,
+		SearchContext $context
+	) {
+		$qbSettings = $context->getConfig()->getProfileService()
+			->loadProfile( SearchProfileService::FT_QUERY_BUILDER,
+				EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT );
+		$builder = new $qbSettings['builder_class']( $builder, $qbSettings['settings'], WikibaseRepo::getDefaultInstance() );
 	}
 
 }
