@@ -6,6 +6,9 @@ use Exception;
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 
+/**
+ * @license GPL-2.0+
+ */
 class ChangeOpDeserializationAssert {
 
 	/**

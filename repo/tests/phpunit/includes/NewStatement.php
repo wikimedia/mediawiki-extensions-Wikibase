@@ -14,6 +14,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 
+/**
+ * @license GPL-2.0+
+ */
 class NewStatement {
 
 	const GENERATE_GUID = true;

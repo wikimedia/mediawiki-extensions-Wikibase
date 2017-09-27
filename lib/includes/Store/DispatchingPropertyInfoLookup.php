@@ -7,6 +7,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBError;
 
+/**
+ * @license GPL-2.0+
+ */
 class DispatchingPropertyInfoLookup implements PropertyInfoLookup {
 
 	/**

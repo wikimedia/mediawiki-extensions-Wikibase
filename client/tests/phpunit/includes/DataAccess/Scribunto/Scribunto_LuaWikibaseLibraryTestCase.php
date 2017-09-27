@@ -14,6 +14,10 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Test\MockClientStore;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
+	/**
+	 * @license GPL-2.0+
+	 * @author Marius Hoch < hoo@online.de >
+	 */
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends PHPUnit_Framework_TestCase {
 
 		protected function setUp() {
