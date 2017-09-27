@@ -3,20 +3,19 @@
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use CirrusSearch;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Search\Elastic\Fields\AllLabelsField;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsField;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions
  *
  * @group WikibaseElastic
  * @group WikibaseRepo
  * @group Wikibase
  */
-class LabelsProviderFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
+class LabelsProviderFieldDefinitionsTest extends SearchFieldTestCase {
 
 	public function testGetFields() {
 		$languageCodes = [ 'ar', 'es' ];
@@ -35,8 +34,7 @@ class LabelsProviderFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
-		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
-		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
+		$searchEngine = $this->getSearchEngineMock();
 
 		$mapping = $fields['labels']->getMapping( $searchEngine );
 		$this->assertEquals( $languageCodes, array_keys( $mapping['properties'] ) );
