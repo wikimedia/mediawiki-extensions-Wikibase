@@ -26,10 +26,10 @@ return [
 		'score_mode' => 'sum',
 		'functions' => [
 			[
-				// Incoming links: k = 50
+				// Incoming links: k = 100
 				'type' => 'satu',
 				'weight' => '0.6',
-				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 2 , 'k' => 50 ]
+				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 1 , 'k' => 100 ]
 			],
 			[
 				// Site links: k = 20
