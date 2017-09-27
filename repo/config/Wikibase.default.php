@@ -250,15 +250,24 @@ return [
 		'useCirrus' => false,
 		// Default label scoring profile name, for prefix search
 		// See profiles in config/EntityPrefixSearchProfiles.php
-		'defaultPrefixProfile' => 'default',
+		'prefixSearchProfile' => 'default',
+		// Default profile name for fulltext search
+		// See profiles in config/EntitySearchProfiles.php
+		'fulltextSearchProfile' => 'wikibase',
 		// Custom prefix query builder profiles placeholder
 		// Field weight profiles. These profiles specify relative weights
 		// of label fields for different languages, e.g. exact language match
 		// vs. fallback language match.
 		// (See config/EntityPrefixSearchProfiles.php)
 		'prefixSearchProfiles' => [],
+		// Profile definitions for fulltext search.
+		// Note that these will be merged with Cirrus standard profiles,
+		// so namespacing is recommended.
+		'fulltextSearchProfiles' => [],
 		// Default rescore profile for prefix search
 		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
+		// Default rescore profile for prefix search
+		'defaultFulltextRescoreProfile' => 'wikibase_prefix',
 		// Custom rescore profiles placeholder
 		// (See config/ElasticSearchRescoreProfiles.php)
 		'rescoreProfiles' => [],
