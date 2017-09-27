@@ -71,6 +71,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',
 				'tests/phpunit/includes/Rdf/NTriplesRdfTestHelper.php',
 				'tests/phpunit/includes/Rdf/RdfBuilderTestData.php',
+				'tests/phpunit/includes/Search/Elastic/Fields/SearchFieldTestCase.php',
 				'tests/phpunit/includes/Search/Elastic/Fields/WikibaseNumericFieldTest.php',
 				'tests/phpunit/includes/Store/MockEntityIdPager.php',
 				'tests/phpunit/includes/Specials/HtmlAssertionHelpers.php',

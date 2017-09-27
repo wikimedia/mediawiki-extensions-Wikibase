@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use CirrusSearch;
+use CirrusSearch\Search\TextIndexField;
+use CirrusSearch\SearchConfig;
 use SearchEngine;
 use SearchIndexField;
 use SearchIndexFieldDefinition;
@@ -47,6 +49,29 @@ abstract class TermIndexField extends SearchIndexFieldDefinition implements Wiki
 			$config['search_analyzer'] = $search_analyzer;
 		}
 		return $config;
+	}
+
+	/**
+	 * Create a tokenized string field config with specific analyzer fields.
+	 *
+	 * @param SearchConfig $config
+	 * @param string $analyzer
+	 * @param string $search_analyzer
+	 * @return array
+	 */
+	protected function getTokenizedSubfield( SearchConfig $config, $analyzer, $search_analyzer = null ) {
+		$field = [
+			'type' => 'text',
+			'analyzer' => $analyzer,
+			'position_increment_gap' => TextIndexField::POSITION_INCREMENT_GAP,
+			'similarity' => TextIndexField::getSimilarity( $config, $this->name, $analyzer ),
+		];
+
+		if ( $search_analyzer ) {
+			$field['search_analyzer'] = $search_analyzer;
+		}
+
+		return $field;
 	}
 
 	/**
