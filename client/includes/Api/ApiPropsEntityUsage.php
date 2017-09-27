@@ -177,6 +177,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 				ApiBase::PARAM_TYPE => [
 					EntityUsage::SITELINK_USAGE,
 					EntityUsage::LABEL_USAGE,
+					EntityUsage::DESCRIPTION_USAGE,
 					EntityUsage::TITLE_USAGE,
 					EntityUsage::STATEMENT_USAGE,
 					EntityUsage::ALL_USAGE,

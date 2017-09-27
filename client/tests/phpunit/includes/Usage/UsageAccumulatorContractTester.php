@@ -34,6 +34,7 @@ class UsageAccumulatorContractTester {
 
 	public function testAddGetUsage() {
 		$this->testAddAndGetLabelUsage();
+		$this->testAddAndGetDescriptionUsage();
 		$this->testAddAndGetTitleUsage();
 		$this->testAddAndGetStatementUsage();
 		$this->testAddAndGetSiteLinksUsage();
@@ -44,6 +45,7 @@ class UsageAccumulatorContractTester {
 		$q3 = new ItemId( 'Q3' );
 		$expected = [
 			new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' ),
+			new EntityUsage( $q3, EntityUsage::DESCRIPTION_USAGE, 'ru' ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P42' ),
 			new EntityUsage( $q2, EntityUsage::SITELINK_USAGE ),
@@ -60,6 +62,20 @@ class UsageAccumulatorContractTester {
 		$this->usageAccumulator->addLabelUsage( $q2, 'xx' );
 
 		$expected = new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' );
+
+		$usages = $this->usageAccumulator->getUsages();
+		$this->assertContainsUsage( $expected, $usages );
+	}
+
+	private function testAddAndGetDescriptionUsage() {
+		$q3 = new ItemId( 'Q3' );
+		$this->usageAccumulator->addDescriptionUsage( $q3, 'ru' );
+
+		$expected = new EntityUsage(
+			$q3,
+			EntityUsage::DESCRIPTION_USAGE,
+			'ru'
+		);
 
 		$usages = $this->usageAccumulator->getUsages();
 		$this->assertContainsUsage( $expected, $usages );

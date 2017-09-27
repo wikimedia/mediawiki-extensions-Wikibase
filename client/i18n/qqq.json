@@ -128,6 +128,7 @@
 	"wikibase-pageinfo-entity-usage": "Desciption in action=info and action=edit about entities used in the page\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-S": "Name for ''sitelink'' entity usage\n{{Identical|Sitelink}}\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-L": "Name for ''label'' entity usage\n{{Identical|Label}}\n{{Related|Wikibase-pageinfo-entity-usage}}",
+	"wikibase-pageinfo-entity-usage-D": "Name for ''description'' entity usage\n{{Identical|Description}}\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-T": "Name for ''title'' entity usage\n* see [[:wikidata:Wikidata:Glossary#Title]]\n{{Identical|Title}}\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-C": "Name for ''statement'' entity usage\n{{Identical|Statement}}\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-X": "Name for ''all'' entity usage\n{{Related|Wikibase-pageinfo-entity-usage}}",

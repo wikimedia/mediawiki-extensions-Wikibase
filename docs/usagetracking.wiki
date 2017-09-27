@@ -20,9 +20,10 @@ Each client wiki tracks which pages use (which aspect of) which entity (from whi
 Entity usage on client pages is tracked using the following codes (each representing one aspect):
 * sitelinks (S): the entity's sitelinks are used.
 * label (L.xx): the entity's label in language xx is used.
+* description (D.xx): the entity's description in language xx is used.
 * title (T): the title of the local page corresponding to the entity is used.
 * statements (C): certain statements (identified by their property id) from the entity are used.
-* other (O): something else about the entity (such as statement data) is used.
+* other (O): something else about the entity is used. This currently implicates statement and description usage.
 * all (X): all aspects of an entity are or may be used.
 
 Changes result in updates to pages that use the respective entity based on the aspect that is used. Changes are classified accordingly:

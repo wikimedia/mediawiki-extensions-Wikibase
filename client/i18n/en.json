@@ -116,6 +116,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} entities used in this page",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Label: $1",
+	"wikibase-pageinfo-entity-usage-D": "Description: $1",
 	"wikibase-pageinfo-entity-usage-T": "Title",
 	"wikibase-pageinfo-entity-usage-C": "Statement: $1",
 	"wikibase-pageinfo-entity-usage-X": "All entity data",
