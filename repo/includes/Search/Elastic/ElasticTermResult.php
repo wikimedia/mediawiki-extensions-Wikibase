@@ -128,9 +128,10 @@ class ElasticTermResult implements ResultsType {
 	 * Locate label for display among the source data, basing on fallback chain.
 	 * @param array $sourceData
 	 * @param string $field
+	 * @param LanguageFallbackChain $fallbackChain
 	 * @return null|Term
 	 */
-	private function findTermForDisplay( $sourceData, $field ) {
+	public static function findTermForDisplay( $sourceData, $field, LanguageFallbackChain $fallbackChain ) {
 		if ( empty( $sourceData[$field] ) ) {
 			return null;
 		}
@@ -151,7 +152,7 @@ class ElasticTermResult implements ResultsType {
 		// Drop empty ones
 		$labels_data = array_filter( $labels_data );
 
-		$preferredValue = $this->fallbackChain->extractPreferredValueOrAny( $labels_data );
+		$preferredValue = $fallbackChain->extractPreferredValueOrAny( $labels_data );
 		if ( $preferredValue ) {
 			return new Term( $preferredValue['language'], $preferredValue['value'] );
 		}
@@ -178,8 +179,8 @@ class ElasticTermResult implements ResultsType {
 
 			// Highlight part contains information about what has actually been matched.
 			$highlight = $r->getHighlights();
-			$displayLabel = $this->findTermForDisplay( $sourceData, 'labels' );
-			$displayDescription = $this->findTermForDisplay( $sourceData, 'descriptions' );
+			$displayLabel = $this->findTermForDisplay( $sourceData, 'labels', $this->fallbackChain );
+			$displayDescription = $this->findTermForDisplay( $sourceData, 'descriptions', $this->fallbackChain );
 
 			if ( !empty( $highlight['title'] ) ) {
 				// If we matched title, this means it's a match by ID

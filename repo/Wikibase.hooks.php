@@ -117,7 +117,10 @@ final class RepoHooks {
 			$settings->setSetting( 'entitySearch', $searchSettings );
 		}
 		if ( $searchSettings['useCirrus'] ) {
-			global $wgCirrusSearchRescoreFunctionScoreChains, $wgCirrusSearchExtraIndexSettings;
+			global $wgCirrusSearchRescoreFunctionScoreChains,
+			       $wgCirrusSearchExtraIndexSettings,
+			       $wgCirrusSearchFullTextQueryBuilderProfiles,
+			       $wgCirrusSearchFullTextQueryBuilderProfile;
 			// ElasticSearch function for entity weight
 			$wgCirrusSearchRescoreFunctionScoreChains = array_merge(
 				isset( $wgCirrusSearchRescoreFunctionScoreChains ) ? $wgCirrusSearchRescoreFunctionScoreChains : [],
@@ -125,7 +128,22 @@ final class RepoHooks {
 			);
 			// Bump max fields so that labels/descriptions fields fit in.
 			$wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
-
+			// Set rescore override
+			// TODO: support cirrusWBProfile here too?
+			$profile = $request->getVal( 'cirrusRescoreProfile' );
+			if ( $profile && isset( $searchSettings['rescoreProfiles'][$profile] ) ) {
+				$searchSettings['rescoreProfileOverride'] = $profile;
+				$settings->setSetting( 'entitySearch', $searchSettings );
+			}
+			// Add Wikibase profiles to fulltext search profiles
+			$wgCirrusSearchFullTextQueryBuilderProfiles = array_merge(
+				$wgCirrusSearchFullTextQueryBuilderProfiles, $searchSettings['searchProfiles']
+			);
+			// Set fulltext profile builder to our profile
+			// We save original profile so that we could delegate to it later
+			$searchSettings['originalSearchProfile'] = $wgCirrusSearchFullTextQueryBuilderProfile;
+			$wgCirrusSearchFullTextQueryBuilderProfile = $searchSettings['fulltextSearchProfile'];
+			$settings->setSetting( 'entitySearch', $searchSettings );
 		}
 
 		return true;
@@ -586,6 +604,7 @@ final class RepoHooks {
 		SpecialSearch $specialSearch,
 		array &$query
 	) {
+		// FIXME: make snippet so that LinkBegin handler doesn't mess it up.
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
