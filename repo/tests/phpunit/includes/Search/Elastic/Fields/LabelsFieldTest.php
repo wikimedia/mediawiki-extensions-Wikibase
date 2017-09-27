@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use CirrusSearch;
-use PHPUnit_Framework_TestCase;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -11,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsField;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\LabelsField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\LabelsField
  *
  * @group WikibaseElastic
  * @group Wikibase
@@ -19,7 +18,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelsField;
  * @license GPL-2.0+
  * @author Stas Malyshev
  */
-class LabelsFieldTest extends PHPUnit_Framework_TestCase {
+class LabelsFieldTest extends SearchFieldTestCase {
 
 	public function getFieldDataProvider() {
 		$item = new Item();
@@ -60,6 +59,8 @@ class LabelsFieldTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider  getFieldDataProvider
+	 * @param $expected
+	 * @param EntityDocument $entity
 	 */
 	public function testLabels( $expected, EntityDocument $entity ) {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
@@ -71,8 +72,7 @@ class LabelsFieldTest extends PHPUnit_Framework_TestCase {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
-
-		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
+		$searchEngine = $this->getSearchEngineMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
 		$mapping = $labels->getMapping( $searchEngine );
@@ -92,13 +92,11 @@ class LabelsFieldTest extends PHPUnit_Framework_TestCase {
 
 	public function testHints() {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$searchEngine = $this->getSearchEngineMock();
 		if ( !class_exists( CirrusSearch::class ) ) {
-			$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 			$this->assertEquals( [], $labels->getEngineHints( $searchEngine ) );
 		} else {
-			$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
-			$this->assertEquals( [ 'noop' => 'equals' ],
-				$labels->getEngineHints( $searchEngine ) );
+			$this->assertEquals( [ 'noop' => 'equals' ], $labels->getEngineHints( $searchEngine ) );
 		}
 	}
 
