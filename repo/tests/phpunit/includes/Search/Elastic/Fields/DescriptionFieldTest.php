@@ -7,49 +7,45 @@ use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\Search\Elastic\Fields\DescriptionsField;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsField;
 
 /**
- * @covers \Wikibase\Repo\Search\Elastic\Fields\LabelsField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\DescriptionsField
  *
  * @group WikibaseElastic
  * @group Wikibase
  *
- * @license GPL-2.0+
- * @author Stas Malyshev
  */
-class LabelsFieldTest extends SearchFieldTestCase {
+class DescriptionFieldTest extends SearchFieldTestCase {
 
 	public function getFieldDataProvider() {
 		$item = new Item();
-		$item->getFingerprint()->setLabel( 'es', 'Gato' );
-		$item->getFingerprint()->setLabel( 'ru', 'Кошка' );
-		$item->getFingerprint()->setLabel( 'de', 'Katze' );
-		$item->getFingerprint()->setLabel( 'fr', 'Chat' );
+		$item->getFingerprint()->setDescription( 'es', 'Gato' );
+		$item->getFingerprint()->setDescription( 'ru', 'Кошка' );
+		$item->getFingerprint()->setDescription( 'de', 'Katze' );
+		$item->getFingerprint()->setDescription( 'fr', 'Chat' );
 
 		$prop = Property::newFromType( 'string' );
-		$prop->getFingerprint()->setLabel( 'en', 'astrological sign' );
-		$prop->getFingerprint()->setLabel( 'ru', 'знак зодиака' );
-		$prop->getFingerprint()->setAliasGroup( 'en', [ 'zodiac sign' ] );
-		$prop->getFingerprint()->setAliasGroup( 'es', [ 'signo zodiacal' ] );
+		$prop->getFingerprint()->setDescription( 'en', 'astrological sign' );
+		$prop->getFingerprint()->setDescription( 'ru', 'знак зодиака' );
 
 		$mock = $this->getMock( EntityDocument::class );
 
 		return [
 			[
 				[
-					'es' => [ 'Gato' ],
-					'ru' => [ 'Кошка' ],
-					'de' => [ 'Katze' ],
-					'fr' => [ 'Chat' ]
+					'es' => 'Gato',
+					'ru' => 'Кошка',
+					'de' => 'Katze',
+					'fr' => 'Chat'
 				],
 				$item
 			],
 			[
 				[
-					'en' => [ 'astrological sign', 'zodiac sign' ],
-					'ru' => [ 'знак зодиака' ],
-					'es' => [ '', 'signo zodiacal' ],
+					'en' => 'astrological sign',
+					'ru' => 'знак зодиака',
 				],
 				$prop
 			],
@@ -62,8 +58,8 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	 * @param $expected
 	 * @param EntityDocument $entity
 	 */
-	public function testLabels( $expected, EntityDocument $entity ) {
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+	public function testDescriptions( $expected, EntityDocument $entity ) {
+		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ] );
 		$this->assertEquals( $expected, $labels->getFieldData( $entity ) );
 	}
 
@@ -82,7 +78,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testGetMappingOtherSearchEngine() {
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ] );
 
 		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
@@ -91,7 +87,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testHints() {
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ] );
 		$searchEngine = $this->getSearchEngineMock();
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->assertEquals( [], $labels->getEngineHints( $searchEngine ) );
