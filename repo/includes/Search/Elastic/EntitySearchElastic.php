@@ -25,7 +25,6 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * @author Stas Malyshev
  */
 class EntitySearchElastic implements EntitySearchHelper {
-
 	/**
 	 * Default rescore profile
 	 */
@@ -35,6 +34,11 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * Name of the context for profile name resolution
 	 */
 	const CONTEXT_WIKIBASE_PREFIX = 'wikibase_prefix_search';
+
+	/**
+	 * Name of the context for profile name resolution
+	 */
+	const CONTEXT_WIKIBASE_FULLTEXT = 'wikibase_fulltext_search';
 
 	/**
 	 * Name of the profile type used to build the elastic query
@@ -206,7 +210,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		}
 
 		foreach ( $fields as $field ) {
-			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $text ) );
+			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $text ) );
 		}
 
 		foreach ( $fieldsExact as $field ) {
@@ -216,7 +220,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery = new BoolQuery();
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addShould( $dismax );
-		$titleMatch = new Term( [ 'title.keyword' => $this->normalizeId( $text ) ] );
+		$titleMatch = new Term( [ 'title.keyword' => EntitySearchUtils::normalizeId( $text, $this->idParser ) ] );
 
 		// Match either labels or exact match to title
 		$query->addShould( $labelsQuery );
@@ -241,47 +245,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$csquery->setFilter( new Match( $field, $text ) );
 		$csquery->setBoost( $boost );
 		return $csquery;
-	}
-
-	/**
-	 * Parse entity ID or return null
-	 * @param $text
-	 * @return null|\Wikibase\DataModel\Entity\EntityId
-	 */
-	private function parseOrNull( $text ) {
-		try {
-			$id = $this->idParser->parse( $text );
-		} catch ( EntityIdParsingException $ex ) {
-			return null;
-		}
-		return $id;
-	}
-
-	/**
-	 * If the text looks like ID, normalize it to ID title
-	 * Cases handled:
-	 * - q42
-	 * - (q42)
-	 * - leading/trailing spaces
-	 * - http://www.wikidata.org/entity/Q42
-	 * @param string $text
-	 * @return string Normalized ID or original string
-	 */
-	private function normalizeId( $text ) {
-		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
-		// or add new subfiled which is case-insensitive
-		$text = strtoupper( str_replace( [ '(', ')' ], '', trim( $text ) ) );
-		$id = $this->parseOrNull( $text );
-		if ( $id ) {
-			return $id->getSerialization();
-		}
-		if ( preg_match( '/\b(\w+)$/', $text, $matches ) && $matches[1] ) {
-			$id = $this->parseOrNull( $matches[1] );
-			if ( $id ) {
-				return $id->getSerialization();
-			}
-		}
-		return $text;
 	}
 
 	/**
