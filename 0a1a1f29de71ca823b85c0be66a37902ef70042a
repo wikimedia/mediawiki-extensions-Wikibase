@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_df66ff25",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-27T20:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_e47c96ea",
+      "range": {
+        "startLine": 349,
+        "startChar": 16,
+        "endLine": 349,
+        "endChar": 34
+      },
+      "revId": "0a1a1f29de71ca823b85c0be66a37902ef70042a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_c414f2a2",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_ffbc2369",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-27T20:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_c414f2a2",
+      "range": {
+        "startLine": 142,
+        "startChar": 47,
+        "endLine": 142,
+        "endChar": 48
+      },
+      "revId": "0a1a1f29de71ca823b85c0be66a37902ef70042a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_84559a54",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2017-09-27T18:29:11Z",
       "side": 1,
       "message": "local statements",
+      "range": {
+        "startLine": 151,
+        "startChar": 2,
+        "endLine": 151,
+        "endChar": 12
+      },
+      "revId": "0a1a1f29de71ca823b85c0be66a37902ef70042a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_dfb7df82",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-27T20:37:00Z",
+      "side": 1,
+      "message": "Copy and paste :D Done!",
+      "parentUuid": "0e6af365_84559a54",
       "range": {
         "startLine": 151,
         "startChar": 2,
