@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_5130c3fc",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-27T22:17:45Z",
+      "side": 1,
+      "message": "I think for now I\u0027d just segregate entity and generic queries, and ignore syntax for entity queries. Later we could revisit this (maybe even in this very patch) but I don\u0027t want to complicate the matters too early.",
+      "parentUuid": "0e6af365_ad4c49a0",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_8d3e25d6",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 1
