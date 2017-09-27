@@ -200,6 +200,7 @@
 	"wikibase-newentity-description": "Description:",
 	"wikibase-newentity-submit": "Create",
 	"special-setlabel": "Set a label",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|statement|statements}}, $2 {{PLURAL:$2|sitelink|sitelinks}}",
 	"wikibase-setlabel-introfull": "You are setting the label in $2 for [[$1]].",
 	"wikibase-setlabel-intro": "This form allows you to set the label of an entity. You need to provide the ID of the entity (e.g. Q23), a language code (e.g. \"en\") and the label to set to.",
 	"wikibase-setlabel-label": "Label:",
