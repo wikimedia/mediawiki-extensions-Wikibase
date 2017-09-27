@@ -21,9 +21,13 @@ class LabelsField extends TermIndexField {
 	 */
 	private $languages;
 
+	/**
+	 * LabelsField constructor.
+	 * @param string[] $languages
+	 */
 	public function __construct( $languages ) {
 		$this->languages = $languages;
-		parent::__construct( "", \SearchIndexField::INDEX_TYPE_NESTED );
+		parent::__construct( "labels", \SearchIndexField::INDEX_TYPE_NESTED );
 	}
 
 	/**
@@ -50,6 +54,11 @@ class LabelsField extends TermIndexField {
 			$langConfig['fields']['near_match_folded'] =
 				$this->getSubfield( 'near_match_asciifolding' );
 			$langConfig['fields']['near_match'] = $this->getSubfield( 'near_match' );
+			// This one is for full-text search, will tokenize
+			// TODO: here we probably will need better language-specific analyzers
+			$langConfig['fields']['plain'] = $this->getTokenizedSubfield( $engine->getConfig(),
+				$language . '_plain', $language . '_plain_search' );
+			// All labels are copies to labels_all
 			$langConfig['copy_to'] = 'labels_all';
 
 			$config['properties'][$language] = $langConfig;
@@ -85,6 +94,13 @@ class LabelsField extends TermIndexField {
 		return $data;
 	}
 
+	/**
+	 * Set engine hints.
+	 * Specifically, sets noop hint so that labels would be compared
+	 * as arrays and removal of labels would be processed correctly.
+	 * @param SearchEngine $engine
+	 * @return array
+	 */
 	public function getEngineHints( SearchEngine $engine ) {
 		if ( !( $engine instanceof CirrusSearch ) ) {
 			// For now only Cirrus/Elastic is supported

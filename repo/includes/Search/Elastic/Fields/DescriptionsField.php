@@ -13,30 +13,60 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
  * @license GPL-2.0+
  * @author Stas Malyshev
  */
-class DescriptionsField implements WikibaseIndexField {
+class DescriptionsField extends TermIndexField {
 
 	/**
 	 * List of available languages
 	 * @var string[]
 	 */
 	private $languages;
+	/**
+	 * @var array
+	 */
+	private $searchSettings;
 
 	/**
 	 * @param string[] $languages Available languages list.
+	 * @param array $searchSettings Search config
 	 */
-	public function __construct( array $languages ) {
+	public function __construct( array $languages, array $searchSettings ) {
 		$this->languages = $languages;
+		parent::__construct( "description", \SearchIndexField::INDEX_TYPE_NESTED );
+		$this->searchSettings = $searchSettings;
 	}
 
 	/**
 	 * @param SearchEngine $engine
-	 * @param string $name
-	 * @return null|\SearchIndexField
+	 * @return null|array
 	 */
-	public function getMappingField( SearchEngine $engine, $name ) {
-		// TODO: no mapping for now, since we're only storing it for retrieval
-		// When we start indexing it, we'll need to figure out how to add proper analyzers
-		return null;
+	public function getMapping( SearchEngine $engine ) {
+		// Since we need a specially tuned field, we can not use
+		// standard search engine types.
+		if ( !( $engine instanceof CirrusSearch ) ) {
+			// For now only Cirrus/Elastic is supported
+			return [];
+		}
+
+		$config = [
+			'type' => 'object',
+			'properties' => []
+		];
+		foreach ( $this->languages as $language ) {
+			// TODO: here we probably will need better language-specific analyzers
+			if ( empty( $this->searchSettings['useStemming'][$language]['index'] ) ) {
+				$langConfig = [ 'type' => 'text', 'index' => 'no' ];
+			} else {
+				$langConfig = $this->getTokenizedSubfield( $engine->getConfig(),
+					$language . '_text',
+					$language . '_text_search'
+				);
+			}
+			$langConfig['fields']['plain'] = $this->getTokenizedSubfield( $engine->getConfig(), $language . '_plain',
+					$language . '_plain_search' );
+			$config['properties'][$language] = $langConfig;
+		}
+
+		return $config;
 	}
 
 	/**
@@ -55,6 +85,13 @@ class DescriptionsField implements WikibaseIndexField {
 		return $data;
 	}
 
+	/**
+	 * Set engine hints.
+	 * Specifically, sets noop hint so that descriptions would be compared
+	 * as arrays and removal of description would be processed correctly.
+	 * @param SearchEngine $engine
+	 * @return array
+	 */
 	public function getEngineHints( SearchEngine $engine ) {
 		if ( !( $engine instanceof CirrusSearch ) ) {
 			// For now only Cirrus/Elastic is supported
