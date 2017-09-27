@@ -9,7 +9,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\StatementCountField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\StatementCountField
  *
  * @group WikibaseElastic
  * @group Wikibase
