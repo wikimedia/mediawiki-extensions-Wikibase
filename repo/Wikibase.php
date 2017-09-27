@@ -994,7 +994,7 @@ call_user_func( function() {
 	$wgHooks['ApiCheckCanExecute'][] = 'Wikibase\RepoHooks::onApiCheckCanExecute';
 	$wgHooks['SetupAfterCache'][] = 'Wikibase\RepoHooks::onSetupAfterCache';
 	$wgHooks['ShowSearchHit'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHit';
-	$wgHooks['ShowSearchHitTitle'][] = 'Wikibase\RepoHooks::onShowSearchHitTitle';
+	$wgHooks['ShowSearchHitTitle'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHitTitle';
 	$wgHooks['TitleGetRestrictionTypes'][] = 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
 	$wgHooks['AbuseFilter-contentToString'][] = 'Wikibase\RepoHooks::onAbuseFilterContentToString';
 	$wgHooks['SpecialPage_reorderPages'][] = 'Wikibase\RepoHooks::onSpecialPageReorderPages';
@@ -1033,7 +1033,12 @@ call_user_func( function() {
 	// vs. fallback language match.
 	$wgWBRepoSettings['entitySearch']['prefixSearchProfiles'] =
 		require __DIR__ . '/config/EntityPrefixSearchProfiles.php';
-	// Wikibase prefix search scoring profile for CirrusSearch.
+	// Field weight profiles. These profiles specify relative weights
+	// of label fields for different languages, e.g. exact language match
+	// vs. fallback language match.
+	$wgWBRepoSettings['entitySearch']['searchProfiles'] =
+		require __DIR__ . '/config/EntitySearchProfiles.php';
+	// Wikibase search rescoring profiles for CirrusSearch.
 	// This profile applies to the whole document.
 	// These configurations define how the results are ordered.
 	// The names should be distinct from other Cirrus rescoring profile, so
