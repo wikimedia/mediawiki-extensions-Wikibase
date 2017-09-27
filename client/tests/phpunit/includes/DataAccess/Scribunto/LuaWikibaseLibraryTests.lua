@@ -32,6 +32,18 @@ local function testGetBestStatementsFormat()
 	return directAccess == entityAccess
 end
 
+local function testGetStatementsType()
+	return type( mw.wikibase.getStatements( 'Q199024', 'P342' ) )
+end
+
+local function testGetStatementsFormat()
+	local directAccess = mw.dumpObject( mw.wikibase.getStatements( 'Q32487', 'P342' ) )
+	local directBestAccess = mw.dumpObject( mw.wikibase.getBestStatements( 'Q32487', 'P342' ) )
+	local entityAccess = mw.dumpObject( mw.wikibase.getEntity( 'Q32487' ).claims.P342 )
+
+	return directBestAccess ~= directAccess and directAccess == entityAccess
+end
+
 local function testGetEntityObjectIsCloned()
 	mw.wikibase.getEntityObject( 'Q199024' ).id = 'a'
 
@@ -102,10 +114,32 @@ local tests = {
 	{ name = 'mw.wikibase.getEntityObject (type)', func = testGetEntityObjectType, type='ToString',
 	  expect = { 'table' }
 	},
+	{ name = 'mw.wikibase.getBestStatements (entityId must be string)', func = mw.wikibase.getBestStatements, type='ToString',
+	  args = { 0, 'P12' },
+	  expect = "bad argument #1 to 'getBestStatements' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getBestStatements (entityId must be string)', func = mw.wikibase.getBestStatements, type='ToString',
+	  args = { 'Q2', 12 },
+	  expect = "bad argument #2 to 'getBestStatements' (string expected, got number)"
+	},
 	{ name = 'mw.wikibase.getBestStatements (type)', func = testGetBestStatementsType, type='ToString',
 	  expect = { 'table' }
 	},
 	{ name = 'mw.wikibase.getBestStatements (format)', func = testGetBestStatementsFormat,
+	  expect = { true }
+	},
+	{ name = 'mw.wikibase.getStatements (entityId must be string)', func = mw.wikibase.getStatements, type='ToString',
+	  args = { 0, 'P12' },
+	  expect = "bad argument #1 to 'getStatements' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getStatements (entityId must be string)', func = mw.wikibase.getStatements, type='ToString',
+	  args = { 'Q2', 12 },
+	  expect = "bad argument #2 to 'getStatements' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getStatements (type)', func = testGetStatementsType, type='ToString',
+	  expect = { 'table' }
+	},
+	{ name = 'mw.wikibase.getStatements (format)', func = testGetStatementsFormat,
 	  expect = { true }
 	},
 	{ name = 'mw.wikibase.getEntityObject (is cloned)', func = testGetEntityObjectIsCloned, type='ToString',
