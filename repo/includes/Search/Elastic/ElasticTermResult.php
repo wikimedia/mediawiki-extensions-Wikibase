@@ -128,41 +128,6 @@ class ElasticTermResult implements ResultsType {
 	}
 
 	/**
-	 * Locate label for display among the source data, basing on fallback chain.
-	 * @param array $sourceData
-	 * @param string $field
-	 * @return null|Term
-	 */
-	private function findTermForDisplay( $sourceData, $field ) {
-		if ( empty( $sourceData[$field] ) ) {
-			return null;
-		}
-
-		$data = $sourceData[$field];
-		$first = reset( $data );
-		if ( is_array( $first ) ) {
-			// If we have multiple, like for labels, extract the first one
-			$labels_data = array_map(
-				function ( $data ) {
-					return isset( $data[0] ) ? $data[0] : null;
-				},
-				$data
-			);
-		} else {
-			$labels_data = $data;
-		}
-		// Drop empty ones
-		$labels_data = array_filter( $labels_data );
-
-		$preferredValue = $this->fallbackChain->extractPreferredValueOrAny( $labels_data );
-		if ( $preferredValue ) {
-			return new Term( $preferredValue['language'], $preferredValue['value'] );
-		}
-
-		return null;
-	}
-
-	/**
 	 * Convert search result from ElasticSearch result set to TermSearchResult.
 	 * @param SearchContext $context
 	 * @param \Elastica\ResultSet $result
@@ -181,8 +146,8 @@ class ElasticTermResult implements ResultsType {
 
 			// Highlight part contains information about what has actually been matched.
 			$highlight = $r->getHighlights();
-			$displayLabel = $this->findTermForDisplay( $sourceData, 'labels' );
-			$displayDescription = $this->findTermForDisplay( $sourceData, 'descriptions' );
+			$displayLabel = EntitySearchUtils::findTermForDisplay( $sourceData, 'labels', $this->fallbackChain );
+			$displayDescription = EntitySearchUtils::findTermForDisplay( $sourceData, 'descriptions', $this->fallbackChain );
 
 			if ( !empty( $highlight['title'] ) ) {
 				// If we matched title, this means it's a match by ID
