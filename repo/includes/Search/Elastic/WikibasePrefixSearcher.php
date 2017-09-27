@@ -37,7 +37,7 @@ class WikibasePrefixSearcher extends Searcher {
 	 * @return \Elastica\Search
 	 */
 	protected function buildSearch() {
-		$this->getSearchContext()->addSyntaxUsed( 'wikibase_prefix', PHP_INT_MAX );
+		$this->searchContext->addSyntaxUsed( 'wikibase_prefix', PHP_INT_MAX );
 
 		$indexType = $this->connection->pickIndexTypeForNamespaces( $this->getSearchContext()->getNamespaces() );
 		$pageType = $this->connection->getPageType( $this->indexBaseName, $indexType );
@@ -48,11 +48,11 @@ class WikibasePrefixSearcher extends Searcher {
 		];
 		$searchQuery = new Query();
 		$searchQuery->setQuery( $this->query );
-		$resultType = $this->getSearchContext()->getResultsType();
-		$searchQuery->setSource( $resultType->getSourceFiltering() );
-		$searchQuery->setStoredFields( $resultType->getStoredFields() );
+		$resultsType = $this->searchContext->getResultsType();
+		$searchQuery->setSource( $resultsType->getSourceFiltering() );
+		$searchQuery->setStoredFields( $resultsType->getStoredFields() );
 
-		$highlight = $this->searchContext->getHighlight( $resultType );
+		$highlight = $this->searchContext->getHighlight( $resultsType );
 		if ( $highlight ) {
 			$searchQuery->setHighlight( $highlight );
 		}
