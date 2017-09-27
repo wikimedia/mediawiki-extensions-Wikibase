@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Language;
 use Parser;
@@ -10,9 +10,9 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
-use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
-use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
+use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
+use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
+use Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
@@ -33,7 +33,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory
+ * @covers Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory
  *
  * @group Wikibase
  * @group WikibaseClient

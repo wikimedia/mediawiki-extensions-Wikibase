@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
 use Language;
 use ParserOutput;
 use Title;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
-use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
+use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
@@ -23,7 +23,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer
+ * @covers Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient

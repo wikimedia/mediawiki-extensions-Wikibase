@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Parser;
 use ParserOptions;
@@ -10,9 +10,9 @@ use PPFrame_Hash;
 use PPNode;
 use Preprocessor_Hash;
 use Title;
-use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRenderer;
-use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
+use Wikibase\Client\DataAccess\ParserFunctions\Runner;
+use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRenderer;
+use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -21,7 +21,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\DataAccess\PropertyParserFunction\Runner
+ * @covers Wikibase\Client\DataAccess\ParserFunctions\Runner
  *
  * @group Wikibase
  * @group WikibaseClient

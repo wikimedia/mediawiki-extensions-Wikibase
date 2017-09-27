@@ -12,7 +12,7 @@ use Site;
 use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
-use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;

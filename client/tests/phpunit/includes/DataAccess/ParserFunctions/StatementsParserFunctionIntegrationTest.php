@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Language;
 use MediaWikiTestCase;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
-use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
+use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
+use Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer
+ * @covers Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient

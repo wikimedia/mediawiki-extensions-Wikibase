@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use InvalidArgumentException;
 use Language;
