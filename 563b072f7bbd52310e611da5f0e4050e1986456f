@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_ad4c49a0",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-27T08:37:57Z",
+      "side": 1,
+      "message": "Because we lack a generic query parser I think we still need to call $this-\u003edelegate-\u003ebuild and inspect the syntaxUsed array to see if there are any syntax we do not support in this builder.\nE.g. the query word1 NOT word2 should not run through this builder but the delegate if you don\u0027t support this syntax.",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_8d3e25d6",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-27T08:37:57Z",
+      "side": 1,
+      "message": "I think we should separate constant score fields (untokenized) and normal match/multi_match fields (tokenized)\nHere the all field is tokenized and its score should matter.\n\nI\u0027d put scoring queries (alongside with future tokenized fields like descriptions) outside the dismax.\n\n- dismax\n  - const(labels.$lang)\n  - const(labels.$fallback)\n  - const(labels_all) // \u003c missing?\n  - const(title.keyword)\n- bool (should or perhaps dismax with a tiebreaker, still unclear to me)\n  - all\n  - all.plain\n  - description.$lang\n  - description.$fallback\n  - description_all (will we have a description_all?)",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_0df8f545",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-27T08:37:57Z",
+      "side": 1,
+      "message": "there are no reasons to run a special degraded query here.\nThis method is here to catch-up query_string syntax errors we failed to detect on our side that failed on elastic.\nSince here we do not send any query that can potentially fail on elastic if we enter this code it means that you\u0027ve built the query with your delegate and it\u0027s wise to use the delegate again in that case.",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
