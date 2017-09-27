@@ -1,0 +1,142 @@
+{
+    "bool": {
+        "disable_coord": true,
+        "should": [
+            {
+                "term": {
+                    "title.keyword": "P128"
+                }
+            },
+            {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match": {
+                                            "all": {
+                                                "query": "(p128) ",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "all.plain": {
+                                                "query": "(p128) ",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "descriptions.en": {
+                                                "query": "(p128) ",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "should": [
+                        {
+                            "dis_max": {
+                                "tie_breaker": 0,
+                                "queries": [
+                                    {
+                                        "constant_score": {
+                                            "filter": {
+                                                "match": {
+                                                    "labels.en.near_match": "(p128) "
+                                                }
+                                            },
+                                            "boost": 0.78
+                                        }
+                                    },
+                                    {
+                                        "constant_score": {
+                                            "filter": {
+                                                "match": {
+                                                    "labels.en.near_match_folded": "(p128) "
+                                                }
+                                            },
+                                            "boost": 0.01
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match": {
+                                            "all": {
+                                                "query": "(p128) ",
+                                                "operator": "OR",
+                                                "boost": 0.04
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "all.plain": {
+                                                "query": "(p128) ",
+                                                "operator": "OR",
+                                                "boost": 0.04
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "tie_breaker": 0.2,
+                                            "queries": [
+                                                {
+                                                    "match": {
+                                                        "descriptions.en": {
+                                                            "query": "(p128) ",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "labels.en.plain": {
+                                                            "query": "(p128) ",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "descriptions.en.plain": {
+                                                            "query": "(p128) ",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "minimum_should_match": 1,
+        "filter": [
+            {
+                "terms": {
+                    "namespace": [
+                        1
+                    ]
+                }
+            }
+        ]
+    }
+}

@@ -236,6 +236,7 @@
 	"wikibase-newentity-description": "Label for the \"description\" textfield holding the description of the new item.\n{{Identical|Description}}",
 	"wikibase-newentity-submit": "Text for the submit button on the CreateItem special page.\n{{Identical|Create}}",
 	"special-setlabel": "{{doc-special|SetLabel}}\nThe special page allows the user to set an entity's label in a particular language.",
+	"wikibase-search-result-stats": "Statistics display as part of search result. Parameters:\n* $1 - Statements count, \n* $2 - Sitelinks count.",
 	"wikibase-setlabel-introfull": "Intro text when label is to be set. Parameters:\n* $1 - the ID that links to the entity\n* $2 - the translated language name (possibly autonym) label, description and aliases are to be set in.",
 	"wikibase-setlabel-intro": "A short text at the top of the page that allows users to set an entity's label explaining the form. Feel free to change \"en\" to your language code(s).",
 	"wikibase-setlabel-label": "Label for the input field to type the label to set the entity to.\n{{Identical|Label}}",
