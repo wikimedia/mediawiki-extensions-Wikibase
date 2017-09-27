@@ -135,24 +135,41 @@ function wikibase.setupInterface()
 	-- getEntityObject is an alias for getEntity as these used to be different.
 	wikibase.getEntityObject = wikibase.getEntity
 
-	-- Get the statement list array for the specified entityId and propertyId.
+	-- Get statements for the specified entityId and propertyId.
 	--
 	-- @param {string} [entityId]
 	-- @param {string} [propertyId]
-	wikibase.getBestStatements = function( entityId, propertyId )
+	-- @param {string} [bestStatementsOnly] Which Statements to include: Either "best" or "all"
+	local getEntityStatements = function( entityId, propertyId, funcName, bestStatementsOnly )
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary items has been disabled.', 2 )
 		end
 
-		checkType( 'getBestStatements', 1, entityId, 'string' )
-		checkType( 'getBestStatements', 2, propertyId, 'string' )
+		checkType( funcName, 1, entityId, 'string' )
+		checkType( funcName, 2, propertyId, 'string' )
 
-		statements = php.getEntityStatement( entityId, propertyId )
+		statements = php.getEntityStatements( entityId, propertyId, bestStatementsOnly )
 		if statements == nil or statements[propertyId] == nil then
 			return {}
 		else
 			return statements[propertyId]
 		end
+	end
+
+	-- Get all statements for the specified entityId and propertyId.
+	--
+	-- @param {string} [entityId]
+	-- @param {string} [propertyId]
+	wikibase.getStatements = function( entityId, propertyId )
+		return getEntityStatements( entityId, propertyId, 'getStatements', 'all' )
+	end
+
+	-- Get the best statements for the specified entityId and propertyId.
+	--
+	-- @param {string} [entityId]
+	-- @param {string} [propertyId]
+	wikibase.getBestStatements = function( entityId, propertyId )
+		return getEntityStatements( entityId, propertyId, 'getBestStatements', 'best' )
 	end
 
 	-- Get the URL for the given entity id, if specified, or of the

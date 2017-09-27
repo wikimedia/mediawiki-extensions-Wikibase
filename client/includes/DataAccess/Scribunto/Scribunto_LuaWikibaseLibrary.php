@@ -297,7 +297,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$lib = [
 			'getLabel' => [ $this, 'getLabel' ],
 			'getEntity' => [ $this, 'getEntity' ],
-			'getEntityStatement' => [ $this, 'getEntityStatement' ],
+			'getEntityStatements' => [ $this, 'getEntityStatements' ],
 			'getSetting' => [ $this, 'getSetting' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
 			'renderSnak' => [ $this, 'renderSnak' ],
@@ -350,16 +350,18 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $prefixedEntityId
 	 * @param string $propertyId
+	 * @param string $bestStatementsOnly Either 'best' or 'all'
 	 *
 	 * @throws ScribuntoException
 	 * @return array
 	 */
-	public function getEntityStatement( $prefixedEntityId, $propertyId ) {
+	public function getEntityStatements( $prefixedEntityId, $propertyId, $bestStatementsOnly ) {
 		$this->checkType( 'getEntityStatement', 1, $prefixedEntityId, 'string' );
 		$this->checkType( 'getEntityStatement', 2, $propertyId, 'string' );
+		$this->checkType( 'getEntityStatement', 3, $bestStatementsOnly, 'string' );
 
 		try {
-			$statements = $this->getEntityAccessor()->getEntityStatement( $prefixedEntityId, $propertyId );
+			$statements = $this->getEntityAccessor()->getEntityStatements( $prefixedEntityId, $propertyId, $bestStatementsOnly );
 		} catch ( EntityAccessLimitException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( EntityIdParsingException $ex ) {
