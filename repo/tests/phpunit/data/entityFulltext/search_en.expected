@@ -1,0 +1,142 @@
+{
+    "bool": {
+        "disable_coord": true,
+        "should": [
+            {
+                "term": {
+                    "title.keyword": "DUCK"
+                }
+            },
+            {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match": {
+                                            "all": {
+                                                "query": "Duck",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "all.plain": {
+                                                "query": "Duck",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "descriptions.en": {
+                                                "query": "Duck",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "should": [
+                        {
+                            "dis_max": {
+                                "tie_breaker": 0,
+                                "queries": [
+                                    {
+                                        "constant_score": {
+                                            "filter": {
+                                                "match": {
+                                                    "labels.en.near_match": "Duck"
+                                                }
+                                            },
+                                            "boost": 0.78
+                                        }
+                                    },
+                                    {
+                                        "constant_score": {
+                                            "filter": {
+                                                "match": {
+                                                    "labels.en.near_match_folded": "Duck"
+                                                }
+                                            },
+                                            "boost": 0.01
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match": {
+                                            "all": {
+                                                "query": "Duck",
+                                                "operator": "OR",
+                                                "boost": 0.04
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "all.plain": {
+                                                "query": "Duck",
+                                                "operator": "OR",
+                                                "boost": 0.04
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "tie_breaker": 0.2,
+                                            "queries": [
+                                                {
+                                                    "match": {
+                                                        "descriptions.en": {
+                                                            "query": "Duck",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "labels.en.plain": {
+                                                            "query": "Duck",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "descriptions.en.plain": {
+                                                            "query": "Duck",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "minimum_should_match": 1,
+        "filter": [
+            {
+                "terms": {
+                    "namespace": [
+                        0
+                    ]
+                }
+            }
+        ]
+    }
+}
