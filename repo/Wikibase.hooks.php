@@ -6,6 +6,7 @@ use ApiBase;
 use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
+use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -987,6 +988,20 @@ final class RepoHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
+	}
+
+	/**
+	 * @param $config
+	 * @param AnalysisConfigBuilder $builder
+	 */
+	public static function onCirrusSearchAnalysisConfig( &$config, AnalysisConfigBuilder $builder ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$languages = $wikibaseRepo->getTermsLanguages()->getLanguages();
+		foreach ( $languages as $lang ) {
+			$configTypes[$builder->getDefaultTextAnalyzerType( $lang )][] = $lang;
+		}
+		// Next: process types & individual languages and see if we need to use
+		// type-level config or language-level config
 	}
 
 }
