@@ -9,13 +9,13 @@ return [
 		'score_mode' => 'sum',
 		'functions' => [
 			[
-				// Incoming links: k = 50
+				// Incoming links: k = 100, since it is normal to have a bunch of incoming links
 				'type' => 'satu',
 				'weight' => '0.6',
-				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 2 , 'k' => 50 ]
+				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 1, 'k' => 100 ]
 			],
 			[
-				// Site links: k = 20
+				// Site links: k = 20, tens of sites is a lot
 				'type' => 'satu',
 				'weight' => '0.4',
 				'params' => [ 'field' => 'sitelink_count', 'missing' => 0, 'a' => 2, 'k' => 20 ]
@@ -26,19 +26,19 @@ return [
 		'score_mode' => 'sum',
 		'functions' => [
 			[
-				// Incoming links: k = 50
+				// Incoming links: k = 100, since it is normal to have a bunch of incoming links
 				'type' => 'satu',
 				'weight' => '0.6',
-				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 2 , 'k' => 50 ]
+				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 1 , 'k' => 100 ]
 			],
 			[
-				// Site links: k = 20
+				// Site links: k = 20, tens of sites is a lot
 				'type' => 'satu',
 				'weight' => '0.4',
 				'params' => [ 'field' => 'sitelink_count', 'missing' => 0, 'a' => 2, 'k' => 20 ]
 			],
 			[
-				// (De)boosting by statement values
+				// (De)boosting by statement values, see statementBoost in search settings
 				'type' => 'statement_boost',
 				'weight' => '0.1',
 			]
