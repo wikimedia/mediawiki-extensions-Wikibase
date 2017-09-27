@@ -1,0 +1,142 @@
+{
+    "bool": {
+        "disable_coord": true,
+        "should": [
+            {
+                "term": {
+                    "title.keyword": "Q42"
+                }
+            },
+            {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match": {
+                                            "all": {
+                                                "query": "q42",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "all.plain": {
+                                                "query": "q42",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "descriptions.en": {
+                                                "query": "q42",
+                                                "operator": "AND"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "should": [
+                        {
+                            "dis_max": {
+                                "tie_breaker": 0,
+                                "queries": [
+                                    {
+                                        "constant_score": {
+                                            "filter": {
+                                                "match": {
+                                                    "labels.en.near_match": "q42"
+                                                }
+                                            },
+                                            "boost": 0.78
+                                        }
+                                    },
+                                    {
+                                        "constant_score": {
+                                            "filter": {
+                                                "match": {
+                                                    "labels.en.near_match_folded": "q42"
+                                                }
+                                            },
+                                            "boost": 0.01
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match": {
+                                            "all": {
+                                                "query": "q42",
+                                                "operator": "OR",
+                                                "boost": 0.04
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "match": {
+                                            "all.plain": {
+                                                "query": "q42",
+                                                "operator": "OR",
+                                                "boost": 0.04
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "tie_breaker": 0.2,
+                                            "queries": [
+                                                {
+                                                    "match": {
+                                                        "descriptions.en": {
+                                                            "query": "q42",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "labels.en.plain": {
+                                                            "query": "q42",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "descriptions.en.plain": {
+                                                            "query": "q42",
+                                                            "boost": 0.07
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "minimum_should_match": 1,
+        "filter": [
+            {
+                "terms": {
+                    "namespace": [
+                        0
+                    ]
+                }
+            }
+        ]
+    }
+}
