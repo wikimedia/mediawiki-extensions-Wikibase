@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use Action;
 use DummyLinker;
+use HtmlArmor;
 use Language;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
@@ -80,7 +81,7 @@ class LinkBeginHookHandler {
 	/**
 	 * @return self
 	 */
-	private static function newFromGlobalState() {
+	public static function newFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::newFromGlobalState
@@ -169,6 +170,15 @@ class LinkBeginHookHandler {
 	}
 
 	/**
+	 * Lookup local ID
+	 * @param Title $target
+	 * @return null|EntityId
+	 */
+	public function lookupLocalId( Title $target ) {
+		return $this->entityIdLookup->getEntityIdForTitle( $target );
+	}
+
+	/**
 	 * @param Title $target
 	 * @param string &$html
 	 * @param array &$customAttribs
@@ -222,7 +232,7 @@ class LinkBeginHookHandler {
 			return;
 		}
 
-		$entityId = $foreignEntityId ?: $this->entityIdLookup->getEntityIdForTitle( $target );
+		$entityId = $foreignEntityId ?: $this->lookupLocalId( $target );
 
 		if ( !$entityId ) {
 			return;
@@ -383,7 +393,7 @@ class LinkBeginHookHandler {
 	 *
 	 * @return string
 	 */
-	private function getHtml( $entityIdSerialization, array $labelData = null ) {
+	public function getHtml( $entityIdSerialization, array $labelData = null ) {
 		/** @var Language $labelLang */
 		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
 
@@ -395,9 +405,9 @@ class LinkBeginHookHandler {
 			. '</span>';
 
 		$labelHtml = '<span class="wb-itemlink-label"'
-				. ' lang="' . htmlspecialchars( $labelLang->getHtmlCode() ) . '"'
+				. ' lang="' . htmlspecialchars( wfBCP47( $labelLang->getHtmlCode() ) ) . '"'
 				. ' dir="' . htmlspecialchars( $labelLang->getDir() ) . '">'
-			. htmlspecialchars( $labelText )
+			. HtmlArmor::getHtml( $labelText )
 			. '</span>';
 
 		return '<span class="wb-itemlink">'
@@ -408,7 +418,14 @@ class LinkBeginHookHandler {
 			. '</span>';
 	}
 
-	private function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
+	/**
+	 * Get "title" attribute for the link.
+	 * @param Title $title
+	 * @param array|null $labelData
+	 * @param array|null $descriptionData
+	 * @return string
+	 */
+	public function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
 		/** @var Language $labelLang */
 		/** @var Language $descriptionLang */
 
