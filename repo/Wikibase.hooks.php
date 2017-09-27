@@ -6,6 +6,7 @@ use ApiBase;
 use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
+use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -36,6 +37,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
+use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use WikiPage;
@@ -989,6 +991,11 @@ final class RepoHooks {
 	 * @param array $config
 	 */
 	public static function onCirrusSearchAnalysisConfig( &$config ) {
+        static $inHook;
+        if ( $inHook ) {
+            // Do not call this hook repeatedly, since ConfigBuilder calls AnalysisConfigBuilder
+            return;
+        }
 		// Analyzer for splitting statements and extracting properties:
 		// P31:Q1234 => P31
 		$config['analyzer']['extract_wb_property'] = [
@@ -1004,6 +1011,14 @@ final class RepoHooks {
 			'type' => 'limit',
 			'max_token_count' => 1
 		];
+
+		$wbBuilder = new ConfigBuilder( WikibaseRepo::getDefaultInstance(), $builder );
+		$inHook = true;
+		try {
+			$wbBuilder->buildConfig( $config );
+		} finally {
+			$inHook = false;
+		}
 	}
 
 }
