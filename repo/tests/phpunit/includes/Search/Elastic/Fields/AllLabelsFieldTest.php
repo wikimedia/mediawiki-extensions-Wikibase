@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Search\Elastic\Fields\AllLabelsField;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\AllLabelsField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\AllLabelsField
  *
  * @group WikibaseElastic
  * @group Wikibase
