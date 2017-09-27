@@ -6,6 +6,7 @@ use ApiBase;
 use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
+use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -35,6 +36,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use WikiPage;
@@ -987,6 +989,25 @@ final class RepoHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
+	}
+
+	/**
+	 * @param $config
+	 * @param AnalysisConfigBuilder $builder
+	 */
+	public static function onCirrusSearchAnalysisConfig( &$config, AnalysisConfigBuilder $builder ) {
+		static $inHook;
+		if ( $inHook ) {
+			// Do not call this hook repeatedly, since ConfigBuilder calls AnalysisConfigBuilder
+			return;
+		}
+		$wbBuilder = new ConfigBuilder( WikibaseRepo::getDefaultInstance(), $builder );
+		$inHook = true;
+		try {
+			$wbBuilder->buildConfig( $config );
+		} finally {
+			$inHook = false;
+		}
 	}
 
 }
