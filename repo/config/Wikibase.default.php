@@ -257,8 +257,38 @@ return [
 		'rescoreProfiles' => [],
 		// Type (de)boosts for rescoring functions
 		'statementBoost' => [],
+		// List of languages that we want to have stemming analyzers
+		// 'index' means we generate stemmed field on index
+		// 'query' means we use it on query
+		'useStemming' => [
+			'ar' => [ 'index' => true, 'query' => true ],
+			'ca' => [ 'index' => true, 'query' => true ],
+			'de' => [ 'index' => true, 'query' => true ],
+			'el' => [ 'index' => true, 'query' => true ],
+			'en' => [ 'index' => true, 'query' => true ],
+			'en-ca' => [ 'index' => true, 'query' => true ],
+			'en-gb' => [ 'index' => true, 'query' => true ],
+			'es' => [ 'index' => true, 'query' => true ],
+			'fa' => [ 'index' => true, 'query' => true ],
+			'fr' => [ 'index' => true, 'query' => true ],
+			'hi' => [ 'index' => true, 'query' => true ],
+			'hy' => [ 'index' => true, 'query' => true ],
+			'it' => [ 'index' => true, 'query' => true ],
+			'ja' => [ 'index' => true, 'query' => true ],
+			'ko' => [ 'index' => true, 'query' => true ],
+			'nl' => [ 'index' => true, 'query' => true ],
+			'nn' => [ 'index' => true, 'query' => true ],
+			'pt' => [ 'index' => true, 'query' => true ],
+			'pt-br' => [ 'index' => true, 'query' => true ],
+			'ru' => [ 'index' => true, 'query' => true ],
+			'simple' => [ 'index' => true, 'query' => true ],
+			'sv' => [ 'index' => true, 'query' => true ],
+			'th' => [ 'index' => true, 'query' => true ],
+			'tr' => [ 'index' => true, 'query' => true ],
+		]
 	],
 
 	// List of properties to be indexed
-	'searchIndexProperties' => []
+	'searchIndexProperties' => [],
+
 ];
