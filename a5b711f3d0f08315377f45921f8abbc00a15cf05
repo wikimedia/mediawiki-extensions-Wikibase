@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_608c0bdc",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T16:02:15Z",
+      "side": 1,
+      "message": "This code down here needs a little refactoring. I will rebase my patch Iddfc271 on top of this later to solve this. Just to let you know what I\u0027m planning to do.",
+      "range": {
+        "startLine": 195,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_60f5eb4b",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T16:02:15Z",
+      "side": 1,
+      "message": "This is not optional here. PHP would get a null value and fail.",
+      "range": {
+        "startLine": 142,
+        "startChar": 20,
+        "endLine": 142,
+        "endChar": 40
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_209613f4",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T16:02:15Z",
+      "side": 1,
+      "message": "I simply called this variable \"rank\" in my patch.",
+      "range": {
+        "startLine": 151,
+        "startChar": 68,
+        "endLine": 151,
+        "endChar": 86
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_a0fbe343",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T16:02:15Z",
+      "side": 1,
+      "message": "I always wondered why the entityId parameter is not optional. Some functions in this library do allow to leave this out, and fall back to the current pages entity. Do you think we can allow this here, for this new function? The biggest issue with that might be that it requires us to swap the two parameters around, and by that making it inconsistent to the existing getBestStatements function. I\u0027m not sure how big of an issue this will be, compared to the convenience it provides. What do you think?",
+      "range": {
+        "startLine": 192,
+        "startChar": 30,
+        "endLine": 192,
+        "endChar": 38
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_a0d443bf",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T16:02:15Z",
+      "side": 1,
+      "message": "I think this is critical and we should name the function \"getAllStatements\" to make this more obvious. I think a generic \"getStatements\" is, well, to generic.",
+      "range": {
+        "startLine": 193,
+        "startChar": 37,
+        "endLine": 193,
+        "endChar": 59
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
