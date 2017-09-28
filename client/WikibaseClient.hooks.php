@@ -6,7 +6,6 @@ use Action;
 use BaseTemplate;
 use EchoEvent;
 use EditPage;
-use IContextSource;
 use OutputPage;
 use Parser;
 use Skin;
@@ -21,14 +20,12 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
-use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
-use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -280,42 +277,6 @@ final class ClientHooks {
 	 */
 	public static function onParserFirstCallInit( Parser &$parser ) {
 		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );
-
-		return true;
-	}
-
-	/**
-	 * Adds the Entity ID of the corresponding Wikidata item in action=info
-	 *
-	 * @param IContextSource $context
-	 * @param array $pageInfo
-	 *
-	 * @return bool
-	 */
-	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
-		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$wikibaseClient->getLanguageFallbackChainFactory(),
-			$wikibaseClient->getTermLookup(),
-			$wikibaseClient->getTermBuffer()
-		);
-		$idParser = $wikibaseClient->getEntityIdParser();
-
-		$infoActionHookHandler = new InfoActionHookHandler(
-			$namespaceChecker,
-			$wikibaseClient->newRepoLinker(),
-			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			$settings->getSetting( 'siteGlobalID' ),
-			$usageLookup,
-			$labelDescriptionLookupFactory,
-			$idParser
-		);
-
-		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
 
 		return true;
 	}
