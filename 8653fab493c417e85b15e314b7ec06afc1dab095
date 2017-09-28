@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_f6276560",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T18:28:36Z",
+      "side": 1,
+      "message": "This is undeclared and unused, right? Why not remove it entirely?",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 45
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_76f5b5c6",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T18:28:36Z",
+      "side": 1,
+      "message": "What does this do?",
+      "range": {
+        "startLine": 273,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 56
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_761cd518",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-09-28T18:28:36Z",
+      "side": 1,
+      "message": "Why is this limited to errors?",
+      "range": {
+        "startLine": 535,
+        "startChar": 39,
+        "endLine": 535,
+        "endChar": 44
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
