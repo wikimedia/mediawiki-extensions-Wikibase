@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_e7d33563",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-28T07:52:52Z",
+      "side": 1,
+      "message": "Are you sure that you want to index description as keywords?\nI feel that descriptions are relatively long text that may be better used as a tokenized fields.\nAt a glance I would not index descriptions as keywords (near_match/near_match_folded).",
+      "revId": "9c619ad60f1d8551aaa1da4e10e707dfa90357c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_47e8010c",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-28T07:52:52Z",
+      "side": 1,
+      "message": "oops sorry please ignore my last comment on PS1, I haven\u0027t seen that you\u0027ve uploaded a new patch.",
+      "revId": "9c619ad60f1d8551aaa1da4e10e707dfa90357c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
