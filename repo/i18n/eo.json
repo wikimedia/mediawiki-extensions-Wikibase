@@ -78,7 +78,7 @@
 	"wikibase-statementview-rank-preferred": "Preferata rango",
 	"wikibase-statementview-rank-normal": "Normala rango",
 	"wikibase-statementview-rank-deprecated": "Malpreferata rango",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referenco|referencoj}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referenco|referencoj}}",
 	"wikibase-snakview-property-input-placeholder": "eco",
 	"wikibase-snakview-choosesnaktype": "Elektu specon de valoro.",
 	"wikibase-snakview-variations-somevalue-label": "nekonata valoro",

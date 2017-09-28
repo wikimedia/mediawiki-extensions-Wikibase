@@ -7,6 +7,7 @@
 			"Ans"
 		]
 	},
+	"wikibase-entity-item": "รายการของสิ่งหนึ่ง",
 	"wikibase-entity-property": "คุณลักษณะ",
 	"wikibase-edit": "แก้ไข",
 	"wikibase-save": "บันทึก",
@@ -46,6 +47,7 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|รายการ}}",
 	"wikibase-sitelinks-special": "ไซต์อื่นๆ",
 	"wikibase-remove": "ลบออก",
+	"wikibase-propertypage-datatype": "ชนิดของข้อมูล",
 	"wikibase-statementview-rank-preferred": "ระดับแนะนำ",
 	"wikibase-statementview-rank-normal": "ระดับปกติ",
 	"wikibase-statementview-rank-deprecated": "ระดับไม่แนะนำ",
@@ -55,6 +57,7 @@
 	"wikibase-snakview-variations-novalue-label": "ค่าว่าง",
 	"wikibase-snakview-snaktypeselector-value": "ระบุค่า",
 	"wikibase-itemdisambiguation-lookup-label": "ป้ายชื่อ:",
+	"wikibase-newproperty-datatype": "ชนิดของข้อมูล:",
 	"special-newitem": "สร้างสารสนเทศใหม่",
 	"wikibase-newitem-fieldset": "สร้างสารสนเทศใหม่",
 	"wikibase-newentity-language": "ภาษา:",
@@ -66,6 +69,8 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "ป้ายชื่อ:",
 	"wikibase-modifyterm-language": "รหัสภาษา:",
 	"wikibase-dispatchstats-change-timestamp": "วัน-เวลา",
+	"wikibase-history-title-with-label": "ประวัติการปรับปรุงของ \"$2\" ($1)",
+	"wikibase-listproperties-datatype": "ชนิดของข้อมูล:",
 	"wikibase-entitieswithoutlabel-label-language": "รหัสภาษา:",
 	"wikibase-entity-summary-restore": "กู้คืนรุ่น $3 ซึ่ง [[Special:Contributions/$4|{{GENDER:$4|$4}}]] สร้าง",
 	"wikibase-entity-summary-undo": "ย้อนรุ่น $3 ซึ่ง [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|คุย]]) ได้สร้างไว้",

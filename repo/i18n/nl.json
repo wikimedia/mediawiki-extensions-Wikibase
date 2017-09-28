@@ -312,7 +312,7 @@
 	"wikibase-redirectentity-toid": "Het ID waarnaartoe door te verwijzen",
 	"wikibase-redirectentity-submit": "Doorverwijzing",
 	"special-mylanguagefallbackchain": "Terugvalketen voor mijn taal",
-	"wikibase-mylanguagefallbackchain-text": "De gebruiker terugvalketen voor talen die gebruikt word voor het weergeven van entiteitlabels wordt hieronder weergegeven.",
+	"wikibase-mylanguagefallbackchain-text": "De terugvalketen voor talen die gebruikt word voor het weergeven van entiteitlabels wordt hieronder weergegeven.",
 	"wikibase-mylanguagefallbackchain-babel": "U kunt deze bewerken door <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, omgezet van $3 - $4",
 	"wikibase-api-unresolved-redirect": "De gegeven entiteits-ID verwijst naar een doorverwijzing, wat niet ondersteund wordt in deze context.",
