@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_fb998d72",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-28T22:08:36Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "0e6af365_608c0bdc",
+      "range": {
+        "startLine": 195,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_60f5eb4b",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-28T16:02:15Z",
       "side": 1,
       "message": "This is not optional here. PHP would get a null value and fail.",
+      "range": {
+        "startLine": 142,
+        "startChar": 20,
+        "endLine": 142,
+        "endChar": 40
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_3b908546",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-28T22:08:36Z",
+      "side": 1,
+      "message": "Ah, doh… I simply copy and pasted all of these. Will change.",
+      "parentUuid": "0e6af365_60f5eb4b",
       "range": {
         "startLine": 142,
         "startChar": 20,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_1b8b411d",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-28T22:08:36Z",
+      "side": 1,
+      "message": "Well, I agree with Lydia and Daniel here: I usually think about it in a hierarchical way: Get the entity -\u003e filter statements by property id, which leads to ( entityId, propertyId ) being more natural.\nAllowing nil for the first parameter later on sounds sensible.",
+      "parentUuid": "0e6af365_a0fbe343",
+      "range": {
+        "startLine": 192,
+        "startChar": 30,
+        "endLine": 192,
+        "endChar": 38
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_a0d443bf",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
@@ -105,6 +177,30 @@
       "writtenOn": "2017-09-28T16:02:15Z",
       "side": 1,
       "message": "I think this is critical and we should name the function \"getAllStatements\" to make this more obvious. I think a generic \"getStatements\" is, well, to generic.",
+      "range": {
+        "startLine": 193,
+        "startChar": 37,
+        "endLine": 193,
+        "endChar": 59
+      },
+      "revId": "a5b711f3d0f08315377f45921f8abbc00a15cf05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_fb8aed1b",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-09-28T22:08:36Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "0e6af365_a0d443bf",
       "range": {
         "startLine": 193,
         "startChar": 37,
