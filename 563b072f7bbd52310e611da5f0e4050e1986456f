@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_679ae5bf",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-28T07:48:17Z",
+      "side": 1,
+      "message": "I was talking only only about the scoring part of the query not the filter.\nI think the point is to separate keyword and tokenized fields.\n\nKeyword fields are constant scores and tokenized fields should use a classic match query.\nThe all field should include everything but a match to labels_all could be interesting for ranking, if none of the labels we query (user lang, fallbacks) match does a match on the label of another language is important? I don\u0027t know enough about the data we have but I feel it can be interesting and should be easy to add since we have it indexed now.\n\nFor description_all I think it\u0027s the same problem: will this provide better ranking?\n\nConcerning the filter I agree that we probably only need all+all.plain (and perhaps title.keyword if the entity ID is not included in all).\n\nIf I draft the full query (including the filter) it may look like this :\n\n- filter (filter part)\n  - bool should (min_should_match: 1)\n    - match(all)\n    - match(all.plain)\n    - match(title.keyword) (verify if needed)\n- should (scoring part)\n  - dismax\n    - const(labels.$lang)\n    - const(labels.$fallback)\n    - const(labels_all) // \u003c probably interesting\n    - const(title.keyword)\n  - bool (should clause or perhaps dismax with a tiebreaker, still unclear to me)\n    - all\n    - all.plain\n    - description.$lang\n    - description.$fallback\n    - description_all (needed?)\n\nThe problem related to the code here is that you mixup a tokenized field (all+all.plain) in the list of constant scores, imo it should go outside the dismax with a simple match or multi_match query.",
+      "parentUuid": "0e6af365_91a95b24",
+      "revId": "563b072f7bbd52310e611da5f0e4050e1986456f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_0df8f545",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 1
