@@ -70,6 +70,7 @@ call_user_func( function() {
 	global $wgAPIListModules,
 		$wgAPIMetaModules,
 		$wgAPIPropModules,
+		$wgAPIUselessQueryPages,
 		$wgExtensionCredits,
 		$wgExtensionFunctions,
 		$wgExtensionMessagesFiles,
@@ -267,6 +268,7 @@ call_user_func( function() {
 			);
 		}
 	];
+	$wgAPIUselessQueryPages[] = 'PagesWithBadges';
 
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages'] = Wikibase\Client\Specials\SpecialUnconnectedPages::class;
