@@ -9,9 +9,10 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @license GPL-2.0+
@@ -70,6 +71,42 @@ class InfoActionHookHandler {
 		$this->usageLookup = $usageLookup;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->idParser = $idParser;
+	}
+
+	/**
+	 * Adds the Entity ID of the corresponding Wikidata item in action=info
+	 *
+	 * @param IContextSource $context
+	 * @param array $pageInfo
+	 *
+	 * @return bool
+	 */
+	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
+		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
+		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$wikibaseClient->getLanguageFallbackChainFactory(),
+			$wikibaseClient->getTermLookup(),
+			$wikibaseClient->getTermBuffer()
+		);
+		$idParser = $wikibaseClient->getEntityIdParser();
+
+		$self = new self(
+			$namespaceChecker,
+			$wikibaseClient->newRepoLinker(),
+			$wikibaseClient->getStore()->getSiteLinkLookup(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$usageLookup,
+			$labelDescriptionLookupFactory,
+			$idParser
+		);
+
+		$pageInfo = $self->handle( $context, $pageInfo );
+
+		return true;
 	}
 
 	/**
