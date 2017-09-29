@@ -8,13 +8,16 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handling of \"$1\" data values is not yet supported.",
 	"valueview-expert-emptyvalue-empty": "empty",
 	"valueview-expert-globecoordinateinput-precision": "Precision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "non specificato",
 	"valueview-expert-globecoordinateinput-customprecision": "special ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
 	"valueview-expert-timevalue-calendar-julian": "Julian",
 	"valueview-expert-timeinput-precision": "Precision:",
 	"valueview-expert-timeinput-calendar": "Calendar:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Linguaggio (obbligatorio)",
 	"valueview-expertextender-unitsuggester-label": "Unit (optional):",
 	"valueview-preview-label": "will be displayed as:",
-	"valueview-preview-novalue": "no valid value recognised"
+	"valueview-preview-novalue": "no valid value recognised",
+	"valueview-listrotator-manually": "impostare manualmente"
 }
