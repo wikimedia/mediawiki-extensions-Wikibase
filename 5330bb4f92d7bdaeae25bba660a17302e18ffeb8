@@ -22,6 +22,30 @@
       "revId": "5330bb4f92d7bdaeae25bba660a17302e18ffeb8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_ac44391d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-09-29T12:43:13Z",
+      "side": 1,
+      "message": "I\u0027m in favor of removing the comment. If anyone wants to know, they should check documentation of $wgAPIUselessQueryPages",
+      "parentUuid": "0e6af365_e121da4c",
+      "range": {
+        "startLine": 271,
+        "startChar": 51,
+        "endLine": 271,
+        "endChar": 69
+      },
+      "revId": "5330bb4f92d7bdaeae25bba660a17302e18ffeb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
