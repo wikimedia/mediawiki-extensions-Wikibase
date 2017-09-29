@@ -45,21 +45,17 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array $settings
-	 *
 	 * @return SettingsArray
 	 */
-	private function newSettings( array $settings ) {
+	private function newSettings() {
 		$defaults = [
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
-			'otherProjectsLinksBeta' => true,
-			'otherProjectsLinksByDefault' => false,
 		];
 
-		return new SettingsArray( array_merge( $defaults, $settings ) );
+		return new SettingsArray( $defaults );
 	}
 
 	/**
@@ -100,9 +96,9 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return $otherProjectsSidebarGeneratorFactory;
 	}
 
-	private function newSidebarHookHandlers( array $settings = [] ) {
+	private function newSidebarHookHandlers() {
 		$en = Language::factory( 'en' );
-		$settings = $this->newSettings( $settings );
+		$settings = $this->newSettings();
 
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( [], $namespaces );
@@ -118,9 +114,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$badgeDisplay,
-			$this->getOtherProjectsSidebarGeneratorFactory( [ 'dummy' => 'xyz' ] ),
-			$settings->getSetting( 'otherProjectsLinksBeta' ),
-			$settings->getSetting( 'otherProjectsLinksByDefault' )
+			$this->getOtherProjectsSidebarGeneratorFactory( [ 'dummy' => 'xyz' ] )
 		);
 	}
 
@@ -261,9 +255,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$sidebar = [];
 
-		$handler = $this->newSidebarHookHandlers( [
-			'otherProjectsLinksByDefault' => $enabled
-		] );
+		$handler = $this->newSidebarHookHandlers();
 
 		$handler->doSidebarBeforeOutput( $skin, $sidebar );
 		return $sidebar;
@@ -271,35 +263,28 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 	public function testDoSidebarBeforeOutput() {
 		$projects = [ 'foo' => 'bar' ];
-		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
+		$sidebar = $this->callDoSidebarBeforeOutput( $projects );
 
 		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
 		$this->assertEquals( $sidebar['wikibase-otherprojects'], $projects );
 	}
 
 	public function testDoSidebarBeforeOutput_noItem() {
-		$sidebar = $this->callDoSidebarBeforeOutput( true, null, null );
+		$sidebar = $this->callDoSidebarBeforeOutput( null, null );
 
 		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
 	}
 
 	public function testDoSidebarBeforeOutput_empty() {
 		$projects = [];
-		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
-
-		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
-	}
-
-	public function testDoSidebarBeforeOutput_disabled() {
-		$projects = [ 'foo' => 'bar' ];
-		$sidebar = $this->callDoSidebarBeforeOutput( false, $projects );
+		$sidebar = $this->callDoSidebarBeforeOutput( $projects );
 
 		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
 	}
 
 	public function testDoSidebarBeforeOutput_generate() {
 		// If no sidebar is set, it should be generated on the fly
-		$sidebar = $this->callDoSidebarBeforeOutput( true, null );
+		$sidebar = $this->callDoSidebarBeforeOutput( null );
 
 		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
 		$this->assertNotEmpty( $sidebar );
