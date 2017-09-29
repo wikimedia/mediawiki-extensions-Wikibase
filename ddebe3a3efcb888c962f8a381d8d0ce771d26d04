@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_61ee4ab3",
+        "filename": "lib/includes/Formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-09-29T10:20:01Z",
+      "side": 1,
+      "message": "unrelated but whatever",
+      "revId": "ddebe3a3efcb888c962f8a381d8d0ce771d26d04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
