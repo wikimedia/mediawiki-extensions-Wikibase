@@ -204,41 +204,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Initialise beta feature preferences
-	 *
-	 * @param User $user
-	 * @param array $betaPreferences
-	 *
-	 * @return bool
-	 */
-	public static function onGetBetaFeaturePreferences( User $user, array &$betaPreferences ) {
-		global $wgExtensionAssetsPath;
-
-		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
-			. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
-
-		$assetsPath = $wgExtensionAssetsPath . DIRECTORY_SEPARATOR . '..' . $remoteExtPath[0];
-
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		if ( !$settings->getSetting( 'otherProjectsLinksBeta' ) || $settings->getSetting( 'otherProjectsLinksByDefault' ) ) {
-			return true;
-		}
-
-		$betaPreferences['wikibase-otherprojects'] = [
-			'label-message' => 'wikibase-otherprojects-beta-message',
-			'desc-message' => 'wikibase-otherprojects-beta-description',
-			'screenshot' => [
-				'ltr' => $assetsPath . '/resources/images/wb-otherprojects-beta-ltr.svg',
-				'rtl' => $assetsPath . '/resources/images/wb-otherprojects-beta-rtl.svg'
-			],
-			'info-link' => 'https://www.mediawiki.org/wiki/Wikibase/Beta_Features/Other_projects_sidebar',
-			'discussion-link' => 'https://www.mediawiki.org/wiki/Talk:Wikibase/Beta_Features/Other_projects_sidebar'
-		];
-
-		return true;
-	}
-
-	/**
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
 	 *
 	 * @param User $user

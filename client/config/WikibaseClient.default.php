@@ -30,8 +30,6 @@ return call_user_func( function() {
 		'echoIcon' => false,
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
-		'otherProjectsLinksByDefault' => false,
-		'otherProjectsLinksBeta' => false,
 		'propertyOrderUrl' => null,
 		// List of additional CSS class names for site links that have badges,
 		// e.g. array( 'Q101' => 'badge-goodarticle' )
