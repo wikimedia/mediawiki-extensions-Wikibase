@@ -55,7 +55,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
-			'otherProjectsLinksBeta' => true,
 			'otherProjectsLinksByDefault' => false,
 		];
 
@@ -119,7 +118,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$namespaceChecker,
 			$badgeDisplay,
 			$this->getOtherProjectsSidebarGeneratorFactory( [ 'dummy' => 'xyz' ] ),
-			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
 	}

@@ -145,7 +145,6 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
-			'otherProjectsLinksBeta' => true,
 			'otherProjectsLinksByDefault' => false,
 		];
 

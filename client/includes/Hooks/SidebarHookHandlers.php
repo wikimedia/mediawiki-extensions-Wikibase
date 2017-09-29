@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use BetaFeatures;
 use OutputPage;
 use ParserOutput;
 use Skin;
@@ -39,11 +38,6 @@ class SidebarHookHandlers {
 	/**
 	 * @var bool
 	 */
-	private $otherProjectsLinksBeta;
-
-	/**
-	 * @var bool
-	 */
 	private $otherProjectsLinksDefault;
 
 	/**
@@ -71,7 +65,6 @@ class SidebarHookHandlers {
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLanguageLinkBadgeDisplay(),
 			$wikibaseClient->getOtherProjectsSidebarGeneratorFactory(),
-			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
 	}
@@ -132,13 +125,11 @@ class SidebarHookHandlers {
 		NamespaceChecker $namespaceChecker,
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
-		$otherProjectsLinksBeta,
 		$otherProjectsLinksDefault
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->badgeDisplay = $badgeDisplay;
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
-		$this->otherProjectsLinksBeta = $otherProjectsLinksBeta;
 		$this->otherProjectsLinksDefault = $otherProjectsLinksDefault;
 	}
 
@@ -228,11 +219,7 @@ class SidebarHookHandlers {
 			return true;
 		}
 
-		$betaFeatureEnabled = class_exists( BetaFeatures::class ) &&
-			$this->otherProjectsLinksBeta &&
-			BetaFeatures::isFeatureEnabled( $skin->getContext()->getUser(), 'wikibase-otherprojects' );
-
-		if ( $this->otherProjectsLinksDefault || $betaFeatureEnabled ) {
+		if ( $this->otherProjectsLinksDefault ) {
 			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
 
 			// in case of stuff in cache without the other projects
