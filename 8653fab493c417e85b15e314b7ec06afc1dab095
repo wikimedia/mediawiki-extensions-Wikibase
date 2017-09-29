@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_61cc0a8d",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-29T09:38:43Z",
+      "side": 1,
+      "message": "Because second argument is passed by reference, so it will generate E_WARNING if I remember correctly",
+      "parentUuid": "0e6af365_f6276560",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 45
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_76f5b5c6",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-28T18:28:36Z",
       "side": 1,
       "message": "What does this do?",
+      "range": {
+        "startLine": 273,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 56
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_a199a282",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-09-29T09:38:43Z",
+      "side": 1,
+      "message": "Puts last message to the beggining of the array",
+      "parentUuid": "0e6af365_76f5b5c6",
       "range": {
         "startLine": 273,
         "startChar": 2,
