@@ -10,11 +10,11 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikimedia\Assert\Assert;
 
 /**
  * Functionality needed to expose Entities to Lua.
@@ -151,10 +151,17 @@ class EntityAccessor {
 	 *
 	 * @param string $prefixedEntityId
 	 * @param string $propertyIdSerialization
+	 * @param string $bestStatementsOnly Either 'best' or 'all'
 	 *
 	 * @return array|null
 	 */
-	public function getEntityStatement( $prefixedEntityId, $propertyIdSerialization ) {
+	public function getEntityStatements( $prefixedEntityId, $propertyIdSerialization, $bestStatementsOnly ) {
+		Assert::parameter(
+			in_array( $bestStatementsOnly, [ 'best', 'all' ] ),
+			'$bestStatementsOnly',
+			'must be either "best" or "all", "' . $bestStatementsOnly . '" given.'
+		);
+
 		$prefixedEntityId = trim( $prefixedEntityId );
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
@@ -180,8 +187,12 @@ class EntityAccessor {
 		$statements = $entityObject->getStatements();
 
 		$statementsProp = $statements->getByPropertyId( $propertyId );
-		$statementsRanked = $statementsProp->getBestStatements();
-		$statementArr = $this->newClientStatementListSerializer()->serialize( $statementsRanked );
+
+		if ( $bestStatementsOnly === 'best' ) {
+			$statementsProp = $statementsProp->getBestStatements();
+		}
+
+		$statementArr = $this->newClientStatementListSerializer()->serialize( $statementsProp );
 		$this->renumber( $statementArr );
 
 		return $statementArr;

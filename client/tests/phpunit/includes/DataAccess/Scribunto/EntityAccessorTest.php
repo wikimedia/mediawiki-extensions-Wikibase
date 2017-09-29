@@ -195,17 +195,44 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetEntityStatement() {
-		$item = $this->getItemWithStatements();
+	public function getEntityStatementsProvider() {
+		return [
+			'Normal Statement, get best Statements' => [
+				$this->getItemWithStatementsClaimClientSerialization( false ),
+				false,
+				'best'
+			],
+			'Normal Statement, get all Statements' => [
+				$this->getItemWithStatementsClaimClientSerialization( false ),
+				false,
+				'all'
+			],
+			'Deprecated Statement, get best Statements' => [
+				[],
+				true,
+				'best'
+			],
+			'Deprecated Statement, get all Statements' => [
+				$this->getItemWithStatementsClaimClientSerialization( true ),
+				true,
+				'all'
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider getEntityStatementsProvider
+	 */
+	public function testGetEntityStatements( $expected, $statementDeprecated, $bestStatementsOnly ) {
+		$item = $this->getItemWithStatements( $statementDeprecated );
 
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 
 		$usages = new HashUsageAccumulator();
 		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages );
-		$actual = $entityAccessor->getEntityStatement( 'Q123099', 'P65' );
+		$actual = $entityAccessor->getEntityStatements( 'Q123099', 'P65', $bestStatementsOnly );
 
-		$expected = $this->getItemWithStatementsClaimClientSerialization();
 		$this->assertSameSize( $expected, $actual );
 		$this->assertEquals( $expected, $actual );
 
@@ -218,7 +245,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return Item
 	 */
-	private function getItemWithStatements() {
+	private function getItemWithStatements( $statementDeprecated = false ) {
 		$p65 = new PropertyId( 'P65' );
 		$p68 = new PropertyId( 'P68' );
 
@@ -243,6 +270,11 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		] );
 
 		$statement->setGuid( 'imaguid' );
+
+		if ( $statementDeprecated ) {
+			$statement->setRank( Statement::RANK_DEPRECATED );
+		}
+
 		$item->getStatements()->addStatement( $statement );
 
 		return $item;
@@ -293,7 +325,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		];
 	}
 
-	private function getItemWithStatementsClaimClientSerialization() {
+	private function getItemWithStatementsClaimClientSerialization( $statementDeprecated = false ) {
 		return [
 			'P65' => [
 				1 => [
@@ -328,7 +360,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 							],
 						],
 					],
-					'rank' => 'normal',
+					'rank' => $statementDeprecated ? 'deprecated' : 'normal',
 					'qualifiers-order' => [
 						1 => 'P65'
 					],
@@ -362,21 +394,34 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		];
 	}
 
-	public function testGetEntityStatementBadProperty() {
+	public function bestStatementsOnlyProvider() {
+		return [
+			[ 'best' ],
+			[ 'all' ]
+		];
+	}
+
+	/**
+	 * @dataProvider bestStatementsOnlyProvider
+	 */
+	public function testGetEntityStatementsBadProperty( $bestStatementsOnly ) {
 		$entityLookup = new MockRepository();
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
 		$this->setExpectedException( InvalidArgumentException::class );
-		$entityAccessor->getEntityStatement( 'Q123099', 'ffsdfs' );
+		$entityAccessor->getEntityStatements( 'Q123099', 'ffsdfs', $bestStatementsOnly );
 	}
 
-	public function testGetEntityStatementMissingStatement() {
+	/**
+	 * @dataProvider bestStatementsOnlyProvider
+	 */
+	public function testGetEntityStatementsMissingStatement( $bestStatementsOnly ) {
 		$item = new Item( new ItemId( 'Q123099' ) );
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
-		$actual = $entityAccessor->getEntityStatement( 'Q123099', 'P13' );
+		$actual = $entityAccessor->getEntityStatements( 'Q123099', 'P13', $bestStatementsOnly );
 
 		$this->assertSame( [], $actual );
 	}

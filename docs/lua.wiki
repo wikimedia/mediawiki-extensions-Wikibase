@@ -188,6 +188,16 @@ An example call might look like this:
 mw.wikibase.getBestStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12 of Q1
 </source>
 
+=== mw.wikibase.getAllStatements ===
+<code>wikibase.getAllStatements( entityId, propertyId )</code><br>
+Returns a table with all statements (even "deprecated" ones) for the given entity ID and property ID.
+
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getAllStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of the statements with the property id P12 of Q1
+</source>
+
 == mw.wikibase.entity ==
 <code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntity|<code>mw.wikibase.getEntity</code>]].
 
