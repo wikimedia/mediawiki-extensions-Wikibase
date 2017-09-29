@@ -88,6 +88,24 @@
       "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_adfbd343",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-29T23:59:33Z",
+      "side": 1,
+      "message": "question: the length here is before analyzer or after?",
+      "parentUuid": "0e6af365_8dd7efc3",
+      "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
