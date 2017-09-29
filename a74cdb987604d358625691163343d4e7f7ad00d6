@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_be8223a8",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-09-29T07:40:20Z",
+      "side": 1,
+      "message": "This will likely set the english analyzer on every field.\nShould we simply avoid index a stem field for now?\nnote that for cirrus: \"text\" means stem, \"plain\" means the standard analyzer.",
+      "revId": "a74cdb987604d358625691163343d4e7f7ad00d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
