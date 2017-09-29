@@ -16,6 +16,24 @@
       "revId": "a74cdb987604d358625691163343d4e7f7ad00d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_272142ad",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-29T16:56:58Z",
+      "side": 1,
+      "message": "I am not sure... is english analyzer worse than nothing?",
+      "parentUuid": "0e6af365_be8223a8",
+      "revId": "a74cdb987604d358625691163343d4e7f7ad00d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
