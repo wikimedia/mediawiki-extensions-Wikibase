@@ -70,6 +70,24 @@
       "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_8dd7efc3",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-09-29T23:58:31Z",
+      "side": 1,
+      "message": "probably none. In fact, the item statement would be something like: P1234\u003dQ2345. The maximum length of this is about 41 char. Even if we add P1234\u003dstring, 255 is more than enough. I\u0027ll add the limit.",
+      "parentUuid": "0e6af365_3313da07",
+      "revId": "2b15354b3653d52c3da7c5bac7d6cbffd42e4528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
