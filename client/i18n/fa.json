@@ -111,6 +111,7 @@
 	"wikibase-pageinfo-entity-usage": "ماهیت‌های {{WBREPONAME}} استفاده شده در این صفحه",
 	"wikibase-pageinfo-entity-usage-S": "پیوند پایگاه",
 	"wikibase-pageinfo-entity-usage-L": "برچسب: $1",
+	"wikibase-pageinfo-entity-usage-D": "توضیحات: $1",
 	"wikibase-pageinfo-entity-usage-T": "عنوان",
 	"wikibase-pageinfo-entity-usage-C": "اظهارنظر: $1",
 	"wikibase-pageinfo-entity-usage-X": "همهٔ اطلاعات هویتی",

@@ -132,6 +132,7 @@
 	"wikibase-pageinfo-entity-usage": "Éléments {{WBREPONAME}} utilisés sur cette page",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Libellé : $1",
+	"wikibase-pageinfo-entity-usage-D": "Description : $1",
 	"wikibase-pageinfo-entity-usage-T": "Titre",
 	"wikibase-pageinfo-entity-usage-C": "Déclaration : $1",
 	"wikibase-pageinfo-entity-usage-X": "Toutes les données de l'entité",

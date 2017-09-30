@@ -90,6 +90,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-entiteter som används på denna sida",
 	"wikibase-pageinfo-entity-usage-S": "Webbplatslänk",
 	"wikibase-pageinfo-entity-usage-L": "Etikett: $1",
+	"wikibase-pageinfo-entity-usage-D": "Beskrivning: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C": "Uttalande: $1",
 	"wikibase-pageinfo-entity-usage-X": "All entitetsdata",

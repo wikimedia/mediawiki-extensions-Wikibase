@@ -22,6 +22,7 @@
 	"wikibase-linkitem-confirmitem-button": "Cunfirmar",
 	"wikibase-linkitem-success-link": "Las páiginas fúrun lhigadas. Puode ancuontrar l'eilemiento que cuntén las lhigaçones ne l nuosso [$1 repositório central de dados].",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Scunder",
 	"wikibase-rc-hide-wikidata-show": "Amostrar",
 	"wikibase-rc-show-wikidata-pref": "Amostrar las eidiçones {{WBREPONAME}} nas mudanças recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",

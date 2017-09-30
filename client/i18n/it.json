@@ -116,6 +116,7 @@
 	"wikibase-pageinfo-entity-usage": "Entità {{WBREPONAME}} utilizzate in questa pagina",
 	"wikibase-pageinfo-entity-usage-S": "Collegamento al sito",
 	"wikibase-pageinfo-entity-usage-L": "Etichetta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Descrizione: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titolo",
 	"wikibase-pageinfo-entity-usage-C": "Dichiarazione: $1",
 	"wikibase-pageinfo-entity-usage-X": "Tutti i dati dell'entità",

@@ -126,6 +126,7 @@
 	"wikibase-pageinfo-entity-usage": "Entidades {{WBREPONAME}} usadas nesta página",
 	"wikibase-pageinfo-entity-usage-S": "Link intersites",
 	"wikibase-pageinfo-entity-usage-L": "Rótulo: $1",
+	"wikibase-pageinfo-entity-usage-D": "Descrição: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
 	"wikibase-pageinfo-entity-usage-C": "Declaração: $1",
 	"wikibase-pageinfo-entity-usage-X": "Todos os dados da entidade",

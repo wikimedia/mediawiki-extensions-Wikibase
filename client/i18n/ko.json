@@ -88,6 +88,7 @@
 	"wikibase-pageinfo-entity-usage": "이 문서에 사용된 {{WBREPONAME}} 항목들",
 	"wikibase-pageinfo-entity-usage-S": "사이트링크",
 	"wikibase-pageinfo-entity-usage-L": "레이블: $1",
+	"wikibase-pageinfo-entity-usage-D": "설명: $1",
 	"wikibase-pageinfo-entity-usage-T": "제목",
 	"wikibase-pageinfo-entity-usage-X": "모든 엔티티 데이터",
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",

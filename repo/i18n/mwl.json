@@ -5,7 +5,12 @@
 		]
 	},
 	"wikibase-edit": "eiditar",
+	"wikibase-add": "poner",
+	"wikibase-label-empty": "Rótulo nun defenido",
+	"wikibase-description-empty": "Çcriçon nun defenida",
 	"wikibase-sitelink-page-edit-placeholder": "páigina",
+	"wikibase-sitelinks-special": "Outros sítios",
+	"wikibase-statementview-rank-normal": "Classeficaçon normal",
 	"wikibase-itembytitle-lookup-page": "Páigina:",
 	"wikibase-newentity-description": "Çcriçon:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Çcriçon:"

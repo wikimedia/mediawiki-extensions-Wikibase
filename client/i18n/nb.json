@@ -113,6 +113,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-entiteter som brukes på denne siden",
 	"wikibase-pageinfo-entity-usage-S": "Sidelenke",
 	"wikibase-pageinfo-entity-usage-L": "Etikett: $1",
+	"wikibase-pageinfo-entity-usage-D": "Beskrivelse: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tittel",
 	"wikibase-pageinfo-entity-usage-C": "Utsagn: $1",
 	"wikibase-pageinfo-entity-usage-X": "All entitetsdata",

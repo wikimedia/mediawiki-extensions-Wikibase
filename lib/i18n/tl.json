@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AnakngAraw",
-			"Jojit fb"
+			"Jojit fb",
+			"LR Guanzon"
 		]
 	},
 	"wikibase-lib-desc": "Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client",
@@ -16,6 +17,7 @@
 	"wikibase-error-autocomplete-response": "Tumugon ang tagapaghain: $1",
 	"wikibase-error-ui-no-external-page": "Hindi matagpuan ang tinukoy na artikulo sa ibabaw ng kaukol na pook.",
 	"wikibase-error-ui-edit-conflict": "Nagkaroon ng isang pagsasalungatan sa pamamatnugot. Paki muling ikarga at sagiping muli.",
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Wika",
 	"wikibase-sitelinks-link-columnheading": "Artikulong nakakawing",
 	"wikibase-tooltip-error-details": "Mga detalye",
@@ -24,10 +26,10 @@
 	"wikibase-entity-summary-wbsetlabel-remove": "Tinanggal ang [$2] katatakan",
 	"wikibase-entity-summary-wbsetdescription-set": "Binago ang [$2] paglalarawan",
 	"wikibase-entity-summary-wbsetdescription-remove": "Tinanggal ang [$2] paglalarawan",
-	"wikibase-entity-summary-wbsetaliases-set": "!!FUZZY!!Itinatakda ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-entity-summary-wbsetaliases-add-remove": "!!FUZZY!!Idinagdag at tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-entity-summary-wbsetaliases-add": "!!FUZZY!!Idinagdag ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-entity-summary-wbsetaliases-remove": "!!FUZZY!!Tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
+	"wikibase-entity-summary-wbsetaliases-set": "Itinatakda ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "Idinagdag at tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
+	"wikibase-entity-summary-wbsetaliases-add": "Idinagdag ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
+	"wikibase-entity-summary-wbsetaliases-remove": "Tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
 	"wikibase-entity-summary-wbsetsitelink-add": "Idinagdag ang kawing [$2] na pangtiyak na pook",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Tinanggal ang kawing [$2] sa tiyak na pook",
 	"wikibase-item-summary-wbeditentity": "Nilikha ang isang bagong bagay"

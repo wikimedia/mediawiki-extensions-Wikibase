@@ -109,6 +109,7 @@
 	"wikibase-pageinfo-entity-usage": "In dieser Seite verwendete {{WBREPONAME}}-Objekte",
 	"wikibase-pageinfo-entity-usage-S": "Websitelink",
 	"wikibase-pageinfo-entity-usage-L": "Bezeichnung: $1",
+	"wikibase-pageinfo-entity-usage-D": "Beschreibung: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C": "Aussage: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle Objektdaten",
