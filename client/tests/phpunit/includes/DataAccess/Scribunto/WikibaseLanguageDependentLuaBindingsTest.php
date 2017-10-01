@@ -157,6 +157,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		$itemId = new ItemId( 'Q7' );
 		$wikibaseLuaBindings->getDescription( $itemId->getSerialization() );
 
+		//NOTE: description usage is not tracked directly, this is done via the LabelDescriptionLookup
 		$this->assertTrue(
 			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::OTHER_USAGE ),
 			'other usage'
