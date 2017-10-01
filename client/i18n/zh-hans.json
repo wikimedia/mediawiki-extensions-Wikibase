@@ -109,7 +109,7 @@
 	"wikibase-unconnectedpages-format-row": "（该页面有$1个{{PLURAL:$1|跨语言链接}}）",
 	"wikibase-unconnectedpages-submit": "显示页面",
 	"pageswithbadges": "有徽章的页面",
-	"pageswithbadges-summary": "此页面列举了有徽章（例如优良条目或特色条目）的页面。列表按页面ID递减排序，这样最新页面会首先列出。",
+	"pageswithbadges-summary": "此页面列举了有徽章（例如优良条目或典范条目）的页面。列表按页面ID递减排序，这样最新页面会首先列出。",
 	"wikibase-pageswithbadges-invalid-id": "$1不是一个有效的项ID",
 	"wikibase-pageswithbadges-legend": "拥有指定徽章的页面列表",
 	"wikibase-pageswithbadges-badge": "徽章：",

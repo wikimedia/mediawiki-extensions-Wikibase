@@ -75,6 +75,7 @@
 	"wikibase-unconnectedpages-format-row": "(該頁面有 $1 個跨語言連結)",
 	"wikibase-unconnectedpages-submit": "顯示頁面",
 	"pageswithbadges": "含有徽章的頁面",
+	"pageswithbadges-summary": "該頁面列出擁有徽章（例如優良條目或典範條目）之頁面。列表按照頁面 ID 遞減排序，因此新頁面會首先列出。",
 	"wikibase-pageswithbadges-invalid-id": "“$1” 不是一個有效 ID 項目",
 	"wikibase-pageswithbadges-badge": "徽章：",
 	"wikibase-pageswithbadges-submit": "顯示頁面",
