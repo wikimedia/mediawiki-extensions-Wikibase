@@ -70,6 +70,30 @@
       "revId": "01a44245b5108fb203208198224c6ae49422f8dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_95d4d5ed",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-01T12:48:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_75c04130",
+      "range": {
+        "startLine": 105,
+        "startChar": 69,
+        "endLine": 105,
+        "endChar": 81
+      },
+      "revId": "01a44245b5108fb203208198224c6ae49422f8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
