@@ -13,7 +13,15 @@ local tests = {
 	{ name = "mw.wikibase.getEntityObject (foreign access)", func = mw.wikibase.getEntityObject,
 	  args = { 'Q42' },
 	  expect = 'Access to arbitrary items has been disabled.'
-	}
+	},
+	{ name = "mw.wikibase.getBestStatements (foreign access)", func = mw.wikibase.getBestStatements,
+	  args = { 'Q42', 'P12' },
+	  expect = 'Access to arbitrary items has been disabled.'
+	},
+	{ name = "mw.wikibase.getAllStatements (foreign access)", func = mw.wikibase.getAllStatements,
+	  args = { 'Q42', 'P12' },
+	  expect = 'Access to arbitrary items has been disabled.'
+	},
 }
 
 return testframework.getTestProvider( tests )
