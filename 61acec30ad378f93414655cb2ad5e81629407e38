@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_8eeb62a0",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-10-02T09:52:53Z",
+      "side": 1,
+      "message": "this one will probably fail.\nignore_above is only supported on type\u003d\"keyword\" fields.\nI don\u0027t think we need to guard against large tokens here since we control the format (i.e. we\u0027ll have only property IDs here)",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 16
+      },
+      "revId": "61acec30ad378f93414655cb2ad5e81629407e38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
