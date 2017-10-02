@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_69ee28b3",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-02T13:09:44Z",
+      "side": 1,
+      "message": "Okay, but that still means that if we want to use wdtn: for other things in the future, then the owl:ObjectProperty type will be incorrect, and we’ll have to change it. And I’m not sure if it’s semantically kosher to change the type like this later, so I’d rather not emit the `a owl:ObjectProperty` triple at all for now.",
+      "parentUuid": "2e7b3738_b92d2443",
+      "range": {
+        "startLine": 65,
+        "startChar": 80,
+        "endLine": 65,
+        "endChar": 94
+      },
+      "revId": "c0a31e5a3808acf0059fe038bae0b471f589e8bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_44ff8631",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 19
