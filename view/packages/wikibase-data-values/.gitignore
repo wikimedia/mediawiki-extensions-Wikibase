@@ -1,7 +1,6 @@
 *~
 *.kate-swp
 
-composer.phar
 composer.lock
 
 !.*
