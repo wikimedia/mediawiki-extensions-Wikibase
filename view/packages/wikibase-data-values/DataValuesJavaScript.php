@@ -31,10 +31,3 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = [
 	'description' => 'JavaScript related to the DataValues library',
 	'license-name' => 'GPL-2.0+'
 ];
-
-// Resource Loader module registration
-$GLOBALS['wgResourceModules'] = array_merge(
-	isset( $GLOBALS['wgResourceModules'] ) ? $GLOBALS['wgResourceModules'] : [],
-	include __DIR__ . '/lib/resources.php',
-	include __DIR__ . '/src/resources.php'
-);
