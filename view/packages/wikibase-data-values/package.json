@@ -1,8 +1,31 @@
 {
 	"name": "DataValuesJavaScript",
+	"description": "DataValues implementation in JavaScript",
+	"keywords": [
+		"datavalues",
+		"wikidata"
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/wmde/DataValuesJavaScript"
+	},
+	"contributors": [
+		{
+			"name": "Daniel Werner",
+			"url": "https://www.mediawiki.org/wiki/User:Danwe"
+		},
+		{
+			"name": "H. Snater",
+			"url": "http://www.snater.com"
+		},
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		}
+	],
+	"bugs": {
+		"url": "https://phabricator.wikimedia.org/"
 	},
 	"license": "GPL-2.0+",
 	"dependencies": {
