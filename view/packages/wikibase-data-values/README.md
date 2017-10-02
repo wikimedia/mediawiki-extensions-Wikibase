@@ -7,6 +7,10 @@ It contains various JavaScript related to the DataValues library.
 
 ## Release notes
 
+### 1.0.0 (dev)
+* The library is now a pure JavaScript library.
+* Removed MediaWiki ResourceLoader module definitions.
+
 ### 0.9.0 (2017-09-06)
 * Removed `valueFormatters.ValueFormatterStore`.
 * Removed the `options` constructor parameter as well as the `getOptions` method from
