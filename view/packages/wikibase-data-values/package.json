@@ -1,5 +1,5 @@
 {
-	"name": "DataValuesJavaScript",
+	"name": "wikibase-data-values",
 	"description": "DataValues implementation in JavaScript",
 	"keywords": [
 		"datavalues",
