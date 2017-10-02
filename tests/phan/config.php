@@ -62,7 +62,6 @@ return [
 		// Include extension stubs if extensions not available locally.
 		// TODO: Technically extensions could also be in ./extensions/.
 		!is_dir( './../../extensions/Babel' ) ? [ 'tests/phan/stubs/babel.php' ] : [],
-		!is_dir( './../../extensions/BetaFeatures' ) ? [ 'tests/phan/stubs/betafeatures.php' ] : [],
 		!is_dir( './../../extensions/CirrusSearch' ) ? [ 'tests/phan/stubs/cirrussearch.php' ] : [],
 		!is_dir( './../../extensions/Echo' ) ? [ 'tests/phan/stubs/echo.php56' ] : [],
 		!is_dir( './../../extensions/GeoData' ) ? [ 'tests/phan/stubs/geodata.php' ] : [],
@@ -96,7 +95,6 @@ return [
 		is_dir( 'vendor' ) ? [ 'vendor' ] : [],
 		// Parse extensions if present. TODO: Technically extensions could also be in ./extensions/.
 		is_dir( './../../extensions/Babel' ) ? [ './../../extensions/Babel' ] : [],
-		is_dir( './../../extensions/BetaFeatures' ) ? [ './../../extensions/BetaFeatures' ] : [],
 		is_dir( './../../extensions/CirrusSearch' ) ? [ './../../extensions/CirrusSearch' ] : [],
 		is_dir( './../../extensions/Echo' ) ? [ './../../extensions/Echo' ] : [],
 		is_dir( './../../extensions/GeoData' ) ? [ './../../extensions/GeoData' ] : [],
