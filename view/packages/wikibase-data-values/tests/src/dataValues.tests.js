@@ -2,12 +2,7 @@
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-define( [
-	'dataValues/dataValues',
-	'jquery',
-	'qunit',
-	'values/MonolingualTextValue'
-], function( dv, $, QUnit ) {
+( function( dv, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'dataValues.js' );
@@ -75,4 +70,4 @@ define( [
 		);
 	} );
 
-} );
+}( dataValues, jQuery, QUnit ) );

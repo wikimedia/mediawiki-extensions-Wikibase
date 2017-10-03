@@ -3,14 +3,14 @@ language: php
 php:
 - 5.5
 
-env:
-- RUNJOB=eslint
-- RUNJOB=qunit
-
 before_script:
   - nvm install 4
+  - npm install
+  - composer install
 
-script: bash ./build/travis/script.sh
+script:
+  - npm test
+  - composer test
 
 notifications:
   irc:

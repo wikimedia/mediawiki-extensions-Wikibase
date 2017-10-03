@@ -2,12 +2,7 @@
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'tests/src/dataValues.DataValue.tests',
-	'values/BoolValue'
-], function( dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -44,4 +39,4 @@ define( [
 
 	test.runTests( 'dataValues.BoolValue' );
 
-} );
+}( dataValues, util ) );

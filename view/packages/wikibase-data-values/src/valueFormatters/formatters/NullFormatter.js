@@ -18,7 +18,7 @@ var PARENT = vf.ValueFormatter;
  *
  * @constructor
  */
-vf.NullFormatter = util.inherit( PARENT, function() {}, {
+vf.NullFormatter = util.inherit( PARENT, {
 	/**
 	 * @inheritdoc
 	 */

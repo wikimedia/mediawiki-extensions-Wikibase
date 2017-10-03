@@ -95,20 +95,17 @@
 		 */
 		testParse: function( assert ) {
 			var parseArguments = this.getParseArguments(),
-				parser = this.getInstance(),
-				requests = [];
-
-			// prevent from going to next test until all parser requests are handled
-			QUnit.stop();
+				parser = this.getInstance();
 
 			$.each( parseArguments, function( i, args ) {
 				var parseInput = args[0],
 					expected = args[1],
 					inputDetailMsg = typeof parseInput === 'string'
 						? 'for input "' + parseInput + '" '
-						: '';
+						: '',
+					done = assert.async();
 
-				var request = parser.parse( parseInput )
+				parser.parse( parseInput )
 					.done( function( dataValue ) {
 						// promise resolved, so no error has occured
 						assert.ok( true, 'parsing succeeded' );
@@ -129,12 +126,7 @@
 						assert.ok( false, 'parsing ' + inputDetailMsg + 'failed: ' + errorMessage );
 					} );
 
-				requests.push( request );
-			} );
-
-			// only start next test after all parser requests are handled
-			$.when.apply( null, requests ).always( function() {
-				QUnit.start();
+				done();
 			} );
 		}
 

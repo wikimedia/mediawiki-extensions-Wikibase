@@ -2,12 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'values/TimeValue',
-	'tests/src/dataValues.DataValue.tests'
-], function( dv, util, TimeValue ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -221,4 +216,4 @@ define( [
 
 	test.runTests( 'dataValues.TimeValue' );
 
-} );
+}( dataValues, util ) );

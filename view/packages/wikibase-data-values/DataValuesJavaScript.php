@@ -14,6 +14,10 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
+if ( !defined( 'MEDIAWIKI' ) ) {
+	return 1;
+}
+
 $GLOBALS['wgExtensionCredits']['datavalues'][] = [
 	'path' => __DIR__,
 	'name' => 'DataValues JavaScript',
@@ -34,54 +38,3 @@ $GLOBALS['wgResourceModules'] = array_merge(
 	include __DIR__ . '/lib/resources.php',
 	include __DIR__ . '/src/resources.php'
 );
-
-/**
- * Register QUnit test base classes used by test modules in dependent components.
- * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
- * @since 0.1
- *
- * @param array &$testModules
- * @param \ResourceLoader &$resourceLoader
- *
- * @return boolean
- */
-$GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
-	array &$testModules,
-	\ResourceLoader &$resourceLoader
-) {
-	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
-		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
-
-	$moduleTemplate = [
-		'localBasePath' => __DIR__ . '/tests',
-		'remoteExtPath' => '..' . $remoteExtPath[0] . DIRECTORY_SEPARATOR . 'tests',
-	];
-
-	$testModuleTemplates = [
-		'valueFormatters.tests' => $moduleTemplate + [
-			'scripts' => [
-				'src/valueFormatters/valueFormatters.tests.js',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'util.inherit',
-				'valueFormatters',
-			],
-		],
-
-		'valueParsers.tests' => $moduleTemplate + [
-			'scripts' => [
-				'src/valueParsers/valueParsers.tests.js',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'util.inherit',
-				'valueParsers',
-			],
-		],
-	];
-
-	$testModules['qunit'] = array_merge( $testModules['qunit'], $testModuleTemplates );
-
-	return true;
-};

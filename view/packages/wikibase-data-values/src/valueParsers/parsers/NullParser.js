@@ -1,8 +1,7 @@
 ( function( vp, dv, $, util ) {
 	'use strict';
 
-var PARENT = vp.ValueParser,
-	constructor = function() {};
+var PARENT = vp.ValueParser;
 
 /**
  * Constructor for null parsers.
@@ -17,7 +16,7 @@ var PARENT = vp.ValueParser,
  *
  * @constructor
  */
-vp.NullParser = util.inherit( PARENT, constructor, {
+vp.NullParser = util.inherit( PARENT, {
 	/**
 	 * @inheritdoc
 	 */

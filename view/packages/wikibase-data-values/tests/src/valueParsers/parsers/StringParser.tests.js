@@ -2,14 +2,7 @@
  * @license GPL-2.0+
  * @author Daniel Werner < danweetz@web.de >
  */
-define( [
-	'valueParsers/valueParsers',
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'parsers/StringParser',
-	'tests/src/valueParsers/valueParsers.tests',
-	'values/StringValue'
-], function( vp, dv, util ) {
+( function( vp, dv, util ) {
 	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest;
@@ -49,4 +42,4 @@ define( [
 
 	test.runTests( 'valueParsers.StringParser' );
 
-} );
+}( valueParsers, dataValues, util ) );

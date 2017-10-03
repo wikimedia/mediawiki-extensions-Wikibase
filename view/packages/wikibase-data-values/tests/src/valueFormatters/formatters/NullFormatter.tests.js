@@ -2,19 +2,10 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-define( [
-	'valueFormatters/valueFormatters',
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'tests/src/valueFormatters/valueFormatters.tests',
-	'formatters/NullFormatter',
-	'values/UnknownValue'
-], function( vf, dv, util ) {
+( function( vf, dv, util ) {
 	'use strict';
 
-	var PARENT = vf.tests.ValueFormatterTest,
-		constructor = function() {
-	};
+	var PARENT = vf.tests.ValueFormatterTest;
 
 	/**
 	 * Constructor for creating a test object containing tests for the NullFormatter.
@@ -23,7 +14,7 @@ define( [
 	 * @extends valueFormatters.tests.ValueFormatterTest
 	 * @since 0.1
 	 */
-	vf.tests.NullParserTest = util.inherit( PARENT, constructor, {
+	vf.tests.NullParserTest = util.inherit( PARENT, {
 
 		/**
 		 * @inheritdoc
@@ -55,4 +46,4 @@ define( [
 
 	test.runTests( 'valueFormatters.NullFormatter' );
 
-} );
+}( valueFormatters, dataValues, util ) );

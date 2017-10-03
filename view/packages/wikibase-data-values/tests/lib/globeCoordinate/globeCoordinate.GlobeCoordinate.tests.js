@@ -3,12 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Mättig
  */
-define( [
-	'globeCoordinate/globeCoordinate',
-	'jquery',
-	'qunit',
-	'globeCoordinate/globeCoordinate.GlobeCoordinate'
-], function( globeCoordinate, $, QUnit ) {
+( function( globeCoordinate, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
@@ -204,4 +199,4 @@ define( [
 
 	} );
 
-} );
+}( globeCoordinate, jQuery, QUnit ) );

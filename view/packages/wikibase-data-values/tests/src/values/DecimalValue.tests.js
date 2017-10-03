@@ -2,12 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-define( [
-	'dataValues/dataValues',
-	'util/util.inherit',
-	'tests/src/dataValues.DataValue.tests',
-	'values/DecimalValue'
-], function( dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -57,4 +52,4 @@ define( [
 
 	test.runTests( 'dataValues.DecimalValueTest' );
 
-} );
+}( dataValues, util ) );
