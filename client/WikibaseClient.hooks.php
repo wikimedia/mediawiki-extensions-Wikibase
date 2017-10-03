@@ -8,8 +8,8 @@ use EchoEvent;
 use EditPage;
 use OutputPage;
 use Parser;
+use RequestContext;
 use Skin;
-use StubObject;
 use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
@@ -92,8 +92,6 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local, $wikiId = null ) {
-		global $wgContLang;
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$repoId = $wikibaseClient->getSettings()->getSetting( 'repoSiteId' );
 
@@ -105,9 +103,9 @@ final class ClientHooks {
 			return;
 		}
 
-		StubObject::unstub( $wgContLang );
+		$contLang = RequestContext::getMain()->getContentLanguage();
 
-		$formatter = new AutoCommentFormatter( $wgContLang, [ 'wikibase-entity' ] );
+		$formatter = new AutoCommentFormatter( $contLang, [ 'wikibase-entity' ] );
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {

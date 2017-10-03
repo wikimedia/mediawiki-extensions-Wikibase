@@ -4,7 +4,6 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use ParserOutput;
-use StubUserLang;
 use Title;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
@@ -35,9 +34,6 @@ class ParserOutputUpdateHookHandlers {
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
-		global $wgLang;
-
-		StubUserLang::unstub( $wgLang );
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(

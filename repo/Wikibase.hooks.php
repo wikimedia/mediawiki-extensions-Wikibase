@@ -25,7 +25,6 @@ use SearchResult;
 use Skin;
 use SkinTemplate;
 use SpecialSearch;
-use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
@@ -647,7 +646,7 @@ final class RepoHooks {
 	 * @param bool $local shall links be generated locally or globally
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local ) {
-		global $wgLang, $wgTitle;
+		global $wgTitle;
 
 		// If it is possible to avoid loading the whole page then the code will be lighter on the server.
 		if ( !( $title instanceof Title ) ) {
@@ -664,18 +663,8 @@ final class RepoHooks {
 			return;
 		}
 
-		if ( $wgLang instanceof StubUserLang ) {
-			wfDebugLog(
-				'wikibase-debug',
-				'Bug: T112070: ' . MWExceptionHandler::prettyPrintTrace(
-					MWExceptionHandler::redactTrace( debug_backtrace() )
-				)
-			);
-
-			StubUserLang::unstub( $wgLang );
-		}
-
-		$formatter = new AutoCommentFormatter( $wgLang, [ 'wikibase-' . $entityType, 'wikibase-entity' ] );
+		$lang = RequestContext::getMain()->getLanguage();
+		$formatter = new AutoCommentFormatter( $lang, [ 'wikibase-' . $entityType, 'wikibase-entity' ] );
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
