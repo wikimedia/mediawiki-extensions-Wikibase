@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_7ad4a54b",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-03T00:04:48Z",
+      "side": 1,
+      "message": "nitpick - probably unnecessary to split this into three lines given as there\u0027s only one arg now. Can be fixed later of course.",
+      "revId": "360098de1eff9cb3755359d64d263ec1b3385976",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_3ace2dba",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-03T00:04:48Z",
+      "side": 1,
+      "message": "isset check here, just in case?",
+      "revId": "360098de1eff9cb3755359d64d263ec1b3385976",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
