@@ -253,7 +253,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$usageTrackingLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
 			$labelDescriptionLookup,
 			$usageAccumulator,
-			$this->getLanguageFallbackChain()
+			$this->getLanguageFallbackChain(),
+			$this->allowDataAccessInUserLanguage()
 		);
 
 		return new WikibaseLanguageDependentLuaBindings(
