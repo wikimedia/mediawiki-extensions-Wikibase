@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_b74a2bc7",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-04T12:34:59Z",
+      "side": 0,
+      "message": "Removing all this is actually scary. This was here for a reason. It took us multiple weeks to get here. What does it mean to remove this now?",
+      "range": {
+        "startLine": 593,
+        "startChar": 2,
+        "endLine": 600,
+        "endChar": 3
+      },
+      "revId": "01b3d94b3ef788eef3415a49c932db887e44949f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

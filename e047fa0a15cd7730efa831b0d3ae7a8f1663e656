@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_f740a3aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-04T12:34:59Z",
+      "side": 1,
+      "message": "What does this word mean in this context? Can you please reword this commit message?",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "e047fa0a15cd7730efa831b0d3ae7a8f1663e656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_771b53d5",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-04T12:34:59Z",
+      "side": 1,
+      "message": "This appears to be a name that only exists in Wikibase code. I can not find it in the RequestContext class or any MediaWiki core code.",
+      "range": {
+        "startLine": 589,
+        "startChar": 36,
+        "endLine": 589,
+        "endChar": 54
+      },
+      "revId": "e047fa0a15cd7730efa831b0d3ae7a8f1663e656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
