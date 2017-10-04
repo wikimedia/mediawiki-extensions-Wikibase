@@ -68,7 +68,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
-	private function getAffectedPagesFinder( array $usage, array $expectedAspects = [] ) {
+	private function getAffectedPagesFinder( array $usage, array $expectedAspects = [], $allowDataAccessInUserLanguage = false ) {
 		$usageLookup = $this->getMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
@@ -81,6 +81,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$this->getTitleFactory(),
 			'enwiki',
 			'en',
+			$allowDataAccessInUserLanguage,
 			false
 		);
 
@@ -136,8 +137,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				EntityChange::REMOVE,
 				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
-			),
-			'item connected to client was deleted'
+			)
 		];
 
 		$cases['add another sitelink to Q2'] = [
@@ -161,13 +161,23 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			)
 		];
 
-		$cases['local label change on Q1 (used by Q2)'] = [
+		$cases['local label change on Q1 (used by Q2); mono-lingual wiki'] = [
 			[ EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ) ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
 			)
+		];
+
+		$cases['local label change on Q1 (used by Q2); multi-lingual wiki'] = [
+			[ EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ), EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE ) ],
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
+				new Item( $q1 ),
+				$this->getItemWithLabel( $q1, 'en', 'ONE' )
+			),
+			true
 		];
 
 		$badges = [ new ItemId( 'Q34' ) ];
@@ -194,8 +204,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getChangedAspectsProvider
 	 */
-	public function testGetChangedAspects( array $expected, EntityChange $change ) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( [] );
+	public function testGetChangedAspects( array $expected, EntityChange $change, $allowDataAccessInUserLanguage = false ) {
+		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $allowDataAccessInUserLanguage );
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
 
@@ -354,8 +364,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				EntityChange::REMOVE,
 				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
-			),
-			'item connected to client was deleted'
+			)
 		];
 
 		$cases['add another sitelink to Q2'] = [
@@ -464,6 +473,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			new TitleFactory(),
 			'enwiki',
 			'en',
+			false,
 			false
 		);
 
