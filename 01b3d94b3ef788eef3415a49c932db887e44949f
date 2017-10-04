@@ -22,6 +22,30 @@
       "revId": "01b3d94b3ef788eef3415a49c932db887e44949f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_141452eb",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-10-04T17:07:51Z",
+      "side": 0,
+      "message": "Indeed. This code isn\u0027t about the variable being a stub, but about it literally being null (or rather, undeclared). Because wgLang and wgContLang are defined fairly late in Setup.php at a point where at least some hooks will have already run (specifically, the SetupAfterCache hook runs before these vars are defined).",
+      "parentUuid": "0e6af365_b74a2bc7",
+      "range": {
+        "startLine": 593,
+        "startChar": 2,
+        "endLine": 600,
+        "endChar": 3
+      },
+      "revId": "01b3d94b3ef788eef3415a49c932db887e44949f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
