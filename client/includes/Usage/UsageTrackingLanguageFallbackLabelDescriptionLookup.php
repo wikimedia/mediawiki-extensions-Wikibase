@@ -4,6 +4,7 @@ namespace Wikibase\Client\Usage;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
@@ -57,9 +58,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	public function getLabel( EntityId $entityId ) {
 		$termFallback = $this->labelDescriptionLookup->getLabel( $entityId );
 
-		$languagesTouched = $this->getUsageLanguages( $termFallback );
-
-		foreach ( $languagesTouched as $lang ) {
+		foreach ( $this->getTouchedLanguages( $termFallback ) as $lang ) {
 			$this->usageAccumulator->addLabelUsage( $entityId, $lang );
 		}
 
@@ -75,9 +74,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	public function getDescription( EntityId $entityId ) {
 		$termFallback = $this->labelDescriptionLookup->getDescription( $entityId );
 
-		$languagesTouched = $this->getUsageLanguages( $termFallback );
-
-		foreach ( $languagesTouched as $lang ) {
+		foreach ( $this->getTouchedLanguages( $termFallback ) as $lang ) {
 			$this->usageAccumulator->addDescriptionUsage( $entityId, $lang );
 		}
 
@@ -91,28 +88,26 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	 *
 	 * @return string[]
 	 */
-	private function getUsageLanguages( TermFallback $termFallback = null ) {
+	private function getTouchedLanguages( TermFallback $termFallback = null ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 
 		if ( $termFallback === null ) {
 			// Nothing found: Record the full fallback chains as used.
-			$languagesTouched = $fetchLanguages;
-		} else {
-			// Found something: Find out which language it was originally in
-			$languageUsed = $termFallback->getSourceLanguageCode();
-			if ( !$languageUsed ) {
-				$languageUsed = $termFallback->getActualLanguageCode();
-			}
-
-			// Record the relevant part of the fallback chain as used.
-			$languagesTouched = array_slice(
-				$fetchLanguages,
-				0,
-				array_search( $languageUsed, $fetchLanguages ) + 1
-			);
+			return $fetchLanguages;
 		}
 
-		return $languagesTouched;
+		// Found something: Find out which language it was originally in
+		$languageUsed = $termFallback->getSourceLanguageCode();
+		if ( !$languageUsed ) {
+			$languageUsed = $termFallback->getActualLanguageCode();
+		}
+
+		// Record the relevant part of the fallback chain as used.
+		return array_slice(
+			$fetchLanguages,
+			0,
+			array_search( $languageUsed, $fetchLanguages ) + 1
+		);
 	}
 
 }
