@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_d299ed81",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackingLanguageFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-04T14:57:29Z",
+      "side": 1,
+      "message": "No big deal, but this is not a provider.",
+      "range": {
+        "startLine": 34,
+        "startChar": 18,
+        "endLine": 34,
+        "endChar": 25
+      },
+      "revId": "513f79bf94a560d3baa736e12d06eba55165ff1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
