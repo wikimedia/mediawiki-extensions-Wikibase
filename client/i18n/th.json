@@ -10,7 +10,7 @@
 			"Aefgh39622"
 		]
 	},
-	"tooltip-t-wikibase": "ลิงก์ไปยังสิ่งนี้ในคลังซึ่งเก็บข้อมูลที่มีการเชื่อมโยงกัน",
+	"tooltip-t-wikibase": "ลิงก์ไปยังสิ่งนี้ในคลังซึ่งเชื่อมโยงข้อมูลต่างๆ เข้าด้วยกัน",
 	"apihelp-query+wbentityusage-description": "คืนค่ารหัสประจำรายการสนเทศทั้งหมดที่ใช้ในหน้าที่กำหนด",
 	"apihelp-query+wbentityusage-summary": "คืนค่ารหัสประจำรายการสนเทศทั้งหมดที่ใช้ในหน้าที่กำหนด",
 	"apihelp-query+wbentityusage-param-prop": "คุณลักษณะที่จะเพิ่มไปในผลลัพธ์",
@@ -26,9 +26,9 @@
 	"apihelp-query+wblistentityusage-example-url": "ดึงหน้าที่เรียกใช้รายการสนเทศ <kbd>Q2</kbd> โดยรวม URL มาด้วย",
 	"apihelp-query+pageterms-example-item": "ดึงค่าป้ายชื่อและชื่ออื่นของรายการ Q84",
 	"wikibase-comment-add": "รายการของสิ่งหนึ่งใน {{WBREPONAME}} ได้ถูกสร้างขึ้น",
-	"wikibase-comment-remove": "รายกาของสิ่งนี้ใน {{WBREPONAME}} ได้ถูกลบออก. จึงลบลิงก์ข้ามภาษาออก.",
+	"wikibase-comment-remove": "รายการของสิ่งนี้ใน {{WBREPONAME}} ได้ถูกลบออก. จึงลบลิงก์ข้ามภาษาออก.",
 	"wikibase-comment-linked": "รายการของสิ่งหนึ่งใน {{WBREPONAME}} ได้เชื่อมโยงเข้ากับหน้านี้",
-	"wikibase-comment-unlink": "หน้านี้ถูได้กตัดการเชื่อมโยงออกจากรายการของสิ่งนั้นใน {{WBREPONAME}}. จึงลบลิงก์ข้ามภาษาออก.",
+	"wikibase-comment-unlink": "หน้านี้ได้ถูกตัดการเชื่อมโยงออกจากรายการของสิ่งนั้นใน {{WBREPONAME}}. จึงลบลิงก์ข้ามภาษาออก.",
 	"wikibase-comment-restore": "รายการของสิ่งนี้ใน {{WBREPONAME}} ได้ถูกกู้คืน. จึงเรียกคืนลิงก์ข้ามภาษา.",
 	"wikibase-comment-update": "เปลี่ยนแปลงสารสนเทศของสิ่งนี้ใน {{WBREPONAME}} แล้ว",
 	"wikibase-comment-sitelink-add": "เพิ่มลิงก์ข้ามภาษาแล้ว: $1",
@@ -62,6 +62,7 @@
 	"wikibase-rc-wikibase-edit-title": "การแก้ไขบน {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไขบน {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "การแก้ไขที่เริ่มบน {{WBREPONAME}}",
+	"wikibase-replicationnote": "โปรดสังเกตว่าอาจใช้เวลาหลายนาทีจนกว่าการเปลี่ยนแปลงจะปรากฏบนวิกิทุกภาษา",
 	"wikibase-watchlist-show-changes-pref": "แสดงการแก้ไขบน {{WBREPONAME}} ในรายการเฝ้าดูของคุณ",
 	"unconnectedpages": "หน้าที่ไม่ได้เชื่อมโยงกับสิ่งใดๆ ใน {{WBREPONAME}}",
 	"wikibase-unconnectedpages-submit": "แสดงหน้า",

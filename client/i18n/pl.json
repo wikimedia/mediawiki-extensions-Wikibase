@@ -109,6 +109,7 @@
 	"wikibase-pageinfo-entity-usage": "Obiekty z Wikidanych użyte na tej stronie",
 	"wikibase-pageinfo-entity-usage-S": "Link do strony",
 	"wikibase-pageinfo-entity-usage-L": "Etykieta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Opis: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tytuł",
 	"wikibase-pageinfo-entity-usage-C": "Deklaracja: $1",
 	"wikibase-pageinfo-entity-usage-X": "Wszystkie dane encji",

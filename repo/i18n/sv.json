@@ -312,6 +312,8 @@
 	"wikibase-mylanguagefallbackchain-text": "Nedan visas kedjan språktillbakafallskedjan som används för att visa dig entitetsetiketter.",
 	"wikibase-mylanguagefallbackchain-babel": "Du kan redigera den genom att lägga in <nowiki>{{#babel: }}</nowiki> på {{GENDER:$1|din}} [[Special:MyPage|användarsida]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, konverterade från $3 - $4",
+	"wikibase-api-claim-value-missing": "Ett värde måste anges när ett påstående med en PropertyValueSnak-snak skapas.",
+	"wikibase-api-claim-value-unexpected": "Du kan inte ange ett värde när du skapar ett påstående utan en PropertyValueSnak som huvudsnak.",
 	"wikibase-api-unresolved-redirect": "Angiven entitets-ID hänvisar till en omdirigering, som inte stöds i detta sammanhang.",
 	"wikibase-api-illegal-entity-remove": "Entiteter med toppnivånyckeln <var>remove</var> kan inte raderas.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Du måste ange antingen en <var>id</var>-entitet eller en kombination av <var>site</var> och <var>page</var>, men inte båda.",

@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Eminn",
-			"Dağlı95"
+			"Dağlı95",
+			"Wertuose"
 		]
 	},
 	"wikibase-error-unexpected": "Xəta: $1",
-	"wikibase-sitelinks-wikipedia": "Vikipediya"
+	"wikibase-sitelinks-wikipedia": "Vikipediya",
+	"wikibase-validator-no-such-property": "$1 xüsusiyyəti tapılmadı"
 }

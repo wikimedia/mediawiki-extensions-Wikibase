@@ -6,8 +6,11 @@
 			"Tokoabibi"
 		]
 	},
+	"wikibase-client-desc": "mamaedapay-malutapiingan nu Wikibase sacunusan a sakaluk",
 	"tooltip-t-wikibase": "masasiket tayza i papatunay a kalunasulitan pisupeday a kakitizaan tu kasacacay",
 	"wikibase-comment-update": "masumad tuway {{WBREPONAME}} kasacacay",
+	"wikibase-comment-sitelink-add": "macunus tu kamu masasiket: $1",
+	"wikibase-comment-sitelink-change": "kamu masasiket masumad $1 tu $2 tuway",
 	"wikibase-comment-sitelink-remove": "misipu kamu masasiket：$1",
 	"wikibase-dataitem": "{{WBREPONAME}} kasacacay",
 	"wikibase-editlinks": "mikawaway-kalumyiti misiket",
@@ -15,7 +18,9 @@
 	"wikibase-addlinkstitle": "micunus milakuwit kamu masasiket",
 	"wikibase-linkitem-addlinks": "micunus tu masasiket",
 	"wikibase-linkitem-close": "edeben sasukamu atilad atu miliyaw lisimet kasabelih",
+	"wikibase-linkitem-failure": "mitanam masasiket matuzu’ay a kasabelih matahkal ku caay kapulita a mungangaw.",
 	"wikibase-linkitem-title": "masasiket tu kasabelih",
+	"wikibase-linkitem-selectlink": "pipili’ calay-kakacawan(wangcan) atu maydih kisu masasiket tina kasabelih a kasabelih",
 	"wikibase-linkitem-input-site": "kamu:",
 	"wikibase-linkitem-input-page": "kasabelih:",
 	"wikibase-linkitem-not-loggedin-title": "maydih kisu patalabu",
@@ -28,17 +33,20 @@
 	"wikibase-error-deserialize-error": "belih-salaylay kalunasulitan mungagnaw",
 	"unconnectedpages": "kasabelih caay masasiket tayza amahicahica tu kasacacay",
 	"wikibase-unconnectedpages-submit": "paazih  kasabelih",
+	"wikibase-pageswithbadges-invalid-id": "$1 caay ku kapahay a ID kasacacay",
 	"wikibase-pageswithbadges-badge": "kunpay:",
 	"wikibase-pageswithbadges-submit": "paazih  kasabelih",
 	"entityusage": "masaheciay misaungay zasatu",
 	"wikibase-entityusage-legend": "pasilsil pisaungay matuzu’ay masaheciay a kasabelih",
 	"wikibase-entityusage-entity": "masaheciay:",
 	"wikibase-entityusage-submit": "paazih  kasabelih",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} kasacacay ID",
 	"wikibase-pageinfo-entity-id-none": "nayi’",
 	"wikibase-pageinfo-entity-usage-S": "Calay-kakacawan(C-wangcan)",
 	"wikibase-pageinfo-entity-usage-L": "aazihen paya: $1",
 	"wikibase-pageinfo-entity-usage-T": "satangahan",
 	"wikibase-pageinfo-entity-usage-X": "sacahamin masaheciay kalunasulitan",
 	"wikibase-property-render-error": "paazih susin $1: $2 mungangaw",
-	"wikibase-otherprojects": "zuma cwanan"
+	"wikibase-otherprojects": "zuma cwanan",
+	"notification-link-text-view-item": "{{GENDER:$1|ciwsace}} kasacacay"
 }
