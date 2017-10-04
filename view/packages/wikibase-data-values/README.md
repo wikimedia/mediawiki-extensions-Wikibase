@@ -5,11 +5,11 @@ It contains various JavaScript related to the DataValues library.
 
 [![Build Status](https://secure.travis-ci.org/wmde/DataValuesJavaScript.png?branch=master)](http://travis-ci.org/wmde/DataValuesJavaScript)
 
-On [Packagist](https://packagist.org/packages/data-values/javascript):
-[![Latest Stable Version](https://poser.pugx.org/data-values/javascript/version.png)](https://packagist.org/packages/data-values/javascript)
-[![Download count](https://poser.pugx.org/data-values/javascript/d/total.png)](https://packagist.org/packages/data-values/javascript)
-
 ## Release notes
+
+### 1.0.0 (dev)
+* The library is now a pure JavaScript library.
+* Removed MediaWiki ResourceLoader module definitions.
 
 ### 0.9.0 (2017-09-06)
 * Removed `valueFormatters.ValueFormatterStore`.

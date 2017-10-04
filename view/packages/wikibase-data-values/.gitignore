@@ -1,8 +1,9 @@
 *~
 *.kate-swp
 
-composer.phar
 composer.lock
+
+package-lock.json
 
 !.*
 .idea/
