@@ -55,6 +55,11 @@ class AffectedPagesFinder {
 	/**
 	 * @var bool
 	 */
+	private $allowDataAccessInUserLanguage;
+
+	/**
+	 * @var bool
+	 */
 	private $checkPageExistence;
 
 	/**
@@ -62,6 +67,7 @@ class AffectedPagesFinder {
 	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
 	 * @param string $contentLanguageCode
+	 * @param bool $allowDataAccessInUserLanguage
 	 * @param bool $checkPageExistence
 	 *
 	 * @throws InvalidArgumentException
@@ -71,6 +77,7 @@ class AffectedPagesFinder {
 		TitleFactory $titleFactory,
 		$siteId,
 		$contentLanguageCode,
+		$allowDataAccessInUserLanguage,
 		$checkPageExistence = true
 	) {
 		if ( !is_string( $siteId ) ) {
@@ -81,6 +88,10 @@ class AffectedPagesFinder {
 			throw new InvalidArgumentException( '$contentLanguageCode must be a string' );
 		}
 
+		if ( !is_bool( $allowDataAccessInUserLanguage ) ) {
+			throw new InvalidArgumentException( '$allowDataAccessInUserLanguage must be a boolean' );
+		}
+
 		if ( !is_bool( $checkPageExistence ) ) {
 			throw new InvalidArgumentException( '$checkPageExistence must be a boolean' );
 		}
@@ -89,6 +100,7 @@ class AffectedPagesFinder {
 		$this->titleFactory = $titleFactory;
 		$this->siteId = $siteId;
 		$this->contentLanguageCode = $contentLanguageCode;
+		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 		$this->checkPageExistence = $checkPageExistence;
 	}
 
@@ -167,6 +179,12 @@ class AffectedPagesFinder {
 
 		foreach ( $labelsDiff as $lang => $diffOp ) {
 			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, $lang );
+		}
+
+		if ( $this->allowDataAccessInUserLanguage ) {
+			// If data access in user language is allowed, we might also
+			// have an all language usages.
+			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE );
 		}
 
 		return $aspects;
