@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_12cea5b9",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-04T14:12:03Z",
+      "side": 1,
+      "message": "This sounds fishy to me. What I know and see here is a method that does not have any side effects. The only thing the method does is manipulating the array that is given as the second argument. But you are (literally) ignoring that result here.\n\nI might miss something, but it looks like you can remove this line entirely.",
+      "parentUuid": "0e6af365_61cc0a8d",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 45
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_76f5b5c6",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Puts last message to the beggining of the array",
       "parentUuid": "0e6af365_76f5b5c6",
+      "range": {
+        "startLine": 273,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 56
+      },
+      "revId": "8653fab493c417e85b15e314b7ec06afc1dab095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_72d92183",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-04T14:12:03Z",
+      "side": 1,
+      "message": "Sure, but why? I can\u0027t figure out why this is done at this point just by looking at the code.",
+      "parentUuid": "0e6af365_a199a282",
       "range": {
         "startLine": 273,
         "startChar": 2,
