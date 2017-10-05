@@ -114,9 +114,9 @@ class DumpJsonTest extends MediaWikiTestCase {
 			)
 		];
 
-		foreach ( $testEntities as $key => $testEntity ) {
+		foreach ( $testEntities as $testEntity ) {
 			$mockRepo->putEntity( $testEntity );
-			$mockEntityIdPager->addEntityPage( $testEntity->getId(), $key );
+			$mockEntityIdPager->addEntityId( $testEntity->getId() );
 		}
 
 		$serializerFactory = new SerializerFactory(
