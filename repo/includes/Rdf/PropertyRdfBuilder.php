@@ -14,6 +14,10 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class PropertyRdfBuilder implements EntityRdfBuilder {
 
+	const OBJECT_PROPERTY = 'ObjectProperty';
+	const DATATYPE_PROPERTY = 'DatatypeProperty';
+	const NO_NORMALIZATION = null;
+
 	/**
 	 * @var RdfVocabulary
 	 */
@@ -24,27 +28,20 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 */
 	private $writer;
 
-	public function __construct(
-		RdfVocabulary $vocabulary,
-		RdfWriter $writer
-	) {
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer ) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
 	}
 
 	/**
 	 * Write predicates linking property entity to property predicates
-	 * @param string $id
-	 * @param boolean $isObjectProperty Is the property data or object property?
-	 * @param boolean $hasNormalization Does the property have normalized predicates?
-	 * @param boolean $isNormalizedObjectProperty Does the property normalize to data or objects?
+	 *
+	 * @param string $id The serialized property ID string
+	 * @param string $propertyRdfType Is the property data or object property?
+	 * @param string|null $normalizedPropertyRdfType Does the property have normalized predicates,
+	 *  and if so does the property normalize to data or objects?
 	 */
-	private function writePropertyPredicates(
-		$id,
-		$isObjectProperty,
-		$hasNormalization,
-		$isNormalizedObjectProperty
-	) {
+	private function writePropertyPredicates( $id, $propertyRdfType, $normalizedPropertyRdfType ) {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
@@ -54,7 +51,8 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
-		if ( $hasNormalization ) {
+
+		if ( $normalizedPropertyRdfType !== self::NO_NORMALIZATION ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaimNormalized' )
 				->is( RdfVocabulary::NSP_DIRECT_CLAIM_NORM, $id );
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )
@@ -64,37 +62,28 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )
 				->is( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id );
 		}
+
 		// Always object properties
 		$this->writer->about( RdfVocabulary::NSP_CLAIM, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		// Depending on property type
-		if ( $isObjectProperty ) {
-			$datatype = 'ObjectProperty';
-		} else {
-			$datatype = 'DatatypeProperty';
-		}
-		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_STATEMENT, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE, $id )->a( 'owl', $datatype );
-		// Normalized predicates, if applicable
-		if ( $hasNormalization ) {
+
+		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM, $id )->a( 'owl', $propertyRdfType );
+		$this->writer->about( RdfVocabulary::NSP_CLAIM_STATEMENT, $id )->a( 'owl', $propertyRdfType );
+		$this->writer->about( RdfVocabulary::NSP_QUALIFIER, $id )->a( 'owl', $propertyRdfType );
+		$this->writer->about( RdfVocabulary::NSP_REFERENCE, $id )->a( 'owl', $propertyRdfType );
+
+		if ( $normalizedPropertyRdfType !== self::NO_NORMALIZATION ) {
 			$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id )
 				->a( 'owl', 'ObjectProperty' );
 			$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id )
 				->a( 'owl', 'ObjectProperty' );
 			$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id )
 				->a( 'owl', 'ObjectProperty' );
-			// Depending on property type
-			if ( $isNormalizedObjectProperty ) {
-				$normalizedDatatype = 'ObjectProperty';
-			} else {
-				$normalizedDatatype = 'DatatypeProperty';
-			}
+
 			$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM_NORM, $id )
-				->a( 'owl', $normalizedDatatype );
+				->a( 'owl', $normalizedPropertyRdfType );
 		}
 	}
 
@@ -103,37 +92,40 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 * or just data item.
 	 *
 	 * @param Property $property
-	 * @return boolean
+	 *
+	 * @return string
 	 */
-	private function propertyIsLink( Property $property ) {
-		// For now, it's very simple but can be more complex later
-		return in_array(
-			$property->getDataTypeId(),
-			[
-				'wikibase-item',
-				'wikibase-property',
-				'url',
-				'commonsMedia',
-				'geo-shape',
-				'tabular-data'
-			]
-		);
+	private function getPropertyRdfType( Property $property ) {
+		$propertyTypesToBeObjects = [
+			'wikibase-item',
+			'wikibase-property',
+			'url',
+			'commonsMedia',
+			'geo-shape',
+			'tabular-data',
+		];
+
+		if ( in_array( $property->getDataTypeId(), $propertyTypesToBeObjects ) ) {
+			return self::OBJECT_PROPERTY;
+		} else {
+			return self::DATATYPE_PROPERTY;
+		}
 	}
 
-	private function propertyNormalizedIsLink( Property $property ) {
-		return $this->propertyIsLink( $property ) ||
-			$property->getDataTypeId() === 'external-id';
-	}
-
-	private function propertyHasNormalization( Property $property ) {
-		// Also very simple for now
-		return in_array(
-			$property->getDataTypeId(),
-			[
-				'quantity',
-				'external-id',
-			]
-		);
+	/**
+	 * @param Property $property
+	 *
+	 * @return string|null
+	 */
+	private function getNormalizedPropertyRdfType( Property $property ) {
+		switch ( $property->getDataTypeId() ) {
+			case 'quantity':
+				return self::OBJECT_PROPERTY;
+			case 'external-id':
+				return self::DATATYPE_PROPERTY;
+			default:
+				return self::NO_NORMALIZATION;
+		}
 	}
 
 	/**
@@ -158,14 +150,13 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 			->is( $this->vocabulary->getDataTypeURI( $property ) );
 
-		$id = $property->getId()->getSerialization();
+		$propertyId = $property->getId()->getSerialization();
 		$this->writePropertyPredicates(
-			$id,
-			$this->propertyIsLink( $property ),
-			$this->propertyHasNormalization( $property ),
-			$this->propertyNormalizedIsLink( $property )
+			$propertyId,
+			$this->getPropertyRdfType( $property ),
+			$this->getNormalizedPropertyRdfType( $property )
 		);
-		$this->writeNovalueClass( $id );
+		$this->writeNovalueClass( $propertyId );
 	}
 
 	/**
@@ -173,9 +164,7 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 *
 	 * @param EntityDocument $entity
 	 */
-	public function addEntity(
-		EntityDocument $entity
-	) {
+	public function addEntity( EntityDocument $entity ) {
 		if ( !$entity instanceof Property ) {
 			return;
 		}
