@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_a9a5e7b2",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T12:32:10Z",
+      "side": 1,
+      "message": "U should come before V.",
+      "range": {
+        "startLine": 120,
+        "startChar": 21,
+        "endLine": 120,
+        "endChar": 23
+      },
+      "revId": "59620bab2cebf88cc6fa91c8ada2500c5bf1a281",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
