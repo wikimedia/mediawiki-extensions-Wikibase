@@ -151,7 +151,7 @@ call_user_func( function() {
 	// for client notifications (requires the Echo extension)
 	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
 	// thus we have to register these two handlers disregarding Echo is loaded or not
-	$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onBeforeCreateEchoEvent';
+	$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\Client\Hooks\EchoSetupHookHandlers::onBeforeCreateEchoEvent';
 	$wgHooks['EchoGetBundleRules'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onEchoGetBundleRules';
 
 	// conditionally register the remaining two handlers which would otherwise fail
