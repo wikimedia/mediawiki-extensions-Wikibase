@@ -68,7 +68,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
-	private function getAffectedPagesFinder( array $usage, array $expectedAspects = [], $allowDataAccessInUserLanguage = false ) {
+	private function getAffectedPagesFinder( array $usage, array $expectedAspects, $trackUsagesInAllLanguages = false ) {
 		$usageLookup = $this->getMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
@@ -81,7 +81,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$this->getTitleFactory(),
 			'enwiki',
 			'en',
-			$allowDataAccessInUserLanguage,
+			$trackUsagesInAllLanguages,
 			false
 		);
 
@@ -204,8 +204,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getChangedAspectsProvider
 	 */
-	public function testGetChangedAspects( array $expected, EntityChange $change, $allowDataAccessInUserLanguage = false ) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $allowDataAccessInUserLanguage );
+	public function testGetChangedAspects( array $expected, EntityChange $change, $trackUsagesInAllLanguages = false ) {
+		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
 

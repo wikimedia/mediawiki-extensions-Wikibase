@@ -38,29 +38,28 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	/**
 	 * @var bool
 	 */
-	private $allowDataAccessInUserLanguage;
+	private $trackUsagesInAllLanguages;
 
 	/**
 	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param LanguageFallbackChain $languageFallbackChain
-	 * @param bool $allowDataAccessInUserLanguage
+	 * @param bool $trackUsagesInAllLanguages
 	 */
 	public function __construct(
 		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator,
 		LanguageFallbackChain $languageFallbackChain,
-		$allowDataAccessInUserLanguage
+		$trackUsagesInAllLanguages
 	) {
+		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
+			throw new InvalidArgumentException( '$trackUsagesInAllLanguages must be a bool' );
+		}
+
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->languageFallbackChain = $languageFallbackChain;
-
-		if ( !is_bool( $allowDataAccessInUserLanguage ) ) {
-			throw new InvalidArgumentException( '$allowDataAccessInUserLanguage must be a boolean' );
-		}
-
-		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
+		$this->trackUsagesInAllLanguages = $trackUsagesInAllLanguages;
 	}
 
 	/**
@@ -103,8 +102,10 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	 * @return string[]|null[]
 	 */
 	private function getTouchedLanguages( TermFallback $termFallback = null ) {
-		if ( $this->allowDataAccessInUserLanguage ) {
-			// Track all languages as used.
+		if ( $this->trackUsagesInAllLanguages ) {
+			// On multi-lingual wikis where users can request pages in any language, we can not
+			// optimize for one language fallback chain only. Since all possible language fallback
+			// chains must cover all languages, we can simply track an "all languages" usage.
 			return [ null ];
 		}
 

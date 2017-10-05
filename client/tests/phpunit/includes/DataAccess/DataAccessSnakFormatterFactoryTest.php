@@ -51,8 +51,7 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getOutputFormatSnakFormatterFactory( $expectedFormat ),
 			$this->getMock( PropertyDataTypeLookup::class ),
 			$this->getMock( EntityIdParser::class ),
-			$languageFallbackLabelDescriptionLookupFactory,
-			true
+			$languageFallbackLabelDescriptionLookupFactory
 		);
 	}
 

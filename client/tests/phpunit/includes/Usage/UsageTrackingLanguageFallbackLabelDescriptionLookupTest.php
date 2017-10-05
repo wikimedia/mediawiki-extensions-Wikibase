@@ -79,7 +79,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 		array $expectedUsages,
 		array $fetchLanguageCodes,
 		TermFallback $term = null,
-		$allowDataAccessInUserLanguage = false
+		$trackUsagesInAllLanguages = false
 	) {
 		$q2 = new ItemId( 'Q2' );
 
@@ -90,7 +90,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 			$term,
 			'getLabel',
 			$fetchLanguageCodes,
-			$allowDataAccessInUserLanguage
+			$trackUsagesInAllLanguages
 		);
 
 		$this->assertSame( $term, $lookup->getLabel( $q2 ) );
@@ -104,7 +104,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 		array $expectedUsages,
 		array $fetchLanguageCodes,
 		TermFallback $term = null,
-		$allowDataAccessInUserLanguage = false
+		$trackUsagesInAllLanguages = false
 	) {
 		$q2 = new ItemId( 'Q2' );
 
@@ -115,7 +115,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 			$term,
 			'getDescription',
 			$fetchLanguageCodes,
-			$allowDataAccessInUserLanguage
+			$trackUsagesInAllLanguages
 		);
 
 		$this->assertSame( $term, $lookup->getDescription( $q2 ) );
@@ -127,7 +127,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 	 * @param TermFallback|null $term
 	 * @param string $method
 	 * @param string[] $fetchLanguageCodes
-	 * @param bool $allowDataAccessInUserLanguage
+	 * @param bool $trackUsagesInAllLanguages
 	 *
 	 * @return UsageTrackingLanguageFallbackLabelDescriptionLookup
 	 */
@@ -136,12 +136,12 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 		TermFallback $term = null,
 		$method,
 		array $fetchLanguageCodes,
-		$allowDataAccessInUserLanguage = false
+		$trackUsagesInAllLanguages
 	) {
 		$languageFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$languageFallbackChain->expects( $this->exactly( $allowDataAccessInUserLanguage ? 0 : 1 ) )
+		$languageFallbackChain->expects( $this->exactly( $trackUsagesInAllLanguages ? 0 : 1 ) )
 			->method( 'getFetchLanguageCodes' )
 			->will( $this->returnValue( $fetchLanguageCodes ) );
 
@@ -149,7 +149,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 			$this->getLanguageFallbackLabelDescriptionLookup( $method, new ItemId( 'Q2' ), $term ),
 			$usageAccumulator,
 			$languageFallbackChain,
-			$allowDataAccessInUserLanguage
+			$trackUsagesInAllLanguages
 		);
 
 		return $usageTrackingLanguageFallbackLabelDescriptionLookup;
