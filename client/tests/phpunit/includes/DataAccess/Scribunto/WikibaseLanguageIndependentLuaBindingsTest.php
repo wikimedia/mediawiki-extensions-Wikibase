@@ -50,11 +50,11 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 			$siteLinkLookup,
 			new SettingsArray(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
-			"enwiki" // siteId
+			'enwiki'
 		);
 	}
 
-	private function hasUsage( $actualUsages, EntityId $entityId, $aspect ) {
+	private function hasUsage( array $actualUsages, EntityId $entityId, $aspect ) {
 		$usage = new EntityUsage( $entityId, $aspect );
 		$key = $usage->getIdentityString();
 		return isset( $actualUsages[$key] );
@@ -68,7 +68,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 			$this->getMock( SiteLinkLookup::class ),
 			$settings,
 			new HashUsageAccumulator(),
-			"enwiki" // siteId
+			'enwiki'
 		);
 
 		$this->assertSame(
@@ -119,9 +119,6 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 
 	/**
 	 * @dataProvider getSiteLinkPageNameProvider
-	 *
-	 * @param string $expected
-	 * @param string $itemId
 	 */
 	public function testGetSiteLinkPageName( $expected, $itemId, $globalSiteId ) {
 		$item = $this->getItem();
@@ -145,7 +142,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 	/**
 	 * @dataProvider provideGlobalSiteId
 	 */
-	public function testGetSiteLinkPageName_usage( $expectedUsages, $globalSiteId ) {
+	public function testGetSiteLinkPageName_usage( array $expectedUsages, $globalSiteId ) {
 		$item = $this->getItem();
 
 		$siteLinkStore = new HashSiteLinkStore();
@@ -164,6 +161,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
 	}
 
+	/**
+	 * @return Item
+	 */
 	private function getItem() {
 		$item = new Item( new ItemId( 'Q666' ) );
 		$item->setLabel( 'en', 'Beer' );

@@ -461,16 +461,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getSiteLinkPageName in WikibaseLuaBindings
 	 *
-	 * @param string $prefixedEntityId
+	 * @param string $prefixedItemId
 	 * @param string|null $globalSiteId
 	 *
 	 * @return string[]
 	 */
-	public function getSiteLinkPageName( $prefixedEntityId, $globalSiteId = null ) {
-		$this->checkType( 'getSiteLinkPageName', 1, $prefixedEntityId, 'string' );
-		$this->checkTypeOptional( 'getSiteLinkPageName', 1, $globalSiteId, 'string', null );
+	public function getSiteLinkPageName( $prefixedItemId, $globalSiteId ) {
+		$this->checkType( 'getSiteLinkPageName', 1, $prefixedItemId, 'string' );
+		$this->checkTypeOptional( 'getSiteLinkPageName', 2, $globalSiteId, 'string', null );
 
-		return [ $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedEntityId, $globalSiteId ) ];
+		return [ $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedItemId, $globalSiteId ) ];
 	}
 
 	/**

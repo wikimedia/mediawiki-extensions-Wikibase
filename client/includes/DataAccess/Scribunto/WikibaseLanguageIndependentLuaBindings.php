@@ -87,16 +87,16 @@ class WikibaseLanguageIndependentLuaBindings {
 	}
 
 	/**
-	 * @param string $prefixedEntityId
+	 * @param string $prefixedItemId
 	 * @param string|null $globalSiteId
 	 *
 	 * @return string|null Null if no site link found.
 	 */
-	public function getSiteLinkPageName( $prefixedEntityId, $globalSiteId = null ) {
-		$globalSiteId = $globalSiteId !== null ? $globalSiteId : $this->siteId;
+	public function getSiteLinkPageName( $prefixedItemId, $globalSiteId ) {
+		$globalSiteId = $globalSiteId ?: $this->siteId;
 
 		try {
-			$itemId = new ItemId( $prefixedEntityId );
+			$itemId = new ItemId( $prefixedItemId );
 		} catch ( InvalidArgumentException $e ) {
 			return null;
 		}
