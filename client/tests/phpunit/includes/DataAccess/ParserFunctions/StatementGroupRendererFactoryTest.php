@@ -172,8 +172,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 				$formatterFactory,
 				$this->getMock( PropertyDataTypeLookup::class ),
 				$this->getMock( EntityIdParser::class ),
-				$this->getLanguageFallbackLabelDescriptionLookupFactory(),
-				false
+				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
 			$allowDataAccessInUserLanguage
 		);
@@ -201,8 +200,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 				$this->getSnakFormatterFactory(),
 				$this->getMock( PropertyDataTypeLookup::class ),
 				$this->getMock( EntityIdParser::class ),
-				$this->getLanguageFallbackLabelDescriptionLookupFactory(),
-				false
+				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
 			$allowDataAccessInUserLanguage
 		);

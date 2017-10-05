@@ -56,7 +56,7 @@ class DataAccessSnakFormatterFactory {
 	/**
 	 * @var bool
 	 */
-	private $allowDataAccessInUserLanguage;
+	private $trackUsagesInAllLanguages;
 
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
@@ -64,10 +64,10 @@ class DataAccessSnakFormatterFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $repoItemUriParser,
 		LanguageFallbackLabelDescriptionLookupFactory $languageFallbackLabelDescriptionLookupFactory,
-		$allowDataAccessInUserLanguage
+		$trackUsagesInAllLanguages = false
 	) {
-		if ( !is_bool( $allowDataAccessInUserLanguage ) ) {
-			throw new InvalidArgumentException( '$allowDataAccessInUserLanguage must be a boolean' );
+		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
+			throw new InvalidArgumentException( '$trackUsagesInAllLanguages must be a bool' );
 		}
 
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
@@ -75,7 +75,7 @@ class DataAccessSnakFormatterFactory {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
 		$this->languageFallbackLabelDescriptionLookupFactory = $languageFallbackLabelDescriptionLookupFactory;
-		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
+		$this->trackUsagesInAllLanguages = $trackUsagesInAllLanguages;
 	}
 
 	/**
@@ -117,7 +117,7 @@ class DataAccessSnakFormatterFactory {
 				$this->languageFallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language ),
 				$usageAccumulator,
 				$fallbackChain,
-				$this->allowDataAccessInUserLanguage
+				$this->trackUsagesInAllLanguages
 			)
 		);
 	}
