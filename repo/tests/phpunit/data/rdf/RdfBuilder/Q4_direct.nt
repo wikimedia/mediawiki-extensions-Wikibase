@@ -1,4 +1,5 @@
 <http://acme.test/Q4> <http://acme.test/prop/direct/P10> <http://commons.wikimedia.org/data/main/Data:Berlin.map> .
+<http://acme.test/Q4> <http://acme.test/prop/direct/P11> "test-external-identifier" .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P2> <http://acme.test/Q42> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> .
 <http://acme.test/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
