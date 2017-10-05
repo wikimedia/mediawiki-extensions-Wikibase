@@ -245,10 +245,12 @@ function wikibase.setupInterface()
 	-- Get the local sitelink title for the given entity id.
 	--
 	-- @param {string} id
-	wikibase.sitelink = function( id )
+	-- @param {string} [globalSiteId]
+	wikibase.sitelink = function( id, globalSiteId )
 		checkType( 'sitelink', 1, id, 'string' )
+		checkTypeMulti( 'sitelink', 2, globalSiteId, { 'string', 'nil' } )
 
-		return php.getSiteLinkPageName( id )
+		return php.getSiteLinkPageName( id, globalSiteId )
 	end
 
 

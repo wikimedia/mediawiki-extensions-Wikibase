@@ -88,26 +88,32 @@ class WikibaseLanguageIndependentLuaBindings {
 
 	/**
 	 * @param string $prefixedEntityId
+	 * @param string|null $globalSiteId
 	 *
 	 * @return string|null Null if no site link found.
 	 */
-	public function getSiteLinkPageName( $prefixedEntityId ) {
+	public function getSiteLinkPageName( $prefixedEntityId, $globalSiteId = null ) {
+		$globalSiteId = $globalSiteId !== null ? $globalSiteId : $this->siteId;
+
 		try {
 			$itemId = new ItemId( $prefixedEntityId );
 		} catch ( InvalidArgumentException $e ) {
 			return null;
 		}
 
-		// @fixme the SiteLinks do not contain badges! but all we want here is page name.
+		if ( $globalSiteId === $this->siteId ) {
+			$this->usageAccumulator->addTitleUsage( $itemId );
+		} else {
+			$this->usageAccumulator->addSiteLinksUsage( $itemId );
+		}
+
 		$siteLinkRows = $this->siteLinkLookup->getLinks(
 			[ $itemId->getNumericId() ],
-			[ $this->siteId ]
+			[ $globalSiteId ]
 		);
 
 		foreach ( $siteLinkRows as $siteLinkRow ) {
 			$siteLink = new SiteLink( $siteLinkRow[0], $siteLinkRow[1] );
-
-			$this->usageAccumulator->addTitleUsage( $itemId );
 			return $siteLink->getPageName();
 		}
 
