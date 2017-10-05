@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Usage;
 use MediaWikiTestCase;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
@@ -23,29 +24,42 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 	public function provideGetLabel() {
+		return $this->provideGetTermFallback( 'L' );
+	}
+
+	public function provideGetDescription() {
+		return $this->provideGetTermFallback( 'D' );
+	}
+
+	private function provideGetTermFallback( $usagePrefix ) {
 		return [
 			'No term found -> all languages tracked' => [
-				[ 'Q2#L.a', 'Q2#L.b', 'Q2#L.c' ],
+				[ "Q2#$usagePrefix.a", "Q2#$usagePrefix.b", "Q2#$usagePrefix.c" ],
 				[ 'a', 'b', 'c' ],
 				null
 			],
 			'Only language in chain used' => [
-				[ 'Q2#L.en' ],
+				[ "Q2#$usagePrefix.en" ],
 				[ 'en' ],
 				new TermFallback( 'en', 'blah blah blah', 'en', null )
 			],
 			'One language in chain used' => [
-				[ 'Q2#L.de', 'Q2#L.es' ],
+				[ "Q2#$usagePrefix.de", "Q2#$usagePrefix.es" ],
 				[ 'de', 'es', 'en' ],
 				new TermFallback( 'de', 'blah blah blah', 'es', null )
 			],
 			'Last language in chain used' => [
-				[ 'Q2#L.de', 'Q2#L.es', 'Q2#L.ru' ],
+				[ "Q2#$usagePrefix.de", "Q2#$usagePrefix.es", "Q2#$usagePrefix.ru" ],
 				[ 'de', 'es', 'ru' ],
 				new TermFallback( 'de', 'blah blah blah', 'ru', null )
 			],
 			'Transliteration' => [
-				[ 'Q2#L.foo', 'Q2#L.ku', 'Q2#L.ku-arab', 'Q2#L.ku-latn' ],
+				[
+					"Q2#$usagePrefix.foo",
+					"Q2#$usagePrefix.ku",
+					"Q2#$usagePrefix.ku-arab",
+					"Q2#$usagePrefix.ku-latn"
+				],
 				[ 'foo', 'ku', 'ku-arab', 'ku-latn', 'en' ],
 				new TermFallback( 'ku', 'blah blah blah', 'ku', 'ku-latn' )
 			]
@@ -60,6 +74,50 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 
 		$usageAccumulator = new HashUsageAccumulator();
 
+		$lookup = $this->getUsageTrackingLanguageFallbackLabelDescriptionLookup(
+			$usageAccumulator,
+			$term,
+			'getLabel',
+			$fetchLanguageCodes
+		);
+
+		$this->assertSame( $term, $lookup->getLabel( $q2 ) );
+		$this->assertSame( $expectedUsages, array_keys( $usageAccumulator->getUsages() ) );
+	}
+
+	/**
+	 * @dataProvider provideGetDescription
+	 */
+	public function testGetDescription( array $expectedUsages, array $fetchLanguageCodes, TermFallback $term = null ) {
+		$q2 = new ItemId( 'Q2' );
+
+		$usageAccumulator = new HashUsageAccumulator();
+
+		$lookup = $this->getUsageTrackingLanguageFallbackLabelDescriptionLookup(
+			$usageAccumulator,
+			$term,
+			'getDescription',
+			$fetchLanguageCodes
+		);
+
+		$this->assertSame( $term, $lookup->getDescription( $q2 ) );
+		$this->assertSame( $expectedUsages, array_keys( $usageAccumulator->getUsages() ) );
+	}
+
+	/**
+	 * @param UsageAccumulator $usageAccumulator
+	 * @param TermFallback|null $term
+	 * @param string $method
+	 * @param string[] $fetchLanguageCodes
+	 *
+	 * @return UsageTrackingLanguageFallbackLabelDescriptionLookup
+	 */
+	private function getUsageTrackingLanguageFallbackLabelDescriptionLookup(
+		UsageAccumulator $usageAccumulator,
+		TermFallback $term = null,
+		$method,
+		array $fetchLanguageCodes
+	) {
 		$languageFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -68,29 +126,12 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiT
 			->will( $this->returnValue( $fetchLanguageCodes ) );
 
 		$usageTrackingLanguageFallbackLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
-			$this->getLanguageFallbackLabelDescriptionLookup( 'getLabel', $q2, $term ),
+			$this->getLanguageFallbackLabelDescriptionLookup( $method, new ItemId( 'Q2' ), $term ),
 			$usageAccumulator,
 			$languageFallbackChain
 		);
 
-		$this->assertSame( $term, $usageTrackingLanguageFallbackLabelDescriptionLookup->getLabel( $q2 ) );
-		$this->assertSame( $expectedUsages, array_keys( $usageAccumulator->getUsages() ) );
-	}
-
-	public function testGetDescription() {
-		$q2 = new ItemId( 'Q2' );
-		$description = new TermFallback( 'de', 'blah', 'df', 'sd' );
-
-		$usageAccumulator = new HashUsageAccumulator();
-
-		$usageTrackingLanguageFallbackLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
-			$this->getLanguageFallbackLabelDescriptionLookup( 'getDescription', $q2, $description ),
-			$usageAccumulator,
-			new LanguageFallbackChain( [] )
-		);
-
-		$this->assertSame( $description, $usageTrackingLanguageFallbackLabelDescriptionLookup->getDescription( $q2 ) );
-		$this->assertSame( [], $usageAccumulator->getUsages() );
+		return $usageTrackingLanguageFallbackLabelDescriptionLookup;
 	}
 
 	/**

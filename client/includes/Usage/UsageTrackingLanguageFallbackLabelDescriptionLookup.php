@@ -57,18 +57,41 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	public function getLabel( EntityId $entityId ) {
 		$termFallback = $this->labelDescriptionLookup->getLabel( $entityId );
 
-		$this->recordLabelUsages( $entityId, $termFallback );
+		$languagesTouched = $this->getUsageLanguages( $termFallback );
+
+		foreach ( $languagesTouched as $lang ) {
+			$this->usageAccumulator->addLabelUsage( $entityId, $lang );
+		}
 
 		return $termFallback;
 	}
 
 	/**
-	 * Record the appropriate label usages for a given TermFallback.
-	 *
 	 * @param EntityId $entityId
-	 * @param TermFallback|null $termFallback
+	 *
+	 * @throws LabelDescriptionLookupException
+	 * @return TermFallback|null
 	 */
-	private function recordLabelUsages( EntityId $entityId, TermFallback $termFallback = null ) {
+	public function getDescription( EntityId $entityId ) {
+		$termFallback = $this->labelDescriptionLookup->getDescription( $entityId );
+
+		$languagesTouched = $this->getUsageLanguages( $termFallback );
+
+		foreach ( $languagesTouched as $lang ) {
+			$this->usageAccumulator->addDescriptionUsage( $entityId, $lang );
+		}
+
+		return $termFallback;
+	}
+
+	/**
+	 * Get the languages from the LanguageFallbackChain used to get a given TermFallback.
+	 *
+	 * @param TermFallback|null $termFallback
+	 *
+	 * @return string[]
+	 */
+	private function getUsageLanguages( TermFallback $termFallback = null ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 
 		if ( $termFallback === null ) {
@@ -89,20 +112,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 			);
 		}
 
-		foreach ( $languagesTouched as $lang ) {
-			$this->usageAccumulator->addLabelUsage( $entityId, $lang );
-		}
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @throws LabelDescriptionLookupException
-	 * @return TermFallback|null
-	 */
-	public function getDescription( EntityId $entityId ) {
-		// TODO: track description usage, see T106287
-		return $this->labelDescriptionLookup->getDescription( $entityId );
+		return $languagesTouched;
 	}
 
 }
