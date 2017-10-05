@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_4960ebfc",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:52:43Z",
+      "side": 1,
+      "message": "Two bool parameters in a row can be confusing. But I\u0027m afraid I don\u0027t have a good suggestion, except replacing both bools with string constants.",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 28
+      },
+      "revId": "0e6763dbdb3fa4e9ec01dd4f1bea1a165725cc05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_fb2de68b",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:52:43Z",
+      "side": 1,
+      "message": "This comment does not explain the \"why\". Suggestion:\n\nOn multi-lingual wikis where users can request pages in any language, we can not optimize for one language fallback chain only. Since all possible language fallback chains must cover all languages, we can simply track an \"all languages\" usage.",
+      "range": {
+        "startLine": 185,
+        "startChar": 6,
+        "endLine": 186,
+        "endChar": 32
+      },
+      "revId": "0e6763dbdb3fa4e9ec01dd4f1bea1a165725cc05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_fb5ba624",
+        "filename": "client/tests/phpunit/includes/DataAccess/DataAccessSnakFormatterFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:52:43Z",
+      "side": 1,
+      "message": "Why enable this here? Shouldn\u0027t the default be false?",
+      "range": {
+        "startLine": 55,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "0e6763dbdb3fa4e9ec01dd4f1bea1a165725cc05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
