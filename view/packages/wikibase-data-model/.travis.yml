@@ -1,14 +1,19 @@
-language: php
+language: node_js
 
-php:
-- 5.5
+node_js:
+- 4
+- 5
+- 6
+- 7
+- 8
 
 sudo: false
 
 before_script:
-  - nvm install 4
+  - npm install
 
-script: npm install && npm test
+script:
+  - npm test
 
 notifications:
   irc:
@@ -18,7 +23,3 @@ notifications:
     on_failure: always
     template:
       - "%{repository}/%{branch}/%{commit} : %{author} %{message} %{build_url}"
-
-cache:
-  directories:
-    - $HOME/.composer/cache
