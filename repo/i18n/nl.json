@@ -43,7 +43,7 @@
 	"wikibase-remove-inprogress": "Bezig met verwijderen...",
 	"wikibase-statementlistview-add": "waarde toevoegen",
 	"wikibase-statementlistview-add-tooltip": "Een nieuwe waarde toevoegen",
-	"wikibase-statementgrouplistview-add": "toevoegen",
+	"wikibase-statementgrouplistview-add": "verklaring toevoegen",
 	"wikibase-statementgrouplistview-add-tooltip": "Een nieuwe verklaring toevoegen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In meer talen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Instellen",

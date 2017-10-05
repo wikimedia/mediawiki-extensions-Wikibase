@@ -111,6 +111,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} entidaes emplegaes nesta páxina",
 	"wikibase-pageinfo-entity-usage-S": "Enllaz del sitiu",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Descripción: $1",
 	"wikibase-pageinfo-entity-usage-T": "Títulu",
 	"wikibase-pageinfo-entity-usage-C": "Declaración: $1",
 	"wikibase-pageinfo-entity-usage-X": "Datos de toles entidaes",

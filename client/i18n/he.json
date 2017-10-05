@@ -115,6 +115,7 @@
 	"wikibase-pageinfo-entity-usage": "ישויות {{WBREPONAME}} שמשמשות בדף הזה",
 	"wikibase-pageinfo-entity-usage-S": "קישור אתר",
 	"wikibase-pageinfo-entity-usage-L": "תווית: $1",
+	"wikibase-pageinfo-entity-usage-D": "תיאור: $1",
 	"wikibase-pageinfo-entity-usage-T": "כותרת",
 	"wikibase-pageinfo-entity-usage-C": "קביעה: $1",
 	"wikibase-pageinfo-entity-usage-X": "כל נתוני הישות",
