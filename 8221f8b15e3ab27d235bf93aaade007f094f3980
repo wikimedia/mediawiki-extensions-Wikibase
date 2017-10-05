@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_ee1685f5",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-05T09:32:13Z",
+      "side": 1,
+      "message": "`$globalSiteId ?: $this-\u003esiteId` ? (That would also return $this-\u003esiteId for $globalSiteId\u003d\u003d\u003d\u0027\u0027, not sure if that’s desirable or not.)",
+      "range": {
+        "startLine": 96,
+        "startChar": 18,
+        "endLine": 96,
+        "endChar": 72
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
