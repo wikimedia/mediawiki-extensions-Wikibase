@@ -158,53 +158,33 @@ class SnakList extends ArrayObject implements Comparable, Hashable {
 	}
 
 	/**
-	 * Orders the snaks in the list grouping them by property.
+	 * Groups snaks by property, and optionally orders them.
 	 *
-	 * @param string[] $order List of serliazed property ids to order by.
+	 * @param string[] $order List of property ID strings to order by. Snaks with other properties
+	 *  will also be grouped, but put at the end, in the order each property appeared first in the
+	 *  original list.
 	 *
 	 * @since 0.5
 	 */
 	public function orderByProperty( array $order = [] ) {
-		$snaksByProperty = $this->getSnaksByProperty();
-		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
+		$byProperty = array_fill_keys( $order, [] );
 
-		foreach ( $orderedProperties as $property ) {
-			if ( array_key_exists( $property, $snaksByProperty ) ) {
-				$snaks = $snaksByProperty[$property];
-				$this->moveSnaksToBottom( $snaks );
-			}
-		}
-	}
-
-	/**
-	 * @param Snak[] $snaks to remove and re add
-	 */
-	private function moveSnaksToBottom( array $snaks ) {
-		foreach ( $snaks as $snak ) {
-			$this->removeSnak( $snak );
-			$this->addSnak( $snak );
-		}
-	}
-
-	/**
-	 * Gets the snaks in the current object in an array
-	 * grouped by property id
-	 *
-	 * @return array[]
-	 */
-	private function getSnaksByProperty() {
-		$snaksByProperty = [];
-
+		/** @var Snak $snak */
 		foreach ( $this as $snak ) {
-			/** @var Snak $snak */
-			$propertyId = $snak->getPropertyId()->getSerialization();
-			if ( !isset( $snaksByProperty[$propertyId] ) ) {
-				$snaksByProperty[$propertyId] = [];
-			}
-			$snaksByProperty[$propertyId][] = $snak;
+			$byProperty[$snak->getPropertyId()->getSerialization()][] = $snak;
 		}
 
-		return $snaksByProperty;
+		$ordered = [];
+		foreach ( $byProperty as $snaks ) {
+			$ordered = array_merge( $ordered, $snaks );
+		}
+
+		$this->exchangeArray( $ordered );
+
+		$index = 0;
+		foreach ( $ordered as $snak ) {
+			$this->offsetHashes[$snak->getHash()] = $index++;
+		}
 	}
 
 	/**
