@@ -1,7 +1,27 @@
 {
+  "name": "wikibase-data-model",
+  "description": "Wikibase datamodel implementation in JavaScript",
   "directories": {
     "lib": "src",
     "test": "tests"
+  },
+  "license": "GPL-2.0+",
+  "contributors": [
+    {
+      "name": "H. Snater",
+      "url": "http://www.snater.com"
+    },
+    {
+      "name": "Adrian Lang",
+      "email": "adrian.lang@wikimedia.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmde/WikibaseDataModelJavaScript"
+  },
+  "bugs": {
+    "url": "https://phabricator.wikimedia.org/"
   },
   "dependencies": {
     "jquery": "^3.2.1",
