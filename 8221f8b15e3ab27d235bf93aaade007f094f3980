@@ -2,6 +2,121 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_a9c3a709",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "This should be renamed to …ItemId, because this is the only entity type supported here.",
+      "range": {
+        "startLine": 469,
+        "startChar": 47,
+        "endLine": 469,
+        "endChar": 55
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_0950b35f",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "This method is never called with this parameter missing. This should be removed.",
+      "range": {
+        "startLine": 469,
+        "startChar": 71,
+        "endLine": 469,
+        "endChar": 77
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_c9effb80",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "2",
+      "range": {
+        "startLine": 471,
+        "startChar": 51,
+        "endLine": 471,
+        "endChar": 52
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_e952ff69",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "This method is never called with this parameter missing. This should be removed.",
+      "range": {
+        "startLine": 95,
+        "startChar": 71,
+        "endLine": 95,
+        "endChar": 77
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_c9c85b28",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "This should be renamed to …ItemId, because this is the only entity type supported here.",
+      "range": {
+        "startLine": 95,
+        "startChar": 47,
+        "endLine": 95,
+        "endChar": 53
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_ee1685f5",
         "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
         "patchSetId": 1
@@ -18,6 +133,53 @@
         "startChar": 18,
         "endLine": 96,
         "endChar": 72
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_a9640746",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "+1 to this suggestion.",
+      "parentUuid": "0e6af365_ee1685f5",
+      "range": {
+        "startLine": 96,
+        "startChar": 18,
+        "endLine": 96,
+        "endChar": 72
+      },
+      "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_8963433b",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T13:30:37Z",
+      "side": 1,
+      "message": "Can you rename this parameter please? What is it? An itemId, I guess?",
+      "range": {
+        "startLine": 249,
+        "startChar": 31,
+        "endLine": 249,
+        "endChar": 33
       },
       "revId": "8221f8b15e3ab27d235bf93aaade007f094f3980",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
