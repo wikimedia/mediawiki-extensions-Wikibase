@@ -110,8 +110,10 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 
 	public function getSiteLinkPageNameProvider() {
 		return [
-			[ 'Beer', 'Q666' ],
-			[ null, 'DoesntExist' ]
+			[ 'Beer', 'Q666', null ],
+			[ 'Bier', 'Q666', 'dewiki' ],
+			[ null, 'DoesntExist', null ],
+			[ null, 'DoesntExist', 'foobar' ],
 		];
 	}
 
@@ -121,17 +123,29 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 	 * @param string $expected
 	 * @param string $itemId
 	 */
-	public function testGetSiteLinkPageName( $expected, $itemId ) {
+	public function testGetSiteLinkPageName( $expected, $itemId, $globalSiteId ) {
 		$item = $this->getItem();
 
 		$siteLinkStore = new HashSiteLinkStore();
 		$siteLinkStore->saveLinksOfItem( $item );
 
 		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings( $siteLinkStore );
-		$this->assertSame( $expected, $wikibaseLuaBindings->getSiteLinkPageName( $itemId ) );
+		$this->assertSame( $expected, $wikibaseLuaBindings->getSiteLinkPageName( $itemId, $globalSiteId ) );
 	}
 
-	public function testGetSiteLinkPageName_usage() {
+	public function provideGlobalSiteId() {
+		return [
+			[ [ 'Q666#T' ], null ],
+			[ [ 'Q666#T' ], 'enwiki' ],
+			[ [ 'Q666#S' ], 'dewiki' ],
+			[ [ 'Q666#S' ], 'whateverwiki' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGlobalSiteId
+	 */
+	public function testGetSiteLinkPageName_usage( $expectedUsages, $globalSiteId ) {
 		$item = $this->getItem();
 
 		$siteLinkStore = new HashSiteLinkStore();
@@ -145,11 +159,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 		);
 
 		$itemId = $item->getId();
-		$wikibaseLuaBindings->getSiteLinkPageName( $itemId->getSerialization() );
+		$wikibaseLuaBindings->getSiteLinkPageName( $itemId->getSerialization(), $globalSiteId );
 
-		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
-		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
-		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
+		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
 	}
 
 	private function getItem() {

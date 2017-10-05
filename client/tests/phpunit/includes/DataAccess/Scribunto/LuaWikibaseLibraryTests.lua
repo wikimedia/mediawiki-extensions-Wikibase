@@ -223,12 +223,20 @@ local tests = {
 	  args = { 'Q32487' },
 	  expect = { 'WikibaseClientDataAccessTest' }
 	},
-	{ name = 'mw.wikibase.sitelink (connected item)', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.sitelink (invalid id given)', func = mw.wikibase.sitelink, type='ToString',
 	  args = {},
 	  expect = "bad argument #1 to 'sitelink' (string expected, got nil)"
 	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32488' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.sitelink (with global site id)', func = mw.wikibase.sitelink, type='ToString',
+	  args = { 'Q32487', 'fooSiteId' },
+	  expect = { 'FooBarFoo' }
+	},
+	{ name = 'mw.wikibase.sitelink (with global site id not found)', func = mw.wikibase.sitelink, type='ToString',
+	  args = { 'Q32487', 'does-not-exist' },
 	  expect = { nil }
 	},
 	{ name = 'mw.wikibase.renderSnak', func = testRenderSnak, type='ToString',

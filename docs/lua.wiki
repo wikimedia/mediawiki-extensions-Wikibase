@@ -73,7 +73,10 @@ local label, lang = mw.wikibase.getLabelWithLang( 'Q42' ) -- label contains the 
 
 === mw.wikibase.sitelink ===
 <code>wikibase.sitelink( id )</code><br>
+<code>wikibase.sitelink( id, globalSiteId )</code><br>
 Takes an item ID and returns the title of the corresponding page title on the local Wiki. This page title can be used to link to the given page.
+
+When <code>globalSiteId</code> is given, the page title on the specified wiki is returned, rather than the one on the local wiki.
 
 An example call might look like this:
 <source lang="lua">
