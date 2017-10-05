@@ -232,6 +232,7 @@ class RdfBuilderTestData {
 			[ new PropertyId( 'P8' ), 'time' ],
 			[ new PropertyId( 'P9' ), 'url' ],
 			[ new PropertyId( 'P10' ), 'geo-shape' ],
+			[ new PropertyId( 'P11' ), 'external-id' ],
 		];
 	}
 

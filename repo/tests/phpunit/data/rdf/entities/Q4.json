@@ -220,6 +220,22 @@
                 "type": "statement",
                 "rank": "normal"
             }
+        ],
+        "P11": [
+            {
+                "id": "TEST-Statement-11-external-id",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P11",
+                    "datatype": "external-id",
+                    "datavalue": {
+                        "value": "test-external-identifier",
+                        "type": "string"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            }
         ]
     }
 }
