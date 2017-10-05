@@ -58,7 +58,7 @@ class GetEntities extends ApiBase {
 	/**
 	 * @var ResultBuilder
 	 */
-	private $resultBuilder;
+	protected $resultBuilder;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -241,7 +241,7 @@ class GetEntities extends ApiBase {
 	 *
 	 * @return EntityRevision[]
 	 */
-	private function getEntityRevisionsFromEntityIds( array $entityIds, $resolveRedirects = false ) {
+	protected function getEntityRevisionsFromEntityIds( array $entityIds, $resolveRedirects = false ) {
 		$revisionArray = [];
 
 		$this->entityPrefetcher->prefetch( $entityIds );
@@ -289,7 +289,7 @@ class GetEntities extends ApiBase {
 	 * @param EntityRevision|null $entityRevision
 	 * @param array $params
 	 */
-	private function handleEntity(
+	protected function handleEntity(
 		$sourceEntityId,
 		EntityRevision $entityRevision = null,
 		array $params = []
