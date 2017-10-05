@@ -55,7 +55,7 @@ class AffectedPagesFinder {
 	/**
 	 * @var bool
 	 */
-	private $allowDataAccessInUserLanguage;
+	private $trackUsagesInAllLanguages;
 
 	/**
 	 * @var bool
@@ -67,8 +67,9 @@ class AffectedPagesFinder {
 	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
 	 * @param string $contentLanguageCode
-	 * @param bool $allowDataAccessInUserLanguage
-	 * @param bool $checkPageExistence
+	 * @param bool $trackUsagesInAllLanguages
+	 * @param bool $checkPageExistence To disable slow filtering that is not relevant in test
+	 *  scenarios. Not meant to be used in production!
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -77,7 +78,7 @@ class AffectedPagesFinder {
 		TitleFactory $titleFactory,
 		$siteId,
 		$contentLanguageCode,
-		$allowDataAccessInUserLanguage,
+		$trackUsagesInAllLanguages,
 		$checkPageExistence = true
 	) {
 		if ( !is_string( $siteId ) ) {
@@ -88,8 +89,8 @@ class AffectedPagesFinder {
 			throw new InvalidArgumentException( '$contentLanguageCode must be a string' );
 		}
 
-		if ( !is_bool( $allowDataAccessInUserLanguage ) ) {
-			throw new InvalidArgumentException( '$allowDataAccessInUserLanguage must be a boolean' );
+		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
+			throw new InvalidArgumentException( '$trackUsagesInAllLanguages must be a bool' );
 		}
 
 		if ( !is_bool( $checkPageExistence ) ) {
@@ -100,7 +101,7 @@ class AffectedPagesFinder {
 		$this->titleFactory = $titleFactory;
 		$this->siteId = $siteId;
 		$this->contentLanguageCode = $contentLanguageCode;
-		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
+		$this->trackUsagesInAllLanguages = $trackUsagesInAllLanguages;
 		$this->checkPageExistence = $checkPageExistence;
 	}
 
@@ -181,9 +182,10 @@ class AffectedPagesFinder {
 			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, $lang );
 		}
 
-		if ( $this->allowDataAccessInUserLanguage ) {
-			// If data access in user language is allowed, we might also
-			// have an all language usage.
+		if ( $this->trackUsagesInAllLanguages ) {
+			// On multi-lingual wikis where users can request pages in any language, we can not
+			// optimize for one language fallback chain only. Since all possible language fallback
+			// chains must cover all languages, we can simply track an "all languages" usage.
 			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE );
 		}
 
