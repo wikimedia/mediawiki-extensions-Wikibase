@@ -140,7 +140,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		foreach ( $testEntities as $key => $testEntity ) {
 			$mockRepo->putEntity( $testEntity, $key, '20000101000000' );
-			$mockEntityIdPager->addEntityPage( $testEntity->getId(), $key );
+			$mockEntityIdPager->addEntityId( $testEntity->getId() );
 		}
 
 		$sqlEntityIdPagerFactory = $this->getMockBuilder( SqlEntityIdPagerFactory::class )
