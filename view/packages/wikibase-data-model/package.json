@@ -37,7 +37,6 @@
     "qunitjs": "^2.3.2"
   },
   "scripts": {
-    "postinstall": "composer install",
     "test": "npm run eslint && npm run run-tests",
     "eslint": "eslint .",
     "run-tests": "karma start --single-run"
