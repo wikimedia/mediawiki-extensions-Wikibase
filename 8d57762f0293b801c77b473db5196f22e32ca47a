@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_1b11da5f",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T16:08:59Z",
+      "side": 1,
+      "message": "Now we have 3 bool parameters in a row. It\u0027s only on a private method and therefor not that much of a problem, but still worth thinking about it, in my opinion.\n\nThe descriptions of these two parameters sound like this should be a single parameter with 3 string constants instead.\n\nWait. Why are there two parameters that both say something about if stuff is in data or object form? This sounds like *all* 3 bool parameters can be merged into a single string parameter.\n\nAfter playing around with the code myself I realized this would result in 6 different string constants. I came up with something I think is reasonable and will upload it as a follow up.",
+      "range": {
+        "startLine": 39,
+        "startChar": 19,
+        "endLine": 40,
+        "endChar": 94
+      },
+      "revId": "8d57762f0293b801c77b473db5196f22e32ca47a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
