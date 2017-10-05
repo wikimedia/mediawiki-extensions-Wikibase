@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Usage;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
@@ -35,18 +36,31 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	private $languageFallbackChain;
 
 	/**
+	 * @var bool
+	 */
+	private $allowDataAccessInUserLanguage;
+
+	/**
 	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param bool $allowDataAccessInUserLanguage
 	 */
 	public function __construct(
 		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator,
-		LanguageFallbackChain $languageFallbackChain
+		LanguageFallbackChain $languageFallbackChain,
+		$allowDataAccessInUserLanguage
 	) {
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->languageFallbackChain = $languageFallbackChain;
+
+		if ( !is_bool( $allowDataAccessInUserLanguage ) ) {
+			throw new InvalidArgumentException( '$allowDataAccessInUserLanguage must be a boolean' );
+		}
+
+		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 	}
 
 	/**
@@ -86,9 +100,14 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescri
 	 *
 	 * @param TermFallback|null $termFallback
 	 *
-	 * @return string[]
+	 * @return string[]|null[]
 	 */
 	private function getTouchedLanguages( TermFallback $termFallback = null ) {
+		if ( $this->allowDataAccessInUserLanguage ) {
+			// Track all languages as used.
+			return [ null ];
+		}
+
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 
 		if ( $termFallback === null ) {

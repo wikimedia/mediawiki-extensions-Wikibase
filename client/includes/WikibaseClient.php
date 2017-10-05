@@ -1094,7 +1094,8 @@ final class WikibaseClient {
 			$this->getSnakFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getRepoItemUriParser(),
-			$this->getLanguageFallbackLabelDescriptionLookupFactory()
+			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
+			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 
@@ -1137,7 +1138,8 @@ final class WikibaseClient {
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
 			$this->settings->getSetting( 'siteGlobalID' ),
-			$this->getContentLanguage()->getCode()
+			$this->getContentLanguage()->getCode(),
+			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 

@@ -45,6 +45,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			'enwiki',
 			'en',
+			false,
 			false
 		);
 	}
