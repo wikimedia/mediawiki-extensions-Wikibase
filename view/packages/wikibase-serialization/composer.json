@@ -16,10 +16,6 @@
 		"issues": "https://phabricator.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
-	"require": {
-		"data-values/javascript": "~0.8.0|~0.7.0",
-		"wikibase/data-model-javascript": "^3.1.0"
-	},
 	"require-dev": {
 		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},

@@ -9,5 +9,9 @@
   },
   "scripts": {
     "eslint": "eslint ."
+  },
+  "dependencies": {
+    "wikibase-data-model": "^4.0.0",
+    "wikibase-data-values": "^0.10.0"
   }
 }
