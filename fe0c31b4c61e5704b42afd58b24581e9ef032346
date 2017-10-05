@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_db16e2f5",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T14:28:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be a .sql script that DROPs the now dysfunctional table? I believe this should be part of the same patch, otherwise the code base will be in a state where this table still exists, but is not updated any more.",
+      "revId": "fe0c31b4c61e5704b42afd58b24581e9ef032346",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_5b0bd2d9",
+        "filename": "repo/tests/phpunit/includes/Store/MockEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T14:28:07Z",
+      "side": 1,
+      "message": "This was also part of the removed EntityPerPage interface. I checked and found that this method is still used in a test, but tons of closely related and now unused code can be removed. I will upload a follow up for this.",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 30
+      },
+      "revId": "fe0c31b4c61e5704b42afd58b24581e9ef032346",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_7b101605",
+        "filename": "repo/tests/phpunit/includes/Store/MockEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-05T14:28:07Z",
+      "side": 1,
+      "message": "This was also part of the removed EntityPerPage interface. I checked and this is dead code now.",
+      "range": {
+        "startLine": 49,
+        "startChar": 17,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "fe0c31b4c61e5704b42afd58b24581e9ef032346",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
