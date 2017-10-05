@@ -52,11 +52,6 @@ class EchoNotificationsHandlers {
 	private $sendEchoNotification;
 
 	/**
-	 * @var array|false
-	 */
-	private $echoIcon;
-
-	/**
 	 * @var string
 	 */
 	private $repoSiteName;
@@ -66,7 +61,6 @@ class EchoNotificationsHandlers {
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param string $siteId
 	 * @param bool $sendEchoNotification
-	 * @param array|false $echoIcon
 	 * @param string $repoSiteName
 	 */
 	public function __construct(
@@ -74,14 +68,12 @@ class EchoNotificationsHandlers {
 		NamespaceChecker $namespaceChecker,
 		$siteId,
 		$sendEchoNotification,
-		$echoIcon,
 		$repoSiteName
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteId = $siteId;
 		$this->sendEchoNotification = $sendEchoNotification;
-		$this->echoIcon = $echoIcon;
 		$this->repoSiteName = $repoSiteName;
 	}
 
@@ -97,68 +89,8 @@ class EchoNotificationsHandlers {
 			$wikibaseClient->getNamespaceChecker(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
-			$settings->getSetting( 'echoIcon' ),
 			$settings->getSetting( 'repoSiteName' )
 		);
-	}
-
-	/**
-	 * Handler for BeforeCreateEchoEvent hook
-	 * @see https://www.mediawiki.org/wiki/Extension:Echo/BeforeCreateEchoEvent
-	 * @see doBeforeCreateEchoEvent
-	 *
-	 * @param array[] &$notifications
-	 * @param array[] &$notificationCategories
-	 * @param array[] &$icons
-	 */
-	public static function onBeforeCreateEchoEvent(
-		array &$notifications,
-		array &$notificationCategories,
-		array &$icons
-	) {
-		$self = self::newFromGlobalState();
-		$self->doBeforeCreateEchoEvent( $notifications, $notificationCategories, $icons );
-	}
-
-	/**
-	 * @see https://www.mediawiki.org/wiki/Notifications/Developer_guide
-	 *
-	 * @param array[] &$notifications
-	 * @param array[] &$notificationCategories
-	 * @param array[] &$icons
-	 */
-	public function doBeforeCreateEchoEvent(
-		array &$notifications,
-		array &$notificationCategories,
-		array &$icons
-	) {
-		if ( $this->sendEchoNotification !== true ) {
-			return;
-		}
-
-		$notificationCategories['wikibase-action'] = [
-			'priority' => 5,
-			'tooltip' => 'echo-pref-tooltip-wikibase-action',
-		];
-
-		$notifications[self::NOTIFICATION_TYPE] = [
-			EchoAttributeManager::ATTR_LOCATORS => [
-				EchoUserLocator::class . '::locateArticleCreator',
-			],
-			'category' => 'wikibase-action',
-			'group' => 'neutral',
-			'section' => 'message',
-			'presentation-model' => PageConnectionPresentationModel::class,
-			'bundle' => [ 'web' => true, 'email' => false ],
-		];
-
-		if ( !empty( $this->echoIcon ) ) {
-			$icons[self::NOTIFICATION_TYPE] = $this->echoIcon;
-		} else {
-			preg_match( '+/extensions/(.*)+', __DIR__, $remoteExtPath );
-			$iconPath = $remoteExtPath[1] . '/../../resources/images/echoIcon.svg';
-			$icons[self::NOTIFICATION_TYPE] = [ 'path' => $iconPath ];
-		}
 	}
 
 	/**
