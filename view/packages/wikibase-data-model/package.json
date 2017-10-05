@@ -4,7 +4,8 @@
     "test": "tests"
   },
   "dependencies": {
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "wikibase-data-values": "^0.10.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
