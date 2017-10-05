@@ -1,0 +1,77 @@
+<?php
+
+namespace Wikibase\Client\Tests\Hooks;
+
+use EchoEvent;
+use MediaWikiTestCase;
+use Wikibase\Client\Hooks\EchoSetupHookHandlers;
+
+/**
+ * @covers Wikibase\Client\Hooks\EchoNotificationsHandlers
+ *
+ * @group Database
+ * @group WikibaseClient
+ * @group Wikibase
+ */
+class EchoSetupHookHandlersTest extends MediaWikiTestCase {
+
+	public function beforeCreateEchoEventProvider() {
+		return [
+			'no registration' => [
+				'register' => false,
+				'icon' => false,
+				'expectedIcon' => false,
+			],
+			'registered with optional icon' => [
+				'register' => true,
+				'icon' => [ 'url' => 'some_url_here' ],
+				'expectedIcon' => [ 'url' => 'some_url_here' ],
+			],
+			'registered with default icon' => [
+				'register' => true,
+				'icon' => false,
+				'expectedIcon' => [ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider beforeCreateEchoEventProvider
+	 */
+	public function testBeforeCreateEchoEvent( $register, $icon, $expectedIcon ) {
+		if ( !class_exists( EchoEvent::class ) ) {
+			$this->markTestSkipped( "Echo not loaded" );
+		}
+
+		$notifications = [];
+		$categories = [];
+		$icons = [];
+
+		$handlers = new EchoSetupHookHandlers( $register, $icon );
+
+		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
+
+		$this->assertSame( $register, isset( $notifications[$handlers::NOTIFICATION_TYPE] ) );
+		$this->assertSame( $register, isset( $categories['wikibase-action'] ) );
+		$this->assertSame( $register, isset( $icons[$handlers::NOTIFICATION_TYPE] ) );
+
+		if ( $register ) {
+			if ( isset( $expectedIcon['path'] ) ) {
+				$this->assertSame(
+					array_keys( $expectedIcon ),
+					array_keys( $icons[$handlers::NOTIFICATION_TYPE] )
+				);
+				$this->assertStringEndsWith(
+					$expectedIcon['path'],
+					$icons[$handlers::NOTIFICATION_TYPE]['path']
+				);
+			} else {
+				$this->assertSame(
+					$expectedIcon,
+					$icons[$handlers::NOTIFICATION_TYPE]
+				);
+			}
+		}
+	}
+
+}
