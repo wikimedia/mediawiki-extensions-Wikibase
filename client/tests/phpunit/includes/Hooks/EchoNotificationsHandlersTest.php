@@ -67,7 +67,6 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 			$this->namespaceChecker,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
-			$settings->getSetting( 'echoIcon' ),
 			'repoSiteName'
 		);
 	}
@@ -174,68 +173,6 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function beforeCreateEchoEventProvider() {
-		return [
-			'no registration' => [
-				'register' => false,
-				'icon' => false,
-				'expectedIcon' => false,
-			],
-			'registered with optional icon' => [
-				'register' => true,
-				'icon' => [ 'url' => 'some_url_here' ],
-				'expectedIcon' => [ 'url' => 'some_url_here' ],
-			],
-			'registered with default icon' => [
-				'register' => true,
-				'icon' => false,
-				'expectedIcon' => [ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider beforeCreateEchoEventProvider
-	 */
-	public function testBeforeCreateEchoEvent( $register, $icon, $expectedIcon ) {
-		$notifications = [];
-		$categories = [];
-		$icons = [];
-
-		$handlers = new EchoNotificationsHandlers(
-			$this->repoLinker,
-			$this->namespaceChecker,
-			'enwiki',
-			$register,
-			$icon,
-			'repoSiteName'
-		);
-
-		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
-
-		$this->assertSame( $register, isset( $notifications[$handlers::NOTIFICATION_TYPE] ) );
-		$this->assertSame( $register, isset( $categories['wikibase-action'] ) );
-		$this->assertSame( $register, isset( $icons[$handlers::NOTIFICATION_TYPE] ) );
-
-		if ( $register ) {
-			if ( isset( $expectedIcon['path'] ) ) {
-				$this->assertSame(
-					array_keys( $expectedIcon ),
-					array_keys( $icons[$handlers::NOTIFICATION_TYPE] )
-				);
-				$this->assertStringEndsWith(
-					$expectedIcon['path'],
-					$icons[$handlers::NOTIFICATION_TYPE]['path']
-				);
-			} else {
-				$this->assertSame(
-					$expectedIcon,
-					$icons[$handlers::NOTIFICATION_TYPE]
-				);
-			}
-		}
-	}
-
 	public function localUserCreatedProvider() {
 		return [
 			'disabled no auto' => [
@@ -270,7 +207,6 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 			$this->namespaceChecker,
 			'enwiki',
 			$enabled,
-			'',
 			'repoSiteName'
 		);
 
