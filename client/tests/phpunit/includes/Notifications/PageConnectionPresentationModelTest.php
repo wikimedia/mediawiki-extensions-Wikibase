@@ -9,9 +9,8 @@ use Message;
 use Title;
 use User;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
-use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
-use Wikibase\Client\RepoLinker;
 
 /**
  * @covers Wikibase\Client\Notifications\PageConnectionPresentationModel
@@ -61,34 +60,12 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 		return $event;
 	}
 
-	/**
-	 * @return RepoLinker
-	 */
-	private function getRepoLinker() {
-		$repoLinker = $this->getMockBuilder( RepoLinker::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$repoLinker
-			->expects( $this->any() )
-			->method( 'getEntityUrl' )
-			->will( $this->returnValue( 'foo' ) );
-
-		return $repoLinker;
-	}
-
 	public function testPresentationModel() {
 		global $wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons;
 
-		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$handlers = new EchoNotificationsHandlers(
-			$this->getRepoLinker(),
-			$namespaceChecker,
-			'enwiki',
+		$handlers = new EchoSetupHookHandlers(
 			true,
-			false,
-			'repoSiteName'
+			false
 		);
 		$handlers->doBeforeCreateEchoEvent(
 			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
@@ -134,9 +111,9 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 		$this->assertInternalType( 'array', $model->getSecondaryLinks() );
 		$this->assertInstanceOf( Message::class, $model->getSubjectMessage() );
 
-		unset( $wgEchoNotifications[$handlers::NOTIFICATION_TYPE] );
+		unset( $wgEchoNotifications[EchoNotificationsHandlers::NOTIFICATION_TYPE] );
 		unset( $wgEchoNotificationCategories['wikibase-action'] );
-		unset( $wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE] );
+		unset( $wgEchoNotificationIcons[EchoNotificationsHandlers::NOTIFICATION_TYPE] );
 	}
 
 }
