@@ -10,6 +10,9 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ### 4.0.0 (dev)
 
+* Made the library a pure JavaScript library.
+* Removed MediaWiki ResourceLoader module definitions.
+* Raised DataValues JS library version requirement to 0.10.0.
 * Removed all Claim collections:
   * Removed `ClaimGroup`
   * Removed `ClaimGroupSet`
