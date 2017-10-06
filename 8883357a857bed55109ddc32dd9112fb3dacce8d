@@ -22,6 +22,30 @@
       "revId": "8883357a857bed55109ddc32dd9112fb3dacce8d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_3b05b3c4",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-06T18:44:32Z",
+      "side": 0,
+      "message": "My meaning was that \"statements\" now includes the count...",
+      "parentUuid": "0e6af365_92b4c434",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "8883357a857bed55109ddc32dd9112fb3dacce8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
