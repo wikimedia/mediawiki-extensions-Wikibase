@@ -7,11 +7,11 @@ It contains various JavaScript related to the DataValues library.
 
 ## Release notes
 
-### 1.0.0 (dev)
-* Removed `globeCoordinate.Formatter`.
-* Removed the `globeCoordinate` utility class.
+### 0.10.0 (2017-10-06)
 * The library is now a pure JavaScript library.
 * Removed MediaWiki ResourceLoader module definitions.
+* Removed `globeCoordinate.Formatter`.
+* Removed the `globeCoordinate` utility class.
 
 ### 0.9.0 (2017-09-06)
 * Removed `valueFormatters.ValueFormatterStore`.

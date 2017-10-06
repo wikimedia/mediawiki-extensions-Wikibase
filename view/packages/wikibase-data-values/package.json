@@ -5,6 +5,7 @@
 		"datavalues",
 		"wikidata"
 	],
+	"version": "0.10.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/wmde/DataValuesJavaScript"
