@@ -22,6 +22,30 @@
       "revId": "61acec30ad378f93414655cb2ad5e81629407e38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_49424115",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-06T18:44:32Z",
+      "side": 1,
+      "message": "yes, good point.",
+      "parentUuid": "0e6af365_8eeb62a0",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 16
+      },
+      "revId": "61acec30ad378f93414655cb2ad5e81629407e38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
