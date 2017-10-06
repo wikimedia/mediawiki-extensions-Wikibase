@@ -45,9 +45,6 @@ return call_user_func( function() {
 				'wikibase.serialization.StrategyProvider',
 
 				'wikibase.serialization.ClaimDeserializer',
-				'wikibase.serialization.ClaimGroupDeserializer',
-				'wikibase.serialization.ClaimGroupSetDeserializer',
-				'wikibase.serialization.ClaimListDeserializer',
 				'wikibase.serialization.EntityDeserializer',
 				'wikibase.serialization.FingerprintDeserializer',
 				'wikibase.serialization.MultiTermDeserializer',
@@ -76,9 +73,6 @@ return call_user_func( function() {
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.StrategyProvider',
 
-				'wikibase.serialization.ClaimGroupSerializer',
-				'wikibase.serialization.ClaimGroupSetSerializer',
-				'wikibase.serialization.ClaimListSerializer',
 				'wikibase.serialization.ClaimSerializer',
 				'wikibase.serialization.EntitySerializer',
 				'wikibase.serialization.FingerprintSerializer',

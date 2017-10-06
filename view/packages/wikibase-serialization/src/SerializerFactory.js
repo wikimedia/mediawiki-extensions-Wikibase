@@ -15,9 +15,6 @@ var MODULE = wb.serialization;
 var SELF = MODULE.SerializerFactory = function WbSerializationSerializerFactory() {
 	this._strategyProvider = new MODULE.StrategyProvider();
 
-	this.registerSerializer( MODULE.ClaimGroupSerializer, wb.datamodel.ClaimGroup );
-	this.registerSerializer( MODULE.ClaimGroupSetSerializer, wb.datamodel.ClaimGroupSet );
-	this.registerSerializer( MODULE.ClaimListSerializer, wb.datamodel.ClaimList );
 	this.registerSerializer( MODULE.ClaimSerializer, wb.datamodel.Claim );
 	this.registerSerializer( MODULE.EntitySerializer, wb.datamodel.Entity );
 	this.registerSerializer( MODULE.FingerprintSerializer, wb.datamodel.Fingerprint );

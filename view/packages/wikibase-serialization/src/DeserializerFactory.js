@@ -16,9 +16,6 @@ var SELF = MODULE.DeserializerFactory = function WbSerializationDeserializerFact
 	this._strategyProvider = new MODULE.StrategyProvider();
 
 	this.registerDeserializer( MODULE.ClaimDeserializer, wb.datamodel.Claim );
-	this.registerDeserializer( MODULE.ClaimGroupDeserializer, wb.datamodel.ClaimGroup );
-	this.registerDeserializer( MODULE.ClaimGroupSetDeserializer, wb.datamodel.ClaimGroupSet );
-	this.registerDeserializer( MODULE.ClaimListDeserializer, wb.datamodel.ClaimList );
 	this.registerDeserializer( MODULE.EntityDeserializer, wb.datamodel.Entity );
 	this.registerDeserializer( MODULE.FingerprintDeserializer, wb.datamodel.Fingerprint );
 	this.registerDeserializer( MODULE.MultiTermDeserializer, wb.datamodel.MultiTerm );

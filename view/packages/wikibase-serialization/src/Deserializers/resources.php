@@ -17,46 +17,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-
-		'wikibase.serialization.ClaimGroupSetDeserializer' => $moduleTemplate + [
-			'scripts' => [
-				'ClaimGroupSetDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.ClaimGroupSet',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ClaimGroupDeserializer',
-				'wikibase.serialization.Deserializer',
-			],
-		],
-
-		'wikibase.serialization.ClaimGroupDeserializer' => $moduleTemplate + [
-			'scripts' => [
-				'ClaimGroupDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.ClaimGroup',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ClaimListDeserializer',
-				'wikibase.serialization.Deserializer',
-			],
-		],
-
-		'wikibase.serialization.ClaimListDeserializer' => $moduleTemplate + [
-			'scripts' => [
-				'ClaimListDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.ClaimList',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.StatementDeserializer',
-			],
-		],
-
 		'wikibase.serialization.ClaimDeserializer' => $moduleTemplate + [
 			'scripts' => [
 				'ClaimDeserializer.js',

@@ -17,46 +17,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-
-		'wikibase.serialization.ClaimGroupSetDeserializer.tests' => $moduleTemplate + [
-			'scripts' => [
-				'ClaimGroupSetDeserializer.tests.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.ClaimGroupSet',
-				'wikibase.datamodel.ClaimList',
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.serialization.ClaimGroupSetDeserializer',
-			],
-		],
-
-		'wikibase.serialization.ClaimGroupDeserializer.tests' => $moduleTemplate + [
-			'scripts' => [
-				'ClaimGroupDeserializer.tests.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.ClaimList',
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.serialization.ClaimGroupDeserializer',
-			],
-		],
-
-		'wikibase.serialization.ClaimListDeserializer.tests' => $moduleTemplate + [
-			'scripts' => [
-				'ClaimListDeserializer.tests.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ClaimList',
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.serialization.ClaimListDeserializer',
-			],
-		],
-
 		'wikibase.serialization.ClaimDeserializer.tests' => $moduleTemplate + [
 			'scripts' => [
 				'ClaimDeserializer.tests.js',
