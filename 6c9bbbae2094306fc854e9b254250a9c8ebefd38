@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_52864cad",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/full-dump-redirect.nt",
+        "patchSetId": 24
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-10-06T14:35:26Z",
+      "side": 1,
+      "message": "trailing whitespace",
+      "range": {
+        "startLine": 23,
+        "startChar": 125,
+        "endLine": 23,
+        "endChar": 126
+      },
+      "revId": "6c9bbbae2094306fc854e9b254250a9c8ebefd38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
