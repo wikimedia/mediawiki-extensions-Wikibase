@@ -20,7 +20,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
-use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -215,9 +215,6 @@ class ItemHandlerTest extends EntityHandlerTest {
 	 */
 	private function getItemHandlerWithMockedPropertyDataTypeLookup() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$itemFieldDefinitions = $this->getMockBuilder( ItemFieldDefinitions::class )
-			->disableOriginalConstructor()
-			->getMock();
 
 		return new ItemHandler(
 			$wikibaseRepo->getStore()->getTermIndex(),
@@ -228,7 +225,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
-			$itemFieldDefinitions,
+			$this->getMock( FieldDefinitions::class ),
 			$this->getPropertyDataTypeLookup()
 		);
 	}

@@ -20,14 +20,12 @@ class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
 	}
 
 	/**
-	 * @return array
+	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
-		$fields = [];
-
-		$fields['descriptions'] = new DescriptionsField( $this->languageCodes );
-
-		return $fields;
+		return [
+			'descriptions' => new DescriptionsField( $this->languageCodes ),
+		];
 	}
 
 }

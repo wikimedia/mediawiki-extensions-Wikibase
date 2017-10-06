@@ -5,6 +5,7 @@ This document describes the configuration of the Wikibase extensions.
 As usual, the extension is configured in MediaWiki's LocalSettings.php file. However, Wikibase settings are placed in associative arrays, <code>$wgWBRepoSettings</code> and <code>$wgWBClientSettings</code> respectively, instead of individual global variables. So, if the setting <code>foo</code> is described below, you would need to use <code>$wgWBRepoSettings['foo']</code> or <code>$wgWBClientSettings['foo']</code> in LocalSettings.php.
 
 == Common Settings ==
+
 === Basic Settings ===
 
 ;entityNamespaces: Defines which kind of entity is managed in which namespace. It is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. Mapping must be done for each type of entity that should be supported.
@@ -45,6 +46,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;localClientDatabases: An array of locally accessible client databases, for use by the <code>dispatchChanges.php</code> script. This setting determines to which wikis changes are pushed directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases. The default is an empty array, indicating no local client databases.
 
 === Expert Settings ===
+
 ;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities.
 :'''Note:''' This may change in the future to allow separate blacklists for different kinds of entities.
@@ -66,10 +68,12 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;prefixSearchProfiles: Loaded from <code>config/EntityPrefixSearchProfiles.php</code>, does not need to be defined manually. (Cirrus)
 :;defaultPrefixRescoreProfile: name of the rescoring profile to use for prefix search. The profile should be defined in <code>config/ElasticSearchRescoreProfiles.php</code>. (Cirrus)
 :;rescoreProfiles: Loaded from <code>config/ElasticSearchRescoreProfiles.php</code>, does not have to be defined manually. (Cirrus).
-;searchIndexProperties: Array of names of properties that would be included in the 'properties' field of the search index. For now, only relevant when Cirrus search is enabled.
+;searchIndexProperties: Array of properties (by ID string) that should be included in the "statement_keywords" field of the search index. For now, only relevant when Cirrus search is enabled.
+
 == Client Settings ==
 
 === Basic Settings ===
+
 ;namespaces: List of namespaces on the client wiki that should have access to repository items. Default: <code>array()</code> (treated as setting is not set, ie. namespaces are enabled).
 ;excludeNamespaces: List of namespaces on the client wiki to disable wikibase links, etc. for.  Default: <code>array()</code>. Example: <code>array( NS_USER_TALK )</code>.
 ;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>.
@@ -106,6 +110,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
 
 === Expert Settings ===
+
 ;injectRecentChanges: Whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
 ;showExternalRecentChanges: Whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
 ;sendEchoNotification: If true, allows users on the client wiki to get a notification when a page they created is connected to a repo item. This requires the Echo extension.
