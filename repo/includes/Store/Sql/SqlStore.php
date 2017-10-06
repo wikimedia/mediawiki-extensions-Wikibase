@@ -35,11 +35,9 @@ use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikibase\Repo\Store\Sql\EntityPerPageTable;
 use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
@@ -261,7 +259,6 @@ class SqlStore implements Store {
 	public function clear() {
 		$this->newSiteLinkStore()->clear();
 		$this->getTermIndex()->clear();
-		$this->newEntityPerPage()->clear();
 	}
 
 	/**
@@ -310,15 +307,6 @@ class SqlStore implements Store {
 	 */
 	public function newSiteLinkStore() {
 		return new SiteLinkTable( 'wb_items_per_site', false );
-	}
-
-	/**
-	 * @see Store::newEntityPerPage
-	 *
-	 * @return EntityPerPage
-	 */
-	public function newEntityPerPage() {
-		return new EntityPerPageTable( wfGetLB(), $this->entityIdParser );
 	}
 
 	/**

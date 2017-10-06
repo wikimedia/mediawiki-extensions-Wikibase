@@ -285,12 +285,6 @@ final class RepoHooks {
 			return;
 		}
 
-		//XXX: EntityContent::save() also does this. Why are we doing this twice?
-		$wikibaseRepo->getStore()->newEntityPerPage()->addEntityPage(
-			$content->getEntityId(),
-			$title->getArticleID()
-		);
-
 		$notifier = $wikibaseRepo->getChangeNotifier();
 		$notifier->notifyOnPageUndeleted( $revision );
 	}
