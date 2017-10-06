@@ -86,6 +86,10 @@ class DatabaseSchemaUpdater {
 		$this->updateChangesTable( $updater, $db );
 
 		$this->registerPropertyInfoTableUpdates( $updater );
+
+		if ( $db->tableExists( 'wb_entity_per_page' ) ) {
+			$updater->dropTable( 'wb_entity_per_page' );
+		}
 	}
 
 	/**
