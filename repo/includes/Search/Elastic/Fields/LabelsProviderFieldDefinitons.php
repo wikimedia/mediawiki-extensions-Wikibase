@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 /**
@@ -22,11 +23,11 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
-		$fields['label_count'] = new LabelCountField();
-		$fields['labels'] = new LabelsField( $this->languageCodes );
-		$fields['labels_all'] = new AllLabelsField();
-
-		return $fields;
+		return [
+			'label_count' => new LabelCountField(),
+			'labels' => new LabelsField( $this->languageCodes ),
+			'labels_all' => new AllLabelsField(),
+		];
 	}
 
 }
