@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_e0d449ee",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-06T10:01:55Z",
+      "side": 1,
+      "message": "This mapping seems to be the same as the one above. Why do we need both?",
+      "revId": "3c11cfd1f69df19c5ff360f8c0dff7aef32014c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_a0341147",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-06T10:01:55Z",
+      "side": 1,
+      "message": "$predicate is not correct - this is just the namespace of the predicate. To be consistent with $propertyValueNamespace, the variable should be called $normalizedValueNamespace or $normalizedPropertyValueNamespace",
+      "revId": "3c11cfd1f69df19c5ff360f8c0dff7aef32014c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
