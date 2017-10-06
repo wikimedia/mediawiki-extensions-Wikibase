@@ -22,9 +22,6 @@ return call_user_func( function() {
 		'wikibase.datamodel' => $moduleTemplate + array(
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.ClaimGroupSet',
-				'wikibase.datamodel.ClaimList',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.EntityId',
 				'wikibase.datamodel.Fingerprint',
@@ -67,42 +64,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
-			),
-		),
-
-		'wikibase.datamodel.ClaimGroup' => $moduleTemplate + array(
-			'scripts' => array(
-				'ClaimGroup.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.ClaimList',
-				'wikibase.datamodel.Group',
-			),
-		),
-
-		'wikibase.datamodel.ClaimGroupSet' => $moduleTemplate + array(
-			'scripts' => array(
-				'ClaimGroupSet.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.ClaimGroup',
-				'wikibase.datamodel.Set',
-			),
-		),
-
-		'wikibase.datamodel.ClaimList' => $moduleTemplate + array(
-			'scripts' => array(
-				'ClaimList.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.List',
 			),
 		),
 

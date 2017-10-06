@@ -10,11 +10,21 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ### 4.0.0 (dev)
 
-* Removed all move-related methods from `SnakList`: `moveUp`, `moveDown`, `move`, as well as
-  `getValidMoveIndices`.
-* Removed dysfunctional `addStatement` and `removeStatement` methods from both `Item` and `Property`
-  classes.
-* Declared `SnakList.getFilteredSnakList` private.
+* Removed all Claim collections:
+  * Removed `ClaimGroup`
+  * Removed `ClaimGroupSet`
+  * Removed `ClaimList`
+* Removed all move-related methods from SnakList:
+  * Removed `SnakList.getValidMoveIndices`
+  * Removed `SnakList.move`
+  * Removed `SnakList.moveDown`
+  * Removed `SnakList.moveUp`
+  * Declared `SnakList.getFilteredSnakList` private
+* Removed dysfunctional methods from all Entity classes:
+  * Removed `Item.addStatement`
+  * Removed `Item.removeStatement`
+  * Removed `Property.addStatement`
+  * Removed `Property.removeStatement`
 
 ### 3.1.0 (2017-09-04)
 
