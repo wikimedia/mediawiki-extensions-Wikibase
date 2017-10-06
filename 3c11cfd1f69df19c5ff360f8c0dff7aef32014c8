@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_20aa6117",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-06T11:03:16Z",
+      "side": 1,
+      "message": "Doesn’t seem to break, but semantically, I don’t think DIRECT_CLAIM stuff belongs in the claimToValue map.",
+      "parentUuid": "0e6af365_20fca13a",
+      "revId": "3c11cfd1f69df19c5ff360f8c0dff7aef32014c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_a0341147",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 23
