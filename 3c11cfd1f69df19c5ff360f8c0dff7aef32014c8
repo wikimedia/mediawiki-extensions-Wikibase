@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_20fca13a",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-06T10:59:04Z",
+      "side": 1,
+      "message": "The one above doesn’t map NSP_DIRECT_CLAIM. Not sure if anything would break if we added it, I’ll try it out.",
+      "parentUuid": "0e6af365_e0d449ee",
+      "revId": "3c11cfd1f69df19c5ff360f8c0dff7aef32014c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_a0341147",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 23
