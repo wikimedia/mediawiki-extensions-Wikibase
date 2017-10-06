@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 /**
@@ -7,24 +8,24 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 class ItemFieldDefinitions implements FieldDefinitions {
 
 	/**
-	 * @var LabelsProviderFieldDefinitions
+	 * @var FieldDefinitions
 	 */
 	private $labelsProviderFieldDefinitions;
 
 	/**
-	 * @var DescriptionsProviderFieldDefinitions
+	 * @var FieldDefinitions
 	 */
 	private $descriptionsProviderFieldDefinitions;
 
 	/**
-	 * @var StatementProviderFieldDefinitions
+	 * @var FieldDefinitions
 	 */
 	private $statementProviderFieldDefinitions;
 
 	public function __construct(
-		LabelsProviderFieldDefinitions $labelsProviderFieldDefinitions,
-		DescriptionsProviderFieldDefinitions $descriptionsProviderFieldDefinitions,
-		StatementProviderFieldDefinitions $statementProviderFieldDefinitions
+		FieldDefinitions $labelsProviderFieldDefinitions,
+		FieldDefinitions $descriptionsProviderFieldDefinitions,
+		FieldDefinitions $statementProviderFieldDefinitions
 	) {
 		$this->labelsProviderFieldDefinitions = $labelsProviderFieldDefinitions;
 		$this->descriptionsProviderFieldDefinitions = $descriptionsProviderFieldDefinitions;
@@ -35,13 +36,6 @@ class ItemFieldDefinitions implements FieldDefinitions {
 	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
-		/*
-		 * Items have:
-		 * - labels
-		 * - descriptions
-		 * - link count
-		 * - statements
-		 */
 		$fields = array_merge(
 			$this->labelsProviderFieldDefinitions->getFields(),
 			$this->descriptionsProviderFieldDefinitions->getFields(),

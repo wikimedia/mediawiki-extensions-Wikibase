@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 /**
@@ -7,24 +8,24 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 class PropertyFieldDefinitions implements FieldDefinitions {
 
 	/**
-	 * @var LabelsProviderFieldDefinitions
+	 * @var FieldDefinitions
 	 */
 	private $labelsProviderFieldDefinitions;
 
 	/**
-	 * @var DescriptionsProviderFieldDefinitions
+	 * @var FieldDefinitions
 	 */
 	private $descriptionsProviderFieldDefinitions;
 
 	/**
-	 * @var StatementProviderFieldDefinitions
+	 * @var FieldDefinitions
 	 */
 	private $statementProviderFieldDefinitions;
 
 	public function __construct(
-		LabelsProviderFieldDefinitions $labelsProviderFieldDefinitions,
-		DescriptionsProviderFieldDefinitions $descriptionsProviderFieldDefinitions,
-		StatementProviderFieldDefinitions $statementProviderFieldDefinitions
+		FieldDefinitions $labelsProviderFieldDefinitions,
+		FieldDefinitions $descriptionsProviderFieldDefinitions,
+		FieldDefinitions $statementProviderFieldDefinitions
 	) {
 		$this->labelsProviderFieldDefinitions = $labelsProviderFieldDefinitions;
 		$this->descriptionsProviderFieldDefinitions = $descriptionsProviderFieldDefinitions;
@@ -35,20 +36,11 @@ class PropertyFieldDefinitions implements FieldDefinitions {
 	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
-		/*
-		 * Properties have:
-		 * - labels
-		 * - descriptions
-		 * - statements
-		 * - statement count
-		 */
-		$fields = array_merge(
+		return array_merge(
 			$this->labelsProviderFieldDefinitions->getFields(),
 			$this->descriptionsProviderFieldDefinitions->getFields(),
 			$this->statementProviderFieldDefinitions->getFields()
 		);
-
-		return $fields;
 	}
 
 }

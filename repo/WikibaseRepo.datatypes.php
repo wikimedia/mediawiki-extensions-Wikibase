@@ -248,9 +248,7 @@ return call_user_func( function() {
 			) {
 				return new LiteralValueRdfBuilder( null, null );
 			},
-			'search-index-data-formatter' => function(
-				StringValue $value
-			) {
+			'search-index-data-formatter-callback' => function ( StringValue $value ) {
 				return $value->getValue();
 			},
 		],
@@ -331,9 +329,7 @@ return call_user_func( function() {
 			) {
 				return new EntityIdRdfBuilder( $vocab, $tracker );
 			},
-			'search-index-data-formatter' => function(
-				EntityIdValue $value
-			) {
+			'search-index-data-formatter-callback' => function ( EntityIdValue $value ) {
 				return $value->getEntityId()->getSerialization();
 			},
 		],
