@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_9265a4df",
+        "filename": "docs/options.wiki",
+        "patchSetId": 20
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "What is the \"name\" of a property?",
+      "range": {
+        "startLine": 63,
+        "startChar": 33,
+        "endLine": 63,
+        "endChar": 52
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_525f2c13",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "I find it helpful to describe more carefully what kind of \"analyzer\" is meant here.",
+      "range": {
+        "startLine": 994,
+        "startChar": 26,
+        "endLine": 994,
+        "endChar": 34
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_12a0d4f0",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "I would put the new element after this formatter, as both are formatters, and called like this.",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 13
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_32a398ff",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "Can you please stick to the existing naming scheme and name this \u0027search-index-data-formatter-callback\u0027?",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 251,
+        "endChar": 31
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_52be4c14",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "Really not relevant, but it confused me a moment to see these two lines in the wrong order.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_b2af88dd",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "I know PHP is ok with doing it like this, but for me as a human being it looks bogus to access an array that was never declared.",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_12d53447",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "I just talked to Lydia about an implementation detail I find scary: The fact that the new configuration is not per property type (e.g. \"index all external identifiers\", which is what I expected), but per property ID. This design decision does have quite relevant implications:\n* We need to maintain a list of property IDs, and update it every time the community creates a new one we want to make available via the search index.\n* The code below uses a nested loop (plus more loops that are hidden in method calls used inside the loops). When the configuration contains 1,000 property IDs, and an Item contains 1,000 statements (which is both absolutely possible), the loop runs 1,000,000 times.\n\nI believe we can deploy this code as it is for now. But we must be aware of these implications and refactor this the moment it becomes a problem:\n* We should optimize the nested loop below. I suggest to loop over all statements a single time, and to a fast array_key_exists check on a list of property ID strings that was array_flipped in the constructor.\n* We might change the configuration per property ID to one per property type.",
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_72b91029",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "Can you please remove this?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_5295ec87",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "I suggest to not do this here, because this code is possibly executed thousands of times, for each entity. Instead the $properties array provided via the constructor should already be made of PropertyId objects.\n\nThis is a detail that can be refactored later, in a separate patch.",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 37
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_12877467",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "This should not catch any arbitrary exception, because this would hide mistakes that should not be hidden, but only exceptions the PropertyId constructor really can throw. That is an InvalidArgumentException, as documented.",
+      "range": {
+        "startLine": 79,
+        "startChar": 14,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_328ab86f",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "This can only happen because of a misconfiguration, which should be reported via the appropriate logging function.",
+      "range": {
+        "startLine": 80,
+        "startChar": 7,
+        "endLine": 80,
+        "endChar": 59
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_12ee941f",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "If you want to stick to strings in the $properties constructor parameter, you could replace this and the nested loop with a single loop over all statements, and an in_array( …, $this-\u003eproperties ) check.",
+      "range": {
+        "startLine": 83,
+        "startChar": 37,
+        "endLine": 83,
+        "endChar": 61
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_72903099",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-06T12:26:34Z",
+      "side": 1,
+      "message": "I find this problematic, because it means it will not only skip empty arrays, but also string, external-identifier and quantity values that return \"0\" or \"0.0\" when formatted as a string.",
+      "range": {
+        "startLine": 96,
+        "startChar": 9,
+        "endLine": 96,
+        "endChar": 16
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
