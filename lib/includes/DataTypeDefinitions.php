@@ -318,8 +318,8 @@ class DataTypeDefinitions {
 	 * Get data formatters for search indexing for each type.
 	 * @return callable[] List of callbacks, with keys having "VT:" prefixes.
 	 */
-	public function getIndexDataFormatters() {
-		return $this->getMapForDefinitionField( 'search-index-data-formatter' );
+	public function getSearchIndexDataFormatters() {
+		return $this->getMapForDefinitionField( 'search-index-data-formatter-callback' );
 	}
 
 }

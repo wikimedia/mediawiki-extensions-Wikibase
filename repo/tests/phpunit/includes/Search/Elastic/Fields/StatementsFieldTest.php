@@ -70,7 +70,7 @@ class StatementsFieldTest extends PHPUnit_Framework_TestCase {
 		}
 		$repo = WikibaseRepo::getDefaultInstance();
 
-		$field = new StatementsField( $this->properties, $repo->getDataTypeDefinitions()->getIndexDataFormatters() );
+		$field = new StatementsField( $this->properties, $repo->getDataTypeDefinitions()->getSearchIndexDataFormatters() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 

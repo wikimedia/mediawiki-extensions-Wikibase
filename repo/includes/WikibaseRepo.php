@@ -95,6 +95,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
@@ -1573,14 +1574,14 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return LabelsProviderFieldDefinitions
+	 * @return FieldDefinitions
 	 */
 	public function getLabelProviderDefinitions() {
 		return new LabelsProviderFieldDefinitions( $this->getTermsLanguages()->getLanguages() );
 	}
 
 	/**
-	 * @return DescriptionsProviderFieldDefinitions
+	 * @return FieldDefinitions
 	 */
 	public function getDescriptionProviderDefinitions() {
 		return new DescriptionsProviderFieldDefinitions( $this->getTermsLanguages()
@@ -1588,17 +1589,17 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return StatementProviderFieldDefinitions
+	 * @return FieldDefinitions
 	 */
 	public function getStatementProviderDefinitions() {
 		return new StatementProviderFieldDefinitions(
 			$this->settings->getSetting( 'searchIndexProperties' ),
-			$this->getDataTypeDefinitions()->getIndexDataFormatters()
+			$this->getDataTypeDefinitions()->getSearchIndexDataFormatters()
 		);
 	}
 
 	/**
-	 * @return ItemFieldDefinitions
+	 * @return FieldDefinitions
 	 */
 	private function getItemFieldDefinitions() {
 		return new ItemFieldDefinitions(
@@ -1608,7 +1609,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return PropertyFieldDefinitions
+	 * @return FieldDefinitions
 	 */
 	private function getPropertyFieldDefinitions() {
 		return new PropertyFieldDefinitions(
