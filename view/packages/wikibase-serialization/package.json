@@ -1,4 +1,24 @@
 {
+  "name": "wikibase-serialization",
+  "description": "Wikibase datamodel serialization implementation in JavaScript",
+  "license": "GPL-2.0+",
+  "contributors": [
+    {
+      "name": "H. Snater",
+      "url": "http://www.snater.com"
+    },
+    {
+      "name": "Adrian Lang",
+      "email": "adrian.lang@wikimedia.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmde/WikibaseSerializationJavaScript"
+  },
+  "bugs": {
+    "url": "https://phabricator.wikimedia.org/"
+  },
   "directories": {
     "lib": "src",
     "test": "tests"
