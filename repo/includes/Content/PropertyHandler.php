@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -68,7 +68,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
 	 * @param PropertyInfoStore $infoStore
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
-	 * @param PropertyFieldDefinitions $propertyFieldDefinitions
+	 * @param FieldDefinitions $propertyFieldDefinitions
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -82,7 +82,7 @@ class PropertyHandler extends EntityHandler {
 		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		PropertyInfoStore $infoStore,
 		PropertyInfoBuilder $propertyInfoBuilder,
-		PropertyFieldDefinitions $propertyFieldDefinitions,
+		FieldDefinitions $propertyFieldDefinitions,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(

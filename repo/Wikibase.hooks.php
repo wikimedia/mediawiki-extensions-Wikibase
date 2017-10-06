@@ -991,8 +991,9 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Add Wikibase-specific analyzer configs.
-	 * @param array $config
+	 * Adds Wikibase-specific ElasticSearch analyzer configurations.
+	 *
+	 * @param array &$config
 	 */
 	public static function onCirrusSearchAnalysisConfig( &$config ) {
 		// Analyzer for splitting statements and extracting properties:

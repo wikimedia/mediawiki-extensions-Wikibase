@@ -1,12 +1,15 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use CirrusSearch;
+use MWException;
 use SearchEngine;
+use SearchIndexField;
 use SearchIndexFieldDefinition;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
@@ -23,25 +26,24 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	const STATEMENT_SEPARATOR = '=';
 
 	/**
-	 * List of properties to index
-	 * @var string[]
+	 * @var array List of properties to index, as a flipped array with the property IDs as keys.
 	 */
-	private $properties;
+	private $propertyIds;
 
 	/**
 	 * @var callable[]
 	 */
-	private $definitions;
+	private $searchIndexDataFormatters;
 
 	/**
-	 * StatementsField constructor.
-	 * @param string[] $properties
-	 * @param callable[] $definitions
+	 * @param string[] $propertyIds
+	 * @param callable[] $searchIndexDataFormatters
 	 */
-	public function __construct( array $properties, array $definitions ) {
-		$this->properties = $properties;
-		$this->definitions = $definitions;
-		parent::__construct( "", \SearchIndexField::INDEX_TYPE_KEYWORD );
+	public function __construct( array $propertyIds, array $searchIndexDataFormatters ) {
+		parent::__construct( '', SearchIndexField::INDEX_TYPE_KEYWORD );
+
+		$this->propertyIds = array_flip( $propertyIds );
+		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 	}
 
 	/**
@@ -50,19 +52,21 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @param SearchEngine $engine
 	 * @param string $name
 	 *
-	 * @return \SearchIndexField|null Null if mapping is not supported
+	 * @return SearchIndexField|null Null if mapping is not supported
 	 */
 	public function getMappingField( SearchEngine $engine, $name ) {
 		if ( !( $engine instanceof CirrusSearch ) ) {
 			// For now only Cirrus/Elastic is supported
 			return null;
 		}
+
 		return $this;
 	}
 
 	/**
 	 * @param EntityDocument $entity
 	 *
+	 * @throws MWException
 	 * @return mixed Get the value of the field to be indexed when a page/document
 	 *               is indexed. This might be an array with nested data, if the field
 	 *               is defined with nested type or an int or string for simple field types.
@@ -71,34 +75,41 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			return [];
 		}
+
 		$data = [];
 
-		foreach ( $this->properties as $property ) {
-			try {
-				$id = new PropertyId( $property );
-			} catch ( \Exception $e ) {
-				// If we couldn't resolve ID for this property, skip it
+		/** @var Statement $statement */
+		foreach ( $entity->getStatements() as $statement ) {
+			$snak = $statement->getMainSnak();
+			if ( !( $snak instanceof PropertyValueSnak ) ) {
+				// Won't index novalue/somevalue for now
 				continue;
 			}
-			foreach ( $entity->getStatements()->getByPropertyId( $id )->getMainSnaks() as $snak ) {
-				if ( !( $snak instanceof PropertyValueSnak ) ) {
-					// Won't index novalue/somevalue for now
-					continue;
-				}
 
-				$dataValue = $snak->getDataValue();
-				if ( !isset( $this->definitions["VT:" . $dataValue->getType()] ) ) {
-					// We do not know how to format these values
-					continue;
-				}
-				$callback = $this->definitions["VT:" . $dataValue->getType()];
-				$value = $callback( $dataValue );
-				if ( !$value ) {
-					continue;
-				}
-				$data[] = $snak->getPropertyId()->getSerialization() . self::STATEMENT_SEPARATOR
-				          . $value;
+			$propertyId = $snak->getPropertyId()->getSerialization();
+			if ( !array_key_exists( $propertyId, $this->propertyIds ) ) {
+				continue;
 			}
+
+			$dataValue = $snak->getDataValue();
+			$definitionKey = 'VT:' . $dataValue->getType();
+
+			if ( !isset( $this->searchIndexDataFormatters[$definitionKey] ) ) {
+				// We do not know how to format these values
+				continue;
+			}
+
+			$formatter = $this->searchIndexDataFormatters[$definitionKey];
+			$value = $formatter( $dataValue );
+
+			if ( !is_string( $value ) ) {
+				throw new MWException( 'Search index data formatter callback for "' . $definitionKey
+					. '" didn\'t returned a string' );
+			} elseif ( $value === '' ) {
+				continue;
+			}
+
+			$data[] = $propertyId . self::STATEMENT_SEPARATOR . $value;
 		}
 
 		return $data;
@@ -106,6 +117,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 	/**
 	 * @param SearchEngine $engine
+	 *
 	 * @return array
 	 */
 	public function getMapping( SearchEngine $engine ) {
@@ -118,13 +130,13 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 		$config = [
 			'type' => 'keyword',
-			"ignore_above" => 255
+			'ignore_above' => 255,
 		];
 		// Subfield indexing only property names, so we could do matches
 		// like "property exists" without specifying the value.
 		$config['fields']['property'] = [
 			'type' => 'text',
-			'analyzer' => "extract_wb_property",
+			'analyzer' => 'extract_wb_property',
 			'search_analyzer' => 'keyword',
 		];
 
