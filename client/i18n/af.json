@@ -39,7 +39,7 @@
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Versteek",
 	"wikibase-rc-hide-wikidata-show": "Wys",
-	"wikibase-rc-show-wikidata-pref": "Wys Wikidata-wysigings in onlangse wysigings",
+	"wikibase-rc-show-wikidata-pref": "Wys {{WBREPONAME}}-wysigings in onlangse wysigings",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-wysiging",
 	"wikibase-replicationnote": "Let daarop dat dit verskeie minute dan duur voor die wysigings op alle wiki's sigbaar sal wees.",
