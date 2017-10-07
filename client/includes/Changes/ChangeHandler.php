@@ -50,11 +50,17 @@ class ChangeHandler {
 	private $siteLookup;
 
 	/**
+	 * @var bool
+	 */
+	private $injectRecentChanges;
+
+	/**
 	 * @param AffectedPagesFinder $affectedPagesFinder
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param SiteLookup $siteLookup
+	 * @param bool $injectRecentChanges
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -63,13 +69,19 @@ class ChangeHandler {
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		$injectRecentChanges = true
 	) {
+		if ( !is_bool( $injectRecentChanges ) ) {
+			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
+		}
+
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->siteLookup = $siteLookup;
+		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
 	/**
@@ -129,7 +141,9 @@ class ChangeHandler {
 		// NOTE: signature depends on change ID, effectively disabling deduplication
 		$changeSignature = $this->getChangeSignature( $change );
 		$rootJobParams['rootJobSignature'] = $titleBatchSignature . '&' . $changeSignature;
-		$this->updater->injectRCRecords( $titlesToUpdate, $change, $rootJobParams );
+		if ( $this->injectRecentChanges ) {
+			$this->updater->injectRCRecords( $titlesToUpdate, $change, $rootJobParams );
+		}
 	}
 
 	/**
