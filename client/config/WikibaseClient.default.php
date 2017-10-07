@@ -110,6 +110,9 @@ return call_user_func( function() {
 				? $settings->getSetting( 'wikiPageUpdaterDbBatchSize' )
 				: $mainConfig->get( 'UpdateRowsPerJob' );
 		},
+
+		// Temp. See T171027
+		'disableInjectRCRecords' => false,
 	];
 
 	// Some defaults depend on information not available at this time.

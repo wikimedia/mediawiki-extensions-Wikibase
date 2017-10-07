@@ -1169,7 +1169,8 @@ final class WikibaseClient {
 			new TitleFactory(),
 			$pageUpdater,
 			$changeListTransformer,
-			$this->siteLookup
+			$this->siteLookup,
+			$this->settings->getSetting( 'disableInjectRCRecords' )
 		);
 	}
 

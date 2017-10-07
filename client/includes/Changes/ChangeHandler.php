@@ -50,11 +50,17 @@ class ChangeHandler {
 	private $siteLookup;
 
 	/**
+	 * @var bool
+	 */
+	private $disableInjectRCRecords;
+
+	/**
 	 * @param AffectedPagesFinder $affectedPagesFinder
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param SiteLookup $siteLookup
+	 * @param bool $disableInjectRCRecords
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -63,13 +69,15 @@ class ChangeHandler {
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		$disableInjectRCRecords = false
 	) {
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->siteLookup = $siteLookup;
+		$this->disableInjectRCRecords = $disableInjectRCRecords;
 	}
 
 	/**
@@ -129,6 +137,10 @@ class ChangeHandler {
 		// NOTE: signature depends on change ID, effectively disabling deduplication
 		$changeSignature = $this->getChangeSignature( $change );
 		$rootJobParams['rootJobSignature'] = $titleBatchSignature . '&' . $changeSignature;
+
+		if ( $this->disableInjectRCRecords === true ) {
+			return;
+		}
 		$this->updater->injectRCRecords( $titlesToUpdate, $change, $rootJobParams );
 	}
 
