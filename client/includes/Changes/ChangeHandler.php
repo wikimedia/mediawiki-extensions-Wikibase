@@ -50,11 +50,18 @@ class ChangeHandler {
 	private $siteLookup;
 
 	/**
+	 * @var bool
+	 */
+	private $injectRecentChanges;
+
+	/**
 	 * @param AffectedPagesFinder $affectedPagesFinder
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param SiteLookup $siteLookup
+	 * @param string $repoId
+	 * @param bool $injectRecentChanges
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -63,13 +70,21 @@ class ChangeHandler {
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		$repoId,
+		$injectRecentChanges = true
 	) {
+		if ( !is_bool( $injectRecentChanges ) ) {
+			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
+		}
+
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->siteLookup = $siteLookup;
+		$this->repoId = $repoId;
+		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
 	/**
