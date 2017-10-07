@@ -78,7 +78,8 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
-			$this->getMock( SiteLookup::class )
+			$this->getMock( SiteLookup::class ),
+			true
 		);
 
 		return $handler;
