@@ -116,6 +116,13 @@ $specialPageAliases['tr'] = [
 	'UnconnectedPages' => [ 'BağlanmamışSayfalar', 'Bağlantısız', 'SiteBağlantısız' ],
 ];
 
+/** Urdu (اردو) */
+$specialPageAliases['ur'] = [
+	'EntityUsage' => [ 'استعمال_وجود', 'استعمال_وجود_ڈیٹا' ],
+	'PagesWithBadges' => [ 'صفحات_مع_علامات' ],
+	'UnconnectedPages' => [ 'غیر_مربوط_صفحات', 'غیر_مربوط', 'بدون_سائٹ_روابط' ],
+];
+
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = [
 	'UnconnectedPages' => [ 'Trang_không_kết_nối', 'Trang_không_có_liên_kết_site' ],
