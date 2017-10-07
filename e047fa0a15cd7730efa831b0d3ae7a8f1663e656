@@ -45,6 +45,23 @@
       "revId": "e047fa0a15cd7730efa831b0d3ae7a8f1663e656",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_b48b061b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-07T19:49:07Z",
+      "side": 1,
+      "message": "in case you\u0027re going to work on this, missing return here",
+      "revId": "e047fa0a15cd7730efa831b0d3ae7a8f1663e656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
