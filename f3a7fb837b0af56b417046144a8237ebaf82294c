@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_035f1978",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-09T15:24:04Z",
+      "side": 1,
+      "message": "\u003e \"label\" is an odd function name anyway. Why are the others called \"get…\", but this one is not? I wish we would stick to a stricter naming scheme. :-(\n\nBecause .label and .sitelink were the very first functions introduced here, before we moved to the new (and IMO nicer) naming scheme. Maybe I\u0027ll rename/ alias them at some point…",
+      "parentUuid": "0e6af365_43651140",
+      "range": {
+        "startLine": 212,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 32
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_0355d9c4",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
