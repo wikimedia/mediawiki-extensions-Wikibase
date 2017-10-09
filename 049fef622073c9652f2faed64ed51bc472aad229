@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_efb2ee91",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-09T06:05:59Z",
+      "side": 1,
+      "message": "why as array?",
+      "range": {
+        "startLine": 459,
+        "startChar": 18,
+        "endLine": 459,
+        "endChar": 20
+      },
+      "revId": "049fef622073c9652f2faed64ed51bc472aad229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_4f33fa5f",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-09T06:05:59Z",
+      "side": 1,
+      "message": "please expend to indicate it has no fallbacks",
+      "revId": "049fef622073c9652f2faed64ed51bc472aad229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
