@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_321dcd78",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-10-09T08:49:31Z",
+      "side": 1,
+      "message": "The logic of the hook is very weird because based on the name, it should return \"true\" to abort sending email but it\u0027s the other way around: https://github.com/wikimedia/mediawiki/blob/4fd44dcd26417265e61029d43d61c522505b96fd/includes/changes/RecentChange.php\n\nJust a note and it\u0027s not a problem in this patch.",
+      "range": {
+        "startLine": 330,
+        "startChar": 10,
+        "endLine": 330,
+        "endChar": 16
+      },
+      "revId": "eb803b31520665126b6609aa7908e279be7c38be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_0f4c229e",
         "filename": "client/WikibaseClient.php",
         "patchSetId": 4
@@ -13,6 +36,30 @@
       "writtenOn": "2017-10-09T06:29:51Z",
       "side": 1,
       "message": "RC stuff is up here. Shouldn\u0027t the new hook be close to these?",
+      "range": {
+        "startLine": 124,
+        "startChar": 25,
+        "endLine": 124,
+        "endChar": 38
+      },
+      "revId": "eb803b31520665126b6609aa7908e279be7c38be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_522081a8",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-10-09T08:49:31Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "0e6af365_0f4c229e",
       "range": {
         "startLine": 124,
         "startChar": 25,
