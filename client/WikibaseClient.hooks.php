@@ -8,6 +8,7 @@ use EchoEvent;
 use EditPage;
 use OutputPage;
 use Parser;
+use RecentChange;
 use Skin;
 use StubObject;
 use Title;
@@ -20,6 +21,7 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
@@ -314,6 +316,20 @@ final class ClientHooks {
 		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
 		$queryPages[] = [ SpecialPagesWithBadges::class, 'PagesWithBadges' ];
 		$queryPages[] = [ SpecialEntityUsage::class, 'EntityUsage' ];
+		return true;
+	}
+
+	/**
+	 * @param User $editor
+	 * @param Title $title
+	 * @param RecentChange $recentChange
+	 * @return bool
+	 */
+	public static function onAbortEmailNotification( User $editor, Title $title, RecentChange $recentChange ) {
+		if ( $recentChange->getAttribute('rc_source') === RecentChangeFactory::SRC_WIKIBASE ) {
+			return false;
+		}
+
 		return true;
 	}
 
