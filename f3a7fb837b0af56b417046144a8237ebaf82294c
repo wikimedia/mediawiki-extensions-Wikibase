@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_8369c98a",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T14:40:25Z",
+      "side": 1,
+      "message": "This check can be skipped if a label was found. Not sure if this is worth the performance gain.",
+      "range": {
+        "startLine": 116,
+        "startChar": 31,
+        "endLine": 116,
+        "endChar": 42
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_6305b5c3",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T14:40:25Z",
+      "side": 1,
+      "message": "Can\u0027t we add an optional languageCode parameter to this function?",
+      "range": {
+        "startLine": 212,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 32
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_0355d9c4",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T14:40:25Z",
+      "side": 1,
+      "message": "What is a \"label fallback\"? \"Language fallbacks\"? Also this description misses what is returned.",
+      "range": {
+        "startLine": 76,
+        "startChar": 73,
+        "endLine": 76,
+        "endChar": 88
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
