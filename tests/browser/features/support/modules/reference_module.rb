@@ -34,7 +34,7 @@ module ReferencePage
   end
 
   def reference_snak_value(reference_index = 1, snak_index = 1)
-    element('div', css: "div.wikibase-statementview-references div.wikibase-referenceview:nth-child(#{reference_index}) div.wikibase-snaklistview:nth-child(#{snak_index}) div.wikibase-snakview-value")
+    element('span', css: "div.wikibase-statementview-references div.wikibase-referenceview:nth-child(#{reference_index}) div.wikibase-snaklistview:nth-child(#{snak_index}) span.wikibase-snakview-value")
   end
 
   def toggle_references(statement_index = 1)

@@ -43,15 +43,15 @@ module StatementPage
   end
 
   def claim_value_string(group_index, claim_index)
-    element('div', css: ".wikibase-statementgroupview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) div.wikibase-snakview-value")
+    element('span', css: ".wikibase-statementgroupview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) span.wikibase-snakview-value")
   end
 
   def claim_value_link(group_index, claim_index)
-    element('a', css: ".wikibase-statementgroupview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) div.wikibase-snakview-value a")
+    element('a', css: ".wikibase-statementgroupview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) span.wikibase-snakview-value a")
   end
 
   def claim_snaktype(group_index, claim_index, snaktype)
-    element('div', css: ".wikibase-statementgroupview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) div.wikibase-snakview-value.wikibase-snakview-variation-#{snaktype}snak")
+    element('span', css: ".wikibase-statementgroupview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) span.wikibase-snakview-value.wikibase-snakview-variation-#{snaktype}snak")
   end
 
   def snak_value_input_field(index = 1)
