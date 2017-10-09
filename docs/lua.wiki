@@ -71,6 +71,15 @@ An example call might look like this:
 local label, lang = mw.wikibase.getLabelWithLang( 'Q42' ) -- label contains the text of the label. lang is the language the returned label is in, like "de".
 </source>
 
+=== mw.wikibase.getLabelByLang ===
+<code>wikibase.getLabelByLang( id, languageCode )</code><br>
+Get the label from an entity for a specific language. This doesn't apply label fallbacks.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getLabelByLang( 'Q42', 'es' ) -- Returns the Spanish label of the item as a string, like "Berlín".
+</source>
+
 === mw.wikibase.sitelink ===
 <code>wikibase.sitelink( itemId )</code><br>
 <code>wikibase.sitelink( itemId, globalSiteId )</code><br>

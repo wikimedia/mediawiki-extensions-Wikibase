@@ -7,9 +7,12 @@ use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
@@ -50,6 +53,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 			$siteLinkLookup,
 			new SettingsArray(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
+			new BasicEntityIdParser,
+			$this->getMock( TermLookup::class ),
+			new StaticContentLanguages( [] ),
 			'enwiki'
 		);
 	}
@@ -68,6 +74,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 			$this->getMock( SiteLinkLookup::class ),
 			$settings,
 			new HashUsageAccumulator(),
+			new BasicEntityIdParser,
+			$this->getMock( TermLookup::class ),
+			new StaticContentLanguages( [] ),
 			'enwiki'
 		);
 
@@ -106,6 +115,83 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 
 		$id = $wikibaseLuaBindings->getEntityId( 'Barcelona' );
 		$this->assertNull( $id );
+	}
+
+	public function getLabelByLanguageProvider() {
+		$q2 = new ItemId( 'Q2' );
+
+		return [
+			'Item and label exist' => [
+				[ 'Q2#L.de' ],
+				'Q2-de',
+				'Q2',
+				'de',
+				$q2,
+				true,
+				true
+			],
+			'Item id valid, but label does not exist' => [
+				[ 'Q2#L.de' ],
+				null,
+				'Q2',
+				'de',
+				$q2,
+				false,
+				true
+			],
+			'Invalid Item Id' => [
+				[],
+				null,
+				'dsfa',
+				'de',
+				null,
+				true,
+				true
+			],
+			'Invalid lang' => [
+				[],
+				null,
+				'Q2',
+				'de',
+				$q2,
+				true,
+				false
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider getLabelByLanguageProvider
+	 */
+	public function testGetLabelByLanguage(
+		array $expectedUsages,
+		$expected,
+		$prefixedEntityId,
+		$languageCode,
+		EntityId $entityId = null,
+		$hasLabel,
+		$hasLang
+	) {
+		$usages = new HashUsageAccumulator();
+
+		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup->expects( $this->exactly( $hasLang && $entityId ? 1 : 0 ) )
+			->method( 'getLabel' )
+			->with( $entityId )
+			->will( $this->returnValue( $hasLabel ? "$prefixedEntityId-$languageCode" : null ) );
+
+		$bindings = new WikibaseLanguageIndependentLuaBindings(
+			$this->getMock( SiteLinkLookup::class ),
+			new SettingsArray(),
+			$usages,
+			new BasicEntityIdParser,
+			$termLookup,
+			new StaticContentLanguages( $hasLang ? [ $languageCode ] : [] ),
+			'enwiki'
+		);
+
+		$this->assertSame( $expected, $bindings->getLabelByLanguage( $prefixedEntityId, $languageCode ) );
+		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
 	}
 
 	public function getSiteLinkPageNameProvider() {

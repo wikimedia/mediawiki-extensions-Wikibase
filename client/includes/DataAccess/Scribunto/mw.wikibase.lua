@@ -216,6 +216,17 @@ function wikibase.setupInterface()
 		return label
 	end
 
+	-- Get the label in languageCode for the given entity id.
+	--
+	-- @param {string} id
+	-- @param {string} languageCode
+	wikibase.getLabelByLang = function( id, languageCode )
+		checkType( 'getLabelByLang', 1, id, 'string' )
+		checkType( 'getLabelByLang', 2, languageCode, 'string' )
+
+		return php.getLabelByLanguage( id, languageCode )
+	end
+
 	-- Get the description, description language for the given entity id, if specified,
 	-- or of the connected entity, if exists.
 	--

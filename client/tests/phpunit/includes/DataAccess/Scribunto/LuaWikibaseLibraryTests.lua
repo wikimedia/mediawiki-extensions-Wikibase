@@ -191,6 +191,38 @@ local tests = {
 	  args = { 'Q32488' },
 	  expect = { nil, nil }
 	},
+	{ name = 'mw.wikibase.getLabelByLang (invalid id type)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 1, 'de' },
+	  expect = "bad argument #1 to 'getLabelByLang' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getLabelByLang (invalid languageCode type)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { "Q42", 1.2 },
+	  expect = "bad argument #2 to 'getLabelByLang' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getLabelByLang (invalid id)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { '-1', 'de' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getLabelByLang 1', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 'Q32487', 'de' },
+	  expect = { 'Lua Test Item' }
+	},
+	{ name = 'mw.wikibase.getLabelByLang 2', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 'Q32487', 'en' },
+	  expect = { 'Test all the code paths' }
+	},
+	{ name = 'mw.wikibase.getLabelByLang (no such item)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 'Q1224342342', 'de' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getLabelByLang (no such lang)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 'Q32487', 'blahblahblah' },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getLabelByLang (no label)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 'Q32488', 'de' },
+	  expect = { nil }
+	},
 	{ name = 'mw.wikibase.description', func = mw.wikibase.description, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'Description of Q32487' }
