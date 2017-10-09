@@ -270,6 +270,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$wikibaseClient->getSettings(),
 			$this->getUsageAccumulator(),
+			$this->getEntityIdParser(),
+			$wikibaseClient->getTermLookup(),
+			$wikibaseClient->getTermsLanguages(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -296,6 +299,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// these can't be called from user code, unless explicitly exposed in Lua.
 		$lib = [
 			'getLabel' => [ $this, 'getLabel' ],
+			'getLabelByLanguage' => [ $this, 'getLabelByLanguage' ],
 			'getEntity' => [ $this, 'getEntity' ],
 			'getEntityStatements' => [ $this, 'getEntityStatements' ],
 			'getSetting' => [ $this, 'getSetting' ],
@@ -444,6 +448,21 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
 
 		return $this->getLanguageDependentLuaBindings()->getLabel( $prefixedEntityId );
+	}
+
+	/**
+	 * Wrapper for getLabel in WikibaseLanguageIndependentLuaBindings
+	 *
+	 * @param string $prefixedEntityId
+	 * @param string $languageCode
+	 *
+	 * @return string[]|null[]
+	 */
+	public function getLabelByLanguage( $prefixedEntityId, $languageCode ) {
+		$this->checkType( 'getLabelByLanguage', 1, $prefixedEntityId, 'string' );
+		$this->checkType( 'getLabelByLanguage', 2, $languageCode, 'string' );
+
+		return [ $this->getLanguageIndependentLuaBindings()->getLabelByLanguage( $prefixedEntityId, $languageCode ) ];
 	}
 
 	/**
