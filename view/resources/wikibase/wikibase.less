@@ -231,6 +231,11 @@ div.wikibase-snakview .wikibase-snakview-value-container {
 	min-height: 1.6em; /* reduces jumping when clicking edit */
 }
 
+.wikibase-snakview-value,
+.wikibase-snakview-indicators {
+	display: inline-block;
+}
+
 div .wikibase-snakview-value span.error.wb-format-error {
 	display: block;
 	color: #f00;
@@ -365,6 +370,10 @@ span.wikibase-snakview-variation-novaluesnak {
 	width: 100%;
 }
 
+.wb-edit .wikibase-snakview-indicators {
+	display: none;
+}
+
 /***** /EDIT/NEW CLAIM *****/
 
 /***** QUALIFIERS *****/
@@ -391,7 +400,7 @@ span.wikibase-snakview-variation-novaluesnak {
 	position: relative;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value {
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-body {
 	margin-left: 16px;
 	margin-right: 18em;
 	word-wrap: break-word;
@@ -556,7 +565,7 @@ span.wikibase-snakview-variation-novaluesnak {
 	position: relative;
 }
 
-.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-value {
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container .wikibase-snakview-body {
 	margin-left: 16px;
 	margin-right: 18em;
 	word-wrap: break-word;
