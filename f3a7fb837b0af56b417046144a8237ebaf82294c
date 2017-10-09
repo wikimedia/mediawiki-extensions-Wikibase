@@ -188,6 +188,30 @@
       "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_3ea6f6be",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-09T16:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_0355d9c4",
+      "range": {
+        "startLine": 76,
+        "startChar": 73,
+        "endLine": 76,
+        "endChar": 88
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
