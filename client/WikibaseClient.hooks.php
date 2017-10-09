@@ -8,6 +8,7 @@ use EchoEvent;
 use EditPage;
 use OutputPage;
 use Parser;
+use RecentChange;
 use Skin;
 use StubObject;
 use Title;
@@ -314,6 +315,20 @@ final class ClientHooks {
 		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
 		$queryPages[] = [ SpecialPagesWithBadges::class, 'PagesWithBadges' ];
 		$queryPages[] = [ SpecialEntityUsage::class, 'EntityUsage' ];
+		return true;
+	}
+
+	/**
+	 * @param User $editor
+	 * @param Title $title
+	 * @param RecentChange $recentChange
+	 * @return bool
+	 */
+	public static function onAbortEmailNotification( User $editor, Title $title, RecentChange $recentChange ) {
+		if ( $recentChange->getAttribute('rc_source') === RecentChangeFactory::SRC_WIKIBASE ) {
+			return false;
+		}
+
 		return true;
 	}
 
