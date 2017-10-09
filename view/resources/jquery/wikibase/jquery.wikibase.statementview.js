@@ -640,6 +640,10 @@
 			// FIXME: Should not be necessary if _setOption would do the right thing for values
 			this._recreateReferences();
 
+			if ( !dropValue ) {
+				this.element.find( '.wikibase-snakview-indicators' ).empty();
+			}
+
 			this._stopEditingQualifiers( dropValue );
 			return $.when(
 				this._mainSnakSnakView.stopEditing( dropValue ),
