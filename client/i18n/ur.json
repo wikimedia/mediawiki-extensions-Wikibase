@@ -35,6 +35,8 @@
 	"wikibase-rc-show-wikidata-pref": "حالیہ تبدیلیوں میں {{WBREPONAME}} کی ترامیم دکھائیں",
 	"wikibase-rc-wikibase-edit-letter": "ڈ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ترمیم",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} کی ترامیم",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} کی ترامیم",
 	"wikibase-replicationnote": "تبدیلیاں نظر آنے میں چند منٹ کا وقت لگ سکتا ہے، انتظار فرمائيں!",
 	"wikibase-watchlist-show-changes-pref": "حالیہ تبدیلیوں میں {{WBREPONAME}} کی ترامیم دکھائیں",
 	"wikibase-error-deserialize-error": "ڈیٹا کے تسلسل میں خامی۔",

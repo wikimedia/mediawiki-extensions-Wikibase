@@ -3,7 +3,8 @@
 		"authors": [
 			"Robin0van0der0vliet",
 			"Ooswesthoesbes",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Pahles"
 		]
 	},
 	"tooltip-t-wikibase": "Link nao item inne verbónje gegaevesvergaoring",
@@ -13,7 +14,7 @@
 	"wikibase-editlinkstitle": "Bewirk interwiki's",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Versjtaek",
-	"wikibase-rc-hide-wikidata-show": "Toean",
+	"wikibase-rc-hide-wikidata-show": "Tuin",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-bewirking",
 	"wikibase-otherprojects": "In anger projekte"

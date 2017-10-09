@@ -43,6 +43,8 @@
 	"wikibase-rc-show-wikidata-pref": "Prikaži promjene projekta {{WBREPONAME}} na popisu nedavnih promjena",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "uređivanje ({{WBREPONAME}})",
+	"wikibase-rcfilters-hide-wikibase-label": "Uređivanja na projektu {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Uređivanja podrijetlom s projekta {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.",
 	"wikibase-watchlist-show-changes-pref": "Prikaži promjene na projektu {{WBREPONAME}} u Vašem popisu praćenja",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",

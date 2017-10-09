@@ -63,6 +63,7 @@
 	"wikibase-time-precision-century": "$1. lasubu a mihca",
 	"wikibase-time-precision-10annum": "$1 kasamihca",
 	"wikibase-time-precision-BCE-Mannum": "$1 cacay lasubu a mang BCE",
+	"wikibase-time-precision-BCE-annum": "ayaw nu Yis mihca {{PLURAL:$1|$1 a mihca}}",
 	"wikibase-time-precision-BCE-millennium": "ayaw nu Yis mihca $1 malebut a mihca",
 	"wikibase-time-precision-BCE-century": "ayaw nu Yis mihca $1 lasubu a mihca",
 	"wikibase-snakformatter-valuetype-mismatch": "sulyang kakuniza \"$1\" atu susin kakuniza \"$2\" caay kataneng.",
@@ -82,6 +83,9 @@
 	"wikibase-entity-summary-wbsetdescription-add": "macunus tu [$2] sapuelac",
 	"wikibase-entity-summary-wbsetdescription-set": "masumad tu [$2] sapuelac",
 	"wikibase-entity-summary-wbsetdescription-remove": "masipu tuway [$2] sapuelac",
+	"wikibase-entity-summary-wbsetaliases-set": "setin [$2] a {{PLURAL:$1|pacimilay ngangan}}",
+	"wikibase-entity-summary-wbsetaliases-add": "macunus tu [$2] a {{PLURAL:$1|pacimilay ngangan}}",
+	"wikibase-entity-summary-wbsetaliases-remove": "masipu [$2] a {{PLURAL:$1|pacimilay a ngangan}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "misumad [$2] aazihen-paya, sapuelac atu pacimilay ngangan",
 	"wikibase-entity-summary-wbsetsitelink-add": "macunus tu masasiket tayza i [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "macunus saungay kunpay a siket tayza [$2]",
@@ -95,6 +99,7 @@
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "patizeng {{PLURAL:$1|saleku}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "setin {{PLURAL:$1|saleku sulyang}}",
 	"wikibase-entity-summary-wbremoveclaims": "misipu {{PLURAL:$1|saleku}}",
+	"wikibase-entity-summary-special-create-item": "napatizeng yamalyilu {{PLURAL:$1|sulyang}} a [$2] kasacacay",
 	"wikibase-entity-summary-wbcreateclaim-create": "patizeng tu saleku",
 	"wikibase-entity-summary-wbremoveclaims-remove": "masipu {{PLURAL:$1|saleku}} tuway",
 	"wikibase-entity-summary-wbsetclaim-update": "masumad {{PLURAL:$3|saleku}} tuway",
@@ -104,6 +109,7 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "macunus {{PLURAL:$1|asip-sulit}} tuway",
 	"wikibase-entity-summary-wbsetqualifier-update": "masumad{{PLURAL:$1|asip-sulit}} tuway",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "masipu {{PLURAL:$1|asip-sulit}}",
+	"wikibase-entity-summary-wbremovereferences-remove": "nay saleku misipu {{PLURAL:$3|miazih tu tatenga’ay nasulitan}}",
 	"wikibase-entity-summary-wbmergeitems-from": "makabu kasacacay nay $3",
 	"wikibase-entity-summary-wbmergeitems-to": "makabu kasacacay ta $3",
 	"wikibase-item-summary-wbcreate-new": "patizeng tuway baluhay kasacacay",
@@ -114,5 +120,6 @@
 	"wikibase-item-summary-wblinktitles-connect": "macunus tu cacay masasiket nu kamu kyu papatun kasabelih",
 	"wikibase-property-summary-wbcreate-new": "patizeng tuway baluhay susin",
 	"wikibase-property-summary-wbeditentity-update": "susin masumad tuway",
-	"wikibase-property-summary-wbeditentity-override": "palawpes tuway ku susin"
+	"wikibase-property-summary-wbeditentity-override": "palawpes tuway ku susin",
+	"wikibase-property-summary-special-create-property": "napatizeng yamalyilu {{PLURAL:$1|sulyang}} a [$2] susin"
 }

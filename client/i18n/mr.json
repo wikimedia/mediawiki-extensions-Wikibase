@@ -48,6 +48,8 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} संपादने अलीकडील बदल मध्ये दाखवा",
 	"wikibase-rc-wikibase-edit-letter": "वि.डा.",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संपादन",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} वरील संपादने",
+	"wikibase-rcfilters-hide-wikibase-description": "मूळची {{WBREPONAME}} वरील संपादने",
 	"wikibase-replicationnote": "कृपया याची नोंद घ्या कि सर्व विकिंवर हे बदल दिसण्यासाठी अनेक मिनीटे लागू शकतील.",
 	"wikibase-watchlist-show-changes-pref": "आपल्या पहाऱ्याच्या यादीत {{WBREPONAME}} संपादने दाखवा",
 	"wikibase-error-deserialize-error": "कलमांची मालिका हटविण्यात अयशस्वी.",
