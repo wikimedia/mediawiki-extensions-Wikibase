@@ -212,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_cde2922e",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T09:33:35Z",
+      "side": 1,
+      "message": "This code is accessing a $fields variable that was never introduced before, but acts like it knowns the variable holds an array. I know this works because of a specific magical behavior in PHP. But we are never using this language feature in our code bases because it is error prone and confusing.\n\nNote that this, along with pretty much all other comments I wrote, is already solved in my follow up and not meant to block this patch here from being merged.",
+      "parentUuid": "0e6af365_9bc93fb1",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_12d53447",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 20
@@ -364,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_4dd54246",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T09:33:35Z",
+      "side": 1,
+      "message": "There is documentation. It says \"@throws InvalidArgumentException\". Any other exception would be a mistake and must bubble up to become visible. Catching other exceptions will hide such mistakes, and make future development harder.",
+      "parentUuid": "0e6af365_db5497cb",
+      "range": {
+        "startLine": 79,
+        "startChar": 14,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_328ab86f",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 20
@@ -399,6 +447,30 @@
       "side": 1,
       "message": "hmm yes I thought about it, but since it\u0027s in the function that can be called repeatedly it can lead to a lot of log spam... but probably it\u0027s ok, I\u0027ll add something",
       "parentUuid": "0e6af365_328ab86f",
+      "range": {
+        "startLine": 80,
+        "startChar": 7,
+        "endLine": 80,
+        "endChar": 59
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_0dcf4ab6",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T09:33:35Z",
+      "side": 1,
+      "message": "Not necessary because I already solved this in my follow up.",
+      "parentUuid": "0e6af365_db0b37d8",
       "range": {
         "startLine": 80,
         "startChar": 7,
@@ -493,6 +565,30 @@
       "side": 1,
       "message": "hmm good point, though item formatter won\u0027t return 0 external-id one might, and others too. I\u0027ll fix it.",
       "parentUuid": "0e6af365_72903099",
+      "range": {
+        "startLine": 96,
+        "startChar": 9,
+        "endLine": 96,
+        "endChar": 16
+      },
+      "revId": "bc4c4b1817ef56a36d6c686019adc789fde7ec18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_2dd24e5e",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T09:33:35Z",
+      "side": 1,
+      "message": "Already done in my follow up.",
+      "parentUuid": "0e6af365_9b6fff8e",
       "range": {
         "startLine": 96,
         "startChar": 9,
