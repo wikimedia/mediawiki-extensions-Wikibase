@@ -364,7 +364,7 @@
 				this._valueView = null;
 				this.$viewPort.empty();
 			}
-			$valueViewDom = this.$viewPort.wrapInner( '<div/>' ).children();
+			$valueViewDom = this.$viewPort.wrapInner( '<span/>' ).children();
 
 			// Can't choose a view for displaying empty value without indication by data type
 			// definition which kind of value should be creatable by the new valueview.
