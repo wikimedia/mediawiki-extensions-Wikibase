@@ -63,15 +63,9 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
-
-		labelsChanger.setLabel( new wb.datamodel.Term( 'language', 'label' ) )
+		return labelsChanger.setLabel( new wb.datamodel.Term( 'language', 'label' ) )
 		.done( function ( savedLabel ) {
-			QUnit.start();
 			assert.equal( savedLabel.getText(), 'label' );
-		} )
-		.fail( function () {
-			assert.ok( false, 'setLabel failed' );
 		} );
 	} );
 
@@ -88,17 +82,17 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		labelsChanger.setLabel( new wb.datamodel.Term( 'language', 'label' ) )
 		.done( function ( savedLabel ) {
 			assert.ok( false, 'setLabel should have failed' );
 		} )
 		.fail( function ( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'setLabel did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
-		} );
+		} )
+		.always( done );
 	} );
 
 }( sinon, wikibase, jQuery ) );

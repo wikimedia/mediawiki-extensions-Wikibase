@@ -34,9 +34,7 @@
 			var promise = entityStore.get( 'id' );
 			assert.equal( promise.state(), 'pending', 'Promise is pending.' );
 
-			QUnit.stop();
-			promise.done( function ( entity ) {
-				QUnit.start();
+			return promise.done( function ( entity ) {
 				assert.ok( true, 'Resolved promise.' );
 			} );
 		}

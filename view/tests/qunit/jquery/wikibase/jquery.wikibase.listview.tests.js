@@ -341,11 +341,9 @@
 
 		var result = listview.startEditing();
 		assert.strictEqual( result.state(), 'pending' );
-		result.done( function () {
-			QUnit.start();
+		return result.done( function () {
 			assert.strictEqual( result.state(), 'resolved' );
 		} );
-		QUnit.stop();
 	} );
 
 	QUnit.test( 'reuse items', function ( assert ) {
@@ -391,9 +389,7 @@
 			QUnit.test( 'destroy after startEditing', function ( assert ) {
 				assert.expect( 1 );
 				var instance = getInstance();
-				QUnit.stop();
-				instance.startEditing().done( function () {
-					QUnit.start();
+				return instance.startEditing().done( function () {
 					tryDestroy( instance, assert );
 				} );
 			} );
