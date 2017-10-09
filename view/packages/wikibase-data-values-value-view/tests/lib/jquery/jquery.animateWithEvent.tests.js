@@ -47,10 +47,9 @@
 
 	QUnit.test( 'special start callback', function( assert ) {
 		assert.expect( 2 );
-		var done = assert.async();
 		var $elem = $( '<div/>' );
 
-		$elem.animateWithEvent(
+		return $elem.animateWithEvent(
 			'foopurpose',
 			{ width: 200 },
 			{},
@@ -65,18 +64,15 @@
 				);
 
 			}
-		).promise().done( function() {
-			done();
-		} );
+		);
 	} );
 
 	QUnit.test( 'options.start callback', function( assert ) {
 		assert.expect( 2 );
 		var $elem = $( '<div/>' );
-		var done = assert.async();
 		var animationEventsAnimation;
 
-		$elem.animateWithEvent(
+		return $elem.animateWithEvent(
 			'foopurpose',
 			{ width: 200 },
 			{
@@ -96,9 +92,7 @@
 			}, function( animationEvent ) {
 				animationEventsAnimation = animationEvent.animation;
 			}
-		).promise().done( function() {
-			done();
-		} );
+		);
 	} );
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
@@ -119,9 +113,7 @@
 			if ( $confirmedElems.length >= $elems.length ) {
 				done();
 			}
-		} ).promise().done( function() {
-			done();
-		} );
+		} ).promise().done( done );
 
 		assert.ok(
 			$elems.length === $confirmedElems.length

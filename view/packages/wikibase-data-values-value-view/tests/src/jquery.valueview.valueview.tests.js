@@ -125,7 +125,6 @@
 
 	QUnit.test( 'getFormattedValue with DOM', function( assert ) {
 		assert.expect( 4 );
-		var done = assert.async();
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
@@ -139,7 +138,7 @@
 			vvArgs: vvArgs
 		} );
 
-		vvInst.draw()
+		return vvInst.draw()
 		.done( function() {
 			assert.equal( vvInst.getFormattedValue(), 'FORMATTED VALUE' );
 			sinon.assert.notCalled( vvArgs.htmlFormatter.format );
@@ -149,19 +148,11 @@
 			vvArgs.htmlFormatter.format.restore();
 			vvArgs.plaintextFormatter.format.restore();
 			vvArgs.parserStore.getParser.restore();
-		} )
-		.fail( function() {
-			assert.ok(
-				false,
-				'draw() returned rejected promise.'
-			);
-		} )
-		.always( done );
+		} );
 	} );
 
 	QUnit.test( 'getFormattedValue without DOM', function( assert ) {
 		assert.expect( 4 );
-		var done = assert.async();
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
@@ -172,7 +163,7 @@
 			vvArgs: vvArgs
 		} );
 
-		vvInst.draw()
+		return vvInst.draw()
 		.done( function() {
 			assert.equal( vvInst.getFormattedValue(), 'STRING VALUE' );
 			sinon.assert.calledOnce( vvArgs.htmlFormatter.format );
@@ -182,14 +173,7 @@
 			vvArgs.htmlFormatter.format.restore();
 			vvArgs.plaintextFormatter.format.restore();
 			vvArgs.parserStore.getParser.restore();
-		} )
-		.fail( function() {
-			assert.ok(
-				false,
-				'draw() returned rejected promise.'
-			);
-		} )
-		.always( done );
+		} );
 	} );
 
 } )(

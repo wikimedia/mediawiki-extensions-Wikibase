@@ -77,9 +77,7 @@
 			.fail( function() {
 				deferred.reject();
 			} )
-			.always( function() {
-				done(); // *1*
-			} );
+			.always( done );
 		} );
 		( callbacks.afterCallingShowExtension || $.noop )( instance );
 
