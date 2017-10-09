@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_837b0923",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-09T14:56:51Z",
+      "side": 1,
+      "message": "PHP5 in production, probably faster on Zend\n\nFirst fetch:\n\u003e $t0 \u003d microtime(1); $lang-\u003ehasLanguage(\u0027es\u0027); echo microtime(1) -$t0;\n0.0023508071899414\nSecond fetch:\n\u003e $t0 \u003d microtime(1); $lang-\u003ehasLanguage(\u0027es\u0027); echo microtime(1) -$t0;\n1.0013580322266E-5\n\nI think this is negligible and way way faster than even trying to get a label from the DB. What do you think?",
+      "parentUuid": "0e6af365_8369c98a",
+      "range": {
+        "startLine": 116,
+        "startChar": 31,
+        "endLine": 116,
+        "endChar": 42
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_6305b5c3",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-10-09T14:40:25Z",
       "side": 1,
       "message": "Can\u0027t we add an optional languageCode parameter to this function?",
+      "range": {
+        "startLine": 212,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 32
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_03963942",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-09T14:56:51Z",
+      "side": 1,
+      "message": "hm, that would make this a little odd maybe: Applies language fallbacks unless some explicitly asks for a lang. Sounds ok with me, but an own function is maybe a bit nicer?",
+      "parentUuid": "0e6af365_6305b5c3",
       "range": {
         "startLine": 212,
         "startChar": 1,
