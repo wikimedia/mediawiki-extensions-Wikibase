@@ -1,6 +1,7 @@
 {
   "name": "wikibase-data-model",
   "description": "Wikibase datamodel implementation in JavaScript",
+  "version": "4.0.0",
   "directories": {
     "lib": "src",
     "test": "tests"
