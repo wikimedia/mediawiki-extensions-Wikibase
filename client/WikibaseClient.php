@@ -147,6 +147,7 @@ call_user_func( function() {
 	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler::onParserLimitReportPrepare';
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
 	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
+	$wgHooks['AbortEmailNotification'][] = '\Wikibase\ClientHooks::onAbortEmailNotification';
 
 	// for client notifications (requires the Echo extension)
 	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
