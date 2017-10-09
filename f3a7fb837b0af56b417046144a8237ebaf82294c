@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_837c69e3",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T15:21:07Z",
+      "side": 1,
+      "message": "Uh, you even benchmarked it. Cool. Thanks! I did not expected this to have much of an impact, but wanted to mention it in case you have a different opinion. So everything is fine.",
+      "parentUuid": "0e6af365_837b0923",
+      "range": {
+        "startLine": 116,
+        "startChar": 31,
+        "endLine": 116,
+        "endChar": 42
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_6305b5c3",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "hm, that would make this a little odd maybe: Applies language fallbacks unless some explicitly asks for a lang. Sounds ok with me, but an own function is maybe a bit nicer?",
       "parentUuid": "0e6af365_6305b5c3",
+      "range": {
+        "startLine": 212,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 32
+      },
+      "revId": "f3a7fb837b0af56b417046144a8237ebaf82294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_43651140",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-09T15:21:07Z",
+      "side": 1,
+      "message": "\"label\" is an odd function name anyway. Why are the others called \"get…\", but this one is not? I wish we would stick to a stricter naming scheme. :-(\n\nI don\u0027t have a strong preference. Yes, the \"applies fallbacks unless …\" argument is a good one for a dedicated method. I\u0027m fine with the proposed \"getLabelByLang\". I don\u0027t like the abbreviated \"…Lang\" but I can see other methods already use the same abbreviation.",
+      "parentUuid": "0e6af365_03963942",
       "range": {
         "startLine": 212,
         "startChar": 1,
