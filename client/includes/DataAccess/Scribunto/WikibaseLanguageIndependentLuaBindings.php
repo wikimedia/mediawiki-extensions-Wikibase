@@ -4,8 +4,13 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
 
@@ -37,6 +42,21 @@ class WikibaseLanguageIndependentLuaBindings {
 	private $usageAccumulator;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @var TermLookup
+	 */
+	private $termLookup;
+
+	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -44,18 +64,27 @@ class WikibaseLanguageIndependentLuaBindings {
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SettingsArray $settings
-	 * @param UsageAccumulator $usageAccumulator for tracking title usage via getEntityId.
+	 * @param UsageAccumulator $usageAccumulator
+	 * @param EntityIdParser $entityIdParser
+	 * @param TermLookup $termLookup
+	 * @param ContentLanguages $termsLanguages
 	 * @param string $siteId
 	 */
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		SettingsArray $settings,
 		UsageAccumulator $usageAccumulator,
+		EntityIdParser $entityIdParser,
+		TermLookup $termLookup,
+		ContentLanguages $termsLanguages,
 		$siteId
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->settings = $settings;
 		$this->usageAccumulator = $usageAccumulator;
+		$this->entityIdParser = $entityIdParser;
+		$this->termLookup = $termLookup;
+		$this->termsLanguages = $termsLanguages;
 		$this->siteId = $siteId;
 	}
 
@@ -75,6 +104,34 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		$this->usageAccumulator->addTitleUsage( $id );
 		return $id->getSerialization();
+	}
+
+	/**
+	 * @param string $prefixedEntityId
+	 * @param string $languageCode
+	 *
+	 * @return string|null Null if language code invalid or entity couldn't be found/ no label present.
+	 */
+	public function getLabelByLanguage( $prefixedEntityId, $languageCode ) {
+		if ( !$this->termsLanguages->hasLanguage( $languageCode ) ) {
+			// Directly abort: Only track label usages for valid languages
+			return null;
+		}
+
+		try {
+			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+		} catch ( EntityIdParsingException $e ) {
+			return null;
+		}
+
+		$this->usageAccumulator->addLabelUsage( $entityId, $languageCode );
+		try {
+			$label = $this->termLookup->getLabel( $entityId, $languageCode );
+		} catch ( TermLookupException $ex ) {
+			return null;
+		}
+
+		return $label;
 	}
 
 	/**
