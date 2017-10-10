@@ -230,6 +230,7 @@ class WikiPageUpdater implements PageUpdater {
 				. count( $batch ) . " titles" );
 
 			$jobs[] = InjectRCRecordsJob::makeJobSpecification( $batch, $change, $rootJobParams );
+			break; // Quick fix for T177707.
 		}
 
 		$this->jobQueueGroup->lazyPush( $jobs );
