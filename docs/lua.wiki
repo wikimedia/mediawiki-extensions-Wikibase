@@ -75,6 +75,8 @@ local label, lang = mw.wikibase.getLabelWithLang( 'Q42' ) -- label contains the 
 <code>wikibase.getLabelByLang( id, languageCode )</code><br>
 Get the label from an entity for a specific language, returns the label as string or nil if it couldn't be found. This doesn't apply any language fallbacks.
 
+'''Note''': This should not be used to get the label in the user's language on multilingual wikis, use [[#mw.wikibase.label|<code>mw.wikibase.label</code>]] for that if by any means possible.
+
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.getLabelByLang( 'Q42', 'es' ) -- Returns the Spanish label of the item as a string, like "Berlín".
