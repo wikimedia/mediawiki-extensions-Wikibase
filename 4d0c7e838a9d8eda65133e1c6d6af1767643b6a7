@@ -22,6 +22,30 @@
       "revId": "4d0c7e838a9d8eda65133e1c6d6af1767643b6a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_fa6aa3e9",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-10T17:47:19Z",
+      "side": 1,
+      "message": "It is configurable via the recentChangesBatchSize setting. That setting is intended to control the batch size, but if we only push one batch, we can use that setting to control total cutoff.",
+      "parentUuid": "0e6af365_1a53f76f",
+      "range": {
+        "startLine": 233,
+        "startChar": 3,
+        "endLine": 233,
+        "endChar": 9
+      },
+      "revId": "4d0c7e838a9d8eda65133e1c6d6af1767643b6a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
