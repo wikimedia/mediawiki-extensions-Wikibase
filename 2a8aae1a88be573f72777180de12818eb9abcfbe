@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_5ad88ff4",
+        "filename": "repo/includes/Content/ItemHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-10T17:46:00Z",
+      "side": 1,
+      "message": "Not sure about this change. I am pretty sure specific handler for Item should be using specific definitions belonging to it. It\u0027s not good to pass property definitions to item handler.",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_1ae2179d",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-10T17:46:00Z",
+      "side": 1,
+      "message": "Same here - while technically it\u0027s FieldDefinitions, it makes no sense to pass anything but Property specific class to Property specific handler.",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_faedc389",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsProviderFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-10T17:46:00Z",
+      "side": 1,
+      "message": "Works for this case, but we may have to revert to the old way if we add more complex structure. We\u0027ll worry about it then, I guess.",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_5a864fbf",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-10T17:46:00Z",
+      "side": 1,
+      "message": "isset($this-\u003epropertyIDs[$propertyId]) should work the same and would probably be a bit faster, since it\u0027s not a function call.",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
