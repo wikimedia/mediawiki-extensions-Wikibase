@@ -223,6 +223,7 @@ class WikiPageUpdater implements PageUpdater {
 
 		$jobs = [];
 		$titleBatches = array_chunk( $titles, $this->rcBatchSize );
+		$titleCount = 0;
 
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
@@ -230,11 +231,16 @@ class WikiPageUpdater implements PageUpdater {
 				. count( $batch ) . " titles" );
 
 			$jobs[] = InjectRCRecordsJob::makeJobSpecification( $batch, $change, $rootJobParams );
+			$titleCount += count( $batch );
+
+			// FIXME: This is a hot fix for T177707, and must be reconsidered.
+			break;
 		}
 
 		$this->jobQueueGroup->lazyPush( $jobs );
+
 		$this->incrementStats( 'InjectRCRecords.jobs', count( $jobs ) );
-		$this->incrementStats( 'InjectRCRecords.titles', count( $titles ) );
+		$this->incrementStats( 'InjectRCRecords.titles', $titleCount );
 	}
 
 }
