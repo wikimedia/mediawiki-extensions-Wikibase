@@ -268,12 +268,8 @@
 			// the property might not be valid anymore aborting the rendering of the value
 			// view.
 			if ( this._variation ) {
-				$( this._variation ).one( 'afterdraw', function () {
-					// If the variant wasn't actually updated 'afterdraw' will run synchronously,
-					// but we need to break out of the stack here.
-					setTimeout( function () {
-						self._variation.focus();
-					}, 0 );
+				$( this._variation ).one( 'afterstartediting', function () {
+					self._variation.focus();
 				} );
 			}
 
