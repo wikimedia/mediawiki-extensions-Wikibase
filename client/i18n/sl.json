@@ -44,6 +44,8 @@
 	"wikibase-rc-show-wikidata-pref": "Pokaži urejanja {{GRAMMAR:rodilnik|{{WBREPONAME}}}} v zadnjih spremembah",
 	"wikibase-rc-wikibase-edit-letter": "P",
 	"wikibase-rc-wikibase-edit-title": "urejanje v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Urejanja v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Urejanja, ki so narejena v {{GRAMMAR:mestnik|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Spremembe se bodo na vseh wikijih morda prikazale šele po več minutah.",
 	"wikibase-watchlist-show-changes-pref": "Pokaži urejanja {{GRAMMAR:rodilnik|{{WBREPONAME}}}} v spisku nadzorov",
 	"wikibase-error-serialize-error": "Serializacija podatkov ni uspela.",
@@ -55,7 +57,7 @@
 	"wikibase-pageinfo-entity-id-none": "Brez",
 	"wikibase-property-render-error": "Upodobitev lastnosti $1 je spodletela: $2",
 	"wikibase-otherprojects": "V drugih projektih",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezava|Povezavi|Povezave|Povezav}} z {{WBREPONAME}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezava|Povezavi|Povezave|Povezav}} z {{GRAMMAR:orodnik|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Obvesti me, ko nekdo poveže stran, ki {{GENDER:|sem jo ustvaril}} z njenim objektom na {{WBREPONAME}}.",
 	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} z {{PLURAL:$4|objektom v {{WBREPONAME}}}}, ki vsebuje podatke, povezane s temo.",
 	"notification-subject-page-connection": "Stran {{SITENAME}}, ki so jo {{GENDER:$3|ustvaril|ustvarila}}, je bila  {{GENDER:$2|povezana}} s svojim objetom v {{WBREPONAME}}"

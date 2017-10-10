@@ -37,5 +37,6 @@
 	"wikibase-pageinfo-entity-id": "ID de l eilemiento {{WBREPONAME}}",
 	"wikibase-otherprojects": "Noutros porjetos",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Lhigaçon|Lhigaçones}} cun {{WBREPONAME}}",
-	"echo-pref-tooltip-wikibase-action": "Abisar-me quando alguien lhigar ua páigina que {{GENDER:|you tenga criado}} pa un eilemiento {{WBREPONAME}}."
+	"echo-pref-tooltip-wikibase-action": "Abisar-me quando alguien lhigar ua páigina que {{GENDER:|you tenga criado}} pa un eilemiento {{WBREPONAME}}.",
+	"unresolved-property-category": "Páiginas que refrencian propiadades ineisistentes"
 }
