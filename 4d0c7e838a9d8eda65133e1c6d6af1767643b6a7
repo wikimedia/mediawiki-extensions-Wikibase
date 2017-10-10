@@ -46,6 +46,29 @@
       "revId": "4d0c7e838a9d8eda65133e1c6d6af1767643b6a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_1a5d374a",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-10T17:53:02Z",
+      "side": 1,
+      "message": "But this is wrong now, isn\u0027t it?",
+      "range": {
+        "startLine": 280,
+        "startChar": 32,
+        "endLine": 280,
+        "endChar": 33
+      },
+      "revId": "4d0c7e838a9d8eda65133e1c6d6af1767643b6a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
