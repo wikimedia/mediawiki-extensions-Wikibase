@@ -2,27 +2,13 @@
 
 JavaScript library containing serializers and deserializers for the Wikibase DataModel.
 
-## Installation
-
-The recommended way to use this library is via [Composer](http://getcomposer.org/).
-
-To add this package as a local, per-project dependency to your project, simply add a
-dependency on `wikibase/serialization-javascript` to your project's `composer.json` file.
-Here is a minimal example of a `composer.json` file that just defines a dependency on
-version 2.0 of this package:
-
-```json
-{
-	"require": {
-		"wikibase/serialization-javascript": "2.0.*"
-	}
-}
-```
-
 ## Release notes
 
 ### 3.0.0 (dev)
 
+* Made the library a pure JavaScript library.
+* Removed MediaWiki ResourceLoader module definitions.
+* Raised DataValues JS library version requirement to 0.10.0, and Wikibase Data Model JS library version requirement to 4.0.0.
 * Removed all serializers and deserializers for Claim collections:
   * Removed ClaimGroupDeserializer
   * Removed ClaimGroupSerializer
