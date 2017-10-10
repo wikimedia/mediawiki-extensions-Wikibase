@@ -6,6 +6,10 @@ use Wikibase\AddUnitConversions;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Repo\Maintenance\SPARQLClient;
 
+/**
+ * @license GPL-2.0+
+ * @author Stas Malyshev
+ */
 class MockAddUnits extends AddUnitConversions {
 
 	/**

@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Specials\HTMLForm;
 use HTMLTextField;
 use Wikibase\StringNormalizer;
 
+/**
+ * @license GPL-2.0+
+ */
 class HTMLTrimmedTextField extends HTMLTextField {
 
 	/**
