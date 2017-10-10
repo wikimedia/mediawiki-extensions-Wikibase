@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_fa5dc3ef",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-10-10T16:43:27Z",
+      "side": 1,
+      "message": "```\nif ( this._variation ) {\n    $( this._variation ).one( \u0027afterstartediting\u0027, function () {\n\tself._variation.focus();\n    } );\n}\n```",
+      "range": {
+        "startLine": 271,
+        "startChar": 4,
+        "endLine": 277,
+        "endChar": 8
+      },
+      "revId": "da6c3aa3929d8d6ba9c3a5600eb262fe37700f27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
