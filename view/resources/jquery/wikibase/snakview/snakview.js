@@ -273,7 +273,7 @@
 					// but we need to break out of the stack here.
 					setTimeout( function () {
 						self._variation.focus();
-					}, 0 );
+					}, 10 );
 				} );
 			}
 
