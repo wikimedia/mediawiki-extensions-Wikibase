@@ -380,7 +380,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getEntityId in WikibaseLuaBindings
+	 * Wrapper for getEntityId in WikibaseLanguageIndependentLuaBindings
 	 *
 	 * @param string|null $pageTitle
 	 *
@@ -392,7 +392,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getSetting in WikibaseLuaBindings
+	 * Wrapper for getSetting in WikibaseLanguageIndependentLuaBindings
 	 *
 	 * @param string $setting
 	 *
@@ -438,7 +438,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getLabel in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getLabel in WikibaseLanguageDependentLuaBindings
 	 *
 	 * @param string $prefixedEntityId
 	 *
@@ -466,7 +466,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getDescription in Scribunto_LuaWikibaseLibraryImplementation
+	 * Wrapper for getDescription in WikibaseLanguageDependentLuaBindings
 	 *
 	 * @param string $prefixedEntityId
 	 *
@@ -479,7 +479,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Wrapper for getSiteLinkPageName in WikibaseLuaBindings
+	 * Wrapper for getSiteLinkPageName in WikibaseLanguageIndependentLuaBindings
 	 *
 	 * @param string $prefixedItemId
 	 * @param string|null $globalSiteId
