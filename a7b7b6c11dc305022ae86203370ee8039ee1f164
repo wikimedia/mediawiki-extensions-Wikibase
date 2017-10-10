@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_54a0668d",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-10T12:01:21Z",
+      "side": 1,
+      "message": "Please add statsd tracking for this case.\nOther than that, this change seems fine.\nI haven\u0027t checked all details again since my last review though.",
+      "revId": "a7b7b6c11dc305022ae86203370ee8039ee1f164",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
