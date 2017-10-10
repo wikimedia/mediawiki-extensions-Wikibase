@@ -72,7 +72,8 @@ module.exports = ( function( $, vv, TimeValue ) {
 			function() {
 				var value = self.viewState().value();
 				return value && value.getOption( 'precision' );
-			}
+			},
+			this._messageProvider
 		);
 
 		var calendarMsgKey = 'valueview-expert-timeinput-calendar';
@@ -89,7 +90,8 @@ module.exports = ( function( $, vv, TimeValue ) {
 			function() {
 				var value = self.viewState().value();
 				return value && value.getOption( 'calendarModel' );
-			}
+			},
+			this._messageProvider
 		);
 
 		var inputExtender = new vv.ExpertExtender(

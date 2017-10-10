@@ -15,8 +15,9 @@
 	 * @param {Function} onValueChange Callback to be triggered when the listrotator's value is
 	 *        changed.
 	 * @param {Function} getUpstreamValue Callback to retrieve the value from a parent component.
+	 * @param {util.MessageProvider} messageProvider
 	 */
-	ExpertExtender.Listrotator = function( className, values, onValueChange, getUpstreamValue ) {
+	ExpertExtender.Listrotator = function( className, values, onValueChange, getUpstreamValue, messageProvider ) {
 		this._onValueChange = onValueChange;
 		this._getUpstreamValue = getUpstreamValue;
 
@@ -24,7 +25,8 @@
 			.addClass( className )
 			.listrotator( {
 				values: values,
-				deferInit: true
+				deferInit: true,
+				messageProvider: messageProvider
 			} );
 		this.rotator = $rotator.data( 'listrotator' );
 	};

@@ -8,10 +8,14 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.Listrotator' );
 
+	var messageProvider = {
+		getMessage: function() { }
+	};
+
 	testExpertExtenderExtension.all(
 		ExpertExtender.Listrotator,
 		function() {
-			return new ExpertExtender.Listrotator( '', [ { value: 'value', label: 'label' } ] );
+			return new ExpertExtender.Listrotator( '', [ { value: 'value', label: 'label' } ], null, null, messageProvider );
 		}
 	);
 
@@ -30,7 +34,8 @@
 			'',
 			[ { value: 'fixed value', label: 'label for fixed value' } ],
 			null,
-			getUpstreamValue
+			getUpstreamValue,
+			messageProvider
 		);
 
 		listrotator.init( $extender );
@@ -57,7 +62,8 @@
 			'',
 			[ { value: 'fixed value', label: 'label for fixed value' } ],
 			onValueChange,
-			getUpstreamValue
+			getUpstreamValue,
+			messageProvider
 		);
 
 		listrotator.init( $extender );

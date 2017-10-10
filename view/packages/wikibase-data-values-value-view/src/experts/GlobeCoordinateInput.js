@@ -149,7 +149,8 @@ module.exports = ( function( $, vv ) {
 						[ getPrecisionLabel( precision ) ]
 					)
 				};
-			}
+			},
+			this._messageProvider
 		);
 
 		var inputExtender = new vv.ExpertExtender(

@@ -2,36 +2,6 @@
 	'use strict';
 
 /**
- * Whether loaded in MediaWiki context.
- * @property {boolean}
- * @ignore
- */
-var IS_MW_CONTEXT = ( typeof mediaWiki !== 'undefined' && mediaWiki.msg );
-
-/**
- * Whether actual listrotator resource loader module is loaded.
- * @property {boolean}
- * @ignore
- */
-var IS_MODULE_LOADED = (
-	IS_MW_CONTEXT
-		&& $.inArray( 'jquery.ui.listrotator', mediaWiki.loader.getModuleNames() ) !== -1
-	);
-
-/**
- * Returns a message from the MediaWiki context if the listrotator module has been loaded.
- * If it has not been loaded, the corresponding string defined in the options will be returned.
- * @ignore
- *
- * @param {string} msgKey
- * @param {string} string
- * @return {string}
- */
-function mwMsgOrString( msgKey, string ) {
-	return ( IS_MODULE_LOADED ) ? mediaWiki.msg( msgKey ) : string;
-}
-
-/**
  * Measures the maximum width of a container according to a list of strings. The width is
  * determined by the widest string.
  * @ignore
@@ -79,6 +49,7 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {boolean} [options.deferInit=false]
  *        Whether to defer initializing the section widths until `initWidths()` is called
  *        "manually".
+ * @param {util.MessageProvider} options.messageProvider
  */
 /**
  * @event selected
@@ -107,9 +78,7 @@ $.widget( 'ui.listrotator', {
 			}
 		},
 		deferInit: false,
-		messages: {
-			manually: mwMsgOrString( 'valueview-listrotator-manually', 'manually' )
-		}
+		messageProvider: null
 	},
 
 	/**
@@ -156,7 +125,7 @@ $.widget( 'ui.listrotator', {
 		this.element.append( this.$curr );
 		this.element.append( $( '<label/>' )
 			.addClass( this.widgetBaseClass + '-manually' )
-			.text( this.options.messages.manually )
+			.text( this.options.messageProvider.getMessage( 'valueview-listrotator-manually' ) )
 			.prepend( this.$manually ) );
 
 		// Construct and initialize menu widget:
