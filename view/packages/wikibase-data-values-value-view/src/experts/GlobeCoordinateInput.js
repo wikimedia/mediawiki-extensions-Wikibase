@@ -204,8 +204,15 @@ module.exports = ( function( $, vv ) {
 		 * @inheritdoc
 		 */
 		destroy: function() {
-			this.precisionRotator = null;
-			this.preview = null;
+			if ( this.precisionRotator ) {
+				this.precisionRotator.destroy();
+				this.precisionRotator = null;
+			}
+			if ( this.preview ) {
+				this.preview.destroy();
+				this.preview = null;
+			}
+
 			PARENT.prototype.destroy.call( this );
 		}
 	} );

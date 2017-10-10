@@ -2,8 +2,8 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
- jQuery.valueview.tests = jQuery.valueview.tests || {};
- jQuery.valueview.tests.testExpert = ( function( $, QUnit, valueview, Notifier ) {
+jQuery.valueview.tests = jQuery.valueview.tests || {};
+jQuery.valueview.tests.testExpert = ( function( $, QUnit, valueview, Notifier ) {
 
 'use strict';
 
@@ -21,25 +21,24 @@ function testExpert( testDefinition ) {
 
 	var Expert = testDefinition.expertConstructor;
 
-	// Used as source for expertProviders.
 	function createExpertDefinitions() {
 		return [
 			{
 				title: 'instance without notifier',
-				args: [
+				constructorArgs: [
 					$( '<span/>' ),
 					new valueview.tests.MockViewState()
 				]
 			}, {
 				title: 'instance with notifier',
-				args: [
+				constructorArgs: [
 					document.createElement( 'div' ),
 					new valueview.tests.MockViewState(),
 					new Notifier()
 				]
 			}, {
 				title: 'instance with ViewState of disabled view',
-				args: [
+				constructorArgs: [
 					$( '<div/>' ),
 					new valueview.tests.MockViewState( { isDisabled: true } ),
 					new Notifier()
@@ -48,48 +47,20 @@ function testExpert( testDefinition ) {
 		];
 	}
 
-	/**
-	 * Returns an array of Functions. Each function returns an object with the following fields
-	 * when executed:
-	 * - expert: A valueview Expert instance.
-	 * - constructorArgs: Arguments used to construct the expert given in the "expert" field.
-	 *
-	 * Each function has a "title" field which describes the expert instance mentioned above.
-	 *
-	 * @return {Function[]}
-	 */
-	function createExpertsProvider() {
-		return $.map( createExpertDefinitions(), function( definition ) {
-			// Provide a setup function for test case parameter creation instead of creating a case
-			// definition object directly. If that would be done later, the expert would already
-			// be created and, in some cases, create conflicts with other tests since some experts
-			// immediately instantiate certain widgets (e.g. inputextender).
-			var caseSetup = function() {
-				var $viewPort = definition.args[0],
-					viewState = definition.args[1],
-					notifier = definition.args[2];
-
-				var expert = new Expert( $viewPort, viewState, notifier, { messages: {} } );
-				expert.init();
-
-				return {
-					expert: expert,
-					constructorArgs: definition.args
-				};
-			};
-			caseSetup.title = definition.title;
-			return caseSetup;
-		} );
-	}
-
-	var expertCases = QUnit.cases( createExpertsProvider );
-
 	// We always have to destroy experts so all widgets used by them get destroyed as well in case
 	// they add something to the body.
 	function expertCasesTestAndCleanup( description, testFn ) {
-		expertCases.test( description, function( args, assert ) {
-			testFn( args, assert );
-			args.expert.destroy();
+		createExpertDefinitions().forEach( function ( definition ) {
+			QUnit.test( description + ' (' + definition.title + ')', function( assert ) {
+				var $viewPort = definition.constructorArgs[0],
+					viewState = definition.constructorArgs[1],
+					notifier = definition.constructorArgs[2];
+
+				definition.expert = new Expert( $viewPort, viewState, notifier, { messages: {} } );
+				definition.expert.init();
+				testFn( definition, assert );
+				definition.expert.destroy();
+			} );
 		} );
 	}
 

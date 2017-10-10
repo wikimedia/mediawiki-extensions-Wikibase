@@ -267,13 +267,13 @@
 		} );
 	}
 
-	QUnit
-	.cases( expertStoreRegistrationTestCases )
-		.test(
+	expertStoreRegistrationTestCases.forEach( function ( params ) {
+		QUnit.test(
 			'registerDataTypeExpert()/registerDataValueExpert() & getExpert()',
-			function( params, assert ) {
+			function( assert ) {
 				expertStoreRegistrationTest( assert, params.register, params.expect );
 			}
 		);
+	} );
 
 }( jQuery, dataValues, QUnit ) );

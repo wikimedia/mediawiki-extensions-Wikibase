@@ -60,10 +60,12 @@
 		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
-			this._preview.destroy();
-			this._preview.element.remove();
+			if ( this._preview ) {
+				this._preview.destroy();
+				this._preview.element.remove();
+				this._preview = null;
+			}
 
-			this._preview = null;
 			this._getUpstreamValue = null;
 		},
 

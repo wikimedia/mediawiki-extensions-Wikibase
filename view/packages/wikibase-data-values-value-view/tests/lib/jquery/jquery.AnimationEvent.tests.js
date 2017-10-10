@@ -64,7 +64,7 @@
 	} );
 
 	QUnit.test( 'animationOptions()', function( assert ) {
-		assert.expect( 9 );
+		assert.expect( AnimationEvent.ANIMATION_STEPS.length + 2 );
 		var event = AnimationEvent( 'animationpurpose' );
 		var predefined = {
 			easing: 'swing',

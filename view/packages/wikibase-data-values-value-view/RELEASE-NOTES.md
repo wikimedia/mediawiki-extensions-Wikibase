@@ -1,5 +1,14 @@
 # ValueView release notes
 
+## 0.21.0 (2017-10-10)
+* Removed `jQuery.valueview.ExpertExtender.CalendarHint`.
+* Removed dependency on `globeCoordinate.Formatter`.
+* Removed dependency on the [Parameterize](https://github.com/AStepaniuk/qunit-parameterize) QUnit plugin.
+* Fixed `jQuery.valueview.ExpertExtender.Preview.destroy` failing when called twice.
+* Fixed incomplete `jQuery.valueview.experts.GlobeCoordinateInput.destroy`.
+* Fixed incomplete `jQuery.valueview.experts.TimeInput.destroy`.
+* Made all tests compatible with QUnit 2.
+
 ## 0.20.1 (2017-08-03)
 * Fixed `jQuery.ui.suggester` and `jQuery.animateWithEvent` tests.
 

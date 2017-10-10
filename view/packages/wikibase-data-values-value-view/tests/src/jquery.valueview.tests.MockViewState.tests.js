@@ -14,11 +14,12 @@
 	/**
 	 * Helper which returns a test function for a member of MockViewState.
 	 *
+	 * @param {Object} params
 	 * @param {string} memberName
 	 * @return {Function}
 	 */
-	function buildMemberTestFn( memberName ) {
-		return function( params, assert ) {
+	function buildMemberTestFn( params, memberName ) {
+		return function( assert ) {
 			assert.expect( 1 );
 			var viewState = new MockViewState( params.constructorArg );
 
@@ -30,8 +31,7 @@
 		};
 	}
 
-	QUnit
-	.cases( [
+	var testCases = [
 		{
 			title: 'without constructor argument',
 			constructorArg: undefined,
@@ -79,8 +79,10 @@
 			optionFoo: true,
 			optionBar: undefined
 		}
-	] )
-		.test( 'constructor', function( params, assert ) {
+	];
+
+	testCases.forEach( function ( params ) {
+		QUnit.test( 'constructor', function( assert ) {
 			assert.expect( 2 );
 			var viewState = new MockViewState( params.constructorArg );
 
@@ -93,11 +95,15 @@
 				viewState instanceof ViewState,
 				'Constructed MockViewState is instanceof ViewState'
 			);
-		} )
-		.test( 'isInEditMode', buildMemberTestFn( 'isInEditMode' ) )
-		.test( 'isDisabled', buildMemberTestFn( 'isDisabled' ) )
-		.test( 'value', buildMemberTestFn( 'value' ) )
-		.test( 'option', function( params, assert ) {
+		} );
+
+		QUnit.test( 'isInEditMode', buildMemberTestFn( params, 'isInEditMode' ) );
+
+		QUnit.test( 'isDisabled', buildMemberTestFn( params, 'isDisabled' ) );
+
+		QUnit.test( 'value', buildMemberTestFn( params, 'value' ) );
+
+		QUnit.test( 'option', function( assert ) {
 			assert.expect( 2 );
 			var viewState = new MockViewState( params.constructorArg );
 
@@ -112,8 +118,8 @@
 				params.optionBar,
 				'Option "bar" holds injected value'
 			);
-
 		} );
+	} );
 
 	QUnit.test( 'Changing state after construction', function( assert ) {
 		assert.expect( 2 );

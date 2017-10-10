@@ -54,112 +54,118 @@
 		}
 	];
 
-	var elemsCases = QUnit.cases( elemsCasesData );
+	elemsCasesData.forEach( function ( params ) {
+		QUnit.test( 'Focusing with valid parameter', function( assert ) {
+			assert.expect( 10 );
+			var $dom = getDomInsertionTestViewport(),
+				positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
 
-	elemsCases.test( 'Focusing with valid parameter', function( params, assert ) {
-		assert.expect( 10 );
-		var $dom = getDomInsertionTestViewport(),
-			positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
-
-		$.each( positions, function( i, pos ) {
-			// Put element in DOM, since Firefox expects this
-			$dom.append( params.elem );
-			assert.ok(
-				params.elem.focusAt( pos ),
-				'focusAt takes "' + pos + '" as a valid position for the element'
-			);
-			params.elem.remove();
+			$.each( positions, function( i, pos ) {
+				// Put element in DOM, since Firefox expects this
+				$dom.append( params.elem );
+				assert.ok(
+					params.elem.focusAt( pos ),
+					'focusAt takes "' + pos + '" as a valid position for the element'
+				);
+				params.elem.remove();
+			} );
 		} );
 	} );
 
-	elemsCases.test( 'Focusing with invalid parameter', function( params, assert ) {
-		assert.expect( 5 );
-		var positions = [ null, undefined, 'foo', [], {} ];
+	elemsCasesData.forEach( function ( params ) {
+		QUnit.test( 'Focusing with invalid parameter', function( assert ) {
+			assert.expect( 5 );
+			var positions = [ null, undefined, 'foo', [], {} ];
 
-		$.each( positions, function( i, pos ) {
-			assert.throws(
-				function() {
-					params.elem.focusAt( pos );
-				},
-				'focusAt does not take "' + pos + '" as a valid position for the element'
-			);
+			$.each( positions, function( i, pos ) {
+				assert.throws(
+					function() {
+						params.elem.focusAt( pos );
+					},
+					'focusAt does not take "' + pos + '" as a valid position for the element'
+				);
+			} );
 		} );
 	} );
 
-	elemsCases.test( 'Focusing element, not in DOM yet', function( params, assert ) {
-		assert.expect( 2 );
-		var $dom = getDomInsertionTestViewport(),
-			elem = params.elem;
+	elemsCasesData.forEach( function ( params ) {
+		QUnit.test( 'Focusing element, not in DOM yet', function( assert ) {
+			assert.expect( 2 );
+			var $dom = getDomInsertionTestViewport(),
+				elem = params.elem;
 
-		if ( !$dom.length ) {
-			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
-		}
+			if ( !$dom.length ) {
+				throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
+			}
 
-		try {
-			assert.ok(
-				elem.focusAt( 0 ),
-				'Can call focusAt on element not in DOM yet.'
-			);
-		} catch ( e ) {
-			assert.expect( 1 );
-			assert.ok(
-				e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
-				'Unable to focus since browser requires element to be in the DOM.'
-			);
-			return;
-		}
+			try {
+				assert.ok(
+					elem.focusAt( 0 ),
+					'Can call focusAt on element not in DOM yet.'
+				);
+			} catch ( e ) {
+				assert.expect( 1 );
+				assert.ok(
+					e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
+					'Unable to focus since browser requires element to be in the DOM.'
+				);
+				return;
+			}
 
-		$( ':focus' ).blur();
-		elem.appendTo( $dom );
+			$( ':focus' ).blur();
+			elem.appendTo( $dom );
 
-		assert.equal(
-			$( ':focus' ).length,
-			0,
-			'After inserting focused element into DOM, the element is not focused since there is' +
-				'no state tracking focus for those elements not in the DOM.'
-		);
-		elem.remove();
-	} );
-
-	elemsCases.test( 'Focusing element in DOM', function( params, assert ) {
-		var $dom = getDomInsertionTestViewport(),
-			elem = params.elem,
-			isOk;
-
-		if ( !$dom.length ) {
-			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
-		}
-
-		$( ':focus' ).blur();
-		elem.appendTo( $dom );
-
-		// Check if focussing actually works
-		elem.focus();
-		if ( !elem.is( ':focus' ) ) {
-			assert.expect( 1 );
-			assert.ok( 'Could not test because focussing does not work.' );
-			return;
-		}
-		assert.expect( 3 );
-		elem.blur();
-		assert.ok( !elem.is( ':focus' ) );
-
-		assert.ok(
-			elem.focusAt( 0 ),
-			'Can call focusAt on element in DOM'
-		);
-
-		if ( !params.focusable ) {
 			assert.equal(
 				$( ':focus' ).length,
 				0,
-				'Element is a non-focusable element and no focus is active'
+				'After inserting focused element into DOM, the element is not focused since there is' +
+					'no state tracking focus for those elements not in the DOM.'
 			);
-		} else {
-			isOk = $( ':focus' ).filter( elem ).length;
-			assert.ok( isOk, 'Focused element has focus set.' );
-		}
-		elem.remove();
+			elem.remove();
+		} );
+	} );
+
+	elemsCasesData.forEach( function ( params ) {
+		QUnit.test( 'Focusing element in DOM', function( assert ) {
+			var $dom = getDomInsertionTestViewport(),
+				elem = params.elem,
+				isOk;
+
+			if ( !$dom.length ) {
+				throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
+			}
+
+			$( ':focus' ).blur();
+			elem.appendTo( $dom );
+
+			// Check if focussing actually works
+			elem.focus();
+			if ( !elem.is( ':focus' ) ) {
+				assert.expect( 1 );
+				assert.ok( 'Could not test because focussing does not work.' );
+				return;
+			}
+			assert.expect( 3 );
+			elem.blur();
+			assert.ok( !elem.is( ':focus' ) );
+
+			assert.ok(
+				elem.focusAt( 0 ),
+				'Can call focusAt on element in DOM'
+			);
+
+			if ( !params.focusable ) {
+				assert.equal(
+					$( ':focus' ).length,
+					0,
+					'Element is a non-focusable element and no focus is active'
+				);
+			} else {
+				isOk = $( ':focus' ).filter( elem ).length;
+				assert.ok( isOk, 'Focused element has focus set.' );
+			}
+			elem.remove();
+		} );
 	} );
 
 }( jQuery, QUnit ) );

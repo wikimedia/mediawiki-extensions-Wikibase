@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
- ( function( QUnit, valueview ) {
+( function( QUnit, valueview ) {
 	'use strict';
 
 	var testExpert = valueview.tests.testExpert;

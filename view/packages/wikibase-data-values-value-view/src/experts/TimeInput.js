@@ -148,9 +148,18 @@ module.exports = ( function( $, vv, TimeValue ) {
 		 * @inheritdoc
 		 */
 		destroy: function() {
-			this.preview = null;
-			this.precisionRotator = null;
-			this.calendarRotator = null;
+			if ( this.calendarRotator ) {
+				this.calendarRotator.destroy();
+				this.calendarRotator = null;
+			}
+			if ( this.precisionRotator ) {
+				this.precisionRotator.destroy();
+				this.precisionRotator = null;
+			}
+			if ( this.preview ) {
+				this.preview.destroy();
+				this.preview = null;
+			}
 
 			PARENT.prototype.destroy.call( this ); // empties viewport
 		},

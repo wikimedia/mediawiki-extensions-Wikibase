@@ -26,7 +26,6 @@ return call_user_func( function() {
 				'dataValues.values',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.tests.MockExpert',
-				'qunit.parameterize',
 			),
 		),
 
@@ -69,7 +68,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.tests.MockViewState',
-				'qunit.parameterize',
 			),
 		),
 
@@ -80,7 +78,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview.Expert',
 				'jquery.valueview.tests.MockViewState',
-				'qunit.parameterize',
 				'util.Notifier',
 			),
 		),
