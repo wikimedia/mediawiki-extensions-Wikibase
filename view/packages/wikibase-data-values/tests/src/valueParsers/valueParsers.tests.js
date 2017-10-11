@@ -124,9 +124,8 @@
 					} )
 					.fail( function( errorMessage ) {
 						assert.ok( false, 'parsing ' + inputDetailMsg + 'failed: ' + errorMessage );
-					} );
-
-				done();
+					} )
+					.always( done );
 			} );
 		}
 

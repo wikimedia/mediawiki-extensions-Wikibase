@@ -98,7 +98,6 @@
 					inputDetailMsg = typeof formatInput === 'string'
 						? 'for input "' + formatInput + '" '
 						: '',
-					request,
 					done = assert.async();
 
 				if( $.isArray( expected ) ) {
@@ -136,16 +135,14 @@
 						'Returned DataValue ' + inputDetailMsg + 'is equal to the expected '
 							+ 'DataValue.'
 					);
-
 				} )
 				.fail( function( errorMessage ) {
 					assert.ok(
 						false,
 						'Formatting ' + inputDetailMsg + 'failed: ' + errorMessage
 					);
-				} );
-
-				done();
+				} )
+				.always( done );
 			} );
 		}
 
