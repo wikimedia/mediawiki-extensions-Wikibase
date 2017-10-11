@@ -26,6 +26,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetDescriptionTest extends ModifyTermTestCase {
 
+	/**
+	 * @var bool
+	 */
 	private static $hasSetup;
 
 	protected function setUp() {
@@ -139,6 +142,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 	/**
 	 * @param User $user
+	 *
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
@@ -148,11 +152,15 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		return $itemRevision->getEntity();
 	}
 
+	/**
+	 * @param string $groupName
+	 *
+	 * @return User
+	 */
 	private function createUserWithGroup( $groupName ) {
 		$user = $this->createTestUser()->getUser();
 		$user->addGroup( $groupName );
 		return $user;
-
 	}
 
 	private function getSetDescriptionRequestParams( ItemId $id ) {

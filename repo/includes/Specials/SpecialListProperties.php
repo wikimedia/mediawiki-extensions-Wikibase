@@ -27,7 +27,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	/**
 	 * Max server side caching time in seconds.
 	 *
-	 * @type integer
+	 * @var int
 	 */
 	const CACHE_TTL_IN_SECONDS = 30;
 

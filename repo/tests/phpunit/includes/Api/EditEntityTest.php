@@ -491,11 +491,15 @@ class EditEntityTest extends WikibaseApiTestCase {
 		return $result['entity'];
 	}
 
+	/**
+	 * @param string $groupName
+	 *
+	 * @return User
+	 */
 	private function createUserWithGroup( $groupName ) {
 		$user = $this->createTestUser()->getUser();
 		$user->addGroup( $groupName );
 		return $user;
-
 	}
 
 	private function addSiteLink( $id ) {

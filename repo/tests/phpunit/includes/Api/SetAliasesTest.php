@@ -26,6 +26,9 @@ use Wikimedia\TestingAccessWrapper;
  */
 class SetAliasesTest extends ModifyTermTestCase {
 
+	/**
+	 * @var bool
+	 */
 	private static $hasSetup;
 
 	protected function setUp() {
@@ -346,6 +349,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 	/**
 	 * @param User $user
+	 *
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
@@ -355,11 +359,15 @@ class SetAliasesTest extends ModifyTermTestCase {
 		return $itemRevision->getEntity();
 	}
 
+	/**
+	 * @param string $groupName
+	 *
+	 * @return User
+	 */
 	private function createUserWithGroup( $groupName ) {
 		$user = $this->createTestUser()->getUser();
 		$user->addGroup( $groupName );
 		return $user;
-
 	}
 
 	private function getAddAliasRequestParams( ItemId $id ) {

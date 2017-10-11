@@ -297,7 +297,7 @@ class SearchEntities extends ApiBase {
 				self::PARAM_TYPE => [ 'url' ],
 				ApiBase::PARAM_ISMULTI => true,
 				self::PARAM_DFLT => 'url',
-		    ]
+			],
 		];
 	}
 

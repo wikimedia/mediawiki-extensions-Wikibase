@@ -211,7 +211,7 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 			'other language, label' => [
 				[ 'en' ],
 				[ 'en' ],
-			    [
+				[
 					'_source' => [
 						'title' => 'Q56',
 						'labels' => [

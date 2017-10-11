@@ -20,7 +20,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RebuildTermSqlIndex extends Maintenance  {
+class RebuildTermSqlIndex extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
