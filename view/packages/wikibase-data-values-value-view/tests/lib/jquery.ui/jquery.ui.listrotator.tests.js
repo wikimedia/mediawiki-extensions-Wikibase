@@ -15,7 +15,12 @@
 				{ value: 1, label: 'one' },
 				{ value: 2, label: 'two' },
 				{ value: 3, label: 'three' }
-			]
+			],
+			messageProvider: {
+				getMessage: function ( msg ) {
+					return msg;
+				}
+			}
 		}, options || {} );
 
 		var $div = $( '<div/>' )
