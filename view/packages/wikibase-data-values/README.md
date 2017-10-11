@@ -1,7 +1,13 @@
 # DataValues JavaScript
 
-This component is in alpha state and not suitable for reuse yet.
-It contains various JavaScript related to the DataValues library.
+This library contains JavaScript implementations of all basic DataValue classes used in the
+[Wikibase software](http://wikiba.se/), along with associated parsers and formatters. This library
+mirrors most of the PHP implementations of DataValue classes as specified in the
+[DataValues set of libraries](https://github.com/DataValues) (most notably the
+[basic](https://github.com/DataValues/DataValues),
+[Geo](https://github.com/DataValues/Geo,
+[Number](https://github.com/DataValues/Number), and
+[Time](https://github.com/DataValues/Time) libraries).
 
 [![Build Status](https://secure.travis-ci.org/wmde/DataValuesJavaScript.png?branch=master)](http://travis-ci.org/wmde/DataValuesJavaScript)
 

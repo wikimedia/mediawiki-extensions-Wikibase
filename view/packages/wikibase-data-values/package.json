@@ -1,6 +1,6 @@
 {
 	"name": "wikibase-data-values",
-	"description": "DataValues implementation in JavaScript",
+	"description": "JavaScript implementations of all basic DataValue classes, associated parsers and formatters",
 	"keywords": [
 		"datavalues",
 		"wikidata"
