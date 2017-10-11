@@ -279,6 +279,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 				// FIXME: Because of the hot fix for T177707 we expect only the first batch.
 				'InjectRCRecords.jobs' => 1,
 				'InjectRCRecords.titles' => 2,
+				'InjectRCRecords.discardedTitles' => 1,
 			] )
 		);
 		$updater->setRecentChangesBatchSize( 2 );

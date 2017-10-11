@@ -241,6 +241,9 @@ class WikiPageUpdater implements PageUpdater {
 
 		$this->incrementStats( 'InjectRCRecords.jobs', count( $jobs ) );
 		$this->incrementStats( 'InjectRCRecords.titles', $titleCount );
+
+		// tracking fallout of the hacky fix for T177707
+		$this->incrementStats( 'InjectRCRecords.discardedTitles', count( $titles ) - $titleCount );
 	}
 
 }
