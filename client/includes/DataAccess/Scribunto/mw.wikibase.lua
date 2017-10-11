@@ -4,7 +4,7 @@
 
 	@since 0.4
 
-	@licence GNU GPL v2+
+	@license GNU GPL v2+
 	@author Jens Ohlig < jens.ohlig@wikimedia.de >
 	@author Marius Hoch < hoo@online.de >
 	@author Bene* < benestar.wikimedia@gmail.com >

@@ -18,7 +18,7 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 	 * Can be used without label - has some predefined value.
 	 *  - Doesn't accept any of options parameters.
 	 *
-	 * @inheritdoc
+	 * @inheritDoc
 	 *
 	 * @see \HTMLForm There is detailed description of the allowed $params (named $info there).
 	 */

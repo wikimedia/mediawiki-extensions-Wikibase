@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 /**
  * Basic display logic to output badges in the sidebar
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  */
 class SidebarLinkBadgeDisplay {
 
