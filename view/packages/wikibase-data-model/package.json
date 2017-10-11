@@ -1,6 +1,6 @@
 {
   "name": "wikibase-data-model",
-  "description": "Wikibase datamodel implementation in JavaScript",
+  "description": "JavaScript implementation of the basic Wikibase DataModel entity types and components they are made of",
   "version": "4.0.0",
   "directories": {
     "lib": "src",
