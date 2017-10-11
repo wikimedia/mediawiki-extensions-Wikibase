@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_bdaf4290",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-11T04:57:00Z",
+      "side": 1,
+      "message": "As the library become rich with different function with slight differences it might be a relevant to have high level description. I wouldn\u0027t expect someone to actually read all the docs :)\n\nExample:\n{| Func                  ||  Entity Func || Language \n| [[#...|label]]          || getLabel || user lang or content\n| getLabelWithLang        || getLabelWithLang || user lang or content\n| getLabelByLang          || -     || specified lang\n|}",
+      "revId": "3e54e095c09d84dc3c372e0d32ea47bc3d397e81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
