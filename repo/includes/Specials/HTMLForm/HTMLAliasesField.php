@@ -29,7 +29,7 @@ class HTMLAliasesField extends HTMLTextField {
 	 * - Doesn't accept `filter-callback` parameter.
 	 * - Doesn't accept `type` parameter.
 	 *
-	 * @inheritdoc
+	 * @inheritDoc
 	 *
 	 * @see \HTMLForm There is detailed description of the allowed $params (named $info there).
 	 */

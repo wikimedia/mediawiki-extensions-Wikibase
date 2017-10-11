@@ -23,7 +23,7 @@ class HTMLItemReferenceField extends \HTMLTextField {
 	 * - Can be used without placeholder - has some predefined value.
 	 * - Doesn't accept `type` parameter.
 	 *
-	 * @inheritdoc
+	 * @inheritDoc
 	 *
 	 * @see \HTMLForm There is detailed description of the allowed $params (named $info there).
 	 */

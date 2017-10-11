@@ -12,7 +12,7 @@
  *
  * @see docs/entiytypes.wiki
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 
