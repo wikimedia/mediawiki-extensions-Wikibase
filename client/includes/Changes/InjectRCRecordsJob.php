@@ -273,7 +273,7 @@ class InjectRCRecordsJob extends Job {
 			}
 		}
 
-		$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken );
+		$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken, [ 'domain' => wfWikiID() ] );
 
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
 
