@@ -276,8 +276,9 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$this->getLBFactoryMock(),
 			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
-				'InjectRCRecords.jobs' => 2, // 2 batches (batch size 2, 3 titles)
-				'InjectRCRecords.titles' => 3,
+				// FIXME: Because of the hot fix for T177707 we expect only the first batch.
+				'InjectRCRecords.jobs' => 1,
+				'InjectRCRecords.titles' => 2,
 			] )
 		);
 		$updater->setRecentChangesBatchSize( 2 );
@@ -288,10 +289,11 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			[ 'rootJobTimestamp' => '20202211060708', 'rootJobSignature' => 'Kittens!', ]
 		);
 
-		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
-		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
-		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
-		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
+		// FIXME: Because of the hot fix for T177707 we expect only the first batch.
+		$this->assertSame( [
+			21 => [ 0, 'Foo' ],
+			22 => [ 0, 'Bar' ],
+		], $pages );
 
 		$this->assertEquals(
 			[
