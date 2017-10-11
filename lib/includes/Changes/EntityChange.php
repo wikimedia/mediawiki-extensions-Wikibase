@@ -2,11 +2,9 @@
 
 namespace Wikibase;
 
-use CentralIdLookup;
 use Deserializers\Deserializer;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory;
-use LocalIdLookup;
 use MWException;
 use RecentChange;
 use Revision;

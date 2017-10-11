@@ -7,7 +7,6 @@ use Html;
 use Language;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;

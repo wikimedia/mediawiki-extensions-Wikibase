@@ -4,7 +4,6 @@ namespace Wikibase\Client\RecentChanges;
 
 use CentralIdLookup;
 use Language;
-use LocalIdLookup;
 use Message;
 use MWException;
 use RecentChange;

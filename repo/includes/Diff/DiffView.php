@@ -8,7 +8,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
-use IContextSource;
 use InvalidArgumentException;
 use MWException;
 use MessageLocalizer;

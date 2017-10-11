@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Serializers\Serializer;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\RecentChanges;
 
-use CentralIdLookup;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
