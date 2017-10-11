@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_407bb923",
+        "filename": "repo/includes/Content/ItemHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-11T09:20:38Z",
+      "side": 1,
+      "message": "The code does not and should not care what implementation it gets. It might be a different \"SomethingSomethingItemFieldDefinitions\" implementation in the future. This code really does not care. All it cares about is if the object does have a \"getFields\" method, which is what the interface guarantees.\n\nThe whole idea of dependency injection is to untangle code from each other.\n\nIf code binds against a super-specific implementation anyway, the whole idea of \"dependency injection via the constructor\" becomes pretty much pointless. We could remove all this injection stuff and simply create the \"ItemFieldsDefiniton\" object the moment it is needed.\n\nBut this is not what we want. We want to be able to test all these things independently from each other. We want to inject a test dummy. Yea, PHPUnit allows to create a mock based on a specific implementation. But this is not what should be best practice. Things become much more obvious when you are able to create a mock from an interface. Then one can clearly see what\u0027s going on: dependency inversion.",
+      "parentUuid": "0e6af365_5ad88ff4",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_1ae2179d",
         "filename": "repo/includes/Content/PropertyHandler.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-10-10T17:46:00Z",
       "side": 1,
       "message": "Same here - while technically it\u0027s FieldDefinitions, it makes no sense to pass anything but Property specific class to Property specific handler.",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_60d35d06",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-11T09:20:38Z",
+      "side": 1,
+      "message": "As before.",
+      "parentUuid": "0e6af365_1ae2179d",
       "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_6076fd3a",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsProviderFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-11T09:20:38Z",
+      "side": 1,
+      "message": "Sure. Can be reworked any time this is needed.",
+      "parentUuid": "0e6af365_faedc389",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_5a864fbf",
         "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2017-10-10T17:46:00Z",
       "side": 1,
       "message": "isset($this-\u003epropertyIDs[$propertyId]) should work the same and would probably be a bit faster, since it\u0027s not a function call.",
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_40d89922",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-11T09:20:38Z",
+      "side": 1,
+      "message": "isset is indeed slightly faster, but the difference is entirely negligible.\n\nhttp://maettig.com/1397246220\n\nI always pick what I find most readable, depending on the context.",
+      "parentUuid": "0e6af365_5a864fbf",
       "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

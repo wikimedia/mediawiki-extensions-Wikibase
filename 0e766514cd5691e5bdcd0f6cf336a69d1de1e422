@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_40aad96e",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-11T09:20:38Z",
+      "side": 0,
+      "message": "I found this comment very problematic for various reasons:\n* It appears like it lists all the things the field definitions below are going to extract. But this is superfluous. Just look at the list directly below and you can see that labels, descriptions, statements, and sitelinks are touched. Why repeat this?\n* It appears like this lists the search index\u0027es field names. But it doesn\u0027t. The field name below is \"sitelink_count\", but the list contains \"link count\". (What \"link\" is meant anyway?)\n* If the comment is meant to explain what an Item is made of, why repeat this either? This documentation must be in the Item class, not here.\n\nSo I figured it\u0027s way better to just stick to self-documenting code.",
+      "parentUuid": "0e6af365_5aff2f31",
+      "revId": "0e766514cd5691e5bdcd0f6cf336a69d1de1e422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_3af4bb4f",
         "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-10-10T17:46:00Z",
       "side": 0,
       "message": "Again, not sure what is the point of deleting these comments.",
+      "revId": "0e766514cd5691e5bdcd0f6cf336a69d1de1e422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_00daa121",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-11T09:20:38Z",
+      "side": 0,
+      "message": "As before.",
+      "parentUuid": "0e6af365_3af4bb4f",
       "revId": "0e766514cd5691e5bdcd0f6cf336a69d1de1e422",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
