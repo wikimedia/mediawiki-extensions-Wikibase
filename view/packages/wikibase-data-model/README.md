@@ -1,8 +1,17 @@
 # Wikibase DataModel JavaScript
 
 **Wikibase DataModel JavaScript** is the JavaScript implementation of the
-[Data Model](https://www.mediawiki.org/wiki/Wikibase/DataModel)
+basic [Wikibase DataModel](https://www.mediawiki.org/wiki/Wikibase/DataModel)
 at the heart of the [Wikibase software](http://wikiba.se/).
+As the [PHP implementation of the DataModel](https://github.com/wmde/WikibaseDataModel), this
+library only implements the basic Item and Property entity types, and the components they are made
+of.
+
+Wikibase uses this library together with the
+[Wikibase Serialization JavaScript library](https://github.com/wmde/WikibaseSerializationJavaScript)
+to deserialize API responses from serialized JSON to actual DataModel objects. These objects can
+then be consumed and manipulated via convenient getter and setter methods, turned back into JSON via
+the corresponding serializer, and send back to the API.
 
 [![Wikibase JavaScript Data Model UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Wikibase_JavaScript_Data_Model_1.0.svg/600px-Wikibase_JavaScript_Data_Model_1.0.svg.png)](https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg)
 
