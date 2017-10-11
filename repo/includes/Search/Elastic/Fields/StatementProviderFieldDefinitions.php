@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
-use Wikibase\Lib\DataTypeDefinitions;
-
 /**
  * Fields for an object that has statements.
  */

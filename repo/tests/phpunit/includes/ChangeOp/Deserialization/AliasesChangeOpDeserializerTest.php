@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
-use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
-use Exception;
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 

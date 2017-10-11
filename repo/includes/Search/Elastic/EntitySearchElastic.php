@@ -8,7 +8,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\DisMax;
 use Elastica\Query\Match;
-use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
 use Language;
 use WebRequest;

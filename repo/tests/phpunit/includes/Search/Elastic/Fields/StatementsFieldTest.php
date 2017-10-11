@@ -9,7 +9,6 @@ use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
