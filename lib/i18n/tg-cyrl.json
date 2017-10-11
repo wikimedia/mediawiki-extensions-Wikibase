@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Ibrahim",
-			"ToJack"
+			"ToJack",
+			"Vashgird"
 		]
 	},
 	"wikibase-deletedentity-item": "Элементи ҳазфшуда",
 	"wikibase-deletedentity-property": "Хусусияти ҳазфшуда",
-	"wikibase-sitelinks-wikipedia": "Википедиа",
+	"wikibase-sitelinks-wikipedia": "Википедия",
 	"wikibase-sitelinks-sitename-columnheading": "Забон",
 	"datatypes-type-wikibase-item": "Элемент",
 	"wikibase-entity-summary-wbsetreference-add": "Ба тасдиқ манбаъ илова шуд",

@@ -61,5 +61,6 @@
 	"wikibase-pageinfo-entity-usage-X": "موجود کی جملہ معلومات",
 	"wikibase-pageinfo-entity-usage-O": "دیگر (بیانات)",
 	"wikibase-otherprojects": "دیگر منصوبوں میں",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}} سے {{PLURAL:$1|رابطہ|رابطے}}",
 	"notification-link-text-view-item": "آئٹم {{GENDER:$1|دیکھیں}}"
 }

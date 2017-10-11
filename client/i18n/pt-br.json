@@ -12,7 +12,8 @@
 			"Dianakc",
 			"He7d3r",
 			"Luk3",
-			"Felipe L. Ewald"
+			"Felipe L. Ewald",
+			"Eduardo Addad de Oliveira"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -120,6 +121,7 @@
 	"wikibase-pageinfo-entity-usage": "Entidades {{WBREPONAME}} usadas nesta página",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Descrição: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
 	"wikibase-pageinfo-entity-usage-C": "Declaração: $1",
 	"wikibase-pageinfo-entity-usage-X": "Todos os tipos de entidades",

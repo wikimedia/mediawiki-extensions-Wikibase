@@ -44,7 +44,7 @@
 	"wikibase-entitytermsforlanguagelistview-less": "פחות שפות",
 	"wikibase-label-empty": "לא הוגדרה תווית",
 	"wikibase-label-edit-placeholder": "נא להזין תווית",
-	"wikibase-label-edit-placeholder-language-aware": "נא להזין תווית ב{{GRAMMAR:תחילית|$1}}",
+	"wikibase-label-edit-placeholder-language-aware": "נא להזין תווית ב-$1",
 	"wikibase-description-empty": "לא הוגדר תיאור",
 	"wikibase-description-edit-placeholder": "נא להזין תיאור",
 	"wikibase-description-edit-placeholder-language-aware": "נא להזין תיאור ב$1",

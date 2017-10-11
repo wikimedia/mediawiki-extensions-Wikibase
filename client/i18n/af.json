@@ -43,6 +43,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-wysiging",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-wysigings",
+	"wikibase-rcfilters-hide-wikibase-description": "Wysigings wat van {{WBREPONAME}} afkomstig is.",
 	"wikibase-replicationnote": "Let daarop dat dit verskeie minute dan duur voor die wysigings op alle wiki's sigbaar sal wees.",
 	"wikibase-watchlist-show-changes-pref": "Wys Wikidata-wysigings in u dophoulys",
 	"wikibase-error-invalid-entity-id": "Die opgegewe ID is nie in die stelsel nie. Gebruik 'n geldig entiteit-ID.",

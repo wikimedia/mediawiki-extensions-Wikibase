@@ -47,6 +47,8 @@
 	"wikibase-rc-show-wikidata-pref": "സമീപകാല മാറ്റങ്ങളിൽ {{WBREPONAME}} തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക",
 	"wikibase-rc-wikibase-edit-letter": "(ഡേ.)",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} തിരുത്ത്",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} തിരുത്തുകൾ",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} പദ്ധതിയിൽ നിന്നുള്ള തിരുത്തുകൾ.",
 	"wikibase-replicationnote": "മാറ്റങ്ങൾ എല്ലാ വിക്കികളിലും പ്രത്യക്ഷപ്പെടാൻ കുറച്ച് മിനിറ്റുകൾ എടുത്തേക്കും എന്നത് പ്രത്യേകം ശ്രദ്ധിക്കുക",
 	"wikibase-watchlist-show-changes-pref": "താങ്കൾ ശ്രദ്ധിക്കുന്നവയുടെ പട്ടികയിൽ {{WBREPONAME}} തിരുത്തുകളും പ്രദർശിപ്പിക്കുക",
 	"wikibase-error-deserialize-error": "ഡേറ്റാ അനുക്രമമാക്കിയത് ഒഴിവാക്കൽ പരാജയപ്പെട്ടു.",
