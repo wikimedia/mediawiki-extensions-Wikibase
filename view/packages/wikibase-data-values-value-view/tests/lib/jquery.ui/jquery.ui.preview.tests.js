@@ -26,7 +26,7 @@
 	};
 
 	QUnit.module( 'jquery.ui.preview', {
-		teardown: function() {
+		afterEach: function() {
 			$( '.test_preview' ).each( function( i, node ) {
 				if ( $( node ).data( 'preview' ) ) {
 					$( node ).data( 'preview' ).destroy();

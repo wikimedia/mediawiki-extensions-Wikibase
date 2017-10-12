@@ -60,7 +60,7 @@
 	};
 
 	QUnit.module( 'jquery.inputautoexpand', {
-		teardown: function() {
+		afterEach: function() {
 			$( '.test_inputautoexpand' ).remove();
 		}
 	} );

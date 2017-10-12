@@ -40,7 +40,7 @@
 	];
 
 	QUnit.module( 'jquery.ui.ooMenu', {
-		teardown: function() {
+		afterEach: function() {
 			$( '.test_ooMenu' ).remove();
 		}
 	} );

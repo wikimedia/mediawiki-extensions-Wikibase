@@ -85,7 +85,7 @@
 	}
 
 	QUnit.module( 'jquery.ui.inputextender', {
-		teardown: function() {
+		afterEach: function() {
 			$( '.test_inputextender' ).each( function( i, node ) {
 				var inputextender = $( node ).data( 'inputextender' );
 				if ( inputextender ) {

@@ -27,7 +27,7 @@
 	};
 
 	QUnit.module( 'jquery.ui.listrotator', {
-		teardown: function() {
+		afterEach: function() {
 			$( '.test_listrotator' ).each( function( i, node ) {
 				var $node = $( node ),
 					listRotator = $node.data( 'listrotator' );

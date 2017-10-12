@@ -29,10 +29,10 @@
 	}
 
 	QUnit.module( 'jquery.event.special.eachchange', {
-		setup: function() {
+		beforeEach: function() {
 			iReset();
 		},
-		teardown: function() {
+		afterEach: function() {
 			$( '.test_eachchange' ).remove();
 		}
 	} );

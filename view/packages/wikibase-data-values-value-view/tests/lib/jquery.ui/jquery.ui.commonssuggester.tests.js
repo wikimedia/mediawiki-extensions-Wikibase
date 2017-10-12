@@ -28,7 +28,7 @@
 	};
 
 	QUnit.module( 'jquery.ui.commonssuggester', {
-		teardown: function() {
+		afterEach: function() {
 			var $suggester = $( '.test_suggester' ),
 				suggester = $suggester.data( 'commonssuggester' );
 			if ( suggester ) {

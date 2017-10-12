@@ -15,7 +15,7 @@
 	}
 
 	QUnit.module( 'jquery.autocompletestring', {
-		teardown: function() {
+		afterEach: function() {
 			$( '.test-autocompletestring' ).remove();
 		}
 	} );

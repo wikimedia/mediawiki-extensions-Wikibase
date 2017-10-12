@@ -43,7 +43,7 @@
 	};
 
 	QUnit.module( 'jquery.ui.suggester', {
-		teardown: function() {
+		afterEach: function() {
 			var $suggester = $( '.test_suggester' ),
 				suggester = $suggester.data( 'suggester' );
 			if ( suggester ) {
