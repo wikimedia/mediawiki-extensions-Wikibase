@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_b533cb5e",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-12T17:46:11Z",
+      "side": 1,
+      "message": "Done. not sure if there is performance gain in it, but maybe it is little bit more readable.",
+      "parentUuid": "0e6af365_55cfefb4",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 90,
+        "endChar": 9
+      },
+      "revId": "6f4328298733b279c4adf88bb41965d030eab257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_b5d8ab80",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 8
@@ -83,6 +107,30 @@
       "writtenOn": "2017-10-12T17:07:52Z",
       "side": 1,
       "message": "no such arg",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 34
+      },
+      "revId": "6f4328298733b279c4adf88bb41965d030eab257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_35403ba8",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-12T17:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_b5d8ab80",
       "range": {
         "startLine": 101,
         "startChar": 15,
