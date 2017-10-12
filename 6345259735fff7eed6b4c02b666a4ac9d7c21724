@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_fd528fe1",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-12T09:31:10Z",
+      "side": 1,
+      "message": "All the added tests here are for methods that EntityHandler doesn’t even override. But on the other hand, the expected values all make sense for EntityHandler. So I guess it’s still okay to have the tests, to make sure something fails if the defaults in ContentHandler change.",
+      "revId": "6345259735fff7eed6b4c02b666a4ac9d7c21724",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
