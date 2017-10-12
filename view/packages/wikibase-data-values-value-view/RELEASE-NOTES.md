@@ -1,6 +1,6 @@
 # ValueView release notes
 
-## 0.21.0 (2017-10-10)
+## 0.21.0 (2017-10-12)
 * Removed `jQuery.valueview.ExpertExtender.CalendarHint`.
 * Removed dependency on `globeCoordinate.Formatter`.
 * Removed dependency on the [Parameterize](https://github.com/AStepaniuk/qunit-parameterize) QUnit plugin.
