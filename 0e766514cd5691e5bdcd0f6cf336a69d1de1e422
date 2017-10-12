@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_78d1cacf",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-12T19:27:34Z",
+      "side": 0,
+      "message": "This documents what we want to index for an Item. Of course it matches the code - that\u0027s the whole point of documenting code, the docs should match what the code does. However, the docs describe the intent, so that if the code changes, we can still ensure it is ok with original intent, by checking the code still matches the docs. \"Self-documenting\" works when it is obvious what is going on, here it is not obvious which items we want to index for the Item (it actually changes with time) so we want to have a comment that explicitly states the intent and ensures the code matches it.",
+      "parentUuid": "0e6af365_40aad96e",
+      "revId": "0e766514cd5691e5bdcd0f6cf336a69d1de1e422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_3af4bb4f",
         "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
         "patchSetId": 5
