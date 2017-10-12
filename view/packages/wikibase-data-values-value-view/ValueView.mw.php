@@ -11,7 +11,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgExtensionCredits, $wgResourceModules, $wgMessagesDirs;
+global $wgExtensionCredits, $wgMessagesDirs;
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,
@@ -27,10 +27,3 @@ $wgExtensionCredits['other'][] = array(
 );
 
 $wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
-
-// Register Resource Loader modules:
-$wgResourceModules = array_merge(
-	$wgResourceModules,
-	include __DIR__ . '/lib/resources.php',
-	include __DIR__ . '/src/resources.php'
-);
