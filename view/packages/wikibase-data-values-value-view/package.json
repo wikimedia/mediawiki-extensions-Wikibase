@@ -1,6 +1,26 @@
 {
   "name": "data-values-value-view",
+  "description": "Provides JS widgets to edit values defined by the DataValues library",
   "version": "0.0.0",
+  "homepage": "https://www.mediawiki.org/wiki/Extension:ValueView",
+  "license": "GPL-2.0+",
+  "contributors": [
+    {
+      "name": "Daniel Werner",
+      "url": "https://www.mediawiki.org/wiki/User:Danwe"
+    },
+    {
+      "name": "H. Snater",
+      "url": "http://www.snater.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gerrit.wikimedia.org/r/data-values/value-view"
+  },
+  "bugs": {
+    "url": "https://phabricator.wikimedia.org/project/view/918/"
+  },
   "scripts": {
     "test": "grunt test"
   },
