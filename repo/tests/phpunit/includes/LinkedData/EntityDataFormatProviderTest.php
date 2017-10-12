@@ -95,7 +95,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 				'json', // default
 				'php',
 
-				// using RdfWriter
+				// using purtle
 				'rdfxml',
 				'n3',
 				'turtle',
