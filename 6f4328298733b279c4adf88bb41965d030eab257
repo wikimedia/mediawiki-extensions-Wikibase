@@ -46,6 +46,52 @@
       "revId": "6f4328298733b279c4adf88bb41965d030eab257",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_55cfefb4",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-12T17:07:52Z",
+      "side": 1,
+      "message": "I wonder whether it would be faster not to reassign the table and pass it by reference instead (tables in Lua are always passed by reference)",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 90,
+        "endChar": 9
+      },
+      "revId": "6f4328298733b279c4adf88bb41965d030eab257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_b5d8ab80",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-12T17:07:52Z",
+      "side": 1,
+      "message": "no such arg",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 34
+      },
+      "revId": "6f4328298733b279c4adf88bb41965d030eab257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
