@@ -33,7 +33,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 	 *     .add( 'fail', function( reason ) { alert( 'ERROR!' } );
 	 *
 	 * @class jQuery.PurposedCallbacks
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor
@@ -220,7 +220,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 	 * and `purposes` members. This is to `jQuery.PurposedCallbacks` what the "Promise" is to
 	 * `jQuery.Deferred`.
 	 * @class jQuery.PurposedCallbacks.Facade
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor

@@ -19,7 +19,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * Store managing `jQuery.valueview.Expert` instances.
 	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

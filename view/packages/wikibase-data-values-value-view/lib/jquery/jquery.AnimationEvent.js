@@ -34,7 +34,7 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	 * @class jQuery.AnimationEvent
 	 * @extends jQuery.Event
 	 * @uses jQuery.PurposedCallbacks
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor

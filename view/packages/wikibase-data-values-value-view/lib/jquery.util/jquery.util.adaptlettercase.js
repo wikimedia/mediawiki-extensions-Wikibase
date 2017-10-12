@@ -9,7 +9,7 @@ jQuery.util.adaptlettercase = ( function() {
 	 * (although the characters may differ in their letter-case of course).
 	 * @member jQuery.util
 	 * @method adaptlettercase
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @param {string} destination String the source string's letter-case shall be applied to.

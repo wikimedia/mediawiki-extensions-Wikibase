@@ -5,7 +5,7 @@ jQuery.valueview = jQuery.valueview || {};
  * @class jQuery.valueview.experts
  * @singleton
  * @since 0.1
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
 jQuery.valueview.experts = ( new function jQueryValueViewExperts() {}() );

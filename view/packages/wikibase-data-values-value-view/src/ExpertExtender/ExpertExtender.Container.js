@@ -5,7 +5,7 @@
 	 * An `ExpertExtender` module which wraps another module in a container.
 	 * @class jQuery.valueview.ExpertExtender.Container
 	 * @since 0.6
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor

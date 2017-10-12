@@ -6,7 +6,7 @@ util.MessageProvider = ( function( util ) {
 	/**
 	 * @class util.MessageProvider
 	 * @abstract
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 */
 	function MessageProvider() {

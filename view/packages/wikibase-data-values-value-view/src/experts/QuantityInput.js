@@ -7,7 +7,7 @@ module.exports = ( function( $, vv, UnitSelector ) {
 	 * @class jQuery.valueview.experts.QuantityInput
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.6
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Thiemo Mättig
 	 */
 	vv.experts.QuantityInput = vv.expert( 'QuantityInput', PARENT, function() {

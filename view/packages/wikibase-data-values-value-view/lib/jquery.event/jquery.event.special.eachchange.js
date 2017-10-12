@@ -109,7 +109,7 @@
 	 * @class jQuery.event.special.eachchange
 	 * @extends jQuery.Event
 	 * @uses jQuery.client
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @param {jQuery.Event} event

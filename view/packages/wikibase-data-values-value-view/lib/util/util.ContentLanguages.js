@@ -9,7 +9,7 @@ this.util = this.util || {};
 	 * @class util.ContentLanguages
 	 * @abstract
 	 * @uses util
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor

@@ -41,7 +41,7 @@ $( document ).ready( function() {
  * @class jQuery.ui.toggler
  * @extends jQuery.Widget
  * @uses jQuery.animateWithEvent
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < danweetz@web.de >
  *

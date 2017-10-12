@@ -7,7 +7,7 @@ util.PrefixingMessageProvider = ( function() {
 	 * Calls another `MessageProvider` with prefixed message keys
 	 * @class util.PrefixingMessageProvider
 	 * @since 0.13.0
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *

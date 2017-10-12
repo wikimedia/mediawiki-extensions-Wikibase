@@ -8,7 +8,7 @@ jQuery.fn.autocompletestring = ( function( $ ) {
 	 * while a text selection is applied to the characters missing in the "incomplete" string.
 	 * @member jQuery.fn
 	 * @method autocompletestring
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @param {string} incomplete

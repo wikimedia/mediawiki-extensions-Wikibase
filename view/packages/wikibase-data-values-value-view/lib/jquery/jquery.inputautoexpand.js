@@ -122,7 +122,7 @@ function escaped( text ) {
  * @member jQuery.fn
  * @method inputautoexpand
  * @uses jQuery.AutoExpandInput
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  *
  * @param {Object} [options={}]
@@ -191,7 +191,7 @@ $.fn.inputautoexpand = function( options ) {
  * @class jQuery.AutoExpandInput
  * @uses jQuery.event.special.eachchange
  * @private
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  *
  * @constructor

@@ -8,7 +8,7 @@ module.exports = ( function( $, vv ) {
 	 * @class jQuery.valueview.experts.StringValue
 	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.StringValue = vv.expert( 'StringValue', PARENT, function() {
