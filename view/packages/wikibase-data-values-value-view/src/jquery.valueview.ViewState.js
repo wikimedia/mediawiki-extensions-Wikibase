@@ -9,7 +9,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * the `valueview`'s current status. Those subsystems should not have full access to the entire
 	 * view though since interaction in both directions would very likely mess things up.
 	 * @class jQuery.valueview.ViewState
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 * @since 0.1
 	 *

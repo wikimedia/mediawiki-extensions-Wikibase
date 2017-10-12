@@ -6,7 +6,7 @@
  * If the value to be set is empty, the widget will display an appropriate message.
  * @class jQuery.ui.preview
  * @extends jQuery.Widget
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

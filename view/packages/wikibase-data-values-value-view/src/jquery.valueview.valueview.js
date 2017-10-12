@@ -29,7 +29,7 @@ function expertProxy( fnName ) {
  * @alternateClassName jQuery.valueview.valueview
  * @extends jQuery.Widget
  * @since 0.1
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  *

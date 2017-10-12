@@ -61,7 +61,7 @@ function measureMaximumStringWidths( $container, strings ) {
  * @class jQuery.ui.listrotator
  * @extends jQuery.Widget
  * @uses jQuery.ui
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

@@ -7,7 +7,7 @@ this.util = this.util || {};
 	 * A simple event-like system for plugging in extensions.
 	 * @class util.Extendable
 	 * @uses jQuery
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor

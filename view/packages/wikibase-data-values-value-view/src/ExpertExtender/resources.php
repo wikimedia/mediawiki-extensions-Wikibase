@@ -1,6 +1,6 @@
 <?php
 /**
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 return call_user_func( function() {

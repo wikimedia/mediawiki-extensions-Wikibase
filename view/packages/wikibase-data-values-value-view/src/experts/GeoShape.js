@@ -12,7 +12,7 @@ module.exports = ( function( $, vv ) {
 	 * @class jQuery.valueview.experts.GeoShape
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */
 	vv.experts.GeoShape = vv.expert( 'GeoShape', PARENT, {

@@ -23,7 +23,7 @@ function escapeRegex( value ) {
  *
  * @member util
  * @method highlightSubstring
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @param {string} substring

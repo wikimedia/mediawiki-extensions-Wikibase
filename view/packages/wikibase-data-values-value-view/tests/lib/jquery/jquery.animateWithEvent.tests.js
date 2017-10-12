@@ -1,5 +1,5 @@
 /**
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( $, QUnit ) {

@@ -14,7 +14,7 @@
 	 * @class jQuery.ui.commonssuggester
 	 * @extends jQuery.ui.suggester
 	 * @uses util
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

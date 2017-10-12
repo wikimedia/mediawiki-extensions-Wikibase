@@ -9,7 +9,7 @@
  * @extends jQuery.Widget
  * @uses jQuery.util
  * @uses util
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
@@ -397,7 +397,7 @@ $.widget( 'ui.ooMenu', {
 /**
  * Default menu item.
  * @class jQuery.ui.ooMenu.Item
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
@@ -466,7 +466,7 @@ $.extend( Item.prototype, {
  * Customizable menu item.
  * @class jQuery.ui.ooMenu.CustomItem
  * @extends jQuery.ui.ooMenu.Item
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

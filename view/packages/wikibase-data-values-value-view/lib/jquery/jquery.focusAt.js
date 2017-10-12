@@ -81,7 +81,7 @@ jQuery.fn.focusAt = ( function() {
 	 *
 	 * @member jQuery.fn
 	 * @method focusAt
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner
 	 *
 	 * @param {number|string} position Either a number specifying the position or one of the strings

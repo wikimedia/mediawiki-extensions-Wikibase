@@ -7,7 +7,7 @@ module.exports = ( function( vv, LanguageSelector ) {
 	 * @class jQuery.valueview.experts.MonolingualText
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.6
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 */
 	vv.experts.MonolingualText = vv.expert( 'MonolingualText', PARENT, function() {

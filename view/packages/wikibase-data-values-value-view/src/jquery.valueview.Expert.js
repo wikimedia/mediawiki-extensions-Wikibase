@@ -17,7 +17,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @method expert
 	 * @static
 	 * @since 0.1
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @param {string} name Should be all-lowercase and without any special characters. Will be used
@@ -70,7 +70,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @class jQuery.valueview.Expert
 	 * @abstract
 	 * @since 0.1
-	 * @licence GNU GPL v2+
+	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @constructor

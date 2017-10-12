@@ -52,7 +52,7 @@ var inputExtendersWithVisibleExtension = ( function() {
  * @extends jQuery.Widget
  * @uses jQuery.event.special.eachchange
  * @uses jQuery.ui
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
