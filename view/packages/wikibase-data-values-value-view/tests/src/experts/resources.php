@@ -69,6 +69,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.UnDeserializableValue.tests' => $moduleTemplate + array(
+				'scripts' => array(
+					'UnDeserializableValueTests.js',
+				),
+				'dependencies' => array(
+					'jquery.valueview.experts.UnDeserializableValue',
+					'jquery.valueview.tests.testExpert',
+				),
+			),
+
 	);
 
 } );

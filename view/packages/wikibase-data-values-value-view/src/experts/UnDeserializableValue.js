@@ -29,7 +29,7 @@
 		 * @inheritdoc
 		 */
 		rawValue: function() {
-			return this.viewState().getTextValue();
+			return this.viewState().getTextValue() || '';
 		},
 
 		/**
