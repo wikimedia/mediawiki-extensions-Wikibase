@@ -1,5 +1,15 @@
 # ValueView release notes
 
+## 0.22.0 (dev)
+* `jQuery.valueview.ExpertExtender.Listrotator` constructor requires a `MessageProvider` now.
+* `jQuery.ui.listrotator` requires a `messageProvider` option now.
+* Made the library a pure JavaScript library.
+* Removed MediaWiki extension credits registration.
+* Removed MediaWiki i18n message registration.
+* Removed MediaWiki ResourceLoader module definitions.
+* Removed `VALUEVIEW_VERSION` constant.
+* Raised DataValues JavaScript library version requirement to 0.10.0.
+
 ## 0.21.0 (2017-10-12)
 * Removed `jQuery.valueview.ExpertExtender.CalendarHint`.
 * Removed dependency on `globeCoordinate.Formatter`.
