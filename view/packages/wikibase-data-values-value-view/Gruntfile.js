@@ -6,7 +6,6 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-karma' );
-	grunt.loadNpmTasks( 'grunt-composer' );
 
 	grunt.initConfig( {
 		eslint: {
@@ -41,7 +40,7 @@ module.exports = function ( grunt ) {
 
 					'node_modules/sinon/pkg/sinon.js',
 
-					'vendor/data-values/javascript/lib/util/util.inherit.js',
+					'node_modules/wikibase-data-values//lib/util/util.inherit.js',
 
 					'lib/jquery/jquery.PurposedCallbacks.js',
 					'lib/jquery/*.js',
@@ -52,17 +51,17 @@ module.exports = function ( grunt ) {
 					'lib/jquery.ui/jquery.ui.suggester.js',
 					'lib/jquery.ui/*.js',
 
-					'vendor/data-values/javascript/lib/globeCoordinate/globeCoordinate.js',
-					'vendor/data-values/javascript/src/dataValues.js',
-					'vendor/data-values/javascript/src/DataValue.js',
-					'vendor/data-values/javascript/src/valueFormatters/valueFormatters.js',
-					'vendor/data-values/javascript/src/valueFormatters/formatters/ValueFormatter.js',
-					'vendor/data-values/javascript/src/valueFormatters/formatters/*.js',
-					'vendor/data-values/javascript/src/valueParsers/valueParsers.js',
-					'vendor/data-values/javascript/src/valueParsers/ValueParserStore.js',
-					'vendor/data-values/javascript/src/valueParsers/parsers/ValueParser.js',
-					'vendor/data-values/javascript/src/valueParsers/parsers/*.js',
-					'vendor/data-values/javascript/src/values/*.js',
+					'node_modules/wikibase-data-values//lib/globeCoordinate/globeCoordinate.js',
+					'node_modules/wikibase-data-values//src/dataValues.js',
+					'node_modules/wikibase-data-values//src/DataValue.js',
+					'node_modules/wikibase-data-values//src/valueFormatters/valueFormatters.js',
+					'node_modules/wikibase-data-values//src/valueFormatters/formatters/ValueFormatter.js',
+					'node_modules/wikibase-data-values//src/valueFormatters/formatters/*.js',
+					'node_modules/wikibase-data-values//src/valueParsers/valueParsers.js',
+					'node_modules/wikibase-data-values//src/valueParsers/ValueParserStore.js',
+					'node_modules/wikibase-data-values//src/valueParsers/parsers/ValueParser.js',
+					'node_modules/wikibase-data-values//src/valueParsers/parsers/*.js',
+					'node_modules/wikibase-data-values//src/values/*.js',
 
 					'tests/phantomjs.bootstrap.js',
 
@@ -98,6 +97,6 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'test', [ 'eslint', 'jsonlint', 'banana', 'qunit' ] );
-	grunt.registerTask( 'qunit', [ 'composer:install:no-dev', 'karma' ] );
+	grunt.registerTask( 'qunit', 'karma' );
 	grunt.registerTask( 'default', 'test' );
 };
