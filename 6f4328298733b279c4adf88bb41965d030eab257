@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_43497835",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-12T14:58:10Z",
+      "side": 1,
+      "message": "This can easily trash the DB, given possible unintentional abuse (see\nhttps://ca.wikipedia.org/w/index.php?title\u003dM%C3%B2dul_Discussi%C3%B3:Wikidata\u0026oldid\u003d18938979#Critical_performance_improvement )\n\nmaybe this is not so cool. Shall we fallback to X in that case?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 4
+      },
+      "revId": "6f4328298733b279c4adf88bb41965d030eab257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
