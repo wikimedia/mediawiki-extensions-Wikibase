@@ -22,6 +22,30 @@
       "revId": "6f4328298733b279c4adf88bb41965d030eab257",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_236564aa",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-12T15:04:39Z",
+      "side": 1,
+      "message": "I don\u0027t think we can meaningfully prevent this from happening (there are other way to do horrible things than plain loops) :/ We could in theory (in the future, not this patch) track a full \"C\", \"L\" or \"D\" usage in that case (so say all Statements, Labels, Descriptions have been used).",
+      "parentUuid": "0e6af365_43497835",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 4
+      },
+      "revId": "6f4328298733b279c4adf88bb41965d030eab257",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
