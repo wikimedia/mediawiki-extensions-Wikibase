@@ -139,6 +139,29 @@
       "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_bdebb776",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-12T10:31:21Z",
+      "side": 1,
+      "message": "double past tense – “didn’t return”",
+      "range": {
+        "startLine": 107,
+        "startChar": 10,
+        "endLine": 107,
+        "endChar": 26
+      },
+      "revId": "2a8aae1a88be573f72777180de12818eb9abcfbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
