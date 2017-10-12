@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_bd4f3796",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-12T10:55:54Z",
+      "side": 1,
+      "message": "Why pass all parameters if all we need is $preparedParameters[\u0027data\u0027]? Do we anticipate that subclasses that override this method may need to look at other parameters?",
+      "revId": "4a6cdae3486b8e188049fb17aedaa2e535d05cfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_ddbc6b69",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-12T10:55:54Z",
+      "side": 1,
+      "message": "I think it would be more logical to have this line below the applyChangeOp call. That way, we wouldn\u0027t be relying on getAliasGroups returning a \"live\" object, not a clone.",
+      "revId": "4a6cdae3486b8e188049fb17aedaa2e535d05cfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
