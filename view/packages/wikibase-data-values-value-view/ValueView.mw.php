@@ -11,7 +11,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+global $wgExtensionCredits, $wgResourceModules, $wgMessagesDirs;
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,
@@ -27,28 +27,6 @@ $wgExtensionCredits['other'][] = array(
 );
 
 $wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
-
-/**
- * Register QUnit test cases.
- * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
- * @since 0.1
- *
- * @param array &$testModules
- * @param ResourceLoader &$resourceLoader
- *
- * @return boolean
- */
-$wgHooks['ResourceLoaderTestModules'][] = function(
-	array &$testModules,
-	ResourceLoader &$resourceLoader
-) {
-	$testModules['qunit'] = array_merge(
-		$testModules['qunit'],
-		include __DIR__ . '/tests/lib/resources.php',
-		include __DIR__ . '/tests/src/resources.php'
-	);
-	return true;
-};
 
 // Register Resource Loader modules:
 $wgResourceModules = array_merge(
