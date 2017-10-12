@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_8349b092",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-12T17:07:38Z",
+      "side": 1,
+      "message": "Exactly. E.g. SetAliases looks for \"language\", \"set\" and other params.",
+      "parentUuid": "0e6af365_bd4f3796",
+      "revId": "4a6cdae3486b8e188049fb17aedaa2e535d05cfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_ddbc6b69",
         "filename": "repo/includes/Api/SetAliases.php",
         "patchSetId": 18
@@ -30,6 +48,24 @@
       "writtenOn": "2017-10-12T10:55:54Z",
       "side": 1,
       "message": "I think it would be more logical to have this line below the applyChangeOp call. That way, we wouldn\u0027t be relying on getAliasGroups returning a \"live\" object, not a clone.",
+      "revId": "4a6cdae3486b8e188049fb17aedaa2e535d05cfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_c336c8ff",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-12T17:07:38Z",
+      "side": 1,
+      "message": "You\u0027re right, that seems reasonable.\nI believe I simply copied the old code and didn\u0027t think about the order. Moved now.",
+      "parentUuid": "0e6af365_ddbc6b69",
       "revId": "4a6cdae3486b8e188049fb17aedaa2e535d05cfc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
