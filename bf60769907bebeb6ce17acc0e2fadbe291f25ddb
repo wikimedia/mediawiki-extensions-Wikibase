@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_d5867fab",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-12T18:13:33Z",
+      "side": 1,
+      "message": "The flag also has to suppress the fine grained tracking info if disabled. The idea is that we need this switch to restore the old behavior, at least on the database level.",
+      "revId": "bf60769907bebeb6ce17acc0e2fadbe291f25ddb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_157df7af",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-12T18:13:33Z",
+      "side": 1,
+      "message": "please use // for comments",
+      "revId": "bf60769907bebeb6ce17acc0e2fadbe291f25ddb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_55492f8f",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-12T18:13:33Z",
+      "side": 1,
+      "message": "This and the tests below should test both modes, with fine grained enabled or disabled.",
+      "revId": "bf60769907bebeb6ce17acc0e2fadbe291f25ddb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_f5814393",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-12T18:13:33Z",
+      "side": 1,
+      "message": "This should test both modes, with fine grained enabled or disabled.",
+      "revId": "bf60769907bebeb6ce17acc0e2fadbe291f25ddb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
