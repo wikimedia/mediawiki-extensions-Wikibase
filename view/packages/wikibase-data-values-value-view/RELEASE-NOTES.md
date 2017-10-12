@@ -1,6 +1,6 @@
 # ValueView release notes
 
-## 0.22.0 (dev)
+## 0.22.0 (2017-10-16)
 * `jQuery.valueview.ExpertExtender.Listrotator` constructor requires a `MessageProvider` now.
 * `jQuery.ui.listrotator` requires a `messageProvider` option now.
 * Made the library a pure JavaScript library.
