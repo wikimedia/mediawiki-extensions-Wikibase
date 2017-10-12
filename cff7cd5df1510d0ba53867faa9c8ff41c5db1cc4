@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_88b30f96",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-10-12T14:08:07Z",
+      "side": 1,
+      "message": "It doesn\u0027t really hurt much to define these if you want the local function for clarity, but you could save a few bytes and cycles by just using php.addLabelUsage directly in the place you call this.",
+      "revId": "cff7cd5df1510d0ba53867faa9c8ff41c5db1cc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_88e54fa1",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-10-12T14:08:07Z",
+      "side": 1,
+      "message": "You should pass 2 as the second parameter to error() here, so when Lua adds location information to the message it uses the line that tried to set the index rather than uselessly reporting the error as occurring on this line.\n\nhttps://www.lua.org/manual/5.1/manual.html#pdf-error",
+      "revId": "cff7cd5df1510d0ba53867faa9c8ff41c5db1cc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_288c63da",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-10-12T14:08:07Z",
+      "side": 1,
+      "message": "This looks like each call logs the usage for the //previous// call, rather than logging usage for the key that\u0027s being returned right now. That makes a difference if the loop is exited early, the key that caused the early exit won\u0027t have usage logged.\n\nInstead, do something like this to log the usage for the key that is currently being returned (and avoid trying to log usage of nil).\n\n local k, v \u003d next( actualEntityTable, key )\n if k ~\u003d nil then\n     usageFunc( entity.id, k )\n end\n return k, v",
+      "revId": "cff7cd5df1510d0ba53867faa9c8ff41c5db1cc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
