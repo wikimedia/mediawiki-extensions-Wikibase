@@ -5,8 +5,6 @@
 			"H. Snater < mediawiki@snater.com >"
 		]
 	},
-	"valueview-desc": "UI components for displaying and editing data values",
-	"valueview-expert-advancedadjustments": "advanced adjustments",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handling of \"$1\" values is not yet supported.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Handling of values for \"$1\" data type is not yet supported.",
 	"valueview-expert-emptyvalue-empty": "empty",
