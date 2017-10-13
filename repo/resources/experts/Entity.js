@@ -88,13 +88,13 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @return {string}
+		 * @return {string|null}
 		 */
 		rawValue: function () {
 			var entitySelector = this.$input.data( 'entityselector' ),
 				selectedEntity = entitySelector.selectedEntity();
 
-			return selectedEntity ? selectedEntity.id : '';
+			return selectedEntity ? selectedEntity.id : null;
 		}
 	} );
 
