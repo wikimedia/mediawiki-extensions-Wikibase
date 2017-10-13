@@ -220,6 +220,12 @@ local function testClaimsAccessIndex( propertyId )
 	return entity.claims[propertyId]
 end
 
+local function testClaimsAccessIndexByName( propertyId, propertyName )
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+
+	return mw.dumpObject( entity.claims[propertyId] ) == mw.dumpObject( entity.claims[propertyName] )
+end
+
 
 local tests = {
 	-- Unit Tests
@@ -239,6 +245,10 @@ local tests = {
 	{ name = 'mw.wikibase.entity.claims access invalid index', func = testClaimsAccessIndex,
 	  args = { 'something' },
 	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.entity.claims access index by name', func = testClaimsAccessIndexByName,
+	  args = { 'P342', 'LuaTestStringProperty' },
+	  expect = { true }
 	},
 	{ name = 'mw.wikibase.entity.create with empty table', func = testCreate,
 	  args = { {} },
