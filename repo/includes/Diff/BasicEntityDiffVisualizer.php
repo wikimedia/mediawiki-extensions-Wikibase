@@ -7,7 +7,7 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use IContextSource;
+use MessageLocalizer;
 use MWException;
 use SiteLookup;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
@@ -26,9 +26,9 @@ use Wikibase\Repo\Content\EntityContentDiff;
 class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 
 	/**
-	 * @var IContextSource
+	 * @var MessageLocalizer
 	 */
-	private $context;
+	private $messageLocalizer;
 
 	/**
 	 * @var ClaimDiffer|null
@@ -51,13 +51,13 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 	private $entityIdFormatter;
 
 	public function __construct(
-		IContextSource $contextSource,
+		MessageLocalizer $messageLocalizer,
 		ClaimDiffer $claimDiffer,
 		ClaimDifferenceVisualizer $claimDiffView,
 		SiteLookup $siteLookup,
 		EntityIdFormatter $entityIdFormatter
 	) {
-		$this->context = $contextSource;
+		$this->messageLocalizer = $messageLocalizer;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
 		$this->siteLookup = $siteLookup;
@@ -96,15 +96,15 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 			[],
 			new Diff(
 				[
-					$this->context->msg( 'wikibase-diffview-label' )->text() => $diff->getLabelsDiff(),
-					$this->context->msg( 'wikibase-diffview-alias' )->text() => $diff->getAliasesDiff(),
-					$this->context->msg( 'wikibase-diffview-description' )->text() => $diff->getDescriptionsDiff(),
+					$this->messageLocalizer->msg( 'wikibase-diffview-label' )->text() => $diff->getLabelsDiff(),
+					$this->messageLocalizer->msg( 'wikibase-diffview-alias' )->text() => $diff->getAliasesDiff(),
+					$this->messageLocalizer->msg( 'wikibase-diffview-description' )->text() => $diff->getDescriptionsDiff(),
 				],
 				true
 			),
 			$this->siteLookup,
 			$this->entityIdFormatter,
-			$this->context
+			$this->messageLocalizer
 		);
 
 		$html .= $termDiffVisualizer->getHtml();
@@ -119,13 +119,13 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 				[],
 				new Diff(
 					[
-						$this->context->msg( 'wikibase-diffview-link' )->text() => $diff->getSiteLinkDiff(),
+						$this->messageLocalizer->msg( 'wikibase-diffview-link' )->text() => $diff->getSiteLinkDiff(),
 					],
 					true
 				),
 				$this->siteLookup,
 				$this->entityIdFormatter,
-				$this->context
+				$this->messageLocalizer
 			);
 
 			$html .= $linkDiffVisualizer->getHtml();
@@ -153,7 +153,7 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 			$diff,
 			$this->siteLookup,
 			$this->entityIdFormatter,
-			$this->context
+			$this->messageLocalizer
 		);
 
 		$html = $linkDiffVisualizer->getHtml();
