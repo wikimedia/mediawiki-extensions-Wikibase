@@ -17,4 +17,3 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 ];
 
 include __DIR__ . '/resources.php';
-include __DIR__ . '/resources.test.php';
