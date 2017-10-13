@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_da00e6b1",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-13T13:57:40Z",
+      "side": 1,
+      "message": "IMHO a new output format would warrant a 1.1.0 release, but that’s not up to me to decide :)",
+      "range": {
+        "startLine": 44,
+        "startChar": 24,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "fd87342bf7e104ea0302bc4d52aad21cfdadf65e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
