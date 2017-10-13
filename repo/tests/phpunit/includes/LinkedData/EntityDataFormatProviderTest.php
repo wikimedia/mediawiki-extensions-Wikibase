@@ -40,20 +40,23 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		'application/x-turtle',
 		'text/n-triples',
 		'application/n-triples',
+		'application/ld+json',
 	];
 
 	private static $rdfExtensions = [
 		'rdf',
 		'n3',
 		'ttl',
-		'nt'
+		'nt',
+		'jsonld',
 	];
 
 	private static $rdfFormats = [
 		'rdfxml',
 		'n3',
 		'turtle',
-		'ntriples'
+		'ntriples',
+		'jsonld',
 	];
 
 	private static $badMimeTypes = [
@@ -81,6 +84,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		'text/n-triples' => 'ntriples', // should be ntriples
 		'text/plain' => 'ntriples', // should be ntriples
 		'ttl' => 'turtle', // should be turtle
+		'application/ld+json' => 'jsonld',
 	];
 
 	/**
@@ -100,6 +104,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 				'n3',
 				'turtle',
 				'ntriples',
+				'jsonld',
 			]
 		);
 
