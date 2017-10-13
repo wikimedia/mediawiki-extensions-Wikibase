@@ -180,6 +180,22 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'text/turtle', // expected mime
 			],
 
+			'Q42.jsonld' => [
+				'jsonld', // format
+				$entityRevQ42, // entityRev
+				null, // redirect
+				[], // incoming
+				null, // flavor
+				[ // output regex
+                    // XXX FIX ME XXX
+					'start' => '!^\s*@prefix !s',
+					'end' => '!\.\s*$!s',
+					'label' => '!"Label42"@en!s',
+				],
+				[],
+				'application/ld+json', // expected mime
+			],
+
 			'Q42.nt' => [
 				'ntriples', // format
 				$entityRevQ42, // entityRev
