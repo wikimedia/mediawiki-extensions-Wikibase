@@ -46,13 +46,13 @@ local maskClaimsTable = function( entity )
 	entity.claims = {}
 
 	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( emptyTable, propertyId )
-		if isValidPropertyId( propertyId ) then
+	pseudoClaimsMetatable.__index = function( emptyTable, property )
+		if isValidPropertyId( property ) then
 			-- Only attempt to track the usage if we have a valid property id.
-			php.addStatementUsage( entity.id, propertyId )
+			php.addStatementUsage( entity.id, property )
 		end
 
-		return actualEntityClaims[propertyId]
+		return actualEntityClaims[property]
 	end
 
 	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data )
@@ -194,30 +194,60 @@ methodtable.getSitelink = function( entity, globalSiteId )
 	return sitelink.title
 end
 
--- Get the best statements with the given property id
+-- Get claims by property id or label from entity
 --
--- @param {string} propertyId
-methodtable.getBestStatements = function( entity, propertyId )
-	checkType( 'getBestStatements', 1, propertyId, 'string' )
-
-	if not isValidPropertyId( propertyId ) then
-		error( 'Invalid property id passed to mw.wikibase.entity.getBestStatements: "' .. propertyId .. '"' )
+-- @param {table} entity
+-- @param {string} propertyLabelOrId
+local resolvePropertyClaims = function( entity, propertyLabelOrId, funcName )
+	local propertyId
+	if isValidPropertyId( propertyLabelOrId ) then
+		propertyId = propertyLabelOrId
+	else
+		propertyId = mw.wikibase.resolvePropertyId( propertyLabelOrId )
+		if not propertyId then
+			error( 'Invalid property id passed to ' .. funcName .. ': "' .. propertyLabelOrId .. '"', 2)
+		end
 	end
 
 	if entity.claims == nil or not entity.claims[propertyId] then
 		return {}
 	end
+	return entity.claims[propertyId]
+end
 
+-- Get the best statements with the given property id or label
+--
+-- @param {string} propertyLabelOrId
+methodtable.getBestStatements = function( entity, propertyLabelOrId )
+	checkType( 'getBestStatements', 1, propertyLabelOrId, 'string' )
+
+	local entityStatements = resolvePropertyClaims( entity, propertyLabelOrId, 'mw.wikibase.entity.getBestStatements' )
 	local statements = {}
 	local bestRank = 'normal'
 
-	for k, statement in pairs( entity.claims[propertyId] ) do
+	for k, statement in pairs( entityStatements ) do
 		if statement.rank == bestRank then
 			statements[#statements + 1] = statement
 		elseif statement.rank == 'preferred' then
 			statements = { statement }
 			bestRank = 'preferred'
 		end
+	end
+
+	return statements
+end
+
+-- Get the all statements with the given property id or label
+--
+-- @param {string} propertyLabelOrId
+methodtable.getAllStatements = function( entity, propertyLabelOrId )
+	checkType( 'getAllStatements', 1, propertyLabelOrId, 'string' )
+
+	local entityStatements = resolvePropertyClaims( entity, propertyLabelOrId, 'mw.wikibase.entity.getAllStatements' )
+	local statements = {}
+
+	for k, statement in pairs( entityStatements ) do
+		statements[#statements + 1] = statement
 	end
 
 	return statements
