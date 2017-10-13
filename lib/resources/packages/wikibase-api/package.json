@@ -3,10 +3,21 @@
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
   "devDependencies": {
     "eslint-config-wikimedia": "0.4.0",
     "grunt": "1.0.1",
+    "grunt-composer": "^0.4.5",
     "grunt-eslint": "19.0.0",
-    "grunt-jsonlint": "1.0.7"
+    "grunt-jsonlint": "1.0.7",
+    "grunt-karma": "^2.0.0",
+    "karma": "^1.7.0",
+    "karma-cli": "^1.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-qunit": "^1.2.1",
+    "qunit": "^1.0.0",
+    "sinon": "^4.0.1"
   }
 }
