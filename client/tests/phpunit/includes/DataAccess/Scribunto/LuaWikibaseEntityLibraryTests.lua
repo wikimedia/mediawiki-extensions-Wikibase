@@ -220,7 +220,6 @@ local function testClaimsAccessIndex( propertyId )
 	return entity.claims[propertyId]
 end
 
-
 local tests = {
 	-- Unit Tests
 
@@ -239,6 +238,10 @@ local tests = {
 	{ name = 'mw.wikibase.entity.claims access invalid index', func = testClaimsAccessIndex,
 	  args = { 'something' },
 	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.entity.claims access index by name', func = testClaimsAccessIndex,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { mw.wikibase.getEntityObject( 'Q32487' ).claims['P342'] }
 	},
 	{ name = 'mw.wikibase.entity.create with empty table', func = testCreate,
 	  args = { {} },

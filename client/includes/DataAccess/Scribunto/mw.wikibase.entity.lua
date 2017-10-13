@@ -46,13 +46,18 @@ local maskClaimsTable = function( entity )
 	entity.claims = {}
 
 	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( emptyTable, propertyId )
-		if isValidPropertyId( propertyId ) then
-			-- Only attempt to track the usage if we have a valid property id.
-			php.addStatementUsage( entity.id, propertyId )
+	pseudoClaimsMetatable.__index = function( emptyTable, property )
+		if not isValidPropertyId( property ) then
+			property = mw.wikibase.resolvePropertyId( property )
+			if not property then return end
 		end
 
-		return actualEntityClaims[propertyId]
+		if isValidPropertyId( property ) then
+			-- Only attempt to track the usage if we have a valid property id.
+			php.addStatementUsage( entity.id, property )
+		end
+
+		return actualEntityClaims[property]
 	end
 
 	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data )
