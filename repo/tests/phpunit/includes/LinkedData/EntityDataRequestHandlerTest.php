@@ -123,7 +123,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				'json', // default
 				'php',
 
-				// using easyRdf
+				// using purtle
 				'rdfxml',
 				'n3',
 				'turtle',
@@ -136,7 +136,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			'json' => 'json', // default
 			'php' => 'php',
 
-			// using easyRdf
+			// using purtle
 			'rdfxml' => 'rdf',
 			'n3' => 'n3',
 			'turtle' => 'ttl',

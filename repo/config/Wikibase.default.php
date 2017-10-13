@@ -55,14 +55,14 @@ return [
 	// Formats that shall be available via SpecialEntityData.
 	// The first format will be used as the default.
 	// This is a whitelist, some formats may not be supported because when missing
-	// optional dependencies (e.g. easyRdf).
+	// optional dependencies (e.g. purtle).
 	// The formats are given using logical names as used by EntityDataSerializationService.
 	'entityDataFormats' => [
 		// using the API
 		'json', // default
 		'php',
 
-		// using easyRdf
+		// using purtle
 		'rdfxml',
 		'n3',
 		'turtle',
