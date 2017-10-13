@@ -180,6 +180,23 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'text/turtle', // expected mime
 			],
 
+			'Q42.jsonld' => [
+				'jsonld', // format
+				$entityRevQ42, // entityRev
+				null, // redirect
+				[], // incoming
+				null, // flavor
+				[ // output regex
+					'start' => '!^\s*\{\s*"@graph": \[!s',
+					'end' => '!\],\s*"@context": \{.*\}\s*\}\s*$!s',
+					'label' => '!"label":\s*\{\s*"@language": "en",\s*"@value": "Label42"\s*\}!s',
+					'item-ref Q2233' => '!"P5":\s*"wd:Q2233",!s',
+					'redirect Q2233' => '!\{\s*"@id": "wd:Q2233",\s*"sameAs": "wd:Q23"\s*\}!s',
+				],
+				[],
+				'application/ld+json', // expected mime
+			],
+
 			'Q42.nt' => [
 				'ntriples', // format
 				$entityRevQ42, // entityRev
@@ -225,6 +242,23 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'application/n-triples', // expected mime
 			],
 
+			'Q2233.jsonld' => [
+				'jsonld', // format
+				$entityRevQ23, // entityRev
+				$entityRedirQ2233, // redirect
+				[ $q2233, $q222333 ], // incoming
+				null, // flavor
+				[ // output regex
+					'start' => '!^\s*\{\s*"@graph": \[!s',
+					'end' => '!\],\s*"@context": \{.*\}\s*\}\s*$!s',
+					'label Q23' => '!"label":\s*\{\s*"@language": "en",\s*"@value": "Label23"\s*\}!s',
+					'redirect Q2233' => '!\{\s*"@id": "wd:Q2233",\s*"sameAs": "wd:Q23"\s*\}!s',
+					'redirect Q222333' => '!\{\s*"@id": "wd:Q222333",\s*"sameAs": "wd:Q23"\s*\}!s',
+				],
+				[],
+				'application/ld+json', // expected mime
+			],
+
 			'Q2233.nt' => [
 				'ntriples', // format
 				$entityRevQ23, // entityRev
@@ -268,6 +302,23 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 						. '*<http://acme\.test/Q23> *\.!s',
 				],
 				'application/n-triples', // expected mime
+			],
+
+			'Q23.jsonld' => [
+				'jsonld', // format
+				$entityRevQ23, // entityRev
+				null, // redirect
+				[ $q2233, $q222333 ], // incoming
+				null, // flavor
+				[ // output regex
+					'start' => '!^\s*\{\s*"@graph": \[!s',
+					'end' => '!\],\s*"@context": \{.*\}\s*\}\s*$!s',
+					'label Q23' => '!"label":\s*\{\s*"@language": "en",\s*"@value": "Label23"\s*\}!s',
+					'redirect Q2233' => '!\{\s*"@id": "wd:Q2233",\s*"sameAs": "wd:Q23"\s*\}!s',
+					'redirect Q222333' => '!\{\s*"@id": "wd:Q222333",\s*"sameAs": "wd:Q23"\s*\}!s',
+				],
+				[],
+				'application/ld+json', // expected mime
 			],
 
 			'Q23.nt' => [
