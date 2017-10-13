@@ -27,9 +27,10 @@
 
 		/**
 		 * @inheritdoc
+		 * @return {string}
 		 */
 		rawValue: function() {
-			return this.viewState().getTextValue() || '';
+			return this._viewState.getTextValue();
 		},
 
 		/**

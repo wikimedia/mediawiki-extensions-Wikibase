@@ -34,6 +34,7 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 
 		/**
 		 * @see jQuery.valueview.Expert.rawValue
+		 * @return {null}
 		 */
 		rawValue: function() {
 			return this._value;

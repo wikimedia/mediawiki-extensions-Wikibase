@@ -36,7 +36,8 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * @see jQuery.valueview.isInEditMode
-		 * @inheritdoc jQuery.valueview#isInEditMode
+		 *
+		 * @return {boolean}
 		 */
 		isInEditMode: function() {
 			return this._view.isInEditMode();
@@ -44,6 +45,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 		/**
 		 * Returns whether the related `valueview` is currently disabled.
+		 *
 		 * @return {boolean}
 		 */
 		isDisabled: function() {
@@ -53,7 +55,8 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related `valueview`'s current value. Does not allow to change the value.
 		 * @see jQuery.valueview.value
-		 * @inheritdoc jQuery.valueview#value
+		 *
+		 * @return {dataValues.DataValue|null}
 		 */
 		value: function() {
 			return this._view.value();
@@ -62,7 +65,8 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related `valueview`'s current formatted value.
 		 * @see jQuery.valueview.getFormattedValue
-		 * @inheritdoc jQuery.valueview#getFormattedValue
+		 *
+		 * @return {string}
 		 */
 		getFormattedValue: function() {
 			return this._view.getFormattedValue();
@@ -71,8 +75,9 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Returns the related `valueview`'s current plain text value.
 		 * @see jQuery.valueview.getTextValue
-		 * @inheritdoc jQuery.valueview#getTextValue
 		 * @since 0.4
+		 *
+		 * @return {string}
 		 */
 		getTextValue: function() {
 			return this._view.getTextValue();
