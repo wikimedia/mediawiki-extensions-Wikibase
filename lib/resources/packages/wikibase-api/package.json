@@ -1,6 +1,7 @@
 {
   "name": "wikibase-api",
   "description": "JavaScript client for the Wikibase Repository web API",
+  "version": "3.0.0",
   "license": "GPL-2.0+",
   "contributors": [
     {

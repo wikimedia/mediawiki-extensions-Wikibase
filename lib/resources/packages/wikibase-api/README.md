@@ -4,7 +4,7 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
-### 3.0.0 (dev)
+### 3.0.0 (2017-10-13)
 
 * Fixed certain `wikibase.api.RepoApi` methods failing when passing in empty strings.
 * Made the library a pure JavaScript library.
