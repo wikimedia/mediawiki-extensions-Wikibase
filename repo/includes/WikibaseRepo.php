@@ -14,6 +14,8 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
+use Diff\Comparer\ComparableComparer;
+use Diff\Differ\OrderedListDiffer;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
@@ -47,6 +49,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -88,6 +91,10 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Modules\PropertyValueExpertsModule;
+use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
+use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
+use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
@@ -279,6 +286,11 @@ class WikibaseRepo {
 	 * @var EntityRdfBuilderFactory|null
 	 */
 	private $entityRdfBuilderFactory = null;
+
+	/**
+	 * @var EntityDiffVisualizerFactory|null
+	 */
+	private $entityDiffVisualizerFactory;
 
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
@@ -1932,6 +1944,53 @@ class WikibaseRepo {
 		}
 
 		return $this->entityRdfBuilderFactory;
+	}
+
+	/**
+	 * @param IContextSource $contextSource
+	 * @return EntityDiffVisualizerFactory
+	 */
+	public function getEntityDiffVisualizerFactory( IContextSource $contextSource ) {
+		$langCode = $contextSource->getLanguage()->getCode();
+
+		$options = new FormatterOptions( [
+			//TODO: fallback chain
+			ValueFormatter::OPT_LANG => $langCode
+		] );
+
+		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$this->getLanguageFallbackChainFactory(),
+			$termLookup
+		);
+		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
+			$contextSource->getLanguage(),
+			[] // TODO: populate ids of entities to prefetch
+		);
+
+		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();
+		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
+
+		$formatterFactory = $this->getSnakFormatterFactory();
+		$detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
+		$terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
+
+		return new EntityDiffVisualizerFactory(
+			$this->entityTypeDefinitions->getEntityDiffVisualizerCallbacks(),
+			$contextSource,
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
+			new ClaimDifferenceVisualizer(
+				new DifferencesSnakVisualizer(
+					$entityIdFormatter,
+					$detailedSnakFormatter,
+					$terseSnakFormatter,
+					$langCode
+				),
+				$langCode
+			),
+			$this->getSiteLookup(),
+			$entityIdFormatter
+		);
 	}
 
 	/**
