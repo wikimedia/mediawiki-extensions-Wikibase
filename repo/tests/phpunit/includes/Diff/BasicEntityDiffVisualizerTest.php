@@ -6,8 +6,8 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
-use IContextSource;
 use MediaWikiTestCase;
+use MessageLocalizer;
 use RawMessage;
 use Site;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
@@ -89,10 +89,10 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return IContextSource
+	 * @return MessageLocalizer
 	 */
-	private function getMockContext() {
-		$mock = $this->getMock( IContextSource::class );
+	private function getMockMessageLocalizer() {
+		$mock = $this->getMock( MessageLocalizer::class );
 
 		$mock->expects( $this->any() )
 			->method( 'msg' )
@@ -131,7 +131,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 		$enwiki->setGlobalId( 'enwiki' );
 
 		return new BasicEntityDiffVisualizer(
-			$this->getMockContext(),
+			$this->getMockMessageLocalizer(),
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
 			new HashSiteStore( [ $enwiki ] ),
