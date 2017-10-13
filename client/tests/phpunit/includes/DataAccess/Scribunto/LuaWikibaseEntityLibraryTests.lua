@@ -86,6 +86,10 @@ local function testGetBestStatements( propertyId )
 	return getNewTestItem():getBestStatements( propertyId )
 end
 
+local function testGetAllStatements( propertyId )
+	return getNewTestItem():getAllStatements( propertyId )
+end
+
 local function testGetProperties()
 	return getNewTestItem():getProperties()
 end
@@ -131,6 +135,18 @@ end
 local function integrationTestGetBestStatements( propertyId )
 	local entity = mw.wikibase.getEntityObject()
 	local statements = entity:getBestStatements( propertyId )
+	local result = {}
+
+	for i, statement in pairs( statements ) do
+		result[#result + 1] = statement.mainsnak.datavalue.value
+	end
+
+	return result
+end
+
+local function integrationTestGetAllStatements( propertyId )
+	local entity = mw.wikibase.getEntityObject()
+	local statements = entity:getAllStatements( propertyId )
 	local result = {}
 
 	for i, statement in pairs( statements ) do
@@ -346,9 +362,9 @@ local tests = {
 	  args = { function() end },
 	  expect = "bad argument #1 to 'getBestStatements' (string expected, got function)"
 	},
-	{ name = 'mw.wikibase.entity.getBestStatements bad property id 2', func = testGetBestStatements, type='ToString',
+	{ name = 'mw.wikibase.entity.getBestStatements non existing property', func = testGetBestStatements, type='ToString',
 	  args = { 'P01' },
-	  expect = 'Invalid property id passed to mw.wikibase.entity.getBestStatements: "P01"'
+	  expect = { {} }
 	},
 	{ name = 'mw.wikibase.entity.getBestStatements 1', func = testGetBestStatements,
 	  args = { 'P321' },
@@ -356,6 +372,30 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.getBestStatements 2', func = testGetBestStatements,
 	  args = { 'P123' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements 3', func = testGetBestStatements,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements bad property id 1', func = testGetAllStatements, type='ToString',
+	  args = { function() end },
+	  expect = "bad argument #1 to 'getAllStatements' (string expected, got function)"
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements non existing property', func = testGetAllStatements, type='ToString',
+	  args = { 'P01' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements 1', func = testGetAllStatements,
+	  args = { 'P321' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements 2', func = testGetAllStatements,
+	  args = { 'P123' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements 3', func = testGetAllStatements,
+	  args = { 'LuaTestStringProperty' },
 	  expect = { {} }
 	},
 	{ name = 'mw.wikibase.entity.getProperties', func = testGetProperties,
@@ -417,6 +457,22 @@ local tests = {
 	{ name = 'mw.wikibase.entity.getBestStatements integration 2', func = integrationTestGetBestStatements,
 	  args = { 'P123' },
 	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements integration 3', func = integrationTestGetBestStatements,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { { 'Lua :)' } }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements integration 1', func = integrationTestGetAllStatements,
+	  args = { 'P342' },
+	  expect = { { 'Lua :)', 'Lua is clearly superior to the parser function' } }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements integration 2', func = integrationTestGetAllStatements,
+	  args = { 'P123' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getAllStatements integration 3', func = integrationTestGetAllStatements,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { { 'Lua :)', 'Lua is clearly superior to the parser function' } }
 	},
 	{ name = 'mw.wikibase.entity.getProperties integration', func = integrationTestGetPropertiesCount,
 	  expect = { 1 }

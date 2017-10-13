@@ -2,6 +2,32 @@ Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that impleme
 
 Changes to the Wikibase Lua interface are subject to the [[d:Wikidata:Stable Interface Policy|Stable Interface Policy]].
 
+For ease of access and convinence Wikibase Lua library provides access to aspects (labels, descriptions, statements) either directly or by loading the whole entity. For improved performance, when accessing only specific aspects it is recommended to access them directly (without getEntity). On multilingual wikis accessing labels is based on user's language rather than Wiki's language. The following table summarizes the most common functions:
+{| class="wikitable"
+! Aspect !! mw.wikibase.FUNCTION !! entity:FUNCTION
+|-
+| Label in content or user language
+| [[#mw.wikibase.label|label]]/[[#mw.wikibase.getLabelWithLang|getLabelWithLang]]
+| [[#mw.wikibase.entity:getLabel|getLabel]]/[[#mw.wikibase.entity:getLabelWithLang|getLabelWithLang]]
+|-
+| Label by language, without fallbacks
+| [[#wikibase.getLabelByLang|getLabelByLang]]
+| NA
+|-
+| Sitelinks
+| [[#mw.wikibase.sitelink|sitelink]]
+| [[#mw.wikibase.entity:getSitelink|getSitelink]]
+|-
+| Descriptions
+| [[#mw.wikibase.description|description]]/[[#mw.wikibase.getDescriptionWithLang|getDescriptionWithLang]]
+| [[#mw.wikibase.entity:getDescription|getDescription]]/[[#mw.wikibase.entity:getDescriptionWithLang|getDescriptionWithLang]]
+|-
+| rowspan="2" | Statements
+| [[#mw.wikibase.getBestStatements|getBestStatements]] || [[#mw.wikibase.entity:getBestStatements|getBestStatements]]
+|-
+| [[#mw.wikibase.getAllStatements|getAllStatements]] || [[#mw.wikibase.entity:getAllStatements|getAllStatements]]
+|}
+
 == mw.wikibase ==
 <code>mw.wikibase</code> has general Lua functionality for working with Wikibase data.
 
@@ -276,14 +302,33 @@ entity:getProperties() -- Returns a table like: { "P123", "P1337" }
 </source>
 
 === mw.wikibase.entity:getBestStatements ===
-<code>entity:getBestStatements( propertyId )</code><br>
-Get the best statements with the given property id.
+<code>entity:getBestStatements( propertyIdOrLabel )</code><br>
+Get the best statements with the given property id or label.
 This includes all statements with rank "preferred" or, if no preferred ones exist, all statements with rank "normal".
 Statements with rank "deprecated" are never included.
 
-An example call might look like this:
+An example call with property ID might look like this:
 <source lang="lua">
 entity:getBestStatements( 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12
+</source>
+
+An example call with property label might look like this:
+<source lang="lua">
+entity:getBestStatements( 'instance of' ) -- Returns a table containing the serialization of the best statements with the "instance of" property
+</source>
+
+=== mw.wikibase.entity:getAllStatements ===
+<code>entity:getAllStatements( propertyIdOrLabel )</code><br>
+Returns a table with all statements (including all ranks, even "deprecated") matching the given property ID or property label.
+
+An example call might look like this:
+<source lang="lua">
+entity:getAllStatements( 'P12' ) -- Returns a table containing the serialization of P12 statements
+</source>
+
+An example call with property label might look like this:
+<source lang="lua">
+entity:getAllStatements( 'instance of' ) -- Returns a table containing the serialization of the statements with the "instance of" property
 </source>
 
 === mw.wikibase.entity:formatPropertyValues ===
