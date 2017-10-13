@@ -1,5 +1,24 @@
 {
-  "private": true,
+  "name": "wikibase-api",
+  "description": "JavaScript client for the Wikibase Repository web API",
+  "license": "GPL-2.0+",
+  "contributors": [
+    {
+      "name": "H. Snater",
+      "url": "http://www.snater.com"
+    },
+    {
+      "name": "Adrian Lang",
+      "email": "adrian.lang@wikimedia.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseJavaScriptApi"
+  },
+  "bugs": {
+    "url": "https://phabricator.wikimedia.org/"
+  },
   "scripts": {
     "test": "grunt test"
   },
