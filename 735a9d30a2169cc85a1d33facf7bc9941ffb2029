@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_fcd3672e",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-13T15:57:50Z",
+      "side": 1,
+      "message": "I\u0027m concerned about the trend to always simply smack new methods at the end of this file. Why not place it close to this one?",
+      "range": {
+        "startLine": 121,
+        "startChar": 26,
+        "endLine": 121,
+        "endChar": 40
+      },
+      "revId": "735a9d30a2169cc85a1d33facf7bc9941ffb2029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
