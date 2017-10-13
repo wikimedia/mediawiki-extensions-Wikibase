@@ -43,6 +43,7 @@
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",
 	"wikibase-entityusage-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
+	"wikibase-pageinfo-entity-usage-D": "Apraksts: $1",
 	"wikibase-pageinfo-entity-usage-T": "Nosaukums",
 	"wikibase-pageinfo-entity-usage-C": "Apgalvojums: $1",
 	"wikibase-pageinfo-entity-usage-O": "Citi (apgalvojumi)",

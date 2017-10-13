@@ -90,7 +90,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostrar as edições {{WBREPONAME}} nas mudanças recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edição {{WBREPONAME}}",
-	"wikibase-rcfilters-hide-wikibase-label": "edições {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Edições {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Edições com origem em {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Este filtro entra em conflito com um ou mais dos filtros de Qualidade de Contribuição ou de Intenção do Utilizador. As previsões de Qualidade e Intenção não estão disponíveis para as edições {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "O filtro \"Edições {{WBREPONAME}}\" entra em conflito com um ou mais filtros de Qualidade de Contribuição ou de Intenção do Utilizador. As previsões de Qualidade e Intenção não estão disponíveis para as edições {{WBREPONAME}}. Os filtros em conflito estão marcados na área Filtros Ativos, acima.",

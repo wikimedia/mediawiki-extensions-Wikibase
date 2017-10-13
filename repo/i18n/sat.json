@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Albinus"
+			"Albinus",
+			"Ramjit Tudu"
 		]
 	},
 	"wikibase-edit": "Toṅge",
 	"wikibase-add": "Joṛao",
 	"wikibase-label-empty": "Jahan lebel Bạnuḱa",
 	"wikibase-description-empty": "Jahan jạṛ baṅ joṅṛao akana",
-	"wikibase-sitelinks-special": "Eṭaḱ siteko"
+	"wikibase-sitelinks-special": "Eṭaḱ siteko",
+	"wikibase-statementview-rank-normal": "ᱥᱟᱫᱷᱟᱨᱚᱱ ᱨᱮᱸᱠ"
 }
