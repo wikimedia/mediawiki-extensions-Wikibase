@@ -33,7 +33,8 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'entity-id-builder' => 'new-foo-id',
 				'entity-id-composer-callback' => 'new-composed-foo-id',
 				'changeop-deserializer-callback' => 'new-changeop-deserializer-callback',
-				'rdf-builder-factory-callback' => 'new-rdf-builder-factory-callback'
+				'rdf-builder-factory-callback' => 'new-rdf-builder-factory-callback',
+				'entity-diff-visualizer-callback' => 'new-entity-diff-visualizer-callback'
 			],
 			'bar' => [
 				'serializer-factory-callback' => 'bar-serializer',
@@ -185,6 +186,15 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(
 			[ 'foo' => 'new-rdf-builder-factory-callback' ],
 			$definitions->getRdfBuilderFactoryCallbacks()
+		);
+	}
+
+	public function testGetEntityDiffVisualizerCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'new-entity-diff-visualizer-callback' ],
+			$definitions->getEntityDiffVisualizerCallbacks()
 		);
 	}
 
