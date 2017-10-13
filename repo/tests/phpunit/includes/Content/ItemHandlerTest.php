@@ -193,6 +193,10 @@ class ItemHandlerTest extends EntityHandlerTest {
 		return ItemContent::newFromItem( $item );
 	}
 
+	public function testSupportsRedirects() {
+		$this->assertTrue( $this->getHandler()->supportsRedirects() );
+	}
+
 	protected function getExpectedSearchIndexFields() {
 		return [ 'label_count', 'statement_count', 'sitelink_count' ];
 	}

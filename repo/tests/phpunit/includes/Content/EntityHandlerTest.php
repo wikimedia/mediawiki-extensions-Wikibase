@@ -494,8 +494,28 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertContains( '(wikibase-noentity)', $context->getOutput()->getHTML() );
 	}
 
+	public function testSupportsSections() {
+		$this->assertFalse( $this->getHandler()->supportsSections() );
+	}
+
 	public function testSupportsCategories() {
 		$this->assertFalse( $this->getHandler()->supportsCategories() );
+	}
+
+	public function testSupportsRedirects() {
+		$this->assertFalse( $this->getHandler()->supportsRedirects() );
+	}
+
+	public function testSupportsDirectEditing() {
+		$this->assertFalse( $this->getHandler()->supportsDirectEditing() );
+	}
+
+	public function testSupportsDirectApiEditing() {
+		$this->assertFalse( $this->getHandler()->supportsDirectApiEditing() );
+	}
+
+	public function testGetAutosummary() {
+		$this->assertSame( '', $this->getHandler()->getAutosummary( null, null, 0 ) );
 	}
 
 	abstract protected function getExpectedSearchIndexFields();

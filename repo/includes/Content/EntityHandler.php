@@ -249,6 +249,8 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * @see ContentHandler::getAutosummary
+	 *
 	 * We never want to use MediaWiki's autosummaries, used e.g. for new page creation. Override this
 	 * to make sure they never overwrite our autosummaries (which look like the automatic summary
 	 * prefixes with a section title, and so could be overwritten).
@@ -260,7 +262,9 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string Empty string
 	 */
 	public function getAutosummary(
-		Content $oldContent = null, Content $newContent = null, $flags
+		Content $oldContent = null,
+		Content $newContent = null,
+		$flags
 	) {
 		return '';
 	}
