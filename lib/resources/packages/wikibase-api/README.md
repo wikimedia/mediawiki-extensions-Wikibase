@@ -2,9 +2,16 @@
 
 JavaScript client for the Wikibase Repository web API.
 
-[![Latest Stable Version](https://poser.pugx.org/wikibase/javascript-api/version.png)](https://packagist.org/packages/wikibase/javascript-api)
-
 ## Release notes
+
+### 3.0.0 (dev)
+
+* Fixed certain `wikibase.api.RepoApi` methods failing when passing in empty strings.
+* Made the library a pure JavaScript library.
+* Removed MediaWiki extension credits registration.
+* Removed MediaWiki ResourceLoader module definitions.
+* Removed `WIKIBASE_JAVASCRIPT_API_VERSION` constant.
+* Raised DataValues JavaScript library version requirement to 0.10.0.
 
 ### 2.2.2 (2017-07-10)
 
