@@ -123,6 +123,15 @@ class EntityTypeDefinitions {
 	}
 
 	/**
+	 * @return callable[] An array mapping entity type identifiers
+	 * to callables instantiating EntityDiffVisualizer objects
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getEntityDiffVisualizerCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-diff-visualizer-callback' );
+	}
+
+	/**
 	 * @return callable[]
 	 */
 	public function getEntityPatcherStrategyBuilders() {
