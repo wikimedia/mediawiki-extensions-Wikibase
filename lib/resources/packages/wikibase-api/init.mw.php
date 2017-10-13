@@ -15,5 +15,3 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'description' => 'Wikibase API client in JavaScript',
 	'license-name' => 'GPL-2.0+'
 ];
-
-include __DIR__ . '/resources.php';
