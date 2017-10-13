@@ -153,10 +153,10 @@ local function integrationTestFormatPropertyValuesByLabel( label )
 	return entity:formatPropertyValues( label )
 end
 
-local function integrationTestFormatPropertyValuesNoSuchProperty( propertyIdOrLabel )
+local function integrationTestFormatPropertyValuesNoSuchProperty( propertyLabelOrId )
 	local entity = mw.wikibase.getEntityObject( 'Q199024' )
 
-	return entity:formatPropertyValues( propertyIdOrLabel )
+	return entity:formatPropertyValues( propertyLabelOrId )
 end
 
 local function integrationTestFormatPropertyValuesProperty()
@@ -178,10 +178,10 @@ local function integrationTestFormatStatementsByLabel( label )
 	return entity:formatStatements( label )
 end
 
-local function integrationTestFormatStatementsNoSuchProperty( propertyIdOrLabel )
+local function integrationTestFormatStatementsNoSuchProperty( propertyLabelOrId )
 	local entity = mw.wikibase.getEntityObject( 'Q199024' )
 
-	return entity:formatStatements( propertyIdOrLabel )
+	return entity:formatStatements( propertyLabelOrId )
 end
 
 local function integrationTestFormatStatementsProperty()
