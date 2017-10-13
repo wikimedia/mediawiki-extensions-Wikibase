@@ -128,6 +128,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				'n3',
 				'turtle',
 				'ntriples',
+				'jsonld',
 			]
 		);
 
@@ -141,6 +142,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			'n3' => 'n3',
 			'turtle' => 'ttl',
 			'ntriples' => 'n3',
+			'jsonld' => 'jsonld',
 		];
 
 		$uriManager = new EntityDataUriManager(
