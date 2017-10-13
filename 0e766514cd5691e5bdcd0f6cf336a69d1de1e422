@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_a58aae6c",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-13T20:47:46Z",
+      "side": 0,
+      "message": "I think this is exactly what is done here: described what we expect from item. I don\u0027t see why this comment is so harmful it needs to be removed.",
+      "parentUuid": "0e6af365_69725ae4",
+      "revId": "0e766514cd5691e5bdcd0f6cf336a69d1de1e422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_3af4bb4f",
         "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
         "patchSetId": 5
