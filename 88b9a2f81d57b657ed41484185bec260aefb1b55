@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_5cb393fd",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataFormatProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-10-13T16:00:25Z",
+      "side": 0,
+      "message": "Well, Purtle also has an RdfWriter interface…",
+      "range": {
+        "startLine": 98,
+        "startChar": 13,
+        "endLine": 98,
+        "endChar": 22
+      },
+      "revId": "88b9a2f81d57b657ed41484185bec260aefb1b55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
