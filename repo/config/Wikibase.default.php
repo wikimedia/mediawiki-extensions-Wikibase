@@ -66,6 +66,7 @@ return [
 		'n3',
 		'turtle',
 		'ntriples',
+		'jsonld',
 
 		// hardcoded internal handling
 		'html',
