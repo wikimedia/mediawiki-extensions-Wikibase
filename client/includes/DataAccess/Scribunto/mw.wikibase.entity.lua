@@ -226,24 +226,35 @@ methodtable.getSitelink = function( entity, globalSiteId )
 	return sitelink.title
 end
 
--- Get the best statements with the given property id
+-- Get claims by property id or label from entity
 --
--- @param {string} propertyId
-methodtable.getBestStatements = function( entity, propertyId )
-	checkType( 'getBestStatements', 1, propertyId, 'string' )
-
-	if not isValidPropertyId( propertyId ) then
-		error( 'Invalid property id passed to mw.wikibase.entity.getBestStatements: "' .. propertyId .. '"' )
+-- @param {table} entity
+-- @param {string} propertyLabelOrId
+local resolvePropertyClaims = function( entity, propertyLabelOrId )
+	local propertyId
+	if isValidPropertyId( propertyLabelOrId ) then
+		propertyId = propertyLabelOrId
+	else
+		propertyId = mw.wikibase.resolvePropertyId( propertyLabelOrId )
 	end
 
 	if entity.claims == nil or not entity.claims[propertyId] then
 		return {}
 	end
+	return entity.claims[propertyId]
+end
 
+-- Get the best statements with the given property id or label
+--
+-- @param {string} propertyLabelOrId
+methodtable.getBestStatements = function( entity, propertyLabelOrId )
+	checkType( 'getBestStatements', 1, propertyLabelOrId, 'string' )
+
+	local entityStatements = resolvePropertyClaims( entity, propertyLabelOrId )
 	local statements = {}
 	local bestRank = 'normal'
 
-	for _, statement in pairs( entity.claims[propertyId] ) do
+	for _, statement in pairs( entityStatements ) do
 		if statement.rank == bestRank then
 			statements[#statements + 1] = statement
 		elseif statement.rank == 'preferred' then
@@ -253,6 +264,15 @@ methodtable.getBestStatements = function( entity, propertyId )
 	end
 
 	return statements
+end
+
+-- Get all statements with the given property id or label
+--
+-- @param {string} propertyLabelOrId
+methodtable.getAllStatements = function( entity, propertyLabelOrId )
+	checkType( 'getAllStatements', 1, propertyLabelOrId, 'string' )
+
+	return resolvePropertyClaims( entity, propertyLabelOrId )
 end
 
 -- Get a table with all property ids attached to the entity.
