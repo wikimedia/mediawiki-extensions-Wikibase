@@ -414,6 +414,32 @@ $specialPageAliases['sv'] = [
 	'SetSiteLink' => [ 'Ange_webbplatslänk' ],
 ];
 
+/** Urdu (اردو) */
+$specialPageAliases['ur'] = [
+	'AvailableBadges' => [ 'دستیاب_علامتیں', 'دستیاب_علامات' ],
+	'DispatchStats' => [ 'شماریات_ارسال' ],
+	'EntitiesWithoutDescription' => [ 'موجودات_بدون_وضاحت' ],
+	'EntitiesWithoutLabel' => [ 'موجودات_بدون_لیبل' ],
+	'EntityData' => [ 'موجودات_کا_ڈیٹا' ],
+	'EntityPage' => [ 'صفحہ_موجود' ],
+	'GoToLinkedPage' => [ 'مربوط_صفحے_میں_جائیں' ],
+	'ItemByTitle' => [ 'آئٹم_بلحاظ_عنوان' ],
+	'ItemDisambiguation' => [ 'آئٹم_کا_ضد_ابہام' ],
+	'ItemsWithoutSitelinks' => [ 'آئٹم_بدون_سائٹ_روابط' ],
+	'ListDatatypes' => [ 'اقسام_ڈیٹا_کی_فہرست' ],
+	'ListProperties' => [ 'خاصیتوں_کی_فہرست' ],
+	'MergeItems' => [ 'ضم_آئٹم' ],
+	'MyLanguageFallbackChain' => [ 'میری_زبان_کی_ثانوی_ترجیحات' ],
+	'NewItem' => [ 'نیا_آئٹم', 'تخلیق_آئٹم' ],
+	'NewProperty' => [ 'نئی_خاصیت', 'تخلیق_خاصیت' ],
+	'RedirectEntity' => [ 'موجود_کا_رجوع_مکرر', 'آئٹم_کا_رجوع_مکرر' ],
+	'SetAliases' => [ 'اندراج_کنیت' ],
+	'SetDescription' => [ 'اندراج_وضاحت' ],
+	'SetLabel' => [ 'اندراج_لیبل' ],
+	'SetLabelDescriptionAliases' => [ 'اندراج_کنیت_برائے_وضاحت_لیبل' ],
+	'SetSiteLink' => [ 'اندراج_سائٹ_ربط' ],
+];
+
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = [
 	'DispatchStats' => [ 'Thống_kê_truyền_bá' ],
