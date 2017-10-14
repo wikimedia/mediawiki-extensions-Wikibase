@@ -69,6 +69,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$entity1->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Testen' );
 			$repo->putEntity( $entity1, $offset + 14 );
 
+			// entity 1, revision 1115
+			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Original', [ new ItemId( 'Q12345' ) ] ) );
+			$repo->putEntity( $entity1, $offset + 15 );
+
 			// entity 1, revision 1117
 			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', [ new ItemId( 'Q12345' ) ] ) );
 			$repo->putEntity( $entity1, $offset + 17 );
@@ -270,6 +274,17 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'parent_id' => 1113,
 		] );
 
+		// change link to other wiki
+		$update11Badge = $this->makeChange( [
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130101020305',
+			'object_id' => 'Q1',
+			'revision_id' => 1115,
+			'user_id' => 1,
+			'parent_id' => 1114,
+		] );
+
 		// change link to local wiki
 		$update11Link = $this->makeChange( [
 			'id' => ++$id,
@@ -278,7 +293,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'object_id' => 'Q1',
 			'revision_id' => 1117,
 			'user_id' => 1,
-			'parent_id' => 1114,
+			'parent_id' => 1115,
 		] );
 
 		// delete
@@ -366,6 +381,11 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'local link breaks' => [
 				[ $update11, $update11Link ], // $changes
 				[ $update11, $update11Link ], // $expected
+			],
+
+			'local link badge change' => [
+				[ $update11, $update11Badge ], // $changes
+				[ $this->combineChanges( $update11, $update11Badge ) ], // $expected
 			],
 
 			'other link merges' => [

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Changes;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
 use Exception;
 use MWException;
 use Wikibase\Change;
@@ -196,6 +198,15 @@ class ChangeRunCoalescer {
 	}
 
 	/**
+	 * @param DiffOp $siteLinkDiffOp
+	 *
+	 * @return bool
+	 */
+	private function isBadgesOnlyChange( DiffOp $siteLinkDiffOp ) {
+		return $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp );
+	}
+
+	/**
 	 * Coalesce consecutive changes by the same user to the same entity into one.
 	 *
 	 * A run of changes may be broken if the action performed changes (e.g. deletion
@@ -230,8 +241,8 @@ class ChangeRunCoalescer {
 
 				if ( !$break && ( $change instanceof ItemChange ) ) {
 					$siteLinkDiff = $change->getSiteLinkDiff();
-					if ( isset( $siteLinkDiff[ $this->localSiteId ] ) ) {
-						// TODO: don't break if only the link's badges changed
+					if ( isset( $siteLinkDiff[$this->localSiteId] )
+						&& !$this->isBadgesOnlyChange( $siteLinkDiff[$this->localSiteId] ) ) {
 						$break = true;
 						$breakNext = true;
 					}
