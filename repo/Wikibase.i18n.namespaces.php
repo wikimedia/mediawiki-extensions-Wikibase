@@ -120,6 +120,15 @@ $namespaceNames['ru'] = [
 	WB_NS_QUERY_TALK => 'Обсуждение_запроса',
 ];
 
+$namespaceNames['ur'] = [
+	WB_NS_ITEM      => 'آئٹم',
+	WB_NS_ITEM_TALK => 'تبادلہ_خیال_آئٹم',
+	WB_NS_PROPERTY      => 'خاصیت',
+	WB_NS_PROPERTY_TALK => 'تبادلہ_خیال_خاصیت',
+	WB_NS_QUERY      => 'استفسار',
+	WB_NS_QUERY_TALK => 'تبادلہ_خیال_استفسار',
+];
+
 $namespaceNames['vi'] = [
 	WB_NS_ITEM      => 'Khoản_mục',
 	WB_NS_ITEM_TALK => 'Thảo_luận_Khoản_mục',
