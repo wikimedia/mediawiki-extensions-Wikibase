@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_167df216",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-14T19:44:56Z",
+      "side": 1,
+      "message": "Upstreaming",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_eb3e37b4",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 3
@@ -122,6 +145,29 @@
         "startChar": 150,
         "endLine": 5,
         "endChar": 284
+      },
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_568a8a1d",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-14T19:44:56Z",
+      "side": 1,
+      "message": "summarizes",
+      "range": {
+        "startLine": 5,
+        "startChar": 557,
+        "endLine": 5,
+        "endChar": 566
       },
       "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
