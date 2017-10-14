@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_768d4e35",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-10-14T19:36:39Z",
+      "side": 1,
+      "message": "you could just use $wikibaseClient",
+      "range": {
+        "startLine": 203,
+        "startChar": 14,
+        "endLine": 203,
+        "endChar": 50
+      },
+      "revId": "10e9304f98424df711f197a17dc5ebec010b8447",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
