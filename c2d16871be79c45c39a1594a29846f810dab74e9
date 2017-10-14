@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_105f3a45",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-14T07:44:00Z",
+      "side": 1,
+      "message": "FAKE NEWS\nWas not sure about it, and I know it is fake but this should give general rule of thumb/guideline for users when to use getEntity and when to access aspects directly. (and may be true in the future)",
+      "range": {
+        "startLine": 5,
+        "startChar": 150,
+        "endLine": 5,
+        "endChar": 284
+      },
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
