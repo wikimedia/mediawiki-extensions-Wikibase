@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_16197227",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-14T18:39:16Z",
+      "side": 0,
+      "message": "What does \"what we expect\" mean? Does this describe what an Item is made of? That should be in the Item.php file. Does this describe what is extracted? That should be visible from the code below.",
+      "parentUuid": "0e6af365_a58aae6c",
+      "revId": "0e766514cd5691e5bdcd0f6cf336a69d1de1e422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_3af4bb4f",
         "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
         "patchSetId": 5
