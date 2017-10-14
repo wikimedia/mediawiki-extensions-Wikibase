@@ -74,12 +74,12 @@ class PropertyIdResolverTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider resolvePropertyIdWithInvalidInput_throwsExceptionProvider
 	 */
-	public function testResolvePropertyIdWithInvalidInput_throwsException( $propertyIdOrLabel ) {
+	public function testResolvePropertyIdWithInvalidInput_throwsException( $propertyLabelOrId ) {
 		$propertyIdResolver = $this->getPropertyIdResolver();
 
 		$this->setExpectedException( PropertyLabelNotResolvedException::class );
 
-		$propertyIdResolver->resolvePropertyId( $propertyIdOrLabel, 'en' );
+		$propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
 	}
 
 	public function resolvePropertyIdWithInvalidInput_throwsExceptionProvider() {
