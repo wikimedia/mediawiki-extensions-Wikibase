@@ -2,6 +2,86 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_eb3e37b4",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-14T10:32:18Z",
+      "side": 1,
+      "message": "undocumented",
+      "range": {
+        "startLine": 201,
+        "startChar": 67,
+        "endLine": 201,
+        "endChar": 75
+      },
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_2b544f00",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-14T10:32:18Z",
+      "side": 1,
+      "message": "Well, this basically means that accessing \u0027P123456\u0027 (which doesn\u0027t exist) is fine (yields nil), but accessing \u0027unused-label\u0027 will error out? I\u0027m not sure this error makes much sense anymore now that we also allow selecting by (essentially) arbitrary strings.",
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_ab483f61",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-14T10:32:18Z",
+      "side": 1,
+      "message": "s/the//",
+      "range": {
+        "startLine": 240,
+        "startChar": 7,
+        "endLine": 240,
+        "endChar": 14
+      },
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_0b3aabc0",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-14T10:32:18Z",
+      "side": 1,
+      "message": "this should not be needed, entityStatements is already properly indexed AFAIR",
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_105f3a45",
         "filename": "docs/lua.wiki",
         "patchSetId": 3
@@ -13,6 +93,30 @@
       "writtenOn": "2017-10-14T07:44:00Z",
       "side": 1,
       "message": "FAKE NEWS\nWas not sure about it, and I know it is fake but this should give general rule of thumb/guideline for users when to use getEntity and when to access aspects directly. (and may be true in the future)",
+      "range": {
+        "startLine": 5,
+        "startChar": 150,
+        "endLine": 5,
+        "endChar": 284
+      },
+      "revId": "c2d16871be79c45c39a1594a29846f810dab74e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_4b574305",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-14T10:32:18Z",
+      "side": 1,
+      "message": "It actually already is (mildly) true… because just getting a certain statements means we don\u0027t need to serialize the whole entity for Lua (which is quite heavy).",
+      "parentUuid": "0e6af365_105f3a45",
       "range": {
         "startLine": 5,
         "startChar": 150,
