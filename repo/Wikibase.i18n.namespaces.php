@@ -130,3 +130,12 @@ $namespaceNames['vi'] = [
 	WB_NS_QUERY      => 'Truy_vấn',
 	WB_NS_QUERY_TALK => 'Thảo_luận_Truy_vấn',
 ];
+
+$namespaceNames['ur'] = [
+	WB_NS_ITEM      => 'آئٹم',
+	WB_NS_ITEM_TALK => 'تبادلہ_خیال_آئٹم',
+	WB_NS_PROPERTY      => 'خاصیت',
+	WB_NS_PROPERTY_TALK => 'تبادلہ_خیال_خاصیت',
+	WB_NS_QUERY      => 'استفسار',
+	WB_NS_QUERY_TALK => 'تبادلہ_خیال_استفسار',
+];
