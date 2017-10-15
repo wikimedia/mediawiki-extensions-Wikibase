@@ -66,6 +66,46 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		);
 	}
 
+	public function testGetEntityRevision_retrieveOnly() {
+		$id = new ItemId( 'Q123' );
+		$item = new Item( $id );
+
+		$mock = $this->getMock( EntityRevisionLookup::class );
+		$mock->expects( $this->exactly( 2 ) )
+			->method( 'getEntityRevision' )
+			->with( $id )
+			->will( $this->returnValue( $item ) );
+
+		$bagOStuff = new HashBagOStuff();
+
+		$lookup = new CachingEntityRevisionLookup( $mock, $bagOStuff );
+		$retrieveOnlyLookup = new CachingEntityRevisionLookup(
+			$mock,
+			$bagOStuff,
+			3600,
+			'wbentity',
+			'retrieve-only'
+		);
+
+		// EntityRevisionLookup call #1, will not be cached
+		$this->assertSame(
+			$item,
+			$retrieveOnlyLookup->getEntityRevision( $id )
+		);
+
+		// EntityRevisionLookup call #2, will be cached
+		$this->assertSame(
+			$item,
+			$lookup->getEntityRevision( $id )
+		);
+
+		// $retrieveOnlyLookup can now use the cache filled above
+		$this->assertSame(
+			$item,
+			$retrieveOnlyLookup->getEntityRevision( $id )
+		);
+	}
+
 	public function testWithRevisionVerification() {
 		$mock = new MockRepository();
 
