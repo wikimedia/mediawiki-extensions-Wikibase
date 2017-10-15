@@ -22,6 +22,30 @@
       "revId": "10e9304f98424df711f197a17dc5ebec010b8447",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_231d5366",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-15T16:09:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_768d4e35",
+      "range": {
+        "startLine": 203,
+        "startChar": 14,
+        "endLine": 203,
+        "endChar": 50
+      },
+      "revId": "10e9304f98424df711f197a17dc5ebec010b8447",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
