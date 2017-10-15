@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_718d5835",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-15T07:12:45Z",
+      "side": 1,
+      "message": "Our coding style asks for a newline here.",
+      "range": {
+        "startLine": 245,
+        "startChar": 72,
+        "endLine": 245,
+        "endChar": 73
+      },
+      "revId": "3ad90852a020b788b9f4c00c352b6e61551d6cdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
