@@ -85,7 +85,9 @@
 	"wikibase-pageinfo-entity-id": "ID de l'element de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Cap",
 	"wikibase-pageinfo-entity-usage": "Elements {{WBREPONAME}} utilitzats en aquesta pàgina",
+	"wikibase-pageinfo-entity-usage-S": "Enllaç de lloc",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Descripció: $1",
 	"wikibase-pageinfo-entity-usage-T": "Títol",
 	"wikibase-pageinfo-entity-usage-X": "Totes les dades de l'entitat",
 	"wikibase-pageinfo-entity-usage-O": "Altres (declaracions)",
@@ -93,6 +95,7 @@
 	"wikibase-otherprojects": "En altres projectes",
 	"wikibase-otherprojects-beta-message": "Barra lateral d'altres projectes",
 	"wikibase-otherprojects-beta-description": "Afegeix una secció «{{int:wikibase-otherprojects}}» en la barra lateral que proporciona enllaços a altres projectes de Wikimedia segons les dades de {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexió|Connexions}} amb {{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|Mostra}} l'element",
 	"unresolved-property-category": "Pàgines amb propietats no resoltes",
 	"unresolved-property-category-desc": "Aquesta categoria mostra les pàgines que fan referència a propietats de {{WBREPONAME}} que no es poden trobar ni per l'identificador ni per l'etiqueta."

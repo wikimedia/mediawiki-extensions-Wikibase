@@ -310,7 +310,7 @@
 	"wikibase-conflict-patched": "ویرایش‌تان در آخرین نسخه اصلاح شد.",
 	"wikibase-restoreold": "بازیابی",
 	"wikibase-entity-summary-restore": "بازگردانی نسخهٔ $3 توسط [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"wikibase-no-direct-editing": "ویرایش مستقیم در فضای نام $1 غیر فعال است",
+	"wikibase-no-direct-editing": "ویرایش مستقیم در فضای نام $1 غیرفعال است",
 	"wikibase-noentity": "این موجودیت وجود ندارد. می‌توانید <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاهه‌های مرتبط را جستجو کنید]</span> تا ببینید کجا رفته‌است.",
 	"wikibase-noentity-createone": "همچنین می‌توانید [[$1|یکی تازه ایجاد کنید]].",
 	"wikibase-special-mergeitems-error-prefix": "این آیتم‌ها نمی‌توانند ادغام شوند. این خطا رخ داده است:",
