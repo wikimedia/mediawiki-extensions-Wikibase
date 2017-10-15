@@ -656,12 +656,13 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string, set to 'uncached' to get an uncached direct lookup service. Set to 'retrieve-only'
+	 *        to get a lookup which reads from the cache, but doesn't store retrieved entities there.
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $uncached = '' ) {
-		return $this->getStore()->getEntityRevisionLookup( $uncached );
+	public function getEntityRevisionLookup( $cache = '' ) {
+		return $this->getStore()->getEntityRevisionLookup( $cache );
 	}
 
 	/**
@@ -739,12 +740,13 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string, set to 'uncached' to get an uncached direct lookup service. Set to 'retrieve-only'
+	 *        to get a lookup which reads from the cache, but doesn't store retrieved entities there.
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $uncached = '' ) {
-		return $this->getStore()->getEntityLookup( $uncached );
+	public function getEntityLookup( $cache = '' ) {
+		return $this->getStore()->getEntityLookup( $cache );
 	}
 
 	/**

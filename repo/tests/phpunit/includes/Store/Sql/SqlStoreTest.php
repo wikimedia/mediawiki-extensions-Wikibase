@@ -103,8 +103,18 @@ class SqlStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testGetEntityLookup() {
-		$service = $this->newInstance()->getEntityLookup();
-		$this->assertInstanceOf( EntityLookup::class, $service );
+		$services = [];
+		$services[] = $this->newInstance()->getEntityLookup();
+		$services[] = $this->newInstance()->getEntityLookup( 'uncached' );
+		$services[] = $this->newInstance()->getEntityLookup( 'retrieve-only' );
+		$services[] = $this->newInstance()->getEntityLookup( 'should default to cache' );
+
+		foreach ( $services as $service ) {
+			$this->assertInstanceOf( EntityLookup::class, $service );
+		}
+
+		// Should be three distinct objects
+		$this->assertCount( 3, array_unique( $services, SORT_REGULAR ) );
 	}
 
 	public function testGetEntityStoreWatcher() {
@@ -118,8 +128,18 @@ class SqlStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testGetEntityRevisionLookup() {
-		$service = $this->newInstance()->getEntityRevisionLookup();
-		$this->assertInstanceOf( EntityRevisionLookup::class, $service );
+		$services = [];
+		$services[] = $this->newInstance()->getEntityRevisionLookup();
+		$services[] = $this->newInstance()->getEntityRevisionLookup( 'uncached' );
+		$services[] = $this->newInstance()->getEntityRevisionLookup( 'retrieve-only' );
+		$services[] = $this->newInstance()->getEntityRevisionLookup( 'should default to cache' );
+
+		foreach ( $services as $service ) {
+			$this->assertInstanceOf( EntityRevisionLookup::class, $service );
+		}
+
+		// Should be three distinct objects
+		$this->assertCount( 3, array_unique( $services, SORT_REGULAR ) );
 	}
 
 	public function testGetEntityInfoBuilderFactory() {

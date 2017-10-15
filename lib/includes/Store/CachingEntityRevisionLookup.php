@@ -45,22 +45,31 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	private $shouldVerifyRevision = false;
 
 	/**
+	 * @var bool
+	 */
+	private $retrieveOnly = false;
+
+	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup The lookup to use
 	 * @param BagOStuff $cache The cache to use
 	 * @param int $cacheDuration Cache duration in seconds. Defaults to 3600 (1 hour).
 	 * @param string $cacheKeyPrefix The key prefix to use for constructing cache keys.
 	 *         Defaults to "wbentity". There should be no reason to change this.
+	 * @param string $retrieveOnly If set to "retrieve-only", retrieved entities wont be
+	 *         stored in the cache (entity changes will be reflected in all cases).
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		BagOStuff $cache,
 		$cacheDuration = 3600,
-		$cacheKeyPrefix = 'wbentity'
+		$cacheKeyPrefix = 'wbentity',
+		$retrieveOnly = 'persist'
 	) {
 		$this->lookup = $entityRevisionLookup;
 		$this->cache = $cache;
 		$this->cacheTimeout = $cacheDuration;
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
+		$this->retrieveOnly = $retrieveOnly === 'retrieve-only';
 	}
 
 	/**
@@ -155,7 +164,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		if ( $revisionId === 0 ) {
 			if ( $entityRevision === null ) {
 				$this->cache->delete( $key );
-			} else {
+			} elseif ( !$this->retrieveOnly ) {
 				$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
 			}
 		}
