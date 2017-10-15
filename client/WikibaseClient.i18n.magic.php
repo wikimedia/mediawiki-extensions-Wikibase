@@ -160,6 +160,14 @@ $magicWords['uk'] = [
 	'property' => [ 0, 'властивість', 'свойство' ],
 ];
 
+/** Urdu (اردو) */
+$magicWords['ur'] = [
+	'noexternallanglinks' => [ 0, 'بیرونی_زبان_کے_روابط_نہیں' ],
+	'property' => [ 0, 'خاصیت' ],
+	'statements' => [ 0, 'بیانات' ],
+	'wbreponame' => [ 0, 'ویب_مخزن_کا_نام' ],
+];
+
 /** Vietnamese (Tiếng Việt) */
 $magicWords['vi'] = [
 	'noexternallanglinks' => [ 0, 'không_liên_kết_ngôn_ngữ_ngoài', 'khôngliênkếtngônngữngoài' ],
