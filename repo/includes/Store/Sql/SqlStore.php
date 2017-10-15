@@ -84,6 +84,11 @@ class SqlStore implements Store {
 	private $rawEntityRevisionLookup = null;
 
 	/**
+	 * @var CachingEntityRevisionLookup|null
+	 */
+	private $retrieveOnlyEntityRevisionLookup = null;
+
+	/**
 	 * @var EntityStore|null
 	 */
 	private $entityStore = null;
@@ -359,12 +364,13 @@ class SqlStore implements Store {
 	 *
 	 * The EntityLookup returned by this method will resolve redirects.
 	 *
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string, set to 'uncached' to get an uncached direct lookup service. Set to 'retrieve-only'
+	 *        to get a lookup which reads from the cache, but doesn't store retrieved entities there.
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $uncached = '' ) {
-		$revisionLookup = $this->getEntityRevisionLookup( $uncached );
+	public function getEntityLookup( $cache = '' ) {
+		$revisionLookup = $this->getEntityRevisionLookup( $cache );
 		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );
 		return $resolvingLookup;
@@ -411,20 +417,31 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getEntityRevisionLookup
 	 *
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string, set to 'uncached' to get an uncached direct lookup service. Set to 'retrieve-only'
+	 *        to get a lookup which reads from the cache, but doesn't store retrieved entities there.
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $uncached = '' ) {
+	public function getEntityRevisionLookup( $cache = '' ) {
 		if ( !$this->entityRevisionLookup ) {
 			list( $this->rawEntityRevisionLookup, $this->entityRevisionLookup ) = $this->newEntityRevisionLookup();
 		}
 
-		if ( $uncached === 'uncached' ) {
+		if ( $cache === 'uncached' ) {
 			return $this->rawEntityRevisionLookup;
+		} elseif ( $cache === 'retrieve-only' ) {
+			return $this->getRetrieveOnlyCachingEntityRevisionLookup();
 		} else {
 			return $this->entityRevisionLookup;
 		}
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getEntityRevisionLookupCacheKey() {
+		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityRevisionLookup in WikibaseClient
+		return $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 	}
 
 	/**
@@ -435,8 +452,7 @@ class SqlStore implements Store {
 	 *  EntityRevisionLookup.
 	 */
 	private function newEntityRevisionLookup() {
-		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityRevisionLookup in WikibaseClient
-		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
+		$cacheKeyPrefix = $this->getEntityRevisionLookupCacheKey();
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
@@ -467,6 +483,31 @@ class SqlStore implements Store {
 		$dispatcher->registerWatcher( $hashCachingLookup );
 
 		return [ $nonCachingLookup, $hashCachingLookup ];
+	}
+
+	/**
+	 * @return CachingEntityRevisionLookup
+	 */
+	private function getRetrieveOnlyCachingEntityRevisionLookup() {
+		if ( !$this->retrieveOnlyEntityRevisionLookup ) {
+			$retrieveOnlyEntityRevisionLookup = new CachingEntityRevisionLookup(
+				$this->getEntityRevisionLookup( 'uncached' ),
+				wfGetCache( $this->cacheType ),
+				$this->cacheDuration,
+				$this->getEntityRevisionLookupCacheKey(),
+				'retrieve-only'
+			);
+
+			$retrieveOnlyEntityRevisionLookup->setVerifyRevision( true );
+
+			/** @var WikiPageEntityStore $dispatcher */
+			$dispatcher = $this->getEntityStoreWatcher();
+			$dispatcher->registerWatcher( $retrieveOnlyEntityRevisionLookup );
+
+			$this->retrieveOnlyEntityRevisionLookup = $retrieveOnlyEntityRevisionLookup;
+		}
+
+		return $this->retrieveOnlyEntityRevisionLookup;
 	}
 
 	/**
