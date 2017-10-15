@@ -5,7 +5,7 @@ This library contains JavaScript implementations of all basic DataValue classes 
 mirrors most of the PHP implementations of DataValue classes as specified in the
 [DataValues set of libraries](https://github.com/DataValues) (most notably the
 [basic](https://github.com/DataValues/DataValues),
-[Geo](https://github.com/DataValues/Geo,
+[Geo](https://github.com/DataValues/Geo),
 [Number](https://github.com/DataValues/Number), and
 [Time](https://github.com/DataValues/Time) libraries).
 
