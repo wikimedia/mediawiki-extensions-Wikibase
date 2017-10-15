@@ -22,7 +22,7 @@ class PropertyValueExpertsModule extends \ResourceLoaderModule {
 	}
 
 	public function getScript( ResourceLoaderContext $context ) {
-		$expertModuleMap = \XML::encodeJsVar( $this->dataTypeDefinitions->getExpertModules() );
+		$expertModuleMap = \Xml::encodeJsVar( $this->dataTypeDefinitions->getExpertModules() );
 
 		$js = <<<JS
 module.exports = ( function () {
