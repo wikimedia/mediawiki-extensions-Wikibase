@@ -22,4 +22,26 @@ return [
 			],
 		],
 	],
+	'entity_weight_boost' => [
+		'score_mode' => 'sum',
+		'functions' => [
+			[
+				// Incoming links: k = 50
+				'type' => 'satu',
+				'weight' => '0.5',
+				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 2 , 'k' => 50 ]
+			],
+			[
+				// Site links: k = 20
+				'type' => 'satu',
+				'weight' => '0.4',
+				'params' => [ 'field' => 'sitelink_count', 'missing' => 0, 'a' => 2, 'k' => 20 ]
+			],
+			[
+				// (De)boosting by statement values
+				'type' => 'statement_boost',
+				'weight' => '0.1',
+			]
+		],
+	],
 ];
