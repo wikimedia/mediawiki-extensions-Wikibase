@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_d92b0ada",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-16T07:42:16Z",
+      "side": 1,
+      "message": "Might be worth hiding those magic string values behind some class-level constants or so, so they\u0027re less magic.\n\nMight be also seen a matter of taste, possibly.",
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_99259205",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-16T07:42:16Z",
+      "side": 1,
+      "message": "So this is now becoming three state. Wouldn\u0027t say I like this, but could be alright here. Maybe the third state (empty string, or actually anything else than \u0027uncached\u0027 or \u0027retrieve-only\u0027) should be also documented now? Not sure how clear it is, with the third option added.",
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
