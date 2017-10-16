@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use CirrusSearch;
 use DataValues\BooleanValue;
-use DataValues\DecimalValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use PHPUnit_Framework_TestCase;
@@ -12,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
@@ -23,7 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group WikibaseElastic
  * @group Wikibase
- *
  */
 class StatementsFieldTest extends PHPUnit_Framework_TestCase {
 
@@ -60,55 +58,42 @@ class StatementsFieldTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider statementsProvider
-	 * @param EntityDocument $entity
-	 * @param $expected
 	 */
-	public function testStatements( EntityDocument $entity, $expected ) {
+	public function testStatements( EntityDocument $entity, array $expected ) {
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
-		$repo = WikibaseRepo::getDefaultInstance();
 
-		$field = new StatementsField( $this->properties, $repo->getDataTypeDefinitions()->getIndexDataFormatters() );
+		$repo = WikibaseRepo::getDefaultInstance();
+		$field = new StatementsField( $this->properties, $repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 
 	public function testFormatters() {
 		$formatters = [
 			'VT:string' => function ( StringValue $s ) {
-				return "STRING:" . $s->getValue();
+				return 'STRING:' . $s->getValue();
 			},
-
 			'VT:quantity' => function ( UnboundedQuantityValue $v ) {
-				return "VALUE:" . $v->getAmount();
+				return 'VALUE:' . $v->getAmount();
 			},
-
 		];
 		$field = new StatementsField( [ 'P123' ], $formatters );
 
-		$snaks = [
-			new PropertyValueSnak( 123, new StringValue( 'testString' ) ),
-			new PropertyValueSnak( 123,
-				new UnboundedQuantityValue( new DecimalValue( 456 ), "1" ) ),
-			new PropertySomeValueSnak( 123 ),
-			new PropertyValueSnak( 123, new StringValue( 'testString2' ) ),
-			new PropertyNoValueSnak( 123 ),
-			new PropertyValueSnak( 123, new BooleanValue( false ) ),
-		];
+		$statementList = new StatementList();
+		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString' ) ) );
+		$statementList->addNewStatement( new PropertyValueSnak( 123, UnboundedQuantityValue::newFromNumber( 456 ) ) );
+		$statementList->addNewStatement( new PropertySomeValueSnak( 123 ) );
+		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString2' ) ) );
+		$statementList->addNewStatement( new PropertyNoValueSnak( 123 ) );
+		$statementList->addNewStatement( new PropertyValueSnak( 123, new BooleanValue( false ) ) );
 
-		$mockList = $this->getMockBuilder( StatementListProvider::class )->setMethods( [
-			'getByPropertyId',
-			'getMainSnaks',
-			'getStatements',
-		] )->getMock();
-		$mockList->expects( $this->once() )->method( 'getByPropertyId' )->willReturnSelf();
-		$mockList->expects( $this->once() )->method( 'getMainSnaks' )->willReturn( $snaks );
-
-		$entity =
-			$this->getMockBuilder( StatementListProviderDummy::class )
-				->disableOriginalConstructor()
-				->getMock();
-		$entity->expects( $this->once() )->method( 'getStatements' )->willReturn( $mockList );
+		$entity = $this->getMockBuilder( StatementListProviderDummy::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$entity->expects( $this->once() )
+			->method( 'getStatements' )
+			->willReturn( $statementList );
 
 		$expected = [
 			'P123=STRING:testString',

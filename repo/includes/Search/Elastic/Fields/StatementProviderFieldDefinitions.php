@@ -11,21 +11,20 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * List of properties to index.
 	 * @var string[]
 	 */
-	private $properties;
+	private $propertyIds;
 
 	/**
 	 * @var callable[]
 	 */
-	private $definitions;
+	private $searchIndexDataFormatters;
 
 	/**
-	 * StatementProviderFieldDefinitions constructor.
-	 * @param string[] $properties List of properties to index
-	 * @param callable[] $definitions
+	 * @param string[] $propertyIds List of properties to index
+	 * @param callable[] $searchIndexDataFormatters
 	 */
-	public function __construct( array $properties, array $definitions ) {
-		$this->definitions = $definitions;
-		$this->properties = $properties;
+	public function __construct( array $propertyIds, array $searchIndexDataFormatters ) {
+		$this->propertyIds = $propertyIds;
+		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 	}
 
 	/**
@@ -33,9 +32,13 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @return WikibaseIndexField[] key is field name, value is WikibaseIndexField
 	 */
 	public function getFields() {
-		$fields['statement_keywords'] = new StatementsField( $this->properties, $this->definitions );
-		$fields['statement_count'] = new StatementCountField();
-		return $fields;
+		return [
+			'statement_keywords' => new StatementsField(
+				$this->propertyIds,
+				$this->searchIndexDataFormatters
+			),
+			'statement_count' => new StatementCountField(),
+		];
 	}
 
 }
