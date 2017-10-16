@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Units;
 /**
  * Basic unit storage functionality.
  * Concrete classes need to fill in data loading.
- * @package Wikibase\Lib
  */
 abstract class BaseUnitStorage implements UnitStorage {
 

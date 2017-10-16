@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Units;
 
 /**
  * Storage interface for Unit conversion information.
- * @package Wikibase\Lib
  */
 interface UnitStorage {
 

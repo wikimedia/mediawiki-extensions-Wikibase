@@ -8,7 +8,6 @@ use DataValues\UnboundedQuantityValue;
 
 /**
  * Convert quantities to other units.
- * @package Wikibase\Lib
  */
 class UnitConverter {
 
