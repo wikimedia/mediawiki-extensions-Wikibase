@@ -710,7 +710,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done
-	 * @return {dataValues.DataValue} return.done.value
+	 * @return {dataValues.DataValue|null} return.done.value The parse result.
 	 * @return {Function} return.fail
 	 * @return {string|undefined} return.fail.message HTML error message or `undefined` if the
 	 *         result shall be ignored.

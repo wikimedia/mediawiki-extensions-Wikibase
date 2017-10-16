@@ -35,6 +35,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @return {null}
 		 */
 		rawValue: function() {
 			return null;

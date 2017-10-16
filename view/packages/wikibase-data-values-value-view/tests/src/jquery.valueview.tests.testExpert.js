@@ -121,10 +121,10 @@ function testExpert( testDefinition ) {
 
 	expertCasesTestAndCleanup( 'rawValue: initial value', function( args, assert ) {
 		assert.expect( 1 );
-		assert.equal(
-			args.expert.rawValue(),
-			'',
-			'newly initialized expert has no value (rawValue() returns empty string)'
+		var rawValue = args.expert.rawValue();
+		assert.ok(
+			rawValue === '' || rawValue === null,
+			'newly initialized expert has no value (rawValue() returns empty string or null)'
 		);
 	} );
 

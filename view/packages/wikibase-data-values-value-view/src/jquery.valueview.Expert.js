@@ -260,10 +260,12 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Will return the value as a string.
 		 * @abstract
 		 *
-		 * @return {string} Returns the current raw value.
+		 * @return {string|dataValues.DataValue|null} Returns either the current raw value as a
+		 *  string that needs to be parsed first, or an already parsed DataValue object (e.g. from a
+		 *  client-side parser, but that should be avoided), or null if the expert is sure there is
+		 *  nothing to parse.
 		 */
 		rawValue: util.abstractMember,
 

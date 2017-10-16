@@ -61,6 +61,7 @@ module.exports = ( function( $, vv ) {
 
 		/**
 		 * @inheritdoc
+		 * @return {string}
 		 */
 		rawValue: function() {
 			return this.$input.val();

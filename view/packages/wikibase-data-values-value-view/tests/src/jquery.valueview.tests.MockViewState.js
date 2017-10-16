@@ -51,14 +51,14 @@ jQuery.valueview.tests.MockViewState = ( function( $, ViewState, util ) {
 		 * @see jQuery.valueview.ViewState.getFormattedValue
 		 */
 		getFormattedValue: function() {
-			return this._view.getFormattedValue;
+			return this._view.getFormattedValue || '';
 		},
 
 		/**
 		 * @see jQuery.valueview.ViewState.getTextValue
 		 */
 		getTextValue: function() {
-			return this._view.getTextValue;
+			return this._view.getTextValue || '';
 		},
 
 		/**

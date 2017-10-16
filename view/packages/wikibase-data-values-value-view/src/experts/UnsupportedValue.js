@@ -28,6 +28,7 @@
 
 		/**
 		 * @inheritdoc
+		 * @return {string}
 		 */
 		rawValue: function() {
 			return this.viewState().getTextValue();
