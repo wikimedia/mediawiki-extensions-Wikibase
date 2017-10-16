@@ -68,6 +68,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;prefixSearchProfiles: Loaded from <code>config/EntityPrefixSearchProfiles.php</code>, does not need to be defined manually. (Cirrus)
 :;defaultPrefixRescoreProfile: name of the rescoring profile to use for prefix search. The profile should be defined in <code>config/ElasticSearchRescoreProfiles.php</code>. (Cirrus)
 :;rescoreProfiles: Loaded from <code>config/ElasticSearchRescoreProfiles.php</code>, does not have to be defined manually. (Cirrus).
+:;statementBoost: Configuration to boost or deboost certain statement values (Cirrus).
 ;searchIndexProperties: Array of properties (by ID string) that should be included in the "statement_keywords" field of the search index. For now, only relevant when Cirrus search is enabled.
 
 == Client Settings ==
