@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_52eb6f77",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T13:50:21Z",
+      "side": 1,
+      "message": "The two methods are duplicated and can be merged into a \"getChangedTerms\". But all this is private and can be refactored any time.",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 40
+      },
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_f28143a5",
+        "filename": "lib/tests/phpunit/Changes/EntityDiffChangedAspectsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T13:50:21Z",
+      "side": 1,
+      "message": "This is a bit to heavy, in my opinion. I think just one bad serialization would have been enough.",
+      "range": {
+        "startLine": 180,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 55
+      },
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
