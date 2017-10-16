@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_77746596",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T10:09:11Z",
+      "side": 1,
+      "message": "I\u0027m not sure this part is clear enough… maybe \"or by loading the whole entity\"?",
+      "range": {
+        "startLine": 5,
+        "startChar": 136,
+        "endLine": 5,
+        "endChar": 148
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_f76055ce",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T10:09:11Z",
+      "side": 1,
+      "message": "Maybe \"Label in content or user language\"?",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_d76511de",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T10:09:11Z",
+      "side": 1,
+      "message": "Maybe just make this a different \"aspect\" \"Label by language, without fallbacks\"? That is probably better than the lengthy explanation above.",
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_9748f961",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T10:09:11Z",
+      "side": 1,
+      "message": "property",
+      "range": {
+        "startLine": 309,
+        "startChar": 21,
+        "endLine": 309,
+        "endChar": 28
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_b743bd42",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T10:09:11Z",
+      "side": 1,
+      "message": "property",
+      "range": {
+        "startLine": 314,
+        "startChar": 21,
+        "endLine": 314,
+        "endChar": 28
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_577121a6",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T10:09:11Z",
+      "side": 1,
+      "message": "property",
+      "range": {
+        "startLine": 328,
+        "startChar": 21,
+        "endLine": 328,
+        "endChar": 28
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
