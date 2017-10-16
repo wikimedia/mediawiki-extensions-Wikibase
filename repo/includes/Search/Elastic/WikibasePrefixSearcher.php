@@ -46,11 +46,11 @@ class WikibasePrefixSearcher extends Searcher {
 		];
 		$searchQuery = new Query();
 		$searchQuery->setQuery( $this->query );
+		$resultType = $this->getSearchContext()->getResultsType();
+		$searchQuery->setSource( $resultType->getSourceFiltering() );
+		$searchQuery->setStoredFields( $resultType->getStoredFields() );
 
-		$searchQuery->setSource( $this->resultsType->getSourceFiltering() );
-		$searchQuery->setStoredFields( $this->resultsType->getStoredFields() );
-
-		$highlight = $this->searchContext->getHighlight( $this->resultsType );
+		$highlight = $this->searchContext->getHighlight( $resultType );
 		if ( $highlight ) {
 			$searchQuery->setHighlight( $highlight );
 		}
