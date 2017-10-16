@@ -8,8 +8,9 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 
 /**
+ * @covers \Wikibase\Repo\Search\Elastic\EntitySearchElastic
+ *
  * @group Wikibase
- * @covers EntitySearchElastic
  */
 class EntitySearchElasticTest extends MediaWikiTestCase {
 
