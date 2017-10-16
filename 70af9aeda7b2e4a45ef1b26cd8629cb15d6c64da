@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_b2a2eb39",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T13:59:56Z",
+      "side": 1,
+      "message": "Why is this not a \"propertyId\" any more? What is it instead?\n\nBasically, this looks unrelated to the rest of this patch, and I don\u0027t see the reason to change it.",
+      "range": {
+        "startLine": 49,
+        "startChar": 55,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_77746596",
         "filename": "docs/lua.wiki",
         "patchSetId": 4
@@ -18,6 +41,29 @@
         "startChar": 136,
         "endLine": 5,
         "endChar": 148
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_12497790",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T13:59:56Z",
+      "side": 1,
+      "message": "I would not work with such a syntax (the star in brackets), but instead write an actual sentence down in the table where the exception is.",
+      "range": {
+        "startLine": 5,
+        "startChar": 532,
+        "endLine": 5,
+        "endChar": 535
       },
       "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
