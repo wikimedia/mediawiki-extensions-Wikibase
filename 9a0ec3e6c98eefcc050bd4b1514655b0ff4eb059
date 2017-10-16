@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_175f2978",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "Yeah, that makes sense",
+      "parentUuid": "0e6af365_1cfbd078",
+      "range": {
+        "startLine": 153,
+        "startChar": 37,
+        "endLine": 153,
+        "endChar": 38
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_5c1708a8",
         "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
         "patchSetId": 2
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_77c78515",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_9cefc0ac",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 28,
+        "endChar": 20
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_bc2084f3",
         "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
         "patchSetId": 2
@@ -82,6 +130,30 @@
       "writtenOn": "2017-10-16T09:42:49Z",
       "side": 1,
       "message": "The fact this needs a comment makes this one of the scariest bits in this class. I don\u0027t have a suggestion how to improve this. But please make sure this is properly covered by tests.",
+      "range": {
+        "startLine": 35,
+        "startChar": 22,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_9753196e",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "This was copy and pasted from AffectedPagesFinder. I have tests for this in testGetFromEntityDiff_otherChanges.",
+      "parentUuid": "0e6af365_bc2084f3",
       "range": {
         "startLine": 35,
         "startChar": 22,
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_97e2399b",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_7c1a0cd2",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_7cbc4c67",
         "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
         "patchSetId": 2
@@ -128,6 +224,30 @@
       "writtenOn": "2017-10-16T09:42:49Z",
       "side": 1,
       "message": "Might be worth using something like this instead:\n\n return array_keys( iterator_to_array( $labelsDiff ) );",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 114,
+        "endChar": 3
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_37d10dd1",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_7cbc4c67",
       "range": {
         "startLine": 112,
         "startChar": 2,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_17ce4931",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_1cb3d097",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 129,
+        "endChar": 3
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_bc2f249b",
         "filename": "lib/tests/phpunit/Changes/EntityDiffChangedAspectsFactoryTest.php",
         "patchSetId": 2
@@ -174,6 +318,30 @@
       "writtenOn": "2017-10-16T09:42:49Z",
       "side": 1,
       "message": "There should be a test with this version not matching.",
+      "range": {
+        "startLine": 35,
+        "startChar": 27,
+        "endLine": 35,
+        "endChar": 71
+      },
+      "revId": "9a0ec3e6c98eefcc050bd4b1514655b0ff4eb059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_b7ddfde2",
+        "filename": "lib/tests/phpunit/Changes/EntityDiffChangedAspectsFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T12:44:02Z",
+      "side": 1,
+      "message": "Not in here, but yes… done.",
+      "parentUuid": "0e6af365_bc2f249b",
       "range": {
         "startLine": 35,
         "startChar": 27,
