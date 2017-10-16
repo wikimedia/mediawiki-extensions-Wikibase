@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_b958965a",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T08:37:13Z",
+      "side": 1,
+      "message": "What does this mean?",
+      "range": {
+        "startLine": 59,
+        "startChar": 33,
+        "endLine": 59,
+        "endChar": 78
+      },
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_d92b0ada",
         "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -13,6 +36,52 @@
       "writtenOn": "2017-10-16T07:42:16Z",
       "side": 1,
       "message": "Might be worth hiding those magic string values behind some class-level constants or so, so they\u0027re less magic.\n\nMight be also seen a matter of taste, possibly.",
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_391a667f",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T08:37:13Z",
+      "side": 1,
+      "message": "What\u0027s the point of skipping this?",
+      "range": {
+        "startLine": 162,
+        "startChar": 20,
+        "endLine": 162,
+        "endChar": 52
+      },
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_9934b2f2",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T08:37:13Z",
+      "side": 1,
+      "message": "This here will be the only line of code that can put something into the cache. When will this be called?",
+      "range": {
+        "startLine": 211,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 19
+      },
       "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
