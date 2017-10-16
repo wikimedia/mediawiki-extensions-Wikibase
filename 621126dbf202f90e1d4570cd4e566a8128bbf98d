@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_ba1f21b9",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-16T19:01:01Z",
+      "side": 1,
+      "message": "Yeah, that makes sense to me as well.\n\nWe had no problems when we started throwing errors in __newindex… but just stopping to do so now seems weird.",
+      "parentUuid": "0e6af365_685ec2ed",
+      "revId": "621126dbf202f90e1d4570cd4e566a8128bbf98d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_57012170",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 11
