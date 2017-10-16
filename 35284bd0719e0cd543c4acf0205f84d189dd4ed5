@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_cd102056",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T14:06:59Z",
+      "side": 1,
+      "message": "This sounds like you need this in a context where you either need an EntityRevisionLookup only, or an EntityStoreWatcher only. But not both in the confusing way (one is read-only, the other isn\u0027t) they are here in this current patch set.",
+      "parentUuid": "0e6af365_9c86e0aa",
+      "range": {
+        "startLine": 59,
+        "startChar": 33,
+        "endLine": 59,
+        "endChar": 78
+      },
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_d92b0ada",
         "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -113,6 +137,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_ed0ba424",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T14:06:59Z",
+      "side": 1,
+      "message": "The set() call below is skipped, which means this getEntityRevision() call is always executed. If this is what\u0027s needed, than a \"caching\" EntityRevisionLookup is obviously not what\u0027s needed.",
+      "parentUuid": "0e6af365_7c520c41",
+      "range": {
+        "startLine": 162,
+        "startChar": 20,
+        "endLine": 162,
+        "endChar": 52
+      },
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_9934b2f2",
         "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -148,6 +196,30 @@
       "side": 1,
       "message": "When something gets changed in the current thread (see EntityStoreWatcher)",
       "parentUuid": "0e6af365_9934b2f2",
+      "range": {
+        "startLine": 211,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 19
+      },
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_8d1a2872",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-16T14:06:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the caching layer you want go there then?",
+      "parentUuid": "0e6af365_1c499090",
       "range": {
         "startLine": 211,
         "startChar": 2,
