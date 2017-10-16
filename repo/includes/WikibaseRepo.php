@@ -1480,20 +1480,22 @@ class WikibaseRepo {
 	 * @return FieldDefinitions
 	 */
 	private function getItemFieldDefinitions() {
-		return new ItemFieldDefinitions(
-			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions(),
-			$this->getStatementProviderDefinitions()
-		);
+		return new ItemFieldDefinitions( [
+			$this->getLabelProviderDefinitions(),
+			$this->getDescriptionProviderDefinitions(),
+			$this->getStatementProviderDefinitions(),
+		] );
 	}
 
 	/**
 	 * @return FieldDefinitions
 	 */
 	private function getPropertyFieldDefinitions() {
-		return new PropertyFieldDefinitions(
-			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions(),
-			$this->getStatementProviderDefinitions()
-		);
+		return new PropertyFieldDefinitions( [
+			$this->getLabelProviderDefinitions(),
+			$this->getDescriptionProviderDefinitions(),
+			$this->getStatementProviderDefinitions(),
+		] );
 	}
 
 	/**

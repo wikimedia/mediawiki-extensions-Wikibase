@@ -8,39 +8,26 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 class ItemFieldDefinitions implements FieldDefinitions {
 
 	/**
-	 * @var FieldDefinitions
+	 * @var FieldDefinitions[]
 	 */
-	private $labelsProviderFieldDefinitions;
+	private $fieldDefinitions;
 
 	/**
-	 * @var FieldDefinitions
+	 * @param FieldDefinitions[] $fieldDefinitions
 	 */
-	private $descriptionsProviderFieldDefinitions;
-
-	/**
-	 * @var FieldDefinitions
-	 */
-	private $statementProviderFieldDefinitions;
-
-	public function __construct(
-		FieldDefinitions $labelsProviderFieldDefinitions,
-		FieldDefinitions $descriptionsProviderFieldDefinitions,
-		FieldDefinitions $statementProviderFieldDefinitions
-	) {
-		$this->labelsProviderFieldDefinitions = $labelsProviderFieldDefinitions;
-		$this->descriptionsProviderFieldDefinitions = $descriptionsProviderFieldDefinitions;
-		$this->statementProviderFieldDefinitions = $statementProviderFieldDefinitions;
+	public function __construct( array $fieldDefinitions ) {
+		$this->fieldDefinitions = $fieldDefinitions;
 	}
 
 	/**
 	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
-		$fields = array_merge(
-			$this->labelsProviderFieldDefinitions->getFields(),
-			$this->descriptionsProviderFieldDefinitions->getFields(),
-			$this->statementProviderFieldDefinitions->getFields()
-		);
+		$fields = [];
+
+		foreach ( $this->fieldDefinitions as $definitions ) {
+			$fields = array_merge( $fields, $definitions->getFields() );
+		}
 
 		$fields['sitelink_count'] = new SiteLinkCountField();
 
