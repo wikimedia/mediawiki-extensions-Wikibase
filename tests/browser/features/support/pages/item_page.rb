@@ -24,8 +24,9 @@ class ItemPage
     item_data
   end
 
-  def create_item(data)
+  def create_item(data, user = nil, password = nil)
     wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+    wb_api.log_in(user, password) if user && password
     resp = wb_api.create_item(data)
 
     id = resp['entity']['id']
