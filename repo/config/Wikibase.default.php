@@ -255,6 +255,8 @@ return [
 		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
 		// Rescore profiles, loaded by Wikibase.php
 		'rescoreProfiles' => [],
+		// Type (de)boosts for rescoring functions
+		'statementBoost' => [],
 	],
 
 	// List of properties to be indexed
