@@ -24,11 +24,11 @@ class ItemFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 	public function testGetFields() {
 		$languageCodes = [ 'ar', 'es' ];
 
-		$fieldDefinitions = new ItemFieldDefinitions(
+		$fieldDefinitions = new ItemFieldDefinitions( [
 			$this->newLabelsProviderFieldDefinitions( $languageCodes ),
 			$this->newDescriptionsProviderFieldDefinitions( $languageCodes ),
-			new StatementProviderFieldDefinitions( [], [] )
-		);
+			new StatementProviderFieldDefinitions( [], [] ),
+		] );
 
 		$fields = $fieldDefinitions->getFields();
 
