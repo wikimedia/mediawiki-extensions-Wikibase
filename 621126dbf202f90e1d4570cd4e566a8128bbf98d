@@ -88,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_685ec2ed",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-10-16T16:04:37Z",
+      "side": 1,
+      "message": "I note that only doing this when fineGrainedLuaTracking is enabled also means that things like the \u0027#\u0027 operator, `table`-package functions, and setting values in the tables will work when fineGrainedLuaTracking is disabled but will not work when it is disabled.\n\nThat doesn\u0027t mean you have to \"fix\" it somehow, but you should be aware of it in case someone reports it as a bug.\n\nThis simplest fix, if you want to do that, would probably be to pass no-op usage functions into maskEntityTable() above when fineGrainedLuaTracking is disabled.",
+      "revId": "621126dbf202f90e1d4570cd4e566a8128bbf98d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_57012170",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
         "patchSetId": 11
