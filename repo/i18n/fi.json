@@ -104,7 +104,7 @@
 	"wikibase-statementview-rank-preferred": "Suosittu asema",
 	"wikibase-statementview-rank-normal": "Tavallinen asema",
 	"wikibase-statementview-rank-deprecated": "Vanhentunut asema",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|lähde|lähdettä}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|lähde|lähdettä}}",
 	"wikibase-snakview-property-input-placeholder": "ominaisuus",
 	"wikibase-snakview-unsupportedsnaktype": "Snak on tyyppiä \"$1\". Tällaisen snakin käsittelyä ei vielä tueta.",
 	"wikibase-snakview-choosesnaktype": "Valitse arvon tyyppi.",

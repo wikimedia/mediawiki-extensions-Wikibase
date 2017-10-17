@@ -35,5 +35,6 @@
 	"wikibase-validator-unknown-unit": "Uned anhysbys: $1",
 	"datatypes-type-wikibase-item": "Eitem",
 	"datatypes-type-commonsMedia": "Ffeil cyfrwng ar y Comin",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-10annum": "$1au"
 }

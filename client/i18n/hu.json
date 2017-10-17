@@ -67,6 +67,8 @@
 	"unconnectedpages-summary": "Ez a lap listázza azokat a lapokat, amik nincsenek összekapcsolva {{WBREPONAME}}-elemekkel (azokban a névterekben, amik támogatják ezt). A lista lapazonosító szerint csökkenő sorrendben van, így a legújabb lapok vannak felül.",
 	"wikibase-unconnectedpages-format-row": "($1 nyelvközi hivatkozás a lapon)",
 	"wikibase-unconnectedpages-submit": "Lapok megjelenítése",
+	"pageswithbadges": "Lapok plecsnikkel",
+	"pageswithbadges-summary": "A plecsnikkel (például jó vagy kiemelt szócikk) rendelkező lapok listája. A lista lapazonosítók alapján van rendezve, tehát az újabb lapok vannak előbb.",
 	"wikibase-pageswithbadges-invalid-id": "$1 nem egy érvényes elemazonosító",
 	"wikibase-pageswithbadges-submit": "Lapok megjelenítése",
 	"entityusage": "Állítások használata",

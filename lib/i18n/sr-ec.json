@@ -38,6 +38,7 @@
 	"wikibase-globedetails-longitude": "Географска дужина",
 	"wikibase-globedetails-latitude": "Географска ширина",
 	"wikibase-globedetails-precision": "Прецизност",
+	"wikibase-parse-error-time": "Вредност за време је погрешно форматирана.",
 	"wikibase-sitelinks-wikipedia": "Википедија",
 	"wikibase-sitelinks-sitename-columnheading": "Језик",
 	"wikibase-sitelinks-link-columnheading": "Повезана страница",

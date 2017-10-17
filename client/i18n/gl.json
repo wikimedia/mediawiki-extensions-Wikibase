@@ -110,6 +110,7 @@
 	"wikibase-pageinfo-entity-usage": "Entidades de {{WBREPONAME}} usadas nesta páxina",
 	"wikibase-pageinfo-entity-usage-S": "Ligazón de sitio",
 	"wikibase-pageinfo-entity-usage-L": "Etiqueta: $1",
+	"wikibase-pageinfo-entity-usage-D": "Descrición: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
 	"wikibase-pageinfo-entity-usage-C": "Declaración: $1",
 	"wikibase-pageinfo-entity-usage-X": "Tódolos datos da entidade",
