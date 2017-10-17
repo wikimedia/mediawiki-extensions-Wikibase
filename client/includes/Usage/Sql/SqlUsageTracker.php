@@ -34,6 +34,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $connectionManager;
 
 	/**
+	 * Usage aspects in this array won't be persisted. If string keys are used, this
+	 * is treated as [ 'usage-aspect-to-replace' => 'replacement' ].
+	 *
 	 * @var string[]
 	 */
 	private $disabledUsageAspects;
@@ -121,14 +124,22 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
-	private function removeBlacklistedUsages( array $usages ) {
+	private function handleBlacklistedUsages( array $usages ) {
 		$newUsages = [];
 
 		foreach ( $usages as $usage ) {
 			if ( !( $usage instanceof EntityUsage ) ) {
 				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
 			}
-			if ( in_array( $usage->getAspect(), $this->disabledUsageAspects ) ) {
+
+			// Disabled usage with replacement
+			if ( isset( $this->disabledUsageAspects[$usage->getAspect()] ) ) {
+				$newUsages[] = new EntityUsage( $usage->getEntityId(), $this->disabledUsageAspects[$usage->getAspect()] );
+				continue;
+			}
+
+			// Disabled usage aspects without replacement (integer key, no replace from -> to map)
+			if ( is_int( array_search( $usage->getAspect(), $this->disabledUsageAspects ) ) ) {
 				continue;
 			}
 
@@ -152,7 +163,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		$usages = $this->removeBlacklistedUsages( $usages );
+		$usages = $this->handleBlacklistedUsages( $usages );
 		if ( empty( $usages ) ) {
 			return;
 		}
@@ -204,7 +215,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			// queryUsages guarantees this to be identity string => EntityUsage
 			$oldUsages = $usageTable->queryUsages( $pageId );
 
-			$usages = $this->removeBlacklistedUsages( $usages );
+			$usages = $this->handleBlacklistedUsages( $usages );
 			$newUsages = $this->reindexEntityUsages( $usages );
 
 			$removed = array_diff_key( $oldUsages, $newUsages );
