@@ -79,19 +79,21 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		$usages = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P12' ),
+			new EntityUsage( $q3, EntityUsage::DESCRIPTION_USAGE, 'es' ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
+			new EntityUsage( $q4, EntityUsage::OTHER_USAGE ),
 		];
 
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( wfGetLB() ),
-			[ EntityUsage::STATEMENT_USAGE ]
+			[ EntityUsage::STATEMENT_USAGE, EntityUsage::DESCRIPTION_USAGE => EntityUsage::OTHER_USAGE ]
 		);
 		$sqlUsageTracker->addUsedEntities( 23, $usages );
 
 		// All entries but the blacklisted should be set
 		$this->assertEquals(
-			[ 'Q3#S', 'Q4#L.de' ],
+			[ 'Q3#S', 'Q3#O', 'Q4#L.de', 'Q4#O' ],
 			array_keys( $this->getUsages( 23 ) )
 		);
 	}
