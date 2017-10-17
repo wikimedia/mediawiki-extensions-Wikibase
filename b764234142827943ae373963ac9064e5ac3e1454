@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_29cbe922",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/SqlUsageTrackerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-17T11:12:26Z",
+      "side": 1,
+      "message": "I would be nice to include a test for this scenario:\n   Q5, DESC\n   Q5, OTHER\n(with DESC\u003d\u003eOTHER)\n\nExpecting Q5#O (and NOT Q5#O, Q5#O)",
+      "revId": "b764234142827943ae373963ac9064e5ac3e1454",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
