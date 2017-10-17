@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_94ac6c9e",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-10-17T13:07:19Z",
+      "side": 1,
+      "message": "constants for this would be good and would allow these be better documented",
+      "parentUuid": "0e6af365_d92b0ada",
+      "revId": "35284bd0719e0cd543c4acf0205f84d189dd4ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_391a667f",
         "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
         "patchSetId": 3
