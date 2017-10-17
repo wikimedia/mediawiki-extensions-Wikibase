@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_49fdfd67",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityDiffVisualizerFactoryTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-17T14:39:33Z",
+      "side": 1,
+      "message": "does not need to extend MWTestCase right? At least, as it does not do anything big with the request context?",
+      "revId": "21560c3b3255ae010566787420e17f10ea41c5bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
