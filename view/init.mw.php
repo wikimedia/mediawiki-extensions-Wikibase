@@ -18,6 +18,9 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 include __DIR__ . '/resources.php';
 include __DIR__ . '/resources.test.php';
 
+$GLOBALS['wgMessagesDirs']['WikibaseView'] = [];
+include __DIR__ . '/lib/i18n.php';
+
 $GLOBALS['wgHooks']['UnitTestsList'][] = function( array &$paths ) {
 	$paths[] = __DIR__ . '/tests/phpunit';
 };
