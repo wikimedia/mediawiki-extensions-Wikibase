@@ -1,0 +1,10 @@
+This directory contains libraries registering Resource Loader modules used by the View component of Wikibase.
+
+Libraries are installed as git submodules rooted in this directory.
+Resource Loader modules consisting of files from the library should be defined by adding a relevant entry in resources.php file (and possibly in resources subdirectory).
+
+If the library files are part of Resource Loader modules used in tests, modules should be defined by adding the entry to resources.test.php.
+
+If the library contains i18n messages that should be registered for the used in Wikibase, make sure to update i18n.php accordingly.
+
+When updating the library, update the state of the submodule as desired, and make sure to commit the state of the submodule to the "main" Wikibase git repository.
