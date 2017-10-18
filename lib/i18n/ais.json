@@ -47,6 +47,7 @@
 	"wikibase-validator-bad-entity-id": "ID kese caay katatenga’: $1",
 	"wikibase-validator-bad-entity-type": "talibahalay a masaheciay nikalahizaan $1",
 	"wikibase-validator-no-such-entity": "caykatepa $1",
+	"wikibase-validator-no-such-property": "caay katepa susin $1",
 	"wikibase-validator-bad-value": "kalunasulitan sulyang mungangaw: $1",
 	"wikibase-validator-bad-value-type": "mungangaw kakuniza-sulyang $1, talaayaway mazateng ku $2",
 	"wikibase-validator-bad-data-type": "mungangaway a kalunasulitan nikalahizaan: $1",

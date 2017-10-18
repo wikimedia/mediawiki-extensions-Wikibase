@@ -35,10 +35,12 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawaway-kalumyiti",
 	"wikibase-watchlist-show-changes-pref": "paazih {{WBREPONAME}} mikawaway-kalumyiti i numisuay a miazihay a piazihan tu sulit",
 	"wikibase-error-deserialize-error": "belih-salaylay kalunasulitan mungagnaw",
+	"wikibase-error-serialize-error": "silyihwa kalunasulitan mungangaw.",
 	"wikibase-error-invalid-entity-id": "sisetyimo la’cus taazihan nasulitan a ID [$2]. pisaungay kapahay a ID",
 	"wikibase-error-exceeded-entity-access-limit": "ciwsac sayadah {{WBREPONAME}} kasacacay.",
 	"unconnectedpages": "kasabelih caay masasiket tayza amahicahica tu kasacacay",
 	"wikibase-unconnectedpages-submit": "paazih  kasabelih",
+	"pageswithbadges": "u sikunpayay kasabelih",
 	"wikibase-pageswithbadges-invalid-id": "$1 caay ku kapahay a ID kasacacay",
 	"wikibase-pageswithbadges-badge": "kunpay:",
 	"wikibase-pageswithbadges-submit": "paazih  kasabelih",
@@ -55,5 +57,6 @@
 	"wikibase-pageinfo-entity-usage-X": "sacahamin masaheciay kalunasulitan",
 	"wikibase-property-render-error": "paazih susin $1: $2 mungangaw",
 	"wikibase-otherprojects": "zuma cwanan",
+	"wikibase-otherprojects-beta-message": "zuma cwanan tapiingan a tusil",
 	"notification-link-text-view-item": "{{GENDER:$1|ciwsace}} kasacacay"
 }
