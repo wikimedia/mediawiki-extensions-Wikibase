@@ -12,6 +12,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function(
 ) {
 	$testModules['qunit'] = array_merge(
 		$testModules['qunit'],
+		include __DIR__ . '/lib/resources.test.php',
 		include __DIR__ . '/tests/qunit/resources.php'
 	);
 
