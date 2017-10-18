@@ -9,6 +9,7 @@ return call_user_func( function() {
 
 	$wgResourceModules = array_merge(
 		$wgResourceModules,
+		include __DIR__ . '/lib/resources.php',
 		include __DIR__ . '/resources/resources.php'
 	);
 } );
