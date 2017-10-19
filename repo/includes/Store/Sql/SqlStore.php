@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -448,10 +449,12 @@ class SqlStore implements Store {
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
-			$nonCachingLookup,
-			wfGetCache( $this->cacheType ),
-			$this->cacheDuration,
-			$cacheKeyPrefix
+			new EntityRevisionCache(
+				wfGetCache( $this->cacheType ),
+				$this->cacheDuration,
+				$cacheKeyPrefix
+			),
+			$nonCachingLookup
 		);
 		// We need to verify the revision ID against the database to avoid stale data.
 		$persistentCachingLookup->setVerifyRevision( true );
@@ -459,8 +462,8 @@ class SqlStore implements Store {
 
 		// Top caching layer using an in-process hash.
 		$hashCachingLookup = new CachingEntityRevisionLookup(
-			$persistentCachingLookup,
-			new HashBagOStuff( [ 'maxKeys' => 1000 ] )
+			new EntityRevisionCache( new HashBagOStuff( [ 'maxKeys' => 1000 ] ) ),
+			$persistentCachingLookup
 		);
 		// No need to verify the revision ID, we'll ignore updates that happen during the request.
 		$hashCachingLookup->setVerifyRevision( false );
