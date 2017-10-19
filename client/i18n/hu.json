@@ -68,7 +68,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 nyelvközi hivatkozás a lapon)",
 	"wikibase-unconnectedpages-submit": "Lapok megjelenítése",
 	"pageswithbadges": "Lapok plecsnikkel",
-	"pageswithbadges-summary": "A plecsnikkel (például jó vagy kiemelt szócikk) rendelkező lapok listája. A lista lapazonosítók alapján van rendezve, tehát az újabb lapok vannak előbb.",
+	"pageswithbadges-summary": "A plecsnikkel (például jó vagy kiemelt szócikk minősítéssel) rendelkező lapok listája. A lista a lapazonosítók alapján van rendezve, tehát az újabb lapok vannak előbb.",
 	"wikibase-pageswithbadges-invalid-id": "$1 nem egy érvényes elemazonosító",
 	"wikibase-pageswithbadges-submit": "Lapok megjelenítése",
 	"entityusage": "Állítások használata",
