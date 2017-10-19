@@ -1012,19 +1012,23 @@ final class RepoHooks {
 
 	/**
 	 * Wikibase-specific rescore builders for CirrusSearch.
+	 *
 	 * @param array $func Builder parameters
 	 * @param SearchContext $context
-	 * @param FunctionScoreBuilder $builder Output parameter for score builder.
+	 * @param FunctionScoreBuilder|null &$builder Output parameter for score builder.
 	 */
 	public static function onCirrusSearchScoreBuilder(
 		array $func,
 		SearchContext $context,
 		FunctionScoreBuilder &$builder = null
 	) {
-		if ( $func['type'] == 'statement_boost' ) {
+		if ( $func['type'] === 'statement_boost' ) {
 			$searchSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
-			$builder = new StatementBoostScoreBuilder( $context, $func['weight'],
-					$searchSettings['statementBoost'] );
+			$builder = new StatementBoostScoreBuilder(
+				$context,
+				$func['weight'],
+				$searchSettings['statementBoost']
+			);
 		}
 	}
 

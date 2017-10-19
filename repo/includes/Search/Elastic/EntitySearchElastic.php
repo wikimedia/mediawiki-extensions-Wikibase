@@ -19,6 +19,9 @@ use Wikibase\Repo\Api\EntitySearchHelper;
 /**
  * Entity search implementation using ElasticSearch.
  * Requires CirrusSearch extension and $wgEntitySearchUseCirrus to be on.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class EntitySearchElastic implements EntitySearchHelper {
 

@@ -12,7 +12,8 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Search\Elastic\ElasticTermResult;
 
 /**
- * @covers ElasticTermResult
+ * @covers \Wikibase\Repo\Search\Elastic\ElasticTermResult
+ *
  * @group Wikibase
  */
 class ElasticTermResultTest extends MediaWikiTestCase {
@@ -326,7 +327,7 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 		];
 	}
 
-	private function getMockFallbackChain( $languages ) {
+	private function getMockFallbackChain( array $languages ) {
 		$mock = $this->getMockBuilder( LanguageFallbackChain::class )
 				->disableOriginalConstructor()
 				->getMock();
@@ -348,12 +349,8 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider termResultsProvider
-	 * @param $languages
-	 * @param $displayLanguages
-	 * @param $resultData
-	 * @param $expected
 	 */
-	public function testTransformResult( $languages, $displayLanguages, $resultData, $expected ) {
+	public function testTransformResult( array $languages, array $displayLanguages, array $resultData, array $expected ) {
 		$res = new ElasticTermResult(
 			new BasicEntityIdParser(),
 			$languages,
