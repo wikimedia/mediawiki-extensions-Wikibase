@@ -61,6 +61,7 @@
 			"lib/maintenance/",
 			"repo/includes/",
 			"repo/maintenance/",
+			"repo/tests/phpunit/maintenance/MockAddUnits.php",
 			"repo/Wikibase.hooks.php"
 		],
 		"psr-4": {

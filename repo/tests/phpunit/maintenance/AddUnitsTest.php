@@ -10,8 +10,6 @@ use Wikibase\Repo\Maintenance\SPARQLClient;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 
-require_once __DIR__ . '/MockAddUnits.php';
-
 /**
  * @covers Wikibase\AddUnitConversions
  * @group Wikibase
