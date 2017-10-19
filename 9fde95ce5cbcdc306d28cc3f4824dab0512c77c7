@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce637b91_8eb7fff1",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "Can we start with 1, please?",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_4ed2672e",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "How do you distinguish addition from removal from update? That\u0027s an important distinction for the affected client. Perhaps this should be an int or a single character, not a bool.",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_aebc43d6",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "aliases, for example",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_6ecf2b83",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "If we are worried about compactness, use shorter keys. Should be ok if this is purely an internal structure. Apropos: it should somewhere say what kind of stability guarantees we give for this structure, and what needs to be considered when bumping the version.",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_eea9db8e",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "why not require an EntityDiff here? The name suggests that it has to be one.",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_0ecc6f8b",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "This is redundant to the check above\n$entityDiff-\u003egetSiteLinkDiff()-\u003eisEmpty()",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_cea417b8",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "EntityDiff could be required in the param list.\n\nThough EntityDiff should actually not know anything about labels, descriptions, or claims. We should have separate interfaces for these... Oh, well.",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_52eb6f77",
         "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
         "patchSetId": 3
@@ -25,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_0ea30faa",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "That method could actually be called getDiffKeys().\nBut I like the more specific methods better. The overhead is minimal.",
+      "parentUuid": "0e6af365_52eb6f77",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 40
+      },
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_f28143a5",
         "filename": "lib/tests/phpunit/Changes/EntityDiffChangedAspectsTest.php",
         "patchSetId": 3
@@ -36,6 +179,30 @@
       "writtenOn": "2017-10-16T13:50:21Z",
       "side": 1,
       "message": "This is a bit to heavy, in my opinion. I think just one bad serialization would have been enough.",
+      "range": {
+        "startLine": 180,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 55
+      },
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_eec23b5d",
+        "filename": "lib/tests/phpunit/Changes/EntityDiffChangedAspectsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-19T08:51:30Z",
+      "side": 1,
+      "message": "hm? what do you mean?",
+      "parentUuid": "0e6af365_f28143a5",
       "range": {
         "startLine": 180,
         "startChar": 43,
