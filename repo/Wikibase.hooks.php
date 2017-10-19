@@ -6,6 +6,7 @@ use ApiBase;
 use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
+use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use Content;
 use ContentHandler;
@@ -1011,18 +1012,23 @@ final class RepoHooks {
 
 	/**
 	 * Wikibase-specific rescore builders for CirrusSearch.
+	 *
 	 * @param array $func
 	 * @param SearchContext $context
-	 * @param $builder
+	 * @param FunctionScoreBuilder|null &$builder
 	 */
 	public static function onCirrusSearchScoreBuilder(
 		array $func,
 	    SearchContext $context,
-	    &$builder
+		FunctionScoreBuilder &$builder = null
 	) {
-		if ( $func['type'] == 'statement_boost' ) {
-			$builder = new StatementBoostScoreBuilder( $context, $func['weight'],
-					WikibaseRepo::getDefaultInstance() );
+		if ( $func['type'] === 'statement_boost' ) {
+			$settings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
+			$builder = new StatementBoostScoreBuilder(
+				$context,
+				$func['weight'],
+				$settings['statementBoost']
+			);
 		}
 	}
 

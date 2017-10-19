@@ -1,17 +1,20 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic;
 
 use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\Search\TermBoostScoreBuilder;
 use Elastica\Query\FunctionScore;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Boost function implementation for statement values.
- * @package Wikibase\Repo\Search\Elastic
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class StatementBoostScoreBuilder extends FunctionScoreBuilder {
+
 	/**
 	 * @var TermBoostScoreBuilder
 	 */
@@ -20,13 +23,16 @@ class StatementBoostScoreBuilder extends FunctionScoreBuilder {
 	/**
 	 * @param SearchContext $context
 	 * @param float $weight
-	 * @param WikibaseRepo $repo
+	 * @param array $statementBoost
 	 */
-	public function __construct( SearchContext $context, $weight, WikibaseRepo $repo ) {
+	public function __construct( SearchContext $context, $weight, array $statementBoost ) {
 		parent::__construct( $context, $weight );
-		$settings = $repo->getSettings()->getSetting( 'entitySearch' );
-		$this->termBuilder = new TermBoostScoreBuilder( $context, $weight,
-				[ 'statement_keywords' => $settings['statementBoost'] ] );
+
+		$this->termBuilder = new TermBoostScoreBuilder(
+			$context,
+			$weight,
+			[ 'statement_keywords' => $statementBoost ]
+		);
 	}
 
 	/**
