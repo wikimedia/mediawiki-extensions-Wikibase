@@ -22,6 +22,30 @@
       "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_ce0097b8",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-10-19T08:10:17Z",
+      "side": 1,
+      "message": "additionally the flexibility of adding and experimenting with multiple rescore_chains that may use different sets of stmt:boost pairs is impossible this way.",
+      "parentUuid": "ce637b91_2ebff3f7",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
