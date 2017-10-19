@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_42ba3620",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-19T17:54:59Z",
+      "side": 1,
+      "message": "well, yes, should be possible.",
+      "parentUuid": "ce637b91_fcdbd152",
+      "range": {
+        "startLine": 1025,
+        "startChar": 5,
+        "endLine": 1025,
+        "endChar": 39
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_2ebff3f7",
         "filename": "repo/config/ElasticSearchRescoreFunctions.php",
         "patchSetId": 3
@@ -165,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_22eb820b",
+        "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-19T17:54:59Z",
+      "side": 1,
+      "message": "oh, forgot this one... phpstorm does it. I\u0027ll remove them.",
+      "parentUuid": "ce637b91_dcbdadd5",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 40
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_fcc2f15c",
         "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
         "patchSetId": 3
@@ -176,6 +224,30 @@
       "writtenOn": "2017-10-19T14:35:10Z",
       "side": 1,
       "message": "Please move this out to the where the constructor is called.",
+      "range": {
+        "startLine": 27,
+        "startChar": 14,
+        "endLine": 27,
+        "endChar": 64
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_02d99e83",
+        "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-19T17:54:59Z",
+      "side": 1,
+      "message": "yeah we probably could pass just the list of boosts.",
+      "parentUuid": "ce637b91_fcc2f15c",
       "range": {
         "startLine": 27,
         "startChar": 14,
