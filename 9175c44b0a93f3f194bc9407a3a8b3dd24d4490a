@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_2ebff3f7",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-10-19T08:05:58Z",
+      "side": 1,
+      "message": "why not simply use the new one defined in cirrus and put here the list of statements:boost pairs inside params?\nThe sole reason I see is to move the config outside this file.\nBut imo it\u0027s clearer to manage if everything is in the same file, you can then quickly see if the max theorical score adds up to a sane value.",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
