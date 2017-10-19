@@ -53,7 +53,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	/**
-	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
+	 * @see EntityRevisionLookupTest::newEntityRevisionLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects

@@ -29,6 +29,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
+use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -346,18 +347,20 @@ class DirectSqlStore implements ClientStore {
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
-			$dispatchingLookup,
-			wfGetCache( $this->cacheType ),
-			$this->cacheDuration,
-			$cacheKeyPrefix
+			new EntityRevisionCache(
+				wfGetCache( $this->cacheType ),
+				$this->cacheDuration,
+				$cacheKeyPrefix
+			),
+			$dispatchingLookup
 		);
 		// We need to verify the revision ID against the database to avoid stale data.
 		$persistentCachingLookup->setVerifyRevision( true );
 
 		// Top caching layer using an in-process hash.
 		$hashCachingLookup = new CachingEntityRevisionLookup(
-			$persistentCachingLookup,
-			new HashBagOStuff( [ 'maxKeys' => 1000 ] )
+			new EntityRevisionCache( new HashBagOStuff( [ 'maxKeys' => 1000 ] ) ),
+			$persistentCachingLookup
 		);
 		// No need to verify the revision ID, we'll ignore updates that happen during the request.
 		$hashCachingLookup->setVerifyRevision( false );
