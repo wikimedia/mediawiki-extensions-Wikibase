@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce637b91_9ce095f9",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-19T14:35:10Z",
+      "side": 1,
+      "message": "Please:\n\n @param FunctionScoreBuilder|null \u0026builder",
+      "range": {
+        "startLine": 1016,
+        "startChar": 4,
+        "endLine": 1016,
+        "endChar": 19
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_7ce841de",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-19T14:35:10Z",
+      "side": 1,
+      "message": "Please:\n\n FunctionScoreBuilder \u0026$builder \u003d null",
+      "range": {
+        "startLine": 1021,
+        "startChar": 5,
+        "endLine": 1021,
+        "endChar": 14
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_fcdbd152",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-19T14:35:10Z",
+      "side": 1,
+      "message": "Why does a builder need the entirety of all the services WikibaseRepo provides? Can you please only inject the services that are actually needed?",
+      "range": {
+        "startLine": 1025,
+        "startChar": 5,
+        "endLine": 1025,
+        "endChar": 39
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_2ebff3f7",
         "filename": "repo/config/ElasticSearchRescoreFunctions.php",
         "patchSetId": 3
@@ -42,6 +111,75 @@
         "startChar": 15,
         "endLine": 42,
         "endChar": 30
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_dcbdadd5",
+        "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-19T14:35:10Z",
+      "side": 1,
+      "message": "We don\u0027t use the @package tag in our code base. (What does it do anyway?) Please remove.",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 40
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_fcc2f15c",
+        "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-19T14:35:10Z",
+      "side": 1,
+      "message": "Please move this out to the where the constructor is called.",
+      "range": {
+        "startLine": 27,
+        "startChar": 14,
+        "endLine": 27,
+        "endChar": 64
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_5cd21d2e",
+        "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-19T14:35:10Z",
+      "side": 1,
+      "message": "Same here. If this is the only setting this service needs, it should only get this.",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 57
       },
       "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
