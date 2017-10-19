@@ -9,6 +9,8 @@ use Wikibase\Lib\DataTypeDefinitions;
  * Module exporting map from property type to expert module name handling this type
  *
  * @note Tested via wikibase.experts.modules.tests.js
+ *
+ * @license GPL-2.0+
  */
 class PropertyValueExpertsModule extends \ResourceLoaderModule {
 

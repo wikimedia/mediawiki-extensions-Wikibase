@@ -14,6 +14,9 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
  * Field indexing statements for particular item.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class StatementsField extends SearchIndexFieldDefinition implements WikibaseIndexField {
 

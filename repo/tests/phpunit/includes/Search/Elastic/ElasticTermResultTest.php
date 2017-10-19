@@ -13,7 +13,11 @@ use Wikibase\Repo\Search\Elastic\ElasticTermResult;
 
 /**
  * @covers ElasticTermResult
+ *
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class ElasticTermResultTest extends MediaWikiTestCase {
 

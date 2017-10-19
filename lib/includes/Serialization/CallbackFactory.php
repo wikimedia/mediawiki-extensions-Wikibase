@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
+ * @license GPL-2.0+
  * @author Addshore
  */
 class CallbackFactory {
