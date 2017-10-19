@@ -39,5 +39,6 @@
 	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<file>.</file>
+	<exclude-pattern>view/lib/wikibase-api/WikibaseJavaScriptApi.php</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
 </ruleset>
