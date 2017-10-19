@@ -11,6 +11,7 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
  *
  * @group Wikibase
  *
+ * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {

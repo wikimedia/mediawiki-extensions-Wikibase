@@ -13,6 +13,9 @@ use Wikibase\Client\Hooks\EchoSetupHookHandlers;
  * @group Database
  * @group WikibaseClient
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EchoSetupHookHandlersTest extends MediaWikiTestCase {
 

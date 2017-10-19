@@ -17,6 +17,9 @@ use User;
  *
  * We don't need the methods that operate by username, so we don't implement them and
  * instead reimplement the methods used by Wikibase.
+ *
+ * @license GPL-2.0+
+ * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
 class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	/**

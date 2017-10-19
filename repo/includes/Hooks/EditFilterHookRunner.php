@@ -22,6 +22,7 @@ use WikiPage;
 /**
  * Class to run the EditFilterMergedContent hook
  *
+ * @license GPL-2.0+
  * @author Addshore
  */
 class EditFilterHookRunner {
