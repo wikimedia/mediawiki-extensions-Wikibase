@@ -6,8 +6,6 @@
 			"चक्रपाणी"
 		]
 	},
-	"valueview-desc": "डेटा वैल्यूज़ को दिखाने और सम्पादन हेतु यू आई कॉम्पोनेन्ट",
-	"valueview-expert-advancedadjustments": "उच्च नियंत्रण",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "$1 वैल्यूज़ की हैंडलिंग अभी सपोर्टेड नहीं है।",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "$1 डेटा टाइप की वैल्यूज़ की हैंडलिंग अभी सपोर्टेड नहीं है।",
 	"valueview-expert-emptyvalue-empty": "खाली",

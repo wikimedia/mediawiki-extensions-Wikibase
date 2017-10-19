@@ -5,8 +5,6 @@
 			"Elisardojm"
 		]
 	},
-	"valueview-desc": "Compoñentes da interface para mostrar e editar valores de datos",
-	"valueview-expert-advancedadjustments": "axustes avanzados",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "A manipulación de valores \"$1\" aínda non está soportada.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A manipulación de valores para o tipo de datos \"$1\" aínda non está soportada.",
 	"valueview-expert-emptyvalue-empty": "baleiro",

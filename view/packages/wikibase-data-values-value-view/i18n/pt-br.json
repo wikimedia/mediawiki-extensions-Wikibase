@@ -9,8 +9,6 @@
 			"Trigonometria87"
 		]
 	},
-	"valueview-desc": "Componentes da interface para exibir e editar valores de dados.",
-	"valueview-expert-advancedadjustments": "ajustes avançados",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "A manipulação de valores \"$1\" ainda não é suportada.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A manipulação de valores para o tipo de dados \"$1\" ainda não é suportada.",
 	"valueview-expert-emptyvalue-empty": "vazio",

@@ -7,8 +7,6 @@
 			"ערן"
 		]
 	},
-	"valueview-desc": "רכיבי ממשק להצגה ועריכה של ערכי נתונים",
-	"valueview-expert-advancedadjustments": "כוונונים מתקדמים",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "טיפול בערכים מסוג \"$1\" אינו נתמך עדיין.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "טיפול בערכים מסוג נתונים \"$1\" אינו נתמך עדיין.",
 	"valueview-expert-emptyvalue-empty": "ריק",

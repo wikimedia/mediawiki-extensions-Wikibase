@@ -6,8 +6,6 @@
 			"Aftabuzzaman"
 		]
 	},
-	"valueview-desc": "উপাত্তের মান প্রদর্শন এবং সম্পাদনার জন্য UI উপাদান",
-	"valueview-expert-advancedadjustments": "উন্নত সমন্বয়",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" মান পরিচালনা এখনো সমর্থিত নয়।",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" উপাত্তের ধরনের জন্য মান পরিচালনা এখনো সমর্থিত নয়।",
 	"valueview-expert-emptyvalue-empty": "খালি",

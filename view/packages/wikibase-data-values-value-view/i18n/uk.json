@@ -6,8 +6,6 @@
 			"Piramidion"
 		]
 	},
-	"valueview-desc": "Компоненти користувацького інтерфейсу для відображення і редагування значень даних",
-	"valueview-expert-advancedadjustments": "розширені налаштування",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обробка значень «$1» ще не підтримується.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обробка значень типу даних «$1» ще не підтримується.",
 	"valueview-expert-emptyvalue-empty": "пусто",

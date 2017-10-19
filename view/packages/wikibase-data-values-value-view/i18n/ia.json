@@ -4,8 +4,6 @@
 			"McDutchie"
 		]
 	},
-	"valueview-desc": "Componentes de interfacie de usator pro monstrar e modificar valores de datos",
-	"valueview-expert-advancedadjustments": "adjustamentos avantiate",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Le manipulation de valores \"$1\" non es ancora supportate.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Le manipulation de valores pro le typo de datos \"$1\" non es ancora supportate.",
 	"valueview-expert-emptyvalue-empty": "vacue",

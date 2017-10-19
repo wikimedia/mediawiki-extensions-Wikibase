@@ -6,8 +6,6 @@
 			"Obsuser"
 		]
 	},
-	"valueview-desc": "УИ компоненте за приказ и уређивање података",
-	"valueview-expert-advancedadjustments": "напредна прилагођавања",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Управљање вредностима „$1” још увек није подржано.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Управљање вредностима за врсту података „$1” још увек није подржано.",
 	"valueview-expert-emptyvalue-empty": "празно",

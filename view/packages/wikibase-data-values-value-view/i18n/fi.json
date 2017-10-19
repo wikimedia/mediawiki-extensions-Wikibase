@@ -7,7 +7,6 @@
 			"Pyscowicz"
 		]
 	},
-	"valueview-expert-advancedadjustments": "lisäsäädöt",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Datatyypin \"$1\" arvojen käsittelyä ei vielä tueta.",
 	"valueview-expert-emptyvalue-empty": "tyhjä",
 	"valueview-expert-globecoordinateinput-precision": "Tarkkuus:",

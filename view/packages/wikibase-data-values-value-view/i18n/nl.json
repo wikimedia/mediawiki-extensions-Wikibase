@@ -6,8 +6,6 @@
 			"Mainframe98"
 		]
 	},
-	"valueview-desc": "Gebruikersinterface-elementen voor het weergeven en bewerken van gegevenswaarden",
-	"valueview-expert-advancedadjustments": "geavanceerde aanpassingen",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Het verwerken van waarden van het type \"$1\" wordt nog niet ondersteund.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Het verwerken van waarden van het gegevenstype \"$1\" wordt nog niet ondersteund.",
 	"valueview-expert-emptyvalue-empty": "leeg",

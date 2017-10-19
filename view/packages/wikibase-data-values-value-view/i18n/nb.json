@@ -5,8 +5,6 @@
 			"Jon Harald Søby"
 		]
 	},
-	"valueview-desc": "UI-komponenter for å vise og redigere dataverdier",
-	"valueview-expert-advancedadjustments": "avanserte justeringer",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering av «$1»-verdier støttes ikke ennå.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering av verdier for datatypen «$1» støttes ikke ennå.",
 	"valueview-expert-emptyvalue-empty": "tom",

@@ -5,8 +5,6 @@
 			"Robin Owain"
 		]
 	},
-	"valueview-desc": "Elfennau o'r rhyngwyneb sy'n arddangos gwerthoedd data a'u golygu",
-	"valueview-expert-advancedadjustments": "cymhwysiadau uwch",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Nid ydym yn gallu trin gwerthoedd \"$1\" hyd yn hyn.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Nid ydym yn gallu trin gwerthoedd o'r math \"$1\" o ddata hyd yn hyn.",
 	"valueview-expert-emptyvalue-empty": "gwag",

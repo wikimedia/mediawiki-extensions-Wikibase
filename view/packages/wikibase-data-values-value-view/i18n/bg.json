@@ -4,7 +4,6 @@
 			"StanProg"
 		]
 	},
-	"valueview-expert-advancedadjustments": "разширени настройки",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обработката на стойност „$1“ все още не се поддържа.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обработката на стойности от тип на данните „$1“ все още не се поддържа.",
 	"valueview-expert-emptyvalue-empty": "празно",

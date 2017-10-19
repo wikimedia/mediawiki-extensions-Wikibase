@@ -6,8 +6,6 @@
 			"Kenrick95"
 		]
 	},
-	"valueview-desc": "Komponen-komponen UI untuk menampilkan dan mengedit nilai data",
-	"valueview-expert-advancedadjustments": "penyesuaian lanjutan",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Penanganan nilai data \"$1\" belum didukung.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Penanganan nilai data untuk tipe data \"$1\" belum didukung.",
 	"valueview-expert-emptyvalue-empty": "kosong",

@@ -7,8 +7,6 @@
 			"Hamilton Abreu"
 		]
 	},
-	"valueview-desc": "Componentes da interface para apresentar e editar valores de dados",
-	"valueview-expert-advancedadjustments": "configurações avançadas",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "O tratamento de valores \"$1\" ainda não é suportado.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "O tratamento de valores para o tipo de dados \"$1\" ainda não é suportado.",
 	"valueview-expert-emptyvalue-empty": "vazio",

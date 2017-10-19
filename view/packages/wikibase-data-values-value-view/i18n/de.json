@@ -5,8 +5,6 @@
 			"Metalhead64"
 		]
 	},
-	"valueview-desc": "Ergänzt die Benutzeroberfläche um Komponenten zum Anzeigen und Bearbeiten von Datenwerten",
-	"valueview-expert-advancedadjustments": "Erweiterte Anpassungen",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Das Bearbeiten von Werten mit dem Typ „$1“ wird noch nicht unterstützt.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.",
 	"valueview-expert-emptyvalue-empty": "leer",

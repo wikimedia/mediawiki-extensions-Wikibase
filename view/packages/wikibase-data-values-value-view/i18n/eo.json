@@ -9,7 +9,5 @@
 	"valueview-expert-timevalue-calendar-julian": "Julia",
 	"valueview-expert-timeinput-precision": "Precizeco:",
 	"valueview-expert-timeinput-calendar": "Kalendaro:",
-	"valueview-expertextender-calendarhint-gregorian": "(Gregoria kalendaro)",
-	"valueview-expertextender-calendarhint-julian": "(Julia kalendaro)",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
 }

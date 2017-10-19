@@ -9,8 +9,6 @@
 	"valueview-expert-emptyvalue-empty": "üres",
 	"valueview-expert-timevalue-calendar-gregorian": "Gergely",
 	"valueview-expert-timeinput-calendar": "Naptár:",
-	"valueview-expertextender-calendarhint-gregorian": "(Gergely-naptár)",
-	"valueview-expertextender-calendarhint-julian": "(Juliánus-naptár)",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Nyelv (kötelező):"
 }

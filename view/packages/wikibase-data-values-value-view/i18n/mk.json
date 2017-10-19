@@ -4,8 +4,6 @@
 			"Bjankuloski06"
 		]
 	},
-	"valueview-desc": "Посреднички компоненти за приказ и уредување на податочни вредности",
-	"valueview-expert-advancedadjustments": "напредни прилагодувања",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Работата со вредности од типот „$1“ сè уште не е поддржана.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.",
 	"valueview-expert-emptyvalue-empty": "празно",

@@ -7,8 +7,6 @@
 			"Xaris333"
 		]
 	},
-	"valueview-desc": "Συστατικά στοιχεία διεπαφής χρήστη για προβολή και επεξεργασία τιμών δεδομένων",
-	"valueview-expert-advancedadjustments": "προηγμένες προσαρμογές",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Χειρισμός τιμών \"$1\" δεν υποστηρίζεται ακόμα.",
 	"valueview-expert-globecoordinateinput-precision": "Ακρίβεια:",
 	"valueview-expert-timevalue-calendar-gregorian": "Γρηγοριανό",

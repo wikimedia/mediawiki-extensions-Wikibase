@@ -9,8 +9,6 @@
 			"Rxy"
 		]
 	},
-	"valueview-desc": "データ値を表示/編集するユーザーインターフェイスコンポーネント",
-	"valueview-expert-advancedadjustments": "高度な調整",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "「$1」の値の処理にはまだ対応していません。",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "データ型「$1」の値の処理にはまだ対応していません。",
 	"valueview-expert-emptyvalue-empty": "空",

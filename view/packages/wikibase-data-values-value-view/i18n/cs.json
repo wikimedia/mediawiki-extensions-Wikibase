@@ -5,8 +5,6 @@
 			"Matěj Suchánek"
 		]
 	},
-	"valueview-desc": "Komponenty uživatelského rozhraní pro zobrazování a editaci datových hodnot",
-	"valueview-expert-advancedadjustments": "pokročilé úpravy",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Zpracování hodnot „$1“ není dosud podporováno.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Zpracování hodnot datového typu „$1“ není dosud podporováno.",
 	"valueview-expert-emptyvalue-empty": "prázdná",

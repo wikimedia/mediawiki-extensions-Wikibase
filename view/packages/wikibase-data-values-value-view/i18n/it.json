@@ -4,8 +4,6 @@
 			"Beta16"
 		]
 	},
-	"valueview-desc": "Componenti dell'interfaccia utente per la visualizzazione e la modifica dei valori dei dati",
-	"valueview-expert-advancedadjustments": "regolazioni avanzate",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La gestione dei valori \"$1\" non è ancora supportata.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "La gestione dei valori per il tipo di dati \"$1\" non è ancora supportata.",
 	"valueview-expert-emptyvalue-empty": "vuoto",

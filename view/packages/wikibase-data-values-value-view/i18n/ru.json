@@ -7,8 +7,6 @@
 			"Mailman"
 		]
 	},
-	"valueview-desc": "Компоненты пользовательского интерфейса для отображения и редактирования значений",
-	"valueview-expert-advancedadjustments": "расширенные настройки",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обработка значений типа «$1» пока не поддерживается.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обработка значений для типа данных «$1» пока не поддерживается.",
 	"valueview-expert-emptyvalue-empty": "пусто",

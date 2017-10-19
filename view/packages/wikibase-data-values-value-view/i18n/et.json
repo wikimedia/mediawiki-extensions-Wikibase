@@ -4,8 +4,6 @@
 			"Pikne"
 		]
 	},
-	"valueview-desc": "Kasutajaliidese komponendid andmeväärtuste kuvamiseks ja muutmiseks",
-	"valueview-expert-advancedadjustments": "täpsem häälestus",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Tüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Andmetüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
 	"valueview-expert-emptyvalue-empty": "tühi",
