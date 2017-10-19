@@ -15,6 +15,8 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
+ * Immutable Wikibase statement builder.
+ *
  * @license GPL-2.0+
  */
 class NewStatement {
