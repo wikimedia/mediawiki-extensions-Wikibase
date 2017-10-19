@@ -4,3 +4,6 @@
 [submodule "view/lib/wikibase-api"]
 	path = view/lib/wikibase-api
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseJavaScriptApi
+[submodule "view/lib/wikibase-serialization"]
+	path = view/lib/wikibase-serialization
+	url = https://github.com/wmde/WikibaseSerializationJavaScript.git
