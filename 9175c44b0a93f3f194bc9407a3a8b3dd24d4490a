@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_a2a8d2d9",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-19T17:46:13Z",
+      "side": 1,
+      "message": "\u003e The sole reason I see is to move the config outside this file.\n\nYes, this is the reason. I don\u0027t want to edit the code each time we need to config a boost for certain P31. While this is borderline as it\u0027s a config file, I\u0027d still prefer changeable configs to live in the proper place. These values will be more-less fixed once set, but the specific types being boosted will be changeable.",
+      "parentUuid": "ce637b91_2ebff3f7",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "9175c44b0a93f3f194bc9407a3a8b3dd24d4490a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_dcbdadd5",
         "filename": "repo/includes/Search/Elastic/StatementBoostScoreBuilder.php",
         "patchSetId": 3
