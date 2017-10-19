@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_4e8587b0",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-19T09:27:14Z",
+      "side": 1,
+      "message": "Maybe use integer flags defined as constants?\n\nself::SITELINK_ADDITION\nself::SITELINK_REMOVAL\nself::SITELINK_CHANGE\nself::SITELINK_BADGE_CHANGE\n\nBut this wont be enough for SiteLinkCommentCreator, it needs the actual old and new value. For that case I planed to keep the SiteLinkDiff (but only that) in ItemChange. What do you think?",
+      "parentUuid": "ce637b91_4ed2672e",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_aebc43d6",
         "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
         "patchSetId": 3
