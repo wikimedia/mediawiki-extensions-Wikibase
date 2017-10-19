@@ -3,8 +3,6 @@
 namespace Wikibase\Repo\Diff;
 
 use Content;
-use Diff\Comparer\ComparableComparer;
-use Diff\Differ\OrderedListDiffer;
 use DifferenceEngine;
 use Html;
 use IContextSource;
@@ -13,13 +11,7 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use ParserOutput;
 use Revision;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\EntityContent;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 

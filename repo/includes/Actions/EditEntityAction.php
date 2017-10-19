@@ -2,8 +2,6 @@
 
 namespace Wikibase;
 
-use Diff\Comparer\ComparableComparer;
-use Diff\Differ\OrderedListDiffer;
 use Html;
 use IContextSource;
 use Linker;
@@ -16,16 +14,8 @@ use OOUI\TextInputWidget;
 use Page;
 use Revision;
 use Status;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use WebRequest;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Content\EntityContentDiff;
-use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
-use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;

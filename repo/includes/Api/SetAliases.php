@@ -4,12 +4,9 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use ApiUsageException;
-use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpAliases;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;

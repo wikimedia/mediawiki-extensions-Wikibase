@@ -15,6 +15,8 @@ use Wikibase\Test\MockClientStore;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	/**
+	 * Fake base class in case Scribunto is not available.
+	 *
 	 * @license GPL-2.0+
 	 * @author Marius Hoch < hoo@online.de >
 	 */

@@ -7,6 +7,9 @@ namespace Wikibase\Lib\Units;
  * The units are stored as:
  *       Qsource,factor,QstandardUnit
  * E.g.: Q130964,4.19,Q25269
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class CSVUnitStorage extends BaseUnitStorage {
 

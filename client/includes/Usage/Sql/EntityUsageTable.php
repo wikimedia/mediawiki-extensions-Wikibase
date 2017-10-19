@@ -81,7 +81,7 @@ class EntityUsageTable {
 
 		//TODO: Inject
 		$this->readConnection = MediaWikiServices::getInstance()->getDBLoadBalancer()
-		                        ->getConnection( DB_REPLICA );
+			->getConnection( DB_REPLICA );
 	}
 
 	/**

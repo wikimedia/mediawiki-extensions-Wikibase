@@ -7,7 +7,11 @@ use Wikibase\UpdateUnits;
 
 /**
  * @covers Wikibase\UpdateUnits
+ *
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class UpdateUnitsTest extends MediaWikiLangTestCase {
 

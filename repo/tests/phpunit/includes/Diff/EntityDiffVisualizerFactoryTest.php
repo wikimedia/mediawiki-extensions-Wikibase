@@ -51,7 +51,6 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit_Framework_TestCase {
 		] );
 
 		$this->assertSame( $dummyVisualizer, $factory->newEntityDiffVisualizer( 'item' ) );
-
 	}
 
 	public function testGivenInstantiatorDoesReturnDiffVisualizer_factoryThrowsException() {
