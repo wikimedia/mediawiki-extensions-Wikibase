@@ -7,3 +7,6 @@
 [submodule "view/lib/wikibase-serialization"]
 	path = view/lib/wikibase-serialization
 	url = https://github.com/wmde/WikibaseSerializationJavaScript.git
+[submodule "view/lib/wikibase-data-values"]
+	path = view/lib/wikibase-data-values
+	url = https://github.com/wmde/DataValuesJavaScript.git
