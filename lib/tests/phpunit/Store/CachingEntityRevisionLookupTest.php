@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTest;
@@ -44,7 +45,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 			$mock->putRedirect( $entityRedir );
 		}
 
-		return new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+
+		return new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
 	}
 
 	public function testGetEntityRevision_byRevisionIdWithMode() {
@@ -57,7 +60,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 			->with( $id, 1234, 'load-mode' )
 			->will( $this->returnValue( $item ) );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+
+		$lookup = new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
 		$lookup->setVerifyRevision( false );
 
 		$this->assertSame(
@@ -74,7 +79,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		$mock->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
+
 		$lookup->setVerifyRevision( true );
 
 		// fetch first revision, so it gets cached
@@ -109,7 +116,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		$mock->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
+
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
@@ -144,7 +153,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		$mock->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
+
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
@@ -172,7 +183,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		$mock->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
+
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
@@ -203,7 +216,9 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		$mock->putEntity( $item, 11 );
 
-		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$entityRevisionCache = new EntityRevisionCache( new HashBagOStuff() );
+		$lookup = new CachingEntityRevisionLookup( $entityRevisionCache, $mock );
+
 		$lookup->setVerifyRevision( false );
 
 		// fetch first revision, so it gets cached
