@@ -21,23 +21,14 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	private $lookup;
 
 	/**
-	 * The cache to use for caching entities.
-	 *
-	 * @var BagOStuff
+	 * @var EntityRevisionCache
 	 */
-	private $cache;
+	private $entityRevisionCache;
 
 	/**
-	 * @var int
+	 * @var CacheRetrievingEntityRevisionLookup
 	 */
-	private $cacheTimeout;
-
-	/**
-	 * The key prefix to use when caching entities in memory.
-	 *
-	 * @var string
-	 */
-	private $cacheKeyPrefix;
+	private $cacheRetrievingLookup;
 
 	/**
 	 * @var bool
@@ -53,14 +44,15 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
-		BagOStuff $cache,
-		$cacheDuration = 3600,
-		$cacheKeyPrefix = 'wbentity'
+		EntityRevisionCache $entityRevisionCache
 	) {
 		$this->lookup = $entityRevisionLookup;
-		$this->cache = $cache;
-		$this->cacheTimeout = $cacheDuration;
-		$this->cacheKeyPrefix = $cacheKeyPrefix;
+		$this->entityRevisionCache = $entityRevisionCache;
+
+		$this->cacheRetrievingLookup = new CacheRetrievingEntityRevisionLookup(
+			$entityRevisionLookup,
+			$entityRevisionCache
+		);
 	}
 
 	/**
@@ -71,23 +63,11 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 */
 	public function setVerifyRevision( $shouldVerifyRevision ) {
 		$this->shouldVerifyRevision = $shouldVerifyRevision;
+		$this->cacheRetrievingLookup->setVerifyRevision( $shouldVerifyRevision );
 	}
 
 	/**
-	 * Returns a cache key suitable for the given entity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return string
-	 */
-	private function getCacheKey( EntityId $entityId ) {
-		$cacheKey = $this->cacheKeyPrefix . ':' . $entityId->getSerialization();
-
-		return $cacheKey;
-	}
-
-	/**
-	 * @see   EntityLookup::getEntity
+	 * @see EntityLookup::getEntity
 	 *
 	 * @note: If this lookup is configured to verify revisions, getLatestRevisionId()
 	 * will be called on the underlying lookup to check whether the cached revision is
@@ -109,29 +89,9 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
 
-		$key = $this->getCacheKey( $entityId );
+		$entityRevision = $this->cacheRetrievingLookup->getEntityRevisionFromCache( $entityId, $revisionId, $mode );
 
-		/** @var EntityRevision $entityRevision */
-		$entityRevision = $this->cache->get( $key );
-
-		if ( $entityRevision !== false ) {
-			if ( $revisionId === 0 && $this->shouldVerifyRevision ) {
-				$latestRevision = $this->lookup->getLatestRevisionId( $entityId, $mode );
-
-				if ( $latestRevision === false ) {
-					// entity no longer exists!
-					$entityRevision = null;
-				} else {
-					$revisionId = $latestRevision;
-				}
-			}
-
-			if ( $revisionId > 0 && $entityRevision && $entityRevision->getRevisionId() !== $revisionId ) {
-				$entityRevision = false;
-			}
-		}
-
-		if ( $entityRevision === false ) {
+		if ( $entityRevision === null ) {
 			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId, $mode );
 		}
 
@@ -149,14 +109,13 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @return EntityRevision|null
 	 */
 	private function fetchEntityRevision( EntityId $entityId, $revisionId, $mode ) {
-		$key = $this->getCacheKey( $entityId );
 		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId, $mode );
 
 		if ( $revisionId === 0 ) {
 			if ( $entityRevision === null ) {
-				$this->cache->delete( $key );
+				$this->entityRevisionCache->removeEntityRevision( $entityId );
 			} else {
-				$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
+				$this->entityRevisionCache->putEntityRevision( $entityRevision );
 			}
 		}
 
@@ -166,30 +125,13 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
-	 * @note: If this lookup is configured to verify revisions, this just delegates
-	 * to the underlying lookup. Otherwise, it may return the ID of a cached
-	 * revision.
-	 *
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
-		// If we do not need to verify the revision, and the revision isn't
-		// needed for an update, we can get the revision from the cached object.
-		// XXX: whether this is actually quicker depends on the cache.
-		if ( ! ( $this->shouldVerifyRevision || $mode === self::LATEST_FROM_MASTER ) ) {
-			$key = $this->getCacheKey( $entityId );
-			/** @var EntityRevision $entityRevision */
-			$entityRevision = $this->cache->get( $key );
-
-			if ( $entityRevision ) {
-				return $entityRevision->getRevisionId();
-			}
-		}
-
-		return $this->lookup->getLatestRevisionId( $entityId, $mode );
+		return $this->cacheRetrievingLookup->getLatestRevisionId( $entityId, $mode );
 	}
 
 	/**
@@ -198,8 +140,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param EntityRevision $entityRevision
 	 */
 	public function entityUpdated( EntityRevision $entityRevision ) {
-		$key = $this->getCacheKey( $entityRevision->getEntity()->getId() );
-		$this->cache->set( $key, $entityRevision, $this->cacheTimeout );
+		$this->entityRevisionCache->putEntityRevision( $entityRevision );
 	}
 
 	/**
@@ -210,8 +151,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 */
 	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
 		//TODO: cache redirects
-		$key = $this->getCacheKey( $entityRedirect->getEntityId() );
-		$this->cache->delete( $key );
+		$this->entityRevisionCache->removeEntityRevision( $entityRedirect->getEntityId() );
 	}
 
 	/**
@@ -220,8 +160,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param EntityId $entityId
 	 */
 	public function entityDeleted( EntityId $entityId ) {
-		$key = $this->getCacheKey( $entityId );
-		$this->cache->delete( $key );
+		$this->entityRevisionCache->removeEntityRevision( $entityId );
 		// XXX: if $this->lookup supports purging, purge?
 	}
 
