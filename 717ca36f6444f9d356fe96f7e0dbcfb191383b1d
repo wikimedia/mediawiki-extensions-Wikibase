@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_7c9cc15f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-19T14:44:26Z",
+      "side": 1,
+      "message": "I am going to add this, to main README, plus on how to possibly add new view deps in another readme, somewhere around view/lib",
+      "revId": "717ca36f6444f9d356fe96f7e0dbcfb191383b1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
