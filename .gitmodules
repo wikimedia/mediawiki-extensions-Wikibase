@@ -1,3 +1,6 @@
 [submodule "view/lib/wikibase-data-values-value-view"]
 	path = view/lib/wikibase-data-values-value-view
 	url = https://gerrit.wikimedia.org/r/data-values/value-view
+[submodule "view/lib/wikibase-api"]
+	path = view/lib/wikibase-api
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseJavaScriptApi
