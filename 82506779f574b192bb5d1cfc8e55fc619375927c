@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_123a49e5",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-10-20T09:50:48Z",
+      "side": 1,
+      "message": "This patch is great but this is too much nested and that\u0027s code smell (alongside with making this big method even bigger). Please move this to a dedicated method and then I think it\u0027s good to go, thank you!",
+      "range": {
+        "startLine": 201,
+        "startChar": 3,
+        "endLine": 215,
+        "endChar": 4
+      },
+      "revId": "82506779f574b192bb5d1cfc8e55fc619375927c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
