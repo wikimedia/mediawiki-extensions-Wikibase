@@ -228,6 +228,10 @@ class GetEntities extends ApiBase {
 	 * @return array
 	 */
 	private function getPropsFromParams( array $params ) {
+		if ( !$params['props'] ) {
+			return [ 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' ];
+		}
+
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$params['props'][] = 'sitelinks';
 		}
