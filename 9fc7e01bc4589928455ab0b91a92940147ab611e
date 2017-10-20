@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_3ef5d6b5",
+        "filename": "view/lib/resources/wikibase-data-values-value-view/lib/resources.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-20T19:15:29Z",
+      "side": 1,
+      "message": "I have a suspicion setting this field is not needed as the lib is no longer even pretending to be an extension. Or is it still needed given Wikibase as an extension obviously?",
+      "revId": "9fc7e01bc4589928455ab0b91a92940147ab611e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
