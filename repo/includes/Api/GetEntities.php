@@ -25,6 +25,9 @@ use Wikibase\StringNormalizer;
  */
 class GetEntities extends ApiBase {
 
+	// TODO: would better be a constant but this is PHP>=5.6, and preferably even private but this is PHP>=7.1
+	private $DEFAULT_PROPS = [ 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' ];
+
 	/**
 	 * @var StringNormalizer
 	 */
@@ -228,6 +231,10 @@ class GetEntities extends ApiBase {
 	 * @return array
 	 */
 	private function getPropsFromParams( array $params ) {
+		if ( !$params['props'] ) {
+			return $this->DEFAULT_PROPS;
+		}
+
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$params['props'][] = 'sitelinks';
 		}
@@ -359,7 +366,7 @@ class GetEntities extends ApiBase {
 			'props' => [
 				self::PARAM_TYPE => [ 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
 					'descriptions', 'claims', 'datatype' ],
-				self::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
+				self::PARAM_DFLT => implode( '|', $this->DEFAULT_PROPS ),
 				self::PARAM_ISMULTI => true,
 			],
 			'languages' => [

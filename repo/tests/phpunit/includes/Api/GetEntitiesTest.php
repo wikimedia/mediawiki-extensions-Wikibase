@@ -635,4 +635,27 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		);
 	}
 
+	public function testGivenPropsIsEmptyList_returnsDefaultSetOfFields() {
+		$id = EntityTestHelper::getId( 'Oslo' );
+
+		list( $result, ) = $this->doApiRequest( [
+			'action' => 'wbgetentities',
+			'ids' => $id,
+			'props' => '',
+		] );
+
+		$data = $result['entities'][$id];
+
+		$this->assertArrayHasKey( 'ns', $data );
+		$this->assertArrayHasKey( 'title', $data );
+		$this->assertArrayHasKey( 'pageid', $data );
+		$this->assertArrayHasKey( 'lastrevid', $data );
+		$this->assertArrayHasKey( 'modified', $data );
+		$this->assertArrayHasKey( 'labels', $data );
+		$this->assertArrayHasKey( 'descriptions', $data );
+		$this->assertArrayHasKey( 'aliases', $data );
+		$this->assertArrayHasKey( 'claims', $data );
+		$this->assertArrayHasKey( 'sitelinks', $data );
+	}
+
 }
