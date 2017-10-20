@@ -69,6 +69,30 @@
       "revId": "c3da9cd68386a8799a6fab000ebe8ac896a74f43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_482d748a",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-20T13:59:55Z",
+      "side": 1,
+      "message": "I think it\u0027s very helpful to keep the \"wikibase-snakview-value\" class for compatibility reasons. But the new element does not need to stick to any \"naming scheme\". As said I would not consider the fact there is a \"wikibase-snakview-value-container\" a \"naming scheme\".\n\nI\u0027m also in favor of \"…-body\".",
+      "parentUuid": "ce637b91_c575cdc9",
+      "range": {
+        "startLine": 83,
+        "startChar": 38,
+        "endLine": 83,
+        "endChar": 42
+      },
+      "revId": "c3da9cd68386a8799a6fab000ebe8ac896a74f43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
