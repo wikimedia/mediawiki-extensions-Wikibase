@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_e563313d",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-20T13:01:26Z",
+      "side": 1,
+      "message": "Oh, there is already a container here.",
+      "range": {
+        "startLine": 81,
+        "startChar": 37,
+        "endLine": 81,
+        "endChar": 46
+      },
+      "revId": "c3da9cd68386a8799a6fab000ebe8ac896a74f43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_85559554",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-20T13:01:26Z",
+      "side": 1,
+      "message": "I\u0027m fine with that. It\u0027s definitely better than \"container\", which means nothing.\n\nOther suggestions:\n* wikibase-snakview-value-with-indicators\n* wikibase-snakview-value-box\n* wikibase-snakview-body\n* wikibase-snakview-meat\n* wikibase-snakview-representation\n* wikibase-snakview-display\n* wikibase-snakview-view\n\nNote that this is not strictly about a \"value\", because no-value snaks don\u0027t even have one! So using \"value\" as part of the name is a little misleading.",
+      "range": {
+        "startLine": 83,
+        "startChar": 38,
+        "endLine": 83,
+        "endChar": 42
+      },
+      "revId": "c3da9cd68386a8799a6fab000ebe8ac896a74f43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
