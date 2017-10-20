@@ -63,6 +63,9 @@ class DispatchChanges extends Maintenance {
 			. 'selecting pending changes. Default: 15', false, true );
 		$this->addOption( 'batch-size', 'Maximum number of changes to pass to a client at a time. '
 			. 'Default: 1000', false, true );
+		$this->addOption( 'client', 'Only dispatch to the client with this site IDs. '
+			. 'May be specified multiple times to select several clients.',
+			false, true, false, true );
 	}
 
 	/**
@@ -181,6 +184,7 @@ class DispatchChanges extends Maintenance {
 		$maxTime = (int)$this->getOption( 'max-time', PHP_INT_MAX );
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
+		$selectedClients = $this->getOption( 'client' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -190,6 +194,25 @@ class DispatchChanges extends Maintenance {
 
 		if ( empty( $clientWikis ) ) {
 			throw new MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
+		}
+
+		if ( $selectedClients !== null ) {
+			$allClientWikis = $clientWikis;
+			$clientWikis = [];
+			foreach ( $selectedClients as $siteID ) {
+				if ( array_key_exists( $siteID, $allClientWikis ) ) {
+					$clientWikis[$siteID] = $allClientWikis[$siteID];
+				} else {
+					throw new MWException(
+						"No client wiki with site ID $siteID configured! " .
+						"Please check \$wgWBRepoSettings['localClientDatabases']."
+					);
+				}
+			}
+
+			if ( empty( $clientWikis ) ) {
+				throw new MWException( 'No client wikis selected!' );
+			}
 		}
 
 		$dispatcher = $this->newChangeDispatcher(
