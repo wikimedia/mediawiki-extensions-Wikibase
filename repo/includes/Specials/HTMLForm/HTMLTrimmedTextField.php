@@ -6,6 +6,8 @@ use HTMLTextField;
 use Wikibase\StringNormalizer;
 
 /**
+ * A variant of an HTMLTextField that forcefully applies trimming.
+ *
  * @license GPL-2.0+
  */
 class HTMLTrimmedTextField extends HTMLTextField {

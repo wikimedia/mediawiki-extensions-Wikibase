@@ -10,6 +10,8 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * Immutable Wikibase entity builder.
+ *
+ * @license GPL-2.0+
  */
 class NewItem {
 

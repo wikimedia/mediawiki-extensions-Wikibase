@@ -8,17 +8,21 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBError;
 
 /**
+ * A dispatching PropertyInfoLookup implementation that is able to understand property ID strings
+ * prefixed with repository names, and forwards to the service responsible for the repository.
+ *
  * @license GPL-2.0+
  */
 class DispatchingPropertyInfoLookup implements PropertyInfoLookup {
 
 	/**
-	 * @var PropertyInfoLookup[]
+	 * @var PropertyInfoLookup[] indexed by repository name
 	 */
 	private $lookups;
 
 	/**
-	 * @param PropertyInfoLookup[] $lookups
+	 * @param PropertyInfoLookup[] $lookups Map of repository name strings to PropertyInfoLookup
+	 *  objects.
 	 */
 	public function __construct( array $lookups ) {
 		Assert::parameter( !empty( $lookups ), '$lookups', 'must not be empty' );

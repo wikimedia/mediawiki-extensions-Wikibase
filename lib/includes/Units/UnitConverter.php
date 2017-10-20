@@ -8,6 +8,9 @@ use DataValues\UnboundedQuantityValue;
 
 /**
  * Convert quantities to other units.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class UnitConverter {
 

@@ -12,7 +12,11 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 
 /**
  * @covers Wikibase\AddUnitConversions
+ *
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class AddUnitsTest extends MediaWikiLangTestCase {
 

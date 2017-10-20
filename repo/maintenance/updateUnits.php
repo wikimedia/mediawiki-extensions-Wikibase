@@ -23,7 +23,9 @@ require_once __DIR__ . '/SPARQLClient.php';
  * mwscript extensions/WikidataBuildResources/extensions/Wikibase/repo/maintenance/updateUnits.php
  *   --wiki wikidatawiki  --base-unit-types Q223662,Q208469 --base-uri http://www.wikidata.org/entity/
  *   --unit-class Q1978718 > unitConversion.json
- * @package Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class UpdateUnits extends Maintenance {
 

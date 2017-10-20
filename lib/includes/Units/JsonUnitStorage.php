@@ -16,6 +16,9 @@ namespace Wikibase\Lib\Units;
  * Primary units must have factor of 1.
  * Another acceptable format is:
  * "Q103510": { "factor": "100000", "unit": "Q44395" },
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class JsonUnitStorage extends BaseUnitStorage {
 

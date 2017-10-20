@@ -5,6 +5,9 @@ namespace Wikibase\Lib\Units;
 /**
  * Basic unit storage functionality.
  * Concrete classes need to fill in data loading.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 abstract class BaseUnitStorage implements UnitStorage {
 
