@@ -25,8 +25,8 @@ use ValueFormatters\ValueFormatterBase;
 class HtmlTimeFormatter extends ValueFormatterBase {
 
 	private static $calendarKeys = [
-		TimeValue::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
-		TimeValue::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
+		TimeValue::CALENDAR_GREGORIAN => 'wikibase-time-calendar-gregorian',
+		TimeValue::CALENDAR_JULIAN => 'wikibase-time-calendar-julian',
 	];
 
 	/**
