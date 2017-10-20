@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_92fb9944",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done. leftovers from previous PS. sorry for that.",
+      "parentUuid": "0e6af365_b2a2eb39",
+      "range": {
+        "startLine": 49,
+        "startChar": 55,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_77746596",
         "filename": "docs/lua.wiki",
         "patchSetId": 4
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_d2d111d2",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_77746596",
+      "range": {
+        "startLine": 5,
+        "startChar": 136,
+        "endLine": 5,
+        "endChar": 148
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_72d705c5",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_12497790",
+      "range": {
+        "startLine": 5,
+        "startChar": 532,
+        "endLine": 5,
+        "endChar": 535
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_f76055ce",
         "filename": "docs/lua.wiki",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2017-10-16T10:09:11Z",
       "side": 1,
       "message": "Maybe \"Label in content or user language\"?",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_32e18d98",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_f76055ce",
       "range": {
         "startLine": 9,
         "startChar": 16,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_92d4f9bf",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_d76511de",
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_9748f961",
         "filename": "docs/lua.wiki",
         "patchSetId": 4
@@ -122,6 +236,30 @@
       "writtenOn": "2017-10-16T10:09:11Z",
       "side": 1,
       "message": "property",
+      "range": {
+        "startLine": 309,
+        "startChar": 21,
+        "endLine": 309,
+        "endChar": 28
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_12efa983",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_9748f961",
       "range": {
         "startLine": 309,
         "startChar": 21,
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "ce637b91_f2e9b57f",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_b743bd42",
+      "range": {
+        "startLine": 314,
+        "startChar": 21,
+        "endLine": 314,
+        "endChar": 28
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_577121a6",
         "filename": "docs/lua.wiki",
         "patchSetId": 4
@@ -168,6 +330,30 @@
       "writtenOn": "2017-10-16T10:09:11Z",
       "side": 1,
       "message": "property",
+      "range": {
+        "startLine": 328,
+        "startChar": 21,
+        "endLine": 328,
+        "endChar": 28
+      },
+      "revId": "70af9aeda7b2e4a45ef1b26cd8629cb15d6c64da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_52de81df",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-10-20T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_577121a6",
       "range": {
         "startLine": 328,
         "startChar": 21,
