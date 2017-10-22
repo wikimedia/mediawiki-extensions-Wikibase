@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_6f59535d",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-22T13:32:05Z",
+      "side": 1,
+      "message": "The sentence about content/ user language is confusingly worded IMO, maybe this can be simplified.\n\nAlso \"For improved performance, when accessing only specific labels/statements …\" should probably say \"For improved performance, when accessing only specific aspects \" (or parts).",
+      "revId": "b38295e3dbe0bff864cd0b8501fe3a3868bb5930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_0f3537f3",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-22T13:32:05Z",
+      "side": 1,
+      "message": "maybe say \"in display language\"? Or is that even more confusing?",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 35
+      },
+      "revId": "b38295e3dbe0bff864cd0b8501fe3a3868bb5930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
