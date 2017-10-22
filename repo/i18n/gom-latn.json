@@ -10,7 +10,6 @@
 	"wikibase-description-empty": "Vornon poribhashit korunk na",
 	"wikibase-statementsection-statements": "Vidhanam",
 	"wikibase-sitelinks-special": "Her websaiti",
-	"wikibase-aliases-empty": "Khuimchich urf poribhashit na",
 	"wikibase-statementview-rank-normal": "Samanya dorzo",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|sondorbh}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|sondorbh}}"
 }

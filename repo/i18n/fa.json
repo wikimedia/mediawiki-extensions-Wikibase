@@ -108,7 +108,7 @@
 	"wikibase-statementview-rank-preferred": "رتبهٔ عالی",
 	"wikibase-statementview-rank-normal": "رتبه معمولی",
 	"wikibase-statementview-rank-deprecated": "رتبه پایین",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|منبع|منابع}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|منبع}}",
 	"wikibase-snakview-property-input-placeholder": "خصوصیت",
 	"wikibase-snakview-unsupportedsnaktype": "اسنک نوع «$1». کار با این نوع اسنک هنوز پشتیبانی نشده‌است.",
 	"wikibase-snakview-choosesnaktype": "نوع مقدار را انتخاب کنید.",
