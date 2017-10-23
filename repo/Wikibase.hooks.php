@@ -192,12 +192,21 @@ final class RepoHooks {
 			self::notifyEntityStoreWatcherOnUpdate( $revision );
 
 			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
+			$parentId = $revision->getParentId();
 
-			if ( $revision->getParentId() === null ) {
+			if ( !$parentId ) {
 				$notifier->notifyOnPageCreated( $revision );
 			} else {
-				$parent = Revision::newFromId( $revision->getParentId() );
-				$notifier->notifyOnPageModified( $revision, $parent );
+				$parent = Revision::newFromId( $parentId );
+
+				if ( !$parent ) {
+					wfLogWarning(
+						__METHOD__ . ': Cannot notify on page modification: '
+						. 'failed to load parent revision with ID ' . $parentId
+					);
+				} else {
+					$notifier->notifyOnPageModified( $revision, $parent );
+				}
 			}
 		}
 	}

@@ -98,7 +98,7 @@ class RevisionData {
 	 * @return int
 	 */
 	public function getParentId() {
-		return $this->changeParams['parent_id'];
+		return intval( $this->changeParams['parent_id'] );
 	}
 
 	/**
