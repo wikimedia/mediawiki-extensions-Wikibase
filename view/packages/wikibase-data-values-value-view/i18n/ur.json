@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Obaid Raza"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "خالی",
+	"valueview-expert-globecoordinateinput-precision": "درستی:",
+	"valueview-expert-globecoordinateinput-nullprecision": "بے تصریح",
+	"valueview-expert-globecoordinateinput-customprecision": "خاص ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "گریگورین",
+	"valueview-expert-timevalue-calendar-julian": "جولینی",
+	"valueview-expert-timeinput-precision": "درستی:",
+	"valueview-expert-timeinput-calendar": "تقویم:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "زبان (تولیتی):",
+	"valueview-expertextender-unitsuggester-label": "اکائی (اختیاری):",
+	"valueview-preview-label": "یہ کچھ یوں ظاہر ہو گا:"
+}
