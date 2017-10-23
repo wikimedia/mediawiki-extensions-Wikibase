@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_841b42d4",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-23T22:58:31Z",
+      "side": 1,
+      "message": "This is not \"dewiki\", but the global site id.",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 29
+      },
+      "revId": "76fc3abdd43fe4195c3121873ba825b6d222ad9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
