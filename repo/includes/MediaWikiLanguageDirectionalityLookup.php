@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use Language;
+use MWException;
 use Wikibase\View\LanguageDirectionalityLookup;
 
 /**
@@ -22,7 +23,13 @@ class MediaWikiLanguageDirectionalityLookup implements LanguageDirectionalityLoo
 	 * @return string|null 'ltr', 'rtl' or null if unknown
 	 */
 	public function getDirectionality( $languageCode ) {
-		return Language::factory( $languageCode )->getDir();
+		try {
+			$lang = Language::factory( $languageCode );
+		} catch ( MWException $ex ) {
+			return null;
+		}
+
+		return $lang->getDir();
 	}
 
 }
