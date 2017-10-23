@@ -94,7 +94,7 @@ class DiffView {
 	 * @return string
 	 * @throws MWException
 	 */
-	private function generateOpHtml( array $path, DiffOp $op ) {
+	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
 			$localizedPath = $path;
 
@@ -147,7 +147,7 @@ class DiffView {
 	 *
 	 * @return string
 	 */
-	private function generateChangeOpHtml( $oldValue, $newValue, array $path ) {
+	protected function generateChangeOpHtml( $oldValue, $newValue, array $path ) {
 		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
 		if ( $oldValue !== null ) {
@@ -265,7 +265,7 @@ class DiffView {
 	 *
 	 * @return string
 	 */
-	private function generateDiffHeaderHtml( $name ) {
+	protected function generateDiffHeaderHtml( $name ) {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
 		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
