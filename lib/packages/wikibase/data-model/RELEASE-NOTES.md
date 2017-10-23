@@ -18,6 +18,12 @@ This release removes integers as acceptable entity IDs.
 * Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
   `hasLinkToSite`, and `removeSiteLink`.
 
+## Version 7.2.0 (2017-10-23)
+
+* Performance optimizations on methods critical for dump generation:
+	* `DispatchingEntityIdParser::parse`
+	* `SnakList::orderByProperty`
+
 ## Version 7.1.0 (2017-09-01)
 
 * Changed `EntityIdValue::getArrayValue` to allow it handle foreign entity IDs and entity IDs that
