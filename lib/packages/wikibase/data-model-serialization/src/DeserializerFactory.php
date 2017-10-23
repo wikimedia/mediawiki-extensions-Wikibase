@@ -169,7 +169,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newSnakDeserializer() {
-		return new SnakDeserializer( $this->dataValueDeserializer, $this->newEntityIdDeserializer() );
+		return new SnakDeserializer( $this->dataValueDeserializer );
 	}
 
 	/**

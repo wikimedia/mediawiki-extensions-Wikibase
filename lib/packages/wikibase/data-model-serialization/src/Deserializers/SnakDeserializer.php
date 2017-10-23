@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Deserializers;
 
+use DataValues\DataValue;
+use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\UnDeserializableValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
@@ -10,6 +12,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -29,17 +32,8 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 */
 	private $dataValueDeserializer;
 
-	/**
-	 * @var Deserializer
-	 */
-	private $entityIdDeserializer;
-
-	public function __construct(
-		Deserializer $dataValueDeserializer,
-		Deserializer $entityIdDeserializer
-	) {
+	public function __construct( Deserializer $dataValueDeserializer ) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->entityIdDeserializer = $entityIdDeserializer;
 	}
 
 	/**
@@ -114,12 +108,24 @@ class SnakDeserializer implements DispatchableDeserializer {
 		);
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return DataValue
+	 */
 	private function deserializeDataValue( $serialization ) {
 		try {
 			return $this->dataValueDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $ex ) {
+			$value = isset( $serialization[DataValueDeserializer::VALUE_KEY] )
+				? $serialization[DataValueDeserializer::VALUE_KEY]
+				: null;
+			$type = isset( $serialization[DataValueDeserializer::TYPE_KEY] )
+				? $serialization[DataValueDeserializer::TYPE_KEY]
+				: null;
 			$error = isset( $serialization['error'] ) ? $serialization['error'] : $ex->getMessage();
-			return new UnDeserializableValue( $serialization['value'], $serialization['type'], $error );
+
+			return new UnDeserializableValue( $value, $type, $error );
 		}
 	}
 
@@ -130,17 +136,15 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 * @return PropertyId
 	 */
 	private function deserializePropertyId( $serialization ) {
-		$propertyId = $this->entityIdDeserializer->deserialize( $serialization );
-
-		if ( !( $propertyId instanceof PropertyId ) ) {
+		try {
+			return new PropertyId( $serialization );
+		} catch ( InvalidArgumentException $ex ) {
 			throw new InvalidAttributeException(
 				'property',
 				$serialization,
 				"'$serialization' is not a valid property ID"
 			);
 		}
-
-		return $propertyId;
 	}
 
 	private function assertCanDeserialize( $serialization ) {
