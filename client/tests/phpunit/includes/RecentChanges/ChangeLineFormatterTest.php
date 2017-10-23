@@ -349,6 +349,15 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				withClass( 'wikibase-edit' ),
 				havingTextContents( 'D' )
 			),
+			'edit-titlelink' => both( withTagName( 'a' ) )
+				->andAlso( havingTextContents( 'Canada' ) ),
+			'edit-titlelink-wrapper' => allOf(
+				withTagName( 'span' ),
+				withClass( 'mw-title' ),
+				havingChild(
+					both( withTagName( 'a' ) )->andAlso( havingTextContents( 'Canada' ) )
+				)
+			),
 			'edit-entitylink' => allOf(
 				withTagName( 'a' ),
 				withClass( 'wb-entity-link' ),
@@ -442,6 +451,14 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				->andAlso( havingTextContents( 'D' ) ),
 			'delete-titlelink' => both( withTagName( 'a' ) )
 				->andAlso( havingTextContents( 'Canada' ) ),
+			'delete-titlelink-wrapper' => both(
+				tagMatchingOutline( '<span class="mw-title"/>' )
+			)
+				->andAlso(
+					havingChild(
+						both( withTagName( 'a' ) )->andAlso( havingTextContents( 'Canada' ) )
+					)
+				),
 			'delete-changeslist-date' => both(
 				tagMatchingOutline( '<span class="mw-changeslist-date"/>' )
 			)
