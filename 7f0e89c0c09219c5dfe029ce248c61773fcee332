@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_c410615e",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-23T06:24:44Z",
+      "side": 1,
+      "message": "Why not override this, and extract functionality that is needed in LexemeDiff to a service class that can be used by both?",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 24
+      },
+      "revId": "7f0e89c0c09219c5dfe029ce248c61773fcee332",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_0416795a",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-23T06:24:44Z",
+      "side": 1,
+      "message": "What is this even?",
+      "range": {
+        "startLine": 97,
+        "startChar": 28,
+        "endLine": 97,
+        "endChar": 30
+      },
+      "revId": "7f0e89c0c09219c5dfe029ce248c61773fcee332",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
