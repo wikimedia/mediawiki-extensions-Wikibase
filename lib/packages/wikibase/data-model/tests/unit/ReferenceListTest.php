@@ -125,7 +125,8 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertTrue(
 			$list->hasReference( $sameReference ),
-			'hasReference should return true when a reference with the same value is present, even when its another instance'
+			'hasReference should return true when a reference with the same value is present, even '
+				. 'when its another instance'
 		);
 	}
 
