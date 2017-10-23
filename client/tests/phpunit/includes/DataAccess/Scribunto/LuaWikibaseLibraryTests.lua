@@ -118,7 +118,7 @@ local tests = {
 	  args = { 0, 'P12' },
 	  expect = "bad argument #1 to 'getBestStatements' (string expected, got number)"
 	},
-	{ name = 'mw.wikibase.getBestStatements (entityId must be string)', func = mw.wikibase.getBestStatements, type='ToString',
+	{ name = 'mw.wikibase.getBestStatements (propertyId must be string)', func = mw.wikibase.getBestStatements, type='ToString',
 	  args = { 'Q2', 12 },
 	  expect = "bad argument #2 to 'getBestStatements' (string expected, got number)"
 	},
@@ -132,7 +132,7 @@ local tests = {
 	  args = { 0, 'P12' },
 	  expect = "bad argument #1 to 'getAllStatements' (string expected, got number)"
 	},
-	{ name = 'mw.wikibase.getAllStatements (entityId must be string)', func = mw.wikibase.getAllStatements, type='ToString',
+	{ name = 'mw.wikibase.getAllStatements (propertyId must be string)', func = mw.wikibase.getAllStatements, type='ToString',
 	  args = { 'Q2', 12 },
 	  expect = "bad argument #2 to 'getAllStatements' (string expected, got number)"
 	},
@@ -263,9 +263,13 @@ local tests = {
 	  args = { 'Q32488' },
 	  expect = { nil }
 	},
-	{ name = 'mw.wikibase.sitelink (with global site id)', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.sitelink (with global site id 1)', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487', 'fooSiteId' },
 	  expect = { 'FooBarFoo' }
+	},
+	{ name = 'mw.wikibase.sitelink (with global site id 2)', func = mw.wikibase.sitelink, type='ToString',
+	  args = { 'Q32487', 'dewiki' },
+	  expect = { 'WikibaseClientDataAccessTest' }
 	},
 	{ name = 'mw.wikibase.sitelink (with global site id not found)', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487', 'does-not-exist' },
