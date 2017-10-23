@@ -87,6 +87,12 @@ local function testFormatValues()
 	return mw.wikibase.formatValues( snaks )
 end
 
+local function testGetEntityUrl( expectedItemId, itemId )
+	local url = mw.wikibase.getEntityUrl( itemId )
+
+	return url:match( '//.*/' .. expectedItemId ) ~= nil
+end
+
 local tests = {
 	-- Integration tests
 
@@ -118,7 +124,7 @@ local tests = {
 	  args = { 0, 'P12' },
 	  expect = "bad argument #1 to 'getBestStatements' (string expected, got number)"
 	},
-	{ name = 'mw.wikibase.getBestStatements (entityId must be string)', func = mw.wikibase.getBestStatements, type='ToString',
+	{ name = 'mw.wikibase.getBestStatements (propertyId must be string)', func = mw.wikibase.getBestStatements, type='ToString',
 	  args = { 'Q2', 12 },
 	  expect = "bad argument #2 to 'getBestStatements' (string expected, got number)"
 	},
@@ -132,7 +138,7 @@ local tests = {
 	  args = { 0, 'P12' },
 	  expect = "bad argument #1 to 'getAllStatements' (string expected, got number)"
 	},
-	{ name = 'mw.wikibase.getAllStatements (entityId must be string)', func = mw.wikibase.getAllStatements, type='ToString',
+	{ name = 'mw.wikibase.getAllStatements (propertyId must be string)', func = mw.wikibase.getAllStatements, type='ToString',
 	  args = { 'Q2', 12 },
 	  expect = "bad argument #2 to 'getAllStatements' (string expected, got number)"
 	},
@@ -310,6 +316,33 @@ local tests = {
 	{ name = 'mw.wikibase.resolvePropertyId (label not found)', func = mw.wikibase.resolvePropertyId,
 	  args = { 'foo' },
 	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getEntityUrl (by entity id)', func = testGetEntityUrl,
+	  args = { 'Q42', 'Q42' },
+	  expect = { true }
+	},
+	{ name = 'mw.wikibase.getEntityUrl (connected page)', func = testGetEntityUrl,
+	  args = { 'Q32487', nil },
+	  expect = { true }
+	},
+	{ name = 'mw.wikibase.getEntityUrl (must be string or nil)', func = mw.wikibase.getEntityUrl,
+	  args = { -1 },
+	  expect = "bad argument #1 to 'getEntityUrl' (string or nil expected, got number)"
+	},
+	{ name = 'mw.wikibase.getEntityUrl (invalid entity id)', func = mw.wikibase.getEntityUrl,
+	  args = { "BlahBlah" },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getPropertyOrder', func = mw.wikibase.getPropertyOrder,
+	  expect = { { ['P1'] = 0, ['P22'] = 1, ['P11'] = 2 } }
+	},
+	{ name = 'mw.wikibase.orderProperties', func = mw.wikibase.orderProperties,
+	  args = { { 'P22', 'P1', 'P44', 'Llama' } },
+	  expect = { { 'P1', 'P22', 'P44', 'Llama' } }
+	},
+	{ name = 'mw.wikibase.orderProperties (must be table)', func = mw.wikibase.orderProperties,
+	  args = { function() end },
+	  expect = "bad argument #1 to 'orderProperties' (table expected, got function)"
 	},
 }
 

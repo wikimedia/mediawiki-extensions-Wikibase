@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * @group WikibaseIntegration
  * @group WikibaseClient
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -55,6 +56,11 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
+
+		$this->insertPage(
+			'MediaWiki:Wikibase-SortedProperties',
+			"* P1\n* P22\n* P11"
+		);
 	}
 
 	protected function tearDown() {
