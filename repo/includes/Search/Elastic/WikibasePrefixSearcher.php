@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Search\Elastic;
 
 use CirrusSearch\Connection;
-use CirrusSearch\Search\RescoreBuilder;
 use CirrusSearch\Searcher;
 use Elastica\Query;
 use Elastica\Query\AbstractQuery;
@@ -79,8 +78,7 @@ class WikibasePrefixSearcher extends Searcher {
 	 * @param array|string $profile
 	 */
 	public function setRescoreProfile( $profile ) {
-		$rescore = new RescoreBuilder( $this->getSearchContext(), $profile );
-		$this->getSearchContext()->mergeRescore( $rescore->build() );
+		$this->getSearchContext()->setRescoreProfile( $profile );
 	}
 
 	/**
