@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e5d03d5_e93791a9",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-24T22:30:42Z",
+      "side": 1,
+      "message": "I notice setRescoreProfile just sets the profile, but merge does array_merge with existing one. That sounds like different semantics. We don\u0027t need the old one anymore? I\u0027d like to be educated on this topic :)",
+      "revId": "9537f16b6e68e2812a73972f121e978c1b542b04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
