@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce637b91_589a0968",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-24T14:47:57Z",
+      "side": 1,
+      "message": "Di",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "91a832c6629413c7b86748570d97dc97701d950d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce637b91_f89f3d53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-24T14:47:57Z",
+      "side": 1,
+      "message": "Still a typo. ;-)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "91a832c6629413c7b86748570d97dc97701d950d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_788b4d1c",
         "filename": "repo/includes/Diff/DiffView.php",
         "patchSetId": 3
