@@ -8,14 +8,20 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
+use InvalidArgumentException;
 use MWException;
+use MessageLocalizer;
+use Site;
+use SiteLookup;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
  * Class for generating views of DiffOp objects.
  *
  * @license GPL-2.0+
  */
-class BasicDiffView implements DiffView {
+class ItemDiffView implements DiffView {
 
 	/**
 	 * @var string[]
@@ -28,12 +34,46 @@ class BasicDiffView implements DiffView {
 	private $diff;
 
 	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
+
+	/**
+	 * @var EntityIdFormatter
+	 */
+	private $entityIdFormatter;
+
+	/**
+	 * @var MessageLocalizer
+	 */
+	private $messageLocalizer;
+
+	/**
+	 * @var string
+	 */
+	private $siteLinkPath;
+
+	/**
 	 * @param string[] $path
 	 * @param Diff $diff
+	 * @param SiteLookup $siteLookup
+	 * @param EntityIdFormatter $entityIdFormatter that must return only HTML! otherwise injections might be possible
+	 * @param MessageLocalizer $messageLocalizer
 	 */
-	public function __construct( array $path, Diff $diff ) {
+	public function __construct(
+		array $path,
+		Diff $diff,
+		SiteLookup $siteLookup,
+		EntityIdFormatter $entityIdFormatter,
+		MessageLocalizer $messageLocalizer
+	) {
 		$this->path = $path;
 		$this->diff = $diff;
+		$this->siteLookup = $siteLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
+		$this->messageLocalizer = $messageLocalizer;
+
+		$this->siteLinkPath = $this->messageLocalizer->msg( 'wikibase-diffview-link' )->text();
 	}
 
 	/**
@@ -57,6 +97,14 @@ class BasicDiffView implements DiffView {
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
 			$localizedPath = $path;
+
+			$translatedLinkSubPath = $this->messageLocalizer->msg(
+				'wikibase-diffview-link-' . $path[2]
+			);
+
+			if ( !$translatedLinkSubPath->isDisabled() ) {
+				$localizedPath[2] = $translatedLinkSubPath->text();
+			}
 
 			$html = $this->generateDiffHeaderHtml( implode( ' / ', $localizedPath ) );
 
@@ -146,7 +194,52 @@ class BasicDiffView implements DiffView {
 	 * @return string
 	 */
 	private function getChangedLine( $tag, $value, array $path ) {
-		return Html::element( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
+		if ( $path[2] === 'badges' ) {
+			$value = $this->getBadgeLinkElement( $value );
+		} else {
+			$value = $this->getSiteLinkElement( $path[1], $value );
+		}
+
+		return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
+	}
+
+	/**
+	 * @param string $siteId
+	 * @param string $pageName
+	 *
+	 * @return string
+	 */
+	private function getSiteLinkElement( $siteId, $pageName ) {
+		$site = $this->siteLookup->getSite( $siteId );
+
+		$tagName = 'span';
+		$attrs = [
+			'dir' => 'auto',
+		];
+
+		if ( $site instanceof Site ) {
+			// Otherwise it may have been deleted from the sites table
+			$tagName = 'a';
+			$attrs['href'] = $site->getPageUrl( $pageName );
+			$attrs['hreflang'] = $site->getLanguageCode();
+		}
+
+		return Html::element( $tagName, $attrs, $pageName );
+	}
+
+	/**
+	 * @param string $idString
+	 *
+	 * @return string HTML
+	 */
+	private function getBadgeLinkElement( $idString ) {
+		try {
+			$itemId = new ItemId( $idString );
+		} catch ( InvalidArgumentException $ex ) {
+			return htmlspecialchars( $idString );
+		}
+
+		return $this->entityIdFormatter->formatEntityId( $itemId );
 	}
 
 	/**

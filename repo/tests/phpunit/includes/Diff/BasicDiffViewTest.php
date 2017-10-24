@@ -6,11 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use HashSiteStore;
 use PHPUnit_Framework_TestCase;
-use RequestContext;
-use TestSites;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Diff\BasicDiffView;
 
 /**
@@ -25,8 +21,6 @@ use Wikibase\Repo\Diff\BasicDiffView;
 class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
 
 	public function diffOpProvider() {
-		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
-
 		return [
 			'Empty' => [
 				'@^$@',
@@ -44,30 +38,6 @@ class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
 				'@<del\b[^>]*>OLD</del>.*<ins\b[^>]*>NEW</ins>@',
 				'OLD',
 				'NEW',
-			],
-			'Link is linked' => [
-				'@<a\b[^>]* href="[^"]*\bNEW"[^>]*>NEW</a>@',
-				null,
-				'NEW',
-				$linkPath . '/enwiki'
-			],
-			'Link has direction' => [
-				'@<a\b[^>]* dir="auto"@',
-				null,
-				'NEW',
-				$linkPath . '/enwiki'
-			],
-			'Link has hreflang' => [
-				'@<a\b[^>]* hreflang="en"@',
-				null,
-				'NEW',
-				$linkPath . '/enwiki'
-			],
-			'Badge is linked correctly' => [
-				'@FORMATTED BADGE ID@',
-				null,
-				'Q123',
-				$linkPath . '/enwiki/badges'
 			]
 		];
 	}
@@ -85,31 +55,6 @@ class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param string[] $path
-	 * @param Diff $diff
-	 *
-	 * @return BasicDiffView
-	 */
-	private function getDiffView( array $path, Diff $diff ) {
-		$siteStore = new HashSiteStore( TestSites::getSites() );
-
-		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
-		$entityIdFormatter->expects( $this->any() )
-			->method( 'formatEntityId' )
-			->will( $this->returnValue( 'FORMATTED BADGE ID' ) );
-
-		$diffView = new BasicDiffView(
-			$path,
-			$diff,
-			$siteStore,
-			$entityIdFormatter,
-			new RequestContext()
-		);
-
-		return $diffView;
-	}
-
-	/**
 	 * @dataProvider diffOpProvider
 	 * @param string $pattern
 	 * @param string|null $oldValue
@@ -122,7 +67,7 @@ class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
 		}
 		$diff = new Diff( $this->getDiffOps( $oldValue, $newValue ) );
 
-		$diffView = $this->getDiffView( $path, $diff );
+		$diffView = new BasicDiffView( $path, $diff );
 		$html = $diffView->getHtml();
 
 		$this->assertInternalType( 'string', $html );
@@ -141,31 +86,6 @@ class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$this->assertRegExp( $pattern, $html, 'Diff table content line' );
-	}
-
-	/**
-	 * @dataProvider invalidBadgeIdProvider
-	 * @param string $badgeId
-	 */
-	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException( $badgeId ) {
-		$path = [
-			wfMessage( 'wikibase-diffview-link' )->text(),
-			'enwiki',
-			'badges'
-		];
-		$diff = new Diff( [ new DiffOpAdd( $badgeId ) ] );
-
-		$diffView = $this->getDiffView( $path, $diff );
-		$html = $diffView->getHtml();
-
-		$this->assertContains( htmlspecialchars( $badgeId ), $html );
-	}
-
-	public function invalidBadgeIdProvider() {
-		return [
-			[ 'invalidBadgeId' ],
-			[ '<a>injection</a>' ],
-		];
 	}
 
 }

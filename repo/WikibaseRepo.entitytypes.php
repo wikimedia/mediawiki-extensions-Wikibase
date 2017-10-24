@@ -19,7 +19,12 @@
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
+use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
+use Wikibase\Repo\Diff\ItemDiffVisualizer;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Rdf\NullEntityRdfBuilder;
 use Wikibase\Rdf\PropertyRdfBuilder;
@@ -84,6 +89,30 @@ return [
 				return $builder;
 			}
 			return new NullEntityRdfBuilder();
+		},
+		'entity-diff-visualizer-callback' => function (
+			MessageLocalizer $messageLocalizer,
+			ClaimDiffer $claimDiffer,
+			ClaimDifferenceVisualizer $claimDiffView,
+			SiteLookup $siteLookup,
+			EntityIdFormatter $entityIdFormatter
+		) {
+			$basicEntityDiffVisualizer = new BasicEntityDiffVisualizer(
+				$messageLocalizer,
+				$claimDiffer,
+				$claimDiffView,
+				$siteLookup,
+				$entityIdFormatter
+			);
+
+			return new ItemDiffVisualizer(
+				$messageLocalizer,
+				$claimDiffer,
+				$claimDiffView,
+				$siteLookup,
+				$entityIdFormatter,
+				$basicEntityDiffVisualizer
+			);
 		}
 	],
 	'property' => [

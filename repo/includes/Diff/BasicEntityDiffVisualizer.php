@@ -11,7 +11,6 @@ use MessageLocalizer;
 use MWException;
 use SiteLookup;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 
@@ -101,34 +100,13 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 					$this->messageLocalizer->msg( 'wikibase-diffview-description' )->text() => $diff->getDescriptionsDiff(),
 				],
 				true
-			),
-			$this->siteLookup,
-			$this->entityIdFormatter,
-			$this->messageLocalizer
+			)
 		);
 
 		$html .= $termDiffVisualizer->getHtml();
 
 		foreach ( $diff->getClaimsDiff() as $claimDiffOp ) {
 			$html .= $this->getClaimDiffHtml( $claimDiffOp );
-		}
-
-		// FIXME: this does not belong here as it is specific to items
-		if ( $diff instanceof ItemDiff ) {
-			$linkDiffVisualizer = new BasicDiffView(
-				[],
-				new Diff(
-					[
-						$this->messageLocalizer->msg( 'wikibase-diffview-link' )->text() => $diff->getSiteLinkDiff(),
-					],
-					true
-				),
-				$this->siteLookup,
-				$this->entityIdFormatter,
-				$this->messageLocalizer
-			);
-
-			$html .= $linkDiffVisualizer->getHtml();
 		}
 
 		return $html;
@@ -148,13 +126,7 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 
 		//TODO: localize path (keys in the diff array)
 
-		$linkDiffVisualizer = new BasicDiffView(
-			[],
-			$diff,
-			$this->siteLookup,
-			$this->entityIdFormatter,
-			$this->messageLocalizer
-		);
+		$linkDiffVisualizer = new BasicDiffView( [], $diff );
 
 		$html = $linkDiffVisualizer->getHtml();
 		return $html;
