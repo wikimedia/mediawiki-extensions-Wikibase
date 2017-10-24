@@ -92,7 +92,7 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 
 		$html = '';
 
-		$termDiffVisualizer = new DiffView(
+		$termDiffVisualizer = new BasicDiffView(
 			[],
 			new Diff(
 				[
@@ -115,7 +115,7 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 
 		// FIXME: this does not belong here as it is specific to items
 		if ( $diff instanceof ItemDiff ) {
-			$linkDiffVisualizer = new DiffView(
+			$linkDiffVisualizer = new BasicDiffView(
 				[],
 				new Diff(
 					[
@@ -148,7 +148,7 @@ class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 
 		//TODO: localize path (keys in the diff array)
 
-		$linkDiffVisualizer = new DiffView(
+		$linkDiffVisualizer = new BasicDiffView(
 			[],
 			$diff,
 			$this->siteLookup,

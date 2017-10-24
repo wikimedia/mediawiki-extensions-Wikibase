@@ -11,10 +11,10 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use TestSites;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\Repo\Diff\DiffView;
+use Wikibase\Repo\Diff\BasicDiffView;
 
 /**
- * @covers Wikibase\Repo\Diff\DiffView
+ * @covers Wikibase\Repo\Diff\BasicDiffView
  *
  * @group Wikibase
  *
@@ -22,7 +22,7 @@ use Wikibase\Repo\Diff\DiffView;
  * @author Thiemo Mättig
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class DiffViewTest extends PHPUnit_Framework_TestCase {
+class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
 
 	public function diffOpProvider() {
 		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
@@ -88,7 +88,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	 * @param string[] $path
 	 * @param Diff $diff
 	 *
-	 * @return DiffView
+	 * @return BasicDiffView
 	 */
 	private function getDiffView( array $path, Diff $diff ) {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
@@ -98,7 +98,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( 'FORMATTED BADGE ID' ) );
 
-		$diffView = new DiffView(
+		$diffView = new BasicDiffView(
 			$path,
 			$diff,
 			$siteStore,
