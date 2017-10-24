@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_788b4d1c",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-24T14:47:27Z",
+      "side": 1,
+      "message": "I feel this must be way more specific about the assumptions calling code is going to make: The HTML returned here is expected to be a set of \u003ctr\u003e elements (without any \u003ctable\u003e or \u003ctbody\u003e, because the calling code is going to add these). Each \u003ctr\u003e is expected to contain exactly four \u003ctd\u003e cells. The first two cells represent marker (either a \"+\" or a \"-\") and content from the old revision, the last two cells represent marker and content from the new revision. Either pair of cells can be omitted and replaced with an empty \u003ctd colspan\u003d\"2\"\u003e if there is no relevant content on this side. \u003cth\u003e cells are not expected.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 18
+      },
+      "revId": "91a832c6629413c7b86748570d97dc97701d950d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
