@@ -21,7 +21,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
  *
  * @license GPL-2.0+
  */
-class DiffView {
+class BasicDiffView {
 
 	/**
 	 * @var string[]
