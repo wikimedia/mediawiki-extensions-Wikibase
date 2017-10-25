@@ -10,5 +10,6 @@ Feature: Delete item
 Scenario: Delete item
   Given I am logged in to the repo
     And I am on an item page
+    And I am ignoring browser errors
   When I click the item delete button
   Then Page should be deleted

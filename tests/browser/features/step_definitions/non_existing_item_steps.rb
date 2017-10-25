@@ -9,6 +9,10 @@ Given(/^I am on an non existing item page$/) do
   visit_page(NonExistingItemPage)
 end
 
+Given(/^I am ignoring browser errors$/) do
+  $skip_browser_error_check = true
+end
+
 Then(/^check if this page behaves correctly$/) do
   on_page(NonExistingItemPage) do |page|
     expect(page.first_heading?).to be true

@@ -8,5 +8,6 @@
 Feature: Non existing item
 
 Scenario: Edit tab
-  Given I am on an non existing item page
+  Given I am ignoring browser errors
+    And I am on an non existing item page
   Then check if this page behaves correctly
