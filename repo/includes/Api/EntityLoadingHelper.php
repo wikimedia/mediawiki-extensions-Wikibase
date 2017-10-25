@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Assert\Assert;
@@ -52,9 +52,9 @@ class EntityLoadingHelper {
 	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
 	/**
-	 * @var SiteLinkLookup|null
+	 * @var EntityByLinkedTitleLookup|null
 	 */
-	private $siteLinkLookup = null;
+	private $entityByLinkedTitleLookup = null;
 
 	/**
 	 * @var string
@@ -91,15 +91,8 @@ class EntityLoadingHelper {
 		$this->entityIdParam = $entityIdParam;
 	}
 
-	/**
-	 * @return SiteLinkLookup|null
-	 */
-	public function getSiteLinkLookup() {
-		return $this->siteLinkLookup;
-	}
-
-	public function setSiteLinkLookup( SiteLinkLookup $siteLinkLookup ) {
-		$this->siteLinkLookup = $siteLinkLookup;
+	public function setEntityByLinkedTitleLookup( EntityByLinkedTitleLookup $entityByTitleLookup ) {
+		$this->entityByLinkedTitleLookup = $entityByTitleLookup;
 	}
 
 	/**
@@ -233,21 +226,21 @@ class EntityLoadingHelper {
 	 * @return EntityId The ID of the entity connected to $title on $site.
 	 */
 	private function getEntityIdFromSiteTitleCombination( $site, $title ) {
-		if ( $this->siteLinkLookup ) {
-			// FIXME: Normalization missing, see T47282.
-			$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
+		if ( $this->entityByLinkedTitleLookup ) {
+			// FIXME: Normalization missing, see T47282. Use EntityByTitleHelper!
+			$entityId = $this->entityByLinkedTitleLookup->getEntityIdForLinkedTitle( $site, $title );
 		} else {
-			$itemId = null;
+			$entityId = null;
 		}
 
-		if ( $itemId === null ) {
+		if ( $entityId === null ) {
 			$this->errorReporter->dieError(
 				'No entity found matching site link ' . $site . ':' . $title,
 				'no-such-entity-link'
 			);
 		}
 
-		return $itemId;
+		return $entityId;
 	}
 
 }

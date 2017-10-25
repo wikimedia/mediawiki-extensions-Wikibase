@@ -7,18 +7,19 @@ use Profiler;
 use Site;
 use SiteLookup;
 use ApiUsageException;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\StringNormalizer;
 
 /**
- * Helper class for api modules to resolve page+title pairs into items.
+ * Helper class for api modules to resolve page+title pairs into entities.
  *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  * @author Addshore
+ * @author Daniel Kinzler
  */
-class ItemByTitleHelper {
+class EntityByTitleHelper {
 
 	/**
 	 * @var ApiBase
@@ -31,9 +32,9 @@ class ItemByTitleHelper {
 	private $resultBuilder;
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var EntityByLinkedTitleLookup
 	 */
-	private $siteLinkLookup;
+	private $entityByLinkedTitleLookup;
 
 	/**
 	 * @var SiteLookup
@@ -48,13 +49,13 @@ class ItemByTitleHelper {
 	public function __construct(
 		ApiBase $apiModule,
 		ResultBuilder $resultBuilder,
-		SiteLinkLookup $siteLinkLookup,
+		EntityByLinkedTitleLookup $entityByLinkedTitleLookup,
 		SiteLookup $siteLookup,
 		StringNormalizer $stringNormalizer
 	) {
 		$this->apiModule = $apiModule;
 		$this->resultBuilder = $resultBuilder;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityByLinkedTitleLookup = $entityByLinkedTitleLookup;
 		$this->siteLookup = $siteLookup;
 		$this->stringNormalizer = $stringNormalizer;
 	}
@@ -67,10 +68,10 @@ class ItemByTitleHelper {
 	 * @param bool $normalize
 	 *
 	 * @throws ApiUsageException
-	 * @return array( ItemId[], array[] )
-	 *         List containing valid ItemIds and MissingItem site title combinations
+	 * @return array( EntityId[], array[] )
+	 *         List containing valid $ids and $missingEntities site title combinations
 	 */
-	public function getItemIds( array $sites, array $titles, $normalize ) {
+	public function getEntityIds( array $sites, array $titles, $normalize ) {
 		$ids = [];
 		$numSites = count( $sites );
 		$numTitles = count( $titles );
@@ -99,19 +100,19 @@ class ItemByTitleHelper {
 			);
 		}
 
-		$missingItems = [];
+		$missingEntities = [];
 		foreach ( $sites as $siteId ) {
 			foreach ( $titles as $title ) {
-				$itemId = $this->getItemId( $siteId, $title, $normalize );
+				$itemId = $this->getEntityId( $siteId, $title, $normalize );
 				if ( !is_null( $itemId ) ) {
 					$ids[] = $itemId;
 				} else {
-					$missingItems[] = [ 'site' => $siteId, 'title' => $title ];
+					$missingEntities[] = [ 'site' => $siteId, 'title' => $title ];
 				}
 			}
 		}
 
-		return [ $ids, $missingItems ];
+		return [ $ids, $missingEntities ];
 	}
 
 	/**
@@ -121,19 +122,19 @@ class ItemByTitleHelper {
 	 * @param string $title
 	 * @param bool $normalize
 	 *
-	 * @return ItemId|null
+	 * @return EntityId|null
 	 */
-	private function getItemId( $siteId, $title, $normalize ) {
+	private function getEntityId( $siteId, $title, $normalize ) {
 		// FIXME: This code is duplicated in SpecialItemByTitle::execute!
 		$title = $this->stringNormalizer->trimToNFC( $title );
-		$id = $this->siteLinkLookup->getItemIdForLink( $siteId, $title );
+		$id = $this->entityByLinkedTitleLookup->getEntityIdForLinkedTitle( $siteId, $title );
 
 		// Try harder by requesting normalization on the external site.
 		if ( $id === null && $normalize === true ) {
-			$siteObj = $this->siteLookup->getSite( $siteId );
+			$siteObj = $this->siteLookup->getSite( $siteId ); // XXX: is this really needed??
 			//XXX: this passes the normalized title back into $title by reference...
 			$this->normalizeTitle( $title, $siteObj );
-			$id = $this->siteLinkLookup->getItemIdForLink( $siteObj->getGlobalId(), $title );
+			$id = $this->entityByLinkedTitleLookup->getEntityIdForLinkedTitle( $siteId, $title );
 		}
 
 		return $id;

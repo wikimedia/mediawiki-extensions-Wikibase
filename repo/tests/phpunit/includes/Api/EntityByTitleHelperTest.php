@@ -10,8 +10,8 @@ use SiteLookup;
 use Title;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\Api\ItemByTitleHelper;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
+use Wikibase\Repo\Api\EntityByTitleHelper;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\StringNormalizer;
 
@@ -25,7 +25,7 @@ use Wikibase\StringNormalizer;
  * @author Marius Hoch < hoo@online.de >
  * @author Addshore
  */
-class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
+class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return ApiBase
@@ -68,13 +68,13 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param mixed $itemId
 	 *
-	 * @return SiteLinkLookup
+	 * @return EntityByLinkedTitleLookup
 	 */
-	private function getSiteLinkLookupMock( $itemId ) {
-		$siteLinkLookupMock = $this->getMock( SiteLinkLookup::class );
+	private function getEntityByTitleLookupMock( $itemId ) {
+		$siteLinkLookupMock = $this->getMock( EntityByLinkedTitleLookup::class );
 
 		$siteLinkLookupMock->expects( $this->any() )
-			->method( 'getItemIdForLink' )
+			->method( 'getEntityIdForLinkedTitle' )
 				->will( $this->returnValue( $itemId ) );
 
 		return $siteLinkLookupMock;
@@ -84,10 +84,10 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$expectedEntityId = new ItemId( 'Q123' );
 		$expectedEntityId = $expectedEntityId->getSerialization();
 
-		$itemByTitleHelper = new ItemByTitleHelper(
+		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
-			$this->getSiteLinkLookupMock( new ItemId( 'Q123' ) ),
+			$this->getEntityByTitleLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -95,7 +95,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$sites = [ 'FooSite' ];
 		$titles = [ 'Berlin', 'London' ];
 
-		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, false );
+		list( $entityIds, ) = $entityByTitleHelper->getEntityIds( $sites, $titles, false );
 
 		foreach ( $entityIds as $entityId ) {
 			$this->assertEquals( $expectedEntityId, $entityId );
@@ -106,11 +106,11 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * Try to get an entity id for a page that's normalized with normalization.
 	 */
 	public function testGetEntityIdNormalized() {
-		$itemByTitleHelper = new ItemByTitleHelper(
+		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 		// Two values should be added: The normalization and the failure to find an entity
 			$this->getResultBuilderMock( 1 ),
-			$this->getSiteLinkLookupMock( null ),
+			$this->getEntityByTitleLookupMock( null ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -118,7 +118,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$sites = [ 'FooSite' ];
 		$titles = [ 'berlin_germany' ];
 
-		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, true );
+		list( $entityIds, ) = $entityByTitleHelper->getEntityIds( $sites, $titles, true );
 
 		// Still nothing could be found
 		$this->assertEquals( [], $entityIds );
@@ -129,11 +129,11 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * Makes sure that the failures are added to the API result.
 	 */
 	public function testGetEntityIdsNotFound() {
-		$itemByTitleHelper = new ItemByTitleHelper(
+		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 		// Two result values should be added (for both titles which wont be found)
 			$this->getResultBuilderMock(),
-			$this->getSiteLinkLookupMock( false ),
+			$this->getEntityByTitleLookupMock( false ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -141,7 +141,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$sites = [ 'FooSite' ];
 		$titles = [ 'Berlin', 'London' ];
 
-		$itemByTitleHelper->getItemIds( $sites, $titles, false );
+		$entityByTitleHelper->getEntityIds( $sites, $titles, false );
 	}
 
 	/**
@@ -150,10 +150,10 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEntityIdsNormalizationNotAllowed() {
 		$this->setExpectedException( ApiUsageException::class );
 
-		$itemByTitleHelper = new ItemByTitleHelper(
+		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
-			$this->getSiteLinkLookupMock( 1 ),
+			$this->getEntityByTitleLookupMock( 1 ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -161,7 +161,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$sites = [ 'FooSite' ];
 		$titles = [ 'Berlin', 'London' ];
 
-		$itemByTitleHelper->getItemIds( $sites, $titles, true );
+		$entityByTitleHelper->getEntityIds( $sites, $titles, true );
 	}
 
 	public function normalizeTitleProvider() {
@@ -187,15 +187,15 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	public function testNormalizeTitle( $title, $expectedEntityId, $expectedAddNormalizedCalls ) {
 		$dummySite = new MediaWikiSite();
 
-		$itemByTitleHelper = new ItemByTitleHelper(
+		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock( $expectedAddNormalizedCalls ),
-			$this->getSiteLinkLookupMock( $expectedEntityId ),
+			$this->getEntityByTitleLookupMock( $expectedEntityId ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
-		$itemByTitleHelper->normalizeTitle( $title, $dummySite );
+		$entityByTitleHelper->normalizeTitle( $title, $dummySite );
 
 		// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
 		// XXX: The Normalized title is passed by via reference to $title...
@@ -225,15 +225,15 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	public function testNotEnoughInput( array $sites, array $titles, $normalize ) {
 		$this->setExpectedException( ApiUsageException::class );
 
-		$itemByTitleHelper = new ItemByTitleHelper(
+		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
-			$this->getSiteLinkLookupMock( new ItemId( 'Q123' ) ),
+			$this->getEntityByTitleLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
-		$itemByTitleHelper->getItemIds( $sites, $titles, $normalize );
+		$entityByTitleHelper->getEntityIds( $sites, $titles, $normalize );
 	}
 
 }
