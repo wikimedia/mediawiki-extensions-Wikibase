@@ -86,8 +86,15 @@ class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$serialization = $serializer->serialize( $goodSnak );
 		$newSnak = $deserializer->deserialize( $serialization );
 
-		$badSnak = new PropertyValueSnak( 42, new UnDeserializableValue( 'Yay', 'string', '' ) );
-		$this->assertEquals( $badSnak, $newSnak );
+		/** @var PropertyValueSnak $newSnak */
+		$this->assertInstanceOf( PropertyValueSnak::class, $newSnak );
+		$this->assertSame( 'P42', $newSnak->getPropertyId()->getSerialization() );
+
+		/** @var UnDeserializableValue $newValue */
+		$newValue = $newSnak->getDataValue();
+		$this->assertInstanceOf( UnDeserializableValue::class, $newValue );
+		$this->assertSame( 'Yay', $newValue->getValue() );
+		$this->assertSame( 'string', $newValue->getTargetType() );
 	}
 
 }
