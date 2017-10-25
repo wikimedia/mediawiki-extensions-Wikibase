@@ -105,6 +105,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\DispatchingEntityRevisionLookup' => __DIR__ . '/includes/Store/DispatchingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\DispatchingPropertyInfoLookup' => __DIR__ . '/includes/Store/DispatchingPropertyInfoLookup.php',
 	'Wikibase\\Lib\\Store\\DispatchingTermBuffer' => __DIR__ . '/includes/Store/DispatchingTermBuffer.php',
+	'Wikibase\\Lib\\Store\\EntityByLinkedTitleLookup' => __DIR__ . '/includes/Store/EntityByLinkedTitleLookup.php',
 	'Wikibase\\Lib\\Store\\EntityContentDataCodec' => __DIR__ . '/includes/Store/EntityContentDataCodec.php',
 	'Wikibase\\Lib\\Store\\EntityInfo' => __DIR__ . '/includes/Store/EntityInfo.php',
 	'Wikibase\\Lib\\Store\\EntityInfoBuilder' => __DIR__ . '/includes/Store/EntityInfoBuilder.php',

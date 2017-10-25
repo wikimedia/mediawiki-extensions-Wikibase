@@ -79,6 +79,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Api\\CreateClaim' => __DIR__ . '/includes/Api/CreateClaim.php',
 	'Wikibase\\Repo\\Api\\CreateRedirect' => __DIR__ . '/includes/Api/CreateRedirect.php',
 	'Wikibase\\Repo\\Api\\EditEntity' => __DIR__ . '/includes/Api/EditEntity.php',
+	'Wikibase\\Repo\\Api\\EntityByTitleHelper' => __DIR__ . '/includes/Api/EntityByTitleHelper.php',
 	'Wikibase\\Repo\\Api\\EntityLoadingHelper' => __DIR__ . '/includes/Api/EntityLoadingHelper.php',
 	'Wikibase\\Repo\\Api\\EntitySavingHelper' => __DIR__ . '/includes/Api/EntitySavingHelper.php',
 	'Wikibase\\Repo\\Api\\EntitySearchHelper' => __DIR__ . '/includes/Api/EntitySearchHelper.php',
