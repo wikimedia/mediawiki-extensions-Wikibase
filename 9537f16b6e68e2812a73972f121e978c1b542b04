@@ -16,6 +16,24 @@
       "revId": "9537f16b6e68e2812a73972f121e978c1b542b04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_2ceb77a2",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-10-25T08:13:44Z",
+      "side": 1,
+      "message": "merging never really worked in the case of this Searcher class.\nIn this case the initial rescore array was always empty so your rescore config was always the sole one being used.\n\nIt was only set when the CirrusSearch Search calls installBoosts() (never called here since you overide buildSearch()), but since I want to remove this method merging is no longer needed.\n\nIt was too misleading imo, order is extremely important and I feel like if one wants to setup rescoring it must provide a full sane profile or use the placeholders we put in place (i.e. for search keywords).",
+      "parentUuid": "8e5d03d5_e93791a9",
+      "revId": "9537f16b6e68e2812a73972f121e978c1b542b04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
