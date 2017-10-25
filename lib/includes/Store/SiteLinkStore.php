@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface SiteLinkStore extends SiteLinkLookup {
+interface SiteLinkStore extends SiteLinkLookup, EntityByTitleLookup {
 
 	/**
 	 * Saves the links for the provided item.
