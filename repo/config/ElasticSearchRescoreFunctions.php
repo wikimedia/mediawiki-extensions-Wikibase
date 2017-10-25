@@ -28,7 +28,7 @@ return [
 			[
 				// Incoming links: k = 50
 				'type' => 'satu',
-				'weight' => '0.5',
+				'weight' => '0.6',
 				'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 2 , 'k' => 50 ]
 			],
 			[
