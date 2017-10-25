@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
 use CirrusSearch\HashSearchConfig;
@@ -9,6 +10,7 @@ use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
 
 /**
  * @covers \Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder
+ *
  * @group Wikibase
  */
 class StatementBoostScoreBuilderTest extends MediaWikiTestCase {
@@ -50,11 +52,8 @@ class StatementBoostScoreBuilderTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider statementBoostProvider
-	 * @param float $weight
-	 * @param array $settings
-	 * @param array $functions
 	 */
-	public function testStatementBoosts( $weight, $settings, $functions ) {
+	public function testStatementBoosts( $weight, array $settings, array $functions ) {
 		$config = new HashSearchConfig( [] );
 		$context = new SearchContext( $config, null );
 		$builder = new StatementBoostScoreBuilder( $context, $weight, $settings );
