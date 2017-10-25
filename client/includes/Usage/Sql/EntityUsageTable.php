@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\DBUnexpectedError;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * Helper class for updating the wbc_entity_usage table.
@@ -26,6 +27,13 @@ use Wikimedia\Rdbms\DBUnexpectedError;
 class EntityUsageTable {
 
 	const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
+
+	/**
+	 * INSERTs are supposed to be done in much larger batches than SELECTs or DELETEs, per the DBA.
+	 * About 1000 was suggested. Given the default batch size is 100, a factor of 5 seems to be a
+	 * good compromise.
+	 */
+	const INSERT_BATCH_SIZE_FACTOR = 5;
 
 	/**
 	 * @var EntityIdParser
@@ -43,9 +51,9 @@ class EntityUsageTable {
 	private $readConnection;
 
 	/**
-	 * @var string
+	 * @var LBFactory
 	 */
-	private $tableName;
+	private $loadBalancerFactory;
 
 	/**
 	 * @var int
@@ -53,9 +61,15 @@ class EntityUsageTable {
 	private $batchSize;
 
 	/**
+	 * @var string
+	 */
+	private $tableName;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param Database $writeConnection
-	 * @param int $batchSize defaults to 100
+	 * @param int $batchSize Batch size for database queries on the entity usage table, including
+	 *  INSERTs, SELECTs, and DELETEs. Defaults to 100.
 	 * @param string|null $tableName defaults to wbc_entity_usage
 	 *
 	 * @throws InvalidArgumentException
@@ -80,8 +94,8 @@ class EntityUsageTable {
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
 
 		//TODO: Inject
-		$this->readConnection = MediaWikiServices::getInstance()->getDBLoadBalancer()
-			->getConnection( DB_REPLICA );
+		$this->loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$this->readConnection = $this->loadBalancerFactory->getMainLB()->getConnection( DB_REPLICA );
 	}
 
 	/**
@@ -160,7 +174,7 @@ class EntityUsageTable {
 
 		$batches = array_chunk(
 			$this->makeUsageRows( $pageId, $usages ),
-			$this->batchSize
+			$this->batchSize * self::INSERT_BATCH_SIZE_FACTOR
 		);
 
 		$c = 0;
@@ -173,6 +187,10 @@ class EntityUsageTable {
 		}
 
 		$this->writeConnection->endAtomic( __METHOD__ );
+
+		// Wait for all database replicas to be updated, but only for the affected client wiki. The
+		// "domain" argument is documented at ILBFactory::waitForReplication.
+		$this->loadBalancerFactory->waitForReplication( [ 'domain' => wfWikiID() ] );
 
 		return $c;
 	}
