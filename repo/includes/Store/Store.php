@@ -77,18 +77,20 @@ interface Store {
 	public function getEntityRedirectLookup();
 
 	/**
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
+	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $uncached = '' );
+	public function getEntityLookup( $cache = '' );
 
 	/**
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
+	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $uncached = '' );
+	public function getEntityRevisionLookup( $cache = '' );
 
 	/**
 	 * @return EntityStore

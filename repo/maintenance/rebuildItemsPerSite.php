@@ -49,7 +49,7 @@ class RebuildItemsPerSite extends Maintenance {
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Use an uncached EntityLookup here to avoid memory leaks
-		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
+		$entityLookup = $wikibaseRepo->getEntityLookup( 'retrieve-only' );
 		$store = $wikibaseRepo->getStore();
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,
