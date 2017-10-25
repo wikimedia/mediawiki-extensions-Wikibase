@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\DBUnexpectedError;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Helper class for updating the wbc_entity_usage table.
@@ -41,6 +42,11 @@ class EntityUsageTable {
 	 * @var Database
 	 */
 	private $readConnection;
+
+	/**
+	 * @var LoadBalancer
+	 */
+	private $loadBalancer;
 
 	/**
 	 * @var string
@@ -80,8 +86,8 @@ class EntityUsageTable {
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
 
 		//TODO: Inject
-		$this->readConnection = MediaWikiServices::getInstance()->getDBLoadBalancer()
-			->getConnection( DB_REPLICA );
+		$this->loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$this->readConnection = $this->loadBalancer->getConnection( DB_REPLICA );
 	}
 
 	/**
@@ -160,7 +166,7 @@ class EntityUsageTable {
 
 		$batches = array_chunk(
 			$this->makeUsageRows( $pageId, $usages ),
-			$this->batchSize
+			$this->batchSize * 5 // This is supposed to be done in huge batches, per the DBA.
 		);
 
 		$c = 0;
@@ -173,6 +179,7 @@ class EntityUsageTable {
 		}
 
 		$this->writeConnection->endAtomic( __METHOD__ );
+		$this->loadBalancer->waitForAll( $this->writeConnection->getMasterPos() );
 
 		return $c;
 	}
