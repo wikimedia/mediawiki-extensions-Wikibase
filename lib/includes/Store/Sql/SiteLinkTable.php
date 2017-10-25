@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use MWException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -341,6 +342,16 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		$this->releaseConnection( $dbr );
 
 		return $siteLinks;
+	}
+
+	/**
+	 * @param string $globalSiteId
+	 * @param string $pageTitle
+	 *
+	 * @return EntityId|null
+	 */
+	public function getEntityIdForLink( $globalSiteId, $pageTitle ) {
+		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
 }

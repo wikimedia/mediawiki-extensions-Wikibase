@@ -13,7 +13,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\EntityByTitleLookup;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\SummaryFormatter;
 
@@ -79,9 +79,9 @@ class ApiHelperFactory {
 	private $idParser;
 
 	/**
-	 * @var SiteLinkLookup|null
+	 * @var EntityByTitleLookup|null
 	 */
-	private $siteLinkLookup;
+	private $entityByTitleLookup;
 
 	/**
 	 * @var EntityFactory|null
@@ -104,7 +104,7 @@ class ApiHelperFactory {
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param EntityIdParser $idParser
-	 * @param SiteLinkLookup|null $siteLinkLookup
+	 * @param EntityByTitleLookup|null $entityByTitleLookup
 	 * @param EntityFactory|null $entityFactory
 	 * @param EntityStore|null $entityStore
 	 */
@@ -119,7 +119,7 @@ class ApiHelperFactory {
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		EntityIdParser $idParser,
-		SiteLinkLookup $siteLinkLookup = null,
+		EntityByTitleLookup $entityByTitleLookup = null,
 		EntityFactory $entityFactory = null,
 		EntityStore $entityStore = null
 	) {
@@ -133,7 +133,7 @@ class ApiHelperFactory {
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
 		$this->idParser = $idParser;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityByTitleLookup = $entityByTitleLookup;
 		$this->entityFactory = $entityFactory;
 		$this->entityStore = $entityStore;
 	}
@@ -192,8 +192,8 @@ class ApiHelperFactory {
 			$this->editEntityFactory
 		);
 
-		if ( $this->siteLinkLookup ) {
-			$helper->setSiteLinkLookup( $this->siteLinkLookup );
+		if ( $this->entityByTitleLookup ) {
+			$helper->setEntityByTitleLookup( $this->entityByTitleLookup );
 		}
 
 		if ( $this->entityFactory ) {
@@ -225,8 +225,8 @@ class ApiHelperFactory {
 			$this->getErrorReporter( $apiBase )
 		);
 
-		if ( $this->siteLinkLookup ) {
-			$helper->setSiteLinkLookup( $this->siteLinkLookup );
+		if ( $this->entityByTitleLookup ) {
+			$helper->setEntityByTitleLookup( $this->entityByTitleLookup );
 		}
 
 		return $helper;

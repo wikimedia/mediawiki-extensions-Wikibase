@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -200,6 +201,16 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 */
 	private function makeSiteLinkKey( SiteLink $siteLink ) {
 		return $siteLink->getSiteId() . ':' . $siteLink->getPageName();
+	}
+
+	/**
+	 * @param string $globalSiteId
+	 * @param string $pageTitle
+	 *
+	 * @return EntityId|null
+	 */
+	public function getEntityIdForLink( $globalSiteId, $pageTitle ) {
+		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
 }
