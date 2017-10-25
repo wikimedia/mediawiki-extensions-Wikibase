@@ -43,7 +43,7 @@ end
 class DriverJSError < StandardError; end
 
 # Fail on JS errors in browser
-AfterStep do ||
+AfterStep('~@ignore_browser_errors') do ||
   errors = @browser.driver.manage.logs.get(:browser)
                .select do |e|
                     e.level == 'SEVERE' && e.message.present?
