@@ -151,7 +151,7 @@ class GetEntities extends ApiBase {
 	 */
 	private function getEntityIdsFromParams( array $params ) {
 		$fromIds = $this->getEntityIdsFromIdParam( $params );
-		$fromSiteTitleCombinations = $this->getItemIdsFromSiteTitleParams( $params );
+		$fromSiteTitleCombinations = $this->getEntityIdsFromSiteTitleParams( $params );
 		$ids = array_merge( $fromIds, $fromSiteTitleCombinations );
 		return array_unique( $ids );
 	}
@@ -186,23 +186,29 @@ class GetEntities extends ApiBase {
 	 * @param array $params
 	 * @return EntityId[]
 	 */
-	private function getItemIdsFromSiteTitleParams( array $params ) {
+	private function getEntityIdsFromSiteTitleParams( array $params ) {
 		$ids = [];
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
-			$itemByTitleHelper = $this->getItemByTitleHelper();
-			list( $ids, $missingItems ) = $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
+			$entityByTitleHelper = $this->getItemByTitleHelper();
+
+			list( $ids, $missingItems ) = $entityByTitleHelper->getEntityIds(
+				$params['sites'],
+				$params['titles'],
+				$params['normalize']
+			);
+
 			$this->addMissingItemsToResult( $missingItems );
 		}
 		return $ids;
 	}
 
 	/**
-	 * @return ItemByTitleHelper
+	 * @return EntityByTitleHelper
 	 */
 	private function getItemByTitleHelper() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$siteLinkStore = $wikibaseRepo->getStore()->newSiteLinkStore();
-		return new ItemByTitleHelper(
+		$siteLinkStore = $wikibaseRepo->getStore()->getEntityByTitleLookup();
+		return new EntityByTitleHelper(
 			$this,
 			$this->resultBuilder,
 			$siteLinkStore,

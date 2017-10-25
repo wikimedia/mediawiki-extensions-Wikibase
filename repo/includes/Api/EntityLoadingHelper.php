@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\EntityByTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Assert\Assert;
@@ -52,9 +52,9 @@ class EntityLoadingHelper {
 	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
 	/**
-	 * @var SiteLinkLookup|null
+	 * @var EntityByTitleLookup|null
 	 */
-	private $siteLinkLookup = null;
+	private $entityByTitleLookup = null;
 
 	/**
 	 * @var string
@@ -92,14 +92,14 @@ class EntityLoadingHelper {
 	}
 
 	/**
-	 * @return SiteLinkLookup|null
+	 * @return EntityByTitleLookup|null
 	 */
-	public function getSiteLinkLookup() {
-		return $this->siteLinkLookup;
+	public function getEntityByTitleLookup() {
+		return $this->entityByTitleLookup;
 	}
 
-	public function setSiteLinkLookup( SiteLinkLookup $siteLinkLookup ) {
-		$this->siteLinkLookup = $siteLinkLookup;
+	public function setEntityByTitleLookup( EntityByTitleLookup $entityByTitleLookup ) {
+		$this->entityByTitleLookup = $entityByTitleLookup;
 	}
 
 	/**
@@ -233,21 +233,21 @@ class EntityLoadingHelper {
 	 * @return EntityId The ID of the entity connected to $title on $site.
 	 */
 	private function getEntityIdFromSiteTitleCombination( $site, $title ) {
-		if ( $this->siteLinkLookup ) {
-			// FIXME: Normalization missing, see T47282.
-			$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
+		if ( $this->entityByTitleLookup ) {
+			// FIXME: Normalization missing, see T47282. Use EntityByTitleHelper!
+			$entityId = $this->entityByTitleLookup->getEntityIdForLink( $site, $title );
 		} else {
-			$itemId = null;
+			$entityId = null;
 		}
 
-		if ( $itemId === null ) {
+		if ( $entityId === null ) {
 			$this->errorReporter->dieError(
 				'No entity found matching site link ' . $site . ':' . $title,
 				'no-such-entity-link'
 			);
 		}
 
-		return $itemId;
+		return $entityId;
 	}
 
 }

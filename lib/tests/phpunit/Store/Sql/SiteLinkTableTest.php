@@ -142,6 +142,19 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider itemProvider
 	 */
+	public function testGetEntityIdForLink( Item $item ) {
+		$this->siteLinkTable->saveLinksOfItem( $item );
+		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
+			$this->assertEquals(
+				$item->getId(),
+				$this->siteLinkTable->getEntityIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() )
+			);
+		}
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 */
 	public function testDeleteLinksOfItem( Item $item ) {
 		$this->siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue(
