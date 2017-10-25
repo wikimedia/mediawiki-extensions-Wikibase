@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8e5d03d5_3ba64ba8",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-25T19:53:23Z",
+      "side": 1,
+      "message": "Well, if we use a well documented format for this, like said above (int constant keys), SiteLinkCommentCreator could work from this alone. No need for this to be client specific.",
+      "parentUuid": "8e5d03d5_cfec1529",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_aebc43d6",
         "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
         "patchSetId": 3
