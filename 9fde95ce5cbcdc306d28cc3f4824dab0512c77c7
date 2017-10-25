@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e5d03d5_cfec1529",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-25T10:22:00Z",
+      "side": 1,
+      "message": "Yes, int sound good.\n\nKeeping SiteLinkDiff when needed sounds ok, but I\u0027m not sure in *which* case you want to keep the SiteLinkDiff. SiteLinkCommentCreator is used for all SiteLink changs, no? And which SiteLink change counts as linuk/unlink depends on the client...\n\nI was wondering whether we can move the logic from SiteLinkCommentCreator:getSiteLinkAddRemoveParams() here. But  the information is client-specific. I suppose we could compose client-specific diffs, but I\u0027m not sure it\u0027s a good idea.",
+      "parentUuid": "ce637b91_4e8587b0",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_aebc43d6",
         "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
         "patchSetId": 3
