@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -23,7 +24,7 @@ class LegacySnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
+		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( Deserializer::class ) );
 
 		$this->deserializer = new LegacySnakListDeserializer( $snakDeserializer );
 	}
@@ -42,7 +43,7 @@ class LegacySnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->deserializer->deserialize( $serialization );
 	}
 

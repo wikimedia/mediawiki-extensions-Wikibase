@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\InternalSerialization\SerializerFactory;
 
@@ -19,7 +20,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	private $factory;
 
 	protected function setUp() {
-		$this->factory = new SerializerFactory( $this->getMock( 'Serializers\Serializer' ) );
+		$this->factory = new SerializerFactory( $this->getMock( Serializer::class ) );
 	}
 
 	public function testEntitySerializerConstruction() {

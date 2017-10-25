@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -72,7 +73,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function expectDeserializationException() {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 	}
 
 	public function testGivenNonArrayDescriptions_exceptionIsThrown() {

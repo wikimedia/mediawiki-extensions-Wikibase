@@ -39,7 +39,7 @@ class StatementDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private function assertDeserializesToStatement( $serialization ) {
 		$statement = $this->deserializer->deserialize( $serialization );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
+		$this->assertInstanceOf( Statement::class, $statement );
 	}
 
 	public function testGivenGeneratedSerialization_statementIsDeserialized() {

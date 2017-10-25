@@ -3,7 +3,10 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer
@@ -30,7 +33,7 @@ class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 		$deserialized = $this->deserializer->deserialize( $serialization );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $deserialized );
+		$this->assertInstanceOf( Property::class, $deserialized );
 	}
 
 	public function testGivenItemSerialization_itemIsReturned() {
@@ -40,14 +43,14 @@ class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 		$deserialized = $this->deserializer->deserialize( $serialization );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $deserialized );
+		$this->assertInstanceOf( Item::class, $deserialized );
 	}
 
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_exceptionIsThrown( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->deserializer->deserialize( $serialization );
 	}
 

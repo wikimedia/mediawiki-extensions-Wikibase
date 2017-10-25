@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -26,7 +27,7 @@ class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$dataValueDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$dataValueDeserializer = $this->getMock( Deserializer::class );
 
 		$dataValueDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
@@ -57,7 +58,7 @@ class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->deserializer->deserialize( $serialization );
 	}
 
@@ -95,7 +96,7 @@ class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenInvalidDataValue_unDerializableValueIsConstructed() {
 		$dataValueDeserializer = new DataValueDeserializer( array(
-			'string' => 'DataValues\StringValue'
+			'string' => StringValue::class
 		) );
 
 		$deserializer = new LegacySnakDeserializer( $dataValueDeserializer );
@@ -107,7 +108,7 @@ class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 			1337
 		) );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\PropertyValueSnak', $snak );
+		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
 		$this->assertSnakHasUnDeseriableValue( $snak );
 	}
 
@@ -119,7 +120,7 @@ class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 		/**
 		 * @var UnDeserializableValue $dataValue
 		 */
-		$this->assertInstanceOf( 'DataValues\UnDeserializableValue', $dataValue );
+		$this->assertInstanceOf( UnDeserializableValue::class, $dataValue );
 
 		$this->assertEquals( $dataValue->getTargetType(), 'string' );
 		$this->assertEquals( $dataValue->getValue(), 1337 );
