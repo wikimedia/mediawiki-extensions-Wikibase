@@ -6,6 +6,8 @@ use ApiBase;
 use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
+use CirrusSearch\Search\FunctionScoreBuilder;
+use CirrusSearch\Search\SearchContext;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -36,6 +38,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
+use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use WikiPage;
@@ -1014,6 +1017,24 @@ final class RepoHooks {
 			'type' => 'limit',
 			'max_token_count' => 1
 		];
+	}
+
+	/**
+	 * Wikibase-specific rescore builders for CirrusSearch.
+	 * @param array $func Builder parameters
+	 * @param SearchContext $context
+	 * @param FunctionScoreBuilder $builder Output parameter for score builder.
+	 */
+	public static function onCirrusSearchScoreBuilder(
+		array $func,
+		SearchContext $context,
+		FunctionScoreBuilder &$builder = null
+	) {
+		if ( $func['type'] == 'statement_boost' ) {
+			$searchSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
+			$builder = new StatementBoostScoreBuilder( $context, $func['weight'],
+					$searchSettings['statementBoost'] );
+		}
 	}
 
 }
