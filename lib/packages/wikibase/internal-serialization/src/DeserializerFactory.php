@@ -37,7 +37,7 @@ class DeserializerFactory {
 	private $currentFactory;
 
 	/**
-	 * @var DispatchableDeserializer|null $currentEntityDeserializer
+	 * @var DispatchableDeserializer|null
 	 */
 	private $currentEntityDeserializer;
 
