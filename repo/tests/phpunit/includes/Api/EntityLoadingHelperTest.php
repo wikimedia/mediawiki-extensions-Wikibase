@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Api\ApiErrorReporter;
@@ -204,13 +204,13 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'revision' => $revision,
 		] );
 
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
-		$siteLinkLookup->expects( $this->once() )
-			->method( 'getItemIdForLink' )
+		$entityByLinkedTitleLookup = $this->getMock( EntityByLinkedTitleLookup::class );
+		$entityByLinkedTitleLookup->expects( $this->once() )
+			->method( 'getEntityIdForLinkedTitle' )
 			->with( 'foowiki', 'FooBar' )
 			->will( $this->returnValue( $id ) );
 
-		$helper->setSiteLinkLookup( $siteLinkLookup );
+		$helper->setEntityByLinkedTitleLookup( $entityByLinkedTitleLookup );
 
 		$return = $helper->loadEntity();
 		$this->assertSame( $entity, $return );
