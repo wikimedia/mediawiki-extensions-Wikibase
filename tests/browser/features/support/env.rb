@@ -43,15 +43,17 @@ end
 class DriverJSError < StandardError; end
 
 # Fail on JS errors in browser
-AfterStep do ||
-  errors = @browser.driver.manage.logs.get(:browser)
+AfterStep do |scenario|
+  if !scenario.methods.include?('location') || (!scenario.location.to_s.start_with?('features/non_existing_item') && !scenario.location.to_s.start_with?('features/delete_item'))
+    errors = @browser.driver.manage.logs.get(:browser)
                .select do |e|
                     e.level == 'SEVERE' && e.message.present?
                   end
                .map(&:message)
                .to_a
 
-  if errors.present?
-    raise DriverJSError, errors.join("\n\n")
+    if errors.present?
+      raise DriverJSError, errors.join("\n\n")
+    end
   end
 end
