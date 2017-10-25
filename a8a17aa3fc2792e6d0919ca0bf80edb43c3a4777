@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e5d03d5_7bf283e1",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-25T19:28:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce637b91_ef430366",
+      "range": {
+        "startLine": 87,
+        "startChar": 35,
+        "endLine": 87,
+        "endChar": 77
+      },
+      "revId": "a8a17aa3fc2792e6d0919ca0bf80edb43c3a4777",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_5a38c89b",
         "filename": "docs/options.wiki",
         "patchSetId": 12
