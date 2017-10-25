@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -44,7 +45,7 @@ class LegacyEntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function expectDeserializationException() {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 	}
 
 	/**

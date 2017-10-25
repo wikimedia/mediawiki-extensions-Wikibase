@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -48,13 +49,13 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$this->deserializer->deserialize( $serialization );
 	}
 
 	public function testEmptyListDeserialization() {
 		$list = $this->deserializer->deserialize( array() );
-		$this->assertInstanceOf( 'Wikibase\DataModel\SiteLinkList', $list );
+		$this->assertInstanceOf( SiteLinkList::class, $list );
 	}
 
 	public function serializationProvider() {
@@ -96,7 +97,7 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenValidSerialization_deserializeReturnsSiteLinkList( $serialization ) {
 		$siteLinkList = $this->deserializer->deserialize( $serialization );
-		$this->assertInstanceOf( 'Wikibase\DataModel\SiteLinkList', $siteLinkList );
+		$this->assertInstanceOf( SiteLinkList::class, $siteLinkList );
 	}
 
 	public function testDeserialization() {

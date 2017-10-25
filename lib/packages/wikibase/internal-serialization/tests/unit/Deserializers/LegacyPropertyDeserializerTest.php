@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -36,7 +37,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function expectDeserializationException() {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 	}
 
 	public function testGivenNoDataType_exceptionIsThrown() {

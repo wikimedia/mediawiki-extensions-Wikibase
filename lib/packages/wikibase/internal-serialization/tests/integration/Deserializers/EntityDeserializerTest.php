@@ -42,7 +42,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private function assertDeserializesToItem( $serialization ) {
 		$item = $this->deserializer->deserialize( $serialization );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $item );
+		$this->assertInstanceOf( Item::class, $item );
 	}
 
 	private function newLegacySerialization() {

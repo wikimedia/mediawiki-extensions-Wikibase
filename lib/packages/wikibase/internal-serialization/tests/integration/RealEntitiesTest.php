@@ -6,6 +6,8 @@ use Deserializers\Deserializer;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\InternalSerialization\DeserializerFactory
@@ -31,7 +33,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->deserializer->deserialize( $serialization );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataModel\Entity\Item',
+			Item::class,
 			$item,
 			$fileName . ' should deserialize into an Item'
 		);
@@ -70,7 +72,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$property = $this->deserializer->deserialize( $serialization );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataModel\Entity\Property',
+			Property::class,
 			$property,
 			$fileName . ' should deserialize into a Property'
 		);

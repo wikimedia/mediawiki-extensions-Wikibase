@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -31,7 +32,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$idDeserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 
-		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
+		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( Deserializer::class ) );
 
 		$statementDeserializer = new LegacyStatementDeserializer(
 			$snakDeserializer,
@@ -77,7 +78,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function expectDeserializationException() {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 	}
 
 	public function testGivenEmptyArray_emptyItemIsReturned() {
@@ -120,7 +121,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function itemFromSerialization( $serialization ) {
 		$item = $this->deserializer->deserialize( $serialization );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $item );
+		$this->assertInstanceOf( Item::class, $item );
 		return $item;
 	}
 
