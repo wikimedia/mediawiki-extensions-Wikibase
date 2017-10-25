@@ -289,11 +289,6 @@ class WikibaseRepo {
 	private $entityRdfBuilderFactory = null;
 
 	/**
-	 * @var EntityDiffVisualizerFactory|null
-	 */
-	private $entityDiffVisualizerFactory;
-
-	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
