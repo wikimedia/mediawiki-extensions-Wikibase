@@ -102,8 +102,20 @@ class SqlStoreTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( EntityRedirectLookup::class, $service );
 	}
 
-	public function testGetEntityLookup() {
-		$service = $this->newInstance()->getEntityLookup();
+	public function entityLoookupCacheProvider() {
+		return [
+			[ '' ],
+			[ 'uncached' ],
+			[ 'retrieve-only' ],
+		];
+	}
+
+	/**
+	 * @dataProvider entityLoookupCacheProvider
+	 */
+	public function testGetEntityLookup( $type ) {
+		$service = $this->newInstance()->getEntityLookup( $type );
+
 		$this->assertInstanceOf( EntityLookup::class, $service );
 	}
 
@@ -117,8 +129,12 @@ class SqlStoreTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( EntityStore::class, $service );
 	}
 
-	public function testGetEntityRevisionLookup() {
-		$service = $this->newInstance()->getEntityRevisionLookup();
+	/**
+	 * @dataProvider entityLoookupCacheProvider
+	 */
+	public function testGetEntityRevisionLookup( $type ) {
+		$service = $this->newInstance()->getEntityRevisionLookup( $type );
+
 		$this->assertInstanceOf( EntityRevisionLookup::class, $service );
 	}
 

@@ -88,7 +88,7 @@ class RebuildTermSqlIndex extends Maintenance {
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$termIndex,
 			$sqlEntityIdPagerFactory,
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityRevisionLookup( 'retrieve-only' ),
 			$this->getEntityTypes(),
 			$this->getOption( 'sleep', 10 )
 		);

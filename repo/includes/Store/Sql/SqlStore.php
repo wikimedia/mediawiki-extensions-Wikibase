@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -83,6 +84,11 @@ class SqlStore implements Store {
 	 * @var EntityRevisionLookup|null
 	 */
 	private $rawEntityRevisionLookup = null;
+
+	/**
+	 * @var CacheRetrievingEntityRevisionLookup|null
+	 */
+	private $cacheRetrievingEntityRevisionLookup = null;
 
 	/**
 	 * @var EntityStore|null
@@ -360,12 +366,13 @@ class SqlStore implements Store {
 	 *
 	 * The EntityLookup returned by this method will resolve redirects.
 	 *
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
+	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $uncached = '' ) {
-		$revisionLookup = $this->getEntityRevisionLookup( $uncached );
+	public function getEntityLookup( $cache = '' ) {
+		$revisionLookup = $this->getEntityRevisionLookup( $cache );
 		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );
 		return $resolvingLookup;
@@ -412,20 +419,31 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getEntityRevisionLookup
 	 *
-	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
+	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $uncached = '' ) {
+	public function getEntityRevisionLookup( $cache = '' ) {
 		if ( !$this->entityRevisionLookup ) {
 			list( $this->rawEntityRevisionLookup, $this->entityRevisionLookup ) = $this->newEntityRevisionLookup();
 		}
 
-		if ( $uncached === 'uncached' ) {
+		if ( $cache === 'uncached' ) {
 			return $this->rawEntityRevisionLookup;
+		} elseif ( $cache === 'retrieve-only' ) {
+			return $this->getCacheRetrievingEntityRevisionLookup();
 		} else {
 			return $this->entityRevisionLookup;
 		}
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getEntityRevisionLookupCacheKey() {
+		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityRevisionLookup in WikibaseClient
+		return $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 	}
 
 	/**
@@ -436,9 +454,6 @@ class SqlStore implements Store {
 	 *  EntityRevisionLookup.
 	 */
 	private function newEntityRevisionLookup() {
-		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityRevisionLookup in WikibaseClient
-		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
-
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
 		/** @var WikiPageEntityStore $dispatcher */
@@ -452,7 +467,7 @@ class SqlStore implements Store {
 			new EntityRevisionCache(
 				wfGetCache( $this->cacheType ),
 				$this->cacheDuration,
-				$cacheKeyPrefix
+				$this->getEntityRevisionLookupCacheKey()
 			),
 			$nonCachingLookup
 		);
@@ -470,6 +485,28 @@ class SqlStore implements Store {
 		$dispatcher->registerWatcher( $hashCachingLookup );
 
 		return [ $nonCachingLookup, $hashCachingLookup ];
+	}
+
+	/**
+	 * @return CacheRetrievingEntityRevisionLookup
+	 */
+	private function getCacheRetrievingEntityRevisionLookup() {
+		if ( !$this->cacheRetrievingEntityRevisionLookup ) {
+			$cacheRetrievingEntityRevisionLookup = new CacheRetrievingEntityRevisionLookup(
+				new EntityRevisionCache(
+					wfGetCache( $this->cacheType ),
+					$this->cacheDuration,
+					$this->getEntityRevisionLookupCacheKey()
+				),
+				$this->getEntityRevisionLookup( 'uncached' )
+			);
+
+			$cacheRetrievingEntityRevisionLookup->setVerifyRevision( true );
+
+			$this->cacheRetrievingEntityRevisionLookup = $cacheRetrievingEntityRevisionLookup;
+		}
+
+		return $this->cacheRetrievingEntityRevisionLookup;
 	}
 
 	/**
