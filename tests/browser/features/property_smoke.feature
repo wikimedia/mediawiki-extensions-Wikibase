@@ -31,6 +31,8 @@ Feature: Property smoke test
       And Sitelink heading should not be there
       And Sitelink edit button should not be there
 
+  # TODO: this is quite fragile tests, which is going to fail every time data of P694 on
+  # beta wikidata is changed, how to make it more stable?
   @wikidata.beta.wmflabs.org
   Examples:
     | property_id | label | description | aliases | num_aliases | datatype | debug_mode |

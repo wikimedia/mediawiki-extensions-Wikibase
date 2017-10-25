@@ -7,6 +7,7 @@
 @chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @wikidata.beta.wmflabs.org
 Feature: Delete item
 
+@ignore_browser_errors
 Scenario: Delete item
   Given I am logged in to the repo
     And I am on an item page
