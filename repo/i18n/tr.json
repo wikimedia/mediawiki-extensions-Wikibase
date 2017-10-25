@@ -197,6 +197,7 @@
 	"wikibase-listdatatypes-string-head": "Dize",
 	"wikibase-listdatatypes-time-head": "Zaman",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatatypes-external-id-head": "Dış tanımlayıcı",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-property": "Wikibase özelliği",
 	"content-model-wikibase-query": "Wikibase sorgu",
