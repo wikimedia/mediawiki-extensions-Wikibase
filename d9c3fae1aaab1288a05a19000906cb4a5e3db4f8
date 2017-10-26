@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e5d03d5_a6e21bcf",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-26T09:37:17Z",
+      "side": 1,
+      "message": "This is horrible and I don\u0027t want do it that way. But as I am selenium/ruby noob, I couldn\u0027t figure out anything better. Does anyone smarter have a better suggestion?\n\nHere is what the problem is about: this AfterStep hook is made  to have tests fail when there are any browser errors. Sounds like a generally good idea to me. The problem is that we have two tests (in feature files mentioned in the condition here, can point closer if needed) the page of not existing item is visited. This results in showing a wiki page saying \"The thing does net exists etc\" but using HTTP response code 404. 404 results in a browser error, which is then caught here and finally the test fails although all went as expect.\n\nSo then the question is: can we somehow make this after step hook ignore those error in case of those two tests?\nAlternative would possibly be to not turn browser errors happening due to http 404 into browser test failures here. Two buts though:\n1) 404s are fine only in the case of those two tests, in general they should indicate a problem\n2) I am not sure if it is possible to figure out that browser error was actually due to 404. I mean, I could try to check what was the error message text but this is going to be very fragile, language-specific, and I guess also browser/server-specific?\n\nAny ideas here?",
+      "revId": "d9c3fae1aaab1288a05a19000906cb4a5e3db4f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
