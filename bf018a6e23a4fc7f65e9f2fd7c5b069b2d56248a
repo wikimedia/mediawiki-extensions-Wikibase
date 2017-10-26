@@ -39,6 +39,30 @@
       "revId": "bf018a6e23a4fc7f65e9f2fd7c5b069b2d56248a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_061befd5",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-10-26T10:00:48Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/386595",
+      "parentUuid": "8e5d03d5_26686b84",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 24
+      },
+      "revId": "bf018a6e23a4fc7f65e9f2fd7c5b069b2d56248a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
