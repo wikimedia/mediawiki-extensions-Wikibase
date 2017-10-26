@@ -106,7 +106,7 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
-### 2.7.0 (2017-10-25)
+### 2.7.0 (2017-10-26)
 
 * Added compatibility with Serialization 4.x
 
