@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8e5d03d5_dcbccad7",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T15:12:27Z",
+      "side": 1,
+      "message": "I suggest this structure:\n\n$siteLinkChanges \u003d [\n\t\u0027enwiki\u0027 \u003d\u003e [ \u0027A\u0027, \u0027B\u0027, false ], //linked page changed\n\t\u0027enwiki\u0027 \u003d\u003e [ \u0027A\u0027, \u0027A\u0027, true ], //only the badges changed\n\t\u0027enwiki\u0027 \u003d\u003e [ null, \u0027A\u0027, … ], //new sitelink added\n\t\u0027enwiki\u0027 \u003d\u003e [ \u0027A\u0027, null, … ], //sitelink removed\n];",
+      "parentUuid": "8e5d03d5_3ba64ba8",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_aebc43d6",
         "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
         "patchSetId": 3
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "8e5d03d5_3cccfe8b",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T15:12:27Z",
+      "side": 1,
+      "message": "Please stick to the long, descriptive names. These are not that many characters. The bulk is not in these keys, but in the values (100 labels, 100 statements and such).\n\nJust an idea for a future improvement: Skip array keys that contain empty arrays anyway.",
+      "parentUuid": "ce637b91_6ecf2b83",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_eea9db8e",
         "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
         "patchSetId": 3
@@ -135,6 +171,24 @@
       "writtenOn": "2017-10-19T08:51:30Z",
       "side": 1,
       "message": "why not require an EntityDiff here? The name suggests that it has to be one.",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_fca426b7",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T15:12:27Z",
+      "side": 1,
+      "message": "I had the same idea, but this is not possible here.",
+      "parentUuid": "ce637b91_eea9db8e",
       "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
