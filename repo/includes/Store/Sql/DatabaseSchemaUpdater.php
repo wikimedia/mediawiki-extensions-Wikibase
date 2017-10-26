@@ -7,6 +7,7 @@ use HashBagOStuff;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -189,7 +190,10 @@ class DatabaseSchemaUpdater {
 			false
 		);
 
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new HashBagOStuff() );
+		$cachingEntityLookup = new CachingEntityRevisionLookup(
+			new EntityRevisionCache( new HashBagOStuff() ),
+			$wikiPageEntityLookup
+		);
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
 		$builder = new PropertyInfoTableBuilder(
