@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
+use Hooks;
 use DBAccessBase;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -351,7 +352,23 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForLink( $globalSiteId, $pageTitle ) {
-		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
-	}
+		$results = [
+			'alternative' => [],
+		];
 
+		$results['preferred'] = $this->getItemIdForLink( $globalSiteId, $pageTitle );
+
+
+		Hooks::run( 'GetEntityIdForLink', [ $globalSiteId, $pageTitle, &$results ] );
+
+		if ( $results['preferred'] === null && count( $results['alternative'] ) > 0 ) {
+			foreach ( $results['alternative'] as $altResult ) {
+				if ( $altResult !== null ) {
+					return $altResult;
+				}
+			}
+		}
+
+		return $results['preferred'];
+	}
 }
