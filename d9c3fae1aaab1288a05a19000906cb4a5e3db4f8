@@ -34,6 +34,24 @@
       "revId": "d9c3fae1aaab1288a05a19000906cb4a5e3db4f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_61f2cdcf",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-26T12:45:20Z",
+      "side": 1,
+      "message": "Thanks for the idea! Tried to do it that way in PS4.",
+      "parentUuid": "8e5d03d5_81e1092c",
+      "revId": "d9c3fae1aaab1288a05a19000906cb4a5e3db4f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
