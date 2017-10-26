@@ -191,7 +191,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addMust( $dismax );
 		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
-		// or add new subfiled which is case-insensitive
+		// or add new subfield which is case-insensitive
 		$titleMatch = new Term( [ 'title.keyword' => strtoupper( $text ) ] );
 
 		// Match either labels or exact match to title
