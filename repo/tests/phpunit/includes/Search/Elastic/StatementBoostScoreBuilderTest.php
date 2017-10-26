@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch;
 use CirrusSearch\HashSearchConfig;
 use CirrusSearch\Search\FunctionScoreDecorator;
 use CirrusSearch\Search\SearchContext;
@@ -54,6 +55,10 @@ class StatementBoostScoreBuilderTest extends MediaWikiTestCase {
 	 * @dataProvider statementBoostProvider
 	 */
 	public function testStatementBoosts( $weight, array $settings, array $functions ) {
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch needed.' );
+		}
+
 		$config = new HashSearchConfig( [] );
 		$context = new SearchContext( $config, null );
 		$builder = new StatementBoostScoreBuilder( $context, $weight, $settings );
