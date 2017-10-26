@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e5d03d5_e69ed3bc",
+        "filename": "lib/includes/Store/EntityByTitleLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T08:22:57Z",
+      "side": 1,
+      "message": "This is way to vague. This sounds like the (local) EntityIdLookup we already have.",
+      "range": {
+        "startLine": 8,
+        "startChar": 45,
+        "endLine": 8,
+        "endChar": 79
+      },
+      "revId": "b4568968bd5ef4e8ee4fb6944a15794647844c24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_06a44f03",
+        "filename": "lib/includes/Store/EntityByTitleLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T08:22:57Z",
+      "side": 1,
+      "message": "What happens if this is empty, or the local wiki? Should this interface say anything about these edge cases? I think it should.",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "b4568968bd5ef4e8ee4fb6944a15794647844c24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_a669bbbe",
+        "filename": "lib/includes/Store/EntityByTitleLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T08:22:57Z",
+      "side": 1,
+      "message": "What is a \"link\" in the context of a \"by Title\" lookup? Do \"link\" and \"title\" mean the same thing here?\n\nThe documentation above sounds like the word \"link\" should be entirely avoided in this interface.",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "b4568968bd5ef4e8ee4fb6944a15794647844c24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
