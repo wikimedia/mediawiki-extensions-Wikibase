@@ -16,6 +16,24 @@
       "revId": "d9c3fae1aaab1288a05a19000906cb4a5e3db4f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_81e1092c",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2017-10-26T11:51:57Z",
+      "side": 1,
+      "message": "Rough idea:\nFor the tests where you do not want to trigger that thing, I would guess, that you could set and unset global there to deactivate them. You could even define steps for that like \"When ignoring 404 errors\" or so...",
+      "parentUuid": "8e5d03d5_a6e21bcf",
+      "revId": "d9c3fae1aaab1288a05a19000906cb4a5e3db4f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
