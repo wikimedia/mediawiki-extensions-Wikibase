@@ -274,6 +274,8 @@ class InjectRCRecordsJob extends Job {
 			}
 		}
 
+		// Wait for all database replicas to be updated, but only for the affected client wiki. The
+		// "domain" argument is documented at ILBFactory::waitForReplication.
 		$this->lbFactory->commitAndWaitForReplication( __METHOD__, $trxToken, [ 'domain' => wfWikiID() ] );
 
 		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
