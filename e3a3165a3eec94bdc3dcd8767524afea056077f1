@@ -16,6 +16,24 @@
       "revId": "e3a3165a3eec94bdc3dcd8767524afea056077f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_66cd0362",
+        "filename": "view/lib/resources/wikibase-data-values-value-view/lib/resources.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-10-26T09:41:49Z",
+      "side": 1,
+      "message": "It\u0027s definitely needed.",
+      "parentUuid": "ce637b91_c3b05e41",
+      "revId": "e3a3165a3eec94bdc3dcd8767524afea056077f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
