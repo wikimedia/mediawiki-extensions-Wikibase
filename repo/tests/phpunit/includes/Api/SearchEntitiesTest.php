@@ -317,6 +317,16 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				[ $q111Match ],
 				[ $q111Result ],
 			],
+			'Copy paste with brackets' => [
+				[ 'search' => '(Q111)' ],
+				[ $q111Match ],
+				[ $q111Result ],
+			],
+			'Copy pasted full URL' => [
+				[ 'search' => 'https://www.wikidata.org/wiki/Q111' ],
+				[ $q111Match ],
+				[ $q111Result ],
+			],
 			'Multiple Results' => [
 				[],
 				[ $q222Match, $q333Match ],
