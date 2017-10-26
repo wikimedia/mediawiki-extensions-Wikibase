@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WikibaseInternalSerialization">
+<ruleset>
 	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase">
 		<exclude name="Generic.Arrays.DisallowLongArraySyntax" />
 	</rule>
