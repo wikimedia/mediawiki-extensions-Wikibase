@@ -355,7 +355,7 @@ class EntityChange extends DiffChange {
 
 		$info = parent::unserializeInfo( $serialization );
 
-		if ( isset( $info['diff'] ) && is_array( $info['diff'] ) ) {
+		if ( isset( $info['diff'] ) && is_array( $info['diff'] ) && $info['diff'] ) {
 			if ( $factory === null ) {
 				$factory = $this->newDiffOpFactory();
 			}
