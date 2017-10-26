@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e5d03d5_01675923",
+        "filename": "tests/browser/features/delete_item.feature",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-26T13:44:35Z",
+      "side": 1,
+      "message": "I would expect a scenario like this to read like a story, written from a users perspective. In other words, I expect this to be written in a way that I can read it aloud, and each step does make so much sense to me that I can follow it manually, step by step. The problem here is that I don\u0027t know what I would need to do to \"ignore browser errors\". Does this refer to exceptions in the JS console? Doesn\u0027t this typically end all JS on a page? How can I continue then?\n\nTL;DR: I hope we can find a better wording for this step. Maybe something like \"And I am going to continue in case of JavaScript errors\"? Or \"And JavaScript errors are not going to stop me\"?",
+      "range": {
+        "startLine": 13,
+        "startChar": 13,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "7b4945d6290d25d542daf2b93804eb2b155501c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
