@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_a87513ca",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-10-27T15:16:26Z",
+      "side": 1,
+      "message": "It could be, yes… not sure how much this matters as this is probably not happening as often, but feel free to change it",
+      "parentUuid": "6e5a8fde_6882bbab",
+      "range": {
+        "startLine": 209,
+        "startChar": 4,
+        "endLine": 209,
+        "endChar": 24
+      },
+      "revId": "b38295e3dbe0bff864cd0b8501fe3a3868bb5930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_6f59535d",
         "filename": "docs/lua.wiki",
         "patchSetId": 5
