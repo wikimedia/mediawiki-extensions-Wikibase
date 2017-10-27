@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_6e0c033e",
+        "filename": "view/lib/resources/wikibase-api.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-27T17:34:21Z",
+      "side": 1,
+      "message": "This file seems to be not necessary. It adds an other level of indirection, but what is the benefit of that? I know it was like this before and you copied it. Can we get rid of it anyway?",
+      "revId": "794f2ef3deac3ca66d1d0c13455e76ecf794a0dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
