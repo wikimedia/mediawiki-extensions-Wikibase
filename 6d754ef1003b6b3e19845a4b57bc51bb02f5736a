@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_ce21779f",
+        "filename": "view/lib/resources/wikibase-serialization.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-27T17:35:21Z",
+      "side": 1,
+      "message": "As before. Why this extra level of indirection instead of including the resources.php file directly?",
+      "revId": "6d754ef1003b6b3e19845a4b57bc51bb02f5736a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
