@@ -79,13 +79,13 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'a gregorian month in 1520' => [
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_MONTH,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'a julian day in 1520' => [
 				'+1520-05-01T00:00:00Z',
@@ -97,19 +97,19 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'a julian day in 1920' => [
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-julian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
 			],
 			'a julian day in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-julian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
 			],
 			'a gregorian day in 1980' => [
 				'+1980-05-01T00:00:00Z',
@@ -122,7 +122,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'-1000000-00-00T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'a julian year in -1000000' => [
 				'-1000000-05-01T00:00:00Z',
@@ -134,7 +134,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'+1520-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'a julian year in 1520' => [
 				'+1520-05-01T00:00:00Z',
@@ -152,13 +152,13 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'+1920-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-julian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
 			],
 			'a julian year in 1980' => [
 				'+1980-05-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				$julian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-julian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-julian)</sup>'
 			],
 			'do not enforce calendar model on rough precisions' => [
 				'+1980-05-01T00:00:00Z',
@@ -209,13 +209,13 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'-1-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'32-bit integer overflow' => [
 				'-2147483649-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'unknown calendar model' => [
 				'+2015-01-01T00:00:00Z',
@@ -233,7 +233,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				'MOCKTIME',
 				TimeValue::PRECISION_DAY,
 				$gregorian,
-				'MOCKDATE<sup class="wb-calendar-name">(valueview-expert-timevalue-calendar-gregorian)</sup>'
+				'MOCKDATE<sup class="wb-calendar-name">(wikibase-time-calendar-gregorian)</sup>'
 			],
 			'HTML entities' => [
 				'<a>injection</a>',
