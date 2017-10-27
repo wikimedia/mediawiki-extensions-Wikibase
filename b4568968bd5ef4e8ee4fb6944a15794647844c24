@@ -68,6 +68,23 @@
       "revId": "b4568968bd5ef4e8ee4fb6944a15794647844c24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_4ec827ab",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-27T18:01:50Z",
+      "side": 1,
+      "message": "Mark: Daniel suggests to introduce a hook here.",
+      "revId": "b4568968bd5ef4e8ee4fb6944a15794647844c24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
