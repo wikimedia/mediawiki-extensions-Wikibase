@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e5d03d5_9ab3af4c",
+        "filename": "repo/includes/Diff/BasicDiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-27T07:45:28Z",
+      "side": 1,
+      "message": "I don\u0027t see this interface. What am I missing?",
+      "range": {
+        "startLine": 18,
+        "startChar": 31,
+        "endLine": 18,
+        "endChar": 39
+      },
+      "revId": "3c7ceff0e67e8d0f2c8e4c3cd13f5df2917d90e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e5d03d5_6c7def16",
         "filename": "repo/includes/Diff/ItemDiffVisualizer.php",
         "patchSetId": 1
@@ -30,6 +53,23 @@
       "writtenOn": "2017-10-25T07:15:16Z",
       "side": 1,
       "message": "Looking at usage of this class I wonder: is it going to be necessary/intended to have ItemDiffVisualizer instance that uses instance X of say message localizer (or any other of services passed in the constructor), while the basic visualizer it uses would use instance Y of the same service?\n\nWhat I mean is, that if both basic and item visualizer are intended to use same services, maybe even injecting basic visualizer is not necessary, and it could created here?\n\nOTOH, I see type hinting against EntityDiffVisualizer - this would mean injecting the visualizer is actually intended. But is it really intended to pass any diff visualizer instance here?",
+      "revId": "3c7ceff0e67e8d0f2c8e4c3cd13f5df2917d90e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_1a9fbfba",
+        "filename": "repo/tests/phpunit/includes/Diff/ItemDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-27T07:45:28Z",
+      "side": 1,
+      "message": "hmm, I am not sure if these are all cases needing testing. What about regular add, remove, change operations?",
       "revId": "3c7ceff0e67e8d0f2c8e4c3cd13f5df2917d90e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
