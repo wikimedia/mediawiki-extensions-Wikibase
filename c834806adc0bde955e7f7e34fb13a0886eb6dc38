@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_bf8a271b",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-28T20:45:42Z",
+      "side": 0,
+      "message": "Isn\u0027t the deleted function still used here?",
+      "range": {
+        "startLine": 276,
+        "startChar": 39,
+        "endLine": 276,
+        "endChar": 56
+      },
+      "revId": "c834806adc0bde955e7f7e34fb13a0886eb6dc38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

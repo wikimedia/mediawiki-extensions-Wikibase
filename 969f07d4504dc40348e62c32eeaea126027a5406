@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_3f771737",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-28T20:45:42Z",
+      "side": 1,
+      "message": "Why didn\u0027t you reused the already existing preg_match( \u0027/.*(\\b\\w{2,})/s\u0027, $term, $matches )? I mean this here is already very helpful and covers a lot of the use cases. But with my original regex you could get rid of the special case handling for brackets above.",
+      "range": {
+        "startLine": 240,
+        "startChar": 20,
+        "endLine": 240,
+        "endChar": 30
+      },
+      "revId": "969f07d4504dc40348e62c32eeaea126027a5406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
