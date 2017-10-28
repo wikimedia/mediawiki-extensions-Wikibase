@@ -12,6 +12,7 @@ use Elastica\Query\Term;
 use Language;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -139,6 +140,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query = new BoolQuery();
 
 		$context->setOriginalSearchTerm( $text );
+		// Drop leading spaces
+		$text = ltrim( $text );
 		if ( empty( $this->contentModelMap[$entityType] ) ) {
 			$context->setResultsPossible( false );
 			$context->addWarning( 'wikibase-search-bad-entity-type', $entityType );
@@ -191,8 +194,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addMust( $dismax );
 		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
-		// or add new subfield which is case-insensitive
-		$titleMatch = new Term( [ 'title.keyword' => strtoupper( $text ) ] );
+		// or add new subfiled which is case-insensitive
+		$titleMatch = new Term( [ 'title.keyword' => $this->normalizeId( $text ) ] );
 
 		// Match either labels or exact match to title
 		$query->addShould( $labelsQuery );
@@ -206,37 +209,43 @@ class EntitySearchElastic implements EntitySearchHelper {
 	}
 
 	/**
-	 * Create constant score query for a field.
-	 * @param string $field
-	 * @param string|double $boost
-	 * @param string $text
-	 * @return ConstantScore
+	 * Parse entity ID or return null
+	 * @param $text
+	 * @return null|\Wikibase\DataModel\Entity\EntityId
 	 */
-	private function makeConstScoreQuery( $field, $boost, $text ) {
-		$csquery = new ConstantScore();
-		$csquery->setFilter( new Match( $field, $text ) );
-		$csquery->setBoost( $boost );
-		return $csquery;
+	private function parseOrNull($text) {
+		try {
+			$id = $this->idParser->parse( $text );
+		}
+		catch ( EntityIdParsingException $ex ) {
+			return null;
+		}
+		return $id;
 	}
 
 	/**
-	 * Get suitable rescore profile.
-	 * If internal config has non, return just the name and let RescoureBuilder handle it.
-	 * @return string|array
+	 * If the text looks like ID, normalize it to ID title
+	 * Cases handled:
+	 * - q42
+	 * - (q42)
+	 * - leading/trailing spaces
+	 * - http://www.wikidata.org/entity/Q42
+	 * @param string $text
+	 * @return string Normalized ID or original string
 	 */
-	private function getRescoreProfile() {
-
-		$rescoreProfile = $this->request->getVal( 'cirrusRescoreProfile' );
-		if ( !$rescoreProfile && isset( $this->settings['defaultPrefixRescoreProfile'] ) ) {
-			$rescoreProfile = $this->settings['defaultPrefixRescoreProfile'];
+	private function normalizeId( $text ) {
+		$text = strtoupper( str_replace( [ '(', ')' ], '', trim( $text ) ) );
+		$id = $this->parseOrNull( $text );
+		if ( $id ) {
+			return $id->getSerialization();
 		}
-		if ( !$rescoreProfile ) {
-			$rescoreProfile = self::DEFAULT_RESCORE_PROFILE;
+		if ( preg_match( '/\b(\w+)$/', $text, $matches ) && $matches[1] ) {
+			$id = $this->parseOrNull( $matches[1] );
+			if ( $id ) {
+				return $id->getSerialization();
+			}
 		}
-		if ( $this->settings['rescoreProfiles'][$rescoreProfile] ) {
-			return $this->settings['rescoreProfiles'][$rescoreProfile];
-		}
-		return $rescoreProfile;
+		return $text;
 	}
 
 	/**
