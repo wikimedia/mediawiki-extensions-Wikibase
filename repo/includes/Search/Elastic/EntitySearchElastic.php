@@ -12,6 +12,7 @@ use Elastica\Query\Term;
 use Language;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -139,6 +140,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query = new BoolQuery();
 
 		$context->setOriginalSearchTerm( $text );
+		// Drop leading spaces
+		$text = ltrim( $text );
 		if ( empty( $this->contentModelMap[$entityType] ) ) {
 			$context->setResultsPossible( false );
 			$context->addWarning( 'wikibase-search-bad-entity-type', $entityType );
@@ -190,9 +193,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery = new BoolQuery();
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addShould( $dismax );
-		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
-		// or add new subfield which is case-insensitive
-		$titleMatch = new Term( [ 'title.keyword' => strtoupper( $text ) ] );
+		$titleMatch = new Term( [ 'title.keyword' => $this->normalizeId( $text ) ] );
 
 		// Match either labels or exact match to title
 		$query->addShould( $labelsQuery );
@@ -237,6 +238,47 @@ class EntitySearchElastic implements EntitySearchHelper {
 			return $this->settings['rescoreProfiles'][$rescoreProfile];
 		}
 		return $rescoreProfile;
+	}
+
+	/**
+	 * Parse entity ID or return null
+	 * @param $text
+	 * @return null|\Wikibase\DataModel\Entity\EntityId
+	 */
+	private function parseOrNull( $text ) {
+		try {
+			$id = $this->idParser->parse( $text );
+		} catch ( EntityIdParsingException $ex ) {
+			return null;
+		}
+		return $id;
+	}
+
+	/**
+	 * If the text looks like ID, normalize it to ID title
+	 * Cases handled:
+	 * - q42
+	 * - (q42)
+	 * - leading/trailing spaces
+	 * - http://www.wikidata.org/entity/Q42
+	 * @param string $text
+	 * @return string Normalized ID or original string
+	 */
+	private function normalizeId( $text ) {
+		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
+		// or add new subfiled which is case-insensitive
+		$text = strtoupper( str_replace( [ '(', ')' ], '', trim( $text ) ) );
+		$id = $this->parseOrNull( $text );
+		if ( $id ) {
+			return $id->getSerialization();
+		}
+		if ( preg_match( '/\b(\w+)$/', $text, $matches ) && $matches[1] ) {
+			$id = $this->parseOrNull( $matches[1] );
+			if ( $id ) {
+				return $id->getSerialization();
+			}
+		}
+		return $text;
 	}
 
 	/**
