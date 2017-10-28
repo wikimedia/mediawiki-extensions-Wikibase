@@ -5,7 +5,8 @@
 			"Aurora",
 			"Shirayuki",
 			"Macofe",
-			"Pizza1016"
+			"Pizza1016",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repositori data berstruktur",
@@ -61,7 +62,6 @@
 	"wikibase-undo-badpage": "Semakan tak elok: Semakan $2 tidak tergolong dalam [[$1]].",
 	"wikibase-undo-firstrev": "Penciptaan halaman tidak boleh dibalikkan",
 	"wikibase-undo-nocontent": "Isi kandungan semakan $2 dari halaman $1 tidak dapat dimuatkan",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Satu|$1}} nilai belum disimpan",
 	"wikibase-disambiguation-title": "Penyahkekaburan untuk \"$1\"",
 	"wb-special-newitem-new-item-notification": "Perkara baru $1 dicipta lalu dilencongkan ke halamannya. Kembali ke $2.",
 	"wikibase-aliases-input-help-message": "Jika set data ini dikenali dengan lebih daripada satu nama, anda boleh menaipkan nama lain dan sinonim supaya ia boleh dicari dengan nama-nama alternatifnya.",
@@ -69,8 +69,7 @@
 	"wikibase-claimview-snak-tooltip": "Isikan nilai yang berkenaan dengan sifat yang bernama \"$1\". Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
 	"wikibase-claimview-snak-new-tooltip": "Setelah menyatakan sifat, anda boleh mengisikan nilai yang berkenaan. Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
 	"wikibase-statementview-rank-normal": "Pangkat normal",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rujukan|rujukan-rujukan}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Satu|$1}} sumber belum disimpan",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|rujukan|rujukan-rujukan}}",
 	"wikibase-snakview-property-input-placeholder": "sifat",
 	"wikibase-snakview-unsupportedsnaktype": "Snak jenis \"$1\". Pengelolaan untuk jenis Snak ini belum disokong.",
 	"wikibase-snakview-choosesnaktype": "Pilih jenis nilai.",
@@ -181,7 +180,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Dapatkan senarai entiti tanpa label",
 	"wikibase-entitieswithoutlabel-label-language": "Kod bahasa:",
 	"wikibase-entitieswithoutlabel-label-type": "Jenis:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "semua",
 	"wikibase-entitieswithoutlabel-submit": "Cari",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" bukan kod bahasa yang sah.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" bukan jenis entiti yang sah.",

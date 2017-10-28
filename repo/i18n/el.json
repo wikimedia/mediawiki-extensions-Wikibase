@@ -94,7 +94,7 @@
 	"wikibase-statementview-rank-preferred": "Προτιμώμενη βαθμίδα",
 	"wikibase-statementview-rank-normal": "Κανονική βαθμίδα",
 	"wikibase-statementview-rank-deprecated": "Παρωχημένη κατάταξη",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|παραπομπή|παραπομπές}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|παραπομπή|παραπομπές}}",
 	"wikibase-snakview-property-input-placeholder": "ιδιότητα",
 	"wikibase-snakview-unsupportedsnaktype": "Σνακ τύπου \"$1\". Ο χειρισμός αυτού του είδους Σνακ δεν υποστηρίζεται ακόμη.",
 	"wikibase-snakview-choosesnaktype": "Επιλέξτε έναν τύπο τιμών.",

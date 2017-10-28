@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gott wisst",
-			"JJohnson1701"
+			"JJohnson1701",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "ādihtan",
@@ -10,7 +11,6 @@
 	"wikibase-label-empty": "Nis nǣnig mearc gesett",
 	"wikibase-description-empty": "Nǣnig gemearcung nis gīet gemearcod.",
 	"wikibase-sitelinks-special": "Ōðre webbstedas",
-	"wikibase-aliases-empty": "Þær ne sindon ōðre naman",
 	"wikibase-statementview-rank-normal": "Gewunelic hād",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|fruma|frumena}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|fruma|frumena}}"
 }

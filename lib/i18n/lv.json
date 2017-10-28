@@ -38,6 +38,7 @@
 	"datatypes-type-wikibase-item": "Vienums",
 	"datatypes-type-wikibase-property": "Īpašība",
 	"datatypes-type-commonsMedia": "Commons multivides fails",
+	"datatypes-type-geo-shape": "Ģeogrāfiska forma",
 	"datatypes-type-tabular-data": "Tabulāri dati",
 	"datatypes-type-external-id": "Ārējais identifikators",
 	"wikibase-time-precision-millennium": "$1. tūkstošgade",
@@ -55,6 +56,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add": "Pievienota saite uz [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "Mainīta saite uz [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Noņemta saite uz [$2]",
+	"wikibase-entity-summary-clientsitelink-update": "Lapa pārvietota no [$3] uz [$4]",
 	"wikibase-item-summary-wbeditentity-create": "Izveidots jauns ieraksts",
 	"wikibase-item-summary-wblinktitles-connect": "Pievienoja valodas saiti, lai savienotu lapas"
 }

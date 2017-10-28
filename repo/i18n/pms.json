@@ -67,7 +67,7 @@
 	"wikibase-statementview-rank-preferred": "Rangh privilegià",
 	"wikibase-statementview-rank-normal": "Rangh normal",
 	"wikibase-statementview-rank-deprecated": "Rangh frust",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rëspondensa|rëspondense}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|rëspondensa|rëspondense}}",
 	"wikibase-snakview-property-input-placeholder": "propietà",
 	"wikibase-snakview-unsupportedsnaktype": "Snak ëd sòrt «$1». La gestion për sta sòrt dë Snak a l'é pa anco' mantnùa.",
 	"wikibase-snakview-choosesnaktype": "Serne na seurt ëd valor.",

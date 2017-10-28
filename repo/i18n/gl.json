@@ -101,7 +101,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "Valor válido, aínda que posiblemente desactualizado",
 	"wikibase-statementview-rank-deprecated": "Rango obsoleto",
 	"wikibase-statementview-rank-tooltip-deprecated": "O valor é coñecido por ser errado pero (acostumaba ser) comunmente admitido",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referencia|referencias}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencia|referencias}}",
 	"wikibase-snakview-property-input-placeholder": "propiedade",
 	"wikibase-snakview-unsupportedsnaktype": "Snak de tipo \"$1\". A manipulación deste tipo de Snak aínda non está soportada.",
 	"wikibase-snakview-choosesnaktype": "Escolla un tipo de valor.",

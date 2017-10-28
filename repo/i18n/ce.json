@@ -78,7 +78,7 @@
 	"wikibase-statementview-rank-preferred": "Бакъхьа хета ранг",
 	"wikibase-statementview-rank-normal": "ЛартӀахь йолу ранг",
 	"wikibase-statementview-rank-deprecated": "Мегаш йоцу ранг",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|1=хьост|хьосташ}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|1=хьост|хьосташ}}",
 	"wikibase-snakview-property-input-placeholder": "билгало",
 	"wikibase-snakview-choosesnaktype": "Харжа маьӀан тайп.",
 	"wikibase-snakview-variations-somevalue-label": "маьӀна хууш дац",

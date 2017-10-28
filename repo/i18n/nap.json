@@ -85,7 +85,7 @@
 	"wikibase-statementview-rank-preferred": "Classifeca preferita",
 	"wikibase-statementview-rank-normal": "Classificato normale",
 	"wikibase-statementview-rank-deprecated": "Classificato scunzigliato",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|riferimento|riferimente}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|riferimento|riferimente}}",
 	"wikibase-snakview-property-input-placeholder": "proprietà",
 	"wikibase-snakview-unsupportedsnaktype": "Snak 'e tipo \"$1\". 'A gistiona pe' stu tipo 'e snak nun è ancora suppurtata.",
 	"wikibase-snakview-choosesnaktype": "Sceglie nu tipo 'e valore.",

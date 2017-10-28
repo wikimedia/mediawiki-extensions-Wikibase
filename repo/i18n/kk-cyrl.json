@@ -60,7 +60,7 @@
 	"wikibase-statementview-rank-preferred": "Қалаған ранк",
 	"wikibase-statementview-rank-normal": "Жай ранк",
 	"wikibase-statementview-rank-deprecated": "Ескірген ранк",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|дереккөз|дереккөз}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|дереккөз|дереккөз}}",
 	"wikibase-snakview-property-input-placeholder": "сипат",
 	"wikibase-snakview-choosesnaktype": "Мән түрін таңдау",
 	"wikibase-snakview-variations-somevalue-label": "белгісіз мән",

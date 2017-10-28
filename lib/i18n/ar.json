@@ -90,6 +90,8 @@
 	"datatypes-type-tabular-data": "بيانات مجدولة",
 	"datatypes-type-external-id": "معرف خارجي",
 	"version-wikibase": "قاعدة ويكي",
+	"wikibase-time-calendar-gregorian": "جريجوري",
+	"wikibase-time-calendar-julian": "يوليوسي",
 	"wikibase-time-precision-Gannum": "$1 مليار سنة بعد الميلاد",
 	"wikibase-time-precision-Mannum": "$1 مليون سنة بعد الميلاد",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 سنة|$1 سنوات}} بعد الميلاد",

@@ -53,7 +53,7 @@
 	"wikibase-claimview-snak-tooltip": "Zapodaj hódnotu po kajkosći z mjenom \"$1\". Jeli kajkosć nima wěstu hódnotu abo tuchwilna hódnota znata njeje, móžeš alternatiwu wubrać, zo by swójsku hódnotu podał, kliknjo na symbol pódla zapodawanskeho kašćika za hódnoty.",
 	"wikibase-claimview-snak-new-tooltip": "Po podawanju kajkosće móžeš wotpowědnu hódnotu zapodać. Jeli kajkosć nima wěstu hódnotu abo tuchwilna hódnota znata njeje, móžeš alternatiwu wubrać, zo by swójsku hódnotu podał, kliknjo na symbol pódla zapodawanskeho kašćika za hódnoty.",
 	"wikibase-statementview-rank-normal": "Normalny rjad",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|žórło|žórle|žórła}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|žórło|žórle|žórła}}",
 	"wikibase-snakview-property-input-placeholder": "kajkosć",
 	"wikibase-snakview-unsupportedsnaktype": "Snak typa \"$1\". Wobdźěłowanje za tutu družinu Snak hišće so njepodpěruje.",
 	"wikibase-snakview-choosesnaktype": "Wubjer hódnotowy typ.",

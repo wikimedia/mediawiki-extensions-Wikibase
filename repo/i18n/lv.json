@@ -68,7 +68,7 @@
 	"wikibase-statementview-rank-preferred": "Vēlamais rangs",
 	"wikibase-statementview-rank-normal": "Normāls rangs",
 	"wikibase-statementview-rank-deprecated": "Novecojis rangs",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|atsauces|atsauce|atsauces}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|atsauces|atsauce|atsauces}}",
 	"wikibase-snakview-property-input-placeholder": "īpašība",
 	"wikibase-snakview-choosesnaktype": "Izvēlieties vērtības tipu.",
 	"wikibase-snakview-variations-somevalue-label": "nezināma vērtība",

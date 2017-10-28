@@ -73,7 +73,7 @@
 	"wikibase-statementview-rank-preferred": "Reng privilegiat",
 	"wikibase-statementview-rank-normal": "Reng normal",
 	"wikibase-statementview-rank-deprecated": "Reng depreciat",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referéncia|referéncias}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referéncia|referéncias}}",
 	"wikibase-snakview-property-input-placeholder": "proprietat",
 	"wikibase-snakview-unsupportedsnaktype": "Snak de tipe « $1 ». La gestion d'aqueste tipe de Snak es pas encara presa en carga.",
 	"wikibase-snakview-choosesnaktype": "Causir un tipe de valor.",

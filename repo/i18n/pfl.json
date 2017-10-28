@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Manuae"
+			"Manuae",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "schaffe",
@@ -10,7 +11,6 @@
 	"wikibase-description-empty": "S'hodd noch kä Bschraiwung",
 	"wikibase-statementsection-statements": "Aussaache",
 	"wikibase-sitelinks-special": "Onnare Saide",
-	"wikibase-aliases-empty": "Kä Waidalaidung feschdg'leeschd",
 	"wikibase-statementview-rank-normal": "Noamala Rong",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|Änzlnochwees}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|Änzlnochwees}}"
 }

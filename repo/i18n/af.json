@@ -47,7 +47,7 @@
 	"wikibase-undo-firstrev": "Dit is nie moontlik om die skep van die bladsy ongedaan te maak nie.",
 	"wikibase-propertypage-datatype": "Datatipe",
 	"wikibase-statementview-rank-normal": "Normale rang",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|bron|bronne}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|bron|bronne}}",
 	"wikibase-snakview-property-input-placeholder": "eienskap",
 	"wikibase-snakview-choosesnaktype": "Kies 'n tipe waarde.",
 	"wikibase-snakview-variations-somevalue-label": "onbekende waarde",

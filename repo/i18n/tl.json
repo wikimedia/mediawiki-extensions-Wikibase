@@ -6,7 +6,8 @@
 			"Sky Harbor",
 			"Leeheonjin",
 			"Stranger195",
-			"Emem.calist"
+			"Emem.calist",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Repositoryo ng datong may kayarian",
@@ -37,12 +38,11 @@
 	"wikibase-undo-samerev": "Hindi maaaring hindi maisagawa, ibinigay ang katulad na rebisyon para sa saligan ng hindi pagsasagawa at pinupukol na hindi pagsasagawa.",
 	"wikibase-undo-badpage": "Masamang rebisyon: Ang rebisyong $2 ay hindi kaanib sa [[$1]].",
 	"wikibase-undo-firstrev": "Hindi maaaring hindi maisagawa ang paglikha ng pahina",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Isang halaga|$1 mga halaga}} ang hindi pa nasasagip",
 	"wikibase-disambiguation-title": "Paglilinaw para sa \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nilikha ang bagong bagay na $1 at muling pinapunta sa pahina nito. Bumalik sa $2.",
 	"wikibase-aliases-input-help-message": "Kung nakikilala ang pangkat ng dato sa ilalim na mas mahigit kaysa sa isang partikular na pangalan, makakapagpasok ka ng mga bansag at mga kasingkahulugan, upang matagpuan ito sa pamamagitan ng kasalit na mga pangalan nito.",
 	"wikibase-statementview-rank-tooltip-preferred": "Wasto at nasa tamang kabuuan.",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|sanggunian|mga sanggunian}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|sanggunian|mga sanggunian}}",
 	"wikibase-move-error": "Hindi ka maaaring maglipat ng mga pahinang nasa loob ng puwang ng pangalan ng datp, at hindi ka maaaring maglipat ng mga pahina na papasok dito.",
 	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",

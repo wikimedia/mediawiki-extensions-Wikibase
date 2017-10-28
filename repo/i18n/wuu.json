@@ -3,7 +3,8 @@
 		"authors": [
 			"Benojan",
 			"十弌",
-			"Poiuyt"
+			"Poiuyt",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "编辑",
@@ -15,7 +16,6 @@
 	"wikibase-sitelinks-special": "其他网站",
 	"wikibase-move-up": "移上去",
 	"wikibase-move-down": "移落去",
-	"wikibase-aliases-empty": "呒不已定义个别名",
 	"wikibase-statementview-rank-normal": "普通级",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|来源}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|来源}}"
 }

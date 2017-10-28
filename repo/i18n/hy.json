@@ -8,7 +8,8 @@
 			"Դավիթ Սարոյան",
 			"Սահակ",
 			"Vahe Gharakhanyan",
-			"Kareyac"
+			"Kareyac",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "խմբագրել",
@@ -29,7 +30,7 @@
 	"wikibase-statementsection-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
 	"wikibase-statementview-rank-normal": "Նորմալ աստիճան",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|աղբյուր|աղբյուրներ}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|աղբյուր|աղբյուրներ}}",
 	"wikibase-entityselector-more": "Ավելին",
 	"wikibase-newentity-language": "Լեզու."
 }

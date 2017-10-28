@@ -82,7 +82,7 @@
 	"wikibase-statementview-rank-preferred": "Пераважны ранг",
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
 	"wikibase-statementview-rank-deprecated": "Нерэкамендаваны ранг",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|крыніца|крыніцы|крыніц}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|крыніца|крыніцы|крыніц}}",
 	"wikibase-snakview-property-input-placeholder": "уласцівасць",
 	"wikibase-snakview-choosesnaktype": "Выберыце тып значэння.",
 	"wikibase-snakview-variations-somevalue-label": "невядомае значэнне",

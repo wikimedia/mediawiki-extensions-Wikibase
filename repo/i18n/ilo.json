@@ -84,7 +84,7 @@
 	"wikibase-statementview-rank-preferred": "Kinaykayat a ranggo",
 	"wikibase-statementview-rank-normal": "Kadawyan a ranggo",
 	"wikibase-statementview-rank-deprecated": "Naikkaten a ranggo",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|a reperensia|a repreperensia}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|a reperensia|a repreperensia}}",
 	"wikibase-snakview-property-input-placeholder": "tagikua",
 	"wikibase-snakview-unsupportedsnaktype": "Snak ti kita ti \"$1\". Ti panagtengngel para iti kastoy a kita ti Snak ket saan pay a nasuportaran.",
 	"wikibase-snakview-choosesnaktype": "Agpili ti maysa a kita ti pateg.",

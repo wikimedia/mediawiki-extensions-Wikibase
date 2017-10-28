@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Sovichet",
-			"គីមស៊្រុន"
+			"គីមស៊្រុន",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "កែប្រែ",
@@ -12,6 +13,5 @@
 	"wikibase-entitytermsforlanguagelistview-language": "ភាសា",
 	"wikibase-description-empty": "គ្មានការអធិប្បាយពន្យល់",
 	"wikibase-sitelinks-special": "វិបសាយផ្សេងទៀត",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "មិន​ទាន់​បាន​រក្សា​ទុក {{PLURAL:$1|ឯកសារ​យោង​មួយ|ឯកសារ​យោង $1}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}"
 }

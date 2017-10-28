@@ -40,7 +40,7 @@
 	"wikibase-disambiguation-title": "ڕوونکردنەوە بۆ «$1»",
 	"wikibase-propertypage-datatype": "جۆری دراوە",
 	"wikibase-statementview-rank-normal": "پلەی ئاسایی",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ژێدەر|ژێدەرەکان}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ژێدەر|ژێدەرەکان}}",
 	"wikibase-snakview-property-input-placeholder": "تایبەتمەندی",
 	"wikibase-snakview-choosesnaktype": "جۆرێکی نرخ ھەڵبژێرە.",
 	"wikibase-snakview-variations-somevalue-label": "نرخی نەزانراو",

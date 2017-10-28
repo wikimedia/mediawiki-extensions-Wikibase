@@ -8,7 +8,8 @@
 			"Macofe",
 			"Arbhatt",
 			"NehalDaveND",
-			"Ashok modhvadia"
+			"Ashok modhvadia",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "માળખાગત માહિતીનો સંગ્રહ",
@@ -50,12 +51,10 @@
 	"wikibase-partial-undo": "ફેરફાર આંશિક રીતે પાછા વાળી શકાશે",
 	"wikibase-empty-undo": "અહિં એવું કશું નથી જે પાછું વાળી શકાય",
 	"wikibase-undo-revision-error": "પુન:સ્થાપન નિષ્ફળ",
-	"wikibase-aliases-empty": "કોઈ ઉપનામ દર્શાવેલ નથી",
 	"wikibase-propertypage-datatype": "ડેટા પ્રકાર",
 	"wikibase-statementview-rank-preferred": "ઇચ્છિત સ્તર",
 	"wikibase-statementview-rank-normal": "સામાન્ય પદ",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|સંદર્ભ|સંદર્ભો}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|સંદર્ભ હજુ સચવાયો|$1 સંદર્ભો હજુ સચવાયા}} નથી",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|સંદર્ભ|સંદર્ભો}}",
 	"wikibase-snakview-property-input-placeholder": "ગુણધર્મ",
 	"wikibase-snakview-choosesnaktype": "કિંમત પ્રકાર પસંદ કરો.",
 	"wikibase-snakview-variations-somevalue-label": "અજાણી કિંમત",
@@ -109,7 +108,6 @@
 	"wikibase-listproperties-submit": "શોધો",
 	"wikibase-entitieswithoutlabel-label-language": "ભાષાસંહિતા:",
 	"wikibase-entitieswithoutlabel-label-type": "પ્રકાર:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "બધા",
 	"wikibase-entitieswithoutlabel-submit": "શોધો",
 	"wikibase-redirectentity-submit": "લક્ષ્યાંકીત",
 	"wikibase-restoreold": "ફરી સ્થાપિત કરો",

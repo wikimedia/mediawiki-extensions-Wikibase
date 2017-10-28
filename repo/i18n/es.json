@@ -129,7 +129,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "Valor válido, aunque posiblemente histórico",
 	"wikibase-statementview-rank-deprecated": "Nivel obsoleto",
 	"wikibase-statementview-rank-tooltip-deprecated": "Se sabe que el valor es erróneo, pero (solía estar) aceptado",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referencia|referencias}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencia|referencias}}",
 	"wikibase-snakview-property-input-placeholder": "propiedad",
 	"wikibase-snakview-choosesnaktype": "Elige un tipo de valor.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "El valor no cumple con la definición de la propiedad.",

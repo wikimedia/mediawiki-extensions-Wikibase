@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Shubha",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-entity-item": "वस्तु",
@@ -29,9 +30,8 @@
 	"wikibase-remove": "निष्कास्यताम्",
 	"wikibase-move-up": "उपरि गम्यताम्",
 	"wikibase-move-down": "अधः गम्यताम्",
-	"wikibase-aliases-empty": "किमपि नामान्तरं न दर्शितम्",
 	"wikibase-statementview-rank-normal": "सामान्यश्रेणी",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|उल्लेखः|उल्लेखाः}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|उल्लेखः|उल्लेखाः}}",
 	"wikibase-snakview-property-input-placeholder": "गुणधर्मः",
 	"wikibase-entityselector-more": "अधिकम्",
 	"wikibase-itembytitle-lookup-site": "स्थानम् :",
@@ -52,7 +52,6 @@
 	"wikibase-dispatchstats-lag-time": "विलम्बः",
 	"wikibase-listproperties-submit": "अन्विष्यताम्",
 	"wikibase-entitieswithoutlabel-label-type": "प्रकारः :",
-	"wikibase-entitieswithoutlabel-label-alltypes": "सर्वाणि",
 	"wikibase-entitieswithoutlabel-submit": "अन्विष्यताम्",
 	"wikibase-redirectentity-submit": "पुनर्निर्दिश्यताम्",
 	"wikibase-restoreold": "पुनस्स्थाप्यताम्",

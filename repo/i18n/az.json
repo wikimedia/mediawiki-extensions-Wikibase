@@ -3,7 +3,8 @@
 		"authors": [
 			"Khan27",
 			"Dağlı95",
-			"Wertuose"
+			"Wertuose",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "redaktə",
@@ -17,6 +18,6 @@
 	"wikibase-statementsection-statements": "Müddəalar",
 	"wikibase-sitelinks-special": "Digər saytlar",
 	"wikibase-statementview-rank-normal": "Normal dərəcə",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|mənbə|mənbələr}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|mənbə|mənbələr}}",
 	"wikibase-listdatatypes-wikibase-property-head": "Xüsusiyyət"
 }

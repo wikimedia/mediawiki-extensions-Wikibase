@@ -3,7 +3,8 @@
 		"authors": [
 			"Iltever",
 			"Macofe",
-			"Ernác"
+			"Ernác",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "тюрлендир",
@@ -12,9 +13,8 @@
 	"wikibase-description-empty": "Ачыкълау толтурулмагъанды",
 	"wikibase-statementsection-statements": "Бегитиуле",
 	"wikibase-sitelinks-special": "Башха сайтла",
-	"wikibase-aliases-empty": "Альтернатив атла (синонимле) табылмалла",
 	"wikibase-statementview-rank-normal": "Нормалы ранг",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|къайнакъ}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|къайнакъ}}",
 	"wikibase-itemdisambiguation-lookup-language": "Тил код:",
 	"wikibase-modifyterm-language": "Тил код:"
 }

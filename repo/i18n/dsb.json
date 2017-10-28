@@ -49,7 +49,7 @@
 	"wikibase-propertypage-datatype": "Datowy typ",
 	"wikibase-claimview-snak-tooltip": "Zapódaj gódnotu pó kakosći z mjenim \"$1\". Jolic kakosć njama wěstu gódnotu abo tuchylna gódnota njejo znata, móžoš alternatiwu wubraś, aby swójsku gódnotu pódał, z tym až kliknjoš na symbol pódla zapódawańskego kašćika za gódnoty.",
 	"wikibase-claimview-snak-new-tooltip": "Pó zapódawanju kakosći, móžoš wótpowědnu gódnotu zapódaś. Jolic kakosć njama wěstu gódnotu abo tuchylna gódnota njejo znata, móžoš alternatiwu wubraś, aby swójsku gódnotu pódał, z tym až kliknjoš na symbol pódla zapódawańskego kašćika za gódnoty.",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|žrědło|žrědle|žrědła}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|žrědło|žrědle|žrědła}}",
 	"wikibase-snakview-property-input-placeholder": "kakosć",
 	"wikibase-snakview-unsupportedsnaktype": "Snak typa \"$1\". Wobźěłowanje za toś tu družynu Snak hyšći se njepódpěra.",
 	"wikibase-snakview-choosesnaktype": "Wubjeŕ gódnotowy typ.",

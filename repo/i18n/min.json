@@ -4,7 +4,8 @@
 			"Iwan Novirion",
 			"Shirayuki",
 			"Macofe",
-			"TomT0m"
+			"TomT0m",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "suntiang",
@@ -25,8 +26,7 @@
 	"wikibase-sitelinks-empty": "Alun ado interwiki untuak item ko.",
 	"wikibase-remove": "hapuih",
 	"wikibase-propertypage-datatype": "Jenis data",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|sumber}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1 sumber}} alun disimpan",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|sumber}}",
 	"wikibase-snakview-property-input-placeholder": "properti",
 	"wikibase-snakview-choosesnaktype": "Piliah jenis nilai",
 	"wikibase-snakview-variations-somevalue-label": "nilai indak dikatahui",
@@ -68,7 +68,6 @@
 	"wikibase-modifyterm-language": "Kode bahaso:",
 	"wikibase-entitieswithoutlabel-label-language": "Kode bahaso:",
 	"wikibase-entitieswithoutlabel-label-type": "Jenis:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "sadonyo",
 	"wikibase-entitieswithoutlabel-submit": "Cari",
 	"special-entitydata": "Data entitas",
 	"wikibase-entitydata-title": "Data Entitas",

@@ -69,7 +69,7 @@
 	"wikibase-propertypage-datatype": "ڈیٹا ٹائپ",
 	"wikibase-statementview-rank-preferred": "ترجیح شدہ درجہ",
 	"wikibase-statementview-rank-normal": "عام درجہ",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|حوالہ|حوالہ جات}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالہ|حوالہ جات}}",
 	"wikibase-snakview-property-input-placeholder": "پراپرٹی",
 	"wikibase-snakview-choosesnaktype": "قدر کی نوع منتخب کریں۔",
 	"wikibase-snakview-variations-somevalue-label": "نا معلوم قدر",

@@ -96,7 +96,7 @@
 	"wikibase-statementview-rank-preferred": "Pageidautinas reitingas",
 	"wikibase-statementview-rank-normal": "Normalus reitingas",
 	"wikibase-statementview-rank-deprecated": "Nebenaudotinas reitingas",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|šaltinis|šaltiniai|šaltinių}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|šaltinis|šaltiniai|šaltinių}}",
 	"wikibase-snakview-property-input-placeholder": "savybė",
 	"wikibase-snakview-unsupportedsnaktype": "Tipo \"$1\" Snak. Šio tipo Snak apdorojimas kol kas nėra palaikomas.",
 	"wikibase-snakview-choosesnaktype": "Pasirinkite reikšmės tipą.",

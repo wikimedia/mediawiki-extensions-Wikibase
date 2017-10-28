@@ -86,7 +86,7 @@
 	"wikibase-statementview-rank-preferred": "פרעפֿערירטער ראנג",
 	"wikibase-statementview-rank-normal": "נארמאלער ראנג",
 	"wikibase-statementview-rank-deprecated": "אראפגעשטופטער ראנג",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|רעפערענץ|רעפערענצן}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|רעפערענץ|רעפערענצן}}",
 	"wikibase-snakview-property-input-placeholder": "אייגנשאפֿט",
 	"wikibase-snakview-unsupportedsnaktype": "סנאק פון טיפ \"$1\". באהאנדלען אזא סארט סנאק איז נאך נישט געשטיצט.",
 	"wikibase-snakview-choosesnaktype": "קלויבט א ווערט טיפ.",

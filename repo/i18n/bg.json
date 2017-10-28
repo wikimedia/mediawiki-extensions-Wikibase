@@ -54,7 +54,7 @@
 	"wikibase-statementview-rank-preferred": "Предпочитан ранг",
 	"wikibase-statementview-rank-normal": "Нормален ранг",
 	"wikibase-statementview-rank-deprecated": "Непрепоръчителен ранг",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|източник|източници}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|източник|източници}}",
 	"wikibase-snakview-property-input-placeholder": "свойство",
 	"wikibase-snakview-variations-somevalue-label": "неизвестна стойност",
 	"wikibase-snakview-snaktypeselector-value": "стойност",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Bonevarluri",
 			"Mogoeilor",
-			"Macofe"
+			"Macofe",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-entity-item": "قلم",
@@ -30,9 +31,8 @@
 	"wikibase-remove": "ؤرداشتن",
 	"wikibase-move-up": "رئتن بالا",
 	"wikibase-move-down": "رو وه هار",
-	"wikibase-aliases-empty": "هیچ هومیاری مشخص نبیه.",
 	"wikibase-statementview-rank-normal": "گرینج کاری نرمال",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|سرچشمه|سرچشمه یا}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|سرچشمه|سرچشمه یا}}",
 	"wikibase-snakview-variations-somevalue-label": "ارزایشت نادیار",
 	"wikibase-snakview-variations-novalue-label": "حالی",
 	"wikibase-snakformat-invalid-value": "ارزایشت نامعتور",
@@ -80,7 +80,6 @@
 	"wikibase-dispatchstats-freshest": "تازه تری",
 	"wikibase-dispatchstats-average": "میانگین",
 	"wikibase-entitieswithoutlabel-label-language": "كد زون:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "همه",
 	"wikibase-entitieswithoutlabel-submit": "فهمسن،جسن",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" کد زون معتوری نئ.",
 	"special-itemswithoutsitelinks": "قلمیایی که هوم پیوندسیلجا نارن",

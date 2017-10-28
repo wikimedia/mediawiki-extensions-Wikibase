@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Silovan"
+			"Silovan",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "რედაქტირაფა",
@@ -11,7 +12,6 @@
 	"wikibase-statementsection-statements": "ფაქტეფი",
 	"wikibase-sitelinks": "საიტიშ რცხუეფი",
 	"wikibase-sitelinks-special": "შხვა საიტეფი",
-	"wikibase-aliases-empty": "ფსევდონიმეფი ვარე გორკვიაფილი.",
 	"wikibase-statementview-rank-normal": "ნორმალური რანგი",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|სქოლიო|სქოლიო}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|სქოლიო|სქოლიო}}"
 }

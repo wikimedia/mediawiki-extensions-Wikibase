@@ -69,7 +69,7 @@
 	"wikibase-statementview-rank-preferred": "პრიორიტეტული რანგი",
 	"wikibase-statementview-rank-normal": "ნორმალური რანგი",
 	"wikibase-statementview-rank-deprecated": "არარეკომენდირებული რანგი",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|სქოლიო|სქოლიო}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|სქოლიო|სქოლიო}}",
 	"wikibase-snakview-property-input-placeholder": "თვისება",
 	"wikibase-snakview-choosesnaktype": "აირჩიეთ მნიშვნელობის ტიპი.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "მნიშვნელობა არ შეესაბამება თვისების განმარტებას.",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"محک"
+			"محک",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "دچی‌ین",
@@ -10,7 +11,6 @@
 	"wikibase-description-empty": "توضیحاتی تعریف نَیینه.",
 	"wikibase-statementsection-statements": "اظهارات",
 	"wikibase-sitelinks-special": "دیگه سایتون",
-	"wikibase-aliases-empty": "مستعاری نوم تعریف نیّه.",
 	"wikibase-statementview-rank-normal": "معمولی رتبه",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|منبع|منابع}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|منبع|منابع}}"
 }

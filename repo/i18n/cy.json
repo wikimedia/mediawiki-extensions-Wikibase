@@ -54,7 +54,7 @@
 	"wikibase-disambiguation-title": "Gwahaniaethu ystyron \"$1\"",
 	"wikibase-propertypage-datatype": "Math y data",
 	"wikibase-statementview-rank-normal": "Safle normal",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ffynonellau|ffynhonnell|ffynonellau}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ffynonellau|ffynhonnell|ffynonellau}}",
 	"wikibase-snakview-property-input-placeholder": "nodwedd",
 	"wikibase-snakview-choosesnaktype": "Dewiswch fath y gwerth.",
 	"wikibase-snakview-variations-somevalue-label": "gwerth anhysbys",

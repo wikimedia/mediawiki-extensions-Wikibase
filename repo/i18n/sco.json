@@ -3,7 +3,8 @@
 		"authors": [
 			"John Reid",
 			"AmaryllisGardener",
-			"Caliburn"
+			"Caliburn",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-desc": "Structurt data repository",
@@ -31,12 +32,10 @@
 	"wikibase-undo-samerev": "Twa different revisions must be specified tae undae an eedit.",
 	"wikibase-undo-nocontent": "Canna laid content o reveesion $2 o page $1",
 	"wikibase-summary-generated": "Summary (will be appendit tae an automatically generatit summary):",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ane value|$1 values}} nae saved yet",
 	"wikibase-statementview-rank-preferred": "Preferred rank",
 	"wikibase-statementview-rank-normal": "Normal rank",
 	"wikibase-statementview-rank-deprecated": "Deprecatit rank",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|references}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Ane reference|$1 references}} nae saved yet",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|reference|references}}",
 	"wikibase-snakview-variations-somevalue-label": "unkent value",
 	"wikibase-snakformat-invalid-value": "Onvalid value.",
 	"wikibase-snakformat-propertynotfound": "Propertie na foond.",

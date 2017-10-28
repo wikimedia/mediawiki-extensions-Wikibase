@@ -82,7 +82,7 @@
 	"wikibase-statementview-rank-preferred": "Foretrukne rang",
 	"wikibase-statementview-rank-normal": "Normal rang",
 	"wikibase-statementview-rank-deprecated": "Forældet rang",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|referencer}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|reference|referencer}}",
 	"wikibase-snakview-property-input-placeholder": "egenskab",
 	"wikibase-snakview-unsupportedsnaktype": "Snak af typen \"$1\". Håndtering af denne slags Snak understøttes ikke endnu.",
 	"wikibase-snakview-choosesnaktype": "Vælg en værditype.",

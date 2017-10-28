@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"EileenSanda"
+			"EileenSanda",
+			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "rætta",
@@ -10,7 +11,6 @@
 	"wikibase-description-empty": "Ongin frágreiðing er útgreinað",
 	"wikibase-statementsection-statements": "Frásøgnir",
 	"wikibase-sitelinks-special": "Aðrar netsíður",
-	"wikibase-aliases-empty": "Onki kallinavn er ásett",
 	"wikibase-statementview-rank-normal": "Vanlig støða",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|kelda|keldur}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|kelda|keldur}}"
 }
