@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_daa4d1b7",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-29T10:56:42Z",
+      "side": 1,
+      "message": "I dug deeper into the issue described here. The service called here is the only one that consumes the \"props\" in question. It does have special case handling for both an \"all\" property, as well as \"props\" being an empty array.\n\nIs there something wrong with the `$props \u003d\u003d\u003d []` special case handling on line 279 in ResultBuilder? If you ask me, it doesn\u0027t look like it. The behavior seems to be well defined.\n\nhttps://www.wikidata.org/wiki/Special:ApiSandbox#action\u003dwbgetentities\u0026format\u003djson\u0026ids\u003dQ10000\u0026props\u003d\n\nI don\u0027t think we should change this.",
+      "range": {
+        "startLine": 308,
+        "startChar": 25,
+        "endLine": 308,
+        "endChar": 42
+      },
+      "revId": "7aa251c88b6a866667441d764c4d9a7d0f6d1ccf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
