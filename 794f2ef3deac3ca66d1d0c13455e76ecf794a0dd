@@ -16,6 +16,24 @@
       "revId": "794f2ef3deac3ca66d1d0c13455e76ecf794a0dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_1a16e9f6",
+        "filename": "view/lib/resources/wikibase-api.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-10-29T10:23:22Z",
+      "side": 1,
+      "message": "So it is actually something I added myself (more or less), not that was copied.\n\nMy thinking was: Let\u0027s have view/lib/resources.php only load a single resource definition file per lib. For this lib, this is the file that gets loaded. Each library then could define its resource whatever way it wants. The latter (i.e. the way lib-specific resource files are structured etc) was indeed to most degree from libraries. I agree that changing the structure of those files whenever makes sense (e.g. simplifying them) would be a good thing. I just preferred, as a first step, to not touch it when possible, to avoid introducing errors while trying to \"fix\" things.",
+      "parentUuid": "6e5a8fde_6e0c033e",
+      "revId": "794f2ef3deac3ca66d1d0c13455e76ecf794a0dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
