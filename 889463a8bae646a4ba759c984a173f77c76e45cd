@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_5a71c10a",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-29T12:34:11Z",
+      "side": 1,
+      "message": "search expects content models here, if \u0027item\u0027 does not have content model, it will not run the search.",
+      "revId": "889463a8bae646a4ba759c984a173f77c76e45cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_7a6efd2b",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-29T12:34:11Z",
+      "side": 1,
+      "message": "This expects some profile settings...",
+      "revId": "889463a8bae646a4ba759c984a173f77c76e45cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
