@@ -2,17 +2,31 @@
 	"@metadata": {
 		"authors": [
 			"MaGa",
-			"Roberta F."
+			"Roberta F.",
+			"Bugoslav"
 		]
 	},
+	"wikibase-lib-desc": "Sadržava objedinjenu funkcionalnost za Wikibazu i proširenja za klijentski program Wikibaze.",
+	"specialpages-group-wikibase": "Wikibaza",
 	"wikibase-deletedentity-item": "Izbrisana stavka",
+	"wikibase-deletedentity-property": "Izbrisano svojstvo",
+	"wikibase-deletedentity-query": "Izbrisani upit",
 	"wikibase-error-unexpected": "Greška: $1",
+	"wikibase-error-save-generic": "Spremanje nije bilo moguće zbog pogrješke.",
+	"wikibase-error-remove-generic": "Uklanjanje nije moguće zbog pogrješke.",
+	"wikibase-error-save-connection": "Spremanje nije moguće zbog pogrješke u povezanosti s mrežom. Molimo Vas, provjerite internetsku vezu.",
+	"wikibase-error-remove-connection": "Spremanje nije moguće zbog pogrješke u povezanosti s mrežom. Molimo Vas, provjerite Vašu internetsku vezu.",
+	"wikibase-error-save-timeout": "Trenutačno imamo tehničkih smetnji. Molimo Vas, pokušajte ponovo.",
+	"wikibase-error-remove-timeout": "Trenutačno imamo tehničkih smetnji. Molimo Vas, pokušajte ponovo.",
+	"wikibase-error-autocomplete-connection": "Ne mogu poslati upit API-ju mrežnoga sjedišta. Molimo Vas, poslije pokušajte ponovo.",
+	"wikibase-error-autocomplete-response": "Odgovor poslužitelja: $1",
 	"wikibase-error-ui-no-external-page": "Stranica \"$2\" nije pronađena na \"$1\".",
 	"wikibase-sitelinks-wikipedia": "Wikipedija",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
 	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
 	"wikibase-snakview-snaktypeselector-somevalue": "nepoznata vrijednost",
 	"wikibase-snakview-snaktypeselector-novalue": "nema vrijednosti",
+	"version-wikibase": "Wikibaza",
 	"wikibase-snakformatter-valuetype-mismatch": "Vrsta vrijednosti \"$1\" ne odgovara vrsti svojstva \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Svojstvo $1 nije pronađeno, nemoguće je odrediti vrstu podataka.",
 	"wikibase-entity-summary-wbsetitem": "Stvorena nova stavka",
