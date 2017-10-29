@@ -34,6 +34,24 @@
       "revId": "794f2ef3deac3ca66d1d0c13455e76ecf794a0dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_1af589b5",
+        "filename": "view/lib/resources/wikibase-api.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-10-29T10:30:30Z",
+      "side": 1,
+      "message": "Sounds good, thanks! That\u0027s also why already gave a +2 here. :-)",
+      "parentUuid": "6e5a8fde_1a16e9f6",
+      "revId": "794f2ef3deac3ca66d1d0c13455e76ecf794a0dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
