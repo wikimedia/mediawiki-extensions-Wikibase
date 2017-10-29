@@ -22,6 +22,30 @@
       "revId": "969f07d4504dc40348e62c32eeaea126027a5406",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_3a5ba528",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-29T06:43:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand how that regexp works... it seems like it matches too much, especially as it is not anchored.",
+      "parentUuid": "6e5a8fde_3f771737",
+      "range": {
+        "startLine": 240,
+        "startChar": 20,
+        "endLine": 240,
+        "endChar": 30
+      },
+      "revId": "969f07d4504dc40348e62c32eeaea126027a5406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
