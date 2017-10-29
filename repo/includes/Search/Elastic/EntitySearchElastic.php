@@ -56,7 +56,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * List of fallback codes for search language
 	 * @var string[]
 	 */
-	private $searchLanguageCodes;
+	private $searchLanguageCodes = [];
 
 	/**
 	 * Wikibase configuration settings for entity search
@@ -233,7 +233,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		if ( !$rescoreProfile ) {
 			$rescoreProfile = self::DEFAULT_RESCORE_PROFILE;
 		}
-		if ( $this->settings['rescoreProfiles'][$rescoreProfile] ) {
+		if ( isset( $this->settings['rescoreProfiles'][$rescoreProfile] ) ) {
 			return $this->settings['rescoreProfiles'][$rescoreProfile];
 		}
 		return $rescoreProfile;
