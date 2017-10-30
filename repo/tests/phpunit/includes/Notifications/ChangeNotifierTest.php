@@ -75,9 +75,25 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @return Revision
 	 */
 	private function makeRevision( Content $content, User $user, $revisionId, $timestamp, $parent_id = 0 ) {
+		$title = $this->getMockBuilder( Title::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$title->expects( $this->any() )
+			->method( 'exists()' )
+			->will( $this->returnValue( true ) );
+
+		$title->expects( $this->any() )
+			->method( 'getArticleId()' )
+			->will( $this->returnValue( 7 ) );
+
+		$title->expects( $this->any() )
+			->method( 'getLatestRevId()' )
+			->will( $this->returnValue( $revisionId ) );
+
 		return new Revision( [
 			'id' => $revisionId,
-			'page' => 7,
+			'title' => $title,
 			'content' => $content,
 			'user' => $user->getId(),
 			'user_text' => $user->getName(),
