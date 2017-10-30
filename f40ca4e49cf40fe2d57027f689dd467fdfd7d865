@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_e2b31ffc",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-30T16:11:43Z",
+      "side": 1,
+      "message": "this needs to go, too",
+      "revId": "f40ca4e49cf40fe2d57027f689dd467fdfd7d865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
