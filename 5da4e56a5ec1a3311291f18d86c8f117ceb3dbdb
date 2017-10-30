@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_718063fa",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-10-30T08:32:10Z",
+      "side": 1,
+      "message": "why not use the field all_near_match instead of title.keyword to handle case sensitivity?",
+      "range": {
+        "startLine": 196,
+        "startChar": 29,
+        "endLine": 196,
+        "endChar": 42
+      },
+      "revId": "5da4e56a5ec1a3311291f18d86c8f117ceb3dbdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
