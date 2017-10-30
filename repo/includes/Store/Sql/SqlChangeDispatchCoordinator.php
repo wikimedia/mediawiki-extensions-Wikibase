@@ -324,7 +324,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		// XXX: subject to clock skew. Use DB based "now" time?
 		$freshDispatchTime = wfTimestamp( TS_MW, $this->now() - $this->dispatchInterval );
-		$staleLockTime = wfTimestamp( TS_MW, $this->now() - $this->lockGraceInterval );
 
 		// TODO: pass the max change ID as a parameter!
 		$row = $dbr->selectRow(
@@ -345,7 +344,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		// from the resulting list at random.
 
 		$where = [
-			'chd_touched < ' . $dbr->addQuotes( $staleLockTime ), // the lock is not old
 			'( chd_touched < ' . $dbr->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or
 				' OR ( ' . (int)$maxId. ' - chd_seen ) > ' . (int)$this->batchSize . ') ' , // or it's lagging by more changes than batchSite
 			'chd_seen < ' . (int)$maxId, // and not fully up to date.

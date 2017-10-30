@@ -247,19 +247,19 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 				'chd_db' => 'nlwikidb',
 				'chd_seen' => '7',
 				'chd_touched' => '20140301070000',
-				'chd_lock' => null,
+				'chd_lock' => 'this-is-ignored',
 				'chd_disabled' => '0',
 			],
 		];
 
-		$lockedRows = [
+		$disabledRows = [
 			'dewiki' => [
 				'chd_site' => 'dewiki',
 				'chd_db' => 'dewikidb',
 				'chd_seen' => '0',
 				'chd_touched' => '20140302235955',
-				'chd_lock' => 'Foo.Bar', // locked
-				'chd_disabled' => 0,
+				'chd_lock' => null,
+				'chd_disabled' => 1, // disabled
 			],
 			'enwiki' => [
 				'chd_site' => 'enwiki',
@@ -290,11 +290,11 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 					'chd_db' => 'nlwikidb',
 					'chd_seen' => '7',
 					'chd_touched' => '20140301070000',
-					'chd_lock' => null,
+					'chd_lock' => 'this-is-ignored',
 				]
 			],
-			'locked or disabled' => [
-				$lockedRows,
+			'disabled' => [
+				$disabledRows,
 				null
 			],
 			'no pending changed' => [
