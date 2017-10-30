@@ -337,7 +337,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		// Select all clients that:
 		//   have not been touched for $dispatchInterval seconds
 		//      ( or are lagging by more changes than given by batchSize )
-		//   and the lock is older than $lockGraceInterval.
 		//   and have not seen all changes
 		//   and are not disabled
 		// Limit the list to $randomness items. Candidates will be picked
