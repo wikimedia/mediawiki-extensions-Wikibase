@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_02499b6a",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-30T15:13:17Z",
+      "side": 1,
+      "message": "I like that idea. It\u0027s essentially a compact version of what\u0027s in a SiteLinkDiff.",
+      "parentUuid": "8e5d03d5_dcbccad7",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce637b91_aebc43d6",
         "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
         "patchSetId": 3
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "Please stick to the long, descriptive names. These are not that many characters. The bulk is not in these keys, but in the values (100 labels, 100 statements and such).\n\nJust an idea for a future improvement: Skip array keys that contain empty arrays anyway.",
       "parentUuid": "ce637b91_6ecf2b83",
+      "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_823d8bba",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-10-30T15:13:17Z",
+      "side": 1,
+      "message": "\u003e Skip array keys that contain empty arrays anyway.\n\nThat would be fine here, but not as a general rule. Especially for external interfaces (API results, etc), this is annoying for client side code, and makes it more error-prone.",
+      "parentUuid": "8e5d03d5_3cccfe8b",
       "revId": "9fde95ce5cbcdc306d28cc3f4824dab0512c77c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
