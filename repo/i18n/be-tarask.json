@@ -46,6 +46,7 @@
 	"wikibase-aliases-edit-placeholder-language-aware": "увядзіце сынонімы мовай: $1",
 	"wikibase-aliases-edit-label": "Сынонімы, падзеленыя вэртыкальнай рысай:",
 	"wikibase-content-language-edit-label": "Мова:",
+	"wikibase-content-language-edit-not-recognized-language": "Пададзены код мовы ня быў распазнаны.",
 	"wikibase-diffview-reference": "крыніца",
 	"wikibase-diffview-rank": "ранг",
 	"wikibase-diffview-rank-preferred": "Прыярытэтны ранг",

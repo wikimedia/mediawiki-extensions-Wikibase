@@ -140,6 +140,8 @@
 	"wikibase-wikibaserepopage-invalid-id": "ID「$1」はシステムに登録されていません。有効な実体ID を使用してください。",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1はリダイレクトです。",
 	"wikibase-wikibaserepopage-storage-exception": "$1 を読み込む際にエラーが発生しました: $2",
+	"special-availablebadges": "利用できるバッジ",
+	"wikibase-availablebadges-emptylist": "このウィキに設定されているバッジはありません。",
 	"special-itembytitle": "ページ名から項目を探す",
 	"wikibase-itembytitle-lookup-fieldset": "サイト名とページ名で項目を探す",
 	"wikibase-itembytitle-lookup-site": "サイト:",

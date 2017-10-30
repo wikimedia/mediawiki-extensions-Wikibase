@@ -73,6 +73,8 @@
 	"datatypes-type-tabular-data": "ছককৃত উপাত্ত",
 	"datatypes-type-external-id": "বহিঃস্থ শনাক্তকারক",
 	"version-wikibase": "উইকিবেজ",
+	"wikibase-time-calendar-gregorian": "গ্রেগরীয়",
+	"wikibase-time-calendar-julian": "জুলীয়",
 	"wikibase-time-precision-Gannum": "$1 বিলিয়ন বছর",
 	"wikibase-time-precision-Mannum": "$1 মিলিয়ন বছর",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 বছর}}",

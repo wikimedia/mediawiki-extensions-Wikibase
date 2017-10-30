@@ -77,6 +77,8 @@
 	"datatypes-type-commonsMedia": "コモンズのメディアファイル",
 	"datatypes-type-external-id": "外部識別子",
 	"version-wikibase": "ウィキベース",
+	"wikibase-time-calendar-gregorian": "グレゴリオ暦",
+	"wikibase-time-calendar-julian": "ユリウス暦",
 	"wikibase-time-precision-annum": "西暦{{PLURAL:$1|$1年}}",
 	"wikibase-time-precision-BCE-annum": "紀元前{{PLURAL:$1|$1世紀}}",
 	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
