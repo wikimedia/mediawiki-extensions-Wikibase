@@ -230,9 +230,22 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	protected function fakeRevision( EntityContent $content, $id = 0 ) {
+		$title = $this->getMockBuilder( Title::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$title->method( 'exists' )
+			->will( $this->returnValue( true ) );
+
+		$title->method( 'getArticleId' )
+			->will( $this->returnValue( $id ) );
+
+		$title->method( 'getLatestRevId' )
+			->will( $this->returnValue( $id ) );
+
 		$revision = new Revision( [
 			'id' => $id,
-			'page' => $id,
+			'title' => $title,
 			'content' => $content,
 		] );
 
