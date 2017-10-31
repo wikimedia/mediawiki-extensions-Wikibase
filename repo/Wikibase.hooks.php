@@ -113,8 +113,13 @@ final class RepoHooks {
 		$request = RequestContext::getMain()->getRequest();
 		$settings = $wikibaseRepo->getSettings();
 		$searchSettings = $settings->getSetting( 'entitySearch' );
-		if ( $searchSettings['useCirrus'] === null && $request->getVal( 'useCirrus' ) ) {
-			$searchSettings['useCirrus'] = true;
+		$useCirrus = $request->getVal( 'useCirrus' );
+		if ( $useCirrus !== null ) {
+			// if we have request one, use it
+			$searchSettings['useCirrus'] =
+			// This really should be global utility function
+				( $useCirrus === 'on' || $useCirrus === 'true' || $useCirrus === 'yes' ||
+				  $useCirrus === '1' );
 			$settings->setSetting( 'entitySearch', $searchSettings );
 		}
 		if ( $searchSettings['useCirrus'] ) {
