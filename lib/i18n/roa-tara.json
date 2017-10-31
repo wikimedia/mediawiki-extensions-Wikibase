@@ -78,6 +78,8 @@
 	"datatypes-type-tabular-data": "Date tabbulare",
 	"datatypes-type-external-id": "Idendificatore de fore",
 	"version-wikibase": "Uicchibase",
+	"wikibase-time-calendar-gregorian": "Gregoriane",
+	"wikibase-time-calendar-julian": "Giuliane",
 	"wikibase-time-precision-Gannum": "$1 migliarde de anne A.C.",
 	"wikibase-time-precision-Mannum": "$1 miliune de anne A.C.",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 anne}} A.C.",

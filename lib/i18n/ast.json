@@ -78,6 +78,8 @@
 	"datatypes-type-tabular-data": "Datos tabulares",
 	"datatypes-type-external-id": "Identificador esternu",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-calendar-gregorian": "Gregorianu",
+	"wikibase-time-calendar-julian": "Xulianu",
 	"wikibase-time-precision-Gannum": "$1 miles de millones d'años dC",
 	"wikibase-time-precision-Mannum": "$1 millones d'años dC",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 añu|$1 años}} dC",

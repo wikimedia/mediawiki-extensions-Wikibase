@@ -74,6 +74,7 @@
 	"wikibase-entitieswithoutlabel-label-language": "รหัสภาษา:",
 	"wikibase-entity-summary-restore": "กู้คืนรุ่น $3 ซึ่ง [[Special:Contributions/$4|{{GENDER:$4|$4}}]] สร้าง",
 	"wikibase-entity-summary-undo": "ย้อนรุ่น $3 ซึ่ง [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|คุย]]) ได้สร้างไว้",
+	"wikibase-listdatatypes-wikibase-item-head": "สิ่งหนึ่ง",
 	"wikibase-listdatatypes-wikibase-property-head": "คุณลักษณะ",
 	"wikibase-concept-uri": "URI แนวคิด",
 	"apihelp-wbeditentity-example-2": "สร้างสารสนเทศใหม่และตั้งป้ายสำหรับ <var>de</var> และ <var>en</var>"
