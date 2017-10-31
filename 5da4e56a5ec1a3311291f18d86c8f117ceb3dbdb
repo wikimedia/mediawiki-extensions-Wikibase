@@ -22,6 +22,30 @@
       "revId": "5da4e56a5ec1a3311291f18d86c8f117ceb3dbdb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_c7e2acd0",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-10-31T03:47:44Z",
+      "side": 1,
+      "message": "I thought all_near_match has much more data than just title? I need to match only against title.",
+      "parentUuid": "6e5a8fde_718063fa",
+      "range": {
+        "startLine": 196,
+        "startChar": 29,
+        "endLine": 196,
+        "endChar": 42
+      },
+      "revId": "5da4e56a5ec1a3311291f18d86c8f117ceb3dbdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
