@@ -46,6 +46,30 @@
       "revId": "5da4e56a5ec1a3311291f18d86c8f117ceb3dbdb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_4268ea84",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-10-31T08:20:36Z",
+      "side": 1,
+      "message": "all_near_match contains titles and redirects, it\u0027s the field we use for the go feature (all_near_match and all_near_match.asciifolding). I think it should work fine here.\nYou have title.near_match/ as well if ignoring redirects is really needed.",
+      "parentUuid": "6e5a8fde_c7e2acd0",
+      "range": {
+        "startLine": 196,
+        "startChar": 29,
+        "endLine": 196,
+        "endChar": 42
+      },
+      "revId": "5da4e56a5ec1a3311291f18d86c8f117ceb3dbdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
