@@ -73,5 +73,6 @@
 	"wikibase-property-render-error": "Gagal merender properti $1: $2",
 	"wikibase-otherprojects": "Dalam proyek lain",
 	"wikibase-otherprojects-beta-message": "Proyek lain menu samping",
-	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} dengan {{WBREPONAME}}"
 }

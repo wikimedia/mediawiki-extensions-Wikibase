@@ -87,6 +87,7 @@
 	"datatypes-type-external-id": "Внешний идентификатор",
 	"version-wikibase": "Вики-база",
 	"wikibase-time-calendar-gregorian": "Григорианский",
+	"wikibase-time-calendar-julian": "Юлианский",
 	"wikibase-time-precision-Gannum": "$1 миллиард{{PLURAL:$1||а|ов}} лет",
 	"wikibase-time-precision-Mannum": "$1 миллион{{PLURAL:$1||а|ов}} лет н.э.",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|год|лет|года}} н.э.",
