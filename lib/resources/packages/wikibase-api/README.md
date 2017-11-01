@@ -4,6 +4,11 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 3.0.1 (2017-11-01)
+
+* Fixed `wikibase.api.RepoApi.getEntities` to return all properties
+  of the entity by default.
+
 ### 3.0.0 (2017-10-13)
 
 * Fixed certain `wikibase.api.RepoApi` methods failing when passing in empty strings.
