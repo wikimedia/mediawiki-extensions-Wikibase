@@ -22,6 +22,30 @@
       "revId": "244d36d5ea93bfde4147771e42b9cd720d367ccf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_49aec5e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-01T16:25:18Z",
+      "side": 1,
+      "message": "yes, because all PHP floats are actually \"double\".",
+      "parentUuid": "6e5a8fde_465f95e8",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "244d36d5ea93bfde4147771e42b9cd720d367ccf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
