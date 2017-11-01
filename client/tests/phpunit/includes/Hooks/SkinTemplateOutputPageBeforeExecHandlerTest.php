@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use ConfigFactory;
+use ContentHandler;
 use FauxRequest;
 use IContextSource;
 use OutputPage;
@@ -139,11 +140,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$output = new OutputPage( $this->getContext() );
 		$output->setProperty( 'noexternallanglinks', $noexternallanglinks );
 		$output->setProperty( 'wikibase_item', 'Q2013' );
-
-		$title = $this->getMock( Title::class );
-		$title->expects( $this->any() )
-			->method( 'exists' )
-			->will( $this->returnValue( true ) );
+		$title = $output->getTitle();
 
 		$skin->expects( $this->any() )
 			->method( 'getOutput' )
@@ -164,12 +161,25 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 	private function getContext() {
 		$request = new FauxRequest( [ 'action' => 'view' ] );
 
+		$title = $this->getMock( Title::class );
+		$title->expects( $this->any() )
+			->method( 'exists' )
+			->will( $this->returnValue( true ) );
+
+		$contentHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKITEXT );
+
 		$wikiPage = $this->getMockBuilder( WikiPage::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$wikiPage->expects( $this->any() )
 			->method( 'getActionOverrides' )
 			->will( $this->returnValue( [] ) );
+		$wikiPage->expects( $this->any() )
+			->method( 'getContentHandler' )
+			->will( $this->returnValue( $contentHandler ) );
+		$wikiPage->expects( $this->any() )
+			->method( 'getTitle' )
+			->will( $this->returnValue( $title ) );
 
 		$context = $this->getMock( IContextSource::class );
 		$context->expects( $this->any() )
@@ -181,6 +191,9 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$context->expects( $this->any() )
 			->method( 'getRequest' )
 			->will( $this->returnValue( $request ) );
+		$context->expects( $this->any() )
+			->method( 'getTitle' )
+			->will( $this->returnValue( $title ) );
 		$context->expects( $this->any() )
 			->method( 'getConfig' )
 			->will( $this->returnValue(

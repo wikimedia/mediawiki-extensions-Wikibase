@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
+use Article;
 use HistoryAction;
 use IContextSource;
-use Page;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -28,13 +28,13 @@ class HistoryEntityAction extends HistoryAction {
 	private $labelLookup;
 
 	/**
-	 * @param Page $page
+	 * @param Article $page
 	 * @param IContextSource|null $context
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LabelDescriptionLookup $labelLookup
 	 */
 	public function __construct(
-		Page $page,
+		Article $page,
 		IContextSource $context = null,
 		EntityIdLookup $entityIdLookup,
 		LabelDescriptionLookup $labelLookup
