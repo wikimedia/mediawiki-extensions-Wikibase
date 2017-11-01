@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_668f31d2",
+        "filename": "README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-01T13:43:53Z",
+      "side": 1,
+      "message": "This can be smashed into one command \"git submodule update --init\"",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "e9cb8e470ccbc68158e9ca8bc5558a1930f6a49e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
