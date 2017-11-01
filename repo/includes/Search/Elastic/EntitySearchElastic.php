@@ -189,7 +189,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$labelsQuery = new BoolQuery();
 		$labelsQuery->addFilter( $labelsFilter );
-		$labelsQuery->addMust( $dismax );
+		$labelsQuery->addShould( $dismax );
 		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
 		// or add new subfield which is case-insensitive
 		$titleMatch = new Term( [ 'title.keyword' => strtoupper( $text ) ] );

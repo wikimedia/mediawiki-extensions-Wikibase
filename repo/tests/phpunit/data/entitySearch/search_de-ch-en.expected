@@ -16,7 +16,7 @@
                                     }
                                 }
                             ],
-                            "must": [
+                            "should": [
                                 {
                                     "dis_max": {
                                         "tie_breaker": 0,
