@@ -79,13 +79,13 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://acme/onto/GlobecoordinateValue> .',
 					'<http://acme/value/2a2da1b4852295168b0bad7e5881cfe6> '
 						. '<http://acme/onto/geoLatitude> '
-						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#double> .',
 					'<http://acme/value/2a2da1b4852295168b0bad7e5881cfe6> '
 						. '<http://acme/onto/geoLongitude> '
-						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#double> .',
 					'<http://acme/value/2a2da1b4852295168b0bad7e5881cfe6> '
 						. '<http://acme/onto/geoPrecision> '
-						. '"0.025"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+						. '"0.025"^^<http://www.w3.org/2001/XMLSchema#double> .',
 					'<http://acme/value/2a2da1b4852295168b0bad7e5881cfe6> '
 						. '<http://acme/onto/geoGlobe> '
 						. '<http://www.wikidata.org/entity/Q2> .',
@@ -126,16 +126,16 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://acme/onto/GlobecoordinateValue> .',
 					'<http://acme/value/da01b99e43c90736626d3d5dd9d71bcf> '
 						. '<http://acme/onto/geoLatitude> '
-						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#double> .',
 					'<http://acme/value/da01b99e43c90736626d3d5dd9d71bcf> '
 						. '<http://acme/onto/geoLongitude> '
-						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#double> .',
 					'<http://acme/value/da01b99e43c90736626d3d5dd9d71bcf> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://acme/onto/GeoAutoPrecision> .',
 					'<http://acme/value/da01b99e43c90736626d3d5dd9d71bcf> '
 						. '<http://acme/onto/geoPrecision> '
-						. '"0.00027777777777778"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+						. '"0.00027777777777778"^^<http://www.w3.org/2001/XMLSchema#double> .',
 					'<http://acme/value/da01b99e43c90736626d3d5dd9d71bcf> '
 						. '<http://acme/onto/geoGlobe> '
 						. '<http://www.wikidata.org/entity/Q2> .',
