@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseJavaScriptApi"
+    "url": "https://gerrit.wikimedia.org/r/wikibase/javascript-api"
   },
   "bugs": {
     "url": "https://phabricator.wikimedia.org/"
