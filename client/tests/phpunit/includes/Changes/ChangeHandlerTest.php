@@ -514,9 +514,9 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 	public function provideHandleChange_rootJobParams() {
 		$ids = [ 18, 19, 17 ]; // note: provide these out of order, to check canonical sorting!
-		$regularChange = $this->newChange( 17, 'x', 'Q100', [] );
-		$coalescedChange = $this->newChange( 0, 'x', 'Q100', [ 'change-ids' => $ids ] );
-		$strangeChange = $this->newChange( 0, 'x', 'Q100', [ 'kittens' => 13 ] );
+		$regularChange = $this->newChange( 17, 'x:y', 'Q100', [] );
+		$coalescedChange = $this->newChange( 0, 'x:y', 'Q100', [ 'change-ids' => $ids ] );
+		$strangeChange = $this->newChange( 0, 'x:y', 'Q100', [ 'kittens' => 13 ] );
 
 		$q100 = new ItemId( 'Q100' );
 		$usages = [ // note: provide these out of order, to check canonical sorting!
