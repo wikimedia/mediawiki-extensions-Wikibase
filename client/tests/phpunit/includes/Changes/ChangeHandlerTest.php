@@ -514,9 +514,9 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 	public function provideHandleChange_rootJobParams() {
 		$ids = [ 18, 19, 17 ]; // note: provide these out of order, to check canonical sorting!
-		$regularChange = $this->newChange( 17, 'x', 'Q100', [] );
-		$coalescedChange = $this->newChange( 0, 'x', 'Q100', [ 'change-ids' => $ids ] );
-		$strangeChange = $this->newChange( 0, 'x', 'Q100', [ 'kittens' => 13 ] );
+		$regularChange = $this->newChange( 17, 'x~y', 'Q100', [] );
+		$coalescedChange = $this->newChange( 0, 'x~y', 'Q100', [ 'change-ids' => $ids ] );
+		$strangeChange = $this->newChange( 0, 'x~y', 'Q100', [ 'kittens' => 13 ] );
 
 		$q100 = new ItemId( 'Q100' );
 		$usages = [ // note: provide these out of order, to check canonical sorting!
@@ -525,7 +525,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		];
 
 		$titleBatchHash = 'f0b873699a63c858667e54cd071f7d9209faeda1';
-		$strangeHash = '97c72edc416a2b659492401306e31c2dd8ffcc49';
+		$strangeHash = 'cadbb4899603593164f06a4754f597fdcb2c07b4';
 
 		$regularRootJobParams = [
 			'purgeWebCache' => [ 'rootJobSignature' => "title-batch:$titleBatchHash" ],

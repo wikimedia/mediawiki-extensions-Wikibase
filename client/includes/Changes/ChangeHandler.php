@@ -136,7 +136,12 @@ class ChangeHandler {
 		}
 
 		$this->updater->purgeWebCache( $titlesToUpdate, $rootJobParams );
-		$this->updater->scheduleRefreshLinks( $titlesToUpdate, $rootJobParams );
+		$this->updater->scheduleRefreshLinks(
+			$titlesToUpdate,
+			$rootJobParams,
+			$change->getAction(),
+			$change->hasField( 'user_id' ) ? 'uid:' . $change->getUserId() : "uid:?"
+		);
 
 		// NOTE: signature depends on change ID, effectively disabling deduplication
 		$changeSignature = $this->getChangeSignature( $change );

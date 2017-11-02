@@ -224,12 +224,15 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			] )
 		);
 
-		$updater->scheduleRefreshLinks( [
-			$titleFoo, $titleBar, $titleCuzz,
-		], [
-			'rootJobTimestamp' => '20202211060708',
-			'rootJobSignature' => 'Kittens!',
-		] );
+		$updater->scheduleRefreshLinks(
+			[ $titleFoo, $titleBar, $titleCuzz ],
+			[
+				'rootJobTimestamp' => '20202211060708',
+				'rootJobSignature' => 'Kittens!',
+			],
+			'test~action',
+			'uid:Tests'
+		);
 
 		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
 		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
