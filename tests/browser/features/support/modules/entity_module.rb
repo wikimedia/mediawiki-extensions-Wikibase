@@ -139,12 +139,20 @@ module EntityPage
   end
 
   def set_copyright_ack_cookie
+    wait_until_cookie_loaded
     cookie = "$.cookie( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/' } );"
     execute_script(cookie)
   end
 
   def set_noanonymouseditwarning_cookie
+    wait_until_cookie_loaded
     cookie = "$.cookie( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
     execute_script(cookie)
+  end
+
+  def wait_until_cookie_loaded
+    wait_until do
+      execute_script('return typeof $.cookie') != 'undefined'
+    end
   end
 end
