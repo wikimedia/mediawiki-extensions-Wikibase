@@ -144,6 +144,9 @@ module EntityPage
   end
 
   def set_noanonymouseditwarning_cookie
+    wait_until do
+      execute_script('return typeof $.cookie') != 'undefined'
+    end
     cookie = "$.cookie( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
     execute_script(cookie)
   end
