@@ -173,8 +173,15 @@ class WikiPageUpdater implements PageUpdater {
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
 	 * @param array $rootJobParams
+	 * @param string $causeAction Triggering action
+	 * @param string $causeAgent Triggering agent
 	 */
-	public function scheduleRefreshLinks( array $titles, array $rootJobParams = [] ) {
+	public function scheduleRefreshLinks(
+		array $titles,
+		array $rootJobParams = [],
+		$causeAction,
+		$causeAgent
+	) {
 		if ( $titles === [] ) {
 			return;
 		}
@@ -184,8 +191,11 @@ class WikiPageUpdater implements PageUpdater {
 		// through batching.
 		$jobCount = count( $titles );
 
+		$cause = [ 'causeAction' => $causeAction, 'causeAgent' => $causeAgent ];
 		foreach ( $titles as $title ) {
-			$this->jobQueueGroup->lazyPush( new RefreshLinksJob( $title, $rootJobParams ) );
+			$this->jobQueueGroup->lazyPush(
+				new RefreshLinksJob( $title, $rootJobParams + $cause )
+			);
 		}
 
 		$this->incrementStats( 'RefreshLinks.jobs', $jobCount );
