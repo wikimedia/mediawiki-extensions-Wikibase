@@ -12,4 +12,4 @@
 	url = https://github.com/wmde/DataValuesJavaScript.git
 [submodule "view/lib/wikibase-data-model"]
 	path = view/lib/wikibase-data-model
-	url = https://www.github.com/wmde/WikibaseDataModelJavaScript
+	url = https://github.com/wmde/WikibaseDataModelJavaScript.git
