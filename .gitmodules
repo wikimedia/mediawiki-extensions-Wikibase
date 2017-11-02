@@ -3,7 +3,7 @@
 	url = https://gerrit.wikimedia.org/r/data-values/value-view
 [submodule "view/lib/wikibase-api"]
 	path = view/lib/wikibase-api
-	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseJavaScriptApi
+	url = https://gerrit.wikimedia.org/r/wikibase/javascript-api
 [submodule "view/lib/wikibase-serialization"]
 	path = view/lib/wikibase-serialization
 	url = https://github.com/wmde/WikibaseSerializationJavaScript.git
