@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_280a5a25",
+        "filename": "repo/tests/phpunit/includes/Diff/ItemDiffVisualizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-02T17:10:05Z",
+      "side": 1,
+      "message": "I am not sure how clear those things are :)\nEspecially when you try to understand what the class does by looking at tests. But yeah, fine for now. I believe we might want to change many things related to this diff code when improving it further.",
+      "range": {
+        "startLine": 45,
+        "startChar": 55,
+        "endLine": 45,
+        "endChar": 59
+      },
+      "revId": "cb498f88a6e545b2b6b53f1ddddd6a168e8b2734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_c80f0632",
+        "filename": "repo/tests/phpunit/includes/Diff/ItemDiffVisualizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-02T17:10:05Z",
+      "side": 1,
+      "message": "sitelink not fingerprint!",
+      "revId": "cb498f88a6e545b2b6b53f1ddddd6a168e8b2734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_e80c423f",
+        "filename": "repo/tests/phpunit/includes/Diff/ItemDiffVisualizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-02T17:10:05Z",
+      "side": 1,
+      "message": "Is this even relevant here?",
+      "revId": "cb498f88a6e545b2b6b53f1ddddd6a168e8b2734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_954dabe2",
+        "filename": "repo/tests/phpunit/includes/Diff/ItemDiffVisualizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-02T17:10:05Z",
+      "side": 1,
+      "message": "basic. changed it",
+      "range": {
+        "startLine": 125,
+        "startChar": 2,
+        "endLine": 125,
+        "endChar": 18
+      },
+      "revId": "cb498f88a6e545b2b6b53f1ddddd6a168e8b2734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
