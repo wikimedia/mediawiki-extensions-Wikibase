@@ -85,7 +85,7 @@ wikibase.view.ControllerViewFactory = ( function ( mw, wb, $ ) {
 
 		view.element.on( 'entitytermsviewafterstopediting', function () {
 			var showEntitytermslistviewValue = mw.user.isAnon()
-				? $.cookie( 'wikibase-entitytermsview-showEntitytermslistview' )
+				? mw.cookie.get( 'wikibase-entitytermsview-showEntitytermslistview' )
 				: mw.user.options.get( 'wikibase-entitytermsview-showEntitytermslistview' );
 			var showEntitytermslistview = ( showEntitytermslistviewValue === 'true'
 				|| showEntitytermslistviewValue === '1'

@@ -70,6 +70,11 @@ class EntityViewPlaceholderExpander {
 	private $termsListItems;
 
 	/**
+	 * @var string
+	 */
+	private $cookiePrefix;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param User $user the current user
 	 * @param EntityDocument $entity
@@ -77,6 +82,7 @@ class EntityViewPlaceholderExpander {
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
+	 * @param string $cookiePrefix
 	 * @param string[] $termsListItems
 	 */
 	public function __construct(
@@ -87,6 +93,7 @@ class EntityViewPlaceholderExpander {
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
+		$cookiePrefix,
 		array $termsListItems = []
 	) {
 		$this->user = $user;
@@ -97,6 +104,7 @@ class EntityViewPlaceholderExpander {
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
 		$this->termsListItems = $termsListItems;
+		$this->cookiePrefix = $cookiePrefix;
 	}
 
 	/**
@@ -151,6 +159,12 @@ class EntityViewPlaceholderExpander {
 		$name = 'wikibase-entitytermsview-showEntitytermslistview';
 
 		if ( $this->user->isAnon() ) {
+			$cookieName = $this->cookiePrefix . $name;
+			if ( isset( $_COOKIE[$cookieName] ) ) {
+				return $_COOKIE[$cookieName] === 'false';
+			}
+			// B/C: cookie set before 2017-11-06 are not prefixed. B/C code to be removed after 2018-11-14
+			// once all old cookies have expired.
 			return isset( $_COOKIE[$name] ) && $_COOKIE[$name] === 'false';
 		} else {
 			return !$this->user->getOption( $name, true );

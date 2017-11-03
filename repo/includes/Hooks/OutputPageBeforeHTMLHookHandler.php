@@ -63,6 +63,11 @@ class OutputPageBeforeHTMLHookHandler {
 	 */
 	private $entityFactory;
 
+	/**
+	 * @var string
+	 */
+	private $cookiePrefix;
+
 	public function __construct(
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
@@ -70,7 +75,8 @@ class OutputPageBeforeHTMLHookHandler {
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookup $languageNameLookup,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
-		EntityFactory $entityFactory
+		EntityFactory $entityFactory,
+		$cookiePrefix
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -79,13 +85,14 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->languageNameLookup = $languageNameLookup;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
+		$this->cookiePrefix = $cookiePrefix;
 	}
 
 	/**
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
-		global $wgLang;
+		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -99,7 +106,8 @@ class OutputPageBeforeHTMLHookHandler {
 				$wikibaseRepo->getEntityContentFactory(),
 				$wikibaseRepo->getEntityIdParser()
 			),
-			$wikibaseRepo->getEntityFactory()
+			$wikibaseRepo->getEntityFactory(),
+			$wgCookiePrefix
 		);
 	}
 
@@ -233,6 +241,7 @@ class OutputPageBeforeHTMLHookHandler {
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $languageCode ),
+			$this->cookiePrefix,
 			$termsListItemsHtml ?: []
 		);
 	}
