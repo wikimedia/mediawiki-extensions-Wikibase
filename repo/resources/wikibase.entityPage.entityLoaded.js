@@ -36,8 +36,12 @@
 
 	var wbEntity = mw.config.get( 'wbEntity' );
 
-	// TODO: Add deprecation warning. All later access to the "wbEntity" configuration variable
-	// should be replaced with the hook.
+	mw.log.deprecate(
+		mw.config.values,
+		'wbEntity',
+		wbEntity,
+		'Use the wikibase.entityPage.entityLoaded hook instead.'
+	);
 
 	/**
 	 * Copied from https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
