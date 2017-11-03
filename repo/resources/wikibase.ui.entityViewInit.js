@@ -341,7 +341,7 @@
 	}
 
 	mw.hook( 'wikipage.content' ).add( function () {
-		if ( mw.config.get( 'wbEntity' ) === null ) {
+		if ( mw.config.get( 'wbEntityId' ) === null ) {
 			return;
 		}
 
