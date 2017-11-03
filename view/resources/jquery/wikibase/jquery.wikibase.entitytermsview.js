@@ -220,7 +220,7 @@
 				} )
 				.on( 'toggleranimation.' + this.widgetName, function ( event, params ) {
 					if ( mw.user.isAnon() ) {
-						$.cookie(
+						mw.cookie.set(
 							'wikibase-entitytermsview-showEntitytermslistview',
 							params.visible,
 							{ expires: 365, path: '/' }

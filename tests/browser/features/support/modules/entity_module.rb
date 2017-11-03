@@ -139,12 +139,12 @@ module EntityPage
   end
 
   def set_copyright_ack_cookie
-    cookie = "$.cookie( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/' } );"
+    cookie = "mw.cookie.set( 'wikibase.acknowledgedcopyrightversion', 'wikibase-1', { 'expires': null, 'path': '/' } );"
     execute_script(cookie)
   end
 
   def set_noanonymouseditwarning_cookie
-    cookie = "$.cookie( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
+    cookie = "mw.cookie.set( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
     execute_script(cookie)
   end
 end
