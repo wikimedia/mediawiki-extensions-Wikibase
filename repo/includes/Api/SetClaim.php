@@ -84,8 +84,11 @@ class SetClaim extends ApiBase {
 		$moduleName,
 		ApiErrorReporter $errorReporter,
 		Deserializer $statementDeserializer,
+		// TODO: Inject a StatementChangeOpFactory that is configurable in entity types definitions.
+		//       This is needed for adding statements to a lexeme's form/sense.
 		StatementChangeOpFactory $statementChangeOpFactory,
 		StatementModificationHelper $modificationHelper,
+		// TODO: Inject a GuidParser that can handle GUIDs such as L2-F1$... that is configurable in entity types definitions.
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator
@@ -128,6 +131,7 @@ class SetClaim extends ApiBase {
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
+		// TODO: Generating the summary should be moved to a separate service that is configurable in entity types definitions.
 		$summary = $this->getSummary( $params, $statement, $entity->getStatements() );
 
 		$index = isset( $params['index'] ) ? $params['index'] : null;
