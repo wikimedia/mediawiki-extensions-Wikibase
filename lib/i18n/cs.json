@@ -84,6 +84,8 @@
 	"datatypes-type-tabular-data": "Tabulková data",
 	"datatypes-type-external-id": "Externí identifikátor",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-calendar-gregorian": "gregoriánský",
+	"wikibase-time-calendar-julian": "juliánský",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|miliarda|miliardy|miliard}} let",
 	"wikibase-time-precision-Mannum": "$1 {{PLURAL:$1|milion|miliony|milionů}} let",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|rok|roky|let}}",
