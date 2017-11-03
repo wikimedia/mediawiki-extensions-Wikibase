@@ -75,7 +75,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			$entityRevisionLookup,
 			$languageNameLookup,
 			$outputPageEntityIdReader,
-			new EntityFactory( [] )
+			new EntityFactory( [] ),
+			''
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -127,7 +128,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			$this->getMock( EntityRevisionLookup::class ),
 			$this->getMock( LanguageNameLookup::class ),
 			$outputPageEntityIdReader,
-			new EntityFactory( [] )
+			new EntityFactory( [] ),
+			''
 		);
 
 		$out = $this->newOutputPage();

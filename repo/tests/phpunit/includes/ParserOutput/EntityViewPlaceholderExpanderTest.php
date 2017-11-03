@@ -27,13 +27,16 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 
+	const COOKIE_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
+
 	/**
 	 * @param User $user
 	 * @param Item $item
+	 * @param string $cookiePrefix
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function newExpander( User $user, Item $item ) {
+	private function newExpander( User $user, Item $item, $cookiePrefix = '' ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		$termsLanguages = [ 'de', 'en', 'ru' ];
@@ -47,19 +50,26 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			$termsLanguages,
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$languageNameLookup,
-			new DummyLocalizedTextProvider()
+			new DummyLocalizedTextProvider(),
+			$cookiePrefix
 		);
 	}
 
 	public function provideEntity() {
+		$item = $this->getTestItem();
+
+		return [
+			[ $item ],
+		];
+	}
+
+	private function getTestItem() {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setLabel( 'en', 'Moskow' );
 		$item->setLabel( 'de', 'Moskau' );
 		$item->setDescription( 'de', 'Hauptstadt Russlands' );
 
-		return [
-			[ $item ],
-		];
+		return $item;
 	}
 
 	/**
@@ -109,6 +119,70 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 		$this->assertContains( 'Hauptstadt Russlands', $html );
 
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-ru', $html );
+	}
+
+	public function testGivenCookieSetToTrue_placeholderIsInitiallyExpanded() {
+		$expander = $this->newExpander( $this->newUser( true ), $this->getTestItem(), 'testwiki-' );
+
+		$_COOKIE['testwiki-' . self::COOKIE_NAME] = 'true';
+
+		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
+
+		$this->assertEquals( '', $html );
+	}
+
+	public function testGivenCookieSetToFalse_placeholderIsInitiallyCollapsed() {
+		$expander = $this->newExpander( $this->newUser( true ), $this->getTestItem(), 'testwiki-' );
+
+		$_COOKIE['testwiki-' . self::COOKIE_NAME] = 'false';
+
+		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
+
+		$this->assertEquals( 'wikibase-initially-collapsed', $html );
+	}
+
+	public function testGivenOldCookieSetToTrue_placeholderIsInitiallyExpanded() {
+		$expander = $this->newExpander( $this->newUser( true ), $this->getTestItem(), 'testwiki-' );
+
+		unset( $_COOKIE['testwiki-' . self::COOKIE_NAME] );
+		$_COOKIE[self::COOKIE_NAME] = 'true';
+
+		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
+
+		$this->assertEquals( '', $html );
+	}
+
+	public function testGivenOldCookieSetToFalse_placeholderIsInitiallyCollapsed() {
+		$expander = $this->newExpander( $this->newUser( true ), $this->getTestItem(), 'testwiki-' );
+
+		unset( $_COOKIE['testwiki-' . self::COOKIE_NAME] );
+		$_COOKIE[self::COOKIE_NAME] = 'false';
+
+		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
+
+		$this->assertEquals( 'wikibase-initially-collapsed', $html );
+	}
+
+	public function testPrefixedCookieHasPrecedenceOverOldCookie() {
+		$expander = $this->newExpander( $this->newUser( true ), $this->getTestItem(), 'testwiki-' );
+
+		$_COOKIE['testwiki-' . self::COOKIE_NAME] = 'true';
+		$_COOKIE[self::COOKIE_NAME] = 'false';
+
+		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
+
+		$this->assertEquals( '', $html );
+	}
+
+	public function testGivenNoCookie_placeholderIsInitiallyExpanded() {
+		$expander = $this->newExpander( $this->newUser( true ), $this->getTestItem(), 'testwiki-' );
+
+		unset( $_COOKIE['testwiki-' . self::COOKIE_NAME] );
+		unset( $_COOKIE[self::COOKIE_NAME] );
+
+		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
+
+		$this->assertEquals( '', $html );
 	}
 
 }

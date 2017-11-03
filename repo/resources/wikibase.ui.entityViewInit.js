@@ -152,7 +152,7 @@
 
 		$entityview.on( viewName + 'afterstartediting', function () {
 			if ( !$.find( '.mw-notification-content' ).length
-				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
+				&& !mw.cookie.get( 'wikibase-no-anonymouseditwarning' )
 			) {
 				var message = mw.msg(
 					'wikibase-anonymouseditwarning',
@@ -230,7 +230,7 @@
 			cookieKey = 'wikibase.acknowledgedcopyrightversion',
 			optionsKey = 'wb-acknowledgedcopyrightversion';
 
-		if ( $.cookie( cookieKey ) === copyRightVersion
+		if ( mw.cookie.get( cookieKey ) === copyRightVersion
 			|| mw.user.options.get( optionsKey ) === copyRightVersion
 		) {
 			return;
@@ -254,7 +254,7 @@
 				event.preventDefault();
 				editableTemplatedWidget.notification();
 				if ( mw.user.isAnon() ) {
-					$.cookie( cookieKey, copyRightVersion, { expires: 365 * 3, path: '/' } );
+					mw.cookie.set( cookieKey, copyRightVersion, { expires: 365 * 3 * 24 * 60 * 60, path: '/' } );
 				} else {
 					var api = new mw.Api();
 					api.saveOption( optionsKey, copyRightVersion );
@@ -288,7 +288,7 @@
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
 			$( window ).off( '.wbCopyrightTooltip' );
 			if ( mw.user.isAnon() ) {
-				$.cookie( cookieKey, copyRightVersion, { expires: 365 * 3, path: '/' } );
+				mw.cookie.set( cookieKey, copyRightVersion, { expires: 365 * 3 * 24 * 60 * 60, path: '/' } );
 			} else {
 				var api = new mw.Api();
 				api.saveOption( optionsKey, copyRightVersion );
