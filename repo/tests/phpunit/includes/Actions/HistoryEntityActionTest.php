@@ -96,6 +96,10 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->method( 'getContext' )
 			->will( $this->returnValue( $context ) );
 
+		$output->expects( $this->any() )
+			->method( 'getLanguage' )
+			->will( $this->returnValue( Language::factory( 'qqx' ) ) );
+
 		return $context;
 	}
 
