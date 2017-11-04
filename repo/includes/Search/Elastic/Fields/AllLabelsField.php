@@ -7,6 +7,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * Field which contains combination of all labels.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class AllLabelsField extends TermIndexField {
 

@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Serialization;
  *
  * This could easily be factored out into a library.
  *
+ * @license GPL-2.0+
  * @author Addshore
  */
 class SerializationModifier {

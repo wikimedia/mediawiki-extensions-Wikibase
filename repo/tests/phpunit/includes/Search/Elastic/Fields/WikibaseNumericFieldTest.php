@@ -10,6 +10,9 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 
 /**
  * Base class for testing numeric fields.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 abstract class WikibaseNumericFieldTest extends PHPUnit_Framework_TestCase {
 

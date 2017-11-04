@@ -17,6 +17,7 @@ use TestSites;
  * @group Database
  * @group medium
  *
+ * @license GPL-2.0+
  * @author Addshore
  */
 class IntegrationApiTest extends ApiTestCase {

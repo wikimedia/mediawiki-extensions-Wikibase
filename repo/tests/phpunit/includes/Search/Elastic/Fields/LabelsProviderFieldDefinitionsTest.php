@@ -15,6 +15,9 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
  * @group WikibaseElastic
  * @group WikibaseRepo
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class LabelsProviderFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 

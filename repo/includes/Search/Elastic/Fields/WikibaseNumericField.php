@@ -1,10 +1,14 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use SearchEngine;
 
 /**
  * Generic numeric field.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 abstract class WikibaseNumericField implements WikibaseIndexField {
 

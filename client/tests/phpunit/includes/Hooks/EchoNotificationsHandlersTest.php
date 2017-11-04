@@ -19,6 +19,9 @@ use Wikibase\SettingsArray;
  * @group Database
  * @group WikibaseClient
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Matěj Suchánek
  */
 class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 

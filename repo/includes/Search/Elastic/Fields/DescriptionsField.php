@@ -7,6 +7,9 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 
 /**
  * Field which contains per-language specific descriptions.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class DescriptionsField implements WikibaseIndexField {
 

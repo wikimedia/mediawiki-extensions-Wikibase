@@ -7,6 +7,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 /**
  * @covers Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField
  *
+ * @license GPL-2.0+
  * @group Wikibase
  */
 class HTMLContentLanguageFieldTest extends \MediaWikiTestCase {

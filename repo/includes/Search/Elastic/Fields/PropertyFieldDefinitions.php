@@ -4,6 +4,9 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 
 /**
  * Search fields that are used for properties.
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class PropertyFieldDefinitions implements FieldDefinitions {
 

@@ -8,6 +8,7 @@ use Wikibase\View\SpecialPageLinker;
 /**
  * A SpecialPageLinker implementation linking to special pages of the local MediaWiki installation.
  *
+ * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class RepoSpecialPageLinker implements SpecialPageLinker {

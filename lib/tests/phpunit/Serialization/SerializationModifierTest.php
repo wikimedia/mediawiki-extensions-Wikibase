@@ -6,11 +6,12 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
- * @author Addshore
+ * @covers \Wikibase\Lib\Serialization\SerializationModifier
  *
  * @group Wikibase
  *
- * @covers Wikibase\Lib\Serialization\SerializationModifier
+ * @license GPL-2.0+
+ * @author Addshore
  */
 class SerializationModifierTest extends PHPUnit_Framework_TestCase {
 

@@ -15,6 +15,9 @@ use Wikibase\Repo\Search\Elastic\ElasticTermResult;
  * @covers \Wikibase\Repo\Search\Elastic\ElasticTermResult
  *
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class ElasticTermResultTest extends MediaWikiTestCase {
 

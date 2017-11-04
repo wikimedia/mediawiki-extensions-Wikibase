@@ -21,6 +21,7 @@ use Wikibase\SettingsArray;
  *
  * @group Wikibase
  *
+ * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
