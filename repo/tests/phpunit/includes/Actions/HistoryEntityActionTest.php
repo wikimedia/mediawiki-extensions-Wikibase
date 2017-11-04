@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Actions;
 use Article;
 use HashConfig;
 use IContextSource;
+use Language;
 use MWContentSerializationException;
 use OutputPage;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -95,6 +96,10 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		$output->expects( $this->once() )
 			->method( 'getContext' )
 			->will( $this->returnValue( $context ) );
+
+		$output->expects( $this->any() )
+			->method( 'getLanguage' )
+			->will( $this->returnValue( Language::factory( 'qqx' ) ) );
 
 		return $context;
 	}
