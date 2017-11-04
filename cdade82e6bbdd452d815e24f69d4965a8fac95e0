@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_d6855ba0",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-04T01:51:19Z",
+      "side": 1,
+      "message": "This is obsolete and should have been removed with I4e78081.",
+      "range": {
+        "startLine": 344,
+        "startChar": 2,
+        "endLine": 346,
+        "endChar": 3
+      },
+      "revId": "cdade82e6bbdd452d815e24f69d4965a8fac95e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
