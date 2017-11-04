@@ -6,6 +6,7 @@
 			"Tokoabibi"
 		]
 	},
+	"wikibase-lib-desc": "Wikibase atu Wikibase kulayangtu sacunus sapikapulungan a sasahicaan",
 	"wikibase-deletedentity-item": "masiputu tu kasacacay",
 	"wikibase-deletedentity-property": "masiputu tu susin",
 	"wikibase-deletedentity-query": "masiputu tu palalitemuh tu kawaw",
@@ -41,6 +42,8 @@
 	"wikibase-validator-invalid": "la’cusay a sulyang",
 	"wikibase-validator-missing-field": "caay kataneng suliten naca pisinga’an \"$1\"",
 	"wikibase-validator-bad-type": "pisaungay $2 mibalic $1",
+	"wikibase-validator-too-long": "sayadahay la’cus matabesiw {{PLURAL:$1|$1 tatebanan nu nisulitan}} tanaya’",
+	"wikibase-validator-too-short": "sainayi’ay maydih {{PLURAL:$1|$1 tatebanan nu nisulitan}} tanaya’",
 	"wikibase-validator-too-high": "mangasiw，amana mangsiw $1",
 	"wikibase-validator-too-low": "magnasiw, amana ma’ngadis mangalep $1",
 	"wikibase-validator-malformed-value": "sulit kese caay katatenga’: $1",
@@ -62,6 +65,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 cacay bataan ku yi a mihca CE",
 	"wikibase-time-precision-Mannum": "$1 cacay lasubu a mang ku mihcan CE",
+	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 a mihca}} CE",
 	"wikibase-time-precision-millennium": "$1 malebut a mihca",
 	"wikibase-time-precision-century": "$1. lasubu a mihca",
 	"wikibase-time-precision-10annum": "$1 kasamihca",

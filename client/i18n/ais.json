@@ -9,6 +9,8 @@
 	"wikibase-client-desc": "mamaedapay-malutapiingan nu Wikibase sacunusan a sakaluk",
 	"tooltip-t-wikibase": "masasiket tayza i papatunay a kalunasulitan pisupeday a kakitizaan tu kasacacay",
 	"wikibase-comment-add": "mapatizeng {{WBREPONAME}} kasacacay tuway.",
+	"wikibase-comment-remove": "masipu masasiketay a {{WBREPONAME}} kasacacay, kamu masasiket masipu tuway.",
+	"wikibase-comment-restore": "mapalawpes tu masipu mahizaay {{WBREPONAME}} kasacacay, kamu masasiket mapatiku tuway",
 	"wikibase-comment-update": "masumad tuway {{WBREPONAME}} kasacacay",
 	"wikibase-comment-sitelink-add": "macunus tu kamu masasiket: $1",
 	"wikibase-comment-sitelink-change": "kamu masasiket masumad $1 tu $2 tuway",
@@ -26,6 +28,7 @@
 	"wikibase-linkitem-input-site": "kamu:",
 	"wikibase-linkitem-input-page": "kasabelih:",
 	"wikibase-linkitem-not-loggedin-title": "maydih kisu patalabu",
+	"wikibase-linkitem-not-loggedin": "maydih kisu patalabu’ tina Wiki itini [$1 teban kalunasulitan suped-sulu] pisaungay tina sasahicaan",
 	"wikibase-property-notfound": "$1 caykatepa ku susin",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "midimut",
@@ -34,6 +37,7 @@
 	"wikibase-rc-wikibase-edit-letter": "sueyi",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawaway-kalumyiti",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} mikawaway-kalumyiti",
+	"wikibase-replicationnote": "piazihen, tina saungay a sumad maydih ku lawad kya kapah ciwsace sacahamin a Wiki.",
 	"wikibase-watchlist-show-changes-pref": "paazih {{WBREPONAME}} mikawaway-kalumyiti i numisuay a miazihay a piazihan tu sulit",
 	"wikibase-error-deserialize-error": "belih-salaylay kalunasulitan mungagnaw",
 	"wikibase-error-serialize-error": "silyihwa kalunasulitan mungangaw.",
@@ -60,5 +64,6 @@
 	"wikibase-property-render-error": "paazih susin $1: $2 mungangaw",
 	"wikibase-otherprojects": "zuma cwanan",
 	"wikibase-otherprojects-beta-message": "zuma cwanan tapiingan a tusil",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|papatun}} mala {{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|ciwsace}} kasacacay"
 }

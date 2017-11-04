@@ -95,6 +95,7 @@
 	"wikibase-statementview-rank-preferred": "Прыярытэтны ранг",
 	"wikibase-statementview-rank-tooltip-preferred": "Слушнае і актуальнае значэньне",
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
+	"wikibase-statementview-rank-tooltip-normal": "Слушнае значэньне, але, магчыма, гістарычнае",
 	"wikibase-statementview-rank-deprecated": "Састарэлы ранг",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|крыніца|крыніцы|крыніцаў}}",
 	"wikibase-snakview-property-input-placeholder": "уласьцівасьць",
