@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Actions;
 use Article;
 use HashConfig;
 use IContextSource;
+use Language;
 use MWContentSerializationException;
 use OutputPage;
 use PHPUnit_Framework_MockObject_MockObject;
