@@ -126,15 +126,17 @@ class AddUsagesForPageJob extends Job {
 	}
 
 	/**
-	 * Call UsageUpdater::addUsagesForPage
+	 * @see Job::run
 	 *
-	 * @return bool Success
+	 * @return bool
 	 */
 	public function run() {
 		$this->usageUpdater->addUsagesForPage(
 			$this->pageId,
 			$this->getUsages()
 		);
+
+		return true;
 	}
 
 }
