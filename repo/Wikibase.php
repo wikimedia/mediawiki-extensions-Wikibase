@@ -502,14 +502,19 @@ call_user_func( function() {
 				$apiHelperFactory->getErrorReporter( $mainModule )
 			);
 
+			$requestParser = new \Wikibase\Repo\Api\BaseSetClaimRequestParser(
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getExternalFormatStatementDeserializer(),
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$wikibaseRepo->getStatementGuidParser()
+			);
+
 			return new Wikibase\Repo\Api\SetClaim(
 				$mainModule,
 				$moduleName,
 				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$wikibaseRepo->getExternalFormatStatementDeserializer(),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$requestParser,
 				$modificationHelper,
-				$wikibaseRepo->getStatementGuidParser(),
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getResultBuilder( $module );
 				},
