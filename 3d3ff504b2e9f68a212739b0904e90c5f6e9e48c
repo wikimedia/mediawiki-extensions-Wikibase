@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_ece436a5",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-06T10:36:43Z",
+      "side": 0,
+      "message": "I\u0027ve bumped into this again today, keep forgetting this got removed. I just note that I believe it was an inconvenient kind of change (we got this discussed a while back in some other place too), so I am probably going to restore it in a bit.",
+      "revId": "3d3ff504b2e9f68a212739b0904e90c5f6e9e48c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
