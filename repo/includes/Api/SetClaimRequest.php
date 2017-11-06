@@ -1,0 +1,44 @@
+<?php
+
+namespace Wikibase\Repo\Api;
+
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+
+/**
+ * TEST
+ */
+class SetClaimRequest {
+
+	/**
+	 * @var EntityId
+	 */
+	private $entityId;
+
+	/**
+	 * @var ChangeOp
+	 */
+	private $changeOp;
+
+	private $statement;
+
+	public function __construct( EntityId $entityId, Statement $statement, ChangeOp $changeOp ) {
+		$this->entityId = $entityId;
+		$this->statement = $statement;
+		$this->changeOp = $changeOp;
+	}
+
+	public function getEntityId() {
+		return $this->entityId;
+	}
+
+	public function getChangeOp() {
+		return $this->changeOp;
+	}
+
+	public function getStatement() {
+		return $this->statement;
+	}
+
+}
