@@ -189,4 +189,20 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'rdf-builder-factory-callback' );
 	}
 
+	// TODO: this possibly is a bit odd location for such stuff
+	// Maybe instead of entity type definitions, there could be some another defintion
+	// file with API-specific stuff, that extension could extend?
+	// Or there could also be some kind of service container dedicated for API,
+	// where extension could register their custom services.
+	// This is also repo-specific feature, should not really be in lib!
+	public function getSetClaimRequestParsers() {
+		$result = [];
+		foreach ( $this->entityTypeDefinitions as $def ) {
+			if ( isset( $def['set-claim-api-request-parser'] ) ) {
+				$result = array_merge( $result, call_user_func( $def['set-claim-api-request-parser'] ) );
+			}
+		}
+		return $result;
+	}
+
 }

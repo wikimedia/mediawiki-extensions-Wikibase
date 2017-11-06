@@ -493,7 +493,6 @@ call_user_func( function() {
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
 			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 			$modificationHelper = new Wikibase\Repo\Api\StatementModificationHelper(
 				$wikibaseRepo->getSnakFactory(),
@@ -502,18 +501,13 @@ call_user_func( function() {
 				$apiHelperFactory->getErrorReporter( $mainModule )
 			);
 
-			$requestParser = new \Wikibase\Repo\Api\BaseSetClaimRequestParser(
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$wikibaseRepo->getExternalFormatStatementDeserializer(),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
-				$wikibaseRepo->getStatementGuidParser()
-			);
+			$errorReporter = $apiHelperFactory->getErrorReporter( $mainModule );
 
 			return new Wikibase\Repo\Api\SetClaim(
 				$mainModule,
 				$moduleName,
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$requestParser,
+				$errorReporter,
+				$wikibaseRepo->getSetClaimApiRequestParser( $errorReporter ),
 				$modificationHelper,
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getResultBuilder( $module );
