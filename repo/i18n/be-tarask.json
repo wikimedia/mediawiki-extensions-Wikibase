@@ -103,6 +103,7 @@
 	"wikibase-snakview-unsupportedsnaktype": "Злучнік тыпу «$1». Апрацоўка падобнага злучніка яшчэ не падтрымліваецца.",
 	"wikibase-snakview-choosesnaktype": "Выберыце тып значэньня.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "Значэньне не адпавядае вызначэньню ўласьцівасьці.",
+	"wikibase-snakview-variation-datavaluetypemismatch-details": "Нечаканы канфлікт паміж тыпам уласьцівасьці «$2» і тыпам значэньня «$1».",
 	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "Немагчыма вызначыць новае значэньне для выдаленай уласьцівасьці.",
 	"wikibase-snakview-variations-somevalue-label": "невядомае значэньне",
 	"wikibase-snakview-variations-novalue-label": "без значэньня",

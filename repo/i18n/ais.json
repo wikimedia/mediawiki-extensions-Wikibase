@@ -164,6 +164,7 @@
 	"wikibase-setsitelink-label": "calay-kakacawan(wangcan) masasiket:",
 	"wikibase-setsitelink-badges": "kunpay:",
 	"wikibase-setsitelink-submit": "setin calay-kakacawan(wangcan) masasiket",
+	"wikibase-setsitelink-invalid-site": "caay kapulita calay-kakacawan(wangcan) ID \"$1\". kapisaungay tu cacay izaway tu a calay-kakacawan(wangcan) ID, tinaku \"zhwiki\".",
 	"wikibase-setsitelink-not-item": "ID $1 caay tungusay nu amahicahica tu kasacacay.",
 	"wikibase-setsitelink-not-badge": "kasacacay $1 caay ku kunpay.",
 	"wikibase-setsitelink-add-failed": "la’cus misuped tina calay-kakacawan(wangcan) masasiket.",
