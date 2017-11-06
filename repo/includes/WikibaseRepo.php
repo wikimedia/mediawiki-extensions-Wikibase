@@ -34,6 +34,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
+use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\DispatchingSetClaimRequestParser;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
@@ -2050,6 +2052,23 @@ class WikibaseRepo {
 
 	private function getPerRepositoryServiceWiring() {
 		return require __DIR__ . '/../../data-access/src/PerRepositoryServiceWiring.php';
+	}
+
+	// TODO: Do not pass error reporter - only done so as a temporary solution
+	// Request parser(s) should return errors to the caller instead of reporting (and dying) itself.
+	public function getSetClaimApiRequestParser( ApiErrorReporter $errorReporter ) {
+		$changeOpFactoryProvider = $this->getChangeOpFactoryProvider();
+
+		$baseParser = new \Wikibase\Repo\Api\BaseSetClaimRequestParser(
+			$errorReporter,
+			$this->getExternalFormatStatementDeserializer(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$this->getStatementGuidParser()
+		);
+
+		$customParsers = $this->entityTypeDefinitions->getSetClaimRequestParsers();
+
+		return new DispatchingSetClaimRequestParser( $baseParser, $customParsers );
 	}
 
 }
