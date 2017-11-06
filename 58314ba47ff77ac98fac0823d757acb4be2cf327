@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_8f77b4fc",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-06T12:31:35Z",
+      "side": 1,
+      "message": "Good point, thanks!",
+      "parentUuid": "6e5a8fde_0f8bc4e9",
+      "range": {
+        "startLine": 257,
+        "startChar": 60,
+        "endLine": 257,
+        "endChar": 82
+      },
+      "revId": "58314ba47ff77ac98fac0823d757acb4be2cf327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_af72b00e",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 3
