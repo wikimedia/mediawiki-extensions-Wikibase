@@ -16,7 +16,6 @@ use ApiUsageException;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -69,13 +68,15 @@ class SetClaim extends ApiBase {
 	private $entitySavingHelper;
 
 	/**
+	 * @var SetClaimRequestParser
+	 */
+	private $requestParser;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param ApiErrorReporter $errorReporter
-	 * @param Deserializer $statementDeserializer
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
 	 * @param StatementModificationHelper $modificationHelper
-	 * @param StatementGuidParser $guidParser
 	 * @param callable $resultBuilderInstantiator
 	 * @param callable $entitySavingHelperInstantiator
 	 */
@@ -83,20 +84,16 @@ class SetClaim extends ApiBase {
 		ApiMain $mainModule,
 		$moduleName,
 		ApiErrorReporter $errorReporter,
-		Deserializer $statementDeserializer,
-		StatementChangeOpFactory $statementChangeOpFactory,
+		SetClaimRequestParser $requestParser,
 		StatementModificationHelper $modificationHelper,
-		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
 		$this->errorReporter = $errorReporter;
-		$this->statementDeserializer = $statementDeserializer;
-		$this->statementChangeOpFactory = $statementChangeOpFactory;
+		$this->requestParser = $requestParser;
 		$this->modificationHelper = $modificationHelper;
-		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
@@ -106,21 +103,9 @@ class SetClaim extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
-		$statement = $this->getStatementFromParams( $params );
-		$guid = $statement->getGuid();
+		$request = $this->requestParser->parse( $params );
 
-		if ( $guid === null ) {
-			$this->errorReporter->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
-		}
-
-		try {
-			$statementGuid = $this->guidParser->parse( $guid );
-		} catch ( StatementGuidParsingException $ex ) {
-			$this->errorReporter->dieException( $ex, 'invalid-claim' );
-			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-		}
-
-		$entityId = $statementGuid->getEntityId();
+		$entityId = $request->getEntityId();
 		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		if ( !( $entity instanceof StatementListProvider ) ) {
@@ -128,10 +113,10 @@ class SetClaim extends ApiBase {
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
-		$summary = $this->getSummary( $params, $statement, $entity->getStatements() );
+		$statement = $request->getStatement();
+		$summary = $this->getSummary( $params, $statement, $entity->getStatements() ); // TODO: move to servicce
 
-		$index = isset( $params['index'] ) ? $params['index'] : null;
-		$changeop = $this->statementChangeOpFactory->newSetStatementOp( $statement, $index );
+		$changeop = $request->getChangeOp();
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
@@ -141,7 +126,7 @@ class SetClaim extends ApiBase {
 
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
-		if ( $index !== null ) {
+		if ( isset( $params['index'] ) ) { // TODO: move to Request?
 			$stats->increment( 'wikibase.repo.api.wbsetclaim.index' );
 		}
 	}
