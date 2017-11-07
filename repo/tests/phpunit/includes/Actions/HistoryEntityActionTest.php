@@ -32,6 +32,9 @@ use Wikibase\Store\EntityIdLookup;
  */
 class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
+	/** @see \LanguageQqx */
+	const DUMMY_LANGUAGE = 'qqx';
+
 	/**
 	 * @param string $title
 	 *
@@ -41,24 +44,26 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		$page = $this->getMockBuilder( Article::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$page->expects( $this->any() )
-			->method( 'getTitle' )
-			->will( $this->returnValue( Title::newFromText( $title ) ) );
+		$page->method( 'getTitle' )
+			->willReturn( Title::newFromText( $title ) );
 		$page->expects( $this->never() )
 			->method( 'getPage' )
 			// Deserializing the full entity may fail, see https://gerrit.wikimedia.org/r/262881
-			->will( $this->throwException( new MWContentSerializationException() ) );
+			->willThrowException( new MWContentSerializationException() );
 
 		return $page;
 	}
 
 	/**
-	 * @return OutputPage
+	 * @return PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getOutput() {
 		$output = $this->getMockBuilder( OutputPage::class )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$output->method( 'getLanguage' )
+			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
 
 		return $output;
 	}
@@ -70,36 +75,28 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getContext( PHPUnit_Framework_MockObject_MockObject $output ) {
 		$context = $this->getMock( IContextSource::class );
-		$context->expects( $this->any() )
-			->method( 'getConfig' )
-			->will( $this->returnValue( new HashConfig( [
+		$context->method( 'getConfig' )
+			->willReturn( new HashConfig( [
 				'UseFileCache' => false,
 				'UseMediaWikiUIEverywhere' => false,
 				'Localtimezone' => 'UTC',
-			] ) ) );
-		$context->expects( $this->any() )
-			->method( 'getRequest' )
-			->will( $this->returnValue( new WebRequest() ) );
-		$context->expects( $this->any() )
-			->method( 'getUser' )
-			->will( $this->returnValue( new User() ) );
-		$context->expects( $this->any() )
-			->method( 'msg' )
-			->will( $this->returnCallback( function() {
-				return call_user_func_array( 'wfMessage', func_get_args() )->inLanguage( 'qqx' );
-			} ) );
+			] ) );
+		$context->method( 'getRequest' )
+			->willReturn( new WebRequest() );
+		$context->method( 'getUser' )
+			->willReturn( new User() );
+		$context->method( 'msg' )
+			->willReturnCallback( function() {
+				return call_user_func_array( 'wfMessage', func_get_args() )
+					->inLanguage( self::DUMMY_LANGUAGE );
+			} );
 
-		$context->expects( $this->any() )
-			->method( 'getOutput' )
-			->will( $this->returnValue( $output ) );
+		$context->method( 'getOutput' )
+			->willReturn( $output );
 
 		$output->expects( $this->once() )
 			->method( 'getContext' )
-			->will( $this->returnValue( $context ) );
-
-		$output->expects( $this->any() )
-			->method( 'getLanguage' )
-			->will( $this->returnValue( Language::factory( 'qqx' ) ) );
+			->willReturn( $context );
 
 		return $context;
 	}
@@ -118,7 +115,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			],
 			'with label' => [
 				new ItemId( 'Q2' ),
-				new Term( 'qqx', 'Label' ),
+				new Term( self::DUMMY_LANGUAGE, 'Label' ),
 				'(wikibase-history-title-with-label: Q2, Label)'
 			],
 		];
@@ -131,12 +128,11 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		$entityIdLookup = $this->getMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
-			->will( $this->returnValue( $entityId ) );
+			->willReturn( $entityId );
 
 		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( $label ) );
+		$labelLookup->method( 'getLabel' )
+			->willReturn( $label );
 
 		$output = $this->getOutput();
 		$output->expects( $this->once() )
