@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_efb5ffca",
+        "filename": "repo/includes/Api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:34:43Z",
+      "side": 1,
+      "message": "I wonder, why is this? When I look at the existing StatementChangeOpFactory it looks like it doesn\u0027t care about entity types at all.\n\nAs far as I can see nothing needs to be changed here, except:\n* FormId must be an EntityId.\n* FormId::getSerialization must return the full ID, e.g. \"L1-F2\", and not only \"F2\".",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 94
+      },
+      "revId": "fedb587f9658bb600ef9dd04190649645d021cfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_cfd9232e",
+        "filename": "repo/includes/Api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:34:43Z",
+      "side": 1,
+      "message": "Same applies here.",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 120
+      },
+      "revId": "fedb587f9658bb600ef9dd04190649645d021cfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_4fce9360",
+        "filename": "repo/includes/Api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:34:43Z",
+      "side": 1,
+      "message": "Why is that? What would be the difference between editing a statement on an Item, and editing a statement on a Form?",
+      "range": {
+        "startLine": 134,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 121
+      },
+      "revId": "fedb587f9658bb600ef9dd04190649645d021cfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
