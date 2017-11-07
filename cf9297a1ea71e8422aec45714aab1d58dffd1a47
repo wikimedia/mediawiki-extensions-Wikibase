@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_aa98556e",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-07T17:04:53Z",
+      "side": 1,
+      "message": "I agree, the general format of API parameters should be constant and independent of what the request is about. This was indeed not clear in the example code (forgive me sloppiness, there are multiple shortcuts made, intentionally so).",
+      "parentUuid": "6e5a8fde_ef941fec",
+      "range": {
+        "startLine": 201,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 49
+      },
+      "revId": "cf9297a1ea71e8422aec45714aab1d58dffd1a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_8fb24b91",
         "filename": "repo/includes/Api/DispatchableSetClaimRequestParser.php",
         "patchSetId": 3
