@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_646ff68f",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T11:45:16Z",
+      "side": 1,
+      "message": "I\u0027m a bit concerned by the fact this test does mess with a global, but does not set it back to what it contained before.",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 43
+      },
+      "revId": "d686d73ff67fcce34c1b3210a9646ae1314c3ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_846a327d",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T11:45:16Z",
+      "side": 1,
+      "message": "I wonder why the test works without properties being configured?",
+      "range": {
+        "startLine": 114,
+        "startChar": 3,
+        "endLine": 114,
+        "endChar": 32
+      },
+      "revId": "d686d73ff67fcce34c1b3210a9646ae1314c3ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
