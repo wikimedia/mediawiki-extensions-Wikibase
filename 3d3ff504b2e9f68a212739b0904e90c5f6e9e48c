@@ -16,6 +16,24 @@
       "revId": "3d3ff504b2e9f68a212739b0904e90c5f6e9e48c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_c161fc33",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T09:59:14Z",
+      "side": 0,
+      "message": "I don\u0027t think private convenience features nobody else knows about should clutter a general configuration file. Also, why is it better to type \"composer cs\" instead of simply \"phpcs\"?",
+      "parentUuid": "6e5a8fde_ece436a5",
+      "revId": "3d3ff504b2e9f68a212739b0904e90c5f6e9e48c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
