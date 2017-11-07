@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_ef941fec",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:52:54Z",
+      "side": 1,
+      "message": "I find this approach problematic for a specific reason:\n\nThis sounds like any implementation of a \"wbsetclaim API request parser\" is allowed to parse whatever API parameters it likes. It sounds like the wbsetclaim API module is allowed to behave different depending on the entity type. But exactly that should not be allowed.\n\nIt might be that some services used internally by wbsetclaim need to know about other entity types. But this should not be visible to the user.\n\nThis can probably be solved with either a better name, or a more specific interface for this thingy here.\n\nBasically: The set and format of the API parameters used should be encoded once, and not multiple times in every single (independent!) implementation of this API module.",
+      "range": {
+        "startLine": 201,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 49
+      },
+      "revId": "cf9297a1ea71e8422aec45714aab1d58dffd1a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_8fb24b91",
+        "filename": "repo/includes/Api/DispatchableSetClaimRequestParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:52:54Z",
+      "side": 1,
+      "message": "I do have the same issue as before, plus: How is this even possible? I mean, the parameters contain a Statement serialization, and thats basically it. I\u0027m sure it would be a mistake to allow *different* Statement serializations that can be distinguished by an interface like it is proposed here.\n\nThe one element that allows distinguishing such is the entity ID encoded in the statement GUID.\n\nBut to understand the entity type and ID from a statement GUID, a generic interface like the one proposed here is not needed. All that\u0027s needed is a service that can split an entity ID from a GUID.",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 42
+      },
+      "revId": "cf9297a1ea71e8422aec45714aab1d58dffd1a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
