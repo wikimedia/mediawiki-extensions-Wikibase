@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_ef809fc6",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:43:16Z",
+      "side": 1,
+      "message": "This GUID parser only works if it is either constructed in a way that it has special case code for Forms and Senses, or FormIds and SenseIds are EntityIds (and FormId::getSerialization must return the full ID, e.g. \"L1-F2\").",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 43
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_6f54af56",
+        "filename": "repo/includes/Api/BaseSetClaimRequestParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:43:16Z",
+      "side": 1,
+      "message": "The split done in this patch is fine. But I don\u0027t get why this interface is needed. What is so special here in this implementation that it can not work with Forms and Senses?",
+      "range": {
+        "startLine": 21,
+        "startChar": 43,
+        "endLine": 21,
+        "endChar": 64
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_8f5ecb79",
+        "filename": "repo/includes/Api/SetClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:43:16Z",
+      "side": 1,
+      "message": "I think this is unused now, and you forgot to remove it.",
+      "range": {
+        "startLine": 170,
+        "startChar": 18,
+        "endLine": 170,
+        "endChar": 40
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_af614734",
+        "filename": "repo/includes/Api/SetClaimRequest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T15:43:16Z",
+      "side": 1,
+      "message": "Where is this needed?",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
