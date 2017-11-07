@@ -6,10 +6,10 @@
 	url = https://gerrit.wikimedia.org/r/wikibase/javascript-api
 [submodule "view/lib/wikibase-serialization"]
 	path = view/lib/wikibase-serialization
-	url = https://github.com/wmde/WikibaseSerializationJavaScript.git
+	url = https://phabricator.wikimedia.org/source/wikibase-serialization.git
 [submodule "view/lib/wikibase-data-values"]
 	path = view/lib/wikibase-data-values
-	url = https://github.com/wmde/DataValuesJavaScript.git
+	url = https://phabricator.wikimedia.org/source/datavalues-javascript.git
 [submodule "view/lib/wikibase-data-model"]
 	path = view/lib/wikibase-data-model
-	url = https://github.com/wmde/WikibaseDataModelJavaScript.git
+	url = https://phabricator.wikimedia.org/source/wikibase-data-model.git
