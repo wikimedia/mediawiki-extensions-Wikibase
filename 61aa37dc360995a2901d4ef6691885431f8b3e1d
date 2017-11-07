@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_61ada82d",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T10:24:42Z",
+      "side": 1,
+      "message": "I think there should be a \"sleep\" here, even if it\u0027s only 1ms. Otherwise this loop will burn the CPU and barely give other processes a chance to be executed.\n\nIt might be that \"execute_script\" already does something like this internally, and an additional \"sleep\" is not needed.",
+      "revId": "61aa37dc360995a2901d4ef6691885431f8b3e1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
