@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_6111285f",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T10:50:37Z",
+      "side": 1,
+      "message": "I think this new parameter must be documented. Not only the type. One can guess that a \"prefix\" is probably a string, no problem with that. But what cookies are meant here? And why do they need a prefix?\n\nIt can simply say something like:\n\n @see https://www.mediawiki.org/wiki/Manual:$wgCookiePrefix",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 15
+      },
+      "revId": "ff51b37d271ca6be95edd090d0e2e26e0c377927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_810c6446",
+        "filename": "repo/includes/ParserOutput/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T10:50:37Z",
+      "side": 1,
+      "message": "As before, please add a little bit of documentation here.",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 31
+      },
+      "revId": "ff51b37d271ca6be95edd090d0e2e26e0c377927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_e4fbe60f",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T10:50:37Z",
+      "side": 1,
+      "message": "Since this here does not have a backwards compatible code path, all not logged in users will get the \"anonymous edit warning\" again!\n\nI think we need to ask PM if this is acceptable.",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 59
+      },
+      "revId": "ff51b37d271ca6be95edd090d0e2e26e0c377927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_c4082a2e",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T10:50:37Z",
+      "side": 1,
+      "message": "As above. There is no backwards compatible code path here, which means cookies set via $.cookie can not be found any more. All anonymous editors will get the \"acknowledge copyright\" popup again!\n\nAs above, I believe this needs a PM decision.",
+      "range": {
+        "startLine": 233,
+        "startChar": 7,
+        "endLine": 233,
+        "endChar": 54
+      },
+      "revId": "ff51b37d271ca6be95edd090d0e2e26e0c377927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_c41fca5c",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T10:50:37Z",
+      "side": 1,
+      "message": "This is so long and repeated so often, I think this should be extracted to a constant.",
+      "range": {
+        "startLine": 129,
+        "startChar": 44,
+        "endLine": 129,
+        "endChar": 120
+      },
+      "revId": "ff51b37d271ca6be95edd090d0e2e26e0c377927",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
