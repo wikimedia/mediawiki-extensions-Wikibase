@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_2aa5459a",
+        "filename": "repo/includes/Api/BaseSetClaimRequestParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-07T17:07:43Z",
+      "side": 1,
+      "message": "E.g. StatementGuidParser would not digest L1-F1$xyaz, would it?",
+      "parentUuid": "6e5a8fde_6f54af56",
+      "range": {
+        "startLine": 21,
+        "startChar": 43,
+        "endLine": 21,
+        "endChar": 64
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_8f5ecb79",
         "filename": "repo/includes/Api/SetClaim.php",
         "patchSetId": 3
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_aaaff576",
+        "filename": "repo/includes/Api/SetClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-07T17:07:43Z",
+      "side": 1,
+      "message": "yes, you\u0027re right. sorry for that, I did not intend this demo code to be perfect clean in every aspect.",
+      "parentUuid": "6e5a8fde_8f5ecb79",
+      "range": {
+        "startLine": 170,
+        "startChar": 18,
+        "endLine": 170,
+        "endChar": 40
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_af614734",
         "filename": "repo/includes/Api/SetClaimRequest.php",
         "patchSetId": 3
@@ -82,6 +130,30 @@
       "writtenOn": "2017-11-07T15:43:16Z",
       "side": 1,
       "message": "Where is this needed?",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_6ac25d3b",
+        "filename": "repo/includes/Api/SetClaimRequest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-07T17:07:43Z",
+      "side": 1,
+      "message": "It is used in the \"main\" SetClaim class",
+      "parentUuid": "6e5a8fde_af614734",
       "range": {
         "startLine": 10,
         "startChar": 3,
