@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_f3d3f362",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-07T19:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e5a8fde_d384b760",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 237,
+        "endChar": 33
+      },
+      "revId": "5447c34a4c2361ad9baf80c78a1376e80202af88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_b37fbb62",
         "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-10-30T20:14:09Z",
       "side": 1,
       "message": "Does this work? We never write round brackets here. This should literally be the name of the method, and the brackets are not part of the name.",
+      "range": {
+        "startLine": 238,
+        "startChar": 20,
+        "endLine": 238,
+        "endChar": 22
+      },
+      "revId": "5447c34a4c2361ad9baf80c78a1376e80202af88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_d3d2775d",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-07T19:15:29Z",
+      "side": 1,
+      "message": "whoos! done.",
+      "parentUuid": "6e5a8fde_b37fbb62",
       "range": {
         "startLine": 238,
         "startChar": 20,
