@@ -341,10 +341,6 @@
 	}
 
 	mw.hook( 'wikipage.content' ).add( function () {
-		if ( mw.config.get( 'wbEntity' ) === null ) {
-			return;
-		}
-
 		// This is copied from startup.js in MediaWiki core.
 		var mwPerformance = window.performance && performance.mark ? performance : {
 			mark: function () {}
