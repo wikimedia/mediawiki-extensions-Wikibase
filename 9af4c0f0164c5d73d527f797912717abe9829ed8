@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_8aa9d9de",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T16:24:43Z",
+      "side": 1,
+      "message": "Can we avoid binding against this super-generic method?",
+      "range": {
+        "startLine": 143,
+        "startChar": 12,
+        "endLine": 143,
+        "endChar": 20
+      },
+      "revId": "9af4c0f0164c5d73d527f797912717abe9829ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_8af799f1",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T16:24:43Z",
+      "side": 1,
+      "message": "Can you please rewrite this as\n\n \u0027uid:\u0027 . $change-\u003egetUserId()\n\nThanks.",
+      "range": {
+        "startLine": 143,
+        "startChar": 41,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "revId": "9af4c0f0164c5d73d527f797912717abe9829ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_6a96dd98",
+        "filename": "client/includes/Changes/PageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T16:24:43Z",
+      "side": 1,
+      "message": "I see only 2 callers of this method, and both are updated in this patch. The defaults are not needed, as far as I can tell. I\u0027m afraid they have the potential to cause much more problems than they might solve.\n\nPlease remove the defaults.",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 23
+      },
+      "revId": "9af4c0f0164c5d73d527f797912717abe9829ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_0a95e988",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T16:24:43Z",
+      "side": 1,
+      "message": "As before: Please remove the defaults.",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 183,
+        "endChar": 23
+      },
+      "revId": "9af4c0f0164c5d73d527f797912717abe9829ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_2a90e597",
+        "filename": "client/tests/phpunit/includes/Changes/MockPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-07T16:24:43Z",
+      "side": 1,
+      "message": "As before: Please remove the defaults.",
+      "range": {
+        "startLine": 58,
+        "startChar": 44,
+        "endLine": 58,
+        "endChar": 88
+      },
+      "revId": "9af4c0f0164c5d73d527f797912717abe9829ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
