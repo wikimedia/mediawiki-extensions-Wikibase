@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_b5fafad8",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-07T18:02:47Z",
+      "side": 1,
+      "message": "you are right, we should restore it afterwards. I forgot to clean this up.",
+      "parentUuid": "6e5a8fde_646ff68f",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 43
+      },
+      "revId": "d686d73ff67fcce34c1b3210a9646ae1314c3ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_846a327d",
         "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-07T11:45:16Z",
       "side": 1,
       "message": "I wonder why the test works without properties being configured?",
+      "range": {
+        "startLine": 114,
+        "startChar": 3,
+        "endLine": 114,
+        "endChar": 32
+      },
+      "revId": "d686d73ff67fcce34c1b3210a9646ae1314c3ee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_75dd6272",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesIntegrationTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-07T18:02:47Z",
+      "side": 1,
+      "message": "well, it doesn\u0027t do any search in fact and we ask it for items, so the only thing it checks is \"do we know what this \u0027item\u0027 thing is that we are asked to search for?\". But since we in fact do not search for anything, it doesn\u0027t matter what is there, only that we \"know\" what it is.",
+      "parentUuid": "6e5a8fde_846a327d",
       "range": {
         "startLine": 114,
         "startChar": 3,
