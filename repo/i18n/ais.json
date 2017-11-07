@@ -90,6 +90,7 @@
 	"wikibase-entityselector-more": "yadah",
 	"wikibase-entityselector-notfound": "inayi’ matatungusay cesyun",
 	"wikibase-anonymouseditwarning": "patalaw: caay henay kisu patalabu.\nmisuay IP puenengan amasulit itini kasacacay a mikawaway-kalumyiti nazipa’an.",
+	"wikibase-move-error": "la’cus kisu malimad i kalunasulitan (data) pangangananay a salaedan kasabelih, amana kisu i kasabelih pacumud i kya pangangananan a salaedan.",
 	"wikibase-validator-sitelink-conflict": "masasiket $1 masaungay tuway nu kasacacay $2. amahica kya masasiket caay tungusay nu kya kasacacay, kapah kisu nay $2 misipu kya masasiket, saca amahica satangahan sungila' malecad, kapah kisu mikabu kasacacay.",
 	"wikibase-validator-label-conflict": "sazumaay a pili’ $3 izaw tu aazihen-paya \"$1\" masasiket tu kamu kodo $2.",
 	"wikibase-validator-label-with-description-conflict": "kasacacay $3 izaw tu aazihen-paya \"$1\" masasiket kamu-kodo $2, pisaungay malecaday sapuelac tu lacul.",
