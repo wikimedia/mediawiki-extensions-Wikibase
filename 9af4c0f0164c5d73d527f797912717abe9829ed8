@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_9571fedf",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2017-11-07T19:08:24Z",
+      "side": 1,
+      "message": "I\u0027m not quite sure what you mean here.\n\nAny ideas for a better way to call this? Calling getUserId() gives warnings if the field isn\u0027t set. I\u0027m not sure if that\u0027s just an oversight though.",
+      "parentUuid": "6e5a8fde_8aa9d9de",
+      "range": {
+        "startLine": 143,
+        "startChar": 12,
+        "endLine": 143,
+        "endChar": 20
+      },
+      "revId": "9af4c0f0164c5d73d527f797912717abe9829ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_6a96dd98",
         "filename": "client/includes/Changes/PageUpdater.php",
         "patchSetId": 6
