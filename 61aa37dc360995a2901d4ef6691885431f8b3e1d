@@ -16,6 +16,24 @@
       "revId": "61aa37dc360995a2901d4ef6691885431f8b3e1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_e11c387e",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-07T10:37:13Z",
+      "side": 1,
+      "message": "I believe wait_until takes care of this, and also timeouts if the condition is not met for too long.",
+      "parentUuid": "6e5a8fde_61ada82d",
+      "revId": "61aa37dc360995a2901d4ef6691885431f8b3e1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
