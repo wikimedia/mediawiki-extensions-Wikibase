@@ -6,10 +6,11 @@ use ApiMain;
 use CirrusSearch;
 use FauxRequest;
 use Language;
-use PHPUnit_Framework_TestCase;
+use MediaWikiTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -38,7 +39,24 @@ use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
-class SearchEntitiesIntegrationTest extends PHPUnit_Framework_TestCase {
+class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->idParser = new BasicEntityIdParser();
+
+		// ElasticSearch function for entity weight
+		$this->mergeMwGlobalArrayValue(
+			'wgCirrusSearchRescoreFunctionScoreChains',
+			require __DIR__ . '/../../../../config/ElasticSearchRescoreFunctions.php'
+		);
+	}
 
 	public function provideQueriesForEntityIds() {
 		return [
@@ -81,7 +99,7 @@ class SearchEntitiesIntegrationTest extends PHPUnit_Framework_TestCase {
 	public function testTermTableIntegration( $query, array $expectedIds ) {
 		$entitySearchTermIndex = new EntitySearchTermIndex(
 			$this->newEntityLookup(),
-			new BasicEntityIdParser(),
+			$this->idParser,
 			$this->newConfigurableTermSearchInteractor(),
 			$this->getMock( LabelDescriptionLookup::class ),
 			[]
@@ -95,21 +113,62 @@ class SearchEntitiesIntegrationTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testElasticSearchIntegration( $query, array $expectedIds ) {
-		global $wgWBRepoSettings, $wgCirrusSearchRescoreFunctionScoreChains;
-
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 
-		// ElasticSearch function for entity weight
-		$wgCirrusSearchRescoreFunctionScoreChains = array_merge(
-			isset( $wgCirrusSearchRescoreFunctionScoreChains ) ? $wgCirrusSearchRescoreFunctionScoreChains : [],
-			require __DIR__ . '/../../../../config/ElasticSearchRescoreFunctions.php'
-		);
+		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
+				->disableOriginalConstructor()
+				->setMethods( [ 'getRankedSearchResults' ] )
+				->getMock();
+
+		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
+			->willReturnCallback( $this->makeElasticSearchCallback() );
+
+		$resultData = $this->executeApiModule( $mockEntitySearchElastic, $query );
+		$this->assertSameSearchResults( $resultData, $expectedIds );
+	}
+
+	/**
+	 * Create callback that transforms JSON query return to TermSearchResult[]
+	 *
+	 * @return \Closure
+	 */
+	private function makeElasticSearchCallback() {
+		$entitySearchElastic = $this->newEntitySearchElastic();
+
+		return function ( $text, $languageCode, $entityType, $limit, $strictLanguage )
+				use ( $entitySearchElastic ) {
+			$result = $entitySearchElastic->getRankedSearchResults(
+				$text,
+				$languageCode,
+				$entityType,
+				$limit,
+				$strictLanguage
+			);
+			// comes out as JSON data
+			$resultData = json_decode( $result, true );
+			// FIXME: this is very brittle, but I don't know how to make it better.
+			$matchId = $resultData['query']['query']['bool']['should'][1]['term']['title.keyword'];
+			try {
+				$entityId = $this->idParser->parse( $matchId );
+			} catch ( EntityIdParsingException $ex ) {
+				return [];
+			}
+
+			return [ new TermSearchResult( new Term( $languageCode, $matchId ), '', $entityId ) ];
+		};
+	}
+
+	/**
+	 * @return EntitySearchElastic
+	 */
+	private function newEntitySearchElastic() {
+		global $wgWBRepoSettings;
 
 		$entitySearchElastic = new EntitySearchElastic(
 			$this->newLanguageFallbackChainFactory(),
-			new BasicEntityIdParser(),
+			$this->idParser,
 			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
 			[ 'item' => 'wikibase-item' ],
 			$wgWBRepoSettings['entitySearch']
@@ -121,38 +180,7 @@ class SearchEntitiesIntegrationTest extends PHPUnit_Framework_TestCase {
 		$entitySearchElastic->setRequest( $request );
 		$entitySearchElastic->setReturnResult( true );
 
-		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
-				->disableOriginalConstructor()
-				->setMethods( [ 'getRankedSearchResults' ] )
-				->getMock();
-		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
-			->willReturnCallback( $this->makeElasticSearchCallback( $entitySearchElastic ) );
-
-		$resultData = $this->executeApiModule( $mockEntitySearchElastic, $query );
-		$this->assertSameSearchResults( $resultData, $expectedIds );
-	}
-
-	/**
-	 * Create callback that transforms JSON query return to TermSearchResult[]
-	 * @param EntitySearchElastic $entitySearchElastic
-	 * @return \Closure
-	 */
-	private function makeElasticSearchCallback( EntitySearchElastic $entitySearchElastic ) {
-		return function ( $text, $languageCode, $entityType, $limit, $strictLanguage )
-				use ( $entitySearchElastic ) {
-			$result = $entitySearchElastic->getRankedSearchResults( $text, $languageCode, $entityType,
-					$limit, $strictLanguage );
-			// comes out as JSON data
-			$resultData = json_decode( $result, true );
-			// FIXME: this is very brittle, but I don't know how to make it better.
-			$matchId = $resultData['query']['query']['bool']['should'][1]['term']['title.keyword'];
-			try {
-				$entityId = ( new BasicEntityIdParser() )->parse( $matchId );
-			} catch ( EntityIdParsingException $ex ) {
-				return [];
-			}
-			return [ new TermSearchResult( new Term( $languageCode, $matchId ), '', $entityId ) ];
-		};
+		return $entitySearchElastic;
 	}
 
 	/**
@@ -203,7 +231,7 @@ class SearchEntitiesIntegrationTest extends PHPUnit_Framework_TestCase {
 		$interactor->method( 'searchForEntities' )->willReturnCallback(
 			function ( $text, $languageCode, $entityType, array $termTypes ) {
 				try {
-					$entityId = ( new BasicEntityIdParser() )->parse( $text );
+					$entityId = $this->idParser->parse( $text );
 				} catch ( EntityIdParsingException $ex ) {
 					return [];
 				}
