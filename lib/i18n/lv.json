@@ -41,6 +41,8 @@
 	"datatypes-type-geo-shape": "Ģeogrāfiska forma",
 	"datatypes-type-tabular-data": "Tabulāri dati",
 	"datatypes-type-external-id": "Ārējais identifikators",
+	"wikibase-time-calendar-gregorian": "Gregora",
+	"wikibase-time-calendar-julian": "Jūlija",
 	"wikibase-time-precision-millennium": "$1. tūkstošgade",
 	"wikibase-time-precision-century": "$1. gadsimts",
 	"wikibase-snakformatter-formatting-exception": "Formatēšanas kļūda: $1.",
