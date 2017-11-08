@@ -50,14 +50,10 @@ class RecentChangeFactory {
 	public function __construct(
 		Language $language,
 		SiteLinkCommentCreator $siteLinkCommentCreator,
-		$centralIdLookup ) {
-
+		CentralIdLookup $centralIdLookup = null
+	) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
-
-		// Required but should be null if the client is not connected to a central
-		// user system
-		Assert::parameterType( 'CentralIdLookup|null', $centralIdLookup, '$centralIdLookup' );
 		$this->centralIdLookup = $centralIdLookup;
 	}
 
@@ -138,7 +134,6 @@ class RecentChangeFactory {
 		$clientUserId = $this->getClientUserId( $repoUserId, $metadata );
 
 		$attribs = [
-
 			'rc_user' => $clientUserId,
 			'rc_user_text' => $userText,
 			'rc_comment' => $this->getEditCommentMulti( $change ),
@@ -179,39 +174,31 @@ class RecentChangeFactory {
 		if ( $repoUserId === 0 ) {
 			// Logged out on repo just copied to client
 			return 0;
-		} else {
-			// We decided to put 0 for users that can not be matched.  As a
-			// result, only users that are centralized and exist on both wikis
-			// will be marked as logged in (and be mapped to the local user).
-			//
-			// We don't currently auto-create the local account if they've
-			// never logged into the client.  This can be done with
-			// CentralAuth, but AFAIK there is not a portable way to do this.
+		}
 
-			// Temporary compatibility until Ie7b9c482cf6a0dd7215b34841efd86fb51be651a
-			// has been deployed long enough that all rows have it.
-			if ( array_key_exists( 'central_user_id', $metadata ) ) {
-				// See change-propagation.wiki for why it can be 0 other than pre-deploy
-				// rows.
-				$centralUserId = $metadata['central_user_id'];
-			} else {
-				$centralUserId = 0;
-			}
+		// We decided to put 0 for users that can not be matched.  As a
+		// result, only users that are centralized and exist on both wikis
+		// will be marked as logged in (and be mapped to the local user).
+		//
+		// We don't currently auto-create the local account if they've
+		// never logged into the client.  This can be done with
+		// CentralAuth, but AFAIK there is not a portable way to do this.
 
-			if ( $centralUserId === 0 || $this->centralIdLookup === null ) {
-				return 0;
-			} else {
-				$clientUser = $this->centralIdLookup->localUserFromCentralId(
-					$centralUserId
-				);
+		// Temporary compatibility until Ie7b9c482cf6a0dd7215b34841efd86fb51be651a
+		// has been deployed long enough that all rows have it.
+		// See change-propagation.wiki for why it can be 0 other than pre-deploy rows.
+		if ( $this->centralIdLookup
+			&& isset( $metadata['central_user_id'] )
+			&& $metadata['central_user_id'] !== 0
+		) {
+			$user = $this->centralIdLookup->localUserFromCentralId( $metadata['central_user_id'] );
 
-				if ( $clientUser === null ) {
-					return 0;
-				} else {
-					return $clientUser->getId();
-				}
+			if ( $user ) {
+				return $user->getId();
 			}
 		}
+
+		return 0;
 	}
 
 	/**
