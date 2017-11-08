@@ -36,16 +36,14 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 	const DUMMY_LANGUAGE = 'qqx';
 
 	/**
-	 * @param string $title
-	 *
 	 * @return Article
 	 */
-	private function getPage( $title ) {
+	private function getArticle() {
 		$page = $this->getMockBuilder( Article::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$page->method( 'getTitle' )
-			->willReturn( Title::newFromText( $title ) );
+			->willReturn( Title::newFromText( 'Page title' ) );
 		$page->expects( $this->never() )
 			->method( 'getPage' )
 			// Deserializing the full entity may fail, see https://gerrit.wikimedia.org/r/262881
@@ -140,7 +138,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->with( $expected );
 
 		$action = new HistoryEntityAction(
-			$this->getPage( 'Page title' ),
+			$this->getArticle(),
 			$this->getContext( $output ),
 			$entityIdLookup,
 			$labelLookup
