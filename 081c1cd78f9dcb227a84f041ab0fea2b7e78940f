@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_73b49533",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-08T10:41:11Z",
+      "side": 1,
+      "message": "I\u0027m deeply scared by the semantics of the plus operator on arrays, and wish we would avoid it whenever we can. But as far as I can tell it is fine here.",
+      "range": {
+        "startLine": 197,
+        "startChar": 48,
+        "endLine": 197,
+        "endChar": 49
+      },
+      "revId": "081c1cd78f9dcb227a84f041ab0fea2b7e78940f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_d3ac69ed",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-08T10:41:11Z",
+      "side": 1,
+      "message": "It\u0027s a little surprising to see \"Tests\" where an integer is expected. Could be \"uid:?\". But obviously doesn\u0027t matter.",
+      "range": {
+        "startLine": 234,
+        "startChar": 8,
+        "endLine": 234,
+        "endChar": 13
+      },
+      "revId": "081c1cd78f9dcb227a84f041ab0fea2b7e78940f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
