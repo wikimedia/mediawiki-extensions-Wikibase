@@ -32,17 +32,14 @@ use Wikibase\Store\EntityIdLookup;
 class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param string $title
-	 *
 	 * @return Article
 	 */
-	private function getPage( $title ) {
+	private function getArticle() {
 		$page = $this->getMockBuilder( Article::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$page->expects( $this->any() )
-			->method( 'getTitle' )
-			->will( $this->returnValue( Title::newFromText( $title ) ) );
+		$page->method( 'getTitle' )
+			->will( $this->returnValue( Title::newFromText( 'Page title' ) ) );
 		$page->expects( $this->never() )
 			->method( 'getPage' )
 			// Deserializing the full entity may fail, see https://gerrit.wikimedia.org/r/262881
@@ -69,27 +66,22 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getContext( PHPUnit_Framework_MockObject_MockObject $output ) {
 		$context = $this->getMock( IContextSource::class );
-		$context->expects( $this->any() )
-			->method( 'getConfig' )
+		$context->method( 'getConfig' )
 			->will( $this->returnValue( new HashConfig( [
 				'UseFileCache' => false,
 				'UseMediaWikiUIEverywhere' => false,
 				'Localtimezone' => 'UTC',
 			] ) ) );
-		$context->expects( $this->any() )
-			->method( 'getRequest' )
+		$context->method( 'getRequest' )
 			->will( $this->returnValue( new WebRequest() ) );
-		$context->expects( $this->any() )
-			->method( 'getUser' )
+		$context->method( 'getUser' )
 			->will( $this->returnValue( new User() ) );
-		$context->expects( $this->any() )
-			->method( 'msg' )
+		$context->method( 'msg' )
 			->will( $this->returnCallback( function() {
 				return call_user_func_array( 'wfMessage', func_get_args() )->inLanguage( 'qqx' );
 			} ) );
 
-		$context->expects( $this->any() )
-			->method( 'getOutput' )
+		$context->method( 'getOutput' )
 			->will( $this->returnValue( $output ) );
 
 		$output->expects( $this->once() )
@@ -129,8 +121,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $entityId ) );
 
 		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$labelLookup->method( 'getLabel' )
 			->will( $this->returnValue( $label ) );
 
 		$output = $this->getOutput();
@@ -139,7 +130,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->with( $expected );
 
 		$action = new HistoryEntityAction(
-			$this->getPage( 'Page title' ),
+			$this->getArticle(),
 			$this->getContext( $output ),
 			$entityIdLookup,
 			$labelLookup

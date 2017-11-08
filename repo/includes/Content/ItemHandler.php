@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Content;
 
+use Article;
 use DataUpdate;
 use IContextSource;
-use Page;
 use Title;
 use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -109,9 +109,9 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return [
-			'history' => function( Page $page, IContextSource $context = null ) {
+			'history' => function( Article $article, IContextSource $context = null ) {
 				return new HistoryEntityAction(
-					$page,
+					$article,
 					$context,
 					$this->entityIdLookup,
 					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
