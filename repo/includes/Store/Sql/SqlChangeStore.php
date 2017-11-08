@@ -79,9 +79,9 @@ class SqlChangeStore implements ChangeStore {
 		// TODO: Avoid depending on hasField here.
 		$time = $change->hasField( 'time' ) ? $change->getTime() : wfTimestampNow();
 		$objectId = $change->hasField( 'object_id' ) ? $change->getObjectId() : '';
-		// TODO: Introduce dedicated getters for revision and user IDs.
+		// TODO: Introduce dedicated getter for revision ID.
 		$revisionId = $change->hasField( 'revision_id' ) ? $change->getField( 'revision_id' ) : '0';
-		$userId = $change->hasField( 'user_id' ) ? $change->getField( 'user_id' ) : '0';
+		$userId = $change->getUserId();
 		$serializedInfo = $change->getSerializedInfo();
 
 		return [

@@ -24,6 +24,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getAge
 	 *
+	 * @throws MWException if the "time" field is not set
 	 * @return int Seconds
 	 */
 	public function getAge() {
@@ -33,6 +34,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getTime
 	 *
+	 * @throws MWException if the "time" field is not set
 	 * @return string TS_MW
 	 */
 	public function getTime() {
@@ -45,7 +47,7 @@ abstract class ChangeRow implements Change {
 	 * @return int
 	 */
 	public function getUserId() {
-		return $this->getField( 'user_id' );
+		return $this->hasField( 'user_id' ) ? $this->getField( 'user_id' ) : 0;
 	}
 
 	public function __construct( array $fields = [] ) {
@@ -55,6 +57,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getObjectId
 	 *
+	 * @throws MWException if the "object_id" field is not set
 	 * @return string
 	 */
 	public function getObjectId() {
@@ -64,7 +67,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @param string $name
 	 *
-	 * @throws MWException
+	 * @throws MWException if the requested field is not set
 	 * @return mixed
 	 */
 	public function getField( $name ) {
@@ -174,6 +177,7 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
+	 * @throws MWException if the "id" field is not set
 	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId() {

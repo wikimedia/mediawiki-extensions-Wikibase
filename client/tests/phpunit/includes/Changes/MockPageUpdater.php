@@ -55,7 +55,10 @@ class MockPageUpdater implements PageUpdater {
 	 * @param string $causeAgent
 	 */
 	public function scheduleRefreshLinks(
-		array $titles, array $rootJobParams = [], $causeAction, $causeAgent
+		array $titles,
+		array $rootJobParams = [],
+		$causeAction,
+		$causeAgent
 	) {
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
