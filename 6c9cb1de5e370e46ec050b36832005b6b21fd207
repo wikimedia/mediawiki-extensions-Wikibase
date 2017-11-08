@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_38a7da4d",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-08T09:44:03Z",
+      "side": 1,
+      "message": "I think it\u0027d be an interesting optimization to keep in wikibase config the list of languages we want to activate stems.\nI\u0027d add a new config like :\n$useStems \u003d [\n   \u0027en\u0027 \u003d\u003e [ \u0027index\u0027 \u003d\u003e true, \u0027query\u0027 \u003d\u003e true ]\n   \u0027fr\u0027 \u003d\u003e [ \u0027index\u0027 \u003d\u003e true, \u0027query\u0027 \u003d\u003e true ]\n   // default is [ \u0027index\u0027 \u003d\u003e false, \u0027query\u0027 \u003d\u003e false ]\n];\n\nAt index creation this would probably save a lot of space and mem because for a lot of languages we\u0027ll index exactly the same tokens.\nAt query time you would just have to inspect this array and add the proper stem query clause if possible.\n\nI think that it\u0027s worth the effort.",
+      "revId": "6c9cb1de5e370e46ec050b36832005b6b21fd207",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
