@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_ee0178ba",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-08T13:34:58Z",
+      "side": 1,
+      "message": "Why not?\n\nTo what does \"base\" refer to in this context? Non-hierarchical entity types? How does it make sense to be forced to implement an other *parser*, if the input the user can provide is per *definition* the exact same?\n\nAll this frustrates me more and more. Really:\n* What is so special about non-hierarchical entity types that we can not make them implement StatementListProvider?\n* What is wrong with a StatementGuidParser that can understand entity IDs from other entity types?",
+      "parentUuid": "6e5a8fde_38c11a34",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 43
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_6f54af56",
         "filename": "repo/includes/Api/BaseSetClaimRequestParser.php",
         "patchSetId": 3
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "Also, the entity to apply a change op, when editing a statement on a form would be lexeme, so the logic processing the input and getting the entity is also going to be different",
       "parentUuid": "6e5a8fde_2aa5459a",
+      "range": {
+        "startLine": 21,
+        "startChar": 43,
+        "endLine": 21,
+        "endChar": 64
+      },
+      "revId": "91813aec3eb354bb0b59c627faecacf04027dfbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_2e69d088",
+        "filename": "repo/includes/Api/BaseSetClaimRequestParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-08T13:34:58Z",
+      "side": 1,
+      "message": "\u003e StatementGuidParser would not digest L1-F1$xyaz\n\nI don\u0027t understand. Why should it not? \"L1-F1\" is the (external) entity ID of a form. Why should the StatementGuidParser not be able to understand that? In fact it already understands that a statement GUID is made of an entity ID, a dollar sign, and a random GUID.\n\nWe don\u0027t need to change anything there.\n\n\u003e the entity to apply a change op, when editing a statement on a form would be lexeme, so the logic processing the input and getting the entity is also going to be different\n\nI don\u0027t get that. The edit is done to a statement, which is an element of an entity. Why would we want to maintain an entirely different, and mostly duplicate infrastructure just because we are talking about a different entity type?",
+      "parentUuid": "6e5a8fde_d8e6c6e2",
       "range": {
         "startLine": 21,
         "startChar": 43,
