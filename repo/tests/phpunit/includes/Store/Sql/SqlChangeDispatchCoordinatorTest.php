@@ -34,7 +34,6 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 
 		$coordinator->setBatchSize( 3 );
 		$coordinator->setRandomness( 3 );
-		$coordinator->setLockGraceInterval( 120 );
 		$coordinator->setDispatchInterval( 60 );
 
 		$coordinator->setArrayRandOverride( function( $array ) {

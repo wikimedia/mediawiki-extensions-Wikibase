@@ -106,7 +106,6 @@ class TestDispatchCoordinator extends Maintenance {
 		}
 		$coordinator->setChangesTable( self::TABLE_PREFIX . 'wb_changes' );
 		$coordinator->setStateTable( self::TABLE_PREFIX . 'wb_changes_dispatch' );
-		$coordinator->setLockGraceInterval( 2 );
 		$coordinator->setDispatchInterval( 2 );
 
 		return $coordinator;

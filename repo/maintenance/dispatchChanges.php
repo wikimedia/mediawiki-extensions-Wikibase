@@ -51,8 +51,6 @@ class DispatchChanges extends Maintenance {
 		$this->addOption( 'idle-delay', "Seconds to sleep when idle. Default: 10", false, true );
 		$this->addOption( 'dispatch-interval', "How often to dispatch to each target wiki. "
 					. "Default: every 60 seconds", false, true );
-		$this->addOption( 'lock-grace-interval', "Seconds after which to probe for orphaned locks."
-					. "Default: 60. NOTE: Currently this has no effect!", false, true );
 		$this->addOption( 'randomness', "Number of least current target wikis to pick from at random. "
 					. "Default: 15.", false, true );
 		$this->addOption( 'max-passes', "The number of passes to perform. "
@@ -107,6 +105,7 @@ class DispatchChanges extends Maintenance {
 	 * @param string[] $allClientWikis as returned by getClientWikis().
 	 * @param string[]|null $selectedSiteIDs site IDs to select, or null to disable filtering.
 	 *
+	 * @throws MWException
 	 * @return string[] A mapping of client wiki site IDs to logical database names.
 	 */
 	private function filterClientWikis( array $allClientWikis, array $selectedSiteIDs = null ) {
@@ -153,7 +152,6 @@ class DispatchChanges extends Maintenance {
 		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
 		$maxChunks = (int)$this->getOption( 'max-chunks', 15 );
 		$dispatchInterval = (int)$this->getOption( 'dispatch-interval', 60 );
-		$lockGraceInterval = (int)$this->getOption( 'lock-grace-interval', 60 );
 		$randomness = (int)$this->getOption( 'randomness', 15 );
 
 		$this->verbose = $this->getOption( 'verbose', false );
@@ -173,7 +171,6 @@ class DispatchChanges extends Maintenance {
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
-		$coordinator->setLockGraceInterval( $lockGraceInterval );
 		$coordinator->setRandomness( $randomness );
 
 		$notificationSender = new JobQueueChangeNotificationSender( $repoDB, $clientWikis );
