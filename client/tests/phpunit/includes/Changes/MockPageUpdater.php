@@ -38,8 +38,15 @@ class MockPageUpdater implements PageUpdater {
 	/**
 	 * @param Title[] $titles
 	 * @param array $rootJobParams
+	 * @param string $causeAction
+	 * @param string $causeAgent
 	 */
-	public function purgeWebCache( array $titles, array $rootJobParams = [] ) {
+	public function purgeWebCache(
+		array $titles,
+		array $rootJobParams = [],
+		$causeAction,
+		$causeAgent
+	) {
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
 			$this->updates['purgeWebCache'][ $key ] = $title;
