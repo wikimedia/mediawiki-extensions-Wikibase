@@ -158,18 +158,14 @@ class EntityContentDiffView extends DifferenceEngine {
 	}
 
 	/**
-	 * Returns the cache key for diff body text or content.
-	 *
-	 * @return string
+	 * @inheritDoc
 	 */
-	protected function getDiffBodyCacheKey() {
-		return wfMemcKey(
-			'diff',
-			'version', self::DIFF_VERSION,
-			'oldid', $this->getOldid(),
-			'newid', $this->getNewid(),
-			'lang', $this->getLanguage()->getCode()
-		);
+	protected function getDiffBodyCacheKeyParams() {
+		$parent = parent::getDiffBodyCacheKeyParams();
+		$code = $this->getLanguage()->getCode();
+		$parent[] = "lang{$code}";
+
+		return $parent;
 	}
 
 }
