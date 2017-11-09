@@ -16,6 +16,9 @@
 	"valueview-expert-timeinput-precision": "Дакладнасьць:",
 	"valueview-expert-timeinput-calendar": "Каляндар:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Мова (абавязкова):",
+	"valueview-expertextender-unitsuggester-label": "Адзінка вымярэньня (неабавязкова):",
 	"valueview-preview-label": "будзе адлюстроўвацца як:",
-	"valueview-preview-novalue": "слушнае значэньне не распазнанае"
+	"valueview-preview-novalue": "слушнае значэньне не распазнанае",
+	"valueview-listrotator-manually": "усталяваць уручную"
 }
