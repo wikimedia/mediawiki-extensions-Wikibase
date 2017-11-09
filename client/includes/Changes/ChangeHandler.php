@@ -135,7 +135,12 @@ class ChangeHandler {
 			$rootJobParams['rootJobTimestamp'] = wfTimestampNow();
 		}
 
-		$this->updater->purgeWebCache( $titlesToUpdate, $rootJobParams );
+		$this->updater->purgeWebCache(
+			$titlesToUpdate,
+			$rootJobParams,
+			$change->getAction(),
+			$change->hasField( 'user_id' ) ? 'uid:' . $change->getUserId() : 'uid:?'
+		);
 		$this->updater->scheduleRefreshLinks(
 			$titlesToUpdate,
 			$rootJobParams,

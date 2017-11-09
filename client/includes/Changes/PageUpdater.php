@@ -21,8 +21,15 @@ interface PageUpdater {
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
 	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.
+	 * @param string $causeAction Triggering action
+	 * @param string $causeAgent Triggering agent
 	 */
-	public function purgeWebCache( array $titles, array $rootJobParams = [] );
+	public function purgeWebCache(
+		array $titles,
+		array $rootJobParams = [],
+		$causeAction,
+		$causeAgent
+	);
 
 	/**
 	 * Schedules RefreshLinks jobs for the given titles
