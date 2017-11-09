@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_5af880e2",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 0,
+      "message": "It looks like we can make this diff quite a bit cleaner if we submit this indention change as a separate patch.",
+      "range": {
+        "startLine": 168,
+        "startChar": 3,
+        "endLine": 168,
+        "endChar": 4
+      },
+      "revId": "2b12451fab570bc4bc732ef033be4c39e887169a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

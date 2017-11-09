@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_1a6688ea",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "string[]",
+      "range": {
+        "startLine": 111,
+        "startChar": 9,
+        "endLine": 111,
+        "endChar": 14
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_5a81604e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "array[]",
+      "range": {
+        "startLine": 117,
+        "startChar": 9,
+        "endLine": 117,
+        "endChar": 14
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_3ab0243e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "$ns, maybe?",
+      "range": {
+        "startLine": 237,
+        "startChar": 16,
+        "endLine": 237,
+        "endChar": 18
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_9aeef81d",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "If the optimized DataModel is going to be used here, this probably does not need caching any more. The only effect of the cache will be some saved str_replace, but I believe this is not worth it.",
+      "range": {
+        "startLine": 335,
+        "startChar": 29,
+        "endLine": 335,
+        "endChar": 41
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_fa5a8c21",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "This can be simplified to:\n\n $localName \u003d str_replace( \u0027:\u0027, \u0027.\u0027, $localIdPart );",
+      "range": {
+        "startLine": 338,
+        "startChar": 3,
+        "endLine": 340,
+        "endChar": 16
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_3a97c494",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "It looks like caching this is not needed any more if the optimized DataModel 7.3 is released and used here: https://github.com/wmde/WikibaseDataModel/pull/767",
+      "range": {
+        "startLine": 355,
+        "startChar": 58,
+        "endLine": 355,
+        "endChar": 75
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_5a6ba0b5",
+        "filename": "repo/includes/Rdf/SnakRdfBuilder.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "This looks like this array access must be guaranteed to succeed, but I can not tell where this guarantee comes from.",
+      "range": {
+        "startLine": 95,
+        "startChar": 5,
+        "endLine": 95,
+        "endChar": 71
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_ba741497",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-09T15:57:15Z",
+      "side": 1,
+      "message": "That\u0027s not a very good name:\n* It has something to do \"caching\", but what exactly is cached?\n* It\u0027s obviously some \"maximum\", but for what?\n* To what do the \"keys\" refer to? \"Cache keys\"? What is this? And how can this have a maximum?",
+      "range": {
+        "startLine": 1045,
+        "startChar": 34,
+        "endLine": 1045,
+        "endChar": 53
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
