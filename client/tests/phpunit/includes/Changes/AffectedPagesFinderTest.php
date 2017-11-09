@@ -189,6 +189,14 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) )
 		];
 
+		$cases['description only change on Q1'] = [
+			[ EntityUsage::DESCRIPTION_USAGE . '.en' ],
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
+				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hello' ] ),
+				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hallo' ] ) )
+		];
+
 		$cases['statement change on Q1'] = [
 			[ EntityUsage::OTHER_USAGE ],
 			$changeFactory->newFromUpdate(
@@ -236,6 +244,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$q1TitleUsage = new EntityUsage( $q1, EntityUsage::TITLE_USAGE );
 		$q2TitleUsage = new EntityUsage( $q2, EntityUsage::TITLE_USAGE );
 
+		$q2DescriptionUsage_en = new EntityUsage( $q2, EntityUsage::DESCRIPTION_USAGE, 'en' );
+
 		// Page 1 is linked to Q1
 		$page1Q1Usages = new PageEntityUsages( 1, [
 			$q1SitelinkUsage,
@@ -245,6 +255,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$page2Q1Usages = new PageEntityUsages( 2, [
 			$q1LabelUsage_en,
 			$q1TitleUsage,
+			$q2DescriptionUsage_en,
 		] );
 
 		// Page 1 uses label and title to link to Q2, and shows the German label too.
@@ -448,6 +459,19 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			)
 		];
 
+		$cases['local description change on Q2 (used by page 2)'] = [
+			[
+				new PageEntityUsages( 2, [ $q2DescriptionUsage_en ] ),
+			],
+			[ EntityUsage::DESCRIPTION_USAGE . '.en' ],
+			[ $page2Q2Usages ],
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
+				new Item( $q2 ),
+				$this->getItemWithDescriptions( $q2, [ 'en' => 'Wow' ] )
+			)
+		];
+
 		return $cases;
 	}
 
@@ -537,6 +561,21 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	private function getItemWithLabel( ItemId $id, $languageCode, $label ) {
 		$item = new Item( $id );
 		$item->setLabel( $languageCode, $label );
+
+		return $item;
+	}
+
+	/**
+	 * @param ItemId $id
+	 * @param string[] $descriptions
+	 *
+	 * @return Item
+	 */
+	private function getItemWithDescriptions( ItemId $id, $descriptions ) {
+		$item = new Item( $id );
+		foreach ( $descriptions as $language => $value ) {
+			$item->setDescription( $language, $value );
+		}
 
 		return $item;
 	}
