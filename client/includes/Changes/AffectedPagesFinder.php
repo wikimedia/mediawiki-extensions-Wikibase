@@ -161,6 +161,16 @@ class AffectedPagesFinder {
 				$remainingDiffOps -= count( $labelAspects );
 			}
 		}
+
+		if ( $diff instanceof EntityDiff && !$diff->getDescriptionsDiff()->isEmpty() ) {
+			$descriptionsDiff = $diff->getDescriptionsDiff();
+
+			if ( !empty( $descriptionsDiff ) ) {
+				$descriptionsAspects = $this->getChangedDescriptionAspects( $descriptionsDiff );
+				$aspects = array_merge( $aspects, $descriptionsAspects );
+				$remainingDiffOps -= count( $descriptionsAspects );
+			}
+		}
 		// FIXME: EntityChange suppresses various kinds of diffs (see above). T113468.
 
 		if ( $remainingDiffOps > 0 ) {
@@ -187,6 +197,28 @@ class AffectedPagesFinder {
 			// optimize for one language fallback chain only. Since all possible language fallback
 			// chains must cover all languages, we can simply track an "all languages" usage.
 			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE );
+		}
+
+		return $aspects;
+	}
+
+	/**
+	 * @param Diff $descriptionsDiff
+	 *
+	 * @return string[]
+	 */
+	private function getChangedDescriptionAspects( Diff $descriptionsDiff ) {
+		$aspects = [];
+
+		foreach ( $descriptionsDiff as $lang => $diffOp ) {
+			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::DESCRIPTION_USAGE, $lang );
+		}
+
+		if ( $this->trackUsagesInAllLanguages ) {
+			// On multi-lingual wikis where users can request pages in any language, we can not
+			// optimize for one language fallback chain only. Since all possible language fallback
+			// chains must cover all languages, we can simply track an "all languages" usage.
+			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::DESCRIPTION_USAGE );
 		}
 
 		return $aspects;

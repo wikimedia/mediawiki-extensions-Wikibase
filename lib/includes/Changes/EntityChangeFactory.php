@@ -179,7 +179,6 @@ class EntityChangeFactory {
 		if ( $entity instanceof FingerprintProvider ) {
 			$fingerprint = $entity->getFingerprint();
 
-			$fingerprint->setDescriptions( new TermList() );
 			$fingerprint->setAliasGroups( new AliasGroupList() );
 		}
 	}
