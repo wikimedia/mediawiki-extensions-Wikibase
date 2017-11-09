@@ -42,48 +42,113 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 *  and if so does the property normalize to data or objects?
 	 */
 	private function writePropertyPredicates( $id, $propertyRdfType, $normalizedPropertyRdfType ) {
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( RdfVocabulary::NSP_QUALIFIER, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is(
+			RdfVocabulary::NSP_CLAIM,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is(
+			RdfVocabulary::NSP_CLAIM_VALUE,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is(
+			RdfVocabulary::NSP_QUALIFIER,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is(
+			RdfVocabulary::NSP_QUALIFIER_VALUE,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is(
+			RdfVocabulary::NSP_REFERENCE,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is(
+			RdfVocabulary::NSP_REFERENCE_VALUE,
+			$id
+		);
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is(
+			RdfVocabulary::NSP_NOVALUE,
+			$id
+		);
 
 		if ( $normalizedPropertyRdfType !== self::NO_NORMALIZATION ) {
-			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaimNormalized' )
-				->is( RdfVocabulary::NSP_DIRECT_CLAIM_NORM, $id );
-			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )
-				->is( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id );
-			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )
-				->is( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id );
-			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )
-				->is( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id );
+			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaimNormalized' )->is(
+				RdfVocabulary::NSP_DIRECT_CLAIM_NORM,
+				$id
+			);
+			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )->is(
+				RdfVocabulary::NSP_CLAIM_VALUE_NORM,
+				$id
+			);
+			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )->is(
+				RdfVocabulary::NSP_QUALIFIER_VALUE_NORM,
+				$id
+			);
+			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )->is(
+				RdfVocabulary::NSP_REFERENCE_VALUE_NORM,
+				$id
+			);
 		}
 
 		// Always object properties
-		$this->writer->about( RdfVocabulary::NSP_CLAIM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about(
+			RdfVocabulary::NSP_CLAIM,
+			$id
+		)->a( 'owl', 'ObjectProperty' );
+		$this->writer->about(
+			RdfVocabulary::NSP_CLAIM_VALUE,
+			$id
+		)->a( 'owl', 'ObjectProperty' );
+		$this->writer->about(
+			RdfVocabulary::NSP_QUALIFIER_VALUE,
+			$id
+		)->a( 'owl', 'ObjectProperty' );
+		$this->writer->about(
+			RdfVocabulary::NSP_REFERENCE_VALUE,
+			$id
+		)->a( 'owl', 'ObjectProperty' );
 
-		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM, $id )->a( 'owl', $propertyRdfType );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_STATEMENT, $id )->a( 'owl', $propertyRdfType );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER, $id )->a( 'owl', $propertyRdfType );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE, $id )->a( 'owl', $propertyRdfType );
+		$this->writer->about(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$id
+		)->a( 'owl', $propertyRdfType );
+		$this->writer->about(
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			$id
+		)->a( 'owl', $propertyRdfType );
+		$this->writer->about(
+			RdfVocabulary::NSP_QUALIFIER,
+			$id
+		)->a( 'owl', $propertyRdfType );
+		$this->writer->about(
+			RdfVocabulary::NSP_REFERENCE,
+			$id
+		)->a( 'owl', $propertyRdfType );
 
 		if ( $normalizedPropertyRdfType !== self::NO_NORMALIZATION ) {
-			$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id )
-				->a( 'owl', 'ObjectProperty' );
-			$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id )
-				->a( 'owl', 'ObjectProperty' );
-			$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id )
-				->a( 'owl', 'ObjectProperty' );
+			$this->writer->about(
+				RdfVocabulary::NSP_CLAIM_VALUE_NORM,
+				$id
+			)->a( 'owl', 'ObjectProperty' );
+			$this->writer->about(
+				RdfVocabulary::NSP_QUALIFIER_VALUE_NORM,
+				$id
+			)->a( 'owl', 'ObjectProperty' );
+			$this->writer->about(
+				RdfVocabulary::NSP_REFERENCE_VALUE_NORM,
+				$id
+			)->a( 'owl', 'ObjectProperty' );
 
-			$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM_NORM, $id )
-				->a( 'owl', $normalizedPropertyRdfType );
+			$this->writer->about(
+				RdfVocabulary::NSP_DIRECT_CLAIM_NORM,
+				$id
+			)->a( 'owl', $normalizedPropertyRdfType );
 		}
 	}
 

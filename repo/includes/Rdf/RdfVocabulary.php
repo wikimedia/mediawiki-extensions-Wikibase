@@ -81,9 +81,9 @@ class RdfVocabulary {
 	];
 	// Value properties
 	public static $claimToValue = [
-			self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
-			self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
-			self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
+		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
+		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
+		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
 	];
 	// Value properties for normalized values
 	public static $claimToValueNormalized = [
@@ -165,38 +165,38 @@ class RdfVocabulary {
 		$propUri = $topUri."prop/";
 
 		$this->namespaces = [
-				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
-				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
-				'owl' => 'http://www.w3.org/2002/07/owl#',
-				// TODO: drop beta once we have stable ontology
-				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
-				// nodes
-				self::NS_DATA => $this->dataUri,
-				self::NS_ENTITY => $this->baseUri,
-				self::NS_STATEMENT => $this->baseUri . 'statement/',
-				self::NS_REFERENCE => $topUri . 'reference/',
-				self::NS_VALUE => $topUri . 'value/',
-				// predicates
-				self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
-				self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',
-				self::NSP_CLAIM => $propUri,
-				self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
-				self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
-				self::NSP_CLAIM_VALUE_NORM => $propUri . 'statement/value-normalized/',
-				self::NSP_QUALIFIER => $propUri . 'qualifier/',
-				self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
-				self::NSP_QUALIFIER_VALUE_NORM => $propUri . 'qualifier/value-normalized/',
-				self::NSP_REFERENCE => $propUri . 'reference/',
-				self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
-				self::NSP_REFERENCE_VALUE_NORM => $propUri . 'reference/value-normalized/',
-				self::NSP_NOVALUE => $propUri . 'novalue/',
-				// external
-				self::NS_SKOS => self::SKOS_URI,
-				self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
-				self::NS_CC => self::CC_URI,
-				self::NS_GEO => self::GEO_URI,
-				self::NS_PROV => self::PROV_URI,
+			'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+			'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+			'xsd' => 'http://www.w3.org/2001/XMLSchema#',
+			'owl' => 'http://www.w3.org/2002/07/owl#',
+			// TODO: drop beta once we have stable ontology
+			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
+			// nodes
+			self::NS_DATA => $this->dataUri,
+			self::NS_ENTITY => $this->baseUri,
+			self::NS_STATEMENT => $this->baseUri . 'statement/',
+			self::NS_REFERENCE => $topUri . 'reference/',
+			self::NS_VALUE => $topUri . 'value/',
+			// predicates
+			self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
+			self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',
+			self::NSP_CLAIM => $propUri,
+			self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
+			self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
+			self::NSP_CLAIM_VALUE_NORM => $propUri . 'statement/value-normalized/',
+			self::NSP_QUALIFIER => $propUri . 'qualifier/',
+			self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
+			self::NSP_QUALIFIER_VALUE_NORM => $propUri . 'qualifier/value-normalized/',
+			self::NSP_REFERENCE => $propUri . 'reference/',
+			self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
+			self::NSP_REFERENCE_VALUE_NORM => $propUri . 'reference/value-normalized/',
+			self::NSP_NOVALUE => $propUri . 'novalue/',
+			// external
+			self::NS_SKOS => self::SKOS_URI,
+			self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
+			self::NS_CC => self::CC_URI,
+			self::NS_GEO => self::GEO_URI,
+			self::NS_PROV => self::PROV_URI,
 		];
 	}
 

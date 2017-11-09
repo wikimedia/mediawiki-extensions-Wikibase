@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\FullStatementRdfBuilder;
@@ -118,8 +119,10 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideAddEntity() {
 		$props = array_map(
-			function ( $row ) {
-				return $row[0];
+			function ( $data ) {
+				/** @var PropertyId $propertyId */
+				$propertyId = $data[0];
+				return $propertyId->getSerialization();
 			},
 			$this->getTestData()->getTestProperties()
 		);
