@@ -176,7 +176,10 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		], [
 			'rootJobTimestamp' => '20202211060708',
 			'rootJobSignature' => 'Kittens!',
-		] );
+		],
+			'test~action',
+			'uid:1'
+		);
 
 		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
 		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
@@ -231,7 +234,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 				'rootJobSignature' => 'Kittens!',
 			],
 			'test~action',
-			'uid:Tests'
+			'uid:1'
 		);
 
 		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
