@@ -142,8 +142,15 @@ class WikiPageUpdater implements PageUpdater {
 	 *
 	 * @param Title[] $titles The Titles of the pages to update
 	 * @param array $rootJobParams
+	 * @param string $causeAction Triggering action
+	 * @param string $causeAgent Triggering agent
 	 */
-	public function purgeWebCache( array $titles, array $rootJobParams = [] ) {
+	public function purgeWebCache(
+		array $titles,
+		array $rootJobParams = [],
+		$causeAction,
+		$causeAgent
+	) {
 		if ( $titles === [] ) {
 			return;
 		}
@@ -152,6 +159,7 @@ class WikiPageUpdater implements PageUpdater {
 		$titleBatches = array_chunk( $titles, $this->purgeCacheBatchSize );
 		$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
 
+		$cause = [ 'causeAction' => $causeAction, 'causeAgent' => $causeAgent ];
 		/* @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling HTMLCacheUpdateJob for "
@@ -159,7 +167,7 @@ class WikiPageUpdater implements PageUpdater {
 
 			$jobs[] = new HTMLCacheUpdateJob(
 				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
-				$this->buildJobParams( $batch, $rootJobParams )
+				array_merge( $this->buildJobParams( $batch, $rootJobParams ), $cause )
 			);
 		}
 
@@ -194,7 +202,7 @@ class WikiPageUpdater implements PageUpdater {
 		$cause = [ 'causeAction' => $causeAction, 'causeAgent' => $causeAgent ];
 		foreach ( $titles as $title ) {
 			$this->jobQueueGroup->lazyPush(
-				new RefreshLinksJob( $title, $rootJobParams + $cause )
+				new RefreshLinksJob( $title, array_merge( $rootJobParams, $cause ) )
 			);
 		}
 
