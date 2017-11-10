@@ -22,6 +22,30 @@
       "revId": "0169f77dd793e191c84327760a57a876ef019dbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_a44ab35d",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-10T11:47:02Z",
+      "side": 0,
+      "message": "The main bloat was due to Statements. When we addressed that, we just went ahead and blanked out everything we didn\u0027t need at the time. I don\u0027t think description diffs will take up a huge amount of space. We can probably save more space my stopping to include empty substructures in the diff... which brings us to T113468.\n\nI believe we must do T113468 before we can include information about statements in the diff. I think we can do descriptions without that optimization.\n\nWe need description info to reduct JobQueue bloat on commons and ruwiki. We should do this ASAP. If T113468 isn\u0027t ready to be merged, I think we should go ahead with just including description diffs for now. \n\nSummary: description diffs should ad much bloat to change propagation, but should help a lot with reducing bloat in the job queue. So let\u0027s do it.",
+      "parentUuid": "6e5a8fde_69b014f2",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 51
+      },
+      "revId": "0169f77dd793e191c84327760a57a876ef019dbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
