@@ -11,7 +11,6 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityChange;
 use Wikimedia\Assert\Assert;
 
@@ -179,7 +178,6 @@ class EntityChangeFactory {
 		if ( $entity instanceof FingerprintProvider ) {
 			$fingerprint = $entity->getFingerprint();
 
-			$fingerprint->setDescriptions( new TermList() );
 			$fingerprint->setAliasGroups( new AliasGroupList() );
 		}
 	}
