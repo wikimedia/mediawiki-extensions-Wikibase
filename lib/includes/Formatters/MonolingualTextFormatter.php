@@ -4,13 +4,13 @@ namespace Wikibase\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
-use ValueFormatters\ValueFormatterBase;
+use ValueFormatters\ValueFormatter;
 
 /**
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class MonolingualTextFormatter extends ValueFormatterBase {
+class MonolingualTextFormatter implements ValueFormatter {
 
 	/**
 	 * @see ValueFormatter::format
