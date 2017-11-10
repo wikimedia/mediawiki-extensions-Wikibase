@@ -119,6 +119,8 @@
 	"wikibase-validator-sitelink-conflict": "Спасылка $1 ужо выкарыстоўваецца элемэнтам $2. Вы можаце выдаліць яе з $2, калі яна да яго не адносіцца, ці злучыць абодва элемэнты, калі яны адносяцца да аднае тэмы.",
 	"wikibase-validator-label-conflict": "Уласьцівасьць $3 ужо мае метку «$1» для моўнага коду $2.",
 	"wikibase-validator-label-with-description-conflict": "Элемэнт $3 ужо мае метку «$1», злучаны з кодам мовы $2 і мае ў апісаньні той жа тэкст.",
+	"wikibase-validator-label-no-entityid": "Метка ня мусіць супадаць зь дзейным ідэнтыфікатарам элемэнту.",
+	"wikibase-validator-illegal-file-chars": "Назва файлу ня можа ўтрыліваць такія сымбалі, як двукроп’і ці нахіленыя рыскі. Калі ласка, устаўце толькі назву файлу пасьля «Файл:».",
 	"wikibase-wikibaserepopage-invalid-langcode": "Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 зьяўляецца перанакіраваньнем.",
 	"wikibase-wikibaserepopage-storage-exception": "Адбылася памылка пры спробе загрузіць $1: $2.",
