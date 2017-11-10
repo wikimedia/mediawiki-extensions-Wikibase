@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_29821c03",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T09:52:18Z",
+      "side": 1,
+      "message": "It looks like this and the duplicate introduced below can very, very easily be merged into a single method. Are you fine with doing this right here in this patch? Otherwise I will upload a follow up.",
+      "range": {
+        "startLine": 188,
+        "startChar": 18,
+        "endLine": 188,
+        "endChar": 40
+      },
+      "revId": "417529cd231dbe4ecd1943a789e41c4898c889db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_299bfc7a",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T09:52:18Z",
+      "side": 1,
+      "message": "I would expect the description use cases to directly follow the label use cases, but there is a sitelink use case in between here.",
+      "range": {
+        "startLine": 185,
+        "startChar": 18,
+        "endLine": 185,
+        "endChar": 32
+      },
+      "revId": "417529cd231dbe4ecd1943a789e41c4898c889db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_e9a404b1",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T09:52:18Z",
+      "side": 1,
+      "message": "The test cases above use EntityUsage::makeAspectKey() instead of hard coding the separation character here. I don\u0027t mind which style is used. (Personally I would hard code the dot everywhere.) I just think it should be consistent.",
+      "range": {
+        "startLine": 193,
+        "startChar": 39,
+        "endLine": 193,
+        "endChar": 40
+      },
+      "revId": "417529cd231dbe4ecd1943a789e41c4898c889db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_a98dac37",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T09:52:18Z",
+      "side": 1,
+      "message": "array $descriptions",
+      "range": {
+        "startLine": 574,
+        "startChar": 55,
+        "endLine": 574,
+        "endChar": 68
+      },
+      "revId": "417529cd231dbe4ecd1943a789e41c4898c889db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

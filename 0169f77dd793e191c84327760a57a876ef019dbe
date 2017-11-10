@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_69b014f2",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T09:52:18Z",
+      "side": 0,
+      "message": "I\u0027m not sure we can do this without fixing T113468 first. The reset here was don to reduce bloat, which caused serious performance issues. Do we already know what will happen if we remove this optimization?",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 51
+      },
+      "revId": "0169f77dd793e191c84327760a57a876ef019dbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
