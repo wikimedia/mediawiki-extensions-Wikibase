@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_69f814e3",
+        "filename": "client/includes/Changes/PageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T08:37:09Z",
+      "side": 1,
+      "message": "This default can be removed now.",
+      "range": {
+        "startLine": 29,
+        "startChar": 22,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "48c1170b05661175da9e50bd6c9f791e727f313b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_c9f10800",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T08:37:09Z",
+      "side": 1,
+      "message": "This default can be removed now.",
+      "range": {
+        "startLine": 150,
+        "startChar": 22,
+        "endLine": 150,
+        "endChar": 27
+      },
+      "revId": "48c1170b05661175da9e50bd6c9f791e727f313b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_e995e489",
+        "filename": "client/tests/phpunit/includes/Changes/MockPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T08:37:09Z",
+      "side": 1,
+      "message": "This default can be removed now.",
+      "range": {
+        "startLine": 46,
+        "startChar": 22,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "48c1170b05661175da9e50bd6c9f791e727f313b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_a9ee0c1d",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T08:37:09Z",
+      "side": 1,
+      "message": "It\u0027s \"action\" below.",
+      "range": {
+        "startLine": 180,
+        "startChar": 9,
+        "endLine": 180,
+        "endChar": 13
+      },
+      "revId": "48c1170b05661175da9e50bd6c9f791e727f313b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
