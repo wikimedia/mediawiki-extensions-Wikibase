@@ -46,6 +46,30 @@
       "revId": "0169f77dd793e191c84327760a57a876ef019dbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_24d9e3f8",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-10T14:40:29Z",
+      "side": 0,
+      "message": "I share this gut feeling and hope it\u0027s correct. ;-) Thanks for the longer response. I wanted to make sure more people have the same idea, and that helped very much.",
+      "parentUuid": "6e5a8fde_a44ab35d",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 51
+      },
+      "revId": "0169f77dd793e191c84327760a57a876ef019dbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
