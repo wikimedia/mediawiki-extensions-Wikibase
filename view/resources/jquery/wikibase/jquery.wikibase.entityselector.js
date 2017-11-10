@@ -293,7 +293,7 @@
 
 					deferred.resolve(
 						response.search,
-						response.searchinfo.search,
+						term,
 						response[ 'search-continue' ]
 					);
 				} )
