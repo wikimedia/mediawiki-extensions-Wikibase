@@ -16,6 +16,24 @@
       "revId": "bd49cadab53d4ccb5010597bec462aaf7397fcde",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_7f71a5a6",
+        "filename": "tests/browser/environments.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2017-11-10T17:28:14Z",
+      "side": 0,
+      "message": "I was just experimenting.",
+      "parentUuid": "6e5a8fde_ffe7d638",
+      "revId": "bd49cadab53d4ccb5010597bec462aaf7397fcde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
