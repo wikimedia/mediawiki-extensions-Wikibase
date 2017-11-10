@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_ffe7d638",
+        "filename": "tests/browser/environments.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-10T15:13:09Z",
+      "side": 0,
+      "message": "why we don\u0027t want to user factory here?",
+      "revId": "bd49cadab53d4ccb5010597bec462aaf7397fcde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
