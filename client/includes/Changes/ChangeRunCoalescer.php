@@ -173,8 +173,8 @@ class ChangeRunCoalescer {
 		$change->setFields(
 			[
 				'revision_id' => $last->getField( 'revision_id' ),
-				'user_id' => $last->getField( 'user_id' ),
-				'time' => $last->getField( 'time' ),
+				'user_id' => $last->getUserId(),
+				'time' => $last->getTime(),
 			]
 		);
 

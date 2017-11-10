@@ -140,7 +140,7 @@ class ChangeHandler {
 			$titlesToUpdate,
 			$rootJobParams,
 			$change->getAction(),
-			$change->hasField( 'user_id' ) ? 'uid:' . $change->getUserId() : 'uid:?'
+			'uid:' . ( $change->getUserId() ?: '?' )
 		);
 
 		// NOTE: signature depends on change ID, effectively disabling deduplication
