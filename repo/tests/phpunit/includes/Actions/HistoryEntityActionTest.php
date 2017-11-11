@@ -62,9 +62,6 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$output->method( 'getLanguage' )
-			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
-
 		return $output;
 	}
 
@@ -93,6 +90,9 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
 		$context->method( 'getOutput' )
 			->willReturn( $output );
+
+		$context->method( 'getLanguage' )
+			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
 
 		$output->expects( $this->once() )
 			->method( 'getContext' )
