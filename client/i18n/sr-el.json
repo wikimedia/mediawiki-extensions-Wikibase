@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"Srdjan m",
 			"Сербијана",
-			"Obsuser"
+			"Obsuser",
+			"Prevodim"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
@@ -42,6 +43,8 @@
 	"wikibase-rc-show-wikidata-pref": "Prikaži izmene na Vikipodacima u skorašnjim izmenama",
 	"wikibase-rc-wikibase-edit-letter": "P",
 	"wikibase-rc-wikibase-edit-title": "Izmena na Vikipodacima",
+	"wikibase-rcfilters-hide-wikibase-label": "Izmenе na Vikipodacima",
+	"wikibase-rcfilters-hide-wikibase-description": "Izmene koje potiču sa Vikipodataka.",
 	"wikibase-replicationnote": "Imajte na umu da je potrebno i do nekoliko minuta da promene postanu vidljive na svim vikijima.",
 	"wikibase-watchlist-show-changes-pref": "Prikaži izmene na Vikipodacima u spisku nadgledanja",
 	"wikibase-error-serialize-error": "Neuspešna serijalizacija podataka.",
