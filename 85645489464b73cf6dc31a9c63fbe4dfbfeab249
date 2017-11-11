@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_087dd5af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-11-11T10:54:09Z",
+      "side": 1,
+      "message": "I have just realized it is $context that I want to return the language...",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "85645489464b73cf6dc31a9c63fbe4dfbfeab249",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
