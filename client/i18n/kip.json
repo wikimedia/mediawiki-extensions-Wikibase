@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"राम प्रसाद जोशी"
+		]
+	},
+	"tooltip-t-wikibase": "जडान गरिएको डाटा भण्डार आइटमको लागि लिङ्क",
+	"wikibase-dataitem": "{{WBREPONAME}} आइटम",
+	"wikibase-editlinks": "लिङ्क थपिसिउ",
+	"wikibase-editlinkstitle": "अन्तरभाषिक लिङ्क सर्सिउ"
+}
