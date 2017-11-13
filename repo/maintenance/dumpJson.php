@@ -80,7 +80,9 @@ class DumpJson extends DumpScript {
 				$wikibaseRepo->getEntityNamespaceLookup(),
 				$wikibaseRepo->getEntityIdParser()
 			);
-			$revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'retrieve-only' );
+			$revisionLookup = $wikibaseRepo->getEntityRevisionLookup(
+				$this->getEntityRevisionLookupCacheMode()
+			);
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,

@@ -51,6 +51,7 @@ abstract class DumpScript extends Maintenance {
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
+		$this->addOption( 'no-cache', "If this is set, don't try to read from an EntityRevisionCache.", false, false );
 	}
 
 	public function setDumpEntitiesServices( SqlEntityIdPagerFactory $sqlEntityIdPagerFactory ) {
@@ -208,6 +209,19 @@ abstract class DumpScript extends Maintenance {
 	 */
 	protected function getRedirectMode() {
 		return EntityIdPager::NO_REDIRECTS;
+	}
+
+	/**
+	 * Cache flag for use in Store::getEntityRevisionLookup.
+	 *
+	 * @return string One of "retrieve-only" and "uncached"
+	 */
+	protected function getEntityRevisionLookupCacheMode() {
+		if ( $this->getOption( 'no-cache', false ) ) {
+			return 'uncached';
+		} else {
+			return 'retrieve-only';
+		}
 	}
 
 	/**

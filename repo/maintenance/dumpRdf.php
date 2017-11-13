@@ -120,7 +120,7 @@ class DumpRdf extends DumpScript {
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRdfBuilderFactory(),
-				$wikibaseRepo->getEntityRevisionLookup( 'retrieve-only' ),
+				$wikibaseRepo->getEntityRevisionLookup( $this->getEntityRevisionLookupCacheMode() ),
 				$wikibaseRepo->getRdfVocabulary(),
 				$wikibaseRepo->getEntityContentFactory()
 			);
