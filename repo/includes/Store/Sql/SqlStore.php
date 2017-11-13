@@ -5,6 +5,7 @@ namespace Wikibase;
 use HashBagOStuff;
 use ObjectCache;
 use Revision;
+use Hooks;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -320,12 +321,16 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::newEntityByTitleLookup
+	 * @see Store::getEntityByLinkedTitleLookup
 	 *
 	 * @return EntityByLinkedTitleLookup
 	 */
 	public function getEntityByLinkedTitleLookup() {
-		return $this->newSiteLinkStore();
+		$lookup = $this->newSiteLinkStore();
+
+		Hooks::run( 'GetEntityByLinkedTitleLookup', [ &$lookup ] );
+
+		return $lookup;
 	}
 
 	/**
