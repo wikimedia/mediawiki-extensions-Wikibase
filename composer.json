@@ -76,8 +76,8 @@
 		"fix": "phpcbf",
 		"test": [
 			"composer validate --no-interaction",
-			"parallel-lint . --exclude vendor --exclude node_modules",
-			"phpcs -p -s"
+			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
+			"phpcs -p -s --ignore=.git"
 		]
 	}
 }
