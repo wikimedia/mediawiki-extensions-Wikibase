@@ -66,6 +66,9 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
 }
 
+// Load autoload info as long as extension classes are not PSR-4-autoloaded
+require_once __DIR__  . '/autoload.php';
+
 call_user_func( function() {
 	global $wgAPIListModules,
 		$wgAPIMetaModules,
