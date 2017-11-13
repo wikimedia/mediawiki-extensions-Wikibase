@@ -70,7 +70,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return EntityByLinkedTitleLookup
 	 */
-	private function getEntityByTitleLookupMock( $itemId ) {
+	private function getEntityByLinkedTitleLookupMock( $itemId ) {
 		$siteLinkLookupMock = $this->getMock( EntityByLinkedTitleLookup::class );
 
 		$siteLinkLookupMock->expects( $this->any() )
@@ -87,7 +87,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
-			$this->getEntityByTitleLookupMock( new ItemId( 'Q123' ) ),
+			$this->getEntityByLinkedTitleLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -110,7 +110,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			$this->getApiBaseMock(),
 		// Two values should be added: The normalization and the failure to find an entity
 			$this->getResultBuilderMock( 1 ),
-			$this->getEntityByTitleLookupMock( null ),
+			$this->getEntityByLinkedTitleLookupMock( null ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -133,7 +133,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			$this->getApiBaseMock(),
 		// Two result values should be added (for both titles which wont be found)
 			$this->getResultBuilderMock(),
-			$this->getEntityByTitleLookupMock( false ),
+			$this->getEntityByLinkedTitleLookupMock( false ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -153,7 +153,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
-			$this->getEntityByTitleLookupMock( 1 ),
+			$this->getEntityByLinkedTitleLookupMock( 1 ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -190,7 +190,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock( $expectedAddNormalizedCalls ),
-			$this->getEntityByTitleLookupMock( $expectedEntityId ),
+			$this->getEntityByLinkedTitleLookupMock( $expectedEntityId ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
@@ -228,7 +228,7 @@ class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
-			$this->getEntityByTitleLookupMock( new ItemId( 'Q123' ) ),
+			$this->getEntityByLinkedTitleLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);

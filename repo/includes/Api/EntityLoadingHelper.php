@@ -91,8 +91,8 @@ class EntityLoadingHelper {
 		$this->entityIdParam = $entityIdParam;
 	}
 
-	public function setEntityByLinkedTitleLookup( EntityByLinkedTitleLookup $entityByTitleLookup ) {
-		$this->entityByLinkedTitleLookup = $entityByTitleLookup;
+	public function setEntityByLinkedTitleLookup( EntityByLinkedTitleLookup $lookup ) {
+		$this->entityByLinkedTitleLookup = $lookup;
 	}
 
 	/**
