@@ -128,6 +128,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_2db0d6d7",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2017-11-13T16:44:08Z",
+      "side": 1,
+      "message": "D\u0027oh. So much config on so many fields... All the \"lowercase\" filters on the *text* field in fact don\u0027t have or need any config. However, the ones on the \"lowercase\" field do, and if you don\u0027t have the ICU plugin installed, the ones on the \"plain\" field do, too. So I withdraw the comment/suggestion! Sorry.",
+      "parentUuid": "6e5a8fde_0d1dda65",
+      "range": {
+        "startLine": 125,
+        "startChar": 24,
+        "endLine": 125,
+        "endChar": 33
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_d24443bf",
         "filename": "repo/tests/phpunit/data/analyzer/en-ru-es-de-zh.expected",
         "patchSetId": 29
