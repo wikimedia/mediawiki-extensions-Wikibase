@@ -47,31 +47,6 @@
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
 	},
-	"autoload": {
-		"classmap": [
-			"client/WikibaseClient.hooks.php",
-			"client/tests/phpunit/MockClientStore.php",
-			"lib/includes/",
-			"lib/WikibaseLib.hooks.php",
-			"lib/maintenance/",
-			"repo/includes/",
-			"repo/maintenance/",
-			"repo/tests/phpunit/maintenance/MockAddUnits.php",
-			"repo/Wikibase.hooks.php"
-		],
-		"psr-4": {
-			"Wikibase\\Client\\": "client/includes",
-			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
-			"Wikibase\\DataAccess\\": "data-access/src",
-			"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit",
-			"Wikibase\\Lib\\": "lib/includes",
-			"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit",
-			"Wikibase\\Repo\\": "repo/includes",
-			"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes",
-			"Wikibase\\View\\": "view/src",
-			"Wikibase\\View\\Tests\\": "view/tests/phpunit"
-		}
-	},
 	"scripts": {
 		"fix": "phpcbf",
 		"test": [
