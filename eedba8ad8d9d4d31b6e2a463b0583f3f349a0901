@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_72a30ffe",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-13T13:48:41Z",
+      "side": 1,
+      "message": "the whole method could possibly also be removed, if this was to significantly influence the performance. OTOH, it is probably good to have this kind of \"logic\" encapsulated in a method here, not call methods on $id everywhere",
+      "revId": "eedba8ad8d9d4d31b6e2a463b0583f3f349a0901",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
