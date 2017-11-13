@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"HairyFotr",
+			"Pinky sl"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "prazno",
+	"valueview-expert-globecoordinateinput-precision": "Natančnost:",
+	"valueview-expert-globecoordinateinput-nullprecision": "neopredeljeno",
+	"valueview-expert-globecoordinateinput-customprecision": "posebno ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "gregorijanski",
+	"valueview-expert-timevalue-calendar-julian": "julijanski",
+	"valueview-expert-timeinput-precision": "natančnost",
+	"valueview-expert-timeinput-calendar": "Koledar:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Jezik (obvezno):",
+	"valueview-expertextender-unitsuggester-label": "Enota (neobvezno)",
+	"valueview-preview-label": "bo izpisano kot:",
+	"valueview-preview-novalue": "nobena veljavna vrednost ni prepoznana",
+	"valueview-listrotator-manually": "nastavi ročno"
+}
