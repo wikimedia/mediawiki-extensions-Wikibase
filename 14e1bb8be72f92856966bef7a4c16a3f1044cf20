@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e5a8fde_12173b57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2017-11-13T15:42:35Z",
+      "side": 1,
+      "message": "Is it possible to specify all the ones (not just the stemming ones) that are not the \"default\" of standard tokenizer + icu_normalizer + word_break_helper? Seems like it would cut down on most of the different analyzers.",
+      "range": {
+        "startLine": 16,
+        "startChar": 18,
+        "endLine": 16,
+        "endChar": 32
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_72c22f5f",
         "filename": "docs/options.wiki",
         "patchSetId": 29
@@ -19,6 +42,29 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_32e83777",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2017-11-13T15:42:35Z",
+      "side": 1,
+      "message": "This list looks good.",
+      "range": {
+        "startLine": 264,
+        "startChar": 3,
+        "endLine": 264,
+        "endChar": 14
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_f2d37fd5",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 29
@@ -30,6 +76,52 @@
       "writtenOn": "2017-11-13T15:24:09Z",
       "side": 1,
       "message": "why is this logic different from the char filter one?\nI\u0027d be for not checking that the filter used by the langConfig exists in the filter definitions.\nOr (better?) fail if it does not. Silently ignoring this broken analyzer is a bad idea imo.",
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_92900bf3",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2017-11-13T15:42:35Z",
+      "side": 1,
+      "message": "Some languages do have custom tokenizers. Chinese and Hebrew have their own tokenizers, and several languages like Tibetan (bo) use the icu_tokenizer. Some filters, like cjk_bigram (inside cjk analyzer) also radically alter the tokens. Not sure whether any of that matters here.",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 58
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_0d1dda65",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2017-11-13T15:42:35Z",
+      "side": 1,
+      "message": "It\u0027s not structurally *guaranteed*, but it is true that all of our \"lowercase\" filters are the same.\n\nI\u0027m 99% sure that all the lowercase filters as specified are actually the same. The two lowercase language settings that are specified—Greek and Turkish—don\u0027t need to be, because they are built into the greek and turkish analyzers. I just verified that that\u0027s the case, so I will remove them. If they ever get unpacked, they will also be name-spaced.",
+      "range": {
+        "startLine": 125,
+        "startChar": 24,
+        "endLine": 125,
+        "endChar": 33
+      },
       "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
