@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_f8c59d40",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-13T20:31:46Z",
+      "side": 1,
+      "message": "I think the idea here is that filter can be something that we defined (and then it\u0027d be in $langConfig) or something that was defined externally, not by language config, and then we should just leave it alone, hoping that whoever defined it added it to analyzer config.",
+      "parentUuid": "6e5a8fde_f2d37fd5",
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_92900bf3",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 29
@@ -234,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_58db9125",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/AnalysisConfigBuilderTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-13T20:31:46Z",
+      "side": 1,
+      "message": "\u003e You\u0027re afraid of creating a hard dep where tests would fail whenever we change cirrus analysis config?\n\nYes.",
+      "parentUuid": "6e5a8fde_726b0fef",
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_52b93377",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/AnalysisConfigBuilderTest.php",
         "patchSetId": 29
@@ -268,6 +304,54 @@
       "writtenOn": "2017-11-13T15:24:09Z",
       "side": 1,
       "message": "would be better to set this to \u0027default\u0027\nsee my comment in the fixture file",
+      "range": {
+        "startLine": 79,
+        "startChar": 68,
+        "endLine": 79,
+        "endChar": 71
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_78076d85",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/AnalysisConfigBuilderTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-13T20:31:46Z",
+      "side": 1,
+      "message": "Good point, added check in setup.",
+      "parentUuid": "6e5a8fde_52b93377",
+      "range": {
+        "startLine": 79,
+        "startChar": 16,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_18f8b979",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/AnalysisConfigBuilderTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-13T20:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e5a8fde_b28bc7c3",
       "range": {
         "startLine": 79,
         "startChar": 68,
