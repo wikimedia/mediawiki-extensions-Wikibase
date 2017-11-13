@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_954f9438",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-13T18:46:27Z",
+      "side": 1,
+      "message": "the problem is when I am using them, I don\u0027t know whether they are \"standard\" or not, and we have several options for \"standard\" - with and without ICU, etc. So I still have to have per-language ones, even though many of them look alike.",
+      "parentUuid": "6e5a8fde_12173b57",
+      "range": {
+        "startLine": 16,
+        "startChar": 18,
+        "endLine": 16,
+        "endChar": 32
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_72c22f5f",
         "filename": "docs/options.wiki",
         "patchSetId": 29
@@ -93,6 +117,30 @@
       "writtenOn": "2017-11-13T15:42:35Z",
       "side": 1,
       "message": "Some languages do have custom tokenizers. Chinese and Hebrew have their own tokenizers, and several languages like Tibetan (bo) use the icu_tokenizer. Some filters, like cjk_bigram (inside cjk analyzer) also radically alter the tokens. Not sure whether any of that matters here.",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 58
+      },
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_1552c4de",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-13T18:46:27Z",
+      "side": 1,
+      "message": "I mean that there are no tokenizers that are constructed by us. If it\u0027s tokenizer like \"hebrew\" we can just copy the config.",
+      "parentUuid": "6e5a8fde_92900bf3",
       "range": {
         "startLine": 123,
         "startChar": 34,
