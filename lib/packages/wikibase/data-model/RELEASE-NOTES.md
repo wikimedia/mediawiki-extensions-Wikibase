@@ -18,6 +18,12 @@ This release removes integers as acceptable entity IDs.
 * Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
   `hasLinkToSite`, and `removeSiteLink`.
 
+## Version 7.3.0 (2017-11-13)
+
+* Performance optimizations on `EntityId`:
+  	* Added protected `$repositoryName` and `$localPart` properties
+  	* Added protected `extractRepositoryNameAndLocalPart`
+
 ## Version 7.2.0 (2017-10-23)
 
 * Performance optimizations on methods critical for dump generation:

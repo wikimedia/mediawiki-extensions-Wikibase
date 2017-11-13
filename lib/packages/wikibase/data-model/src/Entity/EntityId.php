@@ -16,16 +16,34 @@ abstract class EntityId implements Comparable, Serializable {
 
 	protected $serialization;
 
+	/**
+	 * @since 7.3
+	 *
+	 * @var string
+	 */
+	protected $repositoryName;
+
+	/**
+	 * @since 7.3
+	 *
+	 * @var string
+	 */
+	protected $localPart;
+
 	const PATTERN = '/^:?(\w+:)*[^:]+\z/';
 
 	/**
 	 * @since 6.2
 	 *
 	 * @param string $serialization
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $serialization ) {
 		self::assertValidSerialization( $serialization );
 		$this->serialization = self::normalizeIdSerialization( $serialization );
+
+		list ( $this->repositoryName, $this->localPart ) = self::extractRepositoryNameAndLocalPart( $serialization );
 	}
 
 	private static function assertValidSerialization( $serialization ) {
@@ -63,12 +81,31 @@ abstract class EntityId implements Comparable, Serializable {
 	 * @since 6.2
 	 *
 	 * @param string $serialization
+	 *
+	 * @throws InvalidArgumentException
 	 * @return string[] Array containing the serialization split into 3 parts.
 	 */
 	public static function splitSerialization( $serialization ) {
 		self::assertValidSerialization( $serialization );
 
-		$parts = explode( ':', self::normalizeIdSerialization( $serialization ) );
+		return self::extractSerializationParts( self::normalizeIdSerialization( $serialization ) );
+	}
+
+	/**
+	 * Splits the given ID serialization into an array with the following three elements:
+	 *  - the repository name as the first element (empty string for local repository)
+	 *  - any parts of the ID serialization but the repository name and the local ID (if any, empty string
+	 *    if nothing else present)
+	 *  - the local ID
+	 * Note: this method does not perform any validation of the given input. Calling code should take
+	 * care of this!
+	 *
+	 * @param string $serialization
+	 *
+	 * @return string[]
+	 */
+	private static function extractSerializationParts( $serialization ) {
+		$parts = explode( ':', $serialization );
 		$localPart = array_pop( $parts );
 		$repoName = array_shift( $parts );
 		$prefixRemainder = implode( ':', $parts );
@@ -86,9 +123,9 @@ abstract class EntityId implements Comparable, Serializable {
 	 * @since 6.2
 	 *
 	 * @param string[] $parts
-	 * @return string
 	 *
 	 * @throws InvalidArgumentException
+	 * @return string
 	 */
 	public static function joinSerialization( array $parts ) {
 		if ( end( $parts ) === '' ) {
@@ -112,9 +149,7 @@ abstract class EntityId implements Comparable, Serializable {
 	 * @return string
 	 */
 	public function getRepositoryName() {
-		$parts = self::splitSerialization( $this->serialization );
-
-		return $parts[0];
+		return $this->repositoryName;
 	}
 
 	/**
@@ -125,9 +160,7 @@ abstract class EntityId implements Comparable, Serializable {
 	 * @return string
 	 */
 	public function getLocalPart() {
-		$parts = self::splitSerialization( $this->serialization );
-
-		return self::joinSerialization( [ '', $parts[1], $parts[2] ] );
+		return $this->localPart;
 	}
 
 	/**
@@ -144,6 +177,7 @@ abstract class EntityId implements Comparable, Serializable {
 
 	/**
 	 * @param string $id
+	 *
 	 * @return string
 	 */
 	private static function normalizeIdSerialization( $id ) {
@@ -177,6 +211,22 @@ abstract class EntityId implements Comparable, Serializable {
 
 		return $target instanceof self
 			&& $target->serialization === $this->serialization;
+	}
+
+	/**
+	 * Returns a pair (repository name, local part of ID) from the given ID serialization.
+	 * Note: this does not perform any validation of the given input. Calling code should take
+	 * care of this!
+	 *
+	 * @since 7.3
+	 *
+	 * @param string $serialization
+	 *
+	 * @return string[] Array of form [ string $repositoryName, string $localPart ]
+	 */
+	protected static function extractRepositoryNameAndLocalPart( $serialization ) {
+		$parts = explode( ':', $serialization, 2 );
+		return isset( $parts[1] ) ? $parts : [ '', $parts[0] ];
 	}
 
 }
