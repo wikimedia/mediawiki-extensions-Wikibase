@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_75f458ee",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:13:24Z",
+      "side": 1,
+      "message": "last line should be: $query-\u003eaddFilter( $filter );",
+      "parentUuid": "6e5a8fde_7529b884",
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_2d43f668",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 20
@@ -138,6 +156,29 @@
         "startChar": 16,
         "endLine": 167,
         "endChar": 23
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_b58f3077",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:13:24Z",
+      "side": 1,
+      "message": "never used",
+      "range": {
+        "startLine": 169,
+        "startChar": 2,
+        "endLine": 169,
+        "endChar": 13
       },
       "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
