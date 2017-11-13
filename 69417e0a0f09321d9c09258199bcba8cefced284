@@ -1,0 +1,262 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_8da78a4b",
+        "filename": "repo/config/EntitySearchProfiles.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "nitpick: filename should be EntityFullTextSearchProfiles.php ?",
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_0d72bae2",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "nitpick: fulltextSearchProfiles",
+      "range": {
+        "startLine": 261,
+        "startChar": 3,
+        "endLine": 261,
+        "endChar": 17
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_35834059",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "probably better to rename as $labelsNearMatch",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 114,
+        "endChar": 9
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_ed5e3e47",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "no stems for fallbacks?",
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_95bb1423",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "this query is misleading you should remove it",
+      "range": {
+        "startLine": 165,
+        "startChar": 2,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_7529b884",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "this filter is perhaps too restrictive and does not use the stem fields you indexed.\n\nWhat you could do is prepare another list of fields (without boosts this time) but with the list of stemmed description fields.\n   $stemFilterFields \u003d [];\n   if( empty( $this-\u003esearchSettings[\u0027useStemming\u0027][$languageCode][\u0027query\u0027]) ) {\n        // [snipped]\n   } else {\n              $stemFilterFields[] \u003d \"descriptions.{$languageCode}\";\n   }\n\n   $filter \u003d new BoolQuery();\n   $filter-\u003eaddShould( $this-\u003ebuildSimpleAllFilter( $term ) );\n   foreach( $stemFilterFields as $filterField ) {\n      $m \u003d new Match();\n      $m-\u003esetFieldQuery( $filterField, $term );\n      $m-\u003esetFieldOperator( $field, \u0027AND\u0027 );\n      $filter-\u003eaddShould( $m );\n   }\n   $query-\u003eaddFilter( $m );",
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_2d43f668",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "addShould",
+      "range": {
+        "startLine": 167,
+        "startChar": 16,
+        "endLine": 167,
+        "endChar": 23
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_6d200ea9",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "you should not use a const query for tokenized fields, a Match query is preferable",
+      "range": {
+        "startLine": 174,
+        "startChar": 50,
+        "endLine": 174,
+        "endChar": 69
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_0d171a57",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "same here, a match query is better",
+      "range": {
+        "startLine": 178,
+        "startChar": 49,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_2d1a167f",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 180,
+        "startChar": 49,
+        "endLine": 180,
+        "endChar": 68
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_d59c2cba",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "should be $dismax (or $labelsNearMatch if you rename it)",
+      "range": {
+        "startLine": 189,
+        "startChar": 21,
+        "endLine": 189,
+        "endChar": 33
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_758d3884",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-13T18:11:18Z",
+      "side": 1,
+      "message": "the filter should be added to $query not $labelsQuery",
+      "range": {
+        "startLine": 189,
+        "startChar": 2,
+        "endLine": 189,
+        "endChar": 8
+      },
+      "revId": "69417e0a0f09321d9c09258199bcba8cefced284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
