@@ -52,6 +52,10 @@ if ( is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/../vendor/autoload.php';
 }
 
+// Load autoload info as long as extension classes are not PSR-4-autoloaded
+require_once __DIR__  . '/autoload.php';
+require_once __DIR__  . '/../data-access/autoload.php';
+
 call_user_func( function() {
 	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
