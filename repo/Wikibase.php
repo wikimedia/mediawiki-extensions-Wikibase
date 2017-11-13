@@ -71,6 +71,9 @@ if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 	throw new Exception( 'Wikibase depends on WikibaseView.' );
 }
 
+// Load autoload info as long as extension classes are not PSR-4-autoloaded
+require_once __DIR__  . '/autoload.php';
+
 call_user_func( function() {
 	global $wgAPIListModules,
 		$wgAPIModules,
