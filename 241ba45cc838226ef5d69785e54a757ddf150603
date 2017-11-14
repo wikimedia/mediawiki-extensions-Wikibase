@@ -351,6 +351,30 @@
       "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_a9f6f557",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-14T11:37:41Z",
+      "side": 1,
+      "message": "Not sure if having \"rdf…\" in the front is better. I still wonder why the word \"keys\" appears here? Isn\u0027t this the maximum size for two MRU caches? \"maxRdfNameCacheSize\"?\n\nAlso, as argued, I believe both caches are not needed any more. So we could as well remove all this.",
+      "parentUuid": "6e5a8fde_17172d57",
+      "range": {
+        "startLine": 1045,
+        "startChar": 34,
+        "endLine": 1045,
+        "endChar": 53
+      },
+      "revId": "241ba45cc838226ef5d69785e54a757ddf150603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
