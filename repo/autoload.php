@@ -357,6 +357,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Tests\\Search\\Elastic\\Fields\\WikibaseNumericFieldTest' => __DIR__ . '/tests/phpunit/includes/Search/Elastic/Fields/WikibaseNumericFieldTest.php',
 	'Wikibase\\Repo\\Tests\\Specials\\HtmlAssertionHelpers' => __DIR__ . '/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php',
 	'Wikibase\\Repo\\Tests\\Specials\\SpecialModifyTermTestCase' => __DIR__ . '/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php',
+	'Wikibase\\Repo\\Tests\\Specials\\SpecialNewEntityTest' => __DIR__ . '/tests/phpunit/includes/Specials/SpecialNewEntityTest.php',
 	'Wikibase\\Repo\\Tests\\Specials\\SpecialWikibaseRepoPageTestBase' => __DIR__ . '/tests/phpunit/includes/Specials/SpecialWikibaseRepoPageTestBase.php',
 	'Wikibase\\Repo\\Tests\\Store\\MockEntityIdPager' => __DIR__ . '/tests/phpunit/includes/Store/MockEntityIdPager.php',
 	'Wikibase\\Repo\\Tests\\Validators\\TestValidator' => __DIR__ . '/tests/phpunit/includes/Validators/TestValidator.php',

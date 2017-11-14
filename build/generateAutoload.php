@@ -75,6 +75,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/Store/MockEntityIdPager.php',
 				'tests/phpunit/includes/Specials/HtmlAssertionHelpers.php',
 				'tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php',
+				'tests/phpunit/includes/Specials/SpecialNewEntityTest.php',
 				'tests/phpunit/includes/Specials/SpecialWikibaseRepoPageTestBase.php',
 				'tests/phpunit/includes/Validators/TestValidator.php',
 				'tests/phpunit/maintenance/MockAddUnits.php',
