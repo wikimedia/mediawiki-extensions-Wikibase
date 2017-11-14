@@ -53,4 +53,12 @@ class DescriptionsField implements WikibaseIndexField {
 		return $data;
 	}
 
+	public function getEngineHints( SearchEngine $engine ) {
+		if ( !( $engine instanceof CirrusSearch ) ) {
+			// For now only Cirrus/Elastic is supported
+			return [];
+		}
+		return [ \CirrusSearch\Search\CirrusIndexField::NOOP_HINT => "equals" ];
+	}
+
 }
