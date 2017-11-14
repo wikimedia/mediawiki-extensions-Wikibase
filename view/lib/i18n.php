@@ -8,6 +8,7 @@ return call_user_func( function() {
 
 	$wgMessagesDirs['WikibaseView'] = array_merge(
 		$wgMessagesDirs['WikibaseView'],
-		 [ __DIR__ . '/wikibase-data-values-value-view/i18n' ]
+		[ __DIR__ . '/wikibase-data-values-value-view/i18n' ],
+		[ __DIR__ . '/wikibase-data-types/i18n' ]
 	);
 } );
