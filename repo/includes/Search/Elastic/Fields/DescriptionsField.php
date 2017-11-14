@@ -1,6 +1,8 @@
 <?php
+
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use CirrusSearch;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -51,6 +53,14 @@ class DescriptionsField implements WikibaseIndexField {
 			$data[$language] = $desc->getText();
 		}
 		return $data;
+	}
+
+	public function getEngineHints( SearchEngine $engine ) {
+		if ( !( $engine instanceof CirrusSearch ) ) {
+			// For now only Cirrus/Elastic is supported
+			return [];
+		}
+		return [ \CirrusSearch\Search\CirrusIndexField::NOOP_HINT => "equals" ];
 	}
 
 }
