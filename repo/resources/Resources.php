@@ -1,6 +1,6 @@
 <?php
 
-use DataTypes\Modules\DataTypesModule;
+use Wikibase\Repo\Modules\DataTypesModule;
 use Wikibase\Repo\Modules\MediaWikiConfigModule;
 use Wikibase\Repo\WikibaseRepo;
 
