@@ -18,7 +18,7 @@ use Wikibase\Client\NamespaceChecker;
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 

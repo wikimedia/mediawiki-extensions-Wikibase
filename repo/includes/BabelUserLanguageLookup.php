@@ -13,7 +13,7 @@ use Wikibase\Lib\UserLanguageLookup;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Marius Hoch
  */
 class BabelUserLanguageLookup implements UserLanguageLookup {

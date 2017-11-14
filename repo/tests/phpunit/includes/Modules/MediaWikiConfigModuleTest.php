@@ -14,7 +14,7 @@ use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class MediaWikiConfigModuleTest extends PHPUnit_Framework_TestCase {
 

@@ -15,7 +15,7 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
  *
  * @license GPL-2.0+
  * @author Stas Malyshev
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class DateTimeValueCleanerTest extends \PHPUnit_Framework_TestCase {
 

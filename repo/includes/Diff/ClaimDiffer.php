@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ClaimDiffer {
 

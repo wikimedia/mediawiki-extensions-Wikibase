@@ -15,7 +15,7 @@ use Wikibase\Lib\EntityIdComposer;
  * @group Wikibase
  *
  * @license GNU GPL v2+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 

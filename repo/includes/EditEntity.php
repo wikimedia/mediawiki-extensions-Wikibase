@@ -28,7 +28,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EditEntity {
 

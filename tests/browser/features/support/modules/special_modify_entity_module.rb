@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 # Wikidata UI tests
 #
-# Author:: Thiemo Mättig
+# Author:: Thiemo Kreuz
 # License:: GNU GPL v2+
 #
 # module for the Special:ModifyEntity page

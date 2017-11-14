@@ -13,7 +13,7 @@ use Wikibase\Repo\Parsers\MonolingualTextParser;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 

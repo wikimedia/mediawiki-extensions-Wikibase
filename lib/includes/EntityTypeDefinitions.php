@@ -17,7 +17,7 @@ use InvalidArgumentException;
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityTypeDefinitions {
 

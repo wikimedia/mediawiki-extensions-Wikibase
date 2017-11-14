@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityRevision;
  * @group WikibaseStore
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityRevisionTest extends PHPUnit_Framework_TestCase {
 

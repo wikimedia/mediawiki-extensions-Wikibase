@@ -11,7 +11,7 @@ namespace Wikibase\Lib;
  *
  * @license GPL-2.0+
  * @author Aleksey Bekh-Ivanov
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 interface FormatableSummary {
 

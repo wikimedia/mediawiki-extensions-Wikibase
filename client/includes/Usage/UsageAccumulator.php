@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 abstract class UsageAccumulator {
 

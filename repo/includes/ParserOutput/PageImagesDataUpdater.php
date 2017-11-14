@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
  * tries to find the one "best" image on an entity page, also referred to as the "lead image".
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class PageImagesDataUpdater implements StatementDataUpdater {
 

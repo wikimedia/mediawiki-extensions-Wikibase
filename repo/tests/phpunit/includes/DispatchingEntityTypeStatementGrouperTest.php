@@ -17,7 +17,7 @@ use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCase {
 

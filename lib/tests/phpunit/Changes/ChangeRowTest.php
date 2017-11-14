@@ -16,7 +16,7 @@ use Wikibase\EntityChange;
  * @group WikibaseChange
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ChangeRowTest extends MediaWikiTestCase {
 

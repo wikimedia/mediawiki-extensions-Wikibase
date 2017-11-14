@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
  * A dedicated formatter for concept URIs referring to entities on a vocabulary repository.
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class VocabularyUriFormatter implements ValueFormatter {
 

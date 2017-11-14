@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 interface EntityTitleStoreLookup extends EntityTitleLookup {
 

@@ -16,7 +16,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * @license GPL-2.0+
  * @author Addshore
  * @author Marius Hoch < hoo@online.de >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 

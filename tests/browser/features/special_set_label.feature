@@ -1,6 +1,6 @@
 # Wikidata UI tests
 #
-# Author:: Thiemo Mättig
+# Author:: Thiemo Kreuz
 # License:: GNU GPL v2+
 #
 # feature definition for the Special:SetLabel page tests
