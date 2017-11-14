@@ -9,6 +9,7 @@ return call_user_func( function() {
 		include __DIR__ . '/resources/wikibase-data-values.php',
 		include __DIR__ . '/resources/wikibase-serialization.php',
 		include __DIR__ . '/resources/wikibase-api.php',
+		include __DIR__ . '/resources/wikibase-data-types.php',
 		include __DIR__ . '/resources/wikibase-data-values-value-view.php'
 	);
 } );
