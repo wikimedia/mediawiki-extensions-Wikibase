@@ -73,6 +73,11 @@ if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__  . '/autoload.php';
+// Nasty hack: some repo's tests rely on classes defined in Client! Load it in repo-only mode to have tests pass
+if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
+	global $wgAutoloadClasses;
+	$wgAutoloadClasses['Wikibase\\Client\\Store\\TitleFactory'] = __DIR__ . '/../client/includes/Store/TitleFactory.php';
+}
 
 call_user_func( function() {
 	global $wgAPIListModules,
