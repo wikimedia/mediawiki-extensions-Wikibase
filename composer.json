@@ -52,7 +52,9 @@
 		"test": [
 			"composer validate --no-interaction",
 			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
+			"@autoload",
 			"phpcs -p -s --ignore=.git"
-		]
+		],
+		"autoload": "build/validateAutoload.sh"
 	}
 }
