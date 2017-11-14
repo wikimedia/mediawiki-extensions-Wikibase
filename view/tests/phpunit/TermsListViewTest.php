@@ -25,7 +25,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class TermsListViewTest extends PHPUnit_Framework_TestCase {

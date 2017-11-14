@@ -24,7 +24,7 @@ use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 

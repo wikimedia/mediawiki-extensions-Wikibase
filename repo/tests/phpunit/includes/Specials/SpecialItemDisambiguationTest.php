@@ -29,7 +29,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 

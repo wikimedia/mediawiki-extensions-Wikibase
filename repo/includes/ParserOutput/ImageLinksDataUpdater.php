@@ -15,7 +15,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ImageLinksDataUpdater implements StatementDataUpdater {
 

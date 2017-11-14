@@ -37,7 +37,7 @@ use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
  * @group WikibaseAPI
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 

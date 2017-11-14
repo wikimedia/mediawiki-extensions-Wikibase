@@ -30,7 +30,7 @@ use Wikibase\View\TermsListView;
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 

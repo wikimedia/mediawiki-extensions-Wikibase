@@ -21,7 +21,7 @@ use Wikibase\Repo\ParserOutput\StatementDataUpdater;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 

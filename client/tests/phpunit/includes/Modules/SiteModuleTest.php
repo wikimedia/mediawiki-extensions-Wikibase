@@ -13,7 +13,7 @@ use Wikibase\Client\Modules\SiteModule;
  * @group WikibaseClient
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SiteModuleTest extends PHPUnit_Framework_TestCase {
 

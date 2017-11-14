@@ -12,7 +12,7 @@ use RuntimeException;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class NTriplesRdfTestHelper {
 

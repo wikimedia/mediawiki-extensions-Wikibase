@@ -19,7 +19,7 @@ use Wikibase\Lib\HtmlTimeFormatter;
  *
  * @license GPL-2.0+
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  * A dummy entity for tests only.
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class StatementListProviderDummy implements EntityDocument, StatementListProvider {
 

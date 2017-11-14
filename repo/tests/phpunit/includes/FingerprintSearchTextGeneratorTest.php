@@ -13,7 +13,7 @@ use Wikibase\Repo\FingerprintSearchTextGenerator;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 

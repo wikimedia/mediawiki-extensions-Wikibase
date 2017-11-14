@@ -20,7 +20,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Stas Malyshev
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 

@@ -22,7 +22,7 @@ use Wikibase\Store\SubscriptionLookup;
  *
  * @license GPL-2.0+
  * @author Amir Sarabadani <ladsgroup@gmail.com>
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 

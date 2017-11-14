@@ -13,7 +13,7 @@ use ValueFormatters\ValueFormatterBase;
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  *
  * @todo move me to DataValues-time
  */

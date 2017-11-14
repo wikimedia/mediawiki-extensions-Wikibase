@@ -16,7 +16,7 @@ use Wikibase\Repo\Api\GetClaimsStatementFilter;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 

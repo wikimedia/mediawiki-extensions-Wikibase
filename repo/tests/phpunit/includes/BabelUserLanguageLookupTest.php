@@ -11,7 +11,7 @@ use User;
  * @group Database
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 

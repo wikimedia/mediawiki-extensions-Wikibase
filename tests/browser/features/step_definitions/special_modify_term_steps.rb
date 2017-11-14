@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 # Wikidata UI tests
 #
-# Author:: Thiemo Mättig
+# Author:: Thiemo Kreuz
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #

@@ -24,7 +24,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @group WikibaseView
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 

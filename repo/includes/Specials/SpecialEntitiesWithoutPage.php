@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 

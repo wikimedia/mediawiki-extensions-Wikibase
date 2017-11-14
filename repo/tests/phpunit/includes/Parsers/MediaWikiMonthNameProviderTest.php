@@ -13,7 +13,7 @@ use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
  * @group TimeParsers
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class MediaWikiMonthNameProviderTest extends PHPUnit_Framework_TestCase {
 

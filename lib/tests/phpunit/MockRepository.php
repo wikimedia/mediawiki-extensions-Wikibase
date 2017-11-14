@@ -41,7 +41,7 @@ use Wikibase\Lib\Store\RedirectRevision;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRedirectLookup,
 	EntityRevisionLookup, EntityStore, PropertyDataTypeLookup, SiteLinkLookup {

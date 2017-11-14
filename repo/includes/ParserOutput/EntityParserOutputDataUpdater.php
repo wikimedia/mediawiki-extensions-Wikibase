@@ -15,7 +15,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityParserOutputDataUpdater {
 
