@@ -9,7 +9,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\ClaimSummaryBuilder' => __DIR__ . '/includes/ClaimSummaryBuilder.php',
 	'Wikibase\\Content\\DeferredCopyEntityHolder' => __DIR__ . '/includes/Content/DeferredCopyEntityHolder.php',
 	'Wikibase\\Content\\DeferredDecodingEntityHolder' => __DIR__ . '/includes/Content/DeferredDecodingEntityHolder.php',
-	'Wikibase\\Content\\EntityHolder' => __DIR__ . '/includes/Content/EntityHolder.php',
 	'Wikibase\\Content\\EntityInstanceHolder' => __DIR__ . '/includes/Content/EntityInstanceHolder.php',
 	'Wikibase\\CopyrightMessageBuilder' => __DIR__ . '/includes/CopyrightMessageBuilder.php',
 	'Wikibase\\CreateBlacklistedItems' => __DIR__ . '/maintenance/createBlacklistedItems.php',
