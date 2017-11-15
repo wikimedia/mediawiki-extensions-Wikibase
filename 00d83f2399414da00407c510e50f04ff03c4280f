@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e578bb4_1e301de5",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-15T14:30:22Z",
+      "side": 1,
+      "message": "not sure it adds much value, we already set high scores when we match (all_near_match) set by cirrus.\nInstead you could try to reuse your code that munges the query (extract the entityId when mentioned inside an url) and add this query ass part of the filters and the scoring queries",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 13
+      },
+      "revId": "00d83f2399414da00407c510e50f04ff03c4280f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e578bb4_9e696dbf",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-15T14:30:22Z",
+      "side": 1,
+      "message": "this name is now misleading it\u0027s not used as a filter, perhaps buildSimpleAllQuery?",
+      "range": {
+        "startLine": 250,
+        "startChar": 18,
+        "endLine": 250,
+        "endChar": 38
+      },
+      "revId": "00d83f2399414da00407c510e50f04ff03c4280f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e578bb4_be578904",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-15T14:30:22Z",
+      "side": 1,
+      "message": "why not reuse buildFieldMatch ?",
+      "revId": "00d83f2399414da00407c510e50f04ff03c4280f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
