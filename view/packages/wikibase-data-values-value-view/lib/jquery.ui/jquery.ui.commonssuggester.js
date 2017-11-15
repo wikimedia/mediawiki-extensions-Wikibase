@@ -178,11 +178,9 @@
 		_createBackgroundImage: function ( fileName ) {
 			// Height alone is ignored, width must be set to something.
 			// We accept to truncate 50% and only show the center 50% of the images area.
-			return 'url(https://commons.wikimedia.org/wiki/Special:Filepath/'
+			return 'url("https://commons.wikimedia.org/wiki/Special:Filepath/'
 				+ encodeURIComponent( fileName )
-					.replace( /\(/g, '%28' )
-					.replace( /\)/g, '%29' )
-				+ '?width=100&height=50)';
+				+ '?width=100&height=50")';
 		}
 
 	} );

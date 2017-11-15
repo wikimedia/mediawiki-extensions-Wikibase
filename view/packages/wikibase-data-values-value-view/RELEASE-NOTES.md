@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.22.1 (2017-11-15)
+* Fixed `jQuery.ui.commonssuggester` not always displaying all thumbnails.
+
 ## 0.22.0 (2017-10-16)
 * `jQuery.valueview.ExpertExtender.Listrotator` constructor requires a `MessageProvider` now.
 * `jQuery.ui.listrotator` requires a `messageProvider` option now.
