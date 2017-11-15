@@ -22,6 +22,30 @@
       "revId": "ecfdcbed828692bec5206490040f8aad48331765",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e578bb4_d9e93f80",
+        "filename": "repo/includes/Content/ItemHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-15T17:27:32Z",
+      "side": 0,
+      "message": "Yes, intentional. Our code fails hard if this is null, it currently just fails later. Core never calls this with null, afaict.",
+      "parentUuid": "4e578bb4_f9b67bd6",
+      "range": {
+        "startLine": 112,
+        "startChar": 62,
+        "endLine": 112,
+        "endChar": 68
+      },
+      "revId": "ecfdcbed828692bec5206490040f8aad48331765",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
