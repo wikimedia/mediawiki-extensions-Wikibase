@@ -111,7 +111,7 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
 	}
 
-	protected function getTestItemContent() {
+	protected function getTestContent() {
 		$item = new Property( null, null, 'string' );
 		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
 		$item->getStatements()->addNewStatement(
@@ -123,6 +123,17 @@ class PropertyHandlerTest extends EntityHandlerTest {
 
 	protected function getExpectedSearchIndexFields() {
 		return [ 'label_count', 'statement_count' ];
+	}
+
+	public function testDataForSearchIndex() {
+		$handler = $this->getHandler();
+		$engine = $this->getMock( \SearchEngine::class );
+
+		$page = $this->getMockWikiPage( $handler );
+
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$this->assertSame( 1, $data['label_count'], 'label_count' );
+		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
 	}
 
 }
