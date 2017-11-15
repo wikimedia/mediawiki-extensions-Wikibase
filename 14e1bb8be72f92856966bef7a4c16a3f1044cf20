@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "4e578bb4_6bf4f283",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-15T18:37:35Z",
+      "side": 1,
+      "message": "But aren\u0027t there built-in filters? It can be that we refer to filter that we didn\u0027t define in this config.",
+      "parentUuid": "4e578bb4_33075221",
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_92900bf3",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 29
