@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4e578bb4_33075221",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-15T14:07:20Z",
+      "side": 1,
+      "message": "then I think the check is wrong and should be like what you do for char_filter:\nif the analyzer uses a filter that is defined in the global config ($config) skip it, otherwise add it\n\nin other words : \n   if ( isset( $langConfig[\u0027filter\u0027][$filter] ) ) {\nshould be:\n   if ( !isset( $config[\u0027filter\u0027][$filter] ) ) {",
+      "parentUuid": "6e5a8fde_f8c59d40",
+      "revId": "14e1bb8be72f92856966bef7a4c16a3f1044cf20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e5a8fde_92900bf3",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 29
