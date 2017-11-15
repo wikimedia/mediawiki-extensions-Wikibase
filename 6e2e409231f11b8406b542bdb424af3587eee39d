@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e578bb4_ab53cae1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-11-15T18:01:23Z",
+      "side": 1,
+      "message": "wsp: using a",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 6
+      },
+      "revId": "6e2e409231f11b8406b542bdb424af3587eee39d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e578bb4_4b4ed63d",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-11-15T18:01:23Z",
+      "side": 1,
+      "message": "Perhaps use $this-\u003emarkTestSkipped( \u0027message\u0027 ) instead?",
+      "range": {
+        "startLine": 471,
+        "startChar": 30,
+        "endLine": 471,
+        "endChar": 59
+      },
+      "revId": "6e2e409231f11b8406b542bdb424af3587eee39d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e578bb4_cb588600",
+        "filename": "repo/tests/phpunit/includes/Content/PropertyHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-11-15T18:01:23Z",
+      "side": 1,
+      "message": "could be renamed (optional)",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 7
+      },
+      "revId": "6e2e409231f11b8406b542bdb424af3587eee39d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
