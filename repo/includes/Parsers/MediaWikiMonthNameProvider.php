@@ -9,7 +9,7 @@ use ValueParsers\MonthNameProvider;
  * A MonthNameProvider using MediaWiki's localization infrastructure.
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class MediaWikiMonthNameProvider implements MonthNameProvider {
 

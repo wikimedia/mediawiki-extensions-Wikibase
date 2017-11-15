@@ -11,7 +11,7 @@ use Language;
  *
  * @license GPL-2.0+
  * @author Liangent < liangent@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class LanguageFallbackChain {
 

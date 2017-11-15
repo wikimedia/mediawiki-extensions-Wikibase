@@ -14,7 +14,7 @@ use Wikibase\Client\Hooks\ParserFunctionRegistrant;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 

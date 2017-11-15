@@ -15,7 +15,7 @@ use Wikibase\Repo\Diff\BasicDiffView;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class BasicDiffViewTest extends PHPUnit_Framework_TestCase {

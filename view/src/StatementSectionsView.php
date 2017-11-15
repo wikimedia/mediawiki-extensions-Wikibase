@@ -9,7 +9,7 @@ use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class StatementSectionsView {

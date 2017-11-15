@@ -14,7 +14,7 @@ use Wikibase\StatementRankSerializer;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class GetClaimsStatementFilter implements StatementFilter {
 

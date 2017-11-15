@@ -17,7 +17,7 @@ use Wikimedia\Assert\ParameterTypeException;
  * @todo Most feature requests require this to be a SnakFormatter instead of a ValueFormatter
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class CommonsThumbnailFormatter implements ValueFormatter {
 

@@ -25,7 +25,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 

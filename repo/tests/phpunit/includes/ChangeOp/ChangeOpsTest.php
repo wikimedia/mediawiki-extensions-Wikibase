@@ -29,7 +29,7 @@ use Wikibase\Summary;
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 

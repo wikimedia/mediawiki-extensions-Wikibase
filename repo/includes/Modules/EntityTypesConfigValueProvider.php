@@ -7,7 +7,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 /**
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Jonas Kress
  */
 class EntityTypesConfigValueProvider implements MediaWikiConfigValueProvider {

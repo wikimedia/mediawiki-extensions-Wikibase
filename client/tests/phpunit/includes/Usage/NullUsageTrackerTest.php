@@ -13,7 +13,7 @@ use Wikibase\Client\Usage\NullUsageTracker;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Marius Hoch
  */
 class NullUsageTrackerTest extends PHPUnit_Framework_TestCase {

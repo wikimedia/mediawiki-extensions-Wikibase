@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 

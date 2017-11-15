@@ -30,7 +30,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 

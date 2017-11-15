@@ -18,7 +18,7 @@ use Wikibase\Summary;
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ChangeOpLabel extends ChangeOpBase {
 

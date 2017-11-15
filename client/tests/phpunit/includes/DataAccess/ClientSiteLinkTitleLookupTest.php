@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ClientSiteLinkTitleLookupTest extends \PHPUnit_Framework_TestCase {
 

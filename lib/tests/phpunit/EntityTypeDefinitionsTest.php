@@ -12,7 +12,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 

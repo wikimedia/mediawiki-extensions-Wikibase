@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDataUpdater {
 

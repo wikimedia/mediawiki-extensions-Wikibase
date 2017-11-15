@@ -42,7 +42,7 @@ use Wikibase\Repo\Api\ResultBuilder;
  *
  * @license GPL-2.0+
  * @author Addshore
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 

@@ -10,7 +10,7 @@ namespace Wikibase\View\Template;
  *
  * @license GPL-2.0+
  * @author H. Snater <mediawiki@snater.com>
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class TemplateRegistry {
 

@@ -9,7 +9,7 @@ use User;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Marius Hoch
  */
 interface UserLanguageLookup {

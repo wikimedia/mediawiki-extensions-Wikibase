@@ -1,7 +1,7 @@
 /**
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 ( function ( $ ) {
 	'use strict';
