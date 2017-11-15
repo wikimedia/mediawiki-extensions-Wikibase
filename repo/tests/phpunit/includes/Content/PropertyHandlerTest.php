@@ -111,18 +111,29 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
 	}
 
-	protected function getTestItemContent() {
-		$item = new Property( null, null, 'string' );
-		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
-		$item->getStatements()->addNewStatement(
+	protected function getTestContent() {
+		$property = new Property( null, null, 'string' );
+		$property->getFingerprint()->setLabel( 'en', 'Kitten' );
+		$property->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
 		);
 
-		return PropertyContent::newFromProperty( $item );
+		return PropertyContent::newFromProperty( $property );
 	}
 
 	protected function getExpectedSearchIndexFields() {
 		return [ 'label_count', 'statement_count' ];
+	}
+
+	public function testDataForSearchIndex() {
+		$handler = $this->getHandler();
+		$engine = $this->getMock( \SearchEngine::class );
+
+		$page = $this->getMockWikiPage( $handler );
+
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$this->assertSame( 1, $data['label_count'], 'label_count' );
+		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
 	}
 
 }

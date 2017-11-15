@@ -182,7 +182,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
 	}
 
-	protected function getTestItemContent() {
+	protected function getTestContent() {
 		$item = new Item();
 		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
@@ -273,6 +273,18 @@ class ItemHandlerTest extends EntityHandlerTest {
 			'two identifiers' => [ $statementListTwoIdentifiers, 2 ],
 			'two identifiers and more statements' => [ $statementListTwoIdentifiersAndMore, 2 ],
 		];
+	}
+
+	public function testDataForSearchIndex() {
+		$handler = $this->getHandler();
+		$engine = $this->getMock( \SearchEngine::class );
+
+		$page = $this->getMockWikiPage( $handler );
+
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$this->assertSame( 1, $data['label_count'], 'label_count' );
+		$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
+		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
 	}
 
 }

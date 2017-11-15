@@ -17,6 +17,7 @@ use RequestContext;
 use Revision;
 use RuntimeException;
 use SearchEngine;
+use Serializers\Serializer;
 use Title;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -29,7 +30,6 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
@@ -130,7 +130,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	abstract protected function newEntity( EntityId $id = null );
 
 	/**
-	 * Returns EntityContents that can be handled by the EntityHandler deriving class.
+	 * Returns EntityContents that can be serialized by the EntityHandler deriving class.
 	 *
 	 * @return array[]
 	 */
@@ -388,6 +388,15 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $idString, $id->getSerialization() );
 	}
 
+	/**
+	 * @return Serializer
+	 */
+	protected function getEntitySerializer() {
+		$newSerializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$newSerializer = $newSerializerFactory->newEntitySerializer();
+		return $newSerializer;
+	}
+
 	public function exportTransformProvider() {
 		$entity = $this->newEntity();
 
@@ -416,8 +425,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		}
 
 		// make new style blob
-		$newSerializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$newSerializer = $newSerializerFactory->newEntitySerializer();
+		$newSerializer = $this->getEntitySerializer();
 		$newBlob = json_encode( $newSerializer->serialize( $entity ) );
 
 		return [
@@ -457,7 +465,12 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	public function testGetLegacyExportFormatDetector() {
 		$detector = $this->getHandler()->getLegacyExportFormatDetector();
-		$this->assertInternalType( 'callable', $detector );
+
+		if ( $detector === null ) {
+			$this->markTestSkipped( 'handler has no legacy export format detector' );
+		} else {
+			$this->assertInternalType( 'callable', $detector );
+		}
 	}
 
 	public function forCreationParamProvider() {
@@ -565,7 +578,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	abstract protected function getTestItemContent();
+	abstract protected function getTestContent();
 
 	/**
 	 * @param EntityHandler $handler
@@ -578,25 +591,13 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
 			->getMock();
 
-		$page->method( 'getContent' )->willReturn( $this->getTestItemContent() );
+		$page->method( 'getContent' )->willReturn( $this->getTestContent() );
 		$page->method( 'getTitle' )->willReturn( $title );
 
 		return $page;
 	}
 
-	public function testDataForSearchIndex() {
-		$handler = $this->getHandler();
-		$engine = $this->getMock( \SearchEngine::class );
-
-		$page = $this->getMockWikiPage( $handler );
-
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
-		$this->assertSame( 1, $data['label_count'], 'label_count' );
-		if ( $handler instanceof ItemHandler ) {
-			$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
-		}
-		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
-	}
+	abstract public function testDataForSearchIndex();
 
 	public function testGetActionOverrides() {
 		$handler = $this->getHandler();
