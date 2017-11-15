@@ -112,6 +112,7 @@
 	"wikibase-entity-summary-wbcreateclaim-create": "patizeng tu saleku",
 	"wikibase-entity-summary-wbremoveclaims-remove": "masipu tu ku {{PLURAL:$1|saleku}} tuway",
 	"wikibase-entity-summary-wbsetclaim-update": "masumad {{PLURAL:$3|saleku}} tuway",
+	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "masumad tu{{PLURAL:$3|saleku}} a {{PLURAL:$4|1 a lyangce|$4 a lyangce}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "masumad tuway {{PLURAL:$3|saleku}} a {{PLURAL:$4|$4 miazih tu tatenga’ay nasulitan}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "masumad{{PLURAL:$3|saleku}}a kasaselel tuway",
 	"wikibase-entity-summary-clientsitelink-update": "kasabelih malimad tu nay [$3] tayza [$4]",

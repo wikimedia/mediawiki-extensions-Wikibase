@@ -125,6 +125,7 @@
 	"wikibase-validator-illegal-tabular-data-title": "Значэньне мусіць пачынацца з <code>Data:</code> і сканчацца на <code>.tab</code>. Дадаткова загаловак ня мусіць утрымліваць такія сымбалі як двукроп’е, краты ці вэртыкальную рысу.",
 	"wikibase-validator-no-such-media": "Файл «$1» не існуе ў [https://commons.wikimedia.org/ Вікісховішчы].",
 	"wikibase-validator-no-such-sitelink": "Не атрымалася знайсьці спасылку на «$1» пры спробе рэдагаваць адзнакі.",
+	"wikibase-validator-page-not-exists": "Старонка «$1» не існуе.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 зьяўляецца перанакіраваньнем.",
 	"wikibase-wikibaserepopage-storage-exception": "Адбылася памылка пры спробе загрузіць $1: $2.",

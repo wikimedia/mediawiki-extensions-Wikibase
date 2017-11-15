@@ -67,5 +67,6 @@
 	"wikibase-otherprojects": "zuma cwanan",
 	"wikibase-otherprojects-beta-message": "zuma cwanan tapiingan a tusil",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|papatun}} mala {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "yu izaw ku tademaw kaku a {{GENDER:|patizeng tu}} kasabelih  masasiket ta {{WBREPONAME}} kasacacay sa patakusen kaku.",
 	"notification-link-text-view-item": "{{GENDER:$1|ciwsace}} kasacacay"
 }
