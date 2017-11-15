@@ -28,18 +28,18 @@ class HistoryEntityAction extends HistoryAction {
 	private $labelLookup;
 
 	/**
-	 * @param Article $page
+	 * @param Article $article
 	 * @param IContextSource|null $context
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LabelDescriptionLookup $labelLookup
 	 */
 	public function __construct(
-		Article $page,
+		Article $article,
 		IContextSource $context = null,
 		EntityIdLookup $entityIdLookup,
 		LabelDescriptionLookup $labelLookup
 	) {
-		parent::__construct( $page, $context );
+		parent::__construct( $article, $context );
 
 		$this->entityIdLookup = $entityIdLookup;
 		$this->labelLookup = $labelLookup;

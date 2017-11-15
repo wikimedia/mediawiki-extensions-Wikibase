@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Content;
 
+use Article;
 use DataUpdate;
 use IContextSource;
 use Page;
@@ -109,7 +110,13 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return [
-			'history' => function( Page $page, IContextSource $context = null ) {
+			'history' => function( Page $page, IContextSource $context ) {
+				// NOTE: for now, the callback must work with a WikiPage as well as an Article
+				// object. Once I0335100b2 is merged, this is no longer needed.
+				if ( !( $page instanceof Article ) ) {
+					$page = Article::newFromWikiPage( $page, $context );
+				}
+
 				return new HistoryEntityAction(
 					$page,
 					$context,

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use Action;
+use Article;
 use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
 use DummySearchIndexFieldDefinition;
@@ -10,6 +12,7 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use MWException;
+use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;
 use Revision;
 use RuntimeException;
@@ -69,7 +72,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	private function getEntityTypeDefinitions() {
+	protected function getEntityTypeDefinitions() {
 		return new EntityTypeDefinitions(
 			array_merge_recursive(
 				require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php',
@@ -493,15 +496,25 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertRegExp( '/wb\d+/', $hash, 'contains Wikibase version' );
 	}
 
+	/**
+	 * @param Title $title
+	 * @return RequestContext
+	 * @throws MWException
+	 */
+	protected function getContext( Title $title ) {
+		$context = new RequestContext( new FauxRequest() );
+		$context->setLanguage( 'qqx' );
+		$context->setTitle( $title );
+
+		return $context;
+	}
+
 	public function testShowMissingEntity() {
 		$handler = $this->getHandler();
 
 		$title = Title::makeTitle( $handler->getEntityNamespace(), 'MISSING' );
 
-		$context = new RequestContext( new FauxRequest() );
-		$context->setLanguage( 'qqx' );
-		$context->setTitle( $title );
-
+		$context = $this->getContext( $title );
 		$handler->showMissingEntity( $title, $context );
 
 		$this->assertContains( '(wikibase-noentity)', $context->getOutput()->getHTML() );
@@ -554,15 +567,28 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	abstract protected function getTestItemContent();
 
+	/**
+	 * @param EntityHandler $handler
+	 * @return PHPUnit_Framework_MockObject_MockObject|WikiPage
+	 */
+	protected function getMockWikiPage( EntityHandler $handler ) {
+		$title = Title::makeTitle( $handler->getEntityNamespace(), "Asdflogjkasdefgo" );
+
+		$page = $this->getMockBuilder( WikiPage::class )
+			->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
+			->getMock();
+
+		$page->method( 'getContent' )->willReturn( $this->getTestItemContent() );
+		$page->method( 'getTitle' )->willReturn( $title );
+
+		return $page;
+	}
+
 	public function testDataForSearchIndex() {
 		$handler = $this->getHandler();
 		$engine = $this->getMock( \SearchEngine::class );
 
-		$page =
-			$this->getMockBuilder( WikiPage::class )
-				->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
-				->getMock();
-		$page->method( 'getContent' )->willReturn( $this->getTestItemContent() );
+		$page = $this->getMockWikiPage( $handler );
 
 		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
 		$this->assertSame( 1, $data['label_count'], 'label_count' );
@@ -570,6 +596,40 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
 		}
 		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
+	}
+
+	public function testGetActionOverrides() {
+		$handler = $this->getHandler();
+		$overrides = $handler->getActionOverrides();
+
+		foreach ( $overrides as $name => $classOrCallback ) {
+			if ( is_string( $classOrCallback ) ) {
+				$this->assertTrue(
+					is_subclass_of( $classOrCallback, Action::class ),
+					'Override for ' . $name . ' must be an action class, found ' . $classOrCallback
+				);
+			} elseif ( is_callable( $classOrCallback ) ) {
+				// NOTE: for now, the callback must work with a WikiPage as well as an Article
+				// object. Once I0335100b2 is merged, this is no longer needed.
+				$wikiPage = $this->getMockWikiPage( $handler );
+				$context = $this->getContext( $wikiPage->getTitle() );
+
+				$action = $classOrCallback( $wikiPage, $context );
+				$this->assertTrue(
+					is_subclass_of( $action, Action::class ),
+					'Callback for action ' . $name . ' must return an Action instance!'
+				);
+
+				$article = Article::newFromWikiPage( $wikiPage, $context );
+				$action = $classOrCallback( $article, $context );
+				$this->assertTrue(
+					is_subclass_of( $action, Action::class ),
+					'Callback for action ' . $name . ' must return an Action instance!'
+				);
+			} else {
+				$this->fail( 'Expected a class name or callback as action override for ' . $name );
+			}
+		}
 	}
 
 }
