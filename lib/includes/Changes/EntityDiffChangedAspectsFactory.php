@@ -83,7 +83,7 @@ class EntityDiffChangedAspectsFactory {
 		$siteLinkChanges = [];
 
 		foreach ( $siteLinkDiff as $siteId => $diffPerSite ) {
-			$siteLinkChanges[$siteId] = !$this->isBadgesOnlyChange( $diffPerSite );
+			$siteLinkChanges[$siteId] = $this->getSiteLinkChangePerSite( $diffPerSite );
 		}
 
 		return $siteLinkChanges;
@@ -92,10 +92,24 @@ class EntityDiffChangedAspectsFactory {
 	/**
 	 * @param DiffOp $siteLinkDiffOp
 	 *
-	 * @return bool
+	 * @return array [ string|null $oldPageName, string|null $newPageName, bool $badgesChanged ]
 	 */
-	private function isBadgesOnlyChange( DiffOp $siteLinkDiffOp ) {
-		return $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp );
+	private function getSiteLinkChangePerSite( DiffOp $siteLinkDiffOp ) {
+		if ( !$siteLinkDiffOp instanceof Diff ) {
+			return [ null, null, false ];
+		}
+		$oldValue = ( array_key_exists( 'name', $siteLinkDiffOp->getRemovedValues() ) ) ?
+			$siteLinkDiffOp->getRemovedValues()['name'] : null;
+
+		$newValue = ( array_key_exists( 'name', $siteLinkDiffOp->getAddedValues() ) ) ?
+			$siteLinkDiffOp->getAddedValues()['name'] : null;
+
+		if ( array_key_exists( 'name', $siteLinkDiffOp->getChanges() ) ) {
+			$oldValue = $siteLinkDiffOp->getChanges()['name']->getOldValue();
+			$newValue = $siteLinkDiffOp->getChanges()['name']->getNewValue();
+		}
+
+		return [ $oldValue, $newValue, array_key_exists( 'badges', $siteLinkDiffOp ) ];
 	}
 
 	/**
