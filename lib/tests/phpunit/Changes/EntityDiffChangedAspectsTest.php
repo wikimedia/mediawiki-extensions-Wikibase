@@ -23,7 +23,7 @@ class EntityDiffChangedAspectsTest extends PHPUnit_Framework_TestCase {
 			'labelChanges' => [ 'a', '1' ],
 			'descriptionChanges' => [ 'b', '2' ],
 			'statementChanges' => [ 'c', '3' ],
-			'siteLinkChanges' => [ 'd' => true ],
+			'siteLinkChanges' => [ 'd' => [ null, null, true ] ],
 			'otherChanges' => true,
 		];
 
@@ -37,7 +37,7 @@ class EntityDiffChangedAspectsTest extends PHPUnit_Framework_TestCase {
 		$invalidStatementChanges['statementChanges'] = [ 'c', 3 ];
 
 		$invalidSiteLinkChangesKeys = $validParams;
-		$invalidSiteLinkChangesKeys['siteLinkChanges'] = [ 1 => true ];
+		$invalidSiteLinkChangesKeys['siteLinkChanges'] = [ 1 => [ null, null, true ] ];
 
 		$invalidSiteLinkChangesValues = $validParams;
 		$invalidSiteLinkChangesValues['siteLinkChanges'] = [ 'd' => 12 ];
@@ -75,7 +75,7 @@ class EntityDiffChangedAspectsTest extends PHPUnit_Framework_TestCase {
 			[ 'a', '1' ],
 			[ 'b', '2' ],
 			[ 'c', '3' ],
-			[ 'd' => true ],
+			[ 'd' => [ null, null, true ] ],
 			true
 		);
 	}
@@ -103,7 +103,7 @@ class EntityDiffChangedAspectsTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetSiteLinkChanges() {
 		$this->assertSame(
-			[ 'd' => true ],
+			[ 'd' => [ null, null, true ] ],
 			$this->getEntityDiffChangedAspects()->getSiteLinkChanges()
 		);
 	}
@@ -121,7 +121,7 @@ class EntityDiffChangedAspectsTest extends PHPUnit_Framework_TestCase {
 			'labelChanges' => [ 'a', '1' ],
 			'descriptionChanges' => [ 'b', '2' ],
 			'statementChanges' => [ 'c', '3' ],
-			'siteLinkChanges' => [ 'd' => true ],
+			'siteLinkChanges' => [ 'd' => [ null, null, true ] ],
 			'otherChanges' => true,
 		];
 
