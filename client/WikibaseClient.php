@@ -301,6 +301,12 @@ call_user_func( function() {
 		$wgResourceModules,
 		include __DIR__ . '/resources/Resources.php'
 	);
+	// Load Wikibase API components (T180727)
+	// TODO: This should really really not just load a random resources file from View
+	$wgResourceModules = array_merge(
+		$wgResourceModules,
+		include __DIR__ . '/../view/lib/resources/wikibase-api/resources.php'
+	);
 
 	$wgWBClientSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
