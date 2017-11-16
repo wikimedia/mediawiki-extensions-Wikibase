@@ -22,6 +22,30 @@
       "revId": "c25763acc33e60272c491bf42fc3adca7461e2fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_8c55c654",
+        "filename": "repo/tests/phpunit/includes/Rdf/FullStatementRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-16T18:16:03Z",
+      "side": 1,
+      "message": "This code does the exact same as before. The magic trick that was happening in the old code was this:\n* The $props array contained PropertyId objects.\n* These object happened to be used in a context where they are casted to strings.\n* __toString returns the IDs serialization, just as getSerialization.\n\nThe new code avoids this magic behavior and makes $props an array of strings.",
+      "parentUuid": "2e5417b0_2c7b72ed",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "c25763acc33e60272c491bf42fc3adca7461e2fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
