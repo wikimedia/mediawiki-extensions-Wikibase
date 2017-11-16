@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_acb3e7fc",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-16T10:34:36Z",
+      "side": 1,
+      "message": "I think at some point we could move this code to cirrus, it does not contain anything specific to wikibase.\nThis would perhaps fix the hard dependencies we have in unit tests.",
+      "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_6c6e4f2c",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-16T10:34:36Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 163,
+        "startChar": 37,
+        "endLine": 163,
+        "endChar": 38
+      },
+      "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_776138d0",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-16T10:34:36Z",
+      "side": 1,
+      "message": "I wonder if running a first pass on all configs to collect default filters:\n  for () {\n     $defaultFilters \u003d array_unique( array_merge( $defaultFilters, $this-\u003egetDefaultFilters( $langConfig ) ) );\n  }\n\nThen we could simply cll resolveFilters, resolveDefaultFilters would not be needed. Advantage would be to avoid expanding some default filters (e.g. preserve_original if it\u0027s not being used in the main config)\n\nplease feel free to ignore, I think the current logic works, the expected files in tests just need to be updated.",
+      "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_971b9473",
+        "filename": "repo/tests/phpunit/data/analyzer/en-ru-es-de-zh.expected",
+        "patchSetId": 34
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-16T10:34:36Z",
+      "side": 1,
+      "message": "I think the new code will now add all default filters",
+      "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
