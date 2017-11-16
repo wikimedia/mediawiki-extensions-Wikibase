@@ -46,6 +46,30 @@
       "revId": "c25763acc33e60272c491bf42fc3adca7461e2fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_acb1a28f",
+        "filename": "repo/tests/phpunit/includes/Rdf/FullStatementRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-11-16T18:36:00Z",
+      "side": 1,
+      "message": "Yech, so it really was as bad as I thought it couldn’t be! :D thanks for the explanation.",
+      "parentUuid": "2e5417b0_8c55c654",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "c25763acc33e60272c491bf42fc3adca7461e2fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
