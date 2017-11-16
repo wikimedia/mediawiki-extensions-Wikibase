@@ -7,7 +7,8 @@
 			"Muhammed taha",
 			"Sarchia",
 			"Lost Whispers",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Épine"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -40,7 +41,7 @@
 	"wikibase-disambiguation-title": "ڕوونکردنەوە بۆ «$1»",
 	"wikibase-propertypage-datatype": "جۆری دراوە",
 	"wikibase-statementview-rank-normal": "پلەی ئاسایی",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ژێدەر|ژێدەرەکان}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ژێدەر}}",
 	"wikibase-snakview-property-input-placeholder": "تایبەتمەندی",
 	"wikibase-snakview-choosesnaktype": "جۆرێکی نرخ ھەڵبژێرە.",
 	"wikibase-snakview-variations-somevalue-label": "نرخی نەزانراو",
