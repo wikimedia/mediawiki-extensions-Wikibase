@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_2c7b72ed",
+        "filename": "repo/tests/phpunit/includes/Rdf/FullStatementRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-11-16T18:10:58Z",
+      "side": 1,
+      "message": "This part of the change isn’t a simple reformatting as far as I can tell, and I don’t understand how it doesn’t seem to affect the tests failing or succeeding.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "c25763acc33e60272c491bf42fc3adca7461e2fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
