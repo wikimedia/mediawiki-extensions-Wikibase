@@ -44,8 +44,8 @@ class EntityDiffChangedAspects implements Serializable {
 	private $statementChanges;
 
 	/**
-	 * Map of site ids to bool. The bool indicates whether only the badge has changed (false)
-	 * or the actual value of the sitelink changed (true).
+	 * Map of site ids to array of old value, new value and boolean value determining if badge
+	 * has changed or not
 	 *
 	 * @var bool[]
 	 */
@@ -78,7 +78,6 @@ class EntityDiffChangedAspects implements Serializable {
 		Assert::parameterElementType( 'string', $descriptionChanges, '$descriptionChanges' );
 		Assert::parameterElementType( 'string', $statementChanges, '$statementChanges' );
 		Assert::parameterElementType( 'string', array_keys( $siteLinkChanges ), 'array_keys( $siteLinkChanges )' );
-		Assert::parameterElementType( 'boolean', $siteLinkChanges, '$siteLinkChanges' );
 		Assert::parameterType( 'boolean', $otherChanges, '$otherChanges' );
 
 		$this->labelChanges = $labelChanges;
