@@ -24,6 +24,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -262,6 +263,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		/** @var LabelsProvider $e5 */
 		/** @var LabelsProvider $e5u4 */
 		/** @var LabelsProvider $e5u4u3 */
+
+		if ( $this->newEntity() instanceof LabelsProvider ) {
+			$this->markTestSkipped( 'provideGetUndoContent only works for entities that have labels field' );
+		}
 
 		$e1 = $this->newEntity();
 		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 1 );
