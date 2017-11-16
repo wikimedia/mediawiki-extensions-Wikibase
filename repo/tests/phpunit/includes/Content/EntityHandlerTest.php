@@ -263,6 +263,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		/** @var LabelsProvider $e5u4 */
 		/** @var LabelsProvider $e5u4u3 */
 
+		if ( !$this->newEntity() instanceof LabelsProvider ) {
+			$this->markTestSkipped( 'provideGetUndoContent only works for entities that have labels field' );
+		}
+
 		$e1 = $this->newEntity();
 		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 1 );
 
