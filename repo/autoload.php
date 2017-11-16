@@ -347,6 +347,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Tests\\ChangeOp\\Deserialization\\DescriptionsChangeOpDeserializationTester' => __DIR__ . '/tests/phpunit/includes/ChangeOp/Deserialization/DescriptionsChangeOpDeserializationTester.php',
 	'Wikibase\\Repo\\Tests\\ChangeOp\\Deserialization\\LabelsChangeOpDeserializationTester' => __DIR__ . '/tests/phpunit/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializationTester.php',
 	'Wikibase\\Repo\\Tests\\ChangeOp\\StatementListProviderDummy' => __DIR__ . '/tests/phpunit/includes/ChangeOp/StatementListProviderDummy.php',
+	'Wikibase\\Repo\\Tests\\Content\\EntityHandlerTest' => __DIR__ . '/tests/phpunit/includes/Content/EntityHandlerTest.php',
 	'Wikibase\\Repo\\Tests\\EntityModificationTestHelper' => __DIR__ . '/tests/phpunit/includes/EntityModificationTestHelper.php',
 	'Wikibase\\Repo\\Tests\\LinkedData\\EntityDataTestProvider' => __DIR__ . '/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',
 	'Wikibase\\Repo\\Tests\\NewItem' => __DIR__ . '/tests/phpunit/includes/NewItem.php',

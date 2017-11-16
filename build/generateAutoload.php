@@ -68,6 +68,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializationTester.php',
 				'tests/phpunit/includes/ChangeOp/Deserialization/DescriptionsChangeOpDeserializationTester.php',
 				'tests/phpunit/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializationTester.php',
+				'tests/phpunit/includes/Content/EntityHandlerTest.php',
 				'tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',
 				'tests/phpunit/includes/Rdf/NTriplesRdfTestHelper.php',
 				'tests/phpunit/includes/Rdf/RdfBuilderTestData.php',
