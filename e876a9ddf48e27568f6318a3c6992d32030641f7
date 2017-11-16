@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "2e5417b0_ec155aa0",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-16T18:04:20Z",
+      "side": 1,
+      "message": "without this, since it\u0027s by-ref in buildConfig, PHP would copy the whole array to pass it here. Which is probably not a huge deal, but since config is kinda big-ish...",
+      "parentUuid": "2e5417b0_6c6e4f2c",
+      "range": {
+        "startLine": 163,
+        "startChar": 37,
+        "endLine": 163,
+        "endChar": 38
+      },
+      "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e5417b0_776138d0",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 34
@@ -53,6 +77,24 @@
       "writtenOn": "2017-11-16T10:34:36Z",
       "side": 1,
       "message": "I wonder if running a first pass on all configs to collect default filters:\n  for () {\n     $defaultFilters \u003d array_unique( array_merge( $defaultFilters, $this-\u003egetDefaultFilters( $langConfig ) ) );\n  }\n\nThen we could simply cll resolveFilters, resolveDefaultFilters would not be needed. Advantage would be to avoid expanding some default filters (e.g. preserve_original if it\u0027s not being used in the main config)\n\nplease feel free to ignore, I think the current logic works, the expected files in tests just need to be updated.",
+      "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_ac0f628c",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-16T18:04:20Z",
+      "side": 1,
+      "message": "I was thinking about it today, especially about removing the filters we don\u0027t use for language sub-configs. I\u0027ll add some solution to this.",
+      "parentUuid": "2e5417b0_776138d0",
       "revId": "e876a9ddf48e27568f6318a3c6992d32030641f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
