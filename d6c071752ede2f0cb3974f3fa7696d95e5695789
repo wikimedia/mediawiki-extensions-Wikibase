@@ -22,6 +22,30 @@
       "revId": "d6c071752ede2f0cb3974f3fa7696d95e5695789",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_989ae116",
+        "filename": "build/validateAutoload.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-16T16:39:11Z",
+      "side": 1,
+      "message": "Tru. Rephrased.",
+      "parentUuid": "4e578bb4_be8b09e8",
+      "range": {
+        "startLine": 12,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 70
+      },
+      "revId": "d6c071752ede2f0cb3974f3fa7696d95e5695789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
