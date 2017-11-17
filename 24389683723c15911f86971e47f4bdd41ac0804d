@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_3b7ba2ed",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T12:30:08Z",
+      "side": 1,
+      "message": "I think you forgot to remove these brackets. They don\u0027t do anything.",
+      "range": {
+        "startLine": 106,
+        "startChar": 14,
+        "endLine": 106,
+        "endChar": 15
+      },
+      "revId": "24389683723c15911f86971e47f4bdd41ac0804d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
