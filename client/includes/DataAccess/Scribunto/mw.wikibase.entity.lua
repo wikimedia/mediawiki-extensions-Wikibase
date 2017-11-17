@@ -33,45 +33,76 @@ local isValidPropertyId = function( propertyId )
 	return type( propertyId ) == 'string' and propertyId:match( '^P[1-9]%d*$' )
 end
 
--- Function to mask an entity's claims table in order to log access
--- to individual claims of an entity.
+-- Log access to claims of entity
+--
+-- @param {string} entityId
+-- @param {string} propertyId
+local addStatementUsage = function( entityId, propertyId )
+	if isValidPropertyId( propertyId ) then
+		-- Only attempt to track the usage if we have a valid property id.
+		php.addStatementUsage( entityId, propertyId )
+	end
+end
+
+-- Function to mask an entity's subtables in order to log access
 -- Code for logging based on: http://www.lua.org/pil/13.4.4.html
 --
 -- @param {table} entity
-local maskClaimsTable = function( entity )
-	if entity.claims == nil then
-		return entity
+-- @param {string} tableName
+-- @param {function} usageFunc
+local maskEntityTable = function( entity, tableName, usageFunc )
+	if entity[tableName] == nil then
+		return
 	end
-	local actualEntityClaims = entity.claims
-	entity.claims = {}
+	local actualEntityTable = entity[tableName]
+	entity[tableName] = {}
 
-	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( _, propertyId )
-		if isValidPropertyId( propertyId ) then
-			-- Only attempt to track the usage if we have a valid property id.
-			php.addStatementUsage( entity.id, propertyId )
+	local pseudoTableMetatable = {}
+	pseudoTableMetatable.__index = function( _, key )
+		usageFunc( entity.id, key )
+		return actualEntityTable[key]
+	end
+
+	pseudoTableMetatable.__newindex = function( _, _, _ )
+		error( 'Entity cannot be modified', 2 )
+	end
+
+	local logNext = function( _, key )
+		local k, v = next( actualEntityTable, key )
+		if k ~= nil then
+			usageFunc( entity.id, k )
 		end
-
-		return actualEntityClaims[propertyId]
+		return k, v
 	end
 
-	pseudoClaimsMetatable.__newindex = function( _, _, _ )
-		error( 'Entity cannot be modified' )
-	end
-
-	local logNext = function( _, propertyId )
-		if isValidPropertyId( propertyId ) then
-			php.addStatementUsage( entity.id, propertyId )
-		end
-		return next( actualEntityClaims, propertyId )
-	end
-
-	pseudoClaimsMetatable.__pairs = function( _ )
+	pseudoTableMetatable.__pairs = function( _ )
 		return logNext, {}, nil
 	end
 
-	setmetatable( entity.claims, pseudoClaimsMetatable )
-	return entity
+	setmetatable( entity[tableName], pseudoTableMetatable )
+end
+
+local noUsageTracking = function()
+end
+
+-- Function to mask an entity's subtables in order to log access and prevent modifications
+--
+-- @param {table} entity
+-- @param {bool} fineGrainedTracking
+local maskEntityTables = function ( entity, fineGrainedTracking )
+	if fineGrainedTracking then
+		maskEntityTable( entity, 'claims', addStatementUsage )
+		maskEntityTable( entity, 'labels', php.addLabelUsage )
+		maskEntityTable( entity, 'sitelinks', php.addSiteLinksUsage )
+		maskEntityTable( entity, 'descriptions', php.addDescriptionUsage )
+		maskEntityTable( entity, 'aliases', php.addOtherUsage )
+	else
+		maskEntityTable( entity, 'claims', noUsageTracking )
+		maskEntityTable( entity, 'labels', noUsageTracking )
+		maskEntityTable( entity, 'sitelinks', noUsageTracking )
+		maskEntityTable( entity, 'descriptions', noUsageTracking )
+		maskEntityTable( entity, 'aliases', noUsageTracking )
+	end
 end
 
 -- Create new entity object from given data
@@ -91,9 +122,10 @@ Entity.create = function( data )
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
 
-	local entity = maskClaimsTable( data )
-	setmetatable( entity, metatable )
+	local entity = data
+	maskEntityTables( entity, php.getSetting( 'fineGrainedLuaTracking' ) )
 
+	setmetatable( entity, metatable )
 	return entity
 end
 
