@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_550aea2a",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-17T21:13:55Z",
+      "side": 1,
+      "message": "Something is still worrying me here. These both functions - getEntityLName() and getEntityRepositoryName() - are both calling splitSerialization(). Which in turn calls a bunch of functions, including self::assertValidSerialization() (we essentially validating the same ID numerous times, for no reason), which call expensive functions such as preg_match. Can\u0027t we improve it so that we do not re-split and re-validate the same IDs so many times? In fact, why we need to validate IDs when generating dumps at all? These ids come from our database, I\u0027m pretty sure they are valid.",
+      "revId": "9de08455b70c5a66f241aa14d816320dcab585f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_9529429d",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-17T21:13:55Z",
+      "side": 1,
+      "message": "could be just return str_replace(...);",
+      "revId": "9de08455b70c5a66f241aa14d816320dcab585f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_38008304",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-17T21:13:55Z",
+      "side": 1,
+      "message": "Here for example we call both getEntityLName and getEntityRepositoryName, resulting in two splitSerialization calls.",
+      "revId": "9de08455b70c5a66f241aa14d816320dcab585f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
