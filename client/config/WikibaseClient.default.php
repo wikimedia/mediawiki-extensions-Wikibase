@@ -83,6 +83,8 @@ return call_user_func( function() {
 
 		'disabledUsageAspects' => [],
 
+		'fineGrainedLuaTracking' => true,
+
 		// The type of object cache to use. Use CACHE_XXX constants.
 		// This is both a repo and client setting, and should be set to the same value in
 		// repo and clients for multiwiki setups.
