@@ -8,7 +8,8 @@
 			"Macofe",
 			"Obaid Raza",
 			"Muhammad Shuaib",
-			"Ladsgroup"
+			"Ladsgroup",
+			"BukhariSaeed"
 		]
 	},
 	"wikibase-entity": "وجود",
@@ -47,7 +48,7 @@
 	"wikibase-diffview-alias": "مستعار نام",
 	"wikibase-diffview-description": "وضاحت",
 	"wikibase-diffview-link": "روابط",
-	"wikibase-sitelink-site-edit-placeholder": "سائٹ",
+	"wikibase-sitelink-site-edit-placeholder": "ویکی",
 	"wikibase-sitelink-page-edit-placeholder": "صفحہ",
 	"wikibase-alias-edit-placeholder": "مستعار نام درج کریں",
 	"wikibase-label-input-help-message": "$1 میں اس وجود کا لیبل درج کریں۔",
