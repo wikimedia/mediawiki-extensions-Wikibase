@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_20913353",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T08:08:16Z",
+      "side": 1,
+      "message": "Technically, this needs an update, because the change was submitted as a separate patch. But we never used the code, so it\u0027s fine to keep the 1.\n\nI just wanted to mention this.",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "50fe47425f1a16df5b914060aa257796e5117ff2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_c0b7fff0",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T08:08:16Z",
+      "side": 1,
+      "message": "array[]",
+      "range": {
+        "startLine": 50,
+        "startChar": 9,
+        "endLine": 50,
+        "endChar": 15
+      },
+      "revId": "50fe47425f1a16df5b914060aa257796e5117ff2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_60c96b7b",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T08:08:16Z",
+      "side": 1,
+      "message": "Needs an update.",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 101
+      },
+      "revId": "50fe47425f1a16df5b914060aa257796e5117ff2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_a0cf6381",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspects.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T08:08:16Z",
+      "side": 1,
+      "message": "Needs an update.",
+      "range": {
+        "startLine": 121,
+        "startChar": 12,
+        "endLine": 121,
+        "endChar": 18
+      },
+      "revId": "50fe47425f1a16df5b914060aa257796e5117ff2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_e08a3b1c",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T08:08:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you meant to express here. Suggestion:\n\n @return array [ string|null $oldPageName, string|null $newPageName, bool $badgesChanged ]",
+      "range": {
+        "startLine": 95,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 25
+      },
+      "revId": "50fe47425f1a16df5b914060aa257796e5117ff2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_407a2f21",
+        "filename": "lib/tests/phpunit/Changes/EntityDiffChangedAspectsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T08:08:16Z",
+      "side": 1,
+      "message": "Having a boolean with no page name is technically fine, but arbitrarily limits the ability to create meaningful summary lines. When we discussed this with Marius in I0ac579e, we established the page name should be included. It will be duplicated in this case (old and new value are identical).",
+      "range": {
+        "startLine": 26,
+        "startChar": 33,
+        "endLine": 26,
+        "endChar": 53
+      },
+      "revId": "50fe47425f1a16df5b914060aa257796e5117ff2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
