@@ -2,12 +2,14 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
-use MWException;
 use RecentChange;
 use Revision;
 use RuntimeException;
 use stdClass;
+use Wikibase\DataModel\Services\Diff\ItemDiff;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikimedia\TestingAccessWrapper;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -338,33 +340,25 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertSame( $expected, $change->getSerializedInfo( [ 'evil' ] ) );
 	}
 
-	public function testDoesNotSerializeObjects() {
-		$info = [ 'array' => [ 'object' => new EntityChange() ] ];
-		$change = new EntityChange( [ 'info' => $info ] );
-		$this->setExpectedException( MWException::class );
-		$change->getSerializedInfo();
-	}
-
 	public function testSerializeAndUnserializeInfo() {
-		$info = [ 'diff' => new DiffOpAdd( '' ) ];
+		$info = [ 'diff' => new ItemDiff(
+			[ 'links' => new Diff( [ 'xwiki' => new DiffOpAdd( 'foo' ) ], true ) ]
+		) ];
 		$change = new EntityChange( [ 'info' => $info ] );
 		$change->setField( 'info', $change->getSerializedInfo() );
-		$this->assertEquals( $info, $change->getInfo() );
+
+		$entityDiffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $info['diff'] );
+		$this->assertEquals( [ 'diff' => serialize( $entityDiffAspects ) ], $change->getInfo() );
 	}
 
 	public function testGivenStatement_serializeInfoSerializesStatement() {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
-		$info = [ 'diff' => new DiffOpAdd( $statement ) ];
-		$expected = [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P1',
-				'hash' => 'any hash',
-			],
-			'type' => 'statement',
-			'rank' => 'normal',
-			'_claimclass_' => Statement::class,
-		];
+		$info = [ 'diff' => new ItemDiff(
+			[ 'claim' => new Diff( [ new DiffOpAdd( $statement ) ], true ) ]
+		) ];
+		$expected = 'C:45:"Wikibase\Lib\Changes\EntityDiffChangedAspects":134:{{"arrayFormatVersion"' .
+			':1,"labelChanges":[],"descriptionChanges":[],"statementChanges":["P1"],"siteLinkChanges":' .
+			'[],"otherChanges":false}}';
 
 		$change = new EntityChange( [ 'info' => $info ] );
 
@@ -374,8 +368,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$json = $change->getSerializedInfo();
 		$array = json_decode( $json, true );
-		$array['diff']['newvalue']['mainsnak']['hash'] = 'any hash';
-		$this->assertSame( $expected, $array['diff']['newvalue'] );
+		$this->assertSame( $expected, $array['diff'] );
 	}
 
 	public function testGivenStatementSerialization_getInfoDeserializesStatement() {
@@ -387,12 +380,16 @@ class EntityChangeTest extends ChangeRowTest {
 			'type' => 'statement',
 			'_claimclass_' => Statement::class,
 		];
-		$json = json_encode( [ 'diff' => [ 'type' => 'add', 'newvalue' => $data ] ] );
+		$json = json_encode( [
+			'diff' => 'C:45:"Wikibase\Lib\Changes\EntityDiffChangedAspects":134:' .
+				'{{"arrayFormatVersion":1,"labelChanges":[],"descriptionChanges":' .
+				'[],"statementChanges":["P1"],"siteLinkChanges":[],"otherChanges":false}}'
+		] );
 
 		$change = new EntityChange( [ 'info' => $json ] );
 		$info = $change->getInfo();
-		$statement = $info['diff']->getNewValue();
-		$this->assertInstanceOf( Statement::class, $statement );
+		$statements = unserialize( $info['diff'] )->getStatementChanges();
+		$this->assertSame( [ 'P1' ], $statements );
 	}
 
 }

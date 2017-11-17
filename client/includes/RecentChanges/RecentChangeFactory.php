@@ -304,7 +304,7 @@ class RecentChangeFactory {
 
 		$editComment = '';
 
-		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
+		if ( $siteLinkDiff !== null && $siteLinkDiff->getSiteLinkChanges() !== [] ) {
 			$action = $change->getAction();
 			$siteLinkComment = $this->siteLinkCommentCreator->getEditComment( $siteLinkDiff, $action, $target );
 			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
