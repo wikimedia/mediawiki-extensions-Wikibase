@@ -28,9 +28,9 @@ class ItemChange extends EntityChange {
 				'Cannot get sitelink diff from ' . $cls . '. Change #' . $this->getId()
 				. ", type " . $this->getType() );
 
-			return new Diff();
+			return ( new Diff() );
 		} else {
-			return $diff->getSiteLinkDiff();
+			return $diff;
 		}
 	}
 

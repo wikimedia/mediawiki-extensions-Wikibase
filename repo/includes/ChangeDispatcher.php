@@ -343,7 +343,7 @@ class ChangeDispatcher {
 	 */
 	private function isRelevantChange( Change $change, $siteID ) {
 		if ( $change instanceof ItemChange ) {
-			$siteLinkDiff = $change->getSiteLinkDiff();
+			$siteLinkDiff = $change->getSiteLinkDiff()->getSiteLinkChanges();
 
 			if ( isset( $siteLinkDiff[ $siteID ] ) ) {
 				return true;
