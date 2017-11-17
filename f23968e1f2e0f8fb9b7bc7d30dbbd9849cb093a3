@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_fbd8aa2a",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T12:09:53Z",
+      "side": 1,
+      "message": "I would not call this method twice because it executes a loop internally.",
+      "range": {
+        "startLine": 102,
+        "startChar": 20,
+        "endLine": 102,
+        "endChar": 36
+      },
+      "revId": "f23968e1f2e0f8fb9b7bc7d30dbbd9849cb093a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_1bdee614",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T12:09:53Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 105,
+        "startChar": 20,
+        "endLine": 105,
+        "endChar": 34
+      },
+      "revId": "f23968e1f2e0f8fb9b7bc7d30dbbd9849cb093a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
