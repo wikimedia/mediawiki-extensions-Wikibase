@@ -18,6 +18,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * @covers Wikibase\Lib\Changes\EntityChangeFactory
@@ -129,8 +130,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [ 'es' => new DiffOpAdd( 'gato' ) ] ),
-			$change->getDiff()->getLabelsDiff(),
+			[ 'es' ],
+			$change->getDiff()->getLabelChanges(),
 			'diff'
 		);
 	}
@@ -149,8 +150,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [ 'en' => new DiffOpAdd( 'kitten' ) ] ),
-			$change->getDiff()->getLabelsDiff(),
+			[ 'en' ],
+			$change->getDiff()->getLabelChanges(),
 			'diff'
 		);
 	}
@@ -169,8 +170,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [ 'de' => new DiffOpRemove( 'Katze' ) ] ),
-			$change->getDiff()->getLabelsDiff(),
+			[ 'de' ],
+			$change->getDiff()->getLabelChanges(),
 			'diff'
 		);
 	}
@@ -189,38 +190,9 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [
-				'enwiki' => new Diff( [
-					'name' => new DiffOpAdd( 'Kitten' )
-				] )
-			] ),
-			$change->getDiff()->getSiteLinkDiff(),
+			[ 'enwiki' => [ null, 'Kitten', false ] ],
+			$change->getDiff()->getSiteLinkChanges(),
 			'diff'
-		);
-	}
-
-	public function testNewFromUpdate_excludeStatementsInDiffs() {
-		$factory = $this->getEntityChangeFactory();
-
-		$item = new Item( new ItemId( 'Q3' ) );
-		$statementList = new StatementList( [
-			new Statement( new PropertyNoValueSnak( 9000 ) )
-		] );
-
-		$item->setStatements( $statementList );
-
-		$updatedItem = new Item( new ItemId( 'Q3' ) );
-		$statementList = new StatementList( [
-			new Statement( new PropertyNoValueSnak( 10 ) )
-		] );
-
-		$updatedItem->setStatements( $statementList );
-
-		$change = $factory->newFromUpdate( EntityChange::UPDATE, $item, $updatedItem );
-
-		$this->assertTrue(
-			$change->getDiff()->isEmpty(),
-			'Diff excludes statement changes and is empty'
 		);
 	}
 
