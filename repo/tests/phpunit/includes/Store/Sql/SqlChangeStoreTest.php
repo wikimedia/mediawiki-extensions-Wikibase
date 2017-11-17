@@ -6,6 +6,7 @@ use RecentChange;
 use Diff\DiffOp\Diff\Diff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -33,7 +34,8 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$changeWithDiff = $factory->newForEntity( EntityChange::REMOVE, new ItemId( 'Q42' ) );
 		$changeWithDiff->setField( 'time', $time );
-		$changeWithDiff->setDiff( new Diff() );
+		$entityDiffChangedAspectsFactory = new EntityDiffChangedAspectsFactory();
+		$changeWithDiff->setDiff( $entityDiffChangedAspectsFactory->newFromEntityDiff( new Diff() ) );
 
 		$rc = new RecentChange();
 		$rc->setAttribs( [
