@@ -135,6 +135,44 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * Add a label usage (called once specific labels are accessed).
+	 *
+	 * @param string $entityId The Entity from which the labels were accessed.
+	 * @param string $langCode Language code of the labels accessed.
+	 */
+	public function addLabelUsage( $entityId, $langCode ) {
+		$this->getImplementation()->addLabelUsage( $entityId, $langCode );
+	}
+
+	/**
+	 * Add a description usage (called once specific descriptions are accessed).
+	 *
+	 * @param string $entityId The Entity from which the descriptions were accessed.
+	 * @param string $langCode Language code of the descriptions accessed.
+	 */
+	public function addDescriptionUsage( $entityId, $langCode ) {
+		$this->getImplementation()->addDescriptionUsage( $entityId, $langCode );
+	}
+
+	/**
+	 * Add a sitelinks usage (called once specific sitelinks are accessed).
+	 *
+	 * @param string $entityId The Entity from which the sitelinks were accessed.
+	 */
+	public function addSiteLinksUsage( $entityId ) {
+		$this->getImplementation()->addSiteLinksUsage( $entityId );
+	}
+
+	/**
+	 * Add an other usage (called once an otherwise not covered aspect is used).
+	 *
+	 * @param string $entityId The Entity from which something was accessed.
+	 */
+	public function addOtherUsage( $entityId ) {
+		$this->getImplementation()->addOtherUsage( $entityId );
+	}
+
+	/**
 	 * Register mw.wikibase.entity.lua library
 	 *
 	 * @return array
@@ -149,11 +187,29 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
 			'addStatementUsage' => [ $this, 'addStatementUsage' ],
+			'addLabelUsage' => [ $this, 'addLabelUsage' ],
+			'addDescriptionUsage' => [ $this, 'addDescriptionUsage' ],
+			'addSiteLinksUsage' => [ $this, 'addSiteLinksUsage' ],
+			'addOtherUsage' => [ $this, 'addOtherUsage' ],
+			'getSetting' => [ $this, 'getSetting' ],
 		];
 
 		return $this->getEngine()->registerInterface(
 			__DIR__ . '/mw.wikibase.entity.lua', $lib, []
 		);
+	}
+
+	/**
+	 * Wrapper for getSetting
+	 *
+	 * @param string $setting
+	 *
+	 * @return array
+	 */
+	public function getSetting( $setting ) {
+		$this->checkType( 'setting', 1, $setting, 'string' );
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		return [ $settings->getSetting( $setting ) ];
 	}
 
 	/**
