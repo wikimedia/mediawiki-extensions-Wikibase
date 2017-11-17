@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_b6e3299c",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2017-11-17T15:36:12Z",
+      "side": 1,
+      "message": "Please move command line \"ignore\" for phpcs to the phpcs.xml file to have all \"exclude-pattern\" at one place",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "e95813aad0c7fb60f0b23ecc02f7587b092861ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
