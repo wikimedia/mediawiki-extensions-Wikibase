@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e5417b0_1b1b46d6",
+        "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-17T12:14:51Z",
+      "side": 1,
+      "message": "Agreed, also made the code more readable.",
+      "parentUuid": "2e5417b0_fbd8aa2a",
+      "range": {
+        "startLine": 102,
+        "startChar": 20,
+        "endLine": 102,
+        "endChar": 36
+      },
+      "revId": "f23968e1f2e0f8fb9b7bc7d30dbbd9849cb093a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e5417b0_1bdee614",
         "filename": "lib/includes/Changes/EntityDiffChangedAspectsFactory.php",
         "patchSetId": 4
