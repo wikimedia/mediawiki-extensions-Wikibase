@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_bb94723a",
+        "filename": "repo/tests/phpunit/includes/Actions/HistoryEntityActionTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-17T12:02:38Z",
+      "side": 1,
+      "message": "I think we should remove this here, and move it down.\n\nThe default OutputPage::getLanguage calls Context::getLanguage.",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 61
+      },
+      "revId": "98e1533e182de87c31013a4d8ffe1c953ea74ece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
