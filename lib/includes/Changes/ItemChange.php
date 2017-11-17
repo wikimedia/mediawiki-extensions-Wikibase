@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * @license GPL-2.0+
@@ -13,7 +15,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiff;
 class ItemChange extends EntityChange {
 
 	/**
-	 * @return Diff
+	 * @return EntityDiffChangedAspects
 	 */
 	public function getSiteLinkDiff() {
 		$diff = $this->getDiff();
@@ -28,9 +30,9 @@ class ItemChange extends EntityChange {
 				'Cannot get sitelink diff from ' . $cls . '. Change #' . $this->getId()
 				. ", type " . $this->getType() );
 
-			return new Diff();
+			return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( new Diff() );
 		} else {
-			return $diff->getSiteLinkDiff();
+			return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
 		}
 	}
 
