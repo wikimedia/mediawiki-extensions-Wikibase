@@ -56,17 +56,23 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 		$statementP1P2Diff['statementChanges'] = [ 'P1', 'P2' ];
 
 		$siteLinkDiff = $emptyDiff;
-		$siteLinkDiff['siteLinkChanges'] = [ 'enwiki' => true ];
+		$siteLinkDiff['siteLinkChanges'] = [ 'enwiki' => [ null, 'PHP', false ] ];
+
+		$siteLinkWithBadgeDiff = $emptyDiff;
+		$siteLinkWithBadgeDiff['siteLinkChanges'] = [ 'enwiki' => [ null, 'PHP', true ] ];
 
 		$siteLinkBadgeOnlyDiff = $emptyDiff;
-		$siteLinkBadgeOnlyDiff['siteLinkChanges'] = [ 'enwiki' => false ];
+		$siteLinkBadgeOnlyDiff['siteLinkChanges'] = [ 'enwiki' => [ null, null, true ] ];
 
 		$berlinEmptyDiff = [
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'de', 'ru' ],
 			'descriptionChanges' => [ 'de', 'es' ],
 			'statementChanges' => [ 'P2' ],
-			'siteLinkChanges' => [ 'dewiki' => true, 'enwiki' => true ],
+			'siteLinkChanges' => [
+				'dewiki' => [ null, 'Berlin', true ],
+				'enwiki' => [ null, 'Berlin', false ]
+			],
 			'otherChanges' => false,
 		];
 
@@ -75,7 +81,11 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 			'labelChanges' => [ 'fr', 'ru' ],
 			'descriptionChanges' => [ 'de', 'es', 'pl' ],
 			'statementChanges' => [ 'P2' ],
-			'siteLinkChanges' => [ 'dewiki' => true, 'enwiki' => true, 'ruwiki' => true ],
+			'siteLinkChanges' => [
+				'dewiki' => [ null, 'Paris', true ],
+				'enwiki' => [ null, 'Paris', false ],
+				'ruwiki' => [ null, 'Paris', false ]
+			],
 			'otherChanges' => false,
 		];
 
@@ -84,7 +94,11 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 			'labelChanges' => [ 'de', 'fr', 'ru' ],
 			'descriptionChanges' => [ 'pl' ],
 			'statementChanges' => [ 'P2' ],
-			'siteLinkChanges' => [ 'dewiki' => true, 'enwiki' => true, 'ruwiki' => true ],
+			'siteLinkChanges' => [
+				'dewiki' => [ 'Berlin', 'Paris', false ],
+				'enwiki' => [ 'Berlin', 'Paris', false ],
+				'ruwiki' => [ null, 'Paris', false ]
+			],
 			'otherChanges' => false,
 		];
 
@@ -250,7 +264,7 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 				$siteLinkItem
 			],
 			'sitelink change with badge' => [
-				$siteLinkDiff,
+				$siteLinkWithBadgeDiff,
 				$emptyItem,
 				$siteLinkBadgeItem
 			],
@@ -280,13 +294,35 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 		$reverseTests = [];
 		foreach ( $cases as $testDescription => $case ) {
 			$reverseTests[$testDescription . ' (reversed)'] = [
-				$case[0],
+				$this->reverseDiff( $case[0] ),
 				$case[2],
 				$case[1]
 			];
 		}
 
 		return array_merge( $cases, $reverseTests );
+	}
+
+	private function reverseDiff( array $diffs ) {
+		$newDiff = [];
+		foreach ( $diffs as $diffType => $diff ) {
+			if ( $diffType === 'siteLinkChanges' ) {
+				$newDiff[$diffType] = $this->reverseSiteLinkDiff( $diff );
+				continue;
+			}
+
+			$newDiff[$diffType] = $diff;
+		}
+
+		return $newDiff;
+	}
+
+	private function reverseSiteLinkDiff( $diff ) {
+		$newSiteLinkDiff = [];
+		foreach ( $diff as $site => $siteDiff ) {
+			$newSiteLinkDiff[$site] = [ $siteDiff[1], $siteDiff[0], $siteDiff[2] ];
+		}
+		return $newSiteLinkDiff;
 	}
 
 	/**
