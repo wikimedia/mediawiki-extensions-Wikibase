@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -133,7 +134,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		}
 		$change->setEntityId( new ItemId( $values['object_id'] ) );
 
-		$change->setDiff( $diff );
+		$change->setDiff( ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff )  );
 
 		return $change;
 	}
