@@ -22,12 +22,14 @@
 	"wikibase-editlinkstitle": "mikawaway tu kalumyiti caliway han ku kamu misiket",
 	"wikibase-addlinkstitle": "micunus milakuwit kamu masasiket",
 	"wikibase-linkitem-addlinks": "micunus tu masasiket",
+	"wikibase-linkitem-alreadylinked": "maydih kisu misasiket a kasabelih masasiket tu teban kalunasulitan suped-sulu a [$1 kasacacay], i tina kakacawan misiket ku $2. \ncacacacay kasacacay dada’ kapah misiket calay-kakacawan(wangcan) a cacay kasabelih，pipili’ zuma amisasiketay a kasabelih",
 	"wikibase-linkitem-close": "edeben sasukamu atilad atu miliyaw lisimet kasabelih",
 	"wikibase-linkitem-failure": "mitanam masasiket matuzu’ay a kasabelih matahkal ku caay kapulita a mungangaw.",
 	"wikibase-linkitem-title": "masasiket tu kasabelih",
 	"wikibase-linkitem-selectlink": "pipili’ calay-kakacawan(wangcan) atu maydih kisu masasiket tina kasabelih a kasabelih",
 	"wikibase-linkitem-input-site": "kamu:",
 	"wikibase-linkitem-input-page": "kasabelih:",
+	"wikibase-linkitem-confirmitem-text": "namipili’ nu misu a kasabelih masasiket tu [$1 teban kalunasulitan suped-sulu cacay kasacacay], pilucek isasa’ maydih nu misu masasiketay a {{PLURAL:$2| kasabelih}}.",
 	"wikibase-linkitem-not-loggedin-title": "maydih kisu patalabu",
 	"wikibase-linkitem-not-loggedin": "maydih kisu patalabu’ tina Wiki itini [$1 teban kalunasulitan suped-sulu] pisaungay tina sasahicaan",
 	"wikibase-linkitem-success-link": "masasiket tu ku kasabelih, kapah tu kisu itamiyan [$1 iteban kalunasulitan suped-sulu] matepa yamalyilu tina masasiket tu kasacacay.",
@@ -68,5 +70,7 @@
 	"wikibase-otherprojects-beta-message": "zuma cwanan tapiingan a tusil",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|papatun}} mala {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "yu izaw ku tademaw kaku a {{GENDER:|patizeng tu}} kasabelih  masasiket ta {{WBREPONAME}} kasacacay sa patakusen kaku.",
-	"notification-link-text-view-item": "{{GENDER:$1|ciwsace}} kasacacay"
+	"notification-bundle-header-page-connection": "<strong>$3</strong> atu{{PLURAL:$4|cacay zuma kasabelih|$4 zuma kasabelih |100=99+ zuma kasabelih }}{{GENDER:$2|masasiket tuway}} ta {{WBREPONAME}} kasacacay.",
+	"notification-link-text-view-item": "{{GENDER:$1|ciwsace}} kasacacay",
+	"notification-subject-page-connection": "kisu ipabaw nu {{SITENAME}} {{GENDER:$3|patizengay a}} kasabelih {{GENDER:$2| masasiket tuway}} ta {{WBREPONAME}} kasacacay"
 }
