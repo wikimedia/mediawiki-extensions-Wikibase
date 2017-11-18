@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_5e51a7dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-11-18T12:50:17Z",
+      "side": 1,
+      "message": "Bug: T172914",
+      "revId": "8a5f360567e3e102e36fe40ffc1782aad8ee472f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_96b06d40",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-11-18T12:50:17Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "8a5f360567e3e102e36fe40ffc1782aad8ee472f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
