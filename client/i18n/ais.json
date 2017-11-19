@@ -68,6 +68,7 @@
 	"wikibase-property-render-error": "paazih susin $1: $2 mungangaw",
 	"wikibase-otherprojects": "zuma cwanan",
 	"wikibase-otherprojects-beta-message": "zuma cwanan tapiingan a tusil",
+	"wikibase-otherprojects-beta-description": "i tapiingan a tulis micunus \"{{int:wikibase-otherprojects}}\" atilad, taneng kilul tu nakamuan {{WBREPONAME}} a kalunasulitan nipabeli masasiket taneng misiket tu zuma Wikimyiti cwanan.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|papatun}} mala {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "yu izaw ku tademaw kaku a {{GENDER:|patizeng tu}} kasabelih  masasiket ta {{WBREPONAME}} kasacacay sa patakusen kaku.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> atu{{PLURAL:$4|cacay zuma kasabelih|$4 zuma kasabelih |100=99+ zuma kasabelih }}{{GENDER:$2|masasiket tuway}} ta {{WBREPONAME}} kasacacay.",

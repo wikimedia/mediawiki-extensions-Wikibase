@@ -129,6 +129,7 @@
 	"wikibase-validator-not-a-language": "«$1» — невядомы код мовы.",
 	"wikibase-item-reference-edit-placeholder": "Увядзіце ідэнтыфікатар элемэнту, напрыклад, Q10",
 	"wikibase-item-reference-edit-invalid-format": "Уведзены ідэнтыфікатар элемэнту мае няслушны фармат",
+	"wikibase-item-reference-edit-nonexistent-item": "Элемэнт з такім ідэнтыфікатарам не існуе",
 	"wikibase-wikibaserepopage-invalid-langcode": "Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 зьяўляецца перанакіраваньнем.",
 	"wikibase-wikibaserepopage-storage-exception": "Адбылася памылка пры спробе загрузіць $1: $2.",

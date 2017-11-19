@@ -52,6 +52,7 @@
 	"wikibase-validator-bad-entity-type": "Tipus d’entitat $1 no previst",
 	"wikibase-validator-no-such-entity": "$1 no trobat",
 	"wikibase-validator-no-such-property": "Propietat $1 no trobada",
+	"wikibase-validator-unknown-unit": "Unitat desconeguda: $1",
 	"wikibase-validator-not-allowed": "Valor il·legal: $1",
 	"wikibase-validator-no-validators": "Prohibit",
 	"datatypes-type-wikibase-item": "Element",
@@ -72,7 +73,9 @@
 	"wikibase-entity-summary-wbeditentity-create": "Nova entitat creada",
 	"wikibase-entity-summary-wbeditentity-update": "Entitat modificada",
 	"wikibase-entity-summary-wbeditentity-override": "S'ha netejat una entitat",
+	"wikibase-entity-summary-wbsetreference": "Defineix una referència",
 	"wikibase-entity-summary-wbsetreference-add": "S'ha afegit una referència a l'afirmació",
+	"wikibase-entity-summary-wbsetreference-set": "S'ha canviat la referència d'una afirmació",
 	"wikibase-entity-summary-wbsetlabel-add": "S'ha afegit una etiqueta en [$2]",
 	"wikibase-entity-summary-wbsetlabel-set": "S'ha canviat l'etiqueta en [$2]",
 	"wikibase-entity-summary-wbsetlabel-remove": "Esborra l'etiqueta [$2]",
@@ -87,6 +90,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add": "S'ha afegit un enllaç a [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "S'ha canviat l'enllaç a [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "S'ha eliminat l'enllaç a [$2]",
+	"wikibase-entity-summary-wblinktitles-create": "S'ha creat l'entitat per a connectar pàgines",
 	"wikibase-entity-summary-wblinktitles-connect": "S'ha afegit un enllaç de llengua per connectar les pàgines",
 	"wikibase-entity-summary-wbcreateclaim-value": "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
@@ -115,5 +119,6 @@
 	"wikibase-property-summary-wbcreate-new": "S’ha creat una propietat nova",
 	"wikibase-property-summary-wbeditentity-create": "S’ha creat una propietat nova",
 	"wikibase-property-summary-wbeditentity-update": "S’ha modificat una propietat",
-	"wikibase-property-summary-wbeditentity-override": "S'ha eliminat una propietat"
+	"wikibase-property-summary-wbeditentity-override": "S'ha eliminat una propietat",
+	"wikibase-property-summary-special-create-property": "S'ha creat una propietat [$2] amb {{PLURAL:$1|valor|valors}}"
 }
