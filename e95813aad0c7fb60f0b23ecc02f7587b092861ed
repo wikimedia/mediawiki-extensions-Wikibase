@@ -22,6 +22,30 @@
       "revId": "e95813aad0c7fb60f0b23ecc02f7587b092861ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_2fa4b703",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-19T16:50:43Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. I agree, and already did that see https://github.com/wmde/WikibaseCodeSniffer/commit/165c94ae44598e828d7496525e54860385839c10 . I will remove this command line flag with the next Wikibase CodeSniffer update.",
+      "parentUuid": "2e5417b0_b6e3299c",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "e95813aad0c7fb60f0b23ecc02f7587b092861ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
