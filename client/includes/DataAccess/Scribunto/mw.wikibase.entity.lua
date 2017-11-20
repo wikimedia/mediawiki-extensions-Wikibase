@@ -46,7 +46,7 @@ local maskClaimsTable = function( entity )
 	entity.claims = {}
 
 	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( emptyTable, propertyId )
+	pseudoClaimsMetatable.__index = function( emptyTable, propertyId ) -- luacheck: no unused args
 		if isValidPropertyId( propertyId ) then
 			-- Only attempt to track the usage if we have a valid property id.
 			php.addStatementUsage( entity.id, propertyId )
@@ -55,18 +55,18 @@ local maskClaimsTable = function( entity )
 		return actualEntityClaims[propertyId]
 	end
 
-	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data )
+	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data ) -- luacheck: no unused args
 		error( 'Entity cannot be modified' )
 	end
 
-	local logNext = function( emptyTable, propertyId )
+	local logNext = function( emptyTable, propertyId ) -- luacheck: no unused args
 		if isValidPropertyId( propertyId ) then
 			php.addStatementUsage( entity.id, propertyId )
 		end
 		return next( actualEntityClaims, propertyId )
 	end
 
-	pseudoClaimsMetatable.__pairs = function( emptyTable )
+	pseudoClaimsMetatable.__pairs = function( emptyTable ) -- luacheck: no unused args
 		return logNext, {}, nil
 	end
 
@@ -211,7 +211,7 @@ methodtable.getBestStatements = function( entity, propertyId )
 	local statements = {}
 	local bestRank = 'normal'
 
-	for k, statement in pairs( entity.claims[propertyId] ) do
+	for _, statement in pairs( entity.claims[propertyId] ) do
 		if statement.rank == bestRank then
 			statements[#statements + 1] = statement
 		elseif statement.rank == 'preferred' then
@@ -233,7 +233,7 @@ methodtable.getProperties = function( entity )
 	local properties = {}
 
 	local n = 0
-	for k, v in pairs( entity.claims ) do
+	for k, _ in pairs( entity.claims ) do
 		n = n + 1
 		properties[n] = k
 	end
