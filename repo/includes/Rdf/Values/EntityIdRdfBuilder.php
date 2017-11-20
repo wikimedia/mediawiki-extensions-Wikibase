@@ -54,7 +54,10 @@ class EntityIdRdfBuilder implements ValueSnakRdfBuilder {
 		$value = $snak->getDataValue();
 		$entityId = $value->getValue()->getEntityId();
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
-		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ENTITY, $entityLName );
+		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $entityId );
+
+		$writer->say( $propertyValueNamespace, $propertyValueLName )
+			->is( $this->vocabulary->entityNamespaceNames[$entityRepoName], $entityLName );
 
 		$this->mentionedEntityTracker->entityReferenceMentioned( $entityId );
 	}

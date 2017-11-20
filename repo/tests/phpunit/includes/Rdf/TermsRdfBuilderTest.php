@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\TermsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -118,7 +119,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer, $languages )
-			->addLabels( $entity->getId(), $entity->getFingerprint()->getLabels() );
+			->addLabels(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getLabels()
+			);
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
@@ -138,7 +143,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer, $languages )
-			->addDescriptions( $entity->getId(), $entity->getFingerprint()->getDescriptions() );
+			->addDescriptions(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getDescriptions()
+			);
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
@@ -158,7 +167,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer, $languages )
-			->addAliases( $entity->getId(), $entity->getFingerprint()->getAliasGroups() );
+			->addAliases(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getAliasGroups()
+			);
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
