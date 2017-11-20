@@ -204,12 +204,12 @@ class NewStatement {
 		$result = new Statement( $snack );
 		$result->setRank( $this->rank );
 
-		if ( $this->guid ) {
-			if ( $this->guid === self::GENERATE_GUID ) {
-				$result->setGuid( $this->generateUuidV4() );
-			} else {
-				$result->setGuid( $this->guid );
-			}
+		if ( $this->guid === self::GENERATE_GUID ) {
+			$result->setGuid(
+				$this->propertyId->getSerialization() . '$' . $this->generateUuidV4()
+			);
+		} elseif ( $this->guid ) {
+			$result->setGuid( $this->guid );
 		}
 
 		foreach ( $this->qualifiers as $qualifier ) {
