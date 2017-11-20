@@ -3,9 +3,12 @@
 		"authors": [
 			"An13sa",
 			"Sator",
-			"Subi"
+			"Subi",
+			"Mikel Ibaiba"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" balioen manipulazioa oraindik ez da onartzen.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" datu motatako balioen manipulazioa oraindik ez da onartzen.",
 	"valueview-expert-emptyvalue-empty": "hutsik",
 	"valueview-expert-globecoordinateinput-precision": "Zehaztasuna:",
 	"valueview-expert-globecoordinateinput-nullprecision": "zehaztugabea",
