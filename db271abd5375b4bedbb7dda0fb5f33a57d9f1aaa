@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_b051dadf",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-21T17:08:43Z",
+      "side": 1,
+      "message": "Currently, the code is circular: The basic EntityContent::isEmpty implementation here calls EntityContent::isEntityEmpty, and both subclass-implementations of EntityContent::isEntityEmpty call EntityContent::isEmpty.\n\nI believe this method here should be made abstract. The only subclass that does not override it yet is LexemeContent. All others override it anyway, and do *not* call the parent. That\u0027s a super strong hint for making this abstract.",
+      "range": {
+        "startLine": 633,
+        "startChar": 17,
+        "endLine": 633,
+        "endChar": 24
+      },
+      "revId": "db271abd5375b4bedbb7dda0fb5f33a57d9f1aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5417b0_30540ac9",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-21T17:08:43Z",
+      "side": 1,
+      "message": "With what I argued above this is not needed any more.",
+      "range": {
+        "startLine": 750,
+        "startChar": 20,
+        "endLine": 750,
+        "endChar": 33
+      },
+      "revId": "db271abd5375b4bedbb7dda0fb5f33a57d9f1aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
