@@ -142,7 +142,8 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 			$user,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
 			$this->mockRepository,
-			$this->getMockEntityTitleLookup()
+			$this->getMockEntityTitleLookup(),
+			$this->getMockBuilder( EntityContentFactory::class )->disableOriginalConstructor()->getMock()
 		);
 
 		return $interactor;

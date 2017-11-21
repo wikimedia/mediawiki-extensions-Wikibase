@@ -146,7 +146,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$this->user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
-				$this->getMockEntityTitleLookup()
+				$this->getMockEntityTitleLookup(),
+				$wikibaseRepo->getEntityContentFactory()
 			)
 		);
 	}

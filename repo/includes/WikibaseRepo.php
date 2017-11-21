@@ -690,7 +690,8 @@ class WikibaseRepo {
 			$user,
 			$this->newEditFilterHookRunner( $context ),
 			$this->getStore()->getEntityRedirectLookup(),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$this->getEntityContentFactory()
 		);
 	}
 
@@ -1649,7 +1650,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newRedirectCreationInteractor( $user, $context ),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$this->getEntityContentFactory()
 		);
 	}
 

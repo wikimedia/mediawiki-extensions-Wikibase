@@ -154,9 +154,11 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 				$user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
-				$this->getMockEntityTitleLookup()
+				$this->getMockEntityTitleLookup(),
+				$wikibaseRepo->getEntityContentFactory()
 			),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$wikibaseRepo->getEntityContentFactory()
 		);
 
 		return $interactor;

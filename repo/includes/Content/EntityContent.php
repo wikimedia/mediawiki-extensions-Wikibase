@@ -583,18 +583,20 @@ abstract class EntityContent extends AbstractContent {
 
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );
 
-		if ( $redirAfterPatch !== null && !$entityAfterPatch->isEmpty() ) {
-			throw new PatcherException( 'EntityContent must not contain Entity data as well as'
-				. ' a redirect after applying the patch!' );
-		} elseif ( $redirAfterPatch ) {
+		$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );
+
+		if ( $redirAfterPatch ) {
+			if ( !$patched->isEmpty() ) {
+				throw new PatcherException( 'EntityContent must not contain Entity data as well as'
+					. ' a redirect after applying the patch!' );
+			}
+
 			$patched = $handler->makeEntityRedirectContent( $redirAfterPatch );
 
 			if ( !$patched ) {
 				throw new PatcherException( 'Cannot create a redirect using content model '
 					. $this->getModel() . '!' );
 			}
-		} else {
-			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );
 		}
 
 		return $patched;
@@ -628,15 +630,17 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return bool True if this is not a redirect and the page is empty.
+	 * An entity is considered empty if it does not contain any content that can be removed. Having
+	 * an ID set never counts as having content.
+	 *
+	 * Knowing if an entity is empty is relevant when, for example, moving or merging entities and
+	 * code wants to make sure all content is transferred from the old to the new entity.
+	 *
+	 * @return bool True if this is not a redirect, and the entity does not contain removable
+	 *  content.
 	 */
 	public function isEmpty() {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
-
-		$holder = $this->getEntityHolder();
-		return $holder === null || $holder->getEntity()->isEmpty();
+		throw new LogicException( 'Not yet implemented for this entity type' );
 	}
 
 	/**

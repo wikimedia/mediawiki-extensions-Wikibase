@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -67,6 +68,11 @@ class RedirectCreationInteractor {
 	 */
 	private $entityRedirectLookup;
 
+	/**
+	 * @var EntityContentFactory
+	 */
+	private $entityContentFactory;
+
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
@@ -75,7 +81,8 @@ class RedirectCreationInteractor {
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
 		EntityRedirectLookup $entityRedirectLookup,
-		EntityTitleStoreLookup $entityTitleLookup
+		EntityTitleStoreLookup $entityTitleLookup,
+		EntityContentFactory $entityContentFactory
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
@@ -85,6 +92,7 @@ class RedirectCreationInteractor {
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityContentFactory = $entityContentFactory;
 	}
 
 	/**
@@ -161,7 +169,8 @@ class RedirectCreationInteractor {
 				}
 			} else {
 				$entity = $revision->getEntity();
-				if ( !$entity->isEmpty() ) {
+				$content = $this->entityContentFactory->newFromEntity( $entity );
+				if ( !$content->isEmpty() ) {
 					throw new RedirectCreationException(
 						"Can't create redirect on non empty item $entityId",
 						'origin-not-empty'
