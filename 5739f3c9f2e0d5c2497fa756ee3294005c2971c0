@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e5417b0_8d05a97e",
+        "filename": "view/resources/wikibase/templates.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-21T16:13:27Z",
+      "side": 1,
+      "message": "This should still happen, so I believe you went a bit to far by removing the first line.",
+      "range": {
+        "startLine": 54,
+        "startChar": 62,
+        "endLine": 54,
+        "endChar": 69
+      },
+      "revId": "5739f3c9f2e0d5c2497fa756ee3294005c2971c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
