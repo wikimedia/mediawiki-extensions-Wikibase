@@ -163,16 +163,18 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				$summaryFormatter,
 				$this->user,
 				new RedirectCreationInteractor(
-						$this->mockRepository,
-						$this->mockRepository,
-						$this->getPermissionCheckers(),
-						$summaryFormatter,
-						$this->user,
-						$this->getMockEditFilterHookRunner(),
-						$this->mockRepository,
-						$this->getMockEntityTitleLookup()
+					$this->mockRepository,
+					$this->mockRepository,
+					$this->getPermissionCheckers(),
+					$summaryFormatter,
+					$this->user,
+					$this->getMockEditFilterHookRunner(),
+					$this->mockRepository,
+					$this->getMockEntityTitleLookup(),
+					$wikibaseRepo->getEntityContentFactory()
 				),
-				$titleLookup
+				$titleLookup,
+				$wikibaseRepo->getEntityContentFactory()
 			),
 			$titleLookup
 		);

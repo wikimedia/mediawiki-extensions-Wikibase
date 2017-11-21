@@ -143,7 +143,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 				$user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
-				$this->getMockEntityTitleLookup()
+				$this->getMockEntityTitleLookup(),
+				$wikibaseRepo->getEntityContentFactory()
 			);
 		}
 

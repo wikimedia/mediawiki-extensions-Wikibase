@@ -200,7 +200,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$wikibaseRepo->getSummaryFormatter(),
 				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
-				$this->getEntityTitleLookup()
+				$this->getEntityTitleLookup(),
+				$wikibaseRepo->getEntityContentFactory()
 			),
 			$errorReporter,
 			function ( $module ) use ( $apiResultBuilder ) {

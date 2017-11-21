@@ -2,12 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Interactors;
 
-use FauxRequest;
 use PHPUnit_Framework_MockObject_Matcher_InvokedRecorder;
-use RequestContext;
 use Status;
 use Title;
 use User;
+use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -15,7 +14,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -125,27 +127,36 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		Status $efHookStatus = null,
 		User $user = null
 	) {
-		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
-		}
+		global $wgUser;
 
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$entityHandlerFactoryCallback = function () {
+			$entityHandler = $this->getMockBuilder( EntityHandler::class )
+				->disableOriginalConstructor()
+				->getMock();
+			$entityHandler->method( 'makeEntityContent' )
+				->willReturnCallback( function ( EntityHolder $entityHolder ) {
+					$entityContent = $this->getMock( EntityContent::class );
+					$entityContent->method( 'isEmpty' )
+						->willReturn( $entityHolder->getEntity()->isEmpty() );
+					return $entityContent;
+				} );
+			return $entityHandler;
+		};
 
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest() );
-
-		$interactor = new RedirectCreationInteractor(
+		return new RedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionChecker(),
-			$summaryFormatter,
-			$user,
+			WikibaseRepo::getDefaultInstance()->getSummaryFormatter(),
+			$user ?: $wgUser,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
 			$this->mockRepository,
-			$this->getMockEntityTitleLookup()
+			$this->getMockEntityTitleLookup(),
+			new EntityContentFactory( [], [
+				'item' => $entityHandlerFactoryCallback,
+				'property' => $entityHandlerFactoryCallback,
+			] )
 		);
-
-		return $interactor;
 	}
 
 	/**
