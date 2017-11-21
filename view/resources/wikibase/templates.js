@@ -64,8 +64,7 @@
 			filteredString = '',
 			character = '';
 
-		// ignore case since IE8 will convert tag names to upper case
-		string = string.replace( /<\/?t(?:head|body|foot)[^>]*>/gi, '' );
+		string = string.replace( /<\/?t(?:head|body|foot)[^>]*>/g, '' );
 
 		// strip white space between tags as well since it might cause interference
 		string = string.replace( />\s+</g, '><' );
@@ -100,25 +99,8 @@
 				readTag = false;
 				outTag = true;
 				filteredString += character;
-			} else if ( outTag && /\s/.test( character ) ) {
-				continue; // omit white space between tag and text (IE8)
-			} else if ( ( !inTag || inTag && readTag )
-				// Strip line breaks inserted by IE8 that are not stripped by the regular expression
-				// before the for loop:
-				&& character.charCodeAt( 0 ) !== 10
-				&& character.charCodeAt( 0 ) !== 13
-			) {
-				filteredString += character;
-				if ( outTag ) {
-					outTag = false;
-				}
 			}
 		}
-
-		// We are not interested in letter case and since IE8 is causing problems due to having
-		// jQuery parse the template will convert the tag names to upper case, just convert the
-		// whole string to lower case.
-		string = filteredString.toLowerCase();
 
 		return string;
 	}
