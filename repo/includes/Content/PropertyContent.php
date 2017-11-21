@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use LogicException;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -133,6 +134,11 @@ class PropertyContent extends EntityContent {
 	 */
 	public function isEmpty() {
 		return !$this->isRedirect() && $this->getProperty()->isEmpty();
+	}
+
+	protected function isEntityEmpty( EntityDocument $entity ) {
+		/** @var Property $entity */
+		return $entity->isEmpty();
 	}
 
 }

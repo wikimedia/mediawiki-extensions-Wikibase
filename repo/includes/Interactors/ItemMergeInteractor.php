@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -70,6 +71,11 @@ class ItemMergeInteractor {
 	 */
 	private $entityTitleLookup;
 
+	/**
+	 * @var EntityContentFactory
+	 */
+	private $entityContentFactory;
+
 	public function __construct(
 		MergeChangeOpsFactory $changeOpFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -88,6 +94,7 @@ class ItemMergeInteractor {
 		$this->user = $user;
 		$this->interactorRedirect = $interactorRedirect;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityContentFactory = ...;
 	}
 
 	/**
@@ -181,7 +188,9 @@ class ItemMergeInteractor {
 	 * @return bool
 	 */
 	private function isEmpty( ItemId $itemId ) {
-		return $this->loadEntity( $itemId )->isEmpty();
+		$entity = $this->loadEntity( $itemId )->isEmpty();
+		$content = $this->entityContentFactory->newFromEntity( $entity );
+		return $content->isEmpty();
 	}
 
 	/**

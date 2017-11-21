@@ -583,7 +583,7 @@ abstract class EntityContent extends AbstractContent {
 
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );
 
-		if ( $redirAfterPatch !== null && !$entityAfterPatch->isEmpty() ) {
+		if ( $redirAfterPatch !== null && !$this->isEntityEmpty( $entityAfterPatch ) ) {
 			throw new PatcherException( 'EntityContent must not contain Entity data as well as'
 				. ' a redirect after applying the patch!' );
 		} elseif ( $redirAfterPatch ) {
@@ -636,7 +636,7 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		$holder = $this->getEntityHolder();
-		return $holder === null || $holder->getEntity()->isEmpty();
+		return $holder === null || $this->isEntityEmpty( $holder->getEntity() );
 	}
 
 	/**
@@ -738,6 +738,18 @@ abstract class EntityContent extends AbstractContent {
 	 */
 	public function getEntityPageProperties() {
 		return [];
+	}
+
+	/**
+	 * Determines whether the Entity is empty. This implementations always returns false.
+	 * Subclasses should override this with the appropriate logic.
+	 *
+	 * @param EntityDocument $entity
+	 * @return bool
+	 */
+	protected function isEntityEmpty( EntityDocument $entity ) {
+		// XXX: this could perhaps live in EntityHandler and subclasses instead!
+		return false;
 	}
 
 }
