@@ -24,6 +24,8 @@
 	"wikibase-addreference": "حوالہ درج کریں",
 	"wikibase-save-inprogress": "محفوظ ہو رہا ہے...",
 	"wikibase-remove-inprogress": "حذف ہو رہا ہے...",
+	"wikibase-statementlistview-add": "اضافہ قدر",
+	"wikibase-statementgrouplistview-add": "اضافہ بیان",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "مزید زبانوں میں",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "تشکیل",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "میری لوڈ کردہ تمام زبانوں میں وضاحتیں، مستعار ناموں اور لیبلز دکھائیں",
@@ -31,6 +33,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "وضاحت",
 	"wikibase-entitytermsforlanguagelistview-label": "لیبل",
 	"wikibase-entitytermsforlanguagelistview-language": "زبان",
+	"wikibase-entitytermsforlanguagelistview-more": "درج کردہ تمام زبانیں",
 	"wikibase-label-empty": "کوئی لیبل نہیں دیا گیا",
 	"wikibase-label-edit-placeholder": "لیبل درج کریں",
 	"wikibase-label-edit-placeholder-language-aware": "$1 میں لیبل درج کریں",
@@ -56,7 +59,7 @@
 	"wikibase-statementsection-statements": "بیانات",
 	"wikibase-sitelinks": "روابط سائٹس",
 	"wikibase-sitelinkgroupview-input-help-message": "سائٹ اور اُس سائٹ کا صفحہ تحریر کر کے سائٹ ربط درج کریں، نیز موجود روابط سائٹس میں ترمیم یا حذف کریں۔",
-	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|اندراج|اندرجات}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|اندراج|اندراجات}}",
 	"wikibase-sitelinks-empty": "اس آئٹم سے کوئی صفحہ مربوط نہیں ہے۔",
 	"wikibase-sitelinks-special": "دیگر ویب سائٹ",
 	"wikibase-badgeselector-badge-placeholder-title": "نشان زد کرنے کے لیے کلک کریں۔",
@@ -105,5 +108,6 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "وضاحت:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "مستعار نام:",
 	"special-setsitelink": "سائٹ ربط درج کریں",
-	"wikibase-restoreold": "بحال"
+	"wikibase-restoreold": "بحال",
+	"wikibase-concept-uri": "تصور یو آر آئی"
 }
