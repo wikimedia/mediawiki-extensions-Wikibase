@@ -1010,6 +1010,7 @@ call_user_func( function() {
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText';
 	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
+	$wgHooks['ParserOutputPostCacheTransform'][] = '\Wikibase\RepoHooks::onParserOutputPostCacheTransform';
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
 	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
 	$wgHooks['CirrusSearchScoreBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchScoreBuilder';
