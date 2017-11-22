@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_b62040aa",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-22T19:03:00Z",
+      "side": 1,
+      "message": "No, turns out for some languages stemmers that Elastic has are not good and are not improving the search, or they do not have any usable stemming at all. See the task link above for discussion. \nI can move the list to the config, of course. I just wanted it in the patch so it could be reviewed together, but since David \u0026Trey already seen it, I could move it to separate patch.",
+      "parentUuid": "0edf5380_cb90bdfa",
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_8b8fd5d0",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 35
@@ -249,6 +267,30 @@
       "writtenOn": "2017-11-22T17:12:14Z",
       "side": 1,
       "message": "Why was this changed to extend that abstract base class? It was not needed before, so why now?",
+      "range": {
+        "startLine": 16,
+        "startChar": 32,
+        "endLine": 16,
+        "endChar": 46
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_16164c5a",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-22T19:03:00Z",
+      "side": 1,
+      "message": "we did not index descriptions before (only stored) so we did not need class that contains code for creating indexing fields.",
+      "parentUuid": "0edf5380_6b3091fd",
       "range": {
         "startLine": 16,
         "startChar": 32,
