@@ -3,12 +3,8 @@
 namespace Wikibase\Client\Changes;
 
 use ArrayIterator;
-use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
-use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
+use MWException;
 use Title;
 use Traversable;
 use UnexpectedValueException;
@@ -19,10 +15,10 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -120,58 +116,50 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param EntityChange $change
+	 * @param EntityChange|EntityDiffChangedAspects $change
 	 *
 	 * @return string[]
 	 */
-	public function getChangedAspects( EntityChange $change ) {
+	public function getChangedAspects( $change ) {
 		$aspects = [];
 
-		$diff = $change->getDiff();
-		$remainingDiffOps = count( $diff ); // this is a "deep" count!
-
-		if ( $remainingDiffOps === 0 ) {
-			// HACK: assume an empty diff implies that some "other" aspect of the entity was changed.
-			// This is needed since EntityChangeFactory::newFromUpdate suppresses statement, description
-			// and alias diffs for performance reasons.
-			// For a better solution, see T113468.
-			$aspects[] = EntityUsage::OTHER_USAGE;
-			return $aspects;
+		if ( $change instanceof EntityChange ) {
+			$diff = $change->getDiff();
+			if ( count( $diff ) === 0 ) {
+				// We still need this hack for now until we stop supressing diffs
+				$aspects[] = EntityUsage::OTHER_USAGE;
+				return $aspects;
+			}
+			$diffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
+		} elseif ( $change instanceof EntityDiffChangedAspects ) {
+			$diffAspects = $change;
+		} else {
+			throw  new MWException( 'AffectedPagesFinder::getChangedAspects accepts EntityChange' .
+				'or EntityDiffChangedAspects' );
 		}
 
-		if ( $diff instanceof ItemDiff && !$diff->getSiteLinkDiff()->isEmpty() ) {
-			$siteLinkDiff = $diff->getSiteLinkDiff();
-
+		if ( $diffAspects->getSiteLinkChanges() !== [] ) {
+			$sitelinkChanges = $diffAspects->getSiteLinkChanges();
 			$aspects[] = EntityUsage::SITELINK_USAGE;
-			$remainingDiffOps -= count( $siteLinkDiff );
 
-			if ( isset( $siteLinkDiff[$this->siteId] )
-				&& !$this->isBadgesOnlyChange( $siteLinkDiff[$this->siteId] )
+			if ( isset( $sitelinkChanges[$this->siteId] )
+				&& !$this->isBadgesOnlyChange( $sitelinkChanges[$this->siteId] )
 			) {
 				$aspects[] = EntityUsage::TITLE_USAGE;
 			}
 		}
 
-		if ( $diff instanceof EntityDiff ) {
-			$labelsDiff = $diff->getLabelsDiff();
-			$descriptionsDiff = $diff->getDescriptionsDiff();
-
-			if ( !$labelsDiff->isEmpty() ) {
-				$labelAspects = $this->getChangedTermAspects( EntityUsage::LABEL_USAGE, $labelsDiff );
+		if ( $diffAspects->getLabelChanges() !== [] ) {
+				$labelAspects = $this->getChangedTermAspects( EntityUsage::LABEL_USAGE, $diffAspects->getLabelChanges() );
 				$aspects = array_merge( $aspects, $labelAspects );
-				$remainingDiffOps -= count( $labelAspects );
-			}
-
-			if ( !$descriptionsDiff->isEmpty() ) {
-				$descriptionsAspects = $this->getChangedTermAspects( EntityUsage::DESCRIPTION_USAGE, $descriptionsDiff );
-				$aspects = array_merge( $aspects, $descriptionsAspects );
-				$remainingDiffOps -= count( $descriptionsAspects );
-			}
 		}
 
-		// FIXME: EntityChange suppresses various kinds of diffs (see above). T113468.
+		if ( $diffAspects->getDescriptionChanges() !== [] ) {
+			$descriptionsAspects = $this->getChangedTermAspects( EntityUsage::DESCRIPTION_USAGE, $diffAspects->getDescriptionChanges() );
+			$aspects = array_merge( $aspects, $descriptionsAspects );
+		}
 
-		if ( $remainingDiffOps > 0 ) {
+		if ( ( $diffAspects->getStatementChanges() !== [] ) || ( $diffAspects->hasOtherChanges() !== false ) ) {
 			$aspects[] = EntityUsage::OTHER_USAGE;
 		}
 
@@ -180,14 +168,14 @@ class AffectedPagesFinder {
 
 	/**
 	 * @param string $aspect
-	 * @param Diff $diff
+	 * @param string[] $diff
 	 *
 	 * @return string[]
 	 */
-	private function getChangedTermAspects( $aspect, Diff $diff ) {
+	private function getChangedTermAspects( $aspect, array $diff ) {
 		$aspects = [];
 
-		foreach ( $diff as $lang => $diffOp ) {
+		foreach ( $diff as $lang ) {
 			$aspects[] = EntityUsage::makeAspectKey( $aspect, $lang );
 		}
 
@@ -225,8 +213,10 @@ class AffectedPagesFinder {
 		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
 
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
-			$siteLinkDiff = $change->getSiteLinkDiff();
-			$namesFromDiff = $this->getPagesReferencedInDiff( $siteLinkDiff );
+			$diffChangedAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+				$change->getDiff()
+			);
+			$namesFromDiff = $this->getPagesReferencedInDiff( $diffChangedAspects->getSiteLinkChanges() );
 			$titlesFromDiff = $this->getTitlesFromTexts( $namesFromDiff );
 			$usagesFromDiff = $this->makeVirtualUsages( $titlesFromDiff, $entityId, [ EntityUsage::SITELINK_USAGE ] );
 
@@ -259,45 +249,34 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param Diff $siteLinkDiff
+	 * @param string[] $siteLinkDiff
 	 *
 	 * @throws UnexpectedValueException
 	 * @return string[]
 	 */
-	private function getPagesReferencedInDiff( Diff $siteLinkDiff ) {
+	private function getPagesReferencedInDiff( array $siteLinkDiff ) {
 		$pagesToUpdate = [];
+		$siteLinkDiffWiki = $siteLinkDiff[$this->siteId];
 
-		// $siteLinkDiff changed from containing atomic diffs to
-		// containing map diffs. For B/C, handle both cases.
-		$siteLinkDiffOp = $siteLinkDiff[$this->siteId];
-
-		if ( $siteLinkDiffOp instanceof Diff && array_key_exists( 'name', $siteLinkDiffOp ) ) {
-			$siteLinkDiffOp = $siteLinkDiffOp['name'];
+		if ( $siteLinkDiffWiki[0] !== null ) {
+			$pagesToUpdate[] = $siteLinkDiffWiki[0];
 		}
 
-		if ( $siteLinkDiffOp instanceof DiffOpAdd ) {
-			$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
-		} elseif ( $siteLinkDiffOp instanceof DiffOpRemove ) {
-			$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-		} elseif ( $siteLinkDiffOp instanceof DiffOpChange ) {
-			$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
-			$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-		} else {
-			throw new UnexpectedValueException(
-				"Unknown change operation: " . get_class( $siteLinkDiffOp ) . ")"
-			);
+		if ( $siteLinkDiffWiki[1] !== null ) {
+			$pagesToUpdate[] = $siteLinkDiffWiki[1];
 		}
 
 		return $pagesToUpdate;
 	}
 
 	/**
-	 * @param DiffOp $siteLinkDiffOp
+	 * @param string|null[] $siteLinkDiff
 	 *
 	 * @return bool
 	 */
-	private function isBadgesOnlyChange( DiffOp $siteLinkDiffOp ) {
-		return $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp );
+	private function isBadgesOnlyChange( array $siteLinkDiff ) {
+		return ( $siteLinkDiff[0] === null && $siteLinkDiff[1] === null
+			&& $siteLinkDiff[2] === true );
 	}
 
 	/**
