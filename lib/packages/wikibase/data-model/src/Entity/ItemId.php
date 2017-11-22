@@ -22,19 +22,14 @@ class ItemId extends EntityId implements Int32EntityId {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $idSerialization ) {
-		$serializationParts = self::splitSerialization( $idSerialization );
-		$localId = strtoupper( $serializationParts[2] );
-		$this->assertValidIdFormat( $localId );
+		$parts = self::splitSerialization( $idSerialization );
+		$this->assertValidIdFormat( $parts[2] );
 		parent::__construct( self::joinSerialization(
-			[ $serializationParts[0], $serializationParts[1], $localId ] )
-		);
+			[ $parts[0], $parts[1], strtoupper( $parts[2] ) ]
+		) );
 	}
 
 	private function assertValidIdFormat( $idSerialization ) {
-		if ( !is_string( $idSerialization ) ) {
-			throw new InvalidArgumentException( '$idSerialization must be a string' );
-		}
-
 		if ( !preg_match( self::PATTERN, $idSerialization ) ) {
 			throw new InvalidArgumentException( '$idSerialization must match ' . self::PATTERN );
 		}
