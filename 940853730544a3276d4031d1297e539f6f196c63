@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_6bded1df",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "That sounds bad. That whole $inHook semaphore looks scary and I would love to see a follow up patch that fixes this issue. Why is the code made circular in the first place?",
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_cb90bdfa",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "This looks like the default should be to use stemming for *all* languages, doesn\u0027t it?\n\nDo you think it\u0027s a good idea to maintain this in the default settings of the Wikibase code base? I would feel better if this here is an empty array, and the configuration is in mediawiki-config.",
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_8b8fd5d0",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "\"array\" type hint missing",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 66
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_6b8c11dc",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "\"array\" type hint missing.",
+      "range": {
+        "startLine": 42,
+        "startChar": 33,
+        "endLine": 42,
+        "endChar": 41
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_2ba96922",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "\"array\" type hints missing.",
+      "range": {
+        "startLine": 67,
+        "startChar": 34,
+        "endLine": 67,
+        "endChar": 77
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_ab6bb9ed",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "\"array\" type hints missing.",
+      "range": {
+        "startLine": 100,
+        "startChar": 31,
+        "endLine": 100,
+        "endChar": 52
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_eb75c1c9",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "Incomplete PHPDoc.",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 18
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_6b825199",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "\"array\" type hint missing.",
+      "range": {
+        "startLine": 135,
+        "startChar": 37,
+        "endLine": 135,
+        "endChar": 45
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_8b5cf54f",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "Incomplete PHPDoc.",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 18
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_2b5fa945",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "\"array\" type hint missing.",
+      "range": {
+        "startLine": 155,
+        "startChar": 30,
+        "endLine": 155,
+        "endChar": 38
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_6b3091fd",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "Why was this changed to extend that abstract base class? It was not needed before, so why now?",
+      "range": {
+        "startLine": 16,
+        "startChar": 32,
+        "endLine": 16,
+        "endChar": 46
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_4b102d5c",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/AnalysisConfigBuilderTest.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-22T17:12:14Z",
+      "side": 1,
+      "message": "Please use absolute names in @covers tags.",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 24
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
