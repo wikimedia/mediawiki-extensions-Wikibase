@@ -1004,6 +1004,23 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Post-cache transformation for Wikibase section-edit markers
+	 *
+	 * @param ParserOutput $out
+	 * @param string &$text Text being transformed
+	 * @param array &$options Transformation options
+	 */
+	public static function onParserOutputPostCacheTransform(
+		ParserOutput $out, &$text, array &$options
+	) {
+		if ( $options['enableSectionEditLinks'] ) {
+			$text = str_replace( [ '<wb:sectionedit>', '</wb:sectionedit>' ], '', $text );
+		} else {
+			$text = preg_replace( '#<wb:sectionedit>.*?</wb:sectionedit>#s' ], '', $text );
+		}
+	}
+
+	/**
 	 * Add Wikibase-specific ElasticSearch analyzer configurations.
 	 * @param array &$config
 	 * @param AnalysisConfigBuilder $builder
