@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_b652003e",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-22T18:57:58Z",
+      "side": 1,
+      "message": "Because we need to modify analysis config, but we also need to fetch analysis configs for other languages. Avoiding this would require deep refactoring of Analysis config builder in Cirrus, which is a huge complex piece of code, which wasn\u0027t built for reuse. It\u0027s probably possible, but not easy at all (unless somebody has an idea how to do it easily) so this hack is probably the best way we have now to deal with it. The problem is that we do need Cirrus to run the hook, since other extensions might change the per-language configuration (at least in theory) but we don\u0027t want to run THIS particular hook for obvious reasons. Right now the Mediawiki API doesn\u0027t allow to temporarily disable hooks, so that\u0027s what we\u0027ve got.",
+      "parentUuid": "0edf5380_6bded1df",
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_cb90bdfa",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 35
