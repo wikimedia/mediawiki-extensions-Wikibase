@@ -283,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_1180164b",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-22T19:29:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_eb75c1c9",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 18
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_6b825199",
         "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
         "patchSetId": 35
@@ -294,6 +318,30 @@
       "writtenOn": "2017-11-22T17:12:14Z",
       "side": 1,
       "message": "\"array\" type hint missing.",
+      "range": {
+        "startLine": 135,
+        "startChar": 37,
+        "endLine": 135,
+        "endChar": 45
+      },
+      "revId": "940853730544a3276d4031d1297e539f6f196c63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_f1849260",
+        "filename": "repo/includes/Search/Elastic/ConfigBuilder.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-22T19:29:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_6b825199",
       "range": {
         "startLine": 135,
         "startChar": 37,
