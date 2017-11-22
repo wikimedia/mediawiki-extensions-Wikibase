@@ -36,7 +36,7 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 		$generator = $this->newToolbarEditSectionGenerator();
 
 		$this->assertEquals(
-			'<span class="wikibase-toolbar-container"></span>',
+			'<wb:sectionedit><span class="wikibase-toolbar-container"></span></wb:sectionedit>',
 			$generator->getAddStatementToGroupSection( $propertyId )
 		);
 	}
@@ -92,7 +92,7 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 		$generator = $this->newToolbarEditSectionGenerator();
 
 		$this->assertEquals(
-			'<span class="wikibase-toolbar-container"></span>',
+			'<wb:sectionedit><span class="wikibase-toolbar-container"></span></wb:sectionedit>',
 			$generator->getStatementEditSection( $statement )
 		);
 	}
