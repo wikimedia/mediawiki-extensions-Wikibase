@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_ebe8217a",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 0,
+      "message": "So this hack is now gone?\nNot opposing to removal, I just don\u0027t understand what the old code did, and don\u0027t see the relevant thing on the side of the new code, so I am asking :)",
+      "revId": "45f8d2573f6af656a3872fa427fb70d86557b0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_6b07f11f",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 0,
+      "message": "so we\u0027re sure that $diff is never going to be an instance of DiffOp now?",
+      "range": {
+        "startLine": 281,
+        "startChar": 25,
+        "endLine": 281,
+        "endChar": 31
+      },
+      "revId": "45f8d2573f6af656a3872fa427fb70d86557b0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_b6ffa0fb",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 0,
+      "message": "yay for this going away!",
+      "range": {
+        "startLine": 317,
+        "startChar": 18,
+        "endLine": 317,
+        "endChar": 40
+      },
+      "revId": "45f8d2573f6af656a3872fa427fb70d86557b0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

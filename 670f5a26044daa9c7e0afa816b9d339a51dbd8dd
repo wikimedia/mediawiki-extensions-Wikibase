@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_363390f5",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 1,
+      "message": "could probably also create it once in the constructor instead of creating on each method call.",
+      "range": {
+        "startLine": 125,
+        "startChar": 19,
+        "endLine": 125,
+        "endChar": 57
+      },
+      "revId": "670f5a26044daa9c7e0afa816b9d339a51dbd8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_ab52993d",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 1,
+      "message": "as mentioned in the other comment, setDiff might not work with this now?",
+      "range": {
+        "startLine": 137,
+        "startChar": 11,
+        "endLine": 137,
+        "endChar": 18
+      },
+      "revId": "670f5a26044daa9c7e0afa816b9d339a51dbd8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_7616b84e",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 1,
+      "message": "hmm, I wonder, especially as this is not the only occurrence of similar call in the change,  whether constructing an empty EntityDiffChangedAspects wouldn\u0027t be nicer than using the factory to get the empty thing. You wouldn\u0027t need to have the static evilness added here.\nBut on the other hand, creating the object, to unserialize some data into it does not seem a nicest thing either, but might alright given all the stuff around here.",
+      "range": {
+        "startLine": 319,
+        "startChar": 20,
+        "endLine": 319,
+        "endChar": 68
+      },
+      "revId": "670f5a26044daa9c7e0afa816b9d339a51dbd8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_ab1a99ce",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 1,
+      "message": "isn\u0027t it the same as return new Diff()?\n\nBut looking at the code, in particular ChangeDispatcger::isRelevantChange, shouldn\u0027t this be returning ItemDiff here?",
+      "revId": "670f5a26044daa9c7e0afa816b9d339a51dbd8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_4b7b0dbe",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 1,
+      "message": "seems unused now, but I am guessing this might become used in a later version?",
+      "revId": "670f5a26044daa9c7e0afa816b9d339a51dbd8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_8ba6b54e",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlChangeStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-11-22T17:20:45Z",
+      "side": 1,
+      "message": "does this work? DiffChange::setDiff seems to expect Diff passed in, which EntityDiffChangedAspects is not?",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "670f5a26044daa9c7e0afa816b9d339a51dbd8dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
