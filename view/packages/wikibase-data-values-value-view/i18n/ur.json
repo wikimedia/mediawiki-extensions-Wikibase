@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Obaid Raza",
-			"Zainab Meher"
+			"Zainab Meher",
+			"BukhariSaeed"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "خالی",
@@ -14,7 +15,7 @@
 	"valueview-expert-timeinput-precision": "درستی",
 	"valueview-expert-timeinput-calendar": "تقویم:",
 	"valueview-expertextender-languageselector-languagetemplate": "  $1($2)",
-	"valueview-expertextender-languageselector-label": "زبان (تولیتی):",
+	"valueview-expertextender-languageselector-label": "زبان (ہدایتی):",
 	"valueview-expertextender-unitsuggester-label": "اکائی (اختیاری):",
 	"valueview-preview-label": "یہ کچھ یوں ظاہر ہو گا:"
 }
