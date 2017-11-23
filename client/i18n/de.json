@@ -11,6 +11,7 @@
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
 	"tooltip-t-wikibase": "Link zum verbundenen Objekt im Datenrepositorium",
 	"apihelp-query+wbentityusage-description": "Gibt alle Objektkennungen zurück, die in den angegebenen Seiten verwendet werden.",
+	"apihelp-query+wbentityusage-summary": "Gibt alle in den angegebenen Seiten verwendeten Objektkennungen zurück.",
 	"apihelp-query+wbentityusage-param-aspect": "Gibt nur Objektkennungen zurück, die diesen Aspekt verwenden.",
 	"apihelp-query+wbentityusage-param-prop": "Eigenschaften, die zum Ergebnis hinzugefügt werden sollen.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Ob die aktivierte URL oder das Objekt hinzugefügt wird",

@@ -108,6 +108,14 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "وضاحت:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "مستعار نام:",
 	"special-setsitelink": "سائٹ ربط درج کریں",
+	"special-mergeitems": "دو آئٹموں کا انضمام",
+	"wikibase-mergeitems-intro": "اگر آپ نے دو آئٹموں کو ضم کردیا تو سارے لیبل، وضاحتیں، مستعار نام، سائٹ روابط اور بیانات بھی ایک آئٹم سے دوسرے آئٹم میں منتقل ہوجائیں گے۔",
+	"wikibase-mergeitems-fromid": "شناخت نمبر جس کے ساتھ ضم کرنا ہے:",
+	"wikibase-mergeitems-toid": "شناخت نمبر جس کو ضم کروانا ہے:",
+	"wikibase-itemmerge-redirect": "یہ آئٹمز پہلے ہی ضم کیے جا چکے ہیں۔",
+	"wikibase-itemmerge-failed-modify": "آئٹموں کا انضمام ناکام رہا، براہ مہربانی پہلے تنازعات دور کریں۔",
 	"wikibase-restoreold": "بحال",
-	"wikibase-concept-uri": "تصور یو آر آئی"
+	"wikibase-concept-uri": "تصور یو آر آئی",
+	"right-item-merge": "آئٹموں کو ضم کریں",
+	"action-item-merge": "آئٹموں کو ضم کریں"
 }

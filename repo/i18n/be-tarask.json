@@ -136,6 +136,7 @@
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 зьяўляецца перанакіраваньнем.",
 	"wikibase-wikibaserepopage-storage-exception": "Адбылася памылка пры спробе загрузіць $1: $2.",
 	"special-availablebadges": "Даступныя адзнакі",
+	"wikibase-availablebadges-emptylist": "У гэтай вікі няма сканфігураваных адзнакаў.",
 	"special-itembytitle": "Аб’ект паводле назвы",
 	"wikibase-itembytitle-lookup-fieldset": "Пошук аб’ектаў паводле сайту і назвы",
 	"wikibase-itembytitle-lookup-site": "Сайт:",

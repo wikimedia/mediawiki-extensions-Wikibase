@@ -395,6 +395,7 @@
 	"wikibase-search-bad-entity-type": "Ungültiger Objekttyp: $1",
 	"wikibase-search-bad-profile-name": "Ungültiger Suchprofilname: $1",
 	"apihelp-wbavailablebadges-description": "Fragt verfügbare Auszeichnungs-Datenobjekte ab.",
+	"apihelp-wbavailablebadges-summary": "Fragt verfügbare Auszeichnungsobjekte ab.",
 	"apihelp-wbavailablebadges-example-1": "Fragt alle verfügbaren Auszeichnungs-Datenobjekte ab",
 	"apihelp-wbcreateclaim-description": "Erstellt Wikibase-Behauptungen.",
 	"apihelp-wbcreateclaim-param-baserevid": "Die numerische Kennung für die Version, auf der die Änderung basiert.\nSie wird verwendet, um Konflikte während des Speicherns zu erkennen.",
