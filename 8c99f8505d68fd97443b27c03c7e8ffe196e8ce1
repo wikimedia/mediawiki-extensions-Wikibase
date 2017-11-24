@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_d3ffc8a5",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-24T16:07:01Z",
+      "side": 1,
+      "message": "used InvalidArgumentException, using assert reduces readability (IMO) and the whole part is temporarily there. So meh",
+      "parentUuid": "0edf5380_33fc34d5",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_d3eb4808",
         "filename": "client/includes/Changes/AffectedPagesFinder.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-11-24T15:58:59Z",
       "side": 1,
       "message": "Long line, please wrap.\nAlso, bad indent.",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_b3fcc4b2",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-24T16:07:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_d3eb4808",
       "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_13281032",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-24T16:07:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_b3e8440d",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_33d39463",
         "filename": "client/includes/Changes/AffectedPagesFinder.php",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_3310b404",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-24T16:07:01Z",
+      "side": 1,
+      "message": "AFAIK not yet",
+      "parentUuid": "0edf5380_33d39463",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_d3c22888",
         "filename": "client/includes/Changes/AffectedPagesFinder.php",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2017-11-24T15:58:59Z",
       "side": 1,
       "message": "Please break long lines above.",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_f32c8c47",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-24T16:07:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_d3c22888",
       "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
