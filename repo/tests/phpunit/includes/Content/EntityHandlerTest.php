@@ -11,6 +11,7 @@ use FauxRequest;
 use InvalidArgumentException;
 use Language;
 use LogicException;
+use MediaWiki\Storage\PageIdentityValue;
 use MWException;
 use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;
@@ -240,11 +241,18 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$title->method( 'getArticleId' )
+		$title->method( 'getArticleID' )
 			->will( $this->returnValue( $id ) );
 
-		$title->method( 'getLatestRevId' )
+		$title->method( 'getLatestRevID' )
 			->will( $this->returnValue( $id ) );
+
+		// TODO: remove conditional as soon as Title::getPageIdentity() is in core.
+		if ( method_exists( Title::class, 'getPageIdentity' ) ) {
+			$page = PageIdentityValue::newFromDBKey( $id, NS_MAIN, __CLASS__ );
+			$title->method( 'getPageIdentity' )
+				->will( $this->returnValue( $page ) );
+		}
 
 		$revision = new Revision( [
 			'id' => $id,
