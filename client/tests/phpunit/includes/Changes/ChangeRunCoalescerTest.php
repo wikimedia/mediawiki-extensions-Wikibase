@@ -12,6 +12,8 @@ use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -133,7 +135,8 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		}
 		$change->setEntityId( new ItemId( $values['object_id'] ) );
 
-		$change->setDiff( $diff );
+		$diffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
+		$change->setAspectsDiff( $diffAspects );
 
 		return $change;
 	}
@@ -192,29 +195,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$this->assertArrayEquals( $expected->getMetadata(), $actual->getMetadata(), false, true );
 		}
 
-		$this->assertDiffsEqual( $expected->getDiff(), $actual->getDiff() );
-	}
-
-	private function assertDiffsEqual( $expected, $actual, $path = '' ) {
-		if ( $expected instanceof AtomicDiffOp ) {
-			//$this->assertEquals( $expected->getType(), $actual->getType(), $path . ' DiffOp.type' );
-			$this->assertEquals( serialize( $expected ), serialize( $actual ), $path . ' DiffOp' );
-			return;
-		}
-
-		if ( $expected instanceof Traversable ) {
-			$expected = iterator_to_array( $expected );
-			$actual = iterator_to_array( $actual );
-		}
-
-		foreach ( $expected as $key => $expectedValue ) {
-			$currentPath = "$path/$key";
-			$this->assertArrayHasKey( $key, $actual, $currentPath . " missing key" );
-			$this->assertDiffsEqual( $expectedValue, $actual[$key], $currentPath );
-		}
-
-		$extraKeys = array_diff( array_keys( $actual ), array_keys( $expected ) );
-		$this->assertEquals( [], $extraKeys, $path . " extra keys" );
+		$this->assertSame(
+			$expected->getAspectsDiff()->toArray(),
+			$actual->getAspectsDiff()->toArray()
+		);
 	}
 
 	public function provideCoalesceChanges() {

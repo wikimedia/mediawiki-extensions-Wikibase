@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -289,6 +290,14 @@ class EntityChange extends DiffChange {
 
 					return $array;
 				} );
+			}
+		}
+
+		if ( isset( $info['compactDiff'] ) ) {
+			$diff = $info['compactDiff'];
+
+			if ( $diff instanceof EntityDiffChangedAspects ) {
+				$info['compactDiff'] = serialize( $diff );
 			}
 		}
 
