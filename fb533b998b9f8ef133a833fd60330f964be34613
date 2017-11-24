@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_9036d6e2",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "We have the same problem with Statements. We currently solve it by allocating (and potentially burning) an ID early on.\n\nFor Form, we decided after brief discussion that for now, we\u0027ll simply not support adding forms while creating a Lexeme.\n\nIn an ideal world, we could pass in a promise.",
+      "parentUuid": "2e7b3738_9b1b8582",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 41
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_dbc82d28",
         "filename": "lib/includes/Store/HierarchicalEntityStore.php",
         "patchSetId": 2
@@ -82,6 +106,30 @@
       "writtenOn": "2017-09-25T16:16:32Z",
       "side": 1,
       "message": "Is it Lexeme or Form in our case?",
+      "range": {
+        "startLine": 108,
+        "startChar": 29,
+        "endLine": 108,
+        "endChar": 51
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_703352f4",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "When editing a Form, it\u0027s a Form. When editing a Lexeme, it\u0027s a Lexeme.",
+      "parentUuid": "2e7b3738_dbc82d28",
       "range": {
         "startLine": 108,
         "startChar": 29,
@@ -117,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_f04da276",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "Why is this a big warning? Some Entities support redirects (like Items), others do not (like Properties). We need to decide whether we want redirects for Forms. The answer is probably \"no\" initially, but we  may find that there is a need for this eventually.",
+      "parentUuid": "2e7b3738_3b593191",
+      "range": {
+        "startLine": 148,
+        "startChar": 2,
+        "endLine": 148,
+        "endChar": 107
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_5b60bdfc",
         "filename": "lib/includes/Store/HierarchicalEntityStore.php",
         "patchSetId": 2
@@ -128,6 +200,54 @@
       "writtenOn": "2017-09-25T16:16:32Z",
       "side": 1,
       "message": "This implementation is incorrect because it will give result for the parent entity, but not for the sub-entity.\n\nImplementing it correctly will take some effort and might require to fetch multiple revisions from DB.",
+      "range": {
+        "startLine": 179,
+        "startChar": 2,
+        "endLine": 183,
+        "endChar": 67
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_5053ae1a",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "The implementation is imprecise, but not more incorrect than determining the last user to edit a full wikipedia page, even when what you are trying to save is an edit to just one section",
+      "parentUuid": "2e7b3738_5b60bdfc",
+      "range": {
+        "startLine": 179,
+        "startChar": 2,
+        "endLine": 183,
+        "endChar": 67
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_107006a3",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "This is just as incorrect as the query that is used by MediaWiki to determine the last user to edit while saving a section edit: that last edit may have been to a completely unrelated part of the page.\n\nAnyway, we should just kill this method. It\u0027s only used for one very dubious conditional in EditPage.",
+      "parentUuid": "2e7b3738_5b60bdfc",
       "range": {
         "startLine": 179,
         "startChar": 2,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_109f66ba",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "As before, this is an artifact of our binding to Wiki pages. The edit history belongs to the page, and watchlist entries belong to the page. All action that operate on a wikipage will operate on the top level entity.\n\nThis is no different from the fact that you can\u0027t watch a specific section of a wikipedia page. You have to watch the whole page. That\u0027s not perfect, but it\u0027s not in violation of any contract, nor is it inconsistent with MediaWiki\u0027s behavior on \"normal\" pages.",
+      "parentUuid": "2e7b3738_7b3fb9d3",
+      "range": {
+        "startLine": 197,
+        "startChar": 2,
+        "endLine": 201,
+        "endChar": 54
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b3738_fb33a908",
         "filename": "lib/includes/Store/HierarchicalEntityStore.php",
         "patchSetId": 2
@@ -174,6 +318,30 @@
       "writtenOn": "2017-09-25T16:16:32Z",
       "side": 1,
       "message": "Shouldn\u0027t it always return `false`?",
+      "range": {
+        "startLine": 228,
+        "startChar": 2,
+        "endLine": 233,
+        "endChar": 3
+      },
+      "revId": "fb533b998b9f8ef133a833fd60330f964be34613",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_90b3764c",
+        "filename": "lib/includes/Store/HierarchicalEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T12:30:32Z",
+      "side": 1,
+      "message": "No, some entity types do not use sequential IDs. MediaInfo for instance does not.\n\nSo far, we have no plan for sub-entites that can use custom IDs. But it\u0027s easy enough to support.",
+      "parentUuid": "2e7b3738_fb33a908",
       "range": {
         "startLine": 228,
         "startChar": 2,
