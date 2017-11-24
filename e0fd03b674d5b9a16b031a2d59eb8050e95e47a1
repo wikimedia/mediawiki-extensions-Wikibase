@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_33b434e4",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T16:20:16Z",
+      "side": 1,
+      "message": "Please add a test case that passes a EntityDiffChangedAspects as a parameter here.",
+      "revId": "e0fd03b674d5b9a16b031a2d59eb8050e95e47a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
