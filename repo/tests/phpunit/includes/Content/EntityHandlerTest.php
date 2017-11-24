@@ -247,12 +247,9 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$title->method( 'getLatestRevID' )
 			->will( $this->returnValue( $id ) );
 
-		// TODO: remove conditional as soon as Title::getPageIdentity() is in core.
-		if ( method_exists( Title::class, 'getPageIdentity' ) ) {
-			$page = PageIdentityValue::newFromDBKey( $id, NS_MAIN, __CLASS__ );
-			$title->method( 'getPageIdentity' )
-				->will( $this->returnValue( $page ) );
-		}
+		$page = PageIdentityValue::newFromDBKey( $id, NS_MAIN, __CLASS__ );
+		$title->method( 'getPageIdentity' )
+			->will( $this->returnValue( $page ) );
 
 		$revision = new Revision( [
 			'id' => $id,
