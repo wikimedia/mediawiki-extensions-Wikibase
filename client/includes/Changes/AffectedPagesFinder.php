@@ -16,7 +16,6 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Store\StorageException;
 
@@ -115,21 +114,21 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param EntityChange|EntityDiffChangedAspects $change
+	 * @param EntityChange $change
 	 *
 	 * @return string[]
 	 */
-	public function getChangedAspects( $change ) {
+	public function getChangedAspects( EntityChange $change ) {
 		$aspects = [];
 
-		if ( $change instanceof EntityChange ) {
-			$diff = $change->getDiff();
-			$diffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
-		} elseif ( $change instanceof EntityDiffChangedAspects ) {
-			$diffAspects = $change;
+		$info = $change->getInfo();
+		// We might unserialize old EntityChange which doesn't have getAspectsDiff method
+		if ( array_key_exists( 'compactDiff', $info ) ) {
+			$diffAspects = $change->getAspectsDiff();
 		} else {
-			throw  new InvalidArgumentException( 'AffectedPagesFinder::getChangedAspects accepts ' .
-				'EntityChange or EntityDiffChangedAspects' );
+			$diffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+				$change->getDiff()
+			);
 		}
 
 		if ( $diffAspects->getSiteLinkChanges() !== [] ) {
@@ -218,9 +217,15 @@ class AffectedPagesFinder {
 		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
 
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
-			$diffChangedAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-				$change->getDiff()
-			);
+			$info = $change->getInfo();
+			// We might unserialize old EntityChange which doesn't have getAspectsDiff method
+			if ( array_key_exists( 'compactDiff', $info ) ) {
+				$diffChangedAspects = $change->getAspectsDiff();
+			} else {
+				$diffChangedAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+					$change->getDiff()
+				);
+			}
 			$namesFromDiff = $this->getPagesReferencedInDiff(
 				$diffChangedAspects->getSiteLinkChanges()
 			);
