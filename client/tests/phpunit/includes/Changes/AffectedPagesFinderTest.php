@@ -223,24 +223,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	/**
-	 * @dataProvider getChangedAspectsProvider
-	 */
-	public function testGetChangedAspectsUsingEntityChangeAspects(
-		array $expected,
-		EntityChange $change,
-		$trackUsagesInAllLanguages = false
-	) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
-
-		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $change->getDiff() );
-		$actual = $referencedPagesFinder->getChangedAspects( $aspects );
-
-		sort( $expected );
-		sort( $actual );
-		$this->assertEquals( $expected, $actual );
-	}
-
 	public function getAffectedUsagesByPageProvider() {
 		$labelUsageDe = EntityUsage::LABEL_USAGE . '.de';
 		$labelUsageEn = EntityUsage::LABEL_USAGE . '.en';

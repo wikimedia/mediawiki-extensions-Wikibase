@@ -140,9 +140,6 @@ class EntityChangeFactory {
 			throw new MWException( 'Either $oldEntity or $newEntity must be given' );
 		}
 
-		$this->minimizeEntityForDiffing( $oldEntity );
-		$this->minimizeEntityForDiffing( $newEntity );
-
 		if ( $oldEntity === null ) {
 			$id = $newEntity->getId();
 			$diff = $this->entityDiffer->getConstructionDiff( $newEntity );
@@ -157,29 +154,10 @@ class EntityChangeFactory {
 		}
 
 		$instance = $this->newForEntity( $action, $id );
-		$instance->setDiff( $diff );
+		$aspectsDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
+		$instance->setAspectsDiff( $aspectsDiff );
 
 		return $instance;
-	}
-
-	/**
-	 * Hack: Don't include statement, description and alias diffs, since those are unused and not
-	 * helpful performance-wise to the dispatcher and change handling.
-	 *
-	 * @fixme Implement T113468 and remove this.
-	 *
-	 * @param EntityDocument|null $entity
-	 */
-	private function minimizeEntityForDiffing( EntityDocument $entity = null ) {
-		if ( $entity instanceof StatementListProvider ) {
-			$entity->getStatements()->clear();
-		}
-
-		if ( $entity instanceof FingerprintProvider ) {
-			$fingerprint = $entity->getFingerprint();
-
-			$fingerprint->setAliasGroups( new AliasGroupList() );
-		}
 	}
 
 }
