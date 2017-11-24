@@ -142,6 +142,7 @@
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Старонка:",
 	"wikibase-itembytitle-submit": "Шукаць",
+	"wikibase-itembytitle-error-site": "Калі ласка, увядзіце існы ідэнтыфікатар сайту, напрыклад, «enwiki» для ангельскай Вікіпэдыі.",
 	"wikibase-itembytitle-create": "Вы можаце таксама [$1 стварыць новы аб’ект].",
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
 	"wikibase-gotolinkedpage-error-item-not-found": "Элемэнт ня знойдзены",

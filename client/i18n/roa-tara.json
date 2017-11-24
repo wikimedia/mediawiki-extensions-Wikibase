@@ -6,6 +6,8 @@
 	},
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
 	"tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
+	"apihelp-query+wbentityusage-description": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
+	"apihelp-query+wbentityusage-summary": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
 	"wikibase-comment-update": "Vôsce de {{WBREPONAME}} cangiate",
 	"wikibase-comment-sitelink-add": "Collegamende d'a lènghe aggiunde: $1",
 	"wikibase-comment-sitelink-change": "Collegamende 'a lènghe cangiate da $1 a $2",
@@ -31,9 +33,13 @@
 	"wikibase-replicationnote": "Pe piacere te 'mbormame ca ponne passà diverse minute fine ca le cangiaminde ponne essere 'ndrucate sus a tutte le uicchi",
 	"wikibase-watchlist-show-changes-pref": "Fà vedè le cangiaminde de {{WBREPONAME}} jndr'à l'elenghe de le pàggene condrollate",
 	"wikibase-error-serialize-error": "'A serializzazzione de le date ave sciute a male.",
+	"unconnectedpages": "Pàggene none collegate a le eleminde",
 	"wikibase-unconnectedpages-submit": "'Ndruche le pàggene",
 	"pageswithbadges": "Pàggene cu le badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
+	"wikibase-entityusage-entity": "Entità:",
+	"wikibase-entityusage-submit": "'Ndruche le pàggene",
+	"wikibase-pageinfo-entity-id": "ID d'a vôsce de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ninde",
 	"wikibase-otherprojects": "Jndr'à otre pruggette"
 }

@@ -4,7 +4,8 @@
 			"පසිඳු කාවින්ද",
 			"عثمان خان شاہ",
 			"Noor2020",
-			"Muhammad Shuaib"
+			"Muhammad Shuaib",
+			"BukhariSaeed"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "ویکیپیڈیا",
@@ -16,5 +17,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-references": "تبدیل کر دیا گیا  {{PLURAL:$4| ایک حوالہ کا| $4  حوالہ جات کے}}  {{PLURAL:$3| دعوی|دعوے}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "درجہ تبدیل کر دیا گیا  {{PLURAL:$3| دعوی کا|دعوے کے }}",
 	"wikibase-item-summary-wbcreate-new": "نئی شے کو تخلیق کیا",
+	"wikibase-item-summary-wbeditentity-override": "آئٹم کو صاف کریں",
+	"wikibase-item-summary-wblinktitles-create": "صفحات کے ساتھ جوڑنے کے لیے اس آئٹم کو بنائیں",
 	"wikibase-property-summary-wbcreate-new": "ایک نئی خاصیت پیدا کیا"
 }
