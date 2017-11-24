@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityNamespaceLookupTest extends PHPUnit_Framework_TestCase {
 
