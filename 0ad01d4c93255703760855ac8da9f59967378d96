@@ -22,6 +22,30 @@
       "revId": "0ad01d4c93255703760855ac8da9f59967378d96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_b3d4c4ed",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T16:53:13Z",
+      "side": 0,
+      "message": "Sure? I seem to remember that that causes problems.\n\nBut anyway, I need to conditional for PageIdentityValue::newFromDBKey.",
+      "parentUuid": "0edf5380_700d1241",
+      "range": {
+        "startLine": 251,
+        "startChar": 7,
+        "endLine": 251,
+        "endChar": 20
+      },
+      "revId": "0ad01d4c93255703760855ac8da9f59967378d96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

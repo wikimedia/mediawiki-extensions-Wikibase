@@ -22,6 +22,30 @@
       "revId": "1b97b92df491695ab00388c445d72af4a88a2bcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_f3048c82",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T16:53:13Z",
+      "side": 1,
+      "message": "It has a use clause. The parent patch adds it.",
+      "parentUuid": "0edf5380_d00a1e29",
+      "range": {
+        "startLine": 250,
+        "startChar": 10,
+        "endLine": 250,
+        "endChar": 27
+      },
+      "revId": "1b97b92df491695ab00388c445d72af4a88a2bcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
