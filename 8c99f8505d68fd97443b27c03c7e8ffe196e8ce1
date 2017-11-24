@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "0edf5380_33fc34d5",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "Should be an InvalidArgumentExcpetion. You can use Assert::parameterType(...) to check, it accepts Foo|Bar syntax (but needs full class names).",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_d3eb4808",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "Long line, please wrap.\nAlso, bad indent.",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_b3e8440d",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "long line, please wrap",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_33d39463",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "So we don\u0027t check for C.P31 etc yet?",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_d3c22888",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "Please break long lines above.",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_139f70ba",
         "filename": "client/includes/Changes/AffectedPagesFinder.php",
         "patchSetId": 3
@@ -43,6 +128,40 @@
         "endLine": 252,
         "endChar": 19
       },
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_33427414",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "list( $oldValue, $newValue, $badgeOnly ) \u003d ...",
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_b34e843a",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "You could inline isBadgesOnlyChange here: \n\n  if ( $oldValue \u003d\u003d\u003d $newValue ) {\n    return [];\n  }\n\nOr am I missing something?",
       "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -130,6 +249,30 @@
       "writtenOn": "2017-11-24T15:47:47Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "0edf5380_536a98b2",
+      "range": {
+        "startLine": 278,
+        "startChar": 11,
+        "endLine": 278,
+        "endChar": 65
+      },
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_d35188df",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-11-24T15:58:59Z",
+      "side": 1,
+      "message": "Indeed!",
       "parentUuid": "0edf5380_536a98b2",
       "range": {
         "startLine": 278,
