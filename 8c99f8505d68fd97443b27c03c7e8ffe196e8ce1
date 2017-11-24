@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_139f70ba",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-24T15:42:53Z",
+      "side": 1,
+      "message": "array[]",
+      "range": {
+        "startLine": 252,
+        "startChar": 11,
+        "endLine": 252,
+        "endChar": 19
+      },
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_b344c44b",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-24T15:42:53Z",
+      "side": 1,
+      "message": "I guess this should be either \"(string|null)[]\", which I find a little problematic because not all tools understand it. Or simply \"array\".",
+      "range": {
+        "startLine": 273,
+        "startChar": 11,
+        "endLine": 273,
+        "endChar": 24
+      },
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_536a98b2",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-24T15:42:53Z",
+      "side": 1,
+      "message": "I would replace this part with \"$siteLinkDiff[0] \u003d\u003d\u003d $siteLinkDiff[1]\". This way it works in both cases when either both are null, or both are the same.",
+      "range": {
+        "startLine": 278,
+        "startChar": 11,
+        "endLine": 278,
+        "endChar": 65
+      },
+      "revId": "8c99f8505d68fd97443b27c03c7e8ffe196e8ce1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
