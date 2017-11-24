@@ -129,8 +129,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [ 'es' => new DiffOpAdd( 'gato' ) ] ),
-			$change->getDiff()->getLabelsDiff(),
+			[ 'es' ],
+			$change->getAspectsDiff()->getLabelChanges(),
 			'diff'
 		);
 	}
@@ -149,8 +149,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [ 'en' => new DiffOpAdd( 'kitten' ) ] ),
-			$change->getDiff()->getLabelsDiff(),
+			[ 'en' ],
+			$change->getAspectsDiff()->getLabelChanges(),
 			'diff'
 		);
 	}
@@ -169,8 +169,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [ 'de' => new DiffOpRemove( 'Katze' ) ] ),
-			$change->getDiff()->getLabelsDiff(),
+			[ 'de' ],
+			$change->getAspectsDiff()->getLabelChanges(),
 			'diff'
 		);
 	}
@@ -189,12 +189,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( [
-				'enwiki' => new Diff( [
-					'name' => new DiffOpAdd( 'Kitten' )
-				] )
-			] ),
-			$change->getDiff()->getSiteLinkDiff(),
+			[ 'enwiki' => [ null, 'Kitten', false ] ],
+			$change->getAspectsDiff()->getSiteLinkChanges(),
 			'diff'
 		);
 	}
@@ -218,8 +214,9 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$change = $factory->newFromUpdate( EntityChange::UPDATE, $item, $updatedItem );
 
-		$this->assertTrue(
-			$change->getDiff()->isEmpty(),
+		$this->assertSame(
+			[ 'P10', 'P9000' ],
+			$change->getAspectsDiff()->getStatementChanges(),
 			'Diff excludes statement changes and is empty'
 		);
 	}
