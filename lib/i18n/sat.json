@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Albinus"
+			"Albinus",
+			"Ramjit Tudu"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipeḍia"
+	"wikibase-sitelinks-wikipedia": "Wikipeḍia",
+	"version-wikibase": "ᱣᱤᱠᱤᱵᱮᱥ"
 }

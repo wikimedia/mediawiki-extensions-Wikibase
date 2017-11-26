@@ -64,7 +64,7 @@
 	"wikibase-undo-title": "patiku \"$1\" a mikawaway-kalumyiti",
 	"wikibase-restore-title": "patiku tu \"$1\" a malumanay a masumad nu ayaway",
 	"wikibase-partial-undo": "liyad nu mikawaway-kalumyiti kapah patiku.",
-	"wikibase-omitted-undo-ops": "zayhan {{PLURAL:$1|sulyang}} masumad tu nu ayaway, $1 ce {{PLURAL:$1|misumad}} la’cus patiku.",
+	"wikibase-omitted-undo-ops": "zayhan{{PLURAL:$1|sulyang}} masumad tu nu ayaway, $1 {{PLURAL:$1|misumad}} la’cus patiku.",
 	"wikibase-empty-undo": "itini inayi’ ku patiku a sumad.",
 	"wikibase-undo-revision-error": "patiku mungangaw",
 	"wikibase-undo-samerev": "apatiku mikawaway-kalumyiti kanca matuzu’ tusa caay kalecaday a sumad.",

@@ -197,6 +197,7 @@
 	"wikibase-itemmerge-cant-load-entity-content": "No s'ha pogut carregar l'element.",
 	"wikibase-dispatchstats-lag-num": "Pendent",
 	"special-listdatatypes": "Llista de tipus de dades disponibles",
+	"wikibase-listdatatypes-listproperties": "Llista de propietats amb aquest tipus de dades",
 	"wikibase-history-title-with-label": "«$2» ($1): Historial de revisions",
 	"wikibase-listproperties-datatype": "Tipus de dades:",
 	"wikibase-listproperties-all": "Tots els tipus de dades",

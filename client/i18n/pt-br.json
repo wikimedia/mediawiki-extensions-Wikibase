@@ -13,7 +13,8 @@
 			"He7d3r",
 			"Luk3",
 			"Felipe L. Ewald",
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"TheEduGobi"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -85,7 +86,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostrar as edições {{WBREPONAME}} nas mudanças recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edição {{WBREPONAME}}",
-	"wikibase-rcfilters-hide-wikibase-label": "Edições {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Edições no {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Edições que se originam em {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Este filtro está em conflito com um ou mais filtros de Qualidade de Contribuição ou Intenção de Usuário. As previsões de qualidade e intenção não estão disponíveis para as edições {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "O filtro \"{{WBREPONAME}} edits\" está em conflito com um ou mais filtros de Qualidade de Contribuição ou Intenção de Usuário. As previsões de qualidade e intenção não estão disponíveis para as edições {{WBREPONAME}}. Os filtros conflitantes estão marcados na área Filtros Ativos, acima.",
