@@ -1475,8 +1475,10 @@ class WikibaseRepo {
 	 * @return FieldDefinitions
 	 */
 	public function getDescriptionProviderDefinitions() {
-		return new DescriptionsProviderFieldDefinitions( $this->getTermsLanguages()
-			->getLanguages() );
+		return new DescriptionsProviderFieldDefinitions(
+			$this->getTermsLanguages()->getLanguages(),
+			$this->getSettings()->getSetting( 'entitySearch' )
+		);
 	}
 
 	/**
