@@ -10,8 +10,6 @@
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
 	background-image: url( images/wb-badges-default.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/wb-badges-default.svg );
-	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/wb-badges-default.svg );
 	background-repeat: no-repeat;
 	background-position: 0 center;
@@ -27,8 +25,6 @@
 
 .wb-badge-empty {
 	background-image: url( images/wb-badges-empty.png );
-	/* @embed */
-	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/wb-badges-empty.svg );
 	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/wb-badges-empty.svg );
 }

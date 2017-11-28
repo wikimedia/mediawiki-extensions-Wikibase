@@ -23,8 +23,6 @@
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
 	background-image: url( images/icons/oojs-ui/collapse.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/collapse.svg );
-	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/collapse.svg );
 }
 
@@ -33,8 +31,6 @@
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
 	background-image: url( images/icons/oojs-ui/expand.png );
-	/* @embed */
-	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/expand.svg );
 	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/expand.svg );
 }
