@@ -233,8 +233,13 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	) {
 		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
 
-		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $change->getDiff() );
-		$actual = $referencedPagesFinder->getChangedAspects( $aspects );
+		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+			$change->getDiff()
+		);
+		$info = $change->getInfo();
+		$info['compactDiff'] = $aspects;
+		$change->setField( 'info', $info );
+		$actual = $referencedPagesFinder->getChangedAspects( $change );
 
 		sort( $expected );
 		sort( $actual );
