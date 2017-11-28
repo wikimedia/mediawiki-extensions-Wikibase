@@ -101,24 +101,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			}, $expectedUsages );
 
 			$params = [
-				'jobsByWiki' => [
-					wfWikiID() => [
-						[
-							'type' => 'wikibase-addUsagesForPage',
-							'params' => [
-								'pageId' => $title->getArticleID(),
-								'usages' => $expectedUsageArray
-							],
-							'opts' => [
-								'removeDuplicates' => true
-							],
-							'title' => [
-								'ns' => NS_MAIN,
-								'key' => 'Oxygen'
-							]
-						]
-					]
-				]
+				'pageId' => $title->getArticleID(),
+				'usages' => $expectedUsageArray
 			];
 
 			$jobScheduler->expects( $this->once() )
@@ -128,7 +112,10 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 					// Unrelated parameter used by mw core to tie together logging of jobs
 					unset( $jobParams['requestId'] );
 
-					self::assertEquals( 'enqueue', $job->getType() );
+					self::assertEquals( 'wikibase-addUsagesForPage', $job->getType() );
+					self::assertEquals( NS_MAIN, $job->getTitle()->getNamespace() );
+					self::assertEquals( 'Oxygen', $job->getTitle()->getDBkey() );
+					self::assertEquals( true, $job->ignoreDuplicates() );
 					self::assertEquals( $params, $jobParams );
 					return true;
 				} ) );
