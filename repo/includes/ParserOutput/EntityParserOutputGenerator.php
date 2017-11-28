@@ -359,7 +359,6 @@ class EntityParserOutputGenerator {
 		// make sure required client-side resources will be loaded
 		// FIXME: Separate the JavaScript that is also needed in read-only mode from
 		// the JavaScript that is only necessary for editing.
-		// Then load JavaScript accordingly depending on $editable.
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
 		$parserOutput->addModules( 'wikibase.entityPage.entityLoaded' );
 	}
