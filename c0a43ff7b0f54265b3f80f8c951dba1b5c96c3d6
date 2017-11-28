@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0edf5380_24be9a13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2017-11-28T15:42:23Z",
+      "side": 1,
+      "message": "Should be above the change id.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 53
+      },
+      "revId": "c0a43ff7b0f54265b3f80f8c951dba1b5c96c3d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_3e750d93",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 2
