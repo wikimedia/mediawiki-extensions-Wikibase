@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_3e750d93",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-28T10:10:43Z",
+      "side": 1,
+      "message": "This parameter is now obsolete, along with a surprising amount of other code. I will upload a follow up patch to not make this one to big.",
+      "range": {
+        "startLine": 261,
+        "startChar": 3,
+        "endLine": 261,
+        "endChar": 7
+      },
+      "revId": "c0a43ff7b0f54265b3f80f8c951dba1b5c96c3d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
