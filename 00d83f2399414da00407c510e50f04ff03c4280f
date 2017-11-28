@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_5cfa9c74",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-28T08:13:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this is related to ID inside URL. This is supposed to match Q-id as is, not inside URL, and be independent of all other matches.",
+      "parentUuid": "4e578bb4_1e301de5",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 13
+      },
+      "revId": "00d83f2399414da00407c510e50f04ff03c4280f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e578bb4_9e696dbf",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 25
