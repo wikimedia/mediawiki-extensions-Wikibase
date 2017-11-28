@@ -165,9 +165,7 @@ class DataUpdateHookHandlers {
 		//TODO: Before posting a job, check replica database. If no changes are needed, skip update.
 
 		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages() );
-		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );
-
-		$this->jobScheduler->lazyPush( $enqueueJob );
+		$this->jobScheduler->lazyPush( $addUsagesForPageJob );
 	}
 
 	/**
