@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_24869aac",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-28T17:14:40Z",
+      "side": 1,
+      "message": "Accident edit, please revert.",
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_0483969c",
+        "filename": "lib/includes/Changes/DiffChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-28T17:14:40Z",
+      "side": 1,
+      "message": "Is this used? If not, why introduce it?",
+      "range": {
+        "startLine": 47,
+        "startChar": 33,
+        "endLine": 47,
+        "endChar": 46
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_844de69d",
+        "filename": "lib/includes/Changes/DiffChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-28T17:14:40Z",
+      "side": 1,
+      "message": "Why does this talk about \"…AspectsDiff\", when the array key is \"compactDiff\"? I actually like the term \"…AspectsDiff\", but I wish this would be consistent, one way or the other.",
+      "range": {
+        "startLine": 60,
+        "startChar": 20,
+        "endLine": 60,
+        "endChar": 31
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_443abee5",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-28T17:14:40Z",
+      "side": 1,
+      "message": "Are we sure we want to utilize PHP internal serialization feature? This always turned out to be a mistake in the past, mostly because this encodes full qualified class names, which is just not necessary for what we actually need here. Can we utilize a hand-crafted serialize and unserialize feature instead? Possibly JSON based?\n\n… \u003d json_encode( $diff-\u003etoArray() );",
+      "range": {
+        "startLine": 300,
+        "startChar": 27,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_04f6f658",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-28T17:14:40Z",
+      "side": 1,
+      "message": "Why is this method not static? It looks like it should be.",
+      "range": {
+        "startLine": 154,
+        "startChar": 60,
+        "endLine": 154,
+        "endChar": 77
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
