@@ -86,6 +86,24 @@
       "revId": "00d83f2399414da00407c510e50f04ff03c4280f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_cd7d5119",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-11-28T21:35:38Z",
+      "side": 1,
+      "message": "I remember having a good reason for it, but can\u0027t remember what it was :) Probably it was some old code and is not relevant anymore. So I\u0027ll make it reuse.",
+      "parentUuid": "4e578bb4_be578904",
+      "revId": "00d83f2399414da00407c510e50f04ff03c4280f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
