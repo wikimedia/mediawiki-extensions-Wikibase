@@ -8,6 +8,7 @@ use Exception;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * @covers Wikibase\ItemChange
@@ -51,6 +52,24 @@ class ItemChangeTest extends EntityChangeTest {
 	 * @param ItemChange $change
 	 */
 	public function testGetSiteLinkDiff( ItemChange $change ) {
+		$siteLinkDiff = $change->getSiteLinkDiff();
+		$this->assertInstanceOf( Diff::class, $siteLinkDiff, 'getSiteLinkDiff must return a Diff' );
+	}
+
+	/**
+	 * @dataProvider changeProvider
+	 *
+	 * @param ItemChange $change
+	 */
+	public function testGetSiteLinkDiffFromCompactDiff( ItemChange $change ) {
+		$info = $change->getInfo();
+		if ( !array_key_exists( 'compactDiff', $info ) ) {
+			$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+				$change->getDiff()
+			);
+			$info['compactDiff'] = $aspects;
+			$change->setField( 'info', $info );
+		}
 		$siteLinkDiff = $change->getSiteLinkDiff();
 		$this->assertInstanceOf( Diff::class, $siteLinkDiff, 'getSiteLinkDiff must return a Diff' );
 	}

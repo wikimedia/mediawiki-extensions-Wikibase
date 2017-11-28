@@ -232,10 +232,18 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$trackUsagesInAllLanguages = false
 	) {
 		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
+		$info = $change->getInfo();
+		if ( !array_key_exists( 'compactDiff', $info ) ) {
+			$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+				$change->getDiff()
+			);
+			$info = $change->getInfo();
+			$info['compactDiff'] = $aspects;
+			$change->setField( 'info', $info );
 
-		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $change->getDiff() );
-		$actual = $referencedPagesFinder->getChangedAspects( $aspects );
+		}
 
+		$actual = $referencedPagesFinder->getChangedAspects( $change );
 		sort( $expected );
 		sort( $actual );
 		$this->assertEquals( $expected, $actual );
