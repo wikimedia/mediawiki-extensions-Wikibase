@@ -146,6 +146,8 @@
 	"wikibase-itembytitle-error-item": "Элемэнт, які спасылаецца на пададзеную старонку, ня знойдзены.",
 	"wikibase-itembytitle-create": "Вы можаце таксама [$1 стварыць новы аб’ект].",
 	"wikibase-itembytitle-summary": "Special:ItemByTitle ужываецца, каб знайсьці адпаведны элемэнт для пададзенай старонкі на злучаным сайце.<br />У першае поле, «{{int:wikibase-itembytitle-lookup-site}}», вы ўводзіце коды мовы і сайту.<br />У другое поле, «{{int:wikibase-itembytitle-lookup-page}}», вы мусіце ўвесьці дакладную назву старонкі так, як яна выглядае на злучаным сайце.",
+	"special-gotolinkedpage": "Перайсьці да далучанай старонкі",
+	"wikibase-gotolinkedpage-lookup-fieldset": "Перайсьці да далучанай старонкі паводле сайту і элемэнту",
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
 	"wikibase-gotolinkedpage-error-item-not-found": "Элемэнт ня знойдзены",
 	"special-itemdisambiguation": "Неадназначнасьць аб’ектаў",

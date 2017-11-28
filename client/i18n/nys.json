@@ -4,7 +4,14 @@
 			"Gnangarra"
 		]
 	},
-	"wikibase-editlinks": "Dookeniny links",
+	"tooltip-t-wikibase": "Beda data repository yallabel",
+	"wikibase-comment-update": "{{WBREPONAME}} yallabel wallak ijow",
+	"wikibase-dataitem": "{{WBREPONAME}} yallabel",
+	"wikibase-editlinks": "Wallak ijow links",
 	"wikibase-editlinkstitle": "wallak ijow interlanguage links",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Kwib-idj-ee",
+	"wikibase-rc-hide-wikidata-show": "Yong-a",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} wallak ijow"
 }
