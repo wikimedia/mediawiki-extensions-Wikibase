@@ -62,11 +62,11 @@ class ItemChangeTest extends EntityChangeTest {
 	 * @param ItemChange $change
 	 */
 	public function testGetSiteLinkDiffAspects( ItemChange $change ) {
-		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-			$change->getDiff()
-		);
 		$info = $change->getInfo();
 		if ( !array_key_exists( 'compactDiff', $info ) ) {
+			$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+				$change->getDiff()
+			);
 			$info['compactDiff'] = $aspects;
 			$change->setField( 'info', $info );
 		}

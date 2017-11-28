@@ -122,7 +122,7 @@ class AffectedPagesFinder {
 		$aspects = [];
 
 		$info = $change->getInfo();
-		// We might unserialize old EntityChange which doesn't have getAspectsDiff method
+		// We might unserialize old EntityChange which doesn't have getCompactDiff method
 		if ( array_key_exists( 'compactDiff', $info ) ) {
 			$diffAspects = $info['compactDiff'];
 		} else {
@@ -218,7 +218,7 @@ class AffectedPagesFinder {
 
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
 			$info = $change->getInfo();
-			// We might unserialize old EntityChange which doesn't have getAspectsDiff method
+			// We might unserialize old EntityChange which doesn't have getCompactDiff method
 			if ( array_key_exists( 'compactDiff', $info ) ) {
 				$diffChangedAspects = $info['compactDiff'];
 			} else {
