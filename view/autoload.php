@@ -6,7 +6,6 @@ global $wgAutoloadClasses;
 $wgAutoloadClasses += [
 	'Wikibase\\View\\DummyLocalizedTextProvider' => __DIR__ . '/src/DummyLocalizedTextProvider.php',
 	'Wikibase\\View\\EditSectionGenerator' => __DIR__ . '/src/EditSectionGenerator.php',
-	'Wikibase\\View\\EmptyEditSectionGenerator' => __DIR__ . '/src/EmptyEditSectionGenerator.php',
 	'Wikibase\\View\\EntityIdFormatterFactory' => __DIR__ . '/src/EntityIdFormatterFactory.php',
 	'Wikibase\\View\\EntityTermsView' => __DIR__ . '/src/EntityTermsView.php',
 	'Wikibase\\View\\EntityView' => __DIR__ . '/src/EntityView.php',

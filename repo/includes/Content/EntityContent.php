@@ -205,7 +205,7 @@ abstract class EntityContent extends AbstractContent {
 				$options = $this->getContentHandler()->makeParserOptions( 'canonical' );
 			}
 
-			return $this->getParserOutputFromEntityView( $title, $revisionId, $options, $generateHtml );
+			return $this->getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
 		}
 	}
 
@@ -240,7 +240,6 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * @note Will fail if this EntityContent represents a redirect.
 	 *
-	 * @param Title $title
 	 * @param int|null $revisionId
 	 * @param ParserOptions $options
 	 * @param bool $generateHtml
@@ -248,7 +247,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ParserOutput
 	 */
 	protected function getParserOutputFromEntityView(
-		Title $title,
 		$revisionId = null,
 		ParserOptions $options,
 		$generateHtml = true
@@ -257,8 +255,7 @@ abstract class EntityContent extends AbstractContent {
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
 
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$options->getUserLang(),
-			true
+			$options->getUserLang()
 		);
 
 		$entityRevision = $this->getEntityRevision( $revisionId );
