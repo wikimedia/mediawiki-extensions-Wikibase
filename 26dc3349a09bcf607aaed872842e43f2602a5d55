@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_b2a94cdf",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-28T20:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_24869aac",
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_0483969c",
         "filename": "lib/includes/Changes/DiffChange.php",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2017-11-28T17:14:40Z",
       "side": 1,
       "message": "Is this used? If not, why introduce it?",
+      "range": {
+        "startLine": 47,
+        "startChar": 33,
+        "endLine": 47,
+        "endChar": 46
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_12bbd823",
+        "filename": "lib/includes/Changes/DiffChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-28T20:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf5380_0483969c",
       "range": {
         "startLine": 47,
         "startChar": 33,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_52f28004",
+        "filename": "lib/includes/Changes/DiffChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-28T20:39:09Z",
+      "side": 1,
+      "message": "Changed it to (set|get)CompactDiff",
+      "parentUuid": "0edf5380_844de69d",
+      "range": {
+        "startLine": 60,
+        "startChar": 20,
+        "endLine": 60,
+        "endChar": 31
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_443abee5",
         "filename": "lib/includes/Changes/EntityChange.php",
         "patchSetId": 2
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "0edf5380_528ba072",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-28T20:39:09Z",
+      "side": 1,
+      "message": "That\u0027s exactly what the serialize() function does, Used that.",
+      "parentUuid": "0edf5380_443abee5",
+      "range": {
+        "startLine": 300,
+        "startChar": 27,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edf5380_04f6f658",
         "filename": "lib/includes/Changes/EntityChangeFactory.php",
         "patchSetId": 2
@@ -99,6 +189,30 @@
       "writtenOn": "2017-11-28T17:14:40Z",
       "side": 1,
       "message": "Why is this method not static? It looks like it should be.",
+      "range": {
+        "startLine": 154,
+        "startChar": 60,
+        "endLine": 154,
+        "endChar": 77
+      },
+      "revId": "26dc3349a09bcf607aaed872842e43f2602a5d55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_d297b091",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-11-28T20:39:09Z",
+      "side": 1,
+      "message": "Outside of scope of this patch.",
+      "parentUuid": "0edf5380_04f6f658",
       "range": {
         "startLine": 154,
         "startChar": 60,
