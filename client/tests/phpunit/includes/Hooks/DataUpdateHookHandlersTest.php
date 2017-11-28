@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use IJobSpecification;
 use JobQueueGroup;
 use LinksUpdate;
 use ParserOutput;
@@ -100,36 +101,20 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 				return $usage->asArray();
 			}, $expectedUsages );
 
-			$params = [
-				'jobsByWiki' => [
-					wfWikiID() => [
-						[
-							'type' => 'wikibase-addUsagesForPage',
-							'params' => [
-								'pageId' => $title->getArticleID(),
-								'usages' => $expectedUsageArray
-							],
-							'opts' => [
-								'removeDuplicates' => true
-							],
-							'title' => [
-								'ns' => NS_MAIN,
-								'key' => 'Oxygen'
-							]
-						]
-					]
-				]
+			$expectedParams = [
+				'pageId' => $title->getArticleID(),
+				'usages' => $expectedUsageArray,
 			];
 
 			$jobScheduler->expects( $this->once() )
 				->method( 'lazyPush' )
-				->with( $this->callback( function ( $job ) use ( $params ) {
+				->with( $this->callback( function ( IJobSpecification $job ) use ( $expectedParams ) {
 					$jobParams = $job->getParams();
 					// Unrelated parameter used by mw core to tie together logging of jobs
 					unset( $jobParams['requestId'] );
 
-					self::assertEquals( 'enqueue', $job->getType() );
-					self::assertEquals( $params, $jobParams );
+					self::assertEquals( 'wikibase-addUsagesForPage', $job->getType() );
+					self::assertEquals( $expectedParams, $jobParams );
 					return true;
 				} ) );
 
