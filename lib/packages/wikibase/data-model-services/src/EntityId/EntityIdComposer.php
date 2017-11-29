@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @since 3.9
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityIdComposer {
 

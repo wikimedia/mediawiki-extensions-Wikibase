@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
  * @covers Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntityRedirectLookupExceptionTest extends PHPUnit_Framework_TestCase {
 

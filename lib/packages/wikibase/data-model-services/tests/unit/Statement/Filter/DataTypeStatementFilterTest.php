@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\DataModel\Services\Statement\Filter\DataTypeStatementFilter
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class DataTypeStatementFilterTest extends PHPUnit_Framework_TestCase {
 

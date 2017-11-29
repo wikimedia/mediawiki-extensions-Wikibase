@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @covers Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class NullStatementGrouperTest extends PHPUnit_Framework_TestCase {
 

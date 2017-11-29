@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
  * @covers Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class LabelDescriptionLookupExceptionTest extends PHPUnit_Framework_TestCase {
 

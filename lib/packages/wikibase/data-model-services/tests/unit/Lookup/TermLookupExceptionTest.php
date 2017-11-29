@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
  * @covers Wikibase\DataModel\Services\Lookup\TermLookupException
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class TermLookupExceptionTest extends PHPUnit_Framework_TestCase {
 

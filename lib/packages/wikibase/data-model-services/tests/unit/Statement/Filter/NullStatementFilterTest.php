@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\DataModel\Services\Statement\Filter\NullStatementFilter
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class NullStatementFilterTest extends PHPUnit_Framework_TestCase {
 

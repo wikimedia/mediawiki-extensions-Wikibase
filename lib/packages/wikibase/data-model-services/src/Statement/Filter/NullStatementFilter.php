@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\StatementFilter;
  * @since 3.2
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class NullStatementFilter implements StatementFilter {
 

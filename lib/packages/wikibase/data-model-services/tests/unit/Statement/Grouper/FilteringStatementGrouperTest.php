@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @covers Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
