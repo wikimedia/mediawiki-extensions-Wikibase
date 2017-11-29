@@ -676,6 +676,13 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	public function getEntityRevisionLookupFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks();
+	}
+
+	/**
 	 * @param User $user
 	 * @param IContextSource $context
 	 *
@@ -724,6 +731,13 @@ class WikibaseRepo {
 	 */
 	public function getEntityStore() {
 		return $this->getStore()->getEntityStore();
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityStoreFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getEntityStoreFactoryCallbacks();
 	}
 
 	/**

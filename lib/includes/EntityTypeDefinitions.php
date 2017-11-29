@@ -69,6 +69,20 @@ class EntityTypeDefinitions {
 	/**
 	 * @return callable[]
 	 */
+	public function getEntityStoreFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-store-factory-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityRevisionLookupFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-revision-lookup-factory-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
 	public function getSerializerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'serializer-factory-callback' );
 	}
