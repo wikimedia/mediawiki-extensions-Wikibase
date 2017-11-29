@@ -149,6 +149,7 @@
 	"special-gotolinkedpage": "Перайсьці да далучанай старонкі",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Перайсьці да далучанай старонкі паводле сайту і элемэнту",
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
+	"wikibase-gotolinkedpage-lookup-item": "Ідэнтыфікатар элемэнту:",
 	"wikibase-gotolinkedpage-error-item-not-found": "Элемэнт ня знойдзены",
 	"special-itemdisambiguation": "Неадназначнасьць аб’ектаў",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Пошук аб’ектаў паводле мовы і меткі",
