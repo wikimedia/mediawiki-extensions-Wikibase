@@ -8,7 +8,7 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'path' => __FILE__,
 	'name' => 'Wikibase View',
 	'author' => [
-		'[http://www.snater.com H. Snater]',
+		'The Wikidata team',
 	],
 	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBV/',
 	'description' => 'Wikibase View',
