@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_a80d5843",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-11-29T10:43:52Z",
+      "side": 1,
+      "message": "I still believe it\u0027s inconsistent with what\u0027s done in autocomplete:\n- autocomplete will be case insensitive (q123 \u003d\u003e Q123)\n- autocomplete will rank higher entity IDs used inside URLs\n\nI still don\u0027t understand what\u0027s the reason you prefer to keep a strict case sensitive match to entity ID?\nIn other words why would we provide different results for the query q123 and Q123?",
+      "range": {
+        "startLine": 190,
+        "startChar": 29,
+        "endLine": 190,
+        "endChar": 42
+      },
+      "revId": "ea052fe39d3c7e8cf07e79f350c863d8a40495ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
