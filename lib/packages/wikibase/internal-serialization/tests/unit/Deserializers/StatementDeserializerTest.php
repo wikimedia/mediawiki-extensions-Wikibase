@@ -12,7 +12,7 @@ use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
  * @covers Wikibase\InternalSerialization\Deserializers\StatementDeserializer
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class StatementDeserializerTest extends PHPUnit_Framework_TestCase {
 
