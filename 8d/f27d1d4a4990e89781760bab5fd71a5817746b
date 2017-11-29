@@ -1,0 +1,8 @@
+Code-Review+1: Lydia Pintscher <lydia.pintscher@wikimedia.de>
+Code-Review+2: Thiemo Mättig (WMDE) <thiemo.kreuz@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Wed, 29 Nov 2017 17:04:24 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/393800
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
