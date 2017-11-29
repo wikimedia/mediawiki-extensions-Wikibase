@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase;
 /**
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
 

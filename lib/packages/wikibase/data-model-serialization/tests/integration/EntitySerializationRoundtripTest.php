@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 /**
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 

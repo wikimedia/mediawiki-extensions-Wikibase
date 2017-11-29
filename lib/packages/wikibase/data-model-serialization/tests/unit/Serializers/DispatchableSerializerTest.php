@@ -9,7 +9,7 @@ use Serializers\Exceptions\UnsupportedObjectException;
 /**
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 
