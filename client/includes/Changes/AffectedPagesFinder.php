@@ -16,7 +16,7 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -126,7 +126,7 @@ class AffectedPagesFinder {
 		if ( array_key_exists( 'compactDiff', $info ) ) {
 			$diffAspects = $info['compactDiff'];
 		} else {
-			$diffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+			$diffAspects = EntityDiffChangedAspects::newFromEntityDiff(
 				$change->getDiff()
 			);
 		}
@@ -244,7 +244,7 @@ class AffectedPagesFinder {
 			if ( array_key_exists( 'compactDiff', $info ) ) {
 				$diffChangedAspects = $info['compactDiff'];
 			} else {
-				$diffChangedAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+				$diffChangedAspects = EntityDiffChangedAspects::newFromEntityDiff(
 					$change->getDiff()
 				);
 			}
