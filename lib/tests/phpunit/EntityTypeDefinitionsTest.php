@@ -19,6 +19,8 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 	private function getDefinitions() {
 		return [
 			'foo' => [
+				'entity-store-factory-callback' => 'foo-store',
+				'entity-revision-lookup-factory-callback' => 'foo-revision-lookup',
 				'serializer-factory-callback' => 'foo-serializer',
 				'storage-serializer-factory-callback' => 'foo-storage-serializer',
 				'deserializer-factory-callback' => 'foo-deserializer',
@@ -46,6 +48,24 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			],
 			'baz' => []
 		];
+	}
+
+	public function testGetEntityStoreFactoryCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-store' ],
+			$definitions->getEntityStoreFactoryCallbacks()
+		);
+	}
+
+	public function testGetEntityRevisionLookupFactoryCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-revision-lookup' ],
+			$definitions->getEntityRevisionLookupFactoryCallbacks()
+		);
 	}
 
 	public function testGetSerializerFactoryCallbacks() {
