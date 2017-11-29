@@ -33,7 +33,7 @@ interface EntityTitleLookup {
 	 * @throws MWException
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
-	 * @return Title|null
+	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id );
 

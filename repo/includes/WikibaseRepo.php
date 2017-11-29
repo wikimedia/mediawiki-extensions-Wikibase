@@ -142,6 +142,7 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -651,7 +652,10 @@ class WikibaseRepo {
 	 * @return EntityTitleStoreLookup
 	 */
 	public function getEntityTitleLookup() {
-		return $this->getEntityContentFactory();
+		return new TypeDispatchingEntityTitleStoreLookup(
+			$this->entityTypeDefinitions->getEntityTitleLookupFactoryCallbacks(),
+			$this->getEntityContentFactory()
+		);
 	}
 
 	/**
@@ -671,6 +675,13 @@ class WikibaseRepo {
 	 */
 	public function getEntityRevisionLookup( $cache = '' ) {
 		return $this->getStore()->getEntityRevisionLookup( $cache );
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityRevisionLookupFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks();
 	}
 
 	/**
@@ -722,6 +733,13 @@ class WikibaseRepo {
 	 */
 	public function getEntityStore() {
 		return $this->getStore()->getEntityStore();
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityStoreFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getEntityStoreFactoryCallbacks();
 	}
 
 	/**
