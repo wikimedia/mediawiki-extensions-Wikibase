@@ -405,7 +405,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @return WikiPageEntityStore
+	 * @return EntityStore
 	 */
 	private function newEntityStore() {
 		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -413,6 +413,12 @@ class SqlStore implements Store {
 
 		$store = new WikiPageEntityStore( $contentFactory, $idGenerator, $this->entityIdComposer );
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
+
+		$decorators = WikibaseRepo::getDefaultInstance()->getEntityStoreDecorators();
+		foreach ( $decorators as $decorator ) {
+			$store = call_user_func( $decorator, $store, $this->getEntityRevisionLookup( 'uncached' ) );
+		}
+
 		return $store;
 	}
 
@@ -461,6 +467,11 @@ class SqlStore implements Store {
 
 		$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
 		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
+
+		$decorators = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookupDecorators();
+		foreach ( $decorators as $decorator ) {
+			$nonCachingLookup = call_user_func( $decorator, $nonCachingLookup );
+		}
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
