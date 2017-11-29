@@ -30,6 +30,8 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
+use Wikibase\Lib\Store\TypeDispatchingEntityStore;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -415,7 +417,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @return WikiPageEntityStore
+	 * @return EntityStore
 	 */
 	private function newEntityStore() {
 		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -423,6 +425,13 @@ class SqlStore implements Store {
 
 		$store = new WikiPageEntityStore( $contentFactory, $idGenerator, $this->entityIdComposer );
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
+
+		$store = new TypeDispatchingEntityStore(
+			WikibaseRepo::getDefaultInstance()->getEntityStoreFactoryCallbacks(),
+			$store,
+			$this->getEntityRevisionLookup( 'uncached' )
+		);
+
 		return $store;
 	}
 
@@ -471,6 +480,11 @@ class SqlStore implements Store {
 
 		$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
 		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
+
+		$nonCachingLookup = new TypeDispatchingEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityRevisionLookupFactoryCallbacks(),
+			$nonCachingLookup
+		);
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
