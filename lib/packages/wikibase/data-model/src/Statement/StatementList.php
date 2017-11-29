@@ -26,7 +26,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class StatementList implements IteratorAggregate, Comparable, Countable {
 

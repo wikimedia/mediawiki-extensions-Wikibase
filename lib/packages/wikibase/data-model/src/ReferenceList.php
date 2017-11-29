@@ -22,7 +22,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ReferenceList implements Comparable, Countable, IteratorAggregate, Serializable {

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  * @covers Wikibase\DataModel\Entity\ItemIdParser
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class ItemIdParserTest extends PHPUnit_Framework_TestCase {
 

@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class SiteLink implements Comparable {
 

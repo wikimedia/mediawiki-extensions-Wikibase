@@ -17,7 +17,7 @@ namespace Wikibase\DataModel\Entity;
  * @since 6.1
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 interface Int32EntityId {
 

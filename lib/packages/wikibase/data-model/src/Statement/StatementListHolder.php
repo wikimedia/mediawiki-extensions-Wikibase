@@ -10,7 +10,7 @@ namespace Wikibase\DataModel\Statement;
  *  gives the guarantee to return an object by reference. Changes to that object change the entity.
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 interface StatementListHolder extends StatementListProvider {
 

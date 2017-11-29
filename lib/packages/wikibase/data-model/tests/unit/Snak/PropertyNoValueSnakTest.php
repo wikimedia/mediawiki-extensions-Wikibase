@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @group WikibaseSnak
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 
