@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_889b341b",
+        "filename": "lib/includes/Changes/DiffChange.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-29T11:38:33Z",
+      "side": 1,
+      "message": "I think it\u0027s a serious flaw if a \"factory\" is exclusively used like this. It\u0027s not really a factory if the code creates a new instance for every single usage. It\u0027s de-facto a static method.\n\nNot a horrible thing right now. We can easily string-replace these calls. But it concerns me. I will upload a follow up patch for this detail.",
+      "range": {
+        "startLine": 52,
+        "startChar": 10,
+        "endLine": 52,
+        "endChar": 70
+      },
+      "revId": "3c7b3e8f7df646ad9c77d4c8ab42e7be8e322dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
