@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -234,7 +234,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
 		$info = $change->getInfo();
 		if ( !array_key_exists( 'compactDiff', $info ) ) {
-			$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+			$aspects = EntityDiffChangedAspects::newFromEntityDiff(
 				$change->getDiff()
 			);
 			$info = $change->getInfo();

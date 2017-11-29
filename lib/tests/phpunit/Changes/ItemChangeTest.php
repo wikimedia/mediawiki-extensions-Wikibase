@@ -8,7 +8,7 @@ use Exception;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
  * @covers Wikibase\ItemChange
@@ -64,7 +64,7 @@ class ItemChangeTest extends EntityChangeTest {
 	public function testGetSiteLinkDiffAspects( ItemChange $change ) {
 		$info = $change->getInfo();
 		if ( !array_key_exists( 'compactDiff', $info ) ) {
-			$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+			$aspects = EntityDiffChangedAspects::newFromEntityDiff(
 				$change->getDiff()
 			);
 			$info['compactDiff'] = $aspects;

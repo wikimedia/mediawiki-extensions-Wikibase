@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Deserializers\Deserializer;
-use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory;
 use MWException;
@@ -18,7 +17,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -375,9 +373,7 @@ class EntityChange extends DiffChange {
 		}
 
 		if ( isset( $info['compactDiff'] ) && is_array( $info['compactDiff'] ) && $info['compactDiff'] ) {
-			$compactDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-				new Diff()
-			);
+			$compactDiff = EntityDiffChangedAspects::newEmpty();
 			$compactDiff->unserialize( $info['compactDiff'] );
 			$info['compactDiff'] = $compactDiff;
 		}
