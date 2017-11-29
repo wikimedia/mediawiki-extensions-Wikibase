@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0edf5380_7be15cfb",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-29T11:48:53Z",
+      "side": 1,
+      "message": "Why \"send\"? This is just a \"newEmptyDiff\" method with the side effect of tracking something unrelated to that. This is not a good split. I would either move the log warning up to where it was before, or rework this method into something like\n\n$this-\u003elogWarning( \u0027Cannot get sitelink diff\u0027 );",
+      "range": {
+        "startLine": 66,
+        "startChar": 18,
+        "endLine": 66,
+        "endChar": 22
+      },
+      "revId": "406075e1f7fa68d90b705de5fa41abce3a2fc50f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edf5380_7b0b1cda",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-29T11:48:53Z",
+      "side": 1,
+      "message": "I\u0027m afraid this is not a honest description of what the test actually does. It starts like it is going to become a roundtrip test for all the code that is involved in compact diffs. But the assertion in the end is super-vague. All it checks is the return type, but not a single bit from the Diff objects contents are compared.",
+      "range": {
+        "startLine": 64,
+        "startChar": 21,
+        "endLine": 64,
+        "endChar": 43
+      },
+      "revId": "406075e1f7fa68d90b705de5fa41abce3a2fc50f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
