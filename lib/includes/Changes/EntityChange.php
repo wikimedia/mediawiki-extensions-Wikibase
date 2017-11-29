@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Diff\DiffOp\Diff\Diff;
 use MWException;
 use RecentChange;
 use Revision;
@@ -10,7 +9,6 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes
@@ -308,12 +306,8 @@ class EntityChange extends DiffChange {
 
 		$info = parent::unserializeInfo( $serialization );
 
-		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) &&
-			$info['compactDiff']
-		) {
-			$compactDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-				new Diff()
-			);
+		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) ) {
+			$compactDiff = EntityDiffChangedAspects::newEmpty();
 			$compactDiff->unserialize( $info['compactDiff'] );
 			$info['compactDiff'] = $compactDiff;
 		}

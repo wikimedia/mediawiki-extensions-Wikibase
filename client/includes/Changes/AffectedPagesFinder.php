@@ -119,7 +119,6 @@ class AffectedPagesFinder {
 	 */
 	public function getChangedAspects( EntityChange $change ) {
 		$aspects = [];
-
 		$diffAspects = $change->getCompactDiff();
 
 		if ( $diffAspects->getSiteLinkChanges() !== [] ) {
