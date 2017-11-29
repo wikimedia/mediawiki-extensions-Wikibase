@@ -1055,10 +1055,9 @@ final class WikibaseClient {
 	 * @return EntityDiffer
 	 */
 	private function getEntityDiffer() {
-		$strategieBuilders = $this->entityTypeDefinitions->getEntityDifferStrategyBuilders();
 		$entityDiffer = new EntityDiffer();
-		foreach ( $strategieBuilders as $strategyBuilder ) {
-			$entityDiffer->registerEntityDifferStrategy( call_user_func( $strategyBuilder ) );
+		foreach ( $this->entityTypeDefinitions->getEntityDifferStrategyBuilders() as $builder ) {
+			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
 		}
 		return $entityDiffer;
 	}

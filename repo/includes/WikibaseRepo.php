@@ -622,10 +622,9 @@ class WikibaseRepo {
 	 * @return EntityDiffer
 	 */
 	public function getEntityDiffer() {
-		$strategieBuilders = $this->entityTypeDefinitions->getEntityDifferStrategyBuilders();
 		$entityDiffer = new EntityDiffer();
-		foreach ( $strategieBuilders as $strategyBuilder ) {
-			$entityDiffer->registerEntityDifferStrategy( call_user_func( $strategyBuilder ) );
+		foreach ( $this->entityTypeDefinitions->getEntityDifferStrategyBuilders() as $builder ) {
+			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
 		}
 		return $entityDiffer;
 	}
@@ -634,10 +633,9 @@ class WikibaseRepo {
 	 * @return EntityPatcher
 	 */
 	public function getEntityPatcher() {
-		$strategieBuilders = $this->entityTypeDefinitions->getEntityPatcherStrategyBuilders();
 		$entityPatcher = new EntityPatcher();
-		foreach ( $strategieBuilders as $strategyBuilder ) {
-			$entityPatcher->registerEntityPatcherStrategy( call_user_func( $strategyBuilder ) );
+		foreach ( $this->entityTypeDefinitions->getEntityPatcherStrategyBuilders() as $builder ) {
+			$entityPatcher->registerEntityPatcherStrategy( call_user_func( $builder ) );
 		}
 		return $entityPatcher;
 	}
