@@ -12,17 +12,14 @@ use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 
 /**
- * Factory for EntityDiffChangedAspects.
- *
  * @license GPL-2.0+
  * @author Marius Hoch
  */
 class EntityDiffChangedAspectsFactory {
 
 	/**
-	 * Get an EntityDiffChangedAspects instance from an EntityDiff.
-	 *
 	 * @param Diff $entityDiff
+	 *
 	 * @return EntityDiffChangedAspects
 	 */
 	public function newFromEntityDiff( Diff $entityDiff ) {

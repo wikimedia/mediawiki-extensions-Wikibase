@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * Class for changes that can be represented as a Diff.
@@ -49,7 +48,7 @@ abstract class DiffChange extends ChangeRow {
 			// This shouldn't happen, but we should be robust against corrupt, incomplete
 			// obsolete instances in the database, etc.
 			wfLogWarning( 'Cannot get the diff when it has not been set yet.' );
-			return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( new Diff() );
+			return EntityDiffChangedAspects::newEmpty();
 		} else {
 			return $info['compactDiff'];
 		}
