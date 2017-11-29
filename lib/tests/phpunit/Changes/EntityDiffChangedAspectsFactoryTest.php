@@ -17,7 +17,6 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * @covers Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory
@@ -336,8 +335,7 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 		$entityDiffer = new EntityDiffer();
 		$entityDiff = $entityDiffer->diffEntities( $oldEntity, $newEntity );
 
-		$factory = new EntityDiffChangedAspectsFactory();
-		$entityDiffChangedAspects = $factory->newFromEntityDiff( $entityDiff );
+		$entityDiffChangedAspects = EntityDiffChangedAspects::newFromEntityDiff( $entityDiff );
 		$actual = $entityDiffChangedAspects->toArray();
 
 		$this->sortSubArrays( $actual );
@@ -351,8 +349,7 @@ class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
 		// Add some unknown change
 		$entityDiff->addOperations( [ new DiffOpAdd( 1 ) ] );
 
-		$factory = new EntityDiffChangedAspectsFactory();
-		$entityDiffChangedAspects = $factory->newFromEntityDiff( $entityDiff );
+		$entityDiffChangedAspects = EntityDiffChangedAspects::newFromEntityDiff( $entityDiff );
 		$actual = $entityDiffChangedAspects->toArray();
 
 		$expectedDiff = [

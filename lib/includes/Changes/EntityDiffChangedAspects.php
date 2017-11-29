@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Changes;
 
+use Diff\DiffOp\Diff\Diff;
 use MWException;
 use Serializable;
 use Wikimedia\Assert\Assert;
@@ -89,6 +90,22 @@ class EntityDiffChangedAspects implements Serializable {
 	}
 
 	/**
+	 * @return self
+	 */
+	public static function newEmpty() {
+		return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( new Diff() );
+	}
+
+	/**
+	 * @param Diff $entityDiff
+	 *
+	 * @return self
+	 */
+	public static function newFromEntityDiff( Diff $entityDiff ) {
+		return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $entityDiff );
+	}
+
+	/**
 	 * Language codes of the labels that changed (added, removed or updated)
 	 *
 	 * @return string[]
@@ -146,7 +163,9 @@ class EntityDiffChangedAspects implements Serializable {
 	/**
 	 * @see Serializable::unserialize
 	 *
-	 * @return string
+	 * @param string $serialized
+	 *
+	 * @throws MWException
 	 */
 	public function unserialize( $serialized ) {
 		$data = json_decode( $serialized );
@@ -163,7 +182,7 @@ class EntityDiffChangedAspects implements Serializable {
 	}
 
 	/**
-	 * @return array[]
+	 * @return array
 	 */
 	public function toArray() {
 		return [
