@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Store;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
@@ -74,7 +73,7 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	 * @param string[] $termTypes Array with one or more of the types 'label', 'alias' and
 	 *  'description'. Default is only 'label'.
 	 *
-	 * @return LabelDescriptionLookup
+	 * @return LanguageFallbackLabelDescriptionLookup
 	 */
 	public function newLabelDescriptionLookup(
 		Language $language,
