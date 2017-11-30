@@ -374,7 +374,9 @@ class EntityChange extends DiffChange {
 			$info['diff'] = $factory->newFromArray( $info['diff'] );
 		}
 
-		if ( isset( $info['compactDiff'] ) && is_array( $info['compactDiff'] ) && $info['compactDiff'] ) {
+		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) &&
+			$info['compactDiff']
+		) {
 			$compactDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
 				new Diff()
 			);
