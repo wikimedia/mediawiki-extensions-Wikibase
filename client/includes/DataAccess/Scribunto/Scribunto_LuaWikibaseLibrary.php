@@ -242,7 +242,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	private function newLanguageDependentLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$usageAccumulator = $this->getUsageAccumulator();
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$wikibaseClient->getTermLookup(),
@@ -251,15 +250,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$usageTrackingLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
 			$labelDescriptionLookup,
-			$usageAccumulator,
+			$this->getUsageAccumulator(),
 			$this->getLanguageFallbackChain(),
 			$this->allowDataAccessInUserLanguage()
 		);
 
 		return new WikibaseLanguageDependentLuaBindings(
 			$this->getEntityIdParser(),
-			$usageTrackingLabelDescriptionLookup,
-			$usageAccumulator
+			$usageTrackingLabelDescriptionLookup
 		);
 	}
 
