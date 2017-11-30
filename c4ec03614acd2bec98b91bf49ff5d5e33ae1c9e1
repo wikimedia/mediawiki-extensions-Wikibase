@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_5b58fb8c",
+        "filename": "view/resources/wikibase/templates.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-11-30T13:54:00Z",
+      "side": 1,
+      "message": "This is the section that avoids back-references. Utilizing back-references was originally suggested in a comment:\n\n(stuff outside of quotes(a quote)[stuff except that particular quote]that particular quote again) repeat\n\nMy approach:\n\n(stuff outside of quotes|\"stuff in double quotes\"|\u0027stuff in single quotes\u0027) repeat\n\nMy approach does not care about the order of attribute names and values and allows junk like \u003ca \"value\"\"value\"\u003e. But this does not matter for what this code cares about.",
+      "range": {
+        "startLine": 70,
+        "startChar": 45,
+        "endLine": 70,
+        "endChar": 60
+      },
+      "revId": "c4ec03614acd2bec98b91bf49ff5d5e33ae1c9e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
