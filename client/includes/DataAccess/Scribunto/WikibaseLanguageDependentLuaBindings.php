@@ -108,9 +108,6 @@ class WikibaseLanguageDependentLuaBindings {
 			return [ null, null ];
 		}
 
-		// XXX: This. Sucks. A lot.
-		// Also notes about language fallbacks from getLabel apply
-		$this->usageAccumulator->addOtherUsage( $entityId );
 		return [ $term->getText(), $term->getActualLanguageCode() ];
 	}
 
