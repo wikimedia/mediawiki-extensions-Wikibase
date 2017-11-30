@@ -264,7 +264,7 @@ abstract class EntityHandler extends ContentHandler {
 	public function getAutosummary(
 		Content $oldContent = null,
 		Content $newContent = null,
-		$flags
+		$flags = 0
 	) {
 		return '';
 	}
