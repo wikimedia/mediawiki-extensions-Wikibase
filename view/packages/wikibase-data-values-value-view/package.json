@@ -33,6 +33,8 @@
     "grunt-karma": "^2.0.0",
     "karma": "^1.7.1",
     "karma-cli": "^1.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-qunit": "^1.2.1",
     "qunitjs": "^2.4.0",
