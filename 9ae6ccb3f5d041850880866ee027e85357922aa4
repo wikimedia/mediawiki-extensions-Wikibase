@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_12000c6d",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageDependentLuaBindings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-01T14:03:41Z",
+      "side": 1,
+      "message": "This entire injection can be removed now.",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 36
+      },
+      "revId": "9ae6ccb3f5d041850880866ee027e85357922aa4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
