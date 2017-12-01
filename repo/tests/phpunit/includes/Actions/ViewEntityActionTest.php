@@ -42,20 +42,24 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function provideShow() {
 		return [
-			[ 'Berlin', 'Hauptstadt von Deutschland' ],
-			[ 'Berlin2', 'redirectMsg' ],
+			[ 'Berlin', 'Hauptstadt von Deutschland', true ],
+			[ 'Berlin2', 'redirectMsg', false ],
 		];
 	}
 
 	/**
 	 * @dataProvider provideShow
 	 */
-	public function testShow( $handle, $expected ) {
+	public function testShow( $handle, $expected, $editable ) {
 		$page = $this->getTestItemPage( $handle );
 		$output = $this->executeViewAction( $page );
 
 		$this->assertContains( $expected, $output->getHTML() );
-		$this->assertEditable( $output );
+		if ( $editable ) {
+			$this->assertEditable( $output );
+		} else {
+			$this->assertNotEditable( $output );
+		}
 	}
 
 	public function testMetaTags_withoutDescription() {
@@ -88,7 +92,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		], $metaTags );
 	}
 
-	public function testShowDiff() {
+	public function testShowDiff_latest() {
 		$page = $this->getTestItemPage( 'Berlin' );
 
 		$latest = $page->getRevision();
@@ -97,6 +101,23 @@ class ViewEntityActionTest extends ActionTestCase {
 		$params = [
 			'diff' => $latest->getId(),
 			'oldid' => $previous->getId()
+		];
+
+		$output = $this->executeViewAction( $page, $params );
+
+		$this->assertContains( 'diff-currentversion-title', $output->getHTML(), 'is diff view' );
+		$this->assertEditable( $output );
+	}
+
+	public function testShowDiff_notLatest() {
+		$page = $this->getTestItemPage( 'Berlin' );
+
+		$previous = $page->getRevision()->getPrevious();
+		$previousPrevious = $previous->getPrevious();
+
+		$params = [
+			'diff' => $previous->getId(),
+			'oldid' => $previousPrevious->getId()
 		];
 
 		$output = $this->executeViewAction( $page, $params );
@@ -179,11 +200,11 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	private function assertEditable( OutputPage $output ) {
 		$jsConfigVars = $output->getJSVars();
+		$html = $output->getHTML();
 
 		// This mirrors the check the front does in isEditable() in wikibase.ui.entityViewInit.js.
-		$this->assertArrayHasKey( 'wbIsEditView', $jsConfigVars );
+		$this->assertContains( 'wikibase-toolbar-button-edit', $html );
 		$this->assertArrayHasKey( 'wgRelevantPageIsProbablyEditable', $jsConfigVars );
-		$this->assertTrue( $jsConfigVars['wbIsEditView'], 'wbIsEditView is enabled' );
 		$this->assertTrue(
 			$jsConfigVars['wgRelevantPageIsProbablyEditable'],
 			'wgRelevantPageIsProbablyEditable is enabled'
@@ -194,10 +215,6 @@ class ViewEntityActionTest extends ActionTestCase {
 		$html = $output->getHTML();
 		$this->assertNotContains( 'wikibase-edittoolbar-container', $html );
 		$this->assertNotContains( 'wikibase-toolbar-button-edit', $html );
-
-		$jsConfigVars = $output->getJsConfigVars();
-		$this->assertArrayHasKey( 'wbIsEditView', $jsConfigVars );
-		$this->assertFalse( $jsConfigVars['wbIsEditView'], 'wbIsEditView is disabled' );
 	}
 
 }
