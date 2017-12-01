@@ -161,7 +161,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$title = Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
-		$expectedUsedOptions = [ 'userlang', 'editsection' ];
+		$expectedUsedOptions = [ 'userlang' ];
 		$actualOptions = $parserOutput->getUsedOptions();
 		$this->assertEquals(
 			$expectedUsedOptions,
