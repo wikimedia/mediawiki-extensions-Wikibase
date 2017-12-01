@@ -14,7 +14,8 @@ module.exports = function ( grunt ) {
 			all: [
 				'**/*.json',
 				'!node_modules/**',
-				'!vendor/**'
+				'!vendor/**',
+				'!extensions/**'
 			]
 		},
 		stylelint: {
@@ -24,7 +25,8 @@ module.exports = function ( grunt ) {
 				'!view/resources/jquery/ui/**',
 				'!view/lib/**',
 				'!node_modules/**',
-				'!vendor/**'
+				'!vendor/**',
+				'!extensions/**'
 			]
 		},
 		banana: {
