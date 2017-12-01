@@ -11,8 +11,8 @@
 	 * @return {boolean}
 	 */
 	function isEditable() {
-		return mw.config.get( 'wbIsEditView' )
-			&& mw.config.get( 'wgRelevantPageIsProbablyEditable' );
+		return mw.config.get( 'wgRelevantPageIsProbablyEditable' )
+			&& $( '.wikibase-toolbar-button-edit' ).length;
 	}
 
 	/**
