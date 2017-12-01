@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_cf19db80",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageDependentLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-01T09:27:22Z",
+      "side": 1,
+      "message": "There is something wrong here. Look how $this-\u003eusageAccumulator is used a single time only, only for descriptions, but not for labels. This can\u0027t be right. I assume this call can be entirely removed, as the necessary usage tracking is already done somewhere else.",
+      "revId": "e8fbccf89caa2fbaa811d9a706f2e3b77e3a2679",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
