@@ -158,13 +158,36 @@ class AffectedPagesFinder {
 			$aspects = array_merge( $aspects, $descriptionsAspects );
 		}
 
-		if ( ( $diffAspects->getStatementChanges() !== [] ) || ( $diffAspects->hasOtherChanges() !== false ) ) {
+		if ( $diffAspects->getStatementChanges() !== [] ) {
+			$statementAspects = $this->getChangedStatementAspects(
+				$diffAspects->getStatementChanges()
+			);
+			$aspects = array_merge( $aspects, $statementAspects );
+		}
+
+
+		if ( $diffAspects->hasOtherChanges() !== false ) {
 			$aspects[] = EntityUsage::OTHER_USAGE;
 		}
 
 		if ( $aspects === [] ) {
 			// This is needed when diff is supressed for performance reasons
 			$aspects[] = EntityUsage::OTHER_USAGE;
+		}
+
+		return $aspects;
+	}
+
+	/**
+	 * @param string[] $diff
+	 *
+	 * @return string[]
+	 */
+	private function getChangedStatementAspects( array $diff ) {
+		$aspects = [];
+
+		foreach ( $diff as $propertyId ) {
+			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::STATEMENT_USAGE, $propertyId );
 		}
 
 		return $aspects;
