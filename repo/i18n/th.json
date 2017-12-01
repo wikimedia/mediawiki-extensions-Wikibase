@@ -24,7 +24,7 @@
 	"wikibase-entitytermsforlanguagelistview-label": "ป้ายชื่อ",
 	"wikibase-entitytermsforlanguagelistview-language": "ภาษา",
 	"wikibase-entitytermsforlanguagelistview-more": "ภาษาที่ป้อนเข้ามาทั้งหมด",
-	"wikibase-label-empty": "ไม่มีการกำหนดป้าย",
+	"wikibase-label-empty": "ไม่มีการกำหนดป้ายชื่อ",
 	"wikibase-label-edit-placeholder": "ป้อนป้ายชื่อ",
 	"wikibase-label-edit-placeholder-language-aware": "ป้อนป้ายชื่อในภาษา$1",
 	"wikibase-description-empty": "ไม่มีการกำหนดคำอธิบาย",

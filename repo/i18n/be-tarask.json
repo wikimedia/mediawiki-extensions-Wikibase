@@ -151,6 +151,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
 	"wikibase-gotolinkedpage-lookup-item": "Ідэнтыфікатар элемэнту:",
 	"wikibase-gotolinkedpage-submit": "Перайсьці",
+	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage выкарыстоўваецца для пошуку старонкі элемэнту на далучаным сайце.<br />Першае поле, «{{int:wikibase-gotolinkedpage-lookup-site}}», куды вы ўводзіце мову і код сайту.<br />У другое поле, «{{int:wikibase-gotolinkedpage-lookup-item}}», вы мусіце ўвесьці ідэнтыфікатар элемэнту, які вы шукаеце.",
 	"wikibase-gotolinkedpage-error-item-not-found": "Элемэнт ня знойдзены",
 	"special-itemdisambiguation": "Неадназначнасьць аб’ектаў",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Пошук аб’ектаў паводле мовы і меткі",

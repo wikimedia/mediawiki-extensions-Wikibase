@@ -6,5 +6,7 @@
 	},
 	"wikibase-edit": "wallak",
 	"wikibase-add": "ngatti",
-	"wikibase-description-empty": "Uart Warrangan"
+	"wikibase-label-empty": "Uart kwel wallak",
+	"wikibase-description-empty": "Uart Warrangan",
+	"wikibase-sitelinks-special": "Wam karlup"
 }

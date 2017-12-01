@@ -117,6 +117,8 @@
 	"wikibase-itemmerge-redirect": "یہ آئٹمز پہلے ہی ضم کیے جا چکے ہیں۔",
 	"wikibase-itemmerge-failed-modify": "آئٹموں کا انضمام ناکام رہا، براہ مہربانی پہلے تنازعات دور کریں۔",
 	"wikibase-restoreold": "بحال",
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] کی جانب سے کیا گیا نسخہ $3 بحال کیا۔",
+	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|تبادلۂ خیال]]) کی جانب سے کی گئی $3 ترمیم رد کردی گئی ہے۔",
 	"wikibase-concept-uri": "تصور یو آر آئی",
 	"right-item-merge": "آئٹموں کو ضم کریں",
 	"action-item-merge": "آئٹموں کو ضم کریں"
