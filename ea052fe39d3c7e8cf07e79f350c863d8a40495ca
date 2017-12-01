@@ -22,6 +22,30 @@
       "revId": "ea052fe39d3c7e8cf07e79f350c863d8a40495ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_749fc955",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-01T01:13:38Z",
+      "side": 1,
+      "message": "I\u0027ve ported the code from prefix search here so now they use the same code.",
+      "parentUuid": "0edf5380_a80d5843",
+      "range": {
+        "startLine": 190,
+        "startChar": 29,
+        "endLine": 190,
+        "endChar": 42
+      },
+      "revId": "ea052fe39d3c7e8cf07e79f350c863d8a40495ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
