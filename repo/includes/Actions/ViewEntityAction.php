@@ -54,18 +54,6 @@ class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Returns true if this view action is performing a plain view (not a diff, print version, etc.)
-	 * of the page's current revision.
-	 *
-	 * @return bool
-	 */
-	private function isEditable() {
-		return !$this->isDiff()
-			&& !$this->getOutput()->isPrintable()
-			&& $this->page->isCurrent();
-	}
-
-	/**
 	 * @return bool
 	 */
 	private function isDiff() {
@@ -74,10 +62,7 @@ class ViewEntityAction extends ViewAction {
 
 	private function showEntityPage() {
 		$outputPage = $this->getOutput();
-		$editable = $this->isEditable();
 
-		// NOTE: page-wide property, independent of user permissions
-		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 		$this->page->view();
 
 		$this->overridePageMetaTags( $outputPage );
