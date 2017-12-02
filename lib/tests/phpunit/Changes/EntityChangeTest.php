@@ -8,6 +8,7 @@ use RecentChange;
 use Revision;
 use RuntimeException;
 use stdClass;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikimedia\TestingAccessWrapper;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -350,6 +351,34 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange( [ 'info' => $info ] );
 		$change->setField( 'info', $change->getSerializedInfo() );
 		$this->assertEquals( $info, $change->getInfo() );
+	}
+
+	public function testSerializeAndUnserializeInfoCompactDiff() {
+		$aspects = new EntityDiffChangedAspects(
+			[ 'fa' ],
+			[],
+			[],
+			[],
+			false
+		);
+		$info = [ 'compactDiff' => $aspects->serialize() ];
+		$change = new EntityChange( [ 'info' => $info ] );
+		$change->setField( 'info', $change->getSerializedInfo() );
+		$this->assertEquals( $info, $change->getInfo() );
+	}
+
+	public function testSerializeAndUnserializeInfoCompactDiffBadSerialization() {
+		$aspects = new EntityDiffChangedAspects(
+			[ 'de' ],
+			[],
+			[],
+			[],
+			false
+		);
+		$info = [ 'compactDiff' => $aspects->toArray() ];
+		$change = new EntityChange( [ 'info' => $info ] );
+		$change->setField( 'info', $change->getSerializedInfo() );
+		$this->assertEquals( [], $change->getInfo() );
 	}
 
 	public function testGivenStatement_serializeInfoSerializesStatement() {
