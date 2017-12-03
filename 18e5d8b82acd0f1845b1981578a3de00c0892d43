@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_8ee86cdf",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-12-03T19:03:26Z",
+      "side": 1,
+      "message": "for backwards compat with gadgets etc., maybe we could do mw.config.set( \u0027wbIsEditView\u0027 ) based on the logic here?",
+      "revId": "18e5d8b82acd0f1845b1981578a3de00c0892d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
