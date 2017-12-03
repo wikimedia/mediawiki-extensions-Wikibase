@@ -98,6 +98,17 @@ $namespaceNames['it'] = [
 	WB_NS_QUERY_TALK => 'Discussioni_query',
 ];
 
+$namespaceNames['ko'] = [
+	WB_NS_ITEM      => '항목',
+	WB_NS_ITEM_TALK => '항목토론',
+
+	WB_NS_PROPERTY      => '속성',
+	WB_NS_PROPERTY_TALK => '속성토론',
+
+	WB_NS_QUERY      => '쿼리',
+	WB_NS_QUERY_TALK => '쿼리토론',
+];
+
 $namespaceNames['nl'] = [
 	WB_NS_ITEM      => 'Item',
 	WB_NS_ITEM_TALK => 'Overleg_item',
