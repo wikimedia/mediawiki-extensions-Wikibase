@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_bb29349d",
+        "filename": "repo/Wikibase.i18n.namespaces.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 787
+      },
+      "writtenOn": "2017-12-03T11:51:36Z",
+      "side": 1,
+      "message": "Query \u003d consulta, but maybe we can find a better word for this or can this stay as-is?",
+      "range": {
+        "startLine": 86,
+        "startChar": 22,
+        "endLine": 86,
+        "endChar": 30
+      },
+      "revId": "4d79013b4ef44b1f7cd8f5cb7108c4e9d47cb10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9b26f0c7",
+        "filename": "repo/Wikibase.i18n.namespaces.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 787
+      },
+      "writtenOn": "2017-12-03T11:51:36Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 30
+      },
+      "revId": "4d79013b4ef44b1f7cd8f5cb7108c4e9d47cb10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
