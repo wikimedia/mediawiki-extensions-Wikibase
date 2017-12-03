@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_3b3524f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1154
+      },
+      "writtenOn": "2017-12-03T11:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_bb62d404",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "9ab499a36bcee36a832eb825455f494f4ed408e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_9b5f1044",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-03T11:36:41Z",
       "side": 1,
       "message": "Shouldn\u0027t this be above the Change-Id line?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 44
+      },
+      "revId": "9ab499a36bcee36a832eb825455f494f4ed408e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_1b3ae0e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1154
+      },
+      "writtenOn": "2017-12-03T11:46:14Z",
+      "side": 1,
+      "message": "I didn\u0027t do anything beyond git commit -s, so git-review hook\u0027s default behavior seem to be this way.",
+      "parentUuid": "eee3df47_9b5f1044",
       "range": {
         "startLine": 10,
         "startChar": 0,
