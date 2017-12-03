@@ -68,7 +68,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 
 		return Html::rawElement(
 			'dt',
-			[],
+			[ 'id' => $dataTypeId ],
 			$this->msg( $baseKey . '-head' )->parse()
 		)
 		. Html::rawElement( 'dd', [],
