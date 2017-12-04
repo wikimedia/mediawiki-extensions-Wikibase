@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Modules;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use Exception;
 use ResourceLoaderContext;
 use Wikibase\Repo\Modules\DataTypesModule;

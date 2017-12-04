@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use Language;
 use SpecialPageTestBase;
 use Title;

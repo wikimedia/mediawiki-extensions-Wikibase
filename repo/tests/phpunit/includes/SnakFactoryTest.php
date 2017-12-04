@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;

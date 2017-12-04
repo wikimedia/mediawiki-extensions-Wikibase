@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use Message;
 use RuntimeException;

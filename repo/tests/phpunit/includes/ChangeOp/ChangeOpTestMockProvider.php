@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use DataTypes\DataType;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;

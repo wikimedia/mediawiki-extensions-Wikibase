@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use DataTypes\DataType;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;

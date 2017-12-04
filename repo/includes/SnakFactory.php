@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
 use InvalidArgumentException;

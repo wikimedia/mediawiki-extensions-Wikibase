@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use OutOfBoundsException;

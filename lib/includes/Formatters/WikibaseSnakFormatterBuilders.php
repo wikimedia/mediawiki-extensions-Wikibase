@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;

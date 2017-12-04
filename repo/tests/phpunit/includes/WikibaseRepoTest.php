@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
 use DataValues\Geo\Values\GlobeCoordinateValue;
