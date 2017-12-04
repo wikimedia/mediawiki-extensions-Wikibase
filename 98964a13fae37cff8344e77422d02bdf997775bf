@@ -22,6 +22,23 @@
       "revId": "98964a13fae37cff8344e77422d02bdf997775bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_dd6ea792",
+        "filename": "repo/includes/Diff/EntityContentDiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-12-04T16:21:52Z",
+      "side": 1,
+      "message": "Running this hook here is pretty evil. You\u0027re reasonably likely to cause other extensions to raise warnings and/or exhibit unexpected behavior because you\u0027re not setting other keys in $options that they can expect to receive from core.",
+      "revId": "98964a13fae37cff8344e77422d02bdf997775bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
