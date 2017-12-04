@@ -13,6 +13,7 @@ use ParserOutput;
 use Revision;
 use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\ToolbarEditSectionGenerator;
 use WikiPage;
 
 /**
@@ -153,6 +154,12 @@ class EntityContentDiffView extends DifferenceEngine {
 		$parserOptions->addExtraKey( 'diff=1' );
 
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
+
+		$parserOutput->setText( ToolbarEditSectionGenerator::enableSectionEditLinks(
+			$parserOutput->getRawText(),
+			false
+		) );
+
 		return $parserOutput;
 	}
 

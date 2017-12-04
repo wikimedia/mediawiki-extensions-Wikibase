@@ -102,7 +102,6 @@ class ViewEntityActionTest extends ActionTestCase {
 		$output = $this->executeViewAction( $page, $params );
 
 		$this->assertContains( 'diff-currentversion-title', $output->getHTML(), 'is diff view' );
-		$this->markTestSkipped( 'Diff page is currently editable, needs fixing: T181807' );
 		$this->assertNotEditable( $output );
 	}
 

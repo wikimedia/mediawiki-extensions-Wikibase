@@ -43,6 +43,7 @@ use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\View\ToolbarEditSectionGenerator;
 use WikiPage;
 
 /**
@@ -1011,13 +1012,14 @@ final class RepoHooks {
 	 * @param array &$options Transformation options
 	 */
 	public static function onParserOutputPostCacheTransform(
-		ParserOutput $out, &$text, array &$options
+		ParserOutput $out,
+		&$text,
+		array &$options
 	) {
-		if ( $options['enableSectionEditLinks'] ) {
-			$text = str_replace( [ '<wb:sectionedit>', '</wb:sectionedit>' ], '', $text );
-		} else {
-			$text = preg_replace( '#<wb:sectionedit>.*?</wb:sectionedit>#s', '', $text );
-		}
+		$text = ToolbarEditSectionGenerator::enableSectionEditLinks(
+			$text,
+			$options['enableSectionEditLinks']
+		);
 	}
 
 	/**

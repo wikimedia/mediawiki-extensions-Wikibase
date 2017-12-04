@@ -39,6 +39,20 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		$this->textProvider = $textProvider;
 	}
 
+	/**
+	 * @param string $text
+	 * @param bool $isEditable
+	 *
+	 * @return string
+	 */
+	public static function enableSectionEditLinks( $text, $isEditable ) {
+		if ( $isEditable ) {
+			return str_replace( [ '<wb:sectionedit>', '</wb:sectionedit>' ], '', $text );
+		} else {
+			return preg_replace( '#<wb:sectionedit>.*?</wb:sectionedit>#s', '', $text );
+		}
+	}
+
 	public function getSiteLinksEditSection( EntityId $entityId = null ) {
 		$specialPageUrlParams = [];
 
