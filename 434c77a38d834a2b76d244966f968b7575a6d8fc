@@ -22,6 +22,30 @@
       "revId": "434c77a38d834a2b76d244966f968b7575a6d8fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_82979d92",
+        "filename": "repo/tests/phpunit/includes/Actions/ViewEntityActionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-04T12:30:50Z",
+      "side": 0,
+      "message": "oops, the idea was exactly to not remove it. fat fingers failure.",
+      "parentUuid": "eee3df47_e25e6916",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 38
+      },
+      "revId": "434c77a38d834a2b76d244966f968b7575a6d8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
