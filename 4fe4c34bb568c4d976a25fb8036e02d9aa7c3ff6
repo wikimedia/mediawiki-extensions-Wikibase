@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_c6fb7443",
+        "filename": "repo/autoload.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-12-04T21:21:33Z",
+      "side": 1,
+      "message": "This needs to be removed",
+      "range": {
+        "startLine": 91,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 92
+      },
+      "revId": "4fe4c34bb568c4d976a25fb8036e02d9aa7c3ff6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
