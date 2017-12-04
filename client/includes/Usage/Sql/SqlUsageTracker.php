@@ -42,11 +42,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $disabledUsageAspects;
 
 	/**
-	 * @var int
-	 */
-	private $batchSize = 100;
-
-	/**
 	 * @param EntityIdParser $idParser
 	 * @param SessionConsistentConnectionManager $connectionManager
 	 * @param string[] $disabledUsageAspects
@@ -67,31 +62,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsageTable
 	 */
 	private function newUsageTable( Database $db ) {
-		return new EntityUsageTable( $this->idParser, $db, $this->batchSize );
-	}
-
-	/**
-	 * Sets the query batch size.
-	 *
-	 * @param int $batchSize
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function setBatchSize( $batchSize ) {
-		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
-			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
-		}
-
-		$this->batchSize = $batchSize;
-	}
-
-	/**
-	 * Returns the current query batch size.
-	 *
-	 * @return int
-	 */
-	public function getBatchSize() {
-		return $this->batchSize;
+		return new EntityUsageTable( $this->idParser, $db );
 	}
 
 	/**
