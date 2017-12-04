@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_ddc22888",
+        "filename": "repo/includes/Diff/EntityContentDiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-04T14:48:21Z",
+      "side": 1,
+      "message": "Note this additional cache key is key and is now as crucial as it was before! Without this extra key the same cached parser output will show up in two situations:\n* When displaying the latest revision of an item page.\n* When displaying a diff that ends with the latest revision.\n\nIn both cases the exact same item page content is supposed to be shown (on diff pages it\u0027s shown below the actual diff). The difference is that we always suppress the edit buttons on diff pages, no matter if the diff shows the current or an older revision. This is different for wikitext pages. MediaWiki core\u0027s default is to show edit buttons in diffs, when the diff shows the latest revision.\n\nWe need to override this default behavior.\n\nI would have preferred to forcefully set the parser option \"enableSectionEditLinks\" to false on Wikibase entity diff pages. But it seems all ways to do this are either removed or deprecated.\n\nSo I went with this approach: forcefully remove the HTML that represents edit links.\n\nA crucial consequence of this is that the parser split enforced via \"diff\u003d1\" is still necessary.",
+      "range": {
+        "startLine": 154,
+        "startChar": 18,
+        "endLine": 154,
+        "endChar": 41
+      },
+      "revId": "98964a13fae37cff8344e77422d02bdf997775bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
