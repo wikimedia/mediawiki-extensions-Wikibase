@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_bdde436e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-12-04T16:25:26Z",
+      "side": 1,
+      "message": "You highlighted the explanation in your next comment.",
+      "parentUuid": "eee3df47_272fc3f4",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "18e5d8b82acd0f1845b1981578a3de00c0892d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_e74ddbe1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2

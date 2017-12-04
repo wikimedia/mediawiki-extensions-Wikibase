@@ -22,6 +22,30 @@
       "revId": "823270ea7e1a4e5907d24bd74a8cbb0dc2cc78e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_7d279b5f",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-12-04T16:25:26Z",
+      "side": 0,
+      "message": "The preview on a diff page can have section edit links in MediaWiki core, if the preview is showing the most current revision.\n\nMediaWiki core already disables section edit links when printable mode is used or when a non-current revision is viewed, so detecting printable mode here to disable section edit links is redundant.\n\nIs some of the confusion here because you seem to be using the former option related to *section* edit links to control all editing in Wikibase?",
+      "parentUuid": "eee3df47_c7eb779f",
+      "range": {
+        "startLine": 63,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "823270ea7e1a4e5907d24bd74a8cbb0dc2cc78e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
