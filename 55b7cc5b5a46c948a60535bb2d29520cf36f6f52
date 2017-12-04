@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_fd056cc5",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "Are we 100% sure that deserialization will even work? PHP serialization is extremely brittle, it will fail if you changed *anything* about members, including order or access modifiers.\n\nIt would be nice to have tests for that - but I\u0027m not sure how to do that, except for hard-coding serialized changes in the unit test.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_1d281032",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "We have this code twice, perhaps put it into a private method for re-use, and to give it a name.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_5d229851",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "The test should not be defensive like this - it should know exactly what kind of data it gets!\n\nQuite to the contrary: the test should make sure that getChangedAspects() will work with and without \u0027compactDiff\u0027!",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9dd2602b",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "Please add a comment saying that this is B/C code, and explain under which conditions it can be removed. Otherwise, it will stay here forever.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_dda348a7",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "This will log warning in production - a LOT of warnings, for a few hours. We probably do not want that - and if we do, we need to tell Ops beforehand. That would need a DEPLOY line in the commit message.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_fd90cc50",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "what?",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_5d861819",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "it would be very nice to know what $change[0] and $change[1] are. Separate variables would be idea, but a comment would already help a lot.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_3db4f4e3",
+        "filename": "lib/includes/Changes/ItemChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "the method name implies that this is a generic logging method, but this method is specific. Either pass the message as a param, or rename the method.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9d80a0fb",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-04T15:05:52Z",
+      "side": 1,
+      "message": "As before: don\u0027t make the test defensive, it should know exactly what kind of data to expect. Instead, make sure the production code works with different kinds of data.",
+      "revId": "55b7cc5b5a46c948a60535bb2d29520cf36f6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
