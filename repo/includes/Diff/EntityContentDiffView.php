@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Diff;
 
 use Content;
 use DifferenceEngine;
+use Hooks;
 use Html;
 use IContextSource;
 use Language;
@@ -153,6 +154,15 @@ class EntityContentDiffView extends DifferenceEngine {
 		$parserOptions->addExtraKey( 'diff=1' );
 
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
+
+		$text = $parserOutput->getRawText();
+		$options = [ 'enableSectionEditLinks' => false ];
+		Hooks::runWithoutAbort(
+			'ParserOutputPostCacheTransform',
+			[ $parserOutput, &$text, &$options ]
+		);
+		$parserOutput->setText( $text );
+
 		return $parserOutput;
 	}
 
