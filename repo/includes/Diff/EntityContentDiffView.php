@@ -153,6 +153,11 @@ class EntityContentDiffView extends DifferenceEngine {
 		$parserOptions->addExtraKey( 'diff=1' );
 
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
+		$parserOutput->setText( preg_replace(
+			'#<wb:sectionedit>.*?</wb:sectionedit>#s',
+			'',
+			$parserOutput->getRawText()
+		) );
 		return $parserOutput;
 	}
 
