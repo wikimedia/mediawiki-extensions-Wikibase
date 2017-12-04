@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Validators;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;

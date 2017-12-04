@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
