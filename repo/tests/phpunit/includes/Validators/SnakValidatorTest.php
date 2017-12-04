@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;

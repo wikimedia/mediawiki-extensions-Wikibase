@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use DataTypes\DataType;
+use Wikibase\Lib\DataType;
 use MWException;
 
 /**
@@ -37,7 +37,7 @@ class DataTypeSelector {
 
 		foreach ( $dataTypes as $dataType ) {
 			if ( !( $dataType instanceof DataType ) ) {
-				throw new MWException( '$dataTypes should only contain instances of DataTypes\DataType' );
+				throw new MWException( '$dataTypes should only contain instances of Wikibase\Lib\DataType' );
 			}
 		}
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use Deserializers\Deserializer;
 use HashSiteStore;
 use Language;

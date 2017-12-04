@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
