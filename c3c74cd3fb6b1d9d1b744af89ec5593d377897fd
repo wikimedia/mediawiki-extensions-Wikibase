@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_e2f82949",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-04T13:58:15Z",
+      "side": 1,
+      "message": "What is the violation then? Doesn\u0027t getWikiPageForEntity return a page of property when called with property ID?",
+      "parentUuid": "eee3df47_a258e18d",
+      "range": {
+        "startLine": 283,
+        "startChar": 32,
+        "endLine": 283,
+        "endChar": 52
+      },
+      "revId": "c3c74cd3fb6b1d9d1b744af89ec5593d377897fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_8255dd54",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
         "patchSetId": 1
