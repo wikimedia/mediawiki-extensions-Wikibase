@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_5d057812",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-04T14:17:41Z",
+      "side": 1,
+      "message": "* This method does not exist on the EntityStore interface.\n* $wikibaseRepo-\u003egetEntityStore() only guarantees to return an EntityStore.",
+      "parentUuid": "eee3df47_e2f82949",
+      "range": {
+        "startLine": 283,
+        "startChar": 32,
+        "endLine": 283,
+        "endChar": 52
+      },
+      "revId": "c3c74cd3fb6b1d9d1b744af89ec5593d377897fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_8255dd54",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
         "patchSetId": 1
