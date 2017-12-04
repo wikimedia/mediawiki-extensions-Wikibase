@@ -199,7 +199,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		];
 
 		$cases['statement change on Q1'] = [
-			[ EntityUsage::OTHER_USAGE ],
+			[ EntityUsage::STATEMENT_USAGE . '.P5' ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
