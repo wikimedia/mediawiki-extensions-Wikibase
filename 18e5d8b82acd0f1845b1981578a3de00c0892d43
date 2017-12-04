@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "eee3df47_272fc3f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-04T11:26:15Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "18e5d8b82acd0f1845b1981578a3de00c0892d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_e74ddbe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-04T11:26:15Z",
+      "side": 1,
+      "message": "This does not seem to make sense. How does calling ParserOutput::getText change the fact that the output the user is going to see is\n\n1. a diff,\n2. a print view, or\n3. not the latest revision?\n\nBasically, I don\u0027t get what\u0027s broken here, why it broke, and why we can\u0027t fix it.",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "18e5d8b82acd0f1845b1981578a3de00c0892d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_8ee86cdf",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 2
@@ -13,6 +59,29 @@
       "writtenOn": "2017-12-03T19:03:26Z",
       "side": 1,
       "message": "for backwards compat with gadgets etc., maybe we could do mw.config.set( \u0027wbIsEditView\u0027 ) based on the logic here?",
+      "revId": "18e5d8b82acd0f1845b1981578a3de00c0892d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_e7ee7bb0",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-04T11:26:15Z",
+      "side": 1,
+      "message": "This would return a number. Should be converted to a boolean.",
+      "range": {
+        "startLine": 15,
+        "startChar": 43,
+        "endLine": 15,
+        "endChar": 49
+      },
       "revId": "18e5d8b82acd0f1845b1981578a3de00c0892d43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

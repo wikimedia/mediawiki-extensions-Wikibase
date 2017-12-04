@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_c7eb779f",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-04T11:26:15Z",
+      "side": 0,
+      "message": "I don\u0027t get why this can\u0027t work any more.\n\nDiffs are *never* editable. Print views are *never* editable. Old revisions are *never* editable. The JavaScript variable wbIsEditView is supposed to be *always* false in these cases.\n\nHow is it possible the variable becomes true sometimes?",
+      "range": {
+        "startLine": 63,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "823270ea7e1a4e5907d24bd74a8cbb0dc2cc78e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
