@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_273343c2",
+        "filename": "repo/tests/phpunit/includes/Actions/ViewEntityActionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-04T10:38:10Z",
+      "side": 1,
+      "message": "Now that I look at this, wouldn\u0027t be enough/better to just skip the \"not editable\" assertion in testShowDiff?\n\nThis assertion method itself is fine as far as I can tell, and the only thing that is broken is that when showing diff, there are edit links there.\n\nOne more thing, if wanted to be super nit picky, we might also want to say e.g. \"Diff page is currently editable, needs fixing: TXXX\" or so, instead of just \"Should be fixed\"",
+      "revId": "34d31ab5cecc74bdf51f53b9bfb5820d7912f789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
