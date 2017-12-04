@@ -12,6 +12,10 @@ use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 class AnalysisConfigBuilderTest extends MediaWikiTestCase {
 
 	public function testAnalysisConfig() {
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch needed.' );
+		}
+
 		$langSettings = [];
 		$langSettings['useStemming'] = [
 			'en' => [ 'index' => true, 'query' => true ],
