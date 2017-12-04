@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests;
 
-use DataTypes\DataType;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use User;

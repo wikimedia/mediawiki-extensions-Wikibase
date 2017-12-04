@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use HTMLForm;
 use Html;
 use Wikibase\DataModel\Entity\EntityId;

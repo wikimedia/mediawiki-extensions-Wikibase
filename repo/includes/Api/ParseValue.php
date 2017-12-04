@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use ApiResult;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use Exception;
 use LogicException;

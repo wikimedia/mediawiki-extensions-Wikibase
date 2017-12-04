@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use SiteLookup;
 use ValueFormatters\NumberLocalizer;

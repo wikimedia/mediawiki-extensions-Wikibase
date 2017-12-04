@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Modules;
 
-use DataTypes\DataType;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use Exception;
 use FormatJson;
 use ResourceLoaderContext;

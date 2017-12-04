@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
 use Language;
