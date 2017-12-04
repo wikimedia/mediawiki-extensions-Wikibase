@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionCache;
@@ -314,6 +315,15 @@ class SqlStore implements Store {
 	 */
 	public function newSiteLinkStore() {
 		return new SiteLinkTable( 'wb_items_per_site', false );
+	}
+
+	/**
+	 * @see Store::newEntityByTitleLookup
+	 *
+	 * @return EntityByLinkedTitleLookup
+	 */
+	public function getEntityByLinkedTitleLookup() {
+		return $this->newSiteLinkStore();
 	}
 
 	/**

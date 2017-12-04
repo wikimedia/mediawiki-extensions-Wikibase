@@ -5,6 +5,7 @@ namespace Wikibase;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -35,6 +36,11 @@ interface Store {
 	 * @return SiteLinkStore
 	 */
 	public function newSiteLinkStore();
+
+	/**
+	 * @return EntityByLinkedTitleLookup
+	 */
+	public function getEntityByLinkedTitleLookup();
 
 	/**
 	 * Removes all data from the store.

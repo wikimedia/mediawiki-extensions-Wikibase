@@ -1610,7 +1610,7 @@ class WikibaseRepo {
 			$this->getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
 			$this->getEntityIdParser(),
-			$this->getStore()->newSiteLinkStore(),
+			$this->getStore()->getEntityByLinkedTitleLookup(),
 			$this->getEntityFactory(),
 			$this->getEntityStore()
 		);
