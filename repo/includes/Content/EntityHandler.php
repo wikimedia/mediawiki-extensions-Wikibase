@@ -760,11 +760,7 @@ abstract class EntityHandler extends ContentHandler {
 			$fields = $this->fieldDefinitions->getFields();
 
 			foreach ( $fields as $fieldName => $field ) {
-				$data = $field->getFieldData( $entity );
-				if ( $data !== null && $data !== [] ) {
-					// We treat null and [] as no data, but 0, "0" etc. is OK
-					$fieldsData[$fieldName] = $data;
-				}
+				$fieldsData[$fieldName] = $field->getFieldData( $entity );
 			}
 		}
 
