@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_da36a0e3",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-05T12:36:10Z",
+      "side": 1,
+      "message": "What getNativeData returns is really not relevant, because there is no code that does anything with it, except this one here. getSize should:\n* never return 0.\n* return a number that is as close as possible to the actual size of the entity blob in the database.\n\nThis means:\n* getNativeData should either return a JSON string or the serialized array structure, as it does now. Returning the entity object is not ideal, but is \"better than nothing\" as a fallback.\n* getSize should be changed to use json_encode instead of serialize. This is already tracked in T157673.",
+      "range": {
+        "startLine": 466,
+        "startChar": 17,
+        "endLine": 466,
+        "endChar": 24
+      },
+      "revId": "30d2d53df90d7fc32de9837c79bece4376a05b3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
