@@ -150,7 +150,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertArrayHasKey( 'Q885588#T', $usages );
 
 		if ( $allowDataAccessInUserLanguage ) {
 			$this->assertArrayHasKey( 'Q885588#L', $usages );

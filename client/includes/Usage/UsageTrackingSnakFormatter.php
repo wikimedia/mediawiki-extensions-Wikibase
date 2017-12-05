@@ -72,10 +72,17 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$value = $snak->getDataValue();
 
+			// FIXME: All usage tracking is technically misplaced here, as it repeats knowledge from
+			// WikibaseValueFormatterBuilders and what the individual formatters actually use.
 			if ( $value instanceof EntityIdValue ) {
 				$entityId = $value->getEntityId();
 				$this->addLabelUsage( $entityId );
-				$this->usageAccumulator->addTitleUsage( $entityId );
+
+				// This title usage aspect must be kept in sync with what the formatters from
+				// WikibaseValueFormatterBuilders::newEntityIdFormatter actually use.
+				if ( $this->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
+					$this->usageAccumulator->addTitleUsage( $entityId );
+				}
 			} elseif ( $value instanceof UnboundedQuantityValue ) {
 				$unit = $value->getUnit();
 				try {

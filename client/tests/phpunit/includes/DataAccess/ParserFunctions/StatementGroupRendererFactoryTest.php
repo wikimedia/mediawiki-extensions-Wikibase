@@ -126,10 +126,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$parser = $this->getParser( 'en', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
-		$renderer = $rendererFactory->newRendererFromParser( $parser );
+		$renderer = $rendererFactory->newRendererFromParser( $parser, 'rich-wikitext' );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
-		$this->assertEquals( "Kittens!", $renderer->render( new ItemId( 'Q1' ), 'P1' ) );
+		$wikitext = $renderer->render( new ItemId( 'Q1' ), 'P1' );
+		$this->assertSame( '<span><span>Kittens!</span></span>', $wikitext );
 
 		$usages = $usageAccumulator->getUsages();
 		if ( $allowDataAccessInUserLanguage ) {

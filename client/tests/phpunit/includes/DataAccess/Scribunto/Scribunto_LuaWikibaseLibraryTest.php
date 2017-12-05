@@ -279,8 +279,6 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			$this->assertArrayHasKey( 'Q885588#L.de', $usage );
 		}
 
-		$this->assertArrayHasKey( 'Q885588#T', $usage );
-
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
@@ -300,7 +298,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		// All languages in the fallback chain from 'ku' to 'ku-latn' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertSame( [ 'Q32488#X', 'Q885588#L', 'Q885588#T' ], array_keys( $usage ) );
+		$this->assertSame( [ 'Q32488#X', 'Q885588#L' ], array_keys( $usage ) );
 
 		$this->assertSame( true, $cacheSplit );
 	}
