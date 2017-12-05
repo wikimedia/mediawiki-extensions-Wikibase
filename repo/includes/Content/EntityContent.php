@@ -16,6 +16,7 @@ use MWException;
 use ParserOptions;
 use ParserOutput;
 use RuntimeException;
+use Serializers\Exceptions\SerializationException;
 use Status;
 use Title;
 use User;
@@ -450,7 +451,11 @@ abstract class EntityContent extends AbstractContent {
 
 		// NOTE: this may or may not be consistent with what EntityContentCodec does!
 		$serializer = WikibaseRepo::getDefaultInstance()->getAllTypesEntitySerializer();
-		return $serializer->serialize( $this->getEntity() );
+		try {
+			return $serializer->serialize( $this->getEntity() );
+		} catch ( SerializationException $ex ) {
+			return $this->getEntity();
+		}
 	}
 
 	/**
