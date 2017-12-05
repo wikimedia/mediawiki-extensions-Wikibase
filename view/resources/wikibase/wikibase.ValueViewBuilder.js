@@ -52,7 +52,7 @@
 
 		/**
 		 * @param {jQuery} $valueViewDom
-		 * @param {dataTypes.DataType|null} dataType
+		 * @param {wikibase.dataTypes.DataType|null} dataType
 		 * @param {dataValues.DataValue|null} dataValue
 		 * @param {string|null} propertyId
 		 *
@@ -71,7 +71,7 @@
 		},
 
 		/**
-		 * @param {dataTypes.DataType|null} dataType
+		 * @param {wikibase.dataTypes.DataType|null} dataType
 		 * @param {dataValues.DataValue|null} dataValue
 		 * @param {string|null} propertyId
 		 *

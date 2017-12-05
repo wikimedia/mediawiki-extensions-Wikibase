@@ -22,7 +22,6 @@ return call_user_func( function() {
 				'snakview.tests.js',
 			],
 			'dependencies' => [
-				'dataTypes.DataTypeStore',
 				'jquery.wikibase.snakview',
 				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',

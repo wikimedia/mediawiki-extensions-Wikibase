@@ -1,0 +1,4 @@
+/**
+ * @ignore
+ */
+this.wikibase.dataTypes = {};

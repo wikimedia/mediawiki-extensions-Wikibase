@@ -28,10 +28,10 @@
 	 * @param {wikibase.store.EntityStore} entityStore Enables the `Variation` to retrieve `Entity`
 	 *        information.
 	 * @param {wikibase.ValueViewBuilder} valueViewBuilder Enables the `Variation` to have
-	 *        `jQuery.valueview` instances created according to particular `dataTypes.DataType` /
+	 *        `jQuery.valueview` instances created according to particular `wikibase.dataTypes.DataType` /
 	 *        `dataValues.DataValue` objects.
-	 * @param {dataTypes.DataTypeStore} dataTypeStore Enables the `Variation` to retrieve a
-	 *        `dataTypes.DataType` instance for a particular `DataType` ID.
+	 * @param {wikibase.dataTypes.DataTypeStore} dataTypeStore Enables the `Variation` to retrieve a
+	 *        `wikibase.dataTypes.DataType` instance for a particular `DataType` ID.
 	 *
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
@@ -106,7 +106,7 @@
 		_viewState: null,
 
 		/**
-		 * @property {dataTypes.DataTypeStore}
+		 * @property {wikibase.dataTypes.DataTypeStore}
 		 */
 		_dataTypeStore: null,
 

@@ -16,7 +16,7 @@
 	 *        Required by the `ValueView` for limiting the list of available languages for
 	 *        particular `jQuery.valueview.Expert` instances like the `Expert` responsible
 	 *        for `MonoLingualTextValue`s.
-	 * @param {dataTypes.DataTypeStore} dataTypeStore
+	 * @param {wikibase.dataTypes.DataTypeStore} dataTypeStore
 	 *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
 	 *        object when interacting on a "value" `Variation`.
 	 * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} entityIdHtmlFormatter
@@ -93,7 +93,7 @@
 	SELF.prototype._contentLanguages = null;
 
 	/**
-	 * @property {dataTypes.DataTypeStore}
+	 * @property {wikibase.dataTypes.DataTypeStore}
 	 * @private
 	 */
 	SELF.prototype._dataTypeStore = null;
