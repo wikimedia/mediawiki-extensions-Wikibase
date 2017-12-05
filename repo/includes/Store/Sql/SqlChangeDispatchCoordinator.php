@@ -59,12 +59,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $dispatchInterval = 60;
 
 	/**
-	 * @var int Number of seconds to wait before testing a lock. Any target with a lock
-	 *           timestamp newer than this will not be considered for selection.
-	 */
-	private $lockGraceInterval = 60;
-
-	/**
 	 * @var int Number of target wikis to select as a base set for random selection.
 	 *           Setting this to 1 causes strict "oldest first" behavior, with the possibility
 	 *           of grind/starvation if dispatching to the oldest wiki fails.
@@ -146,18 +140,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 */
 	public function setRandomness( $randomness ) {
 		$this->randomness = $randomness;
-	}
-
-	/**
-	 * Sets the number of seconds after a lock should be challenged. This should be at least twice
-	 * as long as we expect a dispatch pass for a single wiki to take. Challenging locks after a
-	 * while safeguards against starving clients that were locked but never unlocked by a process
-	 * that has since died.
-	 *
-	 * @param int $lockGraceInterval
-	 */
-	public function setLockGraceInterval( $lockGraceInterval ) {
-		$this->lockGraceInterval = $lockGraceInterval;
 	}
 
 	/**
