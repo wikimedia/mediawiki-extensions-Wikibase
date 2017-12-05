@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gothicspeaker"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} 𐍃𐍄𐌰𐍆𐍃",
+	"wikibase-editlinks": "𐌹𐌽𐌼𐌰𐌹𐌳𐌴𐌹 𐌲𐌰𐍅𐌹𐍃𐍃𐌹𐌽𐍃",
+	"wikibase-editlinkstitle": "𐌹𐌽𐌼𐌰𐌹𐌳𐌴𐌹 𐌼𐌹𐌸𐍂𐌰𐌶𐌳𐌰𐌲𐌰𐍅𐌹𐍃𐍃𐌹𐌽𐍃",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "𐌰𐍆𐍆𐌹𐌻𐌷",
+	"wikibase-rc-hide-wikidata-show": "𐌱𐌰𐌽𐌳𐍅𐌴𐌹",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 𐌹𐌽𐌼𐌰𐌹𐌳𐌴𐌹",
+	"wikibase-otherprojects": "𐌹𐌽 𐌰𐌽𐌸𐌰𐍂𐌰𐌹𐌼 𐍆𐌰𐌿𐍂𐌰𐍅𐌰𐌿𐍂𐍀𐍉𐌼"
+}

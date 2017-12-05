@@ -34,7 +34,6 @@
 	"wikibase-undo-revision-error": "L’anulacion at pas reussi",
 	"wikibase-undo-badpage": "Crouye vèrsion&nbsp;: la vèrsion $2 est pas a [[$1]].",
 	"wikibase-undo-firstrev": "Empossiblo d’anular la crèacion de la pâge",
-	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Yona valor p’oncor encartâye|$1 valors p’oncor encartâyes}}",
 	"wikibase-disambiguation-title": "Homonimia por « $1 »",
 	"wb-special-newitem-new-item-notification": "Un novél èlèment $1 fêt et pués redirigiê vers la sina pâge. Retôrn a $2.",
 	"wikibase-propertypage-datatype": "Tipo de donâs",

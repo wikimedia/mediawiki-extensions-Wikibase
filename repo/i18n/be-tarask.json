@@ -160,6 +160,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Код мовы:",
 	"wikibase-itemdisambiguation-lookup-label": "Метка:",
 	"wikibase-itemdisambiguation-submit": "Шукаць",
+	"wikibase-itemdisambiguation-form-hints": "Заўважце, што ня больш за $1 {{PLURAL:$1|вынік будзе паказаны|вынікі будуць паказаныя|вынікаў будуць паказаныя}}.",
 	"wikibase-itemdisambiguation-nothing-found": "Нажаль, аб’ектаў з такой меткай ня знойдзена.",
 	"wikibase-itemdisambiguation-create": "Вы можаце [$1 стварыць новы аб’ект].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Даруйце, сыстэме невядомы моўны код, пазначаны вамі. Калі ласка, выкарыстоўвайце вядомы код, як то «be-tarask».",
