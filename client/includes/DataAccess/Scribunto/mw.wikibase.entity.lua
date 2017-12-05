@@ -9,7 +9,7 @@
 ]]
 
 local php = mw_interface
-local entity = {}
+local Entity = {}
 local metatable = {}
 local methodtable = {}
 local util = require 'libraryUtil'
@@ -19,7 +19,7 @@ local checkTypeMulti = util.checkTypeMulti
 metatable.__index = methodtable
 
 -- Claim ranks (Claim::RANK_* in PHP)
-entity.claimRanks = {
+Entity.claimRanks = {
 	RANK_TRUTH = 3,
 	RANK_PREFERRED = 2,
 	RANK_NORMAL = 1,
@@ -46,7 +46,7 @@ local maskClaimsTable = function( entity )
 	entity.claims = {}
 
 	local pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function( emptyTable, propertyId )
+	pseudoClaimsMetatable.__index = function( _, propertyId )
 		if isValidPropertyId( propertyId ) then
 			-- Only attempt to track the usage if we have a valid property id.
 			php.addStatementUsage( entity.id, propertyId )
@@ -55,18 +55,18 @@ local maskClaimsTable = function( entity )
 		return actualEntityClaims[propertyId]
 	end
 
-	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyId, data )
+	pseudoClaimsMetatable.__newindex = function( _, _, _ )
 		error( 'Entity cannot be modified' )
 	end
 
-	local logNext = function( emptyTable, propertyId )
+	local logNext = function( _, propertyId )
 		if isValidPropertyId( propertyId ) then
 			php.addStatementUsage( entity.id, propertyId )
 		end
 		return next( actualEntityClaims, propertyId )
 	end
 
-	pseudoClaimsMetatable.__pairs = function( emptyTable )
+	pseudoClaimsMetatable.__pairs = function( _ )
 		return logNext, {}, nil
 	end
 
@@ -77,7 +77,7 @@ end
 -- Create new entity object from given data
 --
 -- @param {table} data
-entity.create = function( data )
+Entity.create = function( data )
 	if type( data ) ~= 'table' then
 		error( 'Expected a table obtained via mw.wikibase.getEntityObject, got ' .. type( data ) .. ' instead' )
 	end
@@ -211,7 +211,7 @@ methodtable.getBestStatements = function( entity, propertyId )
 	local statements = {}
 	local bestRank = 'normal'
 
-	for k, statement in pairs( entity.claims[propertyId] ) do
+	for _, statement in pairs( entity.claims[propertyId] ) do
 		if statement.rank == bestRank then
 			statements[#statements + 1] = statement
 		elseif statement.rank == 'preferred' then
@@ -233,7 +233,7 @@ methodtable.getProperties = function( entity )
 	local properties = {}
 
 	local n = 0
-	for k, v in pairs( entity.claims ) do
+	for k, _ in pairs( entity.claims ) do
 		n = n + 1
 		properties[n] = k
 	end
@@ -306,8 +306,8 @@ methodtable.formatStatements = function( entity, propertyLabelOrId, acceptableRa
 	);
 end
 
-mw.wikibase.entity = entity
-package.loaded['mw.wikibase.entity'] = entity
+mw.wikibase.entity = Entity
+package.loaded['mw.wikibase.entity'] = Entity
 mw_interface = nil
 
-return entity
+return Entity
