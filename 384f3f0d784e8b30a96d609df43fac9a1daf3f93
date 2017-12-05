@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_50671122",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialListDatatypesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-05T18:12:18Z",
+      "side": 1,
+      "message": "I expected this here to be enough. The global above was totally ignored on my local system, that\u0027s why I removed it.",
+      "range": {
+        "startLine": 51,
+        "startChar": 59,
+        "endLine": 51,
+        "endChar": 62
+      },
+      "revId": "384f3f0d784e8b30a96d609df43fac9a1daf3f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
