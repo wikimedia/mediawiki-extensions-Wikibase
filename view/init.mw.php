@@ -5,13 +5,13 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 $GLOBALS['wgExtensionCredits']['wikibase'][] = [
-	'path' => __FILE__,
+	'path' => __DIR__,
 	'name' => 'Wikibase View',
 	'author' => [
 		'The Wikidata team',
 	],
-	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBV/',
-	'description' => 'Wikibase View',
+	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/view/',
+	'description' => 'View component for the Wikibase Repository',
 	'license-name' => 'GPL-2.0+'
 ];
 
