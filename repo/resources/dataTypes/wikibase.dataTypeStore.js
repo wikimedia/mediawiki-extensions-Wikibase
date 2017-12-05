@@ -3,16 +3,16 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-wikibase.dataTypeStore = ( function ( $, mw, dataTypes ) {
+wikibase.dataTypeStore = ( function ( $, mw, wb ) {
 	'use strict';
 
-	var dataTypeStore = new dataTypes.DataTypeStore(),
+	var dataTypeStore = new wb.dataTypes.DataTypeStore(),
 		dataTypeDefinitions = mw.config.get( 'wbDataTypes' ) || {};
 
 	$.each( dataTypeDefinitions, function ( dtTypeId, dtDefinition ) {
-		dataTypeStore.registerDataType( dataTypes.DataType.newFromJSON( dtTypeId, dtDefinition ) );
+		dataTypeStore.registerDataType( wb.dataTypes.DataType.newFromJSON( dtTypeId, dtDefinition ) );
 	} );
 
 	return dataTypeStore;
 
-}( jQuery, mediaWiki, dataTypes ) );
+}( jQuery, mediaWiki, wikibase ) );

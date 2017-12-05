@@ -13,6 +13,3 @@
 [submodule "view/lib/wikibase-data-model"]
 	path = view/lib/wikibase-data-model
 	url = https://phabricator.wikimedia.org/source/wikibase-data-model.git
-[submodule "view/lib/wikibase-data-types"]
-	path = view/lib/wikibase-data-types
-	url = https://phabricator.wikimedia.org/source/datatypes-javascript.git

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, QUnit, wb, dt, mw ) {
+( function ( $, QUnit, wb, mw ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
@@ -49,7 +49,7 @@
 			getSnakRemover: function () {
 			},
 			valueViewBuilder: 'I am a ValueViewBuilder',
-			dataTypeStore: new dt.DataTypeStore()
+			dataTypeStore: new wb.dataTypes.DataTypeStore()
 		}, options || {} );
 
 		$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -303,4 +303,4 @@
 		);
 	} );
 
-}( jQuery, QUnit, wikibase, dataTypes, mediaWiki ) );
+}( jQuery, QUnit, wikibase, mediaWiki ) );
