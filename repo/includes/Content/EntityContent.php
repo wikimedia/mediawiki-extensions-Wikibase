@@ -38,6 +38,9 @@ use WikiPage;
 /**
  * Abstract content object for articles representing Wikibase entities.
  *
+ * For more information on the relationship between entities and wiki pages, see
+ * docs/entity-storage.wiki.
+ *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
