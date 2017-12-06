@@ -11,9 +11,9 @@ use Wikibase\LanguageFallbackChain;
  */
 class EntityResult extends Result {
 	/**
-	 * @var Result
+	 * Key which holds wikibase data for result extra data.
 	 */
-	private $cirrusResult;
+	const WIKIBASE_EXTRA_DATA = 'wikibase';
 
 	/**
 	 * Label data with highlighting.
@@ -120,6 +120,11 @@ class EntityResult extends Result {
 						$match[1] === 'labels' ) )
 				];
 			}
+		}
+		if ( $this->extraDisplay ) {
+			// Add extra snippet to extension data
+			$this->extensionData[self::WIKIBASE_EXTRA_DATA] =
+				[ 'extrasnippet' => HtmlArmor::getHtml( $this->extraDisplay['value'] ) ];
 		}
 	}
 
