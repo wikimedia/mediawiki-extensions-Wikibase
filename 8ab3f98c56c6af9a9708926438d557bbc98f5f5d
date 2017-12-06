@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_b4a5acb3",
+        "filename": "view/init.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-12-06T09:38:26Z",
+      "side": 1,
+      "message": "Hmm, this is actually documented as being file not dir\n\nhttps://www.mediawiki.org/wiki/Manual:$wgExtensionCredits\n\nFile name for the extension itself, required for getting the revision number from SVN - string, added in 1.15.0. Since 1.23 also used to create the link to the extension\u0027s license file\n\nHowever __DIR__ seems to work for repo client and lib so lets run with this!",
+      "range": {
+        "startLine": 8,
+        "startChar": 11,
+        "endLine": 8,
+        "endChar": 18
+      },
+      "revId": "8ab3f98c56c6af9a9708926438d557bbc98f5f5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
