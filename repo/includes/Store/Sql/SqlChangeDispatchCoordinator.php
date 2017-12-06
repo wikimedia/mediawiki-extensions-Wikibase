@@ -506,7 +506,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		}
 		$db->commit( __METHOD__ );
 
-		// Wait for all database replicas to be updated, but only for the affected client wiki. The
+		// Wait for all database replicas to be updated, but only for repo db. The
 		// "domain" argument is documented at ILBFactory::waitForReplication.
 		$this->LBFactory->waitForReplication( [ 'domain' => $this->repoDB ] );
 
