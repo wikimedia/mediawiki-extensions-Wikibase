@@ -98,7 +98,7 @@ call_user_func( function() {
 		$wgWBClientSettings;
 
 	$wgExtensionCredits['wikibase'][] = array(
-		'path' => __DIR__,
+		'path' => __DIR__ . '/../README.md',
 		'name' => 'Wikibase Client',
 		'author' => array(
 			'The Wikidata team',
