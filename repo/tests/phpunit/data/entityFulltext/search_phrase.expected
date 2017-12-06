@@ -1,0 +1,31 @@
+{
+    "bool": {
+        "must": [
+            {
+                "query_string": {
+                    "query": "(all.plain:\"flowers algernon\"~2^1)",
+                    "fields": [
+                        "all.plain^1",
+                        "all^0.5"
+                    ],
+                    "auto_generate_phrase_queries": true,
+                    "phrase_slop": 0,
+                    "default_operator": "AND",
+                    "allow_leading_wildcard": true,
+                    "fuzzy_prefix_length": 2,
+                    "rewrite": "top_terms_boost_1024",
+                    "max_determined_states": 500
+                }
+            }
+        ],
+        "filter": [
+            {
+                "terms": {
+                    "namespace": [
+                        0
+                    ]
+                }
+            }
+        ]
+    }
+}
