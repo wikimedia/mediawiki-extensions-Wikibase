@@ -9,6 +9,7 @@ use Elastica\Query\DisMax;
 use Elastica\Query\Match;
 use Elastica\Query\Term;
 use RuntimeException;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -70,6 +71,18 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	}
 
 	/**
+	 * Check whether the query is simple or contains advanced syntax
+	 * @param SearchContext $searchContext
+	 * @param string $term
+	 * @return bool
+	 */
+	private function isSimpleQuery( SearchContext $searchContext, $term ) {
+		$dummyContext = clone  $searchContext;
+		$this->delegate->build( $dummyContext, $term, false );
+		return !$dummyContext->isSpecialKeywordUsed();
+	}
+
+	/**
 	 * Search articles with provided term.
 	 *
 	 * @param SearchContext $searchContext
@@ -94,7 +107,12 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$this->delegate->build( $searchContext, $term, $showSuggestion );
 			return;
 		}
-		// FIXME: eventually we should deal with combined namespaces, probably running
+		// TODO: if we have a mix here of article & entity namespaces, the search may not work
+		// very well here. Right now we're just forcing it to entity space. We may want to look
+		// for a better solution.
+		$searchContext->setNamespaces( $entityNs );
+
+		// TODO: eventually we should deal with combined namespaces, probably running
 		// a union of entity query for entity namespaces and delegate query for article namespaces
 		$this->buildEntitySearch( $this->repo, $searchContext, $term );
 	}
@@ -106,14 +124,33 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @param $term
 	 */
 	protected function buildEntitySearch( WikibaseRepo $repo, SearchContext $searchContext, $term ) {
+		$languageCode = $repo->getUserLanguage()->getCode();
+		$langChain = $repo->getLanguageFallbackChainFactory()->newFromLanguageCode( $languageCode );
+
+		// Try the old builder first.
+		$this->delegate->build( $searchContext, $term, false );
+		if ( $searchContext->areResultsPossible() && !$searchContext->isSpecialKeywordUsed() ) {
+			// We use entity search query if we did not find any advanced syntax
+			// and the base builder did not reject the query
+			$this->buildEntitySearchQuery( $searchContext, $term, $languageCode, $langChain );
+			// TODO: maybe we could use the same profile on advanced query results?
+			$searchContext->setRescoreProfile( EntitySearchUtils::getRescoreProfile( $this->searchSettings,
+				'fulltextSearchProfile' ) );
+		}
+		// if we did find advanced query, we keep the old setup but change the result type
+		$searchContext->setResultsType( new EntityResultType( $languageCode, $langChain ) );
+	}
+
+	/**
+	 * Build a fulltext query for Wikibase entity.
+	 * @param SearchContext $searchContext
+	 * @param string $term Search term
+	 * @param string $languageCode Display language
+	 * @param LanguageFallbackChain $langChain Language fallback chain for search language
+	 */
+	protected function buildEntitySearchQuery( SearchContext $searchContext, $term, $languageCode,
+												LanguageFallbackChain $langChain ) {
 		$searchContext->addSyntaxUsed( 'entity_full_text', 10 );
-
-		$settings = $repo->getSettings();
-		$searchSettings = $settings->getSetting( 'entitySearch' );
-
-		$lang = $repo->getUserLanguage();
-		$languageCode = $lang->getCode();
-		$languageChainFactory = $repo->getLanguageFallbackChainFactory();
 
 		/*
 		 * Overall query structure is as follows:
@@ -156,7 +193,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			];
 		}
 
-		$langChain = $languageChainFactory->newFromLanguageCode( $languageCode );
 		$searchLanguageCodes = $langChain->getFetchLanguageCodes();
 
 		$discount = $profile['fallback-discount'];
@@ -236,10 +272,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		$query->setMinimumShouldMatch( 1 );
 
 		$searchContext->setMainQuery( $query );
-		$searchContext->setRescoreProfile( EntitySearchUtils::getRescoreProfile( $searchSettings,
-			'fulltextSearchProfile' ) );
-		// setup results type
-		$searchContext->setResultsType( new EntityResultType( $languageCode, $langChain ) );
 	}
 
 	public function buildDegraded( SearchContext $searchContext ) {
