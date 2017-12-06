@@ -1,0 +1,36 @@
+{
+    "bool": {
+        "must": [
+            {
+                "match_all": {}
+            }
+        ],
+        "filter": [
+            {
+                "bool": {
+                    "must": [
+                        {
+                            "query_string": {
+                                "query": "\"word1 word2\"",
+                                "fields": [
+                                    "source_text.plain"
+                                ],
+                                "default_operator": "AND",
+                                "allow_leading_wildcard": true,
+                                "fuzzy_prefix_length": 2,
+                                "rewrite": "top_terms_boost_1024"
+                            }
+                        },
+                        {
+                            "terms": {
+                                "namespace": [
+                                    0
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
