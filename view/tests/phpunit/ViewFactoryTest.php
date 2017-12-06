@@ -2,7 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use HashSiteStore;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;

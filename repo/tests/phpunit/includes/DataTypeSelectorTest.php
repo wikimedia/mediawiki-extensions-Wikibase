@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use DataTypes\DataType;
+use Wikibase\Lib\DataType;
 use MWException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataTypeSelector;

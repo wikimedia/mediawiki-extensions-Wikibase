@@ -3,7 +3,7 @@
 namespace Wikibase\Repo;
 
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
-use DataTypes\DataTypeFactory;
+use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
