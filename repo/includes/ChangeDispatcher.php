@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Change;
 use Wikibase\Lib\Store\ChunkAccess;
@@ -248,7 +249,7 @@ class ChangeDispatcher {
 
 		if ( $n === 0 ) {
 			$this->trace( "Posted no changes to $siteID (nothing to do). "
-						. "Next ID is $continueAfter." );
+				. "Next ID is $continueAfter." );
 		} else {
 			/* @var Change $last */
 			$last = end( $changes );
@@ -320,6 +321,18 @@ class ChangeDispatcher {
 
 			//XXX: We could try to adapt $chunkSize based on ratio of changes that get filtered out:
 			//     $chunkSize = ( $this->batchSize - count( $batch ) ) * ( count_before / count_after );
+		}
+
+		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		if ( !( $chunksExamined < $this->maxChunks ) ) {
+			$stats->increment(
+				'wikibase.repo.changeDispatcher.getPendingChanges.maxChunksReached'
+			);
+		}
+		if ( !( $batchSize < $this->batchSize ) ) {
+			$stats->increment(
+				'wikibase.repo.changeDispatcher.getPendingChanges.batchSizeReached'
+			);
 		}
 
 		$this->trace( "Got " . count( $batch ) . " pending changes. " );
