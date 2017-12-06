@@ -6,7 +6,14 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
- * Represents a revision of a Wikibase entity.
+ * An EntityRevision identifies some revision of the description of an entity.
+ * A revision of an entity is uniquely identified by the tuple ( entity-id, revision-id ).
+ *
+ * Note that the revision ID alone is not guaranteed to be unique unique, and cannot be relied
+ * upon to identify an entity. In particular, revisions of two different entitites may have the
+ * same revision id.
+ *
+ * For more information, see docs/entity-storage.txt
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -57,7 +64,10 @@ class EntityRevision {
 	}
 
 	/**
-	 * @see Revision::getId
+	 * The ID of the revision of the given entity.
+	 *
+	 * Note that this number is not guaranteed to be globally unique, nor to be increasing over
+	 * time.
 	 *
 	 * @return int
 	 */
@@ -66,7 +76,7 @@ class EntityRevision {
 	}
 
 	/**
-	 * @see Revision::getTimestamp
+	 * The revision's timestamp. This is furely informational, it does not identify the revision.
 	 *
 	 * @return string in MediaWiki format or an empty string
 	 */

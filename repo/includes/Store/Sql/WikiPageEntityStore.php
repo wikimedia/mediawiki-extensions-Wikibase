@@ -26,7 +26,8 @@ use WikiPage;
 /**
  * EntityStore implementation based on WikiPage.
  *
- * @todo: move the actual implementation of the storage logic from EntityContent into this class.
+ * For more information on the relationship between entities and wiki pages,
+ * see docs/entity-storage.txt
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

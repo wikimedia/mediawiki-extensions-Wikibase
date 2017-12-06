@@ -14,6 +14,9 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Checks permissions to perform actions on the entity based on MediaWiki page permissions.
  *
+ * For more information on the relationship between entities and wiki pages,
+ * see docs/entity-storage.txt
+ *
  * @license GPL-2.0+
  */
 class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
