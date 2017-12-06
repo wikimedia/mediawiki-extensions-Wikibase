@@ -83,6 +83,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @param string $term term to search
 	 * @param bool $showSuggestion should this search suggest alternative
 	 * searches that might be better?
+	 * @throws \MWException
 	 */
 	public function build( SearchContext $searchContext, $term, $showSuggestion ) {
 		$entityNs = [];
@@ -98,7 +99,12 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$this->delegate->build( $searchContext, $term, $showSuggestion );
 			return;
 		}
-		// FIXME: eventually we should deal with combined namespaces, probably running
+		// TODO: if we have a mix here of article & entity namespaces, the search may not work
+		// very well here. Right now we're just forcing it to entity space. We may want to look
+		// for a better solution.
+		$searchContext->setNamespaces( $entityNs );
+
+		// TODO: eventually we should deal with combined namespaces, probably running
 		// a union of entity query for entity namespaces and delegate query for article namespaces
 		$this->buildEntitySearch( $searchContext, $term );
 	}
@@ -106,13 +112,30 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	/**
 	 * Set up entity search query
 	 * @param SearchContext $searchContext
-	 * @param string $term Search term
-	 * @param string $this->userLanguage User language code
+	 * @param $term
+	 * @throws \MWException
 	 */
 	protected function buildEntitySearch( SearchContext $searchContext, $term ) {
+		// Try the old builder first.
+		$this->delegate->build( $searchContext, $term, false );
+		if ( $searchContext->areResultsPossible() && !$searchContext->isSpecialKeywordUsed() ) {
+			// We use entity search query if we did not find any advanced syntax
+			// and the base builder did not reject the query
+			$this->buildEntitySearchQuery( $searchContext, $term );
+		}
+		// if we did find advanced query, we keep the old setup but change the result type
+		$searchContext->setResultsType( new EntityResultType( $this->userLanguage,
+			$this->languageFallbackChainFactory->newFromLanguageCode( $this->userLanguage ) ) );
+	}
+
+	/**
+	 * Build a fulltext query for Wikibase entity.
+	 * @param SearchContext $searchContext
+	 * @param string $term Search term
+	 */
+	protected function buildEntitySearchQuery( SearchContext $searchContext, $term ) {
 		$searchContext->setProfileContext( EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT );
 		$searchContext->addSyntaxUsed( 'entity_full_text', 10 );
-
 		/*
 		 * Overall query structure is as follows:
 		 * - Bool with:
@@ -130,7 +153,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		 *     OR (should with 0 minimum) of:
 		 *        all
 		 *        all.plain
-		 *        DISMAX of: all fulltext matches for
+		 *        DISMAX of: all fulltext matches for tokenized fields
 		 */
 
 		$profile = $this->settings;
@@ -154,8 +177,8 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			];
 		}
 
-		$langChain = $this->languageFallbackChainFactory->newFromLanguageCode( $this->userLanguage );
-		$searchLanguageCodes = $langChain->getFetchLanguageCodes();
+		$searchLanguageCodes = $this->languageFallbackChainFactory->newFromLanguageCode( $this->userLanguage )
+				->getFetchLanguageCodes();
 
 		$discount = $profile['fallback-discount'];
 		$stemFilterFields = [];
@@ -234,8 +257,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		$query->setMinimumShouldMatch( 1 );
 
 		$searchContext->setMainQuery( $query );
-		// setup results type
-		$searchContext->setResultsType( new EntityResultType( $this->userLanguage, $langChain ) );
 	}
 
 	/**
