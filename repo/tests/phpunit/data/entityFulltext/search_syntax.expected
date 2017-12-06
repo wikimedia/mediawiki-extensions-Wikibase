@@ -1,0 +1,40 @@
+{
+    "bool": {
+        "minimum_should_match": 1,
+        "should": [
+            {
+                "query_string": {
+                    "query": "Duck -bird -animal",
+                    "fields": [
+                        "all.plain^1",
+                        "all^0.5"
+                    ],
+                    "auto_generate_phrase_queries": true,
+                    "phrase_slop": 0,
+                    "default_operator": "AND",
+                    "allow_leading_wildcard": true,
+                    "fuzzy_prefix_length": 2,
+                    "rewrite": "top_terms_boost_1024",
+                    "max_determinized_states": 500
+                }
+            },
+            {
+                "multi_match": {
+                    "fields": [
+                        "all_near_match^2"
+                    ],
+                    "query": "Duck -bird -animal"
+                }
+            }
+        ],
+        "filter": [
+            {
+                "terms": {
+                    "namespace": [
+                        0
+                    ]
+                }
+            }
+        ]
+    }
+}
