@@ -261,12 +261,17 @@ class DispatchChanges extends Maintenance {
 			}
 
 			$wikiState = null;
-			$runStartTime = microtime( true );
+			$passStartTime = microtime( true );
 			$c++;
 
 			try {
 				$this->trace( "Picking a client wiki..." );
+				$selectClientStartTime = microtime( true );
 				$wikiState = $dispatcher->selectClient();
+				$stats->timing(
+					'wikibase.repo.dispatchChanges.selectClient-time',
+					( microtime( true ) - $selectClientStartTime ) * 1000
+				);
 
 				if ( $wikiState ) {
 					$dispatchedChanges = $dispatcher->dispatchTo( $wikiState );
@@ -302,7 +307,7 @@ class DispatchChanges extends Maintenance {
 			}
 
 			$t = ( microtime( true ) - $startTime );
-			$stats->timing( 'wikibase.repo.dispatchChanges.pass-time', ( microtime( true ) - $runStartTime ) * 1000 );
+			$stats->timing( 'wikibase.repo.dispatchChanges.pass-time', ( microtime( true ) - $passStartTime ) * 1000 );
 		}
 
 		$stats->timing( 'wikibase.repo.dispatchChanges.execute-time', $t * 1000 );
