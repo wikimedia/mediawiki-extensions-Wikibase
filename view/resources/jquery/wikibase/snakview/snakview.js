@@ -42,8 +42,8 @@
 	 *        Required for dynamically gathering `Entity`/`Property` information.
 	 * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
 	 *        Required to interfacing a `snakview` "value" `Variation` to `jQuery.valueview`.
-	 * @param {dataTypes.DataTypeStore} options.dataTypeStore
-	 *        Required to retrieve and evaluate a proper `dataTypes.DataType` object when interacting on
+	 * @param {wikibase.dataTypes.DataTypeStore} options.dataTypeStore
+	 *        Required to retrieve and evaluate a proper `wikibase.dataTypes.DataType` object when interacting on
 	 *        a "value" `Variation`.
 	 * @param {boolean} [options.drawProperty=true]
 	 *        The `Property` part of the `snakview` is not rendered when `drawProperty` is false.

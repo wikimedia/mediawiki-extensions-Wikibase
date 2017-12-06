@@ -110,7 +110,7 @@
 			 * @private
 			 *
 			 * @param {wikibase.datamodel.Property|undefined|null} property
-			 * @return {dataTypes.DataType|null}
+			 * @return {wikibase.dataTypes.DataType|null}
 			 */
 			function _getDataType( property ) {
 				// If the set property is not there, we have to display a warning. This can happen
@@ -350,7 +350,7 @@
 		 * @private
 		 *
 		 * @param {dataValues.DataValue} dataValue
-		 * @param {dataTypes.DataType} [dataType] The `DataTypes` which the given `DataValue` has
+		 * @param {wikibase.dataTypes.DataType} [dataType] The `DataTypes` which the given `DataValue` has
 		 *        been created for. Can be omitted but might result in a less specialized
 		 *        `jQuery.valueview`.
 		 * @param {string} [propertyId]

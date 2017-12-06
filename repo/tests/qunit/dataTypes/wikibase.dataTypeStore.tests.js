@@ -16,4 +16,4 @@
 		);
 	} );
 
-}( QUnit, wikibase.dataTypeStore, dataTypes ) );
+}( QUnit, wikibase.dataTypeStore, wikibase.dataTypes ) );

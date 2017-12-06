@@ -25,12 +25,30 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.dataTypes.DataType.tests' => $moduleBase + [
+			'scripts' => [
+				'dataTypes/DataType.tests.js',
+			],
+			'dependencies' => [
+				'wikibase.dataTypes.DataType'
+			],
+		],
+
+		'wikibase.dataTypes.DataTypeStore.tests' => $moduleBase + [
+			'scripts' => [
+				'dataTypes/DataTypeStore.tests.js',
+			],
+			'dependencies' => [
+				'wikibase.dataTypes.DataTypeStore'
+			],
+		],
+
 		'wikibase.dataTypeStore.tests' => $moduleBase + [
 			'scripts' => [
 				'dataTypes/wikibase.dataTypeStore.tests.js',
 			],
 			'dependencies' => [
-				'dataTypes.DataTypeStore',
+				'wikibase.dataTypes.DataTypeStore',
 				'wikibase.dataTypeStore',
 			],
 		],
