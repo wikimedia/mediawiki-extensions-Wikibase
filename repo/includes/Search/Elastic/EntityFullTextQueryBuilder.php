@@ -66,6 +66,18 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	}
 
 	/**
+	 * Check whether the query is simple or contains advanced syntax
+	 * @param SearchContext $searchContext
+	 * @param string $term
+	 * @return bool
+	 */
+	private function isSimpleQuery( SearchContext $searchContext, $term ) {
+		$dummyContext = clone  $searchContext;
+		$this->delegate->build( $dummyContext, $term, false );
+		return !$dummyContext->isSpecialKeywordUsed();
+	}
+
+	/**
 	 * Search articles with provided term.
 	 *
 	 * @param SearchContext $searchContext
@@ -90,6 +102,13 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$this->delegate->build( $searchContext, $term, $showSuggestion );
 			return;
 		}
+
+		if ( !$this->isSimpleQuery( $searchContext, $term ) ) {
+			// searching only article namespaces - use parent
+			$this->delegate->build( $searchContext, $term, $showSuggestion );
+			return;
+		}
+
 		// FIXME: eventually we should deal with combined namespaces, probably running
 		// a union of entity query for entity namespaces and delegate query for article namespaces
 		$this->buildEntitySearch( $this->repo, $searchContext, $term );
