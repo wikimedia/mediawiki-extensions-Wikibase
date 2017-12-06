@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_d4166b59",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "Typo.",
+      "range": {
+        "startLine": 6,
+        "startChar": 282,
+        "endLine": 6,
+        "endChar": 283
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_74215fac",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "This terminology is new to me. Why \"description\"?",
+      "range": {
+        "startLine": 6,
+        "startChar": 29,
+        "endLine": 6,
+        "endChar": 47
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_f40d6f42",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "Space missing.",
+      "range": {
+        "startLine": 8,
+        "startChar": 501,
+        "endLine": 8,
+        "endChar": 503
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_97fb4511",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "I would not mention this. A \"section\" in MediaWiki is super fragile. It\u0027s an anchor to a headline, and either may change any time without notice. In contrast, sub-entities have identifiers that can not be edited.\n\nSo no, sub-entities are not \"similar\" to sections.",
+      "range": {
+        "startLine": 10,
+        "startChar": 195,
+        "endLine": 10,
+        "endChar": 249
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_d71cad6c",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "I find this sentence very confusing here, like it\u0027s misplaced and has nothing to do with what was said before. Please start a new paragraph to explain namespaces, if needed.\n\nAlso, typo in \"MediaWiki\".",
+      "range": {
+        "startLine": 12,
+        "startChar": 262,
+        "endLine": 12,
+        "endChar": 346
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_f733b1f1",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "The difference between the two is never explained.",
+      "range": {
+        "startLine": 22,
+        "startChar": 183,
+        "endLine": 22,
+        "endChar": 228
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_372eb988",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "Personally, I find this section helpful. However, it might be confusing for developers not that familiar with this specific core concept. Technically the two have nothing to do with each other.",
+      "range": {
+        "startLine": 29,
+        "startChar": 242,
+        "endLine": 29,
+        "endChar": 528
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_b7580937",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "I think this needs a separate paragraph and more text to make it really understandable.",
+      "range": {
+        "startLine": 34,
+        "startChar": 259,
+        "endLine": 34,
+        "endChar": 363
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9749856d",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "\"all top-level and sub-entities on a page\".",
+      "range": {
+        "startLine": 34,
+        "startChar": 164,
+        "endLine": 34,
+        "endChar": 176
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_774e8173",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "Typo.",
+      "range": {
+        "startLine": 34,
+        "startChar": 223,
+        "endLine": 34,
+        "endChar": 226
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_142a938f",
+        "filename": "lib/includes/Store/EntityRevision.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "What do you mean with \"description\" in this context?",
+      "range": {
+        "startLine": 9,
+        "startChar": 46,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_54341bf1",
+        "filename": "lib/includes/Store/EntityRevision.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-06T20:43:40Z",
+      "side": 1,
+      "message": "Is \"unique unique\" what I think it is? Looks more like a mistake.",
+      "range": {
+        "startLine": 12,
+        "startChar": 59,
+        "endLine": 12,
+        "endChar": 72
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
