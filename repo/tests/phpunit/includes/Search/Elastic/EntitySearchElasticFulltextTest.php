@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch\Query\BoostTemplatesFeature;
 use CirrusSearch\Query\FullTextQueryStringQueryBuilder;
+use CirrusSearch\Query\SimpleInSourceFeature;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
 use Language;
@@ -119,6 +121,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 					'settings' => [],
 				],
 			],
+			'wgCirrusSearchRescoreProfile' => 'wikibase',
 		] );
 		$config = new SearchConfig();
 		$settings = [
@@ -132,11 +135,16 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			'fallback-discount' => 0.1,
 		];
 		$repo = $this->getMockRepo( $params['userLang'], $wgSettings );
-		$builder = new EntityFullTextQueryBuilder( $config, [], $settings, $repo );
+		$features = [
+			new SimpleInSourceFeature(),
+			new BoostTemplatesFeature(),
+		];
+		$builder = new EntityFullTextQueryBuilder( $config, $features, $settings, $repo );
 
 		$context = new SearchContext( $config, $params['ns'] );
 		$builder->build( $context, $params['search'], false );
 		$query = $context->getQuery();
+		$context->getRescore();
 		$encoded = json_encode( $query->toArray(), JSON_PRETTY_PRINT );
 		$this->assertFileContains( $expected, $encoded );
 	}
