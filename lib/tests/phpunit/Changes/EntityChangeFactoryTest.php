@@ -2,6 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -126,8 +129,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			[ 'es' ],
-			$change->getCompactDiff()->getLabelChanges(),
+			new Diff( [ 'es' => new DiffOpAdd( 'gato' ) ] ),
+			$change->getDiff()->getLabelsDiff(),
 			'diff'
 		);
 	}
@@ -146,8 +149,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			[ 'en' ],
-			$change->getCompactDiff()->getLabelChanges(),
+			new Diff( [ 'en' => new DiffOpAdd( 'kitten' ) ] ),
+			$change->getDiff()->getLabelsDiff(),
 			'diff'
 		);
 	}
@@ -166,8 +169,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			[ 'de' ],
-			$change->getCompactDiff()->getLabelChanges(),
+			new Diff( [ 'de' => new DiffOpRemove( 'Katze' ) ] ),
+			$change->getDiff()->getLabelsDiff(),
 			'diff'
 		);
 	}
@@ -186,8 +189,12 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			[ 'enwiki' => [ null, 'Kitten', false ] ],
-			$change->getCompactDiff()->getSiteLinkChanges(),
+			new Diff( [
+				'enwiki' => new Diff( [
+					'name' => new DiffOpAdd( 'Kitten' )
+				] )
+			] ),
+			$change->getDiff()->getSiteLinkDiff(),
 			'diff'
 		);
 	}
@@ -211,9 +218,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$change = $factory->newFromUpdate( EntityChange::UPDATE, $item, $updatedItem );
 
-		$this->assertSame(
-			[ 'P10', 'P9000' ],
-			$change->getCompactDiff()->getStatementChanges(),
+		$this->assertTrue(
+			$change->getDiff()->isEmpty(),
 			'Diff excludes statement changes and is empty'
 		);
 	}

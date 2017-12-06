@@ -8,6 +8,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityChange;
 use Wikimedia\Assert\Assert;
 
@@ -137,6 +140,9 @@ class EntityChangeFactory {
 			throw new MWException( 'Either $oldEntity or $newEntity must be given' );
 		}
 
+		$this->minimizeEntityForDiffing( $oldEntity );
+		$this->minimizeEntityForDiffing( $newEntity );
+
 		if ( $oldEntity === null ) {
 			$id = $newEntity->getId();
 			$diff = $this->entityDiffer->getConstructionDiff( $newEntity );
@@ -151,10 +157,29 @@ class EntityChangeFactory {
 		}
 
 		$instance = $this->newForEntity( $action, $id );
-		$aspectsDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
-		$instance->setCompactDiff( $aspectsDiff );
+		$instance->setDiff( $diff );
 
 		return $instance;
+	}
+
+	/**
+	 * Hack: Don't include statement, description and alias diffs, since those are unused and not
+	 * helpful performance-wise to the dispatcher and change handling.
+	 *
+	 * @fixme Implement T113468 and remove this.
+	 *
+	 * @param EntityDocument|null $entity
+	 */
+	private function minimizeEntityForDiffing( EntityDocument $entity = null ) {
+		if ( $entity instanceof StatementListProvider ) {
+			$entity->getStatements()->clear();
+		}
+
+		if ( $entity instanceof FingerprintProvider ) {
+			$fingerprint = $entity->getFingerprint();
+
+			$fingerprint->setAliasGroups( new AliasGroupList() );
+		}
 	}
 
 }
