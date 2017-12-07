@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_d38674ab",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-12-07T23:29:48Z",
+      "side": 0,
+      "message": "losing this will make it annoying to regenerate fixtures if anything changes. Typically when something changes and a test breaks i regenerate the fixtures and then review those changes via `git diff`",
+      "revId": "fb3af0f138d4f82e4885605c1e9d4b9e19d2b244",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
