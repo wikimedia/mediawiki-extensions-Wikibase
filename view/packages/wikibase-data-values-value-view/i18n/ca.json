@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Arnaugir",
-			"Pitort"
+			"Pitort",
+			"Paucabot"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "buit",
@@ -11,6 +12,7 @@
 	"valueview-expert-timevalue-calendar-julian": "julià",
 	"valueview-expert-timeinput-precision": "Precisió:",
 	"valueview-expert-timeinput-calendar": "Calendari:",
+	"valueview-expertextender-languageselector-label": "Llengua (obligatori):",
 	"valueview-preview-label": "es mostrarà com:",
 	"valueview-preview-novalue": "no s'ha reconegut cap valor vàlid"
 }
