@@ -25,7 +25,8 @@
 			"Wladek92",
 			"Urhixidur",
 			"AntonierCH",
-			"Envlh"
+			"Envlh",
+			"KATRINE1992"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -93,6 +94,16 @@
 	"wikibase-validator-unknown-unit": "Unité inconnue : $1",
 	"wikibase-validator-not-allowed": "Valeur interdite : $1",
 	"wikibase-validator-no-validators": "Interdit",
+	"datatypes-type-string": "Chaîne",
+	"datatypes-type-quantity": "Ποσότητα",
+	"datatypes-type-monolingualtext": "Texte monolingue",
+	"datatypes-type-multilingualtext": "Texte multilingue",
+	"datatypes-type-number": "Nombre",
+	"datatypes-type-mediawiki-title": "Titre MédiaWiki",
+	"datatypes-type-unknown": "Non spécifié",
+	"datatypes-type-boolean": "Booléen",
+	"datatypes-type-globe-coordinate": "Coordonnées géographiques",
+	"datatypes-type-time": "Point dans le temps",
 	"datatypes-type-wikibase-item": "Élément",
 	"datatypes-type-wikibase-property": "Propriété",
 	"datatypes-type-commonsMedia": "Fichier multimédia de Commons",

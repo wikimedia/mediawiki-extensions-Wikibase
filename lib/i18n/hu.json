@@ -6,7 +6,8 @@
 			"Tacsipacsi",
 			"Grin",
 			"Dj",
-			"Máté"
+			"Máté",
+			"Wolf Rex"
 		]
 	},
 	"wikibase-lib-desc": "A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza",
@@ -63,6 +64,16 @@
 	"wikibase-validator-bad-url-scheme": "A(z) „$1” URL-séma nem támogatott.",
 	"wikibase-validator-unknown-unit": "Ismeretlen mértékegység: $1",
 	"wikibase-validator-not-allowed": "Érvénytelen érték: $1",
+	"datatypes-type-string": "Karakterlánc",
+	"datatypes-type-quantity": "Mennyiség",
+	"datatypes-type-monolingualtext": "Egynyelvű szöveg",
+	"datatypes-type-multilingualtext": "Többnyelvű szöveg",
+	"datatypes-type-number": "Szám",
+	"datatypes-type-mediawiki-title": "MediaWiki-cím",
+	"datatypes-type-unknown": "Meghatározatlan",
+	"datatypes-type-boolean": "Logikai érték",
+	"datatypes-type-globe-coordinate": "Földrajzi koordináták",
+	"datatypes-type-time": "Időpont",
 	"datatypes-type-wikibase-item": "Elem",
 	"datatypes-type-wikibase-property": "Tulajdonság",
 	"datatypes-type-commonsMedia": "Commons-médiafájl",

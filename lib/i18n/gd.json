@@ -1,8 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Akerbeltz"
+			"Akerbeltz",
+			"GunChleoc"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Uicipeid"
+	"wikibase-sitelinks-wikipedia": "Uicipeid",
+	"datatypes-type-string": "Sreang",
+	"datatypes-type-quantity": "Uiread",
+	"datatypes-type-monolingualtext": "Teacsa aon-chànanach",
+	"datatypes-type-multilingualtext": "Teacsa ioma-chànanach",
+	"datatypes-type-number": "Àireamh",
+	"datatypes-type-mediawiki-title": "Tiotal MediaWiki",
+	"datatypes-type-unknown": "Gun sònrachadh",
+	"datatypes-type-boolean": "Booleach",
+	"datatypes-type-globe-coordinate": "Co-chomharran cruinn-eòlasach",
+	"datatypes-type-time": "Àm"
 }

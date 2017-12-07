@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Naudefj",
-			"Robby"
+			"Robby",
+			"Fwolff"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase-databank",
@@ -17,6 +18,9 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "onbekende waarde",
 	"wikibase-snakview-snaktypeselector-novalue": "geen waarde",
 	"wikibase-tooltip-error-details": "Details",
+	"datatypes-type-monolingualtext": "Eentalige teks",
+	"datatypes-type-multilingualtext": "Meertalige teks",
+	"datatypes-type-globe-coordinate": "Geografiese koördinate",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Medialêer van Commons",
 	"version-wikibase": "Wikibase",

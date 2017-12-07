@@ -6,6 +6,8 @@
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipédia",
+	"datatypes-type-string": "String",
+	"datatypes-type-number": "Nomer",
 	"wikibase-entity-summary-wbsetlabel-remove": "Label [$2] dipupus",
 	"wikibase-entity-summary-wbsetdescription-remove": "Déskripsi [$2] dipupus",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Ngaran lian}} [$2] dipupus sarta ditambah",

@@ -8,5 +8,6 @@
 	"wikibase-add": "ngatti",
 	"wikibase-label-empty": "Uart kwel wallak",
 	"wikibase-description-empty": "Uart Warrangan",
-	"wikibase-sitelinks-special": "Wam karlup"
+	"wikibase-sitelinks-special": "Wam karlup",
+	"wikibase-statementview-rank-normal": "Kwop rank"
 }

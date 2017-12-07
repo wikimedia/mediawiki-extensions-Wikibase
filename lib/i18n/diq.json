@@ -3,7 +3,8 @@
 		"authors": [
 			"Erdemaslancan",
 			"Marmase",
-			"Mirzali"
+			"Mirzali",
+			"Kumkumuk"
 		]
 	},
 	"wikibase-quantitydetails-amount": "Miqdar",
@@ -23,6 +24,16 @@
 	"wikibase-sitelinks-link-columnheading": "Pela gırebiyayiye",
 	"wikibase-snakview-snaktypeselector-novalue": "erc çıniyo",
 	"wikibase-tooltip-error-details": "Teferruati",
+	"datatypes-type-string": "La",
+	"datatypes-type-quantity": "Miktar",
+	"datatypes-type-monolingualtext": "Nuştey yo zıwani",
+	"datatypes-type-multilingualtext": "Nuştey zaf Zıwani",
+	"datatypes-type-number": "Numre",
+	"datatypes-type-mediawiki-title": "Sernamey MediaWiki",
+	"datatypes-type-unknown": "Nêvaciyayo",
+	"datatypes-type-boolean": "Boolean",
+	"datatypes-type-globe-coordinate": "Koordinatê coğrafyayêni",
+	"datatypes-type-time": "Noktay zemani",
 	"datatypes-type-wikibase-item": "Obje",
 	"version-wikibase": "Wikibase"
 }

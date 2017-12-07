@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Рустам Нурыев"
+			"Рустам Нурыев",
+			"Lizalizaufa",
+			"Ләйсән"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Википедия"
+	"wikibase-sitelinks-wikipedia": "Википедия",
+	"datatypes-type-quantity": "Миҡдары",
+	"datatypes-type-monolingualtext": "Бер телле текст",
+	"datatypes-type-multilingualtext": "Күп телле текст",
+	"datatypes-type-mediawiki-title": "MediaWiki исеме",
+	"datatypes-type-unknown": "Аныҡланмаған",
+	"datatypes-type-globe-coordinate": "Географик координаталар",
+	"datatypes-type-time": "Ваҡыт мәле"
 }

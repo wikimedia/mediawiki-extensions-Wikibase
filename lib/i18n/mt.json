@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Leli Forte"
+			"Leli Forte",
+			"Chrisportelli"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipedija"
+	"wikibase-sitelinks-wikipedia": "Wikipedija",
+	"datatypes-type-number": "Numru"
 }

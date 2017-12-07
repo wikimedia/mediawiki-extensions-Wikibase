@@ -3,7 +3,8 @@
 		"authors": [
 			"පසිඳු කාවින්ද",
 			"Subi",
-			"Sator"
+			"Sator",
+			"An13sa"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -23,6 +24,15 @@
 	"wikibase-sitelinks-sitename-columnheading": "Hizkuntza",
 	"wikibase-snakview-snaktypeselector-novalue": "baliorik ez",
 	"wikibase-tooltip-error-details": "Xehetasunak",
+	"datatypes-type-string": "Katea",
+	"datatypes-type-quantity": "Kopurua",
+	"datatypes-type-monolingualtext": "Hizkuntza bakarreko testua",
+	"datatypes-type-multilingualtext": "Hizkuntza anitzeko testua",
+	"datatypes-type-number": "Zenbakia",
+	"datatypes-type-mediawiki-title": "MediaWiki izenburua",
+	"datatypes-type-unknown": "Zehaztugabea",
+	"datatypes-type-boolean": "Boolearra",
+	"datatypes-type-globe-coordinate": "Koordenatu geografikoak",
 	"datatypes-type-wikibase-item": "Elementua",
 	"datatypes-type-wikibase-property": "Propietatea",
 	"datatypes-type-commonsMedia": "Commons multimedia fitxategia",

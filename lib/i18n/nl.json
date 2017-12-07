@@ -12,7 +12,8 @@
 			"Robin van der Vliet",
 			"MrLeopold",
 			"Hex",
-			"Mainframe98"
+			"Mainframe98",
+			"Wiki13"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -80,6 +81,16 @@
 	"wikibase-validator-unknown-unit": "Onbekende eenheid: $1",
 	"wikibase-validator-not-allowed": "Ongeldige waarde: $1",
 	"wikibase-validator-no-validators": "Niet toegestaan",
+	"datatypes-type-string": "Tekenreeks",
+	"datatypes-type-quantity": "Hoeveelheid",
+	"datatypes-type-monolingualtext": "Enkeltalige tekst",
+	"datatypes-type-multilingualtext": "Meertalige tekst",
+	"datatypes-type-number": "Getal",
+	"datatypes-type-mediawiki-title": "MeidaWikipagina",
+	"datatypes-type-unknown": "Niet opgegeven",
+	"datatypes-type-boolean": "Booleaanse operator",
+	"datatypes-type-globe-coordinate": "Geografische coördinaten",
+	"datatypes-type-time": "Tijdstip",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Eigenschap",
 	"datatypes-type-commonsMedia": "Mediabestand van Commons",

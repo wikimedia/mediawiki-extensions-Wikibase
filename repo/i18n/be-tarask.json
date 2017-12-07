@@ -165,6 +165,8 @@
 	"wikibase-itemdisambiguation-search": "Вы можаце [$1 шукаць элемэнт].",
 	"wikibase-itemdisambiguation-create": "Вы можаце [$1 стварыць новы аб’ект].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Даруйце, сыстэме невядомы моўны код, пазначаны вамі. Калі ласка, выкарыстоўвайце вядомы код, як то «be-tarask».",
+	"wikibase-itemdisambiguation-description": "Значэньні, якія выкарыстоўваюцца для пошуку, мусяць быць поўным тэкстам запісу. Ідэнтыфікатарам зьяўляецца код мовы, напрыклад, «en».",
+	"wikibase-itemdisambiguation-summary": "Шукаць усе элемэнты, якія маюць дакладна такую ж метку.",
 	"special-newproperty": "Стварыць новую ўласьцівасьць",
 	"wikibase-newproperty-fieldset": "Стварыць новую ўласьцівасьць",
 	"wikibase-newproperty-datatype": "Тып зьвестак:",

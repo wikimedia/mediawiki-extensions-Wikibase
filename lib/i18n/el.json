@@ -9,7 +9,8 @@
 			"Protnet",
 			"Geraki",
 			"Glavkos",
-			"KATRINE1992"
+			"KATRINE1992",
+			"ZaDiak"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -61,6 +62,12 @@
 	"wikibase-validator-bad-url-scheme": "Μη υποστηριζόμενο σύστημα URL:$1",
 	"wikibase-validator-unknown-unit": "Άγνωστη μονάδα: $1",
 	"wikibase-validator-not-allowed": "Εσφαλμένη τιμή: $1",
+	"datatypes-type-string": "Συμβολοσειρά",
+	"datatypes-type-quantity": "Ποσότητα",
+	"datatypes-type-number": "Αριθμός",
+	"datatypes-type-mediawiki-title": "Τίτλος MediaWiki",
+	"datatypes-type-unknown": "Αδιευκρίνιστο",
+	"datatypes-type-boolean": "Δυαδική τιμή",
 	"datatypes-type-wikibase-item": "Αντικείμενο",
 	"datatypes-type-commonsMedia": "αρχείο πολυμέσων των Commons",
 	"version-wikibase": "Wikibase",

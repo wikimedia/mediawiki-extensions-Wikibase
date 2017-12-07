@@ -18,6 +18,8 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "نرخی نەزانراو",
 	"wikibase-snakview-snaktypeselector-novalue": "بێ نرخ",
 	"wikibase-tooltip-error-details": "وردەکارییەکان",
+	"datatypes-type-string": "زنجیرەنووسە",
+	"datatypes-type-time": "کات",
 	"datatypes-type-wikibase-item": "بەند",
 	"wikibase-entity-summary-wbsetitem": "بەندێکی نوێ دروست کرا",
 	"wikibase-entity-summary-wbsetlabel-set": "سەرناوی [$2] گۆڕدرا",

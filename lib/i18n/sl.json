@@ -3,7 +3,8 @@
 		"authors": [
 			"Eleassar",
 			"Dbc334",
-			"Pickle12"
+			"Pickle12",
+			"HairyFotr"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibaza",
@@ -25,6 +26,8 @@
 	"wikibase-validator-no-such-property": "Lastnosti $1 ni mogoče najti",
 	"wikibase-validator-bad-url": "Povezave ne smejo vsebovati določenih znakov, kot so presledki ali oglati oklepaji: $1",
 	"wikibase-validator-not-allowed": "Nedovoljena vrednost: $1",
+	"datatypes-type-quantity": "Količina",
+	"datatypes-type-number": "Število",
 	"datatypes-type-wikibase-item": "Predmet",
 	"datatypes-type-commonsMedia": "Predstavnostna datoteka v Zbirki",
 	"version-wikibase": "Wikibaza"

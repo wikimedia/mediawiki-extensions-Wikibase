@@ -12,7 +12,8 @@
 			"Zhuyifei1999",
 			"乌拉跨氪",
 			"Duolaimi",
-			"Hanyanbo98"
+			"Hanyanbo98",
+			"Dimension"
 		]
 	},
 	"wikibase-lib-desc": "储存维基库及其客户端的共同功能",
@@ -80,6 +81,16 @@
 	"wikibase-validator-unknown-unit": "未知单位：$1",
 	"wikibase-validator-not-allowed": "非法值：$1",
 	"wikibase-validator-no-validators": "禁止的",
+	"datatypes-type-string": "字符串",
+	"datatypes-type-quantity": "数量",
+	"datatypes-type-monolingualtext": "单语文本",
+	"datatypes-type-multilingualtext": "多语文本",
+	"datatypes-type-number": "数值",
+	"datatypes-type-mediawiki-title": "MediaWiki 标题",
+	"datatypes-type-unknown": "未指定",
+	"datatypes-type-boolean": "布尔值",
+	"datatypes-type-globe-coordinate": "地理坐标",
+	"datatypes-type-time": "时间点",
 	"datatypes-type-wikibase-item": "项",
 	"datatypes-type-wikibase-property": "属性",
 	"datatypes-type-commonsMedia": "共享资源媒体文件",

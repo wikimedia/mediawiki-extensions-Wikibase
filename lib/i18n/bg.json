@@ -4,7 +4,9 @@
 			"Spiritia",
 			"DCLXVI",
 			"Termininja",
-			"Vodnokon4e"
+			"Vodnokon4e",
+			"StanProg",
+			"පසිඳු කාවින්ද"
 		]
 	},
 	"wikibase-error-unexpected": "Грешка: $1.",
@@ -30,6 +32,16 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "неизвестна стойност",
 	"wikibase-snakview-snaktypeselector-novalue": "без стойност",
 	"wikibase-tooltip-error-details": "Подробности",
+	"datatypes-type-string": "Низ",
+	"datatypes-type-quantity": "Количество",
+	"datatypes-type-monolingualtext": "Едноезичен текст",
+	"datatypes-type-multilingualtext": "Многоезичен текст",
+	"datatypes-type-number": "Число",
+	"datatypes-type-mediawiki-title": "Заглавие на МедияУики",
+	"datatypes-type-unknown": "Неуказано",
+	"datatypes-type-boolean": "Булев",
+	"datatypes-type-globe-coordinate": "Географски координати",
+	"datatypes-type-time": "Момент във времето",
 	"datatypes-type-wikibase-item": "Обект",
 	"datatypes-type-commonsMedia": "Файл от Общомедия"
 }

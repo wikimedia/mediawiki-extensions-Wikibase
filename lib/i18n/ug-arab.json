@@ -8,5 +8,10 @@
 	"wikibase-sitelinks-wikipedia": "ۋىكىقامۇس",
 	"wikibase-sitelinks-sitename-columnheading": "تىل",
 	"wikibase-tooltip-error-details": "تەپسىلاتى",
+	"datatypes-type-string": "تېكىست",
+	"datatypes-type-quantity": "سانى",
+	"datatypes-type-number": "نومۇرى",
+	"datatypes-type-unknown": "بەلگىلەنمىگەن",
+	"datatypes-type-boolean": "بۇلىن",
 	"datatypes-type-wikibase-item": "تۈر"
 }

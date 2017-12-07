@@ -2,9 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"ଶିତିକଣ୍ଠ ଦାଶ",
-			"Jnanaranjan Sahu"
+			"Jnanaranjan Sahu",
+			"Ansumang"
 		]
 	},
 	"wikibase-error-unexpected": "କିଛି ଗୋଟେ ଅଜଣା ଅସୁବିଧା ହେଲା: $1 ।",
-	"wikibase-sitelinks-wikipedia": "ଉଇକିପିଡ଼ିଆ"
+	"wikibase-sitelinks-wikipedia": "ଉଇକିପିଡ଼ିଆ",
+	"datatypes-type-quantity": "ପରିମାଣ",
+	"datatypes-type-number": "ନମ୍ବର"
 }

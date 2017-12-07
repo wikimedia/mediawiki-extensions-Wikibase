@@ -5,7 +5,8 @@
 			"Stelistcristi",
 			"Rsocol",
 			"Macofe",
-			"Strainu"
+			"Strainu",
+			"Firilacroco"
 		]
 	},
 	"wikibase-lib-desc": "Grupează funcționalități comune pentru extensiile Wikibase și Client Wikibase",
@@ -69,6 +70,14 @@
 	"wikibase-validator-bad-url-scheme": "Schemă de URL neacceptată: $1",
 	"wikibase-validator-unknown-unit": "Unitate necunoscută: $1",
 	"wikibase-validator-not-allowed": "Valoare interzisă: $1",
+	"datatypes-type-string": "Șir",
+	"datatypes-type-quantity": "Cantitate",
+	"datatypes-type-number": "Număr",
+	"datatypes-type-mediawiki-title": "Titlu MediaWiki",
+	"datatypes-type-unknown": "Nespecificat",
+	"datatypes-type-boolean": "Adevărat/fals",
+	"datatypes-type-globe-coordinate": "Coordonate geografice",
+	"datatypes-type-time": "Timp",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Fișier multimedia de la Commons",
 	"version-wikibase": "Wikibase",

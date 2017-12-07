@@ -18,6 +18,11 @@
 	"wikibase-sitelinks-sitename-columnheading": "భాష",
 	"wikibase-tooltip-error-details": "వివరాలు",
 	"wikibase-validator-invalid": "చెల్లని విలువ",
+	"datatypes-type-string": "పదబంధం",
+	"datatypes-type-quantity": "రాశి",
+	"datatypes-type-number": "సంఖ్య",
+	"datatypes-type-mediawiki-title": "మీడియావికీ శీర్షిక",
+	"datatypes-type-time": "సమయం",
 	"datatypes-type-wikibase-item": "అంశం",
 	"datatypes-type-wikibase-property": "లక్షణం"
 }

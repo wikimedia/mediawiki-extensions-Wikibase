@@ -5,6 +5,16 @@
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
+	"datatypes-type-string": "Soratra",
+	"datatypes-type-quantity": "Habetsaka",
+	"datatypes-type-monolingualtext": "Lahatsoratra amin'ny fiteny tokana",
+	"datatypes-type-multilingualtext": "Lahatsoratraa ami'ny fiteny maro",
+	"datatypes-type-number": "Isa",
+	"datatypes-type-mediawiki-title": "Lohateny MediaWiki",
+	"datatypes-type-unknown": "Tsy voalaza",
+	"datatypes-type-boolean": "Booleanina",
+	"datatypes-type-globe-coordinate": "Laharan-toerana ara-jeografika",
+	"datatypes-type-time": "Toerana anatin'ny fotoana",
 	"datatypes-type-geo-shape": "Sosona jeografika",
 	"wikibase-item-summary-wblinktitles-connect": "Nanampy rohim-piteny hampifandray pejy"
 }

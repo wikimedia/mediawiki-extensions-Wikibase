@@ -9,7 +9,9 @@
 			"VezonThunder",
 			"Pxos",
 			"Macofe",
-			"Pyscowicz"
+			"Pyscowicz",
+			"01miki10",
+			"Silvonen"
 		]
 	},
 	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",
@@ -64,6 +66,16 @@
 	"wikibase-validator-unknown-unit": "Tuntematon yksikkö: $1",
 	"wikibase-validator-not-allowed": "Virheellinen arvo: $1",
 	"wikibase-validator-no-validators": "Kielletty",
+	"datatypes-type-string": "Merkkijono",
+	"datatypes-type-quantity": "Määrä",
+	"datatypes-type-monolingualtext": "Yksikielinen teksti",
+	"datatypes-type-multilingualtext": "Monikielinen teksti",
+	"datatypes-type-number": "Numero",
+	"datatypes-type-mediawiki-title": "MediaWiki-otsikko",
+	"datatypes-type-unknown": "Määrittelemätön",
+	"datatypes-type-boolean": "Totuusarvo",
+	"datatypes-type-globe-coordinate": "Maantieteellinen koordinaatti",
+	"datatypes-type-time": "Ajanhetki",
 	"datatypes-type-wikibase-item": "Kohde",
 	"datatypes-type-wikibase-property": "Ominaisuus",
 	"datatypes-type-commonsMedia": "Commonsin mediatiedosto",

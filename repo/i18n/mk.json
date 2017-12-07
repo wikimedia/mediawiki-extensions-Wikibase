@@ -150,7 +150,7 @@
 	"wikibase-itemdisambiguation-nothing-found": "За жал, не пронајдов ниеден натпис.",
 	"wikibase-itemdisambiguation-search": "Можете да го [$1 побарате предметот].",
 	"wikibase-itemdisambiguation-create": "Можете да [$1 создадете нов предмет].",
-	"wikibase-itemdisambiguation-invalid-langcode": "Нажалост, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).",
+	"wikibase-itemdisambiguation-invalid-langcode": "За жал, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).",
 	"wikibase-itemdisambiguation-description": "Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. Јазикот е назнака, како на пр. „mk“.",
 	"wikibase-itemdisambiguation-summary": "Пребарај ги сите предмети со точно истиот натпис.",
 	"special-newproperty": "Создај ново својство",

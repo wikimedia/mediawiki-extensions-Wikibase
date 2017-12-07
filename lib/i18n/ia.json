@@ -41,5 +41,15 @@
 	"wikibase-validator-bad-value-type": "Typo de valor $1 incorrecte; expectava $2",
 	"wikibase-validator-bad-url": "URLs non pote continer certe characteres como spatios o parentheses quadrate: $1",
 	"wikibase-validator-not-allowed": "Valor non valide: $1",
-	"wikibase-validator-no-validators": "Prohibite"
+	"wikibase-validator-no-validators": "Prohibite",
+	"datatypes-type-string": "Catena de characteres",
+	"datatypes-type-quantity": "Quantitate",
+	"datatypes-type-monolingualtext": "Texto monolingue",
+	"datatypes-type-multilingualtext": "Texto multilingue",
+	"datatypes-type-number": "Numero",
+	"datatypes-type-mediawiki-title": "Titulo de MediaWiki",
+	"datatypes-type-unknown": "Non specificate",
+	"datatypes-type-boolean": "Boolean",
+	"datatypes-type-globe-coordinate": "Coordinatas geographic",
+	"datatypes-type-time": "Puncto in tempore"
 }

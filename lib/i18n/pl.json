@@ -12,7 +12,8 @@
 			"Macofe",
 			"Devwebtel",
 			"Sethakill",
-			"Mateon1"
+			"Mateon1",
+			"Woytecr"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",
@@ -80,6 +81,16 @@
 	"wikibase-validator-unknown-unit": "Nieznana jednostka: $1",
 	"wikibase-validator-not-allowed": "Niepoprawna wartość: $1",
 	"wikibase-validator-no-validators": "Odmowa dostępu",
+	"datatypes-type-string": "Łańcuch",
+	"datatypes-type-quantity": "Ilość",
+	"datatypes-type-monolingualtext": "Tekst jednojęzyczny",
+	"datatypes-type-multilingualtext": "Tekst wielojęzyczny",
+	"datatypes-type-number": "Liczba",
+	"datatypes-type-mediawiki-title": "Tytuł MediaWiki",
+	"datatypes-type-unknown": "Nieokreślone",
+	"datatypes-type-boolean": "Wartość logiczna",
+	"datatypes-type-globe-coordinate": "Współrzędne geograficzne",
+	"datatypes-type-time": "Moment w czasie",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-wikibase-property": "Właściwość",
 	"datatypes-type-commonsMedia": "Plik multimedialny na Commons",

@@ -350,7 +350,7 @@
 	"wikibase-redirectentity-submit": "Rediriger",
 	"special-mylanguagefallbackchain": "Mon enchaînement de langues de repli",
 	"wikibase-mylanguagefallbackchain-text": "L’enchaînement de langues de repli utilisé pour vous afficher les libellés des entités est présenté ci-dessous.",
-	"wikibase-mylanguagefallbackchain-babel": "Vous pouvez la modifier en mettant <nowiki>{{#babel: }}</nowiki> sur {{GENDER:$1|votre}} [[Special:MyPage|page utilisateur]].",
+	"wikibase-mylanguagefallbackchain-babel": "Vous pouvez la modifier en mettant <nowiki>{{#babel: }}</nowiki> sur votre [[Special:MyPage|page d’utilisat{{GENDER:$1|eur|rice}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traduit depuis $3 - $4",
 	"wikibase-api-claim-value-missing": "Une valeur doit être fournie lors de la création d’une demande avec un élément PropertyValueSnak.",
 	"wikibase-api-claim-value-unexpected": "Vous ne pouvez pas fournir une valeur en créant une demande sans PropertyValueSnak comme élément principal.",

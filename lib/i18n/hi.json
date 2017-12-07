@@ -4,7 +4,9 @@
 			"Siddhartha Ghai",
 			"NehalDaveND",
 			"Vivek Rai",
-			"Sfic"
+			"Sfic",
+			"Ansumang",
+			"चक्रपाणी"
 		]
 	},
 	"specialpages-group-wikibase": "विकिबैस",
@@ -35,6 +37,16 @@
 	"wikibase-validator-no-such-property": "गुण $1 नहीं मिला",
 	"wikibase-validator-bad-data-type": "गलत डाटा प्रकार: $1",
 	"wikibase-validator-unknown-unit": "अज्ञात इकाई: $1",
+	"datatypes-type-string": "स्ट्रिंग",
+	"datatypes-type-quantity": "मात्रा",
+	"datatypes-type-monolingualtext": "एकभाषी टेक्स्ट",
+	"datatypes-type-multilingualtext": "बहुभाषी टेक्स्ट",
+	"datatypes-type-number": "संख्या",
+	"datatypes-type-mediawiki-title": "मीडियाविकि शीर्षक",
+	"datatypes-type-unknown": "अनिर्दिष्ट",
+	"datatypes-type-boolean": "बूलियन",
+	"datatypes-type-globe-coordinate": "भौगोलिक निर्देशांक",
+	"datatypes-type-time": "समय में एक बिंदु",
 	"datatypes-type-wikibase-item": "वस्तु",
 	"datatypes-type-wikibase-property": "गुणधर्म",
 	"datatypes-type-commonsMedia": "कॉमन्स मीडिया फ़ाइल",

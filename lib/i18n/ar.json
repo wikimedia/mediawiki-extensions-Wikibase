@@ -15,7 +15,10 @@
 			"Sonic N800",
 			"Mr. Ibrahem",
 			"ديفيد",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Antime",
+			"Claw eg",
+			"Mido"
 		]
 	},
 	"wikibase-lib-desc": "يمسك بالوظيفة المشتركة لامتدادات Wikibase و Wikibase Client",
@@ -83,6 +86,16 @@
 	"wikibase-validator-unknown-unit": "وحدة غير معروفة: $1",
 	"wikibase-validator-not-allowed": "قيمة غير قانونية: $1",
 	"wikibase-validator-no-validators": "محظور",
+	"datatypes-type-string": "نص",
+	"datatypes-type-quantity": "كمية",
+	"datatypes-type-monolingualtext": "نص بلغة وحيدة",
+	"datatypes-type-multilingualtext": "نص متعدد اللغات",
+	"datatypes-type-number": "رقم",
+	"datatypes-type-mediawiki-title": "عنوان الميدياويكي",
+	"datatypes-type-unknown": "غير محدد",
+	"datatypes-type-boolean": "قيمة منطقية",
+	"datatypes-type-globe-coordinate": "إحداثيات جغرافية",
+	"datatypes-type-time": "نقطة زمنية",
 	"datatypes-type-wikibase-item": "عنصر",
 	"datatypes-type-wikibase-property": "خاصية",
 	"datatypes-type-commonsMedia": "ملف وسائط من كومنز",

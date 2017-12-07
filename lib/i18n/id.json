@@ -4,7 +4,8 @@
 			"Farras",
 			"Iwan Novirion",
 			"පසිඳු කාවින්ද",
-			"Beeyan"
+			"Beeyan",
+			"Rachmat04"
 		]
 	},
 	"wikibase-lib-desc": "Menangani fungsi umum untuk Wikibase dan ekstensi klien Wikibase",
@@ -46,6 +47,16 @@
 	"wikibase-validator-bad-url": "Lokator Sumber Seragam (URL) cacat: $1",
 	"wikibase-validator-not-allowed": "Nilai tidak sah: $1",
 	"wikibase-validator-no-validators": "Dilarang",
+	"datatypes-type-string": "String",
+	"datatypes-type-quantity": "Jumlah",
+	"datatypes-type-monolingualtext": "Teks bahasa tunggal",
+	"datatypes-type-multilingualtext": "Teks multibahasa",
+	"datatypes-type-number": "Nomor",
+	"datatypes-type-mediawiki-title": "Judul MediaWiki",
+	"datatypes-type-unknown": "Tidak ditentukan",
+	"datatypes-type-boolean": "Boolean",
+	"datatypes-type-globe-coordinate": "Koordinat geografis",
+	"datatypes-type-time": "Titik waktu",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Atribut",
 	"datatypes-type-commonsMedia": "Berkas media Commons",

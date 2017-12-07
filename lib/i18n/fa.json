@@ -15,7 +15,9 @@
 			"Alirezaaa",
 			"Macofe",
 			"Nojan Madinehi",
-			"Huji"
+			"Huji",
+			"Mahdy Saffar",
+			"Mjbmr"
 		]
 	},
 	"wikibase-lib-desc": "نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس",
@@ -82,6 +84,16 @@
 	"wikibase-validator-unknown-unit": "واحد ناشناخته: $1",
 	"wikibase-validator-not-allowed": "مقدار نامجاز: $1",
 	"wikibase-validator-no-validators": "ممنوع",
+	"datatypes-type-string": "رشته",
+	"datatypes-type-quantity": "مقدار",
+	"datatypes-type-monolingualtext": "متن تک‌زبانه",
+	"datatypes-type-multilingualtext": "متن چندزبانه",
+	"datatypes-type-number": "عدد",
+	"datatypes-type-mediawiki-title": "عنوان مدیاویکی",
+	"datatypes-type-unknown": "مشخصنشده",
+	"datatypes-type-boolean": "بولی",
+	"datatypes-type-globe-coordinate": "مختصات جغرافیایی",
+	"datatypes-type-time": "نقطه در زمان",
 	"datatypes-type-wikibase-item": "آیتم",
 	"datatypes-type-wikibase-property": "خاصیت",
 	"datatypes-type-commonsMedia": "پرونده‌های ویکی‌انبار",

@@ -11,7 +11,8 @@
 			"Stevenliuyi",
 			"LNDDYL",
 			"Cwlin0416",
-			"TMg"
+			"TMg",
+			"Wehwei"
 		]
 	},
 	"wikibase-lib-desc": "Wikibase 與 Wikibase 用戶端擴充套件所共用的功能",
@@ -77,6 +78,16 @@
 	"wikibase-validator-unknown-unit": "不明的單位：$1",
 	"wikibase-validator-not-allowed": "不合法的數值：$1",
 	"wikibase-validator-no-validators": "禁止",
+	"datatypes-type-string": "字串",
+	"datatypes-type-quantity": "數量",
+	"datatypes-type-monolingualtext": "單語言內容",
+	"datatypes-type-multilingualtext": "多語言內容",
+	"datatypes-type-number": "數字",
+	"datatypes-type-mediawiki-title": "MediaWiki 標題",
+	"datatypes-type-unknown": "未指定",
+	"datatypes-type-boolean": "布林值",
+	"datatypes-type-globe-coordinate": "地理座標",
+	"datatypes-type-time": "時間點",
 	"datatypes-type-wikibase-item": "項目",
 	"datatypes-type-wikibase-property": "屬性",
 	"datatypes-type-commonsMedia": "共享資源媒體檔案",

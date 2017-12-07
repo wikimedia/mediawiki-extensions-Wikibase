@@ -58,6 +58,7 @@
 	"wikibase-validator-unknown-unit": "caay kapulita tatebanan-nisulitan $1",
 	"wikibase-validator-not-allowed": "caay kalikecay a sulyang: $1",
 	"wikibase-validator-no-validators": "satezep",
+	"datatypes-type-quantity": "nikayadah",
 	"datatypes-type-wikibase-item": "kasacacay",
 	"datatypes-type-commonsMedia": "kasasimel katahkalan nu kalisiw myiti tangan",
 	"datatypes-type-geo-shape": "hekal nu lala’-liwliw",

@@ -2,10 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Xelgen",
-			"Kareyac"
+			"Kareyac",
+			"Narek",
+			"Աշոտ1997"
 		]
 	},
 	"wikibase-error-ui-no-external-page": "\"$2\" էջը չի հաջողվել գտնել \"$1\"-ում",
 	"wikibase-sitelinks-wikipedia": "Վիքիպեդիա",
+	"datatypes-type-string": "Տող",
+	"datatypes-type-multilingualtext": "Բազմալեզու տեքստ",
+	"datatypes-type-number": "Թիվ",
+	"datatypes-type-boolean": "Տրամաբանական տիպ",
+	"datatypes-type-globe-coordinate": "Աշխարհագրական կոորդինատներ",
 	"datatypes-type-commonsMedia": "Տեսաձայնային նիշք Վիքիպահեստում"
 }

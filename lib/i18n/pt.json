@@ -14,7 +14,8 @@
 			"Imperadeiro90",
 			"Fúlvio",
 			"Jkb8",
-			"Mansil"
+			"Mansil",
+			"Alchimista"
 		]
 	},
 	"wikibase-lib-desc": "Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client",
@@ -82,6 +83,16 @@
 	"wikibase-validator-unknown-unit": "Unidade desconhecida: $1",
 	"wikibase-validator-not-allowed": "Valor inválido: $1",
 	"wikibase-validator-no-validators": "Proibido",
+	"datatypes-type-string": "String",
+	"datatypes-type-quantity": "Quantidade",
+	"datatypes-type-monolingualtext": "Texto monolingue",
+	"datatypes-type-multilingualtext": "Texto multilingue",
+	"datatypes-type-number": "Número",
+	"datatypes-type-mediawiki-title": "Título do MediaWiki",
+	"datatypes-type-unknown": "Não Especificado",
+	"datatypes-type-boolean": "Booleano",
+	"datatypes-type-globe-coordinate": "Coordenadas geográficas",
+	"datatypes-type-time": "Ponto no tempo",
 	"datatypes-type-wikibase-item": "Objeto",
 	"datatypes-type-wikibase-property": "Propriedade",
 	"datatypes-type-commonsMedia": "Ficheiro multimédia do Commons",

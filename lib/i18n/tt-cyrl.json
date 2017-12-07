@@ -4,5 +4,15 @@
 			"Ильнар"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Википедия"
+	"wikibase-sitelinks-wikipedia": "Википедия",
+	"datatypes-type-string": "Юл",
+	"datatypes-type-quantity": "Микъдары",
+	"datatypes-type-monolingualtext": "Бертелле текст",
+	"datatypes-type-multilingualtext": "Күптелле текст",
+	"datatypes-type-number": "Саны",
+	"datatypes-type-mediawiki-title": "MediaWiki исеме",
+	"datatypes-type-unknown": "Ачыкланмаган",
+	"datatypes-type-boolean": "Логик мәгънәсе",
+	"datatypes-type-globe-coordinate": "Географик координаталар",
+	"datatypes-type-time": "Вакыт мәле"
 }

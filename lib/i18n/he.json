@@ -5,7 +5,8 @@
 			"Yona b",
 			"Guycn2",
 			"Macofe",
-			"ערן"
+			"ערן",
+			"Inkbug"
 		]
 	},
 	"wikibase-lib-desc": "הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client",
@@ -73,6 +74,16 @@
 	"wikibase-validator-unknown-unit": "יחידה בלתי־ידועה: $1",
 	"wikibase-validator-not-allowed": "ערך בלתי־תקין: $1",
 	"wikibase-validator-no-validators": "אסור",
+	"datatypes-type-string": "מחרוזת",
+	"datatypes-type-quantity": "כמות",
+	"datatypes-type-monolingualtext": "טקסט חד־לשוני",
+	"datatypes-type-multilingualtext": "טקסט רב־לשוני",
+	"datatypes-type-number": "מספר",
+	"datatypes-type-mediawiki-title": "כותרת מדיה־ויקי",
+	"datatypes-type-unknown": "בלתי־מוגדר",
+	"datatypes-type-boolean": "בוליאני",
+	"datatypes-type-globe-coordinate": "נקודות ציון גאוגרפיות",
+	"datatypes-type-time": "נקודת זמן",
 	"datatypes-type-wikibase-item": "פריט",
 	"datatypes-type-wikibase-property": "מאפיין",
 	"datatypes-type-commonsMedia": "קובץ מדיה בוויקישיתוף",

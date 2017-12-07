@@ -9,7 +9,9 @@
 			"Fasouzafreitas",
 			"TheEduGobi",
 			"Dianakc",
-			"Felipe L. Ewald"
+			"Felipe L. Ewald",
+			"!Silent",
+			"O andarilho"
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
@@ -77,6 +79,16 @@
 	"wikibase-validator-unknown-unit": "Unidade desconhecida: $1",
 	"wikibase-validator-not-allowed": "Valor ilegal: $1",
 	"wikibase-validator-no-validators": "Proibido",
+	"datatypes-type-string": "String",
+	"datatypes-type-quantity": "Quantidade",
+	"datatypes-type-monolingualtext": "Texto multilíngue",
+	"datatypes-type-multilingualtext": "Texto multilíngue",
+	"datatypes-type-number": "Número",
+	"datatypes-type-mediawiki-title": "Título do MediaWiki",
+	"datatypes-type-unknown": "Não especificado",
+	"datatypes-type-boolean": "Booleano",
+	"datatypes-type-globe-coordinate": "Coordenadas geográfica",
+	"datatypes-type-time": "Ponto no tempo",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Propriedade",
 	"datatypes-type-commonsMedia": "Arquivo de mídia do Commons",
