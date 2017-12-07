@@ -4,11 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings;
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\HashUsageAccumulator;
-use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
@@ -37,18 +32,15 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 
 	/**
 	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
-	 * @param UsageAccumulator|null $usageAccumulator
 	 *
 	 * @return WikibaseLanguageDependentLuaBindings
 	 */
 	private function getWikibaseLanguageDependentLuaBindings(
-		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
-		UsageAccumulator $usageAccumulator = null
+		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
 	) {
 		return new WikibaseLanguageDependentLuaBindings(
 			new ItemIdParser(),
-			$labelDescriptionLookup,
-			$usageAccumulator ?: new HashUsageAccumulator()
+			$labelDescriptionLookup
 		);
 	}
 
@@ -75,12 +67,6 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		return $labelDescriptionLookup;
 	}
 
-	private function hasUsage( $actualUsages, EntityId $entityId, $aspect ) {
-		$usage = new EntityUsage( $entityId, $aspect );
-		$key = $usage->getIdentityString();
-		return isset( $actualUsages[$key] );
-	}
-
 	public function getLabelProvider() {
 		return [
 			[ [ 'LabelString', 'lang-code' ], 'Q123' ],
@@ -102,29 +88,6 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		$this->assertSame( $expected, $wikibaseLuaBindings->getLabel( $itemId ) );
 	}
 
-	public function testGetLabel_usage() {
-		$usages = new HashUsageAccumulator();
-
-		$wikibaseLuaBindings = $this->getWikibaseLanguageDependentLuaBindings(
-			$this->getLabelDescriptionLookup(),
-			$usages
-		);
-
-		$itemId = new ItemId( 'Q7' );
-		$wikibaseLuaBindings->getLabel( $itemId->getSerialization() );
-
-		//NOTE: label usage is not tracked directly, this is done via the LabelDescriptionLookup
-		$this->assertFalse(
-			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ),
-			'title usage'
-		);
-
-		$this->assertFalse(
-			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ),
-			'all usage'
-		);
-	}
-
 	public function getDescriptionProvider() {
 		return [
 			[ [ 'DescriptionString', 'lang-code' ], 'Q123' ],
@@ -144,39 +107,6 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		);
 
 		$this->assertSame( $expected, $wikibaseLuaBindings->getDescription( $itemId ) );
-	}
-
-	public function testGetDescription_usage() {
-		$usages = new HashUsageAccumulator();
-
-		$wikibaseLuaBindings = $this->getWikibaseLanguageDependentLuaBindings(
-			$this->getLabelDescriptionLookup(),
-			$usages
-		);
-
-		$itemId = new ItemId( 'Q7' );
-		$wikibaseLuaBindings->getDescription( $itemId->getSerialization() );
-
-		//NOTE: description usage is not tracked directly, this is done via the LabelDescriptionLookup
-		$this->assertTrue(
-			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::OTHER_USAGE ),
-			'other usage'
-		);
-
-		$this->assertFalse(
-			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ),
-			'label usage'
-		);
-
-		$this->assertFalse(
-			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ),
-			'title usage'
-		);
-
-		$this->assertFalse(
-			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ),
-			'all usage'
-		);
 	}
 
 }
