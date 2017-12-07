@@ -22,6 +22,29 @@
       "revId": "354317e2b552ec827cf31c68c661de10826ed3ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_196644b7",
+        "filename": "client/tests/phpunit/includes/DataAccess/ParserFunctions/StatementGroupRendererFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-07T13:45:41Z",
+      "side": 1,
+      "message": "This assertion here is why I needed to touch this test. I had two options:\n* Just remove this line.\n* Change the mode from plain text (which is the default) to \"rich-wikitext\".\n\nI decided to go with the later option, because this makes this test here kind of an integration test. I removed the \"T\" usages from all other tests. So now both cases are tested. That would not be the case if I remove the \"T\" everywhere.",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 46
+      },
+      "revId": "354317e2b552ec827cf31c68c661de10826ed3ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
