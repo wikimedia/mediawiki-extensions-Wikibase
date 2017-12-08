@@ -69,6 +69,30 @@
       "revId": "354317e2b552ec827cf31c68c661de10826ed3ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_22294737",
+        "filename": "client/tests/phpunit/includes/DataAccess/ParserFunctions/StatementGroupRendererFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-08T11:37:43Z",
+      "side": 1,
+      "message": "That would not change much. It would especially not reduce the number of places I need to touch to make this patch work. We could leave a TODO here, but since I know a lot of our tests do something similar, I don\u0027t think a TODO is going to do much.\n\nI uploaded a follow up that splits the test, see I6e9dd02.",
+      "parentUuid": "eee3df47_ff709fa5",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 46
+      },
+      "revId": "354317e2b552ec827cf31c68c661de10826ed3ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
