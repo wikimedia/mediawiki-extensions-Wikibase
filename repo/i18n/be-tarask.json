@@ -168,6 +168,7 @@
 	"wikibase-itemdisambiguation-description": "Значэньні, якія выкарыстоўваюцца для пошуку, мусяць быць поўным тэкстам запісу. Ідэнтыфікатарам зьяўляецца код мовы, напрыклад, «en».",
 	"wikibase-itemdisambiguation-summary": "Шукаць усе элемэнты, якія маюць дакладна такую ж метку.",
 	"special-newproperty": "Стварыць новую ўласьцівасьць",
+	"wikibase-newproperty-summary": "Упэўніцеся, што вы праверылі, ці не існуе ўжо такая ўласьцівасьць!<br />Вам трэба стварыць [[{{int:Wikibase-label-helppage}}|метку]] і [[{{int:Wikibase-description-helppage}}|апісаньне]] для ўсіх новых уласьцівасьцяў, а таксама слушны тып уласьцівасьці.",
 	"wikibase-newproperty-fieldset": "Стварыць новую ўласьцівасьць",
 	"wikibase-newproperty-datatype": "Тып зьвестак:",
 	"wikibase-newproperty-invalid-datatype": "Пазначаны няслушны тып зьвестак.",

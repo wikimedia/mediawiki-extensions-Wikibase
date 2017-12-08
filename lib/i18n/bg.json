@@ -43,5 +43,6 @@
 	"datatypes-type-globe-coordinate": "Географски координати",
 	"datatypes-type-time": "Момент във времето",
 	"datatypes-type-wikibase-item": "Обект",
-	"datatypes-type-commonsMedia": "Файл от Общомедия"
+	"datatypes-type-commonsMedia": "Файл от Общомедия",
+	"wikibase-entity-summary-wbcreateredirect": "Пренасочване към $4"
 }

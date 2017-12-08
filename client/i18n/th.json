@@ -30,7 +30,7 @@
 	"wikibase-comment-linked": "รายการของสิ่งหนึ่งใน {{WBREPONAME}} ได้เชื่อมโยงเข้ากับหน้านี้",
 	"wikibase-comment-unlink": "หน้านี้ได้ถูกตัดการเชื่อมโยงออกจากรายการของสิ่งนั้นใน {{WBREPONAME}}. จึงลบลิงก์ข้ามภาษาออก.",
 	"wikibase-comment-restore": "รายการของสิ่งนี้ใน {{WBREPONAME}} ได้ถูกกู้คืน. จึงเรียกคืนลิงก์ข้ามภาษา.",
-	"wikibase-comment-update": "เปลี่ยนแปลงสารสนเทศของสิ่งนี้ใน {{WBREPONAME}} แล้ว",
+	"wikibase-comment-update": "เปลี่ยนรายการ {{WBREPONAME}} แล้ว",
 	"wikibase-comment-sitelink-add": "เพิ่มลิงก์ข้ามภาษาแล้ว: $1",
 	"wikibase-comment-sitelink-change": "เปลี่ยนลิงก์ข้ามภาษาจาก $1 เป็น $2 แล้ว",
 	"wikibase-comment-sitelink-remove": "ลบลิงก์ข้ามภาษาแล้ว: $1",
