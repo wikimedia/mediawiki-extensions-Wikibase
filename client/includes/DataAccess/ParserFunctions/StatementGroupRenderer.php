@@ -17,7 +17,7 @@ interface StatementGroupRenderer {
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
 	 *
-	 * @return string
+	 * @return string Wikitext
 	 */
 	public function render( EntityId $entityId, $propertyLabelOrId );
 

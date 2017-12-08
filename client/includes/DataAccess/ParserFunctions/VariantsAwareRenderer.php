@@ -38,7 +38,7 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 * @param string $propertyLabelOrId
 	 *
 	 * @throws OutOfBoundsException
-	 * @return string
+	 * @return string Wikitext
 	 */
 	public function render( EntityId $entityId, $propertyLabelOrId ) {
 		$renderedVariantsArray = $this->buildRenderedVariantsArray( $entityId, $propertyLabelOrId );

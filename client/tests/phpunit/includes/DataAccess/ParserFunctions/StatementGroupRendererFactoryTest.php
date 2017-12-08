@@ -120,6 +120,39 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @dataProvider provideWikitextTypes
+	 */
+	public function testRenderOutput( $wikitextType, $expectedWikitext, $titleUsageExpected ) {
+		$wikitext = $this->getStatementGroupRendererFactory()
+			->newRendererFromParser( $this->getParser(), $wikitextType )
+			->render( new ItemId( 'Q1' ), 'P1' );
+
+		$this->assertSame( $expectedWikitext, $wikitext );
+	}
+
+	/**
+	 * @dataProvider provideWikitextTypes
+	 */
+	public function testTitleUsageTracking( $wikitextType, $expectedWikitext, $titleUsageExpected ) {
+		$parser = $this->getParser();
+		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
+
+		$this->getStatementGroupRendererFactory()
+			->newRendererFromParser( $parser, $wikitextType )
+			->render( new ItemId( 'Q1' ), 'P1' );
+		$usages = $usageAccumulator->getUsages();
+
+		$this->assertSame( $titleUsageExpected, array_key_exists( 'Q7#T', $usages ) );
+	}
+
+	public function provideWikitextTypes() {
+		return [
+			[ 'escaped-plaintext', 'Kittens!', false ],
+			[ 'rich-wikitext', '<span><span>Kittens!</span></span>', true ],
+		];
+	}
+
+	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
 	public function testNewRenderer_usageTracking( $allowDataAccessInUserLanguage ) {
@@ -129,8 +162,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser, 'rich-wikitext' );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
-		$wikitext = $renderer->render( new ItemId( 'Q1' ), 'P1' );
-		$this->assertSame( '<span><span>Kittens!</span></span>', $wikitext );
+
+		$renderer->render( new ItemId( 'Q1' ), 'P1' );
 
 		$usages = $usageAccumulator->getUsages();
 		if ( $allowDataAccessInUserLanguage ) {
@@ -138,7 +171,6 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		} else {
 			$this->assertArrayHasKey( 'Q7#L.en', $usages );
 		}
-		$this->assertArrayHasKey( 'Q7#T', $usages );
 	}
 
 	/**
