@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_227e67e1",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-08T12:03:08Z",
+      "side": 1,
+      "message": "Can you please rename this to $expectedFile too?",
+      "range": {
+        "startLine": 65,
+        "startChar": 18,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "1974b974f88d02cf40fd8d8dfb425527c6356532",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_62886fed",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-08T12:03:08Z",
+      "side": 1,
+      "message": "I\u0027m really not happy about this here. What this means is: The comparison will fail if a whitespace or any other irrelevant formatting detail in the ….expected file is not exactly the same as the output produced by this json_encode. But such details are irrelevant and should not make this test fail.\n\nTL;DR: This patch changes the test so it does not compare the decoded JSON any more, but the encoded and JSON string including all formatting details. I think this is not an improvement, and should not be done.",
+      "range": {
+        "startLine": 88,
+        "startChar": 45,
+        "endLine": 88,
+        "endChar": 62
+      },
+      "revId": "1974b974f88d02cf40fd8d8dfb425527c6356532",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
