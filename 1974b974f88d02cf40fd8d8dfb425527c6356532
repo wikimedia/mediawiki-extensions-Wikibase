@@ -45,6 +45,30 @@
       "revId": "1974b974f88d02cf40fd8d8dfb425527c6356532",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_bbfbc2b9",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-08T18:55:26Z",
+      "side": 1,
+      "message": "The JSON is produced by the same json_encode, so there\u0027s absolutely no reason for any whitespace changes or formatting changes to appear. \nThe comparison is indeed now text and not array, but given that text comparisons produce line diffs, it would work even better, since array comparisons often do not provide line diffs, but only abbreviated ones. \n\nAs I am the author of the original test, I think this is completely OK to compare strings there.",
+      "parentUuid": "eee3df47_62886fed",
+      "range": {
+        "startLine": 88,
+        "startChar": 45,
+        "endLine": 88,
+        "endChar": 62
+      },
+      "revId": "1974b974f88d02cf40fd8d8dfb425527c6356532",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

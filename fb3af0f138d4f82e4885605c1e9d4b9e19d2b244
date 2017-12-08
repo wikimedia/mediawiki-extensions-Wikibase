@@ -16,6 +16,24 @@
       "revId": "fb3af0f138d4f82e4885605c1e9d4b9e19d2b244",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_1b290e37",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-08T18:55:26Z",
+      "side": 0,
+      "message": "We\u0027ve not losing anything - the new one should work exactly like the old one, asserFileContains saves the fixture if it\u0027s not there. That\u0027s the whole point of asserFileContains.",
+      "parentUuid": "eee3df47_d38674ab",
+      "revId": "fb3af0f138d4f82e4885605c1e9d4b9e19d2b244",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
