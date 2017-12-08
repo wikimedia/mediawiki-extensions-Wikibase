@@ -55,7 +55,7 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 *
-	 * @return string
+	 * @return string Wikitext
 	 */
 	public function render( EntityId $entityId, $propertyLabelOrId ) {
 		try {

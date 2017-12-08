@@ -115,7 +115,7 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param string $type
+	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
@@ -160,7 +160,7 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param string $type
+	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
 	 * @param string $languageCode
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
@@ -189,7 +189,7 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param string $type
+	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
 	 * @param string[] $variants
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput

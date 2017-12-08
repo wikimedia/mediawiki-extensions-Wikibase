@@ -73,7 +73,7 @@ class StatementTransclusionInteractor {
 	 * @param int[]|null $acceptableRanks
 	 *
 	 * @throws PropertyLabelNotResolvedException
-	 * @return string
+	 * @return string Wikitext
 	 */
 	public function render(
 		EntityId $entityId,
