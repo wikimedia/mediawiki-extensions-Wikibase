@@ -219,12 +219,16 @@ class DispatchChanges extends Maintenance {
 			throw new MWException( "WikibaseLib has not been loaded." );
 		}
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		if ( $wikibaseRepo->getSettings()->getSetting( 'dispatchNoopRuns' ) ) {
+			$this->log( 'Noop runs are enabled so exiting early and not performing dispatch operations.' );
+		}
+
 		$maxTime = (int)$this->getOption( 'max-time', PHP_INT_MAX );
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 		$selectedClients = $this->getOption( 'client' );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$clientWikis = $this->getClientWikis(
 			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' )

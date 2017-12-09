@@ -52,6 +52,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;dispatchDefaultMaxChunks: Overrides the default value for max-chunks in dispatchChanges.php
 ;dispatchDefaultDispatchInterval: Overrides the default value for dispatch-interval in dispatchChanges.php
 ;dispatchDefaultDispatchRandomness: Overrides the default value for randomness in dispatchChanges.php
+;dispatchNoopRuns: Force the dispatchChanges.php script to do NOOP(no operation) runs, even when called. Can be used to safely alter dispatch lock managers while not having to remove configured crons.
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities.
 :'''Note:''' This may change in the future to allow separate blacklists for different kinds of entities.
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
