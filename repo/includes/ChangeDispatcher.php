@@ -459,6 +459,7 @@ class ChangeDispatcher {
 	}
 
 	private function log( $message ) {
+		wfDebugLog( 'WikibaseDispatch', $message );
 		$this->messageReporter->reportMessage( $message );
 	}
 
