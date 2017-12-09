@@ -3,6 +3,8 @@
 namespace Wikibase\Store\Sql;
 
 use Exception;
+use StatsdDataFactoryInterface;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
@@ -100,6 +102,11 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $LBFactory;
 
 	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
+	/**
 	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
 	 * @param LBFactory $LBFactory
@@ -114,6 +121,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->repoDB = $repoDB;
 		$this->repoSiteId = $repoSiteId;
 
+		$this->stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$this->messageReporter = new NullMessageReporter();
 		$this->LBFactory = $LBFactory;
 	}
@@ -274,9 +282,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 			if ( $state ) {
 				// got one
+				$this->stats->increment(
+					'wikibase.repo.SqlChangeDispatchCoordinator.selectClient.success'
+				);
 				return $state;
 			}
-
+			$this->stats->increment(
+				'wikibase.repo.SqlChangeDispatchCoordinator.selectClient.fail'
+			);
 			wfDebugLog( __METHOD__, 'Failed to grab dispatch lock for ' . $wiki );
 			// try again
 		}
