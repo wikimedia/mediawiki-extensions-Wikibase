@@ -149,10 +149,22 @@ class DispatchChanges extends Maintenance {
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
 
-		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
-		$maxChunks = (int)$this->getOption( 'max-chunks', 15 );
-		$dispatchInterval = (int)$this->getOption( 'dispatch-interval', 60 );
-		$randomness = (int)$this->getOption( 'randomness', 15 );
+		$batchSize = (int)$this->getOption(
+			'batch-size',
+			$settings->getSetting( 'dispatchDefaultBatchSize' )
+		);
+		$maxChunks = (int)$this->getOption(
+			'max-chunks',
+			$settings->getSetting( 'dispatchDefaultMaxChunks' )
+		);
+		$dispatchInterval = (int)$this->getOption(
+			'dispatch-interval',
+			$settings->getSetting( 'dispatchDefaultDispatchInterval' )
+		);
+		$randomness = (int)$this->getOption(
+			'randomness',
+			$settings->getSetting( 'dispatchDefaultDispatchRandomness' )
+		);
 
 		$this->verbose = $this->getOption( 'verbose', false );
 

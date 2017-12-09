@@ -48,6 +48,10 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 === Expert Settings ===
 
 ;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
+;dispatchDefaultBatchSize: Overrides the default value for batch-size in dispatchChanges.php
+;dispatchDefaultMaxChunks: Overrides the default value for max-chunks in dispatchChanges.php
+;dispatchDefaultDispatchInterval: Overrides the default value for dispatch-interval in dispatchChanges.php
+;dispatchDefaultDispatchRandomness: Overrides the default value for randomness in dispatchChanges.php
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities.
 :'''Note:''' This may change in the future to allow separate blacklists for different kinds of entities.
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
