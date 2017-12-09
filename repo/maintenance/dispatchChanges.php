@@ -219,12 +219,19 @@ class DispatchChanges extends Maintenance {
 			throw new MWException( "WikibaseLib has not been loaded." );
 		}
 
-		$maxTime = (int)$this->getOption( 'max-time', PHP_INT_MAX );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$dispatchMaxTimeSetting = $wikibaseRepo->getSettings()->getSetting( 'dispatchMaxTime' );
+
+		if ( $dispatchMaxTimeSetting == 0 ) {
+			$this->log( 'dispatchMaxTime 0, so exiting early and not performing dispatch operations.' );
+			return;
+		}
+
+		$maxTime = (int)$this->getOption( 'max-time', $dispatchMaxTimeSetting );
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 		$selectedClients = $this->getOption( 'client' );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$clientWikis = $this->getClientWikis(
 			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' )
