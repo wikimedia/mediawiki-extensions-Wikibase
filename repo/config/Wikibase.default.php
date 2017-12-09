@@ -49,6 +49,7 @@ return [
 	'localClientDatabases' => [],
 
 	// Settings for change dispatching
+	'dispatchNullRuns' => false,
 	'dispatchBatchChunkFactor' => 3,
 	'dispatchBatchCacheFactor' => 3,
 	'dispatchDefaultBatchSize' => 1000,
