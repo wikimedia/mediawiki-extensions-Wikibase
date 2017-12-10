@@ -15,7 +15,8 @@
 			"Fúlvio",
 			"Jkb8",
 			"Mansil",
-			"Alchimista"
+			"Alchimista",
+			"MokaAkashiyaPT"
 		]
 	},
 	"wikibase-lib-desc": "Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client",
@@ -89,7 +90,7 @@
 	"datatypes-type-multilingualtext": "Texto multilingue",
 	"datatypes-type-number": "Número",
 	"datatypes-type-mediawiki-title": "Título do MediaWiki",
-	"datatypes-type-unknown": "Não Especificado",
+	"datatypes-type-unknown": "Não especificado",
 	"datatypes-type-boolean": "Booleano",
 	"datatypes-type-globe-coordinate": "Coordenadas geográficas",
 	"datatypes-type-time": "Ponto no tempo",

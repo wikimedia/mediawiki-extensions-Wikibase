@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"बिप्लब आनन्द",
-			"NehalDaveND"
+			"NehalDaveND",
+			"सरोज कुमार ढकाल"
 		]
 	},
 	"wikibase-error-unexpected": "त्रुटि: $1",
@@ -18,7 +19,7 @@
 	"wikibase-globedetails-latitude": "रेखांश",
 	"wikibase-globedetails-precision": "यथार्थता",
 	"wikibase-globedetails-globe": "ग्लोब",
-	"wikibase-sitelinks-wikipedia": "विकिपीडिया",
+	"wikibase-sitelinks-wikipedia": "विकिपिडिया",
 	"wikibase-sitelinks-sitename-columnheading": "भाषा",
 	"wikibase-snakview-snaktypeselector-somevalue": "अज्ञात मिति",
 	"wikibase-snakview-snaktypeselector-novalue": "कुनै मिति",
