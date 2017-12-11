@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_35216cf7",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "this might sound like a cool term to call the \"tracking mode\" or something, but as a name of a setting/flag, I\u0027d rather have something that clearly indicates what happens when I set it to whatever values there could be.\n\ntrying alternatives, how does \"trackIndividualAspectUsage\" or \"trackSeparateAspectUsage\" sound? Is it clear or rather awkward?\n\nI am honestly asking, as I am not that familiar with the realm of usage aspects.",
+      "range": {
+        "startLine": 87,
+        "startChar": 16,
+        "endLine": 87,
+        "endChar": 39
+      },
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_f56d442e",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "\"an all\" looks odd at glance.\n\nMaybe:\n... or just track the All (X) usage?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_15738815",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "the?",
+      "range": {
+        "startLine": 167,
+        "startChar": 36,
+        "endLine": 167,
+        "endChar": 38
+      },
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_35596c5e",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "do we bother exposing all settings or do we only want to expose only the single one (the \"fine grained tracking\" one)?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_55fa3040",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "Do you mind if I split this into two test methods?\n\nassertEquals( something, !whatnot ) is getting too obfuscated to my taste.",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_98022dbd",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "this provider method is quite far from the test using it, could we move it closer?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_78dbe954",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T13:54:49Z",
+      "side": 1,
+      "message": "So I don\u0027t understand what this test is actually testing, given $fineGrainedTracking was added. The language fallback behaviour is not changed regardless what is the value of the setting flag, right? Maybe we want to test the behaviour controlled by the flag in the separate test method(s)?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
