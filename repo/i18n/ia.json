@@ -47,7 +47,7 @@
 	"special-itembytitle": "Elemento per titulo",
 	"special-itemdisambiguation": "Disambiguation de elementos",
 	"special-newitem": "Crear un nove objecto",
-	"wikibase-restoreold": "reinitialisar",
+	"wikibase-restoreold": "restaurar",
 	"apihelp-wblinktitles-description": "Associa duo paginas sur duo wikis differente a un elemento Wikibase.",
 	"apihelp-wblinktitles-summary": "Associa duo paginas sur duo wikis differente a un elemento Wikibase.",
 	"apihelp-wbsetsitelink-param-linksite": "Le identificator del sito sur le qual se trova le pagina a ligar"

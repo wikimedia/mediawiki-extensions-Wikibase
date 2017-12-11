@@ -325,7 +325,7 @@
 	"wikibase-api-cant-redirect": "Kan geen doorverwijzing maken (mogelijk omdat doorverwijzingen tussen entiteiten van deze soort in het geheel niet ondersteund worden).",
 	"wikibase-self-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie, en daarbij zijn enige tussentijdse wijzigingen overschreven.",
 	"wikibase-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie.",
-	"wikibase-restoreold": "opnieuw instellen",
+	"wikibase-restoreold": "terugzetten",
 	"wikibase-entity-summary-restore": "Versie $3 van [[Special:Contributions/$4|{{GENDER:$4|$4}}]] teruggeplaatst",
 	"wikibase-entity-summary-undo": "Versie $3 door [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|overleg]]) ongedaan gemaakt",
 	"wikibase-no-direct-editing": "Rechtstreeks bewerken is niet mogelijk in de naamruimte $1",
