@@ -53,14 +53,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 			$testName = substr( basename( $queryFile ), 0, -6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
 			$expectedFile = substr( $queryFile, 0, -5 ) . 'expected';
-			$expected =
-				is_file( $expectedFile ) ? json_decode( file_get_contents( $expectedFile ), true )
-					// Flags test to generate a new fixture
-					: $expectedFile;
-			$tests[$testName] = [
-				$query,
-				$expected,
-			];
+			$tests[$testName] = [ $query, $expectedFile ];
 		}
 
 		return $tests;
@@ -68,8 +61,8 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider searchDataProvider
-	 * @param $params
-	 * @param $expected
+	 * @param string[] $params query parameters
+	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
 		$this->setMwGlobals( [
@@ -92,14 +85,8 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		);
 		$decodedQuery = json_decode( $elasticQuery, true );
 		unset( $decodedQuery['path'] );
-
-		if ( is_string( $expected ) ) {
-			// Flag to generate a new fixture.
-			file_put_contents( $expected, json_encode( $decodedQuery, JSON_PRETTY_PRINT ) );
-		} else {
-			// Finally compare some things
-			$this->assertEquals( $expected, $decodedQuery );
-		}
+		$encodedData = json_encode( $decodedQuery, JSON_PRETTY_PRINT );
+		$this->assertFileContains( $expected, $encodedData );
 	}
 
 }
