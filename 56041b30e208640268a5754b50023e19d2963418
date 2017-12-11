@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_db3e6f86",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-11T15:55:34Z",
+      "side": 1,
+      "message": "Oh, it should be \"an\", not \"and\".",
+      "parentUuid": "eee3df47_5aad3e2d",
+      "range": {
+        "startLine": 8,
+        "startChar": 212,
+        "endLine": 8,
+        "endChar": 244
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_97fb4511",
         "filename": "docs/entity-storage.wiki",
         "patchSetId": 1
@@ -330,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_5b537fe6",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-11T15:55:34Z",
+      "side": 1,
+      "message": "Re \"virtual\": it\u0027s a \"real\" revision of the page, and a \"real\" revision of the entity that changed, and a not-so-real revision of all other entities on that page. What\u0027s \"real\" depends on your perspective, I guess.\n\nAs to whether this behavior is intentional: it\u0027s an undesired but acceptable artifact of the storage mechanism. It\u0027s not very pretty, but it does no harm. And I see no alternative if we do not want to store Forms and Senses on separate pages - which would cause a whole lot of other consistency issues.\n\nI agree that specing this out is critical. Do you think this document as proposed is sufficient in that regard? Perhaps I should add \"this is an undesired but acceptable artifact of the storage mechanism\"...",
+      "parentUuid": "eee3df47_d5b2c1e3",
+      "range": {
+        "startLine": 29,
+        "startChar": 242,
+        "endLine": 29,
+        "endChar": 528
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_b7580937",
         "filename": "docs/entity-storage.wiki",
         "patchSetId": 1
@@ -528,6 +576,30 @@
       "writtenOn": "2017-12-11T10:58:18Z",
       "side": 1,
       "message": "\"globally unique\" seems a bit not clear to me.\nSo this is about that fact that this number is only unique (and only makes sense) in the context of the related entity ID, right?",
+      "range": {
+        "startLine": 69,
+        "startChar": 50,
+        "endLine": 69,
+        "endChar": 65
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_db55cfc6",
+        "filename": "lib/includes/Store/EntityRevision.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-11T15:55:34Z",
+      "side": 1,
+      "message": "Yes.\n\n\"global\" here refers to the database of the local wiki.",
+      "parentUuid": "eee3df47_fab53279",
       "range": {
         "startLine": 69,
         "startChar": 50,
