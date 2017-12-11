@@ -95,6 +95,29 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_5aad3e2d",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T10:58:18Z",
+      "side": 1,
+      "message": "something seems to be missing in this sentence.\nOr is it just \"and\" that is not needed here?",
+      "range": {
+        "startLine": 8,
+        "startChar": 212,
+        "endLine": 8,
+        "endChar": 244
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_97fb4511",
         "filename": "docs/entity-storage.wiki",
         "patchSetId": 1
@@ -271,6 +294,30 @@
       "side": 1,
       "message": "I could also call them \"virtual\" or \"incidental\". Since we are talking to MediaWiki developers, it seems appropriate to point out parallels between the two vocabularies, especially since we directly map between them in many cases.",
       "parentUuid": "eee3df47_372eb988",
+      "range": {
+        "startLine": 29,
+        "startChar": 242,
+        "endLine": 29,
+        "endChar": 528
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_d5b2c1e3",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T10:58:18Z",
+      "side": 1,
+      "message": "hmm, i wouldn\u0027t use the term \"virtual\" as it might suggest \"not real\".\nThose revision are actual revision we\u0027re considering here, right?\n\nBut what is most crucial here from my perspective is this fragment:\n\u003e updating a single sub-entity will create a new revision of the page that contains that sub-entity. This implies that it also creates a new revision for every other entity contained on that page, including the top level entity.\n\nMaybe it is clear for everyone else since the Iron Age but I didn\u0027t know that is actually intentional and expected that when there are several \"sub-entities\", any edit to any of those \"sub-entities\" or to the \"parent\" entity results in the entity revision to all of them, i.e. to the \"parent\" entity, and to all \"sub-entities\".\n\nI don\u0027t really care if the somewhat similar concept from MW is referred here or not. But having this behaviour defined seemed pretty critical to me.",
+      "parentUuid": "eee3df47_4a0bd02d",
       "range": {
         "startLine": 29,
         "startChar": 242,
@@ -463,6 +510,52 @@
         "startChar": 59,
         "endLine": 12,
         "endChar": 72
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_fab53279",
+        "filename": "lib/includes/Store/EntityRevision.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T10:58:18Z",
+      "side": 1,
+      "message": "\"globally unique\" seems a bit not clear to me.\nSo this is about that fact that this number is only unique (and only makes sense) in the context of the related entity ID, right?",
+      "range": {
+        "startLine": 69,
+        "startChar": 50,
+        "endLine": 69,
+        "endChar": 65
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_5acede5f",
+        "filename": "lib/includes/Store/EntityRevision.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T10:58:18Z",
+      "side": 1,
+      "message": "p",
+      "range": {
+        "startLine": 79,
+        "startChar": 37,
+        "endLine": 79,
+        "endChar": 39
       },
       "revId": "56041b30e208640268a5754b50023e19d2963418",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",

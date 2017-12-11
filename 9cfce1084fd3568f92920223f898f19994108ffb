@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_5a109e53",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T10:58:18Z",
+      "side": 0,
+      "message": "so did the todo got resolved in the meanwhile?",
+      "revId": "9cfce1084fd3568f92920223f898f19994108ffb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
