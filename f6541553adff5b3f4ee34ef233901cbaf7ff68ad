@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_751ad4d1",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-12-11T11:50:18Z",
+      "side": 1,
+      "message": "This looks weird, We define a store object, register a watcher than we define another one and return that, at least we should go with two different variable names.",
+      "range": {
+        "startLine": 426,
+        "startChar": 2,
+        "endLine": 426,
+        "endChar": 8
+      },
+      "revId": "f6541553adff5b3f4ee34ef233901cbaf7ff68ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
