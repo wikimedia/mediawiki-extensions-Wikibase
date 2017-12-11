@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_b8d2915b",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-11T13:16:00Z",
+      "side": 1,
+      "message": "The order of the private properties up here is quite messy, and not in sync with anything below.",
+      "revId": "95d0aa500904955f308c439922c89a1994556bd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_98d50d4a",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-11T13:16:00Z",
+      "side": 1,
+      "message": "Does this need to be \"buffering\"? Isn\u0027t StatsdDataFactoryInterface enough here?",
+      "range": {
+        "startLine": 105,
+        "startChar": 9,
+        "endLine": 105,
+        "endChar": 36
+      },
+      "revId": "95d0aa500904955f308c439922c89a1994556bd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
