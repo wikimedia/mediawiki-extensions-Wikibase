@@ -378,6 +378,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_9b298739",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-11T15:59:15Z",
+      "side": 1,
+      "message": "I guess specing it here is a minimum.\nPossibly a service dealing with not-so-obvious cases (e.g. RevisionLookup dealing with forms) should make it also clear to their users. Clarifying this in doc and (equally important) clearly showing in such service\u0027s test would be something I could think of.",
+      "parentUuid": "eee3df47_5b537fe6",
+      "range": {
+        "startLine": 29,
+        "startChar": 242,
+        "endLine": 29,
+        "endChar": 528
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_b7580937",
         "filename": "docs/entity-storage.wiki",
         "patchSetId": 1
