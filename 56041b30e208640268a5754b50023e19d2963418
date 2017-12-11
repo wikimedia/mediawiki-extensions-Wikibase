@@ -402,6 +402,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_7b8f6326",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-12-11T16:22:39Z",
+      "side": 1,
+      "message": "(note after talking to Leszek) This document should make it more clear which parts are guarantees of the storage layer, and which parts are just information about current behavior (that is, a description of the binding of entities to pages as currently implemented)",
+      "parentUuid": "eee3df47_9b298739",
+      "range": {
+        "startLine": 29,
+        "startChar": 242,
+        "endLine": 29,
+        "endChar": 528
+      },
+      "revId": "56041b30e208640268a5754b50023e19d2963418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_b7580937",
         "filename": "docs/entity-storage.wiki",
         "patchSetId": 1
