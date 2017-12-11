@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_a4eee81c",
+        "filename": "repo/config/EntitySearchProfiles.php",
+        "patchSetId": 36
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-11T21:15:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_78d80980",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 14,
+        "endChar": 15
+      },
+      "revId": "6fc1fc4da9f91d7e5f70f31df0fa9ae915013c6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_d8cf95b3",
         "filename": "repo/config/EntitySearchProfiles.php",
         "patchSetId": 36
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-11T15:01:00Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 18,
+        "startChar": 13,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "6fc1fc4da9f91d7e5f70f31df0fa9ae915013c6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_84f12401",
+        "filename": "repo/config/EntitySearchProfiles.php",
+        "patchSetId": 36
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-11T21:15:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_d8cf95b3",
       "range": {
         "startLine": 18,
         "startChar": 13,
