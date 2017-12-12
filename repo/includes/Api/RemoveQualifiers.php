@@ -6,7 +6,6 @@ use ApiBase;
 use ApiMain;
 use ApiUsageException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -100,11 +99,8 @@ class RemoveQualifiers extends ApiBase {
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $guid, $qualifierHashes ) );
 
-		try {
-			$changeOps->apply( $entity, $summary );
-		} catch ( ChangeOpException $e ) {
-			$this->errorReporter->dieException( $e, 'failed-save' );
-		}
+		$this->modificationHelper->checkPermissions( $entity, $this->getUser(), $changeOps );
+		$this->modificationHelper->applyChangeOp( $changeOps, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
