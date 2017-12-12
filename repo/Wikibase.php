@@ -335,7 +335,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$errorReporter
+				$errorReporter,
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\CreateClaim(
@@ -386,7 +387,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\RemoveClaims(
@@ -416,7 +418,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\SetClaimValue(
@@ -446,7 +449,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\SetReference(
@@ -477,7 +481,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\RemoveReferences(
@@ -507,7 +512,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\SetClaim(
@@ -538,7 +544,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\RemoveQualifiers(
@@ -568,7 +575,8 @@ call_user_func( function() {
 				$wikibaseRepo->getSnakFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$wikibaseRepo->getEntityPermissionChecker()
 			);
 
 			return new Wikibase\Repo\Api\SetQualifier(

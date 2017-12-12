@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use DataValues\StringValue;
 use RuntimeException;
+use Status;
+use User;
 use ValueValidators\Result;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
@@ -19,6 +21,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\StatementModificationHelper;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -81,7 +84,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 			$wikibaseRepo->getSnakFactory(),
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getStatementGuidValidator(),
-			$apiHelperFactory->getErrorReporter( $apiMain )
+			$apiHelperFactory->getErrorReporter( $apiMain ),
+			$this->newPermissionChecker()
 		);
 
 		return new CreateClaim(
@@ -129,6 +133,32 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		$this->setExpectedException( RuntimeException::class, 'no-such-claim' );
 		$helper->getStatementFromEntity( 'unknown', $entity );
+	}
+
+	public function testCheckPermission_passesWhenPermissionGranted() {
+		$helper = $this->getNewInstance();
+
+		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp->method( 'getActions' )
+			->will( $this->returnValue( [ 'test' ] ) );
+
+		$user = $this->getTestUser()->getUser();
+		$helper->checkPermissions( new Item(), $user, $changeOp );
+
+		$this->assertTrue( true ); // dummy, we just have to get here
+	}
+
+	public function testCheckPermission_reportsErrorWhenPermissionDenied() {
+		$helper = $this->getNewInstance();
+
+		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp->method( 'getActions' )
+			->will( $this->returnValue( [ 'bad' ] ) );
+
+		$this->setExpectedException( RuntimeException::class, 'permissiondenied' );
+
+		$user = $this->getTestUser()->getUser();
+		$helper->checkPermissions( new Item(), $user, $changeOp );
 	}
 
 	public function testApplyChangeOp_validatesAndAppliesChangeOp() {
@@ -189,7 +219,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 			$this->getMockBuilder( SnakFactory::class )->disableOriginalConstructor()->getMock(),
 			$entityIdParser,
 			new StatementGuidValidator( $entityIdParser ),
-			$errorReporter ?: $this->newApiErrorReporter()
+			$errorReporter ?: $this->newApiErrorReporter(),
+			$this->newPermissionChecker()
 		);
 	}
 
@@ -211,7 +242,34 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 				throw new RuntimeException( $message );
 			} ) );
 
+		$errorReporter->method( 'dieStatus' )
+			->will( $this->returnCallback( function ( Status $status, $description ) {
+				throw new RuntimeException( $description . ': ' . $status->getWikiText() );
+			} ) );
+
 		return $errorReporter;
+	}
+
+	/**
+	 * @return EntityPermissionChecker
+	 */
+	private function newPermissionChecker() {
+		$permissionChecker = $this->getMockBuilder( EntityPermissionChecker::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$permissionChecker->method( 'getPermissionStatusForEntity' )
+			->will( $this->returnCallback(
+				function ( User $user, $action, EntityDocument $entity, $quick = '' ) {
+					if ( $action === 'bad' ) {
+						return Status::newFatal( 'bad' );
+					} else {
+						return Status::newGood();
+					}
+				}
+			) );
+
+		return $permissionChecker;
 	}
 
 }
