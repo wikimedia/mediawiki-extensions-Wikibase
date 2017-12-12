@@ -16,12 +16,12 @@ return [
 	// to do some work to validate them.
 	'default' => [
 		'any' => 0.001,
-		'lang-exact' => 2,
-		'lang-folded' => 1.8,
-		'lang-prefix' => 1.1,
-		'fallback-exact' => 1,
-		'fallback-folded' => 0.9,
-		'fallback-prefix' => 0.8,
-		'fallback-discount' => 0.1,
+                'lang-exact' => 2,
+                'lang-folded' => 1.6,
+                'lang-prefix' => 1.1,
+                'fallback-exact' => 1.9,
+                'fallback-folded' => 1.3,
+                'fallback-prefix' => 0.4,
+                'fallback-discount' => 0.9,
 	]
 ];
