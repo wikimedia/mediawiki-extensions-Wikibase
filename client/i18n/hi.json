@@ -6,7 +6,8 @@
 			"Siddhartha Ghai",
 			"बिप्लब आनन्द",
 			"NehalDaveND",
-			"Sfic"
+			"Sfic",
+			"Jayprakash12345"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस एक्सटेंशन के लिए क्लाइन्ट",
@@ -47,7 +48,7 @@
 	"wikibase-rc-hide-wikidata-show": "दिखाएँ",
 	"wikibase-rc-show-wikidata-pref": "विकिडेटा संपादनो को हाल के परिवर्तनों में दिखाएँ",
 	"wikibase-rc-wikibase-edit-letter": "डा",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} सम्पादन",
 	"wikibase-unconnectedpages-submit": "पृष्ठ दिखाएँ",
 	"wikibase-pageswithbadges-badge": "बैज:",
