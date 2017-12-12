@@ -2,24 +2,14 @@
 
 namespace Wikibase;
 
-use Deserializers\Deserializer;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
-use Diff\DiffOpFactory;
-use MWException;
 use RecentChange;
 use Revision;
-use RuntimeException;
-use Serializers\Serializer;
 use User;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes
@@ -278,23 +268,6 @@ class EntityChange extends DiffChange {
 
 		$info = array_diff_key( $info, array_flip( $skipKeys ) );
 
-		if ( isset( $info['diff'] ) ) {
-			$diff = $info['diff'];
-
-			if ( $diff instanceof DiffOp ) {
-				$info['diff'] = $diff->toArray( function ( $data ) {
-					if ( !( $data instanceof Statement ) ) {
-						return $data;
-					}
-
-					$array = $this->getStatementSerializer()->serialize( $data );
-					$array['_claimclass_'] = get_class( $data );
-
-					return $array;
-				} );
-			}
-		}
-
 		if ( isset( $info['compactDiff'] ) ) {
 			$diff = $info['compactDiff'];
 
@@ -303,54 +276,8 @@ class EntityChange extends DiffChange {
 			}
 		}
 
-		// Make sure we never serialize objects.
-		// This is a lot of overhead, so we only do it during testing.
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-			array_walk_recursive(
-				$info,
-				function ( $v ) {
-					if ( is_object( $v ) ) {
-						throw new MWException( "Refusing to serialize PHP object of type "
-							. get_class( $v ) );
-					}
-				}
-			);
-		}
-
 		//XXX: we could JSON_UNESCAPED_UNICODE here, perhaps.
 		return json_encode( $info );
-	}
-
-	/**
-	 * @throws RuntimeException
-	 * @return Serializer
-	 */
-	private function getStatementSerializer() {
-		// FIXME: the change row system needs to be reworked to either allow for sane injection
-		// or to avoid this kind of configuration dependent tasks.
-		if ( WikibaseSettings::isRepoEnabled() ) {
-			return WikibaseRepo::getDefaultInstance()->getStatementSerializer();
-		} elseif ( WikibaseSettings::isClientEnabled() ) {
-			throw new RuntimeException( 'Cannot serialize statements on the client' );
-		} else {
-			throw new RuntimeException( 'Need either client or repo loaded' );
-		}
-	}
-
-	/**
-	 * @throws RuntimeException
-	 * @return Deserializer
-	 */
-	private function getStatementDeserializer() {
-		// FIXME: the change row system needs to be reworked to either allow for sane injection
-		// or to avoid this kind of configuration dependent tasks.
-		if ( WikibaseSettings::isRepoEnabled() ) {
-			return WikibaseRepo::getDefaultInstance()->getInternalFormatStatementDeserializer();
-		} elseif ( WikibaseSettings::isClientEnabled() ) {
-			return WikibaseClient::getDefaultInstance()->getInternalFormatStatementDeserializer();
-		} else {
-			throw new RuntimeException( 'Need either client or repo loaded' );
-		}
 	}
 
 	/**
@@ -366,14 +293,6 @@ class EntityChange extends DiffChange {
 
 		$info = parent::unserializeInfo( $serialization );
 
-		if ( isset( $info['diff'] ) && is_array( $info['diff'] ) && $info['diff'] ) {
-			if ( $factory === null ) {
-				$factory = $this->newDiffOpFactory();
-			}
-
-			$info['diff'] = $factory->newFromArray( $info['diff'] );
-		}
-
 		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) &&
 			$info['compactDiff']
 		) {
@@ -385,26 +304,6 @@ class EntityChange extends DiffChange {
 		}
 
 		return $info;
-	}
-
-	/**
-	 * @return DiffOpFactory
-	 */
-	private function newDiffOpFactory() {
-		return new EntityTypeAwareDiffOpFactory( function ( array $data ) {
-			if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
-				$class = $data['_claimclass_'];
-
-				if ( $class === Statement::class
-					|| is_subclass_of( $class, Statement::class )
-				) {
-					unset( $data['_claimclass_'] );
-					return $this->getStatementDeserializer()->deserialize( $data );
-				}
-			}
-
-			return $data;
-		} );
 	}
 
 }
