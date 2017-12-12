@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "eee3df47_a13d352b",
+        "filename": "lib/includes/Store/EntityTitleLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-12T12:34:16Z",
+      "side": 1,
+      "message": "removing null seems not OK given what the description says above (implementation can either return null or the Title object). If there is no need to allow null, the desc should also be changed.",
+      "revId": "e79d66616b13713212ca980b4d034e030b27dc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_49a615a8",
         "filename": "lib/includes/Store/TypeDispatchingEntityRevisionLookup.php",
         "patchSetId": 5
@@ -13,6 +30,46 @@
       "writtenOn": "2017-12-11T19:42:49Z",
       "side": 1,
       "message": "huh?",
+      "revId": "e79d66616b13713212ca980b4d034e030b27dc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_c18839ef",
+        "filename": "repo/includes/Store/TypeDispatchingEntityTitleStoreLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-12T12:34:16Z",
+      "side": 1,
+      "message": "So is it intended to implement and dispatch to implementations of  EntityTitleStoreLookup or EntityTitleLookup?\n\nHere it is EntityTitleStoreLookup, while EntityTypeDefinitions mention entity-title-lookup-factory-callback (i.e. no store part) only, and also\nFormTitleLookup in I5cf53043d87a7fd78470a80b81de3db765a5bf46 is only a EntityTitleLookup (which mean form lookup is not going to work basically, given the check here on line 66).\n\nTo be honest, I don\u0027t know/remember anym ore while both interface exist separately, but whichever makes sense in this context should probably be used uniformly.",
+      "revId": "e79d66616b13713212ca980b4d034e030b27dc74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_a18b75e7",
+        "filename": "repo/includes/Store/TypeDispatchingEntityTitleStoreLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-12T12:34:16Z",
+      "side": 1,
+      "message": "evil grammar: did not create",
+      "range": {
+        "startLine": 67,
+        "startChar": 48,
+        "endLine": 67,
+        "endChar": 55
+      },
       "revId": "e79d66616b13713212ca980b4d034e030b27dc74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
