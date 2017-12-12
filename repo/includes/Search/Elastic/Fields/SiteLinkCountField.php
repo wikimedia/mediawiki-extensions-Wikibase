@@ -12,6 +12,12 @@ use Wikibase\DataModel\Entity\Item;
 class SiteLinkCountField extends WikibaseNumericField {
 
 	/**
+	 * Field name
+	 * @var string
+	 */
+	const NAME = 'sitelink_count';
+
+	/**
 	 * @see SearchIndexField::getFieldData
 	 *
 	 * @param EntityDocument $entity

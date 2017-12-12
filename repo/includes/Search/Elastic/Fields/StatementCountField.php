@@ -12,6 +12,11 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 class StatementCountField extends WikibaseNumericField {
 
 	/**
+	 * Field name
+	 */
+	const NAME = 'statement_count';
+
+	/**
 	 * @see SearchIndexField::getFieldData
 	 *
 	 * @param EntityDocument $entity

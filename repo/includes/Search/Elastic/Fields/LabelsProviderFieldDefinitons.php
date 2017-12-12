@@ -27,9 +27,9 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	 */
 	public function getFields() {
 		return [
-			'label_count' => new LabelCountField(),
-			'labels' => new LabelsField( $this->languageCodes ),
-			'labels_all' => new AllLabelsField(),
+			LabelCountField::NAME => new LabelCountField(),
+			LabelsField::NAME => new LabelsField( $this->languageCodes ),
+			AllLabelsField::NAME => new AllLabelsField(),
 		];
 	}
 

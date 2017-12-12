@@ -16,6 +16,11 @@ use Wikibase\DataModel\Term\LabelsProvider;
 class LabelsField extends TermIndexField {
 
 	/**
+	 * Field name
+	 */
+	const NAME = "labels";
+
+	/**
 	 * List of available languages
 	 * @var string[]
 	 */
@@ -27,7 +32,7 @@ class LabelsField extends TermIndexField {
 	 */
 	public function __construct( $languages ) {
 		$this->languages = $languages;
-		parent::__construct( "labels", \SearchIndexField::INDEX_TYPE_NESTED );
+		parent::__construct( self::NAME, \SearchIndexField::INDEX_TYPE_NESTED );
 	}
 
 	/**

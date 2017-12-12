@@ -32,7 +32,7 @@ class ItemFieldDefinitions implements FieldDefinitions {
 			$fields = array_merge( $fields, $definitions->getFields() );
 		}
 
-		$fields['sitelink_count'] = new SiteLinkCountField();
+		$fields[SiteLinkCountField::NAME] = new SiteLinkCountField();
 
 		return $fields;
 	}
