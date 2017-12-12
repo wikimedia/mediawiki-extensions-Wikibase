@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
 use Wikimedia\TestingAccessWrapper;
@@ -68,7 +69,10 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$instance->setField( 'type', $type );
-		$instance->setDiff( $diff );
+		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+			$diff
+		);
+		$instance->setCompactDiff( $aspects );
 
 		return $instance;
 	}
