@@ -101,11 +101,8 @@ class RemoveClaims extends ApiBase {
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $params ) );
 
-		try {
-			$changeOps->apply( $entity, $summary );
-		} catch ( ChangeOpException $e ) {
-			$this->errorReporter->dieException( $e, 'failed-save' );
-		}
+		$this->modificationHelper->checkPermissions( $entity, $this->getUser(), $changeOps );
+		$this->modificationHelper->applyChangeOp( $changeOps, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );

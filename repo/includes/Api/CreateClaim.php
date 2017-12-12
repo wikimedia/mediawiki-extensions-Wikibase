@@ -95,6 +95,7 @@ class CreateClaim extends ApiBase {
 		/* @var ChangeOpMainSnak $changeOp */
 		$changeOp = $this->statementChangeOpFactory->newSetMainSnakOp( '', $snak );
 
+		$this->modificationHelper->checkPermissions( $entity, $this->getUser(), $changeOp );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getStatementGuid() );
