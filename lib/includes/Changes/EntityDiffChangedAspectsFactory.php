@@ -77,7 +77,7 @@ class EntityDiffChangedAspectsFactory {
 	/**
 	 * @param Diff $siteLinkDiff
 	 *
-	 * @return string[]
+	 * @return array[]
 	 */
 	private function getChangedSiteLinks( Diff $siteLinkDiff ) {
 		$siteLinkChanges = [];

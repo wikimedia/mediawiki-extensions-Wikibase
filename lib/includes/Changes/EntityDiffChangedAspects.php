@@ -64,7 +64,8 @@ class EntityDiffChangedAspects implements Serializable {
 	 * @param string[] $labelChanges Language codes of the labels that changed (added, removed or updated)
 	 * @param string[] $descriptionChanges Language codes of the descriptions that changed (added, removed or updated)
 	 * @param string[] $statementChanges Property id serialization from the statements that changed (added, removed or updated)
-	 * @param bool[] $siteLinkChanges Map of site ids to bool: only the badge has changed (false) or the actual sitelink changed (true)
+	 * @param array[] $siteLinkChanges Map of global site identifiers to [ string|null $oldPageName,
+	 *  string|null $newPageName, bool $badgesChanged ]
 	 * @param bool $otherChanges Do we have changes that are not covered more specifically?
 	 */
 	public function __construct(
@@ -137,7 +138,7 @@ class EntityDiffChangedAspects implements Serializable {
 	/**
 	 * @see Serializable::serialize
 	 *
-	 * @return string
+	 * @return string JSON
 	 */
 	public function serialize() {
 		return json_encode( $this->toArray() );
@@ -146,7 +147,9 @@ class EntityDiffChangedAspects implements Serializable {
 	/**
 	 * @see Serializable::unserialize
 	 *
-	 * @return string
+	 * @param string $serialized JSON
+	 *
+	 * @throws MWException
 	 */
 	public function unserialize( $serialized ) {
 		$data = json_decode( $serialized );
@@ -163,7 +166,7 @@ class EntityDiffChangedAspects implements Serializable {
 	}
 
 	/**
-	 * @return array[]
+	 * @return array
 	 */
 	public function toArray() {
 		return [
