@@ -2,11 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
-use Diff\DiffOp\DiffOpAdd;
 use MWException;
 use RecentChange;
 use Revision;
-use RuntimeException;
 use stdClass;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikimedia\TestingAccessWrapper;
@@ -14,8 +12,6 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityChange;
 use Wikibase\ItemContent;
 use Wikibase\WikibaseSettings;
@@ -340,17 +336,10 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testDoesNotSerializeObjects() {
-		$info = [ 'array' => [ 'object' => new EntityChange() ] ];
+		$info = [ 'array' => [ 'object' => new stdClass() ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
 		$this->setExpectedException( MWException::class );
 		$change->getSerializedInfo();
-	}
-
-	public function testSerializeAndUnserializeInfo() {
-		$info = [ 'diff' => new DiffOpAdd( '' ) ];
-		$change = new EntityChange( [ 'info' => $info ] );
-		$change->setField( 'info', $change->getSerializedInfo() );
-		$this->assertEquals( $info, $change->getInfo() );
 	}
 
 	public function testSerializeAndUnserializeInfoCompactDiff() {
@@ -379,49 +368,6 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange( [ 'info' => $info ] );
 		$change->setField( 'info', $change->getSerializedInfo() );
 		$this->assertEquals( $info, $change->getInfo() );
-	}
-
-	public function testGivenStatement_serializeInfoSerializesStatement() {
-		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
-		$info = [ 'diff' => new DiffOpAdd( $statement ) ];
-		$expected = [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P1',
-				'hash' => 'any hash',
-			],
-			'type' => 'statement',
-			'rank' => 'normal',
-			'_claimclass_' => Statement::class,
-		];
-
-		$change = new EntityChange( [ 'info' => $info ] );
-
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->setExpectedException( RuntimeException::class );
-		}
-
-		$json = $change->getSerializedInfo();
-		$array = json_decode( $json, true );
-		$array['diff']['newvalue']['mainsnak']['hash'] = 'any hash';
-		$this->assertSame( $expected, $array['diff']['newvalue'] );
-	}
-
-	public function testGivenStatementSerialization_getInfoDeserializesStatement() {
-		$data = [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P1',
-			],
-			'type' => 'statement',
-			'_claimclass_' => Statement::class,
-		];
-		$json = json_encode( [ 'diff' => [ 'type' => 'add', 'newvalue' => $data ] ] );
-
-		$change = new EntityChange( [ 'info' => $json ] );
-		$info = $change->getInfo();
-		$statement = $info['diff']->getNewValue();
-		$this->assertInstanceOf( Statement::class, $statement );
 	}
 
 }
