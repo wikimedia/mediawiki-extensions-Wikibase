@@ -1883,7 +1883,6 @@ class WikibaseRepo {
 				new StaticContentLanguages( [
 					// Language codes that are not even well-formed BCP 47 language codes
 					'simple',
-					'tokipona',
 
 					// Deprecated language codes with an alternative in MediaWiki
 					'bat-smg', // => sgs

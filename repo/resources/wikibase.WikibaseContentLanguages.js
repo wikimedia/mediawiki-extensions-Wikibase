@@ -47,7 +47,7 @@
 					// We don't want to have language codes in the suggester that are not
 					// supported by the backend. The other way round is currently acceptable,
 					// but will be fixed in T124758.
-					return [ 'de-formal', 'nl-informal', 'tokipona' ].indexOf( code ) === -1;
+					return [ 'de-formal', 'nl-informal' ].indexOf( code ) === -1;
 				} );
 			}
 			return this._languageCodes;
