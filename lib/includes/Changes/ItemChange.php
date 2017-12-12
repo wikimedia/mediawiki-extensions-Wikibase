@@ -6,7 +6,6 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOpRemove;
-use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
@@ -20,28 +19,12 @@ class ItemChange extends EntityChange {
 	 * @return Diff
 	 */
 	public function getSiteLinkDiff() {
-		$info = $this->getInfo();
-		if ( !array_key_exists( 'diff', $info ) ) {
-			if ( !array_key_exists( 'compactDiff', $info ) ) {
-				$this->logWarning( $this );
-				return new Diff();
-			}
-
-			$aspects = $info['compactDiff'];
-			if ( !( $aspects instanceof EntityDiffChangedAspects ) ) {
-				$this->logWarning( $aspects );
-				return new Diff();
-			}
-			return $this->getDiffFromSiteLinkChanges( $aspects->getSiteLinkChanges() );
-
-		}
-		$diff = $this->getDiff();
-		if ( !( $diff instanceof ItemDiff ) ) {
-			$this->logWarning( $diff );
+		$aspects = $this->getCompactDiff();
+		if ( !( $aspects instanceof EntityDiffChangedAspects ) ) {
+			$this->logWarning( $aspects );
 			return new Diff();
-		} else {
-			return $diff->getSiteLinkDiff();
 		}
+		return $this->getDiffFromSiteLinkChanges( $aspects->getSiteLinkChanges() );
 	}
 
 	private function getDiffFromSiteLinkChanges( array $siteLinkChanges ) {

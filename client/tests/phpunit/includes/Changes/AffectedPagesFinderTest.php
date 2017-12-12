@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -218,32 +217,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
 
-		sort( $expected );
-		sort( $actual );
-		$this->assertEquals( $expected, $actual );
-	}
-
-	/**
-	 * @dataProvider getChangedAspectsProvider
-	 */
-	public function testGetChangedAspectsUsingEntityChangeAspects(
-		array $expected,
-		EntityChange $change,
-		$trackUsagesInAllLanguages = false
-	) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
-		$info = $change->getInfo();
-		if ( !array_key_exists( 'compactDiff', $info ) ) {
-			$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-				$change->getDiff()
-			);
-			$info = $change->getInfo();
-			$info['compactDiff'] = $aspects;
-			$change->setField( 'info', $info );
-
-		}
-
-		$actual = $referencedPagesFinder->getChangedAspects( $change );
 		sort( $expected );
 		sort( $actual );
 		$this->assertEquals( $expected, $actual );

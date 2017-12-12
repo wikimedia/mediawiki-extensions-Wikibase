@@ -346,13 +346,6 @@ class EntityChangeTest extends ChangeRowTest {
 		$change->getSerializedInfo();
 	}
 
-	public function testSerializeAndUnserializeInfo() {
-		$info = [ 'diff' => new DiffOpAdd( '' ) ];
-		$change = new EntityChange( [ 'info' => $info ] );
-		$change->setField( 'info', $change->getSerializedInfo() );
-		$this->assertEquals( $info, $change->getInfo() );
-	}
-
 	public function testSerializeAndUnserializeInfoCompactDiff() {
 		$aspects = new EntityDiffChangedAspects(
 			[ 'fa' ],
@@ -379,49 +372,6 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange( [ 'info' => $info ] );
 		$change->setField( 'info', $change->getSerializedInfo() );
 		$this->assertEquals( $info, $change->getInfo() );
-	}
-
-	public function testGivenStatement_serializeInfoSerializesStatement() {
-		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
-		$info = [ 'diff' => new DiffOpAdd( $statement ) ];
-		$expected = [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P1',
-				'hash' => 'any hash',
-			],
-			'type' => 'statement',
-			'rank' => 'normal',
-			'_claimclass_' => Statement::class,
-		];
-
-		$change = new EntityChange( [ 'info' => $info ] );
-
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->setExpectedException( RuntimeException::class );
-		}
-
-		$json = $change->getSerializedInfo();
-		$array = json_decode( $json, true );
-		$array['diff']['newvalue']['mainsnak']['hash'] = 'any hash';
-		$this->assertSame( $expected, $array['diff']['newvalue'] );
-	}
-
-	public function testGivenStatementSerialization_getInfoDeserializesStatement() {
-		$data = [
-			'mainsnak' => [
-				'snaktype' => 'novalue',
-				'property' => 'P1',
-			],
-			'type' => 'statement',
-			'_claimclass_' => Statement::class,
-		];
-		$json = json_encode( [ 'diff' => [ 'type' => 'add', 'newvalue' => $data ] ] );
-
-		$change = new EntityChange( [ 'info' => $json ] );
-		$info = $change->getInfo();
-		$statement = $info['diff']->getNewValue();
-		$this->assertInstanceOf( Statement::class, $statement );
 	}
 
 }
