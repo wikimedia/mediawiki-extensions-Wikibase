@@ -21,6 +21,11 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 class StatementsField extends SearchIndexFieldDefinition implements WikibaseIndexField {
 
 	/**
+	 * Field name
+	 */
+	const NAME = 'statement_keywords';
+
+	/**
 	 * String which separates property from value in statement representation.
 	 * Should be the string that is:
 	 * - Not part of property ID serialization
@@ -43,7 +48,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @param callable[] $searchIndexDataFormatters
 	 */
 	public function __construct( array $propertyIds, array $searchIndexDataFormatters ) {
-		parent::__construct( '', SearchIndexField::INDEX_TYPE_KEYWORD );
+		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_KEYWORD );
 
 		$this->propertyIds = array_flip( $propertyIds );
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;

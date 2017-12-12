@@ -12,6 +12,11 @@ use Wikibase\DataModel\Term\LabelsProvider;
 class LabelCountField extends WikibaseNumericField {
 
 	/**
+	 * Field name
+	 */
+	const NAME = 'label_count';
+
+	/**
 	 * @see SearchIndexField::getFieldData
 	 *
 	 * @param EntityDocument $entity
