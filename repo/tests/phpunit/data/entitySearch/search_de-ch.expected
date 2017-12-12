@@ -38,7 +38,7 @@
                                                             "labels.de-ch.near_match_folded": "Wien"
                                                         }
                                                     },
-                                                    "boost": 1.8
+                                                    "boost": 1.6
                                                 }
                                             },
                                             {
@@ -68,7 +68,7 @@
                                                             "labels.de.near_match": "Wien"
                                                         }
                                                     },
-                                                    "boost": 0.1
+                                                    "boost": 1.71
                                                 }
                                             },
                                             {
@@ -78,7 +78,7 @@
                                                             "labels.de.near_match_folded": "Wien"
                                                         }
                                                     },
-                                                    "boost": 0.09
+                                                    "boost": 1.17
                                                 }
                                             },
                                             {
@@ -88,7 +88,7 @@
                                                             "labels.de.prefix": "Wien"
                                                         }
                                                     },
-                                                    "boost": 0.08
+                                                    "boost": 0.36
                                                 }
                                             },
                                             {
@@ -98,7 +98,7 @@
                                                             "labels.en.near_match": "Wien"
                                                         }
                                                     },
-                                                    "boost": 0.01
+                                                    "boost": 1.539
                                                 }
                                             },
                                             {
@@ -108,7 +108,7 @@
                                                             "labels.en.near_match_folded": "Wien"
                                                         }
                                                     },
-                                                    "boost": 0.009
+                                                    "boost": 1.053
                                                 }
                                             },
                                             {
@@ -118,7 +118,7 @@
                                                             "labels.en.prefix": "Wien"
                                                         }
                                                     },
-                                                    "boost": 0.008
+                                                    "boost": 0.324
                                                 }
                                             }
                                         ]
