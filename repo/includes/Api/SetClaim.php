@@ -132,6 +132,7 @@ class SetClaim extends ApiBase {
 
 		$index = isset( $params['index'] ) ? $params['index'] : null;
 		$changeop = $this->statementChangeOpFactory->newSetStatementOp( $statement, $index );
+		$this->modificationHelper->checkPermissions( $entity, $this->getUser(), $changeop );
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );

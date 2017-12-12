@@ -129,6 +129,7 @@ class SetReference extends ApiBase {
 		$newReference = new Reference( $snakList );
 
 		$changeOp = $this->getChangeOp( $newReference );
+		$this->modificationHelper->checkPermissions( $entity, $this->getUser(), $changeOp );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );

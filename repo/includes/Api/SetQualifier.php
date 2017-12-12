@@ -102,6 +102,7 @@ class SetQualifier extends ApiBase {
 		}
 
 		$changeOp = $this->getChangeOp();
+		$this->modificationHelper->checkPermissions( $entity, $this->getUser(), $changeOp );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );

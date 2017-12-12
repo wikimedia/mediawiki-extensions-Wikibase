@@ -7,6 +7,8 @@ use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
 use ApiUsageException;
+use Status;
+use User;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
@@ -21,6 +23,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
@@ -46,23 +49,31 @@ class StatementModificationHelper {
 	private $guidValidator;
 
 	/**
-	 * @var ApiErrorReporter
-	 *
+	 * @var EntityPermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * @param SnakFactory $snakFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param StatementGuidValidator $guidValidator
 	 * @param ApiErrorReporter $errorReporter
+	 * @param EntityPermissionChecker $permissionChecker
+	 * @internal param ApiErrorReporter $
+	 *
 	 */
 	public function __construct(
 		SnakFactory $snakFactory,
 		EntityIdParser $entityIdParser,
 		StatementGuidValidator $guidValidator,
-		ApiErrorReporter $errorReporter
+		ApiErrorReporter $errorReporter,
+		EntityPermissionChecker $permissionChecker
 	) {
 		$this->snakFactory = $snakFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->guidValidator = $guidValidator;
 		$this->errorReporter = $errorReporter;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -162,6 +173,32 @@ class StatementModificationHelper {
 			$summary->setUserSummary( $params['summary'] );
 		}
 		return $summary;
+	}
+
+	/**
+	 * Check permission to apply the ChangeOp. If permission checks fail,
+	 * this calls ApiErrorReporter::dieStatus() which causes the an exception
+	 * that lets the API request fail.
+	 *
+	 * @param EntityDocument $entity the entity to check
+	 * @param User $user User doing the action
+	 * @param ChangeOp $changeOp
+	 */
+	public function checkPermissions( EntityDocument $entity, User $user, ChangeOp $changeOp ) {
+		$status = Status::newGood();
+
+		foreach ( $changeOp->getActions() as $perm ) {
+			$permStatus = $this->permissionChecker->getPermissionStatusForEntity(
+				$user,
+				$perm,
+				$entity
+			);
+			$status->merge( $permStatus );
+		}
+
+		if ( !$status->isOK() ) {
+			$this->errorReporter->dieStatus( $status, 'permissiondenied' );
+		}
 	}
 
 	/**
