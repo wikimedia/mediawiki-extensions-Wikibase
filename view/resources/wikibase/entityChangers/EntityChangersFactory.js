@@ -48,6 +48,10 @@
 		 */
 		_fireHook: null,
 
+		getRevisionStore: function () {
+			return this._revisionStore;
+		},
+
 		/**
 		 * @return {wikibase.entityChangers.AliasesChanger}
 		 */
