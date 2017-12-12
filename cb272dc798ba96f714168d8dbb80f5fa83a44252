@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_52f0798d",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-12T16:45:49Z",
+      "side": 1,
+      "message": "its\n\nOne could probably go on arguing whether the ID is \"the only identifying\" feature of the entity or not, but whatever. What\u0027s written here is probably good enough.",
+      "range": {
+        "startLine": 19,
+        "startChar": 88,
+        "endLine": 19,
+        "endChar": 92
+      },
+      "revId": "cb272dc798ba96f714168d8dbb80f5fa83a44252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_b21465a1",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-12T16:45:49Z",
+      "side": 1,
+      "message": "rather off topic but taking a chance to ask: is \"term\" something more than just a \"technical\" (read implementation) concept?",
+      "range": {
+        "startLine": 41,
+        "startChar": 501,
+        "endLine": 41,
+        "endChar": 506
+      },
+      "revId": "cb272dc798ba96f714168d8dbb80f5fa83a44252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
