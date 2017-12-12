@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_5254f954",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-12T16:55:47Z",
+      "side": 1,
+      "message": "Specific entity types can have more identifying features, but in general, the ID is the only one that is guaranteed to be unchangeable for all entity types. That\u0027s essentially the definition of an entity ID.",
+      "parentUuid": "eee3df47_52f0798d",
+      "range": {
+        "startLine": 19,
+        "startChar": 88,
+        "endLine": 19,
+        "endChar": 92
+      },
+      "revId": "cb272dc798ba96f714168d8dbb80f5fa83a44252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_b21465a1",
         "filename": "docs/entity-storage.wiki",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-12T16:45:49Z",
       "side": 1,
       "message": "rather off topic but taking a chance to ask: is \"term\" something more than just a \"technical\" (read implementation) concept?",
+      "range": {
+        "startLine": 41,
+        "startChar": 501,
+        "endLine": 41,
+        "endChar": 506
+      },
+      "revId": "cb272dc798ba96f714168d8dbb80f5fa83a44252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_72ee5d87",
+        "filename": "docs/entity-storage.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-12T16:55:47Z",
+      "side": 1,
+      "message": "Yes, I think it\u0027s almost exclusively a technical detail. I think we are barely ever exposing the word \"term\" to users. Users can see it in JavaScript file names and CSS classes.\n\nBasically: imagine we give the user a term, but we don\u0027t tell him if it\u0027s a label, description, alias, or whatnot. That term is entirely useless then.\n\nI wanted to avoid the word \"term\" here in this document, but the example really is the best entitytype-specific example we have, and it can not be shown without mentioning the word \"term\".",
+      "parentUuid": "eee3df47_b21465a1",
       "range": {
         "startLine": 41,
         "startChar": 501,
