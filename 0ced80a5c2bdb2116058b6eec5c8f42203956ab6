@@ -69,6 +69,30 @@
       "revId": "0ced80a5c2bdb2116058b6eec5c8f42203956ab6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_edfa8c3f",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-12T18:30:12Z",
+      "side": 1,
+      "message": "oops, I misunderstood it, actually static:: is better if we want to extend it and override only name but keep the ctor. So please ignore my previous  comment, it was wrong.",
+      "parentUuid": "eee3df47_edc9ec56",
+      "range": {
+        "startLine": 51,
+        "startChar": 23,
+        "endLine": 51,
+        "endChar": 29
+      },
+      "revId": "0ced80a5c2bdb2116058b6eec5c8f42203956ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
