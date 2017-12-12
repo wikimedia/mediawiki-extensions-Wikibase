@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_726bfdee",
+        "filename": "repo/includes/Search/Elastic/Fields/SiteLinkCountField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-12T17:02:58Z",
+      "side": 1,
+      "message": "This is almost entirely pointless. The type does not do anything. All IDEs can easily figure out this constant contains a string. The comment above does not tell much. A constant …Field::NAME is obviously the name of that field.",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 4
+      },
+      "revId": "0ced80a5c2bdb2116058b6eec5c8f42203956ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_32a33541",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-12T17:02:58Z",
+      "side": 1,
+      "message": "I find it best practice to stick to \"self\", and only use \"static\" if really necessary.",
+      "range": {
+        "startLine": 51,
+        "startChar": 23,
+        "endLine": 51,
+        "endChar": 29
+      },
+      "revId": "0ced80a5c2bdb2116058b6eec5c8f42203956ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
