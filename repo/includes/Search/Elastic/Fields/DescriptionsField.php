@@ -16,6 +16,11 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 class DescriptionsField extends TermIndexField {
 
 	/**
+	 * Field name
+	 */
+	const NAME = 'descriptions';
+
+	/**
 	 * List of available languages
 	 * @var string[]
 	 */
@@ -31,7 +36,7 @@ class DescriptionsField extends TermIndexField {
 	 */
 	public function __construct( array $languages, array $searchSettings ) {
 		$this->languages = $languages;
-		parent::__construct( "description", \SearchIndexField::INDEX_TYPE_NESTED );
+		parent::__construct( static::NAME, \SearchIndexField::INDEX_TYPE_NESTED );
 		$this->searchSettings = $searchSettings;
 	}
 

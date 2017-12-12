@@ -36,11 +36,11 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 */
 	public function getFields() {
 		return [
-			'statement_keywords' => new StatementsField(
+			StatementsField::NAME => new StatementsField(
 				$this->propertyIds,
 				$this->searchIndexDataFormatters
 			),
-			'statement_count' => new StatementCountField(),
+			StatementCountField::NAME => new StatementCountField(),
 		];
 	}
 

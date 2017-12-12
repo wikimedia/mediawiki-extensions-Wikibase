@@ -33,7 +33,7 @@ class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
 	 */
 	public function getFields() {
 		return [
-			'descriptions' => new DescriptionsField( $this->languageCodes, $this->searchSettings ),
+			DescriptionsField::NAME => new DescriptionsField( $this->languageCodes, $this->searchSettings ),
 		];
 	}
 
