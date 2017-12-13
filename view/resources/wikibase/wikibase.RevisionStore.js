@@ -16,6 +16,7 @@
 	var SELF = wb.RevisionStore = function WbRevisionStore( baseRev ) {
 		this._revisions = {
 			baseRevision: baseRev,
+			entityRevisions: {},
 			labelRevision: baseRev,
 			descriptionRevision: baseRev,
 			aliasesRevision: baseRev,
@@ -36,6 +37,22 @@
 		 * @return {number}
 		 */
 		getBaseRevision: function () {
+			return this._revisions.baseRevision;
+		},
+
+		/**
+		 * Returns the currently used revision number for any entity (either the same entity this
+		 * RevisionStore was constructed for, or an other entity sharing the same RevisionStore).
+		 * Falls back to the base revision this RevisionStore was constructed with.
+		 *
+		 * @param {string} entityId
+		 * @return {number}
+		 */
+		getEntityRevision: function ( entityId ) {
+			if ( Object.prototype.hasOwnProperty.call( this._revisions.entityRevisions, entityId ) ) {
+				return this._revisions.entityRevisions[ entityId ];
+			}
+
 			return this._revisions.baseRevision;
 		},
 
@@ -100,7 +117,27 @@
 				return this._revisions.claimRevisions[ statementGuid ];
 			}
 
+			var index = statementGuid.indexOf( '$' );
+			if ( index > 0 ) {
+				var entityId = statementGuid.slice( 0, index );
+				if ( Object.prototype.hasOwnProperty.call( this._revisions.entityRevisions, entityId ) ) {
+					return this._revisions.entityRevisions[ entityId ];
+				}
+			}
+
 			return this._revisions.baseRevision;
+		},
+
+		/**
+		 * Updates the currently used revision number for any entity (either the same entity this
+		 * RevisionStore was constructed for, or an other entity sharing the same RevisionStore).
+		 * Will be used as a fallback for getClaimRevision.
+		 *
+		 * @param {number} rev
+		 * @param {string} entityId
+		 */
+		setEntityRevision: function ( rev, entityId ) {
+			this._revisions.entityRevisions[ entityId ] = rev;
 		},
 
 		/**
