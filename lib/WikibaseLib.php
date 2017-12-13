@@ -53,7 +53,6 @@ if ( is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 }
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
-require_once __DIR__  . '/autoload.php';
 require_once __DIR__  . '/../data-access/autoload.php';
 // Nasty hack: some lib's tests rely on ItemContent class defined in Repo! Load it in client-only mode to have tests pass
 if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
@@ -64,7 +63,10 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+	global $wgAutoloadNamespaces, $wgAutoloadClasses, $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+
+	$wgAutoloadNamespaces['Wikibase\\Lib\\'] = 'lib/includes';
+	$wgAutoloadClasses['Wikibase\\WikibaseSettings'] = __DIR__ . '/includes/WikibaseSettings.php';
 
 	$wgExtensionCredits['wikibase'][] = [
 		'path' => __DIR__,
