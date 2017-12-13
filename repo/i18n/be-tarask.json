@@ -183,6 +183,7 @@
 	"wikibase-newitem-page": "Назва першай злучанай старонкі",
 	"wikibase-newitem-no-external-page": "Старонка «$2» ня знойдзеная на сайце «$1».",
 	"wikibase-newitem-not-recognized-siteid": "Пададзены ідэнтыфікатар сайта не распазнаны.",
+	"wikibase-newitem-insufficient-data": "Вам трэба запоўніць прынамсі назву, ці апісаньне, ці псэўданімы.",
 	"wikibase-newentity-language": "Мова:",
 	"wikibase-newentity-label": "Метка:",
 	"wikibase-newentity-description": "Апісаньне:",
