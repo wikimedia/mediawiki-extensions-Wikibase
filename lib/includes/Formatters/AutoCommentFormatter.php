@@ -100,7 +100,7 @@ class AutoCommentFormatter {
 		}
 
 		// render the autocomment
-		$auto = $msg->params( $args )->parse();
+		$auto = $msg->plaintextParams( $args )->parse();
 		return $auto;
 	}
 
