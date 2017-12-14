@@ -2,9 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -35,16 +32,6 @@ abstract class ModifyTerm extends ModifyEntity {
 		$summary->setLanguage( $params['language'] );
 
 		return $summary;
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string[] A list of permissions
-	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return [ EntityPermissionChecker::ACTION_EDIT_TERMS ];
 	}
 
 	/**
