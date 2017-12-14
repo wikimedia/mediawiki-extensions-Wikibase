@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_85110bb4",
+        "filename": "repo/includes/Api/StatementModificationHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-14T17:22:16Z",
+      "side": 1,
+      "message": "Whoops.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 38
+      },
+      "revId": "a9730953dc069cea5eebf6a7d7c204f802853660",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
