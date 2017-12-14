@@ -317,9 +317,11 @@
 			// change their help messages anywhere in their lifecycle.
 			function addTooltip( helpMessage ) {
 				if ( self._$tooltipAnchor ) {
-					self._$tooltipAnchor.wbtooltip( {
-						content: helpMessage
-					} );
+					if ( helpMessage ) {
+						self._$tooltipAnchor.wbtooltip( { content: helpMessage } );
+					} else {
+						self._$tooltipAnchor.hide();
+					}
 				}
 			}
 
