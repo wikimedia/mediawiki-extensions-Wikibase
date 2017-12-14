@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_4501c370",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-14T17:07:53Z",
+      "side": 0,
+      "message": "I think this is unrelated to what this patch aims to do, and must stay for now.",
+      "revId": "6bbe317e0e76774f58e73c536e73b61a9a037612",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_05d97b26",
+        "filename": "lib/tests/phpunit/Changes/EntityChangeTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-14T17:07:53Z",
+      "side": 0,
+      "message": "I think this test should not be removed, but just use an other object. Just use a new \\stdClass() object here.",
+      "range": {
+        "startLine": 343,
+        "startChar": 41,
+        "endLine": 343,
+        "endChar": 53
+      },
+      "revId": "6bbe317e0e76774f58e73c536e73b61a9a037612",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

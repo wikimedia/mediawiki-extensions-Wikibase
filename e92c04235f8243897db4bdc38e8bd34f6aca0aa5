@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_a5c9af57",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-14T17:07:53Z",
+      "side": 1,
+      "message": "Reminds me: can I get a review of Id17259c, maybe?",
+      "revId": "e92c04235f8243897db4bdc38e8bd34f6aca0aa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
