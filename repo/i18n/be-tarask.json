@@ -195,6 +195,7 @@
 	"wikibase-setlabel-submit": "Вызначыць метку",
 	"special-setdescription": "Даданьне апісаньняў",
 	"wikibase-setdescription-introfull": "Вы задаеце апісаньне для [[$1]] на мове $2.",
+	"wikibase-setdescription-intro": "Гэтая форма дазваляе вам вызначыць апісаньне элемэнту. Вам трэба падаць ідэнтыфікатар элемэнту (напрыклад, Q23), код мовы (напрыклад, «en») і само апісаньне.",
 	"wikibase-setdescription-label": "Апісаньне:",
 	"wikibase-setdescription-submit": "Дадаць апісаньне",
 	"special-setaliases": "Вызначэньне псэўданімаў",

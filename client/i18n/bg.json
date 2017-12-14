@@ -27,8 +27,8 @@
 	"wikibase-editlinkstitle": "Редактиране на междуезиковите препратки",
 	"wikibase-linkitem-addlinks": "Добавяне на препратки",
 	"wikibase-linkitem-failure": "При опита за свързване с дадената страница възникна неизвестна грешка.",
-	"wikibase-linkitem-title": "Свържи със страница",
-	"wikibase-linkitem-linkpage": "Свържи със страница",
+	"wikibase-linkitem-title": "Свързване със страница",
+	"wikibase-linkitem-linkpage": "Свързване със страница",
 	"wikibase-linkitem-selectlink": "Изберете сайта и страницата от него, която искате да свърже с тази.",
 	"wikibase-linkitem-input-site": "Език:",
 	"wikibase-linkitem-input-page": "Страница:",
@@ -61,9 +61,9 @@
 	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} обекти, използвани на страницата:",
-	"wikibase-pageinfo-entity-usage-L": "етикет: $1",
-	"wikibase-pageinfo-entity-usage-T": "заглавие",
-	"wikibase-pageinfo-entity-usage-O": "други (изявления)",
+	"wikibase-pageinfo-entity-usage-L": "Етикет: $1",
+	"wikibase-pageinfo-entity-usage-T": "Заглавие",
+	"wikibase-pageinfo-entity-usage-O": "Други (изявления)",
 	"wikibase-otherprojects": "В други проекти",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Свързване|Свързвания}} с {{WBREPONAME}}"
 }
