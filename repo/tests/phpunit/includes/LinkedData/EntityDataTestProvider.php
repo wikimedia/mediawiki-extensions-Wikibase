@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\LinkedData;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -27,7 +29,12 @@ class EntityDataTestProvider {
 
 		$itemRev = new EntityRevision( $item, 4242, '20131211100908' );
 
-		return [ $itemRev ];
+		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
+		$property->setLabel( 'en', 'Propertyyy' );
+
+		$propertyRev = new EntityRevision( $property, 4243, '20141211100908' );
+
+		return [ $itemRev, $propertyRev ];
 	}
 
 	/**
@@ -503,6 +510,14 @@ class EntityDataTestProvider {
 			[ // headers
 				'Location' => '!/Q42\.json$!'
 			]
+		];
+
+		$cases[] = [ // #43: disabled rdf export for properties
+			'',      // subpage
+			[ 'id' => 'P42', 'format' => 'rdf' ], // parameters
+			[], // headers
+			'!wikibase-entitydata-rdf-disabled!', // output regex
+			400,       // http code
 		];
 
 		return $cases;
