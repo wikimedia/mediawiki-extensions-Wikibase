@@ -14,7 +14,6 @@ use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -152,11 +151,12 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
-			new ItemIdParser(),
+			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,
 			$service,
 			$entityDataFormatProvider,
+			[ 'property' ],
 			'json',
 			1800,
 			false,

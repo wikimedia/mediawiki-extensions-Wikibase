@@ -124,6 +124,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$mockRepository,
 			$serializationService,
 			$entityDataFormatProvider,
+			[],
 			$defaultFormat,
 			0,
 			$useSquid,
