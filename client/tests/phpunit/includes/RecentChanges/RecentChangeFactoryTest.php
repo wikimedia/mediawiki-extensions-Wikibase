@@ -364,7 +364,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$linksDewikiDummy = [
 			'links' => [
-				'dewiki' => [ 'name' => 'Dummy' ]
+				'dewiki' => [ 'name' => 'Duummy' ]
 			]
 		];
 

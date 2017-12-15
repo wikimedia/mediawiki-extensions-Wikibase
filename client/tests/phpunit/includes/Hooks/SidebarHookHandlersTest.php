@@ -202,7 +202,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$languageLinkTitle = Title::makeTitle( NS_MAIN, 'Test', '', 'en' );
 
-		$dummy = Title::makeTitle( NS_MAIN, 'Dummy' );
+		$dummy = Title::makeTitle( NS_MAIN, 'Duummy' );
 
 		$context = new RequestContext();
 		$output = new OutputPage( $context );

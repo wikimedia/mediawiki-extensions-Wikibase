@@ -74,7 +74,7 @@ final class TestChanges {
 			// -----
 
 			$new = new Item( new ItemId( 'Q100' ) );
-			$new->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Dummy' );
+			$new->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Duummy' );
 			$changes['set-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
@@ -86,13 +86,13 @@ final class TestChanges {
 			$new = new Item( new ItemId( 'Q100' ) );
 
 			$new->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Emmy' );
-			$new->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Dummy' );
+			$new->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Duummy' );
 
 			$changes['change-sitelink-order'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
-			$new->getSiteLinkList()->setNewSiteLink( 'dewiki', 'Dummy2' );
+			$new->getSiteLinkList()->setNewSiteLink( 'dewiki', 'Duummy2' );
 			$changes['change-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
