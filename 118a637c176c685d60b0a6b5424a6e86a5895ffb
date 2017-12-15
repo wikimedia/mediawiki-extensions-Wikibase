@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_77b638f7",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-15T14:30:44Z",
+      "side": 1,
+      "message": "But title usages are still tracked when formatValue() is used (which corresponds to the {{#statements}} parser function). That\u0027s why I added this as a replacement for the …#T assertion I had to remove above.",
+      "range": {
+        "startLine": 335,
+        "startChar": 29,
+        "endLine": 335,
+        "endChar": 38
+      },
+      "revId": "118a637c176c685d60b0a6b5424a6e86a5895ffb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
