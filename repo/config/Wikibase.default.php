@@ -267,4 +267,7 @@ return [
 	// List of properties to be indexed
 	'searchIndexProperties' => [],
 
+	// List of entity types that rdf export is disabled
+	'disabledRdfExportEntityTypes' => [],
+
 ];
