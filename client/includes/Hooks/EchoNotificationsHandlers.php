@@ -210,6 +210,7 @@ class EchoNotificationsHandlers {
 			}
 
 			$old = $siteLinkDiffOp->getOldValue();
+			var_dump( $new, $old );
 			$oldTitle = Title::newFromText( $old );
 
 			// propably means that there was a page move
