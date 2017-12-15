@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_17c52c64",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-15T14:30:44Z",
+      "side": 1,
+      "message": "This changed because of I8375361 (T181813). Title usages are not tracked any more when the renderSnak() function is used (this corresponds to the {{#property}} parser function).",
+      "range": {
+        "startLine": 81,
+        "startChar": 27,
+        "endLine": 81,
+        "endChar": 36
+      },
+      "revId": "33fdb49edcb1ff614e975b4040221768c6217398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
