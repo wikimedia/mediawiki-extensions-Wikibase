@@ -151,6 +151,7 @@ class EchoNotificationsHandlers {
 		}
 
 		$siteLinkDiff = $change->getSiteLinkDiff();
+		var_dump( $siteLinkDiff );
 		if ( $siteLinkDiff->isEmpty() ) {
 			return false;
 		}
