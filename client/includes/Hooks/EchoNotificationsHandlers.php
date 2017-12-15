@@ -159,6 +159,8 @@ class EchoNotificationsHandlers {
 		if ( !isset( $siteLinkDiff[$siteId] ) || !isset( $siteLinkDiff[$siteId]['name'] ) ) {
 			return false;
 		}
+		var_dump( $siteLinkDiff );
+		var_dump( $this->siteId );
 
 		$siteLinkDiffOp = $siteLinkDiff[$siteId]['name'];
 
