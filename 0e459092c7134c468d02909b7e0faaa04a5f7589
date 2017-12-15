@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_541fb25d",
+        "filename": "lib/includes/Store/TypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-15T09:59:52Z",
+      "side": 1,
+      "message": "maybe it might make some things cleaner if callbacks and the actual objects created by those callbacks were stored separately, and not on replacing another.\n\nI don\u0027t think it is something critical or so. Just mentioning it here for thought.",
+      "revId": "0e459092c7134c468d02909b7e0faaa04a5f7589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_f42ec687",
+        "filename": "lib/includes/Store/TypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-15T09:59:52Z",
+      "side": 1,
+      "message": "not a huge deal maybe, but this path is not tested.\nOr actually it is quite a critical functionality isn\u0027t it?",
+      "revId": "0e459092c7134c468d02909b7e0faaa04a5f7589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9435bad8",
+        "filename": "lib/tests/phpunit/Store/TypeDispatchingEntityTitleStoreLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-15T09:59:52Z",
+      "side": 1,
+      "message": "class name should TypeDispatchingEntityRevisionLookupTest, no?",
+      "revId": "0e459092c7134c468d02909b7e0faaa04a5f7589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
