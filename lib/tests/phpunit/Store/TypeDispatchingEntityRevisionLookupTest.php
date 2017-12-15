@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -17,6 +18,23 @@ use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityRevisionLookupTest extends MediaWikiTestCase {
+
+	/**
+	 * @covers TypeDispatchingEntityRevisionLookup::getLookup
+	 */
+	public function testGivenInvalidCallback_getEntityRevisionFails() {
+		$lookup = new TypeDispatchingEntityRevisionLookup(
+			[
+				'property' => function ( EntityRevisionLookup $defaultService ) {
+					return new \stdClass();
+				},
+			],
+			$this->newDefaultService( 'getEntityRevision' )
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$lookup->getEntityRevision( new PropertyId( 'P1' ) );
+	}
 
 	public function testGivenUnknownEntityType_getEntityRevisionForwardsToDefaultService() {
 		$id = new PropertyId( 'P1' );

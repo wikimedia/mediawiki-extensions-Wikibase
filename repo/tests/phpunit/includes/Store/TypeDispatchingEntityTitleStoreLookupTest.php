@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -17,6 +18,23 @@ use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityTitleStoreLookupTest extends MediaWikiTestCase {
+
+	/**
+	 * @covers TypeDispatchingEntityTitleStoreLookup::getLookup
+	 */
+	public function testGivenInvalidCallback_getTitleForIdFails() {
+		$lookup = new TypeDispatchingEntityTitleStoreLookup(
+			[
+				'property' => function ( EntityTitleStoreLookup $defaultService ) {
+					return new \stdClass();
+				},
+			],
+			$this->newDefaultService()
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$lookup->getTitleForId( new PropertyId( 'P1' ) );
+	}
 
 	public function testGivenUnknownEntityType_getTitleForIdForwardsToDefaultService() {
 		$id = new PropertyId( 'P1' );
