@@ -92,7 +92,7 @@ final class TestChanges {
 			$old = $new->copy();
 
 			// -----
-			$new->getSiteLinkList()->setNewSiteLink( 'dewiki', 'Dummy2' );
+			$new->getSiteLinkList()->setNewSiteLink( 'dewiki', 'Duummy2' );
 			$changes['change-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
