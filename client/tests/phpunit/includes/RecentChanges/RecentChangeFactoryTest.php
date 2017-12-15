@@ -364,7 +364,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$linksDewikiDummy = [
 			'links' => [
-				'dewiki' => [ 'name' => 'Dummy' ]
+				'dewiki' => [ 'name' => 'Duummy' ]
 			]
 		];
 
@@ -385,7 +385,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				]
 			],
 			'sitelink update' => [
-				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
+				'(wikibase-comment-sitelink-change: dewiki:Duummy, dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
 				[ 'user_id' => 1 ],
@@ -403,7 +403,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				]
 			],
 			'sitelink removed' => [
-				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
+				'(wikibase-comment-sitelink-remove: dewiki:Duummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
 				[ 'user_id' => 1 ],

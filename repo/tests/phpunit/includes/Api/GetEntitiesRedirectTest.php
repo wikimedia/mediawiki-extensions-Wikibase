@@ -36,7 +36,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 	}
 
 	private function createEntityRedirect( EntityId $target ) {
-		$id = $this->createEntity( 'Dummy' );
+		$id = $this->createEntity( 'Duummy' );
 
 		$redirect = new EntityRedirect( $id, $target );
 
