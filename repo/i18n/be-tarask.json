@@ -199,6 +199,7 @@
 	"wikibase-setdescription-label": "Апісаньне:",
 	"wikibase-setdescription-submit": "Дадаць апісаньне",
 	"special-setaliases": "Вызначэньне псэўданімаў",
+	"wikibase-setaliases-introfull": "Вы вызначаеце псэўданімы мовай $2 для [[$1]]. Асобныя псэўданімы падзяляюцца вэртыкальнай рысай (<code>|</code>).",
 	"wikibase-setaliases-label": "Псэўданімы:",
 	"wikibase-setaliases-submit": "Вызначыць псэўданімы:",
 	"wikibase-setlabeldescriptionaliases-label-label": "Метка:",

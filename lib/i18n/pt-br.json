@@ -11,7 +11,8 @@
 			"Dianakc",
 			"Felipe L. Ewald",
 			"!Silent",
-			"O andarilho"
+			"O andarilho",
+			"Eduardo Addad de Oliveira"
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
@@ -96,6 +97,8 @@
 	"datatypes-type-tabular-data": "Dados tabulares",
 	"datatypes-type-external-id": "Identificador externo",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-calendar-gregorian": "Gregoriano",
+	"wikibase-time-calendar-julian": "Juliano",
 	"wikibase-time-precision-Gannum": "$1 biliões de anos CE",
 	"wikibase-time-precision-Mannum": "$1 milhões de anos CE",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 ano|$1 anos}} CE",
