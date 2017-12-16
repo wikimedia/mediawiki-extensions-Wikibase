@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_abf4d5ca",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "IMO this name is OK. \n\nPS note that this flag is used by the Lua access to entities - other access such as parser functions of {{#property}} and {{#statement}} may behave differently.\n\nI believe this is right solution for now as we may want to evaluate and test the settings benefits in large deployment of WMF wikis. (it isn\u0027t trivial as ot may affect the DB size and updates).",
+      "parentUuid": "eee3df47_35216cf7",
+      "range": {
+        "startLine": 87,
+        "startChar": 16,
+        "endLine": 87,
+        "endChar": 39
+      },
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_f56d442e",
         "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2017-12-11T13:54:49Z",
       "side": 1,
       "message": "\"an all\" looks odd at glance.\n\nMaybe:\n... or just track the All (X) usage?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_0bfea1aa",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_f56d442e",
       "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_ebfa5db5",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_15738815",
+      "range": {
+        "startLine": 167,
+        "startChar": 36,
+        "endLine": 167,
+        "endChar": 38
+      },
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_35596c5e",
         "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 3
@@ -76,6 +142,24 @@
       "writtenOn": "2017-12-11T13:54:49Z",
       "side": 1,
       "message": "do we bother exposing all settings or do we only want to expose only the single one (the \"fine grained tracking\" one)?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_cb1e7910",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "this is consistent with similar function in Scribunto/Scribunto_LuaWikibaseLibrary.php  used for other setting (allowArbitraryDataAccess). may be useful for easy access to other settings in the future",
+      "parentUuid": "eee3df47_35596c5e",
       "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_0b1501e9",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "I was indeed a bit lazy here but I think it is readable. if you think it is better to split it, go for it :)",
+      "parentUuid": "eee3df47_55fa3040",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_98022dbd",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
         "patchSetId": 3
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_eb11bdfd",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "Done (PS5 by Thiemo)",
+      "parentUuid": "eee3df47_98022dbd",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_78dbe954",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
         "patchSetId": 3
@@ -127,6 +247,24 @@
       "writtenOn": "2017-12-11T13:54:49Z",
       "side": 1,
       "message": "So I don\u0027t understand what this test is actually testing, given $fineGrainedTracking was added. The language fallback behaviour is not changed regardless what is the value of the setting flag, right? Maybe we want to test the behaviour controlled by the flag in the separate test method(s)?",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_6be48d0a",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2017-12-16T10:57:22Z",
+      "side": 1,
+      "message": "enabling fine grained tracking would break the current test (no use of X). The aim of the test is to verify backward compatibility (when fine grained tracking is disabled) or the new behavior (with no X).\n\ndoes it make sense, or is it a kind of \"integration\" test mixing 2 unrelated features and should be break to separate tests? (if so I guess we would like to replace the assertSame with assertArrayHasKey and verify only T and L aspects to be independent of the fine grained settings)",
+      "parentUuid": "eee3df47_78dbe954",
       "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
