@@ -282,8 +282,19 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
-	public function testRenderSnak_languageFallback() {
+	public function fineGrainedLuaTrackingProvider() {
+		return [
+			[ true, [ 'Q885588#L' ] ],
+			[ false, [ 'Q32488#X', 'Q885588#L' ] ],
+		];
+	}
+
+	/**
+	 * @dataProvider fineGrainedLuaTrackingProvider
+	 */
+	public function testRenderSnak_languageFallback( $fineGrainedTracking, $expectedUsage ) {
 		$this->setAllowDataAccessInUserLanguage( true );
+		$this->setFineGrainedLuaTracking( $fineGrainedTracking );
 		$cacheSplit = false;
 		$lang = Language::factory( 'ku' );
 
@@ -298,7 +309,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		// All languages in the fallback chain from 'ku' to 'ku-latn' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertSame( [ 'Q32488#X', 'Q885588#L' ], array_keys( $usage ) );
+		$this->assertSame( $expectedUsage, array_keys( $usage ) );
 
 		$this->assertSame( true, $cacheSplit );
 	}
@@ -318,6 +329,10 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			[ '<span>Q885588</span>' ],
 			$luaWikibaseLibrary->formatValue( $snak )
 		);
+
+		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q885588#L.de', $usage );
+		$this->assertArrayHasKey( 'Q885588#T', $usage );
 	}
 
 	/**
@@ -495,6 +510,14 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	private function setAllowDataAccessInUserLanguage( $value ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
+	}
+
+	/**
+	 * @param bool $value
+	 */
+	private function setFineGrainedLuaTracking( $value ) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'fineGrainedLuaTracking', $value );
 	}
 
 }
