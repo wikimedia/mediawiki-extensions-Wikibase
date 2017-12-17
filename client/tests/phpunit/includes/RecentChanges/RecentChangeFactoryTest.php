@@ -3,9 +3,12 @@
 namespace Wikibase\Client\Tests\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Diff\ItemDiffer;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
 use Wikimedia\TestingAccessWrapper;
@@ -68,7 +71,10 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$instance->setField( 'type', $type );
-		$instance->setDiff( $diff );
+		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
+			$diff
+		);
+		$instance->setCompactDiff( $aspects );
 
 		return $instance;
 	}
@@ -134,8 +140,15 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $emptyDiff, $fields );
 		$change->setMetadata( $metadata );
 
-		$diffOp = new Diff( [ 'testwiki' => new DiffOpChange( 'RecentChangeFactoryTest', 'Bar' ) ] );
-		$siteLinkDiff = new ItemDiff( [ 'links' => $diffOp ] );
+		$itemDiffer = new ItemDiffer();
+		$emptyItem = new Item( new ItemId( 'Q17' ), null, null, null );
+		$oldItem = $emptyItem->copy();
+		$oldItem->addSiteLink( new SiteLink( 'testwiki', 'RecentChangeFactoryTest' ) );
+
+		$newItem = $emptyItem->copy();
+		$newItem->addSiteLink( new SiteLink( 'testwiki', 'Bar' ) );
+
+		$siteLinkDiff = $itemDiffer->diffItems( $oldItem, $newItem );
 		$siteLinkChange = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
 		$siteLinkChange->setMetadata( $metadata );
 

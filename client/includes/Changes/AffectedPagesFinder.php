@@ -16,7 +16,6 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -120,16 +119,7 @@ class AffectedPagesFinder {
 	 */
 	public function getChangedAspects( EntityChange $change ) {
 		$aspects = [];
-
-		$info = $change->getInfo();
-		// We might unserialize old EntityChange which doesn't have getCompactDiff method
-		if ( array_key_exists( 'compactDiff', $info ) ) {
-			$diffAspects = $info['compactDiff'];
-		} else {
-			$diffAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-				$change->getDiff()
-			);
-		}
+		$diffAspects = $change->getCompactDiff();
 
 		if ( $diffAspects->getSiteLinkChanges() !== [] ) {
 			$sitelinkChanges = $diffAspects->getSiteLinkChanges();
@@ -239,15 +229,7 @@ class AffectedPagesFinder {
 		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
 
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
-			$info = $change->getInfo();
-			// We might unserialize old EntityChange which doesn't have getCompactDiff method
-			if ( array_key_exists( 'compactDiff', $info ) ) {
-				$diffChangedAspects = $info['compactDiff'];
-			} else {
-				$diffChangedAspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-					$change->getDiff()
-				);
-			}
+			$diffChangedAspects = $change->getCompactDiff();
 			$namesFromDiff = $this->getPagesReferencedInDiff(
 				$diffChangedAspects->getSiteLinkChanges()
 			);
