@@ -8,6 +8,7 @@ use Exception;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 
 /**
  * @covers Wikibase\ItemChange
