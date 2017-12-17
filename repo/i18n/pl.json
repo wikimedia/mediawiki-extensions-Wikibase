@@ -36,7 +36,7 @@
 	"wikibase-remove-inprogress": "Usuwanie...",
 	"wikibase-statementlistview-add": "dodaj wartość",
 	"wikibase-statementlistview-add-tooltip": "Dodaj nową wartość",
-	"wikibase-statementgrouplistview-add": "dodaj",
+	"wikibase-statementgrouplistview-add": "dodaj deklarację",
 	"wikibase-statementgrouplistview-add-tooltip": "Dodaj nową deklarację",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "W innych językach",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfiguruj",

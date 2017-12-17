@@ -43,6 +43,7 @@
 	"wikibase-pageinfo-entity-id": "د {{WBREPONAME}} توکي پېژند",
 	"wikibase-pageinfo-entity-id-none": "هېڅ",
 	"wikibase-pageinfo-entity-usage": "په دې پاڼه کې د ويکيډاټا (Wikidata) استعمال",
+	"wikibase-pageinfo-entity-usage-D": "څرگندونه: $1",
 	"wikibase-pageinfo-entity-usage-T": "سرليک",
 	"wikibase-otherprojects": "په نورو پروژو کې",
 	"wikibase-otherprojects-beta-message": "د نورو پروژو څنگپټه",
