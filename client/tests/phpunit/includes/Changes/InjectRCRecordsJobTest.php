@@ -13,11 +13,10 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
@@ -219,7 +218,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 			'object_id' => $itemId->getSerialization(),
 		] );
 
-		$diff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( new ItemDiff() );
+		$diff = EntityDiffChangedAspects::newEmpty();
 
 		return [
 			'mock change' => [

@@ -8,7 +8,7 @@ use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
 use Wikimedia\TestingAccessWrapper;
@@ -71,10 +71,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$instance->setField( 'type', $type );
-		$aspects = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff(
-			$diff
-		);
-		$instance->setCompactDiff( $aspects );
+		$instance->setCompactDiff( EntityDiffChangedAspects::newFromEntityDiff( $diff ) );
 
 		return $instance;
 	}

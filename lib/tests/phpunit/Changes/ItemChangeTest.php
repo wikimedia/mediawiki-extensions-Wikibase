@@ -8,7 +8,7 @@ use Exception;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
  * @covers Wikibase\ItemChange
@@ -72,9 +72,7 @@ class ItemChangeTest extends EntityChangeTest {
 			// Make sure we can deal with that.
 
 			$change = new ItemChange( [ 'type' => 'test' ] );
-			$change->setCompactDiff(
-				( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( new Diff() )
-			);
+			$change->setCompactDiff( EntityDiffChangedAspects::newEmpty() );
 
 			$cases['plain-diff'] = [ $change ];
 
@@ -95,9 +93,7 @@ class ItemChangeTest extends EntityChangeTest {
 
 			//NOTE: ItemChange's constructor may or may not already fix the bad diff.
 			$change = new ItemChange( [ 'type' => 'test' ] );
-			$change->setCompactDiff(
-				( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff )
-			);
+			$change->setCompactDiff( EntityDiffChangedAspects::newFromEntityDiff( $diff ) );
 
 			$cases['atomic-sitelink-diff'] = [ $change ];
 		} finally {
