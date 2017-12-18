@@ -69,6 +69,24 @@ class EntityAccessor {
 	 */
 	private $termsLanguages;
 
+	/**
+	 * @var bool
+	 */
+	private $fineGrainedLuaTracking;
+
+	/**
+	 * @param EntityIdParser $entityIdParser
+	 * @param EntityLookup $entityLookup
+	 * @param UsageAccumulator $usageAccumulator
+	 * @param Serializer $entitySerializer
+	 * @param Serializer $statementSerializer
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param Language $language
+	 * @param ContentLanguages $termsLanguages
+	 * @param bool $fineGrainedLuaTracking Whether to track each used aspect
+	 *        separately in Lua or just track the All (X) usage.
+	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
@@ -78,7 +96,8 @@ class EntityAccessor {
 		PropertyDataTypeLookup $dataTypeLookup,
 		LanguageFallbackChain $fallbackChain,
 		Language $language,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		$fineGrainedLuaTracking
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
@@ -89,6 +108,7 @@ class EntityAccessor {
 		$this->fallbackChain = $fallbackChain;
 		$this->language = $language;
 		$this->termsLanguages = $termsLanguages;
+		$this->fineGrainedLuaTracking = $fineGrainedLuaTracking;
 	}
 
 	/**
@@ -121,8 +141,9 @@ class EntityAccessor {
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
-		$this->usageAccumulator->addAllUsage( $entityId );
-
+		if ( !$this->fineGrainedLuaTracking ) {
+			$this->usageAccumulator->addAllUsage( $entityId );
+		}
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
