@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use ExtensionRegistry;
 use GeoData\GeoData;
 use Language;
 use PageImages;
@@ -188,14 +189,16 @@ class EntityParserOutputGeneratorFactory {
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
 		];
 
-		if ( !empty( $this->preferredPageImagesProperties ) && class_exists( PageImages::class ) ) {
+		if ( !empty( $this->preferredPageImagesProperties )
+			&& ExtensionRegistry::getInstance()->isLoaded( 'PageImages' )
+		) {
 			$updaters[] = new PageImagesDataUpdater(
 				$this->preferredPageImagesProperties,
 				PageImages::PROP_NAME_FREE
 			);
 		}
 
-		if ( class_exists( GeoData::class ) ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'GeoData' ) ) {
 			$updaters[] = new GeoDataDataUpdater(
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,

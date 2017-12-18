@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use Babel;
+use ExtensionRegistry;
 use User;
 use Wikibase\Lib\UserLanguageLookup;
 
@@ -35,7 +36,7 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 		// Lazy initialisation
 		if ( !isset( $this->babelLanguages[$key] ) ) {
 			// If the extension is installed, grab the languages from the user's Babel box
-			if ( class_exists( Babel::class ) && !$user->isAnon() ) {
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) && !$user->isAnon() ) {
 				$this->babelLanguages[$key] = Babel::getCachedUserLanguages( $user );
 			} else {
 				$this->babelLanguages[$key] = [];

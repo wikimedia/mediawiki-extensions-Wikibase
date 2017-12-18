@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
 use GeoData\GeoData;
@@ -61,7 +62,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		array $preferredPropertiesIds,
 		array $globeUris
 	) {
-		if ( !class_exists( GeoData::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'GeoData' ) ) {
 			throw new RuntimeException( 'GeoDataDataUpdater requires the GeoData extension '
 				. 'to be enabled' );
 		}

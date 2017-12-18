@@ -6,6 +6,7 @@ use Action;
 use BaseTemplate;
 use EchoEvent;
 use EditPage;
+use ExtensionRegistry;
 use OutputPage;
 use Parser;
 use RecentChange;
@@ -343,7 +344,7 @@ final class ClientHooks {
 		global $wgHooks;
 
 		// These hooks should only be run if we use the Echo extension
-		if ( class_exists( EchoEvent::class ) ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			$wgHooks['LocalUserCreated'][] = EchoNotificationsHandlers::class . '::onLocalUserCreated';
 			$wgHooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
 		}
