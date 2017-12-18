@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_8f19a181",
+        "filename": "lib/autoload.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-12-18T11:27:43Z",
+      "side": 1,
+      "message": "I guess we can drop these stuff, right?",
+      "revId": "4738b1cf6718639efb5599d83581c9b173094b3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

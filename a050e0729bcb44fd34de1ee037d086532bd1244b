@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_cf21e99f",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-12-18T11:27:43Z",
+      "side": 0,
+      "message": "This is wrong and should stay. Add $change-\u003esetCompactDiff( EntityDiffChangedAspects::newFromEntityDiff( $diff ) );",
+      "range": {
+        "startLine": 75,
+        "startChar": 3,
+        "endLine": 75,
+        "endChar": 27
+      },
+      "revId": "a050e0729bcb44fd34de1ee037d086532bd1244b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
