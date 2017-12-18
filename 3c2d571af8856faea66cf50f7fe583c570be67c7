@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_3be370d6",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T23:02:16Z",
+      "side": 1,
+      "message": "This checks whether advanced syntax is being used - but this function is not needed anymore anyway, should be deleted.",
+      "parentUuid": "cee8db29_5a3d95b7",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 48
+      },
+      "revId": "3c2d571af8856faea66cf50f7fe583c570be67c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_faad89e8",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-18T14:08:15Z",
       "side": 1,
       "message": "The body of this method is 123 lines long, even if this patch removed quite a few lines. I did a quick regex search and could not find an other method that long (outside of tests). The second longest is WikibaseRepo::getMonolingualTextLanguages.\n\nThis makes me happy (we are quite good in producing readable code), but a bit sad the same time (search related code I see tends to look notably different from Wikibase code).\n\nCan you please refactor this code and split it into logical elements with self-documenting names? That would be super awesome.",
+      "range": {
+        "startLine": 151,
+        "startChar": 20,
+        "endLine": 151,
+        "endChar": 42
+      },
+      "revId": "3c2d571af8856faea66cf50f7fe583c570be67c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_7bcdf861",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T23:02:16Z",
+      "side": 1,
+      "message": "This code creates a big search query, so it is big. I don\u0027t see much point in splitting it into pieces, making the overall structure harder to read (since you need to jump back and forth between function definitions), to satisfy an arbitrary metric. If you see specific functionality than can be taken out, your suggestions are welcome.",
+      "parentUuid": "cee8db29_faad89e8",
       "range": {
         "startLine": 151,
         "startChar": 20,
