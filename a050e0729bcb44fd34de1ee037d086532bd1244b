@@ -22,6 +22,30 @@
       "revId": "a050e0729bcb44fd34de1ee037d086532bd1244b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_af5e25ea",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T12:02:50Z",
+      "side": 0,
+      "message": "I believe this is a misunderstanding. There is no $diff variable here. This line is setting an empty diff, which is the default anyway. All tests still succeed when I remove this line, so it obviously does not make a difference.\n\nWhy do you think it needs to stay?",
+      "parentUuid": "cee8db29_cf21e99f",
+      "range": {
+        "startLine": 75,
+        "startChar": 3,
+        "endLine": 75,
+        "endChar": 27
+      },
+      "revId": "a050e0729bcb44fd34de1ee037d086532bd1244b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

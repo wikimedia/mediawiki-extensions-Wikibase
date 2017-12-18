@@ -16,6 +16,24 @@
       "revId": "4738b1cf6718639efb5599d83581c9b173094b3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_8fc24187",
+        "filename": "lib/autoload.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T12:02:50Z",
+      "side": 1,
+      "message": "As said I had to add this, otherwise I can not run the ItemChangeTest.\n\nI do not see proper PSR-4 loading in place for the \"lib\" part of this code base.",
+      "parentUuid": "cee8db29_8f19a181",
+      "revId": "4738b1cf6718639efb5599d83581c9b173094b3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
