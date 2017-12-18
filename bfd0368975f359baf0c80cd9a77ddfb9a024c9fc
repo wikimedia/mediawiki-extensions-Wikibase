@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_0f80f14a",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataRequestHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T11:45:32Z",
+      "side": 1,
+      "message": "Personally, I prefer to run tests with qqx. This allows to test for message keys, instead of actual English messages (which might change, and then require tests to change for no good reason).",
+      "range": {
+        "startLine": 187,
+        "startChar": 26,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "bfd0368975f359baf0c80cd9a77ddfb9a024c9fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
