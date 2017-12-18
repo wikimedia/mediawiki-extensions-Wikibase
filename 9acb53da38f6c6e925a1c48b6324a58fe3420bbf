@@ -201,6 +201,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_14ce44b9",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-18T09:09:37Z",
+      "side": 1,
+      "message": "I failed to do it in a week, so let\u0027s not wait for me. I\u0027ll do it separately some day (tm). Let\u0027s move on with what we have here for now.",
+      "parentUuid": "eee3df47_0b1501e9",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_98022dbd",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
         "patchSetId": 3
@@ -265,6 +283,24 @@
       "side": 1,
       "message": "enabling fine grained tracking would break the current test (no use of X). The aim of the test is to verify backward compatibility (when fine grained tracking is disabled) or the new behavior (with no X).\n\ndoes it make sense, or is it a kind of \"integration\" test mixing 2 unrelated features and should be break to separate tests? (if so I guess we would like to replace the assertSame with assertArrayHasKey and verify only T and L aspects to be independent of the fine grained settings)",
       "parentUuid": "eee3df47_78dbe954",
+      "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_b4d83881",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-18T09:09:37Z",
+      "side": 1,
+      "message": "I would prefer to have this split and rather test two features separately, unless there is a need to check the combination of those two. Maybe it is. Let\u0027s tackle the test issues separately.",
+      "parentUuid": "eee3df47_6be48d0a",
       "revId": "9acb53da38f6c6e925a1c48b6324a58fe3420bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
