@@ -507,7 +507,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|<>', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!'
 			],
 			[
 				'item',
@@ -515,7 +515,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|&lt;&gt;', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#38;lt&#59;&#38;gt&#59;\].*?</span></span>!'
 			],
 			[
 				'item',
@@ -523,7 +523,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				false, 'wbsetlabel-set:1|&', false,
 				'Title',
 				false,
-				'!<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span></span>!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!'
 			],
 			[
 				'item',
