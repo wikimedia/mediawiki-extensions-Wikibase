@@ -18,7 +18,8 @@
 			"Macofe",
 			"Mansil",
 			"Hamilton Abreu",
-			"MokaAkashiyaPT"
+			"MokaAkashiyaPT",
+			"Athena in Wonderland"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -124,7 +125,7 @@
 	"wikibase-pageinfo-entity-id": "ID do elemento {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nenhuma",
 	"wikibase-pageinfo-entity-usage": "Entidades {{WBREPONAME}} usadas nesta página",
-	"wikibase-pageinfo-entity-usage-S": "Link intersites",
+	"wikibase-pageinfo-entity-usage-S": "Hiperligação intersites",
 	"wikibase-pageinfo-entity-usage-L": "Rótulo: $1",
 	"wikibase-pageinfo-entity-usage-D": "Descrição: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
