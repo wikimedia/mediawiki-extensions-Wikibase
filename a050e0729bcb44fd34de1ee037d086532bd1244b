@@ -46,6 +46,30 @@
       "revId": "a050e0729bcb44fd34de1ee037d086532bd1244b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_ef994d73",
+        "filename": "lib/tests/phpunit/Changes/ItemChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-12-18T12:30:25Z",
+      "side": 0,
+      "message": "yes it\u0027s empty diff, my mistake, sorry. I still think we should add \"$change-\u003esetCompactDiff( EntityDiffChangedAspects::newEmpty() );\" because otherwise it logs a warning. I don\u0027t have strong feelings about it though.",
+      "parentUuid": "cee8db29_af5e25ea",
+      "range": {
+        "startLine": 75,
+        "startChar": 3,
+        "endLine": 75,
+        "endChar": 27
+      },
+      "revId": "a050e0729bcb44fd34de1ee037d086532bd1244b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
