@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use Action;
 use DummyLinker;
+use HtmlArmor;
 use Language;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
@@ -379,7 +380,7 @@ class LinkBeginHookHandler {
 
 	/**
 	 * @param string $entityIdSerialization
-	 * @param array|null $labelData
+	 * @param string[]|null $labelData
 	 *
 	 * @return string
 	 */
@@ -397,7 +398,7 @@ class LinkBeginHookHandler {
 		$labelHtml = '<span class="wb-itemlink-label"'
 				. ' lang="' . htmlspecialchars( $labelLang->getHtmlCode() ) . '"'
 				. ' dir="' . htmlspecialchars( $labelLang->getDir() ) . '">'
-			. htmlspecialchars( $labelText )
+			. HtmlArmor::getHtml( $labelText )
 			. '</span>';
 
 		return '<span class="wb-itemlink">'
@@ -408,6 +409,13 @@ class LinkBeginHookHandler {
 			. '</span>';
 	}
 
+	/**
+	 * @param Title $title
+	 * @param string[]|null $labelData
+	 * @param string[]|null $descriptionData
+	 *
+	 * @return string The plain, unescaped title="…" attribute for the link.
+	 */
 	private function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
 		/** @var Language $labelLang */
 		/** @var Language $descriptionLang */
