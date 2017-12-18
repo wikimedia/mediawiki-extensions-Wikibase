@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_077615d5",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T19:16:35Z",
+      "side": 1,
+      "message": "Separate patches do not make sense to me here - the move is motivated by the change of the function and structure of the code, ShowSearchHitTitle works completely differently now, and moving it around without that change, just for the sake of moving, makes no sense.",
+      "parentUuid": "cee8db29_dad36563",
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_3aded170",
         "filename": "repo/config/ElasticSearchRescoreFunctions.php",
         "patchSetId": 43
@@ -88,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_a7a6494e",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T19:16:35Z",
+      "side": 1,
+      "message": "Because we need to reuse it when we build display for fulltext results. I do not see what is so alarming about it.",
+      "parentUuid": "cee8db29_1ab82de2",
+      "range": {
+        "startLine": 428,
+        "startChar": 1,
+        "endLine": 428,
+        "endChar": 7
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_ba5e61ea",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 43
@@ -99,6 +141,30 @@
       "writtenOn": "2017-12-18T14:37:52Z",
       "side": 1,
       "message": "Why does this need to become public?\n\nThe fact it becomes static in this patch, and the service is provided as a parameter, raises multiple alarms. This is an anti-pattern we can not accept.\n\nWhat this change effectively means is: this is not a method of this class any more. It does not even belong to this class any more. With this change it is a pure static helper function that does not interact with the ElasticTermResult class in any way.\n\nIf you really, really need a global, static helper method like this, please put it somewhere else, where it makes more sense. I suggest to introduce a service object that holds a LanguageFallbackChain, and does not (!) get it passed in as a function parameter, but via the constructor. This service can then be used whenever some code needs to \"find a term for display\". Whatever \"find\" means. Please also name this service so it becomes more obvious what it does.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_27b23993",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T19:16:35Z",
+      "side": 1,
+      "message": "it becomes public because we need it for other result class too. I don\u0027t want to make special service object that needs construction and management just for one utility function, this looks like a case of overengineering in the code that is quite hard to get through even as it is now. It is a simple utility function - scan though the array and find the best value - it does not need whole level of abstraction on top of it.",
+      "parentUuid": "cee8db29_ba5e61ea",
       "range": {
         "startLine": 137,
         "startChar": 1,
@@ -145,6 +211,30 @@
       "writtenOn": "2017-12-18T14:37:52Z",
       "side": 1,
       "message": "As I already commented in the following patch: Please, please split this method.",
+      "range": {
+        "startLine": 108,
+        "startChar": 20,
+        "endLine": 108,
+        "endChar": 37
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_47a93d21",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T19:16:35Z",
+      "side": 1,
+      "message": "I do not see why. This method does one identifyable thing, which should be in one place. Yes, it is big because the thing it is doing is big - search query is complex. Splitting it into small pieces won\u0027t add anything to readability - just make the reader jump back and forth trying to assemble the whole picture out of small pieces that make no sense by themselves.",
+      "parentUuid": "cee8db29_fa846960",
       "range": {
         "startLine": 108,
         "startChar": 20,
