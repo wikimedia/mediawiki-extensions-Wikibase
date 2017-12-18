@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
+use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
 use GeoData\GeoData;
@@ -33,7 +34,7 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	private function willSkipTests() {
-		return !class_exists( GeoData::class );
+		return !ExtensionRegistry::getInstance()->isLoaded( 'GeoData' );
 	}
 
 	protected function setUp() {
