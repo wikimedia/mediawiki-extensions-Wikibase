@@ -456,7 +456,8 @@ class EntityDataRequestHandler {
 		$this->outputData(
 			$request,
 			$output->getRequest()->response(),
-			$data, $contentType,
+			$data,
+			$contentType,
 			$entityRevision->getTimestamp()
 		);
 	}
