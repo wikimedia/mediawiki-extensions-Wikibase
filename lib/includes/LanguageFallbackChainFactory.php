@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Babel;
+use ExtensionRegistry;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -209,7 +210,7 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
-		if ( !class_exists( Babel::class ) || $user->isAnon() ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) || $user->isAnon() ) {
 			return $this->newFromLanguageCode( $languageCode, self::FALLBACK_ALL );
 		}
 
