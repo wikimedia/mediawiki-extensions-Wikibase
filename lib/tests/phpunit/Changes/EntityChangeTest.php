@@ -6,6 +6,7 @@ use MWException;
 use RecentChange;
 use Revision;
 use stdClass;
+use Title;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikimedia\TestingAccessWrapper;
 use User;
@@ -271,7 +272,7 @@ class EntityChangeTest extends ChangeRowTest {
 			'timestamp' => $timestamp,
 			'content' => ItemContent::newFromItem( $item ),
 			'comment' => 'Test!',
-		] );
+		], 0, Title::newFromText( 'Required workaround' ) );
 
 		$entityChange->setRevisionInfo( $revision, 8 );
 
