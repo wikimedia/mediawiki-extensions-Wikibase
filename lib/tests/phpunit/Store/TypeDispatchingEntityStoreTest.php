@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -49,6 +50,24 @@ class TypeDispatchingEntityStoreTest extends MediaWikiTestCase {
 		);
 
 		$store->assignFreshId( $entity );
+	}
+
+	/**
+	 * @covers TypeDispatchingEntityStore::getStore
+	 */
+	public function testGivenInvalidCallback_saveEntityFails() {
+		$store = new TypeDispatchingEntityStore(
+			[
+				'property' => function ( EntityStore $defaultService ) {
+					return new \stdClass();
+				},
+			],
+			$this->newDefaultService( 'saveEntity' ),
+			$this->newEntityRevisionLookup()
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$store->saveEntity( Property::newFromType( 'string' ), 'summary', $this->newUser() );
 	}
 
 	public function testGivenUnknownEntityType_saveEntityForwardsToDefaultService() {
