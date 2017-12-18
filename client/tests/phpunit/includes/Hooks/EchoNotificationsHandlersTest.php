@@ -151,28 +151,28 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 		$settings->setSetting( 'sendEchoNotification', true );
 		$handlers = $this->getHandlers( $settings );
 
-		Title::newFromText( 'Dummy2' )->resetArticleID( 0 );
+		Title::newFromText( 'Duummy2' )->resetArticleID( 0 );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Dummy' does not create an event"
+			"Failed asserting that 'Duummy' does not create an event"
 		);
 
-		$this->insertPage( 'Dummy2' );
+		$this->insertPage( 'Duummy2' );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Dummy2' does not create an event"
+			"Failed asserting that 'Duummy2' does not create an event"
 		);
 
-		$this->insertPage( 'Dummy', '#REDIRECT [[Dummy2]]' );
+		$this->insertPage( 'Duummy', '#REDIRECT [[Duummy2]]' );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Dummy2' redirected to by 'Dummy' does not create an event"
+			"Failed asserting that 'Duummy2' redirected to by 'Duummy' does not create an event"
 		);
 
-		$this->insertPage( 'Dummy' );
+		$this->insertPage( 'Duummy' );
 		$this->assertTrue(
 			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Dummy2' creates an event"
+			"Failed asserting that 'Duummy2' creates an event"
 		);
 	}
 
