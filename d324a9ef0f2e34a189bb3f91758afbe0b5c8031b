@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_1b102c04",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T22:56:58Z",
+      "side": 1,
+      "message": "True. I\u0027m not sure how to properly document satu functions... maybe add graph?",
+      "parentUuid": "cee8db29_3aded170",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 30
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_3a97f194",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 43
@@ -71,6 +95,30 @@
       "writtenOn": "2017-12-18T14:37:52Z",
       "side": 1,
       "message": "How are these changes related to \"fulltext search support for Wikidata labels\"? Please split this off to a separate patch.",
+      "range": {
+        "startLine": 408,
+        "startChar": 36,
+        "endLine": 410,
+        "endChar": 23
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_3b225051",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T22:56:58Z",
+      "side": 1,
+      "message": "This one is not really related, it\u0027s making link handler properly handle BCP codes and directions. I can take it out.",
+      "parentUuid": "cee8db29_3a97f194",
       "range": {
         "startLine": 408,
         "startChar": 36,
@@ -188,6 +236,30 @@
       "writtenOn": "2017-12-18T14:37:52Z",
       "side": 1,
       "message": "These two calls are not updated, but call a static method now.",
+      "range": {
+        "startLine": 185,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 50
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_dbdb6453",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-12-18T22:56:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee8db29_da59a506",
       "range": {
         "startLine": 185,
         "startChar": 19,
