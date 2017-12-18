@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_dad36563",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "This looks like a quite trivial refactoring that can be split of to a separate patch: The onShowSearchHitTitle method moves from one class to another.",
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_3aded170",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "What is the purpose of this comment? It looks like it does nothing but literally repeating what is written below.",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 30
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_3a97f194",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "How are these changes related to \"fulltext search support for Wikidata labels\"? Please split this off to a separate patch.",
+      "range": {
+        "startLine": 408,
+        "startChar": 36,
+        "endLine": 410,
+        "endChar": 23
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_1ab82de2",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "Why does this need to become public? This is again a sign that makes my alarm bells ring pretty loud.",
+      "range": {
+        "startLine": 428,
+        "startChar": 1,
+        "endLine": 428,
+        "endChar": 7
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_ba5e61ea",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "Why does this need to become public?\n\nThe fact it becomes static in this patch, and the service is provided as a parameter, raises multiple alarms. This is an anti-pattern we can not accept.\n\nWhat this change effectively means is: this is not a method of this class any more. It does not even belong to this class any more. With this change it is a pure static helper function that does not interact with the ElasticTermResult class in any way.\n\nIf you really, really need a global, static helper method like this, please put it somewhere else, where it makes more sense. I suggest to introduce a service object that holds a LanguageFallbackChain, and does not (!) get it passed in as a function parameter, but via the constructor. This service can then be used whenever some code needs to \"find a term for display\". Whatever \"find\" means. Please also name this service so it becomes more obvious what it does.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_da59a506",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "These two calls are not updated, but call a static method now.",
+      "range": {
+        "startLine": 185,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 50
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_fa846960",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-18T14:37:52Z",
+      "side": 1,
+      "message": "As I already commented in the following patch: Please, please split this method.",
+      "range": {
+        "startLine": 108,
+        "startChar": 20,
+        "endLine": 108,
+        "endChar": 37
+      },
+      "revId": "d324a9ef0f2e34a189bb3f91758afbe0b5c8031b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
