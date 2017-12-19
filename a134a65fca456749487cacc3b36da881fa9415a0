@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_f890e750",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-19T17:02:39Z",
+      "side": 1,
+      "message": "Tangential, but don’t we have constants for these formats anywhere?",
+      "revId": "a134a65fca456749487cacc3b36da881fa9415a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
