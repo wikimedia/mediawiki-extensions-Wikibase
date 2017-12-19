@@ -94,6 +94,30 @@
       "revId": "4f4fd4b89776e400ac743cd20ef2cfba282cf040",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_52ce12ba",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-12-19T14:35:42Z",
+      "side": 1,
+      "message": "Thanks for the explanation.",
+      "parentUuid": "cee8db29_6c29c09a",
+      "range": {
+        "startLine": 388,
+        "startChar": 2,
+        "endLine": 388,
+        "endChar": 33
+      },
+      "revId": "4f4fd4b89776e400ac743cd20ef2cfba282cf040",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
