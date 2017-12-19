@@ -1,5 +1,5 @@
 {
-    "description": "wikibase_prefix search for '(p128) '",
+    "description": "wikibase_prefix search for 'space ag '",
     "params": {
         "timeout": "20s"
     },
@@ -12,7 +12,7 @@
                             "filter": [
                                 {
                                     "match": {
-                                        "labels_all.prefix": "(p128)"
+                                        "labels_all.prefix": "space ag"
                                     }
                                 }
                             ],
@@ -25,7 +25,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.near_match": "(p128)"
+                                                            "labels.de-ch.near_match": "space ag"
                                                         }
                                                     },
                                                     "boost": 2
@@ -35,7 +35,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.near_match_folded": "(p128)"
+                                                            "labels.de-ch.near_match_folded": "space ag"
                                                         }
                                                     },
                                                     "boost": 1.6
@@ -45,7 +45,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.prefix": "(p128)"
+                                                            "labels.de-ch.prefix": "space ag"
                                                         }
                                                     },
                                                     "boost": 0.88
@@ -55,7 +55,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels_all.near_match_folded": "(p128)"
+                                                            "labels_all.near_match_folded": "space ag"
                                                         }
                                                     },
                                                     "boost": 0.001
@@ -65,10 +65,90 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.prefix": "(p128) "
+                                                            "labels.de.near_match": "space ag"
+                                                        }
+                                                    },
+                                                    "boost": 1.71
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.near_match_folded": "space ag"
+                                                        }
+                                                    },
+                                                    "boost": 1.17
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.prefix": "space ag"
+                                                        }
+                                                    },
+                                                    "boost": 0.288
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.near_match": "space ag"
+                                                        }
+                                                    },
+                                                    "boost": 1.539
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.near_match_folded": "space ag"
+                                                        }
+                                                    },
+                                                    "boost": 1.053
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.prefix": "space ag"
+                                                        }
+                                                    },
+                                                    "boost": 0.2592
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de-ch.prefix": "space ag "
                                                         }
                                                     },
                                                     "boost": 1.1
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.prefix": "space ag "
+                                                        }
+                                                    },
+                                                    "boost": 0.36
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.prefix": "space ag "
+                                                        }
+                                                    },
+                                                    "boost": 0.324
                                                 }
                                             }
                                         ]
@@ -79,7 +159,7 @@
                     },
                     {
                         "term": {
-                            "title.keyword": "P128"
+                            "title.keyword": "SPACE AG"
                         }
                     }
                 ],
@@ -96,6 +176,10 @@
         "_source": [
             "namespace",
             "title",
+            "labels.de-ch",
+            "descriptions.de-ch",
+            "labels.de",
+            "descriptions.de",
             "labels.en",
             "descriptions.en"
         ],
@@ -115,6 +199,24 @@
                     "matched_fields": [
                         "title.keyword"
                     ]
+                },
+                "labels.de-ch.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.de.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
                 },
                 "labels.en.prefix": {
                     "type": "experimental",
@@ -136,7 +238,7 @@
                 }
             }
         },
-        "size": 10,
+        "size": 7,
         "rescore": [
             {
                 "window_size": 8192,
