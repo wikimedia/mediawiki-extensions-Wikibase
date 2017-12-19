@@ -25,7 +25,7 @@ class CommonsLinkFormatterTest extends \MediaWikiTestCase {
 		return [
 			[
 				new StringValue( 'example.jpg' ), // Lower-case file name
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*example.jpg.*</a>@'
 			],
 			[
 				new StringValue( 'Example.jpg' ),
@@ -37,7 +37,7 @@ class CommonsLinkFormatterTest extends \MediaWikiTestCase {
 			],
 			[
 				new StringValue( 'Example_underscore.jpg' ),
-				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_underscore.jpg".*>.*Example underscore.jpg.*</a>@'
+				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_underscore.jpg".*>.*Example_underscore.jpg.*</a>@'
 			],
 			[
 				new StringValue( 'Example+plus.jpg' ),
