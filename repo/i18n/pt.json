@@ -15,7 +15,8 @@
 			"Macofe",
 			"Imperadeiro90",
 			"Jkb8",
-			"Fúlvio"
+			"Fúlvio",
+			"Athena in Wonderland"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -297,6 +298,7 @@
 	"wikibase-entitydata-not-acceptable": "Não foi encontrado nenhum formato correspondente. Tipos MIME suportados: $1",
 	"wikibase-entitydata-bad-revision": "Não é possível mostrar a revisão $2 da entidade $1.",
 	"wikibase-entitydata-bad-id": "Identificador inválido: $1.",
+	"wikibase-entitydata-rdf-disabled": "A exportação em RDF foi desativada para este tipo de entidade: $1.",
 	"wikibase-entitydata-unsupported-format": "O formato de dados $1 não é suportado por esta interface.",
 	"wikibase-entitydata-storage-error": "O carregamento da entidade $1 falhou.",
 	"wikibase-entitydata-title": "Dados da entidade",
