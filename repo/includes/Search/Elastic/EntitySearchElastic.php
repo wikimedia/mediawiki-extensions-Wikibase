@@ -140,8 +140,9 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query = new BoolQuery();
 
 		$context->setOriginalSearchTerm( $text );
-		// Drop leading spaces
-		$text = ltrim( $text );
+		// Drop only leading spaces for exact matches, and all spaces for the rest
+		$textExact = ltrim( $text );
+		$text = trim( $text );
 		if ( empty( $this->contentModelMap[$entityType] ) ) {
 			$context->setResultsPossible( false );
 			$context->addWarning( 'wikibase-search-bad-entity-type', $entityType );
@@ -164,6 +165,9 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$fields = [
 			[ "labels.{$languageCode}.near_match", $profile['lang-exact'] ],
 			[ "labels.{$languageCode}.near_match_folded", $profile['lang-folded'] ],
+		];
+		// Fields to which query applies exactly as stated, without trailing space trimming
+		$fieldsExact = [
 			[ "labels.{$languageCode}.prefix", $profile['lang-prefix'] ],
 		];
 
@@ -181,13 +185,18 @@ class EntitySearchElastic implements EntitySearchHelper {
 				$weight = $profile['fallback-folded'] * $discount;
 				$fields[] = [ "labels.{$fallbackCode}.near_match_folded", $weight ];
 				$weight = $profile['fallback-prefix'] * $discount;
-				$fields[] = [ "labels.{$fallbackCode}.prefix", $weight ];
+				$fieldsExact[] = [ "labels.{$fallbackCode}.prefix", $weight ];
+
 				$discount *= $profile['fallback-discount'];
 			}
 		}
 
 		foreach ( $fields as $field ) {
 			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $text ) );
+		}
+
+		foreach ( $fieldsExact as $field ) {
+			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $textExact ) );
 		}
 
 		$labelsQuery = new BoolQuery();
