@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_7bde9171",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-19T18:41:34Z",
+      "side": 1,
+      "message": "We should probably update this screenshot…",
+      "range": {
+        "startLine": 56,
+        "startChar": 21,
+        "endLine": 56,
+        "endChar": 66
+      },
+      "revId": "061d7ab3835704c3349031c693dabaadd4520f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_5bf74df2",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-19T18:41:34Z",
+      "side": 1,
+      "message": "saves",
+      "range": {
+        "startLine": 57,
+        "startChar": 70,
+        "endLine": 57,
+        "endChar": 74
+      },
+      "revId": "061d7ab3835704c3349031c693dabaadd4520f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_3bfc09d5",
+        "filename": "repo/includes/ParserOutput/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-19T18:41:34Z",
+      "side": 1,
+      "message": "perhaps add a trailing comma at the end so the diff is prettier next time :)",
+      "revId": "061d7ab3835704c3349031c693dabaadd4520f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
