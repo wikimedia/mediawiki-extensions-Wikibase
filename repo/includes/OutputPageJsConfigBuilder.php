@@ -84,10 +84,14 @@ class OutputPageJsConfigBuilder {
 	 * @return Message
 	 */
 	private function getCopyrightMessage( $rightsUrl, $rightsText, Language $language ) {
+		global $wgEditSubmitButtonLabelPublish;
+
+		$messageKey = ( $wgEditSubmitButtonLabelPublish ) ? 'wikibase-publish' : 'wikibase-save';
 		$copyrightMessage = $this->copyrightMessageBuilder->build(
 			$rightsUrl,
 			$rightsText,
-			$language
+			$language,
+			$messageKey
 		);
 
 		return $copyrightMessage;
