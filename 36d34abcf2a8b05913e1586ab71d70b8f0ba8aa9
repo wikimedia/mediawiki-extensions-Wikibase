@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_e64de876",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-19T21:08:47Z",
+      "side": 1,
+      "message": "I think this would be more readable if the message key was extracted to a variable and the this._toolbar.toggleActionMessage( mw.msg( ) ) wasn’t repeated.",
+      "revId": "36d34abcf2a8b05913e1586ab71d70b8f0ba8aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
