@@ -49,6 +49,31 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $configVars );
 	}
 
+	public function testBuildWikibasePublish() {
+		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => true ] );
+		$configBuilder = new OutputPageJsConfigBuilder();
+
+		$configVars = $configBuilder->build(
+			$this->getOutputPage(),
+			'https://creativecommons.org',
+			'CC-0',
+			[]
+		);
+
+		$expected = [
+			'wbCopyright' => [
+				'version' => 'wikibase-1',
+				'messageHtml' =>
+					'(wikibase-shortcopyrightwarning: (wikibase-publish), ' .
+					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
+					', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
+			],
+			'wbBadgeItems' => []
+		];
+
+		$this->assertEquals( $expected, $configVars );
+	}
+
 	/**
 	 * @return User
 	 */
