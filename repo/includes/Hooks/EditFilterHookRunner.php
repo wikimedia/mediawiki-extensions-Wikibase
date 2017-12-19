@@ -7,6 +7,7 @@ use Hooks;
 use IContextSource;
 use InvalidArgumentException;
 use MutableContext;
+use OutOfBoundsException;
 use RuntimeException;
 use Status;
 use Title;
@@ -68,7 +69,7 @@ class EditFilterHookRunner {
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
-	 * @param EntityDocument|EntityRedirect|null $new The entity or redirect we are trying to save
+	 * @param EntityDocument|EntityRedirect $new The entity or redirect we are trying to save
 	 * @param User $user the user performing the edit
 	 * @param string $summary The edit summary
 	 *
@@ -84,29 +85,31 @@ class EditFilterHookRunner {
 		}
 
 		if ( $new instanceof EntityDocument ) {
-			$entityContent = $this->entityContentFactory->newFromEntity( $new );
+			try {
+				$content = $this->entityContentFactory->newFromEntity( $new );
+			} catch ( OutOfBoundsException $ex ) {
+				// FIXME: This is a temporary workaround, assuming no hook handler cares what this
+				// actually contains.
+				$content = new \TextContent( '' );
+			}
 			$context = $this->getContextForEditFilter( $new->getId(), $new->getType() );
-
 		} elseif ( $new instanceof EntityRedirect ) {
-			$entityContent = $this->entityContentFactory->newFromRedirect( $new );
-			if ( $entityContent === null ) {
-				throw new RuntimeException(
-					'Cannot get EntityContent from EntityRedirect of type ' .
-					$new->getEntityId()->getEntityType()
-				);
+			$entityId = $new->getEntityId();
+			$content = $this->entityContentFactory->newFromRedirect( $new );
+
+			if ( $content === null ) {
+				throw new RuntimeException( 'Cannot get EntityContent from EntityRedirect of type '
+					. $entityId->getEntityType() );
 			}
 
-			$context = $this->getContextForEditFilter(
-				$new->getEntityId(),
-				$new->getEntityId()->getEntityType()
-			);
+			$context = $this->getContextForEditFilter( $entityId, $entityId->getEntityType() );
 		} else {
 			throw new InvalidArgumentException( '$new must be instance of EntityDocument or EntityRedirect' );
 		}
 
 		if ( !Hooks::run(
 			'EditFilterMergedContent',
-			[ $context, $entityContent, &$filterStatus, $summary, $user, false ]
+			[ $context, $content, &$filterStatus, $summary, $user, false ]
 		) ) {
 			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
