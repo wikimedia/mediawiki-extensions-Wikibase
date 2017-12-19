@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_26587035",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-19T21:08:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee8db29_5bf74df2",
+      "range": {
+        "startLine": 57,
+        "startChar": 70,
+        "endLine": 57,
+        "endChar": 74
+      },
+      "revId": "061d7ab3835704c3349031c693dabaadd4520f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_3bfc09d5",
         "filename": "repo/includes/ParserOutput/ParserOutputJsConfigBuilder.php",
         "patchSetId": 1
