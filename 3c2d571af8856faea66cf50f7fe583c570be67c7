@@ -93,6 +93,30 @@
       "revId": "3c2d571af8856faea66cf50f7fe583c570be67c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_f121279f",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-19T08:54:08Z",
+      "side": 1,
+      "message": "I\u0027m sorry for the misunderstanding. I\u0027m afraid my point got entirely lost. I was not at all talking about an \"arbitrary metric\". Please excuse me if I felt the need to justify my gut feeling of \"wow, this method is huge\" with a number.\n\nAsking for \"suggestions\" is not how this is supposed to work. It is *you* guys who submitted this. *You* wrote this. *You* know what it is supposed to do, what it means, and how it needs to be split to enable others to read and understand your intent. This can not be fixed by other people later. Making intent clear and obvious is your duty.\n\nYou can not put that burden on other peoples shoulders.\n\nThis is the Wikibase code base. It follows high standards – actually higher standards than many other code bases. The number of lines per function I dug up was meant to demonstrate this quite obviously. Other code bases do have much larger functions (especially MediaWiki core), but this does not justify doing the same here.\n\nI\u0027m sorry to say that, but it seems I have to: I can not accept such linear, unstructured code in the Wikibase code base.\n\nI already gave some suggestions, like moving this glue-code to a separate code base.",
+      "parentUuid": "cee8db29_7bcdf861",
+      "range": {
+        "startLine": 151,
+        "startChar": 20,
+        "endLine": 151,
+        "endChar": 42
+      },
+      "revId": "3c2d571af8856faea66cf50f7fe583c570be67c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
