@@ -62,6 +62,24 @@
       "revId": "061d7ab3835704c3349031c693dabaadd4520f03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_fb5e21eb",
+        "filename": "repo/includes/ParserOutput/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-12-19T19:05:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee8db29_3bfc09d5",
+      "revId": "061d7ab3835704c3349031c693dabaadd4520f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
