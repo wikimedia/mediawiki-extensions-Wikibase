@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_f69e3dbc",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-12-19T02:06:03Z",
+      "side": 1,
+      "message": "getHtmlCode() returns already a BCP 47 converted language code.",
+      "range": {
+        "startLine": 400,
+        "startChar": 69,
+        "endLine": 400,
+        "endChar": 80
+      },
+      "revId": "b297df4aafd4dc8194ce872304fd95e5b73b73a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
