@@ -98,6 +98,11 @@ class EntityDataRequestHandler {
 	private $frameOptionsHeader;
 
 	/**
+	 * @var string[]
+	 */
+	private $disabledRdfExportEntityTypes;
+
+	/**
 	 * @param EntityDataUriManager $uriManager
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser
@@ -109,6 +114,7 @@ class EntityDataRequestHandler {
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useSquids do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
+	 * @param string[] $disabledRdfExportEntityTypes List of entity types
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
@@ -118,6 +124,7 @@ class EntityDataRequestHandler {
 		EntityRedirectLookup $entityRedirectLookup,
 		EntityDataSerializationService $serializationService,
 		EntityDataFormatProvider $entityDataFormatProvider,
+		array $disabledRdfExportEntityTypes,
 		$defaultFormat,
 		$maxAge,
 		$useSquids,
@@ -134,6 +141,7 @@ class EntityDataRequestHandler {
 		$this->maxAge = $maxAge;
 		$this->useSquids = $useSquids;
 		$this->frameOptionsHeader = $frameOptionsHeader;
+		$this->disabledRdfExportEntityTypes = $disabledRdfExportEntityTypes;
 	}
 
 	/**
@@ -201,6 +209,15 @@ class EntityDataRequestHandler {
 			$entityId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
 			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id', $id ) );
+		}
+
+		if ( $format === 'rdf' ) {
+			if ( in_array( $entityId->getEntityType(), $this->disabledRdfExportEntityTypes ) ) {
+				throw new HttpError(
+					400,
+					wfMessage( 'wikibase-entitydata-rdf-disabled', $entityId->getEntityType() )
+				);
+			}
 		}
 
 		//XXX: allow for logged in users only?
