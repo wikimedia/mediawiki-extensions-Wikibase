@@ -211,7 +211,7 @@ class EntityDataRequestHandler {
 			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
-		if ( $format === 'rdf' ) {
+		if ( $format === 'rdf' || $format === 'ttl' ) {
 			if ( in_array( $entityId->getEntityType(), $this->disabledRdfExportEntityTypes ) ) {
 				throw new HttpError(
 					400,
