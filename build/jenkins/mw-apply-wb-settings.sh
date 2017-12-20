@@ -20,6 +20,10 @@ if [ $BUILD = true ]; then
   exit 1
 fi
 
+function apply_common_settings {
+  echo 'wfLoadExtension( "WikibaseLib", "$IP/extensions/Wikibase/lib/extension.json" );' >> LocalSettings.php
+}
+
 function apply_client_settings {
   echo "client"
   echo '$wgEnableWikibaseRepo = false;' >> LocalSettings.php
@@ -28,7 +32,11 @@ function apply_client_settings {
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = false;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
+  echo 'wfLoadExtension( "WikibaseClient", "$IP/extensions/Wikibase/client/extension.json" );' >> LocalSettings.php
+  # Use example config for testing
+  echo 'require_once __DIR__ . "/extensions/Wikibase/client/config/WikibaseClient.example.php";' >> LocalSettings.php
+  # TODO make this unncessary. Include hack to make testing work with the current code
+  echo 'require_once __DIR__ . "/extensions/Wikibase/client/config/WikibaseClient.jenkins.php";' >> LocalSettings.php
 }
 
 function apply_repo_settings {
@@ -38,7 +46,9 @@ function apply_repo_settings {
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
+  echo 'wfLoadExtension( "WikibaseRepo", "$IP/extensions/Wikibase/repo/extension.json" );' >> LocalSettings.php
+  # Use example config for testing
+  echo 'require_once __DIR__ . "/extensions/Wikibase/repo/config/Wikibase.example.php";' >> LocalSettings.php
 }
 
 cd $WORKSPACE/src
@@ -51,6 +61,8 @@ if [ -v PHPTAGS ]
 then
   echo '<?php' >> LocalSettings.php
 fi
+
+apply_common_settings
 
 if [ "$REPO" = "repo" ]
 then
