@@ -1,0 +1,46 @@
+{
+	"name": "Wikibase View",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/view/",
+	"description": "View component for the Wikibase Repository",
+	"type": "wikibase",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
+	"callback": "\\Wikibase\\View\\Registrar::registerExtension",
+	"MessagesDirs": {
+		"WikibaseView": []
+	},
+	"AutoloadClasses": {
+		"Wikibase\\View\\Registrar": "Registrar.php",
+		"Wikibase\\View\\DummyLocalizedTextProvider": "src/DummyLocalizedTextProvider.php",
+		"Wikibase\\View\\EditSectionGenerator": "src/EditSectionGenerator.php",
+		"Wikibase\\View\\EmptyEditSectionGenerator": "src/EmptyEditSectionGenerator.php",
+		"Wikibase\\View\\EntityIdFormatterFactory": "src/EntityIdFormatterFactory.php",
+		"Wikibase\\View\\EntityTermsView": "src/EntityTermsView.php",
+		"Wikibase\\View\\EntityView": "src/EntityView.php",
+		"Wikibase\\View\\HtmlSnakFormatterFactory": "src/HtmlSnakFormatterFactory.php",
+		"Wikibase\\View\\HtmlTermRenderer": "src/HtmlTermRenderer.php",
+		"Wikibase\\View\\ItemView": "src/ItemView.php",
+		"Wikibase\\View\\LanguageDirectionalityLookup": "src/LanguageDirectionalityLookup.php",
+		"Wikibase\\View\\LocalizedTextProvider": "src/LocalizedTextProvider.php",
+		"Wikibase\\View\\Module\\TemplateModule": "src/Module/TemplateModule.php",
+		"Wikibase\\View\\PropertyView": "src/PropertyView.php",
+		"Wikibase\\View\\SimpleEntityTermsView": "src/SimpleEntityTermsView.php",
+		"Wikibase\\View\\SiteLinksView": "src/SiteLinksView.php",
+		"Wikibase\\View\\SnakHtmlGenerator": "src/SnakHtmlGenerator.php",
+		"Wikibase\\View\\SpecialPageLinker": "src/SpecialPageLinker.php",
+		"Wikibase\\View\\StatementGroupListView": "src/StatementGroupListView.php",
+		"Wikibase\\View\\StatementHtmlGenerator": "src/StatementHtmlGenerator.php",
+		"Wikibase\\View\\StatementSectionsView": "src/StatementSectionsView.php",
+		"Wikibase\\View\\Template\\Template": "src/Template/Template.php",
+		"Wikibase\\View\\Template\\TemplateFactory": "src/Template/TemplateFactory.php",
+		"Wikibase\\View\\Template\\TemplateRegistry": "src/Template/TemplateRegistry.php",
+		"Wikibase\\View\\TermsListView": "src/TermsListView.php",
+		"Wikibase\\View\\ToolbarEditSectionGenerator": "src/ToolbarEditSectionGenerator.php",
+		"Wikibase\\View\\ViewFactory": "src/ViewFactory.php"
+	},
+	"manifest_version": 2
+}
