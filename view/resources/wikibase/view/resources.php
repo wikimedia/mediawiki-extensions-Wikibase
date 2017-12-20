@@ -57,6 +57,7 @@ return call_user_func( function() {
 			],
 			'messages' => [
 				'wikibase-save-inprogress',
+				'wikibase-publish-inprogress',
 			]
 		],
 

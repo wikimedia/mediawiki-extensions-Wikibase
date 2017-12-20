@@ -26,6 +26,8 @@ class ParserOutputJsConfigBuilder {
 	 * @return array
 	 */
 	public function build( EntityDocument $entity ) {
+		global $wgEditSubmitButtonLabelPublish;
+
 		$entityId = $entity->getId();
 
 		if ( !$entityId ) {
@@ -36,7 +38,8 @@ class ParserOutputJsConfigBuilder {
 
 		$configVars = [
 			'wbEntityId' => $entityId,
-			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity ) )
+			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity ) ),
+			'wgEditSubmitButtonLabelPublish' => $wgEditSubmitButtonLabelPublish,
 		];
 
 		return $configVars;

@@ -46,7 +46,7 @@
 			onRemove: null,
 			buttonLabels: {
 				edit: mw.msg( 'wikibase-edit' ),
-				save: mw.msg( 'wikibase-save' ),
+				save: mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? mw.msg( 'wikibase-publish' ) : mw.msg( 'wikibase-save' ),
 				remove: mw.msg( 'wikibase-remove' ),
 				cancel: mw.msg( 'wikibase-cancel' )
 			}
