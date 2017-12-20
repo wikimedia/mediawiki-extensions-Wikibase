@@ -49,8 +49,6 @@ return call_user_func( function() {
 				'wikibase-remove-inprogress',
 				'wikibase-save',
 				'wikibase-publish',
-				'wikibase-save-inprogress',
-				'wikibase-publish-inprogress',
 			],
 		],
 
