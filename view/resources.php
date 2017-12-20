@@ -5,10 +5,7 @@
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 return call_user_func( function() {
-	global $wgResourceModules;
-
-	$wgResourceModules = array_merge(
-		$wgResourceModules,
+	return array_merge(
 		include __DIR__ . '/lib/resources.php',
 		include __DIR__ . '/resources/resources.php'
 	);
