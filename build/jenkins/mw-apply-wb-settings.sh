@@ -28,7 +28,11 @@ function apply_client_settings {
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = false;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
+  echo 'wfLoadExtension( "WikibaseClient", __DIR__ . "/extensions/Wikibase/client/extension.json" );' >> LocalSettings.php
+  # Use example config for testing
+  echo 'require_once __DIR__ . "/extensions/Wikibase/client/config/WikibaseClient.example.php";' >> LocalSettings.php
+  # TODO make this unncessary. Include hack to make testing work with the current code
+  echo 'require_once __DIR__ . "/extensions/Wikibase/client/config/WikibaseClient.jenkins.php";' >> LocalSettings.php
 }
 
 function apply_repo_settings {
