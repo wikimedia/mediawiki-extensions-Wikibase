@@ -12,7 +12,7 @@
  * @author Daniel Kinzler
  */
 
-if ( !defined( 'WBC_VERSION' ) ) {
+if ( !\ExtensionRegistry::getInstance()->isLoaded( 'WikibaseClient' ) ) {
 	die( 'Not an entry point. Load WikibaseClient.php first.' );
 }
 
