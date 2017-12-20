@@ -30,9 +30,10 @@
  *
  * @license GPL-2.0+
  */
-
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
-	require_once __DIR__ . '/repo/Wikibase.php';
+	wfLoadExtension( 'WikibaseLib', __DIR__ . '/lib/extension.json' );
+	wfLoadExtension( 'Wikibase View', __DIR__ . '/view/extension.json' );
+	wfLoadExtension( 'WikibaseRepo', __DIR__ . '/repo/extension.json' );
 
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		// Use example config for testing
@@ -41,11 +42,11 @@ if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnable
 }
 
 if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
-	require_once __DIR__ . '/client/WikibaseClient.php';
+	wfLoadExtension( 'WikibaseLib', __DIR__ . '/lib/extension.json' );
+	wfLoadExtension( 'Wikibase View', __DIR__ . '/view/extension.json' );
+	wfLoadExtension( 'Wikibase Client', __DIR__ . '/client/extension.json' );
 
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		// Use example config for testing
-		require_once __DIR__ . '/client/config/WikibaseClient.example.php';
 		// TODO make this unncessary. Include hack to make testing work with the current code
 		require_once __DIR__ . '/client/config/WikibaseClient.jenkins.php';
 	}

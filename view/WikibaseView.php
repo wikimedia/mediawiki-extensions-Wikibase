@@ -1,22 +1,13 @@
 <?php
 
-if ( defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-	// Do not initialize more than once.
-	return 1;
-}
-
-define( 'WIKIBASE_VIEW_VERSION', '0.1-dev' );
-
-// Include the composer autoloader if it is present.
-if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
-	require_once __DIR__ . '/vendor/autoload.php';
-}
-
-// Load autoload info as long as extension classes are not PSR-4-autoloaded
-require_once __DIR__  . '/autoload.php';
-
-if ( defined( 'MEDIAWIKI' ) ) {
-	call_user_func( function() {
-		require_once __DIR__ . '/init.mw.php';
-	} );
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'Wikibase View', __DIR__ . '/extension.json' );
+	wfWarn(
+		'Deprecated PHP entry point used for Wikibase View extension. ' .
+		'Please use wfLoadExtension instead, ' .
+		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+	);
+	return;
+} else {
+	die( 'This version of the Wikibase View extension requires MediaWiki 1.31+' );
 }
