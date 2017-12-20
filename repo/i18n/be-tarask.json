@@ -208,6 +208,7 @@
 	"wikibase-setlabeldescriptionaliases-intro": "Гэтая форма дазваляе вам вызначыць метку, апісаньне і псэўданімы элемэнту. Вам трэба спачатку падаць ідэнтыфікатар элемэнту (напрыклад, «Q23») і код мовы (напрыклад, «en»).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Метка:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Апісаньне:",
+	"wikibase-setlabeldescriptionaliases-aliases-label": "Псэўданімы:",
 	"special-setsitelink": "Вызначыць спасылку на сайт",
 	"wikibase-setsitelink-site": "Ідэнтыфікатар сайта:",
 	"wikibase-setsitelink-label": "Спасылка на сайт:",
