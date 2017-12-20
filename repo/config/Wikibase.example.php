@@ -12,10 +12,6 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'WB_VERSION' ) ) {
-	die( 'Not an entry point. Load Wikibase.php first.' );
-}
-
 call_user_func( function() {
 	global $wgContentHandlerUseDB,
 		$wgDBname,
