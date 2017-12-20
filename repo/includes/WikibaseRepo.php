@@ -1894,6 +1894,8 @@ class WikibaseRepo {
 						// T174238
 						'ami',
 
+						// T181823
+						'fro', 'frm',
 					] )
 				),
 
