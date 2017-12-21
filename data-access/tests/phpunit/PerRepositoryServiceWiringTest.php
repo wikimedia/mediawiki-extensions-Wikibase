@@ -7,7 +7,7 @@ use LogicException;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -35,7 +35,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 		$container = new PerRepositoryServiceContainer(
 			false,
 			'',
-			new PrefixMappingEntityIdParser( [ '' => '' ], $this->getMock( EntityIdParser::class ) ),
+			new PrefixMappingEntityIdParser( [ '' => '' ], new ItemIdParser() ),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),

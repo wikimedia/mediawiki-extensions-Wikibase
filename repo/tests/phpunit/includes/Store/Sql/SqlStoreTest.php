@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use Wikibase\DataAccess\WikibaseServices;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\IdGenerator;
@@ -68,7 +68,7 @@ class SqlStoreTest extends MediaWikiTestCase {
 
 		return new SqlStore(
 			$changeFactory,
-			$this->getMock( EntityIdParser::class ),
+			new ItemIdParser(),
 			$entityIdComposer,
 			$this->getMock( EntityIdLookup::class ),
 			$this->getMock( EntityTitleStoreLookup::class ),

@@ -9,7 +9,7 @@ use Language;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -48,7 +48,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new ApiHelperFactory(
 			$this->getMock( EntityTitleLookup::class ),
 			$this->getMock( ExceptionLocalizer::class ),
-			$this->getMock( PropertyDataTypeLookup::class ),
+			new InMemoryDataTypeLookup(),
 			new HashSiteStore(),
 			$summaryFormatter,
 			$this->getMock( EntityRevisionLookup::class ),

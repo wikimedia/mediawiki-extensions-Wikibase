@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
@@ -22,7 +22,7 @@ class SqlEntityIdPagerFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testNewSqlEntityIdPager() {
 		$factory = new SqlEntityIdPagerFactory(
 			new EntityNamespaceLookup( [] ),
-			$this->getMock( EntityIdParser::class )
+			new ItemIdParser()
 		);
 		$pager = $factory->newSqlEntityIdPager();
 
