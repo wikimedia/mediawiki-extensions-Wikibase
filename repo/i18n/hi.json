@@ -11,7 +11,8 @@
 			"Sfic",
 			"Upendradutt93",
 			"Sachinkatiyar",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Rajatkatiyar10"
 		]
 	},
 	"wikibase-entity": "इकाई",
@@ -20,10 +21,12 @@
 	"wikibase-entity-query": "प्रश्न",
 	"wikibase-edit": "संपादन",
 	"wikibase-save": "सहेजें",
+	"wikibase-publish": "प्रकाशित करना",
 	"wikibase-cancel": "रद्द करें",
 	"wikibase-add": "जोड़ें",
 	"wikibase-addreference": "सन्दर्भ जोड़ें",
 	"wikibase-save-inprogress": "सहेजा जा रहा है…",
+	"wikibase-publish-inprogress": "प्रकाशित किया जा रहा है…",
 	"wikibase-remove-inprogress": "हटाया जा रहा है…",
 	"wikibase-statementlistview-add": "जोड़ें",
 	"wikibase-statementgrouplistview-add": "जोड़ें",
@@ -135,6 +138,7 @@
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" मान्य भाषा कोड नहीं है।",
 	"special-entitydata": "इकाई डाटा",
 	"wikibase-entitydata-bad-id": "अमान्य आईडी: $1",
+	"wikibase-entitydata-rdf-disabled": "इस प्रकार की संस्था के लिए RDF निर्यात मना है: $1|",
 	"wikibase-entitydata-title": "इकाई डाटा",
 	"special-entitypage": "इकाई पृष्ठ",
 	"wikibase-entitypage-title": "इकाई पृष्ठ",

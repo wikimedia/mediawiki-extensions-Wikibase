@@ -89,7 +89,7 @@
 	"wikibase-entitieswithoutlabel-label-language": "Езиков код:",
 	"wikibase-entitieswithoutlabel-label-type": "Тип:",
 	"wikibase-entitieswithoutlabel-submit": "Търсене",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" не е валиден езиков код.",
+	"wikibase-entitieswithoutlabel-invalid-language": "„$1“ не е валиден езиков код.",
 	"special-itemswithoutsitelinks": "Обекти без междуезикови препратки",
 	"wikibase-restoreold": "възстановяване",
 	"wikibase-listdatatypes-url-head": "URL адрес",

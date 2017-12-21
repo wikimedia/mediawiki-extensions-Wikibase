@@ -9,7 +9,8 @@
 			"Banjo",
 			"Amire80",
 			"Macofe",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Athena in Wonderland"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estruturados",
@@ -19,11 +20,13 @@
 	"wikibase-entity-query": "pescuda",
 	"wikibase-edit": "editar",
 	"wikibase-save": "gardar",
+	"wikibase-publish": "publicar",
 	"wikibase-cancel": "cancelar",
 	"wikibase-add": "engadir",
 	"wikibase-addqualifier": "engadir un cualificativo",
 	"wikibase-addreference": "engadir unha referencia",
 	"wikibase-save-inprogress": "Gardando...",
+	"wikibase-publish-inprogress": "Publicando…",
 	"wikibase-remove-inprogress": "Eliminando...",
 	"wikibase-statementlistview-add": "engadir un valor",
 	"wikibase-statementlistview-add-tooltip": "Engadir un valor novo",

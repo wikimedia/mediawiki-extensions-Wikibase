@@ -95,7 +95,7 @@
 	"wikibase-validator-not-allowed": "Valeur interdite : $1",
 	"wikibase-validator-no-validators": "Interdit",
 	"datatypes-type-string": "Chaîne",
-	"datatypes-type-quantity": "Ποσότητα",
+	"datatypes-type-quantity": "Quantité",
 	"datatypes-type-monolingualtext": "Texte monolingue",
 	"datatypes-type-multilingualtext": "Texte multilingue",
 	"datatypes-type-number": "Nombre",
