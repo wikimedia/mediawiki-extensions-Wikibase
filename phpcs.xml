@@ -41,4 +41,6 @@
 	<file>.</file>
 	<exclude-pattern>view/lib/wikibase-api/WikibaseJavaScriptApi.php</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
+	<!-- See https://phabricator.wikimedia.org/T158974 -->
+	<!-- <arg name="bootstrap" value="./vendor/mediawiki/mediawiki-codesniffer/utils/bootstrap-ci.php" /> -->
 </ruleset>
