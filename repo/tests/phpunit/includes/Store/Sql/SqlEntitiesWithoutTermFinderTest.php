@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -226,7 +226,7 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 		$this->setExpectedException( InvalidArgumentException::class );
 
 		$finder = new SqlEntitiesWithoutTermFinder(
-			$this->getMock( EntityIdParser::class ),
+			new ItemIdParser(),
 			new EntityNamespaceLookup( [] ),
 			[
 				Item::ENTITY_TYPE => 'Q',
@@ -244,7 +244,7 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 		$this->setExpectedException( InvalidArgumentException::class );
 
 		$finder = new SqlEntitiesWithoutTermFinder(
-			$this->getMock( EntityIdParser::class ),
+			new ItemIdParser(),
 			new EntityNamespaceLookup( [] ),
 			[
 				Item::ENTITY_TYPE => 'Q',

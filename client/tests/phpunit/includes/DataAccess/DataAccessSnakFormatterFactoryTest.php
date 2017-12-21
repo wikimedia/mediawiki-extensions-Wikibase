@@ -8,9 +8,9 @@ use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\LanguageFallbackChainFactory;
@@ -49,8 +49,8 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
 			$this->getOutputFormatSnakFormatterFactory( $expectedFormat ),
-			$this->getMock( PropertyDataTypeLookup::class ),
-			$this->getMock( EntityIdParser::class ),
+			new InMemoryDataTypeLookup(),
+			new ItemIdParser(),
 			$languageFallbackLabelDescriptionLookupFactory,
 			false
 		);

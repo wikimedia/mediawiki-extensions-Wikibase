@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Serializers\ItemSerializer;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -181,7 +181,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				->getMock(),
 			$this->getMockBuilder( ItemSerializer::class )->disableOriginalConstructor()->getMock(),
 			$this->getMock( SiteLookup::class ),
-			$this->getMock( PropertyDataTypeLookup::class )
+			new InMemoryDataTypeLookup()
 		);
 		$errorReporter = new ApiErrorReporter(
 			$main,

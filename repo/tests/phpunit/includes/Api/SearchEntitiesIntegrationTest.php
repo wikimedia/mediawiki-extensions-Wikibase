@@ -13,14 +13,14 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\EntitySearchTermIndex;
@@ -212,8 +212,8 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			'',
 			$entitySearchTermIndex,
 			$this->newEntityTitleLookup(),
-			$this->getMock( PropertyDataTypeLookup::class ),
-			$this->getMock( ContentLanguages::class ),
+			new InMemoryDataTypeLookup(),
+			new StaticContentLanguages( [] ),
 			[ 'item', 'property' ],
 			[ '' => 'conceptBaseUri:' ]
 		);

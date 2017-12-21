@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use PHPUnit_Framework_TestCase;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -79,7 +80,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends PHPUnit_Framework_TestCas
 	public function testGetFormat() {
 		$formatter = new BinaryOptionDispatchingSnakFormatter(
 			'text/whatever',
-			$this->getMock( PropertyDataTypeLookup::class ),
+			new InMemoryDataTypeLookup(),
 			$this->getMock( SnakFormatter::class ),
 			$this->getMock( SnakFormatter::class ),
 			[]
