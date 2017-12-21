@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\StringValue;
@@ -200,7 +201,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = new OutputFormatSnakFormatterFactory(
 			[],
 			$valueFormatterFactory,
-			$this->getMock( PropertyDataTypeLookup::class ),
+			new InMemoryDataTypeLookup(),
 			new DataTypeFactory( [] )
 		);
 		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );

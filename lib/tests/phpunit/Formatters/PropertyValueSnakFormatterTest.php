@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
@@ -13,7 +14,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -55,27 +55,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $dataType
-	 *
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getMockDataTypeLookup( $dataType ) {
-		if ( $dataType !== '' ) {
-			$getDataTypeIdForPropertyResult = $this->returnValue( $dataType );
-		} else {
-			$getDataTypeIdForPropertyResult = $this->throwException(
-				new PropertyDataTypeLookupException( new PropertyId( 'P666' ) ) );
-		}
-
-		$typeLookup = $this->getMock( PropertyDataTypeLookup::class );
-		$typeLookup->expects( $this->atLeastOnce() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $getDataTypeIdForPropertyResult );
-
-		return $typeLookup;
-	}
-
-	/**
-	 * @param string $dataType
 	 * @param string $valueType
 	 *
 	 * @return DataTypeFactory
@@ -103,21 +82,23 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider formatSnakProvider
 	 */
 	public function testFormatSnak(
-		$snak, $dataType, $valueType, $targetFormat, ValueFormatter $formatter,
-		$expected, $expectedException = null
+		$snak,
+		$dataType,
+		$valueType,
+		$targetFormat,
+		ValueFormatter $formatter,
+		$expected,
+		$expectedException = null
 	) {
 		if ( $expectedException !== null ) {
 			$this->setExpectedException( $expectedException );
 		}
 
-		$typeLookup = $this->getMockDataTypeLookup( $dataType );
-		$typeFactory = $this->getMockDataTypeFactory( $dataType, $valueType );
-
 		$formatter = new PropertyValueSnakFormatter(
 			$targetFormat,
 			$formatter,
-			$typeLookup,
-			$typeFactory
+			new InMemoryDataTypeLookup(),
+			$this->getMockDataTypeFactory( $dataType, $valueType )
 		);
 
 		$actual = $formatter->formatSnak( $snak );
