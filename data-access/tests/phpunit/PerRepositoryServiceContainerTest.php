@@ -7,10 +7,10 @@ use stdClass;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\EntityIdComposer;
@@ -31,13 +31,10 @@ class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	 * @return PerRepositoryServiceContainer
 	 */
 	private function newRepositoryServiceContainer() {
-		/** @var EntityIdParser $idParser */
-		$idParser = $this->getMock( EntityIdParser::class );
-
 		return new PerRepositoryServiceContainer(
 			'foowiki',
 			'foo',
-			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $idParser ),
+			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new ItemIdParser() ),
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
