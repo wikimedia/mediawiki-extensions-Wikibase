@@ -1,8 +1,6 @@
 /**
  * JavaScript storing revision ids about different sections.
  *
- * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- *
  * @license GPL-2.0-or-later
  * @author Tobias Gritschacher
  */
@@ -13,6 +11,7 @@
 	 * Offers access to stored revision ids
 	 *
 	 * @constructor
+	 * @param {number} baseRev
 	 */
 	var SELF = wb.RevisionStore = function WbRevisionStore( baseRev ) {
 		this._revisions = {
@@ -25,9 +24,14 @@
 		};
 	};
 
+	/**
+	 * @class wikibase.RevisionStore
+	 */
 	$.extend( SELF.prototype, {
+
 		/**
-		 * Returns the base revision id.
+		 * Returns the original base revision number of the one entity this RevisionStore was
+		 * constructed for.
 		 *
 		 * @return {number}
 		 */
@@ -36,7 +40,7 @@
 		},
 
 		/**
-		 * Returns the label revision id.
+		 * Returns the currently used revision number for all labels.
 		 *
 		 * @return {number}
 		 */
@@ -45,7 +49,7 @@
 		},
 
 		/**
-		 * Returns the description revision id.
+		 * Returns the currently used revision number for all descriptions.
 		 *
 		 * @return {number}
 		 */
@@ -54,7 +58,7 @@
 		},
 
 		/**
-		 * Returns the aliases revision id.
+		 * Returns the currently used revision number for all aliases.
 		 *
 		 * @return {number}
 		 */
@@ -63,31 +67,43 @@
 		},
 
 		/**
-		 * Returns the sitelinks revision id.
+		 * Returns the currently used revision number for a sitelink, per global site identifier.
+		 * Falls back to the base revision this RevisionStore was constructed with.
 		 *
+		 * Note this is not globally unique! Different entities with sitelinks can not share the
+		 * same RevisionStore!
+		 *
+		 * @param {string} siteId
 		 * @return {number}
 		 */
-		getSitelinksRevision: function ( lang ) {
-			if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
-				return this._revisions.sitelinksRevision[ lang ];
+		getSitelinksRevision: function ( siteId ) {
+			if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, siteId ) ) {
+				return this._revisions.sitelinksRevision[ siteId ];
 			}
+
 			return this._revisions.baseRevision;
 		},
 
 		/**
-		 * Returns the claim revision id.
+		 * Returns the currently used revision number for a statement, per statement GUID.
 		 *
+		 * Since statement GUIDs are globally unique, different entities with statements can
+		 * theoretically share the same RevisionStore. However, this is not how RevisionStores are
+		 * meant to be used, and highly discouraged.
+		 *
+		 * @param {string} statementGuid
 		 * @return {number}
 		 */
-		getClaimRevision: function ( claimGuid ) {
-			if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
-				return this._revisions.claimRevisions[ claimGuid ];
+		getClaimRevision: function ( statementGuid ) {
+			if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, statementGuid ) ) {
+				return this._revisions.claimRevisions[ statementGuid ];
 			}
+
 			return this._revisions.baseRevision;
 		},
 
 		/**
-		 * Saves the label revision id.
+		 * Updates the currently used revision number for all labels.
 		 *
 		 * @param {number} rev
 		 */
@@ -96,7 +112,7 @@
 		},
 
 		/**
-		 * Saves the description revision id.
+		 * Updates the currently used revision number for all descriptions.
 		 *
 		 * @param {number} rev
 		 */
@@ -105,7 +121,7 @@
 		},
 
 		/**
-		 * Saves the aliases revision id.
+		 * Updates the currently used revision number for all aliases.
 		 *
 		 * @param {number} rev
 		 */
@@ -114,23 +130,23 @@
 		},
 
 		/**
-		 * Saves the sitelinks revision id.
+		 * Updates the currently used revision number for a sitelink, per global site identifier.
 		 *
 		 * @param {number} rev
-		 * @param {string} lang
+		 * @param {string} siteId
 		 */
-		setSitelinksRevision: function ( rev, lang ) {
-			this._revisions.sitelinksRevision[ lang ] = rev;
+		setSitelinksRevision: function ( rev, siteId ) {
+			this._revisions.sitelinksRevision[ siteId ] = rev;
 		},
 
 		/**
-		 * Saves the claim revision id.
+		 * Updates the currently used revision number for a statement, per statement GUID.
 		 *
 		 * @param {number} rev
-		 * @param {string} claimGuid
+		 * @param {string} statementGuid
 		 */
-		setClaimRevision: function ( rev, claimGuid ) {
-			this._revisions.claimRevisions[ claimGuid ] = rev;
+		setClaimRevision: function ( rev, statementGuid ) {
+			this._revisions.claimRevisions[ statementGuid ] = rev;
 		}
 
 	} );
