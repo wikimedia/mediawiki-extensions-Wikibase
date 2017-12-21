@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_a2ce1eb7",
+        "filename": "view/resources/wikibase/wikibase.RevisionStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-12-21T16:54:08Z",
+      "side": 1,
+      "message": "I’m not sure if this is correct – perhaps “unique *across* all entities”?",
+      "range": {
+        "startLine": 89,
+        "startChar": 41,
+        "endLine": 89,
+        "endChar": 45
+      },
+      "revId": "1e64698ee37d7de92e289b3f8ad12db3c61451da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
