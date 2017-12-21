@@ -58,6 +58,12 @@ class PropertyPage
       properties[handle] = property
     end
 
+    wait_for_search_index
+
     properties
+  end
+
+  def wait_for_search_index
+    sleep 2
   end
 end
