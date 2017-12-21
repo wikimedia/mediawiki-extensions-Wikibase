@@ -25,12 +25,6 @@ module EntitySelectorPage
     end
   end
 
-  def wait_for_suggestions_list
-    wait_until do
-      entity_selector_search?
-    end
-  end
-
   def select_claim_property(property_label)
     claim_entity_selector_input_element.clear
     self.claim_entity_selector_input = property_label
