@@ -9,7 +9,7 @@ use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\ResultWrapper;
 
@@ -267,11 +267,11 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param Database $db
+	 * @param IDatabase $db
 	 *
 	 * @return string
 	 */
-	private function getWhere( array $entityIds, Database $db ) {
+	private function getWhere( array $entityIds, IDatabase $db ) {
 		$where = [];
 
 		foreach ( $entityIds as $entityId ) {
