@@ -129,7 +129,7 @@ class SearchEntities extends ApiBase {
 		];
 
 		if ( $props !== null && in_array( 'url', $props ) ) {
-			$entry['url'] = $title->getFullUrl();
+			$entry['url'] = $title->getFullURL();
 		}
 		if ( $entityId instanceof PropertyId ) {
 			$entry['datatype'] = $this->propertyDataTypeLookup
