@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_f6e1042b",
+        "filename": "view/resources/wikibase/wikibase.RevisionStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-22T08:01:08Z",
+      "side": 1,
+      "message": "something like this probably also could be added to getClaimRevision",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 77
+      },
+      "revId": "a769064890e2e75d155f0a52c40125300fbd4ed3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_36ec0c20",
+        "filename": "view/resources/wikibase/wikibase.RevisionStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-22T08:01:08Z",
+      "side": 1,
+      "message": "why this note needs to be added here?",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 24
+      },
+      "revId": "a769064890e2e75d155f0a52c40125300fbd4ed3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_96fcf8d6",
+        "filename": "view/resources/wikibase/wikibase.RevisionStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-22T08:01:08Z",
+      "side": 1,
+      "message": "why does this paragraph need to be added here?",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "a769064890e2e75d155f0a52c40125300fbd4ed3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
