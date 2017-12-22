@@ -22,6 +22,30 @@
       "revId": "3648c6f95ce23c3b76262894a565da55392c03a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_b105c615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-22T11:28:35Z",
+      "side": 1,
+      "message": "Not at this point, no, but possibly in the future. E.g. when we need to show multiple entities (that are not sub-entities) on one page.\n\nAt least that was my idea. There are currently no plans to do something like this.",
+      "parentUuid": "cee8db29_56d9d082",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 22
+      },
+      "revId": "3648c6f95ce23c3b76262894a565da55392c03a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
