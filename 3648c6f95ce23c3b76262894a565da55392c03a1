@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_56d9d082",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-22T08:00:58Z",
+      "side": 1,
+      "message": "is this a good thing? \"kind of introducing\" something but not saying it? Why do we want to have some kind of implicit functionality here added? Wikibase itself does not make any use of it, and is not meant to, right?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 22
+      },
+      "revId": "3648c6f95ce23c3b76262894a565da55392c03a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
