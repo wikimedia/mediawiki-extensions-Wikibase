@@ -18,7 +18,7 @@
 	"wikibase-error-remove-timeout": "Поради възникнали технически трудности изтриването не можа да бъде завършено.",
 	"wikibase-error-autocomplete-connection": "Възникна проблем със заявката към API интерфейса на Уикипедия. Опитайте по-късно.",
 	"wikibase-error-autocomplete-response": "Отговор на сървъра: $1",
-	"wikibase-error-ui-no-external-page": "Посочената статия не беше намерена в съответния сайт.",
+	"wikibase-error-ui-no-external-page": "Страницата „$2“ не е намерена на „$1“.",
 	"wikibase-error-ui-edit-conflict": "Настъпил е конфликт на редакции. Презаредете и съхранете отново.",
 	"wikibase-timedetails-timezone": "Часова зона",
 	"wikibase-timedetails-calendar": "Календар",
