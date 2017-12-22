@@ -335,7 +335,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$this->assertEquals( $expectedOk, $status->isOK(), 'unresolved conflict?' );
 
 		if ( $expectedData !== null ) {
-			$this->assertTrue( $status->isOK(), '$status->isOk()' );
+			$this->assertTrue( $status->isOK(), '$status->isOK()' );
 
 			$result = $status->getValue();
 			$this->assertArrayHasKey( 'revision', $result, '$status->getValue["revision"]' );
