@@ -53,7 +53,7 @@ class TypeDispatchingEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @covers TypeDispatchingEntityStore::getStore
+	 * @covers \Wikibase\Lib\Store\TypeDispatchingEntityStore::getStore
 	 */
 	public function testGivenInvalidCallback_saveEntityFails() {
 		$store = new TypeDispatchingEntityStore(
