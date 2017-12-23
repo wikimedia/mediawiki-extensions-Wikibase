@@ -50,6 +50,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		// why is this needed?
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
+		$page->getContext()->setLanguage( 'en' );
 
 		$page->setRequestHandler( $this->newRequestHandler() );
 		$page->setEntityDataFormatProvider( $this->newEntityDataFormatProvider() );
