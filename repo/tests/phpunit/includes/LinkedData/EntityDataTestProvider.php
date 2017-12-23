@@ -516,7 +516,7 @@ class EntityDataTestProvider {
 			'',      // subpage
 			[ 'id' => 'P42', 'format' => 'rdf' ], // parameters
 			[], // headers
-			'!RDF export is disabled for this type of entity: property!', // output regex
+			'!wikibase-entitydata-rdf-disabled: property!', // output regex
 			400,       // http code
 		];
 

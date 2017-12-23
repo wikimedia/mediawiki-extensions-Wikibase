@@ -185,7 +185,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		// construct Context and OutputPage
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
-		$context->setLanguage( 'en' );
+		$context->setLanguage( 'qqx' );
 
 		$output = new OutputPage( $context );
 		$output->setTitle( $this->interfaceTitle );

@@ -50,6 +50,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		// why is this needed?
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
+		$page->getContext()->setLanguage( 'qqx' );
 
 		$page->setRequestHandler( $this->newRequestHandler() );
 		$page->setEntityDataFormatProvider( $this->newEntityDataFormatProvider() );
@@ -204,7 +205,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertContains( 'Supported formats are: json, nt, rdf, html', $output, "output" );
+		$expected = '(wikibase-entitydata-text: json(comma-separator)nt(comma-separator)' .
+			'rdf(comma-separator)html)';
+		$this->assertContains( $expected, $output, "output" );
 	}
 
 }
