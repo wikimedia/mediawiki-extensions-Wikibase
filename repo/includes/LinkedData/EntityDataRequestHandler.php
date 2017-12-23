@@ -202,20 +202,20 @@ class EntityDataRequestHandler {
 		// If there is no ID, fail
 		if ( $id === null || $id === '' ) {
 			//TODO: different error message?
-			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id', $id ) );
+			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id', $id ) );
+			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
 		if ( $format === 'rdf' || $format === 'ttl' ) {
 			if ( in_array( $entityId->getEntityType(), $this->disabledRdfExportEntityTypes ) ) {
 				throw new HttpError(
 					400,
-					wfMessage( 'wikibase-entitydata-rdf-disabled', $entityId->getEntityType() )
+					$output->msg( 'wikibase-entitydata-rdf-disabled', $entityId->getEntityType() )
 				);
 			}
 		}
@@ -344,7 +344,7 @@ class EntityDataRequestHandler {
 
 		if ( $format === null ) {
 			$mimeTypes = implode( ', ', $this->entityDataFormatProvider->getSupportedMimeTypes() );
-			$msg = wfMessage( 'wikibase-entitydata-not-acceptable', $mimeTypes );
+			$msg = $output->msg( 'wikibase-entitydata-not-acceptable', $mimeTypes );
 			throw new HttpError( 406, $msg );
 		}
 
