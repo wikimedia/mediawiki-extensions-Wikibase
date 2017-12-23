@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
 class TypeDispatchingEntityRevisionLookupTest extends MediaWikiTestCase {
 
 	/**
-	 * @covers TypeDispatchingEntityRevisionLookup::getLookup
+	 * @covers \Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup::getLookup
 	 */
 	public function testGivenInvalidCallback_getEntityRevisionFails() {
 		$lookup = new TypeDispatchingEntityRevisionLookup(

@@ -20,7 +20,7 @@ use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
 class TypeDispatchingEntityTitleStoreLookupTest extends MediaWikiTestCase {
 
 	/**
-	 * @covers TypeDispatchingEntityTitleStoreLookup::getLookup
+	 * @covers \Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup::getLookup
 	 */
 	public function testGivenInvalidCallback_getTitleForIdFails() {
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
