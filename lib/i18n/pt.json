@@ -142,7 +142,7 @@
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Alterou o rótulo, descrição e nomes alternativos [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Adicionou ligação para [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Adicionou ligação com emblema para [$2]",
-	"wikibase-entity-summary-wbsetsitelink-set": "Alterou ligação para [$2]",
+	"wikibase-entity-summary-wbsetsitelink-set": "Alterou hiperligação para [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "Alterou emblemas para [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "Alterou ligação e emblemas para [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Removeu ligação para [$2]",

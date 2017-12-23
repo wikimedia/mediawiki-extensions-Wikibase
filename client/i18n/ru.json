@@ -17,7 +17,8 @@
 			"Adam-Yourist",
 			"Туллук",
 			"Gamliel Fishkin",
-			"Alexey zakharenkov"
+			"Alexey zakharenkov",
+			"Facenapalm"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -25,6 +26,7 @@
 	"apihelp-query+wbentityusage-param-prop": "Свойства для включения в результат",
 	"apihelp-query+wbentityusage-param-limit": "Сколько всего использований сущности возвращать.",
 	"apihelp-query+wblistentityusage-description": "Возвращает все страницы, которые используют идентификаторы указанной сущности.",
+	"apihelp-query+wblistentityusage-summary": "Возвращает все страницы, которые используют идентификаторы указанной сущности.",
 	"apihelp-query+wblistentityusage-param-prop": "Свойства для включения в результат.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Если активировано, URL сущности будет добавлен к результату запроса.",
 	"apihelp-query+wblistentityusage-param-aspect": "Возвращать только идентификаторы, которые используются в данном аспекте.",
