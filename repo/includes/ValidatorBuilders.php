@@ -184,7 +184,8 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'string' );
 		//TODO: validate UTF8 (here and elsewhere)
 		$validators[] = new StringLengthValidator( 1, $maxLength, 'mb_strlen' );
-		$validators[] = new RegexValidator( '/^\s|[\v\t]|\s$/u', true ); // no leading/trailing whitespace, no line breaks.
+		// no leading/trailing whitespace, no tab or vertical whitespace, no line breaks.
+		$validators[] = new RegexValidator( '/^\s|[\v\t]|\s$/u', true );
 
 		return $validators;
 	}
