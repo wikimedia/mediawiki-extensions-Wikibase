@@ -671,8 +671,8 @@ final class WikibaseClient {
 	 * @return RepositoryDefinitions
 	 */
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
-		// FIXME: It might no longer be needed to check different settings (repoDatabase vs foreignRepositories)
-		// once repository settings are unified, see: T153767.
+		// FIXME: It might no longer be needed to check different settings (repoDatabase vs
+		// repositories) once repository settings are unified, see: T153767.
 		$definitions = [ '' => [
 			'database' => $settings->getSetting( 'repoDatabase' ),
 			'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
@@ -680,7 +680,7 @@ final class WikibaseClient {
 			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ];
 
-		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+		foreach ( $settings->getSetting( 'repositories' ) as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
