@@ -128,7 +128,7 @@ class TermValidatorFactory {
 		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 1, $this->maxLength, 'mb_strlen' );
-		$validators[] = new RegexValidator( '/^\s|[\v\t]|\s$/u', true ); // no leading/trailing whitespace, no line breaks.
+		$validators[] = new RegexValidator( '/^\s|[\v\t]|\s$/u', true ); // no leading/trailing whitespace, no tab or vertical whitespace, no line breaks.
 
 		return $validators;
 	}
