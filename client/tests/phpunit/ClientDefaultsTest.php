@@ -60,7 +60,16 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'repoArticlePath' => '/wiki/$1', // hardcoded default
 					'repoScriptPath' => '/w', // hardcoded default
 					'siteGlobalID' => 'mw_mywiki',
-					'repoDatabase' => null,
+					'repositories' => [
+						'' => [
+							'repoDatabase' => null,
+							'baseUri' => '//www.wikidata.org/entity/',
+							'entityNamespaces' => [
+								'item' => 0,
+								'property' => 120,
+							],
+						],
+					],
 					'changesDatabase' => null,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
 				]
@@ -102,6 +111,9 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
+					'wgWBRepoSettings' => [
+						'entityNamespaces' => [ 'item' => 303 ],
+					],
 				],
 				true, // $repoIsLocal
 				[ // $expected
@@ -109,7 +121,12 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'repoDatabase' => false,
+					'repositories' => [
+						'' => [
+							'repoDatabase' => false,
+							'baseUri' => 'http://www.acme.com/entity/',
+						],
+					],
 					'changesDatabase' => false,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
 				]
@@ -117,13 +134,16 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 
 			[ // #4: derive changesDatabase
 				[ // $settings
-					'repoDatabase' => 'mw_foowiki',
+					'repositories' => [
+						'' => [
+							'repoDatabase' => 'mw_foowiki'
+						],
+					],
 				],
 				[ // $wg
 				],
 				false, // $repoIsLocal
 				[ // $expected
-					'repoDatabase' => 'mw_foowiki',
 					'changesDatabase' => 'mw_foowiki',
 				]
 			],
@@ -136,6 +156,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
+					'wgWBRepoSettings' => [ 'entityNamespaces' => [ 'item' => 303 ] ],
 				],
 				true, // $repoIsLocal
 				[ // $expected
@@ -143,7 +164,6 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'repoDatabase' => false,
 					'changesDatabase' => false,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
 				]
@@ -156,7 +176,11 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 				false, // $repoIsLocal
 				[ // $expected
 					'repoNamespaces' => [ 'item' => '', 'property' => 'Property' ],
-					'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
+					'repositories' => [
+						'' => [
+							'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
+						],
+					],
 				]
 			],
 		];
@@ -172,7 +196,11 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 				true, // $repoIsLocal
 				[ // $expected
 					'repoNamespaces' => $namespaceNames,
-					'entityNamespaces' => $entityNamespaces,
+					'repositories' => [
+						'' => [
+							'entityNamespaces' => $entityNamespaces,
+						],
+					],
 				]
 			];
 		}
@@ -195,10 +223,27 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 		//      to decide how to behave. Normally, this is true if and only if
 		//      WB_VERSION is defined.
 		$settings->setSetting( 'thisWikiIsTheRepo', $repoIsLocal );
+		// When "mocking" the repo being enabled, set the global so WikibaseSettings does not object
+		if ( $repoIsLocal && !WikibaseSettings::isRepoEnabled() ) {
+			define( 'WB_VERSION', 'GOAT' );
+		}
 
 		foreach ( $expected as $key => $exp ) {
 			$actual = $settings->getSetting( $key );
+
+			if ( $key === 'repositories' ) {
+				$this->assertRepositorySettingsEqual( $exp, $actual );
+				continue;
+			}
+
 			$this->assertSame( $exp, $actual, "Setting $key" );
+		}
+	}
+
+	private function assertRepositorySettingsEqual( $expected, $actual ) {
+		foreach ( $expected as $repoName => $expectedRepoSettings ) {
+			$actualToCompare = array_intersect_key( $actual[$repoName], $expectedRepoSettings );
+			$this->assertSame( $expectedRepoSettings, $actualToCompare );
 		}
 	}
 

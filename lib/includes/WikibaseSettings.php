@@ -65,7 +65,10 @@ class WikibaseSettings {
 		}
 
 		$settings = self::getSettings( 'wgWBClientSettings' );
-		$settings->setSetting( 'entityNamespaces', self::buildEntityNamespaceConfigurations( $settings ) );
+
+		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
+		self::applyEntityNamespacesToSettings( $settings, $entityNamespaces );
+
 		return $settings;
 	}
 
@@ -96,16 +99,46 @@ class WikibaseSettings {
 	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
 	private static function buildEntityNamespaceConfigurations( SettingsArray $settings ) {
-		if ( !$settings->hasSetting( 'entityNamespaces' ) ) {
+		if ( !$settings->hasSetting( 'repositories' ) && !$settings->hasSetting( 'entityNamespaces' ) ) {
 			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. 'The \'entityNamespaces\' setting has to be set to an '
 				. 'array mapping entity types to namespace IDs. '
 				. 'See Wikibase.example.php for details and examples.' );
 		}
 
-		$namespaces = $settings->getSetting( 'entityNamespaces' );
+		$namespaces = $settings->hasSetting( 'repositories' )
+			? self::getEntityNamespacesFromRepositorySettings( $settings->getSetting( 'repositories' ) )
+			: $settings->getSetting( 'entityNamespaces' );
+
 		Hooks::run( 'WikibaseEntityNamespaces', [ &$namespaces ] );
 		return $namespaces;
+	}
+
+	private static function getEntityNamespacesFromRepositorySettings( array $repositorySettings ) {
+		return array_reduce(
+			$repositorySettings,
+			function ( array $result, array $repoSettings ) {
+				return array_merge( $result, $repoSettings['entityNamespaces'] );
+			},
+			[]
+		);
+	}
+
+	private static function applyEntityNamespacesToSettings( SettingsArray $settings, array $entityNamespaces ) {
+		if ( !$settings->hasSetting( 'repositories' ) ) {
+			$settings->setSetting( 'entityNamespaces', $entityNamespaces );
+			return;
+		}
+
+		$repositorySettings = $settings->getSetting( 'repositories' );
+		$namespacesDefinedForRepositories = self::getEntityNamespacesFromRepositorySettings( $repositorySettings );
+
+		$namespacesInNoRepository = array_diff_key( $entityNamespaces, $namespacesDefinedForRepositories );
+
+		if ( $namespacesInNoRepository ) {
+			$repositorySettings['']['entityNamespaces'] += $namespacesInNoRepository;
+			$settings->setSetting( 'repositories', $repositorySettings );
+		}
 	}
 
 }
