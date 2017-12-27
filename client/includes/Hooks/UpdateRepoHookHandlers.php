@@ -64,7 +64,7 @@ class UpdateRepoHookHandlers {
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 
-		$repoDB = $settings->getSetting( 'repoDatabase' );
+		$repoDB = $wikibaseClient->getRepositoryDefinitions()->getDatabaseNames()[''];
 		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
 
 		if ( !$jobQueueGroup ) {
@@ -78,7 +78,7 @@ class UpdateRepoHookHandlers {
 			$namespaceChecker,
 			$jobQueueGroup,
 			$siteLinkLookup,
-			$settings->getSetting( 'repoDatabase' ),
+			$repoDB,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'propagateChangesToRepo' )
 		);
