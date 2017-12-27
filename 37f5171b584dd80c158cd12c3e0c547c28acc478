@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_88bde965",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-12-27T09:12:35Z",
+      "side": 1,
+      "message": "Line breaks are part of vertical whitespace.",
+      "range": {
+        "startLine": 187,
+        "startChar": 47,
+        "endLine": 187,
+        "endChar": 82
+      },
+      "revId": "37f5171b584dd80c158cd12c3e0c547c28acc478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
