@@ -167,13 +167,13 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.entitytermsview.css',
 			],
 			'dependencies' => [
-				'jquery.cookie',
 				'jquery.ui.closeable',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.toggler',
 				'jquery.wikibase.entitytermsforlanguagelistview',
 				'mediawiki.api',
 				'mediawiki.api.options',
+				'mediawiki.cookie',
 				'mediawiki.user',
 			],
 			'messages' => [
