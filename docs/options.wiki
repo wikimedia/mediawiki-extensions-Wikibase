@@ -8,7 +8,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 
 === Basic Settings ===
 
-;entityNamespaces: Defines which kind of entity is managed in which namespace. It is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. Mapping must be done for each type of entity that should be supported.
 ;changesDatabase: The database that changes are recorded to for processing by clients. This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; <code>false</code> means that the wiki's own database shall be used. '''Note''' that on the client, this setting should usually be the same as the '''repoDatabase''' setting.
 ;siteLinkGroups: The site groups to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is <code>array( 'wikipedia' )</code>. This defines which groups of sites can be linked to Wikibase items.
 :'''Note''' that this setting replaces the old ''siteLinkGroup'' setting, which only allowed for a single group.
@@ -36,6 +35,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 
 === Basic Settings ===
 
+;entityNamespaces: Defines which kind of entity is managed in which namespace. It is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. Mapping must be done for each type of entity that should be supported.
 ;dataRightsUrl: URL to link to license for data contents. Defaults to <code>$wgRightsUrl</code> setting.
 ;dataRightsText: Text for data license link. Defaults to <code>$wgRightsText</code> setting.
 ;sparqlEndpoint: URL to the service description of the SPARQL end point for the repository. Defaults to null, meaning there is no SPARQL endpoint.
@@ -81,8 +81,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;excludeNamespaces: List of namespaces on the client wiki to disable wikibase links, etc. for.  Default: <code>array()</code>. Example: <code>array( NS_USER_TALK )</code>.
 ;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>.
 :'''Note:''' This may be removed once we can get this information from the sites table.
-;repoConceptBaseUri: The base of the repository's concept URIs. Default is <code>'<i>repoUrl</i>/entity/'</code>.
-:'''Note:''' This may be removed once we can get this information from the sites table.
 ;repoScriptPath: The repository's script path. Default is $wgScriptPath, assuming that the repo's script path is the same as this wiki's script path.
 :'''Note:''' This may be removed once we can get this information from the sites table.
 ;repoArticlePath: The repository's article path. Default is $wgArticlePath, assuming that the repo's article path is the same as this wiki's script path.
@@ -93,8 +91,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;siteGroup: This site's site group (e.g. <code>'wikipedia'</code> or <code>'wikivoyage'</code>) as used in the sites table. The setting is optional and falls back to site store lookup. For performance reasons, it may be desireable to set this explicitly to avoid lookups.
 ;repoSiteId: Site ID of connected repository wiki. Default is to assume client and repo, so this setting defaults to siteGlobalID.
 ;repoSiteName: Site name of the connected repository wiki. Default is to assume client and repo are same wiki, so defaults to global $wgSitename setting.  If not the same wiki, defaults to 'Wikidata'. This setting can also be set to an i18n message key and will be handled as a message, if the message key exists so that the repo site name can be translatable.
-;repoDatabase: The logical name of the repository database, in a form that LBFactory can understand. If not <code>null</code>, the client wiki will access the repository's database directly, instead of locally caching information received via change notifications. Default: <code>null</code>. Note that <code>false</code> would mean "this wiki's database"!
-:'''Note:''' This is currently required to be not <code>null</code>, since local caching is not fully implemented.
 ;repoNamespaces: An array telling the client wiki which namespaces on the repository are used for which entity type. This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names. This information is used when constructing links to entities on the repository. Default (items in main namespace):
 <poem>
           array(
