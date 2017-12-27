@@ -60,7 +60,16 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'repoArticlePath' => '/wiki/$1', // hardcoded default
 					'repoScriptPath' => '/w', // hardcoded default
 					'siteGlobalID' => 'mw_mywiki',
-					'repoDatabase' => null,
+					'repositories' => [
+						'' => [
+							'repoDatabase' => null,
+							'baseUri' => '//www.wikidata.org/entity/',
+							'entityNamespaces' => [
+								'item' => 0,
+								'property' => 120,
+							],
+						],
+					],
 					'changesDatabase' => null,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
 				]
@@ -93,8 +102,10 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'sharedCacheKeyPrefix' => 'foo:WBL/' . rawurlencode( WBL_VERSION ),
 				]
 			],
+		];
 
-			[ // #3: local repo, no values set
+		if ( WikibaseSettings::isRepoEnabled() ) {
+			$cases[] = [ // #3: local repo, no values set
 				[ // $settings
 				],
 				[ // $wg
@@ -102,6 +113,9 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
+					'wgWBRepoSettings' => [
+						'entityNamespaces' => [ 'item' => 303 ],
+					],
 				],
 				true, // $repoIsLocal
 				[ // $expected
@@ -109,25 +123,36 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'repoDatabase' => false,
+					'repositories' => [
+						'' => [
+							'repoDatabase' => false,
+							'baseUri' => 'http://www.acme.com/entity/',
+						],
+					],
 					'changesDatabase' => false,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
 				]
-			],
+			];
+		}
 
-			[ // #4: derive changesDatabase
-				[ // $settings
-					'repoDatabase' => 'mw_foowiki',
+		$cases[] = [ // #4: derive changesDatabase
+			[ // $settings
+				'repositories' => [
+					'' => [
+						'repoDatabase' => 'mw_foowiki'
+					],
 				],
-				[ // $wg
-				],
-				false, // $repoIsLocal
-				[ // $expected
-					'repoDatabase' => 'mw_foowiki',
-					'changesDatabase' => 'mw_foowiki',
-				]
 			],
-			[ // #5: sharedCacheKeyPrefix explicitly set
+			[ // $wg
+			],
+			false, // $repoIsLocal
+			[ // $expected
+				'changesDatabase' => 'mw_foowiki',
+			]
+		];
+
+		if ( WikibaseSettings::isRepoEnabled() ) {
+			$cases[] = [ // #5: sharedCacheKeyPrefix explicitly set
 				[ // $settings
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24'
 				],
@@ -136,6 +161,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
+					'wgWBRepoSettings' => [ 'entityNamespaces' => [ 'item' => 303 ] ],
 				],
 				true, // $repoIsLocal
 				[ // $expected
@@ -143,22 +169,26 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'repoArticlePath' => '/mywiki',
 					'repoScriptPath' => '/mediawiki',
 					'siteGlobalID' => 'mw_mywiki',
-					'repoDatabase' => false,
 					'changesDatabase' => false,
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
 				]
+			];
+		}
+
+		$cases[] = [ // #6: derive repoNamespaces and entityNamespaces
+			[ // $settings
 			],
-			[ // #6: derive repoNamespaces and entityNamespaces
-				[ // $settings
-				],
-				[ // $wg
-				],
-				false, // $repoIsLocal
-				[ // $expected
-					'repoNamespaces' => [ 'item' => '', 'property' => 'Property' ],
-					'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
-				]
+			[ // $wg
 			],
+			false, // $repoIsLocal
+			[ // $expected
+				'repoNamespaces' => [ 'item' => '', 'property' => 'Property' ],
+				'repositories' => [
+					'' => [
+						'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
+					],
+				],
+			]
 		];
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
@@ -172,7 +202,11 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 				true, // $repoIsLocal
 				[ // $expected
 					'repoNamespaces' => $namespaceNames,
-					'entityNamespaces' => $entityNamespaces,
+					'repositories' => [
+						'' => [
+							'entityNamespaces' => $entityNamespaces,
+						],
+					],
 				]
 			];
 		}
@@ -198,7 +232,20 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 
 		foreach ( $expected as $key => $exp ) {
 			$actual = $settings->getSetting( $key );
+
+			if ( $key === 'repositories' ) {
+				$this->assertRepositorySettingsEqual( $exp, $actual );
+				continue;
+			}
+
 			$this->assertSame( $exp, $actual, "Setting $key" );
+		}
+	}
+
+	private function assertRepositorySettingsEqual( $expected, $actual ) {
+		foreach ( $expected as $repoName => $expectedRepoSettings ) {
+			$actualToCompare = array_intersect_key( $actual[$repoName], $expectedRepoSettings );
+			$this->assertSame( $expectedRepoSettings, $actualToCompare );
 		}
 	}
 

@@ -46,22 +46,22 @@ if ( !defined( 'WB_VERSION' ) ) {
 	// default to what you have $wgScriptPath set in the client.
 	$wgWBClientSettings['repoScriptPath'] = "/w";
 
-	// Database name of the repository, for direct access from the client.
-	// repoDatabase and changesDatabase will generally be the same.
-	// This requires the given database name to be known to LBFactory, see
-	// $wgLBFactoryConf below.
-	$wgWBClientSettings['repoDatabase'] = "repo";
-
 	// Tell the client which namespace ID on the repo holds which type of entity.
 	$baseRepoNs = 120;
 
 	define( 'WB_REPO_NS_ITEM', $baseRepoNs );
 	define( 'WB_REPO_NS_PROPERTY', $baseRepoNs + 2 );
 
-	// Tell Wikibase which namespace on the repo to use for which kind of entity
-	$wgWBClientSettings['entityNamespaces'] = [
-		'item' => WB_REPO_NS_ITEM,
-		'property' => WB_REPO_NS_PROPERTY
+	$wgWBClientSettings['repositories'] = [
+		'' => [
+			'repoDatabase' => 'repo',
+			'baseUri' => $wgWBClientSettings['repoUrl'] . '/entity',
+			'entityNamespaces' => [
+				'item' => WB_REPO_NS_ITEM,
+				'property' => WB_REPO_NS_PROPERTY
+			],
+			'prefixMapping' => [ '' => '' ],
+		]
 	];
 }
 
