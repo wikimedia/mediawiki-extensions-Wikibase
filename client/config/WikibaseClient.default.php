@@ -90,7 +90,7 @@ return call_user_func( function() {
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
-		'foreignRepositories' => [],
+		'repositories' => [],
 
 		// Enable writing of term_full_entity_id column in wb_terms table.
 		'writeFullEntityIdColumn' => function ( SettingsArray $settings ) {
