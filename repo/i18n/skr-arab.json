@@ -5,7 +5,9 @@
 		]
 	},
 	"wikibase-edit": "لکھو",
+	"wikibase-publish": "چھاپو",
 	"wikibase-add": "جوڑو",
+	"wikibase-publish-inprogress": "شائع تھیندا پئے۔۔۔",
 	"wikibase-label-empty": "کوئی سرخی کائنی",
 	"wikibase-description-empty": "کوئی وضاحت کائنی",
 	"wikibase-sitelinks-special": "ٻیاں سائٹاں",
