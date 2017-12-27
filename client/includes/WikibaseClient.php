@@ -531,17 +531,13 @@ final class WikibaseClient {
 	 */
 	public function getStore() {
 		if ( $this->store === null ) {
-			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
-			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
-			// $repoDatabase needs to be a logical database name that LBFactory understands.
-			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
 				$this->getWikibaseServices(),
-				$repoDatabase,
+				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode()
 			);
 		}
@@ -671,14 +667,15 @@ final class WikibaseClient {
 	 * @return RepositoryDefinitions
 	 */
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
-		// FIXME: It might no longer be needed to check different settings (repoDatabase vs foreignRepositories)
-		// once repository settings are unified, see: T153767.
-		$definitions = [ '' => [
-			'database' => $settings->getSetting( 'repoDatabase' ),
-			'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-		] ];
+		// B/C for now, should be removed soon.
+		if ( !array_key_exists( '', $settings->getSetting( 'foreignRepositories' ) ) ) {
+			$definitions = [ '' => [
+				'database' => $settings->getSetting( 'repoDatabase' ),
+				'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ];
+		}
 
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
@@ -842,8 +839,16 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	private function getRepoItemUriParser() {
+		// B/C compatibility, should be removed soon
+		// TODO: Move to check repo that has item entity not the default repo
+		$repositories = $this->settings->getSetting( 'foreignRepositories' );
+		if ( array_key_exists( '', $repositories ) ) {
+			$baseUri = $repositories['']['base-uri'];
+		} else {
+			$baseUri = $this->settings->getSetting( 'repoConceptBaseUri' );
+		}
 		return new SuffixEntityIdParser(
-			$this->settings->getSetting( 'repoConceptBaseUri' ),
+			$baseUri,
 			new ItemIdParser()
 		);
 	}
