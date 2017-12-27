@@ -531,17 +531,13 @@ final class WikibaseClient {
 	 */
 	public function getStore() {
 		if ( $this->store === null ) {
-			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
-			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
-			// $repoDatabase needs to be a logical database name that LBFactory understands.
-			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
 				$this->getWikibaseServices(),
-				$repoDatabase,
+				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode()
 			);
 		}
@@ -671,16 +667,27 @@ final class WikibaseClient {
 	 * @return RepositoryDefinitions
 	 */
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
-		// FIXME: It might no longer be needed to check different settings (repoDatabase vs foreignRepositories)
-		// once repository settings are unified, see: T153767.
-		$definitions = [ '' => [
-			'database' => $settings->getSetting( 'repoDatabase' ),
-			'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-		] ];
+		$definitions = [];
 
-		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+		// Backwards compatibility: if the old "foreignRepositories" settings is there,
+		// use its values.
+		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
+			? $settings->getSetting( 'foreignRepositories' )
+			: $settings->getSetting( 'repositories' );
+
+		// Backwards compatibility: if settings of the "local" repository
+		// are not defined in the "repositories" settings, fallback to old
+		// single-repo settings
+		if ( !array_key_exists( '', $repoSettingsArray ) ) {
+			$definitions = [ '' => [
+				'database' => $settings->getSetting( 'repoDatabase' ),
+				'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ];
+		}
+
+		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
@@ -842,8 +849,10 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	private function getRepoItemUriParser() {
+		// B/C compatibility, should be removed soon
+		// TODO: Move to check repo that has item entity not the default repo
 		return new SuffixEntityIdParser(
-			$this->settings->getSetting( 'repoConceptBaseUri' ),
+			$this->getRepositoryDefinitions()->getConceptBaseUris()[''],
 			new ItemIdParser()
 		);
 	}
