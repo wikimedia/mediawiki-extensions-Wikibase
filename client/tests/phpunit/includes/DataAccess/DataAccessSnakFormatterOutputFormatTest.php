@@ -125,8 +125,8 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	 * @return array[]
 	 */
 	private function getGenericSnaks() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$repoConceptBaseUri = $settings->getSetting( 'repoConceptBaseUri' );
+		$repositories = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
+		$repoConceptBaseUri = $repositories->getConceptBaseUris()[''];
 
 		$p4 = new PropertyId( 'P4' );
 		$sampleUrl = 'https://www.wikidata.org/w/index.php?title=Q2013&action=history';
