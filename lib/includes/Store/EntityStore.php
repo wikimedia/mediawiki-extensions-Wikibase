@@ -98,7 +98,7 @@ interface EntityStore {
 	 *
 	 * @see EditPage::userWasLastToEdit()
 	 *
-	 * @param User $user the user
+	 * @param User $user
 	 * @param EntityId $id the entity to check
 	 * @param int $lastRevId the revision to check from
 	 *

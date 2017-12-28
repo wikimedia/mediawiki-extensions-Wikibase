@@ -556,7 +556,7 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 	 *
 	 * @see EditPage::userWasLastToEdit
 	 *
-	 * @param User $user the user
+	 * @param User $user
 	 * @param EntityId $entityId the entity to check
 	 * @param int $lastRevisionId the revision to check from
 	 *

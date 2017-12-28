@@ -6,6 +6,7 @@ use AbstractContent;
 use Article;
 use Content;
 use DataUpdate;
+use DeferrableUpdate;
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
@@ -141,7 +142,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param WikiPage $page
 	 * @param ParserOutput|null $parserOutput
 	 *
-	 * @return DataUpdate[]
+	 * @return DeferrableUpdate[]
 	 */
 	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
 		/* @var EntityHandler $handler */

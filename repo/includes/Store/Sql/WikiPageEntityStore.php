@@ -351,7 +351,7 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @see EditPage::userWasLastToEdit()
 	 *
-	 * @param User $user the user
+	 * @param User $user
 	 * @param EntityId $id the entity to check (ignored by this implementation)
 	 * @param int $lastRevId the revision the user supplied
 	 *

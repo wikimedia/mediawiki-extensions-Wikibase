@@ -9,7 +9,7 @@
 class Scribunto_LuaEngine {
 
 	/**
-	 * @param string $moduleFileName string
+	 * @param string $moduleFileName
 	 * @param array $interfaceFuncs
 	 * @param array $setupOptions
 	 *
@@ -24,8 +24,8 @@ class Scribunto_LuaLibraryBase {
 
 	/**
 	 * @param string $name
-	 * @param int $argIdx integer
-	 * @param mixed $arg mixed
+	 * @param int $argIdx
+	 * @param mixed $arg
 	 * @param string $expectType
 	 */
 	protected function checkType( $name, $argIdx, $arg, $expectType ) {

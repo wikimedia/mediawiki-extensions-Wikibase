@@ -561,7 +561,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * Creates a new PropertyInfoLookup instance
 	 * Note: cache key used by the lookup should be the same as the cache key used
 	 * by CachedPropertyInfoStore.
 	 *

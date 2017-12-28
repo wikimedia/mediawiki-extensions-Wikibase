@@ -56,7 +56,7 @@ class SearchEntities extends Maintenance {
 
 	/**
 	 * Set wikibase repo to be used, e.g. for testing.
-	 * @param WikibaseRepo $repo New repo
+	 * @param WikibaseRepo $repo
 	 */
 	public function setRepo( WikibaseRepo $repo ) {
 		$this->repo = $repo;

@@ -635,7 +635,7 @@ final class RepoHooks {
 	 * Hook handler for AbuseFilter's AbuseFilter-contentToString hook, implemented
 	 * to provide a custom text representation of Entities for filtering.
 	 *
-	 * @param Content $content The content object
+	 * @param Content $content
 	 * @param string  &$text The resulting text
 	 *
 	 * @return bool

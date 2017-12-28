@@ -62,8 +62,8 @@ class LangLinkHandler {
 	/**
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
-	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
-	 * @param EntityLookup $entityLookup An entity lookup service
+	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityLookup $entityLookup
 	 * @param SiteLookup $siteLookup
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.

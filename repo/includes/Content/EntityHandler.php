@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Content;
 use Content;
 use ContentHandler;
 use DataUpdate;
+use DeferrableUpdate;
 use Diff\Patcher\PatcherException;
 use Hooks;
 use Html;
@@ -621,7 +622,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityContent $content
 	 * @param Title $title
 	 *
-	 * @return DataUpdate[]
+	 * @return DeferrableUpdate[]
 	 */
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
 		$updates = [];
