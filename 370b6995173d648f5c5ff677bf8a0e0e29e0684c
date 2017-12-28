@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_a9b1ccde",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-28T08:28:11Z",
+      "side": 1,
+      "message": "that one should also be moved, shouldn\u0027t it?",
+      "revId": "370b6995173d648f5c5ff677bf8a0e0e29e0684c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
