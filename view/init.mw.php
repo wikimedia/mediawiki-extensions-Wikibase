@@ -6,7 +6,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'path' => __DIR__ . '/../README.md',
-	'name' => 'Wikibase View',
+	'name' => 'WikibaseView',
 	'author' => [
 		'The Wikidata team',
 	],
