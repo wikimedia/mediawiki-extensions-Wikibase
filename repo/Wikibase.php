@@ -98,11 +98,11 @@ call_user_func( function() {
 
 	$wgExtensionCredits['wikibase'][] = [
 		'path' => __DIR__ . '/../README.md',
-		'name' => 'Wikibase Repository',
+		'name' => 'WikibaseRepository',
 		'author' => [
 			'The Wikidata team',
 		],
-		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase',
+		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Repository',
 		'descriptionmsg' => 'wikibase-desc',
 		'license-name' => 'GPL-2.0-or-later'
 	];
