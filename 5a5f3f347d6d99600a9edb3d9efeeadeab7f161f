@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_a99a6c64",
+        "filename": "Wikibase.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-28T08:25:32Z",
+      "side": 1,
+      "message": "That\u0027s what I figured.\nAlso, we have those evil constants set by each \"component\", and if the constant is set, the registration method just does not proceed.",
+      "parentUuid": "cee8db29_89be88cf",
+      "revId": "5a5f3f347d6d99600a9edb3d9efeeadeab7f161f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_e9975491",
         "filename": "lib/Registrar.php",
         "patchSetId": 34
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_09a0b88c",
+        "filename": "lib/Registrar.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-28T08:25:32Z",
+      "side": 1,
+      "message": "yup, I needed to put some placeholder comment to make phpcs happy. will add some real comment once the solution gets the actual shape",
+      "parentUuid": "cee8db29_e9975491",
+      "revId": "5a5f3f347d6d99600a9edb3d9efeeadeab7f161f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee8db29_4995a088",
         "filename": "repo/Registrar.php",
         "patchSetId": 34
@@ -65,6 +101,24 @@
       "writtenOn": "2017-12-28T04:44:51Z",
       "side": 1,
       "message": "sigh.... still on 0.5 alpha :/",
+      "revId": "5a5f3f347d6d99600a9edb3d9efeeadeab7f161f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_89b208e3",
+        "filename": "repo/Registrar.php",
+        "patchSetId": 34
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-12-28T08:25:32Z",
+      "side": 1,
+      "message": "the view component is even saying \"0.1-dev\" :)\nI\u0027d be happy to change those numbers to 1.0.0, or even ditch them completely (they have no actual meaning, do they?), as a first thing after switching to extension.json",
+      "parentUuid": "cee8db29_4995a088",
       "revId": "5a5f3f347d6d99600a9edb3d9efeeadeab7f161f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
