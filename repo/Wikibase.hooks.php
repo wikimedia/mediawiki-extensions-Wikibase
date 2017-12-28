@@ -16,6 +16,7 @@ use HistoryPager;
 use IContextSource;
 use LogEntry;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Storage\RevisionRecord;
 use MWException;
 use MWExceptionHandler;
 use OutputPage;
@@ -200,7 +201,10 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $wikiPage->getContent()->getModel() ) ) {
-			self::notifyEntityStoreWatcherOnUpdate( $revision );
+			self::notifyEntityStoreWatcherOnUpdate(
+				$revision->getContent(),
+				$revision->getRevisionRecord()
+			);
 
 			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 			$parentId = $revision->getParentId();
@@ -222,9 +226,10 @@ final class RepoHooks {
 		}
 	}
 
-	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
-		/** @var EntityContent $content */
-		$content = $revision->getContent();
+	private static function notifyEntityStoreWatcherOnUpdate(
+		EntityContent $content,
+		RevisionRecord $revision
+	) {
 		$watcher = WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher();
 
 		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
@@ -410,7 +415,7 @@ final class RepoHooks {
 		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $wikiPage->getLatest() !== $rev->getId()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
-			&& !$rev->isDeleted( Revision::DELETED_TEXT )
+			&& !$rev->isDeleted( RevisionRecord::DELETED_TEXT )
 		) {
 			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 			$link = $linkRenderer->makeKnownLink(
@@ -458,7 +463,7 @@ final class RepoHooks {
 						: $skinTemplate->getRevisionId();
 
 					$rev = Revision::newFromId( $revid );
-					if ( !$rev || $rev->isDeleted( Revision::DELETED_TEXT ) ) {
+					if ( !$rev || $rev->isDeleted( RevisionRecord::DELETED_TEXT ) ) {
 						return;
 					}
 

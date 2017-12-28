@@ -8,6 +8,7 @@ use Html;
 use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Storage\RevisionRecord;
 use MWException;
 use ParserOutput;
 use Revision;
@@ -98,7 +99,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		$header = $linkRenderer->makeKnownLink( $title, $headerMsg->text(), [],
 			[ 'oldid' => $rev->getId() ] );
 
-		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
+		if ( $rev->userCan( RevisionRecord::DELETED_TEXT, $user ) ) {
 			if ( $title->quickUserCan( 'edit', $user ) && !$rev->isCurrent() ) {
 				$editQuery = [
 					'action' => 'edit',
@@ -110,7 +111,7 @@ class EntityContentDiffView extends DifferenceEngine {
 				)->escaped();
 			}
 
-			if ( $rev->isDeleted( Revision::DELETED_TEXT ) ) {
+			if ( $rev->isDeleted( RevisionRecord::DELETED_TEXT ) ) {
 				$header = Html::rawElement( 'span', [ 'class' => 'history-deleted' ], $header );
 			}
 		} else {

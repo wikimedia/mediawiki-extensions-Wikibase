@@ -57,7 +57,7 @@ class RedirectRevision {
 	}
 
 	/**
-	 * @see Revision::getId
+	 * @see RevisionRecord::getId
 	 *
 	 * @return int
 	 */
@@ -66,7 +66,7 @@ class RedirectRevision {
 	}
 
 	/**
-	 * @see Revision::getTimestamp
+	 * @see RevisionRecord::getTimestamp
 	 *
 	 * @return string in MediaWiki format or an empty string
 	 */
