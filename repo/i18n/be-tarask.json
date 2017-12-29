@@ -221,6 +221,8 @@
 	"wikibase-setsitelink-badges": "Адзнакі:",
 	"wikibase-setsitelink-submit": "Вызначыць спасылку на сайт",
 	"wikibase-setsitelink-invalid-site": "Ідэнтыфікатар сайта «$1» невядомы. Ужывайце, калі ласка, вядомыя ідэнтыфікатары, як то «enwiki».",
+	"wikibase-setsitelink-not-item": "Ідэнтыфікатар $1 не належыць элемэнту.",
+	"wikibase-setsitelink-not-badge": "Элемэнт $1 не зьяўляецца адзнакай.",
 	"wikibase-setsitelink-add-failed": "Не ўдалося захаваць спасылку на сайт.",
 	"wikibase-setsitelink-remove-failed": "Не ўдалося выдаліць спасылку на сайт.",
 	"wikibase-modifyentity-id": "Ідэнтыфікатар:",

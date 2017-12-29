@@ -10,7 +10,8 @@
 			"Salpusnis",
 			"Zygimantus",
 			"Macofe",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Manvydasz"
 		]
 	},
 	"wikibase-desc": "Struktūruotų duomenų talpykla",
@@ -26,7 +27,7 @@
 	"wikibase-addreference": "pridėti nuorodą",
 	"wikibase-save-inprogress": "Saugoma...",
 	"wikibase-remove-inprogress": "Šalinama...",
-	"wikibase-statementlistview-add": "pridėti",
+	"wikibase-statementlistview-add": "pridėti vertę",
 	"wikibase-statementlistview-add-tooltip": "Pridėti naują reikšmę",
 	"wikibase-statementgrouplistview-add": "pridėti",
 	"wikibase-statementgrouplistview-add-tooltip": "Pridėti naują pareiškimą",
