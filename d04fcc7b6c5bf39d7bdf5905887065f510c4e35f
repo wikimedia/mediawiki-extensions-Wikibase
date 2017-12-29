@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee8db29_1b991772",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-12-29T11:28:15Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 12,
+        "startChar": 39,
+        "endLine": 12,
+        "endChar": 50
+      },
+      "revId": "d04fcc7b6c5bf39d7bdf5905887065f510c4e35f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_7ba0238e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-12-29T11:28:15Z",
+      "side": 1,
+      "message": "Would you please add my report T175492?",
+      "revId": "d04fcc7b6c5bf39d7bdf5905887065f510c4e35f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
