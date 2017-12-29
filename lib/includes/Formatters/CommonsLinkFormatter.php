@@ -61,7 +61,7 @@ class CommonsLinkFormatter implements ValueFormatter {
 		$attributes = array_merge( $this->attributes, [
 			'href' => '//commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
 		] );
-		$html = Html::element( 'a', $attributes, $title->getText() );
+		$html = Html::element( 'a', $attributes, $fileName );
 
 		return $html;
 	}
