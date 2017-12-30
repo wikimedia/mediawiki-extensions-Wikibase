@@ -323,16 +323,22 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.sitelinkgroupview.css',
 			],
 			'dependencies' => [
-				'jquery.makeCollapsible',
 				'jquery.sticknode',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
+				'jquery.wikibase.sitelinkgroupview.mw-collapsible.styles',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
 				'wikibase.sites',
 			],
 			'messages' => [
 				'wikibase-sitelinkgroupview-input-help-message',
+			],
+		],
+
+		'jquery.wikibase.sitelinkgroupview.mw-collapsible.styles' => $moduleTemplate + [
+			'styles' => [
+				'themes/default/jquery.wikibase.sitelinkgroupview.mw-collapsible.css',
 			],
 		],
 
