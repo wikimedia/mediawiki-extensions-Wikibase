@@ -440,6 +440,7 @@
 	"apihelp-wblinktitles-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
 	"apihelp-wblinktitles-example-1": "Añadir un enlace «Hydrogen» de la página en inglés a «Wasserstoff» en la página en alemán",
 	"apihelp-wbmergeitems-description": "Fusiona varios elementos.",
+	"apihelp-wbmergeitems-summary": "Combina varios elementos.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
 	"apihelp-wbmergeitems-example-1": "Fusiona datos de <samp>Q42</samp> a <samp>Q222</samp>",
 	"apihelp-wbmergeitems-example-2": "Fusiona los datos de <samp>Q555</samp> a <samp>Q3</samp>",
