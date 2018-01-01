@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic;
 
-use CirrusSearch\Search\FunctionScoreBuilder;
+use CirrusSearch\Search\ScoreBuilder\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\Search\TermBoostScoreBuilder;
 use Elastica\Query\FunctionScore;
