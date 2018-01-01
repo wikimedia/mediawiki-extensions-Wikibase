@@ -8,8 +8,8 @@
 			"Sophivorus"
 		]
 	},
-	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Todavía no se admite la manipulación de valores \"$1\"",
-	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Todavía no se admite la manipulación de valores para el tipo de datos \"$1\"",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Todavía no se admite la manipulación de valores «$1».",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Todavía no se admite la manipulación de valores para el tipo de datos «$1».",
 	"valueview-expert-emptyvalue-empty": "vacío",
 	"valueview-expert-globecoordinateinput-precision": "Precisión:",
 	"valueview-expert-globecoordinateinput-nullprecision": "sin especificar",
