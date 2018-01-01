@@ -44,7 +44,8 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 			'rc_cur_id' => 2354,
 			'rc_this_oldid' => 343,
 			'rc_last_oldid' => 897,
-			'rc_comment' => 'Fake data!'
+			'rc_comment_text' => 'Fake data!',
+			'rc_comment_data' => null
 		] );
 
 		$changeWithDataFromRC = $factory->newForEntity( EntityChange::REMOVE, new ItemId( 'Q123' ) );
