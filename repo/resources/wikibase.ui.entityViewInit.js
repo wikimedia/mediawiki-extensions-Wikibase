@@ -37,6 +37,8 @@
 	}
 
 	/**
+	 * Builds an entity store.
+	 *
 	 * @param {wikibase.api.RepoApi} repoApi
 	 * @param {string} languageCode The language code of the ui language
 	 * @return {wikibase.store.CachingEntityStore}

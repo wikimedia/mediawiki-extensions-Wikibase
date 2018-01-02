@@ -131,10 +131,11 @@ class EntityParserOutputGeneratorFactory {
 	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
 	 *
 	 * @param string $userLanguageCode
+	 * @param bool $editable
 	 *
 	 * @return EntityParserOutputGenerator
 	 */
-	public function getEntityParserOutputGenerator( $userLanguageCode ) {
+	public function getEntityParserOutputGenerator( $userLanguageCode, $editable ) {
 		$userLanguage = Language::factory( $userLanguageCode );
 
 		return new EntityParserOutputGenerator(
@@ -147,7 +148,8 @@ class EntityParserOutputGeneratorFactory {
 			new MediaWikiLocalizedTextProvider( $userLanguageCode ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$userLanguageCode
+			$userLanguageCode,
+			$editable
 		);
 	}
 

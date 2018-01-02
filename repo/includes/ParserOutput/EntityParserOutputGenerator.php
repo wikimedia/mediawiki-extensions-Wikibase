@@ -24,6 +24,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TermsListView;
@@ -90,6 +91,11 @@ class EntityParserOutputGenerator {
 	private $languageCode;
 
 	/**
+	 * @var bool
+	 */
+	private $editable;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -100,6 +106,7 @@ class EntityParserOutputGenerator {
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
 	 * @param string $languageCode
+	 * @param bool $editable
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
@@ -111,7 +118,8 @@ class EntityParserOutputGenerator {
 		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		$languageCode
+		$languageCode,
+		$editable
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
@@ -123,6 +131,7 @@ class EntityParserOutputGenerator {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->languageCode = $languageCode;
+		$this->editable = $editable;
 	}
 
 	/**
@@ -284,11 +293,11 @@ class EntityParserOutputGenerator {
 			$this->languageFallbackChain
 		);
 
-		$editSectionGenerator = new ToolbarEditSectionGenerator(
+		$editSectionGenerator = $this->editable ? new ToolbarEditSectionGenerator(
 			new RepoSpecialPageLinker(),
 			$this->templateFactory,
 			$this->textProvider
-		);
+		) : new EmptyEditSectionGenerator();
 
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
 		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
