@@ -253,7 +253,7 @@ return [
 		'prefixSearchProfiles' => [],
 		// Default rescore profile for prefix search
 		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
-		// Rescore profiles, loaded by Wikibase.php
+		// Custom rescore profiles placeholder
 		'rescoreProfiles' => [],
 		// Type (de)boosts for rescoring functions
 		'statementBoost' => [],
