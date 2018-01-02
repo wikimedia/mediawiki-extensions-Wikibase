@@ -8,7 +8,7 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\EntityUsageTable
@@ -352,7 +352,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 *
 	 * @return bool
 	 */
-	private function rowExists( Database $db, array $conditions ) {
+	private function rowExists( IDatabase $db, array $conditions ) {
 		$count = $db->selectRowCount( EntityUsageTable::DEFAULT_TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}
