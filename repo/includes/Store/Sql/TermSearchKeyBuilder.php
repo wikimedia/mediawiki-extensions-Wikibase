@@ -5,7 +5,7 @@ namespace Wikibase;
 use Wikibase\Lib\Reporting\MessageReporter;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Utility class for rebuilding the term_search_key field.
@@ -159,13 +159,13 @@ class TermSearchKeyBuilder {
 	 *
 	 * @see TermSqlIndex::getSearchKey
 	 *
-	 * @param Database $dbw the database connection to use
+	 * @param IDatabase $dbw the database connection to use
 	 * @param int $rowId the row to update
 	 * @param string $text the term's text
 	 *
 	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
-	private function updateSearchKey( Database $dbw, $rowId, $text ) {
+	private function updateSearchKey( IDatabase $dbw, $rowId, $text ) {
 		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {

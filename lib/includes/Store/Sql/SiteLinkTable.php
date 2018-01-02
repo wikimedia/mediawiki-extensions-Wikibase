@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkStore;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Represents a lookup database table for sitelinks.
@@ -119,11 +119,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	/**
 	 * @param Item $item
 	 * @param SiteLink[] $links
-	 * @param Database $dbw
+	 * @param IDatabase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function insertLinks( Item $item, array $links, Database $dbw ) {
+	private function insertLinks( Item $item, array $links, IDatabase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
 		$insert = [];
@@ -148,11 +148,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	/**
 	 * @param Item $item
 	 * @param SiteLink[] $links
-	 * @param Database $dbw
+	 * @param IDatabase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function deleteLinks( Item $item, array $links, Database $dbw ) {
+	private function deleteLinks( Item $item, array $links, IDatabase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
 		$siteIds = [];

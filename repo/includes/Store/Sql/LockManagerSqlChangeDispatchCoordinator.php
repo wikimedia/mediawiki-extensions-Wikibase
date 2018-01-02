@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use LockManager;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LBFactory;
 
 /**
@@ -52,24 +52,24 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 	/**
 	 * @see SqlChangeDispatchCoordinator::releaseClient()
 	 *
-	 * @param Database $db The database connection to work on.
+	 * @param IDatabase $db The database connection to work on.
 	 * @param string $lock The name of the lock to release.
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	protected function releaseClientLock( Database $db, $lock ) {
+	protected function releaseClientLock( IDatabase $db, $lock ) {
 		return $this->lockManager->unlock( [ $lock ] )->isOK();
 	}
 
 	/**
 	 * @see SqlChangeDispatchCoordinator::isClientLockUsed()
 	 *
-	 * @param Database $db The database connection to work on.
+	 * @param IDatabase $db The database connection to work on.
 	 * @param string $lock The name of the lock to check.
 	 *
 	 * @return bool false since it's not needed in LockManager-based coordinators
 	 */
-	protected function isClientLockUsed( Database $db, $lock ) {
+	protected function isClientLockUsed( IDatabase $db, $lock ) {
 		// Not needed
 		return false;
 	}

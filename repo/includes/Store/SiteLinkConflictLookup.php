@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Contains methods for looking up SiteLink conflicts
@@ -23,7 +23,7 @@ interface SiteLinkConflictLookup {
 	 * - string sitePage
 	 *
 	 * @param Item          $item
-	 * @param Database|null $db The database object to use (optional).
+	 * @param IDatabase|null $db The database object to use (optional).
 	 *        If conflict checking is performed as part of a save operation,
 	 *        this should be used to provide the master DB connection that will
 	 *        also be used for saving. This will preserve transactional integrity
@@ -31,6 +31,6 @@ interface SiteLinkConflictLookup {
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( Item $item, Database $db = null );
+	public function getConflictsForItem( Item $item, IDatabase $db = null );
 
 }

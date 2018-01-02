@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @license GPL-2.0+
@@ -32,11 +32,11 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 	 * @see SiteLinkConflictLookup::getConflictsForItem
 	 *
 	 * @param Item $item
-	 * @param Database|null $db
+	 * @param IDatabase|null $db
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( Item $item, Database $db = null ) {
+	public function getConflictsForItem( Item $item, IDatabase $db = null ) {
 		$siteLinks = $item->getSiteLinkList();
 
 		if ( $siteLinks->isEmpty() ) {

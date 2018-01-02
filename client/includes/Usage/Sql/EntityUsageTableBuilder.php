@@ -11,7 +11,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
 use Wikimedia\Rdbms\ResultWrapper;
 
@@ -140,12 +140,12 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param EntityId[] $entityPerPage
 	 *
 	 * @return int The number of rows inserted.
 	 */
-	private function insertUsageBatch( Database $db, array $entityPerPage ) {
+	private function insertUsageBatch( IDatabase $db, array $entityPerPage ) {
 		$db->startAtomic( __METHOD__ );
 
 		$c = 0;
@@ -171,12 +171,12 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param int $fromPageId
 	 *
 	 * @return EntityId[] An associative array mapping page IDs to Entity IDs.
 	 */
-	private function getUsageBatch( Database $db, $fromPageId = 0 ) {
+	private function getUsageBatch( IDatabase $db, $fromPageId = 0 ) {
 		$res = $db->select(
 			'page_props',
 			[ 'pp_page', 'pp_value' ],
