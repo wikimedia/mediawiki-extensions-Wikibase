@@ -86,6 +86,7 @@ class StatementHtmlGenerator {
 
 		$references = $statement->getReferences();
 		$referencesHtml = $this->getHtmlForReferences( $references );
+		$collapseReferences = $editSectionHtml !== '' && !$references->isEmpty();
 
 		return $this->templateFactory->render(
 			'wikibase-statementview',
@@ -97,7 +98,7 @@ class StatementHtmlGenerator {
 			$editSectionHtml,
 			$referencesHeadingHtml,
 			$referencesHtml,
-			$references->isEmpty() ? '' : 'wikibase-initially-collapsed'
+			$collapseReferences ? 'wikibase-initially-collapsed' : ''
 		);
 	}
 

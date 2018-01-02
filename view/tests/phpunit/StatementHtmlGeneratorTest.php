@@ -117,7 +117,11 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider referencesProvider
 	 */
-	public function testCollapsedReferences( Statement $statement, $expected ) {
+	public function testCollapsedReferences(
+		Statement $statement,
+		$editSectionHtml,
+		$expected
+	) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$templateFactory,
@@ -126,7 +130,7 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			new DummyLocalizedTextProvider()
 		);
 
-		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, '' );
+		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, $editSectionHtml );
 
 		$this->assertSame(
 			$expected ? 1 : 0,
@@ -141,8 +145,10 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		$referencedStatement->addNewReference( $snak );
 
 		return [
-			[ $statement, false ],
-			[ $referencedStatement, true ],
+			[ $statement, '', false ],
+			[ $statement, '<EDIT SECTION>', false ],
+			[ $referencedStatement, '', false ],
+			[ $referencedStatement, '<EDIT SECTION>', true ],
 		];
 	}
 

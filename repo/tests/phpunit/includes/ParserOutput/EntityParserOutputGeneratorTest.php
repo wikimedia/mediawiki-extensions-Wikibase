@@ -215,7 +215,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			'en'
+			'en',
+			true
 		);
 	}
 
@@ -403,7 +404,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getMock( LocalizedTextProvider::class ),
 			new EntityDataFormatProvider(),
 			$dataUpdaters,
-			'en'
+			'en',
+			true
 		);
 	}
 
