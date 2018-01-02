@@ -7,6 +7,7 @@ use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
+use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use Content;
@@ -38,6 +39,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
@@ -126,12 +128,7 @@ final class RepoHooks {
 			$settings->setSetting( 'entitySearch', $searchSettings );
 		}
 		if ( $searchSettings['useCirrus'] ) {
-			global $wgCirrusSearchRescoreFunctionScoreChains, $wgCirrusSearchExtraIndexSettings;
-			// ElasticSearch function for entity weight
-			$wgCirrusSearchRescoreFunctionScoreChains = array_merge(
-				isset( $wgCirrusSearchRescoreFunctionScoreChains ) ? $wgCirrusSearchRescoreFunctionScoreChains : [],
-				require __DIR__ . '/config/ElasticSearchRescoreFunctions.php'
-			);
+			global $wgCirrusSearchExtraIndexSettings;
 			// Bump max fields so that labels/descriptions fields fit in.
 			$wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
 
@@ -1090,4 +1087,34 @@ final class RepoHooks {
 		}
 	}
 
+	/**
+	 * Register our cirrus profiles.
+	 *
+	 * @param SearchProfileService $profileService
+	 */
+	public static function onCirrusSearchProfileService( SearchProfileService $profileService ) {
+		// register base profiles available on all wikibase installs
+		$profileService->registerArrayRepository( SearchProfileService::RESCORE,
+			'wikibase_base', require __DIR__ . '/config/ElasticSearchRescoreProfiles.php' );
+		$profileService->registerArrayRepository( SearchProfileService::RESCORE_FUNCTION_CHAINS,
+			'wikibase_base', require __DIR__ . '/config/ElasticSearchRescoreFunctions.php' );
+
+		// register custom profiles provided in the wikibase config
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entitySearchConfig = $settings->getSetting( 'entitySearch' );
+		if ( isset( $entitySearchConfig['rescoreProfiles'] ) ) {
+			$profileService->registerArrayRepository( SearchProfileService::RESCORE,
+				'wikibase_config',  $entitySearchConfig['rescoreProfiles'] );
+		}
+
+		// Determine the default rescore profile to use for entity autocomplete search
+		$defaultRescore = EntitySearchElastic::DEFAULT_RESCORE_PROFILE;
+		if ( isset( $entitySearchConfig['defaultPrefixRescoreProfile'] ) ) {
+			$defaultRescore = $entitySearchConfig['defaultPrefixRescoreProfile'];
+		}
+		// Setup the default rescore profile for the prefix search query
+		// with the possibility to override the profile by setting the URI param cirrusRescoreProfile
+		$profileService->registerSimpleNameResolver( SearchProfileService::RESCORE,
+			$defaultRescore, EntitySearchElastic::PROFILE_CONTEXT, 'cirrusRescoreProfile' );
+	}
 }

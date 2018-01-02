@@ -1014,6 +1014,7 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
 	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
 	$wgHooks['CirrusSearchScoreBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchScoreBuilder';
+	$wgHooks['CirrusSearchProfileService'][] = '\Wikibase\RepoHooks::onCirrusSearchProfileService';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
@@ -1034,11 +1035,4 @@ call_user_func( function() {
 	// vs. fallback language match.
 	$wgWBRepoSettings['entitySearch']['prefixSearchProfiles'] =
 		require __DIR__ . '/config/EntityPrefixSearchProfiles.php';
-	// Wikibase prefix search scoring profile for CirrusSearch.
-	// This profile applies to the whole document.
-	// These configurations define how the results are ordered.
-	// The names should be distinct from other Cirrus rescoring profile, so
-	// prefixing with 'wikibase' is recommended.
-	$wgWBRepoSettings['entitySearch']['rescoreProfiles'] =
-		require __DIR__ . '/config/ElasticSearchRescoreProfiles.php';
 } );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic;
 
+use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
@@ -30,6 +31,11 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * Default rescore profile
 	 */
 	const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
+
+	/**
+	 * Name of the context for profile name resolution
+	 */
+	const PROFILE_CONTEXT = 'wikibase_prefix_search';
 
 	/**
 	 * @var LanguageFallbackChainFactory
@@ -245,26 +251,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	}
 
 	/**
-	 * Get suitable rescore profile.
-	 * If internal config has non, return just the name and let RescoureBuilder handle it.
-	 * @return string|array
-	 */
-	private function getRescoreProfile() {
-
-		$rescoreProfile = $this->request->getVal( 'cirrusRescoreProfile' );
-		if ( !$rescoreProfile && isset( $this->settings['defaultPrefixRescoreProfile'] ) ) {
-			$rescoreProfile = $this->settings['defaultPrefixRescoreProfile'];
-		}
-		if ( !$rescoreProfile ) {
-			$rescoreProfile = self::DEFAULT_RESCORE_PROFILE;
-		}
-		if ( isset( $this->settings['rescoreProfiles'][$rescoreProfile] ) ) {
-			return $this->settings['rescoreProfiles'][$rescoreProfile];
-		}
-		return $rescoreProfile;
-	}
-
-	/**
 	 * Parse entity ID or return null
 	 * @param $text
 	 * @return null|\Wikibase\DataModel\Entity\EntityId
@@ -339,7 +325,10 @@ class EntitySearchElastic implements EntitySearchHelper {
 		) );
 
 		$searcher->setOptionsFromRequest( $this->request );
-		$searcher->setRescoreProfile( $this->getRescoreProfile() );
+		$searcher->setRescoreProfile( $searcher->getSearchContext()
+			->getConfig()
+			->getProfileService()
+			->loadProfileForContext( SearchProfileService::RESCORE, self::PROFILE_CONTEXT ) );
 
 		$result = $searcher->performSearch( $query );
 
