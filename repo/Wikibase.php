@@ -1014,6 +1014,7 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
 	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
 	$wgHooks['CirrusSearchScoreBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchScoreBuilder';
+	$wgHooks['CirrusSearchProfileService'][] = '\Wikibase\RepoHooks::onCirrusSearchProfileService';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
@@ -1028,17 +1029,4 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
-
-	// Field weight profiles. These profiles specify relative weights
-	// of label fields for different languages, e.g. exact language match
-	// vs. fallback language match.
-	$wgWBRepoSettings['entitySearch']['prefixSearchProfiles'] =
-		require __DIR__ . '/config/EntityPrefixSearchProfiles.php';
-	// Wikibase prefix search scoring profile for CirrusSearch.
-	// This profile applies to the whole document.
-	// These configurations define how the results are ordered.
-	// The names should be distinct from other Cirrus rescoring profile, so
-	// prefixing with 'wikibase' is recommended.
-	$wgWBRepoSettings['entitySearch']['rescoreProfiles'] =
-		require __DIR__ . '/config/ElasticSearchRescoreProfiles.php';
 } );
