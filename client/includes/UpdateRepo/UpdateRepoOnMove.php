@@ -20,7 +20,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 	private $newTitle;
 
 	/**
-	 * @param string $repoDB Database name of the repo
+	 * @param string $repoDB IDatabase name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param User $user
 	 * @param string $siteId Global id of the client wiki

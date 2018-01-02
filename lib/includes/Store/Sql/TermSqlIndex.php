@@ -24,7 +24,7 @@ use Wikibase\StringNormalizer;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Term lookup cache.
@@ -104,7 +104,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * Returns the name of the database table used to store the terms.
-	 * This is the logical table name, subject to prefixing by the Database object.
+	 * This is the logical table name, subject to prefixing by the IDatabase object.
 	 *
 	 * @return string
 	 */
@@ -188,11 +188,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param EntityDocument $entity
 	 * @param TermIndexEntry[] $terms
-	 * @param Database $dbw
+	 * @param IDatabase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function insertTerms( EntityDocument $entity, array $terms, Database $dbw ) {
+	private function insertTerms( EntityDocument $entity, array $terms, IDatabase $dbw ) {
 		$entityId = $entity->getId();
 		$this->assertIsNumericEntityId( $entityId );
 		/** @var EntityId|Int32EntityId $entityId */
@@ -223,11 +223,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param array $entityIdentifiers Term table fields identifying an entity
 	 * @param TermIndexEntry $term
-	 * @param Database $dbw
+	 * @param IDatabase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function insertTerm( array $entityIdentifiers, TermIndexEntry $term, Database $dbw ) {
+	private function insertTerm( array $entityIdentifiers, TermIndexEntry $term, IDatabase $dbw ) {
 		$fields = array_merge(
 			$this->getTermFields( $term ),
 			$entityIdentifiers
@@ -345,11 +345,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param EntityId $entityId
 	 * @param TermIndexEntry[] $terms
-	 * @param Database $dbw
+	 * @param IDatabase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function deleteTerms( EntityId $entityId, array $terms, Database $dbw ) {
+	private function deleteTerms( EntityId $entityId, array $terms, IDatabase $dbw ) {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
@@ -608,18 +608,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * Returns the Database connection from which to read.
+	 * Returns the IDatabase connection from which to read.
 	 *
-	 * @return Database
+	 * @return IDatabase
 	 */
 	public function getReadDb() {
 		return $this->getConnection( DB_REPLICA );
 	}
 
 	/**
-	 * Returns the Database connection to which to write.
+	 * Returns the IDatabase connection to which to write.
 	 *
-	 * @return Database
+	 * @return IDatabase
 	 */
 	public function getWriteDb() {
 		return $this->getConnection( DB_MASTER );
@@ -778,7 +778,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -787,7 +787,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return string[]
 	 */
 	private function criteriaToConditions(
-		Database $db,
+		IDatabase $db,
 		array $criteria,
 		$termType = null,
 		$entityType = null,
@@ -804,7 +804,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param TermIndexSearchCriteria $mask
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -813,7 +813,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return array
 	 */
 	private function getTermMatchConditions(
-		Database $db,
+		IDatabase $db,
 		TermIndexSearchCriteria $mask,
 		$termType = null,
 		$entityType = null,

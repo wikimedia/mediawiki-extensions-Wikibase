@@ -9,7 +9,7 @@ use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\NamespaceChecker;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\ResultWrapper;
 
@@ -83,13 +83,13 @@ class SpecialUnconnectedPages extends QueryPage {
 	/**
 	 * Build conditionals for namespace
 	 *
-	 * @param Database $dbr
+	 * @param IDatabase $dbr
 	 * @param Title|null $title
 	 * @param NamespaceChecker|null $checker
 	 *
 	 * @return string[]
 	 */
-	public function buildConditionals( Database $dbr, Title $title = null, NamespaceChecker $checker = null ) {
+	public function buildConditionals( IDatabase $dbr, Title $title = null, NamespaceChecker $checker = null ) {
 		$conds = [];
 
 		if ( $checker === null ) {

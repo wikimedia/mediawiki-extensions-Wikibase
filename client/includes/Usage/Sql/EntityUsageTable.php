@@ -11,7 +11,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -41,12 +41,12 @@ class EntityUsageTable {
 	private $idParser;
 
 	/**
-	 * @var Database
+	 * @var IDatabase
 	 */
 	private $writeConnection;
 
 	/**
-	 * @var Database
+	 * @var IDatabase
 	 */
 	private $readConnection;
 
@@ -67,7 +67,7 @@ class EntityUsageTable {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param Database $writeConnection
+	 * @param IDatabase $writeConnection
 	 * @param int $batchSize Batch size for database queries on the entity usage table, including
 	 *  INSERTs, SELECTs, and DELETEs. Defaults to 100.
 	 * @param string|null $tableName defaults to wbc_entity_usage
@@ -76,7 +76,7 @@ class EntityUsageTable {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		Database $writeConnection,
+		IDatabase $writeConnection,
 		$batchSize = 100,
 		$tableName = null
 	) {

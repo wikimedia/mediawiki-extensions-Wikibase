@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use MWException;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**
@@ -52,14 +52,14 @@ class SqlIdGenerator implements IdGenerator {
 	/**
 	 * Generates and returns a new ID.
 	 *
-	 * @param Database $database
+	 * @param IDatabase $database
 	 * @param string $type
 	 * @param bool $retry Retry once in case of e.g. race conditions. Defaults to true.
 	 *
 	 * @throws MWException
 	 * @return int
 	 */
-	private function generateNewId( Database $database, $type, $retry = true ) {
+	private function generateNewId( IDatabase $database, $type, $retry = true ) {
 		$database->startAtomic( __METHOD__ );
 
 		$currentId = $database->selectRow(

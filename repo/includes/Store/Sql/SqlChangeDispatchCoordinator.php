@@ -8,7 +8,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\Rdbms\LoadBalancer;
@@ -220,23 +220,23 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return Database A connection to the repo's master database
+	 * @return IDatabase A connection to the repo's master database
 	 */
 	private function getRepoMaster() {
 		return $this->getRepoLB()->getConnection( DB_MASTER, [], $this->repoDB );
 	}
 
 	/**
-	 * @return Database A connection to the repo's replica database
+	 * @return IDatabase A connection to the repo's replica database
 	 */
 	private function getRepoReplica() {
 		return $this->getRepoLB()->getConnection( DB_REPLICA, [], $this->repoDB );
 	}
 
 	/**
-	 * @param Database $db The repo database connection to release for re-use.
+	 * @param IDatabase $db The repo database connection to release for re-use.
 	 */
-	private function releaseRepoDb( Database $db ) {
+	private function releaseRepoDb( IDatabase $db ) {
 		$this->getRepoLB()->reuseConnection( $db );
 	}
 
@@ -553,12 +553,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Releases the given global lock on the given client wiki.
 	 *
-	 * @param Database $db The database connection to work on.
+	 * @param IDatabase $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to release.
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	protected function releaseClientLock( Database $db, $lock ) {
+	protected function releaseClientLock( IDatabase $db, $lock ) {
 		if ( isset( $this->releaseClientLockOverride ) ) {
 			return call_user_func( $this->releaseClientLockOverride, $db, $lock );
 		}
@@ -569,12 +569,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Checks the given global lock on the given client wiki.
 	 *
-	 * @param Database $db The database connection to work on.
+	 * @param IDatabase $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to check.
 	 *
 	 * @return bool true if the given lock is currently held by another process, false otherwise.
 	 */
-	protected function isClientLockUsed( Database $db, $lock ) {
+	protected function isClientLockUsed( IDatabase $db, $lock ) {
 		if ( isset( $this->isClientLockUsedOverride ) ) {
 			return call_user_func( $this->isClientLockUsedOverride, $db, $lock );
 		}

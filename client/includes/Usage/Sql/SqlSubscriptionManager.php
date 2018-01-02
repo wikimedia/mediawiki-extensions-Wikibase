@@ -177,7 +177,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	}
 
 	/**
-	 * Returns a list of rows for insertion, using Database's multi-row insert mechanism.
+	 * Returns a list of rows for insertion, using IDatabase's multi-row insert mechanism.
 	 * Each row is represented as array( $subscriber, $entityId ).
 	 *
 	 * @param string $subscriber

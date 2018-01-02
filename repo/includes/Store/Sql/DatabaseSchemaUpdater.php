@@ -17,7 +17,7 @@ use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @license GPL-2.0+
@@ -119,7 +119,7 @@ class DatabaseSchemaUpdater {
 		);
 	}
 
-	private function updateItemsPerSiteTable( DatabaseUpdater $updater, Database $db ) {
+	private function updateItemsPerSiteTable( DatabaseUpdater $updater, IDatabase $db ) {
 		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
 		if ( $db->getType() !== 'sqlite' ) {
@@ -131,7 +131,7 @@ class DatabaseSchemaUpdater {
 		}
 	}
 
-	private function updateChangesTable( DatabaseUpdater $updater, Database $db ) {
+	private function updateChangesTable( DatabaseUpdater $updater, IDatabase $db ) {
 		// Make wb_changes.change_info MEDIUMBLOB - T108246
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
 		if ( $db->getType() !== 'sqlite' ) {
@@ -239,7 +239,7 @@ class DatabaseSchemaUpdater {
 	 * falling back to the plain ".sql" extension if no specific script is found.
 	 *
 	 * @param string $name the script's name, without file extension
-	 * @param string $type the database type, as returned by Database::getType()
+	 * @param string $type the database type, as returned by IDatabase::getType()
 	 *
 	 * @return string The path to the script file
 	 * @throws MWException If the script was not found in any script directory
@@ -275,9 +275,9 @@ class DatabaseSchemaUpdater {
 	 * Applies updates to the wb_terms table.
 	 *
 	 * @param DatabaseUpdater $updater
-	 * @param Database $db
+	 * @param IDatabase $db
 	 */
-	private function updateTermsTable( DatabaseUpdater $updater, Database $db ) {
+	private function updateTermsTable( DatabaseUpdater $updater, IDatabase $db ) {
 		// ---- Update from 0.1 or 0.2. ----
 		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
 			$updater->addExtensionField(

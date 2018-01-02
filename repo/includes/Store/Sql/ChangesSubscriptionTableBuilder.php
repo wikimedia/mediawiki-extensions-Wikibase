@@ -10,7 +10,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
 use Wikimedia\Rdbms\ResultWrapper;
 
@@ -148,12 +148,12 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param array[] $subscriptionsPerItem
 	 *
 	 * @return int The number of rows inserted.
 	 */
-	private function insertSubscriptionBatch( Database $db, array $subscriptionsPerItem ) {
+	private function insertSubscriptionBatch( IDatabase $db, array $subscriptionsPerItem ) {
 		$db->startAtomic( __METHOD__ );
 
 		$c = 0;
@@ -182,12 +182,12 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param array &$continuation
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
-	private function getSubscriptionsPerItemBatch( Database $db, &$continuation = [] ) {
+	private function getSubscriptionsPerItemBatch( IDatabase $db, &$continuation = [] ) {
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {

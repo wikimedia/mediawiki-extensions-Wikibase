@@ -5,7 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use ArrayIterator;
 use InvalidArgumentException;
 use Traversable;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
@@ -57,11 +57,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 *
 	 * @return EntityUsageTable
 	 */
-	private function newUsageTable( Database $db ) {
+	private function newUsageTable( IDatabase $db ) {
 		return new EntityUsageTable( $this->idParser, $db );
 	}
 
