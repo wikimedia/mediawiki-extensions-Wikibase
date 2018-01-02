@@ -114,10 +114,7 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		return $testCases;
 	}
 
-	/**
-	 * @dataProvider referencesProvider
-	 */
-	public function testCollapsedReferences( Statement $statement, $expected ) {
+	public function testGivenNoReferences_SectionIsNotCollapsed() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$templateFactory,
@@ -126,24 +123,30 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			new DummyLocalizedTextProvider()
 		);
 
-		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, '' );
-
-		$this->assertSame(
-			$expected ? 1 : 0,
-			substr_count( $html, 'wikibase-initially-collapsed' )
-		);
-	}
-
-	public function referencesProvider() {
 		$snak = new PropertyNoValueSnak( 1 );
 		$statement = new Statement( $snak );
-		$referencedStatement = clone $statement;
-		$referencedStatement->addNewReference( $snak );
 
-		return [
-			[ $statement, false ],
-			[ $referencedStatement, true ],
-		];
+		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, '<EDIT SECTION HTML>' );
+
+		$this->assertNotContains( 'wikibase-initially-collapsed', $html );
+	}
+
+	public function testGivenReferencedStatement_SectionIsCollapsed() {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+		$statementHtmlGenerator = new StatementHtmlGenerator(
+			$templateFactory,
+			$this->getSnakHtmlGeneratorMock(),
+			new BasicNumberLocalizer(),
+			new DummyLocalizedTextProvider()
+		);
+
+		$snak = new PropertyNoValueSnak( 1 );
+		$statement = new Statement( $snak );
+		$statement->addNewReference( $snak );
+
+		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, '<EDIT SECTION HTML>' );
+
+		$this->assertContains( 'wikibase-initially-collapsed', $html );
 	}
 
 }
