@@ -46,6 +46,30 @@
       "revId": "8fc6716d6193605dbc5b4ce2e0d4bd898816dc32",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_7a196b27",
+        "filename": "client/includes/UpdateRepo/UpdateRepoOnMove.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-02T16:18:45Z",
+      "side": 1,
+      "message": "nah, it\u0027s just docs.",
+      "parentUuid": "aeed6739_daffd7a5",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "8fc6716d6193605dbc5b4ce2e0d4bd898816dc32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
