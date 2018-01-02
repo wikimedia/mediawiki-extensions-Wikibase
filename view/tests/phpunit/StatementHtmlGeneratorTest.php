@@ -114,7 +114,14 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		return $testCases;
 	}
 
-	public function testGivenNoReferences_SectionIsNotCollapsed() {
+	/**
+	 * @dataProvider referencesProvider
+	 */
+	public function testCollapsedReferences(
+		Statement $statement,
+		$editSectionHtml,
+		$expected
+	) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$templateFactory,
@@ -123,30 +130,26 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			new DummyLocalizedTextProvider()
 		);
 
-		$snak = new PropertyNoValueSnak( 1 );
-		$statement = new Statement( $snak );
+		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, $editSectionHtml );
 
-		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, '<EDIT SECTION HTML>' );
-
-		$this->assertNotContains( 'wikibase-initially-collapsed', $html );
+		$this->assertSame(
+			$expected ? 1 : 0,
+			substr_count( $html, 'wikibase-initially-collapsed' )
+		);
 	}
 
-	public function testGivenReferencedStatement_SectionIsCollapsed() {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$statementHtmlGenerator = new StatementHtmlGenerator(
-			$templateFactory,
-			$this->getSnakHtmlGeneratorMock(),
-			new BasicNumberLocalizer(),
-			new DummyLocalizedTextProvider()
-		);
-
+	public function referencesProvider() {
 		$snak = new PropertyNoValueSnak( 1 );
 		$statement = new Statement( $snak );
-		$statement->addNewReference( $snak );
+		$referencedStatement = clone $statement;
+		$referencedStatement->addNewReference( $snak );
 
-		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, '<EDIT SECTION HTML>' );
-
-		$this->assertContains( 'wikibase-initially-collapsed', $html );
+		return [
+			[ $statement, '', false ],
+			[ $statement, '<EDIT SECTION>', false ],
+			[ $referencedStatement, '', false ],
+			[ $referencedStatement, '<EDIT SECTION>', true ],
+		];
 	}
 
 }
