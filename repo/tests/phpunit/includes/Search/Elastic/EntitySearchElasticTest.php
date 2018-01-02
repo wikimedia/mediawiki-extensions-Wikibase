@@ -65,13 +65,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
-		$this->setMwGlobals( [
-			'wgEntitySearchUseCirrus' => true,
-			'wgCirrusSearchRescoreProfiles' =>
-				include __DIR__ . '/../../../../../config/ElasticSearchRescoreProfiles.php',
-			'wgCirrusSearchRescoreFunctionScoreChains' =>
-				include __DIR__ . '/../../../../../config/ElasticSearchRescoreFunctions.php',
-		] );
+		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
 		$search = $this->newEntitySearch( Language::factory( $params['userLang'] ) );
 		$search->setRequest( $this->getMockRequest() );
 		$search->setReturnResult( true );
