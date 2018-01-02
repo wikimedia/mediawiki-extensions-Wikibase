@@ -51,12 +51,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 		parent::setUp();
 
 		$this->idParser = new BasicEntityIdParser();
-
-		// ElasticSearch function for entity weight
-		$this->mergeMwGlobalArrayValue(
-			'wgCirrusSearchRescoreFunctionScoreChains',
-			require __DIR__ . '/../../../../config/ElasticSearchRescoreFunctions.php'
-		);
 	}
 
 	public function provideQueriesForEntityIds() {
