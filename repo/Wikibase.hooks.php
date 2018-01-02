@@ -7,6 +7,7 @@ use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
+use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use Content;
@@ -38,6 +39,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
@@ -126,12 +128,7 @@ final class RepoHooks {
 			$settings->setSetting( 'entitySearch', $searchSettings );
 		}
 		if ( $searchSettings['useCirrus'] ) {
-			global $wgCirrusSearchRescoreFunctionScoreChains, $wgCirrusSearchExtraIndexSettings;
-			// ElasticSearch function for entity weight
-			$wgCirrusSearchRescoreFunctionScoreChains = array_merge(
-				isset( $wgCirrusSearchRescoreFunctionScoreChains ) ? $wgCirrusSearchRescoreFunctionScoreChains : [],
-				require __DIR__ . '/config/ElasticSearchRescoreFunctions.php'
-			);
+			global $wgCirrusSearchExtraIndexSettings;
 			// Bump max fields so that labels/descriptions fields fit in.
 			$wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
 
@@ -1088,6 +1085,55 @@ final class RepoHooks {
 				$searchSettings['statementBoost']
 			);
 		}
+	}
+
+	/**
+	 * Register our cirrus profiles.
+	 *
+	 * @param SearchProfileService $service
+	 */
+	public static function onCirrusSearchProfileService( SearchProfileService $service ) {
+		// register base profiles available on all wikibase installs
+		$service->registerFileRepository( SearchProfileService::RESCORE,
+			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreProfiles.php' );
+		$service->registerFileRepository( SearchProfileService::RESCORE_FUNCTION_CHAINS,
+			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreFunctions.php' );
+		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+			'wikibase_base', __DIR__ . '/config/EntityPrefixSearchProfiles.php');
+
+		// register custom profiles provided in the wikibase config
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entitySearchConfig = $settings->getSetting( 'entitySearch' );
+		if ( isset( $entitySearchConfig['rescoreProfiles'] ) ) {
+			$service->registerArrayRepository( SearchProfileService::RESCORE,
+				'wikibase_config', $entitySearchConfig['rescoreProfiles'] );
+		}
+		if ( isset( $entitySearchConfig['prefixSearchProfiles'] ) ) {
+			$service->registerArrayRepository( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+				'wikibase_config', $entitySearchConfig['prefixSearchProfiles'] );
+		}
+
+		// Determine the default rescore profile to use for entity autocomplete search
+		$defaultRescore = EntitySearchElastic::DEFAULT_RESCORE_PROFILE;
+		if ( isset( $entitySearchConfig['defaultPrefixRescoreProfile'] ) ) {
+			// If set in config use it
+			$defaultRescore = $entitySearchConfig['defaultPrefixRescoreProfile'];
+		}
+		$service->registerDefaultProfile( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, $defaultRescore );
+		// add the possibility to override the profile by setting the URI param cirrusRescoreProfile
+		$service->registerUriParamOverride( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusRescoreProfile' );
+
+		// Determine the default query builder profile to use for entity autocomplete search
+		$defaultQB = EntitySearchElastic::DEFAULT_QUERY_BUILDER_PROFILE;
+		if ( isset( $entitySearchConfig['defaultPrefixProfile'] ) ) {
+			$defaultQB = $entitySearchConfig['defaultPrefixProfile'];
+		}
+		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, $defaultQB );
+		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusWBProfile' );
 	}
 
 }

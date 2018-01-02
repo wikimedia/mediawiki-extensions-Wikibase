@@ -32,6 +32,21 @@ class EntitySearchElastic implements EntitySearchHelper {
 	const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
 
 	/**
+	 * Name of the context for profile name resolution
+	 */
+	const CONTEXT_WIKIBASE_PREFIX = 'wikibase_prefix_search';
+
+	/**
+	 * Name of the profile type used to build the elastic query
+	 */
+	const WIKIBASE_QUERY_BUILDER_PROFILE_TYPE = 'wikibase_prefix_querybuilder';
+
+	/**
+	 * Default query builder profile
+	 */
+	const DEFAULT_QUERY_BUILDER_PROFILE = 'default';
+
+	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageChainFactory;
@@ -108,18 +123,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	}
 
 	/**
-	 * Load specific label scoring profile.
-	 * @param string $profile
-	 * @return array|null Profile or null if none found.
-	 */
-	protected function loadProfile( $profile ) {
-		if ( empty( $this->settings['prefixSearchProfiles'][$profile] ) ) {
-			return null;
-		}
-		return $this->settings['prefixSearchProfiles'][$profile];
-	}
-
-	/**
 	 * Produce ES query that matches the arguments.
 	 *
 	 * @param $text
@@ -151,13 +154,9 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$labelsFilter = new Match( 'labels_all.prefix', $text );
 
-		$profileName = $this->request->getVal( 'cirrusWBProfile', $this->settings['defaultPrefixProfile'] );
-		$profile = $this->loadProfile( $profileName );
-		if ( !$profile ) {
-			$context->setResultsPossible( false );
-			$context->addWarning( 'wikibase-search-bad-profile-name', $profileName );
-			return $query;
-		}
+		$profile = $context->getConfig()
+			->getProfileService()
+			->loadProfile( self::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE, self::CONTEXT_WIKIBASE_PREFIX );
 
 		$dismax = new DisMax();
 		$dismax->setTieBreaker( 0 );
@@ -245,26 +244,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	}
 
 	/**
-	 * Get suitable rescore profile.
-	 * If internal config has non, return just the name and let RescoureBuilder handle it.
-	 * @return string|array
-	 */
-	private function getRescoreProfile() {
-
-		$rescoreProfile = $this->request->getVal( 'cirrusRescoreProfile' );
-		if ( !$rescoreProfile && isset( $this->settings['defaultPrefixRescoreProfile'] ) ) {
-			$rescoreProfile = $this->settings['defaultPrefixRescoreProfile'];
-		}
-		if ( !$rescoreProfile ) {
-			$rescoreProfile = self::DEFAULT_RESCORE_PROFILE;
-		}
-		if ( isset( $this->settings['rescoreProfiles'][$rescoreProfile] ) ) {
-			return $this->settings['rescoreProfiles'][$rescoreProfile];
-		}
-		return $rescoreProfile;
-	}
-
-	/**
 	 * Parse entity ID or return null
 	 * @param $text
 	 * @return null|\Wikibase\DataModel\Entity\EntityId
@@ -339,8 +318,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		) );
 
 		$searcher->setOptionsFromRequest( $this->request );
-		$searcher->setRescoreProfile( $this->getRescoreProfile() );
-
+		$searcher->getSearchContext()->setProfileContext( self::CONTEXT_WIKIBASE_PREFIX );
 		$result = $searcher->performSearch( $query );
 
 		// FIXME: this is a hack, we need to return Status upstream instead
