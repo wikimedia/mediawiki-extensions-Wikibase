@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeed6739_9397f592",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-03T12:42:14Z",
+      "side": 1,
+      "message": "Do I see read right this could also make make propertyId a nil?\nIf so, maybe the condition below could also check if propertyId is nul?\n\nNot really writing nil, so it might actually not be how you do it.",
+      "revId": "a832e9c15f9742494d143ce8af3ca47e9e413a0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
