@@ -347,7 +347,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param array $conditions
 	 *
 	 * @return bool

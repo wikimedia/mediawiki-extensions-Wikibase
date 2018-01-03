@@ -7,7 +7,7 @@ use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers Wikibase\Client\Store\Sql\PagePropsEntityIdLookup
@@ -34,7 +34,7 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 		return $title;
 	}
 
-	private function insertPageProps( Database $db, $pageId, EntityId $entityId ) {
+	private function insertPageProps( IDatabase $db, $pageId, EntityId $entityId ) {
 		$db->insert(
 			'page_props',
 			[
