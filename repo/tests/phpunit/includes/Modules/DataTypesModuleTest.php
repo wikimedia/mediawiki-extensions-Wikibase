@@ -13,7 +13,7 @@ use Wikibase\Repo\Modules\DataTypesModule;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class DataTypesModuleTest extends \PHPUnit_Framework_TestCase {

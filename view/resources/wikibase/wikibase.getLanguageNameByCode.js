@@ -4,7 +4,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @license GPL-2.0+
- * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 ( function ( wb, $ ) {

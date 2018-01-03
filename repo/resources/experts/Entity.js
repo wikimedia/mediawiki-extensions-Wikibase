@@ -11,7 +11,7 @@
 	 * @abstract
 	 * @uses jQuery.wikibase.entityselector
 	 * @license GPL-2.0+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 */
 	var SELF = MODULE.Entity = vv.expert( 'wikibaseentity', PARENT, {
 		/**

@@ -10,7 +10,7 @@
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @uses jQuery.wikibase.listview
 	 * @license GPL-2.0+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

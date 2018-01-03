@@ -1,7 +1,7 @@
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 ( function ( $, mw, wb, dataTypeStore, getExpertsStore, getParserStore, performance ) {
