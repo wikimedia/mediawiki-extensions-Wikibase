@@ -14,7 +14,7 @@
  * http://aehlke.github.com/tag-it/LICENSE
  *
  * @license MIT license
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  *
  * @option {string} [inputName]

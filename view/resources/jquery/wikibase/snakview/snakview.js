@@ -16,7 +16,7 @@
 	 * @see wikibase.datamodel.Snak
 	 * @class jQuery.wikibase.snakview
 	 * @extends jQuery.ui.EditableTemplatedWidget
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

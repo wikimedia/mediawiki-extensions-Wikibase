@@ -19,7 +19,7 @@ use ResourceLoaderModule;
  *   returning a DataTypeFactory instance.
  *
  * @license GPL-2.0+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 class DataTypesModule extends ResourceLoaderModule {
 
