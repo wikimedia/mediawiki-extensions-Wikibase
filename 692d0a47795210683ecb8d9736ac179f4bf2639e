@@ -22,6 +22,30 @@
       "revId": "692d0a47795210683ecb8d9736ac179f4bf2639e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_a7c58992",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2018-01-04T21:31:09Z",
+      "side": 1,
+      "message": "Both are part of the interface, so it is save to use any IDatabase as proxy target here.",
+      "parentUuid": "aeed6739_1375a592",
+      "range": {
+        "startLine": 111,
+        "startChar": 20,
+        "endLine": 111,
+        "endChar": 39
+      },
+      "revId": "692d0a47795210683ecb8d9736ac179f4bf2639e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
