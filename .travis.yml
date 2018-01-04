@@ -15,6 +15,9 @@ matrix:
       php: 7.0
     - env: DBTYPE=mysql LANG=en MW=master WB=both
       php: hhvm
+  allow_failures:
+    - env: DBTYPE=sqlite LANG=ru MW=master WB=both
+      php: 5.5
 
 before_script:
     - bash ./build/travis/install.sh
