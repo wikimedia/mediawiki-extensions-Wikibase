@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ContentHandler;
-use DatabaseMysql;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Rdbms\DatabaseMysql;
 use Wikimedia\Rdbms\LoadBalancer;
 use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
