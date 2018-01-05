@@ -15,6 +15,10 @@ matrix:
       php: 7.0
     - env: DBTYPE=mysql LANG=en MW=master WB=both
       php: hhvm
+    - env: DBTYPE=mysql LANG=en MW=master WB=both
+      php: 7.1
+    - env: DBTYPE=mysql LANG=en MW=master WB=both
+      php: 7.2
   allow_failures:
     - env: DBTYPE=sqlite LANG=ru MW=master WB=both
       php: 5.5
