@@ -997,7 +997,7 @@ class WikibaseRepo {
 	private function getVocabularyBaseUri() {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
-		return $this->settings->getSetting( 'conceptBaseUri' );
+		return $this->getLocalConceptBaseUri();
 	}
 
 	/**
@@ -1962,7 +1962,7 @@ class WikibaseRepo {
 		if ( !$unitStorage ) {
 			return null;
 		}
-		return new UnitConverter( $unitStorage, $this->settings->getSetting( 'conceptBaseUri' ) );
+		return new UnitConverter( $unitStorage, $this->getLocalConceptBaseUri() );
 	}
 
 	/**
@@ -2072,6 +2072,10 @@ class WikibaseRepo {
 	 */
 	public function getLocalDatabase() {
 		return $this->repositoryDefinitions->getDatabaseNames()[''];
+	}
+
+	public function getLocalConceptBaseUri() {
+		return $this->repositoryDefinitions->getConceptBaseUris()[''];
 	}
 
 	/**

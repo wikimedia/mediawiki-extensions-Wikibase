@@ -79,7 +79,7 @@ class UpdateUnits extends Maintenance {
 			$this->error( 'SPARQL endpoint not defined', 1 );
 		}
 		$this->setBaseUri( $this->getOption( 'base-uri',
-			$repo->getSettings()->getSetting( 'conceptBaseUri' ) ) );
+			$repo->getLocalConceptBaseUri() ) );
 		$this->client = new SPARQLClient( $endPoint, $this->baseUri );
 
 		$unitClass = $this->getOption( 'unit-class' );

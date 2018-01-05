@@ -784,8 +784,7 @@ final class RepoHooks {
 
 		$data['wikibase-propertytypes'] = $propertyTypes;
 
-		$conceptBaseUri = $wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' );
-		$data['wikibase-conceptbaseuri'] = $conceptBaseUri;
+		$data['wikibase-conceptbaseuri'] = $wikibaseRepo->getLocalConceptBaseUri();
 
 		$geoShapeStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'geoShapeStorageBaseUrl' );
 		$data['wikibase-geoshapestoragebaseurl'] = $geoShapeStorageBaseUrl;
@@ -893,7 +892,7 @@ final class RepoHooks {
 			return;
 		}
 
-		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
+		$baseUri = WikibaseRepo::getDefaultInstance()->getLocalConceptBaseUri();
 		$navigationUrls['wb-concept-uri'] = [
 			'text' => $skinTemplate->msg( 'wikibase-concept-uri' ),
 			'href' => $baseUri . $title->getDBkey(),

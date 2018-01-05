@@ -141,7 +141,7 @@ class AddUnitConversions extends Maintenance {
 		}
 
 		$baseUri = $this->getOption( 'base-uri',
-				$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ) );
+				$wikibaseRepo->getLocalConceptBaseUri() );
 		$this->client = new SPARQLClient( $endPoint, $baseUri );
 		$format = $this->getOption( 'format', 'ttl' );
 		$this->initializeWriter( $baseUri, $format );
