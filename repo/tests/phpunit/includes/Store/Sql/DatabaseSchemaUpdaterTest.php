@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use DatabaseMysql;
 use MysqlUpdater;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
 use Wikibase\Store;
+use Wikimedia\Rdbms\DatabaseMysql;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater
