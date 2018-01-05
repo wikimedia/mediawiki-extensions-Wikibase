@@ -21,7 +21,8 @@ call_user_func( function() {
 		$wgDBname,
 		$wgExtraNamespaces,
 		$wgNamespacesToBeSearchedDefault,
-		$wgWBRepoSettings;
+		$wgWBRepoSettings,
+		$wgServer;
 
 	$wgContentHandlerUseDB = true;
 
@@ -39,9 +40,19 @@ call_user_func( function() {
 	$wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
 	$wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
 
+	$baseUri = preg_replace( '!^//!', 'http://', $wgServer );
 	// Tell Wikibase which namespace to use for which kind of entity
-	$wgWBRepoSettings['entityNamespaces']['item'] = WB_NS_ITEM;
-	$wgWBRepoSettings['entityNamespaces']['property'] = WB_NS_PROPERTY;
+	$wgWBRepoSettings['repositories'] = [
+		'' => [
+			'repoDatabase' => false,
+			'entityNamespaces' => [
+				'item' => WB_NS_ITEM,
+				'property' => WB_NS_PROPERTY,
+			],
+			'baseUri' => $baseUri . '/entity/',
+			'prefixMapping' => [],
+		]
+	];
 
 	// Make sure we use the same keys on repo and clients, so we can share cached objects.
 	$wgWBRepoSettings['sharedCacheKeyPrefix'] = $wgDBname . ':WBL/' . rawurlencode( WBL_VERSION );
@@ -88,10 +99,6 @@ define( 'WB_NS_PROPERTY_TALK', $baseNs +3 );
 // No extra namespace for items, using a core namespace for that.
 $wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
 $wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
-
-// Tell Wikibase which namespace to use for which kind of entity
-$wgWBRepoSettings['entityNamespaces']['item'] = NS_MAIN; // <=== Use main namespace for items!!!
-$wgWBRepoSettings['entityNamespaces']['property'] = WB_NS_PROPERTY; // use custom namespace
 
 // No need to mess with $wgNamespacesToBeSearchedDefault, the main namespace will be searched per default.
 

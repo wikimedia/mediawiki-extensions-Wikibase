@@ -43,7 +43,10 @@ class WikibaseSettings {
 		}
 
 		$settings = self::getSettings( 'wgWBRepoSettings' );
-		$settings->setSetting( 'entityNamespaces', self::buildEntityNamespaceConfigurations( $settings ) );
+
+		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
+		self::applyEntityNamespacesToSettings( $settings, $entityNamespaces );
+
 		return $settings;
 	}
 
@@ -125,11 +128,6 @@ class WikibaseSettings {
 	}
 
 	private static function applyEntityNamespacesToSettings( SettingsArray $settings, array $entityNamespaces ) {
-		if ( $settings->hasSetting( 'entityNamespaces' ) ) {
-			$settings->setSetting( 'entityNamespaces', $entityNamespaces );
-			return;
-		}
-
 		$repositorySettings = $settings->getSetting( 'repositories' );
 		$namespacesDefinedForRepositories = self::getEntityNamespacesFromRepositorySettings( $repositorySettings );
 

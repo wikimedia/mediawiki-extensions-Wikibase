@@ -22,8 +22,5 @@ return [
 
 	'specialSiteLinkGroups' => [],
 
-	// local by default. Set to something LBFactory understands.
-	'changesDatabase' => false,
-
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
 ];

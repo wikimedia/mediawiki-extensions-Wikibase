@@ -328,16 +328,30 @@ class WikibaseRepo {
 	 * @return RepositoryDefinitions
 	 */
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
-		// FIXME: It might no longer be needed to check different settings (e.g. changesDatabase vs foreignRepositories)
-		// once repository-related settings are unified, see: T153767.
-		$definitions = [ '' => [
-			'database' => $settings->getSetting( 'changesDatabase' ),
-			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-		] ];
+		$definitions = [];
 
-		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+		// Backwards compatibility: if the old "foreignRepositories" settings is there,
+		// use its values.
+		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
+			? $settings->getSetting( 'foreignRepositories' )
+			: $settings->getSetting( 'repositories' );
+
+		// Backwards compatibility: if settings of the "local" repository
+		// are not defined in the "repositories" settings but with individual settings,
+		// fallback to old single-repo settings
+		if ( $settings->hasSetting( 'changesDatabase' )
+			&& $settings->hasSetting( 'entityNamespaces' )
+			&& $settings->hasSetting( 'conceptBaseUri' )
+		) {
+			$definitions = [ '' => [
+				'database' => $settings->getSetting( 'changesDatabase' ),
+				'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ];
+		}
+
+		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
@@ -1675,7 +1689,14 @@ class WikibaseRepo {
 	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
 	public function getLocalEntityNamespaces() {
-		return $this->settings->getSetting( 'entityNamespaces' );
+		$entityNamespaces = $this->repositoryDefinitions->getEntityNamespaces();
+		$localEntityTypes = $this->repositoryDefinitions->getEntityTypesPerRepository()[''];
+
+		$namespaces = [];
+		foreach ( $localEntityTypes as $type ) {
+			$namespaces[$type] = $entityNamespaces[$type];
+		}
+		return $namespaces;
 	}
 
 	/**

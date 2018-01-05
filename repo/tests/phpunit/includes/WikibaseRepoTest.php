@@ -362,13 +362,10 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetLocalEntityTypes() {
-		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting(
-			'entityNamespaces',
-			[
-				'foo' => 100,
-				'bar' => 102
-			]
+		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions(
+			$this->getRepositoryDefinition( '', [
+				'entity-namespaces' => [ 'foo' => 100, 'bar' => 102, ]
+			] )
 		);
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();

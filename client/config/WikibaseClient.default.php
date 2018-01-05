@@ -139,7 +139,14 @@ return call_user_func( function() {
 			'property' => 120
 		];
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
-			$entityNamespaces = WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' );
+			// TODO: Duplicates logic from WikibaseSettings::getEntityNamespacesFromRepositorySettings
+			$entityNamespaces = array_reduce(
+				WikibaseSettings::getRepoSettings()->getSetting( 'repositories' ),
+				function ( array $result, array $repoSettings ) {
+					return array_merge( $result, $repoSettings['entityNamespaces'] );
+				},
+				[]
+			);
 		}
 
 		return [
@@ -178,10 +185,18 @@ return call_user_func( function() {
 
 	$defaults['repoNamespaces'] = function ( SettingsArray $settings ) {
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
+			// TODO: Duplicates logic from WikibaseSettings::getEntityNamespacesFromRepositorySettings
+			$entityNamespaces = array_reduce(
+				WikibaseSettings::getRepoSettings()->getSetting( 'repositories' ),
+				function ( array $result, array $repoSettings ) {
+					return array_merge( $result, $repoSettings['entityNamespaces'] );
+				},
+				[]
+			);
 			// if this is the repo wiki, look up the namespace names based on the entityNamespaces setting
 			$namespaceNames = array_map(
 				[ MWNamespace::class, 'getCanonicalName' ],
-				WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' )
+				$entityNamespaces
 			);
 			return $namespaceNames;
 		} else {

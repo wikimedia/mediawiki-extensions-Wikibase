@@ -113,9 +113,6 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
-					'wgWBRepoSettings' => [
-						'entityNamespaces' => [ 'item' => 303 ],
-					],
 				],
 				true, // $repoIsLocal
 				[ // $expected
@@ -161,7 +158,6 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'wgArticlePath' => '/mywiki',
 					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
-					'wgWBRepoSettings' => [ 'entityNamespaces' => [ 'item' => 303 ] ],
 				],
 				true, // $repoIsLocal
 				[ // $expected
@@ -193,7 +189,13 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			$repoSettings = WikibaseSettings::getRepoSettings();
-			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
+			$entityNamespaces = array_reduce(
+				$repoSettings->getSetting( 'repositories' ),
+				function ( array $result, array $repoSettings ) {
+					return array_merge( $result, $repoSettings['entityNamespaces'] );
+				},
+				[]
+			);
 			$namespaceNames = array_map( [ MWNamespace::class, 'getCanonicalName' ], $entityNamespaces );
 
 			$cases[] = [ // #7: default repoNamespaces and entityNamespaces

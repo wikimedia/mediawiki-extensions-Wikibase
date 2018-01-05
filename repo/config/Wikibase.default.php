@@ -22,10 +22,6 @@ return [
 		720101010,
 	],
 
-	// List of supported entity types, mapping entity type identifiers to namespace IDs.
-	// This setting is used to enable entity types.
-	'entityNamespaces' => [],
-
 	// See StatementGrouperBuilder for an example.
 	'statementSections' => [],
 
@@ -83,11 +79,6 @@ return [
 	'sparqlEndpoint' => null,
 
 	'transformLegacyFormatOnExport' => true,
-
-	'conceptBaseUri' => function() {
-		$uri = preg_replace( '!^//!', 'http://', $GLOBALS['wgServer'] );
-		return $uri . '/entity/';
-	},
 
 	// Property used as formatter to link identifiers
 	'formatterUrlProperty' => null,
@@ -203,8 +194,19 @@ return [
 		'wb-identifiers' => [ 'name' => 'identifiers', 'type' => 'integer' ],
 	],
 
-	// Map of foreign repository names to repository-specific settings such as "supportedEntityTypes"
-	'foreignRepositories' => [],
+	'repositories' => function() {
+		$baseUri = preg_replace( '!^//!', 'http://', $GLOBALS['wgServer'] );
+
+		return [
+			'' => [
+				'repoDatabase' => false,
+				'entityNamespaces' => [],
+				'baseUri' => $baseUri . '/entity/',
+				'prefixMapping' => [ '' => '' ],
+
+			],
+		];
+	},
 
 	// List of entity types for Special:EntitiesWithoutLabel and …Description, or null for all.
 	'supportedEntityTypesForEntitiesWithoutTermListings' => null,
