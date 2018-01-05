@@ -120,11 +120,6 @@ class SqlStore implements Store {
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var string|bool false for local, or a database id that wfGetLB understands.
-	 */
-	private $changesDatabase;
-
-	/**
 	 * @var TermIndex|null
 	 */
 	private $termIndex = null;
@@ -212,7 +207,6 @@ class SqlStore implements Store {
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
