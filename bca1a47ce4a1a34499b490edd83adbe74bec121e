@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeed6739_cdb70780",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-05T19:35:47Z",
+      "side": 1,
+      "message": "There\u0027s a \u0027repositories\u0027 entry in the repo settings now?",
+      "revId": "bca1a47ce4a1a34499b490edd83adbe74bec121e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_2d7cb3b3",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-05T19:35:47Z",
+      "side": 1,
+      "message": "Does the client still need to know about entity namespaces? I thought that need went away with the introduction of Special:EntityPage, which allows links to entities based on their ID, without knowing the namespace (or title format in general).",
+      "revId": "bca1a47ce4a1a34499b490edd83adbe74bec121e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_8dbdff65",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-05T19:35:47Z",
+      "side": 1,
+      "message": "I\u0027m a bit torn about this... all settings in this file are for the local repository. It seems to make sense to have the configuration for *this* repo at the top level. That is different from the client - the client may have a default repo, but really all repos it accesses are on the same level conceptually.\n\nMaybe it makes more sense to think about the the other way: the repo shouldn\u0027t have a foreignRepositories setting. If it accesses foreign repos, it does so as a client, so they are configured in the client settings.\n\nThis is just off the top of my head, I havn\u0027t thought about the implications in detail. I just notice that our concept of \"client\" still isn\u0027t quite clear.",
+      "revId": "bca1a47ce4a1a34499b490edd83adbe74bec121e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
