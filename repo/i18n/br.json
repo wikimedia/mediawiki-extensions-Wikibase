@@ -7,15 +7,18 @@
 			"Macofe",
 			"Gwenn-Ael",
 			"Pymouss",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Dishual"
 		]
 	},
 	"wikibase-edit": "kemmañ",
 	"wikibase-save": "enrollañ",
+	"wikibase-publish": "embann",
 	"wikibase-cancel": "nullañ",
 	"wikibase-add": "ouzhpennañ",
 	"wikibase-addreference": "ouzhpennañ un daveenn",
 	"wikibase-save-inprogress": "Oc'h enrollañ...",
+	"wikibase-publish-inprogress": "Oc'h embann...",
 	"wikibase-remove-inprogress": "O tiverkañ...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Muioc'h a yezhoù",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Anvet ivez",

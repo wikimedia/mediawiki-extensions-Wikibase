@@ -51,7 +51,7 @@
 	"wikibase-sitelink-site-edit-placeholder": "vikivietne",
 	"wikibase-sitelink-page-edit-placeholder": "lapa",
 	"wikibase-alias-edit-placeholder": "ievadiet citu nosaukumu",
-	"wikibase-label-input-help-message": "Ievadiet šīs datu kopas $1 nosaukumu.",
+	"wikibase-label-input-help-message": "Ievadiet šīs entītijas $1 nosaukumu.",
 	"wikibase-statementsection-statements": "Apgalvojumi",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|vienumi|vienums|vienumi}}",
 	"wikibase-sitelinks-special": "Citas vietnes",

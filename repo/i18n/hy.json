@@ -13,7 +13,9 @@
 		]
 	},
 	"wikibase-edit": "խմբագրել",
+	"wikibase-publish": "հրատարակել",
 	"wikibase-add": "ավելացնել",
+	"wikibase-publish-inprogress": "հրապարակվում է...",
 	"wikibase-statementlistview-add": "ավելացնել",
 	"wikibase-statementlistview-add-tooltip": "Ավելացնել նոր նշանակություն",
 	"wikibase-statementgrouplistview-add": "ավելացնել",
