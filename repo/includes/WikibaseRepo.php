@@ -2066,6 +2066,15 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * Returns the symbolic name of the database of the "local" repository.
+	 *
+	 * @return string|false
+	 */
+	public function getLocalDatabase() {
+		return $this->repositoryDefinitions->getDatabaseNames()[''];
+	}
+
+	/**
 	 * @return WikibaseServices
 	 */
 	public function getWikibaseServices() {

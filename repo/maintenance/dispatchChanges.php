@@ -134,6 +134,7 @@ class DispatchChanges extends Maintenance {
 	/**
 	 * Initializes members from command line options and configuration settings.
 	 *
+	 * @param string|false $repoDB symbolic database name of repo's local database
 	 * @param string[] $clientWikis A mapping of client wiki site IDs to logical database names.
 	 * @param EntityChangeLookup $changeLookup
 	 * @param SettingsArray $settings
@@ -141,11 +142,11 @@ class DispatchChanges extends Maintenance {
 	 * @return ChangeDispatcher
 	 */
 	private function newChangeDispatcher(
+		$repoDB,
 		array $clientWikis,
 		EntityChangeLookup $changeLookup,
 		SettingsArray $settings
 	) {
-		$repoDB = $settings->getSetting( 'changesDatabase' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
 
@@ -167,7 +168,7 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = $this->getCoordinator( $settings );
+		$coordinator = $this->getCoordinator( $repoDB );
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
@@ -229,6 +230,7 @@ class DispatchChanges extends Maintenance {
 		}
 
 		$dispatcher = $this->newChangeDispatcher(
+			$wikibaseRepo->getLocalDatabase(),
 			$clientWikis,
 			$wikibaseRepo->getStore()->getEntityChangeLookup(),
 			$wikibaseRepo->getSettings()
@@ -316,11 +318,12 @@ class DispatchChanges extends Maintenance {
 	/**
 	 * Find and return the proper ChangeDispatchCoordinator
 	 *
+	 * @param string|false $repoDB
 	 * @param SettingsArray $settings
 	 *
 	 * @return SqlChangeDispatchCoordinator
 	 */
-	private function getCoordinator( SettingsArray $settings ) {
+	private function getCoordinator( $repoDB, SettingsArray $settings ) {
 		$repoID = wfWikiID();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
 		$LBFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
@@ -329,12 +332,12 @@ class DispatchChanges extends Maintenance {
 			return new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
 				$LBFactory,
-				$settings->getSetting( 'changesDatabase' ),
+				$repoDB,
 				$repoID
 			);
 		} else {
 			return new SqlChangeDispatchCoordinator(
-				$settings->getSetting( 'changesDatabase' ),
+				$repoDB,
 				$repoID,
 				$LBFactory
 			);

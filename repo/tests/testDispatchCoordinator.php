@@ -67,7 +67,7 @@ class TestDispatchCoordinator extends Maintenance {
 		$iterations = (int)$this->getOption( 'number', 30 );
 		$this->createFakeTables( $iterations );
 
-		$coordinatorOne = $this->createCoordinator( $wikibaseRepo->getSettings() );
+		$coordinatorOne = $this->createCoordinator( $wikibaseRepo->getLocalDatabase(), $wikibaseRepo->getSettings() );
 		$coordinatorOne->initState( $this->getClientWikis() );
 
 		for ( $i = 1; $i <= $iterations; $i++ ) {
@@ -79,11 +79,12 @@ class TestDispatchCoordinator extends Maintenance {
 	/**
 	 * Find and return the proper ChangeDispatchCoordinator
 	 *
+	 * @param string|false $repoDB
 	 * @param SettingsArray $settings
 	 *
 	 * @return ChangeDispatchCoordinator
 	 */
-	private function createCoordinator( SettingsArray $settings ) {
+	private function createCoordinator( $repoDB, SettingsArray $settings ) {
 		$repoID = wfWikiID();
 		$lockManagerName = $this->getOption(
 			'lock',
@@ -94,12 +95,12 @@ class TestDispatchCoordinator extends Maintenance {
 			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
 				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-				$settings->getSetting( 'changesDatabase' ),
+				$repoDB,
 				$repoID
 			);
 		} else {
 			$coordinator = new SqlChangeDispatchCoordinator(
-				$settings->getSetting( 'changesDatabase' ),
+				$repoDB,
 				$repoID,
 				MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
 			);
