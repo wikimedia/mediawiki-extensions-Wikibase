@@ -41,6 +41,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",
+	"entityusage": "Entītijas lietojums",
 	"wikibase-entityusage-invalid-id": "$1 nav derīgs entītijas ID",
 	"wikibase-entityusage-legend": "Lapu saraksts, kuras izmanto norādīto entītiju",
 	"wikibase-entityusage-entity": "Entītija:",
