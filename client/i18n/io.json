@@ -5,8 +5,11 @@
 		]
 	},
 	"tooltip-t-wikibase": "Ligilo ad arkivo de la datumaro",
+	"wikibase-comment-update": "{{WBREPONAME}} artiklo chanjita",
+	"wikibase-dataitem": "Redakto en {{WBREPONAME}}",
 	"wikibase-editlinks": "Redaktar ligili",
 	"wikibase-editlinkstitle": "Redaktar la ligili ad altra lingui",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Celar",
 	"wikibase-rc-hide-wikidata-show": "Montrar",
 	"wikibase-rc-wikibase-edit-letter": "D",

@@ -66,7 +66,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}編輯",
 	"wikibase-rcfilters-hide-wikibase-description": "在{{WBREPONAME}}引起的編輯。",
 	"wikibase-replicationnote": "請注意，此動作的變更需要花費數分鐘方可於所有 Wiki 檢視。",
-	"wikibase-watchlist-show-changes-pref": "顯示 {{WBREPONAME}} 編輯於您的監視清單中",
+	"wikibase-watchlist-show-changes-pref": "於您的監視清單中顯示{{WBREPONAME}}的編輯",
 	"wikibase-error-deserialize-error": "序列化資料失敗。",
 	"wikibase-error-serialize-error": "序列化資料失敗",
 	"wikibase-error-invalid-entity-id": "系統無法辨識輸入的 ID [$2]。請使用有效的 ID。",
