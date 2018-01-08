@@ -78,6 +78,7 @@ return [
 	 */
 	'directory_list' => array_merge(
 		[
+			'data-access/src',
 			'client/includes',
 			'repo/includes',
 			'lib/includes',
@@ -321,45 +322,45 @@ return [
 	 * to this black-list to inhibit them from being reported.
 	 */
 	'suppress_issue_types' => [
-		// approximate error count: 3
+		// approximate error count: 6
 		"PhanDeprecatedClass",
-		// approximate error count: 43
+		// approximate error count: 107
 		"PhanDeprecatedFunction",
 		// approximate error count: 3
 		"PhanParamReqAfterOpt",
-		// approximate error count: 19
+		// approximate error count: 15
 		"PhanParamSignatureMismatch",
 		// approximate error count: 1
 		"PhanParamSignatureMismatchInternal",
-		// approximate error count: 17
+		// approximate error count: 6
 		"PhanParamTooMany",
 		// approximate error count: 2
 		"PhanTypeComparisonToArray",
-		// approximate error count: 75
+		// approximate error count: 50
 		"PhanTypeMismatchArgument",
-		// approximate error count: 5
+		// approximate error count: 8
 		"PhanTypeMismatchArgumentInternal",
-		// approximate error count: 5
-		"PhanTypeMismatchProperty",
-		// approximate error count: 9
-		"PhanTypeMismatchReturn",
-		// approximate error count: 3
-		"PhanTypeMissingReturn",
-		// approximate error count: 2
-		"PhanUndeclaredClassConstant",
-		// approximate error count: 14
-		"PhanUndeclaredClassMethod",
-		// approximate error count: 54
-		"PhanUndeclaredConstant",
-		// approximate error count: 139
-		"PhanUndeclaredMethod",
-		// approximate error count: 25
-		"PhanUndeclaredProperty",
-		// approximate error count: 3
-		"PhanUndeclaredTypeParameter",
 		// approximate error count: 4
+		"PhanTypeMismatchProperty",
+		// approximate error count: 12
+		"PhanTypeMismatchReturn",
+		// approximate error count: 1
+		"PhanTypeMissingReturn",
+		// approximate error count: 1
+		"PhanUndeclaredClassConstant",
+		// approximate error count: 1
+		"PhanUndeclaredClassMethod",
+		// approximate error count: 72
+		"PhanUndeclaredConstant",
+		// approximate error count: 171
+		"PhanUndeclaredMethod",
+		// approximate error count: 23
+		"PhanUndeclaredProperty",
+		// approximate error count: 1
+		"PhanUndeclaredTypeParameter",
+		// approximate error count: 1
 		"PhanUndeclaredTypeProperty",
-		// approximate error count: 3
+		// approximate error count: 4
 		"PhanUndeclaredVariable",
 	],
 
