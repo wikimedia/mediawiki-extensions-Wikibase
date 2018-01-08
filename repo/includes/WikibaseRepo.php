@@ -1072,7 +1072,7 @@ class WikibaseRepo {
 			$formatter = $this->getMessageParameterFormatter();
 			$localizers = $this->getExceptionLocalizers( $formatter );
 
-			$this->exceptionLocalizer = new DispatchingExceptionLocalizer( $localizers, $formatter );
+			$this->exceptionLocalizer = new DispatchingExceptionLocalizer( $localizers );
 		}
 
 		return $this->exceptionLocalizer;

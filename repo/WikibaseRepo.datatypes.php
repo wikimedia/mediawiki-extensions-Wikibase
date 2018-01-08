@@ -320,7 +320,7 @@ return call_user_func( function() {
 					$repo->getStore()->getPropertyInfoLookup(),
 					PropertyInfoStore::KEY_CANONICAL_URI
 				);
-				return new ExternalIdentifierRdfBuilder( $uriPatternProvider, $vocab );
+				return new ExternalIdentifierRdfBuilder( $uriPatternProvider );
 			},
 		],
 		'VT:wikibase-entityid' => [
