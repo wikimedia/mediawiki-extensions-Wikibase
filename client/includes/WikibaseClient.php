@@ -635,7 +635,7 @@ final class WikibaseClient {
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
-	 * @return WikibaseClient
+	 * @return self
 	 */
 	private static function newInstance() {
 		global $wgWBClientDataTypes;
@@ -697,7 +697,7 @@ final class WikibaseClient {
 	 *
 	 * @param string $reset Flag: Pass "reset" to reset the default instance
 	 *
-	 * @return WikibaseClient
+	 * @return self
 	 */
 	public static function getDefaultInstance( $reset = 'noreset' ) {
 		static $instance = null;

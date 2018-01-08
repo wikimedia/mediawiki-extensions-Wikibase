@@ -534,11 +534,11 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * Returns a diff between this EntityContent and the given EntityContent.
 	 *
-	 * @param EntityContent $toContent
+	 * @param self $toContent
 	 *
 	 * @return EntityContentDiff
 	 */
-	public function getDiff( EntityContent $toContent ) {
+	public function getDiff( self $toContent ) {
 		$fromContent = $this;
 
 		$differ = new MapDiffer();
@@ -564,7 +564,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param EntityContentDiff $patch
 	 *
 	 * @throws PatcherException
-	 * @return EntityContent
+	 * @return self
 	 */
 	public function getPatchedCopy( EntityContentDiff $patch ) {
 		/* @var EntityHandler $handler */
@@ -643,7 +643,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * @see Content::copy
 	 *
-	 * @return EntityContent
+	 * @return self
 	 */
 	public function copy() {
 		/* @var EntityHandler $handler */

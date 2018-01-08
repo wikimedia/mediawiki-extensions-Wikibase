@@ -59,7 +59,7 @@ class EditActionHookHandler {
 
 	/**
 	 * @param IContextSource $context
-	 * @return EditActionHookHandler
+	 * @return self
 	 */
 	public static function newFromGlobalState( IContextSource $context ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
