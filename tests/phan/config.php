@@ -64,6 +64,7 @@ return [
 		!is_dir( './../../extensions/CirrusSearch' ) ? [ 'tests/phan/stubs/cirrussearch.php' ] : [],
 		!is_dir( './../../extensions/Echo' ) ? [ 'tests/phan/stubs/echo.php56' ] : [],
 		!is_dir( './../../extensions/GeoData' ) ? [ 'tests/phan/stubs/geodata.php' ] : [],
+		!is_dir( './../../extensions/PageImages' ) ? [ 'tests/phan/stubs/pageimages.php' ] : [],
 		!is_dir( './../../extensions/Scribunto' ) ? [ 'tests/phan/stubs/scribunto.php' ] : []
 	),
 
@@ -347,8 +348,6 @@ return [
 		// approximate error count: 1
 		"PhanTypeMissingReturn",
 		// approximate error count: 1
-		"PhanUndeclaredClassConstant",
-		// approximate error count: 1
 		"PhanUndeclaredClassMethod",
 		// approximate error count: 72
 		"PhanUndeclaredConstant",
@@ -358,8 +357,6 @@ return [
 		"PhanUndeclaredProperty",
 		// approximate error count: 1
 		"PhanUndeclaredTypeParameter",
-		// approximate error count: 1
-		"PhanUndeclaredTypeProperty",
 		// approximate error count: 4
 		"PhanUndeclaredVariable",
 	],
