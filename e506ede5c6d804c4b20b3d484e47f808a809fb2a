@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeed6739_c5a993de",
+        "filename": "lib/includes/Store/EntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-08T12:50:42Z",
+      "side": 1,
+      "message": "How did you added these linebreaks? I find it better if all code shares the same line length limit at 100 characters.",
+      "revId": "e506ede5c6d804c4b20b3d484e47f808a809fb2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
