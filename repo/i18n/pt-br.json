@@ -18,7 +18,8 @@
 			"Peter Fernando",
 			"Hamilton Abreu",
 			"Felipe L. Ewald",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Eduardo Addad de Oliveira"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -34,9 +35,9 @@
 	"wikibase-addreference": "adicionar referência",
 	"wikibase-save-inprogress": "Salvando...",
 	"wikibase-remove-inprogress": "Removendo...",
-	"wikibase-statementlistview-add": "adicionar",
+	"wikibase-statementlistview-add": "adicionar valor",
 	"wikibase-statementlistview-add-tooltip": "Adicionar um novo valor",
-	"wikibase-statementgrouplistview-add": "adicionar",
+	"wikibase-statementgrouplistview-add": "adicionar declaração",
 	"wikibase-statementgrouplistview-add-tooltip": "Adicionar uma nova declaração",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Em mais idiomas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",

@@ -20,7 +20,8 @@
 			"Nemo bis",
 			"HakanIST",
 			"Vito Genovese",
-			"Botansahin"
+			"Botansahin",
+			"Chansey"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -30,11 +31,13 @@
 	"wikibase-entity-query": "sorgu",
 	"wikibase-edit": "düzenle",
 	"wikibase-save": "kaydet",
+	"wikibase-publish": "yayınla",
 	"wikibase-cancel": "vazgeç",
 	"wikibase-add": "ekle",
 	"wikibase-addqualifier": "niteleyici еkle",
 	"wikibase-addreference": "kaynak ekle",
 	"wikibase-save-inprogress": "Kaydediliyor...",
+	"wikibase-publish-inprogress": "Yayınlanıyor...",
 	"wikibase-remove-inprogress": "Kaldırılıyor...",
 	"wikibase-statementlistview-add": "değer ekle",
 	"wikibase-statementlistview-add-tooltip": "Yeni bir değer ekle",

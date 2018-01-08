@@ -512,6 +512,8 @@
 	"apihelp-wbsetdescription-param-language": "Idioma de la descripción",
 	"apihelp-wbsetdescription-param-value": "El valor que establecer como descripción",
 	"apihelp-wbsetdescription-example-2": "Establecer la cadena «<var>An encyclopedia that everyone can edit</var>» como descripción en inglés de la página con un enlace de sitio a <var>enwiki:Wikipedia</var>",
+	"apihelp-wbsetlabel-description": "Establece una etiqueta para una única entidad de Wikibase.",
+	"apihelp-wbsetlabel-summary": "Establece una etiqueta para una única entidad de Wikibase.",
 	"apihelp-wbsetlabel-param-new": "Si se establece, se creará una entidad nueva.\nEstablece esto al tipo de entidad que quieres crear.",
 	"apihelp-wbsetlabel-param-site": "Un identificador para el sitio en el que reside la página.\nÚsalo junto con <var>title</var> para crear un enlace de sitio completo.",
 	"apihelp-wbsetlabel-param-baserevid": "El identificador numérico de la revisión en la que basar la modificación.\nEste dato se utiliza para detectar conflictos al guardar.",
