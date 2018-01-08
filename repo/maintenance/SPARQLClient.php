@@ -18,6 +18,16 @@ class SPARQLClient {
 	const TIMEOUT = 300;
 
 	/**
+	 * @var string
+	 */
+	private $endpoint;
+
+	/**
+	 * @var string
+	 */
+	private $baseURL;
+
+	/**
 	 * @param string $url SPARQL Endpoint
 	 * @param string $baseURL RDF base URL - common prefix in entity URIs
 	 */
