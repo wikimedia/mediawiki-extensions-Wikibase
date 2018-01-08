@@ -538,7 +538,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return EntityContentDiff
 	 */
-	public function getDiff( self $toContent ) {
+	public function getDiff( EntityContent $toContent ) {
 		$fromContent = $this;
 
 		$differ = new MapDiffer();
