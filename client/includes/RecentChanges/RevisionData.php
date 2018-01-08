@@ -34,6 +34,11 @@ class RevisionData {
 	protected $commentHtml;
 
 	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
 	 * @var array
 	 */
 	protected $changeParams;
