@@ -339,7 +339,7 @@ final class RepoHooks {
 			if ( $change ) {
 				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();
 
-				$centralIdLookup = CentralIdLookupFactory::getInstance()->getCentralIdLookup();
+				$centralIdLookup = ( new CentralIdLookupFactory() )->getCentralIdLookup();
 				if ( $centralIdLookup === null ) {
 					$centralUserId = 0;
 				} else {

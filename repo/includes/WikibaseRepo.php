@@ -1258,7 +1258,7 @@ class WikibaseRepo {
 		return new ChangeNotifier(
 			$this->getEntityChangeFactory(),
 			$transmitters,
-			CentralIdLookupFactory::getInstance()->getCentralIdLookup()
+			( new CentralIdLookupFactory() )->getCentralIdLookup()
 		);
 	}
 

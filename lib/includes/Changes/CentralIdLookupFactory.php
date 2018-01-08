@@ -12,15 +12,6 @@ use LocalIdLookup;
 class CentralIdLookupFactory {
 
 	/**
-	 * Returns an instance of the factory
-	 *
-	 * @return CentralIdLookupFactory
-	 */
-	public static function getInstance() {
-		return new CentralIdLookupFactory();
-	}
-
-	/**
 	 * Returns a CentralIdLookup that is safe to use for cross-wiki propagation, or
 	 * null.
 	 *
