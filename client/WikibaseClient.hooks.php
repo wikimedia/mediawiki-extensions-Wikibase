@@ -52,13 +52,9 @@ final class ClientHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
 	 * @param string[] &$paths
-	 *
-	 * @return bool
 	 */
 	public static function registerUnitTests( array &$paths ) {
 		$paths[] = __DIR__ . '/tests/phpunit/';
-
-		return true;
 	}
 
 	/**
@@ -66,8 +62,6 @@ final class ClientHooks {
 	 *
 	 * @param string $engine
 	 * @param array $extraLibraries
-	 *
-	 * @return bool
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
@@ -75,8 +69,6 @@ final class ClientHooks {
 			$extraLibraries['mw.wikibase'] = Scribunto_LuaWikibaseLibrary::class;
 			$extraLibraries['mw.wikibase.entity'] = Scribunto_LuaWikibaseEntityLibrary::class;
 		}
-
-		return true;
 	}
 
 	/**
@@ -90,8 +82,6 @@ final class ClientHooks {
 	 * @param Title|null $title use for further information
 	 * @param bool $local shall links be generated locally or globally
 	 * @param string|null $wikiId The ID of the wiki the comment applies to, if not the local wiki.
-	 *
-	 * @return bool
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local, $wikiId = null ) {
 		global $wgContLang;
@@ -122,8 +112,6 @@ final class ClientHooks {
 	 *
 	 * @param BaseTemplate $baseTemplate
 	 * @param array $toolbox
-	 *
-	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -149,8 +137,6 @@ final class ClientHooks {
 				'id' => 't-wikibase'
 			];
 		}
-
-		return true;
 	}
 
 	/**
@@ -173,8 +159,6 @@ final class ClientHooks {
 	 *
 	 * @param OutputPage &$out
 	 * @param Skin &$skin
-	 *
-	 * @return bool
 	 */
 	public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
 		$prefixedId = $out->getProperty( 'wikibase_item' );
@@ -182,8 +166,6 @@ final class ClientHooks {
 		if ( $prefixedId !== null ) {
 			$out->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
 		}
-
-		return true;
 	}
 
 	/**
@@ -192,8 +174,6 @@ final class ClientHooks {
 	 *
 	 * @param OutputPage &$out
 	 * @param Skin &$skin
-	 *
-	 * @return bool
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
@@ -201,8 +181,6 @@ final class ClientHooks {
 
 		$actionName = Action::getActionName( $skin->getContext() );
 		$beforePageDisplayHandler->addModules( $out, $actionName );
-
-		return true;
 	}
 
 	/**
@@ -210,14 +188,12 @@ final class ClientHooks {
 	 *
 	 * @param User $user
 	 * @param array[] &$prefs
-	 *
-	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$prefs ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		if ( !$settings->getSetting( 'showExternalRecentChanges' ) ) {
-			return true;
+			return;
 		}
 
 		$prefs['rcshowwikidata'] = [
@@ -231,21 +207,15 @@ final class ClientHooks {
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
 		];
-
-		return true;
 	}
 
 	/**
 	 * Register the parser functions.
 	 *
 	 * @param Parser $parser
-	 *
-	 * @return bool
 	 */
 	public static function onParserFirstCallInit( Parser &$parser ) {
 		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );
-
-		return true;
 	}
 
 	/**
@@ -275,8 +245,6 @@ final class ClientHooks {
 	 *
 	 * @param Title $title
 	 * @param OutputPage $out
-	 *
-	 * @return bool
 	 */
 	public static function onArticleDeleteAfterSuccess( Title $title, OutputPage $out ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -292,16 +260,12 @@ final class ClientHooks {
 		$html = $deletePageNotice->getPageDeleteNoticeHtml( $title );
 
 		$out->addHTML( $html );
-
-		return true;
 	}
 
 	/**
 	 * @param BaseTemplate $skinTemplate
 	 * @param string $name
 	 * @param string &$html
-	 *
-	 * @return boolean
 	 */
 	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
 		$handler = new BaseTemplateAfterPortletHandler();
@@ -316,13 +280,13 @@ final class ClientHooks {
 		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
 		$queryPages[] = [ SpecialPagesWithBadges::class, 'PagesWithBadges' ];
 		$queryPages[] = [ SpecialEntityUsage::class, 'EntityUsage' ];
-		return true;
 	}
 
 	/**
 	 * @param User $editor
 	 * @param Title $title
 	 * @param RecentChange $recentChange
+	 *
 	 * @return bool
 	 */
 	public static function onAbortEmailNotification( User $editor, Title $title, RecentChange $recentChange ) {
