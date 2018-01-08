@@ -9,7 +9,7 @@ var PARENT = dv.DataValue;
  * @extends dataValues.DataValue
  * @since 0.1
  * @license GPL-2.0+
- * @author Daniel Werner < danweetz@web.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  *
  * @constructor
  *
