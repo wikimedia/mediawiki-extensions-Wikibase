@@ -17,7 +17,7 @@ final class Settings extends SettingsArray {
 	/**
 	 * @deprecated
 	 *
-	 * @return Settings
+	 * @return self
 	 */
 	public static function singleton() {
 		static $instance = null;
