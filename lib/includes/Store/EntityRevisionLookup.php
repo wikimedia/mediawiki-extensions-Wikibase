@@ -23,6 +23,10 @@ interface EntityRevisionLookup {
 	 * Flag used to indicate that loading slightly lagged data is fine (like
 	 * LATEST_FROM_REPLICA), but in case an entity or revision couldn't be found,
 	 * we try loading it from master.
+	 *
+	 * Note that this flag must only be used in code that is exclusively called from POST requests,
+	 * since master may reside in a different datacenter and GET requests which trigger reading or
+	 * writing to master result in an error in that case.
 	 */
 	const LATEST_FROM_REPLICA_WITH_FALLBACK = 'master_fallback';
 
