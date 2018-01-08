@@ -1184,7 +1184,7 @@ final class WikibaseClient {
 				$this->siteLookup,
 				$this->settings->getSetting( 'siteGlobalID' )
 			),
-			CentralIdLookupFactory::getInstance()->getCentralIdLookup()
+			( new CentralIdLookupFactory() )->getCentralIdLookup()
 		);
 	}
 
