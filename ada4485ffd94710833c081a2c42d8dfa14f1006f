@@ -22,6 +22,30 @@
       "revId": "ada4485ffd94710833c081a2c42d8dfa14f1006f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_978b3cc4",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-08T18:51:44Z",
+      "side": 1,
+      "message": "Hm, turns out we shouldn’t do that too much, apparently…",
+      "parentUuid": "aeed6739_77b4b833",
+      "range": {
+        "startLine": 541,
+        "startChar": 26,
+        "endLine": 541,
+        "endChar": 30
+      },
+      "revId": "ada4485ffd94710833c081a2c42d8dfa14f1006f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
