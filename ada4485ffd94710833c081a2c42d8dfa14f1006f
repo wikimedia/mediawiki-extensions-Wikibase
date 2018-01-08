@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeed6739_77b4b833",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-08T17:49:16Z",
+      "side": 1,
+      "message": "Oh, I didn’t know you could use `self` in type hints too!",
+      "range": {
+        "startLine": 541,
+        "startChar": 26,
+        "endLine": 541,
+        "endChar": 30
+      },
+      "revId": "ada4485ffd94710833c081a2c42d8dfa14f1006f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
