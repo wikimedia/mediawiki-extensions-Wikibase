@@ -10,7 +10,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * view though since interaction in both directions would very likely mess things up.
 	 * @class jQuery.valueview.ViewState
 	 * @license GNU GPL v2+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @since 0.1
 	 *
 	 * @constructor

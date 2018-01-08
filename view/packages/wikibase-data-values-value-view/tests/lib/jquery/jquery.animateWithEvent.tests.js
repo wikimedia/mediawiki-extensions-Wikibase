@@ -1,6 +1,6 @@
 /**
  * @license GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 ( function( $, QUnit ) {
 	'use strict';

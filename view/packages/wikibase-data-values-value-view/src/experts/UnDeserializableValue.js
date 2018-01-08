@@ -10,7 +10,7 @@
 	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
 	 * @license GNU GPL v2+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author Katie Filbert < aude.wiki@gmail.com >
 	 */
 	vv.experts.UnDeserializableValue = vv.expert( 'UnDeserializableValue', PARENT, {

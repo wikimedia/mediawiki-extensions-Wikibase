@@ -43,7 +43,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
 	 * @license GNU GPL v2+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author H. Snater < mediawiki@snater.com >
 	 */
 	vv.experts.TimeInput = vv.expert( 'TimeInput', PARENT, function() {

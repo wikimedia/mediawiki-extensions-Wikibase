@@ -43,7 +43,7 @@ $( document ).ready( function() {
  * @uses jQuery.animateWithEvent
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < danweetz@web.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  *
  * @constructor
  *

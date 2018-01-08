@@ -30,7 +30,7 @@ function expertProxy( fnName ) {
  * @extends jQuery.Widget
  * @since 0.1
  * @license GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

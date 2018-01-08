@@ -10,7 +10,7 @@
 	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
 	 * @license GNU GPL v2+
-	 * @author Daniel Werner < daniel.werner@wikimedia.de >
+	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 */
 	vv.experts.UnsupportedValue = vv.expert( 'UnsupportedValue', PARENT, {
 		/**
