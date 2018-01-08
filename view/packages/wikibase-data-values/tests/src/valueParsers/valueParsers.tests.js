@@ -1,7 +1,7 @@
 /**
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner < danweetz@web.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 ( function( vp, dv, util, $, QUnit ) {
 	'use strict';
