@@ -54,7 +54,7 @@ class RemoveQualifiers extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $errorReporter
+	 * @param ApiErrorReporter $errorReporter
 	 * @param StatementChangeOpFactory $statementChangeOpFactory
 	 * @param StatementModificationHelper $modificationHelper
 	 * @param StatementGuidParser $guidParser
@@ -64,7 +64,7 @@ class RemoveQualifiers extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		$errorReporter,
+		ApiErrorReporter $errorReporter,
 		StatementChangeOpFactory $statementChangeOpFactory,
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,

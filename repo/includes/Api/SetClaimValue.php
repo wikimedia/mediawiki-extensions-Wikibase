@@ -49,7 +49,7 @@ class SetClaimValue extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $errorReporter
+	 * @param ApiErrorReporter $errorReporter
 	 * @param StatementChangeOpFactory $statementChangeOpFactory
 	 * @param StatementModificationHelper $modificationHelper
 	 * @param StatementGuidParser $guidParser
@@ -59,7 +59,7 @@ class SetClaimValue extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		$errorReporter,
+		ApiErrorReporter $errorReporter,
 		StatementChangeOpFactory $statementChangeOpFactory,
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,
@@ -67,6 +67,7 @@ class SetClaimValue extends ApiBase {
 		callable $entitySavingHelperInstantiator
 	) {
 		parent::__construct( $mainModule, $moduleName );
+
 		$this->errorReporter = $errorReporter;
 		$this->statementChangeOpFactory = $statementChangeOpFactory;
 		$this->modificationHelper = $modificationHelper;
