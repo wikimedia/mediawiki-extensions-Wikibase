@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use CentralIdLookup;
 use InvalidArgumentException;
 use Revision;
 use User;
@@ -38,10 +39,14 @@ class ChangeNotifier {
 	 * @param EntityChangeFactory $changeFactory
 	 * @param ChangeTransmitter[] $changeTransmitters
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
-	 *   this repository is not connected to a central user system (see
-	 *   Wikibase\Lib\Changes\CentralIdLookupFactory).
+	 *   this repository is not connected to a central user system,
+	 *   @see Wikibase\Lib\Changes\CentralIdLookupFactory.
 	 */
-	public function __construct( EntityChangeFactory $changeFactory, array $changeTransmitters, $centralIdLookup ) {
+	public function __construct(
+		EntityChangeFactory $changeFactory,
+		array $changeTransmitters,
+		CentralIdLookup $centralIdLookup = null
+	) {
 		Assert::parameterElementType(
 			ChangeTransmitter::class,
 			$changeTransmitters,
@@ -50,10 +55,6 @@ class ChangeNotifier {
 
 		$this->changeFactory = $changeFactory;
 		$this->changeTransmitters = $changeTransmitters;
-
-		// There is no type hint because it is a required parameter that allows
-		// nulls.
-		Assert::parameterType( 'CentralIdLookup|null', $centralIdLookup, '$centralIdLookup' );
 		$this->centralIdLookup = $centralIdLookup;
 	}
 
@@ -193,19 +194,16 @@ class ChangeNotifier {
 	}
 
 	/**
-	 * Gets central user ID, or 0, from user
-	 *
 	 * @param User $user Repository user
+	 *
 	 * @return int Central user ID, or 0
 	 */
-	protected function getCentralUserId( User $user ) {
-		if ( $this->centralIdLookup === null ) {
-			return 0;
-		} else {
-			return $this->centralIdLookup->centralIdFromLocalUser(
-				$user
-			);
+	private function getCentralUserId( User $user ) {
+		if ( $this->centralIdLookup ) {
+			return $this->centralIdLookup->centralIdFromLocalUser( $user );
 		}
+
+		return 0;
 	}
 
 	/**
