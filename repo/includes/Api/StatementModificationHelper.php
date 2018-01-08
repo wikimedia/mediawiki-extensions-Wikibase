@@ -47,12 +47,9 @@ class StatementModificationHelper {
 
 	/**
 	 * @var ApiErrorReporter
-	 *
-	 * @param SnakFactory $snakFactory
-	 * @param EntityIdParser $entityIdParser
-	 * @param StatementGuidValidator $guidValidator
-	 * @param ApiErrorReporter $errorReporter
 	 */
+	private $errorReporter;
+
 	public function __construct(
 		SnakFactory $snakFactory,
 		EntityIdParser $entityIdParser,
