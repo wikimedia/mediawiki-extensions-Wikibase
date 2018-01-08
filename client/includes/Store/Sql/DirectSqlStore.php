@@ -100,7 +100,7 @@ class DirectSqlStore implements ClientStore {
 	private $cacheDuration;
 
 	/**
-	 * @var EntityLookup|null
+	 * @var EntityRevisionLookup|null
 	 */
 	private $entityRevisionLookup = null;
 

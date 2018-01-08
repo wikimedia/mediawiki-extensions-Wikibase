@@ -200,7 +200,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * Encodes the given data as JSON
 	 *
-	 * @param string $data
+	 * @param mixed $data
 	 *
 	 * @return string
 	 * @throws MWException

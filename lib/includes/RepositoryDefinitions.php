@@ -31,17 +31,17 @@ use Wikimedia\Assert\Assert;
 class RepositoryDefinitions {
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	private $repositoryDefinitions = [];
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	private $entityTypeToRepositoryMapping = [];
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	private $entityTypesPerRepository = [];
 
@@ -51,7 +51,7 @@ class RepositoryDefinitions {
 	private $entityNamespaces;
 
 	/**
-	 * @param array $repositoryDefinitions Associative array mapping repository names to an array of
+	 * @param array[] $repositoryDefinitions Associative array mapping repository names to an array of
 	 * repository settings. Empty-string key stands for local repository.
 	 * See class description for information on the expected format of $repositoryDefinitions
 	 *
@@ -117,7 +117,7 @@ class RepositoryDefinitions {
 	}
 
 	/**
-	 * @return string[] Associative array (string => array) mapping entity types to a list of
+	 * @return array[] Associative array (string => array) mapping entity types to a list of
 	 * [string repository name, int namespace] pairs, for repositories that provide entities of the given type,
 	 * and the namespace ID on the respective repository.
 	 */
@@ -151,7 +151,7 @@ class RepositoryDefinitions {
 	}
 
 	/**
-	 * @param array $repositoryDefinitions
+	 * @param array[] $repositoryDefinitions
 	 *
 	 * @throws InvalidArgumentException
 	 */

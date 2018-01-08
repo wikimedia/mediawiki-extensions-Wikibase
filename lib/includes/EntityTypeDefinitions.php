@@ -52,7 +52,7 @@ class EntityTypeDefinitions {
 	/**
 	 * @param string $field
 	 *
-	 * @return callable[]
+	 * @return array
 	 */
 	private function getMapForDefinitionField( $field ) {
 		$fieldValues = [];

@@ -105,6 +105,13 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		);
 	}
 
+	/**
+	 * @see ApiQueryBase::getCacheMode
+	 *
+	 * @param array $params
+	 *
+	 * @return string
+	 */
 	public function getCacheMode( $params ) {
 		return 'public';
 	}

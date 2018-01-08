@@ -36,6 +36,11 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$this->repoLinker = $repoLinker;
 	}
 
+	/**
+	 * @see ApiQueryGeneratorBase::executeGenerator
+	 *
+	 * @param ApiPageSet $resultPageSet
+	 */
 	public function executeGenerator( $resultPageSet ) {
 		$this->run( $resultPageSet );
 	}
@@ -168,6 +173,13 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		);
 	}
 
+	/**
+	 * @see ApiQueryBase::getCacheMode
+	 *
+	 * @param array $params
+	 *
+	 * @return string
+	 */
 	public function getCacheMode( $params ) {
 		return 'public';
 	}

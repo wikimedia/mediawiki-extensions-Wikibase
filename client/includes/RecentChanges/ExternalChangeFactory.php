@@ -196,7 +196,7 @@ class ExternalChangeFactory {
 	 * @param array|string $comment
 	 * @param string $type
 	 *
-	 * @return string
+	 * @return array
 	 */
 	private function parseAutoComment( $comment, $type ) {
 		$newComment = [
