@@ -11,8 +11,8 @@ use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\LoadBalancer;
-use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Implements initial population (priming) for the wb_changes_subscription table,
@@ -220,14 +220,14 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * @param ResultWrapper $res A result set with the ips_item_id and ips_site_id fields
+	 * @param IResultWrapper $res A result set with the ips_item_id and ips_site_id fields
 	 *        set for each row.
 	 * @param array &$continuation Single item ID => site ID pair or empty.
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
 	private function getSubscriptionsPerItemFromRows(
-		ResultWrapper $res,
+		IResultWrapper $res,
 		&$continuation = []
 	) {
 		$subscriptionsPerItem = [];

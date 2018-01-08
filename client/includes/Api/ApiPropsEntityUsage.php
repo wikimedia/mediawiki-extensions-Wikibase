@@ -8,7 +8,7 @@ use ApiQueryBase;
 use ApiResult;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * API module to get the usage of entities.
@@ -46,11 +46,11 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	}
 
 	/**
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 * @param int $limit
 	 * @param array $prop
 	 */
-	private function formatResult( ResultWrapper $res, $limit, array $prop ) {
+	private function formatResult( IResultWrapper $res, $limit, array $prop ) {
 		$currentPageId = null;
 		$entry = [];
 		$count = 0;
@@ -112,7 +112,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	/**
 	 * @param array $params
 	 *
-	 * @return ResultWrapper|null
+	 * @return IResultWrapper|null
 	 */
 	public function doQuery( array $params ) {
 		$pages = $this->getPageSet()->getGoodTitles();

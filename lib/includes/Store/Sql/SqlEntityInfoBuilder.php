@@ -15,7 +15,7 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Class EntityInfoBuilder implementation relying on database access.
@@ -439,11 +439,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @note: Keep in sync with EntitySerializer!
 	 *
-	 * @param ResultWrapper $dbResult
+	 * @param IResultWrapper $dbResult
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function injectTerms( ResultWrapper $dbResult ) {
+	private function injectTerms( IResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
 				try {
 					if ( $this->readFullEntityIdColumn === true ) {
@@ -558,11 +558,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @note: Keep in sync with ItemSerializer!
 	 *
-	 * @param ResultWrapper $dbResult
+	 * @param IResultWrapper $dbResult
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function injectDataTypes( ResultWrapper $dbResult ) {
+	private function injectDataTypes( IResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
 			$id = PropertyId::newFromNumber( (int)$row->pi_property_id );
 			$key = $id->getSerialization();

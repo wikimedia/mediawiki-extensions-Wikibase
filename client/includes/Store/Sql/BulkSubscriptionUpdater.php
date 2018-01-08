@@ -9,7 +9,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
@@ -232,14 +232,14 @@ class BulkSubscriptionUpdater {
 	 * Extracts entity id strings from the rows in a query result, and updates $continuation
 	 * to a position "after" the content of the given query result.
 	 *
-	 * @param ResultWrapper $res A result set with the field given by $entityIdField field set for each row.
+	 * @param IResultWrapper $res A result set with the field given by $entityIdField field set for each row.
 	 *        The result is expected to be sorted by entity id, in ascending order.
 	 * @param string $entityIdField The name of the field that contains the entity id.
 	 * @param array &$continuation Updated to an array containing the last EntityId in the result.
 	 *
 	 * @return string[] A list of entity ids strings.
 	 */
-	private function getEntityIdsFromRows( ResultWrapper $res, $entityIdField, array &$continuation = null ) {
+	private function getEntityIdsFromRows( IResultWrapper $res, $entityIdField, array &$continuation = null ) {
 		$entities = [];
 
 		foreach ( $res as $row ) {

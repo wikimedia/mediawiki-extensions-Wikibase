@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBQueryError;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -235,12 +235,12 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * entity id of the entities they refer to.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 *
 	 * @return array Array mapping entity ID serializations to either objects or false if an entity
 	 *  is not present in $res.
 	 */
-	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
+	private function indexResultByEntityId( array $entityIds, IResultWrapper $res ) {
 		$rows = [];
 		// Create a key based map from the rows just returned to reduce
 		// the complexity below.

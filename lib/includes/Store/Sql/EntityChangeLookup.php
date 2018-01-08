@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Allows accessing changes stored in a database.
@@ -151,11 +151,11 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	}
 
 	/**
-	 * @param ResultWrapper $rows
+	 * @param IResultWrapper $rows
 	 *
 	 * @return EntityChange[]
 	 */
-	private function changesFromRows( ResultWrapper $rows ) {
+	private function changesFromRows( IResultWrapper $rows ) {
 		$changes = [];
 
 		foreach ( $rows as $row ) {

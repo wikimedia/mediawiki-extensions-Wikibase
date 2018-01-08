@@ -10,7 +10,7 @@ use ApiResult;
 use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * API module to get the usage of entities.
@@ -72,13 +72,13 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 * @param int $limit
 	 * @param array $prop
 	 * @param ApiPageSet|null $resultPageSet
 	 */
 	private function formatResult(
-		ResultWrapper $res,
+		IResultWrapper $res,
 		$limit,
 		array $prop,
 		ApiPageSet $resultPageSet = null
@@ -176,7 +176,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 * @param array $params
 	 * @param ApiPageSet|null $resultPageSet
 	 *
-	 * @return ResultWrapper|null
+	 * @return IResultWrapper|null
 	 */
 	public function doQuery( array $params, ApiPageSet $resultPageSet = null ) {
 		if ( !$params['entities'] ) {
