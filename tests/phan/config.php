@@ -78,6 +78,7 @@ return [
 	 */
 	'directory_list' => array_merge(
 		[
+			'data-access/src',
 			'client/includes',
 			'repo/includes',
 			'lib/includes',
@@ -321,46 +322,7 @@ return [
 	 * to this black-list to inhibit them from being reported.
 	 */
 	'suppress_issue_types' => [
-		// approximate error count: 3
-		"PhanDeprecatedClass",
-		// approximate error count: 43
-		"PhanDeprecatedFunction",
-		// approximate error count: 3
-		"PhanParamReqAfterOpt",
-		// approximate error count: 19
-		"PhanParamSignatureMismatch",
-		// approximate error count: 1
-		"PhanParamSignatureMismatchInternal",
-		// approximate error count: 17
-		"PhanParamTooMany",
-		// approximate error count: 2
-		"PhanTypeComparisonToArray",
-		// approximate error count: 75
-		"PhanTypeMismatchArgument",
-		// approximate error count: 5
-		"PhanTypeMismatchArgumentInternal",
-		// approximate error count: 5
-		"PhanTypeMismatchProperty",
-		// approximate error count: 9
-		"PhanTypeMismatchReturn",
-		// approximate error count: 3
-		"PhanTypeMissingReturn",
-		// approximate error count: 2
-		"PhanUndeclaredClassConstant",
-		// approximate error count: 14
-		"PhanUndeclaredClassMethod",
-		// approximate error count: 54
-		"PhanUndeclaredConstant",
-		// approximate error count: 139
-		"PhanUndeclaredMethod",
-		// approximate error count: 25
-		"PhanUndeclaredProperty",
-		// approximate error count: 3
-		"PhanUndeclaredTypeParameter",
-		// approximate error count: 4
-		"PhanUndeclaredTypeProperty",
-		// approximate error count: 3
-		"PhanUndeclaredVariable",
+
 	],
 
 	/**
