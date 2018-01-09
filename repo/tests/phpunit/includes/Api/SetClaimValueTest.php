@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use DataValues\StringValue;
 use FormatJson;
-use Revision;
+use MediaWiki\Storage\RevisionRecord;
 use ApiUsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -146,7 +146,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$obtainedEntity = $entityLookup->getEntity( $itemId );
 
 		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $itemId ) );
-		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
+		$generatedSummary = $page->getRevision()->getComment( RevisionRecord::RAW );
 		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
 		$statements = $obtainedEntity->getStatements();

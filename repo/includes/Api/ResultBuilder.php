@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiResult;
+use MediaWiki\Storage\RevisionRecord;
 use Revision;
 use Serializers\Serializer;
 use SiteLookup;
@@ -1078,7 +1079,7 @@ class ResultBuilder {
 	}
 
 	private function getRevisionId( $revision ) {
-		if ( $revision instanceof Revision ) {
+		if ( $revision instanceof Revision || $revision instanceof RevisionRecord ) {
 			$revisionId = $revision->getId();
 		} elseif ( $revision instanceof EntityRevision ) {
 			$revisionId = $revision->getRevisionId();
