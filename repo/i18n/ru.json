@@ -29,7 +29,8 @@
 			"Irus",
 			"Kareyac",
 			"MaxBioHazard",
-			"Redredsonia"
+			"Redredsonia",
+			"Jack who built the house"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -39,13 +40,13 @@
 	"wikibase-entity-query": "запрос",
 	"wikibase-edit": "редактировать",
 	"wikibase-save": "сохранить",
-	"wikibase-publish": "опубликовать",
+	"wikibase-publish": "записать",
 	"wikibase-cancel": "отменить",
 	"wikibase-add": "добавить",
 	"wikibase-addqualifier": "квалификатор",
 	"wikibase-addreference": "добавить источник",
 	"wikibase-save-inprogress": "Сохранение…",
-	"wikibase-publish-inprogress": "Публикуется...",
+	"wikibase-publish-inprogress": "Записывается...",
 	"wikibase-remove-inprogress": "Удаление…",
 	"wikibase-statementlistview-add": "добавить значение",
 	"wikibase-statementlistview-add-tooltip": "Добавить новое значение",
