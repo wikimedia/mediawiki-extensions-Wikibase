@@ -16,6 +16,24 @@
       "revId": "a832e9c15f9742494d143ce8af3ca47e9e413a0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_40fe0767",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-09T15:34:44Z",
+      "side": 1,
+      "message": "I tried this, and an array access with nil works just fine. It does not trigger an error or something, but reports the array element not being found.\n\nHowever, I still find it better to check this explicitly and uploaded a follow up patch that changes this code. See Ieed8ced.",
+      "parentUuid": "aeed6739_9397f592",
+      "revId": "a832e9c15f9742494d143ce8af3ca47e9e413a0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
