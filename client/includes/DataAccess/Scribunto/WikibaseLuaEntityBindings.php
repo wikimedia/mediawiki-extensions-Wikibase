@@ -6,6 +6,7 @@ use Language;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -117,7 +118,7 @@ class WikibaseLuaEntityBindings {
 	 */
 	public function addStatementUsage( $entityId, $propertyId ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
-		$propertyId = $this->entityIdParser->parse( $propertyId );
+		$propertyId = new PropertyId( $propertyId );
 
 		$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
 	}
