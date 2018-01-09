@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeed6739_c3434142",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-09T16:33:32Z",
+      "side": 1,
+      "message": "I would not squeeze the new behavior into this method. The method returns a string, and the path is simply prepended. The method does not need to know about the prepended string. This can as well be done outside of this method, and it\u0027s quite easy:\n\n implode( \u0027 / \u0027, array_merge( $path, [ $this-\u003egetPropertyHeader( … ) ] );",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 34
+      },
+      "revId": "b12ee0bd476e3b9c382d203a79b91d9fae1677a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_4309f12e",
+        "filename": "repo/includes/Diff/DifferencesSnakVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-09T16:33:32Z",
+      "side": 1,
+      "message": "I wonder if we should have a message for these slashes, or maybe even a PathRenderer class or something. But: all the slashes that are currently used in diffs are hard-coded in multiple places anyway (one in line #127 below). For this patch here it is fine to continue doing so and hard-code them again in this line.",
+      "range": {
+        "startLine": 120,
+        "startChar": 17,
+        "endLine": 120,
+        "endChar": 48
+      },
+      "revId": "b12ee0bd476e3b9c382d203a79b91d9fae1677a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
