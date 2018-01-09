@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use Deserializers\DispatchableDeserializer;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
@@ -1358,7 +1359,7 @@ class WikibaseRepo {
 	/**
 	 * Returns a deserializer to deserialize entities in current serialization only.
 	 *
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
