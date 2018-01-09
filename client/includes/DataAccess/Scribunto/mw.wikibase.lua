@@ -137,6 +137,7 @@ function wikibase.setupInterface()
 
 	-- @param {string} entityId
 	-- @param {string} propertyId
+	-- @param {string} funcName
 	-- @param {string} rank Which statements to include. Either "best" or "all".
 	local getEntityStatements = function( entityId, propertyId, funcName, rank )
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
