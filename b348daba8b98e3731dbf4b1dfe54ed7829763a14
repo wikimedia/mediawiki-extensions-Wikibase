@@ -22,6 +22,30 @@
       "revId": "b348daba8b98e3731dbf4b1dfe54ed7829763a14",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_a4c2c65b",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-10T10:45:17Z",
+      "side": 1,
+      "message": "So I added it to mw.wikibase.lua, but not here? Whoops. Good catch!",
+      "parentUuid": "aeed6739_b4f59181",
+      "range": {
+        "startLine": 231,
+        "startChar": 64,
+        "endLine": 231,
+        "endChar": 73
+      },
+      "revId": "b348daba8b98e3731dbf4b1dfe54ed7829763a14",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
