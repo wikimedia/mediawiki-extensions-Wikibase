@@ -446,8 +446,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Avoid relying on this method! It bypasses EntityContentCodec, and does
 	 *       not make any guarantees about the structure of the array returned.
 	 *
-	 * @return array An undefined data structure representing the content. This is not guaranteed
-	 *         to conform to any serialization structure used in the database or externally.
+	 * @return array|EntityDocument An undefined data structure representing the content. This is
+	 *  not guaranteed to conform to any serialization structure used in the database or externally.
 	 */
 	public function getNativeData() {
 		if ( $this->isRedirect() ) {
