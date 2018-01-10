@@ -31,8 +31,6 @@ class HookChangeTransmitter implements ChangeTransmitter {
 	/**
 	 * @see ChangeNotificationChannel::sendChangeNotification()
 	 *
-	 * This dummy implementation does nothing.
-	 *
 	 * @param Change $change
 	 */
 	public function transmitChange( Change $change ) {
