@@ -35,6 +35,7 @@
 	"wikibase-linkitem-confirmitem-text": "Избраната страница е вече свързана с [$1 обект от нашето централно хранилище с данни]. Потвърдете, ако страниците, показани по-долу, са онези, които искате да свържете с тази страница.",
 	"wikibase-linkitem-confirmitem-button": "Потвърждаване",
 	"wikibase-linkitem-not-loggedin-title": "Трябва да сте влезли в системата",
+	"wikibase-linkitem-success-link": "Страниците бяха свързани. Можете да намерите обекта, съдържащ връзките, в нашото [$1 централно хранилище за данни].",
 	"wikibase-rc-hide-wikidata": "$1 на {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Скриване",
 	"wikibase-rc-hide-wikidata-show": "Показване",
