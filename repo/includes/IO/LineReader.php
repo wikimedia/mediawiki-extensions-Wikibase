@@ -16,7 +16,7 @@ use Iterator;
 class LineReader implements Iterator {
 
 	/**
-	 * @var resource
+	 * @var resource|null
 	 */
 	private $fileHandle;
 
@@ -80,7 +80,7 @@ class LineReader implements Iterator {
 			fclose( $this->fileHandle );
 		}
 
-		$this->fileHandle = false;
+		$this->fileHandle = null;
 	}
 
 	/**
