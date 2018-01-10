@@ -330,34 +330,30 @@ return [
 		"PhanDeprecatedFunction",
 		// approximate error count: 3
 		"PhanParamReqAfterOpt",
-		// approximate error count: 15
+		// approximate error count: 9
 		"PhanParamSignatureMismatch",
 		// approximate error count: 1
 		"PhanParamSignatureMismatchInternal",
-		// approximate error count: 6
+		// approximate error count: 4
 		"PhanParamTooMany",
 		// approximate error count: 2
 		"PhanTypeComparisonToArray",
-		// approximate error count: 50
+		// approximate error count: 47
 		"PhanTypeMismatchArgument",
-		// approximate error count: 8
+		// approximate error count: 5
 		"PhanTypeMismatchArgumentInternal",
-		// approximate error count: 4
+		// approximate error count: 3
 		"PhanTypeMismatchProperty",
-		// approximate error count: 12
+		// approximate error count: 2
 		"PhanTypeMismatchReturn",
 		// approximate error count: 1
 		"PhanTypeMissingReturn",
-		// approximate error count: 1
-		"PhanUndeclaredClassMethod",
 		// approximate error count: 72
 		"PhanUndeclaredConstant",
-		// approximate error count: 171
+		// approximate error count: 168
 		"PhanUndeclaredMethod",
-		// approximate error count: 23
+		// approximate error count: 17
 		"PhanUndeclaredProperty",
-		// approximate error count: 1
-		"PhanUndeclaredTypeParameter",
 		// approximate error count: 4
 		"PhanUndeclaredVariable",
 	],
