@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_cdff3564",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-10T17:51:49Z",
+      "side": 1,
+      "message": "Here I can add a strict type hint.",
+      "range": {
+        "startLine": 318,
+        "startChar": 40,
+        "endLine": 318,
+        "endChar": 52
+      },
+      "revId": "e9b7666acdc4d247a4a6b8db1f826a76e3fe38ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_2dca194b",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-10T17:51:49Z",
+      "side": 1,
+      "message": "I can not add a strict type hint here, because the base class in core does not have it.",
+      "range": {
+        "startLine": 44,
+        "startChar": 35,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "e9b7666acdc4d247a4a6b8db1f826a76e3fe38ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_8dd7edf1",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-10T17:51:49Z",
+      "side": 1,
+      "message": "I can not add a strict type hint here, because the base class in core does not have it.",
+      "range": {
+        "startLine": 183,
+        "startChar": 31,
+        "endLine": 183,
+        "endChar": 38
+      },
+      "revId": "e9b7666acdc4d247a4a6b8db1f826a76e3fe38ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_4dcde561",
+        "filename": "client/includes/Api/ApiPropsEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-10T17:51:49Z",
+      "side": 1,
+      "message": "I can not add a strict type hint here, because the base class in core does not have it.",
+      "range": {
+        "startLine": 115,
+        "startChar": 31,
+        "endLine": 115,
+        "endChar": 38
+      },
+      "revId": "e9b7666acdc4d247a4a6b8db1f826a76e3fe38ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
