@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Article;
+use Html;
 use MWException;
 use OutputPage;
 use ViewAction;
@@ -91,7 +92,11 @@ class ViewEntityAction extends ViewAction {
 
 		if ( $this->isDiff() ) {
 			if ( isset( $meta['title'] ) ) {
-				$this->setPageTitle( $outputPage, $meta['title'] );
+				$this->setDiffPageTitle(
+					$outputPage,
+					$meta['title'],
+					$outputPage->getJsConfigVars()['wbEntityId']
+				);
 			}
 
 			// No description, social media tags, or any search engine optimization for diffs
@@ -116,8 +121,18 @@ class ViewEntityAction extends ViewAction {
 	/**
 	 * @param OutputPage $outputPage
 	 * @param string $titleText
+	 * @param string $entityIdSerialization
 	 */
-	private function setPageTitle( OutputPage $outputPage, $titleText ) {
+	private function setDiffPageTitle(
+		OutputPage $outputPage,
+		$titleText,
+		$entityIdSerialization
+	) {
+		$id = Html::element(
+			'span',
+			[ 'class' => 'wikibase-title-id' ],
+			$this->msg( 'parentheses' )->plaintextParams( $entityIdSerialization )
+		);
 		// Escaping HTML characters in order to retain original label that may contain HTML
 		// characters. This prevents having characters evaluated or stripped via
 		// OutputPage::setPageTitle:
@@ -129,7 +144,7 @@ class ViewEntityAction extends ViewAction {
 				// or should set the attribute of the h1 to correct direction.
 				// Still note that the direction is "auto" so guessing should
 				// give the right direction in most cases.
-			)->plaintextParams( htmlspecialchars( $titleText ) )
+			)->plaintextParams( htmlspecialchars( $titleText ) . ' ' . $id )
 		);
 	}
 
