@@ -22,6 +22,30 @@
       "revId": "26666c9a2f54df2310522e6765e15abfced8eab9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_c4d6f22b",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-10T10:38:39Z",
+      "side": 1,
+      "message": "I agree this is fragile, because this ID is set in entirely disjoint code, and may go away without a warning. Users will see empty brackets then, and we might find some warnings because of an unknown array index in logs. Is this enough? Or should we log a more specific message if the ID is null?",
+      "parentUuid": "8ef26315_e4416e10",
+      "range": {
+        "startLine": 98,
+        "startChar": 5,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "26666c9a2f54df2310522e6765e15abfced8eab9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
