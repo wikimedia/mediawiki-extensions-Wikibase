@@ -10,7 +10,7 @@ use Title;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 
 /**
  * StatementGroupRenderer of the {{#property}} parser function.
@@ -66,11 +66,12 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 				)
 			);
 		} catch ( PropertyLabelNotResolvedException $ex ) {
-			$this->parserOutput->addTrackingCategory( 'unresolved-property-category', $this->title );
+			$this->parserOutput->addTrackingCategory( 'unresolved-property-category',
+				$this->title );
 
 			// @fixme use ExceptionLocalizer
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
-		} catch ( EntityAccessLimitException $ex ) {
+		} catch ( EntityLookupException $ex ) {
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
