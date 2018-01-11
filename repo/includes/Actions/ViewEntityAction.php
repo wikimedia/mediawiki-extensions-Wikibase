@@ -92,19 +92,7 @@ class ViewEntityAction extends ViewAction {
 
 		if ( $this->isDiff() ) {
 			if ( isset( $meta['title'] ) ) {
-				$configVars = $outputPage->getJsConfigVars();
-				if ( !isset( $configVars['wbEntityId'] ) ) {
-					wfLogWarning( "'wbEntityId' has not been found." );
-					$entityId = null;
-				} else {
-					$entityId = $configVars['wbEntityId'];
-				}
-
-				$this->setDiffPageTitle(
-					$outputPage,
-					$meta['title'],
-					$entityId
-				);
+				$this->setDiffPageTitle( $outputPage, $meta['title'] );
 			}
 
 			// No description, social media tags, or any search engine optimization for diffs
@@ -129,21 +117,19 @@ class ViewEntityAction extends ViewAction {
 	/**
 	 * @param OutputPage $outputPage
 	 * @param string $titleText
-	 * @param string $entityIdSerialization
 	 */
-	private function setDiffPageTitle(
-		OutputPage $outputPage,
-		$titleText,
-		$entityIdSerialization
-	) {
-		if ( $entityIdSerialization !== null ) {
-			$id = ' ' .  Html::element(
+	private function setDiffPageTitle( OutputPage $outputPage, $titleText ) {
+		$variables = $outputPage->getJsConfigVars();
+
+		if ( !isset( $variables['wbEntityId'] ) ) {
+			wfLogWarning( "'wbEntityId' has not been found." );
+			$id = '';
+		} else {
+			$id = ' ' . Html::element(
 				'span',
 				[ 'class' => 'wikibase-title-id' ],
-				$this->msg( 'parentheses' )->plaintextParams( $entityIdSerialization )
+				$this->msg( 'parentheses' )->plaintextParams( $variables['wbEntityId'] )
 			);
-		} else {
-			$id = '';
 		}
 
 		// Escaping HTML characters in order to retain original label that may contain HTML
