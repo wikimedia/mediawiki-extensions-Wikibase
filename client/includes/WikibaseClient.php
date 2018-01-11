@@ -1206,6 +1206,10 @@ final class WikibaseClient {
 				$this->getEntityLookup(),
 				$this->settings->getSetting( 'entityAccessLimit' )
 			);
+
+			$this->restrictedEntityLookup->setDisabledEntityTypes(
+				$this->settings->getSetting( 'disabledAccessEntityTypes' )
+			);
 		}
 
 		return $this->restrictedEntityLookup;
