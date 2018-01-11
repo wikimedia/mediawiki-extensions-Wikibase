@@ -241,5 +241,8 @@ return call_user_func( function() {
 	// Enable reading of term_full_entity_id column in wb_terms table.
 	$defaults['readFullEntityIdColumn'] = false;
 
+	// Disabled entity access
+	$defaults['disabledAccessEntityTypes'] = [];
+
 	return $defaults;
 } );
