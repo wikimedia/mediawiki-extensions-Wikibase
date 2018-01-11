@@ -226,31 +226,33 @@ methodtable.getSitelink = function( entity, globalSiteId )
 	return sitelink.title
 end
 
--- Get claims by property id or label from entity
---
 -- @param {table} entity
 -- @param {string} propertyLabelOrId
-local resolvePropertyClaims = function( entity, propertyLabelOrId )
-	local propertyId
-	if isValidPropertyId( propertyLabelOrId ) then
-		propertyId = propertyLabelOrId
-	else
-		propertyId = mw.wikibase.resolvePropertyId( propertyLabelOrId )
-	end
+-- @param {string} funcName for error logging
+local getEntityStatements = function( entity, propertyLabelOrId, funcName )
+	checkType( funcName, 1, propertyLabelOrId, 'string' )
 
-	if entity.claims == nil or not entity.claims[propertyId] then
+	if not entity.claims then
 		return {}
 	end
-	return entity.claims[propertyId]
+
+	local propertyId = propertyLabelOrId
+	if not isValidPropertyId( propertyId ) then
+		propertyId = mw.wikibase.resolvePropertyId( propertyId )
+	end
+
+	if propertyId and entity.claims[propertyId] then
+		return entity.claims[propertyId]
+	end
+
+	return {}
 end
 
 -- Get the best statements with the given property id or label
 --
 -- @param {string} propertyLabelOrId
 methodtable.getBestStatements = function( entity, propertyLabelOrId )
-	checkType( 'getBestStatements', 1, propertyLabelOrId, 'string' )
-
-	local entityStatements = resolvePropertyClaims( entity, propertyLabelOrId )
+	local entityStatements = getEntityStatements( entity, propertyLabelOrId, 'getBestStatements' )
 	local statements = {}
 	local bestRank = 'normal'
 
@@ -270,9 +272,7 @@ end
 --
 -- @param {string} propertyLabelOrId
 methodtable.getAllStatements = function( entity, propertyLabelOrId )
-	checkType( 'getAllStatements', 1, propertyLabelOrId, 'string' )
-
-	return resolvePropertyClaims( entity, propertyLabelOrId )
+	return getEntityStatements( entity, propertyLabelOrId, 'getAllStatements' )
 end
 
 -- Get a table with all property ids attached to the entity.
