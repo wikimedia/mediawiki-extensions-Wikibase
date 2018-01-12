@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 
@@ -105,7 +106,6 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
 			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
 			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
-			//array( null, '' ),
 		];
 	}
 
@@ -131,40 +131,38 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetPropertyAndValueHeader
 	 */
-	public function testGetPropertyAndValueHeader( $snak, $expected, array $path ) {
+	public function testGetPropertyAndValueHeader( $snak, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
-		$result = $snakVisualizer->getPropertyAndValueHeader( $snak, $path );
+		$result = $snakVisualizer->getPropertyAndValueHeader( $snak );
 		$this->assertEquals( $expected, $result );
 	}
 
 	public function provideGetPropertyAndValueHeader() {
-		$expected = 'foo / bar / property / <a>PID</a>: <i>SNAK</i>';
-		$path = [ 'foo', 'bar' ];
+		$expected = 'property / <a>PID</a>: <i>SNAK</i>';
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected, $path ],
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 		];
 	}
 
 	/**
 	 * @dataProvider provideGetPropertyHeader
 	 */
-	public function testGetPropertyHeader( $snak, $expected, array $path ) {
+	public function testGetPropertyHeader( Snak $snak = null, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
-		$result = $snakVisualizer->getPropertyHeader( $snak, $path );
+		$result = $snakVisualizer->getPropertyHeader( $snak );
 		$this->assertEquals( $expected, $result );
 	}
 
 	public function provideGetPropertyHeader() {
-		$expected = 'foo / bar / property / <a>PID</a>';
-		$path = [ 'foo', 'bar' ];
+		$expected = 'property / <a>PID</a>';
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected, $path ],
-			[ null, 'foo / bar / property', $path ],
-			[ null, 'property', [] ],
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ null, 'property' ],
+			[ null, 'property' ],
 		];
 	}
 
