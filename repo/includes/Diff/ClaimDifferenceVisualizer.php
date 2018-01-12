@@ -55,6 +55,7 @@ class ClaimDifferenceVisualizer {
 		Statement $baseStatement,
 		array $path = []
 	) {
+		$headerPrefix = implode( ' / ', $path ) . ' / ';
 		$newestMainSnak = $baseStatement->getMainSnak();
 		$oldestMainSnak = $newestMainSnak;
 		$html = '';
@@ -63,40 +64,40 @@ class ClaimDifferenceVisualizer {
 		if ( $mainSnakChange !== null ) {
 			$oldestMainSnak = $mainSnakChange->getOldValue() ?: $newestMainSnak;
 			$html .= $this->visualizeMainSnakChange(
+				$headerPrefix,
 				$mainSnakChange,
 				$oldestMainSnak,
-				$newestMainSnak,
-				$path
+				$newestMainSnak
 			);
 		}
 
 		$rankChange = $claimDifference->getRankChange();
 		if ( $rankChange !== null ) {
 			$html .= $this->visualizeRankChange(
+				$headerPrefix,
 				$rankChange,
 				$oldestMainSnak,
-				$newestMainSnak,
-				$path
+				$newestMainSnak
 			);
 		}
 
 		$qualifierChanges = $claimDifference->getQualifierChanges();
 		if ( $qualifierChanges !== null ) {
 			$html .= $this->visualizeQualifierChanges(
+				$headerPrefix,
 				$qualifierChanges,
 				$oldestMainSnak,
-				$newestMainSnak,
-				$path
+				$newestMainSnak
 			);
 		}
 
 		$referenceChanges = $claimDifference->getReferenceChanges();
 		if ( $referenceChanges !== null ) {
 			$html .= $this->visualizeReferenceChanges(
+				$headerPrefix,
 				$referenceChanges,
 				$oldestMainSnak,
-				$newestMainSnak,
-				$path
+				$newestMainSnak
 			);
 		}
 
@@ -132,22 +133,22 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
+	 * @param string $headerPrefix
 	 * @param DiffOpChange $mainSnakChange
 	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
 	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
-	 * @param string[] $path The path to prepend in the header
 	 *
 	 * @return string HTML
 	 */
 	private function visualizeMainSnakChange(
+		$headerPrefix,
 		DiffOpChange $mainSnakChange,
 		Snak $oldestMainSnak,
-		Snak $newestMainSnak,
-		array $path
+		Snak $newestMainSnak
 	) {
 		$valueFormatter = new DiffOpValueFormatter(
-			$this->snakVisualizer->getPropertyHeader( $oldestMainSnak, $path ),
-			$this->snakVisualizer->getPropertyHeader( $newestMainSnak, $path ),
+			$headerPrefix . $this->snakVisualizer->getPropertyHeader( $oldestMainSnak ),
+			$headerPrefix . $this->snakVisualizer->getPropertyHeader( $newestMainSnak ),
 			// TODO: How to highlight the actual changes inside the snak?
 			$this->snakVisualizer->getDetailedValue( $mainSnakChange->getOldValue() ),
 			$this->snakVisualizer->getDetailedValue( $mainSnakChange->getNewValue() )
@@ -157,27 +158,27 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
+	 * @param string $headerPrefix
 	 * @param DiffOpChange $rankChange
 	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
 	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
-	 * @param string[] $path The path to prepend in the header
 	 *
 	 * @return string HTML
 	 */
 	private function visualizeRankChange(
+		$headerPrefix,
 		DiffOpChange $rankChange,
 		Snak $oldestMainSnak,
-		Snak $newestMainSnak,
-		array $path
+		Snak $newestMainSnak
 	) {
 		$msg = wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode );
 		$header = $msg->parse();
 
 		$valueFormatter = new DiffOpValueFormatter(
-			$this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak, $path ) . ' / ' .
-			$header,
-			$this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak, $path ) . ' / ' .
-			$header,
+			$headerPrefix . $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak )
+				. ' / ' . $header,
+			$headerPrefix . $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak )
+				. ' / ' . $header,
 			$this->getRankHtml( $rankChange->getOldValue() ),
 			$this->getRankHtml( $rankChange->getNewValue() )
 		);
@@ -209,27 +210,29 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
+	 * @param string $headerPrefix
 	 * @param Diff $changes
 	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
 	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
-	 * @param string[] $path The path to prepend in the header
 	 *
 	 * @return string HTML
 	 */
 	private function visualizeReferenceChanges(
+		$headerPrefix,
 		Diff $changes,
 		Snak $oldestMainSnak,
-		Snak $newestMainSnak,
-		array $path
+		Snak $newestMainSnak
 	) {
 		$html = '';
 
 		$msg = wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode );
 		$header = $msg->parse();
 
-		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak, $path )
+		$oldClaimHeader = $headerPrefix
+			. $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak )
 			. ' / ' . $header;
-		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak, $path )
+		$newClaimHeader = $headerPrefix
+			. $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak )
 			. ' / ' . $header;
 
 		foreach ( $changes as $change ) {
@@ -281,27 +284,29 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
+	 * @param string $headerPrefix
 	 * @param Diff $changes
 	 * @param Snak $oldestMainSnak The old main snak, if present; otherwise, the new main snak
 	 * @param Snak $newestMainSnak The new main snak, if present; otherwise, the old main snak
-	 * @param string[] $path The path to prepend in the header
 	 *
 	 * @return string HTML
 	 */
 	private function visualizeQualifierChanges(
+		$headerPrefix,
 		Diff $changes,
 		Snak $oldestMainSnak,
-		Snak $newestMainSnak,
-		array $path
+		Snak $newestMainSnak
 	) {
 		$html = '';
 
 		$msg = wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode );
 		$header = $msg->parse();
 
-		$oldClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak, $path )
+		$oldClaimHeader = $headerPrefix
+			. $this->snakVisualizer->getPropertyAndValueHeader( $oldestMainSnak )
 			. ' / ' . $header;
-		$newClaimHeader = $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak, $path )
+		$newClaimHeader = $headerPrefix
+			. $this->snakVisualizer->getPropertyAndValueHeader( $newestMainSnak )
 			. ' / ' . $header;
 
 		foreach ( $changes as $change ) {
