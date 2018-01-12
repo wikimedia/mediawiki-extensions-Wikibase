@@ -397,10 +397,12 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return string HTML
 	 */
 	private function getEditButton() {
+		global $wgEditSubmitButtonLabelPublish;
+		$msgKey = $wgEditSubmitButtonLabelPublish ? 'publishchanges' : 'savearticle';
 		return ( new ButtonInputWidget( [
 				'name' => 'wpSave',
-				'value' => $this->msg( 'savearticle' )->text(),
-				'label' => $this->msg( 'savearticle' )->text(),
+				'value' => $this->msg( $msgKey )->text(),
+				'label' => $this->msg( $msgKey )->text(),
 				'accessKey' => $this->msg( 'accesskey-save' )->plain(),
 				'flags' => [ 'primary', 'progressive' ],
 				'type' => 'submit',
