@@ -488,12 +488,6 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @param SettingsArray $settings
-	 * @param DataTypeDefinitions $dataTypeDefinitions
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param RepositoryDefinitions $repositoryDefinitions
-	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,

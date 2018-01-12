@@ -58,8 +58,8 @@ final class RepoHooks {
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
 	 *
-	 * @param OutputPage $out
-	 * @param Skin $skin
+	 * @param OutputPage &$out
+	 * @param Skin &$skin
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		$out->addModules( 'wikibase.ui.entitysearch' );
@@ -68,8 +68,8 @@ final class RepoHooks {
 	/**
 	 * Handler for the BeforePageDisplayMobile hook that adds the wikibase mobile styles.
 	 *
-	 * @param OutputPage $out
-	 * @param Skin $skin
+	 * @param OutputPage &$out
+	 * @param Skin &$skin
 	 */
 	public static function onBeforePageDisplayMobile( OutputPage &$out, Skin &$skin ) {
 		$title = $out->getTitle();
@@ -436,8 +436,8 @@ final class RepoHooks {
 	 * Alter the structured navigation links in SkinTemplates.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
 	 *
-	 * @param SkinTemplate $skinTemplate
-	 * @param array $links
+	 * @param SkinTemplate &$skinTemplate
+	 * @param array &$links
 	 */
 	public static function onPageTabs( SkinTemplate &$skinTemplate, array &$links ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();

@@ -34,10 +34,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 */
 	private $shouldVerifyRevision = false;
 
-	/**
-	 * @param EntityRevisionCache $entityRevisionCache
-	 * @param EntityRevisionLookup $entityRevisionLookup
-	 */
 	public function __construct(
 		EntityRevisionCache $entityRevisionCache,
 		EntityRevisionLookup $entityRevisionLookup

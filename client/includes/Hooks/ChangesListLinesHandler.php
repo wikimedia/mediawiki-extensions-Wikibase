@@ -65,7 +65,7 @@ class ChangesListLinesHandler {
 	 * @param ChangesList $changesList
 	 * @return self
 	 */
-	private static function getInstance( $changesList ) {
+	private static function getInstance( ChangesList $changesList ) {
 		if ( self::$instance === null ) {
 			self::$instance = self::newFromGlobalState( $changesList );
 		}

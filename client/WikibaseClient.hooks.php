@@ -212,7 +212,7 @@ final class ClientHooks {
 	/**
 	 * Register the parser functions.
 	 *
-	 * @param Parser $parser
+	 * @param Parser &$parser
 	 */
 	public static function onParserFirstCallInit( Parser &$parser ) {
 		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );

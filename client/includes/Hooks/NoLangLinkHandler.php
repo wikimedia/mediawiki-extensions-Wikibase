@@ -30,7 +30,7 @@ class NoLangLinkHandler {
 	 *
 	 * @return string
 	 */
-	public static function handle( &$parser /*...*/ ) {
+	public static function handle( Parser &$parser /*...*/ ) {
 		$langs = func_get_args();
 
 		// Remove the first member, which is the parser.
@@ -88,12 +88,12 @@ class NoLangLinkHandler {
 	/**
 	 * Parser function
 	 *
-	 * @param Parser &$parser
+	 * @param Parser $parser
 	 * @param string[] $langs
 	 *
 	 * @return string
 	 */
-	public function doHandle( &$parser, array $langs ) {
+	public function doHandle( Parser $parser, array $langs ) {
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
 			// shorten out
 			return '';

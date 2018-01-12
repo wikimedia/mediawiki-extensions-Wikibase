@@ -17,9 +17,6 @@ class DispatchingEntityDiffVisualizer implements EntityDiffVisualizer {
 	 */
 	private $diffVisualizerFactory;
 
-	/**
-	 * @param EntityDiffVisualizerFactory $diffVisualizerFactory
-	 */
 	public function __construct( EntityDiffVisualizerFactory $diffVisualizerFactory ) {
 		$this->diffVisualizerFactory = $diffVisualizerFactory;
 	}
