@@ -43,12 +43,6 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 	 */
 	private $usageTrackingLabelDescriptionLookup;
 
-	/**
-	 * @param SnakFormatter $snakFormatter
-	 * @param UsageAccumulator $usageAccumulator
-	 * @param EntityIdParser $repoItemUriParser
-	 * @param UsageTrackingLanguageFallbackLabelDescriptionLookup $usageTrackingLabelDescriptionLookup
-	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
 		UsageAccumulator $usageAccumulator,
@@ -99,9 +93,6 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 		return $this->snakFormatter->formatSnak( $snak );
 	}
 
-	/**
-	 * @param EntityId $id
-	 */
 	private function addLabelUsage( EntityId $id ) {
 		// Just get the label from UsageTrackingLanguageFallbackLabelDescriptionLookup::getLabel,
 		// which will record the appropriate usage(s) for us.

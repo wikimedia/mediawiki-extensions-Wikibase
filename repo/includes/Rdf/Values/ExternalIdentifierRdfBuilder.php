@@ -27,12 +27,7 @@ class ExternalIdentifierRdfBuilder implements ValueSnakRdfBuilder {
 	 */
 	private $uriPatternProvider;
 
-	/**
-	 * @param PropertyInfoProvider $uriPatternProvider
-	 */
-	public function __construct(
-		PropertyInfoProvider $uriPatternProvider
-	) {
+	public function __construct( PropertyInfoProvider $uriPatternProvider ) {
 		$this->uriPatternProvider = $uriPatternProvider;
 	}
 

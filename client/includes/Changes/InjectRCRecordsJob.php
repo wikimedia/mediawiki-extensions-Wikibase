@@ -159,30 +159,18 @@ class InjectRCRecordsJob extends Job {
 		$this->logger = new NullLogger();
 	}
 
-	/**
-	 * @param RecentChangesDuplicateDetector $rcDuplicateDetector
-	 */
 	public function setRecentChangesDuplicateDetector( RecentChangesDuplicateDetector $rcDuplicateDetector ) {
 		$this->rcDuplicateDetector = $rcDuplicateDetector;
 	}
 
-	/**
-	 * @param TitleFactory $titleFactory
-	 */
 	public function setTitleFactory( TitleFactory $titleFactory ) {
 		$this->titleFactory = $titleFactory;
 	}
 
-	/**
-	 * @param LoggerInterface $logger
-	 */
 	public function setLogger( LoggerInterface $logger ) {
 		$this->logger = $logger;
 	}
 
-	/**
-	 * @param StatsdDataFactoryInterface $stats
-	 */
 	public function setStats( StatsdDataFactoryInterface $stats ) {
 		$this->stats = $stats;
 	}

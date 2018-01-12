@@ -21,9 +21,6 @@ class MockEntityIdPager implements EntityIdPager {
 	 */
 	private $offset = 0;
 
-	/**
-	 * @param EntityId $entityId
-	 */
 	public function addEntityId( EntityId $entityId ) {
 		$this->entityIds[] = $entityId;
 	}

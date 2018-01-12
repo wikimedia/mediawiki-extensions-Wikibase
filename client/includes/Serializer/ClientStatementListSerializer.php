@@ -18,10 +18,6 @@ class ClientStatementListSerializer extends ClientSerializer {
 	 */
 	private $statementListSerializer;
 
-	/**
-	 * @param Serializer $statementListSerializer
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 */
 	public function __construct(
 		Serializer $statementListSerializer,
 		PropertyDataTypeLookup $dataTypeLookup

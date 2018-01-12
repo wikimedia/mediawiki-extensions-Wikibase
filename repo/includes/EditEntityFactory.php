@@ -53,15 +53,6 @@ class EditEntityFactory {
 	 */
 	private $editFilterHookRunner;
 
-	/**
-	 * @param EntityTitleStoreLookup $titleLookup
-	 * @param EntityRevisionLookup $entityLookup
-	 * @param EntityStore $entityStore
-	 * @param EntityPermissionChecker $permissionChecker
-	 * @param EntityDiffer $entityDiffer
-	 * @param EntityPatcher $entityPatcher
-	 * @param EditFilterHookRunner $editFilterHookRunner
-	 */
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,

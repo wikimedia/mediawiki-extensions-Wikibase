@@ -30,10 +30,6 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	 */
 	private $shouldVerifyRevision = false;
 
-	/**
-	 * @param EntityRevisionCache $cache
-	 * @param EntityRevisionLookup $lookup
-	 */
 	public function __construct( EntityRevisionCache $cache, EntityRevisionLookup $lookup ) {
 		$this->cache = $cache;
 		$this->lookup = $lookup;
