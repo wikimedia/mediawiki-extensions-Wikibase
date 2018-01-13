@@ -1818,6 +1818,7 @@ class WikibaseRepo {
 						'pwn', // T174231
 						'pyu', // T174227
 						'quc', // T155376
+						'shy', // T184783
 						'ssf', // T174236
 						'trv', // T174228
 						'tzl', // T98314
@@ -1834,7 +1835,7 @@ class WikibaseRepo {
 					// Language codes that are not even well-formed BCP 47 language codes
 					'simple',
 
-					// Deprecated language codes with an alternative in MediaWiki
+                                        // Deprecated language codes with an alternative in MediaWiki
 					'bat-smg', // => sgs
 					'be-x-old', // => be-tarask
 					'fiu-vro', // => vro
