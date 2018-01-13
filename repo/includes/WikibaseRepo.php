@@ -47,6 +47,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -68,7 +69,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DifferenceContentLanguages;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
@@ -159,11 +159,12 @@ use Wikibase\SummaryFormatter;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
+use Wikimedia\ObjectFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -307,10 +308,12 @@ class WikibaseRepo {
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitions ] );
 
-		$entityTypeDefinitions = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitions ] );
+		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
+		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitionsArray ] );
 
 		$settings = WikibaseSettings::getRepoSettings();
+
+		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
@@ -318,20 +321,24 @@ class WikibaseRepo {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			self::getRepositoryDefinitionsFromSettings( $settings )
+			$entityTypeDefinitions,
+			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
 	}
 
 	/**
 	 * @param SettingsArray $settings
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
 	 * @return RepositoryDefinitions
 	 */
-	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
+	private static function getRepositoryDefinitionsFromSettings(
+		SettingsArray $settings,
+		EntityTypeDefinitions $entityTypeDefinitions
+	) {
 		// FIXME: It might no longer be needed to check different settings (e.g. changesDatabase vs foreignRepositories)
 		// once repository-related settings are unified, see: T153767.
-		$definitions = [ '' => [
+		$repoDefinitions = [ '' => [
 			'database' => $settings->getSetting( 'changesDatabase' ),
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
@@ -339,7 +346,7 @@ class WikibaseRepo {
 		] ];
 
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
-			$definitions[$repository] = [
+			$repoDefinitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
 				'entity-namespaces' => $repositorySettings['entityNamespaces'],
@@ -347,7 +354,7 @@ class WikibaseRepo {
 			];
 		}
 
-		return new RepositoryDefinitions( $definitions );
+		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
 	}
 
 	/**
@@ -1282,8 +1289,9 @@ class WikibaseRepo {
 	/**
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
-	 *  $wgWBRepoSettings['entityNamespaces'] setting. Optionally the list also contains
-	 *  entity types from the configured foreign repositories.
+	 *  $wgWBRepoSettings['entityNamespaces'] setting.
+	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
+	 *  Optionally the list also contains entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
 		return $this->repositoryDefinitions->getAllEntityTypes();
@@ -1293,9 +1301,11 @@ class WikibaseRepo {
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
+	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->getLocalEntityNamespaces() );
+		// A blank string represents the local repo
+		return $this->repositoryDefinitions->getEntityTypesPerRepository()[''];
 	}
 
 	/**
@@ -1690,6 +1700,10 @@ class WikibaseRepo {
 		);
 	}
 
+	public function getEntityViewFactory() {
+		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() );
+	}
+
 	/**
 	 * @return EntityParserOutputGeneratorFactory
 	 */
@@ -1699,7 +1713,7 @@ class WikibaseRepo {
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		return new EntityParserOutputGeneratorFactory(
-			new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() ),
+			$this->getEntityViewFactory(),
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),
@@ -1790,6 +1804,7 @@ class WikibaseRepo {
 						'bnn', // T174230
 						'brx', // T155369
 						'chn', // T155370
+						'cnr', // T185800
 						'cop', // T155371
 						'ett', // T125066
 						'eya', // T155372
@@ -1818,6 +1833,11 @@ class WikibaseRepo {
 						'pwn', // T174231
 						'pyu', // T174227
 						'quc', // T155376
+                                                'shy', // T184783
+						'sjd', // T188596
+						'sju', // T188599
+						'smn', // T188580
+						'sms', // T188579
 						'ssf', // T174236
 						'trv', // T174228
 						'tzl', // T98314
@@ -1898,7 +1918,7 @@ class WikibaseRepo {
 	/**
 	 * Creates configured unit storage. Configuration is in unitStorage parameter,
 	 * in getObjectFromSpec format.
-	 * @see \ObjectFactory::getObjectFromSpec
+	 * @see ObjectFactory::getObjectFromSpec
 	 * @return null|UnitStorage Configured unit storage, or null
 	 */
 	private function getUnitStorage() {
@@ -1906,7 +1926,7 @@ class WikibaseRepo {
 			return null;
 		}
 		$storage =
-			\ObjectFactory::getObjectFromSpec( $this->settings->getSetting( 'unitStorage' ) );
+			ObjectFactory::getObjectFromSpec( $this->settings->getSetting( 'unitStorage' ) );
 		if ( !( $storage instanceof UnitStorage ) ) {
 			wfWarn( "Bad unit storage configuration, ignoring" );
 			return null;
@@ -2017,7 +2037,8 @@ class WikibaseRepo {
 	private function getDataAccessSettings() {
 		return new DataAccessSettings(
 			$this->settings->getSetting( 'maxSerializedEntitySize' ),
-			$this->settings->getSetting( 'readFullEntityIdColumn' )
+			$this->settings->getSetting( 'useTermsTableSearchFields' ),
+			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' )
 		);
 	}
 
@@ -2027,6 +2048,14 @@ class WikibaseRepo {
 
 	private function getPerRepositoryServiceWiring() {
 		return require __DIR__ . '/../../data-access/src/PerRepositoryServiceWiring.php';
+	}
+
+	/**
+	 * Get entity search helper callbacks.
+	 * @return callable[]
+	 */
+	public function getEntitySearchHelperCallbacks() {
+		return $this->entityTypeDefinitions->getEntitySearchHelperCallbacks();
 	}
 
 }
