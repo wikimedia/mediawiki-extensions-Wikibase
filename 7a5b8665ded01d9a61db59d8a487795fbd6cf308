@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_e24dc5e1",
+        "filename": "repo/tests/phpunit/includes/Diff/ClaimDifferenceVisualizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-13T09:04:20Z",
+      "side": 1,
+      "message": "I\u0027m a moron. Even if it was correct to remove the two implodes from the mocks, everything else must stay. I will fix this.",
+      "revId": "7a5b8665ded01d9a61db59d8a487795fbd6cf308",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
