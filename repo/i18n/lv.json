@@ -101,6 +101,8 @@
 	"wikibase-itemdisambiguation-submit": "Meklēt",
 	"wikibase-itemdisambiguation-search": "Tu vari [$1 meklēt vienumu].",
 	"wikibase-itemdisambiguation-create": "Tu vari [$1 izveidot vienumu].",
+	"special-newproperty": "Izveidot jaunu īpašību",
+	"wikibase-newproperty-fieldset": "Izveidot jaunu īpašību",
 	"wikibase-newproperty-datatype": "Datu tips:",
 	"wikibase-newproperty-pick-data-type": "(izvēlies datu tipu)",
 	"wikibase-description-helppage": "Help:Apraksts",
@@ -124,6 +126,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Nosaukums:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Apraksts:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Citi nosaukumi:",
+	"wikibase-setsitelink-site": "Vietnes ID:",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Valodas kods:",
 	"special-mergeitems": "Apvienot divus vienumus",
@@ -158,6 +161,7 @@
 	"wikibase-no-direct-editing": "Vārdtelpā $1 tieša labošana ir atslēgta",
 	"wikibase-noentity-createone": "Jūs varat arī [[$1|izveidot jaunu]].",
 	"wikibase-listdatatypes-wikibase-item-head": "Vienums",
+	"wikibase-listdatatypes-wikibase-property-head": "Īpašība",
 	"wikibase-listdatatypes-globe-coordinate-head": "Ģeogrāfiskās koordinātas",
 	"wikibase-listdatatypes-geo-shape-head": "Ģeogrāfiska forma",
 	"wikibase-listdatatypes-tabular-data-head": "Tabulāri dati",
@@ -168,6 +172,7 @@
 	"wikibase-concept-uri": "Jēdziena URI",
 	"wikibase-concept-uri-tooltip": "URI, kas apzīmē šajā vienumā aprakstīto jēdzienu",
 	"datatypes-type-url": "URL",
+	"right-item-merge": "Apvienot vienumus",
 	"action-item-merge": "apvienot vienumus",
 	"apihelp-wbmergeitems-summary": "Apvieno vairākus vienumus."
 }
