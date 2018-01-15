@@ -3,16 +3,21 @@
 		"authors": [
 			"Arnaugir",
 			"Pitort",
-			"Paucabot"
+			"Paucabot",
+			"Fitoschido"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "buit",
 	"valueview-expert-globecoordinateinput-precision": "Precisió",
+	"valueview-expert-globecoordinateinput-nullprecision": "sense especificar",
+	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "gregorià",
 	"valueview-expert-timevalue-calendar-julian": "julià",
 	"valueview-expert-timeinput-precision": "Precisió:",
 	"valueview-expert-timeinput-calendar": "Calendari:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Llengua (obligatori):",
+	"valueview-expertextender-unitsuggester-label": "Unitat (opcional):",
 	"valueview-preview-label": "es mostrarà com:",
 	"valueview-preview-novalue": "no s'ha reconegut cap valor vàlid"
 }
