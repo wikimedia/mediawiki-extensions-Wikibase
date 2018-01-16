@@ -53,10 +53,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		parent::setUp();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
-		$this->oldEntityNamespaces = $wikibaseClient->getRepositoryDefinitions()->getEntityNamespaces();
+		$this->oldEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
 		$settings->setSetting( 'allowDataTransclusion', true );
 		$settings->setSetting( 'entityNamespaces', [ 'item' => 0 ] );
 
