@@ -1,5 +1,10 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.9.0 (2018-01-18)
+
+* Added `EntityIdComposer`.
+* Added `DisabledEntityTypesEntityLookup`.
+
 ## Version 3.8.0 (2017-03-17)
 
 * Fixed `EntityRetrievingTermLookup` silently failing for entities that do not implement
