@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikimedia\Assert\ParameterAssertionException;
@@ -15,15 +15,8 @@ use Wikimedia\Assert\ParameterTypeException;
  */
 class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @return EntityIdParser
-	 */
-	private function getDummyEntityIdParser() {
-		return $this->getMock( EntityIdParser::class );
-	}
-
 	public function testGetIdParser_repositoryWithKnownMapping() {
-		$dummyParser = $this->getDummyEntityIdParser();
+		$dummyParser = new ItemIdParser();
 		$idPrefixMapping = [
 			'foo' => [ 'd' => 'de', 'e' => 'en', ],
 		];
@@ -35,7 +28,7 @@ class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testGetIdParser_repositoryWithoutKnownMapping() {
-		$dummyParser = $this->getDummyEntityIdParser();
+		$dummyParser = new ItemIdParser();
 		$idPrefixMapping = [
 			'foo' => [ 'd' => 'de', 'e' => 'en', ],
 		];
@@ -47,7 +40,7 @@ class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testGetIdParser_noIdPrefixMappings() {
-		$dummyParser = $this->getDummyEntityIdParser();
+		$dummyParser = new ItemIdParser();
 		$factory = new PrefixMappingEntityIdParserFactory( $dummyParser, [] );
 		$this->assertEquals(
 			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $dummyParser ),
@@ -56,13 +49,13 @@ class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testGivenNonStringRepository_exceptionIsThrown() {
-		$factory = new PrefixMappingEntityIdParserFactory( $this->getDummyEntityIdParser(), [] );
+		$factory = new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );
 		$this->setExpectedException( ParameterTypeException::class );
 		$factory->getIdParser( 111 );
 	}
 
 	public function testGivenRepositoryIncludingColon_exceptionIsThrown() {
-		$factory = new PrefixMappingEntityIdParserFactory( $this->getDummyEntityIdParser(), [] );
+		$factory = new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );
 		$this->setExpectedException( ParameterAssertionException::class );
 		$factory->getIdParser( 'en:' );
 	}
@@ -72,7 +65,7 @@ class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGivenInvalidIdPrefixMapping_exceptionIsThrown( array $mapping ) {
 		$this->setExpectedException( ParameterAssertionException::class );
-		new PrefixMappingEntityIdParserFactory( $this->getDummyEntityIdParser(), $mapping );
+		new PrefixMappingEntityIdParserFactory( new ItemIdParser(), $mapping );
 	}
 
 	public function provideInvalidIdPrefixMapping() {
@@ -87,8 +80,7 @@ class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testGetIdParserReusesTheInstanceOverMultitpleCalls() {
-		$dummyParser = $this->getDummyEntityIdParser();
-		$factory = new PrefixMappingEntityIdParserFactory( $dummyParser, [] );
+		$factory = new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );
 
 		$parserOne = $factory->getIdParser( 'foo' );
 		$parserTwo = $factory->getIdParser( 'foo' );
