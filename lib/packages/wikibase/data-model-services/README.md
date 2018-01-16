@@ -10,8 +10,9 @@
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model-services/version.png)](https://packagist.org/packages/wikibase/data-model-services)
 [![Latest Unstable Version](https://poser.pugx.org/wikibase/data-model-services/v/unstable.svg)](//packagist.org/packages/wikibase/data-model-services)
 
-**Wikibase DataModel Services** is a collection of services around [Wikibase DataModel]
-(https://github.com/wmde/WikibaseDataModel). It is part of the [Wikibase software](http://wikiba.se/).
+**Wikibase DataModel Services** is a collection of services around
+[Wikibase DataModel](https://github.com/wmde/WikibaseDataModel).
+It is part of the [Wikibase software](http://wikiba.se/).
 
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
