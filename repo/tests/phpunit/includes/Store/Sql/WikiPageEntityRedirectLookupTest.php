@@ -8,7 +8,7 @@ use Title;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikimedia\Rdbms\DatabaseMysql;
+use Wikimedia\Rdbms\DatabaseMysqli;
 use Wikimedia\Rdbms\LoadBalancer;
 use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
@@ -180,10 +180,10 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	/**
 	 * @param array $row
 	 *
-	 * @return DatabaseMysql
+	 * @return DatabaseMysqli
 	 */
 	private function getMockDatabase( array $row ) {
-		$db = $this->getMockBuilder( DatabaseMysql::class )
+		$db = $this->getMockBuilder( DatabaseMysqli::class )
 			->disableOriginalConstructor()
 			->getMock();
 
