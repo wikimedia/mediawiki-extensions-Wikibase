@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikimedia\Assert\ParameterAssertionException;
@@ -86,9 +87,8 @@ class PrefixMappingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideInvalidPrefixMapping
 	 */
 	public function testGivenInvalidPrefixMapping_exceptionIsThrown( array $prefixMapping ) {
-		$regularParser = $this->getMock( EntityIdParser::class );
 		$this->setExpectedException( ParameterAssertionException::class );
-		new PrefixMappingEntityIdParser( $prefixMapping, $regularParser );
+		new PrefixMappingEntityIdParser( $prefixMapping, new ItemIdParser() );
 	}
 
 	public function provideInvalidPrefixMapping() {
