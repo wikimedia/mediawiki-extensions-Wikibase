@@ -131,38 +131,40 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetPropertyAndValueHeader
 	 */
-	public function testGetPropertyAndValueHeader( $snak, $expected ) {
+	public function testGetPropertyAndValueHeader( $snak, $expected, array $path ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
-		$result = $snakVisualizer->getPropertyAndValueHeader( $snak );
+		$result = $snakVisualizer->getPropertyAndValueHeader( $snak, $path );
 		$this->assertEquals( $expected, $result );
 	}
 
 	public function provideGetPropertyAndValueHeader() {
-		$expected = 'property / <a>PID</a>: <i>SNAK</i>';
+		$expected = 'foo / bar / property / <a>PID</a>: <i>SNAK</i>';
+		$path = [ 'foo', 'bar' ];
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
-			//array( null, '' ),
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected, $path ],
 		];
 	}
 
 	/**
 	 * @dataProvider provideGetPropertyHeader
 	 */
-	public function testGetPropertyHeader( $snak, $expected ) {
+	public function testGetPropertyHeader( $snak, $expected, array $path ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
-		$result = $snakVisualizer->getPropertyHeader( $snak );
+		$result = $snakVisualizer->getPropertyHeader( $snak, $path );
 		$this->assertEquals( $expected, $result );
 	}
 
 	public function provideGetPropertyHeader() {
-		$expected = 'property / <a>PID</a>';
+		$expected = 'foo / bar / property / <a>PID</a>';
+		$path = [ 'foo', 'bar' ];
 		return [
-			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
-			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
-			[ null, 'property' ],
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected, $path ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected, $path ],
+			[ null, 'foo / bar / property', $path ],
+			[ null, 'property', [] ],
 		];
 	}
 

@@ -110,11 +110,17 @@ class DifferencesSnakVisualizer {
 	 * Get formatted header for a snak, including the snak's property label, but not the snak's value.
 	 *
 	 * @param Snak|null $snak
+	 * @param string[] $path The path to prepend in the header
 	 *
 	 * @return string HTML
 	 */
-	public function getPropertyHeader( Snak $snak = null ) {
-		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->languageCode )->escaped();
+	public function getPropertyHeader( Snak $snak = null, array $path = [] ) {
+		$headerText = '';
+		if ( $path !== [] ) {
+			$headerText = implode( ' / ', $path ) . ' / ';
+		}
+		$headerText .= wfMessage( 'wikibase-entity-property' )
+			->inLanguage( $this->languageCode )->escaped();
 
 		if ( $snak !== null ) {
 			$propertyId = $snak->getPropertyId();
@@ -128,11 +134,12 @@ class DifferencesSnakVisualizer {
 	 * Get formatted header for a snak, including the snak's property label and value.
 	 *
 	 * @param Snak $snak
+	 * @param string[] $path The path to prepend in the header
 	 *
 	 * @return string HTML
 	 */
-	public function getPropertyAndValueHeader( Snak $snak ) {
-		$before = $this->getPropertyHeader( $snak );
+	public function getPropertyAndValueHeader( Snak $snak, array $path = [] ) {
+		$before = $this->getPropertyHeader( $snak, $path );
 
 		try {
 			$after = $this->snakBreadCrumbFormatter->formatSnak( $snak );
