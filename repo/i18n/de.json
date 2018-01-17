@@ -571,6 +571,7 @@
 	"apihelp-wbsetqualifier-param-baserevid": "Die numerische Kennung für die Version, auf der die Änderung basiert.\nSie wird verwendet, um Konflikte während des Speicherns zu erkennen.",
 	"apihelp-wbsetqualifier-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „{{int:group-bot}}“ angehört.",
 	"apihelp-wbsetreference-description": "Erstellt einen Einzelnachweis oder legt den Wert eines vorhandenen Einzelnachweises fest.",
+	"apihelp-wbsetreference-summary": "Erstellt einen Einzelnachweis oder legt den Wert eines vorhandenen fest.",
 	"apihelp-wbsetreference-param-summary": "Zusammenfassung für die Bearbeitung. \nEs wird ein automatisch generierter Kommentar vorangestellt. Die maximale Länge des automatischen Kommentars und der Zusammenfassung darf 260 Zeichen nicht überschreiten. Alles über dieser Begrenzung wird abgeschnitten.",
 	"apihelp-wbsetreference-param-baserevid": "Die numerische Kennung für die Version, auf der die Änderung basiert.\nSie wird verwendet, um Konflikte während des Speicherns zu erkennen.",
 	"apihelp-wbsetreference-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „Bot“ angehört.",
