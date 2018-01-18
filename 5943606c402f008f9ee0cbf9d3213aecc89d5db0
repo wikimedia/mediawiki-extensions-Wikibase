@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_c1222750",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-18T17:03:07Z",
+      "side": 1,
+      "message": "That was a rebase mistake. Let me fix it",
+      "parentUuid": "8ef26315_e1976391",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_c13d078c",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-18T16:44:46Z",
       "side": 1,
       "message": "oops, the new parameter has not been added to the phpdoc!",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_a1271b5e",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-18T17:03:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_c13d078c",
       "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -93,6 +129,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_41f617c3",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-18T17:03:07Z",
+      "side": 1,
+      "message": "That indeed is but I think it\u0027s outside of scope of this patch, we should make a phab card and track this technical debt though.",
+      "parentUuid": "8ef26315_e144831e",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_21e94b10",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 1
@@ -104,6 +158,24 @@
       "writtenOn": "2018-01-18T16:44:46Z",
       "side": 1,
       "message": "So we assume there is always a limit? I mean, should there be a way to have unlimited number of usages per page, or is practically not needed?\n\nI don\u0027t say there should be. I\u0027ll let the smarter decide.",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_a1e6fb10",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-18T17:03:07Z",
+      "side": 1,
+      "message": "I don\u0027t know to be honest, better safe than sorry.",
+      "parentUuid": "8ef26315_21e94b10",
       "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -127,6 +199,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_81d77f27",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-18T17:03:07Z",
+      "side": 1,
+      "message": "Actually that\u0027s very important and I forgot to add it, otherwise this log is useless.",
+      "parentUuid": "8ef26315_81edbf24",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_01c9afae",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -138,6 +228,30 @@
       "writtenOn": "2018-01-18T16:44:46Z",
       "side": 1,
       "message": "This seems a bit too technical description to me.\nIsn\u0027t the point of this option that it defines what number of entity usages are allowed for single page? And if there are more usages, there will be a warning?",
+      "range": {
+        "startLine": 116,
+        "startChar": 26,
+        "endLine": 116,
+        "endChar": 129
+      },
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_21caeb70",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-18T17:03:07Z",
+      "side": 1,
+      "message": "Reword it completely, hopefully it helps. Writing was never one of my strongest suits.",
+      "parentUuid": "8ef26315_01c9afae",
       "range": {
         "startLine": 116,
         "startChar": 26,
