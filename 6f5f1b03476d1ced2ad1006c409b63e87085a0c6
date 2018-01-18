@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_8d2fb8f2",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-01-18T07:36:32Z",
+      "side": 1,
+      "message": "not sure I get it - why one include is gone and the other isn\u0027t?",
+      "revId": "6f5f1b03476d1ced2ad1006c409b63e87085a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_edf11c94",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-01-18T07:36:32Z",
+      "side": 1,
+      "message": "The constants in SearchProfileService start with CONTEXT_, shouldn\u0027t this one start with context too? Also, this context is only for prefix search, so maybe it should be CONTEXT_WIKIBASE_PREFIX or something like that?",
+      "revId": "6f5f1b03476d1ced2ad1006c409b63e87085a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
