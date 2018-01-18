@@ -42,7 +42,10 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 */
 	public function getUsages() {
 		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );
-		return $usages ?: [];
+		if ( $usages ) {
+			return ( new UsageDeduplicator() )->deduplicate( $usages );
+		}
+		return [];
 	}
 
 }
