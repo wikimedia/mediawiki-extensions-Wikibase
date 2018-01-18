@@ -48,6 +48,11 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 		$this->badgeItems = $badgeItems;
 	}
 
+	/**
+	 * @see SpecialPage::execute
+	 *
+	 * @param string|null $subPage
+	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 

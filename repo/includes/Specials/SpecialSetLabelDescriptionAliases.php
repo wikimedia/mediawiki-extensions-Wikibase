@@ -203,7 +203,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param string $termType Either 'label', 'description' or 'aliases'.
 	 * @param string $value Text to fill the input element with
 	 *
-	 * @return string HTML
+	 * @return array[]
 	 */
 	private function getLabeledInputField( $termType, $value ) {
 		$fieldId = 'wikibase-setlabeldescriptionaliases-' . $termType;

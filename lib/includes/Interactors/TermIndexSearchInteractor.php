@@ -220,8 +220,7 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 	/**
 	 * @param TermIndexEntry[] $termIndexEntries
 	 *
-	 * @return array[]
-	 * @see TermSearchInteractor interface for return format
+	 * @return TermSearchResult[]
 	 */
 	private function getSearchResults( array $termIndexEntries ) {
 		$searchResults = [];

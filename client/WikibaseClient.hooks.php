@@ -312,6 +312,9 @@ final class ClientHooks {
 		}
 	}
 
+	/**
+	 * @param array[] &$queryPages
+	 */
 	public static function onwgQueryPages( &$queryPages ) {
 		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
 		$queryPages[] = [ SpecialPagesWithBadges::class, 'PagesWithBadges' ];
