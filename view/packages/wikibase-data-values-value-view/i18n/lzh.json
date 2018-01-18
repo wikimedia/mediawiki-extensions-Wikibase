@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"SolidBlock"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "無處值“$1”。",
+	"valueview-expert-emptyvalue-empty": "虛",
+	"valueview-expert-globecoordinateinput-precision": "細：",
+	"valueview-expert-globecoordinateinput-customprecision": "異（$1）"
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Uğurkent"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "boş",
+	"valueview-expert-globecoordinateinput-customprecision": "özel ($1)",
+	"valueview-expert-timeinput-calendar": "Takvim:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+}

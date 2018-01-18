@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kosovastar"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "bosh",
+	"valueview-expert-globecoordinateinput-precision": "Saktësia:",
+	"valueview-expert-globecoordinateinput-customprecision": "e veçantë ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorian"
+}

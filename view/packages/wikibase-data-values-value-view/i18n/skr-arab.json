@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "خالی",
+	"valueview-expert-timeinput-calendar": "کیلنڈر:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "زبان (ضروری):",
+	"valueview-expertextender-unitsuggester-label": "یونٹ (اختیاری)"
+}
