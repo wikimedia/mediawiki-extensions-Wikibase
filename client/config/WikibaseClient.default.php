@@ -90,8 +90,6 @@ return call_user_func( function() {
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
-		'foreignRepositories' => [],
-
 		// Enable writing of term_full_entity_id column in wb_terms table.
 		'writeFullEntityIdColumn' => function ( SettingsArray $settings ) {
 			return $settings->hasSetting( 'hasFullEntityIdColumn' ) ?
@@ -132,6 +130,30 @@ return call_user_func( function() {
 		return WikibaseSettings::isRepoEnabled();
 	};
 
+	$defaults['repositories'] = function ( SettingsArray $settings ) {
+		// XXX: Default to having Items in the main namespace, and properties in NS 120.
+		// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
+		// FIXME: throw an exception, instead of making assumptions that may brak the site in strange ways!
+		$entityNamespaces = [
+			'item' => 0,
+			'property' => 120
+		];
+		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
+			$entityNamespaces = WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' );
+		}
+
+		return [
+			'' => [
+				// Use false (meaning the local wiki's database) if this wiki is the repo,
+				// otherwise default to null (meaning we can't access the repo's DB directly).
+				'repoDatabase' => $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : null,
+				'baseUri' => $settings->getSetting( 'repoUrl' ) . '/entity/',
+				'entityNamespaces' => $entityNamespaces,
+				'prefixMapping' => [ '' => '' ],
+			]
+		];
+	};
+
 	$defaults['repoSiteName'] = function ( SettingsArray $settings ) {
 		// This uses $wgSitename if this wiki is the repo.  Otherwise, set this to
 		// either an i18n message key and the message will be used, if it exists.
@@ -144,10 +166,6 @@ return call_user_func( function() {
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgServer'] : '//www.wikidata.org';
 	};
 
-	$defaults['repoConceptBaseUri'] = function ( SettingsArray $settings ) {
-		return $settings->getSetting( 'repoUrl' ) . '/entity/';
-	};
-
 	$defaults['repoArticlePath'] = function ( SettingsArray $settings ) {
 		// use $wgArticlePath if this wiki is the repo, otherwise default to /wiki/$1
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgArticlePath'] : '/wiki/$1';
@@ -158,32 +176,12 @@ return call_user_func( function() {
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgScriptPath'] : '/w';
 	};
 
-	$defaults['repoDatabase'] = function ( SettingsArray $settings ) {
-		// Use false (meaning the local wiki's database) if this wiki is the repo,
-		// otherwise default to null (meaning we can't access the repo's DB directly).
-		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : null;
-	};
-
-	$defaults['entityNamespaces'] = function ( SettingsArray $settings ) {
-		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
-			return WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' );
-		} else {
-			// XXX: Default to having Items in the main namespace, and properties in NS 120.
-			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
-			// FIXME: throw an exception, instead of making assumptions that may brak the site in strange ways!
-			return [
-				'item' => 0,
-				'property' => 120
-			];
-		}
-	};
-
 	$defaults['repoNamespaces'] = function ( SettingsArray $settings ) {
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
 			// if this is the repo wiki, look up the namespace names based on the entityNamespaces setting
 			$namespaceNames = array_map(
 				[ MWNamespace::class, 'getCanonicalName' ],
-				$settings->getSetting( 'entityNamespaces' )
+				WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' )
 			);
 			return $namespaceNames;
 		} else {
@@ -198,10 +196,11 @@ return call_user_func( function() {
 	};
 
 	$defaults['changesDatabase'] = function ( SettingsArray $settings ) {
-		// Per default, the database for tracking changes is the repo's database.
+		// Per default, the database for tracking changes is the local repo's database.
 		// Note that the value for the repoDatabase setting may be calculated dynamically,
-		// see above.
-		return $settings->getSetting( 'repoDatabase' );
+		// see above in 'repositories' setting.
+		$repositorySettings = $settings->getSetting( 'repositories' );
+		return $repositorySettings['']['repoDatabase'];
 	};
 
 	$defaults['siteGlobalID'] = function ( SettingsArray $settings ) {
@@ -213,9 +212,12 @@ return call_user_func( function() {
 	$defaults['repoSiteId'] = function( SettingsArray $settings ) {
 		// If repoDatabase is set, then default is same as repoDatabase
 		// otherwise, defaults to siteGlobalID
-		return ( $settings->getSetting( 'repoDatabase' ) === false )
+		$repositorySettings = $settings->getSetting( 'repositories' );
+		$repoDatabase = $repositorySettings['']['repoDatabase'];
+
+		return ( $repoDatabase === false )
 			? $settings->getSetting( 'siteGlobalID' )
-			: $settings->getSetting( 'repoDatabase' );
+			: $repoDatabase;
 	};
 
 	$defaults['siteGroup'] = function ( SettingsArray $settings ) {
