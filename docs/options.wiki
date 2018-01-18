@@ -112,6 +112,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;badgeClassNames: A list of additional CSS class names for site links that have badges. The array has to consist of serialized item IDs pointing to their CSS class names, like <code>array( 'Q101' => 'badge-goodarticle' )</code>. Note that this extension does not add any CSS to actually display the badges.
 ;otherProjectsLinks: Site global ID list of sites which should be linked in the other projects sidebar section. Empty value will suppress this section.
 ;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
+;disabledAccessEntityTypes: List of entity types that access to them in the client should be disabled.
 
 === Expert Settings ===
 

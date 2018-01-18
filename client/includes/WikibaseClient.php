@@ -56,6 +56,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -1215,8 +1216,12 @@ final class WikibaseClient {
 	 */
 	public function getRestrictedEntityLookup() {
 		if ( $this->restrictedEntityLookup === null ) {
-			$this->restrictedEntityLookup = new RestrictedEntityLookup(
+			$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
 				$this->getEntityLookup(),
+				$this->settings->getSetting( 'disabledAccessEntityTypes' )
+			);
+			$this->restrictedEntityLookup = new RestrictedEntityLookup(
+				$disabledEntityTypesEntityLookup,
 				$this->settings->getSetting( 'entityAccessLimit' )
 			);
 		}
