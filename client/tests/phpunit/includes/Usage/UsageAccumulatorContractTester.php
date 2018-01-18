@@ -45,11 +45,11 @@ class UsageAccumulatorContractTester {
 		$q3 = new ItemId( 'Q3' );
 		$expected = [
 			new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' ),
-			new EntityUsage( $q3, EntityUsage::DESCRIPTION_USAGE, 'ru' ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
-			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P42' ),
 			new EntityUsage( $q2, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q2, EntityUsage::OTHER_USAGE ),
+			new EntityUsage( $q3, EntityUsage::DESCRIPTION_USAGE, 'ru' ),
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P42' ),
 			new EntityUsage( $q3, EntityUsage::ALL_USAGE ),
 		];
 

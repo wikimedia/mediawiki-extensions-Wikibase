@@ -112,6 +112,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\Usage\\SubscriptionManager' => __DIR__ . '/includes/Usage/SubscriptionManager.php',
 	'Wikibase\\Client\\Usage\\UsageAccumulator' => __DIR__ . '/includes/Usage/UsageAccumulator.php',
 	'Wikibase\\Client\\Usage\\UsageAspectTransformer' => __DIR__ . '/includes/Usage/UsageAspectTransformer.php',
+	'Wikibase\\Client\\Usage\\UsageDeduplicator' => __DIR__ . '/includes/Usage/UsageDeduplicator.php',
 	'Wikibase\\Client\\Usage\\UsageLookup' => __DIR__ . '/includes/Usage/UsageLookup.php',
 	'Wikibase\\Client\\Usage\\UsageTracker' => __DIR__ . '/includes/Usage/UsageTracker.php',
 	'Wikibase\\Client\\Usage\\UsageTrackerException' => __DIR__ . '/includes/Usage/UsageTrackerException.php',
