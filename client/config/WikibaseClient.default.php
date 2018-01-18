@@ -246,5 +246,8 @@ return call_user_func( function() {
 	// Disabled entity access
 	$defaults['disabledAccessEntityTypes'] = [];
 
+	// The limit to issue a warning when number of entities used in a page hit that
+	$defaults['entityUsagePerPageLimit'] = 100;
+
 	return $defaults;
 } );
