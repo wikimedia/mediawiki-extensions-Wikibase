@@ -49,7 +49,8 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		$this->sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( wfGetLB() ),
-			[]
+			[],
+			100
 		);
 
 		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker, [ $this, 'getUsages' ] );
@@ -90,7 +91,9 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( wfGetLB() ),
-			[ EntityUsage::STATEMENT_USAGE, EntityUsage::DESCRIPTION_USAGE => EntityUsage::OTHER_USAGE ]
+			[ EntityUsage::STATEMENT_USAGE, EntityUsage::DESCRIPTION_USAGE =>
+				EntityUsage::OTHER_USAGE ],
+			100
 		);
 		$sqlUsageTracker->addUsedEntities( 23, $usages );
 
@@ -118,7 +121,8 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( wfGetLB() ),
-			[]
+			[],
+			100
 		);
 		// Make sure the blacklisted entries are actually removed.
 		$sqlUsageTracker->addUsedEntities( 23, $usages );
@@ -126,7 +130,8 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		$sqlUsageTrackerWithBlacklist = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( wfGetLB() ),
-			[ EntityUsage::STATEMENT_USAGE ]
+			[ EntityUsage::STATEMENT_USAGE ],
+			100
 		);
 		$sqlUsageTrackerWithBlacklist->replaceUsedEntities( 23, $usages );
 

@@ -8,6 +8,7 @@ use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndex;
 use Wikibase\Lib\Store\TermPropertyLabelResolver;
@@ -19,7 +20,6 @@ use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -100,7 +100,7 @@ class DirectSqlStore implements ClientStore {
 	private $cacheDuration;
 
 	/**
-	 * @var EntityRevisionLookup|null
+	 * @var EntityLookup|null
 	 */
 	private $entityRevisionLookup = null;
 
@@ -175,6 +175,11 @@ class DirectSqlStore implements ClientStore {
 	private $readFullEntityIdColumn;
 
 	/**
+	 * @var int
+	 */
+	private $entityUsagePerPageLimit;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
@@ -190,6 +195,7 @@ class DirectSqlStore implements ClientStore {
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		WikibaseServices $wikibaseServices,
+		SettingsArray $settings,
 		$repoWiki = false,
 		$languageCode
 	) {
@@ -201,8 +207,7 @@ class DirectSqlStore implements ClientStore {
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
-		// @TODO: Inject
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
@@ -210,6 +215,7 @@ class DirectSqlStore implements ClientStore {
 		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );
 		$this->readFullEntityIdColumn = $settings->getSetting( 'readFullEntityIdColumn' );
+		$this->entityUsagePerPageLimit = $settings->getSetting( 'entityUsagePerPageLimit' );
 	}
 
 	/**
@@ -287,7 +293,12 @@ class DirectSqlStore implements ClientStore {
 	public function getUsageTracker() {
 		if ( $this->usageTracker === null ) {
 			$connectionManager = $this->getLocalConnectionManager();
-			$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager, $this->disabledUsageAspects );
+			$this->usageTracker = new SqlUsageTracker(
+				$this->entityIdParser,
+				$connectionManager,
+				$this->disabledUsageAspects,
+				$this->entityUsagePerPageLimit
+			);
 		}
 
 		return $this->usageTracker;

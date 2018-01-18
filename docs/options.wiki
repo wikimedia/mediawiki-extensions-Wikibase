@@ -113,6 +113,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;otherProjectsLinks: Site global ID list of sites which should be linked in the other projects sidebar section. Empty value will suppress this section.
 ;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
 ;disabledAccessEntityTypes: List of entity types that access to them in the client should be disabled.
+;entityUsagePerPageLimit: An integer number determining the number of entity usages possible in a page before issuing a warning. The default is 100.
 
 === Expert Settings ===
 
