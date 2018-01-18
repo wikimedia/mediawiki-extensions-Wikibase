@@ -4,13 +4,14 @@ namespace Wikibase\Lib\Tests\Store;
 
 use BagOStuff;
 use InvalidArgumentException;
+use MediaWikiCoversValidator;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 
 /**
- * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
+ * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore
  *
  * @group Wikibase
  * @group WikibasePropertyInfo
@@ -19,6 +20,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
  * @license GPL-2.0+
  */
 class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
+	use MediaWikiCoversValidator;
 
 	private function newCacheAwarePropertyInfoStore( BagOStuff $cache ) {
 		$mockStore = $this->getMock( PropertyInfoStore::class );
