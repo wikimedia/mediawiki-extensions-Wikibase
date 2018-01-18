@@ -1824,6 +1824,8 @@ class WikibaseRepo {
 						'pwn', // T174231
 						'pyu', // T174227
 						'quc', // T155376
+						'qya', // T185194
+						'sjn', // T185194
 						'ssf', // T174236
 						'trv', // T174228
 						'tzl', // T98314
