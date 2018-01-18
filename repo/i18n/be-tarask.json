@@ -266,6 +266,7 @@
 	"wikibase-dispatchstats-average": "Сярэдняе",
 	"special-listdatatypes": "Сьпіс усіх даступных тыпаў зьвестак",
 	"wikibase-listdatatypes-intro": "Гэта сьпіс усіх тыпаў зьвестак, даступных у гэтай інсталяцыі:",
+	"wikibase-listdatatypes-listproperties": "Сьпіс уласьцівасьцяў з гэтым тыпам зьвестак",
 	"wikibase-history-title-with-label": "$2 ($1) — гісторыя зьменаў",
 	"wikibase-history-title-without-label": "$1 — гісторыя зьменаў",
 	"special-entitieswithoutdescription": "Аб’екты без апісаньня",
