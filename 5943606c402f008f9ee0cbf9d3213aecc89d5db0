@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_e1976391",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "does it have to be changed?",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_c13d078c",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "oops, the new parameter has not been added to the phpdoc!",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_6138739c",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "Cool!",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_41957788",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "+1",
+      "range": {
+        "startLine": 210,
+        "startChar": 12,
+        "endLine": 210,
+        "endChar": 54
+      },
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_e144831e",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "I know this is not the way this class is used now, but if I see correctly, the limit could be omited by running this method for the same page but with different stuff in $usages right. I am guessing this might be seen as a problem.",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_21e94b10",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "So we assume there is always a limit? I mean, should there be a way to have unlimited number of usages per page, or is practically not needed?\n\nI don\u0027t say there should be. I\u0027ll let the smarter decide.",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_81edbf24",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "Random question (probably answer is no, but will ask any way): does it matter to also log the page on which too many entities are used?",
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_01c9afae",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-18T16:44:46Z",
+      "side": 1,
+      "message": "This seems a bit too technical description to me.\nIsn\u0027t the point of this option that it defines what number of entity usages are allowed for single page? And if there are more usages, there will be a warning?",
+      "range": {
+        "startLine": 116,
+        "startChar": 26,
+        "endLine": 116,
+        "endChar": 129
+      },
+      "revId": "5943606c402f008f9ee0cbf9d3213aecc89d5db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
