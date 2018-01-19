@@ -101,7 +101,7 @@ class AffectedPagesFinder {
 	/**
 	 * @param Change $change
 	 *
-	 * @return ArrayIterator of PageEntityUsage
+	 * @return PageEntityUsages[]
 	 */
 	public function getAffectedUsagesByPage( Change $change ) {
 		if ( $change instanceof EntityChange ) {
@@ -109,7 +109,7 @@ class AffectedPagesFinder {
 			return $this->filterUpdates( $usages );
 		}
 
-		return new ArrayIterator();
+		return [];
 	}
 
 	/**
@@ -304,7 +304,7 @@ class AffectedPagesFinder {
 	 *
 	 * @param Traversable $usages A traversable of PageEntityUsages.
 	 *
-	 * @return ArrayIterator of PageEntityUsages
+	 * @return PageEntityUsages[]
 	 */
 	private function filterUpdates( Traversable $usages ) {
 		$titlesToUpdate = [];
@@ -326,7 +326,7 @@ class AffectedPagesFinder {
 			$titlesToUpdate[$key] = $pageEntityUsages;
 		}
 
-		return new ArrayIterator( $titlesToUpdate );
+		return $titlesToUpdate;
 	}
 
 	/**
