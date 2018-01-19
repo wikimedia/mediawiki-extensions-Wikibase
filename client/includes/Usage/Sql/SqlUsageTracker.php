@@ -42,6 +42,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $disabledUsageAspects;
 
 	/**
+	 * The limit to issue a warning when entity usage per page hit that limit
+	 *
+	 * @var int
+	 */
+	private $entityUsagePerPageLimit;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param SessionConsistentConnectionManager $connectionManager
 	 * @param string[] $disabledUsageAspects
@@ -49,11 +56,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	public function __construct(
 		EntityIdParser $idParser,
 		SessionConsistentConnectionManager $connectionManager,
-		array $disabledUsageAspects
+		array $disabledUsageAspects,
+		$entityUsagePerPageLimit
 	) {
 		$this->idParser = $idParser;
 		$this->connectionManager = $connectionManager;
 		$this->disabledUsageAspects = $disabledUsageAspects;
+		$this->entityUsagePerPageLimit = $entityUsagePerPageLimit;
 	}
 
 	/**
@@ -132,6 +141,12 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	public function addUsedEntities( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
+		if ( count( $usages ) > $this->entityUsagePerPageLimit ) {
+			wfLogWarning(
+				'Number of usages in page id ' . $pageId . ' is too high: ' . count( $usages )
+			);
 		}
 
 		$usages = $this->handleBlacklistedUsages( $usages );

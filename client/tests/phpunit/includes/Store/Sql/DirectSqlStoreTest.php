@@ -43,7 +43,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$client = WikibaseClient::getDefaultInstance();
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$wikibaseServices = $this->getMock( WikibaseServices::class );
 
@@ -60,6 +60,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			new EntityIdComposer( [] ),
 			new EntityNamespaceLookup( [] ),
 			$wikibaseServices,
+			$wikibaseClient->getSettings(),
 			wfWikiID(),
 			'en'
 		);
