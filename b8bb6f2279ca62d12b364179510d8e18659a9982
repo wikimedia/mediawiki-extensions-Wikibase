@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_8ac953b1",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-19T09:58:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_016fef8f",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "b8bb6f2279ca62d12b364179510d8e18659a9982",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_01f6cfd3",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-01-19T09:24:12Z",
       "side": 1,
       "message": "this groups usages by the aspect, not by the entity, right?\nIt is assumed that $usages are all related to the same entity, no?",
+      "revId": "b8bb6f2279ca62d12b364179510d8e18659a9982",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_6ac4c794",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-19T09:58:51Z",
+      "side": 1,
+      "message": "Yes, it assumes all usages belong to one entity.",
+      "parentUuid": "8ef26315_01f6cfd3",
       "revId": "b8bb6f2279ca62d12b364179510d8e18659a9982",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
