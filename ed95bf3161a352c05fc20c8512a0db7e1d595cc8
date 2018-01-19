@@ -16,6 +16,24 @@
       "revId": "ed95bf3161a352c05fc20c8512a0db7e1d595cc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_2ad2bf5d",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-19T09:58:51Z",
+      "side": 1,
+      "message": "Tried it and didn\u0027t work",
+      "parentUuid": "8ef26315_8ab4b334",
+      "revId": "ed95bf3161a352c05fc20c8512a0db7e1d595cc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
