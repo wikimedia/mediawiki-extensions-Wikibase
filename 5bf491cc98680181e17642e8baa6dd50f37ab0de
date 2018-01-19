@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_e5dac84f",
+        "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:40:42Z",
+      "side": 1,
+      "message": "Does this still make sense? AFAICT from existing client code, the modifier of a STATEMENT_USAGE should be a property ID serialization.",
+      "range": {
+        "startLine": 26,
+        "startChar": 69,
+        "endLine": 26,
+        "endChar": 73
+      },
+      "revId": "5bf491cc98680181e17642e8baa6dd50f37ab0de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
