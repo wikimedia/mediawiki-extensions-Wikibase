@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_a52c4090",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:04:37Z",
+      "side": 1,
+      "message": "Can’t this be replaced with an unconditional\n\n $structuredUsages[$entityId-\u003egetSerialization()][] \u003d $usage;\n\n? I tried it out in PHP 5.6 and it seems to work (without any warnings).",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 4
+      },
+      "revId": "f8bcd4d354f2b5cbc9e711de01f1ddebc02105ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_456bbcb5",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:04:37Z",
+      "side": 1,
+      "message": "(very minor:) $entityIdSerialization?",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 42
+      },
+      "revId": "f8bcd4d354f2b5cbc9e711de01f1ddebc02105ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_0571b4a7",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:04:37Z",
+      "side": 1,
+      "message": "Could also be\n\n $structuredUsagesPerEntity \u003d array_map( [ $this, \u0027structureUsagesPerEntity\u0027 ], $structuredUsages );\n\nif I’m not mistaken. (You could even reuse the same $structuredUsages variable.)",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 3
+      },
+      "revId": "f8bcd4d354f2b5cbc9e711de01f1ddebc02105ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_256e70c4",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:04:37Z",
+      "side": 1,
+      "message": "Same comment as on L48 (again, unless I’m wrong :) )",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 4
+      },
+      "revId": "f8bcd4d354f2b5cbc9e711de01f1ddebc02105ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_8565c4df",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:04:37Z",
+      "side": 1,
+      "message": "I don’t understand this part… are these the only usages which have “modifiers”? (And I assume a “modifier” is the .de part of L.de mentioned in the task?)",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 4
+      },
+      "revId": "f8bcd4d354f2b5cbc9e711de01f1ddebc02105ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_05a094f0",
+        "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-19T13:04:37Z",
+      "side": 1,
+      "message": "Shouldn’t this be EntityUsage::STATEMENT_USAGE?",
+      "range": {
+        "startLine": 26,
+        "startChar": 39,
+        "endLine": 26,
+        "endChar": 69
+      },
+      "revId": "f8bcd4d354f2b5cbc9e711de01f1ddebc02105ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
