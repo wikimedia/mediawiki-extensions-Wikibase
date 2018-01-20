@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arsenekoumyk"
+		]
+	},
+	"tooltip-t-wikibase": "Маълюмат репозиторидеги гесегине байланыв",
+	"wikibase-comment-update": "{{WBREPONAME}} гесеги алышынгъан эди",
+	"wikibase-dataitem": "{{WBREPONAME}} гесеги",
+	"wikibase-editlinks": "Байланывланы тюзлемек",
+	"wikibase-editlinkstitle": "Тилара байланывланы тюзлемек",
+	"wikibase-rc-wikibase-edit-letter": "Т",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тюзлевю"
+}

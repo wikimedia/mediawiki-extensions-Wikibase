@@ -98,8 +98,8 @@
 	"wikibase-otherprojects": "In andere projecten",
 	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",
 	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie aan de zijbalk toe, met links naar andere Wikimedia-projecten op basis van {{WBREPONAME}}-gegevens.",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connectie|Connecties}} met {{WBREPONAME}}",
-	"echo-pref-tooltip-wikibase-action": "Informeer mij wanneer iemand een een pagina die {{GENDER:|ik aangemaakt heb}}, koppelt aan een {{WBREPONAME}}-item.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koppeling|Koppelingen}} met {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Informeer mij wanneer iemand een pagina die {{GENDER:|ik heb aangemaakt}}, koppelt aan een {{WBREPONAME}}-item.",
 	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
 	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen"
 }

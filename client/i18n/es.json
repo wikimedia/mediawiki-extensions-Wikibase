@@ -23,6 +23,7 @@
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
 	"tooltip-t-wikibase": "Enlace al elemento conectado del repositorio de datos",
 	"apihelp-query+wbentityusage-description": "Devuelve todos los identificadores de entidad utilizados en las páginas dadas.",
+	"apihelp-query+wbentityusage-summary": "Devuelve todos los identificadores de entidades utilizados en las páginas indicadas.",
 	"apihelp-query+wbentityusage-param-aspect": "Devolver solo los identificadores de entidad que utilizaron este aspecto.",
 	"apihelp-query+wbentityusage-param-prop": "Propiedades que añadir al resultado.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si está activado, se añadirá el URL de la entidad",

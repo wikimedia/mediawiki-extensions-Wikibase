@@ -1,10 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Geopoet"
+			"Geopoet",
+			"Filipinayzd"
 		]
 	},
+	"tooltip-t-wikibase": "Takod sa konektadong bagay sa repositoryo nin data",
 	"wikibase-comment-update": "{{WBREPONAME}} aytem pinagliwat",
+	"wikibase-dataitem": "{{WBREPONAME}} na bagay",
+	"wikibase-editlinks": "Liwaton an mga takod",
+	"wikibase-editlinkstitle": "Liwaton an mga interlengwaheng takod",
 	"wikibase-rc-hide-wikidata-show": "Ipatanaw",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} liwaton"
