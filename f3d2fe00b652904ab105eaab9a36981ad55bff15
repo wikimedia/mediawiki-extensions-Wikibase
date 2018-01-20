@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_4ce5a005",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-01-20T20:54:25Z",
+      "side": 1,
+      "message": "the usecases looks like:\n( new UsageDeduplicator() )-\u003ededuplicate( $usages );\n\nif the instance isn\u0027t going to be used more than once, consider to expose it as a static function\nUsageDeduplicator::deduplicate( $usages )",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_ecf62cc1",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-01-20T20:54:25Z",
+      "side": 1,
+      "message": "should it also de-duplicate claims? (if code access \u003c20 properties (or some other threshold) , this is probably reasonable to track all the entity claims)",
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_8ce7a80c",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-01-20T20:54:25Z",
+      "side": 1,
+      "message": "suggestion if length of $usages \u003e THRESHOLD return the usage with no modifier.\ne.g replace L.de, L.en, L.fa, L.he,... \u003d\u003e L",
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
