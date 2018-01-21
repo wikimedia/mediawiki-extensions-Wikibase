@@ -6,7 +6,8 @@
 			"Termininja",
 			"Vodnokon4e",
 			"StanProg",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"ShockD"
 		]
 	},
 	"wikibase-error-unexpected": "Грешка: $1.",
@@ -44,5 +45,13 @@
 	"datatypes-type-time": "Момент във времето",
 	"datatypes-type-wikibase-item": "Обект",
 	"datatypes-type-commonsMedia": "Файл от Общомедия",
-	"wikibase-entity-summary-wbcreateredirect": "Пренасочване към $4"
+	"wikibase-entity-summary-wbcreateredirect": "Пренасочване към $4",
+	"wikibase-entity-summary-wbsetsitelink-add": "Добавена връзка към [$2]",
+	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
+	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
+	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
+	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
+	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
+	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}"
 }

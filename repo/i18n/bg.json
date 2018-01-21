@@ -10,7 +10,8 @@
 			"Termininja",
 			"Vodnokon4e",
 			"Kareyac",
-			"Ladsgroup"
+			"Ladsgroup",
+			"ShockD"
 		]
 	},
 	"wikibase-desc": "Хранилище на структурирани данни",
@@ -44,6 +45,7 @@
 	"wikibase-diffview-rank-deprecated": "Непрепоръчителен ранг",
 	"wikibase-sitelink-site-edit-placeholder": "уики",
 	"wikibase-sitelink-page-edit-placeholder": "страница",
+	"wikibase-alias-edit-placeholder": "въведете допълнително название",
 	"wikibase-entitytermsview-input-help-message": "Въведете етикет на обекта, кратко описание и псевдоними за съответния език.",
 	"wikibase-statementsection-statements": "Изявления",
 	"wikibase-sitelinks": "Уики връзки",

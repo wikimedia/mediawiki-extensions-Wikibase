@@ -19,7 +19,8 @@
 			"Cwek",
 			"1233thehongkonger",
 			"Wwycheuk",
-			"A2093064"
+			"A2093064",
+			"Eflyjason"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -38,7 +39,7 @@
 	"wikibase-comment-sitelink-change": "語言連結已從 $1 變更至 $2",
 	"wikibase-comment-sitelink-remove": "已刪除語言連結：$1",
 	"wikibase-comment-multi": "$1 次{{PLURAL:$1|變更|變更}}",
-	"wikibase-dataitem": "{{WBREPONAME}} 項目",
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "編輯連結",
 	"wikibase-editlinkstitle": "編輯跨語言連結",
 	"wikibase-addlinkstitle": "加入跨語言連結",
