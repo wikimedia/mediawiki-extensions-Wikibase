@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_2a8111a5",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-22T09:43:57Z",
+      "side": 1,
+      "message": "You mean the parameter should be optional? I don\u0027t think this is necessary. There is only 1 caller over there in Scribunto_LuaWikibaseLibrary, and it passes the parameter.",
+      "parentUuid": "8ef26315_8abe6511",
+      "range": {
+        "startLine": 99,
+        "startChar": 42,
+        "endLine": 99,
+        "endChar": 55
+      },
+      "revId": "5c5d8dc321494e56e79fb01ff848c29786d07bb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_6ab95929",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindingsTest.php",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-22T06:28:01Z",
       "side": 1,
       "message": "This call require the second parameter to default to null… do we want that?",
+      "range": {
+        "startLine": 103,
+        "startChar": 30,
+        "endLine": 103,
+        "endChar": 41
+      },
+      "revId": "5c5d8dc321494e56e79fb01ff848c29786d07bb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_cab86d77",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindingsTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-22T09:43:57Z",
+      "side": 1,
+      "message": "This is indeed a mistake. Fixed in PS9.",
+      "parentUuid": "8ef26315_6ab95929",
       "range": {
         "startLine": 103,
         "startChar": 30,
