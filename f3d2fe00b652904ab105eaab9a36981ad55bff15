@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_ad253baa",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-22T10:14:17Z",
+      "side": 1,
+      "message": "Then we have to make everything static, what you say is useful when using a factory. Also it really doesn\u0027t make any difference.",
+      "parentUuid": "8ef26315_4ce5a005",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_ecf62cc1",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 5
@@ -36,6 +60,24 @@
       "writtenOn": "2018-01-20T20:54:25Z",
       "side": 1,
       "message": "should it also de-duplicate claims? (if code access \u003c20 properties (or some other threshold) , this is probably reasonable to track all the entity claims)",
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_4d3757e0",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-22T10:14:17Z",
+      "side": 1,
+      "message": "I\u0027d rather do it in later patches.",
+      "parentUuid": "8ef26315_ecf62cc1",
       "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +113,24 @@
       "side": 1,
       "message": "That sounds like a good idea for a second patch, but I think it makes sense to keep this one simple for now.",
       "parentUuid": "8ef26315_8ce7a80c",
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_2d32cbef",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-22T10:14:17Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "8ef26315_2a963197",
       "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
