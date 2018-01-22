@@ -51,6 +51,10 @@ return [
 	// Settings for change dispatching
 	'dispatchBatchChunkFactor' => 3,
 	'dispatchBatchCacheFactor' => 3,
+	'dispatchDefaultBatchSize' => 1000,
+	'dispatchDefaultMaxChunks' => 15,
+	'dispatchDefaultDispatchInterval' => 60,
+	'dispatchDefaultDispatchRandomness' => 15,
 
 	// Formats that shall be available via SpecialEntityData.
 	// The first format will be used as the default.
