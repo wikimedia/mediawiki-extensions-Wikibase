@@ -5,7 +5,6 @@ use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 
 /**
  * Utility class to build analyzer configs for ElasticSearch
- * @package Wikibase\Repo\Search\Elastic
  */
 class ConfigBuilder {
 

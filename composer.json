@@ -39,9 +39,9 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
-		"wikibase/wikibase-codesniffer": "^0.2.0",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
-		"mediawiki/minus-x": "0.3.0"
+		"mediawiki/minus-x": "0.3.0",
+		"wikibase/wikibase-codesniffer": "^0.3.0"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
@@ -51,7 +51,7 @@
 		"test": [
 			"composer validate --no-interaction",
 			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
-			"phpcs -p -s --ignore=.git",
+			"phpcs -p -s",
 			"minus-x check ."
 		]
 	}

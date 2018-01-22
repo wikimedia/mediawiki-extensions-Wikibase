@@ -273,7 +273,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list ( $result, ) = $this->doApiRequestWithToken(
+		list( $result, ) = $this->doApiRequestWithToken(
 			$this->getAddAliasRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -316,7 +316,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
 
-		list ( $result, ) = $this->doApiRequestWithToken(
+		list( $result, ) = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetAliasRequestParams(),
 			null,
 			$userWithAllPermissions
