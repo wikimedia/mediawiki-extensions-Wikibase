@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_be00c36e",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-01-22T21:24:21Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "8ef26315_ad253baa",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_ecf62cc1",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 5
