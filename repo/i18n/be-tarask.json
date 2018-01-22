@@ -272,6 +272,7 @@
 	"special-listproperties": "Сьпіс уласьцівасьцяў",
 	"wikibase-listproperties-legend": "Атрымаць сьпіс уласьцівасьцяў паводле тыпу зьвестак",
 	"wikibase-listproperties-datatype": "Тып зьвестак:",
+	"wikibase-listproperties-all": "Усе тыпы зьвестак",
 	"special-entitieswithoutdescription": "Аб’екты без апісаньня",
 	"special-entitieswithoutlabel": "Аб’екты бязь метак",
 	"wikibase-entitieswithoutlabel-legend": "Атрымасьць сьпіс аб’ектаў бязь метак",
