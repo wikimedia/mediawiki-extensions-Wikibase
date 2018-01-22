@@ -578,7 +578,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list ( $result, ) = $this->doApiRequestWithToken(
+		list( $result, ) = $this->doApiRequestWithToken(
 			$this->getSetSiteLinkRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -621,7 +621,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'writeapi' => true ]
 		] );
 
-		list ( $result, ) = $this->doApiRequestWithToken(
+		list( $result, ) = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetSiteLinkRequestParams(),
 			null,
 			$userWithAllPermissions

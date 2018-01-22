@@ -24,7 +24,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	private $statementGuid;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	private $rank;
 
@@ -32,7 +32,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	 * Constructs a new statement rank change operation
 	 *
 	 * @param string $statementGuid
-	 * @param integer $rank
+	 * @param int $rank
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -41,7 +41,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 			throw new InvalidArgumentException( '$statementGuid needs to be a string' );
 		}
 
-		if ( !is_integer( $rank ) ) {
+		if ( !is_int( $rank ) ) {
 			throw new InvalidArgumentException( '$rank needs to be an integer' );
 		}
 

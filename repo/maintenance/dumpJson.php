@@ -12,14 +12,14 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
-require_once __DIR__ . '/dumpEntities.php';
+require_once __DIR__ . '/DumpEntities.php';
 
 /**
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Addshore
  */
-class DumpJson extends DumpScript {
+class DumpJson extends DumpEntities {
 
 	/**
 	 * @var EntityLookup
