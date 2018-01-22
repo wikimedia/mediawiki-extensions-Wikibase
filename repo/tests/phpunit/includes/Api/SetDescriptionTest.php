@@ -66,7 +66,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
-		list ( $result, ) = $this->doApiRequestWithToken(
+		list( $result, ) = $this->doApiRequestWithToken(
 			$this->getSetDescriptionRequestParams( $newItem->getId() ),
 			null,
 			$userWithAllPermissions
@@ -109,7 +109,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
 
-		list ( $result, ) = $this->doApiRequestWithToken(
+		list( $result, ) = $this->doApiRequestWithToken(
 			$this->getCreateItemAndSetDescriptionRequestParams(),
 			null,
 			$userWithAllPermissions

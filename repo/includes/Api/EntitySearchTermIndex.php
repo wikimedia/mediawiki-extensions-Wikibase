@@ -198,7 +198,7 @@ class EntitySearchTermIndex implements EntitySearchHelper {
 
 		// NOTE: this assumes entities of the particular type are only provided by a single repository
 		// This assumption is currently valid but might change in the future.
-		list ( $repositoryPrefix, ) = $this->entityTypeToRepositoryMapping[$entityType][0];
+		list( $repositoryPrefix, ) = $this->entityTypeToRepositoryMapping[$entityType][0];
 
 		try {
 			$id = $this->idParser->parse( EntityId::joinSerialization( [

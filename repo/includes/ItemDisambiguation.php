@@ -54,13 +54,9 @@ class ItemDisambiguation {
 	 * @return string HTML
 	 */
 	public function getHTML( array $searchResults ) {
-		return
-			'<ul class="wikibase-disambiguation">' .
-				implode( '', array_map(
-					[ $this, 'getResultHtml' ],
-					$searchResults
-				) ).
-			'</ul>';
+		return '<ul class="wikibase-disambiguation">'
+			. implode( '', array_map( [ $this, 'getResultHtml' ], $searchResults ) )
+			. '</ul>';
 	}
 
 	/**
