@@ -45,7 +45,7 @@ use Wikibase\Repo\Tests\Store\MockEntityIdPager;
  */
 class DumpJsonTest extends MediaWikiTestCase {
 
-	public function testScript() {
+	private function getDumpJson() {
 		$dumpScript = new DumpJson();
 
 		$mockRepo = new MockRepository();
@@ -141,21 +141,42 @@ class DumpJsonTest extends MediaWikiTestCase {
 			$serializerFactory->newEntitySerializer()
 		);
 
+		return $dumpScript;
+	}
+
+	public function dumpParameterProvider() {
+		return [
+			'dump everything' => [
+				[],
+				__DIR__ . '/../data/maintenance/dumpJson-log.txt',
+				__DIR__ . '/../data/maintenance/dumpJson-out.txt',
+			],
+			'dump with limit 2' => [
+				[
+					'limit' => 2,
+				],
+				__DIR__ . '/../data/maintenance/dumpJson-limit2-log.txt',
+				__DIR__ . '/../data/maintenance/dumpJson-limit2-out.txt',
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider dumpParameterProvider
+	 */
+	public function testScript( array $opts, $expectedLogFile, $expectedOutFile ) {
+		$dumpScript = $this->getDumpJson();
+
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );
 		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );
 
-		$dumpScript->loadParamsAndArgs(
-			null,
-			[
-				'log' => $logFileName,
-				'output' => $outFileName,
-			]
-		);
+		$opts = $opts + [ 'log' => $logFileName, 'output' => $outFileName ];
+		$dumpScript->loadParamsAndArgs( null, $opts );
 
 		$dumpScript->execute();
 
-		$expectedLog = file_get_contents( __DIR__ . '/../data/maintenance/dumpJson-log.txt' );
-		$expectedOut = file_get_contents( __DIR__ . '/../data/maintenance/dumpJson-out.txt' );
+		$expectedLog = file_get_contents( $expectedLogFile );
+		$expectedOut = file_get_contents( $expectedOutFile );
 
 		$this->assertEquals(
 			$this->fixLineEndings( $expectedLog ),
