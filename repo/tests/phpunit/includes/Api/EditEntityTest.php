@@ -485,7 +485,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 							  'new' => 'item',
 							  'data' =>
 							  '{"labels":{"en":{"language":"en","value":"something"}}}' ];
-		list ( $result, ) = $this->doApiRequestWithToken( $createItemParams, null, $user );
+		list( $result, ) = $this->doApiRequestWithToken( $createItemParams, null, $user );
 		return $result['entity'];
 	}
 

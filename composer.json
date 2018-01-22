@@ -39,7 +39,7 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
-		"wikibase/wikibase-codesniffer": "^0.2.0",
+		"wikibase/wikibase-codesniffer": "^0.3.0",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.2.1"
 	},

@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Wikibase">
-	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase"/>
-
-	<!-- Exceptions -->
+<ruleset>
+	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase" />
 
 	<rule ref="Generic.Files.LineLength">
 		<properties>
@@ -17,7 +15,14 @@
 	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement">
 		<exclude-pattern>WikibaseClient\.example\.php</exclude-pattern>
 	</rule>
-	<rule ref="Generic.Files.OneClassPerFile">
+	<rule ref="MediaWiki.Files.ClassMatchesFilename">
+		<exclude-pattern>/maintenance/</exclude-pattern>
+		<exclude-pattern>build/generateAutoload\.php</exclude-pattern>
+		<exclude-pattern>repo/tests/testDispatchCoordinator\.php</exclude-pattern>
+		<!-- FIXME: These files should be renamed to match their class name. -->
+		<exclude-pattern>Wikibase*\.hooks\.php</exclude-pattern>
+	</rule>
+	<rule ref="MediaWiki.Files.OneClassPerFile">
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
 	</rule>
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
@@ -26,8 +31,6 @@
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
 		<exclude-pattern>Scribunto_LuaWikibase*Library</exclude-pattern>
 	</rule>
-
-	<!-- Additions -->
 
 	<!-- Metrics are intentionally not part of the base Wikibase CodeSniffer rule set. -->
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
@@ -39,6 +42,7 @@
 	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<file>.</file>
+	<exclude-pattern>repo/tests/browser</exclude-pattern>
 	<exclude-pattern>view/lib/wikibase-api/WikibaseJavaScriptApi.php</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
 </ruleset>
