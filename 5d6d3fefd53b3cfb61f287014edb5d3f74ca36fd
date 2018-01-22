@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_f8b26391",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-01-22T17:05:15Z",
+      "side": 1,
+      "message": "but it\u0027s not actually exiting, is it?",
+      "revId": "5d6d3fefd53b3cfb61f287014edb5d3f74ca36fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
