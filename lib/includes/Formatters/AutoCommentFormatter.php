@@ -99,6 +99,9 @@ class AutoCommentFormatter {
 			return null;
 		}
 
+		// no message requires wikitext params and some args are user-controlled
+		$args = array_map( 'wfEscapeWikiText', $args );
+
 		// render the autocomment
 		$auto = $msg->params( $args )->parse();
 		return $auto;
