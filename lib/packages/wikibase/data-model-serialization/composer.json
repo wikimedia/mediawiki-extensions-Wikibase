@@ -11,7 +11,7 @@
 		"wikidata"
 	],
 	"homepage": "https://github.com/wmde/WikibaseDataModelSerialization",
-	"license": "GPL-2.0+",
+	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
 			"name": "Thomas PT",
