@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_1381f0a4",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-01-22T19:26:14Z",
+      "side": 1,
+      "message": "We need to track a SiteLink usage if $globalSiteId !\u003d $this-\u003esiteId. Title usages only refer to the Item\u0027s sitelink to the current wiki.",
+      "revId": "c591a9cff44d2fb5d2d40cc89f7696c3627bda17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
