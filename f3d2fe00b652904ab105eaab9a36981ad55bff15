@@ -56,6 +56,24 @@
       "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_2a963197",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-01-22T06:32:49Z",
+      "side": 1,
+      "message": "That sounds like a good idea for a second patch, but I think it makes sense to keep this one simple for now.",
+      "parentUuid": "8ef26315_8ce7a80c",
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
