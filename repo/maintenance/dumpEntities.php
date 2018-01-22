@@ -52,6 +52,7 @@ abstract class DumpScript extends Maintenance {
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
 		$this->addOption( 'no-cache', "If this is set, don't try to read from an EntityRevisionCache.", false, false );
+		$this->addOption( 'continue', 'Continue parameter for SqlEntityIdPager. Not compatible with --list-file.', false, true );
 	}
 
 	public function setDumpEntitiesServices( SqlEntityIdPagerFactory $sqlEntityIdPagerFactory ) {
@@ -230,7 +231,14 @@ abstract class DumpScript extends Maintenance {
 	 * @return SqlEntityIdPager
 	 */
 	private function makeIdQueryStream( $entityType ) {
-		return $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityType, $this->getRedirectMode() );
+		$sqlEntityIdPager = $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityType, $this->getRedirectMode() );
+
+		$continue = $this->getOption( 'continue', null );
+		if ( $continue ) {
+			$sqlEntityIdPager->setPosition( intval( $continue ) );
+		}
+
+		return $sqlEntityIdPager;
 	}
 
 	/**
