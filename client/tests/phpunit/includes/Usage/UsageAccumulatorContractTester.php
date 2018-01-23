@@ -156,6 +156,8 @@ class UsageAccumulatorContractTester {
 	private function assertSameUsages( array $expected, array $actual, $message = '' ) {
 		$expected = $this->getIdentityStrings( $expected );
 		$actual = $this->getIdentityStrings( $actual );
+		sort( $expected );
+		sort( $actual );
 
 		Assert::assertEquals( $expected, $actual, $message );
 	}
