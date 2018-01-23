@@ -3,6 +3,7 @@
 namespace Wikibase\Client\RecentChanges;
 
 use CentralIdLookup;
+use ExternalUserNames;
 use Language;
 use Message;
 use MWException;
@@ -41,20 +42,28 @@ class RecentChangeFactory {
 	private $centralIdLookup;
 
 	/**
+	 * @var string[]
+	 */
+	private $repoInterwikiPrefixes;
+
+	/**
 	 * @param Language $language Language to format in
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
 	 *   this repository is not connected to a central user system (see
 	 *   Wikibase\Lib\Changes\CentralIdLookupFactory).
+	 * @param string[] $repoInterwikiPrefixes
 	 */
 	public function __construct(
 		Language $language,
 		SiteLinkCommentCreator $siteLinkCommentCreator,
-		CentralIdLookup $centralIdLookup = null
+		CentralIdLookup $centralIdLookup = null,
+		array $repoInterwikiPrefixes
 	) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
 		$this->centralIdLookup = $centralIdLookup;
+		$this->repoInterwikiPrefixes = $repoInterwikiPrefixes;
 	}
 
 	/**
@@ -132,6 +141,13 @@ class RecentChangeFactory {
 
 		$repoUserId = $change->getUserId();
 		$clientUserId = $this->getClientUserId( $repoUserId, $metadata );
+		if ( $clientUserId === 0 && $this->repoInterwikiPrefixes !== [] ) {
+			$externalUsernames = new ExternalUserNames(
+				$this->repoInterwikiPrefixes[0],
+				false
+			);
+			$userText = $externalUsernames->addPrefix( $userText );
+		}
 
 		$attribs = [
 			'rc_user' => $clientUserId,
