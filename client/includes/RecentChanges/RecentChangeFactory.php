@@ -3,6 +3,7 @@
 namespace Wikibase\Client\RecentChanges;
 
 use CentralIdLookup;
+use ExternalUserNames;
 use Language;
 use Message;
 use MWException;
@@ -41,20 +42,28 @@ class RecentChangeFactory {
 	private $centralIdLookup;
 
 	/**
+	 * @var ExternalUserNames|null
+	 */
+	private $externalUsernames;
+
+	/**
 	 * @param Language $language Language to format in
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
 	 *   this repository is not connected to a central user system (see
 	 *   Wikibase\Lib\Changes\CentralIdLookupFactory).
+	 * @param ExternalUserNames|null $externalUsernames
 	 */
 	public function __construct(
 		Language $language,
 		SiteLinkCommentCreator $siteLinkCommentCreator,
-		CentralIdLookup $centralIdLookup = null
+		CentralIdLookup $centralIdLookup = null,
+		ExternalUserNames $externalUsernames = null
 	) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
 		$this->centralIdLookup = $centralIdLookup;
+		$this->externalUsernames = $externalUsernames;
 	}
 
 	/**
@@ -132,6 +141,11 @@ class RecentChangeFactory {
 
 		$repoUserId = $change->getUserId();
 		$clientUserId = $this->getClientUserId( $repoUserId, $metadata );
+
+		// If the user could not be found in client but exists in repo
+		if ( $this->externalUsernames !== null && $clientUserId === 0 && $repoUserId !== 0 ) {
+			$userText = $this->externalUsernames->addPrefix( $userText );
+		}
 
 		$attribs = [
 			'rc_user' => $clientUserId,
