@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_41771bcf",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-23T16:20:02Z",
+      "side": 1,
+      "message": "Should be named $usagesByAspect for consistency.",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "b45ce19d8a0d996e297f6da227bcd6641331d460",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_617cd7b4",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-23T16:20:02Z",
+      "side": 1,
+      "message": "We can re-add a filter by aspect here, if it really is necessary.\n\nforeach ( … as $aspect \u003d\u003e … ) {\n    if ( $aspect \u003d\u003d\u003d EntityUsage::LABEL_USAGE\n        || $aspect \u003d\u003d\u003d EntityUsage::DESCRIPTION_USAGE\n    ) {\n        …",
+      "revId": "b45ce19d8a0d996e297f6da227bcd6641331d460",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
