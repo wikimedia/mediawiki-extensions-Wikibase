@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ef26315_81d3e304",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-23T16:15:13Z",
+      "side": 1,
+      "message": "I wonder why we squish all non-deduplicated usages through this extension data de/serialization? Can we avoid this?\n\nI had a look and no, we can\u0027t, because the usages are collected step by step in an \"accumulator\". This here is the first time we do have access to the complete collection.",
+      "range": {
+        "startLine": 44,
+        "startChar": 33,
+        "endLine": 44,
+        "endChar": 76
+      },
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_4ce5a005",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 5
