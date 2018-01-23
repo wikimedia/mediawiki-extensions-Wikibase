@@ -67,5 +67,6 @@
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s poveznicama na ostale Wikimedijine projekte na osnovi podataka s projekta {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s projektom {{WBREPONAME}}",
 	"notification-header-page-connection": "Stranicu <strong>$3</strong> {{GENDER:$2|povezao je suradnik $1|povezala je suradnica $1}} sa stavkom ({{WBREPONAME}}).",
+	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} stavku",
 	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima"
 }

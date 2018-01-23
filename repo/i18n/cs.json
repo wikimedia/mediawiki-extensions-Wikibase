@@ -300,10 +300,15 @@
 	"wikibase-entitydata-not-acceptable": "Nenalezen žádný odpovídající formát. Podporované MIME typy: $1",
 	"wikibase-entitydata-bad-revision": "Nelze zobrazit revizi $2 entity $1.",
 	"wikibase-entitydata-bad-id": "Chybné ID: $1",
+	"wikibase-entitydata-rdf-disabled": "RDF export je pro typ entity $1 zakázán.",
 	"wikibase-entitydata-unsupported-format": "Toto rozhraní nepodporuje datový formát $1.",
 	"wikibase-entitydata-storage-error": "Nepodařilo se načíst entitu $1.",
 	"wikibase-entitydata-title": "Data entity",
 	"wikibase-entitydata-text": "Tato stránka poskytuje odkazovací datové rozhraní k hodnotám entit. Uveďte ID entity v URL použitím syntaxe pro podstránky.\n* Použije se vyjednávání o obsahu podle hlavičky Accept vašeho klienta. To znamená, že data entity budou poskytnuta ve formátu preferovaném vaším klientem. U webového prohlížeče to bude HTML, takže bude váš prohlížeč přesměrován na běžnou stránku entity.\n* Výslovně si můžete konkrétní datový formát vyžádat uvedením příslušné přípony souboru k ID entity: Q23.json vrátí data ve formátu JSON, Q23.ttl vrátí RDF/Turtle atd. Podporované formáty jsou: $1.",
+	"special-entitypage": "Stránka entity",
+	"wikibase-entitypage-title": "Stránka entity",
+	"wikibase-entitypage-text": "Tato stránka přesměrovává na stránku entity v úložišti, do kterého patří. Uveďte ID entity v URL použitím syntaxe pro podstránky.",
+	"wikibase-entitypage-bad-id": "Chybné ID: $1.",
 	"special-redirectentity": "Přesměrovat entitu",
 	"wikibase-redirectentity-success": "$1 bylo přesměrováno na $2.",
 	"wikibase-redirectentity-fromid": "ID odkud přesměrovat",
@@ -369,5 +374,6 @@
 	"action-property-create": "vytvářet vlastnosti",
 	"wikibase-pageinfo-subscription": "Wiki odebírající tuto entitu",
 	"wikibase-pageinfo-subscription-none": "Žádné",
+	"wikibase-search-bad-entity-type": "Chybný typ entity: $1",
 	"apihelp-wbsearchentities-example-4": "Vyhledávání „abc“ v angličtině s limitem 2 a posunem o 2"
 }
