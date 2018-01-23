@@ -16,6 +16,24 @@
       "revId": "93d7ef9aef269dc3b4b525c4ff04601dbedeaa22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_61d857f5",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-23T16:04:37Z",
+      "side": 1,
+      "message": "You\u0027re right, added a condition to avoid that.",
+      "parentUuid": "8ef26315_e18bc719",
+      "revId": "93d7ef9aef269dc3b4b525c4ff04601dbedeaa22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
