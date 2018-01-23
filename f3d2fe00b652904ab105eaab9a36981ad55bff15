@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_a1a7ff4a",
+        "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-23T16:16:11Z",
+      "side": 0,
+      "message": "Don\u0027t remove this. This will be useful when building coverage reports that WMF is building.  See https://doc.wikimedia.org/cover-extensions/ORES/includes/ORESService.php.html",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 65
+      },
+      "revId": "f3d2fe00b652904ab105eaab9a36981ad55bff15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
