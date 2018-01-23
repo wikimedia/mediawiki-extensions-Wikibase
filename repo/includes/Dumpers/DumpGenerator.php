@@ -13,6 +13,7 @@ use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 
 /**
  * DumpGenerator generates a dump of a given set of entities, excluding
@@ -243,7 +244,14 @@ abstract class DumpGenerator {
 
 		// Iterate over batches of IDs, maintaining the current position of the pager in the $position variable.
 		while ( true ) {
-			$ids = $idPager->fetchIds( $this->batchSize );
+			if ( $this->limit && ( $dumpCount + $this->batchSize ) > $this->limit ) {
+				// Try not to overrun $limit in order to make sure pager's position can be used for continuing.
+				$limit = $this->limit - $dumpCount;
+			} else {
+				$limit = $this->batchSize;
+			}
+
+			$ids = $idPager->fetchIds( $limit );
 			if ( !$ids ) {
 				break;
 			}
@@ -253,6 +261,13 @@ abstract class DumpGenerator {
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
 
 			if ( $this->limit && $dumpCount >= $this->limit ) {
+				$this->progressReporter->reportMessage( 'Reached entity dump limit of ' . $this->limit . '.' );
+
+				if ( $idPager instanceof SqlEntityIdPager ) {
+					// This message is possibly being parsed for continuation purposes, thus avoid changing it.
+					$this->progressReporter->reportMessage( 'Last SqlEntityIdPager position: ' . $idPager->getPosition() .  '.' );
+				}
+
 				break;
 			}
 		}
