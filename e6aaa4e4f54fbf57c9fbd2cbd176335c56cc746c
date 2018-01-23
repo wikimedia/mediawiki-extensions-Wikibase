@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_017513c8",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-23T16:19:30Z",
+      "side": 1,
+      "message": "Couldn’t these be declared as `EntityUsage[][]`?",
+      "revId": "e6aaa4e4f54fbf57c9fbd2cbd176335c56cc746c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
