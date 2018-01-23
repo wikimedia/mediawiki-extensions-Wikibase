@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_0409a12f",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-23T16:48:14Z",
+      "side": 1,
+      "message": "So as only the first thing in the list is needed, would it make sense to only have a single thing passed in the constructor, and simplify the logic in this class?",
+      "revId": "8c5bcc4a6f9376512acfd372ed5efe51a7733dc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_a41a6d71",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-23T16:48:14Z",
+      "side": 1,
+      "message": "nah, to be honest I think this test is really not helpful. If we cannot have the test for the whole behaviour, which would be really cool in general, then I would actually be fine with skipping this test here.",
+      "revId": "8c5bcc4a6f9376512acfd372ed5efe51a7733dc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
