@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ef26315_014cf39d",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-23T16:33:59Z",
+      "side": 1,
+      "message": "This method is put in the last but it should be somewhere closer if possible",
+      "range": {
+        "startLine": 19,
+        "startChar": 16,
+        "endLine": 19,
+        "endChar": 39
+      },
+      "revId": "b45ce19d8a0d996e297f6da227bcd6641331d460",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_41771bcf",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 1
@@ -36,6 +59,29 @@
       "writtenOn": "2018-01-23T16:20:02Z",
       "side": 1,
       "message": "We can re-add a filter by aspect here, if it really is necessary.\n\nforeach ( … as $aspect \u003d\u003e … ) {\n    if ( $aspect \u003d\u003d\u003d EntityUsage::LABEL_USAGE\n        || $aspect \u003d\u003d\u003d EntityUsage::DESCRIPTION_USAGE\n    ) {\n        …",
+      "revId": "b45ce19d8a0d996e297f6da227bcd6641331d460",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_2172cfe2",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-23T16:33:59Z",
+      "side": 1,
+      "message": "This is too much indentation, the thing I really want to avoid.\nSeveral nested loop is a code smell.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
       "revId": "b45ce19d8a0d996e297f6da227bcd6641331d460",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
