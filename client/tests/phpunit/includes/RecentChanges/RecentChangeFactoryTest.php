@@ -40,7 +40,12 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$lang = Language::factory( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteLookup, 'testwiki' );
-		return new RecentChangeFactory( $lang, $siteLinkCommentCreator, $centralIdLookup );
+		return new RecentChangeFactory(
+			$lang,
+			$siteLinkCommentCreator,
+			$centralIdLookup,
+			'repo'
+		);
 	}
 
 	private function newRecentChangeFactory() {
@@ -161,7 +166,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$changeAttr = [
 			'rc_user' => 0,
-			'rc_user_text' => 'RecentChangeFactoryTestUser',
+			'rc_user_text' => 'repo>RecentChangeFactoryTestUser',
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => false,

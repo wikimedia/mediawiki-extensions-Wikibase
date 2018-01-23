@@ -1192,6 +1192,11 @@ final class WikibaseClient {
 	 * @return RecentChangeFactory
 	 */
 	public function getRecentChangeFactory() {
+		$repoSite = $this->siteLookup->getSite(
+			$this->getRepositoryDefinitions()->getDatabaseNames()['']
+		);
+		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
+
 		return new RecentChangeFactory(
 			$this->getContentLanguage(),
 			new SiteLinkCommentCreator(
@@ -1199,7 +1204,8 @@ final class WikibaseClient {
 				$this->siteLookup,
 				$this->settings->getSetting( 'siteGlobalID' )
 			),
-			( new CentralIdLookupFactory() )->getCentralIdLookup()
+			( new CentralIdLookupFactory() )->getCentralIdLookup(),
+			( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null
 		);
 	}
 
