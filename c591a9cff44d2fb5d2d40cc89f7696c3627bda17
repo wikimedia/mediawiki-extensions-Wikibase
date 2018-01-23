@@ -16,6 +16,24 @@
       "revId": "c591a9cff44d2fb5d2d40cc89f7696c3627bda17",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_6463450b",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-01-23T18:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_1381f0a4",
+      "revId": "c591a9cff44d2fb5d2d40cc89f7696c3627bda17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
