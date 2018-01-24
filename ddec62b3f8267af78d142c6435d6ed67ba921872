@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_9aeb4977",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T17:25:44Z",
+      "side": 1,
+      "message": "ExternalUserNames|null",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_3ade75de",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T17:25:44Z",
+      "side": 1,
+      "message": "Is this a forgotten snippet from a previous patch set?",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 43
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_ba9f2505",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T17:25:44Z",
+      "side": 1,
+      "message": "This is actually misplaced. There is a dedicated WikibaseClientTest for this.",
+      "range": {
+        "startLine": 293,
+        "startChar": 17,
+        "endLine": 293,
+        "endChar": 43
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_9a9229ff",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T17:25:44Z",
+      "side": 1,
+      "message": "This hides errors, because the assertion can not tell where this empty string will appear in the output. Please use some actual dummy string, e.g. \u0027ExternalUser\u0027.",
+      "range": {
+        "startLine": 300,
+        "startChar": 55,
+        "endLine": 300,
+        "endChar": 57
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_da9cb114",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T17:25:44Z",
+      "side": 1,
+      "message": "It looks like this test is testing the ExternalUserNames, and nothing else. We could remove everything except this property from RecentChangeFactory and this test will still succeed.\n\nIn other words: I can not tell what this is supposed to test.",
+      "range": {
+        "startLine": 300,
+        "startChar": 25,
+        "endLine": 300,
+        "endChar": 42
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
