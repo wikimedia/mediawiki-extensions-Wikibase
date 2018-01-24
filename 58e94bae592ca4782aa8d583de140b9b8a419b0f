@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_b09467eb",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-24T12:41:15Z",
+      "side": 1,
+      "message": "Is there any reason why you’re instantiating this every time? I would perhaps do it in the constructor and then have something like:\n\n if ( $this-\u003eexternalUsernames !\u003d\u003d null \u0026\u0026 $clientUserId \u003d\u003d\u003d 0 \u0026\u0026 $repoUserId !\u003d\u003d 0 ) {\n     $userText \u003d $this-\u003eexternalUsernames-\u003eaddPrefix( $userText );\n }\n\nPerhaps this entire conditional could also be extracted, together with L118-L125, into some function like:\n\n $userText \u003d $this-\u003egetUserText( $metadata, $repoUserId, $clientUserId );",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "58e94bae592ca4782aa8d583de140b9b8a419b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_308177a5",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-24T12:41:15Z",
+      "side": 1,
+      "message": "The same snippet already exists in getStore() – do you think it would make sense to extract a getRepositoryDatabaseName() function?",
+      "range": {
+        "startLine": 1196,
+        "startChar": 3,
+        "endLine": 1196,
+        "endChar": 60
+      },
+      "revId": "58e94bae592ca4782aa8d583de140b9b8a419b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
