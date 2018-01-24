@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_7a5e3ded",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-24T15:38:08Z",
+      "side": 1,
+      "message": "Okay",
+      "parentUuid": "8ef26315_9a34e9a8",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "58e94bae592ca4782aa8d583de140b9b8a419b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_308177a5",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 3
