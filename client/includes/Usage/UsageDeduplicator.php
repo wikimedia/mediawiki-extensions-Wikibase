@@ -25,9 +25,8 @@ class UsageDeduplicator {
 		$return = [];
 		array_walk_recursive(
 			$structuredUsages,
-			function( $a ) use ( &$return ) {
-				/* @var EntityUsage $a */
-				$return[$a->getIdentityString()] = $a;
+			function ( EntityUsage $usage ) use ( &$return ) {
+				$return[$usage->getIdentityString()] = $usage;
 			}
 		);
 		return $return;
@@ -65,8 +64,8 @@ class UsageDeduplicator {
 	}
 
 	/**
-	 * @param EntityUsage[] $usages
-	 * @return EntityUsage[]
+	 * @param array[] $usages
+	 * @return array[]
 	 */
 	private function deduplicateUsagesPerEntity( array $usages ) {
 		$usages[EntityUsage::DESCRIPTION_USAGE] = $this->deduplicatePerType(

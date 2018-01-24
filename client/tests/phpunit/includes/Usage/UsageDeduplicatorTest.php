@@ -31,19 +31,35 @@ class UsageDeduplicatorTest extends \PHPUnit_Framework_TestCase {
 		$q2DescriptionFa = new EntityUsage( $q2, EntityUsage::DESCRIPTION_USAGE, 'fa' );
 
 		return [
-			[ [ $q1LabelEn, $q1Label ], [ $q1Label ] ],
-			[ [ $q1LabelEn ], [ $q1LabelEn ] ],
-			[ [ $q1LabelEn, $q1Label, $q2Description, $q1All ], [ $q1Label, $q1All, $q2Description ] ],
-			[ [ $q1LabelEn, $q2Label, $q1Statement ], [ $q1LabelEn, $q1Statement, $q2Label ] ],
-			[ [ $q2DescriptionFa, $q2Description, $q1All ], [ $q2Description, $q1All ] ],
+			[
+				[ $q1LabelEn, $q1Label ],
+				[ $q1Label ]
+			],
+			[
+				[ $q1LabelEn ],
+				[ $q1LabelEn ]
+			],
+			[
+				[ $q1Label, $q1LabelEn, $q2Description, $q1All ],
+				[ $q1Label, $q2Description, $q1All ]
+			],
+			[
+				[ $q1LabelEn, $q2Label, $q1Statement ],
+				[ $q1LabelEn, $q2Label, $q1Statement ]
+			],
+			[
+				[ $q2Description, $q2DescriptionFa, $q1All ],
+				[ $q2Description, $q1All ]
+			],
 		];
 	}
 
 	/**
-	 * @covers \Wikibase\Client\Usage\UsageDeduplicator::deduplicate
 	 * @dataProvider provideDeduplicate
+	 * @param EntityUsage[] $usages
+	 * @param EntityUsage[] $output
 	 */
-	public function testDeduplicate( $usages, $output ) {
+	public function testDeduplicate( array $usages, array $output ) {
 		$expected = [];
 		foreach ( $output as $usage ) {
 			$expected[$usage->getIdentityString()] = $usage;
