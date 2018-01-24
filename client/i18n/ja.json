@@ -12,7 +12,8 @@
 			"にょきにょき",
 			"Mirinano",
 			"Iwai.masaharu",
-			"Hinaloe"
+			"Hinaloe",
+			"Afaz"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 拡張機能のクライアント",
@@ -72,6 +73,9 @@
 	"wikibase-pageswithbadges-legend": "バッジを受け取ったページ一覧",
 	"wikibase-pageswithbadges-badge": "バッジ:",
 	"wikibase-pageswithbadges-submit": "ページを表示",
+	"entityusage-summary": "このページは、入力したエンティティを使用しているページが一覧表示されます（例：Q42）。リストはページIDの降順でソートされ、新しいページが一番上になります。",
+	"wikibase-entityusage-legend": "入力されたエンティティを使用するページの一覧",
+	"wikibase-entityusage-entity": "エンティティを入力：",
 	"wikibase-entityusage-submit": "ページを表示",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目 ID",
 	"wikibase-pageinfo-entity-id-none": "なし",
