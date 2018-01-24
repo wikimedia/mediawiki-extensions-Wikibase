@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_fa5ecd46",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T17:55:26Z",
+      "side": 1,
+      "message": "Sorry, this comment was bollocks.",
+      "parentUuid": "8ef26315_ba9f2505",
+      "range": {
+        "startLine": 293,
+        "startChar": 17,
+        "endLine": 293,
+        "endChar": 43
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_9a9229ff",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 5
