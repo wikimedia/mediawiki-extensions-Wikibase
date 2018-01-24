@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_502b63db",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindingsTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T11:43:08Z",
+      "side": 1,
+      "message": "This test is now testing at least three or four different things and should be split. But this can easily be done in later patches and should not block this one further.",
+      "range": {
+        "startLine": 89,
+        "startChar": 17,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "0228e2f4eb7925d8dff0f6f0b2e6371a94a056af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_30269711",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindingsTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-24T11:43:08Z",
+      "side": 1,
+      "message": "This needs an assertTrue expecting a SITELINK_USAGE. As the test is structured now this is not easy to add. I believe the test must be split first.",
+      "revId": "0228e2f4eb7925d8dff0f6f0b2e6371a94a056af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
