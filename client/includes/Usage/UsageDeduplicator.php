@@ -11,6 +11,18 @@ namespace Wikibase\Client\Usage;
 class UsageDeduplicator {
 
 	/**
+	 * @var int
+	 */
+	private $modifiersLimit;
+
+	/**
+	 * @param int $modifiersLimit
+	 */
+	public function __construct( $modifiersLimit = 10 ) {
+		$this->modifiersLimit = $modifiersLimit;
+	}
+
+	/**
 	 * @param EntityUsage[] $usages
 	 *
 	 * @return EntityUsage[]
@@ -47,11 +59,21 @@ class UsageDeduplicator {
 	private function deduplicateStructuredUsages( array $structuredUsages ) {
 		foreach ( $structuredUsages as &$usagesPerEntity ) {
 			foreach ( $usagesPerEntity as &$usagesPerAspect ) {
+				$this->limitAspects( $usagesPerAspect );
 				$this->deduplicatePerAspect( $usagesPerAspect );
 			}
 		}
 
 		return $structuredUsages;
+	}
+
+	/**
+	 * @param EntityUsage[] &$usages
+	 */
+	private function limitAspects( array &$usages ) {
+		if ( count( $usages ) > $this->modifiersLimit ) {
+			$usages = [ new EntityUsage( $usages[0]->getEntityId(), $usages[0]->getAspect() ) ];
+		}
 	}
 
 	/**
