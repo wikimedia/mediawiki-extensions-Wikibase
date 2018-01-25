@@ -22,8 +22,19 @@ class UsageDeduplicatorTest extends \PHPUnit_Framework_TestCase {
 		$q1 = new ItemId( 'Q1' );
 		$q1Label = new EntityUsage( $q1, EntityUsage::LABEL_USAGE );
 		$q1LabelEn = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'en' );
+		$q1LabelDe = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'de' );
+		$q1LabelRu = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'ru' );
+		$q1LabelPl = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'pl' );
+		$q1LabelPt = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'pt' );
+		$q1LabelFa = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'fa' );
+
 		$q1All = new EntityUsage( $q1, EntityUsage::ALL_USAGE );
-		$q1Statement = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P15' );
+		$q1Statement1 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P15' );
+		$q1Statement2 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P16' );
+		$q1Statement3 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P17' );
+		$q1Statement4 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P18' );
+		$q1Statement5 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P19' );
+		$q1Statement = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE );
 
 		$q2 = new ItemId( 'Q2' );
 		$q2Label = new EntityUsage( $q2, EntityUsage::LABEL_USAGE );
@@ -44,13 +55,29 @@ class UsageDeduplicatorTest extends \PHPUnit_Framework_TestCase {
 				[ $q1Label, $q2Description, $q1All ]
 			],
 			[
-				[ $q1LabelEn, $q2Label, $q1Statement ],
-				[ $q1LabelEn, $q2Label, $q1Statement ]
+				[ $q1LabelEn, $q2Label, $q1Statement1 ],
+				[ $q1LabelEn, $q2Label, $q1Statement1 ]
 			],
 			[
 				[ $q2Description, $q2DescriptionFa, $q1All ],
 				[ $q2Description, $q1All ]
 			],
+			[
+				[ $q1LabelEn, $q1Statement1, $q1Statement2, $q1Statement3, $q1Statement4 ],
+				[ $q1LabelEn, $q1Statement1, $q1Statement2, $q1Statement3, $q1Statement4 ],
+			],
+			[
+				[ $q1LabelEn, $q1Statement1, $q1Statement2, $q1Statement3, $q1Statement4, $q1Statement5 ],
+				[ $q1LabelEn, $q1Statement ],
+			],
+			[
+				[ $q1LabelEn, $q1LabelDe, $q1LabelRu, $q1LabelPl, $q1LabelPt ],
+				[ $q1LabelEn, $q1LabelDe, $q1LabelRu, $q1LabelPl, $q1LabelPt ],
+			],
+			[
+				[ $q1LabelEn, $q1LabelDe, $q1LabelRu, $q1LabelPl, $q1LabelPt, $q1LabelFa ],
+				[ $q1Label ],
+			]
 		];
 	}
 
@@ -64,7 +91,13 @@ class UsageDeduplicatorTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $output as $usage ) {
 			$expected[$usage->getIdentityString()] = $usage;
 		}
-		$this->assertEquals( $expected, ( new UsageDeduplicator() )->deduplicate( $usages ) );
+
+		$usageModifierLimits = [
+			EntityUsage::STATEMENT_USAGE => 4,
+			EntityUsage::LABEL_USAGE => 5
+		];
+
+		$this->assertEquals( $expected, ( new UsageDeduplicator( $usageModifierLimits ) )->deduplicate( $usages ) );
 	}
 
 }
