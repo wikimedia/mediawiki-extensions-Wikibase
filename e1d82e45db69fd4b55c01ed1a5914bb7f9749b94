@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6eefef32_a652cc3d",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-25T18:09:21Z",
+      "side": 1,
+      "message": "I think that limit is too low for languages. We want to catch cases where people go through *everything*. 10 modifiers would still be a very useful filter for change dispatching. \n\nFor statements, we\u0027d ideally want the limit to be relative to the total number of statements on the entity. We have that in page_props, right? But loading that would probably be overkill. 10 may be an OK-ish limit for that.\n\nAnyway, we\u0027ll want different limits for different aspects.",
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eefef32_66828499",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 2
@@ -13,6 +30,30 @@
       "writtenOn": "2018-01-25T18:06:27Z",
       "side": 1,
       "message": "For maximum clarity, I would perhaps comment this as:\n\n new EntityUsage(\n     $usages[0]-\u003egetEntityId(),\n     $usages[0]-\u003egetAspect()\n     // throw away modifier\n )\n\nSo it doesn’t look like you’re only creating a copy of the first array entry. But perhaps that’s just because I’m not as familiar with EntityUsage :)",
+      "range": {
+        "startLine": 75,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eefef32_e64cd4a1",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-25T18:09:21Z",
+      "side": 1,
+      "message": "I agree that this is a bit hard to read.",
+      "parentUuid": "6eefef32_66828499",
       "range": {
         "startLine": 75,
         "startChar": 15,
