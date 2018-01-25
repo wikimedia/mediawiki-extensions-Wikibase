@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage;
 
 use ParserOutput;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * This implementation of the UsageAccumulator interface acts as a wrapper around
@@ -19,8 +20,16 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 */
 	private $parserOutput;
 
+	/**
+	 * @var int[]
+	 */
+	private $usageModifierLimits;
+
 	public function __construct( ParserOutput $parserOutput ) {
 		$this->parserOutput = $parserOutput;
+		$this->usageModifierLimits = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
+			'entityUsageModifierLimits'
+		);
 	}
 
 	/**
@@ -43,9 +52,16 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	public function getUsages() {
 		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );
 		if ( $usages ) {
-			return ( new UsageDeduplicator() )->deduplicate( $usages );
+			return ( new UsageDeduplicator( $this->usageModifierLimits ) )->deduplicate( $usages );
 		}
 		return [];
+	}
+
+	/**
+	 * @param int[] $usageModifierLimits associative array mapping entity type to the limit
+	 */
+	public function setUsageModifierLimits( array $usageModifierLimits ) {
+		$this->usageModifierLimits = $usageModifierLimits;
 	}
 
 }
