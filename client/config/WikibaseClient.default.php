@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
 use Wikibase\WikibaseSettings;
@@ -248,6 +249,13 @@ return call_user_func( function() {
 
 	// The limit to issue a warning when number of entities used in a page hit that
 	$defaults['entityUsagePerPageLimit'] = 100;
+
+	// The limit to turn the usage into a general one when there is too many modifiers
+	$defaults['entityUsageModifierLimits'] = [
+		EntityUsage::DESCRIPTION_USAGE => 30,
+		EntityUsage::LABEL_USAGE => 30,
+		EntityUsage::STATEMENT_USAGE => 10
+	];
 
 	return $defaults;
 } );
