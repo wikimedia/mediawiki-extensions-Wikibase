@@ -138,6 +138,30 @@
       "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_9a4fc996",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-25T13:10:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_da9cb114",
+      "range": {
+        "startLine": 300,
+        "startChar": 25,
+        "endLine": 300,
+        "endChar": 42
+      },
+      "revId": "ddec62b3f8267af78d142c6435d6ed67ba921872",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
