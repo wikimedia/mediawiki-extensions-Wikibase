@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests;
 
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\DataTypeFactory;
 use Deserializers\Deserializer;
 use HashSiteStore;
@@ -41,6 +42,7 @@ use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Client\WikibaseClient
@@ -215,6 +217,13 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		$siteStore->saveSite( $site );
 
+		$site = new Site();
+		$site->setGlobalId( 'repo' );
+		$site->setGroup( 'wikipedia' );
+		$site->addInterwikiId( 'repointerwiki' );
+
+		$siteStore->saveSite( $site );
+
 		return $siteStore;
 	}
 
@@ -279,6 +288,17 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetChangeHandler() {
 		$handler = $this->getWikibaseClient()->getChangeHandler();
 		$this->assertInstanceOf( ChangeHandler::class, $handler );
+	}
+
+	public function testGetRecentChangeFactory() {
+		$recentChangeFactory = $this->getWikibaseClient()->getRecentChangeFactory();
+		$this->assertInstanceOf( RecentChangeFactory::class, $recentChangeFactory );
+
+		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
+		$this->assertStringStartsWith(
+			'repointerwiki>',
+			$recentChangeFactory->externalUsernames->addPrefix( 'TestUser' )
+		);
 	}
 
 	public function testGetParserFunctionRegistrant() {
@@ -358,7 +378,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			new HashSiteStore()
+			$this->getSiteLookup()
 		);
 	}
 
@@ -367,7 +387,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => 'repo', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
 		);
 	}
 

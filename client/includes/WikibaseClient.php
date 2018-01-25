@@ -13,6 +13,7 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
+use ExternalUserNames;
 use Exception;
 use Hooks;
 use Http;
@@ -1192,6 +1193,12 @@ final class WikibaseClient {
 	 * @return RecentChangeFactory
 	 */
 	public function getRecentChangeFactory() {
+		$repoSite = $this->siteLookup->getSite(
+			$this->getRepositoryDefinitions()->getDatabaseNames()['']
+		);
+		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
+		$interwikiPrefix = ( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null;
+
 		return new RecentChangeFactory(
 			$this->getContentLanguage(),
 			new SiteLinkCommentCreator(
@@ -1199,7 +1206,9 @@ final class WikibaseClient {
 				$this->siteLookup,
 				$this->settings->getSetting( 'siteGlobalID' )
 			),
-			( new CentralIdLookupFactory() )->getCentralIdLookup()
+			( new CentralIdLookupFactory() )->getCentralIdLookup(),
+			( $interwikiPrefix !== null ) ?
+				new ExternalUserNames( $interwikiPrefix, false ) : null
 		);
 	}
 
