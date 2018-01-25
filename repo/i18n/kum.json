@@ -4,5 +4,8 @@
 			"Arsenekoumyk"
 		]
 	},
-	"wikibase-edit": "тюзлемек"
+	"wikibase-edit": "тюзлемек",
+	"wikibase-add": "къошмакъ",
+	"wikibase-description-empty": "Сыпатлав мекенлешмеген",
+	"wikibase-sitelinks-special": "Башгъа сайтлар"
 }

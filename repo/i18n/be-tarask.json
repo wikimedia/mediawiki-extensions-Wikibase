@@ -276,6 +276,7 @@
 	"wikibase-listproperties-submit": "Знайсьці",
 	"wikibase-listproperties-invalid-datatype": "«$1» не зьяўляецца слушным тыпам зьвестак.",
 	"special-entitieswithoutdescription": "Аб’екты без апісаньня",
+	"wikibase-entitieswithoutdescription-legend": "Атрымаць сьпіс элемэнтаў без апісаньня",
 	"special-entitieswithoutlabel": "Аб’екты бязь метак",
 	"wikibase-entitieswithoutlabel-legend": "Атрымасьць сьпіс аб’ектаў бязь метак",
 	"wikibase-entitieswithoutlabel-label-language": "Код мовы:",

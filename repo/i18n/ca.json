@@ -209,7 +209,7 @@
 	"wikibase-entitieswithoutlabel-label-language": "Codi d'idioma:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipus:",
 	"wikibase-entitieswithoutlabel-submit": "Cerca",
-	"wikibase-entitieswithoutlabel-invalid-language": "\" $1 \" no és un codi d'idioma vàlid.",
+	"wikibase-entitieswithoutlabel-invalid-language": "«$1» no és un codi d’idioma vàlid.",
 	"special-entitydata": "Dades de l'entitat",
 	"wikibase-entitydata-bad-revision": "No es pot mostrar la revisió $2 de l'entitat $1.",
 	"wikibase-restoreold": "restaura",
