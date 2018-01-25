@@ -22,6 +22,30 @@
       "revId": "c065d23bdcb8bb6348d76c717f0aaf49e607f0b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eefef32_8624f008",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-25T16:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eefef32_c6ff1864",
+      "range": {
+        "startLine": 420,
+        "startChar": 39,
+        "endLine": 420,
+        "endChar": 47
+      },
+      "revId": "c065d23bdcb8bb6348d76c717f0aaf49e607f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
