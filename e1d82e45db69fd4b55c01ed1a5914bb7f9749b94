@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eefef32_66828499",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-25T18:06:27Z",
+      "side": 1,
+      "message": "For maximum clarity, I would perhaps comment this as:\n\n new EntityUsage(\n     $usages[0]-\u003egetEntityId(),\n     $usages[0]-\u003egetAspect()\n     // throw away modifier\n )\n\nSo it doesn’t look like you’re only creating a copy of the first array entry. But perhaps that’s just because I’m not as familiar with EntityUsage :)",
+      "range": {
+        "startLine": 75,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
