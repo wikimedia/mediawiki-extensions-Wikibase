@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_ff157b4e",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-26T14:43:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efcebec_3f9a43be",
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efcebec_df84ff60",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 2
@@ -60,6 +78,30 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_9f20b7aa",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-26T14:43:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efcebec_df84ff60",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efcebec_ff7f3b61",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 2
@@ -71,6 +113,30 @@
       "writtenOn": "2018-01-26T10:15:32Z",
       "side": 1,
       "message": "This method does not really \"limit aspects\". It limits the number of usages (per aspect) that have modifiers.\n\nSuggestion: limitPerAspect",
+      "range": {
+        "startLine": 73,
+        "startChar": 18,
+        "endLine": 73,
+        "endChar": 30
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_3f10835b",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-26T14:43:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efcebec_ff7f3b61",
       "range": {
         "startLine": 73,
         "startChar": 18,
@@ -118,6 +184,30 @@
       "side": 1,
       "message": "I agree that this is a bit hard to read.",
       "parentUuid": "6eefef32_66828499",
+      "range": {
+        "startLine": 75,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_df1a3f7e",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-26T14:43:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eefef32_e64cd4a1",
       "range": {
         "startLine": 75,
         "startChar": 15,
