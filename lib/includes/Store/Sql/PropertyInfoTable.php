@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBError;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.
@@ -83,11 +83,11 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	/**
 	 * Decodes a result with info blobs.
 	 *
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 *
 	 * @return array[] The array of decoded blobs
 	 */
-	private function decodeResult( ResultWrapper $res ) {
+	private function decodeResult( IResultWrapper $res ) {
 		$infos = [];
 
 		foreach ( $res as $row ) {

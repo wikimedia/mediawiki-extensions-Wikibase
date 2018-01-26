@@ -11,7 +11,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\TermIndexEntry;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Hook handlers for triggering prefetching of labels.
@@ -81,7 +81,7 @@ class LabelPrefetchHookHandlers {
 	 * Static handler for the ChangesListInitRows hook.
 	 *
 	 * @param ChangesList $list
-	 * @param ResultWrapper|object[] $rows
+	 * @param IResultWrapper|object[] $rows
 	 *
 	 * @return bool
 	 */
@@ -121,7 +121,7 @@ class LabelPrefetchHookHandlers {
 
 	/**
 	 * @param ChangesList $list
-	 * @param ResultWrapper|object[] $rows
+	 * @param IResultWrapper|object[] $rows
 	 *
 	 * @return bool
 	 */
@@ -138,7 +138,7 @@ class LabelPrefetchHookHandlers {
 	}
 
 	/**
-	 * @param ResultWrapper|object[] $rows
+	 * @param IResultWrapper|object[] $rows
 	 *
 	 * @return Title[]
 	 */

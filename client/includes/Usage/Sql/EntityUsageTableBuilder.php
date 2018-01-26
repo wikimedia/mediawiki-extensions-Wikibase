@@ -12,8 +12,8 @@ use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\LoadBalancer;
-use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Implements initial population (priming) for the wbc_entity_usage table,
@@ -195,11 +195,11 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 *
 	 * @return EntityId[] An associative array mapping page IDs to Entity IDs.
 	 */
-	private function slurpEntityIds( ResultWrapper $res ) {
+	private function slurpEntityIds( IResultWrapper $res ) {
 		$entityPerPage = [];
 
 		foreach ( $res as $row ) {

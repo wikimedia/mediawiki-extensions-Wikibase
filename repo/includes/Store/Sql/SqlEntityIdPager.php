@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * SqlEntityIdPager is a cursor for iterating over the EntityIds stored in
@@ -172,11 +172,11 @@ class SqlEntityIdPager implements EntityIdPager {
 	 * position. Returns an array with said entity ids and the next position
 	 * or null in case the position didn't change.
 	 *
-	 * @param ResultWrapper $rows
+	 * @param IResultWrapper $rows
 	 *
 	 * @return array Tuple with ( EntityId[], int|null )
 	 */
-	private function processRows( ResultWrapper $rows ) {
+	private function processRows( IResultWrapper $rows ) {
 		$entityIds = [];
 		$position = null;
 

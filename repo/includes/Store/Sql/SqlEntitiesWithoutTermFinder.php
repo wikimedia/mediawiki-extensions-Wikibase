@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Service for getting entities without terms.
@@ -172,10 +172,10 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 	}
 
 	/**
-	 * @param ResultWrapper $rows
+	 * @param IResultWrapper $rows
 	 * @return EntityId[]
 	 */
-	private function getEntityIdsFromRows( ResultWrapper $rows ) {
+	private function getEntityIdsFromRows( IResultWrapper $rows ) {
 		$entities = [];
 
 		foreach ( $rows as $row ) {

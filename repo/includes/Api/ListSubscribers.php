@@ -10,7 +10,7 @@ use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * API module for getting wikis subscribed to changes to given entities.
@@ -87,7 +87,7 @@ class ListSubscribers extends ApiQueryBase {
 	 * @param string $continue
 	 * @param int $limit
 	 *
-	 * @return ResultWrapper
+	 * @return IResultWrapper
 	 */
 	public function doQuery( array $idStrings, $continue, $limit ) {
 		$this->addFields( [
@@ -134,11 +134,11 @@ class ListSubscribers extends ApiQueryBase {
 	}
 
 	/**
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 * @param int $limit
 	 * @param array $props
 	 */
-	private function formatResult( ResultWrapper $res, $limit, array $props ) {
+	private function formatResult( IResultWrapper $res, $limit, array $props ) {
 		$currentEntity = null;
 		$count = 0;
 		$result = $this->getResult();
