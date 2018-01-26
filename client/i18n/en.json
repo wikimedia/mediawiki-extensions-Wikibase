@@ -35,7 +35,7 @@
 	"apihelp-query+pageterms-example-simple": "Get all terms associated with the page 'London', in the user language.",
 	"apihelp-query+pageterms-example-label-en": "Get labels and aliases associated with the page 'London', in English.",
 	"apihelp-query+pageterms-example-item": "Get labels and aliases of item Q84.",
-	"apihelp-query+pageterms-param-terms": "The types of terms to get, e.g. 'description'. If not specified, all types are returned.",
+	"apihelp-query+pageterms-param-terms": "The types of terms to get, e.g. 'description', each returned as an array of strings keyed by their type, e.g. {\"description\": [\"foo\"]}. If not specified, all types are returned.",
 	"apihelp-query+wikibase-description": "Get information about the Wikibase client and the associated Wikibase repository.",
 	"apihelp-query+wikibase-summary": "Get information about the Wikibase client and the associated Wikibase repository.",
 	"apihelp-query+wikibase-example": "Get URL path and other information about Wikibase client and repository.",
