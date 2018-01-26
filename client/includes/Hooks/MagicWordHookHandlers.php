@@ -72,14 +72,14 @@ class MagicWordHookHandlers {
 	/**
 	 * Static handler for the ParserGetVariableValueSwitch hook
 	 *
-	 * @param Parser &$parser
-	 * @param array &$cache
-	 * @param string &$magicWordId
+	 * @param Parser $parser
+	 * @param array $cache
+	 * @param string $magicWordId
 	 * @param string &$ret
 	 *
 	 * @return bool
 	 */
-	public static function onParserGetVariableValueSwitch( Parser &$parser, &$cache, &$magicWordId, &$ret ) {
+	public static function onParserGetVariableValueSwitch( Parser $parser, $cache, $magicWordId, &$ret ) {
 		$handler = self::newFromGlobalState();
 		$handler->doParserGetVariableValueSwitch( $parser, $cache, $magicWordId, $ret );
 	}
