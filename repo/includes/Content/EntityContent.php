@@ -28,7 +28,7 @@ use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
@@ -398,7 +398,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return string
 	 */
 	public function getTextForSummary( $maxLength = 250 ) {
-		global $wgLang;
+		global $wgContLang;
 
 		if ( $this->isRedirect() ) {
 			return $this->getRedirectText();
@@ -406,13 +406,19 @@ abstract class EntityContent extends AbstractContent {
 
 		$entity = $this->getEntity();
 
-		if ( $entity instanceof DescriptionsProvider ) {
-			$descriptions = $entity->getDescriptions();
-			$languageCode = $wgLang->getCode();
+		// TODO: This assumes all entities are LabelsProvider. Fix it.
+		if ( $entity instanceof LabelsProvider ) {
+			$labels = $entity->getLabels();
+			$languageCode = $wgContLang->getCode();
 
-			if ( $descriptions->hasTermForLanguage( $languageCode ) ) {
-				$description = $descriptions->getByLanguage( $languageCode )->getText();
-				return substr( $description, 0, $maxLength );
+			if ( $labels->hasTermForLanguage( $languageCode ) ) {
+				$label = $labels->getByLanguage( $languageCode )->getText();
+				return substr( $label, 0, $maxLength );
+			}
+
+			// Return first term it can find
+			foreach ( $labels->getIterator() as $term ) {
+				return substr( $term->getText(), 0, $maxLength );
 			}
 		}
 
