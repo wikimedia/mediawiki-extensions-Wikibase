@@ -46,6 +46,30 @@
       "revId": "0516ac60231e373543301506b3f452cc1ebe52f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_9fbc3769",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-26T13:47:54Z",
+      "side": 1,
+      "message": "Wait, you only mean that there’s no error for the function signature, right? Because the referenceness still seems to work through the array, if I’m not mistaken:\n\n function exchange( \u0026$x, \u0026$y ) { $z \u003d $x; $x \u003d $y; $y \u003d $z; }\n $c \u003d \u0027i\u0027;\n $d \u003d \u0027j\u0027;\n call_user_func_array( \u0027exchange\u0027, [ \u0026$c, \u0026$d ] );\n var_dump( $c ); // \"j\"\n var_dump( $d ); // \"i\"",
+      "parentUuid": "4efcebec_5f8c6fdb",
+      "range": {
+        "startLine": 9,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "0516ac60231e373543301506b3f452cc1ebe52f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
