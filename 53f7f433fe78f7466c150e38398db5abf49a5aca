@@ -16,6 +16,24 @@
       "revId": "53f7f433fe78f7466c150e38398db5abf49a5aca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_9f90b750",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T11:46:22Z",
+      "side": 1,
+      "message": "Good catch. Usually this is correct, but not here because the Wikibase code is arranged in subdirectories (\"client\" and so on). The default point to \"../tests/phpunit/\" and would not find anything there.",
+      "parentUuid": "4efcebec_ffe0dbf9",
+      "revId": "53f7f433fe78f7466c150e38398db5abf49a5aca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
