@@ -33,11 +33,11 @@ final class LibHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
 	 *
 	 * @param array &$testModules
-	 * @param ResourceLoader &$resourceLoader
+	 * @param ResourceLoader $resourceLoader
 	 *
 	 * @return boolean
 	 */
-	public static function registerQUnitTests( array &$testModules, ResourceLoader &$resourceLoader ) {
+	public static function registerQUnitTests( array &$testModules, ResourceLoader $resourceLoader ) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			include __DIR__ . '/tests/qunit/resources.php'
