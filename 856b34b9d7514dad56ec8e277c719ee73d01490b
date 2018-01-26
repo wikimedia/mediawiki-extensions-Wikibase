@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_22334af5",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-26T14:46:53Z",
+      "side": 1,
+      "message": "missing @param string $aspect",
+      "revId": "856b34b9d7514dad56ec8e277c719ee73d01490b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_c248a669",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-26T14:46:53Z",
+      "side": 1,
+      "message": "typo: statements",
+      "range": {
+        "startLine": 133,
+        "startChar": 299,
+        "endLine": 133,
+        "endChar": 308
+      },
+      "revId": "856b34b9d7514dad56ec8e277c719ee73d01490b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_622d528b",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-26T14:46:53Z",
+      "side": 1,
+      "message": "typo: aspect",
+      "range": {
+        "startLine": 133,
+        "startChar": 117,
+        "endLine": 133,
+        "endChar": 123
+      },
+      "revId": "856b34b9d7514dad56ec8e277c719ee73d01490b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
