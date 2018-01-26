@@ -19,6 +19,70 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_3f9a43be",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T10:15:32Z",
+      "side": 1,
+      "message": "I would introduce an array of limits, but for now have only two limits in this array:\n\n$usageModifierLimits \u003d [\n    \u0027terms\u0027 \u003d\u003e 10,\n    \u0027statements\u0027 \u003d\u003e 10,\n]\n\nBut maybe I\u0027m overthinking this and it\u0027s much, much easier to simply reuse the aspect keys:\n\n$usageModifierLimits \u003d [\n    \u0027L\u0027 \u003d\u003e 10,\n    \u0027D\u0027 \u003d\u003e 10,\n    \u0027C\u0027 \u003d\u003e 10,\n]",
+      "parentUuid": "6eefef32_a652cc3d",
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_df84ff60",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T10:15:32Z",
+      "side": 1,
+      "message": "You want too change this to\n\n foreach ( $usagesPerEntity as $aspect \u003d\u003e \u0026$usagesPerAspect )\n\nand use the aspect key as an argument for the limit feature.",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_ff7f3b61",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T10:15:32Z",
+      "side": 1,
+      "message": "This method does not really \"limit aspects\". It limits the number of usages (per aspect) that have modifiers.\n\nSuggestion: limitPerAspect",
+      "range": {
+        "startLine": 73,
+        "startChar": 18,
+        "endLine": 73,
+        "endChar": 30
+      },
+      "revId": "e1d82e45db69fd4b55c01ed1a5914bb7f9749b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eefef32_66828499",
         "filename": "client/includes/Usage/UsageDeduplicator.php",
         "patchSetId": 2
