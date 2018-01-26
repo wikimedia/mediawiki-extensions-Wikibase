@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_ff9a9b16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T13:39:08Z",
+      "side": 1,
+      "message": "I had the same impression, but after having a closer look I realized this is not what happens. Hooks are called like this:\n\n Hooks::run( \u0027Foo\u0027, [ \u0026$foo ] );\n\nNote that these are not function parameters, but elements of an array. An \u0026 changes the way an element is added to this array, but does not have any effect on the hook handler function that is called later via call_user_func_array.\n\nTL;DR: We can freely add and remove \u0026 on our hook handler functions, and should remove all where a variables value is not intentionally changed by our code.",
+      "range": {
+        "startLine": 9,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "0516ac60231e373543301506b3f452cc1ebe52f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
