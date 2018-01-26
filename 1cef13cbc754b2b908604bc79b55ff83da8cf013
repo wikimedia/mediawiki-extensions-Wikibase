@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_ffa8dbda",
+        "filename": "client/includes/ParserOutput/ClientParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T10:01:22Z",
+      "side": 1,
+      "message": "This documentation also does not fit any more.",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 44
+      },
+      "revId": "1cef13cbc754b2b908604bc79b55ff83da8cf013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_dfad1fe9",
+        "filename": "client/includes/ParserOutput/ClientParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T10:01:22Z",
+      "side": 1,
+      "message": "I think you either need to update this methods name, or add a new method. Look at ParserOutputUpdateHookHandlers::doContentAlterParserOutput. There are already 3 methods called, each with a single responsibility. I think it\u0027s better to add a fourth method. This also makes it easier to write a test for it (which is missing at the moment, therefor the -1).\n\nsiteLinkLookup-\u003egetItemIdForLink() is called multiple times then. But this is not a problem because it is a CachingSiteLinkLookup.",
+      "range": {
+        "startLine": 75,
+        "startChar": 17,
+        "endLine": 75,
+        "endChar": 37
+      },
+      "revId": "1cef13cbc754b2b908604bc79b55ff83da8cf013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
