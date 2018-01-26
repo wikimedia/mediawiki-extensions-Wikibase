@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_5f30effc",
+        "filename": "client/includes/Hooks/MagicWordHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T14:30:10Z",
+      "side": 0,
+      "message": "I realized we loose one bit of information if we remove all \u0026 here: This effectively documents which parameters *can* be passed back via a reference. However:\n\n* Documentation should not be done here but in docs/hooks.txt as well as https://www.mediawiki.org/wiki/Manual:Hooks/ParserGetVariableValueSwitch\n* I carefully looked at the code that calls this hook and I have *extreme* doubts any of these variables (except \u0026$ret, obviously) should ever be touched by a handler. You can swap the $parser with an other one! Luckily this does nothing. Swapping the cache will mess up the internal state of the parser, with unknown consequences (hopefully no negative ones). Swapping the $index also messes with the cache, with unexpected results pretty much guaranteed.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 31
+      },
+      "revId": "43ab2f0e9dc5cfb134533572243835044e082e4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
