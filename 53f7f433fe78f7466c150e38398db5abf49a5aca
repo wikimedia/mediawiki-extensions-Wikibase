@@ -34,6 +34,24 @@
       "revId": "53f7f433fe78f7466c150e38398db5abf49a5aca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_7f7a0b21",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-26T11:47:42Z",
+      "side": 1,
+      "message": "Ah, makes sense, because this hooks file isn’t at the repository root. Thanks!",
+      "parentUuid": "4efcebec_9f90b750",
+      "revId": "53f7f433fe78f7466c150e38398db5abf49a5aca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
