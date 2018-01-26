@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_9f0557c7",
+        "filename": "client/includes/Hooks/NoLangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-26T11:21:30Z",
+      "side": 1,
+      "message": "Is this \u0026 still needed? I don’t see how it has any effect, especially since you removed the corresponding \u0026 from doHandle() below.",
+      "range": {
+        "startLine": 33,
+        "startChar": 39,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "bc68fd4619c77d40590e09dcb77614bfb66f6bb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
