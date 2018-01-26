@@ -22,6 +22,30 @@
       "revId": "bc68fd4619c77d40590e09dcb77614bfb66f6bb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_1f7dc717",
+        "filename": "client/includes/Hooks/NoLangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T11:52:36Z",
+      "side": 1,
+      "message": "I understand the idea, but this is not possible. The caller states \u0026$parser as a reference. Not because this would be an intentional feature, but because this was a common best-practice in very old PHP to avoid expensive cloning of objects. This is obsolete now, but the caller was never changed.\n\nIf the called code does not accept references, this happens:\n\nPHP Fatal error:  Call-time pass-by-reference has been removed; If you would like to pass argument by reference, modify the declaration of …",
+      "parentUuid": "4efcebec_9f0557c7",
+      "range": {
+        "startLine": 33,
+        "startChar": 39,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "bc68fd4619c77d40590e09dcb77614bfb66f6bb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
