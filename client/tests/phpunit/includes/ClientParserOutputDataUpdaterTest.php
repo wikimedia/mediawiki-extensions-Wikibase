@@ -100,15 +100,19 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $prefixedText
+	 * @param bool $isRedirect
 	 *
 	 * @return Title
 	 */
-	private function getTitle( $prefixedText ) {
+	private function getTitle( $prefixedText, $isRedirect = false ) {
 		$title = $this->getMock( Title::class );
 
 		$title->expects( $this->once() )
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( $prefixedText ) );
+
+		$title->method( 'isRedirect' )
+			->will( $this->returnValue( $isRedirect ) );
 
 		return $title;
 	}
@@ -294,6 +298,29 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 
 		// Stuff didn't blow up
 		$this->assertTrue( true );
+	}
+
+	public function updateTrackingCategoriesDataProvider() {
+		return [
+			[ 'Foo sr', false, 0 ],
+			[ 'Foo sr', true, 1 ],
+			[ 'Foo xx', false, 0 ],
+			[ 'Foo xx', true, 0 ],
+		];
+	}
+
+	/**
+	 * @dataProvider updateTrackingCategoriesDataProvider
+	 */
+	public function testUpdateTrackingCategories( $titleText, $isRedirect, $expected ) {
+		$parserOutput = $this->getMock( ParserOutput::class );
+		$parserOutput->expects( $this->exactly( $expected ) )
+			->method( 'addTrackingCategory' );
+
+		$title = $this->getTitle( $titleText, $isRedirect );
+
+		$instance = $this->newInstance();
+		$instance->updateTrackingCategories( $title, $parserOutput );
 	}
 
 }

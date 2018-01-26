@@ -85,6 +85,20 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
+	/**
+	 * Add tracking category if the page is a redirect and is connected to an item
+	 *
+	 * @param Title $title
+	 * @param ParserOutput $out
+	 */
+	public function updateTrackingCategories( Title $title, ParserOutput $out ) {
+		$itemId = $this->getItemIdForTitle( $title );
+
+		if ( $itemId && $title->isRedirect() ) {
+			$out->addTrackingCategory( 'connected-redirect-category', $title );
+		}
+	}
+
 	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ) {
 		$itemId = $this->getItemIdForTitle( $title );
 
