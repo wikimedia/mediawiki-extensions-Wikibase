@@ -231,7 +231,7 @@ final class ClientHooks {
 	 * @param OutputPage $output
 	 * @param int $tabindex
 	 */
-	public static function onEditAction( EditPage $editor, OutputPage $output, &$tabindex ) {
+	public static function onEditAction( EditPage $editor, OutputPage $output, $tabindex ) {
 		if ( $editor->section ) {
 			// Shorten out, like template transclusion in core
 			return;
