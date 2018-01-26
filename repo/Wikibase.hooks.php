@@ -58,20 +58,20 @@ final class RepoHooks {
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
 	 *
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 */
-	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$out->addModules( 'wikibase.ui.entitysearch' );
 	}
 
 	/**
 	 * Handler for the BeforePageDisplayMobile hook that adds the wikibase mobile styles.
 	 *
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 */
-	public static function onBeforePageDisplayMobile( OutputPage &$out, Skin &$skin ) {
+	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skin ) {
 		$title = $out->getTitle();
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		$isEntityTitle = $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() );
@@ -154,10 +154,10 @@ final class RepoHooks {
 	/**
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
 	 *
-	 * @param array &$testModules
-	 * @param ResourceLoader &$resourceLoader
+	 * @param string[] &$testModules
+	 * @param ResourceLoader $resourceLoader
 	 */
-	public static function registerQUnitTests( array &$testModules, ResourceLoader &$resourceLoader ) {
+	public static function registerQUnitTests( array &$testModules, ResourceLoader $resourceLoader ) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			include __DIR__ . '/tests/qunit/resources.php'
@@ -252,8 +252,8 @@ final class RepoHooks {
 	 * Occurs after the delete article request has been processed.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
 	 *
-	 * @param WikiPage &$wikiPage
-	 * @param User &$user
+	 * @param WikiPage $wikiPage
+	 * @param User $user
 	 * @param string $reason
 	 * @param int $id id of the article that was deleted
 	 * @param Content|null $content
@@ -262,8 +262,8 @@ final class RepoHooks {
 	 * @throws MWException
 	 */
 	public static function onArticleDeleteComplete(
-		WikiPage &$wikiPage,
-		User &$user,
+		WikiPage $wikiPage,
+		User $user,
 		$reason,
 		$id,
 		Content $content = null,
@@ -401,11 +401,11 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageHistoryLineEnding
 	 *
 	 * @param HistoryPager $history
-	 * @param object &$row
-	 * @param string &$s
-	 * @param array &$classes
+	 * @param object $row
+	 * @param string &$html
+	 * @param array $classes
 	 */
-	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes ) {
+	public static function onPageHistoryLineEnding( HistoryPager $history, $row, &$html, array $classes ) {
 		// Note: This assumes that HistoryPager::getTitle returns a Title.
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
@@ -428,7 +428,7 @@ final class RepoHooks {
 				]
 			);
 
-			$s .= ' ' . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
+			$html .= ' ' . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
 		}
 	}
 
@@ -436,10 +436,10 @@ final class RepoHooks {
 	 * Alter the structured navigation links in SkinTemplates.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
 	 *
-	 * @param SkinTemplate &$skinTemplate
-	 * @param array &$links
+	 * @param SkinTemplate $skinTemplate
+	 * @param array[] &$links
 	 */
-	public static function onPageTabs( SkinTemplate &$skinTemplate, array &$links ) {
+	public static function onPageTabs( SkinTemplate $skinTemplate, array &$links ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$title = $skinTemplate->getRelevantTitle();
@@ -492,9 +492,9 @@ final class RepoHooks {
 	 * Reorder the groups for the special pages
 	 *
 	 * @param array &$groups
-	 * @param bool &$moveOther
+	 * @param bool $moveOther
 	 */
-	public static function onSpecialPageReorderPages( &$groups, &$moveOther ) {
+	public static function onSpecialPageReorderPages( &$groups, $moveOther ) {
 		$groups = array_merge( [ 'wikibaserepo' => null ], $groups );
 	}
 
@@ -503,10 +503,10 @@ final class RepoHooks {
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
 	 *
 	 * @param OutputPage $out
-	 * @param Skin $sk
-	 * @param array $bodyAttrs
+	 * @param Skin $skin
+	 * @param array &$bodyAttrs
 	 */
-	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
+	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $skin, array &$bodyAttrs ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$outputPageEntityIdReader = new OutputPageEntityIdReader(
 			$wikibaseRepo->getEntityContentFactory(),
@@ -527,7 +527,7 @@ final class RepoHooks {
 		// add another class with the ID of the item:
 		$bodyAttrs['class'] .= ' wb-' . $entityType . 'page-' . $entityId->getSerialization();
 
-		if ( $sk->getRequest()->getCheck( 'diff' ) ) {
+		if ( $skin->getRequest()->getCheck( 'diff' ) ) {
 			$bodyAttrs['class'] .= ' wb-diffpage';
 		}
 
@@ -594,20 +594,20 @@ final class RepoHooks {
 	 *
 	 * @todo highlight the Q## part of the entity link formatting and highlight label matches
 	 *
-	 * @param Title &$title
+	 * @param Title $title
 	 * @param string &$titleSnippet
 	 * @param SearchResult $result
 	 * @param string $terms
 	 * @param SpecialSearch $specialSearch
-	 * @param string[] &$query
+	 * @param string[] $query
 	 */
 	public static function onShowSearchHitTitle(
-		Title &$title,
+		Title $title,
 		&$titleSnippet,
 		SearchResult $result,
 		$terms,
 		SpecialSearch $specialSearch,
-		array &$query
+		array $query
 	) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
@@ -1014,12 +1014,12 @@ final class RepoHooks {
 	 *
 	 * @param ParserOutput $out
 	 * @param string &$text Text being transformed
-	 * @param array &$options Transformation options
+	 * @param array $options Transformation options
 	 */
 	public static function onParserOutputPostCacheTransform(
 		ParserOutput $out,
 		&$text,
-		array &$options
+		array $options
 	) {
 		$text = ToolbarEditSectionGenerator::enableSectionEditLinks(
 			$text,
