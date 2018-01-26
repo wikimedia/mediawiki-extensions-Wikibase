@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_c2d8a62b",
+        "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T17:00:04Z",
+      "side": 1,
+      "message": "I would test with 2 and 3 instead to simplify the test setup as much as possible.",
+      "range": {
+        "startLine": 97,
+        "startChar": 31,
+        "endLine": 97,
+        "endChar": 32
+      },
+      "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efcebec_e28a021c",
         "filename": "docs/options.wiki",
         "patchSetId": 4
@@ -30,6 +53,24 @@
       "writtenOn": "2018-01-26T16:36:29Z",
       "side": 1,
       "message": "The name could be more descriptiove. How about entityUsageModifierSimplificationThreashold?",
+      "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_a2dd9a19",
+        "filename": "docs/options.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-26T17:00:04Z",
+      "side": 1,
+      "message": "TBH I don\u0027t find this better. A \"simplification threshold\" really is not that much more than a \"limit\".",
+      "parentUuid": "4efcebec_e28a021c",
       "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
