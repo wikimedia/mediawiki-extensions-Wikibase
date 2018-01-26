@@ -398,11 +398,11 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageHistoryLineEnding
 	 *
 	 * @param HistoryPager $history
-	 * @param object &$row
+	 * @param object $row
 	 * @param string &$html
-	 * @param array &$classes
+	 * @param array $classes
 	 */
-	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$html, array &$classes ) {
+	public static function onPageHistoryLineEnding( HistoryPager $history, $row, &$html, array $classes ) {
 		// Note: This assumes that HistoryPager::getTitle returns a Title.
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
@@ -489,9 +489,9 @@ final class RepoHooks {
 	 * Reorder the groups for the special pages
 	 *
 	 * @param array &$groups
-	 * @param bool &$moveOther
+	 * @param bool $moveOther
 	 */
-	public static function onSpecialPageReorderPages( &$groups, &$moveOther ) {
+	public static function onSpecialPageReorderPages( &$groups, $moveOther ) {
 		$groups = array_merge( [ 'wikibaserepo' => null ], $groups );
 	}
 
@@ -979,12 +979,12 @@ final class RepoHooks {
 	 *
 	 * @param ParserOutput $out
 	 * @param string &$text Text being transformed
-	 * @param array &$options Transformation options
+	 * @param array $options Transformation options
 	 */
 	public static function onParserOutputPostCacheTransform(
 		ParserOutput $out,
 		&$text,
-		array &$options
+		array $options
 	) {
 		$text = ToolbarEditSectionGenerator::enableSectionEditLinks(
 			$text,
