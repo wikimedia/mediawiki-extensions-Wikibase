@@ -31,7 +31,7 @@ class WikibaseSettings {
 
 	/**
 	 * @note This runs the WikibaseEntityNamespaces hook to allow extensions to modify
-	 *       the 'entityNamepsaces' setting.
+	 *       the 'entityNamespaces' setting.
 	 *
 	 * @throws MWException
 	 *
