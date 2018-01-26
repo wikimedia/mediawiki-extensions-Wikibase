@@ -287,6 +287,7 @@
 	"special-itemswithoutsitelinks": "Аб’екты без спасылак на сайты",
 	"special-entitydata": "Зьвесткі аб’екта",
 	"wikibase-entitydata-not-found": "Аб’ект з ідэнтыфікатарам $1 ня знойдзены.",
+	"wikibase-entitydata-not-acceptable": "Адпаведны фармат ня знойдзены. MIME-тыпы, якія падтрымліваюцца: $1",
 	"wikibase-entitydata-bad-revision": "Немагчыма паказаць вэрсію $2 аб’екта $1.",
 	"wikibase-entitydata-bad-id": "Няслушны ідэнтыфікатар: $1.",
 	"wikibase-entitydata-unsupported-format": "Фармат зьвестак $1 гэтым інтэрфэйсам не падтрымліваецца.",

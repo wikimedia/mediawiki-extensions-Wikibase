@@ -533,6 +533,7 @@
 	"apihelp-wbsetaliases-param-language": "Die Sprache, für die die Aliasse festgelegt werden sollen",
 	"apihelp-wbsetaliases-example-1": "Legt die englischen Aliasse für das Objekt mit der Kennung <samp>Q1</samp> auf <var>Foo</var> und <var>Bar</var> fest",
 	"apihelp-wbsetclaim-description": "Erstellt oder aktualisiert eine ganze Aussage oder Behauptung.",
+	"apihelp-wbsetclaim-summary": "Erstellt oder aktualisiert eine ganze Aussage oder Behauptung.",
 	"apihelp-wbsetclaim-param-summary": "Zusammenfassung für die Bearbeitung. \nEs wird ein automatisch generierter Kommentar vorangestellt. Die maximale Länge des automatischen Kommentars und der Zusammenfassung darf 260 Zeichen nicht überschreiten. Alles über dieser Begrenzung wird abgeschnitten.",
 	"apihelp-wbsetclaim-param-baserevid": "Die numerische Kennung für die Version, auf der die Änderung basiert.\nSie wird verwendet, um Konflikte während des Speicherns zu erkennen.",
 	"apihelp-wbsetclaim-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „{{int:group-bot}}“ angehört.",
