@@ -172,7 +172,7 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NamespaceIsMovable
 	 *
 	 * @param int $ns Namespace ID
-	 * @param bool $movable
+	 * @param bool &$movable
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
@@ -368,7 +368,7 @@ final class RepoHooks {
 	 *       becomes more.
 	 *
 	 * @param User $user
-	 * @param array &$preferences
+	 * @param array[] &$preferences
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		$preferences['wb-acknowledgedcopyrightversion'] = [
@@ -546,7 +546,7 @@ final class RepoHooks {
 	 *
 	 * @param ApiBase $module The API module being called
 	 * @param User    $user   The user calling the API
-	 * @param array|string|null   $message Output-parameter holding for the message the call should fail with.
+	 * @param array|string|null &$message Output-parameter holding for the message the call should fail with.
 	 *                            This can be a message key or an array as expected by ApiBase::dieUsageMsg().
 	 *
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
@@ -625,7 +625,7 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleGetRestrictionTypes
 	 *
 	 * @param Title $title
-	 * @param array $types The types of protection available
+	 * @param string[] &$types The types of protection available
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
@@ -745,7 +745,7 @@ final class RepoHooks {
 	 *
 	 * @param string $contentModel
 	 * @param Title $title
-	 * @param bool $ok
+	 * @param bool &$ok
 	 *
 	 * @return bool
 	 */
@@ -831,7 +831,7 @@ final class RepoHooks {
 	/**
 	 * Adds DispatchStats info to the API
 	 *
-	 * @param array $data
+	 * @param array[] &$data
 	 */
 	public static function onAPIQuerySiteInfoStatisticsInfo( array &$data ) {
 		$stats = new DispatchStats();
@@ -885,7 +885,7 @@ final class RepoHooks {
 	 * in the toolbox.
 	 *
 	 * @param SkinTemplate $skinTemplate
-	 * @param array $navigationUrls
+	 * @param array[] &$navigationUrls
 	 */
 	public static function onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink(
 		SkinTemplate $skinTemplate,
@@ -910,7 +910,7 @@ final class RepoHooks {
 	 * Called in BaseTemplate::getToolbox(), allows us to add navigation URLs to the toolbox.
 	 *
 	 * @param BaseTemplate $baseTemplate
-	 * @param array $toolbox
+	 * @param array[] &$toolbox
 	 */
 	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		if ( !isset( $baseTemplate->data['nav_urls']['wb-concept-uri'] ) ) {
@@ -978,7 +978,7 @@ final class RepoHooks {
 	 * Adds the Wikis using the entity in action=info
 	 *
 	 * @param IContextSource $context
-	 * @param array $pageInfo
+	 * @param array[] &$pageInfo
 	 */
 	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
