@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_c27c26eb",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-26T17:31:49Z",
+      "side": 1,
+      "message": "I checked before putting it in here, this class has been instantiated 25 different places which is a technical debt on its own.\nHaving a factory for this sounds like a good idea to me but probably in another patch.",
+      "parentUuid": "4efcebec_a290fa4f",
+      "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efcebec_c2d8a62b",
         "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2018-01-26T17:00:04Z",
       "side": 1,
       "message": "I would test with 2 and 3 instead to simplify the test setup as much as possible.",
+      "range": {
+        "startLine": 97,
+        "startChar": 31,
+        "endLine": 97,
+        "endChar": 32
+      },
+      "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_4271360b",
+        "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-26T17:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efcebec_c2d8a62b",
       "range": {
         "startLine": 97,
         "startChar": 31,
