@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_a290fa4f",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-26T16:36:29Z",
+      "side": 1,
+      "message": "Initializing from global state is not nice at all.\n\nBut I see why... we\u0027d have to either have a factory for this, or hand this setting down in several places. Please check how  hard that would be. This should at least have a big TODO and a plan, it\u0027s new debt.",
+      "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_e28a021c",
+        "filename": "docs/options.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-01-26T16:36:29Z",
+      "side": 1,
+      "message": "The name could be more descriptiove. How about entityUsageModifierSimplificationThreashold?",
+      "revId": "d39a97eb4d1cbb96762cd6a4465d739557294886",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
