@@ -87,14 +87,14 @@ class MagicWordHookHandlers {
 	/**
 	 * Apply the magic word.
 	 *
-	 * @param Parser &$parser
-	 * @param array &$cache
-	 * @param string &$magicWordId
+	 * @param Parser $parser
+	 * @param array $cache
+	 * @param string $magicWordId
 	 * @param string &$ret
 	 *
 	 * @return bool
 	 */
-	protected function doParserGetVariableValueSwitch( Parser &$parser, &$cache, &$magicWordId, &$ret ) {
+	protected function doParserGetVariableValueSwitch( Parser $parser, $cache, $magicWordId, &$ret ) {
 		if ( $magicWordId === 'noexternallanglinks' ) {
 			NoLangLinkHandler::handle( $parser, '*' );
 		} elseif ( $magicWordId === 'wbreponame' ) {
