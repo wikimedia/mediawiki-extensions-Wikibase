@@ -147,4 +147,6 @@
 	"notification-page-connection-link": "{{notranslate}}\nThe name of the page where notified users can find more information and help.  Parameters:\n* $1 – repository name (eg. Wikidata)",
 	"unresolved-property-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where pages are placed automatically if they reference properties that cannot be resolved.\n\nSee also:\n* {{msg-mw|Unresolved-property-category-desc}}",
 	"unresolved-property-category-desc": "Unresolved property category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Unresolved-property-category}}"
+	"connected-redirect-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where redirect pages are placed automatically if they are connected to a data item.\n\nSee also:\n* {{msg-mw|Connected-redirect-category-desc}}",
+	"connected-redirect-category-desc": "Connected redirect category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Connected-redirect-category}}"
 }

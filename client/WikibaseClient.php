@@ -128,6 +128,7 @@ call_user_func( function() {
 
 	// Tracking categories
 	$wgTrackingCategories[] = 'unresolved-property-category';
+	$wgTrackingCategories[] = 'connected-redirect-category';
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] = '\Wikibase\ClientHooks::registerUnitTests';

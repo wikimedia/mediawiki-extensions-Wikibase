@@ -80,6 +80,9 @@ class ClientParserOutputDataUpdater {
 
 			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
 			$usageAccumulator->addSiteLinksUsage( $itemId );
+			if ( $title->isRedirect() ) {
+				$out->addTrackingCategory( 'connected-redirect-category', $title );
+			}
 		} else {
 			$out->unsetProperty( 'wikibase_item' );
 		}
