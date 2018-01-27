@@ -7,7 +7,8 @@
 			"Srdjan m",
 			"Сербијана",
 			"Obsuser",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Acamicamacaraca"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -138,7 +139,7 @@
 	"wikibase-itemdisambiguation-nothing-found": "Жао нам је, ниједна ставка са тим насловом није пронађена.",
 	"wikibase-itemdisambiguation-create": "Можете [$1 направити ставку].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Жао нам је, језички код који сте унели је непознат систему. Молимо да користите важећи код као што је „sr“.",
-	"special-newproperty": "Креирање новог својства",
+	"special-newproperty": "Прављење новог својства",
 	"wikibase-newproperty-fieldset": "Прављење новог својства",
 	"wikibase-newproperty-datatype": "Врста податка:",
 	"wikibase-newproperty-invalid-datatype": "Назначена је неважећа врста податка.",

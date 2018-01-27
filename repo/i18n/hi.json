@@ -12,7 +12,8 @@
 			"Upendradutt93",
 			"Sachinkatiyar",
 			"Ladsgroup",
-			"Rajatkatiyar10"
+			"Rajatkatiyar10",
+			"Jayprakash12345"
 		]
 	},
 	"wikibase-entity": "इकाई",
@@ -28,8 +29,8 @@
 	"wikibase-save-inprogress": "सहेजा जा रहा है…",
 	"wikibase-publish-inprogress": "प्रकाशित किया जा रहा है…",
 	"wikibase-remove-inprogress": "हटाया जा रहा है…",
-	"wikibase-statementlistview-add": "जोड़ें",
-	"wikibase-statementgrouplistview-add": "जोड़ें",
+	"wikibase-statementlistview-add": "मान जोड़े",
+	"wikibase-statementgrouplistview-add": "कथन जोड़ें",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "कॉन्फ़िगर करें",
 	"wikibase-entitytermsforlanguagelistview-description": "विवरण",
 	"wikibase-entitytermsforlanguagelistview-label": "लेबल",

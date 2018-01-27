@@ -290,6 +290,7 @@
 	"wikibase-entitydata-not-acceptable": "Адпаведны фармат ня знойдзены. MIME-тыпы, якія падтрымліваюцца: $1",
 	"wikibase-entitydata-bad-revision": "Немагчыма паказаць вэрсію $2 аб’екта $1.",
 	"wikibase-entitydata-bad-id": "Няслушны ідэнтыфікатар: $1.",
+	"wikibase-entitydata-rdf-disabled": "RDF-экспарт адключаны для гэтага тыпу элемэнту: $1.",
 	"wikibase-entitydata-unsupported-format": "Фармат зьвестак $1 гэтым інтэрфэйсам не падтрымліваецца.",
 	"wikibase-entitydata-title": "Зьвесткі аб’екта",
 	"special-mylanguagefallbackchain": "Мой парадак запасных моваў",

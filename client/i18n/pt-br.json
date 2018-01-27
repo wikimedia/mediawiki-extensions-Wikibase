@@ -42,7 +42,7 @@
 	"apihelp-query+pageterms-example-simple": "Obtenha todos os termos associados à página 'London', no idioma do usuário.",
 	"apihelp-query+pageterms-example-label-en": "Obtenha rótulos e alias associados à página 'London', em inglês.",
 	"apihelp-query+pageterms-example-item": "Obtenha rótulos e nomes alternativos do item Q84.",
-	"apihelp-query+pageterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description'. Se não for especificado, todos os tipos são devolvidos.",
+	"apihelp-query+pageterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description' ,cada um retornou uma matriz de cadeias com chave por seu tipo, e. {\"description\": [\"foo\"]}. Se não for especificado, todos os tipos são devolvidos.",
 	"apihelp-query+wikibase-description": "Obtenha informações sobre o cliente Wikibase e o repositório Wikibase associado.",
 	"apihelp-query+wikibase-summary": "Obtenha informações sobre o cliente Wikibase e o repositório Wikibase associado.",
 	"apihelp-query+wikibase-example": "Obter o caminho do URL e outras informações sobre o cliente e o repositório Wikibase.",
