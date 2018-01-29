@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_f73477f9",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-01-29T13:21:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efcebec_77b3474d",
+      "revId": "140fad64d028058c6f60f5e926400bc9ac436072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efcebec_57b0cb3e",
         "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
         "patchSetId": 5
