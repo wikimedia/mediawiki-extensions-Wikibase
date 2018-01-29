@@ -135,7 +135,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 		$unlocalizer = new MediaWikiNumberUnlocalizer( $lang );
 		$regex = $unlocalizer->getNumberRegex();
 
-		$hex = utf8ToHexSequence( $regex );
+		$hex = bin2hex( $regex );
 
 		$match = (bool)preg_match( "/^(?:$regex)$/u", $value, $m );
 		$this->assertTrue( $match, "Hex $value: $hex" );
