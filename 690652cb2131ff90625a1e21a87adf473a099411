@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_4dcf9e82",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-29T17:47:33Z",
+      "side": 1,
+      "message": "Perhaps also mention that not mentioning a usage type at all means no deduplication?",
+      "revId": "690652cb2131ff90625a1e21a87adf473a099411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_0dbd96d1",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-29T17:47:33Z",
+      "side": 1,
+      "message": "usage",
+      "range": {
+        "startLine": 133,
+        "startChar": 54,
+        "endLine": 133,
+        "endChar": 60
+      },
+      "revId": "690652cb2131ff90625a1e21a87adf473a099411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_adf582b7",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-29T17:47:33Z",
+      "side": 1,
+      "message": "aspect",
+      "range": {
+        "startLine": 133,
+        "startChar": 117,
+        "endLine": 133,
+        "endChar": 123
+      },
+      "revId": "690652cb2131ff90625a1e21a87adf473a099411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
