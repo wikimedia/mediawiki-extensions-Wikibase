@@ -13,7 +13,8 @@
 			"Sachinkatiyar",
 			"Ladsgroup",
 			"Rajatkatiyar10",
-			"Jayprakash12345"
+			"Jayprakash12345",
+			"Innocentbunny"
 		]
 	},
 	"wikibase-entity": "इकाई",
@@ -29,7 +30,7 @@
 	"wikibase-save-inprogress": "सहेजा जा रहा है…",
 	"wikibase-publish-inprogress": "प्रकाशित किया जा रहा है…",
 	"wikibase-remove-inprogress": "हटाया जा रहा है…",
-	"wikibase-statementlistview-add": "मान जोड़े",
+	"wikibase-statementlistview-add": "मान जोड़ें",
 	"wikibase-statementgrouplistview-add": "कथन जोड़ें",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "कॉन्फ़िगर करें",
 	"wikibase-entitytermsforlanguagelistview-description": "विवरण",

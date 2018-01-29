@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Srtxg"
+			"Srtxg",
+			"Reptilien.19831209BE1"
 		]
 	},
 	"wikibase-comment-update": "Cayet {{WBREPONAME}} candjî",
@@ -9,6 +10,7 @@
 	"wikibase-editlinks": "Candjî les loyéns",
 	"wikibase-editlinkstitle": "Candjî les loyéns eturlingaedje",
 	"wikibase-rc-hide-wikidata-hide": "Catchî",
+	"wikibase-rc-hide-wikidata-show": "Mostrer",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Candjî {{WBREPONAME}}"
 }

@@ -13,7 +13,8 @@
 			"MrLeopold",
 			"Hex",
 			"Mainframe98",
-			"Wiki13"
+			"Wiki13",
+			"Mar(c)"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -88,7 +89,7 @@
 	"datatypes-type-number": "Getal",
 	"datatypes-type-mediawiki-title": "MediaWiki-titel",
 	"datatypes-type-unknown": "Niet opgegeven",
-	"datatypes-type-boolean": "Booleaanse operator",
+	"datatypes-type-boolean": "Boolean",
 	"datatypes-type-globe-coordinate": "Geografische coördinaten",
 	"datatypes-type-time": "Tijdstip",
 	"datatypes-type-wikibase-item": "Item",
