@@ -80,8 +80,8 @@ class EditEntityFactory {
 	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
 	 *        of EditEntity was changed so that "late" conflicts that arise between edit conflict
 	 *        detection and database update are always detected, and result in the update to fail.
-	 *
 	 * @param bool $allowMasterConnection Can use a master connection or not
+	 *
 	 * @return EditEntity
 	 */
 	public function newEditEntity(

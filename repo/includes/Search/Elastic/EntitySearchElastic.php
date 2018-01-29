@@ -122,10 +122,10 @@ class EntitySearchElastic implements EntitySearchHelper {
 	/**
 	 * Produce ES query that matches the arguments.
 	 *
-	 * @param $text
-	 * @param $languageCode
-	 * @param $entityType
-	 * @param $strictLanguage
+	 * @param string $text
+	 * @param string $languageCode
+	 * @param string $entityType
+	 * @param bool $strictLanguage
 	 * @param SearchContext $context
 	 *
 	 * @return AbstractQuery

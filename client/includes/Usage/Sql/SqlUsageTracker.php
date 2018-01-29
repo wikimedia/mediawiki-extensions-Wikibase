@@ -52,6 +52,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityIdParser $idParser
 	 * @param SessionConsistentConnectionManager $connectionManager
 	 * @param string[] $disabledUsageAspects
+	 * @param int $entityUsagePerPageLimit
 	 */
 	public function __construct(
 		EntityIdParser $idParser,

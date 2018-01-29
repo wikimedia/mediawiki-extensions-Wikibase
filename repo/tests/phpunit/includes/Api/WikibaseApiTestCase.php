@@ -225,7 +225,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 *  in the flat structure.
 	 * @param bool $multiValue Whether the value in the flat structure shall be an indexed array of
 	 *  values instead of a single value.
-	 * @param array $into optional aggregator.
+	 * @param array &$into optional aggregator.
 	 *
 	 * @return array The flat version of $data.
 	 */

@@ -77,7 +77,7 @@ class InfoActionHookHandler {
 	 * Adds the Entity ID of the corresponding Wikidata item in action=info
 	 *
 	 * @param IContextSource $context
-	 * @param array $pageInfo
+	 * @param array[] &$pageInfo
 	 *
 	 * @return bool
 	 */
@@ -111,9 +111,9 @@ class InfoActionHookHandler {
 
 	/**
 	 * @param IContextSource $context
-	 * @param array $pageInfo
+	 * @param array[] $pageInfo
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function handle( IContextSource $context, array $pageInfo ) {
 		// Check if wikibase namespace is enabled

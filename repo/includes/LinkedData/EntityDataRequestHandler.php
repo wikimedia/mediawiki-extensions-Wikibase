@@ -110,11 +110,11 @@ class EntityDataRequestHandler {
 	 * @param EntityRedirectLookup $entityRedirectLookup
 	 * @param EntityDataSerializationService $serializationService
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param string[] $disabledRdfExportEntityTypes List of entity types
 	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useSquids do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
-	 * @param string[] $disabledRdfExportEntityTypes List of entity types
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,

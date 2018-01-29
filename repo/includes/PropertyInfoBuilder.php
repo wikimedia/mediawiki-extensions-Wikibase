@@ -26,7 +26,7 @@ class PropertyInfoBuilder {
 	private $propertyIdMap;
 
 	/**
-	 * @param PropertyId[] Maps PropertyInfoStore keys to PropertyIds
+	 * @param PropertyId[] $propertyIdMap Maps PropertyInfoStore keys to PropertyIds
 	 */
 	public function __construct( $propertyIdMap = [] ) {
 		Assert::parameterElementType( PropertyId::class, $propertyIdMap, '$propertyIdMap' );

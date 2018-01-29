@@ -36,7 +36,7 @@ class TermIndexSearchCriteria {
 	private $termText = null;
 
 	/**
-	 * @param array $fields, containing fields:
+	 * @param array $fields Associative array containing fields:
 	 *        'termType' => string|null, one of TermIndexEntry::TYPE_… constants,
 	 *        'termLanguage' => string|null
 	 *        'termText' => string|null
