@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\StorageException;
 
 /**
  * Actual implementations of various functions to access Wikibase functionality
- * through Scribunto. Functions in here can dependend on the target language.
+ * through Scribunto. Functions in here can depend on the target language.
  *
  * @license GPL-2.0+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
