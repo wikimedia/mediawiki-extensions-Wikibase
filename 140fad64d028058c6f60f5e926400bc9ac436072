@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_77b3474d",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-29T09:52:25Z",
+      "side": 1,
+      "message": "this is a map of _usage_ type to the limit, isn\u0027t?",
+      "revId": "140fad64d028058c6f60f5e926400bc9ac436072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_57b0cb3e",
+        "filename": "client/tests/phpunit/includes/Usage/UsageDeduplicatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-01-29T09:52:25Z",
+      "side": 1,
+      "message": "I think it would be more readable if the limiting was tested separately. I have hard time seeing which of test cases are of relevance here etc.\n\nI am not insisting on changing this, I might go and change it later.",
+      "revId": "140fad64d028058c6f60f5e926400bc9ac436072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
