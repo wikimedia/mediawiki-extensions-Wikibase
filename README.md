@@ -55,6 +55,7 @@ If you want to only have one or the other, then set `$wgEnableWikibaseRepo = fal
 
 Wikibase also depends on several JavaScript libraries. They are included in this repository as submodules.
 To fetch files of these libraries, you might need to run the following commands:
+
 ```bash
 git submodule update --init
 ```
