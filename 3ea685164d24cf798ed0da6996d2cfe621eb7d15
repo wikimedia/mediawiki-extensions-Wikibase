@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_d7333409",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-01-30T10:26:54Z",
+      "side": 1,
+      "message": "Minor typo here – but I don’t think that’s usually a reason to block a change, so feel free to merge anyways if you think it’s not worth fixing :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 42,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "3ea685164d24cf798ed0da6996d2cfe621eb7d15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
