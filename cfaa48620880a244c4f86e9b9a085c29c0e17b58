@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_17675c23",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-30T10:15:10Z",
+      "side": 1,
+      "message": "I think we should start with a higher number as the default here, e.g. 100. We can lower the number via configuration then.",
+      "range": {
+        "startLine": 257,
+        "startChar": 34,
+        "endLine": 257,
+        "endChar": 36
+      },
+      "revId": "cfaa48620880a244c4f86e9b9a085c29c0e17b58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_5771e4dc",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-30T10:15:10Z",
+      "side": 1,
+      "message": "I think this property should not hold the limits, but the entire $usageDeduplicator. So it is only instantiated once, and not every time getUsages() is called.\n\nBut this is nothing but refactoring and can be done any time later.",
+      "range": {
+        "startLine": 26,
+        "startChar": 9,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "cfaa48620880a244c4f86e9b9a085c29c0e17b58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_d785f4a0",
+        "filename": "client/includes/Usage/UsageDeduplicator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-01-30T10:15:10Z",
+      "side": 1,
+      "message": "Can you please add an assertion here?\n\n Assert::parameterElementType( \u0027integer\u0027, $usageModifierLimits, \u0027$usageModifierLimits\u0027 );\n\nOtherwise a misconfiguration (e.g. the configuration accidentally set to [ \u0027L\u0027 \u003d\u003e null ]) will make the comparison below do unwanted things. It will then start throwing *everything* away, which is not what I would expect.",
+      "revId": "cfaa48620880a244c4f86e9b9a085c29c0e17b58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
