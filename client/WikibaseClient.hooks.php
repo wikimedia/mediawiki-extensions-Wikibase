@@ -61,7 +61,7 @@ final class ClientHooks {
 	 * External library for Scribunto
 	 *
 	 * @param string $engine
-	 * @param array $extraLibraries
+	 * @param string[] &$extraLibraries
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
@@ -111,7 +111,7 @@ final class ClientHooks {
 	 * Add Wikibase item link in toolbox
 	 *
 	 * @param BaseTemplate $baseTemplate
-	 * @param array $toolbox
+	 * @param array[] &$toolbox
 	 */
 	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
