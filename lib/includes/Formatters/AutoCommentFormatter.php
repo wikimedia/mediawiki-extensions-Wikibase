@@ -108,7 +108,7 @@ class AutoCommentFormatter {
 	}
 
 	/**
-	 * Wrapps a comment by applying the appropriate directionality markers and pre and/or postfix
+	 * Wraps a comment by applying the appropriate directionality markers and pre and/or postfix
 	 * separators.
 	 *
 	 * @note This code should be kept in sync with what Linker::formatAutocomments does.
