@@ -81,12 +81,12 @@ class MessageSnakFormatter implements SnakFormatter {
 	 *
 	 * @see SnakFormatter::formatSnak
 	 *
-	 * @param Snak $snak Unused in this implementation.
+	 * @param Snak|null $snak Unused in this implementation.
 	 *
 	 * @throws RuntimeException If the requested output format is not known.
 	 * @return string Plain, wikitext or HTML
 	 */
-	public function formatSnak( Snak $snak ) {
+	public function formatSnak( Snak $snak = null ) {
 		if ( $this->format === SnakFormatter::FORMAT_PLAIN ) {
 			return $this->message->plain();
 		} elseif ( $this->format === SnakFormatter::FORMAT_WIKI ) {
