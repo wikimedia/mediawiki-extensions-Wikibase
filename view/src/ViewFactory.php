@@ -265,8 +265,8 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementSectionsView

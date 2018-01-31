@@ -136,6 +136,7 @@ class SetSiteLink extends ModifyEntity {
 
 	/**
 	 * @param array $preparedParameters
+	 * @param EntityDocument $entity
 	 *
 	 * @return ChangeOpSiteLink
 	 */

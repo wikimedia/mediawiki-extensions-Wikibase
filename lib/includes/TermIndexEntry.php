@@ -51,7 +51,7 @@ class TermIndexEntry {
 	private $entityId;
 
 	/**
-	 * @param array $fields, containing fields:
+	 * @param array $fields Associative array containing fields:
 	 *        'termType' => string, one of self::TYPE_* constants,
 	 *        'termLanguage' => string
 	 *        'termText' => string

@@ -295,6 +295,8 @@ abstract class ModifyEntity extends ApiBase {
 
 	/**
 	 * @param array $preparedParameters
+	 * @param EntityDocument $entity
+	 *
 	 * @return ChangeOp
 	 */
 	abstract protected function getChangeOp( array $preparedParameters, EntityDocument $entity );

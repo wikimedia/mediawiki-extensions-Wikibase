@@ -107,8 +107,8 @@ class LinkBeginHookHandler {
 	 *
 	 * @param DummyLinker $dummy Used to be a skin, but that eliminated.
 	 * @param Title $target
-	 * @param string $html
-	 * @param array $customAttribs
+	 * @param string &$html
+	 * @param array &$customAttribs
 	 * @param array $query
 	 * @param array $options
 	 * @param mixed $ret

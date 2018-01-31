@@ -37,7 +37,7 @@ class ConfigBuilder {
 	 * Build a new all-language analyzer configuration.
 	 * This adds analyzers, filters, etc. which are required for language-specific
 	 * indexing of Wikidata fields.
-	 * @param array[] $config Existing config which will be modified with new analyzers
+	 * @param array[] &$config Existing config which will be modified with new analyzers
 	 */
 	public function buildConfig( array &$config ) {
 		$stemmedLanguages = array_filter( $this->languageList, function ( $lang ) {

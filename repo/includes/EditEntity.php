@@ -178,6 +178,7 @@ class EditEntity {
 	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
 	 *        of this class changed so that "late" conflicts that arise between edit conflict
 	 *        detection and database update are always detected, and result in the update to fail.
+	 * @param bool $allowMasterConnection
 	 */
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
