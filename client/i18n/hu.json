@@ -92,5 +92,7 @@
 	"notification-link-text-view-item": "Elem {{GENDER:$1|megtekintése}}",
 	"notification-subject-page-connection": "A(z) {{SITENAME}} wikin {{GENDER:$3|létrehozott}} oldaladat {{GENDER:$2|összekapcsolták}} egy {{WBREPONAME}}-elemmel",
 	"unresolved-property-category": "Lapok feloldhatatlan tulajdonságokkal",
-	"unresolved-property-category-desc": "Ez a kategória azokat a lapokat listázza, amik olyan {{WBREPONAME}}-tulajdonságokat próbálnak lekérdezni, amiket sem az azonosítójuk, sem a címkéjük alapján nem sikerült megtalálni."
+	"unresolved-property-category-desc": "Ez a kategória azokat a lapokat listázza, amik olyan {{WBREPONAME}}-tulajdonságokat próbálnak lekérdezni, amiket sem az azonosítójuk, sem a címkéjük alapján nem sikerült megtalálni.",
+	"connected-redirect-category": "{{WBREPONAME}}-elemhez kapcsolt átirányítások",
+	"connected-redirect-category-desc": "A lap egy átirányítás, de össze van kapcsolva egy {{WBREPONAME}}-elemmel."
 }

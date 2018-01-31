@@ -29,6 +29,7 @@
 	"apihelp-query+wblistentityusage-example-url": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, inklusive der URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden und der Aspekt war Websitelink oder Aussage.",
 	"apihelp-query+pageterms-description": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Websitelink verknüpft sind. Auf der Objektseite selber werden die Begriffe direkt verwendet. Vorbehalt: Auf einem Repositoriumswiki funktioniert dieses Modul nur auf Objektseiten direkt, nicht auf Seiten, die mit einem Objekt über einen Websitelink verbunden sind. Dies kann sich in Zukunft ändern.",
+	"apihelp-query+pageterms-summary": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Link verknüpft sind. Auf der Objektseite selber werden die Begriffe direkt verwendet. Vorbehalt: Auf einem Repositoriumswiki funktioniert dieses Modul direkt auf Objektseiten, nicht auf Seiten, die mit einem Objekt über einen Link verbunden sind. Dies kann sich in Zukunft ändern.",
 	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",
 	"apihelp-query+pageterms-example-label-en": "Ruft Bezeichnungen und Aliasse im Zusammenhang mit der Seite „London“ in Englisch ab.",
 	"apihelp-query+pageterms-example-item": "Ruft Bezeichnungen und Aliasse des Objektes Q84 auf.",
@@ -128,5 +129,7 @@
 	"notification-link-text-view-item": "Objekt {{GENDER:$1|ansehen}}",
 	"notification-subject-page-connection": "Eine Seite auf {{SITENAME}}, die du {{GENDER:$3|erstellt}} hast, wurde mit einem {{WBREPONAME}}-Objekt {{GENDER:$2|verbunden}}.",
 	"unresolved-property-category": "Seiten mit ungelösten Eigenschaften",
-	"unresolved-property-category-desc": "Diese Kategorie listet Seiten auf, deren Referenz weder {{WBREPONAME}}-Eigenschaften finden konnte noch ihre Eigenschaftskennung oder die Bezeichnung."
+	"unresolved-property-category-desc": "Diese Kategorie listet Seiten auf, deren Referenz weder {{WBREPONAME}}-Eigenschaften finden konnte noch ihre Eigenschaftskennung oder die Bezeichnung.",
+	"connected-redirect-category": "Weiterleitungen, die mit einem {{WBREPONAME}}-Objekt verbunden sind",
+	"connected-redirect-category-desc": "Diese Kategorie listet Weiterleitungsseiten auf, die mit einem {{WBREPONAME}}-Objekt verbunden sind."
 }
