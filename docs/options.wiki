@@ -102,10 +102,10 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;repoSiteName: Site name of the connected repository wiki. Default is to assume client and repo are same wiki, so defaults to global $wgSitename setting.  If not the same wiki, defaults to 'Wikidata'. This setting can also be set to an i18n message key and will be handled as a message, if the message key exists so that the repo site name can be translatable.
 ;repoNamespaces: An array telling the client wiki which namespaces on the repository are used for which entity type. This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names. This information is used when constructing links to entities on the repository. Default (items in main namespace):
 <poem>
-          array(
+          [
               'item' => '',
               'property' => 'Property'
-          )
+          ]
 </poem>
 ;allowDataTransclusion: Switch to enable data transclusion features like the <code><nowiki>{{#property}}</nowiki></code> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <code>true</code>.
 ;allowArbitraryDataAccess: Switch to allow accessing arbitrary items from the <tt>wikibase</tt> Scribunto module and the via the parser functions (instead of just the item which is linked to the current page). Defaults to <code>true</code>.
@@ -130,3 +130,4 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;wikiPageUpdaterDbBatchSize: DEPRECATED. If set, acts as a default for purgeCacheBatchSize and recentChangesBatchSize.
 ;purgeCacheBatchSize: Number of pages to process in each HTMLCacheUpdateJob, a job used to send client wikis notifications about relevant changes to entities. Higher value mean fewer jobs but longer run-time per job. Defaults to wikiPageUpdaterDbBatchSize (for backwards compatibility) or MediaWiki core's $wgUpdateRowsPerJob (which currently defaults to 300).
 ;recentChangesBatchSize: Number of <code>recentchanges</code> table rows to create in each InjectRCRecordsJob, a job used to send client wikis notifications about relevant changes to entities. Higher value mean fewer jobs but longer run-time per job. Defaults to wikiPageUpdaterDbBatchSize (for backwards compatibility) or MediaWiki core's $wgUpdateRowsPerJob (which currently defaults to 300).
+;entityUsageModifierLimits: Associative array mapping usage type to the limit. If number of modifiers for the given aspect of an entity passes this limit, it turns all modifiers to a general entity usage in the given aspect. This is useful when with bad lua, a page in client uses all languages or statements in the repo causing the wbc_entity_usage become too big.
