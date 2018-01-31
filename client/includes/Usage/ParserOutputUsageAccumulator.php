@@ -21,16 +21,17 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	private $parserOutput;
 
 	/**
-	 * @var int[]
+	 * @var UsageDeduplicator
 	 */
-	private $usageModifierLimits;
+	private $usageDeduplicator;
 
 	public function __construct( ParserOutput $parserOutput ) {
 		$this->parserOutput = $parserOutput;
 		// TODO: Inject it properly
-		$this->usageModifierLimits = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
+		$usageModifierLimits = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
 			'entityUsageModifierLimits'
 		);
+		$this->usageDeduplicator = new UsageDeduplicator( $usageModifierLimits );
 	}
 
 	/**
@@ -53,16 +54,9 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	public function getUsages() {
 		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );
 		if ( $usages ) {
-			return ( new UsageDeduplicator( $this->usageModifierLimits ) )->deduplicate( $usages );
+			return $this->usageDeduplicator->deduplicate( $usages );
 		}
 		return [];
-	}
-
-	/**
-	 * @param int[] $usageModifierLimits associative array mapping usage type to the limit
-	 */
-	public function setUsageModifierLimits( array $usageModifierLimits ) {
-		$this->usageModifierLimits = $usageModifierLimits;
 	}
 
 }

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Usage;
 
+use Wikimedia\Assert\Assert;
+
 /**
  * This class de-duplicates entity usages for performance and storage reasons
  *
@@ -19,6 +21,8 @@ class UsageDeduplicator {
 	 * @param int[] $usageModifierLimits associative array mapping usage type to the limit
 	 */
 	public function __construct( array $usageModifierLimits ) {
+		Assert::parameterElementType( 'integer', $usageModifierLimits, '$usageModifierLimits' );
+
 		$this->usageModifierLimits = $usageModifierLimits;
 	}
 
