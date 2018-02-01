@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_2a75bc92",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-02-01T15:40:04Z",
+      "side": 1,
+      "message": "hmm, looking at ChangeOpAliases, could I am not sure I understand in which cases this message would be used?",
+      "revId": "c03b8e9e6dccd4579e8d2911821b1c53a742bbf7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
