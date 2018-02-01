@@ -146,7 +146,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	 * @param WikiPage $page
 	 * @param Revision $rev
 	 *
-	 * @return ParserOutput
+	 * @return ParserOutput|bool False if the revision was not found
 	 */
 	protected function getParserOutput( WikiPage $page, Revision $rev ) {
 		$parserOptions = $page->makeParserOptions( $this->getContext() );
@@ -156,10 +156,12 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
 
-		$parserOutput->setText( ToolbarEditSectionGenerator::enableSectionEditLinks(
-			$parserOutput->getRawText(),
-			false
-		) );
+		if ( $parserOutput ) {
+			$parserOutput->setText( ToolbarEditSectionGenerator::enableSectionEditLinks(
+				$parserOutput->getRawText(),
+				false
+			) );
+		}
 
 		return $parserOutput;
 	}
