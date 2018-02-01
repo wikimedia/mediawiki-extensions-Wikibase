@@ -148,5 +148,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|}}Afficher l'élément",
 	"notification-subject-page-connection": "Une page sur {{SITENAME}} que vous avez {{GENDER:$3|créée}} a été {{GENDER:$2|reliée}} à l’élément {{WBREPONAME}}",
 	"unresolved-property-category": "Pages avec des propriétés non résolues",
-	"unresolved-property-category-desc": "Cette catégorie répertorie les pages qui utilisent les propriétés {{WBREPONAME}} que l'on ne peut trouver ni par l'identifiant de propriété (ID), ni par l'étiquette."
+	"unresolved-property-category-desc": "Cette catégorie répertorie les pages qui utilisent les propriétés {{WBREPONAME}} que l'on ne peut trouver ni par l'identifiant de propriété (ID), ni par l'étiquette.",
+	"connected-redirect-category": "Redirections connectées à un élément {{WEBREPONAME}}",
+	"connected-redirect-category-desc": "Cette catégorie liste les pages de redirection qui sont connectées à un élément {{WBREPONAME}}."
 }

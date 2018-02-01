@@ -8,6 +8,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "متعلقہ ڈیٹا سے منسلک کریں",
+	"wikibase-after-page-delete": "[$1 {{WBREPONAME}} سے منسلک آئٹم] سے اس صفحہ کا ربط حذف ہونا ضروری ہے۔ ہماری درخواست ہے کہ آپ اسے ایک مرتبہ جانچ لیں۔",
 	"wikibase-comment-update": "{{WBREPONAME}} کا آئٹم تبدیل کیا گیا",
 	"wikibase-comment-sitelink-add": "زبان کا ربط شامل کر دیا گيا: $1",
 	"wikibase-comment-sitelink-change": "زبان کا ربط $1 سے $2 کی طرف بدل دیا گيا",
