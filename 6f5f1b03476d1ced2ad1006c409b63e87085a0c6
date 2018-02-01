@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efcebec_2aef7c83",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-02-01T17:39:24Z",
+      "side": 1,
+      "message": "I think I just migrated the profiles whose types are known by cirrus.\nHere this one is a bit special since it has no equivalent in cirrus.\nThinking about it twice I think it makes sense to migrate it aswell with a specific profile type so that we can reuse some of the logic to separate code vs config profiles + query param handling.\n\nI may revisit this if we manage to unify the query building process in cirrus.",
+      "parentUuid": "8ef26315_8d2fb8f2",
+      "revId": "6f5f1b03476d1ced2ad1006c409b63e87085a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_edf11c94",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-18T07:36:32Z",
       "side": 1,
       "message": "The constants in SearchProfileService start with CONTEXT_, shouldn\u0027t this one start with context too? Also, this context is only for prefix search, so maybe it should be CONTEXT_WIKIBASE_PREFIX or something like that?",
+      "revId": "6f5f1b03476d1ced2ad1006c409b63e87085a0c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_6a8b4421",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-02-01T17:39:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_edf11c94",
       "revId": "6f5f1b03476d1ced2ad1006c409b63e87085a0c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
