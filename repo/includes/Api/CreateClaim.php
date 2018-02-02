@@ -92,7 +92,7 @@ class CreateClaim extends ApiBase {
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 
-		/* @var ChangeOpMainSnak $changeOp */
+		/** @var ChangeOpMainSnak $changeOp */
 		$changeOp = $this->statementChangeOpFactory->newSetMainSnakOp( '', $snak );
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );

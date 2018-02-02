@@ -145,7 +145,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return DeferrableUpdate[]
 	 */
 	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
-		/* @var EntityHandler $handler */
+		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$updates = $handler->getEntityDeletionUpdates( $this, $page->getTitle() );
 
@@ -573,7 +573,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return self
 	 */
 	public function getPatchedCopy( EntityContentDiff $patch ) {
-		/* @var EntityHandler $handler */
+		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 
 		if ( $this->isRedirect() ) {
@@ -622,7 +622,7 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		if ( isset( $redirData['redirect'] ) ) {
-			/* @var EntityHandler $handler */
+			/** @var EntityHandler $handler */
 			$handler = $this->getContentHandler();
 
 			$entityId = $this->getEntityId();
@@ -652,7 +652,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return self
 	 */
 	public function copy() {
-		/* @var EntityHandler $handler */
+		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 
 		if ( $this->isRedirect() ) {
@@ -684,7 +684,7 @@ abstract class EntityContent extends AbstractContent {
 
 		if ( $status->isOK() ) {
 			if ( !$this->isRedirect() && !( $flags & self::EDIT_IGNORE_CONSTRAINTS ) ) {
-				/* @var EntityHandler $handler */
+				/** @var EntityHandler $handler */
 				$handler = $this->getContentHandler();
 				$validators = $handler->getOnSaveValidators( ( $flags & EDIT_NEW ) !== 0 );
 				$status = $this->applyValidators( $validators );
@@ -713,7 +713,7 @@ abstract class EntityContent extends AbstractContent {
 			}
 		}
 
-		/* @var EntityHandler $handler */
+		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$status = $handler->getValidationErrorLocalizer()->getResultStatus( $result );
 		return $status;

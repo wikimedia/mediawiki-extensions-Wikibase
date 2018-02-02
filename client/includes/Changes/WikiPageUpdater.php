@@ -160,7 +160,7 @@ class WikiPageUpdater implements PageUpdater {
 		$dummyTitle = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
 
 		$cause = [ 'causeAction' => $causeAction, 'causeAgent' => $causeAgent ];
-		/* @var Title[] $batch */
+		/** @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling HTMLCacheUpdateJob for "
 				. count( $batch ) . " titles" );
@@ -243,7 +243,7 @@ class WikiPageUpdater implements PageUpdater {
 		$titleBatches = array_chunk( $titles, $this->rcBatchSize );
 		$titleCount = 0;
 
-		/* @var Title[] $batch */
+		/** @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling InjectRCRecords for "
 				. count( $batch ) . " titles" );

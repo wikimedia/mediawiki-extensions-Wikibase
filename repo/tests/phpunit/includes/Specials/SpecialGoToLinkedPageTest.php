@@ -155,7 +155,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @dataProvider requestWithoutRedirectProvider
 	 */
 	public function testExecuteWithoutRedirect( $sub, $target, $site, $item, $error ) {
-		/* @var FauxResponse $response */
+		/** @var FauxResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub, null, self::DUMMY_LANGUAGE );
 
 		$this->assertEquals( $target, $response->getHeader( 'Location' ), 'Redirect' );
@@ -183,7 +183,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @dataProvider requestWithRedirectProvider
 	 */
 	public function testExecuteWithRedirect( $sub, $target ) {
-		/* @var FauxResponse $response */
+		/** @var FauxResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub );
 
 		$this->assertEquals( $target, $response->getHeader( 'Location' ), 'Redirect' );

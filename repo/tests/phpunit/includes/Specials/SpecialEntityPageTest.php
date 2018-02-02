@@ -82,7 +82,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	) {
 		$request = new FauxRequest( $requestParams );
 
-		/* @var FauxResponse $response */
+		/** @var FauxResponse $response */
 		list( , $response ) = $this->executeSpecialPage( $subPage, $request );
 
 		$this->assertSame( 301, $response->getStatusCode() );
@@ -105,7 +105,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	) {
 		$request = new FauxRequest( $requestParams );
 
-		/* @var FauxResponse $response */
+		/** @var FauxResponse $response */
 		list( , $response ) = $this->executeSpecialPage( $subPage, $request );
 
 		$this->assertSame( 301, $response->getStatusCode() );

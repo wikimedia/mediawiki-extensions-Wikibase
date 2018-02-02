@@ -159,7 +159,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$page = new WikiPage( $title );
 		$action = $this->createAction( 'view', $page );
 
-		/* @var \FauxResponse $response */
+		/** @var \FauxResponse $response */
 		$response = $action->getRequest()->response();
 		$response->header( "HTTP/1.1 200 OK" ); // reset
 

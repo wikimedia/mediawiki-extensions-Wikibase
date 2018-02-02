@@ -202,7 +202,7 @@ final class TestChanges {
 			$infoFilter = array_flip( $infoFilter );
 			$filteredChanges = [];
 
-			/* @var ChangeRow $change */
+			/** @var ChangeRow $change */
 			foreach ( $changes as $change ) {
 				if ( $change->hasField( 'info' ) ) {
 					$info = $change->getInfo();
