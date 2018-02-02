@@ -77,7 +77,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	public function testStatementsParserFunction_byPropertyLabel() {
 		$result = $this->parseWikitextToHtml( '{{#statements:LuaTestStringProperty}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -89,7 +89,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	public function testStatementsParserFunction_byPropertyId() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -101,7 +101,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	public function testStatementsParserFunction_arbitraryAccess() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32488}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -113,7 +113,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	public function testStatementsParserFunction_multipleValues() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32489}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -125,7 +125,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	public function testStatementsParserFunction_arbitraryAccessNotFound() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q1234567}}' );
 
-		$this->assertSame( '', $result->getText() );
+		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -139,7 +139,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertRegExp(
 			'/<p.*class=".*wikibase-error.*">.*P2147483645.*<\/p>/',
-			$result->getText()
+			$result->getText( [ 'unwrap' => true ] )
 		);
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
@@ -155,7 +155,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 			'A page not connected to an item'
 		);
 
-		$this->assertSame( '', $result->getText() );
+		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -172,12 +172,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
-
-		// FIXME: The conditional is a temporary workaround, remove when done! See T37247.
-		if ( is_callable( [ $popt, 'setWrapOutputClass' ] ) ) {
-			$popt->setWrapOutputClass( false );
-		}
-
 		$parser = new Parser( [ 'class' => 'Parser' ] );
 		return $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
 	}
