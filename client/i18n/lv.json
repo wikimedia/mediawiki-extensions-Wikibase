@@ -55,5 +55,6 @@
 	"wikibase-pageinfo-entity-usage-O": "Citi (apgalvojumi)",
 	"wikibase-otherprojects": "Citos projektos",
 	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem.",
-	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu"
+	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu",
+	"connected-redirect-category-desc": "Pieprasītie konti"
 }

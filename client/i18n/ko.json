@@ -96,5 +96,6 @@
 	"echo-category-title-wikibase-action": "{{WBREPONAME}}에 대한 {{PLURAL:$1|연결}}",
 	"echo-pref-tooltip-wikibase-action": "누군가가 {{GENDER:|내가 만든}} 문서를 {{WBREPONAME}} 항목에 연결할 때 내게 알립니다.",
 	"notification-header-page-connection": "<strong>$3</strong> 문서가 {{WBREPONAME}} 항목에 {{GENDER:$2|연결되었습니다}}.",
-	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}"
+	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}",
+	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다."
 }

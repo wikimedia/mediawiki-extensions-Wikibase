@@ -9,7 +9,8 @@
 			"Matěj Suchánek",
 			"DobyvatelCZ",
 			"Macofe",
-			"Cvanca"
+			"Cvanca",
+			"Ilimanaq29"
 		]
 	},
 	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Wikibase Client",
@@ -131,6 +132,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Přidán a změněn alias|Přidány a změněny aliasy}} pro [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Přidán alias|Přidány aliasy}} pro [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Odstraněn alias|Odstraněny aliasy}} pro [$2]",
+	"wikibase-entity-summary-wbsetaliases-update": "Aktualizovány [$2] {{PLURAL:$1|alias|aliasy|aliasů}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Změněn štítek, popis a aliasy pro [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Přidán odkaz na [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Přidán odkaz s odznakem pro [$2]",
@@ -146,9 +148,10 @@
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "{{PLURAL:$1|Nastavena hodnota tvrzení|Nastaveny hodnoty tvrzení}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Odstraněno tvrzení|Odstraněna tvrzení}}",
+	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Odstraněno tvrzení|Odstraněna tvrzení}}",
+	"wikibase-entity-summary-wbremoveclaims-update": "{{PLURAL:$1|Odstraněno|Odstraněna}} {{PLURAL:$1|tvrzení}}",
 	"wikibase-entity-summary-special-create-item": "Založena položka pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "Vytvořeno tvrzení",
-	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Odstraněno tvrzení|Odstraněna tvrzení}}",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Změněno tvrzení|Změněna tvrzení}}",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Vytvořeno tvrzení|Vytvořena tvrzení}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Změněno jedno vymezení|Změněna $4 vymezení|Změněno $4 vymezení}} u {{PLURAL:$3|tvrzení}}",

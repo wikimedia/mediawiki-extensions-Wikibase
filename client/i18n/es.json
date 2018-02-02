@@ -132,5 +132,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
 	"notification-subject-page-connection": "Una página en {{SITENAME}} que tu {{GENDER:$3|creaste}} se {{GENDER:$2|conectó}} un elemento de {{WBREPONAME}}",
 	"unresolved-property-category": "Páginas con propiedades no resueltas",
-	"unresolved-property-category-desc": "Esta categoría muestra páginas que referencian propiedades {{WBREPONAME}} que no  se pueden encontrar por su identificador de propiedad ni por su etiqueta."
+	"unresolved-property-category-desc": "Esta categoría muestra páginas que referencian propiedades {{WBREPONAME}} que no  se pueden encontrar por su identificador de propiedad ni por su etiqueta.",
+	"connected-redirect-category": "Redirecciones asociadas con un elemento de {{WBREPONAME}}",
+	"connected-redirect-category-desc": "Esta categoría enumera las páginas de redirección conectadas con algún elemento de {{WBREPONAME}}."
 }

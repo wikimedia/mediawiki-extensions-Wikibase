@@ -51,7 +51,7 @@
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
-	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
 	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
+	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}"
 }
