@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_b2281a34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-02T12:44:05Z",
+      "side": 1,
+      "message": "I found five occurrences in core includes/ and three more in core tests/phpunit/includes/. (There are also two in vendor/wikibase/data-model/ – do you intend to fix those?)",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "158365cf7d9f67ee3c54b190197dd980b8c70c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
