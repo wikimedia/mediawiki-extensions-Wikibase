@@ -121,7 +121,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	public function doTestValidRequest( ItemId $itemId, $guid, $value, $expectedSummary ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityLookup = $wikibaseRepo->getEntityLookup();
-		/** @var Item $obtainedEntity */
+		/** @var StatementListProvider $obtainedEntity */
 		$obtainedEntity = $entityLookup->getEntity( $itemId );
 		$statementCount = $obtainedEntity->getStatements()->count();
 
@@ -142,7 +142,6 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $value, $claim['mainsnak']['datavalue']['value'] );
 
-		/** @var StatementListProvider $obtainedEntity */
 		$obtainedEntity = $entityLookup->getEntity( $itemId );
 
 		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $itemId ) );
@@ -174,7 +173,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		if ( $guid === null ) {
-			/** @var Item $item */
+			/** @var StatementListProvider $item */
 			$statements = $item->getStatements()->toArray();
 			/** @var Statement $statement */
 			$statement = reset( $statements );
