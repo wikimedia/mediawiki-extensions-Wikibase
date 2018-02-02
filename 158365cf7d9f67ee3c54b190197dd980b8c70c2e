@@ -22,6 +22,30 @@
       "revId": "158365cf7d9f67ee3c54b190197dd980b8c70c2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_d28b261f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-02T13:12:31Z",
+      "side": 1,
+      "message": "There might be a few super-rare exceptions. Yes, I plan to fix our components as well when the need arises. Not critical at the moment as these are, again, just a few exceptions.",
+      "parentUuid": "4efcebec_b2281a34",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "158365cf7d9f67ee3c54b190197dd980b8c70c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
