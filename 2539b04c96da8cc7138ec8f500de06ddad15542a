@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efcebec_9206becf",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-02T12:38:01Z",
+      "side": 1,
+      "message": "Isn’t this one also redundant?",
+      "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_d2104607",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-02T12:38:01Z",
+      "side": 1,
+      "message": "I’m not sure why this change is an improvement. If we have an ItemId (and not just any EntityId), it only makes sense to expect an Item from the entity lookup, no?",
+      "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
