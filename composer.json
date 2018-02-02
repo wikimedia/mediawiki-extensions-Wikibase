@@ -51,7 +51,8 @@
 		"test": [
 			"composer validate --no-interaction",
 			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
-			"phpcs -p -s --ignore=.git"
+			"phpcs -p -s --ignore=.git",
+			"minus-x check ."
 		]
 	}
 }
