@@ -16,6 +16,24 @@
       "revId": "4ead67edd3f0fcfb3e7c360b9b53eb571d75010d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efcebec_f2958236",
+        "filename": "lib/includes/Store/Sql/EntityChangeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-02T13:17:19Z",
+      "side": 0,
+      "message": "The method must conform to the ChunkAccess::getRecordId interface.",
+      "parentUuid": "4efcebec_5266f6b7",
+      "revId": "4ead67edd3f0fcfb3e7c360b9b53eb571d75010d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
