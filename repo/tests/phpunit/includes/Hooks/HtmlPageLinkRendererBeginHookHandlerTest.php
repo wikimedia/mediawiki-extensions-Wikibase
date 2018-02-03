@@ -18,6 +18,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
@@ -464,12 +465,16 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 			LanguageWithConversion::factory( 'en' ),
 		] );
 
+		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			$this->getTermLookup(),
+			$languageFallback
+		);
+
 		return new HtmlPageLinkRendererBeginHookHandler(
 			$this->getEntityIdLookup(),
 			new ItemIdParser(),
-			$this->getTermLookup(),
+			$labelDescriptionLookup,
 			$this->getEntityNamespaceLookup(),
-			$languageFallback,
 			$this->getInterwikiLookup(),
 			$this->getEntityLinkFormatterFactory()
 		);

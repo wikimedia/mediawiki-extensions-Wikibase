@@ -14,10 +14,11 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
@@ -49,19 +50,14 @@ class HtmlPageLinkRendererBeginHookHandler {
 	private $entityIdParser;
 
 	/**
-	 * @var TermLookup
+	 * @var LabelDescriptionLookup
 	 */
-	private $termLookup;
+	private $labelDescriptionLookup;
 
 	/**
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
-
-	/**
-	 * @var LanguageFallbackChain
-	 */
-	private $languageFallback;
 
 	/**
 	 * @var InterwikiLookup
@@ -83,12 +79,16 @@ class HtmlPageLinkRendererBeginHookHandler {
 		$context = RequestContext::getMain();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
+		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			$wikibaseRepo->getTermLookup(),
+			$languageFallbackChain
+		);
+
 		return new self(
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getTermLookup(),
+			$labelDescriptionLookup,
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			$languageFallbackChain,
 			MediaWikiServices::getInstance()->getInterwikiLookup(),
 			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() )
 		);
@@ -137,27 +137,23 @@ class HtmlPageLinkRendererBeginHookHandler {
 	/**
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityIdParser $entityIdParser
-	 * @param TermLookup $termLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param LanguageFallbackChain $languageFallback
 	 * @param InterwikiLookup $interwikiLookup
 	 * @param EntityLinkFormatterFactory $linkFormatterFactory
-	 * @todo: Would be nicer to take a LabelDescriptionLookup instead of TermLookup + FallbackChain.
 	 */
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
 		EntityIdParser $entityIdParser,
-		TermLookup $termLookup,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
-		LanguageFallbackChain $languageFallback,
 		InterwikiLookup $interwikiLookup,
 		EntityLinkFormatterFactory $linkFormatterFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityIdParser = $entityIdParser;
-		$this->termLookup = $termLookup;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->languageFallback = $languageFallback;
 		$this->interwikiLookup = $interwikiLookup;
 		$this->linkFormatterFactory = $linkFormatterFactory;
 	}
@@ -233,21 +229,15 @@ class HtmlPageLinkRendererBeginHookHandler {
 			return true;
 		}
 
-		// @todo: this re-implements the logic in LanguageFallbackLabelDescriptionLookup,
-		// as that didn't support descriptions back when this code was written.
-
-		// NOTE: keep in sync with with fallback languages in LabelPrefetchHookHandler::newFromGlobalState
-
 		try {
-			$labels = $this->termLookup->getLabels( $entityId, $this->languageFallback->getFetchLanguageCodes() );
-			$descriptions = $this->termLookup->getDescriptions( $entityId, $this->languageFallback->getFetchLanguageCodes() );
-		} catch ( StorageException $ex ) {
-			// This shouldn't happen if $target->exists() return true!
+			$label = $this->labelDescriptionLookup->getLabel( $entityId );
+			$description = $this->labelDescriptionLookup->getDescription( $entityId );
+		} catch ( LabelDescriptionLookupException $ex ) {
 			return true;
 		}
 
-		$labelData = $this->getPreferredTerm( $labels );
-		$descriptionData = $this->getPreferredTerm( $descriptions );
+		$labelData = $this->termFallbackToTermData( $label );
+		$descriptionData = $this->termFallbackToTermData( $description );
 
 		$linkFormatter = $this->linkFormatterFactory->getLinkFormatter( $entityId->getEntityType() );
 		$text = new HtmlArmor( $linkFormatter->getHtml( $entityId, $labelData ) );
@@ -262,6 +252,21 @@ class HtmlPageLinkRendererBeginHookHandler {
 		$out->addModuleStyles( [ 'wikibase.common' ] );
 
 		return true;
+	}
+
+	/**
+	 * @param TermFallback|null $term
+	 * @return string[]|null
+	 */
+	private function termFallbackToTermData( TermFallback $term = null ) {
+		if ( $term ) {
+			return [
+				'value' => $term->getText(),
+				'language' => $term->getActualLanguageCode(),
+			];
+		}
+
+		return null;
 	}
 
 	/**
@@ -307,21 +312,6 @@ class HtmlPageLinkRendererBeginHookHandler {
 		}
 
 		return null;
-	}
-
-	/**
-	 * @param array $termsByLanguage
-	 *
-	 * @return string[]|null
-	 */
-	private function getPreferredTerm( array $termsByLanguage ) {
-		if ( empty( $termsByLanguage ) ) {
-			return null;
-		}
-
-		return $this->languageFallback->extractPreferredValueOrAny(
-			$termsByLanguage
-		);
 	}
 
 	/**
