@@ -19,7 +19,8 @@
 			"بدارين",
 			"Mr. Ibrahem",
 			"Mido",
-			"ديفيد"
+			"ديفيد",
+			"Azouz.anis"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
@@ -143,5 +144,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|اعرض}} العنصر",
 	"notification-subject-page-connection": "الصفحة على {{SITENAME}} التي قمت {{GENDER:$3|بإنشائها}} تم {{GENDER:$2|وصلها}} إلى عنصر {{WBREPONAME}}",
 	"unresolved-property-category": "الصفحات بخصائص غير محلولة",
-	"unresolved-property-category-desc": "هذا التصنيف يعرض الصفحات التي تستخدم خصائص {{WBREPONAME}} التي لا يمكن إيجادها بواسطة رقم الخاصية ولا بواسطة العلامة الخاصة بها."
+	"unresolved-property-category-desc": "هذا التصنيف يعرض الصفحات التي تستخدم خصائص {{WBREPONAME}} التي لا يمكن إيجادها بواسطة رقم الخاصية ولا بواسطة العلامة الخاصة بها.",
+	"connected-redirect-category": "عمليات إعادة التوجيه متصلة ب {{WBREPONAME}} بند",
+	"connected-redirect-category-desc": "تسرد هذه الفئة صفحات إعادة التوجيه المرتبطة ب {{WBREPONAME}} بند"
 }

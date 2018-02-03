@@ -18,7 +18,8 @@
 			"محمد أحمد عبد الفتاح",
 			"Antime",
 			"Claw eg",
-			"Mido"
+			"Mido",
+			"Azouz.anis"
 		]
 	},
 	"wikibase-lib-desc": "يمسك بالوظيفة المشتركة لامتدادات Wikibase و Wikibase Client",
@@ -140,6 +141,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "أضاف وأزال [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetaliases-add": "أضاف [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "أزال [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
+	"wikibase-entity-summary-wbsetaliases-update": "محدث [$2] {{PLURAL:$1|إسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "غير [$2] التسمية، والوصف والأسماء المستعارة",
 	"wikibase-entity-summary-wbsetsitelink-add": "إضافة وصلة إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "أضاف وصلة مع شارات إلى [$2]",
@@ -156,6 +158,7 @@
 	"wikibase-entity-summary-wbsetclaimvalue": "تحديد {{PLURAL:$1|قيمة ادعاء|قيم ادعائين|قيم ادعاءات}}",
 	"wikibase-entity-summary-wbremoveclaims": "إزالة {{PLURAL:$1|ادعاء|ادعائين|ادعاءات}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "إزالة {{PLURAL:$1|ادعاء|ادعائين|ادعاءات}}",
+	"wikibase-entity-summary-wbremoveclaims-update": "إزالة {{PLURAL:$1|ادعاء|ادعائين|ادعاءات}}",
 	"wikibase-entity-summary-special-create-item": "إنشاء عنصر [$2] مع {{PLURAL:$1|قيمة|قيمتين|قيم}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "إنشاء ادعاء",
 	"wikibase-entity-summary-wbsetclaim-update": "تعديل {{PLURAL:$3|ادعاء|ادعائين|ادعاءات}}",
