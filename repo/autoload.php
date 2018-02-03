@@ -178,6 +178,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\FingerprintSearchTextGenerator' => __DIR__ . '/includes/FingerprintSearchTextGenerator.php',
 	'Wikibase\\Repo\\GenericEventDispatcher' => __DIR__ . '/includes/GenericEventDispatcher.php',
 	'Wikibase\\Repo\\Hooks\\EditFilterHookRunner' => __DIR__ . '/includes/Hooks/EditFilterHookRunner.php',
+	'Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererBeginHookHandler' => __DIR__ . '/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\InfoActionHookHandler' => __DIR__ . '/includes/Hooks/InfoActionHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\ItemLinkFormatter' => __DIR__ . '/includes/Hooks/ItemLinkFormatter.php',
 	'Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandlers' => __DIR__ . '/includes/Hooks/LabelPrefetchHookHandlers.php',

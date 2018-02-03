@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Hooks;
 
 use Action;
-use DummyLinker;
+use HtmlArmor;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Linker\LinkTarget;
@@ -22,19 +22,20 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * Handler for the LinkBegin hook, used to change the default link text of links to wikibase Entity
- * pages to the respective entity's label. This is used mainly for listings on special pages or for
- * edit summaries, where it is useful to see pages listed by label rather than their entity ID.
+ * Handler for the HtmlPageLinkRendererBegin hook, used to change the default link text of links to
+ * wikibase Entity pages to the respective entity's label. This is used mainly for listings on
+ * special pages or for edit summaries, where it is useful to see pages listed by label rather than
+ * their entity ID.
  *
  * Label lookups are relatively expensive if done repeatedly for individual labels. If possible,
- * labels should be pre-loaded and buffered for later use via the LinkBegin hook.
+ * labels should be pre-loaded and buffered for later use via the HtmlPageLinkRendererBegin hook.
  *
  * @see LabelPrefetchHookHandlers
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class LinkBeginHookHandler {
+class HtmlPageLinkRendererBeginHookHandler {
 
 	/**
 	 * @var EntityIdLookup
@@ -62,14 +63,10 @@ class LinkBeginHookHandler {
 	private $languageFallback;
 
 	/**
-	 * @var LinkRenderer
-	 */
-	private $linkRenderer;
-
-	/**
 	 * @var InterwikiLookup
 	 */
 	private $interwikiLookup;
+
 	/**
 	 * @var ItemLinkFormatter
 	 */
@@ -91,7 +88,6 @@ class LinkBeginHookHandler {
 			$wikibaseRepo->getTermLookup(),
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$languageFallbackChain,
-			MediaWikiServices::getInstance()->getLinkRenderer(),
 			MediaWikiServices::getInstance()->getInterwikiLookup(),
 			new ItemLinkFormatter( $context->getLanguage() )
 		);
@@ -100,25 +96,23 @@ class LinkBeginHookHandler {
 	/**
 	 * Special page handling where we want to display meaningful link labels instead of just the items ID.
 	 * This is only handling special pages right now and gets disabled in normal pages.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/HtmlPageLinkRendererBegin
 	 *
-	 * @param DummyLinker $dummy Used to be a skin, but that eliminated.
-	 * @param Title $target
-	 * @param string &$html
-	 * @param array &$customAttribs
-	 * @param array $query
-	 * @param array $options
-	 * @param mixed $ret
+	 * @param LinkRenderer $linkRenderer
+	 * @param LinkTarget $target
+	 * @param HtmlArmor|string|null &$text
+	 * @param array &$extraAttribs
+	 * @param array &$query
+	 * @param string|null &$ret
 	 *
-	 * @return bool true
+	 * @return bool
 	 */
-	public static function onLinkBegin(
-		$dummy,
-		Title $target,
-		&$html,
-		array &$customAttribs,
+	public static function onHtmlPageLinkRendererBegin(
+		LinkRenderer $linkRenderer,
+		LinkTarget $target,
+		&$text,
+		array &$extraAttribs,
 		array &$query,
-		&$options,
 		&$ret
 	) {
 		$context = RequestContext::getMain();
@@ -129,9 +123,14 @@ class LinkBeginHookHandler {
 		}
 
 		$handler = self::newFromGlobalState();
-		$handler->doOnLinkBegin( $target, $html, $customAttribs, $context );
-
-		return true;
+		return $handler->doHtmlPageLinkRendererBegin(
+			$linkRenderer,
+			Title::newFromLinkTarget( $target ),
+			$text,
+			$extraAttribs,
+			$context,
+			$ret
+		);
 	}
 
 	/**
@@ -140,7 +139,6 @@ class LinkBeginHookHandler {
 	 * @param TermLookup $termLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LanguageFallbackChain $languageFallback
-	 * @param LinkRenderer $linkRenderer
 	 * @param InterwikiLookup $interwikiLookup
 	 * @param ItemLinkFormatter $linkFormatter
 	 * @todo: Would be nicer to take a LabelDescriptionLookup instead of TermLookup + FallbackChain.
@@ -151,7 +149,6 @@ class LinkBeginHookHandler {
 		TermLookup $termLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		LanguageFallbackChain $languageFallback,
-		LinkRenderer $linkRenderer,
 		InterwikiLookup $interwikiLookup,
 		ItemLinkFormatter $linkFormatter
 	) {
@@ -160,30 +157,40 @@ class LinkBeginHookHandler {
 		$this->termLookup = $termLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->languageFallback = $languageFallback;
-		$this->linkRenderer = $linkRenderer;
 		$this->interwikiLookup = $interwikiLookup;
 		$this->linkFormatter = $linkFormatter;
 	}
 
 	/**
+	 * @param LinkRenderer $linkRenderer
 	 * @param Title $target
-	 * @param string &$html
+	 * @param HtmlArmor|string|null &$text
 	 * @param array &$customAttribs
 	 * @param RequestContext $context
+	 * @param string|null &$html
+	 *
+	 * @return bool
 	 */
-	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, RequestContext $context ) {
+	public function doHtmlPageLinkRendererBegin(
+		LinkRenderer $linkRenderer,
+		Title $target,
+		&$text,
+		array &$customAttribs,
+		RequestContext $context,
+		&$html = null
+	) {
 		$out = $context->getOutput();
 		$outTitle = $out->getTitle();
 
 		// For good measure: Don't do anything in case the OutputPage has no Title set.
 		if ( !$outTitle ) {
-			return;
+			return true;
 		}
 
 		// if custom link text is given, there is no point in overwriting it
 		// but not if it is similar to the plain title
-		if ( $html !== null && $target->getFullText() !== $html ) {
-			return;
+		if ( $text !== null && $target->getFullText() !== HtmlArmor::getHtml( $text ) ) {
+			return true;
 		}
 
 		$foreignEntityId = $this->parseForeignEntityId( $target );
@@ -192,14 +199,14 @@ class LinkBeginHookHandler {
 		if ( $isLocal
 			&& !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
 		) {
-			return;
+			return true;
 		}
 
 		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
 		// Don't run this code when accessing it through the api (eg. for parsing) as the title is
 		// set to a special page dummy in api.php, see https://phabricator.wikimedia.org/T111346
 		if ( defined( 'MW_API' ) || !$this->shouldConvert( $outTitle, $context ) ) {
-			return;
+			return true;
 		}
 
 		$targetText = $target->getText();
@@ -210,19 +217,19 @@ class LinkBeginHookHandler {
 		// to indicate that the logged action occurred while creating an entity.
 		if ( SpecialPageFactory::exists( $targetText ) ) {
 			$target = Title::makeTitle( NS_SPECIAL, $targetText );
-			$html = $this->linkRenderer->makeKnownLink( $target );
-			return;
+			$html = $linkRenderer->makeKnownLink( $target );
+			return false;
 		}
 
 		if ( $isLocal && !$target->exists() ) {
 			// The link points to a non-existing item.
-			return;
+			return true;
 		}
 
 		$entityId = $foreignEntityId ?: $this->entityIdLookup->getEntityIdForTitle( $target );
 
 		if ( !$entityId ) {
-			return;
+			return true;
 		}
 
 		// @todo: this re-implements the logic in LanguageFallbackLabelDescriptionLookup,
@@ -235,13 +242,13 @@ class LinkBeginHookHandler {
 			$descriptions = $this->termLookup->getDescriptions( $entityId, $this->languageFallback->getFetchLanguageCodes() );
 		} catch ( StorageException $ex ) {
 			// This shouldn't happen if $target->exists() return true!
-			return;
+			return true;
 		}
 
 		$labelData = $this->getPreferredTerm( $labels );
 		$descriptionData = $this->getPreferredTerm( $descriptions );
 
-		$html = $this->linkFormatter->getHtml( $entityId, $labelData );
+		$text = new HtmlArmor( $this->linkFormatter->getHtml( $entityId, $labelData ) );
 
 		$customAttribs['title'] = $this->linkFormatter->getTitleAttribute(
 			$target,
@@ -251,6 +258,8 @@ class LinkBeginHookHandler {
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out->addModuleStyles( [ 'wikibase.common' ] );
+
+		return true;
 	}
 
 	/**

@@ -995,7 +995,7 @@ call_user_func( function() {
 	$wgHooks['ArticleDeleteComplete'][] = 'Wikibase\RepoHooks::onArticleDeleteComplete';
 	$wgHooks['ArticleUndelete'][] = 'Wikibase\RepoHooks::onArticleUndelete';
 	$wgHooks['GetPreferences'][] = 'Wikibase\RepoHooks::onGetPreferences';
-	$wgHooks['LinkBegin'][] = 'Wikibase\Repo\Hooks\LinkBeginHookHandler::onLinkBegin';
+	$wgHooks['HtmlPageLinkRendererBegin'][] = 'Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler::onHtmlPageLinkRendererBegin';
 	$wgHooks['ChangesListInitRows'][] = 'Wikibase\Repo\Hooks\LabelPrefetchHookHandlers::onChangesListInitRows';
 	$wgHooks['OutputPageBodyAttributes'][] = 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 	$wgHooks['FormatAutocomments'][] = 'Wikibase\RepoHooks::onFormat';

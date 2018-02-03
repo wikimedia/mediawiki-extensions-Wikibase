@@ -1105,7 +1105,7 @@ class WikibaseRepo {
 	 */
 	private function newSummaryFormatter() {
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
-		// the links created in LinkBeginHookHandler afterwards (the links must not
+		// the links created in HtmlPageLinkRendererBeginHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
 		$idFormatter = new EntityIdPlainLinkFormatter( $this->getEntityContentFactory() );
 
