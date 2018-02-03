@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Formats entity IDs by generating a wiki link to the corresponding page title
  * without display text. This link can contain a namespace like [[Property:P42]].
- * LinkBeginHookHandler requires this exact format.
+ * HtmlPageLinkRendererBeginHookHandler requires this exact format.
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
