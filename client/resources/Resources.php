@@ -23,7 +23,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.client.init' => $moduleTemplate + [
-			'position' => 'top',
 			'skinStyles' => [
 				'modern' => 'wikibase.client.css',
 				'monobook' => 'wikibase.client.css',
@@ -39,12 +38,10 @@ return call_user_func( function() {
 		],
 
 		'wikibase.client.page-move' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => 'wikibase.client.page-move.css'
 		],
 
 		'wikibase.client.changeslist.css' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => 'wikibase.client.changeslist.css'
 		],
 
