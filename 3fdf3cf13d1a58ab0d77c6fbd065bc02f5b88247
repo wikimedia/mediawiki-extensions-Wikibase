@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1f1eff_2af37f1c",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-02-04T16:11:28Z",
+      "side": 1,
+      "message": "Here is also a\n\n \u0027position\u0027 \u003d\u003e \u0027top\u0027",
+      "range": {
+        "startLine": 196,
+        "startChar": 3,
+        "endLine": 196,
+        "endChar": 23
+      },
+      "revId": "3fdf3cf13d1a58ab0d77c6fbd065bc02f5b88247",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
