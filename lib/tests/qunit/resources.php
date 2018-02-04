@@ -22,7 +22,6 @@ return call_user_func( function() {
 				'test.mediawiki.qunit.testrunner',
 				'wikibase',
 			],
-			'position' => 'top'
 		],
 
 		'wikibase.Site.tests' => $moduleBase + [

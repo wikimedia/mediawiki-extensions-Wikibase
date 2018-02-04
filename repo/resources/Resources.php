@@ -19,9 +19,7 @@ return call_user_func( function() {
 
 	$moduleTemplate = [
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . $remoteExtPath[0],
-		'position' => 'top' // reducing the time between DOM construction and JS initialisation
-	];
+		'remoteExtPath' => '..' . $remoteExtPath[0]
 
 	$modules = [
 
@@ -194,7 +192,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.special' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => [
 				'wikibase.special/wikibase.special.css'
 			],

@@ -85,7 +85,6 @@ return call_user_func( function() {
 		],
 
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => [
 				'themes/default/jquery.wikibase.toolbar.css',
 			],
@@ -102,7 +101,6 @@ return call_user_func( function() {
 		],
 
 		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => [
 				'themes/default/jquery.wikibase.toolbarbutton.css',
 			],
