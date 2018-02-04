@@ -20,7 +20,6 @@ return call_user_func( function() {
 
 		// common styles independent from JavaScript being enabled or disabled
 		'wikibase.common' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase.less',
@@ -40,7 +39,6 @@ return call_user_func( function() {
 		],
 
 		'wikibase.mobile' => $moduleTemplate + [
-			'position' => 'top',
 			'styles' => [
 				'wikibase.mobile.css'
 			],
