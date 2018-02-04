@@ -20,7 +20,6 @@ return call_user_func( function() {
 	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	];
 
 	$modules = [
