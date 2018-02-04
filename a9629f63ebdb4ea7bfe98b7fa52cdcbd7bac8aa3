@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a9ca6ef_62f2a553",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-02-04T15:51:46Z",
+      "side": 1,
+      "message": "Remove this comment.\n\nThe comment obtains the position \u003d\u003e top.",
+      "range": {
+        "startLine": 62,
+        "startChar": 46,
+        "endLine": 62,
+        "endChar": 114
+      },
+      "revId": "a9629f63ebdb4ea7bfe98b7fa52cdcbd7bac8aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c5db2da_1a9ed4f0",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-02-04T15:51:46Z",
+      "side": 1,
+      "message": "Remove this comment.\n\nThe comment obtains the position \u003d\u003e top.",
+      "range": {
+        "startLine": 935,
+        "startChar": 47,
+        "endLine": 935,
+        "endChar": 114
+      },
+      "revId": "a9629f63ebdb4ea7bfe98b7fa52cdcbd7bac8aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1638902d_1eb924fb",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-02-04T15:51:46Z",
+      "side": 1,
+      "message": "Remove this comment.\n\nThe comment obtains the position \u003d\u003e top.",
+      "range": {
+        "startLine": 22,
+        "startChar": 45,
+        "endLine": 22,
+        "endChar": 113
+      },
+      "revId": "a9629f63ebdb4ea7bfe98b7fa52cdcbd7bac8aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e816738_b4470ca9",
+        "filename": "view/init.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-02-04T15:51:46Z",
+      "side": 1,
+      "message": "Remove this comment.\n\nThe comment obtains the position \u003d\u003e top.",
+      "range": {
+        "startLine": 41,
+        "startChar": 45,
+        "endLine": 41,
+        "endChar": 113
+      },
+      "revId": "a9629f63ebdb4ea7bfe98b7fa52cdcbd7bac8aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
