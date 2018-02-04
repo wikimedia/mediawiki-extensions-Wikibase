@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"LeGuyanaisPure"
+		]
+	},
+	"tooltip-t-wikibase": "Lyen vèr éléman-an di référansyèl dé doné konèkté",
+	"wikibase-comment-update": "Éléman {{WBREPONAME}} modifyé",
+	"wikibase-dataitem": "Éléman {{WBREPONAME}}",
+	"wikibase-editlinks": "Modifyé lyen-yan",
+	"wikibase-editlinkstitle": "Modifyé lyen entèrlanng-yan",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Maské",
+	"wikibase-rc-hide-wikidata-show": "Afiché",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Modifikasyon di {{WBREPONAME}}.",
+	"wikibase-otherprojects": "Andan ròt projèt"
+}
