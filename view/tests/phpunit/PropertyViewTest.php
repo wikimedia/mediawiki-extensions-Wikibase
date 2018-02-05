@@ -69,7 +69,7 @@ class PropertyViewTest extends EntityViewTest {
 	 * @param array $entityData
 	 */
 	protected function prepareEntityData( EntityDocument $entity, array &$entityData ) {
-		/* @var Property $entity */
+		/** @var Property $entity */
 		$entityData['datatype'] = $entity->getDataTypeId();
 	}
 

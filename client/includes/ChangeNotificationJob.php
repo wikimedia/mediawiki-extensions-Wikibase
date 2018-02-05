@@ -99,7 +99,7 @@ class ChangeNotificationJob extends Job {
 		$changeHandler->handleChanges( $changes, $this->getRootJobParams() );
 
 		if ( $changes ) {
-			/* @var EntityChange $last */
+			/** @var EntityChange $last */
 			$n = count( $changes );
 			$last = end( $changes );
 

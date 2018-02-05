@@ -134,8 +134,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @dataProvider simpleEntityParameterProvider()
 	 */
 	public function testSaveEntity( EntityDocument $entity, EntityDocument $empty ) {
-		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
+		/**
+		 * @var WikiPageEntityStore $store
+		 * @var EntityRevisionLookup $lookup
+		 */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
@@ -231,7 +233,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testSaveRedirect() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
@@ -301,7 +303,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @dataProvider unsupportedRedirectProvider
 	 */
 	public function testSaveRedirectFailure( EntityRedirect $redirect ) {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
@@ -310,8 +312,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testUserWasLastToEdit() {
-		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
+		/**
+		 * @var WikiPageEntityStore $store
+		 * @var EntityRevisionLookup $lookup
+		 */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 
 		$anonUser = User::newFromId( 0 );
@@ -368,7 +372,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testUpdateWatchlist() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 
 		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
@@ -447,7 +451,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testSaveFlags() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 
 		$entity = $this->newEntity();
@@ -510,7 +514,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testRepeatedSave() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 
 		$entity = $this->newEntity();
@@ -562,8 +566,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @dataProvider simpleEntityParameterProvider
 	 */
 	public function testDeleteEntity( EntityDocument $entity ) {
-		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
+		/**
+		 * @var WikiPageEntityStore $store
+		 * @var EntityRevisionLookup $lookup
+		 */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
@@ -611,14 +617,14 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @covers \Wikibase\Repo\Store\WikiPageEntityStore::canCreateWithCustomId
 	 */
 	public function testCanCreateWithCustomId( EntityId $id, $expected ) {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 
 		$this->assertSame( $expected, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
 	}
 
 	public function testGetWikiPageForEntityFails_GivenForeignEntityId() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -626,7 +632,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testSaveEntityFails_GivenForeignEntityId() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -634,7 +640,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testDeleteEntityFails_GivenForeignEntityId() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -642,7 +648,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testUserWasLastToEditFails_GivenForeignEntityId() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -653,7 +659,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @dataProvider foreignRedirectServiceProvider
 	 */
 	public function testSaveRedirectFails_GivenForeignEntityId( EntityId $source, EntityId $target ) {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -672,7 +678,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testUpdateWatchListFails_GivenForeignEntityId() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -680,7 +686,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testIsWatchingFails_GivenForeignEntityId() {
-		/* @var WikiPageEntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->setExpectedException( InvalidArgumentException::class );
 

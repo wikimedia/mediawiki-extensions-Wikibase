@@ -225,7 +225,7 @@ class EntityChange extends DiffChange {
 		] );
 
 		if ( !$this->hasField( 'object_id' ) ) {
-			/* @var EntityContent $content */
+			/** @var EntityContent $content */
 			$content = $revision->getContent(); // potentially expensive!
 			$entityId = $content->getEntityId();
 

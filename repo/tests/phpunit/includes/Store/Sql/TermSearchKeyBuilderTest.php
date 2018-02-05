@@ -39,7 +39,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 	 * @dataProvider termProvider
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
-		/* @var TermSqlIndex $termCache */
+		/** @var TermSqlIndex $termCache */
 		$termCache = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 
 		// make term in item

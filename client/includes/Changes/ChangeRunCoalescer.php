@@ -126,8 +126,10 @@ class ChangeRunCoalescer {
 		// we now assume that we have a list if EntityChanges,
 		// all done by the same user on the same entity.
 
-		/* @var EntityChange $last */
-		/* @var EntityChange $first */
+		/**
+		 * @var EntityChange $last
+		 * @var EntityChange $first
+		 */
 		$last = end( $changes );
 		$first = reset( $changes );
 

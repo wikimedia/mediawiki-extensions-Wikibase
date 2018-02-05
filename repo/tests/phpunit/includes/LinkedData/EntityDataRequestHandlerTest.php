@@ -219,7 +219,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
 
-		/* @var FauxResponse $response */
+		/** @var FauxResponse $response */
 		$response = $request->response();
 
 		// construct handler
@@ -291,7 +291,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		array $headers,
 		$expectedRedirectSuffix
 	) {
-		/* @var FauxResponse $response */
+		/** @var FauxResponse $response */
 		$output = $this->makeOutputPage( [], $headers );
 		$request = $output->getRequest();
 

@@ -251,7 +251,7 @@ class ChangeDispatcher {
 			$this->trace( "Posted no changes to $siteID (nothing to do). "
 						. "Next ID is $continueAfter." );
 		} else {
-			/* @var Change $last */
+			/** @var Change $last */
 			$last = end( $changes );
 
 			$this->log( "Posted $n changes to $siteID, "
