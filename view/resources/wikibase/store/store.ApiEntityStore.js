@@ -13,7 +13,7 @@
 	 * @extends wikibase.store.EntityStore
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
-	 * @param {wikibase.serialization.EntityDeserializer} entityDeserializer;
+	 * @param {wikibase.serialization.EntityDeserializer} entityDeserializer
 	 * @param {string[]} languages
 	 */
 	MODULE.ApiEntityStore = util.inherit(

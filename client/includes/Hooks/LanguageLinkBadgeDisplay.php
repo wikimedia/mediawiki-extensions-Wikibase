@@ -18,7 +18,7 @@ use Wikibase\DataModel\SiteLink;
 class LanguageLinkBadgeDisplay {
 
 	/**
-	 * @var SidebarLinkBadgeDisplay;
+	 * @var SidebarLinkBadgeDisplay
 	 */
 	protected $sidebarLinkBadgeDisplay;
 
