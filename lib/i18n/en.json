@@ -121,7 +121,7 @@
 	"wikibase-entity-summary-wbsetdescription-add": "Added [$2] description",
 	"wikibase-entity-summary-wbsetdescription-set": "Changed [$2] description",
 	"wikibase-entity-summary-wbsetdescription-remove": "Removed [$2] description",
-	"wikibase-entity-summary-wbsetaliases-set": "Setting [$2] {{PLURAL:$1|alias|aliases}}",
+	"wikibase-entity-summary-wbsetaliases-set": "Set [$2] {{PLURAL:$1|alias|aliases}}",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Added and removed [$2] {{PLURAL:$1|alias|aliases}}",
 	"wikibase-entity-summary-wbsetaliases-add": "Added [$2] {{PLURAL:$1|alias|aliases}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "Removed [$2] {{PLURAL:$1|alias|aliases}}",
