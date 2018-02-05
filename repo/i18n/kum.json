@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arsenekoumyk"
+			"Arsenekoumyk",
+			"ArslanX"
 		]
 	},
 	"wikibase-edit": "тюзлемек",
 	"wikibase-add": "къошмакъ",
+	"wikibase-label-empty": "Ярлыгъы ёкъ",
 	"wikibase-description-empty": "Сыпатлав мекенлешмеген",
 	"wikibase-sitelinks-special": "Башгъа сайтлар",
 	"wikibase-statementview-rank-normal": "Нормал ранк"

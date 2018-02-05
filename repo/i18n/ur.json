@@ -107,6 +107,7 @@
 	"special-setdescription": "وضاحت درج کریں",
 	"wikibase-setdescription-label": "وضاحت:",
 	"wikibase-setdescription-submit": "وضاحت درج کریں",
+	"special-setlabeldescriptionaliases": "لیبل، وضاحت اور مستعار نام شامل کریں",
 	"wikibase-setlabeldescriptionaliases-label-label": "لیبل:",
 	"wikibase-setlabeldescriptionaliases-description-label": "وضاحت:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "مستعار نام:",

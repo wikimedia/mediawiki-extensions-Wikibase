@@ -301,6 +301,7 @@
 	"wikibase-entitypage-bad-id": "Няслушны ідэнтыфікатар: $1.",
 	"special-redirectentity": "Перанакіраваньне элемэнту",
 	"wikibase-redirectentity-success": "$1 быў перанакіраваны на $2.",
+	"wikibase-redirectentity-fromid": "Ідэнтыфікатар, зь якога перанакіроўваць",
 	"special-mylanguagefallbackchain": "Мой парадак запасных моваў",
 	"wikibase-mylanguagefallbackchain-text": "Ніжэй пералічаны парадак запасных моваў, на якіх адлюстроўваюцца меткі аб’ектаў.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можаце зьмяніць яго, дадаўшы <nowiki>{{#babel: }}</nowiki> на [[Special:MyPage|Вашую старонку {{GENDER:$1|ўдзельніка|ўдзельніцы}}]].",
