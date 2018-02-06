@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
+use ApiQueryInfo;
 use MWException;
 use Title;
 use User;
@@ -693,7 +694,6 @@ class EditEntityActionTest extends ActionTestCase {
 	}
 
 	public function provideUndoRevisions() {
-
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
 		return [
@@ -850,7 +850,7 @@ class EditEntityActionTest extends ActionTestCase {
 	/**
 	 * @dataProvider provideUndoPermissions
 	 */
-	public function testUndoPermissions( $action, $permissions, $error ) {
+	public function testUndoPermissions( $action, array $permissions, $error ) {
 		$handle = 'London';
 
 		self::resetTestItem( $handle );
@@ -886,6 +886,46 @@ class EditEntityActionTest extends ActionTestCase {
 		 return $entityNamespaceLookup->getEntityNamespace( 'item' );
 	}
 
+	/**
+	 * Changes wgUser and resets any associated state
+	 *
+	 * @param User $user the desired user
+	 */
+	private function setUser( User $user ) {
+		global $wgUser;
+
+		if ( $user->getName() !== $wgUser->getName() ) {
+			$wgUser = $user;
+			ApiQueryInfo::resetTokenCache();
+		}
+	}
+
+	/**
+	 * @param array[] $permissions
+	 */
+	private function applyPermissions( array $permissions ) {
+		global $wgGroupPermissions,
+			$wgUser;
+
+		if ( $permissions === [] ) {
+			return;
+		}
+
+		foreach ( $permissions as $group => $rights ) {
+			if ( !isset( $wgGroupPermissions[ $group ] ) ) {
+				$wgGroupPermissions[ $group ] = [];
+			}
+
+			$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
+		}
+
+		// reset rights cache
+		$wgUser->clearInstanceCache();
+	}
+
+	/**
+	 * @return string
+	 */
 	private function getEditToken() {
 		global $wgUser;
 
