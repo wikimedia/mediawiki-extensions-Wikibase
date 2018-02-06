@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1703f3de_83b38433",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-06T16:43:33Z",
+      "side": 1,
+      "message": "s/Setting/Set/ here as well.\n\nAnd I wonder if we need to document that this is past tense, not imperative? But we don’t do the same in …-wbsetreference or …-wbsetclaimvalue, so it’s probably fine.",
+      "range": {
+        "startLine": 135,
+        "startChar": 211,
+        "endLine": 135,
+        "endChar": 218
+      },
+      "revId": "a427fc5ff6820838098ca134d28a6aca6a3d3ee9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
