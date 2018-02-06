@@ -24,12 +24,8 @@ use WikiPage;
 /**
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
- *
- * @todo: move this to core (except the test item stuff of course)
  */
 class ActionTestCase extends \MediaWikiTestCase {
-
-	private $permissionsChanged = false;
 
 	protected function setUp() {
 		parent::setUp();
@@ -51,28 +47,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 
 	protected function tearDown() {
 		ApiQueryInfo::resetTokenCache();
+
 		parent::tearDown();
-	}
-
-	protected function applyPermissions( $permissions ) {
-		global $wgGroupPermissions, $wgUser;
-
-		if ( !$permissions ) {
-			return;
-		}
-
-		foreach ( $permissions as $group => $rights ) {
-			if ( !empty( $wgGroupPermissions[ $group ] ) ) {
-				$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
-			} else {
-				$wgGroupPermissions[ $group ] = $rights;
-			}
-		}
-
-		$this->permissionsChanged = true;
-
-		// reset rights cache
-		$wgUser->clearInstanceCache();
 	}
 
 	/**
@@ -133,22 +109,16 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @param string|Action $action The action to call, may be an action name or class name.
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
-	 * @param bool       $post posted?
-	 * @param array|null $session optional session data
+	 * @param bool $wasPosted
 	 *
 	 * @return Action
 	 */
-	protected function createAction( $action, WikiPage $page, array $params = null, $post = false, $session = null ) {
+	protected function createAction( $action, WikiPage $page, array $params = null, $wasPosted = false ) {
 		global $wgLang,
-			$wgRequest,
 			$wgUser;
 
 		if ( $params == null ) {
 			$params = [];
-		}
-
-		if ( $session == null ) {
-			$session = $wgRequest->getSessionArray();
 		}
 
 		if ( !( $page instanceof Article ) ) {
@@ -158,7 +128,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		}
 
 		$context = new RequestContext();
-		$context->setRequest( new FauxRequest( $params, $post, $session ) );
+		$context->setRequest( new FauxRequest( $params, $wasPosted ) );
 		$context->setUser( $wgUser );     // determined by setUser()
 		$context->setLanguage( $wgLang ); // qqx as per setUp()
 		$context->setTitle( $article->getTitle() );
@@ -187,15 +157,14 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @param string|Action $action The action to call; may be an action name or class name
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
-	 * @param bool       $post posted?
-	 * @param array|null $session optional session data
+	 * @param bool $wasPosted
 	 *
 	 * @return OutputPage
 	 * @throws MWException
 	 */
-	protected function callAction( $action, WikiPage $page, array $params = null, $post = false, array $session = null ) {
+	protected function callAction( $action, WikiPage $page, array $params, $wasPosted ) {
 		if ( is_string( $action ) ) {
-			$action = $this->createAction( $action, $page, $params, $post, $session );
+			$action = $this->createAction( $action, $page, $params, $wasPosted );
 
 			if ( !$action ) {
 				throw new MWException( "unknown action: $action" );
@@ -205,28 +174,6 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$action->show();
 
 		return $action->getContext()->getOutput();
-	}
-
-	/**
-	 * Changes wgUser and resets any associated state
-	 *
-	 * @param User $user the desired user
-	 * @param array|null $session optional session data
-	 */
-	protected function setUser( User $user, array $session = null ) {
-		global $wgRequest,
-			$wgUser;
-
-		if ( $user->getName() != $wgUser->getName() ) {
-			$wgUser = $user;
-			ApiQueryInfo::resetTokenCache();
-		}
-
-		if ( $session !== null ) {
-			foreach ( $session as $k => $v ) {
-				$wgRequest->setSessionData( $k, $v );
-			}
-		}
 	}
 
 	/**
@@ -240,7 +187,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$itemData = $this->makeTestItemData();
 
 		foreach ( $itemData as $handle => $revisions ) {
-			$item = $this->createTestContent( $handle, $revisions );
+			$item = $this->createTestContent( $revisions );
 			self::$testItems[$handle] = $item;
 		}
 	}
@@ -250,14 +197,13 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 *
 	 * @todo Provide this for all kinds of entities.
 	 *
-	 * @param string $handle
 	 * @param array $revisions List of EntityDocument or string. String values represent redirects.
 	 *
 	 * @return Item|EntityRedirect
 	 * @throws MWException
 	 * @throws RuntimeException
 	 */
-	private function createTestContent( $handle, array $revisions ) {
+	private function createTestContent( array $revisions ) {
 		global $wgUser;
 
 		/** @var EntityRevision $rev */
@@ -371,7 +317,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$itemData = $this->makeTestItemData();
 		$revisions = $itemData[ $handle ];
 
-		$item = $this->createTestContent( $handle, $revisions );
+		$item = $this->createTestContent( $revisions );
 		self::$testItems[ $handle ] = $item;
 	}
 
