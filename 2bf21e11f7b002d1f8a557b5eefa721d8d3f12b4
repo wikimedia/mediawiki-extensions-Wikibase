@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28e756e1_fbf9373c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-06T16:39:30Z",
+      "side": 1,
+      "message": "I’m not sure about this removal – we don’t use $tabindex, but if I understand the hook correctly, if we wanted to use it, it could only make sense if we used it with \u0026. So is it a good idea to remove it?",
+      "range": {
+        "startLine": 228,
+        "startChar": 76,
+        "endLine": 228,
+        "endChar": 85
+      },
+      "revId": "2bf21e11f7b002d1f8a557b5eefa721d8d3f12b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "276fddfb_56f60976",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-06T16:39:30Z",
+      "side": 1,
+      "message": "Same question here – if we wanted to modify the classes at some future point, we’d need to make this a reference again.",
+      "range": {
+        "startLine": 408,
+        "startChar": 92,
+        "endLine": 408,
+        "endChar": 100
+      },
+      "revId": "2bf21e11f7b002d1f8a557b5eefa721d8d3f12b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "420566df_9a863060",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-06T16:39:30Z",
+      "side": 1,
+      "message": "I’m also not sure if this is a case like the other ones I commented on… I can’t even figure out where this hook is triggered? I can’t find any references to SpecialPage_reorderPages or even just “reorder” in my MediaWiki clone?? very confused right now :D",
+      "range": {
+        "startLine": 497,
+        "startChar": 61,
+        "endLine": 497,
+        "endChar": 71
+      },
+      "revId": "2bf21e11f7b002d1f8a557b5eefa721d8d3f12b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e87c5853_b53c1407",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-06T16:39:30Z",
+      "side": 1,
+      "message": "This is also something the hook might want to modify, right?",
+      "range": {
+        "startLine": 610,
+        "startChar": 8,
+        "endLine": 610,
+        "endChar": 14
+      },
+      "revId": "2bf21e11f7b002d1f8a557b5eefa721d8d3f12b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6011e903_9deafe3c",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-06T16:39:30Z",
+      "side": 1,
+      "message": "I don’t understand this hook enough to say whether this is also a case like the above…",
+      "range": {
+        "startLine": 1022,
+        "startChar": 8,
+        "endLine": 1022,
+        "endChar": 16
+      },
+      "revId": "2bf21e11f7b002d1f8a557b5eefa721d8d3f12b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
