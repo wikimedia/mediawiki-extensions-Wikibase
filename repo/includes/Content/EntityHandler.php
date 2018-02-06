@@ -45,7 +45,6 @@ use WikiPage;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
 abstract class EntityHandler extends ContentHandler {
 
