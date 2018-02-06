@@ -159,6 +159,7 @@ use Wikibase\SummaryFormatter;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
+use Wikimedia\ObjectFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1898,7 +1899,7 @@ class WikibaseRepo {
 	/**
 	 * Creates configured unit storage. Configuration is in unitStorage parameter,
 	 * in getObjectFromSpec format.
-	 * @see \ObjectFactory::getObjectFromSpec
+	 * @see ObjectFactory::getObjectFromSpec
 	 * @return null|UnitStorage Configured unit storage, or null
 	 */
 	private function getUnitStorage() {
@@ -1906,7 +1907,7 @@ class WikibaseRepo {
 			return null;
 		}
 		$storage =
-			\ObjectFactory::getObjectFromSpec( $this->settings->getSetting( 'unitStorage' ) );
+			ObjectFactory::getObjectFromSpec( $this->settings->getSetting( 'unitStorage' ) );
 		if ( !( $storage instanceof UnitStorage ) ) {
 			wfWarn( "Bad unit storage configuration, ignoring" );
 			return null;
