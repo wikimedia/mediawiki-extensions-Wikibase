@@ -474,7 +474,7 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @see ContentHandler::canBeUsedOn();
+	 * @see ContentHandler::canBeUsedOn
 	 *
 	 * This implementation returns true if and only if the given title's namespace
 	 * is the same as the one returned by $this->getEntityNamespace().
