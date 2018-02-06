@@ -138,6 +138,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Se {{PLURAL:$1|añadió y eliminó un|añadieron y eliminaron}} alias de [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "Se añadió {{PLURAL:$1|el alias|los alias}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "Eliminando {{PLURAL:$1|el alias|los alias}} de [$2]",
+	"wikibase-entity-summary-wbsetaliases-update": "Se {{PLURAL:$1|actualizó [$2] alias|actualizaron [$2] alias}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Se cambia etiqueta, descripción y alias [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Se añadió un enlace a [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Se agregó un enlace con insignias a [$2]",
