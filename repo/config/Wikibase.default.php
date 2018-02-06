@@ -251,14 +251,16 @@ return [
 		// Default label scoring profile name, for prefix search
 		// See profiles in config/EntityPrefixSearchProfiles.php
 		'defaultPrefixProfile' => 'default',
+		// Custom prefix query builder profiles placeholder
 		// Field weight profiles. These profiles specify relative weights
 		// of label fields for different languages, e.g. exact language match
 		// vs. fallback language match.
-		// Loaded from config/EntityPrefixSearchProfiles.php by Wikibase.php
+		// (See config/EntityPrefixSearchProfiles.php)
 		'prefixSearchProfiles' => [],
 		// Default rescore profile for prefix search
 		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
-		// Rescore profiles, loaded by Wikibase.php
+		// Custom rescore profiles placeholder
+		// (See config/ElasticSearchRescoreProfiles.php)
 		'rescoreProfiles' => [],
 		// Type (de)boosts for rescoring functions
 		'statementBoost' => [],
