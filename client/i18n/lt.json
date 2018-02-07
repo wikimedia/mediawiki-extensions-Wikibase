@@ -7,7 +7,8 @@
 			"Salpusnis",
 			"Albertas",
 			"Zygimantus",
-			"Eitvys200"
+			"Eitvys200",
+			"Manvydasz"
 		]
 	},
 	"wikibase-client-desc": "Wikibase išplėtimo klientas",
@@ -72,6 +73,8 @@
 	"wikibase-rc-show-wikidata-pref": "Rodyti pakeitimus {{WBREPONAME}} naujausių keitimų puslapyje",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} keitimas",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} pakeitimai",
+	"wikibase-rcfilters-hide-wikibase-description": "Pakeitimai iš {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Atkreipkite dėmesį, kad gali praeiti keletas minučių kol keitimai bus matomi visose wiki.",
 	"wikibase-watchlist-show-changes-pref": "Rodyti keitimus {{WBREPONAME}} jūsų stebimųjų puslapių sąraše",
 	"wikibase-error-deserialize-error": "Nepavyko deserializuoti duomenų.",

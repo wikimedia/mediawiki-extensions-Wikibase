@@ -48,7 +48,7 @@
 	"apihelp-query+pageterms-example-simple": "الحصول على كل المصطلحات المرتبطة بالصفحة 'London'، بلغة المستخدم.",
 	"apihelp-query+pageterms-example-label-en": "الحصول على التسميات والاسماء المستعارة مع الصفحة 'London'، بالإنجليزية.",
 	"apihelp-query+pageterms-example-item": "الحصول على التسميات والأسماء المستعارة للعنصر Q84.",
-	"apihelp-query+pageterms-param-terms": "أنواع المصطلحات للحصول عليها، مثلا 'description'. إذا لم يتم التحديد، فسيتم إظهار كل الأنواع.",
+	"apihelp-query+pageterms-param-terms": "أنواع المصطلحات للحصول عليها، مثلا 'description'، كل منها يتم إرجاعها كمصفوفة من سلاسل الحروف مبوبة حسب النوع، مثلا {\"description\": [\"foo\"]}. إذا لم يتم التحديد، فسيتم إظهار كل الأنواع.",
 	"apihelp-query+wikibase-description": "الحصول على المعلومات حول عميل Wikibase ومستودع Wikibase المصاحب.",
 	"apihelp-query+wikibase-summary": "الحصول على معلومات حول عميل ويكي بيز ومستودع ويكي بيز المصاحب.",
 	"apihelp-query+wikibase-example": "الحصول على المسار والمعلومات الأخرى حول عميل ومستودع Wikibase.",

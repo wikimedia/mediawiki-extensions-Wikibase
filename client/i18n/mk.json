@@ -29,7 +29,7 @@
 	"apihelp-query+pageterms-example-simple": "Дај ги сите поими поврзани со страницата „Лондон“, во корисничката страница.",
 	"apihelp-query+pageterms-example-label-en": "Дај ги натписите и истозначниците поврзани со страницата „Лондон“, на македонски.",
 	"apihelp-query+pageterms-example-item": "Дај натписи и истозначници за предметот Q84.",
-	"apihelp-query+pageterms-param-terms": "Видови поими што треба да се дадат, на пр. „опис“. Ако не е укажано, тогаш ќе се дадат сите.",
+	"apihelp-query+pageterms-param-terms": "Кои видови поими да се добијат, на пр. „опис“; секои од нив се даваат како строј низи шифрирани по вид, како на пр. {„опис“: [\"foo\"]}. Ако не е укажано, ќе се дадат сите видови.",
 	"apihelp-query+wikibase-description": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата",
 	"apihelp-query+wikibase-summary": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата.",
 	"apihelp-query+wikibase-example": "Дај URL-патека и други информации за складиштето на Викибазата.",
@@ -125,5 +125,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Погл.}} предмет",
 	"notification-subject-page-connection": "Страница на {{SITENAME}} што ја имате {{GENDER:$3|создадено}} е {{GENDER:$2|поврзана}} со предмет на {{WBREPONAME}}",
 	"unresolved-property-category": "Страници со нерешени својства",
-	"unresolved-property-category-desc": "Во категоријава се наведени страници што се повикуваат на својства од {{WBREPONAME}} кои не можат да се пронајдат ниту по назнаката на својството, ниту по патписот."
+	"unresolved-property-category-desc": "Во категоријава се наведени страници што се повикуваат на својства од {{WBREPONAME}} кои не можат да се пронајдат ниту по назнаката на својството, ниту по патписот.",
+	"connected-redirect-category": "Пренасочувања поврзани со предметот {{WBREPONAME}}",
+	"connected-redirect-category-desc": "Во категоријава се наведени пренасочувачки страници поврзани со предметот {{WBREPONAME}}."
 }
