@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e4299260_f6138aeb",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-07T12:42:31Z",
+      "side": 1,
+      "message": "Indeed. Thanks.",
+      "parentUuid": "4efcebec_9206becf",
+      "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efcebec_d2104607",
         "filename": "repo/tests/phpunit/includes/Api/SetClaimValueTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-02-02T12:38:01Z",
       "side": 1,
       "message": "I’m not sure why this change is an improvement. If we have an ItemId (and not just any EntityId), it only makes sense to expect an Item from the entity lookup, no?",
+      "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59e6d065_dc90e131",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-07T12:42:31Z",
+      "side": 1,
+      "message": "I understand the concern and agree. I actually did asked myself the same question.\n\nHowever: Look, these are the tests for the wbsetclaimvalue API. The only thing this code should care about is the StatementListProvider interface. And it does: below this point, the code does not care any more if the provided EntityId belongs to an Item.\n\nWhich raises the question why there are so many Item and ItemId type hints here. The answer for many of the is convenience (there is no other interface that combines EntityDocument and StatementListProvider). I will upload a follow up and try to replace at least some of these mentions of items.",
+      "parentUuid": "4efcebec_d2104607",
       "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
