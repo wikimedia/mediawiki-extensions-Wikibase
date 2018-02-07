@@ -61,7 +61,6 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	public function getRecordId( $rec ) {
 		Assert::parameterType( EntityChange::class, $rec, '$rec' );
 
-		/* @var EntityChange $rec */
 		return $rec->getId();
 	}
 

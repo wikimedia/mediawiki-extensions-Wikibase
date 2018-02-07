@@ -223,7 +223,6 @@ abstract class EntityContent extends AbstractContent {
 	 */
 	protected function getParserOutputForRedirect( $generateHtml ) {
 		$output = new ParserOutput();
-		/** @var Title $target */
 		$target = $this->getRedirectTarget();
 
 		// Make sure to include the redirect link in pagelinks
@@ -322,7 +321,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Will fail if this EntityContent is not a redirect.
 	 */
 	protected function getRedirectText() {
-		/** @var Title $target */
 		$target = $this->getRedirectTarget();
 		return '#REDIRECT [[' . $target->getFullText() . ']]';
 	}
@@ -496,7 +494,6 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
-		/** @var Title $thisRedirect */
 		$thisRedirect = $this->getRedirectTarget();
 		$thatRedirect = $that->getRedirectTarget();
 
@@ -704,7 +701,6 @@ abstract class EntityContent extends AbstractContent {
 	private function applyValidators( array $validators ) {
 		$result = Result::newSuccess();
 
-		/* @var EntityValidator $validator */
 		foreach ( $validators as $validator ) {
 			$result = $validator->validateEntity( $this->getEntity() );
 

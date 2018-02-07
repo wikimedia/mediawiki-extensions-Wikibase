@@ -17,6 +17,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
@@ -384,7 +385,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		if ( $guid === null ) {
-			/** @var Item $item */
+			/** @var StatementListProvider $item */
 			$statements = $item->getStatements()->toArray();
 			/** @var Statement $statement */
 			$statement = reset( $statements );
