@@ -69,6 +69,24 @@
       "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3878a76b_01904c0e",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-07T12:50:14Z",
+      "side": 1,
+      "message": "I didn’t see that this is test code… in that case I’m more comfortable with this change :)\n\n\u003e there is no other interface that combines EntityDocument and StatementListProvider\n\nOff-topic, but why is there no such interface – or why doesn’t EntityDocument extend StatementListProvider? All the entity types I know – items, properties, lexemes, media info (even forms and senses, though I don’t know if they actually implement EntityDocument) – can contain statements, and by now I think we have plenty of code that assumes EntityLookup::getEntity() will return something that’s also a StatementListProvider.",
+      "parentUuid": "59e6d065_dc90e131",
+      "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
