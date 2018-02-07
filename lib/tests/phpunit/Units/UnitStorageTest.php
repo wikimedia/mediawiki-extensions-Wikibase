@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests\Units;
 
 use MediaWikiTestCase;
-use ObjectFactory;
 use Wikibase\Lib\Units\CSVUnitStorage;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitStorage;
+use Wikimedia\ObjectFactory;
 use RuntimeException;
 
 /**
