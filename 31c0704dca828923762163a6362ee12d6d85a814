@@ -34,6 +34,24 @@
       "revId": "31c0704dca828923762163a6362ee12d6d85a814",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5627a7f2_71eb7b54",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-07T14:05:54Z",
+      "side": 1,
+      "message": "Makes sense, thanks.",
+      "parentUuid": "6eee7837_77bcc30f",
+      "revId": "31c0704dca828923762163a6362ee12d6d85a814",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
