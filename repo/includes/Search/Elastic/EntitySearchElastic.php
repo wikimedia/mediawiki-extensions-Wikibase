@@ -39,7 +39,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 	/**
 	 * Name of the profile type used to build the elastic query
 	 */
-	const WIKIBASE_QUERY_BUILDER_PROFILE_TYPE = 'wikibase_prefix_querybuilder';
+	const WIKIBASE_PREFIX_QUERY_BUILDER = 'wikibase_prefix_querybuilder';
 
 	/**
 	 * Default query builder profile
@@ -156,7 +156,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$profile = $context->getConfig()
 			->getProfileService()
-			->loadProfile( self::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE, self::CONTEXT_WIKIBASE_PREFIX );
+			->loadProfile( self::WIKIBASE_PREFIX_QUERY_BUILDER, self::CONTEXT_WIKIBASE_PREFIX );
 
 		$dismax = new DisMax();
 		$dismax->setTieBreaker( 0 );

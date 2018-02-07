@@ -1102,7 +1102,7 @@ final class RepoHooks {
 			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreProfiles.php' );
 		$service->registerFileRepository( SearchProfileService::RESCORE_FUNCTION_CHAINS,
 			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreFunctions.php' );
-		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			'wikibase_base', __DIR__ . '/config/EntityPrefixSearchProfiles.php' );
 
 		// register custom profiles provided in the wikibase config
@@ -1113,7 +1113,7 @@ final class RepoHooks {
 				'wikibase_config', $entitySearchConfig['rescoreProfiles'] );
 		}
 		if ( isset( $entitySearchConfig['prefixSearchProfiles'] ) ) {
-			$service->registerArrayRepository( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+			$service->registerArrayRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 				'wikibase_config', $entitySearchConfig['prefixSearchProfiles'] );
 		}
 
@@ -1134,9 +1134,9 @@ final class RepoHooks {
 		if ( isset( $entitySearchConfig['defaultPrefixProfile'] ) ) {
 			$defaultQB = $entitySearchConfig['defaultPrefixProfile'];
 		}
-		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, $defaultQB );
-		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_QUERY_BUILDER_PROFILE_TYPE,
+		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusWBProfile' );
 	}
 
