@@ -87,6 +87,24 @@
       "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c09fb0fc_a097c00c",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-07T13:03:20Z",
+      "side": 1,
+      "message": "Good question. I\u0027m not aware of a specific reason except that we never actually needed to do this, and wanted to keep our interfaces as small as possible.",
+      "parentUuid": "3878a76b_01904c0e",
+      "revId": "2539b04c96da8cc7138ec8f500de06ddad15542a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
