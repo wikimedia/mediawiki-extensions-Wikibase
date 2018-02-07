@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f551b1d1_a5e5eb4b",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-07T13:12:07Z",
+      "side": 1,
+      "message": "Shouldn’t there be a doc comment mentioning StatementListProvider here, similar to L431 below?",
+      "revId": "31c0704dca828923762163a6362ee12d6d85a814",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
