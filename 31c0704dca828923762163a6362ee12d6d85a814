@@ -16,6 +16,24 @@
       "revId": "31c0704dca828923762163a6362ee12d6d85a814",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6eee7837_77bcc30f",
+        "filename": "repo/tests/phpunit/includes/Api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-07T14:00:04Z",
+      "side": 1,
+      "message": "Good catch. These two instances look similar, but there is an important difference: Below the result of the saveEntity call is used. It returns an unknown EntityDocument, which must be type hinted again.\n\nThis is not the case up here.",
+      "parentUuid": "f551b1d1_a5e5eb4b",
+      "revId": "31c0704dca828923762163a6362ee12d6d85a814",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
