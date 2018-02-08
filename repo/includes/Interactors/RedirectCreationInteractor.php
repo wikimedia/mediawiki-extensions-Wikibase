@@ -109,7 +109,7 @@ class RedirectCreationInteractor {
 		$this->checkCanCreateRedirect( $fromId );
 
 		$summary = new Summary( 'wbcreateredirect' );
-		$summary->addAutoCommentArgs( $fromId->getSerialization(), $toId->getSerialization() );
+		$summary->addAutoCommentArgs( $fromId, $toId );
 
 		$redirect = new EntityRedirect( $fromId, $toId );
 		$this->saveRedirect( $redirect, $summary, $bot );
