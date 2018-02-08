@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0996b337_2307eb1d",
+        "filename": "repo/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-08T13:37:41Z",
+      "side": 1,
+      "message": "Can we name this $html please, just as in the test? Naming this $ret confuses me, because a $ret variable is typically for an error code. But not here. If this is not null, it is the actual HTML of the actual link, and everything else (including \u0026$text) is ignored then.\n\nWhen looking further down I\u0027m even more confused: is this code supposed to set \u0026$text or \u0026$ret? Setting both would not make sense, I believe.\n\nCan we please remove all \u0026 here that are not needed? This way it would become much more obvious which of these variables are used in which way.",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 7
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c153e6a4_21aab9d3",
+        "filename": "repo/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-08T13:37:41Z",
+      "side": 1,
+      "message": "I see the new HtmlPageLinkRendererBegin hook stops calling other hook handlers (including the old LinkBegin) when false is returned. But I do not see why the code returns false here, but true everywhere else?",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 15
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18076bf7_87613205",
+        "filename": "repo/tests/phpunit/includes/Hooks/HtmlPageLinkRendererBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-08T13:37:41Z",
+      "side": 1,
+      "message": "Why bother with this if it is not used, and not needed? We can remove the \u0026 from \u0026$ret in the hook handlers method header. This allows us to pass null directly, without the need to assign null to an unused variable first.",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 15
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d24cb6db_2ac19875",
+        "filename": "repo/tests/phpunit/includes/Hooks/HtmlPageLinkRendererBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-08T13:37:41Z",
+      "side": 1,
+      "message": "I like the naming scheme \"newInstance\" for the one private function that creates an instance of the class under test. Just a suggestion, since the method name is changed anyway in this patch.",
+      "range": {
+        "startLine": 470,
+        "startChar": 18,
+        "endLine": 470,
+        "endChar": 32
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
