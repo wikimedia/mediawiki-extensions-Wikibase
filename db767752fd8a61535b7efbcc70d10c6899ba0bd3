@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e337e73_9a53863c",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-08T13:46:15Z",
+      "side": 1,
+      "message": "I believe this change is fine.\n\nIn both cases, the entity ID is passed as the first element in the getCommentArgs array, which will end as $3 in the message.\n\nFor reference, the two messages are:\n* \"Merged item from $3\"\n* \"Merged item into $3\"\n\nWith the old code, $3 was just the ID string, e.g. \"Q1\". With the new code, it is a wikitext snippet with an unlabeled link, e.g. \"[[Item:Q1]]\" or \"[[Q1]]\", depending on the namespace setup.\n\nEven if this link is not labeled (which can\u0027t work anyway for the entity that is not a redirect), having the link alone is an improvement.",
+      "revId": "db767752fd8a61535b7efbcc70d10c6899ba0bd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a5b5b1f_863e29b6",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-08T13:46:15Z",
+      "side": 1,
+      "message": "Same arguments as before.\n\nNote that the current message is \"Redirected to $4\", which means $fromId is unused.",
+      "revId": "db767752fd8a61535b7efbcc70d10c6899ba0bd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
