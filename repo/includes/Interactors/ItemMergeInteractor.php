@@ -239,7 +239,7 @@ class ItemMergeInteractor {
 	 * @return Summary
 	 */
 	private function getSummary( $direction, ItemId $getId, $customSummary = null ) {
-		$summary = new Summary( 'wbmergeitems', $direction, null, [ $getId->getSerialization() ] );
+		$summary = new Summary( 'wbmergeitems', $direction, null, [ $getId ] );
 		if ( $customSummary !== null ) {
 			$summary->setUserSummary( $customSummary );
 		}
