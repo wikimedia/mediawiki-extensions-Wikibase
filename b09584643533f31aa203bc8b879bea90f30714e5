@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a3fb6470_038da65a",
+        "filename": "repo/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-02-08T13:51:32Z",
+      "side": 1,
+      "message": "I\u0027m afraid we need all of those \u0026.\n\nAnd yes, $html is better. I don\u0027t know why I didn\u0027t keep it. (Perhaps because it was already used in the legacy handler.)",
+      "parentUuid": "0996b337_2307eb1d",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 7
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c153e6a4_21aab9d3",
         "filename": "repo/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-08T13:37:41Z",
       "side": 1,
       "message": "I see the new HtmlPageLinkRendererBegin hook stops calling other hook handlers (including the old LinkBegin) when false is returned. But I do not see why the code returns false here, but true everywhere else?",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 15
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bdd99e8_ec28f5a2",
+        "filename": "repo/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-02-08T13:51:32Z",
+      "side": 1,
+      "message": "If we returned false anywhere else, the linker would always return $ret (or $html, if you wish that). But in most cases we only change $text.",
+      "parentUuid": "c153e6a4_21aab9d3",
       "range": {
         "startLine": 223,
         "startChar": 10,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6bbbfe20_da909814",
+        "filename": "repo/tests/phpunit/includes/Hooks/HtmlPageLinkRendererBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-02-08T13:51:32Z",
+      "side": 1,
+      "message": "Replied to the other file.",
+      "parentUuid": "18076bf7_87613205",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 15
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d24cb6db_2ac19875",
         "filename": "repo/tests/phpunit/includes/Hooks/HtmlPageLinkRendererBeginHookHandlerTest.php",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2018-02-08T13:37:41Z",
       "side": 1,
       "message": "I like the naming scheme \"newInstance\" for the one private function that creates an instance of the class under test. Just a suggestion, since the method name is changed anyway in this patch.",
+      "range": {
+        "startLine": 470,
+        "startChar": 18,
+        "endLine": 470,
+        "endChar": 32
+      },
+      "revId": "b09584643533f31aa203bc8b879bea90f30714e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf55f4f4_74e6e5d6",
+        "filename": "repo/tests/phpunit/includes/Hooks/HtmlPageLinkRendererBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-02-08T13:51:32Z",
+      "side": 1,
+      "message": "Could be.",
+      "parentUuid": "d24cb6db_2ac19875",
       "range": {
         "startLine": 470,
         "startChar": 18,
