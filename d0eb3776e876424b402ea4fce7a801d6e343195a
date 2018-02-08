@@ -22,6 +22,30 @@
       "revId": "d0eb3776e876424b402ea4fce7a801d6e343195a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41a188fe_02914301",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 53
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-02-08T18:37:55Z",
+      "side": 1,
+      "message": "The context is used in the hook below. We could do profile context too but that sounds a bit more complex.",
+      "parentUuid": "f77f4885_974ad5fe",
+      "range": {
+        "startLine": 1126,
+        "startChar": 24,
+        "endLine": 1126,
+        "endChar": 49
+      },
+      "revId": "d0eb3776e876424b402ea4fce7a801d6e343195a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
