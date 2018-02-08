@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f77f4885_974ad5fe",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 53
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-02-08T10:23:36Z",
+      "side": 1,
+      "message": "We\u0027ll never really use this context (this is probably why you needed to add a new hook).\nBecause we run through the Searcher we maybe don\u0027t have the opportunity to customize the CONTEXT prior to Searcher::buildFullTextSearch being called.\n\nThe other solution you mentioned in the cirrus patch would be:\n- find a way to customize the ProfileContext of Searcher::$context being used: on every Searcher entry points (searchText, prefixSearch) we\u0027d call a hook to override the profile context, wikibase could implement this hook:\n  - onCirrusSearchProfileContext( \u0026$context, array $namespaces ) {\n       if ( $context \u003d\u003d\u003d CONTEXT_DEFAULT \u0026\u0026 [namespaces check] ) { // means fulltext\n            $context \u003d CONTEXT_WIKIBASE_FULLTEXT;\n       }\n    }\n\nnot sure what best, hooking the FTBuilder will work but it feels we short cut profile selection.",
+      "range": {
+        "startLine": 1126,
+        "startChar": 24,
+        "endLine": 1126,
+        "endChar": 49
+      },
+      "revId": "d0eb3776e876424b402ea4fce7a801d6e343195a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
