@@ -31,7 +31,7 @@
 	"apihelp-query+pageterms-example-simple": "Algama tolos términos asociaos cola páxina 'London', na llingua del usuariu.",
 	"apihelp-query+pageterms-example-label-en": "Algama les etiquetes y alcuños asociaos cola páxina 'London', n'inglés.",
 	"apihelp-query+pageterms-example-item": "Recibir les etiquetes y alcuños del elementu Q84.",
-	"apihelp-query+pageterms-param-terms": "Los tipos de términos a algamar; p.ex., \"description\". Si nun s'especifica, devuélvense tolos tipos.",
+	"apihelp-query+pageterms-param-terms": "Los tipos de términos a algamar; p.ex., \"description\", caún d'ellos devueltu como una matriz de cadenes con claves según el so tipu; p. ex., {\"description\": [\"foo\"]}. Si nun s'especifica, devuélvense tolos tipos.",
 	"apihelp-query+wikibase-description": "Algamar información sobro'l cliente de Wikibase ya'l repositoriu de Wikibase asociáu.",
 	"apihelp-query+wikibase-summary": "Algamar información sobro'l cliente de Wikibase ya'l repositoriu de Wikibase asociáu.",
 	"apihelp-query+wikibase-example": "Algamar el camín URL y otra información sobro'l cliente ya'l repositoriu de Wikibase.",
@@ -127,5 +127,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} l'elementu",
 	"notification-subject-page-connection": "Una páxina de {{SITENAME}} que {{GENDER:$3|creasti}} {{GENDER:$2|coneutóse}} con un elementu de {{WBREPONAME}}",
 	"unresolved-property-category": "Páxines con propiedaes sin resolver",
-	"unresolved-property-category-desc": "Esta categoría amuesa páxines que referencien propiedaes {{WBREPONAME}} que nun pueden alcontrase nin pol identificador de propiedá nin pola etiqueta."
+	"unresolved-property-category-desc": "Esta categoría amuesa páxines que referencien propiedaes {{WBREPONAME}} que nun pueden alcontrase nin pol identificador de propiedá nin pola etiqueta.",
+	"connected-redirect-category": "Redireiciones coneutaes con un elementu de {{WBREPONAME}}",
+	"connected-redirect-category-desc": "Esta categoría llista les páxines de redireición que tán conectaes con un elementu de {{WBREPONAME}}."
 }

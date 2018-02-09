@@ -21,6 +21,7 @@
 	"wikibase-entity-query": "upit",
 	"wikibase-edit": "uredi",
 	"wikibase-save": "spremi",
+	"wikibase-publish": "objavi",
 	"wikibase-cancel": "odustani",
 	"wikibase-add": "dodaj",
 	"wikibase-addqualifier": "dodaj atribut",

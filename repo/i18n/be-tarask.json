@@ -307,6 +307,7 @@
 	"special-mylanguagefallbackchain": "Мой парадак запасных моваў",
 	"wikibase-mylanguagefallbackchain-text": "Ніжэй пералічаны парадак запасных моваў, на якіх адлюстроўваюцца меткі аб’ектаў.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можаце зьмяніць яго, дадаўшы <nowiki>{{#babel: }}</nowiki> на [[Special:MyPage|Вашую старонку {{GENDER:$1|ўдзельніка|ўдзельніцы}}]].",
+	"wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, ператворана з $3 — $4",
 	"wikibase-restoreold": "аднавіць",
 	"wikibase-no-direct-editing": "Простае рэдагаваньне ў прасторы назваў «$1» адключанае",
 	"wikibase-noentity-createone": "Вы можаце таксама [[$1|стварыць яго]].",

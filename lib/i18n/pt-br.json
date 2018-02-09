@@ -131,7 +131,7 @@
 	"wikibase-entity-summary-wbsetdescription-add": "Adicionada a descrição em $2",
 	"wikibase-entity-summary-wbsetdescription-set": "Alterada a descrição [$2]",
 	"wikibase-entity-summary-wbsetdescription-remove": "Removida a descrição [$2]",
-	"wikibase-entity-summary-wbsetaliases-set": "Configurando [$2] {{PLURAL:$1|nome alternativo|nomes alternativos}}",
+	"wikibase-entity-summary-wbsetaliases-set": "Definiu {{PLURAL:$1|nome alternativo|nomes alternativos}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Nome alternativo adicionado e removido [$2]|Nomes alternativos adicionados e removidos [$2]}}",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Nome alternativo adicionado [$2]|Nomes alternativos adicionados [$2]}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Nome alternativo removido [$2]|Nomes alternativos removidos [$2]}}",
