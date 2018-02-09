@@ -352,7 +352,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 
 		$toRevId = $this->mockRepository->getLatestRevisionId( $toId );
 		$this->testHelper->assertRevisionSummary(
-			'@^/\* *wbmergeitems-from:0\|\|\[\[Item:Q1\]\] *\*/ *CustomSummary$@',
+			'@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@',
 			$toRevId,
 			'summary for target item'
 		);
