@@ -77,6 +77,9 @@ class ChangeOps implements ChangeOp {
 			return;
 		} else {
 			foreach ( $this->changeOps as $changeOp ) {
+				// The individual ChangeOps are intentionally not allowed to update the summary
+				// here, as this loop cannot know how to combine summaries like "removed A" and
+				// "added B" to a still meaningful summary. "Updated A, B" would be wrong.
 				$changeOp->apply( $entity, null );
 			}
 			if ( $summary ) {

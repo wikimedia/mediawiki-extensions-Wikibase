@@ -22,7 +22,7 @@ interface FormatableSummary {
 	 *
 	 * Parameters of the message will be:
 	 * - $1: Number of auto-summary arguments (@see getAutoSummaryArgs ) to be used for
-	 *   {{PLURAL:$1|…|…}} support in the message. Note that the auto-summary arguments themselve
+	 *   {{PLURAL:$1|…|…}} support in the message. Note that the auto-summary arguments themselves
 	 *   are not passed as parameters to the message, but appended.
 	 * - $2: Language code of the edited content, or empty if not applicable
 	 *   (@see getLanguageCode ).
