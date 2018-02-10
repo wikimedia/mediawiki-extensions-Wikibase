@@ -45,13 +45,22 @@
 	"datatypes-type-time": "Момент във времето",
 	"datatypes-type-wikibase-item": "Обект",
 	"datatypes-type-commonsMedia": "Файл от Общомедия",
+	"wikibase-entity-summary-wbsetitem": "Създаване на нов обект",
 	"wikibase-entity-summary-wbcreateredirect": "Пренасочване към $4",
+	"wikibase-entity-summary-wbsetlabel-set": "Променен [$2] етикет",
+	"wikibase-entity-summary-wbsetdescription-remove": "Премахване на [$2] описание",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Променен [$2] етикет, описание и синоними",
 	"wikibase-entity-summary-wbsetsitelink-add": "Добавена връзка към [$2]",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Премахната връзка към [$2]",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
-	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}"
+	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}",
+	"wikibase-entity-summary-clientsitelink-update": "Страницата е преместена от [$3] на [$4]",
+	"wikibase-entity-summary-wbmergeitems-to": "Сливане на обекта с $3",
+	"wikibase-item-summary-wbeditentity": "Създаване на нов обект",
+	"wikibase-item-summary-wbeditentity-override": "Изчистване на обект"
 }

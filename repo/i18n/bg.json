@@ -29,6 +29,7 @@
 	"wikibase-remove-inprogress": "Премахване...",
 	"wikibase-statementlistview-add": "добавяне на стойност",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На други езици",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Среща се и като",
 	"wikibase-entitytermsforlanguagelistview-description": "Описание",
 	"wikibase-entitytermsforlanguagelistview-label": "Етикет",
 	"wikibase-entitytermsforlanguagelistview-language": "Език",

@@ -7,7 +7,8 @@
 			"Guycn2",
 			"Inkbug",
 			"ערן",
-			"Yona b"
+			"Yona b",
+			"IKhitron"
 		]
 	},
 	"wikibase-client-desc": "לקוח להרחבה Wikibase",
@@ -131,5 +132,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|הצגת}} פריט",
 	"notification-subject-page-connection": "דף {{GENDER:$3|שיצרת}} באתר {{SITENAME}} {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}",
 	"unresolved-property-category": "דפים עם מאפיינים בלתי־פתורים",
-	"unresolved-property-category-desc": "הקטגוריה הזאת כוללת דפים שמפנים למאפיינים ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} שאי־אפשר למצוא לפי מזהה או תווית."
+	"unresolved-property-category-desc": "הקטגוריה הזאת כוללת דפים שמפנים למאפיינים ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} שאי־אפשר למצוא לפי מזהה או תווית.",
+	"connected-redirect-category": "הפניות המקושרות לפריטי {{WBREPONAME}}",
+	"connected-redirect-category-desc": "הקטגוריה הזאת מונה דפי הפניות המקושרות לפריטי {{WBREPONAME}}."
 }

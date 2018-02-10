@@ -134,7 +134,7 @@
 	"wikibase-entity-summary-wbsetdescription-add": "Se añade la descripción [$2]",
 	"wikibase-entity-summary-wbsetdescription-set": "Se cambió la descripción [$2]",
 	"wikibase-entity-summary-wbsetdescription-remove": "La descripción [$2] ha sido eliminada",
-	"wikibase-entity-summary-wbsetaliases-set": "Definiendo {{PLURAL:$1|el alias|los alias}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-set": "Definición de {{PLURAL:$1|alias}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Se {{PLURAL:$1|añadió y eliminó un|añadieron y eliminaron}} alias de [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "Se añadió {{PLURAL:$1|el alias|los alias}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "Eliminando {{PLURAL:$1|el alias|los alias}} de [$2]",
