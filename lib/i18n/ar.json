@@ -141,7 +141,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "أضاف وأزال [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetaliases-add": "أضاف [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "أزال [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
-	"wikibase-entity-summary-wbsetaliases-update": "محدث [$2] {{PLURAL:$1|إسم مستعار|أسماء مستعارة}}",
+	"wikibase-entity-summary-wbsetaliases-update": "حدث [$2] {{PLURAL:$1|اسما مستعارا|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "غير [$2] التسمية، والوصف والأسماء المستعارة",
 	"wikibase-entity-summary-wbsetsitelink-add": "إضافة وصلة إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "أضاف وصلة مع شارات إلى [$2]",

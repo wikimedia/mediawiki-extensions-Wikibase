@@ -116,5 +116,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Соединение|Соединения}} с {{grammar:genitive|{{WBREPONAME}}}}",
 	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент",
 	"unresolved-property-category": "Страницы с недоступными свойствами",
-	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени."
+	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени.",
+	"connected-redirect-category": "Перенаправления, связанные с элементом {{grammar:genitive|{{WBREPONAME}}}}",
+	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}."
 }

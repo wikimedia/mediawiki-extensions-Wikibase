@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"बिप्लब आनन्द"
+			"बिप्लब आनन्द",
+			"Tulsi Bhagat"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस वृद्धि के लेल क्लाइन्ट",
@@ -48,6 +49,6 @@
 	"wikibase-unconnectedpages-submit": "पन्ना देखाबी",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} बिषय आइडी",
 	"wikibase-pageinfo-entity-id-none": "कोनो नै",
-	"wikibase-otherprojects": "अन्य परियोजनासभमे",
+	"wikibase-otherprojects": "अन्य परियोजनासभ",
 	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार"
 }
