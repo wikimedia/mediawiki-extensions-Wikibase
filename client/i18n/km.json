@@ -8,6 +8,7 @@
 	"wikibase-comment-unlink": "ទំព័រ​នេះ​ត្រូវ​បាន​ផ្ដាច់​តំណ​ពី​វត្ថុ {{WBREPONAME}} ហើយ។ តំណ​ភាសា​ក៏​ត្រូវ​បាន​ដក​ចេញ​ដែរ។",
 	"wikibase-editlinks": "កែប្រែតំណភ្ជាប់",
 	"wikibase-editlinkstitle": "កែប្រែតំណភ្ជាប់អន្តរភាសា",
+	"wikibase-linkitem-addlinks": "បន្ថែមតំណភ្ជាប់",
 	"wikibase-linkitem-input-site": "ភាសា៖",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "លាក់",
