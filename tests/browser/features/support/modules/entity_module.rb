@@ -130,6 +130,41 @@ module EntityPage
     end
   end
 
+  def wait_for_search_index_update(page_titles)
+    return if ENV['USES_CIRRUS_SEARCH'] != 'true'
+
+    mw_api = MediawikiApi::Client.new URL.repo_api
+
+    sleep_period = 5
+    timeout_seconds = 60
+    timeout_loops = (timeout_seconds / sleep_period).to_i
+
+    in_index = false
+    until in_index || timeout_loops == 0
+      if page_index_updated(mw_api, page_titles)
+        break
+      end
+
+      sleep(sleep_period)
+      timeout_loops -= 1
+    end
+    true
+  end
+
+  def page_index_updated(api, page_titles)
+    response = api.action(:query, prop: 'cirrusdoc|revisions', titles: page_titles.join('|'), revprop: 'ids', token_type: false)
+    response['query']['pages'].each_value do |_, page_data|
+      if !page_data.key?('cirrusdoc') || !page_data.key?('revisions')
+        return false
+      end
+      revision_id = page_data['revisions'][0]['revid']
+      if page_data['cirrusdoc'][0]['source']['version'] != revision_id
+        return false
+      end
+    end
+    true
+  end
+
   # creates a random string
   def generate_random_string(length = 8)
     chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'

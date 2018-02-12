@@ -42,6 +42,7 @@ test:
   mediawiki_url: https://test.wikidata.org/wiki/
   mediawiki_user: Selenium_user
   user_factory: true
+  uses_cirrus_search: true
   # mediawiki_password: SET THIS IN THE ENVIRONMENT!
 
 integration:
