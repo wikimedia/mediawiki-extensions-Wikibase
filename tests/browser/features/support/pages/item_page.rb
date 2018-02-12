@@ -55,6 +55,9 @@ class ItemPage
       items[handle] = item
     end
 
+    page_titles = items.map { |title, data| ENV['ITEM_NAMESPACE'] + data['id'] }
+    wait_for_search_index_update(page_titles)
+
     items
   end
 end
