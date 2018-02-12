@@ -31,12 +31,6 @@
  * @license GPL-2.0+
  */
 
-/**
- * This documentation group collects source code files belonging to Wikibase Client.
- *
- * @defgroup WikibaseClient Wikibase Client
- */
-
 // @codingStandardsIgnoreFile
 
 if ( !defined( 'MEDIAWIKI' ) ) {
