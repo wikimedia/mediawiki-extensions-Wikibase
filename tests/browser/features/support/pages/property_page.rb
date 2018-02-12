@@ -58,6 +58,9 @@ class PropertyPage
       properties[handle] = property
     end
 
+    page_titles = properties.map { |_, data| ENV['PROPERTY_NAMESPACE'] + data['id'] }
+    wait_for_search_index_update(page_titles)
+
     properties
   end
 end
