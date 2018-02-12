@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc3dd56a_e201fee5",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-12T15:56:53Z",
+      "side": 1,
+      "message": "This variable looks like you missed it somehow while working on this code. It\u0027s never set to anything else but false.",
+      "range": {
+        "startLine": 143,
+        "startChar": 10,
+        "endLine": 143,
+        "endChar": 18
+      },
+      "revId": "bde412ae9b0d2843a4058b5e55ab3a3f900d682a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
