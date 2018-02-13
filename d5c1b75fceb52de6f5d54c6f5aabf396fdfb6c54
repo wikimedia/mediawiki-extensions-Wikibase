@@ -258,6 +258,30 @@
       "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9d6ac0b_0ae311ca",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T11:11:15Z",
+      "side": 1,
+      "message": "Returning false also means \"please try again\", which (as argued) does not make much sense in case the response is so fundamentally wrong. You could rename the function to \"page_index_out_of_date\" and flip the bools. Then it\u0027s more obvious it will only return true if there is a chance the index might be updated later.",
+      "parentUuid": "86f273da_38b0e28a",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
