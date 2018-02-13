@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa62a1e5_96fd42ba",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-02-13T10:38:47Z",
+      "side": 1,
+      "message": "I didn\u0027t dig to deep into details but if it was not converted to the string, the whole thing was exploding.\nI assume/guess ENV must contain string values only?",
+      "parentUuid": "44c5bcc4_b7645bbb",
+      "range": {
+        "startLine": 31,
+        "startChar": 79,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04926aba_18344c41",
         "filename": "tests/browser/features/support/modules/entity_module.rb",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-13T10:26:26Z",
       "side": 1,
       "message": "Totally unrelated to this patch: Once I suggested to turn these animations off entirely, instead of \"waiting\" for them (\u003d wasting time). I don\u0027t remember what happened to this patch. The one-liner that is needed is this one:\n\n jQuery.fx.off \u003d true;\n\nMaybe this is already in the setup somewhere?",
+      "range": {
+        "startLine": 127,
+        "startChar": 6,
+        "endLine": 127,
+        "endChar": 42
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e031404_72125196",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-02-13T10:38:47Z",
+      "side": 1,
+      "message": "I don\u0027t know",
+      "parentUuid": "04926aba_18344c41",
       "range": {
         "startLine": 127,
         "startChar": 6,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e02b27c2_c003be0b",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-02-13T10:38:47Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "82eb2a95_9bafd987",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c137fea0_517c94d4",
         "filename": "tests/browser/features/support/modules/entity_module.rb",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2018-02-13T10:26:26Z",
       "side": 1,
       "message": "When I play around with this query in the ApiSandbox, this is called \"rvprop\", without an \"e\".",
+      "range": {
+        "startLine": 154,
+        "startChar": 94,
+        "endLine": 154,
+        "endChar": 101
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87211109_1ce067d3",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-02-13T10:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c137fea0_517c94d4",
       "range": {
         "startLine": 154,
         "startChar": 94,
@@ -129,6 +225,30 @@
       "side": 1,
       "message": "I tried and it really looks like the two keys are guaranteed to be set:\n\nhttps://www.wikidata.org/wiki/Special:ApiSandbox#action\u003dquery\u0026format\u003djson\u0026prop\u003drevisions%7Ccirrusdoc\u0026titles\u003dWikidata%3AHelp\u0026rvprop\u003dids",
       "parentUuid": "c00808c1_29ded005",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86f273da_38b0e28a",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-02-13T10:38:47Z",
+      "side": 1,
+      "message": "This was more of a sanity check or something. This method return true would mean \"page index updated\" which is confusing imo.\nRemoved the check so there is a more visible error raised if the API response structure is unexpected (which as you say is not likely to happen).",
+      "parentUuid": "da812ee7_1c208935",
       "range": {
         "startLine": 157,
         "startChar": 15,
