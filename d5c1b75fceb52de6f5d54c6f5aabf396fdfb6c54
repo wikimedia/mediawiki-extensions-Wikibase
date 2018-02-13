@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44c5bcc4_b7645bbb",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T10:26:26Z",
+      "side": 1,
+      "message": "I wonder why a bool is converted to a string, and not kept as a bool?",
+      "range": {
+        "startLine": 31,
+        "startChar": 79,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04926aba_18344c41",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T10:26:26Z",
+      "side": 1,
+      "message": "Totally unrelated to this patch: Once I suggested to turn these animations off entirely, instead of \"waiting\" for them (\u003d wasting time). I don\u0027t remember what happened to this patch. The one-liner that is needed is this one:\n\n jQuery.fx.off \u003d true;\n\nMaybe this is already in the setup somewhere?",
+      "range": {
+        "startLine": 127,
+        "startChar": 6,
+        "endLine": 127,
+        "endChar": 42
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82eb2a95_9bafd987",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T10:26:26Z",
+      "side": 1,
+      "message": "As far as I can see this return value is never used.",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c137fea0_517c94d4",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T10:26:26Z",
+      "side": 1,
+      "message": "When I play around with this query in the ApiSandbox, this is called \"rvprop\", without an \"e\".",
+      "range": {
+        "startLine": 154,
+        "startChar": 94,
+        "endLine": 154,
+        "endChar": 101
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c00808c1_29ded005",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T10:26:26Z",
+      "side": 1,
+      "message": "I wonder what it means if one of these two elements is missing?\n* If \"cirrusdoc\" is missing, Cirrus is probably not enabled.\n* If \"revisions\" are missing, there is probably something really, really wrong.\n\nIn both cases it\u0027s unlikely that repeating the same request will change anything. I think it\u0027s better to return true and fail fast, instead of waiting a full minute.",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
