@@ -94,5 +94,6 @@
 	"notification-link-text-view-item": "আইটেম {{GENDER:$1|দেখুন}}",
 	"notification-subject-page-connection": "{{SITENAME}}-এ আপনার {{GENDER:$3|তৈরি করা}} একটি পাতা {{WBREPONAME}} আইটেমের সাথে {{GENDER:$2|সংযুক্ত হয়েছে}}।",
 	"unresolved-property-category": "অমীমাংসিত বৈশিষ্ট্যসহ পাতা",
-	"connected-redirect-category": "একটি {{WBREPONAME}} আইটেমে সংযুক্ত পুনর্নির্দেশ"
+	"connected-redirect-category": "একটি {{WBREPONAME}} আইটেমে সংযুক্ত পুনর্নির্দেশ",
+	"connected-redirect-category-desc": "এই বিষয়শ্রেণী পুনর্নির্দেশ পৃষ্ঠাগুলি তালিকাভুক্ত যা একটি {{WBREPONAME}} আইটেমে সংযুক্ত।"
 }

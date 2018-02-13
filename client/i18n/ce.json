@@ -74,6 +74,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Кхин тӀе хьажорг",
 	"wikibase-pageinfo-entity-usage-L": "Билгало: $1",
 	"wikibase-pageinfo-entity-usage-T": "Корта",
+	"wikibase-pageinfo-entity-usage-C": "Хаам: $1",
 	"wikibase-pageinfo-entity-usage-X": "Духхера массо хаамаш",
 	"wikibase-pageinfo-entity-usage-O": "Кхин (ДӀахьедар)",
 	"wikibase-property-render-error": "билгало «$1»: $2 гучуйоккхуш гӀалат ду",

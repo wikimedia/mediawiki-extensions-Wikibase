@@ -8,7 +8,8 @@
 			"Stryn",
 			"WikiPhoenix",
 			"Rockyfelle",
-			"Josve05a"
+			"Josve05a",
+			"Lejonel"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
@@ -106,6 +107,6 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Visa}} objekt",
 	"notification-subject-page-connection": "En sida på {{SITENAME}} som du {{GENDER:$3|skapade}} har {{GENDER:$2|anslutits}} till ett {{WBREPONAME}}-objekt",
 	"unresolved-property-category": "Sidor med olösta egenskaper",
-	"connected-redirect-category": "Omdirigerar som är anslutna till ett {{WBREPONAME}}-objekt",
+	"connected-redirect-category": "Omdirigeringar anslutna till ett {{WBREPONAME}}-objekt",
 	"connected-redirect-category-desc": "Denna kategori listar omdirigeringssidor som är anslutna till ett {{WBREPONAME}}-objekt."
 }

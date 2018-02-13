@@ -10,7 +10,7 @@
 	},
 	"wikibase-client-desc": "Klient pro rozšíření Wikibase",
 	"tooltip-t-wikibase": "Odkaz na propojenou položku datového úložiště",
-	"apihelp-query+pageterms-param-terms": "Druhy podmínek k získání (např. 'popis'), každý zobrazen jako řada klíčových řetězců (např. {\"popis\": [\"foo\"]}). Pokud není specifikován, druhy jsou vráceny.",
+	"apihelp-query+pageterms-param-terms": "Typy řetězců k načtení (např. 'description'), každý zobrazen jako pole řetězců s typem jako klíčem (např. {\"description\": [\"foo\"]}). Pokud není specifikován, jsou vráceny všechny typy.",
 	"wikibase-after-page-move": "Vaše přejmenování by nyní mělo změnit mezijazykový odkaz [$1 v související položce {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",
 	"wikibase-after-page-move-queued": "Související [$1 položka {{grammar:2sg|{{WBREPONAME}}}}] bude automaticky aktualizována. Upozorňujeme, že se to nemusí stát okamžitě.",
 	"wikibase-after-page-delete": "Odkaz na tuto stránku by měl být odstraněn [$1 ze související položky {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",

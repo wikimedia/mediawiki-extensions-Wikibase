@@ -101,5 +101,6 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koppeling|Koppelingen}} met {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Informeer mij wanneer iemand een pagina die {{GENDER:|ik heb aangemaakt}}, koppelt aan een {{WBREPONAME}}-item.",
 	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
-	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen"
+	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen",
+	"connected-redirect-category": "Doorverwijzingen verbonden met een {{WBREPONAME}}-item"
 }

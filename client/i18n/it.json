@@ -17,7 +17,8 @@
 			"Lucas2",
 			"Horcrux92",
 			"Anto",
-			"Una giornata uggiosa '94"
+			"Una giornata uggiosa '94",
+			"Sakretsu"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -133,5 +134,6 @@
 	"notification-subject-page-connection": "Una pagina su {{SITENAME}} che {{GENDER:$3|hai creato}} è {{GENDER:$2|stata connessa}} a un elemento {{WBREPONAME}}",
 	"unresolved-property-category": "Pagine che utilizzano proprietà non esistenti",
 	"unresolved-property-category-desc": "Questa categoria elenca le pagine che contengono riferimenti a proprietà {{WBREPONAME}} che non possono essere trovate né dal loro ID proprietà né dall'etichetta.",
-	"connected-redirect-category": "Redirect connessi a un elemento {{WBREPONAME}}"
+	"connected-redirect-category": "Redirect connessi a un elemento {{WBREPONAME}}",
+	"connected-redirect-category-desc": "Questa categoria elenca i redirect che sono connessi a un elemento {{WBREPONAME}}."
 }
