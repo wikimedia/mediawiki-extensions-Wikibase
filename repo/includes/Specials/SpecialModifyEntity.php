@@ -208,7 +208,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		try {
 			$this->processArguments( $subPage );
 			$valid = $this->validateInput();
-			$status = null;
 
 			if ( $valid && $this->isModificationRequested() ) {
 				$updatedEntity = $this->getEntityForModification();
@@ -219,13 +218,12 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 					$status = $this->saveEntity( $updatedEntity, $summary, $token );
 
 					$this->handleStatus( $status, $updatedEntity );
+					return;
 				}
 			}
 
-			if ( !$status || !$status->isOK() ) {
-				$entity = $this->getEntityForDisplay();
-				$this->setForm( $entity );
-			}
+			$entity = $this->getEntityForDisplay();
+			$this->setForm( $entity );
 		} catch ( UserInputException $ex ) {
 			$error = $this->msg( $ex->getKey(), $ex->getParams() )->parse();
 			$this->showErrorHTML( $error );
