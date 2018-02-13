@@ -200,6 +200,9 @@ return call_user_func( function() {
 		// Per default, the database for tracking changes is the local repo's database.
 		// Note that the value for the repoDatabase setting may be calculated dynamically,
 		// see above in 'repositories' setting.
+		if ( $settings->hasSetting( 'repoDatabase' ) ) {
+			return $settings->getSetting( 'repoDatabase' );
+		}
 		$repositorySettings = $settings->getSetting( 'repositories' );
 		return $repositorySettings['']['repoDatabase'];
 	};
@@ -213,8 +216,12 @@ return call_user_func( function() {
 	$defaults['repoSiteId'] = function( SettingsArray $settings ) {
 		// If repoDatabase is set, then default is same as repoDatabase
 		// otherwise, defaults to siteGlobalID
-		$repositorySettings = $settings->getSetting( 'repositories' );
-		$repoDatabase = $repositorySettings['']['repoDatabase'];
+		if ( $settings->hasSetting( 'repoDatabase' ) ) {
+			$repoDatabase = $settings->getSetting( 'repoDatabase' );
+		} else {
+			$repositorySettings = $settings->getSetting( 'repositories' );
+			$repoDatabase = $repositorySettings['']['repoDatabase'];
+		}
 
 		return ( $repoDatabase === false )
 			? $settings->getSetting( 'siteGlobalID' )
