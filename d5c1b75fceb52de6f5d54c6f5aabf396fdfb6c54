@@ -114,6 +114,30 @@
       "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da812ee7_1c208935",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-13T10:28:02Z",
+      "side": 1,
+      "message": "I tried and it really looks like the two keys are guaranteed to be set:\n\nhttps://www.wikidata.org/wiki/Special:ApiSandbox#action\u003dquery\u0026format\u003djson\u0026prop\u003drevisions%7Ccirrusdoc\u0026titles\u003dWikidata%3AHelp\u0026rvprop\u003dids",
+      "parentUuid": "c00808c1_29ded005",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "d5c1b75fceb52de6f5d54c6f5aabf396fdfb6c54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
