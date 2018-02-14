@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\EntityIdComposer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class EntityIdComposerTest extends PHPUnit_Framework_TestCase {

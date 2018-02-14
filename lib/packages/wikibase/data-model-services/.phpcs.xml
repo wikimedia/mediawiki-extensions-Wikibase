@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WikibaseDataModelServices">
+<ruleset>
 	<rule ref="vendor/wikibase/wikibase-codesniffer/Wikibase" />
-
-	<rule ref="Generic.CodeAnalysis" />
 
 	<rule ref="Generic.Files.LineLength">
 		<properties>
@@ -14,7 +12,7 @@
 	<rule ref="Generic.Metrics.CyclomaticComplexity" />
 	<rule ref="Generic.Metrics.NestingLevel" />
 
-	<rule ref="PSR1" />
+	<rule ref="PSR1.Files.SideEffects" />
 	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
 	<rule ref="Squiz.Strings.DoubleQuoteUsage">
 		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
