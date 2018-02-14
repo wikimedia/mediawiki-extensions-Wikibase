@@ -5,7 +5,7 @@ namespace Wikibase;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;

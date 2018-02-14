@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;

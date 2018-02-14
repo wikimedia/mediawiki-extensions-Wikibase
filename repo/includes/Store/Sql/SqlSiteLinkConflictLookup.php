@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikimedia\Rdbms\IDatabase;
 

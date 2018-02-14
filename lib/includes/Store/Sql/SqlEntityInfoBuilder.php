@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
