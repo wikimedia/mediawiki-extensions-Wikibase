@@ -1,11 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Stavanger7"
+			"Stavanger7",
+			"Fanjiayi"
 		]
 	},
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
+	"wikibase-editlinks": "Redacter catenunes",
+	"wikibase-editlinkstitle": "Redacter interlingue catenunes",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redacter",
 	"wikibase-otherprojects": "In altri projectes"
 }

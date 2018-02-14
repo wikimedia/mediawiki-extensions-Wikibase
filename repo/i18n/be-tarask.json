@@ -312,6 +312,7 @@
 	"wikibase-api-claim-value-unexpected": "Вы ня можаце падаць значэньне, калі ствараеце сьцьверджаньне без PropertyValueSnak у якасьці галоўнага снэку.",
 	"wikibase-api-unresolved-redirect": "Пададзены ідэнтыфікатар элемэнту належыць да перанакіраваньня, што не падтрымліваецца ў гэтым кантэксьце.",
 	"wikibase-api-illegal-entity-remove": "Элемэнт ня можа быць выдалены з дапамогай ключа <var>remove</var> найвышэйшага ўзроўню.",
+	"wikibase-api-illegal-id-or-site-page-selector": "Вам трэба падаць ці <var>id</var> элемэнту, ці камбінацыю <var>site</var> і <var>page</var>, але ня ўсё адразу.",
 	"wikibase-restoreold": "аднавіць",
 	"wikibase-no-direct-editing": "Простае рэдагаваньне ў прасторы назваў «$1» адключанае",
 	"wikibase-noentity-createone": "Вы можаце таксама [[$1|стварыць яго]].",

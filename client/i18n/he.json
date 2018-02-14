@@ -36,7 +36,7 @@
 	"apihelp-query+pageterms-example-simple": "קבלת כל הפריטים המשויכים לדף 'London', בשפה של המשתמש.",
 	"apihelp-query+pageterms-example-label-en": "קבלת תוויות וכינויים שמשויעכים לדף 'London', באנגלית.",
 	"apihelp-query+pageterms-example-item": "קבלת תוויות וכינויים של הפריט Q84.",
-	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'description'. אם לא צוין, יוחזרו כל הסוגים.",
+	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'description', כל אחד מהם מוחזר בתור מערך של מחרוזות עם סוגים בתור מפתחות, למשל <span dir=\"ltr\">{\"description\": [\"foo\"]}</span>. אם לא צוין, יוחזרו כל הסוגים.",
 	"apihelp-query+wikibase-description": "קבלת מידע על לקוח ויקיבייס ועל מאגר הוויקיבייס המשויך.",
 	"apihelp-query+wikibase-summary": "קבלת מידע על לקוח ויקיבייס ועל מאגר הוויקיבייס המשויך.",
 	"apihelp-query+wikibase-example": "קבלת נתיב URL ומידע אחר על לקוח ויקיבייס ומאגר ויקיבייס.",

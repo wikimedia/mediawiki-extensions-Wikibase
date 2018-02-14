@@ -8,7 +8,7 @@
 	},
 	"tooltip-t-wikibase": "जुड़ल डेटा भंडार के चीज खातिर लिंक",
 	"wikibase-comment-update": "{{WBREPONAME}} चीज बदलल गइल",
-	"wikibase-dataitem": "{{WBREPONAME}} चीज",
+	"wikibase-dataitem": "{{WBREPONAME}} आइटम",
 	"wikibase-editlinks": "कड़ी संपादित करीं",
 	"wikibase-editlinkstitle": "अंतरविकि कड़ी संपादित करीं",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
@@ -17,5 +17,7 @@
 	"wikibase-rc-wikibase-edit-letter": "डा",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संपादन",
 	"unconnectedpages": "बिना विकिडेटा आइटम से जुड़ल पन्ना",
-	"wikibase-otherprojects": "अन्य प्रोजेक्ट में"
+	"wikibase-otherprojects": "अन्य प्रोजेक्ट में",
+	"connected-redirect-category": "अनुप्रेषण जवन {{WBREPONAME}} आइटम से जुड़ल बाड़ें",
+	"connected-redirect-category-desc": "एह श्रेणी में {{WBREPONAME}} आइटम से जुड़ल अनुप्रेषण पन्ना सभ के लिस्ट बाटे।"
 }
