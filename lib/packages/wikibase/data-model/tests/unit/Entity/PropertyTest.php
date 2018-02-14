@@ -325,25 +325,25 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 	public function aliasesProvider() {
 		return [
 			[ [
-				       'en' => [ [ 'spam' ] ]
-			       ] ],
+				'en' => [ [ 'spam' ] ],
+			] ],
 			[ [
-				       'en' => [ [ 'foo', 'bar', 'baz' ] ]
-			       ] ],
+				'en' => [ [ 'foo', 'bar', 'baz' ] ],
+			] ],
 			[ [
-				       'en' => [ [ 'foo', 'bar' ], [ 'baz', 'spam' ] ]
-			       ] ],
+				'en' => [ [ 'foo', 'bar' ], [ 'baz', 'spam' ] ],
+			] ],
 			[ [
-				       'en' => [ [ 'foo', 'bar', 'baz' ] ],
-				       'de' => [ [ 'foobar' ], [ 'baz' ] ],
-			       ] ],
+				'en' => [ [ 'foo', 'bar', 'baz' ] ],
+				'de' => [ [ 'foobar' ], [ 'baz' ] ],
+			] ],
 			// with duplicates
 			[ [
-				       'en' => [ [ 'spam', 'ham', 'ham' ] ]
-			       ] ],
+				'en' => [ [ 'spam', 'ham', 'ham' ] ],
+			] ],
 			[ [
-				       'en' => [ [ 'foo', 'bar' ], [ 'bar', 'spam' ] ]
-			       ] ],
+				'en' => [ [ 'foo', 'bar' ], [ 'bar', 'spam' ] ],
+			] ],
 		];
 	}
 

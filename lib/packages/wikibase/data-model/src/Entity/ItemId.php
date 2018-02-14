@@ -83,7 +83,7 @@ class ItemId extends EntityId implements Int32EntityId {
 	public function unserialize( $serialized ) {
 		$array = json_decode( $serialized );
 		$this->serialization = is_array( $array ) ? $array[1] : $serialized;
-		list ( $this->repositoryName, $this->localPart ) =
+		list( $this->repositoryName, $this->localPart ) =
 			self::extractRepositoryNameAndLocalPart( $this->serialization );
 	}
 
