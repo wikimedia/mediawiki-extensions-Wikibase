@@ -47,14 +47,12 @@ class TermListPatcher {
 
 		switch ( true ) {
 			case $diffOp instanceof DiffOpAdd:
-				/** @var $diffOp DiffOpAdd */
 				if ( !$hasLang ) {
 					$terms->setTextForLanguage( $lang, $diffOp->getNewValue() );
 				}
 				break;
 
 			case $diffOp instanceof DiffOpChange:
-				/** @var $diffOp DiffOpChange */
 				if ( $hasLang
 					&& $terms->getByLanguage( $lang )->getText() === $diffOp->getOldValue()
 				) {
@@ -63,7 +61,6 @@ class TermListPatcher {
 				break;
 
 			case $diffOp instanceof DiffOpRemove:
-				/** @var $diffOp DiffOpRemove */
 				if ( $hasLang
 					&& $terms->getByLanguage( $lang )->getText() === $diffOp->getOldValue()
 				) {
