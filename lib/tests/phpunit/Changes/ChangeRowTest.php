@@ -104,9 +104,9 @@ class ChangeRowTest extends MediaWikiTestCase {
 			'info' => 's:5:"value";',
 		] );
 
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$info = $change->getInfo();
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		$this->assertSame( [], $info );
 	}

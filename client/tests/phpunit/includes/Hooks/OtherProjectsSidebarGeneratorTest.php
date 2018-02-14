@@ -155,7 +155,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		);
 
 		if ( $suppressErrors ) {
-			\MediaWiki\suppressWarnings();
+			\Wikimedia\suppressWarnings();
 		}
 		$this->assertEquals(
 			$result,
@@ -163,7 +163,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		);
 
 		if ( $suppressErrors ) {
-			\MediaWiki\restoreWarnings();
+			\Wikimedia\restoreWarnings();
 		}
 	}
 

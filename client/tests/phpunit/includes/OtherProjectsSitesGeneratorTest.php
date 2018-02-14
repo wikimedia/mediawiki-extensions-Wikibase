@@ -85,12 +85,12 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 
 		// getOtherProjectsSiteIds does wfWarn in case it's being called with a siteid
 		// it doesn't know about. That's fine, we can just ignore that.
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$result = $otherProjectsSitesProvider->getOtherProjectsSiteIds( [
 			'wikipedia',
 			'wikisource',
 		] );
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		$this->assertSame( [], $result );
 	}

@@ -46,9 +46,9 @@ class TemplateRegistryTest extends PHPUnit_Framework_TestCase {
 	public function testGetUnknownTemplate() {
 		$registry = new TemplateRegistry( [] );
 
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$html = $registry->getTemplate( 'unknown' );
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		$this->assertNull( $html );
 	}

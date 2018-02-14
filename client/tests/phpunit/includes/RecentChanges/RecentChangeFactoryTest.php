@@ -467,9 +467,9 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$factory = $this->newRecentChangeFactory();
 
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$rc = $factory->newRecentChange( $change, $target );
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		$expectedComment = '(wikibase-comment-update)';
 		$this->assertEquals( $expectedComment, $rc->getAttribute( 'rc_comment' ) );
