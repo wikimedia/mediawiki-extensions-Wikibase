@@ -43,7 +43,7 @@ abstract class EntityId implements Comparable, Serializable {
 		self::assertValidSerialization( $serialization );
 		$this->serialization = self::normalizeIdSerialization( $serialization );
 
-		list ( $this->repositoryName, $this->localPart ) = self::extractRepositoryNameAndLocalPart( $serialization );
+		list( $this->repositoryName, $this->localPart ) = self::extractRepositoryNameAndLocalPart( $serialization );
 	}
 
 	private static function assertValidSerialization( $serialization ) {
@@ -63,7 +63,7 @@ abstract class EntityId implements Comparable, Serializable {
 	/**
 	 * @return string
 	 */
-	public abstract function getEntityType();
+	abstract public function getEntityType();
 
 	/**
 	 * @return string

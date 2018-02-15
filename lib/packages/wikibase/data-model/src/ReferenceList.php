@@ -281,7 +281,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 		}
 
 		return $target instanceof self
-		       && $this->getValueHash() === $target->getValueHash();
+			&& $this->getValueHash() === $target->getValueHash();
 	}
 
 	/**
