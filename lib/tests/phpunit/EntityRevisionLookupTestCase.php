@@ -16,6 +16,8 @@ use Wikibase\Lib\Store\StorageException;
 /**
  * Base class for testing EntityRevisionLookup implementations
  *
+ * @covers \Wikibase\Lib\Store\EntityRevisionLookup
+ *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later

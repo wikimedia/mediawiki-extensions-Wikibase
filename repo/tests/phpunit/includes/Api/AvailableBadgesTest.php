@@ -6,7 +6,7 @@ use ApiTestCase;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Tests for the AvailableBadges class.
+ * @covers \Wikibase\Repo\Api\AvailableBadges
  *
  * @group API
  * @group Database
