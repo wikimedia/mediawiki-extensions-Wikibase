@@ -69,7 +69,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		list( $result, ) = $this->executeSpecialPage( 'Q3' );
 		$aspectsTehran = [
 			wfMessage( 'wikibase-pageinfo-entity-usage-O' )->parse(),
-			wfMessage( 'wikibase-pageinfo-entity-usage-L', 'fa' )->parse(),
+			wfMessage( 'wikibase-pageinfo-entity-usage-L-with-modifier', 'fa' )->parse(),
 		];
 		$aspectsAthena = [
 			wfMessage( 'wikibase-pageinfo-entity-usage-S' )->parse(),
