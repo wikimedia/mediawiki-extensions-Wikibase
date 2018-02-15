@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a8f43ea4_736a667b",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-02-15T12:01:36Z",
+      "side": 1,
+      "message": "Ok, done.",
+      "parentUuid": "323cfc24_8492d47d",
+      "range": {
+        "startLine": 118,
+        "startChar": 38,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "29eaab36bb1b65c91267d4504a048a8e8aaaae4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "feb30b35_21ea23c8",
         "filename": "client/i18n/qqq.json",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-15T11:44:44Z",
       "side": 1,
       "message": "It looks like a \"when\" is missing here.",
+      "range": {
+        "startLine": 132,
+        "startChar": 83,
+        "endLine": 132,
+        "endChar": 84
+      },
+      "revId": "29eaab36bb1b65c91267d4504a048a8e8aaaae4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae5b7bf4_266d106c",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-02-15T12:01:36Z",
+      "side": 1,
+      "message": "It is.",
+      "parentUuid": "feb30b35_21ea23c8",
       "range": {
         "startLine": 132,
         "startChar": 83,
