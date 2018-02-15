@@ -190,8 +190,22 @@ class SpecialEntityUsage extends QueryPage {
 
 		foreach ( $rowAspects as $aspect ) {
 			$aspect = EntityUsage::splitAspectKey( $aspect );
-			$aspects[] = $this->getContext()->msg(
-				'wikibase-pageinfo-entity-usage-' . $aspect[0], $aspect[1] )->parse();
+			// Possible messages:
+			//   wikibase-pageinfo-entity-usage-L
+			//   wikibase-pageinfo-entity-usage-L-with-modifier
+			//   wikibase-pageinfo-entity-usage-D
+			//   wikibase-pageinfo-entity-usage-D-with-modifier
+			//   wikibase-pageinfo-entity-usage-C
+			//   wikibase-pageinfo-entity-usage-C-with-modifier
+			//   wikibase-pageinfo-entity-usage-S
+			//   wikibase-pageinfo-entity-usage-T
+			//   wikibase-pageinfo-entity-usage-X
+			//   wikibase-pageinfo-entity-usage-O
+			$msgKey = 'wikibase-pageinfo-entity-usage-' . $aspect[0];
+			if ( $aspect[1] !== null ) {
+				$msgKey .= '-with-modifier';
+			}
+			$aspects[] = $this->getContext()->msg( $msgKey, $aspect[1] )->parse();
 		}
 
 		return $this->getContext()->getLanguage()->commaList( $aspects );
