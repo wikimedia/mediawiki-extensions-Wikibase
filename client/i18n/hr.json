@@ -68,5 +68,6 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s projektom {{WBREPONAME}}",
 	"notification-header-page-connection": "Stranicu <strong>$3</strong> {{GENDER:$2|povezao je suradnik $1|povezala je suradnica $1}} sa stavkom ({{WBREPONAME}}).",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} stavku",
-	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima"
+	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima",
+	"connected-redirect-category": "Preusmjeravanja povezana sa stavkom na projektu {{WBREPONAME}}"
 }

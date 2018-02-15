@@ -100,7 +100,7 @@
 	"wikibase-pageinfo-entity-id-none": "Nėra",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} objektai naudojami šiame puslapyje",
 	"wikibase-pageinfo-entity-usage-S": "Svetainės nuoroda",
-	"wikibase-pageinfo-entity-usage-L": "Etiketė: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiketė: $1",
 	"wikibase-pageinfo-entity-usage-T": "Pavadinimas",
 	"wikibase-pageinfo-entity-usage-X": "Visi subjekto duomenys",
 	"wikibase-pageinfo-entity-usage-O": "Kita (Pareiškimai)",

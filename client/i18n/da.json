@@ -66,7 +66,7 @@
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-emner, der bruges på denne side",
 	"wikibase-pageinfo-entity-usage-S": "Sidehenvisning",
-	"wikibase-pageinfo-entity-usage-L": "Etiket: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiket: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
 	"wikibase-otherprojects": "I andre projekter",

@@ -69,7 +69,7 @@
 	"wikibase-pageinfo-entity-id-none": "Žiadne",
 	"wikibase-pageinfo-entity-usage": "Entity {{GRAMMAR:2sg|{{WBREPONAME}}}} použité na tejto stránke",
 	"wikibase-pageinfo-entity-usage-S": "Odkaz na stránku",
-	"wikibase-pageinfo-entity-usage-L": "Štítok: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Štítok: $1",
 	"wikibase-pageinfo-entity-usage-T": "Názov",
 	"wikibase-pageinfo-entity-usage-X": "Všetky údaje entity",
 	"wikibase-pageinfo-entity-usage-O": "Iné (tvrdenia)",

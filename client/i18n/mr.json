@@ -70,7 +70,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} कलमाची ओळखण",
 	"wikibase-pageinfo-entity-id-none": "काहीही नाही",
 	"wikibase-pageinfo-entity-usage-S": "संकेतस्थळ दुवा",
-	"wikibase-pageinfo-entity-usage-L": "लेबल: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "लेबल: $1",
 	"wikibase-pageinfo-entity-usage-T": "शीर्षक",
 	"wikibase-pageinfo-entity-usage-O": "ईतर (विधाने)",
 	"wikibase-property-render-error": "$1 गुणधर्म देण्यास अयशस्वी:$2",

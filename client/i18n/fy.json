@@ -18,6 +18,6 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Bewurking fan {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Gjin",
-	"wikibase-pageinfo-entity-usage-L": "Lebel: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Lebel: $1",
 	"wikibase-otherprojects": "Yn oare projekten"
 }

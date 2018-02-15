@@ -59,7 +59,7 @@
 	"wikibase-pageinfo-entity-id-none": "کوئی نہیں",
 	"wikibase-pageinfo-entity-usage": "اس صفحہ میں مستعمل {{WBREPONAME}} کے موجودات",
 	"wikibase-pageinfo-entity-usage-S": "سائٹ کا ربط",
-	"wikibase-pageinfo-entity-usage-L": "نشان: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "نشان: $1",
 	"wikibase-pageinfo-entity-usage-T": "عنوان",
 	"wikibase-pageinfo-entity-usage-X": "موجود کی جملہ معلومات",
 	"wikibase-pageinfo-entity-usage-O": "دیگر (بیانات)",

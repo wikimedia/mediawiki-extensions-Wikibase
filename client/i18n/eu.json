@@ -38,7 +38,7 @@
 	"wikibase-entityusage-entity": "Entitatea:",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} elementu IDa",
 	"wikibase-pageinfo-entity-id-none": "Bat ere ez",
-	"wikibase-pageinfo-entity-usage-L": "Etiketa:$1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiketa:$1",
 	"wikibase-pageinfo-entity-usage-T": "Titulua",
 	"wikibase-otherprojects": "Beste proiektuetan",
 	"notification-link-text-view-item": "{{GENDER:$1|Ikus}} elementua"

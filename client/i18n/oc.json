@@ -38,7 +38,7 @@
 	"wikibase-pageinfo-entity-id-none": "Pas cap",
 	"wikibase-pageinfo-entity-usage": "Elements {{WBREPONAME}} utilizats sus aquesta pagina",
 	"wikibase-pageinfo-entity-usage-S": "Ligam de site",
-	"wikibase-pageinfo-entity-usage-L": "Libellat : $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Libellat : $1",
 	"wikibase-pageinfo-entity-usage-T": "Títol",
 	"wikibase-pageinfo-entity-usage-X": "Totas las donadas de l'entitat",
 	"wikibase-pageinfo-entity-usage-O": "Autre (declaracions)",

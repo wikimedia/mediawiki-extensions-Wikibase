@@ -100,7 +100,7 @@
 	"wikibase-pageinfo-entity-id-none": "Hini ebet",
 	"wikibase-pageinfo-entity-usage": "Entiteoù {{WBREPONAME}} implijet er bajenn-mañ",
 	"wikibase-pageinfo-entity-usage-S": "Liamm lec'hienn",
-	"wikibase-pageinfo-entity-usage-L": "Tikedenn : $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Tikedenn : $1",
 	"wikibase-pageinfo-entity-usage-T": "Titl",
 	"wikibase-pageinfo-entity-usage-X": "Holl roadennoù an entite",
 	"wikibase-pageinfo-entity-usage-O": "Traoù all (disklêriadurioù)",

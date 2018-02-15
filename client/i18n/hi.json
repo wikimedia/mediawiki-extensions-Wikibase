@@ -59,7 +59,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} वस्तु आईडी",
 	"wikibase-pageinfo-entity-id-none": "कुछ नहीं",
 	"wikibase-pageinfo-entity-usage-S": "साइटकड़ी",
-	"wikibase-pageinfo-entity-usage-L": "लेबल: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "लेबल: $1",
 	"wikibase-pageinfo-entity-usage-T": "शीर्षक",
 	"wikibase-pageinfo-entity-usage-X": "सभी इकाई डाटा",
 	"wikibase-otherprojects": "अन्य परियोजनाओं में",

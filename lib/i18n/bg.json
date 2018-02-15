@@ -60,7 +60,10 @@
 	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-clientsitelink-update": "Страницата е преместена от [$3] на [$4]",
+	"wikibase-entity-summary-wbmergeitems-from": "Сливане на обект от $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Сливане на обекта с $3",
+	"wikibase-item-summary-wbcreate-new": "Създаване на нов обект",
 	"wikibase-item-summary-wbeditentity": "Създаване на нов обект",
+	"wikibase-item-summary-wbeditentity-create": "Създаване на нов обект",
 	"wikibase-item-summary-wbeditentity-override": "Изчистване на обект"
 }

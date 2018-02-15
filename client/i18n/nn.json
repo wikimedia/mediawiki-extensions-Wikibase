@@ -68,7 +68,7 @@
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-pageinfo-entity-usage": "Einingar frå {{WBREPONAME}} nytta på sida",
 	"wikibase-pageinfo-entity-usage-S": "Nettstadlenkje",
-	"wikibase-pageinfo-entity-usage-L": "Merkelapp: $1",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Merkelapp: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tittel",
 	"wikibase-pageinfo-entity-usage-X": "Alle einingsdata",
 	"wikibase-pageinfo-entity-usage-O": "Anna (utsegner)",
