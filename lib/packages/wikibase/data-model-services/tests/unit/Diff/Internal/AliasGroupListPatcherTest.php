@@ -220,7 +220,7 @@ class AliasGroupListPatcherTest extends PHPUnit_Framework_TestCase {
 				new AliasGroupList( [
 					new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 					new AliasGroup( 'de', [ 'foo', 'baz' ] ),
-				    new AliasGroup( 'nl', [ 'bar', 'baz' ] )
+					new AliasGroup( 'nl', [ 'bar', 'baz' ] ),
 				] ),
 				new Diff( [
 					'en' => new Diff( [ new DiffOpRemove( 'foo' ), new DiffOpAdd( 'baz' ) ] ),
