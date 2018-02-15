@@ -7,11 +7,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 
 /**
  * Base class for tests of EntityInfoBuilder implementation.
  * This abstract test case tests conformance to the contract of the EntityInfoBuilder interface.
+ *
+ * @covers \Wikibase\Lib\Store\EntityInfoBuilder
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -69,7 +71,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	/**
 	 * @param EntityId[] $ids
 	 *
-	 * @return SqlEntityInfoBuilder
+	 * @return EntityInfoBuilder
 	 */
 	abstract protected function newEntityInfoBuilder( array $ids );
 
