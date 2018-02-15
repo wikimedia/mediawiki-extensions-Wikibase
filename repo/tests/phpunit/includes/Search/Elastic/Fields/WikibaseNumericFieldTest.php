@@ -11,6 +11,8 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 /**
  * Base class for testing numeric fields.
  *
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField
+ *
  * @license GPL-2.0+
  * @author Stas Malyshev
  */

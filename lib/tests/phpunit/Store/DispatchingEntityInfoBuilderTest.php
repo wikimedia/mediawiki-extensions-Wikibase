@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 
 /**
- * @class Wikibase\Lib\Store\DispatchingEntityInfoBuilder
+ * @covers \Wikibase\Lib\Store\DispatchingEntityInfoBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

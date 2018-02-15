@@ -11,6 +11,8 @@ use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
+ * @covers \Wikibase\Repo\Specials\SpecialNewEntity
+ *
  * @license GPL-2.0+
  */
 abstract class SpecialNewEntityTest extends SpecialPageTestBase {
