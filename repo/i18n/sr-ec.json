@@ -188,7 +188,7 @@
 	"wikibase-itemmerge-no-such-entity": "Ставка није пронађена.",
 	"special-dispatchstats": "Статистика дневника отпрема",
 	"wikibase-dispatchstats-no-stats": "Тренутно нема расположивих статистика.",
-	"wikibase-dispatchstats-changes": "Статистика дневника промена",
+	"wikibase-dispatchstats-changes": "Статистика дневника измена",
 	"wikibase-dispatchstats-stats": "Отпрема статистике",
 	"wikibase-dispatchstats-change-id": "ИД",
 	"wikibase-dispatchstats-change-timestamp": "Време и датум",
