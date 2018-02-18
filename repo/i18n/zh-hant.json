@@ -341,6 +341,7 @@
 	"right-property-create": "建立屬性",
 	"action-item-merge": "合併項目",
 	"action-property-create": "建立屬性",
+	"wikibase-pageinfo-subscription-none": "無",
 	"apihelp-wbcreateclaim-description": "建立 Wikibase 主張。",
 	"apihelp-wbcreateclaim-param-entity": "您要加入主張的實體 ID",
 	"apihelp-wbcreateredirect-description": "建立實體重新導向。",

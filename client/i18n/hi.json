@@ -7,7 +7,8 @@
 			"बिप्लब आनन्द",
 			"NehalDaveND",
 			"Sfic",
-			"Jayprakash12345"
+			"Jayprakash12345",
+			"Nitin1485"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस एक्सटेंशन के लिए क्लाइन्ट",
@@ -59,8 +60,11 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} वस्तु आईडी",
 	"wikibase-pageinfo-entity-id-none": "कुछ नहीं",
 	"wikibase-pageinfo-entity-usage-S": "साइटकड़ी",
+	"wikibase-pageinfo-entity-usage-L": "कुछ लेबल",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "लेबल: $1",
+	"wikibase-pageinfo-entity-usage-D": "कुछ विवरण",
 	"wikibase-pageinfo-entity-usage-T": "शीर्षक",
+	"wikibase-pageinfo-entity-usage-C": "कुछ वक्तव्य",
 	"wikibase-pageinfo-entity-usage-X": "सभी इकाई डाटा",
 	"wikibase-otherprojects": "अन्य परियोजनाओं में",
 	"wikibase-otherprojects-beta-message": "अन्य परियोजना साइडबार",

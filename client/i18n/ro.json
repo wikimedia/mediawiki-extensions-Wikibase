@@ -42,6 +42,8 @@
 	"wikibase-rc-show-wikidata-pref": "Arată modificările de la {{WBREPONAME}} în lista cu schimbări recente",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modificare la {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Modificări făcute la {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Modificări la {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Rețineți că pot trece câteva minute până când modificările sunt vizibile pe toate wikiurile.",
 	"wikibase-watchlist-show-changes-pref": "Arată modificările de la {{WBREPONAME}} în lista dumneavoastră de pagini urmărite",
 	"wikibase-error-serialize-error": "Imposibil de serializat datele.",

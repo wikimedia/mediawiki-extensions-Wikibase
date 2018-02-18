@@ -5,7 +5,8 @@
 			"Event",
 			"Jeblad",
 			"Tarjeimo",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"Kjetil r"
 		]
 	},
 	"wikibase-client-desc": "Klient for Wikibase-utvidelsen",
@@ -129,5 +130,6 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Vis}} element",
 	"notification-subject-page-connection": "En side på {{SITENAME}} som du {{GENDER:$3|opprettet}} ble {{GENDER:$2|koblet}} til et {{WBREPONAME}}-element",
 	"unresolved-property-category": "Sider med uløste egenskaper",
-	"unresolved-property-category-desc": "Denne kategorien lister opp sider som refererer til {{WBREPONAME}}-egenskaper som ikke kan finnes med egenskaps-ID eller etikett."
+	"unresolved-property-category-desc": "Denne kategorien lister opp sider som refererer til {{WBREPONAME}}-egenskaper som ikke kan finnes med egenskaps-ID eller etikett.",
+	"connected-redirect-category": "Omdirigeringer knyttet til et {{WBREPONAME}}-objekt"
 }

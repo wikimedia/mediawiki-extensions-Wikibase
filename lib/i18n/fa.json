@@ -80,6 +80,7 @@
 	"wikibase-validator-bad-value-type": "نوع دادۀ غلط $1 برای $2",
 	"wikibase-validator-bad-data-type": "داده با نوع نامناسب: $1",
 	"wikibase-validator-bad-url": "یوآرال ناقص: $1",
+	"wikibase-validator-url-scheme-missing": "نشانی اینترنتی ساختار مانند \"https://\" ندارد: $1",
 	"wikibase-validator-bad-url-scheme": "ساختار یوآرال «$1» پشتیبانی نمی‌شود.",
 	"wikibase-validator-unknown-unit": "واحد ناشناخته: $1",
 	"wikibase-validator-not-allowed": "مقدار نامجاز: $1",

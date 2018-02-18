@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Chuvash2014",
-			"Chuvash"
+			"Chuvash",
+			"Chavash"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} япалана улӑштарнӑ",
 	"wikibase-dataitem": "{{WBREPONAME}}",
+	"wikibase-editlinks": "Каҫӑсене тӳрлет",
+	"wikibase-editlinkstitle": "Чӗлхесем хушшинчи каҫӑсем",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "кăтартмалла мар",
 	"wikibase-rc-hide-wikidata-show": "кăтартмалла",
