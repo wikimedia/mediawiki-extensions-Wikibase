@@ -45,7 +45,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class ItemContentTest extends EntityContentTest {
+class ItemContentTest extends EntityContentTestCase {
 
 	public function provideValidConstructorArguments() {
 		return [
