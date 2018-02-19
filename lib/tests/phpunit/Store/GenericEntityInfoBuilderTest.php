@@ -18,7 +18,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class GenericEntityInfoBuilderTest extends EntityInfoBuilderTest {
+class GenericEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 	/**
 	 * @param EntityId[] $ids

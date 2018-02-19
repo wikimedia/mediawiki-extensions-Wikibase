@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Tests\EntityRevisionLookupTest;
+use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -24,10 +24,10 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTest {
+class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 	/**
-	 * @see EntityRevisionLookupTest::newEntityRevisionLookup
+	 * @see EntityRevisionLookupTestCase::newEntityRevisionLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects

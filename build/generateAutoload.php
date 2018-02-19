@@ -29,7 +29,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 			'lib',
 			[ 'includes', 'maintenance' ],
 			[
-				'tests/phpunit/EntityRevisionLookupTest.php',
+				'tests/phpunit/EntityRevisionLookupTestCase.php',
 				'tests/phpunit/MockPropertyLabelResolver.php',
 				'tests/phpunit/MockRepository.php',
 				'tests/phpunit/Changes/MockRepoClientCentralIdLookup.php',
@@ -39,7 +39,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/Store/MockChunkAccess.php',
 				'tests/phpunit/Store/MockPropertyInfoLookup.php',
 				'tests/phpunit/Store/MockTermIndex.php',
-				'tests/phpunit/Store/TermIndexTest.php',
+				'tests/phpunit/Store/TermIndexTestCase.php',
 				'tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
 			]
 		);
@@ -73,7 +73,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/Rdf/NTriplesRdfTestHelper.php',
 				'tests/phpunit/includes/Rdf/RdfBuilderTestData.php',
 				'tests/phpunit/includes/Search/Elastic/Fields/SearchFieldTestCase.php',
-				'tests/phpunit/includes/Search/Elastic/Fields/WikibaseNumericFieldTest.php',
+				'tests/phpunit/includes/Search/Elastic/Fields/WikibaseNumericFieldTestCase.php',
 				'tests/phpunit/includes/Store/MockEntityIdPager.php',
 				'tests/phpunit/includes/Specials/HtmlAssertionHelpers.php',
 				'tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php',

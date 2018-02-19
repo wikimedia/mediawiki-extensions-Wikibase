@@ -16,7 +16,7 @@ use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
-use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
+use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\PropertyContent;
 use Wikibase\WikibaseSettings;
 use Wikipage;
@@ -32,7 +32,7 @@ use Wikipage;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
+class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 	protected function setUp() {
 		parent::setUp();
