@@ -113,9 +113,12 @@
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-entiteter som brukes på denne siden",
 	"wikibase-pageinfo-entity-usage-S": "Sidelenke",
+	"wikibase-pageinfo-entity-usage-L": "Noen etiketter",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etikett: $1",
+	"wikibase-pageinfo-entity-usage-D": "Noen beskrivelser",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Beskrivelse: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tittel",
+	"wikibase-pageinfo-entity-usage-C": "Noen utsagn",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Utsagn: $1",
 	"wikibase-pageinfo-entity-usage-X": "All entitetsdata",
 	"wikibase-pageinfo-entity-usage-O": "Annet (påstander)",
@@ -131,5 +134,6 @@
 	"notification-subject-page-connection": "En side på {{SITENAME}} som du {{GENDER:$3|opprettet}} ble {{GENDER:$2|koblet}} til et {{WBREPONAME}}-element",
 	"unresolved-property-category": "Sider med uløste egenskaper",
 	"unresolved-property-category-desc": "Denne kategorien lister opp sider som refererer til {{WBREPONAME}}-egenskaper som ikke kan finnes med egenskaps-ID eller etikett.",
-	"connected-redirect-category": "Omdirigeringer knyttet til et {{WBREPONAME}}-objekt"
+	"connected-redirect-category": "Omdirigeringer knyttet til et {{WBREPONAME}}-objekt",
+	"connected-redirect-category-desc": "Denne kategorien lister opp omdirigeringssider som er koblet til et {{WBREPONAME}}-element."
 }

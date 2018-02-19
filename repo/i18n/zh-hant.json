@@ -23,7 +23,8 @@
 			"和平奮鬥救地球",
 			"Wwycheuk",
 			"Translatealcd",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Hello903hello"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -41,7 +42,7 @@
 	"wikibase-save-inprogress": "儲存中...",
 	"wikibase-publish-inprogress": "發佈中…",
 	"wikibase-remove-inprogress": "移除中...",
-	"wikibase-statementlistview-add": "加入",
+	"wikibase-statementlistview-add": "加入值",
 	"wikibase-statementgrouplistview-add": "加入",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "更多其他語言",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "設定",
@@ -103,7 +104,7 @@
 	"wikibase-aliases-input-help-message": "要該此項目易於搜尋，您可以輸入別名。",
 	"wikibase-propertypage-datatype": "資料型態",
 	"wikibase-propertypage-bad-datatype": "未知的數據型態: $1",
-	"wikibase-claimview-snak-tooltip": "請輸入屬性名稱為 \"$1\" 所對應的數值。 若該屬性沒有指定的數值或實際數值為未知，您可以點選數值輸入框旁的圖示來指定自訂數值替代。",
+	"wikibase-claimview-snak-tooltip": "請輸入屬性名稱為「$1」所對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點選數值輸入框前的圖示來選擇一個值類型替代。",
 	"wikibase-claimview-snak-new-tooltip": "指定屬性後你可以輸入對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點選數值輸入框旁的圖示來指定自訂數值替代。",
 	"wikibase-statementview-rank-preferred": "最佳等級",
 	"wikibase-statementview-rank-normal": "一般等級",
@@ -174,7 +175,7 @@
 	"wikibase-newitem-fieldset": "建立一個新項目",
 	"wikibase-newitem-site": "第一個連結頁面的網站",
 	"wikibase-newitem-page": "第一個連結頁面的名稱",
-	"wikibase-newitem-no-external-page": "在對應網站無法找到指定頁面。",
+	"wikibase-newitem-no-external-page": "在「$1」上找不到頁面「$2」。",
 	"wikibase-newitem-not-recognized-siteid": "提供的網站 ID 無法辨識。",
 	"wikibase-newentity-language": "語言：",
 	"wikibase-newentity-label": "標籤：",
