@@ -20,7 +20,7 @@ use Wikibase\TermIndexEntry;
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  * @author Daniel Kinzler
  */
-abstract class TermIndexTest extends \MediaWikiTestCase {
+abstract class TermIndexTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * @return TermIndex

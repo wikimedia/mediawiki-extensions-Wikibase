@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Tests\EntityRevisionLookupTest;
+use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -24,7 +24,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
+class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 	/**
 	 * @see EntityRevisionLookupTest::newEntityRevisionLookup

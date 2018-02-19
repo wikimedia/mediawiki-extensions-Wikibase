@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
+abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * @return ItemId[]

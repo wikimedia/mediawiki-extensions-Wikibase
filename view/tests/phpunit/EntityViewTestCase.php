@@ -18,7 +18,7 @@ use Wikibase\View\EntityView;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-abstract class EntityViewTest extends PHPUnit_Framework_TestCase {
+abstract class EntityViewTestCase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityId $id

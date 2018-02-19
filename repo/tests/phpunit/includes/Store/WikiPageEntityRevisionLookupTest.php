@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
-use Wikibase\Lib\Tests\EntityRevisionLookupTest;
+use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use MWContentSerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -27,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
+class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 	/**
 	 * @var EntityRevision[]
