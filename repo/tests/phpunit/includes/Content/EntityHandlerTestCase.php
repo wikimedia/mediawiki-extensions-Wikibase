@@ -49,7 +49,7 @@ use WikitextContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class EntityHandlerTest extends \MediaWikiTestCase {
+abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 	abstract public function getModelId();
 

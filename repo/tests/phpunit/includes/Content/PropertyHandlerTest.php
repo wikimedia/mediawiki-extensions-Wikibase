@@ -23,7 +23,7 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyHandlerTest extends EntityHandlerTest {
+class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	/**
 	 * @see EntityHandlerTest::getModelId

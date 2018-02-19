@@ -26,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Addshore
  */
-class SpecialNewPropertyTest extends SpecialNewEntityTest {
+class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
