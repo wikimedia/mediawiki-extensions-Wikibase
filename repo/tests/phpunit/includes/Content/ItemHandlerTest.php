@@ -38,10 +38,10 @@ use Wikibase\SettingsArray;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class ItemHandlerTest extends EntityHandlerTest {
+class ItemHandlerTest extends EntityHandlerTestCase {
 
 	/**
-	 * @see EntityHandlerTest::getModelId
+	 * @see EntityHandlerTestCase::getModelId
 	 * @return string
 	 */
 	public function getModelId() {
@@ -53,7 +53,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
-	 * @see EntityHandlerTest::contentProvider
+	 * @see EntityHandlerTestCase::contentProvider
 	 */
 	public function contentProvider() {
 		/** @var ItemContent $content */
