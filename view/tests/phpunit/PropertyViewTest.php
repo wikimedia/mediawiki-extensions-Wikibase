@@ -30,7 +30,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class PropertyViewTest extends EntityViewTest {
+class PropertyViewTest extends EntityViewTestCase {
 
 	/**
 	 * @param EntityId|PropertyId $id

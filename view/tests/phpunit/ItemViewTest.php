@@ -29,7 +29,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class ItemViewTest extends EntityViewTest {
+class ItemViewTest extends EntityViewTestCase {
 
 	/**
 	 * @param EntityId|ItemId $id

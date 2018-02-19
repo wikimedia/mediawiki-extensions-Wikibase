@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\StorageException;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
+abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * @return EntityRevision[]

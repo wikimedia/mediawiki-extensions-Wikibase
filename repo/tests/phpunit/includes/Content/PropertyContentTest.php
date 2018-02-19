@@ -23,7 +23,7 @@ use Wikibase\PropertyContent;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyContentTest extends EntityContentTest {
+class PropertyContentTest extends EntityContentTestCase {
 
 	public function provideValidConstructorArguments() {
 		return [
