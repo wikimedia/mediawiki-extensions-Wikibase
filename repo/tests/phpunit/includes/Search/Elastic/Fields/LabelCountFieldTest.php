@@ -16,7 +16,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class LabelCountFieldTest extends WikibaseNumericFieldTest {
+class LabelCountFieldTest extends WikibaseNumericFieldTestCase {
 
 	public function getFieldDataProvider() {
 		$item = new Item();

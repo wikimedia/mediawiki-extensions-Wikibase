@@ -16,7 +16,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SiteLinkCountFieldTest extends WikibaseNumericFieldTest {
+class SiteLinkCountFieldTest extends WikibaseNumericFieldTestCase {
 
 	/**
 	 * @return WikibaseNumericField

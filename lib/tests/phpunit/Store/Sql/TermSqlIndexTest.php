@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\Lib\Tests\Store\TermIndexTest;
+use Wikibase\Lib\Tests\Store\TermIndexTestCase;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
@@ -35,7 +35,7 @@ use Wikimedia\TestingAccessWrapper;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class TermSqlIndexTest extends TermIndexTest {
+class TermSqlIndexTest extends TermIndexTestCase {
 
 	protected function setUp() {
 		parent::setUp();
