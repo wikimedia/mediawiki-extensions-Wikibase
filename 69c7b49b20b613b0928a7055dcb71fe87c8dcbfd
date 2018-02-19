@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "752d20df_c5e4c81e",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatementRank.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-19T15:50:19Z",
+      "side": 1,
+      "message": "Note that only the \"is_int\" function name is required for the PHPCS update. However, I decided to also touch the two type hints for consistency (in this file).",
+      "revId": "69c7b49b20b613b0928a7055dcb71fe87c8dcbfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c6135af_f413d9a2",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-19T15:50:19Z",
+      "side": 1,
+      "message": "I missed to explain this before:\n\nThe violation in this file could have been resolved in different ways:\n* Rename the file to DumpScript.php to match the class name.\n* Exclude this file from the sniff.\n* Add an annotation to disable the sniff here.\n\nI decided to rename both the file and the class to \"DumpEntities\" because I found \"DumpScript\" way to vague. (A \"script\" to \"dump\" what?)\n\nNote the same violation is not an issue in the other two dump….php files because the sniff is aware of the naming convention for maintenance scripts, which are supposed to start with a lower case character.",
+      "range": {
+        "startLine": 28,
+        "startChar": 15,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "69c7b49b20b613b0928a7055dcb71fe87c8dcbfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
