@@ -62,7 +62,7 @@ class ItemChangeTest extends EntityChangeTest {
 		//NOTE: Disable developer warnings that may get triggered by
 		//      the B/C code path.
 		$wgDevelopmentWarnings = false;
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 
 		try {
 			$cases = [];
@@ -98,7 +98,7 @@ class ItemChangeTest extends EntityChangeTest {
 			$cases['atomic-sitelink-diff'] = [ $change ];
 		} finally {
 			$wgDevelopmentWarnings = true;
-			\MediaWiki\restoreWarnings();
+			\Wikimedia\restoreWarnings();
 		}
 
 		return $cases;
@@ -116,7 +116,7 @@ class ItemChangeTest extends EntityChangeTest {
 		$this->setMwGlobals( 'wgDevelopmentWarnings', false );
 
 		// Also suppress notices that may be triggered by wfLogWarning
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 
 		try {
 			$siteLinkDiff = $change->getSiteLinkDiff();
@@ -126,7 +126,7 @@ class ItemChangeTest extends EntityChangeTest {
 				'getSiteLinkDiff must return a Diff'
 			);
 		} finally {
-			\MediaWiki\restoreWarnings();
+			\Wikimedia\restoreWarnings();
 		}
 	}
 

@@ -173,9 +173,9 @@ abstract class DumpScript extends Maintenance {
 		$dumper->setBatchSize( $batchSize );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$dumper->generateDump( $idStream );
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		if ( $idStream instanceof EntityIdReader ) {
 			// close stream / free resources

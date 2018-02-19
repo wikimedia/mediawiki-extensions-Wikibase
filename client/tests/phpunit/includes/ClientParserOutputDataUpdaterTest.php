@@ -266,9 +266,9 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		);
 
 		// Suppress warnings as this is supposed to throw one.
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		// Stuff didn't blow up
 		$this->assertTrue( true );
@@ -292,9 +292,9 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		);
 
 		// Suppress warnings as this is supposed to throw one.
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		// Stuff didn't blow up
 		$this->assertTrue( true );
