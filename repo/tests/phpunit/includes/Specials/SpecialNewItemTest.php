@@ -30,7 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Addshore
  */
-class SpecialNewItemTest extends SpecialNewEntityTest {
+class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	/**
 	 * @var SiteStore

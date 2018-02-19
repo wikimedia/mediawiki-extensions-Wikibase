@@ -13,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @license GPL-2.0-or-later
  */
-abstract class SpecialNewEntityTest extends SpecialPageTestBase {
+abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 

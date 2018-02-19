@@ -23,10 +23,10 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyHandlerTest extends EntityHandlerTest {
+class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	/**
-	 * @see EntityHandlerTest::getModelId
+	 * @see EntityHandlerTestCase::getModelId
 	 * @return string
 	 */
 	public function getModelId() {
@@ -38,7 +38,7 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
-	 * @see EntityHandlerTest::contentProvider
+	 * @see EntityHandlerTestCase::contentProvider
 	 */
 	public function contentProvider() {
 		$contents = [];
