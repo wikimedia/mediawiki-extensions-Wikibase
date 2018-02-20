@@ -4,7 +4,7 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
-	'Wikibase\\ClientHooks' => __DIR__ . '/WikibaseClient.hooks.php',
+	'Wikibase\\ClientHooks' => __DIR__ . '/ClientHooks.php',
 	'Wikibase\\Client\\Api\\ApiClientInfo' => __DIR__ . '/includes/Api/ApiClientInfo.php',
 	'Wikibase\\Client\\Api\\ApiListEntityUsage' => __DIR__ . '/includes/Api/ApiListEntityUsage.php',
 	'Wikibase\\Client\\Api\\ApiPropsEntityUsage' => __DIR__ . '/includes/Api/ApiPropsEntityUsage.php',

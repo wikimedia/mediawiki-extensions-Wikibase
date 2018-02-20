@@ -21,10 +21,9 @@
 	<rule ref="MediaWiki.Files.ClassMatchesFilename">
 		<!-- FIXME: These files should be renamed to match their class name. -->
 		<exclude-pattern>build/generateAutoload\.php</exclude-pattern>
-		<exclude-pattern>Wikibase*\.hooks\.php</exclude-pattern>
 	</rule>
 	<rule ref="MediaWiki.VariableAnalysis.ForbiddenGlobalVariables.ForbiddenGlobal$wgTitle">
-		<exclude-pattern>Wikibase\.hooks\.php</exclude-pattern>
+		<exclude-pattern>RepoHooks\.php</exclude-pattern>
 	</rule>
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
