@@ -157,10 +157,10 @@ final class ClientHooks {
 	/**
 	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
 	 *
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 */
-	public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
+	public static function onBeforePageDisplayAddJsConfig( OutputPage $out, Skin $skin ) {
 		$prefixedId = $out->getProperty( 'wikibase_item' );
 
 		if ( $prefixedId !== null ) {
@@ -172,10 +172,10 @@ final class ClientHooks {
 	 * Adds css for the edit links sidebar link or JS to create a new item
 	 * or to link with an existing one.
 	 *
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 */
-	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
 		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
 
@@ -212,9 +212,9 @@ final class ClientHooks {
 	/**
 	 * Register the parser functions.
 	 *
-	 * @param Parser &$parser
+	 * @param Parser $parser
 	 */
-	public static function onParserFirstCallInit( Parser &$parser ) {
+	public static function onParserFirstCallInit( Parser $parser ) {
 		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );
 	}
 
