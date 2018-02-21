@@ -104,10 +104,10 @@
 				typeNames.push( type );
 			}
 		} );
-		mw.loader.using( modules, function () {
+		mw.loader.using( modules, function ( require ) {
 			modules.forEach( function ( module, index ) {
 				entityDeserializer.registerStrategy(
-					mw.loader.require( module )(),
+					require( module )(),
 					typeNames[ index ]
 				);
 			} );
