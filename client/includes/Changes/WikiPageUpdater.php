@@ -261,7 +261,11 @@ class WikiPageUpdater implements PageUpdater {
 		$this->incrementStats( 'InjectRCRecords.titles', $titleCount );
 
 		// tracking fallout of the hacky fix for T177707
-		$this->incrementStats( 'InjectRCRecords.discardedTitles', count( $titles ) - $titleCount );
+		$delta = count( $titles ) - $titleCount;
+		$this->incrementStats( 'InjectRCRecords.discardedTitles', $delta );
+		if ( $delta !== 0 ) {
+			$this->incrementStats( 'InjectRCRecords.incompleteChanges', 1 );
+		}
 	}
 
 }
