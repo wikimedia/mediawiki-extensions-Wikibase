@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hello903hello"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "空",
+	"valueview-expert-timevalue-calendar-gregorian": "公曆",
+	"valueview-expert-timevalue-calendar-julian": "儒略曆",
+	"valueview-expert-timeinput-calendar": "日曆：",
+	"valueview-expertextender-languageselector-languagetemplate": "$1（$2）"
+}
