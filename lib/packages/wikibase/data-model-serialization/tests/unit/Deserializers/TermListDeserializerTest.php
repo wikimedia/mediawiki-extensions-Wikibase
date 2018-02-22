@@ -4,7 +4,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\TermDeserializer;
 use Wikibase\DataModel\Deserializers\TermListDeserializer;
 use Wikibase\DataModel\Term\Term;
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0+
  * @author Addshore
  */
-class TermListDeserializerTest extends PHPUnit_Framework_TestCase {
+class TermListDeserializerTest extends TestCase {
 
 	/**
 	 * @return Deserializer

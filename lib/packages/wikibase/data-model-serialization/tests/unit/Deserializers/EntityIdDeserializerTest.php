@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
-class EntityIdDeserializerTest extends PHPUnit_Framework_TestCase {
+class EntityIdDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
 		$entityIdParserMock = $this->getMock( EntityIdParser::class );

@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
@@ -15,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
-class StatementListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class StatementListSerializationRoundtripTest extends TestCase {
 
 	/**
 	 * @dataProvider snaksProvider

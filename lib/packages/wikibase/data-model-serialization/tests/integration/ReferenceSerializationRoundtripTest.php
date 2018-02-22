@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Reference;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */
-class ReferenceSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class ReferenceSerializationRoundtripTest extends TestCase {
 
 	/**
 	 * @dataProvider referenceProvider

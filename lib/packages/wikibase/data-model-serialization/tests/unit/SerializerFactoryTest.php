@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -26,7 +27,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class SerializerFactoryTest extends TestCase {
 
 	private function buildSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );

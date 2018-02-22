@@ -2,7 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupSerializerTest extends PHPUnit_Framework_TestCase {
+class AliasGroupSerializerTest extends TestCase {
 
 	/**
 	 * @dataProvider nonSerializableProvider

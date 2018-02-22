@@ -4,14 +4,14 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */
-abstract class DispatchableDeserializerTest extends PHPUnit_Framework_TestCase {
+abstract class DispatchableDeserializerTest extends TestCase {
 
 	/**
 	 * @return DispatchableDeserializer

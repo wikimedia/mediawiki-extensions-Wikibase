@@ -2,7 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\UnsupportedObjectException;
 
@@ -11,7 +11,7 @@ use Serializers\Exceptions\UnsupportedObjectException;
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */
-abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
+abstract class DispatchableSerializerTest extends TestCase {
 
 	/**
 	 * @return DispatchableSerializer

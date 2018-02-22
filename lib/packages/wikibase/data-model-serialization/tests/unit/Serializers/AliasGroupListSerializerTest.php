@@ -2,7 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use stdClass;
@@ -17,7 +17,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupListSerializerTest extends PHPUnit_Framework_TestCase {
+class AliasGroupListSerializerTest extends TestCase {
 
 	/**
 	 * @param bool $useObjectsForMaps

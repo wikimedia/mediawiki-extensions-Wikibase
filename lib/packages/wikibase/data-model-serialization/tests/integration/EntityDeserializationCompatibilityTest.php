@@ -9,6 +9,7 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
+use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -21,7 +22,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase {
+class EntityDeserializationCompatibilityTest extends TestCase {
 
 	/**
 	 * @var Deserializer
