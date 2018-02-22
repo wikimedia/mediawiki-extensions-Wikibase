@@ -21,6 +21,7 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikimedia\Purtle\BNodeLabeler;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
@@ -179,7 +180,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		$this->timestamp = (int)$timestamp;
 	}
 
-	private static function getRdfWriter( $name ) {
+	private static function getRdfWriter( $name, BNodeLabeler $labeler = null ) {
 		$factory = new RdfWriterFactory();
 		$format = $factory->getFormatName( $name );
 
@@ -187,7 +188,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			return null;
 		}
 
-		return $factory->getWriter( $format );
+		return $factory->getWriter( $format, $labeler );
 	}
 
 	/**
@@ -232,6 +233,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
 	 * @param EntityTitleLookup          $titleLookup
+	 * @param BNodeLabeler               $labeler
 	 *
 	 * @return static
 	 * @throws InvalidArgumentException
@@ -247,9 +249,10 @@ class RdfDumpGenerator extends DumpGenerator {
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		RdfVocabulary $vocabulary,
-		EntityTitleLookup $titleLookup
+		EntityTitleLookup $titleLookup,
+		BNodeLabeler $labeler = null
 	) {
-		$rdfWriter = self::getRdfWriter( $format );
+		$rdfWriter = self::getRdfWriter( $format, $labeler );
 		if ( !$rdfWriter ) {
 			throw new InvalidArgumentException( "Unknown format: $format" );
 		}

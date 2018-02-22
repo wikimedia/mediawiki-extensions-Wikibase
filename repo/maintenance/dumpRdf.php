@@ -15,6 +15,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Purtle\BNodeLabeler;
 
 require_once __DIR__ . '/DumpEntities.php';
 
@@ -156,6 +157,13 @@ class DumpRdf extends DumpEntities {
 			$this->error( 'Invalid flavor: ' . $flavor, 1 );
 		}
 
+		if ( $this->getOption( 'sharding-factor', 1 ) !== 1 ) {
+			$shard = $this->getOption( 'shard', 0 );
+			$labeler = new BNodeLabeler( "genid{$shard}-" );
+		} else {
+			$labeler = null;
+		}
+
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
@@ -167,7 +175,8 @@ class DumpRdf extends DumpEntities {
 			$this->entityRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$this->rdfVocabulary,
-			$this->titleLookup
+			$this->titleLookup,
+			$labeler
 		);
 	}
 
