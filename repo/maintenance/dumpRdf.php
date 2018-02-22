@@ -15,6 +15,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Purtle\BNodeLabeler;
 
 require_once __DIR__ . '/DumpEntities.php';
 
@@ -80,6 +81,7 @@ class DumpRdf extends DumpEntities {
 			true
 		);
 		$this->addOption( 'redirect-only', 'Whether to only dump information about redirects.', false, false );
+		$this->addOption( 'part-id', 'Unique identifier for this part of multi-part dump, to be used for marking bnodes.', false, true );
 	}
 
 	public function setServices(
@@ -156,6 +158,20 @@ class DumpRdf extends DumpEntities {
 			$this->error( 'Invalid flavor: ' . $flavor, 1 );
 		}
 
+		$labeler = null;
+		$partId = $this->getOption( 'part-id' );
+		if ( $partId ) {
+			$labeler = new BNodeLabeler( "genid{$partId}-" );
+		}
+
+		if ( $this->getOption( 'sharding-factor', 1 ) !== 1 ) {
+			$shard = $this->getOption( 'shard', 0 );
+			if ( !$labeler ) {
+				// Mark this shard's bnodes with shard ID if not told otherwise
+				$labeler = new BNodeLabeler( "genid{$shard}-" );
+			}
+		}
+
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
@@ -167,7 +183,8 @@ class DumpRdf extends DumpEntities {
 			$this->entityRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$this->rdfVocabulary,
-			$this->titleLookup
+			$this->titleLookup,
+			$labeler
 		);
 	}
 
