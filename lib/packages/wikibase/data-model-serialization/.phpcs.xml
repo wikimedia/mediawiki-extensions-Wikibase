@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WikibaseDataModelServices">
+<ruleset>
 	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase" />
 
 	<rule ref="Generic.Files.LineLength">
