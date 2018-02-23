@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "720dd6c5_c71ee608",
+        "filename": "lib/includes/Store/HashSiteLinkStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-23T16:10:19Z",
+      "side": 1,
+      "message": "That\u0027s me unintentionally falling back to old habits. PS2 shows how much better Assert is in cases like this. \\o/",
+      "parentUuid": "549b02b9_644bcb5a",
+      "revId": "ace795eee5183e3d278a41cd6bba019017949fd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2ca516a_7ea1ecc3",
         "filename": "lib/includes/Store/Sql/SiteLinkTable.php",
         "patchSetId": 1
