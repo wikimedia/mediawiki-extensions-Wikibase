@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -32,9 +33,14 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+		if ( !is_string( $globalSiteId ) || !is_string( $pageTitle ) ) {
+			throw new InvalidArgumentException( '$globalSiteId and $pageTitle must be strings' );
+		}
+
 		$key = "$globalSiteId:$pageTitle";
 
 		if ( isset( $this->itemIdsByLink[$key] ) ) {
@@ -207,6 +213,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ) {
