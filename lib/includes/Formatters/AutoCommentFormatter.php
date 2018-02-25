@@ -122,7 +122,7 @@ class AutoCommentFormatter {
 	public function wrapAutoComment( $pre, $comment, $post ) {
 		if ( $pre ) {
 			# written summary $presep autocomment (summary /* section */)
-			$pre = wfMessage( 'autocomment-prefix' )->inLanguage( $this->language )->escaped();
+			$pre = wfMessage( 'autocomment-prefix' )->inLanguage( $this->language )->text();
 		}
 		if ( $post ) {
 			# autocomment $postsep written summary (/* section */ summary)
