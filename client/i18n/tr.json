@@ -12,7 +12,8 @@
 			"HakanIST",
 			"Alpkant",
 			"Incelemeelemani",
-			"Vito Genovese"
+			"Vito Genovese",
+			"Diyapazon"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -57,5 +58,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Başlık",
 	"wikibase-otherprojects": "Diğer projelerde",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
-	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler."
+	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler.",
+	"connected-redirect-category": "Bir {{WBREPONAME}} öğesine bağlı olan yönlendirmeler",
+	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler."
 }

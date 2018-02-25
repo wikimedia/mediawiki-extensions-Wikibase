@@ -83,5 +83,6 @@
 	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion \"{{int:wikibase-otherprojects}}\", joka tarjoaa linkit muihin Wikimedia-hankkeisiin perustuen dataan sivustolla {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Yhteys|Yhteydet}} {{WBREPONAME}}an",
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
-	"unresolved-property-category": "Sivut, joissa ratkaisemattomia ominaisuuksia"
+	"unresolved-property-category": "Sivut, joissa ratkaisemattomia ominaisuuksia",
+	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen"
 }
