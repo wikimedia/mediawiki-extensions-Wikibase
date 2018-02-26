@@ -109,6 +109,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
           ]
 </poem>
 ;allowDataTransclusion: Switch to enable data transclusion features like the <code><nowiki>{{#property}}</nowiki></code> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <code>true</code>.
+;allowLocalShortDesc: Switch to enable local override of the central description with <code><nowiki>{{#shortdesc}}</nowiki></code>. Defaults to <code>false</code>.
 ;allowArbitraryDataAccess: Switch to allow accessing arbitrary items from the <tt>wikibase</tt> Scribunto module and the via the parser functions (instead of just the item which is linked to the current page). Defaults to <code>true</code>.
 ;allowDataAccessInUserLanguage: Switch to allow accessing data in the user's language rather than the content language from the <tt>wikibase</tt> Scribunto module and the via the parser functions. Useful for multilingual wikis: Allows users to split the ParserCache by user language. Defaults to <code>false</code>.
 ;entityAccessLimit: Limit for the number of different full entities that can be loaded on any given page, via Scribunto or the property parser function. Defaults to 200.
