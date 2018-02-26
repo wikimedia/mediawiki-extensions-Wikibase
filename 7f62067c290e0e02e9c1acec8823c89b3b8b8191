@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "38d41ad4_239541c3",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-26T11:32:42Z",
+      "side": 1,
+      "message": "A description of the page, or the topic of page, I don\u0027t think there is a difference, I was just trying to be pedantic. The name came out of an enwiki discussion so I don\u0027t want to change it on my own. (Also, are there any other kinds of descriptions?)",
+      "parentUuid": "538b27cc_b1f4ea1f",
+      "range": {
+        "startLine": 16,
+        "startChar": 39,
+        "endLine": 16,
+        "endChar": 80
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4059a00_850930d1",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 3
@@ -105,6 +129,30 @@
       "writtenOn": "2018-02-26T11:01:49Z",
       "side": 1,
       "message": "It might be worth marking this api module as internal?\nRight now the only use case we have is for wmf internal app usage, and this would allow us to change the behaviour in the future without having to inform wikibase users and wait etc.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d68c23e_e70ef2f2",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-26T11:32:42Z",
+      "side": 1,
+      "message": "Given how popular descriptions are in all kinds of tools, I don\u0027t think it should be internal in the long term. Probably a good idea to mark it as such while it\u0027s new, though.",
+      "parentUuid": "e513561c_331c6ce5",
       "range": {
         "startLine": 22,
         "startChar": 6,
