@@ -187,7 +187,7 @@ class RepositoryDefinitions {
 		$values = [];
 
 		foreach ( $this->repositoryDefinitions as $repositoryName => $definition ) {
-			if ( isset( $definition[$field] ) ) {
+			if ( array_key_exists( $field, $definition ) ) {
 				$values[$repositoryName] = $definition[$field];
 			}
 		}
