@@ -14,7 +14,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
  * @license GPL-2.0+
  * @author Stas Malyshev
  */
-abstract class WikibaseNumericFieldTest extends PHPUnit_Framework_TestCase {
+abstract class WikibaseNumericFieldTestCase extends PHPUnit_Framework_TestCase {
 
 	public function testGetMapping() {
 		$field = $this->getFieldObject();

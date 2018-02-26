@@ -30,7 +30,7 @@ use WikiPage;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class EntityContentTest extends \MediaWikiTestCase {
+abstract class EntityContentTestCase extends \MediaWikiTestCase {
 
 	private $originalGroupPermissions;
 	private $originalUser;
