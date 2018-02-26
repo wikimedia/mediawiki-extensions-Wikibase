@@ -253,6 +253,24 @@ call_user_func( function() {
 		}
 	);
 
+	$wgAPIPropModules['description'] = [
+		'class' => Wikibase\Client\Api\Description::class,
+		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+			$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
+			$allowLocalDescription = $client->getSettings()->getSetting( 'allowLocalDescription' );
+			$termIndex = $client->getStore()->getTermIndex();
+			$entityIdLookup = $client->getStore()->getEntityIdLookup();
+			return new Wikibase\Client\Api\Description(
+				$allowLocalDescription,
+				$client->getContentLanguage(),
+				$entityIdLookup,
+				$termIndex,
+				$apiQuery,
+				$moduleName
+			);
+		}
+	];
+
 	$wgAPIPropModules['wbentityusage'] = [
 		'class' => Wikibase\Client\Api\ApiPropsEntityUsage::class,
 		'factory' => function ( ApiQuery $query, $moduleName ) {

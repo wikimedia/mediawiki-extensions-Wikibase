@@ -31,6 +31,7 @@ return call_user_func( function() {
 		'sendEchoNotification' => false,
 		'echoIcon' => false,
 		'allowDataTransclusion' => true,
+		'allowLocalDescription' => false,
 		'propagateChangesToRepo' => true,
 		'propertyOrderUrl' => null,
 		// List of additional CSS class names for site links that have badges,
