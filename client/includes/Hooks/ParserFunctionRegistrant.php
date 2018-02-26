@@ -19,10 +19,16 @@ class ParserFunctionRegistrant {
 	private $allowDataTransclusion;
 
 	/**
+	 * @var bool Setting to enable local override of descriptions.
+	 */
+	private $allowLocalDescription;
+
+	/**
 	 * @param bool $allowDataTransclusion
 	 */
-	public function __construct( $allowDataTransclusion ) {
+	public function __construct( $allowDataTransclusion, $allowLocalDescription ) {
 		$this->allowDataTransclusion = $allowDataTransclusion;
+		$this->allowLocalDescription = $allowLocalDescription;
 	}
 
 	public function register( Parser $parser ) {
@@ -39,25 +45,31 @@ class ParserFunctionRegistrant {
 	}
 
 	private function registerParserFunctions( Parser $parser ) {
-		if ( !$this->allowDataTransclusion ) {
-			return;
+		if ( $this->allowDataTransclusion ) {
+			$parser->setFunctionHook(
+				'property',
+				function( Parser $parser, PPFrame $frame, array $args ) {
+					return Runner::renderEscapedPlainText( $parser, $frame, $args );
+				},
+				Parser::SFH_OBJECT_ARGS
+			);
+
+			$parser->setFunctionHook(
+				'statements',
+				function( Parser $parser, PPFrame $frame, array $args ) {
+					return Runner::renderRichWikitext( $parser, $frame, $args );
+				},
+				Parser::SFH_OBJECT_ARGS
+			);
 		}
 
-		$parser->setFunctionHook(
-			'property',
-			function( Parser $parser, PPFrame $frame, array $args ) {
-				return Runner::renderEscapedPlainText( $parser, $frame, $args );
-			},
-			Parser::SFH_OBJECT_ARGS
-		);
-
-		$parser->setFunctionHook(
-			'statements',
-			function( Parser $parser, PPFrame $frame, array $args ) {
-				return Runner::renderRichWikitext( $parser, $frame, $args );
-			},
-			Parser::SFH_OBJECT_ARGS
-		);
+		if ( $this->allowLocalDescription ) {
+			$parser->setFunctionHook(
+				'shortdesc',
+				[ ShortDescHandler::class, 'handle' ],
+				Parser::SFH_NO_HASH
+			);
+		}
 	}
 
 }
