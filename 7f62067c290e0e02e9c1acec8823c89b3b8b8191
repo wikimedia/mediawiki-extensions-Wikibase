@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "950be45c_f4ff5475",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T17:00:54Z",
+      "side": 1,
+      "message": "I was merely expressing what was said on the phab ticket also in code review. A description of a page on wikipedia / a mediawiki site and the description of the item / concept linked to the page can differ in some cases.",
+      "parentUuid": "38d41ad4_239541c3",
+      "range": {
+        "startLine": 16,
+        "startChar": 39,
+        "endLine": 16,
+        "endChar": 80
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4059a00_850930d1",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 3
@@ -153,6 +177,30 @@
       "side": 1,
       "message": "Given how popular descriptions are in all kinds of tools, I don\u0027t think it should be internal in the long term. Probably a good idea to mark it as such while it\u0027s new, though.",
       "parentUuid": "e513561c_331c6ce5",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b747c02c_cc607eb9",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T17:00:54Z",
+      "side": 1,
+      "message": "Yeh, if other people end up using it we can \u0027publish\u0027 is, but internal allows us to change it as much as we want for now (if we need to).",
+      "parentUuid": "5d68c23e_e70ef2f2",
       "range": {
         "startLine": 22,
         "startChar": 6,
