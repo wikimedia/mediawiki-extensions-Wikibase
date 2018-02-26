@@ -21,18 +21,34 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 	public function parserFunctionsProvider() {
 		return [
 			[
-				'allowDataTransclusion' => false,
+				[
+					'allowDataTransclusion' => false,
+					'allowLocalShortDesc' => false,
+				],
 				[
 					'noexternallanglinks',
-				]
+				],
 			],
 			[
-				'allowDataTransclusion' => true,
+				[
+					'allowDataTransclusion' => true,
+					'allowLocalShortDesc' => false,
+				],
 				[
 					'noexternallanglinks',
 					'property',
 					'statements',
-				]
+				],
+			],
+			[
+				[
+					'allowDataTransclusion' => false,
+					'allowLocalShortDesc' => true,
+				],
+				[
+					'noexternallanglinks',
+					'shortdesc',
+				],
 			],
 		];
 	}
@@ -41,12 +57,13 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider parserFunctionsProvider
 	 */
 	public function testRegisterParserFunctions(
-		$allowDataTransclusion,
+		$constructorArgs,
 		array $expected
 	) {
 		$parser = new Parser( [ 'class' => 'Parser' ] );
 
-		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion );
+		list( $allowDataTransclusion, $allowLocalShortDesc ) = array_values( $constructorArgs );
+		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion, $allowLocalShortDesc );
 		$registrant->register( $parser );
 		$actual = $parser->getFunctionHooks();
 
