@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f388439_2d9652d0",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "Might be worth specifying parser function here?",
+      "range": {
+        "startLine": 41,
+        "startChar": 84,
+        "endLine": 41,
+        "endChar": 98
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3205b881_5e97dc6f",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "Might be worth stating that the description comes from the associated wikibase item, rather than the repository.",
+      "range": {
+        "startLine": 42,
+        "startChar": 104,
+        "endLine": 42,
+        "endChar": 124
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "538b27cc_b1f4ea1f",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "If this description is specifically for the topic of the page perhaps the parser function should be called {{SHORTTOPICDESC: or just {{TOPICDESC: to avoid confusion ?",
+      "range": {
+        "startLine": 16,
+        "startChar": 39,
+        "endLine": 16,
+        "endChar": 80
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4059a00_850930d1",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "Could we add a comment here saying that this api module could probably live in a separate extension?",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 2
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e513561c_331c6ce5",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "It might be worth marking this api module as internal?\nRight now the only use case we have is for wmf internal app usage, and this would allow us to change the behaviour in the future without having to inform wikibase users and wait etc.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49a708ef_784661a4",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "@params are the wrong way around.",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 35
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6c3c0b7_6978ba5b",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "Could we also have an example with the prefersource parameter?",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 39
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1f84483_a5917c01",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-02-26T11:01:49Z",
+      "side": 1,
+      "message": "not needed space.",
+      "range": {
+        "startLine": 112,
+        "startChar": 1,
+        "endLine": 112,
+        "endChar": 2
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
