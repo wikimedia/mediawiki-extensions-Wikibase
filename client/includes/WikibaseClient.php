@@ -1083,7 +1083,8 @@ final class WikibaseClient {
 	 */
 	public function getParserFunctionRegistrant() {
 		return new ParserFunctionRegistrant(
-			$this->settings->getSetting( 'allowDataTransclusion' )
+			$this->settings->getSetting( 'allowDataTransclusion' ),
+			$this->settings->getSetting( 'allowLocalShortDesc' )
 		);
 	}
 
