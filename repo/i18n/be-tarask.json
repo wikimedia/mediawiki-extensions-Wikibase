@@ -324,6 +324,7 @@
 	"wikibase-self-conflict-patched": "Вашая праўка ўвайшла ў апошнюю вэрсію, пры гэтым былі перазапісаныя некаторыя вашыя прамежкавыя зьмены.",
 	"wikibase-conflict-patched": "Вашая праўка ўвайшла ў апошнюю вэрсію.",
 	"wikibase-restoreold": "аднавіць",
+	"wikibase-entity-summary-restore": "Адноўленая вэрсія $3 аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Простае рэдагаваньне ў прасторы назваў «$1» адключанае",
 	"wikibase-noentity-createone": "Вы можаце таксама [[$1|стварыць яго]].",
 	"wikibase-listdatatypes-wikibase-item-head": "Аб’ект",
