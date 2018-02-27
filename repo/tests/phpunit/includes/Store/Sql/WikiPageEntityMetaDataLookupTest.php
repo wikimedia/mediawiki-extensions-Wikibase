@@ -281,6 +281,18 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->assertRevisionInformation( $entityIds, $result );
 	}
 
+	public function testLoadRevisionInformation_emptyEntityIds() {
+		$entityIds = [];
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadRevisionInformation(
+				$entityIds,
+				EntityRevisionLookup::LATEST_FROM_REPLICA
+			);
+
+		$this->assertEmpty( $result );
+	}
+
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationThrowsException() {
 		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
 
