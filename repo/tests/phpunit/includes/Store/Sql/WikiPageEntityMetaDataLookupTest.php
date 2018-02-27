@@ -281,6 +281,21 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->assertRevisionInformation( $entityIds, $result );
 	}
 
+	public function testLoadRevisionInformation_unknownNamespace() {
+		$entityId = $this->data[0]->getEntity()->getId();
+		$namespaceLookup = new EntityNamespaceLookup( [] );
+		$metaDataLookup = new WikiPageEntityMetaDataLookup( $namespaceLookup );
+
+		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
+		$result = $metaDataLookup->loadRevisionInformation(
+			[ $entityId ],
+			EntityRevisionLookup::LATEST_FROM_REPLICA
+		);
+		\Wikimedia\restoreWarnings();
+
+		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
+	}
+
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationThrowsException() {
 		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
 
