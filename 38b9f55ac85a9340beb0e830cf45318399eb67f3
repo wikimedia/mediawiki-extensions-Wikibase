@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5d3b5cf_96945f58",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-02-27T15:38:06Z",
+      "side": 1,
+      "message": "While \"WHERE 0\" works on MySQL and SQLite, it doesn\u0027t work on PostgreSQL, MSSQL, or Oracle. It\u0027d be better to use a condition like \"1\u003d0\" instead.",
+      "revId": "38b9f55ac85a9340beb0e830cf45318399eb67f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
