@@ -14,7 +14,7 @@
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
 	"tooltip-t-wikibase": "Linkki yhdistettyyn keskustietovaraston kohteeseen",
-	"wikibase-after-page-move": "Voit myös [$1 päivittää] sivuun liittyvän {{WBREPONAME}}-kohteen säilyttääksesi kielilinkit siirretyllä sivulla.",
+	"wikibase-after-page-move": "Tekemäsi siirron vaikutusten [$1 pitäisi näkyä kielilinkkinä kohteessa {{WBREPONAME}}]. Voit kuitenkin varmistaa asian vielä.",
 	"wikibase-after-page-move-queued": "Tähän sivuun liitetty [$1 {{WBREPONAME}}-kohde] päivitetään pian automaattisesti. Huomaa, että se ei välttämättä tapahdu välittömästi.",
 	"wikibase-after-page-delete-queued": "Tähän sivuun liitetty [$1 {{WBREPONAME}}-kohde] päivitetään pian automaattisesti. Huomaa, että se ei välttämättä tapahdu välittömästi.",
 	"wikibase-comment-add": "{{WBREPONAME}}-kohde luotu.",
@@ -83,6 +83,6 @@
 	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion \"{{int:wikibase-otherprojects}}\", joka tarjoaa linkit muihin Wikimedia-hankkeisiin perustuen dataan sivustolla {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Yhteys|Yhteydet}} {{WBREPONAME}}an",
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
-	"unresolved-property-category": "Sivut, joissa ratkaisemattomia ominaisuuksia",
+	"unresolved-property-category": "Sivut, joissa on ratkaisemattomia ominaisuuksia",
 	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen"
 }

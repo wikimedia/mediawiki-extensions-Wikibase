@@ -8,5 +8,8 @@
 	"tooltip-t-wikibase": "Легэтурэ кэтре елементул асочиат дин депозитул де дате",
 	"wikibase-dataitem": "Елемент {{WBREPONAME}}",
 	"wikibase-editlinks": "Модификэ легэтуриле",
-	"wikibase-editlinkstitle": "Модификэ легэтуриле интерлингуале"
+	"wikibase-editlinkstitle": "Модификэ легэтуриле интерлингуале",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-letter": "Д",
+	"wikibase-rc-wikibase-edit-title": "Редактаре {{WBREPONAME}}"
 }

@@ -55,8 +55,8 @@
 	"wikibase-rc-show-wikidata-pref": "Прикажи измене на Википодацима у скорашњим изменама",
 	"wikibase-rc-wikibase-edit-letter": "П",
 	"wikibase-rc-wikibase-edit-title": "Измена на Википодацима",
-	"wikibase-rcfilters-hide-wikibase-label": "Измјене на Википодацима",
-	"wikibase-rcfilters-hide-wikibase-description": "Измјене које потичу са Википодатака.",
+	"wikibase-rcfilters-hide-wikibase-label": "Измене на Википодацима",
+	"wikibase-rcfilters-hide-wikibase-description": "Измене које потичу са Википодатака.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Овај филтер је у сукобу са једним или више филтера за Квалитет доприноса или Намеру корисника. Предвиђања квалитета или намерет нису доступна за измене {{WBREPONAME}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Филтер „{{WBREPONAME}} edits” је у сукобу са једним или више филтера за Квалитет доприноса или Намеру корисника. Предвиђања квалитета и намере нису доступна за измене {{WBREPONAME}}. Сукобљени филтери су означени у подручју Активни филтери, изнад.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Предвиђања квалитета доприноса нису доступна за одређене типове измена, тако да је овај филтер у сукобу са следећим {{PLURAL:$2|филтером|филтерима}} типа измене: $1",
@@ -91,6 +91,6 @@
 	"echo-pref-tooltip-wikibase-action": "Обавештава вас када неко повеже страницу коју сте направили на ставку Википодатака.",
 	"notification-header-page-connection": "{{GENDER:$2|Корисник|Корисница|Корисник}} $2 је {{GENDER:$2|повезао|повезала|повезао}} страницу <strong>$3</strong> на ставку на Википодацима.",
 	"notification-subject-page-connection": "{{GENDER:$2|Корисник|Корисница|Корисник}} $2 је страницу <strong>$3</strong> коју сте Ви {{GENDER:$3|направили}} на пројекту {{SITENAME}} {{GENDER:$2|повезао|повезала|повезао}} на ставку на Википодацима",
-	"connected-redirect-category": "Преусмерења која су повезана на Википодатке",
-	"connected-redirect-category-desc": "Ова категорија приказује листу преусмерених страница које су повезане на Википодацима."
+	"connected-redirect-category": "Преусмерења која су повезана на Википодацима",
+	"connected-redirect-category-desc": "Ова категорија приказује списак преусмерења која су повезана на Википодацима."
 }

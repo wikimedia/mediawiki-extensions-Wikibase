@@ -4,7 +4,8 @@
 			"V.narsikar",
 			"Ydyashad",
 			"संतोष दहिवळ",
-			"BPositive"
+			"BPositive",
+			"Sureshkhole"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस विस्तारकाचा ग्राहक",
@@ -71,6 +72,7 @@
 	"wikibase-pageinfo-entity-id-none": "काहीही नाही",
 	"wikibase-pageinfo-entity-usage-S": "संकेतस्थळ दुवा",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "लेबल: $1",
+	"wikibase-pageinfo-entity-usage-D": "काही वर्णन",
 	"wikibase-pageinfo-entity-usage-T": "शीर्षक",
 	"wikibase-pageinfo-entity-usage-O": "ईतर (विधाने)",
 	"wikibase-property-render-error": "$1 गुणधर्म देण्यास अयशस्वी:$2",

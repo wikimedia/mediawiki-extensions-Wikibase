@@ -75,7 +75,7 @@
 	"special-newproperty": "Създаване на ново свойство",
 	"wikibase-newproperty-fieldset": "Създаване на ново свойство",
 	"wikibase-newproperty-datatype": "Тип на данните:",
-	"wikibase-newproperty-invalid-datatype": "Указан е невалиден тип на данните",
+	"wikibase-newproperty-invalid-datatype": "Указан е невалиден тип на данните.",
 	"special-newitem": "Създаване на нов обект",
 	"wikibase-newitem-fieldset": "Създаване на нов обект",
 	"wikibase-newitem-no-external-page": "Посочената страница не беше намерена в съответния сайт.",
