@@ -301,7 +301,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		if ( empty( $where ) ) {
 			// If we skipped all entity IDs, select nothing, not everything.
-			return '0';
+			return '0=1';
 		}
 
 		return $db->makeList( $where, LIST_OR );
