@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ae76f80_f62ecdf5",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "I\u0027m not happy to see the magic word being called \"SHORTDESC\", but the API module \"description\". It would be really awesome if this could be the same.",
+      "range": {
+        "startLine": 256,
+        "startChar": 20,
+        "endLine": 256,
+        "endChar": 31
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d24d1c34_5c6c50a1",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "Is this the setting that disabled the magic word? If so, can we please make sure the names of the two somehow resemble each other? If the magic word is called \"SHORTDESC\", shouldn\u0027t this setting be called \"allowLocalShortDesc\" then?",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed7d047_3265ec65",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "\"… short description a.k.a. subtitle …\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 62
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "256624a3_3d9d6f79",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "Please use \"{{WBREPONAME}}\" here.",
+      "range": {
+        "startLine": 42,
+        "startChar": 104,
+        "endLine": 42,
+        "endChar": 112
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dc9323d_557ce942",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "If this really is an issue, it should be turned into a Phabricator ticket and prioritized accordingly. Please do not hide such fundamental architectural questions in a comment. It will not do anything here but confuse everybody looking at this code later.\n\nPlease either add a specific ticket number here, or remove the comment entirely.",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b43bea8b_331b621b",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "Personally I like it if these are the first two constructor parameters, just as in the base class. But this is more a matter of taste than anything, so feel free to ignore this comment if you disagree.",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 13
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3270a478_f1084606",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "I suspect this is intentional, but please note this implementation is not able to apply any language fallbacks. Personally I believe this is correct and what I would expected from such an API module.",
+      "range": {
+        "startLine": 137,
+        "startChar": 41,
+        "endLine": 137,
+        "endChar": 78
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6875ae6b_4214e556",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "This is a pretty significant side-effect that is not immediately visible from the method name \"addDescriptionsToResult\". Can you please try to make it more obvious, e.g. by renaming the method?",
+      "range": {
+        "startLine": 177,
+        "startChar": 4,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dec51577_ece03208",
+        "filename": "client/includes/Hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "Can you please move the new code into a new private method? The new magic word is significantly distinct and does not really qualify as a \"parser function\" because it does not return anything. It\u0027s just a magic word, more similar to {{DISPLAYTITLE:…}} than to an actual function.",
+      "range": {
+        "startLine": 47,
+        "startChar": 18,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab5e3dd_92903bdf",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "The one major problem I do have with the sanitation and invalidation in here is that is is only applied on descriptions provided via {{SHORTDESC:…}} but not on Wikidata descriptions. This creates the situation that a Wikidata description that is actually invalid according to the algorithm in here can not be changed.\n\nE.g. the Wikidata description is \"..\" (two dots). Users can not override this with \"{{SHORTDESC:...}}\" (three dots). This is inconsistent and hard to argue when the community starts asking \"Why?\" questions. Can we please either get rid of this, or apply it on both local and central descriptions?",
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd9cc6aa_27b1da8e",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "What does this mean?",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2b2e9fa_41f4b2bf",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:26:52Z",
+      "side": 1,
+      "message": "This \\s is redundant because \\p{z} already includes all whitespace characters.",
+      "range": {
+        "startLine": 44,
+        "startChar": 26,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
