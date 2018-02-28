@@ -137,16 +137,33 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 *  could not be found.
 	 */
 	public function loadLatestRevisionIds( array $entityIds, $mode ) {
-		return array_map(
-			function ( $revisionInformation ) {
-				if ( is_bool( $revisionInformation ) ) {
-					return $revisionInformation;
-				}
+		$revisionIds = [];
 
-				return $revisionInformation->page_latest;
-			},
-			$this->loadRevisionInformation( $entityIds, $mode )
-		);
+		$this->assertEntityIdsFromRightRepository( $entityIds );
+
+		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
+			$revisionIds = $this->selectLatestRevisionIdsMultiple( $entityIds, DB_REPLICA );
+		}
+
+		if ( $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
+			// Attempt to load (missing) rows from master if the caller asked for that.
+			$loadFromMaster = [];
+			/** @var EntityId $entityId */
+			foreach ( $entityIds as $entityId ) {
+				if ( !isset( $revisionIds[$entityId->getSerialization()] ) || !$revisionIds[$entityId->getSerialization()] ) {
+					$loadFromMaster[] = $entityId;
+				}
+			}
+
+			if ( $loadFromMaster ) {
+				$revisionIds = array_merge(
+					$revisionIds,
+					$this->selectLatestRevisionIdsMultiple( $loadFromMaster, DB_MASTER )
+				);
+			}
+		}
+
+		return $revisionIds;
 	}
 
 	/**
@@ -268,6 +285,41 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$this->releaseConnection( $db );
 
 		return $this->indexResultByEntityId( $entityIds, $res );
+	}
+
+	/**
+	 * Selects page_latest information from the page table.
+	 * Returns an array like entityid -> int or false (if not found).
+	 *
+	 * @param EntityId[] $entityIds The entities to query the DB for.
+	 * @param int $connType DB_REPLICA or DB_MASTER
+	 *
+	 * @throws DBQueryError If the query fails.
+	 * @return array Array mapping entity ID serializations to either ints or false if an entity
+	 *  could not be found.
+	 */
+	private function selectLatestRevisionIdsMultiple( array $entityIds, $connType ) {
+		$db = $this->getConnection( $connType );
+
+		$res = $db->select(
+			'page',
+			[ 'page_title', 'page_latest' ],
+			$this->getWhere( $entityIds, $db ),
+			__METHOD__
+		);
+
+		$this->releaseConnection( $db );
+
+		return array_map(
+			function ( $revisionInformation ) {
+				if ( is_bool( $revisionInformation ) ) {
+					return $revisionInformation;
+				}
+
+				return $revisionInformation->page_latest;
+			},
+			$this->indexResultByEntityId( $entityIds, $res )
+		);
 	}
 
 	/**
