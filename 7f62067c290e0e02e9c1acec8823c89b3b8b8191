@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c73a079f_cf77e9f4",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "That seems like an orthogonal issue. The topic of the page (ie. the concept described by the page) might be slightly different from the linked Wikidata concept, since languages do not map words to concepts in identical ways; I don\u0027t think talking/not talking about topics would make that any clearer.",
+      "parentUuid": "950be45c_f4ff5475",
+      "range": {
+        "startLine": 16,
+        "startChar": 39,
+        "endLine": 16,
+        "endChar": 80
+      },
+      "revId": "7f62067c290e0e02e9c1acec8823c89b3b8b8191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4059a00_850930d1",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 3
