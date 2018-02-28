@@ -16,6 +16,24 @@
       "revId": "38b9f55ac85a9340beb0e830cf45318399eb67f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7adc984_1955cffb",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-02-28T21:27:09Z",
+      "side": 1,
+      "message": "Fixed in https://gerrit.wikimedia.org/r/#/c/415071/2/lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+      "parentUuid": "b5d3b5cf_96945f58",
+      "revId": "38b9f55ac85a9340beb0e830cf45318399eb67f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
