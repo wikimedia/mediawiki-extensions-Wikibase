@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9b62915_e69280a1",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T14:52:30Z",
+      "side": 1,
+      "message": "You could use $this-\u003eassertEntityIdsFromRightRepository( [ $entityId ] ) here and reduce the number of private methods by one. ;-)",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 55
+      },
+      "revId": "baadcc6bae02ec77f05ccc396446151a3df01d0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
