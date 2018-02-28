@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "22126bd0_6711a1b4",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-28T13:45:43Z",
+      "side": 1,
+      "message": "Hm, I thought is_bool was better than \u003d\u003d\u003d false… but I think I like !is_object even more, because in L156 we definitely require an object. Great idea!",
+      "parentUuid": "7edc9195_1afeecd6",
+      "range": {
+        "startLine": 152,
+        "startChar": 9,
+        "endLine": 152,
+        "endChar": 40
+      },
+      "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40632a35_f6fb5403",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 1
@@ -82,6 +106,30 @@
       "writtenOn": "2018-02-28T13:40:11Z",
       "side": 1,
       "message": "Ah, I see. This is where the name comes from. To be honest I would not reuse this as a method name. What it really represents is the latest revision ID for the page where an entity is stored. The method name should reflect this somehow.",
+      "range": {
+        "startLine": 156,
+        "startChar": 33,
+        "endLine": 156,
+        "endChar": 44
+      },
+      "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc3ba837_d9d98bb8",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-28T13:45:43Z",
+      "side": 1,
+      "message": "Yeah, I guess it doesn’t make too much sense unless you’re thinking about the page table at the moment, like I was :)\n\nPerhaps loadLatestRevisionId() or loadCurrentRevisionId()?",
+      "parentUuid": "40632a35_f6fb5403",
       "range": {
         "startLine": 156,
         "startChar": 33,
