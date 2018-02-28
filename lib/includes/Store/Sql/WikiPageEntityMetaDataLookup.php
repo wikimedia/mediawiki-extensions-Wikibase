@@ -65,13 +65,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		$rows = [];
 
-		foreach ( $entityIds as $entityId ) {
-			if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
-				throw new InvalidArgumentException(
-					'Could not load data from the database of repository: ' . $entityId->getRepositoryName()
-				);
-			}
-		}
+		$this->assertEntityIdsFromRightRepository( $entityIds );
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_REPLICA );
@@ -115,11 +109,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$revisionId,
 		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
 	) {
-		if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
-			throw new InvalidArgumentException(
-				'Could not load data from the database of repository: ' . $entityId->getRepositoryName()
-			);
-		}
+		$this->assertEntityIdFromRightRepository( $entityId );
 
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_REPLICA );
 
@@ -166,6 +156,31 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 */
 	private function isEntityIdFromRightRepository( EntityId $entityId ) {
 		return $entityId->getRepositoryName() === $this->repositoryName;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws InvalidArgumentException When $entityId does not belong the repository of this lookup
+	 */
+	private function assertEntityIdFromRightRepository( EntityId $entityId ) {
+		if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
+			throw new InvalidArgumentException(
+				'Could not load data from the database of repository: ' .
+				$entityId->getRepositoryName()
+			);
+		}
+	}
+
+	/**
+	 * @param EntityId[] $entityIds
+	 *
+	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
+	 */
+	private function assertEntityIdsFromRightRepository( array $entityIds ) {
+		foreach ( $entityIds as $entityId ) {
+			$this->assertEntityIdFromRightRepository( $entityId );
+		}
 	}
 
 	/**
