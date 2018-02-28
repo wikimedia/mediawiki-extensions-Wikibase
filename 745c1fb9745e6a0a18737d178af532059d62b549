@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76e058f5_f8f5957c",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-02-28T11:00:59Z",
+      "side": 1,
+      "message": "Alternatively, we could directly delegate to $this-\u003elookup-\u003eloadPageLatest(), similar to loadRevisionInformationByRevisionId() above. This would bypass our cache, but use a better database query if the metadata isn’t cached. Since I don’t know where and how this prefetching accessor is used, I’m not sure which would be better…",
+      "range": {
+        "startLine": 205,
+        "startChar": 2,
+        "endLine": 214,
+        "endChar": 4
+      },
+      "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
