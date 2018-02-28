@@ -152,6 +152,8 @@ module EntityPage
   def page_index_updated(api, page_titles)
     response = api.action(:query, prop: 'cirrusdoc|revisions', titles: page_titles.join('|'), rvprop: 'ids', token_type: false)
     response['query']['pages'].each_value do |_, page_data|
+      if !page_data.key?('cirrusdoc') || !page_data.key?('revisions')
+        return false
       revision_id = page_data['revisions'][0]['revid']
       if page_data['cirrusdoc'][0]['source']['version'] != revision_id
         return false
