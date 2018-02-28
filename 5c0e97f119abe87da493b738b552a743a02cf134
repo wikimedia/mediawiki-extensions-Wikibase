@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "040346e1_25fe8a12",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "The specification for this task was the result of lots of negotiations so I\u0027d ask that discussions about changing editor-visible parts would happen in the task and involve @DannyH. (I\u0027d pick {{DESCRIPTION|...}} or even {{#description|...}} if it were me but I imagine the \"short\" part helps orient editors on how to use it.) \u0027shortdesc\u0027 as an API module name sounds less than helpful, and it is combining two description sources after all so I don\u0027t think it\u0027s confusing that it\u0027s not exactly named after one of them.",
+      "parentUuid": "4ae76f80_f62ecdf5",
+      "range": {
+        "startLine": 256,
+        "startChar": 20,
+        "endLine": 256,
+        "endChar": 31
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d24d1c34_5c6c50a1",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 4
@@ -117,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "d2ee6d10_0004392e",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion on this, I was asked in the previous review round to add the note.",
+      "parentUuid": "0dc9323d_557ce942",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b43bea8b_331b621b",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 4
@@ -151,6 +199,30 @@
       "writtenOn": "2018-02-28T13:26:52Z",
       "side": 1,
       "message": "I suspect this is intentional, but please note this implementation is not able to apply any language fallbacks. Personally I believe this is correct and what I would expected from such an API module.",
+      "range": {
+        "startLine": 137,
+        "startChar": 41,
+        "endLine": 137,
+        "endChar": 78
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce9fd58f_ac5a99c5",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s intentional. I think falling back to a close language could be interesting if MediaWiki understood that concept, but giving an English description when the client expects a Mandarin one is not helpful at all.",
+      "parentUuid": "3270a478_f1084606",
       "range": {
         "startLine": 137,
         "startChar": 41,
@@ -209,6 +281,30 @@
     },
     {
       "key": {
+        "uuid": "983111a7_6e3a6ee4",
+        "filename": "client/includes/Hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "Technically anything that takes wikitext input is a parser function, but sure, will move it if you prefer that.",
+      "parentUuid": "dec51577_ece03208",
+      "range": {
+        "startLine": 47,
+        "startChar": 18,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ab5e3dd_92903bdf",
         "filename": "client/includes/Hooks/ShortDescHandler.php",
         "patchSetId": 4
@@ -220,6 +316,24 @@
       "writtenOn": "2018-02-28T13:26:52Z",
       "side": 1,
       "message": "The one major problem I do have with the sanitation and invalidation in here is that is is only applied on descriptions provided via {{SHORTDESC:…}} but not on Wikidata descriptions. This creates the situation that a Wikidata description that is actually invalid according to the algorithm in here can not be changed.\n\nE.g. the Wikidata description is \"..\" (two dots). Users can not override this with \"{{SHORTDESC:...}}\" (three dots). This is inconsistent and hard to argue when the community starts asking \"Why?\" questions. Can we please either get rid of this, or apply it on both local and central descriptions?",
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d31a90fb_f142c469",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "Sanitization is basically a wikitext -\u003e plaintext transform. Wikidata descriptions are plaintext in the first place, they cannot be compared. The goal is not to prevent anything, just to filter out HTML that was probably put there unintentionally or without realizing that the field is plaintext.\n\nAs for the validation criteria, that was the result of some pretty complex negotiations between the enwiki community and various WMF departments (and the Wikidata team, I\u0027d expect). If you want to change it, please discuss that with @DannyH on the task.\n\nI guess the same filtering could be applied to the central description, but it would complicate the code and AFAIK Wikidata already prevents such descriptions via community norms, so it would be somewhat pointless.",
+      "parentUuid": "1ab5e3dd_92903bdf",
       "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -249,6 +363,30 @@
     },
     {
       "key": {
+        "uuid": "167078d6_1f591ff5",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "Mindless copying from NoLangLinkHandler :) Probably should say parser function callback.",
+      "parentUuid": "fd9cc6aa_27b1da8e",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b2e9fa_41f4b2bf",
         "filename": "client/includes/Hooks/ShortDescHandler.php",
         "patchSetId": 4
@@ -260,6 +398,30 @@
       "writtenOn": "2018-02-28T13:26:52Z",
       "side": 1,
       "message": "This \\s is redundant because \\p{z} already includes all whitespace characters.",
+      "range": {
+        "startLine": 44,
+        "startChar": 26,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7fd759e_b5867adb",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-02-28T22:17:21Z",
+      "side": 1,
+      "message": "I felt it makes the regex easier to read (most people probably wouldn\u0027t know what exactly is included in the separator category). Can remove if you disagree.",
+      "parentUuid": "f2b2e9fa_41f4b2bf",
       "range": {
         "startLine": 44,
         "startChar": 26,
