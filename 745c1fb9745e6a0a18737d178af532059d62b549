@@ -22,6 +22,75 @@
       "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f92aab2_4a236935",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:40:11Z",
+      "side": 1,
+      "message": "This name confuses me. It does not \"load a page\" as far as I can see.",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 31
+      },
+      "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7edc9195_1afeecd6",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:40:11Z",
+      "side": 1,
+      "message": "This can also be\n\n if ( $revisionInformation \u003d\u003d\u003d false )\n\nor\n\n if ( !is_object( $revisionInformation ) )\n\nPersonally I would find either one better than the current is_bool. But in reality it does not make much of a difference.",
+      "range": {
+        "startLine": 152,
+        "startChar": 9,
+        "endLine": 152,
+        "endChar": 40
+      },
+      "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40632a35_f6fb5403",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-02-28T13:40:11Z",
+      "side": 1,
+      "message": "Ah, I see. This is where the name comes from. To be honest I would not reuse this as a method name. What it really represents is the latest revision ID for the page where an entity is stored. The method name should reflect this somehow.",
+      "range": {
+        "startLine": 156,
+        "startChar": 33,
+        "endLine": 156,
+        "endChar": 44
+      },
+      "revId": "745c1fb9745e6a0a18737d178af532059d62b549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
