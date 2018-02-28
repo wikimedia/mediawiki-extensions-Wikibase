@@ -135,6 +135,31 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	}
 
 	/**
+	 * @param EntityId[] $entityIds
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
+	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 *
+	 * @throws DBQueryError
+	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
+	 *
+	 * @return (int|bool)[] Array mapping entity ID serializations to revision IDs or false if an entity
+	 *  could not be found.
+	 */
+	public function loadPageLatest( array $entityIds, $mode ) {
+		return array_map(
+			function ( $revisionInformation ) {
+				if ( is_bool( $revisionInformation ) ) {
+					return $revisionInformation;
+				}
+
+				return $revisionInformation->page_latest;
+			},
+			$this->loadRevisionInformation( $entityIds, $mode )
+		);
+	}
+
+	/**
 	 * @param EntityId $entityId
 	 *
 	 * @return bool

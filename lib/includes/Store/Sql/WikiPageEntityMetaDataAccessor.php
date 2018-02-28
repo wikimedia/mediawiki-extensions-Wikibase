@@ -53,4 +53,17 @@ interface WikiPageEntityMetaDataAccessor {
 		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
 	);
 
+	/**
+	 * Looks up the latest revision ID(s) for the given entityId(s).
+	 * Returns an array of integer revision IDs
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
+	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 *
+	 * @return int[] Array of entity id serialization => revision ID.
+	 */
+	public function loadPageLatest( array $entityIds, $mode );
+
 }

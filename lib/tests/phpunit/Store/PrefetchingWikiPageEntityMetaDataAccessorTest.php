@@ -237,6 +237,29 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$this->assertSame( 'passthrough', $result );
 	}
 
+	public function testLoadPageLatest() {
+		// This function is also mostly a wrapper around another function.
+		$q1 = new ItemId( 'Q1' );
+
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup->expects( $this->once() )
+			->method( 'loadRevisionInformation' )
+			->with(
+				[ $q1->getSerialization() => $q1 ],
+				'load-mode'
+			)
+			->will( $this->returnValue(
+				[ 'Q1' => (object)[ 'page_latest' => 'revision ID' ] ]
+			) );
+
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+
+		// This loads Q1 with $mode = 'load-mode'
+		$result = $accessor->loadPageLatest( [ $q1 ], 'load-mode' );
+
+		$this->assertSame( [ 'Q1' => 'revision ID' ], $result );
+	}
+
 	/**
 	 * Makes sure that calling $method with $params will purge the cache
 	 * for Q1.

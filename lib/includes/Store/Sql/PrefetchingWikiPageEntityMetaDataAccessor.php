@@ -190,6 +190,30 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		return $this->lookup->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
 	}
 
+	/**
+	 * @see WikiPageEntityMetaDataAccessor::loadPageLatest
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
+	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 *
+	 * @return (int|bool)[] Array of entity ID serialization => revision IDs or false if an entity could not be found.
+	 */
+	public function loadPageLatest( array $entityIds, $mode ) {
+		// load and cache full information, then return only part of it
+		return array_map(
+			function ( $revisionInformation ) {
+				if ( is_bool( $revisionInformation ) ) {
+					return $revisionInformation;
+				}
+
+				return $revisionInformation->page_latest;
+			},
+			$this->loadRevisionInformation( $entityIds, $mode )
+		);
+	}
+
 	private function doFetch( $mode ) {
 		if ( empty( $this->toFetch ) ) {
 			return;
