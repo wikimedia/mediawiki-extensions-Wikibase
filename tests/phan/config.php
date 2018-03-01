@@ -99,6 +99,7 @@ return [
 		is_dir( './../../extensions/CirrusSearch' ) ? [ './../../extensions/CirrusSearch' ] : [],
 		is_dir( './../../extensions/Echo' ) ? [ './../../extensions/Echo' ] : [],
 		is_dir( './../../extensions/GeoData' ) ? [ './../../extensions/GeoData' ] : [],
+		is_dir( './../../extensions/PageImages' ) ? [ './../../extensions/PageImages' ] : [],
 		is_dir( './../../extensions/Scribunto' ) ? [ './../../extensions/Scribunto' ] : []
 	),
 
