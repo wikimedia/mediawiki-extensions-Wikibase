@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d20164e_9eec1247",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-01T15:01:05Z",
+      "side": 1,
+      "message": "This file here contains the constant CI complains about. I wonder if the stuff needs to be declared \"public\" there?",
+      "range": {
+        "startLine": 67,
+        "startChar": 50,
+        "endLine": 67,
+        "endChar": 81
+      },
+      "revId": "e1789ea9e811c57c9d9e15f37fd0865822439e32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
