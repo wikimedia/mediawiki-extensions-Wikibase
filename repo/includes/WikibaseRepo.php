@@ -1820,6 +1820,8 @@ class WikibaseRepo {
 						'pyu', // T174227
 						'quc', // T155376
 						'ssf', // T174236
+						'smn', // T188580
+						'sms', // T188579
 						'trv', // T174228
 						'tzl', // T98314
 						'umu', // T160531
