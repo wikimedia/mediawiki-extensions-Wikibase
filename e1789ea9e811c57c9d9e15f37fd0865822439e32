@@ -22,6 +22,30 @@
       "revId": "e1789ea9e811c57c9d9e15f37fd0865822439e32",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2331db37_89bdb426",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-01T15:06:52Z",
+      "side": 1,
+      "message": "AFAIK `public` is the default for constants, and according to https://secure.php.net/manual/en/language.oop5.constants.php explicit visibility wasn’t even allowed until PHP 7.1.0.",
+      "parentUuid": "3d20164e_9eec1247",
+      "range": {
+        "startLine": 67,
+        "startChar": 50,
+        "endLine": 67,
+        "endChar": 81
+      },
+      "revId": "e1789ea9e811c57c9d9e15f37fd0865822439e32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
