@@ -4,17 +4,23 @@
 			"Nikosguard",
 			"Geraki",
 			"Protnet",
-			"Xaris333"
+			"Xaris333",
+			"Nikosgranturismogt"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Χειρισμός τιμών \"$1\" δεν υποστηρίζεται ακόμα.",
+	"valueview-expert-emptyvalue-empty": "κενή",
 	"valueview-expert-globecoordinateinput-precision": "Ακρίβεια:",
+	"valueview-expert-globecoordinateinput-nullprecision": "Αδιευκρίνιστο",
+	"valueview-expert-globecoordinateinput-customprecision": "ειδικό ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Γρηγοριανό",
 	"valueview-expert-timevalue-calendar-julian": "Ιουλιανό",
 	"valueview-expert-timeinput-precision": "Ακρίβεια:",
 	"valueview-expert-timeinput-calendar": "Ημερολόγιο:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "↓Γλώσσα (υποχρεωτικό):",
 	"valueview-expertextender-unitsuggester-label": "Μονάδα (προαιρετικό):",
 	"valueview-preview-label": "θα εμφανίζεται ως:",
+	"valueview-preview-novalue": "δεν αναγνωρίστηκε έγκυρη τιμή",
 	"valueview-listrotator-manually": "χειροκίνητη ρύθμιση"
 }
