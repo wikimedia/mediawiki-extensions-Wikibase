@@ -431,6 +431,30 @@
       "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f314a8a6_c329a6ef",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-02T03:07:38Z",
+      "side": 1,
+      "message": "On a closer look, tab is apparently not included.",
+      "parentUuid": "d7fd759e_b5867adb",
+      "range": {
+        "startLine": 44,
+        "startChar": 26,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
