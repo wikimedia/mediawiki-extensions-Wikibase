@@ -237,27 +237,103 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$this->assertSame( 'passthrough', $result );
 	}
 
-	public function testLoadLatestRevisionIds() {
-		// This function is also mostly a wrapper around another function.
+	public function testLoadLatestRevisionIds_usesCache() {
+		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
-
 		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
-			->with(
-				[ $q1->getSerialization() => $q1 ],
-				'load-mode'
-			)
-			->will( $this->returnValue(
-				[ 'Q1' => (object)[ 'page_latest' => 'revision ID' ] ]
-			) );
-
+			->with( [ $q1->getSerialization() => $q1 ], $mode )
+			->willReturn( [ $q1->getSerialization() => (object)[ 'page_latest' => 100 ] ] );
+		$lookup->expects( $this->never() )
+			->method( 'loadLatestRevisionIds' );
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor->loadRevisionInformation( [ $q1 ], $mode );
 
-		// This loads Q1 with $mode = 'load-mode'
-		$result = $accessor->loadLatestRevisionIds( [ $q1 ], 'load-mode' );
+		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1 ], $mode );
 
-		$this->assertSame( [ 'Q1' => 'revision ID' ], $result );
+		$this->assertSame( [ $q1->getSerialization() => 100 ], $latestRevisionIds );
+	}
+
+	public function testLoadLatestRevisionIds_usesLookup() {
+		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$q1 = new ItemId( 'Q1' );
+		$q2 = new ItemId( 'Q2' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup->expects( $this->once() )
+			->method( 'loadRevisionInformation' )
+			->with( [ $q1->getSerialization() => $q1 ], $mode )
+			->willReturn( [ $q1->getSerialization() => (object)[ 'page_latest' => 100 ] ] );
+		$lookup->expects( $this->once() )
+			->method( 'loadLatestRevisionIds' )
+			->with( [ $q2 ], $mode )
+			->willReturn( [ $q2->getSerialization() => 200 ] );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor->loadRevisionInformation( [ $q1 ], $mode );
+
+		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q2 ], $mode );
+
+		$this->assertSame( [ $q2->getSerialization() => 200 ], $latestRevisionIds );
+	}
+
+	public function testLoadLatestRevisionIds_mergesCacheAndLookup() {
+		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$q1 = new ItemId( 'Q1' );
+		$q2 = new ItemId( 'Q2' );
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup->expects( $this->once() )
+			->method( 'loadRevisionInformation' )
+			->with( [ $q1->getSerialization() => $q1, $q3->getSerialization() => $q3 ], $mode )
+			->willReturn( [
+				$q1->getSerialization() => (object)[ 'page_latest' => 100 ],
+				$q3->getSerialization() => (object)[ 'page_latest' => 300 ],
+			] );
+		$lookup->expects( $this->once() )
+			->method( 'loadLatestRevisionIds' )
+			->with( [ $q2, $q4 ], $mode )
+			->willReturn( [
+				$q2->getSerialization() => 200,
+				$q4->getSerialization() => 400,
+			] );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor->loadRevisionInformation( [ $q1, $q3 ], $mode );
+
+		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1, $q2, $q3, $q4 ], $mode );
+
+		$expected = [
+			$q1->getSerialization() => 100,
+			$q2->getSerialization() => 200,
+			$q3->getSerialization() => 300,
+			$q4->getSerialization() => 400,
+		];
+		ksort( $latestRevisionIds );
+		ksort( $expected );
+		$this->assertSame(
+			$expected,
+			$latestRevisionIds
+		);
+	}
+
+	public function testLoadLatestRevisionIds_masterSkipsCache() {
+		$mode = EntityRevisionLookup::LATEST_FROM_MASTER;
+		$q1 = new ItemId( 'Q1' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup->expects( $this->once() )
+			->method( 'loadRevisionInformation' )
+			->with( [ $q1 ], $mode )
+			->willReturn( [ $q1->getSerialization() => (object)[ 'page_latest' => 100 ] ] );
+		$lookup->expects( $this->once() )
+			->method( 'loadLatestRevisionIds' )
+			->with( [ $q1 ], $mode )
+			->willReturn( [ $q1->getSerialization() => 101 ] );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor->loadRevisionInformation( [ $q1 ], $mode );
+
+		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1 ], $mode );
+
+		$this->assertSame( [ $q1->getSerialization() => 101 ], $latestRevisionIds );
 	}
 
 	/**
