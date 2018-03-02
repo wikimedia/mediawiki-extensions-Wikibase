@@ -52,6 +52,24 @@
       "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d73c763_da84a416",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-02T15:21:38Z",
+      "side": 1,
+      "message": "Presumably that depends on $mode – for loadRevisionInformation(), PrefetchingWPEMDL skips its pre-fetched data if the mode is LATEST_FROM_MASTER. The same would make sense for loadLatestRevisionIds(), I guess.\n\nFilling in pre-fetched data and then asking for the remaining ones sounds good… is it okay if this is left to a separate change?",
+      "parentUuid": "8ac81546_f8a0e9bd",
+      "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
