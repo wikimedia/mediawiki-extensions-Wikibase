@@ -88,6 +88,24 @@
       "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32a0df9f_ec103a3c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-02T17:32:29Z",
+      "side": 1,
+      "message": "I tried to implement this in I0faebed5b3, but I haven’t added tests yet.",
+      "parentUuid": "b740dfcf_df0446d2",
+      "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
