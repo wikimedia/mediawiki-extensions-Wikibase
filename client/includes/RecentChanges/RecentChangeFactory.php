@@ -151,7 +151,7 @@ class RecentChangeFactory {
 			'rc_user' => $clientUserId,
 			'rc_user_text' => $userText,
 			'rc_comment' => $this->getEditCommentMulti( $change ),
-			'rc_type' => RC_EXTERNAL,
+			'rc_type' => $metadata['rc_type'],
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => $isBot,
 			'rc_patrolled' => true,
