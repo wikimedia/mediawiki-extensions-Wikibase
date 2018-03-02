@@ -13,7 +13,7 @@ use Wikibase\LanguageFallbackChainFactory;
 /**
  * Page for displaying the current language fallback chain for debugging.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >
  */
 class SpecialMyLanguageFallbackChain extends SpecialPage {

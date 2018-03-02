@@ -12,7 +12,7 @@ use Wikimedia\Assert\Assert;
  * for a repository the entity ID belongs to.
  * When purgeAll is called all known prefetchers are requested to purge their caches.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityPrefetcher implements EntityPrefetcher {
 

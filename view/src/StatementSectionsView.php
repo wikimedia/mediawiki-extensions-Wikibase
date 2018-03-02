@@ -8,7 +8,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

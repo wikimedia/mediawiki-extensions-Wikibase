@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
  *
  * @see EntityInfoBuilder
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityInfoTermLookup implements TermLookup {

@@ -16,7 +16,7 @@ use Wikibase\Lib\CommonsLinkFormatter;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class CommonsLinkFormatterTest extends \MediaWikiTestCase {

@@ -7,7 +7,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ParserOutputJsConfigBuilder {
 

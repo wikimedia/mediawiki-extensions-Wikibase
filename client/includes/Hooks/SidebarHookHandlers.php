@@ -16,7 +16,7 @@ use Wikibase\Client\NamespaceChecker;
  * handler functions will create a new instance of SidebarHookHandlers and then call the
  * corresponding member function on that.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SidebarHookHandlers {
 

@@ -18,7 +18,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 /**
  * SQL based implementation of ChangeDispatchCoordinator;
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {

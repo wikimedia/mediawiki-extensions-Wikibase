@@ -25,7 +25,7 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
  * @group Wikibase
  * @group WikibaseAPI
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Daniel Kinzler
  */

@@ -29,7 +29,7 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Term lookup cache.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
 

@@ -23,7 +23,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * Test maintenance script that runs two dispatching and checks if they conflict.
  * The main purpose of this file is to test dispatchChanges.php maintenance script.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class TestDispatchCoordinator extends Maintenance {

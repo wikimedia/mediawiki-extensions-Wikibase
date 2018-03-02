@@ -11,7 +11,7 @@ use Wikibase\Store\EntityIdLookup;
 /**
  * Handles the history action for Wikibase entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

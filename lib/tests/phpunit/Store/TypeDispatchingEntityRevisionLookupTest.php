@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityRevisionLookupTest extends MediaWikiTestCase {

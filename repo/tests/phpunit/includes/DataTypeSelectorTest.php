@@ -12,7 +12,7 @@ use Wikibase\DataTypeSelector;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {

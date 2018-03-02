@@ -12,7 +12,7 @@ use Wikimedia\Rdbms\LBFactory;
  * LockManager implementation provided to be used instead of
  * SqlChangeDisptachCoordinator's own locking.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinator {

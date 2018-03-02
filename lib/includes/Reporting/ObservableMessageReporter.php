@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Reporting;
  * Message reporter that reports messages by passing them along to all
  * registered handlers.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ObservableMessageReporter implements MessageReporter {

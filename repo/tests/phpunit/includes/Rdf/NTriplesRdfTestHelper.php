@@ -10,7 +10,7 @@ use RuntimeException;
  *
  * @see https://en.wikipedia.org/wiki/N-Triples
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

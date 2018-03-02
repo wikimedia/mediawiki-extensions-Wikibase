@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module for using value formatters.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Addshore
  * @author Marius Hoch

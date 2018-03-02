@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz

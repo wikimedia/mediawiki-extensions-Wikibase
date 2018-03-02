@@ -22,7 +22,7 @@ use Wikibase\DataModel\Term\Term;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {

@@ -34,7 +34,7 @@
 	 * @see wikibase.datamodel.Statement.RANK
 	 * @class jQuery.wikibase.statementview.RankSelector
 	 * @extends jQuery.ui.EditableTemplatedWidget
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

@@ -8,7 +8,7 @@ use Wikibase\DispatchStats;
 /**
  * Page for displaying diagnostics about the dispatch process.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SpecialDispatchStats extends SpecialWikibasePage {

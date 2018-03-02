@@ -11,7 +11,7 @@ use Wikimedia\Rdbms\DBError;
  * A dispatching PropertyInfoLookup implementation that is able to understand property ID strings
  * prefixed with repository names, and forwards to the service responsible for the repository.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingPropertyInfoLookup implements PropertyInfoLookup {
 

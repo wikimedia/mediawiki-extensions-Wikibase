@@ -10,7 +10,7 @@ use Wikibase\View\LanguageDirectionalityLookup;
  * Service for looking up language directionalities based on MediaWiki's Language
  * class.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class MediaWikiLanguageDirectionalityLookup implements LanguageDirectionalityLookup {

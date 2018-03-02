@@ -10,7 +10,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML to display terms of an entity in a list.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermsListView {
 

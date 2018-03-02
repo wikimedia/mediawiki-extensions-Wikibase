@@ -22,7 +22,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * The script accepts search requests from stdin, line by line,
  * and outputs results, preserving order.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class SearchEntities extends Maintenance {

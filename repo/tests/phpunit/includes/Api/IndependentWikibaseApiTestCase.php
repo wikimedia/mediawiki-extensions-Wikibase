@@ -14,7 +14,7 @@ use Wikimedia\TestingAccessWrapper;
  * This class can be used instead of the Mediawiki Api TestCase.
  * This class allows us to override services within Wikibase API modules
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {

@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @deprecated Use WikibaseRepo::getDefaultInstance()->getStore() instead
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StoreFactory {

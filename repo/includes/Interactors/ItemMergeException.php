@@ -8,7 +8,7 @@ use Wikibase\Lib\MessageException;
 /**
  * Exception representing a failure to execute the "merge items" use case.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ItemMergeException extends MessageException {

@@ -7,7 +7,7 @@ use Http;
 /**
  * PropertyOrderProvider that retrieves the order from a http(s) URL.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider implements PropertyOrderProvider {

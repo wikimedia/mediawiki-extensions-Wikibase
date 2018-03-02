@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * Service interface to find Entities by a (somehow) linked page title that is not identical to the
  * page where the entity is stored. Not meant as a replacement for EntityIdLookup!
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

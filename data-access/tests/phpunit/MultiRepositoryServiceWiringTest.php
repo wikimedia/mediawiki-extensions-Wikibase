@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 

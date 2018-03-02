@@ -13,7 +13,7 @@ use Wikibase\Summary;
 /**
  * Class for reference removal change operation
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class ChangeOpReferenceRemove extends ChangeOpBase {

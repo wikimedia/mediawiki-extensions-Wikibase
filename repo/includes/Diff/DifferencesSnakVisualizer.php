@@ -12,7 +12,7 @@ use Wikibase\Lib\SnakFormatter;
 /**
  * Visualizes Snaks for difference views
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class DifferencesSnakVisualizer {

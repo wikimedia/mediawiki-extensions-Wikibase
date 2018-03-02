@@ -24,7 +24,7 @@ require_once __DIR__ . '/SPARQLClient.php';
  *   --wiki wikidatawiki  --base-unit-types Q223662,Q208469 --base-uri http://www.wikidata.org/entity/
  *   --unit-class Q1978718 > unitConversion.json
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class UpdateUnits extends Maintenance {

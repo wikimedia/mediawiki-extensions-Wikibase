@@ -10,7 +10,7 @@ use Iterator;
  * Each line returned will contain the line separator character(s) and all whitespace.
  * Concatenating all lines returned by the reader should result in the original file.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class LineReader implements Iterator {

@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * This allows wikis to link to an entity page without needing to know namespace names of entity types
  * configured on the target wiki.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SpecialEntityPage extends SpecialWikibasePage {
 

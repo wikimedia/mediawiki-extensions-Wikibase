@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikimedia\Rdbms\DBError;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 interface PropertyInfoLookup {
 

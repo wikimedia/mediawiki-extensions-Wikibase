@@ -7,7 +7,7 @@ use MWHttpRequest;
 /**
  * Simple SPARQL client
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class SPARQLClient {

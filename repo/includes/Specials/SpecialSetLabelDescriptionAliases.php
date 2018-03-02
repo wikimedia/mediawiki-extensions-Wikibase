@@ -24,7 +24,7 @@ use Wikibase\SummaryFormatter;
  * Special page for setting label, description and aliases of a Wikibase entity that features
  * labels, descriptions and aliases.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {

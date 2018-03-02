@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Manages URIs for the linked data interface
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityDataUriManager {

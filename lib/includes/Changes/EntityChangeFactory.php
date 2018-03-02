@@ -14,7 +14,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Factory for EntityChange objects
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Creates a notice about the Wikibase Item belonging to the current page
  * after a delete (in case there's one).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class DeletePageNoticeCreator {

@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\IDatabase;
  * @group WikibaseStore
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {

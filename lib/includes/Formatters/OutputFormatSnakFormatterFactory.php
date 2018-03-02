@@ -16,7 +16,7 @@ use Wikimedia\Assert\Assert;
  * Implemented based on constructor callbacks and a default SnakFormatter implementation
  * that uses TypedValueFormatters.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class OutputFormatSnakFormatterFactory {

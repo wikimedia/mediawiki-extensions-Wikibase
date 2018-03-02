@@ -12,7 +12,7 @@ use Wikibase\Lib\UnionContentLanguages;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {

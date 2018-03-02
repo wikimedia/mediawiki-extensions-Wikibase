@@ -13,7 +13,7 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  *
  * @see docs/constraints.wiki
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityConstraintProvider {

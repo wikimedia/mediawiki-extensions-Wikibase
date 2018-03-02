@@ -11,7 +11,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 /**
  * Base class for testing numeric fields.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 abstract class WikibaseNumericFieldTestCase extends PHPUnit_Framework_TestCase {

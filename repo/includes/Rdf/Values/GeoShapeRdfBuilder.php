@@ -7,7 +7,7 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ObjectUriRdfBuilder;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class GeoShapeRdfBuilder extends ObjectUriRdfBuilder {
 

@@ -8,7 +8,7 @@ use ValueFormatters\FormattingException;
 /**
  * Provides a string representation for a DataValue given its associated DataType.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface TypedValueFormatter {

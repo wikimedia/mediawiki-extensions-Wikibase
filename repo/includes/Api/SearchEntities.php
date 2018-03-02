@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * API module to search for Wikibase entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SearchEntities extends ApiBase {
 

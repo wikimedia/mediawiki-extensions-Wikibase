@@ -13,7 +13,7 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * RDF mapping for UnboundedQuantityValue and QuantityValue.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */

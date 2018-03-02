@@ -17,7 +17,7 @@ use Wikibase\StringNormalizer;
  *
  * @see docs/change-op-serialization.wiki for documentation on site link change request format.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 

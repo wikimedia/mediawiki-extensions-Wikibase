@@ -14,7 +14,7 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class SpecialListDatatypesTest extends SpecialPageTestBase {

@@ -23,7 +23,7 @@ use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
  * @group Wikibase
  * @group medium
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 

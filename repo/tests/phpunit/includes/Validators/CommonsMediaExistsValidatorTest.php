@@ -13,7 +13,7 @@ use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class CommonsMediaExistsValidatorTest extends \PHPUnit_Framework_TestCase {

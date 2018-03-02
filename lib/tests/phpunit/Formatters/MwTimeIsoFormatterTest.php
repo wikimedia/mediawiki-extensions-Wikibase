@@ -15,7 +15,7 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  * @group DataValueExtensions
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  * @author Addshore
  * @author Thiemo Kreuz

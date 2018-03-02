@@ -11,7 +11,7 @@ use Wikibase\DataModel\SiteLink;
  * Provides access to the badges of the current page's sitelinks
  * and adds some properties to the HTML output to display them.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */

@@ -34,7 +34,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @group Wikibase
  * @group ChangeOp
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Daniel Kinzler
  * @author Thiemo Kreuz

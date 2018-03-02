@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 /**
  * Utility class for rebuilding the wb_property_info table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PropertyInfoTableBuilder {

@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {

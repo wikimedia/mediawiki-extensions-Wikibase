@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Change notification channel using MediaWiki's global scope Hook facility.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class HookChangeTransmitter implements ChangeTransmitter {

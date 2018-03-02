@@ -18,7 +18,7 @@ use ResourceLoaderModule;
  * - (Function|DataTypeFactory) datatypefactory: Provider for the data types. Can be a callback
  *   returning a DataTypeFactory instance.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 class DataTypesModule extends ResourceLoaderModule {

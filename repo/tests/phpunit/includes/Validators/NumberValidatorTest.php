@@ -10,7 +10,7 @@ use Wikibase\Repo\Validators\NumberValidator;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

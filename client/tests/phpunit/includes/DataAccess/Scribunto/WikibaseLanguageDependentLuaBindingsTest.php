@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\TermFallback;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >

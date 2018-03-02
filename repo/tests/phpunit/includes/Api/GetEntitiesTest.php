@@ -9,7 +9,7 @@ use ApiUsageException;
  *
  * Test cases are generated using the data provided in the various static arrays below.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  *
  * @group API

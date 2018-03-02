@@ -17,7 +17,7 @@ use Wikibase\Lib\MediaWikiNumberLocalizer;
  * ValueFormatter for formatting objects that may be encountered in
  * parameters of ValueValidators\Error objects as wikitext.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class MessageParameterFormatter implements ValueFormatter {

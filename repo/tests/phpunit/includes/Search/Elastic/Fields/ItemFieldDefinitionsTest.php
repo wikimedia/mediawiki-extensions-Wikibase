@@ -19,7 +19,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class ItemFieldDefinitionsTest extends PHPUnit_Framework_TestCase {

@@ -12,7 +12,7 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	],
 	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/view/',
 	'description' => 'View component for the Wikibase Repository',
-	'license-name' => 'GPL-2.0+'
+	'license-name' => 'GPL-2.0-or-later'
 ];
 
 include __DIR__ . '/resources.php';

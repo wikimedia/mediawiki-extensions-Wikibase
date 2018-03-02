@@ -12,7 +12,7 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  * A factory providing PerRepositoryServiceContainer objects configured for given repository.
  * PerRepositoryServiceContainers are initialized using wiring files provided in the constructor.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceContainerFactory {
 

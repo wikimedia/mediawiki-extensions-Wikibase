@@ -9,7 +9,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 /**
  * Constructs ChangeOps for item change requests
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ItemChangeOpDeserializer implements ChangeOpDeserializer {
 

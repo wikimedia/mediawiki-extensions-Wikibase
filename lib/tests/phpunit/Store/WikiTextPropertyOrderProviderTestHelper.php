@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 /**
  * Helper class for tests for WikiTextPropertyOrderProvider subclasses.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  * @author Marius Hoch
  */

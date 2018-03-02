@@ -28,7 +28,7 @@ use Wikibase\Repo\Api\SearchEntities;
  *
  * @group medium
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Daniel Kinzler
  */

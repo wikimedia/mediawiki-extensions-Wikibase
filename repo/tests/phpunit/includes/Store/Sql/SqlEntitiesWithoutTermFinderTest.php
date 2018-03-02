@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {

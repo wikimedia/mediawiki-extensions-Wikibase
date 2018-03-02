@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * based on the client's local wbc_entity_usage table. The client wiki will be subscribed
  * to be informed about changes to any entity present in the local wbc_entity_usage table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class BulkSubscriptionUpdater {

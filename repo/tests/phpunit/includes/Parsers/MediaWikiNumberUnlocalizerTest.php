@@ -13,7 +13,7 @@ use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
  * @group ValueParsers
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {

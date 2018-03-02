@@ -9,7 +9,7 @@ use Wikibase\Change;
 /**
  * ChangeNotificationSender based on a JobQueueGroup and ChangeNotificationJob.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

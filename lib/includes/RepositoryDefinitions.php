@@ -26,7 +26,7 @@ use Wikimedia\Assert\Assert;
  * @see docs/options.wiki for documentation on "foreignRepositories" settings defining configuration
  * of foreign repositories..
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RepositoryDefinitions {
 

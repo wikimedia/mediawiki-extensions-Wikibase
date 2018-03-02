@@ -12,7 +12,7 @@ use Wikibase\View\Template\TemplateFactory;
  * Base class for creating views for all different kinds of Wikibase\DataModel\Entity\EntityDocument.
  * For the Wikibase\DataModel\Entity\EntityDocument this basically is what the Parser is for WikitextContent.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 abstract class EntityView {
 

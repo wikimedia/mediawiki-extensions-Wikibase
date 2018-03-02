@@ -9,7 +9,7 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * Factory to return Rdf builders for special parts of properties
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class PropertyRdfBuilder implements EntityRdfBuilder {

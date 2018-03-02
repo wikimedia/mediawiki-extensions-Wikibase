@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
 return call_user_func( function() {

@@ -37,7 +37,7 @@ use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
  * @group WikibaseSpecialPage
  * @group WikibaseEntityData
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SpecialEntityDataTest extends SpecialPageTestBase {

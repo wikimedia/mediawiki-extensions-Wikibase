@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {

@@ -14,7 +14,7 @@ use Wikimedia\Assert\Assert;
  * Validator for interwiki links.
  * Checks whether the page title exists on the foreign wiki.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jonas Kress
  */
 class InterWikiLinkExistsValidator implements ValueValidator {

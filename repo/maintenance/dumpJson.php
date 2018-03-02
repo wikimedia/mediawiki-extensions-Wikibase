@@ -15,7 +15,7 @@ use Wikibase\Repo\WikibaseRepo;
 require_once __DIR__ . '/DumpEntities.php';
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Addshore
  */

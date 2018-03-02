@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

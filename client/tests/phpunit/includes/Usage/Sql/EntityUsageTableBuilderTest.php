@@ -17,7 +17,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
  * @group WikibaseUsageTracking
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityUsageTableBuilderTest extends \MediaWikiTestCase {

@@ -15,7 +15,7 @@ use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 /**
  * API module for creating entity redirects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class CreateRedirect extends ApiBase {

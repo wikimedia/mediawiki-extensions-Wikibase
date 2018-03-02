@@ -27,7 +27,7 @@ use Wikibase\Summary;
  * @group Wikibase
  * @group ChangeOp
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Kreuz
  */

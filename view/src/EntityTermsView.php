@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * Generates HTML to display the terms of an entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 interface EntityTermsView {

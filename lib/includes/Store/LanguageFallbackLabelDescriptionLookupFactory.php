@@ -13,7 +13,7 @@ use Wikibase\LanguageFallbackChainFactory;
  * Factory to provide an LabelDescriptionLookup which does automatic prefetching
  * of terms, applies a language fallback and returns the LabelDescriptionLookup.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LanguageFallbackLabelDescriptionLookupFactory {

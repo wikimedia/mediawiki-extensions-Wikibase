@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {

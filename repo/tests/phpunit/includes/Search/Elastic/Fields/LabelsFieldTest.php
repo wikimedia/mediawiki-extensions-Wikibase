@@ -15,7 +15,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelsField;
  * @group WikibaseElastic
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class LabelsFieldTest extends SearchFieldTestCase {

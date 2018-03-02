@@ -6,7 +6,7 @@ namespace Wikibase;
  * Utility class for collecting dispatch statistics.
  * Note that you must call load() before accessing any getters.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

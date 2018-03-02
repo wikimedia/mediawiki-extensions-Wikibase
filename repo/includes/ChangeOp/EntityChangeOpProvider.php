@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
  * Turns entity change request into ChangeOp objects based on change request deserialization
  * configured for the particular entity type.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class EntityChangeOpProvider {
 

@@ -14,7 +14,7 @@ use Wikibase\WikibaseSettings;
  * @group WikibaseStore
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

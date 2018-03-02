@@ -5,7 +5,7 @@ namespace Wikibase\Rdf;
 /**
  * RDF producer options
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 interface RdfProducer {

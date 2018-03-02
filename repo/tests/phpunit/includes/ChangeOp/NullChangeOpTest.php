@@ -10,7 +10,7 @@ use Wikibase\Repo\ChangeOp\NullChangeOp;
  * @covers Wikibase\Repo\ChangeOp\NullChangeOp
  *
  * @group Wikibase
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class NullChangeOpTest extends \PHPUnit_Framework_TestCase {
 

@@ -43,7 +43,7 @@ use Wikibase\Store\EntityIdLookup;
  * Implementation of the client store interface using direct access to the repository's
  * database via MediaWiki's foreign wiki mechanism as implemented by LBFactoryMulti.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

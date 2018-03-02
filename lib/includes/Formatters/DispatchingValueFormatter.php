@@ -15,7 +15,7 @@ use ValueFormatters\ValueFormatter;
  * @todo: Plain format() shouldn't be supported,
  * formatValue() should require the dataType ID.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {

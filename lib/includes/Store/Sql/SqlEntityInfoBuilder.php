@@ -20,7 +20,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Class EntityInfoBuilder implementation relying on database access.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {

@@ -10,7 +10,7 @@ use Wikimedia\Assert\Assert;
  * A CompositeValidator uses a list of sub-validators to validate the data.
  * It does not implement any validation logic directly.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class CompositeValidator implements ValueValidator {

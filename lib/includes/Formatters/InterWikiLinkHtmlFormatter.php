@@ -10,7 +10,7 @@ use ValueFormatters\ValueFormatter;
 /**
  * Formats the StringValue from a snak as an HTML link.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jonas Kress
  */
 class InterWikiLinkHtmlFormatter implements ValueFormatter {

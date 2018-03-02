@@ -23,7 +23,7 @@ use Wikibase\Summary;
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Michał Łazowik

@@ -12,7 +12,7 @@ use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class EntitySearchElasticTest extends MediaWikiTestCase {

@@ -7,7 +7,7 @@ use Html;
 /**
  * Class for generating diff rows for a given set of old and new values.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DiffOpValueFormatter {
 

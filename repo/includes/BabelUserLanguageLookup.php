@@ -12,7 +12,7 @@ use Wikibase\Lib\UserLanguageLookup;
  *
  * The current implementation relies on the Babel extension, but that may change.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  * @author Marius Hoch

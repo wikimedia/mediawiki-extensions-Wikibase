@@ -11,7 +11,7 @@ use ValueValidators\Result;
  * Exception thrown when the validation of a change operation failed.
  * This is essentially a wrapper for ValueValidators\Result.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ChangeOpValidationException extends ChangeOpException {

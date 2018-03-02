@@ -19,7 +19,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase {
 

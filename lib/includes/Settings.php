@@ -8,7 +8,7 @@ namespace Wikibase;
  * Each component should manage its own settings,
  * and such settings should be defined in their own configuration.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

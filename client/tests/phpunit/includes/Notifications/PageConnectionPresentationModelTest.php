@@ -18,7 +18,7 @@ use Wikibase\Client\Notifications\PageConnectionPresentationModel;
  * @group Database
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  */
 class PageConnectionPresentationModelTest extends MediaWikiTestCase {

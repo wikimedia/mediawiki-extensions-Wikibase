@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Provides logic to update the repo after certain changes have been
  * performed in the client (like page moves).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 abstract class UpdateRepo {

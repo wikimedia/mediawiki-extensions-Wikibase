@@ -1,5 +1,5 @@
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>

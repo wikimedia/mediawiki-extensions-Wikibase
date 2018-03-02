@@ -14,7 +14,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jonas Kress
  */
 class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {

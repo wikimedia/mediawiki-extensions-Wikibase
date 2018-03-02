@@ -13,7 +13,7 @@ use Wikimedia\Assert\Assert;
 /**
  * RDF vocabulary for use in mapping for wikibase data model.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RdfVocabulary {
 

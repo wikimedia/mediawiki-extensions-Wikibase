@@ -12,7 +12,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 /**
  * Provides validators for terms (like the maximum length of labels, etc).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class TermValidatorFactory {

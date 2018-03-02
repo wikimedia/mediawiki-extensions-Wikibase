@@ -21,7 +21,7 @@
 	 * @uses wikibase.datamodel.ReferenceList
 	 * @uses wikibase.datamodel.Statement
 	 * @uses wikibase.utilities.ui
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author H. Snater < mediawiki@snater.com >
 	 *

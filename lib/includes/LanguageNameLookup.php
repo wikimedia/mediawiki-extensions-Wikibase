@@ -8,7 +8,7 @@ use Language;
  * Service for looking up language names based on MediaWiki's Language
  * class.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class LanguageNameLookup {
 

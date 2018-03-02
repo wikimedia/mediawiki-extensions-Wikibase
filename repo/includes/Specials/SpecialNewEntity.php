@@ -16,7 +16,7 @@ use Wikibase\SummaryFormatter;
 /**
  * Page for creating new Wikibase entities that contain a Fingerprint.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 

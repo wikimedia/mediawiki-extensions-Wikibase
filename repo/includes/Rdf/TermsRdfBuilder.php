@@ -14,7 +14,7 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * RDF mapping for entity terms.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermsRdfBuilder implements EntityRdfBuilder {
 

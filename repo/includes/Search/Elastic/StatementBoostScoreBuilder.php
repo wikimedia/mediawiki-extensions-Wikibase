@@ -10,7 +10,7 @@ use Elastica\Query\FunctionScore;
 /**
  * Boost function implementation for statement values.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class StatementBoostScoreBuilder extends FunctionScoreBuilder {

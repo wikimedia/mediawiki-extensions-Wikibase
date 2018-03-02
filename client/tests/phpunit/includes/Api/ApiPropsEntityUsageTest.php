@@ -22,7 +22,7 @@ use WikiPage;
  * @group WikibaseClient
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {

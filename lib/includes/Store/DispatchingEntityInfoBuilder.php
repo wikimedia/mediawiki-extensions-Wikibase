@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Delegates method calls to EntityInfoBuilder instances configures for a particular repository.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityInfoBuilder implements EntityInfoBuilder {
 

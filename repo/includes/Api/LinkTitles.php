@@ -19,7 +19,7 @@ use Wikibase\Summary;
  * API module to associate two pages on two different sites with a Wikibase item.
  * Requires API write mode to be enabled.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Addshore
  */

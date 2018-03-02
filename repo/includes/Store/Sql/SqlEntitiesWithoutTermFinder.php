@@ -14,7 +14,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Service for getting entities without terms.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
  * @author Marius Hoch

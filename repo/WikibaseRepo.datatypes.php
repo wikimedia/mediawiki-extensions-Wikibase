@@ -20,7 +20,7 @@
  * @see WikibaseValueFormatterBuilders
  * @see docs/datatypes.wiki Documentation on how to add new data type
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 

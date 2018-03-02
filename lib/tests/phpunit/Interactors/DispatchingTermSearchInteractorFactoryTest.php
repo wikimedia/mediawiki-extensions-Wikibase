@@ -15,7 +15,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit_Framework_TestCase {
 

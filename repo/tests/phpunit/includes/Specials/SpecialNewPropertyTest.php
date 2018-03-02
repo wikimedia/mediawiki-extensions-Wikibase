@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Addshore
  */

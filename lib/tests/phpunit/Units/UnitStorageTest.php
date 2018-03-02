@@ -16,7 +16,7 @@ use RuntimeException;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class UnitStorageTest extends MediaWikiTestCase {
 

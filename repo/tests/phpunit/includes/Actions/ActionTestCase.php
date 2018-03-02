@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  *
  * @todo: move this to core (except the test item stuff of course)

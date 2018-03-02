@@ -14,7 +14,7 @@ use Wikibase\StringNormalizer;
  * Factory providing ChangeOpDeserializers for fields of items and properties,
  * such as label, description, alias, claim and sitelink.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializerFactory {
 

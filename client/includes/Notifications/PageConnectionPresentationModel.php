@@ -10,7 +10,7 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 /**
  * Presentation model for Echo notifications
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  */
 class PageConnectionPresentationModel extends EchoEventPresentationModel {

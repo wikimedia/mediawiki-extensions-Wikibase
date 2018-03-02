@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiff;
 /**
  * Represents a diff between two Wikibase\EntityContent instances.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityContentDiff extends Diff {

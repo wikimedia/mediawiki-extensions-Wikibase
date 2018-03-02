@@ -10,7 +10,7 @@ use Wikibase\View\EntityIdFormatterFactory;
 /**
  * A factory for generating EntityIdHtmlLinkFormatters.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {

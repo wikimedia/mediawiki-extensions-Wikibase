@@ -30,7 +30,7 @@ use Wikimedia\Assert\Assert;
  * Program logic should use an instance of OutputFormatValueFormatterFactory
  * resp. OutputFormatSnakFormatterFactory.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class WikibaseValueFormatterBuilders {

@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseAPI
  * @group BreakingTheSlownessBarrier
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class SetDescriptionTest extends ModifyTermTestCase {

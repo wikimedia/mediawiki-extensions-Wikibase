@@ -20,7 +20,7 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @group Wikibase
  * @group WikibaseClient
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {

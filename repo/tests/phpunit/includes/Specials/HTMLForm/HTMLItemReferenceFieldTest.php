@@ -12,7 +12,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
 	/**

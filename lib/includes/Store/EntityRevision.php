@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * different entities may have the same revision ID. For more information on the relationship
  * between entities and wiki pages, see docs/entity-storage.wiki.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityRevision {

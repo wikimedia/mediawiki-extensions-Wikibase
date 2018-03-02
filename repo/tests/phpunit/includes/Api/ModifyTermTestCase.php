@@ -7,7 +7,7 @@ use ApiUsageException;
 /**
  * Test case for language attributes API modules.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 abstract class ModifyTermTestCase extends WikibaseApiTestCase {

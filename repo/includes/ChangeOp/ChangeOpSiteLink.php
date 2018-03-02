@@ -15,7 +15,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Class for sitelink change operation
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpSiteLink extends ChangeOpBase {
 

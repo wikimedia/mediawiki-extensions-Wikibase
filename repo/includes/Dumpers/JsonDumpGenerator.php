@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\StorageException;
  * JsonDumpGenerator generates an JSON dump of a given set of entities, excluding
  * redirects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class JsonDumpGenerator extends DumpGenerator {

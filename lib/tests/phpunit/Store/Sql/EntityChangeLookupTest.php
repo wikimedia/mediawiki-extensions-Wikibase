@@ -18,7 +18,7 @@ use Wikibase\WikibaseSettings;
  * @group WikibaseStore
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class EntityChangeLookupTest extends \MediaWikiTestCase {

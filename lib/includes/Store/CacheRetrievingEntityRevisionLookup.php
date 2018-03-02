@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
  * EntityRevisionLookup implementation that checks an EntityRevisionCache for cached revisions (but
  * doesn't cache on its own). Falls back to a given EntityRevisionLookup.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

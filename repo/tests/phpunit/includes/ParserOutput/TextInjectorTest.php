@@ -9,7 +9,7 @@ use Wikibase\Repo\ParserOutput\TextInjector;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class TextInjectorTest extends \PHPUnit_Framework_TestCase {

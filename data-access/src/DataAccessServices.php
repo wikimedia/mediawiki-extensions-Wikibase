@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * An interface of a factory of data retrieval/lookup services.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 interface DataAccessServices {
 

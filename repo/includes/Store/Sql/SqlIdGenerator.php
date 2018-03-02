@@ -10,7 +10,7 @@ use Wikimedia\Rdbms\LoadBalancer;
  * Unique Id generator implemented using an SQL table.
  * The table needs to have the fields id_value and id_type.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SqlIdGenerator implements IdGenerator {

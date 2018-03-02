@@ -22,7 +22,7 @@ use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
  * @group DataValueExtensions
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_TestCase {

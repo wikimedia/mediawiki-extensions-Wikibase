@@ -33,7 +33,7 @@ namespace Wikibase\Rdf;
  *
  * - In all cases, before returning anything, set $this->bag[$key] = $hash.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class HashDedupeBag implements DedupeBag {

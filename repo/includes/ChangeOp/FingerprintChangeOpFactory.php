@@ -8,7 +8,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * Factory for ChangeOps that apply to an entity Fingerprint.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class FingerprintChangeOpFactory {

@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Gets a notice about the Wikibase Item belonging to the current page
  * after a move (in case there's one).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class MovePageNotice {

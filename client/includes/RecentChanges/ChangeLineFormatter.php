@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * Formats a changes line for including changes from the Wikibase repo in
  * the client's recent changes, watchlist and related changes special pages.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

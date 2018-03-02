@@ -7,7 +7,7 @@ use UtfNormal\Validator;
 /**
  * StringNormalizer provides several methods for normalizing strings.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author John Erling Blad < jeblad@gmail.com >
  */

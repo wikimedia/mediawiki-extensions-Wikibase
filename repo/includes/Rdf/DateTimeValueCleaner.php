@@ -9,7 +9,7 @@ use DataValues\TimeValue;
  * Very basic cleaner that assumes the date is Gregorian and only
  * ensures it looks OK.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  * @author Thiemo Kreuz
  */

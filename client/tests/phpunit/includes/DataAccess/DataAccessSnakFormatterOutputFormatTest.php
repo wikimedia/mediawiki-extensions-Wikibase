@@ -35,7 +35,7 @@ use Wikibase\Test\MockClientStore;
  * @group WikibaseClient
  * @group WikibaseDataAccess
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase {

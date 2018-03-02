@@ -1,6 +1,6 @@
 <?php
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  *

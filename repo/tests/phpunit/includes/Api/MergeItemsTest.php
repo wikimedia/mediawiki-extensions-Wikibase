@@ -44,7 +44,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @group WikibaseAPI
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Lucie-Aimée Kaffee
  */

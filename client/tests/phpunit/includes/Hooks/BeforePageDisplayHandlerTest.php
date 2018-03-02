@@ -17,7 +17,7 @@ use Wikibase\Client\NamespaceChecker;
  * @group WikibaseHooks
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {

@@ -8,7 +8,7 @@
 	 * @class jQuery.wikibase.entityview
 	 * @extends jQuery.ui.TemplatedWidget
 	 * @abstract
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

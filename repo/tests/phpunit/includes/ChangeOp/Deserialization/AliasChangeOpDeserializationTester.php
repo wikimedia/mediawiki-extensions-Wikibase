@@ -11,7 +11,7 @@ use Wikibase\Summary;
  * Set of test methods that can be reused in AliasesChangeOpDeserializerTest and tests for
  * ChangeOpDeserializers of entities that have aliases.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 trait AliasChangeOpDeserializationTester {
 

@@ -5,7 +5,7 @@ wikibase.view.ViewController = ( function () {
 	 * A controller for editing wikibase datamodel values through wikibase views
 	 *
 	 * @class wikibase.view.ViewController
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 * @abstract
 	 * @constructor

@@ -13,7 +13,7 @@ use Wikimedia\Assert\Assert;
  * This can also be used for entity types which don't have all aspects mentioned here,
  * the aspects are represented as unchanged in that case.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class EntityDiffChangedAspects implements Serializable {

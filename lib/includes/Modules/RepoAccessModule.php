@@ -10,7 +10,7 @@ use ResourceLoaderModule;
  * JavaScript variables needed to access the repo independent from the current
  * working wiki
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class RepoAccessModule extends ResourceLoaderModule {

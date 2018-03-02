@@ -18,7 +18,7 @@ use Title;
  * in the rc_params column of the RecentChange table, for use in
  * generating recent change comments for wikibase changes.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

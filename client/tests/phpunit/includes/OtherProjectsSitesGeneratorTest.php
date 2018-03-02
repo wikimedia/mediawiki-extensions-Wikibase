@@ -15,7 +15,7 @@ use Wikibase\Client\OtherProjectsSitesGenerator;
  * @group Database
  * @group WikibaseIntegration
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */

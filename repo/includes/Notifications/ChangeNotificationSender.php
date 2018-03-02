@@ -7,7 +7,7 @@ use Wikibase\Change;
 /**
  * Channel for sending notifications about changes to a repo's clients.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface ChangeNotificationSender {

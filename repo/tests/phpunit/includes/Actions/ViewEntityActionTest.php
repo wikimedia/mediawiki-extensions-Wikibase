@@ -11,7 +11,7 @@ use WikiPage;
 /**
  * @covers Wikibase\ViewEntityAction
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  *
  * @group Action

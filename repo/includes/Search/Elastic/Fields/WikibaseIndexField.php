@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * type defined in the mapping. (e.g. nested must be array,
  * integer field must get an int, etc)
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 interface WikibaseIndexField {

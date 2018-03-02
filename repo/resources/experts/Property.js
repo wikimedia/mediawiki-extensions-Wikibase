@@ -11,7 +11,7 @@ module.exports = ( function ( wb, vv ) {
 	 * @class wikibase.experts.Property
 	 * @extends wikibase.experts.Entity
 	 * @uses jQuery.valueview
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 */
 	var SELF = MODULE.Property = vv.expert( 'wikibaseproperty', PARENT, {

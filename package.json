@@ -9,7 +9,7 @@
     "url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase"
   },
   "author": "The Wikidata team",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "devDependencies": {
     "eslint-config-wikimedia": "0.5.0",
     "grunt": "1.0.1",

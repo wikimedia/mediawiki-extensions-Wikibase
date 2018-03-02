@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  * user, and not interrupted by a "disruptive" change. Changes altering the association
  * between pages on the local wiki and items on the repo are considered disruptive.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ChangeRunCoalescer {

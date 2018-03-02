@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Units;
 /**
  * Storage interface for Unit conversion information.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 interface UnitStorage {

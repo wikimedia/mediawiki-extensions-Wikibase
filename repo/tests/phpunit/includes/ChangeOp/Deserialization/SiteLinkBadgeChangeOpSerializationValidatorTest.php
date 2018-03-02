@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase {
 

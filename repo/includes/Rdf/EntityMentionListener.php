@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * are referenced in the RDF output. Such stubs would typically give at
  * least a type and a label for the entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface EntityMentionListener {

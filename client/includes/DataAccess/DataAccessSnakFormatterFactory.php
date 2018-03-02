@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * A factory for SnakFormatters in a client context, to be reused in different methods that "access
  * repository data" from a client (typically parser functions and Lua scripts).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch
  */

@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 

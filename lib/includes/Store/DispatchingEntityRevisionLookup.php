@@ -11,7 +11,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * Delegates lookup to the repository-specific EntityRevisionLookup
  * based on the name of the repository an EntityId belongs to.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
 

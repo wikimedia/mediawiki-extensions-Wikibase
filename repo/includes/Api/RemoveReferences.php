@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * API module for removing one or more references of the same statement.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */

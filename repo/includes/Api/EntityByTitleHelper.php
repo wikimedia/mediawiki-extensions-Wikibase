@@ -14,7 +14,7 @@ use Wikibase\StringNormalizer;
 /**
  * Helper class for api modules to resolve page+title pairs into entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  * @author Addshore
  * @author Daniel Kinzler

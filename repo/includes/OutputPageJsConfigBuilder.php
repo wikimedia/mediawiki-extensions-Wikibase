@@ -10,7 +10,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Handles adding user-specific or other js config to OutputPage
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class OutputPageJsConfigBuilder {

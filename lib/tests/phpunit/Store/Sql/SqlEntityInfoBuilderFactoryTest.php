@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
  * @group Wikibase
  * @group WikibaseStore
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 

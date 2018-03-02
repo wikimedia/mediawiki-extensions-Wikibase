@@ -9,7 +9,7 @@ use ValueParsers\Normalizers\StringNormalizer;
  * Adapter implementing ValueParsers\Normalizers\StringNormalizer based on \Wikibase\StringNormalize.
  * Used to perform string normalization in StringParser.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class WikibaseStringValueNormalizer implements StringNormalizer {

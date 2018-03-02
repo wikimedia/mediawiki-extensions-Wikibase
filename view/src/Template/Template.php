@@ -10,7 +10,7 @@ use Message;
  *
  * This class Represents a template that can contain placeholders just like MediaWiki messages.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author H. Snater <mediawiki@snater.com>
  */
 class Template extends Message {

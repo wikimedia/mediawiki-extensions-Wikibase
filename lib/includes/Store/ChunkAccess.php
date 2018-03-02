@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store;
  * Interface for DAO objects providing chunked access based on sequential indexes.
  * "holes" in the index sequence are acceptable but should not be frequent.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface ChunkAccess {

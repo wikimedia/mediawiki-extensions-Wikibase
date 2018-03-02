@@ -15,7 +15,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @group Wikibase
  * @group WikibaseStore
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingTermBufferTest extends PHPUnit_Framework_TestCase {
 

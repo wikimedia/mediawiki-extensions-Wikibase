@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\TypeDispatchingEntityStore;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityStoreTest extends MediaWikiTestCase {

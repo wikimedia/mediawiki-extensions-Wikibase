@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Service interface for checking a user's permissions on a given entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface EntityPermissionChecker {

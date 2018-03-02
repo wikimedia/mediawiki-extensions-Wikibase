@@ -18,7 +18,7 @@ use Wikibase\Repo\Diff\ItemDiffView;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

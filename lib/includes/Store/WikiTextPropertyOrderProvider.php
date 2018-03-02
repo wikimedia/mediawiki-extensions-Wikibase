@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store;
  * Base class for PropertyOrderProviders, that parse the property order from a
  * wikitext page.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  * @author Marius Hoch
  */

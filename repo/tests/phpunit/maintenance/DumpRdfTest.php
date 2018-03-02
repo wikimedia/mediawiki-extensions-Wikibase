@@ -47,7 +47,7 @@ use Wikimedia\TestingAccessWrapper;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class DumpRdfTest extends MediaWikiLangTestCase {

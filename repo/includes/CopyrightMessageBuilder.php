@@ -6,7 +6,7 @@ use Language;
 use Message;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Werner
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

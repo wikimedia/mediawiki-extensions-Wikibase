@@ -20,7 +20,7 @@ use Wikibase\SettingsArray;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  */
 class EchoNotificationsHandlersTest extends MediaWikiTestCase {

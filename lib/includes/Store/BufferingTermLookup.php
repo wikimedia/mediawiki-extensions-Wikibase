@@ -11,7 +11,7 @@ use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {

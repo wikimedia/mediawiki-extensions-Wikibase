@@ -11,7 +11,7 @@ use Wikimedia\Assert\Assert;
  * SnakUrlExpander that uses an PropertyInfoProvider to find
  * a URL pattern for expanding a Snak's value into an URL.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PropertyInfoSnakUrlExpander implements SnakUrlExpander {

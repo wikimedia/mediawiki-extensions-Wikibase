@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * PropertyDataTypeLookup that uses an PropertyInfoLookup to find
  * a property's data type ID.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {

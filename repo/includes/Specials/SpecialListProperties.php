@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * Special page to list properties by data type
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Addshore
  */

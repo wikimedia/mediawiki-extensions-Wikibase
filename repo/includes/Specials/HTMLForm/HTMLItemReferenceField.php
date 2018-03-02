@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Class representing generic form field referencing item by its ID.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class HTMLItemReferenceField extends \HTMLTextField {
 

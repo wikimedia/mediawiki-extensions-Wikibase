@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @group WikibaseUsageTracking
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SiteLinkUsageLookupTest extends MediaWikiTestCase {

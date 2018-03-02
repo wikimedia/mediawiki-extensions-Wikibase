@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Modules;
 use Wikibase\SettingsArray;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SettingsValueProvider implements MediaWikiConfigValueProvider {
 

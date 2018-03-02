@@ -7,7 +7,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 /**
  * @covers Wikibase\DataAccess\DataAccessSettings
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DataAccessSettingsTest extends \PHPUnit_Framework_TestCase {
 

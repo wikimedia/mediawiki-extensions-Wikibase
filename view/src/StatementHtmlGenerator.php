@@ -14,7 +14,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Backend renderer that generates the HTML representation of a statement for use in an entity view.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class StatementHtmlGenerator {
 

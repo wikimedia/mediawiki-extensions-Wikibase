@@ -7,7 +7,7 @@
 	 * A factory for creating toolbars
 	 *
 	 * @class wikibase.view.ToolbarFactory
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 * @constructor
 	 */

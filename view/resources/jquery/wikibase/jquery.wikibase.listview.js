@@ -7,7 +7,7 @@
 	 * View for displaying and editing list items, each represented by a single random widget.
 	 * @class jQuery.wikibase.listview
 	 * @extends jQuery.ui.TemplatedWidget
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 * @author H. Snater < mediawiki@snater.com >
 	 *

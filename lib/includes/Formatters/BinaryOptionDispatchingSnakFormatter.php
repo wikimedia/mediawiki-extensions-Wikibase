@@ -14,7 +14,7 @@ use Wikimedia\Assert\Assert;
  * Snaks based on the associated property's data type. Depending on that
  * data type, we choose between a "special" SnakFormatter and a generic one.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class BinaryOptionDispatchingSnakFormatter implements SnakFormatter {

@@ -14,7 +14,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Class to build the information about a property.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */

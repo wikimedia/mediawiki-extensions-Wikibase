@@ -22,7 +22,7 @@ use Wikibase\Repo\DataTypeValidatorFactory;
 /**
  * Class SnakValidator for validating Snaks.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SnakValidator implements ValueValidator {

@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * Runner for the {{#property|…}} and {{#statements|…}} parser functions.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class Runner {
 

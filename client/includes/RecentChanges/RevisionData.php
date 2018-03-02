@@ -7,7 +7,7 @@ namespace Wikibase\Client\RecentChanges;
  *
  * @todo Merge this into ExternalChange
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

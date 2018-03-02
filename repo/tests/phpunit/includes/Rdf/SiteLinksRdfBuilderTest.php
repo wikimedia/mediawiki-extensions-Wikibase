@@ -11,7 +11,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @group Wikibase
  * @group WikibaseRdf
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */

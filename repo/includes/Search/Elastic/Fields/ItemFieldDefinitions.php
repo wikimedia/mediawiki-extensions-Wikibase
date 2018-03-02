@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 /**
  * Search fields that are used for items.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class ItemFieldDefinitions implements FieldDefinitions {

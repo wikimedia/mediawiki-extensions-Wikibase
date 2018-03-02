@@ -17,7 +17,7 @@ use Wikibase\Repo\Specials\SpecialAvailableBadges;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gamil.com>
  */
 class SpecialAvailableBadgesTest extends SpecialPageTestBase {

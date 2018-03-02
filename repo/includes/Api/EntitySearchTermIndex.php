@@ -17,7 +17,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Helper class to search for entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntitySearchTermIndex implements EntitySearchHelper {

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author eranroz
  */
 class ClientStatementListSerializer extends ClientSerializer {

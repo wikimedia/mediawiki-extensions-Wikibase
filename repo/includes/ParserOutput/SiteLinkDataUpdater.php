@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 interface SiteLinkDataUpdater extends ParserOutputDataUpdater {

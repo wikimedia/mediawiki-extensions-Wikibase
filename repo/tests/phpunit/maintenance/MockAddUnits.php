@@ -7,7 +7,7 @@ use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Repo\Maintenance\SPARQLClient;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class MockAddUnits extends AddUnitConversions {

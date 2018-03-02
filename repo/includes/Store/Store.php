@@ -27,7 +27,7 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  *
  * @todo: provide getXXX() methods for getting local pseudo-singletons (shared service objects).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 interface Store {

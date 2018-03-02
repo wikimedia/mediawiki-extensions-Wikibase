@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * Services are defined by loading wiring arrays, or by using defineService method.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class MultiRepositoryServices extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
 

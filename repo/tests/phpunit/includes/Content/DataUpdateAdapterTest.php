@@ -12,7 +12,7 @@ use Wikibase\Repo\Content\DataUpdateAdapter;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class DataUpdateAdapterTest extends \PHPUnit_Framework_TestCase {

@@ -39,7 +39,7 @@ use Wikibase\Lib\Store\RedirectRevision;
  *
  * Mock repository for use in tests.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

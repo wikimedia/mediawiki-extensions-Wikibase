@@ -10,7 +10,7 @@ use Wikibase\Repo\PidLock;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class PidLockTest extends PHPUnit_Framework_TestCase {

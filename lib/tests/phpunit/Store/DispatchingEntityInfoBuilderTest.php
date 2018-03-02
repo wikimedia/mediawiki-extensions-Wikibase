@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  * @group Wikibase
  * @group WikibaseStore
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 

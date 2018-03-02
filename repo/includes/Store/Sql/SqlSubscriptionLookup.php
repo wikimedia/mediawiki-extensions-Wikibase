@@ -10,7 +10,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 /**
  * Implementation of SubscriptionLookup based on a database table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SqlSubscriptionLookup implements SubscriptionLookup {

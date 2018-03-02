@@ -8,7 +8,7 @@ use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 abstract class ClientSerializer implements Serializer {

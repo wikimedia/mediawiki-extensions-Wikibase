@@ -20,7 +20,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Helper class for api modules to load entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Daniel Kinzler
  */

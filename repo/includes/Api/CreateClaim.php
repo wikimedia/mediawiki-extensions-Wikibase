@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * API module for creating claims.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

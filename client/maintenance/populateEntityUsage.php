@@ -17,7 +17,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for populating wbc_entity_usage based on the page_props table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PopulateEntityUsage extends LoggedUpdateMaintenance {

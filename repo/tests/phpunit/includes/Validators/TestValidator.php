@@ -13,7 +13,7 @@ use ValueValidators\ValueValidator;
  * If the value is a DataValue object, it's native representation
  * ("array value") will be checked.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class TestValidator implements ValueValidator {

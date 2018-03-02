@@ -20,7 +20,7 @@ use Wikibase\WikibaseSettings;
  * pageterms with titles=Washington_DC would include that label and description
  * in the response.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PageTerms extends ApiQueryBase {

@@ -36,7 +36,7 @@ use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
  * @warning: This is a low level factory for use by bootstrap code only!
  * Program logic should use an instance of DataTypeValidatorFactory.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ValidatorBuilders {

@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\ChangeStore;
  * @group Wikibase
  * @group WikibaseChange
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class DatabaseChangeTransmitterTest extends \PHPUnit_Framework_TestCase {

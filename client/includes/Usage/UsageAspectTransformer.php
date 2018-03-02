@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * UsageAspectTransformer that was constructed to consider all (X) usages relevant
  * will keep the usage Q1#S usage as "relevant".
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

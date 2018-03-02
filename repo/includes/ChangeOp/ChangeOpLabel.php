@@ -15,7 +15,7 @@ use Wikibase\Summary;
 /**
  * Class for label change operation
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  * @author Thiemo Kreuz

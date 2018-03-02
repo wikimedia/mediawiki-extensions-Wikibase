@@ -9,7 +9,7 @@ use DataValues\TimeValue;
  * Clean datetime value to conform to RDF/XML standards
  * This class supports Julian->Gregorian conversion
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  * @author Thiemo Kreuz
  */

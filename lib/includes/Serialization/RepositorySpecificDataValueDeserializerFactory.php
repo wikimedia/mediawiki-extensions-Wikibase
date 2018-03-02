@@ -17,7 +17,7 @@ use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
  * Factory creating DataValueDeserializer instances configured for the given repository, ie.
  * using the EntityIdParser configured for the repository when deserializing EntityIdValue.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RepositorySpecificDataValueDeserializerFactory {
 

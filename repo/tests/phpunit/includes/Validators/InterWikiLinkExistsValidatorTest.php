@@ -12,7 +12,7 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jonas Kress
  */
 class InterWikiLinkExistsValidatorTest extends \PHPUnit_Framework_TestCase {

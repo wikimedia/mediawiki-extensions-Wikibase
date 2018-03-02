@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 /**
  * StatementGroupRenderer of the {{#property}} parser function.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class LanguageAwareRenderer implements StatementGroupRenderer {
 

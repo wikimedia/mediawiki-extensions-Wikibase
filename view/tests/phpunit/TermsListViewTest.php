@@ -23,7 +23,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @group Wikibase
  * @group WikibaseView
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>

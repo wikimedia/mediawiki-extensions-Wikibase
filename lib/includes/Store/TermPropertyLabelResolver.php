@@ -13,7 +13,7 @@ use Wikibase\TermIndex;
  * Resolves property labels (which are unique per language) into entity IDs
  * using a TermIndex.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

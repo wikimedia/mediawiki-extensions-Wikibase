@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * No-op implementation of the SubscriptionManager and UsageLookup interfaces.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class NullSubscriptionManager implements SubscriptionManager {

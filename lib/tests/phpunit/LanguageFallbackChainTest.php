@@ -12,7 +12,7 @@ use Wikibase\LanguageWithConversion;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >
  * @author Thiemo Kreuz
  */

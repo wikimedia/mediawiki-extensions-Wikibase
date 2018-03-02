@@ -7,7 +7,7 @@ use Exception;
 /**
  * Exception representing a failure to execute the "create redirect" use case.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class RedirectCreationException extends Exception {

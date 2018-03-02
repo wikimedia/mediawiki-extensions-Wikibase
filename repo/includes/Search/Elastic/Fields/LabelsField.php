@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 /**
  * Field which contains per-language specific labels.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class LabelsField extends TermIndexField {

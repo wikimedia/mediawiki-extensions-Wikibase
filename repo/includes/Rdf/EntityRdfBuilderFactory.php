@@ -9,7 +9,7 @@ use Wikimedia\Purtle\RdfWriter;
  * Factory for EntityRdfBuilder based on factory callbacks.
  * For use with EntityTypeDefinitions.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class EntityRdfBuilderFactory {

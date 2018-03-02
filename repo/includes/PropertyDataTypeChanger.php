@@ -15,7 +15,7 @@ use User;
  * Class for changing a property's data type.
  * Please be aware of the implication such an operation has.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class PropertyDataTypeChanger {

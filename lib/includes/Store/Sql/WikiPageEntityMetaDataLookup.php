@@ -18,7 +18,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * loading entities from WikiPages (via Revision) or to verify an entity against
  * page.page_latest.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */

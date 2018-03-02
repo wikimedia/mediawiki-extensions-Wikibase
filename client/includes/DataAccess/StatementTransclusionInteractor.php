@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 /**
  * Renders the main Snaks associated with a given Property on an Entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class StatementTransclusionInteractor {

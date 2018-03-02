@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class MockEntityIdPager implements EntityIdPager {

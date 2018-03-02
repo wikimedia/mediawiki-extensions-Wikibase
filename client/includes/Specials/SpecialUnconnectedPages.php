@@ -16,7 +16,7 @@ use Wikimedia\Rdbms\ResultWrapper;
 /**
  * List client pages that are not connected to repository items.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Amir Sarabadani < ladsgroup@gmail.com >
  * @author Daniel Kinzler

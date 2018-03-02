@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Finds linked entities on an Entity and add the links to ParserOutput.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz

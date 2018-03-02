@@ -19,7 +19,7 @@ use Wikibase\Lib\Formatters\TypedValueFormatter;
  * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. This is essentially a
  * SnakFormatter adapter for TypedValueFormatter.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PropertyValueSnakFormatter implements SnakFormatter {

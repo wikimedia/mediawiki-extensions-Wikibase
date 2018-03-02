@@ -15,7 +15,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * are unique (per language). This is used to make sure that no two items have the same
  * label and description.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class LabelDescriptionUniquenessValidator implements EntityValidator, FingerprintValidator {

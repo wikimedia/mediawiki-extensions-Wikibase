@@ -13,7 +13,7 @@ use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 /**
  * Represents a change for an entity; to be extended by various change subtypes
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

@@ -25,7 +25,7 @@ use Wikibase\Repo\Api\QuerySearchEntities;
  * @group Wikibase
  * @group WikibaseAPI
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {

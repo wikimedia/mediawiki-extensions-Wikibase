@@ -14,7 +14,7 @@ use ValueValidators\ValueValidator;
  * If the respective field is missing or null, the validation will fail with
  * the code 'missing-field'
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class DataFieldValidator implements ValueValidator {

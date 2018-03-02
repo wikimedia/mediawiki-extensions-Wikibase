@@ -19,7 +19,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {

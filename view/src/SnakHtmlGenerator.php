@@ -13,7 +13,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Base class for generating Snak html.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SnakHtmlGenerator {
 

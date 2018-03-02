@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
  * Base class for tests of EntityInfoBuilder implementation.
  * This abstract test case tests conformance to the contract of the EntityInfoBuilder interface.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {

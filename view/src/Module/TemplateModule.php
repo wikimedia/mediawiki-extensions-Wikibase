@@ -10,7 +10,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Injects templates into JavaScript.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author H. Snater <mediawiki@snater.com>
  */
 class TemplateModule extends ResourceLoaderFileModule {

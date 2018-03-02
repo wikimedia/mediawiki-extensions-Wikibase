@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * Interface and base class for objects accumulating usage tracking information for a given page.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

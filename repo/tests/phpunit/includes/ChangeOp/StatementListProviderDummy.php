@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 /**
  * A dummy entity for tests only.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class StatementListProviderDummy implements EntityDocument, StatementListProvider {

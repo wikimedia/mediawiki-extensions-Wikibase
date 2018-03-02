@@ -21,7 +21,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Factory for EntityContent objects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >

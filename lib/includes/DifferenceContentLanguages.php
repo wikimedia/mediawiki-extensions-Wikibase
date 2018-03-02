@@ -6,7 +6,7 @@ namespace Wikibase\Lib;
  * Provide languages supported as content languages by removing values in one ContentLanguages
  * from another ContentLanguages
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class DifferenceContentLanguages implements ContentLanguages {

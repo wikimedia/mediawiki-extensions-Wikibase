@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * Class for generating a ClaimDifference given two statements.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Addshore
  * @author Thiemo Kreuz

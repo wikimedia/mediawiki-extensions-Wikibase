@@ -14,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseSpecialPage
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >
  */
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {

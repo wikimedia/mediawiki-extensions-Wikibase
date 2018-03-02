@@ -20,7 +20,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Daniel Kinzler
  */

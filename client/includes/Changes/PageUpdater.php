@@ -11,7 +11,7 @@ use Wikibase\EntityChange;
  *
  * Used by ChangeHandler as an interface to the local wiki.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface PageUpdater {

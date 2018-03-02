@@ -18,7 +18,7 @@ use Wikibase\Repo\ParserOutput\PageImagesDataUpdater;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {

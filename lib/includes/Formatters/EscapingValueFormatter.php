@@ -9,7 +9,7 @@ use ValueFormatters\ValueFormatter;
  * EscapingValueFormatter wraps another ValueFormatter and
  * applies a transformation (escaping) to that formatter's output.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EscapingValueFormatter implements ValueFormatter {

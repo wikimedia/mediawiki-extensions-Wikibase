@@ -7,7 +7,7 @@ use Exception;
 /**
  * Interface for objects that can handle exceptions.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface ExceptionHandler {

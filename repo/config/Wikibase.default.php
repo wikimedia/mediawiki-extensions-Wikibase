@@ -8,7 +8,7 @@ use Wikibase\SettingsArray;
  * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
  * It should furthermore not be included from outside the extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 return [

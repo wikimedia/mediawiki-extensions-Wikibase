@@ -8,7 +8,7 @@ use Wikibase\Lib\MessageException;
 /**
  * Exception representing a token check failure.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class TokenCheckException extends MessageException {

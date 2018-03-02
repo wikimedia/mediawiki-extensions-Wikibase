@@ -7,7 +7,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikimedia\Assert\Assert;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class TermSearchResult {

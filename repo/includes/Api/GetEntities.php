@@ -21,7 +21,7 @@ use Wikibase\StringNormalizer;
 /**
  * API module to get the data for one or more Wikibase entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class GetEntities extends ApiBase {
 

@@ -27,7 +27,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @group Wikibase
  * @group WikibaseView
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
