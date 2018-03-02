@@ -202,17 +202,38 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 * @return (int|bool)[] Array of entity ID serialization => revision IDs or false if an entity could not be found.
 	 */
 	public function loadLatestRevisionIds( array $entityIds, $mode ) {
-		// load and cache full information, then return only part of it
-		return array_map(
-			function ( $revisionInformation ) {
-				if ( !is_object( $revisionInformation ) ) {
-					return $revisionInformation;
-				}
+		if ( $mode === EntityRevisionLookup::LATEST_FROM_MASTER ) {
+			// Don't attempt to use the cache in case we are asked to fetch from master.
+			return $this->lookup->loadLatestRevisionIds( $entityIds, $mode );
+		}
 
-				return $revisionInformation->page_latest;
-			},
-			$this->loadRevisionInformation( $entityIds, $mode )
-		);
+		// Use revision IDs we already have from cache,
+		// delegate to underlying lookup for everything else.
+
+		$this->doFetch( $mode );
+
+		$revisionIds = [];
+		$unknownEntityIds = [];
+
+		foreach ( $entityIds as $entityId ) {
+			$idSerialization = $entityId->getSerialization();
+			if ( $this->cache->has( $idSerialization ) ) {
+				$revisionInformation = $this->cache->get( $idSerialization );
+				$revisionIds[$idSerialization] = $revisionInformation->page_latest;
+			} else {
+				$unknownEntityIds[] = $entityId;
+			}
+		}
+
+		if ( $unknownEntityIds !== [] ) {
+			$revisionIds = array_merge(
+				$revisionIds,
+				$this->lookup->loadLatestRevisionIds( $unknownEntityIds, $mode )
+			);
+			// no caching for these – would require a separate cache, not worth it
+		}
+
+		return $revisionIds;
 	}
 
 	private function doFetch( $mode ) {
