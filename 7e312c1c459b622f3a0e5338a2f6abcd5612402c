@@ -16,6 +16,24 @@
       "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be6e9bf1_61bf2a2a",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-02T14:44:53Z",
+      "side": 1,
+      "message": "Yeah, I’m not sure which behavior makes more sense for PrefetchingEtc – after all, this means it no longer benefits from its own pre-fetching. What do you think? (I guess it doesn’t really matter while we haven’t converted any Wikibase code to use this new method yet…)",
+      "parentUuid": "9ccbea84_f77cc0d6",
+      "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
