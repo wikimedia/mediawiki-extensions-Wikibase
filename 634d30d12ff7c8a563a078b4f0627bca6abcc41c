@@ -165,6 +165,30 @@
       "revId": "634d30d12ff7c8a563a078b4f0627bca6abcc41c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f9875d1_080879ac",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-03-02T10:44:35Z",
+      "side": 1,
+      "message": "Import (use clause) works for functions only since PHP 5.6.\nBecause of this, we usually see namespaced functions fully qualified. \nWe could stop doing that because we now can, or stick to it for consistency.\nI personally would keep the qualification because \"named names\" look scary, but I don\u0027t have strong feelings about this.",
+      "parentUuid": "dd49c944_3fedbf12",
+      "range": {
+        "startLine": 432,
+        "startChar": 3,
+        "endLine": 432,
+        "endChar": 12
+      },
+      "revId": "634d30d12ff7c8a563a078b4f0627bca6abcc41c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
