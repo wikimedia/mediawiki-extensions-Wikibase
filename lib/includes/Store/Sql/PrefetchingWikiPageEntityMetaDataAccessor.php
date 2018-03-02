@@ -140,7 +140,8 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
-	 * @return stdClass[] Array of entity id serialization => object.
+	 * @return (stdClass|bool)[] Array mapping entity ID serializations to either objects
+	 * or false if an entity could not be found.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		if ( $mode === EntityRevisionLookup::LATEST_FROM_MASTER ) {
