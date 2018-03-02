@@ -34,6 +34,24 @@
       "revId": "e2581c0e6c77743e04233ab1d02b7df684eb0418",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33fd6099_9026f313",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-02T16:42:47Z",
+      "side": 1,
+      "message": "The main argument for this syntax is that it\u0027s meaningful and helpful for human readers. It\u0027s true that not all tools can understand it. But we figured the benefits are worth the reduced compatibility. After all this is not code but a comment, and comments are mainly targeted at humans.\n\nSame for multi-dimensional arrays like \"int[][]\".\n\nPersonally I had a different opinion on this just a few weeks ago, but changed my mind.",
+      "parentUuid": "9d632ca0_34a5fc77",
+      "revId": "e2581c0e6c77743e04233ab1d02b7df684eb0418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
