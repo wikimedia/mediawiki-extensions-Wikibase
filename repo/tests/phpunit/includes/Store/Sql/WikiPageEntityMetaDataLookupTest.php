@@ -359,4 +359,84 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->assertEquals( $revision->getRevisionId(), $result->rev_id );
 	}
 
+	/**
+	 * @param EntityId[] $entityIds array of four entity IDs; the third entry (index 2) should not exist
+	 * @param (int|bool)[] $result
+	 */
+	private function assertLatestRevisionIds( array $entityIds, array $result ) {
+		$serializedEntityIds = [];
+		foreach ( $entityIds as $entityId ) {
+			$serializedEntityIds[] = $entityId->getSerialization();
+		}
+
+		// Verify that all requested entity ids are part of the result
+		$this->assertEquals( $serializedEntityIds, array_keys( $result ) );
+
+		// Verify revision ids
+		$this->assertEquals(
+			$result[$serializedEntityIds[0]], $this->data[0]->getRevisionId()
+		);
+		$this->assertEquals(
+			$result[$serializedEntityIds[1]], $this->data[1]->getRevisionId()
+		);
+		$this->assertEquals(
+			$result[$serializedEntityIds[3]], $this->data[2]->getRevisionId()
+		);
+
+		// Verify that no further entities are part of the result
+		$this->assertCount( count( $entityIds ), $result );
+	}
+
+	public function testLoadLatestRevisionIds() {
+		$entityIds = [
+			$this->data[0]->getEntity()->getId(),
+			$this->data[1]->getEntity()->getId(),
+			new ItemId( 'Q823487354' ), // Doesn't exist
+			$this->data[2]->getEntity()->getId()
+		];
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadLatestRevisionIds(
+				$entityIds,
+				EntityRevisionLookup::LATEST_FROM_REPLICA
+			);
+
+		$this->assertLatestRevisionIds( $entityIds, $result );
+	}
+
+	public function testLoadLatestRevisionIds_masterFallback() {
+		$entityIds = [
+			$this->data[0]->getEntity()->getId(),
+			$this->data[1]->getEntity()->getId(),
+			new ItemId( 'Q823487354' ), // Doesn't exist
+			$this->data[2]->getEntity()->getId()
+		];
+
+		// Make sure we have two calls to getConnection: One that asks for a
+		// replica and one that asks for the master.
+		$lookup = $this->getLookupWithLaggedConnection( 1, 0, 2 );
+
+		$result = $lookup->loadLatestRevisionIds(
+			$entityIds,
+			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+		);
+
+		$this->assertLatestRevisionIds( $entityIds, $result );
+	}
+
+	public function testLoadLatestRevisionIds_unknownNamespace() {
+		$entityId = $this->data[0]->getEntity()->getId();
+		$namespaceLookup = new EntityNamespaceLookup( [] );
+		$metaDataLookup = new WikiPageEntityMetaDataLookup( $namespaceLookup );
+
+		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
+		$result = $metaDataLookup->loadLatestRevisionIds(
+			[ $entityId ],
+			EntityRevisionLookup::LATEST_FROM_REPLICA
+		);
+		\Wikimedia\restoreWarnings();
+
+		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
+	}
+
 }
