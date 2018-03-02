@@ -34,6 +34,24 @@
       "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ac81546_f8a0e9bd",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-03-02T15:16:34Z",
+      "side": 1,
+      "message": "This actually raises a question about the intended semantics of this method: is it ok to return cached revision IDs? Cached for how long? \nIf it\u0027s ok to return revision IDs pre-fetched a few seconds ago, then the implementation in PrefetchingWPEMDL should first fill in all ids from pre-fetched data, then call loadLatestRevisionIds() for all remaining entity IDs.\nif it\u0027s not ok to return info a few seconds old, then it should always directly delegate to this method.",
+      "parentUuid": "be6e9bf1_61bf2a2a",
+      "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
