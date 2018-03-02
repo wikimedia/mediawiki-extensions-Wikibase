@@ -16,6 +16,24 @@
       "revId": "e2581c0e6c77743e04233ab1d02b7df684eb0418",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d632ca0_34a5fc77",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-02T14:45:43Z",
+      "side": 1,
+      "message": "I think it is, but Thiemo would know more… Thiemo, do you remember what the result was the last time I wanted to use this syntax? :)",
+      "parentUuid": "269ecbc8_1db004d5",
+      "revId": "e2581c0e6c77743e04233ab1d02b7df684eb0418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
