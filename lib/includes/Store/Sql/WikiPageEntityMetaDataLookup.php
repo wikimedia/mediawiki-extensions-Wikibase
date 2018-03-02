@@ -59,7 +59,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @throws DBQueryError
 	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
 	 *
-	 * @return array Array mapping entity ID serializations to either objects or false if an entity
+	 * @return (stdClass|bool)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  could not be found.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
