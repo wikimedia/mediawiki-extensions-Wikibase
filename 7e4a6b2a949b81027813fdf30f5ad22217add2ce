@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8940800_4e0567e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-02T17:35:05Z",
+      "side": 1,
+      "message": "By this I meant “*add* tests”, but it turns out the new code doesn’t even pass the existing test :) on it",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 12
+      },
+      "revId": "7e4a6b2a949b81027813fdf30f5ad22217add2ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
