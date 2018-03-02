@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "654d7212_9bc852d1",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-02T10:22:00Z",
+      "side": 1,
+      "message": "Nah, do it both in a followup.",
+      "parentUuid": "05487178_5bdbcf1c",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 65,
+        "endChar": 17
+      },
+      "revId": "634d30d12ff7c8a563a078b4f0627bca6abcc41c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5940c63_f28cec36",
         "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
         "patchSetId": 3
