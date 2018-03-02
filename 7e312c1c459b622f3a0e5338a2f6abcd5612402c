@@ -70,6 +70,24 @@
       "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b740dfcf_df0446d2",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-03-02T17:15:02Z",
+      "side": 1,
+      "message": "Yes, indeed, I didn\u0027t even think of $mode - that makes it nice and explicit.\n\nYes, can be done in a separate patch, if that patch is up before this is merged, or we at least have a ticket to make sure we don\u0027t forget.",
+      "parentUuid": "1d73c763_da84a416",
+      "revId": "7e312c1c459b622f3a0e5338a2f6abcd5612402c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
