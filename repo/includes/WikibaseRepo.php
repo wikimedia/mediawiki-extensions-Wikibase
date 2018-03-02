@@ -960,7 +960,7 @@ class WikibaseRepo {
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getPrefetchingTermLookup();
+		return $this->getWikibaseServices()->getTermBuffer();
 	}
 
 	/**
@@ -974,7 +974,8 @@ class WikibaseRepo {
 	 * @return PrefetchingTermLookup
 	 */
 	public function getPrefetchingTermLookup() {
-		return $this->getWikibaseServices()->getTermBuffer();
+		// FIXME: This assumes all TermBuffer implementations are PrefetchingTermLookups!
+		return $this->getTermBuffer();
 	}
 
 	/**

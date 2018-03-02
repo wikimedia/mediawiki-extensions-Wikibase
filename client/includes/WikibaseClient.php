@@ -221,11 +221,6 @@ final class WikibaseClient {
 	private $termBuffer = null;
 
 	/**
-	 * @var PrefetchingTermLookup|null
-	 */
-	private $prefetchingTermLookup = null;
-
-	/**
 	 * @var PropertyOrderProvider|null
 	 */
 	private $propertyOrderProvider = null;
@@ -435,7 +430,7 @@ final class WikibaseClient {
 	 */
 	public function getTermBuffer() {
 		if ( !$this->termBuffer ) {
-			$this->termBuffer = $this->getPrefetchingTermLookup();
+			$this->termBuffer = $this->getWikibaseServices()->getTermBuffer();
 		}
 
 		return $this->termBuffer;
@@ -456,12 +451,8 @@ final class WikibaseClient {
 	 * @return PrefetchingTermLookup
 	 */
 	private function getPrefetchingTermLookup() {
-		if ( !$this->prefetchingTermLookup ) {
-			// TODO: This should not assume the TermBuffer instance to be a PrefetchingTermLookup
-			$this->prefetchingTermLookup = $this->getWikibaseServices()->getTermBuffer();
-		}
-
-		return $this->prefetchingTermLookup;
+		// FIXME: This assumes all TermBuffer implementations are PrefetchingTermLookups!
+		return $this->getTermBuffer();
 	}
 
 	/**
