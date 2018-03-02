@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "269ecbc8_1db004d5",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-03-02T14:34:42Z",
+      "side": 1,
+      "message": "is this syntax supported by the tools we use?",
+      "revId": "e2581c0e6c77743e04233ab1d02b7df684eb0418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
