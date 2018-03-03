@@ -155,6 +155,7 @@
 	"wikibase-entity-summary-wbsetclaimvalue": "ثبت {{PLURAL:$1|یک مقدار ادعا|مقدار ادعا}}",
 	"wikibase-entity-summary-wbremoveclaims": "حذف  {{PLURAL:$1| ادعا|ادعا}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "پاک‌کردن {{PLURAL:$1|مطالبه|مطالبه‌ها}}",
+	"wikibase-entity-summary-wbremoveclaims-update": "پاک‌کردن {{PLURAL:$1|مطالبه|مطالبه‌ها}}",
 	"wikibase-entity-summary-special-create-item": "ایجاد یک آیتم [$2] با {{PLURAL:$1|مقدار|مقدارها}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "ادعای ایجاد شده",
 	"wikibase-entity-summary-wbsetclaim-update": "تغییر دادن {{PLURAL:$3|ادعا|ادعاها}}",

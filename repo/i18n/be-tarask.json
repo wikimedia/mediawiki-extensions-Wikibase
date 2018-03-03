@@ -330,6 +330,7 @@
 	"wikibase-no-direct-editing": "Простае рэдагаваньне ў прасторы назваў «$1» адключанае",
 	"wikibase-noentity": "Гэты элемэнт не існуе. Вы можаце [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пашукаць у журналах падзеяў], каб даведацца куды ён зьнік.",
 	"wikibase-noentity-createone": "Вы можаце таксама [[$1|стварыць яго]].",
+	"wikibase-special-mergeitems-error-prefix": "Элемэнты ня могуць быць аб’яднаныя. Узьнікла наступная памылка:",
 	"wikibase-listdatatypes-wikibase-item-head": "Аб’ект",
 	"wikibase-listdatatypes-wikibase-property-head": "Уласьцівасьць",
 	"wikibase-listdatatypes-commonsmedia-head": "мэдыяфайл зь Вікісховішча",

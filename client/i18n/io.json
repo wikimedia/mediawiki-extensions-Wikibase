@@ -15,5 +15,7 @@
 	"wikibase-rc-hide-wikidata-show": "Montrar",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id": "Identifiko dil artiklo en {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
 	"wikibase-otherprojects": "En altra projeti"
 }

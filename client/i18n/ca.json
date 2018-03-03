@@ -107,5 +107,7 @@
 	"echo-pref-tooltip-wikibase-action": "Notifiqueu-me quan algú connecti una pàgina {{GENDER:|que he creat}} a un element de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Mostra}} l'element",
 	"unresolved-property-category": "Pàgines amb propietats no resoltes",
-	"unresolved-property-category-desc": "Aquesta categoria mostra les pàgines que fan referència a propietats de {{WBREPONAME}} que no es poden trobar ni per l'identificador ni per l'etiqueta."
+	"unresolved-property-category-desc": "Aquesta categoria mostra les pàgines que fan referència a propietats de {{WBREPONAME}} que no es poden trobar ni per l'identificador ni per l'etiqueta.",
+	"connected-redirect-category": "Redireccions associades amb un element de {{WBREPONAME}}",
+	"connected-redirect-category-desc": "Aquesta categoria llista les pàgines de redirecció associades amb qualque element de {{WBREPONAME}}."
 }
