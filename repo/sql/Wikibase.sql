@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
 ) /*$wgDBTableOptions*/;
 
 CREATE UNIQUE INDEX /*i*/wb_ips_item_site_page ON /*_*/wb_items_per_site (ips_site_id, ips_site_page);
-CREATE INDEX /*i*/wb_ips_site_page ON /*_*/wb_items_per_site (ips_site_page);
 CREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 
 
