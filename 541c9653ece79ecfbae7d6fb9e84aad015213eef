@@ -1,0 +1,245 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0194e50c_7bd4dfa1",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "Unrelated reformatting is pretty distracting and should not be done because of this, especially not on a patch that is that big.",
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dead9802_a92e1ea6",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "This is unused now and should be removed.",
+      "range": {
+        "startLine": 599,
+        "startChar": 24,
+        "endLine": 599,
+        "endChar": 44
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa10db5_55b405aa",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "I\u0027m afraid I have to strictly vote against making anything public here. I\u0027m afraid I can not even accept this as an intermediate step. See my other comments in the ShowSearchHitHandler.",
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dd9197b_bcd08d58",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "This should not be needed. The only user of this is in ShowSearchHitHandler::getLink. Instead of injecting the LinkBeginHookHandler into the ShowSearchHitHandler (two hook handlers that really should not depend on each other, and don\u0027t need to), the two should share the same (much more narrow) services.\n\nIn this particular case here it should easily be possible to inject an EntityIdLookup into ShowSearchHitHandler, instead of reusing this one.",
+      "range": {
+        "startLine": 177,
+        "startChar": 17,
+        "endLine": 177,
+        "endChar": 30
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bddedf4c_c378badc",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "I believe this is a rebase artifact. This comment does not add anything to what is already in the method header, and was removed because of this.",
+      "range": {
+        "startLine": 57,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 4
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f0fdb27_d6821655",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "Please either make this a valid documentation block by including the type information, or remove it.",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 16
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e6d3c58_8a7e0379",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 210,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 16
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646e8c7e_3f9b4bbb",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "Please don\u0027t do this. I can see why you are doing it, but I am sure there is a much better way of achieving the same.\n\nWhat you are doing at the moment is using the LinkBeginHookHandler class like it is a link formatter service. But this is not the case. Formatting links is only one thing the class does. This feature should be extracted to a separate class (this class does not need to implement any interface). Both the LinkBeginHookHandler and this ShowSearchHitHandler can then use the same service.\n\nPlease don\u0027t make two hook handlers depend on each other just because they need to share a bit of code.",
+      "range": {
+        "startLine": 299,
+        "startChar": 18,
+        "endLine": 299,
+        "endChar": 60
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d6a2cf0_34b6c23d",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "A class that is called a \"ElasticTermResult\" really, really should not have static helper functions. That\u0027s a significant code smell I am not willing to accept. Please extract this to a separate service and inject it where it is needed.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a62bacf8_14ac9ecf",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "Why does this service need access to the *entire* top-level factory? This should be avoided at all costs. What I see used below is:\n* 1 specific setting, namely \"entitySearch\"\n* EntityNamespaceLookup\n* EntityIdParser\n* LanguageFallbackChainFactory\n* The users language code.\n\nPlease pass these elements separately.\n\nLuckily this is much easier to fix in later patches, compared to the other code smells I already commented on in previous files.",
+      "range": {
+        "startLine": 42,
+        "startChar": 79,
+        "endLine": 42,
+        "endChar": 97
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b2bede0_4ca31a1f",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T17:38:32Z",
+      "side": 1,
+      "message": "Why pass this as a parameter here? This code does have access to $this-\u003erepo.",
+      "range": {
+        "startLine": 85,
+        "startChar": 39,
+        "endLine": 85,
+        "endChar": 57
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
