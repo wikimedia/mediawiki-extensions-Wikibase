@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a9cfdab_d36a5cd0",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T11:23:06Z",
+      "side": 1,
+      "message": "The same CREATE INDEX line is in repo/sql/AddRowIDs.sqlite.sql. Should we remove this too? Otherwise running update.php on older systems might create the index, just to delete it a second later.",
+      "revId": "54a25f490da0cb99ef6fd177b49541581fb9988d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaacf678_1356af01",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T11:23:06Z",
+      "side": 1,
+      "message": "I see multiple WHERE in our code that include the ips_site_page column. But as far as I can see all these WHERE also include the ips_site_id column, which means they are using this combined index here.",
+      "range": {
+        "startLine": 27,
+        "startChar": 74,
+        "endLine": 27,
+        "endChar": 100
+      },
+      "revId": "54a25f490da0cb99ef6fd177b49541581fb9988d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
