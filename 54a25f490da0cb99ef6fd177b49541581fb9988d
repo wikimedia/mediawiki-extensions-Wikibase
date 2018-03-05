@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "111fbc63_312d8fb1",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-05T12:22:34Z",
+      "side": 1,
+      "message": "AddRowIDs is a patch that should not be applied if the term_row_id is there. If that system is that old, I\u0027d be okay with adding and removing it ;)\nIn general, we don\u0027t touch old sql patches.",
+      "parentUuid": "6a9cfdab_d36a5cd0",
+      "revId": "54a25f490da0cb99ef6fd177b49541581fb9988d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaacf678_1356af01",
         "filename": "repo/sql/Wikibase.sql",
         "patchSetId": 1
