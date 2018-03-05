@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\StorageException;
  * Actual implementations of various functions to access Wikibase functionality
  * through Scribunto. Functions in here can depend on the target language.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
  */

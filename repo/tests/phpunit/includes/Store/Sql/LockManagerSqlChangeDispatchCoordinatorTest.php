@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
  * @group WikibaseChange
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 

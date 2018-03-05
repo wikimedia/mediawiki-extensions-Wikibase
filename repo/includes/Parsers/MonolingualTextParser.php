@@ -10,7 +10,7 @@ use ValueParsers\StringValueParser;
 /**
  * Parser for monolingual text strings.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 /**
  * Watcher interface for watching an EntityStore.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface EntityStoreWatcher {

@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @group WikibaseSpecialPage
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class ItemDisambiguationTest extends MediaWikiTestCase {

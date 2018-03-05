@@ -13,7 +13,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
  * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ParserOutputUsageAccumulatorTest extends \PHPUnit_Framework_TestCase {

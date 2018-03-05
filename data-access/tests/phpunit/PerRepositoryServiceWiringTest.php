@@ -24,7 +24,7 @@ use Wikibase\TermIndex;
 /**
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 /**
  * Definitions for any entity that has descriptions.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class DescriptionsProviderFieldDefinitions implements FieldDefinitions {

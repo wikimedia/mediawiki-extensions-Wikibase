@@ -15,7 +15,7 @@ use Wikibase\StringNormalizer;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class GenericServicesTest extends \PHPUnit_Framework_TestCase {
 

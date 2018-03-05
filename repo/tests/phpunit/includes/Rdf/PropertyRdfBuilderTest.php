@@ -11,7 +11,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @group Wikibase
  * @group WikibaseRdf
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class PropertyRdfBuilderTest extends \PHPUnit_Framework_TestCase {

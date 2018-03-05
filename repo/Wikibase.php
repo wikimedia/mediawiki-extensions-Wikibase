@@ -28,7 +28,7 @@
  * @see README.md
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase_Repository
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -104,7 +104,7 @@ call_user_func( function() {
 		],
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase',
 		'descriptionmsg' => 'wikibase-desc',
-		'license-name' => 'GPL-2.0+'
+		'license-name' => 'GPL-2.0-or-later'
 	];
 
 	// Registry and definition of data types

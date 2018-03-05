@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @group Wikibase
  * @group WikibaseStore
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class FieldPropertyInfoProviderTest extends PHPUnit_Framework_TestCase {

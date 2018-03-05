@@ -28,7 +28,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @group WikibaseClient
  * @group WikibaseDataAccess
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {

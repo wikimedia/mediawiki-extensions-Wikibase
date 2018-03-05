@@ -27,7 +27,7 @@ use Wikibase\SummaryFormatter;
  * @group Wikibase
  * @group WikibaseAPI
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {

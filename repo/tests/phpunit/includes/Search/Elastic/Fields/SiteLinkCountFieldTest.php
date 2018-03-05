@@ -13,7 +13,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
  * @group WikibaseElastic
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteLinkCountFieldTest extends WikibaseNumericFieldTestCase {

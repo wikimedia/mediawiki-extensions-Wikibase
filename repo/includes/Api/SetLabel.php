@@ -14,7 +14,7 @@ use Wikibase\Summary;
  * API module to set the label for a Wikibase entity.
  * Requires API write mode to be enabled.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

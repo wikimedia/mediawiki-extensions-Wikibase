@@ -13,7 +13,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 /**
  * Constructs ChangeOps for statement change requests (referred to as "claims" for legacy reasons).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 

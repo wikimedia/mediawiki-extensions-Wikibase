@@ -19,7 +19,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {

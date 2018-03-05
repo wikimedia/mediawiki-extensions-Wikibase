@@ -3,7 +3,7 @@
  *
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher
  */
 ( function ( wb, $ ) {

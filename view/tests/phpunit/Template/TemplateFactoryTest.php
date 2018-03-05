@@ -15,7 +15,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @group Wikibase
  * @group WikibaseView
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TemplateFactoryTest extends PHPUnit_Framework_TestCase {

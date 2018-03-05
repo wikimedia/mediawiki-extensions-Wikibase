@@ -30,7 +30,7 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {

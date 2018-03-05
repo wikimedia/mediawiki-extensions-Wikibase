@@ -20,7 +20,7 @@ use Wikibase\SummaryFormatter;
 /**
  * Abstract base class for special pages of the WikibaseRepo extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {

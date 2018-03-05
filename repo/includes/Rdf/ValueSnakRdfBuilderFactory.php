@@ -9,7 +9,7 @@ use Wikimedia\Purtle\RdfWriter;
  * Factory for ValueSnakRdfBuilder based on factory callbacks.
  * For use with DataTypeDefinitions.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ValueSnakRdfBuilderFactory {

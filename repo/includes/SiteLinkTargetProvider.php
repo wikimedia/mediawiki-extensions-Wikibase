@@ -7,7 +7,7 @@ use SiteList;
 use SiteLookup;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SiteLinkTargetProvider {
 

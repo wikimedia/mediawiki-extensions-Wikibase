@@ -39,7 +39,7 @@ use Wikimedia\Purtle\RdfWriterFactory;
  *
  * For RDF output, this relies on the RdfBuilder class.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

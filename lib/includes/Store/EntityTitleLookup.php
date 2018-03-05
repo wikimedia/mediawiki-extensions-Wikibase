@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * The mapping could be programmatic, or it could be based on database lookups.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface EntityTitleLookup {

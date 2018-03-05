@@ -14,7 +14,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * This result type implements the result for searching
  * a Wikibase entity by its label or alias.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class ElasticTermResult implements ResultsType {

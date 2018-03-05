@@ -10,7 +10,7 @@ use Wikibase\Summary;
 /**
  * Class for holding a batch of change operations
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Kreuz
  */

@@ -23,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseElastic
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class StatementsFieldTest extends PHPUnit_Framework_TestCase {

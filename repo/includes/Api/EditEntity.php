@@ -30,7 +30,7 @@ use Wikibase\Summary;
  * Derived class for API modules modifying a single entity identified by id xor a combination of
  * site and page title.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class EditEntity extends ModifyEntity {
 

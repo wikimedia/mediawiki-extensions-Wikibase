@@ -10,7 +10,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML to display statements.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */

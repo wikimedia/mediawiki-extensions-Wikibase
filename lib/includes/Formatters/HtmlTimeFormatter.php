@@ -17,7 +17,7 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @see Wikibase\Lib\TimeDetailsFormatter
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz
  * @author Daniel Kinzler

@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
 /**
  * StringLengthValidator checks a string's length
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class StringLengthValidator implements ValueValidator {

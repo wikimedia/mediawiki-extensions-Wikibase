@@ -15,7 +15,7 @@ use Wikibase\LanguageFallbackChain;
  *
  * @see UsageAccumulator
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {

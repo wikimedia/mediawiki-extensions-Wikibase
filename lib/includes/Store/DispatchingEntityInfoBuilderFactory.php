@@ -11,7 +11,7 @@ use Wikimedia\Assert\Assert;
  * Builders used in the DispatchingEntityInfoBuilder created by the factory
  * are created depending on to which repositories requested entities belong to.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 

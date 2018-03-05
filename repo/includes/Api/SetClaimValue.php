@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */

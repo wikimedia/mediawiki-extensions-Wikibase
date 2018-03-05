@@ -9,7 +9,7 @@ use FormatJson;
  *
  * This file produce errors if run standalone.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  *
  * @group API

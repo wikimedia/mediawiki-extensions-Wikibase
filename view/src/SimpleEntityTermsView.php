@@ -13,7 +13,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML to display the terms of an entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SimpleEntityTermsView implements EntityTermsView {
 

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 /**
  * An EntityStore that does dispatching based on the entity type.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityStore implements EntityStore {

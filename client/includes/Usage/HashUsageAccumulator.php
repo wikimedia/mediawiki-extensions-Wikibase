@@ -6,7 +6,7 @@ namespace Wikibase\Client\Usage;
  * This implementation of the UsageAccumulator interface simply wraps
  * an array containing the usage information.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class HashUsageAccumulator extends UsageAccumulator {

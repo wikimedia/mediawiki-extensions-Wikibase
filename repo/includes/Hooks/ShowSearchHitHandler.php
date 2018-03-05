@@ -18,7 +18,7 @@ use Wikibase\Store\EntityIdLookup;
 /**
  * Handler to format entities in the search results
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  * @author Daniel Kinzler
  */

@@ -10,7 +10,7 @@
  * This file is NOT an entry point the WikibaseLib extension. Use WikibaseLib.php.
  * It should furthermore not be included from outside the extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 return [
 	// whether changes get recorded to wb_changes

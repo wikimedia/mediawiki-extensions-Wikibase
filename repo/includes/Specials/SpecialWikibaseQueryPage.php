@@ -12,7 +12,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Base for special pages that show the result of a Query. Rewriting of QueryPage but
  * with abstraction of the storage system and without cache support.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {

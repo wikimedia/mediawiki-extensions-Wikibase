@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\EntityRevisionCache;
  * @group WikibaseEntityLookup
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class EntityRevisionCacheTest extends PHPUnit_Framework_TestCase {

@@ -9,7 +9,7 @@ use Site;
 /**
  * Translates api sitematrix results json into an array of Site objects
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteMatrixParser {

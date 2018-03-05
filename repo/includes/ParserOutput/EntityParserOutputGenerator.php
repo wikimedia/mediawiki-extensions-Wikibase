@@ -32,7 +32,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
 /**
  * Creates the parser output for an entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>

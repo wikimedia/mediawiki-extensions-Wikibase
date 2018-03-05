@@ -9,7 +9,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module to query available badge items.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AvailableBadges extends ApiBase {

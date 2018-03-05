@@ -21,7 +21,7 @@ use Wikibase\SummaryFormatter;
 /**
  * An interactor implementing the use case of creating a redirect.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Addshore
  */

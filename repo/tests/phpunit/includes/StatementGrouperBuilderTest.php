@@ -17,7 +17,7 @@ use Wikibase\Repo\StatementGrouperBuilder;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {

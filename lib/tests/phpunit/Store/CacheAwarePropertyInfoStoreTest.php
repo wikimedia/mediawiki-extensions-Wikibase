@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
  * @group WikibasePropertyInfo
  * @group WikibaseStore
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 	use MediaWikiCoversValidator;

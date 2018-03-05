@@ -14,7 +14,7 @@ use Wikimedia\Assert\Assert;
  * Validator for commons media values which checks whether the file in question
  * exists. Doesn't check whether the name is normalized.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class CommonsMediaExistsValidator implements ValueValidator {

@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @todo Move to DataModel Services.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class EntityIdComposer {

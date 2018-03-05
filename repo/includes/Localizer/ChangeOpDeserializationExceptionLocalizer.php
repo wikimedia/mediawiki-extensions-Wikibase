@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
  * Localizes ChangeOpDeserializationExceptions.
  * NOTE: Only exceptions with error codes that prepended with "wikibase-api" form the i18n message key are localized.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializationExceptionLocalizer implements ExceptionLocalizer {
 

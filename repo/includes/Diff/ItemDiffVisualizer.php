@@ -12,7 +12,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
 /**
  * Class for generating views of EntityDiff objects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class ItemDiffVisualizer implements EntityDiffVisualizer {

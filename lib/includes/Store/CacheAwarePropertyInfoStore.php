@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * Note: Cache keys used by this class should be in sync with keys used by
  * CachingPropertyInfoLookup instances.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class CacheAwarePropertyInfoStore implements PropertyInfoStore {

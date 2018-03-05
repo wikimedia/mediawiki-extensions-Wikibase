@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
  * @group Wikibase
  * @group WikibaseStore
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 

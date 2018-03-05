@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\DispatchingTermBuffer;
 use Wikimedia\Assert\Assert;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 return [

@@ -26,7 +26,7 @@ use Wikibase\Summary;
 /**
  * Helper class for modifying an entities statements.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class StatementModificationHelper {
 

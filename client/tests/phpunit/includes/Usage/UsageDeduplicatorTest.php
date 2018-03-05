@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class UsageDeduplicatorTest extends \PHPUnit_Framework_TestCase {

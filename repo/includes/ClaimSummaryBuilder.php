@@ -9,7 +9,7 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 /**
  * EditSummary-Builder for claim operations
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */

@@ -12,7 +12,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @group Wikibase
  * @group WikibaseContent
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class UniquenessViolationTest extends \PHPUnit_Framework_TestCase {

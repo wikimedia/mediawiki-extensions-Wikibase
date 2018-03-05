@@ -10,7 +10,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
 

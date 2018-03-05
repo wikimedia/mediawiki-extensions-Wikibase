@@ -23,7 +23,7 @@ use Wikibase\SummaryFormatter;
 /**
  * Special page for setting the sitepage of a Wikibase entity.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
 class SpecialSetSiteLink extends SpecialModifyEntity {

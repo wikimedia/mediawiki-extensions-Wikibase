@@ -8,7 +8,7 @@
 	 * @see wikibase.datamodel.Item
 	 * @class jQuery.wikibase.itemview
 	 * @extends jQuery.wikibase.entityview
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @param {Object} options

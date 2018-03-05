@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * Class MockPropertyInfoLockup is an implementation of PropertyInfoLookup based on a local array.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class MockPropertyInfoLookup implements PropertyInfoLookup {

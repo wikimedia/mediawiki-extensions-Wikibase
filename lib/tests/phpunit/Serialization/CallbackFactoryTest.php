@@ -11,7 +11,7 @@ use Wikibase\Lib\Serialization\CallbackFactory;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class CallbackFactoryTest extends PHPUnit_Framework_TestCase {

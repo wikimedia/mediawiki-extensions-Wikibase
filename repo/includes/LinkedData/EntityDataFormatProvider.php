@@ -11,7 +11,7 @@ use Wikimedia\Purtle\RdfWriterFactory;
 /**
  * Service for getting information about supported data formats.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class EntityDataFormatProvider {
 

@@ -16,7 +16,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 /**
  * Special page for creating redirects between entities
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class SpecialRedirectEntity extends SpecialWikibasePage {

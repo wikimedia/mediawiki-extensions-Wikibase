@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikimedia\Assert\Assert;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ForeignEntityValidator implements ValueValidator {
 

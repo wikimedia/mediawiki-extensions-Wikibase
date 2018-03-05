@@ -19,7 +19,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {

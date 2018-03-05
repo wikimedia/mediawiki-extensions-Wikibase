@@ -19,7 +19,7 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
  * DumpGenerator generates a dump of a given set of entities, excluding
  * redirects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 abstract class DumpGenerator {

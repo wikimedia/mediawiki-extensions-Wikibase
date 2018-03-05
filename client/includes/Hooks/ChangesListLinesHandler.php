@@ -15,7 +15,7 @@ use Wikibase\Client\WikibaseClient;
 /**
  * Handlers for hooks dealing with Wikibase changes in client recent changes and watchlists
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Matěj Suchánek
  */

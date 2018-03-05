@@ -13,7 +13,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Marius Hoch < hoo@online.de >
  * @author Thiemo Kreuz

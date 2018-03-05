@@ -8,7 +8,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * Class creating DispatchingTermIndexSearchInteractor instances configured for the particular display language.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingTermSearchInteractorFactory implements TermSearchInteractorFactory {
 

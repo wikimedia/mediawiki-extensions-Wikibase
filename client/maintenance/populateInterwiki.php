@@ -16,7 +16,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * Maintenance script that populates the interwiki table with list of sites
  * as exists on Wikipedia, so interwiki links render properly.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class PopulateInterwiki extends Maintenance {

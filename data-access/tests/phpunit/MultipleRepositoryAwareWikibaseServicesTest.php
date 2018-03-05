@@ -27,7 +27,7 @@ use Wikibase\StringNormalizer;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_TestCase {
 

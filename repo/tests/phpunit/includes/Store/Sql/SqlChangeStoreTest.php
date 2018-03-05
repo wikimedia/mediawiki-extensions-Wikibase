@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseChange
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

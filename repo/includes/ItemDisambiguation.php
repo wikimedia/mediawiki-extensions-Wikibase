@@ -12,7 +12,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ItemDisambiguation {
 

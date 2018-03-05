@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Validates the structure of the site link's badge change request.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SiteLinkBadgeChangeOpSerializationValidator {
 

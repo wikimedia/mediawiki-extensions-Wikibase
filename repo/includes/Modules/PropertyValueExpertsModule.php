@@ -10,7 +10,7 @@ use Wikibase\Lib\DataTypeDefinitions;
  *
  * @note Tested via wikibase.experts.modules.tests.js
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PropertyValueExpertsModule extends \ResourceLoaderModule {
 

@@ -7,7 +7,7 @@ use Wikimedia\Assert\Assert;
 /**
  * This class de-duplicates entity usages for performance and storage reasons
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class UsageDeduplicator {

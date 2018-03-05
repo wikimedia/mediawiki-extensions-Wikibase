@@ -12,7 +12,7 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 /**
  * Validator for checking that site links are unique across all Items.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SiteLinkUniquenessValidator implements EntityValidator {

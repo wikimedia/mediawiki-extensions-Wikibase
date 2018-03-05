@@ -13,7 +13,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class TermSearchResultTest extends PHPUnit_Framework_TestCase {

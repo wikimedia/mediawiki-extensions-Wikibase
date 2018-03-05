@@ -15,7 +15,7 @@ use Wikibase\StatementRankSerializer;
 /**
  * Class for generating HTML for Claim Diffs.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ClaimDifferenceVisualizer {
 

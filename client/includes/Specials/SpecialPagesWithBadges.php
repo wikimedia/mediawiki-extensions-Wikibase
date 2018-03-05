@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 /**
  * Show a list of pages with a given badge.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SpecialPagesWithBadges extends QueryPage {

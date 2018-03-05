@@ -9,7 +9,7 @@ use Wikibase\TermIndex;
 /**
  * Class creating TermIndexSearchInteractor instances configured for the particular display language.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermIndexSearchInteractorFactory implements TermSearchInteractorFactory {
 

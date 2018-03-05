@@ -21,7 +21,7 @@ use Wikibase\SummaryFormatter;
 /**
  * Page for creating new Wikibase items.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class SpecialNewItem extends SpecialNewEntity {

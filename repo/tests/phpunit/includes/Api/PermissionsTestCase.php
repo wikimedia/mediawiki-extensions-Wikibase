@@ -9,7 +9,7 @@ use Wikimedia\TestingAccessWrapper;
 /**
  * Base class for permissions tests
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  * @author Addshore
  */

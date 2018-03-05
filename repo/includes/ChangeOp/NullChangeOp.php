@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Summary;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class NullChangeOp implements ChangeOp {
 

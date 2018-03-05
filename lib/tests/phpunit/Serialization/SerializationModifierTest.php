@@ -10,7 +10,7 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class SerializationModifierTest extends PHPUnit_Framework_TestCase {

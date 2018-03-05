@@ -20,7 +20,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * sophisticated populating of term_full_entity_id column, including handling custom
  * entity types, batching with continuation, etc.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PopulateTermFullEntityId extends LoggedUpdateMaintenance {
 

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Service for updating usage tracking and associated change subscription information.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

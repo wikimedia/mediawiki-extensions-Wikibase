@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  * Interface for services giving access to meta data about one or more entities as needed for
  * loading entities from WikiPages (via Revision) or to verify an entity against page.page_latest.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 interface WikiPageEntityMetaDataAccessor {

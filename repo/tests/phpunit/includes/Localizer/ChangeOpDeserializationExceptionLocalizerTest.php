@@ -12,7 +12,7 @@ use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializationExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 

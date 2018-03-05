@@ -20,7 +20,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {

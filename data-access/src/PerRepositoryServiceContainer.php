@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  * A service locator for services configured for a particular repository.
  * Services are defined by loading a wiring array(s), or by using defineService method.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceContainer extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
 

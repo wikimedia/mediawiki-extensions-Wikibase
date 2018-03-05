@@ -10,7 +10,7 @@ use Wikibase\Lib\LanguageNameLookup;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class LanguageNameLookupTest extends PHPUnit_Framework_TestCase {
 

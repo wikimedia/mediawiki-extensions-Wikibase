@@ -20,7 +20,7 @@ use WikiPage;
  * handler functions will create a new instance of UpdateRepoHookHandlers and then call the
  * corresponding member function on that.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoHookHandlers {

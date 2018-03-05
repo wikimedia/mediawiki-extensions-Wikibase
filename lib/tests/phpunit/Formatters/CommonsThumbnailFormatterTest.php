@@ -14,7 +14,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
  * @group ValueFormatters
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class CommonsThumbnailFormatterTest extends MediaWikiTestCase {

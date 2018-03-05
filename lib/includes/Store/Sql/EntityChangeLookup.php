@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Allows accessing changes stored in a database.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class EntityChangeLookup extends DBAccessBase implements ChunkAccess {

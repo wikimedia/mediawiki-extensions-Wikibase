@@ -11,7 +11,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 /**
  * Lookup of EntityIds based on wikibase_item entries in the page_props table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class PagePropsEntityIdLookup implements EntityIdLookup {

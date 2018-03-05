@@ -36,7 +36,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class SpecialRedirectEntityTest extends SpecialPageTestBase {

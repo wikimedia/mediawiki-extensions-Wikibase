@@ -12,7 +12,7 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
  * @group WikibaseHooks
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */

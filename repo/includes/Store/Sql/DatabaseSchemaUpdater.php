@@ -20,7 +20,7 @@ use Wikibase\Store;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

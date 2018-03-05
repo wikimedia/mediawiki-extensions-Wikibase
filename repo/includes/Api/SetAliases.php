@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * API module to set the aliases for a Wikibase entity.
  * Requires API write mode to be enabled.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class SetAliases extends ModifyEntity {
 

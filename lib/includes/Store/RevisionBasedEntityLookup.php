@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
  *
  * This implementation does not resolve redirects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class RevisionBasedEntityLookup implements EntityLookup {

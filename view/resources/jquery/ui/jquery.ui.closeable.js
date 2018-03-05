@@ -7,7 +7,7 @@
 	 * Content container that can be closed/hidden.
 	 * @class jQuery.ui.closeable
 	 * @extends jQuery.ui.TemplatedWidget
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

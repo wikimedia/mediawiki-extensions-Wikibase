@@ -10,7 +10,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * Object representing search criteria while performing a search in the term index.
  * Instances might be incomplete (have null values for some of the fields).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermIndexSearchCriteria {
 

@@ -7,7 +7,7 @@ use MWException;
 /**
  * Class representing a single change (ie a row in the wb_changes).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

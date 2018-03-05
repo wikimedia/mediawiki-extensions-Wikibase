@@ -30,7 +30,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * @group WikibaseClient
  * @group WikibaseDataAccess
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >

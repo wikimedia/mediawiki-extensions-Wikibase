@@ -12,7 +12,7 @@ use Wikibase\Client\LangLinkHandler;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ParserOutputUpdateHookHandlers {
 

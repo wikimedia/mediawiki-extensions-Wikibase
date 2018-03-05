@@ -8,7 +8,7 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Contains methods for looking up SiteLink conflicts
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 interface SiteLinkConflictLookup {

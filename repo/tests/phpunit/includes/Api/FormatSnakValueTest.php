@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  * @group medium
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class FormatSnakValueTest extends ApiTestCase {

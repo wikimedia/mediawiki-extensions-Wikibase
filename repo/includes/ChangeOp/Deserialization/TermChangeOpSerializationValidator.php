@@ -8,7 +8,7 @@ use Wikibase\Lib\ContentLanguages;
  * This class is used to validate attributes of term change serializations
  * such as language fields before they are passed to ChangeOps.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermChangeOpSerializationValidator {
 

@@ -26,7 +26,7 @@ use Wikimedia\Http\HttpAcceptParser;
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

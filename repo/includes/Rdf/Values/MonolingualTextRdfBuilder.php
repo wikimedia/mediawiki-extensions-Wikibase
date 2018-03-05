@@ -10,7 +10,7 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * RDF mapping for MonolingualTextValues.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */

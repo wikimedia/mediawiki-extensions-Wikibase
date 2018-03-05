@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * An EntityTitleStoreLookup that guarantees to return the titles of pages that actually store the
  * entities, and does dispatching based on the entity type.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {

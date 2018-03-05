@@ -15,7 +15,7 @@ use Wikibase\View\Module\TemplateModule;
  * @group Wikibase
  * @group WikibaseView
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TemplateModuleTest extends PHPUnit_Framework_TestCase {

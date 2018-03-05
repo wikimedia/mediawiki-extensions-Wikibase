@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Note that this is implemented as a special page and not a per-page action, so there is no need
  * for the web server to map ID prefixes to wiki namespaces.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

@@ -28,7 +28,7 @@ use Wikibase\StringNormalizer;
  * services aware of multi-repository configuration that delegate their action
  * to service instance configured for a particular repository.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices {
 

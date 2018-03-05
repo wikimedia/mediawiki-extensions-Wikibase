@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Enables accessing a linked page on a site by providing the item id and site
  * id.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jan Zerebecki
  */
 class SpecialGoToLinkedPage extends SpecialWikibasePage {

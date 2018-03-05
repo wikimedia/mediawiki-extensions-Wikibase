@@ -10,7 +10,7 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class MediaWikiLanguageDirectionalityLookupTest extends PHPUnit_Framework_TestCase {

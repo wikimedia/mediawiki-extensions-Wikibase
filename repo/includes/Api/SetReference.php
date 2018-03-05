@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * API module for creating a reference or setting the value of an existing one.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */

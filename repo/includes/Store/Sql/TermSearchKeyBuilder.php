@@ -10,7 +10,7 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Utility class for rebuilding the term_search_key field.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Daniel Kinzler

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * Consumers of this interface should provide documentation that clearly states what information
  * the PropertyInfoProvider instance is expected to return, and in what form.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface PropertyInfoProvider {

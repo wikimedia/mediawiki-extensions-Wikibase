@@ -12,7 +12,7 @@ use Wikibase\DispatchStats;
  * @group Wikibase
  * @group WikibaseChange
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class DispatchStatsTest extends \MediaWikiTestCase {

@@ -7,7 +7,7 @@ namespace Wikibase\View;
  *
  * These are meant to be unescaped, plain text results.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 interface LocalizedTextProvider {

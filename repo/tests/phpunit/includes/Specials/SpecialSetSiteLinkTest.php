@@ -29,7 +29,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Marius Hoch < hoo@online.de >

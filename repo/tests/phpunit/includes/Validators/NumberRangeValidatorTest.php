@@ -11,7 +11,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class NumberRangeValidatorTest extends \PHPUnit_Framework_TestCase {

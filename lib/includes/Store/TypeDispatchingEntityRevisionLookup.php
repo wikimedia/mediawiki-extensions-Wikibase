@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * An EntityRevisionLookup that does dispatching based on the entity type.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {

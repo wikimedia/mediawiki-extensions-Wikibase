@@ -14,7 +14,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Prune the Wikibase changes table to a maximum number of entries.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class PruneChanges extends Maintenance {

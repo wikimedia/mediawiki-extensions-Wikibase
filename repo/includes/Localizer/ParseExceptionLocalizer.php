@@ -10,7 +10,7 @@ use ValueParsers\ParseException;
 /**
  * Provides a Message for ParseException for localized errors.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

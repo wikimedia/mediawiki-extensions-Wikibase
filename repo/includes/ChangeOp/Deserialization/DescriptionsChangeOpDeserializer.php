@@ -11,7 +11,7 @@ use Wikibase\StringNormalizer;
 /**
  * Constructs ChangeOps for description change requests
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DescriptionsChangeOpDeserializer implements ChangeOpDeserializer {
 

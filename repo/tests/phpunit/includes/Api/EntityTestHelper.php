@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use OutOfBoundsException;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 /**
  * Fields for an object that has statements.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class StatementProviderFieldDefinitions implements FieldDefinitions {

@@ -10,7 +10,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML for a section edit link
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ToolbarEditSectionGenerator implements EditSectionGenerator {
 

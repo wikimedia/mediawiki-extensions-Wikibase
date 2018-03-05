@@ -17,7 +17,7 @@ namespace Wikibase\Lib\Units;
  * Another acceptable format is:
  * "Q103510": { "factor": "100000", "unit": "Q44395" },
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class JsonUnitStorage extends BaseUnitStorage {

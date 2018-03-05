@@ -19,7 +19,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {

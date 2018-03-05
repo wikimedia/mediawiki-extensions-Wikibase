@@ -14,7 +14,7 @@ use Wikimedia\Assert\PostconditionException;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCase {

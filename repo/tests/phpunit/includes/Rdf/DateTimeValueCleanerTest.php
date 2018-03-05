@@ -13,7 +13,7 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
  * @group Wikibase
  * @group WikibaseRdf
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  * @author Thiemo Kreuz
  */

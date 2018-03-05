@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 trait HtmlAssertionHelpers {
 

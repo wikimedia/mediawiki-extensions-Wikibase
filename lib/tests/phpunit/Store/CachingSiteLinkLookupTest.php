@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @group WikibaseStore
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {

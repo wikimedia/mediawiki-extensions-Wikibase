@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\TermList;
  *
  * This is intended particularly for uniqueness checks.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface FingerprintValidator {

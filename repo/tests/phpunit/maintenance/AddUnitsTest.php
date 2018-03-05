@@ -15,7 +15,7 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class AddUnitsTest extends MediaWikiLangTestCase {

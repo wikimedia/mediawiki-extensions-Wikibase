@@ -13,7 +13,7 @@
 	 * @extends jQuery.ui.TemplatedWidget
 	 * @uses jQuery.wikibase.listview
 	 * @uses jQuery.wikibase.listview.ListItemAdapter
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikimedia\Assert\Assert;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingTermLookup {
 

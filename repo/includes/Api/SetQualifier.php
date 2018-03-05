@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * API module for creating a qualifier or setting the value of an existing one.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

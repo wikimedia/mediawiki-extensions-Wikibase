@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 /**
  * Resolves the PropertyId for the input, which might be a property label or prefixed id.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PropertyIdResolver {
 

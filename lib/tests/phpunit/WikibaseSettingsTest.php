@@ -11,7 +11,7 @@ use Wikibase\WikibaseSettings;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  */
 class WikibaseSettingsTest extends PHPUnit_Framework_TestCase {

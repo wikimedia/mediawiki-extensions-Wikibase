@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
  * @see EntityLookup
  * @see EntityRevisionLookup
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface EntityStore {

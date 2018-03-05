@@ -11,7 +11,7 @@ use Wikibase\SettingsArray;
  *
  * @todo: may want to include namespaces and other settings here too.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */

@@ -24,7 +24,7 @@ require_once __DIR__ . '/SPARQLClient.php';
 /**
  * Generate dump-like RDF for newly added units without running full dump.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class AddUnitConversions extends Maintenance {

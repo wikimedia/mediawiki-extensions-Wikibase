@@ -17,7 +17,7 @@ if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	/**
 	 * Fake base class in case Scribunto is not available.
 	 *
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Marius Hoch < hoo@online.de >
 	 */
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends PHPUnit_Framework_TestCase {
@@ -43,7 +43,7 @@ if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
  * @group WikibaseClient
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  * @author Daniel Kinzler
  */

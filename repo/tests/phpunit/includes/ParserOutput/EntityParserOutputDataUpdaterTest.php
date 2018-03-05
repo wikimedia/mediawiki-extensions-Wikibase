@@ -20,7 +20,7 @@ use Wikibase\Repo\ParserOutput\StatementDataUpdater;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @group Wikibase
  * @group WikibaseClient
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author eranroz
  */
 class ClientStatementListSerializerTest extends PHPUnit_Framework_TestCase {

@@ -7,7 +7,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Provides access to settings relevant for services in the data access component.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DataAccessSettings {
 

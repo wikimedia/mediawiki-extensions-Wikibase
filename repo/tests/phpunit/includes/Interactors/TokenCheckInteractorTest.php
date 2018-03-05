@@ -15,7 +15,7 @@ use Wikibase\Repo\Interactors\TokenCheckInteractor;
  *
  * @group medium
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class TokenCheckInteractorTest extends PHPUnit_Framework_TestCase {

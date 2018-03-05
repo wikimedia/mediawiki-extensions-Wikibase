@@ -13,7 +13,7 @@ use SearchIndexFieldDefinition;
  * Generic class for fields that index terms such as labels.
  * This class applies only to ElasticSearch fields currently.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 abstract class TermIndexField extends SearchIndexFieldDefinition implements WikibaseIndexField {

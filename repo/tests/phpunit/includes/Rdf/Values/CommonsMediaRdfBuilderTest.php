@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @group Wikibase
  * @group WikibaseRdf
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class CommonsMediaRdfBuilderTest extends \PHPUnit_Framework_TestCase {

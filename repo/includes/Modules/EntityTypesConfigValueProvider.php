@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Modules;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz
  * @author Jonas Kress

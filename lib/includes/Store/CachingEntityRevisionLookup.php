@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Implementation of EntityLookup that caches the obtained entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWatcher {

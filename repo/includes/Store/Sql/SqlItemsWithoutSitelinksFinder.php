@@ -10,7 +10,7 @@ use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 /**
  * Service for getting Items without sitelinks.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch
  */

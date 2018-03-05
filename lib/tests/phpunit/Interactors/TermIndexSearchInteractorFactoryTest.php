@@ -14,7 +14,7 @@ use Wikibase\TermIndex;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermIndexSearchInteractorFactoryTest extends \PHPUnit_Framework_TestCase {
 

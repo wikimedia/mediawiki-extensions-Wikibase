@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * API module to search for Wikibase entities that can be used as a generator.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class QuerySearchEntities extends ApiQueryGeneratorBase {

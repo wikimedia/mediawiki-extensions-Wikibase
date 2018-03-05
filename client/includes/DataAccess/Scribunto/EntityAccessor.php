@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 /**
  * Functionality needed to expose Entities to Lua.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class EntityAccessor {
 

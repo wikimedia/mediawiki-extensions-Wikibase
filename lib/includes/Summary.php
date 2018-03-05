@@ -7,7 +7,7 @@ use Wikibase\Lib\FormatableSummary;
 /**
  * A Summary object can be used to build complex, translatable summaries.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

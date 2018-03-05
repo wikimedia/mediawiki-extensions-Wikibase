@@ -24,7 +24,7 @@ use Wikimedia\Assert\Assert;
  * to stand in for others (with escaping applies if necessary). E.g. if there is not HTML formatter
  * defined for a data type, the plain text formatter plus HTML escaping would be used.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class OutputFormatValueFormatterFactory {

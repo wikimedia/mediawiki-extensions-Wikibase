@@ -8,7 +8,7 @@ use Wikibase\Repo\Store\ChangeStore;
 /**
  * Notification channel based on a database table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class DatabaseChangeTransmitter implements ChangeTransmitter {

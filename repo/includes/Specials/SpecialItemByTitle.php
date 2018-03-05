@@ -15,7 +15,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * Enables accessing items by providing the identifier of a site and the title
  * of the corresponding page on that site.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

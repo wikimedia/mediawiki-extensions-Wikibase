@@ -26,7 +26,7 @@ use Wikibase\Store\EntityIdLookup;
  * @group Database
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 

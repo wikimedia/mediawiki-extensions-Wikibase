@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 /**
  * A simple wrapper that forwards formatting of an EntityIdValue object to an EntityIdFormatter.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */

@@ -12,7 +12,7 @@ use Wikibase\DataModel\SiteLink;
  * Note: This doesn't implement any means of purging or data invalidation beyond the cache
  * timeout.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingSiteLinkLookup implements SiteLinkLookup {

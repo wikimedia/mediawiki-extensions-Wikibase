@@ -10,7 +10,7 @@ use Wikibase\Lib\RepositoryDefinitions;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 

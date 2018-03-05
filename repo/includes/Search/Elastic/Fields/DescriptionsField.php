@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 /**
  * Field which contains per-language specific descriptions.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class DescriptionsField extends TermIndexField {

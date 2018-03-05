@@ -9,7 +9,7 @@ use Wikibase\Change;
  *
  * @see docs/change-propagation.wiki for an overview of the change propagation mechanism.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 interface ChangeStore {

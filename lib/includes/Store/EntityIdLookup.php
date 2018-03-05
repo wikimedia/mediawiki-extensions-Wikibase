@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\StorageException;
 /**
  * Service interface for looking up EntityIds given local wiki pages.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface EntityIdLookup {

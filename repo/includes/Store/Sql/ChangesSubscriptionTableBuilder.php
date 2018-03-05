@@ -19,7 +19,7 @@ use Wikimedia\Rdbms\LoadBalancer;
  * based on the wb_items_per_site. Any wiki linked via the wb_items_per_site table
  * will be considered a subscriber.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ChangesSubscriptionTableBuilder {

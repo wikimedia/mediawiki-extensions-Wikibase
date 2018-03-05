@@ -18,7 +18,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @group Wikibase
  * @group ChangeOp
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {

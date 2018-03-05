@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * A lookup that resolves a specific sitelink on a specific Item into a MediaWiki Title object.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class ClientSiteLinkTitleLookup implements EntityTitleLookup {

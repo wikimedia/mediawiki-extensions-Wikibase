@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class TermChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase {
 

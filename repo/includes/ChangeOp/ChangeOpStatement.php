@@ -21,7 +21,7 @@ use Wikibase\Summary;
 /**
  * Class for statement modification operations
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpStatement extends ChangeOpBase {
 

@@ -15,7 +15,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * API module for getting wikis subscribed to changes to given entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class ListSubscribers extends ApiQueryBase {

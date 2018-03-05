@@ -12,7 +12,7 @@ use Wikibase\Client\Usage\NullUsageTracker;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  * @author Marius Hoch
  */

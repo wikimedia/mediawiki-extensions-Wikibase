@@ -24,7 +24,7 @@ use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jan Zerebecki
  */
 class SpecialGoToLinkedPageTest extends SpecialPageTestBase {

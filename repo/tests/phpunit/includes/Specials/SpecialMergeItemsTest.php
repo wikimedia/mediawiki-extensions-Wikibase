@@ -41,7 +41,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  * @author Lucie-Aimée Kaffee

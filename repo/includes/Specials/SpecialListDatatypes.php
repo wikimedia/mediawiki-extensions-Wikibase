@@ -8,7 +8,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Page for listing available datatypes.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jens Ohlig
  */
 class SpecialListDatatypes extends SpecialWikibasePage {

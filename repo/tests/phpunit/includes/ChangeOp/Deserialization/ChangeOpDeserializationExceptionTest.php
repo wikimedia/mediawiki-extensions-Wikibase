@@ -9,7 +9,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializationExceptionTest extends \PHPUnit_Framework_TestCase {
 

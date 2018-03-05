@@ -32,7 +32,7 @@ use Wikibase\Lib\AutoCommentFormatter;
 /**
  * File defining the hook handlers for the Wikibase Client extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 final class ClientHooks {
 

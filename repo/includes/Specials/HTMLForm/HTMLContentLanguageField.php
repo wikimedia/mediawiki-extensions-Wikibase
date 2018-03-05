@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Class representing generic content language selector field
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class HTMLContentLanguageField extends HTMLComboboxField {
 

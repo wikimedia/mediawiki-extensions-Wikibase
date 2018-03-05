@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseUsageTracking
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {

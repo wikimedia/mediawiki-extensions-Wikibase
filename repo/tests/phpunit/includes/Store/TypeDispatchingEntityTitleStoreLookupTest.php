@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityTitleStoreLookupTest extends MediaWikiTestCase {

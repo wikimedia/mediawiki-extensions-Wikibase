@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * snippet, containing a link to a local page as specified by the relevant sitelink, labeled with
  * the label in the local (or a fallback) language. Both the sitelink and the label are optional.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class EntityIdSiteLinkFormatter implements EntityIdFormatter {

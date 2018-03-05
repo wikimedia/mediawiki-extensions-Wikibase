@@ -22,7 +22,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group DataValueExtensions
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class BinaryOptionDispatchingSnakFormatterTest extends PHPUnit_Framework_TestCase {

@@ -15,7 +15,7 @@ use ValueFormatters\ValueFormatterBase;
 /**
  * Formatter for rendering the details of a GlobeCoordinateValue (most useful for diffs) in HTML.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {

@@ -19,7 +19,7 @@ use Wikibase\SummaryFormatter;
 /**
  * Job template for updating the repo after a change in client.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 abstract class UpdateRepoJob extends Job {

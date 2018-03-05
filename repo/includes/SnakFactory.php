@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\Snak;
 /**
  * Factory for creating new snaks.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SnakFactory {

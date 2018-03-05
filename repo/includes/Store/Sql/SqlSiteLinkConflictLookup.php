@@ -10,7 +10,7 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >

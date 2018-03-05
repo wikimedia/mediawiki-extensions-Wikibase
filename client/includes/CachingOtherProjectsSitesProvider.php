@@ -8,7 +8,7 @@ use BagOStuff;
  * Get a list of sites that should be displayed in the "Other projects" sidebar
  * from cache or re-compute them.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingOtherProjectsSitesProvider implements OtherProjectsSitesProvider {

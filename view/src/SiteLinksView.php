@@ -15,7 +15,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Creates views for lists of site links.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

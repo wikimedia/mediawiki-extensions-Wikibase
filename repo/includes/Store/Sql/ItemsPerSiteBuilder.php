@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 /**
  * Utility class for rebuilding the wb_items_per_site table.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class ItemsPerSiteBuilder {

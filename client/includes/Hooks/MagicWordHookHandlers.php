@@ -11,7 +11,7 @@ use Wikibase\Client\WikibaseClient;
 
 /**
  * File defining hooks related to magic words
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class MagicWordHookHandlers {
 

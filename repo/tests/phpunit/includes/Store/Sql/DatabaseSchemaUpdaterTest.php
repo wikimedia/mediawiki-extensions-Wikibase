@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\DatabaseMysqli;
  * @group Wikibase
  * @group WikibaseChange
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class DatabaseSchemaUpdaterTest extends \PHPUnit_Framework_TestCase {

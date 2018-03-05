@@ -12,7 +12,7 @@ use Wikibase\Summary;
  * the actual modifications, as well as providing associated services such as
  * building an appropriate edit summary and performing validation of the change.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Daniel Kinzler
  */

@@ -18,7 +18,7 @@ use WikiPage;
 /**
  * Handlers for client Echo notifications
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  */
 class EchoNotificationsHandlers {

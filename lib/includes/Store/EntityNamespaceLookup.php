@@ -7,7 +7,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Utility functions for Wikibase namespaces.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class EntityNamespaceLookup {
 

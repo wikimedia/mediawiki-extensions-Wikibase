@@ -14,7 +14,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * SqlEntityIdPager is a cursor for iterating over the EntityIds stored in
  * the current Wikibase installation.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

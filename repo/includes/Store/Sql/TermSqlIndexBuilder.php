@@ -24,7 +24,7 @@ use Wikimedia\Rdbms\LoadBalancer;
  * terms of the entity, even if there is no other need for rebuilding the index
  * (i.e. all ID fields are populated, there are no duplicate entries).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class TermSqlIndexBuilder {

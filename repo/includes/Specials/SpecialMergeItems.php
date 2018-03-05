@@ -21,7 +21,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 /**
  * Special page for merging one item to another.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */

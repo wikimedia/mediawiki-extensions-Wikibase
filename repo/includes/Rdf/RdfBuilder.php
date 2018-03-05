@@ -16,7 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * RDF mapping for wikibase data model.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 

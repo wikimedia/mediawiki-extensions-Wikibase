@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * For more information on the relationship between entities and wiki pages, see
  * docs/entity-storage.wiki.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 

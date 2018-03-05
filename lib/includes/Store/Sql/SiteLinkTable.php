@@ -15,7 +15,7 @@ use Wikimedia\Rdbms\IDatabase;
  * Represents a lookup database table for sitelinks.
  * It should have these fields: ips_item_id, ips_site_id, ips_site_page.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

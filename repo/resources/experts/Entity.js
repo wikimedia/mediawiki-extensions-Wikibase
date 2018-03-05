@@ -10,7 +10,7 @@
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @abstract
 	 * @uses jQuery.wikibase.entityselector
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 */
 	var SELF = MODULE.Entity = vv.expert( 'wikibaseentity', PARENT, {

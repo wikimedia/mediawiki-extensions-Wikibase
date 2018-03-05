@@ -10,7 +10,7 @@ use Wikimedia\Purtle\RdfWriter;
  * Dispatching implementation of ValueSnakRdfBuilder. This allows extensions to register
  * ValueSnakRdfBuilders for custom data types.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {

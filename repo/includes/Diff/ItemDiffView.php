@@ -19,7 +19,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 /**
  * Class for generating views of DiffOp objects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ItemDiffView implements DiffView {
 

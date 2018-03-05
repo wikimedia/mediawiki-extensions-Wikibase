@@ -28,7 +28,7 @@
  * @see README.md
  * @see https://www.mediawiki.org/wiki/Extension:WikibaseLib
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -74,7 +74,7 @@ call_user_func( function() {
 		],
 		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
 		'descriptionmsg' => 'wikibase-lib-desc',
-		'license-name' => 'GPL-2.0+'
+		'license-name' => 'GPL-2.0-or-later'
 	];
 
 	define( 'SUMMARY_MAX_LENGTH', 250 );

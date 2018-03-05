@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Store;
  * It first tries the primary provider and, if that has no data, resorts to
  * the secondary provider.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class FallbackPropertyOrderProvider implements PropertyOrderProvider {

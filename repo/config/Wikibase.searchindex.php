@@ -15,7 +15,7 @@ use Wikibase\ItemContent;
  * all string and text values present in the main snak of any
  * statement associated with an item.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 

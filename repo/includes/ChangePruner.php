@@ -9,7 +9,7 @@ use Wikibase\Lib\Reporting\NullMessageReporter;
 /**
  * Handles pruning wb_changes table, used by pruneChanges maintenance script.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ChangePruner {

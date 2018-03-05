@@ -28,7 +28,7 @@
  * @see README.md
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase_Client
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 // @codingStandardsIgnoreFile
@@ -99,7 +99,7 @@ call_user_func( function() {
 		),
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
 		'descriptionmsg' => 'wikibase-client-desc',
-		'license-name' => 'GPL-2.0+'
+		'license-name' => 'GPL-2.0-or-later'
 	);
 
 	// Registry and definition of data types

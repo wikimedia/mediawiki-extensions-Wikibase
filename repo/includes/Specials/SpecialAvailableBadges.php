@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\PrefetchingTermLookup;
 /**
  * Page for listing all available badges.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Victor Barbu < victorbarbu08@gmail.com >
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */

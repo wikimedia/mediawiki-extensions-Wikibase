@@ -10,7 +10,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 /**
  * Factory for ChangeOps that merge Items.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class MergeChangeOpsFactory {

@@ -8,7 +8,7 @@ use Wikibase\StringNormalizer;
 /**
  * Class representing generic alias field
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class HTMLAliasesField extends HTMLTextField {
 

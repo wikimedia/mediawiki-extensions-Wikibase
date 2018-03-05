@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
 return call_user_func( function () {

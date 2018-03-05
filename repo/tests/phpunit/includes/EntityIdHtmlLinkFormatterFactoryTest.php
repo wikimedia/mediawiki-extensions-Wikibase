@@ -16,7 +16,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
  * @group ValueFormatters
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {

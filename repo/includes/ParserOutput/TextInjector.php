@@ -8,7 +8,7 @@ namespace Wikibase\Repo\ParserOutput;
  * cacheable HTML (in ParserOutput), and later replacing it with non-cacheable HTML
  * snippets (for use by OutputPage).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class TextInjector {

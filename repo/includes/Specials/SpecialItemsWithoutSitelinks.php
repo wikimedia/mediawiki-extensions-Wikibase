@@ -8,7 +8,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Special page for listing Items without sitelinks.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {

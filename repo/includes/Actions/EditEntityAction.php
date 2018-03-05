@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  * This shows the forms for the undo and restore operations if requested.
  * Otherwise it will just show the normal entity view.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  * @author Daniel Kinzler

@@ -15,7 +15,7 @@ use Wikibase\Client\RepoItemLinkGenerator;
  * Injects an edit link for language links pointing to the repo, and creates
  * a dummy "Other languages" section for JS use.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class SkinTemplateOutputPageBeforeExecHandler {

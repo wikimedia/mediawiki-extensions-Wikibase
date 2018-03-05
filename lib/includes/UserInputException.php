@@ -9,7 +9,7 @@ use Exception;
  * allow them to bubble up to presentation layer and contain message
  * that can be displayed to the user in their language.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class UserInputException extends MessageException {

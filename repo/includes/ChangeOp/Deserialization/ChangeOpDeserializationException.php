@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ChangeOp\Deserialization;
 /**
  * Thrown from ChangeOpDeserializers to be handled by a higher abstraction layer such as the API
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializationException extends \InvalidArgumentException {
 

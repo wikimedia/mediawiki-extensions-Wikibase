@@ -13,7 +13,7 @@ use Wikimedia\Assert\Assert;
  * DispatchingSnakFormatter will format a Snak by delegating the formatting to an appropriate
  * SnakFormatter based on the snak type or the associated property's data type.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class DispatchingSnakFormatter implements SnakFormatter {

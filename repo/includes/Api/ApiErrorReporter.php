@@ -22,7 +22,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
  * ApiErrorReporter is a component for API modules that handles
  * error reporting. It supports localization of error messages.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ApiErrorReporter {

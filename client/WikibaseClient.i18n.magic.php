@@ -3,7 +3,7 @@
 /**
  * Internationalization file with magic words for the Wikibase Client extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 $magicWords = [];

@@ -14,7 +14,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @group WikibaseValidators
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */

@@ -13,7 +13,7 @@ use Status;
  * Searcher class for performing Wikibase prefix search.
  * @see \CirrusSearch\Searcher
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class WikibasePrefixSearcher extends Searcher {

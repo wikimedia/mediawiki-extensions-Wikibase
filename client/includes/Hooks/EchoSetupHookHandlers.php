@@ -11,7 +11,7 @@ use Wikibase\WikibaseSettings;
  * Handlers for hooks (e.g. BeforeCreateEchoEvent) called when Echo extension
  * is initialized, so on every page load.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

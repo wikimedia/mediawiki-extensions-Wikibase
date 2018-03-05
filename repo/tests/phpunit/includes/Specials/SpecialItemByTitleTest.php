@@ -28,7 +28,7 @@ use Wikibase\Repo\Specials\SpecialItemByTitle;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SpecialItemByTitleTest extends SpecialPageTestBase {

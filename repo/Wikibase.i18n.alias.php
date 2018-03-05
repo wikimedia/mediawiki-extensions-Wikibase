@@ -3,7 +3,7 @@
 /**
  * Aliases for the special pages of the Wikibase Repository extension.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 

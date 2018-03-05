@@ -10,7 +10,7 @@ use Diff\DiffOp\DiffOpChange;
  * Represents the difference between two Statement objects.
  * @fixme Contains references and rank? It's a StatementDifference!
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Kreuz
  */

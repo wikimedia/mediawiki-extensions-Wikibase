@@ -25,7 +25,7 @@ use Wikibase\Repo\ValueParserFactory;
 /**
  * API module for using value parsers.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore

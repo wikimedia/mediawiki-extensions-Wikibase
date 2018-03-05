@@ -20,7 +20,7 @@ use Wikibase\SettingsArray;
  * All functions in here are independent from the target language, meaning that
  * this class can be instantiated without knowing the target language.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
  */

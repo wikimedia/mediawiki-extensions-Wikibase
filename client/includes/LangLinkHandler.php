@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @todo split this up and find a better home for stuff that adds
  * parser output properties and extension data.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >

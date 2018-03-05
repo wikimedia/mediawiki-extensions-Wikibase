@@ -59,7 +59,7 @@ use WikiPage;
  * Implementation of the store interface using an SQL backend via MediaWiki's
  * storage abstraction layer.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SqlStore implements Store {

@@ -1,7 +1,7 @@
 /**
  * QUnit tests for "wikibase.statementgrouplabelscroll" jQuery widget.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 ( function ( $, QUnit, StatementGroupLabelScrollWidget ) {

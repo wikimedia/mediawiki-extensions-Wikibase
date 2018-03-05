@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
  * @group Wikibase
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
 class HttpUrlPropertyOrderProviderTest extends PHPUnit_Framework_TestCase {

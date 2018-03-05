@@ -22,7 +22,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {

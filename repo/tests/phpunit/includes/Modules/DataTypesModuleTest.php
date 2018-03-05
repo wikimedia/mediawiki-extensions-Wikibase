@@ -12,7 +12,7 @@ use Wikibase\Repo\Modules\DataTypesModule;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

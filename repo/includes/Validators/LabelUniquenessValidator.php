@@ -11,7 +11,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * Validator for checking that entity labels and aliases are unique (per language).
  * This is used to make sure that Properties have unique labels and aliases.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class LabelUniquenessValidator implements EntityValidator {

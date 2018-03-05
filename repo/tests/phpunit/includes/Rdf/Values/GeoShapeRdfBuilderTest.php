@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @group Wikibase
  * @group WikibaseRdf
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class GeoShapeRdfBuilderTest extends \PHPUnit_Framework_TestCase {

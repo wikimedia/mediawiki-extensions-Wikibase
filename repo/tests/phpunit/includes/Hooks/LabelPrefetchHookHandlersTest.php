@@ -23,7 +23,7 @@ use Wikibase\Store\EntityIdLookup;
  * @group Database
  *        ^--- who knows what ChangesList may do internally...
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

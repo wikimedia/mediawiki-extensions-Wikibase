@@ -10,7 +10,7 @@ use ResourceLoaderModule;
  * Generic, reusable ResourceLoader module to set a JavaScript configuration variable via
  * mw.config.set.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class MediaWikiConfigModule extends ResourceLoaderModule {

@@ -7,7 +7,7 @@ use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 /**
  * Class for changes that can be represented as a Diff.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

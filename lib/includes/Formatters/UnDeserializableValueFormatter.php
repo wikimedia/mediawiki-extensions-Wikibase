@@ -12,7 +12,7 @@ use ValueFormatters\ValueFormatterBase;
  * the message "The value is invalid and cannot be displayed" instead. The message can be changed
  * via an option.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class UnDeserializableValueFormatter extends ValueFormatterBase {

@@ -14,7 +14,7 @@ use Wikibase\StringNormalizer;
 /**
  * A container/factory of services which don't rely/require repository-specific configuration.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class GenericServices {
 

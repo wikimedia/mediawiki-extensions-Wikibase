@@ -40,7 +40,7 @@ use Wikibase\Repo\Tests\Store\MockEntityIdPager;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class DumpJsonTest extends MediaWikiTestCase {

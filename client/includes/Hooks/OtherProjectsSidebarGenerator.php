@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * Outputs a sidebar section for other project links.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */

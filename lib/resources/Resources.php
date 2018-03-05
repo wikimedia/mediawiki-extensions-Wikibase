@@ -4,7 +4,7 @@ use Wikibase\RepoAccessModule;
 use Wikibase\SitesModule;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
  *

@@ -16,7 +16,7 @@ use Wikibase\Repo\Search\Elastic\Fields\AllLabelsField;
  * @group WikibaseElastic
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
 class AllLabelsFieldTest extends PHPUnit_Framework_TestCase {

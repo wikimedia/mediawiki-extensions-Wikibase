@@ -12,7 +12,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Handles the view action for Wikibase entities.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  */

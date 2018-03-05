@@ -28,7 +28,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group DataValueExtensions
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase {

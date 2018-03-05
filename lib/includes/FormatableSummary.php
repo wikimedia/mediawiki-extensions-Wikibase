@@ -9,7 +9,7 @@ namespace Wikibase\Lib;
  * "wikibase-entity-summary-wbsetlabel-add", and mentions the new label as well as it's language
  * code.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Aleksey Bekh-Ivanov
  * @author Thiemo Kreuz
  */

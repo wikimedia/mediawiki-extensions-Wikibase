@@ -28,7 +28,7 @@
  * @see README.md
  * @see http://wikiba.se
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {

@@ -14,7 +14,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class EntityChangeOpProviderTest extends \PHPUnit_Framework_TestCase {
 

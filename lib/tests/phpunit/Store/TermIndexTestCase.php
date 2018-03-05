@@ -15,7 +15,7 @@ use Wikibase\TermIndexEntry;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  * @author Daniel Kinzler

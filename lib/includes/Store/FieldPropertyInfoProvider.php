@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
  * PropertyInfoProvider implementation based on a specific field in the array returned
  * by a PropertyInfoLookup.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class FieldPropertyInfoProvider implements PropertyInfoProvider {

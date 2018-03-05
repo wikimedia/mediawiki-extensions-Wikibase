@@ -22,7 +22,7 @@ use Wikibase\TermIndexEntry;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@googlemail.com >
  * @author Addshore
  * @author Thiemo Kreuz

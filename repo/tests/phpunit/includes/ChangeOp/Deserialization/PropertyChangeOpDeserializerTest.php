@@ -22,7 +22,7 @@ use Wikibase\Summary;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PropertyChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 

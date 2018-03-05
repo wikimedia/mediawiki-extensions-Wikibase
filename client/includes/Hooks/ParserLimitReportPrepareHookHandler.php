@@ -8,7 +8,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class ParserLimitReportPrepareHookHandler {

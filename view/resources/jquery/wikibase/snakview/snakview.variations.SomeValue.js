@@ -12,7 +12,7 @@
 	 * @see wikibase.datamodel.PropertySomeValueSnak
 	 * @class jQuery.wikibase.snakview.varaiations.SomeValue
 	 * @extends jQuery.wikibase.snakview.variations.Variation
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor

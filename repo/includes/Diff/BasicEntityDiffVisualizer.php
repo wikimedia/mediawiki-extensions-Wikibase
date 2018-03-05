@@ -17,7 +17,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
 /**
  * Class for generating views of EntityDiff objects.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel kinzler

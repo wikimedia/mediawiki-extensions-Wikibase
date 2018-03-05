@@ -34,7 +34,7 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {

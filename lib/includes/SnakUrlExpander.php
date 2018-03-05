@@ -8,7 +8,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * SnakUrlExpander expands the value of a Snak to a URL (or URI) or some sort.
  * The mechanism of expansion and the meaning of the URL are not defined by the interface.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 interface SnakUrlExpander {

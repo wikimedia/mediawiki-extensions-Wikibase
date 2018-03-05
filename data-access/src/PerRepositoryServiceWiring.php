@@ -21,7 +21,7 @@ use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 
 return [

@@ -14,7 +14,7 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  *
  * @group Wikibase
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 

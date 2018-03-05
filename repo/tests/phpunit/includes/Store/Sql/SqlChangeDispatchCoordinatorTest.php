@@ -13,7 +13,7 @@ use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
  * @group WikibaseChange
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {

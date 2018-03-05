@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
  * Code to make the PageImages extension aware of pages in the Wikibase namespaces. The algorithm
  * tries to find the one "best" image on an entity page, also referred to as the "lead image".
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class PageImagesDataUpdater implements StatementDataUpdater {

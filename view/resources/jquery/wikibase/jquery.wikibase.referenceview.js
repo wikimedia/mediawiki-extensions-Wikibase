@@ -8,7 +8,7 @@
 	 * @see wikibase.datamodel.Reference
 	 * @class jQuery.wikibase.referenceview
 	 * @extends jQuery.ui.EditableTemplatedWidget
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

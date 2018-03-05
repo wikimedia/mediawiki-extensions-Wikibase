@@ -9,7 +9,7 @@
 	 * `jquery.wikibase.statementlistview` widget.
 	 * @see wikibase.datamodel.StatementGroup
 	 * @extends jQuery.ui.TemplatedWidget
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor

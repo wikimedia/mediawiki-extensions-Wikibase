@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
  * they are supporting in @see docs/change-op-serializations.wiki. The format must follow the
  * @see https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  * @author Thiemo Kreuz
  */

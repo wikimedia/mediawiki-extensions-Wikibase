@@ -51,7 +51,7 @@ use Wikimedia\TestingAccessWrapper;
  * @group WikibaseClient
  * @group Database
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
