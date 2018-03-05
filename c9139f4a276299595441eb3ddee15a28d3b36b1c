@@ -16,6 +16,24 @@
       "revId": "c9139f4a276299595441eb3ddee15a28d3b36b1c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95c75920_4cc87f3d",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T12:41:42Z",
+      "side": 1,
+      "message": "Good catch.\n\nThe more general convention for all code is that all arrays can be sparse – except when stated otherwise. There are a few places in the Wikibase codebase where we give this guarantee, but this is super-rare.\n\nIf the implementation of a method requires an array to be non-sparse, it should utilize array_values(). But this should then be done in the implementation, not by the caller.\n\nTo be sure I checked all implementations of the method in question here, and this array is exclusively used in foreach loops, ignoring any array keys.",
+      "parentUuid": "4ec1d547_e77c9c07",
+      "revId": "c9139f4a276299595441eb3ddee15a28d3b36b1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
