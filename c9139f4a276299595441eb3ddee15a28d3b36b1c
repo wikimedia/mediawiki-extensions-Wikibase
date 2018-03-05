@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ec1d547_e77c9c07",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-05T12:18:30Z",
+      "side": 1,
+      "message": "This will call the method with a potentially sparse array (e. g. [ 0 \u003d\u003e …, 1 \u003d\u003e …, 3 \u003d\u003e …, 8 \u003d\u003e … ]) – is that okay? Do we have conventions for whether it’s okay to call methods with non-contiguous arrays like this?",
+      "revId": "c9139f4a276299595441eb3ddee15a28d3b36b1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
