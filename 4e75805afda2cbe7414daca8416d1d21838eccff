@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1896b50_e7c3fddf",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-05T08:51:42Z",
+      "side": 1,
+      "message": "This should either be $rcinfo or $fields. In other words, the code should know where this field is supposed to dome from, and not get it from this merged array.",
+      "range": {
+        "startLine": 154,
+        "startChar": 16,
+        "endLine": 154,
+        "endChar": 25
+      },
+      "revId": "4e75805afda2cbe7414daca8416d1d21838eccff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
