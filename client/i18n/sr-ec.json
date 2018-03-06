@@ -29,7 +29,7 @@
 	"wikibase-comment-sitelink-add": "Додата веза за језик: $1",
 	"wikibase-comment-sitelink-change": "Веза на језику промењена са $1 на $2",
 	"wikibase-comment-sitelink-remove": "Уклоњена веза за језик: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|измена}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|измена|измене|измена}}",
 	"wikibase-dataitem": "Ставка на Википодацима",
 	"wikibase-editlinks": "Уреди везе",
 	"wikibase-editlinkstitle": "Уређивање међујезичких веза",

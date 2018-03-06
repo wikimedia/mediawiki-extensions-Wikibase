@@ -74,7 +74,7 @@
 	"wikibase-remove": "уклони",
 	"wikibase-move-up": "помери нагоре",
 	"wikibase-move-down": "помери надоле",
-	"wikibase-undo-title": "Поништавање измене за „$1“",
+	"wikibase-undo-title": "Поништавање измене на „$1“",
 	"wikibase-restore-title": "Враћање старије верзије за „$1“",
 	"wikibase-partial-undo": "Измена може бити делимично поништена.",
 	"wikibase-empty-undo": "Не постоји ништа што може бити поништено овде.",

@@ -336,6 +336,7 @@
 	"wikibase-listdatatypes-wikibase-property-head": "Уласьцівасьць",
 	"wikibase-listdatatypes-wikibase-property-body": "Спасылка на ўласьцівасьці ў праекце. Калі значэньне ўведзенае, у прасторы назваў «Property» праекту будзе шукацца адпаведная ўласьцівасьць.",
 	"wikibase-listdatatypes-commonsmedia-head": "мэдыяфайл зь Вікісховішча",
+	"wikibase-listdatatypes-commonsmedia-body": "Спасылка на файлы, якія захоўваюцца ў Вікісховішчы. Калі значэньне ўведзенае, адпаведныя файлы будуць шукацца ў прасторы назваў «File» Вікісховішча.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Геаграфічныя каардынаты",
 	"wikibase-listdatatypes-quantity-head": "Колькасьць",
 	"wikibase-listdatatypes-monolingualtext-head": "Аднамоўны тэкст",
