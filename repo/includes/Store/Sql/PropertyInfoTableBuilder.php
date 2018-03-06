@@ -125,6 +125,13 @@ class PropertyInfoTableBuilder {
 	 * method within an (explicit) database transaction.
 	 */
 	public function rebuildPropertyInfo() {
+		$propertyNamespace = $this->entityNamespaceLookup->getEntityNamespace(
+			Property::ENTITY_TYPE
+		);
+		if ( $propertyNamespace === null ) {
+			throw new RuntimeException( __METHOD__ . ' can not run with no Property namespace defined.' );
+		}
+
 		$dbw = $this->propertyInfoTable->getWriteConnection();
 
 		$total = 0;
@@ -163,9 +170,7 @@ class PropertyInfoTableBuilder {
 				[ 'page_title', 'page_id' ],
 				[
 					'page_id > ' . (int)$pageId,
-					'page_namespace = ' . $this->entityNamespaceLookup->getEntityNamespace(
-						Property::ENTITY_TYPE
-					),
+					'page_namespace = ' . $propertyNamespace,
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				],
 				__METHOD__,
