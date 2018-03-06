@@ -105,6 +105,8 @@ class SiteMatrixParser {
 			// todo: get this from $wgConf
 			$site->setLanguageCode( 'en' );
 
+			$site->addInterwikiId( $specialSite['code'] );
+
 			$sites[$siteId] = $site;
 		}
 

@@ -148,43 +148,50 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 				'siteid' => 'enwiki',
 				'group' => 'wikipedia',
 				'url' => 'en.wikipedia.org',
-				'lang' => 'en'
+				'lang' => 'en',
+				'localids' => [],
 			],
 			[
 				'siteid' => 'frwiki',
 				'group' => 'wikipedia',
 				'url' => 'fr.wikipedia.org',
-				'lang' => 'fr'
+				'lang' => 'fr',
+				'localids' => [],
 			],
 			[
 				'siteid' => 'enwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'en.wikivoyage.org',
-				'lang' => 'en'
+				'lang' => 'en',
+				'localids' => [],
 			],
 			[
 				'siteid' => 'frwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'fr.wikivoyage.org',
-				'lang' => 'fr'
+				'lang' => 'fr',
+				'localids' => [],
 			],
 			[
 				'siteid' => 'enwikiquote',
 				'group' => 'wikiquote',
 				'url' => 'en.wikiquote.org',
-				'lang' => 'en'
+				'lang' => 'en',
+				'localids' => [],
 			],
 			[
 				'siteid' => 'commonswiki',
 				'group' => 'commons',
 				'url' => 'commons.wikimedia.org',
-				'lang' => 'en'
+				'lang' => 'en',
+				'localids' => [ 'interwiki' => [ 'commons' ] ],
 			],
 			[
 				'siteid' => 'wikidatawiki',
 				'group' => 'wikidata',
 				'url' => 'www.wikidata.org',
-				'lang' => 'en'
+				'lang' => 'en',
+				'localids' => [ 'interwiki' => [ 'wikidata' ] ],
 			]
 		];
 
@@ -201,7 +208,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 				'group' => $siteData['group'],
 				'source' => 'local',
 				'language' => $siteData['lang'],
-				'localids' => [],
+				'localids' => $siteData['localids'],
 				'internalid' => null,
 				'data' => [
 					'paths' => [
