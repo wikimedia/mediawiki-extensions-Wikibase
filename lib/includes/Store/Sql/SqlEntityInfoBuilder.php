@@ -136,11 +136,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $repositoryName;
 
 	/**
-	 * @var bool
-	 */
-	private $readFullEntityIdColumn = false;
-
-	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -394,12 +389,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function collectTermsForEntities( $entityType, array $termTypes = null, array $languages = null ) {
 		$where = [];
 
-		if ( $this->readFullEntityIdColumn === true ) {
-			$where['term_full_entity_id'] = $this->localIdsByType[$entityType];
-		} else {
-			$where['term_entity_id'] = $this->numericIdsByType[$entityType];
-			$where['term_entity_type'] = $entityType;
-		}
+		$where['term_full_entity_id'] = $this->localIdsByType[$entityType];
 
 		if ( $termTypes === null ) {
 			$termTypes = [ null ];
@@ -409,13 +399,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$where['term_language'] = $languages;
 		}
 
-		$fields = [ 'term_type', 'term_language', 'term_text' ];
-		if ( $this->readFullEntityIdColumn === true ) {
-			$fields[] = 'term_full_entity_id';
-		} else {
-			$fields[] = 'term_entity_id';
-			$fields[] = 'term_entity_type';
-		}
+		$fields = [ 'term_type', 'term_language', 'term_text', 'term_full_entity_id' ];
 
 		$dbr = $this->getConnection( DB_REPLICA );
 
@@ -445,23 +429,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( IResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
-				try {
-					if ( $this->readFullEntityIdColumn === true ) {
-						$entityId = $this->idParser->parse( $row->term_full_entity_id );
-					} else {
-						$entityId = $this->entityIdComposer->composeEntityId(
-							$this->repositoryName,
-							$row->term_entity_type,
-							$row->term_entity_id
-						);
-					}
-				} catch ( EntityIdParsingException $ex ) {
-					wfLogWarning( 'Unsupported entity serialization "' . $row->term_full_entity_id . '"' );
-					continue;
-				} catch ( InvalidArgumentException $ex ) {
-					wfLogWarning( 'Unsupported entity type "' . $row->term_entity_type . '"' );
-					continue;
-				}
+			try {
+				$entityId = $this->idParser->parse( $row->term_full_entity_id );
+			} catch ( EntityIdParsingException $ex ) {
+				wfLogWarning( 'Unsupported entity serialization "' . $row->term_full_entity_id . '"' );
+				continue;
+			}
 
 			$key = $entityId->getSerialization();
 
@@ -787,13 +760,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$retain = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
 		$remove = array_diff( array_keys( $this->entityInfo ), $retain );
 		$this->unsetEntityInfo( $remove );
-	}
-
-	/**
-	 * @param bool $readFullEntityIdColumn
-	 */
-	public function setReadFullEntityIdColumn( $readFullEntityIdColumn ) {
-		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 }

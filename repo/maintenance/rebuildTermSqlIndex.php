@@ -77,12 +77,7 @@ class RebuildTermSqlIndex extends Maintenance {
 			$idParser
 		);
 
-		$termIndex = $this->getTermSqlIndex(
-			$entityIdComposer,
-			$idParser,
-			$repoSettings->getSetting( 'writeFullEntityIdColumn' ),
-			$repoSettings->getSetting( 'readFullEntityIdColumn' )
-		);
+		$termIndex = $this->getTermSqlIndex( $entityIdComposer, $idParser );
 
 		$builder = new TermSqlIndexBuilder(
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
@@ -95,7 +90,6 @@ class RebuildTermSqlIndex extends Maintenance {
 		$builder->setProgressReporter( $this->getReporter() );
 		$builder->setErrorReporter( $this->getErrorReporter() );
 		$builder->setBatchSize( $batchSize );
-		$builder->setReadFullEntityIdColumn( $repoSettings->getSetting( 'readFullEntityIdColumn' ) );
 
 		if ( $fromId !== null ) {
 			$builder->setFromId( (int)$fromId );
@@ -127,29 +121,20 @@ class RebuildTermSqlIndex extends Maintenance {
 	/**
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdParser $entityIdParser
-	 * @param bool $writeFullEntityIdColumn
-	 * @param bool $readFullEntityIdColumn
 	 *
 	 * @return TermSqlIndex
 	 */
 	private function getTermSqlIndex(
 		EntityIdComposer $entityIdComposer,
-		EntityIdParser $entityIdParser,
-		$writeFullEntityIdColumn,
-		$readFullEntityIdColumn
+		EntityIdParser $entityIdParser
 	) {
-		$termSqlIndex = new TermSqlIndex(
+		return new TermSqlIndex(
 			new StringNormalizer(),
 			$entityIdComposer,
 			$entityIdParser,
 			false,
-			'',
-			$writeFullEntityIdColumn
+			''
 		);
-
-		$termSqlIndex->setReadFullEntityIdColumn( $readFullEntityIdColumn );
-
-		return $termSqlIndex;
 	}
 
 	/**

@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Sql\TermSqlIndexBuilder;
 use Wikibase\Repo\WikibaseRepo;
@@ -40,7 +38,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$firstItem = $this->createItemWithNTerms( 'Q111', 5 );
 		$secondItem = $this->createItemWithNTerms( 'Q112', 2 );
 		$this->saveEntities( [ $firstItem, $secondItem ] );
-		$this->clearFullEntityIdColumn();
 
 		$this->getBuilder( [ Item::ENTITY_TYPE ] )->rebuild();
 
@@ -52,7 +49,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$firstItem = $this->createItemWithNTerms( 'Q111', 5 );
 		$secondItem = $this->createItemWithNTerms( 'Q112', 2 );
 		$this->saveEntities( [ $firstItem, $secondItem ] );
-		$this->clearFullEntityIdColumn();
 
 		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
 		$builder->setRebuildAllEntityTerms( true );
@@ -110,7 +106,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$firstItem = $this->createItemWithNTerms( 'Q111', 5 );
 		$secondItem = $this->createItemWithNTerms( 'Q112', 2 );
 		$this->saveEntities( [ $firstItem, $secondItem ] );
-		$this->clearFullEntityIdColumn();
 
 		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
 		$builder->setRemoveDuplicateTerms( true );
@@ -121,29 +116,11 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$this->assertTermIndexRowsHaveFullEntityId( $secondItem->getId(), 2 );
 	}
 
-	public function testRebuildOnlyRebuildsTermsOfEntitiesOfGivenType() {
-		$item = $this->createItemWithNTerms( 'Q1', 5 );
-		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
-		$property->setLabel( 'en', 'name' );
-		$this->saveEntities( [ $item, $property ] );
-		$this->clearFullEntityIdColumn();
-
-		$this->assertTermIndexRowsHaveFullEntityId( $item->getId(), 0 );
-		$this->assertTermIndexRowsHaveFullEntityId( $property->getId(), 0 );
-
-		$this->getBuilder( [ Property::ENTITY_TYPE ] )->rebuild();
-
-		$this->assertTermIndexRowsHaveFullEntityId( $item->getId(), 0 );
-		$this->assertTermIndexRowsHaveFullEntityId( $property->getId(), 1 );
-	}
-
 	public function testGivenRebuildAllFlag_rebuildAddsNewRowsToIndex() {
 		$item = $this->createItemWithNTerms( 'Q1', 1 );
 		$this->saveEntities( [ $item ] );
 
 		$originalRowIds = $this->getTermRowIdsForEntity( $item->getId() );
-
-		$this->clearFullEntityIdColumn();
 
 		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
 		$builder->setRebuildAllEntityTerms( true );
@@ -162,8 +139,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		$this->saveEntities( [ $item ] );
 
 		$originalRowIds = $this->getTermRowIdsForEntity( $item->getId() );
-
-		$this->clearFullEntityIdColumn();
 
 		$this->getBuilder( [ Item::ENTITY_TYPE ] )->rebuild();
 
@@ -196,7 +171,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		);
 
 		$builder->setBatchSize( 2 );
-		$builder->setReadFullEntityIdColumn( false );
 
 		return $builder;
 	}
@@ -241,15 +215,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
-	private function clearFullEntityIdColumn() {
-		$this->db->update(
-			TermSqlIndexBuilder::TABLE_NAME,
-			[ 'term_full_entity_id' => null ],
-			[],
-			__METHOD__
-		);
-	}
-
 	private function insertTerm( EntityDocument $entity, $termLanguage, $termType, $termText ) {
 		$stringNormalizer = new StringNormalizer();
 
@@ -259,7 +224,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 			[
 				[
 					'term_full_entity_id' => $entity->getId()->getSerialization(),
-					'term_entity_id' => $entity->getId()->getNumericId(),
+					'term_entity_id' => 0,
 					'term_entity_type' => $entity->getType(),
 					'term_language' => $termLanguage,
 					'term_type' => $termType,
