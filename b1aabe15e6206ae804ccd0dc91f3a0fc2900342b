@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "297d5d79_3c5ed7ee",
+        "filename": "repo/includes/Store/Elastic/ElasticTermLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-06T10:11:11Z",
+      "side": 1,
+      "message": "I think this needs to be $result[0].",
+      "range": {
+        "startLine": 179,
+        "startChar": 9,
+        "endLine": 179,
+        "endChar": 16
+      },
+      "revId": "b1aabe15e6206ae804ccd0dc91f3a0fc2900342b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d88e5fe6_42b892a8",
+        "filename": "repo/includes/Store/Elastic/ElasticTermLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-06T10:11:11Z",
+      "side": 1,
+      "message": "$result[0]",
+      "range": {
+        "startLine": 248,
+        "startChar": 9,
+        "endLine": 248,
+        "endChar": 16
+      },
+      "revId": "b1aabe15e6206ae804ccd0dc91f3a0fc2900342b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
