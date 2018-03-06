@@ -160,19 +160,9 @@ class DirectSqlStore implements ClientStore {
 	private $siteId;
 
 	/**
-	 * @var bool
-	 */
-	private $writeFullEntityIdColumn;
-
-	/**
 	 * @var string[]
 	 */
 	private $disabledUsageAspects;
-
-	/**
-	 * @var bool
-	 */
-	private $readFullEntityIdColumn;
 
 	/**
 	 * @var int
@@ -213,9 +203,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
-		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );
-		$this->readFullEntityIdColumn = $settings->getSetting( 'readFullEntityIdColumn' );
 		$this->entityUsagePerPageLimit = $settings->getSetting( 'entityUsagePerPageLimit' );
 	}
 
@@ -394,10 +382,8 @@ class DirectSqlStore implements ClientStore {
 				$this->entityIdComposer,
 				$this->entityIdParser,
 				$this->repoWiki,
-				'',
-				$this->writeFullEntityIdColumn
+				''
 			);
-			$this->termIndex->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
 		}
 
 		return $this->termIndex;

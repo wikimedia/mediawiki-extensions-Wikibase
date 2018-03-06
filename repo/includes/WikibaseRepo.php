@@ -2021,8 +2021,7 @@ class WikibaseRepo {
 
 	private function getDataAccessSettings() {
 		return new DataAccessSettings(
-			$this->settings->getSetting( 'maxSerializedEntitySize' ),
-			$this->settings->getSetting( 'readFullEntityIdColumn' )
+			$this->settings->getSetting( 'maxSerializedEntitySize' )
 		);
 	}
 

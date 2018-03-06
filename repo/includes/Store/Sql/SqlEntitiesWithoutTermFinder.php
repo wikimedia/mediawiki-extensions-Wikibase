@@ -39,28 +39,18 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 	private $entityTypeToPrefixMap;
 
 	/**
-	 * Whether it's possible to read from term_full_entity_id
-	 *
-	 * @var bool
-	 */
-	private $canReadFullEntityIdColumn;
-
-	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string[] $entityTypeToPrefixMap Maps (supported) entity types to their prefix (before the numerical part).
-	 * @param bool $canReadFullEntityIdColumn Whether it can read term_entity_full_id or not
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityNamespaceLookup $entityNamespaceLookup,
-		array $entityTypeToPrefixMap,
-		$canReadFullEntityIdColumn = false
+		array $entityTypeToPrefixMap
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->entityTypeToPrefixMap = $entityTypeToPrefixMap;
-		$this->canReadFullEntityIdColumn = $canReadFullEntityIdColumn;
 
 		Assert::parameterElementType( 'string', $entityTypeToPrefixMap, '$entityTypeToPrefixMap' );
 	}
@@ -161,12 +151,7 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 			'term_entity_type' => $entityType,
 			'page_namespace' => $this->entityNamespaceLookup->getEntityNamespace( $entityType )
 		];
-		if ( $this->canReadFullEntityIdColumn ) {
-			$conditions[] = 'term_full_entity_id = page_title';
-		} else {
-			$prefix = $dbr->addQuotes( $this->entityTypeToPrefixMap[ $entityType ] );
-			$conditions[] = 'term_entity_id = ' . $dbr->strreplace( 'page_title', "$prefix", "''" );
-		}
+		$conditions[] = 'term_full_entity_id = page_title';
 
 		return $dbr->makeList( $conditions, IDatabase::LIST_AND );
 	}
@@ -205,13 +190,6 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 		}
 
 		return $entityTypes;
-	}
-
-	/**
-	 * @param bool $canReadFullEntityIdColumn
-	 */
-	public function setCanReadFullEntityIdColumn( $canReadFullEntityIdColumn ) {
-		$this->canReadFullEntityIdColumn = $canReadFullEntityIdColumn;
 	}
 
 }
