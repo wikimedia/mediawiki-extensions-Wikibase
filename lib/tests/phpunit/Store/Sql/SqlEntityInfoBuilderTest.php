@@ -119,7 +119,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			foreach ( $langTerms as $term ) {
 				$rows[] = [
 					$id->getEntityType(),
-					$id->getNumericId(),
+					0,
 					$id->getSerialization(),
 					$termType,
 					$lang,
@@ -255,106 +255,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
 	}
 
-	private function saveFakeForeignItemTerm( ItemId $itemId, $termType, $termLanguage, $termText ) {
-		// Inserting a dummy label for item with numeric ID part equal to 1.
-		// In this test local database is used to pretend to be a databse of
-		// repository "foo". Terms fetched from the database should be
-		// matched to entity IDs using correct repository prefixes (this
-		// builder's responsibility as this information is not stored in wb_terms table).
-		$this->insertRows(
-			'wb_terms',
-			[
-				'term_entity_type',
-				'term_entity_id',
-				'term_type',
-				'term_language',
-				'term_text',
-				'term_search_key'
-			],
-			[
-				[
-					$itemId->getEntityType(),
-					$itemId->getNumericId(),
-					$termType,
-					$termLanguage,
-					$termText,
-					$termText
-				]
-			]
-		);
-	}
-
-	public function testEntityIdsArePrefixedWithRepositoryName() {
-		$itemId = new ItemId( 'foo:Q1' );
-
-		$label = 'dummy label';
-		$languageCode = 'en';
-
-		$this->saveFakeForeignItemTerm( $itemId, 'label', $languageCode, $label );
-
-		$builder = new SqlEntityInfoBuilder(
-			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-			] ),
-			$this->getEntityNamespaceLookup(),
-			[ $itemId ],
-			false,
-			'foo'
-		);
-
-		$builder->collectTerms();
-
-		$entityInfo = $builder->getEntityInfo()->getEntityInfo( $itemId );
-
-		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
-	}
-
-	public function testRemoveMissingConsidersForeignEntities() {
-		$itemId = new ItemId( 'foo:Q1' );
-
-		$this->saveFakeForeignItemTerm( $itemId, 'label', 'en', 'dummy label' );
-
-		$builder = new SqlEntityInfoBuilder(
-			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-			] ),
-			$this->getEntityNamespaceLookup(),
-			[ $itemId ],
-			false,
-			'foo'
-		);
-
-		$builder->removeMissing();
-
-		$entityInfo = $builder->getEntityInfo();
-
-		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
-	}
-
-	public function testConstructorIgnoresEntityIdsFromOtherRepositoriesFullEntityId() {
-		$itemId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'foo:P1' );
-
-		$builder = new SqlEntityInfoBuilder(
-			new BasicEntityIdParser(),
-			$this->getIdComposer(),
-			$this->getEntityNamespaceLookup(),
-			[ $itemId, $propertyId ],
-			false,
-			''
-		);
-		$builder->setReadFullEntityIdColumn( true );
-
-		$this->assertTrue( $builder->getEntityInfo()->hasEntityInfo( $itemId ) );
-		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
-	}
-
 	private function saveFakeForeignItemTermUsingFullItemId( ItemId $itemId, $termType, $termLanguage, $termText ) {
 		// Inserting a dummy label for item with numeric ID part equal to 1.
 		// In this test local database is used to pretend to be a databse of
@@ -386,7 +286,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 		);
 	}
 
-	public function testEntityIdsArePrefixedWithRepositoryNameFullEntityId() {
+	public function testEntityIdsArePrefixedWithRepositoryName() {
 		$itemId = new ItemId( 'foo:Q1' );
 
 		$label = 'dummy label';
@@ -407,8 +307,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			'foo'
 		);
 
-		$builder->setReadFullEntityIdColumn( true );
-
 		$builder->collectTerms();
 
 		$entityInfo = $builder->getEntityInfo()->getEntityInfo( $itemId );
@@ -416,7 +314,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
 	}
 
-	public function testRemoveMissingConsidersForeignEntities_fullEntityId() {
+	public function testRemoveMissingConsidersForeignEntities() {
 		$itemId = new ItemId( 'foo:Q1' );
 
 		$this->saveFakeForeignItemTermUsingFullItemId( $itemId, 'label', 'en', 'dummy label' );
@@ -434,182 +332,11 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			'foo'
 		);
 
-		$builder->setReadFullEntityIdColumn( true );
-
 		$builder->removeMissing();
 
 		$entityInfo = $builder->getEntityInfo();
 
 		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
-	}
-
-	/**
-	 * @dataProvider retainEntityInfoProvider
-	 */
-	public function testRetainEntityInfoFullEntityId( array $ids, array $retain, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->retainEntityInfo( $retain );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
-	}
-
-	/**
-	 * @dataProvider removeEntityInfoProvider
-	 */
-	public function testRemoveEntityInfoFullEntityId( array $ids, array $remove, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->removeEntityInfo( $remove );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
-	}
-
-	/**
-	 * @dataProvider removeMissingButKeepRedirects
-	 */
-	public function testRemoveMissingButKeepRedirectsFullEntityId( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->removeMissing();
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
-	}
-
-	/**
-	 * @dataProvider removeMissingAndRedirectsProvider
-	 */
-	public function testRemoveMissingAndRedirectsFullEntityId( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->removeMissing( 'remove-redirects' );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
-	}
-
-	/**
-	 * @dataProvider collectDataTypesProvider
-	 */
-	public function testCollectDataTypesFullEntityId( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->collectDataTypes();
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertSameSize( $expected, $entityInfo );
-
-		foreach ( $expected as $id => $expectedRecord ) {
-			$this->assertArrayHasKey( $id, $entityInfo );
-			$actualRecord = $entityInfo[$id];
-
-			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
-		}
-	}
-
-	public function testCollectTerms_redirectFullEntityId() {
-		$ids = [ new ItemId( 'Q7' ), new ItemId( 'Q1' ) ];
-
-		$expected = [
-			'Q1' => [
-				'id' => 'Q1',
-				'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ),
-			],
-			'Q2' => [
-				'id' => 'Q2',
-				'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
-			],
-			'Q7' => [
-				'id' => 'Q2',
-				'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
-			]
-		];
-
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->resolveRedirects();
-		$builder->collectTerms( [ 'label' ], [ 'de' ] );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertEquals( array_keys( $expected ), array_keys( $entityInfo ) );
-
-		foreach ( $expected as $id => $expectedRecord ) {
-			$this->assertArrayHasKey( $id, $entityInfo );
-			$actualRecord = $entityInfo[$id];
-
-			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
-		}
-	}
-
-	/**
-	 * @dataProvider collectTermsProvider
-	 */
-	public function testCollectTermsFullEntityId(
-		array $ids,
-		array $types = null,
-		array $languages = null,
-		array $expected
-	) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->collectTerms( $types, $languages );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertSameSize( $expected, $entityInfo );
-
-		foreach ( $expected as $id => $expectedRecord ) {
-			$this->assertArrayHasKey( $id, $entityInfo );
-			$actualRecord = $entityInfo[$id];
-
-			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
-		}
-	}
-
-	/**
-	 * @dataProvider resolveRedirectsProvider
-	 */
-	public function testResolveRedirectsFullEntityId( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-
-		$builder->resolveRedirects();
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$resolvedIds = array_map(
-			function( $record ) {
-				return $record['id'];
-			},
-			$entityInfo
-		);
-
-		$this->assertArrayEquals( $expected, $resolvedIds );
-	}
-
-	/**
-	 * @dataProvider getEntityInfoProvider
-	 */
-	public function testGetEntityInfoFullEntityId( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilderFullEntityId( $ids );
-		$actual = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( $expected, $actual, false, true );
-	}
-
-	/**
-	 * @param EntityId[] $ids
-	 *
-	 * @return SqlEntityInfoBuilder
-	 */
-	private function newEntityInfoBuilderFullEntityId( array $ids ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-		$builder->setReadFullEntityIdColumn( true );
-
-		return $builder;
 	}
 
 }

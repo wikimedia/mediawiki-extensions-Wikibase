@@ -170,16 +170,6 @@ class SqlStore implements Store {
 	private $idBlacklist;
 
 	/**
-	 * @var bool
-	 */
-	private $writeFullEntityIdColumn;
-
-	/**
-	 * @var bool
-	 */
-	private $readFullEntityIdColumn;
-
-	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
@@ -211,8 +201,6 @@ class SqlStore implements Store {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
-		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
-		$this->readFullEntityIdColumn = $settings->getSetting( 'readFullEntityIdColumn' );
 	}
 
 	/**
@@ -249,11 +237,8 @@ class SqlStore implements Store {
 			$this->entityIdComposer,
 			$this->entityIdParser,
 			false,
-			'',
-			$this->writeFullEntityIdColumn
+			''
 		);
-
-		$termSqlIndex->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
 
 		return $termSqlIndex;
 	}
@@ -333,7 +318,7 @@ class SqlStore implements Store {
 	 * @return EntitiesWithoutTermFinder
 	 */
 	public function newEntitiesWithoutTermFinder() {
-		$sqlEntitiesWithoutTermFinder = new SqlEntitiesWithoutTermFinder(
+		return new SqlEntitiesWithoutTermFinder(
 			$this->entityIdParser,
 			$this->entityNamespaceLookup,
 			[ // TODO: Make this configurable!
@@ -341,12 +326,6 @@ class SqlStore implements Store {
 				Property::ENTITY_TYPE => 'P'
 			]
 		);
-
-		$sqlEntitiesWithoutTermFinder->setCanReadFullEntityIdColumn(
-			$this->readFullEntityIdColumn
-		);
-
-		return $sqlEntitiesWithoutTermFinder;
 	}
 
 	/**

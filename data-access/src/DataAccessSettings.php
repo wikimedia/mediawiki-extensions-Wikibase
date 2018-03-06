@@ -17,20 +17,12 @@ class DataAccessSettings {
 	private $maxSerializedEntitySizeInBytes;
 
 	/**
-	 * @var bool
-	 */
-	private $readFullEntityIdColumn;
-
-	/**
 	 * @param int $maxSerializedEntitySizeInKiloBytes
-	 * @param bool $readFullEntityIdColumn
 	 */
-	public function __construct( $maxSerializedEntitySizeInKiloBytes, $readFullEntityIdColumn ) {
+	public function __construct( $maxSerializedEntitySizeInKiloBytes ) {
 		Assert::parameterType( 'integer', $maxSerializedEntitySizeInKiloBytes, '$maxSerializedEntitySizeInBytes' );
-		Assert::parameterType( 'boolean', $readFullEntityIdColumn, '$readFullEntityIdColumn' );
 
 		$this->maxSerializedEntitySizeInBytes = $maxSerializedEntitySizeInKiloBytes * 1024;
-		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 	/**
@@ -38,13 +30,6 @@ class DataAccessSettings {
 	 */
 	public function maxSerializedEntitySizeInBytes() {
 		return $this->maxSerializedEntitySizeInBytes;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function readFullEntityIdColumn() {
-		return $this->readFullEntityIdColumn;
 	}
 
 }
