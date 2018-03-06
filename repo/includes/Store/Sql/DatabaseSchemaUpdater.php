@@ -129,6 +129,11 @@ class DatabaseSchemaUpdater {
 				$this->getUpdateScriptPath( 'MakeIpsSitePageLarger', $db->getType() )
 			);
 		}
+		$updater->dropExtensionIndex(
+			'wb_items_per_site',
+			'wb_ips_site_page',
+			$this->getUpdateScriptPath( 'DropItemsPerSiteIndex', $db->getType() )
+		);
 	}
 
 	private function updateChangesTable( DatabaseUpdater $updater, IDatabase $db ) {
