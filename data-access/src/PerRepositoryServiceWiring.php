@@ -39,8 +39,6 @@ return [
 			$services->getRepositoryName()
 		);
 
-		$factory->setReadFullEntityIdColumn( $settings->readFullEntityIdColumn() );
-
 		return $factory;
 	},
 
@@ -128,7 +126,6 @@ return [
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
-		$index->setReadFullEntityIdColumn( $settings->readFullEntityIdColumn() );
 		return $index;
 	},
 

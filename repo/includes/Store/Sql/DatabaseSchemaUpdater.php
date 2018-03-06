@@ -335,12 +335,8 @@ class DatabaseSchemaUpdater {
 			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
 		);
 
-		$wikibaseRepoSettings = WikibaseRepo::getDefaultInstance()->getSettings();
-		if ( $wikibaseRepoSettings->getSetting( 'writeFullEntityIdColumn' ) === true ) {
-			$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
-
-			// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
-		}
+		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
+		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
 	}
 
 }
