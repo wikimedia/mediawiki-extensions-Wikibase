@@ -151,7 +151,7 @@ module EntityPage
 
   def page_index_updated(api, page_titles)
     response = api.action(:query, prop: 'cirrusdoc|revisions', titles: page_titles.join('|'), rvprop: 'ids', token_type: false).data
-    puts data.to_json
+    puts response.to_json
     if response.nil? || !response.key?('query') || !response['query'].key?('pages')
       return false
     end
