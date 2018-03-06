@@ -91,12 +91,6 @@ return call_user_func( function() {
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
-		// Enable writing of term_full_entity_id column in wb_terms table.
-		'writeFullEntityIdColumn' => function ( SettingsArray $settings ) {
-			return $settings->hasSetting( 'hasFullEntityIdColumn' ) ?
-				$settings->getSetting( 'hasFullEntityIdColumn' ) : true;
-		},
-
 		// Batch size for UpdateHtmlCacheJob
 		'purgeCacheBatchSize' => function ( SettingsArray $settings ) {
 			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
@@ -247,9 +241,6 @@ return call_user_func( function() {
 	// pages. Will be concatenated with the page title, so should end with "/" or "title=". Special
 	// characters (e.g. space, percent, etc.) should NOT be encoded.
 	$defaults['tabularDataStorageBaseUrl'] = 'https://commons.wikimedia.org/wiki/';
-
-	// Enable reading of term_full_entity_id column in wb_terms table.
-	$defaults['readFullEntityIdColumn'] = false;
 
 	// Disabled entity access
 	$defaults['disabledAccessEntityTypes'] = [];
