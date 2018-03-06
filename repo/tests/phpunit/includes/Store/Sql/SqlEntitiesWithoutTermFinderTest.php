@@ -59,13 +59,13 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 			);
 
 			$termsRows = [];
-			$termsRows[] = $this->getTermRow( 100, 'Q100', 'item', 'en', 'label' );
-			$termsRows[] = $this->getTermRow( 100, 'Q100', 'item', 'en', 'description' );
-			$termsRows[] = $this->getTermRow( 102, 'Q102', 'item', 'es', 'label' );
-			$termsRows[] = $this->getTermRow( 102, 'Q102', 'item', 'en', 'alias' );
-			$termsRows[] = $this->getTermRow( 102, 'Q102', 'item', 'es', 'alias' );
-			$termsRows[] = $this->getTermRow( 102, 'P102', 'property', 'de', 'description' );
-			$termsRows[] = $this->getTermRow( 103, 'P103', 'property', 'de', 'label' );
+			$termsRows[] = $this->getTermRow( 'Q100', 'item', 'en', 'label' );
+			$termsRows[] = $this->getTermRow( 'Q100', 'item', 'en', 'description' );
+			$termsRows[] = $this->getTermRow( 'Q102', 'item', 'es', 'label' );
+			$termsRows[] = $this->getTermRow( 'Q102', 'item', 'en', 'alias' );
+			$termsRows[] = $this->getTermRow( 'Q102', 'item', 'es', 'alias' );
+			$termsRows[] = $this->getTermRow( 'P102', 'property', 'de', 'description' );
+			$termsRows[] = $this->getTermRow( 'P103', 'property', 'de', 'label' );
 
 			$dbw->insert(
 				'wb_terms',
@@ -73,36 +73,6 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 				__METHOD__
 			);
 		}
-	}
-
-	/**
-	 * @dataProvider getEntitiesWithoutTermProvider
-	 */
-	public function testGetEntitiesWithoutTermFullEntityId(
-		array $expected,
-		$termType,
-		$language,
-		array $entityTypes = null,
-		$limit,
-		$offset
-	) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$finder = new SqlEntitiesWithoutTermFinder(
-			$wikibaseRepo->getEntityIdParser(),
-			new EntityNamespaceLookup( [
-				'item' => 200,
-				'property' => 400,
-			] ),
-			[
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P'
-			],
-			true
-		);
-
-		$result = $finder->getEntitiesWithoutTerm( $termType, $language, $entityTypes, $limit, $offset );
-		$this->assertArrayEquals( $expected, $result, true, true );
 	}
 
 	/**
@@ -127,8 +97,7 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 			[
 				Item::ENTITY_TYPE => 'Q',
 				Property::ENTITY_TYPE => 'P'
-			],
-			false
+			]
 		);
 
 		$result = $finder->getEntitiesWithoutTerm( $termType, $language, $entityTypes, $limit, $offset );
@@ -220,26 +189,6 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider unSupportedEntityTypesProvider
 	 */
-	public function testGetEntitiesWithoutTerm_unSupportedEntityTypesFullEntityId(
-		array $entityTypes
-	) {
-		$this->setExpectedException( InvalidArgumentException::class );
-
-		$finder = new SqlEntitiesWithoutTermFinder(
-			new ItemIdParser(),
-			new EntityNamespaceLookup( [] ),
-			[
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P'
-			],
-			true
-		);
-		$finder->getEntitiesWithoutTerm( 'label', null, $entityTypes );
-	}
-
-	/**
-	 * @dataProvider unSupportedEntityTypesProvider
-	 */
 	public function testGetEntitiesWithoutTerm_unSupportedEntityTypes( array $entityTypes ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -249,8 +198,7 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 			[
 				Item::ENTITY_TYPE => 'Q',
 				Property::ENTITY_TYPE => 'P'
-			],
-			false
+			]
 		);
 		$finder->getEntitiesWithoutTerm( 'label', null, $entityTypes );
 	}
@@ -264,14 +212,12 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 	}
 
 	private function getTermRow(
-		$numericEntityId,
 		$fullEntityId,
 		$entityType,
 		$languageCode,
 		$termType
 	) {
 		return [
-			'term_entity_id' => $numericEntityId,
 			'term_full_entity_id' => $fullEntityId,
 			'term_entity_type' => $entityType,
 			'term_language' => $languageCode,

@@ -196,7 +196,6 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 		);
 
 		$builder->setBatchSize( 2 );
-		$builder->setReadFullEntityIdColumn( false );
 
 		return $builder;
 	}
@@ -259,7 +258,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 			[
 				[
 					'term_full_entity_id' => $entity->getId()->getSerialization(),
-					'term_entity_id' => $entity->getId()->getNumericId(),
+					'term_entity_id' => 0,
 					'term_entity_type' => $entity->getType(),
 					'term_language' => $termLanguage,
 					'term_type' => $termType,
