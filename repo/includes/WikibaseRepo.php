@@ -32,6 +32,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\Store\ElasticTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -974,7 +975,8 @@ class WikibaseRepo {
 	 * @return PrefetchingTermLookup
 	 */
 	public function getPrefetchingTermLookup() {
-		return $this->getWikibaseServices()->getTermBuffer();
+		return ElasticTermLookup::fromDefaultConfig($this->getEntityTitleLookup(), $this->getEntityIdParser());
+		//return $this->getWikibaseServices()->getTermBuffer();
 	}
 
 	/**
