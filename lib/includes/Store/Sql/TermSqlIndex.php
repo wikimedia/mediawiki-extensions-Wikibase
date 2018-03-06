@@ -59,16 +59,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $entityIdParser;
 
 	/**
-	 * @var bool
-	 */
-	private $writeFullEntityIdColumn;
-
-	/**
-	 * @var bool
-	 */
-	private $readFullEntityIdColumn = false;
-
-	/**
 	 * @var int
 	 */
 	private $maxConflicts = 500;
@@ -79,25 +69,21 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
-	 * @param bool $writeFullEntityIdColumn Allow writing to the column.
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		EntityIdParser $entityIdParser,
 		$wikiDb = false,
-		$repositoryName = '',
-		$writeFullEntityIdColumn = true
+		$repositoryName = ''
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
-		Assert::parameterType( 'boolean', $writeFullEntityIdColumn, '$writeFullEntityIdColumn' );
 
 		parent::__construct( $wikiDb );
 
 		$this->repositoryName = $repositoryName;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
-		$this->writeFullEntityIdColumn = $writeFullEntityIdColumn;
 		$this->entityIdParser = $entityIdParser;
 		$this->tableName = 'wb_terms';
 	}
@@ -198,14 +184,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		/** @var EntityId|Int32EntityId $entityId */
 
 		$entityIdentifiers = [
-			'term_entity_id' => $entityId->getNumericId(),
+			'term_entity_id' => 0,
 			'term_entity_type' => $entity->getType(),
 			'term_weight' => $this->getWeight( $entity ),
+			'term_full_entity_id' => $entityId->getSerialization(),
 		];
-
-		if ( $this->writeFullEntityIdColumn ) {
-			$entityIdentifiers['term_full_entity_id'] = $entityId->getSerialization();
-		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
@@ -356,18 +339,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$this->assertIsNumericEntityId( $entityId );
 		/** @var EntityId|Int32EntityId $entityId */
 
-		$entityIdentifiers = [];
-		$uniqueKeyFields = [ 'term_language', 'term_type', 'term_text' ];
-
-		if ( $this->readFullEntityIdColumn ) {
-			$entityIdentifiers['term_full_entity_id'] = $entityId->getSerialization();
-			$uniqueKeyFields[] = 'term_full_entity_id';
-		} else {
-			$entityIdentifiers['term_entity_id'] = $entityId->getNumericId();
-			$entityIdentifiers['term_entity_type'] = $entityId->getEntityType();
-			$uniqueKeyFields[] = 'term_entity_type';
-			$uniqueKeyFields[] = 'term_entity_id';
-		}
+		$entityIdentifiers = [ 'term_full_entity_id' => $entityId->getSerialization() ];
+		$uniqueKeyFields = [ 'term_language', 'term_type', 'term_text', 'term_full_entity_id' ];
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting terms for ' . $entityId->getSerialization() );
 
@@ -450,12 +423,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$dbw = $this->getConnection( DB_MASTER );
 
-		$conditions = [ 'term_entity_type' => $entityId->getEntityType() ];
-		if ( $this->readFullEntityIdColumn ) {
-			$conditions['term_full_entity_id'] = $entityId->getSerialization();
-		} else {
-			$conditions['term_entity_id'] = $entityId->getNumericId();
-		}
+		$conditions = [
+			'term_entity_type' => $entityId->getEntityType(),
+			'term_full_entity_id' => $entityId->getSerialization(),
+		];
 
 		$success = $dbw->delete(
 			$this->tableName,
@@ -567,13 +538,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		}
 
-		$conditions = [ 'term_entity_type' => $entityType ];
-
-		if ( $this->readFullEntityIdColumn ) {
-			$conditions['term_full_entity_id'] = $fullIds;
-		} else {
-			$conditions['term_entity_id'] = $numericIds;
-		}
+		$conditions = [
+			'term_entity_type' => $entityType,
+			'term_full_entity_id' => $fullIds,
+		];
 
 		if ( $languageCodes !== null ) {
 			$conditions['term_language'] = $languageCodes;
@@ -583,13 +551,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$conditions['term_type'] = $termTypes;
 		}
 
-		$fields = [ 'term_type', 'term_language', 'term_text' ];
-		if ( $this->readFullEntityIdColumn ) {
-			$fields[] = 'term_full_entity_id';
-		} else {
-			$fields[] = 'term_entity_id';
-			$fields[] = 'term_entity_type';
-		}
+		$fields = [ 'term_type', 'term_language', 'term_text', 'term_full_entity_id' ];
 
 		$dbr = $this->getReadDb();
 
@@ -654,12 +616,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$queryOptions['LIMIT'] = $options['LIMIT'];
 		}
 
-		$fields = [ 'term_entity_type', 'term_type', 'term_language', 'term_text', 'term_weight' ];
-		if ( $this->readFullEntityIdColumn ) {
-			$fields[] = 'term_full_entity_id';
-		} else {
-			$fields[] = 'term_entity_id';
-		}
+		$fields = [
+			'term_entity_type',
+			'term_type',
+			'term_language',
+			'term_text',
+			'term_weight',
+			'term_full_entity_id'
+		];
 		$rows = $dbr->select(
 			$this->tableName,
 			$fields,
@@ -742,13 +706,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				$row->term_text .
 				$row->term_type .
 				$row->term_language .
-				$row->term_entity_type;
-
-			if ( $this->readFullEntityIdColumn ) {
-				$sortData[$key]['string'] .= $row->term_full_entity_id;
-			} else {
-				$sortData[$key]['string'] .= $row->term_entity_id;
-			}
+				$row->term_entity_type .
+				$row->term_full_entity_id;
 
 			$rowMap[$key] = $row;
 		}
@@ -896,13 +855,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return EntityId|null
 	 */
 	private function getEntityId( $termRow ) {
-		if ( isset( $termRow->term_entity_type ) && isset( $termRow->term_entity_id ) ) {
-			return $this->entityIdComposer->composeEntityId(
-				$this->repositoryName,
-				$termRow->term_entity_type,
-				$termRow->term_entity_id
-			);
-		} elseif ( isset( $termRow->term_full_entity_id ) ) {
+		if ( isset( $termRow->term_full_entity_id ) ) {
 			return $this->entityIdParser->parse(
 				$termRow->term_full_entity_id
 			);
@@ -1004,13 +957,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$where['L.term_entity_type'] = $entityType;
 		$where['L.term_type'] = TermIndexEntry::TYPE_LABEL;
 		$where['D.term_type'] = TermIndexEntry::TYPE_DESCRIPTION;
-
-		if ( $this->readFullEntityIdColumn ) {
-			$where[] = 'D.term_full_entity_id=' . 'L.term_full_entity_id';
-		} else {
-			$where[] = 'D.term_entity_id=' . 'L.term_entity_id';
-			$where[] = 'D.term_entity_type=' . 'L.term_entity_type';
-		}
+		$where[] = 'D.term_full_entity_id=' . 'L.term_full_entity_id';
 
 		$termConditions = [];
 
@@ -1123,13 +1070,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $normalized;
-	}
-
-	/**
-	 * @param bool $readFullEntityIdColumn
-	 */
-	public function setReadFullEntityIdColumn( $readFullEntityIdColumn ) {
-		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 }

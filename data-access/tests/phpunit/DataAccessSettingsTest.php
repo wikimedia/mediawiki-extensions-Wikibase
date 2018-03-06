@@ -12,15 +12,9 @@ use Wikibase\DataAccess\DataAccessSettings;
 class DataAccessSettingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConvertsMaxSerializedEntitySizeFromKiloBytesToBytes() {
-		$settings = new DataAccessSettings( 1, true );
+		$settings = new DataAccessSettings( 1 );
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
-	}
-
-	public function testReturnsReadFullEntityIdColumn() {
-		$size = 0;
-		$this->assertEquals( false, ( new DataAccessSettings( $size, false ) )->readFullEntityIdColumn() );
-		$this->assertEquals( true, ( new DataAccessSettings( $size, true ) )->readFullEntityIdColumn() );
 	}
 
 }

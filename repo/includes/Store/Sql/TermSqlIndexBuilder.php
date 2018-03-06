@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -72,11 +70,6 @@ class TermSqlIndexBuilder {
 	private $errorReporter;
 
 	/**
-	 * @var bool
-	 */
-	private $readFullEntityIdColumn = true;
-
-	/**
 	 * @var int
 	 */
 	private $batchSize = 1000;
@@ -136,13 +129,6 @@ class TermSqlIndexBuilder {
 	 */
 	public function setBatchSize( $size ) {
 		$this->batchSize = $size;
-	}
-
-	/**
-	 * @param bool $readFullEntityIdColumn
-	 */
-	public function setReadFullEntityIdColumn( $readFullEntityIdColumn ) {
-		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 	public function rebuild() {
@@ -247,10 +233,6 @@ class TermSqlIndexBuilder {
 				$this->removeDuplicateTermsOfEntity( $dbw, $entityId, $duplicateTerms );
 			}
 		}
-
-		if ( $this->hasMissingFullEntityId( $dbr, $entityId ) ) {
-			$this->populateFullEntityIdField( $dbw, $entityId );
-		}
 	}
 
 	private function rebuildAllTermsOfEntity( EntityId $entityId ) {
@@ -284,12 +266,7 @@ class TermSqlIndexBuilder {
 	 * @param TermIndexEntry[] $duplicateTerms
 	 */
 	private function removeDuplicateTermsOfEntity( IDatabase $db, EntityId $entityId, array $duplicateTerms ) {
-		$idConds = $this->readFullEntityIdColumn ?
-			[ 'term_full_entity_id' => $entityId->getSerialization() ] :
-			[
-				'term_entity_id' => $entityId->getNumericId(),
-				'term_entity_type' => $entityId->getEntityType(),
-			];
+		$idConds = [ 'term_full_entity_id' => $entityId->getSerialization() ];
 
 		/** @var TermIndexEntry $term */
 		foreach ( $duplicateTerms as $term ) {
@@ -344,57 +321,6 @@ class TermSqlIndexBuilder {
 		}
 
 		return array_values( $duplicateTerms );
-	}
-
-	private function hasMissingFullEntityId( IDatabase $db, EntityId $entityId ) {
-		if ( $this->readFullEntityIdColumn ) {
-			return false;
-		}
-
-		if ( ! $entityId instanceof Int32EntityId ) {
-			throw new RuntimeException(
-				'Full entity ID column in wb_terms table is not used but ' .
-				$entityId->getSerialization() . ' does not have numeric part in ID.'
-			);
-		}
-
-		$hasRowWithNullFullId = (bool)$db->selectField(
-			self::TABLE_NAME,
-			'1',
-			[
-				'term_entity_type' => $entityId->getEntityType(),
-				'term_entity_id' => $entityId->getNumericId(),
-				'term_full_entity_id IS NULL'
-			],
-			__METHOD__
-		);
-
-		return (bool)$hasRowWithNullFullId;
-	}
-
-	private function populateFullEntityIdField( IDatabase $db, EntityId $entityId ) {
-		if ( $this->readFullEntityIdColumn ) {
-			return;
-		}
-
-		if ( ! $entityId instanceof Int32EntityId ) {
-			throw new RuntimeException(
-				'Full entity ID column in wb_terms table is not used but ' .
-				$entityId->getSerialization() . ' does not have numeric part in ID.'
-			);
-		}
-
-		$db->update(
-			self::TABLE_NAME,
-			[
-				'term_full_entity_id' => $entityId->getSerialization()
-			],
-			[
-				'term_entity_type' => $entityId->getEntityType(),
-				'term_entity_id' => $entityId->getNumericId(),
-			],
-			__METHOD__
-		);
 	}
 
 }
