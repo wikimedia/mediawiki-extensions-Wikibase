@@ -338,6 +338,7 @@
 	"wikibase-listdatatypes-commonsmedia-head": "мэдыяфайл зь Вікісховішча",
 	"wikibase-listdatatypes-commonsmedia-body": "Спасылка на файлы, якія захоўваюцца ў Вікісховішчы. Калі значэньне ўведзенае, адпаведныя файлы будуць шукацца ў прасторы назваў «File» Вікісховішча.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Геаграфічныя каардынаты",
+	"wikibase-listdatatypes-geo-shape-head": "Геаграфічная форма",
 	"wikibase-listdatatypes-quantity-head": "Колькасьць",
 	"wikibase-listdatatypes-monolingualtext-head": "Аднамоўны тэкст",
 	"wikibase-listdatatypes-multilingualtext-head": "Шматмоўны тэкст",
