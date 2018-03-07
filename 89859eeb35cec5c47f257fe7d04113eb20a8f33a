@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "96434708_cbceb5d3",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T16:56:52Z",
+      "side": 1,
+      "message": "Needs to return false if page_is_redirect is true. (Same for non-Prefetching WPEMDA – follow-up change.)",
+      "range": {
+        "startLine": 220,
+        "startChar": 59,
+        "endLine": 220,
+        "endChar": 70
+      },
+      "revId": "89859eeb35cec5c47f257fe7d04113eb20a8f33a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78336351_1de7dbe0",
         "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 3
@@ -60,6 +83,24 @@
       "writtenOn": "2018-03-06T17:14:29Z",
       "side": 1,
       "message": "Should we do anything special if an entity ID was requested for prefetch but wasn’t prefetched yet? Should we do the full fetch in that case, and then use the cached information?\n\nI guess this could be implemented as: near the beginning of this method, do a fetch for the intersection of $this-\u003etoFetch and $entityIds.",
+      "revId": "89859eeb35cec5c47f257fe7d04113eb20a8f33a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcaa1c4e_36cf087a",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T16:56:52Z",
+      "side": 1,
+      "message": "Fetching the intersection probably isn’t much more expensive than fetching everything marked to be pre-fetched, so let’s just do a full fetch at the beginning here.",
+      "parentUuid": "78336351_1de7dbe0",
       "revId": "89859eeb35cec5c47f257fe7d04113eb20a8f33a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
