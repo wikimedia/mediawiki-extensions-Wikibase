@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Hooks;
 
 use Action;
 use DummyLinker;
-use HtmlArmor;
 use Language;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
@@ -64,11 +63,6 @@ class LinkBeginHookHandler {
 	private $languageFallback;
 
 	/**
-	 * @var Language
-	 */
-	private $pageLanguage;
-
-	/**
 	 * @var LinkRenderer
 	 */
 	private $linkRenderer;
@@ -77,6 +71,10 @@ class LinkBeginHookHandler {
 	 * @var InterwikiLookup
 	 */
 	private $interwikiLookup;
+	/**
+	 * @var LinkFormatter
+	 */
+	private $linkFormatter;
 
 	/**
 	 * @return self
@@ -96,7 +94,8 @@ class LinkBeginHookHandler {
 			$languageFallbackChain,
 			$context->getLanguage(),
 			MediaWikiServices::getInstance()->getLinkRenderer(),
-			MediaWikiServices::getInstance()->getInterwikiLookup()
+			MediaWikiServices::getInstance()->getInterwikiLookup(),
+			new LinkFormatter( $wikibaseRepo->getEntityIdLookup(), $context->getLanguage() )
 		);
 	}
 
@@ -146,7 +145,7 @@ class LinkBeginHookHandler {
 	 * @param Language $pageLanguage
 	 * @param LinkRenderer $linkRenderer
 	 * @param InterwikiLookup $interwikiLookup
-	 *
+	 * @param LinkFormatter $linkFormatter
 	 * @todo: Would be nicer to take a LabelDescriptionLookup instead of TermLookup + FallbackChain.
 	 */
 	public function __construct(
@@ -157,16 +156,17 @@ class LinkBeginHookHandler {
 		LanguageFallbackChain $languageFallback,
 		Language $pageLanguage,
 		LinkRenderer $linkRenderer,
-		InterwikiLookup $interwikiLookup
+		InterwikiLookup $interwikiLookup,
+		LinkFormatter $linkFormatter
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->termLookup = $termLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->languageFallback = $languageFallback;
-		$this->pageLanguage = $pageLanguage;
 		$this->linkRenderer = $linkRenderer;
 		$this->interwikiLookup = $interwikiLookup;
+		$this->linkFormatter = $linkFormatter;
 	}
 
 	/**
@@ -245,9 +245,9 @@ class LinkBeginHookHandler {
 		$labelData = $this->getPreferredTerm( $labels );
 		$descriptionData = $this->getPreferredTerm( $descriptions );
 
-		$html = $this->getHtml( $entityId->getSerialization(), $labelData );
+		$html = $this->linkFormatter->getHtml( $entityId->getSerialization(), $labelData );
 
-		$customAttribs['title'] = $this->getTitleAttribute(
+		$customAttribs['title'] = $this->linkFormatter->getTitleAttribute(
 			$target,
 			$labelData,
 			$descriptionData
@@ -352,94 +352,6 @@ class LinkBeginHookHandler {
 
 		$shouldConvert = true;
 		return true;
-	}
-
-	/**
-	 * @param string[]|null $termData A term record as returned by
-	 * LanguageFallbackChain::extractPreferredValueOrAny(),
-	 * containing the 'value' and 'language' fields, or null
-	 * or an empty array.
-	 *
-	 * @see LanguageFallbackChain::extractPreferredValueOrAny
-	 *
-	 * @return array list( string $text, Language $language )
-	 */
-	private function extractTextAndLanguage( array $termData = null ) {
-		if ( $termData ) {
-			return [
-				$termData['value'],
-				Language::factory( $termData['language'] )
-			];
-		} else {
-			return [
-				'',
-				$this->pageLanguage
-			];
-		}
-	}
-
-	/**
-	 * @param string $entityIdSerialization
-	 * @param string[]|null $labelData
-	 *
-	 * @return string
-	 */
-	private function getHtml( $entityIdSerialization, array $labelData = null ) {
-		/** @var Language $labelLang */
-		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
-
-		$idHtml = '<span class="wb-itemlink-id">'
-			. wfMessage(
-				'wikibase-itemlink-id-wrapper',
-				$entityIdSerialization
-			)->inContentLanguage()->escaped()
-			. '</span>';
-
-		$labelHtml = '<span class="wb-itemlink-label"'
-				. ' lang="' . htmlspecialchars( $labelLang->getHtmlCode() ) . '"'
-				. ' dir="' . htmlspecialchars( $labelLang->getDir() ) . '">'
-			. HtmlArmor::getHtml( $labelText )
-			. '</span>';
-
-		return '<span class="wb-itemlink">'
-			. wfMessage( 'wikibase-itemlink' )->rawParams(
-				$labelHtml,
-				$idHtml
-			)->inContentLanguage()->escaped()
-			. '</span>';
-	}
-
-	/**
-	 * @param Title $title
-	 * @param string[]|null $labelData
-	 * @param string[]|null $descriptionData
-	 *
-	 * @return string The plain, unescaped title="…" attribute for the link.
-	 */
-	private function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
-		/** @var Language $labelLang */
-		/** @var Language $descriptionLang */
-
-		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
-		list( $descriptionText, $descriptionLang ) = $this->extractTextAndLanguage( $descriptionData );
-
-		// Set title attribute for constructed link, and make tricks with the directionality to get it right
-		$titleText = ( $labelText !== '' )
-			? $labelLang->getDirMark() . $labelText
-				. $this->pageLanguage->getDirMark()
-			: $title->getPrefixedText();
-
-		if ( $descriptionText !== '' ) {
-			$descriptionText = $descriptionLang->getDirMark() . $descriptionText
-				. $this->pageLanguage->getDirMark();
-			return wfMessage(
-				'wikibase-itemlink-title',
-				$titleText,
-				$descriptionText
-			)->inContentLanguage()->text();
-		} else {
-			return $titleText; // no description, just display the title then
-		}
 	}
 
 }
