@@ -199,7 +199,8 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
-	 * @return (int|bool)[] Array of entity ID serialization => revision IDs or false if an entity could not be found.
+	 * @return (int|bool)[] Array of entity ID serialization => revision IDs
+	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	public function loadLatestRevisionIds( array $entityIds, $mode ) {
 		if ( $mode === EntityRevisionLookup::LATEST_FROM_MASTER ) {
@@ -219,7 +220,11 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 			$idSerialization = $entityId->getSerialization();
 			if ( $this->cache->has( $idSerialization ) ) {
 				$revisionInformation = $this->cache->get( $idSerialization );
-				$revisionIds[$idSerialization] = $revisionInformation->page_latest;
+				if ( $revisionInformation->page_is_redirect ) {
+					$revisionIds[$idSerialization] = false;
+				} else {
+					$revisionIds[$idSerialization] = $revisionInformation->page_latest;
+				}
 			} else {
 				$unknownEntityIds[] = $entityId;
 			}

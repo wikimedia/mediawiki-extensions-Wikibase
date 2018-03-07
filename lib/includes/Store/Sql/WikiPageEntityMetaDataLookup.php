@@ -133,8 +133,8 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @throws DBQueryError
 	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
 	 *
-	 * @return (int|bool)[] Array mapping entity ID serializations to revision IDs or false if an entity
-	 *  could not be found.
+	 * @return (int|bool)[] Array mapping entity ID serializations to revision IDs
+	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	public function loadLatestRevisionIds( array $entityIds, $mode ) {
 		$revisionIds = [];
@@ -295,15 +295,15 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_REPLICA or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return array Array mapping entity ID serializations to either ints or false if an entity
-	 *  could not be found.
+	 * @return array Array mapping entity ID serializations to either ints
+	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	private function selectLatestRevisionIdsMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
 
 		$res = $db->select(
 			'page',
-			[ 'page_title', 'page_latest' ],
+			[ 'page_title', 'page_latest', 'page_is_redirect' ],
 			$this->getWhere( $entityIds, $db ),
 			__METHOD__
 		);
@@ -314,6 +314,10 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			function ( $revisionInformation ) {
 				if ( !is_object( $revisionInformation ) ) {
 					return $revisionInformation;
+				}
+
+				if ( $revisionInformation->page_is_redirect ) {
+					return false;
 				}
 
 				return $revisionInformation->page_latest;

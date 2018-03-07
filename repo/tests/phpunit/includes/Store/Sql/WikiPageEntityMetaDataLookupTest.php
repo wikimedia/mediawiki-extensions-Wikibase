@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWikiTestCase;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
@@ -37,6 +38,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 */
 	private $data = [];
 
+	/**
+	 * @var EntityId
+	 */
+	private $redirectId;
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -52,6 +58,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			$entity = $this->data[2]->getEntity();
 			$entity->getFingerprint()->setLabel( 'en', 'Updated' );
 			$this->data[2] = $store->saveEntity( $entity, 'WikiPageEntityMetaDataLookupTest', $wgUser );
+
+			$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $wgUser, EDIT_NEW );
+			$this->redirectId = $this->data[3]->getEntity()->getId();
+			$redirect = new EntityRedirect( $this->redirectId, $entity->getId() );
+			$this->data[] = $store->saveRedirect( $redirect, 'WikiPageEntityMetaDataLookupTest', $wgUser );
 		}
 	}
 
@@ -435,6 +446,18 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 		\Wikimedia\restoreWarnings();
+
+		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
+	}
+
+	public function testLoadLatestRevisionIds_noResultForRedirect() {
+		$entityId = $this->redirectId;
+
+		$result = $this->getWikiPageEntityMetaDataLookup()
+			->loadLatestRevisionIds(
+				[ $entityId ],
+				EntityRevisionLookup::LATEST_FROM_REPLICA
+			);
 
 		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
 	}
