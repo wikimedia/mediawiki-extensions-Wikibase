@@ -180,6 +180,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Hooks\\EditFilterHookRunner' => __DIR__ . '/includes/Hooks/EditFilterHookRunner.php',
 	'Wikibase\\Repo\\Hooks\\InfoActionHookHandler' => __DIR__ . '/includes/Hooks/InfoActionHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandlers' => __DIR__ . '/includes/Hooks/LabelPrefetchHookHandlers.php',
+	'Wikibase\\Repo\\Hooks\\LinkFormatter' => __DIR__ . '/includes/Hooks/LinkFormatter.php',
 	'Wikibase\\Repo\\Hooks\\LinkBeginHookHandler' => __DIR__ . '/includes/Hooks/LinkBeginHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler' => __DIR__ . '/includes/Hooks/OutputPageBeforeHTMLHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\OutputPageEntityIdReader' => __DIR__ . '/includes/Hooks/OutputPageEntityIdReader.php',
