@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f423e22_54c78d56",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-07T18:33:05Z",
+      "side": 1,
+      "message": "Since the only value that can appear here is also \"false\", the two if() could be merged.",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 32
+      },
+      "revId": "a6f615e06ec8c45de6dbc8d9b942778fabda8cd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
