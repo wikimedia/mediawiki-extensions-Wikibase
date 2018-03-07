@@ -89,7 +89,7 @@ class EntityDiffChangedAspectsFactory {
 	/**
 	 * @param DiffOp $siteLinkDiffOp
 	 *
-	 * @return array [ string|null $oldPageName, string|null $newPageName, bool $badgesChanged ]
+	 * @return array( string|null $oldPageName, string|null $newPageName, bool $badgesChanged )
 	 */
 	private function getSiteLinkChangePerSite( DiffOp $siteLinkDiffOp ) {
 		if ( !$siteLinkDiffOp instanceof Diff ) {
