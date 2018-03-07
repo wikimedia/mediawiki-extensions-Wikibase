@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34449509_13747c61",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-07T08:26:29Z",
+      "side": 1,
+      "message": "I don\u0027t mind this name here (no abbreviations etc) but it looks the code is actually using the name: allowLocalShortDesc\n\nWhich one you want to go with?",
+      "range": {
+        "startLine": 112,
+        "startChar": 1,
+        "endLine": 112,
+        "endChar": 22
+      },
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
