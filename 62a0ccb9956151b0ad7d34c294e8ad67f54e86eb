@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "14d16bb1_56cd08a9",
+        "filename": "client/tests/phpunit/includes/Api/DescriptionTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-03-07T23:46:04Z",
+      "side": 1,
+      "message": "I think one per method per mocked class is more consistent with all other such cases in this repo.",
+      "parentUuid": "1ecd7106_e7a5bfeb",
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34449509_13747c61",
         "filename": "docs/options.wiki",
         "patchSetId": 6
