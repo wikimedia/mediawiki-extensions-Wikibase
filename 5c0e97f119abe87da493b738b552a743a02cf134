@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "81c1d696_3a71e28e",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-07T20:11:24Z",
+      "side": 1,
+      "message": "\u003e The fact that this API module is now in wikibase raises interesting questions regarding show is actually responsible for it in the long run too.\n\nThat\u0027s a fair question but probably not something to discuss on gerrit; I filed T189154.",
+      "parentUuid": "410474af_28297f31",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b43bea8b_331b621b",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 4
@@ -342,6 +366,30 @@
       "side": 1,
       "message": "addDescriptionsToResult should probably return some value depending on the success of the values being added, and then whatever calls addDescriptionsToResult can deal with adding the continue if needed.",
       "parentUuid": "6875ae6b_4214e556",
+      "range": {
+        "startLine": 177,
+        "startChar": 4,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d000ff85_59708c59",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-07T20:11:24Z",
+      "side": 1,
+      "message": "I guess it could return the number of descriptions added or false if they were all added, and then the caller can set continuation based on that. Seems a bit awkward though.",
+      "parentUuid": "a7f04b72_51a95e3a",
       "range": {
         "startLine": 177,
         "startChar": 4,
