@@ -213,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "c22a8334_8a1680f7",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-07T13:33:32Z",
+      "side": 1,
+      "message": "\u003e the decision was made to add it directly to wikibase to save time in the short run?\n\nthis is also what I understood, and I am fine with putting this to Wikibase as a temporary solution. But this being temporary should be made clear.",
+      "parentUuid": "bd08a3cb_bfeceb89",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b43bea8b_331b621b",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 4
