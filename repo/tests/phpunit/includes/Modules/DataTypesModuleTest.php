@@ -18,9 +18,6 @@ use Wikibase\Repo\Modules\DataTypesModule;
  */
 class DataTypesModuleTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @return array [instance, resource definition]
-	 */
 	public function provideDataTypesModuleAndResourceDefinition() {
 		$dataTypeFactory = new DataTypeFactory( [ 'url' => 'string' ] );
 
@@ -56,9 +53,6 @@ class DataTypesModuleTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( DataTypeFactory::class, $module->getDataTypeFactory() );
 	}
 
-	/**
-	 * @return array [invalid resource definition, case description]
-	 */
 	public function provideInvalidResourceDefinition() {
 		$dataTypeFactory = new DataTypeFactory( [] );
 

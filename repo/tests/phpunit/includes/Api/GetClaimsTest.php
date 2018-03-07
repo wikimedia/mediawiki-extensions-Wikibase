@@ -98,9 +98,6 @@ class GetClaimsTest extends ApiTestCase {
 		];
 	}
 
-	/**
-	 * @return array( $params, $statements, $groupedByProperty )
-	 */
 	public function validRequestProvider() {
 		$entities = $this->getNewEntities();
 
