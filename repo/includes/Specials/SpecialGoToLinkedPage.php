@@ -79,7 +79,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	/**
 	 * @param string|null $subPage
 	 *
-	 * @return array [ string[] $sites, string $itemString ]
+	 * @return array( string[] $sites, string $itemString )
 	 */
 	private function getArguments( $subPage ) {
 		$request = $this->getRequest();
