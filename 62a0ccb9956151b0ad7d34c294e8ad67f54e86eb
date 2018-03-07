@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "3bdb70c3_e250672d",
+        "filename": "client/tests/phpunit/includes/Api/DescriptionTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-07T17:44:16Z",
+      "side": 1,
+      "message": "I might very likely miss something, so let me ask: is it important to list what methods are implemented on the mock, or is having $module-\u003emethod( \u0027xyz\u0027 ) below enough?",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 254,
+        "endChar": 50
+      },
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55b143ed_a21fee53",
+        "filename": "client/tests/phpunit/includes/Api/DescriptionTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-07T17:44:16Z",
+      "side": 1,
+      "message": "just curiosity, not criticising or anything: have you considered having two private methods instead of this one returning a pair of services?",
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34449509_13747c61",
         "filename": "docs/options.wiki",
         "patchSetId": 6
