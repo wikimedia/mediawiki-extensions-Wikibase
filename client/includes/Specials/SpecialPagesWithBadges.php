@@ -177,7 +177,7 @@ class SpecialPagesWithBadges extends QueryPage {
 			'conds' => [
 				'pp_propname' => 'wikibase-badge-' . $this->badgeId->getSerialization()
 			],
-			'options' => [], // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
+			'options' => [], // sorting is determined getOrderFields(), which returns [ 'value' ] per default.
 			'join_conds' => [
 				'page_props' => [ 'JOIN', [ 'page_id = pp_page' ] ]
 			]

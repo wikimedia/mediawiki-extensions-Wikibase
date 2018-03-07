@@ -17,21 +17,21 @@ use Wikibase\DataModel\Statement\StatementFilter;
  * Factory for a StatementGrouper. The grouper is instantiated based on a specification array that
  * has the following form:
  *
- * array(
- *     'item' => array(
+ * [
+ *     'item' => [
  *         'statements' => null,
- *         'example' => array(
+ *         'example' => [
  *             'type' => 'propertySet',
- *             'propertyIds' => array( 'P1' ),
- *         ),
- *         'identifiers' => array(
+ *             'propertyIds' => [ 'P1' ],
+ *         ],
+ *         'identifiers' => [
  *             'type' => 'dataType',
- *             'dataTypes' => array( 'external-id' ),
- *         ),
- *     ),
- *     'property' => array(
- *     ),
- * ),
+ *             'dataTypes' => [ 'external-id' ],
+ *         ],
+ *     ],
+ *     'property' => [
+ *     ],
+ * ],
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

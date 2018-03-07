@@ -34,7 +34,7 @@ class AutoCommentFormatter {
 	 * @param Language $language
 	 * @param string[] $messagePrefixes Prefixes to try when constructing the message key from
 	 *        the name given in the autocomment block. Typically something like
-	 *        array( "wikibase-item", "wikibase-entity" ).
+	 *        [ 'wikibase-item', 'wikibase-entity' ].
 	 */
 	public function __construct( Language $language, array $messagePrefixes ) {
 		$this->language = $language;

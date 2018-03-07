@@ -124,7 +124,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 		$titleFactory = $this->titleFactory;
 		$pageEntityUsages = array_map(
 			function ( array $row ) use ( $titleFactory ) {
-				// $row = array( $siteId, $pageName, $numericItemId );
+				// $row = [ $siteId, $pageName, $numericItemId ];
 				$itemId = ItemId::newFromNumber( $row[2] );
 				$title = $titleFactory->newFromText( $row[1] );
 

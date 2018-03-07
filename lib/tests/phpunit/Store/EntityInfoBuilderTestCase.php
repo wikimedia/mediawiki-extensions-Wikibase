@@ -156,12 +156,12 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * Converts a map of the form $language => $value into a ist of records
-	 * of the form $language => array( 'language' => $language, 'value' => $value ).
+	 * of the form $language => [ 'language' => $language, 'value' => $value ].
 	 *
 	 * @param array $map map if the form $language => $value
 	 * @param string|null $language For the language for all entries. Useful if $map is a list, not an associative array.
 	 *
-	 * @return array map if the form $language => array( 'language' => $language, 'value' => $value )
+	 * @return array map if the form $language => [ 'language' => $language, 'value' => $value ]
 	 */
 	protected function makeLanguageValueRecords( array $map, $language = null ) {
 		$records = [];

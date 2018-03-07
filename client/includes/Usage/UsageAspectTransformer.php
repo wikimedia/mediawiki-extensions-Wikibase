@@ -54,9 +54,9 @@ class UsageAspectTransformer {
 	 * Gets EntityUsage objects for each aspect in $aspects that is relevant according to
 	 * getRelevantAspects( $entityId ).
 	 *
-	 * @example: If was called with setRelevantAspects( $q3, array( 'T', 'L.de', 'L.en' ) ),
-	 * getFilteredUsages( $q3, array( 'S', 'L' ) ) will return EntityUsage( $q3, 'L.de', 'L.en' ),
-	 * while getFilteredUsages( $q3, array( 'X' ) ) will return EntityUsage( $q3, 'T' )
+	 * @example: If was called with setRelevantAspects( $q3, [ 'T', 'L.de', 'L.en' ] ),
+	 * getFilteredUsages( $q3, [ 'S', 'L' ] ) will return EntityUsage( $q3, 'L.de', 'L.en' ),
+	 * while getFilteredUsages( $q3, [ 'X' ] ) will return EntityUsage( $q3, 'T' )
 	 * and EntityUsage( $q3, 'L' ).
 	 *
 	 * @param EntityId $entityId

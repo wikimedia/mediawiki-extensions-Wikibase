@@ -198,10 +198,10 @@ class EditEntityTest extends MediaWikiTestCase {
 	public function provideEditConflict() {
 		/*
 		 * Test Revisions:
-		 * #10: label: array( 'en' => 'foo' );
-		 * #11: label: array( 'en' => 'bar' ); // by other user
-		 * #12: label: array( 'en' => 'bar', 'de' => 'bar' );
-		 * #13: label: array( 'en' => 'test', 'de' => 'bar' ), description: array( 'en' => 'more testing' );
+		 * #10: label: [ 'en' => 'foo' ];
+		 * #11: label: [ 'en' => 'bar' ]; // by other user
+		 * #12: label: [ 'en' => 'bar', 'de' => 'bar' ];
+		 * #13: label: [ 'en' => 'test', 'de' => 'bar' ], description: [ 'en' => 'more testing' ];
 		*/
 
 		return [

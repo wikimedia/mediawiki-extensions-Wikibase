@@ -73,7 +73,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	/**
 	 * @see EntityLookupTest::newEntityLoader()
 	 *
-	 * @return array array( EntityStore, EntityLookup )
+	 * @return array [ EntityStore, EntityLookup ]
 	 */
 	protected function createStoreAndLookup() {
 		// make sure the term index is empty to avoid conflicts.

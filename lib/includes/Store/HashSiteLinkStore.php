@@ -47,9 +47,9 @@ class HashSiteLinkStore implements SiteLinkStore {
 	/**
 	 * @see SiteLinkStore::getLinks
 	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids, Defaults to array()
-	 * @param string[] $siteIds Defaults to array()
-	 * @param string[] $pageNames Defaults to array()
+	 * @param int[] $numericIds Numeric (unprefixed) item ids
+	 * @param string[] $siteIds
+	 * @param string[] $pageNames
 	 *
 	 * @return array[]
 	 */

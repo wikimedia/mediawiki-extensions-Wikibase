@@ -11,7 +11,7 @@ namespace Wikibase\Lib\Store;
 interface PropertyOrderProvider {
 
 	/**
-	 * Get order of properties in the form array( $propertyIdSerialization => $ordinalNumber )
+	 * Get order of properties in the form [ $propertyIdSerialization => $ordinalNumber ]
 	 *
 	 * @return null|int[] An associative array mapping property ID strings to ordinal numbers.
 	 * 	The order of properties is represented by the ordinal numbers associated with them.
