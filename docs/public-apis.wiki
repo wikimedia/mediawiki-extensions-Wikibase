@@ -5,7 +5,7 @@ are run by the CI pre-merge and are integrated in the Wikidata build.
 
 TODO:
 
-Explain how this extension can be used by other Mediawiki exstension,
+Explain how this extension can be used by other Mediawiki extension,
 which type of public APIs there are (HTTP API, Mediawiki hooks, composer
 components, PHP classes, etc) and what stability guarantees are available and
 how these are annotated on the individual parts (e.g. class level docs).
