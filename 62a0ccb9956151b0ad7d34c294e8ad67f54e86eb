@@ -104,6 +104,30 @@
       "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab808958_5a035be1",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-07T20:04:28Z",
+      "side": 1,
+      "message": "Oops, thanks. I updated the name based on earlier review feedback and missed this one.",
+      "parentUuid": "34449509_13747c61",
+      "range": {
+        "startLine": 112,
+        "startChar": 1,
+        "endLine": 112,
+        "endChar": 22
+      },
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
