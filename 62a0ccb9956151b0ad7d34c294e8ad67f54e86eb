@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "64f57300_5d7c77bd",
+        "filename": "client/tests/phpunit/includes/Api/DescriptionTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-07T19:53:37Z",
+      "side": 1,
+      "message": "The getMock() call generates and loads the class file, which is a subclass of Description that overrides methods with PHPUnit\u0027s mock handlers. If a method is not overridden there, I don\u0027t think setting expectations on it has any effect.\n\nThe goal here is to mock all the inherited methods but not the methods of the class under test themselves.",
+      "parentUuid": "3bdb70c3_e250672d",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 254,
+        "endChar": 50
+      },
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55b143ed_a21fee53",
         "filename": "client/tests/phpunit/includes/Api/DescriptionTest.php",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2018-03-07T17:44:16Z",
       "side": 1,
       "message": "just curiosity, not criticising or anything: have you considered having two private methods instead of this one returning a pair of services?",
+      "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ecd7106_e7a5bfeb",
+        "filename": "client/tests/phpunit/includes/Api/DescriptionTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-07T19:53:37Z",
+      "side": 1,
+      "message": "I tried to separate the code into Wikibase-specific mocking, MW-core-specific mocking and API-specific mocking. I can change it into one call per mocked class if you prefer.",
+      "parentUuid": "55b143ed_a21fee53",
       "revId": "62a0ccb9956151b0ad7d34c294e8ad67f54e86eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
