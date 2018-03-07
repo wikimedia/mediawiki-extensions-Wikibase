@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -22,6 +23,7 @@ interface EntityByLinkedTitleLookup {
 	 * @param string $globalSiteId An empty string refers to the local wiki.
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle );

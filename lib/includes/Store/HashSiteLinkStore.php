@@ -2,10 +2,12 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikimedia\Assert\Assert;
 
 /**
  * An array based dummy implementation of a SiteLinkStore for exclusive use in tests.
@@ -32,9 +34,13 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+		Assert::parameterType( 'string', $globalSiteId, '$globalSiteId' );
+		Assert::parameterType( 'string', $pageTitle, '$pageTitle' );
+
 		$key = "$globalSiteId:$pageTitle";
 
 		if ( isset( $this->itemIdsByLink[$key] ) ) {
@@ -207,6 +213,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ) {

@@ -3,12 +3,14 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
+use InvalidArgumentException;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkStore;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
@@ -206,9 +208,13 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+		Assert::parameterType( 'string', $globalSiteId, '$globalSiteId' );
+		Assert::parameterType( 'string', $pageTitle, '$pageTitle' );
+
 		// We store page titles with spaces instead of underscores
 		$pageTitle = str_replace( '_', ' ', $pageTitle );
 
@@ -348,6 +354,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
+	 * @throws InvalidArgumentException if a parameter does not have the expected type
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ) {
