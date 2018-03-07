@@ -64,7 +64,7 @@ interface WikiPageEntityMetaDataAccessor {
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @return (int|bool)[] Array mapping entity ID serializations to either revision IDs
-	 * or false if an entity could not be found.
+	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	public function loadLatestRevisionIds( array $entityIds, $mode );
 

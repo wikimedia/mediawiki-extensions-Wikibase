@@ -244,7 +244,10 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ], $mode )
-			->willReturn( [ $q1->getSerialization() => (object)[ 'page_latest' => 100 ] ] );
+			->willReturn( [ $q1->getSerialization() => (object)[
+				'page_latest' => 100,
+				'page_is_redirect' => false,
+			] ] );
 		$lookup->expects( $this->never() )
 			->method( 'loadLatestRevisionIds' );
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
@@ -263,7 +266,10 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ], $mode )
-			->willReturn( [ $q1->getSerialization() => (object)[ 'page_latest' => 100 ] ] );
+			->willReturn( [ $q1->getSerialization() => (object)[
+				'page_latest' => 100,
+				'page_is_redirect' => false,
+			] ] );
 		$lookup->expects( $this->once() )
 			->method( 'loadLatestRevisionIds' )
 			->with( [ $q2 ], $mode )
@@ -287,8 +293,14 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1, $q3->getSerialization() => $q3 ], $mode )
 			->willReturn( [
-				$q1->getSerialization() => (object)[ 'page_latest' => 100 ],
-				$q3->getSerialization() => (object)[ 'page_latest' => 300 ],
+				$q1->getSerialization() => (object)[
+					'page_latest' => 100,
+					'page_is_redirect' => false,
+				],
+				$q3->getSerialization() => (object)[
+					'page_latest' => 300,
+					'page_is_redirect' => false,
+				],
 			] );
 		$lookup->expects( $this->once() )
 			->method( 'loadLatestRevisionIds' )
@@ -323,7 +335,10 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1 ], $mode )
-			->willReturn( [ $q1->getSerialization() => (object)[ 'page_latest' => 100 ] ] );
+			->willReturn( [ $q1->getSerialization() => (object)[
+				'page_latest' => 100,
+				'page_is_redirect' => false,
+			] ] );
 		$lookup->expects( $this->once() )
 			->method( 'loadLatestRevisionIds' )
 			->with( [ $q1 ], $mode )
@@ -346,8 +361,14 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1, $q2->getSerialization() => $q2 ], $mode )
 			->willReturn( [
-				$q1->getSerialization() => (object)[ 'page_latest' => 100 ],
-				$q2->getSerialization() => (object)[ 'page_latest' => 200 ],
+				$q1->getSerialization() => (object)[
+					'page_latest' => 100,
+					'page_is_redirect' => false,
+				],
+				$q2->getSerialization() => (object)[
+					'page_latest' => 200,
+					'page_is_redirect' => false,
+				],
 			] );
 		$lookup->expects( $this->never() )
 			->method( 'loadLatestRevisionIds' );
@@ -357,6 +378,28 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q2 ], $mode );
 
 		$this->assertSame( [ $q2->getSerialization() => 200 ], $latestRevisionIds );
+	}
+
+	public function testLoadLatestRevisionIds_noResultForRedirect() {
+		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$q1 = new ItemId( 'Q1' );
+
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup->expects( $this->once() )
+			->method( 'loadRevisionInformation' )
+			->with( [ $q1->getSerialization() => $q1 ], $mode )
+			->willReturn( [ $q1->getSerialization() => (object)[
+				'page_latest' => 100,
+				'page_is_redirect' => true,
+			] ] );
+		$lookup->expects( $this->never() )
+			->method( 'loadLatestRevisionIds' );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+
+		$accessor->prefetch( [ $q1 ] );
+		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1 ], $mode );
+
+		$this->assertSame( [ $q1->getSerialization() => false ], $latestRevisionIds );
 	}
 
 	/**
