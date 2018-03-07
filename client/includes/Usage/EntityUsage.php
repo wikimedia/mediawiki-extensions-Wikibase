@@ -166,7 +166,7 @@ class EntityUsage {
 	}
 
 	/**
-	 * @return array array( 'entityId' => $entityId, 'aspect' => $aspect, 'modifier' => $modifier )
+	 * @return array( 'entityId' => string $entityId, 'aspect' => string $aspect, 'modifier' => string|null $modifier )
 	 */
 	public function asArray() {
 		return [

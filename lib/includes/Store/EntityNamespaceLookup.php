@@ -30,7 +30,7 @@ class EntityNamespaceLookup {
 	 *
 	 * @deprecated since 0.5, use self::getEntityType instead
 	 *
-	 * @return array [ entity type (string) -> namespace id (integer) ]
+	 * @return int[] Array mapping entity type strings to namespace IDs
 	 */
 	public function getEntityNamespaces() {
 		return $this->entityNamespaces;
