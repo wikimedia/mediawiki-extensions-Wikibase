@@ -189,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "bd08a3cb_bfeceb89",
+        "filename": "client/includes/Api/Description.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-03-07T13:28:15Z",
+      "side": 1,
+      "message": "I see in the latest PS this comment has been removed.\n\nPerhaps don\u0027t add it as a @fixme or @todo but state that this api module would make sense as an extensions seperate to wikibase, but the decision was made to add it directly to wikibase to save time in the short run?",
+      "parentUuid": "410474af_28297f31",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 59
+      },
+      "revId": "5c0e97f119abe87da493b738b552a743a02cf134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b43bea8b_331b621b",
         "filename": "client/includes/Api/Description.php",
         "patchSetId": 4
