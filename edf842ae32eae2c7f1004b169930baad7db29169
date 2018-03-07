@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbde2fc1_7372f1ed",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 0,
+      "message": "Shouldn’t either this test or the next one be kept?",
+      "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9afc3ee8_221dbff0",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 0,
+      "message": "Shouldn’t this test be kept?",
+      "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

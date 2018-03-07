@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "214fd4cd_f6b264fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "term_entity_id",
+      "range": {
+        "startLine": 7,
+        "startChar": 37,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34929448_e97b40d0",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "Could be merged into the two lines above now. ( $entityIdentifiers \u003d [ \u0027term_full_entity_id\u0027 \u003d\u003e $entityId-\u003egetSerialization() ] etc. )",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb47018_244de374",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "optional: trailing comma?",
+      "range": {
+        "startLine": 431,
+        "startChar": 55,
+        "endLine": 431,
+        "endChar": 57
+      },
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d42d0fd1_fdad880c",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "Why were so many tests here removed? It looks like many of them should be kept, perhaps with minor updates (e. g. write term_full_entity_id in saveFakeForeignItemTerm).",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c3bc919_85e24c74",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "obsolete?",
+      "range": {
+        "startLine": 477,
+        "startChar": 42,
+        "endLine": 477,
+        "endChar": 70
+      },
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1ea1f76_3562ab41",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "could be merged into above array now",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b90aefa_253f01a9",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/TermSqlIndexBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-07T11:58:27Z",
+      "side": 1,
+      "message": "Shouldn’t all these rebuild tests be removed now? If we’re no longer clearing the column as part of the test, isn’t it a no-op anyways?",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
