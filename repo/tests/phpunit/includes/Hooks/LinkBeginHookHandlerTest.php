@@ -17,6 +17,7 @@ use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\LinkBeginHookHandler;
+use Wikibase\Repo\Hooks\ItemLinkFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
@@ -435,9 +436,9 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$languageFallback,
-			Language::factory( 'en' ),
 			MediaWikiServices::getInstance()->getLinkRenderer(),
-			$this->getInterwikiLookup()
+			$this->getInterwikiLookup(),
+			new ItemLinkFormatter( $this->getEntityIdLookup(), Language::factory( 'en' ) )
 		);
 	}
 
