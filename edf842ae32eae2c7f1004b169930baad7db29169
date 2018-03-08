@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "631fad55_e3816ca6",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-08T13:27:01Z",
+      "side": 0,
+      "message": "It\u0027s duplicated from the parent class. See testSaveTermsOfEntity.",
+      "parentUuid": "bbde2fc1_7372f1ed",
+      "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9afc3ee8_221dbff0",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-03-07T11:58:27Z",
       "side": 0,
       "message": "Shouldn’t this test be kept?",
+      "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4480b3b_96b5d45f",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-08T13:27:01Z",
+      "side": 0,
+      "message": "This is duplicated from the parent test class: TermIndexTestCase",
+      "parentUuid": "9afc3ee8_221dbff0",
       "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
