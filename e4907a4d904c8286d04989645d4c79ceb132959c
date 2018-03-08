@@ -91,6 +91,30 @@
       "revId": "e4907a4d904c8286d04989645d4c79ceb132959c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2dd2c979_76b9b287",
+        "filename": "repo/includes/Hooks/LinkFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-08T17:53:22Z",
+      "side": 1,
+      "message": "That\u0027s how the function was before. I can change it of course.",
+      "parentUuid": "6e4639cc_d8c7ff3b",
+      "range": {
+        "startLine": 60,
+        "startChar": 11,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "e4907a4d904c8286d04989645d4c79ceb132959c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
