@@ -19,14 +19,21 @@ class ParserFunctionRegistrant {
 	private $allowDataTransclusion;
 
 	/**
+	 * @var bool Setting to enable local override of descriptions.
+	 */
+	private $allowLocalShortDesc;
+
+	/**
 	 * @param bool $allowDataTransclusion
 	 */
-	public function __construct( $allowDataTransclusion ) {
+	public function __construct( $allowDataTransclusion, $allowLocalShortDesc ) {
 		$this->allowDataTransclusion = $allowDataTransclusion;
+		$this->allowLocalShortDesc = $allowLocalShortDesc;
 	}
 
 	public function register( Parser $parser ) {
 		$this->registerNoLangLinkHandler( $parser );
+		$this->registerShortDescHandler( $parser );
 		$this->registerParserFunctions( $parser );
 	}
 
@@ -36,6 +43,16 @@ class ParserFunctionRegistrant {
 			[ NoLangLinkHandler::class, 'handle' ],
 			Parser::SFH_NO_HASH
 		);
+	}
+
+	private function registerShortDescHandler( Parser $parser ) {
+		if ( $this->allowLocalShortDesc ) {
+			$parser->setFunctionHook(
+				'shortdesc',
+				[ ShortDescHandler::class, 'handle' ],
+				Parser::SFH_NO_HASH
+			);
+		}
 	}
 
 	private function registerParserFunctions( Parser $parser ) {
