@@ -5,13 +5,14 @@ namespace Wikibase;
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
 use Maintenance;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Sparql\SparqlClient;
 use Title;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Rdf\Values\QuantityRdfBuilder;
-use Wikibase\Repo\Maintenance\SPARQLClient;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\Purtle\RdfWriterFactory;
@@ -19,7 +20,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
 $basePath =
 	getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
-require_once __DIR__ . '/SPARQLClient.php';
 
 /**
  * Generate dump-like RDF for newly added units without running full dump.
@@ -50,7 +50,7 @@ class AddUnitConversions extends Maintenance {
 	protected $unitConverter;
 
 	/**
-	 * @var SPARQLClient
+	 * @var SparqlClient
 	 */
 	protected $client;
 
@@ -142,7 +142,9 @@ class AddUnitConversions extends Maintenance {
 
 		$baseUri = $this->getOption( 'base-uri',
 				$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ) );
-		$this->client = new SPARQLClient( $endPoint, $baseUri );
+
+		$this->client = new SPARQLClient( $endPoint, MediaWikiServices::getInstance()->getHttpRequestFactory() );
+		$this->client->appendUserAgent( __CLASS__ );
 		$format = $this->getOption( 'format', 'ttl' );
 		$this->initializeWriter( $baseUri, $format );
 		$this->unitConverter = new UnitConverter( new JsonUnitStorage( $newJsonName ), $baseUri );
