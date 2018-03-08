@@ -22,6 +22,30 @@
       "revId": "40f6fd7a53c376c674b94793150bced4db1fdd18",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "509e0240_81325525",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-08T13:29:48Z",
+      "side": 1,
+      "message": "I didn\u0027t find the word \"lame\" inappropriate (especially when referring to the code I wrote myself), otherwise I wouldn\u0027t have used it.\nNonetheless, thanks for notice. I see it might be problematic.\n\nThis text is going to appear publicly with my name next to it, so I of course stand behind it, and I am ready to apologize if someone feels offended.",
+      "parentUuid": "5e9eb6bf_dd19a431",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "40f6fd7a53c376c674b94793150bced4db1fdd18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
