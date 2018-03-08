@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "030ffd38_6b921f56",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T16:49:01Z",
+      "side": 1,
+      "message": "Okay, now I see it. Thank you!\n\nIMHO it would be a good idea to mention this in the commit message – just something short like “all the tests removed here are either no longer required or copies of a similar test function which is still kept” perhaps?",
+      "parentUuid": "8c304af5_4f3f62c4",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c3bc919_85e24c74",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
