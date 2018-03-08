@@ -380,13 +380,13 @@ abstract class TermIndexTestCase extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'abc' );
 		$item->setLabel( 'de', 'def' );
 		$item->setLabel( 'nl', 'ghi' );
-		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
+		$item->setDescription( 'en', 'testSaveTermsForEntity' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
 		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
 
 		$this->assertTermExists( $lookup,
-			'testDeleteTermsForEntity',
+			'testSaveTermsForEntity',
 			TermIndexEntry::TYPE_DESCRIPTION,
 			'en',
 			Item::ENTITY_TYPE
@@ -411,7 +411,7 @@ abstract class TermIndexTestCase extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
 
 		$this->assertTermExists( $lookup,
-			'testDeleteTermsForEntity',
+			'testSaveTermsForEntity',
 			TermIndexEntry::TYPE_DESCRIPTION,
 			'en',
 			Item::ENTITY_TYPE
@@ -437,7 +437,7 @@ abstract class TermIndexTestCase extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
 
 		$this->assertTermExists( $lookup,
-			'testDeleteTermsForEntity',
+			'testSaveTermsForEntity',
 			TermIndexEntry::TYPE_DESCRIPTION,
 			'en',
 			Item::ENTITY_TYPE
