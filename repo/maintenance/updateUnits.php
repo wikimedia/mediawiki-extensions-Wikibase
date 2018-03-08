@@ -5,13 +5,13 @@ namespace Wikibase;
 use DataValues\DecimalMath;
 use DataValues\DecimalValue;
 use Maintenance;
-use Wikibase\Repo\Maintenance\SPARQLClient;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Sparql\SparqlClient;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath =
 	getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
-require_once __DIR__ . '/SPARQLClient.php';
 
 /**
  * Update the conversion table for units.
@@ -42,7 +42,7 @@ class UpdateUnits extends Maintenance {
 	private $baseLen;
 
 	/**
-	 * @var SPARQLClient
+	 * @var SparqlClient
 	 */
 	private $client;
 
@@ -80,7 +80,8 @@ class UpdateUnits extends Maintenance {
 		}
 		$this->setBaseUri( $this->getOption( 'base-uri',
 			$repo->getSettings()->getSetting( 'conceptBaseUri' ) ) );
-		$this->client = new SPARQLClient( $endPoint, $this->baseUri );
+		$this->client = new SparqlClient( $endPoint, MediaWikiServices::getInstance()->getHttpRequestFactory() );
+		$this->client->appendUserAgent( __CLASS__ );
 
 		$unitClass = $this->getOption( 'unit-class' );
 		if ( $unitClass ) {
@@ -302,9 +303,25 @@ SELECT ?unit (COUNT(DISTINCT ?v) as ?c) WHERE {
   ORDER BY DESC(?c)
   LIMIT 200
 UQUERY;
-		$unitUsage = $this->client->getIDs( $usageQuery, 'unit' );
+		$unitUsage = $this->getIDs( $usageQuery, 'unit' );
 		$unitUsage = array_flip( $unitUsage );
 		return $unitUsage;
+	}
+
+	/**
+	 * Get list of IDs from SPARQL.
+	 * @param string $sparql Query
+	 * @param string $item Variable name where IDs are stored
+	 * @return string[] List of entity ID strings
+	 */
+	private function getIDs( $sparql, $item ) {
+		$data = $this->client->query( $sparql );
+		if ( $data ) {
+			return array_map( function ( $row ) use ( $item ) {
+				return str_replace( $this->baseUri, '', $row[$item] );
+			}, $data );
+		}
+		return [];
 	}
 
 	/**
@@ -330,7 +347,7 @@ QUERY;
 		$baseUnits = [];
 		// arrange better lookup
 		foreach ( $baseUnitsData as $base ) {
-			$item = substr( $base['unit'], strlen( $this->baseUri ) );
+			$item = substr( $base['unit'], $this->baseLen );
 			$baseUnits[$item] = $base;
 		}
 		return $baseUnits;

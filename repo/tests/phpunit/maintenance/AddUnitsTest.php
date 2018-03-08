@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
+use MediaWiki\Sparql\SparqlClient;
 use MediaWikiLangTestCase;
 use Wikibase\Lib\Units\UnitConverter;
-use Wikibase\Repo\Maintenance\SPARQLClient;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 
@@ -25,7 +25,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 	 */
 	private $script;
 	/**
-	 * @var SPARQLClient
+	 * @var SparqlClient
 	 */
 	private $client;
 	/**
@@ -41,7 +41,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 		parent::setUp();
 		$this->script = new MockAddUnits();
 		$this->client =
-			$this->getMockBuilder( SPARQLClient::class )->disableOriginalConstructor()->getMock();
+			$this->getMockBuilder( SparqlClient::class )->disableOriginalConstructor()->getMock();
 		$this->script->setClient( $this->client );
 		$this->script->initializeWriter( 'http://acme.test/', 'nt' );
 		$this->uc =
