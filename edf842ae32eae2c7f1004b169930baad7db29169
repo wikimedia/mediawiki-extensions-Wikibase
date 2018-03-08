@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9963c4cb_fefc8c41",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T14:32:14Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "631fad55_e3816ca6",
+      "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9afc3ee8_221dbff0",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
@@ -69,6 +87,24 @@
       "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6abbccd_11542705",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T14:32:14Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "e4480b3b_96b5d45f",
+      "revId": "edf842ae32eae2c7f1004b169930baad7db29169",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

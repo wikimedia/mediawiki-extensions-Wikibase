@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "a4e402cc_ea918a4a",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T14:32:14Z",
+      "side": 1,
+      "message": "Okay, I see how that’s the case for the tests near the end of this file – but I can’t find repository-related tests in EntityInfoBuilderTestCase, so I still don’t see why the first there tests are removed :/",
+      "parentUuid": "feb17c3a_36546ed5",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c3bc919_85e24c74",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
