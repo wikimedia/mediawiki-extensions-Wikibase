@@ -8,8 +8,14 @@
 			"BukhariSaeed"
 		]
 	},
+	"wikibase-client-desc": "ویکی بیس نامی توسیع کا کلائنٹ",
 	"tooltip-t-wikibase": "متعلقہ ڈیٹا سے منسلک کریں",
 	"wikibase-after-page-delete": "[$1 {{WBREPONAME}} سے منسلک آئٹم] سے اس صفحہ کا ربط حذف ہونا ضروری ہے۔ ہماری درخواست ہے کہ آپ اسے ایک مرتبہ جانچ لیں۔",
+	"wikibase-comment-add": "{{WBREPONAME}} آئٹم بنا دیا گیا۔",
+	"wikibase-comment-remove": "{{WBREPONAME}} کا منسلکہ آئٹم حذف کر دیا گیا اور زبانوں کے روابط بھی ہٹا دیے گئے۔",
+	"wikibase-comment-linked": "{{WBREPONAME}} آئٹم اس صفحہ سے مربوط ہو گیا۔",
+	"wikibase-comment-unlink": "{{WBREPONAME}} آئٹم کو اس صفحے سے غیر مربوط کر دیا گیا اور زبانوں کے روابط بھی ہٹا دیے گئے۔",
+	"wikibase-comment-restore": "{{WBREPONAME}} کا منسلکہ آئٹم اور زبانوں کے روابط بحال کر دیے گئے۔",
 	"wikibase-comment-update": "{{WBREPONAME}} کا آئٹم تبدیل کیا گیا",
 	"wikibase-comment-sitelink-add": "زبان کا ربط شامل کر دیا گيا: $1",
 	"wikibase-comment-sitelink-change": "زبان کا ربط $1 سے $2 کی طرف بدل دیا گيا",
@@ -20,6 +26,7 @@
 	"wikibase-editlinkstitle": "بین اللسانی روابط میں ترمیم کریں",
 	"wikibase-addlinkstitle": "بین الویکی ربط شامل کریں",
 	"wikibase-linkitem-addlinks": "روابط شامل کریں",
+	"wikibase-linkitem-alreadylinked": "آپ جس صفحہ کو مربوط کرنا چاہ رہے ہیں وہ پہلے سے ڈیٹا کے مرکزی مخزن میں [$1 آئٹم] سے مربوط ہے جو اس سائٹ کے صفحہ $2 سے جڑا ہوا ہے۔ آئٹم بیک وقت ایک ہی صفحہ سے مربوط ہو سکتے ہیں، چنانچہ آپ کسی اور صفحہ کا انتخاب کریں۔",
 	"wikibase-linkitem-close": "بند کر کے صفحہ تازہ کریں",
 	"wikibase-linkitem-failure": "دیئے گئے صفحہ سے منسلک کرنے کی کوشش کے دوران ایک نامعلوم خامی پیش آگئی۔",
 	"wikibase-linkitem-title": "صفحہ سے مربوط کریں",
@@ -60,10 +67,15 @@
 	"wikibase-pageinfo-entity-usage": "اس صفحہ میں مستعمل {{WBREPONAME}} کے موجودات",
 	"wikibase-pageinfo-entity-usage-S": "سائٹ کا ربط",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "نشان: $1",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "وضاحت: $1",
 	"wikibase-pageinfo-entity-usage-T": "عنوان",
+	"wikibase-pageinfo-entity-usage-C": "کچھ بیانات",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "بیان: $1",
 	"wikibase-pageinfo-entity-usage-X": "موجود کی جملہ معلومات",
 	"wikibase-pageinfo-entity-usage-O": "دیگر (بیانات)",
 	"wikibase-otherprojects": "دیگر منصوبوں میں",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} سے {{PLURAL:$1|رابطہ|رابطے}}",
-	"notification-link-text-view-item": "آئٹم {{GENDER:$1|دیکھیں}}"
+	"notification-link-text-view-item": "آئٹم {{GENDER:$1|دیکھیں}}",
+	"connected-redirect-category": "{{WBREPONAME}} آئٹم سے مربوط رجوع مکررات",
+	"connected-redirect-category-desc": "اس زمرے میں ان رجوع مکررات کی فہرست ہے جو {{WBREPONAME}} کے کسی آئٹم سے مربوط ہیں۔"
 }

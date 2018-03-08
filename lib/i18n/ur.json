@@ -59,7 +59,7 @@
 	"wikibase-entity-summary-wbsetqualifier-update": "نے {{PLURAL:$1|کوالیفائر تبدیل کیا|کوالیفائر تبدیل کیے}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "نے {{PLURAL:$1|کوالیفائر حذف کیا|کوالیفائر حذف کیے}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "نے دعوے سے {{PLURAL:$1|حوالہ حذف کیا|حوالے حذف کیے}}",
-	"wikibase-entity-summary-wbmergeitems-from": "$3 سے ضم کردہ آئٹم",
+	"wikibase-entity-summary-wbmergeitems-from": "نے $3 کو اس آئٹم میں ضم کیا",
 	"wikibase-entity-summary-wbmergeitems-to": "$3 میں ضم کردہ آئٹم",
 	"wikibase-item-summary-wbcreate-new": "نے نیا آئٹم بنایا",
 	"wikibase-item-summary-wbeditentity": "نے نیا آئٹم بنایا",

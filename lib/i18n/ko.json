@@ -10,7 +10,8 @@
 			"Revi",
 			"Hwangjy9",
 			"Ykhwong",
-			"Nuevo Paso"
+			"Nuevo Paso",
+			"Garam"
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
@@ -124,7 +125,7 @@
 	"wikibase-entity-summary-wbsetaliases-add": "[$2] {{PLURAL:$1|다른 이름}} 항목을 추가함",
 	"wikibase-entity-summary-wbsetaliases-remove": "[$2] {{PLURAL:$1|다른 이름}} 항목을 제거함",
 	"wikibase-entity-summary-wbsetaliases-update": "[$2] {{PLURAL:$1|다른 이름}}을 업데이트함",
-	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "[$2] 레이블과 설명과 다른 이름 변경",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "[$2] 레이블과 설명 및 다른 이름을 변경",
 	"wikibase-entity-summary-wbsetsitelink-add": "[$2]에 링크를 추가함",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "[$2]에 배지로 추가된 링크",
 	"wikibase-entity-summary-wbsetsitelink-set": "[$2](으)로 링크를 바꿈",
@@ -152,7 +153,7 @@
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|한정어}}를 바꿈",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|한정어}}를 제거함",
 	"wikibase-entity-summary-wbremovereferences-remove": "주장에서 {{PLURAL:$3|각주}}를 제거함",
-	"wikibase-entity-summary-wbmergeitems-from": "$3에서 이쪽으로 항목 병합됨",
+	"wikibase-entity-summary-wbmergeitems-from": "$3에서부터 항목이 병합됨",
 	"wikibase-entity-summary-wbmergeitems-to": "'$3' 안으로 항목이 병합됨",
 	"wikibase-item-summary-wbcreate-new": "새 항목을 만듦",
 	"wikibase-item-summary-wbeditentity": "새 항목을 만듦",

@@ -15,7 +15,8 @@
 			"Ykhwong",
 			"Jerrykim306",
 			"Ellif",
-			"Nuevo Paso"
+			"Nuevo Paso",
+			"Garam"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -119,7 +120,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "이후 편집에 이 약관에 동의합니다. 이 메시지를 다시 보이지 마세요.",
 	"wikibase-entityselector-more": "더 보기",
 	"wikibase-entityselector-notfound": "일치하는 항목이 없습니다",
-	"wikibase-anonymouseditwarning": "경고: 로그인하고 있지 않습니다.\nIP 주소가 이 개체의 편집 역사에 남게 됩니다.",
+	"wikibase-anonymouseditwarning": "경고: 로그인이 되어있지 않습니다.\nIP 주소가 문서의 역사에 남게 됩니다.",
 	"wikibase-move-error": "데이터 이름공간에 있는 문서를 이동할 수 없으며 그것으로 문서를 이동할 수 없습니다.",
 	"wikibase-validator-sitelink-conflict": "사이트링크 $1은 이미 항목 $2가 사용하고 있습니다.",
 	"wikibase-validator-label-conflict": "속성($3)은 이미 $2 언어 코드와 관련된 \"$1\" 레이블이 있습니다.",
@@ -302,7 +303,7 @@
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]]님의 $3 판으로 복구함",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|$4]] ([[User talk:$4|토론]])의 $3판 편집을 되돌림",
 	"wikibase-no-direct-editing": "$1 이름공간에서 직접 편집은 비활성화되어 있습니다.",
-	"wikibase-noentity": "이 객체는 존재하지 않습니다. 이 객체가 어떻게 되었는지 [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색할 수] 있습니다.",
+	"wikibase-noentity": "이 객체는 존재하지 않습니다. 이 객체의 행방은 [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색]하여 찾을 수 있습니다.",
 	"wikibase-noentity-createone": "또한 [[$1|새 항목을 만들 수 있습니다]].",
 	"wikibase-special-mergeitems-error-prefix": "항목을 병합할 수 없습니다. 다음 오류가 발생했습니다:",
 	"wikibase-listdatatypes-wikibase-item-head": "항목",
