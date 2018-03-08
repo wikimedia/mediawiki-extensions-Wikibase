@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0656e819_de54122b",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T16:52:26Z",
+      "side": 1,
+      "message": "looks like this should be an “is” (but doesn’t have to be fixed in this change)",
+      "range": {
+        "startLine": 281,
+        "startChar": 12,
+        "endLine": 281,
+        "endChar": 14
+      },
+      "revId": "ae92eeb86d952c5bdd26a927aaab537c0184d7a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88026fc5_66ad9605",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T16:52:26Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 380,
+        "startChar": 22,
+        "endLine": 380,
+        "endChar": 24
+      },
+      "revId": "ae92eeb86d952c5bdd26a927aaab537c0184d7a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
