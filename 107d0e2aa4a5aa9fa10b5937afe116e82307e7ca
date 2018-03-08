@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "8c304af5_4f3f62c4",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-08T16:27:57Z",
+      "side": 1,
+      "message": "You are right, they are not in parent test class but I checked and all of them are duplicated here, one with fullEntityId suffix. For example search for testEntityIdsArePrefixedWithRepositoryName in here.",
+      "parentUuid": "a4e402cc_ea918a4a",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c3bc919_85e24c74",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
