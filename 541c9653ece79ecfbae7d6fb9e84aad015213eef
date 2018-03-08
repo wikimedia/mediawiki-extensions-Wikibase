@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8918f611_6695f10d",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-08T18:12:17Z",
+      "side": 1,
+      "message": "As I said, I did not intend to change it, probably happened by accident. I restored the formatting in the following patch.",
+      "parentUuid": "459b7138_bf7ce893",
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dead9802_a92e1ea6",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 62
@@ -407,6 +425,30 @@
       "side": 1,
       "message": "If it\u0027s just one small function that\u0027s not worth extracting to a separate class, you can copy-paste it. Except for a little duplication there is barely an issue with this. Making previously private functions globally (!) available is a no-go, as it is one of the fastest steps towards the famous Ball of Mud.",
       "parentUuid": "2e9b18af_2cf142d9",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2255cfd6_5713efe3",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-08T18:12:17Z",
+      "side": 1,
+      "message": "i don\u0027t want to copy-paste this function, it is against every code reuse principle as it is exactly the same function doing exactly the same thing. if you have better place for it, please propose.",
+      "parentUuid": "52899c69_58c4a8e2",
       "range": {
         "startLine": 137,
         "startChar": 1,
