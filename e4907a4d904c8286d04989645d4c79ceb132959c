@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb2db02d_962aba8a",
+        "filename": "repo/includes/Hooks/LinkFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-08T13:05:31Z",
+      "side": 1,
+      "message": "Please remove this.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "e4907a4d904c8286d04989645d4c79ceb132959c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19fd0782_b4bbc6a4",
+        "filename": "repo/includes/Hooks/LinkFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-08T13:05:31Z",
+      "side": 1,
+      "message": "I find this class name way to generic. The code below mentions \"itemlink\" multiple times. This is a strong hint that this class name should be something like \"ItemLinkFormatter\".",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "e4907a4d904c8286d04989645d4c79ceb132959c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da43be01_7c13f2b4",
+        "filename": "repo/includes/Hooks/LinkFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-08T13:05:31Z",
+      "side": 1,
+      "message": "What this little helper method here does looks like it does not need to sit in this class here. Even if this is used a few times in different situations, it might be worth inlining this small code snippet everywhere. The benefit is that this class here does not need an EntityIdLookup. One dependency gone.\n\nThis is refactoring that can be done any time, and should not be a reason to block this patch.\n\nHowever, it appears this method is not used, at least not in this patch. So why introduce it?",
+      "range": {
+        "startLine": 41,
+        "startChar": 17,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "e4907a4d904c8286d04989645d4c79ceb132959c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e4639cc_d8c7ff3b",
+        "filename": "repo/includes/Hooks/LinkFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-08T13:05:31Z",
+      "side": 1,
+      "message": "Why isn\u0027t this an EntityId object? The caller I see can easily pass an EntityId. Can you please change this?",
+      "range": {
+        "startLine": 60,
+        "startChar": 11,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "e4907a4d904c8286d04989645d4c79ceb132959c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
