@@ -182,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "0f67fe02_add7d5c4",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-08T13:30:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1ea1f76_3562ab41",
+      "revId": "107d0e2aa4a5aa9fa10b5937afe116e82307e7ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b90aefa_253f01a9",
         "filename": "repo/tests/phpunit/includes/Store/Sql/TermSqlIndexBuilderTest.php",
         "patchSetId": 2
