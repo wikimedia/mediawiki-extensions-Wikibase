@@ -135,7 +135,7 @@ class SpecialUnconnectedPages extends QueryPage {
 				'page_num_iwlinks' => '0',
 			],
 			'conds' => $conds,
-			// Sorting is determined getOrderFields(), which returns array( 'value' ) per default.
+			// Sorting is determined getOrderFields(), which returns [ 'value' ] per default.
 			'options' => [],
 			'join_conds' => [
 				// TODO Also get explicit_langlink_count from page_props once that is populated.

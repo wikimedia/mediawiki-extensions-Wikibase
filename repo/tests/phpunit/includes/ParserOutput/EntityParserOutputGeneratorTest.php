@@ -118,7 +118,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		// TODO would be nice to test this, but ReferencedEntitiesDataUpdater uses LinkBatch which uses the database
 //		$this->assertEquals(
-//			array( 'item:Q42', 'item:Q35' ),
+//			[ 'item:Q42', 'item:Q35' ],
 //			array_keys( $parserOutput->getLinks()[NS_MAIN] ),
 //			'badges'
 //		);

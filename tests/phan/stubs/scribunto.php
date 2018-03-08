@@ -15,7 +15,7 @@ class Scribunto_LuaEngine {
 	 *
 	 * @return array Lua package
 	 */
-	public function registerInterface( $moduleFileName, $interfaceFuncs, $setupOptions = array() ) {
+	public function registerInterface( $moduleFileName, $interfaceFuncs, $setupOptions = [] ) {
 	}
 
 }

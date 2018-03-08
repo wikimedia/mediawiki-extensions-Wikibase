@@ -35,7 +35,7 @@ return call_user_func( function() {
 		'propagateChangesToRepo' => true,
 		'propertyOrderUrl' => null,
 		// List of additional CSS class names for site links that have badges,
-		// e.g. array( 'Q101' => 'badge-goodarticle' )
+		// e.g. [ 'Q101' => 'badge-goodarticle' ]
 		'badgeClassNames' => [],
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,

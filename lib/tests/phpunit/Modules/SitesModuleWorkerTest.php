@@ -157,14 +157,14 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 						$this->newSitesModuleWorker(),
 						$this->newSitesModuleWorker(),
 					// Should ignore non-MW-sites
-					// $this->newSitesModuleWorker( array( $nonMwSite ) ),
+					// $this->newSitesModuleWorker( [ $nonMwSite ] ),
 					],
 					'single site' => [
 						$this->newSitesModuleWorker( [ $site ] ),
 						$this->newSitesModuleWorker( [ $site ] ),
 					// Should ignore non-MW-sites
-					// $this->newSitesModuleWorker( array( $site, $nonMwSite ) ),
-					// $this->newSitesModuleWorker( array( $nonMwSite, $site ) )
+					// $this->newSitesModuleWorker( [ $site, $nonMwSite ] ),
+					// $this->newSitesModuleWorker( [ $nonMwSite, $site ] )
 					],
 					'single site with configured group' => [
 						$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] ),

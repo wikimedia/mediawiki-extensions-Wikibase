@@ -252,7 +252,7 @@ class ChangesSubscriptionTableBuilder {
 
 	/**
 	 * Returns a list of rows for insertion, using Database's multi-row insert mechanism.
-	 * Each row is represented as array( $itemId, $subscriber ).
+	 * Each row is represented as [ $itemId, $subscriber ].
 	 *
 	 * @param string $itemId
 	 * @param string[] $subscribers

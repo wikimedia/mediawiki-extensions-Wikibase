@@ -109,15 +109,15 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 //		$dupeAliasFingerprint = new Fingerprint(
-//			new TermList( array( new Term( 'de', 'good' ) ) ),
+//			new TermList( [ new Term( 'de', 'good' ) ] ),
 //			new TermList(),
-//			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' ) ) ) )
+//			new AliasGroupList( [ new AliasGroup( 'de', [ 'DUPE' ] ) ] )
 //		);
 
 		return [
 			'conflicting label' => [ $dupeLabelFingerprint, 'label-conflict' ],
 			// insert again when T104393 is resolved
-			// 'conflicting alias' => array( $dupeAliasFingerprint, 'label-conflict' ),
+			// 'conflicting alias' => [ $dupeAliasFingerprint, 'label-conflict' ],
 		];
 	}
 

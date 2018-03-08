@@ -69,7 +69,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param array[] &$notifications An array to receive any notifications,
-	 *                each having the form array( $siteID, $changes ).
+	 *                each having the form [ $siteID, $changes ].
 	 *
 	 * @return ChangeNotificationSender
 	 */

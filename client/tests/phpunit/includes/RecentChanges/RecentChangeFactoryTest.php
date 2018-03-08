@@ -247,7 +247,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				$preparedAttr
 			],
 
-			// 'composite change' => array(),
+			// 'composite change' => [],
 		];
 	}
 
