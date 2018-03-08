@@ -46,6 +46,30 @@
       "revId": "40f6fd7a53c376c674b94793150bced4db1fdd18",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21de0085_61e3ae1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-08T13:40:28Z",
+      "side": 1,
+      "message": "My point is that you are not only speaking for yourself, but also for your company.",
+      "parentUuid": "509e0240_81325525",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "40f6fd7a53c376c674b94793150bced4db1fdd18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
