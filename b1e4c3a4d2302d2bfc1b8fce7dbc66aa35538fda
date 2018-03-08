@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4b71698_6fd16b35",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-08T10:56:38Z",
+      "side": 1,
+      "message": "`string[] entity ID serializations` would be clearer (to clarify that this doesn’t return EntityId objects)",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 17
+      },
+      "revId": "b1e4c3a4d2302d2bfc1b8fce7dbc66aa35538fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
