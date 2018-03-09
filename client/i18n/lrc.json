@@ -2,18 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Bonevarluri",
-			"Mogoeilor"
+			"Mogoeilor",
+			"Beyronvan"
 		]
 	},
-	"tooltip-t-wikibase": "هوم پیۋندیا د اٛمایٱ جا رسینٱ یا",
+	"tooltip-t-wikibase": "هوم پیڤندیا د اٛمایٱ جا رسینٱ یا",
 	"wikibase-comment-update": "{{WBREPONAME}} قلم آلشت بی",
 	"wikibase-comment-sitelink-add": "هوم پیوند زون اضاف بیه:$1",
 	"wikibase-comment-sitelink-change": "هوم پیوند زون د $1 تا $2 آلشت بی",
 	"wikibase-comment-sitelink-remove": "هوم پیوند زون ورداشته بیه:$1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|آلشت|آلشتیا}}",
 	"wikibase-dataitem": "{{WBREPONAME}} قلم",
-	"wikibase-editlinks": "ۋیرایشت هوم پیۋندیا",
-	"wikibase-editlinkstitle": "ڤیرایشت هوم پیۋند زۊنی",
+	"wikibase-editlinks": "ڤیرایشت هوم پیڤندیا",
+	"wikibase-editlinkstitle": "ڤیرایشت هوم پیڤند زۊنی",
 	"wikibase-linkitem-addlinks": "اضاف کردن هوم پیوندیا",
 	"wikibase-linkitem-title": "هوم پیوند کردن وا بلگه",
 	"wikibase-linkitem-linkpage": "هوم پیوند کردن وا بلگه",
