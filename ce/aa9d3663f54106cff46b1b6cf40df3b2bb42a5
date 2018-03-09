@@ -1,0 +1,9 @@
+Code-Review+1: Aleksey Bekh-Ivanov (WMDE) <aleksey.bekh-ivanov@wikimedia.de>
+Code-Review+2: Lucas Werkmeister (WMDE) <lucas.werkmeister@wikimedia.de>
+Code-Review+2: Ladsgroup <Ladsgroup@gmail.com>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 09 Mar 2018 19:56:25 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/361072
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
