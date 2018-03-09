@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
+use ExternalUserNames;
 use Language;
 use RecentChange;
 use UnexpectedValueException;
@@ -89,7 +90,7 @@ class ExternalChangeFactory {
 		}
 
 		return new RevisionData(
-			$recentChange->getAttribute( 'rc_user_text' ),
+			ExternalUserNames::getLocal( $recentChange->getAttribute( 'rc_user_text' ) ),
 			$recentChange->getAttribute( 'rc_timestamp' ),
 			$comment,
 			$commentHtml,
