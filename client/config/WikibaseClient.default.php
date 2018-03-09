@@ -250,7 +250,7 @@ return call_user_func( function() {
 	$defaults['tabularDataStorageBaseUrl'] = 'https://commons.wikimedia.org/wiki/';
 
 	// Enable reading of term_full_entity_id column in wb_terms table.
-	$defaults['readFullEntityIdColumn'] = false;
+	$defaults['readFullEntityIdColumn'] = true;
 
 	// Disabled entity access
 	$defaults['disabledAccessEntityTypes'] = [];
