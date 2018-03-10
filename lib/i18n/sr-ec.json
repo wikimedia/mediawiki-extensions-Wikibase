@@ -70,7 +70,7 @@
 	"datatypes-type-unknown": "Неодређено",
 	"datatypes-type-boolean": "Буловски",
 	"datatypes-type-globe-coordinate": "Географске координате",
-	"datatypes-type-time": "Тренутак у времену",
+	"datatypes-type-time": "Тачка у времену",
 	"datatypes-type-wikibase-item": "ставка",
 	"datatypes-type-wikibase-property": "својство",
 	"datatypes-type-commonsMedia": "датотека са Оставе",
