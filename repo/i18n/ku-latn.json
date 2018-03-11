@@ -28,6 +28,7 @@
 	"wikibase-label-empty": "Etîketek jî nehate naskirin",
 	"wikibase-description-empty": "Tu danasîn nehatiye nivîsîn",
 	"wikibase-description-edit-placeholder": "danasînekê binivîse",
+	"wikibase-content-language-edit-label": "Ziman:",
 	"wikibase-diffview-reference": "referans",
 	"wikibase-diffview-label": "etîket",
 	"wikibase-diffview-description": "danasîn",
@@ -67,6 +68,7 @@
 	"wikibase-entitieswithoutlabel-label-language": "Koda ziman:",
 	"wikibase-entitieswithoutlabel-label-type": "Cure:",
 	"wikibase-entitieswithoutlabel-submit": "Bibîne",
+	"wikibase-redirectentity-submit": "Beralîkirin",
 	"wikibase-listdatatypes-url-head": "URL",
 	"datatypes-type-url": "URL",
 	"apihelp-wbsetlabel-param-language": "Zimanê etîketê"

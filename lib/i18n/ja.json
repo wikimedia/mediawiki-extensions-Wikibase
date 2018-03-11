@@ -6,7 +6,8 @@
 			"Sujiniku",
 			"Otokoume",
 			"Afaz",
-			"ネイ"
+			"ネイ",
+			"Yusuke1109"
 		]
 	},
 	"wikibase-lib-desc": "ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する",
@@ -19,8 +20,8 @@
 	"wikibase-error-remove-generic": "エラーが発生したため、除去することができませんでした。",
 	"wikibase-error-save-connection": "接続エラーが発生したため、保存することができませんでした。自身のインターネット接続を確認してください。",
 	"wikibase-error-remove-connection": "接続エラーが発生したため、除去することができませんでした。自身のインターネット接続を確認してください。",
-	"wikibase-error-save-timeout": "技術的な障害が発生しています。「保存」を完了できませんでした。",
-	"wikibase-error-remove-timeout": "技術的な障害が発生しています。「除去」を完了できませんでした。",
+	"wikibase-error-save-timeout": "技術的な障害が発生しています。もう一度やり直してください。",
+	"wikibase-error-remove-timeout": "技術的な障害が発生しています。もう一度やり直してください。",
 	"wikibase-error-autocomplete-connection": "サイトの API のクエリを実行できませんでした。しばらくしてからもう一度お試しください。",
 	"wikibase-error-autocomplete-response": "サーバーの応答: $1",
 	"wikibase-error-ui-no-external-page": "ページ「$2」は「$1」内で見つかりませんでした。",
@@ -67,8 +68,8 @@
 	"wikibase-validator-no-such-property": "プロパティ $1 が見つかりません",
 	"wikibase-validator-bad-value": "データ値の破損: $1",
 	"wikibase-validator-bad-value-type": "値の型 $1 は間違いです。$2 が正しい型です。",
-	"wikibase-validator-bad-url": "誤った形式の URL: $1",
-	"wikibase-validator-bad-url-scheme": "未対応の URL スキーム: $1",
+	"wikibase-validator-bad-url": "URLには、スペースや大括弧などの特定の文字を含めることはできません: $1",
+	"wikibase-validator-bad-url-scheme": "URLスキーム「$1」は未対応です",
 	"wikibase-validator-unknown-unit": "不明な単位: $1",
 	"wikibase-validator-not-allowed": "値の誤り: $1",
 	"wikibase-validator-no-validators": "禁止",
