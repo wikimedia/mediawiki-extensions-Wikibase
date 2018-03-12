@@ -30,8 +30,6 @@ class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 	 * @return WikibaseLuaEntityBindings
 	 */
 	private function getWikibaseLuaEntityBindings( HashUsageAccumulator $usageAccumulator = null ) {
-		$usageAccumulator = $usageAccumulator ?: new HashUsageAccumulator();
-
 		$plainTextTransclusionInteractor = $this->getMockBuilder( StatementTransclusionInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -55,7 +53,7 @@ class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 			$richWikitextTransclusionInteractor,
 			new BasicEntityIdParser(),
 			Language::factory( 'es' ),
-			$usageAccumulator,
+			$usageAccumulator ?: new HashUsageAccumulator(),
 			'enwiki'
 		);
 	}
@@ -91,7 +89,7 @@ class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 		$usageAccumulator = new HashUsageAccumulator();
 
 		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $usageAccumulator );
-		$wikibaseLuaEntityBindings->addStatementUsage( $q2013->getSerialization(), 'P1337', true );
+		$wikibaseLuaEntityBindings->addStatementUsage( $q2013->getSerialization(), 'P1337' );
 
 		$this->assertCount( 1, $usageAccumulator->getUsages() );
 		$this->assertEquals(
