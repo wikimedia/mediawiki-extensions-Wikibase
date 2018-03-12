@@ -88,19 +88,26 @@ class TermSqlIndexTest extends TermIndexTestCase {
 	}
 
 	public function termProvider() {
-		return [
-			[ 'en', 'FoO', 'fOo', true ],
-			[ 'ru', 'Берлин', 'берлин', true ],
-			[ 'en', 'FoO', 'bar', false ],
-			[ 'ru', 'Берлин', 'бе55585рлин', false ],
-		];
+		$termIndex = $this->getTermIndex();
+
+		yield [ $termIndex, 'en', 'FoO', 'fOo', true ];
+		yield [ $termIndex, 'ru', 'Берлин', 'берлин', true ];
+		yield [ $termIndex, 'en', 'FoO', 'bar', false ];
+		yield [ $termIndex, 'ru', 'Берлин', 'бе55585рлин', false ];
+
+		$termIndex = $this->getTermIndex();
+		$termIndex->setUseSearchFields( false );
+
+		yield [ $termIndex, 'en', 'Foo', 'Foo', true ];
+		yield [ $termIndex, 'en', 'Foo', 'foo', false ];
+		yield [ $termIndex, 'ru', 'Берлин', 'Берлин', true ];
+		yield [ $termIndex, 'ru', 'Берлин', 'берлин', false ];
 	}
 
 	/**
 	 * @dataProvider termProvider
 	 */
-	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
-		$termIndex = $this->getTermIndex();
+	public function testGetMatchingTerms2( TermSqlIndex $termIndex, $languageCode, $termText, $searchText, $matches ) {
 		$termIndex->clear();
 
 		$item = new Item( new ItemId( 'Q42' ) );
@@ -183,6 +190,43 @@ class TermSqlIndexTest extends TermIndexTestCase {
 		$this->markTestSkippedOnMySql();
 
 		parent::testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected );
+	}
+
+	public function labelWithDescriptionConflictProvider_CaseSensitive() {
+		foreach ( $this->labelWithDescriptionConflictProvider() as $testCase => $arguments ) {
+			list( $entities, $entityType, $labels, $descriptions, $expected ) = $arguments;
+			if ( preg_match( '/different .* capitalization/', $testCase ) ) {
+				$expected = [];
+			}
+			yield $testCase => [ $entities, $entityType, $labels, $descriptions, $expected ];
+		}
+	}
+
+	/**
+	 * @dataProvider labelWithDescriptionConflictProvider_CaseSensitive
+	 */
+	public function testGetLabelWithDescriptionConflicts_NoUseSearchFields(
+		array $entities,
+		$entityType,
+		array $labels,
+		array $descriptions,
+		array $expected
+	) {
+		$this->markTestSkippedOnMySql();
+
+		// TODO this is copied from TermIndexTestCase, is there a nicer way to do this?
+		$termIndex = $this->getTermIndex();
+		$termIndex->setUseSearchFields( false );
+		$termIndex->clear();
+
+		foreach ( $entities as $entity ) {
+			$termIndex->saveTermsOfEntity( $entity );
+		}
+
+		$matches = $termIndex->getLabelWithDescriptionConflicts( $entityType, $labels, $descriptions );
+		$actual = $this->getEntityIdStrings( $matches );
+
+		$this->assertArrayEquals( $expected, $actual, false, false );
 	}
 
 	public function getMatchingTermsOptionsProvider() {
@@ -325,6 +369,17 @@ class TermSqlIndexTest extends TermIndexTestCase {
 	 */
 	public function testGetEntityTerms( $expectedTerms, EntityDocument $entity ) {
 		$termIndex = $this->getTermIndex();
+		$wikibaseTerms = $termIndex->getEntityTerms( $entity );
+
+		$this->assertEquals( $expectedTerms, $wikibaseTerms );
+	}
+
+	/**
+	 * @dataProvider getEntityTermsProvider
+	 */
+	public function testGetEntityTerms_NoUseSearchFields( $expectedTerms, EntityDocument $entity ) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->setUseSearchFields( false );
 		$wikibaseTerms = $termIndex->getEntityTerms( $entity );
 
 		$this->assertEquals( $expectedTerms, $wikibaseTerms );
@@ -479,6 +534,50 @@ class TermSqlIndexTest extends TermIndexTestCase {
 		);
 
 		$this->assertSame( 2, $rowCount );
+	}
+
+	/**
+	 * @dataProvider provideForceWriteSearchFields
+	 */
+	public function testInsertTerms_NoUseSearchFields( $forceWriteSearchFields ) {
+		$item = new Item( new ItemId( 'Q1112362' ) );
+		$termDe = new TermIndexEntry( [
+			'entityId' => $item->getId(),
+			'termText' => 'German',
+			'termLanguage' => 'de',
+			'termType' => 'description'
+		] );
+
+		$termIndex = $this->getTermIndex();
+		$termIndex->setUseSearchFields( false );
+		$termIndex->setForceWriteSearchFields( $forceWriteSearchFields );
+		/** @var TermSqlIndex $termIndex */
+		$termIndex = TestingAccessWrapper::newFromObject( $termIndex );
+
+		$this->assertTrue(
+			$termIndex->insertTerms(
+				$item,
+				[ $termDe ],
+				$termIndex->getConnection( DB_MASTER )
+			)
+		);
+
+		$result = $this->db->selectField(
+			'wb_terms',
+			'term_search_key',
+			[ 'term_full_entity_id' => 'Q1112362', 'term_entity_type' => 'item' ],
+			__METHOD__
+		);
+
+		$expected = $forceWriteSearchFields ? 'german' : '';
+		$this->assertSame( $expected, $result->fetchRow()['term_search_key'] );
+	}
+
+	public function provideForceWriteSearchFields() {
+		return [
+			'don’t force writing search fields' => [ true ],
+			'force writing search fields' => [ false ],
+		];
 	}
 
 }

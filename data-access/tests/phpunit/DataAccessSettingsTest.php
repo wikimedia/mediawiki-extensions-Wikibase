@@ -12,9 +12,28 @@ use Wikibase\DataAccess\DataAccessSettings;
 class DataAccessSettingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConvertsMaxSerializedEntitySizeFromKiloBytesToBytes() {
-		$settings = new DataAccessSettings( 1 );
+		$settings = new DataAccessSettings( 1, true, false );
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
+	}
+
+	/**
+	 * @dataProvider provideTwoBooleans
+	 */
+	public function testSearchFieldsGetters( $useSearchFields, $forceWriteSearchFields ) {
+		$settings = new DataAccessSettings( 1, $useSearchFields, $forceWriteSearchFields );
+
+		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
+		$this->assertSame( $forceWriteSearchFields, $settings->forceWriteSearchFields() );
+	}
+
+	public function provideTwoBooleans() {
+		return [
+			[ false, false ],
+			[ false, true ],
+			[ true, false ],
+			[ true, true ],
+		];
 	}
 
 }

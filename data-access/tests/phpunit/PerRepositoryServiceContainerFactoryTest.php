@@ -36,7 +36,7 @@ class PerRepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCa
 			[ '' => false ],
 			[],
 			new GenericServices( $entityTypeDefinitions, [] ),
-			new DataAccessSettings( 0, false ),
+			new DataAccessSettings( 0, true, false ),
 			$entityTypeDefinitions
 		);
 	}

@@ -43,7 +43,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			[ '' => false ],
 			require __DIR__ . '/../../src/PerRepositoryServiceWiring.php',
 			new GenericServices( $entityTypeDefinitions, [] ),
-			new DataAccessSettings( 0, false ),
+			new DataAccessSettings( 0, true, false ),
 			$entityTypeDefinitions
 		);
 	}

@@ -17,12 +17,32 @@ class DataAccessSettings {
 	private $maxSerializedEntitySizeInBytes;
 
 	/**
-	 * @param int $maxSerializedEntitySizeInKiloBytes
+	 * @var bool
 	 */
-	public function __construct( $maxSerializedEntitySizeInKiloBytes ) {
+	private $useSearchFields;
+
+	/**
+	 * @var bool
+	 */
+	private $forceWriteSearchFields;
+
+	/**
+	 * @param int $maxSerializedEntitySizeInKiloBytes
+	 * @param bool $useSearchFields
+	 * @param bool $forceWriteSearchFields
+	 */
+	public function __construct(
+		$maxSerializedEntitySizeInKiloBytes,
+		$useSearchFields,
+		$forceWriteSearchFields
+	) {
 		Assert::parameterType( 'integer', $maxSerializedEntitySizeInKiloBytes, '$maxSerializedEntitySizeInBytes' );
+		Assert::parameterType( 'boolean', $useSearchFields, '$useSearchFields' );
+		Assert::parameterType( 'boolean', $forceWriteSearchFields, '$forceWriteSearchFields' );
 
 		$this->maxSerializedEntitySizeInBytes = $maxSerializedEntitySizeInKiloBytes * 1024;
+		$this->useSearchFields = $useSearchFields;
+		$this->forceWriteSearchFields = $forceWriteSearchFields;
 	}
 
 	/**
@@ -30,6 +50,20 @@ class DataAccessSettings {
 	 */
 	public function maxSerializedEntitySizeInBytes() {
 		return $this->maxSerializedEntitySizeInBytes;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function useSearchFields() {
+		return $this->useSearchFields;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function forceWriteSearchFields() {
+		return $this->forceWriteSearchFields;
 	}
 
 }
