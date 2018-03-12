@@ -19,8 +19,8 @@
 	"valueview-expert-timeinput-calendar": "Календар:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Језик (обавезно):",
-	"valueview-expertextender-unitsuggester-label": "Јединица (необавезно):",
+	"valueview-expertextender-unitsuggester-label": "Јединица (опционо):",
 	"valueview-preview-label": "приказаће се као:",
-	"valueview-preview-novalue": "није препозната ниједна исправна вредност",
+	"valueview-preview-novalue": "није препозната ниједна валидна вредност",
 	"valueview-listrotator-manually": "подеси ручно"
 }
