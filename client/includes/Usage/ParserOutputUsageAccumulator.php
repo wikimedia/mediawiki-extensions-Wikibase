@@ -27,13 +27,16 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 */
 	private $usageDeduplicator;
 
-	public function __construct( ParserOutput $parserOutput ) {
+	public function __construct(
+		ParserOutput $parserOutput,
+		UsageDeduplicator $deduplicator = null
+	) {
 		$this->parserOutput = $parserOutput;
 		// TODO: Inject it properly
 		$usageModifierLimits = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
 			'entityUsageModifierLimits'
 		);
-		$this->usageDeduplicator = new UsageDeduplicator( $usageModifierLimits );
+		$this->usageDeduplicator = $deduplicator ?: new UsageDeduplicator( $usageModifierLimits );
 	}
 
 	/**
