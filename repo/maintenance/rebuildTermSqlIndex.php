@@ -77,7 +77,7 @@ class RebuildTermSqlIndex extends Maintenance {
 			$idParser
 		);
 
-		$termIndex = $this->getTermSqlIndex( $entityIdComposer, $idParser );
+		$termIndex = $this->getTermSqlIndex( $entityIdComposer, $idParser, $repoSettings );
 
 		$builder = new TermSqlIndexBuilder(
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
@@ -126,15 +126,19 @@ class RebuildTermSqlIndex extends Maintenance {
 	 */
 	private function getTermSqlIndex(
 		EntityIdComposer $entityIdComposer,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		SettingsArray $settings
 	) {
-		return new TermSqlIndex(
+		$termSqlIndex = new TermSqlIndex(
 			new StringNormalizer(),
 			$entityIdComposer,
 			$entityIdParser,
 			false,
 			''
 		);
+		$termSqlIndex->setUseSearchFields( $settings->getSetting( 'useTermsTableSearchFields' ) );
+		$termSqlIndex->setForceWriteSearchFields( $settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
+		return $termSqlIndex;
 	}
 
 	/**

@@ -225,6 +225,14 @@ call_user_func( function() {
 				);
 				$entitySearchHelper->setRequest( $mainModule->getRequest() );
 			} else {
+				if ( !$settings['useTermsTableSearchFields'] ) {
+					wfLogWarning(
+						'Using wb_terms table for wbsearchentities API action ' .
+						'but not using search-related fields of terms table. ' .
+						'This results in degraded search experience, ' .
+						'please enable the useTermsTableSearchFields setting.'
+					);
+				}
 				$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchTermIndex(
 					$repo->getEntityLookup(),
 					$repo->getEntityIdParser(),

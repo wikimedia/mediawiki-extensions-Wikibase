@@ -126,6 +126,8 @@ return [
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
+		$index->setUseSearchFields( $settings->useSearchFields() );
+		$index->setForceWriteSearchFields( $settings->forceWriteSearchFields() );
 		return $index;
 	},
 

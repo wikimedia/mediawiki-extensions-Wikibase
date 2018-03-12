@@ -25,6 +25,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;maxSerializedEntitySize: The maximum serialized size of entities, in KB. Loading and storing will fail if this size is exceeded. This is intended as a hard limit that prevents very large chunks of data being stored or processed due to abuse or erroneous code. Defaults to MediaWiki core's <code>$wgMaxArticleSize</code> setting.
 ;geoShapeStorageBaseUrl: Base URL of geo shape storage frontend. Used primarily to build links to the geo shapes. Will be concatenated with the page title, so should end with <code>/</code> or <code>title=</code>. Special characters (e.g. space, percent, etc.) should ''not'' be encoded.
 ;tabularDataStorageBaseUrl: Base URL of tabular data storage frontend. Used primarily to build links to the tabular data pages. Will be concatenated with the page title, so should end with <code>/</code> or <code>title=</code>. Special characters (e.g. space, percent, etc.) should ''not'' be encoded.
+;useTermsTableSearchFields: Whether to use the search-related fields (<code>term_search_key</code> and <code>term_weight</code>) of the <code>wb_terms</code> table. This should not be disabled unless some other search backend is used (see <code>entitySearch</code> below).
+;forceWriteTermsTableSearchFields: If true, write search-related fields of the <code>wb_terms</code> table even if they are not used. Useful if you want to experiment with <code>useTermsTableSearchFields</code> and don’t want missed updates in the table.
 
 == Repository Settings ==
 
@@ -68,7 +70,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;supportedEntityTypesForEntitiesWithoutTermListings: Array of entity types that are supported on Special:EntitiesWithoutLabel and …Description, typically <code>'item'</code> and <code>'property'</code>. Defaults to <code>null</code>, which enables all numeric entity types.
 ;dispatchingLockManager: If you want to use another lock mechanism for dispatching changes to clients instead of database locking (which can occupy too many connections to the master database), set its name in this config. See $wgLockManagers documentation in MediaWiki core for more information on configuring a locking mechanism inside core.
 ;entitySearch: Set of settings controlling how we search for entities. Has following subsettings:
-:;useCirrus: boolean|null, whether we should use CirrusSearch extension. Settings marked with (Cirrus) are relevant only when this setting is enabled. If set to null, CirrusSearch is not used unless the request has useCirrus=1.
+:;useCirrus: boolean|null, whether we should use CirrusSearch extension. Settings marked with (Cirrus) are relevant only when this setting is enabled. If set to null, CirrusSearch is not used unless the request has useCirrus=1. When using CirrusSearch, you can disable the <code>useTermsTableSearchFields</code> setting to save some space in the <code>wb_terms</code> table.
 :;defaultPrefixProfile: name of the label scoring profile to use for prefix search. The profile should be defined like examples in <code>config/EntityPrefixSearchProfiles.php</code>. (Cirrus)
 :;prefixSearchProfiles: Loaded from <code>config/EntityPrefixSearchProfiles.php</code>, does not need to be defined manually. (Cirrus)
 :;defaultPrefixRescoreProfile: name of the rescoring profile to use for prefix search. The profile should be defined in <code>config/ElasticSearchRescoreProfiles.php</code>. (Cirrus)
