@@ -149,7 +149,8 @@ class DataUpdateHookHandlers {
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		if ( count( $usageAcc->getUsages() ) === 0 ) {
+		$usages = $usageAcc->getUsages();
+		if ( $usages === [] ) {
 			// no usages or no title, bail out
 			return;
 		}
@@ -163,7 +164,7 @@ class DataUpdateHookHandlers {
 
 		//TODO: Before posting a job, check replica database. If no changes are needed, skip update.
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages() );
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usages );
 		$this->jobScheduler->lazyPush( $addUsagesForPageJob );
 	}
 
