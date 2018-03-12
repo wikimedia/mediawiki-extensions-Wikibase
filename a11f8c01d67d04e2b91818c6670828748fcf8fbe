@@ -39,6 +39,24 @@
       "revId": "a11f8c01d67d04e2b91818c6670828748fcf8fbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdc8928f_a08640c4",
+        "filename": "client/tests/phpunit/includes/Usage/ParserOutputUsageAccumulatorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-12T13:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec5f250_831f0d12",
+      "revId": "a11f8c01d67d04e2b91818c6670828748fcf8fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
