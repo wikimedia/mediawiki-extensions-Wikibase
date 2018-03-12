@@ -103,6 +103,11 @@ class EntityUsage {
 	private $modifier;
 
 	/**
+	 * @var string
+	 */
+	private $identity;
+
+	/**
 	 * @param EntityId $entityId
 	 * @param string $aspect use the EntityUsage::XXX_USAGE constants
 	 * @param string|null $modifier for further qualifying the usage aspect (e.g. a language code
@@ -118,6 +123,7 @@ class EntityUsage {
 		$this->entityId = $entityId;
 		$this->aspect = $aspect;
 		$this->modifier = $modifier;
+		$this->identity = $entityId->getSerialization() . '#' . self::makeAspectKey( $aspect, $modifier );
 	}
 
 	/**
@@ -155,14 +161,14 @@ class EntityUsage {
 	 * @return string
 	 */
 	public function getIdentityString() {
-		return $this->getEntityId()->getSerialization() . '#' . $this->getAspectKey();
+		return $this->identity;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->getIdentityString();
+		return $this->identity;
 	}
 
 	/**
