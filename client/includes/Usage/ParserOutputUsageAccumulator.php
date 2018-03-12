@@ -15,6 +15,8 @@ use Wikibase\Client\WikibaseClient;
  */
 class ParserOutputUsageAccumulator extends UsageAccumulator {
 
+	const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
+
 	/**
 	 * @var ParserOutput
 	 */
@@ -40,10 +42,10 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 * @param EntityUsage $usage
 	 */
 	public function addUsage( EntityUsage $usage ) {
-		$usages = $this->getUsages();
+		$usages = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
 		$key = $usage->getIdentityString();
 		$usages[$key] = $usage;
-		$this->parserOutput->setExtensionData( 'wikibase-entity-usage', $usages );
+		$this->parserOutput->setExtensionData( self::EXTENSION_DATA_KEY, $usages );
 	}
 
 	/**
@@ -52,7 +54,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 * @return EntityUsage[]
 	 */
 	public function getUsages() {
-		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );
+		$usages = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY );
 		if ( $usages ) {
 			return $this->usageDeduplicator->deduplicate( $usages );
 		}
