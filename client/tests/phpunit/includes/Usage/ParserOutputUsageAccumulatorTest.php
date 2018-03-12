@@ -3,7 +3,10 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use ParserOutput;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageDeduplicator;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\Usage\ParserOutputUsageAccumulator
@@ -26,6 +29,21 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit_Framework_TestCase {
 		$tester->testAddGetUsage();
 
 		$this->assertNotNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+	}
+
+	public function testDeduplicatorIsCalledOnce() {
+		$deduplicator = $this->getMockBuilder( UsageDeduplicator::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$deduplicator->expects( $this->once() )
+			->method( 'deduplicate' )
+			->willReturn( '<DEDUPLICATED>' );
+
+		$id = new ItemId( 'Q1' );
+		$acc = new ParserOutputUsageAccumulator( new ParserOutput(), $deduplicator );
+		$acc->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE ) );
+		$acc->addUsage( new EntityUsage( $id, EntityUsage::DESCRIPTION_USAGE ) );
+		$this->assertSame( '<DEDUPLICATED>', $acc->getUsages() );
 	}
 
 }
