@@ -344,6 +344,7 @@
 	"wikibase-listdatatypes-tabular-data-head": "Таблічныя зьвесткі",
 	"wikibase-listdatatypes-tabular-data-body": "Спасылка на таблічныя зьвесткі, якія захоўваюцца ў Вікісховішчы (ці іншай наладжанай вікі). Глядзіце «https://www.mediawiki.org/wiki/Help:Tabular_Data» дзеля дадатковай дакумэнтацыі пра таблічныя зьвесткі.",
 	"wikibase-listdatatypes-quantity-head": "Колькасьць",
+	"wikibase-listdatatypes-quantity-body": "Поле сымбальных зьвестак для ўводу колькасьці, якая вызначаецца ў пэўных адзінках. Актуальныя адзінкі пазначаюцца пры ўводзе зьвестак.\n* amount – няяўная частка радку (прэфікс адзінкі ня вызначаны)\n* unit – няяўная частка радку, па змоўчаньні «1» (сувязь з эталёнам ня вызначаная)\n* upperbound - верхняя мяжа колькасьці\n* lowerbound - ніжняя мяжа колькасьці",
 	"wikibase-listdatatypes-monolingualtext-head": "Аднамоўны тэкст",
 	"wikibase-listdatatypes-multilingualtext-head": "Шматмоўны тэкст",
 	"wikibase-listdatatypes-string-head": "Радок",
