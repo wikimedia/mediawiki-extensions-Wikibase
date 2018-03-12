@@ -16,6 +16,24 @@
       "revId": "e9e1330d4577d03ecdd809ff47699b4f9cee63cc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c1d14d0_31de6a22",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-12T11:31:48Z",
+      "side": 1,
+      "message": "Let\u0027s fix it in a follow up.",
+      "parentUuid": "28e04c2a_e94e6b6a",
+      "revId": "e9e1330d4577d03ecdd809ff47699b4f9cee63cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
