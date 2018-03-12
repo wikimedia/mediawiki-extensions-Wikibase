@@ -59,6 +59,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $entityIdParser;
 
 	/**
+	 * @var bool
+	 */
+	private $useSearchFields;
+
+	/**
+	 * @var bool
+	 */
+	private $forceWriteSearchFields;
+
+	/**
 	 * @var int
 	 */
 	private $maxConflicts = 500;
@@ -69,13 +79,23 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
+	 * @param bool $useSearchFields Whether to read and write fields
+	 * that are only useful for searching entities (term_search_key and term_weight).
+	 * This should only be used if search is provided by some other service (e. g. ElasticSearch) –
+	 * if this is disabled, any search requests to this index
+	 * will use the term_text (not normalized) instead of the term_search_key.
+	 * @param bool $forceWriteSearchFields If true, write search-related fields
+	 * even if they are not used according to $useSearchFields.
+	 * (This flag has no effect if $useSearchFields is true.)
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		EntityIdParser $entityIdParser,
 		$wikiDb = false,
-		$repositoryName = ''
+		$repositoryName = '',
+		$useSearchFields = true,
+		$forceWriteSearchFields = false
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
@@ -85,6 +105,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdParser = $entityIdParser;
+		$this->useSearchFields = $useSearchFields;
+		$this->forceWriteSearchFields = $forceWriteSearchFields;
 		$this->tableName = 'wb_terms';
 	}
 
@@ -186,9 +208,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdentifiers = [
 			'term_entity_id' => 0,
 			'term_entity_type' => $entity->getType(),
-			'term_weight' => $this->getWeight( $entity ),
 			'term_full_entity_id' => $entityId->getSerialization(),
 		];
+
+		if ( $this->useSearchFields || $this->forceWriteSearchFields ) {
+			$entityIdentifiers['term_weight'] = $this->getWeight( $entity );
+		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
@@ -212,7 +237,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	private function insertTerm( array $entityIdentifiers, TermIndexEntry $term, IDatabase $dbw ) {
 		$fields = array_merge(
-			$this->getTermFields( $term ),
+			$this->getTermFieldsForInsert( $term ),
 			$entityIdentifiers
 		);
 
@@ -346,7 +371,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$success = true;
 		foreach ( $terms as $term ) {
-			$termIdentifiers = $this->getTermFields( $term );
+			$termIdentifiers = $this->getTermFieldsForSelect( $term );
 			$termIdentifiers = array_intersect_key( $termIdentifiers, array_flip( $uniqueKeyFields ) );
 
 			$success = $dbw->delete(
@@ -392,18 +417,37 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * Returns an array with the database table fields for the provided term.
+	 * Returns an array with the non-derived database table fields for the provided term.
 	 *
 	 * @param TermIndexEntry $term
 	 *
 	 * @return string[]
 	 */
-	private function getTermFields( TermIndexEntry $term ) {
+	private function getTermFieldsForSelect( TermIndexEntry $term ) {
 		$fields = [
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getTermType(),
 			'term_text' => $term->getText(),
-			'term_search_key' => $this->getSearchKey( $term->getText() )
+		];
+
+		return $fields;
+	}
+
+	/**
+	 * Returns an array with all database table fields for the provided term.
+	 *
+	 * @param TermIndexEntry $term
+	 *
+	 * @return string[]
+	 */
+	private function getTermFieldsForInsert( TermIndexEntry $term ) {
+		$fields = [
+			'term_language' => $term->getLanguage(),
+			'term_type' => $term->getTermType(),
+			'term_text' => $term->getText(),
+			'term_search_key' => $this->useSearchFields || $this->forceWriteSearchFields ?
+				$this->getSearchKey( $term->getText() ) :
+				''
 		];
 
 		return $fields;
@@ -631,7 +675,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			__METHOD__,
 			$queryOptions
 		);
-		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] ) {
+		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] && $this->useSearchFields ) {
 			$rows = $this->getRowsOrderedByWeight( $rows );
 		}
 
@@ -801,7 +845,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			// used in the database.
 			$textField = 'term_text';
 
-			if ( !$options['caseSensitive'] ) {
+			if ( !$options['caseSensitive'] && $this->useSearchFields ) {
 				$textField = 'term_search_key';
 				$text = $this->getSearchKey( $mask->getText() );
 			}
@@ -967,9 +1011,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$matchConditions = [
 				'L.term_language' => $lang,
-				'L.term_search_key' => $this->getSearchKey( $label ),
-				'D.term_search_key' => $this->getSearchKey( $description )
 			];
+			if ( $this->useSearchFields ) {
+				$matchConditions['L.term_search_key'] = $this->getSearchKey( $label );
+				$matchConditions['D.term_search_key'] = $this->getSearchKey( $description );
+			} else {
+				// TODO should we still use $this->getSearchKey() here?
+				$matchConditions['L.term_text'] = $label;
+				$matchConditions['D.term_text'] = $description;
+			}
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
 		}
@@ -1070,6 +1120,20 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $normalized;
+	}
+
+	/**
+	 * @param bool $useSearchFields Whether to read and write fields that are only useful for searching entities.
+	 */
+	public function setUseSearchFields( $useSearchFields ) {
+		$this->useSearchFields = $useSearchFields;
+	}
+
+	/**
+	 * @param bool $forceWriteSearchFields Whether to write search-related fields even if they are not used.
+	 */
+	public function setForceWriteSearchFields( $forceWriteSearchFields ) {
+		$this->forceWriteSearchFields = $forceWriteSearchFields;
 	}
 
 }

@@ -170,6 +170,16 @@ class DirectSqlStore implements ClientStore {
 	private $entityUsagePerPageLimit;
 
 	/**
+	 * @var bool
+	 */
+	private $useSearchFields;
+
+	/**
+	 * @var bool
+	 */
+	private $forceWriteSearchFields;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
@@ -205,6 +215,8 @@ class DirectSqlStore implements ClientStore {
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );
 		$this->entityUsagePerPageLimit = $settings->getSetting( 'entityUsagePerPageLimit' );
+		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
+		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 	}
 
 	/**
@@ -382,7 +394,9 @@ class DirectSqlStore implements ClientStore {
 				$this->entityIdComposer,
 				$this->entityIdParser,
 				$this->repoWiki,
-				''
+				'',
+				$this->useSearchFields,
+				$this->forceWriteSearchFields
 			);
 		}
 

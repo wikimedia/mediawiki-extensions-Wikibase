@@ -124,7 +124,9 @@ return [
 			$services->getEntityIdComposer(),
 			$services->getEntityIdParser(),
 			$services->getDatabaseName(),
-			$services->getRepositoryName()
+			$services->getRepositoryName(),
+			$settings->useSearchFields(),
+			$settings->forceWriteSearchFields()
 		);
 		return $index;
 	},

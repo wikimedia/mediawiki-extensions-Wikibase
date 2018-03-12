@@ -681,7 +681,7 @@ abstract class TermIndexTestCase extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expected, $actual, false, false );
 	}
 
-	private function getEntityIdStrings( array $terms ) {
+	protected function getEntityIdStrings( array $terms ) {
 		return array_map( function( TermIndexEntry $term ) {
 			$id = $term->getEntityId();
 			return $id->getSerialization();

@@ -170,6 +170,16 @@ class SqlStore implements Store {
 	private $idBlacklist;
 
 	/**
+	 * @var bool
+	 */
+	private $useSearchFields;
+
+	/**
+	 * @var bool
+	 */
+	private $forceWriteSearchFields;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
@@ -201,6 +211,8 @@ class SqlStore implements Store {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
+		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
+		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 	}
 
 	/**
@@ -237,7 +249,9 @@ class SqlStore implements Store {
 			$this->entityIdComposer,
 			$this->entityIdParser,
 			false,
-			''
+			'',
+			$this->useSearchFields,
+			$this->forceWriteSearchFields
 		);
 
 		return $termSqlIndex;
