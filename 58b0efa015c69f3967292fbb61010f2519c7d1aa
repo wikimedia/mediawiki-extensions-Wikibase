@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b30be1de_89742239",
+        "filename": "client/tests/phpunit/includes/Usage/ParserOutputUsageAccumulatorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-12T13:18:51Z",
+      "side": 1,
+      "message": "Would be nicer to add several usages here (otherwise having the deduplication on addUsage and not on getUsages would pass).",
+      "revId": "58b0efa015c69f3967292fbb61010f2519c7d1aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
