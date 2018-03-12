@@ -39,7 +39,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
-			new DataAccessSettings( 0, false ),
+			new DataAccessSettings( 0, true, false ),
 			[]
 		);
 

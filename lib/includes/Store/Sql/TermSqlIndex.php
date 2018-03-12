@@ -59,6 +59,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $entityIdParser;
 
 	/**
+	 * @var bool
+	 */
+	private $useSearchFields = true;
+
+	/**
+	 * @var bool
+	 */
+	private $forceWriteSearchFields = false;
+
+	/**
 	 * @var int
 	 */
 	private $maxConflicts = 500;
@@ -86,6 +96,30 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdParser = $entityIdParser;
 		$this->tableName = 'wb_terms';
+	}
+
+	/**
+	 * Set whether to read and write fields
+	 * that are only useful for searching entities (term_search_key and term_weight).
+	 * This should only be used if search is provided by some other service (e. g. ElasticSearch) –
+	 * if this is disabled, any search requests to this TermIndex
+	 * will use the term_text (not normalized) instead of the term_search_key.
+	 *
+	 * @param bool $useSearchFields
+	 */
+	public function setUseSearchFields( $useSearchFields ) {
+		$this->useSearchFields = $useSearchFields;
+	}
+
+	/**
+	 * If true, write search-related fields
+	 * even if they are not used according to $useSearchFields.
+	 * (This flag has no effect if $useSearchFields is true.)
+	 *
+	 * @param bool $forceWriteSearchFields
+	 */
+	public function setForceWriteSearchFields( $forceWriteSearchFields ) {
+		$this->forceWriteSearchFields = $forceWriteSearchFields;
 	}
 
 	/**
@@ -186,9 +220,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdentifiers = [
 			'term_entity_id' => 0,
 			'term_entity_type' => $entity->getType(),
-			'term_weight' => $this->getWeight( $entity ),
 			'term_full_entity_id' => $entityId->getSerialization(),
 		];
+
+		if ( $this->useSearchFields || $this->forceWriteSearchFields ) {
+			$entityIdentifiers['term_weight'] = $this->getWeight( $entity );
+		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
@@ -403,7 +440,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getTermType(),
 			'term_text' => $term->getText(),
-			'term_search_key' => $this->getSearchKey( $term->getText() )
+			'term_search_key' => $this->useSearchFields || $this->forceWriteSearchFields ?
+				$this->getSearchKey( $term->getText() ) :
+				''
 		];
 
 		return $fields;
@@ -631,7 +670,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			__METHOD__,
 			$queryOptions
 		);
-		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] ) {
+		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] && $this->useSearchFields ) {
 			$rows = $this->getRowsOrderedByWeight( $rows );
 		}
 
@@ -801,7 +840,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			// used in the database.
 			$textField = 'term_text';
 
-			if ( !$options['caseSensitive'] ) {
+			if ( !$options['caseSensitive'] && $this->useSearchFields ) {
 				$textField = 'term_search_key';
 				$text = $this->getSearchKey( $mask->getText() );
 			}
@@ -967,9 +1006,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$matchConditions = [
 				'L.term_language' => $lang,
-				'L.term_search_key' => $this->getSearchKey( $label ),
-				'D.term_search_key' => $this->getSearchKey( $description )
 			];
+			if ( $this->useSearchFields ) {
+				$matchConditions['L.term_search_key'] = $this->getSearchKey( $label );
+				$matchConditions['D.term_search_key'] = $this->getSearchKey( $description );
+			} else {
+				$matchConditions['L.term_text'] = $label;
+				$matchConditions['D.term_text'] = $description;
+			}
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
 		}
