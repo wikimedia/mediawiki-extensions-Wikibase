@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28e04c2a_e94e6b6a",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-12T11:29:31Z",
+      "side": 1,
+      "message": "What should happen to this message now that the setting no longer exists?",
+      "revId": "e9e1330d4577d03ecdd809ff47699b4f9cee63cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
