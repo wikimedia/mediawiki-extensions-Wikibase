@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -29,12 +28,15 @@ class StatementListPatcher {
 	 * @throws PatcherException
 	 */
 	public function patchStatementList( StatementList $statements, Diff $patch ) {
-		/** @var DiffOp $diffOp */
+		/**
+		 * @var Statement $statement
+		 * @var Statement $oldStatement
+		 * @var Statement $newStatement
+		 */
+
 		foreach ( $patch as $diffOp ) {
 			switch ( true ) {
 				case $diffOp instanceof DiffOpAdd:
-					/** @var DiffOpAdd $diffOp */
-					/** @var Statement $statement */
 					$statement = $diffOp->getNewValue();
 					$guid = $statement->getGuid();
 					if ( $statements->getFirstStatementWithGuid( $guid ) === null ) {
@@ -43,17 +45,12 @@ class StatementListPatcher {
 					break;
 
 				case $diffOp instanceof DiffOpChange:
-					/** @var DiffOpChange $diffOp */
-					/** @var Statement $oldStatement */
-					/** @var Statement $newStatement */
 					$oldStatement = $diffOp->getOldValue();
 					$newStatement = $diffOp->getNewValue();
 					$this->changeStatement( $statements, $oldStatement->getGuid(), $newStatement );
 					break;
 
 				case $diffOp instanceof DiffOpRemove:
-					/** @var DiffOpRemove $diffOp */
-					/** @var Statement $statement */
 					$statement = $diffOp->getOldValue();
 					$statements->removeStatementsWithGuid( $statement->getGuid() );
 					break;

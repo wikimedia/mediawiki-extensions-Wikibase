@@ -49,19 +49,16 @@ class AliasGroupListPatcher {
 
 		switch ( true ) {
 			case $diffOp instanceof DiffOpAdd:
-				/** @var $diffOp DiffOpAdd */
 				if ( !$hasLang ) {
 					$groups->setAliasesForLanguage( $lang, $diffOp->getNewValue() );
 				}
 				break;
 
 			case $diffOp instanceof DiffOpChange:
-				/** @var $diffOp DiffOpChange */
 				$this->applyAliasGroupChange( $groups, $lang, $diffOp );
 				break;
 
 			case $diffOp instanceof DiffOpRemove:
-				/** @var $diffOp DiffOpRemove */
 				if ( $hasLang
 					&& $groups->getByLanguage( $lang )->getAliases() === $diffOp->getOldValue()
 				) {
@@ -70,7 +67,6 @@ class AliasGroupListPatcher {
 				break;
 
 			case $diffOp instanceof Diff:
-				/** @var $diffOp Diff */
 				$this->applyAliasGroupDiff( $groups, $lang, $diffOp );
 				break;
 
@@ -130,12 +126,10 @@ class AliasGroupListPatcher {
 		foreach ( $patch as $diffOp ) {
 			switch ( true ) {
 				case $diffOp instanceof DiffOpAdd:
-					/** @var $diffOp DiffOpAdd */
 					$aliases[] = $diffOp->getNewValue();
 					break;
 
 				case $diffOp instanceof DiffOpChange:
-					/** @var $diffOp DiffOpChange */
 					$key = array_search( $diffOp->getOldValue(), $aliases, true );
 					if ( $key !== false ) {
 						unset( $aliases[$key] );
@@ -144,7 +138,6 @@ class AliasGroupListPatcher {
 					break;
 
 				case $diffOp instanceof DiffOpRemove:
-					/** @var $diffOp DiffOpRemove */
 					$key = array_search( $diffOp->getOldValue(), $aliases, true );
 					if ( $key !== false ) {
 						unset( $aliases[$key] );
