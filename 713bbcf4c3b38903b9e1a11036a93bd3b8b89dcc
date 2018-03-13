@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6398ff7f_f3a3a7df",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-13T17:02:59Z",
+      "side": 1,
+      "message": "Hmm no real limit but I guess we can put an arbitrary one. It\u0027s unlikely we\u0027ll need a lot here but putting on explicit limit might help.",
+      "parentUuid": "9af61600_67bd0a75",
+      "range": {
+        "startLine": 59,
+        "startChar": 35,
+        "endLine": 59,
+        "endChar": 42
+      },
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f892f747_f0da3fc9",
         "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
         "patchSetId": 11
@@ -59,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "1b454bce_7e0d3747",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-13T17:02:59Z",
+      "side": 1,
+      "message": "I don\u0027t think so. This is for retrieving labels \u0026 descriptions, redirects don\u0027t have them.",
+      "parentUuid": "57f65d11_43102dd7",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16aa5a35_848f5dc5",
         "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
         "patchSetId": 11
@@ -70,6 +112,24 @@
       "writtenOn": "2018-03-13T08:52:31Z",
       "side": 1,
       "message": "So in theory you could match more than the list of titles you want:\nIf asking for NS1:Q123 and NS2:Q234 but NS2:Q123 exists then you could return 3 titles instead of 2.\nIf the data does not allow this situation then it\u0027s fine.",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "804b517c_9c9acf5f",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-13T17:02:59Z",
+      "side": 1,
+      "message": "In theory, yes. In practice, entities in different namespaces have different prefixes, so it should never happen. Namespace here is to exclude matches to pages in non-entity namespaces that still can be named something like Q123.",
+      "parentUuid": "16aa5a35_848f5dc5",
       "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
