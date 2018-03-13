@@ -71,8 +71,7 @@ class PopulateTermFullEntityId extends LoggedUpdateMaintenance {
 		if ( $this->termsTableHasTermsForCustomEntityTypes( $dbr ) ) {
 			$this->error(
 				"There are entries for entities other than items and properties in wb_terms which cannot be automatically updated.\n" .
-				"Run rebuildTermSqlIndex (consider --no-deduplication option) maintenance script to have terms of all entities updated.\n" .
-				"You should set Wikibase 'readFullEntityIdColumn' setting to false until all terms have been updated.\n",
+				"Run rebuildTermSqlIndex (consider --no-deduplication option) maintenance script to have terms of all entities updated.\n",
 				0
 			);
 		}
