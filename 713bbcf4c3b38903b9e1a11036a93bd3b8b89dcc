@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c61b1762_5fa2b34d",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-13T20:05:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6398ff7f_f3a3a7df",
+      "range": {
+        "startLine": 59,
+        "startChar": 35,
+        "endLine": 59,
+        "endChar": 42
+      },
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f892f747_f0da3fc9",
         "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
         "patchSetId": 11
@@ -60,6 +84,24 @@
       "writtenOn": "2018-03-13T08:52:31Z",
       "side": 1,
       "message": "We should probably ensure that we don\u0027t hit 10000 or the query will fail, we can\u0027t return more than 10000 results.",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5765ce50_94c9fb51",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-13T20:05:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f892f747_f0da3fc9",
       "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
