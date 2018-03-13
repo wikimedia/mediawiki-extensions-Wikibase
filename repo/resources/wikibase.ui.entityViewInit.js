@@ -363,6 +363,8 @@
 				attachWatchLinkUpdater( $entityview, viewName );
 			}
 
+			mw.hook( 'wikibase.entityPage.entityView.rendered' ).fire();
+
 			mwPerformance.mark( 'wbInitEnd' );
 		} );
 
