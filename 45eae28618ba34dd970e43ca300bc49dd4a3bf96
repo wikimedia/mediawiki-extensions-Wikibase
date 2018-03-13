@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a5ed0d1f_372badad",
+        "filename": "client/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2018-03-13T05:23:19Z",
+      "side": 1,
+      "message": "This doesn\u0027t actually do anything, phpcs:ignoreFile disables all sniffs for the entire file. If you just want to disable just that sniff you\u0027ll need phpcs:disable and phpcs:enable",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 44
+      },
+      "revId": "45eae28618ba34dd970e43ca300bc49dd4a3bf96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaf25e01_9ad52751",
         "filename": "docs/options.wiki",
         "patchSetId": 9
