@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9af61600_67bd0a75",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-13T08:52:31Z",
+      "side": 1,
+      "message": "do we have a limit somewhere?\nElastic hard limit defaults to 65536 for terms query I bet it\u0027s more than we need.\nSadly we want to return all of them and the limit in the resultset is 10000 so this process is capped at 10000 (don\u0027t forget the worst scenario where we multiple by the number of indices)",
+      "range": {
+        "startLine": 59,
+        "startChar": 35,
+        "endLine": 59,
+        "endChar": 42
+      },
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f892f747_f0da3fc9",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-13T08:52:31Z",
+      "side": 1,
+      "message": "We should probably ensure that we don\u0027t hit 10000 or the query will fail, we can\u0027t return more than 10000 results.",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57f65d11_43102dd7",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-13T08:52:31Z",
+      "side": 1,
+      "message": "This will only match canonical titles and will silently ignore redirects, should we support them?",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16aa5a35_848f5dc5",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-13T08:52:31Z",
+      "side": 1,
+      "message": "So in theory you could match more than the list of titles you want:\nIf asking for NS1:Q123 and NS2:Q234 but NS2:Q123 exists then you could return 3 titles instead of 2.\nIf the data does not allow this situation then it\u0027s fine.",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2bb3c958_da8cfe87",
+        "filename": "lib/includes/Store/Elastic/TermLookupSearcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-13T08:52:31Z",
+      "side": 1,
+      "message": "not sure why we still have this catch in Searcher::get I doubt this could happen when using the _search endpoint, probably a leftover of some code using the _get endpoint prior switching to _search...",
+      "revId": "713bbcf4c3b38903b9e1a11036a93bd3b8b89dcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
