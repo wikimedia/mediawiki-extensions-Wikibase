@@ -461,6 +461,30 @@
     },
     {
       "key": {
+        "uuid": "0ebb428d_5d8f1bec",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-13T04:51:29Z",
+      "side": 1,
+      "message": "This is now moved to Utils class.",
+      "parentUuid": "2255cfd6_5713efe3",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a62bacf8_14ac9ecf",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 62
