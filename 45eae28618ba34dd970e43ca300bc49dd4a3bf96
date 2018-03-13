@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaf25e01_9ad52751",
+        "filename": "docs/options.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 531
+      },
+      "writtenOn": "2018-03-13T05:15:45Z",
+      "side": 1,
+      "message": "Is it \"{{#shortdesc}}\" or \"{{SHORTDESC:}}\"? Different files say different things.",
+      "revId": "45eae28618ba34dd970e43ca300bc49dd4a3bf96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
