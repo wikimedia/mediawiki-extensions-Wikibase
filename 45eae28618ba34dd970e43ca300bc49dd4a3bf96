@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "db26541b_7efe00b1",
+        "filename": "client/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-03-13T05:26:29Z",
+      "side": 1,
+      "message": "That needs to be fixed somewhere in generateAutoload.php I suppose.",
+      "parentUuid": "a5ed0d1f_372badad",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 44
+      },
+      "revId": "45eae28618ba34dd970e43ca300bc49dd4a3bf96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaf25e01_9ad52751",
         "filename": "docs/options.wiki",
         "patchSetId": 9
