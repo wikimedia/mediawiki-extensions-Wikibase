@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "442d70a9_ab51a5f4",
+        "filename": "view/lib/i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-03-14T17:14:38Z",
+      "side": 0,
+      "message": "Global",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "79fa784201d45a429713e9f38e497eb7f03e7ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eab2eef7_a84aa961",
+        "filename": "view/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-03-14T17:14:38Z",
+      "side": 0,
+      "message": "Global",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "79fa784201d45a429713e9f38e497eb7f03e7ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "310876ad_1154f952",
+        "filename": "view/resources.test.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-03-14T17:14:38Z",
+      "side": 0,
+      "message": "Global",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "79fa784201d45a429713e9f38e497eb7f03e7ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
