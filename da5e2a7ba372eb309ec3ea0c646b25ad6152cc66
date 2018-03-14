@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a42ea05_cc3fd334",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T12:18:39Z",
+      "side": 1,
+      "message": "should be a round parenthesis now",
+      "range": {
+        "startLine": 225,
+        "startChar": 72,
+        "endLine": 225,
+        "endChar": 73
+      },
+      "revId": "da5e2a7ba372eb309ec3ea0c646b25ad6152cc66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
