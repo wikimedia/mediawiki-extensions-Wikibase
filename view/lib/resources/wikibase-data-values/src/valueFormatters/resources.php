@@ -6,16 +6,9 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-	$dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-		. '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'wikibase-data-values'
-		. DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'valueFormatters';
-
-	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
-		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', $dir, $remoteExtPath );
-
 	$moduleTemplate = [
-		'localBasePath' => $dir,
-		'remoteExtPath' => '..' . $remoteExtPath[0],
+		'localBasePath' => __DIR__ . '/../../../../wikibase-data-values/src/valueFormatters',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values/src/valueFormatters',
 	];
 
 	return [
