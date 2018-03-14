@@ -98,13 +98,9 @@ class EchoSetupHookHandlers {
 			'bundle' => [ 'web' => true, 'email' => false ],
 		];
 
-		if ( !empty( $this->echoIcon ) ) {
-			$icons[EchoNotificationsHandlers::NOTIFICATION_TYPE] = $this->echoIcon;
-		} else {
-			preg_match( '+/extensions/(.*)+', __DIR__, $remoteExtPath );
-			$iconPath = $remoteExtPath[1] . '/../../resources/images/echoIcon.svg';
-			$icons[EchoNotificationsHandlers::NOTIFICATION_TYPE] = [ 'path' => $iconPath ];
-		}
+		$icons[EchoNotificationsHandlers::NOTIFICATION_TYPE] = $this->echoIcon ?: [
+			'path' => 'Wikibase/client/resources/images/echoIcon.svg',
+		];
 	}
 
 }

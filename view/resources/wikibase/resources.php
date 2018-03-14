@@ -8,12 +8,9 @@ use Wikibase\View\Module\TemplateModule;
  * @author H. Snater < mediawiki@snater.com >
  */
 return call_user_func( function() {
-	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
-		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
-
 	$moduleTemplate = [
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . $remoteExtPath[0],
+		'remoteExtPath' => 'Wikibase/view/resources/wikibase',
 	];
 
 	$modules = [
