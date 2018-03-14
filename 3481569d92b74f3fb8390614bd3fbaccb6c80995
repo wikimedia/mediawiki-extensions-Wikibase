@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2a926d1_082c7747",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T16:23:09Z",
+      "side": 1,
+      "message": "No need for this to be in here.",
+      "range": {
+        "startLine": 380,
+        "startChar": 67,
+        "endLine": 380,
+        "endChar": 86
+      },
+      "revId": "3481569d92b74f3fb8390614bd3fbaccb6c80995",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
