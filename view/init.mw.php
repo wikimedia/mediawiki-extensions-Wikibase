@@ -15,11 +15,26 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'license-name' => 'GPL-2.0-or-later'
 ];
 
-include __DIR__ . '/resources.php';
-include __DIR__ . '/resources.test.php';
+$GLOBALS['wgResourceModules'] = array_merge(
+	$GLOBALS['wgResourceModules'],
+	include __DIR__ . '/lib/resources.php',
+	include __DIR__ . '/resources/resources.php'
+);
 
-$GLOBALS['wgMessagesDirs']['WikibaseView'] = [];
-include __DIR__ . '/lib/i18n.php';
+$GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
+	array &$testModules,
+	ResourceLoader $resourceLoader
+) {
+	$testModules['qunit'] = array_merge(
+		$testModules['qunit'],
+		include __DIR__ . '/lib/resources.test.php',
+		include __DIR__ . '/tests/qunit/resources.php'
+	);
+};
+
+$GLOBALS['wgMessagesDirs']['WikibaseView'] = [
+	__DIR__ . '/lib/wikibase-data-values-value-view/i18n',
+];
 
 $GLOBALS['wgHooks']['UnitTestsList'][] = function( array &$paths ) {
 	$paths[] = __DIR__ . '/tests/phpunit';
