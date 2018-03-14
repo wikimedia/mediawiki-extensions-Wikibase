@@ -94,7 +94,7 @@ class EntityDataUriManager {
 	 *
 	 * @param string $doc
 	 *
-	 * @return string[] An array of two strings, array( $id, $format ).
+	 * @return string[] A 2-element array in the form [ string $id, string $format ]
 	 */
 	public function parseDocName( $doc ) {
 		$format = '';

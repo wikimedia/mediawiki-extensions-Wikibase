@@ -277,8 +277,8 @@ class ChangeDispatcher {
 	 * @param int $after The last change ID processed by a previous run. All changes returned
 	 *                     will have an ID greater than $after.
 	 *
-	 * @return array( $batch, $seen ), where $batch is a list of Change objects, and $seen
-	 *         if the ID of the last change considered for the batch (even if that was filtered out),
+	 * @return array( Change[] $batch, int $seen ), where $batch is a list of Change objects, and
+	 *  $seen is the ID of the last change considered for the batch (even if that was filtered out),
 	 *         for use as a continuation marker.
 	 */
 	public function getPendingChanges( $siteID, $after ) {
@@ -376,8 +376,8 @@ class ChangeDispatcher {
 	 * @param Change[] $changes The list of changes to filter.
 	 * @param int $limit The max number of changes to return
 	 *
-	 * @return array( $batch, $seen ), where $batch is the filtered list of Change objects,
-	 *         and $seen if the ID of the last change considered for the batch
+	 * @return array( Change[] $batch, int $seen ), where $batch is the filtered list of Change
+	 *  objects, and $seen is the ID of the last change considered for the batch
 	 *         (even if that was filtered out), for use as a continuation marker.
 	 */
 	private function filterChanges( $siteID, array $changes, $limit ) {
