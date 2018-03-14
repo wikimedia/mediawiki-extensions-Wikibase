@@ -249,6 +249,9 @@ return [
 		// Custom rescore profiles placeholder
 		// (See config/ElasticSearchRescoreProfiles.php)
 		'rescoreProfiles' => [],
+		// Custom function chains placeholder
+		// (See config/ElasticSearchRescoreFunctions.php)
+		'rescoreFunctionChains' => [],
 		// Type (de)boosts for rescoring functions
 		'statementBoost' => [],
 		// List of languages that we want to have stemming analyzers
