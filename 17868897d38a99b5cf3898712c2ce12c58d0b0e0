@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a62bea9_923ec83f",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "should spell out TermIndex here, otherwise this sounds a little confusing to me (the term \"index\" is used for so many things)",
+      "range": {
+        "startLine": 105,
+        "startChar": 53,
+        "endLine": 105,
+        "endChar": 58
+      },
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db5796de_1d43d742",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "With this, the delete query will probably go from using the `term_search_full` index to using the `term_entity` one. Will that make it significantly slower? This might cause troubles due to long transactions.",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0268846_b5de7470",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "This seems a little brittle to me… maybe we should rather add another field to the provider?",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e47a2a79_87cdf8a1",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "Could just use IDatabase::selectField",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68233e0b_58b7e2e1",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "Why not merge this with the above and add a provider with (expectedTermSearchKey, forceWriteSearchFields)?",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49feeb61_c703a790",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "Could just use IDatabase::selectField",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5777b34d_dafe4d52",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "This setting is not part of the \"entitySearch\" settings array, thus this can\u0027t be accessed like this!",
+      "range": {
+        "startLine": 228,
+        "startChar": 21,
+        "endLine": 228,
+        "endChar": 46
+      },
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f3b9b33_05718156",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T10:42:32Z",
+      "side": 1,
+      "message": "missing phpdoc for this parameter",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
