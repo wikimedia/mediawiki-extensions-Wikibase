@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2403c82_f7a39585",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T21:28:17Z",
+      "side": 1,
+      "message": "can also be null",
+      "range": {
+        "startLine": 53,
+        "startChar": 9,
+        "endLine": 53,
+        "endChar": 21
+      },
+      "revId": "2f6c9977378c9d90fcd5f15b62dc2522571e944b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
