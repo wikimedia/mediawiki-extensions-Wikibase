@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad4a98f_2db98cec",
+        "filename": "view/init.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-03-14T19:13:37Z",
+      "side": 1,
+      "message": "This is now no longer an array. For future ease of use and extendability, as well as to reduce risk factor of unintentional change, might be better to change this back to an array containing just one item.",
+      "range": {
+        "startLine": 35,
+        "startChar": 26,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "61cea503b36f81bd9bab29b621d977b0d34ac413",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
