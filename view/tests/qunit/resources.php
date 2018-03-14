@@ -4,12 +4,9 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-$remoteExtPathParts = explode(
-	DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
-);
 $moduleBase = [
 	'localBasePath' => __DIR__,
-	'remoteExtPath' => $remoteExtPathParts[1],
+	'remoteExtPath' => 'Wikibase/view/tests/qunit',
 ];
 
 $modules = [
