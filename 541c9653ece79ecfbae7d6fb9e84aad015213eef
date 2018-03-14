@@ -485,6 +485,30 @@
     },
     {
       "key": {
+        "uuid": "d6c19c1b_6322a3d2",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 62
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-14T14:59:49Z",
+      "side": 1,
+      "message": "http://geek-and-poke.com/geekandpoke/2013/8/20/naming-is-key",
+      "parentUuid": "0ebb428d_5d8f1bec",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "541c9653ece79ecfbae7d6fb9e84aad015213eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a62bacf8_14ac9ecf",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 62
