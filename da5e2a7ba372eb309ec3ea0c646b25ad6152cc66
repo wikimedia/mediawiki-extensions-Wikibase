@@ -46,6 +46,30 @@
       "revId": "da5e2a7ba372eb309ec3ea0c646b25ad6152cc66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2c5e523_c69ccc9d",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T12:36:48Z",
+      "side": 1,
+      "message": "Great, thanks!",
+      "parentUuid": "418de32e_e0b15716",
+      "range": {
+        "startLine": 225,
+        "startChar": 72,
+        "endLine": 225,
+        "endChar": 73
+      },
+      "revId": "da5e2a7ba372eb309ec3ea0c646b25ad6152cc66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
