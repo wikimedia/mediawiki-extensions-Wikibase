@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "917d2667_da2f5b2c",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a62bea9_923ec83f",
+      "range": {
+        "startLine": 105,
+        "startChar": 53,
+        "endLine": 105,
+        "endChar": 58
+      },
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db5796de_1d43d742",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "8be954dd_92a08e3c",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Wait, is this change even necessary? I just noticed the array_intersect_key below – if I’m not mistaken, that removes the term_search_key anyways, so perhaps we can do with only one getTermFields() method after all.",
+      "parentUuid": "db5796de_1d43d742",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0268846_b5de7470",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
@@ -53,6 +95,24 @@
       "writtenOn": "2018-03-14T10:42:32Z",
       "side": 1,
       "message": "This seems a little brittle to me… maybe we should rather add another field to the provider?",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "caada280_62e79a20",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Well, the real provider comes from the parent class, which shouldn’t know too much about TermSqlIndex details, so I’m not sure what the best way to write these tests is…",
+      "parentUuid": "e0268846_b5de7470",
       "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "778a5487_37855fee",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e47a2a79_87cdf8a1",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68233e0b_58b7e2e1",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "b4912776_eea65bbb",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68233e0b_58b7e2e1",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49feeb61_c703a790",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
@@ -104,6 +200,24 @@
       "writtenOn": "2018-03-14T10:42:32Z",
       "side": 1,
       "message": "Could just use IDatabase::selectField",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "adc1a4c7_cad86200",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49feeb61_c703a790",
       "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -133,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "1bd1adaf_8fcbf196",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5777b34d_dafe4d52",
+      "range": {
+        "startLine": 228,
+        "startChar": 21,
+        "endLine": 228,
+        "endChar": 46
+      },
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f3b9b33_05718156",
         "filename": "repo/maintenance/rebuildTermSqlIndex.php",
         "patchSetId": 2
@@ -144,6 +282,24 @@
       "writtenOn": "2018-03-14T10:42:32Z",
       "side": 1,
       "message": "missing phpdoc for this parameter",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6719ce71_b2998386",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-14T11:21:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f3b9b33_05718156",
       "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
