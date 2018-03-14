@@ -53,7 +53,6 @@ return [
 			'repo/Wikibase.php',
 			'repo/WikibaseRepo.datatypes.php',
 			'repo/WikibaseRepo.entitytypes.php',
-			'view/init.mw.php',
 			'view/resources.php',
 			'view/WikibaseView.php',
 			'Wikibase.php',
