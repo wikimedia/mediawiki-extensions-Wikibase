@@ -10,7 +10,7 @@ var MODULE = wb.serialization,
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  *
  * @constructor
  */
