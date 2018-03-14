@@ -1112,6 +1112,10 @@ final class RepoHooks {
 			$service->registerArrayRepository( SearchProfileService::RESCORE,
 				'wikibase_config', $entitySearchConfig['rescoreProfiles'] );
 		}
+		if ( isset( $entitySearchConfig['rescoreFunctionChains'] ) ) {
+			$service->registerArrayRepository( SearchProfileService::RESCORE_FUNCTION_CHAINS,
+				'wikibase_config', $entitySearchConfig['rescoreFunctionChains'] );
+		}
 		if ( isset( $entitySearchConfig['prefixSearchProfiles'] ) ) {
 			$service->registerArrayRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 				'wikibase_config', $entitySearchConfig['prefixSearchProfiles'] );
