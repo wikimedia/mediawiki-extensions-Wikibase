@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "9f5683c2_95aac6c0",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-14T15:30:59Z",
+      "side": 1,
+      "message": "Good catch… due to that, I guess this is fine.\n\nIf we want, we can still switch this to delete by PK… but I doubt that\u0027s necessary for now.",
+      "parentUuid": "8be954dd_92a08e3c",
+      "revId": "17868897d38a99b5cf3898712c2ce12c58d0b0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0268846_b5de7470",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 2
