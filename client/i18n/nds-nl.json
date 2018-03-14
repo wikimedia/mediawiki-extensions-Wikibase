@@ -14,7 +14,7 @@
 	"wikibase-comment-sitelink-change": "Taalverwiezing ewiezigd van $1 naor $2",
 	"wikibase-comment-sitelink-remove": "Taalverwiezing vortedaon: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|wieziging|wiezigingen}}",
-	"wikibase-dataitem": "{{WBREPONAME}}-onderwarp",
+	"wikibase-dataitem": "{{WBREPONAME}}-underwarp",
 	"wikibase-editlinks": "Verwiezingen bewarken",
 	"wikibase-editlinkstitle": "Verwiezingen veur aandere talen bewarken",
 	"wikibase-linkitem-addlinks": "Verwiezingen derbie zetten",
@@ -43,7 +43,7 @@
 	"unconnectedpages": "Ziejen die niet ekoppeld bin an n onderwarp",
 	"wikibase-unconnectedpages-submit": "Zeuk",
 	"wikibase-pageinfo-entity-id-none": "Gien",
-	"wikibase-otherprojects": "In aandere projekten",
+	"wikibase-otherprojects": "In andere projekten",
 	"wikibase-otherprojects-beta-message": "Aandere projekten-ziedbalke",
 	"wikibase-otherprojects-beta-description": "Voegt n \"{{int:wikibase-otherprojects}}\"-seksie toe an de ziedbalke die toegang gif tot aandere Wikimedia-projekten op baosis van gegevens van {{WBREPONAME}}."
 }

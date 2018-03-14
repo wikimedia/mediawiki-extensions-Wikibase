@@ -6,7 +6,8 @@
 			"Macofe",
 			"Amire80",
 			"Sarvaturi",
-			"Ladsgroup"
+			"Ladsgroup",
+			"S4b1nuz E.656"
 		]
 	},
 	"wikibase-desc": "Dipòsitu di dati strutturati",
@@ -46,7 +47,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "discrizzioni",
 	"wikibase-diffview-link": "culligamenti",
-	"wikibase-sitelink-site-edit-placeholder": "situ",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "pàggina",
 	"wikibase-alias-edit-placeholder": "scrivi n'alias",
 	"wikibase-label-input-help-message": "Scrivi l'etichetta di sta ntità n $1.",
