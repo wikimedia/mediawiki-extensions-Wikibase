@@ -1791,6 +1791,7 @@ class WikibaseRepo {
 						'bnn', // T174230
 						'brx', // T155369
 						'chn', // T155370
+						'cnr', // T185800
 						'cop', // T155371
 						'ett', // T125066
 						'eya', // T155372
