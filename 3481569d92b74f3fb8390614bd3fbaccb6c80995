@@ -22,6 +22,30 @@
       "revId": "3481569d92b74f3fb8390614bd3fbaccb6c80995",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c11d139_26b157d1",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-15T00:43:41Z",
+      "side": 1,
+      "message": "I\u0027d say this is outside of scope of this patch.",
+      "parentUuid": "a2a926d1_082c7747",
+      "range": {
+        "startLine": 380,
+        "startChar": 67,
+        "endLine": 380,
+        "endChar": 86
+      },
+      "revId": "3481569d92b74f3fb8390614bd3fbaccb6c80995",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
