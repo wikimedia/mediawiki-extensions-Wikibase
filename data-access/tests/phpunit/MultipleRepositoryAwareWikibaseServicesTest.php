@@ -37,7 +37,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 			new EntityIdComposer( [] ),
 			$this->getRepositoryDefinitions(),
 			new EntityTypeDefinitions( [] ),
-			new DataAccessSettings( 1, true ),
+			new DataAccessSettings( 1, true, false ),
 			$this->getMultiRepoServiceWiring(),
 			[]
 		);

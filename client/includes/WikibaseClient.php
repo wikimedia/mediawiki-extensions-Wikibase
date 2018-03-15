@@ -385,7 +385,9 @@ final class WikibaseClient {
 
 	private function getDataAccessSettings() {
 		return new DataAccessSettings(
-			$this->settings->getSetting( 'maxSerializedEntitySize' )
+			$this->settings->getSetting( 'maxSerializedEntitySize' ),
+			$this->settings->getSetting( 'useTermsTableSearchFields' ),
+			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' )
 		);
 	}
 

@@ -264,4 +264,10 @@ return [
 	// List of entity types that rdf export is disabled
 	'disabledRdfExportEntityTypes' => [],
 
+	// Use search-related fields of wb_terms table
+	'useTermsTableSearchFields' => true,
+
+	// Override useTermsTableSearchFields for writing
+	'forceWriteTermsTableSearchFields' => false,
+
 ];
