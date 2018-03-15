@@ -4,15 +4,16 @@
 			"Bonevarluri",
 			"Mogoeilor",
 			"Macofe",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Beyronvan"
 		]
 	},
 	"wikibase-entity-item": "قلم",
 	"wikibase-entity-query": "مئن جوری",
-	"wikibase-edit": "ۋیرایشت",
+	"wikibase-edit": "ڤیرایشت",
 	"wikibase-save": "اماییه کردن",
 	"wikibase-cancel": "انجوم شیو كردن",
-	"wikibase-add": "اضاف کردن",
+	"wikibase-add": "اٛزاف کردن",
 	"wikibase-addreference": "اضاف کردن سرچشمه",
 	"wikibase-save-inprogress": "د حال و بال اماییه کاری...",
 	"wikibase-remove-inprogress": "د حال و بال ؤرداشتن...",
@@ -27,7 +28,7 @@
 	"wikibase-sitelink-site-edit-placeholder": "سیلجا",
 	"wikibase-sitelink-page-edit-placeholder": "بلگه",
 	"wikibase-statementsection-statements": "گوته یا",
-	"wikibase-sitelinks-special": "دیارگه یا هنی",
+	"wikibase-sitelinks-special": "دیارگٱیا هٱنی",
 	"wikibase-remove": "ؤرداشتن",
 	"wikibase-move-up": "رئتن بالا",
 	"wikibase-move-down": "رو وه هار",

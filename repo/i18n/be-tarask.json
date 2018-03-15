@@ -350,6 +350,7 @@
 	"wikibase-listdatatypes-multilingualtext-head": "Шматмоўны тэкст",
 	"wikibase-listdatatypes-multilingualtext-body": "Поле сымбальных зьвестак для радку, які мусіць быць перакладзены на іншыя мовы. Звычайна выкарыстоўваецца для назваў элемэнтаў, якія маюць глябальную цікавасьць і нелякальныя формы запісу. Яны могуць адрозьнівацца як мовай, так і сыстэмай запісу.\n* language — яўнае значэньне, каб задаць мову для тэкставай часткі\n* value — яўнае значэньне для радку на вызначанай мове",
 	"wikibase-listdatatypes-string-head": "Радок",
+	"wikibase-listdatatypes-string-body": "Поле сымбальных зьвестак для радку сымбаляў. Звычайна выкарыстоўваецца для ідэнтыфікатараў, чыя форма напісаньня не залежыць ад мовы чытача.\n* value — яўнае значэньне для радку на вызначанай мове",
 	"wikibase-listdatatypes-time-head": "Час",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-external-id-head": "Вонкавы ідэнтыфікатар",
