@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
+use MediaWiki\Sparql\SparqlClient;
 use Wikibase\AddUnitConversions;
 use Wikibase\Lib\Units\UnitConverter;
-use Wikibase\Repo\Maintenance\SPARQLClient;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,9 +20,9 @@ class MockAddUnits extends AddUnitConversions {
 
 	/**
 	 * Set SPARQL client.
-	 * @param SPARQLClient $client
+	 * @param SparqlClient $client
 	 */
-	public function setClient( SPARQLClient $client ) {
+	public function setClient( SparqlClient $client ) {
 		$this->client = $client;
 	}
 
