@@ -10,7 +10,6 @@ use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\WikibaseSettings;
 use WikiPage;
 use WikitextContent;
 
@@ -47,13 +46,10 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	private $oldEntityNamespaces;
 
 	protected function setUp() {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
-		}
-
 		parent::setUp();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
 		$settings = $wikibaseClient->getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
 		$this->oldEntityNamespaces = $wikibaseClient->getRepositoryDefinitions()->getEntityNamespaces();
@@ -131,7 +127,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	public function testUpdateUsageOnCreation() {
 		// Create a new page that uses Q11.
 		$text = "Just some text\n";
-		$text .= "using a property: {{#property:P1|from=Q11}}\n";
+		$text .= "using a property: {{#property:doesNotExist|from=Q11}}\n";
 		$this->updatePage( $this->articleTitle, $text );
 
 		// Check that the usage of Q11 is tracked.
@@ -157,7 +153,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->waitForNextTimestamp(); // make sure we don't get the same timestamp as the edit before!
 
 		// Create the template we'll use below.
-		$text = "{{#property:P2|from=Q22}}\n";
+		$text = "{{#property:doesNotExist|from=Q22}}\n";
 		$this->updatePage( $this->templateTitle, $text );
 
 		// Assume the state created by testUpdateUsageOnCreation().
@@ -183,7 +179,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		// Assume the state created by testUpdateUsageOnEdit().
 		// Change the template to use Q33.
-		$text = "{{#property:P3|from=Q33}}\n";
+		$text = "{{#property:doesNotExist|from=Q33}}\n";
 
 		$this->updatePage( $this->templateTitle, $text );
 
