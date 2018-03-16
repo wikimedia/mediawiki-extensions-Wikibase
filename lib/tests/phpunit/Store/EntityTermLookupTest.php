@@ -123,8 +123,11 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		return new EntityTermLookup( $termIndex );
 	}
 
-	protected function getTermIndex() {
-		$terms = [
+	/**
+	 * @return TermIndexEntry[]
+	 */
+	protected static function provideTerms() {
+		return [
 			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
 				'termType' => 'label',
@@ -150,8 +153,10 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 				'termText' => 'Metropole an der Ostküste der Vereinigten Staaten'
 			] ),
 		];
+	}
 
-		return new MockTermIndex( $terms );
+	protected function getTermIndex() {
+		return new MockTermIndex( self::provideTerms() );
 	}
 
 }
