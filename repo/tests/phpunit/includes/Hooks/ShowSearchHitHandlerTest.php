@@ -346,6 +346,10 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$linkCount,
 		$expected
 	) {
+		if ( !class_exists( 'CirrusSearch' ) ) {
+			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
+		}
+
 		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".html";
 		$displayLanguage = 'en';
 
