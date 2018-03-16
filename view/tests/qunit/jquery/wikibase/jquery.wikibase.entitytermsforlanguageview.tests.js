@@ -45,7 +45,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.skip( 'Create & destroy', function ( assert ) {
 		assert.expect( 3 );
 		assert.throws(
 			function () {
