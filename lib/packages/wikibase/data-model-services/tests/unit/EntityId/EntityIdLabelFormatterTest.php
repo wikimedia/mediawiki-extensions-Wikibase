@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
+use Wikibase\DataModel\Services\Lookup\LabelLookup;
 use Wikibase\DataModel\Term\Term;
 
 /**
@@ -46,8 +46,7 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @param string $expectedString
 	 */
 	public function testParseWithValidArguments( EntityId $entityId, $languageCode, $expectedString ) {
-		$labelDescriptionLookup = $this->getLabelDescriptionLookup( $languageCode );
-		$formatter = new EntityIdLabelFormatter( $labelDescriptionLookup );
+		$formatter = new EntityIdLabelFormatter( $this->getLabelLookup( $languageCode ) );
 
 		$formattedValue = $formatter->formatEntityId( $entityId );
 
@@ -58,12 +57,12 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param string $languageCode
 	 *
-	 * @return LabelDescriptionLookup
+	 * @return LabelLookup
 	 */
-	private function getLabelDescriptionLookup( $languageCode ) {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+	private function getLabelLookup( $languageCode ) {
+		$labelLookup = $this->getMock( LabelLookup::class );
 
-		$labelDescriptionLookup->expects( $this->any() )
+		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $languageCode ) {
 				if ( $id->getSerialization() === 'Q42' && $languageCode === 'es' ) {
@@ -73,7 +72,7 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 				}
 			} ) );
 
-		return $labelDescriptionLookup;
+		return $labelLookup;
 	}
 
 }

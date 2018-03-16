@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.10.0 (dev)
+
+* Added `LabelLookup` interface.
+
 ## Version 3.9.0 (2018-01-18)
 
 * Added `EntityIdComposer`.

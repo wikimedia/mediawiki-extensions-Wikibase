@@ -6,22 +6,19 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * @since 1.1
+ * @since 3.10
  *
- * @license GPL-2.0+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Marius Hoch < hoo@online.de >
+ * @license GPL-2.0-or-later
+ * @author Thiemo Kreuz
  */
-interface LabelDescriptionLookup extends LabelLookup {
+interface LabelLookup {
 
 	/**
-	 * @since 2.0
-	 *
 	 * @param EntityId $entityId
 	 *
 	 * @throws LabelDescriptionLookupException
 	 * @return Term|null
 	 */
-	public function getDescription( EntityId $entityId );
+	public function getLabel( EntityId $entityId );
 
 }
