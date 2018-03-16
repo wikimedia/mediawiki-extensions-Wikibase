@@ -34,7 +34,7 @@
 			}, options || {} ) );
 	}
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.skip( 'Create & destroy', function ( assert ) {
 		assert.expect( 4 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' );
@@ -69,7 +69,7 @@
 		);
 	} );
 
-	QUnit.test( 'Deferred button initialization', function ( assert ) {
+	QUnit.skip( 'Deferred button initialization', function ( assert ) {
 		assert.expect( 7 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' ),
@@ -105,7 +105,7 @@
 		);
 	} );
 
-	QUnit.test( 'toEditMode(), toNonEditMode()', function ( assert ) {
+	QUnit.skip( 'toEditMode(), toNonEditMode()', function ( assert ) {
 		assert.expect( 9 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' );
