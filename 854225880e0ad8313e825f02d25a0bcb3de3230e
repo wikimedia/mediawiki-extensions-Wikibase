@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec656957_c7addf71",
+        "filename": "docs/options.wiki",
+        "patchSetId": 74
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-16T11:15:00Z",
+      "side": 1,
+      "message": "profiles profile?",
+      "range": {
+        "startLine": 78,
+        "startChar": 25,
+        "endLine": 78,
+        "endChar": 50
+      },
+      "revId": "854225880e0ad8313e825f02d25a0bcb3de3230e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90845285_4af75cbe",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 74
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-03-16T11:15:00Z",
+      "side": 1,
+      "message": "does it make difference that is no longer \u0027auto\u0027 here? I don\u0027t know.",
+      "range": {
+        "startLine": 224,
+        "startChar": 23,
+        "endLine": 224,
+        "endChar": 42
+      },
+      "revId": "854225880e0ad8313e825f02d25a0bcb3de3230e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
