@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "ba32002c_044c71b8",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 74
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-16T11:24:09Z",
+      "side": 1,
+      "message": "Note this is quite expensive, because it actually loads all localizations for this language. But these are never used below. The only reason this is done here is basically the getDir() call below, which might not be worth it and can as well be replaced with \"auto\".\n\nThe getHtmlCode() call below does not need a Language object at all, but can be replaced with a much cheaper LanguageCode::bcp47( … ).",
+      "range": {
+        "startLine": 219,
+        "startChar": 16,
+        "endLine": 219,
+        "endChar": 33
+      },
+      "revId": "854225880e0ad8313e825f02d25a0bcb3de3230e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90845285_4af75cbe",
         "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
         "patchSetId": 74
