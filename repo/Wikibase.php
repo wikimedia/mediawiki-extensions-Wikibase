@@ -215,9 +215,10 @@ call_user_func( function() {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
 			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
+			// TODO: should not be part of Wikibase. Need a hook?
 			if ( $searchSettings['useCirrus'] ) {
 				$lang = $repo->getUserLanguage();
-				$entitySearchHelper = new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
+				$entitySearchHelper = new WikibaseSearchElastic\EntitySearchElastic(
 					$repo->getLanguageFallbackChainFactory(),
 					$repo->getEntityIdParser(),
 					$lang,
