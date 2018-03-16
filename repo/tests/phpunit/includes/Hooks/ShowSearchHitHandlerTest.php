@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use CirrusSearch;
 use ContextSource;
+use ExtensionRegistry;
+use HtmlArmor;
 use Language;
 use MediaWikiTestCase;
+use MWException;
 use RawMessage;
+use ReflectionMethod;
 use SearchResult;
 use SpecialSearch;
 use Title;
@@ -31,10 +36,7 @@ use Wikimedia\TestingAccessWrapper;
  * @author Matěj Suchánek
  */
 class ShowSearchHitHandlerTest extends MediaWikiTestCase {
-	/**
-	 * @var Item[]
-	 */
-	private $entities;
+
 	/**
 	 * Test cases that should be covered:
 	 * - non-Entity result
@@ -75,7 +77,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 				// Highlighted label
 				[ 'language' => 'en', 'value' => 'Hit <escape me> item' ],
 				// Highlighted description
-				[ 'language' => 'de', 'value' => new \HtmlArmor( 'Hit <b>!HERE!</b> "some" description' ) ],
+				[ 'language' => 'de', 'value' => new HtmlArmor( 'Hit <b>!HERE!</b> "some" description' ) ],
 				// extra
 				null,
 				// statements
@@ -167,7 +169,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 				// Highlighted description
 				[ 'language' => 'en', 'value' => 'Hit description' ],
 				// extra
-				[ 'language' => 'ru', 'value' => new \HtmlArmor( 'Look <b>what</b> I found!' ) ],
+				[ 'language' => 'ru', 'value' => new HtmlArmor( 'Look <b>what</b> I found!' ) ],
 				// statements
 				1,
 				// links
@@ -260,7 +262,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	/**
 	 * @param string $language
 	 * @return SpecialSearch
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	private function getSearchPage( $language ) {
 		$searchPage = $this->getMockBuilder( SpecialSearch::class )
@@ -346,6 +348,10 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$linkCount,
 		$expected
 	) {
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
+		}
+
 		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".html";
 		$displayLanguage = 'en';
 
@@ -394,7 +400,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			$related,
 			$html
 		);
-		$output = \HtmlArmor::getHtml( $title ) . "\n" .
+		$output = HtmlArmor::getHtml( $title ) . "\n" .
 				json_encode( $attributes, JSON_PRETTY_PRINT ) . "\n" .
 				$section . "\n" .
 				$extract . "\n" .
@@ -538,9 +544,13 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @param string $displayLanguage
 	 * @param string[] $languages
 	 * @param string $expected
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public function testShowSearchHitPlain( $title, $labels, $displayLanguage, $languages, $expected ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
+			// This test uses language names from CLDR
+			$this->markTestSkipped( 'cldr not installed, skipping' );
+		}
 
 		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".plain.html";
 
@@ -583,7 +593,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			]
 		);
 
-		$output = \HtmlArmor::getHtml( $title ) . "\n" .
+		$output = HtmlArmor::getHtml( $title ) . "\n" .
 				$extract . "\n" .
 				$size;
 
@@ -605,18 +615,6 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 2 ) );
 		return $item;
-	}
-
-	/**
-	 * @param object|string $object Object or class containing the method
-	 * @param string $method Method name
-	 * @param array $args other arguments
-	 * @return mixed Whatever the method returns
-	 */
-	private function callPrivateMethodWithArgs( $object, $method, $args ) {
-		$refMethod = new \ReflectionMethod( $object, $method );
-		$refMethod->setAccessible( true );
-		return $refMethod->invokeArgs( $object, $args );
 	}
 
 }
