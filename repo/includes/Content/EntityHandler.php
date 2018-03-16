@@ -31,7 +31,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use WikibaseSearchElastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -130,6 +130,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->errorLocalizer = $errorLocalizer;
 		$this->entityIdParser = $entityIdParser;
 		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
+		// TODO: Elastic-specific class. Should be changed
 		$this->fieldDefinitions = $fieldDefinitions;
 	}
 

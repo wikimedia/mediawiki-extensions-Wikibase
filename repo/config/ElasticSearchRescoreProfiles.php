@@ -1,4 +1,5 @@
 <?php
+// TODO: should be moved out of this repository
 // Wikibase prefix search scoring profile for CirrusSearch.
 // This profile applies to the whole document.
 // These configurations define how the results are ordered.

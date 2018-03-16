@@ -27,7 +27,7 @@ use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\ItemHandler;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use WikibaseSearchElastic\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
