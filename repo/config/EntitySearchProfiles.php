@@ -1,11 +1,13 @@
 <?php
+// TODO: should be moved out of this repository
+
 // Search profiles for fulltext search
 // Matches the syntax of Cirrus search profiles, e.g. in FullTextQueryBuilderProfiles.config.php
 // Note that these will be merged with Cirrus standard profiles,
 // so prefixing with 'wikibase' is recommended.
 return [
 	'wikibase' => [
-		'builder_class' => \Wikibase\Repo\Search\Elastic\EntityFullTextQueryBuilder::class,
+		'builder_class' => WikibaseSearchElastic\EntityFullTextQueryBuilder::class,
 		'settings' => [
 			'any'               => 0.04,
 			'lang-exact'        => 0.78,

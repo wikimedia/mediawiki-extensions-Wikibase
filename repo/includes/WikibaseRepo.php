@@ -103,12 +103,11 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
-use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
+use WikibaseSearchElastic\Fields\DescriptionsProviderFieldDefinitions;
+use WikibaseSearchElastic\Fields\ItemFieldDefinitions;
+use WikibaseSearchElastic\Fields\LabelsProviderFieldDefinitions;
+use WikibaseSearchElastic\Fields\PropertyFieldDefinitions;
+use WikibaseSearchElastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -1477,14 +1476,18 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return FieldDefinitions
+	 * TODO: Elastic-specific class, should be moved out?
+	 * TODO: Why public?
+	 * @return \WikibaseSearchElastic\Fields\FieldDefinitions
 	 */
 	public function getLabelProviderDefinitions() {
 		return new LabelsProviderFieldDefinitions( $this->getTermsLanguages()->getLanguages() );
 	}
 
 	/**
-	 * @return FieldDefinitions
+	 * TODO: Elastic-specific class, should be moved out?
+	 * TODO: Why public?
+	 * @return \WikibaseSearchElastic\Fields\FieldDefinitions
 	 */
 	public function getDescriptionProviderDefinitions() {
 		return new DescriptionsProviderFieldDefinitions(
@@ -1494,7 +1497,9 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return FieldDefinitions
+	 * TODO: Elastic-specific class, should be moved out?
+	 * TODO: Why public?
+	 * @return \WikibaseSearchElastic\Fields\FieldDefinitions
 	 */
 	public function getStatementProviderDefinitions() {
 		return new StatementProviderFieldDefinitions(
@@ -1504,7 +1509,8 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return FieldDefinitions
+	 * TODO: Elastic-specific class, should be moved out?
+	 * @return \WikibaseSearchElastic\Fields\FieldDefinitions
 	 */
 	private function getItemFieldDefinitions() {
 		return new ItemFieldDefinitions( [
@@ -1515,7 +1521,8 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return FieldDefinitions
+	 * TODO: Elastic-specific class, should be moved out?
+	 * @return \WikibaseSearchElastic\Fields\FieldDefinitions
 	 */
 	private function getPropertyFieldDefinitions() {
 		return new PropertyFieldDefinitions( [

@@ -1,4 +1,6 @@
 <?php
+// TODO: should be moved out of this repository
+
 // ElasticSearch function for entity weight
 // satu function is from includes/Search/RescoreBuilders.php in CirrusSearch
 // The formula is: x^a/(k^a+x^a)

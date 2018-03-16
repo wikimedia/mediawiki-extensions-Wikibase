@@ -26,12 +26,12 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\EntitySearchTermIndex;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
+use WikibaseSearchElastic\EntitySearchElastic;
 
 /**
  * @covers \Wikibase\Repo\Api\EntitySearchTermIndex
  * @covers \Wikibase\Repo\Api\SearchEntities
- * @covers \Wikibase\Repo\Search\Elastic\EntitySearchElastic
+ * @covers \WikibaseSearchElastic\EntitySearchElastic
  *
  * @group API
  * @group Wikibase
@@ -108,6 +108,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testElasticSearchIntegration( $query, array $expectedIds ) {
+		// TODO: should be moved out?
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
@@ -156,7 +157,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntitySearchElastic
+	 * @return \WikibaseSearchElastic\EntitySearchElastic
 	 */
 	private function newEntitySearchElastic() {
 		global $wgWBRepoSettings;

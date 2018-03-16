@@ -1,0 +1,16 @@
+{
+	"name": "TODO",
+	"author": [
+		"TODO",
+		"..."
+	],
+	"url": "TODO",
+	"descriptionmsg": "TODO",
+	"type": "wikibase",
+	"license-name": "GPL-2.0-or-later",
+	"AutoloadNamespaces": {
+		"Wikibase\\Search\\Elastic\\": "src/",
+		"Wikibase\\Search\\Elastic\\Tests\\": "tests/"
+	},
+	"manifest_version": 2
+}

@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use WikibaseSearchElastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
@@ -91,6 +91,7 @@ class PropertyHandler extends EntityHandler {
 			$constraintProvider,
 			$errorLocalizer,
 			$entityIdParser,
+			// TODO: Elastic-specific class. Should be changed
 			$propertyFieldDefinitions,
 			$legacyExportFormatDetector
 		);

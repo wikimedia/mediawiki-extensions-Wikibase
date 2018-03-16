@@ -18,7 +18,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\ItemLinkFormatter;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
-use Wikibase\Repo\Search\Elastic\EntityResult;
+use WikibaseSearchElastic\EntityResult;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\TestingAccessWrapper;
 
@@ -222,7 +222,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @param string[] $extra Extra match data
 	 * @param int $statementCount
 	 * @param int $linkCount
-	 * @return EntityResult
+	 * @return \WikibaseSearchElastic\EntityResult
 	 */
 	private function getEntityResult(
 		$labelData,

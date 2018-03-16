@@ -22,7 +22,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Search\Elastic\EntityResult;
+use WikibaseSearchElastic\EntityResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
@@ -102,6 +102,7 @@ class ShowSearchHitHandler {
 		&$html
 	) {
 		$self = self::newFromGlobalState( $searchPage->getContext() );
+		// TODO: Elastic-specific class. Should be changed
 		if ( $result instanceof EntityResult ) {
 			$self->showEntityResultHit( $searchPage, $result, $terms,
 				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
@@ -289,7 +290,7 @@ class ShowSearchHitHandler {
 
 	/**
 	 * Generate link text for Title link in search hit.
-	 * @param EntityResult $result
+	 * @param \WikibaseSearchElastic\EntityResult $result
 	 * @param Title $title
 	 * @param string|HtmlArmor &$html Variable where HTML will be placed
 	 * @param array &$attributes Link tag attributes, can add more

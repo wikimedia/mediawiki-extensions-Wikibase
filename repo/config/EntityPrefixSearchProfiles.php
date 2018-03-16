@@ -1,5 +1,7 @@
 <?php
 
+// TODO: should be moved out of this repository
+
 /**
  * Profile defining weights for query matching options.
  * any - match in any language

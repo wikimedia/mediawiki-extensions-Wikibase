@@ -24,7 +24,7 @@ use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use WikibaseSearchElastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
@@ -72,7 +72,7 @@ class ItemHandler extends EntityHandler {
 	 * @param SiteLinkStore $siteLinkStore
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
-	 * @param FieldDefinitions $itemFieldDefinitions
+	 * @param \WikibaseSearchElastic\Fields\FieldDefinitions $itemFieldDefinitions
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param callable|null $legacyExportFormatDetector
 	 */
@@ -96,6 +96,7 @@ class ItemHandler extends EntityHandler {
 			$constraintProvider,
 			$errorLocalizer,
 			$entityIdParser,
+			// TODO: Elastic-specific class. Should be changed
 			$itemFieldDefinitions,
 			$legacyExportFormatDetector
 		);

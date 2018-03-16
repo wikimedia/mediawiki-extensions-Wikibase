@@ -7,7 +7,7 @@ use Maintenance;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\EntitySearchTermIndex;
-use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
+use WikibaseSearchElastic\EntitySearchElastic;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -66,6 +66,9 @@ class SearchEntities extends Maintenance {
 	 * Do the actual work. All child classes will need to implement this
 	 */
 	public function execute() {
+		// TODO: should this allow specifying the engine, or should it use
+		// the one provided by WikibaseRepo?
+		// TODO: should there be WikibaseRepo::getEntitySearchHelper?
 		$engine = $this->getOption( 'engine', 'sql' );
 		$this->repo = WikibaseRepo::getDefaultInstance();
 		$this->searchHelper = $this->getSearchHelper( $engine );
