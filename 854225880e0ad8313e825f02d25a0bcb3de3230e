@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "337fce82_263eb212",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 74
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-17T03:16:04Z",
+      "side": 1,
+      "message": "Hmm I am not familiar how well auto works. If it works OK, I am fine with replacing it with LanguageCode::bcp47.",
+      "parentUuid": "ba32002c_044c71b8",
+      "range": {
+        "startLine": 219,
+        "startChar": 16,
+        "endLine": 219,
+        "endChar": 33
+      },
+      "revId": "854225880e0ad8313e825f02d25a0bcb3de3230e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90845285_4af75cbe",
         "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
         "patchSetId": 74
