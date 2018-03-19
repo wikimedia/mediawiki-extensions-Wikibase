@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "vakua",
+	"valueview-expert-globecoordinateinput-precision": "Exakteso:",
+	"valueview-expert-globecoordinateinput-nullprecision": "Sen speciguro",
+	"valueview-expert-globecoordinateinput-customprecision": "Specala ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriala",
+	"valueview-expert-timevalue-calendar-julian": "Juliala",
+	"valueview-expert-timeinput-precision": "Exakteso:",
+	"valueview-expert-timeinput-calendar": "Kalendario:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Linguo (obliganta informo):",
+	"valueview-expertextender-unitsuggester-label": "Unajo (fakultativa):",
+	"valueview-preview-label": "ol montresos quale:",
+	"valueview-preview-novalue": "nula valida valoro trovita",
+	"valueview-listrotator-manually": "informar manuale"
+}
