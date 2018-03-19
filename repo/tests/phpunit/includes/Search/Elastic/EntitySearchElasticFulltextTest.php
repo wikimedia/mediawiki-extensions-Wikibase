@@ -2,7 +2,11 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch\Profile\SearchProfileService;
+use CirrusSearch\Query\BoostTemplatesFeature;
 use CirrusSearch\Query\FullTextQueryBuilder;
+use CirrusSearch\Query\FullTextQueryStringQueryBuilder;
+use CirrusSearch\Query\InSourceFeature;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
 use Language;
@@ -87,6 +91,11 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$wgSettings['statementBoost'] = [ 'P31=Q4167410' => '-10' ];
 		$wgSettings['useStemming'] = [ 'en' => [ 'query' => true ] ];
 
+		$this->setMwGlobals( [
+			'wgCirrusSearchQueryStringMaxDeterminizedStates' => 500,
+			'wgCirrusSearchElasticQuirks' => [],
+		] );
+
 		$config = new SearchConfig();
 		$settings = [
 			'any'               => 0.04,
@@ -98,7 +107,14 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			'fallback-partial'  => 0.03,
 			'fallback-discount' => 0.1,
 		];
-		$delegate = $this->getMock( FullTextQueryBuilder::class );
+		$features = [
+			new InSourceFeature( $config ),
+			new BoostTemplatesFeature(),
+		];
+		$builderSettings = $config->getProfileService()
+			->loadProfileByName( SearchProfileService::FT_QUERY_BUILDER, 'default' );
+		$delegate = new FullTextQueryStringQueryBuilder( $config, $features, $builderSettings['settings'] );
+
 		$builder = new EntityFullTextQueryBuilder(
 			$delegate,
 			$wgSettings,
@@ -112,6 +128,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$context = new SearchContext( $config, $params['ns'] );
 		$builder->build( $context, $params['search'], false );
 		$query = $context->getQuery();
+		$context->getRescore();
 		$encoded = json_encode( $query->toArray(), JSON_PRETTY_PRINT );
 		$this->assertFileContains( $expected, $encoded );
 	}
