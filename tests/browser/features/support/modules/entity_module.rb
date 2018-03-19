@@ -136,7 +136,7 @@ module EntityPage
     mw_api = MediawikiApi::Client.new URL.repo_api
 
     sleep_period = 30
-    timeout_seconds = 300
+    timeout_seconds = 240
     timeout_loops = (timeout_seconds / sleep_period).to_i
 
     while timeout_loops > 0
