@@ -199,6 +199,7 @@
 	"wikibase-newentity-description": "Beskrivning:",
 	"wikibase-newentity-submit": "Skapa",
 	"special-setlabel": "Ange en etikett",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|påstående|påståenden}}, $2 {{PLURAL:$2|webbplatslänk|webbplatslänkar}}",
 	"wikibase-setlabel-introfull": "Du anger etiketten på $2 för [[$1]].",
 	"wikibase-setlabel-intro": "Detta formulär tillåter dig att ange etiketten för en entitet. Du behöver ange ID:et för objektet (t.ex. Q23), en språkkod (t.ex. \"sv\") och den önskade etiketten.",
 	"wikibase-setlabel-label": "Etikett:",

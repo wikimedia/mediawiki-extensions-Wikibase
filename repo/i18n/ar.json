@@ -26,7 +26,8 @@
 			"BAB ZAA",
 			"Mido",
 			"Ladsgroup",
-			"أحمد"
+			"أحمد",
+			"ديفيد"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -211,6 +212,7 @@
 	"wikibase-newentity-description": "الوصف:",
 	"wikibase-newentity-submit": "إنشاء",
 	"special-setlabel": "تحديد تسمية",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|بيان}}، $2 {{PLURAL:$2|وصلة موقع}}",
 	"wikibase-setlabel-introfull": "أنت تقوم بتحديد التسمية بـ$2 من أجل [[$1]].",
 	"wikibase-setlabel-intro": "تسمح هذه الاستمارة لك بتحديد وسم كائن. عليك تقديم معرف الكائن (مثل Q23) ورمز لغة (مثل «en») والوسم الذي يجب تحديده له.",
 	"wikibase-setlabel-label": "التسمية:",

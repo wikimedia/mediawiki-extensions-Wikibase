@@ -212,6 +212,7 @@
 	"wikibase-newentity-description": "描述：",
 	"wikibase-newentity-submit": "创建",
 	"special-setlabel": "设置标签",
+	"wikibase-search-result-stats": "$1个{{PLURAL:$1|声明}}，$2个{{PLURAL:$2|网站链接}}",
 	"wikibase-setlabel-introfull": "您正在设置[[$1]]的$2标签。",
 	"wikibase-setlabel-intro": "该表格允许您设置实体的标签。您需要提供实体的ID（如Q23）、语言代码（如“zh”）和要设置的标签。",
 	"wikibase-setlabel-label": "标签：",

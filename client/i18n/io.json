@@ -20,6 +20,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Celar",
 	"wikibase-rc-hide-wikidata-show": "Montrar",
+	"wikibase-rc-show-wikidata-pref": "Montrez la redakti che {{WBREPONAME}} en la recenta chanji",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
 	"wikibase-replicationnote": "Atencez ke povas bezonar kelka minuti, til ke omna modifiki divenos videbla en omna Wiki.",

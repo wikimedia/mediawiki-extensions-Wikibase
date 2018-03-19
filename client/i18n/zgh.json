@@ -4,7 +4,8 @@
 			"Amara-Amaziɣ",
 			"ⵕⴰⵊⵉ",
 			"YesIn",
-			"Mdb897"
+			"Mdb897",
+			"Brahim-essaidi"
 		]
 	},
 	"tooltip-t-wikibase": "ⴰⵙⵖⵏ ⵙ ⵓⴼⵔⴷⵉⵙ ⴰⵙⴰⵖⵓⵍ ⵏ ⵉⵙⴼⴽⴰ ⵉⵣⴷⵉⵏ",
@@ -12,6 +13,7 @@
 	"wikibase-dataitem": "ⴰⴼⵔⴷⵉⵙ ⵏ {{WBREPONAME}}",
 	"wikibase-editlinks": "ⵙⵏⴼⵍ ⵉⵙⵖⵓⵏⴻⵏ",
 	"wikibase-editlinkstitle": "ⵙⵏⴼⵍ ⵉⵙⵖⵓⵏ ⵏ ⵜⵓⵜⵍⴰⵢⵉⵏ ⵏ ⴱⵕⵕⴰ",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ⵙⵙⵏⵜⵍ",
 	"wikibase-rc-hide-wikidata-show": "ⵙⵎⴰⵍ",
 	"wikibase-rc-wikibase-edit-letter": "ⴷ",

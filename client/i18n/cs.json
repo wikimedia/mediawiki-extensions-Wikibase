@@ -14,7 +14,7 @@
 	"apihelp-query+description-summary": "Získat krátký popis a.k.a. popisku, který popisuje, o čem je cílová stránka.",
 	"apihelp-query+description-param-prefersource": "Který zdrojový popis preferovat:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Lokální popisy pomocí parserové funkce {{SHORTDESC:...}} ve wikitextu stránky.",
-	"apihelp-query+description-paramvalue-prefersource-central": "Hlavní popisy z asociovaného předmětu {{WBREPONAME}}.",
+	"apihelp-query+description-paramvalue-prefersource-central": "Centrální popisy ze související položky {{grammar:2sg|{{WBREPONAME}}}}.",
 	"apihelp-query+description-example": "Získat popis stránky 'Londýn'.",
 	"apihelp-query+description-example-central": "Získejte popis pro stránku 'Londýn', upřednostňujíce hlavní popis, pokud existuje.",
 	"wikibase-after-page-move": "Vaše přejmenování by nyní mělo změnit mezijazykový odkaz [$1 v související položce {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",

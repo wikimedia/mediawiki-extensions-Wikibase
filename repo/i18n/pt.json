@@ -201,6 +201,7 @@
 	"wikibase-newentity-description": "Descrição:",
 	"wikibase-newentity-submit": "Criar",
 	"special-setlabel": "Definir um rótulo",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|declaração|declarações}}, $2 {{PLURAL:$2|hiperligação|hiperligações}} intersites",
 	"wikibase-setlabel-introfull": "Está a definir o rótulo em \"$2\" para [[$1]].",
 	"wikibase-setlabel-intro": "Este formulário permite-lhe definir o rótulo de uma entidade. Precisa de fornecer o identificador da entidade (ex: Q23), um código de língua (ex: \"pt\") e o rótulo a ser definido.",
 	"wikibase-setlabel-label": "Rótulo:",

@@ -201,6 +201,7 @@
 	"wikibase-newentity-description": "Popis:",
 	"wikibase-newentity-submit": "Vytvořit",
 	"special-setlabel": "Nastavit štítek",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|tvrzení}}, $2 {{PLURAL:$2|odkaz|odkazy|odkazů}} na články",
 	"wikibase-setlabel-introfull": "Nastavujete štítek v jazyce $2 pro [[$1]].",
 	"wikibase-setlabel-intro": "Tento formulář umožňuje nastavení štítku entity. Budete potřebovat ID entity (např. „Q23“), kód jazyka (např. „cs“) a štítek, který chcete přidat.",
 	"wikibase-setlabel-label": "Štítek:",

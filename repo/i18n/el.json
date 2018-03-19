@@ -11,7 +11,8 @@
 			"Glavkos",
 			"Badseed",
 			"AVRS",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Nikosgranturismogt"
 		]
 	},
 	"wikibase-desc": "Αποθετήριο δομημένων δεδομένων",
@@ -29,9 +30,9 @@
 	"wikibase-save-inprogress": "Αποθηκεύεται...",
 	"wikibase-publish-inprogress": "δημοσιεύεται...",
 	"wikibase-remove-inprogress": "Αφαιρείται...",
-	"wikibase-statementlistview-add": "προσθήκη",
+	"wikibase-statementlistview-add": "προσθήκη τιμής",
 	"wikibase-statementlistview-add-tooltip": "προσθέστε μια νέα τιμή",
-	"wikibase-statementgrouplistview-add": "προσθήκη",
+	"wikibase-statementgrouplistview-add": "προσθήκη δήλωσης",
 	"wikibase-statementgrouplistview-add-tooltip": "προσθέστε μια νέα δήλωση",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Σε περισσότερες γλώσσες",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Ρυθμίστε",
@@ -62,7 +63,7 @@
 	"wikibase-diffview-alias": "αλλώνυμα",
 	"wikibase-diffview-description": "περιγραφή",
 	"wikibase-diffview-link": "σύνδεσμοι",
-	"wikibase-sitelink-site-edit-placeholder": "τοποθεσία",
+	"wikibase-sitelink-site-edit-placeholder": "βίκι",
 	"wikibase-sitelink-page-edit-placeholder": "σελίδα",
 	"wikibase-alias-edit-placeholder": "Πληκτρολογήστε μια εναλλακτική ονομασία",
 	"wikibase-label-input-help-message": "Εισαγάγετε την ετικέτα για αυτήν την οντότητα στα $1.",

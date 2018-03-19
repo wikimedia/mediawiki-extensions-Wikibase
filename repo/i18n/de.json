@@ -211,6 +211,7 @@
 	"wikibase-newentity-description": "Beschreibung:",
 	"wikibase-newentity-submit": "Erstellen",
 	"special-setlabel": "Eine Bezeichnung festlegen",
+	"wikibase-search-result-stats": "{{PLURAL:$1|Eine Aussage|$1 Aussagen}}, {{PLURAL:$2|ein Websitelink|$2 Websitelinks}}",
 	"wikibase-setlabel-introfull": "Du legst die Bezeichnung für [[$1]] in der Sprache $2 fest.",
 	"wikibase-setlabel-intro": "Dieses Formular ermöglicht es dir, die Bezeichnungen eines Objektes festzulegen. Du musst eine Kennung für dieses Objekt (z. B. „Q23“), einen Sprachcode (z. B. „de“) und die festzulegende Bezeichnung angeben.",
 	"wikibase-setlabel-label": "Bezeichnung:",
