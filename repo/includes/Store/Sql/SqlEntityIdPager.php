@@ -48,6 +48,13 @@ class SqlEntityIdPager implements EntityIdPager {
 	private $position = 0;
 
 	/**
+	 * Last page_id to fetch.
+	 *
+	 * @var int|null
+	 */
+	private $cutoffPosition = null;
+
+	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param null|string $entityType The desired entity type, or null for any type.
@@ -116,17 +123,24 @@ class SqlEntityIdPager implements EntityIdPager {
 	}
 
 	/**
-	 * @return int
+	 * @return int The last page id fetched.
 	 */
 	public function getPosition() {
 		return $this->position;
 	}
 
 	/**
-	 * @param int $position
+	 * @param int $position Page id to start paging from, thus fetching will start from page $position + 1.
 	 */
 	public function setPosition( $position ) {
 		$this->position = $position;
+	}
+
+	/**
+	 * @param int $cutoffPosition The last page id that can be fetched.
+	 */
+	public function setCutoffPosition( $cutoffPosition ) {
+		$this->cutoffPosition = $cutoffPosition;
 	}
 
 	/**
@@ -136,6 +150,10 @@ class SqlEntityIdPager implements EntityIdPager {
 	 */
 	private function getWhere( $position ) {
 		$where = [ 'page_id > ' . (int)$position ];
+
+		if ( $this->cutoffPosition !== null ) {
+			$where[] = 'page_id <= ' . (int)$this->cutoffPosition;
+		}
 
 		if ( $this->entityType === null ) {
 			$where['page_namespace'] = $this->entityNamespaceLookup->getEntityNamespaces();
@@ -168,7 +186,7 @@ class SqlEntityIdPager implements EntityIdPager {
 	}
 
 	/**
-	 * Processes the query result: Parse the EntityIds and compute the next
+	 * Processes the query result: Parse the EntityIds and compute the last
 	 * position. Returns an array with said entity ids and the next position
 	 * or null in case the position didn't change.
 	 *

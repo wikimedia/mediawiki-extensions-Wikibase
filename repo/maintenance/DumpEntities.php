@@ -52,7 +52,8 @@ abstract class DumpEntities extends Maintenance {
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
 		$this->addOption( 'no-cache', "If this is set, don't try to read from an EntityRevisionCache.", false, false );
-		$this->addOption( 'continue', 'Continue parameter for SqlEntityIdPager. Not compatible with --list-file.', false, true );
+		$this->addOption( 'continue', 'Page id to start dumping from. Not compatible with --list-file.', false, true );
+		$this->addOption( 'last-page-id', 'Last page id to dump. Not compatible with --list-file.', false, true );
 	}
 
 	public function setDumpEntitiesServices( SqlEntityIdPagerFactory $sqlEntityIdPagerFactory ) {
@@ -236,6 +237,10 @@ abstract class DumpEntities extends Maintenance {
 		$continue = $this->getOption( 'continue', null );
 		if ( $continue ) {
 			$sqlEntityIdPager->setPosition( intval( $continue ) );
+		}
+		$lastPageId = $this->getOption( 'last-page-id', null );
+		if ( $lastPageId ) {
+			$sqlEntityIdPager->setCutoffPosition( intval( $lastPageId ) );
 		}
 
 		return $sqlEntityIdPager;

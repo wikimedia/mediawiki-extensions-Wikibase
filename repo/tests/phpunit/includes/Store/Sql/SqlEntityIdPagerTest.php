@@ -327,4 +327,36 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 		$this->assertSame( $itemPage->getId(), $pager->getPosition() );
 	}
 
+	public function testSetCutoffPosition() {
+		$entities = [
+			new Item( new ItemId( 'Q6' ) ),
+			new Property( new PropertyId( 'P1' ), null, 'string' ),
+			new Item( new ItemId( 'Q7' ) ),
+			new Property( new PropertyId( 'P2' ), null, 'string' ),
+			new Item( new ItemId( 'Q8' ) )
+		];
+
+		$this->insertEntities( $entities );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$pager = new SqlEntityIdPager(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getEntityIdParser()
+		);
+
+		/** @var WikiPageEntityStore $entityStore */
+		$entityStore = $wikibaseRepo->getEntityStore();
+
+		$itemPage = $entityStore->getWikiPageForEntity( $entities[2]->getId() );
+
+		$pager->setCutoffPosition( $itemPage->getId() );
+
+		$ids = $pager->fetchIds( 10 );
+
+		$this->assertEquals(
+			[ new ItemId( 'Q6' ), new PropertyId( 'P1' ), new ItemId( 'Q7' ) ],
+			$ids
+		);
+	}
+
 }
