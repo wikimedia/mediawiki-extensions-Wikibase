@@ -1131,7 +1131,7 @@ final class RepoHooks {
 			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, 'cirrusWBProfile' );
 
 		// Determine the default rescore profile to use for fulltext search
-		$defaultFTRescore = EntitySearchElastic::DEFAULT_RESCORE_PROFILE;
+		$defaultFTRescore = 'wikibase';
 		if ( isset( $entitySearchConfig['defaultFulltextRescoreProfile'] ) ) {
 			// If set in config use it
 			$defaultFTRescore = $entitySearchConfig['defaultFulltextRescoreProfile'];
