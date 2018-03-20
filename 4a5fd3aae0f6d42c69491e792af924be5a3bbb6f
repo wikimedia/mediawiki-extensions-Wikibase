@@ -25,6 +25,53 @@
     },
     {
       "key": {
+        "uuid": "d2e67026_75bcd882",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-20T20:49:50Z",
+      "side": 1,
+      "message": "This is a bit contradictory. Better would be to just write: \"Set current pager position. Next fetch will start with page ID of $position + 1\"",
+      "range": {
+        "startLine": 133,
+        "startChar": 33,
+        "endLine": 133,
+        "endChar": 103
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc29db58_8ee780bf",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-20T20:49:50Z",
+      "side": 1,
+      "message": "I am not sure null is acceptable here",
+      "parentUuid": "61168f89_8e0d7f16",
+      "range": {
+        "startLine": 133,
+        "startChar": 11,
+        "endLine": 133,
+        "endChar": 14
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "412a0764_2b917985",
         "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
         "patchSetId": 1
@@ -59,6 +106,30 @@
       "writtenOn": "2018-03-20T11:44:42Z",
       "side": 1,
       "message": "This should be more specific – if I read SqlEntityIdPager correctly, dumping starts at the page ID one *after* the ID specified here.",
+      "range": {
+        "startLine": 55,
+        "startChar": 33,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5de1d8cb_8cd91f38",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-20T20:49:50Z",
+      "side": 1,
+      "message": "That is kinda weird API. I get why it is this way in SqlEntityIdPager - AFAIR that\u0027s how continue works in API - but I am not sure it is wise to expose the users to this API. Maybe we can make --continue take the first ID to dump and internally change it (like subtract 1) as necessary to make SqlEntityIdPager work?",
+      "parentUuid": "682f7853_ba02ddc7",
       "range": {
         "startLine": 55,
         "startChar": 33,
