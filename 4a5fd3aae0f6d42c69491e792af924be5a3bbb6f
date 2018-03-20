@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61168f89_8e0d7f16",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-20T11:44:42Z",
+      "side": 1,
+      "message": "int|null ?",
+      "range": {
+        "startLine": 133,
+        "startChar": 11,
+        "endLine": 133,
+        "endChar": 14
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "412a0764_2b917985",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-20T11:44:42Z",
+      "side": 1,
+      "message": "int|null ?",
+      "range": {
+        "startLine": 140,
+        "startChar": 11,
+        "endLine": 140,
+        "endChar": 14
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "682f7853_ba02ddc7",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-20T11:44:42Z",
+      "side": 1,
+      "message": "This should be more specific – if I read SqlEntityIdPager correctly, dumping starts at the page ID one *after* the ID specified here.",
+      "range": {
+        "startLine": 55,
+        "startChar": 33,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffbc3e3f_f17949c5",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-20T11:44:42Z",
+      "side": 1,
+      "message": "I’d like to see a second test for continuation – first set the cutoff position (like in the above test), then set the position to the same page ID and unset the cutoff position, do another fetch, and assert that in combination, both fetches returned the full set of entity IDs (no page was skipped).",
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
