@@ -45,6 +45,8 @@
 	"wikibase-rcfilters-hide-wikibase-description": "ئەو دەستکارییانەی لە {{WBREPONAME}}وە ئەنجام دراون",
 	"wikibase-replicationnote": "تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.",
 	"wikibase-watchlist-show-changes-pref": "دەستکارییەکانی {{WBREPONAME}} لە پێرستی چاودێرییەکەت نیشان بدە",
+	"unconnectedpages": "ئەو پەڕانەی بەندی ویکیدراوەیان نییە",
+	"unconnectedpages-summary": "ئەم پەڕەیە لە پێڕستێکی ھەموو ئەو پەڕانە پێکھاتووە کە بەندی ویکیدراوەیان نییە. نوێترین پەڕەکان لە ئەوەڵەوە پیشان دەدرێن.",
 	"wikibase-unconnectedpages-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageswithbadges-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",

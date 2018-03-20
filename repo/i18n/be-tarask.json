@@ -358,6 +358,7 @@
 	"wikibase-listdatatypes-url-body": "Поле сымбальных зьвестак для URL-адрасоў. URL-адрасы абмежаваныя пратаколамі, якія падтрымліваюцца для вонкавых спасылак у вікітэксьце.",
 	"wikibase-listdatatypes-external-id-head": "Вонкавы ідэнтыфікатар",
 	"wikibase-listdatatypes-external-id-body": "Поле сымбальных зьвестак для вонкавага ідэнтыфікатару. Вонкавыя ідэнтыфікатары могуць быць аўтаматычна злучаныя з аўтарытэтным рэсурсам для паказу.",
+	"wikibase-concept-uri": "URI канцэпту",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Прадмет у Вікібазе",
 	"content-model-wikibase-property": "Уласьцівасьць Wikibase",
