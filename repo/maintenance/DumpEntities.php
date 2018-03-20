@@ -52,7 +52,19 @@ abstract class DumpEntities extends Maintenance {
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
 		$this->addOption( 'no-cache', "If this is set, don't try to read from an EntityRevisionCache.", false, false );
-		$this->addOption( 'continue', 'Continue parameter for SqlEntityIdPager. Not compatible with --list-file.', false, true );
+		$this->addOption(
+			'next-page-id',
+			'Next page id to dump, use 0 to start with the first page. Use the reported last SqlEntityIdPager position + 1 ' .
+				'to continue a previous run. Not compatible with --list-file.',
+			false,
+			true
+		);
+		$this->addOption(
+			'last-page-id',
+			'Page id of the last page to possibly include in the dump. Not compatible with --list-file.',
+			false,
+			true
+		);
 	}
 
 	public function setDumpEntitiesServices( SqlEntityIdPagerFactory $sqlEntityIdPagerFactory ) {
@@ -233,9 +245,13 @@ abstract class DumpEntities extends Maintenance {
 	private function makeIdQueryStream( $entityType ) {
 		$sqlEntityIdPager = $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityType, $this->getRedirectMode() );
 
-		$continue = $this->getOption( 'continue', null );
-		if ( $continue ) {
-			$sqlEntityIdPager->setPosition( intval( $continue ) );
+		$nextPageId = $this->getOption( 'next-page-id', null );
+		if ( $nextPageId ) {
+			$sqlEntityIdPager->setPosition( intval( $nextPageId ) - 1 );
+		}
+		$lastPageId = $this->getOption( 'last-page-id', null );
+		if ( $lastPageId ) {
+			$sqlEntityIdPager->setCutoffPosition( intval( $lastPageId ) );
 		}
 
 		return $sqlEntityIdPager;
