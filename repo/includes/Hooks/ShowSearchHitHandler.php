@@ -6,8 +6,7 @@ use Html;
 use HtmlArmor;
 use IContextSource;
 use InvalidArgumentException;
-use Language;
-use MWException;
+use LanguageCode;
 use RequestContext;
 use SearchResult;
 use SpecialSearch;
@@ -215,13 +214,7 @@ class ShowSearchHitHandler {
 	 */
 	private static function addLanguageAttrs( array &$attr, $displayLanguage, array $text ) {
 		if ( $text['language'] !== $displayLanguage ) {
-			try {
-				$language = Language::factory( $text['language'] );
-			} catch ( MWException $e ) {
-				// If somebody fed us broken language, ignore it
-				return;
-			}
-			$attr += [ 'dir' => $language->getDir(), 'lang' => $language->getHtmlCode() ];
+			$attr += [ 'dir' => 'auto', 'lang' => LanguageCode::bcp47( $text['language'] ) ];
 		}
 	}
 
