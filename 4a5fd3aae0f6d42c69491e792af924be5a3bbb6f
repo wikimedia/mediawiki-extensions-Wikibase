@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "8deda781_9b384c5b",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-03-21T18:22:13Z",
+      "side": 1,
+      "message": "I\u0027d like: first-page-id to go along with last-page-id. \u0027Continue\u0027 only makes sense as a name if you aren\u0027t dumping from 1, which you will at least some of the time. These jobs might be run in any order, not necessarily in sequence, so not sure about the option name forthat reason as well.",
+      "parentUuid": "682f7853_ba02ddc7",
+      "range": {
+        "startLine": 55,
+        "startChar": 33,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffbc3e3f_f17949c5",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
         "patchSetId": 1
