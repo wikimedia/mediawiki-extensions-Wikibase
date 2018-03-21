@@ -67,7 +67,7 @@ call_user_func( function() {
 	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = [
-		'path' => __DIR__,
+		'path' => __DIR__ . '/../README.md',
 		'name' => 'WikibaseLib',
 		'author' => [
 			'The Wikidata team',

@@ -97,7 +97,7 @@ call_user_func( function() {
 		$wgWBRepoSettings;
 
 	$wgExtensionCredits['wikibase'][] = [
-		'path' => __DIR__,
+		'path' => __DIR__ . '/../README.md',
 		'name' => 'Wikibase Repository',
 		'author' => [
 			'The Wikidata team',
