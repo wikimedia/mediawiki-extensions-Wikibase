@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f811d88_5ff84b25",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-21T09:13:16Z",
+      "side": 1,
+      "message": "it\u0027ll switch to a rescore window using entity_weight_boost but no statementBoost is configured in config/Wikibase.default.php\nI suppose it works but it feels strange to have this as default settings.\nIt feels also strange to set a rescore profile named \"wikibase_prefix\" by default for fulltext searches.\n\nIn other words I don\u0027t know what to do but it seems that this line is unrelated to the problem.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 23,
+        "endLine": 1134,
+        "endChar": 31
+      },
+      "revId": "47b1e300bde5ba2bb02d07751a2fb5934971ff69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44dfe907_d931a956",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-03-21T09:13:16Z",
+      "side": 1,
+      "message": "I guess we need to handle conflicting setups and a config seems to be the sole solution for now. I\u0027d love to continue discussing this in : T189880",
+      "range": {
+        "startLine": 1160,
+        "startChar": 39,
+        "endLine": 1160,
+        "endChar": 48
+      },
+      "revId": "47b1e300bde5ba2bb02d07751a2fb5934971ff69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
