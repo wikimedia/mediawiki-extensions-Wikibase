@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a04acdf9_cdbf4d63",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-21T11:25:24Z",
+      "side": 1,
+      "message": "I was thinking more of setCutoffPosition() – the extra test I suggested would need to reset that, and the current pager code can already handle position or cutoffPosition being null.",
+      "parentUuid": "bc29db58_8ee780bf",
+      "range": {
+        "startLine": 133,
+        "startChar": 11,
+        "endLine": 133,
+        "endChar": 14
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "412a0764_2b917985",
         "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
         "patchSetId": 1
