@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "21be8e7e_f1c12f53",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-21T17:11:04Z",
+      "side": 1,
+      "message": "Wait, this is wrong. I intended to change the other one.",
+      "parentUuid": "7f811d88_5ff84b25",
+      "range": {
+        "startLine": 1134,
+        "startChar": 23,
+        "endLine": 1134,
+        "endChar": 31
+      },
+      "revId": "47b1e300bde5ba2bb02d07751a2fb5934971ff69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44dfe907_d931a956",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 4
