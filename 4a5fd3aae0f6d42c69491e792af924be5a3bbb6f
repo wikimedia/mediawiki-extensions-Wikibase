@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "9f9148fd_36729e94",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-21T18:45:21Z",
+      "side": 1,
+      "message": "Agree, continue here refers to one specific use case, but nothing in this option implies this use case. Would be better to do it in a generic way like start/end or first-id/last-id.",
+      "parentUuid": "8deda781_9b384c5b",
+      "range": {
+        "startLine": 55,
+        "startChar": 33,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffbc3e3f_f17949c5",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
         "patchSetId": 1
