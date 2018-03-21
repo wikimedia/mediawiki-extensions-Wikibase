@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
+use ActorMigration;
 use InvalidArgumentException;
 use MWException;
 use Revision;
@@ -367,17 +368,19 @@ class WikiPageEntityStore implements EntityStore {
 
 		// Scan through the revision table
 		$dbw = wfGetDB( DB_MASTER );
-		$res = $dbw->select( 'revision',
-			'rev_user',
+		$revWhere = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
+		$res = $dbw->select(
+			[ 'revision' ] + $revWhere['tables'],
+			1,
 			[
 				'rev_page' => $revision->getPage(),
 				'rev_id > ' . (int)$lastRevId
 				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
-				'rev_user != ' . (int)$user->getId()
-				. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
+				'NOT( ' . $revWhere['conds'] . ' )',
 			],
 			__METHOD__,
-			[ 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 ]
+			[ 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 ],
+			$revWhere['joins']
 		);
 
 		return $res->current() === false; // return true if query had no match
