@@ -360,6 +360,7 @@
 	"wikibase-listdatatypes-external-id-body": "Поле сымбальных зьвестак для вонкавага ідэнтыфікатару. Вонкавыя ідэнтыфікатары могуць быць аўтаматычна злучаныя з аўтарытэтным рэсурсам для паказу.",
 	"wikibase-concept-uri": "URI канцэпту",
 	"wikibase-concept-uri-tooltip": "URI, які ідэнтыфікуе канцэпт, апісаны гэтым элемэнтам",
+	"wikibase-pageimage-helptext": "Гэтая выява ўзятая зь сьцьверджаньняў гэтага элемэнту. Вы можаце наладзіць выяву празь зьмену сьцьверджаньня.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Прадмет у Вікібазе",
 	"content-model-wikibase-property": "Уласьцівасьць Wikibase",
