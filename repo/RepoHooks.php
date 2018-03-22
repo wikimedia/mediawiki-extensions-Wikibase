@@ -1151,10 +1151,19 @@ final class RepoHooks {
 		FullTextQueryBuilder &$builder,
 		SearchContext $context
 	) {
+		if ( !$context->getConfig()->isLocalWiki() ) {
+			// don't mess with interwiki searches
+			return;
+		}
+		$repo = WikibaseRepo::getDefaultInstance();
+		$settings = $repo->getSettings()->getSetting( 'entitySearch' );
+		if ( !$settings || empty( $settings['useCirrus'] ) ) {
+			return;
+		}
+
 		$qbSettings = $context->getConfig()->getProfileService()
 			->loadProfile( SearchProfileService::FT_QUERY_BUILDER,
 				EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT );
-		$repo = WikibaseRepo::getDefaultInstance();
 		$builder = new $qbSettings['builder_class'](
 				$builder,
 				$repo->getSettings()->getSetting( 'entitySearch' ),

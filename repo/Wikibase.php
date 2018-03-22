@@ -1024,6 +1024,7 @@ call_user_func( function() {
 	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
 	$wgHooks['CirrusSearchScoreBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchScoreBuilder';
 	$wgHooks['CirrusSearchProfileService'][] = '\Wikibase\RepoHooks::onCirrusSearchProfileService';
+	$wgHooks['CirrusSearchFulltextQueryBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchFulltextQueryBuilder';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
