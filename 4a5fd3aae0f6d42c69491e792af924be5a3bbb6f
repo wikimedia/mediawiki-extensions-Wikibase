@@ -96,6 +96,54 @@
     },
     {
       "key": {
+        "uuid": "926a198a_3840281b",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-22T02:19:46Z",
+      "side": 1,
+      "message": "Good idea, changed.",
+      "parentUuid": "d2e67026_75bcd882",
+      "range": {
+        "startLine": 133,
+        "startChar": 33,
+        "endLine": 133,
+        "endChar": 103
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ecf874d_3608cbc2",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-22T02:19:46Z",
+      "side": 1,
+      "message": "null doesn\u0027t make sense here IMO",
+      "parentUuid": "61168f89_8e0d7f16",
+      "range": {
+        "startLine": 133,
+        "startChar": 11,
+        "endLine": 133,
+        "endChar": 14
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "412a0764_2b917985",
         "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
         "patchSetId": 1
@@ -107,6 +155,30 @@
       "writtenOn": "2018-03-20T11:44:42Z",
       "side": 1,
       "message": "int|null ?",
+      "range": {
+        "startLine": 140,
+        "startChar": 11,
+        "endLine": 140,
+        "endChar": 14
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8381f7a3_d9cb1a02",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-22T02:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "412a0764_2b917985",
       "range": {
         "startLine": 140,
         "startChar": 11,
@@ -214,6 +286,30 @@
     },
     {
       "key": {
+        "uuid": "d0dcd455_99a323b4",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-22T02:19:46Z",
+      "side": 1,
+      "message": "I changed this so that it hopefully makes more sense.",
+      "parentUuid": "9f9148fd_36729e94",
+      "range": {
+        "startLine": 55,
+        "startChar": 33,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffbc3e3f_f17949c5",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
         "patchSetId": 1
@@ -225,6 +321,24 @@
       "writtenOn": "2018-03-20T11:44:42Z",
       "side": 1,
       "message": "I’d like to see a second test for continuation – first set the cutoff position (like in the above test), then set the position to the same page ID and unset the cutoff position, do another fetch, and assert that in combination, both fetches returned the full set of entity IDs (no page was skipped).",
+      "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66794c5c_64bc4ce8",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-03-22T02:19:46Z",
+      "side": 1,
+      "message": "Done, but I chose to combine both tests into one.",
+      "parentUuid": "ffbc3e3f_f17949c5",
       "revId": "4a5fd3aae0f6d42c69491e792af924be5a3bbb6f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
