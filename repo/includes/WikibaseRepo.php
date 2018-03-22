@@ -1691,6 +1691,10 @@ class WikibaseRepo {
 		);
 	}
 
+	public function getEntityViewFactory() {
+		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() );
+	}
+
 	/**
 	 * @return EntityParserOutputGeneratorFactory
 	 */
@@ -1700,7 +1704,7 @@ class WikibaseRepo {
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		return new EntityParserOutputGeneratorFactory(
-			new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() ),
+			$this->getEntityViewFactory(),
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),
