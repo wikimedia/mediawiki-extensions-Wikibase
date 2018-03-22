@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\TermDeserializer;
 use Wikibase\DataModel\Term\Term;
 
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Term;
  * @license GPL-2.0+
  * @author Addshore
  */
-class TermDeserializerTest extends PHPUnit_Framework_TestCase {
+class TermDeserializerTest extends TestCase {
 
 	/**
 	 * @dataProvider nonDeserializableProvider

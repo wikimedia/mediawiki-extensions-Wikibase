@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,7 +15,7 @@ use Wikibase\DataModel\SiteLink;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkSerializationRoundtripTest extends TestCase {
 
 	/**
 	 * @dataProvider siteLinkProvider

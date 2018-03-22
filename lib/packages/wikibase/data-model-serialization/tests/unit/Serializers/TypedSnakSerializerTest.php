@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use PHPUnit\Framework\TestCase;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
@@ -15,7 +16,7 @@ use Wikibase\DataModel\Snak\TypedSnak;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {
+class TypedSnakSerializerTest extends TestCase {
 
 	/**
 	 * @var Serializer

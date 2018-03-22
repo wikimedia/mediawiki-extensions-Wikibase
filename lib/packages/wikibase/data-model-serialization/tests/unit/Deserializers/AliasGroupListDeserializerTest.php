@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupListDeserializerTest extends PHPUnit_Framework_TestCase {
+class AliasGroupListDeserializerTest extends TestCase {
 
 	/**
 	 * @dataProvider nonDeserializableProvider

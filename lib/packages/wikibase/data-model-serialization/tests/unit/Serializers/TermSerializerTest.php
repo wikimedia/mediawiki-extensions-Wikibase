@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use PHPUnit\Framework\TestCase;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Serializers\TermSerializer;
 use Wikibase\DataModel\Term\Term;
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Term\TermFallback;
  * @license GPL-2.0+
  * @author Addshore
  */
-class TermSerializerTest extends \PHPUnit_Framework_TestCase {
+class TermSerializerTest extends TestCase {
 
 	/**
 	 * @dataProvider serializationProvider

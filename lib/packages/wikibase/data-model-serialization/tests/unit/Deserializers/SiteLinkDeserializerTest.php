@@ -5,7 +5,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -17,7 +17,7 @@ use Wikibase\DataModel\SiteLink;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {
+class SiteLinkDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( Deserializer::class );

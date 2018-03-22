@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
@@ -12,7 +13,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class DeserializerFactoryTest extends TestCase {
 
 	private function buildDeserializerFactory() {
 		return new DeserializerFactory( new DataValueDeserializer(), new BasicEntityIdParser() );

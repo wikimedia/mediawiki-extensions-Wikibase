@@ -4,7 +4,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
-class SnakListDeserializerTest extends PHPUnit_Framework_TestCase {
+class SnakListDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
 		$snakDeserializerMock = $this->getMock( Deserializer::class );

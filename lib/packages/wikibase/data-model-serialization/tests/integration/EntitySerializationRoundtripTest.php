@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */
-class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class EntitySerializationRoundtripTest extends TestCase {
 
 	public function itemProvider() {
 		$empty = new Item( new ItemId( 'Q42' ) );

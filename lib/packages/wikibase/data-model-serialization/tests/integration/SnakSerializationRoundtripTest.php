@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
@@ -20,7 +21,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */
-class SnakSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class SnakSerializationRoundtripTest extends TestCase {
 
 	private function getSnakSerializer() {
 		$factory = new SerializerFactory( new DataValueSerializer() );

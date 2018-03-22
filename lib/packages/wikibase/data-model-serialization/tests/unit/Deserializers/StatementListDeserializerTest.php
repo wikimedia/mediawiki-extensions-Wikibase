@@ -4,7 +4,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\StatementListDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class StatementListDeserializerTest extends PHPUnit_Framework_TestCase {
+class StatementListDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
