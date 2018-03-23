@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Serialization;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
@@ -13,7 +12,7 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class SerializationModifierTest extends PHPUnit_Framework_TestCase {
+class SerializationModifierTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return SerializationModifier

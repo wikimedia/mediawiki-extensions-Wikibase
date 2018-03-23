@@ -18,7 +18,7 @@ use Wikibase\PropertyInfoBuilder;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {
+class PropertyInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	private function getPropertyInfoBuilder() {
 		return new PropertyInfoBuilder( [

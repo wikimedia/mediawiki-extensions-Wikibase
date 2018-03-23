@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use LogicException;
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -22,7 +21,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */
-class EntityIdPlainLinkFormatterTest extends PHPUnit_Framework_TestCase {
+class EntityIdPlainLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function formatEntityIdProvider() {
 		return [

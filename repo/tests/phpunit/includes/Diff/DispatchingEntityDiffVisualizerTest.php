@@ -22,7 +22,7 @@ use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityDiffVisualizerTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityDiffVisualizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testDispatchesRequestToPerEntityTypeVisualizer() {
 		$itemVisualizer = $this->getMock( EntityDiffVisualizer::class );

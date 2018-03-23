@@ -16,7 +16,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
+class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider

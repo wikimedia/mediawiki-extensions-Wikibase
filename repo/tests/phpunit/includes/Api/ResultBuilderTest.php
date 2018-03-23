@@ -44,7 +44,7 @@ use Wikibase\Repo\Api\ResultBuilder;
  * @author Addshore
  * @author Thiemo Kreuz
  */
-class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
+class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	private function getDefaultResult() {
 		return new ApiResult( false );

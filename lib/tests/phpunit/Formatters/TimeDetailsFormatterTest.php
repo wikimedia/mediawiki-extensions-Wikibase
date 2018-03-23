@@ -20,7 +20,7 @@ use Wikibase\Lib\TimeDetailsFormatter;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
+class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string $formattedHeading

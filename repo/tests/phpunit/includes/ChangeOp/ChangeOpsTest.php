@@ -31,7 +31,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Kreuz
  */
-class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testEmptyChangeOps() {
 		$changeOps = new ChangeOps();

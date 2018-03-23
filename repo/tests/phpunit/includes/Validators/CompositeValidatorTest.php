@@ -18,7 +18,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class CompositeValidatorTest extends \PHPUnit_Framework_TestCase {
+class CompositeValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideValidate() {
 		$validators = [

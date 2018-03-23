@@ -19,7 +19,7 @@ use Wikibase\Repo\ValueParserFactory;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz
  */
-class ValueParserFactoryTest extends \PHPUnit_Framework_TestCase {
+class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideInvalidConstructorArgument

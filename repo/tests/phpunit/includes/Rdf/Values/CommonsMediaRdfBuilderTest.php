@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class CommonsMediaRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

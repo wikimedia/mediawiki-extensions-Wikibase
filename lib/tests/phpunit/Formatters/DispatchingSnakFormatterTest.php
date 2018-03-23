@@ -24,7 +24,7 @@ use Wikibase\Lib\SnakFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
+class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string $dataType

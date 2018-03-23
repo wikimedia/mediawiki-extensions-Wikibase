@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
 use Language;
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -31,7 +30,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
+class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function getDataAccessSnakFormatterFactory( $expectedFormat ) {
 		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )

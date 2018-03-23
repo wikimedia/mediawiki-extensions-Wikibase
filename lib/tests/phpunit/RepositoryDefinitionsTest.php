@@ -12,7 +12,7 @@ use Wikibase\Lib\RepositoryDefinitions;
  *
  * @license GPL-2.0-or-later
  */
-class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
+class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideInvalidConstructorArguments() {
 		return [

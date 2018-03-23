@@ -21,7 +21,7 @@ use Wikibase\Lib\Formatters\DispatchingValueFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
+class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider

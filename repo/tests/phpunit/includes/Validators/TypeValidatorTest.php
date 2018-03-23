@@ -16,7 +16,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class TypeValidatorTest extends \PHPUnit_Framework_TestCase {
+class TypeValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideValidate() {
 		return [

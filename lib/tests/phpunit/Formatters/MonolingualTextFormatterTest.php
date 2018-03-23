@@ -15,7 +15,7 @@ use Wikibase\Formatters\MonolingualTextFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MonolingualTextFormatterTest extends \PHPUnit_Framework_TestCase {
+class MonolingualTextFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider monolingualTextFormatProvider

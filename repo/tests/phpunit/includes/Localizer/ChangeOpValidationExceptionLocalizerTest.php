@@ -18,7 +18,7 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetExceptionMessage() {
 		$result0 = Result::newError( [] );

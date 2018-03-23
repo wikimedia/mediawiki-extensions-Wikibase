@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Sites;
 
 use MediaWikiSite;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\Lib\Sites\SiteMatrixParser;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
+class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider sitesFromJsonProvider

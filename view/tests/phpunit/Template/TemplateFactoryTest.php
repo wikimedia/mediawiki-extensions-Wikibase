@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests\Template;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
@@ -18,7 +17,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
+class TemplateFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
 		return new TemplateFactory( new TemplateRegistry( [

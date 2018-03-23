@@ -8,7 +8,6 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use ValueValidators\Error;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
@@ -33,7 +32,7 @@ use Wikibase\Repo\Validators\SnakValidator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SnakValidatorTest extends PHPUnit_Framework_TestCase {
+class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var DataTypeFactory

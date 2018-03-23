@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\UnDeserializableValueFormatter;
@@ -15,7 +14,7 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class UnDeserializableValueFormatterTest extends PHPUnit_Framework_TestCase {
+class UnDeserializableValueFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testFormat() {
 		$options = new FormatterOptions( [

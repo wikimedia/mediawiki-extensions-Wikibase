@@ -21,7 +21,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @license GPL-2.0-or-later
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpStatementRankTest extends \PHPUnit\Framework\TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = new Item( new ItemId( 'Q42' ) );

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use PHPUnit_Framework_TestCase;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,7 +24,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
+class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 
 	const COOKIE_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Modules;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Modules\EntityTypesConfigValueProvider;
 use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
@@ -15,7 +14,7 @@ use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class EntityTypesConfigValueProviderTest extends PHPUnit_Framework_TestCase {
+class EntityTypesConfigValueProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor_returnsMediaWikiConfigValueProviderInterface() {
 		$instance = $this->newInstance();

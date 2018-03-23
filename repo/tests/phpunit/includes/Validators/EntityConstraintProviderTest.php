@@ -17,7 +17,7 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityConstraintProviderTest extends \PHPUnit_Framework_TestCase {
+class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 
 	private function getEntityConstraintProvider() {
 		$duplicateDetector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )

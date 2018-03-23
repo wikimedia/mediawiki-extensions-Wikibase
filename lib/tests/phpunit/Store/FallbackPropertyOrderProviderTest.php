@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
@@ -15,7 +14,7 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class FallbackPropertyOrderProviderTest extends PHPUnit_Framework_TestCase {
+class FallbackPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function getPropertyOrderProvider() {
 		return [

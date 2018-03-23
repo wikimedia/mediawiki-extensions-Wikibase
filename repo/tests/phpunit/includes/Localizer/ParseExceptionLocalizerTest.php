@@ -15,7 +15,7 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class ParseExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetExceptionMessage() {
 		return [

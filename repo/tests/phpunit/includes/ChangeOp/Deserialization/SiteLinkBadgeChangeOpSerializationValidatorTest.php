@@ -14,7 +14,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
  *
  * @license GPL-2.0-or-later
  */
-class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideNonStringBadgeSerilization() {
 		return [

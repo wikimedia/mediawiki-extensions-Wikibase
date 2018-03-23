@@ -7,7 +7,6 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -24,7 +23,7 @@ use Wikibase\Repo\SnakFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SnakFactoryTest extends PHPUnit_Framework_TestCase {
+class SnakFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function newInstance() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();

@@ -15,7 +15,7 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  * @license GPL-2.0-or-later
  * @author Jonas Kress
  */
-class InterWikiLinkExistsValidatorTest extends \PHPUnit_Framework_TestCase {
+class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	const EXISTING_PAGE = "Foo.map";
 	const NONEXISTENT_PAGE = "Foo.NOT-FOUND.map";

@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests\Template;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class TemplateRegistryTest extends PHPUnit_Framework_TestCase {
+class TemplateRegistryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCanConstructWithEmptyArray() {
 		$registry = new TemplateRegistry( [] );

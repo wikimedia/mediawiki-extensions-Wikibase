@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\Client\Usage\NullSubscriptionManager;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class NullSubscriptionManagerTest extends PHPUnit_Framework_TestCase {
+class NullSubscriptionManagerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testSubscribe() {
 		$instance = new NullSubscriptionManager();

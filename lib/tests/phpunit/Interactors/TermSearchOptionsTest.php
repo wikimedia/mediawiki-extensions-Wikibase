@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\Lib\Interactors\TermSearchOptions;
  * @author Addshore
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
+class TermSearchOptionsTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideLimitInputAndExpected() {
 		return [

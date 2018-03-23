@@ -15,7 +15,7 @@ use Wikibase\Repo\Content\DataUpdateAdapter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DataUpdateAdapterTest extends \PHPUnit_Framework_TestCase {
+class DataUpdateAdapterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testDoUpdate() {
 		$reporter = $this->getMock( MessageReporter::class );

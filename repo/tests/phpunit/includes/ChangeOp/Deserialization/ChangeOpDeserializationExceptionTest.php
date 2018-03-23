@@ -11,7 +11,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
  *
  * @license GPL-2.0-or-later
  */
-class ChangeOpDeserializationExceptionTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpDeserializationExceptionTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider exceptionMessageProvider

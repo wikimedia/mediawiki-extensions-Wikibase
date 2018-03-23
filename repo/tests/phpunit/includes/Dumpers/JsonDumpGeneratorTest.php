@@ -36,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Addshore
  */
-class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
+class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var SerializerFactory|null

@@ -33,7 +33,7 @@ use Wikibase\Store\SubscriptionLookup;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
+class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var array[]

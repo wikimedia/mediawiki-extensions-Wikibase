@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
+class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 
 	private $localPropertyInfo;
 	private $fooPropertyInfo;

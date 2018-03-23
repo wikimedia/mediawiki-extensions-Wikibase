@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use HashBagOStuff;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
@@ -18,7 +17,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
+class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetItemIdForLink_cacheHit() {
 		$cache = new HashBagOStuff();

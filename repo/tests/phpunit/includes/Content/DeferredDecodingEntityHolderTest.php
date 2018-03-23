@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
+class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return EntityDocument

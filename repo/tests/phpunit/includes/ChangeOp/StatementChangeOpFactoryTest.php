@@ -19,7 +19,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class StatementChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
+class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return StatementChangeOpFactory

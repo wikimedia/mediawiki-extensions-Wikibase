@@ -19,7 +19,7 @@ use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
+class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	private function newFormatter( FormatterOptions $options = null ) {
 		$vocabularyUriFormatter = $this->getMock( ValueFormatter::class );

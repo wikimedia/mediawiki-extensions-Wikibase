@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Changes;
 
 use Diff\DiffOp\DiffOpAdd;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,7 +26,7 @@ use Wikibase\Lib\Changes\EntityDiffChangedAspects;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class EntityDiffChangedAspectsFactoryTest extends PHPUnit_Framework_TestCase {
+class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideNewFromEntityDiff() {
 		$emptyDiff = [

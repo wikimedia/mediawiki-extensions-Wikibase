@@ -13,7 +13,7 @@ use Wikibase\Lib\Reporting\ObservableMessageReporter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ObservableMessageReporterTest extends \PHPUnit_Framework_TestCase {
+class ObservableMessageReporterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testReportMessage() {
 		$observedMessages = [];

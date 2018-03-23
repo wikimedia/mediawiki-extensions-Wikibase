@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Kreuz
  */
-class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
+class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider renderProvider

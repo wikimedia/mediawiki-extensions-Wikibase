@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_TestCase {
+class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return TermLookup

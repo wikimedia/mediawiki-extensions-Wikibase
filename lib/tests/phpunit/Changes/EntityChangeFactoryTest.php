@@ -27,7 +27,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
+class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return EntityChangeFactory

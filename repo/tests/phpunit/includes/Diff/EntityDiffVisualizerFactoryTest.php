@@ -21,7 +21,7 @@ use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
-class EntityDiffVisualizerFactoryTest extends \PHPUnit_Framework_TestCase {
+class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNoType_factoryReturnsBasicEntityDiffVisualizer() {
 		$factory = $this->newFactory();

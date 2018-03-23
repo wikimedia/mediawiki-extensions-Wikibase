@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use CirrusSearch;
-use PHPUnit_Framework_TestCase;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -19,7 +18,7 @@ use Wikibase\Repo\Search\Elastic\Fields\AllLabelsField;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class AllLabelsFieldTest extends PHPUnit_Framework_TestCase {
+class AllLabelsFieldTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideFieldData() {
 		$item = new Item();

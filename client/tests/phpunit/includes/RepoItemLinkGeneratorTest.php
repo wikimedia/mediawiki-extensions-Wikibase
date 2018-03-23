@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
@@ -20,7 +19,7 @@ use Wikibase\Client\NamespaceChecker;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
+class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';

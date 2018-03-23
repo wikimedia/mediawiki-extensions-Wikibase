@@ -24,7 +24,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

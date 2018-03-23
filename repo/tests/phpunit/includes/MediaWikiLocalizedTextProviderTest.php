@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 
 /**
@@ -13,7 +12,7 @@ use Wikibase\Repo\MediaWikiLocalizedTextProvider;
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class MediaWikiLocalizedTextProviderTest extends PHPUnit_Framework_TestCase {
+class MediaWikiLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function mediaWikiLocalizedTextProviderProvider() {
 		return [

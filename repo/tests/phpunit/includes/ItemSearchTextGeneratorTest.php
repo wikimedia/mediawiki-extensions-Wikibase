@@ -14,7 +14,7 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Kreuz
  */
-class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
+class ItemSearchTextGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function generateProvider() {
 		$item = new Item();

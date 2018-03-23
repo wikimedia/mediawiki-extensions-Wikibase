@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class ChangeOpDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetLabelsChangeOpDeserializer() {
 		$this->assertInstanceOf(

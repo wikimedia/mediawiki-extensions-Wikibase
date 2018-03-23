@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -27,7 +26,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @author Daniel Kinzler
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
+class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getAddStatementToGroupSectionProvider

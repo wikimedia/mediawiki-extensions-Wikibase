@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use ArrayIterator;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\NullUsageTracker;
 
 /**
@@ -16,7 +15,7 @@ use Wikibase\Client\Usage\NullUsageTracker;
  * @author Thiemo Kreuz
  * @author Marius Hoch
  */
-class NullUsageTrackerTest extends PHPUnit_Framework_TestCase {
+class NullUsageTrackerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddUsedEntities() {
 		$instance = new NullUsageTracker();

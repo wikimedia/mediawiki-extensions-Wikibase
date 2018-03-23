@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
@@ -22,7 +21,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class ItemFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
+class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetFields() {
 		$languageCodes = [ 'ar', 'es' ];

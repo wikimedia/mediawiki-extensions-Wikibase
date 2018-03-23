@@ -16,7 +16,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
  *
  * @license GPL-2.0-or-later
  */
-class EntityChangeOpProviderTest extends \PHPUnit_Framework_TestCase {
+class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideInvalidDeserializerInstantiators() {
 		return [

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use HashBagOStuff;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
@@ -18,7 +17,7 @@ use Wikibase\Lib\Store\EntityRevisionCache;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class EntityRevisionCacheTest extends PHPUnit_Framework_TestCase {
+class EntityRevisionCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGet() {
 		$q5 = new ItemId( 'Q5' );

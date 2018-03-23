@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
-class TabularDataRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class TabularDataRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

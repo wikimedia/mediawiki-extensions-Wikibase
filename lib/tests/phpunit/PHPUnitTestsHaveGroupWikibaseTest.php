@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit_Framework_TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -16,7 +15,7 @@ use SplFileInfo;
  * @author Marius Hoch
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PHPUnitTestsHaveGroupWikibaseTest extends PHPUnit_Framework_TestCase {
+class PHPUnitTestsHaveGroupWikibaseTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider dirProvider

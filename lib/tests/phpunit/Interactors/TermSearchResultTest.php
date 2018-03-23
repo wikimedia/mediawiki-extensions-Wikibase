@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
@@ -16,7 +15,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class TermSearchResultTest extends PHPUnit_Framework_TestCase {
+class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGoodConstruction() {
 		return [

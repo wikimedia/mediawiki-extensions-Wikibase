@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
 use ParserOutput;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -19,7 +18,7 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
+class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return ImageLinksDataUpdater

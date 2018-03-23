@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
  *
  * @license GPL-2.0-or-later
  */
-class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
+class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
 
 	private function newCacheAwarePropertyInfoStore( BagOStuff $cache ) {

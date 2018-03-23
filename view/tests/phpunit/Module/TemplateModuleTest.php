@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests\Module;
 
-use PHPUnit_Framework_TestCase;
 use ResourceLoaderContext;
 use Wikibase\View\Module\TemplateModule;
 
@@ -18,7 +17,7 @@ use Wikibase\View\Module\TemplateModule;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class TemplateModuleTest extends PHPUnit_Framework_TestCase {
+class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetScript() {
 		$instance = new TemplateModule();

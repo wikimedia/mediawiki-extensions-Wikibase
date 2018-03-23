@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use HashSiteStore;
-use PHPUnit_Framework_TestCase;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
@@ -22,7 +21,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
+class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return MergeChangeOpsFactory

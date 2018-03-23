@@ -16,7 +16,7 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
+class BaseTemplateAfterPortletHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getEditLinkProvider

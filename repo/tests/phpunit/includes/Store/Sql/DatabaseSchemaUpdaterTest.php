@@ -16,7 +16,7 @@ use Wikimedia\Rdbms\DatabaseMysqli;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class DatabaseSchemaUpdaterTest extends \PHPUnit_Framework_TestCase {
+class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * Extremely simple test making sure this isn't going to blow up.

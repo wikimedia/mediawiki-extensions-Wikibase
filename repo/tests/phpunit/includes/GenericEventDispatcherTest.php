@@ -15,7 +15,7 @@ use Wikibase\Repo\GenericEventDispatcher;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class GenericEventDispatcherTest extends \PHPUnit_Framework_TestCase {
+class GenericEventDispatcherTest extends \PHPUnit\Framework\TestCase {
 
 	public function testRegisterWatcher_failure() {
 		$this->setExpectedException( InvalidArgumentException::class );

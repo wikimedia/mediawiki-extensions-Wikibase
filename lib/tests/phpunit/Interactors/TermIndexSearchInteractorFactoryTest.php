@@ -16,7 +16,7 @@ use Wikibase\TermIndex;
  *
  * @license GPL-2.0-or-later
  */
-class TermIndexSearchInteractorFactoryTest extends \PHPUnit_Framework_TestCase {
+class TermIndexSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNewInteractorReturnsTermIndexSearchInteractorInstance() {
 		$factory = new TermIndexSearchInteractorFactory(

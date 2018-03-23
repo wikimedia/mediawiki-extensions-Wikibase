@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use Wikibase\Lib\DataType;
 use MWException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataTypeSelector;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\DataTypeSelector;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
+class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 
 	/** @see \LanguageQqx */
 	const DUMMY_LANGUAGE = 'qqx';

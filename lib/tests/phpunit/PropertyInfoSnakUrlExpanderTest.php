@@ -21,7 +21,7 @@ use Wikimedia\Assert\ParameterTypeException;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
+class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideExpandUrl() {
 		$p66 = new PropertyId( 'P66' );

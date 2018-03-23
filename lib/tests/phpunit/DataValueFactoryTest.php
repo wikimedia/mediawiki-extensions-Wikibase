@@ -7,7 +7,6 @@ use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 
 /**
  * @covers DataValues\DataValueFactory
@@ -17,7 +16,7 @@ use PHPUnit_Framework_TestCase;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class DataValueFactoryTest extends PHPUnit_Framework_TestCase {
+class DataValueFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function newInstance() {
 		$deserializer = $this->getMock( Deserializer::class );

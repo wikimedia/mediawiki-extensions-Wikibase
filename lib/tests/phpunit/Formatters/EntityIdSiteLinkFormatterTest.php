@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -19,7 +18,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
+class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function formatEntityIdProvider() {
 		return [

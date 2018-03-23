@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
@@ -12,7 +11,7 @@ use Wikibase\Lib\LanguageNameLookup;
  *
  * @license GPL-2.0-or-later
  */
-class LanguageNameLookupTest extends PHPUnit_Framework_TestCase {
+class LanguageNameLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function getNameProvider() {
 		return [

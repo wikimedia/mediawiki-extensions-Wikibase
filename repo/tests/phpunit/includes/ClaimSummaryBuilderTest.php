@@ -25,7 +25,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */
-class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
+class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return Snak[]

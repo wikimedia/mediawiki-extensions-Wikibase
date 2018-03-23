@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SerializerFactory;
@@ -20,7 +19,7 @@ use Wikibase\LanguageFallbackChain;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
+class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
 		$serializerFactory = new SerializerFactory(

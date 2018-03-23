@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SiteLinkChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideInvalidBadgeItemIdList() {
 		return [

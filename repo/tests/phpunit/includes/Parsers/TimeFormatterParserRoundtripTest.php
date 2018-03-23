@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\IsoTimestampParser;
@@ -22,7 +21,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
+class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 
 	private function newTimeParserFactory( ParserOptions $options = null ) {
 		$monthNameProvider = $this->getMock( MonthNameProvider::class );

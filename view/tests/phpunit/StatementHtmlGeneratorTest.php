@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -28,7 +27,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
+class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return SnakHtmlGenerator

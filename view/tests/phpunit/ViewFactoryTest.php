@@ -5,7 +5,6 @@ namespace Wikibase\View\Tests;
 use Wikibase\Lib\DataTypeFactory;
 use HashSiteStore;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -52,7 +51,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Thiemo Kreuz
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ViewFactoryTest extends PHPUnit_Framework_TestCase {
+class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newViewFactory(
 		EntityIdFormatterFactory $htmlFactory = null,

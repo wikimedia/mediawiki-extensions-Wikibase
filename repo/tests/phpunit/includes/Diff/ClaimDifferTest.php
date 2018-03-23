@@ -8,7 +8,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -26,7 +25,7 @@ use Wikibase\Repo\Diff\ClaimDifference;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class ClaimDifferTest extends PHPUnit_Framework_TestCase {
+class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 
 	public function diffClaimsProvider() {
 		$argLists = [];

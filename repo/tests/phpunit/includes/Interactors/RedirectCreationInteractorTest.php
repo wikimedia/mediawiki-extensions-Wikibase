@@ -31,7 +31,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
+class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var MockRepository|null

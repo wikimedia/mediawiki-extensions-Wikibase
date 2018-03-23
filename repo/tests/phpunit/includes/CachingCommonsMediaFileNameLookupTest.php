@@ -15,7 +15,7 @@ use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class CachingCommonsMediaFileNameLookupTest extends \PHPUnit_Framework_TestCase {
+class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNormalize() {
 		$lookup = new CachingCommonsMediaFileNameLookup(

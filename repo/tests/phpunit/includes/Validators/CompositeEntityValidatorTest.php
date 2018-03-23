@@ -18,7 +18,7 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
+class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function validEntityProvider() {
 		$success = Result::newSuccess();

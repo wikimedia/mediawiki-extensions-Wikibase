@@ -6,7 +6,6 @@ use BagOStuff;
 use HashBagOStuff;
 use HashSiteStore;
 use MediaWikiSite;
-use PHPUnit_Framework_TestCase;
 use Site;
 use Wikibase\Lib\SitesModuleWorker;
 use Wikibase\SettingsArray;
@@ -24,7 +23,7 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
+class SitesModuleWorkerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param Site[] $sites

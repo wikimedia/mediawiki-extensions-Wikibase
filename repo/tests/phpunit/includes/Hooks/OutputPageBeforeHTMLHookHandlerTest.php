@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use DerivativeContext;
 use OutputPage;
-use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,7 +26,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
+class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return OutputPage

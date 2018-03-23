@@ -11,7 +11,7 @@ use SplFileInfo;
  *
  * @license GPL-2.0-or-later
  */
-class NoReverseDependencyTest extends \PHPUnit_Framework_TestCase {
+class NoReverseDependencyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNoClientDependency() {
 		$this->assertEmpty( $this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' ) );

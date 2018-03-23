@@ -20,7 +20,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
+class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function getEntityProvider() {
 		$q10 = new ItemId( 'Q10' );

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use HashSiteStore;
-use PHPUnit_Framework_TestCase;
 use Site;
 use SiteLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -18,7 +17,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * @author Marius Hoch < hoo@online.de >
  * @author Thiemo Kreuz
  */
-class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
+class SiteLinkTargetProviderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getSiteListProvider

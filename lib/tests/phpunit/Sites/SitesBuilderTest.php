@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Sites;
 
 use HashSiteStore;
 use MediaWikiSite;
-use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\Lib\Sites\SitesBuilder;
 
@@ -16,7 +15,7 @@ use Wikibase\Lib\Sites\SitesBuilder;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SitesBuilderTest extends PHPUnit_Framework_TestCase {
+class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider buildSitesProvider

@@ -14,7 +14,7 @@ use Wikibase\Repo\Validators\NumberValidator;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
+class NumberValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function validValueProvider() {
 		$data = [

@@ -15,7 +15,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class UniquenessViolationTest extends \PHPUnit_Framework_TestCase {
+class UniquenessViolationTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstruct() {
 		$conflictingEntity = new ItemId( 'Q4' );

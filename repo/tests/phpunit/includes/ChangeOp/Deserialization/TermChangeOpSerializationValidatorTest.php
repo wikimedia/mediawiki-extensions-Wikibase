@@ -14,7 +14,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
  *
  * @license GPL-2.0-or-later
  */
-class TermChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase {
+class TermChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidTermSerializationProvider

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\PidLock;
 
 /**
@@ -13,7 +12,7 @@ use Wikibase\Repo\PidLock;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class PidLockTest extends PHPUnit_Framework_TestCase {
+class PidLockTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider wikiIdProvider

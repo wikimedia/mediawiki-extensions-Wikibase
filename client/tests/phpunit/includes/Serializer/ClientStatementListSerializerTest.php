@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\SerializerFactory;
@@ -20,7 +19,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @license GPL-2.0-or-later
  * @author eranroz
  */
-class ClientStatementListSerializerTest extends PHPUnit_Framework_TestCase {
+class ClientStatementListSerializerTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
 		$serializerFactory = new SerializerFactory(

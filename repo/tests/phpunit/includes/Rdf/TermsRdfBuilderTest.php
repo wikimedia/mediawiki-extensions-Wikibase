@@ -16,7 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

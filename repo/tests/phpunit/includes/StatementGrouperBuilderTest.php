@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -20,7 +19,7 @@ use Wikibase\Repo\StatementGrouperBuilder;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
+class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param array[] $specifications

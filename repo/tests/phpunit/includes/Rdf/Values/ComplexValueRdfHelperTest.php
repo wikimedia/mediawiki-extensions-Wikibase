@@ -18,7 +18,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ComplexValueRdfHelperTest extends \PHPUnit_Framework_TestCase {
+class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

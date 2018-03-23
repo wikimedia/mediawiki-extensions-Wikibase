@@ -16,7 +16,7 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  *
  * @license GPL-2.0-or-later
  */
-class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function getDummyIdParserFactory() {
 		return new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );

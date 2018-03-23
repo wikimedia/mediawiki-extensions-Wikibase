@@ -18,7 +18,7 @@ use Wikibase\Lib\SnakFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EscapingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
+class EscapingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string $output

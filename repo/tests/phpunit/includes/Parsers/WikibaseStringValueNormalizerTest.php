@@ -14,7 +14,7 @@ use Wikibase\StringNormalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikibaseStringValueNormalizerTest extends \PHPUnit_Framework_TestCase {
+class WikibaseStringValueNormalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNormalize() {
 		$input = 'Kittens';

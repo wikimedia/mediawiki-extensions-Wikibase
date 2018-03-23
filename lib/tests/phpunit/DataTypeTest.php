@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests;
 
 use Wikibase\Lib\DataType;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 
 /**
  * @covers Wikibase\Lib\DataType
@@ -15,7 +14,7 @@ use PHPUnit_Framework_TestCase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Mättig
  */
-class DataTypeTest extends PHPUnit_Framework_TestCase {
+class DataTypeTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider

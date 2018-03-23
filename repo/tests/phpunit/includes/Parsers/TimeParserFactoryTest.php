@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
-use PHPUnit_Framework_TestCase;
 use ValueParsers\IsoTimestampParser;
 use ValueParsers\MonthNameProvider;
 use ValueParsers\ParserOptions;
@@ -21,7 +20,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @author Addshore
  * @author Thiemo Kreuz
  */
-class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
+class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return MonthNameProvider

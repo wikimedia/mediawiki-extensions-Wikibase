@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -28,7 +27,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class TermsListViewTest extends PHPUnit_Framework_TestCase {
+class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 
 	private function getTermsListView(
 		$languageNameCalls = 0,

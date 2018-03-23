@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Parser;
 use ParserOptions;
-use PHPUnit_Framework_TestCase;
 use PPFrame;
 use PPFrame_Hash;
 use PPNode;
@@ -31,7 +30,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class RunnerTest extends PHPUnit_Framework_TestCase {
+class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider wikitextTypeProvider

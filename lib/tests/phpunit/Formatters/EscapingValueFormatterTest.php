@@ -17,7 +17,7 @@ use Wikibase\Lib\EscapingValueFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EscapingValueFormatterTest extends \PHPUnit_Framework_TestCase {
+class EscapingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testFormat() {
 		$formatter = new EscapingValueFormatter( new StringFormatter( new FormatterOptions() ), 'htmlspecialchars' );

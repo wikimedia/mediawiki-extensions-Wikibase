@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -34,7 +33,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
+class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );

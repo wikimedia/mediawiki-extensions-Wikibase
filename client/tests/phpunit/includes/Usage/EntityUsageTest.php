@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -16,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityUsageTest extends PHPUnit_Framework_TestCase {
+class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetEntityId() {
 		$id = new ItemId( 'Q7' );

@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
-use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_TestSuite;
 use Scribunto_LuaEngineTestBase;
 use Title;
@@ -20,7 +19,7 @@ if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	 * @license GPL-2.0-or-later
 	 * @author Marius Hoch < hoo@online.de >
 	 */
-	abstract class Scribunto_LuaWikibaseLibraryTestCase extends PHPUnit_Framework_TestCase {
+	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \PHPUnit\Framework\TestCase {
 
 		protected function setUp() {
 			$this->markTestSkipped( 'Scribunto is not available' );
