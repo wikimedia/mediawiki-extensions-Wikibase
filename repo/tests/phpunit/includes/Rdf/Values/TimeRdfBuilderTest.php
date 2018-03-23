@@ -22,7 +22,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

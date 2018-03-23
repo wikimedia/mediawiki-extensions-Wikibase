@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests\Template;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\View\Template\Template;
 use Wikibase\View\Template\TemplateRegistry;
 
@@ -18,7 +17,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author H. Snater <mediawiki@snater.com>
  * @author Thiemo Kreuz
  */
-class TemplateTest extends PHPUnit_Framework_TestCase {
+class TemplateTest extends \PHPUnit\Framework\TestCase {
 
 	public function testRender() {
 		$instance = new Template( new TemplateRegistry( [ 'empty' => '' ] ), 'empty' );

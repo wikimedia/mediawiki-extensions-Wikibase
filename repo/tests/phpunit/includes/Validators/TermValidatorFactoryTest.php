@@ -24,7 +24,7 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
+class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	const MAX_LENGTH = 8;
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\RecentChanges;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\RecentChanges\ExternalChange;
 use Wikibase\Client\RecentChanges\RevisionData;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ExternalChangeTest extends PHPUnit_Framework_TestCase {
+class ExternalChangeTest extends \PHPUnit\Framework\TestCase {
 
 	public function testValueObject() {
 		$entityId = new ItemId( 'Q1' );

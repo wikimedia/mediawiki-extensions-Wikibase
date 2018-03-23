@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
@@ -21,7 +20,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
+class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideConstructor_failure() {
 		$pageId = 17;

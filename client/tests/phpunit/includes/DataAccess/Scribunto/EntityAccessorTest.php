@@ -36,7 +36,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
+class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor() {
 		$entityAccessor = $this->getEntityAccessor();

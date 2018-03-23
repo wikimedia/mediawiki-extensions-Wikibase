@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Hooks;
 use IJobSpecification;
 use JobQueue;
 use JobQueueGroup;
-use PHPUnit_Framework_TestCase;
 use ReflectionMethod;
 use Title;
 use User;
@@ -23,7 +22,7 @@ use Wikibase\Client\NamespaceChecker;
  * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoHookHandlersTest extends PHPUnit_Framework_TestCase {
+class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 
 	public function doArticleDeleteCompleteProvider() {
 		return [

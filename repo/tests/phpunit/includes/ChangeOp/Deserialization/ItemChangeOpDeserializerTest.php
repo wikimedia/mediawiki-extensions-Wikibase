@@ -25,7 +25,7 @@ use Wikibase\Summary;
  *
  * @license GPL-2.0-or-later
  */
-class ItemChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
+class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	use LabelsChangeOpDeserializationTester;
 

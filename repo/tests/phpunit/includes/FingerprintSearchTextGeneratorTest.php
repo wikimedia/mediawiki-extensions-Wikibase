@@ -15,7 +15,7 @@ use Wikibase\Repo\FingerprintSearchTextGenerator;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Kreuz
  */
-class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
+class FingerprintSearchTextGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGenerate() {
 		$entity = new Item();

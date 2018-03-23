@@ -6,7 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Diff\BasicDiffView;
 
 /**
@@ -18,7 +17,7 @@ use Wikibase\Repo\Diff\BasicDiffView;
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class BasicDiffViewTest extends PHPUnit_Framework_TestCase {
+class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function diffOpProvider() {
 		return [

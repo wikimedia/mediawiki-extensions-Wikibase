@@ -21,7 +21,7 @@ use Wikimedia\Assert\ParameterTypeException;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCase {
+class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideFormatSnak() {
 		$formatterUrlExpander = $this->getMock( SnakUrlExpander::class );

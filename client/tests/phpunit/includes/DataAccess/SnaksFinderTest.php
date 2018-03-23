@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
+class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider findSnaksProvider

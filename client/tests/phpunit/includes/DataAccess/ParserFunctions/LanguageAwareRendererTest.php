@@ -33,7 +33,7 @@ use Wikibase\Lib\SnakFormatter;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
+class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver

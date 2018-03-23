@@ -28,7 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ParseValueTest extends \PHPUnit_Framework_TestCase {
+class ParseValueTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string[] $params

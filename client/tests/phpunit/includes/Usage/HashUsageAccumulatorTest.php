@@ -15,7 +15,7 @@ use Wikibase\Client\Usage\HashUsageAccumulator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class HashUsageAccumulatorTest extends \PHPUnit_Framework_TestCase {
+class HashUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddGetUsage() {
 		$acc = new HashUsageAccumulator();

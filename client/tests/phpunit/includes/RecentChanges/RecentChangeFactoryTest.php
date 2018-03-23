@@ -31,7 +31,7 @@ use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
+class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return RecentChangeFactory

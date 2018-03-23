@@ -13,7 +13,7 @@ use Wikibase\SettingsArray;
  *
  * @license GPL-2.0-or-later
  */
-class SettingsValueProviderTest extends \PHPUnit_Framework_TestCase {
+class SettingsValueProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetKeyReturnsJSSettingName() {
 		$settingsValueProvider = new SettingsValueProvider(

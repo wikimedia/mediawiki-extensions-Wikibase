@@ -21,7 +21,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 
 	public function invalidConstructorProvider() {
 		$args = [];

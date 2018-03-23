@@ -20,7 +20,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ExternalIdentifierRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

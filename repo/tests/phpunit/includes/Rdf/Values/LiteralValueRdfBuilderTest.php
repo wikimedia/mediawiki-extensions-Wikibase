@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class LiteralValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

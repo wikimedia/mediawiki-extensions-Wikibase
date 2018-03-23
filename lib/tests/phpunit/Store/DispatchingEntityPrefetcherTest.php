@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 
 	public function testPrefetchGroupsIdsByRepositoryAndDelegatesPrefetchingToRepositorySpecificPrefetcher() {
 		$localIdOne = new ItemId( 'Q100' );

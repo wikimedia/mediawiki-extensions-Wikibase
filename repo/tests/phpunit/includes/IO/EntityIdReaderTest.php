@@ -20,7 +20,7 @@ use Wikibase\Repo\IO\LineReader;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
+class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 
 	protected function getTestFile() {
 		return __DIR__ . '/EntityIdReaderTest.txt';

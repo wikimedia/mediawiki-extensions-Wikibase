@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Hooks;
 use Language;
 use OutputPage;
 use ParserOutput;
-use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -25,7 +24,7 @@ use Wikibase\DataModel\Term\Term;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
+class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return LanguageLinkBadgeDisplay

@@ -18,7 +18,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DispatchingValueSnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddValue() {
 		$writer = $this->getMock( RdfWriter::class );

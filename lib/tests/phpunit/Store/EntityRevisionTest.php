@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
 
@@ -16,7 +15,7 @@ use Wikibase\Lib\Store\EntityRevision;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class EntityRevisionTest extends PHPUnit_Framework_TestCase {
+class EntityRevisionTest extends \PHPUnit\Framework\TestCase {
 
 	public function testMinimalConstructorArguments() {
 		$entity = new Item();

@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityInfoBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideInvalidFactoryLists() {
 		return [

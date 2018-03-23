@@ -17,7 +17,7 @@ use Wikibase\Repo\Store\ChangeStore;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class DatabaseChangeTransmitterTest extends \PHPUnit_Framework_TestCase {
+class DatabaseChangeTransmitterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testTransmitChange() {
 		$change = $this->getMock( Change::class );

@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
 use Language;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
@@ -35,7 +34,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */
-class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
+class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 
 	public function formatProvider() {
 		return [

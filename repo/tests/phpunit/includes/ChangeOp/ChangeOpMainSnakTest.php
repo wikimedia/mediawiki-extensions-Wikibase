@@ -30,7 +30,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */
-class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider

@@ -17,7 +17,7 @@ use Wikibase\Repo\Validators\ForeignEntityValidator;
  *
  * @license GPL-2.0-or-later
  */
-class ForeignEntityValidatorTest extends \PHPUnit_Framework_TestCase {
+class ForeignEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidRepositorySettingsProvider

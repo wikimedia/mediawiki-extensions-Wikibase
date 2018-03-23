@@ -17,7 +17,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DataValueValidatorTest extends \PHPUnit_Framework_TestCase {
+class DataValueValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );

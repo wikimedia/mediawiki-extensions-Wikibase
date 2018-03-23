@@ -6,7 +6,6 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
-use PHPUnit_Framework_TestCase;
 use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
@@ -23,7 +22,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnDeleteTest extends PHPUnit_Framework_TestCase {
+class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * Return some fake data for testing

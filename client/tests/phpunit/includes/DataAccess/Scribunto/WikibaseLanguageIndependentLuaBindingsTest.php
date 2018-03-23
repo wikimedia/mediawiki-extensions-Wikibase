@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
@@ -29,7 +28,7 @@ use Wikibase\SettingsArray;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestCase {
+class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor() {
 		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings(

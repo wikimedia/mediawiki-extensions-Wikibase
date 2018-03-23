@@ -31,7 +31,7 @@ use Wikibase\Lib\SnakFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
+class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider

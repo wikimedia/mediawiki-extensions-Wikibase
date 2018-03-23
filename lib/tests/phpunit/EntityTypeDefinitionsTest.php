@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  */
-class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
+class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 	private function getDefinitions() {
 		return [

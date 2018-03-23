@@ -13,7 +13,7 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SettingsArrayTest extends \PHPUnit_Framework_TestCase {
+class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider settingProvider

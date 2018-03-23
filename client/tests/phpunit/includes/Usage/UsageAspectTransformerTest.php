@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
+class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetRelevantAspects() {
 		$q1 = new ItemId( 'Q1' );

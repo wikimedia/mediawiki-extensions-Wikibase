@@ -23,7 +23,7 @@ use Wikibase\Summary;
  * @author Michał Łazowik
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 
 	public function invalidConstructorProvider() {
 		$argLists = [];

@@ -18,7 +18,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityRevisionLookup

@@ -16,7 +16,7 @@ use Wikibase\Repo\Validators\NotEntityIdValidator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
+class NotEntityIdValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider

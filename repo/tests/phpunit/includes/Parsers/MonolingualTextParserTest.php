@@ -15,7 +15,7 @@ use Wikibase\Repo\Parsers\MonolingualTextParser;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
+class MonolingualTextParserTest extends \PHPUnit\Framework\TestCase {
 
 	public function textProvider() {
 		return [

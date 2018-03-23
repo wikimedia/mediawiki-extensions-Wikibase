@@ -20,7 +20,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
+class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 
 	private $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',

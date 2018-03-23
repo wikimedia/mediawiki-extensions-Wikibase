@@ -26,7 +26,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

@@ -13,7 +13,7 @@ use Wikibase\Client\RecentChanges\RevisionData;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RevisionDataTest extends \PHPUnit_Framework_TestCase {
+class RevisionDataTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetUserName() {
 		$revisionData = $this->newRevisionData();

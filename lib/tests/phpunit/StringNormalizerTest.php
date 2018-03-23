@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\StringNormalizer;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\StringNormalizer;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class StringNormalizerTest extends PHPUnit_Framework_TestCase {
+class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider providerTrimBadChars

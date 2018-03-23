@@ -23,7 +23,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

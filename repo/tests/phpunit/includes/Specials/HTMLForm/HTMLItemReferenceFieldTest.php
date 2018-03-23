@@ -14,7 +14,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
  *
  * @license GPL-2.0-or-later
  */
-class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
+class HTMLItemReferenceFieldTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @var InMemoryEntityLookup
 	 */

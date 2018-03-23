@@ -17,7 +17,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit_Framework_TestCase {
+class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideInvalidConstructorArguments() {
 		return [

@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Units;
 
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 
@@ -15,7 +14,7 @@ use Wikibase\Lib\Units\UnitStorage;
  *
  * @license GPL-2.0-or-later
  */
-class UnitConverterTest extends PHPUnit_Framework_TestCase {
+class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 
 	public function getConverterPairs() {
 		return [

@@ -16,7 +16,7 @@ use Wikibase\Repo\Modules\DataTypesModule;
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class DataTypesModuleTest extends \PHPUnit_Framework_TestCase {
+class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideDataTypesModuleAndResourceDefinition() {
 		$dataTypeFactory = new DataTypeFactory( [ 'url' => 'string' ] );

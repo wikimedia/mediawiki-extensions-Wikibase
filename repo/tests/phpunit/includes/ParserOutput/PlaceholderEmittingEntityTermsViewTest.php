@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
@@ -21,7 +20,7 @@ use Wikibase\View\TermsListView;
  * @license GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase {
+class PlaceholderEmittingEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 
 	private function newEntityTermsView( TextInjector $textInjector ) {
 		$termsListView = $this->getMockBuilder( TermsListView::class )

@@ -14,7 +14,7 @@ use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
  *
  * @license GPL-2.0-or-later
  */
-class ChangeOpDeserializationExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpDeserializationExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenExceptionOfOtherType_hasExceptionMessageReturnsFalse() {
 		$localizer = new ChangeOpDeserializationExceptionLocalizer();

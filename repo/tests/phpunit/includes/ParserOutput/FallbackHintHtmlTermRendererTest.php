@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageNameLookup;
@@ -17,7 +16,7 @@ use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
  * @license GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class FallbackHintHtmlTermRendererTest extends PHPUnit_Framework_TestCase {
+class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 
 	private function newHtmlTermRenderer() {
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();

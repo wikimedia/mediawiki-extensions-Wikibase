@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Exceptions\DeserializationException;
-use PHPUnit_Framework_TestCase;
 use Serializers\Exceptions\SerializationException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -20,7 +19,7 @@ use Wikibase\StatementRankSerializer;
  * @author Addshore
  * @author Thiemo Kreuz
  */
-class StatementRankSerializerTest extends PHPUnit_Framework_TestCase {
+class StatementRankSerializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function rankProvider() {
 		return [

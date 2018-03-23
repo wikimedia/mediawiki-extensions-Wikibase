@@ -6,7 +6,6 @@ use CirrusSearch;
 use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -26,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class StatementsFieldTest extends PHPUnit_Framework_TestCase {
+class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * List of properties we handle.

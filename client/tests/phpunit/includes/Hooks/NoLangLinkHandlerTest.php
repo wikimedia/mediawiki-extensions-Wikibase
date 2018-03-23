@@ -18,7 +18,7 @@ use Wikibase\Client\Hooks\NoLangLinkHandler;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
+class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var int[]

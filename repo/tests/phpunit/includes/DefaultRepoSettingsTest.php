@@ -10,7 +10,7 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class DefaultRepoSettingsTest extends \PHPUnit_Framework_TestCase {
+class DefaultRepoSettingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testDefaultTransformLegacyFormatOnExportSetting() {
 		$defaultSettings = require __DIR__ . '/../../../config/Wikibase.default.php';

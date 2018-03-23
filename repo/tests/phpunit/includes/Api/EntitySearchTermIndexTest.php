@@ -26,7 +26,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntitySearchTermIndexTest extends \PHPUnit_Framework_TestCase {
+class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 
 	const EXISTING_LOCAL_ITEM = 'Q111';
 	const FOREIGN_REPO_PREFIX = 'foreign';

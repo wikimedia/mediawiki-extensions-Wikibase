@@ -21,7 +21,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */
-class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 
 	private function getTermValidatorFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );

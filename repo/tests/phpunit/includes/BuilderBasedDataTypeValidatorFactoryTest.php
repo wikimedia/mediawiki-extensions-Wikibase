@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikimedia\Assert\ParameterElementTypeException;
@@ -17,7 +16,7 @@ use Wikimedia\Assert\PostconditionException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCase {
+class BuilderBasedDataTypeValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testInvalidConstructorArgument() {
 		$this->setExpectedException( ParameterElementTypeException::class );

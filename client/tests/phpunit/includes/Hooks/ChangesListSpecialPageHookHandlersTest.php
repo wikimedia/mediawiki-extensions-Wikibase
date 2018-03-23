@@ -24,7 +24,7 @@ use Wikimedia\TestingAccessWrapper;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
-class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase {
+class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var ExtensionRegistry

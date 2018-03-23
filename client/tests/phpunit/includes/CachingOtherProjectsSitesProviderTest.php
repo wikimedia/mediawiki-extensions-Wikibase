@@ -16,7 +16,7 @@ use Wikibase\Client\OtherProjectsSitesProvider;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class CachingOtherProjectsSitesProviderTest extends \PHPUnit_Framework_TestCase {
+class CachingOtherProjectsSitesProviderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return OtherProjectsSitesProvider

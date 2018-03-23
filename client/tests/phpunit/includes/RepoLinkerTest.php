@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
+class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoSettings() {
 		return [

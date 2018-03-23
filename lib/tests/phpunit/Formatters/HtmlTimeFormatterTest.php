@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\HtmlTimeFormatter;
@@ -21,7 +20,7 @@ use Wikibase\Lib\HtmlTimeFormatter;
  * @author Addshore
  * @author Thiemo Kreuz
  */
-class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
+class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return HtmlTimeFormatter

@@ -16,7 +16,7 @@ use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class CommonsMediaExistsValidatorTest extends \PHPUnit_Framework_TestCase {
+class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return CachingCommonsMediaFileNameLookup

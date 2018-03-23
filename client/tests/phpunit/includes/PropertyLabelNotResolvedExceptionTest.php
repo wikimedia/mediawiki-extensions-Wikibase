@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class PropertyLabelNotResolvedExceptionTest extends PHPUnit_Framework_TestCase {
+class PropertyLabelNotResolvedExceptionTest extends \PHPUnit\Framework\TestCase {
 
 	public function testWithDefaultParameters() {
 		$ex = new PropertyLabelNotResolvedException( '<LABEL>', '<LANGUAGECODE>' );

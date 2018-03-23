@@ -7,7 +7,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
-use PHPUnit_Framework_TestCase;
 use RequestContext;
 use TestSites;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -22,7 +21,7 @@ use Wikibase\Repo\Diff\ItemDiffView;
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class ItemDiffViewTest extends PHPUnit_Framework_TestCase {
+class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 
 	public function diffOpProvider() {
 		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();

@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ClientSiteLinkTitleLookupTest extends \PHPUnit_Framework_TestCase {
+class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getTitleForIdProvider

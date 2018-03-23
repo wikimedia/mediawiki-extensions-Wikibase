@@ -22,7 +22,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider

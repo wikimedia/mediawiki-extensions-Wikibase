@@ -20,7 +20,7 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  *
  * @license GPL-2.0-or-later
  */
-class PerRepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase {
+class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepositoryServiceContainerFactory() {
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(

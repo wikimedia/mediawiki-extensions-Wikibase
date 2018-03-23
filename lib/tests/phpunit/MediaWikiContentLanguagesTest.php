@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\MediaWikiContentLanguages;
 
 /**
@@ -13,7 +12,7 @@ use Wikibase\Lib\MediaWikiContentLanguages;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class MediaWikiContentLanguagesTest extends PHPUnit_Framework_TestCase {
+class MediaWikiContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetLanguages() {
 		$wbContentLanguages = new MediaWikiContentLanguages();

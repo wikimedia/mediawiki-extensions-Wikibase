@@ -9,7 +9,6 @@ use Language;
 use MWContentSerializationException;
 use OutputPage;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 use Title;
 use User;
 use WebRequest;
@@ -30,7 +29,7 @@ use Wikibase\Store\EntityIdLookup;
  * @author Thiemo Kreuz
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
+class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 
 	/** @see \LanguageQqx */
 	const DUMMY_LANGUAGE = 'qqx';

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\View;
 
-use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -20,7 +19,7 @@ use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
+class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetSnakFormatter() {
 		$snakFormatter = $this->getMock( SnakFormatter::class );

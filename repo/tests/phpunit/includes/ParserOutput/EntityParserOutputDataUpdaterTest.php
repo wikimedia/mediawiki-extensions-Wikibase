@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
 use ParserOutput;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -23,7 +22,7 @@ use Wikibase\Repo\ParserOutput\StatementDataUpdater;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
+class EntityParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider entitiesProvider

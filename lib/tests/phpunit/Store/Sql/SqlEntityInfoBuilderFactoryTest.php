@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
  *
  * @license GPL-2.0-or-later
  */
-class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
+class SqlEntityInfoBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return EntityIdComposer

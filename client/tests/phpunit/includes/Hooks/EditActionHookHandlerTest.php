@@ -28,7 +28,7 @@ use Wikibase\Client\Usage\EntityUsage;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
-class EditActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
+class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider handleProvider

@@ -20,7 +20,7 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class DispatchingExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetExceptionMessage() {
 		$localizers = [

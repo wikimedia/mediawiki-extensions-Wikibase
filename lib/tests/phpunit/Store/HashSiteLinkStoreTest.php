@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\HashSiteLinkStore;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
+class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetItemIdForLink() {
 		$itemId = new ItemId( 'Q900' );

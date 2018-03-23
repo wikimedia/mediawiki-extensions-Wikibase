@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Parser;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 
 /**
@@ -16,7 +15,7 @@ use Wikibase\Client\Hooks\ParserFunctionRegistrant;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Kreuz
  */
-class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
+class ParserFunctionRegistrantTest extends \PHPUnit\Framework\TestCase {
 
 	public function parserFunctionsProvider() {
 		return [

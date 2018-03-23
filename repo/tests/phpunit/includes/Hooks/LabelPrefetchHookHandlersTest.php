@@ -27,7 +27,7 @@ use Wikibase\Store\EntityIdLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
+class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param Title[] $titles

@@ -22,7 +22,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
+class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return EntityLookup

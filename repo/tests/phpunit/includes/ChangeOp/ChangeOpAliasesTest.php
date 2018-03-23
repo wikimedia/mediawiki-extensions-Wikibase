@@ -21,7 +21,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */
-class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 
 	private function getTermValidatorFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );

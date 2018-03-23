@@ -25,7 +25,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilder;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

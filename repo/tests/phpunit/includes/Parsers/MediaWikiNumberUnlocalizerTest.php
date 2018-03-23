@@ -16,7 +16,7 @@ use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
+class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return array[] Array of arrays of three strings: localized value, language code and expected

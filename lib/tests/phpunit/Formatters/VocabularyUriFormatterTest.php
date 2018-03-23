@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -19,7 +18,7 @@ use Wikibase\Lib\VocabularyUriFormatter;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
+class VocabularyUriFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function unitProvider() {
 		return [

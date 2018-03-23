@@ -25,7 +25,7 @@ use WikiPage;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_TestCase {
+class SkinTemplateOutputPageBeforeExecHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testDoSkinTemplateOutputPageBeforeExec_setEditLink() {
 		$expected = 'I am a Link!';

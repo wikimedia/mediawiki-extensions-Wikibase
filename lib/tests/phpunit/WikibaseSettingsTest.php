@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests;
 
 use MWException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\WikibaseSettings;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\WikibaseSettings;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  */
-class WikibaseSettingsTest extends PHPUnit_Framework_TestCase {
+class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetRepoSettings() {
 		if ( WikibaseSettings::isRepoEnabled() ) {

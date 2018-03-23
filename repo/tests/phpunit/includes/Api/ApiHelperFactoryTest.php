@@ -30,7 +30,7 @@ use Wikibase\SummaryFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
+class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newApiHelperFactory() {
 		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )

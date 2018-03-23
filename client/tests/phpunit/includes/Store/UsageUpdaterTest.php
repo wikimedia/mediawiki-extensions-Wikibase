@@ -21,7 +21,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
+class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	public function addUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );

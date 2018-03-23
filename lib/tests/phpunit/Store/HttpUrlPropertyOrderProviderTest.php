@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class HttpUrlPropertyOrderProviderTest extends PHPUnit_Framework_TestCase {
+class HttpUrlPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetPropertyOrder() {
 		$cases = WikiTextPropertyOrderProviderTestHelper::provideGetPropertyOrder();

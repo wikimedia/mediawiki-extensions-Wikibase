@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use IContextSource;
 use OutputPage;
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -19,7 +18,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {
+class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getEntityIdFromOutputPageProvider

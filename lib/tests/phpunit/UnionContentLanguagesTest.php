@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\UnionContentLanguages;
@@ -15,7 +14,7 @@ use Wikibase\Lib\UnionContentLanguages;
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
+class UnionContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideTestGetLanguages

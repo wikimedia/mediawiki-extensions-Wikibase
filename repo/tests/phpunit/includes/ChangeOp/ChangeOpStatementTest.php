@@ -39,7 +39,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider

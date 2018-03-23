@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
@@ -22,7 +21,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Stas Malyshev
  * @author Thiemo Kreuz
  */
-class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
+class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

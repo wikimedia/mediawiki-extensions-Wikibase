@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Notifications;
 
 use JobQueueGroup;
 use JobSpecification;
-use PHPUnit_Framework_TestCase;
 use Wikibase\Change;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 
@@ -18,7 +17,7 @@ use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class JobQueueChangeNotificationSenderTest extends PHPUnit_Framework_TestCase {
+class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return JobQueueChangeNotificationSender

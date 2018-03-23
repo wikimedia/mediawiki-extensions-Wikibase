@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 
 /**
@@ -13,7 +12,7 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class MediaWikiLanguageDirectionalityLookupTest extends PHPUnit_Framework_TestCase {
+class MediaWikiLanguageDirectionalityLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideLanguageCodes() {
 		return [

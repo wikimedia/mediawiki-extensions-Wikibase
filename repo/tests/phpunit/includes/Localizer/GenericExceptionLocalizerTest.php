@@ -14,7 +14,7 @@ use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class GenericExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class GenericExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetExceptionMessage() {
 		return [

@@ -42,7 +42,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
+class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider wikitextTypeProvider

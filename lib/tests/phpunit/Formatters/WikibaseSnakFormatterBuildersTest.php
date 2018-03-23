@@ -27,7 +27,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
+class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return WikibaseSnakFormatterBuilders

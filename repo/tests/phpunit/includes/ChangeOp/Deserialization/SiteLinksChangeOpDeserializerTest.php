@@ -24,7 +24,7 @@ use Wikibase\StringNormalizer;
  *
  * @license GPL-2.0-or-later
  */
-class SiteLinksChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
+class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	const SITE_ID = 'somewiki';
 

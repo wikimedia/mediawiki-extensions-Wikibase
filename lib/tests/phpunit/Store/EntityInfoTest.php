@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -22,7 +21,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityInfoTest extends PHPUnit_Framework_TestCase {
+class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param EntityDocument[] $entities

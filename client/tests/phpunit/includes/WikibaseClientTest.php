@@ -53,7 +53,7 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
+class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetDefaultValueFormatterBuilders() {
 		$first = WikibaseClient::getDefaultValueFormatterBuilders();

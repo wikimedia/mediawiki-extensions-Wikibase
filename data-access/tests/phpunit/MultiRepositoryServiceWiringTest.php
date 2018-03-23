@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0-or-later
  */
-class MultiRepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
+class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return PerRepositoryServiceContainerFactory

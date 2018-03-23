@@ -20,7 +20,7 @@ use Wikibase\Lib\RepositoryDefinitions;
  *
  * @license GPL-2.0-or-later
  */
-class MultiRepositoryServicesTest extends \PHPUnit_Framework_TestCase {
+class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 
 	const ITEM_NAMESPACE = 100;
 	const PROPERTY_NAMESPACE = 300;

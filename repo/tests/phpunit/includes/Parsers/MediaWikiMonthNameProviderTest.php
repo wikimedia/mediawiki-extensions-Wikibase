@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class MediaWikiMonthNameProviderTest extends PHPUnit_Framework_TestCase {
+class MediaWikiMonthNameProviderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider languageCodeProvider

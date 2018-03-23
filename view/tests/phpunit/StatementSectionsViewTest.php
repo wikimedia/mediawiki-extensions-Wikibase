@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -26,7 +25,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
+class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance( array $statementLists = [] ) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( [

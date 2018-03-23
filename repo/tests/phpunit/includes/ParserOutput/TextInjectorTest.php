@@ -12,7 +12,7 @@ use Wikibase\Repo\ParserOutput\TextInjector;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class TextInjectorTest extends \PHPUnit_Framework_TestCase {
+class TextInjectorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor() {
 		$injector = new TextInjector();

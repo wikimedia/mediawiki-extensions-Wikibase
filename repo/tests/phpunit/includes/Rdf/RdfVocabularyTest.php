@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -20,7 +19,7 @@ use Wikibase\Rdf\RdfVocabulary;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
+class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
 		return new RdfVocabulary(

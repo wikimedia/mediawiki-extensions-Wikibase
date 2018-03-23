@@ -14,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class ClaimsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
+class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	use ClaimsChangeOpDeserializationTester;
 

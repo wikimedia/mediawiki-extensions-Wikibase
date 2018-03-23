@@ -23,7 +23,7 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getEditCommentProvider

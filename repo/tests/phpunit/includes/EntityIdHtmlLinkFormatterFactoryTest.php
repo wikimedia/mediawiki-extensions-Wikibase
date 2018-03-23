@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\LanguageNameLookup;
@@ -19,7 +18,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
+class EntityIdHtmlLinkFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function getFormatterFactory() {
 		$titleLookup = $this->getMock( EntityTitleLookup::class );

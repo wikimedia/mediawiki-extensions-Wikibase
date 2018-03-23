@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\HashDedupeBag;
 
 /**
@@ -14,7 +13,7 @@ use Wikibase\Rdf\HashDedupeBag;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class HashDedupeBagTest extends PHPUnit_Framework_TestCase {
+class HashDedupeBagTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAlreadySeen() {
 		$bag = new HashDedupeBag( 2 );

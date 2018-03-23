@@ -25,7 +25,7 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
+class LabelDescriptionUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return LabelDescriptionDuplicateDetector

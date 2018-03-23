@@ -25,7 +25,7 @@ use Wikibase\StringNormalizer;
  * @author Marius Hoch < hoo@online.de >
  * @author Addshore
  */
-class EntityByTitleHelperTest extends \PHPUnit_Framework_TestCase {
+class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return ApiBase

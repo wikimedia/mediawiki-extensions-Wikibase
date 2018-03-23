@@ -28,7 +28,7 @@ use Wikibase\Repo\Api\QuerySearchEntities;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
+class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param array $params

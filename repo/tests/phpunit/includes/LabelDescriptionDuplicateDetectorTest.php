@@ -20,7 +20,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {
+class LabelDescriptionDuplicateDetectorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getWorld() {
 		$world = [];

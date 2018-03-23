@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
-class UsageDeduplicatorTest extends \PHPUnit_Framework_TestCase {
+class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideDeduplicate() {
 		$q1 = new ItemId( 'Q1' );

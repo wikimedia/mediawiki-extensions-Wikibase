@@ -12,7 +12,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
  *
  * @license GPL-2.0-or-later
  */
-class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
+class InterWikiLinkWikitextFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testSomeTitleGiven_FormatsItAsAnExternalLink() {
 		$formatter = new InterWikiLinkWikitextFormatter( '//site.org/wiki/' );

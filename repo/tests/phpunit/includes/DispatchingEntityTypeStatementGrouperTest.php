@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -19,7 +18,7 @@ use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCase {
+class DispatchingEntityTypeStatementGrouperTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param int $count

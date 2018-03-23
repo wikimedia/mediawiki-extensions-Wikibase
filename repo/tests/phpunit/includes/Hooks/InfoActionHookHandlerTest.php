@@ -24,7 +24,7 @@ use Wikibase\Store\SubscriptionLookup;
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  * @author Thiemo Kreuz
  */
-class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
+class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider handleProvider

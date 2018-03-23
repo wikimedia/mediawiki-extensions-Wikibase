@@ -14,7 +14,7 @@ use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class FingerprintChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
+class FingerprintChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return FingerprintChangeOpFactory

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
@@ -15,7 +14,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz
  */
-class EntityNamespaceLookupTest extends PHPUnit_Framework_TestCase {
+class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
 		return new EntityNamespaceLookup( [

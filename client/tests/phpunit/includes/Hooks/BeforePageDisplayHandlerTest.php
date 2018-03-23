@@ -20,7 +20,7 @@ use Wikibase\Client\NamespaceChecker;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
+class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider wikibaseForNamespaceProvider

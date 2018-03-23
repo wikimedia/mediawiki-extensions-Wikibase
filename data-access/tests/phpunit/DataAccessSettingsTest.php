@@ -9,7 +9,7 @@ use Wikibase\DataAccess\DataAccessSettings;
  *
  * @license GPL-2.0-or-later
  */
-class DataAccessSettingsTest extends \PHPUnit_Framework_TestCase {
+class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConvertsMaxSerializedEntitySizeFromKiloBytesToBytes() {
 		$settings = new DataAccessSettings( 1, true, false );

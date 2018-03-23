@@ -15,7 +15,7 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class MessageExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class MessageExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetExceptionMessage() {
 		$exception = new MessageException(

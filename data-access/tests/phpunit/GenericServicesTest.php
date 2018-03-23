@@ -17,7 +17,7 @@ use Wikibase\StringNormalizer;
  *
  * @license GPL-2.0-or-later
  */
-class GenericServicesTest extends \PHPUnit_Framework_TestCase {
+class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetEntityNamespaceLookup() {
 		$services = $this->newGenericServices();

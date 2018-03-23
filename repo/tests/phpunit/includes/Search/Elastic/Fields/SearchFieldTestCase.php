@@ -3,13 +3,12 @@
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use CirrusSearch;
-use PHPUnit_Framework_TestCase;
 use SearchEngine;
 
 /**
  * Helper test class for search field testing.
  */
-class SearchFieldTestCase extends PHPUnit_Framework_TestCase {
+class SearchFieldTestCase extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * Prepare search engine mock suitable for testing search fields.
