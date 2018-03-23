@@ -79,7 +79,9 @@
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
-			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
+			wbCurRev = mw.config.get( 'wbCurrentRevision' ),
+			currentRevision = wbCurRev === null ? mw.config.get( 'wgCurRevisionId' ) : wbCurRev,
+			revisionStore = new wb.RevisionStore( currentRevision ),
 			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 				repoApi,
 				revisionStore,
