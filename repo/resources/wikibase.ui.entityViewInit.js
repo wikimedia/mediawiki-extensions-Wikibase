@@ -109,7 +109,8 @@
 			};
 
 		if ( isEditable() ) {
-			var revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
+			var currentRevision = mw.config.get( 'wbCurrentRevision' ) || mw.config.get( 'wgCurRevisionId' ),
+				revisionStore = new wb.RevisionStore( currentRevision ),
 				entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 					repoApi,
 					revisionStore,
