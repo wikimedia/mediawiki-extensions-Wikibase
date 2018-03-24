@@ -366,6 +366,7 @@
 	"content-model-wikibase-property": "Уласьцівасьць Wikibase",
 	"content-model-wikibase-query": "Запыт Wikibase",
 	"right-item-term": "Зьмена ўласьцівасьцяў элемэнтаў (меткі, апісаньні, сынонімы)",
+	"right-item-merge": "Аб’яднаньне элемэнтаў",
 	"right-property-create": "ствараць уласьцівасьці",
 	"action-property-create": "ствараць уласьцівасьці"
 }
