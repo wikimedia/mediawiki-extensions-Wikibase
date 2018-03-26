@@ -187,6 +187,7 @@
 	"wikibase-newentity-description": "Опис:",
 	"wikibase-newentity-submit": "Создај",
 	"special-setlabel": "Задавање на натпис",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|исказ|искази}}, $2 {{PLURAL:$2|викиврска|викиврски}}",
 	"wikibase-setlabel-introfull": "Задавате натпис на $2 за [[$1]].",
 	"wikibase-setlabel-intro": "Овој образец ви овозможува да зададете натпис на предмет. Ќе треба да ја наведете назнаката на предметот (на пр. Q23), јазичен код (на пр. mk) и натписот што го задавате.",
 	"wikibase-setlabel-label": "Натпис:",

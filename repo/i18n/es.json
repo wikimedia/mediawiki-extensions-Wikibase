@@ -417,6 +417,7 @@
 	"apihelp-wbformatvalue-param-datatype": "El tipo de dato del valor. Esto es distinto del tipo del valor",
 	"apihelp-wbformatvalue-param-property": "Identificador de la propiedad a la que pertenece el valor del dato, debe utilizarse en lugar del parámetro <var>datatype</var>.",
 	"apihelp-wbgetentities-description": "Obtiene los datos de múltiples entidades de Wikibase.",
+	"apihelp-wbgetentities-summary": "Obtiene los datos de múltiples entidades de Wikibase.",
 	"apihelp-wbgetentities-param-ids": "Los identificadores de las entidades de las que obtener los datos",
 	"apihelp-wbgetentities-param-languages": "Por defecto, los valores internacionalizados se devuelven en todos los idiomas disponibles. Este parámetro permite filtrarlos a uno o más idiomas. Para ello, hay que introducir los códigos de idioma correspondientes.",
 	"apihelp-wbgetentities-param-languagefallback": "Aplicar idioma de reserva para los idiomas definidos en el parámetro <var>languages</var>, en el contexto actual de la llamada a la API.",

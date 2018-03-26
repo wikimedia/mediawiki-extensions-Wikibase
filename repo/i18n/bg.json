@@ -98,6 +98,7 @@
 	"wikibase-entitieswithoutlabel-invalid-language": "„$1“ не е валиден езиков код.",
 	"special-itemswithoutsitelinks": "Обекти без междуезикови препратки",
 	"wikibase-restoreold": "възстановяване",
+	"wikibase-entity-summary-restore": "Възстановена версия $3 на [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-listdatatypes-url-head": "URL адрес",
 	"datatypes-type-url": "URL адрес",
 	"content-model-wikibase-item": "Обект в Уикиданни",
