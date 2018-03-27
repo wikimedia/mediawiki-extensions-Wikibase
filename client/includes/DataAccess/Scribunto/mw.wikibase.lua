@@ -214,12 +214,15 @@ function wikibase.setupInterface()
 	-- Like wikibase.getLabelWithLang, but only returns the plain label.
 	--
 	-- @param {string} [id]
-	wikibase.label = function( id )
+	wikibase.getLabel = function( id )
 		checkTypeMulti( 'label', 1, id, { 'string', 'nil' } )
 		local label = wikibase.getLabelWithLang( id )
 
 		return label
 	end
+
+	-- Legacy alias for getLabel
+	wikibase.label = wikibase.getLabel
 
 	-- Get the label in languageCode for the given entity id.
 	--
@@ -251,24 +254,29 @@ function wikibase.setupInterface()
 	-- Like wikibase.getDescriptionWithLang, but only returns the plain description.
 	--
 	-- @param {string} [id]
-	wikibase.description = function( id )
+	wikibase.getDescription = function( id )
 		checkTypeMulti( 'description', 1, id, { 'string', 'nil' } )
 		local description = wikibase.getDescriptionWithLang( id )
 
 		return description
 	end
 
+	-- Legacy alias for getDescription
+	wikibase.description = wikibase.getDescription
+
 	-- Get the local sitelink title for the given entity id.
 	--
 	-- @param {string} itemId
 	-- @param {string} [globalSiteId]
-	wikibase.sitelink = function( itemId, globalSiteId )
+	wikibase.getSitelink = function( itemId, globalSiteId )
 		checkType( 'sitelink', 1, itemId, 'string' )
 		checkTypeMulti( 'sitelink', 2, globalSiteId, { 'string', 'nil' } )
 
 		return php.getSiteLinkPageName( itemId, globalSiteId )
 	end
 
+	-- Legacy alias for getSitelink
+	wikibase.sitelink = wikibase.getSitelink
 
 	-- Render a Snak value from its serialization as wikitext escaped plain text.
 	--

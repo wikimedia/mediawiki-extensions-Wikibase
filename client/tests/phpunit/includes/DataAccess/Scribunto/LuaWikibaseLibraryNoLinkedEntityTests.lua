@@ -19,13 +19,13 @@ local tests = {
 	{ name = "mw.wikibase.getEntityUrl returns nil", func = mw.wikibase.getEntityUrl,
 	  expect = { nil }
 	},
-	{ name = "mw.wikibase.label returns nil", func = mw.wikibase.label,
+	{ name = "mw.wikibase.getLabel returns nil", func = mw.wikibase.getLabel,
 	  expect = { nil }
 	},
 	{ name = "mw.wikibase.getLabelWithLang returns nil, nil", func = mw.wikibase.getLabelWithLang,
 	  expect = { nil, nil }
 	},
-	{ name = "mw.wikibase.description returns nil", func = mw.wikibase.description,
+	{ name = "mw.wikibase.getDescription returns nil", func = mw.wikibase.getDescription,
 	  expect = { nil }
 	},
 	{ name = "mw.wikibase.getDescriptionWithLang returns nil, nil", func = mw.wikibase.getDescriptionWithLang,

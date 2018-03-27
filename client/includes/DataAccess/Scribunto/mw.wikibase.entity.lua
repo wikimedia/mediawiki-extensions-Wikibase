@@ -310,7 +310,7 @@ local formatValuesByPropertyId = function( entity, phpFormatterFunction, propert
 
 	local label
 	if isValidPropertyId( propertyLabelOrId ) then
-		label = mw.wikibase.label( propertyLabelOrId )
+		label = mw.wikibase.getLabel( propertyLabelOrId )
 	end
 
 	if label == nil then

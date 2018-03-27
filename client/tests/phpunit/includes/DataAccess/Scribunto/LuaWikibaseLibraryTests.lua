@@ -173,19 +173,23 @@ local tests = {
 	  args = { 123 },
 	  expect = "bad argument #1 to 'getEntity' (string or nil expected, got number)"
 	},
-	{ name = 'mw.wikibase.label', func = mw.wikibase.label, type='ToString',
+	{ name = 'mw.wikibase.label (legacy alias)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'Lua Test Item' }
 	},
-	{ name = 'mw.wikibase.label (no such item)', func = mw.wikibase.label, type='ToString',
+	{ name = 'mw.wikibase.getLabel', func = mw.wikibase.getLabel, type='ToString',
+	  args = { 'Q32487' },
+	  expect = { 'Lua Test Item' }
+	},
+	{ name = 'mw.wikibase.getLabel (no such item)', func = mw.wikibase.getLabel, type='ToString',
 	  args = { 'Q1224342342' },
 	  expect = { nil }
 	},
-	{ name = 'mw.wikibase.label (connected item)', func = mw.wikibase.label, type='ToString',
+	{ name = 'mw.wikibase.getLabel (connected item)', func = mw.wikibase.getLabel, type='ToString',
 	  args = {},
 	  expect = { 'Lua Test Item' }
 	},
-	{ name = 'mw.wikibase.label (no label)', func = mw.wikibase.label, type='ToString',
+	{ name = 'mw.wikibase.getLabel (no label)', func = mw.wikibase.getLabel, type='ToString',
 	  args = { 'Q32488' },
 	  expect = { nil }
 	},
@@ -237,19 +241,23 @@ local tests = {
 	  args = { 'Q32488', 'de' },
 	  expect = { nil }
 	},
-	{ name = 'mw.wikibase.description', func = mw.wikibase.description, type='ToString',
+	{ name = 'mw.wikibase.description (legacy alias)', func = mw.wikibase.description, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'Description of Q32487' }
 	},
-	{ name = 'mw.wikibase.description (connected item)', func = mw.wikibase.description, type='ToString',
+	{ name = 'mw.wikibase.getDescription', func = mw.wikibase.getDescription, type='ToString',
+	  args = { 'Q32487' },
+	  expect = { 'Description of Q32487' }
+	},
+	{ name = 'mw.wikibase.getDescription (connected item)', func = mw.wikibase.getDescription, type='ToString',
 	  args = {},
 	  expect = { 'Description of Q32487' }
 	},
-	{ name = 'mw.wikibase.description (no such item)', func = mw.wikibase.description, type='ToString',
+	{ name = 'mw.wikibase.getDescription (no such item)', func = mw.wikibase.getDescription, type='ToString',
 	  args = { 'Q1224342342' },
 	  expect = { nil }
 	},
-	{ name = 'mw.wikibase.description (no such description)', func = mw.wikibase.description, type='ToString',
+	{ name = 'mw.wikibase.getDescription (no such description)', func = mw.wikibase.getDescription, type='ToString',
 	  args = { 'P342' },
 	  expect = { nil }
 	},
@@ -265,23 +273,27 @@ local tests = {
 	  args = { 'P342' },
 	  expect = { nil, nil }
 	},
-	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.sitelink (legacy alias)', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'WikibaseClientDataAccessTest' }
 	},
-	{ name = 'mw.wikibase.sitelink (invalid id given)', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.getSitelink', func = mw.wikibase.getSitelink, type='ToString',
+	  args = { 'Q32487' },
+	  expect = { 'WikibaseClientDataAccessTest' }
+	},
+	{ name = 'mw.wikibase.getSitelink (invalid id given)', func = mw.wikibase.getSitelink, type='ToString',
 	  args = {},
 	  expect = "bad argument #1 to 'sitelink' (string expected, got nil)"
 	},
-	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.getSitelink', func = mw.wikibase.getSitelink, type='ToString',
 	  args = { 'Q32488' },
 	  expect = { nil }
 	},
-	{ name = 'mw.wikibase.sitelink (with global site id)', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.getSitelink (with global site id)', func = mw.wikibase.getSitelink, type='ToString',
 	  args = { 'Q32487', 'fooSiteId' },
 	  expect = { 'FooBarFoo' }
 	},
-	{ name = 'mw.wikibase.sitelink (with global site id not found)', func = mw.wikibase.sitelink, type='ToString',
+	{ name = 'mw.wikibase.getSitelink (with global site id not found)', func = mw.wikibase.getSitelink, type='ToString',
 	  args = { 'Q32487', 'does-not-exist' },
 	  expect = { nil }
 	},

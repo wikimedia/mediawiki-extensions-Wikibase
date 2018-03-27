@@ -7,19 +7,19 @@ For ease of access and convinence Wikibase Lua library provides access to aspect
 ! Aspect !! mw.wikibase.FUNCTION !! entity:FUNCTION
 |-
 | Label in content or user language
-| [[#mw.wikibase.label|label]]/[[#mw.wikibase.getLabelWithLang|getLabelWithLang]]
+| [[#mw.wikibase.getLabel|getLabel]]/[[#mw.wikibase.getLabelWithLang|getLabelWithLang]]
 | [[#mw.wikibase.entity:getLabel|getLabel]]/[[#mw.wikibase.entity:getLabelWithLang|getLabelWithLang]]
 |-
 | Label by language, without fallbacks
-| [[#wikibase.getLabelByLang|getLabelByLang]]
+| [[#mw.wikibase.getLabelByLang|getLabelByLang]]
 | NA
 |-
 | Sitelinks
-| [[#mw.wikibase.sitelink|sitelink]]
+| [[#mw.wikibase.getSitelink|getSitelink]]
 | [[#mw.wikibase.entity:getSitelink|getSitelink]]
 |-
 | Descriptions
-| [[#mw.wikibase.description|description]]/[[#mw.wikibase.getDescriptionWithLang|getDescriptionWithLang]]
+| [[#mw.wikibase.getDescription|getDescription]]/[[#mw.wikibase.getDescriptionWithLang|getDescriptionWithLang]]
 | [[#mw.wikibase.entity:getDescription|getDescription]]/[[#mw.wikibase.entity:getDescriptionWithLang|getDescriptionWithLang]]
 |-
 | rowspan="2" | Statements
@@ -42,9 +42,6 @@ An example call might look like this:
 <source lang="lua">
 mw.wikibase.getEntity( 'Q42' ) -- Returns a mw.wikibase.entity table for the Item with the id Q42
 </source>
-
-=== mw.wikibase.getEntityObject ===
-Alias for [[#mw.wikibase.getEntity|mw.wikibase.getEntity]].
 
 === mw.wikibase.getEntityIdForCurrentPage ===
 <code>wikibase.getEntityIdForCurrentPage()</code><br>
@@ -76,22 +73,22 @@ An example call might look like this:
 mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, like "https://www.wikidata.org/wiki/Special:EntityPage/Q42".
 </source>
 
-=== mw.wikibase.label ===
-<code>wikibase.label()</code><br>
-<code>wikibase.label( id )</code><br>
+=== mw.wikibase.getLabel ===
+<code>wikibase.getLabel()</code><br>
+<code>wikibase.getLabel( id )</code><br>
 Takes an item ID and returns the label in the language of the local Wiki.
 
 If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists. The label will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [[#mw.wikibase.getLabelWithLang|<code>mw.wikibase.getLabelWithLang</code>]].
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.label( 'Q42' ) -- Returns the label of the item as a string, like "Berlin".
+mw.wikibase.getLabel( 'Q42' ) -- Returns the label of the item as a string, like "Berlin".
 </source>
 
 === mw.wikibase.getLabelWithLang ===
 <code>wikibase.getLabelWithLang()</code><br>
 <code>wikibase.getLabelWithLang( id )</code><br>
-Like [[#mw.wikibase.label|<code>mw.wikibase.label</code>]], but has the language the returned label is in as an additional second return parameter.
+Like [[#mw.wikibase.getLabel|<code>mw.wikibase.getLabel</code>]], but has the language the returned label is in as an additional second return parameter.
 
 An example call might look like this:
 <source lang="lua">
@@ -102,41 +99,41 @@ local label, lang = mw.wikibase.getLabelWithLang( 'Q42' ) -- label contains the 
 <code>wikibase.getLabelByLang( id, languageCode )</code><br>
 Get the label from an entity for a specific language, returns the label as string or nil if it couldn't be found. This doesn't apply any language fallbacks.
 
-'''Note''': This should not be used to get the label in the user's language on multilingual wikis, use [[#mw.wikibase.label|<code>mw.wikibase.label</code>]] for that if by any means possible.
+'''Note''': This should not be used to get the label in the user's language on multilingual wikis, use [[#mw.wikibase.getLabel|<code>mw.wikibase.getLabel</code>]] for that if by any means possible.
 
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.getLabelByLang( 'Q42', 'es' ) -- Returns the Spanish label of the item as a string, like "Berlín".
 </source>
 
-=== mw.wikibase.sitelink ===
-<code>wikibase.sitelink( itemId )</code><br>
-<code>wikibase.sitelink( itemId, globalSiteId )</code><br>
+=== mw.wikibase.getSitelink ===
+<code>wikibase.getSitelink( itemId )</code><br>
+<code>wikibase.getSitelink( itemId, globalSiteId )</code><br>
 Takes an item ID and returns the title of the corresponding page title on the local Wiki. This page title can be used to link to the given page.
 
 When <code>globalSiteId</code> is given, the page title on the specified wiki is returned, rather than the one on the local wiki.
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.sitelink( 'Q42' ) -- Returns the given item's page title in the current Wiki as a string, like "Berlin".
+mw.wikibase.getSitelink( 'Q42' ) -- Returns the given item's page title in the current Wiki as a string, like "Berlin".
 </source>
 
-=== mw.wikibase.description ===
-<code>wikibase.description()</code><br>
-<code>wikibase.description( id )</code><br>
+=== mw.wikibase.getDescription ===
+<code>wikibase.getDescription()</code><br>
+<code>wikibase.getDescription( id )</code><br>
 Takes an item ID and returns the description in the language of the local Wiki.
 
 If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists. The description will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [[#mw.wikibase.getDescriptionWithLang|<code>mw.wikibase.getDescriptionWithLang</code>]].
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.description( 'Q42' ) -- Returns the description of the item as a string, like "capital of Germany".
+mw.wikibase.getDescription( 'Q42' ) -- Returns the description of the item as a string, like "capital of Germany".
 </source>
 
 === mw.wikibase.getDescriptionWithLang ===
 <code>wikibase.getDescriptionWithLang()</code><br>
 <code>wikibase.getDescriptionWithLang( id )</code><br>
-Like [[#mw.wikibase.description|<code>mw.wikibase.description</code>]], but has the language the returned description is in as an additional second return parameter.
+Like [[#mw.wikibase.getDescription|<code>mw.wikibase.getDescription</code>]], but has the language the returned description is in as an additional second return parameter.
 
 An example call might look like this:
 <source lang="lua">
@@ -236,6 +233,21 @@ An example call might look like this:
 <source lang="lua">
 mw.wikibase.getAllStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of P12 statements from Q1
 </source>
+
+=== Legacy aliases ===
+These functions exist solely for backward compatibility, they should not be used in new code.
+
+==== mw.wikibase.getEntityObject ====
+Alias for [[#mw.wikibase.getEntity|mw.wikibase.getEntity]].
+
+==== mw.wikibase.label ====
+Alias for [[#mw.wikibase.getLabel|mw.wikibase.getLabel]].
+
+==== mw.wikibase.description ====
+Alias for [[#mw.wikibase.getDescription|mw.wikibase.getDescription]].
+
+==== mw.wikibase.sitelink ====
+Alias for [[#mw.wikibase.getSitelink|mw.wikibase.getSitelink]].
 
 == mw.wikibase.entity ==
 <code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntity|<code>mw.wikibase.getEntity</code>]].
