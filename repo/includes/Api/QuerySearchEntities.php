@@ -162,7 +162,6 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,
-				self::PARAM_RANGE_ENFORCE => true,
 			],
 		];
 	}
