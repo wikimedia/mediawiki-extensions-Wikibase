@@ -1,10 +1,16 @@
 # Wikibase DataModel Serialization release notes
 
-## 2.7.0 (dev)
+## 2.7.0 (2018-03-28)
 
+* Fixed `AliasGroupListDeserializer` and `TermListDeserializer` misbehaving when confronted with
+  language codes exclusively made of digits.
+* Fixed `SnakDeserializer` possibly accessing non-existing array elements.
 * Improved documentation of `SerializerFactory::newEntitySerializer` as well as
   `DeserializerFactory::newEntityDeserializer`.
 * Added compatibility with Serialization 4.x
+* Improved forward-compatibility with PHPUnit 6
+* Note: The `SnakDeserializer` constructor changed, but since it's declared package private, this
+  shouldn't affect anyone.
 
 ## 2.6.0 (2017-09-18)
 
