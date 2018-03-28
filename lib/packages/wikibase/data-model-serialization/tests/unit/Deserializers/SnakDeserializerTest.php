@@ -24,17 +24,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 class SnakDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
-		$entityIdDeserializerMock->expects( $this->any() )
-			->method( 'deserialize' )
-			->with( $this->equalTo( 'P42' ) )
-			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
-
 		return new SnakDeserializer(
 			new DataValueDeserializer( [
 				'string' => StringValue::class,
-			] ),
-			$entityIdDeserializerMock
+			] )
 		);
 	}
 
@@ -150,12 +143,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testDeserializePropertyIdFilterItemId() {
-		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
-		$entityIdDeserializerMock->expects( $this->any() )
-			->method( 'deserialize' )
-			->with( $this->equalTo( 'Q42' ) )
-			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
-		$deserializer = new SnakDeserializer( new DataValueDeserializer(), $entityIdDeserializerMock );
+		$deserializer = new SnakDeserializer( new DataValueDeserializer() );
 
 		$this->setExpectedException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
