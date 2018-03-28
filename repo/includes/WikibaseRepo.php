@@ -2036,4 +2036,11 @@ class WikibaseRepo {
 		return require __DIR__ . '/../../data-access/src/PerRepositoryServiceWiring.php';
 	}
 
+	/**
+	 * Get entity search helper callbacks.
+	 * @return callable[]
+	 */
+	public function getEntitySearchHelperCallbacks() {
+		return $this->entityTypeDefinitions->getEntitySearchHelperCallbacks();
+	}
 }
