@@ -100,20 +100,22 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * @param Language $userLang
 	 * @param array $contentModelMap Maps entity type => content model name
 	 * @param array $settings Search settings, see Wikibase.default.php under 'entitySearch'
+	 * @param WebRequest|null $request Web request context
 	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageChainFactory,
 		EntityIdParser $idParser,
 		Language $userLang,
 		array $contentModelMap,
-		array $settings
+		array $settings,
+		WebRequest $request = null
 	) {
 		$this->languageChainFactory = $languageChainFactory;
 		$this->idParser = $idParser;
 		$this->userLang = $userLang;
 		$this->contentModelMap = $contentModelMap;
 		$this->settings = $settings;
-		$this->request = new \FauxRequest();
+		$this->request = $request ?: new \FauxRequest();
 	}
 
 	/**

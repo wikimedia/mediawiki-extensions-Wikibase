@@ -78,6 +78,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Api\\AvailableBadges' => __DIR__ . '/includes/Api/AvailableBadges.php',
 	'Wikibase\\Repo\\Api\\CreateClaim' => __DIR__ . '/includes/Api/CreateClaim.php',
 	'Wikibase\\Repo\\Api\\CreateRedirect' => __DIR__ . '/includes/Api/CreateRedirect.php',
+	'Wikibase\\Repo\\Api\\TypeDispatchingEntitySearchHelper' => __DIR__ . '/includes/Api/TypeDispatchingEntitySearchHelper.php',
 	'Wikibase\\Repo\\Api\\EditEntity' => __DIR__ . '/includes/Api/EditEntity.php',
 	'Wikibase\\Repo\\Api\\EntityByTitleHelper' => __DIR__ . '/includes/Api/EntityByTitleHelper.php',
 	'Wikibase\\Repo\\Api\\EntityLoadingHelper' => __DIR__ . '/includes/Api/EntityLoadingHelper.php',

@@ -35,7 +35,8 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'entity-id-composer-callback' => 'new-composed-foo-id',
 				'changeop-deserializer-callback' => 'new-changeop-deserializer-callback',
 				'rdf-builder-factory-callback' => 'new-rdf-builder-factory-callback',
-				'entity-diff-visualizer-callback' => 'new-entity-diff-visualizer-callback'
+				'entity-diff-visualizer-callback' => 'new-entity-diff-visualizer-callback',
+				'entity-search-callback' => 'foo-search',
 			],
 			'bar' => [
 				'serializer-factory-callback' => 'bar-serializer',
@@ -44,6 +45,7 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'content-model-id' => 'bar-model',
 				'content-handler-factory-callback' => 'bar-handler',
 				'entity-factory-callback' => 'new-bar',
+				'entity-search-callback' => 'bar-search',
 			],
 			'baz' => []
 		];
@@ -214,6 +216,15 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame(
 			[ 'foo' => 'new-rdf-builder-factory-callback' ],
 			$definitions->getRdfBuilderFactoryCallbacks()
+		);
+	}
+
+	public function testGetEntitySearchHelperCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-search', 'bar' => 'bar-search' ],
+			$definitions->getEntitySearchHelperCallbacks()
 		);
 	}
 
