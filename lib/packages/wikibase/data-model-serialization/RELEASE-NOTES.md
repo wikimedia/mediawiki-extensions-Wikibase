@@ -4,6 +4,7 @@
 
 * Improved documentation of `SerializerFactory::newEntitySerializer` as well as
   `DeserializerFactory::newEntityDeserializer`.
+* Added compatibility with Serialization 4.x
 
 ## 2.6.0 (2017-09-18)
 
