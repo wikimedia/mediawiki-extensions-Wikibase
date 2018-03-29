@@ -258,15 +258,12 @@ call_user_func( function() {
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
 			$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
-			$termIndex = $client->getStore()->getTermIndex();
-			$entityIdLookup = $client->getStore()->getEntityIdLookup();
+			$descriptionLookup = $client->getStore()->getDescriptionLookup();
 			return new Wikibase\Client\Api\Description(
 				$apiQuery,
 				$moduleName,
 				$allowLocalShortDesc,
-				$client->getContentLanguage(),
-				$entityIdLookup,
-				$termIndex
+				$descriptionLookup
 			);
 		}
 	];

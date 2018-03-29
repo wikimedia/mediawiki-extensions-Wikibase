@@ -85,6 +85,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\Specials\\SpecialUnconnectedPages' => __DIR__ . '/includes/Specials/SpecialUnconnectedPages.php',
 	'Wikibase\\Client\\Store\\AddUsagesForPageJob' => __DIR__ . '/includes/Store/AddUsagesForPageJob.php',
 	'Wikibase\\Client\\Store\\ClientStore' => __DIR__ . '/includes/Store/ClientStore.php',
+	'Wikibase\\Client\\Store\\DescriptionLookup' => __DIR__ . '/includes/Store/DescriptionLookup.php',
 	'Wikibase\\Client\\Store\\Sql\\BulkSubscriptionUpdater' => __DIR__ . '/includes/Store/Sql/BulkSubscriptionUpdater.php',
 	'Wikibase\\Client\\Store\\Sql\\DirectSqlStore' => __DIR__ . '/includes/Store/Sql/DirectSqlStore.php',
 	'Wikibase\\Client\\Store\\Sql\\PagePropsEntityIdLookup' => __DIR__ . '/includes/Store/Sql/PagePropsEntityIdLookup.php',

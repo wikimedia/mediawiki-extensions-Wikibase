@@ -6,6 +6,7 @@ use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use UtfNormal\Utils;
 use Wikibase\Client\Hooks\ShortDescHandler;
+use Wikibase\Client\Store\DescriptionLookup;
 
 /**
  * @covers Wikibase\Client\Hooks\ShortDescHandler
@@ -84,7 +85,7 @@ class ShortDescHandlerTest extends TestCase {
 		} else {
 			$output->expects( $this->once() )
 				->method( 'setProperty' )
-				->with( 'wikibase-shortdesc', $pageProperty );
+				->with( DescriptionLookup::LOCAL_PROPERTY_NAME, $pageProperty );
 		}
 		$this->handler->doHandle( $parser, $inputString, '' );
 	}
