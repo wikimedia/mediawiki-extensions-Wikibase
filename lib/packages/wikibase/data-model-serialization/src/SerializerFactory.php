@@ -131,7 +131,7 @@ class SerializerFactory {
 	 *
 	 * @since 2.1
 	 *
-	 * @return Serializer
+	 * @return DispatchableSerializer
 	 */
 	public function newItemSerializer() {
 		return new ItemSerializer(
@@ -148,7 +148,7 @@ class SerializerFactory {
 	 *
 	 * @since 2.1
 	 *
-	 * @return Serializer
+	 * @return DispatchableSerializer
 	 */
 	public function newPropertySerializer() {
 		return new PropertySerializer(
@@ -186,7 +186,7 @@ class SerializerFactory {
 	 *
 	 * @since 1.4
 	 *
-	 * @return Serializer
+	 * @return DispatchableSerializer
 	 */
 	public function newStatementSerializer() {
 		return new StatementSerializer(
