@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ede732b6_9b950c41",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-03-29T22:44:39Z",
+      "side": 1,
+      "message": "trailing space.",
+      "range": {
+        "startLine": 6,
+        "startChar": 34,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "0674c6c8b1b412c083709fb95445c14e41040437",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
