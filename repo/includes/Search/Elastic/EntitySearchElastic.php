@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Search\Elastic;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\ConstantScore;
 use Elastica\Query\DisMax;
 use Elastica\Query\Match;
 use Elastica\Query\Term;
@@ -213,7 +212,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		}
 
 		foreach ( $fieldsExact as $field ) {
-			$dismax->addQuery( $this->makeConstScoreQuery( $field[0], $field[1], $textExact ) );
+			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $textExact ) );
 		}
 
 		$labelsQuery = new BoolQuery();
@@ -230,20 +229,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query->addFilter( new Term( [ 'content_model' => $this->contentModelMap[$entityType] ] ) );
 
 		return $query;
-	}
-
-	/**
-	 * Create constant score query for a field.
-	 * @param string $field
-	 * @param string|double $boost
-	 * @param string $text
-	 * @return ConstantScore
-	 */
-	private function makeConstScoreQuery( $field, $boost, $text ) {
-		$csquery = new ConstantScore();
-		$csquery->setFilter( new Match( $field, $text ) );
-		$csquery->setBoost( $boost );
-		return $csquery;
 	}
 
 	/**
