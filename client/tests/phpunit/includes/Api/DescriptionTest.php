@@ -5,16 +5,10 @@ namespace Wikibase\Client\Tests\Api;
 use ApiMain;
 use Language;
 use PHPUnit4And6Compat;
-use PageProps;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Client\Api\Description;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
-use Wikimedia\ScopedCallback;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -61,31 +55,36 @@ class DescriptionTest extends TestCase {
 		$allowLocalShortDesc,
 		array $params,
 		array $requestedPageIds,
-		array $localDescriptions,
-		array $centralDescriptions,
 		$fitLimit,
+		array $expectedPageIds,
+		array $expectedSources,
+		array $descriptions,
+		array $actualSources,
 		array $expectedResult,
 		$expectedContinue
 	) {
-		$scope = $this->mockPageProps( $localDescriptions );
-		$idLookup = $this->getIdLookup( $centralDescriptions );
-		$termIndex = $this->getTermIndex( $centralDescriptions );
+		$descriptionLookup = $this->getDescriptionLookup( $expectedPageIds, $expectedSources,
+			$descriptions, $actualSources );
 		$module = $this->getModule( $allowLocalShortDesc, $params, $requestedPageIds, $fitLimit,
-			$idLookup, $termIndex );
+			$descriptionLookup );
 		$module->execute();
 		$this->assertSame( $expectedResult, $this->resultData );
 		$this->assertSame( $expectedContinue, $this->continueEnumParameter );
 	}
 
 	public function provideExecute() {
+		$local = DescriptionLookup::SOURCE_LOCAL;
+		$central = DescriptionLookup::SOURCE_CENTRAL;
 		return [
 			'empty' => [
 				'allow local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => [],
-				'local descriptions by page ID' => [],
-				'central descriptions by page ID' => [],
 				'fit limit' => null,
+				'expected page IDs' => [],
+				'expected sources' => [ $central ],
+				'actual descriptions by page ID' => [],
+				'actual sources by page ID' => [],
 				'expected results' => [],
 				'expected continuation value' => null,
 			],
@@ -93,9 +92,11 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 4 => 'L3', 5 => 'L4' ],
-				'central descriptions by page ID' => [ 3 => 'C3', 4 => 'C4', 5 => null ],
 				'fit limit' => null,
+				'expected page IDs' => [ 1, 2, 3, 4, 5 ],
+				'expected sources' => [ $central ],
+				'actual descriptions by page ID' => [ 3 => 'C3', 4 => 'C4' ],
+				'actual sources by page ID' => [ 3 => $central, 4 => $central ],
 				'expected results' => [
 					3 => [ 'description' => 'C3', 'descriptionsource' => 'central' ],
 					4 => [ 'description' => 'C4', 'descriptionsource' => 'central' ],
@@ -106,9 +107,11 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [],
 				'requested page IDs' => [ 1, 2, 3, 4, 5, 6 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions by page ID' => [ 2 => null, 3 => 'C3', 4 => 'C4', 5 => null ],
 				'fit limit' => null,
+				'expected page IDs' => [ 1, 2, 3, 4, 5, 6 ],
+				'expected sources' => [ $local, $central ],
+				'actual descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3', 4 => 'C4' ],
+				'actual sources by page ID' => [ 1 => $local, 2 => $local, 3 => $local, 4 => $central ],
 				'expected results' => [
 					1 => [ 'description' => 'L1', 'descriptionsource' => 'local' ],
 					2 => [ 'description' => 'L2', 'descriptionsource' => 'local' ],
@@ -121,9 +124,11 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [ 'prefersource' => 'central' ],
 				'requested page IDs' => [ 1, 2, 3, 4, 5, 6 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions by page ID' => [ 2 => null, 3 => 'C3', 4 => 'C4', 5 => null ],
 				'fit limit' => null,
+				'expected page IDs' => [ 1, 2, 3, 4, 5, 6 ],
+				'expected sources' => [ $central, $local ],
+				'actual descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'C3', 4 => 'C4', ],
+				'actual sources by page ID' => [ 1 => $local, 2 => $local, 3 => $central, 4 => $central ],
 				'expected results' => [
 					1 => [ 'description' => 'L1', 'descriptionsource' => 'local' ],
 					2 => [ 'description' => 'L2', 'descriptionsource' => 'local' ],
@@ -136,9 +141,12 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions by page ID' => [ 2 => 'C2', 3 => 'C3', 4 => 'C4', 5 => 'C5' ],
 				'fit limit' => 2,
+				'expected page IDs' => [ 1, 2, 3, 4, 5 ],
+				'expected sources' => [ $local, $central ],
+				'actual descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3', 4 => 'C4', 5 => 'C5' ],
+				'actual sources by page ID' => [ 1 => $local, 2 => $local, 3 => $local, 4 => $central,
+					5 => $central ],
 				'expected results' => [
 					1 => [ 'description' => 'L1', 'descriptionsource' => 'local' ],
 					2 => [ 'description' => 'L2', 'descriptionsource' => 'local' ],
@@ -149,9 +157,11 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [ 'continue' => 2 ],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions by page ID' => [ 2 => 'C2', 3 => 'C3', 4 => 'C4', 5 => 'C5' ],
 				'fit limit' => 2,
+				'expected page IDs' => [ 3, 4, 5 ],
+				'expected sources' => [ $local, $central ],
+				'actual descriptions by page ID' => [ 3 => 'L3', 4 => 'C4', 5 => 'C5' ],
+				'actual sources by page ID' => [ 3 => $local, 4 => $central, 5 => $central ],
 				'expected results' => [
 					3 => [ 'description' => 'L3', 'descriptionsource' => 'local' ],
 					4 => [ 'description' => 'C4', 'descriptionsource' => 'central' ],
@@ -162,9 +172,11 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [ 'continue' => 4 ],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions by page ID' => [ 2 => 'C2', 3 => 'C3', 4 => 'C4', 5 => 'C5' ],
 				'fit limit' => 2,
+				'expected page IDs' => [ 5 ],
+				'expected sources' => [ $local, $central ],
+				'actual descriptions by page ID' => [ 5 => 'C5' ],
+				'actual sources by page ID' => [ 5 => $central ],
 				'expected results' => [
 					5 => [ 'description' => 'C5', 'descriptionsource' => 'central' ],
 				],
@@ -174,9 +186,11 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [ 'continue' => 2 ],
 				'requested page IDs' => [ 1, 2, 3, 4 ],
-				'local descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions by page ID' => [ 2 => 'C2', 3 => 'C3', 4 => 'C4' ],
 				'fit limit' => 2,
+				'expected page IDs' => [ 3, 4 ],
+				'expected sources' => [ $local, $central ],
+				'actual descriptions by page ID' => [ 3 => 'L3', 4 => 'C4' ],
+				'actual sources by page ID' => [ 3 => $local, 4 => $central ],
 				'expected results' => [
 					3 => [ 'description' => 'L3', 'descriptionsource' => 'local' ],
 					4 => [ 'description' => 'C4', 'descriptionsource' => 'central' ],
@@ -187,14 +201,51 @@ class DescriptionTest extends TestCase {
 				'allow local descriptions' => true,
 				'API params' => [],
 				'requested page IDs' => range( 1, 600 ),
-				'local descriptions by page ID' => array_fill( 1, 600, 'local' ),
-				'central descriptions by page ID' => [],
 				'fit limit' => null,
-				'expected results' => array_fill( 1, 500, [ 'description' => 'local',
+				'expected page IDs' => range( 1, 500 ),
+				'expected sources' => [ $local, $central ],
+				'actual descriptions by page ID' => array_fill( 1, 500, 'LX' ),
+				'actual sources by page ID' => array_fill( 1, 500, $local ),
+				'expected results' => array_fill( 1, 500, [ 'description' => 'LX',
 					'descriptionsource' => 'local' ] ),
 				'expected continuation value' => 500,
 			],
 		];
+	}
+
+	/**
+	 * Mock description lookup.
+	 * @param int[] $expectedPageIds
+	 * @param string[] $expectedSources
+	 * @param array $descriptionsToReturn page ID => description text
+	 * @param string[] $sourcesToReturn page ID => DescriptionLookup::SOURCE_*
+	 * @return \PHPUnit_Framework_MockObject_MockObject|DescriptionLookup
+	 */
+	private function getDescriptionLookup(
+		$expectedPageIds,
+		$expectedSources,
+		$descriptionsToReturn,
+		$sourcesToReturn
+	) {
+		$descriptionLookup = $this->getMockBuilder( DescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$descriptionLookup->expects( $this->once() )
+			->method( 'getDescriptions' )
+			->willReturnCallback( function ( $titles, $sources, &$actualSources )
+				use ( $expectedPageIds, $expectedSources, $descriptionsToReturn, $sourcesToReturn ) {
+					/** @var Title[] $titles */
+					/** @var string|string[] $sourcesToReturn */
+					$pageIds = array_values( array_map( function ( Title $title ) {
+						return $title->getArticleID();
+					}, $titles ) );
+					// Should be a sort-insensitive check but everything is sorted anyway.
+					$this->assertSame( $expectedPageIds, $pageIds );
+					$this->assertSame( $expectedSources, (array)$sources );
+					$actualSources = $sourcesToReturn;
+					return $descriptionsToReturn;
+			} );
+		return $descriptionLookup;
 	}
 
 	/**
@@ -205,18 +256,16 @@ class DescriptionTest extends TestCase {
 	 * @param array $params API parameters for the module (unprefixed)
 	 * @param array $requestedPageIds
 	 * @param int|null $fitLimit
-	 * @param EntityIdLookup $idLookup
-	 * @param TermIndex $termIndex
-	 *
+	 * @param DescriptionLookup $descriptionLookup
 	 * @return Description
+	 *
 	 */
 	private function getModule(
 		$allowLocalShortDesc,
 		array $params,
 		array $requestedPageIds,
 		$fitLimit,
-		EntityIdLookup $idLookup,
-		TermIndex $termIndex
+		DescriptionLookup $descriptionLookup
 	) {
 		$main = $this->getMockBuilder( ApiMain::class )
 			->disableOriginalConstructor()
@@ -259,9 +308,7 @@ class DescriptionTest extends TestCase {
 			->getMock();
 		$modulePrivate = TestingAccessWrapper::newFromObject( $module );
 		$modulePrivate->allowLocalShortDesc = $allowLocalShortDesc;
-		$modulePrivate->contentLanguage = Language::factory( 'en' );
-		$modulePrivate->idLookup = $idLookup;
-		$modulePrivate->termIndex = $termIndex;
+		$modulePrivate->descriptionLookup = $descriptionLookup;
 		$module->expects( $this->any() )
 			->method( 'getParameter' )
 			->willReturnCallback( function ( $name ) use ( $params ) {
@@ -297,107 +344,19 @@ class DescriptionTest extends TestCase {
 	 * @return Title[] page id => Title
 	 */
 	private function makeTitles( $requestedPageIds ) {
-		return array_map( function ( $pageId ) {
+		$en = Language::factory( 'en' );
+		return array_map( function ( $pageId ) use ( $en ) {
 			$title = $this->getMockBuilder( Title::class )
 				->disableOriginalConstructor()
 				->getMock();
 			$title->expects( $this->any() )
 				->method( 'getArticleID' )
 				->willReturn( $pageId );
+			$title->expects( $this->any() )
+				->method( 'getPageLanguage' )
+				->willReturn( $en );
 			return $title;
 		}, array_combine( $requestedPageIds, $requestedPageIds ) );
-	}
-
-	/**
-	 * Mock page property lookup.
-	 *
-	 * @param array $localDescriptions page id => description
-	 *
-	 * @return ScopedCallback
-	 */
-	private function mockPageProps( array $localDescriptions ) {
-		$pageProps = $this->getMockBuilder( PageProps::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$pageProps->expects( $this->any() )
-			->method( 'getProperties' )
-			->with( $this->anything(), 'wikibase-shortdesc' )
-			->willReturnCallback( function ( $titlesByPageId ) use ( $localDescriptions ) {
-				return array_filter( array_map( function ( Title $title ) use ( $localDescriptions ) {
-					if ( !array_key_exists( $title->getArticleID(), $localDescriptions ) ) {
-						return null;
-					}
-					return $localDescriptions[$title->getArticleID()];
-				}, $titlesByPageId ), function ( $description ) {
-					return $description !== null;
-				} );
-			} );
-		return PageProps::overrideInstance( $pageProps );
-	}
-
-	/**
-	 * Mock id lookup.
-	 *
-	 * To keep things simple, we just pretend each title which has a central description
-	 * is linked to the entity 'Q<pageid>'.
-	 *
-	 * @param array $centralDescriptions page id => description
-	 *   If $centralDescriptions[<pageid>] is missing, there is no linked entity;
-	 *   if it is null, there is no description.
-	 *
-	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityIdLookup
-	 */
-	private function getIdLookup( array $centralDescriptions ) {
-		$idLookup = $this->getMockBuilder( EntityIdLookup::class )
-			->getMockForAbstractClass();
-		$idLookup->expects( $this->any() )
-			->method( 'getEntityIds' )
-			->willReturnCallback( function ( $titlesByPageId ) use ( $centralDescriptions ) {
-				return array_filter( array_map( function ( Title $title ) use ( $centralDescriptions ) {
-					if ( !array_key_exists( $title->getArticleID(), $centralDescriptions ) ) {
-						return null;
-					}
-					return new ItemId( ItemId::joinSerialization(
-						[ 'central', '', 'Q' . $title->getArticleID() ] ) );
-				}, $titlesByPageId ) );
-			} );
-		return $idLookup;
-	}
-
-	/**
-	 * Mock term lookup.
-	 *
-	 * Assumes the setup used by getIdLookup() and must be called with the same $centralDescriptions
-	 * array.
-	 *
-	 * @param array $centralDescriptions page id => description
-	 *   If $centralDescriptions[<pageid>] is missing, there is no linked entity;
-	 *   if it is null, there is no description.
-	 *
-	 * @return \PHPUnit_Framework_MockObject_MockObject|TermIndex
-	 */
-	private function getTermIndex( array $centralDescriptions ) {
-		$termIndex = $this->getMockBuilder( TermIndex::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$termIndex->expects( $this->any() )
-			->method( 'getTermsOfEntities' )
-			->willReturnCallback( function ( $entityIdsByPageId ) use ( $centralDescriptions ) {
-				return array_values( array_filter( array_map(
-					function ( EntityId $entityId ) use ( $centralDescriptions ) {
-						$pageId = substr( $entityId->getLocalPart(), 1 );
-						if ( $centralDescriptions[$pageId] === null ) {
-							return null;
-						}
-						return new TermIndexEntry( [
-							'termType' => TermIndexEntry::TYPE_DESCRIPTION,
-							'termLanguage' => 'en',
-							'termText' => $centralDescriptions[$pageId],
-							'entityId' => $entityId,
-						] );
-					}, $entityIdsByPageId ) ) );
-			} );
-		return $termIndex;
 	}
 
 }
