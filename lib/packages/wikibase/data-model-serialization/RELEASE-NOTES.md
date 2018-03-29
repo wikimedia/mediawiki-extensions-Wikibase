@@ -1,6 +1,6 @@
 # Wikibase DataModel Serialization release notes
 
-## 2.7.0 (2018-03-28)
+## 2.7.0 (2018-03-29)
 
 * Fixed `AliasGroupListDeserializer` and `TermListDeserializer` misbehaving when confronted with
   language codes exclusively made of digits.
