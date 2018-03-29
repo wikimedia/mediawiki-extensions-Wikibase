@@ -782,7 +782,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-claim',
-					'message' => '\'P0\' is not a valid entity ID'
+					'message' => '\'P0\' is not a valid'
 				] ]
 			],
 			'invalid statement GUID' => [
