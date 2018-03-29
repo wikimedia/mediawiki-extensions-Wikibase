@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0b086f3_fe273109",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-03-29T12:49:42Z",
+      "side": 1,
+      "message": "optional suggestion: add a comment to improve readability of the test?  // (entity|property) ID",
+      "revId": "e1ea24a7bc45c9dcdcc4cc93403f8a35d4a29cf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
