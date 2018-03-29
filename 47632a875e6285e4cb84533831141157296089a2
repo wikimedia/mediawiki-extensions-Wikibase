@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0f467480_54ab779f",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T23:10:43Z",
+      "side": 1,
+      "message": "renamed to entity-search-callback",
+      "parentUuid": "5d8816fb_9eaf95fd",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 22
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc6c876c_11780eb8",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 3
@@ -131,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "f5bad5f9_f5f43c76",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T23:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4490c882_a78da05d",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 17
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a3f9c6b_fe3847ec",
         "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
         "patchSetId": 3
@@ -189,6 +237,30 @@
       "writtenOn": "2018-03-29T08:16:10Z",
       "side": 1,
       "message": "Should say \"bad factory\", or \"factory returned unexpected object\", or something like that.",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ea47ccf_7cb4a142",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T23:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3ec6f08_964c6f1a",
       "range": {
         "startLine": 52,
         "startChar": 33,
