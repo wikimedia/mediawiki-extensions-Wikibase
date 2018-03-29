@@ -6,6 +6,7 @@ use HashBagOStuff;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
@@ -417,6 +418,15 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->entityIdLookup;
+	}
+
+	/**
+	 * @see ClientStore::getDescriptionLookup
+	 *
+	 * @return DescriptionLookup
+	 */
+	public function getDescriptionLookup() {
+		return new DescriptionLookup( $this->getEntityIdLookup(), $this->getTermIndex() );
 	}
 
 	/**

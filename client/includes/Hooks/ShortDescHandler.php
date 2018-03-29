@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Parser;
+use Wikibase\Client\Store\DescriptionLookup;
 
 /**
  * Handles the {{SHORTDESC:...}} parser function.
@@ -72,7 +73,7 @@ class ShortDescHandler {
 		$shortDesc = $this->sanitize( $shortDesc );
 		if ( $this->isValid( $shortDesc ) ) {
 			$out = $parser->getOutput();
-			$out->setProperty( 'wikibase-shortdesc', $shortDesc );
+			$out->setProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
 		}
 	}
 
