@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7999e13_83de78bd",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-29T08:16:10Z",
+      "side": 1,
+      "message": "Can you please come up with a more specific name? \"Helper\" is effectively meaningless. What does this helper do? \"Helping\" as a concept is nothing that tells me anything about Wikibase or CirrusSearch. The current name basically says \"some code for searching entities\". If this really is all it does, why not call it \"EntitySearch\" then?",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 22
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc6c876c_11780eb8",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-29T08:16:10Z",
+      "side": 1,
+      "message": "Please extract the duplicated code to a named function, and reference the function two times in the array.",
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3c1dd00_c4560b44",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-29T08:16:10Z",
+      "side": 1,
+      "message": "\"Dispatching\" can be done on many aspects, not only on the entity type. We already run into issues with this naming scheme, and started to name such dispatchers \"TypeDispatching…\" if they dispatch based on the entity type.",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 17
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a3f9c6b_fe3847ec",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-29T08:16:10Z",
+      "side": 1,
+      "message": "I think returning [] is fine.",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3ec6f08_964c6f1a",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-29T08:16:10Z",
+      "side": 1,
+      "message": "Should say \"bad factory\", or \"factory returned unexpected object\", or something like that.",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
