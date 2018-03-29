@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5d8816fb_9eaf95fd",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T17:14:11Z",
+      "side": 1,
+      "message": "Well, that\u0027s how the interface is called. I can rename it of course.",
+      "parentUuid": "d7999e13_83de78bd",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 22
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc6c876c_11780eb8",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2018-03-29T08:16:10Z",
       "side": 1,
       "message": "Please extract the duplicated code to a named function, and reference the function two times in the array.",
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "576429e1_272fdb62",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T17:14:11Z",
+      "side": 1,
+      "message": "I thought about it, but where do I put this function? these files do not look like good places for functions, and I saw no obvious place to put it. \nAlso, this thing is going to go away pretty soon when T190022 gets on the way and the bulk of the code gets moved to separate extension. But if you have an idea where to put it, I have no problem in making it a function.",
+      "parentUuid": "fc6c876c_11780eb8",
       "revId": "47632a875e6285e4cb84533831141157296089a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "4490c882_a78da05d",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T17:14:11Z",
+      "side": 1,
+      "message": "OK, will rename it. I based it on existing name scheme, did not know it is going to change.",
+      "parentUuid": "a3c1dd00_c4560b44",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 17
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a3f9c6b_fe3847ec",
         "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
         "patchSetId": 3
@@ -76,6 +142,30 @@
       "writtenOn": "2018-03-29T08:16:10Z",
       "side": 1,
       "message": "I think returning [] is fine.",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "47632a875e6285e4cb84533831141157296089a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "145be7cd_aa0585f5",
+        "filename": "repo/includes/Api/DispatchingEntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-03-29T17:14:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0a3f9c6b_fe3847ec",
       "range": {
         "startLine": 46,
         "startChar": 6,
