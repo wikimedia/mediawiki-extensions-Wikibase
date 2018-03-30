@@ -371,5 +371,6 @@
 	"right-property-term": "Зьмена тэрмінаў уласьцівасьцяў (меткі, апісаньні, сынонімы)",
 	"right-property-create": "ствараць уласьцівасьці",
 	"wikibase-entity-not-viewable-title": "Несупадзеньне тыпу зьместу: зьмест ня можа быць паказаны",
+	"wikibase-entity-not-viewable": "Пададзены зьмест тыпу «$1» не зьяўляецца элемэнтам і Wikibase ня можа паказаць яго.",
 	"action-property-create": "ствараць уласьцівасьці"
 }
