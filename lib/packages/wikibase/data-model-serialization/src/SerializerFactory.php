@@ -299,7 +299,10 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newAliasGroupListSerializer() {
-		return new AliasGroupListSerializer( $this->newAliasGroupSerializer(), $this->shouldUseObjectsForMaps() );
+		return new AliasGroupListSerializer(
+			$this->newAliasGroupSerializer(),
+			$this->shouldUseObjectsForMaps()
+		);
 	}
 
 }

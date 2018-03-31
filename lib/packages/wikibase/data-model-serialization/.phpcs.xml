@@ -4,7 +4,7 @@
 
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<property name="lineLimit" value="108" />
+			<property name="lineLimit" value="107" />
 		</properties>
 	</rule>
 

@@ -119,7 +119,10 @@ class SerializerFactoryTest extends TestCase {
 	}
 
 	public function testNewSnakListSerializerWithUseObjectsForMaps() {
-		$factory = new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS );
+		$factory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_OBJECTS_FOR_MAPS
+		);
 		$serializer = $factory->newSnakListSerializer();
 		$this->assertAttributeSame( true, 'useObjectsForMaps', $serializer );
 	}
