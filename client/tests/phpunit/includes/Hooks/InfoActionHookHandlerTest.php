@@ -9,6 +9,7 @@ use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -41,9 +42,11 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		array $pageInfo,
 		$enabled,
 		ItemId $itemId = null,
+		$localDescription,
+		$centralDescription,
 		$message
 	) {
-		$hookHandler = $this->newHookHandler( $enabled, $itemId );
+		$hookHandler = $this->newHookHandler( $enabled, $itemId, $localDescription, $centralDescription );
 		$pageInfo = $hookHandler->handle( $context, $pageInfo );
 
 		$this->assertEquals( $expected, $pageInfo, $message );
@@ -75,6 +78,8 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				[ 'header-basic' => [] ],
 				true,
 				new ItemId( 'Q4' ),
+				null,
+				null,
 				'item id link'
 			],
 			[
@@ -89,6 +94,8 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				[ 'header-properties' => [] ],
 				false,
 				new ItemId( 'Q4' ),
+				null,
+				null,
 				'namespace does not have wikibase enabled'
 			],
 			[
@@ -104,6 +111,8 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				[ 'header-basic' => [] ],
 				true,
 				null,
+				null,
+				null,
 				'page is not connected to an item'
 			],
 			[
@@ -118,18 +127,58 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				[ 'header-properties' => [] ],
 				false,
 				new ItemId( 'Q5' ),
+				null,
+				null,
 				'No label for Q5'
-			]
+			],
+			[
+				[
+					'header-basic' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
+							$unLabeledLink
+						],
+						[
+							$context->msg( 'wikibase-pageinfo-description-local' )->escaped(),
+							'this is the local description',
+						],
+						[
+							$context->msg( 'wikibase-pageinfo-description-central' )->escaped(),
+							'this is the central description',
+						],
+					],
+					'header-properties' => [
+						[
+							$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+							"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
+						],
+					]
+				],
+				$context,
+				[ 'header-basic' => [] ],
+				true,
+				new ItemId( 'Q4' ),
+				'this is the local description',
+				'this is the central description',
+				'description',
+			],
 		];
 	}
 
 	/**
 	 * @param bool $enabled
 	 * @param ItemId|null $itemId
+	 * @param string $localDescription
+	 * @param string $centralDescription
 	 *
 	 * @return InfoActionHookHandler
 	 */
-	private function newHookHandler( $enabled, ItemId $itemId = null ) {
+	private function newHookHandler(
+		$enabled,
+		ItemId $itemId = null,
+		$localDescription,
+		$centralDescription
+	) {
 		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -191,6 +240,20 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				return new ItemId( $idSerialization );
 			} ) );
 
+		$descriptionLookup = $this->getMockBuilder( DescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$descriptionLookup->expects( $this->at( 0 ) )
+			->method( 'getDescription' )
+			->with( $this->anything(), DescriptionLookup::SOURCE_LOCAL )
+			->willReturn( $localDescription );
+
+		$descriptionLookup->expects( $this->at( 1 ) )
+			->method( 'getDescription' )
+			->with( $this->anything(), DescriptionLookup::SOURCE_CENTRAL )
+			->willReturn( $centralDescription );
+
 		$hookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$repoLinker,
@@ -198,7 +261,8 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			'enwiki',
 			$sqlUsageTracker,
 			$labelDescriptionLookupFactory,
-			$idParser
+			$idParser,
+			$descriptionLookup
 		);
 
 		return $hookHandler;
