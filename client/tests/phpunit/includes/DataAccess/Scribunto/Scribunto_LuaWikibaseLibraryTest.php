@@ -252,6 +252,25 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
+	public function provideIsValidEntityId() {
+		return [
+			[ true, 'Q12' ],
+			[ true, 'P12' ],
+			[ false, 'Q0' ],
+			[ false, '[[Q2]]' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideIsValidEntityId
+	 */
+	public function testIsValidEntityId( $expected, $entityIdSerialization ) {
+		$this->assertSame(
+			[ $expected ],
+			$this->newScribuntoLuaWikibaseLibrary()->isValidEntityId( $entityIdSerialization )
+		);
+	}
+
 	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */

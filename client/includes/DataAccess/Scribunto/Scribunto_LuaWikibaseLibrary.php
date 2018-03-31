@@ -313,6 +313,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'resolvePropertyId' => [ $this, 'resolvePropertyId' ],
 			'getSiteLinkPageName' => [ $this, 'getSiteLinkPageName' ],
 			'incrementExpensiveFunctionCount' => [ $this, 'incrementExpensiveFunctionCount' ],
+			'isValidEntityId' => [ $this, 'isValidEntityId' ],
 			'getPropertyOrder' => [ $this, 'getPropertyOrder' ],
 			'orderProperties' => [ $this, 'orderProperties' ],
 		];
@@ -493,6 +494,20 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkTypeOptional( 'getSiteLinkPageName', 2, $globalSiteId, 'string', null );
 
 		return [ $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedItemId, $globalSiteId ) ];
+	}
+
+	/**
+	 * Wrapper for WikibaseLanguageIndependentLuaBindings::isValidEntityId
+	 *
+	 * @param string $entityIdSerialization
+	 *
+	 * @throws ScribuntoException
+	 * @return bool[] One bool telling whether the entity id is valid (parseable).
+	 */
+	public function isValidEntityId( $entityIdSerialization ) {
+		$this->checkType( 'isValidEntityId', 1, $entityIdSerialization, 'string' );
+
+		return [ $this->getLanguageIndependentLuaBindings()->isValidEntityId( $entityIdSerialization ) ];
 	}
 
 	/**

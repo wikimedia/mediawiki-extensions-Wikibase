@@ -140,6 +140,16 @@ An example call might look like this:
 local description, lang = mw.wikibase.getDescriptionWithLang( 'Q42' ) -- description contains the text of the description. lang is the language the returned description is in, like "de".
 </source>
 
+=== mw.wikibase.isValidEntityId ===
+<code>wikibase.isValidEntityIds( entityIdSerialization )</code><br>
+Returns whether this a valid entity id. This does not check whether the entity in question exists, it just checks that the entity id in question is valid.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.isValidEntityId( 'Q12' ) -- Returns true.
+mw.wikibase.isValidEntityId( 'Q0-invalid-id' ) -- Returns false.
+</source>
+
 === mw.wikibase.renderSnak ===
 <code>wikibase.renderSnak( snakSerialization )</code><br>
 Renders a serialized Snak value to wikitext escaped plain text. This is useful for displaying References or Qualifiers.
