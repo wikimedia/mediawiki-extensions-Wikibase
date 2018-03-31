@@ -6,6 +6,7 @@ use Html;
 use IContextSource;
 use Title;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -55,6 +56,11 @@ class InfoActionHookHandler {
 	 */
 	private $idParser;
 
+	/**
+	 * @var DescriptionLookup
+	 */
+	private $descriptionLookup;
+
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
@@ -62,7 +68,8 @@ class InfoActionHookHandler {
 		$siteId,
 		UsageLookup $usageLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		EntityIdParser $idParser
+		EntityIdParser $idParser,
+		DescriptionLookup $descriptionLookup
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
@@ -71,6 +78,7 @@ class InfoActionHookHandler {
 		$this->usageLookup = $usageLookup;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->idParser = $idParser;
+		$this->descriptionLookup = $descriptionLookup;
 	}
 
 	/**
@@ -93,6 +101,7 @@ class InfoActionHookHandler {
 			$wikibaseClient->getTermBuffer()
 		);
 		$idParser = $wikibaseClient->getEntityIdParser();
+		$descriptionLookup = $wikibaseClient->getStore()->getDescriptionLookup();
 
 		$self = new self(
 			$namespaceChecker,
@@ -101,7 +110,8 @@ class InfoActionHookHandler {
 			$settings->getSetting( 'siteGlobalID' ),
 			$usageLookup,
 			$labelDescriptionLookupFactory,
-			$idParser
+			$idParser,
+			$descriptionLookup
 		);
 
 		$pageInfo = $self->handle( $context, $pageInfo );
@@ -119,9 +129,21 @@ class InfoActionHookHandler {
 		// Check if wikibase namespace is enabled
 		$title = $context->getTitle();
 		$usage = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
+		$localDescription = $this->descriptionLookup->getDescription( $title,
+			DescriptionLookup::SOURCE_LOCAL );
+		$centralDescription = $this->descriptionLookup->getDescription( $title,
+			DescriptionLookup::SOURCE_CENTRAL );
 
 		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) && $title->exists() ) {
 			$pageInfo['header-basic'][] = $this->getPageInfoRow( $context, $title );
+		}
+		if ( $localDescription ) {
+			$pageInfo['header-basic'][] = $this->getDescriptionInfoRow( $context, $localDescription,
+				DescriptionLookup::SOURCE_LOCAL );
+		}
+		if ( $centralDescription ) {
+			$pageInfo['header-basic'][] = $this->getDescriptionInfoRow( $context, $centralDescription,
+				DescriptionLookup::SOURCE_CENTRAL );
 		}
 
 		if ( $usage ) {
@@ -147,6 +169,21 @@ class InfoActionHookHandler {
 			: $this->getUnconnectedItemPageInfo( $context );
 
 		return $row;
+	}
+
+	/**
+	 * @param IContextSource $context
+	 * @param string $description
+	 * @param string $source
+	 *
+	 * @return string[]
+	 */
+	private function getDescriptionInfoRow( $context, $description, $source ) {
+		return [
+			// messages: wikibase-pageinfo-description-local, wikibase-pageinfo-description-central
+			$context->msg( 'wikibase-pageinfo-description-' . $source ),
+			$description
+		];
 	}
 
 	/**
