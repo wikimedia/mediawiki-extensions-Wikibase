@@ -434,4 +434,14 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [], $actual );
 	}
 
+	public function testHasEntity() {
+		$item = new Item( new ItemId( 'Q123099' ) );
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+		$entityAccessor = $this->getEntityAccessor( $entityLookup );
+
+		$this->assertSame( true, $entityAccessor->hasEntity( 'Q123099' ) );
+		$this->assertSame( false, $entityAccessor->hasEntity( 'Q1239' ) );
+	}
+
 }

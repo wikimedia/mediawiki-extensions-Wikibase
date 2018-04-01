@@ -278,6 +278,19 @@ function wikibase.setupInterface()
 	-- Legacy alias for getSitelink
 	wikibase.sitelink = wikibase.getSitelink
 
+	-- Does the entity in question exist?
+	--
+	-- @param {string} entityId
+	wikibase.hasEntity = function( entityId )
+		checkType( 'hasEntity', 1, entityId, 'string' )
+
+		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
+			error( 'Access to arbitrary entities has been disabled.', 2 )
+		end
+
+		return php.hasEntity( entityId )
+	end
+
 	-- Render a Snak value from its serialization as wikitext escaped plain text.
 	--
 	-- @param {table} snakSerialization

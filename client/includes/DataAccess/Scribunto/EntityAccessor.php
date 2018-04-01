@@ -169,6 +169,32 @@ class EntityAccessor {
 	}
 
 	/**
+	 * Find out whether an entity exists.
+	 *
+	 * @param string $prefixedEntityId
+	 *
+	 * @return bool
+	 */
+	public function hasEntity( $prefixedEntityId ) {
+		$prefixedEntityId = trim( $prefixedEntityId );
+
+		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+
+		// This doesn't really depend on any aspect of the entity specifically.
+		$this->usageAccumulator->addOtherUsage( $entityId );
+		try {
+			return $this->entityLookup->hasEntity( $entityId );
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			// We probably hit a double redirect
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to check the existence of ' . $prefixedEntityId
+			);
+
+			return false;
+		}
+	}
+
+	/**
 	 * Get statement list from prefixed ID (e.g. "Q23") and property (e.g "P123") and return it as serialized array.
 	 *
 	 * @param string $prefixedEntityId
