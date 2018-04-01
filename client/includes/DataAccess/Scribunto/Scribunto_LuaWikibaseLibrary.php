@@ -300,6 +300,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getLabel' => [ $this, 'getLabel' ],
 			'getLabelByLanguage' => [ $this, 'getLabelByLanguage' ],
 			'getEntity' => [ $this, 'getEntity' ],
+			'entityExists' => [ $this, 'entityExists' ],
 			'getEntityStatements' => [ $this, 'getEntityStatements' ],
 			'getSetting' => [ $this, 'getSetting' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
@@ -346,6 +347,27 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( Exception $ex ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
+		}
+	}
+
+	/**
+	 * Wrapper for entityExists in EntityAccessor
+	 *
+	 * @param string $prefixedEntityId
+	 *
+	 * @throws ScribuntoException
+	 * @return bool[]
+	 */
+	public function entityExists( $prefixedEntityId ) {
+		$this->checkType( 'entityExists', 1, $prefixedEntityId, 'string' );
+
+		try {
+			return [ $this->getEntityAccessor()->entityExists( $prefixedEntityId ) ];
+		} catch ( EntityIdParsingException $ex ) {
+			throw new ScribuntoException(
+				'wikibase-error-invalid-entity-id',
+				[ 'args' => [ $prefixedEntityId ] ]
+			);
 		}
 	}
 
