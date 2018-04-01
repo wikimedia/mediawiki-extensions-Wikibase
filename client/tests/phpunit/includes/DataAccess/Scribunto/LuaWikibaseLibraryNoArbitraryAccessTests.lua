@@ -22,6 +22,10 @@ local tests = {
 	  args = { 'Q42', 'P12' },
 	  expect = 'Access to arbitrary entities has been disabled.'
 	},
+	{ name = "mw.wikibase.entityExists (foreign access)", func = mw.wikibase.entityExists,
+	  args = { 'Q42' },
+	  expect = 'Access to arbitrary entities has been disabled.'
+	},
 }
 
 return testframework.getTestProvider( tests )

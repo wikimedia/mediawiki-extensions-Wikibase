@@ -140,6 +140,15 @@ An example call might look like this:
 local description, lang = mw.wikibase.getDescriptionWithLang( 'Q42' ) -- description contains the text of the description. lang is the language the returned description is in, like "de".
 </source>
 
+=== mw.wikibase.entityExists ===
+<code>wikibase.entityExists( id )</code><br>
+Returns whether the entity in question exists.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.entityExists( 'Q42' ) -- Returns true, if the Item Q42 exists.
+</source>
+
 === mw.wikibase.renderSnak ===
 <code>wikibase.renderSnak( snakSerialization )</code><br>
 Renders a serialized Snak value to wikitext escaped plain text. This is useful for displaying References or Qualifiers.
