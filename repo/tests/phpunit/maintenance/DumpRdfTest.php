@@ -60,7 +60,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		TestSites::insertIntoDb();
 	}
 
-	public function testScript() {
+	private function getDumpRdf() {
 		$dumpScript = new DumpRdf();
 
 		$mockRepo = new MockRepository();
@@ -167,22 +167,42 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$this->getEntityTitleLookup()
 		);
 
+		return $dumpScript;
+	}
+
+	public function dumpParameterProvider() {
+		return [
+			'dump everything' => [
+				[],
+				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
+				__DIR__ . '/../data/maintenance/dumpRdf-out.txt',
+			],
+			'dump with part-id' => [
+				[
+					'part-id' => 'blah',
+				],
+				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
+				__DIR__ . '/../data/maintenance/dumpRdf-part-id-blah-out.txt',
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider dumpParameterProvider
+	 */
+	public function testScript( array $opts, $expectedLogFile, $expectedOutFile ) {
+		$dumpScript = $this->getDumpRdf();
+
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
 		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
 
-		$dumpScript->loadParamsAndArgs(
-			null,
-			[
-				'log' => $logFileName,
-				'output' => $outFileName,
-				'format' => 'n-triples',
-			]
-		);
+		$opts = $opts + [ 'format' => 'n-triples', 'log' => $logFileName, 'output' => $outFileName ];
+		$dumpScript->loadParamsAndArgs( null, $opts );
 
 		$dumpScript->execute();
 
-		$expectedLog = file_get_contents( __DIR__ . '/../data/maintenance/dumpRdf-log.txt' );
-		$expectedOut = file_get_contents( __DIR__ . '/../data/maintenance/dumpRdf-out.txt' );
+		$expectedLog = file_get_contents( $expectedLogFile );
+		$expectedOut = file_get_contents( $expectedOutFile );
 
 		$actualOut = file_get_contents( $outFileName );
 		$actualOut = preg_replace(
