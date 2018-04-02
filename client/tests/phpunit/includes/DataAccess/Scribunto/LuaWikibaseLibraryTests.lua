@@ -181,6 +181,10 @@ local tests = {
 	  args = { 'Q32487' },
 	  expect = { 'Lua Test Item' }
 	},
+	{ name = 'mw.wikibase.getLabel (invalid id type)', func = mw.wikibase.getLabel,
+	  args = { 1 },
+	  expect = "bad argument #1 to 'getLabel' (string or nil expected, got number)"
+	},
 	{ name = 'mw.wikibase.getLabel (no such item)', func = mw.wikibase.getLabel, type='ToString',
 	  args = { 'Q1224342342' },
 	  expect = { nil }
@@ -249,6 +253,10 @@ local tests = {
 	  args = { 'Q32487' },
 	  expect = { 'Description of Q32487' }
 	},
+	{ name = 'mw.wikibase.getDescription (invalid id given)', func = mw.wikibase.getDescription,
+	  args = { 12 },
+	  expect = "bad argument #1 to 'getDescription' (string or nil expected, got number)"
+	},
 	{ name = 'mw.wikibase.getDescription (connected item)', func = mw.wikibase.getDescription, type='ToString',
 	  args = {},
 	  expect = { 'Description of Q32487' }
@@ -283,7 +291,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getSitelink (invalid id given)', func = mw.wikibase.getSitelink, type='ToString',
 	  args = {},
-	  expect = "bad argument #1 to 'sitelink' (string expected, got nil)"
+	  expect = "bad argument #1 to 'getSitelink' (string expected, got nil)"
 	},
 	{ name = 'mw.wikibase.getSitelink', func = mw.wikibase.getSitelink, type='ToString',
 	  args = { 'Q32488' },

@@ -215,7 +215,7 @@ function wikibase.setupInterface()
 	--
 	-- @param {string} [id]
 	wikibase.getLabel = function( id )
-		checkTypeMulti( 'label', 1, id, { 'string', 'nil' } )
+		checkTypeMulti( 'getLabel', 1, id, { 'string', 'nil' } )
 		local label = wikibase.getLabelWithLang( id )
 
 		return label
@@ -255,7 +255,7 @@ function wikibase.setupInterface()
 	--
 	-- @param {string} [id]
 	wikibase.getDescription = function( id )
-		checkTypeMulti( 'description', 1, id, { 'string', 'nil' } )
+		checkTypeMulti( 'getDescription', 1, id, { 'string', 'nil' } )
 		local description = wikibase.getDescriptionWithLang( id )
 
 		return description
@@ -269,8 +269,8 @@ function wikibase.setupInterface()
 	-- @param {string} itemId
 	-- @param {string} [globalSiteId]
 	wikibase.getSitelink = function( itemId, globalSiteId )
-		checkType( 'sitelink', 1, itemId, 'string' )
-		checkTypeMulti( 'sitelink', 2, globalSiteId, { 'string', 'nil' } )
+		checkType( 'getSitelink', 1, itemId, 'string' )
+		checkTypeMulti( 'getSitelink', 2, globalSiteId, { 'string', 'nil' } )
 
 		return php.getSiteLinkPageName( itemId, globalSiteId )
 	end
