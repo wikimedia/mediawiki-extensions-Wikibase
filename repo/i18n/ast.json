@@ -188,6 +188,7 @@
 	"wikibase-newentity-description": "Descripción:",
 	"wikibase-newentity-submit": "Crear",
 	"special-setlabel": "Definir una etiqueta",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|declaración|declaraciones}}, $2 {{PLURAL:$2|enllaz|enllaces}} de sitiu",
 	"wikibase-setlabel-introfull": "Ta definiendo la etiqueta en $2 pa [[$1]].",
 	"wikibase-setlabel-intro": "Esti formulariu permite definir la etiqueta d'una entidá. Tien de dar el ID de la entidá (p. ex. Q23), un códigu d'idioma (p. ex. \"ast\") y la etiqueta a definir.",
 	"wikibase-setlabel-label": "Etiqueta:",

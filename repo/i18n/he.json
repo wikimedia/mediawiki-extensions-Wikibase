@@ -197,6 +197,7 @@
 	"wikibase-newentity-description": "תיאור:",
 	"wikibase-newentity-submit": "יצירה",
 	"special-setlabel": "הגדרת תווית",
+	"wikibase-search-result-stats": "{{PLURAL:$1|קביעה אחת|$2 קביעות}}, {{PLURAL:$2|קישור־אתר אחד|$2 קישורי־אתר}}",
 	"wikibase-setlabel-introfull": "נא לכתוב תווית ב$2 עבור [[$1]].",
 	"wikibase-setlabel-intro": "הטופס הזה מאפשר לך להגדיר תווית לישות. יש לספק את המזהה של הישות (למשל Q23), את קוד השפה (למשל en) ואת התווית.",
 	"wikibase-setlabel-label": "תווית:",
