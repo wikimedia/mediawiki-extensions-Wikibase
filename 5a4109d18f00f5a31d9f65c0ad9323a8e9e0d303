@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4956cf0_d56e9945",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-04-03T07:19:47Z",
+      "side": 1,
+      "message": "Why bool[]?",
+      "range": {
+        "startLine": 505,
+        "startChar": 4,
+        "endLine": 505,
+        "endChar": 18
+      },
+      "revId": "5a4109d18f00f5a31d9f65c0ad9323a8e9e0d303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
