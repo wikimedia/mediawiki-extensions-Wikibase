@@ -130,7 +130,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add-both": "[$2]에 배지로 추가된 링크",
 	"wikibase-entity-summary-wbsetsitelink-set": "[$2](으)로 링크를 바꿈",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "[$2]를 가리키는 링크용를 위해 변경된 배지",
-	"wikibase-entity-summary-wbsetsitelink-set-both": "[$2]를 가리키는 링크를 위해 변경된 링크와 배지",
+	"wikibase-entity-summary-wbsetsitelink-set-both": "[$2] 링크와 배지를 바꿈",
 	"wikibase-entity-summary-wbsetsitelink-remove": "[$2]에서 링크를 제거함",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|서술}}을 만듦",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|서술}}을 만듦",
