@@ -2,7 +2,8 @@
 
 /**
  * Definition of entity types for use with Wikibase.
- * The array returned by the code below is supposed to be merged into $wgWBRepoEntityTypes.
+ * The array returned by the code below is supposed to be merged with the content of
+ * lib/WikibaseLib.entitytypes.php.
  * It defines the views used by the repo to display entities of different types.
  *
  * @note: Keep in sync with lib/WikibaseLib.entitytypes.php
