@@ -34,7 +34,7 @@ class EchoSetupHookHandlersTest extends MediaWikiTestCase {
 			'registered with default icon' => [
 				'register' => true,
 				'icon' => false,
-				'expectedIcon' => [ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
+				'expectedIcon' => [ 'path' => 'Wikibase/client/resources/images/echoIcon.svg' ],
 			]
 		];
 	}

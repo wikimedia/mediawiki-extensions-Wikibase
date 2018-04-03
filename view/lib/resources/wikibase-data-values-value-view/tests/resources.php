@@ -8,17 +8,9 @@
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
-
-	$dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR  . '..'
-		. DIRECTORY_SEPARATOR . 'wikibase-data-values-value-view' . DIRECTORY_SEPARATOR . 'tests'
-		. DIRECTORY_SEPARATOR . 'src';
-
-	$remoteExtPathParts = explode(
-		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, $dir, 2
-	);
 	$moduleTemplate = [
-		'localBasePath' => $dir,
-		'remoteExtPath' => $remoteExtPathParts[1],
+		'localBasePath' => __DIR__ . '/../../../wikibase-data-values-value-view/tests/src',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/tests/src',
 	];
 
 	return [
