@@ -276,7 +276,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\TermIndexField' => __DIR__ . '/includes/Search/Elastic/Fields/TermIndexField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\WikibaseIndexField' => __DIR__ . '/includes/Search/Elastic/Fields/WikibaseIndexField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\WikibaseNumericField' => __DIR__ . '/includes/Search/Elastic/Fields/WikibaseNumericField.php',
-	'Wikibase\\Repo\\Search\\Elastic\\StatementBoostScoreBuilder' => __DIR__ . '/includes/Search/Elastic/StatementBoostScoreBuilder.php',
 	'Wikibase\\Repo\\Search\\Elastic\\WikibasePrefixSearcher' => __DIR__ . '/includes/Search/Elastic/WikibasePrefixSearcher.php',
 	'Wikibase\\Repo\\SiteLinkTargetProvider' => __DIR__ . '/includes/SiteLinkTargetProvider.php',
 	'Wikibase\\Repo\\SnakFactory' => __DIR__ . '/includes/SnakFactory.php',
