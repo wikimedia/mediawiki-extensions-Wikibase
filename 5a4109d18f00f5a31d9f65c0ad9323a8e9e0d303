@@ -46,6 +46,23 @@
       "revId": "5a4109d18f00f5a31d9f65c0ad9323a8e9e0d303",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64bb7dd0_8e1ba93e",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-04T18:56:31Z",
+      "side": 1,
+      "message": "What was your idea for the specific position of the new section in this file? I would expect the new function to be close to the existing getEntityId… functions.",
+      "revId": "5a4109d18f00f5a31d9f65c0ad9323a8e9e0d303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
