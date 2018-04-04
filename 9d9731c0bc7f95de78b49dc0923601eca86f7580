@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2ddf22d_7c0c2548",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-04T18:53:12Z",
+      "side": 1,
+      "message": "I\u0027m a little curious about the name. I expected this to be named \"entityExists\", or just \"exists\". The word \"has\" brings up the question \"who or what does have an entity with this ID?\" This \"who\" is not given as a parameter, but implicitly assumed. When used with repository prefixes, the \"who\" becomes a little awkward: Code that reads \u0027wikibase.hasEntity( \"commons:M500\" )\u0027 is not querying the Wikibase database, but the Commons database.\n\nI feel \u0027wikibase.entityExists( \"commons:M500\" )\u0027 would fit better. What do you think?",
+      "range": {
+        "startLine": 284,
+        "startChar": 1,
+        "endLine": 284,
+        "endChar": 19
+      },
+      "revId": "9d9731c0bc7f95de78b49dc0923601eca86f7580",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
