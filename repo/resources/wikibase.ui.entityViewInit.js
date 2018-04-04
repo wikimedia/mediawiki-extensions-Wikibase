@@ -79,7 +79,10 @@
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
-			viewFactoryClass = wb.view.ReadModeViewFactory,
+			entityNamespace = entity.getType(),
+			viewFactoryClass = wb[ entityNamespace ] && wb[ entityNamespace ].view
+				&& wb[ entityNamespace ].view.ReadModeViewFactory // can be overridden by extensions
+				|| wb.view.ReadmodeViewFactory, // default factory
 			viewFactoryArguments = [
 				structureEditorFactory,
 				contentLanguages,
@@ -120,7 +123,6 @@
 					}
 				);
 
-			var entityNamespace = entity.getType();
 			viewFactoryClass = wb[ entityNamespace ] && wb[ entityNamespace ].view
 				&& wb[ entityNamespace ].view.ControllerViewFactory // extension
 				|| wb.view.ControllerViewFactory; // default factory
