@@ -78,4 +78,10 @@ class UnitStorageTest extends MediaWikiTestCase {
 		$this->assertNull( $storage->getConversion( 'Q1' ) );
 	}
 
+	public function testEmptyStorage() {
+		$storage = new ArrayUnitStorage( [] );
+
+		$this->assertNull( $storage->getConversion( 'Q1' ) );
+	}
+
 }
