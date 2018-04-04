@@ -563,7 +563,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_last_oldid' => $title->getLatestRevID(),
 			'rc_type' => RC_EXTERNAL,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
-			'rc_patrolled' => true,
+			'rc_patrolled' => 2,
 			'rc_ip' => '127.0.0.1',
 			'rc_old_len' => 123,
 			'rc_new_len' => 123,
