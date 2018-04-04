@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ba30d59_9768819f",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-04T18:45:23Z",
+      "side": 1,
+      "message": "Not that I\u0027m opposing this class name. It\u0027s fine. It\u0027s just that I see the naming scheme \"InMemory…\" being used for array-based implementations of other services. Maybe it\u0027s an idea to stick to this?",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 22
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fd8ea64_9996e0b4",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-04T18:45:23Z",
+      "side": 1,
+      "message": "I think the type hint here can say \"array $data \u003d null\".",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6331c95_b9f27a3a",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-04T18:45:23Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 3
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
