@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Units;
 
 use MediaWikiTestCase;
+use Wikibase\Lib\Units\ArrayUnitStorage;
 use Wikibase\Lib\Units\CSVUnitStorage;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitStorage;
@@ -23,7 +24,20 @@ class UnitStorageTest extends MediaWikiTestCase {
 	public function storageModels() {
 		return [
 			[ JsonUnitStorage::class, [ __DIR__ . '/testunits.json' ] ],
-			[ CSVUnitStorage::class, [ __DIR__ . '/testunits.csv' ] ]
+			[ CSVUnitStorage::class, [ __DIR__ . '/testunits.csv' ] ],
+			[
+				ArrayUnitStorage::class,
+				[ [
+					'Q1' => [ '1.0', 'Q1' ],
+					'Q2' => [ '22.234', 'Q1' ],
+					'Q3' => [ '1', 'Q3' ],
+					'Q4' => [
+						'factor' => '0.0000000000000000000243885945',
+						'unit' => 'Q3',
+						'otherdata' => 'should be ignored',
+					]
+				] ]
+			],
 		];
 	}
 

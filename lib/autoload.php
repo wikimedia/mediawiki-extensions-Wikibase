@@ -177,6 +177,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\TimeDetailsFormatter' => __DIR__ . '/includes/Formatters/TimeDetailsFormatter.php',
 	'Wikibase\\Lib\\UnDeserializableValueFormatter' => __DIR__ . '/includes/Formatters/UnDeserializableValueFormatter.php',
 	'Wikibase\\Lib\\UnionContentLanguages' => __DIR__ . '/includes/UnionContentLanguages.php',
+	'Wikibase\\Lib\\Units\\ArrayUnitStorage' => __DIR__ . '/includes/Units/ArrayUnitStorage.php',
 	'Wikibase\\Lib\\Units\\BaseUnitStorage' => __DIR__ . '/includes/Units/BaseUnitStorage.php',
 	'Wikibase\\Lib\\Units\\CSVUnitStorage' => __DIR__ . '/includes/Units/CSVUnitStorage.php',
 	'Wikibase\\Lib\\Units\\JsonUnitStorage' => __DIR__ . '/includes/Units/JsonUnitStorage.php',
