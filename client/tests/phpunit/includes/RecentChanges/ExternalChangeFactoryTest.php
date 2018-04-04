@@ -355,7 +355,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			'rc_this_oldid' => 114,
 			'rc_last_oldid' => 114,
 			'rc_type' => 5,
-			'rc_patrolled' => 1,
+			'rc_patrolled' => 2,
 			'rc_ip' => '',
 			'rc_old_len' => 2,
 			'rc_new_len' => 2,

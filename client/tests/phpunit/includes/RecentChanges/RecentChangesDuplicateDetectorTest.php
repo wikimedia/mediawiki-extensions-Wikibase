@@ -179,7 +179,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_last_oldid' => 0,
 			'rc_type' => RC_EXTERNAL,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
-			'rc_patrolled' => false,
+			'rc_patrolled' => 0,
 			'rc_ip' => '127.0.0.1',
 			'rc_old_len' => 0,
 			'rc_new_len' => 0,

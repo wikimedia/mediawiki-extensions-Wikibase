@@ -171,7 +171,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => false,
-			'rc_patrolled' => true,
+			'rc_patrolled' => 2,
 			'rc_params' => serialize( [
 				'wikibase-repo-change' => $metadata + $fields + [
 					'object_id' => 'Q17',
