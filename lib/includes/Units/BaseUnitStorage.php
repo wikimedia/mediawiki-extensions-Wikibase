@@ -31,7 +31,7 @@ abstract class BaseUnitStorage implements UnitStorage {
 	private function loadData() {
 		if ( is_null( $this->storageData ) ) {
 			$this->storageData = $this->loadStorageData();
-			if ( !$this->storageData ) {
+			if ( is_null( $this->storageData ) ) {
 				throw new \RuntimeException( "Failed to load unit storage" );
 			}
 		}
