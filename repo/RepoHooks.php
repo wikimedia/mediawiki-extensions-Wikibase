@@ -11,6 +11,7 @@ use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
+use CirrusSearch\Search\TermBoostScoreBuilder;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -42,7 +43,6 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
-use Wikibase\Repo\Search\Elastic\StatementBoostScoreBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -1051,10 +1051,10 @@ final class RepoHooks {
 	) {
 		if ( $func['type'] === 'statement_boost' ) {
 			$searchSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
-			$builder = new StatementBoostScoreBuilder(
+			$builder = new TermBoostScoreBuilder(
 				$context,
 				$func['weight'],
-				$searchSettings['statementBoost']
+				[ StatementsField::NAME => $searchSettings['statementBoost'] ]
 			);
 		}
 	}
