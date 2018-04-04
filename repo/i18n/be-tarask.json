@@ -374,5 +374,7 @@
 	"wikibase-entity-not-viewable": "Пададзены зьмест тыпу «$1» не зьяўляецца элемэнтам і Wikibase ня можа паказаць яго.",
 	"action-item-merge": "аб’яднаньне элемэнтаў",
 	"action-property-create": "ствараць уласьцівасьці",
-	"wikibase-pageinfo-subscription": "Вікі, падпісаныя на гэты элемэнт"
+	"wikibase-pageinfo-subscription": "Вікі, падпісаныя на гэты элемэнт",
+	"wikibase-pageinfo-subscription-none": "Няма",
+	"wikibase-search-bad-entity-type": "Кепскі тып элемэнту: $1"
 }
