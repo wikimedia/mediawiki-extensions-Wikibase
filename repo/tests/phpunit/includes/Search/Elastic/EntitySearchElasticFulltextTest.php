@@ -31,8 +31,55 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		}
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entitySearch = $wikibaseRepo->getSettings()->getSetting( 'entitySearch' );
-		$entitySearch['statementBoost'] = [ 'P31=Q4167410' => '-10' ];
-		$entitySearch['defaultFulltextRescoreProfile'] = 'wikibase_prefix_boost';
+		$entitySearch['defaultFulltextRescoreProfile'] = 'wikibase_unittest';
+		$entitySearch['rescoreProfiles'] = [
+			'wikibase_unittest' => [
+				'i18n_msg' => 'wikibase-rescore-profile-fulltext',
+				'supported_namespaces' => 'all',
+				'rescore' => [
+					[
+						'window' => 8192,
+						'window_size_override' => 'EntitySearchRescoreWindowSize',
+						'query_weight' => 1.0,
+						'rescore_query_weight' => 1.0,
+						'score_mode' => 'total',
+						'type' => 'function_score',
+						'function_chain' => 'entity_weight_unittest'
+					],
+				]
+			]
+		];
+		$entitySearch['rescoreFunctionChains'] = [
+			'entity_weight_unittest' => [
+				'score_mode' => 'sum',
+				'functions' => [
+					[
+						// Incoming links: k = 100, since it is normal to have a bunch of incoming links
+						'type' => 'satu',
+						'weight' => '0.6',
+						'params' => [ 'field' => 'incoming_links', 'missing' => 0, 'a' => 1 , 'k' => 100 ]
+					],
+					[
+						// Site links: k = 20, tens of sites is a lot
+						'type' => 'satu',
+						'weight' => '0.4',
+						'params' => [ 'field' => 'sitelink_count', 'missing' => 0, 'a' => 2, 'k' => 20 ]
+					],
+					[
+						// (De)boosting by statement values
+						'type' => 'term_boost',
+						'weight' => 0.1,
+						'params' => [
+							'statement_keywords' => [
+								// Q4167410=Wikimedia disambiguation page
+								'P31=Q4167410' => -10,
+							]
+						]
+					]
+				],
+			]
+		];
+
 		$entitySearch['useStemming'] = [ 'en' => [ 'query' => true ] ];
 		$wikibaseRepo->getSettings()->setSetting( 'entitySearch', $entitySearch );
 	}
