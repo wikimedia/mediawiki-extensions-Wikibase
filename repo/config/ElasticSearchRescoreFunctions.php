@@ -22,6 +22,8 @@ return [
 			],
 		],
 	],
+	// The follow settings are provided as an example to illustrate the statement boosting feature
+	/*
 	'entity_weight_boost' => [
 		'score_mode' => 'sum',
 		'functions' => [
@@ -38,10 +40,22 @@ return [
 				'params' => [ 'field' => 'sitelink_count', 'missing' => 0, 'a' => 2, 'k' => 20 ]
 			],
 			[
-				// (De)boosting by statement values, see statementBoost in search settings
-				'type' => 'statement_boost',
-				'weight' => '0.1',
+				// (De)boosting by statement values
+				'type' => 'term_boost',
+				'weight' => 0.1,
+				'params' => [
+					'statement_keywords' => [
+						// Q4167410=Wikimedia disambiguation page
+						'P31=Q4167410' => -10,
+						// T183510:
+						// Q13442814=scientific article
+						'P31=Q13442814' => -5,
+						// Q18918145=academic journal article
+						'P31=Q18918145' => -5,
+					]
+				]
 			]
 		],
 	],
+	*/
 ];

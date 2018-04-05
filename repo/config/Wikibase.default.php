@@ -252,17 +252,15 @@ return [
 		// so namespacing is recommended.
 		'fulltextSearchProfiles' => [],
 		// Default rescore profile for prefix search
-		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
-		// Default rescore profile for prefix search
-		'defaultFulltextRescoreProfile' => 'wikibase_prefix',
+		'defaultPrefixRescoreProfile' => 'wikibase',
+		// Default rescore profile for fulltext search
+		'defaultFulltextRescoreProfile' => 'wikibase',
 		// Custom rescore profiles placeholder
 		// (See config/ElasticSearchRescoreProfiles.php)
 		'rescoreProfiles' => [],
 		// Custom function chains placeholder
 		// (See config/ElasticSearchRescoreFunctions.php)
 		'rescoreFunctionChains' => [],
-		// Type (de)boosts for rescoring functions
-		'statementBoost' => [],
 		// List of languages that we want to have stemming analyzers
 		// 'index' means we generate stemmed field on index
 		// 'query' means we use it on query

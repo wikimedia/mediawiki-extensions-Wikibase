@@ -9,9 +9,7 @@ use BaseTemplate;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Query\FullTextQueryBuilder;
-use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
-use CirrusSearch\Search\TermBoostScoreBuilder;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -1034,45 +1032,6 @@ final class RepoHooks {
 			$wbBuilder->buildConfig( $config );
 		} finally {
 			$inHook = false;
-		}
-	}
-
-	/**
-	 * Wikibase-specific rescore builders for CirrusSearch.
-	 *
-	 * @param array $func Builder parameters
-	 * @param SearchContext $context
-	 * @param FunctionScoreBuilder|null &$builder Output parameter for score builder.
-	 */
-	public static function onCirrusSearchScoreBuilder(
-		array $func,
-		SearchContext $context,
-		FunctionScoreBuilder &$builder = null
-	) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
-		self::registerCirrusSearchScoreBuilder( $func, $context, $builder, $settings );
-	}
-
-	/**
-	 * Register Wikibase-specific rescore builders for CirrusSearch.
-	 *
-	 * @param array $func Builder parameters
-	 * @param SearchContext $context
-	 * @param FunctionScoreBuilder|null &$builder Output parameter for score builder.
-	 * @param array $searchSettings
-	 */
-	public static function registerCirrusSearchScoreBuilder(
-		array $func,
-		SearchContext $context,
-		FunctionScoreBuilder &$builder = null,
-		array $searchSettings
-	) {
-		if ( $func['type'] === 'statement_boost' ) {
-			$builder = new TermBoostScoreBuilder(
-				$context,
-				$func['weight'],
-				[ StatementsField::NAME => isset( $searchSettings['statementBoost'] ) ? $searchSettings['statementBoost'] : [] ]
-			);
 		}
 	}
 

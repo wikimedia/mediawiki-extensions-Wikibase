@@ -27,7 +27,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 	/**
 	 * Default rescore profile
 	 */
-	const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
+	const DEFAULT_RESCORE_PROFILE = 'wikibase';
 
 	/**
 	 * Name of the context for profile name resolution
