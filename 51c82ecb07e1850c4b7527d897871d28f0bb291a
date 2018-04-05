@@ -16,6 +16,24 @@
       "revId": "51c82ecb07e1850c4b7527d897871d28f0bb291a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deaf2079_397922ec",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-05T19:35:39Z",
+      "side": 1,
+      "message": "This is something I was wondering.\nWith MW globals I can use setMwGlobals that will take care of the cleanups but with wikibase I don\u0027t know how to do that and I simply copied what was done in SetSiteLinkTest.\nWhat I\u0027d like to test here as well is how cirrus profile management takes care of our custom config.",
+      "parentUuid": "408954da_4a27123f",
+      "revId": "51c82ecb07e1850c4b7527d897871d28f0bb291a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
