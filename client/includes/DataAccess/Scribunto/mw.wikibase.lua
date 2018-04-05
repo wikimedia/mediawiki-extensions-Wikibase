@@ -278,6 +278,15 @@ function wikibase.setupInterface()
 	-- Legacy alias for getSitelink
 	wikibase.sitelink = wikibase.getSitelink
 
+	-- Is this a valid (parseable) entity id?
+	--
+	-- @param {string} entityIdSerialization
+	wikibase.isValidEntityId = function( entityIdSerialization )
+		checkType( 'isValidEntityId', 1, entityIdSerialization, 'string' )
+
+		return php.isValidEntityId( entityIdSerialization )
+	end
+
 	-- Render a Snak value from its serialization as wikitext escaped plain text.
 	--
 	-- @param {table} snakSerialization

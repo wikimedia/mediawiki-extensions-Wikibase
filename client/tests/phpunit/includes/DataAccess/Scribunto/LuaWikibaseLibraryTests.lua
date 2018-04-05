@@ -357,6 +357,18 @@ local tests = {
 	  args = { -1 },
 	  expect = "bad argument #1 to 'getEntityUrl' (string or nil expected, got number)"
 	},
+	{ name = 'mw.wikibase.isValidEntityId', func = mw.wikibase.isValidEntityId,
+	  args = { "Q12" },
+	  expect = { true }
+	},
+	{ name = 'mw.wikibase.isValidEntityId (invalid id)', func = mw.wikibase.isValidEntityId,
+	  args = { "Q0" },
+	  expect = { false }
+	},
+	{ name = 'mw.wikibase.isValidEntityId (must be string)', func = mw.wikibase.isValidEntityId,
+	  args = { 12 },
+	  expect = "bad argument #1 to 'isValidEntityId' (string expected, got number)"
+	},
 	{ name = 'mw.wikibase.getEntityUrl (invalid entity id)', func = mw.wikibase.getEntityUrl,
 	  args = { "BlahBlah" },
 	  expect = { nil }

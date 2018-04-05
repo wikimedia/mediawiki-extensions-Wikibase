@@ -114,6 +114,23 @@ class WikibaseLanguageIndependentLuaBindings {
 	}
 
 	/**
+	 * Is this a valid (parseable) entity id.
+	 *
+	 * @param string $entityIdSerialization
+	 *
+	 * @return bool
+	 */
+	public function isValidEntityId( $entityIdSerialization ) {
+		try {
+			$this->entityIdParser->parse( $entityIdSerialization );
+		} catch ( EntityIdParsingException $e ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * @param string $prefixedEntityId
 	 * @param string $languageCode
 	 *

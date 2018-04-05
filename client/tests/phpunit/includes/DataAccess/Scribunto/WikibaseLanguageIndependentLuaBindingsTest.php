@@ -31,25 +31,23 @@ use Wikibase\SettingsArray;
 class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor() {
-		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings(
-			$this->getMock( SiteLinkLookup::class )
-		);
+		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings();
 
 		$this->assertInstanceOf( WikibaseLanguageIndependentLuaBindings::class, $wikibaseLuaBindings );
 	}
 
 	/**
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param SiteLinkLookup|null $siteLinkLookup
 	 * @param UsageAccumulator|null $usageAccumulator
 	 *
 	 * @return WikibaseLanguageIndependentLuaBindings
 	 */
 	private function getWikibaseLanguageIndependentLuaBindings(
-		SiteLinkLookup $siteLinkLookup,
+		SiteLinkLookup $siteLinkLookup = null,
 		UsageAccumulator $usageAccumulator = null
 	) {
 		return new WikibaseLanguageIndependentLuaBindings(
-			$siteLinkLookup,
+			$siteLinkLookup ?: $this->getMock( SiteLinkLookup::class ),
 			new SettingsArray(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			new BasicEntityIdParser,
@@ -250,6 +248,24 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$wikibaseLuaBindings->getSiteLinkPageName( $itemId->getSerialization(), $globalSiteId );
 
 		$this->assertSame( $expectedUsages, array_keys( $usages->getUsages() ) );
+	}
+
+	public function provideIsValidEntityId() {
+		return [
+			[ true, 'Q12' ],
+			[ true, 'P12' ],
+			[ false, 'Q0' ],
+			[ false, '[[Q2]]' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideIsValidEntityId
+	 */
+	public function testIsValidEntityId( $expected, $entityIdSerialization ) {
+		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings();
+
+		$this->assertSame( $expected, $wikibaseLuaBindings->isValidEntityId( $entityIdSerialization ) );
 	}
 
 	/**
