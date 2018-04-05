@@ -264,6 +264,15 @@ Alias for [[#mw.wikibase.getSitelink|mw.wikibase.getSitelink]].
 
 Functions documented as <code>mw.wikibase.entity.name</code> are available on the global <code>mw.wikibase.entity</code> table; functions documented as <code>mw.wikibase.entity:name</code> are methods of an <code>mw.wikibase.entity</code> object (see [[#mw.wikibase.entity.create|<code>mw.wikibase.entity.create</code>]]).
 
+=== mw.wikibase.entity:getId ===
+<code>entity:getId()</code><br>
+Returns the ID of the entity, as a string.
+
+An example call might look like this:
+<source lang="lua">
+entity:getId() -- Returns a string like "Q123"
+</source>
+
 === mw.wikibase.entity:getLabel ===
 <code>entity:getLabel()</code><br>
 <code>entity:getLabel( langCode )</code><br>
