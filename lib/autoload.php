@@ -179,6 +179,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\UnionContentLanguages' => __DIR__ . '/includes/UnionContentLanguages.php',
 	'Wikibase\\Lib\\Units\\BaseUnitStorage' => __DIR__ . '/includes/Units/BaseUnitStorage.php',
 	'Wikibase\\Lib\\Units\\CSVUnitStorage' => __DIR__ . '/includes/Units/CSVUnitStorage.php',
+	'Wikibase\\Lib\\Units\\InMemoryUnitStorage' => __DIR__ . '/includes/Units/InMemoryUnitStorage.php',
 	'Wikibase\\Lib\\Units\\JsonUnitStorage' => __DIR__ . '/includes/Units/JsonUnitStorage.php',
 	'Wikibase\\Lib\\Units\\UnitConverter' => __DIR__ . '/includes/Units/UnitConverter.php',
 	'Wikibase\\Lib\\Units\\UnitStorage' => __DIR__ . '/includes/Units/UnitStorage.php',
