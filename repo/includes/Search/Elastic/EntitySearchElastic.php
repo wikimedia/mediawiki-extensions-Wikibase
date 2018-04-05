@@ -49,6 +49,13 @@ class EntitySearchElastic implements EntitySearchHelper {
 	const DEFAULT_QUERY_BUILDER_PROFILE = 'default';
 
 	/**
+	 * Replacement syntax for statement boosting
+	 * @see \CirrusSearch\Profile\SearchProfileRepositoryTransformer
+	 * and repo/config/ElasticSearchRescoreFunctions.php
+	 */
+	const STMT_BOOST_PROFILE_REPL = 'functions.*[type=term_boost].params[statement_keywords=_statementBoost_].statement_keywords';
+
+	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageChainFactory;
