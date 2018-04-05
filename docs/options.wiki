@@ -78,7 +78,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;fulltextSearchProfiles: search profiles to use for fulltext search. (Cirrus)
 :;defaultFulltextRescoreProfile: name of the rescoring profile to use for fulltext search. The profile should be defined in <code>config/ElasticSearchRescoreProfiles.php</code>. (Cirrus)
 :;rescoreProfiles: Loaded from <code>config/ElasticSearchRescoreProfiles.php</code>, does not have to be defined manually. (Cirrus).
-:;statementBoost: Configuration to boost or deboost certain statement values (Cirrus).
 :;useStemming: Configuration to use stemming analyzer for descriptions in certain languages. Array of two fields: index - use it for indexing, query - use main text field for querying. (Cirrus)
 ;searchIndexProperties: Array of properties (by ID string) that should be included in the "statement_keywords" field of the search index. For now, only relevant when Cirrus search is enabled.
 ;disabledRdfExportEntityTypes: Array of entity types that RDF export needs to be disabled for them, default: empty array, meaning nothing is disabled.
