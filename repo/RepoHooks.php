@@ -1049,22 +1049,49 @@ final class RepoHooks {
 		SearchContext $context,
 		FunctionScoreBuilder &$builder = null
 	) {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
+		self::registerCirrusSearchScoreBuilder( $func, $context, $builder, $settings );
+	}
+
+	/**
+	 * Register Wikibase-specific rescore builders for CirrusSearch.
+	 *
+	 * @param array $func Builder parameters
+	 * @param SearchContext $context
+	 * @param FunctionScoreBuilder|null &$builder Output parameter for score builder.
+	 * @param array $searchSettings
+	 */
+	public static function registerCirrusSearchScoreBuilder(
+		array $func,
+		SearchContext $context,
+		FunctionScoreBuilder &$builder = null,
+		array $searchSettings
+	) {
 		if ( $func['type'] === 'statement_boost' ) {
-			$searchSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
 			$builder = new StatementBoostScoreBuilder(
 				$context,
 				$func['weight'],
-				$searchSettings['statementBoost']
+				isset( $searchSettings['statementBoost'] ) ? $searchSettings['statementBoost'] : []
 			);
 		}
 	}
 
 	/**
-	 * Register our cirrus profiles.
+	 * Register our cirrus profiles using WikibaseRepo::getDefaultInstance().
 	 *
 	 * @param SearchProfileService $service
 	 */
 	public static function onCirrusSearchProfileService( SearchProfileService $service ) {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
+		self::registerSearchProfiles( $service, $settings );
+	}
+
+	/**
+	 * Register cirrus profiles .
+	 * @param SearchProfileService $service
+	 * @param array $entitySearchConfig
+	 */
+	public static function registerSearchProfiles( SearchProfileService $service, array $entitySearchConfig ) {
 		// register base profiles available on all wikibase installs
 		$service->registerFileRepository( SearchProfileService::RESCORE,
 			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreProfiles.php' );
@@ -1076,8 +1103,6 @@ final class RepoHooks {
 			'wikibase_base', __DIR__ . '/config/EntitySearchProfiles.php' );
 
 		// register custom profiles provided in the wikibase config
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$entitySearchConfig = $settings->getSetting( 'entitySearch' );
 		if ( isset( $entitySearchConfig['rescoreProfiles'] ) ) {
 			$service->registerArrayRepository( SearchProfileService::RESCORE,
 				'wikibase_config', $entitySearchConfig['rescoreProfiles'] );
