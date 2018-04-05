@@ -52,16 +52,23 @@ class UnitStorageTest extends MediaWikiTestCase {
 		$this->assertNull( $storage->getConversion( 'Q5' ) );
 	}
 
+	public function badStorageModels() {
+		return [
+			[ JsonUnitStorage::class, [ 'nosuchfile' ] ],
+			[ CSVUnitStorage::class, [ 'nosuchfile' ] ],
+		];
+	}
+
 	/**
-	 * @dataProvider storageModels
+	 * @dataProvider badStorageModels
 	 * @expectedException RuntimeException
 	 * @expectedExceptionMessage Failed to load unit storage
 	 */
 	public function testBadStorage( $class, array $args ) {
-		$def = [ 'class' => $class, 'args' => [ 'nosuchfile' ] ];
+		$def = [ 'class' => $class, 'args' => $args ];
 		$storage = ObjectFactory::getObjectFromSpec( $def );
 
-		$this->assertNull( $storage->getConversion( 'Q1' ) );
+		$storage->getConversion( 'Q1' );
 	}
 
 }
