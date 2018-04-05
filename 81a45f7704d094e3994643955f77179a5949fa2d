@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50a1c0bc_617d13b6",
+        "filename": "view/resources/wikibase/view/ViewFactoryFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-04-05T13:27:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dbc1568_70edd19a",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "81a45f7704d094e3994643955f77179a5949fa2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a963e18c_00ab870c",
         "filename": "view/resources/wikibase/view/ViewFactoryFactory.js",
         "patchSetId": 6
