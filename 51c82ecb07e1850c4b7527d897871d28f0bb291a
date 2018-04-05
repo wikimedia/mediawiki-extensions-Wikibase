@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "408954da_4a27123f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-05T16:58:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure messing with default settings is a good thing - we could break something in the following tests. We probably should isolate it so it only influences this test.",
+      "revId": "51c82ecb07e1850c4b7527d897871d28f0bb291a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
