@@ -16,7 +16,8 @@
 			"Tkalyn",
 			"DixonD",
 			"Piramidion",
-			"Dars"
+			"Dars",
+			"Avatar6"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -140,5 +141,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Переглянути}} елемент",
 	"notification-subject-page-connection": "Сторінка у {{GRAMMAR:locative|{{SITENAME}}}}, яку Ви {{GENDER:$3|створили}}, {{GENDER:$2|приєднана}} до елемента {{GRAMMAR:genitive|{{WBREPONAME}}}}",
 	"unresolved-property-category": "Сторінки з нерозв'язаними властивостями",
-	"unresolved-property-category-desc": "Ця сторінка містить сторінки, які посилаються на властивості {{WBREPONAME}}, які не вдається знайти ані за ідентифікатором, ані за назвою."
+	"unresolved-property-category-desc": "Ця сторінка містить сторінки, які посилаються на властивості {{WBREPONAME}}, які не вдається знайти ані за ідентифікатором, ані за назвою.",
+	"connected-redirect-category": "{{WBREPONAME}}:Перенаправлення Вікіпедії",
+	"connected-redirect-category-desc": "Ця категорія містить сторінки-перенаправлення, які поєднані із елементом в проекті «[[{{WBREPONAME}}]]».\nThis category lists redirect pages that are connected to a {{WBREPONAME}} item."
 }

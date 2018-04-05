@@ -203,6 +203,7 @@
 	"wikibase-newentity-description": "Beschrijving:",
 	"wikibase-newentity-submit": "Aanmaken",
 	"special-setlabel": "Label instellen",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|verklaring|verklaringen}}, $2 {{PLURAL:$2|sitekoppeling|sitekoppelingen}}",
 	"wikibase-setlabel-introfull": "U bent het label voor [[$1]] aan het instellen in het $2.",
 	"wikibase-setlabel-intro": "Via dit formulier kunt u het label van een entiteit instellen. U moet het ID van de entiteit opgeven (bijvoorbeeld Q23), een taalcode (bijvoorbeeld \"en\") en het te gebruiken label.",
 	"wikibase-setlabel-label": "Label:",

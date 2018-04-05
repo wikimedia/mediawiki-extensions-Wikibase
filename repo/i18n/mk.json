@@ -363,6 +363,8 @@
 	"action-property-create": "создавање на својства",
 	"wikibase-pageinfo-subscription": "Викија претплатени на оваа единица",
 	"wikibase-pageinfo-subscription-none": "Ниедно",
+	"wikibase-search-bad-entity-type": "Неисправен тип на единица: $1",
+	"wikibase-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1",
 	"apihelp-wbavailablebadges-description": "Бара расположиви значки.",
 	"apihelp-wbavailablebadges-example-1": "Ги бара сите расположиви значки",
 	"apihelp-wbcreateclaim-description": "Создава тврдења во Викибазата.",
