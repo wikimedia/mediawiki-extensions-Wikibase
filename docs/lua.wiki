@@ -423,6 +423,15 @@ The following is a (heavily shortened) example, from the Wikidata Item about Wik
 }
 </source>
 
+=== mw.wikibase.entity:getId ===
+<code>entity:getId()</code><br>
+Returns the ID of the entity, as a string.
+
+An example call might look like this:
+<source lang="lua">
+entity:getId() -- Returns a string like "Q123"
+</source>
+
 === mw.wikibase.entity:getLabel ===
 <code>entity:getLabel()</code><br>
 <code>entity:getLabel( langCode )</code><br>
