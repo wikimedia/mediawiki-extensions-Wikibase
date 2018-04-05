@@ -92,6 +92,30 @@
       "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdff00ea_a78669fa",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-05T08:31:23Z",
+      "side": 1,
+      "message": "Because UnitStorageTest::testBadStorage calls the constructor with a string \u0027nosuchfile\u0027 argument (that’s also why we can’t have a typehint).\n\nAlternative solution: fix the test to make less assumptions about the class…",
+      "parentUuid": "c6331c95_b9f27a3a",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 3
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
