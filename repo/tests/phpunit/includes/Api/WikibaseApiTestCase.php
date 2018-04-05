@@ -86,6 +86,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array|null $session
 	 * @param User|null $user
 	 *
+	 * @throws ApiUsageException
 	 * @return array( array|null $resultData, WebRequest $request, array $sessionArray )
 	 */
 	protected function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
