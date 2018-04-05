@@ -1022,7 +1022,6 @@ call_user_func( function() {
 	$wgHooks['ParserOutputPostCacheTransform'][] = '\Wikibase\RepoHooks::onParserOutputPostCacheTransform';
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
 	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
-	$wgHooks['CirrusSearchScoreBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchScoreBuilder';
 	$wgHooks['CirrusSearchProfileService'][] = '\Wikibase\RepoHooks::onCirrusSearchProfileService';
 	$wgHooks['CirrusSearchFulltextQueryBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchFulltextQueryBuilder';
 

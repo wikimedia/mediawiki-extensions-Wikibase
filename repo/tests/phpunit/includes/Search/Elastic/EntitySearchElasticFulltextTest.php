@@ -7,7 +7,6 @@ use CirrusSearch\Query\BoostTemplatesFeature;
 use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Query\FullTextQueryStringQueryBuilder;
 use CirrusSearch\Query\InSourceFeature;
-use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
 use MediaWikiTestCase;
@@ -19,7 +18,6 @@ use Wikibase\RepoHooks;
 
 /**
  * @covers \Wikibase\Repo\Search\Elastic\EntityFullTextQueryBuilder
- * @covers \Wikibase\RepoHooks::registerCirrusSearchScoreBuilder()
  * @covers \Wikibase\RepoHooks::registerSearchProfiles()
  *
  * @group Wikibase
@@ -47,19 +45,6 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		parent::setTemporaryHook( 'CirrusSearchProfileService', function( SearchProfileService $service ) {
 			RepoHooks::registerSearchProfiles( $service, self::$ENTITY_SEARH_CONFIG );
 		} );
-
-		// Override this one so that we can inject our config for statement_boost
-		parent::setTemporaryHook(
-			'CirrusSearchScoreBuilder',
-			function (
-				array $func,
-				SearchContext $context,
-				FunctionScoreBuilder &$builder = null
-			) {
-				RepoHooks::registerCirrusSearchScoreBuilder( $func, $context,
-					$builder, self::$ENTITY_SEARH_CONFIG );
-			}
-		);
 	}
 
 	public function searchDataProvider() {

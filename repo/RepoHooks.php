@@ -7,11 +7,11 @@ use ApiEditPage;
 use ApiQuerySiteinfo;
 use BaseTemplate;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
+use CirrusSearch\Profile\ArrayProfileRepository;
+use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Query\FullTextQueryBuilder;
-use CirrusSearch\Search\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
-use CirrusSearch\Search\TermBoostScoreBuilder;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -1038,45 +1038,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Wikibase-specific rescore builders for CirrusSearch.
-	 *
-	 * @param array $func Builder parameters
-	 * @param SearchContext $context
-	 * @param FunctionScoreBuilder|null &$builder Output parameter for score builder.
-	 */
-	public static function onCirrusSearchScoreBuilder(
-		array $func,
-		SearchContext $context,
-		FunctionScoreBuilder &$builder = null
-	) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
-		self::registerCirrusSearchScoreBuilder( $func, $context, $builder, $settings );
-	}
-
-	/**
-	 * Register Wikibase-specific rescore builders for CirrusSearch.
-	 *
-	 * @param array $func Builder parameters
-	 * @param SearchContext $context
-	 * @param FunctionScoreBuilder|null &$builder Output parameter for score builder.
-	 * @param array $searchSettings
-	 */
-	public static function registerCirrusSearchScoreBuilder(
-		array $func,
-		SearchContext $context,
-		FunctionScoreBuilder &$builder = null,
-		array $searchSettings
-	) {
-		if ( $func['type'] === 'statement_boost' ) {
-			$builder = new TermBoostScoreBuilder(
-				$context,
-				$func['weight'],
-				[ StatementsField::NAME => isset( $searchSettings['statementBoost'] ) ? $searchSettings['statementBoost'] : [] ]
-			);
-		}
-	}
-
-	/**
 	 * Register our cirrus profiles using WikibaseRepo::getDefaultInstance().
 	 *
 	 * @param SearchProfileService $service
@@ -1092,11 +1053,17 @@ final class RepoHooks {
 	 * @param array $entitySearchConfig
 	 */
 	public static function registerSearchProfiles( SearchProfileService $service, array $entitySearchConfig ) {
+		$stmtBoost = isset( $entitySearchConfig['statementBoost'] ) ? $entitySearchConfig['statementBoost'] : [];
 		// register base profiles available on all wikibase installs
 		$service->registerFileRepository( SearchProfileService::RESCORE,
 			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreProfiles.php' );
-		$service->registerFileRepository( SearchProfileService::RESCORE_FUNCTION_CHAINS,
-			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreFunctions.php' );
+		$service->registerRepository( new SearchProfileRepositoryTransformer(
+				ArrayProfileRepository::fromFile(
+					SearchProfileService::RESCORE_FUNCTION_CHAINS,
+					'wikibase_base',
+					__DIR__ . '/config/ElasticSearchRescoreFunctions.php' ),
+				[ EntitySearchElastic::STMT_BOOST_PROFILE_REPL => $stmtBoost ]
+		) );
 		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			'wikibase_base', __DIR__ . '/config/EntityPrefixSearchProfiles.php' );
 		$service->registerFileRepository( SearchProfileService::FT_QUERY_BUILDER,
@@ -1108,8 +1075,13 @@ final class RepoHooks {
 				'wikibase_config', $entitySearchConfig['rescoreProfiles'] );
 		}
 		if ( isset( $entitySearchConfig['rescoreFunctionChains'] ) ) {
-			$service->registerArrayRepository( SearchProfileService::RESCORE_FUNCTION_CHAINS,
-				'wikibase_config', $entitySearchConfig['rescoreFunctionChains'] );
+			$service->registerRepository( new SearchProfileRepositoryTransformer(
+				ArrayProfileRepository::fromArray(
+					SearchProfileService::RESCORE_FUNCTION_CHAINS,
+					'wikibase_config',
+					$entitySearchConfig['rescoreFunctionChains'] ),
+				[ EntitySearchElastic::STMT_BOOST_PROFILE_REPL => $stmtBoost ]
+			) );
 		}
 		if ( isset( $entitySearchConfig['prefixSearchProfiles'] ) ) {
 			$service->registerArrayRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
