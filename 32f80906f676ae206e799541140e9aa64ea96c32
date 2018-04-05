@@ -22,6 +22,30 @@
       "revId": "32f80906f676ae206e799541140e9aa64ea96c32",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c666071_26ab8367",
+        "filename": "client/tests/phpunit/includes/RecentChanges/RecentChangeFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-05T11:35:50Z",
+      "side": 1,
+      "message": "I missed this. Thank you for spotting it.",
+      "parentUuid": "5e9e6585_4ff94de4",
+      "range": {
+        "startLine": 198,
+        "startChar": 21,
+        "endLine": 198,
+        "endChar": 25
+      },
+      "revId": "32f80906f676ae206e799541140e9aa64ea96c32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
