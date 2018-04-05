@@ -52,6 +52,24 @@
       "revId": "51c82ecb07e1850c4b7527d897871d28f0bb291a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83d7794d_831fe662",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-05T21:52:44Z",
+      "side": 1,
+      "message": "found a way with setTemporaryHook",
+      "parentUuid": "65aec95f_94f8e141",
+      "revId": "51c82ecb07e1850c4b7527d897871d28f0bb291a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
