@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dbc1568_70edd19a",
+        "filename": "view/resources/wikibase/view/ViewFactoryFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-05T13:12:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be {*[]} or {Array}?",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "81a45f7704d094e3994643955f77179a5949fa2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a963e18c_00ab870c",
+        "filename": "view/resources/wikibase/view/ViewFactoryFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-05T13:12:41Z",
+      "side": 1,
+      "message": "For reference: this is a quirk the ….apply() call requires us to do. This was also in the old code.",
+      "revId": "81a45f7704d094e3994643955f77179a5949fa2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
