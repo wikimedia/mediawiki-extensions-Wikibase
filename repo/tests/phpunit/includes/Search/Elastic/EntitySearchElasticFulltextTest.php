@@ -9,18 +9,15 @@ use CirrusSearch\Query\FullTextQueryStringQueryBuilder;
 use CirrusSearch\Query\InSourceFeature;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
-use Language;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Search\Elastic\EntityFullTextQueryBuilder;
-use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers  \Wikibase\Repo\Search\Elastic\EntitySearchElastic
+ * @covers  \Wikibase\Repo\Search\Elastic\EntityFullTextQueryBuilder
  * @group Wikibase
  * @license GPL-2.0+
  * @author  Stas Malyshev
@@ -32,29 +29,12 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		if ( !class_exists( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
-	}
-
-	/**
-	 * @param Language $userLang
-	 * @return EntitySearchElastic
-	 */
-	private function newEntitySearch( Language $userLang ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		return new EntitySearchElastic(
-			$repo->getLanguageFallbackChainFactory(),
-			new BasicEntityIdParser(),
-			$userLang,
-			$repo->getContentModelMappings(),
-			$repo->getSettings()->getSetting( 'entitySearch' )
-		);
-	}
-
-	/**
-	 * @return \FauxRequest
-	 */
-	private function getMockRequest() {
-		return new \FauxRequest( [ 'cirrusDumpQuery' => 'yes' ] );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entitySearch = $wikibaseRepo->getSettings()->getSetting( 'entitySearch' );
+		$entitySearch['statementBoost'] = [ 'P31=Q4167410' => '-10' ];
+		$entitySearch['defaultFulltextRescoreProfile'] = 'wikibase_prefix_boost';
+		$entitySearch['useStemming'] = [ 'en' => [ 'query' => true ] ];
+		$wikibaseRepo->getSettings()->setSetting( 'entitySearch', $entitySearch );
 	}
 
 	public function searchDataProvider() {
@@ -88,13 +68,11 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
-		$wgSettings['statementBoost'] = [ 'P31=Q4167410' => '-10' ];
-		$wgSettings['useStemming'] = [ 'en' => [ 'query' => true ] ];
-
 		$this->setMwGlobals( [
 			'wgCirrusSearchQueryStringMaxDeterminizedStates' => 500,
 			'wgCirrusSearchElasticQuirks' => [],
 		] );
+		$wgSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
 
 		$config = new SearchConfig();
 		$settings = [
@@ -128,8 +106,8 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$context = new SearchContext( $config, $params['ns'] );
 		$builder->build( $context, $params['search'], false );
 		$query = $context->getQuery();
-		$context->getRescore();
-		$encoded = json_encode( $query->toArray(), JSON_PRETTY_PRINT );
+		$rescore = $context->getRescore();
+		$encoded = json_encode( [ 'query' => $query->toArray(), 'rescore_query' => $rescore ], JSON_PRETTY_PRINT );
 		$this->assertFileContains( $expected, $encoded );
 	}
 
