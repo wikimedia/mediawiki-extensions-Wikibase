@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7edd4a0a_b8e146e2",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-05T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ba30d59_9768819f",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 22
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fd8ea64_9996e0b4",
         "filename": "lib/includes/Units/ArrayUnitStorage.php",
         "patchSetId": 1
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "140f2e85_d3101104",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-05T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60c02bb1_ee99aeb5",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6331c95_b9f27a3a",
         "filename": "lib/includes/Units/ArrayUnitStorage.php",
         "patchSetId": 1
@@ -107,6 +155,30 @@
       "side": 1,
       "message": "Because UnitStorageTest::testBadStorage calls the constructor with a string \u0027nosuchfile\u0027 argument (that’s also why we can’t have a typehint).\n\nAlternative solution: fix the test to make less assumptions about the class…",
       "parentUuid": "c6331c95_b9f27a3a",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 3
+      },
+      "revId": "b73f5c418ad6d1bbe8915270ba6350f74651aed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1560220_5cf72b67",
+        "filename": "lib/includes/Units/ArrayUnitStorage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-05T09:00:52Z",
+      "side": 1,
+      "message": "Tests improved in I156490ef11.",
+      "parentUuid": "bdff00ea_a78669fa",
       "range": {
         "startLine": 25,
         "startChar": 2,
