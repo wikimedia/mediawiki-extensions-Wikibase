@@ -168,6 +168,25 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
 
+	public function entityExistsProvider() {
+		return [
+			[ true, 'Q885588' ],
+			[ false, 'Q338380281' ]
+		];
+	}
+
+	/**
+	 * @dataProvider entityExistsProvider
+	 */
+	public function testEntityExists( $expected, $entityIdSerialization ) {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			[ $expected ],
+			$luaWikibaseLibrary->entityExists( $entityIdSerialization )
+		);
+	}
+
 	public function testGetEntity_entityAccessLimitExceeded() {
 		$this->setExpectedException( ScribuntoException::class );
 

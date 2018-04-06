@@ -173,6 +173,18 @@ local tests = {
 	  args = { 123 },
 	  expect = "bad argument #1 to 'getEntity' (string or nil expected, got number)"
 	},
+	{ name = "mw.wikibase.entityExists (does exist)", func = mw.wikibase.entityExists,
+	  args = { 'Q199024' },
+	  expect = { true }
+	},
+	{ name = "mw.wikibase.entityExists (doesn't exist)", func = mw.wikibase.entityExists,
+	  args = { 'Q1223214234' },
+	  expect = { false }
+	},
+	{ name = "mw.wikibase.entityExists (id must be string)", func = mw.wikibase.entityExists,
+	  args = { 123 },
+	  expect = "bad argument #1 to 'entityExists' (string expected, got number)"
+	},
 	{ name = 'mw.wikibase.label (legacy alias)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'Lua Test Item' }

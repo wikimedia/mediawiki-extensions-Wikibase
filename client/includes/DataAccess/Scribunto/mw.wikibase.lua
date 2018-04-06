@@ -287,6 +287,19 @@ function wikibase.setupInterface()
 		return php.isValidEntityId( entityIdSerialization )
 	end
 
+	-- Does the entity in question exist?
+	--
+	-- @param {string} entityId
+	wikibase.entityExists = function( entityId )
+		checkType( 'entityExists', 1, entityId, 'string' )
+
+		if not php.getSetting( 'allowArbitraryDataAccess' ) and entityId ~= wikibase.getEntityIdForCurrentPage() then
+			error( 'Access to arbitrary entities has been disabled.', 2 )
+		end
+
+		return php.entityExists( entityId )
+	end
+
 	-- Render a Snak value from its serialization as wikitext escaped plain text.
 	--
 	-- @param {table} snakSerialization
