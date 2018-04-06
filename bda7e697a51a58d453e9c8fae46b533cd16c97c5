@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e18b6ab1_8410aa49",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2018-04-06T21:49:50Z",
+      "side": 1,
+      "message": "if it makes that much of a difference we could provide another level of overrides like https://3v4l.org/NtpGE\n\nI\u0027m not sure if it\u0027s necessary though.",
+      "revId": "bda7e697a51a58d453e9c8fae46b533cd16c97c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
