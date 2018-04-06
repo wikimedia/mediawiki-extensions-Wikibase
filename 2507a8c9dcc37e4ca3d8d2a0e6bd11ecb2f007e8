@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3c9bacb_8f8a98fe",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T16:31:23Z",
+      "side": 1,
+      "message": "shouldn’t this be a space if this is wikitext?",
+      "range": {
+        "startLine": 239,
+        "startChar": 123,
+        "endLine": 239,
+        "endChar": 124
+      },
+      "revId": "2507a8c9dcc37e4ca3d8d2a0e6bd11ecb2f007e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
