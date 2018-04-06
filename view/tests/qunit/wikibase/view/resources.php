@@ -50,6 +50,15 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.view.ViewFactoryFactory.tests' => $moduleTemplate + [
+			'scripts' => [
+				'ViewFactoryFactory.tests.js',
+			],
+			'dependencies' => [
+				'wikibase.view.ViewFactoryFactory'
+			],
+		],
+
 		'wikibase.view.ToolbarFactory.tests' => $moduleTemplate + [
 			'scripts' => [
 				'ToolbarFactory.tests.js',

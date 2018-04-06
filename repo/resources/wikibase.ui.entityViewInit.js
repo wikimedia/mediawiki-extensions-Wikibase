@@ -79,8 +79,19 @@
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
-			viewFactoryClass = wb.view.ReadModeViewFactory,
+			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
+			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
+				repoApi,
+				revisionStore,
+				entity,
+				function ( hookName ) {
+					var hook = mw.hook( hookName );
+					hook.fire.apply( hook, Array.prototype.slice.call( arguments, 1 ) );
+				}
+			),
 			viewFactoryArguments = [
+				toolbarFactory,
+				entityChangersFactory,
 				structureEditorFactory,
 				contentLanguages,
 				dataTypeStore,
@@ -106,34 +117,13 @@
 			],
 			startEditingCallback = function () {
 				return $.Deferred().resolve().promise();
-			};
-
-		if ( isEditable() ) {
-			var revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
-				entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
-					repoApi,
-					revisionStore,
-					entity,
-					function ( hookName ) {
-						var hook = mw.hook( hookName );
-						hook.fire.apply( hook, Array.prototype.slice.call( arguments, 1 ) );
-					}
-				);
-
-			var entityNamespace = entity.getType();
-			viewFactoryClass = wb[ entityNamespace ] && wb[ entityNamespace ].view
-				&& wb[ entityNamespace ].view.ControllerViewFactory // extension
-				|| wb.view.ControllerViewFactory; // default factory
-
-			viewFactoryArguments.unshift(
-				toolbarFactory,
-				entityChangersFactory
-			);
-		}
-
-		viewFactoryArguments.unshift( null );
-		var viewFactory = new ( Function.prototype.bind.apply( viewFactoryClass, viewFactoryArguments ) )();
-		var entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
+			},
+			entityNamespace = entity.getType(),
+			ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
+				&& wb[ entityNamespace ].view.ViewFactoryFactory
+				|| wb.view.ViewFactoryFactory,
+			viewFactory = ( new ViewFactoryFactory() ).getViewFactory( isEditable(), viewFactoryArguments ),
+			entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
 
 		return entityView.widgetName;
 	}
