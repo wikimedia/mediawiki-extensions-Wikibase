@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53c7ffe8_266a425d",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T17:23:56Z",
+      "side": 1,
+      "message": "not sure if “scheme” is wrong, but I think this should be “schema”?",
+      "range": {
+        "startLine": 239,
+        "startChar": 148,
+        "endLine": 239,
+        "endChar": 154
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04be3423_808290e0",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T17:23:56Z",
+      "side": 1,
+      "message": "typo: of",
+      "range": {
+        "startLine": 239,
+        "startChar": 187,
+        "endLine": 239,
+        "endChar": 189
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3921f3aa_d75588cb",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T17:23:56Z",
+      "side": 1,
+      "message": "I think the \u003csmall\u003e makes the code look strange on-wiki… if you want to save space, perhaps wrapping it in {{Collapse top}}/{{Collapse bottom}} would be better?",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 7
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f52e897a_2da4b225",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T17:23:56Z",
+      "side": 1,
+      "message": "I’m not sure if order is significant in Lua tables, but perhaps we should take a few liberties and reorder the entries? I would suggest putting the rank above the qualifiers, perhaps even above the mainsnak.",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 278,
+        "endChar": 24
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1fb0df6_5ff8e46f",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T17:23:56Z",
+      "side": 1,
+      "message": "Similarly, I wouldn’t put this at the very bottom.\n\nHm, or perhaps this makes sense? Because you usually already know that the value is a statement, and so this is the most useless part of the table? Not sure.",
+      "range": {
+        "startLine": 319,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 27
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4acaf690_143b6a1f",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-06T17:23:56Z",
+      "side": 1,
+      "message": "I would also suggest reordering the table entries a bit here – perhaps in the following order:\n\n- id\n- type\n- schemaVersion\n- labels\n- descriptions\n- aliases\n- sitelinks\n- claims",
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
