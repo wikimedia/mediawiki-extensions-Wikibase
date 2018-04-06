@@ -22,6 +22,30 @@
       "revId": "2507a8c9dcc37e4ca3d8d2a0e6bd11ecb2f007e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e1d3161_54086bcc",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-06T16:47:40Z",
+      "side": 1,
+      "message": "Doh, yes :)",
+      "parentUuid": "b3c9bacb_8f8a98fe",
+      "range": {
+        "startLine": 239,
+        "startChar": 123,
+        "endLine": 239,
+        "endChar": 124
+      },
+      "revId": "2507a8c9dcc37e4ca3d8d2a0e6bd11ecb2f007e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
