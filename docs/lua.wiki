@@ -235,6 +235,92 @@ An example call might look like this:
 mw.wikibase.getBestStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of P12 statements from Q1
 </source>
 
+==== Structure ====
+The returned structure is very similar to the [https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON#Claims_and_Statements Wikibase DataModel JSON schema for statements], and equivalent to the statement structures in [[#mw.wikibase.entity|mw.wikibase.entity]].
+
+An example might look like this:
+<source lang="lua">
+mw.logObject( mw.wikibase.getBestStatements( 'Q16354758', 'P1324' ) )
+
+{
+  {
+    ["id"] = "Q16354758$d09b1475-46d7-bbd3-ce7a-4698212a4a99",
+    ["rank"] = "normal",
+    ["mainsnak"] = {
+      ["datatype"] = "url",
+      ["datavalue"] = {
+        ["type"] = "string",
+        ["value"] = "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git",
+      },
+      ["property"] = "P1324",
+      ["snaktype"] = "value",
+    },
+    ["qualifiers"] = {
+      ["P2700"] = {
+        {
+          ["datatype"] = "wikibase-item",
+          ["datavalue"] = {
+            ["type"] = "wikibase-entityid",
+            ["value"] = {
+              ["entity-type"] = "item",
+              ["id"] = "Q186055",
+              ["numeric-id"] = 186055,
+            },
+          },
+          ["hash"] = "c9653c60db2ac354cb25a08c14c306afd1238d7c",
+          ["property"] = "P2700",
+          ["snaktype"] = "value",
+        },
+      },
+    },
+    ["qualifiers-order"] = {
+      "P2700",
+    },
+    ["references"] = {
+      {
+        ["hash"] = "ebb5373bbff11d9abd156aadbcf65ad5f97035dd",
+        ["snaks"] = {
+          ["P813"] = {
+            {
+              ["datatype"] = "time",
+              ["datavalue"] = {
+                ["type"] = "time",
+                ["value"] = {
+                  ["after"] = 0,
+                  ["before"] = 0,
+                  ["calendarmodel"] = "http://www.wikidata.org/entity/Q1985727",
+                  ["precision"] = 11,
+                  ["time"] = "+2016-10-05T00:00:00Z",
+                  ["timezone"] = 0,
+                },
+              },
+              ["property"] = "P813",
+              ["snaktype"] = "value",
+            },
+          },
+          ["P854"] = {
+            {
+              ["datatype"] = "url",
+              ["datavalue"] = {
+                ["type"] = "string",
+                ["value"] = "https://www.mediawiki.org/wiki/Extension:Wikibase_Repository#Download",
+              },
+              ["property"] = "P854",
+              ["snaktype"] = "value",
+            },
+          },
+        },
+        ["snaks-order"] = {
+          "P854",
+          "P813",
+        },
+      },
+    },
+    ["type"] = "statement",
+  },
+}
+</source>
+
 === mw.wikibase.getAllStatements ===
 <code>wikibase.getAllStatements( entityId, propertyId )</code><br>
 Returns a table with all statements (including all ranks, even "deprecated") matching the given property ID on the given entity ID.
@@ -243,6 +329,8 @@ An example call might look like this:
 <source lang="lua">
 mw.wikibase.getAllStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of P12 statements from Q1
 </source>
+
+The structure of the returned table is identical to those obtained via [[#mw.wikibase.getBestStatements|mw.wikibase.getBestStatements]].
 
 === Legacy aliases ===
 These functions exist solely for backward compatibility, they should not be used in new code.
@@ -263,6 +351,68 @@ Alias for [[#mw.wikibase.getSitelink|mw.wikibase.getSitelink]].
 <code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntity|<code>mw.wikibase.getEntity</code>]].
 
 Functions documented as <code>mw.wikibase.entity.name</code> are available on the global <code>mw.wikibase.entity</code> table; functions documented as <code>mw.wikibase.entity:name</code> are methods of an <code>mw.wikibase.entity</code> object (see [[#mw.wikibase.entity.create|<code>mw.wikibase.entity.create</code>]]).
+
+=== Structure ===
+The structure of this is very similar to the [https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON Wikibase DataModel JSON] schema. This can be handily viewed with <source lang="lua">mw.logObject( mw.wikibase.getEntity( 'Q123' ) )</source> in the Scribunto '''Debug console'''.
+
+The following is a (heavily shortened) example, from the Wikidata Item about Wikibase:
+<source lang="lua">
+{
+  ["id"] = "Q16354758",
+  ["type"] = "item",
+  ["schemaVersion"] = 2,
+  ["labels"] = {
+    { ["language"] = "en", ["value"] = "Wikibase", },
+  },
+  ["descriptions"] = {
+    ["de"] = { ["language"] = "de", ["value"] = "Sammlung von Software (Anwendungen und Bibliotheken) zum Erstellen, Verwalten und Austauschen strukturierter Daten", },
+  },
+  ["aliases"] = {
+    ["ru"] = { { ["language"] = "ru", ["value"] = "Викибаза", }, },
+  },
+  ["sitelinks"] = {
+    ["enwiki"] = { ["badges"] = { }, ["site"] = "enwiki", ["title"] = "Wikibase", },
+  },
+  ["claims"] = {
+    ["P1324"] = {
+      {
+        ["id"] = "Q16354758$d09b1475-46d7-bbd3-ce7a-4698212a4a99",
+        ["mainsnak"] = {
+          ["datatype"] = "url",
+          ["datavalue"] = { ["type"] = "string", ["value"] = "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git", },
+          ["property"] = "P1324",
+          ["snaktype"] = "value",
+        },
+        ["qualifiers"] = {
+          ["P2700"] = {
+            {
+              ["datatype"] = "wikibase-item",
+                ["datavalue"] = { ["type"] = "wikibase-entityid", ["value"] = { ["entity-type"] = "item", ["id"] = "Q186055", ["numeric-id"] = 186055, }, },
+                ["hash"] = "c9653c60db2ac354cb25a08c14c306afd1238d7c",
+                ["property"] = "P2700",
+                ["snaktype"] = "value",
+            },
+          },
+        },
+        ["qualifiers-order"] = { "P2700", },
+        ["rank"] = "normal",
+        ["references"] = {
+          {
+            ["hash"] = "ebb5373bbff11d9abd156aadbcf65ad5f97035dd",
+            ["snaks"] = {
+              ["P854"] = {
+                { ["datatype"] = "url", ["datavalue"] = { ["type"] = "string", ["value"] = "https://www.mediawiki.org/wiki/Extension:Wikibase_Repository#Download", }, ["property"] = "P854", ["snaktype"] = "value", },
+              },
+            },
+            ["snaks-order"] = { "P854", "P813", },
+          },
+        },
+        ["type"] = "statement",
+      },
+    },
+  },
+}
+</source>
 
 === mw.wikibase.entity:getLabel ===
 <code>entity:getLabel()</code><br>
