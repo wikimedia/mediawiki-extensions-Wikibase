@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "03b5ec1a_aabe9571",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-04-07T16:00:28Z",
+      "side": 1,
+      "message": "I think we should not assume these templates are there – wherever this text might show up.\n\nI agree \u003csmall\u003e should not be used. Please keep any syntax trivial.\n\nNote that \u003csource\u003e is deprecated for a long time, because it clashes with an HTML5 element with the same name. \u003csyntaxhighlight\u003e should be used.",
+      "parentUuid": "3921f3aa_d75588cb",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 7
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f52e897a_2da4b225",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
