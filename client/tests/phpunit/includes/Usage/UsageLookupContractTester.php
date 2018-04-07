@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_Assert as Assert;
+use PHPUnit\Framework\Assert;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use HashBagOStuff;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 
 /**
@@ -73,12 +73,12 @@ class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase 
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return MediaWikiPageNameNormalizer
 	 */
 	private function getMediaWikiPageNameNormalizer(
-		PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+		Invocation $matcher
 	) {
 		$fileNameLookup = $this->getMockBuilder( MediaWikiPageNameNormalizer::class )
 			->disableOriginalConstructor()

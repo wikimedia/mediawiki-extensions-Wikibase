@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -90,11 +90,11 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return ExceptionHandler
 	 */
-	private function getExceptionHandler( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
+	private function getExceptionHandler( Invocation $matcher ) {
 		$mock = $this->getMock( ExceptionHandler::class );
 		$mock->expects( $matcher )
 			->method( 'handleException' );
@@ -103,11 +103,11 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return MessageReporter
 	 */
-	private function getMessageReporter( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
+	private function getMessageReporter( Invocation $matcher ) {
 		$mock = $this->getMock( MessageReporter::class );
 		$mock->expects( $matcher )
 			->method( 'reportMessage' );

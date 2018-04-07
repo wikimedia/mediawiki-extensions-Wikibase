@@ -7,7 +7,7 @@ use ContentHandler;
 use FauxRequest;
 use IContextSource;
 use OutputPage;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Skin;
 use SkinFallbackTemplate;
 use SkinTemplate;
@@ -122,7 +122,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends \PHPUnit\Framework\Tes
 				} elseif ( $name === 'wbeditlanglinks' ) {
 					$actualWbeditlanglinks = $val;
 				} else {
-					PHPUnit_Framework_TestCase::fail( 'Unexpected option ' .  $name . ' set.' );
+					TestCase::fail( 'Unexpected option ' .  $name . ' set.' );
 				}
 			} ) );
 

@@ -7,7 +7,7 @@ use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Change;
 use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
@@ -86,12 +86,12 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation|null $expectedLoadChunkCalls
+	 * @param Invocation|null $expectedLoadChunkCalls
 	 *
 	 * @return ChunkAccess Guaranteed to only return Change objects from loadChunk.
 	 */
 	private function getChunkedChangesAccess(
-		PHPUnit_Framework_MockObject_Matcher_Invocation $expectedLoadChunkCalls = null
+		Invocation $expectedLoadChunkCalls = null
 	) {
 		$chunkedAccess = $this->getMock( ChunkAccess::class );
 

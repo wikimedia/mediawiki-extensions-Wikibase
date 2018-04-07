@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
@@ -138,11 +138,11 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return ExceptionHandler
 	 */
-	private function getExceptionHandler( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
+	private function getExceptionHandler( Invocation $matcher ) {
 		$mock = $this->getMock( ExceptionHandler::class );
 		$mock->expects( $matcher )
 			->method( 'handleException' );
@@ -151,11 +151,11 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return MessageReporter
 	 */
-	private function getMessageReporter( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
+	private function getMessageReporter( Invocation $matcher ) {
 		$mock = $this->getMock( MessageReporter::class );
 		$mock->expects( $matcher )
 			->method( 'reportMessage' );

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
-use PHPUnit_Framework_MockObject_Matcher_InvokedRecorder;
+use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
 use Status;
 use Title;
@@ -88,13 +88,13 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $invokeCount
+	 * @param InvokedRecorder|null $invokeCount
 	 * @param Status|null $hookReturn
 	 *
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner(
-		PHPUnit_Framework_MockObject_Matcher_InvokedRecorder $invokeCount = null,
+		InvokedRecorder $invokeCount = null,
 		Status $hookReturn = null
 	) {
 		if ( $invokeCount === null ) {
@@ -114,14 +114,14 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $efHookCalls
+	 * @param InvokedRecorder|null $efHookCalls
 	 * @param Status|null $efHookStatus
 	 * @param User|null $user
 	 *
 	 * @return RedirectCreationInteractor
 	 */
 	private function newInteractor(
-		PHPUnit_Framework_MockObject_Matcher_InvokedRecorder $efHookCalls = null,
+		InvokedRecorder $efHookCalls = null,
 		Status $efHookStatus = null,
 		User $user = null
 	) {

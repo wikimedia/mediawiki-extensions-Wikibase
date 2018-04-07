@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use Http;
-use PHPUnit_Framework_Assert;
+use PHPUnit\Framework\Assert;
 
 /**
  * Http mock for the HttpUrlPropertyOrderProviderTest.
@@ -22,9 +22,9 @@ class HttpUrlPropertyOrderProviderTestMockHttp extends Http {
 	public static $response;
 
 	public static function get( $url, $options = [], $caller = __METHOD__ ) {
-		PHPUnit_Framework_Assert::assertSame( 'page-url', $url );
-		PHPUnit_Framework_Assert::assertInternalType( 'array', $options );
-		PHPUnit_Framework_Assert::assertInternalType( 'string', $caller );
+		Assert::assertSame( 'page-url', $url );
+		Assert::assertInternalType( 'array', $options );
+		Assert::assertInternalType( 'string', $caller );
 
 		return self::$response;
 	}

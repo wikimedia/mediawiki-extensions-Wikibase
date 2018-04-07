@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use FauxRequest;
-use PHPUnit_Framework_Error;
+use PHPUnit\Framework\Error;
 use RawMessage;
 use SpecialPageTestBase;
 use Status;
@@ -115,7 +115,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$exceptionLocalizer->expects( $this->any() )
 			->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {
-				if ( $ex instanceof PHPUnit_Framework_Error ) {
+				if ( $ex instanceof Error ) {
 					throw $ex;
 				}
 
