@@ -3,7 +3,8 @@
 		"authors": [
 			"Toliño",
 			"Banjo",
-			"Elisardojm"
+			"Elisardojm",
+			"Navhy"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",
@@ -70,8 +71,8 @@
 	"wikibase-property-notfound": "Non se atopou a propiedade \"$1\".",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Agochar",
-	"wikibase-rc-hide-wikidata-show": "Mostrar",
-	"wikibase-rc-show-wikidata-pref": "Mostrar as modificacións de {{WBREPONAME}} nos cambios recentes",
+	"wikibase-rc-hide-wikidata-show": "Amosar",
+	"wikibase-rc-show-wikidata-pref": "Amosar as modificacións de {{WBREPONAME}} nos cambios recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edición de {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Edicións de {{WBREPONAME}}",

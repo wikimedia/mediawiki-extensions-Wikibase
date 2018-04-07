@@ -378,5 +378,6 @@
 	"wikibase-pageinfo-subscription-none": "Няма",
 	"wikibase-search-bad-entity-type": "Кепскі тып элемэнту: $1",
 	"wikibase-search-bad-profile-name": "Кепская назва профілю пошуку: $1",
-	"apihelp-wbavailablebadges-description": "Запытвае даступныя элемэнты адзнакаў."
+	"apihelp-wbavailablebadges-description": "Запытвае даступныя элемэнты адзнакаў.",
+	"apihelp-wbavailablebadges-summary": "Запытвае даступныя элемэнты адзнакаў."
 }
