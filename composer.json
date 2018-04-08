@@ -54,5 +54,8 @@
 			"phpcs -p -s",
 			"minus-x check ."
 		]
+	},
+	"config": {
+		"process-timeout": 350
 	}
 }
