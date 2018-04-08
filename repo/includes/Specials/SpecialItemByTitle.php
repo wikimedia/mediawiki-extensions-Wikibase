@@ -122,7 +122,9 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				$siteObj = $this->sites->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
 					$pageName = $siteObj->normalizePageName( $page );
-					$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
+					if ( is_string( $pageName ) ) { // T191634
+						$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
+					}
 				}
 			}
 
