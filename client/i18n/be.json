@@ -40,16 +40,20 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Схаваць",
 	"wikibase-rc-hide-wikidata-show": "Паказаць",
-	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі Вікізвестак у спісе апошніх змен",
+	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі {{grammar:genitive|{{WBREPONAME}}}} у спісе апошніх змен",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-replicationnote": "Калі ласка, звернеце ўвагу, што можа прайсці некалькі хвілін, пакуль змены стануць бачнымі ва ўсіх вікі-праектах",
+	"wikibase-watchlist-show-changes-pref": "Паказаць змяненні ў {{grammar:genitive|{{WBREPONAME}}}} у спісе назірання",
 	"unconnectedpages": "Старонкі, не звязаныя з элементамі",
 	"pageswithbadges": "Старонкі з адзнакамі",
 	"pageswithbadges-summary": "Гэтая старонка змяшчае спіс старонак з адзнакамі (напрыклад, Добрага або Выдатнага артыкула). Спіс адсартаваны паводле змяншэння ID старонкі, такім чынам новыя старонкі адлюстроўваюцца ў спісе першымі.",
 	"entityusage": "Выкарыстоўванне сутнасці",
 	"entityusage-summary": "Гэтая старонка змяшчае спіс усіх старонк, якія выкарыстоўваюць дадзеную сутнасць (напрыклад, Q42). Гэты спіс адсартаваны паводле змяншэння ID старонкі, такім чынам новыя старонкі адлюстроўваюцца ў спісе першымі.",
+	"wikibase-pageinfo-entity-usage": "Сутнасці {{WBREPONAME}}, якія выкарыстоўваюцца на гэтай старонцы",
 	"wikibase-otherprojects": "У іншых праектах",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Злучэнне|Злучэнні}} з {{grammar:genitive|{{WBREPONAME}}}}",
 	"unresolved-property-category": "Старонкі з недаступнымі уласцівасцямі Вікідадзеных",
-	"unresolved-property-category-desc": "Старонка, якая спасылаецца на ўласцівасць Вікідадзеных, што не можа быць знойдзена па ID або подпісу"
+	"unresolved-property-category-desc": "Старонка, якая спасылаецца на ўласцівасць Вікідадзеных, што не можа быць знойдзена па ID або подпісу",
+	"connected-redirect-category": "Перасылкі, звязаныя з элементам {{grammar:genitive|{{WBREPONAME}}}}"
 }
