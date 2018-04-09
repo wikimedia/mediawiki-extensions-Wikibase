@@ -45,6 +45,54 @@
       "revId": "b0cdfaf8ca55a110a9e45849f6df678bcd50d8e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "037649c6_951eb31e",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T09:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78352f4e_34c38a7d",
+      "range": {
+        "startLine": 269,
+        "startChar": 12,
+        "endLine": 269,
+        "endChar": 14
+      },
+      "revId": "b0cdfaf8ca55a110a9e45849f6df678bcd50d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5caaece_1c23e45c",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T09:33:51Z",
+      "side": 1,
+      "message": "\u003e *a* string?\n\nI actually checked which is more common (grepped the my codebase, including vendor) for both forms and \"as a string\" won about 3:1. I wonder what a native speaker would consider more natural…",
+      "parentUuid": "76a06b67_188d2d2c",
+      "range": {
+        "startLine": 269,
+        "startChar": 33,
+        "endLine": 269,
+        "endChar": 39
+      },
+      "revId": "b0cdfaf8ca55a110a9e45849f6df678bcd50d8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
