@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "cd56d328_f6b649c7",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T10:08:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53c7ffe8_266a425d",
+      "range": {
+        "startLine": 239,
+        "startChar": 148,
+        "endLine": 239,
+        "endChar": 154
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf1418ae_121a85c9",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T10:08:56Z",
+      "side": 1,
+      "message": "Actually I think this was supposed to be \"to\".",
+      "parentUuid": "04be3423_808290e0",
+      "range": {
+        "startLine": 239,
+        "startChar": 187,
+        "endLine": 239,
+        "endChar": 189
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3921f3aa_d75588cb",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "a2281a0a_fc5b727a",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T10:08:56Z",
+      "side": 1,
+      "message": "I dropped the small for now… this makes this rather space eating, but I think that\u0027s fine… most people probably use the TOC to navigate anyway.\n\n\u003e Note that \u003csource\u003e is deprecated for a long time, because it\n \u003e clashes with an HTML5 element with the same name. \u003csyntaxhighlight\u003e\n \u003e should be used.\n\nAh ok, I\u0027ll change this in a follow-up for the whole file… after checking that \u003csyntaxhighlight\u003e also works on github.",
+      "parentUuid": "03b5ec1a_aabe9571",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 7
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f52e897a_2da4b225",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
@@ -106,6 +178,30 @@
       "writtenOn": "2018-04-06T17:23:56Z",
       "side": 1,
       "message": "I’m not sure if order is significant in Lua tables, but perhaps we should take a few liberties and reorder the entries? I would suggest putting the rank above the qualifiers, perhaps even above the mainsnak.",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 278,
+        "endChar": 24
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "326ae7e6_17f335aa",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T10:08:56Z",
+      "side": 1,
+      "message": "Well, order is significant in Lua if you iterate over a table… but no one should make assumptions about this order. I already reordered some of the examples, will do here as well.",
+      "parentUuid": "f52e897a_2da4b225",
       "range": {
         "startLine": 278,
         "startChar": 4,
@@ -141,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "20aa152e_aff6b45b",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T10:08:56Z",
+      "side": 1,
+      "message": "I think this is probably not something people are very interested in here… for completeness, we should still mention it, though.",
+      "parentUuid": "b1fb0df6_5ff8e46f",
+      "range": {
+        "startLine": 319,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 27
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4acaf690_143b6a1f",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
@@ -152,6 +272,24 @@
       "writtenOn": "2018-04-06T17:23:56Z",
       "side": 1,
       "message": "I would also suggest reordering the table entries a bit here – perhaps in the following order:\n\n- id\n- type\n- schemaVersion\n- labels\n- descriptions\n- aliases\n- sitelinks\n- claims",
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4142764b_760faf7c",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-09T10:08:56Z",
+      "side": 1,
+      "message": "I already reordered this so that id, type and schemaVersion are at the top. Your proposed order probably makes it easier to grasp what\u0027s relevant, will adopt.",
+      "parentUuid": "4acaf690_143b6a1f",
       "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
