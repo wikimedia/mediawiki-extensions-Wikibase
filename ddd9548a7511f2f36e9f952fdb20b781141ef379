@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d328fbca_b776a254",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-09T21:40:16Z",
+      "side": 1,
+      "message": "I don\u0027t like having those here. Wikibase is generic code, and here we insert Wikidata IDs. We should have some better solution for this.",
+      "revId": "ddd9548a7511f2f36e9f952fdb20b781141ef379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
