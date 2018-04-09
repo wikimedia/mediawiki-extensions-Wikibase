@@ -85,7 +85,7 @@
 	"datatypes-type-number": "숫자",
 	"datatypes-type-mediawiki-title": "미디어위키 제목",
 	"datatypes-type-unknown": "지정되지 않음",
-	"datatypes-type-boolean": "부울",
+	"datatypes-type-boolean": "불리언",
 	"datatypes-type-globe-coordinate": "지리적 좌표",
 	"datatypes-type-time": "시점",
 	"datatypes-type-wikibase-item": "항목",

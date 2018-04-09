@@ -380,5 +380,6 @@
 	"wikibase-search-bad-profile-name": "Кепская назва профілю пошуку: $1",
 	"apihelp-wbavailablebadges-description": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-summary": "Запытвае даступныя элемэнты адзнакаў.",
-	"apihelp-wbavailablebadges-example-1": "Запытвае ўсе даступныя элемэнты адзнакаў"
+	"apihelp-wbavailablebadges-example-1": "Запытвае ўсе даступныя элемэнты адзнакаў",
+	"apihelp-wbcreateclaim-description": "Стварае сьцьверджаньні ў Вікібазе"
 }
