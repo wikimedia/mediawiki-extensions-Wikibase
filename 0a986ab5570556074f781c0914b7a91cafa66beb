@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4bb84141_523e9a6f",
+        "filename": "repo/includes/Api/TypeDispatchingEntitySearchHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-09T17:59:14Z",
+      "side": 1,
+      "message": "The reason WebRequest is there is that we have debug options for Cirrus search that depend on request variables. I know this is not idea, especially given the fact that this particular detail infects the upper layers, but I am not sure how to avoid this as for now. Generally, we need the way to pass request information (mainly parameters) to the search layer for it to be able to control the behavior. We could switch to using \\RequestContext::getMain()-\u003egetRequest() inside the specific handlers that need it if you think it is preferable. This is using global state though which makes it less testable. If you have any other ideas please share.",
+      "parentUuid": "488f94ed_c27c8b22",
+      "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23e3554c_34d4a4ca",
         "filename": "repo/includes/Api/TypeDispatchingEntitySearchHelper.php",
         "patchSetId": 7
