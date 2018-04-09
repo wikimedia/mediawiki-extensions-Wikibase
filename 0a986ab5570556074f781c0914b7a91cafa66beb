@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "488f94ed_c27c8b22",
+        "filename": "repo/includes/Api/TypeDispatchingEntitySearchHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-04-09T15:50:14Z",
+      "side": 1,
+      "message": "Having WebRequest here is not really making me happy. Not sure what would be an alternative though. I guess moving it to some kind of entity search helper factory, that produces the object for the given web request might be an option, but is not beautiful either.\n\nAny other ideas that could be applied here?",
+      "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23e3554c_34d4a4ca",
+        "filename": "repo/includes/Api/TypeDispatchingEntitySearchHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-04-09T15:50:14Z",
+      "side": 1,
+      "message": "Given how this class is used I guess it might not be an issue in practice, but I believe one could argue that we would prefer to only have single instance of per-entity-type helper when this method is called multiple times. Currently it would create a new instance on each call.",
+      "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
