@@ -16,6 +16,24 @@
       "revId": "bda7e697a51a58d453e9c8fae46b533cd16c97c5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afb23f1a_45885fd2",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-09T12:36:51Z",
+      "side": 1,
+      "message": "overriding like this sounds interesting indeed.\nCurrently we have a possibility but it\u0027s up to rescore function itself to support this (calling getOverriddenFactor but it\u0027s currently limited to float atm).\n\nGiving the path of the param to override sounds extremely flexible indeed.\n\nProblem I see right now is how extensions could inform the RescoreBuilder that it has these override settings.\nRescoreBuilder is and will continue to be dependent on  SearchConfig so perhaps we need to make them available there?\nOr reuse the profile management service? We could have a decorator class that you pass the repository of rescore functions and then a list of overrides.\nThen the list of overrides would be applied on the fly using the code in your paste.\n\nSo when declaring profiles it\u0027d look like:\n   $service-\u003eregisterRepository(\n      new NameToBeFoundProfileOverrider(\n         ArrayProfileRepository::fromFile( SearchProfileService::RESCORE_FUNCTION_CHAINS, \u0027wikibase_base\u0027, \u0027path_to_functions.php\u0027 ),\n         [\n            \u0027path.to.rescore.component.to.override\u0027 \u003d\u003e $wbSettings[\u0027statementBoost\u0027]\n         ]\n    ) );\n\nI think that could work if this is what we want I can prepare these classes in cirrus.\n\nAlternatively I think mediawiki-config provides us all the necessary tools to do this there using IS.php (https://gerrit.wikimedia.org/r/#/c/419367/11/wmf-config/WikibaseSearchSettings.php line 136)\n\nLemme know what you prefer :)",
+      "parentUuid": "e18b6ab1_8410aa49",
+      "revId": "bda7e697a51a58d453e9c8fae46b533cd16c97c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
