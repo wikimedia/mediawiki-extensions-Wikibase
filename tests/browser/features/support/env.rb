@@ -34,7 +34,7 @@ require_all File.dirname(__FILE__) + '/modules'
 require_all File.dirname(__FILE__) + '/pages'
 require_all File.dirname(__FILE__) + '/utils'
 
-PageObject.default_element_wait = 15 # increased to avoid fails on saucelabs
+PageObject.default_element_wait = 90 # increased to avoid fails on saucelabs
 
 # TODO: find out if this is still needed? is there a real fix wait on it happening instead of sleeping? move this into one of the gems if this is needed, as other can benefit
 unless (env_no = ENV['TEST_ENV_NUMBER'].to_i).zero?
