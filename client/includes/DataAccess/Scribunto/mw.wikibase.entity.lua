@@ -121,12 +121,20 @@ Entity.create = function( data )
 	if data.schemaVersion < 2 then
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
+	if type( data.id ) ~= 'string' then
+		error( 'data.id must be a string, got ' .. type( data.id ) .. ' instead' )
+	end
 
 	local entity = data
 	maskEntityTables( entity, php.getSetting( 'fineGrainedLuaTracking' ) )
 
 	setmetatable( entity, metatable )
 	return entity
+end
+
+-- Get the id serialization from this entity.
+methodtable.getId = function( entity )
+	return entity.id
 end
 
 -- Get a term of a given type for a given language code or the content language (on monolingual wikis)
