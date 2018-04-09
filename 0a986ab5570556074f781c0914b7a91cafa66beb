@@ -33,6 +33,24 @@
       "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad1c4cd6_708b29d5",
+        "filename": "repo/includes/Api/TypeDispatchingEntitySearchHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-09T17:53:53Z",
+      "side": 1,
+      "message": "Isn\u0027t that how the callbacks are supposed to work? We could redesign the callbacks system to involve caching layer or introduce a caching layer somewhere here, but that\u0027s not the purpose of this patch. Also, persisting handlers means we will have to reset the state (e.g. search context, request context, etc.) each time - which potentially can make it more time-consuming than creating a new handler class each time. I am not sure we could actually save that much by caching the handler - the object is pretty small. What is the reason for having single instance as opposed to instance per request? BTW, I don\u0027t think we even have a code path that can run more than one getRankedSearchResults per request, do we?",
+      "parentUuid": "23e3554c_34d4a4ca",
+      "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
