@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "aa91ffbd_109cd35b",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-09T14:37:42Z",
+      "side": 1,
+      "message": "You’re right, that makes a lot more sense.",
+      "parentUuid": "cf1418ae_121a85c9",
+      "range": {
+        "startLine": 239,
+        "startChar": 187,
+        "endLine": 239,
+        "endChar": 189
+      },
+      "revId": "1cf64a3705af096ce67060cbe9b5ce974aabd833",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3921f3aa_d75588cb",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
