@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "369f08cc_7725b55f",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-10T11:19:16Z",
+      "side": 1,
+      "message": "This works as $revWhere[\u0027tables\u0027] has aliases as keys. Generally + with arrays makes me uncomfortable (as it\u0027s so often used wrong).",
+      "range": {
+        "startLine": 373,
+        "startChar": 18,
+        "endLine": 373,
+        "endChar": 19
+      },
+      "revId": "9100d324015edcc8194d6a5b7e98eda2d413f6fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
