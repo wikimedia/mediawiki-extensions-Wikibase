@@ -381,5 +381,6 @@
 	"apihelp-wbavailablebadges-description": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-summary": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-example-1": "Запытвае ўсе даступныя элемэнты адзнакаў",
-	"apihelp-wbcreateclaim-description": "Стварае сьцьверджаньні ў Вікібазе"
+	"apihelp-wbcreateclaim-description": "Стварае сьцьверджаньні ў Вікібазе",
+	"apihelp-wbcreateclaim-summary": "Стварае сьцьверджаньні ў Вікібазе."
 }

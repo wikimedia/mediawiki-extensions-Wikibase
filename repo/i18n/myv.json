@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Botuzhaleny-sodamo",
-			"Macofe"
+			"Macofe",
+			"Rueter"
 		]
 	},
 	"wikibase-edit": "витнемс-петнемс",
 	"wikibase-add": "поладомс",
+	"wikibase-sitelinks-special": "Лия сайтат",
+	"wikibase-statementview-rank-normal": "Эрьва чинь ранг",
 	"wikibase-itemdisambiguation-lookup-language": "Келень кодось:",
 	"wikibase-modifyterm-language": "Келень кодось:",
 	"wikibase-entitieswithoutlabel-label-language": "Келень кодось:",

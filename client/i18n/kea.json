@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Quintino Lopes Castro Tavares"
+		]
+	},
+	"tooltip-t-wikibase": "Ligason pa elementu na repositóriu di dadus",
+	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
+	"wikibase-editlinks": "Muda liganson di iperlinks",
+	"wikibase-editlinkstitle": "Edita ligasons interlínguas"
+}

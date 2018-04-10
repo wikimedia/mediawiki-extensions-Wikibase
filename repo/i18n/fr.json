@@ -238,7 +238,7 @@
 	"wikibase-newentity-description": "Description&nbsp;:",
 	"wikibase-newentity-submit": "Créer",
 	"special-setlabel": "Définir un libellé",
-	"wikibase-search-result-stats": "$1 instruction{{PLURAL:$1||s}}, $2 lien{{PLURAL:$2||s}} de site",
+	"wikibase-search-result-stats": "$1 déclaration{{PLURAL:$1||s}}, $2 lien{{PLURAL:$2||s}} de site",
 	"wikibase-setlabel-introfull": "Vous êtes en train de définir le libellé en $2 pour [[$1]].",
 	"wikibase-setlabel-intro": "Ce formulaire vous permet de définir le libellé d'une entité. Vous devez fournir l'ID de l'entité (par exemple Q23), un code de langue (par exemple en) et le libellé à définir.",
 	"wikibase-setlabel-label": "Libellé:",
