@@ -62,6 +62,10 @@ local function testCreate( data )
 	return mw.wikibase.entity.create( data )
 end
 
+local function testGetId()
+	return getNewTestItem():getId()
+end
+
 local function testGetLabel( code )
 	return getNewTestItem():getLabel( code )
 end
@@ -260,6 +264,10 @@ local tests = {
 	  args = { {} },
 	  expect = 'Expected a non-empty table obtained via mw.wikibase.getEntityObject'
 	},
+	{ name = 'mw.wikibase.entity.create without id', func = testCreate,
+	  args = { { schemaVersion = 2 } },
+	  expect = 'data.id must be a string, got nil instead'
+	},
 	{ name = 'mw.wikibase.entity.create without schemaVersion', func = testCreate,
 	  args = { { id = 'Q1' } },
 	  expect = 'data.schemaVersion must be a number, got nil instead'
@@ -275,6 +283,9 @@ local tests = {
 	{ name = 'mw.wikibase.entity.create (no table)', func = testCreate, type='ToString',
 	  args = { nil },
 	  expect = 'Expected a table obtained via mw.wikibase.getEntityObject, got nil instead'
+	},
+	{ name = 'mw.wikibase.entity.getId', func = testGetId,
+	  expect = { 'Q123' }
 	},
 	{ name = 'mw.wikibase.entity.getLabel 1', func = testGetLabel, type='ToString',
 	  args = { 'de' },
