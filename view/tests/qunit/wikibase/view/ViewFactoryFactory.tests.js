@@ -1,54 +1,52 @@
 ( function ( $, sinon, QUnit, wb, ViewFactoryFactory ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.view.ViewFactoryFactory' );
+	var sandbox = sinon.sandbox.create();
+
+	QUnit.module( 'wikibase.view.ViewFactoryFactory', {
+		beforeEach: function () {
+			sandbox.stub( wikibase.view, 'ControllerViewFactory' );
+			sandbox.stub( wikibase.view, 'ReadModeViewFactory' );
+		},
+		afterEach: function () {
+			sandbox.restore();
+		}
+	} );
 
 	QUnit.test( 'returns ControllerViewFactory when editable', function ( assert ) {
 		assert.expect( 2 );
 		var factory = new ViewFactoryFactory(),
-			controllerViewStub = sinon.stub( wikibase.view, 'ControllerViewFactory' ),
 			result = factory.getViewFactory( true, [] );
 
-		sinon.assert.calledWithNew( controllerViewStub );
-		assert.ok( result instanceof controllerViewStub );
-
-		controllerViewStub.restore();
+		sinon.assert.calledWithNew( wikibase.view.ControllerViewFactory );
+		assert.ok( result instanceof wikibase.view.ControllerViewFactory );
 	} );
 
 	QUnit.test( 'returns ReadModeViewFactory when not editable', function ( assert ) {
 		assert.expect( 2 );
 		var factory = new ViewFactoryFactory(),
-			readModeViewFactory = sinon.stub( wikibase.view, 'ReadModeViewFactory' ),
 			result = factory.getViewFactory( false, [] );
 
-		sinon.assert.calledWithNew( readModeViewFactory );
-		assert.ok( result instanceof readModeViewFactory );
-
-		readModeViewFactory.restore();
+		sinon.assert.calledWithNew( wikibase.view.ReadModeViewFactory );
+		assert.ok( result instanceof wikibase.view.ReadModeViewFactory );
 	} );
 
 	QUnit.test( 'ControllerViewFactory is called with correct arguments', function ( assert ) {
 		assert.expect( 1 );
-		var factory = new ViewFactoryFactory(),
-			controllerViewStub = sinon.stub( wikibase.view, 'ControllerViewFactory' );
+		var factory = new ViewFactoryFactory();
 
 		factory.getViewFactory( true, [ 1, 2, 3 ] );
 
-		assert.ok( controllerViewStub.calledWith( 1, 2, 3 ) );
-
-		controllerViewStub.restore();
+		assert.ok( wikibase.view.ControllerViewFactory.calledWith( 1, 2, 3 ) );
 	} );
 
 	QUnit.test( 'ReadModeViewFactory is called with correct arguments', function ( assert ) {
 		assert.expect( 1 );
-		var factory = new ViewFactoryFactory(),
-			readModeViewStub = sinon.stub( wikibase.view, 'ReadModeViewFactory' );
+		var factory = new ViewFactoryFactory();
 
 		factory.getViewFactory( false, [ 1, 2, 3 ] );
 
-		assert.ok( readModeViewStub.calledWith( 3 ) );
-
-		readModeViewStub.restore();
+		assert.ok( wikibase.view.ReadModeViewFactory.calledWith( 3 ) );
 	} );
 
 }( jQuery, sinon, QUnit, wikibase, wikibase.view.ViewFactoryFactory ) );
