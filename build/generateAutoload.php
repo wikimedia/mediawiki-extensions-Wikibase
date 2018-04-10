@@ -32,8 +32,11 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/EntityRevisionLookupTestCase.php',
 				'tests/phpunit/MockPropertyLabelResolver.php',
 				'tests/phpunit/MockRepository.php',
+				'tests/phpunit/Changes/ChangeRowTest.php',
+				'tests/phpunit/Changes/EntityChangeTest.php',
 				'tests/phpunit/Changes/MockRepoClientCentralIdLookup.php',
 				'tests/phpunit/Changes/TestChanges.php',
+				'tests/phpunit/Store/EntityInfoBuilderTestCase.php',
 				'tests/phpunit/Store/EntityTermLookupTest.php',
 				'tests/phpunit/Store/HttpUrlPropertyOrderProviderTestMockHttp.php',
 				'tests/phpunit/Store/MockChunkAccess.php',
@@ -68,6 +71,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializationTester.php',
 				'tests/phpunit/includes/ChangeOp/Deserialization/DescriptionsChangeOpDeserializationTester.php',
 				'tests/phpunit/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializationTester.php',
+				'tests/phpunit/includes/Content/EntityContentTestCase.php',
 				'tests/phpunit/includes/Content/EntityHandlerTestCase.php',
 				'tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',
 				'tests/phpunit/includes/Rdf/NTriplesRdfTestHelper.php',
@@ -98,7 +102,13 @@ class GenerateWikibaseAutoload extends Maintenance {
 			]
 		);
 
-		$this->generateAutoloadForComponent( 'view', [ 'src' ] );
+		$this->generateAutoloadForComponent(
+			'view',
+			[ 'src' ],
+			[
+				'tests/phpunit/EntityViewTestCase.php',
+			]
+		);
 
 		echo "Done.\n\n";
 	}
