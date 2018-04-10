@@ -3,7 +3,6 @@
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModelServices.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModelServices)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/?branch=master)
-[![Dependency Status](https://www.versioneye.com/php/wikibase:data-model-services/dev-master/badge.svg)](https://www.versioneye.com/php/wikibase:data-model-services/dev-master)
 [![Download count](https://poser.pugx.org/wikibase/data-model-services/d/total.png)](https://packagist.org/packages/wikibase/data-model-services)
 [![License](https://poser.pugx.org/wikibase/data-model-services/license.svg)](https://packagist.org/packages/wikibase/data-model-services)
 
