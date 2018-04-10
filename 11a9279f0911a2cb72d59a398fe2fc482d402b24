@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80f67eff_0794fefa",
+        "filename": "view/tests/qunit/wikibase/view/ViewFactoryFactory.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-04-10T07:04:52Z",
+      "side": 1,
+      "message": "@leszek-wmde Somehow this syntax surprises me; can\u0027t remember having it seen this way. Could this be a solution to the strange JS CI problems we encountered recently?",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "11a9279f0911a2cb72d59a398fe2fc482d402b24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
