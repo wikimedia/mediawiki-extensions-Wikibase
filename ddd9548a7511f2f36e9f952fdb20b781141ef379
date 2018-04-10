@@ -16,6 +16,24 @@
       "revId": "ddd9548a7511f2f36e9f952fdb20b781141ef379",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfb966a9_39dfcf6c",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-10T20:51:47Z",
+      "side": 1,
+      "message": "I sent another proposal that keeps the statementBoost config var, lemme know if this better suits your needs.",
+      "parentUuid": "d328fbca_b776a254",
+      "revId": "ddd9548a7511f2f36e9f952fdb20b781141ef379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
