@@ -122,12 +122,10 @@ class EditFilterHookRunner {
 	 * @return MutableContext
 	 */
 	private function getContextForEditFilter( EntityId $entityId = null, $entityType ) {
+		$context = clone $this->context;
 		if ( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );
-			$context = clone $this->context;
 		} else {
-			$context = $this->context;
-
 			// This constructs a "fake" title of the form Property:NewProperty,
 			// where the title text is assumed to be name of the special page used
 			// to create entities of the given type. This is used by the
