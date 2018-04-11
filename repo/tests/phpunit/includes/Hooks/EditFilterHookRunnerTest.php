@@ -34,10 +34,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	/**
 	 * @return EditFilterHookRunner
 	 */
-	public function getEditFilterHookRunner() {
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest() );
-
+	public function getEditFilterHookRunner( RequestContext $context ) {
 		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -75,13 +72,22 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	public function testRun_noHooksRegisteredGoodStatus() {
 		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'EditFilterMergedContent' => [] ] );
 
-		$runner = $this->getEditFilterHookRunner();
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+		$preContext = clone $context;
+
+		$runner = $this->getEditFilterHookRunner( $context );
 		$status = $runner->run(
 			new Item(),
 			User::newFromName( 'EditFilterHookRunnerTestUser' ),
 			'summary'
 		);
 		$this->assertTrue( $status->isGood() );
+		$this->assertEquals(
+			$preContext,
+			$context,
+			'Context should not be altered'
+		);
 	}
 
 	public function runData() {
@@ -181,13 +187,23 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			'wgHooks' => $hooks
 		] );
 
-		$runner = $this->getEditFilterHookRunner();
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+		$preContext = clone $context;
+
+		$runner = $this->getEditFilterHookRunner( $context );
 		$status = $runner->run(
 			$new,
 			User::newFromName( 'EditFilterHookRunnerTestUser' ),
 			'summary'
 		);
 		$this->assertEquals( $expected['status'], $status );
+
+		$this->assertEquals(
+			$preContext,
+			$context,
+			'Context should not be altered'
+		);
 	}
 
 }
