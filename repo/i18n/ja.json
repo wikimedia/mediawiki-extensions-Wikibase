@@ -349,7 +349,7 @@
 	"action-item-merge": "項目を統合",
 	"action-property-create": "プロパティを作成",
 	"apihelp-wbcreateclaim-description": "Wikibaseの主張を作成",
-	"apihelp-wbcreateclaim-param-entity": "主張を追加する実体のID",
+	"apihelp-wbcreateclaim-param-entity": "主張を追加するエンティティのID",
 	"apihelp-wbcreateredirect-description": "実体のリダイレクトを作成します。",
 	"apihelp-wbcreateredirect-param-from": "リダイレクトを作成する実体ID",
 	"apihelp-wbcreateredirect-param-to": "リダイレクト先の実体ID",
