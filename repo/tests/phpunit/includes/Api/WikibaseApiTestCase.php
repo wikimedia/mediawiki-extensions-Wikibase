@@ -85,11 +85,17 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $params
 	 * @param array|null $session
 	 * @param User|null $user
+	 * @param string $tokenType
 	 *
 	 * @throws ApiUsageException
 	 * @return array( array|null $resultData, WebRequest $request, array $sessionArray )
 	 */
-	protected function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
+	protected function doApiRequestWithToken(
+		array $params,
+		array $session = null,
+		User $user = null,
+		$tokenType = 'csrf'
+	) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
 		}
@@ -98,7 +104,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$params['token'] = $user->getEditToken();
 		}
 
-		return $this->doApiRequest( $params, $session, false, $user );
+		return $this->doApiRequest( $params, $session, false, $user, $tokenType );
 	}
 
 	/**
