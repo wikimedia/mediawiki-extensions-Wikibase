@@ -224,17 +224,30 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function validateParameters( array $params ) {
 		$entityReferenceBySiteLinkGiven = isset( $params['site'] ) && isset( $params['title'] );
+		$entityReferenceBySiteLinkPartial = ( isset( $params['site'] ) xor isset( $params['title'] ) );
 		$entityIdGiven = isset( $params['id'] );
 		$shouldCreateNewWithSomeType = isset( $params['new'] );
 
-		$createNew_AndOr_IdIsGiven = $entityIdGiven || $shouldCreateNewWithSomeType;
+		$noReferenceIsGiven = !$entityIdGiven && !$shouldCreateNewWithSomeType && !$entityReferenceBySiteLinkGiven;
+		$bothReferencesAreGiven = $entityIdGiven && $entityReferenceBySiteLinkGiven;
 
-		$noReferenceIsGiven = !$createNew_AndOr_IdIsGiven && !$entityReferenceBySiteLinkGiven;
-		$bothReferencesAreGiven = $createNew_AndOr_IdIsGiven && $entityReferenceBySiteLinkGiven;
+		if ( $entityReferenceBySiteLinkPartial ) {
+			$this->errorReporter->dieWithError(
+				'wikibase-api-illegal-id-or-site-page-selector',
+				'param-missing'
+			);
+		}
 
 		if ( $noReferenceIsGiven || $bothReferencesAreGiven ) {
 			$this->errorReporter->dieWithError(
 				'wikibase-api-illegal-id-or-site-page-selector',
+				'param-illegal'
+			);
+		}
+
+		if ( $shouldCreateNewWithSomeType && ( $entityIdGiven || $entityReferenceBySiteLinkGiven ) ) {
+			$this->errorReporter->dieWithError(
+				'Either provide the item "id" or pairs of "site" and "title" or a "new" type for an entity',
 				'param-illegal'
 			);
 		}

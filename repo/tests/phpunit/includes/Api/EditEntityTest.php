@@ -604,6 +604,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 */
 	public function provideExceptionData() {
 		return [
+			'no entity id given' => [
+				'p' => [ 'data' => '{}' ],
+				'e' => [ 'exception' => [
+					'type' => ApiUsageException::class,
+					'code' => 'param-illegal'
+				] ] ],
 			'empty entity id given' => [
 				'p' => [ 'id' => '', 'data' => '{}' ],
 				'e' => [ 'exception' => [
@@ -640,11 +646,18 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'param-missing'
 				] ] ],
+			'missing site but id given' => [
+				'p' => [ 'title' => 'abcde', 'id' => 'Q12', 'data' => '{}' ],
+				'e' => [ 'exception' => [
+					'type' => ApiUsageException::class,
+					'code' => 'param-missing'
+				] ] ],
 			'cant have id and new' => [
 				'p' => [ 'id' => 'q666', 'new' => 'item', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-missing'
+					'code' => 'param-illegal',
+					'message' => 'Either provide the item "id" or pairs of "site" and "title" or a "new" type for an entity',
 				] ] ],
 			'when clearing must also have data!' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ],
