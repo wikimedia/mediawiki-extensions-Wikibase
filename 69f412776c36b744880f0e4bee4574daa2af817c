@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6af2320e_6d50fb03",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexSearchFieldsClearer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-11T14:51:19Z",
+      "side": 1,
+      "message": "I know it\u0027s not a typo, more like what about this name? I\u0027m fine either way :D",
+      "parentUuid": "cd19c421_853dab5c",
+      "range": {
+        "startLine": 17,
+        "startChar": 30,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "69f412776c36b744880f0e4bee4574daa2af817c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e9996f2_ee404ce5",
         "filename": "repo/includes/Store/Sql/TermSqlIndexSearchFieldsClearer.php",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Hm, won’t that potentially make the query more expensive, in case it has to skip a lot of cleared rows?\n\n(But I guess it’s better to have a slightly more expensive SELECT on the replica to avoid unnecessary UPDATEs on the master…)",
       "parentUuid": "1e9996f2_ee404ce5",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 37
+      },
+      "revId": "69f412776c36b744880f0e4bee4574daa2af817c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86ff93ff_5cb5bd5e",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexSearchFieldsClearer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-11T14:51:19Z",
+      "side": 1,
+      "message": "Yes, exactly. Replica is scalable, master is not",
+      "parentUuid": "92810e9e_9c4bbc23",
       "range": {
         "startLine": 134,
         "startChar": 4,
