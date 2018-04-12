@@ -158,39 +158,6 @@ class EditEntity extends ModifyEntity {
 		return ( $title !== null && $title->exists() );
 	}
 
-	/**
-	 * @see ModifyEntity::validateParameters
-	 *
-	 * @param array $params
-	 */
-	protected function validateParameters( array $params ) {
-		$hasId = isset( $params['id'] );
-		$hasNew = isset( $params['new'] );
-		$hasSiteLink = isset( $params['site'] ) && isset( $params['title'] );
-		$hasSiteLinkPart = isset( $params['site'] ) || isset( $params['title'] );
-
-		if ( !( $hasId xor $hasSiteLink xor $hasNew ) ) {
-			$this->errorReporter->dieError(
-				'Either provide the item "id" or pairs of "site" and "title" or a "new" type for'
-					. ' an entity',
-				'param-missing'
-			);
-		}
-		if ( $hasId && $hasSiteLink ) {
-			$this->errorReporter->dieWithError(
-				'wikibase-api-illegal-id-or-site-page-selector',
-				'param-illegal'
-			);
-		}
-		if ( ( $hasId || $hasSiteLinkPart ) && $hasNew ) {
-			$this->errorReporter->dieError(
-				'Parameters "id", "site", "title" and "new" are not allowed to be both set in the'
-					. ' same request',
-				'param-illegal'
-			);
-		}
-	}
-
 	protected function prepareParameters( array $params ) {
 		$this->validateDataParameter( $params );
 		$params['data'] = json_decode( $params['data'], true );

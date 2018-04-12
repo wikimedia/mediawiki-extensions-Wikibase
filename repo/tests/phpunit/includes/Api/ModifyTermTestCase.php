@@ -194,14 +194,14 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'title' => 'Blub', 'language' => 'en', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal',
+					'code' => 'param-missing',
 				] ]
 			],
 			[ //8
 				'p' => [ 'site' => 'enwiki', 'language' => 'en', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal',
+					'code' => 'param-missing',
 				] ]
 			],
 		];
