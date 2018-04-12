@@ -98,10 +98,6 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 			->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnValue( $ok ) );
 
-		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityType' )
-			->will( $this->returnValue( $ok ) );
-
 		return $permissionChecker;
 	}
 

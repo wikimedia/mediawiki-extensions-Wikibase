@@ -247,10 +247,6 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dupeDetector->expects( $this->any() )
-			->method( 'detectTermConflicts' )
-			->will( $this->returnValue( Status::newGood() ) );
-
 		return new TermValidatorFactory(
 			100,
 			[ 'en', 'de', 'fr' ],

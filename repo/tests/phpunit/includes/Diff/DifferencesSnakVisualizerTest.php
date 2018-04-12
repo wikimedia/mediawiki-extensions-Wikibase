@@ -36,9 +36,6 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 			->method( 'getFormat' )
 			->will( $this->returnValue( $format ) );
 		$instance->expects( $this->any() )
-			->method( 'canFormatSnak' )
-			->will( $this->returnValue( true ) );
-		$instance->expects( $this->any() )
 			->method( 'formatSnak' )
 			->will( $this->returnValue( $returnValue ) );
 		return $instance;

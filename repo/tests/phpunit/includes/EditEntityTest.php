@@ -59,10 +59,6 @@ class EditEntityTest extends MediaWikiTestCase {
 				);
 			} ) );
 
-		$titleLookup->expects( $this->any() )
-			->method( 'getNamespaceForType' )
-			->will( $this->returnValue( NS_MAIN ) );
-
 		return $titleLookup;
 	}
 

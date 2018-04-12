@@ -186,9 +186,6 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		$change->expects( $this->never() )
 			->method( 'getType' );
 
-		$change->expects( $this->never() )
-			->method( 'getUser' );
-
 		$change->expects( $this->any() )
 			->method( 'isEmpty' )
 			->will( $this->returnValue( false ) );

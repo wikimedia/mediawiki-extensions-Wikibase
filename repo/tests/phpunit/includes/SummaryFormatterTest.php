@@ -90,9 +90,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$valueFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback( [ $this, 'formatValue' ] ) );
-		$valueFormatter->expects( $this->any() )
-			->method( 'getFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->any() )
