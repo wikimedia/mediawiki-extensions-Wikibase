@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f398f8b_a2d8e95d",
+        "filename": "repo/maintenance/clearTermSqlIndexSearchFields.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-12T18:15:21Z",
+      "side": 1,
+      "message": "You can have boolean arguments. This saves a lot of complexity here:\nFor example see --verbose: https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/repo/maintenance/populateChangesSubscription.php#L29",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 3
+      },
+      "revId": "072b823303b153531d4f6f564770a8455dbe6efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
