@@ -37,11 +37,26 @@
 		 */
 		getAll: function () {
 			// Cache language codes
-			if ( !this._languageCodes && this._languageMap ) {
-				this._languageCodes = $.map( this._languageMap, function ( val, key ) {
-					return key;
-				} );
-				this._languageCodes = $.grep( this._languageCodes, function ( code ) {
+			if ( !this._languageCodes ) {
+				this._languageCodes = this._languageMap ? Object.keys( this._languageMap ) : [];
+
+				// FIXME: This must be kept in sync with WikibaseRepo::getMonolingualTextLanguages()
+				// in the backend! Introduce a ResourceLoader module for this!
+				this._languageCodes = this._languageCodes.concat( [
+					// Special ISO 639-2 codes
+					'und', 'mis', 'mul', 'zxx',
+
+					// Other valid codes without MediaWiki localization
+					'abe', 'ami', 'bnn', 'brx', 'chn', 'cnr', 'cop', 'ett', 'eya', 'fkv', 'fos',
+					'fr-ca', 'frm', 'fro', 'fuf', 'gez', 'hai', 'kjh', 'koy', 'lag', 'lkt', 'lld',
+					'mnc', 'moe', 'non', 'nr', 'nxm', 'ood', 'otk', 'pjt', 'ppu', 'pwn', 'pyu',
+					'quc', 'sjd', 'sju', 'smn', 'sms', 'ssf', 'trv', 'tzl', 'umu', 'uun', 'xpu',
+					'yap', 'zun'
+				] );
+
+				// FIXME: This does not remove all codes WikibaseRepo::getMonolingualTextLanguages()
+				// removes in the backend!
+				$.grep( this._languageCodes, function ( code ) {
 					// Make sure this is a subset of the language codes returned by
 					// WikibaseRepo::getMonolingualTextLanguages
 					// We don't want to have language codes in the suggester that are not
