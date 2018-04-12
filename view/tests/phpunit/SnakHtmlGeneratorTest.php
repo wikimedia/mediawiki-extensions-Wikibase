@@ -35,9 +35,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return SnakHtmlGenerator
 	 */
-	private function getSnakHtmlGenerator(
-		PHPUnit_Framework_MockObject_Matcher_Invocation $formatPropertyIdMatcher
-	) {
+	private function getSnakHtmlGenerator( $formatPropertyIdMatcher ) {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->once() )
 			->method( 'formatSnak' )
