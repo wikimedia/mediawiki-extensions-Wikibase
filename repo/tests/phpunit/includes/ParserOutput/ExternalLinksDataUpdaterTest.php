@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
+use PHPUnit4And6Compat;
 use ParserOutput;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -19,6 +20,7 @@ use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
  * @author Thiemo Kreuz
  */
 class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ExternalLinksDataUpdater

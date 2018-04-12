@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use Language;
+use PHPUnit4And6Compat;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use ValueParsers\Test\StringValueParserTest;
@@ -21,6 +22,7 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
  * @author Marius Hoch
  */
 class MwTimeIsoParserTest extends StringValueParserTest {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @see ValueParserTestBase::getInstance

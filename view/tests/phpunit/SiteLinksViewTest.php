@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use PHPUnit4And6Compat;
 use Site;
 use SiteList;
 use ValueFormatters\NumberLocalizer;
@@ -32,6 +33,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Thiemo Kreuz
  */
 class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testNoGroups() {
 		$html = $this->newInstance()->getHtml( [], null, [] );

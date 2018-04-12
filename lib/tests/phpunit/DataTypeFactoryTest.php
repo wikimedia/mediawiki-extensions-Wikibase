@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
@@ -18,6 +19,7 @@ use OutOfBoundsException;
  * @author Thiemo Mättig
  */
 class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider valueTypesProvider

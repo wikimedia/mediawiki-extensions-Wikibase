@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
@@ -15,6 +16,7 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * @author Marius Hoch < hoo@online.de >
  */
 class FallbackPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function getPropertyOrderProvider() {
 		return [

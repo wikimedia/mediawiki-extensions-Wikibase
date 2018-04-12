@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -32,6 +33,7 @@ use Wikibase\View\TermsListView;
  * @author Thiemo Kreuz
  */
 class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getEntityTermsView( $editSectionCalls = 0, TermsListView $termsListView = null ) {
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );

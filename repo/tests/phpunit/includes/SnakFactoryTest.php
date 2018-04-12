@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
@@ -24,6 +25,7 @@ use Wikibase\Repo\SnakFactory;
  * @author Daniel Kinzler
  */
 class SnakFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function newInstance() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
