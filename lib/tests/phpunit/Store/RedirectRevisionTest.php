@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\RedirectRevision;
@@ -17,6 +18,7 @@ use Wikibase\Lib\Store\RedirectRevision;
  * @author Thiemo Kreuz
  */
 class RedirectRevisionTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function newRedirect() {
 		return new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) );

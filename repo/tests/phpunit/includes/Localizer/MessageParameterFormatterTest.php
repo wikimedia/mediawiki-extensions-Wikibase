@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\DecimalValue;
 use HashSiteStore;
 use Language;
+use PHPUnit4And6Compat;
 use Site;
 use SiteLookup;
 use ValueFormatters\ValueFormatter;
@@ -24,6 +25,7 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
  * @author Daniel Kinzler
  */
 class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function formatProvider() {
 		$decimal = new DecimalValue( '+123.456' );

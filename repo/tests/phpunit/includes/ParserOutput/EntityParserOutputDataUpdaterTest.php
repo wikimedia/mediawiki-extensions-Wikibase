@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use ParserOutput;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
@@ -23,6 +24,7 @@ use Wikibase\Repo\ParserOutput\StatementDataUpdater;
  * @author Thiemo Kreuz
  */
 class EntityParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider entitiesProvider

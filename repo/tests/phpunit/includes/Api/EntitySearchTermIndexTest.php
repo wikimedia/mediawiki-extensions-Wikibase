@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,6 +28,7 @@ use Wikibase\TermIndexEntry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	const EXISTING_LOCAL_ITEM = 'Q111';
 	const FOREIGN_REPO_PREFIX = 'foreign';

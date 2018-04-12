@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use OutOfBoundsException;
+use PHPUnit4And6Compat;
 use Wikibase\SettingsArray;
 
 /**
@@ -14,6 +15,7 @@ use Wikibase\SettingsArray;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider settingProvider

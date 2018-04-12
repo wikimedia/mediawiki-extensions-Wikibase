@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Store;
 
+use PHPUnit4And6Compat;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\SubscriptionManager;
@@ -22,6 +23,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Marius Hoch
  */
 class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function addUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );

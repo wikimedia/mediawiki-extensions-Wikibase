@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use HashBagOStuff;
+use PHPUnit4And6Compat;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\OtherProjectsSitesProvider;
 
@@ -17,6 +18,7 @@ use Wikibase\Client\OtherProjectsSitesProvider;
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingOtherProjectsSitesProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return OtherProjectsSitesProvider

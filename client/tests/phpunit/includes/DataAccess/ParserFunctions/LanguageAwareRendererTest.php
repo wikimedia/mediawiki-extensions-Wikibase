@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
 use Language;
+use PHPUnit4And6Compat;
 use ParserOutput;
 use Title;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -34,6 +35,7 @@ use Wikibase\Lib\SnakFormatter;
  * @author Daniel Kinzler
  */
 class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver

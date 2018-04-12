@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -16,6 +17,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @author Daniel Kinzler
  */
 class FieldPropertyInfoProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider provideGetPropertyInfo

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -25,6 +26,7 @@ use Wikibase\Lib\SnakFormatter;
  * @author Daniel Kinzler
  */
 class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param string $dataType
