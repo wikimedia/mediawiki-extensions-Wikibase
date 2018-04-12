@@ -90,9 +90,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return ChunkAccess Guaranteed to only return Change objects from loadChunk.
 	 */
-	private function getChunkedChangesAccess(
-		PHPUnit_Framework_MockObject_Matcher_Invocation $expectedLoadChunkCalls = null
-	) {
+	private function getChunkedChangesAccess( $expectedLoadChunkCalls = null ) {
 		$chunkedAccess = $this->getMock( ChunkAccess::class );
 
 		$chunkedAccess->expects( $expectedLoadChunkCalls ?: $this->never() )

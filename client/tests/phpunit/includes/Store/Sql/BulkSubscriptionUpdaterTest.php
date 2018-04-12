@@ -253,7 +253,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 	 *
 	 * @return ExceptionHandler
 	 */
-	private function getExceptionHandler( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
+	private function getExceptionHandler( $matcher ) {
 		$mock = $this->getMock( ExceptionHandler::class );
 		$mock->expects( $matcher )
 			->method( 'handleException' );
@@ -266,7 +266,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 	 *
 	 * @return MessageReporter
 	 */
-	private function getMessageReporter( PHPUnit_Framework_MockObject_Matcher_Invocation $matcher ) {
+	private function getMessageReporter( $matcher ) {
 		$mock = $this->getMock( MessageReporter::class );
 		$mock->expects( $matcher )
 			->method( 'reportMessage' );

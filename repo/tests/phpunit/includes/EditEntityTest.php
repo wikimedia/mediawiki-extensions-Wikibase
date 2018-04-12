@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWikiTestCase;
 use ObjectCache;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
 use Status;
 use Title;
@@ -102,7 +101,7 @@ class EditEntityTest extends MediaWikiTestCase {
 
 	private function getMockEditFitlerHookRunner(
 		Status $status = null,
-		PHPUnit_Framework_MockObject_Matcher_Invocation $expects = null
+		$expects = null
 	) {
 		if ( is_null( $status ) ) {
 			$status = Status::newGood();
