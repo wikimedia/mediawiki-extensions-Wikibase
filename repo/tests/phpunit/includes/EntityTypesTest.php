@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityHandler;
@@ -16,6 +17,7 @@ use Wikibase\View\EntityView;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getRegistry() {
 		return require __DIR__  . '/../../../WikibaseRepo.entitytypes.php';

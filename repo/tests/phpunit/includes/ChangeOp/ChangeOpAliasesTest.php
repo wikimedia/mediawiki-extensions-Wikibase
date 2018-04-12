@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOpAliases;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Content\EntityInstanceHolder;
@@ -22,6 +23,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Daniel Kinzler
  */
 class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getTermValidatorFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );

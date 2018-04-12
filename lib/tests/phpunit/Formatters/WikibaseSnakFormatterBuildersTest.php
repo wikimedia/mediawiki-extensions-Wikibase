@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
 use InvalidArgumentException;
@@ -28,6 +29,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @author Daniel Kinzler
  */
 class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return WikibaseSnakFormatterBuilders

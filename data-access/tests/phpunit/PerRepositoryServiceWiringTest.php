@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
+use PHPUnit4And6Compat;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
@@ -27,6 +28,7 @@ use Wikibase\TermIndex;
  * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return PerRepositoryServiceContainer

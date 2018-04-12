@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use InvalidArgumentException;
 use Language;
 use OutOfBoundsException;
+use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,6 +27,7 @@ use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
  * @author Daniel Kinzler
  */
 class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider provideGetLabelDescriptionLookup

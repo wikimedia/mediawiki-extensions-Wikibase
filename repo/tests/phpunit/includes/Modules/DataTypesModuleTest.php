@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Modules;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use Exception;
 use ResourceLoaderContext;
@@ -17,6 +18,7 @@ use Wikibase\Repo\Modules\DataTypesModule;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideDataTypesModuleAndResourceDefinition() {
 		$dataTypeFactory = new DataTypeFactory( [ 'url' => 'string' ] );

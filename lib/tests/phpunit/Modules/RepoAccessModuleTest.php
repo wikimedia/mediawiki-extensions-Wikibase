@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
+use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use Wikibase\RepoAccessModule;
 
@@ -14,6 +15,7 @@ use Wikibase\RepoAccessModule;
  * @author Thiemo Kreuz
  */
 class RepoAccessModuleTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ResourceLoaderContext

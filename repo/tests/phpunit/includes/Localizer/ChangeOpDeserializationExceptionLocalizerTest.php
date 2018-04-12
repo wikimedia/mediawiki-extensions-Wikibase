@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Localizer;
 
 use InvalidArgumentException;
 use Message;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 
@@ -15,6 +16,7 @@ use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
  * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializationExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testGivenExceptionOfOtherType_hasExceptionMessageReturnsFalse() {
 		$localizer = new ChangeOpDeserializationExceptionLocalizer();

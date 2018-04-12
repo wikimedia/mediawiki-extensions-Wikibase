@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use HashSiteStore;
 use Language;
+use PHPUnit4And6Compat;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -24,6 +25,7 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider getEditCommentProvider

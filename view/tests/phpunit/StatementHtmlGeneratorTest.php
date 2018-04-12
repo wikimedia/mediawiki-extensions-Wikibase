@@ -3,6 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
+use PHPUnit4And6Compat;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -28,6 +29,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author H. Snater < mediawiki@snater.com >
  */
 class StatementHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return SnakHtmlGenerator
