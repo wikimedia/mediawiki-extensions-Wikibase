@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
@@ -16,6 +17,7 @@ use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testPrefetchGroupsIdsByRepositoryAndDelegatesPrefetchingToRepositorySpecificPrefetcher() {
 		$localIdOne = new ItemId( 'Q100' );

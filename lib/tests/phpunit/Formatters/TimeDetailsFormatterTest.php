@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\TimeValue;
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\TimeDetailsFormatter;
@@ -21,6 +22,7 @@ use Wikibase\Lib\TimeDetailsFormatter;
  * @author Thiemo Kreuz
  */
 class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param string $formattedHeading

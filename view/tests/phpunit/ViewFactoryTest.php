@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use HashSiteStore;
 use InvalidArgumentException;
@@ -52,6 +53,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function newViewFactory(
 		EntityIdFormatterFactory $htmlFactory = null,

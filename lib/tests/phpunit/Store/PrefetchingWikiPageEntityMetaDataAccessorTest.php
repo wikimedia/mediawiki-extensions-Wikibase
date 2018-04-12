@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -21,6 +22,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
  * @author Marius Hoch < hoo@online.de >
  */
 class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testPrefetch() {
 		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;

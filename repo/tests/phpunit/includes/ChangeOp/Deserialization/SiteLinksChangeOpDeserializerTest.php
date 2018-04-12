@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use Exception;
 use HashSiteStore;
+use PHPUnit4And6Compat;
 use Site;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
@@ -25,6 +26,7 @@ use Wikibase\StringNormalizer;
  * @license GPL-2.0-or-later
  */
 class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	const SITE_ID = 'somewiki';
 

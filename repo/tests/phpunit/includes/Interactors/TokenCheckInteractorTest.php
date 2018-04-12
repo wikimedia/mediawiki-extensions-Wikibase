@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
+use PHPUnit4And6Compat;
 use User;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
@@ -18,6 +19,7 @@ use Wikibase\Repo\Interactors\TokenCheckInteractor;
  * @author Daniel Kinzler
  */
 class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return User

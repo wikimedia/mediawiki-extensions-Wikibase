@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use HashSiteStore;
 use MediaWikiSite;
+use PHPUnit4And6Compat;
 use Site;
 use SiteLookup;
 use Title;
@@ -26,6 +27,7 @@ use Wikibase\StringNormalizer;
  * @author Addshore
  */
 class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ApiBase

@@ -10,6 +10,7 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use PHPUnit4And6Compat;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -38,6 +39,7 @@ use Wikibase\Test\MockClientStore;
  * @author Marius Hoch
  */
 class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
+use PHPUnit4And6Compat;
 use ParserOutput;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -20,6 +21,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Daniel Kinzler
  */
 class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testAddGetUsage() {
 		$parserOutput = new ParserOutput();

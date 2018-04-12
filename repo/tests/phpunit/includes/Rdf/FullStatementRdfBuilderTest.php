@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\DedupeBag;
@@ -25,6 +26,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Stas Malyshev
  */
 class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var NTriplesRdfTestHelper

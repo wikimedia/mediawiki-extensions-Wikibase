@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use Deserializers\Deserializer;
+use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\SerializerFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getRegistry() {
 		return require __DIR__  . '/../../WikibaseLib.entitytypes.php';
