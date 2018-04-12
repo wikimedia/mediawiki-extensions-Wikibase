@@ -154,7 +154,7 @@ class RecentChangeFactory {
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => $isBot,
-			'rc_patrolled' => 2,
+			'rc_patrolled' => RecentChange::PRC_AUTOPATROLLED,
 			'rc_params' => serialize( $params ),
 			'rc_timestamp' => $time,
 			'rc_log_type' => null,
