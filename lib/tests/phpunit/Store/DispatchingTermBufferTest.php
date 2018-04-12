@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -17,6 +18,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @license GPL-2.0-or-later
  */
 class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider invalidTermBufferProvider

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
+use PHPUnit4And6Compat;
 use ValueParsers\NullParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
@@ -20,6 +21,7 @@ use Wikibase\Repo\ValueParserFactory;
  * @author Thiemo Kreuz
  */
 class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider provideInvalidConstructorArgument

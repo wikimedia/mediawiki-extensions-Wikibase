@@ -10,6 +10,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
+use PHPUnit4And6Compat;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
@@ -37,6 +38,7 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  * @author Daniel Kinzler
  */
 class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	const GEO_SHAPE_STORAGE_API_URL = 'http://some.wiki/api.php';
 

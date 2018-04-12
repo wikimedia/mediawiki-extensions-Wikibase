@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
+use PHPUnit4And6Compat;
 use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 use Wikibase\StringNormalizer;
 
@@ -15,6 +16,7 @@ use Wikibase\StringNormalizer;
  * @author Daniel Kinzler
  */
 class WikibaseStringValueNormalizerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testNormalize() {
 		$input = 'Kittens';

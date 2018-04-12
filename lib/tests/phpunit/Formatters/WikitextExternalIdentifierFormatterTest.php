@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -22,6 +23,7 @@ use Wikimedia\Assert\ParameterTypeException;
  * @author Daniel Kinzler
  */
 class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideFormatSnak() {
 		$formatterUrlExpander = $this->getMock( SnakUrlExpander::class );

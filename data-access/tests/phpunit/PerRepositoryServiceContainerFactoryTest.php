@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
@@ -21,6 +22,7 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getRepositoryServiceContainerFactory() {
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(

@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
@@ -31,6 +32,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Daniel Kinzler
  */
 class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ChangeOpTestMockProvider

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Changes;
 
 use InvalidArgumentException;
 use MWException;
+use PHPUnit4And6Compat;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
@@ -16,6 +17,7 @@ use Wikibase\Lib\Changes\EntityDiffChangedAspects;
  * @author Marius Hoch
  */
 class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function invalidConstructionProvider() {
 		$validParams = [

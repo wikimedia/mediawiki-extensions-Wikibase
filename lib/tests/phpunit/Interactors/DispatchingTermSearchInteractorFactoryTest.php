@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
@@ -18,6 +19,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @license GPL-2.0-or-later
  */
 class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideInvalidConstructorArguments() {
 		return [

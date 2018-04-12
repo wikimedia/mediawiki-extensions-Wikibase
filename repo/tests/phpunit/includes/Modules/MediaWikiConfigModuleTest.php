@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Modules;
 
+use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Wikibase\Repo\Modules\MediaWikiConfigModule;
@@ -16,6 +17,7 @@ use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
  * @author Thiemo Kreuz
  */
 class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testConstructor_returnsResourceLoaderModule() {
 		$this->assertInstanceOf( ResourceLoaderModule::class, $this->newInstance() );

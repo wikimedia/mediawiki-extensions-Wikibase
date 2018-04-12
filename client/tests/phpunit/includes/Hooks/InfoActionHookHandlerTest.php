@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Html;
 use IContextSource;
+use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
@@ -29,6 +30,7 @@ use Wikibase\Client\NamespaceChecker;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider handleProvider

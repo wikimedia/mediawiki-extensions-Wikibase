@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Serialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Exceptions\DeserializationException;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
@@ -17,6 +18,7 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  * @license GPL-2.0-or-later
  */
 class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getDummyIdParserFactory() {
 		return new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );

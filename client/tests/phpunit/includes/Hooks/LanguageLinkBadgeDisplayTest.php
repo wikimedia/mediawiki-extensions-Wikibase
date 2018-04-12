@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use OutputPage;
+use PHPUnit4And6Compat;
 use ParserOutput;
 use RequestContext;
 use Title;
@@ -25,6 +26,7 @@ use Wikibase\DataModel\Term\Term;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return LanguageLinkBadgeDisplay

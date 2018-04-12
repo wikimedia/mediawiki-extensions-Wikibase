@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Rdf\DispatchingValueSnakRdfBuilder;
@@ -19,6 +20,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  */
 class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testAddValue() {
 		$writer = $this->getMock( RdfWriter::class );

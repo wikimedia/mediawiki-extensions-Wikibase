@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use BagOStuff;
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -20,6 +21,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
  * @license GPL-2.0-or-later
  */
 class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	private function newCacheAwarePropertyInfoStore( BagOStuff $cache ) {

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use HashSiteStore;
+use PHPUnit4And6Compat;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
@@ -23,6 +24,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @author Daniel Kinzler
  */
 class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ChangeOpTestMockProvider

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
+use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_Matcher_InvokedRecorder;
 use RequestContext;
 use Status;
@@ -32,6 +33,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Daniel Kinzler
  */
 class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var MockRepository|null
