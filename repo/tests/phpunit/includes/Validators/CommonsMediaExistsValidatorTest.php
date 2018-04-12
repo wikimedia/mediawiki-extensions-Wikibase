@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
 
@@ -17,6 +18,7 @@ use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
  * @author Marius Hoch
  */
 class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return CachingCommonsMediaFileNameLookup

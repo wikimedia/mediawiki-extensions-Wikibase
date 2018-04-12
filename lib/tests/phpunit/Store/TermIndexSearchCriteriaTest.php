@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\TermIndexEntry;
@@ -15,6 +16,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @license GPL-2.0-or-later
  */
 class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideFieldsForConstructor() {
 		return [

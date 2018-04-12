@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
+use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,6 +20,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Thiemo Kreuz
  */
 class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider getTitleForIdProvider

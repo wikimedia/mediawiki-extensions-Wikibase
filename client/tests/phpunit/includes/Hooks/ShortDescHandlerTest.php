@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use UtfNormal\Utils;
 use Wikibase\Client\Hooks\ShortDescHandler;
@@ -15,6 +16,7 @@ use Wikibase\Client\Hooks\ShortDescHandler;
  * @license GPL-2.0+
  */
 class ShortDescHandlerTest extends TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ShortDescHandler

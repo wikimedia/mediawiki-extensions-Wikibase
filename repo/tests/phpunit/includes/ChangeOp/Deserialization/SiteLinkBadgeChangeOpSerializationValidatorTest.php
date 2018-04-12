@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use PHPUnit4And6Compat;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -15,6 +16,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
  * @license GPL-2.0-or-later
  */
 class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideNonStringBadgeSerilization() {
 		return [

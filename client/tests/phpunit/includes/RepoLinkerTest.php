@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,6 +19,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getRepoSettings() {
 		return [

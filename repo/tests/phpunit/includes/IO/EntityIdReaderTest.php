@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\IO;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,6 +22,7 @@ use Wikibase\Repo\IO\LineReader;
  * @author Daniel Kinzler
  */
 class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	protected function getTestFile() {
 		return __DIR__ . '/EntityIdReaderTest.txt';

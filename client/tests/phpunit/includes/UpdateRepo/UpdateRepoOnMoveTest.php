@@ -6,6 +6,7 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
+use PHPUnit4And6Compat;
 use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
@@ -23,6 +24,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * Return some fake data for testing

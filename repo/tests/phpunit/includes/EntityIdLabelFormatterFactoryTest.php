@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SnakFormatter;
@@ -17,6 +18,7 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
  * @author Daniel Kinzler
  */
 class EntityIdLabelFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getFormatterFactory() {
 		return new EntityIdLabelFormatterFactory();
