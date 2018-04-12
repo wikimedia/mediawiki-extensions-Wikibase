@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWikiTestCase;
 use ObjectCache;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
 use Status;
 use Title;

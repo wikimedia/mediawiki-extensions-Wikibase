@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,6 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Daniel Kinzler
  */
 class SiteLinkChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideInvalidBadgeItemIdList() {
 		return [

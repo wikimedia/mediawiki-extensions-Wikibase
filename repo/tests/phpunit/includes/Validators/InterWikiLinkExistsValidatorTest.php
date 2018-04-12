@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 
@@ -16,6 +17,7 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  * @author Jonas Kress
  */
 class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	const EXISTING_PAGE = "Foo.map";
 	const NONEXISTENT_PAGE = "Foo.NOT-FOUND.map";

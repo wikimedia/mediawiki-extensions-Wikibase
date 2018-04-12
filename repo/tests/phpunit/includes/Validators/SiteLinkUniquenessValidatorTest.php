@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
@@ -20,6 +21,7 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  * @author Daniel Kinzler
  */
 class SiteLinkUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return SiteLinkConflictLookup

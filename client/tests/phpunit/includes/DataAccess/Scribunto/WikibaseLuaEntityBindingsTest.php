@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
+use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\EntityUsage;
@@ -22,6 +23,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param HashUsageAccumulator|null $usageAccumulator

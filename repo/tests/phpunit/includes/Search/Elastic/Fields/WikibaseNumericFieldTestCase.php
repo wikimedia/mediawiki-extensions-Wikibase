@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use DummySearchIndexFieldDefinition;
+use PHPUnit4And6Compat;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
@@ -16,6 +17,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
  * @author Stas Malyshev
  */
 abstract class WikibaseNumericFieldTestCase extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testGetMapping() {
 		$field = $this->getFieldObject();

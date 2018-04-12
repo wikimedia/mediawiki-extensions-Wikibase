@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Language;
+use PHPUnit4And6Compat;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
 use Wikibase\Client\Usage\EntityUsage;
@@ -37,6 +38,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Marius Hoch < hoo@online.de >
  */
 class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testConstructor() {
 		$entityAccessor = $this->getEntityAccessor();

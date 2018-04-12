@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Modules;
 
+use PHPUnit4And6Compat;
 use Prophecy\Prophecy\ObjectProphecy;
 use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\SettingsArray;
@@ -14,6 +15,7 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0-or-later
  */
 class SettingsValueProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testGetKeyReturnsJSSettingName() {
 		$settingsValueProvider = new SettingsValueProvider(

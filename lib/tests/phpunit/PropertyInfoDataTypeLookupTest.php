@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -21,6 +22,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @author Daniel Kinzler
  */
 class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',
