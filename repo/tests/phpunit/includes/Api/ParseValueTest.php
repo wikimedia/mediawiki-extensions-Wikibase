@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
@@ -29,6 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class ParseValueTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param string[] $params

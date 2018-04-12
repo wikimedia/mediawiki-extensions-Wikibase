@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -18,6 +19,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  */
 class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testConstructor() {
 		$term = new TermIndexEntry( [

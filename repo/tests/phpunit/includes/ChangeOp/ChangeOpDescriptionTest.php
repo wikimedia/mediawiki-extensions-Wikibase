@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -22,6 +23,7 @@ use Wikibase\Summary;
  * @author Daniel Kinzler
  */
 class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getTermValidatorFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -20,6 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Daniel Kinzler
  */
 class StatementChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return StatementChangeOpFactory

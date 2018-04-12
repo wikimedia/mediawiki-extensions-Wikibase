@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use PHPUnit4And6Compat;
 use RuntimeException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -18,6 +19,7 @@ use Wikibase\Repo\Api\GetClaimsStatementFilter;
  * @author Thiemo Kreuz
  */
 class GetClaimsStatementFilterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param bool $expectsError

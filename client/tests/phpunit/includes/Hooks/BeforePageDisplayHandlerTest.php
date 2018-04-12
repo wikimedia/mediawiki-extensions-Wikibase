@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use PHPUnit4And6Compat;
 use RequestContext;
 use Skin;
 use SkinFallback;
@@ -21,6 +22,7 @@ use Wikibase\Client\NamespaceChecker;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider wikibaseForNamespaceProvider

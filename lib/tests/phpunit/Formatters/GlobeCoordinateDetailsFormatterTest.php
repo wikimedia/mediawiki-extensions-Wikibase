@@ -6,6 +6,7 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\NumberValue;
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
@@ -20,6 +21,7 @@ use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
  * @author Daniel Kinzler
  */
 class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function newFormatter( FormatterOptions $options = null ) {
 		$vocabularyUriFormatter = $this->getMock( ValueFormatter::class );

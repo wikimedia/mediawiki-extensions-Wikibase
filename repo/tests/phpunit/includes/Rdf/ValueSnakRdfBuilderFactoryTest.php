@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Closure;
+use PHPUnit4And6Compat;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
@@ -24,6 +25,7 @@ use Wikibase\Rdf\DedupeBag;
  * @author Daniel Kinzler
  */
 class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function getBuilderFlags() {
 		return [

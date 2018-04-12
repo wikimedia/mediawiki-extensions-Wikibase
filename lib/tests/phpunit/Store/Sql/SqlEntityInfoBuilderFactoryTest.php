@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -18,6 +19,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
  * @license GPL-2.0-or-later
  */
 class SqlEntityInfoBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return EntityIdComposer
