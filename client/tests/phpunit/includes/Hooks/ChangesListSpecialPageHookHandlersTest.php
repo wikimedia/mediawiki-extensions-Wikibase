@@ -6,6 +6,7 @@ use ChangesListBooleanFilter;
 use ExtensionRegistry;
 use FauxRequest;
 use FormOptions;
+use PHPUnit4And6Compat;
 use SpecialPageFactory;
 use SpecialRecentChanges;
 use User;
@@ -25,6 +26,7 @@ use Wikimedia\TestingAccessWrapper;
  * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
 class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ExtensionRegistry

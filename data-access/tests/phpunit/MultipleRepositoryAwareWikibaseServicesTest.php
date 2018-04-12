@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -30,6 +31,7 @@ use Wikibase\StringNormalizer;
  * @license GPL-2.0-or-later
  */
 class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function newMultipleRepositoryAwareWikibaseServices() {
 		return new MultipleRepositoryAwareWikibaseServices(

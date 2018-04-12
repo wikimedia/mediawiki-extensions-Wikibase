@@ -6,6 +6,7 @@ use ApiBase;
 use ApiResult;
 use HashSiteStore;
 use Language;
+use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
@@ -31,6 +32,7 @@ use Wikibase\SummaryFormatter;
  * @author Daniel Kinzler
  */
 class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function newApiHelperFactory() {
 		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )

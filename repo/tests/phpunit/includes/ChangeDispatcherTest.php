@@ -7,6 +7,7 @@ use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Change;
 use Wikibase\Lib\Store\ChunkAccess;
@@ -34,6 +35,7 @@ use Wikibase\Store\SubscriptionLookup;
  * @author Daniel Kinzler
  */
 class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @var array[]

@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Hooks;
 use EditPage;
 use Html;
 use IContextSource;
+use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\EditActionHookHandler;
@@ -29,6 +30,7 @@ use Wikibase\Client\Usage\EntityUsage;
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider handleProvider

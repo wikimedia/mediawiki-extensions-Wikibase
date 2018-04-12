@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -31,6 +32,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  */
 class PropertyViewTest extends EntityViewTestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @param EntityId|PropertyId $id

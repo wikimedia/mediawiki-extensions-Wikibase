@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Reporting;
 
+use PHPUnit4And6Compat;
 use RuntimeException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
@@ -16,6 +17,7 @@ use Wikibase\Lib\Reporting\ReportingExceptionHandler;
  * @author Daniel Kinzler
  */
 class ReportingExceptionHandlerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testReportMessage() {
 		$reporter = $this->getMock( MessageReporter::class );

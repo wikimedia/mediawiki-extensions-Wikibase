@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Diff;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\Diff\Diff;
+use PHPUnit4And6Compat;
 use SiteLookup;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -23,6 +24,7 @@ use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityDiffVisualizerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testDispatchesRequestToPerEntityTypeVisualizer() {
 		$itemVisualizer = $this->getMock( EntityDiffVisualizer::class );

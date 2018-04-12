@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Modules;
 
+use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use Wikibase\Client\Modules\SiteModule;
 
@@ -15,6 +16,7 @@ use Wikibase\Client\Modules\SiteModule;
  * @author Thiemo Kreuz
  */
 class SiteModuleTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ResourceLoaderContext

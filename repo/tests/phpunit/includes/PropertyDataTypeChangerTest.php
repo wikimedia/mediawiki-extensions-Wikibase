@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
@@ -23,6 +24,7 @@ use Wikibase\Repo\PropertyDataTypeChanger;
  * @author Marius Hoch
  */
 class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testChangeDataType_success() {
 		$propertyId = new PropertyId( 'P42' );

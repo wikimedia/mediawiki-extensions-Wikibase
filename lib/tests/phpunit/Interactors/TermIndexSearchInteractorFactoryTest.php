@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
+use PHPUnit4And6Compat;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
@@ -17,6 +18,7 @@ use Wikibase\TermIndex;
  * @license GPL-2.0-or-later
  */
 class TermIndexSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function testNewInteractorReturnsTermIndexSearchInteractorInstance() {
 		$factory = new TermIndexSearchInteractorFactory(

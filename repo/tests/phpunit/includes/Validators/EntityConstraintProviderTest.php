@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
@@ -18,6 +19,7 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @author Daniel Kinzler
  */
 class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getEntityConstraintProvider() {
 		$duplicateDetector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )

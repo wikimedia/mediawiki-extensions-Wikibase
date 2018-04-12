@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
@@ -17,6 +18,7 @@ use Wikibase\Lib\LanguageNameLookup;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	private function getIndicator() {
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
