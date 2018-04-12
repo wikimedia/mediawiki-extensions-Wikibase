@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
 use LogicException;
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
@@ -17,6 +18,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
  * @license GPL-2.0-or-later
  */
 class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideInvalidDeserializerInstantiators() {
 		return [

@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use DataValues\StringValue;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -22,6 +23,7 @@ use Wikimedia\Assert\ParameterTypeException;
  * @author Daniel Kinzler
  */
 class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	public function provideExpandUrl() {
 		$p66 = new PropertyId( 'P66' );

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use HashSiteStore;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -25,6 +26,7 @@ use Wikibase\Summary;
  * @license GPL-2.0-or-later
  */
 class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	use AliasChangeOpDeserializationTester;
 	use ClaimsChangeOpDeserializationTester;

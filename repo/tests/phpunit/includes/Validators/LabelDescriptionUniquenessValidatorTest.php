@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -26,6 +27,7 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  * @author Daniel Kinzler
  */
 class LabelDescriptionUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @return LabelDescriptionDuplicateDetector

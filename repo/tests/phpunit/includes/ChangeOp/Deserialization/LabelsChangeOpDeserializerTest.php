@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;
@@ -19,6 +20,7 @@ use Wikibase\StringNormalizer;
  * @license GPL-2.0-or-later
  */
 class LabelsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	use LabelsChangeOpDeserializationTester;
 

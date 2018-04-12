@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -21,6 +22,7 @@ use Wikibase\View\EntityView;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
 
 	/**
 	 * @expectedException InvalidArgumentException
