@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b35d39c_cb066a65",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-12T13:42:47Z",
+      "side": 1,
+      "message": "erm ... I think this is a little hard to follow. Wouldn\u0027t something like this be simpler?\n\ncurrentRevision \u003d mw.config.get( \u0027wbCurrentRevision\u0027 );\nif ( currentRevision \u003d\u003d\u003d null ) {\n    currentRevision \u003d mw.config.get( \u0027wgCurRevisionId\u0027 );\n}",
+      "revId": "5885a33b1bbb5ad3c4664599aa3fb85f0b17b53b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
