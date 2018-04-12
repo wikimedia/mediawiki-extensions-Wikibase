@@ -79,9 +79,7 @@ class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase 
 	 *
 	 * @return MediaWikiPageNameNormalizer
 	 */
-	private function getMediaWikiPageNameNormalizer(
-		PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
-	) {
+	private function getMediaWikiPageNameNormalizer( $matcher ) {
 		$fileNameLookup = $this->getMockBuilder( MediaWikiPageNameNormalizer::class )
 			->disableOriginalConstructor()
 			->getMock();
