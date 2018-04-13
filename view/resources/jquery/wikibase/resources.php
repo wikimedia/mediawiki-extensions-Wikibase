@@ -396,6 +396,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
+				'mediawiki.page.gallery',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
 			],

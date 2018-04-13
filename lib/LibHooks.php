@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use ExtensionRegistry;
 use ResourceLoader;
+use Wikibase\Lib\Formatters\CommonsMediaImageGallery;
 
 /**
  * File defining the hook handlers for the WikibaseLib extension.
@@ -80,6 +81,15 @@ final class LibHooks {
 		$resourceLoader->register( $modules );
 
 		return true;
+	}
+
+	/**
+	 * Add our custom ImageGallery implementation.
+	 *
+	 * @param string[] &$modeMapping
+	 */
+	public static function onGalleryGetModes( array &$modeMapping ) {
+		$modeMapping['wikibase-commons-media'] = CommonsMediaImageGallery::class;
 	}
 
 }

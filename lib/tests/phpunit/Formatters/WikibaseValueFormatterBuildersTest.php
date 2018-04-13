@@ -288,6 +288,13 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\.wikimedia\.org/wiki/File:Example\.jpg">Example\.jpg</a>$@',
 			],
+			'html commons inline image' => [
+				'CommonsMedia',
+				SnakFormatter::FORMAT_HTML_VERBOSE,
+				$this->newFormatterOptions(),
+				new StringValue( 'DOES-NOT-EXIST-dfsdf.jpg' ),
+				'@^<ul.*>.*<a.*href=".*DOES-NOT-EXIST.*>.*</ul>$@s',
+			],
 			// geo-shape
 			'plain geo-shape' => [
 				'GeoShape',
