@@ -45,9 +45,6 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getSerialization(), NS_MAIN );
 			} ) );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getNamespaceForType' )
-			->will( $this->returnValue( NS_MAIN ) );
 
 		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
 			->disableOriginalConstructor()
