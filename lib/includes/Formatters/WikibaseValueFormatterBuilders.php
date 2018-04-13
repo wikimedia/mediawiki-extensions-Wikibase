@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
+use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
 use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
@@ -138,6 +139,7 @@ class WikibaseValueFormatterBuilders {
 		switch ( $format ) {
 			case SnakFormatter::FORMAT_HTML:
 			case SnakFormatter::FORMAT_HTML_DIFF:
+			case SnakFormatter::FORMAT_HTML_VERBOSE:
 				return SnakFormatter::FORMAT_HTML;
 			case SnakFormatter::FORMAT_WIKI:
 			case SnakFormatter::FORMAT_PLAIN:
@@ -251,6 +253,10 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
+		if ( $format === SnakFormatter::FORMAT_HTML_VERBOSE ) {
+			return new CommonsInlineImageFormatter();
+		}
+
 		switch ( $this->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new CommonsLinkFormatter( $options );
