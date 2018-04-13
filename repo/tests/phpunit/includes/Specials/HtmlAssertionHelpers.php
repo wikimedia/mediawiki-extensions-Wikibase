@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use HamcrestPHPUnitIntegration;
+
 /**
  * @license GPL-2.0-or-later
  */
 trait HtmlAssertionHelpers {
+	use HamcrestPHPUnitIntegration;
 
 	/**
 	 * @param string $html
@@ -13,7 +16,7 @@ trait HtmlAssertionHelpers {
 	 */
 	protected function assertHtmlContainsInputWithName( $html, $name ) {
 
-		assertThat(
+		$this->assertThatHamcrest(
 			$html,
 			is( htmlPiece( havingChild( tagMatchingOutline( "<input name='$name'/>" ) ) ) )
 		);
@@ -26,7 +29,7 @@ trait HtmlAssertionHelpers {
 	 */
 	protected function assertHtmlContainsInputWithNameAndValue( $html, $name, $value ) {
 
-		assertThat(
+		$this->assertThatHamcrest(
 			$html,
 			is( htmlPiece( havingChild( tagMatchingOutline( "<input name='$name' value='$value'/>" ) ) ) ) );
 	}
@@ -37,7 +40,7 @@ trait HtmlAssertionHelpers {
 	 */
 	protected function assertHtmlContainsSelectWithName( $html, $name ) {
 
-		assertThat(
+		$this->assertThatHamcrest(
 			$html,
 			is( htmlPiece( havingChild(
 				tagMatchingOutline( "<select name='$name'/>" ) ) ) )
@@ -51,7 +54,7 @@ trait HtmlAssertionHelpers {
 	 */
 	protected function assertHtmlContainsSelectWithNameAndSelectedValue( $html, $name, $value ) {
 
-		assertThat(
+		$this->assertThatHamcrest(
 			$html,
 			is(
 				htmlPiece(
@@ -72,7 +75,7 @@ trait HtmlAssertionHelpers {
 	 * @param string $html
 	 */
 	protected function assertHtmlContainsSubmitControl( $html ) {
-		assertThat(
+		$this->assertThatHamcrest(
 			$html,
 			is(
 				htmlPiece(
@@ -100,7 +103,7 @@ trait HtmlAssertionHelpers {
 		$formErrorMessage = tagMatchingOutline( '<div class="error"/>' );
 		$ooUiErrorMessage = tagMatchingOutline( '<li class="oo-ui-fieldLayout-messages-error"/>' );
 
-		assertThat( $html, is( htmlPiece(
+		$this->assertThatHamcrest( $html, is( htmlPiece(
 			havingChild(
 				both( either( $formErrorMessage )->orElse( $ooUiErrorMessage ) )
 					->andAlso( havingTextContents( containsString( $messageText )->ignoringCase() ) ) ) ) ) );
