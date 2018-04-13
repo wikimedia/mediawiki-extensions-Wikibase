@@ -121,7 +121,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return RedirectCreationInteractor
 	 */
 	private function newInteractor(
-		PHPUnit_Framework_MockObject_Matcher_InvokedRecorder $efHookCalls = null,
+		$efHookCalls = null,
 		Status $efHookStatus = null,
 		User $user = null
 	) {
