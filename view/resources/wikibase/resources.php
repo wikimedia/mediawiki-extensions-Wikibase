@@ -40,7 +40,8 @@ return call_user_func( function() {
 				'wikibase.mobile.css'
 			],
 			'dependencies' => [
-				'jquery.wikibase.statementview.RankSelector.styles'
+				'jquery.wikibase.statementview.RankSelector.styles',
+				'mediawiki.page.gallery.styles'
 			],
 			'targets' => 'mobile'
 		],
