@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4736c88c_443782df",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-04-13T02:24:48Z",
+      "side": 1,
+      "message": "It\u0027d be cool if this could do $this-\u003e +1 each time.",
+      "range": {
+        "startLine": 321,
+        "startChar": 3,
+        "endLine": 321,
+        "endChar": 13
+      },
+      "revId": "06580dc2447c75bec7002b9b08741621e036ae8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
