@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
+use HamcrestPHPUnitIntegration;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -25,6 +26,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Marius Hoch < hoo@online.de >
  */
 class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
+	use HamcrestPHPUnitIntegration;
 
 	/**
 	 * @param Term|null $term
@@ -272,7 +274,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 		$formattedEntityId = $formatter->formatEntityId( new ItemId( 'Q42' ) );
 
-		assertThat( $formattedEntityId, htmlPiece( havingChild( withClass( 'mw-redirect' ) ) ) );
+		$this->assertThatHamcrest( $formattedEntityId, htmlPiece( havingChild( withClass( 'mw-redirect' ) ) ) );
 	}
 
 }

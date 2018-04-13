@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 
 use ChangesList;
 use DerivativeContext;
+use HamcrestPHPUnitIntegration;
 use Language;
 use Linker;
 use MediaWikiLangTestCase;
@@ -30,6 +31,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ChangeLineFormatterTest extends MediaWikiLangTestCase {
+	use HamcrestPHPUnitIntegration;
 
 	protected $repoLinker;
 
@@ -84,7 +86,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		foreach ( $expectedTags as $key => $tagMatcher ) {
 			$message = $key . "\n\t" . $formattedLine;
-			assertThat(
+			$this->assertThatHamcrest(
 				$message,
 				$formattedLine,
 				is( htmlPiece( havingChild( $tagMatcher ) ) )
@@ -156,7 +158,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			if ( isset( $map[$part] ) ) {
 				$this->assertArrayHasKey( $map[$part], $data );
 				$message = $key . "\n\t" . $data[$map[$part]];
-				assertThat(
+				$this->assertThatHamcrest(
 					$message,
 					$data[$map[$part]],
 					is( htmlPiece( havingChild( $tagMatcher ) ) )
@@ -238,7 +240,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			if ( isset( $map[$part] ) ) {
 				$this->assertArrayHasKey( $map[$part], $data );
 				$message = $key . "\n\t" . $data[$map[$part]];
-				assertThat(
+				$this->assertThatHamcrest(
 					$message,
 					$data[$map[$part]],
 					is( htmlPiece( havingChild( $tagMatcher ) ) )

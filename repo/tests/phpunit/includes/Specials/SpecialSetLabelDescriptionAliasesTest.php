@@ -291,7 +291,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id' type='hidden' value='{$item->getId()->getSerialization()}'/>" )
 		) ) ) );
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', self::USER_LANGUAGE );
@@ -309,7 +309,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$subPage = $item->getId()->getSerialization() . '/' . $language;
 		list( $output ) = $this->executeSpecialPage( $subPage );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>" )
 		) ) ) );
 		$this->assertHtmlContainsInputWithName( $output, 'label' );
@@ -335,7 +335,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization(), new FauxRequest( [ 'language' => $language ] ) );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>" )
 		) ) ) );
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'label', $label );
@@ -371,7 +371,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		list( $output, ) = ( new SpecialPageExecutor() )->executeSpecialPage( $specialPage, $id->getSerialization(), $request );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
 				->andAlso( havingTextContents( new Message( 'permissionserrors', [], new Language( self::USER_LANGUAGE ) ) ) )
 		) ) ) );

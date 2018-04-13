@@ -55,13 +55,13 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '', null, self::USER_LANGUAGE );
 
 		$expectedLanguage = self::USER_LANGUAGE;
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' value='$expectedLanguage'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value'/>" )
 		) ) ) );
 
@@ -75,16 +75,16 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( $id, null, self::USER_LANGUAGE );
 
 		$expectedLanguage = self::USER_LANGUAGE;
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id' type='hidden' value='$id'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$expectedLanguage'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='remove' value='remove' type='hidden'/>" )
 		) ) ) );
 
@@ -97,16 +97,16 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		// execute with two subpage values
 		list( $output, ) = $this->executeSpecialPage( $id . '/' . $itemTermLanguage, null, self::USER_LANGUAGE );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id' type='hidden' value='$id'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='language' type='hidden' value='$itemTermLanguage'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value' value='$termValue'/>" )
 		) ) ) );
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='remove' value='remove' type='hidden'/>" )
 		) ) ) );
 
@@ -120,7 +120,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value' value='$termValue'/>" )
 		) ) ) );
 	}
@@ -134,7 +134,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request, self::USER_LANGUAGE );
 
-		assertThat( $output, is( htmlPiece( havingChild(
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
 			->andAlso( havingTextContents( new Message( 'permissionserrors', [], new Language( self::USER_LANGUAGE ) ) ) )
 		) ) ) );
