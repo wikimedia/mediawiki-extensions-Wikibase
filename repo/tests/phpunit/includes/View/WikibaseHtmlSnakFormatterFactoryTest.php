@@ -37,7 +37,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$outputFormatSnakFormatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
 			->with(
-				SnakFormatter::FORMAT_HTML,
+				SnakFormatter::FORMAT_HTML_VERBOSE,
 				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'en',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
