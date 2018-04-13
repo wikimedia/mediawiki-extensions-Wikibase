@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "28b73030_6c50dce5",
+        "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-13T20:28:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69223b5a_220b65a5",
+      "range": {
+        "startLine": 18,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 51
+      },
+      "revId": "6abff623126bcc98ddcb706c3eca50a1b1e32421",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d01b5f82_475197a2",
         "filename": "lib/tests/phpunit/Formatters/CommonsMediaImageGalleryTest.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-04-13T19:19:07Z",
       "side": 1,
       "message": "Same here :D",
+      "range": {
+        "startLine": 19,
+        "startChar": 24,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "6abff623126bcc98ddcb706c3eca50a1b1e32421",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d6ab473_984a9ed3",
+        "filename": "lib/tests/phpunit/Formatters/CommonsMediaImageGalleryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-13T20:28:30Z",
+      "side": 1,
+      "message": "c\u0026p leftover. Removed.",
+      "parentUuid": "d01b5f82_475197a2",
       "range": {
         "startLine": 19,
         "startChar": 24,
