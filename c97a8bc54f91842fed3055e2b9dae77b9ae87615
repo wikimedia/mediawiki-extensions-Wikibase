@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fddf729e_bbb69126",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-04-13T03:14:07Z",
+      "side": 1,
+      "message": "Maybe \"tests: Switch to using core\u0027s new HamcrestPHPUnitIntegration wrapper\" or similar?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "c97a8bc54f91842fed3055e2b9dae77b9ae87615",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
