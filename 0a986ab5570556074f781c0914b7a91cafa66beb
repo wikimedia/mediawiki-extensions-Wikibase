@@ -87,6 +87,24 @@
       "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b7faef9_81e49d53",
+        "filename": "repo/includes/Api/TypeDispatchingEntitySearchHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-04-13T12:18:14Z",
+      "side": 1,
+      "message": "Yup, I am not sure/don\u0027t know if this is called multiple times in a request, and as long as it is not, that would be more theoretical discussion. So fine for me like it is now.",
+      "parentUuid": "ad1c4cd6_708b29d5",
+      "revId": "0a986ab5570556074f781c0914b7a91cafa66beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
