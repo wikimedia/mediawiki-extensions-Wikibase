@@ -187,10 +187,6 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getType' );
 
 		$change->expects( $this->any() )
-			->method( 'isEmpty' )
-			->will( $this->returnValue( false ) );
-
-		$change->expects( $this->any() )
 			->method( 'getTime' )
 			->will( $this->returnValue( $time ) );
 

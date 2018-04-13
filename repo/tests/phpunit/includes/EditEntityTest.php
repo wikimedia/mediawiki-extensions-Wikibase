@@ -85,10 +85,6 @@ class EditEntityTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( $checkAction ) );
 
 		$permissionChecker->expects( $this->any() )
-			->method( 'getPermissionStatusForEntityType' )
-			->will( $this->returnCallback( $checkAction ) );
-
-		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( $checkAction ) );
 
