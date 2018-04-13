@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use FauxRequest;
 use FauxResponse;
 use Hamcrest\Matcher;
+use Hamcrest\MatcherAssert;
 use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use TestSites;
@@ -107,11 +108,14 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
+
+		MatcherAssert::resetCount();
 	}
 
 	protected function tearDown() {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
+		$this->addToAssertionCount( MatcherAssert::getCount() );
 
 		parent::tearDown();
 	}
