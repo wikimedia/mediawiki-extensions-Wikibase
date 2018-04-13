@@ -213,38 +213,8 @@ call_user_func( function() {
 		'class' => Wikibase\Repo\Api\SearchEntities::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-			$repoSettings = $repo->getSettings();
-			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
-			if ( $searchSettings['useCirrus'] ) {
-				$lang = $repo->getUserLanguage();
-				$entitySearchHelper = new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
-					$repo->getLanguageFallbackChainFactory(),
-					$repo->getEntityIdParser(),
-					$lang,
-					$repo->getContentModelMappings(),
-					$searchSettings
-				);
-				$entitySearchHelper->setRequest( $mainModule->getRequest() );
-			} else {
-				if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
-					wfLogWarning(
-						'Using wb_terms table for wbsearchentities API action ' .
-						'but not using search-related fields of terms table. ' .
-						'This results in degraded search experience, ' .
-						'please enable the useTermsTableSearchFields setting.'
-					);
-				}
-				$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchTermIndex(
-					$repo->getEntityLookup(),
-					$repo->getEntityIdParser(),
-					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
-					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-						$repo->getTermLookup(),
-						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
-					),
-					$repo->getEntityTypeToRepositoryMapping()
-				);
-			}
+			$entitySearchHelper = new Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper( $repo->getEntitySearchHelperCallbacks(),
+					$mainModule->getRequest() );
 
 			return new Wikibase\Repo\Api\SearchEntities(
 				$mainModule,

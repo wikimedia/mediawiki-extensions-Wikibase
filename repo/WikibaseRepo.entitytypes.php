@@ -114,7 +114,43 @@ return [
 				$entityIdFormatter,
 				$basicEntityDiffVisualizer
 			);
-		}
+		},
+		'entity-search-callback' => function ( WebRequest $request ) {
+			// FIXME: this code should be split into extension for T190022
+			// Leaving only EntitySearchTermIndex here
+			$repo = WikibaseRepo::getDefaultInstance();
+			$repoSettings = $repo->getSettings();
+			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
+			if ( $searchSettings['useCirrus'] ) {
+				return new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
+					$repo->getLanguageFallbackChainFactory(),
+					$repo->getEntityIdParser(),
+					$repo->getUserLanguage(),
+					$repo->getContentModelMappings(),
+					$searchSettings,
+					$request
+				);
+			} else {
+				if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
+					wfLogWarning(
+						'Using wb_terms table for wbsearchentities API action ' .
+						'but not using search-related fields of terms table. ' .
+						'This results in degraded search experience, ' .
+						'please enable the useTermsTableSearchFields setting.'
+					);
+				}
+				return new Wikibase\Repo\Api\EntitySearchTermIndex(
+					$repo->getEntityLookup(),
+					$repo->getEntityIdParser(),
+					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
+					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+						$repo->getTermLookup(),
+						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+					),
+					$repo->getEntityTypeToRepositoryMapping()
+				);
+			}
+		},
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -160,6 +196,42 @@ return [
 				$vocabulary,
 				$writer
 			);
-		}
+		},
+		'entity-search-callback' => function ( WebRequest $request ) {
+			// FIXME: this code should be split into extension for T190022
+			// Leaving only EntitySearchTermIndex here
+			$repo = WikibaseRepo::getDefaultInstance();
+			$repoSettings = $repo->getSettings();
+			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
+			if ( $searchSettings['useCirrus'] ) {
+				return new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
+					$repo->getLanguageFallbackChainFactory(),
+					$repo->getEntityIdParser(),
+					$repo->getUserLanguage(),
+					$repo->getContentModelMappings(),
+					$searchSettings,
+					$request
+				);
+			} else {
+				if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
+					wfLogWarning(
+						'Using wb_terms table for wbsearchentities API action ' .
+						'but not using search-related fields of terms table. ' .
+						'This results in degraded search experience, ' .
+						'please enable the useTermsTableSearchFields setting.'
+					);
+				}
+				return new Wikibase\Repo\Api\EntitySearchTermIndex(
+					$repo->getEntityLookup(),
+					$repo->getEntityIdParser(),
+					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
+					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+						$repo->getTermLookup(),
+						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+					),
+					$repo->getEntityTypeToRepositoryMapping()
+				);
+			}
+		},
 	]
 ];
