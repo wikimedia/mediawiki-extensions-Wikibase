@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use FauxRequest;
 use FauxResponse;
 use Hamcrest\Matcher;
+use HamcrestPHPUnitIntegration;
 use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use TestSites;
@@ -35,6 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Marius Hoch < hoo@online.de >
  */
 class SpecialSetSiteLinkTest extends SpecialPageTestBase {
+	use HamcrestPHPUnitIntegration;
 
 	/**
 	 * @var array
@@ -240,7 +242,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		assertThat(
+		$this->assertThatHamcrest(
 			$output,
 			is( htmlPiece( havingChild( both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<input name="page" value="Wikidata"/>' ) )
@@ -314,7 +316,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	private function assertHtmlContainsTagsMatching( $html, array $tagMatchers ) {
 		foreach ( $tagMatchers as $key => $matcher ) {
 			$message = "Failed to match html output with tag '{$key}'";
-			assertThat(
+			$this->assertThatHamcrest(
 				$message,
 				$html,
 				is( htmlPiece( havingChild( $matcher ) ) )
