@@ -24,6 +24,7 @@ interface SnakFormatter {
 	const FORMAT_WIKI = 'text/x-wiki';
 	const FORMAT_HTML = 'text/html';
 	const FORMAT_HTML_DIFF = 'text/html; disposition=diff';
+	const FORMAT_HTML_VERBOSE = 'text/html; disposition=verbose';
 
 	/**
 	 * Options key for controlling error handling.
