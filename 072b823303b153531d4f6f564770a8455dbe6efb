@@ -22,6 +22,30 @@
       "revId": "072b823303b153531d4f6f564770a8455dbe6efb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9dda4ad_196fdbaa",
+        "filename": "repo/maintenance/clearTermSqlIndexSearchFields.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-04-13T13:15:59Z",
+      "side": 1,
+      "message": "But the clear-term-weight option should be true by default, not false like --verbose… unless I invert the phrasing and introduce some flag like --skip-term-weight instead?",
+      "parentUuid": "5f398f8b_a2d8e95d",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 3
+      },
+      "revId": "072b823303b153531d4f6f564770a8455dbe6efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
