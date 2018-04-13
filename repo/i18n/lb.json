@@ -72,6 +72,7 @@
 	"wb-special-newitem-new-item-notification": "Neit Element $1 ugeluecht a virugeleet op seng Säit. Zréck op $2.",
 	"wikibase-propertypage-datatype": "Datentyp",
 	"wikibase-propertypage-bad-datatype": "Onbekannten Datentyp: $1",
+	"wikibase-claimview-snak-new-tooltip": "Nom Festleeë vun enger Eegenschaft kënnt Dir de Wäert dofir aginn. Wann d'Eegenschaft keen designéierte Wäert huet oder den aktuelle Wäert onbekannt ass, da kënnt Dir en alternative Wäert-Typ uginn andeem Dir op d'Ikon virun der Këscht fir d'Wäerter klickt.",
 	"wikibase-statementview-rank-tooltip-preferred": "Valabelen an aktuelle Wäert",
 	"wikibase-statementview-rank-normal": "Normal Bewäertung",
 	"wikibase-statementview-rank-tooltip-deprecated": "De Wäert ass als falsch bekannt awer (gouf) allgemeng gegleeft",
