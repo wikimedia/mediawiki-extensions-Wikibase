@@ -4,5 +4,8 @@
 			"Joao Xavier"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipedio"
+	"wikibase-sitelinks-wikipedia": "Wikipedio",
+	"wikibase-sitelinks-link-columnheading": "Pagino ligata",
+	"wikibase-entity-summary-wbsetlabel-add": "Adjuntita etiketo [$2]",
+	"wikibase-entity-summary-clientsitelink-update": "Pagino movita de [$3] a [$4]"
 }
