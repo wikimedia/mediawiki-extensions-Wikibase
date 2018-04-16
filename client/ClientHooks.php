@@ -241,7 +241,7 @@ final class ClientHooks {
 
 	/**
 	 * Notify the user that we have automatically updated the repo or that they
-	 * need to do that per hand.
+	 * need to do that per hand. Also, removing entity usages
 	 *
 	 * @param Title $title
 	 * @param OutputPage $out
@@ -260,6 +260,8 @@ final class ClientHooks {
 		$html = $deletePageNotice->getPageDeleteNoticeHtml( $title );
 
 		$out->addHTML( $html );
+
+		$wikibaseClient->getStore()->getUsageUpdater()->pruneUsagesForPage( $title->getArticleID() );
 	}
 
 	/**
