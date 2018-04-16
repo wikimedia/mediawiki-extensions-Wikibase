@@ -241,7 +241,7 @@ final class ClientHooks {
 
 	/**
 	 * Notify the user that we have automatically updated the repo or that they
-	 * need to do that per hand.
+	 * need to do that per hand, and remove entity usages for the deleted page.
 	 *
 	 * @param Title $title
 	 * @param OutputPage $out
@@ -250,6 +250,7 @@ final class ClientHooks {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		$repoLinker = $wikibaseClient->newRepoLinker();
+		$usageUpdater = $wikibaseClient->getStore()->getUsageUpdater();
 
 		$deletePageNotice = new DeletePageNoticeCreator(
 			$siteLinkLookup,
@@ -260,6 +261,8 @@ final class ClientHooks {
 		$html = $deletePageNotice->getPageDeleteNoticeHtml( $title );
 
 		$out->addHTML( $html );
+
+		$usageUpdater->pruneUsagesForPage( $title->getArticleID() );
 	}
 
 	/**
