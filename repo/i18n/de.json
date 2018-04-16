@@ -501,7 +501,7 @@
 	"apihelp-wbremovereferences-description": "Entfernt eine oder mehrere Referenzen der gleichen Aussage.",
 	"apihelp-wbremovereferences-summary": "Entfernt einen oder mehrere Einzelnachweise von der gleichen Aussage.",
 	"apihelp-wbremovereferences-param-references": "Die Hashs der Referenzen, die entfernt werden sollen",
-	"apihelp-wbsearchentities-description": "Sucht nach Objekten mithilfe von Bezeichnungen und Aliasse.\nGibt eine Bezeichnung und Beschreibung für das Objekt in der Benutzersprache zurück, falls möglich.\nGibt Einzelheiten des entsprechenden Begriffs zurück.\nDer entsprechende Begriffstext ist auch im Aliasschlüssel vorhanden, falls er von der angezeigten Bezeichnung abweicht.",
+	"apihelp-wbsearchentities-description": "Sucht nach Objekten mithilfe von Bezeichnungen, Aliasse oder Kennungen.\nGibt eine Bezeichnung und Beschreibung für das Objekt in der Benutzersprache zurück, falls möglich.\nGibt Einzelheiten des entsprechenden Begriffs zurück.\nDer entsprechende Begriffstext ist auch im Aliasschlüssel vorhanden, falls er von der angezeigten Bezeichnung abweicht.",
 	"apihelp-wbsearchentities-summary": "Sucht nach Objekten, die Bezeichnungen und Aliasse verwenden.",
 	"apihelp-wbsearchentities-param-search": "Nach diesem Text suchen.",
 	"apihelp-wbsearchentities-param-language": "In dieser Sprache suchen.",
