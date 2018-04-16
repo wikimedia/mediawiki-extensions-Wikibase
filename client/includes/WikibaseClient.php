@@ -684,6 +684,7 @@ final class WikibaseClient {
 		// fallback to old single-repo settings
 		if ( $settings->hasSetting( 'repoDatabase' )
 			&& $settings->hasSetting( 'entityNamespaces' )
+			&& $settings->hasSetting( 'enabledEntityTypes' )
 			&& $settings->hasSetting( 'repoConceptBaseUri' )
 		) {
 			$definitions = [ '' => [
@@ -691,6 +692,7 @@ final class WikibaseClient {
 				'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
 				'prefix-mapping' => [ '' => '' ],
 				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+				'enabled-entity-types' => $settings->getSetting( 'enabledEntityTypes' ),
 			] ];
 			unset( $repoSettingsArray[''] );
 		}
@@ -700,6 +702,7 @@ final class WikibaseClient {
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
 				'entity-namespaces' => $repositorySettings['entityNamespaces'],
+				'enabled-entity-types' => array_keys( $repositorySettings['entityNamespaces'] ),
 				'prefix-mapping' => $repositorySettings['prefixMapping'],
 			];
 		}

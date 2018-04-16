@@ -136,8 +136,13 @@ return call_user_func( function() {
 			'item' => 0,
 			'property' => 120
 		];
+		$enabledEntityTypes = [
+			'item',
+			'property',
+		];
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
 			$entityNamespaces = WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' );
+			$enabledEntityTypes = WikibaseSettings::getRepoSettings()->getSetting( 'enabledEntityTypes' );
 		}
 
 		return [
@@ -147,6 +152,7 @@ return call_user_func( function() {
 				'repoDatabase' => $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : null,
 				'baseUri' => $settings->getSetting( 'repoUrl' ) . '/entity/',
 				'entityNamespaces' => $entityNamespaces,
+				'enabledEntityTypes' => $enabledEntityTypes,
 				'prefixMapping' => [ '' => '' ],
 			]
 		];

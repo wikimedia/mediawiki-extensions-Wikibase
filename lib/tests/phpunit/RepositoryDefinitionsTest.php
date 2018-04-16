@@ -160,7 +160,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			[ 'item' => 666, 'property' => 777, 'mediainfo' => 888, 'lexeme' => 999 ],
-			$definitions->getEntityNamespaces()
+			$definitions->getEntityTypeToNamespace()
 		);
 	}
 

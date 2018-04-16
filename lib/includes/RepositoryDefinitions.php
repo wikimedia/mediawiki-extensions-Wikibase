@@ -17,6 +17,7 @@ use Wikimedia\Assert\Assert;
  *    scheme and authority part of the URI. Only entity ID will be added to the base URI.
  *  - entity-namespaces: map of names of entity types (strings) the repository provides to namespaces IDs (ints)
  *    related to the given entity type on the repository's wiki.
+ *  - enabled-entity-types: list of names of entity types (strings) that are enabled on this repository.
  *  - prefix-mapping: map of repository prefixes used in the repository (@see docs/foreign-entity-ids.wiki
  *    in the Data Model component for documentation on prefix mapping).
  *
@@ -46,9 +47,14 @@ class RepositoryDefinitions {
 	private $entityTypesPerRepository = [];
 
 	/**
+	 * @var array[]
+	 */
+	private $entityTypes = [];
+
+	/**
 	 * @var int[]
 	 */
-	private $entityNamespaces;
+	private $entityTypeToNamespace;
 
 	/**
 	 * @param array[] $repositoryDefinitions Associative array mapping repository names to an array of
@@ -58,7 +64,13 @@ class RepositoryDefinitions {
 	 * @throws InvalidArgumentException if $repositoryDefinitions has invalid format
 	 */
 	public function __construct( array $repositoryDefinitions ) {
-		$requiredFields = [ 'database', 'base-uri', 'entity-namespaces', 'prefix-mapping' ];
+		$requiredFields = [
+			'database',
+			'base-uri',
+			'entity-namespaces',
+			'enabled-entity-types',
+			'prefix-mapping',
+		];
 
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $repositoryDefinitions, '$repositoryDefinitions' );
 		Assert::parameterElementType( 'array', $repositoryDefinitions, '$repositoryDefinitions' );
@@ -129,15 +141,15 @@ class RepositoryDefinitions {
 	 * @return string[] List of entity type names provided by all defined repositories.
 	 */
 	public function getAllEntityTypes() {
-		return array_keys( $this->entityTypeToRepositoryMapping );
+		return $this->entityTypes;
 	}
 
 	/**
 	 * @return int[] Associative array (string => int) mapping entity type names to namespace IDs (numbers) related
 	 * namespace on the wiki of the repository that provides entities of the given type.
 	 */
-	public function getEntityNamespaces() {
-		return $this->entityNamespaces;
+	public function getEntityTypeToNamespace() {
+		return $this->entityTypeToNamespace;
 	}
 
 	/**
@@ -158,21 +170,25 @@ class RepositoryDefinitions {
 	private function buildEntityTypeMappings( array $repositoryDefinitions ) {
 		$this->entityTypeToRepositoryMapping = [];
 		$this->entityTypesPerRepository = [];
-		$this->entityNamespaces = [];
+		$this->entityTypeToNamespace = [];
 
 		foreach ( $repositoryDefinitions as $repositoryName => $definition ) {
-			foreach ( $definition['entity-namespaces'] as $type => $namespace ) {
-				if ( isset( $this->entityTypeToRepositoryMapping[$type] ) ) {
-					throw new InvalidArgumentException(
-						'Using same entity types on multiple repositories is not supported yet. '
-						. '"' . $type . '" has already be defined for repository '
-						. '"' . $this->entityTypeToRepositoryMapping[$type][0][0] .'"'
-					);
+			foreach ( $definition['enabled-entity-types'] as $type ) {
+				if ( array_key_exists( $type, $definition['entity-namespaces'] ) ) {
+					if ( isset( $this->entityTypeToRepositoryMapping[$type] ) ) {
+						throw new InvalidArgumentException(
+							'Using same entity types on multiple repositories is not supported yet. '
+							. '"' . $type . '" has already be defined for repository '
+							. '"' . $this->entityTypeToRepositoryMapping[$type][0][0] .'"'
+						);
+					}
+					$namespace = $definition['entity-namespaces'][$type];
+					// TODO do entity types with no namespace need to land in this map?
+					$this->entityTypeToRepositoryMapping[$type][] = [ $repositoryName, $namespace ];
+					$this->entityTypeToNamespace[$type] = $namespace;
 				}
-
-				$this->entityTypeToRepositoryMapping[$type][] = [ $repositoryName, $namespace ];
 				$this->entityTypesPerRepository[$repositoryName][] = $type;
-				$this->entityNamespaces[$type] = $namespace;
+				$this->entityTypes[] = $type;
 			}
 		}
 	}

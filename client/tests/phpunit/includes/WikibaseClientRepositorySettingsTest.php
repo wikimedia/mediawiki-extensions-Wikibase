@@ -33,7 +33,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 		);
 		$this->assertEquals(
 			[ 'item' => 303, 'property' => 808 ],
-			$repositoryDefinitions->getEntityNamespaces()
+			$repositoryDefinitions->getEntityTypeToNamespace()
 		);
 		$this->assertEquals(
 			[ '' => 'http://foo.oof/entity/' ],
@@ -68,7 +68,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 		);
 		$this->assertEquals(
 			[ 'item' => 303, 'property' => 808, 'cool' => 666 ],
-			$repositoryDefinitions->getEntityNamespaces()
+			$repositoryDefinitions->getEntityTypeToNamespace()
 		);
 		$this->assertEquals(
 			[ '' => 'http://foo.oof/entity/', 'coolrepo' => 'http://soooo.cooooool/entity/' ],
@@ -110,7 +110,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 		);
 		$this->assertEquals(
 			[ 'item' => 303, 'property' => 808, 'cool' => 666 ],
-			$repositoryDefinitions->getEntityNamespaces()
+			$repositoryDefinitions->getEntityTypeToNamespace()
 		);
 		$this->assertEquals(
 			[ '' => 'http://foo.oof/entity/', 'coolrepo' => 'http://soooo.cooooool/entity/' ],
@@ -148,7 +148,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 		$client = WikibaseClient::getDefaultInstance( 'reset' );
 		$repositoryDefinitions = $client->getRepositoryDefinitions();
 
-		$this->assertEquals( 666, $repositoryDefinitions->getEntityNamespaces()['cool'] );
+		$this->assertEquals( 666, $repositoryDefinitions->getEntityTypeToNamespace()['cool'] );
 		$this->assertEquals( [ 'cool' ], $repositoryDefinitions->getEntityTypesPerRepository()['coolrepo'] );
 	}
 
@@ -176,7 +176,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 		$client = WikibaseClient::getDefaultInstance( 'reset' );
 		$repositoryDefinitions = $client->getRepositoryDefinitions();
 
-		$this->assertEquals( 666, $repositoryDefinitions->getEntityNamespaces()['cool'] );
+		$this->assertEquals( 666, $repositoryDefinitions->getEntityTypeToNamespace()['cool'] );
 		$this->assertEquals( [ 'item', 'property', 'cool' ], $repositoryDefinitions->getEntityTypesPerRepository()[''] );
 	}
 

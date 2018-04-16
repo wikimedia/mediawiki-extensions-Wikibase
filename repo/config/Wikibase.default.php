@@ -21,8 +21,11 @@ return [
 	],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
-	// This setting is used to enable entity types.
+	// Using this setting will not enable use of the entity type. See enabledEntityTypes below.
 	'entityNamespaces' => [],
+
+	// List of enabled entity types.
+	'enabledEntityTypes' => [],
 
 	// See StatementGrouperBuilder for an example.
 	'statementSections' => [],

@@ -308,8 +308,8 @@ class WikibaseRepo {
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitions ] );
 
-		$entityTypeDefinitions = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitions ] );
+		$entityTypeDefinitionArrays = self::getDefaultEntityTypes();
+		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitionArrays ] );
 
 		$settings = WikibaseSettings::getRepoSettings();
 
@@ -319,7 +319,7 @@ class WikibaseRepo {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
+			new EntityTypeDefinitions( $entityTypeDefinitionArrays ),
 			self::getRepositoryDefinitionsFromSettings( $settings )
 		);
 	}
@@ -337,6 +337,7 @@ class WikibaseRepo {
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
 			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			'enabled-entity-types' => $settings->getSetting( 'enabledEntityTypes' ),
 		] ];
 
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
@@ -344,6 +345,12 @@ class WikibaseRepo {
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
 				'entity-namespaces' => $repositorySettings['entityNamespaces'],
+				// TODO explicitly enable types here?
+				// OR assume all are enabled? (This won't work for remote repos with form entity types as they have no namespace...)
+				// TODO all repo settings will need a list of enabled entity types as well as the NS ID mapping
+				// TODO do entities with no namespace even work for foreign repos? there still has to be some namespace???? O_o
+				//'enabled-entity-types' => $repositorySettings['enabledEntityTypes'],
+				'enabled-entity-types' => array_keys( $repositorySettings['entityNamespaces'] ),
 				'prefix-mapping' => $repositorySettings['prefixMapping'],
 			];
 		}
@@ -1287,7 +1294,9 @@ class WikibaseRepo {
 	 *  entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
-		return $this->repositoryDefinitions->getAllEntityTypes();
+		$allTypes = $this->entityTypeDefinitions->getEntityTypes();
+		$list = $this->repositoryDefinitions->getAllEntityTypes();
+		return $list;
 	}
 
 	/**
@@ -1296,7 +1305,9 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->getLocalEntityNamespaces() );
+		$allTypes = $this->entityTypeDefinitions->getEntityTypes();
+		$list = array_keys( $this->getLocalEntityNamespaces() );
+		return $list;
 	}
 
 	/**
@@ -1672,6 +1683,13 @@ class WikibaseRepo {
 	 */
 	public function getLocalEntityNamespaces() {
 		return $this->settings->getSetting( 'entityNamespaces' );
+	}
+
+	/**
+	 * @return string[] A list of entity type identifiers that are enabled.
+	 */
+	public function getLocalEnabledEntityTypes() {
+		return $this->settings->getSetting( 'enabledEntityTypes' );
 	}
 
 	/**

@@ -60,6 +60,10 @@ if ( !defined( 'WB_VERSION' ) ) {
 				'item' => WB_REPO_NS_ITEM,
 				'property' => WB_REPO_NS_PROPERTY
 			],
+			'enabledEntityTypes' => [
+				'item',
+				'property',
+			],
 			'prefixMapping' => [ '' => '' ],
 		]
 	];
