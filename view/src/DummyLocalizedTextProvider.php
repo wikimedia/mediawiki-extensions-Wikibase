@@ -17,7 +17,7 @@ class DummyLocalizedTextProvider implements LocalizedTextProvider {
 	 * @return string The $key, followed by a colon and comma separated $params, all in brackets.
 	 */
 	public function get( $key, array $params = [] ) {
-		return "($key" . ( $params !== [] ? ": " . implode( $params, ", " ) : "" ) . ")";
+		return "($key" . ( $params !== [] ? ": " . implode( ", ", $params ) : "" ) . ")";
 	}
 
 	/**
