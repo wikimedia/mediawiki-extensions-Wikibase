@@ -315,6 +315,8 @@ class SearchEntities extends ApiBase {
 				'apihelp-wbsearchentities-example-3',
 			'action=wbsearchentities&search=alphabet&language=en&props=' =>
 				'apihelp-wbsearchentities-example-5',
+			'action=wbsearchentities&search=Q1234&language=en' =>
+				'apihelp-wbsearchentities-example-6',
 		];
 	}
 

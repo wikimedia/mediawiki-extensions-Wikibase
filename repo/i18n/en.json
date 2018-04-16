@@ -585,6 +585,7 @@
 	"apihelp-wbsearchentities-example-3": "Search for \"alphabet\" in English language for type property",
 	"apihelp-wbsearchentities-example-4": "Search for \"abc\" in English language with a limit of 2 and an offset of 2",
 	"apihelp-wbsearchentities-example-5": "Search for \"alphabet\" in English language omitting url parameter",
+	"apihelp-wbsearchentities-example-6": "Search for \"Q1234\" in English language, to match the entity ID.",
 	"apihelp-query+wbsearch-description": "Searches for entities using labels and aliases.\nThis can be used as a generator for other queries.\nReturns the matched term that should be displayed.",
 	"apihelp-query+wbsearch-summary": "Searches for entities using labels and aliases.",
 	"apihelp-query+wbsearch-extended-description": "This can be used as a generator for other queries.\nReturns the matched term that should be displayed.",
