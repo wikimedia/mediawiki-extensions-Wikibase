@@ -219,4 +219,12 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'entity-search-callback' );
 	}
 
+	/**
+	 * @return array An array mapping entity type identifiers to string[] of sub entity types.
+	 * Not guaranteed to contain all entity types, will only contain entity types that have sub entities.
+	 */
+	public function getSubEntityTypes() {
+		return $this->getMapForDefinitionField( 'sub-entity-types' );
+	}
+
 }

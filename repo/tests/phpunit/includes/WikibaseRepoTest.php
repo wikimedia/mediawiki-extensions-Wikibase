@@ -362,13 +362,32 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetLocalEntityTypes() {
-		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting(
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting(
 			'entityNamespaces',
 			[
 				'foo' => 100,
 				'bar' => 102
 			]
+		);
+		$settings->setSetting(
+			'repositories',
+			[ '' => [
+				'database' => null,
+				'base-uri' => null,
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ]
+		);
+
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
+			new RepositoryDefinitions(
+				$settings->getSetting( 'repositories' ),
+				new EntityTypeDefinitions( [] )
+			)
 		);
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
@@ -406,7 +425,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			WikibaseRepo::getDefaultInstance()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			new RepositoryDefinitions( $repoDefinitions )
+			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) )
 		);
 	}
 
@@ -555,7 +574,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
+			new EntityTypeDefinitions( [] )
 		);
 	}
 
