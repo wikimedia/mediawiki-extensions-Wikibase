@@ -308,10 +308,12 @@ class WikibaseRepo {
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitions ] );
 
-		$entityTypeDefinitions = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitions ] );
+		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
+		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitionsArray ] );
 
 		$settings = WikibaseSettings::getRepoSettings();
+
+		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
@@ -319,20 +321,24 @@ class WikibaseRepo {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			self::getRepositoryDefinitionsFromSettings( $settings )
+			$entityTypeDefinitions,
+			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
 	}
 
 	/**
 	 * @param SettingsArray $settings
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
 	 * @return RepositoryDefinitions
 	 */
-	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
+	private static function getRepositoryDefinitionsFromSettings(
+		SettingsArray $settings,
+		EntityTypeDefinitions $entityTypeDefinitions
+	) {
 		// FIXME: It might no longer be needed to check different settings (e.g. changesDatabase vs foreignRepositories)
 		// once repository-related settings are unified, see: T153767.
-		$definitions = [ '' => [
+		$repoDefinitions = [ '' => [
 			'database' => $settings->getSetting( 'changesDatabase' ),
 			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
@@ -340,7 +346,7 @@ class WikibaseRepo {
 		] ];
 
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
-			$definitions[$repository] = [
+			$repoDefinitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
 				'entity-namespaces' => $repositorySettings['entityNamespaces'],
@@ -348,7 +354,7 @@ class WikibaseRepo {
 			];
 		}
 
-		return new RepositoryDefinitions( $definitions );
+		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
 	}
 
 	/**
@@ -1283,8 +1289,9 @@ class WikibaseRepo {
 	/**
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
-	 *  $wgWBRepoSettings['entityNamespaces'] setting. Optionally the list also contains
-	 *  entity types from the configured foreign repositories.
+	 *  $wgWBRepoSettings['entityNamespaces'] setting.
+	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
+	 *  Optionally the list also contains entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
 		return $this->repositoryDefinitions->getAllEntityTypes();
@@ -1294,9 +1301,11 @@ class WikibaseRepo {
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
+	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->getLocalEntityNamespaces() );
+		// A blank string represents the local repo
+		return $this->repositoryDefinitions->getEntityTypesPerRepository()[''];
 	}
 
 	/**
