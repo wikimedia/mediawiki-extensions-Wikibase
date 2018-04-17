@@ -542,6 +542,7 @@
 	"apihelp-wbsearchentities-example-3": "Sök efter \"alphabet\" på engelska, för typen egenskap",
 	"apihelp-wbsearchentities-example-4": "Sök efter \"abc\" på engelska med en gräns på 2 och en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Sök efter \"alphabet\" på engelska och utelämna URL-parametrar",
+	"apihelp-wbsearchentities-example-6": "Sök efter \"Q1234\" på engelska för att matcha entitetens ID.",
 	"apihelp-query+wbsearch-description": "Sök efter entiteter med etiketter och alias.\nDetta kan användas som en generator till andra förfrågan.\nReturnerar den matchade termen som bör visas.",
 	"apihelp-query+wbsearch-summary": "Söker efter entiteter med etiketter och alias.",
 	"apihelp-query+wbsearch-extended-description": "Detta kan användas som en generator för andra frågor.\nReturnerar den matchade termen som bör visas.",
