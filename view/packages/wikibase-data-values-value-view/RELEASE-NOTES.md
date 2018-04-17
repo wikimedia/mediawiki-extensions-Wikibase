@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.22.2 (2018-04-17)
+
+* Updated i18n message translations.
+
 ## 0.22.1 (2017-11-16)
 * Fixed `jQuery.ui.commonssuggester` not always displaying all thumbnails.
 
