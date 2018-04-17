@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0643efb5_1bd199f8",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-17T19:51:48Z",
+      "side": 1,
+      "message": "I think this should be somewhere in config or hooks - this is not really a fixed property of the code, more like a config. This code has no idea about statement boosting, it just uses the rescore configs, whatever they are. But we can live with it for now and change it in later patch.",
+      "revId": "5bde0c0bcde39063bf6a6af53b8a7cf82f3c84db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
