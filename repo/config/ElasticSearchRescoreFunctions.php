@@ -39,8 +39,11 @@ return [
 			],
 			[
 				// (De)boosting by statement values, see statementBoost in search settings
-				'type' => 'statement_boost',
+				'type' => 'term_boost',
 				'weight' => '0.1',
+				'params' => [
+					'statement_keywords' => '_statementBoost_'
+				]
 			]
 		],
 	],
