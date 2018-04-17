@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 
 /**
@@ -42,7 +43,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenInvalidArguments_constructorThrowsException( array $args ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new RepositoryDefinitions( $args );
+		new RepositoryDefinitions( $args, new EntityTypeDefinitions( [] ) );
 	}
 
 	/**
@@ -72,13 +73,13 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetRepositoryNames() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals( [ '', 'media', 'lexeme' ], $definitions->getRepositoryNames() );
 	}
 
 	public function testGetDatabaseNames() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[ '' => false, 'media' => 'foowiki', 'lexeme' => 'bazwiki' ],
@@ -87,7 +88,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetConceptBaseUris() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[
@@ -100,7 +101,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetPrefixMappings() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[ '' => [], 'media' => [], 'lexeme' => [ 'foo' => 'media' ] ],
@@ -109,7 +110,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityTypesPerRepository() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[
@@ -122,7 +123,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityTypeToRepositoryMapping() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[
@@ -140,14 +141,17 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 		$irrelevantDefinitions = [ 'database' => 'foo', 'base-uri' => 'http://acme.test/concept/', 'prefix-mapping' => [] ];
 
-		new RepositoryDefinitions( [
-			'' => array_merge( $irrelevantDefinitions, [ 'entity-namespaces' => [ 'item' => 666, 'property' => 777 ] ] ),
-			'media' => array_merge( $irrelevantDefinitions, [ 'entity-namespaces' => [ 'item' => 111, 'mediainfo' => 222 ] ] ),
-		] );
+		new RepositoryDefinitions(
+			[
+				'' => array_merge( $irrelevantDefinitions, [ 'entity-namespaces' => [ 'item' => 666, 'property' => 777 ] ] ),
+				'media' => array_merge( $irrelevantDefinitions, [ 'entity-namespaces' => [ 'item' => 111, 'mediainfo' => 222 ] ] ),
+			],
+			new EntityTypeDefinitions( [] )
+		);
 	}
 
 	public function testGetAllEntityTypes() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[ 'item', 'property', 'mediainfo', 'lexeme' ],
@@ -156,7 +160,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityNamespaces() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals(
 			[ 'item' => 666, 'property' => 777, 'mediainfo' => 888, 'lexeme' => 999 ],
