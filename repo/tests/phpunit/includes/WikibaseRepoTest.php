@@ -362,18 +362,42 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetLocalEntityTypes() {
-		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting(
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting(
 			'entityNamespaces',
 			[
 				'foo' => 100,
-				'bar' => 102
+				'bar' => 102,
+				'lexeme' => 104,
 			]
+		);
+		$settings->setSetting(
+			'repositories',
+			[ '' => [
+				'database' => null,
+				'base-uri' => null,
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ]
+		);
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				$settings->getSetting( 'repositories' ),
+				$entityTypeDefinitions
+			)
 		);
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
 		$this->assertContains( 'foo', $localEntityTypes );
 		$this->assertContains( 'bar', $localEntityTypes );
+		$this->assertContains( 'lexeme', $localEntityTypes );
+		// Sub entities should appear in the list
+		$this->assertContains( 'form', $localEntityTypes );
 	}
 
 	/**
@@ -406,7 +430,19 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			WikibaseRepo::getDefaultInstance()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			new RepositoryDefinitions( $repoDefinitions )
+			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) )
+		);
+	}
+
+	private function getEntityTypeDefinitions() {
+		return new EntityTypeDefinitions(
+			[
+				'lexeme' => [
+					'sub-entity-types' => [
+						'form',
+					],
+				],
+			]
 		);
 	}
 
@@ -415,17 +451,27 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
 		}
 
-		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 200, 'bar' => 220 ] ] ),
-			$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 250 ] ] ),
-			$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'foobar' => 280 ] ] )
-		) );
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$wikibaseRepo = new WikibaseRepo(
+			WikibaseRepo::getDefaultInstance()->getSettings(),
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				array_merge(
+					$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 200, 'bar' => 220 ] ] ),
+					$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 250 ] ] ),
+					$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'lexeme' => 280 ] ] )
+				),
+				$entityTypeDefinitions
+			)
+		);
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
 		$this->assertContains( 'foo', $enabled );
 		$this->assertContains( 'bar', $enabled );
 		$this->assertContains( 'baz', $enabled );
-		$this->assertContains( 'foobar', $enabled );
+		$this->assertContains( 'lexeme', $enabled );
+		$this->assertContains( 'form', $enabled );
 	}
 
 	public function testGetExceptionLocalizer() {
@@ -555,7 +601,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
+			new EntityTypeDefinitions( [] )
 		);
 	}
 
