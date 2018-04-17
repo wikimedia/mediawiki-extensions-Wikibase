@@ -36,6 +36,11 @@ class RepositoryDefinitions {
 	private $repositoryDefinitions = [];
 
 	/**
+	 * @var EntityTypeDefinitions
+	 */
+	private $entityTypeDefinitions;
+
+	/**
 	 * @var array[]
 	 */
 	private $entityTypeToRepositoryMapping = [];
@@ -54,10 +59,11 @@ class RepositoryDefinitions {
 	 * @param array[] $repositoryDefinitions Associative array mapping repository names to an array of
 	 * repository settings. Empty-string key stands for local repository.
 	 * See class description for information on the expected format of $repositoryDefinitions
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
 	 * @throws InvalidArgumentException if $repositoryDefinitions has invalid format
 	 */
-	public function __construct( array $repositoryDefinitions ) {
+	public function __construct( array $repositoryDefinitions, EntityTypeDefinitions $entityTypeDefinitions ) {
 		$requiredFields = [ 'database', 'base-uri', 'entity-namespaces', 'prefix-mapping' ];
 
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $repositoryDefinitions, '$repositoryDefinitions' );
@@ -76,6 +82,7 @@ class RepositoryDefinitions {
 		}
 
 		$this->repositoryDefinitions = $repositoryDefinitions;
+		$this->entityTypeDefinitions = $entityTypeDefinitions;
 
 		$this->buildEntityTypeMappings( $repositoryDefinitions );
 	}
@@ -111,6 +118,7 @@ class RepositoryDefinitions {
 	/**
 	 * @return array[] Associative array (string => string[]) mapping repository names to lists of entity types
 	 * provided by each repository.
+	 * Note: This includes sub entity types.
 	 */
 	public function getEntityTypesPerRepository() {
 		return $this->entityTypesPerRepository;
@@ -120,6 +128,7 @@ class RepositoryDefinitions {
 	 * @return array[] Associative array (string => array) mapping entity types to a list of
 	 * [string repository name, int namespace] pairs, for repositories that provide entities of the given type,
 	 * and the namespace ID on the respective repository.
+	 * Note: Sub entities are not represented in the return as they do not have a namespace.
 	 */
 	public function getEntityTypeToRepositoryMapping() {
 		return $this->entityTypeToRepositoryMapping;
@@ -127,14 +136,32 @@ class RepositoryDefinitions {
 
 	/**
 	 * @return string[] List of entity type names provided by all defined repositories.
+	 * Note: This includes sub entity types.
 	 */
 	public function getAllEntityTypes() {
-		return array_keys( $this->entityTypeToRepositoryMapping );
+		$mainEntityTypes = array_keys( $this->entityTypeToRepositoryMapping );
+		return array_merge( $mainEntityTypes, $this->getSubEntityTypesFromEntityTypes( $mainEntityTypes ) );
+	}
+
+	/**
+	 * @param string[] $entityTypes
+	 * @return string[]
+	 */
+	private function getSubEntityTypesFromEntityTypes( $entityTypes ) {
+		$subTypeMap = $this->entityTypeDefinitions->getSubEntityTypes();
+		$subTypes = [];
+		foreach ( $entityTypes as $type ) {
+			if ( array_key_exists( $type, $subTypeMap ) ) {
+				$subTypes = array_merge( $subTypes, $subTypeMap[$type] );
+			}
+		}
+		return array_unique( $subTypes );
 	}
 
 	/**
 	 * @return int[] Associative array (string => int) mapping entity type names to namespace IDs (numbers) related
 	 * namespace on the wiki of the repository that provides entities of the given type.
+	 * Note: Sub entities are not represented in the return as they do not have a namespace.
 	 */
 	public function getEntityNamespaces() {
 		return $this->entityNamespaces;
@@ -152,10 +179,13 @@ class RepositoryDefinitions {
 
 	/**
 	 * @param array[] $repositoryDefinitions
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function buildEntityTypeMappings( array $repositoryDefinitions ) {
+	private function buildEntityTypeMappings( array $repositoryDefinitions) {
+		$subEntityTypeMap = $this->entityTypeDefinitions->getSubEntityTypes();
+
 		$this->entityTypeToRepositoryMapping = [];
 		$this->entityTypesPerRepository = [];
 		$this->entityNamespaces = [];
@@ -171,8 +201,14 @@ class RepositoryDefinitions {
 				}
 
 				$this->entityTypeToRepositoryMapping[$type][] = [ $repositoryName, $namespace ];
-				$this->entityTypesPerRepository[$repositoryName][] = $type;
 				$this->entityNamespaces[$type] = $namespace;
+
+				$this->entityTypesPerRepository[$repositoryName][] = $type;
+				if ( array_key_exists( $type, $subEntityTypeMap ) ) {
+					foreach ( $subEntityTypeMap[$type] as $subEntityType ) {
+						$this->entityTypesPerRepository[$repositoryName][] = $subEntityType;
+					}
+				}
 			}
 		}
 	}
