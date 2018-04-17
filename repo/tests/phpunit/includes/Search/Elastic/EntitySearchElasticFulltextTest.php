@@ -7,7 +7,7 @@ use CirrusSearch\Query\BoostTemplatesFeature;
 use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Query\FullTextQueryStringQueryBuilder;
 use CirrusSearch\Query\InSourceFeature;
-use CirrusSearch\Search\FunctionScoreBuilder;
+use CirrusSearch\Search\Rescore\FunctionScoreBuilder;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
 use MediaWikiTestCase;
