@@ -648,10 +648,12 @@ final class WikibaseClient {
 		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', [ &$dataTypeDefinitions ] );
 
-		$entityTypeDefinitions = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseClientEntityTypes', [ &$entityTypeDefinitions ] );
+		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
+		Hooks::run( 'WikibaseClientEntityTypes', [ &$entityTypeDefinitionsArray ] );
 
 		$settings = WikibaseSettings::getClientSettings();
+
+		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
@@ -659,18 +661,19 @@ final class WikibaseClient {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			self::getRepositoryDefinitionsFromSettings( $settings ),
+			$entityTypeDefinitions,
+			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
 			MediaWikiServices::getInstance()->getSiteLookup()
 		);
 	}
 
 	/**
 	 * @param SettingsArray $settings
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
 	 * @return RepositoryDefinitions
 	 */
-	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
+	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
 		$definitions = [];
 
 		// Backwards compatibility: if the old "foreignRepositories" settings is there,
@@ -704,7 +707,7 @@ final class WikibaseClient {
 			];
 		}
 
-		return new RepositoryDefinitions( $definitions );
+		return new RepositoryDefinitions( $definitions, $entityTypeDefinitions );
 	}
 
 	/**

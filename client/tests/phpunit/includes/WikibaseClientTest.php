@@ -387,7 +387,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => 'repo', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => 'repo', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
+			new EntityTypeDefinitions( [] )
 		);
 	}
 
