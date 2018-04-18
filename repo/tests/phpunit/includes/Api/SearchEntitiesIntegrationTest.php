@@ -23,13 +23,15 @@ use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\CombinedEntitySearchHelper;
+use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\EntitySearchTermIndex;
+use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 
 /**
- * @covers \Wikibase\Repo\Api\EntitySearchTermIndex
+ * @covers \Wikibase\Repo\Api\EntityTermSearchHelper
  * @covers \Wikibase\Repo\Api\SearchEntities
  * @covers \Wikibase\Repo\Search\Elastic\EntitySearchElastic
  *
@@ -92,15 +94,22 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testTermTableIntegration( $query, array $expectedIds ) {
-		$entitySearchTermIndex = new EntitySearchTermIndex(
-			$this->newEntityLookup(),
-			$this->idParser,
-			$this->newConfigurableTermSearchInteractor(),
-			$this->getMock( LabelDescriptionLookup::class ),
-			[]
+		$searchHelper = new CombinedEntitySearchHelper(
+			[
+				new EntityIdSearchHelper(
+					$this->newEntityLookup(),
+					$this->idParser,
+					$this->getMock( LabelDescriptionLookup::class ),
+					[]
+				),
+				new EntityTermSearchHelper(
+					$this->newConfigurableTermSearchInteractor()
+				)
+			]
 		);
 
-		$resultData = $this->executeApiModule( $entitySearchTermIndex, $query );
+
+		$resultData = $this->executeApiModule( $searchHelper, $query );
 		$this->assertSameSearchResults( $resultData, $expectedIds );
 	}
 

@@ -139,15 +139,21 @@ return [
 						'please enable the useTermsTableSearchFields setting.'
 					);
 				}
-				return new Wikibase\Repo\Api\EntitySearchTermIndex(
-					$repo->getEntityLookup(),
-					$repo->getEntityIdParser(),
-					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
-					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-						$repo->getTermLookup(),
-						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
-					),
-					$repo->getEntityTypeToRepositoryMapping()
+				return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+					[
+						new Wikibase\Repo\Api\EntityIdSearchHelper(
+							$repo->getEntityLookup(),
+							$repo->getEntityIdParser(),
+							new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+								$repo->getTermLookup(),
+								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+							),
+							$repo->getEntityTypeToRepositoryMapping()
+						),
+						new Wikibase\Repo\Api\EntityTermSearchHelper(
+							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
+						)
+					]
 				);
 			}
 		},
@@ -221,15 +227,22 @@ return [
 						'please enable the useTermsTableSearchFields setting.'
 					);
 				}
-				return new Wikibase\Repo\Api\EntitySearchTermIndex(
-					$repo->getEntityLookup(),
-					$repo->getEntityIdParser(),
-					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
-					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-						$repo->getTermLookup(),
-						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
-					),
-					$repo->getEntityTypeToRepositoryMapping()
+
+				return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+					[
+						new Wikibase\Repo\Api\EntityIdSearchHelper(
+							$repo->getEntityLookup(),
+							$repo->getEntityIdParser(),
+							new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+								$repo->getTermLookup(),
+								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+							),
+							$repo->getEntityTypeToRepositoryMapping()
+						),
+						new Wikibase\Repo\Api\EntityTermSearchHelper(
+							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
+						)
+					]
 				);
 			}
 		},

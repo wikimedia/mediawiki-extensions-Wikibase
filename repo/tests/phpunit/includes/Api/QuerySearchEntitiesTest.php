@@ -16,7 +16,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Api\EntitySearchTermIndex;
+use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\QuerySearchEntities;
 
 /**
@@ -90,10 +90,10 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 * @param array $params
 	 * @param TermSearchResult[] $matches
 	 *
-	 * @return EntitySearchTermIndex
+	 * @return EntityTermSearchHelper
 	 */
 	private function getMockEntitySearchHelper( array $params, array $matches ) {
-		$mock = $this->getMockBuilder( EntitySearchTermIndex::class )
+		$mock = $this->getMockBuilder( EntityTermSearchHelper::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->atLeastOnce() )
