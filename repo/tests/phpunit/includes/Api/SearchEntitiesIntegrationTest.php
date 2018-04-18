@@ -24,12 +24,12 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\EntitySearchTermIndex;
+use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 
 /**
- * @covers \Wikibase\Repo\Api\EntitySearchTermIndex
+ * @covers \Wikibase\Repo\Api\EntityTermSearchHelper
  * @covers \Wikibase\Repo\Api\SearchEntities
  * @covers \Wikibase\Repo\Search\Elastic\EntitySearchElastic
  *
@@ -92,7 +92,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testTermTableIntegration( $query, array $expectedIds ) {
-		$entitySearchTermIndex = new EntitySearchTermIndex(
+		$entitySearchTermIndex = new EntityTermSearchHelper(
 			$this->newEntityLookup(),
 			$this->idParser,
 			$this->newConfigurableTermSearchInteractor(),
