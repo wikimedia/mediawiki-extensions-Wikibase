@@ -22,6 +22,30 @@
       "revId": "6e2e6dbb9f516fbc8cfd5d56ebd22c6c10ebb588",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af5b9dde_4cc7f919",
+        "filename": "view/lib/wikibase-data-values-value-view",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-04-18T08:18:43Z",
+      "side": 1,
+      "message": "ewww, yes...",
+      "parentUuid": "f33571f5_61f85bf7",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "6e2e6dbb9f516fbc8cfd5d56ebd22c6c10ebb588",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
