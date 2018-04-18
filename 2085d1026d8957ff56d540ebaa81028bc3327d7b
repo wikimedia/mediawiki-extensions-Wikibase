@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eb2294c_f4b7981b",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-04-18T07:46:01Z",
+      "side": 1,
+      "message": "in principle both I think, even though we might only be using on the repo side.\nThis kind of defines what entity types are there, and we want client to also know these \"sub\" ones.",
+      "range": {
+        "startLine": 77,
+        "startChar": 31,
+        "endLine": 77,
+        "endChar": 60
+      },
+      "revId": "2085d1026d8957ff56d540ebaa81028bc3327d7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
