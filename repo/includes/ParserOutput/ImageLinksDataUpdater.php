@@ -69,7 +69,13 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		foreach ( $this->fileNames as $fileName => $null ) {
-			$parserOutput->addImage( $fileName );
+			$file = wfFindFile( $fileName );
+
+			$parserOutput->addImage(
+				$fileName,
+				$file ? $file->getSha1() : false,
+				$file ? $file->getTimestamp() : false
+			);
 		}
 	}
 
