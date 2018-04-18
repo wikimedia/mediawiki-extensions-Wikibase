@@ -1828,6 +1828,7 @@ class WikibaseRepo {
 						'nxm', // T167745
 						'ood', // T155423
 						'otk', // T137809
+						'phn', // T155425
 						'pjt', // T155426
 						'ppu', // T174233
 						'pwn', // T174231
