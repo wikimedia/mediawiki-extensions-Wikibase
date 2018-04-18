@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f33571f5_61f85bf7",
+        "filename": "view/lib/wikibase-data-values-value-view",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-04-18T08:15:02Z",
+      "side": 1,
+      "message": "this change looks evil :)",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "6e2e6dbb9f516fbc8cfd5d56ebd22c6c10ebb588",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
