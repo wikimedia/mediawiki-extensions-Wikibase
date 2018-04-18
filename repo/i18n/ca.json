@@ -209,6 +209,8 @@
 	"wikibase-history-title-without-label": "Historial de revisions de ($1)",
 	"wikibase-listproperties-datatype": "Tipus de dades:",
 	"wikibase-listproperties-all": "Tots els tipus de dades",
+	"special-entitieswithoutlabel": "Entitats sense etiqueta",
+	"wikibase-entitieswithoutlabel-legend": "Obtenir llista d'entitats sense etiqueta",
 	"wikibase-entitieswithoutlabel-label-language": "Codi d'idioma:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipus:",
 	"wikibase-entitieswithoutlabel-submit": "Cerca",

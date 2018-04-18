@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Krol111",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Przem(1)s"
 		]
 	},
-	"wikibase-edit": "sprowjej",
+	"wikibase-edit": "edytuj",
 	"wikibase-add": "wkludź",
 	"wikibase-label-empty": "Uopis ńy uostoł podany",
 	"wikibase-description-empty": "Ńy wszkryflano uopisu",
