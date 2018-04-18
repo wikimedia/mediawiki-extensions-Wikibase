@@ -16,6 +16,24 @@
       "revId": "fc081a926745082fa82f7b1782cae7cc8a900ed1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49d55a59_ac44e6ab",
+        "filename": "repo/includes/Api/EntityTermSearchHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-04-18T11:14:03Z",
+      "side": 1,
+      "message": "\u003e Or could it be that $exactSearchResults can have multiple entries per entity ID, thus it is still kind of \"flattened\" in mergeSearchResults?\n\nI\u0027m not sure if that would be possible / it that happens.\nI think lets leave this logic untouched for now (as it was) :)",
+      "parentUuid": "549d1c8f_658be62f",
+      "revId": "fc081a926745082fa82f7b1782cae7cc8a900ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
