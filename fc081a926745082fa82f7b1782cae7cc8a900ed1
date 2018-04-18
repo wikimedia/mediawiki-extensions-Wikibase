@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "549d1c8f_658be62f",
+        "filename": "repo/includes/Api/EntityTermSearchHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-04-18T11:07:45Z",
+      "side": 1,
+      "message": "is this step necessary? Unless I get it wrong this results in trimming $exactSearchResults to have no more than $limit entries in it, and puts the result into $allSearchResults.\nBut isn\u0027t at this point $exactSearchResults for sure not bigger than $limit? So couldn\u0027t this just be $allSearchResults \u003d $exactSearchResults?\n\nOr could it be that $exactSearchResults can have multiple entries per entity ID, thus it is still kind of \"flattened\" in mergeSearchResults?",
+      "revId": "fc081a926745082fa82f7b1782cae7cc8a900ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
