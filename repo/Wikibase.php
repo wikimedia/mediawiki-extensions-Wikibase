@@ -639,16 +639,21 @@ call_user_func( function() {
 		'class' => Wikibase\Repo\Api\QuerySearchEntities::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchTermIndex(
-				$repo->getEntityLookup(),
-				$repo->getEntityIdParser(),
-				$repo->newTermSearchInteractor( $apiQuery->getLanguage()->getCode() ),
-				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-					$repo->getTermLookup(),
-					$repo->getLanguageFallbackChainFactory()
-						->newFromLanguage( $apiQuery->getLanguage() )
-				),
-				$repo->getEntityTypeToRepositoryMapping()
+			$entitySearchHelper = new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+				[
+					new Wikibase\Repo\Api\EntityIdSearchHelper(
+						$repo->getEntityLookup(),
+						$repo->getEntityIdParser(),
+						new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+							$repo->getTermLookup(),
+							$repo->getLanguageFallbackChainFactory()->newFromLanguage( $apiQuery->getLanguage() )
+						),
+						$repo->getEntityTypeToRepositoryMapping()
+					),
+					new Wikibase\Repo\Api\EntityTermSearchHelper(
+						$repo->newTermSearchInteractor( $apiQuery->getLanguage()->getCode() )
+					)
+				]
 			);
 
 			return new Wikibase\Repo\Api\QuerySearchEntities(

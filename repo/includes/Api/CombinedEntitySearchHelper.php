@@ -1,0 +1,93 @@
+<?php
+
+namespace Wikibase\Repo\Api;
+
+use Wikibase\Lib\Interactors\TermSearchResult;
+
+/**
+ * Helper class to search for entities by ID
+ *
+ * @license GPL-2.0-or-later
+ */
+class CombinedEntitySearchHelper implements EntitySearchHelper {
+
+	/**
+	 * @var EntitySearchHelper[]
+	 */
+	private $searchHelpers;
+
+	/**
+	 * CombinedEntitySearchHelper constructor.
+	 * @param array $searchHelpers ordered array of EntitySearchHelpers to be used.
+	 */
+	public function __construct( array $searchHelpers ) {
+		$this->searchHelpers = $searchHelpers;
+	}
+
+	/**
+	 * Get entities matching the search term.
+	 *
+	 * @param string $text
+	 * @param string $languageCode
+	 * @param string $entityType
+	 * @param int $limit
+	 * @param bool $strictLanguage
+	 *
+	 * @return TermSearchResult[] Key: string Serialized EntityId
+	 */
+	public function getRankedSearchResults(
+		$text,
+		$languageCode,
+		$entityType,
+		$limit,
+		$strictLanguage
+	) {
+		$allSearchResults = [];
+
+		foreach ( $this->searchHelpers as $helper ) {
+			$newResults = $helper->getRankedSearchResults(
+				$text,
+				$languageCode,
+				$entityType,
+				$limit - count( $allSearchResults ),
+				$strictLanguage
+			);
+			$allSearchResults = $this->mergeSearchResults( $allSearchResults, $newResults, $limit );
+
+			// If we have already hit the correct number of results then stop looping through helpers
+			if ( $limit - count( $allSearchResults ) <= 0 ) {
+				break;
+			}
+		}
+
+		return $allSearchResults;
+	}
+
+	/**
+	 * @param TermSearchResult[] $searchResults
+	 * @param TermSearchResult[] $newSearchResults
+	 * @param int $limit
+	 *
+	 * @return TermSearchResult[]
+	 */
+	private function mergeSearchResults( array $searchResults, array $newSearchResults, $limit ) {
+		$searchResultEntityIdSerializations = array_keys( $searchResults );
+
+		foreach ( $newSearchResults as $searchResultToAdd ) {
+			$entityIdString = $searchResultToAdd->getEntityId()->getSerialization();
+
+			if ( !in_array( $entityIdString, $searchResultEntityIdSerializations ) ) {
+				$searchResults[$entityIdString] = $searchResultToAdd;
+				$searchResultEntityIdSerializations[] = $entityIdString;
+				$missing = $limit - count( $searchResults );
+
+				if ( $missing <= 0 ) {
+					return $searchResults;
+				}
+			}
+		}
+
+		return $searchResults;
+	}
+
+}

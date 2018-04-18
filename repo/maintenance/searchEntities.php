@@ -6,7 +6,7 @@ use OrderedStreamingForkController;
 use Maintenance;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\EntitySearchTermIndex;
+use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -156,7 +156,7 @@ class SearchEntities extends Maintenance {
 
 		switch ( $engine ) {
 			case 'sql':
-				return new EntitySearchTermIndex(
+				return new EntityTermSearchHelper(
 					$this->repo->getEntityLookup(),
 					$this->repo->getEntityIdParser(),
 					$this->repo->newTermSearchInteractor( $this->repo->getUserLanguage()->getCode() ),
