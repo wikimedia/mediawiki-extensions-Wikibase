@@ -81,4 +81,28 @@ class CombinedEntitySearchHelperUnitTest extends \PHPUnit\Framework\TestCase {
 		$this->assertCount( 1, $result );
 	}
 
+	public function testInternalSearchHelperDoesNotDuplicateEntriesForSingleEntity() {
+		$result1 = [ 'Q1' => new TermSearchResult( new Term( 'en', 'foo1' ), 'match1', new ItemId( 'Q1' ) ) ];
+		$result2 = [ 'Q1' => new TermSearchResult( new Term( 'en', 'foo2' ), 'match2', new ItemId( 'Q1' ) ) ];
+
+		$mock1 = $this->getMock( EntitySearchHelper::class );
+		$mock1->expects( $this->exactly( 1 ) )
+			->method( 'getRankedSearchResults' )
+			->willReturn( $result1 );
+		$mock2 = $this->getMock( EntitySearchHelper::class );
+		$mock2->expects( $this->exactly( 1 ) )
+			->method( 'getRankedSearchResults' )
+			->willReturn( $result2 );
+
+		$helper = new CombinedEntitySearchHelper( [ $mock1, $mock2 ] );
+		$result = $helper->getRankedSearchResults( '', '', '', 2, false );
+
+		$this->assertEquals(
+			[
+				'Q1' => $result1['Q1'],
+			],
+			$result
+		);
+	}
+
 }
