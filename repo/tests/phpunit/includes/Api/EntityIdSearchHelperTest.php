@@ -36,21 +36,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	const DEFAULT_DESCRIPTION = 'ptDescription';
 
 	/**
-	 * @param bool $exists
-	 *
-	 * @return Title
-	 */
-	public function getMockTitle( $exists ) {
-		$mock = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'exists' )
-			->will( $this->returnValue( $exists ) );
-		return $mock;
-	}
-
-	/**
 	 * Get a lookup that always returns a pt label and description
 	 *
 	 * @return LabelDescriptionLookup
@@ -89,13 +74,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockLabelDescriptionLookup(),
 			$entityTypeToRepositoryMapping
 		);
-	}
-
-	public function provideStrictLanguageValues() {
-		return [
-			[ true ],
-			[ false ],
-		];
 	}
 
 	public function provideTestGetRankedSearchResults() {

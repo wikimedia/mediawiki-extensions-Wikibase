@@ -25,27 +25,9 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	const EXISTING_LOCAL_ITEM = 'Q111';
-	const FOREIGN_REPO_PREFIX = 'foreign';
-	const EXISTING_FOREIGN_ITEM = 'foreign:Q2';
-	const EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX = 'Q2';
 	const DEFAULT_LANGUAGE = 'pt';
 	const DEFAULT_LABEL = 'ptLabel';
 	const DEFAULT_DESCRIPTION = 'ptDescription';
-
-	/**
-	 * @param bool $exists
-	 *
-	 * @return Title
-	 */
-	public function getMockTitle( $exists ) {
-		$mock = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'exists' )
-			->will( $this->returnValue( $exists ) );
-		return $mock;
-	}
 
 	/**
 	 * @param string $search
