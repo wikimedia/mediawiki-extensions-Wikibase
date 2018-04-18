@@ -12,14 +12,11 @@ use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Repo\Api\EntitySearchTermIndex;
-use Wikibase\TermIndexEntry;
+use Wikibase\Repo\Api\EntityIdSearchHelper;
 
 /**
- * @covers Wikibase\Repo\Api\EntitySearchTermIndex
+ * @covers Wikibase\Repo\Api\EntityTermSearchHelper
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -27,7 +24,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
+class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	const EXISTING_LOCAL_ITEM = 'Q111';
@@ -54,33 +51,6 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param string $search
-	 * @param string $language
-	 * @param string $type
-	 * @param TermSearchResult[] $returnResults
-	 *
-	 * @return ConfigurableTermSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
-	 */
-	private function getMockSearchInteractor(
-		$search,
-		$language,
-		$type,
-		array $returnResults = []
-	) {
-		$mock = $this->getMock( ConfigurableTermSearchInteractor::class );
-		$mock->expects( $this->atLeastOnce() )
-			->method( 'searchForEntities' )
-			->with(
-				$this->equalTo( $search ),
-				$this->equalTo( $language ),
-				$this->equalTo( $type ),
-				$this->equalTo( [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ] )
-			)
-			->will( $this->returnValue( $returnResults ) );
-		return $mock;
-	}
-
-	/**
 	 * Get a lookup that always returns a pt label and description
 	 *
 	 * @return LabelDescriptionLookup
@@ -98,7 +68,6 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newEntitySearchHelper(
-		ConfigurableTermSearchInteractor $searchInteractor,
 		array $entityTypeToRepositoryMapping = []
 	) {
 		$localEntityLookup = new InMemoryEntityLookup();
@@ -114,10 +83,9 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 			]
 		);
 
-		return new EntitySearchTermIndex(
+		return new EntityIdSearchHelper(
 			$entityLookup,
 			new ItemIdParser(),
-			$searchInteractor,
 			$this->getMockLabelDescriptionLookup(),
 			$entityTypeToRepositoryMapping
 		);
@@ -130,23 +98,6 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider provideStrictLanguageValues
-	 */
-	public function testSearchStrictLanguage_passedToSearchInteractor( $strictLanguage ) {
-		$searchInteractor = $this->getMockSearchInteractor( 'Foo', 'de-ch', 'item' );
-		$searchInteractor->expects( $this->atLeastOnce() )
-			->method( 'setTermSearchOptions' )
-			->with( $this->callback(
-				function ( TermSearchOptions $options ) use ( $strictLanguage ) {
-					return $options->getUseLanguageFallback() !== $strictLanguage;
-				}
-			) );
-
-		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
-		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $strictLanguage );
-	}
-
 	public function provideTestGetRankedSearchResults() {
 		$existingLocalItemResult = new TermSearchResult(
 			new Term( 'qid', self::EXISTING_LOCAL_ITEM ),
@@ -154,21 +105,6 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 			new ItemId( self::EXISTING_LOCAL_ITEM ),
 			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
 			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
-		);
-
-		$q222Result = new TermSearchResult(
-			new Term( 'en-gb', 'Fooooo' ),
-			'label',
-			new ItemId( 'Q222' ),
-			new Term( 'en-gb', 'FooHeHe' ),
-			new Term( 'en', 'FooHeHe en description' )
-		);
-
-		$q333Result = new TermSearchResult(
-			new Term( 'de', 'AMatchedTerm' ),
-			'alias',
-			new ItemId( 'Q333' ),
-			new Term( 'fr', 'ADisplayLabel' )
 		);
 
 		$existingForeignItemResult = new TermSearchResult(
@@ -180,74 +116,52 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$defaultLimit = 10;
-		$emptyInteractorResult = [];
 
 		return [
 			'No exact match' => [
 				'Q999',
 				$defaultLimit,
-				$emptyInteractorResult,
 				[],
 			],
 			'Exact EntityId match' => [
 				self::EXISTING_LOCAL_ITEM,
 				$defaultLimit,
-				$emptyInteractorResult,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
 			'Exact EntityId match in foreign repository' => [
 				self::EXISTING_FOREIGN_ITEM,
 				$defaultLimit,
-				$emptyInteractorResult,
 				[ self::EXISTING_FOREIGN_ITEM => $existingForeignItemResult ],
 			],
 			'EntityID plus term matches' => [
 				self::EXISTING_LOCAL_ITEM,
 				$defaultLimit,
-				[ $q222Result ],
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult, 'Q222' => $q222Result ],
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
 			'Trimming' => [
 				' ' . self::EXISTING_LOCAL_ITEM . ' ',
 				$defaultLimit,
-				$emptyInteractorResult,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
 			'Brackets are removed' => [
 				'(' . self::EXISTING_LOCAL_ITEM . ')',
 				$defaultLimit,
-				$emptyInteractorResult,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
 			'URL prefixes are removed' => [
 				'http://example.com/' . self::EXISTING_LOCAL_ITEM,
 				$defaultLimit,
-				$emptyInteractorResult,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
 			'Single characters are ignored' => [
 				'w/' . self::EXISTING_LOCAL_ITEM . '/w',
 				$defaultLimit,
-				$emptyInteractorResult,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
-			'EntityID extraction plus term matches' => [
+			'EntityID extraction' => [
 				'[id:' . self::EXISTING_LOCAL_ITEM . ']',
 				$defaultLimit,
-				[ $q222Result ],
-				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult, 'Q222' => $q222Result ],
-			],
-			'Multiple Results' => [
-				'Foo',
-				$defaultLimit,
-				[ $q222Result, $q333Result ],
-				[ 'Q222' => $q222Result, 'Q333' => $q333Result ],
-			],
-			'Multiple Results (limited)' => [
-				'Foo',
-				1,
-				[ $q222Result ],
-				[ 'Q222' => $q222Result ],
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
 		];
 	}
@@ -255,9 +169,8 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideTestGetRankedSearchResults
 	 */
-	public function testGetRankedSearchResults( $search, $limit, array $interactorReturn, array $expected ) {
-		$searchInteractor = $this->getMockSearchInteractor( $search, 'en', 'item', $interactorReturn );
-		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+	public function testGetRankedSearchResults( $search, $limit, array $expected ) {
+		$entitySearchHelper = $this->newEntitySearchHelper();
 
 		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
 		$this->assertEquals( $expected, $results );
@@ -274,12 +187,7 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 			)
 		];
 
-		$mockSearchInteractor = $this->getMock( ConfigurableTermSearchInteractor::class );
-		$mockSearchInteractor->method( 'searchForEntities' )
-			->will( $this->returnValue( [] ) );
-
 		$entitySearchHelper = $this->newEntitySearchHelper(
-			$mockSearchInteractor,
 			[ 'item' => [ [ 'foreign', 123 ] ] ]
 		);
 
@@ -298,11 +206,7 @@ class EntitySearchTermIndexTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenEntityTypeDefinedInMultipleRepos_constructorThrowsException() {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$mockSearchInteractor = $this->getMock( ConfigurableTermSearchInteractor::class );
-		$mockSearchInteractor->method( 'searchForEntities' )
-			->will( $this->returnValue( [] ) );
-
-		$this->newEntitySearchHelper( $mockSearchInteractor, [ 'item' => [ '', 'foreign' ] ] );
+		$this->newEntitySearchHelper( [ 'item' => [ '', 'foreign' ] ] );
 	}
 
 }

@@ -639,7 +639,7 @@ call_user_func( function() {
 		'class' => Wikibase\Repo\Api\QuerySearchEntities::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchTermIndex(
+			$entitySearchHelper = new Wikibase\Repo\Api\EntityTermSearchHelper(
 				$repo->getEntityLookup(),
 				$repo->getEntityIdParser(),
 				$repo->newTermSearchInteractor( $apiQuery->getLanguage()->getCode() ),
