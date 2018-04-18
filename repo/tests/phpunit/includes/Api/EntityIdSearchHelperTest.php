@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
-use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -34,21 +33,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	const DEFAULT_LANGUAGE = 'pt';
 	const DEFAULT_LABEL = 'ptLabel';
 	const DEFAULT_DESCRIPTION = 'ptDescription';
-
-	/**
-	 * @param bool $exists
-	 *
-	 * @return Title
-	 */
-	public function getMockTitle( $exists ) {
-		$mock = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'exists' )
-			->will( $this->returnValue( $exists ) );
-		return $mock;
-	}
 
 	/**
 	 * Get a lookup that always returns a pt label and description
@@ -89,13 +73,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockLabelDescriptionLookup(),
 			$entityTypeToRepositoryMapping
 		);
-	}
-
-	public function provideStrictLanguageValues() {
-		return [
-			[ true ],
-			[ false ],
-		];
 	}
 
 	public function provideTestGetRankedSearchResults() {
