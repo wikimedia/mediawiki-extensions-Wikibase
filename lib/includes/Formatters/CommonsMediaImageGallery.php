@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Formatters;
 
+use File;
 use MediaTransformOutput;
 use PackedImageGallery;
 
@@ -12,6 +13,19 @@ use PackedImageGallery;
  * @author Marius Hoch
  */
 class CommonsMediaImageGallery extends PackedImageGallery {
+
+	/**
+	 * Get the transform parameters for a thumbnail.
+	 *
+	 * @param File|bool $img The file in question. May be false for invalid image
+	 * @return array
+	 */
+	protected function getThumbParams( $img ) {
+		return [
+			'width' => 430,
+			'height' => 180
+		];
+	}
 
 	/**
 	 * Length to truncate filename to in caption when using "showfilename" (if int).
