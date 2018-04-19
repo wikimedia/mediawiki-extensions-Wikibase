@@ -362,6 +362,7 @@
 	"wikibase-concept-uri-tooltip": "URI, які ідэнтыфікуе канцэпт, апісаны гэтым элемэнтам",
 	"wikibase-pageimage-helptext": "Гэтая выява ўзятая зь сьцьверджаньняў гэтага элемэнту. Вы можаце наладзіць выяву празь зьмену сьцьверджаньня.",
 	"wikibase-rescore-profile-prefix": "Профіль rescore па змоўчаньні для запаўняльнага пошуку",
+	"wikibase-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
 	"wikibase-rescore-profile-fulltext": "Профіль rescore па змоўчаньні для паўнатэкставага пошуку",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Прадмет у Вікібазе",

@@ -325,7 +325,7 @@
 	"wikibase-listdatatypes-globe-coordinate-body": "ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。「地球」それから「WGS84」が既定となっており、分解能と範囲が指定されます。\n* latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N または S で指定されます\n* longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E または W で指定されます\n* globe – 星を表す明示 (?) のデータ値。既定は「地球」\"http://www.wikidata.org/entity/Q2\"\n* precision - 座標の数値的な精度。",
 	"wikibase-listdatatypes-quantity-head": "数量",
 	"wikibase-listdatatypes-quantity-body": "何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。\n* amount – 文字列の非明示部分 (単位接頭辞の対応付けは不明瞭です)\n* unit – デフォルトが\"1\"な、文字列の非明示部分 (標準化団体への対応付けは不明瞭です)\n* accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値\n* upperbound - 量の上限\n* lowerbound - 量の下限",
-	"wikibase-listdatatypes-monolingualtext-head": "単一言語のテキスト",
+	"wikibase-listdatatypes-monolingualtext-head": "単一言語テキスト",
 	"wikibase-listdatatypes-monolingualtext-body": "他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、何らかの識別子、化学式、ラテン語の学名などがあります。\n* language - テキスト (text) 部分の言語を識別するための明示の値\n* value - 言語を特定した文字列、明示の値",
 	"wikibase-listdatatypes-multilingualtext-head": "多言語のテキスト",
 	"wikibase-listdatatypes-multilingualtext-body": "他の言語に翻訳する必要のある文字列のリテラルデータ。典型的な用途としては、地元の表記のようなものを持たない、全世界的に関係する実体の名前があります。それらは言語や文字体系によって異なることがあります。\n* language - テキスト (text) 部分の言語を識別するための明示の値\n* value - 言語を特定した文字列、明示の値",
