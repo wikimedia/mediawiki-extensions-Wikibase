@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chaduvari",
+			"Veeven"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ఖాళీ",
+	"valueview-expert-globecoordinateinput-customprecision": "ప్రత్యేక ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "గ్రెగోరియన్",
+	"valueview-expert-timevalue-calendar-julian": "జూలియన్",
+	"valueview-expert-timeinput-calendar": "క్యాలెండరు:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "భాష (తప్పనిసరి):",
+	"valueview-preview-label": "ఇలాఅ చూపిస్తాం:"
+}

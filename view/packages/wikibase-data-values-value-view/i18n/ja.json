@@ -6,7 +6,8 @@
 			"Otokoume",
 			"Endres",
 			"Mirinano",
-			"Rxy"
+			"Rxy",
+			"Afaz"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "「$1」の値の処理にはまだ対応していません。",
@@ -20,6 +21,7 @@
 	"valueview-expert-timeinput-calendar": "暦:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "言語（必須）:",
+	"valueview-expertextender-unitsuggester-label": "単位 (任意):",
 	"valueview-preview-label": "プレビュー:",
 	"valueview-preview-novalue": "有効な値を認識できませんでした",
 	"valueview-listrotator-manually": "手動設定"
