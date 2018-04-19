@@ -30,6 +30,11 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 */
 	private $languageFallbackIndicator;
 
+	/**
+	 * @var NonExistingEntityIdHtmlFormatter
+	 */
+	private $nonExistingFormatter;
+
 	public function __construct(
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityTitleLookup $entityTitleLookup,
@@ -39,6 +44,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackIndicator = new LanguageFallbackIndicator( $languageNameLookup );
+		$this->nonExistingFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
 	}
 
 	/**
@@ -52,7 +58,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
 		if ( $title === null ) {
-			return $this->getHtmlForNonExistent( $entityId );
+			return $this->nonExistingFormatter->formatEntityId( $entityId );
 		}
 
 		$term = $this->lookupEntityLabel( $entityId );
@@ -61,7 +67,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		if ( $term !== null ) {
 			$label = $term->getText();
 		} elseif ( $title->isLocal() && !$title->exists() ) {
-			return $this->getHtmlForNonExistent( $entityId );
+			return $this->nonExistingFormatter->formatEntityId( $entityId );
 		} else {
 			$label = $entityId->getSerialization();
 		}
@@ -99,24 +105,6 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		}
 
 		return $attributes;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return string HTML
-	 */
-	private function getHtmlForNonExistent( EntityId $entityId ) {
-		$attributes = [ 'class' => 'wb-entity-undefinedinfo' ];
-
-		$message = wfMessage( 'parentheses',
-			wfMessage( 'wikibase-deletedentity-' . $entityId->getEntityType() )->text()
-		);
-
-		$undefinedInfo = Html::element( 'span', $attributes, $message );
-
-		$separator = wfMessage( 'word-separator' )->text();
-		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
 }
