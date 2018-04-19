@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7561bcf_e1671390",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-19T15:48:10Z",
+      "side": 1,
+      "message": "it\u0027ll help me a bit if you could extract this logic out of the query building logic.\nBasically extracting this into its own method that returns an array like:\n [\n    \u0027statements\u0027 \u003d\u003e [\n       \u0027VALUE1\u0027,\n       \u0027VALUE2\u0027,\n    ]\n]\n\nSee https://gerrit.wikimedia.org/r/#/c/426958/3/includes/Query/LanguageFeature.php\n\nI\u0027m introducing a new method parseValue, so clearly separating the parsing logic from the query building logic might help me when I\u0027ll adapt your keyword.",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ac62ccf_ac2556c4",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-19T15:48:10Z",
+      "side": 1,
+      "message": "I wonder if must is really what you want.\nWe have other keywords that allow combining multiple values using a pipe and we emit an OR query between them.\nUsing OR (addShould) here might be more consistent with the rest of syntax.",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 20
+      },
+      "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfdc4723_d787c399",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-19T15:48:10Z",
+      "side": 1,
+      "message": "might be better to not use QueryHelper::matchPage\n- it adds extra dependency to cirrus\n- this method is made for Title so it\u0027ll apply some processing to your string that you probably don\u0027t want.\n\nEmitting a new Match query might just work.",
+      "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
