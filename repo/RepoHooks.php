@@ -43,6 +43,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
+use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -1169,4 +1170,13 @@ final class RepoHooks {
 			);
 	}
 
+	/**
+	 * Add extra cirrus search query features for wikibase
+	 *
+	 * @param $config (not used, required by hook)
+	 * @param array $extraFeatures
+	 */
+	public static function onCirrusSearchAddQueryFeatures( $config, array &$extraFeatures ) {
+		$extraFeatures[] = new HasWbStatementFeature();
+	}
 }
