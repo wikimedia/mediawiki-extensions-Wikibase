@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c965a595_3dd3f5a9",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-19T23:06:36Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense anymore… please also remove the atomic section.",
+      "revId": "75f152372e21a13f16cae4daab17b2518984e6d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
