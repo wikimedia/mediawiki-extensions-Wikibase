@@ -179,18 +179,18 @@ class EntityUsageTable {
 
 		$c = 0;
 
-		$this->writeConnection->startAtomic( __METHOD__ );
-
 		foreach ( $batches as $rows ) {
+			$this->writeConnection->startAtomic( __METHOD__ );
+
 			$this->writeConnection->insert( $this->tableName, $rows, __METHOD__, [ 'IGNORE' ] );
 			$c += $this->writeConnection->affectedRows();
+
+			$this->writeConnection->endAtomic( __METHOD__ );
+
+			// Wait for all database replicas to be updated, but only for the affected client wiki. The
+			// "domain" argument is documented at ILBFactory::waitForReplication.
+			$this->loadBalancerFactory->waitForReplication( [ 'domain' => wfWikiID() ] );
 		}
-
-		$this->writeConnection->endAtomic( __METHOD__ );
-
-		// Wait for all database replicas to be updated, but only for the affected client wiki. The
-		// "domain" argument is documented at ILBFactory::waitForReplication.
-		$this->loadBalancerFactory->waitForReplication( [ 'domain' => wfWikiID() ] );
 
 		return $c;
 	}
