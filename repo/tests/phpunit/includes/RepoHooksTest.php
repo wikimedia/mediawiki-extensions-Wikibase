@@ -14,6 +14,7 @@ use RequestContext;
 use SkinTemplate;
 use stdClass;
 use Title;
+use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use Wikibase\SettingsArray;
@@ -294,4 +295,11 @@ XML
 		$this->assertSame( $altLinks, $out->getLinkTags() );
 	}
 
+	public function testOnCirrusSearchAddQueryFeatures() {
+		$extraFeatures = [];
+		RepoHooks::onCirrusSearchAddQueryFeatures( [], $extraFeatures );
+
+		$this->assertCount( 1, $extraFeatures );
+		$this->assertInstanceOf( HasWbStatementFeature::class, $extraFeatures[0] );
+	}
 }
