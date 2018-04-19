@@ -70,6 +70,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\MessageException' => __DIR__ . '/includes/MessageException.php',
 	'Wikibase\\Lib\\MessageSnakFormatter' => __DIR__ . '/includes/Formatters/MessageSnakFormatter.php',
 	'Wikibase\\Lib\\MwTimeIsoFormatter' => __DIR__ . '/includes/Formatters/MwTimeIsoFormatter.php',
+	'Wikibase\\Lib\\NonExistingEntityIdHtmlFormatter' => __DIR__ . '/includes/Formatters/NonExistingEntityIdHtmlFormatter.php',
 	'Wikibase\\Lib\\OutputFormatSnakFormatterFactory' => __DIR__ . '/includes/Formatters/OutputFormatSnakFormatterFactory.php',
 	'Wikibase\\Lib\\OutputFormatValueFormatterFactory' => __DIR__ . '/includes/Formatters/OutputFormatValueFormatterFactory.php',
 	'Wikibase\\Lib\\PropertyInfoDataTypeLookup' => __DIR__ . '/includes/PropertyInfoDataTypeLookup.php',
