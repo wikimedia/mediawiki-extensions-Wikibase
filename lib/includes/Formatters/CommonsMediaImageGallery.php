@@ -14,6 +14,19 @@ use PackedImageGallery;
 class CommonsMediaImageGallery extends PackedImageGallery {
 
 	/**
+	 * Get the transform parameters for a thumbnail.
+	 *
+	 * @param File $img The file in question. May be false for invalid image
+	 * @return array
+	 */
+	protected function getThumbParams( $img ) {
+		return [
+			'width' => 430,
+			'height' => 180
+		];
+	}
+
+	/**
 	 * Length to truncate filename to in caption when using "showfilename" (if int).
 	 * A value of 'true' will truncate the filename to one line using CSS, while
 	 * 'false' will disable truncating.
