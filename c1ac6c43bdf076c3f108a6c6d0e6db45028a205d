@@ -16,6 +16,24 @@
       "revId": "c1ac6c43bdf076c3f108a6c6d0e6db45028a205d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6041fdf9_06b8ab46",
+        "filename": "client/autoload.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-20T15:46:35Z",
+      "side": 0,
+      "message": "I had to run build/generateAutoload.php so that I could use my new class, and that modified this file (and others), so I thought I better commit the changes",
+      "parentUuid": "1141b112_704c3d9a",
+      "revId": "c1ac6c43bdf076c3f108a6c6d0e6db45028a205d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }

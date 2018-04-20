@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d492d658_5378d64f",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-20T15:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7561bcf_e1671390",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ac62ccf_ac2556c4",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 1
@@ -59,6 +83,48 @@
       "writtenOn": "2018-04-19T15:48:10Z",
       "side": 1,
       "message": "might be better to not use QueryHelper::matchPage\n- it adds extra dependency to cirrus\n- this method is made for Title so it\u0027ll apply some processing to your string that you probably don\u0027t want.\n\nEmitting a new Match query might just work.",
+      "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3b584a8_cee916ba",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-20T15:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ac62ccf_ac2556c4",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 20
+      },
+      "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a20d7fc_d590dd77",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-20T15:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfdc4723_d787c399",
       "revId": "e7ac93709ff9f9889b3b30ad4f8d7eb4c5dfdd29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
