@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
@@ -29,7 +30,8 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$fieldDefinitions = new ItemFieldDefinitions( [
 			$this->newLabelsProviderFieldDefinitions( $languageCodes ),
 			$this->newDescriptionsProviderFieldDefinitions( $languageCodes ),
-			new StatementProviderFieldDefinitions( [], [] ),
+			new StatementProviderFieldDefinitions( $this->getMock( PropertyDataTypeLookup::class ),
+				[], [], [] ),
 		] );
 
 		$fields = $fieldDefinitions->getFields();

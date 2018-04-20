@@ -8,6 +8,7 @@ use SearchEngine;
 use SearchIndexField;
 use SearchIndexFieldDefinition;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -39,15 +40,33 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	private $propertyIds;
 
 	/**
+	 * @var string[]
+	 */
+	private $indexedTypes;
+
+	/**
 	 * @var callable[]
 	 */
 	private $searchIndexDataFormatters;
 
 	/**
-	 * @param string[] $propertyIds
-	 * @param callable[] $searchIndexDataFormatters
+	 * @var PropertyDataTypeLookup
 	 */
-	public function __construct( array $propertyIds, array $searchIndexDataFormatters ) {
+	private $propertyDataTypeLookup;
+
+	/**
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param string[] $propertyIds List of property IDs to index
+	 * @param string[] $indexedTypes List of property types to index. Property of this type will be
+	 *      indexed regardless of $propertyIds.
+	 * @param callable[] $searchIndexDataFormatters Search formatters, indexed by data type name
+	 */
+	public function __construct(
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		array $propertyIds,
+		array $indexedTypes,
+		array $searchIndexDataFormatters
+	) {
 		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_KEYWORD );
 
 		$this->propertyIds = array_flip( $propertyIds );
@@ -94,8 +113,10 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 				continue;
 			}
 
+			$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 			$propertyId = $snak->getPropertyId()->getSerialization();
-			if ( !array_key_exists( $propertyId, $this->propertyIds ) ) {
+			if ( !array_key_exists( $propType, $this->indexedTypes ) &&
+			     !array_key_exists( $propertyId, $this->propertyIds ) ) {
 				continue;
 			}
 
