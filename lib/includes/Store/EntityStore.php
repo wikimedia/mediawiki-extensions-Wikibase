@@ -89,6 +89,9 @@ interface EntityStore {
 	 * @param EntityId $entityId
 	 * @param string $reason the reason for deletion
 	 * @param User $user
+	 *
+	 * @throws StorageException
+	 * @throws PermissionsError
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user );
 
