@@ -8,6 +8,8 @@ use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -47,7 +49,8 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 			],
 			'Q4' => [
 				$testData->getEntity( 'Q4' ),
-				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring' ]
+				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring',
+				  'P9=http://url.acme.test\badurl?chars=\привет< >"' ]
 			],
 			'Q7' => [
 				$testData->getEntity( 'Q7' ),
@@ -61,6 +64,24 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * @param string[] $map
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getPropertyTypeLookup( array $map ) {
+		$lookup = $this->getMock( PropertyDataTypeLookup::class );
+
+		$lookup->method( 'getDataTypeIdForProperty' )
+			->willReturnCallback( function ( PropertyId $id ) use ( $map ) {
+				if ( isset( $map[$id->getSerialization()] ) ) {
+					return $map[$id->getSerialization()];
+				}
+				return 'string';
+			} );
+
+		return $lookup;
+	}
+
+	/**
 	 * @dataProvider statementsProvider
 	 */
 	public function testStatements( EntityDocument $entity, array $expected ) {
@@ -69,7 +90,12 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$repo = WikibaseRepo::getDefaultInstance();
-		$field = new StatementsField( $this->properties, $repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
+		$lookup = $this->getPropertyTypeLookup( [
+			'P9' => 'sometype',
+		] );
+
+		$field = new StatementsField( $lookup, $this->properties, [ 'sometype' ],
+				$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 
@@ -82,7 +108,10 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 				return 'VALUE:' . $v->getAmount();
 			},
 		];
-		$field = new StatementsField( [ 'P123' ], $formatters );
+		$lookup = $this->getPropertyTypeLookup( [
+			'P9' => 'sometype',
+		] );
+		$field = new StatementsField( $lookup, [ 'P123' ], [], $formatters );
 
 		$statementList = new StatementList();
 		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString' ) ) );
