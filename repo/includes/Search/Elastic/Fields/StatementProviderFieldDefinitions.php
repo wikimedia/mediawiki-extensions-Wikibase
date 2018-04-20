@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
 /**
  * Fields for an object that has statements.
@@ -20,14 +21,25 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @var callable[]
 	 */
 	private $searchIndexDataFormatters;
-
 	/**
-	 * @param string[] $propertyIds List of properties to index
-	 * @param callable[] $searchIndexDataFormatters
+	 * @var PropertyDataTypeLookup
 	 */
-	public function __construct( array $propertyIds, array $searchIndexDataFormatters ) {
+	private $propertyDataTypeLookup;
+	/**
+	 * @var array
+	 */
+	private $indexedTypes;
+
+	public function __construct(
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		array $propertyIds,
+		array $indexedTypes,
+		array $searchIndexDataFormatters
+	) {
 		$this->propertyIds = $propertyIds;
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->indexedTypes = $indexedTypes;
 	}
 
 	/**
@@ -37,7 +49,9 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	public function getFields() {
 		return [
 			StatementsField::NAME => new StatementsField(
+				$this->propertyDataTypeLookup,
 				$this->propertyIds,
+				$this->indexedTypes,
 				$this->searchIndexDataFormatters
 			),
 			StatementCountField::NAME => new StatementCountField(),
