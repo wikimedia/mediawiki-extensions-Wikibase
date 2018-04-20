@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df86328b_79d582bf",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Please add description of what the keyword does, with examples of how queries are supposed to look like.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7120754a_99949505",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Maybe we should move adding the warning here. Both are treating of the same scenario - no keywords - so makes sense not to split it.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46a3335c_058d70e7",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "I don\u0027t see any place it can return false or null",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60aef4b5_2afccfab",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "$quotedValue and $suffix don\u0027t seem to be ever used. And $valueDelimiter is always |. Do we need those as arguments?",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f3da40d_007bede3",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Why can\u0027t we just return $validStatements?",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "433ae23a_d7f4008a",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Some docs on how the valid syntax looks like would be helpful.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78510fd1_be77043e",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Not sure this test is necessary...",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b04c542f_d250caf1",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Need to add some tests with no data at all and with invalid syntax, e.g. haswbstatement:pigeon etc.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3976ce1_7bce778b",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-20T22:24:34Z",
+      "side": 1,
+      "message": "Why we need a mock DB here? This keyword shouldn\u0027t do anything with the db.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
