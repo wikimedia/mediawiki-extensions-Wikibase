@@ -391,6 +391,7 @@
 	"apihelp-wbcreateclaim-param-entity": "Ідэнтыфікатар элемэнту, да якога дадаецца сьцьверджаньне",
 	"apihelp-wbcreateclaim-param-property": "Ідэнтыфікатар уласьцівасьці снэку",
 	"apihelp-wbcreateclaim-param-value": "Значэньне снэку пры стварэньні сьцьверджаньня з снэкам, які мае значэньне",
+	"apihelp-wbcreateclaim-param-snaktype": "Тып снэку",
 	"apihelp-wbcreateredirect-description": "Стварае перанакіраваньні на элемэнты.",
 	"apihelp-wbcreateredirect-summary": "Стварае перанакіраваньні на элемэнты."
 }

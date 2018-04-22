@@ -3,7 +3,8 @@
 		"authors": [
 			"Чаховіч Уладзіслаў",
 			"Дзяніс Тутэйшы",
-			"Mechanizatar"
+			"Mechanizatar",
+			"Artsiom91"
 		]
 	},
 	"wikibase-lib-desc": "Утрымлівае агульны функцыянал пашырэнняў Wikibase і Wikibase Client.",
@@ -25,9 +26,23 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "невядомае значэнне",
 	"wikibase-snakview-snaktypeselector-novalue": "значэнне не зададзена",
 	"wikibase-tooltip-error-details": "Падрабязнасці",
+	"datatypes-type-string": "Радок",
+	"datatypes-type-quantity": "Колькасць",
+	"datatypes-type-monolingualtext": "Аднамоўны тэкст",
+	"datatypes-type-multilingualtext": "Шматмоўны тэкст",
+	"datatypes-type-number": "Лік",
+	"datatypes-type-mediawiki-title": "Загаловак MediaWiki",
+	"datatypes-type-unknown": "Невызначаны",
+	"datatypes-type-boolean": "Булеўскае значэнне",
+	"datatypes-type-globe-coordinate": "Геаграфічныя каардынаты",
+	"datatypes-type-time": "Момант часу",
 	"datatypes-type-wikibase-item": "Элемент",
+	"datatypes-type-wikibase-property": "Уласцівасць",
 	"datatypes-type-commonsMedia": "Медыяфайл з Вікісховішча",
+	"datatypes-type-geo-shape": "Геаграфічная форма",
+	"datatypes-type-external-id": "Вонкавы ідэнтыфікатар",
 	"wikibase-entity-summary-wbsetitem": "Новы элемент створаны",
+	"wikibase-entity-summary-wbcreateredirect": "Перасылае да $4",
 	"wikibase-entity-summary-wbsetreference": "Вызначана спасылка на крыніцу",
 	"wikibase-entity-summary-wbsetlabel-set": "Зменена назва [$2]",
 	"wikibase-entity-summary-wbsetlabel-remove": "Выдалена назва [$2]",
