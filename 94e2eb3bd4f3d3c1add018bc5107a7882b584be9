@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "5a1a3578_700bd829",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T10:06:19Z",
+      "side": 1,
+      "message": "should be empty string.\n\nhere it\u0027s the char involved in delimiting the value of the keyword:\n keyword:test \u003d\u003e valueDelimiter \u003d\u003d \u0027\u0027\n keyword:\"test\" \u003d\u003e valueDelimiter \u003d\u003d \u0027\"\u0027\n\nIt\u0027s available for few keywords that behaves differently depending on the char used to wrap its value:\n - insource:word\n - insource:\"a phrase\"\n - insource:/a regex/i  ($valueDelimiter \u003d\u003d \u0027/\u0027, $suffix \u003d \u0027i\u0027 )\n\nIn your usecase you don\u0027t really have different behaviors so you could just pass the empty string.\n\nYou can control the valueDelimiters you accept by extending getValueDelimiters() (but this is not needed for this keyword)",
+      "range": {
+        "startLine": 40,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7120754a_99949505",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 3
@@ -30,6 +53,24 @@
       "writtenOn": "2018-04-20T22:24:34Z",
       "side": 1,
       "message": "Maybe we should move adding the warning here. Both are treating of the same scenario - no keywords - so makes sense not to split it.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "754fda23_3a7e1ab1",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T10:06:19Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the warnings in parseValue.\nI\u0027ll handle this \"setResultsPossible\" differently in the future.",
+      "parentUuid": "7120754a_99949505",
       "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -53,6 +94,24 @@
     },
     {
       "key": {
+        "uuid": "d4e3b259_77015113",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T10:06:19Z",
+      "side": 1,
+      "message": "This is a new method of the Keyword interface\n- array: a value to keep in the AST for future use\n- null: nothing to keep\n- false: (very special case to instruct the parser that the value is refused and should remain unconsumed, it\u0027s only allowed for keywords returning true to allowEmptyValue())\n\nWe have only one instance of such keywords, it\u0027s prefer-recent:\n- prefer-recent:hello \u003d\u003e will search hello using default recency options\n- prefer-recent:0.3 hello \u003d\u003e will search hello using 0.3 as one the recency options.\n\nIt\u0027s why most of the parseValue implementations will return an array.",
+      "parentUuid": "46a3335c_058d70e7",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60aef4b5_2afccfab",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 3
@@ -70,6 +129,47 @@
     },
     {
       "key": {
+        "uuid": "b42d4d25_05693c18",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T10:06:19Z",
+      "side": 1,
+      "message": "They are used by the new parser prior to creating the KeywordNode in the AST. It passes everything it knows even if most of the keywords don\u0027t care about these.",
+      "parentUuid": "60aef4b5_2afccfab",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f23f713_bb0bc59f",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T10:06:19Z",
+      "side": 1,
+      "message": "should be \u0027|\u0027\nThis value ($valueDelimiter) will be controlled by the future parser and won\u0027t be \u0027|\u0027 as you might think.\nsee comments above",
+      "range": {
+        "startLine": 84,
+        "startChar": 31,
+        "endLine": 84,
+        "endChar": 46
+      },
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f3da40d_007bede3",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 3
@@ -81,6 +181,24 @@
       "writtenOn": "2018-04-20T22:24:34Z",
       "side": 1,
       "message": "Why can\u0027t we just return $validStatements?",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eec2cd8d_a9ee968d",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T10:06:19Z",
+      "side": 1,
+      "message": "we could indeed, in other keywords I did it like that but don\u0027t have strong opinions, it\u0027s just a bit clearer when I dump the AST to json",
+      "parentUuid": "6f3da40d_007bede3",
       "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
