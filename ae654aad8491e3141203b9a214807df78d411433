@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc997daf_6925ec06",
+        "filename": "Gruntfile.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-04-23T19:05:36Z",
+      "side": 1,
+      "message": "Does\n\n **/*.js\n\ninclude *.js in the root directory?\n\nFor JSON there is only a\n\n **/*.json\n\nalthough there are .json files in the root directory. Either the .json files are not checked or **/*.json also checks the root directory.",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "ae654aad8491e3141203b9a214807df78d411433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
