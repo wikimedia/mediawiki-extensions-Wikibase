@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "85222814_51e5c56b",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df86328b_79d582bf",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a1a3578_700bd829",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2018-04-23T10:06:19Z",
       "side": 1,
       "message": "should be empty string.\n\nhere it\u0027s the char involved in delimiting the value of the keyword:\n keyword:test \u003d\u003e valueDelimiter \u003d\u003d \u0027\u0027\n keyword:\"test\" \u003d\u003e valueDelimiter \u003d\u003d \u0027\"\u0027\n\nIt\u0027s available for few keywords that behaves differently depending on the char used to wrap its value:\n - insource:word\n - insource:\"a phrase\"\n - insource:/a regex/i  ($valueDelimiter \u003d\u003d \u0027/\u0027, $suffix \u003d \u0027i\u0027 )\n\nIn your usecase you don\u0027t really have different behaviors so you could just pass the empty string.\n\nYou can control the valueDelimiters you accept by extending getValueDelimiters() (but this is not needed for this keyword)",
+      "range": {
+        "startLine": 40,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecf7cfef_ebffc8fa",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a1a3578_700bd829",
       "range": {
         "startLine": 40,
         "startChar": 3,
@@ -170,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "fa3dcd90_3e6f4421",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f23f713_bb0bc59f",
+      "range": {
+        "startLine": 84,
+        "startChar": 31,
+        "endLine": 84,
+        "endChar": 46
+      },
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f3da40d_007bede3",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 3
@@ -222,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "2e441612_9d3f09f6",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "433ae23a_d7f4008a",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78510fd1_be77043e",
         "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
         "patchSetId": 3
@@ -233,6 +317,24 @@
       "writtenOn": "2018-04-20T22:24:34Z",
       "side": 1,
       "message": "Not sure this test is necessary...",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2574c450_d037486d",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "I think it\u0027s a tiny bit useful, but I can remove it if you prefer",
+      "parentUuid": "78510fd1_be77043e",
       "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -256,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "d91c423b_1540a3e3",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b04c542f_d250caf1",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3976ce1_7bce778b",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
         "patchSetId": 3
@@ -267,6 +387,24 @@
       "writtenOn": "2018-04-20T22:24:34Z",
       "side": 1,
       "message": "Why we need a mock DB here? This keyword shouldn\u0027t do anything with the db.",
+      "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2fa30a1_0980f266",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T10:47:16Z",
+      "side": 1,
+      "message": "copy-pasta :/\n\nRemoved",
+      "parentUuid": "b3976ce1_7bce778b",
       "revId": "94e2eb3bd4f3d3c1add018bc5107a7882b584be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
