@@ -392,6 +392,7 @@
 	"apihelp-wbcreateclaim-param-property": "Ідэнтыфікатар уласьцівасьці снэку",
 	"apihelp-wbcreateclaim-param-value": "Значэньне снэку пры стварэньні сьцьверджаньня з снэкам, які мае значэньне",
 	"apihelp-wbcreateclaim-param-snaktype": "Тып снэку",
+	"apihelp-wbcreateclaim-param-summary": "Апісаньне рэдагаваньня.\nСьпераду будзе дададзены аўтаматычны камэнтар. Ліміт даўжыні аўтаматычнага камэнтару разам з апісаньнем — 260 сымбаляў. Памятайце, што ўсё, што перавышае гэты ліміт будзе сьцёртае.",
 	"apihelp-wbcreateredirect-description": "Стварае перанакіраваньні на элемэнты.",
 	"apihelp-wbcreateredirect-summary": "Стварае перанакіраваньні на элемэнты."
 }
