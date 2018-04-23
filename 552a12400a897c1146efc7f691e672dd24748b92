@@ -56,6 +56,30 @@
       "revId": "552a12400a897c1146efc7f691e672dd24748b92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9303737_77dfc189",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-04-23T13:50:42Z",
+      "side": 1,
+      "message": "scratch this comment I misread the regex",
+      "parentUuid": "0b810de6_076c7819",
+      "range": {
+        "startLine": 136,
+        "startChar": 46,
+        "endLine": 136,
+        "endChar": 47
+      },
+      "revId": "552a12400a897c1146efc7f691e672dd24748b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
