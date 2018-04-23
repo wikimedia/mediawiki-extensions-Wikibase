@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "77c762f6_6db04635",
+        "filename": "client/autoload.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T14:40:53Z",
+      "side": 1,
+      "message": "It\u0027s what I get when I run build/generateAutoload.php, so I thought I should just commit it",
+      "parentUuid": "74387158_f22ac25d",
+      "revId": "552a12400a897c1146efc7f691e672dd24748b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25a428a9_6546aaad",
         "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2018-04-23T12:55:15Z",
       "side": 1,
       "message": "Should we also verify that the statement is present in searchIndexProperties ?\nUsers might think that we can query all statements but it\u0027s not true since we have to explicitely whitelist some of them.",
+      "revId": "552a12400a897c1146efc7f691e672dd24748b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20a97d20_38ea8263",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-23T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a428a9_6546aaad",
       "revId": "552a12400a897c1146efc7f691e672dd24748b92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
