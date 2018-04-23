@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9461690_74148fe8",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-23T17:43:52Z",
+      "side": 1,
+      "message": "I don\u0027t think we should actually do that. The reason is we may index properties not only by ID, but by type or by any marker. So I think I disagree with David here - we shouldn\u0027t check anything, and if it\u0027s not indexed, then the search won\u0027t find anything. It\u0027s not a problem.",
+      "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
