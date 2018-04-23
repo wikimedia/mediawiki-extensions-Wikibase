@@ -22,6 +22,30 @@
       "revId": "ae654aad8491e3141203b9a214807df78d411433",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3687c86_97705e18",
+        "filename": "Gruntfile.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2018-04-23T19:11:28Z",
+      "side": 1,
+      "message": "I have seen this style in some extensions and it ensure that the root file is included.\n\nInvalid json files in the root are normally catched by the tools using them, so that this should not be a problem.",
+      "parentUuid": "fc997daf_6925ec06",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "ae654aad8491e3141203b9a214807df78d411433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
