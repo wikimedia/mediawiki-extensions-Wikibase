@@ -1,7 +1,23 @@
 {
-    "@metadata": {
-        "authors": []
-    },
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Ti panagtengngel ti \"$1\" a patpateg ti datos ket saan pay a nasuportaran.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Ti panagtengngel kadagiti pateg para iti \"$1\" a kita ti datos ket saan pay a nasuportaran."
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Ti panagtengngel dagiti pateg ti \"$1\" ket saan pay a nasuportaran.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Ti panagtengngel kadagiti pateg para iti \"$1\" a kita ti datos ket saan pay a nasuportaran.",
+	"valueview-expert-emptyvalue-empty": "awan linaon",
+	"valueview-expert-globecoordinateinput-precision": "Presision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "di naibagbaga",
+	"valueview-expert-globecoordinateinput-customprecision": "espesial ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
+	"valueview-expert-timevalue-calendar-julian": "Huliano",
+	"valueview-expert-timeinput-precision": "Presision:",
+	"valueview-expert-timeinput-calendar": "Kalendario:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Pagsasao (nasken):",
+	"valueview-expertextender-unitsuggester-label": "Yunit (pagpilian):",
+	"valueview-preview-label": "maiparangto a kas:",
+	"valueview-preview-novalue": "awan ti mabigbig nga umiso a pateg",
+	"valueview-listrotator-manually": "manual nga isaad"
 }
