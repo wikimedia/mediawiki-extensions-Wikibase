@@ -393,6 +393,7 @@
 	"apihelp-wbcreateclaim-param-value": "Значэньне снэку пры стварэньні сьцьверджаньня з снэкам, які мае значэньне",
 	"apihelp-wbcreateclaim-param-snaktype": "Тып снэку",
 	"apihelp-wbcreateclaim-param-summary": "Апісаньне рэдагаваньня.\nСьпераду будзе дададзены аўтаматычны камэнтар. Ліміт даўжыні аўтаматычнага камэнтару разам з апісаньнем — 260 сымбаляў. Памятайце, што ўсё, што перавышае гэты ліміт будзе сьцёртае.",
+	"apihelp-wbcreateclaim-example-1": "Стварае сьцьверджаньне для элемэнту <samp>Q42</samp> уласьцівасьці <samp>P9001</samp> з снэкам «{{int:wikibase-snakview-snaktypeselector-novalue}}».",
 	"apihelp-wbcreateredirect-description": "Стварае перанакіраваньні на элемэнты.",
 	"apihelp-wbcreateredirect-summary": "Стварае перанакіраваньні на элемэнты."
 }

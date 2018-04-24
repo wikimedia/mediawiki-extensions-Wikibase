@@ -63,7 +63,7 @@
 	"wikibase-replicationnote": "変更内容をすべてのウィキに反映させるのに時間がかかる場合があることにご注意ください。",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}の編集をウォッチリストに表示",
 	"wikibase-error-serialize-error": "データをシリアライズできませんでした。",
-	"wikibase-error-invalid-entity-id": "ID「$2」はシステムに登録されていません。有効な実体ID を使用してください。",
+	"wikibase-error-invalid-entity-id": "ID「$2」はシステムに登録されていません。有効なエンティティIDを使用してください。",
 	"wikibase-error-exceeded-entity-access-limit": "{{WBREPONAME}} の実体のアクセス数が多すぎます",
 	"unconnectedpages": "項目に接続されていないページ",
 	"unconnectedpages-summary": "このページでは、関連項目のないページが一覧表示されます。(一覧は、関連項目をサポートしている名前空間に限定されています。)この一覧は降順ページIDでソートされており、新しいページほど先頭に来ます。",

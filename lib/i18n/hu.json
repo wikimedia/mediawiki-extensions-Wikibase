@@ -78,6 +78,7 @@
 	"datatypes-type-wikibase-property": "Tulajdonság",
 	"datatypes-type-commonsMedia": "Commons-médiafájl",
 	"datatypes-type-geo-shape": "Földrajzi forma",
+	"datatypes-type-tabular-data": "Táblázatos adat",
 	"datatypes-type-external-id": "Külső azonosító",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "i. sz. $1 milliárd év",
