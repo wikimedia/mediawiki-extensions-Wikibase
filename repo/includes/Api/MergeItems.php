@@ -116,9 +116,9 @@ class MergeItems extends ApiBase {
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		} catch ( ItemMergeException $ex ) {
-			$this->handleException( $ex );
+			$this->handleException( $ex, $ex->getErrorCode() );
 		} catch ( RedirectCreationException $ex ) {
-			$this->handleException( $ex );
+			$this->handleException( $ex, $ex->getErrorCode() );
 		}
 	}
 
@@ -141,17 +141,20 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @param ItemMergeException|RedirectCreationException $ex
+	 * @param Exception $ex
+	 * @param string $errorCode
+	 * @param string[] $extraData
 	 *
 	 * @throws ApiUsageException always
 	 */
-	private function handleException( Exception $ex ) {
+	private function handleException( Exception $ex, $errorCode, $extraData = [] ) {
 		$cause = $ex->getPrevious();
 
 		if ( $cause ) {
-			$this->errorReporter->dieException( $cause, $ex->getErrorCode() );
+			$extraData[] = $ex->getMessage();
+			$this->handleException( $cause, $errorCode, $extraData );
 		} else {
-			$this->errorReporter->dieError( $ex->getMessage(), $ex->getErrorCode() );
+			$this->errorReporter->dieException( $ex, $errorCode, 0, [ 'extradata' => $extraData ] );
 		}
 	}
 
