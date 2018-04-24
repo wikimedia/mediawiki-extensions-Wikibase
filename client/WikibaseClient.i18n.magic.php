@@ -88,6 +88,14 @@ $magicWords['fy'] = [
 	'property' => [ 0, 'eigenskip' ],
 ];
 
+$magicWords['he'] = [
+	'noexternallanglinks' => [ 0, 'ללא_קישורי_שפה' ],
+	'property' => [ 0, 'מאפיין' ],
+	'statements' => [ 0, 'הצהרות' ],
+	'wbreponame' => [ 0, 'שם_המאגר' ],
+	'shortdesc' => [ 1, 'תיאור_קצר' ],
+];
+
 /** Hindi (हिन्दी) */
 $magicWords['hi'] = [
 	'noexternallanglinks' => [ 0, 'कोई_अंतरविकी_कड़ियाँ_नहीं', 'कोई_अंतरविकि_कड़ियाँ_नहीं' ],
