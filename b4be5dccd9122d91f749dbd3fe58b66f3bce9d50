@@ -16,6 +16,24 @@
       "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "151ee97e_bf8498ea",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-24T14:30:22Z",
+      "side": 1,
+      "message": "As far as I can see in the code only Statements where Statement::getMainSnak()::getPropertyId()::getSerialization() returns a value that is in the array $GLOBALS[\u0027wgWBRepoSettings\u0027][\u0027searchIndexProperties\u0027] can get indexed, so I think this is correct\n\nPerhaps I\u0027m missing something? Or perhaps a variable is poorly named/commented?\n\nI think David\u0027s concern about users is fair - a user is likely to be puzzled if they search for haswbstatement:P999\u003dQ88 and get no results, even though they *know* that item X has the statement P999\u003dQ888",
+      "parentUuid": "d9461690_74148fe8",
+      "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
