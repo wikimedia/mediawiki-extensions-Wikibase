@@ -3,8 +3,11 @@
 namespace Wikibase\Lib\Formatters;
 
 use File;
+use HTML;
+use Language;
 use MediaTransformOutput;
 use PackedImageGallery;
+use Title;
 
 /**
  * Custom image gallery for displaying commons media values in Wikibase entity views.
@@ -65,6 +68,21 @@ class CommonsMediaImageGallery extends PackedImageGallery {
 	 */
 	protected function getGBWidthOverwrite( $thumb ) {
 		return 'auto';
+	}
+
+	/**
+	 * @param Title $title
+	 * @param Language $lang
+	 * @return string HTML
+	 */
+	protected function getCaptionHtml( Title $title, Language $lang ) {
+		// Note: This doesn't take getCaptionLength() into account, but we set that to false anyway.
+		$attributes = [
+			'class' => 'galleryfilename',
+			'href' => '//commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
+		];
+
+		return Html::element( 'a', $attributes, $title->getText() );
 	}
 
 }
