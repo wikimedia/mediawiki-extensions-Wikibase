@@ -50,6 +50,20 @@ class SummaryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $summary->getAutoSummaryArgs() );
 	}
 
+	public function testSetAutoSummaryArgs() {
+		$summary = new Summary( 'summarytest' );
+		$summary->setAutoSummaryArgs( [ 'two', 'only' ] );
+
+		$this->assertEquals( [ 'two', 'only' ], $summary->getAutoSummaryArgs() );
+	}
+
+	public function testSetAutoCommentArgs() {
+		$summary = new Summary( 'summarytest' );
+		$summary->setAutoCommentArgs( [ 'three', 'alone' ] );
+
+		$this->assertEquals( [ 'three', 'alone' ], $summary->getCommentArgs() );
+	}
+
 	public function testSetAction() {
 		$summary = new Summary( 'summarytest' );
 
