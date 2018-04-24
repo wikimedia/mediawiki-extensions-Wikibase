@@ -23,14 +23,17 @@ use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
 class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 
 	public function commonsInlineImageFormatterProvider() {
+		$exampleJpgHtmlRegex = '@<ul .*<a[^>]+href="//commons.wikimedia.org/wiki/File:Example.jpg"[^>]*>' .
+				'<img.*src=".*//upload.wikimedia.org/wikipedia/commons/.*/Example.jpg".*/>.*Example.jpg.*</ul>@s';
+
 		return [
 			[
 				new StringValue( 'example.jpg' ), // Lower-case file name
-				'@<ul .*<img.*src=".*//upload.wikimedia.org/wikipedia/commons/.*/Example.jpg".*/>.*Example.jpg.*</ul>@s'
+				$exampleJpgHtmlRegex
 			],
 			[
 				new StringValue( 'Example.jpg' ),
-				'@<ul .*<img.*src=".*//upload.wikimedia.org/wikipedia/commons/.*/Example.jpg".*/>.*Example.jpg.*</ul>@s'
+				$exampleJpgHtmlRegex
 			],
 			[
 				new StringValue( 'Example-That-Does-Not-Exist.jpg' ),
