@@ -147,6 +147,10 @@ class Summary implements FormatableSummary {
 		$this->summaryArgs = array_merge( $this->summaryArgs, $args );
 	}
 
+	public function resetAutoSummaryArgs() {
+		$this->summaryArgs = [];
+	}
+
 	/**
 	 * @return array
 	 */
