@@ -149,9 +149,9 @@ class MergeItems extends ApiBase {
 		$cause = $ex->getPrevious();
 
 		if ( $cause ) {
-			$this->errorReporter->dieException( $cause, $ex->getErrorCode() );
+			$this->handleException( $cause );
 		} else {
-			$this->errorReporter->dieError( $ex->getMessage(), $ex->getErrorCode() );
+			$this->errorReporter->dieException( $ex, $ex->getErrorCode() );
 		}
 	}
 
