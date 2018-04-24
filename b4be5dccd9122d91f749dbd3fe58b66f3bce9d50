@@ -34,6 +34,24 @@
       "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1b09272_491e8ae1",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-24T17:34:24Z",
+      "side": 1,
+      "message": "This is correct in the current code, where the only properties indexed are those in searchIndexProperties. However, with https://phabricator.wikimedia.org/T99899 and https://gerrit.wikimedia.org/r/c/427836/ it is going to change, and in general we won\u0027t have a fixed list of properties that we index. \n\n\u003e a user is likely to be puzzled if they search for haswbstatement:P999\u003dQ88 and get no results, even though they *know* that item X has the statement P999\u003dQ888\n\nIf the property is not indexed, then it won\u0027t be found. This is true for all searches - if you don\u0027t index something, you don\u0027t find it. I don\u0027t see how anything changes here. We may need some docs on it, but using searchIndexProperties is not going to work.",
+      "parentUuid": "151ee97e_bf8498ea",
+      "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
