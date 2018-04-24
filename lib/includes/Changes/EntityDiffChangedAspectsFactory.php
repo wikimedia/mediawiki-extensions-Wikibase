@@ -157,7 +157,7 @@ class EntityDiffChangedAspectsFactory {
 			$changedStatements[] = $statement->getPropertyId()->getSerialization();
 		}
 
-		return array_unique( $changedStatements );
+		return array_values( array_unique( $changedStatements ) );
 	}
 
 }

@@ -177,7 +177,7 @@ class EntityDiffChangedAspects implements Serializable {
 
 		$this->labelChanges = $data->labelChanges;
 		$this->descriptionChanges = $data->descriptionChanges;
-		$this->statementChanges = $data->statementChanges;
+		$this->statementChanges = array_values( (array)$data->statementChanges );
 		$this->siteLinkChanges = (array)$data->siteLinkChanges;
 		$this->otherChanges = $data->otherChanges;
 	}
