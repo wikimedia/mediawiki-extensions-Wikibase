@@ -70,6 +70,24 @@
       "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d952aa2_ff50131c",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-04-25T18:14:33Z",
+      "side": 1,
+      "message": "Well, yes, you are right, but I\u0027m not seeing a good way of checking this unless we have an API for that in Wikibase. Maybe we should, but that would require some refactoring - decision of whether to index the property may not be as trivial as checking in the list anymore, we will include or exclude properties by variety of criteria in the future, not only by fixed list. \nIf you\u0027d like you can make a patch to have indexer to use generic API (some class/interface I guess) and use the same API here to check whether or not the property is indexed. But I think it\u0027d be beyond the goals of this patch.",
+      "parentUuid": "95cdde5d_27a4f280",
+      "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
