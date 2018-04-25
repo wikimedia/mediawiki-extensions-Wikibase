@@ -242,6 +242,17 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * @param ParserOptions $options
+	 * @return Repo\ParserOutput\EntityParserOutputGenerator
+	 */
+	protected function getEntityParserOutputGenerator( ParserOptions $options ) {
+		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
+		return $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
+			$options->getUserLang()
+		);
+	}
+
+	/**
 	 * @note Will fail if this EntityContent represents a redirect.
 	 *
 	 * @param int|null $revisionId
@@ -256,12 +267,7 @@ abstract class EntityContent extends AbstractContent {
 		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
-		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
-
-		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$options->getUserLang()
-		);
-
+		$outputGenerator = $this->getEntityParserOutputGenerator( $options );
 		$entityRevision = $this->getEntityRevision( $revisionId );
 
 		$output = $outputGenerator->getParserOutput( $entityRevision->getEntity(), $generateHtml );

@@ -24,6 +24,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TermsListView;
@@ -290,26 +291,15 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		);
 
-		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
-		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
-		$termsListView = new TermsListView(
-			TemplateFactory::getDefaultInstance(),
-			$languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $this->languageCode ),
-			$languageDirectionalityLookup
-		);
-
 		$textInjector = new TextInjector();
-		$entityTermsView = new PlaceholderEmittingEntityTermsView(
-			new FallbackHintHtmlTermRenderer(
-				$languageDirectionalityLookup,
-				$languageNameLookup
-			),
+
+		$termsListView = $this->getTermsListView( $this->languageCode );
+		$entityTermsView = $this->getEntityTermsView(
+			$this->languageCode,
 			$entityLabelDescriptionLookup,
-			$this->templateFactory,
 			$editSectionGenerator,
-			$this->textProvider,
 			$termsListView,
+			$this->textProvider,
 			$textInjector
 		);
 
@@ -335,14 +325,66 @@ class EntityParserOutputGenerator {
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $textInjector->getMarkers() );
 
-		$parserOutput->setExtensionData(
-			'wikibase-terms-list-items',
-			$entityTermsView->getTermsListItems(
-				$this->languageCode,
-				$entity instanceof LabelsProvider ? $entity->getLabels() : new TermList(),
-				$entity instanceof DescriptionsProvider ? $entity->getDescriptions() : new TermList(),
-				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null
-			)
+		if ($entityTermsView instanceof PlaceholderEmittingEntityTermsView) {
+			$parserOutput->setExtensionData(
+				'wikibase-terms-list-items',
+				$entityTermsView->getTermsListItems(
+					$this->languageCode,
+					$entity instanceof LabelsProvider ? $entity->getLabels() : new TermList(),
+					$entity instanceof DescriptionsProvider ? $entity->getDescriptions() : new TermList(),
+					$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null
+				)
+			);
+		}
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @return TermsListView
+	 */
+	public function getTermsListView( $languageCode ) {
+		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
+		$languageNameLookup = new LanguageNameLookup( $languageCode );
+		return new TermsListView(
+			TemplateFactory::getDefaultInstance(),
+			$languageNameLookup,
+			new MediaWikiLocalizedTextProvider( $languageCode ),
+			$languageDirectionalityLookup
+		);
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param LanguageFallbackLabelDescriptionLookup $entityLabelDescriptionLookup
+	 * @param ToolbarEditSectionGenerator $editSectionGenerator
+	 * @param LocalizedTextProvider $textProvider
+	 * @param TermsListView $termsListView
+	 * @param TextInjector $textInjector
+	 * @return EntityTermsView
+	 */
+	public function getEntityTermsView(
+		$languageCode,
+		LanguageFallbackLabelDescriptionLookup $entityLabelDescriptionLookup,
+		ToolbarEditSectionGenerator $editSectionGenerator,
+		TermsListView $termsListView,
+		LocalizedTextProvider $textProvider,
+		TextInjector $textInjector
+	) {
+		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
+		$languageNameLookup = new LanguageNameLookup( $languageCode );
+		$htmlTermRenderer = new FallbackHintHtmlTermRenderer(
+			$languageDirectionalityLookup,
+			$languageNameLookup
+		);
+
+		return new PlaceholderEmittingEntityTermsView(
+			$htmlTermRenderer,
+			$entityLabelDescriptionLookup,
+			TemplateFactory::getDefaultInstance(),
+			$editSectionGenerator,
+			$textProvider,
+			$termsListView,
+			$textInjector
 		);
 	}
 
