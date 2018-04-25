@@ -52,6 +52,24 @@
       "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95cdde5d_27a4f280",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-04-25T16:59:50Z",
+      "side": 1,
+      "message": "\u003e If the property is not indexed, then it won\u0027t be found. This is true for all searches\n\nI understand that, I just think from a user perspective it\u0027s going to be weird to search for something you know exists and get no results, without any clue as to why\n\nBut as you say T99899 makes the code here wrong one way or the other. Changed",
+      "parentUuid": "f1b09272_491e8ae1",
+      "revId": "b4be5dccd9122d91f749dbd3fe58b66f3bce9d50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
