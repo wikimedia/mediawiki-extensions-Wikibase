@@ -40,6 +40,19 @@ class CommonsMediaImageGallery extends PackedImageGallery {
 	}
 
 	/**
+	 * Adjust the image parameters for a thumbnail.
+	 *
+	 * Used by a subclass to insert extra high resolution images.
+	 * @param MediaTransformOutput $thumb The thumbnail
+	 * @param array &$imageParameters Array of options
+	 */
+	protected function adjustImageParameters( $thumb, &$imageParameters ) {
+		parent::adjustImageParameters( $thumb, $imageParameters );
+
+		$imageParameters['custom-url-link'] = '//commons.wikimedia.org/wiki/File:' . $thumb->getFile()->getTitle()->getPartialURL();
+	}
+
+	/**
 	 * Allows overwriting the computed width of the gallerybox <li> with a string,
 	 * like '100%'.
 	 *
