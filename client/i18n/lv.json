@@ -11,6 +11,7 @@
 	"tooltip-t-wikibase": "Saite uz pievienoto datu krātuves vienumu",
 	"apihelp-query+wbentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
 	"apihelp-query+wblistentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
+	"apihelp-query+description-example": "Iegūt lapas \"Londona\" aprakstu.",
 	"wikibase-comment-add": "{{WBREPONAME}} vienums izveidots.",
 	"wikibase-comment-update": "{{WBREPONAME}} vienums izmainīts",
 	"wikibase-comment-sitelink-add": "Valodas saite pievienota: $1",

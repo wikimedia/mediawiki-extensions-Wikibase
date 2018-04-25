@@ -40,6 +40,7 @@
 	"wikibase-validator-no-validators": "Aizliegts",
 	"datatypes-type-quantity": "Daudzums",
 	"datatypes-type-globe-coordinate": "Ģeogrāfiskās koordinātas",
+	"datatypes-type-time": "Laika brīdis",
 	"datatypes-type-wikibase-item": "Vienums",
 	"datatypes-type-wikibase-property": "Īpašība",
 	"datatypes-type-commonsMedia": "Commons multivides fails",

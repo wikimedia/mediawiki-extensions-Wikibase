@@ -17,7 +17,8 @@
 			"DixonD",
 			"Piramidion",
 			"Dars",
-			"Avatar6"
+			"Avatar6",
+			"Movses"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -143,5 +144,5 @@
 	"unresolved-property-category": "Сторінки з нерозв'язаними властивостями",
 	"unresolved-property-category-desc": "Ця сторінка містить сторінки, які посилаються на властивості {{WBREPONAME}}, які не вдається знайти ані за ідентифікатором, ані за назвою.",
 	"connected-redirect-category": "{{WBREPONAME}}:Перенаправлення Вікіпедії",
-	"connected-redirect-category-desc": "Ця категорія містить сторінки-перенаправлення, які поєднані із елементом в проекті «[[{{WBREPONAME}}]]».\nThis category lists redirect pages that are connected to a {{WBREPONAME}} item."
+	"connected-redirect-category-desc": "Ця категорія містить сторінки-перенаправлення, які поєднані із елементом {{WBREPONAME}}"
 }

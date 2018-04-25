@@ -36,7 +36,7 @@
 	"apihelp-query+pageterms-param-terms": "Die Arten der Begriffe, die abgerufen werden sollen, z.&nbsp;B. „Beschreibung“, jede wird als eine Anordnung von Zeichenfolgen zurückgegeben, die nach ihrem Typ kodiert sind, z.&nbsp;B. {\"Beschreibung\": [\"foo\"]}. Falls nicht angegeben, werden alle Typen zurückgegeben.",
 	"apihelp-query+description-summary": "Ruft eine Kurzbeschreibung a.k.a. einen Untertitel ab, der erklärt, über was die Zielseite handelt.",
 	"apihelp-query+description-param-prefersource": "Welche Beschreibungsquelle bevorzugt werden soll, falls vorhanden:",
-	"apihelp-query+description-paramvalue-prefersource-local": "Lokale Beschreibungen über die Parserfunktion {{SHORTDESC:…}} im Wikitext der Seite.",
+	"apihelp-query+description-paramvalue-prefersource-local": "Lokale Beschreibungen über die Parserfunktion <code><nowiki>{{SHORTDESC:…}}</nowiki></code> im Wikitext der Seite.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Zentrale Beschreibungen von dem verknüpften {{WBREPONAME}}-Datenobjekt.",
 	"apihelp-query+description-example": "Ruft die Beschreibung für die Seite „London“ ab.",
 	"apihelp-query+description-example-central": "Ruft die Beschreibung für die Seite „London“ ab, mit der Bevorzugung der zentralen Beschreibung, falls vorhanden.",
