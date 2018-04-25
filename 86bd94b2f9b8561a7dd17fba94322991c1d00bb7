@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69980cfb_11256364",
+        "filename": "client/WikibaseClient.i18n.magic.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-04-25T05:55:07Z",
+      "side": 1,
+      "message": "For consistency I suggest to call it \"קביעות\"",
+      "range": {
+        "startLine": 95,
+        "startChar": 23,
+        "endLine": 95,
+        "endChar": 29
+      },
+      "revId": "86bd94b2f9b8561a7dd17fba94322991c1d00bb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
