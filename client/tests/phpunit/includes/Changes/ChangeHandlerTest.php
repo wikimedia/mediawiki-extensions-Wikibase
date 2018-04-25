@@ -45,7 +45,6 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			'enwiki',
 			'en',
-			false,
 			false
 		);
 	}
@@ -273,7 +272,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
 			->will( $this->returnCallback(
-				function( $ids ) use ( $siteLinkLookup ) {
+				function( $ids, $aspects ) use ( $siteLinkLookup ) {
 					$pages = [];
 
 					foreach ( $ids as $id ) {
@@ -285,11 +284,25 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 						foreach ( $links as $link ) {
 							if ( $link->getSiteId() === 'enwiki' ) {
 								// we use the numeric item id as the fake page id of the local page!
-								$usages = [
-									new EntityUsage( $id, EntityUsage::SITELINK_USAGE ),
-									new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'en' )
-								];
-								$pages[] = new PageEntityUsages( $id->getNumericId(), $usages );
+								$usedAspects = array_intersect(
+									[ EntityUsage::SITELINK_USAGE, EntityUsage::LABEL_USAGE . '.en' ],
+									$aspects
+								);
+								if ( !$usedAspects ) {
+									continue;
+								}
+								$usages = [];
+								foreach ( $usedAspects as $aspect ) {
+									$usages[] = new EntityUsage(
+										$id,
+										EntityUsage::splitAspectKey( $aspect )[0],
+										EntityUsage::splitAspectKey( $aspect )[1]
+									);
+								}
+								$pages[] = new PageEntityUsages(
+									$id->getNumericId(),
+									$usages
+								);
 							}
 						}
 					}
