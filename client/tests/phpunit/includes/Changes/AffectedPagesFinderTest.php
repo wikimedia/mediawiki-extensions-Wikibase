@@ -68,7 +68,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
-	private function getAffectedPagesFinder( array $usage, array $expectedAspects, $trackUsagesInAllLanguages = false ) {
+	private function getAffectedPagesFinder( array $usage, array $expectedAspects ) {
 		$usageLookup = $this->getMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
@@ -81,7 +81,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$this->getTitleFactory(),
 			'enwiki',
 			'en',
-			$trackUsagesInAllLanguages,
 			false
 		);
 
@@ -161,23 +160,13 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			)
 		];
 
-		$cases['local label change on Q1 (used by Q2); mono-lingual wiki'] = [
-			[ EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ) ],
-			$changeFactory->newFromUpdate(
-				EntityChange::UPDATE,
-				new Item( $q1 ),
-				$this->getItemWithLabel( $q1, 'en', 'ONE' )
-			)
-		];
-
-		$cases['local label change on Q1 (used by Q2); multi-lingual wiki'] = [
+		$cases['local label change on Q1 (used by Q2)'] = [
 			[ EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ), EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE ) ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
-			),
-			true
+			)
 		];
 
 		$badges = [ new ItemId( 'Q34' ) ];
@@ -190,7 +179,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		];
 
 		$cases['description only change on Q1'] = [
-			[ EntityUsage::DESCRIPTION_USAGE . '.en' ],
+			[ EntityUsage::DESCRIPTION_USAGE, EntityUsage::DESCRIPTION_USAGE . '.en' ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hello' ] ),
@@ -198,7 +187,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		];
 
 		$cases['statement change on Q1'] = [
-			[ EntityUsage::STATEMENT_USAGE . '.P5' ],
+			[ EntityUsage::STATEMENT_USAGE, EntityUsage::STATEMENT_USAGE . '.P5' ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
@@ -212,8 +201,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getChangedAspectsProvider
 	 */
-	public function testGetChangedAspects( array $expected, EntityChange $change, $trackUsagesInAllLanguages = false ) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [], $trackUsagesInAllLanguages );
+	public function testGetChangedAspects( array $expected, EntityChange $change ) {
+		$referencedPagesFinder = $this->getAffectedPagesFinder( [], [] );
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
 
@@ -223,6 +212,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	public function getAffectedUsagesByPageProvider() {
+		$labelUsage = EntityUsage::LABEL_USAGE;
 		$labelUsageDe = EntityUsage::LABEL_USAGE . '.de';
 		$labelUsageEn = EntityUsage::LABEL_USAGE . '.en';
 
@@ -233,7 +223,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$q1SitelinkUsage = new EntityUsage( $q1, EntityUsage::SITELINK_USAGE );
 		$q2SitelinkUsage = new EntityUsage( $q2, EntityUsage::SITELINK_USAGE );
-		$q2AllUsage = new EntityUsage( $q2, EntityUsage::ALL_USAGE );
 		$q2OtherUsage = new EntityUsage( $q2, EntityUsage::OTHER_USAGE );
 
 		$q1LabelUsage_en = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'en' );
@@ -244,7 +233,11 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$q1TitleUsage = new EntityUsage( $q1, EntityUsage::TITLE_USAGE );
 		$q2TitleUsage = new EntityUsage( $q2, EntityUsage::TITLE_USAGE );
 
+		$q2DescriptionUsage = new EntityUsage( $q2, EntityUsage::DESCRIPTION_USAGE );
 		$q2DescriptionUsage_en = new EntityUsage( $q2, EntityUsage::DESCRIPTION_USAGE, 'en' );
+
+		$q2StatementUsage_p1 = new EntityUsage( $q2, EntityUsage::STATEMENT_USAGE, 'P1' );
+		$q2StatementUsage_p2 = new EntityUsage( $q2, EntityUsage::STATEMENT_USAGE, 'P2' );
 
 		// Page 1 is linked to Q1
 		$page1Q1Usages = new PageEntityUsages( 1, [
@@ -266,7 +259,12 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		// Page 2 uses Q2 to render an infobox
 		$page2Q2Usages = new PageEntityUsages( 2, [
-			$q2AllUsage,
+			$q2StatementUsage_p1,
+			$q2TitleUsage,
+			$q2SitelinkUsage,
+			$q2OtherUsage,
+			$q2LabelUsage,
+			$q2DescriptionUsage
 		] );
 
 		// Cases
@@ -394,9 +392,9 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			)
 		];
 
-		$cases['other language label change on Q1 (not used on any page)'] = [
-			[],
-			[ $labelUsageDe ],
+		$cases['other language label change on Q1 (used on one page)'] = [
+			[ new PageEntityUsages( 2, [ $q1LabelUsage_en ] ) ],
+			[ $labelUsageDe, $labelUsage ],
 			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -420,10 +418,10 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases['other language label change on Q2 (used on page 1 and 2)'] = [
 			[
-				new PageEntityUsages( 1, [ $q2LabelUsage_de ] ),
-				new PageEntityUsages( 2, [ $q2LabelUsage_de ] ),
+				new PageEntityUsages( 1, [ $q2LabelUsage, $q2LabelUsage_de ] ),
+				new PageEntityUsages( 2, [ $q2LabelUsage, $q2LabelUsage_de ] ),
 			],
-			[ $labelUsageDe ],
+			[ $labelUsageDe, $labelUsage ],
 			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -436,7 +434,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			[
 				new PageEntityUsages( 2, [ $q1LabelUsage_en ] ),
 			],
-			[ $labelUsageEn ],
+			[ $labelUsageEn, $labelUsage ],
 			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -447,10 +445,10 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases['local label change on Q2 (used by page 1 and page 2)'] = [
 			[
-				new PageEntityUsages( 1, [ $q2LabelUsage_en ] ),
-				new PageEntityUsages( 2, [ $q2LabelUsage_en ] ),
+				new PageEntityUsages( 1, [ $q2LabelUsage, $q2LabelUsage_en ] ),
+				new PageEntityUsages( 2, [ $q2LabelUsage, $q2LabelUsage_en ] ),
 			],
-			[ $labelUsageEn ],
+			[ $labelUsageEn, $labelUsage ],
 			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -461,14 +459,40 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases['local description change on Q2 (used by page 2)'] = [
 			[
-				new PageEntityUsages( 2, [ $q2DescriptionUsage_en ] ),
+				new PageEntityUsages( 2, [ $q2DescriptionUsage, $q2DescriptionUsage_en ] ),
 			],
-			[ EntityUsage::DESCRIPTION_USAGE . '.en' ],
+			[ EntityUsage::DESCRIPTION_USAGE . '.en', EntityUsage::DESCRIPTION_USAGE ],
 			[ $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithDescriptions( $q2, [ 'en' => 'Wow' ] )
+			)
+		];
+
+		$cases['local statement change on Q2 (used by page 2)'] = [
+			[
+				new PageEntityUsages( 2, [ $q2StatementUsage_p1 ] ),
+			],
+			[ EntityUsage::STATEMENT_USAGE . '.P1', EntityUsage::STATEMENT_USAGE ],
+			[ $page2Q2Usages ],
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
+				new Item( $q2 ),
+				$this->getItemWithStatement( $q2, new PropertyId( 'P1' ), new StringValue( 'Hello' ) )
+			)
+		];
+
+		$cases['unrelated statement change on Q2 (used by page 2)'] = [
+			[
+				new PageEntityUsages( 2, [ $q2StatementUsage_p1 ] ),
+			],
+			[ EntityUsage::STATEMENT_USAGE . '.P2', EntityUsage::STATEMENT_USAGE ],
+			[ $page2Q2Usages ],
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
+				new Item( $q2 ),
+				$this->getItemWithStatement( $q2, new PropertyId( 'P2' ), new StringValue( 'Hello' ) )
 			)
 		];
 
@@ -497,7 +521,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			new TitleFactory(),
 			'enwiki',
 			'en',
-			false,
 			false
 		);
 
