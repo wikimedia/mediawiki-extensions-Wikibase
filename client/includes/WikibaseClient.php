@@ -1158,8 +1158,7 @@ final class WikibaseClient {
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
 			$this->settings->getSetting( 'siteGlobalID' ),
-			$this->getContentLanguage()->getCode(),
-			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
+			$this->getContentLanguage()->getCode()
 		);
 	}
 
