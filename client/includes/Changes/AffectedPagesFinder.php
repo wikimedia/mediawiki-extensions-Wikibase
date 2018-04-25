@@ -48,11 +48,6 @@ class AffectedPagesFinder {
 	/**
 	 * @var bool
 	 */
-	private $trackUsagesInAllLanguages;
-
-	/**
-	 * @var bool
-	 */
 	private $checkPageExistence;
 
 	/**
@@ -60,7 +55,6 @@ class AffectedPagesFinder {
 	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
 	 * @param string $contentLanguageCode
-	 * @param bool $trackUsagesInAllLanguages
 	 * @param bool $checkPageExistence To disable slow filtering that is not relevant in test
 	 *  scenarios. Not meant to be used in production!
 	 *
@@ -71,7 +65,6 @@ class AffectedPagesFinder {
 		TitleFactory $titleFactory,
 		$siteId,
 		$contentLanguageCode,
-		$trackUsagesInAllLanguages,
 		$checkPageExistence = true
 	) {
 		if ( !is_string( $siteId ) ) {
@@ -82,10 +75,6 @@ class AffectedPagesFinder {
 			throw new InvalidArgumentException( '$contentLanguageCode must be a string' );
 		}
 
-		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
-			throw new InvalidArgumentException( '$trackUsagesInAllLanguages must be a bool' );
-		}
-
 		if ( !is_bool( $checkPageExistence ) ) {
 			throw new InvalidArgumentException( '$checkPageExistence must be a boolean' );
 		}
@@ -94,7 +83,6 @@ class AffectedPagesFinder {
 		$this->titleFactory = $titleFactory;
 		$this->siteId = $siteId;
 		$this->contentLanguageCode = $contentLanguageCode;
-		$this->trackUsagesInAllLanguages = $trackUsagesInAllLanguages;
 		$this->checkPageExistence = $checkPageExistence;
 	}
 
@@ -179,6 +167,8 @@ class AffectedPagesFinder {
 			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::STATEMENT_USAGE, $propertyId );
 		}
 
+		$aspects[] = EntityUsage::makeAspectKey( EntityUsage::STATEMENT_USAGE );
+
 		return $aspects;
 	}
 
@@ -195,12 +185,7 @@ class AffectedPagesFinder {
 			$aspects[] = EntityUsage::makeAspectKey( $aspect, $lang );
 		}
 
-		if ( $this->trackUsagesInAllLanguages ) {
-			// On multi-lingual wikis where users can request pages in any language, we can not
-			// optimize for one language fallback chain only. Since all possible language fallback
-			// chains must cover all languages, we can simply track an "all languages" usage.
-			$aspects[] = EntityUsage::makeAspectKey( $aspect );
-		}
+		$aspects[] = EntityUsage::makeAspectKey( $aspect );
 
 		return $aspects;
 	}
