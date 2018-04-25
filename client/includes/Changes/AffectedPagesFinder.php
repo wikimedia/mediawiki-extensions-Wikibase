@@ -138,6 +138,7 @@ class AffectedPagesFinder {
 				$diffAspects->getLabelChanges()
 			);
 			$aspects = array_merge( $aspects, $labelAspects );
+			$aspects[] = EntityUsage::LABEL_USAGE;
 		}
 
 		if ( $diffAspects->getDescriptionChanges() !== [] ) {
@@ -146,6 +147,7 @@ class AffectedPagesFinder {
 				$diffAspects->getDescriptionChanges()
 			);
 			$aspects = array_merge( $aspects, $descriptionsAspects );
+			$aspects[] = EntityUsage::DESCRIPTION_USAGE;
 		}
 
 		if ( $diffAspects->getStatementChanges() !== [] ) {
@@ -153,6 +155,7 @@ class AffectedPagesFinder {
 				$diffAspects->getStatementChanges()
 			);
 			$aspects = array_merge( $aspects, $statementAspects );
+			$aspects[] = EntityUsage::SITELINK_USAGE;
 		}
 
 		if ( $diffAspects->hasOtherChanges() !== false ) {
