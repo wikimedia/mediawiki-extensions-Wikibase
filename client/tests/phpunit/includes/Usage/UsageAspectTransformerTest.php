@@ -87,12 +87,6 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 				[ 'L.en' ],
 				[]
 			],
-			'modifier: match unmodified relevant' => [
-				$q1,
-				[ 'L', 'L.ru' ],
-				[ 'L.en' ],
-				[ 'Q1#L.en' ]
-			],
 			'modifier: match unmodified aspect' => [
 				$q1,
 				[ 'L.en' ],
@@ -103,7 +97,7 @@ class UsageAspectTransformerTest extends \PHPUnit\Framework\TestCase {
 				$q1,
 				[ 'L.en', 'L' ],
 				[ 'L', 'L.ru' ],
-				[ 'Q1#L', 'Q1#L.en', 'Q1#L.ru' ]
+				[ 'Q1#L', 'Q1#L.en' ]
 			],
 		];
 	}
