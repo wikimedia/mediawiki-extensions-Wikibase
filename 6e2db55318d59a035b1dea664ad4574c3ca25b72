@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfdd4f58_2c874a11",
+        "filename": "lib/includes/Formatters/CommonsMediaImageGallery.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-04-25T15:08:31Z",
+      "side": 1,
+      "message": "Protocol relative URLs (//) are not necessary anymore. Use directly HTTPS (https://) because http://commons.wikimedia.org/ redirects to https://commons.wikimedia.org/.",
+      "range": {
+        "startLine": 82,
+        "startChar": 14,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "6e2db55318d59a035b1dea664ad4574c3ca25b72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
