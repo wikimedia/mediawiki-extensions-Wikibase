@@ -70,14 +70,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entityInfo = null;
 
 	/**
-	 * Maps of id strings to numeric ids, grouped by entity type.
-	 * Used to build database queries on tables that use separate
-	 * fields for type and numeric id.
+	 * Maps of id strings to numeric property ids.
+	 * Used to build database queries on wb_property_info
 	 *
-	 * @var array[] map of entity types to maps of id-strings to numeric ids:
-	 *      type => id-string => id-int
+	 * @var array[] map of id-strings to numeric ids:
+	 *      type => id-int
 	 */
-	private $numericIdsByType = [];
+	private $numericPropertyIds = [];
 
 	/**
 	 * Maps of ID strings to local ID parts (i.e. excluding the repository prefix, if the
@@ -93,7 +92,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * Maps of id strings to page info records, grouped by entity type.
-	 * This uses the same basic structure as $this->numericIdsByType.
+	 * This uses the same basic structure as $localIdsByType.
 	 * Each page info record is an associative array with keys page_id
 	 * and redirect_target.
 	 *
@@ -201,7 +200,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->entityIds = [];
 		$this->entityInfo = [];
-		$this->numericIdsByType = [];
+		$this->numericPropertyIds = [];
 		$this->localIdsByType = [];
 
 		foreach ( $ids as $id ) {
@@ -238,7 +237,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * Applied the given redirect to the internal data structure.
 	 *
 	 * After this method returns, the old ID will have been replaced by the target ID
-	 * in the $entityInfo as well as the $numericIdsByType structures. In $entityInfo,
+	 * in the $entityInfo as well as the $numericPropertyIds structures. In $entityInfo,
 	 * the old key will remain as a reference to the entry under the new (target) key.
 	 *
 	 * @param string $idString The redirected entity id
@@ -279,7 +278,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * Removes any references to the given entity from the $entityInfo data
-	 * structure as well as the $numericIdsByType cache, but not from
+	 * structure as well as the $numericPropertyIds cache, but not from
 	 * the $entityIds cache.
 	 *
 	 * @param string $idString
@@ -290,7 +289,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$type = $id->getEntityType();
 
 		unset( $this->entityInfo[$idString] );
-		unset( $this->numericIdsByType[$type][$idString] );
+		unset( $this->numericPropertyIds[$idString] );
 		unset( $this->localIdsByType[$type][$idString] );
 	}
 
@@ -309,7 +308,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * Updates the $entityInfo structure and makes the ID
-	 * available via the $numericIdsByType and $entityIds caches.
+	 * available via the $numericPropertyIds and $entityIds caches.
 	 *
 	 * @param EntityId $id
 	 */
@@ -322,9 +321,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->entityIds[$key] = $id;
 		$this->entityInfo[$key]['id'] = $key;
-		// FIXME: this will fail for IDs that do not have a numeric form
-		$this->numericIdsByType[$type][$key] = $id->getNumericId();
 		$this->localIdsByType[$type][$key] = $id->getLocalPart();
+		if ( $type === Property::ENTITY_TYPE ) {
+			$this->numericPropertyIds[$key] = $id->getNumericId();
+		}
 	}
 
 	/**
@@ -502,19 +502,17 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	public function collectDataTypes() {
 		//TODO: use PropertyDataTypeLookup service to make use of caching!
 
-		if ( empty( $this->numericIdsByType[Property::ENTITY_TYPE] ) ) {
+		if ( empty( $this->numericPropertyIds ) ) {
 			// there are no Property entities, so there is nothing to do.
 			return;
 		}
-
-		$numericPropertyIds = $this->numericIdsByType[Property::ENTITY_TYPE];
 
 		$dbw = $this->getConnection( DB_REPLICA );
 
 		$res = $dbw->select(
 			$this->propertyInfoTable,
 			[ 'pi_property_id', 'pi_type' ],
-			[ 'pi_property_id' => $numericPropertyIds ],
+			[ 'pi_property_id' => $this->numericPropertyIds ],
 			__METHOD__
 		);
 
@@ -567,16 +565,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function unsetEntityInfo( array $ids ) {
 		$this->entityInfo = array_diff_key( $this->entityInfo, array_flip( $ids ) );
 		$this->entityIds = array_diff_key( $this->entityIds, array_flip( $ids ) );
+		$this->numericPropertyIds = array_diff_key( $this->numericPropertyIds, array_flip( $ids ) );
 
-		foreach ( $this->numericIdsByType as &$numericIds ) {
-			$numericIds = array_diff_key( $numericIds, array_flip( $ids ) );
-		}
 		foreach ( $this->localIdsByType as &$idsByType ) {
 			$idsByType = array_diff_key( $idsByType, array_flip( $ids ) );
 		}
 
 		// remove empty entries
-		$this->numericIdsByType = array_filter( $this->numericIdsByType );
 		$this->localIdsByType = array_filter( $this->localIdsByType );
 	}
 
