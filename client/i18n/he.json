@@ -39,7 +39,7 @@
 	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'description', כל אחד מהם מוחזר בתור מערך של מחרוזות עם סוגים בתור מפתחות, למשל <span dir=\"ltr\">{\"description\": [\"foo\"]}</span>. אם לא צוין, יוחזרו כל הסוגים.",
 	"apihelp-query+description-summary": "קבלת תיאור קצר, כלומר כותרת משנה שמסבירה במה עוסק דף היעד.",
 	"apihelp-query+description-param-prefersource": "איזה מקור להעדיף עבור התיאור, אם ישנו:",
-	"apihelp-query+description-paramvalue-prefersource-local": "תיאורים מקומיים באמצעות פונקציית המפענח {{SHORTDESC:...}} בקוד הוויקי של הדף.",
+	"apihelp-query+description-paramvalue-prefersource-local": "תיאורים מקומיים באמצעות פונקציית המפענח <code dir=\"ltr\"><nowiki>{{SHORTDESC:...}}</nowiki></code> בקוד הוויקי של הדף.",
 	"apihelp-query+description-paramvalue-prefersource-central": "תיאורים מרכזיים מתוך פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך.",
 	"apihelp-query+description-example": "קבלת התיאור של הדף 'לונדון'.",
 	"apihelp-query+description-example-central": "קבלת התיאור של הדף 'לונדון', והעדפת התיאור המרכזי אם הוא קיים.",

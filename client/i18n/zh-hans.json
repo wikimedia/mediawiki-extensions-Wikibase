@@ -50,7 +50,7 @@
 	"apihelp-query+pageterms-param-terms": "要获取的术语类型，例如“description”，按类型每个返回为字符串键控数组，例如{\"description\": [\"foo\"]}。如果未指定，就返回所有类型。",
 	"apihelp-query+description-summary": "获取一段简短描述（或称子标题）解释目标页面有关什么话题。",
 	"apihelp-query+description-param-prefersource": "首选哪种描述来源（只要有）：",
-	"apihelp-query+description-paramvalue-prefersource-local": "通过页面中wiki文本的{{SHORTDESC:...}}解析器函数生成的本地描述。",
+	"apihelp-query+description-paramvalue-prefersource-local": "通过页面中wiki文本的<code><nowiki>{{SHORTDESC:...}}</nowiki></code>解析器函数生成的本地描述。",
 	"apihelp-query+description-paramvalue-prefersource-central": "来自关联{{WBREPONAME}}项的中心描述。",
 	"apihelp-query+description-example": "获取页面“London”的描述。",
 	"apihelp-query+description-example-central": "获取页面“London”的描述，首选中心描述（如有）。",

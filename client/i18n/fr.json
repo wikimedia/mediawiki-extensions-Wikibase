@@ -55,7 +55,7 @@
 	"apihelp-query+pageterms-param-terms": "Les types de termes à obtenir, par exemple 'description', chacun étant retourné en tant que tableau de chaînes accédées avec une clé égale au type cherché, par exemple  {\"description\": [\"foo\"]}. Si non spécifié, tous les types sont renvoyés.",
 	"apihelp-query+description-summary": "Obtenez une brève description sous-titre a.k.a expliquant ce qu'est la page cible.",
 	"apihelp-query+description-param-prefersource": "Quelle source de description préférer si présent :",
-	"apihelp-query+description-paramvalue-prefersource-local": "Description locale via la fonction analyseur  {{SHORTDESC:...}} dans le texte wiki de la page.",
+	"apihelp-query+description-paramvalue-prefersource-local": "Description locale via la fonction analyseur  <code><nowiki>{{SHORTDESC:...}}</nowiki></code> dans le wikitexte de la page.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descriptions centrales de l'élément associé  {{WBREPONAME}} .",
 	"apihelp-query+description-example": "Obtenir la description de la page 'London'.",
 	"apihelp-query+description-example-central": "Obtenez la description de la page 'London', en préférant la description centrale si elle existe.",
