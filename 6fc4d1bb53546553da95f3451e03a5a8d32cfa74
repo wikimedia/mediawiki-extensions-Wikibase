@@ -22,6 +22,30 @@
       "revId": "6fc4d1bb53546553da95f3451e03a5a8d32cfa74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6328f7ec_30596410",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-04-26T13:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7942664e_c9cd735f",
+      "range": {
+        "startLine": 95,
+        "startChar": 49,
+        "endLine": 95,
+        "endChar": 67
+      },
+      "revId": "6fc4d1bb53546553da95f3451e03a5a8d32cfa74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
