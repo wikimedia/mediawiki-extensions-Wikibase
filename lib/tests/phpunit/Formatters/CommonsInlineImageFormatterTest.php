@@ -24,7 +24,8 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 
 	public function commonsInlineImageFormatterProvider() {
 		$exampleJpgHtmlRegex = '@<ul .*<a[^>]+href="//commons.wikimedia.org/wiki/File:Example.jpg"[^>]*>' .
-				'<img.*src=".*//upload.wikimedia.org/wikipedia/commons/.*/Example.jpg".*/>.*Example.jpg.*</ul>@s';
+				'<img.*src=".*//upload.wikimedia.org/wikipedia/commons/.*/Example.jpg".*/></a>.*' .
+				'<a[^>]+href="//commons.wikimedia.org/wiki/File:Example.jpg"[^>]*>Example.jpg</a>.*</ul>@s';
 
 		return [
 			[
@@ -37,7 +38,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 			],
 			[
 				new StringValue( 'Example-That-Does-Not-Exist.jpg' ),
-				'@^.*<a.*href=".*Example-That-Does-Not-Exist.jpg.*@s'
+				'@^.*<a[^>]+href="//commons.wikimedia.org/wiki/File:Example-That-Does-Not-Exist.jpg"[^>]*>@s'
 			],
 			[
 				new StringValue( 'Dangerous-quotes""' ),
