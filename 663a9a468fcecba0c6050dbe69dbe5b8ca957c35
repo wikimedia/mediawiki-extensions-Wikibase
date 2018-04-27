@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d85d624_42432ea7",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-04-27T15:53:43Z",
+      "side": 1,
+      "message": "There\u0027s no test here for matching \"C\" usages at all, as far as I can see. There should be two: one testing a \"C\" usage, and one testing \"C.P1\" vs. \"C.P2\" usage, where only one of the two is matched.",
+      "revId": "663a9a468fcecba0c6050dbe69dbe5b8ca957c35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
