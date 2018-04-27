@@ -16,6 +16,24 @@
       "revId": "663a9a468fcecba0c6050dbe69dbe5b8ca957c35",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dac3eb80_73f24d60",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-27T22:30:02Z",
+      "side": 1,
+      "message": "I added some tests to be sure it works fine.",
+      "parentUuid": "3d85d624_42432ea7",
+      "revId": "663a9a468fcecba0c6050dbe69dbe5b8ca957c35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
