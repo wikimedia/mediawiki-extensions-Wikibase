@@ -396,6 +396,7 @@
 	"apihelp-wbcreateclaim-example-1": "Стварае сьцьверджаньне для элемэнту <samp>Q42</samp> уласьцівасьці <samp>P9001</samp> з снэкам «{{int:wikibase-snakview-snaktypeselector-novalue}}».",
 	"apihelp-wbcreateclaim-example-2": "Стварае сьцьверджаньне для элемэнту <samp>Q42</samp> уласьцівасьці <samp>P9002</samp> з радковым значэньнем «<var>itsastring</var>»",
 	"apihelp-wbcreateclaim-example-3": "Стварае сьцьверджаньне для элемэнту <samp>Q42</samp> уласьцівасьці <samp>P9003</samp> з значэньнем элемэнту <samp>Q1</samp>",
+	"apihelp-wbcreateclaim-example-4": "Стварае сьцьверджаньне для элемэнту <samp>Q42</samp> уласьцівасьці <samp>P9004</samp> з снэкам з каардынатамі",
 	"apihelp-wbcreateredirect-description": "Стварае перанакіраваньні на элемэнты.",
 	"apihelp-wbcreateredirect-summary": "Стварае перанакіраваньні на элемэнты."
 }

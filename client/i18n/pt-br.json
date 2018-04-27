@@ -14,7 +14,8 @@
 			"Luk3",
 			"Felipe L. Ewald",
 			"Eduardo Addad de Oliveira",
-			"TheEduGobi"
+			"TheEduGobi",
+			"Guycn2"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -45,7 +46,7 @@
 	"apihelp-query+pageterms-param-terms": "Os tipos de termos a serem obtidos, p.ex. 'description' ,cada um retornou uma matriz de cadeias com chave por seu tipo, e. {\"description\": [\"foo\"]}. Se não for especificado, todos os tipos são devolvidos.",
 	"apihelp-query+description-summary": "Obter uma descrição breve, isto é, um subtítulo que explica o objetivo da página de destino.",
 	"apihelp-query+description-param-prefersource": "Qual das fontes de descrições será a preferida, se existir:",
-	"apihelp-query+description-paramvalue-prefersource-local": "Descrições locais, através da função {{SHORTDESC:...}} do analisador sintático no texto wiki da página.",
+	"apihelp-query+description-paramvalue-prefersource-local": "Descrições locais, através da função <code><nowiki>{{SHORTDESC:...}}</nowiki></code> do analisador sintático no texto wiki da página.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descrições centralizadas, do elemento {{WBREPONAME}} associado.",
 	"apihelp-query+description-example": "Obter a descrição para a página 'London'.",
 	"apihelp-query+description-example-central": "Obter a descrição para a página 'London', dando preferência à descrição centralizada se esta existir.",

@@ -39,7 +39,7 @@
 	"wikibase-linkitem-confirmitem-button": "സ്ഥിരീകരിക്കുക",
 	"wikibase-linkitem-not-loggedin-title": "താങ്കൾ പ്രവേശിച്ചിരിക്കേണ്ടതാവശ്യമാണ്",
 	"wikibase-linkitem-not-loggedin": "ഈ സൗകര്യം ഉപയോഗിക്കുന്നതിനായി ഈ വിക്കിയിലും [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലും] താങ്കൾ പ്രവേശിച്ചിരിക്കേണ്ടതുണ്ട്.",
-	"wikibase-linkitem-success-link": "താളുകൾ വിജയകരമായി കണ്ണിചേർത്തിരിക്കുന്നു. താങ്കൾക്ക് ഇനം ഞങ്ങളുടെ [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിൽ] കാണാവുന്നതാണ്.",
+	"wikibase-linkitem-success-link": "താളുകൾ കണ്ണിചേർത്തിരിക്കുന്നു. താങ്കൾക്ക് ഇനം ഞങ്ങളുടെ [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിൽ] കാണാവുന്നതാണ്.",
 	"wikibase-property-notfound": "$1 എന്ന ഗുണം കണ്ടെത്താനായില്ല.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "മറയ്ക്കുക",
@@ -65,8 +65,16 @@
 	"wikibase-pageswithbadges-submit": "താളുകൾ പ്രദർശിപ്പിക്കുക",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ഇനം ഐ.ഡി.",
 	"wikibase-pageinfo-entity-id-none": "ഒന്നുമില്ല",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "വിവരണം: $1",
+	"wikibase-pageinfo-entity-usage-T": "തലക്കെട്ട്",
 	"wikibase-property-render-error": "$1 എന്ന ഗുണഗണം പ്രദർശനസജ്ജമാക്കൽ പരാജയപ്പെട്ടു: $2",
 	"wikibase-otherprojects": "ഇതരപദ്ധതികളിൽ",
 	"wikibase-otherprojects-beta-message": "ഇതരപദ്ധതികൾ സൈഡ്‌ബാർ",
-	"wikibase-otherprojects-beta-description": "{{WBREPONAME}} വിവരങ്ങൾക്കനുസരിച്ച്, സൈഡ്ബാറിൽ മറ്റ് വിക്കിമീഡിയ പദ്ധതികളിലേക്ക് കണ്ണികൾ നൽകുന്ന \"{{int:wikibase-otherprojects}}\" ഭാഗം ചേർക്കുന്നു."
+	"wikibase-otherprojects-beta-description": "{{WBREPONAME}} വിവരങ്ങൾക്കനുസരിച്ച്, സൈഡ്ബാറിൽ മറ്റ് വിക്കിമീഡിയ പദ്ധതികളിലേക്ക് കണ്ണികൾ നൽകുന്ന \"{{int:wikibase-otherprojects}}\" ഭാഗം ചേർക്കുന്നു.",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}} സംരംഭത്തിലോട്ടുള്ള {{PLURAL:$1|ബന്ധം|ബന്ധങ്ങൾ}}",
+	"echo-pref-tooltip-wikibase-action": "{{GENDER:|ഞാൻ സൃഷ്ടിച്ച}} ഒരു താൾ ആരെങ്കിലും ഒരു {{WBREPONAME}} ഇനവുമായി ബന്ധപ്പെടുത്തിയാൽ എന്നെ അറിയിക്കുക.",
+	"notification-header-page-connection": "<strong>$3</strong> എന്ന താൾ, വിഷയവുമായി ബന്ധപ്പെട്ട വിവരങ്ങൾ ഉൾക്കൊള്ളുന്ന, {{PLURAL:$4|-1=ഒരു {{WBREPONAME}} ഇനവുമായി| {{WBREPONAME}} ഇനം $4 എന്നതുമായി}} {{GENDER:$2|ബന്ധിപ്പിച്ചിരിക്കുന്നു}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> ഒപ്പം {{PLURAL:$4|മറ്റൊരു താളും|മറ്റ് $4 താളുകളും|100=99+ മറ്റ് താളുകളും}} {{WBREPONAME}} ഇനങ്ങളുമായി {{GENDER:$2|ബന്ധിപ്പിച്ചിരിക്കുന്നു}}.",
+	"notification-link-text-view-item": "ഇനം {{GENDER:$1|കാണുക}}",
+	"notification-subject-page-connection": "{{SITENAME}} സംരംഭത്തിൽ താങ്കൾ {{GENDER:$3|സൃഷ്ടിച്ച}} ഒരു താൾ {{WBREPONAME}} ഇനവുമായി {{GENDER:$2|ബന്ധിപ്പിച്ചിരിക്കുന്നു}}"
 }

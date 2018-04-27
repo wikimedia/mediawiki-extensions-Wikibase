@@ -20,7 +20,8 @@
 			"Mr. Ibrahem",
 			"Mido",
 			"ديفيد",
-			"Azouz.anis"
+			"Azouz.anis",
+			"Guycn2"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
@@ -51,7 +52,7 @@
 	"apihelp-query+pageterms-param-terms": "أنواع المصطلحات للحصول عليها، مثلا 'description'، كل منها يتم إرجاعها كمصفوفة من سلاسل الحروف مبوبة حسب النوع، مثلا {\"description\": [\"foo\"]}. إذا لم يتم التحديد، فسيتم إظهار كل الأنواع.",
 	"apihelp-query+description-summary": "الحصول على وصف موجز للمفردات المصاحبة يوضح العنوان المستهدف للصفحة المستهدفة.",
 	"apihelp-query+description-param-prefersource": "ما مصدر الوصف الذي تفضله إذا كان موجودًا:",
-	"apihelp-query+description-paramvalue-prefersource-local": "الأوصاف المحلية عبر دالة المحلل {{SHORTDESC:...}} في نص الويكي للصفحة.",
+	"apihelp-query+description-paramvalue-prefersource-local": "الأوصاف المحلية عبر دالة المحلل <code dir=\"ltr\"><nowiki>{{SHORTDESC:...}}</nowiki></code> في نص الويكي للصفحة.",
 	"apihelp-query+description-paramvalue-prefersource-central": "وصف مركزي من عنصر {{WBREPONAME}} المقترن.",
 	"apihelp-query+description-example": "احصل على وصف لصفحة 'لندن'.",
 	"apihelp-query+description-example-central": "احصل على وصف لصفحة 'لندن'، مفضلا الوصف المركزي إذا كان موجودًا.",

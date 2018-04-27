@@ -3,7 +3,8 @@
 		"authors": [
 			"Edinwiki",
 			"Xuacu",
-			"Crucifunked"
+			"Crucifunked",
+			"Guycn2"
 		]
 	},
 	"wikibase-client-desc": "Cliente pa la estensión Wikibase",
@@ -34,7 +35,7 @@
 	"apihelp-query+pageterms-param-terms": "Los tipos de términos a algamar; p.ex., \"description\", caún d'ellos devueltu como una matriz de cadenes con claves según el so tipu; p. ex., {\"description\": [\"foo\"]}. Si nun s'especifica, devuélvense tolos tipos.",
 	"apihelp-query+description-summary": "Recibir una descripción curtia (subtítulu) esplicando'l tema de la páxina destín.",
 	"apihelp-query+description-param-prefersource": "Fonte de la descripción preferida, si ta presente:",
-	"apihelp-query+description-paramvalue-prefersource-local": "Descripciones llocales usando la función del analizador {{SHORTDESC:...}} del testu wiki de la páxina.",
+	"apihelp-query+description-paramvalue-prefersource-local": "Descripciones llocales usando la función del analizador <code><nowiki>{{SHORTDESC:...}}</nowiki></code> del testu wiki de la páxina.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descripciones centralizaes dende l'elementu asociáu en {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Recibir la descripcion de la páxina 'London'.",
 	"apihelp-query+description-example-central": "Recibir la descripcion de la páxina 'London', prefiriendo la descripción central si existe.",
