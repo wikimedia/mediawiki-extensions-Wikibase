@@ -104,6 +104,7 @@
 	"wikibase-pageswithbadges-submit": "نمایش صفحات",
 	"entityusage": "استفادهٔ موجودیت",
 	"wikibase-entityusage-invalid-id": "$1 یک شناسه صحیح موجودیت نیست",
+	"wikibase-entityusage-legend": "فهرست صفحاتی که از موجود داده شده استفاده می‌کنند را بده",
 	"wikibase-entityusage-entity": "موجودیت:",
 	"wikibase-entityusage-submit": "نمایش صفحات",
 	"wikibase-pageinfo-entity-id": "شناسه مورد {{WBREPONAME}}",

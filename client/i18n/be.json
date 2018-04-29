@@ -11,6 +11,7 @@
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
 	"tooltip-t-wikibase": "Спасылка на звязаны элемент рэпазітара даных",
 	"wikibase-after-page-move": "Вашае перайменаванне павінна адлюстравацца ў моўнай спасылцы [$1 ў адпаведным элеменце {{grammar:genitive|{{WBREPONAME}}}}]. Просім Вас праверыць, што гэта адбылося.",
+	"wikibase-after-page-delete": "Спасылка на гэтую старонку павінна быць выдалена з [$1 адпаведнага элемента {{GRAMMAR:genitive|{{WBREPONAME}}}}]. Мы просім Вас праверыць, што гэта адбылося.",
 	"wikibase-comment-remove": "Злучаны элемент выдалены з {{grammar:genitive|{{WBREPONAME}}}}. Моўныя спасылкі былі выдалены.",
 	"wikibase-comment-linked": "Элемент {{grammar:genitive|{{WBREPONAME}}}} быў злучаны з гэтай старонкай.",
 	"wikibase-comment-unlink": "Гэта старонка была аддзелена ад элемента {{grammar:genitive|{{WBREPONAME}}}}. Моўныя спасылкі выдалены.",
