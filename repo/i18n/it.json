@@ -439,7 +439,7 @@
 	"apihelp-wbsearchentities-param-strictlanguage": "Se disabilitare la lingua di riserva",
 	"apihelp-wbsearchentities-param-type": "Cerca per questo tipo di entità.",
 	"apihelp-wbsearchentities-param-limit": "Numero massimo di risultati",
-	"apihelp-wbsearchentities-example-6": "Cerca\"Q1234\" in lingua inglese per accordare l'entità di identificazione.",
+	"apihelp-wbsearchentities-example-6": "Cerca\"Q1234\" in lingua inglese, per corrispondere all'ID entità.",
 	"apihelp-query+wbsearch-param-search": "Ricerca di questo testo.",
 	"apihelp-query+wbsearch-param-language": "Ricerca in questa lingua.",
 	"apihelp-query+wbsearch-param-strictlanguage": "Se disabilitare la lingua di riserva",

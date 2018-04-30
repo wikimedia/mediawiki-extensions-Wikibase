@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anok kutai jang"
+		]
+	},
+	"tooltip-t-wikibase": "Pranala par hubungkan data dalang ruang voor simpang akang",
+	"wikibase-comment-update": "Akang {{WBREPONAME}} ada barobah",
+	"wikibase-dataitem": "Akang sabiji di {{WBREPONAME}}",
+	"wikibase-editlinks": "Robah pranala",
+	"wikibase-editlinkstitle": "Robah pranala antarwiki",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Jang kas lia",
+	"wikibase-rc-hide-wikidata-show": "Kas tunjuk kamuka",
+	"wikibase-rc-wikibase-edit-title": "Parobahan {{WBREPONAME}}",
+	"wikibase-otherprojects": "Dalang proyek laeng"
+}

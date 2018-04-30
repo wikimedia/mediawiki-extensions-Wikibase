@@ -460,7 +460,7 @@
 	"apihelp-wbremovereferences-param-statement": "Avaldus, mille viide määratakse, avalduse GUID",
 	"apihelp-wbremovereferences-param-references": "Eemaldatavate viidete räsiväärtused",
 	"apihelp-wbremovereferences-example-1": "Eemalda viide, mille räsiväärtus on \"<var>455481eeac76e6a8af71a6b493c073d54788e7e9</var>\" avalduselt, mille GUID on \"<var>Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F</var>\"",
-	"apihelp-wbsearchentities-description": "Otsib siltide ja rööpkujude abil olemeid.\nTagastab olemi sildi  ja kirjelduse, kui see on kasutaja keeles võimalik.\nTagastab leitud vaste üksikasjad.\nLeitud vaste tekst on samuti esitatud rööpkujude juures, kui see erineb kuvatavast sildist.",
+	"apihelp-wbsearchentities-description": "Otsib olemeid siltide, rööpkujude ja identifikaatorite abil.\nTagastab olemi sildi  ja kirjelduse, kui see on kasutaja keeles võimalik.\nTagastab leitud vaste üksikasjad.\nLeitud vaste tekst on samuti esitatud rööpkujude juures, kui see erineb kuvatavast sildist.",
 	"apihelp-wbsearchentities-param-search": "Otsi seda teksti.",
 	"apihelp-wbsearchentities-param-language": "Otsi selles keeles.",
 	"apihelp-wbsearchentities-param-type": "Otsi seda tüüpi olemit.",

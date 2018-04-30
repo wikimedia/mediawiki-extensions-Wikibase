@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anok kutai jang"
+		]
+	},
+	"wikibase-edit": "kas ubah",
+	"wikibase-add": "kas tambah",
+	"wikibase-label-empty": "Seng ada label",
+	"wikibase-description-empty": "Seng ada deskripsi",
+	"wikibase-sitelinks-special": "Situs laeng",
+	"wikibase-statementview-rank-normal": "Rangking normal"
+}
