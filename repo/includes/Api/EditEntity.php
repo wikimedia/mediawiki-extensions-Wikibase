@@ -6,6 +6,7 @@ use ApiMain;
 use Deserializers\Deserializer;
 use Title;
 use ApiUsageException;
+use Wikibase\DataModel\Entity\Clearable;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
@@ -206,7 +207,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 *
-	 * @param EntityDocument &$entity
+	 * @param EntityDocument|Clearable &$entity
 	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
@@ -218,7 +219,7 @@ class EditEntity extends ModifyEntity {
 		$exists = $this->entityExists( $entity->getId() );
 
 		if ( $preparedParameters['clear'] ) {
-			$entity = $this->clearEntity( $entity );
+			$entity->clear();
 
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
 		} else {
@@ -238,24 +239,6 @@ class EditEntity extends ModifyEntity {
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $preparedParameters );
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return EntityDocument
-	 */
-	private function clearEntity( EntityDocument $entity ) {
-		$newEntity = $this->entityFactory->newEmpty( $entity->getType() );
-		$newEntity->setId( $entity->getId() );
-
-		// FIXME how to avoid special case handling here?
-		if ( $entity instanceof Property ) {
-			/** @var Property $newEntity */
-			$newEntity->setDataTypeId( $entity->getDataTypeId() );
-		}
-
-		return $newEntity;
 	}
 
 	/**
