@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7673f17c_10969b02",
+        "filename": "repo/includes/Api/MergeItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-30T12:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6b69fef_27774961",
+      "revId": "4b290febc535a154a500063cfe7973a02b3406cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "04ec93d9_ac516e15",
         "filename": "repo/includes/Api/MergeItems.php",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2018-04-30T07:54:00Z",
       "side": 1,
       "message": "Maybe we should have a unit test for this?",
+      "range": {
+        "startLine": 155,
+        "startChar": 61,
+        "endLine": 155,
+        "endChar": 71
+      },
+      "revId": "4b290febc535a154a500063cfe7973a02b3406cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452671af_7b77d3c1",
+        "filename": "repo/includes/Api/MergeItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-04-30T12:04:33Z",
+      "side": 1,
+      "message": "Adding unit tests requires changing ApiModuleTestHelper::assertUsageException() which sounds like a rabbit hole :D",
+      "parentUuid": "04ec93d9_ac516e15",
       "range": {
         "startLine": 155,
         "startChar": 61,
