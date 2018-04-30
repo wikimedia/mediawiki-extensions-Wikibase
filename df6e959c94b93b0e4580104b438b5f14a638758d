@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8d4f3aa_50d90e1d",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-30T14:13:06Z",
+      "side": 1,
+      "message": "This is actually not relevant to the change below",
+      "revId": "df6e959c94b93b0e4580104b438b5f14a638758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db39501a_bbc340e3",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-04-30T14:13:06Z",
+      "side": 1,
+      "message": "This should actually be empty: Page #2 has no \"C.P2\" or \"C\" usage.",
+      "range": {
+        "startLine": 491,
+        "startChar": 5,
+        "endLine": 491,
+        "endChar": 19
+      },
+      "revId": "df6e959c94b93b0e4580104b438b5f14a638758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
