@@ -49,6 +49,15 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 				$testData->getEntity( 'Q4' ),
 				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring' ]
 			],
+			'Q6' => [
+				$testData->getEntity( 'Q6' ),
+				[
+					'P7=string',
+					'P7=string[P2=Q42]',
+					'P7=string[P2=Q666]',
+					'P7=string[P7=simplestring]',
+				]
+			],
 			'Q7' => [
 				$testData->getEntity( 'Q7' ),
 				[ 'P7=string', 'P7=string2' ]
