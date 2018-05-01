@@ -399,5 +399,6 @@
 	"apihelp-wbcreateclaim-example-4": "Стварае сьцьверджаньне для элемэнту <samp>Q42</samp> уласьцівасьці <samp>P9004</samp> з снэкам з каардынатамі",
 	"apihelp-wbcreateredirect-description": "Стварае перанакіраваньні на элемэнты.",
 	"apihelp-wbcreateredirect-summary": "Стварае перанакіраваньні на элемэнты.",
-	"apihelp-wbcreateredirect-param-from": "Ідэнтыфікатар элемэнту, зь якога трэба зрабіць перанакіраваньне"
+	"apihelp-wbcreateredirect-param-from": "Ідэнтыфікатар элемэнту, зь якога трэба зрабіць перанакіраваньне",
+	"apihelp-wbcreateredirect-param-to": "Ідэнтыфікатар элемэнту, на які зрабіць перанакіраваньне"
 }
