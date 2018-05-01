@@ -49,6 +49,20 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 				$testData->getEntity( 'Q4' ),
 				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring' ]
 			],
+			'Q6' => [
+				$testData->getEntity( 'Q6' ),
+				[
+					'P7=string',
+					'P7=string[P2=Q42]',
+					'P7=string[P2=Q666]',
+					'P7=string[P3=Universe.svg]',
+					'P7=string[P7=simplestring]',
+					'P7=string[P9=http://url.acme.test/]',
+					"P7=string[P9= http://url.acme2.test/\n]",
+					'P7=string[foreign:P11=simplestring]',
+					'P7=string[foreign:P12=foreign:Q1234]',
+				]
+			],
 			'Q7' => [
 				$testData->getEntity( 'Q7' ),
 				[ 'P7=string', 'P7=string2' ]
@@ -69,7 +83,11 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$repo = WikibaseRepo::getDefaultInstance();
-		$field = new StatementsField( $this->properties, $repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
+
+		$field = new StatementsField(
+			$this->properties,
+			$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks()
+		);
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 
@@ -108,5 +126,4 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 		$data = $field->getFieldData( $entity );
 		$this->assertEquals( $expected, $data );
 	}
-
 }
