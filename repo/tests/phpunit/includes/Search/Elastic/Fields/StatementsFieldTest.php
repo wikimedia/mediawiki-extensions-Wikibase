@@ -27,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Stas Malyshev
  */
 class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
+	//use PHPUnit4And6Compat;
 
 	/**
 	 * List of properties we handle.
@@ -48,6 +48,15 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 			'Q4' => [
 				$testData->getEntity( 'Q4' ),
 				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring' ]
+			],
+			'Q6' => [
+				$testData->getEntity( 'Q6' ),
+				[
+					'P7=string',
+					'P7=string[P2=Q42]',
+					'P7=string[P2=Q666]',
+					'P7=string[P7=simplestring]',
+				]
 			],
 			'Q7' => [
 				$testData->getEntity( 'Q7' ),
