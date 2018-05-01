@@ -10,6 +10,7 @@ use SearchIndexFieldDefinition;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
@@ -117,44 +118,95 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		/** @var Statement $statement */
 		foreach ( $entity->getStatements() as $statement ) {
 			$snak = $statement->getMainSnak();
-			if ( !( $snak instanceof PropertyValueSnak ) ) {
-				// Won't index novalue/somevalue for now
-				continue;
+			$mainSnakString = $this->getWhitelistedSnakAsString( $snak );
+			if ( !is_null( $mainSnakString ) ) {
+				$data[] = $mainSnakString;
+				foreach ( $statement->getQualifiers() as $qualifier ) {
+					$qualifierString = $this->getSnakAsString( $qualifier );
+					if ( !is_null( $qualifierString ) ) {
+						$data[] = $mainSnakString . '[' . $qualifierString . ']';
+					}
+				}
 			}
-
-			$propertyId = $snak->getPropertyId()->getSerialization();
-			if ( array_key_exists( $propertyId, $this->excludedIds ) ) {
-				continue;
-			}
-
-			$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-			if ( !array_key_exists( $propType, $this->indexedTypes ) &&
-				!array_key_exists( $propertyId, $this->propertyIds ) ) {
-				continue;
-			}
-
-			$dataValue = $snak->getDataValue();
-			$definitionKey = 'VT:' . $dataValue->getType();
-
-			if ( !isset( $this->searchIndexDataFormatters[$definitionKey] ) ) {
-				// We do not know how to format these values
-				continue;
-			}
-
-			$formatter = $this->searchIndexDataFormatters[$definitionKey];
-			$value = $formatter( $dataValue );
-
-			if ( !is_string( $value ) ) {
-				throw new MWException( 'Search index data formatter callback for "' . $definitionKey
-					. '" didn\'t return a string' );
-			} elseif ( $value === '' ) {
-				continue;
-			}
-
-			$data[] = $propertyId . self::STATEMENT_SEPARATOR . $value;
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Return the snak in the format '<property id>=<value>'
+	 *
+	 * e.g. P180=Q537, P240=1234567
+	 *
+	 * @param Snak $snak
+	 * @return null|string
+	 * @throws MWException
+	 */
+	private function getSnakAsString( Snak $snak ) {
+		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
+			return null;
+		}
+
+		$dataValue = $snak->getDataValue();
+		$definitionKey = 'VT:' . $dataValue->getType();
+
+		if ( !isset( $this->searchIndexDataFormatters[$definitionKey] ) ) {
+			// We do not know how to format these values
+			return null;
+		}
+
+		$formatter = $this->searchIndexDataFormatters[$definitionKey];
+		$value = $formatter( $dataValue );
+
+		if ( !is_string( $value ) ) {
+			throw new MWException( 'Search index data formatter callback for "' . $definitionKey
+								   . '" didn\'t return a string' );
+		}
+		if ( $value === '' ) {
+			return null;
+		}
+
+		return $snak->getPropertyId()->getSerialization() . self::STATEMENT_SEPARATOR . $value;
+	}
+
+	/**
+	 * Return the snak in the format '<property id>=<value>' IF AND ONLY IF the property has been
+	 * whitelisted or its type has been whitelisted, and it has not been specifically excluded
+	 *
+	 * e.g. P180=Q537, P240=1234567
+	 *
+	 * @param Snak $snak
+	 * @return null|string
+	 * @throws MWException
+	 */
+	private function getWhitelistedSnakAsString( Snak $snak ) {
+		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
+			return null;
+		}
+
+		$propertyId = $snak->getPropertyId()->getSerialization();
+		if ( array_key_exists( $propertyId, $this->excludedIds ) ) {
+			return null;
+		}
+
+		$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		if ( !array_key_exists( $propType, $this->indexedTypes ) &&
+			 !array_key_exists( $propertyId, $this->propertyIds ) ) {
+			return null;
+		}
+
+		return $this->getSnakAsString( $snak );
+	}
+
+	/**
+	 * Returns true if the snak has a known value - i.e. it is NOT a PropertyNoValueSnak or a
+	 * 	PropertySomeValueSnak
+	 *
+	 * @param Snak $snak
+	 * @return bool
+	 */
+	private function snakHasKnownValue( Snak $snak ) {
+		return ( $snak instanceof PropertyValueSnak );
 	}
 
 	/**
