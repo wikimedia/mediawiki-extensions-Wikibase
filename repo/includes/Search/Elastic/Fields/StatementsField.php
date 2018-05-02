@@ -53,18 +53,24 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyDataTypeLookup;
+	/**
+	 * @var array
+	 */
+	private $excludedIds;
 
 	/**
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param string[] $propertyIds List of property IDs to index
 	 * @param string[] $indexedTypes List of property types to index. Property of this type will be
 	 *      indexed regardless of $propertyIds.
+	 * @param string[] $excludedIds List of property IDs to exclude.
 	 * @param callable[] $searchIndexDataFormatters Search formatters, indexed by data type name
 	 */
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $propertyIds,
 		array $indexedTypes,
+		array $excludedIds,
 		array $searchIndexDataFormatters
 	) {
 		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_KEYWORD );
@@ -73,6 +79,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		$this->indexedTypes = array_flip( $indexedTypes );
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->excludedIds = array_flip( $excludedIds );
 	}
 
 	/**
@@ -115,8 +122,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 				continue;
 			}
 
-			$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 			$propertyId = $snak->getPropertyId()->getSerialization();
+			if ( array_key_exists( $propertyId, $this->excludedIds ) ) {
+				continue;
+			}
+
+			$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 			if ( !array_key_exists( $propType, $this->indexedTypes ) &&
 				!array_key_exists( $propertyId, $this->propertyIds ) ) {
 				continue;

@@ -31,7 +31,7 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			$this->newLabelsProviderFieldDefinitions( $languageCodes ),
 			$this->newDescriptionsProviderFieldDefinitions( $languageCodes ),
 			new StatementProviderFieldDefinitions( $this->getMock( PropertyDataTypeLookup::class ),
-				[], [], [] ),
+				[], [], [], [] ),
 		] );
 
 		$fields = $fieldDefinitions->getFields();
