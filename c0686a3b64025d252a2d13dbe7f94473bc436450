@@ -46,6 +46,30 @@
       "revId": "c0686a3b64025d252a2d13dbe7f94473bc436450",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcce695e_e4dc876f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-02T15:46:11Z",
+      "side": 1,
+      "message": "oh, good point, CirrusSearch is old :(",
+      "parentUuid": "5ef37ff3_1dee6079",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 46
+      },
+      "revId": "c0686a3b64025d252a2d13dbe7f94473bc436450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
