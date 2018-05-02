@@ -22,6 +22,30 @@
       "revId": "c0686a3b64025d252a2d13dbe7f94473bc436450",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ef37ff3_1dee6079",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-05-02T15:30:05Z",
+      "side": 1,
+      "message": "It looks to me like ExtensionRegistry loads extension.json files. \n\nCirrusSearch doesn\u0027t have an extension.json file, and \\ExtensionRegistry::getInstance()-\u003eisLoaded( \u0027CirrusSearch\u0027 ) returns false even when class_exists( CirrusSearch::class ) returns true",
+      "parentUuid": "94c4578f_72d0f3b1",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 46
+      },
+      "revId": "c0686a3b64025d252a2d13dbe7f94473bc436450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
