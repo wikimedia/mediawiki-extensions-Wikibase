@@ -1833,6 +1833,7 @@ class WikibaseRepo {
 						'pwn', // T174231
 						'pyu', // T174227
 						'quc', // T155376
+						'shy', // T184783
 						'sjd', // T188596
 						'sju', // T188599
 						'smn', // T188580
