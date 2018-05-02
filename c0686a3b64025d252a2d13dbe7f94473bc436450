@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94c4578f_72d0f3b1",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-02T14:29:24Z",
+      "side": 1,
+      "message": "Use ExtensionRegistry, like what have been done in similar tests.",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 46
+      },
+      "revId": "c0686a3b64025d252a2d13dbe7f94473bc436450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
