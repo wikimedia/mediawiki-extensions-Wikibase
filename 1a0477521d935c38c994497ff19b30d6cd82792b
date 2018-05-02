@@ -16,6 +16,24 @@
       "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4846a9e_827364de",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-05-02T11:19:37Z",
+      "side": 1,
+      "message": "Initially for SDoC we\u0027ll just index \u0027depicts\u0027 and its allowed qualifiers - you can see those here https://www.wikidata.org/wiki/Property:P180 under \u0027allowed qualifiers constraint\u0027\n\nSo, for SDoC at least for now I don\u0027t think we need to maintain a whitelist of qualifiers that\u0027s separate to properties. \n\nThe qualifiers include properties of type \u0027quantity\u0027 and \u0027monolingual text\u0027 which won\u0027t get indexed AFAICS - will talk to Ramsey about whether we need to be able to search on these",
+      "parentUuid": "9d0ccc4e_6460bfa5",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
