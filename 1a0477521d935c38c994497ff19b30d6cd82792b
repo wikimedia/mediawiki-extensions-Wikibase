@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d0ccc4e_6460bfa5",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-05-02T05:43:43Z",
+      "side": 1,
+      "message": "This assumes we want to index the same properties in qualifiers as in statements. I am not sure whether this is actually true - is it?",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
