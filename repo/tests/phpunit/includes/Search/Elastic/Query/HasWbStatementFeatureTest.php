@@ -2,12 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Query;
 
-use CirrusSearch\InterwikiResolver;
-use CirrusSearch\Query\KeywordFeature;
-use CirrusSearch\Search\Escaper;
-use CirrusSearch\Search\SearchContext;
-use CirrusSearch\SearchConfig;
-use MediaWiki\MediaWikiServices;
+use CirrusSearch\CrossSearchStrategy;
+use CirrusSearch\Query\KeywordFeatureAssertions;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 
 /**
@@ -23,54 +19,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 
 		if ( !class_exists( \CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
-		} else {
-			MediaWikiServices::getInstance()
-				->resetServiceForTesting( InterwikiResolver::SERVICE );
 		}
-	}
-
-	/**
-	 * @return SearchContext
-	 */
-	protected function mockContext() {
-		$context = $this->getMockBuilder( SearchContext::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$context->expects( $this->any() )->method( 'getConfig' )->willReturn( new SearchConfig() );
-		$context->expects( $this->any() )->method( 'escaper' )->willReturn(
-			new Escaper( 'en', true )
-		);
-
-		return $context;
-	}
-
-	protected function mockContextExpectingAddFilter( array $expectedQuery = null ) {
-		$context = $this->mockContext();
-		if ( $expectedQuery === null ) {
-			$context->expects( $this->never() )
-				->method( 'addFilter' );
-		} else {
-			$context->expects( $this->once() )
-				->method( 'addFilter' )
-				->with( $this->callback( function ( $query ) use ( $expectedQuery ) {
-					$this->assertEquals( $expectedQuery, $query->toArray() );
-					return true;
-				} ) );
-		}
-
-		return $context;
-	}
-
-	protected function assertWarnings( KeywordFeature $feature, $expected, $term ) {
-		$warnings = [];
-		$context = $this->mockContext();
-		$context->expects( $this->any() )
-			->method( 'addWarning' )
-			->will( $this->returnCallback( function () use ( &$warnings ) {
-				$warnings[] = array_filter( func_get_args() );
-			} ) );
-		$feature->apply( $context, $term );
-		$this->assertEquals( $expected, $warnings );
 	}
 
 	public function applyProvider() {
@@ -171,25 +120,22 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	 * @dataProvider applyProvider
 	 */
 	public function testApply( array $expected = null, $term, $foreignRepoNames ) {
-		$context = $this->mockContextExpectingAddFilter( $expected );
-		$context->expects( $this->exactly(
-				$expected === null ? 1 : 0
-			) )
-			->method( 'setResultsPossible' )
-			->with( false );
-
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
-		$feature->apply( $context, $term );
+		$kwAssertions = $this->getKWAssertions();
+		$expectedWarnings = $expected !== null ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
+		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
+		if ( $expected === null ) {
+			$kwAssertions->assertNoResultsPossible( $feature, $term );
+		}
 	}
 
 	public function applyNoDataProvider() {
 		return [
 			'empty data' => [
-				null,
 				'haswbstatement:',
 			],
 			'no data' => [
-				null,
 				'',
 			],
 		];
@@ -198,41 +144,29 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider applyNoDataProvider
 	 */
-	public function testApplyNoData( array $expected = null, $term ) {
-		$context = $this->mockContextExpectingAddFilter( $expected );
-
+	public function testNotConsumed( $term ) {
 		$feature = new HasWbStatementFeature( [ 'P999' ] );
-		$feature->apply( $context, $term );
+		$this->getKWAssertions()->assertNotConsumed( $feature, $term );
 	}
 
 	public function testInvalidStatementWarning() {
-		$this->assertWarnings(
-			new HasWbStatementFeature( [ 'P999' ] ),
-			[ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ],
-			'haswbstatement:INVALID'
-		);
+		$feature = new HasWbStatementFeature( [ 'P999' ] );
+		$expectedWarnings = [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
+		$kwAssertions = $this->getKWAssertions();
+		$kwAssertions->assertParsedValue( $feature, 'haswbstatement:INVALID', [ 'statements' => [] ], $expectedWarnings );
+		$kwAssertions->assertExpandedData( $feature, 'haswbstatement:INVALID', [], [] );
+		$kwAssertions->assertFilter( $feature, 'haswbstatement:INVALID', null, $expectedWarnings );
+		$kwAssertions->assertNoResultsPossible( $feature, 'haswbstatement:INVALID' );
 	}
 
 	/**
 	 * @dataProvider parseProvider
 	 */
 	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
-		$warningCollector = $this->getMockBuilder( SearchContext::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$warningCollector->expects( $warningExpected ? $this->once() : $this->never() )
-			->method( 'addWarning' );
-
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
-		$parsedValue = $feature->parseValue(
-			'',
-			$value,
-			'',
-			'',
-			'',
-			$warningCollector
-		);
-		$this->assertEquals( [ 'statements' => $expected ], $parsedValue );
+		$expectedWarnings = $warningExpected ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$kwAssertions = $this->getKWAssertions();
+		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", [ 'statements' => $expected ], $expectedWarnings );
 	}
 
 	public function parseProvider() {
@@ -293,4 +227,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 		];
 	}
 
+	private function getKWAssertions() {
+		return new KeywordFeatureAssertions( $this );
+	}
 }
