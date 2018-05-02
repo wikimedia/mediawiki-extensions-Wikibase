@@ -30,17 +30,23 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @var array
 	 */
 	private $indexedTypes;
+	/**
+	 * @var array
+	 */
+	private $excludedIds;
 
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $propertyIds,
 		array $indexedTypes,
+		array $excludedIds,
 		array $searchIndexDataFormatters
 	) {
 		$this->propertyIds = $propertyIds;
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->indexedTypes = $indexedTypes;
+		$this->excludedIds = $excludedIds;
 	}
 
 	/**
@@ -53,6 +59,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 				$this->propertyDataTypeLookup,
 				$this->propertyIds,
 				$this->indexedTypes,
+				$this->excludedIds,
 				$this->searchIndexDataFormatters
 			),
 			StatementCountField::NAME => new StatementCountField(),

@@ -50,7 +50,8 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 			'Q4' => [
 				$testData->getEntity( 'Q4' ),
 				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring',
-				  'P9=http://url.acme.test\badurl?chars=\привет< >"' ]
+				  'P9=http://url.acme.test\badurl?chars=\привет< >"'
+				]
 			],
 			'Q7' => [
 				$testData->getEntity( 'Q7' ),
@@ -92,9 +93,10 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',
+			'P11' => 'sometype',
 		] );
 
-		$field = new StatementsField( $lookup, $this->properties, [ 'sometype' ],
+		$field = new StatementsField( $lookup, $this->properties, [ 'sometype' ], [ 'P11' ],
 				$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
@@ -111,7 +113,7 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',
 		] );
-		$field = new StatementsField( $lookup, [ 'P123' ], [], $formatters );
+		$field = new StatementsField( $lookup, [ 'P123' ], [], [], $formatters );
 
 		$statementList = new StatementList();
 		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString' ) ) );

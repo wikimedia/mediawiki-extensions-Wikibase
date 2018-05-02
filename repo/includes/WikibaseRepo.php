@@ -1510,6 +1510,7 @@ class WikibaseRepo {
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->settings->getSetting( 'searchIndexProperties' ),
 			$this->settings->getSetting( 'searchIndexTypes' ),
+			$this->settings->getSetting( 'searchIndexPropertiesExclude' ),
 			$this->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks()
 		);
 	}
