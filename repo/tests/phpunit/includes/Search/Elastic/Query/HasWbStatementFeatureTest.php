@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Query;
 
+use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\BaseSimpleKeywordFeatureTest;
-use CirrusSearch\Search\SearchContext;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 
 /**
@@ -112,15 +112,13 @@ class HasWbStatementFeatureTest extends BaseSimpleKeywordFeatureTest {
 	 * @dataProvider applyProvider
 	 */
 	public function testApply( array $expected = null, $term, $foreignRepoNames ) {
-		$context = $this->mockContextExpectingAddFilter( $expected );
-		$context->expects( $this->exactly(
-				$expected === null ? 1 : 0
-			) )
-			->method( 'setResultsPossible' )
-			->with( false );
-
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
-		$feature->apply( $context, $term );
+		$expectedWarnings = $expected !== null ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$this->assertFilter( $feature, $term, $expected, $expectedWarnings );
+		$this->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
+		if ( $expected === null ) {
+			$this->assertNoResultsPossible( $feature, $term );
+		}
 	}
 
 	public function applyNoDataProvider() {
@@ -140,40 +138,26 @@ class HasWbStatementFeatureTest extends BaseSimpleKeywordFeatureTest {
 	 * @dataProvider applyNoDataProvider
 	 */
 	public function testApplyNoData( array $expected = null, $term ) {
-		$context = $this->mockContextExpectingAddFilter( $expected );
-
 		$feature = new HasWbStatementFeature( [ 'P999' ] );
-		$feature->apply( $context, $term );
+		$this->assertNotConsumed( $feature, $term );
 	}
 
 	public function testInvalidStatementWarning() {
-		$this->assertWarnings(
-			new HasWbStatementFeature( [ 'P999' ] ),
-			[ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ],
-			'haswbstatement:INVALID'
-		);
+		$feature = new HasWbStatementFeature( [ 'P999' ] );
+		$expectedWarnings = [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
+		$this->assertParsedValue( $feature, 'haswbstatement:INVALID', [ 'statements' => [] ], $expectedWarnings );
+		$this->assertExpandedData( $feature, 'haswbstatement:INVALID', [], [] );
+		$this->assertFilter( $feature, 'haswbstatement:INVALID', null, $expectedWarnings );
+		$this->assertNoResultsPossible( $feature, 'haswbstatement:INVALID' );
 	}
 
 	/**
 	 * @dataProvider parseProvider
 	 */
 	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
-		$warningCollector = $this->getMockBuilder( SearchContext::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$warningCollector->expects( $warningExpected ? $this->once() : $this->never() )
-			->method( 'addWarning' );
-
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
-		$parsedValue = $feature->parseValue(
-			'',
-			$value,
-			'',
-			'',
-			'',
-			$warningCollector
-		);
-		$this->assertEquals( [ 'statements' => $expected ], $parsedValue );
+		$expectedWarnings = $warningExpected ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$this->assertParsedValue( $feature, "haswbstatement:\"$value\"", [ 'statements' => $expected ], $expectedWarnings );
 	}
 
 	public function parseProvider() {
