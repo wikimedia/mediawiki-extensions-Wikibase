@@ -34,6 +34,24 @@
       "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1106845b_ca61b020",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-05-02T19:10:25Z",
+      "side": 1,
+      "message": "None of the properties will get indexed if they are not one of: 1) list of explicitly indexed properties or 2) (after https://gerrit.wikimedia.org/r/c/427836/ is merged) list of properties of special type. So the question is - do we need just one set of configs for both statements and qualifiers, or two of them? Because something may be useless in the main index but useful as qualifier, or vice versa.",
+      "parentUuid": "d4846a9e_827364de",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
