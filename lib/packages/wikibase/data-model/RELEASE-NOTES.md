@@ -18,6 +18,10 @@ This release removes integers as acceptable entity IDs.
 * Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
   `hasLinkToSite`, and `removeSiteLink`.
 
+## Version 7.4.0 (2018-05-02)
+
+* Added `clear` to `EntityDocument`
+
 ## Version 7.3.0 (2017-11-13)
 
 * Performance optimizations on `EntityId`:
