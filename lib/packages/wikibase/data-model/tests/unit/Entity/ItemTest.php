@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -740,6 +741,45 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 			$item->getFingerprint()->getAliasGroups(),
 			$item->getAliasGroups()
 		);
+	}
+
+	/**
+	 * @dataProvider clearableProvider
+	 */
+	public function testClear( Item $item ) {
+		$clone = $item->copy();
+
+		$item->clear();
+
+		$this->assertEquals( $clone->getId(), $item->getId(), 'cleared Item should keep its id' );
+		$this->assertTrue( $item->isEmpty(), 'cleared Item should be empty' );
+	}
+
+	public function clearableProvider() {
+		return [
+			'empty' => [ new Item( new ItemId( 'Q23' ) ), ],
+			'with fingerprint' => [
+				new Item(
+					new ItemId( 'Q42' ),
+					new Fingerprint( new TermList( [ new Term( 'en', 'foo' ) ] ) )
+				),
+			],
+			'with sitelink' => [
+				new Item(
+					new ItemId( 'Q123' ),
+					null,
+					new SiteLinkList( [ new SiteLink( 'enwiki', 'Wikidata' ) ] )
+				)
+			],
+			'with statement' => [
+				new Item(
+					new ItemId( 'Q321' ),
+					null,
+					null,
+					new StatementList( [ $this->newStatement() ] )
+				)
+			]
+		];
 	}
 
 }
