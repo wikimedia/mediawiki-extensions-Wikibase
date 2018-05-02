@@ -41,7 +41,8 @@
 		"jakub-onderka/php-parallel-lint": "1.0.0",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.3.1",
-		"wikibase/wikibase-codesniffer": "^0.3.0"
+		"wikibase/wikibase-codesniffer": "^0.3.0",
+		"davidrjonas/composer-lock-diff": "^1.3"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
@@ -53,6 +54,17 @@
 			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
 			"phpcs -p -s",
 			"minus-x check ."
+		],
+		"mediawiki-vendor-download": [
+			"curl -so vendor/mediawiki-vendor-composer.lock https://raw.githubusercontent.com/wikimedia/mediawiki-vendor/master/composer.lock"
+		],
+		"mediawiki-vendor-diff": [
+			"@mediawiki-vendor-download",
+			"composer-lock-diff --from ./composer.lock --to ./vendor/mediawiki-vendor-composer.lock"
+		],
+		"mediawiki-vendor-diff-changed": [
+			"@mediawiki-vendor-download",
+			"composer-lock-diff --from ./composer.lock --to ./vendor/mediawiki-vendor-composer.lock | grep -v \"| REMOVED\" | grep -v \"| NEW\""
 		]
 	},
 	"config": {
