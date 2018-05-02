@@ -343,7 +343,7 @@ class Item implements EntityDocument, FingerprintProvider, StatementListHolder,
 	}
 
 	/**
-	 * @since 7.4
+	 * @since 7.5
 	 */
 	public function clear() {
 		$this->fingerprint = new Fingerprint();

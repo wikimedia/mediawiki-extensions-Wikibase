@@ -13,11 +13,15 @@ This release removes integers as acceptable entity IDs.
   `hasElement`, `hasElementHash`, `hasValidType`, `preSetElement`, `removeByElementHash`,
   `removeElement`, and `setElement`.
 * Added periods to the list of disallowed characters in `RepositoryNameAssert`.
-* Added `EntityDocument::clear`
+* `EntityDocument` now extends `ClearableEntity`
 
 #### Other changes
 * Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
   `hasLinkToSite`, and `removeSiteLink`.
+
+## Version 7.5.0 (2018-05-02)
+
+* Introduce `ClearableEntity` interface.
 
 ## Version 7.4.1 (2018-05-02)
 

@@ -15,7 +15,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-interface EntityDocument extends Comparable {
+interface EntityDocument extends Comparable, ClearableEntity {
 
 	/**
 	 * Returns a type identifier for the entity, e.g. "item" or "property".
@@ -87,12 +87,5 @@ interface EntityDocument extends Comparable {
 	 * @return self
 	 */
 	public function copy();
-
-	/**
-	 * Clears all fields of the entity that can be emptied. The entity's id stays the same.
-	 *
-	 * @since 7.4
-	 */
-	public function clear();
 
 }
