@@ -51,6 +51,10 @@ class StatementListProviderDummy implements EntityDocument, StatementListProvide
 		return $this;
 	}
 
+	public function clear() {
+		throw new \BadMethodCallException( 'Not yet implemented' );
+	}
+
 	public function getStatements() {
 		return $this->statements;
 	}
