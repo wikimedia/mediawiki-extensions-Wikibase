@@ -10,15 +10,7 @@
  */
 
 return [
-	'idBlacklist' => [
-		1,
-		23,
-		42,
-		1337,
-		9001,
-		31337,
-		720101010,
-	],
+	'idBlacklist' => [],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
 	// This setting is used to enable entity types.
