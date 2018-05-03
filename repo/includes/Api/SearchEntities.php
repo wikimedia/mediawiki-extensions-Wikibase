@@ -82,6 +82,24 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
+	 * Prepare parameters array for search helper.
+	 * @param array $params
+	 * @return array
+	 */
+	private function prepareParams( array $params ) {
+		if ( isset( $params['options'] ) ) {
+			$params['options'] = json_decode( $params['options'], true );
+			if ( !is_array( $params['options'] ) ) {
+				$params['options'] = [];
+			}
+		} else {
+			$params['options'] = [];
+		}
+		$params['options']['strictLanguage'] = $params['strictlanguage'];
+		return $params;
+	}
+
+	/**
 	 * Populates the search result returning the number of requested matches plus one additional
 	 * item for being able to determine if there would be any more results.
 	 * If there are not enough exact matches, the list of returned entries will be additionally
@@ -97,7 +115,7 @@ class SearchEntities extends ApiBase {
 			$params['language'],
 			$params['type'],
 			$params['continue'] + $params['limit'] + 1,
-			$params['strictlanguage']
+			$params['options']
 		);
 
 		$entries = [];
@@ -206,7 +224,7 @@ class SearchEntities extends ApiBase {
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );
 
-		$params = $this->extractRequestParams();
+		$params = $this->prepareParams( $this->extractRequestParams() );
 
 		$entries = $this->getSearchEntries( $params );
 
@@ -297,6 +315,9 @@ class SearchEntities extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 				self::PARAM_DFLT => 'url',
 			],
+			'options' => [
+				self::PARAM_TYPE => 'text'
+			]
 		];
 	}
 

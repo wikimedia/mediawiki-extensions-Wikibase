@@ -12,12 +12,11 @@ interface EntitySearchHelper {
 	/**
 	 * Get entities matching the search term.
 	 *
-	 * @param string $text
-	 * @param string $languageCode
-	 * @param string $entityType
-	 * @param int $limit
-	 * @param bool $strictLanguage
-	 *
+	 * @param string $text Search term
+	 * @param string $languageCode Search language
+	 * @param string $entityType Entity type to search (item, property, etc.)
+	 * @param int $limit Max number of entries to return
+	 * @param array $options Search options
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
 	public function getRankedSearchResults(
@@ -25,7 +24,7 @@ interface EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$options
 	);
 
 }

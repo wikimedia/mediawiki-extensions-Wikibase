@@ -36,11 +36,11 @@ class EntityTermSearchHelper implements EntitySearchHelper {
 	 * @param string $languageCode
 	 * @param string $entityType
 	 * @param int $limit
-	 * @param bool $strictLanguage
+	 * @param array $options
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
-	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
+	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $options ) {
 		$allSearchResults = [];
 
 		$exactSearchResults = $this->searchEntities(
@@ -49,7 +49,7 @@ class EntityTermSearchHelper implements EntitySearchHelper {
 			$entityType,
 			$limit,
 			false,
-			$strictLanguage
+			$options['strictLanguage']
 		);
 		$allSearchResults = $this->mergeSearchResults( $allSearchResults, $exactSearchResults, $limit );
 
@@ -62,7 +62,7 @@ class EntityTermSearchHelper implements EntitySearchHelper {
 				$entityType,
 				$limit, // needs to be the full limit as exact matches are also contained in the prefix search
 				true,
-				$strictLanguage
+				$options['strictLanguage']
 			);
 			$allSearchResults = $this->mergeSearchResults( $allSearchResults, $prefixSearchResults, $limit );
 		}
