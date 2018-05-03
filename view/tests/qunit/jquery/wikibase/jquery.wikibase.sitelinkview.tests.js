@@ -74,7 +74,7 @@
 		}
 	} ) );
 
-	QUnit.skip( 'Create and destroy', function ( assert ) {
+	QUnit.test( 'Create and destroy', function ( assert ) {
 		assert.expect( 2 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -92,7 +92,7 @@
 		);
 	} );
 
-	QUnit.skip( 'Create and destroy with initial value', function ( assert ) {
+	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
 		assert.expect( 2 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
@@ -113,7 +113,7 @@
 		);
 	} );
 
-	QUnit.skip( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
 		assert.expect( 4 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -152,7 +152,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.skip( 'startEditing(), stopEditing() with initial value', function ( assert ) {
+	QUnit.test( 'startEditing(), stopEditing() with initial value', function ( assert ) {
 		assert.expect( 5 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
@@ -194,7 +194,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.skip( 'value()', function ( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		assert.expect( 2 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -219,7 +219,7 @@
 		);
 	} );
 
-	QUnit.skip( 'isEmpty()', function ( assert ) {
+	QUnit.test( 'isEmpty()', function ( assert ) {
 		assert.expect( 6 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview(),
@@ -273,7 +273,7 @@
 		);
 	} );
 
-	QUnit.skip( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
