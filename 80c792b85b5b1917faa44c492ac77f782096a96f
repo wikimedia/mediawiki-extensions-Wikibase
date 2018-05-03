@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff4f4156_44b5a54c",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementsFieldTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2018-05-03T22:03:26Z",
+      "side": 1,
+      "message": "I\u0027m sure people are going to want to search for the second half of this without having to specify the first (although there are use cases for both).\n\nWe could we also update the mapping to add a new pattern tokenizer on \"P\\d+\u003d(.*)\" to capture group 1. That could be added as a property of statement_keywords to allow searching without the property specified (although still a strict keyword match)",
+      "revId": "80c792b85b5b1917faa44c492ac77f782096a96f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
