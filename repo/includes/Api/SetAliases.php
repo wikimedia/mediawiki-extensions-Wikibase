@@ -92,8 +92,8 @@ class SetAliases extends ModifyEntity {
 
 			// Get the full list of current aliases
 			if ( $aliasGroups->hasGroupForLanguage( $language ) ) {
-				$aliases = $aliasGroups->getByLanguage( $language )->getAliases();
-				$summary->addAutoSummaryArgs( $aliases );
+				$aliases = array_diff( $aliasGroups->getByLanguage( $language )->getAliases(), $params['remove'] );
+				$summary->addAutoSummaryArgs( array_merge( $aliases, $params['add'] ) );
 			}
 		}
 
@@ -108,6 +108,7 @@ class SetAliases extends ModifyEntity {
 	 * @param array $preparedParameters
 	 *
 	 * @return Summary
+	 * @throws ApiUsageException
 	 */
 	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
 		if ( !( $entity instanceof AliasesProvider ) ) {
