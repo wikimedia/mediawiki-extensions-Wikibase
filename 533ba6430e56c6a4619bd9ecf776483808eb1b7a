@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79f3ee6b_ca9e2114",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-03T11:42:45Z",
+      "side": 1,
+      "message": "In the wikibase we don\u0027t use terms like local or central and using those will confuse people in future. I say let\u0027s go with client/repo pair.",
+      "range": {
+        "startLine": 135,
+        "startChar": 29,
+        "endLine": 135,
+        "endChar": 36
+      },
+      "revId": "533ba6430e56c6a4619bd9ecf776483808eb1b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
