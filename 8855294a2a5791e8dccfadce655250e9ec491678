@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3063288_1d079586",
+        "filename": "view/lib/wikibase-data-values-value-view",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-05-03T12:08:58Z",
+      "side": 1,
+      "message": "Did you intentionally update this?",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "8855294a2a5791e8dccfadce655250e9ec491678",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
