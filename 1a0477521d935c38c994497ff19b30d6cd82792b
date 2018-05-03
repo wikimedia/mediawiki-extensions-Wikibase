@@ -52,6 +52,24 @@
       "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bd82b16_2fc3188f",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-05-03T14:02:04Z",
+      "side": 1,
+      "message": "Updated so that all qualifiers are indexed",
+      "parentUuid": "1106845b_ca61b020",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
