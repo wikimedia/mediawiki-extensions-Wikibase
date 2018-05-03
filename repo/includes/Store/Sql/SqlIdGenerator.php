@@ -27,7 +27,7 @@ class SqlIdGenerator implements IdGenerator {
 
 	/**
 	 * @param LoadBalancer $loadBalancer
-	 * @param int[] $idBlacklist
+	 * @param array[] $idBlacklist
 	 */
 	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist = [] ) {
 		$this->loadBalancer = $loadBalancer;
@@ -103,7 +103,7 @@ class SqlIdGenerator implements IdGenerator {
 			throw new MWException( 'Could not generate a reliably unique ID.' );
 		}
 
-		if ( in_array( $id, $this->idBlacklist ) ) {
+		if ( in_array( $type, $this->idBlacklist ) && in_array( $id, $this->idBlacklist['type'] ) ) {
 			$id = $this->generateNewId( $database, $type );
 		}
 
