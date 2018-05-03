@@ -295,6 +295,9 @@ XML
 		$this->assertSame( $altLinks, $out->getLinkTags() );
 	}
 
+	/**
+	 * @depends CirrusSearch
+	 */
 	public function testOnCirrusSearchAddQueryFeatures() {
 		$extraFeatures = [];
 		RepoHooks::onCirrusSearchAddQueryFeatures( [], $extraFeatures );
