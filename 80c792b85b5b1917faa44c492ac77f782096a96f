@@ -16,6 +16,24 @@
       "revId": "80c792b85b5b1917faa44c492ac77f782096a96f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be7de3ee_72b1fb53",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementsFieldTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-05-03T22:08:26Z",
+      "side": 1,
+      "message": "\u003e I\u0027m sure people are going to want to search for the second half of this without having to specify the first (although there are use cases for both).\n\nI guess that depends on property and values - i.e. search for \"any ID that would be A123\" is probably useless, but if the string is unique enough, maybe.  I guess we can add it later if people ask.",
+      "parentUuid": "ff4f4156_44b5a54c",
+      "revId": "80c792b85b5b1917faa44c492ac77f782096a96f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
