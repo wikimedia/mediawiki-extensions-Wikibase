@@ -16,6 +16,24 @@
       "revId": "5f1a94e166fd45cec0470723a168c4043be65582",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6e5c090_87cd1f36",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-03T12:31:15Z",
+      "side": 0,
+      "message": "Actually you found a bug. Fixed now.",
+      "parentUuid": "0fbf0090_f3212d78",
+      "revId": "5f1a94e166fd45cec0470723a168c4043be65582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
