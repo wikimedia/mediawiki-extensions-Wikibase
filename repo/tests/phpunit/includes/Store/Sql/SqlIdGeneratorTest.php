@@ -18,7 +18,7 @@ use Wikibase\SqlIdGenerator;
  */
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
-	public function testGetNewId() {
+	public function testGetNewId_noBlacklist() {
 		$generator = new SqlIdGenerator( wfGetLB() );
 
 		$id = $generator->getNewId( 'wikibase-kittens' );
@@ -26,10 +26,17 @@ class SqlIdGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function testIdBlacklisting() {
-		$generator = new SqlIdGenerator( wfGetLB(), [ 1, 2 ] );
+		$generator = new SqlIdGenerator( wfGetLB(), [ 'wikibase-blacklist' => [ 1, 2 ] ] );
 
 		$id = $generator->getNewId( 'wikibase-blacklist' );
 		$this->assertSame( 3, $id );
+	}
+
+	public function testIdBlacklisting_onlyAppliesForSpecifiedEntityType() {
+		$generator = new SqlIdGenerator( wfGetLB(), [ 'wikibase-blacklist' => [ 1, 2 ] ] );
+
+		$id = $generator->getNewId( 'wikibase-non-blacklist' );
+		$this->assertSame( 1, $id );
 	}
 
 }
