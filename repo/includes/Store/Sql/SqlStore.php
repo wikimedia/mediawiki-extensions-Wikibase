@@ -165,7 +165,7 @@ class SqlStore implements Store {
 	private $cacheDuration;
 
 	/**
-	 * @var int[]
+	 * @var array[]
 	 */
 	private $idBlacklist;
 
