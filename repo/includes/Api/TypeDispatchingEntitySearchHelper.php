@@ -31,7 +31,7 @@ class TypeDispatchingEntitySearchHelper implements EntitySearchHelper {
 	 * @param string $languageCode
 	 * @param string $entityType
 	 * @param int $limit
-	 * @param bool $strictLanguage
+	 * @param array|null $options
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
@@ -40,7 +40,7 @@ class TypeDispatchingEntitySearchHelper implements EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$options
 	) {
 		if ( empty( $this->callbacks[$entityType] ) ) {
 			return [];
@@ -51,7 +51,7 @@ class TypeDispatchingEntitySearchHelper implements EntitySearchHelper {
 			throw new \RuntimeException( "Bad helper returned by the factory for $entityType" );
 		}
 		return $helper->getRankedSearchResults( $text, $languageCode, $entityType, $limit,
-			$strictLanguage );
+			$options );
 	}
 
 }

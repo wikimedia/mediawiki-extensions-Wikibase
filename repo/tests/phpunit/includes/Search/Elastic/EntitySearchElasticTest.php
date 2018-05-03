@@ -75,7 +75,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		}
 		$elasticQuery = $search->getRankedSearchResults(
 			$params['search'], $params['language'],
-			$params['type'], $limit, $params['strictlanguage']
+			$params['type'], $limit, [ 'strictLanguage' => $params['strictlanguage'] ]
 		);
 		$decodedQuery = json_decode( $elasticQuery, true );
 		unset( $decodedQuery['path'] );

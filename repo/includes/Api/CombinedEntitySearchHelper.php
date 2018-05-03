@@ -31,7 +31,7 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 	 * @param string $languageCode
 	 * @param string $entityType
 	 * @param int $limit
-	 * @param bool $strictLanguage
+	 * @param array $options
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
@@ -40,7 +40,7 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$options
 	) {
 		$allSearchResults = [];
 
@@ -50,7 +50,7 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 				$languageCode,
 				$entityType,
 				$limit - count( $allSearchResults ),
-				$strictLanguage
+				$options
 			);
 			$allSearchResults = $this->mergeSearchResults( $allSearchResults, $newResults, $limit );
 

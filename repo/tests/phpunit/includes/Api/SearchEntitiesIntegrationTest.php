@@ -147,7 +147,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 				$languageCode,
 				$entityType,
 				$limit,
-				$strictLanguage
+				[ 'strictLanguage' => $strictLanguage ]
 			);
 			// comes out as JSON data
 			$resultData = json_decode( $result, true );

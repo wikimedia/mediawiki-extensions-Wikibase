@@ -149,7 +149,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testGetRankedSearchResults( $search, $limit, array $expected ) {
 		$entitySearchHelper = $this->newEntitySearchHelper();
 
-		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
+		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, [] );
 		$this->assertEquals( $expected, $results );
 	}
 

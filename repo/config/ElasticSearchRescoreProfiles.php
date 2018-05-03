@@ -20,7 +20,7 @@ return [
 			],
 		]
 	],
-	// Profile that uses both entity weight end statement-based boosts
+	// Profile that uses both entity weight and statement-based boosts
 	'wikibase_prefix_boost' => [
 		'i18n_msg' => 'wikibase-rescore-profile-prefix-boost',
 		'supported_namespaces' => 'all',
