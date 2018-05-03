@@ -79,6 +79,11 @@ class ApiModuleTestHelper {
 		if ( isset( $expected['message'] ) ) {
 			Assert::assertContains( $expected['message'], $ex->getMessage() );
 		}
+
+		if ( isset( $expected['extradata'] ) ) {
+			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
+			Assert::assertEquals( $expected['extradata'], $msg->getApiData()['extradata'] );
+		}
 	}
 
 	/**

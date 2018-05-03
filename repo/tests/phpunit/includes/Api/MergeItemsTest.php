@@ -496,10 +496,12 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo2' ] ] ],
+				[ 'Conflicting descriptions for language en' ]
 			],
 			[
 				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
 				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo2' ] ] ],
+				[ 'Conflicting sitelinks for dewiki' ]
 			],
 			[
 				[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
@@ -509,6 +511,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 					'type' => 'statement', 'rank' => 'normal' ] ] ]
 				],
 				[],
+				[ 'The two items cannot be merged because one of them links to the other using property P1' ],
 			],
 			[
 				[],
@@ -518,6 +521,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 					],
 					'type' => 'statement', 'rank' => 'normal' ] ] ]
 				],
+				[ 'The two items cannot be merged because one of them links to the other using property P1' ],
 			]
 		];
 	}
@@ -525,8 +529,11 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideExceptionConflictsData
 	 */
-	public function testMergeItemsConflictsExceptions( $pre1, $pre2 ) {
-		$expected = [ 'exception' => [ 'type' => ApiUsageException::class, 'code' => 'failed-save' ] ];
+	public function testMergeItemsConflictsExceptions( $pre1, $pre2, $extraData ) {
+		$expected = [
+			'exception' => [ 'type' => ApiUsageException::class, 'code' => 'failed-save' ],
+			'extradata' => $extraData
+		];
 
 		// -- prefill the entities --------------------------------------------
 		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
