@@ -22,6 +22,30 @@
       "revId": "84e1fe5cd9cb7b564a3d833f9f1c0fbeacae0039",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4222c40_1c633ca3",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-05-03T08:21:09Z",
+      "side": 1,
+      "message": "Question being if there is something upstream that makes this exception yield a result fundamentally superior to a recoverable fatal error / TypeError exception - but +1",
+      "parentUuid": "1a5b8cca_072cb3fe",
+      "range": {
+        "startLine": 222,
+        "startChar": 3,
+        "endLine": 222,
+        "endChar": 20
+      },
+      "revId": "84e1fe5cd9cb7b564a3d833f9f1c0fbeacae0039",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
