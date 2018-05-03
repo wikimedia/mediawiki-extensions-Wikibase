@@ -112,7 +112,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				$this->equalTo( $params['language'] ),
 				$this->equalTo( $params['type'] ),
 				$this->equalTo( $params['continue'] + $params['limit'] + 1 ),
-				$this->equalTo( $params['strictlanguage'] )
+				$this->equalTo( [ 'strictLanguage' => $params['strictlanguage'] ] )
 			)
 			->will( $this->returnValue( $returnResults ) );
 

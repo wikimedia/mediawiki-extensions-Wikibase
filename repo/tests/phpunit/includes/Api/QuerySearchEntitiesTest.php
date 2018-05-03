@@ -103,7 +103,7 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				$this->equalTo( $params['wbslanguage'] ),
 				$this->equalTo( $params['wbstype'] ),
 				$this->equalTo( $params['wbslimit'] ),
-				$this->equalTo( false )
+				$this->equalTo( [] )
 			)
 			->will( $this->returnValue( $matches ) );
 

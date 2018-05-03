@@ -65,7 +65,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		$params = $this->extractRequestParams();
+		$params = $this->prepareParams( $this->extractRequestParams() );
 		$searchResults = $this->getSearchResults( $params );
 		$result = $this->getResult();
 
@@ -105,6 +105,24 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	}
 
 	/**
+	 * Prepare parameters array for search helper.
+	 * @param array $params
+	 * @return array
+	 */
+	private function prepareParams( array $params ) {
+		if ( isset( $params['options'] ) ) {
+			$params['options'] = json_decode( $params['options'], true );
+			if ( !is_array( $params['options'] ) ) {
+				$params['options'] = [];
+			}
+		} else {
+			$params['options'] = [];
+		}
+		$params['options']['strictLanguage'] = $params['strictlanguage'];
+		return $params;
+	}
+
+	/**
 	 * @param array $params
 	 *
 	 * @return TermSearchResult[]
@@ -115,7 +133,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			$params['language'] ?: $this->getLanguage()->getCode(),
 			$params['type'],
 			$params['limit'],
-			$params['strictlanguage']
+			$params['options']
 		);
 	}
 
@@ -163,6 +181,9 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,
 			],
+			'options' => [
+				self::PARAM_TYPE => 'text'
+			]
 		];
 	}
 

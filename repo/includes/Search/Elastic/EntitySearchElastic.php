@@ -139,7 +139,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * @param string $text
 	 * @param string $languageCode
 	 * @param string $entityType
-	 * @param bool $strictLanguage
+	 * @param array $options
 	 * @param SearchContext $context
 	 *
 	 * @return AbstractQuery
@@ -148,7 +148,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$text,
 		$languageCode,
 		$entityType,
-		$strictLanguage,
+		$options,
 		SearchContext $context
 	) {
 		$query = new BoolQuery();
@@ -191,7 +191,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 
 		$langChain = $this->languageChainFactory->newFromLanguageCode( $languageCode );
 		$this->searchLanguageCodes = $langChain->getFetchLanguageCodes();
-		if ( !$strictLanguage ) {
+		if ( !$options['strictLanguage'] ) {
 			$fields[] = [ "labels_all.near_match_folded", $profile['any'] ];
 			$discount = $profile['fallback-discount'];
 			foreach ( $this->searchLanguageCodes as $fallbackCode ) {
@@ -252,7 +252,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * @param string $languageCode
 	 * @param string $entityType
 	 * @param int $limit
-	 * @param bool $strictLanguage
+	 * @param array $options
 	 *
 	 * @return TermSearchResult[]
 	 */
@@ -261,10 +261,10 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$languageCode,
 		$entityType,
 		$limit,
-		$strictLanguage
+		$options
 	) {
 		$searcher = new WikibasePrefixSearcher( 0, $limit );
-		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
+		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $options,
 				$searcher->getSearchContext() );
 
 		$searcher->setResultsType( new ElasticTermResult(
