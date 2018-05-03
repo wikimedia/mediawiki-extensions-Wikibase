@@ -53,7 +53,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-muokkaus",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-muokkaukset",
-	"wikibase-rcfilters-hide-wikibase-description": "Muokkauset, jotka ovat peräisin {{WBREPONAME}}sta.",
+	"wikibase-rcfilters-hide-wikibase-description": "Muutokset, jotka ovat peräisin {{WBREPONAME}}sta.",
 	"wikibase-replicationnote": "Huomaa, että voi kestää useita minuutteja ennen kuin muutokset näkyvät kaikissa wikeissä.",
 	"wikibase-watchlist-show-changes-pref": "Näytä {{WBREPONAME}}-muokkaukset tarkkailulistalla",
 	"wikibase-error-serialize-error": "Tietojen sarjoittaminen epäonnistui.",

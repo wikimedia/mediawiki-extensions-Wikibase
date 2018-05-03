@@ -51,5 +51,6 @@
 	"wikibase-unconnectedpages-submit": "Jak",
 	"wikibase-pageinfo-entity-id": "ID Item Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Hana",
-	"wikibase-property-render-error": "Hana meuhasé render properti $1: $2"
+	"wikibase-property-render-error": "Hana meuhasé render properti $1: $2",
+	"wikibase-otherprojects": "Lam proyèk la'én"
 }

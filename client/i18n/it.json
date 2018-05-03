@@ -46,6 +46,7 @@
 	"apihelp-query+pageterms-example-label-en": "Ottieni etichette ed alias associati alla pagina 'London', in inglese.",
 	"apihelp-query+pageterms-example-item": "Ottieni le etichette e gli alias dell'elemento Q84.",
 	"apihelp-query+pageterms-param-terms": "Il tipo di termine da ottenere, ad esempio 'description', ognuna restituita come una matrice di stringhe con chiave il loro tipo, ad esempio {\"description\": [\"foo\"]}. Se non specificato, saranno restituiti tutti i tipi.",
+	"apihelp-query+description-paramvalue-prefersource-local": "Descrizioni locali tramite la parser function <code><nowiki>{{SHORTDESC:...}}</nowiki></code> nel wikitesto della pagina.",
 	"apihelp-query+description-example": "Ottieni la descrizione per la pagina 'London'.",
 	"apihelp-query+wikibase-description": "Ottieni informazioni sul client Wikibase ed il repository Wikibase associato.",
 	"apihelp-query+wikibase-example": "Ottieni il percorso URL e altre informazioni sul client e repository Wikibase.",

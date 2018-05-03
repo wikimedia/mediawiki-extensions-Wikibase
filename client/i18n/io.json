@@ -30,6 +30,8 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
 	"wikibase-replicationnote": "Atencez ke povas bezonar kelka minuti, til ke omna modifiki divenos videbla en omna Wiki.",
+	"unconnectedpages": "Pagino sen konekto ad artikli",
+	"pageswithbadges": "Pagini kun insigni",
 	"wikibase-pageinfo-entity-id": "Identifiko dil artiklo en {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
 	"wikibase-otherprojects": "En altra projeti"
