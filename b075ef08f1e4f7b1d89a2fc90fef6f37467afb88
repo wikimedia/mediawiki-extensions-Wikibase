@@ -81,6 +81,30 @@
       "revId": "b075ef08f1e4f7b1d89a2fc90fef6f37467afb88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7636c4b5_49414df5",
+        "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-05-04T11:37:14Z",
+      "side": 1,
+      "message": "Sorry, I meant $that should have been removed.\n\nWhen I don\u0027t pass the test case through into the anon function and instead use $this for some reason testingItem is null.\nVery odd, and I haven\u0027t been able to explain that yet, but I imagine it is some magic phpunit thing having a weird interaction?",
+      "parentUuid": "4be77543_5d5bb060",
+      "range": {
+        "startLine": 158,
+        "startChar": 16,
+        "endLine": 158,
+        "endChar": 26
+      },
+      "revId": "b075ef08f1e4f7b1d89a2fc90fef6f37467afb88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
