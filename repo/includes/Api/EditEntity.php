@@ -34,6 +34,10 @@ use Wikibase\Summary;
  */
 class EditEntity extends ModifyEntity {
 
+	const PARAM_DATA = 'data';
+
+	const PARAM_CLEAR = 'clear';
+
 	/**
 	 * @var ContentLanguages
 	 */
@@ -160,7 +164,7 @@ class EditEntity extends ModifyEntity {
 
 	protected function prepareParameters( array $params ) {
 		$this->validateDataParameter( $params );
-		$params['data'] = json_decode( $params['data'], true );
+		$params[self::PARAM_DATA] = json_decode( $params[self::PARAM_DATA], true );
 		return parent::prepareParameters( $params );
 	}
 
@@ -169,12 +173,12 @@ class EditEntity extends ModifyEntity {
 		EntityDocument $entity,
 		$baseRevId
 	) {
-		$data = $preparedParameters['data'];
+		$data = $preparedParameters[self::PARAM_DATA];
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
 		$exists = $this->entityExists( $entity->getId() );
 
-		if ( $preparedParameters['clear'] ) {
+		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			if ( $preparedParameters['baserevid'] && $exists ) {
 				$latestRevision = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
@@ -213,11 +217,11 @@ class EditEntity extends ModifyEntity {
 	 * @return Summary
 	 */
 	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
-		$data = $preparedParameters['data'];
+		$data = $preparedParameters[self::PARAM_DATA];
 
 		$exists = $this->entityExists( $entity->getId() );
 
-		if ( $preparedParameters['clear'] ) {
+		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$entity = $this->clearEntity( $entity );
 
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
@@ -268,7 +272,7 @@ class EditEntity extends ModifyEntity {
 		//      Perhaps that could be based on the resulting diff?
 		$summary = $this->createSummary( $preparedParameters );
 		if ( isset( $preparedParameters['id'] ) xor ( isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] ) ) ) {
-			$summary->setAction( $preparedParameters['clear'] === false ? 'update' : 'override' );
+			$summary->setAction( $preparedParameters[self::PARAM_CLEAR] === false ? 'update' : 'override' );
 		} else {
 			$summary->setAction( 'create' );
 		}
@@ -283,7 +287,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp
 	 */
 	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
-		$data = $preparedParameters['data'];
+		$data = $preparedParameters[self::PARAM_DATA];
 
 		try {
 			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $data );
@@ -320,7 +324,7 @@ class EditEntity extends ModifyEntity {
 	 * @param array $params
 	 */
 	private function validateDataParameter( array $params ) {
-		if ( !isset( $params['data'] ) ) {
+		if ( !isset( $params[self::PARAM_DATA] ) ) {
 			$this->errorReporter->dieError( 'No data to operate upon', 'no-data' );
 		}
 	}
@@ -474,11 +478,11 @@ class EditEntity extends ModifyEntity {
 		return array_merge(
 			parent::getAllowedParams(),
 			[
-				'data' => [
+				self::PARAM_DATA => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => true,
 				],
-				'clear' => [
+				self::PARAM_CLEAR => [
 					self::PARAM_TYPE => 'boolean',
 					self::PARAM_DFLT => false
 				],
