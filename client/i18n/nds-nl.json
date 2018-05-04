@@ -37,7 +37,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-bewarking",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-bewarkingen",
-	"wikibase-rcfilters-hide-wikibase-description": "Bewarkingen dy van {{WBREPONAME}} ofkummen.",
+	"wikibase-rcfilters-hide-wikibase-description": "Bewarkingen dee van {{WBREPONAME}} ofkummen.",
 	"wikibase-replicationnote": "t Kan n paor minuten duren veurdat de wiezigingen op alle wiki's zichtbaor bin.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-bewarkingen laoten zien in joew volglieste",
 	"wikibase-error-serialize-error": "De gegevens konnen niet eserialiseerd wörden",
