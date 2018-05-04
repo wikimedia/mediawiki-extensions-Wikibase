@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6c4ee2d_fc005cdc",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-04T09:27:21Z",
+      "side": 1,
+      "message": "I know that this is not your code… but the variable names are exactly the opposite of the call above. Yikes!",
+      "revId": "41736fd0e5785778c7687d7b022c83b5f21e6e12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
