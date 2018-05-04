@@ -25,6 +25,7 @@
  */
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
+use DataValues\MonolingualTextValue;
 use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
@@ -197,6 +198,9 @@ return call_user_func( function() {
 				DedupeBag $dedupe
 			) {
 				return new MonolingualTextRdfBuilder();
+			},
+			'search-index-data-formatter-callback' => function ( MonolingualTextValue $value ) {
+				return $value->getText();
 			},
 		],
 		'VT:quantity' => [

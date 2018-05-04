@@ -56,6 +56,8 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 					'P7=string[P2=Q42]',
 					'P7=string[P2=Q666]',
 					'P7=string[P3=Universe.svg]',
+					'P7=string[P5=превед]',
+					'P7=string[P5=бред]',
 					'P7=string[P7=simplestring]',
 					'P7=string[P9=http://url.acme.test/]',
 					"P7=string[P9= http://url.acme2.test/\n]",
