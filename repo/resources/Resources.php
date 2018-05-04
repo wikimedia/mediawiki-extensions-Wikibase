@@ -118,7 +118,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'mediawiki.api.options',
 				'mediawiki.cookie',
-				'mediawiki.page.gallery',
 				'mediawiki.page.watch.ajax',
 				'mediawiki.user',
 				'mw.config.values.wbEntityTypes',

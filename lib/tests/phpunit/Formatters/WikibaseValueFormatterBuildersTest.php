@@ -293,7 +293,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML_VERBOSE,
 				$this->newFormatterOptions(),
 				new StringValue( 'DOES-NOT-EXIST-dfsdf.jpg' ),
-				'@^<ul.*>.*<a.*href=".*DOES-NOT-EXIST.*>.*</ul>$@s',
+				'@^<div.*>.*<a.*href=".*DOES-NOT-EXIST.*>.*</div>$@s',
 			],
 			// geo-shape
 			'plain geo-shape' => [

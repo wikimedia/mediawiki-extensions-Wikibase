@@ -41,7 +41,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.wikibase.statementview.RankSelector.styles',
-				'mediawiki.page.gallery.styles'
 			],
 			'targets' => 'mobile'
 		],
