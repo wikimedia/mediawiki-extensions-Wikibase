@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use Title;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -54,7 +55,10 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 		$q22 = new ItemId( 'Q22' );
 		$this->insertPageProps( $db, 22, $q22 );
 
-		$lookup = new PagePropsEntityIdLookup( wfGetLB(), new ItemIdParser() );
+		$lookup = new PagePropsEntityIdLookup(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			new ItemIdParser()
+		);
 		$this->assertEquals( $q22, $lookup->getEntityIdForTitle( $title22 ) );
 		$this->assertNull( $lookup->getEntityIdForTitle( $title99 ) );
 	}
@@ -77,7 +81,10 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 			22 => $q22
 		];
 
-		$lookup = new PagePropsEntityIdLookup( wfGetLB(), new ItemIdParser() );
+		$lookup = new PagePropsEntityIdLookup(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			new ItemIdParser()
+		);
 		$actual = $lookup->getEntityIds( [ $title22, $title99, $title11 ] );
 		ksort( $actual );
 

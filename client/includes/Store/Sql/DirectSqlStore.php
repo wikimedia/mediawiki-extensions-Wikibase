@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Store\Sql;
 
 use HashBagOStuff;
+use MediaWiki\MediaWikiServices;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
@@ -241,8 +242,9 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private function getRepoConnectionManager() {
 		if ( $this->repoConnectionManager === null ) {
+			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 			$this->repoConnectionManager = new SessionConsistentConnectionManager(
-				wfGetLB( $this->repoWiki ),
+				$lbFactory->getMainLB( $this->repoWiki ),
 				$this->repoWiki
 			);
 		}
@@ -258,7 +260,9 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private function getLocalConnectionManager() {
 		if ( $this->localConnectionManager === null ) {
-			$this->localConnectionManager = new SessionConsistentConnectionManager( wfGetLB() );
+			$this->localConnectionManager = new SessionConsistentConnectionManager(
+				MediaWikiServices::getInstance()->getDBLoadBalancer()
+			);
 		}
 
 		return $this->localConnectionManager;
@@ -411,7 +415,7 @@ class DirectSqlStore implements ClientStore {
 	public function getEntityIdLookup() {
 		if ( $this->entityIdLookup === null ) {
 			$this->entityIdLookup = new PagePropsEntityIdLookup(
-				wfGetLB(),
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
 				$this->entityIdParser
 			);
 		}

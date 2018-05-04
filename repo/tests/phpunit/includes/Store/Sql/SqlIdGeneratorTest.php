@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\SqlIdGenerator;
 
 /**
@@ -19,14 +20,17 @@ use Wikibase\SqlIdGenerator;
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
 	public function testGetNewId() {
-		$generator = new SqlIdGenerator( wfGetLB() );
+		$generator = new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$id = $generator->getNewId( 'wikibase-kittens' );
 		$this->assertSame( 1, $id );
 	}
 
 	public function testIdBlacklisting() {
-		$generator = new SqlIdGenerator( wfGetLB(), [ 1, 2 ] );
+		$generator = new SqlIdGenerator(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			[ 1, 2 ]
+		);
 
 		$id = $generator->getNewId( 'wikibase-blacklist' );
 		$this->assertSame( 3, $id );

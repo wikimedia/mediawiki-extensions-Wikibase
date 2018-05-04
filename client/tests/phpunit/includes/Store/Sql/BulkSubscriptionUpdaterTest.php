@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\WikibaseSettings;
@@ -41,7 +42,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 	 * @return BulkSubscriptionUpdater
 	 */
 	private function getBulkSubscriptionUpdater( $batchSize = 10 ) {
-		$loadBalancer = wfGetLB();
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
 
 		return new BulkSubscriptionUpdater(
 			new SessionConsistentConnectionManager( $loadBalancer, false ),

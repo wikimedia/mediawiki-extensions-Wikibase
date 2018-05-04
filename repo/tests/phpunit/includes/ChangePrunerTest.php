@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Reporting\MessageReporter;
@@ -67,7 +68,7 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	}
 
 	private function addTestChanges() {
-		$changeStore = new SqlChangeStore( wfGetLB() );
+		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$change = new EntityChange( $this->getChangeRowData( '20150101000005' ) );
 		$changeStore->saveChange( $change );

@@ -186,7 +186,9 @@ class DispatchChanges extends Maintenance {
 		$coordinator->setRandomness( $randomness );
 
 		$notificationSender = new JobQueueChangeNotificationSender( $repoDB, $clientWikis );
-		$subscriptionLookup = new SqlSubscriptionLookup( wfGetLB() );
+		$subscriptionLookup = new SqlSubscriptionLookup(
+			MediaWikiServices::getInstance()->getDBLoadBalancer()
+		);
 
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\WikibaseRepo;
@@ -67,7 +68,8 @@ class ChangesSubscriptionSchemaUpdater {
 	 */
 	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, $table ) {
 		$primer = new ChangesSubscriptionTableBuilder(
-			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
+			// would be nice to pass in $dbUpdater->getDB().
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
 			$table,
 			1000

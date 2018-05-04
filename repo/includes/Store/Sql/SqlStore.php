@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use HashBagOStuff;
+use MediaWiki\MediaWikiServices;
 use ObjectCache;
 use Revision;
 use Hooks;
@@ -301,7 +302,10 @@ class SqlStore implements Store {
 	 * @return IdGenerator
 	 */
 	public function newIdGenerator() {
-		return new SqlIdGenerator( wfGetLB(), $this->idBlacklist );
+		return new SqlIdGenerator(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			$this->idBlacklist
+		);
 	}
 
 	/**
@@ -360,7 +364,7 @@ class SqlStore implements Store {
 		return new WikiPageEntityRedirectLookup(
 			$this->entityTitleLookup,
 			$this->entityIdLookup,
-			wfGetLB()
+			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
 	}
 
@@ -654,7 +658,7 @@ class SqlStore implements Store {
 	 * @return SqlChangeStore
 	 */
 	public function getChangeStore() {
-		return new SqlChangeStore( wfGetLB() );
+		return new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 	}
 
 }
