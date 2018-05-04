@@ -155,9 +155,6 @@ class UsageAspectTransformer {
 		// the values being meaningless (a.k.a. HashSet).
 		$aspects = array_flip( $directMatches );
 
-		// Matches 'L.xx' in $aspects to 'L' in $relevant.
-		$this->intersectAspectsIntoKeys( $aspectKeys, $relevant, $aspects );
-
 		// Matches 'L.xx' in $relevant to 'L' in $aspects.
 		$this->intersectAspectsIntoKeys( $relevant, $aspectKeys, $aspects );
 
