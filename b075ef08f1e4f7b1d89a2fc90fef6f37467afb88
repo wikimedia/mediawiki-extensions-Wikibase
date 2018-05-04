@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae017332_f2cef6af",
+        "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-05-04T11:35:31Z",
+      "side": 1,
+      "message": "Yup, this also should have been killed",
+      "parentUuid": "ad68232a_c6429db5",
+      "revId": "b075ef08f1e4f7b1d89a2fc90fef6f37467afb88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dea9b718_ae942c60",
         "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2018-05-04T11:34:43Z",
       "side": 1,
       "message": "Can’t you just refer to $this? Or are the provider and the test called on different test class instances?",
+      "range": {
+        "startLine": 158,
+        "startChar": 16,
+        "endLine": 158,
+        "endChar": 26
+      },
+      "revId": "b075ef08f1e4f7b1d89a2fc90fef6f37467afb88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4be77543_5d5bb060",
+        "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-05-04T11:35:31Z",
+      "side": 1,
+      "message": "This is left over from something that should have been killed.",
+      "parentUuid": "dea9b718_ae942c60",
       "range": {
         "startLine": 158,
         "startChar": 16,
