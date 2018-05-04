@@ -3,10 +3,15 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\StringValue;
-use ImageGalleryBase;
+use File;
+use Html;
 use InvalidArgumentException;
+use Language;
+use Linker;
 use Title;
+use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formats the StringValue from a "commonsMedia" snak as an HTML link pointing to the file
@@ -18,7 +23,22 @@ use ValueFormatters\ValueFormatter;
  * @author Adrian Heine
  * @author Marius Hoch
  */
-class CommonsInlineImageFormatter implements ValueFormatter {
+class CommonsInlineImageFormatter extends ValueFormatterBase {
+
+	/**
+	 * @var Language
+	 */
+	private $language;
+
+	/**
+	 * @param FormatterOptions|null $options
+	 */
+	public function __construct( FormatterOptions $options = null ) {
+		parent::__construct( $options );
+
+		$languageCode = $this->getOption( ValueFormatter::OPT_LANG );
+		$this->language = Language::factory( $languageCode );
+	}
 
 	/**
 	 * @see ValueFormatter::format
@@ -42,11 +62,74 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 			return htmlspecialchars( $fileName );
 		}
 
-		/** @var CommonsMediaImageGallery $imageGallery */
-		$imageGallery = ImageGalleryBase::factory( 'wikibase-commons-media' );
-		$imageGallery->add( $title );
+		$transformOptions = [
+			'width' => 310,
+			'height' => 180
+		];
 
-		return $imageGallery->toHTML();
+		$file = wfFindFile( $fileName );
+		if ( !$file instanceof File ) {
+			return $this->getCaptionHtml( $title );
+		}
+		$thumb = $file->transform( $transformOptions );
+		if ( !$thumb ) {
+			return $this->getCaptionHtml( $title );
+		}
+
+		Linker::processResponsiveImages( $file, $thumb, $transformOptions );
+
+		return $this->wrapThumb( $title, $thumb->toHtml() ) . $this->getCaptionHtml( $title, $file );
+	}
+
+	/**
+	 * @param Title $title
+	 * @param string $thumbHtml
+	 * @return string HTML
+	 */
+	private function wrapThumb( Title $title, $thumbHtml ) {
+		$attributes = [
+			'class' => 'image',
+			'href' => '//commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
+		];
+
+		return Html::rawElement(
+			'div',
+			[ 'class' => 'thumb' ],
+			Html::rawElement( 'a', $attributes, $thumbHtml )
+		);
+	}
+
+	/**
+	 * @param File $file
+	 * @return string HTML
+	 */
+	private function getFileMetaHtml( File $file ) {
+		return $this->language->semicolonList( [
+			$file->getDimensionsString(),
+			htmlspecialchars( $this->language->formatSize( $file->getSize() ) )
+		] );
+	}
+
+	/**
+	 * @param Title $title
+	 * @param File|null $file
+	 * @return string HTML
+	 */
+	private function getCaptionHtml( Title $title, $file = null ) {
+		$attributes = [
+			'href' => '//commons.wikimedia.org/wiki/File:' . $title->getPartialURL()
+		];
+		$innerHtml = Html::element( 'a', $attributes, $title->getText() );
+
+		if ( $file ) {
+			$innerHtml .= Html::element( 'br' ) . $this->getFileMetaHtml( $file );
+		}
+
+		return Html::rawElement(
+			'div',
+			[ 'class' => 'commons-media-caption' ],
+			$innerHtml
+		);
 	}
 
 }
