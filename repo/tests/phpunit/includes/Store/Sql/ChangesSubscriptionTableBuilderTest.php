@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
@@ -37,7 +38,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 	 * @return ChangesSubscriptionTableBuilder
 	 */
 	private function getChangesSubscriptionTableBuilder( $batchSize, $verbosity ) {
-		$loadBalancer = wfGetLB();
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
 
 		return new ChangesSubscriptionTableBuilder(
 			$loadBalancer,

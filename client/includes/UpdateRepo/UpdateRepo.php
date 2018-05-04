@@ -5,6 +5,7 @@ namespace Wikibase\Client\UpdateRepo;
 use IJobSpecification;
 use JobQueueGroup;
 use JobSpecification;
+use MediaWiki\MediaWikiServices;
 use RuntimeException;
 use Title;
 use User;
@@ -151,7 +152,7 @@ abstract class UpdateRepo {
 	 * @return int
 	 */
 	protected function getJobDelay() {
-		$lagArray = wfGetLB()->getMaxLag();
+		$lagArray = MediaWikiServices::getInstance()->getDBLoadBalancer()->getMaxLag();
 		// This should be good enough, especially given that lagged servers get
 		// less load by the load balancer, thus it's very unlikely we'll end
 		// up on the server with the highest lag.

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use RecentChange;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
@@ -95,12 +96,13 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 	 * @dataProvider saveChangeInsertProvider
 	 */
 	public function testSaveChange_insert( array $expected, EntityChange $change ) {
-		$db = wfGetDB( DB_MASTER );
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$db = $lb->getConnection( DB_MASTER );
 
 		$db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
 
-		$store = new SqlChangeStore( wfGetLB() );
+		$store = new SqlChangeStore( $lb );
 		$store->saveChange( $change );
 
 		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
@@ -128,7 +130,8 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 	}
 
 	public function testSaveChange_update() {
-		$db = wfGetDB( DB_MASTER );
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$db = $lb->getConnection( DB_MASTER );
 
 		$db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
@@ -139,7 +142,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$change->setField( 'time', wfTimestampNow() );
 
-		$store = new SqlChangeStore( wfGetLB() );
+		$store = new SqlChangeStore( $lb );
 		$store->saveChange( $change );
 		$expected = [
 			'change_id' => (string)$change->getId(),

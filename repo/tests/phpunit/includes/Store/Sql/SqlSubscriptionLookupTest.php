@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -43,7 +44,7 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 
 		$this->insertSubscriptions( $subscriptions );
 
-		$lookup = new SqlSubscriptionLookup( wfGetLB() );
+		$lookup = new SqlSubscriptionLookup( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$subscriptions = $lookup->getSubscriptions( 'enwiki', [
 			new PropertyId( 'P1' ),
@@ -73,7 +74,7 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 
 		$this->insertSubscriptions( $subscriptions );
 
-		$lookup = new SqlSubscriptionLookup( wfGetLB() );
+		$lookup = new SqlSubscriptionLookup( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$subscribers = $lookup->getSubscribers( new ItemId( 'Q2' ) );
 		$expected = [ 'dewiki', 'enwiki' ];

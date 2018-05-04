@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\WikibaseClient;
@@ -71,9 +72,10 @@ class UpdateSubscriptions extends Maintenance {
 			[ $this, 'report' ]
 		);
 
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$updater = new BulkSubscriptionUpdater(
-			new SessionConsistentConnectionManager( wfGetLB() ),
-			new SessionConsistentConnectionManager( wfGetLB( $repoDB ), $repoDB ),
+			new SessionConsistentConnectionManager( $lbFactory->getMainLB() ),
+			new SessionConsistentConnectionManager( $lbFactory->getMainLB( $repoDB ), $repoDB ),
 			$clientId,
 			$repoDB,
 			$this->mBatchSize

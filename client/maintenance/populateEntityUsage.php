@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -52,7 +53,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 		$builder = new EntityUsageTableBuilder(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
-			wfGetLB(),
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
 			$this->mBatchSize
 		);
 

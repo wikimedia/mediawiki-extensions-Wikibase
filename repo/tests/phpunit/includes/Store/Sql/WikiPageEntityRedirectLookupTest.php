@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ContentHandler;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
@@ -212,7 +213,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 		return new WikiPageEntityRedirectLookup(
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getEntityIdLookup(),
-			wfGetLB()
+			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
 	}
 

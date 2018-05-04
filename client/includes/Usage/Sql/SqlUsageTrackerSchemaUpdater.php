@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -85,7 +86,8 @@ class SqlUsageTrackerSchemaUpdater {
 
 		$primer = new EntityUsageTableBuilder(
 			$idParser,
-			wfGetLB() // TODO: Would be nice to pass in $dbUpdater->getDB().
+			// TODO: Would be nice to pass in $dbUpdater->getDB().
+			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
 
 		$reporter = new ObservableMessageReporter();

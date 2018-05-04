@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -79,7 +80,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$changeStore = new SqlChangeStore( wfGetLB() );
+		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 		foreach ( $changesToStore as $change ) {
 			$change->setField( 'id', null ); // Null the id as we save the same changes multiple times
 			$changeStore->saveChange( $change );
@@ -122,7 +123,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 		$expected->setField( 'revision_id', 342342 );
 		$expected->setField( 'id', null ); // Null the id as we save the same changes multiple times
 
-		$changeStore = new SqlChangeStore( wfGetLB() );
+		$changeStore = new SqlChangeStore( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 		$changeStore->saveChange( $expected );
 
 		$lookup = $this->newEntityChangeLookup( wfWikiID() );

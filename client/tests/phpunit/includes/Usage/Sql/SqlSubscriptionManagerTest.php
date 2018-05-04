@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -37,7 +38,9 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 	 */
 	private function getSubscriptionManager() {
 		return new SqlSubscriptionManager(
-			new SessionConsistentConnectionManager( wfGetLB() )
+			new SessionConsistentConnectionManager(
+				MediaWikiServices::getInstance()->getDBLoadBalancer()
+			)
 		);
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use MediaWiki\MediaWikiServices;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
@@ -39,7 +40,11 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 			99 => '--broken--',
 		] );
 
-		$primer = new EntityUsageTableBuilder( new ItemIdParser(), wfGetLB(), 2 );
+		$primer = new EntityUsageTableBuilder(
+			new ItemIdParser(),
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			2
+		);
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );
 		$primer->setExceptionHandler( $this->getExceptionHandler( $this->exactly( 2 ) ) );
 

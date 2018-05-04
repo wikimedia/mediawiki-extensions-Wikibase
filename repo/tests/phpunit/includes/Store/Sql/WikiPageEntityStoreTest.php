@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RawMessage;
 use Revision;
@@ -108,7 +109,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 				]
 			),
-			new SqlIdGenerator( wfGetLB() ),
+			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer()
 		);
 
