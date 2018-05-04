@@ -12,9 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,6 +27,11 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class FormatSnakValueTest extends ApiTestCase {
+
+	/** @var Item */
+	protected $testingItem;
+	/** @var Property */
+	protected $testingProperty;
 
 	public function provideApiRequest() {
 		$november11 = new TimeValue(
@@ -48,179 +51,219 @@ class FormatSnakValueTest extends ApiTestCase {
 		$wordSeparator = wfMessage( 'word-separator' )->text();
 		$deletedItem = wfMessage( 'wikibase-deletedentity-item' )->inLanguage( 'en' )->text();
 
+		$thats = $this;
+
 		return [
-			[
-				new StringValue( 'test' ),
-				null,
-				null,
-				null,
-				null,
-				'/^test$/'
-			],
-			[
-				$november11,
-				null,
-				null,
-				null,
-				null,
-				'/^11 November 2013$/'
-			],
-			[
-				$november,
-				null,
-				null,
-				null,
-				null,
-				'/^November 2013$/'
-			],
-			[
-				new StringValue( 'http://acme.test' ),
-				'string',
-				SnakFormatter::FORMAT_PLAIN,
-				null,
-				null,
-				'@^http://acme\.test$@'
-			],
-			[
-				new StringValue( 'http://acme.test' ),
-				'string',
-				SnakFormatter::FORMAT_WIKI,
-				null,
-				null,
-				'@^http&#58;//acme\.test$@'
-			],
-			[
-				new StringValue( 'http://acme.test' ),
-				'url',
-				SnakFormatter::FORMAT_PLAIN,
-				null,
-				null,
-				'@^http://acme\.test$@'
-			],
-			[
-				UnboundedQuantityValue::newFromNumber( '+12.33' ),
-				'quantity',
-				SnakFormatter::FORMAT_PLAIN,
-				[ 'lang' => 'de' ],
-				null,
-				'@^12,33$@' // german decimal separator
-			],
-			[
-				new StringValue( 'http://acme.test' ),
-				'url',
-				SnakFormatter::FORMAT_WIKI,
-				null,
-				null,
-				'@^http://acme\.test$@'
-			],
-			[
-				new StringValue( 'example.jpg' ),
-				'commonsMedia',
-				SnakFormatter::FORMAT_HTML,
-				null,
-				null,
-				'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@'
-			],
-			[
-				new EntityIdValue( new ItemId( 'Q404' ) ),
-				'wikibase-item',
-				SnakFormatter::FORMAT_HTML,
-				null,
-				null,
-				'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\('
-					. preg_quote( $deletedItem, '/' ) . '\)<\/span>$/'
-			],
-			[
-				new EntityIdValue( new ItemId( 'Q23' ) ),
-				'wikibase-item',
-				SnakFormatter::FORMAT_HTML,
-				null,
-				null,
-				'/^<a title="[^"]*Q23" href="[^"]+Q23">George Washington<\/a>$/'
-			],
-			[
-				new EntityIdValue( new ItemId( 'Q23' ) ),
-				'wikibase-item',
-				SnakFormatter::FORMAT_HTML,
-				[ 'lang' => 'de-ch' ], // fallback
-				null,
-				'/^<a title="[^"]*Q23" href="[^"]+Q23" lang="en">George Washington<\/a>'
-					. '<sup class="wb-language-fallback-indicator">[^<>]+<\/sup>$/'
-			],
-			[
-				new StringValue( 'whatever' ),
-				null,
-				SnakFormatter::FORMAT_HTML,
-				[ 'lang' => 'qqx' ],
-				'P404',
-				'/wikibase-snakformatter-property-not-found/'
-			],
-			[
-				new EntityIdValue( new ItemId( 'Q23' ) ),
-				null,
-				SnakFormatter::FORMAT_PLAIN,
-				[ 'lang' => 'qqx' ],
-				'P42',
-				'/wikibase-snakformatter-valuetype-mismatch/'
-			],
-			[
-				new StringValue( 'whatever' ),
-				null,
-				SnakFormatter::FORMAT_PLAIN,
-				[ 'lang' => 'qqx' ],
-				'P42',
-				'/^whatever$/'
-			],
+			[ function () {
+				return [
+					new StringValue( 'test' ),
+					null,
+					null,
+					null,
+					null,
+					'/^test$/',
+				];
+			} ],
+			[ function () use ( $november11 ) {
+				return [
+					$november11,
+					null,
+					null,
+					null,
+					null,
+					'/^11 November 2013$/',
+				];
+			} ],
+			[ function () use ( $november ) {
+				return [
+					$november,
+					null,
+					null,
+					null,
+					null,
+					'/^November 2013$/',
+				];
+			} ],
+			[ function () {
+				return [
+					new StringValue( 'http://acme.test' ),
+					'string',
+					SnakFormatter::FORMAT_PLAIN,
+					null,
+					null,
+					'@^http://acme\.test$@',
+				];
+			} ],
+			[ function () {
+				return [
+					new StringValue( 'http://acme.test' ),
+					'string',
+					SnakFormatter::FORMAT_WIKI,
+					null,
+					null,
+					'@^http&#58;//acme\.test$@',
+				];
+			} ],
+			[ function () {
+				return [
+					new StringValue( 'http://acme.test' ),
+					'url',
+					SnakFormatter::FORMAT_PLAIN,
+					null,
+					null,
+					'@^http://acme\.test$@',
+				];
+			} ],
+			[ function () {
+				return [
+					UnboundedQuantityValue::newFromNumber( '+12.33' ),
+					'quantity',
+					SnakFormatter::FORMAT_PLAIN,
+					[ 'lang' => 'de' ],
+					null,
+					'@^12,33$@' // german decimal separator
+				];
+			} ],
+			[ function () {
+				return [
+					new StringValue( 'http://acme.test' ),
+					'url',
+					SnakFormatter::FORMAT_WIKI,
+					null,
+					null,
+					'@^http://acme\.test$@',
+				];
+			} ],
+			[ function () {
+				return [
+					new StringValue( 'example.jpg' ),
+					'commonsMedia',
+					SnakFormatter::FORMAT_HTML,
+					null,
+					null,
+					'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@',
+				];
+			} ],
+			[ function () use ( $wordSeparator, $deletedItem ) {
+				return [
+					new EntityIdValue( new ItemId( 'Q404' ) ),
+					'wikibase-item',
+					SnakFormatter::FORMAT_HTML,
+					null,
+					null,
+					'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' .
+					preg_quote( $deletedItem, '/' ) . '\)<\/span>$/',
+				];
+			} ],
+			[ function ( self $test ) {
+				$id = $test->testingItem->getId();
+				$idString = $id->getSerialization();
+
+				return [
+					new EntityIdValue( $id ),
+					'wikibase-item',
+					SnakFormatter::FORMAT_HTML,
+					null,
+					null,
+					'/^<a title="[^"]*' . $idString . '" href="[^"]+' . $idString .
+					'">George Washington<\/a>$/',
+				];
+			} ],
+			[ function ( self $test ) {
+				$id = $test->testingItem->getId();
+				$idString = $id->getSerialization();
+
+				return [
+					new EntityIdValue( $id ),
+					'wikibase-item',
+					SnakFormatter::FORMAT_HTML,
+					[ 'lang' => 'de-ch' ], // fallback
+					null,
+					'/^<a title="[^"]*' . $idString . '" href="[^"]+' . $idString .
+					'" lang="en">George Washington<\/a>' .
+					'<sup class="wb-language-fallback-indicator">[^<>]+<\/sup>$/',
+				];
+			} ],
+			[ function () {
+				return [
+					new StringValue( 'whatever' ),
+					null,
+					SnakFormatter::FORMAT_HTML,
+					[ 'lang' => 'qqx' ],
+					'P404',
+					'/wikibase-snakformatter-property-not-found/',
+				];
+			} ],
+			[ function ( self $test ) {
+				$qid = $test->testingItem->getId();
+				$pid = $test->testingProperty->getId();
+
+				return [
+					new EntityIdValue( $qid ),
+					null,
+					SnakFormatter::FORMAT_PLAIN,
+					[ 'lang' => 'qqx' ],
+					$pid->getSerialization(),
+					'/wikibase-snakformatter-valuetype-mismatch/',
+				];
+			} ],
+			[ function ( self $test) {
+				$pid = $test->testingProperty->getId();
+
+				return [
+					new StringValue( 'whatever' ),
+					null,
+					SnakFormatter::FORMAT_PLAIN,
+					[ 'lang' => 'qqx' ],
+					$pid->getSerialization(),
+					'/^whatever$/',
+				];
+			} ],
 			// @TODO: Add a test for identifiers, once we have these.
 		];
 	}
 
-	private function setUpEntities() {
+	private function saveEntities() {
 		global $wgUser;
 
-		static $setup = false;
+		$this->testingItem = new Item();
+		$this->testingItem->getFingerprint()->setLabel( 'en', 'George Washington' );
 
-		if ( $setup ) {
-			return;
-		}
-
-		$setup = true;
+		// Set up a Property
+		$this->testingProperty = new Property( null, null, 'string' );
 
 		$store = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
 
-		// remove entities we care about
-		$idsToDelete = [ new ItemId( 'Q404' ), new ItemId( 'Q23' ), new PropertyId( 'P404' ) ];
-		foreach ( $idsToDelete as $id ) {
-			try {
-				$store->deleteEntity( $id, 'test', $wgUser );
-			} catch ( StorageException $ex ) {
-				// ignore
-			}
-		}
-
-		// Set up Q23
-		$item = new Item( new ItemId( 'Q23' ) );
-		$item->getFingerprint()->setLabel( 'en', 'George Washington' );
-
-		// Set up P42
-		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
-
-		$store->saveEntity( $item, 'testing', $wgUser, EDIT_NEW );
-		$store->saveEntity( $property, 'testing', $wgUser, EDIT_NEW );
+		// Save them, this will also automatically assign new IDs
+		$store->saveEntity( $this->testingItem, 'testing', $wgUser, EDIT_NEW );
+		$store->saveEntity( $this->testingProperty, 'testing', $wgUser, EDIT_NEW );
 	}
 
 	/**
 	 * @dataProvider provideApiRequest
 	 */
-	public function testApiRequest(
-		DataValue $value,
-		$dataType,
-		$format,
-		$options,
-		$propertyId,
-		$pattern
-	) {
-		$this->setUpEntities();
+	public function testApiRequest( $providerCallback ) {
+		$this->saveEntities();
+		/**
+		 * @var DataValue $value
+		 * @var string|null $dataType
+		 * @var string $format
+		 * @var array $options
+		 * @var string $propertyId
+		 * @var string $pattern
+		 */
+		list(
+			$value,
+			$dataType,
+			$format,
+			$options,
+			$propertyId,
+			$pattern
+			) = $providerCallback( $this );
+
+		if ( is_callable( $value ) ) {
+			$value = $value();
+		}
 
 		$params = [
 			'action' => 'wbformatvalue',
