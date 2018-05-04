@@ -254,7 +254,7 @@ class WikibaseValueFormatterBuilders {
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
 		if ( $format === SnakFormatter::FORMAT_HTML_VERBOSE ) {
-			return new CommonsInlineImageFormatter();
+			return new CommonsInlineImageFormatter( $options );
 		}
 
 		switch ( $this->getBaseFormat( $format ) ) {

@@ -104,6 +104,10 @@
 	display: inline;
 }
 
+.wikibase-snakview div.commons-media-caption {
+	display: block;
+}
+
 .wikibase-statementview-references-container,
 .wikibase-statementview-qualifiers {
 	font-size: 0.8em;

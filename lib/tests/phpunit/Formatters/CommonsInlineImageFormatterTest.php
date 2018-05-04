@@ -7,6 +7,8 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 
 /**
  * @covers Wikibase\Lib\Formatters\CommonsInlineImageFormatter
@@ -23,9 +25,9 @@ use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
 class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 
 	public function commonsInlineImageFormatterProvider() {
-		$exampleJpgHtmlRegex = '@<ul .*<a[^>]+href="//commons.wikimedia.org/wiki/File:Example.jpg"[^>]*>' .
-				'<img.*src=".*//upload.wikimedia.org/wikipedia/commons/.*/Example.jpg".*/></a>.*' .
-				'<a[^>]+href="//commons.wikimedia.org/wiki/File:Example.jpg"[^>]*>Example.jpg</a>.*</ul>@s';
+		$exampleJpgHtmlRegex = '@<div .*<a[^>]+href="https://commons\.wikimedia\.org/wiki/File:Example\.jpg"[^>]*>' .
+				'<img.*src=".*//upload\.wikimedia\.org/wikipedia/commons/.*/Example\.jpg".*/></a></div>.*' .
+				'<div .*><a[^>]+href="https://commons\.wikimedia\.org/wiki/File:Example\.jpg"[^>]*>Example\.jpg</a>.*\d+.*</div>@s';
 
 		return [
 			[
@@ -38,7 +40,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 			],
 			[
 				new StringValue( 'Example-That-Does-Not-Exist.jpg' ),
-				'@^.*<a[^>]+href="//commons.wikimedia.org/wiki/File:Example-That-Does-Not-Exist.jpg"[^>]*>@s'
+				'@^.*<a[^>]+href="https://commons.wikimedia.org/wiki/File:Example-That-Does-Not-Exist.jpg"[^>]*>@s'
 			],
 			[
 				new StringValue( 'Dangerous-quotes""' ),
@@ -61,7 +63,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
-		$formatter = new CommonsInlineImageFormatter();
+		$formatter = new CommonsInlineImageFormatter( $this->newFormatterOptions() );
 
 		$html = $formatter->format( $value );
 		if ( $shouldContain ) {
@@ -72,11 +74,19 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = new CommonsInlineImageFormatter();
+		$formatter = new CommonsInlineImageFormatter( $this->newFormatterOptions() );
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
+	}
+
+	private function newFormatterOptions() {
+		$options = [
+			ValueFormatter::OPT_LANG => 'en'
+		];
+
+		return new FormatterOptions( $options );
 	}
 
 }
