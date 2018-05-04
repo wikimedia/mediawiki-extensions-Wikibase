@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e5105483_f984630c",
+        "filename": "repo/maintenance/createBlacklistedItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-05-04T11:33:04Z",
+      "side": 0,
+      "message": "\u003e If we resurrect the script, this should probably be\n \u003e $this-\u003efatalError( \u0027You need…\u0027 ) instead\n\nI\u0027ll carry these comments over to the version of this script to be added to WikibaseLexeme",
+      "parentUuid": "ca99e077_cde47265",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 8
+      },
+      "revId": "d50d26425034c13a68ba15c222455a3543eeb9b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e4d06c16_8d6ef604",
         "filename": "repo/maintenance/createBlacklistedItems.php",
         "patchSetId": 1
