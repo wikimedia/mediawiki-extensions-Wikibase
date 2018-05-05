@@ -129,5 +129,7 @@
 	"notification-header-page-connection": "صفحه <strong>$3</strong> به {{PLURAL:$4|-1=یک آیتم در {{WBREPONAME}} item|آیتم $4 در {{WBREPONAME}}}} {{GENDER:$2|متصل شد}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|نمایش}} آیتم",
 	"notification-subject-page-connection": "صفحه‌ای در {{SITENAME}} که شما {{GENDER:$3|ایجاد کردید}} به آیتم {{WBREPONAME}} {{GENDER:$2|متصل بود}}",
-	"unresolved-property-category": "صفحات با خصوصیات نامشخص"
+	"unresolved-property-category": "صفحات با خصوصیات نامشخص",
+	"connected-redirect-category": "تغییرمسیرهای متصل شده به یک آیتم {{WBREPONAME}}",
+	"connected-redirect-category-desc": "این رده فهرست صفحات تغییرمسیری است که به یک آیتم {{WBREPONAME}} متصل شده‌اند."
 }
