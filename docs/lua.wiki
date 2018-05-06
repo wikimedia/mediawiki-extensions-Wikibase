@@ -239,6 +239,8 @@ mw.wikibase.orderProperties( propertyIds ) -- Returns a table with ordered prope
 <code>wikibase.getBestStatements( entityId, propertyId )</code><br>
 Returns a table with the "best" statements matching the given property ID on the given entity ID. The definition of "best" is that the function will return "preferred" statements, if there are any, otherwise "normal" ranked statements. It will never return "deprecated" statements. This is what you usually want when surfacing values to an ordinary reader.
 
+An empty table is returned if the entity doesn't exist  or no statements with the requested property ID could be found.
+
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.getBestStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of P12 statements from Q1
@@ -334,12 +336,16 @@ mw.logObject( mw.wikibase.getBestStatements( 'Q16354758', 'P1324' ) )
 <code>wikibase.getAllStatements( entityId, propertyId )</code><br>
 Returns a table with all statements (including all ranks, even "deprecated") matching the given property ID on the given entity ID.
 
+An empty table is returned if the entity doesn't exist or no statements with the requested property ID could be found.
+
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.getAllStatements( 'Q1', 'P12' ) -- Returns a table containing the serialization of P12 statements from Q1
 </source>
 
 The structure of the returned table is identical to those obtained via [[#mw.wikibase.getBestStatements|mw.wikibase.getBestStatements]].
+
+If statements with the requested property ID exist, the table returned is equivalent to the content of <code>mw.wikibase.getEntity( entityId ).claims[propertyId]</code>.
 
 === Legacy aliases ===
 These functions exist solely for backward compatibility, they should not be used in new code.
@@ -425,7 +431,7 @@ The following is a (heavily shortened) example, from the Wikidata Item about Wik
 
 === mw.wikibase.entity:getId ===
 <code>entity:getId()</code><br>
-Returns the ID of the entity, as a string.
+Returns the ID of the entity, as a string. This is equivalent to the content of <code>entity.id</code>.
 
 An example call might look like this:
 <source lang="lua">
