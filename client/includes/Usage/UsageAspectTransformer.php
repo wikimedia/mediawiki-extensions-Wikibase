@@ -129,9 +129,9 @@ class UsageAspectTransformer {
 	 * - If X is present in $relevant, this method returns $aspects (if all aspects are relevant,
 	 * nothing is filtered out).
 	 * - If a modified aspect A.xx is present in $relevant and the unmodified aspect A is present in
-	 *   $aspects, A is included in the result.
+	 *   $aspects, A.xx is included in the result.
 	 * - If a modified aspect A.xx is present in $aspect and the unmodified aspect A is present in
-	 *   $relevant, the modified aspect A.xx is included in the result.
+	 *   $relevant, neither A.xx nor A will be included in the result.
 	 *
 	 * @param string[] $aspectKeys Array of aspect keys, with modifiers applied.
 	 * @param string[] $relevant Array of aspect keys, with modifiers applied.
@@ -156,26 +156,27 @@ class UsageAspectTransformer {
 		$aspects = array_flip( $directMatches );
 
 		// Matches 'L.xx' in $relevant to 'L' in $aspects.
-		$this->intersectAspectsIntoKeys( $relevant, $aspectKeys, $aspects );
+		$this->includeGeneralUsages( $relevant, array_flip( $aspectKeys ), $aspects );
 
 		ksort( $aspects );
 		return array_keys( $aspects );
 	}
 
 	/**
-	 * @param string[] $aspectKeys Array of aspect keys, with modifiers applied.
-	 * @param string[] $relevant Array of aspects (without modifiers).
+	 * Makes general (modifier less) usages trigger the associated relevant specialized aspects.
+	 * For example matches 'L' in $aspectKeys to 'L.xx' in $relevantKeys.
+	 *
+	 * @param string[] $relevantKeys Array of potentially relevant aspect keys, with modifiers applied.
+	 * @param string[] $aspectKeys Array of actually used aspects keys, with modifiers applied.
 	 * @param array &$aspects Associative array of aspect keys (with modifiers) as keys, the values
 	 * being meaningless (a.k.a. HashSet).
 	 */
-	private function intersectAspectsIntoKeys( array $aspectKeys, array $relevant, array &$aspects ) {
-		$relevant = array_flip( $relevant );
+	private function includeGeneralUsages( array $relevantKeys, array $aspectKeys, array &$aspects ) {
+		foreach ( $relevantKeys as $relevantKey ) {
+			$aspect = EntityUsage::stripModifier( $relevantKey );
 
-		foreach ( $aspectKeys as $aspectKey ) {
-			$aspect = EntityUsage::stripModifier( $aspectKey );
-
-			if ( array_key_exists( $aspect, $relevant ) ) {
-				$aspects[$aspectKey] = null;
+			if ( array_key_exists( $aspect, $aspectKeys ) ) {
+				$aspects[$relevantKey] = null;
 			}
 		}
 	}
