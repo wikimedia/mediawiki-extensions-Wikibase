@@ -6,9 +6,9 @@
 			"ElizaMag"
 		]
 	},
-	"tooltip-t-wikibase": "Репозиторен дарий вIашагIювзаеннача элемента тӀатовжам",
-	"wikibase-comment-update": "Элемент {{grammar:genitive|{{WBREPONAME}}}} хийцай",
-	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чура элемент",
+	"tooltip-t-wikibase": "Укх оагIонца вIашагIювзаеннача дарий репозиторен элементá тӀатовжам",
+	"wikibase-comment-update": "Викидарий элемент хийцай",
+	"wikibase-dataitem": "Викидарий элемент",
 	"wikibase-editlinks": "ТӀатовжамаш нийсдар",
 	"wikibase-editlinkstitle": "Метташта юкъера тӀатовжамаш нийсдар",
 	"wikibase-linkitem-input-page": "ОагIув:",

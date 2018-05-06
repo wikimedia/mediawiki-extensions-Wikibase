@@ -1,11 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Taxandru"
+			"Taxandru",
+			"L2212"
 		]
 	},
 	"wikibase-comment-add": "Un'elementu de {{WBREPONAME}} est istadu creadu.",
 	"wikibase-comment-update": "Elementu {{WBREPONAME}} cambiadu",
 	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
+	"wikibase-editlinks": "Modìfica sos ligàmenes",
+	"wikibase-editlinkstitle": "Modìfica sos ligàmenes interlinguìsticos",
+	"wikibase-rc-hide-wikidata-hide": "Cua",
+	"wikibase-rc-hide-wikidata-show": "Ammustra",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Modìfica fata in {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id": "ID elementu {{WBREPONAME}}"
 }

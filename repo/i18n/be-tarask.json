@@ -404,5 +404,6 @@
 	"apihelp-wbcreateredirect-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}».",
 	"apihelp-wbcreateredirect-example-1": "Ператварыць <samp>Q11</samp> у перанакіраваньне на <samp>Q12</samp>",
 	"apihelp-wbeditentity-description": "Стварае адзін новы элемэнт Вікібазы і зьмяняе яго паводле сэрыялізаваных зьвестак.",
-	"apihelp-wbeditentity-summary": "Стварае адзін новы элемэнт Вікібазы і зьмяняе яго паводле сэрыялізаваных зьвестак."
+	"apihelp-wbeditentity-summary": "Стварае адзін новы элемэнт Вікібазы і зьмяняе яго паводле сэрыялізаваных зьвестак.",
+	"apihelp-wbeditentity-param-id": "Ідэнтыфікатар элемэнту з прэфіксам.\nУжывайце <var>id</var> ці <var>site</var> і <var>title</var> разам."
 }
