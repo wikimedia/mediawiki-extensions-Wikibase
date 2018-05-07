@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5072961a_116aebab",
+        "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-07T11:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c3530b1_0b504b42",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "1688eff9c64b88411c1d2b34df536e254270cd8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4dcb1c28_6aa31836",
         "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-05-07T10:59:54Z",
       "side": 1,
       "message": "Isn’t that what we’re getting rid of now? :)",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "1688eff9c64b88411c1d2b34df536e254270cd8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a78e2dcd_8ddffa1d",
+        "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-07T11:10:00Z",
+      "side": 1,
+      "message": "I guess so. Removed the comment.",
+      "parentUuid": "4dcb1c28_6aa31836",
       "range": {
         "startLine": 20,
         "startChar": 1,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "14b7522b_28167a6d",
+        "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-07T11:10:00Z",
+      "side": 1,
+      "message": "Done, but only optionally (I don\u0027t see a strong need to pass this through all the factories)",
+      "parentUuid": "b93e8960_df5e533e",
+      "range": {
+        "startLine": 70,
+        "startChar": 10,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "1688eff9c64b88411c1d2b34df536e254270cd8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f87bacf_f536f3ea",
         "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fbe3610e_aa9f39a1",
+        "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-07T11:10:00Z",
+      "side": 1,
+      "message": "As this has been requested twice no, let\u0027s change it.\n\nProtocol relative used to be(?) the default for WMF software, but that doesn\u0027t make to much sense anymore.",
+      "parentUuid": "9f87bacf_f536f3ea",
+      "range": {
+        "startLine": 92,
+        "startChar": 14,
+        "endLine": 92,
+        "endChar": 16
+      },
+      "revId": "1688eff9c64b88411c1d2b34df536e254270cd8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "66ebb5f8_b95c9922",
         "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2018-05-07T10:59:54Z",
       "side": 1,
       "message": "I was a bit confused by the position of this function – if it’s only used by getCaptionHtml(), perhaps it should be placed below that function?",
+      "range": {
+        "startLine": 106,
+        "startChar": 18,
+        "endLine": 106,
+        "endChar": 33
+      },
+      "revId": "1688eff9c64b88411c1d2b34df536e254270cd8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35a33488_68d0a1c2",
+        "filename": "lib/includes/Formatters/CommonsInlineImageFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-07T11:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66ebb5f8_b95c9922",
       "range": {
         "startLine": 106,
         "startChar": 18,
