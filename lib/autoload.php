@@ -41,7 +41,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\FormatterLabelDescriptionLookupFactory' => __DIR__ . '/includes/Formatters/FormatterLabelDescriptionLookupFactory.php',
 	'Wikibase\\Lib\\Formatters\\BinaryOptionDispatchingSnakFormatter' => __DIR__ . '/includes/Formatters/BinaryOptionDispatchingSnakFormatter.php',
 	'Wikibase\\Lib\\Formatters\\CommonsInlineImageFormatter' => __DIR__ . '/includes/Formatters/CommonsInlineImageFormatter.php',
-	'Wikibase\\Lib\\Formatters\\CommonsMediaImageGallery' => __DIR__ . '/includes/Formatters/CommonsMediaImageGallery.php',
 	'Wikibase\\Lib\\Formatters\\CommonsThumbnailFormatter' => __DIR__ . '/includes/Formatters/CommonsThumbnailFormatter.php',
 	'Wikibase\\Lib\\Formatters\\DispatchingValueFormatter' => __DIR__ . '/includes/Formatters/DispatchingValueFormatter.php',
 	'Wikibase\\Lib\\Formatters\\EntityIdSiteLinkFormatter' => __DIR__ . '/includes/Formatters/EntityIdSiteLinkFormatter.php',
