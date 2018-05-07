@@ -1,11 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"Uğurkent"
+			"Uğurkent",
+			"Hedda"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" değerlerinin kullanımı henüz desteklenmiyor.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" veri türü için değerlerin kullanımı henüz desteklenmiyor.",
 	"valueview-expert-emptyvalue-empty": "boş",
+	"valueview-expert-globecoordinateinput-precision": "Kesinlik:",
+	"valueview-expert-globecoordinateinput-nullprecision": "belirtilmemiş",
 	"valueview-expert-globecoordinateinput-customprecision": "özel ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoryen",
+	"valueview-expert-timevalue-calendar-julian": "Jülyen",
+	"valueview-expert-timeinput-precision": "Kesinlik:",
 	"valueview-expert-timeinput-calendar": "Takvim:",
-	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Dil (zorunlu):",
+	"valueview-expertextender-unitsuggester-label": "Birim (isteğe bağlı):",
+	"valueview-preview-label": "görünecek hâli:",
+	"valueview-preview-novalue": "geçerli bir değer tanınmadı",
+	"valueview-listrotator-manually": "el ile ayarla"
 }
