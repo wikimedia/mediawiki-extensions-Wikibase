@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80eb83bb_afe40b0a",
+        "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-05-08T13:21:45Z",
+      "side": 1,
+      "message": "Didn\u0027t find a place where `$value` is callable. Seems like it is not needed.",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 3
+      },
+      "revId": "fae9096bafdad7646991bb66570f8185afabe8b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
