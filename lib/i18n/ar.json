@@ -154,7 +154,7 @@
 	"wikibase-entity-summary-wbcreateclaim-value": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
-	"wikibase-entity-summary-wbcreateclaim": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
+	"wikibase-entity-summary-wbcreateclaim": "إنشاء {{PLURAL:$1|ادعاء|$1 ادعاءات}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "تحديد {{PLURAL:$1|قيمة ادعاء|قيم ادعائين|قيم ادعاءات}}",
 	"wikibase-entity-summary-wbremoveclaims": "إزالة {{PLURAL:$1|ادعاء|ادعائين|ادعاءات}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "إزالة {{PLURAL:$1|ادعاء|ادعائين|ادعاءات}}",
