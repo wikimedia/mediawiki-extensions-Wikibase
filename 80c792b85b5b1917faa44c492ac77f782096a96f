@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8df7ff05_2a7c6456",
+        "filename": "docs/options.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-08T05:56:47Z",
+      "side": 1,
+      "message": "those \"types\" are also being called \"data types\". I guess you might want to consider renaming this setting for more clarity. OTOH, \"searchIndexPropertyDataTypes\" is a pretty long name.",
+      "range": {
+        "startLine": 84,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 17
+      },
+      "revId": "80c792b85b5b1917faa44c492ac77f782096a96f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff4f4156_44b5a54c",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementsFieldTest.php",
         "patchSetId": 4
