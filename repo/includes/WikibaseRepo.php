@@ -1507,7 +1507,9 @@ class WikibaseRepo {
 	 */
 	public function getStatementProviderDefinitions() {
 		return new StatementProviderFieldDefinitions(
+			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->settings->getSetting( 'searchIndexProperties' ),
+			$this->settings->getSetting( 'searchIndexTypes' ),
 			$this->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks()
 		);
 	}
