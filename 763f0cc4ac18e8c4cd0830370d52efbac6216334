@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f2a9bb4_f1abaa13",
+        "filename": "client/WikibaseClient.i18n.magic.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5725
+      },
+      "writtenOn": "2018-05-09T08:03:24Z",
+      "side": 1,
+      "message": "wouldn\u0027t \"הצהרות\" be a better word? \n\n״קביעות״ can also be translated as \"tenure\" which is confusing... right?",
+      "revId": "763f0cc4ac18e8c4cd0830370d52efbac6216334",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
