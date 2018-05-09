@@ -22,6 +22,30 @@
       "revId": "47f9352169522a18f2ac7d19047fb13abd7e0869",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a39a378d_14464e08",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-09T16:16:59Z",
+      "side": 1,
+      "message": "Well, at least GitHub seems to suppress these (while it can handle the rest of our wiki syntax surprisingly great).\n\nhttps://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/docs/lua.wiki",
+      "parentUuid": "3031b381_2ac431ad",
+      "range": {
+        "startLine": 365,
+        "startChar": 260,
+        "endLine": 365,
+        "endChar": 310
+      },
+      "revId": "47f9352169522a18f2ac7d19047fb13abd7e0869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
