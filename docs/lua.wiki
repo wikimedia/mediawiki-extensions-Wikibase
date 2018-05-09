@@ -1,6 +1,6 @@
-Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that implements functions to access data from the Wikibase repository, if the Wikibase Client configuration enables <code>allowDataTransclusion</code>. Lua modules and wiki templates can invoke these functions.
+Wikibase Client provides a Lua [https://www.mediawiki.org/wiki/Scribunto Scribunto] interface that implements functions to access data from the Wikibase repository, if the Wikibase Client configuration enables <code>allowDataTransclusion</code>. Lua modules and wiki templates can invoke these functions.
 
-Changes to the Wikibase Lua interface are subject to the [[d:Wikidata:Stable Interface Policy|Stable Interface Policy]].
+Changes to the Wikibase Lua interface are subject to the [https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy Stable Interface Policy].
 
 For ease of access and convinence Wikibase Lua library provides access to aspects (labels, descriptions, statements) either directly or by loading the whole entity. For improved performance, when accessing only specific aspects it is recommended to access them directly (without getEntity). On multilingual wikis accessing labels is based on user's language rather than Wiki's language. The following table summarizes the most common functions:
 {| class="wikitable"
@@ -34,7 +34,7 @@ For ease of access and convinence Wikibase Lua library provides access to aspect
 === mw.wikibase.getEntity ===
 <code>wikibase.getEntity()</code><br>
 <code>wikibase.getEntity( id )</code><br>
-:<span style="color: red;">This function is [[mw:Manual:$wgExpensiveParserFunctionLimit|expensive]] when called with the ID of an entity not connected to the current page.</span> Loading entities doesn't count as expensive if the same entity is loaded twice during a module run. However, due to restrictions in the caching, if more than 14 other entities are loaded inbetween, the entity must be fetched again, which then counts as expensive.
+:<span style="color: red;">This function is [https://www.mediawiki.org/wiki/Manual:$wgExpensiveParserFunctionLimit expensive] when called with the ID of an entity not connected to the current page.</span> Loading entities doesn't count as expensive if the same entity is loaded twice during a module run. However, due to restrictions in the caching, if more than 14 other entities are loaded inbetween, the entity must be fetched again, which then counts as expensive.
 
 Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibase item requested by id. If no id was given, the item connected to the current page will be returned. Requesting an item by id is only supported if arbitrary access is enabled.
 
@@ -239,7 +239,7 @@ mw.wikibase.orderProperties( propertyIds ) -- Returns a table with ordered prope
 <code>wikibase.getBestStatements( entityId, propertyId )</code><br>
 Returns a table with the "best" statements matching the given property ID on the given entity ID. The definition of "best" is that the function will return "preferred" statements, if there are any, otherwise "normal" ranked statements. It will never return "deprecated" statements. This is what you usually want when surfacing values to an ordinary reader.
 
-An empty table is returned if the entity doesn't exist  or no statements with the requested property ID could be found.
+An empty table is returned if the entity doesn't exist or no statements with the requested property ID could be found.
 
 An example call might look like this:
 <source lang="lua">
