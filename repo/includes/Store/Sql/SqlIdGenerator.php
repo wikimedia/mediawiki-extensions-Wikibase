@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikimedia\Rdbms\DBQueryError;
 use MWException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
@@ -60,22 +61,34 @@ class SqlIdGenerator implements IdGenerator {
 	 * @return int
 	 */
 	private function generateNewId( IDatabase $database, $type, $retry = true ) {
-		$database->startAtomic( __METHOD__ );
+		$atomicSection = $database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
 
-		$currentId = $database->selectRow(
-			'wb_id_counters',
-			'id_value',
-			[ 'id_type' => $type ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
+		try {
+			$currentId = $database->selectRow(
+				'wb_id_counters',
+				'id_value',
+				[ 'id_type' => $type ],
+				__METHOD__,
+				[ 'FOR UPDATE' ]
+			);
+		} catch ( DBQueryError $e ) {
+			if ( !$retry ) {
+				throw $e;
+			}
+
+			// Try once more
+			$database->cancelAtomic( __METHOD__, $atomicSection );
+
+			return $this->generateNewId( $database, $type, false );
+		}
 
 		if ( is_object( $currentId ) ) {
 			$id = $currentId->id_value + 1;
 			$success = $database->update(
 				'wb_id_counters',
 				[ 'id_value' => $id ],
-				[ 'id_type' => $type ]
+				[ 'id_type' => $type ],
+				__METHOD__
 			);
 		} else {
 			$id = 1;
