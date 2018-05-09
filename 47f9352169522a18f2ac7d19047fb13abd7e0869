@@ -46,6 +46,30 @@
       "revId": "47f9352169522a18f2ac7d19047fb13abd7e0869",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37a3081c_219fc566",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-09T16:24:33Z",
+      "side": 1,
+      "message": "Ok. Can you change all the other prefixed [[mw:…]] links in this file the same way?",
+      "parentUuid": "a39a378d_14464e08",
+      "range": {
+        "startLine": 365,
+        "startChar": 260,
+        "endLine": 365,
+        "endChar": 310
+      },
+      "revId": "47f9352169522a18f2ac7d19047fb13abd7e0869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
