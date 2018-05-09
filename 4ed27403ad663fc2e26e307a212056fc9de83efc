@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53c2023b_b04cf964",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-09T12:18:47Z",
+      "side": 1,
+      "message": "\"[…] or no statements with the requested property ID could be found.\"",
+      "range": {
+        "startLine": 339,
+        "startChar": 55,
+        "endLine": 339,
+        "endChar": 95
+      },
+      "revId": "4ed27403ad663fc2e26e307a212056fc9de83efc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1838afec_9467492b",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-09T12:18:47Z",
+      "side": 1,
+      "message": "I believe this is slightly more precise: \"If statements with the requested property ID exist […]\".",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 33
+      },
+      "revId": "4ed27403ad663fc2e26e307a212056fc9de83efc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
