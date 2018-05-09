@@ -68,6 +68,7 @@
 			PARENT.prototype._create.call( this );
 
 			if ( this.options.value ) {
+				this._updateId();
 				this._createPropertyLabel();
 			}
 			this._createStatementlistview();
@@ -82,6 +83,14 @@
 				this.statementlistview.destroy();
 			}
 			PARENT.prototype.destroy.call( this );
+		},
+
+		/**
+		 * @private
+		 */
+		_updateId: function () {
+			var propertyId = this.options.value.getKey();
+			this.element.attr( 'id', propertyId );
 		},
 
 		/**
