@@ -368,7 +368,7 @@ Alias for [[#mw.wikibase.getSitelink|mw.wikibase.getSitelink]].
 Functions documented as <code>mw.wikibase.entity.name</code> are available on the global <code>mw.wikibase.entity</code> table; functions documented as <code>mw.wikibase.entity:name</code> are methods of an <code>mw.wikibase.entity</code> object (see [[#mw.wikibase.entity.create|<code>mw.wikibase.entity.create</code>]]).
 
 === Structure ===
-The structure of this is very similar to the [https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON Wikibase DataModel JSON] schema. This can be handily viewed with <source lang="lua">mw.logObject( mw.wikibase.getEntity( 'Q123' ) )</source> in the Scribunto '''Debug console'''.
+The structure of this is very similar to the [https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON Wikibase DataModel JSON] schema. This can be handily viewed with <source lang="lua">mw.logObject( mw.wikibase.getEntity( 'Q123' ) )</source> in the Scribunto [https://www.mediawiki.org/wiki/Extension:Scribunto#Debug_console '''Debug console'''].
 
 The following is a (heavily shortened) example, from the Wikidata Item about Wikibase:
 <source lang="lua">
