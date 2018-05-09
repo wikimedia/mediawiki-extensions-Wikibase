@@ -13,7 +13,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Content\\EntityHolder' => __DIR__ . '/includes/Content/EntityHolder.php',
 	'Wikibase\\Content\\EntityInstanceHolder' => __DIR__ . '/includes/Content/EntityInstanceHolder.php',
 	'Wikibase\\CopyrightMessageBuilder' => __DIR__ . '/includes/CopyrightMessageBuilder.php',
-	'Wikibase\\CreateBlacklistedItems' => __DIR__ . '/maintenance/createBlacklistedItems.php',
 	'Wikibase\\DataTypeSelector' => __DIR__ . '/includes/DataTypeSelector.php',
 	'Wikibase\\DispatchChanges' => __DIR__ . '/maintenance/dispatchChanges.php',
 	'Wikibase\\DispatchStats' => __DIR__ . '/includes/Store/Sql/DispatchStats.php',
