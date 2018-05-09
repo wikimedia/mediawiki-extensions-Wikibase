@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdd3fe4e_a24ef450",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-09T16:49:24Z",
+      "side": 1,
+      "message": "Not that it matters much, and options.wiki seems to be clear and specific in the regard any way, but in reality this is probably going to be \u0027lexeme\u0027 \u003d\u003e [ STUFF ], no?",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "0174c24a2e3d3804071528e017b1bcd9087b873d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
