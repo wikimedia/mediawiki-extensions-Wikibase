@@ -63,6 +63,7 @@
 	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} обекти, използвани на страницата:",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Етикет: $1",
+	"wikibase-pageinfo-entity-usage-D": "Някакви описания",
 	"wikibase-pageinfo-entity-usage-T": "Заглавие",
 	"wikibase-pageinfo-entity-usage-O": "Други (изявления)",
 	"wikibase-otherprojects": "В други проекти",

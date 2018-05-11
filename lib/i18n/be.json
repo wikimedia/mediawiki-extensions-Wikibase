@@ -26,6 +26,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "невядомае значэнне",
 	"wikibase-snakview-snaktypeselector-novalue": "значэнне не зададзена",
 	"wikibase-tooltip-error-details": "Падрабязнасці",
+	"wikibase-validator-not-allowed": "Недапушчальнае значэнне: $1",
 	"datatypes-type-string": "Радок",
 	"datatypes-type-quantity": "Колькасць",
 	"datatypes-type-monolingualtext": "Аднамоўны тэкст",

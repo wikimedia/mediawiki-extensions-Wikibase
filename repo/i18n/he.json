@@ -559,7 +559,7 @@
 	"apihelp-query+wbsubscribers-summary": "קבלת מינויים לישויות הנתונות.",
 	"apihelp-query+wbsubscribers-param-entities": "עבור אילו ישויות לקבל מינויים",
 	"apihelp-query+wbsubscribers-param-prop": "אילו מאפיינים להוסיף לתוצאה",
-	"apihelp-query+wbsubscribers-param-limit": "מספר מרבי של תוצאות?",
+	"apihelp-query+wbsubscribers-param-limit": "מספר מרבי של תוצאות",
 	"apihelp-query+wbsubscribers-example-1": "קבלת מינויים לישות <samp>Q42</samp>",
 	"apihelp-query+wbsubscribers-example-2": "קבלת מינויים לישות <samp>Q42</samp> עם URL אל <code>Special:EntityUsage</code> כלול",
 	"apihelp-wbsetaliases-description": "הגדרת כינויים לישות ויקיבייס.",
