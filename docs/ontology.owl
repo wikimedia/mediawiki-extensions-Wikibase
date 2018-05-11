@@ -40,15 +40,17 @@
   </owl:Class>
 
   <owl:Class rdf:about="&wikibase;Item">
+    <owl:disjointWith rdf:resource="&wikibase;Property"/>
     <rdfs:label>Item</rdfs:label>
     <rdfs:comment>Wikibase item.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
   </owl:Class>
 
   <owl:Class rdf:about="&wikibase;Property">
-      <rdfs:label>Property</rdfs:label>
-      <rdfs:comment>Wikibase property.</rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
+    <owl:disjointWith rdf:resource="&wikibase;Item"/>
+    <rdfs:label>Property</rdfs:label>
+    <rdfs:comment>Wikibase property.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
   </owl:Class>
 
   <owl:Class rdf:about="&wikibase;Statement">
