@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -386,6 +387,91 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'language' => 'en',
 			'add' => 'an alias',
 		];
+	}
+
+	public function testGivenAliasAdded_correctSummarySet() {
+		$itemId = new ItemId( 'Q667' );
+		$item = new Item( $itemId );
+		$item->setAliases( 'en', [ 'an alias' ] );
+
+		$this->saveTestItem( $item );
+
+		$params = [
+			'action' => 'wbsetaliases',
+			'id' => $itemId->getSerialization(),
+			'language' => 'en',
+			'add' => 'another alias',
+		];
+
+		$this->doApiRequestWithToken( $params );
+
+		$itemRevision = $this->getCurrentItemRevision( $itemId );
+
+		$revision = MediaWikiServices::getInstance()->getRevisionStore()->getRevisionById( $itemRevision->getRevisionId() );
+
+		$this->assertEquals( '/* wbsetaliases-add:1|en */ another alias', $revision->getComment()->text );
+	}
+
+	public function testGivenAliasRemoved_correctSummarySet() {
+		$itemId = new ItemId( 'Q667' );
+		$item = new Item( $itemId );
+		$item->setAliases( 'en', [ 'an alias', 'another alias' ] );
+
+		$this->saveTestItem( $item );
+
+		$params = [
+			'action' => 'wbsetaliases',
+			'id' => $itemId->getSerialization(),
+			'language' => 'en',
+			'remove' => 'another alias',
+		];
+
+		$this->doApiRequestWithToken( $params );
+
+		$itemRevision = $this->getCurrentItemRevision( $itemId );
+
+		$revision = MediaWikiServices::getInstance()->getRevisionStore()->getRevisionById( $itemRevision->getRevisionId() );
+
+		$this->assertEquals( '/* wbsetaliases-remove:1|en */ another alias', $revision->getComment()->text );
+	}
+
+	public function testGivenAliasesChanged_summaryMentionsNewAliases() {
+		// TODO: fix https://phabricator.wikimedia.org/T190492
+		$this->markTestSkipped( 'Currently failing because old aliases are shown instead' );
+
+		$itemId = new ItemId( 'Q667' );
+		$item = new Item( $itemId );
+		$item->setAliases( 'en', [ 'old alias' ] );
+
+		$this->saveTestItem( $item );
+
+		$params = [
+			'action' => 'wbsetaliases',
+			'id' => $itemId->getSerialization(),
+			'language' => 'en',
+			'remove' => 'old alias',
+			'add' => 'new alias',
+		];
+
+		$this->doApiRequestWithToken( $params );
+
+		$itemRevision = $this->getCurrentItemRevision( $itemId );
+
+		$revision = MediaWikiServices::getInstance()->getRevisionStore()->getRevisionById( $itemRevision->getRevisionId() );
+
+		$this->assertEquals( '/* wbsetaliases-update:1|en */ new alias', $revision->getComment()->text );
+	}
+
+	private function saveTestItem( Item $item ) {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$store->saveEntity( $item, 'SetAliasesTest: created test item', $this->getTestUser()->getUser() );
+	}
+
+	private function getCurrentItemRevision( ItemId $id ) {
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
+
+		return $lookup->getEntityRevision( $id );
 	}
 
 }
