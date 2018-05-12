@@ -436,9 +436,6 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	public function testGivenAliasesChanged_summaryMentionsNewAliases() {
-		// TODO: fix https://phabricator.wikimedia.org/T190492
-		$this->markTestSkipped( 'Currently failing because old aliases are shown instead' );
-
 		$itemId = new ItemId( 'Q667' );
 		$item = new Item( $itemId );
 		$item->setAliases( 'en', [ 'old alias' ] );

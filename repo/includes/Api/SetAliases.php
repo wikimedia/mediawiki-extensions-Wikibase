@@ -78,16 +78,13 @@ class SetAliases extends ModifyEntity {
 		}
 	}
 
-	private function createSummaryForAliases( array $params, AliasesProvider $entity ) {
-		$summary = $this->createSummary( $params );
-
+	private function adjustSummary( Summary &$summary, array $params, AliasesProvider $entity ) {
 		if ( !empty( $params['add'] ) && !empty( $params['remove'] ) ) {
 			$language = $params['language'];
 
 			$aliasGroups = $entity->getAliasGroups();
 
-			// Set the action to 'set' in case we add and remove aliases in a single edit
-			$summary->setAction( 'set' );
+			$summary->setAction( 'update' );
 			$summary->setLanguage( $language );
 
 			// Get the full list of current aliases
@@ -96,8 +93,6 @@ class SetAliases extends ModifyEntity {
 				$summary->addAutoSummaryArgs( $aliases );
 			}
 		}
-
-		return $summary;
 	}
 
 	/**
@@ -124,9 +119,12 @@ class SetAliases extends ModifyEntity {
 		if ( !empty( $preparedParameters['add'] ) && !empty( $preparedParameters['remove'] ) ) {
 			$stats->increment( 'wikibase.repo.api.wbsetaliases.addremove' );
 		}
-		$summary = $this->createSummaryForAliases( $preparedParameters, $entity );
+
+		$summary = $this->createSummary( $preparedParameters );
 
 		$this->applyChangeOp( $changeOp, $entity, $summary );
+
+		$this->adjustSummary( $summary, $preparedParameters, $entity );
 
 		$aliasGroups = $entity->getAliasGroups();
 
