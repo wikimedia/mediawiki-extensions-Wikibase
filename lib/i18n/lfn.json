@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Katxis"
+			"Katxis",
+			"Robin van der Vliet"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Vicipedia"
+	"wikibase-sitelinks-wikipedia": "Vicipedia",
+	"wikibase-sitelinks-sitename-columnheading": "Lingua"
 }

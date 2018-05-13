@@ -2,13 +2,28 @@
 	"@metadata": {
 		"authors": [
 			"Katxis",
-			"Cgboeree"
+			"Cgboeree",
+			"Robin van der Vliet"
 		]
 	},
 	"wikibase-edit": "edita",
 	"wikibase-add": "ajunta",
+	"wikibase-entitytermsforlanguagelistview-description": "Descrive",
+	"wikibase-entitytermsforlanguagelistview-label": "Eticeta",
+	"wikibase-entitytermsforlanguagelistview-language": "Lingua",
 	"wikibase-label-empty": "No eticeta definada",
 	"wikibase-description-empty": "No descrive es definada",
+	"wikibase-content-language-edit-label": "Lingua:",
+	"wikibase-diffview-label": "eticeta",
+	"wikibase-diffview-description": "descrive",
 	"wikibase-sitelinks-special": "Otra locas",
-	"wikibase-statementview-rank-normal": "Grado normal"
+	"wikibase-statementview-rank-normal": "Grado normal",
+	"wikibase-itemdisambiguation-lookup-label": "Eticeta:",
+	"wikibase-newentity-language": "Lingua:",
+	"wikibase-newentity-label": "Eticeta:",
+	"wikibase-newentity-description": "Descrive:",
+	"wikibase-setlabel-label": "Eticeta:",
+	"wikibase-setdescription-label": "Descrive:",
+	"wikibase-setlabeldescriptionaliases-label-label": "Eticeta:",
+	"wikibase-setlabeldescriptionaliases-description-label": "Descrive:"
 }
