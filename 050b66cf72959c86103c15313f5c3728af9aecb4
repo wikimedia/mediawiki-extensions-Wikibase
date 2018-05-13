@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2cb28ab2_c177c9a7",
+        "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-13T21:07:29Z",
+      "side": 1,
+      "message": "This hard coded number scares me, is there a way to extract it from somewhere?",
+      "range": {
+        "startLine": 77,
+        "startChar": 88,
+        "endLine": 77,
+        "endChar": 92
+      },
+      "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
