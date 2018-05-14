@@ -22,6 +22,30 @@
       "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b7583cb_748559ef",
+        "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-05-14T11:41:56Z",
+      "side": 1,
+      "message": "$database-\u003ewasLockTimeout() seems to be equivalent for instances of DatabaseMysqlBase (and for other databases the errno will almost certainly have a different meaning anyways).",
+      "parentUuid": "2cb28ab2_c177c9a7",
+      "range": {
+        "startLine": 77,
+        "startChar": 88,
+        "endLine": 77,
+        "endChar": 92
+      },
+      "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
