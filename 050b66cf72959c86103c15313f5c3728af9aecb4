@@ -46,6 +46,30 @@
       "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f1ccc51_31c7724e",
+        "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-14T15:04:07Z",
+      "side": 1,
+      "message": "I\u0027d appreciate if the whole condition, and maybe even additionally the \"is mysql and error code is 1205\" part, were put in the private method with a name that describes what it stands for. It might be clear now, but I can say for myself I will for sure not remember what this combo of four things means in a month.",
+      "parentUuid": "0b7583cb_748559ef",
+      "range": {
+        "startLine": 77,
+        "startChar": 88,
+        "endLine": 77,
+        "endChar": 92
+      },
+      "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
