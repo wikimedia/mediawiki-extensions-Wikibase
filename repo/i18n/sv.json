@@ -527,7 +527,7 @@
 	"apihelp-wbremovereferences-param-summary": "Sammanfattning av redigeringen.\nKommer att föregås av en automatiskt genererad kommentar. Längden på autokommentaren tillsammans med sammanfattningen är 260 tecken. Var medveten om att allting utöver den gränsen kommer att kapas.",
 	"apihelp-wbremovereferences-param-references": "Hasharna för referenserna som ska tas bort",
 	"apihelp-wbremovereferences-example-1": "Ta bort referensen med hash  \"<var>455481eeac76e6a8af71a6b493c073d54788e7e9</var>\" från påståendet med ett GUID av \"Q42$<var>Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F</var>\"",
-	"apihelp-wbsearchentities-description": "Söker efter entiteter med hjälp av etiketter och alias.\nReturnerar en etikett och beskrivning för entiteten på användarens språk om det är möjligt.\nReturnerar detaljer om den matchade termen.\nDen matchade termens text finns också i aliasnyckeln om den skiljer sig från visningsetiketten.",
+	"apihelp-wbsearchentities-description": "Söker efter entiteter med hjälp av etiketter, alias eller ID:n.\nReturnerar en etikett och beskrivning för entiteten på användarens språk om det är möjligt.\nReturnerar detaljer om den matchade termen.\nDen matchade termens text finns också i aliasnyckeln om den skiljer sig från visningsetiketten.",
 	"apihelp-wbsearchentities-summary": "Söker efter entiteter med etiketter och alias.",
 	"apihelp-wbsearchentities-extended-description": "Returnerar en etikett och beskrivning för entiteten på användarens språk om det är möjligt.\nReturnerar detaljer om den matchade termen.\nDen matchade termens text finns också i aliasnyckeln om den skiljer sig från visningsetiketten.",
 	"apihelp-wbsearchentities-param-search": "Sök efter denna text.",
