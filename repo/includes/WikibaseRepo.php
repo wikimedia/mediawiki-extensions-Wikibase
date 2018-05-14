@@ -91,6 +91,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -1091,6 +1092,7 @@ class WikibaseRepo {
 			'ParseException' => new ParseExceptionLocalizer(),
 			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
 			'ChangeOpDeserializationException' => new ChangeOpDeserializationExceptionLocalizer(),
+			'ChangeOpApplyException' => new ChangeOpApplyExceptionLocalizer(),
 			'Exception' => new GenericExceptionLocalizer()
 		];
 	}
