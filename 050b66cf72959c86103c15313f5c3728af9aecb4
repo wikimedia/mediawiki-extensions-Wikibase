@@ -70,6 +70,30 @@
       "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2df8537_e4222617",
+        "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-05-14T15:07:52Z",
+      "side": 1,
+      "message": "d\u0027oh, the comment right above this line already mentions $database-\u003ewasLockTimeout(), I didn’t notice that…\n\nStill, I don’t understand why we can’t use it? It sounds like something we should fix in core, not work around by hard-coding constants in our own codebase :/",
+      "parentUuid": "0f1ccc51_31c7724e",
+      "range": {
+        "startLine": 77,
+        "startChar": 88,
+        "endLine": 77,
+        "endChar": 92
+      },
+      "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
