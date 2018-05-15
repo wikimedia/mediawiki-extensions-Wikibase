@@ -191,9 +191,14 @@ abstract class ModifyEntity extends ApiBase {
 			);
 			$currentEntity = $currentEntityRevision ? $currentEntityRevision->getEntity() : $entity;
 			$result = $changeOp->validate( $currentEntity );
+			// Also validate the change op against the entity it would be applied on, as apply might
+			// explode on cases validate would have caught.
+			// Case for that seem to be a "clear" flag of wbeditentity which results in $entity being
+			// quite a different entity from $currentEntity, and validation results might differ significantly.
+			$resultOriginalEntity = $changeOp->validate( $entity );
 
-			if ( !$result->isValid() ) {
-				throw new ChangeOpValidationException( $result );
+			if ( !$result->isValid() || !$resultOriginalEntity->isValid() ) {
+				throw new ChangeOpValidationException( $result->isValid() ? $resultOriginalEntity : $result );
 			}
 
 			$changeOp->apply( $entity, $summary );
