@@ -331,7 +331,7 @@ class EntityParserOutputGenerator {
 		$titleHtml = $entityView->getTitleHtml( $entity );
 		$parserOutput->setTitleText( $titleHtml );
 
-		$html = $entityView->getHtml( $entity );
+		$html = '<div id="mobile-termbox"></div>' . $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $textInjector->getMarkers() );
 
@@ -361,6 +361,9 @@ class EntityParserOutputGenerator {
 		// the JavaScript that is only necessary for editing.
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
 		$parserOutput->addModules( 'wikibase.entityPage.entityLoaded' );
+
+		//FIXME: Remove!!!
+		$parserOutput->addModules( 'wikibase.mobile.termBox' );
 	}
 
 	/**
