@@ -200,6 +200,13 @@ return call_user_func( function() {
 				}
 		],
 
+		'wikibase.mobile.itemSelector' => $moduleTemplate + [
+				'scripts' => [
+					'mobile/itemSelector.js',
+				],
+				'targets' => [ 'mobile' ],
+			]
+
 	];
 
 	return array_merge(
