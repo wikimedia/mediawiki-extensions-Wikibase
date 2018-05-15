@@ -200,6 +200,23 @@ return call_user_func( function() {
 				}
 		],
 
+		'wikibase.mobile.termBox' => $moduleTemplate + [
+			'scripts' => [
+				'mobile/termBox.js',
+			],
+			'dependencies' => [
+				'vue',
+			],
+			'targets' => [ 'mobile' ],
+		],
+
+		'vue' => $moduleTemplate + [
+			'scripts' => [
+				'mobile/vue.js',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
 	];
 
 	return array_merge(
