@@ -361,6 +361,9 @@ class EntityParserOutputGenerator {
 		// the JavaScript that is only necessary for editing.
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
 		$parserOutput->addModules( 'wikibase.entityPage.entityLoaded' );
+
+		//FIXME: Remove!!!
+		$parserOutput->addModules( 'wikibase.mobile.itemSelector' );
 	}
 
 	/**
