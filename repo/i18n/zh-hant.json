@@ -25,7 +25,8 @@
 			"Translatealcd",
 			"Ladsgroup",
 			"Hello903hello",
-			"Mutolisp"
+			"Mutolisp",
+			"Kly"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -355,7 +356,7 @@
 	"apihelp-wbgetclaims-description": "取得 Wikibase 主張。",
 	"apihelp-wbgetclaims-param-entity": "用來取得主張的實體 ID。 除非提供主張 GUID，否則為必填。",
 	"apihelp-wbgetclaims-param-rank": "選填的篩選條件，只回傳達到指定等級的主張",
-	"apihelp-wbgetclaims-example-1": "取得項目 ID Q42 的主張",
+	"apihelp-wbgetclaims-example-1": "取得項目 ID <samp>Q42</samp> 的聲稱",
 	"apihelp-wbgetclaims-example-3": "取得項目 ID Q42 等級為一般的主張",
 	"apihelp-wbremoveclaims-description": "移除 Wikibase 主張。",
 	"apihelp-wbremoveclaims-param-claim": "移除一個 GUID 或多個 (以 | 符號分隔) GUID 表示的主張。\n所有主張必須屬於同一個實體。",

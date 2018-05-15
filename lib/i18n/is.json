@@ -21,7 +21,7 @@
 	"wikibase-error-autocomplete-connection": "Mistókst að senda fyrirspurn til síðunnar. Vinsamlegast reyndu aftur síðar.",
 	"wikibase-error-autocomplete-response": "Vefþjónninn svaraði: $1",
 	"wikibase-error-ui-no-external-page": "Síðan \"$2\" fannst ekki á \"$1\".",
-	"wikibase-error-ui-edit-conflict": "Sama gildið var breytt í millitíðinni sem olli breytingarárekstri. Vinsamlegast endurhladdu síðunni.",
+	"wikibase-error-ui-edit-conflict": "Sama gildi var breytt í millitíðinni, sem veldur breytingarárekstri. Lestu síðuna inn aftur.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (umritað)",
 	"wikibase-quantitydetails-amount": "Magn",
 	"wikibase-quantitydetails-upperbound": "efri mörk",
