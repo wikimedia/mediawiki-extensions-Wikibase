@@ -3,12 +3,13 @@
 		"authors": [
 			"Albinus",
 			"Manik Soren",
-			"Ramjit Tudu"
+			"Ramjit Tudu",
+			"Fagunkoyel Hansdah"
 		]
 	},
 	"tooltip-t-wikibase": "ᱜᱩᱫᱟᱹᱢ ᱚᱲᱟᱜ ᱥᱟᱶᱛᱮᱱ ᱠᱟᱛᱷᱟᱠᱩ ᱡᱚᱱᱚᱲ",
 	"wikibase-comment-update": "{{WBREPONAME}} ᱥᱟᱛᱚᱢ ᱵᱚᱫᱚᱞ ᱦᱩᱭᱠᱟᱱᱟ",
-	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-dataitem": "{{WBREPONAME}} ᱡᱤᱱᱤᱥ",
 	"wikibase-editlinks": "ᱡᱚᱱᱚᱲᱠᱩ ᱥᱟᱯᱲᱟᱣ",
 	"wikibase-editlinkstitle": "ᱵᱷᱤᱛᱨᱤ ᱯᱟᱹᱨᱥᱤ ᱡᱚᱱᱚᱲ ᱠᱚ ᱵᱚᱫᱚᱞ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
