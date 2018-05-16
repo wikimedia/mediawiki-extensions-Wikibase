@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cbe086a6_30ddd1ba",
+        "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-05-16T11:38:56Z",
+      "side": 1,
+      "message": "How about this:\nLets not lock it at all, but just increment and select?\n```\nUPDATE wb_id_counters SET\n  id_value \u003d @id_value :\u003d id_value+1\nWHERE id_type\u003d\u0027wikibase-item\u0027 LIMIT 1;\n\nSELECT @id_value;\n```\n\nThis way we won\u0027t have locks at all and there won\u0027t be a possibility to have this error.\n\nAs a downside - we will \"waste\" some IDs in case of invalid requests, but does it really matter? \nNow `id_value` column has type of `int(10) unsigned`, but as soon as all the modern CPUs are 64bit and PHPs integers are also 64bit, we can make it `bigint(20) unsigned` and swim in IDs for the rest of our lives :)\n\nPS: Before doing so, we need to check the transaction isolation level for Mediawiki. What is it? Who knows?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2cb28ab2_c177c9a7",
         "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
         "patchSetId": 4
