@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81a2e033_c7c20dd1",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-05-16T11:12:37Z",
+      "side": 1,
+      "message": "Why do we validate against $currentEntity at all if it will be applied to the $entity?",
+      "range": {
+        "startLine": 193,
+        "startChar": 3,
+        "endLine": 193,
+        "endChar": 51
+      },
+      "revId": "1abfab719e8ffd39969bf8c4d6b457774cd7b670",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
