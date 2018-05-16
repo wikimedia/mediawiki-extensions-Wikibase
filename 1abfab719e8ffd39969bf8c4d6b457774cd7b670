@@ -22,6 +22,30 @@
       "revId": "1abfab719e8ffd39969bf8c4d6b457774cd7b670",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11601a10_a92ab3c2",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-16T11:28:02Z",
+      "side": 1,
+      "message": "I am confused myself too.\nGiven the \"note\" above:\n\n\u003e NOTE: Always validate modification against the current revision, if it exists!\n\u003e Otherwise, we may miss e.g. a combination of language/label/description\n\u003e that was already taken.\n\nthe idea was apparently to do some kind of race condition checking.\n\nI am not convinced it is really the best way and place to do it though. That said, I have preferred to not dig into loophole unless necessary. This change seems to fix the logical flaw in the implementation of this race condition thing, I admit not really making situation any better after the change.",
+      "parentUuid": "81a2e033_c7c20dd1",
+      "range": {
+        "startLine": 193,
+        "startChar": 3,
+        "endLine": 193,
+        "endChar": 51
+      },
+      "revId": "1abfab719e8ffd39969bf8c4d6b457774cd7b670",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
