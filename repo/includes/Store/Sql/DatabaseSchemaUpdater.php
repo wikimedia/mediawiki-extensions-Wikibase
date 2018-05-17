@@ -335,6 +335,12 @@ class DatabaseSchemaUpdater {
 			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
 		);
 
+		$updater->dropExtensionIndex(
+			'wb_terms',
+			'term_search',
+			$this->getUpdateScriptPath( 'DropNotFullEntityIdTermIndexes', $db->getType() )
+		);
+
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
 	}
