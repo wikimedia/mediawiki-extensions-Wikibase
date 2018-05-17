@@ -324,7 +324,7 @@ class DatabaseSchemaUpdater {
 		// updated indexes
 		$updater->addExtensionIndex(
 			'wb_terms',
-			'term_search',
+			'term_text',
 			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
 		);
 
@@ -333,6 +333,12 @@ class DatabaseSchemaUpdater {
 			'wb_terms',
 			'term_full_entity_id',
 			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
+		);
+
+		$updater->dropExtensionIndex(
+			'wb_terms',
+			'term_search',
+			$this->getUpdateScriptPath( 'DropNotFullEntityIdTermIndexes', $db->getType() )
 		);
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
