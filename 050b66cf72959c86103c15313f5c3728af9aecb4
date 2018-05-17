@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "14007d4b_18403f5b",
+        "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-05-17T04:51:38Z",
+      "side": 1,
+      "message": "REPEATABLE-READ is preferred for write transactions and assumed in various read paths for DB_REPLICA. This is the default mysql mode and is used on wmf sites.\n\nIf you do an UPDATE here it will have the same locks as SELECT FOR UPDATE.",
+      "parentUuid": "cbe086a6_30ddd1ba",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "050b66cf72959c86103c15313f5c3728af9aecb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2cb28ab2_c177c9a7",
         "filename": "repo/includes/Store/Sql/SqlIdGenerator.php",
         "patchSetId": 4
