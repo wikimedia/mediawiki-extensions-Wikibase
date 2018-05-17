@@ -11,6 +11,7 @@
 	"wikibase-add": "ajunta",
 	"wikibase-addreference": "ajunta refere",
 	"wikibase-statementlistview-add": "ajunta valua",
+	"wikibase-statementgrouplistview-add": "ajunta declara",
 	"wikibase-entitytermsforlanguagelistview-description": "Descrive",
 	"wikibase-entitytermsforlanguagelistview-label": "Eticeta",
 	"wikibase-entitytermsforlanguagelistview-language": "Lingua",

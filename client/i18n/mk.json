@@ -105,7 +105,7 @@
 	"wikibase-pageswithbadges-legend": "Список на страници со дадена значка",
 	"wikibase-pageswithbadges-badge": "Значка:",
 	"wikibase-pageswithbadges-submit": "Прикажи страници",
-	"entityusage": "Употреба на единицата",
+	"entityusage": "Употреба на единица",
 	"entityusage-summary": "Тука се наведени страници што користат дадена единица (на пр. Q42). Списокот е надолно подреден по назнака на страницата, така што поновите се прикажуваат погоре.",
 	"wikibase-entityusage-invalid-id": "$1 не претставува важечка назнака на единица",
 	"wikibase-entityusage-legend": "Список на страници што користат дадена единица",
