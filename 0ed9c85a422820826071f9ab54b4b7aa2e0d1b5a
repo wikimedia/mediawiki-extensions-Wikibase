@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "380c0627_6ce8a3a9",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityClearChangeOpValidateIntegrationTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-17T16:25:23Z",
+      "side": 1,
+      "message": "so in priciple yes.\nThe issue that I am claiming I am fixing in this patch is the way EditEntity/ModifyEntity deal with calling ChangeOp::validate and ChangeOp::apply. As far as I could check, all Wikibase core\u0027s ChangeOp implementation have pretty defensive implementations of apply method, therefore I couldn\u0027t exploit the problem using real implementations. Thus mock, which I hoped demonstrates the problem we encountered with the real ChangeOp in WikibaseLexeme (i.e. not duplicating checks from validate and apply, and apply being passed different entity that validate had got)",
+      "parentUuid": "093c8d2d_bd84545e",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 2
+      },
+      "revId": "0ed9c85a422820826071f9ab54b4b7aa2e0d1b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d68dac69_72873d04",
         "filename": "repo/tests/phpunit/includes/Api/EditEntityClearChangeOpValidateIntegrationTest.php",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2018-05-16T16:58:08Z",
       "side": 1,
       "message": "Hardcore :)",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 69
+      },
+      "revId": "0ed9c85a422820826071f9ab54b4b7aa2e0d1b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1b5d9ff_600e254a",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityClearChangeOpValidateIntegrationTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-17T16:25:23Z",
+      "side": 1,
+      "message": "All my other attempts to get this tested were even more hardcore :)",
+      "parentUuid": "d68dac69_72873d04",
       "range": {
         "startLine": 83,
         "startChar": 1,
