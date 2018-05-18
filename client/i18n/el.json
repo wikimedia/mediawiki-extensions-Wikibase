@@ -5,7 +5,8 @@
 			"Geraki",
 			"Nikosguard",
 			"Glavkos",
-			"Protnet"
+			"Protnet",
+			"Nikosgranturismogt"
 		]
 	},
 	"wikibase-client-desc": "Πελάτης για την επέκταση Wikibase",
@@ -56,8 +57,10 @@
 	"unconnectedpages-summary": "Αυτή η σελίδα περιέχει σελίδες που δεν είναι συνδεδεμένες με αντικείμενο δεδομένων (σε namespaces που υποστηρίζουν συνδεδεμένα αντικείμενα). Ο κατάλογος είναι ταξινομημένος με φθίνουσα σειρά page ID, έτσι ώστε νεότερες σελίδες βρίσκονται πρώτες.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|διαγλωσσικός σύνδεσμος|διαγλωσσικοί σύνδεσμοι}} για τη σελίδα)",
 	"wikibase-unconnectedpages-submit": "Εμφάνιση σελίδων",
+	"pageswithbadges": "Σελίδες με σήματα",
 	"wikibase-pageswithbadges-invalid-id": "$1 δεν είναι έγκυρο αναγνωριστικό αντικειμένου",
 	"wikibase-pageswithbadges-submit": "Εμφάνιση σελίδων",
+	"entityusage": "Χρήση οντότητας",
 	"wikibase-entityusage-submit": "Εμφάνιση σελίδων",
 	"wikibase-pageinfo-entity-id": "Αναγνωριστικό αντικειμένου {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Κανένα",
