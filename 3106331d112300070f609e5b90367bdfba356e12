@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22ebe986_e44868f8",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-05-18T14:47:40Z",
+      "side": 1,
+      "message": "This part should be explained in the commit message IMHO. Did I understand it correctly?\n\n\u003e The UpdateTermIndexes patch is now added based on the presence on term_text instead of term_search, otherwise the updater will attempt to re-apply that update since the term_search index now no longer exists.",
+      "revId": "3106331d112300070f609e5b90367bdfba356e12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
