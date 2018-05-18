@@ -16,6 +16,24 @@
       "revId": "f5fceedee9322f83495ea1631819a753bc9086cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3fbb7db_86aa72f3",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-05-18T14:47:40Z",
+      "side": 1,
+      "message": "To sum up some IRL explanation yesterday – these indexes are also added in bulk (UpdateTermIndexes above), so it should be okay to drop them in bulk as well.",
+      "parentUuid": "b86efb39_563725e0",
+      "revId": "f5fceedee9322f83495ea1631819a753bc9086cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
