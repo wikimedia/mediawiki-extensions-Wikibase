@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b6be26b_ee11c732",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-05-18T15:05:02Z",
+      "side": 1,
+      "message": "Incidentally – does this _s mean anything or is it a typo? (If typo, can be fixed in a follow-up.)",
+      "range": {
+        "startLine": 52,
+        "startChar": 48,
+        "endLine": 52,
+        "endChar": 50
+      },
+      "revId": "247e7503864b77fe1aeb9b4d66c53cd910bf4d1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
