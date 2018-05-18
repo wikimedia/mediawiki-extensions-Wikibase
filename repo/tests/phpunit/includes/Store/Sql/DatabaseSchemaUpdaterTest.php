@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MysqlUpdater;
 use PHPUnit4And6Compat;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
+use Wikibase\SettingsArray;
 use Wikibase\Store;
 use Wikimedia\Rdbms\DatabaseMysqli;
 
@@ -25,6 +26,13 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testDoSchemaUpdate() {
 		$store = $this->getMock( Store::class );
+		$settings = $this->getMockBuilder( SettingsArray::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$settings->expects( $this->once() )
+			->method( 'getSetting' )
+			->will( $this->returnValue( true ) );
 
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
 			->disableOriginalConstructor()
@@ -42,7 +50,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getDB' )
 			->will( $this->returnValue( $db ) );
 
-		$databaseSchemaUpdater = new DatabaseSchemaUpdater( $store );
+		$databaseSchemaUpdater = new DatabaseSchemaUpdater( $store, $settings );
 		$databaseSchemaUpdater->doSchemaUpdate( $updater );
 	}
 

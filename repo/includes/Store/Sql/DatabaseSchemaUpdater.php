@@ -16,6 +16,7 @@ use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 use Wikibase\Store;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -31,14 +32,20 @@ class DatabaseSchemaUpdater {
 	 */
 	private $store;
 
-	public function __construct( Store $store ) {
+	/**
+	 * @var SettingsArray
+	 */
+	private $settings;
+
+	public function __construct( Store $store, SettingsArray $settings ) {
 		$this->store = $store;
+		$this->settings = $settings;
 	}
 
 	private static function newFromGlobalState() {
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		return new self( $store );
+		return new self( $wikibaseRepo->getStore(), $wikibaseRepo->getSettings() );
 	}
 
 	/**
@@ -309,8 +316,6 @@ class DatabaseSchemaUpdater {
 			$this->getUpdateScriptPath( 'AddTermsWeight', $db->getType() )
 		);
 
-		// ---- Update from 0.4 ----
-
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
 		if ( $db->getType() !== 'sqlite' ) {
 			// make term_row_id BIGINT
@@ -340,6 +345,14 @@ class DatabaseSchemaUpdater {
 			'term_search',
 			$this->getUpdateScriptPath( 'DropNotFullEntityIdTermIndexes', $db->getType() )
 		);
+
+		if ( !$this->settings->getSetting( 'useTermsTableSearchFields' ) ) {
+			$updater->dropExtensionIndex(
+				'wb_terms',
+				'term_search_key',
+				$this->getUpdateScriptPath( 'DropNotTermSearchIndexes', $db->getType() )
+			);
+		}
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
