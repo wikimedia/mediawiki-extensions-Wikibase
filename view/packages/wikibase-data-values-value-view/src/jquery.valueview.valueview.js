@@ -295,6 +295,23 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		this.element.html( this.$value );
 
+		// XXX: This component shouldn't need to know about this :/
+		// The html initially present (from the static html) does not necessarily
+		// work as expected when moved around. Immediately re-render for
+		// displaying Kartographer maps in entities.
+		if ( this._value && this.options.dataValueType === 'globecoordinate' ) {
+			this._formatValue( this._value )
+			.done( function( formattedValue ) {
+				self._formattedValue = formattedValue;
+				self.draw();
+			} )
+			.fail( function( message ) {
+				if ( message ) {
+					self._renderError( message );
+				}
+			} );
+		}
+
 		this.draw()
 		.done( function() {
 			self._trigger( 'afterstartediting' );
