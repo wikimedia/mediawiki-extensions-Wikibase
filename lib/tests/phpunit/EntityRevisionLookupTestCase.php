@@ -195,6 +195,22 @@ abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
 		$this->assertInstanceOf( EntityRevision::class, $entityRev );
 	}
 
+	/**
+	 * @dataProvider provideGetEntityRevision_redirect
+	 */
+	public function testGetLatestRevisionId_redirect( EntityId $id, $expectedRedirect ) {
+		$lookup = $this->getEntityRevisionLookup();
+
+		try {
+			$result = $lookup->getLatestRevisionId( $id );
+			$this->fail( 'Expected an UnresolvedRedirectException exception when looking up a redirect.' );
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			$this->assertEquals( $expectedRedirect, $ex->getRedirectTargetId() );
+			$this->assertGreaterThan( 0, $ex->getRevisionId() );
+			$this->assertNotEmpty( $ex->getRevisionTimestamp() );
+		}
+	}
+
 	public function testGetLatestRevisionForMissing() {
 		$lookup = $this->getEntityRevisionLookup();
 		$itemId = new ItemId( 'Q753' );
