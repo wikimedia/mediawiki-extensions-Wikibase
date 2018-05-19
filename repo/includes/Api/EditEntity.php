@@ -182,6 +182,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			if ( $preparedParameters['baserevid'] && $exists ) {
+				// FIXME: handle RevisionedUnresolvedRedirectException?
 				$latestRevision = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
