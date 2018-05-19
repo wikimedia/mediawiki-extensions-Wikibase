@@ -6,6 +6,7 @@ use Message;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Class representing generic form field referencing item by its ID.
@@ -63,8 +64,12 @@ class HTMLItemReferenceField extends \HTMLTextField {
 			return $this->msg( 'wikibase-item-reference-edit-invalid-format' );
 		}
 
-		if ( !$this->entityLookup->hasEntity( $itemId ) ) {
-			return $this->msg( 'wikibase-item-reference-edit-nonexistent-item' );
+		try {
+			if ( !$this->entityLookup->hasEntity( $itemId ) ) {
+				return $this->msg( 'wikibase-item-reference-edit-nonexistent-item' );
+			}
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			return $this->msg( 'wikibase-wikibaserepopage-unresolved-redirect', $itemId->getSerialization() );
 		}
 
 		return parent::validate( $value, $alldata );

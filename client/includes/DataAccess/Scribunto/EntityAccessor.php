@@ -10,6 +10,7 @@ use Wikibase\Client\Serializer\ClientStatementListSerializer;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -100,7 +101,7 @@ class EntityAccessor {
 		$fineGrainedLuaTracking
 	) {
 		$this->entityIdParser = $entityIdParser;
-		$this->entityLookup = $entityLookup;
+		$this->entityLookup = new RedirectResolvingEntityLookup( $entityLookup );
 		$this->usageAccumulator = $usageAccumulator;
 		$this->entitySerializer = $entitySerializer;
 		$this->statementSerializer = $statementSerializer;

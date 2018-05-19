@@ -70,6 +70,7 @@ interface EntityRevisionLookup {
 	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER.
 	 *        LATEST_FROM_MASTER would force the revision to be determined from the canonical master database.
 	 *
+	 * @throws RevisionedUnresolvedRedirectException
 	 * @return int|false Returns false in case the entity doesn't exist (this includes redirects).
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA );

@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\DataAccess;
 use DataValues\StringValue;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -121,6 +122,10 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$this->createTestItem( new ItemId( 'Q199024' ), [ 'de' => 'Arbitrary access \o/' ] );
 
 		$this->createTestItem( new ItemId( 'Q885588' ), [ 'ku-latn' => 'Pisîk' ] );
+
+		// Create a redirect item for test
+		$redirect = new EntityRedirect( new ItemId( 'Q302' ), new ItemId( 'Q199024' ) );
+		$this->siteLinkLookup->putRedirect( $redirect );
 	}
 
 	/**

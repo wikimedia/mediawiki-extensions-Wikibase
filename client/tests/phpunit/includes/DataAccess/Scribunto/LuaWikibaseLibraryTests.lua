@@ -95,7 +95,6 @@ end
 
 local tests = {
 	-- Integration tests
-
 	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
 	  expect = { 'Q32487' }
 	},
@@ -184,6 +183,10 @@ local tests = {
 	{ name = "mw.wikibase.entityExists (id must be string)", func = mw.wikibase.entityExists,
 	  args = { 123 },
 	  expect = "bad argument #1 to 'entityExists' (string expected, got number)"
+	},
+	{ name = "mw.wikibase.entityExists (redirect)", func = mw.wikibase.entityExists,
+	  args = { 'Q302' },
+	  expect = { true }
 	},
 	{ name = 'mw.wikibase.label (legacy alias)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
