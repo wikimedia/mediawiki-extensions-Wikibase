@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c390a30_f17f05d7",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-05-19T10:49:11Z",
+      "side": 1,
+      "message": "not sure what is the best approach here.\n\nAfter applying my patch, it was possible to get into this edge case scenario from UI, resulting in error message to user in the red error tip of \"Couldn\u0027t save: [9c10ef3b41c18b42f41b8780] Exception caught: Unresolved redirect to Q2\"",
+      "range": {
+        "startLine": 285,
+        "startChar": 5,
+        "endLine": 285,
+        "endChar": 153
+      },
+      "revId": "9dbdfe0afd7cb58679d1101295b361276b0df6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
