@@ -447,12 +447,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
-		try {
-			$revision = $this->getEntityRevision( $entityId, 0, $mode );
-		} catch ( RevisionedUnresolvedRedirectException $e ) {
-			return false;
-		}
-
+		$revision = $this->getEntityRevision( $entityId, 0, $mode );
 		return $revision === null ? false : $revision->getRevisionId();
 	}
 

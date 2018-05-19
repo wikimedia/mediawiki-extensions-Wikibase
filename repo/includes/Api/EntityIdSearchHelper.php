@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikimedia\Assert\Assert;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Helper class to search for entities by ID
@@ -146,8 +147,14 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	private function getMatchingIdsIncludingPrefixes( EntityId $entityId ) {
 		$entityIds = [];
 
-		if ( $this->entityLookup->hasEntity( $entityId ) ) {
-			$entityIds[] = $entityId;
+		try {
+			if ( $this->entityLookup->hasEntity( $entityId ) ) {
+				$entityIds[] = $entityId;
+			}
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to load ' . $entityId
+			);
 		}
 
 		// Entity ID without repository prefix, let's try prepending known prefixes
@@ -172,8 +179,14 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 			return [];
 		}
 
-		if ( $this->entityLookup->hasEntity( $id ) ) {
-			$entityIds[] = $id;
+		try {
+			if ( $this->entityLookup->hasEntity( $id ) ) {
+				$entityIds[] = $id;
+			}
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to load ' . $id
+			);
 		}
 
 		return $entityIds;
