@@ -417,5 +417,6 @@
 	"apihelp-wbeditentity-example-1": "Стварыць новы пусты элемэнт, вярнуць поўную структуру элемэнту",
 	"apihelp-wbeditentity-example-2": "Стварыць новы элемэнт і вызначыць меткі для <var>de</var> і <var>en</var>",
 	"apihelp-wbeditentity-example-3": "Стварыць новую ўласьцівасьць, якая ўтрымлівае json-зьвесткі, вярнуць поўную структуру элемэнту",
-	"apihelp-wbeditentity-example-4": "Ачысьціць усе зьвесткі з элемэнту з ідэнтыфікатарам <samp>Q42</samp>"
+	"apihelp-wbeditentity-example-4": "Ачысьціць усе зьвесткі з элемэнту з ідэнтыфікатарам <samp>Q42</samp>",
+	"apihelp-wbeditentity-example-5": "Ачысьціць усе зьвесткі элемэнту з ідэнтыфікатарам <samp>Q42</samp> і вызначыць метку для <var>en</var>"
 }

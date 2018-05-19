@@ -270,6 +270,7 @@
 	"wikibase-itemmerge-no-such-entity": "No se encontró el elemento.",
 	"wikibase-itemmerge-cant-load-entity-content": "Error al cargar el elemento.",
 	"wikibase-itemmerge-cant-merge-self": "No se puede fusionar un elemento consigo mismo.",
+	"wikibase-tokencheck-missingtoken": "Se necesita una ficha de edición.",
 	"wikibase-tokencheck-mustposttoken": "La edición solo es posible usando solicitudes POST.",
 	"special-dispatchstats": "Estadísticas de distribución de las modificaciones",
 	"wikibase-dispatchstats-intro": "Esta página proporciona estadísticas sobre la distribución de las modificaciones de los clientes.",
