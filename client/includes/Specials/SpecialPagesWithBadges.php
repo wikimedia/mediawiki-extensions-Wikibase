@@ -106,7 +106,6 @@ class SpecialPagesWithBadges extends QueryPage {
 				'name' => 'badge',
 				'type' => 'select',
 				'id' => 'wb-pageswithbadges-badge',
-				'cssclass' => 'wb-select',
 				'label-message' => 'wikibase-pageswithbadges-badge',
 				'options' => $this->getOptionsArray()
 			],
