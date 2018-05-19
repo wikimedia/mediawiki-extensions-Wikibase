@@ -188,12 +188,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.special' => $moduleTemplate + [
-			'styles' => [
-				'wikibase.special/wikibase.special.css'
-			],
-		],
-
 		'wikibase.experts.modules' => $moduleTemplate + [
 				'factory' => function () {
 					return WikibaseRepo::getDefaultInstance()->getPropertyValueExpertsModule();

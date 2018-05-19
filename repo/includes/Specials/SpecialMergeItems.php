@@ -207,8 +207,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * Creates the HTML form for merging two items.
 	 */
 	protected function createForm() {
-		$this->getOutput()->addModuleStyles( [ 'wikibase.special' ] );
-
 		$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
 
 		$pre = '';
