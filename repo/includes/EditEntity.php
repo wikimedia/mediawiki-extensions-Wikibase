@@ -282,6 +282,8 @@ class EditEntity {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
 			} elseif ( $id !== null ) {
+				// FIXME: handle RevisionedUnresolvedRedirectException?
+				// (1. User A open a entity, 2. User B merge this entity (becomes redirect), 3. A tries to edit)
 				$this->latestRevId = (int)$this->entityRevisionLookup->getLatestRevisionId(
 					$id,
 					$this->getReplicaMode()

@@ -133,13 +133,25 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
+	 * @throws RevisionedUnresolvedRedirectException
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 		$row = $rows[$entityId->getSerialization()];
 
-		if ( $row && $row->page_latest && !$row->page_is_redirect ) {
+		if ( $row && $row->page_latest ) {
+			if ( $row->page_is_redirect ) {
+				/** @var EntityRedirect $redirect */
+				list( $entityRevision, $redirect ) = $this->loadEntity( $row );
+				throw new RevisionedUnresolvedRedirectException(
+					$entityId,
+					$redirect->getTargetId(),
+					(int)$row->rev_id,
+					$row->rev_timestamp
+				);
+			}
+
 			return (int)$row->page_latest;
 		}
 
