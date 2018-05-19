@@ -267,7 +267,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				'label-message' => 'wikibase-modifyterm-language',
 				'type' => 'text',
 				'default' => $this->languageCode,
-				'cssclass' => 'wb-input',
 				'id' => 'wb-modifyterm-language'
 			];
 			// Messages:

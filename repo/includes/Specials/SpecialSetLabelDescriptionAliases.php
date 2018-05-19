@@ -187,7 +187,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'name' => 'language',
 				'default' => $languageCode,
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => $fieldId,
 				'label-message' => 'wikibase-modifyterm-language'
 			];
@@ -217,7 +216,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'name' => $termType,
 				'default' => $value,
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => $fieldId,
 				'placeholder' => $value,
 				'label-message' => $fieldId . '-label'
