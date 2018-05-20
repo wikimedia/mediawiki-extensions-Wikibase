@@ -2,8 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use DataValues\Geo\Formatters\LatLongFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
+use DataValues\Geo\Formatters\LatLongFormatter;
+use ExtensionRegistry;
 use InvalidArgumentException;
 use Language;
 use Psr\SimpleCache\CacheInterface;
@@ -26,6 +27,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
 use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
+use Wikibase\Lib\Formatters\WikitextGlobeCoordinateFormatter;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -428,7 +430,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
 	 *
-	 * @return GlobeCoordinateFormatter
+	 * @return ValueFormatter
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
 		$isHtmlVerboseFormat = $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format );
@@ -444,23 +446,30 @@ class WikibaseValueFormatterBuilders {
 			);
 		}
 
-		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
-		// see https://phabricator.wikimedia.org/T102960
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
 			return new GlobeCoordinateDetailsFormatter(
 				$this->getVocabularyUriFormatter( $options ),
 				$options
 			);
-		} else {
-			$options->setOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
-			$options->setOption( LatLongFormatter::OPT_SPACING_LEVEL, [
-				LatLongFormatter::OPT_SPACE_LATLONG
-			] );
-			$options->setOption( LatLongFormatter::OPT_DIRECTIONAL, true );
-
-			$plainFormatter = new GlobeCoordinateFormatter( $options );
-			return $this->escapeValueFormatter( $format, $plainFormatter );
 		}
+
+		$options->setOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
+		$options->setOption( LatLongFormatter::OPT_SPACING_LEVEL, [
+			LatLongFormatter::OPT_SPACE_LATLONG
+		] );
+		$options->setOption( LatLongFormatter::OPT_DIRECTIONAL, true );
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {
+			$options->setOption( WikitextGlobeCoordinateFormatter::OPT_ENABLE_KARTOGRAPHER, true );
+		}
+
+		$plainFormatter = new GlobeCoordinateFormatter( $options );
+		if ( $format === SnakFormatter::FORMAT_WIKI ) {
+			return new WikitextGlobeCoordinateFormatter(
+				$plainFormatter,
+				$options
+			);
+		}
+		return $this->escapeValueFormatter( $format, $plainFormatter );
 	}
 
 	/**
