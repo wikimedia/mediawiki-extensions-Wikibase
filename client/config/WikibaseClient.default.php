@@ -117,6 +117,7 @@ return call_user_func( function() {
 		},
 
 		'useKartographerGlobeCoordinateFormatter' => false,
+		'useKartographerMaplinkInWikitext' => false,
 		'trackLuaFunctionCallsPerSiteGroup' => false,
 		'trackLuaFunctionCallsPerWiki' => false,
 	];

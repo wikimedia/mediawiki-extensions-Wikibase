@@ -105,7 +105,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( EntityRevisionLookup::class ),
 			$entityTitleLookup,
-			$this->newKartographerEmbeddingHandler()
+			$this->newKartographerEmbeddingHandler(),
+			true
 		);
 	}
 
@@ -388,6 +389,13 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				$this->newFormatterOptions(),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
 				'@^55°45\'S, 37°15\'E$@'
+			],
+			'html coordinate' => [
+				'GlobeCoordinate',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new GlobeCoordinateValue( new LatLongValue( 1, 2 ), 1 ),
+				'@^<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":\[2,1\]}}</maplink>$@'
 			],
 			'coordinate details' => [
 				'GlobeCoordinate',
