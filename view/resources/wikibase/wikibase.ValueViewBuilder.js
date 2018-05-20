@@ -78,9 +78,14 @@
 		 * @return {Object}
 		 */
 		_getOptions: function ( dataType, dataValue, propertyId ) {
-			var dataTypeId = dataType && dataType.getId();
+			var dataTypeId = dataType && dataType.getId(),
+				htmlFlavor = 'text/html';
+
+			if ( dataTypeId === 'commonsMedia' ) {
+				htmlFlavor = 'text/html; disposition=verbose';
+			}
 			var valueViewOptions = $.extend( {}, this._baseOptions, {
-				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html; disposition=verbose' ),
+				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, htmlFlavor ),
 				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/plain' ),
 				value: dataValue
 			} );
