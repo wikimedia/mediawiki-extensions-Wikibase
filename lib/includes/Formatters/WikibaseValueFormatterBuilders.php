@@ -423,6 +423,16 @@ class WikibaseValueFormatterBuilders {
 	 * @return GlobeCoordinateFormatter
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
+		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format ) ) {
+			$isPreview = $format === SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW;
+
+			return new GlobeCoordinateKartographerFormatter(
+				$options,
+				$this->newGlobeCoordinateFormatter( SnakFormatter::FORMAT_HTML, $options ),
+				new CachingKartographerEmbeddingHandler( new \Parser, $isPreview )
+			);
+		}
+
 		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
 		// see https://phabricator.wikimedia.org/T102960
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
