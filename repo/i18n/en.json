@@ -429,6 +429,7 @@
 	"wikibase-pageinfo-subscription-none": "None",
 	"wikibase-search-bad-entity-type": "Bad entity type: $1",
 	"wikibase-search-bad-profile-name": "Bad search profile name: $1",
+	"wikibase-search-namespace-mix": "Mixing entity and article namespaces in search is currently not supported. Only entity namespaces will be searched.",
 	"apihelp-wbavailablebadges-description": "Queries available badge items.",
 	"apihelp-wbavailablebadges-summary": "Queries available badge items.",
 	"apihelp-wbavailablebadges-example-1": "Queries all available badge items",

@@ -102,6 +102,9 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		// TODO: if we have a mix here of article & entity namespaces, the search may not work
 		// very well here. Right now we're just forcing it to entity space. We may want to look
 		// for a better solution.
+		if ( !empty( $articleNs ) ) {
+			$searchContext->addWarning( 'wikibase-search-namespace-mix' );
+		}
 		$searchContext->setNamespaces( $entityNs );
 
 		// TODO: eventually we should deal with combined namespaces, probably running
