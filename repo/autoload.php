@@ -252,6 +252,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ParserOutput\\ExternalLinksDataUpdater' => __DIR__ . '/includes/ParserOutput/ExternalLinksDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\FallbackHintHtmlTermRenderer' => __DIR__ . '/includes/ParserOutput/FallbackHintHtmlTermRenderer.php',
 	'Wikibase\\Repo\\ParserOutput\\GeoDataDataUpdater' => __DIR__ . '/includes/ParserOutput/GeoDataDataUpdater.php',
+	'Wikibase\\Repo\\ParserOutput\\GlobeCoordinateKartographerDataUpdater' => __DIR__ . '/includes/ParserOutput/GlobeCoordinateKartographerDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\ImageLinksDataUpdater' => __DIR__ . '/includes/ParserOutput/ImageLinksDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\PageImagesDataUpdater' => __DIR__ . '/includes/ParserOutput/PageImagesDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\ParserOutputDataUpdater' => __DIR__ . '/includes/ParserOutput/ParserOutputDataUpdater.php',
