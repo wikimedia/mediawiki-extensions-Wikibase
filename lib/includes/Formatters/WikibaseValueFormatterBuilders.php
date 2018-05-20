@@ -112,6 +112,11 @@ class WikibaseValueFormatterBuilders {
 	private $snakFormat;
 
 	/**
+	 * @var CachingKartographerEmbeddingHandler|null
+	 */
+	private $kartographerEmbeddingHandler;
+
+	/**
 	 * @var int
 	 */
 	private $cacheTtlInSeconds;
@@ -128,6 +133,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup|null $entityTitleLookup
+	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 */
 	public function __construct(
 		Language $defaultLanguage,
@@ -140,7 +146,8 @@ class WikibaseValueFormatterBuilders {
 		$cacheTtlInSeconds,
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
-		EntityTitleLookup $entityTitleLookup = null
+		EntityTitleLookup $entityTitleLookup = null,
+		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null
 	) {
 		Assert::parameterType(
 			'string',
@@ -178,6 +185,7 @@ class WikibaseValueFormatterBuilders {
 		$this->cache = $cache;
 		$this->snakFormat = new SnakFormat();
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
+		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -423,6 +431,19 @@ class WikibaseValueFormatterBuilders {
 	 * @return GlobeCoordinateFormatter
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
+		$isHtmlVerboseFormat = $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format );
+
+		if ( $isHtmlVerboseFormat && $this->kartographerEmbeddingHandler ) {
+			$isPreview = $format === SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW;
+
+			return new GlobeCoordinateKartographerFormatter(
+				$options,
+				$this->newGlobeCoordinateFormatter( SnakFormatter::FORMAT_HTML, $options ),
+				$this->kartographerEmbeddingHandler,
+				$isPreview
+			);
+		}
+
 		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
 		// see https://phabricator.wikimedia.org/T102960
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
