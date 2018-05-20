@@ -27,6 +27,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
@@ -103,8 +104,33 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			self::CACHE_TTL_IN_SECONDS,
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( EntityRevisionLookup::class ),
-			$entityTitleLookup
+			$entityTitleLookup,
+			$this->newKartographerEmbeddingHandler()
 		);
+	}
+
+	private function newKartographerEmbeddingHandler() {
+		$handler = $this->getMockBuilder( CachingKartographerEmbeddingHandler::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$handler->expects( $this->any() )
+			->method( 'getHtml' )
+			->with(
+				$this->isInstanceOf( GlobeCoordinateValue::class ),
+				$this->isInstanceOf( Language::class )
+			)
+			->will( $this->returnValue( '<kartographer-html/>' ) );
+
+		$handler->expects( $this->any() )
+			->method( 'getPreviewHtml' )
+			->with(
+				$this->isInstanceOf( GlobeCoordinateValue::class ),
+				$this->isInstanceOf( Language::class )
+			)
+			->will( $this->returnValue( '<kartographer-preview-html/>' ) );
+
+		return $handler;
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
@@ -369,6 +395,20 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				$this->newFormatterOptions( 'de' ),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
 				'@^.*55° 45\', 37° 15\'.*$@'
+			],
+			'coordinate kartographer html' => [
+				'GlobeCoordinate',
+				SnakFormatter::FORMAT_HTML_VERBOSE,
+				$this->newFormatterOptions( 'de' ),
+				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
+				'@^<div><kartographer-html/><div class="wikibase-kartographer-caption">55°45\'S, 37°15\'E</div></div>$@'
+			],
+			'coordinate kartographer preview html' => [
+				'GlobeCoordinate',
+				SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW,
+				$this->newFormatterOptions( 'de' ),
+				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
+				'@^<div><kartographer-preview-html/><div class="wikibase-kartographer-caption">55°45\'S, 37°15\'E</div></div>$@'
 			],
 
 			// Quantity

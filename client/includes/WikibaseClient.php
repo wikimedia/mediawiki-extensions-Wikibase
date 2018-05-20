@@ -17,6 +17,7 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
+use ExtensionRegistry;
 use ExternalUserNames;
 use Hooks;
 use Http;
@@ -27,6 +28,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
+use Parser;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
@@ -74,6 +76,7 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\ItemChange;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -270,11 +273,22 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
+		global $wgKartographerEnableMapFrame;
+
 		if ( $this->valueFormatterBuilders === null ) {
 			$entityTitleLookup = new ClientSiteLinkTitleLookup(
 				$this->getStore()->getSiteLinkLookup(),
 				$this->settings->getSetting( 'siteGlobalID' )
 			);
+
+			$kartographerEmbeddingHandler = null;
+			if (
+				ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
+				isset( $wgKartographerEnableMapFrame ) &&
+				$wgKartographerEnableMapFrame
+			) {
+				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
+			}
 
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 				$this->getContentLanguage(),
@@ -287,7 +301,8 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'sharedCacheDuration' ),
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
-				$entityTitleLookup
+				$entityTitleLookup,
+				$kartographerEmbeddingHandler
 			);
 		}
 
