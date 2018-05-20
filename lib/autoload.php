@@ -50,6 +50,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Formatters\\InterWikiLinkWikitextFormatter' => __DIR__ . '/includes/Formatters/InterWikiLinkWikitextFormatter.php',
 	'Wikibase\\Lib\\Formatters\\TypedValueFormatter' => __DIR__ . '/includes/Formatters/TypedValueFormatter.php',
 	'Wikibase\\Lib\\Formatters\\WikitextExternalIdentifierFormatter' => __DIR__ . '/includes/Formatters/WikitextExternalIdentifierFormatter.php',
+	'Wikibase\\Lib\\Formatters\\WikitextMonolingualTextFormatter' => __DIR__ . '/includes/Formatters/WikitextMonolingualTextFormatter.php',
 	'Wikibase\\Lib\\GlobeCoordinateDetailsFormatter' => __DIR__ . '/includes/Formatters/GlobeCoordinateDetailsFormatter.php',
 	'Wikibase\\Lib\\HtmlTimeFormatter' => __DIR__ . '/includes/Formatters/HtmlTimeFormatter.php',
 	'Wikibase\\Lib\\HtmlUrlFormatter' => __DIR__ . '/includes/Formatters/HtmlUrlFormatter.php',

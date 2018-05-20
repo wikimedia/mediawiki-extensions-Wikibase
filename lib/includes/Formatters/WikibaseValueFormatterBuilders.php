@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib;
 
-use DataValues\Geo\Formatters\LatLongFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
+use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use Language;
 use ValueFormatters\DecimalFormatter;
@@ -21,6 +21,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
+use Wikibase\Lib\Formatters\WikitextMonolingualTextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\Assert;
 
@@ -392,12 +393,14 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 *
-	 * @return MonolingualHtmlFormatter
+	 * @return ValueFormatter
 	 */
 	public function newMonolingualFormatter( $format ) {
 		// TODO: Add a wikitext formatter that shows the language name
 		if ( $this->isHtmlFormat( $format ) ) {
 			return new MonolingualHtmlFormatter( $this->languageNameLookup );
+		} elseif ( $format === SnakFormatter::FORMAT_WIKI ) {
+			return new WikitextMonolingualTextFormatter();
 		} else {
 			return $this->escapeValueFormatter( $format, new MonolingualTextFormatter() );
 		}
