@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dde24da_a23490ee",
+        "filename": "lib/includes/Formatters/WikitextMonolingualTextFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-20T15:16:44Z",
+      "side": 1,
+      "message": "Can you please escape this the same way? Just for security.",
+      "range": {
+        "startLine": 28,
+        "startChar": 26,
+        "endLine": 28,
+        "endChar": 51
+      },
+      "revId": "6610d93ce47af9faacf4cedcc7e517d251594e49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
