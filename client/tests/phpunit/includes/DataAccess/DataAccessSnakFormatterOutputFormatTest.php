@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
-use Language;
 use DataValues\DecimalValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
@@ -10,19 +9,20 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use Language;
 use PHPUnit4And6Compat;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Test\MockClientStore;
@@ -138,13 +138,6 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 				new PropertyValueSnak(
 					new PropertyId( 'P2' ),
 					new GlobeCoordinateValue( new LatLongValue( 12, 34 ), null )
-				)
-			],
-			'monolingualtext' => [
-				'a &#91;&#91;b&#93;&#93; c',
-				new PropertyValueSnak(
-					new PropertyId( 'P3' ),
-					new MonolingualTextValue( 'es', 'a [[b]] c' )
 				)
 			],
 			'quantity' => [
@@ -296,6 +289,13 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 					new StringValue( 'In data we trust' )
 				)
 			],
+			'monolingualtext' => [
+				'<span><span lang="es">a &#91;&#91;b&#93;&#93; c</span></span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P3' ),
+					new MonolingualTextValue( 'es', 'a [[b]] c' )
+				)
+			],
 		];
 
 		foreach ( $genericSnaks as $testName => $case ) {
@@ -357,7 +357,14 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 					new PropertyId( 'P12' ),
 					new StringValue( 'In data we trust' )
 				)
-			]
+			],
+			'monolingualtext' => [
+				'a &#91;&#91;b&#93;&#93; c',
+				new PropertyValueSnak(
+					new PropertyId( 'P3' ),
+					new MonolingualTextValue( 'es', 'a [[b]] c' )
+				)
+			],
 		];
 
 		return $cases + $this->getGenericSnaks();
