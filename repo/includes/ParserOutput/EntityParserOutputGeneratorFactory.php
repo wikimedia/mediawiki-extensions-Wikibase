@@ -5,12 +5,14 @@ namespace Wikibase\Repo\ParserOutput;
 use ExtensionRegistry;
 use Language;
 use PageImages;
+use Parser;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -200,6 +202,12 @@ class EntityParserOutputGeneratorFactory {
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,
 				$this->globeUris
+			);
+		}
+
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {
+			$updaters[] = new GlobeCoordinateKartographerDataUpdater(
+				new CachingKartographerEmbeddingHandler( new Parser )
 			);
 		}
 

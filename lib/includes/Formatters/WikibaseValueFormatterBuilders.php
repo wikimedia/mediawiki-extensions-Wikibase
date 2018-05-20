@@ -370,6 +370,14 @@ class WikibaseValueFormatterBuilders {
 	 * @return GlobeCoordinateFormatter
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
+		if ( $format === SnakFormatter::FORMAT_HTML_VERBOSE ) {
+			return new GlobeCoordinateKartographerFormatter(
+				$options,
+				$this->newGlobeCoordinateFormatter( SnakFormatter::FORMAT_HTML, $options ),
+				new CachingKartographerEmbeddingHandler( new \Parser ) // TODO: INJECT
+			);
+		}
+
 		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
 		// see https://phabricator.wikimedia.org/T102960
 		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
