@@ -22,6 +22,7 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
+use ExtensionRegistry;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
@@ -29,6 +30,7 @@ use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
+use Parser;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
@@ -117,6 +119,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -293,6 +296,11 @@ class WikibaseRepo {
 	 * @var EntityRdfBuilderFactory|null
 	 */
 	private $entityRdfBuilderFactory = null;
+
+	/**
+	 * @var CachingKartographerEmbeddingHandler|null
+	 */
+	private $kartographerEmbeddingHandler = null;
 
 	/**
 	 * @var WikibaseRepo|null
@@ -480,8 +488,25 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'sharedCacheDuration' ),
 			$this->getEntityLookup(),
 			$this->getEntityRevisionLookup(),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$this->getKartographerEmbeddingHandler()
 		);
+	}
+
+	/**
+	 * @return CachingKartographerEmbeddingHandler|null
+	 */
+	public function getKartographerEmbeddingHandler() {
+		global $wgKartographerEnableMapFrame;
+
+		$hasKartographer = ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' );
+		$mapFramesEnabled = isset( $wgKartographerEnableMapFrame ) && $wgKartographerEnableMapFrame;
+
+		if ( $this->kartographerEmbeddingHandler === null && $hasKartographer && $mapFramesEnabled ) {
+			$this->kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
+		}
+
+		return $this->kartographerEmbeddingHandler;
 	}
 
 	/**
@@ -1778,6 +1803,7 @@ class WikibaseRepo {
 				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
 				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
 			),
+			$this->getKartographerEmbeddingHandler(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )
