@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -90,6 +91,11 @@ class EntityParserOutputGeneratorFactory {
 	private $entityReferenceExtractorDelegator;
 
 	/**
+	 * @var CachingKartographerEmbeddingHandler|null
+	 */
+	private $kartographerEmbeddingHandler;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityInfoBuilder $entityInfoBuilder
@@ -100,6 +106,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param Serializer $entitySerializer
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
+	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
@@ -116,6 +123,7 @@ class EntityParserOutputGeneratorFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		Serializer $entitySerializer,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
+		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -133,6 +141,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
+		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 	}
 
 	/**
@@ -182,6 +191,8 @@ class EntityParserOutputGeneratorFactory {
 	 * @return EntityParserOutputDataUpdater[]
 	 */
 	private function getDataUpdaters() {
+		global $wgKartographerEnableMapFrame;
+
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
 		$updaters = [
@@ -213,6 +224,17 @@ class EntityParserOutputGeneratorFactory {
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Math' ) ) {
 			$updaters[] = new EntityStatementDataUpdaterAdapter(
 				new \MathDataUpdater( $propertyDataTypeMatcher )
+			);
+		}
+
+		$hasKartographer = ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' );
+		$mapFramesEnabled = isset( $wgKartographerEnableMapFrame ) && $wgKartographerEnableMapFrame;
+
+		if ( $this->kartographerEmbeddingHandler && $hasKartographer && $mapFramesEnabled ) {
+			$updaters[] = new EntityStatementDataUpdaterAdapter(
+				new GlobeCoordinateKartographerDataUpdater(
+					$this->kartographerEmbeddingHandler
+				)
 			);
 		}
 
