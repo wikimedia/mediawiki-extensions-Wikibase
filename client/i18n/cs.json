@@ -6,7 +6,8 @@
 			"Mormegil",
 			"Matěj Suchánek",
 			"Ilimanaq29",
-			"Guycn2"
+			"Guycn2",
+			"Walter Klosse"
 		]
 	},
 	"wikibase-client-desc": "Klient pro rozšíření Wikibase",
@@ -16,8 +17,8 @@
 	"apihelp-query+description-param-prefersource": "Který zdrojový popis preferovat:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Lokální popisy pomocí parserové funkce <code><nowiki>{{SHORTDESC:...}}</nowiki></code> ve wikitextu stránky.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Centrální popisy ze související položky {{grammar:2sg|{{WBREPONAME}}}}.",
-	"apihelp-query+description-example": "Získat popis stránky 'Londýn'.",
-	"apihelp-query+description-example-central": "Získejte popis pro stránku 'Londýn', upřednostňujíce hlavní popis, pokud existuje.",
+	"apihelp-query+description-example": "Získat popis stránky 'London'.",
+	"apihelp-query+description-example-central": "Získejte popis pro stránku 'London', upřednostňujíce hlavní popis, pokud existuje.",
 	"wikibase-after-page-move": "Vaše přejmenování by nyní mělo změnit mezijazykový odkaz [$1 v související položce {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",
 	"wikibase-after-page-move-queued": "Související [$1 položka {{grammar:2sg|{{WBREPONAME}}}}] bude automaticky aktualizována. Upozorňujeme, že se to nemusí stát okamžitě.",
 	"wikibase-after-page-delete": "Odkaz na tuto stránku by měl být odstraněn [$1 ze související položky {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",

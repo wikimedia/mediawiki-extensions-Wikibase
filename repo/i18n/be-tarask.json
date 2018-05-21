@@ -381,6 +381,7 @@
 	"wikibase-pageinfo-subscription-none": "Няма",
 	"wikibase-search-bad-entity-type": "Кепскі тып элемэнту: $1",
 	"wikibase-search-bad-profile-name": "Кепская назва профілю пошуку: $1",
+	"wikibase-search-namespace-mix": "Адначасовае выкарыстаньне прастораў назваў элемэнтаў і артыкулаў у цяперашні час не падтрымліваецца. Пошук будзе адбывацца толькі ў прасторы назваў элемэнтаў.",
 	"apihelp-wbavailablebadges-description": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-summary": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-example-1": "Запытвае ўсе даступныя элемэнты адзнакаў",
@@ -418,5 +419,6 @@
 	"apihelp-wbeditentity-example-2": "Стварыць новы элемэнт і вызначыць меткі для <var>de</var> і <var>en</var>",
 	"apihelp-wbeditentity-example-3": "Стварыць новую ўласьцівасьць, якая ўтрымлівае json-зьвесткі, вярнуць поўную структуру элемэнту",
 	"apihelp-wbeditentity-example-4": "Ачысьціць усе зьвесткі з элемэнту з ідэнтыфікатарам <samp>Q42</samp>",
-	"apihelp-wbeditentity-example-5": "Ачысьціць усе зьвесткі элемэнту з ідэнтыфікатарам <samp>Q42</samp> і вызначыць метку для <var>en</var>"
+	"apihelp-wbeditentity-example-5": "Ачысьціць усе зьвесткі элемэнту з ідэнтыфікатарам <samp>Q42</samp> і вызначыць метку для <var>en</var>",
+	"apihelp-wbeditentity-example-6": "Вызначае спасылку на сайт для <var>nowiki</var>, пры гэтым перазапісвае яе, калі яна існуе"
 }
