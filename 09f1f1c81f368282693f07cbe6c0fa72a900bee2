@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f803f66_cc2bb70b",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-05-22T16:25:54Z",
+      "side": 1,
+      "message": "Duplicated from __construct(), but that’s not a big deal IMO.",
+      "revId": "09f1f1c81f368282693f07cbe6c0fa72a900bee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
