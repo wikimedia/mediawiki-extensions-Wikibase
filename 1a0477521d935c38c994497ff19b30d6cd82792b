@@ -70,6 +70,24 @@
       "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24a84675_a8a4a56e",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-05-22T09:06:41Z",
+      "side": 1,
+      "message": "what do you mean by \"all qualifiers are indexed\", does it mean that qualifiers that have non discrete values (random text/quantity/dates/...) will get indexed in this format?",
+      "parentUuid": "6bd82b16_2fc3188f",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
