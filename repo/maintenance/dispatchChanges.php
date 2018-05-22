@@ -38,8 +38,16 @@ class DispatchChanges extends Maintenance {
 	 */
 	private $verbose;
 
+	/**
+	 * @var int
+	 */
+	private $defaultMaxTime;
+
 	public function __construct() {
 		parent::__construct();
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$this->defaultMaxTime = $wikibaseRepo->getSettings()->getSetting( 'dispatchMaxTime' );
 
 		$this->addDescription(
 			"Maintenance script that polls for Wikibase changes in the shared wb_changes table\n" .
@@ -56,7 +64,7 @@ class DispatchChanges extends Maintenance {
 		$this->addOption( 'max-passes', "The number of passes to perform. "
 					. "Default: 1 if --max-time is not set, infinite if it is.", false, true );
 		$this->addOption( 'max-time', "The number of seconds to run before exiting, "
-					. "if --max-passes is not reached. Default: infinite.", false, true );
+					. "if --max-passes is not reached. Default: " . $this->defaultMaxTime . ".", false, true );
 		$this->addOption( 'max-chunks', 'Maximum number of chunks or passes per wiki when '
 			. 'selecting pending changes. Default: 15', false, true );
 		$this->addOption( 'batch-size', 'Maximum number of changes to pass to a client at a time. '
@@ -221,19 +229,17 @@ class DispatchChanges extends Maintenance {
 			throw new MWException( "WikibaseLib has not been loaded." );
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$dispatchMaxTimeSetting = $wikibaseRepo->getSettings()->getSetting( 'dispatchMaxTime' );
-
-		if ( $dispatchMaxTimeSetting == 0 ) {
+		if ( $this->defaultMaxTime == 0 ) {
 			$this->log( 'dispatchMaxTime 0, so exiting early and not performing dispatch operations.' );
 			return;
 		}
 
-		$maxTime = (int)$this->getOption( 'max-time', $dispatchMaxTimeSetting );
+		$maxTime = (int)$this->getOption( 'max-time', $this->defaultMaxTime );
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 		$selectedClients = $this->getOption( 'client' );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$clientWikis = $this->getClientWikis(
 			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' )
