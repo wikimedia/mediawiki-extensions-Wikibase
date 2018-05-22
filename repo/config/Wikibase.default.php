@@ -39,7 +39,7 @@ return [
 	'localClientDatabases' => [],
 
 	// Settings for change dispatching
-	'dispatchMaxTime' => PHP_INT_MAX,
+	'dispatchMaxTime' => 60 * 60,
 	'dispatchBatchChunkFactor' => 3,
 	'dispatchBatchCacheFactor' => 3,
 	'dispatchDefaultBatchSize' => 1000,
