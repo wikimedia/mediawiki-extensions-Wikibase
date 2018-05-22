@@ -88,6 +88,24 @@
       "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74fe6271_20f6ef2a",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-05-22T09:14:24Z",
+      "side": 1,
+      "message": "No - I just mean that there\u0027s not a whitelist for qualifiers. In order for a qualifier to get indexed it must have a callback set up in WikibaseRepo.datatypes.php (\u0027search-index-data-formatter-callback\u0027) to transform it to a string value before writing to the index. ATM the only callbacks set up are for EntityIdValue and StringValue values",
+      "parentUuid": "24a84675_a8a4a56e",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
