@@ -106,6 +106,24 @@
       "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b5ad468_a4dee1e6",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-05-22T09:22:38Z",
+      "side": 1,
+      "message": "ok, do we know what\u0027s behind StringValue?\nThe only thing I\u0027m concerned about is that we use the lexicon to store data that will never be \"searchable\" because too specific. I.e. will inscriptions (P1684) be considered a StringValue qualifier?",
+      "parentUuid": "74fe6271_20f6ef2a",
+      "revId": "1a0477521d935c38c994497ff19b30d6cd82792b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
