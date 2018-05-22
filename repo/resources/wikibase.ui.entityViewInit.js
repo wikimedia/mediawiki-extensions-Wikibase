@@ -59,7 +59,9 @@
 	 * @throws {Error} if no widget to render the entity exists.
 	 */
 	function createEntityView( entity, $entityview ) {
-		var repoConfig = mw.config.get( 'wbRepo' ),
+		var currentRevision, revisionStore, entityChangersFactory,
+			viewFactoryArguments, ViewFactoryFactory, viewFactory, entityView,
+			repoConfig = mw.config.get( 'wbRepo' ),
 			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
 			repoApi = new wb.api.RepoApi( mwApi ),
@@ -79,51 +81,64 @@
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
-			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
-			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
-				repoApi,
-				revisionStore,
-				entity,
-				function ( hookName ) {
-					var hook = mw.hook( hookName );
-					hook.fire.apply( hook, Array.prototype.slice.call( arguments, 1 ) );
-				}
-			),
-			viewFactoryArguments = [
-				toolbarFactory,
-				entityChangersFactory,
-				structureEditorFactory,
-				contentLanguages,
-				dataTypeStore,
-				new wb.entityIdFormatter.CachingEntityIdHtmlFormatter(
-					new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( entityIdParser, htmlDataValueEntityIdFormatter )
-				),
-				new wb.entityIdFormatter.CachingEntityIdPlainFormatter(
-					new wb.entityIdFormatter.DataValueBasedEntityIdPlainFormatter( entityIdParser, plaintextDataValueEntityIdFormatter )
-				),
-				entityStore,
-				getExpertsStore( dataTypeStore ),
-				formatterFactory,
-				{
-					getMessage: function ( key, params ) {
-						return mw.msg.apply( mw, [ key ].concat( params ) );
-					}
-				},
-				parserStore,
-				userLanguages,
-				repoApiUrl,
-				mw.config.get( 'wbGeoShapeStorageApiEndpoint' ),
-				mw.config.get( 'wbTabularDataStorageApiEndpoint' )
-			],
 			startEditingCallback = function () {
 				return $.Deferred().resolve().promise();
 			},
 			entityNamespace = entity.getType(),
-			ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
-				&& wb[ entityNamespace ].view.ViewFactoryFactory
-				|| wb.view.ViewFactoryFactory,
-			viewFactory = ( new ViewFactoryFactory() ).getViewFactory( isEditable(), viewFactoryArguments ),
-			entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
+			wbCurRev = mw.config.get( 'wbCurrentRevision' );
+
+		if ( wbCurRev === null ) {
+			currentRevision = mw.config.get( 'wgCurRevisionId' );
+		} else {
+			currentRevision = wbCurRev;
+		}
+
+		revisionStore = new wb.RevisionStore( currentRevision );
+
+		entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
+			repoApi,
+			revisionStore,
+			entity,
+			function ( hookName ) {
+				var hook = mw.hook( hookName );
+				hook.fire.apply( hook, Array.prototype.slice.call( arguments, 1 ) );
+			}
+		);
+
+		viewFactoryArguments = [
+			toolbarFactory,
+			entityChangersFactory,
+			structureEditorFactory,
+			contentLanguages,
+			dataTypeStore,
+			new wb.entityIdFormatter.CachingEntityIdHtmlFormatter(
+				new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( entityIdParser, htmlDataValueEntityIdFormatter )
+			),
+			new wb.entityIdFormatter.CachingEntityIdPlainFormatter(
+				new wb.entityIdFormatter.DataValueBasedEntityIdPlainFormatter( entityIdParser, plaintextDataValueEntityIdFormatter )
+			),
+			entityStore,
+			getExpertsStore( dataTypeStore ),
+			formatterFactory,
+			{
+				getMessage: function ( key, params ) {
+					return mw.msg.apply( mw, [ key ].concat( params ) );
+				}
+			},
+			parserStore,
+			userLanguages,
+			repoApiUrl,
+			mw.config.get( 'wbGeoShapeStorageApiEndpoint' ),
+			mw.config.get( 'wbTabularDataStorageApiEndpoint' )
+		];
+
+		ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
+			&& wb[ entityNamespace ].view.ViewFactoryFactory
+			|| wb.view.ViewFactoryFactory;
+
+		viewFactory = ( new ViewFactoryFactory() ).getViewFactory( isEditable(), viewFactoryArguments );
+
+		entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
 
 		return entityView.widgetName;
 	}
