@@ -16,6 +16,9 @@ return [
 	// This setting is used to enable entity types.
 	'entityNamespaces' => [],
 
+	// List of entity types that (temporarily) can not be changed; identifiers per EntityDocument::getType()
+	'readOnlyEntityTypes' => [],
+
 	// See StatementGrouperBuilder for an example.
 	'statementSections' => [],
 

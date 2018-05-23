@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use ReadOnlyError;
 use RuntimeException;
@@ -20,6 +21,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -594,12 +596,30 @@ class EditEntity {
 	}
 
 	/**
+	 * @param EntityDocument $entity
+	 *
 	 * @throws ReadOnlyError
 	 */
-	private function checkReadOnly() {
+	private function checkReadOnly( EntityDocument $entity ) {
 		if ( wfReadOnly() ) {
 			throw new ReadOnlyError();
 		}
+		if ( $this->entityTypeIsReadOnly( $entity ) ) {
+			MediaWikiServices::getInstance()->getConfiguredReadOnlyMode()->setReason(
+				'Editing of entity type: ' . $entity->getType() . ' is currently disabled. It will be enabled soon.'
+			);
+			throw new ReadOnlyError();
+		}
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 * @return bool
+	 */
+	private function entityTypeIsReadOnly( EntityDocument $entity ) {
+		$readOnlyTypes = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'readOnlyEntityTypes' );
+
+		return in_array( $entity->getType(), $readOnlyTypes );
 	}
 
 	/**
@@ -628,7 +648,7 @@ class EditEntity {
 	 * @see    EntityStore::saveEntity
 	 */
 	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null ) {
-		$this->checkReadOnly();
+		$this->checkReadOnly( $newEntity );
 		$this->checkEntityId( $newEntity->getId() );
 
 		$watch = $this->getDesiredWatchState( $watch );
