@@ -47,14 +47,18 @@
 		} );
 
 		function updatePlaceholders( languageCode ) {
-			var autonym = autonyms[ languageCode ];
+			var autonym = autonyms[ languageCode ],
+				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
 
 			if ( typeof autonym !== 'string' ) {
 				autonym = '[' + languageCode + ']';
 			}
 
 			fields.forEach( function ( field ) {
-				field.$input.attr( 'placeholder', mw.msg( field.msgAware, autonym ) );
+				field.$input.prop( 'placeholder', mw.msg( field.msgAware, autonym ) );
+				if ( langDir ) {
+					field.$input.prop( 'dir', langDir );
+				}
 			} );
 		}
 
