@@ -43,7 +43,14 @@ abstract class DumpEntities extends Maintenance {
 		$this->addDescription( 'Generate a JSON dump from entities in the repository.' );
 
 		$this->addOption( 'list-file', "A file containing one entity ID per line.", false, true );
-		$this->addOption( 'entity-type', "Only dump this kind of entity, e.g. `item` or `property`.", false, true );
+		$this->addOption(
+			'entity-type',
+			"Only dump this kind of entity, e.g. `item` or `property`. Can be given multiple times.",
+			false,
+			true,
+			false,
+			/* $multiOccurrence */ true
+		);
 		$this->addOption( 'sharding-factor', "The number of shards (must be >= 1)", false, true );
 		$this->addOption( 'shard', "The shard to output (must be less than the sharding-factor)", false, true );
 		$this->addOption( 'batch-size', "The number of entities per processing batch", false, true );
@@ -135,7 +142,7 @@ abstract class DumpEntities extends Maintenance {
 	 */
 	public function execute() {
 		//TODO: more validation for options
-		$entityType = $this->getOption( 'entity-type' );
+		$entityTypes = $this->getOption( 'entity-type' );
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );
@@ -160,8 +167,8 @@ abstract class DumpEntities extends Maintenance {
 			$this->logMessage( "Dumping entities listed in " . $this->getOption( 'list-file' ) );
 		}
 
-		if ( $entityType ) {
-			$this->logMessage( "Dumping entities of type $entityType" );
+		if ( $entityTypes ) {
+			$this->logMessage( 'Dumping entities of type ' . join( ', ', $entityTypes ) );
 		}
 
 		if ( $shardingFactor ) {
@@ -181,10 +188,10 @@ abstract class DumpEntities extends Maintenance {
 		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,
 		//      but filtering in the dumper is needed when working from a list file.
 		$dumper->setShardingFilter( $shardingFactor, $shard );
-		$dumper->setEntityTypeFilter( $entityType );
+		$dumper->setEntityTypesFilter( $entityTypes );
 		$dumper->setBatchSize( $batchSize );
 
-		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
+		$idStream = $this->makeIdStream( $entityTypes, $exceptionReporter );
 		\Wikimedia\suppressWarnings();
 		$dumper->generateDump( $idStream );
 		\Wikimedia\restoreWarnings();
@@ -198,18 +205,18 @@ abstract class DumpEntities extends Maintenance {
 	}
 
 	/**
-	 * @param null|string $entityType
+	 * @param null|string[] $entityTypes
 	 * @param ExceptionHandler|null $exceptionReporter
 	 *
 	 * @return EntityIdReader|SqlEntityIdPager a stream of EntityId objects
 	 */
-	private function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdStream( array $entityTypes = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
 			$stream = $this->makeIdFileStream( $listFile, $exceptionReporter );
 		} else {
-			$stream = $this->makeIdQueryStream( $entityType );
+			$stream = $this->makeIdQueryStream( $entityTypes );
 		}
 
 		return $stream;
@@ -238,12 +245,19 @@ abstract class DumpEntities extends Maintenance {
 	}
 
 	/**
-	 * @param string|null $entityType
+	 * @param string[]|null $entityTypes
 	 *
 	 * @return SqlEntityIdPager
 	 */
-	private function makeIdQueryStream( $entityType ) {
-		$sqlEntityIdPager = $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityType, $this->getRedirectMode() );
+	private function makeIdQueryStream( array $entityTypes = null ) {
+		if ( is_array( $entityTypes ) && count( $entityTypes ) === 1 ) {
+			$entityTypes = $entityTypes[0];
+		} elseif ( is_array( $entityTypes ) ) {
+			// Already filtered by DumpGenerator::setEntityTypesFilter
+			// TODO: SqlEntityIdPager should support filtering by more than one type (more efficient than in DumpGenerator)
+			$entityTypes = null;
+		}
+		$sqlEntityIdPager = $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityTypes, $this->getRedirectMode() );
 
 		$firstPageId = $this->getOption( 'first-page-id', null );
 		if ( $firstPageId ) {

@@ -61,9 +61,9 @@ abstract class DumpGenerator {
 	protected $entityPrefetcher;
 
 	/**
-	 * @var string
+	 * @var int[] String to int map of types to include.
 	 */
-	protected $entityType;
+	protected $entityTypes;
 
 	/**
 	 * Entity count limit - dump will generate this many
@@ -152,12 +152,15 @@ abstract class DumpGenerator {
 	}
 
 	/**
-	 * Set the entity type to be included in the output.
+	 * Set the entity types to be included in the output.
 	 *
-	 * @param string|null $type The desired type (use null for any type).
+	 * @param string[]|null $types The desired types (use null for any type).
 	 */
-	public function setEntityTypeFilter( $type ) {
-		$this->entityType = $type;
+	public function setEntityTypesFilter( $types ) {
+		if ( is_array( $types ) ) {
+			$types = array_flip( $types );
+		}
+		$this->entityTypes = $types;
 	}
 
 	private function idMatchesFilters( EntityId $entityId ) {
@@ -179,7 +182,7 @@ abstract class DumpGenerator {
 	}
 
 	private function idMatchesType( EntityId $entityId ) {
-		return $this->entityType === null || ( $entityId->getEntityType() === $this->entityType );
+		return $this->entityTypes === null || ( array_key_exists( $entityId->getEntityType(), $this->entityTypes ) );
 	}
 
 	/**
