@@ -402,6 +402,7 @@
 	"wikibase-pageinfo-subscription-none": "无",
 	"wikibase-search-bad-entity-type": "错误实体类型：$1",
 	"wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
+	"wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。",
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-summary": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-example-1": "查询所有可用的徽章项",

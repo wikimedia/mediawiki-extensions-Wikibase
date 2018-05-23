@@ -88,6 +88,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "La til og fjerna {{PLURAL:$1|tilleggsnamn}} for [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "La til {{PLURAL:$1|tilleggsnamn}} for [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "Fjerna {{PLURAL:$1|tilleggsnamn}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-update": "Oppdaterte {{PLURAL:$1|tilleggsnamn}} [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Endra merkelapp, skildring og tilleggsnamn for [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "La til lenkje til [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "La til lenkje med teikn til [$2]",

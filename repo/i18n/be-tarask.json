@@ -421,5 +421,6 @@
 	"apihelp-wbeditentity-example-4": "Ачысьціць усе зьвесткі з элемэнту з ідэнтыфікатарам <samp>Q42</samp>",
 	"apihelp-wbeditentity-example-5": "Ачысьціць усе зьвесткі элемэнту з ідэнтыфікатарам <samp>Q42</samp> і вызначыць метку для <var>en</var>",
 	"apihelp-wbeditentity-example-6": "Вызначае спасылку на сайт для <var>nowiki</var>, пры гэтым перазапісвае яе, калі яна існуе",
-	"apihelp-wbeditentity-example-7": "Вызначае апісаньне для <var>nb</var>, пры гэтым перазапісвае яго, калі яно існуе"
+	"apihelp-wbeditentity-example-7": "Вызначае апісаньне для <var>nb</var>, пры гэтым перазапісвае яго, калі яно існуе",
+	"apihelp-wbeditentity-example-8": "Стварае новае сьцьверджаньне ў элемэнце для ўласьцівасьці <samp>P56</samp> і з значэньнем «<var>ExampleString</var>»"
 }
