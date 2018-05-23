@@ -16,6 +16,8 @@ return [
 	// This setting is used to enable entity types.
 	'entityNamespaces' => [],
 
+	'readOnlyEntityTypes' => [],
+
 	// See StatementGrouperBuilder for an example.
 	'statementSections' => [],
 

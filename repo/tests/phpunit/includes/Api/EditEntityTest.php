@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use MediaWiki\MediaWikiServices;
+use ReadOnlyError;
 use User;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
@@ -1111,6 +1113,44 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		$expectedException = [ 'type' => ApiUsageException::class, 'code' => 'editconflict' ];
 		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
+	public function testGivenReadOnlyType_errorIsShownAndNoEditHappened() {
+		$oldReason = MediaWikiServices::getInstance()->getConfiguredReadOnlyMode()->getReason();
+		$oldSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+			'readOnlyEntityTypes'
+		);
+
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+			'readOnlyEntityTypes',
+			[ 'item' ]
+		);
+
+		$params = [
+			'action' => 'wbeditentity',
+			'data' => json_encode( [
+				'labels' => [ 'en' => [ 'value' => 'fooooo', 'language' => 'en' ] ]
+			] ),
+			'new' => 'item'
+		];
+
+		try {
+			$this->doApiRequestWithToken( $params );
+			$this->fail( 'Read only error did not happen but should' );
+		} catch ( ReadOnlyError $e ) {
+			$message = $e->getMessageObject();
+			$this->assertEquals( 'readonlytext', $message->getKey() );
+			$this->assertEquals(
+				[ 'Editing of entity type: item is currently disabled. It will be enabled soon.' ],
+				$message->getParams()
+			);
+		}
+
+		MediaWikiServices::getInstance()->getConfiguredReadOnlyMode()->setReason( $oldReason );
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+			'readOnlyEntityTypes',
+			$oldSetting
+		);
 	}
 
 	/**
