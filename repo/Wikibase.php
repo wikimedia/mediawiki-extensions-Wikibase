@@ -747,7 +747,8 @@ call_user_func( function() {
 			$wikibaseRepo->getStore()->getEntityLookup()
 		);
 	};
-	$wgSpecialPages['ItemDisambiguation'] = function() {
+	// FIXME: Hot Fix for T195520
+	/*$wgSpecialPages['ItemDisambiguation'] = function() {
 		global $wgLang;
 
 		$languageCode = $wgLang->getCode();
@@ -764,7 +765,7 @@ call_user_func( function() {
 			$itemDisambiguation,
 			$wikibaseRepo->newTermSearchInteractor( $languageCode )
 		);
-	};
+	};*/
 	$wgSpecialPages['ItemsWithoutSitelinks']
 		= Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks::class;
 	$wgSpecialPages['SetLabel'] = function() {
