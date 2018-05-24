@@ -39,7 +39,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	/**
 	 * @var array List of properties to index, as a flipped array with the property IDs as keys.
 	 */
-	private $propertyIds;
+	protected $propertyIds;
 
 	/**
 	 * @var string[]
@@ -49,7 +49,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	/**
 	 * @var callable[]
 	 */
-	private $searchIndexDataFormatters;
+	protected $searchIndexDataFormatters;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -135,15 +135,15 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	}
 
 	/**
-	 * Return the snak in the format '<property id>=<value>'
+	 * Return the snak as an array with keys propertyId and value
 	 *
-	 * e.g. P180=Q537, P240=1234567
+	 * e.g. [ 'propertyId' => 'P180', 'value' => 'Q999' ]
 	 *
 	 * @param Snak $snak
-	 * @return null|string
+	 * @return array
 	 * @throws MWException
 	 */
-	private function getSnakAsString( Snak $snak ) {
+	protected function getSnakAsPropertyIdAndValue( Snak $snak ) {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
 			return null;
 		}
@@ -167,7 +167,19 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 			return null;
 		}
 
-		return $snak->getPropertyId()->getSerialization() . self::STATEMENT_SEPARATOR . $value;
+		return [
+			'propertyId' => $snak->getPropertyId()->getSerialization(),
+			'value' => $value,
+		];
+	}
+
+	protected function getSnakAsString( Snak $snak ) {
+		$snakAsPropertyIdAndValue = $this->getSnakAsPropertyIdAndValue( $snak );
+		if ( is_null( $snakAsPropertyIdAndValue ) ) {
+			return null;
+		}
+		return $snakAsPropertyIdAndValue[ 'propertyId' ] . self::STATEMENT_SEPARATOR .
+			   $snakAsPropertyIdAndValue[ 'value' ];
 	}
 
 	/**
@@ -181,7 +193,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @return null|string
 	 * @throws MWException
 	 */
-	private function getWhitelistedSnakAsString( Snak $snak, $guid ) {
+	protected function getWhitelistedSnakAsString( Snak $snak, $guid ) {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
 			return null;
 		}
@@ -215,7 +227,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @param Snak $snak
 	 * @return bool
 	 */
-	private function snakHasKnownValue( Snak $snak ) {
+	protected function snakHasKnownValue( Snak $snak ) {
 		return ( $snak instanceof PropertyValueSnak );
 	}
 
