@@ -34,6 +34,41 @@
       "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef179e59_864883d8",
+        "filename": "lib/includes/Formatters/MonolingualWikitextFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-24T18:59:31Z",
+      "side": 1,
+      "message": "It indeed does… also escapes single quotes fwiw.",
+      "parentUuid": "2467f013_231c55e7",
+      "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df2b7ac_418a5e4e",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-24T18:59:31Z",
+      "side": 1,
+      "message": "Not wrapping this via escapeValueFormatter is fine here, but was a little unintuitive to see for me.",
+      "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
