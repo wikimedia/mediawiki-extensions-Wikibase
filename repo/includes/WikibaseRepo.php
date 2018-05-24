@@ -1514,7 +1514,8 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'searchIndexProperties' ),
 			$this->settings->getSetting( 'searchIndexTypes' ),
 			$this->settings->getSetting( 'searchIndexPropertiesExclude' ),
-			$this->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks()
+			$this->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
+			$this->settings->getSetting( 'searchIndexQualifierPropertiesForQuantity' )
 		);
 	}
 
