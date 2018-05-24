@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9d3982af_746205f4",
+        "filename": "repo/includes/Dumpers/DumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-24T13:08:02Z",
+      "side": 1,
+      "message": "does the integer value mean anything here?\n\nCan\u0027t we just have a string array with entity types?\nIf the point of having a string-index map is performance, I\u0027d argue that differences when there is only a handful of values are ignorable. Would be happy to be proved wrong of course.",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "b9d0465ce37fb78d706cca6ec189f10296614705",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15478562_90e7c130",
         "filename": "repo/maintenance/DumpEntities.php",
         "patchSetId": 1
