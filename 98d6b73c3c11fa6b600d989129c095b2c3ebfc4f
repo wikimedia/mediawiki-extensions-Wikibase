@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15953f99_30e907e3",
+        "filename": "lib/includes/Formatters/MonolingualWikitextFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-05-24T17:29:21Z",
+      "side": 1,
+      "message": "Is it absolutely safe to assume that $languageCode cannot contain quotes? If not, this should probably also call htmlspecialchars.\n\nIf we assume that it is safe, why is there a need to call wfEscapeWikiText? The chance to see square brackets or apostrophes in language codes isn\u0027t high either.",
+      "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
