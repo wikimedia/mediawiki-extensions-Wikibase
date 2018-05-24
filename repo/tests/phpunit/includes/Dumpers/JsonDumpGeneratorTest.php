@@ -290,11 +290,11 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider typeFilterProvider
 	 */
-	public function testTypeFilterDump( array $ids, $type, array $expectedIds ) {
+	public function testTypeFilterDump( array $ids, array $types = null, array $expectedIds ) {
 		$dumper = $this->newDumpGenerator( $ids );
 		$pager = $this->makeIdPager( $ids );
 
-		$dumper->setEntityTypeFilter( $type );
+		$dumper->setEntityTypesFilter( $types );
 
 		ob_start();
 		$dumper->generateDump( $pager );
@@ -342,8 +342,9 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'empty' => [ [], null, [] ],
 			'some entities' => [ [ $p10, $q30 ], null, [ $p10, $q30 ] ],
-			'just properties' => [ [ $p10, $q30 ], Property::ENTITY_TYPE, [ $p10 ] ],
-			'no matches' => [ [ $p10 ], Item::ENTITY_TYPE, [] ],
+			'just properties' => [ [ $p10, $q30 ], [ Property::ENTITY_TYPE ], [ $p10 ] ],
+			'no matches' => [ [ $p10 ], [ Item::ENTITY_TYPE ], [] ],
+			'two types' => [ [ $p10, $q30 ], [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ], [ $p10, $q30 ] ],
 		];
 	}
 
