@@ -463,7 +463,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$conditions = [
-			'term_entity_type' => $entityId->getEntityType(),
 			'term_full_entity_id' => $entityId->getSerialization(),
 		];
 
@@ -559,26 +558,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return [];
 		}
 
-		$entityType = null;
-		$numericIds = [];
 		$fullIds = [];
 
 		foreach ( $entityIds as $id ) {
-			if ( $entityType === null ) {
-				$entityType = $id->getEntityType();
-			} elseif ( $id->getEntityType() !== $entityType ) {
-				throw new MWException( "ID $id does not refer to an entity of type $entityType" );
-			}
-
-			$this->assertIsNumericEntityId( $id );
-			/** @var Int32EntityId $id */
-			$numericIds[] = $id->getNumericId();
 			$fullIds[] = $id->getLocalPart();
-
 		}
 
 		$conditions = [
-			'term_entity_type' => $entityType,
 			'term_full_entity_id' => $fullIds,
 		];
 
@@ -656,7 +642,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		$fields = [
-			'term_entity_type',
 			'term_type',
 			'term_language',
 			'term_text',
@@ -745,7 +730,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				$row->term_text .
 				$row->term_type .
 				$row->term_language .
-				$row->term_entity_type .
 				$row->term_full_entity_id;
 
 			$rowMap[$key] = $row;
