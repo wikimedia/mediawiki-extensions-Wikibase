@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15478562_90e7c130",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-24T12:49:19Z",
+      "side": 1,
+      "message": "This is confusing, if $entityTypes is null, it passes null to sqlEntityIdPager, if it has one entity type, we pass the string but if it\u0027s more than that, we pass null again. it\u0027s too complex for a method but it seems there is no way around it.",
+      "range": {
+        "startLine": 253,
+        "startChar": 7,
+        "endLine": 253,
+        "endChar": 31
+      },
+      "revId": "b9d0465ce37fb78d706cca6ec189f10296614705",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
