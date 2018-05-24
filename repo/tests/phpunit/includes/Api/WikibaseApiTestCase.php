@@ -30,6 +30,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 */
 	private static $wbTestUser = null;
 
+	private $backupRepoSettings = [];
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -46,6 +48,43 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 			$isSetup = true;
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function setMwGlobals( $pairs, $value = null ) {
+		parent::setMwGlobals( $pairs, $value );
+
+		if ( is_string( $pairs ) ) {
+			$pairs = [ $pairs => $value ];
+		}
+
+		if ( !isset( $pairs['wgWBRepoSettings'] ) ) {
+			return;
+		}
+
+		$repoSettings = WikibaseRepo::getDefaultInstance()->getSettings();
+		foreach ( $pairs['wgWBRepoSettings'] as $settingName => $newSettingValue ) {
+			$existingSettingValue = $repoSettings->getSetting( $settingName );
+			if ( $existingSettingValue === $newSettingValue ) {
+				continue;
+			}
+			$this->backupRepoSettings[$settingName] = $existingSettingValue;
+			$repoSettings->setSetting( $settingName, $newSettingValue );
+		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function tearDown() {
+		$repoSettings = WikibaseRepo::getDefaultInstance()->getSettings();
+		foreach ( $this->backupRepoSettings as $settingName => $settingValue ) {
+			$repoSettings->setSetting( $settingName, $settingValue );
+		}
+
+		parent::tearDown();
 	}
 
 	protected function createTestUser() {
