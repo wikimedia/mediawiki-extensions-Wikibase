@@ -272,6 +272,8 @@ return [
 	'searchIndexTypes' => [],
 	// List of properties to be excluded from indexing
 	'searchIndexPropertiesExclude' => [],
+	// List of properties that, if in a qualifier, will be used for indexing quantities
+	'searchIndexQualifierPropertiesForQuantity' => [],
 
 	// List of entity types that rdf export is disabled
 	'disabledRdfExportEntityTypes' => [],

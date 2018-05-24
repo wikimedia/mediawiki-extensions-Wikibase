@@ -83,6 +83,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;searchIndexProperties: Array of properties (by ID string) that should be included in the "statement_keywords" field of the search index. For now, only relevant when Cirrus search is enabled.
 ;searchIndexTypes: Array of auto-indexed type names. Statements with properties of this type will automatically be indexed in the "statement_keywords" field. For now, only relevant when Cirrus search is enabled.
 ;searchIndexPropertiesExclude: Array of properties (by ID string) that should be excluded from the "statement_keywords" field. This takes priority over other searchIndex* settings. For now, only relevant when Cirrus search is enabled.
+;searchIndexQualifierPropertiesForQuantity: Array of properties (by ID string) that, if used in a qualifier, will be used to write a value to the "statment_quantity" field. For now, only relevant when Cirrus search is enabled.
 ;disabledRdfExportEntityTypes: Array of entity types that RDF export needs to be disabled for them, default: empty array, meaning nothing is disabled.
 ;dispatchLagToMaxLagFactor: If set to a positive number, the median dispatch lag (in seconds) will be divided by this number and passed to core like database lag (see the API maxlag parameter). Defaults to 0 (disabled).
 ;dumpDBDefaultGroup: Default database group to use in dump maintenance scripts, defaults to "dump". Set to <code>null</code> to use the value from <code>$wgDBDefaultGroup</code>.

@@ -281,6 +281,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\StatementCountField' => __DIR__ . '/includes/Search/Elastic/Fields/StatementCountField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\StatementProviderFieldDefinitions' => __DIR__ . '/includes/Search/Elastic/Fields/StatementProviderFieldDefinitions.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\StatementsField' => __DIR__ . '/includes/Search/Elastic/Fields/StatementsField.php',
+	'Wikibase\\Repo\\Search\\Elastic\\Fields\\StatementQuantityField' => __DIR__ . '/includes/Search/Elastic/Fields/StatementQuantityField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\TermIndexField' => __DIR__ . '/includes/Search/Elastic/Fields/TermIndexField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\WikibaseIndexField' => __DIR__ . '/includes/Search/Elastic/Fields/WikibaseIndexField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\WikibaseNumericField' => __DIR__ . '/includes/Search/Elastic/Fields/WikibaseNumericField.php',
