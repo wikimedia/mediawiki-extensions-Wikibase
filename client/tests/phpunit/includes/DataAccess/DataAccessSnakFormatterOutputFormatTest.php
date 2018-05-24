@@ -140,13 +140,6 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 					new GlobeCoordinateValue( new LatLongValue( 12, 34 ), null )
 				)
 			],
-			'monolingualtext' => [
-				'a &#91;&#91;b&#93;&#93; c',
-				new PropertyValueSnak(
-					new PropertyId( 'P3' ),
-					new MonolingualTextValue( 'es', 'a [[b]] c' )
-				)
-			],
 			'quantity' => [
 				'42±0 a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
@@ -261,6 +254,13 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 		$namespacedFileName = Title::newFromText( 'A_file name.jpg', NS_FILE )->getPrefixedText();
 
 		$cases = [
+			'monolingualtext' => [
+				'<span><span lang="es">a &#91;&#91;b&#93;&#93; c</span></span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P3' ),
+					new MonolingualTextValue( 'es', 'a [[b]] c' )
+				)
+			],
 			'commonsMedia' => [
 				'<span>[[' . $namespacedFileName . '|frameless]]</span>',
 				new PropertyValueSnak(
@@ -323,6 +323,13 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 
 	public function escapedPlainTextSnakProvider() {
 		$cases = [
+			'monolingualtext' => [
+				'a &#91;&#91;b&#93;&#93; c',
+				new PropertyValueSnak(
+					new PropertyId( 'P3' ),
+					new MonolingualTextValue( 'es', 'a [[b]] c' )
+				)
+			],
 			'commonsMedia' => [
 				'A_file name.jpg',
 				new PropertyValueSnak(

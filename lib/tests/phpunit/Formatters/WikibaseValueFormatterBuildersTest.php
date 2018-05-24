@@ -429,7 +429,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions( 'en' ),
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				'/^.*lang="de".*?>Hallo Welt<.*Deutsch.*$/'
+				'/ lang="de".*>Hallo Welt<.*Deutsch/'
+			],
+			'wikitext monolingual text' => [
+				'Monolingual',
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions( 'en' ),
+				new MonolingualTextValue( 'de', 'Hallo Welt' ),
+				'/ lang="de".*>Hallo Welt</'
 			],
 		];
 	}
