@@ -642,10 +642,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityType = null,
 		array $options = []
 	) {
-		// Things be broken
-		wfDebugLog( 'AdHocDebug', __CLASS__ . wfGetAllCallers( false ) );
-		return [];
-
 		if ( empty( $criteria ) ) {
 			return [];
 		}
@@ -667,13 +663,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_weight',
 			'term_full_entity_id'
 		];
-		$rows = $dbr->select(
+		$query = $dbr->selectSQLText(
 			$this->tableName,
 			$fields,
 			[ $dbr->makeList( $termConditions, LIST_OR ) ],
 			__METHOD__,
 			$queryOptions
 		);
+
+		// Things be broken! T195520
+		wfDebugLog( 'AdHocDebug', __CLASS__ . ' ### ' . $query . ' ### ' . wfGetAllCallers( false ) );
+		return [];
+
 		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] && $this->useSearchFields ) {
 			$rows = $this->getRowsOrderedByWeight( $rows );
 		}
