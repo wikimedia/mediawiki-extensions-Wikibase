@@ -642,6 +642,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityType = null,
 		array $options = []
 	) {
+		// Things be broken
+		wfDebugLog( 'TermSqlIndex_getMatchingTerms', __CLASS__ . wfGetAllCallers( false ) );
+		return [];
+
 		if ( empty( $criteria ) ) {
 			return [];
 		}
