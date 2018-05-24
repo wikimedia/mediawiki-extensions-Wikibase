@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use MediaWiki\MediaWikiServices;
 use ReadOnlyError;
 use User;
 use ApiUsageException;
@@ -1116,7 +1115,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	public function testGivenReadOnlyType_errorIsShownAndNoEditHappened() {
-		$oldReason = MediaWikiServices::getInstance()->getConfiguredReadOnlyMode()->getReason();
+		$this->overrideMwServices();
 		$oldSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
 			'readOnlyEntityTypes'
 		);
@@ -1146,7 +1145,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			);
 		}
 
-		MediaWikiServices::getInstance()->getConfiguredReadOnlyMode()->setReason( $oldReason );
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
 			'readOnlyEntityTypes',
 			$oldSetting
