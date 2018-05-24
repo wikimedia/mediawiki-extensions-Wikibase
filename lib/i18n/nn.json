@@ -75,6 +75,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-property-not-found": "Fann ikkje eigenskapen $1, kan ikkje avgjera kva datatype som skal nyttast.",
 	"wikibase-entity-summary-wbsetitem": "Oppretta eit nytt element",
+	"wikibase-entity-summary-wbcreate-new": "Oppretta ei ny eining",
 	"wikibase-entity-summary-wbcreateredirect": "Omdirigert til $4",
 	"wikibase-entity-summary-wbsetreference": "Sette ei kjelde",
 	"wikibase-entity-summary-wbsetreference-add": "La til referanse for utsegn",

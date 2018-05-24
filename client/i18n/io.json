@@ -9,6 +9,7 @@
 	"wikibase-after-page-delete": "Omna ligili ad ica pagino mustis modifikesir a la [nova asociita pagino $1, en {{WBREPONAME}}], e nula pagino existanta mustas havar ligili a la pagino efacinda. Voluntez verifikar se to fakte eventas.",
 	"wikibase-comment-linked": "Artiklo {{WBREPONAME}} ligesis ad ica pagino.",
 	"wikibase-comment-update": "{{WBREPONAME}} artiklo chanjita",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|modifikuro|modifikuri}}",
 	"wikibase-dataitem": "Redakto en {{WBREPONAME}}",
 	"wikibase-editlinks": "Redaktar ligili",
 	"wikibase-editlinkstitle": "Redaktar la ligili ad altra lingui",
