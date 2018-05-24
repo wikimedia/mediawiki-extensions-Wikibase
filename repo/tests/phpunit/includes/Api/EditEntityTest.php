@@ -1116,13 +1116,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	public function testGivenReadOnlyType_errorIsShownAndNoEditHappened() {
 		$this->overrideMwServices();
-		$oldSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
-			'readOnlyEntityTypes'
-		);
-
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'readOnlyEntityTypes',
-			[ 'item' ]
+		$this->mergeMwGlobalArrayValue(
+			'wgWBRepoSettings',
+			[
+				'readOnlyEntityTypes' => [ 'item' ]
+			]
 		);
 
 		$params = [
@@ -1144,11 +1142,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 				$message->getParams()
 			);
 		}
-
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'readOnlyEntityTypes',
-			$oldSetting
-		);
 	}
 
 	/**
