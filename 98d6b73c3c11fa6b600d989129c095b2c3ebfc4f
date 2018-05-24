@@ -16,6 +16,24 @@
       "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2467f013_231c55e7",
+        "filename": "lib/includes/Formatters/MonolingualWikitextFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-05-24T18:28:43Z",
+      "side": 1,
+      "message": "`wfEscapeWikiText` seems to escape `\"`.  `wfEscapeWikiText(\u0027\"\u0027)` returns `\u0026#34;`.",
+      "parentUuid": "15953f99_30e907e3",
+      "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
