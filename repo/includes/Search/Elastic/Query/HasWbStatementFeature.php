@@ -121,7 +121,11 @@ class HasWbStatementFeature extends SimpleKeywordFeature {
 		$statementStrings = explode( '|', $value );
 		foreach ( $statementStrings as $statementString ) {
 			if ( $this->isStatementStringValid( $statementString ) ) {
-				$validStatements[] = $statementString;
+				if ( $this->statementContainsQuantityQualifier( $statementString ) ) {
+					
+				} else {
+					$validStatements[] = $statementString;
+				}
 			}
 		}
 		if ( count( $validStatements ) == 0 ) {
@@ -130,7 +134,10 @@ class HasWbStatementFeature extends SimpleKeywordFeature {
 				$key
 			);
 		}
-		return [ 'statements' => $validStatements ];
+		return [
+			'statements' => $validStatements,
+			'statementQuantities' => $quantityStatements,
+		];
 	}
 
 	/**
@@ -140,6 +147,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature {
 	 * The following strings are valid:
 	 * Wikidata:P180=Wikidata:Q537 (assuming 'Wikidata' is a valid foreign repo name)
 	 * P2014=79802
+	 * P180=Q5[Q111=9] (value in square brackets is a qualifier)
 	 *
 	 * The following strings are invalid:
 	 * NON_EXISTENT_FOREIGN_REPO_NAME:P123=Wikidata:Q537
@@ -150,15 +158,10 @@ class HasWbStatementFeature extends SimpleKeywordFeature {
 	 * @return bool
 	 */
 	private function isStatementStringValid( $statementString ) {
-		//Strip delimiters, anchors and pattern modifiers from PropertyId::PATTERN
-		$propertyIdPattern = preg_replace(
-			'/([^\sa-zA-Z0-9\\\])(\^|\\\A)?(.*?)(\$|\\\z|\\\Z)?\\1[a-zA-Z]*/',
-			'$3',
-			PropertyId::PATTERN
-		);
+
 		$validStatementStringPattern = '/^' .
 			'((' . implode( '|', $this->foreignRepoNames ) .'):)?' .
-			$propertyIdPattern .
+			$this->getBasicPropertyIdPattern() .
 			StatementsField::STATEMENT_SEPARATOR .
 			'/i';
 
@@ -166,6 +169,32 @@ class HasWbStatementFeature extends SimpleKeywordFeature {
 			$validStatementStringPattern,
 			$statementString
 		);
+	}
+
+	/**
+	 * Return PropertyId::PATTERN without delimiters, anchors, pattern modifiers
+	 *
+	 * @return string
+	 */
+	private function getBasicPropertyIdPattern() {
+
+		return preg_replace(
+			'/([^\sa-zA-Z0-9\\\])(\^|\\\A)?(.*?)(\$|\\\z|\\\Z)?\\1[a-zA-Z]*/',
+			'$3',
+			PropertyId::PATTERN
+		);
+	}
+
+	private function statementContainsQuantityQualifier( $statementString ) {
+
+	}
+
+	private function decomposeStatementContainingQuantityQualifier( $statementString ) {
+		return [
+			'string' => '',
+			'operator' => '',
+			'quantity' => 0,
+		];
 	}
 
 }
