@@ -5,6 +5,7 @@ use HtmlArmor;
 use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
 
 /**
  * Utility class to format Wikidata links for usage in hooks.
@@ -20,11 +21,7 @@ class ItemLinkFormatter {
 	}
 
 	/**
-	 * Produce link HTML from Entity ID and label data.
-	 * @param EntityId $entityId
-	 * @param string[]|null $labelData Array containing the 'value' and 'language' fields
-	 *
-	 * @return string HTML code for the link
+	 * @see EntityLinkFormatter::getHtml
 	 */
 	public function getHtml( EntityId $entityId, array $labelData = null ) {
 		/** @var Language $labelLang */
@@ -76,12 +73,7 @@ class ItemLinkFormatter {
 	}
 
 	/**
-	 * Get "title" attribute for Wikidata entity link.
-	 * @param Title $title
-	 * @param string[]|null $labelData
-	 * @param string[]|null $descriptionData
-	 *
-	 * @return string The plain, unescaped title="…" attribute for the link.
+	 * @see EntityLinkFormatter::getTitleAttribute
 	 */
 	public function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
 		/** @var Language $labelLang */
