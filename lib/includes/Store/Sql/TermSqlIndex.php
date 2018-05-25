@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Traversable;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
@@ -253,6 +254,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$entityIdentifiers
 		);
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.selectField.TermSqlIndex_insertTerm'
+		);
+
 		$hasRow = (bool)$dbw->selectField(
 			$this->tableName,
 			'1',
@@ -269,6 +274,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			);
 			return true;
 		}
+
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.insert.TermSqlIndex_insertTerm'
+		);
 
 		return $dbw->insert(
 			$this->tableName,
@@ -386,6 +395,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$termIdentifiers = $this->getTermFields( $term );
 			$termIdentifiers = array_intersect_key( $termIdentifiers, array_flip( $uniqueKeyFields ) );
 
+			MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+				'wikibase.repo.wb_terms.delete.TermSqlIndex_deleteTerms'
+			);
+
 			$success = $dbw->delete(
 				$this->tableName,
 				array_merge(
@@ -466,6 +479,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_entity_type' => $entityId->getEntityType(),
 			'term_full_entity_id' => $entityId->getSerialization(),
 		];
+
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.delete.TermSqlIndex_deleteTermsOfEntity'
+		);
 
 		$success = $dbw->delete(
 			$this->tableName,
@@ -594,6 +611,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$dbr = $this->getReadDb();
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.select.TermSqlIndex_fetchTemrs'
+		);
+
 		$res = $dbr->select(
 			$this->tableName,
 			$fields,
@@ -663,6 +684,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_weight',
 			'term_full_entity_id'
 		];
+
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.select.TermSqlIndex_getMatchingTerms'
+		);
+
 		$rows = $dbr->select(
 			$this->tableName,
 			$fields,
@@ -910,6 +936,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	public function clear() {
 		$dbw = $this->getConnection( DB_MASTER );
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.delete.TermSqlIndex_clear'
+		);
 		$ok = $dbw->delete( $this->tableName, '*', __METHOD__ );
 		$this->releaseConnection( $dbw );
 		return $ok;
@@ -1023,6 +1052,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$queryOptions = [
 			'LIMIT' => $this->maxConflicts
 		];
+
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.select.TermSqlIndex_getLabelWithDescriptionConflicts'
+		);
 
 		$obtainedTerms = $dbr->select(
 			[ 'L' => $this->tableName, 'D' => $this->tableName ],
