@@ -20,7 +20,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Hooks\ItemLinkFormatter;
+use Wikibase\Repo\Hooks\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 use Wikibase\Repo\Search\Elastic\EntityResult;
 use Wikibase\Store\EntityIdLookup;
@@ -438,7 +438,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			$this->getMockFallbackChain( $languages ),
 			$this->getEntityIdLookup(),
 			$this->getEntityLookup( $entities ),
-			new ItemLinkFormatter( Language::factory( 'en' ) )
+			new DefaultEntityLinkFormatter( Language::factory( 'en' ) )
 		);
 	}
 

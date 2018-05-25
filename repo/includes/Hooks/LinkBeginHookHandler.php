@@ -18,6 +18,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
@@ -71,9 +72,9 @@ class LinkBeginHookHandler {
 	 */
 	private $interwikiLookup;
 	/**
-	 * @var ItemLinkFormatter
+	 * @var EntityLinkFormatterFactory
 	 */
-	private $linkFormatter;
+	private $linkFormatterFactory;
 
 	/**
 	 * @return self
@@ -93,7 +94,7 @@ class LinkBeginHookHandler {
 			$languageFallbackChain,
 			MediaWikiServices::getInstance()->getLinkRenderer(),
 			MediaWikiServices::getInstance()->getInterwikiLookup(),
-			new ItemLinkFormatter( $context->getLanguage() )
+			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() )
 		);
 	}
 
@@ -142,7 +143,7 @@ class LinkBeginHookHandler {
 	 * @param LanguageFallbackChain $languageFallback
 	 * @param LinkRenderer $linkRenderer
 	 * @param InterwikiLookup $interwikiLookup
-	 * @param ItemLinkFormatter $linkFormatter
+	 * @param EntityLinkFormatterFactory $linkFormatterFactory
 	 * @todo: Would be nicer to take a LabelDescriptionLookup instead of TermLookup + FallbackChain.
 	 */
 	public function __construct(
@@ -153,7 +154,7 @@ class LinkBeginHookHandler {
 		LanguageFallbackChain $languageFallback,
 		LinkRenderer $linkRenderer,
 		InterwikiLookup $interwikiLookup,
-		ItemLinkFormatter $linkFormatter
+		EntityLinkFormatterFactory $linkFormatterFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityIdParser = $entityIdParser;
@@ -162,7 +163,7 @@ class LinkBeginHookHandler {
 		$this->languageFallback = $languageFallback;
 		$this->linkRenderer = $linkRenderer;
 		$this->interwikiLookup = $interwikiLookup;
-		$this->linkFormatter = $linkFormatter;
+		$this->linkFormatterFactory = $linkFormatterFactory;
 	}
 
 	/**
@@ -241,9 +242,10 @@ class LinkBeginHookHandler {
 		$labelData = $this->getPreferredTerm( $labels );
 		$descriptionData = $this->getPreferredTerm( $descriptions );
 
-		$html = $this->linkFormatter->getHtml( $entityId, $labelData );
+		$linkFormatter = $this->linkFormatterFactory->getLinkFormatter( $entityId->getEntityType() );
+		$html = $linkFormatter->getHtml( $entityId, $labelData );
 
-		$customAttribs['title'] = $this->linkFormatter->getTitleAttribute(
+		$customAttribs['title'] = $linkFormatter->getTitleAttribute(
 			$target,
 			$labelData,
 			$descriptionData
