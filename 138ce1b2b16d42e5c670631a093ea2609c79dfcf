@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "706b501d_8ab2b454",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-05-25T11:47:12Z",
+      "side": 1,
+      "message": "Would be really nice to have a proper factory for this.",
+      "revId": "138ce1b2b16d42e5c670631a093ea2609c79dfcf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

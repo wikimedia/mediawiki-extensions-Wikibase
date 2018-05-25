@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a4da18d_771e0351",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-05-25T11:47:12Z",
+      "side": 0,
+      "message": "I\u0027m not sure the new code actually does exactly the same thing as this code. In particular, it seems to me the new code is missinng the EntityIdSearchHelper functionality. Am I missing something?",
+      "revId": "4efc8ec71eee17417ee4086c2fde97a3d87db86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
