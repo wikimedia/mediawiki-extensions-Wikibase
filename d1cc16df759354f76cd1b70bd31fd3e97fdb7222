@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ecac355f_a0287ca3",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-25T14:02:21Z",
+      "side": 1,
+      "message": "Do you want to do this in the loop?\nIf the exact number of selects is intended, you could also call increment with the number of $termTypes before/after the loop, to just do it once",
+      "revId": "d1cc16df759354f76cd1b70bd31fd3e97fdb7222",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
