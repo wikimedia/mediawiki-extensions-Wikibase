@@ -227,4 +227,13 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'sub-entity-types' );
 	}
 
+	/**
+	 * @return callable[] An array mapping entity type identifiers
+	 * to callables instantiating EntityLinkFormatter objects
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getLinkFormatterCallbacks() {
+		return $this->getMapForDefinitionField( 'link-formatter-callback' );
+	}
+
 }
