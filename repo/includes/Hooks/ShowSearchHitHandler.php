@@ -55,7 +55,7 @@ class ShowSearchHitHandler {
 	 */
 	private $entityLookup;
 	/**
-	 * @var ItemLinkFormatter
+	 * @var DefaultEntityLinkFormatter
 	 */
 	private $linkFormatter;
 
@@ -64,7 +64,7 @@ class ShowSearchHitHandler {
 		LanguageFallbackChain $languageFallbackChain,
 		EntityIdLookup $entityIdLookup,
 		EntityLookup $entityLookup,
-		ItemLinkFormatter $linkFormatter
+		DefaultEntityLinkFormatter $linkFormatter
 	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
@@ -86,7 +86,7 @@ class ShowSearchHitHandler {
 			$languageFallbackChainFactory->newFromContext( $context ),
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityLookup(),
-			new ItemLinkFormatter( $context->getLanguage() )
+			new DefaultEntityLinkFormatter( $context->getLanguage() )
 		);
 	}
 
