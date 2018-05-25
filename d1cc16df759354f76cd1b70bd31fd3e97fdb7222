@@ -16,6 +16,24 @@
       "revId": "d1cc16df759354f76cd1b70bd31fd3e97fdb7222",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c6fada8_c2f27b99",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-05-25T15:15:37Z",
+      "side": 1,
+      "message": "I should indeed do this outside the loop..",
+      "parentUuid": "ecac355f_a0287ca3",
+      "revId": "d1cc16df759354f76cd1b70bd31fd3e97fdb7222",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
