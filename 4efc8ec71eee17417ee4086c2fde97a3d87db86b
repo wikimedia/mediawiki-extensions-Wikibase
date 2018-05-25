@@ -16,6 +16,24 @@
       "revId": "4efc8ec71eee17417ee4086c2fde97a3d87db86b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bca5207f_e78fc9e2",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-25T11:53:33Z",
+      "side": 0,
+      "message": "The dispatching sends the search backend to the entity types definition and we have the EntityIdSearchHelper there:\nhttps://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/repo/WikibaseRepo.entitytypes.php#L206",
+      "parentUuid": "1a4da18d_771e0351",
+      "revId": "4efc8ec71eee17417ee4086c2fde97a3d87db86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
