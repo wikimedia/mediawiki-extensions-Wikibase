@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikimedia\Assert\Assert;
@@ -149,6 +150,10 @@ class TermSqlIndexSearchFieldsClearer {
 			$update['term_weight'] = 0.0;
 		}
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.selectFieldValues.TermSqlIndexSearchFieldsClearer_clearBatch'
+		);
+
 		$rows = $dbr->selectFieldValues(
 			self::TABLE_NAME,
 			'term_row_id',
@@ -164,6 +169,10 @@ class TermSqlIndexSearchFieldsClearer {
 		);
 
 		if ( $rows !== [] ) {
+			MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+				'wikibase.repo.wb_terms.update.TermSqlIndexSearchFieldsClearer_clearBatch'
+			);
+
 			$dbw->update(
 				self::TABLE_NAME,
 				$update,

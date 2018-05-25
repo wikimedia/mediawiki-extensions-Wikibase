@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use RuntimeException;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -405,6 +406,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		// Do one query per term type here, this is way faster on MySQL: T147748
 		foreach ( $termTypes as $termType ) {
+			MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+				'wikibase.repo.wb_terms.select.SqlEntityInfoBuilder_collectTermsForEntities'
+			);
+
 			$res = $dbr->select(
 				$this->termTable,
 				$fields,
