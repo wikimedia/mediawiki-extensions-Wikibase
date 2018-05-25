@@ -213,8 +213,10 @@ call_user_func( function() {
 		'class' => Wikibase\Repo\Api\SearchEntities::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-			$entitySearchHelper = new Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper( $repo->getEntitySearchHelperCallbacks(),
-					$mainModule->getRequest() );
+			$entitySearchHelper = new Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper(
+				$repo->getEntitySearchHelperCallbacks(),
+				$mainModule->getRequest()
+			);
 
 			return new Wikibase\Repo\Api\SearchEntities(
 				$mainModule,
@@ -639,27 +641,14 @@ call_user_func( function() {
 		'class' => Wikibase\Repo\Api\QuerySearchEntities::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-			$entitySearchHelper = new Wikibase\Repo\Api\CombinedEntitySearchHelper(
-				[
-					new Wikibase\Repo\Api\EntityIdSearchHelper(
-						$repo->getEntityLookup(),
-						$repo->getEntityIdParser(),
-						new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-							$repo->getTermLookup(),
-							$repo->getLanguageFallbackChainFactory()->newFromLanguage( $apiQuery->getLanguage() )
-						),
-						$repo->getEntityTypeToRepositoryMapping()
-					),
-					new Wikibase\Repo\Api\EntityTermSearchHelper(
-						$repo->newTermSearchInteractor( $apiQuery->getLanguage()->getCode() )
-					)
-				]
-			);
 
 			return new Wikibase\Repo\Api\QuerySearchEntities(
 				$apiQuery,
 				$moduleName,
-				$entitySearchHelper,
+				new Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper(
+					$repo->getEntitySearchHelperCallbacks(),
+					$apiQuery->getRequest()
+				),
 				$repo->getEntityTitleLookup(),
 				$repo->getTermsLanguages(),
 				$repo->getEnabledEntityTypes()
@@ -762,7 +751,10 @@ call_user_func( function() {
 			new Wikibase\Lib\MediaWikiContentLanguages(),
 			$languageNameLookup,
 			$itemDisambiguation,
-			$wikibaseRepo->newTermSearchInteractor( $languageCode )
+			new Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper(
+				$wikibaseRepo->getEntitySearchHelperCallbacks(),
+				RequestContext::getMain()->getRequest()
+			)
 		);
 	};
 	$wgSpecialPages['ItemsWithoutSitelinks']

@@ -7,11 +7,9 @@ use Html;
 use WebRequest;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\TermIndexEntry;
+use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -37,9 +35,9 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $itemDisambiguation;
 
 	/**
-	 * @var ConfigurableTermSearchInteractor
+	 * @var EntitySearchHelper
 	 */
-	private $searchInteractor = null;
+	private $entitySearchHelper;
 
 	/**
 	 * @var int
@@ -50,14 +48,14 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param ContentLanguages $contentLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param ItemDisambiguation $itemDisambiguation
-	 * @param ConfigurableTermSearchInteractor $searchInteractor
+	 * @param EntitySearchHelper $entitySearchHelper
 	 * @param int $limit
 	 */
 	public function __construct(
 		ContentLanguages $contentLanguages,
 		LanguageNameLookup $languageNameLookup,
 		ItemDisambiguation $itemDisambiguation,
-		ConfigurableTermSearchInteractor $searchInteractor,
+		EntitySearchHelper $entitySearchHelper,
 		$limit = 100
 	) {
 		parent::__construct( 'ItemDisambiguation' );
@@ -65,7 +63,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$this->contentLanguages = $contentLanguages;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->itemDisambiguation = $itemDisambiguation;
-		$this->searchInteractor = $searchInteractor;
+		$this->entitySearchHelper = $entitySearchHelper;
 		$this->limit = $limit;
 	}
 
@@ -157,19 +155,12 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return TermSearchResult[]
 	 */
 	private function getSearchResults( $label, $languageCode ) {
-		$searchOptions = new TermSearchOptions();
-		$searchOptions->setLimit( $this->limit );
-		$searchOptions->setIsCaseSensitive( false );
-		$searchOptions->setIsPrefixSearch( false );
-		$searchOptions->setUseLanguageFallback( true );
-
-		$this->searchInteractor->setTermSearchOptions( $searchOptions );
-
-		return $this->searchInteractor->searchForEntities(
+		return $this->entitySearchHelper->getRankedSearchResults(
 			$label,
 			$languageCode,
 			'item',
-			[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ]
+			$this->limit,
+			false
 		);
 	}
 
