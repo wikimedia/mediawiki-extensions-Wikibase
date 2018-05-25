@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use RuntimeException;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -400,6 +401,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		}
 
 		$fields = [ 'term_type', 'term_language', 'term_text', 'term_full_entity_id' ];
+
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->updateCount(
+			'wikibase.repo.wb_terms.select.SqlEntityInfoBuilder_collectTermsForEntities',
+			count( $termTypes )
+		);
 
 		$dbr = $this->getConnection( DB_REPLICA );
 

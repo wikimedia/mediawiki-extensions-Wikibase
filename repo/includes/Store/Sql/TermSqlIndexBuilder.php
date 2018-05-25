@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
@@ -270,6 +271,9 @@ class TermSqlIndexBuilder {
 
 		/** @var TermIndexEntry $term */
 		foreach ( $duplicateTerms as $term ) {
+			MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+				'wikibase.repo.wb_terms.selectFieldValues.TermSqlIndexBuilder_removeDuplicateTermsOfEntity'
+			);
 			$rowIds = $db->selectFieldValues(
 				self::TABLE_NAME,
 				'term_row_id',
@@ -289,6 +293,10 @@ class TermSqlIndexBuilder {
 			}
 
 			array_shift( $rowIds );
+			MediaWikiServices::getInstance()->getStatsdDataFactory()->updateCount(
+				'wikibase.repo.wb_terms.delete.TermSqlIndexBuilder_removeDuplicateTermsOfEntity',
+				count( $rowIds )
+			);
 			foreach ( $rowIds as $id ) {
 				$db->delete( self::TABLE_NAME, [ 'term_row_id' => $id ] );
 			}
