@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -91,6 +92,10 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 		if ( $language !== null ) {
 			$joinConditions['term_language'] = $language;
 		}
+
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.select.SqlEntitiesWithoutTermFinder_getEntitiesWithoutTerm'
+		);
 
 		$rows = $dbr->select(
 			[ 'page', 'wb_terms' ],
