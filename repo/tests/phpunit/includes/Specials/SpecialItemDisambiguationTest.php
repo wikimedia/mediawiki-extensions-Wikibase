@@ -8,10 +8,10 @@ use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndexEntry;
 
@@ -50,9 +50,9 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return ConfigurableTermSearchInteractor
+	 * @return EntitySearchHelper
 	 */
-	private function getMockSearchInteractor() {
+	private function getMockSearchHelper() {
 		$searchResults = [
 			[
 				'entityId' => new ItemId( 'Q2' ),
@@ -71,26 +71,17 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				],
 			],
 		];
-		$mock = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$mock = $this->getMock( EntitySearchHelper::class );
 
 		$mock->expects( $this->any() )
-			->method( 'searchForEntities' )
+			->method( 'getRankedSearchResults' )
 			->will( $this->returnCallback(
-				function( $text, $lang, $entityType, array $termTypes ) use ( $searchResults ) {
+				function( $text, $lang, $entityType ) use ( $searchResults ) {
 					if ( $lang !== 'fr' ) {
 						throw new InvalidArgumentException( 'Not a valid language code' );
 					}
 
-					$expectedTermTypes = [
-						TermIndexEntry::TYPE_LABEL,
-						TermIndexEntry::TYPE_ALIAS
-					];
-
-					if (
-						$text === 'Foo' &&
-						$entityType === 'item' &&
-						$termTypes === $expectedTermTypes
-					) {
+					if ( $text === 'Foo' && $entityType === 'item' ) {
 						return $searchResults;
 					}
 
@@ -132,7 +123,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			$this->getContentLanguages(),
 			$this->getMockLanguageNameLookup(),
 			$this->getMockItemDisambiguation(),
-			$this->getMockSearchInteractor()
+			$this->getMockSearchHelper()
 		);
 	}
 
