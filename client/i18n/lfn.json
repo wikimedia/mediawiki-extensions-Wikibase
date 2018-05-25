@@ -18,6 +18,8 @@
 	"wikibase-rc-hide-wikidata-show": "Mostra",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edita de {{WBREPONAME}}",
+	"pageswithbadges": "Pajes con insinias",
+	"entityusage": "Usa de esente",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Eticeta: $1",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Descrive: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titulo",
