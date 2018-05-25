@@ -91,6 +91,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -2061,6 +2062,10 @@ class WikibaseRepo {
 	 */
 	public function getEntitySearchHelperCallbacks() {
 		return $this->entityTypeDefinitions->getEntitySearchHelperCallbacks();
+	}
+
+	public function getEntityLinkFormatterFactory( Language $language ) {
+		return new EntityLinkFormatterFactory( $language, $this->entityTypeDefinitions->getLinkFormatterCallbacks() );
 	}
 
 }

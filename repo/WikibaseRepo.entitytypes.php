@@ -34,6 +34,7 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
+use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
@@ -157,6 +158,9 @@ return [
 				);
 			}
 		},
+		'link-formatter-callback' => function( Language $language ) {
+			return new DefaultEntityLinkFormatter( $language );
+		},
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -245,6 +249,9 @@ return [
 					]
 				);
 			}
+		},
+		'link-formatter-callback' => function( Language $language ) {
+			return new DefaultEntityLinkFormatter( $language );
 		},
 	]
 ];
