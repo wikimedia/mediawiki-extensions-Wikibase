@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b2ec53b1_532a1aa1",
+        "filename": "repo/includes/Dumpers/DumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-25T07:09:36Z",
+      "side": 1,
+      "message": "Thanks for checking. I honestly don\u0027t mind that much really. I simply prefer optimizing when it is needed. But OTOH, I understand in case of dump generation even couple of percent of speed increase means a significant time win, so I also get why you went up for optimizing ALL the things here.",
+      "parentUuid": "07d6c8a5_f2842d05",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "b9d0465ce37fb78d706cca6ec189f10296614705",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15478562_90e7c130",
         "filename": "repo/maintenance/DumpEntities.php",
         "patchSetId": 1
