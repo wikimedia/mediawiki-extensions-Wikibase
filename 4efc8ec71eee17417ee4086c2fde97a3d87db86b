@@ -69,6 +69,24 @@
       "revId": "4efc8ec71eee17417ee4086c2fde97a3d87db86b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4099874e_e7cce6a5",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-05-26T23:03:13Z",
+      "side": 0,
+      "message": "Oh it\u0027s the other way around. Maybe we should make a phabricator ticket for it.",
+      "parentUuid": "fea621c8_64666260",
+      "revId": "4efc8ec71eee17417ee4086c2fde97a3d87db86b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
