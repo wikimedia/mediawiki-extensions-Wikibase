@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63bd236d_d33bf557",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-26T19:08:24Z",
+      "side": 1,
+      "message": "Yeah, this should probably give an error in this case",
+      "revId": "a534edee2976495798d3c0301d01ac3f5461cb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f1a1ec0_a859fb11",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-26T19:08:24Z",
+      "side": 1,
+      "message": "Hm, this is a good question… given that getLatestRevision also doesn\u0027t handle this, I think it\u0027s fine to ignore.",
+      "revId": "a534edee2976495798d3c0301d01ac3f5461cb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
