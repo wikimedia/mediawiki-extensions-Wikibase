@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ab295071_8485157c",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-05-26T18:04:38Z",
+      "side": 1,
+      "message": "I\u0027m a little unhappy with shoving something from the Api namespace into a special page… this is actually more general than for the Api, it seems.",
+      "revId": "138ce1b2b16d42e5c670631a093ea2609c79dfcf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "706b501d_8ab2b454",
         "filename": "repo/Wikibase.php",
         "patchSetId": 2
