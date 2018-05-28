@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "db450e5f_943eb335",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-05-28T14:52:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49210b03_cbd563f6",
+      "revId": "f3d5a115474c466d740d0e62cd4062c29a256f5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f49dbc43_fd9ba85d",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementQuantityFieldTest.php",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2018-05-28T13:02:51Z",
       "side": 1,
       "message": "if we have a random string how will guarantee that there are no spaces?",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 15
+      },
+      "revId": "f3d5a115474c466d740d0e62cd4062c29a256f5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41c5c74e_3acd2c6e",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementQuantityFieldTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-05-28T14:52:19Z",
+      "side": 1,
+      "message": "We can\u0027t, so I set the tokenizer to \u0027keyword\u0027",
+      "parentUuid": "f49dbc43_fd9ba85d",
       "range": {
         "startLine": 51,
         "startChar": 9,
