@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Simartampua"
+		]
+	},
+	"tooltip-t-wikibase": "Tautkon tu item repositori data na tarsambung",
+	"wikibase-comment-update": "{{WBREPONAME}} naiuba",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "Pature tautan",
+	"wikibase-editlinkstitle": "Pature tautan antar saro",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Bunion",
+	"wikibase-rc-hide-wikidata-show": "Patidaon",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} pature",
+	"wikibase-otherprojects": "I proyek nalain"
+}

@@ -391,6 +391,7 @@
 	"wikibase-pageinfo-subscription-none": "Nenhuma",
 	"wikibase-search-bad-entity-type": "Tipo de entidade inválido: $1",
 	"wikibase-search-bad-profile-name": "Nome de perfil de pesquisa inválido: $1",
+	"wikibase-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",
 	"apihelp-wbavailablebadges-description": "Consulta os objetos de emblemas disponíveis.",
 	"apihelp-wbavailablebadges-summary": "Consulta os objetos de emblemas disponíveis.",
 	"apihelp-wbavailablebadges-example-1": "Consulta todos os objetos de emblemas disponíveis",

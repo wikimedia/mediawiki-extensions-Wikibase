@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"C.R.",
-			"Candalua"
+			"Candalua",
+			"Ruthven"
 		]
 	},
 	"wikibase-client-desc": "Client pe' l'estensione Wikibase",
@@ -16,16 +17,16 @@
 	"apihelp-query+wikibase-example": "Piglia nu percurzo URL e l'ati nfurmaziune ncopp'a Wikibase e repository.",
 	"apihelp-query+wikibase-param-prop": "Quala pruprietà s'avess'a piglià:\n;<kbd>url</kbd>: URL bbase, 'o posto addò sta 'o script e base articule 'e Wikibase repository.\n;<kbd>siteid</kbd>: 'O siteide 'e stu sito.",
 	"wikibase-after-page-move": "Putite pure [$1 agghiurnà] l'elemento ssuoccio ncopp' 'o {{WBREPONAME}} pe' puté trasferì interlink ncopp'a paggena nuova.",
-	"wikibase-after-page-move-queued": "L'[$1 elemento {{WBREPONAME}}] ssuoccio a sta pagena sarrà priesto agghiurnato automatecamente. Fateve capace ca nun è ca succeresse mò mò subbeto subbeto.",
+	"wikibase-after-page-move-queued": "Ll'[$1 elemento {{WBREPONAME}}] ssuoccio a sta pagena sarrà agghiurnato automatecamente. Faciteve capace ca nun è ca succere 'a via 'e subbeto.",
 	"wikibase-after-page-delete": "Putite pure luvà 'o culegamento a sta paggena d' 'a paggena ssuoccia 'e [$1 {{WBREPONAME}} item] pe' v'astipà 'e link 'e paggene.",
-	"wikibase-after-page-delete-queued": "L'[$1 elemento {{WBREPONAME}}] ssuoccio a sta pagena sarrà priesto agghiurnato automatecamente. Fateve capace ca nun è ca succeresse mò mò subbeto subbeto.",
+	"wikibase-after-page-delete-queued": "Ll'[$1 elemento {{WBREPONAME}}] ssuoccio a sta pagena sarrà priesto agghiurnato automatecamente. Faciteve capace ca nun è ca succere 'a via 'e subbeto.",
 	"wikibase-comment-add": "N'elemento 'e {{WBREPONAME}} è stato criato.",
 	"wikibase-comment-remove": "L'elemento 'e {{WBREPONAME}} ssuoccio è stato scancellato. 'E cullegamente interlinguistice so' state luvate.",
 	"wikibase-comment-linked": "N'elemento 'e {{WBREPONAME}} è stato cullegato a sta paggena.",
 	"wikibase-comment-unlink": "Sta pagina è stata scullegata 'a ll'elemento 'e {{WBREPONAME}}. 'E cullegamente interlinguistice so' state luvate.",
 	"wikibase-comment-restore": "L'elemento 'e {{WBREPONAME}} ssuoccio è stato arrepigliato. 'E cullegamente interlinguistice so' state pure arrepigliate.",
 	"wikibase-comment-update": "Elemento {{WBREPONAME}} cagnato",
-	"wikibase-comment-sitelink-add": "Cullegamiento 'e llengua mò s'è azzeccato: $1",
+	"wikibase-comment-sitelink-add": "Cullegamiento 'e llengua azzeccato: $1",
 	"wikibase-comment-sitelink-change": "Culegamento 'e lengua cagnato 'a $1 a $2",
 	"wikibase-comment-sitelink-remove": "Cullegamento 'e lengua luvato: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|cagnamiento|cagnamiente}}",
@@ -34,7 +35,7 @@
 	"wikibase-editlinkstitle": "Càgna 'e cullegamente nterlenguistece",
 	"wikibase-addlinkstitle": "Azzecca cocche cullegamento nterlenguisteco",
 	"wikibase-linkitem-addlinks": "Azzecca jonta",
-	"wikibase-linkitem-alreadylinked": "'A paggena ca vulevate cullegà è mò òm azzecata a n'[$1 item] dint'a ll'archivio centrale 'e date ca puntasse mmerz'a $2 int'a stu sito. L'elemente se putessero culegà a na paggena surtanto pe' sito. Sciglite na paggena diversa 'a quale l'avisser'a cullegà.",
+	"wikibase-linkitem-alreadylinked": "'A paggena ca vulevate cullegà sta ggià azzecata a n'[$1 item] dint'a ll'archivio centrale 'e date ca jonta 'a $2 ncopp'a stu sito. Ll'elemente se putessero culegà a na paggena surtanto pe sito. Sciglite na paggena diversa addò l'avisser'a cullegà.",
 	"wikibase-linkitem-close": "Nchiure 'a fenesta 'e dialogo e recarreca paggena",
 	"wikibase-linkitem-failure": "S'è verificato n'errore scanusciuto pe' tramente ca se faceva 'o tentativo 'e cullega 'a paggena data.",
 	"wikibase-linkitem-title": "Collega â paggena",
