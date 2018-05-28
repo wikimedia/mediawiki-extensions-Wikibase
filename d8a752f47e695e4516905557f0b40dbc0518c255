@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f98bc84e_c174a0cd",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-28T10:02:02Z",
+      "side": 1,
+      "message": "This calls .attr(), while the new code calls .prop(). I get confused by this every single time. What I find important here is consistency: I think we need to use the same in both lines, whatever it is.",
+      "range": {
+        "startLine": 58,
+        "startChar": 17,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "d8a752f47e695e4516905557f0b40dbc0518c255",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
