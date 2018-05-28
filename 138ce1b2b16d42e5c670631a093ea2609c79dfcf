@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "47989875_cacf20bd",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-28T07:38:57Z",
+      "side": 1,
+      "message": "Agreed. I don\u0027t like to have even those existing weak boundaries broken. I don\u0027t claim to understand the Api SearchHelper as a whole, but I don\u0027t think it fits \"as is\" the lib. The \"lib\" is the anti pattern IMO any way.\nWould some kind of \"term lookup\" be more appropriate here? There has been Elastic-based implementation of the \"term lookup\" added recently, I am not sure if it has already been used in any place though. I guess using it here would \"only\" require wrapping it with some \"term search interactor\"?",
+      "parentUuid": "ab295071_8485157c",
+      "revId": "138ce1b2b16d42e5c670631a093ea2609c79dfcf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "706b501d_8ab2b454",
         "filename": "repo/Wikibase.php",
         "patchSetId": 2
