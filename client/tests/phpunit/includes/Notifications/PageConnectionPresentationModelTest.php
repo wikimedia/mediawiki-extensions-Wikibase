@@ -82,7 +82,7 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 		);
 
 		$user = User::newFromName( 'User' );
-		$model = EchoEventPresentationModel::factory( $event, 'en', $user );
+		$model = EchoEventPresentationModel::factory( $event, Language::factory( 'en' ), $user );
 		$this->assertInstanceOf( PageConnectionPresentationModel::class, $model );
 
 		$this->assertFalse(
