@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Search\Elastic\Query;
 
+use CirrusSearch\Parser\AST\KeywordFeatureNode;
+use CirrusSearch\Query\Builder\QueryBuildingContext;
+use CirrusSearch\Query\FilterQueryFeature;
 use CirrusSearch\Query\SimpleKeywordFeature;
+use CirrusSearch\Search\Rescore\BoostFunctionBuilder;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\WarningCollector;
+use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -36,7 +41,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
  * @todo Move to WikibaseCirrusSearch extension
  * @see https://phabricator.wikimedia.org/T190022
  */
-class HasWbStatementFeature extends SimpleKeywordFeature {
+class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryFeature {
 
 	/**
 	 * @var array Names of foreign repos from $wgWBRepoSettings
@@ -168,4 +173,11 @@ class HasWbStatementFeature extends SimpleKeywordFeature {
 		);
 	}
 
+	public function getFilterQuery( KeywordFeatureNode $node, QueryBuildingContext $context ) {
+		$statements = $node->getParsedValue()['statements'];
+		if ( $statements === [] ) {
+			return null;
+		}
+		return $this->matchStatements( $statements );
+	}
 }
