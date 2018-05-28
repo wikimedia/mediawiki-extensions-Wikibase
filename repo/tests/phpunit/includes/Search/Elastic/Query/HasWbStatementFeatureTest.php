@@ -122,7 +122,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	public function testApply( array $expected = null, $term, $foreignRepoNames ) {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
 		$kwAssertions = $this->getKWAssertions();
-		$expectedWarnings = $expected !== null ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$expectedWarnings = $expected == null ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
 		if ( $expected === null ) {
