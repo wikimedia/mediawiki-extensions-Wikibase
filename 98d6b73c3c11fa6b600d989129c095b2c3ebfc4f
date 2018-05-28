@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3268ec7e_4301c112",
+        "filename": "lib/includes/Formatters/MonolingualWikitextFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-05-28T10:58:43Z",
+      "side": 1,
+      "message": "oh, you are right. never mind, then :)",
+      "parentUuid": "ef179e59_864883d8",
+      "revId": "98d6b73c3c11fa6b600d989129c095b2c3ebfc4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9df2b7ac_418a5e4e",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 9
