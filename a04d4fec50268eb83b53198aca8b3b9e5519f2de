@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8462a2ec_f76800de",
+        "filename": "repo/includes/Hooks/Formatters/EntityLinkFormatterFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-05-28T10:05:38Z",
+      "side": 1,
+      "message": "Should this fall back to a default formatter that can at least produce a working link with the entity id or do we want this to explode?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 3
+      },
+      "revId": "a04d4fec50268eb83b53198aca8b3b9e5519f2de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
