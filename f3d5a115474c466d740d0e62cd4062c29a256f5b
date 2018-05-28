@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49210b03_cbd563f6",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-05-28T13:02:51Z",
+      "side": 1,
+      "message": "you need a tokenizer in this case it\u0027s probably:\n  \u0027tokenizer\u0027 \u003d\u003e \u0027whitespace\u0027",
+      "revId": "f3d5a115474c466d740d0e62cd4062c29a256f5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f49dbc43_fd9ba85d",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementQuantityFieldTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-05-28T13:02:51Z",
+      "side": 1,
+      "message": "if we have a random string how will guarantee that there are no spaces?",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 15
+      },
+      "revId": "f3d5a115474c466d740d0e62cd4062c29a256f5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
