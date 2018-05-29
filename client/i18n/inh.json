@@ -15,7 +15,9 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Къайладаккха",
 	"wikibase-rc-hide-wikidata-show": "Хьахьокха",
+	"wikibase-rc-show-wikidata-pref": "Хьахьокха {{grammar:genitive|{{WBREPONAME}}}} чура хувцамаш керда хувцамашка",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} нийсдар",
+	"wikibase-watchlist-show-changes-pref": "Хьахьокха хувцамаш {{grammar:genitive|{{WBREPONAME}}}} чура керда хувцамаш гойтача",
 	"wikibase-otherprojects": "Кхыйола проекташ чу"
 }

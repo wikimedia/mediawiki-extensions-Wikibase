@@ -8,7 +8,7 @@
 	"specialpages-group-wikibase": "วิกิฐานข้อมูล",
 	"wikibase-deletedentity-item": "รายการของสิ่งนี่ได้ถูกลบ",
 	"wikibase-deletedentity-property": "คุณลักษณะได้ถูกลบ",
-	"wikibase-deletedentity-query": "query ไดถูกลบ",
+	"wikibase-deletedentity-query": "query ได้ถูกลบ",
 	"wikibase-error-unexpected": "ข้อผิดพลาด: $1",
 	"wikibase-error-save-generic": "ไม่สามารถบันทึก เนื่องจากเกิดข้อผิดพลาด",
 	"wikibase-error-remove-generic": "ไม่สามารถลบ เนื่องจากเกิดข้อผิดพลาด",

@@ -394,6 +394,7 @@
 	"apihelp-wbsetclaimvalue-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
 	"apihelp-wbsetdescription-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
 	"apihelp-wbsetdescription-param-language": "Język opisu",
+	"apihelp-wbsetdescription-param-value": "Wartość do ustawienia dla opisu",
 	"apihelp-wbsetlabel-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
 	"apihelp-wbsetlabel-param-language": "Język etykiety",
 	"apihelp-wbsetlabel-param-value": "Wartość etykiety",

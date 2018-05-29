@@ -80,6 +80,8 @@
 	"wikibase-entity-summary-wbsetitem": "Oppretta eit nytt element",
 	"wikibase-entity-summary-wbcreate-new": "Oppretta ei ny eining",
 	"wikibase-entity-summary-wbcreateredirect": "Omdirigert til $4",
+	"wikibase-entity-summary-wbeditentity": "Oppretta ei ny eining",
+	"wikibase-entity-summary-wbeditentity-create": "Oppretta ei ny eining",
 	"wikibase-entity-summary-wbsetreference": "Sette ei kjelde",
 	"wikibase-entity-summary-wbsetreference-add": "La til referanse for utsegn",
 	"wikibase-entity-summary-wbsetlabel-add": "La til merkelapp for [$2]",

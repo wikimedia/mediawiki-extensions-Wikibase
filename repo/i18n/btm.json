@@ -6,5 +6,8 @@
 	},
 	"wikibase-edit": "Pature",
 	"wikibase-add": "Manambaon",
-	"wikibase-sitelinks-special": "Situs lain"
+	"wikibase-label-empty": "Indadong label naitontuon",
+	"wikibase-description-empty": "Inda adong deskripsi naidefenision",
+	"wikibase-sitelinks-special": "Situs lain",
+	"wikibase-statementview-rank-normal": "Tingkat normal"
 }
