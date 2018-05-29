@@ -22,6 +22,30 @@
       "revId": "3a795243f4ec30814175c40331c8d1bf71e07b0a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6af1987_a8ed77ea",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-05-29T07:39:11Z",
+      "side": 1,
+      "message": "no particular reason except perhaps my laziness, will fix :)",
+      "parentUuid": "92d88f39_c4d1d78b",
+      "range": {
+        "startLine": 125,
+        "startChar": 32,
+        "endLine": 125,
+        "endChar": 34
+      },
+      "revId": "3a795243f4ec30814175c40331c8d1bf71e07b0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
