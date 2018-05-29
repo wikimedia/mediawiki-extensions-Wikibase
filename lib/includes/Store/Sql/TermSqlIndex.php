@@ -700,6 +700,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'wikibase.repo.wb_terms.select.TermSqlIndex_getMatchingTerms'
 		);
 
+		$rows = $dbr->select(
+			$this->tableName,
+			$fields,
+			[ $dbr->makeList( $termConditions, LIST_OR ) ],
+			__METHOD__,
+			$queryOptions
+		);
+
 		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] && $this->useSearchFields ) {
 			$rows = $this->getRowsOrderedByWeight( $rows );
 		}
