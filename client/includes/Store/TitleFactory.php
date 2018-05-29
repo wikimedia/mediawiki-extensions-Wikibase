@@ -46,7 +46,7 @@ class TitleFactory {
 	 * @throws MalformedTitleException
 	 * @return Title
 	 */
-	public function newFromText( $text, $defaultNamespace = NS_MAIN ) {
+	public function newFromText( $text, $defaultNamespace = 0 ) { // TODO use NS_MAIN
 		$title = Title::newFromText( $text, $defaultNamespace );
 
 		if ( !$title ) {
