@@ -694,7 +694,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		// Things be broken! T195520
 		wfDebugLog( 'AdHocDebug', __CLASS__ . ' ### ' . $query . ' ### ' . wfGetAllCallers( false ) );
-		return [];
 
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.wb_terms.select.TermSqlIndex_getMatchingTerms'
