@@ -11,7 +11,6 @@ use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Term\AliasesProvider;
@@ -194,19 +193,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 *
-	 * @throws MWException
-	 */
-	private function assertIsNumericEntityId( EntityId $entityId ) {
-		if ( !( $entityId instanceof Int32EntityId ) ) {
-			throw new MWException(
-				'Entity ID: ' . $entityId->getSerialization() . ' does not implement Int32EntityId'
-			);
-		}
-	}
-
-	/**
 	 * @param EntityDocument $entity
 	 * @param TermIndexEntry[] $terms
 	 * @param IDatabase $dbw
@@ -215,8 +201,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	private function insertTerms( EntityDocument $entity, array $terms, IDatabase $dbw ) {
 		$entityId = $entity->getId();
-		$this->assertIsNumericEntityId( $entityId );
-		/** @var EntityId|Int32EntityId $entityId */
 
 		$entityIdentifiers = [
 			'term_entity_id' => 0,
@@ -382,9 +366,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
-		$this->assertIsNumericEntityId( $entityId );
-		/** @var EntityId|Int32EntityId $entityId */
-
 		$entityIdentifiers = [ 'term_full_entity_id' => $entityId->getSerialization() ];
 		$uniqueKeyFields = [ 'term_language', 'term_type', 'term_text', 'term_full_entity_id' ];
 
@@ -470,8 +451,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
 		$this->assertEntityIdFromRightRepository( $entityId );
-		$this->assertIsNumericEntityId( $entityId );
-		/** @var EntityId|Int32EntityId $entityId */
 
 		$dbw = $this->getConnection( DB_MASTER );
 
@@ -577,7 +556,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		$entityType = null;
-		$numericIds = [];
 		$fullIds = [];
 
 		foreach ( $entityIds as $id ) {
@@ -587,9 +565,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				throw new MWException( "ID $id does not refer to an entity of type $entityType" );
 			}
 
-			$this->assertIsNumericEntityId( $id );
-			/** @var Int32EntityId $id */
-			$numericIds[] = $id->getNumericId();
 			$fullIds[] = $id->getLocalPart();
 
 		}
