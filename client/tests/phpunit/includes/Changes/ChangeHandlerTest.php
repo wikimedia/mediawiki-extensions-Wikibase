@@ -240,7 +240,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
-			->will( $this->returnCallback( function( $text, $defaultNs = NS_MAIN ) use ( $pageIdsByTitle ) {
+			->will( $this->returnCallback( function( $text, $defaultNs = 0 /* TODO T195868 */ ) use ( $pageIdsByTitle ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
