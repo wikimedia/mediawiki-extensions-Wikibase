@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Notifications;
 
 use EchoEvent;
 use EchoEventPresentationModel;
+use Language;
 use MediaWikiTestCase;
 use Message;
 use Title;
@@ -82,7 +83,7 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 		);
 
 		$user = User::newFromName( 'User' );
-		$model = EchoEventPresentationModel::factory( $event, 'en', $user );
+		$model = EchoEventPresentationModel::factory( $event, Language::factory( 'en' ), $user );
 		$this->assertInstanceOf( PageConnectionPresentationModel::class, $model );
 
 		$this->assertFalse(
