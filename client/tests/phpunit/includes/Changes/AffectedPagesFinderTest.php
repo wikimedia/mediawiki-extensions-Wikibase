@@ -54,7 +54,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
-			->will( $this->returnCallback( function( $text, $defaultNs = NS_MAIN ) {
+			->will( $this->returnCallback( function( $text, $defaultNs = \NS_MAIN ) {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
