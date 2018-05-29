@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "107bd828_f6c8de12",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-29T15:58:13Z",
+      "side": 0,
+      "message": "You can just remove this and it will work as well. The fact this can be optional is not relevant for this test. The caller always passes the argument, so it\u0027s fine to have a callee that always expects it.\n\nSame for all other instanced of this.",
+      "range": {
+        "startLine": 243,
+        "startChar": 62,
+        "endLine": 243,
+        "endChar": 71
+      },
+      "revId": "68a3a18c6138d49a855960a19335b3e72e0bf76b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
