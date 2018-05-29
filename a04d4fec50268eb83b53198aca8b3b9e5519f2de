@@ -22,6 +22,53 @@
       "revId": "a04d4fec50268eb83b53198aca8b3b9e5519f2de",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1ceaa74_7c74d0e2",
+        "filename": "repo/includes/Hooks/Formatters/EntityLinkFormatterFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-05-29T08:32:06Z",
+      "side": 1,
+      "message": "In the _assumed_ absence of a use case I am pro exploding - who ever needs the fallback could still catch. A dedicated exception type could be helpful for that, though.\nOTOH Do we now plan to define the link-formatter-callback for all entitytypes? How may would carry custom values, how many would feel redundant?\n\nCurrently explodes on http://default.web.mw.localhost:8087/mediawiki/index.php?from\u003d\u0026to\u003d\u0026namespace\u003d146\u0026title\u003dSpecial%3AAllPages (All Lexeme pages)",
+      "parentUuid": "8462a2ec_f76800de",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 3
+      },
+      "revId": "a04d4fec50268eb83b53198aca8b3b9e5519f2de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa0c6e84_578b099f",
+        "filename": "repo/includes/Hooks/Formatters/EntityLinkFormatterFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-05-29T08:32:06Z",
+      "side": 1,
+      "message": "This makes for a rather strong contract between EntityLinkFormatterFactory and the entitytypes configuration, but it\u0027s totally implicit.\nIt is consistent with the rest of the entitytypes configuration but what value does it bring that our factory does not really instantiate but only delegates?\nCould we not configure the class, (assert  against a known interface - as a bonus), and instantiate here?\n\nAlso, isn\u0027t each of the link formatters an idempotent service? Yet it is instantiated over and over again.",
+      "range": {
+        "startLine": 46,
+        "startChar": 32,
+        "endLine": 46,
+        "endChar": 51
+      },
+      "revId": "a04d4fec50268eb83b53198aca8b3b9e5519f2de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
