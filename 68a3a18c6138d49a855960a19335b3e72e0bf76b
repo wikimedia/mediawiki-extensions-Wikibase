@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f641450e_5cd0e068",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-05-29T16:07:26Z",
+      "side": 0,
+      "message": "Uh, looks like this array was build for no reason any more, since the table column is not populated any more. I wonder if it was intentional to leave this code here?",
+      "range": {
+        "startLine": 592,
+        "startChar": 3,
+        "endLine": 592,
+        "endChar": 16
+      },
+      "revId": "68a3a18c6138d49a855960a19335b3e72e0bf76b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
