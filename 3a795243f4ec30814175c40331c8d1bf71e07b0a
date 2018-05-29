@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92d88f39_c4d1d78b",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Query/HasWbStatementFeatureTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-29T06:04:26Z",
+      "side": 1,
+      "message": "any reason to not have \u003d\u003d\u003d here?",
+      "range": {
+        "startLine": 125,
+        "startChar": 32,
+        "endLine": 125,
+        "endChar": 34
+      },
+      "revId": "3a795243f4ec30814175c40331c8d1bf71e07b0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
