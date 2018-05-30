@@ -1,7 +1,9 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.10.0 (dev)
+## Version 3.10.0 (2018-05-31)
 
+* Added `ReferencedEntityIdLookup` interface.
+* Added `EntityRetrievingClosestReferencedEntityIdLookup` as `ReferencedEntityIdLookup` implementation.
 * Added `LabelLookup` interface.
 
 ## Version 3.9.0 (2018-01-18)
