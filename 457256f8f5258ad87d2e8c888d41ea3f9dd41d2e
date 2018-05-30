@@ -22,6 +22,30 @@
       "revId": "457256f8f5258ad87d2e8c888d41ea3f9dd41d2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c3b390d_72a08b3a",
+        "filename": "repo/includes/Hooks/DefaultEntityLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-05-30T13:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9e25ec8_cba8b97e",
+      "range": {
+        "startLine": 2,
+        "startChar": 24,
+        "endLine": 2,
+        "endChar": 29
+      },
+      "revId": "457256f8f5258ad87d2e8c888d41ea3f9dd41d2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
