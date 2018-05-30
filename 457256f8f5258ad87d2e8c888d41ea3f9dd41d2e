@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9e25ec8_cba8b97e",
+        "filename": "repo/includes/Hooks/DefaultEntityLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-30T12:44:24Z",
+      "side": 1,
+      "message": "this could maybe also go to Wikibase\\Repo\\Hooks\\Formatters namespace then?",
+      "range": {
+        "startLine": 2,
+        "startChar": 24,
+        "endLine": 2,
+        "endChar": 29
+      },
+      "revId": "457256f8f5258ad87d2e8c888d41ea3f9dd41d2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
