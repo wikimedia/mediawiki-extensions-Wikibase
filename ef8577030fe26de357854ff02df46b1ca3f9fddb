@@ -22,6 +22,30 @@
       "revId": "ef8577030fe26de357854ff02df46b1ca3f9fddb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd916400_6bf0e44c",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-05-30T13:05:37Z",
+      "side": 1,
+      "message": "pfft, PHPStorm doesn\u0027t even remove related TODO comments when refactoring? lame :P",
+      "parentUuid": "5f8d1bb6_65647a2c",
+      "range": {
+        "startLine": 254,
+        "startChar": 55,
+        "endLine": 254,
+        "endChar": 99
+      },
+      "revId": "ef8577030fe26de357854ff02df46b1ca3f9fddb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
