@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f8d1bb6_65647a2c",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-05-30T12:44:24Z",
+      "side": 1,
+      "message": "the comment does not seem to be relevant any more?",
+      "range": {
+        "startLine": 254,
+        "startChar": 55,
+        "endLine": 254,
+        "endChar": 99
+      },
+      "revId": "ef8577030fe26de357854ff02df46b1ca3f9fddb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
