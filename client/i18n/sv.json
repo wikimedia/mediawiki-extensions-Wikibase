@@ -57,6 +57,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Du måste vara inloggad",
 	"wikibase-linkitem-not-loggedin": "Du måste vara inloggad på denna wiki och i [$1 den centrala databasen] att använda denna funktion.",
 	"wikibase-linkitem-success-link": "Sidorna har länkats. Du kan hitta objektet som innehåller länkarna i vår [$1 centrala databas].",
+	"limitreport-entityaccesscount": "Antal laddade Wikibase-entiteter",
 	"wikibase-property-notfound": "Egenskapen $1 hittades inte.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Dölj",

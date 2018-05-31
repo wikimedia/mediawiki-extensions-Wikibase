@@ -71,6 +71,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Du må være innlogget",
 	"wikibase-linkitem-not-loggedin": "Du må være innlogget på denne wikien og på det [$1 sentrale dataregisteret] for å bruke denne funksjonen.",
 	"wikibase-linkitem-success-link": "Sidene er koblet. Du kan finne elementet med nettstedlenkene i vårt [$1 sentrale datalager].",
+	"limitreport-entityaccesscount": "Antall Wikibase-elementer lastet",
 	"wikibase-property-notfound": "Egenskapen $1 ble ikke funnet.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Skjul",

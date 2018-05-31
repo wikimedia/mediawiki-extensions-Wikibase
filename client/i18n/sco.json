@@ -47,6 +47,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Ye need tae be loggit in",
 	"wikibase-linkitem-not-loggedin": "Ye need tae be loggit in oan this wiki n in the [$1 central data reposeeterie] tae uise this feature.",
 	"wikibase-linkitem-success-link": "The pages hae been airtit. Ye can find the item conteenin the airtins in oor [$1 central data repository].",
+	"limitreport-entityaccesscount": "Nummer o Wikibase entities laidit",
 	"wikibase-property-notfound": "$1 propertie naw foond.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Skauk",

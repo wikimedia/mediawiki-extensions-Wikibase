@@ -57,6 +57,7 @@
 	"wikibase-linkitem-not-loggedin-title": "U moet aangemeld zijn",
 	"wikibase-linkitem-not-loggedin": "U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.",
 	"wikibase-linkitem-success-link": "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
+	"limitreport-entityaccesscount": "Aantal Wikibase-entiteiten geladen",
 	"wikibase-property-notfound": "Eigenschap $1 niet gevonden.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "verbergen",

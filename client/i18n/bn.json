@@ -49,6 +49,7 @@
 	"wikibase-linkitem-not-loggedin-title": "আপনার প্রবেশ করা প্রয়োজন",
 	"wikibase-linkitem-not-loggedin": "এই বৈশিষ্ট্য ব্যবহার করতে আপনাকে এই উইকি এবং  [$1 কেন্দ্রীয় তথ্য ভান্ডারে] প্রবেশ (লগ ইন) করতে হবে।",
 	"wikibase-linkitem-success-link": "এই পাতাটি সংযুক্ত হয়েছে। আপনি আমাদের [$1 কেন্দ্রীয় তথ্য ভান্ডারে] নতুন তৈরি এই আইটেমের লিঙ্ক খুঁজে পাবেন।",
+	"limitreport-entityaccesscount": "লোডকৃত উইকিবেজ ভুক্তির সংখ্যা",
 	"wikibase-property-notfound": "$1 বৈশিষ্ট্য পাওয়া যায়নি।",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "আড়াল করো",

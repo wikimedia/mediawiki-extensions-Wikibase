@@ -70,6 +70,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Вы должны авторизоваться",
 	"wikibase-linkitem-not-loggedin": "Чтобы воспользоваться этой функцией, вы должны быть авторизованы в этой вики и в [$1 центральном репозитории данных].",
 	"wikibase-linkitem-success-link": "Страницы были связаны. Вы можете найти элемент, содержащий связи, в нашем [$1 центральном хранилище данных].",
+	"limitreport-entityaccesscount": "Количество загруженных сущностей Викибазы",
 	"wikibase-property-notfound": "Свойство «$1» не найдено",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Скрыть",
