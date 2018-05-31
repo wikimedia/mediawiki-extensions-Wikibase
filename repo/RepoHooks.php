@@ -1187,4 +1187,38 @@ final class RepoHooks {
 		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
 	}
 
+	/**
+	 * Handler for the ApiMaxLagInfo to add dispatching lag stats
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ApiMaxLagInfo
+	 *
+	 * @param array &$lagInfo
+	 */
+	public static function onApiMaxLagInfo( array &$lagInfo ) {
+
+		$dispatchLagToMaxLagFactor = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+			'dispatchLagToMaxLagFactor'
+		);
+
+		if ( $dispatchLagToMaxLagFactor <= 0 ) {
+			return;
+		}
+
+		$stats = new DispatchStats();
+		$stats->load();
+		$median = $stats->getMedian();
+
+		if ( $median ) {
+			$maxDispatchLag = $median->chd_lag / (float)$dispatchLagToMaxLagFactor;
+			if ( $maxDispatchLag > $lagInfo['lag'] ) {
+				$lagInfo = [
+					'host' => $median->chd_site,
+					'lag' => $maxDispatchLag,
+					'type' => 'wikibase-dispatching',
+					'dispatchLag' => $median->chd_lag,
+				];
+			}
+		}
+	}
+
 }
