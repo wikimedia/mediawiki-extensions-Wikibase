@@ -281,4 +281,7 @@ return [
 	// Override useTermsTableSearchFields for writing
 	'forceWriteTermsTableSearchFields' => false,
 
+	// Change it to non-zero so it becomes effective
+	'DispatchLagToMaxLagFactor' => 0
+
 ];
