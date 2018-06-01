@@ -44,6 +44,7 @@ use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
+use Wikibase\Repo\Search\Elastic\Query\WbStatementQuantityFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -1192,6 +1193,7 @@ final class RepoHooks {
 			$foreignRepoNames = array_keys( $foreignRepos );
 		}
 		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
+		$extraFeatures[] = new WbStatementQuantityFeature( $foreignRepoNames );
 	}
 
 	/**
