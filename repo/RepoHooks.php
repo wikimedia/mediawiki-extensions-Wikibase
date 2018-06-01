@@ -44,6 +44,7 @@ use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
+use Wikibase\Repo\Search\Elastic\Query\WbStatementQuantityFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -1024,6 +1025,13 @@ final class RepoHooks {
 			'max_token_count' => 1
 		];
 
+		// Analyzer for extracting quantity data and storing it in a term frequency field
+		$config['analyzer']['extract_wb_quantity'] = [
+			'type' => 'custom',
+			'tokenizer' => 'keyword',
+			'filter' => [ 'term_freq' ],
+		];
+
 		// Language analyzers for descriptions
 		$repo = WikibaseRepo::getDefaultInstance();
 		$wbBuilder = new ConfigBuilder( $repo->getTermsLanguages()->getLanguages(),
@@ -1185,6 +1193,7 @@ final class RepoHooks {
 			$foreignRepoNames = array_keys( $foreignRepos );
 		}
 		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
+		$extraFeatures[] = new WbStatementQuantityFeature( $foreignRepoNames );
 	}
 
 	/**

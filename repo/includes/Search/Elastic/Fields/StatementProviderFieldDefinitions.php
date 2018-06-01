@@ -63,6 +63,13 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 				$this->searchIndexDataFormatters
 			),
 			StatementCountField::NAME => new StatementCountField(),
+			StatementQuantityField::NAME => new StatementQuantityField(
+				$this->propertyDataTypeLookup,
+				$this->propertyIds,
+				$this->indexedTypes,
+				$this->excludedIds,
+				$this->searchIndexDataFormatters
+			),
 		];
 	}
 
