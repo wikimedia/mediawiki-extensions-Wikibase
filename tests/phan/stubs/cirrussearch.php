@@ -94,6 +94,19 @@ namespace CirrusSearch {
 	}
 }
 
+namespace CirrusSearch\Extra\Query {
+	class TermFreq {
+		/**
+		 * @param string $field
+		 * @param string $term
+		 * @param string $operator
+		 * @param int $number
+		 */
+		public function __construct( $field, $term, $operator, $number ) {
+		}
+	}
+}
+
 namespace CirrusSearch\Maintenance {
 	class AnalysisConfigBuilder {
 		/**
@@ -206,6 +219,16 @@ namespace CirrusSearch\Query\Builder {
 namespace CirrusSearch\Search {
 	class CirrusIndexField {
 		const NOOP_HINT = 'noop';
+	}
+
+	class Filters {
+		/**
+		 * @param AbstractQuery[] $queries
+		 * @param bool $matchAll
+		 * @return AbstractQuery|null
+		 */
+		public static function booleanOr( array $queries, $matchAll = true ) {
+		}
 	}
 
 	class TextIndexField {
