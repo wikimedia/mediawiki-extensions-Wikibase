@@ -94,6 +94,19 @@ namespace CirrusSearch {
 	}
 }
 
+namespace \CirrusSearch\Extra\Query {
+	class TermFreq {
+		/**
+		 * @param string $field The name of the field to search
+		 * @param string $term The term to search for
+		 * @param string $operator A comparison operator. One of [ '<', '<=', '>', '>=', '=' ]
+		 * @param int $number The number to compare against
+		 */
+		public function __construct( $field, $term, $operator, $number ) {
+		}
+	}
+}
+
 namespace CirrusSearch\Maintenance {
 	class AnalysisConfigBuilder {
 		/**
@@ -206,6 +219,18 @@ namespace CirrusSearch\Query\Builder {
 namespace CirrusSearch\Search {
 	class CirrusIndexField {
 		const NOOP_HINT = 'noop';
+	}
+
+	class Filters {
+		/**
+		 * @param AbstractQuery[] $queries
+		 * @param bool $matchAll When true (default) function never returns null,
+		 *  when no queries are provided a MatchAll is returned.
+		 * @return AbstractQuery|null The resulting OR query. Only returns null when
+		 *  no queries are passed and $matchAll is false.
+		 */
+		public static function booleanOr( array $queries, $matchAll = true ) {
+		}
 	}
 
 	class TextIndexField {
