@@ -26,6 +26,7 @@
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use DataValues\StringValue;
+use DataValues\UnboundedQuantityValue;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
@@ -227,6 +228,9 @@ return call_user_func( function() {
 				$unitConverter = ( $flags & RdfProducer::PRODUCE_NORMALIZED_VALUES ) ?
 					WikibaseRepo::getDefaultInstance()->getUnitConverter() : null;
 				return new QuantityRdfBuilder( $complexValueHelper, $unitConverter );
+			},
+			'search-index-data-formatter-callback' => function ( UnboundedQuantityValue $value ) {
+				return (string)round( $value->getAmount()->getValueFloat() );
 			},
 		],
 		'VT:string' => [
