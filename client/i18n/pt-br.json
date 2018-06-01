@@ -86,6 +86,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Você precisa estar logado",
 	"wikibase-linkitem-not-loggedin": "Você precisa estar logado neste wiki e no [$1 repositório central de dados] para utilizar esse recurso.",
 	"wikibase-linkitem-success-link": "As páginas foram vinculadas. Você pode encontrar o item que contém os links em nosso [$1 repositório central de dados].",
+	"limitreport-entityaccesscount": "Número de entidades Wikibase carregadas",
 	"wikibase-property-notfound": "A propriedade $1 não foi encontrada.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
