@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "87b4acaf_bd0f6958",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-02T15:44:50Z",
+      "side": 1,
+      "message": "Thanks for this note, $stats-\u003eload() calls the database (replica) and it\u0027s expensive.",
+      "parentUuid": "7f0d1c7e_945b867f",
+      "revId": "2ded21039c2d27c7a9a2afbcec5fff00193224f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "857ad6c2_66640b99",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2018-05-31T15:18:20Z",
       "side": 1,
       "message": "\"dispatchLag\" would seem to be a more appropriate name.",
+      "range": {
+        "startLine": 1214,
+        "startChar": 6,
+        "endLine": 1214,
+        "endChar": 13
+      },
+      "revId": "2ded21039c2d27c7a9a2afbcec5fff00193224f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f01edf4_d259b575",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-02T15:44:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "857ad6c2_66640b99",
       "range": {
         "startLine": 1214,
         "startChar": 6,
