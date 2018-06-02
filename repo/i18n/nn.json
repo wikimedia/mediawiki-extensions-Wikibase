@@ -82,6 +82,7 @@
 	"wikibase-aliases-input-help-message": "Er datasettet kjend med meir enn eitt namn, kan du leggja til tilleggsnamn og liketydingar slik at det kan finnast med desse namna òg.",
 	"wikibase-propertypage-datatype": "Datatype",
 	"wikibase-propertypage-bad-datatype": "Ukjend datatype: $1",
+	"wikibase-claimview-snak-tooltip": "Før inn ein verdi som svarar til eigenskapen «$1». Om eigenskapen ikkje har nokon verdi eller om den rette verdien er ukjend, kan du velja ein alternativ verditype ved å klikka på ikonet før inndataboksen.",
 	"wikibase-statementview-rank-preferred": "Føretrekt rang",
 	"wikibase-statementview-rank-normal": "Normal rang",
 	"wikibase-statementview-rank-deprecated": "Forelda rang",
