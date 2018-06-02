@@ -25,5 +25,5 @@ return [
 	// local by default. Set to something LBFactory understands.
 	'changesDatabase' => false,
 
-	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
+	'maxSerializedEntitySize' => (int)$GLOBALS['wgMaxArticleSize'],
 ];
