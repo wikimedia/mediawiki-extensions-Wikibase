@@ -429,5 +429,6 @@
 	"apihelp-wbeditentity-example-12": "Выдаляе метку",
 	"apihelp-wbformatvalue-description": "Фарматуе DataValues.",
 	"apihelp-wbformatvalue-summary": "Фарматуе DataValues.",
-	"apihelp-wbformatvalue-param-generate": "Пажаданы фармат вываду для генэрацыі."
+	"apihelp-wbformatvalue-param-generate": "Пажаданы фармат вываду для генэрацыі.",
+	"apihelp-wbformatvalue-param-datatype": "Тып зьвестак значэньня. Ён адрозьніваецца ад тыпу значэньня"
 }

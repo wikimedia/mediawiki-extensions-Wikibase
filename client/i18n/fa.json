@@ -44,6 +44,7 @@
 	"apihelp-query+pageterms-example-label-en": "برچسب‌ها و نام‌های مستعار مرتبط شده با صفحه 'London' در انگلیسی را دریافت کن",
 	"apihelp-query+pageterms-example-item": "گرفتن برچسب‌ها و نام‌های مستعار آیتم Q84.",
 	"apihelp-query+pageterms-param-terms": "نوع اصطلاح‌ها برای دریافت مانند «توضیحات». اگر مشخص نشده باشد، همهٔ نوع‌ها بازگشت داده می‌شود.",
+	"apihelp-query+description-example": "گرفتن توضیحات برای صفحه «London»",
 	"apihelp-query+wikibase-description": "اطلاعاتی درباره بخش کاربری ویکی‌بیس و  مخزن ویکی‌بیس مرتبط دریافت کن.",
 	"apihelp-query+wikibase-example": "دریافت نشانی اینترنتی و اطلاعات مرتبط با ویکی‌بیس کلاینت و مخزن ویکی‌بیس.",
 	"wikibase-after-page-move": "شما ممکن است در عین حال بخواهید آیتم وابستهٔ {{WBREPONAME}} را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.",
