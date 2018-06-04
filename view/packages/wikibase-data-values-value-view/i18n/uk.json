@@ -3,7 +3,8 @@
 		"authors": [
 			"Ата",
 			"Mykola Swarnyk",
-			"Piramidion"
+			"Piramidion",
+			"Avatar6"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обробка значень «$1» ще не підтримується.",
@@ -18,8 +19,8 @@
 	"valueview-expert-timeinput-calendar": "Календар:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Мова (обов'язково)",
-	"valueview-expertextender-unitsuggester-label": "Блок (на вибір):",
-	"valueview-preview-label": "буде відображатися як:",
+	"valueview-expertextender-unitsuggester-label": "Од. вимірювання (опціонально):",
+	"valueview-preview-label": "відобразиться як:",
 	"valueview-preview-novalue": "не розпізнано допустимого значення",
 	"valueview-listrotator-manually": "встановити вручну"
 }

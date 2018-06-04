@@ -4,9 +4,11 @@
 			"Njardarlogar"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handsaming av «$1»-verdiar er enno ikkje støtta.",
 	"valueview-expert-emptyvalue-empty": "tom",
 	"valueview-expert-timeinput-precision": "Presisjon",
 	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-unitsuggester-label": "Eining (valfri):",
 	"valueview-preview-label": "vil visast som:",
 	"valueview-preview-novalue": "ingen gild verdi vart attkjend"
 }
