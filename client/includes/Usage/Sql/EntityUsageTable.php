@@ -319,7 +319,8 @@ class EntityUsageTable {
 			$this->tableName,
 			[ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ],
 			$where,
-			__METHOD__
+			__METHOD__,
+			[ 'ORDER BY' => 'eu_page_id' ]
 		);
 
 		$pages = $this->foldRowsIntoPageEntityUsages( $res );
