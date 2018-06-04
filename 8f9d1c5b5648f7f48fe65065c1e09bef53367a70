@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36700ab4_12f59983",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-06-04T12:54:02Z",
+      "side": 0,
+      "message": "I can only assume (seeing both diffs at the same time) that this mw\u003c1.25 would not work in 5.6.99 anyways, but why are we changing something explicit to something implicit?",
+      "range": {
+        "startLine": 47,
+        "startChar": 26,
+        "endLine": 47,
+        "endChar": 31
+      },
+      "revId": "8f9d1c5b5648f7f48fe65065c1e09bef53367a70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
