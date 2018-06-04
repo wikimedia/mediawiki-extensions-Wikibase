@@ -114,6 +114,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "Endra {{PLURAL:$4|éin kvalifikator|$4 kvalifikatorar}} for {{PLURAL:$3|éi utsegn|utsegner}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "Endra {{PLURAL:$4|éin referanse|$4 referansar}} for {{PLURAL:$3|utsegn|utsegner}}",
 	"wikibase-entity-summary-clientsitelink-update": "Sida flytt frå [$3] til [$4]",
+	"wikibase-entity-summary-clientsitelink-remove": "Sletta side på [$3]",
 	"wikibase-entity-summary-wbsetqualifier-add": "La til {{PLURAL:$1|kvalifikator|kvalifikatorar}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "Endra {{PLURAL:$1|kvalifikator|kvalifikatorar}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Fjerna {{PLURAL:$1|kvalifikator|kvalifikatorar}}",
