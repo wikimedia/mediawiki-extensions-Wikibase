@@ -22,6 +22,30 @@
       "revId": "533ba6430e56c6a4619bd9ecf776483808eb1b7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdc34815_351a4a11",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-06-04T14:22:48Z",
+      "side": 1,
+      "message": "It matches the API keywords, and I am pretty sure API users would find repo/client more confusing.",
+      "parentUuid": "79f3ee6b_ca9e2114",
+      "range": {
+        "startLine": 135,
+        "startChar": 29,
+        "endLine": 135,
+        "endChar": 36
+      },
+      "revId": "533ba6430e56c6a4619bd9ecf776483808eb1b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
