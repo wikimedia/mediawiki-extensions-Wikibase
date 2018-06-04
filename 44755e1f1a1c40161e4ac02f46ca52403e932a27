@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b965f132_673d95ef",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:49:45Z",
+      "side": 1,
+      "message": "\"set to a positive number\"",
+      "range": {
+        "startLine": 86,
+        "startChar": 91,
+        "endLine": 86,
+        "endChar": 106
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bea87efe_75c30456",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:49:45Z",
+      "side": 1,
+      "message": "This page doesn\u0027t exist.\n\nAlso I wonder if it should be …/ApiMaxLagInfo?",
+      "range": {
+        "startLine": 1193,
+        "startChar": 9,
+        "endLine": 1193,
+        "endChar": 63
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a97e3dc1_57b98343",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:49:45Z",
+      "side": 1,
+      "message": "Is this condition inverted? I think it is.\n\nAlso, please use a \"\u003c\u003d 0\" comparison here to not accidentally divide by a negative number below.",
+      "range": {
+        "startLine": 1203,
+        "startChar": 7,
+        "endLine": 1203,
+        "endChar": 33
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04f5a12c_ec4ff9db",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:49:45Z",
+      "side": 1,
+      "message": "As far as I can tell this is a hook handler. Hook handlers don\u0027t support returning anything but true or false. I assume this is a mistake, and should have been a straight \"return\".",
+      "range": {
+        "startLine": 1204,
+        "startChar": 3,
+        "endLine": 1204,
+        "endChar": 18
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "603cb6c2_e305a7c7",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:49:45Z",
+      "side": 1,
+      "message": "a positive number",
+      "range": {
+        "startLine": 284,
+        "startChar": 17,
+        "endLine": 284,
+        "endChar": 25
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
