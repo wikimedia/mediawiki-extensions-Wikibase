@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use MagicWord;
 use Parser;
 
 /**
@@ -16,12 +17,13 @@ class ShortDescHandler {
 	 *
 	 * @param Parser $parser
 	 * @param string $shortDesc Short description of the current page, as plain text.
+	 * @param string $controlArg An extra argument to control behavior (such as 'noreplace').
 	 *
 	 * @return string
 	 */
-	public static function handle( Parser $parser, $shortDesc ) {
+	public static function handle( Parser $parser, $shortDesc, $controlArg = '' ) {
 		$handler = self::newFromGlobalState();
-		$handler->doHandle( $parser, $shortDesc );
+		$handler->doHandle( $parser, $shortDesc, $controlArg );
 		return '';
 	}
 
@@ -75,15 +77,34 @@ class ShortDescHandler {
 	 *
 	 * @param Parser $parser
 	 * @param string $shortDesc Short description of the current page, as plain text.
+	 * @param string $controlArg An extra argument to control behavior (such as 'noreplace').
 	 *
 	 * @return void
 	 */
-	public function doHandle( Parser $parser, $shortDesc ) {
+	public function doHandle( Parser $parser, $shortDesc, $controlArg ) {
+		$noReplace = $this->parseNoReplace( $controlArg );
+		$out = $parser->getOutput();
+
+		if ( $out->getProperty( 'wikibase-shortdesc' ) !== false && $noReplace ) {
+			return;
+		}
+
 		$shortDesc = $this->sanitize( $shortDesc );
 		if ( $this->isValid( $shortDesc ) ) {
-			$out = $parser->getOutput();
 			$out->setProperty( 'wikibase-shortdesc', $shortDesc );
 		}
+	}
+
+	/**
+	 * @param string $controlArg
+	 * @return bool
+	 */
+	private function parseNoReplace( $controlArg ) {
+		static $magicWord = null;
+		if ( is_null( $magicWord ) ) {
+			$magicWord = MagicWord::get( 'shortdesc_noreplace' );
+		}
+		return $magicWord->matchStartToEnd( $controlArg );
 	}
 
 }
