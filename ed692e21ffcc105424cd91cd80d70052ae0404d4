@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e200839a_8c5d5203",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:43:26Z",
+      "side": 1,
+      "message": "This preg_replace should go after html_entity_decode, otherwise it\u0027s still possible to have newlines in the string by encoding them as HTML entities.",
+      "revId": "ed692e21ffcc105424cd91cd80d70052ae0404d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55e57e7a_22ddfb51",
+        "filename": "client/tests/phpunit/includes/Hooks/ShortDescHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-04T12:43:26Z",
+      "side": 1,
+      "message": "Please add more test cases. Suggestions:\n\n\u0027\u0026#32;a\u0027 \u003d\u003e \u0027a\u0027\n\u0027a\u0026#10;b\u0027 \u003d\u003e \u0027a b\u0027\n\u0027a\u0026lt;b\u0026gt;c\u0027 \u003d\u003e \u0027a\u003cb\u003ec\u0027\n\u0027a\u0026amp;lt;b\u0027 \u003d\u003e \u0027a\u0026lt;b\u0027\n\u0027\u0026lt;b\u003ea\u0026lt;/b\u003e\u0027 \u003d\u003e \u0027\u003cb\u003ea\u003c/b\u003e\u0027",
+      "revId": "ed692e21ffcc105424cd91cd80d70052ae0404d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
