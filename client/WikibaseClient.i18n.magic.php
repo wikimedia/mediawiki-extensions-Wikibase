@@ -15,6 +15,7 @@ $magicWords['en'] = [
 	'statements' => [ 0, 'statements' ],
 	'wbreponame' => [ 0, 'wbreponame' ],
 	'shortdesc' => [ 1, 'SHORTDESC' ],
+	'shortdesc_noreplace' => [ 0, 'noreplace' ],
 ];
 
 /** Arabic (العربية) */
