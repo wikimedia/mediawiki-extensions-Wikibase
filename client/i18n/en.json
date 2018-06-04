@@ -37,6 +37,7 @@
 	"apihelp-query+pageterms-example-item": "Get labels and aliases of item Q84.",
 	"apihelp-query+pageterms-param-terms": "The types of terms to get, e.g. 'description', each returned as an array of strings keyed by their type, e.g. {\"description\": [\"foo\"]}. If not specified, all types are returned.",
 	"apihelp-query+description-summary": "Get a short description a.k.a. subtitle explaining what the target page is about.",
+	"apihelp-query+description-extended-description": "The description is plain text, on a single line, but otherwise arbitrary (potentially including raw HTML tags, which also should be intepreted as plain text). It must not be used in HTML unescaped!",
 	"apihelp-query+description-param-prefersource": "Which description source to prefer if present:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Local descriptions via <code><nowiki>{{SHORTDESC:...}}</nowiki></code> parser function in the wikitext of the page.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Central descriptions from the associated {{WBREPONAME}} item.",

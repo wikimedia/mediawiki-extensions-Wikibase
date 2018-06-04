@@ -49,15 +49,25 @@ class ShortDescHandler {
 	 *
 	 * Note that the sanitized description can still contain HTML (that was encoded as entities in
 	 * the original) as there is no reason why someone shouldn't mention HTML tags in a description.
-	 * No effort is made to handle trickier cases like <pre> correctly as there is no legitimate
-	 * reason to use anything like that in {{SHORTDESC:...}}.
+	 * That means the sanitized value is actually less safe for HTML inclusion than the original
+	 * one (can contain <script> tags)! It is the clients' responsibility to handle it safely.
 	 *
 	 * @param string $shortDesc Short description of the current page, as HTML.
 	 *
 	 * @return string Plaintext of description.
 	 */
 	public function sanitize( $shortDesc ) {
-		return trim( html_entity_decode( strip_tags( $shortDesc ), ENT_QUOTES, 'utf-8' ) );
+		// Remove accidental formatting - descriptions are plaintext.
+		$shortDesc = strip_tags( $shortDesc );
+		// Unescape - clients are not necessarily HTML-based and using HTML tags as part of
+		// the descript (i.e. with <nowiki> or such) should be possible.
+		$shortDesc = html_entity_decode( $shortDesc, ENT_QUOTES, 'utf-8' );
+		// Remove newlines, tabs and other weird whitespace
+		$shortDesc = preg_replace( '/\s+/', ' ', $shortDesc );
+		// Get rid of leading/trailing space - no valid usecase for it, easy for it to go unnoticed
+		// in HTML, and clients might display the description in an environment that does not
+		// ignore spaces like HTML does.
+		return trim( $shortDesc );
 	}
 
 	/**
