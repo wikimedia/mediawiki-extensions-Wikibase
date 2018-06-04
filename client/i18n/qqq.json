@@ -50,6 +50,7 @@
 	"apihelp-query+pageterms-example-item": "{{doc-apihelp-example|query+pageterms}}",
 	"apihelp-query+pageterms-param-terms": "{{doc-apihelp-param|query+pageterms|terms}}",
 	"apihelp-query+description-summary": "{{doc-apihelp-summary|query+description}}",
+	"apihelp-query+description-extended-description": "{{doc-apihelp-extended-description|query+description}}",
 	"apihelp-query+description-param-prefersource": "{{doc-apihelp-param|query+description|prefersource}}",
 	"apihelp-query+description-paramvalue-prefersource-local": "{{doc-apihelp-paramvalue|query+description|prefersource|local}}",
 	"apihelp-query+description-paramvalue-prefersource-central": "{{doc-apihelp-paramvalue|query+description|prefersource|central}}",

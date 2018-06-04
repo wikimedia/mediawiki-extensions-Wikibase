@@ -65,7 +65,13 @@ class ShortDescHandlerTest extends TestCase {
 			// expanded parser function parameter, sanitized value
 			'trim' => [ ' foo ', 'foo' ],
 			'remove HTML' => [ 'a<i>b</i>c', 'abc' ],
-			'decode' => [ '&lt;div&gt;', '<div>' ],
+			'remove newline' => [ "a\nb\n \nc", 'a b c' ],
+			'decode' => [ 'a&lt;div&gt;b', 'a<div>b' ],
+			'decode and trim' => [ '&#32;a', 'a' ],
+			'decode and remove newline' => [ 'a&#10;b', 'a b' ],
+			'decode, remove newline and trim' => [ '&#10;b', 'b' ],
+			'do not decode twice' => [ 'a&amp;lt;b', 'a&lt;b' ],
+			'do not remove HTML after decode' => [ '&lt;b>a&lt;/b>', '<b>a</b>' ],
 		];
 	}
 
