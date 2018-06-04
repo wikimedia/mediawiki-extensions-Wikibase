@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fbb025d_5c862928",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-06-04T14:23:22Z",
+      "side": 1,
+      "message": "Either \"clients\u0027 responsibility\" or \"the client\u0027s responsibility\".",
+      "range": {
+        "startLine": 53,
+        "startChar": 43,
+        "endLine": 53,
+        "endChar": 55
+      },
+      "revId": "91bb4c533ba92e99511d787136733d8006185c85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
