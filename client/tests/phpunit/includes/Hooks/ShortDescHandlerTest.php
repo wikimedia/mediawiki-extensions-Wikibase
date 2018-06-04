@@ -76,24 +76,17 @@ class ShortDescHandlerTest extends TestCase {
 	 * @param string|null $pageProperty
 	 */
 	public function testDoHandle( $inputString, $pageProperty ) {
-		$output = $this->getMockBuilder( \OutputPage::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$parser = $this->getMockBuilder( \Parser::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$parser->expects( $this->any() )
-			->method( 'getOutput' )
-			->willReturn( $output );
+		$output = $this->getMockBuilder( \OutputPage::class )->disableOriginalConstructor()->getMock();
+		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
+		$parser->expects( $this->any() )->method( 'getOutput' )->willReturn( $output );
 		if ( $pageProperty === null ) {
-			$output->expects( $this->never() )
-				->method( 'setProperty' );
+			$output->expects( $this->never() )->method( 'setProperty' );
 		} else {
 			$output->expects( $this->once() )
 				->method( 'setProperty' )
 				->with( 'wikibase-shortdesc', $pageProperty );
 		}
-		$this->handler->doHandle( $parser, $inputString );
+		$this->handler->doHandle( $parser, $inputString, '' );
 	}
 
 	public function provideDoHandle() {
@@ -107,4 +100,25 @@ class ShortDescHandlerTest extends TestCase {
 		];
 	}
 
+	public function testDoHandle_noreplace() {
+		$shortDesc = null;
+
+		$output = $this->getMockBuilder( \OutputPage::class )->disableOriginalConstructor()->getMock();
+		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
+		$parser->expects( $this->any() )->method( 'getOutput' )->willReturn( $output );
+		$output->expects( $this->any() )->method( 'setProperty' )
+			->willReturnCallback( function ( $name, $value ) use ( &$shortDesc ) {
+				$this->assertSame( 'wikibase-shortdesc', $name );
+				$shortDesc = $value;
+			} );
+
+		$this->handler->doHandle( $parser, 'foo', '' );
+		$this->assertSame( 'foo', $shortDesc );
+
+		$this->handler->doHandle( $parser, 'bar', '' );
+		$this->assertSame( 'bar', $shortDesc );
+
+		$this->handler->doHandle( $parser, 'baz', 'noreplace' );
+		$this->assertSame( 'bar', $shortDesc );
+	}
 }
