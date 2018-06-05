@@ -24,6 +24,7 @@
 
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
 
 return call_user_func( function() {
 	// NOTE: 'formatter-factory-callback' callbacks act as glue between the high level interface
@@ -101,6 +102,11 @@ return call_user_func( function() {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
+		],
+		'VT:wikibase-unmapped-entityid' => [
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				return new UnmappedEntityIdValueFormatter( $format, $options );
+			}
 		],
 		'PT:external-id' => [
 			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
