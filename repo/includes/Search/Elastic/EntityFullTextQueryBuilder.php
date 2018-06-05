@@ -85,7 +85,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * searches that might be better?
 	 * @throws \MWException
 	 */
-	public function build( SearchContext $searchContext, $term, $showSuggestion ) {
+	public function build( SearchContext $searchContext, $term, $showSuggestion = false ) {
 		$entityNs = [];
 		$articleNs = [];
 		foreach ( $searchContext->getNamespaces() as $ns ) {
