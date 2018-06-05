@@ -161,6 +161,7 @@ return [
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
+		'fulltext-search-context' => \Wikibase\Repo\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -253,5 +254,6 @@ return [
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
+		'fulltext-search-context' => \Wikibase\Repo\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	]
 ];
