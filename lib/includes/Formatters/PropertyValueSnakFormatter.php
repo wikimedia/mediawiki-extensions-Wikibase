@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
 
 /**
@@ -91,11 +92,14 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 
 		$value = $snak->getDataValue();
 
+		$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+
+		if ( $value instanceof UnmappedEntityIdValue ) {
+			return $this->formatValue( $value, $propertyType );
+		}
+
 		try {
-			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
-		} catch ( PropertyDataTypeLookupException $ex ) {
-			throw $ex;
 		} catch ( OutOfBoundsException $ex ) {
 			throw new FormattingException( $ex->getMessage(), 0, $ex );
 		}

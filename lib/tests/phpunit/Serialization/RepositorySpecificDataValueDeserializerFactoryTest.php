@@ -8,6 +8,7 @@ use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
+use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
@@ -92,6 +93,19 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit\Framew
 		$this->setExpectedException( DeserializationException::class );
 
 		$deserializer->deserialize( [ 'type' => 'wikibase-entityid', 'value' => [ 'entity-type' => 'item', 'numeric-id' => 3 ] ] );
+	}
+
+	public function testReturnsDeserializerParsingEntityIdValuesOfUnmappedEntityType() {
+		$factory = new RepositorySpecificDataValueDeserializerFactory(
+			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
+		);
+
+		$deserializer = $factory->getDeserializer( '' );
+
+		$result = $deserializer->deserialize( [ 'type' => 'wikibase-entityid', 'value' => [ 'id' => 'X303' ] ] );
+
+		$this->assertInstanceOf( UnmappedEntityIdValue::class, $result );
+		$this->assertSame( 'X303', $result->getValue() );
 	}
 
 }
