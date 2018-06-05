@@ -40,6 +40,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Search\Elastic\DispatchingQueryBuilder;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
@@ -1175,6 +1176,34 @@ final class RepoHooks {
 				$repo->getEntityIdParser(),
 				$repo->getUserLanguage()->getCode()
 			);
+	}
+
+	/**
+	 * @param FullTextQueryBuilder $builder
+	 * @param string $term
+	 * @param SearchContext $context
+	 */
+	public static function onCirrusSearchFulltextQueryBuilderComplete(
+		FullTextQueryBuilder $builder,
+		$term,
+		SearchContext $context
+	) {
+		if ( !$context->getConfig()->isLocalWiki() ) {
+			// don't mess with interwiki searches
+			return;
+		}
+
+		$repo = WikibaseRepo::getDefaultInstance();
+		$settings = $repo->getSettings()->getSetting( 'entitySearch' );
+		if ( !$settings || empty( $settings['useCirrus'] ) ) {
+			// Right now our specialized search is Cirrus, so no point in
+			// calling dispatcher if Cirrus is disabled.
+			return;
+		}
+
+		$wbBuilder = new DispatchingQueryBuilder( $repo->getFulltextSearchTypes(),
+				$repo->getEntityNamespaceLookup() );
+		$wbBuilder->build( $context, $term );
 	}
 
 	/**

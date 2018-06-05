@@ -473,6 +473,8 @@
 	"wikibase-search-bad-entity-type": "Error message displayed when user supplies bad entity type to wbsearchentities",
 	"wikibase-search-bad-profile-name": "Error message displayed when user supplies bad search profile name",
 	"wikibase-search-namespace-mix": "Warning when using mixed namespaces in fulltext search",
+	"wikibase-search-config-notfound": "Error message displayed when configured search profile can not be loaded",
+	"wikibase-search-config-badclass": "Error message displayed when configured query builder can not be found or has wrong type",
 	"apihelp-wbavailablebadges-description": "{{doc-apihelp-description|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-summary": "{{doc-apihelp-summary|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",

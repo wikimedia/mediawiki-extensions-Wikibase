@@ -125,12 +125,12 @@ class ShowSearchHitHandler {
 			return;
 		}
 
-		$extract = '';
-
 		$entity = $this->getEntity( $title );
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			return;
 		}
+
+		$extract = '';
 
 		$entityTerms = $entity->getDescriptions()->toTextArray();
 		$termData = $this->languageFallbackChain->extractPreferredValue( $entityTerms );
@@ -283,7 +283,7 @@ class ShowSearchHitHandler {
 	 */
 	private function showPlainSearchTitle( Title $title, &$titleSnippet ) {
 		if ( $this->isTitleEntity( $title ) ) {
-			$titleSnippet = $title->getPrefixedText();
+			$titleSnippet = $title->getFullText();
 		}
 		// The rest of the plain title work is done in LinkBeginHookHandler
 	}

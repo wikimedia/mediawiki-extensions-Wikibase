@@ -268,6 +268,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Rdf\\Values\\GeoShapeRdfBuilder' => __DIR__ . '/includes/Rdf/Values/GeoShapeRdfBuilder.php',
 	'Wikibase\\Repo\\Rdf\\Values\\TabularDataRdfBuilder' => __DIR__ . '/includes/Rdf/Values/TabularDataRdfBuilder.php',
 	'Wikibase\\Repo\\Search\\Elastic\\ConfigBuilder' => __DIR__ . '/includes/Search/Elastic/ConfigBuilder.php',
+	'Wikibase\\Repo\\Search\\Elastic\\DispatchingQueryBuilder' => __DIR__ . '/includes/Search/Elastic/DispatchingQueryBuilder.php',
 	'Wikibase\\Repo\\Search\\Elastic\\ElasticTermResult' => __DIR__ . '/includes/Search/Elastic/ElasticTermResult.php',
 	'Wikibase\\Repo\\Search\\Elastic\\EntityFullTextQueryBuilder' => __DIR__ . '/includes/Search/Elastic/EntityFullTextQueryBuilder.php',
 	'Wikibase\\Repo\\Search\\Elastic\\EntityResult' => __DIR__ . '/includes/Search/Elastic/EntityResult.php',

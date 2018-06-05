@@ -10,7 +10,7 @@ use Elastica\Query\Match;
 use Elastica\Query\Term;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Builder for entity fulltext queries
@@ -22,20 +22,10 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 */
 	private $settings;
 	/**
-	 * This is regular fulltext builder which we'll use
-	 * if we can't use the main one.
-	 * @var FullTextQueryBuilder
-	 */
-	private $delegate;
-	/**
 	 * Repository 'entitySearch' settings
 	 * @var array
 	 */
 	private $searchSettings;
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup;
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
@@ -50,30 +40,41 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	private $userLanguage;
 
 	/**
-	 * @param FullTextQueryBuilder $delegate
 	 * @param array $searchSettings Settings from entitySearch config entry
 	 * @param array $settings Settings from EntitySearchProfiles.php
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param string $userLanguage User's language code
 	 */
 	public function __construct(
-		FullTextQueryBuilder $delegate,
 		array $searchSettings,
 		array $settings,
-		EntityNamespaceLookup $entityNamespaceLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityIdParser $entityIdParser,
 		$userLanguage
 	) {
 		$this->searchSettings = $searchSettings;
 		$this->settings = $settings;
-		$this->delegate = $delegate;
-		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->userLanguage = $userLanguage;
+	}
+
+	/**
+	 * Create fulltext builder from global environment.
+	 * @param array $settings Configuration from config file
+	 * @return EntityFullTextQueryBuilder
+	 * @throws \MWException
+	 */
+	public static function newFromGlobals( array $settings ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		return new static(
+			$repo->getSettings()->getSetting( 'entitySearch' ),
+			$settings,
+			$repo->getLanguageFallbackChainFactory(),
+			$repo->getEntityIdParser(),
+			$repo->getUserLanguage()->getCode()
+		);
 	}
 
 	/**
@@ -84,49 +85,24 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @throws \MWException
 	 */
 	public function build( SearchContext $searchContext, $term ) {
-		$entityNs = [];
-		$articleNs = [];
-		foreach ( $searchContext->getNamespaces() as $ns ) {
-			if ( $this->entityNamespaceLookup->isEntityNamespace( (int)$ns ) ) {
-				$entityNs[] = $ns;
-			} else {
-				$articleNs[] = $ns;
-			}
-		}
-		if ( empty( $entityNs ) ) {
-			$this->delegate->build( $searchContext, $term );
-			return;
-		}
-		// TODO: if we have a mix here of article & entity namespaces, the search may not work
-		// very well here. Right now we're just forcing it to entity space. We may want to look
-		// for a better solution.
-		if ( !empty( $articleNs ) ) {
-			$searchContext->addWarning( 'wikibase-search-namespace-mix' );
-		}
-		$searchContext->setNamespaces( $entityNs );
-
-		// TODO: eventually we should deal with combined namespaces, probably running
-		// a union of entity query for entity namespaces and delegate query for article namespaces
-		$this->buildEntitySearch( $searchContext, $term );
-	}
-
-	/**
-	 * Set up entity search query
-	 * @param SearchContext $searchContext
-	 * @param string $term
-	 * @throws \MWException
-	 */
-	protected function buildEntitySearch( SearchContext $searchContext, $term ) {
-		// Try the old builder first.
-		$this->delegate->build( $searchContext, $term, false );
 		if ( $searchContext->areResultsPossible() && !$searchContext->isSpecialKeywordUsed() ) {
 			// We use entity search query if we did not find any advanced syntax
 			// and the base builder did not reject the query
 			$this->buildEntitySearchQuery( $searchContext, $term );
 		}
 		// if we did find advanced query, we keep the old setup but change the result type
+		// FIXME: make it dispatch by content model
 		$searchContext->setResultsType( new EntityResultType( $this->userLanguage,
 			$this->languageFallbackChainFactory->newFromLanguageCode( $this->userLanguage ) ) );
+	}
+
+	/**
+	 * @param SearchContext $searchContext
+	 * @return bool
+	 */
+	public function buildDegraded( SearchContext $searchContext ) {
+		// Not doing anything for now
+		return false;
 	}
 
 	/**
@@ -258,14 +234,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		$query->setMinimumShouldMatch( 1 );
 
 		$searchContext->setMainQuery( $query );
-	}
-
-	/**
-	 * @param SearchContext $searchContext
-	 * @return bool
-	 */
-	public function buildDegraded( SearchContext $searchContext ) {
-		return $this->delegate->buildDegraded( $searchContext );
 	}
 
 	/**
