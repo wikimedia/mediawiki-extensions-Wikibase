@@ -358,6 +358,33 @@ function wikibase.setupInterface()
 		return php.getPropertyOrder()
 	end
 
+	-- Get the closest referenced entity (out of toIds), from a given entity.
+	--
+	-- @param {string} fromEntityId
+	-- @param {string} propertyId
+	-- @param {table} toIds
+	wikibase.getReferencedEntityId = function( fromEntityId, propertyId, toIds )
+		checkType( 'getReferencedEntityId', 1, fromEntityId, 'string' )
+		checkType( 'getReferencedEntityId', 2, propertyId, 'string' )
+		checkType( 'getReferencedEntityId', 3, toIds, 'table' )
+
+		-- Check the type of all toId values, Scribunto has no function for this yet (T196048)
+		for i, toId in ipairs( toIds ) do
+			if type( toId ) ~= 'string' then
+				error(
+					'toIds value at index ' .. i .. ' must be string, ' .. type( toId ) .. ' given.',
+					1
+				)
+			end
+		end
+
+		if not php.getSetting( 'allowArbitraryDataAccess' ) then
+			error( 'Access to arbitrary entities has been disabled.', 2 )
+		end
+
+		return php.getReferencedEntityId( fromEntityId, propertyId, toIds )
+	end
+
 	mw = mw or {}
 	mw.wikibase = wikibase
 	package.loaded['mw.wikibase'] = wikibase
