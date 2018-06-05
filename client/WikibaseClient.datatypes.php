@@ -42,6 +42,12 @@ return call_user_func( function() {
 				return $factory->newUnDeserializableValueFormatter( $format, $options );
 			}
 		],
+		'VT:unknown' => [
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
+				return $factory->newUnDeserializableValueFormatter( $format, $options );
+			}
+		],
 		'VT:globecoordinate' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
