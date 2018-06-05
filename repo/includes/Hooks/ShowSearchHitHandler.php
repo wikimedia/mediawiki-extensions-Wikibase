@@ -125,12 +125,12 @@ class ShowSearchHitHandler {
 			return;
 		}
 
-		$extract = '';
-
 		$entity = $this->getEntity( $title );
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			return;
 		}
+
+		$extract = '';
 
 		$entityTerms = $entity->getDescriptions()->toTextArray();
 		$termData = $this->languageFallbackChain->extractPreferredValue( $entityTerms );
