@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a74a80b_d495025e",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-05T15:00:29Z",
+      "side": 1,
+      "message": "Is this sentence missing some words? Better remove it if there is nothing to say. The @see below should provide enough information.",
+      "range": {
+        "startLine": 1191,
+        "startChar": 4,
+        "endLine": 1191,
+        "endChar": 33
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e2bdfeb_fc4a82dd",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-05T15:00:29Z",
+      "side": 1,
+      "message": "Could have an \"array\" type hint here.",
+      "range": {
+        "startLine": 1197,
+        "startChar": 41,
+        "endLine": 1197,
+        "endChar": 50
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
