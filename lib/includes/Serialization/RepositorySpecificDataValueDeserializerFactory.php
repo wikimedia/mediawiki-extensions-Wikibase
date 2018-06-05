@@ -10,8 +10,10 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
+use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 
 /**
  * Factory creating DataValueDeserializer instances configured for the given repository, ie.
@@ -66,9 +68,14 @@ class RepositorySpecificDataValueDeserializerFactory {
 						'Not able to parse entity id values from the foreign repository not containing the "id" string'
 					);
 				}
-				return isset( $value['id'] )
-					? new EntityIdValue( $parser->parse( $value['id'] ) )
-					: EntityIdValue::newFromArray( $value );
+				try {
+					$result = isset( $value['id'] )
+						? new EntityIdValue( $parser->parse( $value['id'] ) )
+						: EntityIdValue::newFromArray( $value );
+				} catch ( EntityIdParsingException $e ) {
+					$result = new UnmappedEntityIdValue( $value['id'] );
+				}
+				return $result;
 			},
 		] );
 	}
