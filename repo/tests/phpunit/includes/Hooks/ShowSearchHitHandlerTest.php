@@ -300,6 +300,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		// hack: content model equals title/id
 		$mockTitle->method( 'getContentModel' )->willReturn( $title );
 		$mockTitle->method( 'getPrefixedText' )->willReturn( "Prefix:$title" );
+		$mockTitle->method( 'getFullText' )->willReturn( "Prefix:$title" );
 
 		$searchResult = $this->getMockBuilder( SearchResult::class )
 			->disableOriginalConstructor()
