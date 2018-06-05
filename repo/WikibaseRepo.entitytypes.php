@@ -170,6 +170,7 @@ return [
 				new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getEntityIdParser() )
 			] );
 		},
+		'fulltext-search-context' => \Wikibase\Repo\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -265,5 +266,6 @@ return [
 		'entity-reference-extractor-callback' => function() {
 			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getEntityIdParser() );
 		},
+		'fulltext-search-context' => \Wikibase\Repo\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	]
 ];
