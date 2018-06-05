@@ -81,11 +81,9 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 *
 	 * @param SearchContext $searchContext
 	 * @param string $term term to search
-	 * @param bool $showSuggestion should this search suggest alternative
-	 * searches that might be better?
 	 * @throws \MWException
 	 */
-	public function build( SearchContext $searchContext, $term, $showSuggestion ) {
+	public function build( SearchContext $searchContext, $term ) {
 		$entityNs = [];
 		$articleNs = [];
 		foreach ( $searchContext->getNamespaces() as $ns ) {
@@ -96,7 +94,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			}
 		}
 		if ( empty( $entityNs ) ) {
-			$this->delegate->build( $searchContext, $term, $showSuggestion );
+			$this->delegate->build( $searchContext, $term );
 			return;
 		}
 		// TODO: if we have a mix here of article & entity namespaces, the search may not work
