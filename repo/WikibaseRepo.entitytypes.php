@@ -161,6 +161,8 @@ return [
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
+		// EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT
+		'fulltext-search-type' => 'wikibase_fulltext_search',
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -253,5 +255,7 @@ return [
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
+		// EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT
+		'fulltext-search-type' => 'wikibase_fulltext_search',
 	]
 ];
