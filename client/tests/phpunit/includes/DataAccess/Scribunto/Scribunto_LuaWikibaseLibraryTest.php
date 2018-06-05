@@ -504,6 +504,34 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertEquals( $expected, $propertyOrder );
 	}
 
+	public function testGetReferencedEntityId_limitExceeded() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'referencedEntityIdAccessLimit', 2 );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			[ null ],
+			$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'P2', [ 'Q3' ] )
+		);
+		$this->assertSame(
+			[ null ],
+			$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'P2', [ 'Q3' ] )
+		);
+
+		$this->setExpectedException( ScribuntoException::class );
+		$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'P2', [ 'Q3' ] );
+	}
+
+	public function testGetReferencedEntityId_propertyIdWrongType() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			[ null ],
+			$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'Q2', [ 'Q3' ] )
+		);
+	}
+
 	/**
 	 * @param string[] $propertyOrder
 	 * @return PropertyOrderProvider $propertyOrderProvider

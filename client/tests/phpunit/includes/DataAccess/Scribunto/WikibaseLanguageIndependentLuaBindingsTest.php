@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use Exception;
 use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
@@ -11,7 +12,11 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
+use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -41,12 +46,14 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 	/**
 	 * @param SiteLinkLookup|null $siteLinkLookup
 	 * @param UsageAccumulator|null $usageAccumulator
+	 * @param ReferencedEntityIdLookup|null $referencedEntityIdLookup
 	 *
 	 * @return WikibaseLanguageIndependentLuaBindings
 	 */
 	private function getWikibaseLanguageIndependentLuaBindings(
 		SiteLinkLookup $siteLinkLookup = null,
-		UsageAccumulator $usageAccumulator = null
+		UsageAccumulator $usageAccumulator = null,
+		ReferencedEntityIdLookup $referencedEntityIdLookup = null
 	) {
 		return new WikibaseLanguageIndependentLuaBindings(
 			$siteLinkLookup ?: $this->getMock( SiteLinkLookup::class ),
@@ -55,6 +62,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			new BasicEntityIdParser,
 			$this->getMock( TermLookup::class ),
 			new StaticContentLanguages( [] ),
+			$referencedEntityIdLookup ?: $this->getMock( ReferencedEntityIdLookup::class ),
 			'enwiki'
 		);
 	}
@@ -76,6 +84,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			new BasicEntityIdParser,
 			$this->getMock( TermLookup::class ),
 			new StaticContentLanguages( [] ),
+			$this->getMock( ReferencedEntityIdLookup::class ),
 			'enwiki'
 		);
 
@@ -192,6 +201,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			new BasicEntityIdParser,
 			$termLookup,
 			new StaticContentLanguages( $hasLang ? [ $languageCode ] : [] ),
+			$this->getMock( ReferencedEntityIdLookup::class ),
 			'enwiki'
 		);
 
@@ -268,6 +278,74 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings();
 
 		$this->assertSame( $expected, $wikibaseLuaBindings->isValidEntityId( $entityIdSerialization ) );
+	}
+
+	/**
+	 * @param Exception|mixed $result Will be thrown if this is an Exception, will be returned
+	 *		otherwise.
+	 * @return ReferencedEntityIdLookup
+	 */
+	private function newReferencedEntityIdLookupMock( $result ) {
+		$referencedEntityIdLookup = $this->getMock( ReferencedEntityIdLookup::class );
+		$getReferencedEntityIdMocker = $referencedEntityIdLookup
+			->expects( $this->once() )
+			->method( 'getReferencedEntityId' )
+			->with( new ItemId( 'Q1453477' ), new PropertyId( 'P1366' ), [ new ItemId( 'Q2013' ) ] );
+
+		if ( $result instanceof Exception ) {
+			$getReferencedEntityIdMocker->willThrowException( $result );
+		} else {
+			$getReferencedEntityIdMocker->willReturn( $result );
+		}
+
+		return $referencedEntityIdLookup;
+	}
+
+	public function provideGetReferencedEntityId() {
+		return [
+			'Nothing found' => [
+				null,
+				$this->newReferencedEntityIdLookupMock( null )
+			],
+			'Q2013 found' => [
+				'Q2013',
+				$this->newReferencedEntityIdLookupMock( new ItemId( 'Q2013' ) )
+			],
+			'MaxReferenceDepthExhaustedException' => [
+				false,
+				$this->newReferencedEntityIdLookupMock(
+					new MaxReferenceDepthExhaustedException(
+						new ItemId( 'Q2013' ),
+						new PropertyId( 'P1366' ),
+						[ new ItemId( 'Q2013' ) ],
+						42
+					)
+				)
+			],
+			'MaxReferencedEntityVisitsExhaustedException' => [
+				false,
+				$this->newReferencedEntityIdLookupMock(
+					new MaxReferencedEntityVisitsExhaustedException(
+						new ItemId( 'Q2013' ),
+						new PropertyId( 'P1366' ),
+						[ new ItemId( 'Q2013' ) ],
+						42
+					)
+				)
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGetReferencedEntityId
+	 */
+	public function testGetReferencedEntityId( $expected, ReferencedEntityIdLookup $referencedEntityIdLookup ) {
+		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings( null, null, $referencedEntityIdLookup );
+
+		$this->assertSame(
+			$expected,
+			$wikibaseLuaBindings->getReferencedEntityId( new ItemId( 'Q1453477' ), new PropertyId( 'P1366' ), [ new ItemId( 'Q2013' ) ] )
+		);
 	}
 
 	/**
