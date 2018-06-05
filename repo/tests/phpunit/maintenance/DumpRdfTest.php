@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\DumpRdf
+ * @covers \Wikibase\DumpRdf
  *
  * @group Wikibase
  * @group Database
@@ -157,6 +157,8 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
+			[ 'item', 'property' ],
+			[ 'lexeme' ],
 			new NullEntityPrefetcher(),
 			new HashSiteStore( TestSites::getSites() ),
 			$this->getMockPropertyDataTypeLookup(),

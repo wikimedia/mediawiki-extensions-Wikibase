@@ -86,6 +86,8 @@ class DumpRdf extends DumpEntities {
 
 	public function setServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
+		array $existingEntityTypes,
+		array $disabledEntityTypes,
 		EntityPrefetcher $entityPrefetcher,
 		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
@@ -95,7 +97,11 @@ class DumpRdf extends DumpEntities {
 		RdfVocabulary $rdfVocabulary,
 		EntityTitleLookup $titleLookup
 	) {
-		parent::setDumpEntitiesServices( $sqlEntityIdPagerFactory );
+		parent::setDumpEntitiesServices(
+			$sqlEntityIdPagerFactory,
+			$existingEntityTypes,
+			$disabledEntityTypes
+		);
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->siteLookup = $siteLookup;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
@@ -117,6 +123,8 @@ class DumpRdf extends DumpEntities {
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
+				$wikibaseRepo->getEnabledEntityTypes(),
+				$wikibaseRepo->getSettings()->getSetting( 'disabledRdfExportEntityTypes' ),
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getSiteLookup(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
