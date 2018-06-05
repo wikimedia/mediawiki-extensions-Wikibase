@@ -76,6 +76,8 @@ string key is associated with a function having the dedicated signature:
   the completion search (wbsearchentities) for the entity type works.
 ; sub-entity-types (optional) (repo and client)
 : an array of strings listing the sub entity types that this entity type contains.
+; fulltext-search-context (repo only)
+: configuration context allowing to instantiate fulltext search query builder
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.
