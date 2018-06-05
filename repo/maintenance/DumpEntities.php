@@ -37,6 +37,10 @@ abstract class DumpEntities extends Maintenance {
 	 */
 	private $logFileHandle = false;
 
+	private $existingEntityTypes = [];
+
+	private $disabledEntityTypes = [];
+
 	public function __construct() {
 		parent::__construct();
 
@@ -74,8 +78,14 @@ abstract class DumpEntities extends Maintenance {
 		);
 	}
 
-	public function setDumpEntitiesServices( SqlEntityIdPagerFactory $sqlEntityIdPagerFactory ) {
+	public function setDumpEntitiesServices(
+		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
+		array $existingEntityTypes,
+		array $disabledEntityTypes
+	) {
 		$this->sqlEntityIdPagerFactory = $sqlEntityIdPagerFactory;
+		$this->existingEntityTypes = $existingEntityTypes;
+		$this->disabledEntityTypes = $disabledEntityTypes;
 	}
 
 	/**
@@ -142,7 +152,6 @@ abstract class DumpEntities extends Maintenance {
 	 */
 	public function execute() {
 		//TODO: more validation for options
-		$entityTypes = $this->getOption( 'entity-type' );
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );
@@ -167,9 +176,9 @@ abstract class DumpEntities extends Maintenance {
 			$this->logMessage( "Dumping entities listed in " . $this->getOption( 'list-file' ) );
 		}
 
-		if ( $entityTypes ) {
-			$this->logMessage( 'Dumping entities of type ' . join( ', ', $entityTypes ) );
-		}
+		$entityTypes = $this->getEntityTypes();
+
+		$this->logMessage( 'Dumping entities of type ' . join( ', ', $entityTypes ) );
 
 		if ( $shardingFactor ) {
 			$this->logMessage( "Dumping shard $shard/$shardingFactor" );
@@ -202,6 +211,13 @@ abstract class DumpEntities extends Maintenance {
 		}
 
 		$this->closeLogFile();
+	}
+
+	private function getEntityTypes() {
+		return array_diff(
+			$this->getOption( 'entity-type', $this->existingEntityTypes ),
+			$this->disabledEntityTypes
+		);
 	}
 
 	/**
