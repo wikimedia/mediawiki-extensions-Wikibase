@@ -167,8 +167,20 @@ abstract class DumpEntities extends Maintenance {
 			$this->logMessage( "Dumping entities listed in " . $this->getOption( 'list-file' ) );
 		}
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$disabledRdfExportEntityTypes = $wikibaseRepo->getSettings()->getSetting( 'disabledRdfExportEntityTypes' );
+
+		if ( !$entityTypes ) {
+			$entityTypes = $wikibaseRepo->getEnabledEntityTypes();
+		}
+
+		$entityTypes = array_diff( $entityTypes, $disabledRdfExportEntityTypes );
+
 		if ( $entityTypes ) {
-			$this->logMessage( 'Dumping entities of type ' . join( ', ', $entityTypes ) );
+			// TODO Should probably be logged regardless of limitation provided to script now
+			// as what is dumped now depends on configured types, configured blacklist, CLI params
+			// $this->logMessage( 'Dumping entities of type ' . join( ', ', $entityTypes ) );
 		}
 
 		if ( $shardingFactor ) {
