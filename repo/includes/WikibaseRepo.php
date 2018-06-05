@@ -2068,4 +2068,12 @@ class WikibaseRepo {
 		return new EntityLinkFormatterFactory( $language, $this->entityTypeDefinitions->getLinkFormatterCallbacks() );
 	}
 
+	/**
+	 * Get entity search helper callbacks.
+	 * @return string[]
+	 */
+	public function getFulltextSearchTypes() {
+		return $this->entityTypeDefinitions->getFulltextSearchTypes();
+	}
+
 }
