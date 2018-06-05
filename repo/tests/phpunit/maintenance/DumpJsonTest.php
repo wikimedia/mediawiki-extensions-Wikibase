@@ -36,7 +36,7 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Tests\Store\MockEntityIdPager;
 
 /**
- * @covers Wikibase\DumpJson
+ * @covers \Wikibase\DumpJson
  *
  * @group Wikibase
  *
@@ -135,6 +135,8 @@ class DumpJsonTest extends MediaWikiTestCase {
 
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
+			[ 'item', 'property' ],
+			[],
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$mockRepo,
