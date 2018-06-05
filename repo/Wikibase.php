@@ -990,7 +990,7 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
 	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
 	$wgHooks['CirrusSearchProfileService'][] = '\Wikibase\RepoHooks::onCirrusSearchProfileService';
-	$wgHooks['CirrusSearchFulltextQueryBuilder'][] = '\Wikibase\RepoHooks::onCirrusSearchFulltextQueryBuilder';
+	$wgHooks['CirrusSearchFulltextQueryBuilderComplete'][] = '\Wikibase\RepoHooks::onCirrusSearchFulltextQueryBuilderComplete';
 	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\RepoHooks::onCirrusSearchAddQueryFeatures';
 
 	// update hooks
