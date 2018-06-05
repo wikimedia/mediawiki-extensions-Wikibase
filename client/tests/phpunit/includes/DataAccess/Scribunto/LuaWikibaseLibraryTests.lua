@@ -396,6 +396,30 @@ local tests = {
 	  args = { function() end },
 	  expect = "bad argument #1 to 'orderProperties' (table expected, got function)"
 	},
+	{ name = 'mw.wikibase.getReferencedEntityId (Q32488 references Q885588 via P456)', func = mw.wikibase.getReferencedEntityId,
+	  args = { 'Q32488', 'P456', { 'Q885588', 'Q42' } },
+	  expect = { 'Q885588' }
+	},
+	{ name = 'mw.wikibase.getReferencedEntityId (target not referenced)', func = mw.wikibase.getReferencedEntityId,
+	  args = { 'Q32488', 'P456', { 'Q42' } },
+	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getReferencedEntityId (fromEntityId must be string)', func = mw.wikibase.getReferencedEntityId,
+	  args = { function() end, 'P20', { 'P22' } },
+	  expect = "bad argument #1 to 'getReferencedEntityId' (string expected, got function)"
+	},
+	{ name = 'mw.wikibase.getReferencedEntityId (propertyId must be string)', func = mw.wikibase.getReferencedEntityId,
+	  args = { 'Q12', 12, { 'P22' } },
+	  expect = "bad argument #2 to 'getReferencedEntityId' (string expected, got number)"
+	},
+	{ name = 'mw.wikibase.getReferencedEntityId (toIds must be table)', func = mw.wikibase.getReferencedEntityId,
+	  args = { 'Q12', 'P12', 'Q22' },
+	  expect = "bad argument #3 to 'getReferencedEntityId' (table expected, got string)"
+	},
+	{ name = 'mw.wikibase.getReferencedEntityId (toIds must contain strings)', func = mw.wikibase.getReferencedEntityId,
+	  args = { 'Q12', 'P12', { 'P22', 24 } },
+	  expect = "toIds value at index 2 must be string, number given."
+	},
 }
 
 return testframework.getTestProvider( tests )

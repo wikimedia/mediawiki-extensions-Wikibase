@@ -33,7 +33,7 @@
 		"wikibase/data-model": "^7.5.0",
 		"wikibase/data-model-serialization": "^2.5.0",
 		"wikibase/internal-serialization": "^2.2.0",
-		"wikibase/data-model-services": "^3.9.0",
+		"wikibase/data-model-services": "^3.10.0",
 		"diff/diff": "^2.3.0",
 		"wikimedia/purtle": "^1.0.7"
 	},

@@ -4,10 +4,15 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
+use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
+use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\ContentLanguages;
@@ -57,6 +62,11 @@ class WikibaseLanguageIndependentLuaBindings {
 	private $termsLanguages;
 
 	/**
+	 * @var ReferencedEntityIdLookup
+	 */
+	private $referencedEntityIdLookup;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -68,6 +78,7 @@ class WikibaseLanguageIndependentLuaBindings {
 	 * @param EntityIdParser $entityIdParser
 	 * @param TermLookup $termLookup
 	 * @param ContentLanguages $termsLanguages
+	 * @param ReferencedEntityIdLookup $referencedEntityIdLookup
 	 * @param string $siteId
 	 */
 	public function __construct(
@@ -77,6 +88,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		EntityIdParser $entityIdParser,
 		TermLookup $termLookup,
 		ContentLanguages $termsLanguages,
+		ReferencedEntityIdLookup $referencedEntityIdLookup,
 		$siteId
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -85,6 +97,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		$this->entityIdParser = $entityIdParser;
 		$this->termLookup = $termLookup;
 		$this->termsLanguages = $termsLanguages;
+		$this->referencedEntityIdLookup = $referencedEntityIdLookup;
 		$this->siteId = $siteId;
 	}
 
@@ -199,6 +212,25 @@ class WikibaseLanguageIndependentLuaBindings {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param EntityId $fromId
+	 * @param PropertyId $propertyId
+	 * @param EntityId[] $toIds
+	 *
+	 * @return string|null|bool
+	 */
+	public function getReferencedEntityId( EntityId $fromId, PropertyId $propertyId, array $toIds ) {
+		try {
+			$res = $this->referencedEntityIdLookup->getReferencedEntityId( $fromId, $propertyId, $toIds );
+		} catch ( MaxReferenceDepthExhaustedException $e ) {
+			return false;
+		} catch ( MaxReferencedEntityVisitsExhaustedException $e ) {
+			return false;
+		}
+
+		return $res ? $res->getSerialization() : null;
 	}
 
 }
