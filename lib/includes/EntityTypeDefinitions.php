@@ -1,4 +1,4 @@
-<?php
+fulltext-search-context<?php
 
 namespace Wikibase\Lib;
 
@@ -234,6 +234,15 @@ class EntityTypeDefinitions {
 	 */
 	public function getLinkFormatterCallbacks() {
 		return $this->getMapForDefinitionField( 'link-formatter-callback' );
+	}
+
+	/**
+	 * @return string[] An array mapping entity type identifiers
+	 * to fulltext search types.
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getFulltextSearchTypes() {
+		return $this->getMapForDefinitionField( 'fulltext-search-context' );
 	}
 
 }

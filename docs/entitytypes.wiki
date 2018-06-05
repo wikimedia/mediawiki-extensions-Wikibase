@@ -66,7 +66,7 @@ string key is associated with a function having the dedicated signature:
 ; js-deserializer-factory-function (repo only)
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type
-; changeop-deserializer-callback (repo only)
+; changeop-deserializer-callfulltext-search-contextback (repo only)
 : a callable that returns a ChangeOpDeserializer instance for change requests to the entity of this type
 ; rdf-builder-factory-callback (repo only)
 : a callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilders
@@ -76,6 +76,8 @@ string key is associated with a function having the dedicated signature:
   the completion search (wbsearchentities) for the entity type works.
 ; sub-entity-types (optional) (repo and client)
 : an array of strings listing the sub entity types that this entity type contains.
+; fulltext-search-context (repo only)
+: configuration context allowing to instantiate fulltext search query builder
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.
