@@ -106,7 +106,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 	 * @param array &$query
 	 * @param string|null &$ret
 	 *
-	 * @return bool
+	 * @return bool true to continue processing the link, false to use $ret directly as the HTML for the link
 	 */
 	public static function onHtmlPageLinkRendererBegin(
 		LinkRenderer $linkRenderer,
@@ -170,7 +170,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 	 * @param RequestContext $context
 	 * @param string|null &$html
 	 *
-	 * @return bool
+	 * @return bool true to continue processing the link, false to use $html directly for the link
 	 */
 	public function doHtmlPageLinkRendererBegin(
 		LinkRenderer $linkRenderer,
