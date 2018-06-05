@@ -347,6 +347,18 @@ The structure of the returned table is identical to those obtained via [[#mw.wik
 
 If statements with the requested property ID exist, the table returned is equivalent to the content of <code>mw.wikibase.getEntity( entityId ).claims[propertyId]</code>.
 
+=== mw.wikibase.getReferencedEntityId ===
+<code>wikibase.getReferencedEntityId( fromEntityId, propertyId, toIds )</code><br>
+Get one referenced entity (out of toIds), from a given entity. The starting entity, and the target entities are (potentially indirectly, via intermediate entities) linked by statements with the given property ID, pointing from the starting entity to one of the target entities.
+
+Returns one id of a referenced entity id, if it could be found. Returns nil if none of the given entities is referenced. Returns false if the search for a referenced entity had to be aborted due to resource limits, thus the result is inconclusive.
+
+Example calls might look like this:
+<source lang="lua">
+mw.wikibase.getReferencedEntityId( 'Q341', 'P279', { 'Q7397', 'Q2095' } ) -- Returns "Q7397", as "free software" is an indirect "subclass of" "software"
+mw.wikibase.getReferencedEntityId( 'Q59', 'P31', { 'Q7366', 'Q2095' } ) -- Returns nil
+</source>
+
 === Legacy aliases ===
 These functions exist solely for backward compatibility, they should not be used in new code.
 

@@ -15,7 +15,9 @@ use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
@@ -264,15 +266,22 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	private function newLanguageIndependentLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
 
 		return new WikibaseLanguageIndependentLuaBindings(
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			$wikibaseClient->getSettings(),
+			$settings,
 			$this->getUsageAccumulator(),
 			$this->getEntityIdParser(),
 			$wikibaseClient->getTermLookup(),
 			$wikibaseClient->getTermsLanguages(),
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+			new EntityRetrievingClosestReferencedEntityIdLookup(
+				$wikibaseClient->getStore()->getEntityLookup(),
+				$wikibaseClient->getStore()->getEntityPrefetcher(),
+				$settings->getSetting( 'referencedEntityIdMaxDepth' ),
+				$settings->getSetting( 'referencedEntityIdMaxReferencedEntityVisits' )
+			),
+			$settings->getSetting( 'siteGlobalID' )
 		);
 	}
 
@@ -285,6 +294,21 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->entityIdParser = $wikibaseClient->getEntityIdParser();
 		}
 		return $this->entityIdParser;
+	}
+
+	/**
+	 * @throws ScribuntoException
+	 * @return EntityId
+	 */
+	private function parseUserGivenEntityId( $idSerialization ) {
+		try {
+			return $this->getEntityIdParser()->parse( $idSerialization );
+		} catch ( EntityIdParsingException $ex ) {
+			throw new ScribuntoException(
+				'wikibase-error-invalid-entity-id',
+				[ 'args' => [ $idSerialization ] ]
+			);
+		}
 	}
 
 	/**
@@ -309,6 +333,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'renderSnaks' => [ $this, 'renderSnaks' ],
 			'formatValues' => [ $this, 'formatValues' ],
 			'getEntityId' => [ $this, 'getEntityId' ],
+			'getReferencedEntityId' => [ $this, 'getReferencedEntityId' ],
 			'getUserLang' => [ $this, 'getUserLang' ],
 			'getDescription' => [ $this, 'getDescription' ],
 			'resolvePropertyId' => [ $this, 'resolvePropertyId' ],
@@ -348,6 +373,52 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		} catch ( Exception $ex ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
+	}
+
+	/**
+	 * Wrapper for getReferencedEntityId in WikibaseLanguageIndependentLuaBindings
+	 *
+	 * @param string $prefixedFromEntityId
+	 * @param string $prefixedPropertyId
+	 * @param string[] $prefixedToIds
+	 *
+	 * @throws ScribuntoException
+	 * @return array
+	 */
+	public function getReferencedEntityId( $prefixedFromEntityId, $prefixedPropertyId, $prefixedToIds ) {
+		$parserOutput = $this->getEngine()->getParser()->getOutput();
+		$key = 'wikibase-referenced-entity-id-limit';
+
+		$accesses = (int)$parserOutput->getExtensionData( $key );
+		$accesses++;
+		$parserOutput->setExtensionData( $key, $accesses );
+
+		$limit = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'referencedEntityIdAccessLimit' );
+		if ( $accesses > $limit ) {
+			throw new ScribuntoException(
+				'wikibase-error-exceeded-referenced-entity-id-limit',
+				[ 'args' => [ $limit ] ]
+			);
+		}
+
+		$this->checkType( 'getReferencedEntityId', 1, $prefixedFromEntityId, 'string' );
+		$this->checkType( 'getReferencedEntityId', 2, $prefixedPropertyId, 'string' );
+		$this->checkType( 'getReferencedEntityId', 3, $prefixedToIds, 'table' );
+
+		$fromId = $this->parseUserGivenEntityId( $prefixedFromEntityId );
+		$propertyId = $this->parseUserGivenEntityId( $prefixedPropertyId );
+		$toIds = array_map(
+			[ $this, 'parseUserGivenEntityId' ],
+			$prefixedToIds
+		);
+
+		if ( !( $propertyId instanceof PropertyId ) ) {
+			return [ null ];
+		}
+
+		return [
+			$this->getLanguageIndependentLuaBindings()->getReferencedEntityId( $fromId, $propertyId, $toIds )
+		];
 	}
 
 	/**
