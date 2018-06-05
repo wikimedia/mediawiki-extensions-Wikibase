@@ -113,7 +113,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		);
 
 		$context = new SearchContext( $config, $params['ns'] );
-		$builder->build( $context, $params['search'], false );
+		$builder->build( $context, $params['search'] );
 		$query = $context->getQuery();
 		$rescore = $context->getRescore();
 		$encoded = json_encode( [ 'query' => $query->toArray(), 'rescore_query' => $rescore ], JSON_PRETTY_PRINT );
