@@ -402,6 +402,7 @@
 	"wikibase-pageinfo-subscription-none": "لا شيء",
 	"wikibase-search-bad-entity-type": "نوع كيان غير صالح: $1",
 	"wikibase-search-bad-profile-name": "اسم بحث غير صالح: $1",
+	"wikibase-search-namespace-mix": "لا يتم حاليا دعم كيان خلط الكيان والمادة في البحث، سيتم البحث عن نطاقات الكيانات فقط.",
 	"apihelp-wbavailablebadges-description": "استعلم عن العناصر المتوفرة بشارات.",
 	"apihelp-wbavailablebadges-summary": "استعلم عن العناصر المتوفرة بشارات.",
 	"apihelp-wbavailablebadges-example-1": "استعلم عن كل العناصر المتوفرة بشارات",

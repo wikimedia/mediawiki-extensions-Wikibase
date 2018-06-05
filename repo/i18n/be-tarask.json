@@ -431,5 +431,6 @@
 	"apihelp-wbformatvalue-summary": "Фарматуе DataValues.",
 	"apihelp-wbformatvalue-param-generate": "Пажаданы фармат вываду для генэрацыі.",
 	"apihelp-wbformatvalue-param-datatype": "Тып зьвестак значэньня. Ён адрозьніваецца ад тыпу значэньня",
-	"apihelp-wbformatvalue-param-datavalue": "Дата для фарматаваньня. Павінна быць JSON-сэрыялізацыяй DataValue-аб’екту."
+	"apihelp-wbformatvalue-param-datavalue": "Дата для фарматаваньня. Павінна быць JSON-сэрыялізацыяй DataValue-аб’екту.",
+	"apihelp-wbformatvalue-param-options": "Парамэтры, якія павінен ужываць фарматавальнік. Падаецца як JSON-аб’ект."
 }
