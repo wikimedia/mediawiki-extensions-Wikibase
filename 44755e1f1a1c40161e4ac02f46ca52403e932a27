@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0033f922_b1b4e23b",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-05T14:29:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b965f132_673d95ef",
+      "range": {
+        "startLine": 86,
+        "startChar": 91,
+        "endLine": 86,
+        "endChar": 106
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bea87efe_75c30456",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-04T12:49:45Z",
       "side": 1,
       "message": "This page doesn\u0027t exist.\n\nAlso I wonder if it should be …/ApiMaxLagInfo?",
+      "range": {
+        "startLine": 1193,
+        "startChar": 9,
+        "endLine": 1193,
+        "endChar": 63
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8838d406_03b04bb6",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-05T14:29:46Z",
+      "side": 1,
+      "message": "I make the page when the core patch gets merged.",
+      "parentUuid": "bea87efe_75c30456",
       "range": {
         "startLine": 1193,
         "startChar": 9,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "813912c4_cac61095",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-05T14:29:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a97e3dc1_57b98343",
+      "range": {
+        "startLine": 1203,
+        "startChar": 7,
+        "endLine": 1203,
+        "endChar": 33
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04f5a12c_ec4ff9db",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "9fdec3b5_155963f9",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-05T14:29:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f5a12c_ec4ff9db",
+      "range": {
+        "startLine": 1204,
+        "startChar": 3,
+        "endLine": 1204,
+        "endChar": 18
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "603cb6c2_e305a7c7",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2018-06-04T12:49:45Z",
       "side": 1,
       "message": "a positive number",
+      "range": {
+        "startLine": 284,
+        "startChar": 17,
+        "endLine": 284,
+        "endChar": 25
+      },
+      "revId": "44755e1f1a1c40161e4ac02f46ca52403e932a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b300852b_1294a456",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-05T14:29:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "603cb6c2_e305a7c7",
       "range": {
         "startLine": 284,
         "startChar": 17,
