@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e780179_dfa7bb9e",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-06T17:58:11Z",
+      "side": 1,
+      "message": "If this is the only setting this class needs, I would inject only this setting, but not the whole settings object.\n\nHowever, this does not really make any difference, as all the code is in the same file anyway.",
+      "range": {
+        "startLine": 349,
+        "startChar": 38,
+        "endLine": 349,
+        "endChar": 63
+      },
+      "revId": "22ed34571187327ea5470e1c847225946b7dd1a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc5a1dea_e63d6d3f",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/DatabaseSchemaUpdaterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-06T17:58:11Z",
+      "side": 1,
+      "message": "$this-\u003ecreateMock( SettingsArray::class ) is the super-convenient shortcut we now have with the PHPUnit 6 compatibility layer.",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "22ed34571187327ea5470e1c847225946b7dd1a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "327da68d_8708fba0",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/DatabaseSchemaUpdaterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-06T17:58:11Z",
+      "side": 1,
+      "message": "Does this test really need to know that this method was called exactly once? I mean, it does not even check *which* setting is requested. It looks like this additional assertion can as well be removed.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 37
+      },
+      "revId": "22ed34571187327ea5470e1c847225946b7dd1a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
