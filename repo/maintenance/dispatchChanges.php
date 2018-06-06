@@ -231,7 +231,7 @@ class DispatchChanges extends Maintenance {
 
 		$maxTime = (int)$this->getOption( 'max-time', $defaultMaxTime );
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
-		$delay = (int)$this->getOption( 'idle-delay', 10 );
+		$delay = (int)$this->getOption( 'idle-delay', $wikibaseRepo->getSettings()->getSetting( 'dispatchIdleDelay' ) );
 		$selectedClients = $this->getOption( 'client' );
 
 		$clientWikis = $this->getClientWikis(

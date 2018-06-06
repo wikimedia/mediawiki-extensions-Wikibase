@@ -43,6 +43,7 @@ return [
 
 	// Settings for change dispatching
 	'dispatchMaxTime' => 60 * 60,
+	'dispatchIdleDelay' => 10,
 	'dispatchBatchChunkFactor' => 3,
 	'dispatchBatchCacheFactor' => 3,
 	'dispatchDefaultBatchSize' => 1000,
