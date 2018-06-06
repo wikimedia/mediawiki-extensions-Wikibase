@@ -290,12 +290,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			$this->stats->increment(
 				'wikibase.repo.SqlChangeDispatchCoordinator.selectClient.fail'
 			);
-			wfDebugLog( __METHOD__, 'Failed to grab dispatch lock for ' . $wiki );
+			$this->log( 'Failed to grab dispatch lock for ' . $wiki );
 			// try again
 		}
 
 		// we ran out of candidates
-		wfDebugLog( __METHOD__, 'Could not lock any of the candidate client wikis for dispatching' );
+		$this->log( 'Could not lock any of the candidate client wikis for dispatching' );
 		return null;
 	}
 
