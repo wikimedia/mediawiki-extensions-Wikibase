@@ -55,6 +55,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;dispatchDefaultDispatchInterval: Overrides the default value for dispatch-interval in dispatchChanges.php
 ;dispatchDefaultDispatchRandomness: Overrides the default value for randomness in dispatchChanges.php
 ;dispatchMaxTime: Overrides the default value for max-time in dispatchChanges.php
+;dispatchIdleDelay: Overrides the default value for idle-delay in dispatchChanges.php
 ;idBlacklist: A map from entity ID type to a list of IDs to reserve and skip for new entities of that type. IDs are given as integers. For example <code>[ 'item' => [ 1, 2, 3 ] ]</code>.
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
 :;length: the maximum length of the string, in characters.
