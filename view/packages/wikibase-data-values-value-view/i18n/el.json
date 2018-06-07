@@ -9,6 +9,7 @@
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Χειρισμός τιμών \"$1\" δεν υποστηρίζεται ακόμα.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Ο χειρισμός τιμών για τον τύπο δεδομένων \"$1\" δεν υποστηρίζεται ακόμα.",
 	"valueview-expert-emptyvalue-empty": "κενή",
 	"valueview-expert-globecoordinateinput-precision": "Ακρίβεια:",
 	"valueview-expert-globecoordinateinput-nullprecision": "Αδιευκρίνιστο",
