@@ -221,12 +221,12 @@ abstract class DumpEntities extends Maintenance {
 	}
 
 	/**
-	 * @param null|string[] $entityTypes
+	 * @param string[] $entityTypes
 	 * @param ExceptionHandler|null $exceptionReporter
 	 *
 	 * @return EntityIdReader|SqlEntityIdPager a stream of EntityId objects
 	 */
-	private function makeIdStream( array $entityTypes = null, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdStream( array $entityTypes, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
@@ -261,18 +261,11 @@ abstract class DumpEntities extends Maintenance {
 	}
 
 	/**
-	 * @param string[]|null $entityTypes
+	 * @param string[] $entityTypes
 	 *
 	 * @return SqlEntityIdPager
 	 */
-	private function makeIdQueryStream( array $entityTypes = null ) {
-		if ( is_array( $entityTypes ) && count( $entityTypes ) === 1 ) {
-			$entityTypes = $entityTypes[0];
-		} elseif ( is_array( $entityTypes ) ) {
-			// Already filtered by DumpGenerator::setEntityTypesFilter
-			// TODO: SqlEntityIdPager should support filtering by more than one type (more efficient than in DumpGenerator)
-			$entityTypes = null;
-		}
+	private function makeIdQueryStream( array $entityTypes ) {
 		$sqlEntityIdPager = $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityTypes, $this->getRedirectMode() );
 
 		$firstPageId = $this->getOption( 'first-page-id', null );
