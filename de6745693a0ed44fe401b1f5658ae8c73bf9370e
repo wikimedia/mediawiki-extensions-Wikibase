@@ -108,6 +108,30 @@
       "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2806ed07_33bbe419",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-06-07T14:33:09Z",
+      "side": 1,
+      "message": "It\u0027s used as $2 in the apierror-maxlag message.\n\nhttps://translatewiki.net/wiki/MediaWiki:Apierror-maxlag\n\nhttps://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/core/+/6bfa7c37540da7605e88c10caf0295ae8ff45723/includes/api/ApiMain.php#1284",
+      "parentUuid": "68d06aeb_7d98ae9e",
+      "range": {
+        "startLine": 1215,
+        "startChar": 6,
+        "endLine": 1215,
+        "endChar": 10
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
