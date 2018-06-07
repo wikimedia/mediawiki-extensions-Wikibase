@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0ea1ffd_8d218f73",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-07T08:01:34Z",
+      "side": 1,
+      "message": "maybe instead of relying on the call order (at 0/at 1), using willReturnCallback returning the appropriate description depending on the second parameter?\nNot much of a difference, arguably, but would make tests less bound to the very detail of the implementation?",
+      "range": {
+        "startLine": 247,
+        "startChar": 2,
+        "endLine": 255,
+        "endChar": 39
+      },
+      "revId": "74297454e1290e9898dafe0cdd03a195eb061ebc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
