@@ -34,6 +34,24 @@
       "revId": "6071bdcb777384fe9d927032ddc71c3b4e3d452d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "971676a3_60761bf3",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-07T13:25:51Z",
+      "side": 1,
+      "message": "right, i was silly. thanks!",
+      "parentUuid": "89efbf9a_54894328",
+      "revId": "6071bdcb777384fe9d927032ddc71c3b4e3d452d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
