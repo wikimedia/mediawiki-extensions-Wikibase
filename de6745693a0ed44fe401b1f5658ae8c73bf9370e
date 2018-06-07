@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5b1948e1_31dd9018",
+        "filename": "docs/options.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-07T14:18:38Z",
+      "side": 1,
+      "message": "should be lower case: \"lag\".\n\nAlso maybe specify as \"…when it\u0027s set to a positive number, dispatch lag of the stalest wiki…\".",
+      "range": {
+        "startLine": 86,
+        "startChar": 117,
+        "endLine": 86,
+        "endChar": 120
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a74a80b_d495025e",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 4
@@ -41,6 +64,46 @@
         "startChar": 41,
         "endLine": 1197,
         "endChar": 50
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f3dfd89_a0a054d8",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-07T14:18:38Z",
+      "side": 1,
+      "message": "Do we really want to use the stalest here?\n\nI think that the average would be more appropriate, as we don\u0027t care about few outliers that much.",
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68d06aeb_7d98ae9e",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-07T14:18:38Z",
+      "side": 1,
+      "message": "Is this used by someone? Reporting a wiki id/ database name here might be unexpected.",
+      "range": {
+        "startLine": 1215,
+        "startChar": 6,
+        "endLine": 1215,
+        "endChar": 10
       },
       "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
