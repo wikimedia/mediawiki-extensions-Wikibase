@@ -33,16 +33,16 @@ class SqlEntityIdPagerFactory {
 	}
 
 	/**
-	 * @param null|string $entityType The desired entity type, or null for any type.
+	 * @param string[] $entityTypes The desired entity types, or empty array for any type.
 	 * @param string $redirectMode A EntityIdPager::XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 *
 	 * @return SqlEntityIdPager
 	 */
-	public function newSqlEntityIdPager( $entityType = null, $redirectMode = EntityIdPager::NO_REDIRECTS ) {
+	public function newSqlEntityIdPager( array $entityTypes = [], $redirectMode = EntityIdPager::NO_REDIRECTS ) {
 		return new SqlEntityIdPager(
 			$this->entityNamespaceLookup,
 			$this->entityIdParser,
-			$entityType,
+			$entityTypes,
 			$redirectMode
 		);
 	}

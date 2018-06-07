@@ -131,7 +131,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider listEntitiesProvider
 	 *
-	 * @param string|null $entityType
+	 * @param array $entityTypes
 	 * @param int $limit
 	 * @param int $calls
 	 * @param string $redirectMode
@@ -140,7 +140,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	 * @param EntityRedirect[] $redirectsToInsert
 	 */
 	public function testFetchIds(
-		$entityType,
+		array $entityTypes,
 		$limit,
 		$calls,
 		$redirectMode,
@@ -154,7 +154,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 		$pager = new SqlEntityIdPager(
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getEntityIdParser(),
-			$entityType,
+			$entityTypes,
 			$redirectMode
 		);
 
@@ -171,14 +171,14 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
 		return [
 			'empty' => [
-				null,
+				[],
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
 				[ [] ]
 			],
 			'no matches' => [
-				Item::ENTITY_TYPE,
+				[ Item::ENTITY_TYPE ],
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
@@ -187,7 +187,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'some entities' => [
-				null,
+				[],
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
@@ -196,7 +196,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'two chunks' => [
-				null,
+				[],
 				1,
 				2,
 				EntityIdPager::NO_REDIRECTS,
@@ -205,7 +205,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'chunks with limit > 1' => [
-				null,
+				[],
 				2,
 				3,
 				EntityIdPager::INCLUDE_REDIRECTS,
@@ -214,7 +214,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'four chunks (two empty)' => [
-				null,
+				[],
 				1,
 				4,
 				EntityIdPager::NO_REDIRECTS,
@@ -223,7 +223,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'include redirects' => [
-				null,
+				[],
 				100,
 				1,
 				EntityIdPager::INCLUDE_REDIRECTS,
@@ -232,7 +232,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'only redirects' => [
-				null,
+				[],
 				100,
 				1,
 				EntityIdPager::ONLY_REDIRECTS,
@@ -241,7 +241,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'just properties' => [
-				Property::ENTITY_TYPE,
+				[ Property::ENTITY_TYPE ],
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
@@ -250,7 +250,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 				[ $redirect ]
 			],
 			'limit' => [
-				Property::ENTITY_TYPE,
+				[ Property::ENTITY_TYPE ],
 				1,
 				1,
 				EntityIdPager::NO_REDIRECTS,
