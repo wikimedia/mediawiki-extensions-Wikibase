@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed170b8_a9fad537",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-07T12:46:18Z",
+      "side": 1,
+      "message": "this message has been previously missed, or why is it now added  in this patch?\nI see the added lines in ShortDescHandler don\u0027t mention this message key.",
+      "revId": "6071bdcb777384fe9d927032ddc71c3b4e3d452d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
