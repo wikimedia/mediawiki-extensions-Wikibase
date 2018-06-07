@@ -31,9 +31,9 @@ class SqlEntityIdPager implements EntityIdPager {
 	private $entityIdParser;
 
 	/**
-	 * @var string|null
+	 * @var array
 	 */
-	private $entityType;
+	private $entityTypes = [];
 
 	/**
 	 * @var string
@@ -57,20 +57,20 @@ class SqlEntityIdPager implements EntityIdPager {
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityIdParser $entityIdParser
-	 * @param null|string $entityType The desired entity type, or null for any type.
+	 * @param string[] $entityTypes The desired entity types, or empty array for any type.
 	 * @param string $redirectMode A EntityIdPager::XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityIdParser $entityIdParser,
-		$entityType = null,
+		array $entityTypes,
 		$redirectMode = EntityIdPager::NO_REDIRECTS
 	) {
-		Assert::parameterType( 'string|null', $entityType, '$entityType' );
+		Assert::parameterElementType( 'string', $entityTypes, '$entityTypes' );
 
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->entityIdParser = $entityIdParser;
-		$this->entityType = $entityType;
+		$this->entityTypes = $entityTypes;
 		$this->redirectMode = $redirectMode;
 	}
 
@@ -155,12 +155,10 @@ class SqlEntityIdPager implements EntityIdPager {
 			$where[] = 'page_id <= ' . (int)$this->cutoffPosition;
 		}
 
-		if ( $this->entityType === null ) {
+		if ( $this->entityTypes === [] ) {
 			$where['page_namespace'] = $this->entityNamespaceLookup->getEntityNamespaces();
 		} else {
-			$where['page_namespace'] = $this->entityNamespaceLookup->getEntityNamespace(
-				$this->entityType
-			);
+			$where['page_namespace'] = $this->getEntityNamespaces( $this->entityTypes );
 		}
 
 		if ( $this->redirectMode === self::NO_REDIRECTS ) {
@@ -168,6 +166,15 @@ class SqlEntityIdPager implements EntityIdPager {
 		}
 
 		return $where;
+	}
+
+	private function getEntityNamespaces( array $entityTypes ) {
+		return array_map(
+			function ( $entityType ) {
+				return $this->entityNamespaceLookup->getEntityNamespace( $entityType );
+			},
+			$entityTypes
+		);
 	}
 
 	/**
