@@ -151,7 +151,10 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			->getMock();
 		$sqlEntityIdPagerFactory->expects( $this->once() )
 			->method( 'newSqlEntityIdPager' )
-			->with( $this->anything(), $this->equalTo( EntityIdPager::INCLUDE_REDIRECTS ) )
+			->with(
+				array_diff( $existingEntityTypes, $disabledEntityTypes ),
+				EntityIdPager::INCLUDE_REDIRECTS
+			)
 			->will( $this->returnValue( $mockEntityIdPager ) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

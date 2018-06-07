@@ -173,7 +173,8 @@ class TermSqlIndexBuilder {
 	 * @param string $entityType
 	 */
 	private function rebuildForEntityType( $entityType ) {
-		$idPager = $this->entityIdPagerFactory->newSqlEntityIdPager( $entityType );
+		// TODO Is doing multiple entity types in one go an option? SqlEntityIdPager supports it
+		$idPager = $this->entityIdPagerFactory->newSqlEntityIdPager( [ $entityType ] );
 		$lastIdProcessed = null;
 
 		if ( $this->fromId !== null ) {
