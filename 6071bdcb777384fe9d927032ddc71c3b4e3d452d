@@ -16,6 +16,24 @@
       "revId": "6071bdcb777384fe9d927032ddc71c3b4e3d452d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89efbf9a_54894328",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-06-07T13:07:49Z",
+      "side": 1,
+      "message": "apihelp-XXX-summary is supposed to be a single line, longer explanations should go into the extended description.",
+      "parentUuid": "8ed170b8_a9fad537",
+      "revId": "6071bdcb777384fe9d927032ddc71c3b4e3d452d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
