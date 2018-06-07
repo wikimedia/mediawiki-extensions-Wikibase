@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29e3ca77_13634bbd",
+        "filename": "repo/tests/selenium/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2018-06-07T14:48:39Z",
+      "side": 1,
+      "message": "ores? ;)",
+      "revId": "28c5d4d97d65f698390a2cdf7412a018a177f679",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
