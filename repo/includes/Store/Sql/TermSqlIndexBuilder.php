@@ -173,7 +173,7 @@ class TermSqlIndexBuilder {
 	 * @param string $entityType
 	 */
 	private function rebuildForEntityType( $entityType ) {
-		$idPager = $this->entityIdPagerFactory->newSqlEntityIdPager( $entityType );
+		$idPager = $this->entityIdPagerFactory->newSqlEntityIdPager( [ $entityType ] );
 		$lastIdProcessed = null;
 
 		if ( $this->fromId !== null ) {
