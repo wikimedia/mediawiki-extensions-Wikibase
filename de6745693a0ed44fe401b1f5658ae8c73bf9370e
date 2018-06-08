@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c06cc925_b8ecb1e1",
+        "filename": "docs/options.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-08T11:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b1948e1_31dd9018",
+      "range": {
+        "startLine": 86,
+        "startChar": 117,
+        "endLine": 86,
+        "endChar": 120
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a74a80b_d495025e",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-05T15:00:29Z",
       "side": 1,
       "message": "Is this sentence missing some words? Better remove it if there is nothing to say. The @see below should provide enough information.",
+      "range": {
+        "startLine": 1191,
+        "startChar": 4,
+        "endLine": 1191,
+        "endChar": 33
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95c1e55c_85de0f55",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-08T11:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a74a80b_d495025e",
       "range": {
         "startLine": 1191,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "90db649c_3bd6501e",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-08T11:36:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e2bdfeb_fc4a82dd",
+      "range": {
+        "startLine": 1197,
+        "startChar": 41,
+        "endLine": 1197,
+        "endChar": 50
+      },
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f3dfd89_a0a054d8",
         "filename": "repo/RepoHooks.php",
         "patchSetId": 4
@@ -82,6 +154,24 @@
       "writtenOn": "2018-06-07T14:18:38Z",
       "side": 1,
       "message": "Do we really want to use the stalest here?\n\nI think that the average would be more appropriate, as we don\u0027t care about few outliers that much.",
+      "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83b6173a_c54c7f52",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-08T11:36:34Z",
+      "side": 1,
+      "message": "I\u0027d say we should go with median if it\u0027s okay to have outliers to some degrees.",
+      "parentUuid": "0f3dfd89_a0a054d8",
       "revId": "de6745693a0ed44fe401b1f5658ae8c73bf9370e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
