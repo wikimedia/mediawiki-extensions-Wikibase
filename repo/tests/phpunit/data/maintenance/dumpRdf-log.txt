@@ -1,2 +1,3 @@
+Dumping entities of type item, property
 Dumping shard 0/1
 Processed 5 entities.

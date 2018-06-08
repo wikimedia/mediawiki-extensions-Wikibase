@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\DumpRdf
+ * @covers \Wikibase\DumpRdf
  *
  * @group Wikibase
  * @group Database
@@ -60,7 +60,10 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		TestSites::insertIntoDb();
 	}
 
-	private function getDumpRdf() {
+	private function getDumpRdf(
+		array $existingEntityTypes,
+		array $disabledEntityTypes
+	) {
 		$dumpScript = new DumpRdf();
 
 		$mockRepo = new MockRepository();
@@ -148,7 +151,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			->getMock();
 		$sqlEntityIdPagerFactory->expects( $this->once() )
 			->method( 'newSqlEntityIdPager' )
-			->with( null, EntityIdPager::INCLUDE_REDIRECTS )
+			->with( $this->anything(), $this->equalTo( EntityIdPager::INCLUDE_REDIRECTS ) )
 			->will( $this->returnValue( $mockEntityIdPager ) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -157,6 +160,8 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
+			$existingEntityTypes,
+			$disabledEntityTypes,
 			new NullEntityPrefetcher(),
 			new HashSiteStore( TestSites::getSites() ),
 			$this->getMockPropertyDataTypeLookup(),
@@ -173,16 +178,27 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	public function dumpParameterProvider() {
 		return [
 			'dump everything' => [
+				[ 'item', 'property' ],
+				[ 'lexeme' ],
 				[],
 				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
 				__DIR__ . '/../data/maintenance/dumpRdf-out.txt',
 			],
 			'dump with part-id' => [
+				[ 'item', 'property' ],
+				[ 'lexeme' ],
 				[
 					'part-id' => 'blah',
 				],
 				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
 				__DIR__ . '/../data/maintenance/dumpRdf-part-id-blah-out.txt',
+			],
+			'dump with property disabled (e.g. disabledRdfExportEntityTypes)' => [
+				[ 'item', 'property' ],
+				[ 'property' ],
+				[],
+				__DIR__ . '/../data/maintenance/dumpRdf-disable-property-log.txt',
+				__DIR__ . '/../data/maintenance/dumpRdf-disable-property-out.txt',
 			]
 		];
 	}
@@ -190,8 +206,14 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider dumpParameterProvider
 	 */
-	public function testScript( array $opts, $expectedLogFile, $expectedOutFile ) {
-		$dumpScript = $this->getDumpRdf();
+	public function testScript(
+		array $existingEntityTypes,
+		array $disabledEntityTypes,
+		array $opts,
+		$expectedLogFile,
+		$expectedOutFile
+	) {
+		$dumpScript = $this->getDumpRdf( $existingEntityTypes, $disabledEntityTypes );
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
 		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
