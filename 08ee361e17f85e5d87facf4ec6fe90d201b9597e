@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a9aaf28_eb814b72",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-09T20:14:53Z",
+      "side": 1,
+      "message": "string[]",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "08ee361e17f85e5d87facf4ec6fe90d201b9597e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98ba7b38_af37aa07",
+        "filename": "repo/includes/Store/Sql/TermSqlIndexBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-09T20:14:53Z",
+      "side": 1,
+      "message": "AFAICT that would be rather easy to adopt to, but wouldn\u0027t really gain is anything.\nI\u0027d remove the TODO.",
+      "revId": "08ee361e17f85e5d87facf4ec6fe90d201b9597e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
