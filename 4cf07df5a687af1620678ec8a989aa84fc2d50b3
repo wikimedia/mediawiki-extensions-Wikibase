@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a57a018_63ecaed4",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-06-09T14:21:39Z",
+      "side": 1,
+      "message": "$2",
+      "range": {
+        "startLine": 23,
+        "startChar": 255,
+        "endLine": 23,
+        "endChar": 257
+      },
+      "revId": "4cf07df5a687af1620678ec8a989aa84fc2d50b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a35f22d9_410ae95b",
+        "filename": "lib/includes/Formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-06-09T14:21:39Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 146,
+        "startChar": 44,
+        "endLine": 146,
+        "endChar": 48
+      },
+      "revId": "4cf07df5a687af1620678ec8a989aa84fc2d50b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_efb503cb",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-06-09T14:21:39Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 26
+      },
+      "revId": "4cf07df5a687af1620678ec8a989aa84fc2d50b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
