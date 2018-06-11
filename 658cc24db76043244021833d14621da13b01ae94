@@ -22,6 +22,30 @@
       "revId": "658cc24db76043244021833d14621da13b01ae94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bad50060_c0a57164",
+        "filename": "view/src/Template/TemplateFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-11T07:13:56Z",
+      "side": 1,
+      "message": "Good catch. But note this is not introduced by this patch. The previous implementation had the exact same behavior. I intentionally kept it.\n\nI can see how this behavior can be problematic, and agree it should be changed. But this must be done in a separate patch.",
+      "parentUuid": "3d6714d8_40f9d5d3",
+      "range": {
+        "startLine": 71,
+        "startChar": 73,
+        "endLine": 71,
+        "endChar": 77
+      },
+      "revId": "658cc24db76043244021833d14621da13b01ae94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
