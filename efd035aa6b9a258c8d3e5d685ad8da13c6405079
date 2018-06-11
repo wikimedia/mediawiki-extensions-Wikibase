@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea80299c_4a561776",
+        "filename": "client/includes/Store/DescriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-11T15:46:32Z",
+      "side": 1,
+      "message": "to simplify the interface, couldn\u0027t this always be an array?",
+      "range": {
+        "startLine": 61,
+        "startChar": 49,
+        "endLine": 61,
+        "endChar": 57
+      },
+      "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9dc67e80_301d374f",
+        "filename": "client/includes/Store/DescriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-11T15:46:32Z",
+      "side": 1,
+      "message": "is this value ever read in production?\nLooking at I4195f6c8ec215a630de3425f9c3cab12bed9644f it does not seem so. But I might clearly be missing something.\n\nIn general it would be nice to have this information simply \"returned\". Will see if I can suggest something meaningful in this regard.",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 74
+      },
+      "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
