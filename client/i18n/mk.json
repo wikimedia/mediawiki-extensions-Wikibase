@@ -32,6 +32,7 @@
 	"apihelp-query+pageterms-example-item": "Дај натписи и истозначници за предметот Q84.",
 	"apihelp-query+pageterms-param-terms": "Кои видови поими да се добијат, на пр. „опис“; секои од нив се даваат како строј низи шифрирани по вид, како на пр. {„опис“: [\"foo\"]}. Ако не е укажано, ќе се дадат сите видови.",
 	"apihelp-query+description-summary": "Дај краток опис (т.е. поднаслов) кој објаснува на што се однесува целната страница",
+	"apihelp-query+description-extended-description": "Описот е прост текст во еден ред, но инаку произволен (можеби со сирови HTML-ознаки, кои исто така треба да се толкуваат како прост текст). Не треба да се користат во HTML без извод!",
 	"apihelp-query+description-param-prefersource": "Кој извор на опис да се претпочита, ако го има:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Месни описи преку расчленувачката функција <code><nowiki>{{SHORTDESC:...}}</nowiki></code> во викитекстот на страницата.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Централните описи од поврзаниот предмет на {{WBREPONAME}}.",

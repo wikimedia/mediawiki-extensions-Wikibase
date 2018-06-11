@@ -101,6 +101,7 @@
 	"wikibase-validator-label-conflict": "Ein annan eigenskap ($3) har alt merkelappen «$1» for språkkoden $2.",
 	"wikibase-validator-label-with-description-conflict": "Eit anna element ($3) har alt merkelappen «$1» og skildringa «$4» for språkkoden $2.",
 	"wikibase-item-reference-edit-placeholder": "Skriv inn element-ID, t.d. Q10",
+	"wikibase-item-reference-edit-invalid-format": "Den oppgjevne element-ID-en har ugyldig format.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Språkkjennemerket «$1» er ukjent. Gjer vel å nytta eit kjennemerke som systemet kjenner, slik som «nn».",
 	"wikibase-wikibaserepopage-invalid-id": "ID-en «$1» er ukjend for systemet. Bruk ein gild einings-ID.",
 	"special-availablebadges": "Tilgjengelege teikn",

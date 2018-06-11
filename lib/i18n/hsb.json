@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Michawiki"
+			"Michawiki",
+			"Matěj Suchánek"
 		]
 	},
 	"wikibase-lib-desc": "Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji",
@@ -44,12 +45,12 @@
 	"wikibase-entity-summary-wbsetaliases-remove": "Wotstroni {{PLURAL:$1|alias|aliasaj|aliasy}} za [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Přida wotkaz k [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Wotstroni wotkaz z [$2]",
-	"wikibase-entity-summary-wbcreateclaim-value": "Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}",
-	"wikibase-entity-summary-wbcreateclaim-novalue": "Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}",
-	"wikibase-entity-summary-wbcreateclaim-somevalue": "Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}",
-	"wikibase-entity-summary-wbcreateclaim": "Wutwori {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}",
+	"wikibase-entity-summary-wbcreateclaim-value": "Wutwori {{PLURAL:$1|twjerdźenje|twjerdźeni|twjerdźenja}}",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "Wutwori {{PLURAL:$1|twjerdźenje|twjerdźeni|twjerdźenja}}",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "Wutwori {{PLURAL:$1|twjerdźenje|twjerdźeni|twjerdźenja}}",
+	"wikibase-entity-summary-wbcreateclaim": "Wutwori {{PLURAL:$1|twjerdźenje|twjerdźeni|twjerdźenja}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "Postaji {{PLURAL:$1|twjerdźensku hódnotu|twjerdźenskej hódnoće|twjerdźenske hódnoty}}",
-	"wikibase-entity-summary-wbremoveclaims": "Wotstroni {{PLURAL:$1twjerdźenje|twjerdźeni|twjerdźenja}}",
+	"wikibase-entity-summary-wbremoveclaims": "Wotstroni {{PLURAL:$1|twjerdźenje|twjerdźeni|twjerdźenja}}",
 	"wikibase-entity-summary-special-create-item": "Wutwori element z {{PLURAL:$1| hódnotu|hódnotomaj|hódnotami}} za  [$2]",
 	"wikibase-item-summary-wbeditentity": "Wutwori nowy element",
 	"wikibase-item-summary-wbeditentity-create": "Wutwori nowy element",

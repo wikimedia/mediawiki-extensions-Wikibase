@@ -433,5 +433,10 @@
 	"apihelp-wbformatvalue-param-datatype": "Тып зьвестак значэньня. Ён адрозьніваецца ад тыпу значэньня",
 	"apihelp-wbformatvalue-param-datavalue": "Дата для фарматаваньня. Павінна быць JSON-сэрыялізацыяй DataValue-аб’екту.",
 	"apihelp-wbformatvalue-param-options": "Парамэтры, якія павінен ужываць фарматавальнік. Падаецца як JSON-аб’ект.",
-	"apihelp-wbformatvalue-example-1": "Фарматаваць простае радковае значэньне."
+	"apihelp-wbformatvalue-param-property": "Ідэнтыфікатар уласьцівасьці, да якой належыць значэньне зьвестак, павінен выкарыстоўваецца замест парамэтру <var>datatype</var>.",
+	"apihelp-wbformatvalue-example-1": "Фарматаваць простае радковае значэньне.",
+	"apihelp-wbformatvalue-example-2": "Фарматаваць радковае значэньне як URL у HTML.",
+	"apihelp-wbgetclaims-description": "Атрымлівае сьцьверджаньні зь Вікібазы.",
+	"apihelp-wbgetclaims-summary": "Атрымлівае сьцьверджаньні зь Вікібазы.",
+	"apihelp-wbgetclaims-param-entity": "Ідэнтыфікатар элемэнту, зь якога атрымліваць сьцьверджаньні. Неабходна, калі не пазначанае сьцьверджаньне GUID."
 }

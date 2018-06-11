@@ -50,6 +50,7 @@
 	"apihelp-query+pageterms-example-item": "Obter os rótulos e nomes alternativos do elemento Q84.",
 	"apihelp-query+pageterms-param-terms": "O tipo de termos a serem obtidos (por exemplo, 'description'), cada um dos quais devolvido como uma matriz de textos (strings) cuja chave é o seu tipo (por exemplo, {\"description\": [\"foo\"]}). Se não for especificado, serão devolvidos todos os tipos.",
 	"apihelp-query+description-summary": "Obter uma descrição breve, isto é, um subtítulo que explica o objetivo da página de destino.",
+	"apihelp-query+description-extended-description": "A descrição é texto simples, numa única linha, mas em tudo o resto arbitrária (possivelmente incluindo elementos de HTML puro, que também devem ser interpretados como texto simples). Não pode ser usada no interior de HTML sem escapes!",
 	"apihelp-query+description-param-prefersource": "Qual das fontes de descrições será a preferida, se existir:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Descrições locais, através da função <code><nowiki>{{SHORTDESC:...}}</nowiki></code> do analisador sintático no texto wiki da página.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descrições centralizadas, do elemento {{WBREPONAME}} associado.",

@@ -91,6 +91,7 @@
 	"wikibase-pageinfo-entity-usage": "Op deze pagina gebruikte {{WBREPONAME}}-entiteiten",
 	"wikibase-pageinfo-entity-usage-S": "Sitekoppeling",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Label: $1",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Beschrijving: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Verklaring: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsgegevens",

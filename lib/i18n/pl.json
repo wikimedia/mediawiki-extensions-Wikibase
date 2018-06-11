@@ -124,7 +124,7 @@
 	"wikibase-entity-summary-wbsetdescription-add": "Dodano opis [$2]",
 	"wikibase-entity-summary-wbsetdescription-set": "Zmieniono opis [$2]",
 	"wikibase-entity-summary-wbsetdescription-remove": "Usunięto opis [$2]",
-	"wikibase-entity-summary-wbsetaliases-set": "Ustawiono {{PLURAL:$1|alias|aliasy}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-set": "Ustawiono [$2] {{PLURAL:$1|alias|aliasy|aliasów}}",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Dodano i usunięto {{PLURAL:$1|alias|aliasy}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "Dodano {{PLURAL:$1|alias|aliasy}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "Usunięto {{PLURAL:$1|alias|aliasy}} [$2]",
