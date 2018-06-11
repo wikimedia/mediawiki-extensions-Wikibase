@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc471dce_f247adc4",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2018-06-11T11:50:58Z",
+      "side": 1,
+      "message": "$2 needs PLURAL",
+      "revId": "e4d22bf7769b32be33428f06c6deab35b82e9553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
