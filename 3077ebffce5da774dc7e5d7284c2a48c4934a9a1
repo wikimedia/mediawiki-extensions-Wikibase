@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48db9a32_8c34d749",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-11T22:38:04Z",
+      "side": 1,
+      "message": "Not super-happy about this, but I am not sure how to avoid it while enabling the same flexibility in construction parameters, which may be very different for different search types.",
+      "revId": "3077ebffce5da774dc7e5d7284c2a48c4934a9a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
