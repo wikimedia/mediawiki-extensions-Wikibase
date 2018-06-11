@@ -46,6 +46,30 @@
       "revId": "658cc24db76043244021833d14621da13b01ae94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65603b20_2049d1eb",
+        "filename": "view/src/Template/TemplateFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-11T11:36:29Z",
+      "side": 1,
+      "message": "\u003e had the exact same behavior\n\nMh, I don\u0027t think so… the old version had Message::fetchMessage overwritten so that it wasn\u0027t able to ever fetch the MW message. That would have resulted in broken behavior as well (set the message to null), so I guess this is fine for now.",
+      "parentUuid": "bad50060_c0a57164",
+      "range": {
+        "startLine": 71,
+        "startChar": 73,
+        "endLine": 71,
+        "endChar": 77
+      },
+      "revId": "658cc24db76043244021833d14621da13b01ae94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

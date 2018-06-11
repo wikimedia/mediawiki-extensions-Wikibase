@@ -22,6 +22,30 @@
       "revId": "68a3a18c6138d49a855960a19335b3e72e0bf76b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b412bd9_03c07095",
+        "filename": "view/src/Template/Template.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-06-11T11:36:29Z",
+      "side": 0,
+      "message": "Indeed… but it didn\u0027t call out to the original Message::fetchMessage ever.",
+      "parentUuid": "51044db7_a69e4c0a",
+      "range": {
+        "startLine": 43,
+        "startChar": 20,
+        "endLine": 43,
+        "endChar": 56
+      },
+      "revId": "68a3a18c6138d49a855960a19335b3e72e0bf76b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
