@@ -45,6 +45,54 @@
       "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f113bd2_4347d08a",
+        "filename": "client/includes/Store/DescriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-06-11T15:56:53Z",
+      "side": 1,
+      "message": "The API uses it, in https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/423244/5/client/includes/Api/Description.php#71\nCould use page ID \u003d\u003e [ description, source ] instead, but most of the time callers wouldn\u0027t care about the source so that seemed a little annoying.",
+      "parentUuid": "9dc67e80_301d374f",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 74
+      },
+      "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3633496d_e248ea65",
+        "filename": "client/includes/Store/DescriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-06-11T15:56:53Z",
+      "side": 1,
+      "message": "That might be simpler but less user-friendly, IMO.",
+      "parentUuid": "ea80299c_4a561776",
+      "range": {
+        "startLine": 61,
+        "startChar": 49,
+        "endLine": 61,
+        "endChar": 57
+      },
+      "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
