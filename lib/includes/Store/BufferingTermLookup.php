@@ -3,6 +3,7 @@
 namespace Wikibase\Store;
 
 use MapCacheLRU;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -110,6 +111,10 @@ class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTer
 	 * @throws StorageException
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.select.BufferingTermLookup_prefetchTerms'
+		);
+
 		if ( empty( $entityIds ) ) {
 			return;
 		}
