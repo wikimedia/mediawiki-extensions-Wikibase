@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e391d6e8_08c74b6e",
+        "filename": "lib/LibHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-12T15:06:47Z",
+      "side": 1,
+      "message": "Is data access part of lib? if so why is this not in lib? then the tests would be running *confused*",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 56
+      },
+      "revId": "7778516280c800d14af08e8fa5453f2463c7c072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
