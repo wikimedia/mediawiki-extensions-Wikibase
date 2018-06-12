@@ -16,6 +16,47 @@
       "revId": "e4d22bf7769b32be33428f06c6deab35b82e9553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be3f3730_6cbbf337",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-06-12T09:29:06Z",
+      "side": 1,
+      "message": "I came here to say the same, needs plural :)",
+      "parentUuid": "dc471dce_f247adc4",
+      "revId": "e4d22bf7769b32be33428f06c6deab35b82e9553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3e254b8_fff48ca3",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-06-12T09:29:06Z",
+      "side": 1,
+      "message": "It looks like ScribuntoException is re-implementing wfMessage poorly, imho, it should just accept Message objects.\n\nFor plural to work, you need to call $language-\u003eformatNum( $limit ) explicitly or use Message::numParam wrapper (untested).",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 401,
+        "endChar": 5
+      },
+      "revId": "e4d22bf7769b32be33428f06c6deab35b82e9553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
