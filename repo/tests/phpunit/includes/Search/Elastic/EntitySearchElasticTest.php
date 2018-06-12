@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Search\Elastic\Tests;
+namespace Wikibase\Repo\Tests\Search\Elastic;
 
 use Language;
 use MediaWikiTestCase;

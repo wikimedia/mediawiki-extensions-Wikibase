@@ -1,9 +1,10 @@
 <?php
-namespace Wikibase\Repo\Search\Elastic\Tests;
+namespace Wikibase\Repo\Tests\Search\Elastic;
 
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use MediaWikiTestCase;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
+use Wikibase\Repo\Search\Elastic\Tests\CirrusSearch;
 
 /**
  * @group Wikibase
