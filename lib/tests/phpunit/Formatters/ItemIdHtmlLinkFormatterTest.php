@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
 use MediaWikiTestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,55 +28,76 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	use HamcrestPHPUnitIntegration;
 
-	/**
-	 * @param Term|null $term
-	 *
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookup( Term $term = null ) {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
+	/** @var EntityTitleLookup|ObjectProphecy */
+	private $entityTitleLookup;
 
-		return $labelDescriptionLookup;
+	/** @var LabelDescriptionLookup|ObjectProphecy */
+	private $labelDescriptionLookup;
+
+	private $currentUserLanguage;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->entityTitleLookup = $this->prophesize( EntityTitleLookup::class );
+		$this->labelDescriptionLookup = $this->prophesize( LabelDescriptionLookup::class );
 	}
 
-	/**
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookupNoLabel() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->throwException( new LabelDescriptionLookupException(
-				new ItemId( 'Q100' ),
-				'meep'
-			) ) );
+	public function testGivenItemExists_ResultingLinkPointsToItemPage() {
+		$this->givenItemExists( 'Q42' );
 
-		return $labelDescriptionLookup;
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q42' ) );
+
+		$expectedUrl = $this->itemPageUrl( 'Q42' );
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingDirectChild(
+				tagMatchingOutline( "<a href=\"${expectedUrl}\"/>" ) )
+		) ) );
 	}
 
-	/**
-	 * @param bool $exists
-	 * @param bool $isRedirect
-	 *
-	 * @return EntityTitleLookup
-	 */
-	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists, $isRedirect ) {
-				$title = Title::newFromText( $id->getSerialization() );
-				$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
-				$title->mRedirect = $isRedirect;
+	public function testItemHasLabelInUserLanguage_ResultingLinkHasLabelAsAText() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenItemHasLabel( 'Q1', 'en', 'Some label' );
 
-				return $title;
-			} )
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+						both( withTagName( 'a' ) )
+							->andAlso( havingTextContents( 'Some label' ) )
+			) ) )
 		);
+	}
 
-		return $entityTitleLookup;
+	public function testItemDoesNotHaveLabelInUserLanguage_ResultingLinkUsesIdAsAText() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenItemExists( 'Q1' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+						both( withTagName( 'a' ) )
+							->andAlso( havingTextContents( 'Q1' ) )
+			) ) )
+		);
+	}
+
+	/**
+	 * @param string $itemId
+	 */
+	private function givenItemExists( $itemId ) {
+		$title = Title::newFromText( $itemId );
+		$title->resetArticleID( ( new ItemId( $itemId ) )->getNumericId() );
+		$title->mRedirect = false;
+
+		$this->entityTitleLookup->getTitleForId( new ItemId( $itemId ) )->willReturn( $title );
 	}
 
 	public function formatProvider() {
@@ -97,38 +119,6 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 				'exists' => false
 			],
 		];
-	}
-
-	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
-		if ( $hasLabel ) {
-			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
-		} else {
-			$labelDescriptionLookup = $this->getLabelDescriptionLookupNoLabel();
-		}
-
-		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
-
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
-			->will( $this->returnCallback( function ( $languageCode ) {
-				$names = [
-						'de' => 'Deutsch',
-						'de-at' => 'Österreichisches Deutsch',
-						'de-ch' => 'Schweizer Hochdeutsch',
-						'en' => 'english in german',
-						'en-ca' => 'Canadian English'
-				];
-				return $names[ $languageCode ];
-			} ) );
-
-		$itemIdHtmlLinkFormatter = new ItemIdHtmlLinkFormatter(
-			$labelDescriptionLookup,
-			$entityTitleLookup,
-			$languageNameLookup
-		);
-
-		return $itemIdHtmlLinkFormatter;
 	}
 
 	/**
@@ -274,6 +264,145 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$formattedEntityId = $formatter->formatEntityId( new ItemId( 'Q42' ) );
 
 		$this->assertThatHamcrest( $formattedEntityId, htmlPiece( havingChild( withClass( 'mw-redirect' ) ) ) );
+	}
+
+	/**
+	 * @param Term|null $term
+	 *
+	 * @return LabelDescriptionLookup
+	 */
+	private function getLabelDescriptionLookup( Term $term = null ) {
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
+
+		return $labelDescriptionLookup;
+	}
+
+	/**
+	 * @return LabelDescriptionLookup
+	 */
+	private function getLabelDescriptionLookupNoLabel() {
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will(
+				$this->throwException(
+					new LabelDescriptionLookupException(
+						new ItemId( 'Q100' ),
+						'meep'
+					)
+				)
+			);
+
+		return $labelDescriptionLookup;
+	}
+
+	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
+		if ( $hasLabel ) {
+			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
+		} else {
+			$labelDescriptionLookup = $this->getLabelDescriptionLookupNoLabel();
+		}
+
+		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
+
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->any() )
+			->method( 'getName' )
+			->will(
+				$this->returnCallback(
+					function ( $languageCode ) {
+						$names = [
+							'de' => 'Deutsch',
+							'de-at' => 'Österreichisches Deutsch',
+							'de-ch' => 'Schweizer Hochdeutsch',
+							'en' => 'english in german',
+							'en-ca' => 'Canadian English'
+						];
+						return $names[ $languageCode ];
+					}
+				)
+			);
+
+		$itemIdHtmlLinkFormatter = new ItemIdHtmlLinkFormatter(
+			$labelDescriptionLookup,
+			$entityTitleLookup,
+			$languageNameLookup
+		);
+
+		return $itemIdHtmlLinkFormatter;
+	}
+
+	/**
+	 * @param bool $exists
+	 * @param bool $isRedirect
+	 *
+	 * @return EntityTitleLookup
+	 */
+	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will(
+				$this->returnCallback(
+					function ( EntityId $id ) use ( $exists, $isRedirect ) {
+						$title = Title::newFromText( $id->getSerialization() );
+						$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
+						$title->mRedirect = $isRedirect;
+
+						return $title;
+					}
+				)
+			);
+
+		return $entityTitleLookup;
+	}
+
+	/**
+	 * @return ItemIdHtmlLinkFormatter
+	 */
+	protected function createFormatter() {
+		return new ItemIdHtmlLinkFormatter(
+			$this->labelDescriptionLookup->reveal(),
+			$this->entityTitleLookup->reveal(),
+			$this->dummy( LanguageNameLookup::class )
+		);
+	}
+
+	private function dummy( $class ) {
+		return $this->prophesize( $class )->reveal();
+	}
+
+	/**
+	 * @param $itemId
+	 * @return string
+	 */
+	private function itemPageUrl( $itemId ) {
+		return Title::newFromText( $itemId )->getLocalURL();
+	}
+
+	private function givenUserLanguageIs( $languageCode ) {
+		$this->currentUserLanguage = $languageCode;
+	}
+
+	private function givenItemHasLabel( $itemId, $labelLanguage, $labelText ) {
+		$this->givenItemExists( 'Q1' );
+
+		$currentLanguage = &$this->currentUserLanguage;
+
+		$this->labelDescriptionLookup
+			->getLabel( new ItemId( $itemId ) )
+			->will(
+				function () use ( $labelLanguage, $labelText, &$currentLanguage ) {
+					if ( $labelLanguage === $currentLanguage ) {
+						return new Term( $labelLanguage, $labelText );
+					} else {
+						return null;
+					}
+				}
+			);
 	}
 
 }
