@@ -366,9 +366,14 @@ return call_user_func( function() {
 				];
 
 				if ( in_array( $format, $htmlFormats ) ) {
-					return new \Wikibase\Lib\EntityIdValueFormatter(
-						$factory->newItemIdHtmlLinkFormatter( $options )
-					);
+					try {
+						return new \Wikibase\Lib\EntityIdValueFormatter(
+							$factory->newItemIdHtmlLinkFormatter( $options )
+						);
+					} catch ( \Throwable $e ) {
+						//FIXME Log the failure
+						return $factory->newEntityIdFormatter( $format, $options );
+					}
 				}
 
 				return $factory->newEntityIdFormatter( $format, $options );
