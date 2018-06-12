@@ -5,6 +5,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Deserializers\Exceptions\DeserializationException;
 use Exception;
 use Language;
+use Scribunto_LuaError;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -395,9 +396,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$limit = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'referencedEntityIdAccessLimit' );
 		if ( $accesses > $limit ) {
-			throw new ScribuntoException(
-				'wikibase-error-exceeded-referenced-entity-id-limit',
-				[ 'args' => [ $limit ] ]
+			throw new Scribunto_LuaError(
+				wfMessage( 'wikibase-error-exceeded-referenced-entity-id-limit' )->params( 'IGNORED' )->numParams( 3 )->text()
 			);
 		}
 
