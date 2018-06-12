@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27b0e659_e57f9a34",
+        "filename": "client/tests/phpunit/includes/DataAccess/ParserFunctions/StatementsParserFunctionIntegrationTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-06-12T13:56:17Z",
+      "side": 1,
+      "message": "Should use what is in $store already?!",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 44
+      },
+      "revId": "d60c71c71f6a452db306536c717cc6af868d338b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "280ad261_1f252052",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-06-12T13:56:17Z",
+      "side": 1,
+      "message": "Great to see this dynamized though I have to admit I don\u0027t understand why it worked before with getTestSiteLinkDataInNotEnabledNamespace()",
+      "range": {
+        "startLine": 197,
+        "startChar": 33,
+        "endLine": 197,
+        "endChar": 40
+      },
+      "revId": "d60c71c71f6a452db306536c717cc6af868d338b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abbbc697_75f1dd90",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/EntityUsageTableTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-06-12T13:56:17Z",
+      "side": 1,
+      "message": "I\u0027m normally not the one to criticize funny strings in tests but the term \"supertype\" could really send people astray while we really just want to say that it\u0027s \"awesome\", right?",
+      "range": {
+        "startLine": 205,
+        "startChar": 25,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "d60c71c71f6a452db306536c717cc6af868d338b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
