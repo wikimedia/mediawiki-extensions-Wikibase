@@ -136,6 +136,8 @@
 	"wikibase-entityusage-submit": "Label for the button that activates the action",
 	"wikibase-pageinfo-entity-id": "A link to the corresponding Wikibase Item",
 	"wikibase-pageinfo-entity-id-none": "The page is not linked with a wikibase item.\n{{Identical|None}}",
+	"wikibase-pageinfo-description-local": "Name for local description.",
+	"wikibase-pageinfo-description-central": "Name for central description.",
 	"wikibase-pageinfo-entity-usage": "Desciption in action=info and action=edit about entities used in the page\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-S": "Name for ''sitelink'' entity usage\n{{Identical|Sitelink}}\n{{Related|Wikibase-pageinfo-entity-usage}}",
 	"wikibase-pageinfo-entity-usage-L": "Name for ''label'' entity usage\n{{Related|Wikibase-pageinfo-entity-usage}}",

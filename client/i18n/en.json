@@ -123,6 +123,8 @@
 	"wikibase-entityusage-submit": "Show pages",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} item ID",
 	"wikibase-pageinfo-entity-id-none": "None",
+	"wikibase-pageinfo-description-local": "Local description",
+	"wikibase-pageinfo-description-central": "Central description",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} entities used in this page",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Some labels",
