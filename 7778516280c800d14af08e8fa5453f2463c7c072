@@ -22,6 +22,30 @@
       "revId": "7778516280c800d14af08e8fa5453f2463c7c072",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7996cf7_b7974011",
+        "filename": "lib/LibHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-12T15:49:37Z",
+      "side": 1,
+      "message": "well, not really part of lib.\nBut adding its tests here is probably the best option.",
+      "parentUuid": "e391d6e8_08c74b6e",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 56
+      },
+      "revId": "7778516280c800d14af08e8fa5453f2463c7c072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
