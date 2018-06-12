@@ -65,6 +65,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Interactors\\TermSearchInteractorFactory' => __DIR__ . '/includes/Interactors/TermSearchInteractorFactory.php',
 	'Wikibase\\Lib\\Interactors\\TermSearchOptions' => __DIR__ . '/includes/Interactors/TermSearchOptions.php',
 	'Wikibase\\Lib\\Interactors\\TermSearchResult' => __DIR__ . '/includes/Interactors/TermSearchResult.php',
+	'Wikibase\\Lib\\ItemIdHtmlLinkFormatter' => __DIR__ . '/includes/Formatters/ItemIdHtmlLinkFormatter.php',
 	'Wikibase\\Lib\\LanguageFallbackIndicator' => __DIR__ . '/includes/LanguageFallbackIndicator.php',
 	'Wikibase\\Lib\\LanguageNameLookup' => __DIR__ . '/includes/LanguageNameLookup.php',
 	'Wikibase\\Lib\\MediaWikiContentLanguages' => __DIR__ . '/includes/MediaWikiContentLanguages.php',

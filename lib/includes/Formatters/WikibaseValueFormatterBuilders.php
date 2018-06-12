@@ -209,6 +209,18 @@ class WikibaseValueFormatterBuilders {
 		return $this->escapeValueFormatter( $format, $plainFormatter );
 	}
 
+	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup(
+			$options
+		);
+
+		return new ItemIdHtmlLinkFormatter(
+			$labelDescriptionLookup,
+			$this->entityTitleLookup,
+			$this->languageNameLookup
+		);
+	}
+
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
