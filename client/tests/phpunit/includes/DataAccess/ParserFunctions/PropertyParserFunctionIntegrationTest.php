@@ -50,6 +50,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		);
 
 		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
+		$this->setMwGlobals( 'wgLang', Language::factory( 'de' ) );
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
