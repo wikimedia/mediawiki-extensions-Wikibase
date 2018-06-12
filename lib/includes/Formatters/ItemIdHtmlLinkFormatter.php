@@ -6,10 +6,10 @@ use Html;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -34,7 +34,7 @@ class ItemIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	private $nonExistingFormatter;
 
 	public function __construct(
-		LabelDescriptionLookup $labelDescriptionLookup,
+		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageNameLookup $languageNameLookup
 	) {
@@ -59,6 +59,7 @@ class ItemIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			return $this->nonExistingFormatter->formatEntityId( $entityId );
 		}
 
+		/** @var TermFallback $term */
 		$term = $this->lookupEntityLabel( $entityId );
 
 		// We can skip the expensive exists() check if we found a term.
@@ -72,6 +73,7 @@ class ItemIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$html = Html::element( 'a', $this->getAttributes( $title, $term ), $label );
 
+		//FIXME Remove this check once all the tests are migrated
 		if ( $term instanceof TermFallback ) {
 			$html .= $this->languageFallbackIndicator->getHtml( $term );
 		}
