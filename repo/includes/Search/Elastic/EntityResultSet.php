@@ -35,17 +35,7 @@ class EntityResultSet extends ResultSet {
 		$this->displayLanguage = $displayLanguage;
 	}
 
-	/**
-	 * @return bool|EntityResult
-	 */
-	public function next() {
-		$current = parent::nextRawResult();
-		if ( $current ) {
-			$result = new EntityResult( $this->displayLanguage, $this->fallbackChain, $current );
-			$this->augmentResult( $result );
-			return $result;
-		}
-		return false;
+	protected function transformOneResult( \Elastica\Result $result ) {
+		return new EntityResult( $this->displayLanguage, $this->fallbackChain, $result );
 	}
-
 }
