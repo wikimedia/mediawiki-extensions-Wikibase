@@ -1,5 +1,5 @@
 <?php
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\Lib\Tests\Store\Elastic;
 
 use Elastica\Result;
 use Status;
@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\Store\ElasticTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TermLookupSearcher;
+use Wikibase\Lib\Tests\Store\EntityTermLookupTest;
 
 /**
  * @covers \Wikibase\Lib\Store\ElasticTermLookup
