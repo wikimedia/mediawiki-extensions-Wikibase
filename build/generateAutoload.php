@@ -23,8 +23,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 	}
 
 	public function execute() {
-		$this->generateAutoloadForComponent( 'data-access', [ 'src' ] );
-
 		$this->generateAutoloadForComponent(
 			'lib',
 			[ 'includes', 'maintenance' ],
