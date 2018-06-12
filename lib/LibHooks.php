@@ -25,6 +25,7 @@ final class LibHooks {
 	 */
 	public static function registerPhpUnitTests( array &$paths ) {
 		$paths[] = __DIR__ . '/tests/phpunit/';
+		$paths[] = __DIR__ . '/../data-access/tests/phpunit/';
 
 		return true;
 	}

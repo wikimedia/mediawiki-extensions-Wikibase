@@ -19,6 +19,7 @@
             <directory>purtle/tests/phpunit</directory>
             <directory>repo/tests/phpunit</directory>
             <directory>view/tests/phpunit</directory>
+            <directory>data-access/tests/phpunit</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -35,6 +36,8 @@
             <directory suffix=".php">repo/maintenance</directory>
 
             <directory suffix=".php">view/src</directory>
+
+            <directory suffix=".php">data-access/src</directory>
         </whitelist>
     </filter>
 </phpunit>
