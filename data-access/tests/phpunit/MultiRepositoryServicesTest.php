@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\RepositoryDefinitions;
 
@@ -42,7 +43,7 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 	public function testGetServiceNames_ReturnsNameOfDefinedService() {
 		$services = new MultiRepositoryServices(
 			$this->dummy( PerRepositoryServiceContainerFactory::class ),
-			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
+			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ), new EntityTypeDefinitions( [] ) )
 		);
 
 		$services->defineService(
@@ -58,10 +59,13 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 	private function newMultiRepositoryServices( PerRepositoryServiceContainerFactory $containerFactory ) {
 		return new MultiRepositoryServices(
 			$containerFactory,
-			new RepositoryDefinitions( array_merge(
-				$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ Item::ENTITY_TYPE => self::ITEM_NAMESPACE ] ] ),
-				$this->getRepositoryDefinition( 'foo', [ 'entity-namespaces' => [ Property::ENTITY_TYPE => self::PROPERTY_NAMESPACE ] ] )
-			) )
+			new RepositoryDefinitions(
+				array_merge(
+					$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ Item::ENTITY_TYPE => self::ITEM_NAMESPACE ] ] ),
+					$this->getRepositoryDefinition( 'foo', [ 'entity-namespaces' => [ Property::ENTITY_TYPE => self::PROPERTY_NAMESPACE ] ] )
+				),
+				new EntityTypeDefinitions( [] )
+			)
 		);
 	}
 
@@ -94,7 +98,7 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 	public function testGetService_AlwaysReturnsTheSameService() {
 		$services = new MultiRepositoryServices(
 			$this->dummy( PerRepositoryServiceContainerFactory::class ),
-			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
+			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ), new EntityTypeDefinitions( [] ) )
 		);
 
 		$someService = $this->someService( 'some service instance' );

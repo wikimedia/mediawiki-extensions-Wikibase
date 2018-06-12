@@ -54,12 +54,15 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 	private function getMultiRepositoryServices() {
 		$services = new MultiRepositoryServices(
 			$this->getPerRepositoryServiceContainerFactory(),
-			new RepositoryDefinitions( [ '' => [
-				'database' => false,
-				'base-uri' => '',
-				'entity-namespaces' => [],
-				'prefix-mapping' => [],
-			] ] )
+			new RepositoryDefinitions(
+				[ '' => [
+					'database' => false,
+					'base-uri' => '',
+					'entity-namespaces' => [],
+					'prefix-mapping' => [],
+				] ],
+				new EntityTypeDefinitions( [] )
+			)
 		);
 
 		$services->loadWiringFiles( [ __DIR__ . '/../../src/MultiRepositoryServiceWiring.php' ] );

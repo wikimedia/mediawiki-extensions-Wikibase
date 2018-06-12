@@ -46,14 +46,15 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 	}
 
 	private function getRepositoryDefinitions() {
-		return new RepositoryDefinitions( [
-			'' => [
+		return new RepositoryDefinitions(
+			[ '' => [
 				'database' => false,
 				'base-uri' => 'http://foo',
 				'entity-namespaces' => [],
 				'prefix-mapping' => [],
-			],
-		] );
+			] ],
+			new EntityTypeDefinitions( [] )
+		);
 	}
 
 	private function getMultiRepoServiceWiring() {

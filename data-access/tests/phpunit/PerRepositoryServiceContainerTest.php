@@ -114,7 +114,6 @@ class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
 		$unusedWatcherService->expects( $this->never() )->method( $event );
 
 		$nonWatcherService = $this->getMock( stdClass::class );
-		$nonWatcherService->expects( $this->never() )->method( $event );
 
 		$container = $this->newRepositoryServiceContainer();
 		$container->defineService( 'watcherService', function () use ( $watcherService ) {
