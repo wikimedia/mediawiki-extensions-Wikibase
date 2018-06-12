@@ -93,6 +93,30 @@
       "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8e50d34_5c997e04",
+        "filename": "client/includes/Store/DescriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-12T09:27:46Z",
+      "side": 1,
+      "message": "Oh, I missed that line, confusing diff. Thanks!",
+      "parentUuid": "2f113bd2_4347d08a",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 74
+      },
+      "revId": "efd035aa6b9a258c8d3e5d685ad8da13c6405079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
