@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "61d23e64_beec8637",
+        "filename": "client/tests/phpunit/includes/DataAccess/ParserFunctions/StatementsParserFunctionIntegrationTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-12T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b0e659_e57f9a34",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 44
+      },
+      "revId": "d60c71c71f6a452db306536c717cc6af868d338b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "280ad261_1f252052",
         "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "93de331b_c27807c2",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-12T16:55:24Z",
+      "side": 1,
+      "message": "My guess is that in that case the code just didn\u0027t hit the line where it actually uses entity lookup.\n\nLooking at ParserOutputUpdateHookHandlers::doContentAlterParserOutput doing the namespace check is indeed the first thing that\u0027s done, so this whole lookup is kind of irrelevant in this case.",
+      "parentUuid": "280ad261_1f252052",
+      "range": {
+        "startLine": 197,
+        "startChar": 33,
+        "endLine": 197,
+        "endChar": 40
+      },
+      "revId": "d60c71c71f6a452db306536c717cc6af868d338b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abbbc697_75f1dd90",
         "filename": "client/tests/phpunit/includes/Usage/Sql/EntityUsageTableTest.php",
         "patchSetId": 9
@@ -59,6 +107,30 @@
       "writtenOn": "2018-06-12T13:56:17Z",
       "side": 1,
       "message": "I\u0027m normally not the one to criticize funny strings in tests but the term \"supertype\" could really send people astray while we really just want to say that it\u0027s \"awesome\", right?",
+      "range": {
+        "startLine": 205,
+        "startChar": 25,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "d60c71c71f6a452db306536c717cc6af868d338b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a14b3b1_b7d0fd96",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/EntityUsageTableTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-12T16:55:24Z",
+      "side": 1,
+      "message": "true. super type is not a good name for the fake data.",
+      "parentUuid": "abbbc697_75f1dd90",
       "range": {
         "startLine": 205,
         "startChar": 25,
