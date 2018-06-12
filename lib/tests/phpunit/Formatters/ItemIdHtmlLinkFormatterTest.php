@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
 use MediaWikiTestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -13,7 +14,9 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\ItemIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * @covers \Wikibase\Lib\ItemIdHtmlLinkFormatter
@@ -27,118 +30,98 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	use HamcrestPHPUnitIntegration;
 
-	/**
-	 * @param Term|null $term
-	 *
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookup( Term $term = null ) {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
+	/** @var EntityTitleLookup|ObjectProphecy */
+	private $entityTitleLookup;
 
-		return $labelDescriptionLookup;
-	}
+	/** @var LanguageFallbackLabelDescriptionLookup|ObjectProphecy */
+	private $labelDescriptionLookup;
 
-	/**
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookupNoLabel() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->throwException( new LabelDescriptionLookupException(
-				new ItemId( 'Q100' ),
-				'meep'
-			) ) );
+	private $currentUserLanguage;
 
-		return $labelDescriptionLookup;
-	}
+	/** @var string[] List of fallback languages */
+	protected $fallbackChain = [];
 
-	/**
-	 * @param bool $exists
-	 * @param bool $isRedirect
-	 *
-	 * @return EntityTitleLookup
-	 */
-	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists, $isRedirect ) {
-				$title = Title::newFromText( $id->getSerialization() );
-				$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
-				$title->mRedirect = $isRedirect;
+	protected function setUp() {
+		parent::setUp();
 
-				return $title;
-			} )
+		$this->entityTitleLookup = $this->prophesize( EntityTitleLookup::class );
+		$this->labelDescriptionLookup = $this->prophesize(
+			LanguageFallbackLabelDescriptionLookup::class
 		);
-
-		return $entityTitleLookup;
 	}
 
-	public function formatProvider() {
-		$escapedItemUrl = preg_quote( Title::newFromText( 'Q42' )->getLocalURL(), '/' );
+	public function testGivenItemExists_ResultingLinkPointsToItemPage() {
+		$this->givenItemExists( 'Q42' );
 
-		return [
-			'has a label' => [
-				'expectedRegex' => '/' . $escapedItemUrl . '.*>A label</',
-			],
-			"has no label" => [
-				'expectedRegex' => '/' . $escapedItemUrl . '.*>Q42</',
-				'hasLabel' => false
-			],
-			"doesn't exist, lookup labels" => [
-				'expectedRegex' => '/^Q42' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
-					preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '/' ) .
-					'</',
-				'hasLabel' => false,
-				'exists' => false
-			],
-		];
-	}
-
-	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
-		if ( $hasLabel ) {
-			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
-		} else {
-			$labelDescriptionLookup = $this->getLabelDescriptionLookupNoLabel();
-		}
-
-		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
-
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
-			->will( $this->returnCallback( function ( $languageCode ) {
-				$names = [
-						'de' => 'Deutsch',
-						'de-at' => 'Österreichisches Deutsch',
-						'de-ch' => 'Schweizer Hochdeutsch',
-						'en' => 'english in german',
-						'en-ca' => 'Canadian English'
-				];
-				return $names[ $languageCode ];
-			} ) );
-
-		$itemIdHtmlLinkFormatter = new ItemIdHtmlLinkFormatter(
-			$labelDescriptionLookup,
-			$entityTitleLookup,
-			$languageNameLookup
-		);
-
-		return $itemIdHtmlLinkFormatter;
-	}
-
-	/**
-	 * @dataProvider formatProvider
-	 */
-	public function testFormat( $expectedRegex, $hasLabel = true, $exists = true ) {
-		$entityIdHtmlLinkFormatter = $this->getFormatter( $hasLabel, $exists );
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q42' ) );
 
-		$this->assertRegExp( $expectedRegex, $result );
+		$expectedUrl = $this->itemPageUrl( 'Q42' );
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingDirectChild(
+				tagMatchingOutline( "<a href=\"${expectedUrl}\"/>" ) )
+		) ) );
+	}
+
+	public function testItemHasLabelInUserLanguage_ResultingLinkHasLabelAsAText() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenItemHasLabel( 'Q1', 'en', 'Some label' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+						both( withTagName( 'a' ) )
+							->andAlso( havingTextContents( 'Some label' ) )
+			) ) )
+		);
+	}
+
+	public function testItemDoesNotHaveLabelInUserLanguage_ResultingLinkUsesIdAsAText() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenItemExists( 'Q1' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+						both( withTagName( 'a' ) )
+							->andAlso( havingTextContents( 'Q1' ) )
+			) ) )
+		);
+	}
+
+	public function testItemDoesNotExist_DelegatesFormattingToNonExistingEntityIdHtmlFormatter() {
+		$this->givenItemDoesNotExist( 'Q1' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
+
+		$nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
+		$expectedResult = $nonExistingEntityIdHtmlFormatter->formatEntityId( new ItemId( 'Q1' ) );
+		$this->assertEquals( $expectedResult, $result );
+	}
+
+	public function testGivenLabelInFallbackLanguageExists_UsesThatLabelAsTheText() {
+		$this->givenUserLanguageIs( 'de' )
+			->withFallbackChain( 'en' );
+		$this->givenItemHasLabel( 'Q1', 'en', 'Label in English' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+			   both( withTagName( 'a' ) )
+				   ->andAlso( havingTextContents( 'Label in English' ) )
+			) ) )
+		);
 	}
 
 	public function formatProvider_fallback() {
@@ -154,14 +137,6 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$translitEnCa = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Canadian English', 'English' )->text();
 
 		return [
-			'plain term' => [
-				'expectedRegex' => '@>Kätzchen<@',
-				'term' => $deTerm,
-			],
-			'plain fallabck term' => [
-				'expectedRegex' => '@>Kätzchen<@',
-				'term' => $deTermFallback,
-			],
 			'fallback to base' => [
 				'expectedRegex' => '@ lang="de">Kätzchen</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Deutsch</sup>@',
@@ -213,7 +188,7 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->will( $this->returnValue( null ) );
 
 		$formatter = new ItemIdHtmlLinkFormatter(
-			$this->getMock( LabelDescriptionLookup::class ),
+			$this->createMock( LanguageFallbackLabelDescriptionLookup::class ),
 			$entityTitleLookup,
 			$this->getMock( LanguageNameLookup::class )
 		);
@@ -274,6 +249,192 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$formattedEntityId = $formatter->formatEntityId( new ItemId( 'Q42' ) );
 
 		$this->assertThatHamcrest( $formattedEntityId, htmlPiece( havingChild( withClass( 'mw-redirect' ) ) ) );
+	}
+
+	/**
+	 * @param Term|null $term
+	 *
+	 * @return LabelDescriptionLookup
+	 */
+	private function getLabelDescriptionLookup( Term $term = null ) {
+		$labelDescriptionLookup = $this->createMock(
+			LanguageFallbackLabelDescriptionLookup::class
+		);
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
+
+		return $labelDescriptionLookup;
+	}
+
+	/**
+	 * @return LabelDescriptionLookup
+	 */
+	private function getLabelDescriptionLookupNoLabel() {
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will(
+				$this->throwException(
+					new LabelDescriptionLookupException(
+						new ItemId( 'Q100' ),
+						'meep'
+					)
+				)
+			);
+
+		return $labelDescriptionLookup;
+	}
+
+	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
+		if ( $hasLabel ) {
+			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
+		} else {
+			$labelDescriptionLookup = $this->getLabelDescriptionLookupNoLabel();
+		}
+
+		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
+
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->any() )
+			->method( 'getName' )
+			->will(
+				$this->returnCallback(
+					function ( $languageCode ) {
+						$names = [
+							'de' => 'Deutsch',
+							'de-at' => 'Österreichisches Deutsch',
+							'de-ch' => 'Schweizer Hochdeutsch',
+							'en' => 'english in german',
+							'en-ca' => 'Canadian English'
+						];
+						return $names[ $languageCode ];
+					}
+				)
+			);
+
+		$itemIdHtmlLinkFormatter = new ItemIdHtmlLinkFormatter(
+			$labelDescriptionLookup,
+			$entityTitleLookup,
+			$languageNameLookup
+		);
+
+		return $itemIdHtmlLinkFormatter;
+	}
+
+	/**
+	 * @param bool $exists
+	 * @param bool $isRedirect
+	 *
+	 * @return EntityTitleLookup
+	 */
+	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will(
+				$this->returnCallback(
+					function ( EntityId $id ) use ( $exists, $isRedirect ) {
+						$title = Title::newFromText( $id->getSerialization() );
+						$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
+						$title->mRedirect = $isRedirect;
+
+						return $title;
+					}
+				)
+			);
+
+		return $entityTitleLookup;
+	}
+
+	/**
+	 * @return ItemIdHtmlLinkFormatter
+	 */
+	protected function createFormatter() {
+		return new ItemIdHtmlLinkFormatter(
+			$this->labelDescriptionLookup->reveal(),
+			$this->entityTitleLookup->reveal(),
+			$this->dummy( LanguageNameLookup::class )
+		);
+	}
+
+	private function dummy( $class ) {
+		return $this->prophesize( $class )->reveal();
+	}
+
+	/**
+	 * @param $itemId
+	 * @return string
+	 */
+	private function itemPageUrl( $itemId ) {
+		return Title::newFromText( $itemId )->getLocalURL();
+	}
+
+	private function givenUserLanguageIs( $languageCode ) {
+		$this->setUserLang( 'qqx' );
+		$this->currentUserLanguage = $languageCode;
+
+		return new class( $this ) extends ItemIdHtmlLinkFormatterTest {
+
+			public function __construct( $testCase ) {
+				$this->testCase = $testCase;
+			}
+
+			public function withFallbackChain( ...$languageCodes ) {
+				$this->testCase->fallbackChain = $languageCodes;
+			}
+
+		};
+	}
+
+	private function givenItemHasLabel( $itemId, $labelLanguage, $labelText ) {
+		$this->givenItemExists( 'Q1' );
+
+		$currentLanguage = &$this->currentUserLanguage;
+		$fallbackChain = &$this->fallbackChain;
+
+		$this->labelDescriptionLookup
+			->getLabel( new ItemId( $itemId ) )
+			->will(
+				function () use ( $labelLanguage, $labelText, &$currentLanguage, &$fallbackChain ) {
+					if ( $labelLanguage === $currentLanguage ) {
+						return new TermFallback(
+							$labelLanguage,
+							$labelText,
+							$labelLanguage,
+							$labelLanguage
+						);
+					}
+					if ( in_array( $labelLanguage, $fallbackChain ) ) {
+						return new TermFallback(
+							$currentLanguage,
+							$labelText,
+							$labelLanguage,
+							$labelLanguage
+						);
+					} else {
+						return null;
+					}
+				}
+			);
+	}
+
+	/**
+	 * @param string $itemId
+	 */
+	private function givenItemDoesNotExist( $itemId ) {
+		$this->entityTitleLookup->getTitleForId( new ItemId( $itemId ) )->willReturn( null );
+	}
+
+	/**
+	 * @param string $itemId
+	 */
+	private function givenItemExists( $itemId ) {
+		$title = Title::newFromText( $itemId );
+		$title->resetArticleID( ( new ItemId( $itemId ) )->getNumericId() );
+		$title->mRedirect = false;
+
+		$this->entityTitleLookup->getTitleForId( new ItemId( $itemId ) )->willReturn( $title );
 	}
 
 }
