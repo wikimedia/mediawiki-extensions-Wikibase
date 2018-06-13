@@ -117,6 +117,8 @@
 	"wikibase-entityusage-submit": "Mostra pagine",
 	"wikibase-pageinfo-entity-id": "ID elemento {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nessuno",
+	"wikibase-pageinfo-description-local": "Descrizione locale",
+	"wikibase-pageinfo-description-central": "Descrizione centrale",
 	"wikibase-pageinfo-entity-usage": "Entità {{WBREPONAME}} utilizzate in questa pagina",
 	"wikibase-pageinfo-entity-usage-S": "Collegamento al sito",
 	"wikibase-pageinfo-entity-usage-L": "Alcune etichette",

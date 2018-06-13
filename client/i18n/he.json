@@ -122,6 +122,8 @@
 	"wikibase-entityusage-submit": "הצגת הדפים",
 	"wikibase-pageinfo-entity-id": "מזהה פריט ב{{GRAMMAR:תחילית|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "אין",
+	"wikibase-pageinfo-description-local": "תיאור מקומי",
+	"wikibase-pageinfo-description-central": "תיאור מרכזי",
 	"wikibase-pageinfo-entity-usage": "ישויות {{WBREPONAME}} שמשמשות בדף הזה",
 	"wikibase-pageinfo-entity-usage-S": "קישור אתר",
 	"wikibase-pageinfo-entity-usage-L": "תוויות אחדות",

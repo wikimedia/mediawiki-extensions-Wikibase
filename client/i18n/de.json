@@ -119,6 +119,8 @@
 	"wikibase-entityusage-submit": "Seiten anzeigen",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-Objektkennung",
 	"wikibase-pageinfo-entity-id-none": "Keine",
+	"wikibase-pageinfo-description-local": "Lokale Beschreibung",
+	"wikibase-pageinfo-description-central": "Zentrale Beschreibung",
 	"wikibase-pageinfo-entity-usage": "In dieser Seite verwendete {{WBREPONAME}}-Objekte",
 	"wikibase-pageinfo-entity-usage-S": "Websitelink",
 	"wikibase-pageinfo-entity-usage-L": "Einige Bezeichnungen",
