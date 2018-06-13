@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee7324e0_5e5ae51d",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-13T12:52:52Z",
+      "side": 1,
+      "message": "these are search contexts, \"search type\" can be misleading as it usually denotes fulltext or prefixsearch.",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 23
+      },
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58bdb17e_290dd2d4",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-13T12:52:52Z",
+      "side": 1,
+      "message": "would be great to have a short phpdoc comment to explain the format of this array",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53492816_6d8baf9f",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-13T12:52:52Z",
+      "side": 1,
+      "message": "this is named searchTypes but reading the code below it actually refers to profile contexts",
+      "range": {
+        "startLine": 26,
+        "startChar": 9,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1122ea78_d01b2be4",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-13T12:52:52Z",
+      "side": 1,
+      "message": "this should be tested as\n  if ( !$namespaces )\n\nif this var is null or equals to the empty array it means all namespaces are requested.\nThis is an historical behavior that I hope we can change to a more explicit \u0027I want all namespaces\u0027.",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e98a0bbc_fed50f21",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-13T12:52:52Z",
+      "side": 1,
+      "message": "why do we send a warning in this case but not when we have ambiguous types (next if)",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffa18dfe_0778696a",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-13T12:52:52Z",
+      "side": 1,
+      "message": "This cannot happen, loadProfile will fail if it cannot determine the profile for the context $searchType.\nGetting default profile for a context is not supposed to fail (it\u0027s a config error)",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
