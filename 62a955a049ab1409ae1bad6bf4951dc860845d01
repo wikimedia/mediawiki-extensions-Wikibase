@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0eeec4ff_1f0cfad2",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-13T22:51:47Z",
+      "side": 1,
+      "message": "hmm that\u0027s indeed not the type I meant here, but it\u0027s a different kind of type... Maybe I\u0027ll rename it to fulltext-search-context.",
+      "parentUuid": "ee7324e0_5e5ae51d",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 23
+      },
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58bdb17e_290dd2d4",
         "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
         "patchSetId": 11
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c7a48832_ee317366",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-13T22:51:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58bdb17e_290dd2d4",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53492816_6d8baf9f",
         "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
         "patchSetId": 11
@@ -59,6 +107,30 @@
       "writtenOn": "2018-06-13T12:52:52Z",
       "side": 1,
       "message": "this is named searchTypes but reading the code below it actually refers to profile contexts",
+      "range": {
+        "startLine": 26,
+        "startChar": 9,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b67bc0d3_7eab9cbd",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-13T22:51:47Z",
+      "side": 1,
+      "message": "Yes, in this context it is the same - same context name means same search type.",
+      "parentUuid": "53492816_6d8baf9f",
       "range": {
         "startLine": 26,
         "startChar": 9,
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "659e0307_0a3a4649",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-13T22:51:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1122ea78_d01b2be4",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e98a0bbc_fed50f21",
         "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
         "patchSetId": 11
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "00c5e490_66a10014",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-13T22:51:47Z",
+      "side": 1,
+      "message": "We want to warn if we mix article and item namespaces, because there\u0027s unobvious behavior right now in this case - we ignore article NSes and only search in entity NSes. The check below checks about searching in more than one *entity* namespace type, which is not the same as mixing entities and articles (at least for now). I am not 100% sure how to resolve this yet, for now it\u0027s a warning.",
+      "parentUuid": "e98a0bbc_fed50f21",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffa18dfe_0778696a",
         "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
         "patchSetId": 11
@@ -116,6 +224,24 @@
       "writtenOn": "2018-06-13T12:52:52Z",
       "side": 1,
       "message": "This cannot happen, loadProfile will fail if it cannot determine the profile for the context $searchType.\nGetting default profile for a context is not supposed to fail (it\u0027s a config error)",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "757b7434_1dbb4523",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-06-13T22:51:47Z",
+      "side": 1,
+      "message": "So how can I check whether such profile exists or not then? Or I shouldn\u0027t?",
+      "parentUuid": "ffa18dfe_0778696a",
       "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
