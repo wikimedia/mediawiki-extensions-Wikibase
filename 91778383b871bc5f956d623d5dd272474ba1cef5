@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84e4f5d0_0437f19f",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-14T08:15:28Z",
+      "side": 1,
+      "message": "Since you run this after having run the default cirrus builder you need to unset some components that have been set by it:\n- $searchContext-\u003esetSuggest( null ) for disabling suggestions\n\nperhaps other states need to be reset...",
+      "revId": "91778383b871bc5f956d623d5dd272474ba1cef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
