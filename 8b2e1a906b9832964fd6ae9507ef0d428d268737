@@ -34,6 +34,24 @@
       "revId": "8b2e1a906b9832964fd6ae9507ef0d428d268737",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17b5b6b7_5f4ea8d8",
+        "filename": "docs/options.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-06-14T16:26:24Z",
+      "side": 1,
+      "message": "I don’t see it yet, Gerrit says PS6 is a rebase with no diff to PS5…",
+      "parentUuid": "665f6bd4_34b66134",
+      "revId": "8b2e1a906b9832964fd6ae9507ef0d428d268737",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
