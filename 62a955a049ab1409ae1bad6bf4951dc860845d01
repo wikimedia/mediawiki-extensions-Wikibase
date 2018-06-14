@@ -245,6 +245,24 @@
       "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3395bf98_34d0bb7a",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-14T07:58:21Z",
+      "side": 1,
+      "message": "I think you should not, profile contexts have to exist since they are generally constants in the code. It should be considered as a bug so imo it\u0027s fine to error out with an exception.\nAn extension that declares a new profile context must generally provide at least one profile attached to it in the code (independently of what\u0027s set in the config)",
+      "parentUuid": "757b7434_1dbb4523",
+      "revId": "62a955a049ab1409ae1bad6bf4951dc860845d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
