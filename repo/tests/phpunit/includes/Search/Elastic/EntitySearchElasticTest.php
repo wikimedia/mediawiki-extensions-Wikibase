@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch\CirrusDebugOptions;
 use Language;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -37,15 +38,10 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 			new BasicEntityIdParser(),
 			$userLang,
 			$repo->getContentModelMappings(),
-			$repo->getSettings()->getSetting( 'entitySearch' )
+			$repo->getSettings()->getSetting( 'entitySearch' ),
+			new \FauxRequest(),
+			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);
-	}
-
-	/**
-	 * @return \FauxRequest
-	 */
-	private function getMockRequest() {
-		return new \FauxRequest( [ 'cirrusDumpQuery' => 'yes' ] );
 	}
 
 	public function searchDataProvider() {
@@ -68,8 +64,6 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 	public function testSearchElastic( $params, $expected ) {
 		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
 		$search = $this->newEntitySearch( Language::factory( $params['userLang'] ) );
-		$search->setRequest( $this->getMockRequest() );
-		$search->setReturnResult( true );
 		$limit = 10;
 		if ( isset( $params['limit'] ) ) {
 			$limit = $params['limit'];
