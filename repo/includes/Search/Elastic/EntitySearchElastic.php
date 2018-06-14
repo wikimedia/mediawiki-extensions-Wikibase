@@ -273,7 +273,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 			$this->languageChainFactory->newFromLanguage( $this->userLang )
 		) );
 
-		$searcher->setOptionsFromRequest( $this->request );
 		$searcher->getSearchContext()->setProfileContext( self::CONTEXT_WIKIBASE_PREFIX );
 		$result = $searcher->performSearch( $query );
 
