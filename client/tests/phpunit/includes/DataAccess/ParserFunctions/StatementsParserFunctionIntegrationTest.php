@@ -12,14 +12,6 @@ use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Test\MockClientStore;
 
 /**
@@ -41,11 +33,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
-	/**
-	 * @var MockClientStore
-	 */
-	private $store;
-
 	protected function setUp() {
 		parent::setUp();
 
@@ -62,8 +49,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 			$wikibaseClient->getStore(),
 			'Mocking the default ClientStore failed'
 		);
-
-		$this->store = $store;
 
 		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
 
@@ -145,31 +130,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q1234567#O', 'Q1234567#C.P342' ],
-			array_keys( $usageAccumulator->getUsages() )
-		);
-	}
-
-	public function testStatementsParserFunction_unknownEntityTypeAsValue() {
-		$propertyId = new PropertyId( 'P666' );
-		$property = new Property( $propertyId, null, 'wikibase-coolentity' );
-
-		$statements = new StatementList( [
-			new Statement( new PropertyValueSnak( $propertyId, new UnmappedEntityIdValue( 'X303' ) ) )
-		] );
-		$item = new Item( new ItemId( 'Q999' ), null, null, $statements );
-
-		// inserting entities through site link lookup is a nasty hack needed/allowed by MockClientStore
-		// TODO: use proper store etc in these tests
-		$this->store->getSiteLinkLookup()->putEntity( $property );
-		$this->store->getSiteLinkLookup()->putEntity( $item );
-
-		$result = $this->parseWikitextToHtml( '{{#statements:P666|from=Q999}}' );
-
-		$this->assertSame( "<p><span><span>X303</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
-
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
-		$this->assertArrayEquals(
-			[ 'Q999#O', 'Q999#C.P666' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}

@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikimedia\Rdbms\IDatabase;
@@ -193,26 +192,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			$this->getUsageStrings( $usagesT2 ),
 			$this->getUsageStrings( $usageTable->queryUsages( 25 ) )
 		);
-	}
-
-	public function testGetQueryUsagesSkipsRowsForEntitiesOfUnknownType() {
-		$customEntityId = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$customEntityId->method( 'getSerialization' )
-			->willReturn( 'ODD123' );
-		$customEntityId->method( 'getEntityType' )
-			->willReturn( 'custom-type' );
-
-		$usageTable = $this->getEntityUsageTable();
-
-		$usageTable->addUsages( 100, [ new EntityUsage( new ItemId( 'Q3' ), EntityUsage::ALL_USAGE ) ] );
-		$usageTable->addUsages( 100, [ new EntityUsage( $customEntityId, EntityUsage::ALL_USAGE ) ] );
-
-		$usages = $usageTable->queryUsages( 100 );
-
-		$this->assertArrayHasKey( 'Q3#X', $usages );
-		$this->assertArrayNotHasKey( 'ODD123#X', $usages );
 	}
 
 	public function provideQueryUsages_InvalidArgumentException() {

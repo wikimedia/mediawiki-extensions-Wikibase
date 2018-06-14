@@ -11,7 +11,6 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\LBFactory;
@@ -233,12 +232,7 @@ class EntityUsageTable {
 		$usages = [];
 
 		foreach ( $rows as $object ) {
-			try {
-				$entityId = $this->idParser->parse( $object->eu_entity_id );
-			} catch ( EntityIdParsingException $e ) {
-				continue;
-			}
-
+			$entityId = $this->idParser->parse( $object->eu_entity_id );
 			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $object->eu_aspect );
 
 			$usage = new EntityUsage( $entityId, $aspect, $modifier );

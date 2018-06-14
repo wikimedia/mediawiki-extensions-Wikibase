@@ -19,17 +19,12 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Client\LangLinkHandler;
-use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Settings;
@@ -158,14 +153,28 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	private function newParserOutputUpdateHookHandlers( array $siteLinkData ) {
 		$settings = $this->newSettings();
 
-		$namespaceChecker = $this->newNamespaceChecker();
+		$namespaces = $settings->getSetting( 'namespaces' );
+		$namespaceChecker = new NamespaceChecker( [], $namespaces );
 
 		$mockRepo = $this->getMockRepo( $siteLinkData );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
-		$parserOutputDataUpdater = $this->newParserOutputDataUpdater( $mockRepo, $siteLinkData, $settings );
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo, $siteLinkData ),
+			$mockRepo,
+			$mockRepo,
+			$settings->getSetting( 'siteGlobalID' )
+		);
 
-		$langLinkHandler = $this->newLangLinkHandler( $namespaceChecker, $mockRepo, $settings );
+		$langLinkHandler = new LangLinkHandler(
+			$this->getBadgeDisplay(),
+			$namespaceChecker,
+			$mockRepo,
+			$mockRepo,
+			$this->getSiteLookup(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'languageLinkSiteGroup' )
+		);
 
 		return new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
@@ -194,7 +203,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$lookup = new InMemoryEntityLookup();
 
 		foreach ( $siteLinkData as $itemId => $siteLinks ) {
-			$item = new Item( new ItemId( $itemId ) );
+			$item = new Item( new ItemId( 'Q1' ) );
 			$item->setSiteLinkList( new SiteLinkList( $siteLinks ) );
 			$lookup->addEntity( $item );
 		}
@@ -371,43 +380,6 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
-	public function testGivenSitelinkHasStatementWithUnknownEntityType_linkDataIsAddedNormally() {
-		$itemId = 'Q555';
-		$siteLink = new SiteLink( 'enwiki', 'Foobarium' );
-
-		$namespaceChecker = $this->newNamespaceChecker();
-
-		$mockRepo = new MockRepository();
-		$item = new Item(
-			new ItemId( $itemId ),
-			null,
-			new SiteLinkList( [ $siteLink ] ),
-			new StatementList( [
-				new Statement( new PropertyValueSnak(
-					new PropertyId( 'P100' ),
-					new UnmappedEntityIdValue( 'X808' )
-				) )
-			] )
-		);
-		$mockRepo->putEntity( $item );
-
-		$langLinkHandler = $this->newLangLinkHandler( $namespaceChecker, $mockRepo );
-
-		$handler = new ParserOutputUpdateHookHandlers(
-			$namespaceChecker,
-			$langLinkHandler,
-			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] )
-		);
-
-		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
-
-		$parserOutput = $this->newParserOutput( [], [] );
-
-		$handler->doContentAlterParserOutput( $title, $parserOutput );
-
-		$this->assertEquals( $itemId, $parserOutput->getProperty( 'wikibase_item' ) );
-	}
-
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {
 		$this->assertInternalType( 'array', $links );
 
@@ -433,42 +405,6 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$this->assertEquals( $expected, $actual, 'SisterLink: ' );
 			$actual = next( $actualLinks );
 		}
-	}
-
-	private function newNamespaceChecker() {
-		$settings = $this->newSettings();
-
-		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( [], $namespaces );
-
-		return $namespaceChecker;
-	}
-
-	private function newParserOutputDataUpdater( MockRepository $mockRepo, array $siteLinkData ) {
-		$settings = $this->newSettings();
-
-		return new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo, $siteLinkData ),
-			$mockRepo,
-			$mockRepo,
-			$settings->getSetting( 'siteGlobalID' )
-		);
-	}
-
-	private function newLangLinkHandler( $namespaceChecker, $mockRepo ) {
-		$settings = $this->newSettings();
-
-		$langLinkHandler = new LangLinkHandler(
-			$this->getBadgeDisplay(),
-			$namespaceChecker,
-			$mockRepo,
-			$mockRepo,
-			$this->getSiteLookup(),
-			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'languageLinkSiteGroup' )
-		);
-
-		return $langLinkHandler;
 	}
 
 }

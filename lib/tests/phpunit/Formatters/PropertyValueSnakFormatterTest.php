@@ -17,9 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Formatters\DispatchingValueFormatter;
-use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
 use Wikibase\Lib\PropertyValueSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\UnDeserializableValueFormatter;
@@ -241,32 +239,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	public function testGetFormat() {
 		$formatter = $this->getDummyPropertyValueSnakFormatter();
 		$this->assertEquals( 'test', $formatter->getFormat() );
-	}
-
-	public function testGivenUnmappedEntityIdValue_doesNotBotherCheckingDataValueTypeMatch() {
-		$valueFormatter = new DispatchingValueFormatter( [
-			'VT:wikibase-unmapped-entityid' => new UnmappedEntityIdValueFormatter(),
-			'VT:string' => $this->getMockFormatter( 'VT:string' ),
-		] );
-
-		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$typeFactory->expects( $this->never() )
-			->method( 'getType' );
-
-		$formatter = new PropertyValueSnakFormatter(
-			SnakFormatter::FORMAT_PLAIN,
-			$valueFormatter,
-			$this->getMockDataTypeLookup( 'wikibase-weird-entity-type' ),
-			$typeFactory
-		);
-
-		$this->assertEquals(
-			'X123',
-			$formatter->formatSnak( new PropertyValueSnak( 17, new UnmappedEntityIdValue( 'X123' ) ) )
-		);
 	}
 
 }
