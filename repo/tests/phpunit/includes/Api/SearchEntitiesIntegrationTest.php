@@ -119,7 +119,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
-		$this->markTestSkipped( 'Transitional.' );
 
 		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
 				->disableOriginalConstructor()
@@ -175,14 +174,10 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$this->idParser,
 			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
 			[ 'item' => 'wikibase-item' ],
-			$wgWBRepoSettings['entitySearch']
+			$wgWBRepoSettings['entitySearch'],
+			new FauxRequest(),
+			CirrusSearch\CirrusDebugOptions::forUnitTests()
 		);
-
-		$request = new FauxRequest();
-		// We'll use cirrusDumpQuery to make the query short-circuit
-		$request->setVal( 'cirrusDumpQuery', 1 );
-		$entitySearchElastic->setRequest( $request );
-		$entitySearchElastic->setReturnResult( true );
 
 		return $entitySearchElastic;
 	}
