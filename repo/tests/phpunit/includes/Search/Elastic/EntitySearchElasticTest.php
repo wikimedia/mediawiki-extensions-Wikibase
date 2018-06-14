@@ -22,6 +22,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		if ( !class_exists( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
+		$this->markTestSkipped( 'Transitional.' );
 	}
 
 	/**

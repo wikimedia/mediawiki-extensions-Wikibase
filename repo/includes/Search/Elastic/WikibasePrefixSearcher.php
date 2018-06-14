@@ -66,10 +66,6 @@ class WikibasePrefixSearcher extends Searcher {
 		// Mark wikibase prefix searches for statistics
 		$searchQuery->addParam( 'stats', 'wikibase-prefix' );
 
-		if ( $this->returnExplain ) {
-			$searchQuery->setExplain( true );
-		}
-
 		return $pageType->createSearch( $searchQuery, $queryOptions );
 	}
 
