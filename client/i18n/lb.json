@@ -69,6 +69,8 @@
 	"wikibase-entityusage-submit": "Säite weisen",
 	"wikibase-pageinfo-entity-id": "ID vum {{WBREPONAME}}-Element",
 	"wikibase-pageinfo-entity-id-none": "Keng",
+	"wikibase-pageinfo-description-local": "Lokal Beschreiwung",
+	"wikibase-pageinfo-description-central": "Zentral Beschreiwung",
 	"wikibase-pageinfo-entity-usage-S": "Link vum Site",
 	"wikibase-pageinfo-entity-usage-L": "E puer Etiketten",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etikett: $1",

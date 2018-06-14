@@ -5,7 +5,8 @@
 			"Ghybu",
 			"Gomada",
 			"Bikarhêner",
-			"Cûndûllah el-Kurdî"
+			"Cûndûllah el-Kurdî",
+			"Kur"
 		]
 	},
 	"tooltip-t-wikibase": "Girêdana ji hêmana eleqedar yê di embara daneyan de re",
@@ -27,5 +28,7 @@
 	"wikibase-rc-wikibase-edit-title": "Guherandina {{WBREPONAME}}",
 	"wikibase-unconnectedpages-submit": "Rûpelan nîşan bide",
 	"wikibase-pageswithbadges-submit": "Rûpelan nîşan bide",
+	"wikibase-pageinfo-description-local": "Danasîna herêmî",
+	"wikibase-pageinfo-description-central": "Danasîna navendî",
 	"wikibase-otherprojects": "Di projeyên din de"
 }

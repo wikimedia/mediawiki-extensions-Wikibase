@@ -136,6 +136,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] verwijderd",
+	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] bijgewerkt",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Label, beschrijving en aliassen gewijzigd voor [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Koppeling toegevoegd voor [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Koppeling met badges toegevoegd aan [$2]",

@@ -76,6 +76,8 @@
 	"wikibase-entityusage-submit": "পৃষ্টা দেখাও",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} আইটেম আইডি",
 	"wikibase-pageinfo-entity-id-none": "কোনটিই নয়",
+	"wikibase-pageinfo-description-local": "স্থানীয় বিবরণ",
+	"wikibase-pageinfo-description-central": "কেন্দ্রীয় বিবরণ",
 	"wikibase-pageinfo-entity-usage": "এই পাতায় ব্যবহৃত {{WBREPONAME}} সত্তা",
 	"wikibase-pageinfo-entity-usage-S": "সাইট সংযোগ",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "লেবেল: $1",

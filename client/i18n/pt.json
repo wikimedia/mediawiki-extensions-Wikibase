@@ -134,6 +134,8 @@
 	"wikibase-entityusage-submit": "Mostrar páginas",
 	"wikibase-pageinfo-entity-id": "ID do elemento {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nenhuma",
+	"wikibase-pageinfo-description-local": "Descrição local",
+	"wikibase-pageinfo-description-central": "Descrição central",
 	"wikibase-pageinfo-entity-usage": "Entidades {{WBREPONAME}} usadas nesta página",
 	"wikibase-pageinfo-entity-usage-S": "Hiperligação intersites",
 	"wikibase-pageinfo-entity-usage-L": "Alguns rótulos",
