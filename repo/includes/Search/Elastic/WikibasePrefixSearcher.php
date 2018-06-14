@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic;
 
+use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\Connection;
 use CirrusSearch\Searcher;
 use Elastica\Query;
@@ -25,11 +26,12 @@ class WikibasePrefixSearcher extends Searcher {
 	/**
 	 * @param int $offset Search offset.
 	 * @param int $limit Search limit.
+	 * @param CirrusDebugOptions $options
 	 */
-	public function __construct( $offset, $limit ) {
+	public function __construct( $offset, $limit, CirrusDebugOptions $options = null ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CirrusSearch' );
 		$connection = new Connection( $config );
-		parent::__construct( $connection, $offset, $limit, $config );
+		parent::__construct( $connection, $offset, $limit, $config, null, null, null, $options );
 	}
 
 	/**
@@ -65,7 +67,7 @@ class WikibasePrefixSearcher extends Searcher {
 		$searchQuery->setParam( 'rescore', $this->searchContext->getRescore() );
 		// Mark wikibase prefix searches for statistics
 		$searchQuery->addParam( 'stats', 'wikibase-prefix' );
-
+		$this->applyDebugOptionsToQuery( $searchQuery );
 		return $pageType->createSearch( $searchQuery, $queryOptions );
 	}
 
