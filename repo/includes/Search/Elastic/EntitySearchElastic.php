@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic;
 
+use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
@@ -93,13 +94,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * @var Language User language for display.
 	 */
 	private $userLang;
-
-	/**
-	 * Should we return raw result?
-	 * Used for testing.
-	 * @var boolean
-	 */
-	private $returnResult;
 
 	/**
 	 * @param LanguageFallbackChainFactory $languageChainFactory
@@ -241,13 +235,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	}
 
 	/**
-	 * @param bool $returnResult
-	 */
-	public function setReturnResult( $returnResult ) {
-		$this->returnResult = $returnResult;
-	}
-
-	/**
 	 * @param string $text
 	 * @param string $languageCode
 	 * @param string $entityType
@@ -263,7 +250,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$limit,
 		$strictLanguage
 	) {
-		$searcher = new WikibasePrefixSearcher( 0, $limit );
+		$searcher = new WikibasePrefixSearcher( 0, $limit, CirrusDebugOptions::fromRequest( $this->request ) );
 		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
 				$searcher->getSearchContext() );
 
@@ -288,7 +275,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		}
 
 		if ( $searcher->isReturnRaw() ) {
-			$result = $searcher->processRawReturn( $result, $this->request, !$this->returnResult );
+			$result = $searcher->processRawReturn( $result, $this->request );
 		}
 
 		return $result;
