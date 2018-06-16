@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "adad5ebf_e7313483",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-06-16T01:31:07Z",
+      "side": 1,
+      "message": "The summary seem to be limited in terms of database storage (767 bytes). While not the number passed here, it seems desirable not to allow this to pass even if somehow the SUMMARY_MAX_LENGTH is capable of reaching 767 in bytes with its number of characters. Right?",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 43
+      },
+      "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
