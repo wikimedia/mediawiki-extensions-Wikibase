@@ -116,6 +116,8 @@
 	"wikibase-entityusage-submit": "Прикажи страници",
 	"wikibase-pageinfo-entity-id": "Предметна назнака на {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "нема",
+	"wikibase-pageinfo-description-local": "Месен опис",
+	"wikibase-pageinfo-description-central": "Централен опис",
 	"wikibase-pageinfo-entity-usage": "Единици на {{WBREPONAME}} што се користат на страницава",
 	"wikibase-pageinfo-entity-usage-S": "Викиврска",
 	"wikibase-pageinfo-entity-usage-L": "Некои натписи",
