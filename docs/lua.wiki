@@ -40,17 +40,17 @@ Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibas
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.getEntity( 'Q42' ) -- Returns a mw.wikibase.entity table for the Item with the id Q42
+mw.wikibase.getEntity( 'Q42' ) -- Returns a mw.wikibase.entity table for the item with the id Q42
 </source>
 
 === mw.wikibase.getEntityIdForCurrentPage ===
 <code>wikibase.getEntityIdForCurrentPage()</code><br>
 
-Gets the Item id of the item connected to the current page.
+Gets the item id of the item connected to the current page. Returns nil if no item is connected.
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.getEntityIdForCurrentPage() -- Returns the Item id as string, like "Q42"
+mw.wikibase.getEntityIdForCurrentPage() -- Returns the item id as string, like "Q42"
 </source>
 
 === mw.wikibase.getEntityIdForTitle ===
@@ -156,7 +156,7 @@ Returns whether the entity in question exists.
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.entityExists( 'Q42' ) -- Returns true, if the Item Q42 exists.
+mw.wikibase.entityExists( 'Q42' ) -- Returns true, if the item Q42 exists.
 </source>
 
 === mw.wikibase.renderSnak ===
@@ -382,7 +382,7 @@ Functions documented as <code>mw.wikibase.entity.name</code> are available on th
 === Structure ===
 The structure of this is very similar to the [https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON Wikibase DataModel JSON] schema. This can be handily viewed with <source lang="lua">mw.logObject( mw.wikibase.getEntity( 'Q123' ) )</source> in the Scribunto [https://www.mediawiki.org/wiki/Extension:Scribunto#Debug_console '''Debug console'''].
 
-The following is a (heavily shortened) example, from the Wikidata Item about Wikibase:
+The following is a (heavily shortened) example, from the Wikidata item about Wikibase:
 <source lang="lua">
 {
   ["id"] = "Q16354758",
