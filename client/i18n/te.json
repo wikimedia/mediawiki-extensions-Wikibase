@@ -10,6 +10,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "ఈ పేజీకి జత చేసి ఉన్న వికీడేటా పేజీకి లంకె",
+	"wikibase-after-page-delete": "[$1 సంబంధిత {{WBREPONAME}} అంశం] నుండి ఈ పేజీకి ఉన్న లింకును తీసివేసి ఉండాలి. అది జరిగిందో లేదో చూడమని కోరుతున్నాం.",
 	"wikibase-comment-update": "{{WBREPONAME}} మార్చబడింది",
 	"wikibase-comment-sitelink-add": "భాష లంకెను చేర్చారు: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|మార్పు|మార్పులు}}",
@@ -29,6 +30,8 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} సవరణ",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} లో మొదలయ్యే దిద్దుబాట్లు.",
 	"wikibase-unconnectedpages-submit": "పేజీలను చూపించు",
+	"pageswithbadges": "బ్యాడ్జీలు కలిగిన పేజీలు",
+	"pageswithbadges-summary": "ఈ పేజీ, బ్యాడ్జీలు కలిగిన పేజీల జాబితాను చూపిస్తుంది (ఉదాహరణకు మంచి వ్యాసం, విశేష వ్యాసం). పేజీ ఐడీ ల అవరోహణ క్రమంలో ఈ జాబితా ఉంటుంది. దీనివలన, సరికొత్త పేజీలు జాబితాలో పైన ఉంటాయి.",
 	"wikibase-pageinfo-entity-id-none": "ఏమీలేదు",
 	"wikibase-otherprojects": "ఇతర ప్రాజక్టులలో",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} తో {{PLURAL:$1|కనెక్షను|కనెక్షన్లు}}",

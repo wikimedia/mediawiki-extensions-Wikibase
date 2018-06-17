@@ -91,6 +91,8 @@
 	"wikibase-entityusage-submit": "Mostra les pàgines",
 	"wikibase-pageinfo-entity-id": "ID de l'element de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Cap",
+	"wikibase-pageinfo-description-local": "Descripció local",
+	"wikibase-pageinfo-description-central": "Descripció central",
 	"wikibase-pageinfo-entity-usage": "Elements {{WBREPONAME}} utilitzats en aquesta pàgina",
 	"wikibase-pageinfo-entity-usage-S": "Enllaç de lloc",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiqueta: $1",

@@ -24,5 +24,8 @@
 	"datatypes-type-mediawiki-title": "మీడియావికీ శీర్షిక",
 	"datatypes-type-time": "సమయం",
 	"datatypes-type-wikibase-item": "అంశం",
-	"datatypes-type-wikibase-property": "లక్షణం"
+	"datatypes-type-wikibase-property": "లక్షణం",
+	"wikibase-entity-summary-wbsetsitelink-add-both": "[$2] బ్యాడ్జీలతో కలిసిన లింకును చేర్చాం",
+	"wikibase-entity-summary-wbsetsitelink-set-badges": "[$2] కొరకు బ్యాడ్జీలను మార్చాం",
+	"wikibase-entity-summary-wbsetsitelink-set-both": "[$2] కు లింకు, బ్యాడ్జీలను మార్చాం"
 }

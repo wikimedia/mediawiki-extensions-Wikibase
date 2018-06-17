@@ -118,6 +118,8 @@
 	"wikibase-entityusage-submit": "Mostrar páginas",
 	"wikibase-pageinfo-entity-id": "Id. del elemento de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ninguno",
+	"wikibase-pageinfo-description-local": "Descripción local",
+	"wikibase-pageinfo-description-central": "Descripción central",
 	"wikibase-pageinfo-entity-usage": "Entidades de {{WBREPONAME}} usadas en esta página",
 	"wikibase-pageinfo-entity-usage-S": "Enlace de sitio",
 	"wikibase-pageinfo-entity-usage-L": "Algunas etiquetas",
