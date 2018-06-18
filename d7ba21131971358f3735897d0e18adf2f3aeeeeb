@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea4095ee_fd92c5c5",
+        "filename": "lib/tests/phpunit/Formatters/ItemIdHtmlLinkFormatterTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-18T16:01:32Z",
+      "side": 1,
+      "message": "not a big deal (and I understand you didn\u0027t touch this line), but now getMock here looks odd if there is createMock two lines above.",
+      "range": {
+        "startLine": 227,
+        "startChar": 10,
+        "endLine": 227,
+        "endChar": 17
+      },
+      "revId": "d7ba21131971358f3735897d0e18adf2f3aeeeeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
