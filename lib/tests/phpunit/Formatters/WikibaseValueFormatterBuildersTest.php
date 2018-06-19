@@ -21,6 +21,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
@@ -94,6 +95,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			new ItemIdParser(),
 			self::GEO_SHAPE_STORAGE_FRONTEND_URL,
 			self::TABULAR_DATA_STORAGE_FRONTEND_URL,
+			$this->createMock( EntityLookup::class ),
 			$entityTitleLookup
 		);
 	}
