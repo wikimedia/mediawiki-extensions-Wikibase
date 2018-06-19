@@ -449,6 +449,8 @@ class WikibaseRepo {
 			$this->getLocalItemUriParser(),
 			$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
+			$this->getEntityLookup(),
+			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup()
 		);
 	}
