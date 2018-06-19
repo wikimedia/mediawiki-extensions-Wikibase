@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3fc1310_bc2a95c2",
+        "filename": "repo/tests/selenium/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2018-06-19T15:25:43Z",
+      "side": 1,
+      "message": "I get `\u0027wikibase\u0027 is not a valid role.`\n\nShould it be wikibase_repo or wikidata?",
+      "revId": "5624418d4b4e3e241e8132d2b04db4d98ac1540d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
