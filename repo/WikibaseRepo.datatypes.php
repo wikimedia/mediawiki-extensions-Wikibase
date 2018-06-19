@@ -27,12 +27,14 @@
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
+use MediaWiki\Logger\LoggerFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -361,6 +363,7 @@ return call_user_func( function() {
 				return $factory->buildItemValidators();
 			},
 			'formatter-factory-callback' => function ( $format, FormatterOptions $options ) {
+
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 
 				$htmlFormats = [
@@ -370,9 +373,33 @@ return call_user_func( function() {
 				];
 
 				if ( in_array( $format, $htmlFormats ) ) {
-					return new \Wikibase\Lib\EntityIdValueFormatter(
-						$factory->newItemIdHtmlLinkFormatter( $options )
-					);
+					//TODO Cleanup the code once https://phabricator.wikimedia.org/T196882 is Done.
+
+					$logger = LoggerFactory::getInstance( 'Wikibase.NewItemIdFormatter' );
+					try {
+						$maxEntityId = WikibaseRepo::getDefaultInstance()->getSettings()
+							->getSetting( 'tmpMaxItemIdForNewItemIdHtmlFormatter' );
+
+						$formatter = new ControlledFallbackEntityIdFormatter(
+							$maxEntityId,
+							$factory->newItemIdHtmlLinkFormatter( $options ),
+							$factory->newEntityIdHtmlLinkFormatter( $options )
+						);
+
+						$formatter->setLogger( $logger );
+
+						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+					} catch ( \Exception $e ) {
+						$logger->critical(
+							"Failed to construct ItemIdHtmlLinkFormatter: {exception_message}",
+							[
+								'exception' => $e,
+								'exception_message' => $e->getMessage(),
+							]
+						);
+
+						return $factory->newEntityIdFormatter( $format, $options );
+					}
 				}
 
 				return $factory->newEntityIdFormatter( $format, $options );

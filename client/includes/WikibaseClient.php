@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client;
 
+use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
@@ -81,6 +82,7 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\RepositoryDefinitions;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
@@ -272,6 +274,10 @@ final class WikibaseClient {
 				$this->getRepoItemUriParser(),
 				$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
 				$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
+				$this->getFormatterCache(),
+				$this->settings->getSetting( 'sharedCacheDuration' ),
+				$this->getEntityLookup(),
+				$this->getStore()->getEntityRevisionLookup(),
 				$entityTitleLookup
 			);
 		}
@@ -1295,6 +1301,22 @@ final class WikibaseClient {
 	 */
 	public function getRepositoryDefinitions() {
 		return $this->repositoryDefinitions;
+	}
+
+	/**
+	 * @return CacheInterface
+	 */
+	private function getFormatterCache() {
+		global $wgSecretKey;
+
+		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
+		$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+		return new SimpleCacheWithBagOStuff(
+			wfGetCache( $cacheType ),
+			'wikibase.client.formatter.',
+			$cacheSecret
+		);
 	}
 
 }
