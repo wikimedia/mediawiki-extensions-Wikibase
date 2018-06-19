@@ -21,6 +21,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
+use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\Assert;

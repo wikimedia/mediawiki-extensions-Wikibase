@@ -11,12 +11,12 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\ItemIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers \Wikibase\Lib\ItemIdHtmlLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter
  *
  * @group ValueFormatters
  * @group Wikibase
