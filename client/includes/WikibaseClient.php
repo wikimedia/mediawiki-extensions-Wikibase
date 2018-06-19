@@ -272,6 +272,9 @@ final class WikibaseClient {
 				$this->getRepoItemUriParser(),
 				$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
 				$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
+				$this->settings->getSetting( 'sharedCacheType' ),
+				$this->getEntityLookup(),
+				$this->getStore()->getEntityRevisionLookup(),
 				$entityTitleLookup
 			);
 		}
