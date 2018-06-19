@@ -32,6 +32,7 @@ use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Rdf\DedupeBag;
@@ -354,6 +355,23 @@ return call_user_func( function() {
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildItemValidators();
+			},
+			'formatter-factory-callback' => function ( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+
+				$htmlFormats = [
+					SnakFormatter::FORMAT_HTML,
+					SnakFormatter::FORMAT_HTML_DIFF,
+					SnakFormatter::FORMAT_HTML_VERBOSE,
+				];
+
+				if ( in_array( $format, $htmlFormats ) ) {
+					return new \Wikibase\Lib\EntityIdValueFormatter(
+						$factory->newItemIdHtmlLinkFormatter( $options )
+					);
+				}
+
+				return $factory->newEntityIdFormatter( $format, $options );
 			},
 		],
 		'PT:wikibase-property' => [
