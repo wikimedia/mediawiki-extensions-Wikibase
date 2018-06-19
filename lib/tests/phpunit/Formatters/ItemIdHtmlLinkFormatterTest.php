@@ -9,7 +9,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\ItemIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
- * @covers \Wikibase\Lib\ItemIdHtmlLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter
  *
  * @group ValueFormatters
  * @group Wikibase
