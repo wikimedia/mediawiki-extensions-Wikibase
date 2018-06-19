@@ -13,6 +13,7 @@ use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use Language;
 use MediaWikiTestCase;
+use Psr\SimpleCache\CacheInterface;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -21,6 +22,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
@@ -28,6 +30,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
@@ -47,6 +50,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	const GEO_SHAPE_STORAGE_FRONTEND_URL = '//commons.wikimedia.org/wiki/';
 
 	const TABULAR_DATA_STORAGE_FRONTEND_URL = '//commons2.wikimedia.org/wiki/';
+
+	const CACHE_TTL_IN_SECONDS = 10;
 
 	protected function setUp() {
 		parent::setUp();
@@ -94,6 +99,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			new ItemIdParser(),
 			self::GEO_SHAPE_STORAGE_FRONTEND_URL,
 			self::TABULAR_DATA_STORAGE_FRONTEND_URL,
+			$this->createCache(),
+			self::CACHE_TTL_IN_SECONDS,
+			$this->createMock( EntityLookup::class ),
+			$this->createMock( EntityRevisionLookup::class ),
 			$entityTitleLookup
 		);
 	}
@@ -529,6 +538,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'@>Custom LabelDescriptionLookup<@'
 			],
 		];
+	}
+
+	private function createCache() {
+		return $this->prophesize( CacheInterface::class )->reveal();
 	}
 
 }

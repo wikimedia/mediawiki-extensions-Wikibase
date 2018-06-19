@@ -4,6 +4,7 @@ namespace Wikibase\Repo;
 
 use Deserializers\DispatchableDeserializer;
 use InvalidArgumentException;
+use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
@@ -34,6 +35,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -448,6 +450,10 @@ class WikibaseRepo {
 			$this->getLocalItemUriParser(),
 			$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
+			$this->getFormatterCache(),
+			$this->settings->getSetting( 'sharedCacheDuration' ),
+			$this->getEntityLookup(),
+			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -2090,6 +2096,22 @@ class WikibaseRepo {
 			}
 		}
 		return $searchTypes;
+	}
+
+	/**
+	 * @return CacheInterface
+	 */
+	private function getFormatterCache() {
+		global $wgSecretKey;
+
+		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
+		$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+		return new SimpleCacheWithBagOStuff(
+			wfGetCache( $cacheType ),
+			'wikibase.repo.formatter.',
+			$cacheSecret
+		);
 	}
 
 }

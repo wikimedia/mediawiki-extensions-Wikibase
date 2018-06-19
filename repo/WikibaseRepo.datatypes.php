@@ -27,12 +27,14 @@
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
+use MediaWiki\Logger\LoggerFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -370,9 +372,21 @@ return call_user_func( function() {
 				];
 
 				if ( in_array( $format, $htmlFormats ) ) {
-					return new \Wikibase\Lib\EntityIdValueFormatter(
-						$factory->newItemIdHtmlLinkFormatter( $options )
-					);
+					try {
+						$max = 100;
+						$formatter = new ControlledFallbackEntityIdFormatter(
+							$max,
+							$factory->newItemIdHtmlLinkFormatter( $options ),
+							$factory->newEntityIdHtmlLinkFormatter( $options )
+						);
+
+						$logger = LoggerFactory::getInstance( ControlledFallbackEntityIdFormatter::class );
+
+						$formatter->setLogger( $logger );
+						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+					} catch ( \Exception $e ) {
+						return $factory->newEntityIdFormatter( $format, $options );
+					}
 				}
 
 				return $factory->newEntityIdFormatter( $format, $options );
