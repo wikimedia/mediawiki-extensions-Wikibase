@@ -290,4 +290,18 @@ return [
 	// DB group to use in dump maintenance scripts. Defaults to "dump", per T147169.
 	'dumpDBDefaultGroup' => 'dump',
 
+	/**
+	 * Upper inclusive range bound of Q-ID. Html links for Item IDs that within this range will
+	 * be rendered using ItemIdHtmlLinkFormatter.
+	 *
+	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
+	 *       Should be removed not later than 31-09-2018. Do not use it.
+	 *
+	 * @var int
+	 * @see https://phabricator.wikimedia.org/T196882
+	 * @see \Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter
+	 * @see \Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter
+	 */
+	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 1,
+
 ];
