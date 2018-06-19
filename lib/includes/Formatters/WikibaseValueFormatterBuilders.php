@@ -14,6 +14,8 @@ use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
@@ -23,6 +25,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -85,6 +88,11 @@ class WikibaseValueFormatterBuilders {
 	private $tabularDataStorageBaseUrl;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
@@ -100,6 +108,7 @@ class WikibaseValueFormatterBuilders {
 		EntityIdParser $repoItemUriParser,
 		$geoShapeStorageBaseUrl,
 		$tabularDataStorageBaseUrl,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		Assert::parameterType(
@@ -121,6 +130,7 @@ class WikibaseValueFormatterBuilders {
 		$this->geoShapeStorageBaseUrl = $geoShapeStorageBaseUrl;
 		$this->tabularDataStorageBaseUrl = $tabularDataStorageBaseUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityLookup = $entityLookup;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -210,8 +220,9 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
-		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup(
-			$options
+		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			new EntityRetrievingTermLookup($this->entityLookup),
+			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
 		);
 
 		return new ItemIdHtmlLinkFormatter(
