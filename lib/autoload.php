@@ -43,6 +43,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Formatters\\BinaryOptionDispatchingSnakFormatter' => __DIR__ . '/includes/Formatters/BinaryOptionDispatchingSnakFormatter.php',
 	'Wikibase\\Lib\\Formatters\\CommonsInlineImageFormatter' => __DIR__ . '/includes/Formatters/CommonsInlineImageFormatter.php',
 	'Wikibase\\Lib\\Formatters\\CommonsThumbnailFormatter' => __DIR__ . '/includes/Formatters/CommonsThumbnailFormatter.php',
+	'Wikibase\\Lib\\Formatters\\ControlledFallbackEntityIdFormatter' => __DIR__ . '/includes/Formatters/ControlledFallbackEntityIdFormatter.php',
 	'Wikibase\\Lib\\Formatters\\DispatchingValueFormatter' => __DIR__ . '/includes/Formatters/DispatchingValueFormatter.php',
 	'Wikibase\\Lib\\Formatters\\EntityIdSiteLinkFormatter' => __DIR__ . '/includes/Formatters/EntityIdSiteLinkFormatter.php',
 	'Wikibase\\Lib\\Formatters\\ErrorHandlingSnakFormatter' => __DIR__ . '/includes/Formatters/ErrorHandlingSnakFormatter.php',
