@@ -133,6 +133,7 @@
 	"wikibase-entityusage-submit": "عرض الصفحات",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
+	"wikibase-pageinfo-description-central": "الوصف المركزي",
 	"wikibase-pageinfo-entity-usage": "كيانات {{WBREPONAME}} المستخدمة في هذه الصفحة",
 	"wikibase-pageinfo-entity-usage-S": "وصلة الموقع",
 	"wikibase-pageinfo-entity-usage-L": "بعض العلامات",

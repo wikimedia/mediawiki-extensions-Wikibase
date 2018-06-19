@@ -64,6 +64,8 @@
 	"wikibase-entityusage-submit": "Εμφάνιση σελίδων",
 	"wikibase-pageinfo-entity-id": "Αναγνωριστικό αντικειμένου {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Κανένα",
+	"wikibase-pageinfo-description-local": "Τοπική περιγραφή",
+	"wikibase-pageinfo-description-central": "Κεντρική περιγραφή",
 	"wikibase-pageinfo-entity-usage-S": "Σύνδεσμος ιστοτόπου",
 	"wikibase-pageinfo-entity-usage-L": "Μερικές ετικέτες",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Ετικέτα: $1",
