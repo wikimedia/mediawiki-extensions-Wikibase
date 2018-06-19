@@ -14,6 +14,8 @@ use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
@@ -24,6 +26,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
 use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -86,6 +89,11 @@ class WikibaseValueFormatterBuilders {
 	private $tabularDataStorageBaseUrl;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
@@ -101,6 +109,7 @@ class WikibaseValueFormatterBuilders {
 		EntityIdParser $repoItemUriParser,
 		$geoShapeStorageBaseUrl,
 		$tabularDataStorageBaseUrl,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		Assert::parameterType(
@@ -122,6 +131,7 @@ class WikibaseValueFormatterBuilders {
 		$this->geoShapeStorageBaseUrl = $geoShapeStorageBaseUrl;
 		$this->tabularDataStorageBaseUrl = $tabularDataStorageBaseUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityLookup = $entityLookup;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -188,14 +198,8 @@ class WikibaseValueFormatterBuilders {
 	 */
 	public function newEntityIdFormatter( $format, FormatterOptions $options ) {
 		if ( $this->isHtmlFormat( $format ) && $this->entityTitleLookup ) {
-			$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-
 			return new EntityIdValueFormatter(
-				new EntityIdHtmlLinkFormatter(
-					$labelDescriptionLookup,
-					$this->entityTitleLookup,
-					$this->languageNameLookup
-				)
+				$this->newEntityIdHtmlLinkFormatter( $options )
 			);
 		} elseif ( $format === SnakFormatter::FORMAT_WIKI && $this->entityTitleLookup ) {
 			return new EntityIdValueFormatter(
@@ -211,8 +215,9 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
-		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup(
-			$options
+		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			new EntityRetrievingTermLookup( $this->entityLookup ),
+			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
 		);
 
 		return new ItemIdHtmlLinkFormatter(
@@ -417,6 +422,15 @@ class WikibaseValueFormatterBuilders {
 			default:
 				return new MonolingualTextFormatter();
 		}
+	}
+
+	public function newEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
+		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+		return new EntityIdHtmlLinkFormatter(
+			$lookup,
+			$this->entityTitleLookup,
+			$this->languageNameLookup
+		);
 	}
 
 }

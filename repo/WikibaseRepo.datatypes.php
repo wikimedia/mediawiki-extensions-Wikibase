@@ -32,6 +32,7 @@ use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -366,9 +367,20 @@ return call_user_func( function() {
 				];
 
 				if ( in_array( $format, $htmlFormats ) ) {
-					return new \Wikibase\Lib\EntityIdValueFormatter(
-						$factory->newItemIdHtmlLinkFormatter( $options )
-					);
+					try {
+						$max = 100;
+						$formatter = new ControlledFallbackEntityIdFormatter(
+							$max,
+							$factory->newItemIdHtmlLinkFormatter( $options ),
+							$factory->newEntityIdHtmlLinkFormatter( $options )
+						);
+
+						//FIXME: Set logger
+						// $formatter->setLogger()
+						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+					} catch ( \Throwable $e ) {
+						return $factory->newEntityIdFormatter( $format, $options );
+					}
 				}
 
 				return $factory->newEntityIdFormatter( $format, $options );
