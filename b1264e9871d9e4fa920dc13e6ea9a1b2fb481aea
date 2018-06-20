@@ -16,6 +16,24 @@
       "revId": "b1264e9871d9e4fa920dc13e6ea9a1b2fb481aea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f64a4d3_81eb1d9e",
+        "filename": "repo/tests/selenium/pageobjects/nonexisting.item.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-06-20T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2bb766e_f93a73e5",
+      "revId": "b1264e9871d9e4fa920dc13e6ea9a1b2fb481aea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
