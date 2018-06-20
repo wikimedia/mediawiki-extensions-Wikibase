@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b46c347_53ce8000",
+        "filename": "lib/includes/Formatters/ControlledFallbackEntityIdFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-20T09:01:31Z",
+      "side": 1,
+      "message": "getLine?",
+      "range": {
+        "startLine": 66,
+        "startChar": 30,
+        "endLine": 66,
+        "endChar": 37
+      },
+      "revId": "e7dcb58f840e6fe05c5836d1d8c0535d2d5a28bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58a49283_981c14da",
+        "filename": "lib/tests/phpunit/Formatters/ControlledFallbackEntityIdFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-20T09:01:31Z",
+      "side": 1,
+      "message": "do you want the test to assert that fallback formatter was not used with Q2 as input, or not called at all?",
+      "revId": "e7dcb58f840e6fe05c5836d1d8c0535d2d5a28bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
