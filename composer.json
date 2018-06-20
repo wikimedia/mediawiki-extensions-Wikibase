@@ -35,7 +35,9 @@
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.10.0",
 		"diff/diff": "^2.3.0",
-		"wikimedia/purtle": "^1.0.7"
+		"wikimedia/purtle": "^1.0.7",
+		"psr/simple-cache": "^1.0.1",
+		"cache/integration-tests": "dev-master"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
