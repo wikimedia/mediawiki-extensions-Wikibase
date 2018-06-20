@@ -283,6 +283,9 @@ return [
 	'forceWriteTermsTableSearchFields' => false,
 
 	// Change it to a positive number so it becomes effective
-	'dispatchLagToMaxLagFactor' => 0
+	'dispatchLagToMaxLagFactor' => 0,
+
+	// DB group to use in dump maintenance scripts
+	'dumpDBDefaultGroup' => 'dump',
 
 ];
