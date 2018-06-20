@@ -429,10 +429,10 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @param string[] $languages
-	 * @param $entities
+	 * @param Item[] $entities
 	 * @return ShowSearchHitHandler
 	 */
-	private function getShowSearchHitHandler( array $languages, $entities ) {
+	private function getShowSearchHitHandler( array $languages, array $entities ) {
 		return new ShowSearchHitHandler(
 			$this->getEntityContentFactory(),
 			$this->getMockFallbackChain( $languages ),
@@ -470,7 +470,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @param Item[] $entities Map ID -> Entity
 	 * @return EntityLookup
 	 */
-	private function getEntityLookup( $entities ) {
+	private function getEntityLookup( array $entities ) {
 		$entityLookup = $this->getMock( EntityLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
@@ -538,14 +538,14 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getPlainSearches
-	 * @param $title
-	 * @param $labels
+	 * @param string $title
+	 * @param string[] $labels
 	 * @param string $displayLanguage
 	 * @param string[] $languages
 	 * @param string $expected
 	 * @throws MWException
 	 */
-	public function testShowSearchHitPlain( $title, $labels, $displayLanguage, $languages, $expected ) {
+	public function testShowSearchHitPlain( $title, array $labels, $displayLanguage, array $languages, $expected ) {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
 			// This test uses language names from CLDR
 			$this->markTestSkipped( 'cldr not installed, skipping' );
@@ -604,7 +604,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @param string[] $labels
 	 * @return Item
 	 */
-	protected function makeItem( $id, $labels ) {
+	protected function makeItem( $id, array $labels ) {
 		$item = new Item( new ItemId( $id ) );
 		foreach ( $labels as $l => $v ) {
 			$item->setLabel( $l, $v );

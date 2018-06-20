@@ -57,7 +57,7 @@ final class EntitySearchUtils {
 
 	/**
 	 * Parse entity ID or return null
-	 * @param $text
+	 * @param string $text
 	 * @param EntityIdParser $idParser
 	 * @return null|\Wikibase\DataModel\Entity\EntityId
 	 */

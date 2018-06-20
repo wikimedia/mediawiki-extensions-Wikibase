@@ -150,7 +150,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * PA=Q888
 	 * PF=1234567
 	 *
-	 * @param $statementString
+	 * @param string $statementString
 	 * @return bool
 	 */
 	private function isStatementStringValid( $statementString ) {

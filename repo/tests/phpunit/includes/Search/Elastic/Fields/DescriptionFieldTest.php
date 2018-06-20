@@ -54,10 +54,8 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 
 	/**
 	 * @dataProvider  getFieldDataProvider
-	 * @param $expected
-	 * @param EntityDocument $entity
 	 */
-	public function testDescriptions( $expected, EntityDocument $entity ) {
+	public function testDescriptions( array $expected, EntityDocument $entity ) {
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$this->assertEquals( $expected, $labels->getFieldData( $entity ) );
 	}
