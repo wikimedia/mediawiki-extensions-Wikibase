@@ -220,9 +220,13 @@ abstract class DumpEntities extends Maintenance {
 	public function finalSetup() {
 		global $wgDBDefaultGroup;
 
-		// As this is a dump-script, set the default DB group to "dump" (T147169).
-		$wgDBDefaultGroup = 'dump';
-		MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->destroy();
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$dumpDBDefaultGroup = $settings->getSetting( 'dumpDBDefaultGroup' );
+
+		if ( $dumpDBDefaultGroup !== null ) {
+			$wgDBDefaultGroup = $dumpDBDefaultGroup;
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->destroy();
+		}
 
 		parent::finalSetup();
 	}
