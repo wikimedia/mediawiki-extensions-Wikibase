@@ -35,13 +35,27 @@
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.10.0",
 		"diff/diff": "^2.3.0",
-		"wikimedia/purtle": "^1.0.7"
+		"wikimedia/purtle": "^1.0.7",
+		"psr/simple-cache": "^1.0.1"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.3.1",
-		"wikibase/wikibase-codesniffer": "^0.3.0"
+		"wikibase/wikibase-codesniffer": "^0.3.0",
+		"cache/integration-tests": "dev-master",
+		"mediawiki/core": "dev-master",
+		"phpunit/phpunit": "4.8.36 || ^6.5"
+	},
+
+	"autoload-dev": {
+		"psr-4": {
+			"Wikibase\\Lib\\": ["lib/includes"]
+		},
+		"classmap": [
+			"vendor/mediawiki/core/includes",
+			"vendor/mediawiki/core/tests/phpunit"
+		]
 	},
 	"scripts": {
 		"fix": "phpcbf",
@@ -49,9 +63,28 @@
 			"composer validate --no-interaction",
 			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
 			"phpcs -p -s",
-			"minus-x check ."
+			"minus-x check .",
+			"phpunit --testsuite WikibaseMediawikiIntegrationTests"
 		]
 	},
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "mediawiki/core",
+				"version": "dev-master",
+				"dist": {
+					"url": "https://github.com/wikimedia/mediawiki/archive/master.zip",
+					"type": "zip"
+				},
+				"autoload": {
+					"classmap": [
+						"includes/"
+					]
+				}
+			}
+		}
+	],
 	"config": {
 		"process-timeout": 350
 	}
