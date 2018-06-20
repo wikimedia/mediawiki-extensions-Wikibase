@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "147742f8_3bc9290d",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-20T09:23:41Z",
+      "side": 1,
+      "message": "Being tired in the morning I fail to parse \"core like database lag\". What does it mean?",
+      "range": {
+        "startLine": 86,
+        "startChar": 139,
+        "endLine": 86,
+        "endChar": 161
+      },
+      "revId": "295d95d0a79ced86c5de0f31327d969a2740c71d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
