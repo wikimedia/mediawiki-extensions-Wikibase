@@ -35,13 +35,15 @@
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.10.0",
 		"diff/diff": "^2.3.0",
-		"wikimedia/purtle": "^1.0.7"
+		"wikimedia/purtle": "^1.0.7",
+		"psr/simple-cache": "^1.0.1"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.3.1",
-		"wikibase/wikibase-codesniffer": "^0.3.0"
+		"wikibase/wikibase-codesniffer": "^0.3.0",
+		"cache/integration-tests": "dev-master"
 	},
 	"scripts": {
 		"fix": "phpcbf",
