@@ -3,7 +3,8 @@
 		"authors": [
 			"Katxis",
 			"Cgboeree",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Mafcadio"
 		]
 	},
 	"wikibase-edit": "edita",
@@ -21,6 +22,7 @@
 	"wikibase-diffview-reference": "refere",
 	"wikibase-diffview-label": "eticeta",
 	"wikibase-diffview-description": "descrive",
+	"wikibase-diffview-link": "lias",
 	"wikibase-statementsection-statements": "Declaras",
 	"wikibase-sitelinks-special": "Otra locas",
 	"wikibase-statementview-rank-normal": "Grado normal",

@@ -114,7 +114,7 @@
 	"wikibase-error-serialize-error": "无法序列化数据。",
 	"wikibase-error-invalid-entity-id": "ID“$2”在系统中是未知的。请使用一个有效的实体ID。",
 	"wikibase-error-exceeded-entity-access-limit": "访问了太多的{{WBREPONAME}}实体。",
-	"wikibase-error-exceeded-referenced-entity-id-limit": "调用了太多次“mw.wikibase.getReferencedEntityId”，只允许最多$2次。",
+	"wikibase-error-exceeded-referenced-entity-id-limit": "调用了太多次“mw.wikibase.getReferencedEntityId”，只{{PLURAL:$2|允许}}最多$2次。",
 	"unconnectedpages": "未连接至项的页面",
 	"unconnectedpages-summary": "此页面列举未链接至数据项的页面（在支持连接项的名字空间中）。列表依页面ID递减排序，因此新页面会首先被列出。",
 	"wikibase-unconnectedpages-format-row": "（该页面有$1个{{PLURAL:$1|跨语言链接}}）",

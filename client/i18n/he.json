@@ -103,7 +103,7 @@
 	"wikibase-error-serialize-error": "כשל בהכנת נתונים לשמירה",
 	"wikibase-error-invalid-entity-id": "המזהה \"$2\" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",
 	"wikibase-error-exceeded-entity-access-limit": "נעשתה גישה ליותר מדי ישויות {{WBREPONAME}}.",
-	"wikibase-error-exceeded-referenced-entity-id-limit": "יותר מדי קריאות ל־\"mw.wikibase.getReferencedEntityId\", המקסימום המותר הוא {{PLURAL:$2|קריאה אחת|$2 קריאות}}.",
+	"wikibase-error-exceeded-referenced-entity-id-limit": "יותר מדי קריאות ל־\"mw.wikibase.getReferencedEntityId\", המספר המרבי המותר הוא {{PLURAL:$2|קריאה אחת|$2 קריאות}}.",
 	"unconnectedpages": "דפים שאינם מקושרים לפריטים",
 	"unconnectedpages-summary": "הדף הזה מציג רשימת דפים שאין פריט נתונים שמקושר אליהם (במרחבי שם שתומכים בפריטים מקושרים). הרשימה ממוינת בסדר יורד לפי מזהה הדף, כך שדפים חדשים יותר מופיעים קודם.",
 	"wikibase-unconnectedpages-format-row": "(בדף יש {{PLURAL:$1|קישור אחד לשפה אחרת|$1 קישורים לשפות אחרות}})",

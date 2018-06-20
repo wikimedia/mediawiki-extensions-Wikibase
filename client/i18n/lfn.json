@@ -20,6 +20,7 @@
 	"wikibase-rc-wikibase-edit-title": "Edita de {{WBREPONAME}}",
 	"pageswithbadges": "Pajes con insinias",
 	"entityusage": "Usa de esente",
+	"wikibase-pageinfo-entity-usage": "Cosas de {{WBREPONAME}} usada en esta paje",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Eticeta: $1",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Descrive: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titulo",

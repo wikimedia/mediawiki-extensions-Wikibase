@@ -99,7 +99,7 @@
 	"wikibase-error-serialize-error": "Impossibile serializzare i dati",
 	"wikibase-error-invalid-entity-id": "L'ID \"$2\" è sconosciuto al sistema. Utilizza un ID di entità valido.",
 	"wikibase-error-exceeded-entity-access-limit": "Troppe entità {{WBREPONAME}} accedute.",
-	"wikibase-error-exceeded-referenced-entity-id-limit": "Troppe chiamate \"mw.wikibase.getReferencedEntityId\", consentite solo fino a $2.",
+	"wikibase-error-exceeded-referenced-entity-id-limit": "Troppe chiamate \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|consentita|consentite}} solo fino a $2.",
 	"unconnectedpages": "Pagine non collegate agli elementi",
 	"unconnectedpages-summary": "Questa pagina elenca le pagine non connessi ad un elemento data (nei namespace che supportano il collegamento tra elementi) Questa lista è ordinata in ordine decrescente secondo l'ID della pagina, cosicché le nuove voci siano elencate per prime.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|collegamento interlinguistico|collegamenti interlinguistici}} nella pagina)",
