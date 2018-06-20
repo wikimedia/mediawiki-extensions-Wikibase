@@ -22,6 +22,30 @@
       "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd61a607_38ca055e",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2018-06-20T16:14:09Z",
+      "side": 1,
+      "message": "Huh, that might be a larger API issue.  The summary is used in a CommentStore, and so SUMMARY_MAX_LENGTH must \u003c\u003d COMMENT_CHARACTER_LIMIT (which is 500 characters), which in turn needs to be \u003c\u003d MAX_COMMENT_LENGTH (65535 *bytes*), and there\u0027s a comment that 4*COMMENT_CHARACTER_LIMIT \u003c\u003d MAX_COMMENT_LENGTH due to UTF-8 encoding.\n\nSo maybe we need SUMMARY_CHARACTER_LIMIT (250 *characters*) and SUMMARY_MAX_LENGTH (767 *bytes*) and do a double truncation, since 4*SUMMARY_CHARACTER_LIMIT \u003e SUMMARY_MAX_LENGTH?\n\nOr maybe the database storage should be increased to 1000 bytes.  Where does the 767 number come from, exactly?",
+      "parentUuid": "adad5ebf_e7313483",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 43
+      },
+      "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
