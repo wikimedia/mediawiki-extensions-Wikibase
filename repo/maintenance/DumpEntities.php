@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
@@ -211,6 +212,19 @@ abstract class DumpEntities extends Maintenance {
 		}
 
 		$this->closeLogFile();
+	}
+
+	/**
+	 * @see Maintenance::finalSetup
+	 */
+	public function finalSetup() {
+		global $wgDBDefaultGroup;
+
+		// As this is a dump-script, set the default DB group to "dump" (T147169).
+		$wgDBDefaultGroup = 'dump';
+		MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->destroy();
+
+		parent::finalSetup();
 	}
 
 	private function getEntityTypes() {
