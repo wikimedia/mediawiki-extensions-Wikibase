@@ -113,7 +113,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	/**
 	 * Set up entity search query
 	 * @param SearchContext $searchContext
-	 * @param $term
+	 * @param string $term
 	 * @throws \MWException
 	 */
 	protected function buildEntitySearch( SearchContext $searchContext, $term ) {

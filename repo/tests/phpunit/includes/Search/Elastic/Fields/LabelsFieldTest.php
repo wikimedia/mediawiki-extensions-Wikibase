@@ -59,10 +59,8 @@ class LabelsFieldTest extends SearchFieldTestCase {
 
 	/**
 	 * @dataProvider  getFieldDataProvider
-	 * @param $expected
-	 * @param EntityDocument $entity
 	 */
-	public function testLabels( $expected, EntityDocument $entity ) {
+	public function testLabels( array $expected, EntityDocument $entity ) {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
 		$this->assertEquals( $expected, $labels->getFieldData( $entity ) );
 	}
