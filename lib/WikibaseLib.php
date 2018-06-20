@@ -62,6 +62,12 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 	$wgAutoloadClasses['Wikibase\\EntityContent'] = __DIR__ . '/../repo/includes/Content/EntityContent.php';
 	$wgAutoloadClasses['Wikibase\\Repo\\Content\\EntityContentDiff'] = __DIR__ . '/../repo/includes/Content/EntityContentDiff.php';
 }
+// Workaround for case when dev-dependencies of Wikibase are not loaded
+// (e.g. when composer merge plugin is used and dev-dependencies of extensions ignored,
+// as on WMF's CI).
+if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+	require_once __DIR__ . '/tests/phpunit/SimpleCacheTestBootstrap.php';
+}
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
