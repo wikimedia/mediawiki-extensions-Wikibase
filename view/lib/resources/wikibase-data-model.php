@@ -72,6 +72,17 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.datamodel.FingerprintableEntity' => $moduleTemplate + [
+			'scripts' => [
+				'FingerprintableEntity.js',
+			],
+			'dependencies' => [
+				'wikibase.datamodel.Entity',
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+			],
+		],
+
 		'wikibase.datamodel.EntityId' => $moduleTemplate + [
 			'scripts' => [
 				'EntityId.js',
@@ -120,7 +131,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Entity',
+				'wikibase.datamodel.FingerprintableEntity',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.SiteLinkSet',
 				'wikibase.datamodel.StatementGroupSet',
@@ -175,7 +186,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Entity',
+				'wikibase.datamodel.FingerprintableEntity',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.StatementGroupSet',
 			],
