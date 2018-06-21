@@ -85,7 +85,7 @@
 	"wikibase-entity-summary-wbsetreference": "Sette ei kjelde",
 	"wikibase-entity-summary-wbsetreference-add": "La til referanse for utsegn",
 	"wikibase-entity-summary-wbsetlabel-add": "La til merkelapp for [$2]",
-	"wikibase-entity-summary-wbsetlabel-set": "Endra merkelapp [$2]",
+	"wikibase-entity-summary-wbsetlabel-set": "Endra merkelapp for [$2]",
 	"wikibase-entity-summary-wbsetlabel-remove": "Fjerna merkelapp [$2]",
 	"wikibase-entity-summary-wbsetdescription-add": "La til skildring for [$2]",
 	"wikibase-entity-summary-wbsetdescription-set": "Endra skildring [$2]",
