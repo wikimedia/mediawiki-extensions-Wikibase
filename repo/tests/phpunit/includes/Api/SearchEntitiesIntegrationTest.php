@@ -119,6 +119,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
+		$this->markTestSkipped( 'Transitional.' );
 
 		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
 				->disableOriginalConstructor()
