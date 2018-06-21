@@ -17,6 +17,11 @@ the corresponding serializer, and send back to the API.
 
 ## Release notes
 
+### 4.1.0 (2018-06-25)
+
+* Added new FingerprintableEntity class
+ * Make Item and Property inherit from it 
+
 ### 4.0.0 (2017-10-09)
 
 * Made the library a pure JavaScript library.

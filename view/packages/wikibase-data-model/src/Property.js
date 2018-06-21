@@ -1,12 +1,12 @@
 ( function( wb, util ) {
 	'use strict';
 
-var PARENT = wb.datamodel.Entity;
+var PARENT = wb.datamodel.FingerprintableEntity;
 
 /**
  * Entity derivative featuring a data type and statements.
  * @class wikibase.datamodel.Property
- * @extends wikibase.datamodel.Entity
+ * @extends wikibase.datamodel.FingerprintableEntity
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
