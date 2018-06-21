@@ -16,6 +16,24 @@
       "revId": "e4bbcfacb0cf4af1659437db1685e95e9e894bf6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "770f3133_4f671fc5",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-21T15:58:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cdbf4af_e1720b0b",
+      "revId": "e4bbcfacb0cf4af1659437db1685e95e9e894bf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
