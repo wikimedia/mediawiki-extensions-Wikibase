@@ -210,7 +210,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
 			$this->getMock( LabelDescriptionLookup::class ),
 			[],
-			new Language( 'en' )
+			Language::factory( 'en' )
 		);
 
 		return new OtherProjectsSidebarGeneratorFactory(

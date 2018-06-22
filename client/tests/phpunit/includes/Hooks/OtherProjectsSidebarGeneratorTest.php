@@ -391,7 +391,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		return new SidebarLinkBadgeDisplay(
 			$labelDescriptionLookup,
 			[ self::BADGE_ITEM_ID => self::BADGE_CSS_CLASS ],
-			new Language( 'en' )
+			Language::factory( 'en' )
 		);
 	}
 
