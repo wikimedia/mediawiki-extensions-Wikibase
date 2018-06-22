@@ -46,6 +46,30 @@
       "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d56dc88a_5563664e",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-06-22T15:10:42Z",
+      "side": 1,
+      "message": "I do not know, sorry :) You might want to ask Brad (either on this commit or on a commit more specific to core/api).",
+      "parentUuid": "dd61a607_38ca055e",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 43
+      },
+      "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
