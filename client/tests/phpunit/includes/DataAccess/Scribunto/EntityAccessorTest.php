@@ -52,7 +52,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$langCode = 'en',
 		$fineGrainedTracking = true
 	) {
-		$language = new Language( $langCode );
+		$language = Language::factory( $langCode );
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
@@ -197,7 +197,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 
-		$entityAccessor = $this->getEntityAccessor( $entityLookup, null, 'qug' );
+		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
 		$this->assertEquals(
 			$this->getItemWithStatementsClientSerialization(),
