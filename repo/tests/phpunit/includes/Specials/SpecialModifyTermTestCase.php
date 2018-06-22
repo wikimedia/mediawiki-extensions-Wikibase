@@ -136,7 +136,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
-			->andAlso( havingTextContents( new Message( 'permissionserrors', [], new Language( self::USER_LANGUAGE ) ) ) )
+			->andAlso( havingTextContents( new Message( 'permissionserrors', [], Language::factory( self::USER_LANGUAGE ) ) ) )
 		) ) ) );
 	}
 
