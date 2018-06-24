@@ -35,7 +35,7 @@
 	"wikibase-error-autocomplete-connection": "Não foi possível consultar a API do sítio. Tente novamente mais tarde, por favor.",
 	"wikibase-error-autocomplete-response": "O servidor respondeu: $1",
 	"wikibase-error-ui-no-external-page": "Não foi possível encontrar uma página \"$2\" em \"$1\".",
-	"wikibase-error-ui-edit-conflict": "O mesmo valor foi entretanto alterado, causando um conflito de edições. Volte a carregar a página, por favor.",
+	"wikibase-error-ui-edit-conflict": "O mesmo valor foi entretanto alterado, causando um conflito entre edições. Volte a carregar a página, por favor.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
 	"wikibase-quantitydetails-amount": "Quantidade",
 	"wikibase-quantitydetails-upperbound": "Limite superior",

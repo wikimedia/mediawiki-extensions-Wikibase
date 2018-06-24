@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Alexx"
+			"Alexx",
+			"Joe Watzmo"
 		]
 	},
-	"wikibase-comment-update": "Dés {{WBREPONAME}}-Óbjekt is génderd wórn.",
-	"wikibase-dataitem": "{{WBREPONAME}}-Daatenóbjekt",
-	"wikibase-editlinks": "Links beórwaten",
-	"wikibase-editlinkstitle": "Waiderlóatung auf Artikel in ånnerne Sproochen beórwaten.",
-	"wikibase-rc-hide-wikidata-show": "åzóang",
+	"wikibase-comment-update": "Des {{WBREPONAME}}-Objekt is gendad worn.",
+	"wikibase-dataitem": "{{WBREPONAME}}-Item",
+	"wikibase-editlinks": "Links beorwatn",
+	"wikibase-editlinkstitle": "Links a Artiken in andane Sprochn beorwatn",
+	"wikibase-rc-hide-wikidata-show": "oozoang",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Beorwatung"
 }

@@ -8,7 +8,8 @@
 			"Сербијана",
 			"Obsuser",
 			"Ladsgroup",
-			"Acamicamacaraca"
+			"Acamicamacaraca",
+			"BadDog"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -138,7 +139,7 @@
 	"wikibase-itemdisambiguation-submit": "Претрага",
 	"wikibase-itemdisambiguation-nothing-found": "Жао нам је, ниједна ставка са тим насловом није пронађена.",
 	"wikibase-itemdisambiguation-create": "Можете [$1 направити ставку].",
-	"wikibase-itemdisambiguation-invalid-langcode": "Жао нам је, језички код који сте унели је непознат систему. Молимо да користите важећи код као што је „sr“.",
+	"wikibase-itemdisambiguation-invalid-langcode": "Жао нам је, језички кôд који сте унели је непознат систему. Молимо да користите важећи кôд као што је „sr“.",
 	"special-newproperty": "Прављење новог својства",
 	"wikibase-newproperty-fieldset": "Прављење новог својства",
 	"wikibase-newproperty-datatype": "Врста податка:",
@@ -260,7 +261,7 @@
 	"wikibase-listdatatypes-quantity-body": "Дословно поље података за количину која се односи на неку врсту прецизно дефинисане јединице. Стварна јединица иде у вредности података који се уписују.\n* вредност - имплицитни део ниске (мапирање префикса јединице је нејасно)\n* јединица - имплицитно део ниске (мапирање стандардизационог телу је нејасно)\n* тачност (необавезно) - експлицитна вредност податка, има исту јединицу као вредност",
 	"wikibase-listdatatypes-monolingualtext-head": "једнојезички текст",
 	"wikibase-listdatatypes-multilingualtext-head": "вишејезички текст",
-	"wikibase-listdatatypes-string-head": "ниска",
+	"wikibase-listdatatypes-string-head": "текст",
 	"wikibase-listdatatypes-time-head": "време",
 	"wikibase-listdatatypes-url-head": "адреса",
 	"wikibase-listdatatypes-external-id-head": "спољашњи идентификатор",
