@@ -116,6 +116,6 @@
 	"notification-subject-page-connection": "{{GENDER:$3|Vámi}} vytvořená stránka na {{GRAMMAR:6sg|{{SITENAME}}}} byla {{GENDER:$2|propojena}} s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}",
 	"unresolved-property-category": "Stránky s nenalezenými vlastnostmi",
 	"unresolved-property-category-desc": "Tato kategorie obsahuje stránky odkazující na vlastnosti na {{GRAMMAR:6sg|{{WBREPONAME}}}}, které nebyly nalezeny ani podle ID, ani podle štítku.",
-	"connected-redirect-category": "Přesměrování odkazující na {{WBREPONAME}}",
+	"connected-redirect-category": "Přesměrování propojená s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Tato kategorie obsahuje přesměrování, která jsou propojená s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}."
 }
