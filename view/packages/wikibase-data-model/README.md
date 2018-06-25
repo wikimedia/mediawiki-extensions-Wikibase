@@ -17,8 +17,12 @@ the corresponding serializer, and send back to the API.
 
 ## Release notes
 
-### 4.1.0 (2018-06-25)
+### 5.0.0 (2018-07-06)
+* Remove references to fingerprint from Entity:
+  * Removed `Entity.getFingerprint`
+  * Removed `Entity.setFingerprint`
 
+### 4.1.0 (2018-06-25)
 * Added new FingerprintableEntity class
  * Make Item and Property inherit from it 
 

@@ -35,30 +35,10 @@ $.extend( SELF.prototype, {
 	_id: null,
 
 	/**
-	 * @property {wikibase.datamodel.Fingerprint}
-	 * @private
-	 */
-	_fingerprint: null,
-
-	/**
 	 * @return {string}
 	 */
 	getId: function() {
 		return this._id;
-	},
-
-	/**
-	 * @return {wikibase.datamodel.Fingerprint}
-	 */
-	getFingerprint: function() {
-		return this._fingerprint;
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Fingerprint} fingerprint
-	 */
-	setFingerprint: function( fingerprint ) {
-		this._fingerprint = fingerprint;
 	},
 
 	/**
