@@ -30,17 +30,17 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	private $pagePropName;
 
 	/**
-	 * @var string
+	 * @var string Property ID of the best possible match so far.
 	 */
 	private $bestProperty;
 
 	/**
-	 * @var int
+	 * @var int Rank of the best possible match so far.
 	 */
 	private $bestRank;
 
 	/**
-	 * @var string|null
+	 * @var string|null Not yet normalized file name of the best possible match so far.
 	 */
 	private $bestFileName = null;
 
@@ -71,14 +71,8 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	 * @param PropertyId $propertyId
 	 * @param int $rank
 	 */
-	private function processSnak(
-		Snak $snak,
-		PropertyId $propertyId,
-		$rank = Statement::RANK_NORMAL
-	) {
-		$id = $propertyId->getSerialization();
-		$fileName = str_replace( ' ', '_', $this->getString( $snak ) );
-
+	private function processSnak( Snak $snak, PropertyId $propertyId, $rank ) {
+		$fileName = $this->getString( $snak );
 		if ( $fileName === null || $fileName === '' ) {
 			return;
 		}
@@ -87,6 +81,7 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 			return;
 		}
 
+		$id = $propertyId->getSerialization();
 		if ( !$this->isAcceptablePriority( $id ) ) {
 			return;
 		}
@@ -185,7 +180,8 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 		if ( $this->bestFileName === null ) {
 			$parserOutput->unsetProperty( $this->pagePropName );
 		} else {
-			$parserOutput->setProperty( $this->pagePropName, $this->bestFileName );
+			$fileName = str_replace( ' ', '_', $this->bestFileName );
+			$parserOutput->setProperty( $this->pagePropName, $fileName );
 		}
 	}
 
