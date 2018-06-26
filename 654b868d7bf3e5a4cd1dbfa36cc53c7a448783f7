@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f063373d_98ea4e27",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2018-06-26T19:42:24Z",
+      "side": 1,
+      "message": "more of a nitpick, but this is indented to 8 levels which is pretty excessive. It seems some of the if conditions could be flipped and `continue` used to improve the readability of this section.",
+      "revId": "654b868d7bf3e5a4cd1dbfa36cc53c7a448783f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
