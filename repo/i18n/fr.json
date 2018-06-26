@@ -381,7 +381,7 @@
 	"wikibase-noentity-createone": "Vous pouvez aussi [[$1|en créer une nouvelle]].",
 	"wikibase-special-mergeitems-error-prefix": "Impossible de fusionner les éléments. L'erreur suivante s'est produite :",
 	"wikibase-listdatatypes-wikibase-item-head": "Élément",
-	"wikibase-listdatatypes-wikibase-item-body": "Lien vers d’autres éléments du projet. Quand une valeur est saisie, l’espace de l’espace de noms « Élément » du projet sera scruté à la recherche des éléments correspondants.",
+	"wikibase-listdatatypes-wikibase-item-body": "Lien vers les autres éléments du projet. Quand une valeur est saisie, l’espace de noms « Élément » du projet sera scruté à la recherche des éléments correspondants.",
 	"wikibase-listdatatypes-wikibase-property-head": "Propriété",
 	"wikibase-listdatatypes-wikibase-property-body": "Lien vers les propriétés du projet. Quand une valeur est saisie, l’espace de noms « Property » du projet sera scruté pour trouver des propriétés correspondantes.",
 	"wikibase-listdatatypes-commonsmedia-head": "Médias sur Commons",
