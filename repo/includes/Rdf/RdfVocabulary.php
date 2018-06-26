@@ -431,7 +431,7 @@ class RdfVocabulary {
 			return $this->canonicalLanguageCodes[$languageCode];
 		}
 
-		self::$canonicalLanguageCodeCache[$languageCode] = wfBCP47( $languageCode );
+		self::$canonicalLanguageCodeCache[$languageCode] = LanguageCode::bcp47( $languageCode );
 		return self::$canonicalLanguageCodeCache[$languageCode];
 	}
 
