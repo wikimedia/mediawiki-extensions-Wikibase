@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "fc90baa7_958539ac",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2018-06-26T20:34:31Z",
+      "side": 1,
+      "message": "just a note that the exact same class/implementation is also in  https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/435753/6/repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03d1f71a_4826e0f6",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
