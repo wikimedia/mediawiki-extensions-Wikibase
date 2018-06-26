@@ -53,6 +53,20 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 				  'P9=http://url.acme.test\badurl?chars=\привет< >"'
 				]
 			],
+			'Q6' => [
+				$testData->getEntity( 'Q6' ),
+				[
+					'P7=string',
+					'P7=string[P2=Q42]',
+					'P7=string[P2=Q666]',
+					'P7=string[P3=Universe.svg]',
+					'P7=string[P7=simplestring]',
+					'P7=string[P9=http://url.acme.test/]',
+					"P7=string[P9= http://url.acme2.test/\n]",
+					'P7=string[foreign:P11=simplestring]',
+					'P7=string[foreign:P12=foreign:Q1234]',
+				]
+			],
 			'Q7' => [
 				$testData->getEntity( 'Q7' ),
 				[ 'P7=string', 'P7=string2' ]
@@ -69,7 +83,9 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getPropertyTypeLookup( array $map ) {
-		$lookup = $this->getMock( PropertyDataTypeLookup::class );
+		$lookup = $this->getMockBuilder( PropertyDataTypeLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$lookup->method( 'getDataTypeIdForProperty' )
 			->willReturnCallback( function ( PropertyId $id ) use ( $map ) {
