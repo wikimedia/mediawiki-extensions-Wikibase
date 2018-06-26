@@ -76,9 +76,7 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 		PropertyId $propertyId,
 		$rank = Statement::RANK_NORMAL
 	) {
-		$id = $propertyId->getSerialization();
-		$fileName = str_replace( ' ', '_', $this->getString( $snak ) );
-
+		$fileName = $this->getString( $snak );
 		if ( $fileName === null || $fileName === '' ) {
 			return;
 		}
@@ -87,6 +85,7 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 			return;
 		}
 
+		$id = $propertyId->getSerialization();
 		if ( !$this->isAcceptablePriority( $id ) ) {
 			return;
 		}
@@ -185,7 +184,8 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 		if ( $this->bestFileName === null ) {
 			$parserOutput->unsetProperty( $this->pagePropName );
 		} else {
-			$parserOutput->setProperty( $this->pagePropName, $this->bestFileName );
+			$fileName = str_replace( ' ', '_', $this->bestFileName );
+			$parserOutput->setProperty( $this->pagePropName, $fileName );
 		}
 	}
 
