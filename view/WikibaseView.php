@@ -21,7 +21,7 @@ require_once __DIR__  . '/autoload.php';
 
 $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'path' => __DIR__ . '/../README.md',
-	'name' => 'Wikibase View',
+	'name' => 'WikibaseView',
 	'author' => [
 		'The Wikidata team',
 	],
