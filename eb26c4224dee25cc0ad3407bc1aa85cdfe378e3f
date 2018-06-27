@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbf26935_83f4b5ad",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T11:57:51Z",
+      "side": 1,
+      "message": "Not, this is NOT the \"original\" rev ID! This is the expected parent ID for use with hasEditConflict()! See https://phabricator.wikimedia.org/T197685",
+      "revId": "eb26c4224dee25cc0ad3407bc1aa85cdfe378e3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b90fb14f_adb7b22c",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T11:57:51Z",
+      "side": 1,
+      "message": "setOriginalRevisionId() is for reverts. The old code was wrong, because I got confused, see T197685. If anything, we want to check hasEditConflicts here.",
+      "revId": "eb26c4224dee25cc0ad3407bc1aa85cdfe378e3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f26ed896_fb0641d9",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T11:57:51Z",
+      "side": 1,
+      "message": "Would be nice to inject the service",
+      "revId": "eb26c4224dee25cc0ad3407bc1aa85cdfe378e3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
