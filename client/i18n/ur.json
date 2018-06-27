@@ -64,6 +64,7 @@
 	"wikibase-entityusage-submit": "صفحات دکھائیں",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} کے آئٹم کی شناخت",
 	"wikibase-pageinfo-entity-id-none": "کوئی نہیں",
+	"wikibase-pageinfo-description-central": "مرکزی وضاحت",
 	"wikibase-pageinfo-entity-usage": "اس صفحہ میں مستعمل {{WBREPONAME}} کے موجودات",
 	"wikibase-pageinfo-entity-usage-S": "سائٹ کا ربط",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "نشان: $1",
