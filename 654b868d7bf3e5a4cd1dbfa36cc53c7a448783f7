@@ -16,6 +16,24 @@
       "revId": "654b868d7bf3e5a4cd1dbfa36cc53c7a448783f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b3fb784_bde22be0",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-27T14:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f063373d_98ea4e27",
+      "revId": "654b868d7bf3e5a4cd1dbfa36cc53c7a448783f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
