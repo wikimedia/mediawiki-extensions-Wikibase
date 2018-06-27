@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8f49605_765f7924",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T15:56:01Z",
+      "side": 1,
+      "message": "import class, or remove this line.",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1174d600_4936c710",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T15:56:01Z",
+      "side": 1,
+      "message": "shothand: $revision-\u003egetContent( \u0027main\u0027 )",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f343842b_d320e376",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T15:56:01Z",
+      "side": 1,
+      "message": "This is wrong (but my fault for getting this wrong originally), see my comment on PS1.",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24c9fcd6_ecd790e3",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-27T15:56:01Z",
+      "side": 1,
+      "message": "This should be in EditEntity I guess",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
