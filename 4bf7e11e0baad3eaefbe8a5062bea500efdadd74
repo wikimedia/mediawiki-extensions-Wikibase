@@ -36,6 +36,75 @@
     },
     {
       "key": {
+        "uuid": "7f5e16ec_804c57f0",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-27T09:04:15Z",
+      "side": 1,
+      "message": "string[]",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 14
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2498924d_03fe6876",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-27T09:04:15Z",
+      "side": 1,
+      "message": "nitpick: string[]",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 16
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e7b1e15_ecf80952",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-27T09:04:15Z",
+      "side": 1,
+      "message": "I wonder if we should disallow \u0027|\u0027 in these strings, it may completely break your logic here if they are allowed.",
+      "range": {
+        "startLine": 59,
+        "startChar": 29,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "03d1f71a_4826e0f6",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -219,6 +288,24 @@
       "writtenOn": "2018-06-26T16:53:58Z",
       "side": 1,
       "message": "nitpick: I think some example values that this pattern is supposed to parse as code comment would help future readers I think.",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b13214a2_24e6b3a0",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-06-27T09:04:15Z",
+      "side": 1,
+      "message": "please ignore, the class comments include some examples.",
+      "parentUuid": "8b902e48_4d0c3e3d",
       "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
