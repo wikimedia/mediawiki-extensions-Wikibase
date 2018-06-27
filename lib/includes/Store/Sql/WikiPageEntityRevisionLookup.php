@@ -3,11 +3,12 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
+use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
-use Revision;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -149,25 +150,30 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * Construct an EntityRevision object from a database row from the revision and text tables.
 	 *
-	 * @see loadEntityBlob()
-	 *
 	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
 	 * @throws MWContentSerializationException
+	 * @throws \MWException
 	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
-		$blob = $this->loadEntityBlob( $row );
-		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
+		// TODO inject
+		$revisionStore = MediaWikiServices::getInstance()->getRevisionStoreFactory()->getRevisionStore( $this->wiki );
+		$revision = $revisionStore->getRevisionById( $row->rev_id );
+		// TODO this should not always be the main slot
+		$slot = $revision->getSlot( 'main' );
+		/** @var EntityContent $content */
+		$content = $slot->getContent();
+		$entity = $content->getEntity();
 
 		if ( $entity ) {
-			$entityRevision = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+			$entityRevision = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
 
 			$result = [ $entityRevision, null ];
 		} else {
-			$redirect = $this->contentCodec->decodeRedirect( $blob, $row->rev_content_format );
+			$redirect = $content->getEntityRedirect();
 
 			if ( !$redirect ) {
 				throw new MWContentSerializationException(
@@ -179,38 +185,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Loads a blob based on a database row from the revision and text tables.
-	 *
-	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
-	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
-	 *
-	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
-	 *        should contain the relevant fields from the revision and/or text table.
-	 *
-	 * @throws MWContentSerializationException
-	 * @return string The blob
-	 */
-	private function loadEntityBlob( $row ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': Calling getRevisionText() on revision '
-			. $row->rev_id );
-
-		//NOTE: $row contains revision fields from another wiki. This SHOULD not
-		//      cause any problems, since getRevisionText should only look at the old_flags
-		//      and old_text fields. But be aware.
-		$blob = Revision::getRevisionText( $row, 'old_', $this->wiki );
-
-		if ( $blob === false ) {
-			wfWarn( 'Unable to load raw content blob for revision ' . $row->rev_id );
-
-			throw new MWContentSerializationException(
-				'Unable to load raw content blob for revision ' . $row->rev_id
-			);
-		}
-
-		return $blob;
 	}
 
 }
