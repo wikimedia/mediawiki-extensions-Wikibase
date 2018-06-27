@@ -18,8 +18,8 @@ interface WikiPageEntityMetaDataAccessor {
 	/**
 	 * Looks up meta data for the given entityId(s) as needed to lookup the latest revision id
 	 * of an entity or to load entity content from a MediaWiki revision. Returns an array of
-	 * stdClass with the following fields: 'rev_id', 'rev_content_format', 'rev_timestamp',
-	 * 'page_latest', 'old_id', 'old_text' and 'old_flags'.
+	 * stdClass with the following fields: 'rev_id', 'rev_timestamp',
+	 * 'page_latest'.
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
@@ -34,8 +34,7 @@ interface WikiPageEntityMetaDataAccessor {
 	/**
 	 * Looks up meta data for the given entityId-revisionId pair as needed to lookup the latest
 	 * revision of the entity or to load entity content from a MediaWiki revision. Included fields are
-	 * 'rev_id', 'rev_content_format', 'rev_timestamp', 'page_latest', 'old_id', 'old_text'
-	 * and 'old_flags'.
+	 * 'rev_id', 'rev_timestamp', 'page_latest'.
 	 * Given that revision are immutable, this function will always try to load a revision from
 	 * replica first and only use the master (with EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 	 * or EntityRevisionLookup::LATEST_FROM_MASTER) in case the revision couldn't be found.

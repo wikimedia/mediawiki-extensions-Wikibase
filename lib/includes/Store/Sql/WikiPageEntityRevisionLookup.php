@@ -3,11 +3,13 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
+use MediaWiki\Storage\RevisionStore;
 use MWContentSerializationException;
-use Revision;
+use MWException;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -37,13 +39,20 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $entityMetaDataAccessor;
 
 	/**
+	 * @var RevisionStore
+	 */
+	private $revisionStore;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
+	 * @param RevisionStore $revisionStore
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
+		RevisionStore $revisionStore,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
@@ -51,6 +60,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$this->contentCodec = $contentCodec;
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
+		$this->revisionStore = $revisionStore;
 	}
 
 	/**
@@ -149,8 +159,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * Construct an EntityRevision object from a database row from the revision and text tables.
 	 *
-	 * @see loadEntityBlob()
-	 *
 	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
@@ -159,58 +167,16 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
-		$blob = $this->loadEntityBlob( $row );
-		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
+		$revision = $this->revisionStore->getRevisionById( $row->rev_id );
+		// TODO this should not always be the main slot
+		/** @var EntityContent $content */
+		$content = $revision->getContent( 'main' );
 
-		if ( $entity ) {
-			$entityRevision = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
-
-			$result = [ $entityRevision, null ];
+		if ( !$content->isRedirect() ) {
+			return [ new EntityRevision( $content->getEntity(), $revision->getId(), $revision->getTimestamp() ), null ];
 		} else {
-			$redirect = $this->contentCodec->decodeRedirect( $blob, $row->rev_content_format );
-
-			if ( !$redirect ) {
-				throw new MWContentSerializationException(
-					'The serialized data contains neither an Entity nor an EntityRedirect!'
-				);
-			}
-
-			$result = [ null, $redirect ];
+			return [ null, $content->getEntityRedirect() ];
 		}
-
-		return $result;
-	}
-
-	/**
-	 * Loads a blob based on a database row from the revision and text tables.
-	 *
-	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
-	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
-	 *
-	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
-	 *        should contain the relevant fields from the revision and/or text table.
-	 *
-	 * @throws MWContentSerializationException
-	 * @return string The blob
-	 */
-	private function loadEntityBlob( $row ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': Calling getRevisionText() on revision '
-			. $row->rev_id );
-
-		//NOTE: $row contains revision fields from another wiki. This SHOULD not
-		//      cause any problems, since getRevisionText should only look at the old_flags
-		//      and old_text fields. But be aware.
-		$blob = Revision::getRevisionText( $row, 'old_', $this->wiki );
-
-		if ( $blob === false ) {
-			wfWarn( 'Unable to load raw content blob for revision ' . $row->rev_id );
-
-			throw new MWContentSerializationException(
-				'Unable to load raw content blob for revision ' . $row->rev_id
-			);
-		}
-
-		return $blob;
 	}
 
 }
