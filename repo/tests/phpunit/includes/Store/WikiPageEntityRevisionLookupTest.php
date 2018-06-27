@@ -2,22 +2,19 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
-use MWContentSerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
+ * @covers \Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
  *
  * @group Database
  * @group Wikibase
@@ -79,6 +76,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		return new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			MediaWikiServices::getInstance()->getRevisionStore(),
 			false
 		);
 	}
@@ -100,32 +98,10 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		return $revision;
 	}
 
-	public function testGetEntityRevision_MWContentSerializationException() {
-		$entityContentDataCodec = $this->getMockBuilder( EntityContentDataCodec::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$entityContentDataCodec->expects( $this->once() )
-			->method( 'decodeEntity' )
-			->will( $this->throwException( new MWContentSerializationException() ) );
-
+	public function testGetEntityRevision_byRevisionIdWithMode() {
 		// Needed to fill the database.
 		$this->newEntityRevisionLookup( $this->getTestRevisions(), [] );
 
-		$lookup = new WikiPageEntityRevisionLookup(
-			$entityContentDataCodec,
-			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
-			false
-		);
-
-		$this->setExpectedException(
-			StorageException::class,
-			'Failed to unserialize the content object.'
-		);
-		$lookup->getEntityRevision( new ItemId( 'Q42' ) );
-	}
-
-	public function testGetEntityRevision_byRevisionIdWithMode() {
 		$testEntityRevision = reset( self::$testEntities );
 		$entityId = $testEntityRevision->getEntity()->getId();
 		$revisionId = $testEntityRevision->getRevisionId();
@@ -145,6 +121,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$metaDataLookup,
+			MediaWikiServices::getInstance()->getRevisionStore(),
 			false
 		);
 
