@@ -208,18 +208,14 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectFields() {
 		return [
 			'rev_id',
-			'rev_content_format',
 			'rev_timestamp',
 			'page_latest',
 			'page_is_redirect',
-			'old_id',
-			'old_text',
-			'old_flags'
 		];
 	}
 
 	/**
-	 * Selects revision information from the page, revision, and text tables.
+	 * Selects revision information from the page and revision tables.
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param int $revisionId The desired revision id
@@ -232,15 +228,12 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$db = $this->getConnection( $connType );
 
 		$join = [];
-
-		// pick text via rev_text_id
-		$join['text'] = [ 'INNER JOIN', 'old_id=rev_text_id' ];
 		$join['page'] = [ 'INNER JOIN', 'rev_page=page_id' ];
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
 
 		$row = $db->selectRow(
-			[ 'revision', 'text', 'page' ],
+			[ 'revision', 'page' ],
 			$this->selectFields(),
 			[ 'rev_id' => $revisionId ],
 			__METHOD__,
@@ -254,7 +247,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	}
 
 	/**
-	 * Selects revision information from the page, revision, and text tables.
+	 * Selects revision information from the page and revision tables.
 	 * Returns an array like entityid -> object or false (if not found).
 	 *
 	 * @param EntityId[] $entityIds The entities to query the DB for.
@@ -272,13 +265,10 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		// To be able to link rows with entity ids
 		$fields[] = 'page_title';
 
-		$tables = [ 'page', 'revision', 'text' ];
+		$tables = [ 'page', 'revision' ];
 
 		// pick latest revision via page_latest
 		$join['revision'] = [ 'INNER JOIN', 'page_latest=rev_id' ];
-
-		// pick text via rev_text_id
-		$join['text'] = [ 'INNER JOIN', 'old_id=rev_text_id' ];
 
 		$res = $db->select( $tables, $fields, $this->getWhere( $entityIds, $db ), __METHOD__, [], $join );
 

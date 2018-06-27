@@ -3,9 +3,12 @@
 namespace Wikibase\Repo\Store;
 
 use ActorMigration;
+use CommentStoreComment;
 use InvalidArgumentException;
+use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Storage\RevisionStore;
 use MWException;
-use Revision;
+use RecentChange;
 use Status;
 use Title;
 use User;
@@ -55,10 +58,16 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private $entityIdComposer;
 
+	/**
+	 * @var RevisionStore
+	 */
+	private $revisionStore;
+
 	public function __construct(
 		EntityContentFactory $contentFactory,
 		IdGenerator $idGenerator,
-		EntityIdComposer $entityIdComposer
+		EntityIdComposer $entityIdComposer,
+		RevisionStore $revisionStore
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
@@ -66,6 +75,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
 
 		$this->entityIdComposer = $entityIdComposer;
+		$this->revisionStore = $revisionStore;
 	}
 
 	/**
@@ -253,19 +263,22 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param string $summary
 	 * @param null|User $user
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
-	 * @param int|bool $baseRevId
+	 * @param int|bool $originalRevId
 	 *
 	 * @throws StorageException
-	 * @return Revision The new revision (or the latest one, in case of a null edit).
+	 * @return RevisionRecord The new revision (or the latest one, in case of a null edit).
 	 */
 	private function saveEntityContent(
 		EntityContent $entityContent,
 		$summary = '',
 		User $user = null,
 		$flags = 0,
-		$baseRevId = false
+		$originalRevId = false
 	) {
+		global $wgUseNPPatrol, $wgUseRCPatrol;
+
 		$page = $this->getWikiPageForEntity( $entityContent->getEntityId() );
+		$updater = $page->newPageUpdater( $user );
 
 		if ( $flags & EDIT_NEW ) {
 			$title = $page->getTitle();
@@ -280,34 +293,43 @@ class WikiPageEntityStore implements EntityStore {
 		 * because EntityContent is mutable, so the cached object might have changed.
 		 *
 		 * @todo Might be able to further optimize handling of prepared edit in WikiPage.
+		 * @todo now we use PageUpdater do we still need the calls below?
 		 */
-
 		$page->clear();
 		$page->clearPreparedEdit();
 
-		$status = $page->doEditContent(
-			$entityContent,
-			$summary,
-			$flags | EDIT_AUTOSUMMARY,
-			$baseRevId,
-			$user
+		// TODO provide a way for entities to be stored in different slots
+		$updater->setContent( 'main', $entityContent );
+		$updater->setOriginalRevisionId( $originalRevId );
+		$needsPatrol = $wgUseRCPatrol || ( $wgUseNPPatrol && !$page->exists() );
+
+		// TODO: this logic should not be in the storage layer, it's here for compatibility
+		// with 1.31 behavior. Applying the 'autopatrol' right should be done in the same
+		// place the 'bot' right is handled, which is currently in EditPage::attemptSave.
+		if ( $needsPatrol && $page->getTitle()->userCan( 'autopatrol', $user ) ) {
+			$updater->setRcPatrolStatus( RecentChange::PRC_AUTOPATROLLED );
+		}
+
+		$revisionRecord = $updater->saveRevision(
+			CommentStoreComment::newUnsavedComment( $summary ),
+			$flags | EDIT_AUTOSUMMARY
 		);
+
+		$status = $updater->getStatus();
 
 		if ( !$status->isOK() ) {
 			throw new StorageException( $status );
 		}
 
-		// As per convention defined by WikiPage, the new revision is in the status value:
-		if ( isset( $status->value['revision'] ) ) {
-			$revision = $status->value['revision'];
+		// If we saved a new revision then return the record
+		if ( $revisionRecord !== null ) {
+			return $revisionRecord;
 		} else {
 			// NOTE: No new revision was created (content didn't change). Report the old one.
 			// There *might* be a race condition here, but since $page already loaded the
 			// latest revision, it should still be cached, and should always be the correct one.
-			$revision = $page->getRevision();
+			return $page->getRevision()->getRevisionRecord();
 		}
-
-		return $revision;
 	}
 
 	/**
@@ -361,7 +383,7 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
 		$this->assertLocalEntityId( $id );
-		$revision = Revision::newFromId( $lastRevId );
+		$revision = $this->revisionStore->getRevisionById( $lastRevId );
 		if ( !$revision ) {
 			return false;
 		}
@@ -373,7 +395,7 @@ class WikiPageEntityStore implements EntityStore {
 			[ 'revision' ] + $revWhere['tables'],
 			1,
 			[
-				'rev_page' => $revision->getPage(),
+				'rev_page' => $revision->getPageId(),
 				'rev_id > ' . (int)$lastRevId
 				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
 				'NOT( ' . $revWhere['conds'] . ' )',
