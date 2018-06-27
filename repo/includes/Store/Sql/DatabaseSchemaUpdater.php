@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
 use HashBagOStuff;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -192,6 +193,7 @@ class DatabaseSchemaUpdater {
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup() ),
+			MediaWikiServices::getInstance()->getRevisionStore(),
 			false
 		);
 
