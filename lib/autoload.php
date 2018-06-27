@@ -103,6 +103,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\CacheAwarePropertyInfoStore' => __DIR__ . '/includes/Store/CacheAwarePropertyInfoStore.php',
 	'Wikibase\\Lib\\Store\\CacheRetrievingEntityRevisionLookup' => __DIR__ . '/includes/Store/CacheRetrievingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\CachingEntityRevisionLookup' => __DIR__ . '/includes/Store/CachingEntityRevisionLookup.php',
+	'Wikibase\\Lib\\Store\\CachingFallbackLabelDescriptionLookup' => __DIR__ . '/includes/Store/CachingFallbackLabelDescriptionLookup.php',
 	'Wikibase\\Lib\\Store\\CachingPropertyInfoLookup' => __DIR__ . '/includes/Store/CachingPropertyInfoLookup.php',
 	'Wikibase\\Lib\\Store\\CachingPropertyOrderProvider' => __DIR__ . '/includes/Store/CachingPropertyOrderProvider.php',
 	'Wikibase\\Lib\\Store\\CachingSiteLinkLookup' => __DIR__ . '/includes/Store/CachingSiteLinkLookup.php',
