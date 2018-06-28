@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56a46348_32bb3a67",
+        "filename": "repo/tests/selenium/.eslintrc.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-28T12:04:57Z",
+      "side": 1,
+      "message": "this could probably also extend ../../../.eslintrc.json\nOr maybe this does not make sense. Style of node tests is pretty different from other JS code we have in Wikibase.",
+      "revId": "b6fd6597237109b8fe403037639dbd2b5ce24823",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42de81b4_543cb184",
+        "filename": "repo/tests/selenium/LocalSettings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-28T12:04:57Z",
+      "side": 1,
+      "message": "This file is for Jenkins, right?",
+      "revId": "b6fd6597237109b8fe403037639dbd2b5ce24823",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2b618f1_69f9d98d",
+        "filename": "repo/tests/selenium/wdio.conf.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-28T12:04:57Z",
+      "side": 1,
+      "message": "Do we need this file?\nI don\u0027t have an objection, just don\u0027t know. What I notice is that WikibaseLexeme does not have it, for instance.",
+      "revId": "b6fd6597237109b8fe403037639dbd2b5ce24823",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
