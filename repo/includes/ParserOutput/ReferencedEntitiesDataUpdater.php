@@ -7,10 +7,12 @@ use DataValues\UnboundedQuantityValue;
 use LinkBatch;
 use ParserOutput;
 use Title;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -25,7 +27,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  */
-class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDataUpdater {
+class ReferencedEntitiesDataUpdater implements EntityParserOutputDataUpdater {
 
 	/**
 	 * @var EntityTitleLookup
@@ -63,12 +65,25 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		return array_values( $this->entityIds );
 	}
 
+	public function processEntity( EntityDocument $entity ) {
+		foreach ( $entity->getStatements() as $statement ) {
+			$this->processStatement( $statement );
+		}
+
+		// TODO: this is silly and will change in the follow-up
+		if ( $entity instanceof Item ) {
+			foreach ( $entity->getSiteLinkList() as $siteLink ) {
+				$this->processSiteLink( $siteLink );
+			}
+		}
+	}
+
 	/**
 	 * Finds linked entities in a Statement.
 	 *
 	 * @param Statement $statement
 	 */
-	public function processStatement( Statement $statement ) {
+	private function processStatement( Statement $statement ) {
 		foreach ( $statement->getAllSnaks() as $snak ) {
 			$this->processSnak( $snak );
 		}
@@ -108,7 +123,7 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		}
 	}
 
-	public function processSiteLink( SiteLink $siteLink ) {
+	private function processSiteLink( SiteLink $siteLink ) {
 		foreach ( $siteLink->getBadges() as $badge ) {
 			$this->entityIds[$badge->getSerialization()] = $badge;
 		}

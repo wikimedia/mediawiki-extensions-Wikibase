@@ -182,8 +182,8 @@ class EntityParserOutputGeneratorFactory {
 				$this->entityTitleLookup,
 				$this->externalEntityIdParser
 			),
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
+			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
 		];
 
 		if ( !empty( $this->preferredPageImagesProperties )
