@@ -10,6 +10,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -80,16 +81,9 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		array $expected
 	) {
 		$instance = $this->newInstance();
+		$entity = $this->createEntityWithStatementsAndSiteLinks( $statements, $siteLinks );
 
-		foreach ( $statements as $statement ) {
-			$instance->processStatement( $statement );
-		}
-
-		if ( $siteLinks !== null ) {
-			foreach ( $siteLinks as $siteLink ) {
-				$instance->processSiteLink( $siteLink );
-			}
-		}
+		$instance->processEntity( $entity );
 
 		$actual = array_map( function( EntityId $id ) {
 			return $id->getSerialization();
@@ -117,16 +111,9 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 			} ) );
 
 		$instance = $this->newInstance( count( $expected ) );
+		$entity = $this->createEntityWithStatementsAndSiteLinks( $statements, $siteLinks );
 
-		foreach ( $statements as $statement ) {
-			$instance->processStatement( $statement );
-		}
-
-		if ( $siteLinks !== null ) {
-			foreach ( $siteLinks as $siteLink ) {
-				$instance->processSiteLink( $siteLink );
-			}
-		}
+		$instance->processEntity( $entity );
 
 		$instance->updateParserOutput( $parserOutput );
 		$this->assertArrayEquals( $expected, $actual );
@@ -178,6 +165,10 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntityNamespace( $entityType );
+	}
+
+	private function createEntityWithStatementsAndSiteLinks( $statements, $siteLinks ) {
+		return new Item( null, null, $siteLinks, $statements );
 	}
 
 }
