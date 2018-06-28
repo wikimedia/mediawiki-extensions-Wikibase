@@ -140,7 +140,7 @@ class EntityParserOutputGenerator {
 	) {
 		$parserOutput = new ParserOutput();
 
-		$updater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdaters );
+		$updater = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
 		$updater->processEntity( $entity );
 		$updater->finish();
 
