@@ -48,6 +48,8 @@
 	"unconnectedpages": "ئەو پەڕانەی بەندی ویکیدراوەیان نییە",
 	"unconnectedpages-summary": "ئەم پەڕەیە لە پێڕستێکی ھەموو ئەو پەڕانە پێکھاتووە کە بەندی ویکیدراوەیان نییە. نوێترین پەڕەکان لە ئەوەڵەوە پیشان دەدرێن.",
 	"wikibase-unconnectedpages-submit": "پەڕەکان نیشان بدە",
+	"pageswithbadges": "ئەو پەڕانەی باجیان ھەیە",
+	"pageswithbadges-summary": "ئەم پەڕەیە ھەموو ئەو پەڕانە پێڕست دەکات کە باجیان ھەیە (نم. وتاری باش و وتاری ھەڵبژێردراو). پەڕە نوێکان یەکەمینەکانن لە پێڕستەکەدا.",
 	"wikibase-pageswithbadges-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "ھیچ",
