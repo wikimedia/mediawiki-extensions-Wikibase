@@ -90,7 +90,7 @@ HTML;
 
 	$templates['wikibase-statementview'] =
 <<<HTML
-<div class="wikibase-statementview wikibase-statement-$1 wb-$2">
+<div id="$1" class="wikibase-statementview wikibase-statement-$1 wb-$2">
 	<div class="wikibase-statementview-rankselector">$3</div>
 	<div class="wikibase-statementview-mainsnak-container">
 		<div class="wikibase-statementview-mainsnak" dir="auto"><!-- wikibase-snakview -->$4</div>
