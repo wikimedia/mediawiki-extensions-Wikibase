@@ -9,6 +9,7 @@ use SearchIndexField;
 use SearchIndexFieldDefinition;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -118,7 +119,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		/** @var Statement $statement */
 		foreach ( $entity->getStatements() as $statement ) {
 			$snak = $statement->getMainSnak();
-			$mainSnakString = $this->getWhitelistedSnakAsString( $snak );
+			$mainSnakString = $this->getWhitelistedSnakAsString( $snak, $statement->getGuid() );
 			if ( !is_null( $mainSnakString ) ) {
 				$data[] = $mainSnakString;
 				foreach ( $statement->getQualifiers() as $qualifier ) {
@@ -176,10 +177,11 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * e.g. P180=Q537, P240=1234567
 	 *
 	 * @param Snak $snak
+	 * @param string $guid Statement GUID to which this snak belongs
 	 * @return null|string
 	 * @throws MWException
 	 */
-	private function getWhitelistedSnakAsString( Snak $snak ) {
+	private function getWhitelistedSnakAsString( Snak $snak, $guid ) {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
 			return null;
 		}
@@ -189,7 +191,15 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 			return null;
 		}
 
-		$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		try {
+			$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		} catch ( PropertyDataTypeLookupException $e ) {
+			// T198091: looks like occasionally we get weird fails on indexing
+			// Log them but do not break indexing other data
+			wfLogWarning( __METHOD__ . ': Failed to look up property ' . $e->getPropertyId() .
+				' for ' . $guid );
+			return null;
+		}
 		if ( !array_key_exists( $propType, $this->indexedTypes ) &&
 			 !array_key_exists( $propertyId, $this->propertyIds ) ) {
 			return null;
