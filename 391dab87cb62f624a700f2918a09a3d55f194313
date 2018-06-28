@@ -22,6 +22,30 @@
       "revId": "391dab87cb62f624a700f2918a09a3d55f194313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f947036d_6e3ca8eb",
+        "filename": "docs/adr/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-06-28T15:56:52Z",
+      "side": 1,
+      "message": "\"decisions\" is missing indeed",
+      "parentUuid": "69a5fee8_ff263975",
+      "range": {
+        "startLine": 5,
+        "startChar": 5,
+        "endLine": 5,
+        "endChar": 66
+      },
+      "revId": "391dab87cb62f624a700f2918a09a3d55f194313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
