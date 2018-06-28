@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69a5fee8_ff263975",
+        "filename": "docs/adr/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-06-28T15:55:32Z",
+      "side": 1,
+      "message": "This sentence sounds like it\u0027s missing a word. Maybe \"decision\" is missing at the end?",
+      "range": {
+        "startLine": 5,
+        "startChar": 5,
+        "endLine": 5,
+        "endChar": 66
+      },
+      "revId": "391dab87cb62f624a700f2918a09a3d55f194313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
