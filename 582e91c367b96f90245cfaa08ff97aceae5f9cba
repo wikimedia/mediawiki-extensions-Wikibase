@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2c8331f_47df46d2",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T09:17:25Z",
+      "side": 1,
+      "message": "Open question about how best to move this into EditEntity but pass the value through to here.\n\nAs a new flag in EntityContent? :/\nAs a new param to all of the methods?",
+      "range": {
+        "startLine": 303,
+        "startChar": 2,
+        "endLine": 310,
+        "endChar": 3
+      },
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
