@@ -22,6 +22,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
+use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
+use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
+use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
@@ -197,6 +201,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
 			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) ),
 			new ReferencedEntitiesDataUpdater(
+				$this->newEntityReferenceExtractor(),
 				$entityTitleLookup,
 				$entityIdParser
 			)
@@ -383,7 +388,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityIdParser = new BasicEntityIdParser();
 
 		$dataUpdaters = [
-			new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityIdParser )
+			new ReferencedEntitiesDataUpdater(
+				$this->newEntityReferenceExtractor(),
+				$entityTitleLookup,
+				$entityIdParser
+			)
 		];
 
 		return new EntityParserOutputGenerator(
@@ -427,6 +436,17 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 					$entityTermsView
 				);
 			},
+		] );
+	}
+
+	private function newEntityReferenceExtractor() {
+		return new EntityReferenceExtractorDelegator( [
+			'item' => function() {
+				return new EntityReferenceExtractorCollection( [
+					new SiteLinkBadgeItemReferenceExtractor(),
+					new StatementEntityReferenceExtractor()
+				] );
+			}
 		] );
 	}
 
