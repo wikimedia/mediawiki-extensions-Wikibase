@@ -22,6 +22,52 @@
       "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b04a1c0_db0d220f",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T07:54:38Z",
+      "side": 1,
+      "message": "WANObjectCache is also used, and does not implement BagOStuff",
+      "range": {
+        "startLine": 11,
+        "startChar": 182,
+        "endLine": 11,
+        "endChar": 191
+      },
+      "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87fb6e31_219681cc",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T07:54:38Z",
+      "side": 1,
+      "message": "Might also need a wrapper for WANObjectCache.\nThis depends on what cache exactly you are thinking of using for wb_terms things",
+      "range": {
+        "startLine": 27,
+        "startChar": 213,
+        "endLine": 27,
+        "endChar": 222
+      },
+      "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
