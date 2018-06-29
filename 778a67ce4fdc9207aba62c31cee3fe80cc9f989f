@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "279072a0_e6f513b5",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T12:48:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t have to be part of this patch, but should probably happen. \nWe do need the other fields eventually, directly or indirectly, to load the Content object.\nThe canonical way of doing this is to use getQueryInfo and then later newRevisionRecordFromRow.\nThat way, this class wouldn\u0027t have to know anything about the database schema.",
+      "parentUuid": "6f1cf76c_d90fbe14",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2fb74dfc_ccbda0f2",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 5
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Sounds follow up worthy",
       "parentUuid": "2fb74dfc_ccbda0f2",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ad136ec_1b4b676b",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T12:48:04Z",
+      "side": 1,
+      "message": "Yea... should have a todo here, or a phab ticket, or both.",
+      "parentUuid": "6ac45e4f_72c1731b",
       "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true

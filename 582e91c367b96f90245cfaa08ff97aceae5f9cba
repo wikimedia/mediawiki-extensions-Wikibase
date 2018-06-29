@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "a66b4851_adad70a9",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T12:48:04Z",
+      "side": 1,
+      "message": "It does, but there is a race condition between the caller doing this check and the actual insert. \nCalling hasEditConflict() prevents the race condition, since it grabs and remembers the parent revision as part of the updater\u0027s state, and then checks it within the transaction that updates the revision table. This is the main  reason for having a PageUpdater object: it acts as a CAS bracket.",
+      "parentUuid": "0442a6dd_f94274db",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2c8331f_47df46d2",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 4
