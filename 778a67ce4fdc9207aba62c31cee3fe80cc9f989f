@@ -22,6 +22,30 @@
       "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8873c911_be111fa7",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T10:43:21Z",
+      "side": 1,
+      "message": "This WILL cause issues. It\u0027s probably ok-ish for now, but not nice at all, and there is no easy way to do this  right.\n\nFor now, this code needs a big fat WARNING pointing to https://phabricator.wikimedia.org/T198467",
+      "parentUuid": "f1986856_95b315cf",
+      "range": {
+        "startLine": 185,
+        "startChar": 3,
+        "endLine": 185,
+        "endChar": 25
+      },
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

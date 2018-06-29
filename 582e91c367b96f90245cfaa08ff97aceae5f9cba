@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b56ec129_46002a95",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T10:43:21Z",
+      "side": 1,
+      "message": "Uuuuh.... this is a pretty big can of worms... \n\nAs far as I can see, returning [ null, null ] here will trigger\n\n  throw new BadRevisionException( \"No such revision found for $entityId: $revisionId\" );\n\nin line 124.\n\nThat\u0027s misleading, but probably has to be good enough for now. The code that returns [ null, null ] needs a big fat WARNING comment, and a reference to the relevant ticket. https://phabricator.wikimedia.org/T198467",
+      "parentUuid": "3966b59f_b64a152d",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f807e6ec_deeba2b6",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 4
@@ -130,6 +148,30 @@
       "side": 1,
       "message": "flags as an array of strings does sound much less awkward.",
       "parentUuid": "9975a84b_3867c85a",
+      "range": {
+        "startLine": 303,
+        "startChar": 2,
+        "endLine": 310,
+        "endChar": 3
+      },
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14477158_49bff310",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T10:43:21Z",
+      "side": 1,
+      "message": "More flexible and more obvious. We need some kind of \"squishy\" interface here for passing flags. Otherwise, we either make this interface brittle by binding it to closely to the underlying mechanisms, or we can\u0027t make use of new features of the underlying mechanism.",
+      "parentUuid": "93244be9_0061b8ba",
       "range": {
         "startLine": 303,
         "startChar": 2,
