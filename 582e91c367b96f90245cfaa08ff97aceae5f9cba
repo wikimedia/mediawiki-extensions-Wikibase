@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "cb265bbe_014eb290",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T12:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b56ec129_46002a95",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f807e6ec_deeba2b6",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 4
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "55972c05_87a9eeb9",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T12:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f807e6ec_deeba2b6",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40ae3e9e_1d65d2cc",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 4
@@ -83,6 +119,24 @@
       "writtenOn": "2018-06-29T09:36:22Z",
       "side": 1,
       "message": "This is still missing the base revision check\n\n  if ( $updater-\u003ehasEditConflict( $baseRevId ) ) {\n     throw new StorageException( Status::newFatal( \u0027edit-conflict\u0027 ) );\n  }",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0442a6dd_f94274db",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T12:12:36Z",
+      "side": 1,
+      "message": "Done.\n\nI hadn\u0027t done this before as the callers already appear to do this.",
+      "parentUuid": "40ae3e9e_1d65d2cc",
       "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -172,6 +226,30 @@
       "side": 1,
       "message": "More flexible and more obvious. We need some kind of \"squishy\" interface here for passing flags. Otherwise, we either make this interface brittle by binding it to closely to the underlying mechanisms, or we can\u0027t make use of new features of the underlying mechanism.",
       "parentUuid": "93244be9_0061b8ba",
+      "range": {
+        "startLine": 303,
+        "startChar": 2,
+        "endLine": 310,
+        "endChar": 3
+      },
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84e4e288_d3f642d6",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T12:12:36Z",
+      "side": 1,
+      "message": "squishy flags sound great, for now I have just updated the TODO per the comment in the next PS",
+      "parentUuid": "14477158_49bff310",
       "range": {
         "startLine": 303,
         "startChar": 2,
