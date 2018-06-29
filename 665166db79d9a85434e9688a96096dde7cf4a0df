@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5936421b_fb5d04a4",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T09:16:09Z",
+      "side": 1,
+      "message": "Removed this line as a MWException should never actually be thrown as $content-\u003eisRedirect is checked before calling getEntity, and getEntity is the source of the MWException",
+      "parentUuid": "e8f49605_765f7924",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1174d600_4936c710",
         "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-27T15:56:01Z",
       "side": 1,
       "message": "shothand: $revision-\u003egetContent( \u0027main\u0027 )",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26495cc5_2ee39fa5",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T09:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1174d600_4936c710",
       "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -64,6 +100,24 @@
       "writtenOn": "2018-06-27T15:56:01Z",
       "side": 1,
       "message": "This should be in EditEntity I guess",
+      "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6680d275_dc1767a7",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T09:16:09Z",
+      "side": 1,
+      "message": "Hmm, and this could be passed through to saveEntity and thus to here using flags?\nAnother could be defined in EntityContent, but that seems a bit ugly :/\nOr add a new param to all of the method calls, also ugly.",
+      "parentUuid": "24c9fcd6_ecd790e3",
       "revId": "665166db79d9a85434e9688a96096dde7cf4a0df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
