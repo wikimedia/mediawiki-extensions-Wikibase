@@ -45,7 +45,7 @@
 	"wikibase-publish-inprogress": "發佈中…",
 	"wikibase-remove-inprogress": "移除中...",
 	"wikibase-statementlistview-add": "加入值",
-	"wikibase-statementgrouplistview-add": "加入",
+	"wikibase-statementgrouplistview-add": "添加聲明",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "更多其他語言",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "設定",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "在頁面讀取時以我所有的語言顯示標籤、別名與描述",
