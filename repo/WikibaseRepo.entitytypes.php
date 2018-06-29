@@ -34,6 +34,9 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
+use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
+use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
+use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
@@ -161,6 +164,12 @@ return [
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
+		'entity-reference-extractor-callback' => function() {
+			return new EntityReferenceExtractorCollection( [
+				new SiteLinkBadgeItemReferenceExtractor(),
+				new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getEntityIdParser() )
+			] );
+		},
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -252,6 +261,9 @@ return [
 		},
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
+		},
+		'entity-reference-extractor-callback' => function() {
+			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getEntityIdParser() );
 		},
 	]
 ];
