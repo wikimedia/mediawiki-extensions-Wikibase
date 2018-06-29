@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "5e490dc6_bcb6ca6c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T09:36:22Z",
+      "side": 1,
+      "message": "This can in theory return null, if the content is suppressed. That should never be the case for the current revision, but this code is also used to load old revisions, right?\n\nLooking at the old code, it apparently just bypassed content suppression.... not good :)",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f807e6ec_deeba2b6",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T09:36:22Z",
+      "side": 1,
+      "message": "This block is not needed, PageUpdater does this, and the relevant exception will  be thrown in line 320.",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40ae3e9e_1d65d2cc",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T09:36:22Z",
+      "side": 1,
+      "message": "This is still missing the base revision check\n\n  if ( $updater-\u003ehasEditConflict( $baseRevId ) ) {\n     throw new StorageException( Status::newFatal( \u0027edit-conflict\u0027 ) );\n  }",
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2c8331f_47df46d2",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 4
@@ -13,6 +64,30 @@
       "writtenOn": "2018-06-29T09:17:25Z",
       "side": 1,
       "message": "Open question about how best to move this into EditEntity but pass the value through to here.\n\nAs a new flag in EntityContent? :/\nAs a new param to all of the methods?",
+      "range": {
+        "startLine": 303,
+        "startChar": 2,
+        "endLine": 310,
+        "endChar": 3
+      },
+      "revId": "582e91c367b96f90245cfaa08ff97aceae5f9cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9975a84b_3867c85a",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T09:36:22Z",
+      "side": 1,
+      "message": "For the purpose of this patch, just update the todo:\n\n  // TODO: this logic should not be in the storage layer, it\u0027s here for compatibility\n  // with 1.31 behavior. Applying the \u0027autopatrol\u0027 right should be done in the same\n  // place the \u0027bot\u0027 right is handled and passed down, perhaps via the $flags parameter.\n  // Relevant callers are EditEntity, PropertyDataTypeChanger, and ItemMergeInteractor.\n\nTo make this less awkward, $flags could become an array of strings, with B/C code for handling an int value.",
+      "parentUuid": "a2c8331f_47df46d2",
       "range": {
         "startLine": 303,
         "startChar": 2,
