@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use stdClass;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -90,38 +89,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		}
 
 		return $rows;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param int $revisionId
-	 * @param string $mode (WikiPageEntityMetaDataAccessor::LATEST_FROM_REPLICA,
-	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_MASTER)
-	 *
-	 * @throws DBQueryError
-	 * @throws InvalidArgumentException When $entityId does not belong the repository of this lookup
-	 *
-	 * @return stdClass|bool
-	 */
-	public function loadRevisionInformationByRevisionId(
-		EntityId $entityId,
-		$revisionId,
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
-	) {
-		$this->assertEntityIdFromRightRepository( $entityId );
-
-		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_REPLICA );
-
-		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
-			// Try loading from master, unless the caller only wants replica data.
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
-				. " with $revisionId from DB_MASTER." );
-
-			$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_MASTER );
-		}
-
-		return $row;
 	}
 
 	/**
@@ -216,38 +183,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			'page_latest',
 			'page_is_redirect',
 		];
-	}
-
-	/**
-	 * Selects revision information from the page and revision tables.
-	 *
-	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param int $revisionId The desired revision id
-	 * @param int $connType DB_REPLICA or DB_MASTER
-	 *
-	 * @throws DBQueryError If the query fails.
-	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
-	 */
-	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
-		$db = $this->getConnection( $connType );
-
-		$join = [];
-		$join['page'] = [ 'INNER JOIN', 'rev_page=page_id' ];
-
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
-
-		$row = $db->selectRow(
-			[ 'revision', 'page' ],
-			$this->selectFields(),
-			[ 'rev_id' => $revisionId ],
-			__METHOD__,
-			[],
-			$join
-		);
-
-		$this->releaseConnection( $db );
-
-		return $row;
 	}
 
 	/**

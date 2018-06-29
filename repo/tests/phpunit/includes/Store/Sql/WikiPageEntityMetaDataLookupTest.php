@@ -148,85 +148,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		return $db;
 	}
 
-	public function testLoadRevisionInformationById_latest() {
-		$entityRevision = $this->data[0];
-
-		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByRevisionId( $entityRevision->getEntity()->getId(), $entityRevision ->getRevisionId() );
-
-		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
-		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
-	}
-
-	public function testLoadRevisionInformationById_masterFallback() {
-		$entityRevision = $this->data[0];
-
-		// Make sure we have two calls to getConnection: One that asks for a
-		// replica and one that asks for the master.
-		$lookup = $this->getLookupWithLaggedConnection( 0, 1, 2 );
-
-		$result = $lookup->loadRevisionInformationByRevisionId(
-			$entityRevision->getEntity()->getId(),
-			$entityRevision ->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
-		);
-
-		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
-		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
-	}
-
-	public function testLoadRevisionInformationById_noFallback() {
-		$entityRevision = $this->data[0];
-
-		// Should do only one getConnection call.
-		$lookup = $this->getLookupWithLaggedConnection( 0, 1, 1 );
-
-		$result = $lookup->loadRevisionInformationByRevisionId(
-			$entityRevision->getEntity()->getId(),
-			$entityRevision ->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_REPLICA
-		);
-
-		// No fallback: Lagged data is omitted.
-		$this->assertFalse( $result );
-	}
-
-	public function testLoadRevisionInformationById_old() {
-		$entityRevision = $this->data[2];
-
-		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByRevisionId(
-				$entityRevision->getEntity()->getId(),
-				$entityRevision ->getRevisionId() - 1 // There were two edits to this item in sequence
-			);
-
-		$this->assertEquals( $entityRevision->getRevisionId() - 1, $result->rev_id );
-		// Page latest should reflect that this is not the latest revision
-		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
-	}
-
-	public function testLoadRevisionInformationById_wrongRevision() {
-		$entityRevision = $this->data[2];
-
-		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByRevisionId(
-				$entityRevision->getEntity()->getId(),
-				$entityRevision ->getRevisionId() * 2 // Doesn't exist
-			);
-
-		$this->assertFalse( $result );
-	}
-
-	public function testLoadRevisionInformationById_notFound() {
-		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByRevisionId(
-				new ItemId( 'Q823487354' ),
-				823487354
-			);
-
-		$this->assertFalse( $result );
-	}
-
 	/**
 	 * @param EntityId[] $entityIds
 	 * @param stdClass[] $result
@@ -318,18 +239,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testGivenEntityFromOtherRepository_loadRevisionInformationByRevisionIdThrowsException() {
-		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
-
-		$this->setExpectedException( InvalidArgumentException::class );
-
-		$lookup->loadRevisionInformationByRevisionId(
-			new ItemId( 'foo:Q123' ),
-			1,
-			EntityRevisionLookup::LATEST_FROM_REPLICA
-		);
-	}
-
 	public function testGivenEntityIdWithRepositoryPrefix_loadRevisionInformationStripsPrefix() {
 		$revision = $this->data[0];
 		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
@@ -350,24 +259,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			$revision->getRevisionId(),
 			$result[$prefixedId]->rev_id
 		);
-	}
-
-	public function testGivenEntityIdWithRepositoryPrefix_loadRevisionInformationByIdStripsPrefix() {
-		$revision = $this->data[0];
-		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
-
-		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, 'foo' );
-
-		$prefixedId = 'foo:' . $unprefixedId;
-
-		$result = $lookup->loadRevisionInformationByRevisionId(
-			new ItemId( $prefixedId ),
-			$revision->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_REPLICA
-		);
-
-		$this->assertInstanceOf( stdClass::class, $result );
-		$this->assertEquals( $revision->getRevisionId(), $result->rev_id );
 	}
 
 	/**

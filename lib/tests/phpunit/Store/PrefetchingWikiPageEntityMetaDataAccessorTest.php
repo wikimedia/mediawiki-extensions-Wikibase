@@ -220,24 +220,6 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$this->assertSame( [ 'Q1' => 'data' ], $result );
 	}
 
-	public function testLoadRevisionInformationByRevisionId() {
-		// This function is a very simple, it's just a wrapper around the
-		// lookup function.
-		$q1 = new ItemId( 'Q1' );
-
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
-		$lookup->expects( $this->once() )
-			->method( 'loadRevisionInformationByRevisionId' )
-			->with( $q1, 123, EntityRevisionLookup::LATEST_FROM_MASTER )
-			->will( $this->returnValue( 'passthrough' ) );
-
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
-
-		$result = $accessor->loadRevisionInformationByRevisionId( $q1, 123 );
-
-		$this->assertSame( 'passthrough', $result );
-	}
-
 	public function testLoadLatestRevisionIds_usesCache() {
 		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );

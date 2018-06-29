@@ -3,11 +3,9 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
+use InvalidArgumentException;
 use MediaWiki\Storage\RevisionAccessException;
 use MediaWiki\Storage\RevisionStore;
-use MWContentSerializationException;
-use MWException;
-use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
@@ -35,6 +33,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $contentCodec;
 
 	/**
+	 * @deprecated
 	 * @var WikiPageEntityMetaDataAccessor
 	 */
 	private $entityMetaDataAccessor;
@@ -45,15 +44,22 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $revisionStore;
 
 	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param RevisionStore $revisionStore
+	 * @param string $repositoryName The name of the repository to lookup from (use an empty string for the local repository)
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
 		RevisionStore $revisionStore,
+		$repositoryName = '',
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
@@ -62,6 +68,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
 		$this->revisionStore = $revisionStore;
+		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -83,6 +90,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
+		$this->assertEntityIdFromRightRepository( $entityId );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
@@ -90,39 +98,24 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
 
-		if ( $revisionId > 0 ) {
-			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
-		} else {
-			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
-			$row = $rows[$entityId->getSerialization()];
+		/** @var EntityRedirect $redirect */
+		list( $entityRevision, $redirect ) = $this->loadEntity( $revisionId );
+
+		if ( $redirect !== null ) {
+			throw new RevisionedUnresolvedRedirectException(
+				$entityId,
+				$redirect->getTargetId(),
+				$revisionId
+			);
 		}
 
-		if ( $row ) {
-			/** @var EntityRedirect $redirect */
-			try {
-				list( $entityRevision, $redirect ) = $this->loadEntity( $row );
-			} catch ( MWContentSerializationException $ex ) {
-				throw new StorageException( 'Failed to unserialize the content object.', 0, $ex );
-			}
-
-			if ( $redirect !== null ) {
-				throw new RevisionedUnresolvedRedirectException(
-					$entityId,
-					$redirect->getTargetId(),
-					(int)$row->rev_id,
-					$row->rev_timestamp
-				);
-			}
-
-			if ( $entityRevision === null ) {
-				// This happens when there is a problem with the external store or if access is forbidden
-				wfLogWarning( __METHOD__ . ': Entity not loaded for ' . $entityId );
-			}
+		if ( $entityRevision === null ) {
+			// This happens when there is a problem with the external store or if access is forbidden
+			wfLogWarning( __METHOD__ . ': Entity not loaded for ' . $entityId );
 		}
 
 		if ( $entityRevision !== null && !$entityRevision->getEntity()->getId()->equals( $entityId ) ) {
-			// This can happen when giving a revision ID that doesn't belong to the given entity,
-			// or some meta data is incorrect.
+			// This can happen when giving a revision ID that doesn't belong to the given entity
 			$actualEntityId = $entityRevision->getEntity()->getId()->getSerialization();
 
 			// Get the revision id we actually loaded, if none was passed explicitly
@@ -147,6 +140,9 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
+		$this->assertEntityIdFromRightRepository( $entityId );
+
+		// TODO stop using entityMetaDataAccessor
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 		$row = $rows[$entityId->getSerialization()];
 
@@ -158,17 +154,14 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	}
 
 	/**
-	 * Construct an EntityRevision object from a database row from the revision and text tables.
-	 *
-	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
-	 *        should contain the relevant fields from the revision and/or text table.
+	 * @param int $revisionId
 	 *
 	 * @throws StorageException
 	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
-	private function loadEntity( $row ) {
-		$revision = $this->revisionStore->getRevisionById( $row->rev_id );
+	private function loadEntity( $revisionId ) {
+		$revision = $this->revisionStore->getRevisionById( $revisionId );
 
 		try {
 			// TODO The slot to load the entity from should be configurable
@@ -191,6 +184,29 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		} else {
 			return [ null, $content->getEntityRedirect() ];
 		}
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws InvalidArgumentException When $entityId does not belong the repository of this lookup
+	 */
+	private function assertEntityIdFromRightRepository( EntityId $entityId ) {
+		if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
+			throw new InvalidArgumentException(
+				'Could not load data from the database of repository: ' .
+				$entityId->getRepositoryName()
+			);
+		}
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
+	 */
+	private function isEntityIdFromRightRepository( EntityId $entityId ) {
+		return $entityId->getRepositoryName() === $this->repositoryName;
 	}
 
 }

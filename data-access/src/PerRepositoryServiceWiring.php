@@ -85,6 +85,7 @@ return [
 			$codec,
 			$metaDataAccessor,
 			$revisionStoreFactory->getRevisionStore( $services->getDatabaseName() ),
+			$services->getRepositoryName(),
 			$services->getDatabaseName()
 		);
 	},

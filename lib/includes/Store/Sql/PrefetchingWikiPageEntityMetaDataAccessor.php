@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
 use MapCacheLRU;
-use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -24,7 +23,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	/**
 	 * @var WikiPageEntityMetaDataAccessor
 	 */
-	private $lookup;
+	private $metaDataAccessor;
 
 	/**
 	 * @var int
@@ -42,11 +41,11 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	private $toFetch = [];
 
 	/**
-	 * @param WikiPageEntityMetaDataAccessor $lookup
+	 * @param WikiPageEntityMetaDataAccessor $metaDataAccessor
 	 * @param int $maxCacheKeys Maximum number of entries to cache (defaults to 1000)
 	 */
-	public function __construct( WikiPageEntityMetaDataAccessor $lookup, $maxCacheKeys = 1000 ) {
-		$this->lookup = $lookup;
+	public function __construct( WikiPageEntityMetaDataAccessor $metaDataAccessor, $maxCacheKeys = 1000 ) {
+		$this->metaDataAccessor = $metaDataAccessor;
 		$this->maxCacheKeys = $maxCacheKeys;
 		$this->cache = new MapCacheLRU( $maxCacheKeys );
 	}
@@ -148,7 +147,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 			// Don't attempt to use the cache in case we are asked to fetch
 			// from master. Also don't put load on the master by just fetching
 			// everything in $this->toFetch.
-			$data = $this->lookup->loadRevisionInformation( $entityIds, $mode );
+			$data = $this->metaDataAccessor->loadRevisionInformation( $entityIds, $mode );
 			// Cache the data, just in case it will be needed again.
 			$this->store( $data );
 			// Make sure we wont fetch these next time.
@@ -169,26 +168,6 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		}
 
 		return $data;
-	}
-
-	/**
-	 * @see WikiPageEntityMetaDataAccessor::loadRevisionInformationByRevisionId
-	 *
-	 * @param EntityId $entityId
-	 * @param int $revisionId
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
-	 *
-	 * @return stdClass|bool false if no such entity exists
-	 */
-	public function loadRevisionInformationByRevisionId(
-		EntityId $entityId,
-		$revisionId,
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
-	) {
-		// Caching this would have little or no benefit, but would be rather complex.
-		return $this->lookup->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
 	}
 
 	/**
@@ -225,7 +204,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		if ( $entityIds !== [] ) {
 			$revisionIds = array_merge(
 				$revisionIds,
-				$this->lookup->loadLatestRevisionIds( array_values( $entityIds ), $mode )
+				$this->metaDataAccessor->loadLatestRevisionIds( array_values( $entityIds ), $mode )
 			);
 			// no caching for these – would require a separate cache, not worth it
 		}
@@ -239,7 +218,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		}
 
 		try {
-			$data = $this->lookup->loadRevisionInformation( $this->toFetch, $mode );
+			$data = $this->metaDataAccessor->loadRevisionInformation( $this->toFetch, $mode );
 		} catch ( InvalidArgumentException $exception ) {
 			// Do not store invalid entity ids (causing exceptions in lookup).
 

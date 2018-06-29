@@ -107,6 +107,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$revisionId = $testEntityRevision->getRevisionId();
 
 		$realMetaDataLookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() );
+
+		// TODO fix test, don't used meta data lookup
+
 		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
