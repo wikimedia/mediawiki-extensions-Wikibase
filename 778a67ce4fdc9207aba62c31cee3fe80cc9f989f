@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1986856_95b315cf",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T10:18:16Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like this will cause issues, but to make this less evil I have to change the contract of EntityRevisionLookup::getEntityRevision to state that null can mean access to a revision is forbidden as it doesn\u0027t yet state that.\n\nDo we have some exception that could be better thrown here instead?",
+      "range": {
+        "startLine": 185,
+        "startChar": 3,
+        "endLine": 185,
+        "endChar": 25
+      },
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
