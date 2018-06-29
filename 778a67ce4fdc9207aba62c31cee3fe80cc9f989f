@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "9e5087ce_ff14a178",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T11:08:54Z",
+      "side": 1,
+      "message": "Ideally, we\u0027d change this from returning stdClass to returning a RevisionRecord.\n\nWith the old Revision class, this was not possible because Revision is bound to the local wiki, and this needs to support cross-wiki lookups.",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dd32fb2_bb221242",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T11:08:54Z",
+      "side": 1,
+      "message": "This method should probably go away and be replaced by a call to RevisionStore::getQueryInfo()",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fb74dfc_ccbda0f2",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-06-29T11:08:54Z",
+      "side": 1,
+      "message": "Ideally, all direct database access would go away. This was only really needed to support cross-wiki lookups. RevisionStore supports that, so we should use it.\n\nAt the very least, this should make use of getQueryInfo(), and probably also use newRevisionrecordFromRow.",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1986856_95b315cf",
         "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
         "patchSetId": 5
