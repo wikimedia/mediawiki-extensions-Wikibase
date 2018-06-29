@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "3ced791a_a7b1dfb1",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:58:27Z",
+      "side": 1,
+      "message": "Ah, David explained to me about relation chains, all is well :)",
+      "parentUuid": "f006f5cb_95935fce",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f5e16ec_804c57f0",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
