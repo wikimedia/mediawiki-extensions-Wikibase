@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a8b0315e_34b92566",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "As we discussed the indexing *is* in a separate patch",
+      "parentUuid": "030c1604_06ef42e3",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc90baa7_958539ac",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f006f5cb_95935fce",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Yeah ... not sure what the done thing is here\n\nThis patch won\u0027t work without the other, so I didn\u0027t want to commit it without lest it got merged by accident",
+      "parentUuid": "fc90baa7_958539ac",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f5e16ec_804c57f0",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -47,6 +83,30 @@
       "writtenOn": "2018-06-27T09:04:15Z",
       "side": 1,
       "message": "string[]",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 14
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2056896_b4967ea8",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f5e16ec_804c57f0",
       "range": {
         "startLine": 51,
         "startChar": 9,
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "aef5967f_a514bbbe",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2498924d_03fe6876",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 16
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e7b1e15_ecf80952",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -93,6 +177,30 @@
       "writtenOn": "2018-06-27T09:04:15Z",
       "side": 1,
       "message": "I wonder if we should disallow \u0027|\u0027 in these strings, it may completely break your logic here if they are allowed.",
+      "range": {
+        "startLine": 59,
+        "startChar": 29,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e867c463_a728cd09",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "I didn\u0027t want to be limiting the names of foreign repos in wikibase, so I put in a workaround for this (see getQueryStrings() )",
+      "parentUuid": "3e7b1e15_ecf80952",
       "range": {
         "startLine": 59,
         "startChar": 29,
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "3901c5c5_93948017",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d1f71a_4826e0f6",
+      "range": {
+        "startLine": 89,
+        "startChar": 22,
+        "endLine": 89,
+        "endChar": 23
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db20232d_882f9367",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -139,6 +271,30 @@
       "writtenOn": "2018-06-26T16:53:58Z",
       "side": 1,
       "message": "should this be extracted as a var outside this loop to avoid reconstructing it on every iteration?",
+      "range": {
+        "startLine": 131,
+        "startChar": 20,
+        "endLine": 131,
+        "endChar": 39
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "029842d4_07ff55da",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db20232d_882f9367",
       "range": {
         "startLine": 131,
         "startChar": 20,
@@ -168,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "23ff8a04_02ba203a",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b28e7a2c_105a06cf",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1eca34aa_fe05080b",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -185,6 +359,24 @@
     },
     {
       "key": {
+        "uuid": "a5cfbd4a_620ccc43",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Changed to hardcoded, as discussed",
+      "parentUuid": "1eca34aa_fe05080b",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a81dbdb_45075258",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -196,6 +388,30 @@
       "writtenOn": "2018-06-26T16:53:58Z",
       "side": 1,
       "message": "nitpick, I think P can be removed (?\u003cname\u003ePATTERN) is equivalent",
+      "range": {
+        "startLine": 160,
+        "startChar": 25,
+        "endLine": 160,
+        "endChar": 26
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c98546_0ec21253",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a81dbdb_45075258",
       "range": {
         "startLine": 160,
         "startChar": 25,
@@ -231,6 +447,30 @@
     },
     {
       "key": {
+        "uuid": "d58d2116_f42c7573",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d56e80ff_2f510762",
+      "range": {
+        "startLine": 162,
+        "startChar": 45,
+        "endLine": 162,
+        "endChar": 68
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eda4798c_0c69e4f3",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -254,6 +494,30 @@
     },
     {
       "key": {
+        "uuid": "92b8aaa6_356474bf",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda4798c_0c69e4f3",
+      "range": {
+        "startLine": 165,
+        "startChar": 3,
+        "endLine": 165,
+        "endChar": 39
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07f6d182_09045c64",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 5
@@ -265,6 +529,30 @@
       "writtenOn": "2018-06-26T16:53:58Z",
       "side": 1,
       "message": "instead of relying on non greedy could you use [^\u003c\u003e\u003d]+ and drop the /U modifier\nalso is it expected that you accept empty strings here?",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 6
+      },
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31f169a5_7cdcce11",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "I don\u0027t want to accept stuff like \u003d\u003d\u003d or \u003e\u003e ... is it not ok to have /U ?",
+      "parentUuid": "07f6d182_09045c64",
       "range": {
         "startLine": 166,
         "startChar": 4,
@@ -305,6 +593,24 @@
       "writtenOn": "2018-06-27T09:04:15Z",
       "side": 1,
       "message": "please ignore, the class comments include some examples.",
+      "parentUuid": "8b902e48_4d0c3e3d",
+      "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dbf90af_2f790a9c",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-06-29T15:41:28Z",
+      "side": 1,
+      "message": "ignoring, as discussed :)",
       "parentUuid": "8b902e48_4d0c3e3d",
       "revId": "4bf7e11e0baad3eaefbe8a5062bea500efdadd74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
