@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
@@ -45,7 +46,9 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 			$this->getMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
 			new ItemIdParser(),
-			$this->getMock( Serializer::class )
+			$this->getMock( Serializer::class ),
+			$this->getMockBuilder( EntityReferenceExtractorFactory::class )
+				->disableOriginalConstructor()->getMock()
 		);
 	}
 
