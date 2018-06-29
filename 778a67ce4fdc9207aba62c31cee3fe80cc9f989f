@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "1d5765da_3ce856fa",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T12:54:51Z",
+      "side": 1,
+      "message": "I actually made a WIP patch to start removing this class, starting with MetaDataAccessor::loadRevisionInformationByRevisionId, as I\u0027m not sure any of it is needed any more?\n\nMore tests that I was expecting to fail failed though so I don\u0027t think I\u0027ll have the time to finish that one.",
+      "parentUuid": "279072a0_e6f513b5",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2fb74dfc_ccbda0f2",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 5
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Yea... should have a todo here, or a phab ticket, or both.",
       "parentUuid": "6ac45e4f_72c1731b",
+      "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bc43e03_fee18caf",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-06-29T12:54:51Z",
+      "side": 1,
+      "message": "I\u0027ll let you make the phab ticket ;)",
+      "parentUuid": "9ad136ec_1b4b676b",
       "revId": "778a67ce4fdc9207aba62c31cee3fe80cc9f989f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
