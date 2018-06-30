@@ -6,5 +6,8 @@
 	},
 	"wikibase-edit": "ꯁꯦꯝꯒꯠꯄꯥ",
 	"wikibase-add": "ꯇꯤꯟꯁꯤꯟꯂꯨ",
-	"wikibase-sitelinks-special": "ꯑꯇꯣꯞꯄꯥ ꯃꯐꯝꯗꯥ"
+	"wikibase-label-empty": "No label defined",
+	"wikibase-description-empty": "ꯐꯖꯅꯥ ꯁꯟꯗꯣꯛꯅꯥ ꯇꯥꯛꯄꯥ ꯂꯩꯇꯦ",
+	"wikibase-sitelinks-special": "ꯑꯇꯣꯞꯄꯥ ꯃꯐꯝꯗꯥ",
+	"wikibase-statementview-rank-normal": "ꯅꯣꯔꯃꯦꯜ ꯔꯦꯡ"
 }
