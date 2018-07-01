@@ -33,6 +33,23 @@
       "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c858b3ad_f0e1223b",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-01T23:27:10Z",
+      "side": 1,
+      "message": "So we do not store the qualifier property, and every quantity value is the same? I am not sure I understand it - what is the use case for this?",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
