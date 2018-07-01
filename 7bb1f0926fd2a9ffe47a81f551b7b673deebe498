@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6780a396_2ee4bbe4",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-01T23:24:39Z",
+      "side": 1,
+      "message": "This seems kinda broad. Are we sure we want all qualifiers of this type?",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f43a19ee_24c33ecc",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-01T23:24:39Z",
+      "side": 1,
+      "message": "I am not sure this is the correct approach - storing it in the separate field. This means we\u0027d have P123\u003dQ5 and P123\u003dQ5|3 stored as separate field, despite the latter containing the former. Can\u0027t we use subfields with proper analyzers instead?",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
