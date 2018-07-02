@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "51597060_1d676fe1",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T15:23:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but we have to decide whether to store the quantity data somehow. Basing the decision on its type seems to me to be cleaner and less likely to need to be changed regularly than a whitelist of P-ids ... perhaps there is another way we could make the decision though that I haven\u0027t thought of?",
+      "parentUuid": "6780a396_2ee4bbe4",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f43a19ee_24c33ecc",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce9a9c23_5188be9d",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T15:23:22Z",
+      "side": 1,
+      "message": "I know very little about analyzers, but what I think you\u0027re suggesting here is for an elastic analyzer to run at write time that would parse a statement and, if appropriate, write (some of) the data to a subfield?\n\nIf that is what you\u0027re suggesting the difficulty would again be in deciding what \"if appropriate\" means. Elastic doesn\u0027t have the datatype information that php has, it just has a string, so the only way I can think of that it could make that decision is a whitelist of P-ids, and having wikibase data stored in elastic code seems odd to me",
+      "parentUuid": "f43a19ee_24c33ecc",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c858b3ad_f0e1223b",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2018-07-01T23:27:10Z",
       "side": 1,
       "message": "So we do not store the qualifier property, and every quantity value is the same? I am not sure I understand it - what is the use case for this?",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7463ccad_15642563",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T15:23:22Z",
+      "side": 1,
+      "message": "Use case: \n* I have images that have the statement \u0027depicts\u003dcat\u0027 with qualifiers \u0027quantity\u003dX\u0027\n* I want to be able find images that depict more than 2 cats, or exactly one cat\n\nIn an earlier version of this I was storing the quantity property id (e.g. wd:P180\u003dwd:Q146[wd:P1114]|2) but when talking to dcausse about it we thought this storing more data then we really needed ... if you\u0027re doing integer comparisons to find something you don\u0027t really care that much about the exact Property you\u0027re doing the comparison on",
+      "parentUuid": "c858b3ad_f0e1223b",
       "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
