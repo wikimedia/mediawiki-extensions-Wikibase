@@ -121,7 +121,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->repoDB = $repoDB;
 		$this->repoSiteId = $repoSiteId;
 
-		$this->stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$this->stats = MediaWikiServices::getInstance()->getPerDbNameStatsdDataFactory();
 		$this->messageReporter = new NullMessageReporter();
 		$this->LBFactory = $LBFactory;
 	}

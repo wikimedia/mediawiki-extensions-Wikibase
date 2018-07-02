@@ -256,7 +256,7 @@ class DispatchChanges extends Maintenance {
 
 		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );
 
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$stats = MediaWikiServices::getInstance()->getPerDbNameStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.dispatchChanges.start' );
 
 		$passes = $maxPasses === PHP_INT_MAX ? "unlimited" : $maxPasses;
