@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "59d37637_ab8ce93a",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2018-07-02T21:18:12Z",
+      "side": 1,
+      "message": "Don\u0027t these get indexed as the same thing? P123\u003dQ5|3 with the configured analysis chain is the equivalent of [P123\u003dQ5, P123\u003dQ5, P123\u003dQ5]. The |3 is extra information stored into the term frequency field, query time would still look for `P123\u003dQ5`\n\nFor stas\u0027s suggestion I don\u0027t think the wikibase data wouldn\u0027t really be stored in elastic code, you would setup something like the `pattern capture token filter` in the wikibase analysis chain which runs a regex against incoming data and indexes the captured data.",
+      "parentUuid": "ce9a9c23_5188be9d",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c858b3ad_f0e1223b",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 7

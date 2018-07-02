@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef15ed27_b0c80f40",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2018-07-02T21:18:12Z",
+      "side": 1,
+      "message": "i\u0027m not sure how it would work here, but in CirrusSearch we generally feature flag things that are only available when our `extra` plugin is installed to elasticsearch.  This is typically done via $wgCirrusSearchWikimediaExtraPlugin, but that of course can\u0027t be used here.\n\nmaybe it\u0027s not too important, and simply needs to be documented that wikibase integration with CirrusSearch requires the extra plugin",
+      "revId": "8e5309f2ddc994a58b7aab96b014b57231fa9661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
