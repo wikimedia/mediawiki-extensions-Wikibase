@@ -179,6 +179,30 @@
     },
     {
       "key": {
+        "uuid": "ff3c2ac5_73265b95",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T10:30:31Z",
+      "side": 1,
+      "message": "sorry, the last solution (use lowercase_keyword) is not applicable because the term_freq query won\u0027t run the analyzer at search time.",
+      "parentUuid": "161b9d79_9adf8ccc",
+      "range": {
+        "startLine": 191,
+        "startChar": 75,
+        "endLine": 191,
+        "endChar": 76
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "079e9c06_5cde9a58",
         "filename": "view/autoload.php",
         "patchSetId": 9
