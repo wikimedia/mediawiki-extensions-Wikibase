@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "90853371_cd0a8789",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdaterCollection.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "`EntityParserOutputDataUpdater`, right?",
+      "range": {
+        "startLine": 25,
+        "startChar": 9,
+        "endLine": 25,
+        "endChar": 32
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84cade2f_7dbd28ad",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdaterCollection.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "Sooo much better than what was there before (EntityParserOutputDataUpdater)!",
+      "range": {
+        "startLine": 36,
+        "startChar": 10,
+        "endLine": 36,
+        "endChar": 30
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2df3db_dff28557",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdaterCollection.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "`$dataUpdater`",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 43
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d94cafe_a5368922",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 5
@@ -18,6 +87,121 @@
         "startChar": 3,
         "endLine": 143,
         "endChar": 10
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32768888_e7fdaaf6",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "Given there is no interface enforcing this (admittedly not introduced in this patch), do we know why this is separated? Only to ease testing?",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 21
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cd39d7a_0fee7cf8",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityParserOutputDataUpdaterCollectionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "`-\u003ewith( $parserOutput );` (make variable from below)",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 11
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7559f0c7_2e28e38b",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityParserOutputDataUpdaterCollectionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "likewise",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a83fd06c_03a68d1a",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityParserOutputDataUpdaterCollectionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "Will probably raise some eyebrows now that the refactoring is over... Keep regardless?",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 55
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3362362_0f1dac52",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityStatementDataUpdaterAdapterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-02T12:53:20Z",
+      "side": 1,
+      "message": "I prefer if use mentions all classes we operate on - but that\u0027s just an opinion, of course.",
+      "range": {
+        "startLine": 38,
+        "startChar": 22,
+        "endLine": 38,
+        "endChar": 35
       },
       "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
