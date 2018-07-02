@@ -22,7 +22,7 @@ class EntityParserOutputDataUpdaterCollection {
 	private $parserOutput;
 
 	/**
-	 * @var ParserOutputDataUpdater[]
+	 * @var EntityParserOutputDataUpdater[]
 	 */
 	private $dataUpdaters;
 
@@ -39,15 +39,10 @@ class EntityParserOutputDataUpdaterCollection {
 		$this->dataUpdaters = $dataUpdaters;
 	}
 
-	public function processEntity( EntityDocument $entity ) {
+	public function updateParserOutput( EntityDocument $entity ) {
 		foreach ( $this->dataUpdaters as $dataUpdater ) {
 			$dataUpdater->processEntity( $entity );
-		}
-	}
-
-	public function finish() {
-		foreach ( $this->dataUpdaters as $updater ) {
-			$updater->updateParserOutput( $this->parserOutput );
+			$dataUpdater->updateParserOutput( $this->parserOutput );
 		}
 	}
 

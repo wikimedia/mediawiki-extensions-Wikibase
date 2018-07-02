@@ -140,9 +140,8 @@ class EntityParserOutputGenerator {
 	) {
 		$parserOutput = new ParserOutput();
 
-		$updater = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
-		$updater->processEntity( $entity );
-		$updater->finish();
+		$updaterCollection = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
+		$updaterCollection->updateParserOutput( $entity );
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );

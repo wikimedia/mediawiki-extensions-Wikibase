@@ -23,29 +23,30 @@ class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\Tes
 
 	public function testUpdateParserOutput() {
 		$entity = new Item();
+		$parserOutput = new ParserOutput();
 
 		$dataUpdater1 = $this->getMock( EntityParserOutputDataUpdater::class );
 		$dataUpdater1->expects( $this->once() )
 			->method( 'processEntity' )
 			->with( $entity );
 		$dataUpdater1->expects( $this->once() )
-			->method( 'updateParserOutput' );
+			->method( 'updateParserOutput' )
+			->with( $parserOutput );
 
 		$dataUpdater2 = $this->getMock( EntityParserOutputDataUpdater::class );
 		$dataUpdater2->expects( $this->once() )
 			->method( 'processEntity' )
 			->with( $entity );
 		$dataUpdater2->expects( $this->once() )
-			->method( 'updateParserOutput' );
+			->method( 'updateParserOutput' )
+			->with( $parserOutput );
 
-		$instance = new EntityParserOutputDataUpdaterCollection( new ParserOutput(), [
+		$instance = new EntityParserOutputDataUpdaterCollection( $parserOutput, [
 			$dataUpdater1,
 			$dataUpdater2
 		] );
 
-		$instance->processEntity( $entity );
-
-		$instance->finish();
+		$instance->updateParserOutput( $entity );
 	}
 
 	/**
@@ -62,14 +63,6 @@ class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\Tes
 			[ [ 'notAnObject' ] ],
 			[ [ $this->getMock( ParserOutputDataUpdater::class ) ] ],
 		];
-	}
-
-	public function testProcessEntityDoesNotTriggerGetters() {
-		$entity = $this->getMock( Item::class );
-		$entity->expects( $this->never() )->method( 'getStatements' );
-		$entity->expects( $this->never() )->method( 'getSiteLinkList' );
-		$instance = new EntityParserOutputDataUpdaterCollection( new ParserOutput(), [] );
-		$instance->processEntity( $entity );
 	}
 
 }
