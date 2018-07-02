@@ -93,6 +93,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Serialization\\RepositorySpecificDataValueDeserializerFactory' => __DIR__ . '/includes/Serialization/RepositorySpecificDataValueDeserializerFactory.php',
 	'Wikibase\\Lib\\Serialization\\SerializationModifier' => __DIR__ . '/includes/Serialization/SerializationModifier.php',
 	'Wikibase\\Lib\\SimpleCacheWithBagOStuff' => __DIR__ . '/includes/SimpleCacheWithBagOStuff.php',
+	'Wikibase\\Lib\\SimpleWANObjectCache' => __DIR__ . '/includes/SimpleWANObjectCache.php',
 	'Wikibase\\Lib\\SitesModuleWorker' => __DIR__ . '/includes/Modules/SitesModuleWorker.php',
 	'Wikibase\\Lib\\Sites\\SiteMatrixParser' => __DIR__ . '/includes/Sites/SiteMatrixParser.php',
 	'Wikibase\\Lib\\Sites\\SitesBuilder' => __DIR__ . '/includes/Sites/SitesBuilder.php',
