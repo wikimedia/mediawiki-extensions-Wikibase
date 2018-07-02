@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d94cafe_a5368922",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-07-02T12:18:31Z",
+      "side": 1,
+      "message": "I guess this could now be an: \u0027updaterCollection\u0027",
+      "range": {
+        "startLine": 143,
+        "startChar": 3,
+        "endLine": 143,
+        "endChar": 10
+      },
+      "revId": "d7778663bb80204dfd32a4e8c8cc94c291dca3a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
