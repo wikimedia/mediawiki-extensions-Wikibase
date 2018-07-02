@@ -104,6 +104,24 @@
       "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f81d8f35_aa22cd22",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T16:49:19Z",
+      "side": 1,
+      "message": "I mean the exact property of the *qualifier*",
+      "parentUuid": "7463ccad_15642563",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
