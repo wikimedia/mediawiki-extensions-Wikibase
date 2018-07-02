@@ -94,6 +94,30 @@
       "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "140f9a11_f866ae27",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2018-07-02T20:32:39Z",
+      "side": 1,
+      "message": "Ok, I tried to chase down where the summary goes after it is returned here (or more precisely, after SummaryFormatter::formatSummary() is called).\n\nSubmitEntityAction.php calls $page-\u003edoEditContent(...$summary...) which is going to pass it to CommentStoreComment::newUnsavedComment($summary)\n\nEntitySavingHelper.php calls $editEntityHandler-\u003eattemptSave( ... $summary ... )\n\nItemMergeInteractor.php calls $entityStore-\u003esaveEntity( ... $summary ... )\n\nRedirectCreationInteractor.php calls $entityStore-\u003esaveRedirect( ... $summary ... )\n\nSpecialWikibaseRepoPage.pp calls $this-\u003eeditEntity-\u003eattemptSave( ... $summary ... )\n\nUpdateRepoJob.php calls $editEntity-\u003eattemptSave( ... $summary ... )\n\nAnomie -- do these uses seem like they will all bottom out in the appropriate truncation in CommentStore?",
+      "parentUuid": "944275e9_b03120c2",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 43
+      },
+      "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
