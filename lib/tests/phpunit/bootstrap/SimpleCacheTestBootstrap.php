@@ -11,5 +11,9 @@ if ( !class_exists( 'Cache\IntegrationTests\SimpleCacheTest' ) ) {
 		public function setUp() {
 			$this->markTestSkipped( 'Cache\IntegrationTests not installed.' );
 		}
+
+		// To avoid warnings "Not test found in class Wikibase\Lib\Tests\SimpleWANObjectCacheTest
+		public function testNotGoingToBeRun() {
+		}
 	}
 }
