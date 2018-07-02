@@ -182,25 +182,25 @@ class EntityParserOutputGeneratorFactory {
 				$this->entityTitleLookup,
 				$this->externalEntityIdParser
 			),
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
+			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
 		];
 
 		if ( !empty( $this->preferredPageImagesProperties )
 			&& ExtensionRegistry::getInstance()->isLoaded( 'PageImages' )
 		) {
-			$updaters[] = new PageImagesDataUpdater(
+			$updaters[] = new EntityStatementDataUpdaterAdapter( new PageImagesDataUpdater(
 				$this->preferredPageImagesProperties,
 				PageImages::PROP_NAME_FREE
-			);
+			) );
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'GeoData' ) ) {
-			$updaters[] = new GeoDataDataUpdater(
+			$updaters[] = new EntityStatementDataUpdaterAdapter( new GeoDataDataUpdater(
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,
 				$this->globeUris
-			);
+			) );
 		}
 
 		return $updaters;
