@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2840f12_32808fcc",
+        "filename": "client/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "seems unrelated",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26f51ae7_69152585",
+        "filename": "data-access/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "seems unrelated",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2643bde_d2f14ffc",
+        "filename": "lib/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "seems unrelated",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49c19c75_2039c08f",
+        "filename": "repo/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "seems unrelated",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "287e9c95_e504015f",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "nitpick: spaces",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dd19be7_ba9b2b29",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "nitpick: spaces",
+      "range": {
+        "startLine": 102,
+        "startChar": 12,
+        "endLine": 102,
+        "endChar": 13
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac39d648_420286d0",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "this should be called before the foreach loop I think.",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6b60233_4f416305",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "nitpick: spaces",
+      "range": {
+        "startLine": 132,
+        "startChar": 32,
+        "endLine": 132,
+        "endChar": 33
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "161b9d79_9adf8ccc",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "beware that your new statement_quantity field is case sensitive.\nso it feels wrong to accept case insensitive values here and send it directly to the index since it\u0027s unlikely to match if only case differs from the user query and the value indexed.\nsolution here is either to:\n- be strict and remove /i\n- find a way to fix the user query (probably possible for property ids but this hard/unfeasible for fields that accept random strings.\n- make the indexed field case insensitive using lowercase_keyword instead of keyword (in the other patch).",
+      "range": {
+        "startLine": 191,
+        "startChar": 75,
+        "endLine": 191,
+        "endChar": 76
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "079e9c06_5cde9a58",
+        "filename": "view/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-02T08:39:44Z",
+      "side": 1,
+      "message": "seems unrelated",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
