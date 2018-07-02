@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e0e6ea00_a7a4e432",
+        "filename": "docs/adr/0001-use-cache-instead-wb_terms-for-data-needed-for-display.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-02T07:45:35Z",
+      "side": 1,
+      "message": "them articles, I\u0027ll never learn this",
+      "parentUuid": "4223b1df_eda182d0",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "92c5983d8c0739558754c529af3b14dc89bdc6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5e4f02b_b9196031",
         "filename": "docs/adr/0001-use-cache-instead-wb_terms-for-data-needed-for-display.md",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-29T08:01:08Z",
       "side": 1,
       "message": "Definitely need to check the impact that this will have on our production caches, how much data will we actually be storing etc (I know this is already being checked)\n\nAlso, what will happen in the situation that the cache is broken / all terms are cleared from the cache? I guess everything would fall back to loading full entities from the DB? Is that something that is okay? or would that also cause explosions?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 377
+      },
+      "revId": "92c5983d8c0739558754c529af3b14dc89bdc6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c463b968_a570a0e5",
+        "filename": "docs/adr/0001-use-cache-instead-wb_terms-for-data-needed-for-display.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-02T07:45:35Z",
+      "side": 1,
+      "message": "\u003e Also, what will happen in the situation that the cache is broken / all terms are cleared from the cache? I guess everything would fall back to loading full entities from the DB? Is that something that is okay? or would that also cause explosions?\n\nWill add clarification: indeed, the idea is the cache is to be used when loading the full entity JSON from the DB is not fast enough.",
+      "parentUuid": "e5e4f02b_b9196031",
       "range": {
         "startLine": 23,
         "startChar": 0,
