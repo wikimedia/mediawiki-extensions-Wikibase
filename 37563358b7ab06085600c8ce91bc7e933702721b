@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "13b07cc5_ccd2cc2d",
+        "filename": "client/autoload.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T17:03:45Z",
+      "side": 1,
+      "message": "All these are the result of me running the autoload generation script, which I had to do so that my new file would be picked up. Seemed to me that they should all go into the repo with the file that caused them?",
+      "parentUuid": "a2840f12_32808fcc",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "26f51ae7_69152585",
         "filename": "data-access/autoload.php",
         "patchSetId": 9
@@ -93,6 +111,30 @@
     },
     {
       "key": {
+        "uuid": "bfb12d09_cfcd804d",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T17:03:45Z",
+      "side": 1,
+      "message": "Code sniffer wouldn\u0027t allow me to remove these, for some reason :/",
+      "parentUuid": "287e9c95_e504015f",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9dd19be7_ba9b2b29",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 9
@@ -116,6 +158,30 @@
     },
     {
       "key": {
+        "uuid": "71c3c464_802cffeb",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T17:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dd19be7_ba9b2b29",
+      "range": {
+        "startLine": 102,
+        "startChar": 12,
+        "endLine": 102,
+        "endChar": 13
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac39d648_420286d0",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 9
@@ -130,6 +196,24 @@
       "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "383eaa27_72d4589e",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T17:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac39d648_420286d0",
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -153,6 +237,30 @@
       "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66dead23_23a9bb80",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T17:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6b60233_4f416305",
+      "range": {
+        "startLine": 132,
+        "startChar": 32,
+        "endLine": 132,
+        "endChar": 33
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -191,6 +299,30 @@
       "side": 1,
       "message": "sorry, the last solution (use lowercase_keyword) is not applicable because the term_freq query won\u0027t run the analyzer at search time.",
       "parentUuid": "161b9d79_9adf8ccc",
+      "range": {
+        "startLine": 191,
+        "startChar": 75,
+        "endLine": 191,
+        "endChar": 76
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12f8d86b_4d433d0a",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-02T17:03:45Z",
+      "side": 1,
+      "message": "Removed /i, seemed like the best combination of easy and reasonable",
+      "parentUuid": "ff3c2ac5_73265b95",
       "range": {
         "startLine": 191,
         "startChar": 75,
