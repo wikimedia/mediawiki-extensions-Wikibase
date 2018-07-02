@@ -70,6 +70,30 @@
       "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "944275e9_b03120c2",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-07-02T19:36:54Z",
+      "side": 1,
+      "message": "Database storage of comments in core tables on WMF wikis has two aspects: the old fields have a limit of 255 bytes, while the new comment table has a limit of 65535 bytes.\n\nFor MediaWiki more generally, there was a patch (I8558e80a) that had updated the old fields to 767 bytes, but that was never deployed to WMF wikis.\n\nIf the string returned here is eventually being passed to CommentStore for insertion into the database, the best thing would be to follow the lead of I92954c92 and let CommentStore do the truncation. If it\u0027s being inserted into some Wikibase-specific table (I don\u0027t see any such table at a quick grep), then the truncation should match the limits of that table (and that table should probably eventually be updated to use the comment table too).",
+      "parentUuid": "d56dc88a_5563664e",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 43
+      },
+      "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
