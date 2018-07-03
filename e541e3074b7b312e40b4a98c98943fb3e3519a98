@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ab9ee367_bfdc5eb9",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T11:22:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "048bee7a_8a544409",
+      "range": {
+        "startLine": 11,
+        "startChar": 73,
+        "endLine": 11,
+        "endChar": 77
+      },
+      "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3b0ddb3_33c60837",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-03T11:18:22Z",
       "side": 1,
       "message": "I suggest to add something like:\n\", although it doesn\u0027t mean that we cannot use it in Wikibase.\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 242,
+        "endLine": 15,
+        "endChar": 243
+      },
+      "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66852532_264d615b",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T11:22:51Z",
+      "side": 1,
+      "message": "This is true. But we also don\u0027t want to use PSR-6 in Wikibase :)\nHow about saying \"we also find it too verbose for needs of Wikibase\" or something like this (as we want 16, not 6)?\n\nI am not sure if mentioning PSR-6 is even relevant here. OTOH, the section is about \"context\".",
+      "parentUuid": "d3b0ddb3_33c60837",
       "range": {
         "startLine": 15,
         "startChar": 242,
