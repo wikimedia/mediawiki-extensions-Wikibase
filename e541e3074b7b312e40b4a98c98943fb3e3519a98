@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "048bee7a_8a544409",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-03T11:18:22Z",
+      "side": 1,
+      "message": "\"does not\"?",
+      "range": {
+        "startLine": 11,
+        "startChar": 73,
+        "endLine": 11,
+        "endChar": 77
+      },
+      "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3b0ddb3_33c60837",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-03T11:18:22Z",
+      "side": 1,
+      "message": "I suggest to add something like:\n\", although it doesn\u0027t mean that we cannot use it in Wikibase.\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 242,
+        "endLine": 15,
+        "endChar": 243
+      },
+      "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
