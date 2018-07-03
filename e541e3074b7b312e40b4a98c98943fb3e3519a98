@@ -117,6 +117,30 @@
       "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4e7a4b1_e1e4cceb",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T14:39:18Z",
+      "side": 1,
+      "message": "I agree that keeping this might be better.\nTried to rephrase hoping for more clarity.\n\nAlternative suggestions welcome!",
+      "parentUuid": "6a8484c1_5e64e8f6",
+      "range": {
+        "startLine": 15,
+        "startChar": 242,
+        "endLine": 15,
+        "endChar": 243
+      },
+      "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
