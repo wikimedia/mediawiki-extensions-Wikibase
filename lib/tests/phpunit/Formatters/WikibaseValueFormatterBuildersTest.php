@@ -90,7 +90,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			->will( $this->returnValue( 'Deutsch' ) );
 
 		return new WikibaseValueFormatterBuilders(
-			Language::factory( 'en' ),
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
 			new ItemIdParser(),

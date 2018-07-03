@@ -45,11 +45,6 @@ use Wikimedia\Assert\Assert;
 class WikibaseValueFormatterBuilders {
 
 	/**
-	 * @var Language
-	 */
-	private $defaultLanguage;
-
-	/**
 	 * @var FormatterLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
@@ -102,7 +97,6 @@ class WikibaseValueFormatterBuilders {
 	private $entityRevisionLookup;
 
 	/**
-	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
@@ -113,7 +107,6 @@ class WikibaseValueFormatterBuilders {
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
-		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
@@ -135,7 +128,6 @@ class WikibaseValueFormatterBuilders {
 			'$tabularDataStorageBaseUrl'
 		);
 
-		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;

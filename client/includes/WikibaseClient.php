@@ -266,7 +266,6 @@ final class WikibaseClient {
 		);
 
 		return new WikibaseValueFormatterBuilders(
-			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 			$this->getRepoItemUriParser(),
