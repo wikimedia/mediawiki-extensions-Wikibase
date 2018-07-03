@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1dcb8550_d3a13f70",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T10:29:16Z",
+      "side": 1,
+      "message": "oh, this-\u003ettl is (or could be) a timestamp, not the number of seconds from now.\n\nCould to this with randomizing then, yes.",
+      "parentUuid": "fcd346f2_58aef682",
+      "range": {
+        "startLine": 112,
+        "startChar": 51,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "6bf7c9671bba563b1b6b8651f6de21132fd3ed78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5533e7df_30533a27",
         "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-03T09:11:07Z",
       "side": 1,
       "message": "With this implementation it becomes a DOS attack vector.\n\nI think it would be better to still cache an empty result, just with smaller TTL (e.g. 10 times less than given).",
+      "range": {
+        "startLine": 108,
+        "startChar": 3,
+        "endLine": 113,
+        "endChar": 4
+      },
+      "revId": "6bf7c9671bba563b1b6b8651f6de21132fd3ed78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3618a277_e21e64ba",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T10:29:16Z",
+      "side": 1,
+      "message": "True. My thinking was, that given language fallback is used, and I assumed items without a single label are really rare, it would just be not needed to store empty results.\n\nBut if my assumption is not valid, that could be an issue. And you\u0027re right that in general it could be a bad thing.",
+      "parentUuid": "5533e7df_30533a27",
       "range": {
         "startLine": 108,
         "startChar": 3,
