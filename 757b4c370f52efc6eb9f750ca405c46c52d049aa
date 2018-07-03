@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b06b7ba9_8ede8985",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T11:16:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3851a944_a671d10d",
+      "range": {
+        "startLine": 1,
+        "startChar": 39,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8b04a1c0_db0d220f",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "928de08b_9d31aa18",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T11:16:11Z",
+      "side": 1,
+      "message": "should I add it, or is \"such as\" enough?\n\nOTOH, if I do my grepping right the only use of WANObjectCache in Wikibase is in repo/tests/testDispatchCoordinator.php, so it does not really seem to be used.",
+      "parentUuid": "8b04a1c0_db0d220f",
+      "range": {
+        "startLine": 11,
+        "startChar": 182,
+        "endLine": 11,
+        "endChar": 191
+      },
+      "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87fb6e31_219681cc",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-06-29T07:54:38Z",
       "side": 1,
       "message": "Might also need a wrapper for WANObjectCache.\nThis depends on what cache exactly you are thinking of using for wb_terms things",
+      "range": {
+        "startLine": 27,
+        "startChar": 213,
+        "endLine": 27,
+        "endChar": 222
+      },
+      "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dd1841f_7c99f2d5",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T11:16:11Z",
+      "side": 1,
+      "message": "See my struggle to get it as I4289aae9b3940c7f69364b7386437df89c574cba \nWill adjust a text here. But please also see my comment above, as I am no longer sure if this is even needed (although yesterday it seemed so).",
+      "parentUuid": "87fb6e31_219681cc",
       "range": {
         "startLine": 27,
         "startChar": 213,
