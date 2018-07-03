@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81968e04_ba478636",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-03T15:14:36Z",
+      "side": 1,
+      "message": "not sure this is right... I tested this on https://wikidata-lexeme.wmflabs.org and it feels strange.\nI mean you accept to search on different types by falling back to cirrus default builders but here you enforce the entity builder but then if it\u0027s mix of entity types you still fallback to cirrus defaults.\nI think it\u0027d be more appropriate to fallback directly to cirrus defaults here.\n\nThat would cover the common usecase of searching all namespaces.",
+      "revId": "94572a76e7a9cf808ccbf7b2f906970f0df3ac09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
