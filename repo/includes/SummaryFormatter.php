@@ -260,7 +260,8 @@ class SummaryFormatter {
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
-		return $this->language->truncateForVisual( rtrim( $mergedString ), SUMMARY_MAX_LENGTH );
+		// note: truncation to proper comment length limit done by CommentStore
+		return rtrim( $mergedString );
 	}
 
 	/**
