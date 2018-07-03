@@ -91,6 +91,7 @@
 		options: {
 			url: null,
 			language: ( IS_MW_CONTEXT ) ? mw.config.get( 'wgUserLanguage' ) : null,
+			suggestions: false,
 			type: 'item',
 			limit: null,
 			caseSensitive: false,
@@ -301,6 +302,18 @@
 					deferred.reject( textStatus );
 				} );
 
+
+				if( self.options.suggestions ) {
+					var d = $.Deferred();
+
+					$.when( deferred, self.options.suggestions( term ) ).then( function( r, s ) {
+						r[0] = s.concat( r[0] );
+						d.resolve.apply( this, r );
+					} );
+
+					return d.promise();
+				}
+
 				return deferred.promise();
 			};
 		},
@@ -315,6 +328,42 @@
 			$.ui.suggester.prototype._updateMenu.apply( this, arguments );
 
 			this.options.menu.element.scrollTop( scrollTop );
+		},
+
+		/**
+		 * Updates the suggestion menu with the received suggestions.
+		 * @protected
+		 *
+		 * @param {string[]} suggestions
+		 * @param {string} requestTerm
+		 */
+		_updateMenuItems: function( suggestions, requestTerm ) {
+			var menuItems = [];
+
+			for ( var i = 0; i < suggestions.length; i++ ) {
+				if (suggestions[i].suggestion) {
+					menuItems.push( new $.ui.ooMenu.CustomItem(
+							'suggestions',
+							null,
+							null,
+							'ui-entityselector-more'
+						) );
+
+				}
+				menuItems.push( this._createMenuItemFromSuggestion( suggestions[i], requestTerm ) );
+
+				if (suggestions[i].suggestionEnd) {
+					menuItems.push( new $.ui.ooMenu.CustomItem(
+							'all search results',
+							null,
+							null,
+							'ui-entityselector-more'
+						) );
+
+				}
+			}
+
+			this.options.menu.option( 'items', menuItems );
 		},
 
 		/**

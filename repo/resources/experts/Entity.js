@@ -62,10 +62,44 @@
 		 * @param {string} repoApiUrl
 		 */
 		_initEntityselector: function ( repoApiUrl ) {
+			var suggestions = function ( term ) {
+
+				var data = [],
+				deferred = $.Deferred();
+				data[0] = {repository: "",
+						suggestion: true,
+						id: "Q2",
+						concepturi: "https://localhost/mediawiki/index.php/Item:Q2",
+						title: "Item:Q2",
+						  label: "Suggestion",
+						  description: "This is a suggested item"
+					};
+				data[1] = {repository: "",
+						id: "Q2",
+						concepturi: "https://localhost/mediawiki/index.php/Item:Q2",
+						title: "Item:Q2",
+						  label: "Suggestion 2",
+						  description: "This is a suggested2 item"
+					};
+				data[2] = {repository: "",
+						suggestionEnd: true,
+						id: "Q2",
+						concepturi: "https://localhost/mediawiki/index.php/Item:Q2",
+						title: "Item:Q2",
+						  label: "Suggestion 3",
+						  description: "This is a suggested3 item"
+					};
+
+				deferred.resolve( data );
+				return deferred.promise();
+			};
+
+			//repoApiUrl = 'https://www.wikidata.org/w/api.php';
 			this.$input.entityselector( {
 				url: repoApiUrl,
 				type: this.constructor.TYPE,
-				selectOnAutocomplete: true
+				selectOnAutocomplete: true,
+				suggestions: suggestions
 			} );
 		},
 
