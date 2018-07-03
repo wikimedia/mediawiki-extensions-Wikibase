@@ -260,7 +260,7 @@ class SummaryFormatter {
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
-		return $this->language->truncate( rtrim( $mergedString ), SUMMARY_MAX_LENGTH );
+		return $this->language->truncateForVisual( rtrim( $mergedString ), SUMMARY_MAX_LENGTH );
 	}
 
 	/**

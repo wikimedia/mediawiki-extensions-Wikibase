@@ -77,6 +77,8 @@ call_user_func( function() {
 		'license-name' => 'GPL-2.0-or-later'
 	];
 
+	// Maximum summary length in characters (not bytes)
+	// Should be less than CommentStore::COMMENT_CHARACTER_LIMIT in core.
 	define( 'SUMMARY_MAX_LENGTH', 250 );
 
 	// i18n
