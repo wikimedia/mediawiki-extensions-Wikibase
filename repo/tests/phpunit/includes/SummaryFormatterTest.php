@@ -285,11 +285,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'This is a test…' ],
 				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…'
 			],
-			[
-				[],
-				[ str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ],
-				'/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...'
-			],
 		];
 	}
 
