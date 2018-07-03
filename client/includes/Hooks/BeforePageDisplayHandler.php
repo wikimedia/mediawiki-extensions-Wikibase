@@ -23,24 +23,18 @@ class BeforePageDisplayHandler {
 	}
 
 	/**
-	 * @note in php5, $out is by passed by reference (by default, so &$out is not needed)
-	 *
 	 * @param OutputPage $out
 	 * @param string $actionName
-	 *
-	 * @return bool
 	 */
 	public function addModules( OutputPage $out, $actionName ) {
 		$title = $out->getTitle();
 
 		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			return true;
+			return;
 		}
 
 		$this->addStyleModules( $out, $title, $actionName );
 		$this->addJsModules( $out, $title, $actionName );
-
-		return true;
 	}
 
 	private function addStyleModules( OutputPage $out, Title $title, $actionName ) {
