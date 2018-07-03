@@ -285,10 +285,12 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				[ 'This is a test…' ],
 				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…'
 			],
+			# This comment is "too long", but it will be truncated to an
+			# appropriate length by core's CommentStore (not SummaryFormatter)
 			[
 				[],
-				[ str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ],
-				'/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...'
+				[ str_repeat( 'a', 512 ) ],
+				'/* foobar:1| */ ' . str_repeat( 'a', 512 )
 			],
 		];
 	}
