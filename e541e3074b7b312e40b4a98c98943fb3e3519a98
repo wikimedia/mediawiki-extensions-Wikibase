@@ -93,6 +93,30 @@
       "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a8484c1_5e64e8f6",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-03T12:43:29Z",
+      "side": 1,
+      "message": "I\u0027m fine with either removing this paragraph or clarifying it. In the current form it reads like \"we cannot use PSR-6 because...\" which is not true.\n\nThinking a bit harder, it might be good to know this history for the next person who will suggest to add it to the core, so I\u0027d rather leave it here.",
+      "parentUuid": "66852532_264d615b",
+      "range": {
+        "startLine": 15,
+        "startChar": 242,
+        "endLine": 15,
+        "endChar": 243
+      },
+      "revId": "e541e3074b7b312e40b4a98c98943fb3e3519a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
