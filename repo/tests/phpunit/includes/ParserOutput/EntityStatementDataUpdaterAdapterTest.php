@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use ParserOutput;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\Statement;
@@ -35,7 +36,7 @@ class EntityStatementDataUpdaterAdapterTest extends TestCase {
 	}
 
 	public function testUpdateParserOutputIsDelegated() {
-		$parserOutput = new \ParserOutput();
+		$parserOutput = new ParserOutput();
 		$statementDataUpdater = $this->getMockStatementDataUpdater();
 		$statementDataUpdater->expects( $this->once() )
 			->method( 'updateParserOutput' )
