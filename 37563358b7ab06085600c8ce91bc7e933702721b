@@ -135,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "54ca60e7_884989c5",
+        "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-03T13:57:42Z",
+      "side": 1,
+      "message": "oh sorry, yes this one was me failing to read that it\u0027s not an array access by key",
+      "parentUuid": "bfb12d09_cfcd804d",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "37563358b7ab06085600c8ce91bc7e933702721b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9dd19be7_ba9b2b29",
         "filename": "repo/includes/Search/Elastic/Query/WbStatementQuantityFeature.php",
         "patchSetId": 9
