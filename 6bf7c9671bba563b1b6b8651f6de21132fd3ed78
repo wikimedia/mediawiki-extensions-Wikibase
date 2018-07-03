@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fcd346f2_58aef682",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-03T09:37:40Z",
+      "side": 1,
+      "message": "Not sure about it, but might be useful:\n\nWe should randomize TTL a bit. Make it between 100% and 110% of the given one, for example. This way it won\u0027t happen that all cache items expire at the same time.",
+      "range": {
+        "startLine": 112,
+        "startChar": 51,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "6bf7c9671bba563b1b6b8651f6de21132fd3ed78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5533e7df_30533a27",
         "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
         "patchSetId": 10
