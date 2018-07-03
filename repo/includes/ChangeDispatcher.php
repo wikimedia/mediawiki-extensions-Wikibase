@@ -323,7 +323,7 @@ class ChangeDispatcher {
 			//     $chunkSize = ( $this->batchSize - count( $batch ) ) * ( count_before / count_after );
 		}
 
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$stats = MediaWikiServices::getInstance()->getPerDbNameStatsdDataFactory();
 		if ( !( $chunksExamined < $this->maxChunks ) ) {
 			$stats->increment(
 				'wikibase.repo.changeDispatcher.getPendingChanges.maxChunksReached'
