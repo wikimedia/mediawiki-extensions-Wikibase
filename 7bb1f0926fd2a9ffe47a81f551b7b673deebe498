@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "ab384faf_07ca1c46",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-03T13:06:29Z",
+      "side": 1,
+      "message": "I feel that reusing the same input data for all usecases around properties/qualifiers is going to be relatively complex and will have very tight coupling between the format and the subfields analyzers.\n\nIf I sum up for this specific usecase we will append a \u0027|QTY\u0027 to every statements. But I worry that future evolutions will be hard to implement without breaking changes (unless we agree on a strongly typed string representation of properties that is regex friendly).\n\nIf we want to go with a single field approach I\u0027d prefer to investigate a \"custom field mapper\" approach in the extra plugin.\nAnalyzers work at the string level while a \"field mapper\" may allow us to declare a field of type \"wikibase_property\", such field could be complex (made of subproperties) e.g.:\n\n\"statements\": [\n   {\n      \"id\": \"P123\",\n      \"qualifiers\": [\n        {\n          \"entity\": \"Q123\",\n          \"quantity\": 1\n        }\n      ]\n      \"foo\": { \"bar\" : \"XYZ\" }\n   }\n]\n\n// or whatever makes sense\n\nOn the other hand the string format would have to be clear enough that it\u0027s impossible for the patterns we declare in the mapping to confuse with another qualifier.\n\nI think that a new field (like the approach we took here) makes it easy to experiment with this usecase, for the all-in-one string format I\u0027d suggest that we document it clearly somewhere before deciding if it\u0027s better/worth implementing.",
+      "parentUuid": "905e7b26_b8b64355",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c858b3ad_f0e1223b",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 7
