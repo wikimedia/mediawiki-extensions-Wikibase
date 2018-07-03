@@ -62,10 +62,74 @@
 		 * @param {string} repoApiUrl
 		 */
 		_initEntityselector: function ( repoApiUrl ) {
+			repoApiUrl = 'https://www.wikidata.org/w/api.php';
+			var self = this;
+			var suggestions = function ( term ) {
+
+				var pId = 'P206',//'P17',//'P2302',//self.$input.closest( '.wikibase-snakview' ).data( 'snakview' ).propertyId(),
+					language = self.$input.data( 'entityselector' ).options.language,
+					//TODO: From constraint settings
+					constraintsPId = 'P2302',
+					constraintValueTypeId = 'Q21510865', //ValueTypeConstraint
+					constraintValueTypeClassId = 'P2308', //Class
+					constraintValueTypeRelationId = 'P2309',
+					itemToProperty =  { 'Q21514624': 'P279', 'Q21503252': 'P31' },
+					relationIds = [],
+					classIds = [], //relation
+					deferred = $.Deferred();
+
+
+				//get constraints definition
+				$.getJSON( repoApiUrl + '?action=wbgetclaims&format=json&entity=' + pId + '&property=' + constraintsPId ).then(
+						function( d ){
+							d.claims['P2302'].forEach( function( c ) {
+								if( c.mainsnak.datavalue.value.id === constraintValueTypeId ) {
+									classIds = classIds.concat (c.qualifiers[ constraintValueTypeClassId ].map( function(d) { return d.datavalue.value.id } ) );
+									relationIds = relationIds.concat( c.qualifiers[ constraintValueTypeRelationId ].map( function(d) { return itemToProperty[d.datavalue.value.id]; } ) );
+								}
+							} );
+
+							var search = term + ' ';
+							relationIds.forEach( function( relationId ){
+								search += '(' + classIds.map( function( id ){
+									return 'haswbstatement:'+ relationId + '=' + id;
+								} ).join( ' OR ' ) + ')';
+							} );
+
+							//do elastic search with haswbstatement filter
+							$.getJSON( repoApiUrl + '?action=query&format=json&list=search&srsearch=' + encodeURIComponent( search ) ).then( function( r ){
+								console.log( r );
+								var ids = r.query.search.map( function( d ){
+									return d.title;
+								} );
+								//get labels
+								$.getJSON( repoApiUrl + '?action=wbgetentities&props=labels|descriptions&format=json&languages=' + language + '&ids=' + ids.join( '|' ) ).then( function( ld ){
+
+									var data = [];
+									ids.forEach( function( id ){
+										data.push({
+											id: id,
+											title: "Item:" + id,
+											  label: ld.entities[ id ][ 'labels' ][ language ].value + '(Suggestion)',
+											  description: ld.entities[ id ][ 'descriptions' ][ language ].value
+										});
+									} )
+									deferred.resolve( data );
+								} );
+							} );
+						}
+				)
+
+
+				return deferred.promise();
+			};
+
+
 			this.$input.entityselector( {
 				url: repoApiUrl,
 				type: this.constructor.TYPE,
-				selectOnAutocomplete: true
+				selectOnAutocomplete: true,
+				suggestions: suggestions
 			} );
 		},
 

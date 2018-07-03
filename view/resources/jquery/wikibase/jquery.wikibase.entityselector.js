@@ -91,6 +91,8 @@
 		options: {
 			url: null,
 			language: ( IS_MW_CONTEXT ) ? mw.config.get( 'wgUserLanguage' ) : null,
+			suggestions: false,
+			propertyId: null,
 			type: 'item',
 			limit: null,
 			caseSensitive: false,
@@ -301,6 +303,17 @@
 					deferred.reject( textStatus );
 				} );
 
+				if( self.options.suggestions ) {
+					var d = $.Deferred();
+
+					$.when( deferred, self.options.suggestions( term ) ).then( function( r, s ) {
+						r[0] = s.concat( r[0] );
+						d.resolve.apply( this, r );
+					} );
+
+					return d.promise();
+				}
+
 				return deferred.promise();
 			};
 		},
@@ -316,6 +329,7 @@
 
 			this.options.menu.element.scrollTop( scrollTop );
 		},
+
 
 		/**
 		 * Generates the label for a suggester entity.
