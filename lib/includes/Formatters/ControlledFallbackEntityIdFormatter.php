@@ -54,7 +54,7 @@ class ControlledFallbackEntityIdFormatter implements EntityIdFormatter {
 		if ( $value instanceof Int32EntityId && $value->getNumericId() <= $this->maxEntityId ) {
 			try {
 				return $this->targetFormatter->formatEntityId( $value );
-			} catch ( \Exception $e ) { //TODO: Catch Throwable once we move to php7
+			} catch ( \Throwable $e ) {
 				$this->logger->error(
 					'Failed to format entity ID. Using fallback formatter',
 					[
