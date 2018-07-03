@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5533e7df_30533a27",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-03T09:11:07Z",
+      "side": 1,
+      "message": "With this implementation it becomes a DOS attack vector.\n\nI think it would be better to still cache an empty result, just with smaller TTL (e.g. 10 times less than given).",
+      "range": {
+        "startLine": 108,
+        "startChar": 3,
+        "endLine": 113,
+        "endChar": 4
+      },
+      "revId": "6bf7c9671bba563b1b6b8651f6de21132fd3ed78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
