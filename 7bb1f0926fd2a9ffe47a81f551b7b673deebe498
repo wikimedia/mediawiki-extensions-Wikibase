@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "905e7b26_b8b64355",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-03T10:28:36Z",
+      "side": 1,
+      "message": "So it\u0027s not a new field? Oh, I didn\u0027t realise that ... maybe we could talk about this at the search meeting later on today",
+      "parentUuid": "59d37637_ab8ce93a",
+      "revId": "7bb1f0926fd2a9ffe47a81f551b7b673deebe498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c858b3ad_f0e1223b",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 7
