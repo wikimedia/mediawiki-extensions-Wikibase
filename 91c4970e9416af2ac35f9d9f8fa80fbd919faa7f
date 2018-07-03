@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b963c0c5_d4366ed4",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-03T11:17:50Z",
+      "side": 1,
+      "message": "This is 100% evil. Not sure how this should be handled to be honest.\n\nIf I get it right, PSR 16 understands TTL as amount of seconds from the point in time the thing was added to cache. Therefore TTL 0 means \"should expire immediately\". If I interpret php docs in WANObjectCache, this what $ttl is about there as well, although 0 means \"never expire\" there. To make things worse, BagOStuff, which WANObjectCache uses kinda internally actually uses expiration timestamp as TTL. And there zero is also special symbol for \"never expire\".\nIt seems if PSR-16 TTL was the amount of seconds added to \"now\" and passed down to inner WANObjectCache here, that would somehow work, because of the way WANObjectCache currently passes the value to BagOStuff. OTOH, it seems not right given that WANObjectCache claims to expect amount of second, not the timestamp.\n\nWhat to do about it?",
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
