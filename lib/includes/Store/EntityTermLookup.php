@@ -6,6 +6,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\TermIndex;
 
 /**
+ * @deprecated Not used in production code apparently?
+ *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

@@ -77,6 +77,7 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 			return new ItemId( $idString );
 		}, array_keys( $this->badgeItems ) );
 
+		// TODO: Only uses descriptions
 		$this->prefetchingTermLookup->prefetchTerms( $itemIds );
 
 		$html = Html::openElement( 'ol' );
