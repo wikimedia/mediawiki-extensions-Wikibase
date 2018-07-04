@@ -212,6 +212,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$propertyIds = array_values( $orderedPropertyInfo );
 
+		// TODO: shares buffer with labelDescriptionLookup, only needs labels
 		$this->prefetchingTermLookup->prefetchTerms( $propertyIds );
 
 		return $propertyIds;

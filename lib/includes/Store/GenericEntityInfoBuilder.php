@@ -14,6 +14,8 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 
 /**
+ * @todo: move to tests namespace
+ *
  * EntityInfoBuilder based on an EntityLookup.
  *
  * This is a rather inefficient implementation of EntityInfoBuilder, intended

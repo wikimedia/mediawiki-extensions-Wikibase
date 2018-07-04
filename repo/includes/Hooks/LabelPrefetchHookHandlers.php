@@ -129,6 +129,8 @@ class LabelPrefetchHookHandlers {
 		try {
 			$titles = $this->getChangedTitles( $rows );
 			$entityIds = $this->idLookup->getEntityIds( $titles );
+			//TODO: buffer shared with label descriptionlookup of HtmlPageLinkRendererBeginHookHandler
+			// Used for both labels and descriptions
 			$this->buffer->prefetchTerms( $entityIds, $this->termTypes, $this->languageCodes );
 		} catch ( StorageException $ex ) {
 			wfLogWarning( __METHOD__ . ': ' . $ex->getMessage() );
