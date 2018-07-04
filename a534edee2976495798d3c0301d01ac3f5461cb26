@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "992a8961_e556e5e2",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-07-04T22:17:20Z",
+      "side": 1,
+      "message": "I think this is dead code, never being called?\nIf so I\u0027m going to ignore it...",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 2
+      },
+      "revId": "a534edee2976495798d3c0301d01ac3f5461cb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f1a1ec0_a859fb11",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 3
@@ -30,6 +53,24 @@
       "writtenOn": "2018-05-26T19:08:24Z",
       "side": 1,
       "message": "Hm, this is a good question… given that getLatestRevision also doesn\u0027t handle this, I think it\u0027s fine to ignore.",
+      "revId": "a534edee2976495798d3c0301d01ac3f5461cb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35fb33d9_80e86c0b",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2018-07-04T22:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f1a1ec0_a859fb11",
       "revId": "a534edee2976495798d3c0301d01ac3f5461cb26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
