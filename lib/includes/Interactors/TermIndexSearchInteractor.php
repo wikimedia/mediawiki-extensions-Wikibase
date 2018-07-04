@@ -237,6 +237,7 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 	 * @param EntityId[] $entityIds
 	 */
 	private function preFetchLabelsAndDescriptionsForDisplay( array $entityIds ) {
+		// TODO: buffer shared with labelDescriptionLookup, used for both labels and descriptions
 		$this->bufferingTermLookup->prefetchTerms(
 			$entityIds,
 			[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ],

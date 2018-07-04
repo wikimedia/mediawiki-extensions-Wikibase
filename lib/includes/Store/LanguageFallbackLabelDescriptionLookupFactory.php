@@ -95,6 +95,8 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 		// Optionally prefetch the terms of the entities passed in here
 		// $termLookup and $termBuffer should be the same BufferingTermLookup then
 		if ( $this->termBuffer !== null ) {
+			// TODO: shares buffer via termLookup with the return labeldescriptionlookup
+			// Used for labels and descriptions
 			$this->termBuffer->prefetchTerms( $entityIds, $termTypes, $languages );
 		}
 
