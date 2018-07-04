@@ -278,8 +278,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	private function setForm( EntityDocument $entity = null ) {
 		$this->getOutput()->addHTML( $this->getCopyrightHTML() );
 
-		$this->getOutput()->addModuleStyles( [ 'wikibase.special' ] );
-
 		if ( $this->getUser()->isAnon() ) {
 			$this->getOutput()->addHTML( Html::rawElement(
 				'p',
@@ -317,7 +315,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				'name' => 'id',
 				'label-message' => 'wikibase-modifyentity-id',
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => $id,
 				'default' => $entity === null ? '' : $entity->getId(),
 			],

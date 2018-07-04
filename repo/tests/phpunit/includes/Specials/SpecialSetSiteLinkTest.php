@@ -162,7 +162,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		// Note: use language fallback de-ch => de
 		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'de-ch' );
 
-		$matchers['id'] = both( tagMatchingOutline( '<div id="wb-modifyentity-id" class="wb-input"/>' ) )->andAlso(
+		$matchers['id'] = both( tagMatchingOutline( '<div id="wb-modifyentity-id"/>' ) )->andAlso(
 			havingChild( both( tagMatchingOutline( '<input name="id"/>' ) )->andAlso(
 				withAttribute( 'value' )->havingValue( self::$itemId )
 			) )
@@ -188,7 +188,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			"<input type='hidden' name='remove' value='remove'/>"
 		);
 
-		$matchers['page'] = both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
+		$matchers['page'] = both( tagMatchingOutline( '<div id="wb-setsitelink-page"/>' ) )->andAlso(
 			havingChild( both( tagMatchingOutline( '<input name="page"/>' ) )->andAlso(
 				withAttribute( 'value' )->havingValue( 'Wikidata' )
 			) )
@@ -214,7 +214,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			havingTextContents( self::$badgeId )
 		);
 
-		$matchers['page'] = both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
+		$matchers['page'] = both( tagMatchingOutline( '<div id="wb-setsitelink-page"/>' ) )->andAlso(
 			havingChild( both( tagMatchingOutline( '<input name="page"/>' ) )->andAlso(
 				withAttribute( 'value' )->havingValue( 'Wikidata' )
 			) )
@@ -244,7 +244,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$this->assertThatHamcrest(
 			$output,
-			is( htmlPiece( havingChild( both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
+			is( htmlPiece( havingChild( both( tagMatchingOutline( '<div id="wb-setsitelink-page"/>' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<input name="page" value="Wikidata"/>' ) )
 			) ) ) ) );
 	}
@@ -294,13 +294,13 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	private static function createMatchers() {
 		return [
-			'id' => both( tagMatchingOutline( '<div id="wb-modifyentity-id" class="wb-input"/>' ) )->andAlso(
+			'id' => both( tagMatchingOutline( '<div id="wb-modifyentity-id"/>' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<input name="id"/>' ) )
 			),
-			'site' => both( tagMatchingOutline( '<div id="wb-setsitelink-site" class="wb-input"/>' ) )->andAlso(
+			'site' => both( tagMatchingOutline( '<div id="wb-setsitelink-site"/>' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<input name="site"/>' ) )
 			),
-			'page' => both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
+			'page' => both( tagMatchingOutline( '<div id="wb-setsitelink-page"/>' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<input name="page"/>' ) )
 			),
 			'submit' => both( withAttribute( 'id' )->havingValue( 'wb-setsitelink-submit' ) )->andAlso(
