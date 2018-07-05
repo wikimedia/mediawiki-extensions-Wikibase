@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 
 /**
  * Factory for LabelDescriptionLookup objects based on FormatterOptions.
@@ -78,7 +78,9 @@ class FormatterLabelDescriptionLookupFactory {
 				'with an instance of LanguageFallbackChain.' );
 		}
 
-		return new LanguageFallbackLabelDescriptionLookup( $this->termLookup, $fallbackChain );
+		// TODO: this should be Buffering one?
+		// TODO: use factory?
+		return new FallbackChainLabelDescriptionLookup( $this->termLookup, $fallbackChain );
 	}
 
 	private function newLanguageLabelDescriptionLookup( FormatterOptions $options ) {

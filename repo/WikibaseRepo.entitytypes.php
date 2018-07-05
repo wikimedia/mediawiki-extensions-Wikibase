@@ -155,7 +155,8 @@ return [
 						new Wikibase\Repo\Api\EntityIdSearchHelper(
 							$repo->getEntityLookup(),
 							$repo->getEntityIdParser(),
-							new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+							// TODO: use factory?
+							new Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup(
 								$repo->getTermLookup(),
 								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),
@@ -260,7 +261,8 @@ return [
 						new Wikibase\Repo\Api\EntityIdSearchHelper(
 							$repo->getEntityLookup(),
 							$repo->getEntityIdParser(),
-							new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+							// TODO: use factory?
+							new Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup(
 								$repo->getTermLookup(),
 								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),

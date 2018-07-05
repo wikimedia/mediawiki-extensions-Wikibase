@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use OrderedStreamingForkController;
 use Maintenance;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
@@ -160,7 +160,8 @@ class SearchEntities extends Maintenance {
 					$this->repo->getEntityLookup(),
 					$this->repo->getEntityIdParser(),
 					$this->repo->newTermSearchInteractor( $this->repo->getUserLanguage()->getCode() ),
-					new LanguageFallbackLabelDescriptionLookup(
+					// TODO: use factory?
+					new FallbackChainLabelDescriptionLookup(
 						$this->repo->getTermLookup(),
 						$this->repo->getLanguageFallbackChainFactory()->newFromLanguage( $this->repo->getUserLanguage() )
 					),
