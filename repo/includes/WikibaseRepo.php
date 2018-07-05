@@ -903,8 +903,7 @@ class WikibaseRepo {
 	public function getLanguageFallbackLabelDescriptionLookupFactory() {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			$this->getLanguageFallbackChainFactory(),
-			$this->getTermLookup(),
-			$this->getTermBuffer()
+			$this->getTermLookup()
 		);
 	}
 
@@ -1971,8 +1970,7 @@ class WikibaseRepo {
 			$termLookup
 		);
 		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
-			$contextSource->getLanguage(),
-			[] // TODO: populate ids of entities to prefetch
+			$contextSource->getLanguage()
 		);
 
 		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();

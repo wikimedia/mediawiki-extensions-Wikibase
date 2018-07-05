@@ -67,8 +67,7 @@ class EditActionHookHandler {
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
 		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
 			$wikibaseClient->getLanguageFallbackChainFactory(),
-			$wikibaseClient->getTermLookup(),
-			$wikibaseClient->getTermBuffer()
+			$wikibaseClient->getTermLookup()
 		);
 		$idParser = $wikibaseClient->getEntityIdParser();
 
