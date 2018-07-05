@@ -299,8 +299,7 @@ call_user_func( function() {
 		return new Wikibase\Client\Specials\SpecialPagesWithBadges(
 			new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory(
 				$wikibaseClient->getLanguageFallbackChainFactory(),
-				$wikibaseClient->getTermLookup(),
-				$wikibaseClient->getTermBuffer()
+				$wikibaseClient->getTermLookup()
 			),
 			array_keys( $settings->getSetting( 'badgeClassNames' ) ),
 			$settings->getSetting( 'siteGlobalID' )

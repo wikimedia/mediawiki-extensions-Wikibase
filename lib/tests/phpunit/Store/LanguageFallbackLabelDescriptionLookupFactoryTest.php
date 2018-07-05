@@ -7,7 +7,6 @@ use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
@@ -43,27 +42,10 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framewo
 		return $termLookup;
 	}
 
-	/**
-	 * @return TermBuffer
-	 */
-	private function getTermBufferMock() {
-		$termBuffer = $this->getMock( TermBuffer::class );
-		$termBuffer->expects( $this->once() )
-			->method( 'prefetchTerms' )
-			->with(
-				$this->equalTo( [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ] ),
-				$this->equalTo( [ 'label' ] ),
-				$this->anything()
-			);
-
-		return $termBuffer;
-	}
-
 	public function testNewLabelDescriptionLookup() {
 		$factory = new LanguageFallbackLabelDescriptionLookupFactory(
 			new LanguageFallbackChainFactory(),
-			$this->getTermLookupMock(),
-			$this->getTermBufferMock()
+			$this->getTermLookupMock()
 		);
 
 		$labelDescriptionLookup = $factory->newLabelDescriptionLookup(
