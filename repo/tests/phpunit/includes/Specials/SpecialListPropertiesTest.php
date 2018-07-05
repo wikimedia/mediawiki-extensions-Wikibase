@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Language;
 use SpecialPageTestBase;
@@ -15,7 +16,6 @@ use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
-use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
@@ -55,14 +55,12 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return BufferingTermLookup
+	 * @return TermLookup
 	 */
-	private function getBufferingTermLookup() {
-		$lookup = $this->getMockBuilder( BufferingTermLookup::class )
+	private function getTermLookup() {
+		$lookup = $this->getMockBuilder( TermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$lookup->expects( $this->any() )
-			->method( 'prefetchTerms' );
 		$lookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
@@ -101,11 +99,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$this->getEntityTitleLookup(),
 			$languageNameLookup
 		);
-		$bufferingTermLookup = $this->getBufferingTermLookup();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
-			// TODO: "regular" term lookup would do? simplify?
-			$bufferingTermLookup,
+			$this->getTermLookup(),
 			$languageFallbackChainFactory->newFromLanguage(
 				$language,
 				LanguageFallbackChainFactory::FALLBACK_ALL
@@ -119,8 +115,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$this->getPropertyInfoStore(),
 			$labelDescriptionLookup,
 			$entityIdFormatter,
-			$this->getEntityTitleLookup(),
-			$bufferingTermLookup
+			$this->getEntityTitleLookup()
 		);
 
 		return $specialPage;
