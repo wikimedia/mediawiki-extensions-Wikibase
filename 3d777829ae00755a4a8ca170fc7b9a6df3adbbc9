@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a1f8e4c6_b26b54e6",
+        "filename": "repo/includes/EntityReferenceExtractors/SiteLinkBadgeItemReferenceExtractor.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81f1ab21_c02504d1",
+      "range": {
+        "startLine": 20,
+        "startChar": 25,
+        "endLine": 20,
+        "endChar": 30
+      },
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1068691c_dcfb42cb",
         "filename": "repo/includes/EntityReferenceExtractors/SiteLinkBadgeItemReferenceExtractor.php",
         "patchSetId": 10
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "5fc72fab_51a7ba06",
+        "filename": "repo/includes/EntityReferenceExtractors/StatementEntityReferenceExtractor.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Copied from the previous code. The functionality doesn\u0027t have much to do with this ticket, so definitely not something to do for now. I\u0027d be ok with dropping the TODOs and instead checking if these are documented on Phabricator somewhere.",
+      "parentUuid": "153ec387_6602056a",
+      "range": {
+        "startLine": 62,
+        "startChar": 5,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2448a72e_999a17a7",
         "filename": "repo/includes/EntityReferenceExtractors/StatementEntityReferenceExtractor.php",
         "patchSetId": 10
@@ -105,6 +153,30 @@
       "writtenOn": "2018-07-05T09:22:09Z",
       "side": 1,
       "message": "We seem to have lost `$this-\u003eexternalEntityIdParser` (`EntityIdParser`) in `ReferencedEntitiesDataUpdater`.",
+      "range": {
+        "startLine": 68,
+        "startChar": 22,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92f3deff_94a0793f",
+        "filename": "repo/includes/EntityReferenceExtractors/StatementEntityReferenceExtractor.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Oopsie. Done!",
+      "parentUuid": "2448a72e_999a17a7",
       "range": {
         "startLine": 68,
         "startChar": 22,
@@ -134,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "a6a4a2b4_c4788a67",
+        "filename": "repo/includes/ParserOutput/ReferencedEntitiesDataUpdater.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a0dd82f_b9e6e9e1",
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c7d7a8b_bc971711",
         "filename": "repo/includes/ParserOutput/ReferencedEntitiesDataUpdater.php",
         "patchSetId": 10
@@ -145,6 +235,30 @@
       "writtenOn": "2018-07-05T09:22:09Z",
       "side": 1,
       "message": "`EntityReferenceExtractor`",
+      "range": {
+        "startLine": 39,
+        "startChar": 11,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24f1c107_0014b2fc",
+        "filename": "repo/includes/ParserOutput/ReferencedEntitiesDataUpdater.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c7d7a8b_bc971711",
       "range": {
         "startLine": 39,
         "startChar": 11,
@@ -180,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "364fb135_709c20c3",
+        "filename": "repo/tests/phpunit/includes/EntityReferenceExtractors/EntityReferenceExtractorDelegatorTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a7fd368_0fb25aea",
+      "range": {
+        "startLine": 40,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26af7067_a61c4c41",
         "filename": "repo/tests/phpunit/includes/EntityReferenceExtractors/EntityReferenceExtractorDelegatorTest.php",
         "patchSetId": 10
@@ -203,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "8ff7c054_6337d598",
+        "filename": "repo/tests/phpunit/includes/EntityReferenceExtractors/EntityReferenceExtractorDelegatorTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Added together with the check that the fallback for StatementListProviders works!",
+      "parentUuid": "26af7067_a61c4c41",
+      "range": {
+        "startLine": 47,
+        "startChar": 9,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2277cf46_1bc126bb",
         "filename": "repo/tests/phpunit/includes/EntityReferenceExtractors/StatementEntityReferenceExtractorTest.php",
         "patchSetId": 10
@@ -214,6 +376,24 @@
       "writtenOn": "2018-07-05T09:22:09Z",
       "side": 1,
       "message": "Missing test case(s) [0]",
+      "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa2ab5a3_f673b4a7",
+        "filename": "repo/tests/phpunit/includes/EntityReferenceExtractors/StatementEntityReferenceExtractorTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2277cf46_1bc126bb",
       "revId": "3d777829ae00755a4a8ca170fc7b9a6df3adbbc9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

@@ -22,6 +22,30 @@
       "revId": "74203e1cb442fa3d4a55a1d4442467b5468cf6ea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1a70ff2_6cfc40a8",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/ReferencedEntitiesDataUpdaterTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-05T12:41:37Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "6741e666_0a51b279",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 6
+      },
+      "revId": "74203e1cb442fa3d4a55a1d4442467b5468cf6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
