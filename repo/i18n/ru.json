@@ -31,7 +31,8 @@
 			"MaxBioHazard",
 			"Redredsonia",
 			"Jack who built the house",
-			"Stjn"
+			"Stjn",
+			"Vlad5250"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -339,6 +340,7 @@
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-listdatatypes-wikibase-item-body": "Ссылка на другие элементы в проекте. При вводе значения будет производиться поиск похожих записей в пространстве имён «Item».",
 	"wikibase-listdatatypes-wikibase-property-head": "Свойство",
+	"wikibase-listdatatypes-wikibase-property-body": "Ссылка на другие элементы в проекте. При вводе значения будет производиться поиск похожих записей в пространстве имён «Property».",
 	"wikibase-listdatatypes-commonsmedia-head": "Медиафайл с Викисклада",
 	"wikibase-listdatatypes-commonsmedia-body": "Ссылка на файлы, хранящиеся на Викискладе. После ввода будет произведён поиск соответствий по пространству имён «File» на Викискладе.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Глобальные координаты",

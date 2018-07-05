@@ -86,7 +86,7 @@
 	"datatypes-type-number": "Число",
 	"datatypes-type-mediawiki-title": "Заголовок MediaWiki",
 	"datatypes-type-unknown": "Не визначений",
-	"datatypes-type-boolean": "Булев",
+	"datatypes-type-boolean": "Логічне значення",
 	"datatypes-type-globe-coordinate": "Географічні координати",
 	"datatypes-type-time": "Момент часу",
 	"datatypes-type-wikibase-item": "Елемент",

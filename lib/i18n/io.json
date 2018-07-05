@@ -4,6 +4,7 @@
 			"Joao Xavier"
 		]
 	},
+	"wikibase-error-ui-no-external-page": "Ne esis posibla trovar la pagino \"$2\" en \"$1\".",
 	"wikibase-sitelinks-wikipedia": "Wikipedio",
 	"wikibase-sitelinks-link-columnheading": "Pagino ligata",
 	"wikibase-entity-summary-wbsetlabel-add": "Adjuntita etiketo [$2]",

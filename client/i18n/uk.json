@@ -46,7 +46,7 @@
 	"apihelp-query+pageterms-example-simple": "Отримати всі терміни, пов'язані зі сторінкою «London» мовою користувача.",
 	"apihelp-query+pageterms-example-label-en": "Отримати мітки й псевдоніми, пов'язані з англомовною сторінкою «London».",
 	"apihelp-query+pageterms-example-item": "Отримати мітки й псевдоніми елемента Q84.",
-	"apihelp-query+pageterms-param-terms": "Типи термінів для отримання, наприклад, «description». Якщо не вказано, видаються усі типи.",
+	"apihelp-query+pageterms-param-terms": "Типи термінів для отримання, наприклад, «description», кожен виводиться як масив рядків, впорядкованих за типом, наприклад, {\"description\": [\"foo\"]}. Якщо не вказано, видаються усі типи.",
 	"apihelp-query+wikibase-description": "Отримати інформацію про клієнт Wikibase і пов'язаний репозиторій Wikibase.",
 	"apihelp-query+wikibase-summary": "Отримати інформацію про клієнта Вікібази та пов'язаний репозиторій Вікібази.",
 	"apihelp-query+wikibase-example": "Отримати URL-адресу та іншу інформацію про клієнт і репозиторій Wikibase.",
