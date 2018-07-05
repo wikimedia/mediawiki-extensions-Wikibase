@@ -877,11 +877,8 @@ call_user_func( function() {
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
 		// TODO: use factory?
-		$labelDescriptionLookup = new Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup(
-			$prefetchingTermLookup,
-			$wikibaseRepo->getLanguageFallbackChainFactory()
-				->newFromLanguage( $wikibaseRepo->getUserLanguage() )
-		);
+		$labelDescriptionLookup = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory()
+			->newLabelDescriptionLookup( $wikibaseRepo->getUserLanguage() );
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
 			->getEntityIdFormatter( $labelDescriptionLookup );
 		return new Wikibase\Repo\Specials\SpecialListProperties(
@@ -889,8 +886,7 @@ call_user_func( function() {
 			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
 			$labelDescriptionLookup,
 			$entityIdFormatter,
-			$wikibaseRepo->getEntityTitleLookup(),
-			$prefetchingTermLookup
+			$wikibaseRepo->getEntityTitleLookup()
 		);
 	};
 	$wgSpecialPages['DispatchStats'] = Wikibase\Repo\Specials\SpecialDispatchStats::class;
