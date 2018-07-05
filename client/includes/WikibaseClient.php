@@ -521,8 +521,7 @@ final class WikibaseClient {
 	public function getLanguageFallbackLabelDescriptionLookupFactory() {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			$this->getLanguageFallbackChainFactory(),
-			$this->getTermLookup(),
-			$this->getTermBuffer()
+			$this->getTermLookup()
 		);
 	}
 
