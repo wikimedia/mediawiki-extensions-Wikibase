@@ -12,7 +12,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataTypeSelector;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -61,18 +60,12 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $titleLookup;
 
-	/**
-	 * @var PrefetchingTermLookup
-	 */
-	private $prefetchingTermLookup;
-
 	public function __construct(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoLookup $propertyInfoLookup,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityIdFormatter $entityIdFormatter,
-		EntityTitleLookup $titleLookup,
-		PrefetchingTermLookup $prefetchingTermLookup
+		EntityTitleLookup $titleLookup
 	) {
 		parent::__construct( 'ListProperties' );
 
@@ -81,7 +74,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->titleLookup = $titleLookup;
-		$this->prefetchingTermLookup = $prefetchingTermLookup;
 	}
 
 	/**
@@ -211,8 +203,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$orderedPropertyInfo = array_slice( $orderedPropertyInfo, $offset, $limit, true );
 
 		$propertyIds = array_values( $orderedPropertyInfo );
-
-		$this->prefetchingTermLookup->prefetchTerms( $propertyIds );
 
 		return $propertyIds;
 	}
