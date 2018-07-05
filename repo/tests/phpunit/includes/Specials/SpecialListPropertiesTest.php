@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
@@ -103,7 +103,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		);
 		$bufferingTermLookup = $this->getBufferingTermLookup();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
+			// TODO: "regular" term lookup would do? simplify?
 			$bufferingTermLookup,
 			$languageFallbackChainFactory->newFromLanguage(
 				$language,

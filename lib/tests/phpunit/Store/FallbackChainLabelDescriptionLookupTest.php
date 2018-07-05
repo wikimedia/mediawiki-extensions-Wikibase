@@ -7,11 +7,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityTermLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup
+ * @covers \Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -20,13 +20,13 @@ use Wikibase\TermIndexEntry;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
+class FallbackChainLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 	public function testGetLabel() {
 		$termLookup = $this->getTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		/** @var TermFallback $term */
 		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q118' ) );
@@ -42,7 +42,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		$termLookup = $this->getTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		/** @var TermFallback $term */
 		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q118' ) );
@@ -58,7 +58,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		$termLookup = $this->getTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		$this->assertNull( $labelDescriptionLookup->getLabel( new ItemId( 'Q120' ) ) );
 	}
@@ -67,7 +67,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		$termLookup = $this->getTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		$this->assertNull( $labelDescriptionLookup->getDescription( new ItemId( 'Q120' ) ) );
 	}
@@ -76,7 +76,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		$termLookup = $this->getTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'ar' );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		$this->assertNull( $labelDescriptionLookup->getLabel( new ItemId( 'Q116' ) ) );
 	}
@@ -85,7 +85,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		$termLookup = $this->getTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'ar' );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		$this->assertNull( $labelDescriptionLookup->getDescription( new ItemId( 'Q116' ) ) );
 	}

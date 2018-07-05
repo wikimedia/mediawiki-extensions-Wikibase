@@ -18,7 +18,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
@@ -79,7 +79,8 @@ class HtmlPageLinkRendererBeginHookHandler {
 		$context = RequestContext::getMain();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		// TODO: use factory?
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
 			$wikibaseRepo->getTermLookup(),
 			$languageFallbackChain
 		);

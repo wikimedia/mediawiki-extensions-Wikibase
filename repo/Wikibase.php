@@ -876,7 +876,8 @@ call_user_func( function() {
 	$wgSpecialPages['ListProperties'] = function () {
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
-		$labelDescriptionLookup = new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+		// TODO: use factory?
+		$labelDescriptionLookup = new Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup(
 			$prefetchingTermLookup,
 			$wikibaseRepo->getLanguageFallbackChainFactory()
 				->newFromLanguage( $wikibaseRepo->getUserLanguage() )

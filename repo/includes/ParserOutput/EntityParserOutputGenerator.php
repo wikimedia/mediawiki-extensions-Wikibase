@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
@@ -278,7 +278,9 @@ class EntityParserOutputGenerator {
 			$entityLookup->addEntity( $entity );
 		}
 
-		$entityLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		// TODO: should this be a buffering one? apparently does not have to?
+		// TODO: use the factory?
+		$entityLabelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
 			new EntityRetrievingTermLookup( $entityLookup ),
 			$this->languageFallbackChain
 		);
@@ -312,7 +314,9 @@ class EntityParserOutputGenerator {
 			$textInjector
 		);
 
-		$referencedEntitiesLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		// TODO: should this be a buffering one? apparently does not have to?
+		// TODO: use the factory?
+		$referencedEntitiesLabelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
 			new EntityInfoTermLookup( $entityInfo ),
 			$this->languageFallbackChain
 		);

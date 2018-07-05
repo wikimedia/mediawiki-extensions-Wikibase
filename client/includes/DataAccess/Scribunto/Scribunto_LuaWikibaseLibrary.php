@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
@@ -247,7 +247,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newLanguageDependentLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		// TODO: should be buffering one, shouldn't it?
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
 			$wikibaseClient->getTermLookup(),
 			$this->getLanguageFallbackChain()
 		);

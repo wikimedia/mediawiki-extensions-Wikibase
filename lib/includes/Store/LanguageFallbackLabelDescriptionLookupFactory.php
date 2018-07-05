@@ -87,7 +87,7 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 
 		$languages = $languageFallbackChain->getFetchLanguageCodes();
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		$labelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
 			$this->termLookup,
 			$languageFallbackChain
 		);
