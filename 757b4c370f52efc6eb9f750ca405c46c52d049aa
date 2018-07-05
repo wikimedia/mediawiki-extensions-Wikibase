@@ -140,6 +140,29 @@
       "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4088e216_1003f050",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5725
+      },
+      "writtenOn": "2018-07-05T08:45:02Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 31,
+        "startChar": 176,
+        "endLine": 31,
+        "endChar": 180
+      },
+      "revId": "757b4c370f52efc6eb9f750ca405c46c52d049aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
