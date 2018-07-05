@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Interactors;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\FallbackChainLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
@@ -65,7 +66,9 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 		$this->bufferingTermLookup = $bufferingTermLookup;
 		$this->languageFallbackChainFactory = $fallbackFactory;
 		$this->displayLanguageCode = $displayLanguageCode;
-		$this->labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+		// TODO: this should be buffering one
+		// TODO: use factory?
+		$this->labelDescriptionLookup = new FallbackChainLabelDescriptionLookup(
 			$this->bufferingTermLookup,
 			$this->languageFallbackChainFactory->newFromLanguageCode( $this->displayLanguageCode )
 		);

@@ -129,6 +129,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\EntityTermLookup' => __DIR__ . '/includes/Store/EntityTermLookup.php',
 	'Wikibase\\Lib\\Store\\EntityTermLookupBase' => __DIR__ . '/includes/Store/EntityTermLookupBase.php',
 	'Wikibase\\Lib\\Store\\EntityTitleLookup' => __DIR__ . '/includes/Store/EntityTitleLookup.php',
+	'Wikibase\\Lib\\Store\\FallbackChainLabelDescriptionLookup' => __DIR__ . '/includes/Store/FallbackChainLabelDescriptionLookup.php',
 	'Wikibase\\Lib\\Store\\FallbackPropertyOrderProvider' => __DIR__ . '/includes/Store/FallbackPropertyOrderProvider.php',
 	'Wikibase\\Lib\\Store\\FieldPropertyInfoProvider' => __DIR__ . '/includes/Store/FieldPropertyInfoProvider.php',
 	'Wikibase\\Lib\\Store\\GenericEntityInfoBuilder' => __DIR__ . '/includes/Store/GenericEntityInfoBuilder.php',
