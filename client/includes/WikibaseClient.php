@@ -64,7 +64,6 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
@@ -215,10 +214,6 @@ final class WikibaseClient {
 	 */
 	private $termLookup = null;
 
-	/**
-	 * @var TermBuffer|null
-	 */
-	private $termBuffer = null;
 
 	/**
 	 * @var PrefetchingTermLookup|null
@@ -429,17 +424,6 @@ final class WikibaseClient {
 	 */
 	private static function getDefaultEntityTypes() {
 		return require __DIR__ . '/../../lib/WikibaseLib.entitytypes.php';
-	}
-
-	/**
-	 * @return TermBuffer
-	 */
-	public function getTermBuffer() {
-		if ( !$this->termBuffer ) {
-			$this->termBuffer = $this->getPrefetchingTermLookup();
-		}
-
-		return $this->termBuffer;
 	}
 
 	/**
