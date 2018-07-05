@@ -156,6 +156,7 @@ class SearchEntities extends Maintenance {
 
 		switch ( $engine ) {
 			case 'sql':
+				// TODO: this constructor call is now broken!
 				return new EntityTermSearchHelper(
 					$this->repo->getEntityLookup(),
 					$this->repo->getEntityIdParser(),
