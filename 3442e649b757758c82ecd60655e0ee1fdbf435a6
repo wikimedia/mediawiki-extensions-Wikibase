@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3acfbadc_c455f582",
+        "filename": "repo/tests/selenium/pagesections/statement.section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-06T11:44:32Z",
+      "side": 1,
+      "message": "We live in the future!",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 49
+      },
+      "revId": "3442e649b757758c82ecd60655e0ee1fdbf435a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a958d4f_884bc675",
+        "filename": "repo/tests/selenium/pagesections/statement.section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-06T11:44:32Z",
+      "side": 1,
+      "message": "The name implies singular but there could be multiple (e.g. lexeme forms) that would also be found. Should we factor this knowledge in at this point already, return a collection and operate on the first (and in wikibase only one) explicitly instead?",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "3442e649b757758c82ecd60655e0ee1fdbf435a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "335ff7df_77e788cc",
+        "filename": "repo/tests/selenium/pagesections/statement.section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-06T11:44:32Z",
+      "side": 1,
+      "message": "Reuse of this.statementsContainer unless the child combinator makes this impossible - should not.",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 45
+      },
+      "revId": "3442e649b757758c82ecd60655e0ee1fdbf435a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7165f8eb_0977bfff",
+        "filename": "repo/tests/selenium/pagesections/statement.section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-06T11:44:32Z",
+      "side": 1,
+      "message": ".waitForEnabled() is not working?",
+      "range": {
+        "startLine": 46,
+        "startChar": 86,
+        "endLine": 46,
+        "endChar": 95
+      },
+      "revId": "3442e649b757758c82ecd60655e0ee1fdbf435a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
