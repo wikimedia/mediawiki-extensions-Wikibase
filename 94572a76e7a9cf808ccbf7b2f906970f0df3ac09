@@ -34,6 +34,24 @@
       "revId": "94572a76e7a9cf808ccbf7b2f906970f0df3ac09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37e40154_e19bd157",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-06T23:30:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d8af711_7383dc3b",
+      "revId": "94572a76e7a9cf808ccbf7b2f906970f0df3ac09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
