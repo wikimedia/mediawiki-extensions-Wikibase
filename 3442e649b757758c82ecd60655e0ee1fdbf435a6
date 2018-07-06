@@ -91,6 +91,29 @@
       "revId": "3442e649b757758c82ecd60655e0ee1fdbf435a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e5386ac_7d93f5bb",
+        "filename": "repo/tests/selenium/pagesections/statement.section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-06T11:50:34Z",
+      "side": 1,
+      "message": "Even if the .waitUntil() needs to stay, you could use an arrow function here and lose the self variable.\nhttps://alicoding.com/using-javascript-es6-arrow-function-for-callback-and-binding/",
+      "range": {
+        "startLine": 46,
+        "startChar": 97,
+        "endLine": 46,
+        "endChar": 110
+      },
+      "revId": "3442e649b757758c82ecd60655e0ee1fdbf435a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
