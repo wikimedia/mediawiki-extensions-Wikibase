@@ -16,6 +16,24 @@
       "revId": "94572a76e7a9cf808ccbf7b2f906970f0df3ac09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d8af711_7383dc3b",
+        "filename": "repo/includes/Search/Elastic/DispatchingQueryBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-06T21:50:10Z",
+      "side": 1,
+      "message": "What probably should happen is if we have one item-type search, then use it, otherwise use the generic one. I.e. it should be like this:\n1. Articles - generic\n2. Item1 - specialized \n3. Articles + Item1 - specialized + warning\n4. Articles + Item1 + Item2 - generic, no warning\n\nSo \"search all\" probably should give no warning now. I think it was hard to do before due to the code being in different places, but should be easier now.",
+      "parentUuid": "81968e04_ba478636",
+      "revId": "94572a76e7a9cf808ccbf7b2f906970f0df3ac09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
