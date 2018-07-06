@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40179228_db84ffc5",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-07-06T15:27:37Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 878,
+        "startChar": 2,
+        "endLine": 878,
+        "endChar": 24
+      },
+      "revId": "aaa7ff4f83d86dd615d914c15da2434d3ec760ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fb40819_e81a288b",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2018-07-06T15:27:37Z",
+      "side": 1,
+      "message": "can the comment be deleted?",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 23
+      },
+      "revId": "aaa7ff4f83d86dd615d914c15da2434d3ec760ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
