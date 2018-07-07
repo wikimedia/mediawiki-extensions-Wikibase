@@ -191,6 +191,7 @@
 	"wikibase-newentity-description": "Beskrivelse:",
 	"wikibase-newentity-submit": "Opprett",
 	"special-setlabel": "Lagre en etikett",
+	"wikibase-search-result-stats": "$1 {{PLURAL:$1|utsagn}}, $2 {{PLURAL:$2|sidelenke|sidelenker}}",
 	"wikibase-setlabel-introfull": "Du lagrer etiketten for $2 i [[$1]].",
 	"wikibase-setlabel-intro": "Dette skjemaet lar deg angi etiketten til en entitet. Du må oppgi IDen til entiteten (f.eks Q23), en språkkode (f.eks «nb») og den ønskede etiketten.",
 	"wikibase-setlabel-label": "Etikett:",
