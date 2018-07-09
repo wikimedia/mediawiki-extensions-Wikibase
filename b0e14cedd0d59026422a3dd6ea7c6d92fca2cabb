@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "535e8e9f_1d36f160",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-09T17:51:09Z",
+      "side": 1,
+      "message": "It should also be noted that there is already a psr6 adapter for the bagostuff https://packagist.org/packages/addshore/psr-6-mediawiki-bagostuff-adapter\n\nAnd it is actually used in WMF production for donations https://packagist.org/packages/addshore/psr-6-mediawiki-bagostuff-adapter/dependents\n\nThere are already adapters that can use a psr16 cache as a psr6 cache and vice versa: https://symfony.com/doc/current/components/cache/psr6_psr16_adapters.html",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 106
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d50baa_095604bb",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 8
