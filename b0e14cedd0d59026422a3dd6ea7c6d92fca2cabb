@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b21436b8_49f61e8a",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-09T17:54:29Z",
+      "side": 1,
+      "message": "Also worth a note:\n\n\"Luckily, it’s not strictly either-or! Psr\\Cache\\CacheItemPoolInterface and Psr\\SimpleCache\\CacheInterface declare only one method of the same name, clear(). As both declarations have the same signature, any cache system may implement both interfaces as long as a PHP dependency of version 5.3.9 or greater is required.\"\n\nA single adapter can cover both PSR implementations :)",
+      "parentUuid": "535e8e9f_1d36f160",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 106
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d50baa_095604bb",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 8
