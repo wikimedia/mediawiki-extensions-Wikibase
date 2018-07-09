@@ -63,6 +63,18 @@ class WikibaseApi {
 			} );
 	}
 
+	getEntity( id ) {
+		return new Promise( ( resolve, reject ) => {
+			bot.request( {
+				ids: id,
+				action: 'wbgetentities',
+				token: bot.editToken
+			} ).then( ( response ) => {
+				resolve( response.entities[ id ] );
+			}, reject );
+		} );
+	}
+
 }
 
 module.exports = new WikibaseApi();
