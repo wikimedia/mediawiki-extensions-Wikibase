@@ -60,5 +60,6 @@
 	"echo-pref-tooltip-wikibase-action": "Паведамляць мне, калі хтосьці падключаецца да старонкі, якую {{GENDER:|я стварыў у|я стварыла ў}} элеменце {{grammar:genitive|{{WBREPONAME}}}}.",
 	"unresolved-property-category": "Старонкі з недаступнымі уласцівасцямі Вікідадзеных",
 	"unresolved-property-category-desc": "Старонка, якая спасылаецца на ўласцівасць Вікідадзеных, што не можа быць знойдзена па ID або подпісу",
-	"connected-redirect-category": "Перасылкі, звязаныя з элементам {{grammar:genitive|{{WBREPONAME}}}}"
+	"connected-redirect-category": "Перасылкі, звязаныя з элементам {{grammar:genitive|{{WBREPONAME}}}}",
+	"connected-redirect-category-desc": "Гэтая катэгорыя змяшчае старонкі-перасылкі, якія звязаны з элементам {{grammar:genitive|{{WBREPONAME}}}}."
 }

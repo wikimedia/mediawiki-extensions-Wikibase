@@ -76,5 +76,6 @@
 	"wikibase-property-render-error": "Nepodarilo sa zobraziť vlastnosť $1: $2",
 	"wikibase-otherprojects": "V iných projektoch",
 	"wikibase-otherprojects-beta-message": "Panel Iné projekty",
-	"wikibase-otherprojects-beta-description": "Pridáva na postranný panel sekciu „{{int:wikibase-otherprojects}}“ obsahujúcu odkazy na ostatné projekty Wikimedia podľa údajov na {{grammar:6sg|{{WBREPONAME}}}}."
+	"wikibase-otherprojects-beta-description": "Pridáva na postranný panel sekciu „{{int:wikibase-otherprojects}}“ obsahujúcu odkazy na ostatné projekty Wikimedia podľa údajov na {{grammar:6sg|{{WBREPONAME}}}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|prepojenie}} s {{GRAMMAR:7sg|{{WBREPONAME}}}}"
 }

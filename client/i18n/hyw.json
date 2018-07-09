@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"ArmenBakkalian"
+			"ArmenBakkalian",
+			"Azniv Stepanian"
 		]
 	},
-	"wikibase-editlinks": "Փոխել յղումները",
-	"wikibase-editlinkstitle": "Խմբագրել միջ-լեզուային յղումները",
+	"wikibase-editlinks": "Խմբագրել յղումները",
+	"wikibase-editlinkstitle": "‎Խմբագրել միջլեզուական յղումները",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Թաքցնել",
 	"wikibase-rc-hide-wikidata-show": "Ցուցադրել",

@@ -58,7 +58,7 @@
 	"wikibase-watchlist-show-changes-pref": "Näytä {{WBREPONAME}}-muokkaukset tarkkailulistalla",
 	"wikibase-error-serialize-error": "Tietojen sarjoittaminen epäonnistui.",
 	"wikibase-error-invalid-entity-id": "Tunniste \"$2\" on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.",
-	"wikibase-error-exceeded-referenced-entity-id-limit": "Liian monta mw.wikibase.getReferencedEntityId-kutsua. Enintään $2-kutsua sallittu.",
+	"wikibase-error-exceeded-referenced-entity-id-limit": "Liian monta mw.wikibase.getReferencedEntityId-kutsua. Enintään $2 {{PLURAL:$2|kutsu|kutsua}} sallittu.",
 	"unconnectedpages": "Sivut, joita ei ole liitetty kohteisiin",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|kieltenvälinen linkki|kieltenvälistä linkkiä}} sivulla)",
 	"wikibase-unconnectedpages-submit": "Näytä sivut",
