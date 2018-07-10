@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5142f9d1_2b4f9c5c",
+        "filename": "repo/tests/selenium/pagesections/form.widgets.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-10T14:40:09Z",
+      "side": 1,
+      "message": "I find this name problematic, especially when I saw it included on a lexeme page (input form vs lexeme form). OOUI seems to call them ComboBox? https://doc.wikimedia.org/oojs-ui/master/demos/?page\u003dwidgets\u0026theme\u003dwikimediaui\u0026direction\u003dltr\u0026platform\u003ddesktop#demo-section-comboBox",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 15
+      },
+      "revId": "03da9de05421fcaf5f03b43016b34bee8221be24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
