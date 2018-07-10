@@ -45,7 +45,6 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 				->disableOriginalConstructor()->getMock(),
 			$this->getMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
-			new ItemIdParser(),
 			$this->getMock( Serializer::class ),
 			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
 				->disableOriginalConstructor()->getMock()

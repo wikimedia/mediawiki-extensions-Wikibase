@@ -203,8 +203,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) ),
 			new ReferencedEntitiesDataUpdater(
 				$this->newEntityReferenceExtractor(),
-				$entityTitleLookup,
-				$entityIdParser
+				$entityTitleLookup
 			)
 		];
 
@@ -391,8 +390,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$dataUpdaters = [
 			new ReferencedEntitiesDataUpdater(
 				$this->newEntityReferenceExtractor(),
-				$entityTitleLookup,
-				$entityIdParser
+				$entityTitleLookup
 			)
 		];
 
