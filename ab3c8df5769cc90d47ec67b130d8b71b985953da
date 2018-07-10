@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1b833413_76593edf",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-10T13:32:12Z",
+      "side": 1,
+      "message": "\u003e If you were to pass in the value to statsd and increment a counter...\n\nI don\u0027t understand what does it mean. Can you explain?\n\n\u003e What is the highest number of entityIds that your expecting to be passed into prefetchTerms?\n\nI don\u0027t really know. I think it is less than 1000. This is one of the reasons I created this patch.\n\n\nTo clarify the goal: I want to see that `prefetchTerms()` was called this-many-times with this-many-ids and that-many-times with that-many-ids.",
+      "parentUuid": "7277513c_23bc5be3",
+      "range": {
+        "startLine": 121,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 55
+      },
+      "revId": "ab3c8df5769cc90d47ec67b130d8b71b985953da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c073b04_4488dbb4",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-10T13:14:36Z",
       "side": 1,
       "message": "it would be worth doing a \"submetric\" here using a . instead of just an _ or this will appear in the grafana graphs looking at individual method calls on https://grafana.wikimedia.org/dashboard/db/wikibase-wb_terms\n\nSomething like BufferingTermLookup_prefetchTerms.byIdCount.0 for example would be easier to work with on the grafana side of things.",
+      "range": {
+        "startLine": 127,
+        "startChar": 67,
+        "endLine": 127,
+        "endChar": 76
+      },
+      "revId": "ab3c8df5769cc90d47ec67b130d8b71b985953da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fc3f0f1_4a773716",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-10T13:32:12Z",
+      "side": 1,
+      "message": "\u003e ... this will appear in the grafana graphs looking at individual method calls ...\n\nThis is exactly what I wanted. I\u0027m not able to edit Graphana boards (don\u0027t know how and probably don\u0027t have enough rights).",
+      "parentUuid": "9c073b04_4488dbb4",
       "range": {
         "startLine": 127,
         "startChar": 67,
