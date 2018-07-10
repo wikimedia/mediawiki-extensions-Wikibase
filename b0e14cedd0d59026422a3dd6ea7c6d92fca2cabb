@@ -69,6 +69,30 @@
       "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9179b6af_30dfc37a",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-10T10:03:46Z",
+      "side": 1,
+      "message": "I would like the opposite.\n\nI don\u0027t mind if it gets in MediaWiki, but I don\u0027t want to do anything about it as soon as it won\u0027t bring us much (if any) value and will probably take a lot of time and effort.",
+      "parentUuid": "84d50baa_095604bb",
+      "range": {
+        "startLine": 17,
+        "startChar": 40,
+        "endLine": 17,
+        "endChar": 69
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
