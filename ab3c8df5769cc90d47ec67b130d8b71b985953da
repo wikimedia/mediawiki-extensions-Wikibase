@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7277513c_23bc5be3",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-10T13:14:36Z",
+      "side": 1,
+      "message": "If you were to pass in the value to statsd and increment a counter you actually get some extra things:\nSee https://wikitech.wikimedia.org/wiki/Graphite#Counters (mean, rate, lower and upper etc)\n\nBut I guess this depends on what your trying to get from the data.\n\nWhat is the highest number of entityIds that your expecting to be passed into prefetchTerms ?",
+      "range": {
+        "startLine": 121,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 55
+      },
+      "revId": "ab3c8df5769cc90d47ec67b130d8b71b985953da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c073b04_4488dbb4",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-10T13:14:36Z",
+      "side": 1,
+      "message": "it would be worth doing a \"submetric\" here using a . instead of just an _ or this will appear in the grafana graphs looking at individual method calls on https://grafana.wikimedia.org/dashboard/db/wikibase-wb_terms\n\nSomething like BufferingTermLookup_prefetchTerms.byIdCount.0 for example would be easier to work with on the grafana side of things.",
+      "range": {
+        "startLine": 127,
+        "startChar": 67,
+        "endLine": 127,
+        "endChar": 76
+      },
+      "revId": "ab3c8df5769cc90d47ec67b130d8b71b985953da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
