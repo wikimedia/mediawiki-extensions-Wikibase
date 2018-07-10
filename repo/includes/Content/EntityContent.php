@@ -186,7 +186,8 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns a ParserOutput object containing the HTML.
 	 *
 	 * @note: this calls ParserOutput::recordOption( 'userlang' ) to split the cache
-	 * by user language.
+	 * by user language, and ParserOutput::recordOption( 'wb' ) to split the cache on
+	 * EntityHandler::PARSER_VERSION.
 	 *
 	 * @see Content::getParserOutput
 	 *
@@ -231,6 +232,8 @@ abstract class EntityContent extends AbstractContent {
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
 		$output->recordOption( 'userlang' );
+		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
+		$output->recordOption( 'wb' );
 		if ( $generateHtml ) {
 			$chain = $this->getRedirectChain();
 			$language = $this->getContentHandler()->getPageViewLanguage( $target );
@@ -269,6 +272,8 @@ abstract class EntityContent extends AbstractContent {
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
 		$output->recordOption( 'userlang' );
+		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
+		$output->recordOption( 'wb' );
 
 		$this->applyEntityPageProperties( $output );
 

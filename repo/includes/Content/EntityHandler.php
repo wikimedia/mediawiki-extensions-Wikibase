@@ -290,32 +290,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @see ContentHandler::makeParserOptions
-	 *
-	 * @param IContextSource|User|string $context
-	 *
-	 * @return ParserOptions
-	 */
-	public function makeParserOptions( $context ) {
-		if ( $context === 'canonical' ) {
-			// There are no "canonical" ParserOptions for Wikibase,
-			// as everything is User-language dependent
-			$context = RequestContext::getMain();
-		}
-
-		$options = parent::makeParserOptions( $context );
-
-		// The html representation of entities depends on the user language, so we
-		// have to call ParserOptions::getUserLangObj to split the cache by user language.
-		$options->getUserLangObj();
-
-		// bump PARSER VERSION when making breaking changes to parser output (e.g. entity view).
-		$options->addExtraKey( 'wb' . self::PARSER_VERSION );
-
-		return $options;
-	}
-
-	/**
 	 * @see ContentHandler::exportTransform
 	 *
 	 * @param string $blob

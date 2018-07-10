@@ -513,15 +513,6 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$this->assertInstanceOf( ValidatorErrorLocalizer::class, $localizer );
 	}
 
-	public function testMakeParserOptions() {
-		$handler = $this->getHandler();
-
-		$options = $handler->makeParserOptions( 'canonical' );
-		$hash = $options->optionsHash( [ 'userlang' ] );
-
-		$this->assertRegExp( '/wb\d+/', $hash, 'contains Wikibase version' );
-	}
-
 	/**
 	 * @param Title $title
 	 * @return RequestContext

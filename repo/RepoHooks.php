@@ -1221,4 +1221,24 @@ final class RepoHooks {
 		}
 	}
 
+	/**
+	 * Handler for the ParserOptionsRegister hook to add a "wb" option for cache-splitting
+	 *
+	 * This registers a lazy-loaded parser option with its value being the EntityHandler
+	 * parser version. Non-Wikibase parses will ignore this option, while Wikibase parses
+	 * will trigger its loading via ParserOutput::recordOption() and thereby include it
+	 * in the cache key to fragment the cache by EntityHandler::PARSER_VERSION.
+	 *
+	 * @param array &$defaults Options and their defaults
+	 * @param array &$inCacheKey Whether each option splits the parser cache
+	 * @param array &$lazyOptions Initializers for lazy-loaded options
+	 */
+	public static function onParserOptionsRegister( &$defaults, &$inCacheKey, &$lazyOptions ) {
+		$defaults['wb'] = null;
+		$inCacheKey['wb'] = true;
+		$lazyOptions['wb'] = function () {
+			return EntityHandler::PARSER_VERSION;
+		};
+	}
+
 }
