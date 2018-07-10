@@ -19,7 +19,8 @@
 			"Gamliel Fishkin",
 			"Alexey zakharenkov",
 			"Facenapalm",
-			"Stjn"
+			"Stjn",
+			"Vlad5250"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -106,6 +107,7 @@
 	"wikibase-entityusage-submit": "Показать страницы",
 	"wikibase-pageinfo-entity-id": "Идентификатор элемента в {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "отсутствует",
+	"wikibase-pageinfo-description-local": "Локальное описание",
 	"wikibase-pageinfo-entity-usage": "Сущности {{WBREPONAME}}, используемые на этой странице",
 	"wikibase-pageinfo-entity-usage-S": "Ссылка на сайт",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Обозначение (метка): $1",
@@ -118,7 +120,8 @@
 	"wikibase-otherprojects": "В других проектах",
 	"wikibase-otherprojects-beta-message": "Боковая панель других проектов",
 	"wikibase-otherprojects-beta-description": "Добавляет на боковую панель раздел «{{int:wikibase-otherprojects}}», который содержит ссылки на другие проекты Фонда Викимедиа на основе данных {{WBREPONAME}}.",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Соединение|Соединения}} с {{grammar:genitive|{{WBREPONAME}}}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Соединение|Соединения}} с элементом {{grammar:genitive|{{WBREPONAME}}}}",
+	"echo-pref-tooltip-wikibase-action": "Уведомлять меня, когда кто-то соединяет {{GENDER:|созданную мной}} страницу к элементу {{grammar:genitive|{{WBREPONAME}}}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент",
 	"unresolved-property-category": "Страницы с недоступными свойствами",
 	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени.",

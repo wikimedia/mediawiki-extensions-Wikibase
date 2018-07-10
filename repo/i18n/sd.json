@@ -3,7 +3,8 @@
 		"authors": [
 			"Sindhu",
 			"Aursani",
-			"Mehtab ahmed"
+			"Mehtab ahmed",
+			"Tweety"
 		]
 	},
 	"wikibase-entity-item": "جزو",
@@ -17,6 +18,7 @@
 	"wikibase-label-empty": "ڪو بہ ليبل بيان ڪيل نہ آهي",
 	"wikibase-description-empty": "تشريح غير ميسر",
 	"wikibase-diffview-link": "ڳنڍڻا",
+	"wikibase-sitelink-page-edit-placeholder": "صفحو",
 	"wikibase-statementsection-statements": "بيانات",
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
 	"wikibase-statementview-rank-normal": "عام درجو",

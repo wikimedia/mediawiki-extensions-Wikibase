@@ -4,7 +4,8 @@
 			"Sindhu",
 			"Mehtab ahmed",
 			"Aursani",
-			"Indus Asia"
+			"Indus Asia",
+			"Tweety"
 		]
 	},
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
@@ -28,5 +29,6 @@
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} تي وجود وٺندڙ ترميمون.",
 	"wikibase-replicationnote": "مھرباني ڪري اھو ياد رھي تہ سڀني وڪين تي تبديليون نظر اچڻ ۾ ڪجھ منٽن جو وقت لڳي سگھي ٿو.",
 	"wikibase-unconnectedpages-submit": "صفحا ڏيکاريو",
+	"wikibase-pageinfo-entity-usage": "هن صفحي تي {{WBREPONAME}} جا استعمال ٿيل حصا",
 	"wikibase-otherprojects": "ٻين رٿائن ۾"
 }
