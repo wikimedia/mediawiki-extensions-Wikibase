@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ac2d0e9_bedab0b6",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-10T14:53:33Z",
+      "side": 1,
+      "message": "This _ can also just be a .\nThis can make working with the data easier in the log run as the metric names can easily be split into just their int value",
+      "range": {
+        "startLine": 124,
+        "startChar": 68,
+        "endLine": 124,
+        "endChar": 69
+      },
+      "revId": "64af7d923804b68baff0491d4abc71ef31b03d3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
