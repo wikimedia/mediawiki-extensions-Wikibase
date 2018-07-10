@@ -169,7 +169,6 @@ return call_user_func( function() {
 				'jquery.ui.toggler',
 				'jquery.wikibase.entitytermsforlanguagelistview',
 				'mediawiki.api',
-				'mediawiki.api.options',
 				'mediawiki.cookie',
 				'mediawiki.user',
 			],

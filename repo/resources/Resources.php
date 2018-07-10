@@ -116,7 +116,7 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js',
 			],
 			'dependencies' => [
-				'mediawiki.api.options',
+				'mediawiki.api',
 				'mediawiki.cookie',
 				'mediawiki.page.watch.ajax',
 				'mediawiki.user',
