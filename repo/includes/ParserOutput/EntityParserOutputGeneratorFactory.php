@@ -189,8 +189,7 @@ class EntityParserOutputGeneratorFactory {
 		$updaters = [
 			new ReferencedEntitiesDataUpdater(
 				$this->entityReferenceExtractorDelegator,
-				$this->entityTitleLookup,
-				$this->externalEntityIdParser
+				$this->entityTitleLookup
 			),
 			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
 			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
