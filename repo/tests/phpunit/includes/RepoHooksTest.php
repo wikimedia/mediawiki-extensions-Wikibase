@@ -9,11 +9,13 @@ use ImportStringSource;
 use MediaWikiTestCase;
 use MWException;
 use OutputPage;
+use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use SkinTemplate;
 use stdClass;
 use Title;
+use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
@@ -293,6 +295,43 @@ XML
 		$this->assertSame( 'wikibase-view-chunks', $out->getProperty( 'wikibase-view-chunks' ) );
 		$this->assertSame( 'wikibase-meta-tags', $out->getProperty( 'wikibase-meta-tags' ) );
 		$this->assertSame( $altLinks, $out->getLinkTags() );
+	}
+
+	public function testOnParserOptionsRegister() {
+		$defaults = [];
+		$inCacheKey = [];
+		$lazyOptions = [];
+
+		RepoHooks::onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
+
+		$this->assertSame( [ 'wb' => null ], $defaults );
+		$this->assertSame( [ 'wb' => true ], $inCacheKey );
+		$this->assertSame( [ 'wb' ], array_keys( $lazyOptions ) );
+		$this->assertInternalType( 'callable', $lazyOptions['wb'] );
+		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions['wb']() );
+	}
+
+	public function testOnParserOptionsRegister_hook() {
+		$pOpts = ParserOptions::newCanonical();
+
+		$used = [];
+		$pOpts->registerWatcher( function ( $opt ) use ( &$used ) {
+			$used[$opt] = true;
+		} );
+
+		$this->assertSame( EntityHandler::PARSER_VERSION, $pOpts->getOption( 'wb' ) );
+		$this->assertSame( [ 'wb' => true ], $used );
+		$this->assertTrue( $pOpts->isSafeToCache() );
+		$this->assertRegExp(
+			'/(?:^|!)wb=' . preg_quote( EntityHandler::PARSER_VERSION, '/' ) . '(?:!|$)/',
+			$pOpts->optionsHash( [ 'wb' ] )
+		);
+
+		$pOpts2 = ParserOptions::newCanonical();
+		$this->assertRegExp(
+			'/(?:^|!)wb=' . preg_quote( EntityHandler::PARSER_VERSION, '/' ) . '(?:!|$)/',
+			$pOpts2->optionsHash( [ 'wb' ] )
+		);
 	}
 
 	/**
