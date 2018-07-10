@@ -3,7 +3,6 @@
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModel.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModel)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/?branch=master)
-[![Dependency Status](https://www.versioneye.com/php/wikibase:data-model/dev-master/badge.svg)](https://www.versioneye.com/php/wikibase:data-model/dev-master)
 [![Download count](https://poser.pugx.org/wikibase/data-model/d/total.png)](https://packagist.org/packages/wikibase/data-model)
 [![License](https://poser.pugx.org/wikibase/data-model/license.svg)](https://packagist.org/packages/wikibase/data-model)
 
