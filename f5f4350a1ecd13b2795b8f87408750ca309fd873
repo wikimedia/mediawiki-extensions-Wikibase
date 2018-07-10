@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "131b246c_1e33acf3",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-10T15:11:17Z",
+      "side": 1,
+      "message": "If we have two methods, how will we understand whether we need to persist data in cache storage or not?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 51
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90ce5369_beab9479",
         "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
         "patchSetId": 11
