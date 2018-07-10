@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "7b1b4c3f_fdcf64cf",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-10T13:44:07Z",
+      "side": 1,
+      "message": "So you could do something like increment( prefetchTerms.idCount.total, count( $entityIds ) );\n\nThen in grafana you could have\n\nprefetchTerms.idCount.total.sum # total ids in 1 minuite bucket\nprefetchTerms.idCount.total.upper # highest number of ids in a single request in the bucket\nprefetchTerms.idCount.total.lower # lowest number of ids in a single request in the bucket\nprefetchTerms.idCount.total.mean # mean of number of ids in a bucket for the calls\netc.\nI\u0027m pretty sure there is also p95 p99 etc but I cant find that in the docs, it could be that is only for timers.\n\nIf the above would answer the question your asking then it would be cleaner than splitting metrics based on the closest power.\n\nAlthough if the closest power approach would be better we can do that. It would result in roughly ~11 metrics if the general maximum that is expected is 1000 ids.",
+      "parentUuid": "1b833413_76593edf",
+      "range": {
+        "startLine": 121,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 55
+      },
+      "revId": "ab3c8df5769cc90d47ec67b130d8b71b985953da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c073b04_4488dbb4",
         "filename": "lib/includes/Store/BufferingTermLookup.php",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "\u003e ... this will appear in the grafana graphs looking at individual method calls ...\n\nThis is exactly what I wanted. I\u0027m not able to edit Graphana boards (don\u0027t know how and probably don\u0027t have enough rights).",
       "parentUuid": "9c073b04_4488dbb4",
+      "range": {
+        "startLine": 127,
+        "startChar": 67,
+        "endLine": 127,
+        "endChar": 76
+      },
+      "revId": "ab3c8df5769cc90d47ec67b130d8b71b985953da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc95873e_15231d8e",
+        "filename": "lib/includes/Store/BufferingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-10T13:44:07Z",
+      "side": 1,
+      "message": "It should probably still use sub metrics otherwise it messes up the semantics of the namespaces.\nFor example, right now wikibase.repo.wb_terms.select.* can be counted to see how many selects are hitting the table.\nif this patch is merged as is then that would no longer be the case.\n\n\u003e I\u0027m not able to edit Graphana boards (don\u0027t know how and probably don\u0027t have enough rights).\n\nWe can pretty easily get you access for that, I just tried looking in the tool that would tell me https://tools.wmflabs.org/ldap/group/nda and https://tools.wmflabs.org/ldap/group/grafana-admin but the tool is down currently so I filed https://phabricator.wikimedia.org/T199225",
+      "parentUuid": "7fc3f0f1_4a773716",
       "range": {
         "startLine": 127,
         "startChar": 67,
