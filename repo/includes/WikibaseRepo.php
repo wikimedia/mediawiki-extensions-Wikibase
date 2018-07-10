@@ -1730,7 +1730,6 @@ class WikibaseRepo {
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
-			$this->getLocalItemUriParser(),
 			$this->getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
 				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
