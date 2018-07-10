@@ -115,6 +115,18 @@ class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTer
 			'wikibase.repo.wb_terms.select.BufferingTermLookup_prefetchTerms'
 		);
 
+		if ( count( $entityIds ) === 0 ) {
+			$idCount = "0";
+		} else {
+			$closest2Power = round( log( count( $entityIds ), 2 ) );
+			$low = ceil( pow( 2, $closest2Power - 0.5 ) );
+			$high = floor( pow( 2, $closest2Power + 0.5 ) );
+			$idCount = $low === $high ? $low : "{$low}-{$high}";
+		}
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.select.BufferingTermLookup_prefetchTerms_idCount_' . $idCount
+		);
+
 		if ( empty( $entityIds ) ) {
 			return;
 		}
