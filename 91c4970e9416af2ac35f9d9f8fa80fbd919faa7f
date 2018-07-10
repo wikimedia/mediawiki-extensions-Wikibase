@@ -16,6 +16,24 @@
       "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db1369fb_59747d12",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-10T15:16:50Z",
+      "side": 1,
+      "message": "If this awesome hack works, I suggest to leave it as is.",
+      "parentUuid": "b963c0c5_d4366ed4",
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
