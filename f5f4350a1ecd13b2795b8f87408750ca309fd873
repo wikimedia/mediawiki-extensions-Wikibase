@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90ce5369_beab9479",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-10T15:10:07Z",
+      "side": 1,
+      "message": "`getLabel()`?",
+      "range": {
+        "startLine": 159,
+        "startChar": 13,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
