@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f4fad2da_18bad40c",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-11T11:31:28Z",
+      "side": 1,
+      "message": "If what you wrote is true, then would it be a good idea to just remove this implementation and not use `WANObjectCache` at all?",
+      "parentUuid": "37ff8637_c37212f0",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d3dfde3_842ca565",
         "filename": "lib/includes/SimpleWANObjectCache.php",
         "patchSetId": 3
