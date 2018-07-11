@@ -22,6 +22,53 @@
       "revId": "03da9de05421fcaf5f03b43016b34bee8221be24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fd29e2d_49ac8a89",
+        "filename": "repo/tests/selenium/pagesections/form.widgets.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-11T12:50:54Z",
+      "side": 1,
+      "message": "This is a misunderstanding which goes to show that abstracting this before we have a second-of-kind is far from ideal.\nMy idea of this class was to provide a mixin for interacting with non-default form elements yet leaving the name of the technology that is used to implement it (ooui) out of the name. I\u0027d want to put all of them here (one selector, one method) because having a dedicated class per field type  feels like massive overkill.\nConsequently the discussion in this line should not be about \"ComboBox\" but about the next higher level of abstraction. \nDo you agree with the approach? Do you have a preference for its name? Admittedly FormWidgets is rather unopinionated but that was sort of the point.\nI understand your desire to avoid confusion between HTML forms and lexeme forms, one way could be to not put FormWidgets into pagesections (which for me conceptually they aren\u0027t) but our IRC discussion on that topic stayed w/o result.",
+      "parentUuid": "5142f9d1_2b4f9c5c",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 15
+      },
+      "revId": "03da9de05421fcaf5f03b43016b34bee8221be24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8209c4c_b7e6a082",
+        "filename": "repo/tests/selenium/pagesections/form.widgets.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-11T12:50:54Z",
+      "side": 1,
+      "message": "This method is used e.g. to fill in the lexical category on Special:NewLexeme, which is not a ComboBox. If we go with the marketing terms on the demo page, LookupElement [0] is probably the one to use. I picked a selector from DOM but maybe not the best choice. LookupElement it is?\n\n[0] https://doc.wikimedia.org/oojs-ui/master/demos/?page\u003dwidgets\u0026theme\u003dwikimediaui\u0026direction\u003dltr\u0026platform\u003ddesktop#demo-section-lookupElement",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "03da9de05421fcaf5f03b43016b34bee8221be24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
