@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "6341b3b3_1aaa2030",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-11T10:47:35Z",
+      "side": 1,
+      "message": "Ok, here is microbenchmark (see at the bottom).\n\nResults:\n```\nnoop: 8ms per 10000 iterations\nserialize entity: 453ms per 10000 iterations\nserialize entity second time: 16ms per 10000 iterations\n```\n\nAs we can see, serialization of an object really takes some time, but serializing string (something that is serialized already) is very lightweight operation.\n\nTaking these numbers into account, I think we should never care about this ever.\n\n\u003e Serialization and deserialization is still one of the biggest \u0027time wasters\u0027 in wikibase code\n\nIf we are talking about classes like `ItemSerializer`, it is completely different issue.\n\nIf we are talking about native serialization, it is probably because we work a lot with caches and stuff in cache is serialized. If we remove caches, the biggest time waster would be something else, I beleive.\n\nMicrobenchmark code (paste it in any PhpUnit test case in Wikibase to run)\n```\npublic function testSerializationPerformance() {\n\t\t$item \u003d NewItem::withId(\u0027Q1\u0027)\n\t\t\t-\u003eandLabel(\u0027en\u0027, \u0027label-en\u0027)\n\t\t\t-\u003eandLabel(\u0027de\u0027, \u0027label-de\u0027)\n\t\t\t-\u003eandDescription(\u0027en\u0027, \u0027en description\u0027)\n\t\t\t-\u003eandDescription(\u0027de\u0027, \u0027de description\u0027)\n\t\t\t-\u003eandAliases(\u0027en\u0027, [\u0027a1\u0027, \u0027a2\u0027])\n\t\t\t-\u003eandAliases(\u0027de\u0027, [\u0027a1\u0027, \u0027a2\u0027])\n\t\t\t-\u003eandStatement(\n\t\t\t\tNewStatement::someValueFor(\u0027P1\u0027)\n\t\t\t\t\t-\u003ewithSomeGuid()\n\t\t\t\t\t-\u003ewithValue(\"TEST\")\n\t\t\t\t\t-\u003ewithQualifier(\u0027P3\u0027, \u0027q\u0027)\n\t\t\t)-\u003eandStatement(\n\t\t\t\tNewStatement::someValueFor(\u0027P2\u0027)\n\t\t\t\t\t-\u003ewithSomeGuid()\n\t\t\t\t\t-\u003ewithValue(\"TEST\")\n\t\t\t\t\t-\u003ewithQualifier(\u0027P3\u0027, \u0027q\u0027)\n\t\t\t)-\u003eandStatement(\n\t\t\t\tNewStatement::someValueFor(\u0027P3\u0027)\n\t\t\t\t\t-\u003ewithSomeGuid()\n\t\t\t\t\t-\u003ewithValue(\"TEST\")\n\t\t\t\t\t-\u003ewithQualifier(\u0027P3\u0027, \u0027q\u0027)\n\t\t\t)-\u003eandStatement(\n\t\t\t\tNewStatement::someValueFor(\u0027P4\u0027)\n\t\t\t\t\t-\u003ewithSomeGuid()\n\t\t\t\t\t-\u003ewithValue(\"TEST\")\n\t\t\t\t\t-\u003ewithQualifier(\u0027P3\u0027, \u0027q\u0027)\n\t\t\t)-\u003ebuild();\n\n\n\t\t$measure \u003d function ($name, callable $f) {\n\t\t\t$start \u003d microtime( true );\n\n\t\t\t$iterations \u003d 10000;\n\t\t\tfor ( $i \u003d 0; $i \u003c $iterations; $i++ ) {\n\t\t\t\t$f();\n\t\t\t}\n\t\t\t$done \u003d microtime( true );\n\n\t\t\t$taken \u003d $done - $start;\n\n\t\t\techo \"$name: \" . round( $taken * 1000 ) . \"ms per $iterations iterations\" . PHP_EOL;\n\t\t};\n\n\t\t$measure(\u0027noop\u0027, function () {});\n\t\t$measure(\u0027serialize entity\u0027, function () use ($item) {\n\t\t\tserialize( $item );\n\t\t});\n\n\t\t$string \u003d serialize( $item );\n\n\t\t$measure(\u0027serialize entity second time\u0027, function () use ($string) {\n\t\t\tserialize( $string );\n\t\t});\n\n\t}\n```",
+      "parentUuid": "c5aaf5a6_0cee159b",
+      "range": {
+        "startLine": 79,
+        "startChar": 11,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ced71be2_2218b00a",
         "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
         "patchSetId": 11
