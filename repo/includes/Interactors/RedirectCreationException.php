@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Interactors;
 
+use Wikibase\Lib\MessageException;
 use Exception;
 
 /**
@@ -10,7 +11,7 @@ use Exception;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class RedirectCreationException extends Exception {
+class RedirectCreationException extends MessageException {
 
 	/**
 	 * @var string
@@ -22,8 +23,8 @@ class RedirectCreationException extends Exception {
 	 * @param string $errorCode An error code, for use in the API
 	 * @param Exception|null $previous The previous exception that caused this exception.
 	 */
-	public function __construct( $message, $errorCode = '', Exception $previous = null ) {
-		parent::__construct( $message, 0, $previous );
+	public function __construct( $message, $errorCode = '', array $params = [], Exception $previous = null ) {
+		parent::__construct( 'wikibase-redirect-' . $errorCode, $params, $message, $previous );
 		$this->errorCode = $errorCode;
 	}
 
