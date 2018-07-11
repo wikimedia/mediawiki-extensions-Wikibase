@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb65f40e_fb0e000e",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-11T15:36:00Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "81a936510704d128c100f6f2eb89032d00efb23e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac100340_b9edf709",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-11T15:36:00Z",
+      "side": 1,
+      "message": "This can just as well be inlined.",
+      "revId": "81a936510704d128c100f6f2eb89032d00efb23e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
