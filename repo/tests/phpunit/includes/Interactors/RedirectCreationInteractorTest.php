@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Interactors\RedirectCreationInteractor
+ * @covers \Wikibase\Repo\Interactors\RedirectCreationInteractor
  *
  * @group Wikibase
  *
@@ -202,7 +202,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 			'source not empty' => [ new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'origin-not-empty' ],
 			'can\'t redirect' => [ new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ],
-			'can\'t redirect EditFilter' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect', Status::newFatal( 'EF' ) ],
+			'can\'t redirect EditFilter' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect-due-to-edit-filter-hook', Status::newFatal( 'EF' ) ],
 		];
 	}
 
