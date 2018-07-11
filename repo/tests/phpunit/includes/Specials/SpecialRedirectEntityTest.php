@@ -26,8 +26,8 @@ use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialRedirectEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialRedirectEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -255,10 +255,10 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ],
 			[ //from id is property
 				'p' => [ 'fromid' => 'P1', 'toid' => 'Q1' ],
-				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ],
+				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:wikibase-redirect-target-is-incompatible' ],
 			[ //to id is property
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'P1' ],
-				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ],
+				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:wikibase-redirect-target-is-incompatible' ],
 			[ //bad token
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ],
 				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ],
@@ -280,7 +280,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		];
 
 		$html = $this->executeSpecialEntityRedirect( $params );
-		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:no-such-entity', $html );
+		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:wikibase-redirect-no-such-entity', $html );
 	}
 
 	public function testNoPermission() {
@@ -292,7 +292,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$user = User::newFromName( 'UserWithoutPermission' );
 
 		$html = $this->executeSpecialEntityRedirect( $params, $user );
-		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:permissiondenied', $html );
+		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:wikibase-redirect-permissiondenied', $html );
 	}
 
 }
