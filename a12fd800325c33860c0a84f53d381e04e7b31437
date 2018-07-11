@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ea27b82_0e88c2c4",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T08:57:41Z",
+      "side": 1,
+      "message": "[09:55, 7/11/2018] Adam: yes, so that is evil\n[09:55, 7/11/2018] Adam: either the RedirectCreationException should be caught by the \u0027presentation layer\u0027 so api ui etc and then a localized error message returned\n[09:56, 7/11/2018] Adam: or, in core, there is a LocalizedException class\n[09:56, 7/11/2018] Adam: which you can construct with a message key\n[09:56, 7/11/2018] Adam: but getMessage() wil always return it in english, as it should, for the logs etc\n[09:56, 7/11/2018] Adam: then in the presentation layer you can use getMessageObject-\u003e to get the Message and then get the string from that",
+      "range": {
+        "startLine": 166,
+        "startChar": 6,
+        "endLine": 166,
+        "endChar": 66
+      },
+      "revId": "a12fd800325c33860c0a84f53d381e04e7b31437",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
