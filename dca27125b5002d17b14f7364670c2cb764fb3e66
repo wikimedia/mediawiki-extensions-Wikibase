@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "2f6bf8b1_22bf299a",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-11T11:07:20Z",
+      "side": 1,
+      "message": "Fixed.\n\nBut it shouldn\u0027t be a blocker. Especially because fix is `@throws InvalidArgumentException|\\InvalidArgumentException` which doesn\u0027t bring any value for the reader.",
+      "parentUuid": "84213b7e_7eb521a2",
+      "range": {
+        "startLine": 30,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c39c2ab0_5af2168b",
         "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
         "patchSetId": 11
