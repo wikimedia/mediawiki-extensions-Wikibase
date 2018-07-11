@@ -156,7 +156,8 @@ class RedirectCreationInteractor {
 				if ( !$title || !$title->isDeleted() ) {
 					throw new RedirectCreationException(
 						"Couldn't get Title for $entityId or Title is not deleted",
-						'no-such-entity'
+						'no-such-entity',
+						[ $entityId ]
 					);
 				}
 			} else {
@@ -164,7 +165,8 @@ class RedirectCreationInteractor {
 				if ( !$entity->isEmpty() ) {
 					throw new RedirectCreationException(
 						"Can't create redirect on non empty item $entityId",
-						'origin-not-empty'
+						'origin-not-empty',
+						[ $entityId ]
 					);
 				}
 			}
@@ -172,7 +174,7 @@ class RedirectCreationInteractor {
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			// Nothing to do. It's ok to override a redirect with a redirect.
 		} catch ( StorageException $ex ) {
-			throw new RedirectCreationException( $ex->getMessage(), 'cant-load-entity-content', $ex );
+			throw new RedirectCreationException( $ex->getMessage(), 'cant-load-entity-content', [], $ex );
 		}
 	}
 
@@ -191,6 +193,7 @@ class RedirectCreationInteractor {
 			throw new RedirectCreationException(
 				$ex->getMessage(),
 				'no-such-entity',
+				[ $entityId ], // TODO per qqq this needs from id
 				$ex
 			);
 		}
@@ -198,7 +201,8 @@ class RedirectCreationInteractor {
 		if ( $redirect !== null ) {
 			throw new RedirectCreationException(
 				"Entity $entityId is a redirect",
-				'target-is-redirect'
+				'target-is-redirect', // TODO per qqq this needs target id
+				[ $entityId ]
 			);
 		}
 	}
@@ -244,7 +248,7 @@ class RedirectCreationInteractor {
 		if ( !$hookStatus->isOK() ) {
 			throw new RedirectCreationException(
 				'EditFilterHook stopped redirect creation',
-				'cant-redirect'
+				'cant-redirect-due-to-edit-filter-hook'
 			);
 		}
 
@@ -256,7 +260,7 @@ class RedirectCreationInteractor {
 				$flags
 			);
 		} catch ( StorageException $ex ) {
-			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', $ex );
+			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', [], $ex );
 		}
 	}
 
