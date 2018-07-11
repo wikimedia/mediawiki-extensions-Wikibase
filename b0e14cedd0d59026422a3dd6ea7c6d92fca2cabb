@@ -117,6 +117,30 @@
       "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54560e3f_1430fbd2",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-07-11T10:00:42Z",
+      "side": 1,
+      "message": "I very much agree with Addshore here. Mediawiki is not just a \"platform\" we are forced to use, it\u0027s essential part of Wikimedia movement that we are part of it.",
+      "parentUuid": "40c5646b_8aa898b0",
+      "range": {
+        "startLine": 17,
+        "startChar": 40,
+        "endLine": 17,
+        "endChar": 69
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
