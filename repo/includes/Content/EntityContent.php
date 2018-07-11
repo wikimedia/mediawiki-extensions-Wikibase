@@ -208,7 +208,7 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
 			if ( $options === null ) {
-				$options = $this->getContentHandler()->makeParserOptions( 'canonical' );
+				$options = ParserOptions::newCanonical( 'canonical' );
 			}
 
 			return $this->getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
