@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Amara-Amaziɣ",
-			"YesIn"
+			"YesIn",
+			"Aslmad mohamed belarhzali"
 		]
 	},
 	"wikibase-edit": "ⵙⵏⴼⵍ",
 	"wikibase-add": "ⵔⵏⵓ",
-	"wikibase-sitelinks-special": "ⵉⵙⵉⵜⵏ ⵢⴰⴹⵏ"
+	"wikibase-label-empty": "ⵓⵔ ⵉⵍⵍⵉ ⴰⵡⴷ ⵢⴰⵏ ⵢⵉⵙⵎ ⵓⵏⵎⵉⵍ",
+	"wikibase-description-empty": "ⴰⵡⴷ ⵢⴰⵏ ⵓⴳⵍⴰⵎ ⵓⵔ ⵉⵜⵜⵓⴼⴽⵉ",
+	"wikibase-sitelinks-special": "ⵉⵙⵉⵜⵏ ⵢⴰⴹⵏ",
+	"wikibase-statementview-rank-normal": "ⴰⵏⵎⴰⵍⴰ ⴰⵎⴰⴳⵏⵓ"
 }

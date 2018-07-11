@@ -142,6 +142,7 @@
 	"wikibase-setaliases-label": "Druga imena:",
 	"wikibase-setaliases-submit": "Določi druga imena",
 	"special-setlabeldescriptionaliases": "Določi oznako, opis in druga imena",
+	"wikibase-setlabeldescriptionaliases-introfull": "Določite oznako, opis in druga imena v jeziku $2 za [[$1]]. Druga imena so med seboj ločena z navpičnico (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Oznaka:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Opis:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Druga imena:",
