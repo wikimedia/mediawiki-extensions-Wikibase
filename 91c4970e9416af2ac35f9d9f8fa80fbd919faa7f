@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "37ff8637_c37212f0",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T10:00:49Z",
+      "side": 1,
+      "message": "This class hides lots of what is happening internally in WANObjectCache, it might be an idea to at least say in the class comment that it is a complex beast and that there will be unexpected things that may happen while using this simple interface, for example deleting and key and trying to set a new key straight away etc will do odd things.",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d3dfde3_842ca565",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T10:00:49Z",
+      "side": 1,
+      "message": "This looks the same as the other interface, could reuse code, but not really needed, but we can use traits now..",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 120,
+        "endChar": 2
+      },
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b963c0c5_d4366ed4",
         "filename": "lib/includes/SimpleWANObjectCache.php",
         "patchSetId": 3
@@ -31,6 +77,24 @@
       "side": 1,
       "message": "If this awesome hack works, I suggest to leave it as is.",
       "parentUuid": "b963c0c5_d4366ed4",
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e364324_233afd43",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T10:00:49Z",
+      "side": 1,
+      "message": "See WANObjectCache::TTL_UNCACHEABLE ?\n/* Idiom for getWithSetCallback() callbacks to avoid calling set() */\nBut it looks like that is only used in getWithSetCallback right now.\nIt could be added to set too?\n\n0.00000001 is indeed a nasty hack and I\u0027m not sure which code path it would end up taking, Aaron should definitely review this.",
+      "parentUuid": "db1369fb_59747d12",
       "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
