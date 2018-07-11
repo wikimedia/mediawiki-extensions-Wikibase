@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d2ab288d_724f359e",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T10:25:16Z",
+      "side": 1,
+      "message": "Right, then the issue my IDE is complaining about is actually in the phpdoc of assertKeyIsValid and that only says it throws a InvalidArgumentException not an \\InvalidArgumentException",
+      "parentUuid": "cb41df4b_66aefc27",
+      "range": {
+        "startLine": 30,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c39c2ab0_5af2168b",
         "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
         "patchSetId": 11
