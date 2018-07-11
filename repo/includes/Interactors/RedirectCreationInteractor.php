@@ -163,7 +163,7 @@ class RedirectCreationInteractor {
 				$entity = $revision->getEntity();
 				if ( !$entity->isEmpty() ) {
 					throw new RedirectCreationException(
-						"Can't create redirect on non empty item $entityId",
+						wfMessage( 'wikibase-redirect-origin-not-empty', $entityId ),
 						'origin-not-empty'
 					);
 				}

@@ -316,6 +316,7 @@
 	"wikibase-redirectentity-fromid": "The ID to redirect from",
 	"wikibase-redirectentity-toid": "The ID to redirect to",
 	"wikibase-redirectentity-submit": "Redirect",
+	"wikibase-redirect-origin-not-empty": "Can't create redirect on non empty entity $1",
 	"special-mylanguagefallbackchain": "My language fallback chain",
 	"wikibase-mylanguagefallbackchain-text": "The language fallback chain used to display entity labels for you is shown below.",
 	"wikibase-mylanguagefallbackchain-babel": "You can edit it by putting <nowiki>{{#babel: }}</nowiki> on {{GENDER:$1|your}} [[Special:MyPage|user page]].",
