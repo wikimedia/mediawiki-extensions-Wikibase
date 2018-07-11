@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e6982f53_b8cd581e",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-11T13:45:29Z",
+      "side": 1,
+      "message": "This is never used. Should be removed",
+      "parentUuid": "294810f2_e412d80d",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 20
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "446230a2_2b15f775",
         "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-11T10:07:05Z",
       "side": 1,
       "message": "Has it been decided what the composition of the Cache will be that is passed in here? which type of bagofstuff / wanobject cache?",
+      "range": {
+        "startLine": 54,
+        "startChar": 11,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72e72034_ebf398bc",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-11T13:45:29Z",
+      "side": 1,
+      "message": "Does it matter?",
+      "parentUuid": "446230a2_2b15f775",
       "range": {
         "startLine": 54,
         "startChar": 11,
