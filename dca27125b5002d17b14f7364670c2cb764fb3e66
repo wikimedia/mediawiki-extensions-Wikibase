@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3a29fe3_9e978006",
+        "filename": "composer.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "Needs to be added to mediawiki-vendor too, would be good to state that in the comment message / add the patch already so it is not missed.",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 19
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddadc599_8aede121",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "This throws a zPsr\\SimpleCache\\InvalidArgumentException",
+      "range": {
+        "startLine": 30,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c39c2ab0_5af2168b",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "Also should needs unserialize, see my comment below",
+      "range": {
+        "startLine": 58,
+        "startChar": 9,
+        "endLine": 58,
+        "endChar": 20
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af7a271c_7f28d901",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to serialize here, BagOStuffs handle serialization if needed and this will just result in double serialization in those cases, also it will waste processing time.",
+      "range": {
+        "startLine": 79,
+        "startChar": 11,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ced71be2_2218b00a",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "This would potentially be possible to implement for certain types of cache, for example HashBagOStuff which has a clear method.\nAlso EmptyBagOStuff, this could always return true, it is always empty?\n\nAlso in the PSR6 adapter I actually kept an in memory list of keys that were saved in the cache pool and then cleared each of them https://github.com/addshore/psr-6-mediawiki-bagostuff-adapter/blob/master/src/BagOStuffPsrCache.php#L59-L61\nLooking back on that though that\u0027s probably fairly evil for long term persistent caches like memcached, but works for in memory caching in single requests.",
+      "range": {
+        "startLine": 105,
+        "startChar": 1,
+        "endLine": 108,
+        "endChar": 2
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "499b0498_4bdfc8b3",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "Another unserialize call here that we could cull",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb812c63_490d3d49",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-11T09:41:22Z",
+      "side": 1,
+      "message": "Another serialize call here",
+      "range": {
+        "startLine": 166,
+        "startChar": 37,
+        "endLine": 166,
+        "endChar": 46
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
