@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5a6d5b0_3a412db9",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-12T15:28:22Z",
+      "side": 1,
+      "message": "I would suggest to check against message key if it is possible.\nOtherwise test will fail in case if someone edits translation, which is not what one might expect.",
+      "range": {
+        "startLine": 82,
+        "startChar": 49,
+        "endLine": 82,
+        "endChar": 112
+      },
+      "revId": "ca1410d45e46adb812b0e67ff81576ba535b1866",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fc2261b_60de22fc",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-12T15:28:22Z",
+      "side": 1,
+      "message": "Is the maximum size of this field 63006 bytes? O_o (I had to use calculator to figure out this number)\n\nCan we use something like `str_repeat( \u0027x\u0027, $maxSize + 1 )` here?",
+      "range": {
+        "startLine": 88,
+        "startChar": 34,
+        "endLine": 88,
+        "endChar": 63
+      },
+      "revId": "ca1410d45e46adb812b0e67ff81576ba535b1866",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
