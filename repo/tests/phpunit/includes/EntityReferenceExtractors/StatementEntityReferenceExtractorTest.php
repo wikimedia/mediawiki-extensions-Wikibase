@@ -6,11 +6,11 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
@@ -86,7 +86,9 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 	}
 
 	private function getMockEntityIdParser() {
-		$entityIdParser = $this->getMockBuilder( EntityIdParser::class )->getMock();
+		$entityIdParser = $this->getMockBuilder( SuffixEntityIdParser::class )
+			->disableOriginalConstructor()
+			->getMock();
 		$entityIdParser->method( 'parse' )
 			->willReturnCallback( function ( $id ) {
 				return new ItemId(
