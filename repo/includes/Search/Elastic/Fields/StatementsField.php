@@ -37,6 +37,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	const STATEMENT_SEPARATOR = '=';
 
 	/**
+	 * Strings which enclose a qualifier for a statement
+	 */
+	const QUALIFIER_START = '[';
+	const QUALIFIER_END = ']';
+
+	/**
 	 * @var array List of properties to index, as a flipped array with the property IDs as keys.
 	 */
 	protected $propertyIds;
@@ -125,7 +131,10 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 				foreach ( $statement->getQualifiers() as $qualifier ) {
 					$qualifierString = $this->getSnakAsString( $qualifier );
 					if ( !is_null( $qualifierString ) ) {
-						$data[] = $mainSnakString . '[' . $qualifierString . ']';
+						$data[] = $mainSnakString .
+							self::QUALIFIER_START .
+							$qualifierString .
+							self::QUALIFIER_END;
 					}
 				}
 			}
