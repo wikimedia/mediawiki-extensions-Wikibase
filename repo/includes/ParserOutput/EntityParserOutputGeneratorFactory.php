@@ -13,7 +13,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -86,11 +85,6 @@ class EntityParserOutputGeneratorFactory {
 	private $globeUris;
 
 	/**
-	 * @var EntityReferenceExtractorDelegator
-	 */
-	private $entityReferenceExtractorDelegator;
-
-	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -100,7 +94,6 @@ class EntityParserOutputGeneratorFactory {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param EntityIdParser $externalEntityIdParser
 	 * @param Serializer $entitySerializer
-	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
@@ -116,7 +109,6 @@ class EntityParserOutputGeneratorFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $externalEntityIdParser,
 		Serializer $entitySerializer,
-		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -133,7 +125,6 @@ class EntityParserOutputGeneratorFactory {
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
-		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
 	}
 
 	/**
@@ -188,7 +179,6 @@ class EntityParserOutputGeneratorFactory {
 
 		$updaters = [
 			new ReferencedEntitiesDataUpdater(
-				$this->entityReferenceExtractorDelegator,
 				$this->entityTitleLookup,
 				$this->externalEntityIdParser
 			),

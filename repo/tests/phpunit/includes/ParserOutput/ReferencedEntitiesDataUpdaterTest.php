@@ -2,16 +2,20 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use MediaWikiTestCase;
 use ParserOutput;
 use Title;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,71 +47,114 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId $entity
-	 * @param EntityId[] $extractedEntities
+	 * @param int $count
 	 *
 	 * @return ReferencedEntitiesDataUpdater
 	 */
-	private function newInstance( EntityDocument $entity, array $extractedEntities ) {
-		$mockEntityIdExtractor = $this->getMock( EntityReferenceExtractor::class );
-		$mockEntityIdExtractor->expects( $this->once() )
-			->method( 'extractEntityIds' )
-			->with( $entity )
-			->willReturn( $extractedEntities );
-
+	private function newInstance( $count = 0 ) {
 		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->exactly( count( $extractedEntities ) ) )
+		$entityTitleLookup->expects( $this->exactly( $count ) )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$namespace = $this->getEntityNamespace( $id->getEntityType() );
 				return Title::makeTitle( $namespace, $id->getSerialization() );
 			} ) );
 
-		return new ReferencedEntitiesDataUpdater( $mockEntityIdExtractor, $entityTitleLookup );
+		$entityIdParser = $this->getMock( EntityIdParser::class );
+		$entityIdParser->expects( $this->any() )
+			->method( 'parse' )
+			->will( $this->returnCallback( function( $id ) {
+				return new ItemId(
+					substr( $id, strlen( self::UNIT_PREFIX ) )
+				);
+			} ) );
+
+		return new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityIdParser );
+	}
+
+	/**
+	 * @dataProvider entityIdProvider
+	 */
+	public function testGetEntityIds(
+		StatementList $statements,
+		SiteLinkList $siteLinks = null,
+		array $expected
+	) {
+		$instance = $this->newInstance();
+		$entity = $this->createEntityWithStatementsAndSiteLinks( $statements, $siteLinks );
+
+		$instance->processEntity( $entity );
+
+		$actual = array_map( function( EntityId $id ) {
+			return $id->getSerialization();
+		}, $instance->getEntityIds() );
+		$this->assertSame( $expected, $actual );
 	}
 
 	/**
 	 * @dataProvider entityIdProvider
 	 */
 	public function testUpdateParserOutput(
-		array $expectedEntityIds
+		StatementList $statements,
+		SiteLinkList $siteLinks = null,
+		array $expected
 	) {
-		$item = new Item();
 		$actual = [];
 
 		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$parserOutput->expects( $this->exactly( count( $expectedEntityIds ) ) )
+		$parserOutput->expects( $this->exactly( count( $expected ) ) )
 			->method( 'addLink' )
 			->will( $this->returnCallback( function( Title $title ) use ( &$actual ) {
 				$actual[] = $title->getText();
 			} ) );
 
-		$instance = $this->newInstance( $item, $expectedEntityIds );
+		$instance = $this->newInstance( count( $expected ) );
+		$entity = $this->createEntityWithStatementsAndSiteLinks( $statements, $siteLinks );
 
-		$instance->processEntity( $item );
+		$instance->processEntity( $entity );
 
 		$instance->updateParserOutput( $parserOutput );
-		$expectedEntityIdStrings = array_map( function ( EntityId $id ) {
-			return $id->getSerialization();
-		}, $expectedEntityIds );
-		$this->assertArrayEquals( $expectedEntityIdStrings, $actual );
+		$this->assertArrayEquals( $expected, $actual );
 	}
 
 	public function entityIdProvider() {
+		$statementList1 = new StatementList();
+		$this->addStatement( $statementList1, 'Q1' );
+
+		$statementList2 = new StatementList();
+		$this->addStatement( $statementList2, 'Q20' );
+		$statementList2->addNewStatement( new PropertyValueSnak(
+			1,
+			UnboundedQuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q21' )
+		) );
+		$statementList2->addNewStatement( new PropertyValueSnak(
+			1,
+			QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' )
+		) );
+
+		$siteLinks = new SiteLinkList();
+		$siteLinks->addNewSiteLink( 'siteId', 'pageName', [ new ItemId( 'Q1' ) ] );
+
 		return [
-			[ [] ],
-			[ [ new PropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],
-			[ [ new ItemId( 'Q1' ) ] ],
-			[ [ new PropertyId( 'P1' ), new ItemId( 'Q1' ) ] ],
-			[ [
-				new PropertyId( 'P1' ),
-				new ItemId( 'Q20' ),
-				new ItemId( 'Q21' ),
-				new ItemId( 'Q22' ),
-			] ],
+			[ new StatementList(), null, [] ],
+			[ $statementList1, null, [ 'P1', 'Q1' ] ],
+			[ new StatementList(), $siteLinks, [ 'Q1' ] ],
+			[ $statementList1, $siteLinks, [ 'P1', 'Q1' ] ],
+			[ $statementList2, null, [ 'P1', 'Q20', 'Q21', 'Q22' ] ],
+			[ $statementList2, $siteLinks, [ 'P1', 'Q20', 'Q21', 'Q22', 'Q1' ] ]
 		];
+	}
+
+	/**
+	 * @param StatementList $statements
+	 * @param string $itemId
+	 */
+	private function addStatement( StatementList $statements, $itemId ) {
+		$statements->addNewStatement(
+			new PropertyValueSnak( 1, new EntityIdValue( new ItemId( $itemId ) ) )
+		);
 	}
 
 	/**
@@ -118,6 +165,10 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntityNamespace( $entityType );
+	}
+
+	private function createEntityWithStatementsAndSiteLinks( $statements, $siteLinks ) {
+		return new Item( null, null, $siteLinks, $statements );
 	}
 
 }
