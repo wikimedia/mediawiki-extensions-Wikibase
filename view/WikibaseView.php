@@ -11,11 +11,6 @@ if ( defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 
 define( 'WIKIBASE_VIEW_VERSION', '0.1-dev' );
 
-// Include the composer autoloader if it is present.
-if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
-	require_once __DIR__ . '/vendor/autoload.php';
-}
-
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__  . '/autoload.php';
 
