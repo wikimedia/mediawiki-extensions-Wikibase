@@ -366,7 +366,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 	public function testMakeEmptyContent() {
 		$content = $this->getHandler()->makeEmptyContent();
-		$this->assertInstanceOf( EntityContent::class, $content );
+		$this->assertTrue( $content->isEmpty(), 'isEmpty' );
 
 		$this->setExpectedException( LogicException::class );
 		$content->getEntity();

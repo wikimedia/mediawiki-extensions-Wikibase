@@ -79,6 +79,17 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * @see EntityContent::isCountable
+	 *
+	 * @param bool|null $hasLinks
+	 *
+	 * @return bool True if this is not a redirect and the item is not empty.
+	 */
+	public function isCountable( $hasLinks = null ) {
+		return !$this->isRedirect() && !$this->isEmpty();
+	}
+
+	/**
 	 * Returns the EntityRedirect represented by this EntityContent, or null if this
 	 * EntityContent is not a redirect.
 	 *

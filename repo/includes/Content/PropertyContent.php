@@ -116,23 +116,12 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @see EntityContent::isCountable
-	 *
-	 * @param bool|null $hasLinks
-	 *
-	 * @return bool True if this is not a redirect and the property is not empty.
-	 */
-	public function isCountable( $hasLinks = null ) {
-		return !$this->isRedirect() && !$this->getProperty()->isEmpty();
-	}
-
-	/**
 	 * @see EntityContent::isEmpty
 	 *
-	 * @return bool True if this is not a redirect and the property is empty.
+	 * @return bool True if this is not a redirect and the item is empty.
 	 */
 	public function isEmpty() {
-		return !$this->isRedirect() && $this->getProperty()->isEmpty();
+		return !$this->isRedirect() && ( !$this->propertyHolder || $this->getProperty()->isEmpty() );
 	}
 
 }
