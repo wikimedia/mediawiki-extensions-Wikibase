@@ -109,6 +109,8 @@
 	"wikibase-entityusage-submit": "Mostrar as páxinas",
 	"wikibase-pageinfo-entity-id": "ID do elemento de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ningún",
+	"wikibase-pageinfo-description-local": "Descrición local",
+	"wikibase-pageinfo-description-central": "Descrición central",
 	"wikibase-pageinfo-entity-usage": "Entidades de {{WBREPONAME}} usadas nesta páxina",
 	"wikibase-pageinfo-entity-usage-S": "Ligazón de sitio",
 	"wikibase-pageinfo-entity-usage-L": "Algunhas etiquetas",

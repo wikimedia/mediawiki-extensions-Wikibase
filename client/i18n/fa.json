@@ -111,6 +111,8 @@
 	"wikibase-entityusage-submit": "نمایش صفحات",
 	"wikibase-pageinfo-entity-id": "شناسه مورد {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "هیچ‌کدام",
+	"wikibase-pageinfo-description-local": "توضیح محلی",
+	"wikibase-pageinfo-description-central": "توضیح سراسری",
 	"wikibase-pageinfo-entity-usage": "ماهیت‌های {{WBREPONAME}} استفاده شده در این صفحه",
 	"wikibase-pageinfo-entity-usage-S": "پیوند پایگاه",
 	"wikibase-pageinfo-entity-usage-L": "چندی برچسب",
