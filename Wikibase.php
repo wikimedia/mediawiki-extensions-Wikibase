@@ -46,7 +46,5 @@ if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnab
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		// Use example config for testing
 		require_once __DIR__ . '/client/config/WikibaseClient.example.php';
-		// TODO make this unncessary. Include hack to make testing work with the current code
-		require_once __DIR__ . '/client/config/WikibaseClient.jenkins.php';
 	}
 }
