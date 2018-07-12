@@ -69,6 +69,32 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->assertHtmlContainsSubmitControl( $html );
 	}
 
+	public function testWhenTermsAreEmpty_errorIsShown() {
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => '',
+			SpecialNewItem::FIELD_DESCRIPTION => '',
+			SpecialNewItem::FIELD_ALIASES => '',
+		];
+
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'You need to fill at least either label, description or aliases.' );
+	}
+
+	public function testWhenTermIsInvalid_errorIsShown() {
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => str_repeat( 'SuchFoo', 9001 ),
+			SpecialNewItem::FIELD_DESCRIPTION => '',
+			SpecialNewItem::FIELD_ALIASES => '',
+		];
+
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'TODO' );
+	}
+
 	public function testSiteAndPageInputFieldsWithPredefinedValuesPresent_WhenRenderedWithGetParametersPassed() {
 		$getParameters = [
 			SpecialNewItem::FIELD_SITE => 'some-site',
