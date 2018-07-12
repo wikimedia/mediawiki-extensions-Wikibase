@@ -91,6 +91,11 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	 */
 	abstract protected function newBlank( EntityId $entityId = null );
 
+	public function testIsEmpty() {
+		$this->assertTrue( $this->newEmpty()->isEmpty(), 'empty' );
+		$this->assertTrue( $this->newBlank()->isEmpty(), 'blank' );
+	}
+
 	/**
 	 * @dataProvider getTextForSearchIndexProvider
 	 */
