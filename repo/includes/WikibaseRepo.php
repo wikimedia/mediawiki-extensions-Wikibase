@@ -990,7 +990,7 @@ class WikibaseRepo {
 	/**
 	 * @return EntityIdParser
 	 */
-	private function getLocalItemUriParser() {
+	public function getLocalItemUriParser() {
 		return new SuffixEntityIdParser(
 			$this->getVocabularyBaseUri(),
 			new ItemIdParser()
@@ -1734,7 +1734,7 @@ class WikibaseRepo {
 			$this->getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
 				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
-				new StatementEntityReferenceExtractor( $this->getEntityIdParser() )
+				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
 			),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
