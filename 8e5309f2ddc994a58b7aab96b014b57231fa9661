@@ -16,6 +16,46 @@
       "revId": "8e5309f2ddc994a58b7aab96b014b57231fa9661",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efefa19_77a99bc3",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-12T00:55:34Z",
+      "side": 1,
+      "message": "I think we need here to limit which qualifiers we consider. As I understood from David, we effectively will be summing up all quantity values using this analyzer. This means if we have more than one numeric value, it would just be added, which produces weird results - e.g. we could add \"ordinal number\" with \"quantity\". I think we need a config that defines which properties we are using. \n\nAlso we probably should have a generic config for enabling/disabling qualifier function, since it\u0027s much more relevant for SDC than Wikidata. Or may be the same config where empty means disabled.",
+      "revId": "8e5309f2ddc994a58b7aab96b014b57231fa9661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c7df2bc_a951bded",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-07-12T00:55:34Z",
+      "side": 1,
+      "message": "Add comment here that this needs extension to be installed. Maybe we can even check for it and issue warning if it\u0027s not there?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 37
+      },
+      "revId": "8e5309f2ddc994a58b7aab96b014b57231fa9661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
