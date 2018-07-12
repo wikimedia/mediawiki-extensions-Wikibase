@@ -9,7 +9,6 @@ use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -17,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -445,7 +445,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			'item' => function() {
 				return new EntityReferenceExtractorCollection( [
 					new SiteLinkBadgeItemReferenceExtractor(),
-					new StatementEntityReferenceExtractor( $this->getMock( EntityIdParser::class ) )
+					new StatementEntityReferenceExtractor(
+						$this->getMockBuilder( SuffixEntityIdParser::class )
+							->disableOriginalConstructor()
+							->getMock()
+					)
 				] );
 			}
 		], $this->getMockBuilder( StatementEntityReferenceExtractor::class )
