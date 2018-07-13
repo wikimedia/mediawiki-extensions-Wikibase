@@ -40,6 +40,7 @@
 	"wikibase-validator-no-such-entity": "$1 nije pronađeno",
 	"wikibase-validator-no-such-property": "Svojstvo $1 nije pronađeno",
 	"wikibase-validator-not-allowed": "Nedozvoljena vrednost: $1",
+	"datatypes-type-time": "Trenutak u vremenu",
 	"datatypes-type-wikibase-item": "Stavka",
 	"datatypes-type-commonsMedia": "Datoteka sa Ostave",
 	"version-wikibase": "Vikibaza",

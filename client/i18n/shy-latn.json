@@ -4,5 +4,12 @@
 			"Vikoula5"
 		]
 	},
-	"wikibase-rc-hide-wikidata-hide": "Ffer"
+	"tooltip-t-wikibase": "Aseɣwen ɣer uferdis n temsisɣelt n isefka yeqqnen",
+	"wikibase-comment-update": "Aferdis {{WBREPONAME}} ibeddel",
+	"wikibase-dataitem": "Aferdis {{WBREPONAME}}",
+	"wikibase-editlinks": "Ẓreg iseɣwan",
+	"wikibase-editlinkstitle": "Ẓreg iseɣwan n gar tutlayin",
+	"wikibase-rc-hide-wikidata-hide": "Ffer",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Taẓrigt n {{WBREPONAME}}"
 }
