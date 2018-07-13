@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5517be15_1ea90eb6",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-13T18:37:44Z",
+      "side": 1,
+      "message": "fails with the old signature of this method.",
+      "revId": "f1afa379274ef59a4e332fab5cceebd42ab0c8eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
