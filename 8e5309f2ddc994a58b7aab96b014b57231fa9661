@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "570b6f1b_f97d4720",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-13T12:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9efefa19_77a99bc3",
+      "revId": "8e5309f2ddc994a58b7aab96b014b57231fa9661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c7df2bc_a951bded",
         "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
         "patchSetId": 9
@@ -47,6 +65,30 @@
       "writtenOn": "2018-07-12T00:55:34Z",
       "side": 1,
       "message": "Add comment here that this needs extension to be installed. Maybe we can even check for it and issue warning if it\u0027s not there?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 37
+      },
+      "revId": "8e5309f2ddc994a58b7aab96b014b57231fa9661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cb45405_e6ab5677",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementQuantityField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5246
+      },
+      "writtenOn": "2018-07-13T12:24:40Z",
+      "side": 1,
+      "message": "Added a comment, but I didn\u0027t do the warning because other parts of cirrus search in wikibase depend on the extension too. Created this ticket to cover it https://phabricator.wikimedia.org/T199533",
+      "parentUuid": "2c7df2bc_a951bded",
       "range": {
         "startLine": 79,
         "startChar": 18,
