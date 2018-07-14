@@ -466,5 +466,6 @@
 	"apihelp-wbgetentities-example-6": "Атрымаць элемэнты з ідэнтыфікатарам <samp>Q42</samp> з усімі меткамі на ўсіх даступных мовах",
 	"apihelp-wbgetentities-example-7": "Атрымаць элемэнты з ідэнтыфікатарамі <samp>P17</samp> і <samp>P3</samp>, якія будуць паказваць толькі тыпы зьвестак",
 	"apihelp-wbgetentities-example-8": "Атрымаць элемэнты з ідэнтыфікатарам <samp>Q42</samp> з усімі сынонімамі на ангельскай мове",
-	"apihelp-wbgetentities-example-9": "Атрымаць элемэнты з ідэнтыфікатарамі <samp>Q1</samp> і <samp>Q42</samp> з апісаньнямі на ангельскай, нямецкай і францускай мовах"
+	"apihelp-wbgetentities-example-9": "Атрымаць элемэнты з ідэнтыфікатарамі <samp>Q1</samp> і <samp>Q42</samp> з апісаньнямі на ангельскай, нямецкай і францускай мовах",
+	"apihelp-wbgetentities-example-10": "Атрымаць элемэнт для старонкі «<var>Berlin</var>» на сайце «<var>enwiki</var>» з моўнымі атрыбутамі на ангельскай мове"
 }

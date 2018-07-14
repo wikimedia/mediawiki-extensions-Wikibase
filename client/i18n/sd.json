@@ -9,6 +9,8 @@
 		]
 	},
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
+	"wikibase-after-page-move": "اوهان جو چورڻو هاڻي [$1 ۾ {{WBREPONAME}} آئٽم تي] ٻولي ڳنڍڻي ۾ نظر اچڻ گھرجي. اسان پڇون ٿا ته اوهان ڏسو ڇا اهو ٿيو آهي.",
+	"wikibase-after-page-delete": "[$1 {{WBREPONAME}} سان لاڳاپيل آئٽم] مان هن صفحي جو ڳنڍڻو ڊاهڻ لازمي آهي. اسان جي درخواست آهي ته اوهان هڪ دفعو چڪاسي وٺو.",
 	"wikibase-comment-update": "{{WBREPONAME}} اسم تبديل ٿيو",
 	"wikibase-dataitem": "{{WBREPONAME}} اسم",
 	"wikibase-editlinks": "ڳنڍڻن کي سنواريو",
