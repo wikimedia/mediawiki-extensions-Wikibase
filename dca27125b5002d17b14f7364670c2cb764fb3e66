@@ -286,6 +286,30 @@
     },
     {
       "key": {
+        "uuid": "3ddf6dfe_2230480c",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:57:06Z",
+      "side": 1,
+      "message": "I find the micro-benchmark results quite convincing enough to not be worried with the double serialization for now.\nNote that lookup using this cache is going to be first used for a small subset of items only, so even this is going to become a performance issue, we are going to be able to control it quite well.\n\nI can understand reservations about using native PHP serialization here. Would \"hiding\" it it (e.g. having cache use some \"serializer\" encapsulating the use of PHP\u0027s serialize/unserialize) help here Addshore?\nI am not sure myself how much of improvement would this be.",
+      "parentUuid": "6341b3b3_1aaa2030",
+      "range": {
+        "startLine": 79,
+        "startChar": 11,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ced71be2_2218b00a",
         "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
         "patchSetId": 11
