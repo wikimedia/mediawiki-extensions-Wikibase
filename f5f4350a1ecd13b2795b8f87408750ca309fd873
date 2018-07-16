@@ -49,6 +49,54 @@
     },
     {
       "key": {
+        "uuid": "dd89d82a_d80372ee",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:56:37Z",
+      "side": 1,
+      "message": "Out of the blue.\nWhat would the note say? \"Defaults to one hour (picked at random gut feeling on June 2018\"?",
+      "parentUuid": "294810f2_e412d80d",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 20
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afed74dc_2eb05346",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:56:37Z",
+      "side": 1,
+      "message": "Used in line 111",
+      "parentUuid": "e6982f53_b8cd581e",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 20
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "446230a2_2b15f775",
         "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
         "patchSetId": 11
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "Does it matter?",
       "parentUuid": "446230a2_2b15f775",
+      "range": {
+        "startLine": 54,
+        "startChar": 11,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "835c32a3_26776921",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:56:37Z",
+      "side": 1,
+      "message": "My idea was that _any_ cache would do. What considerations did I naively miss? :)",
+      "parentUuid": "72e72034_ebf398bc",
       "range": {
         "startLine": 54,
         "startChar": 11,
@@ -153,6 +225,30 @@
       "writtenOn": "2018-07-10T15:10:07Z",
       "side": 1,
       "message": "`getLabel()`?",
+      "range": {
+        "startLine": 159,
+        "startChar": 13,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "f5f4350a1ecd13b2795b8f87408750ca309fd873",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "113283da_7adaa5ff",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90ce5369_beab9479",
       "range": {
         "startLine": 159,
         "startChar": 13,
