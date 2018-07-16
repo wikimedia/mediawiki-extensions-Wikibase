@@ -119,7 +119,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::resolveRedirects
 	 */
-	public function resolveRedirects() {
+	private function resolveRedirects() {
 		$ids = array_keys( $this->entityInfo );
 
 		$this->redirects = [];
@@ -168,7 +168,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 * @param string[]|null $types Which types of terms to include (e.g. "label", "description", "aliases").
 	 * @param string[]|null $languages Which languages to include
 	 */
-	public function collectTerms( array $types = null, array $languages = null ) {
+	private function collectTerms( array $types = null, array $languages = null ) {
 		foreach ( $this->entityInfo as $id => &$entityRecord ) {
 			$id = $this->parseId( $id );
 			$entity = $this->getEntity( $id );
@@ -275,7 +275,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::collectDataTypes
 	 */
-	public function collectDataTypes() {
+	private function collectDataTypes() {
 		foreach ( $this->entityInfo as $id => &$entityRecord ) {
 			$id = $this->parseId( $id );
 
@@ -298,7 +298,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 *
 	 * @param string $redirects A flag, either "keep-redirects" (default) or "remove-redirects".
 	 */
-	public function removeMissing( $redirects = 'keep-redirects' ) {
+	private function removeMissing( $redirects = 'keep-redirects' ) {
 		foreach ( array_keys( $this->entityInfo ) as $key ) {
 			$id = $this->parseId( $key );
 
@@ -323,7 +323,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 *
 	 * @return EntityInfo
 	 */
-	public function getEntityInfo() {
+	private function getEntityInfo() {
 		return new EntityInfo( $this->entityInfo );
 	}
 
@@ -345,9 +345,24 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 *
 	 * @param EntityId[] $ids
 	 */
-	public function retainEntityInfo( array $ids ) {
+	private function retainEntityInfo( array $ids ) {
 		$retain = $this->convertEntityIdsToStrings( $ids );
 		$this->entityInfo = array_intersect_key( $this->entityInfo, array_flip( $retain ) );
+	}
+
+	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+		$this->resolveRedirects();
+
+		$this->collectTerms(
+			[ 'label', 'description' ],
+			$languageCodes
+		);
+
+		$this->removeMissing();
+		$this->collectDataTypes();
+		$this->retainEntityInfo( $entityIds );
+
+		return $this->getEntityInfo();
 	}
 
 }

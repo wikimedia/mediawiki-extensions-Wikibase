@@ -238,7 +238,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 		);
 	}
 
-	public function testConstructorIgnoresEntityIdsFromOtherRepositories() {
+	public function testIgnoresEntityIdsFromOtherRepositories() {
 		$itemId = new ItemId( 'Q1' );
 		$propertyId = new PropertyId( 'foo:P1' );
 
@@ -251,11 +251,22 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			''
 		);
 
-		$this->assertTrue( $builder->getEntityInfo()->hasEntityInfo( $itemId ) );
-		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
+		$this->assertTrue( $builder->collectEntityInfo( [ $itemId, $propertyId ], [] )->hasEntityInfo( $itemId ) );
+		$this->assertFalse( $builder->collectEntityInfo( [ $itemId, $propertyId ], [] )->hasEntityInfo( $propertyId ) );
 	}
 
 	private function saveFakeForeignItemTermUsingFullItemId( ItemId $itemId, $termType, $termLanguage, $termText ) {
+		// Insert any existing data for the item ID (might collide because of insert done in setUp
+		$db = wfGetDB( DB_MASTER );
+		$db->delete(
+			'wb_terms',
+			[
+				'term_full_entity_id' => $itemId->getLocalPart(),
+				'term_type' => $termType,
+				'term_language' => $termLanguage
+			]
+		);
+
 		// Inserting a dummy label for item with numeric ID part equal to 1.
 		// In this test local database is used to pretend to be a databse of
 		// repository "foo". Terms fetched from the database should be
@@ -307,36 +318,9 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			'foo'
 		);
 
-		$builder->collectTerms();
-
-		$entityInfo = $builder->getEntityInfo()->getEntityInfo( $itemId );
+		$entityInfo = $builder->collectEntityInfo( [ $itemId ], [ $languageCode ] )->getEntityInfo( $itemId );
 
 		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
-	}
-
-	public function testRemoveMissingConsidersForeignEntities() {
-		$itemId = new ItemId( 'foo:Q1' );
-
-		$this->saveFakeForeignItemTermUsingFullItemId( $itemId, 'label', 'en', 'dummy label' );
-
-		$builder = new SqlEntityInfoBuilder(
-			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-			] ),
-			$this->getEntityNamespaceLookup(),
-			[ $itemId ],
-			false,
-			'foo'
-		);
-
-		$builder->removeMissing();
-
-		$entityInfo = $builder->getEntityInfo();
-
-		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
 	}
 
 }
