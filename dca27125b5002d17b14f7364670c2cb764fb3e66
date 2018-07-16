@@ -310,6 +310,30 @@
     },
     {
       "key": {
+        "uuid": "35e927fd_1c4ead7c",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-07-16T15:27:55Z",
+      "side": 1,
+      "message": "HashBagOStuff could just be changed to serialize and various callers could be moved off to MapCacheRLU (which does not serialize). That would avoid an extra layer here.",
+      "parentUuid": "3ddf6dfe_2230480c",
+      "range": {
+        "startLine": 79,
+        "startChar": 11,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ced71be2_2218b00a",
         "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
         "patchSetId": 11
