@@ -480,48 +480,6 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
 
-	public function removeEntityInfoProvider() {
-		return [
-			'empty' => [
-				[],
-				[],
-				[],
-			],
-			'remove nonexisting' => [
-				[
-					new ItemId( 'Q1' ),
-				],
-				[
-					new ItemId( 'Q2' ),
-				],
-				[ 'Q1' ],
-			],
-			'remove some' => [
-				[
-					new ItemId( 'Q1' ),
-					new ItemId( 'Q2' ),
-					new ItemId( 'Q3' ),
-				],
-				[
-					new ItemId( 'Q2' ),
-				],
-				[ 'Q1', 'Q3' ],
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider removeEntityInfoProvider
-	 */
-	public function testRemoveEntityInfo( array $ids, array $remove, array $expected ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->removeEntityInfo( $remove );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
-	}
-
 	public function retainEntityInfoProvider() {
 		return [
 			'empty' => [
