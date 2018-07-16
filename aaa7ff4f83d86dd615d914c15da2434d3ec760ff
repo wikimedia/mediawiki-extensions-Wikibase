@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "700e735b_f067f196",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T13:45:46Z",
+      "side": 1,
+      "message": "oops, removed",
+      "parentUuid": "40179228_db84ffc5",
+      "range": {
+        "startLine": 878,
+        "startChar": 2,
+        "endLine": 878,
+        "endChar": 24
+      },
+      "revId": "aaa7ff4f83d86dd615d914c15da2434d3ec760ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb40819_e81a288b",
         "filename": "repo/Wikibase.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-06T15:27:37Z",
       "side": 1,
       "message": "can the comment be deleted?",
+      "range": {
+        "startLine": 879,
+        "startChar": 2,
+        "endLine": 879,
+        "endChar": 23
+      },
+      "revId": "aaa7ff4f83d86dd615d914c15da2434d3ec760ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8539b4e6_44166465",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T13:45:46Z",
+      "side": 1,
+      "message": "yup, solving this TODO was the whole point of this change",
+      "parentUuid": "3fb40819_e81a288b",
       "range": {
         "startLine": 879,
         "startChar": 2,
