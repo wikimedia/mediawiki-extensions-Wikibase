@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e200cbb8_e39896fe",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:15:22Z",
+      "side": 1,
+      "message": "Right, do we really need to decorate WANObjectCache? Is it ever used in Wikibase?\n\nWhat are the odd things you referred to Addshore?\nAsking as I don\u0027t know WANObjectCache, and it is a really mysterious creature to me. Im not even sure what\u0027s allowed and what\u0027s not.",
+      "parentUuid": "f4fad2da_18bad40c",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d3dfde3_842ca565",
         "filename": "lib/includes/SimpleWANObjectCache.php",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "writtenOn": "2018-07-11T10:00:49Z",
       "side": 1,
       "message": "This looks the same as the other interface, could reuse code, but not really needed, but we can use traits now..",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 120,
+        "endChar": 2
+      },
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76356179_55615ce9",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:15:22Z",
+      "side": 1,
+      "message": "Yup, I intentionally copied it to hear from reviewers.\n\nCould be done right away. But how about moving this out to trait/whetever in a separate patch?\nWith the pattern in mind: first have duplication, then remove it.",
+      "parentUuid": "5d3dfde3_842ca565",
       "range": {
         "startLine": 103,
         "startChar": 1,
