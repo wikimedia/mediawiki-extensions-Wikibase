@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "9860afce_44052d16",
+        "filename": "lib/includes/SimpleWANObjectCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-07-16T13:03:24Z",
+      "side": 1,
+      "message": "I don\u0027t recommend trying to wrap WANObjectCache behind a simple key/value interface like this, since it will indeed due confusing things that go against the interface contract (e.g. tombstones). Even with the hold-offs set to 0 seconds, there would still be the awkwardness that set() does not have to apply in all datacenters but delete() does. I suppose the proxy\u0027s delete() could wrap reap() to be more consistent in that regard.\n\nPart of the contract for BagOStuff/WANObjectCache is in the class itself and part in the factory method or service that yields such objects, e.g. getLocalClusterCache(). I suppose that same would hold with PSR-16 (\"An instance of CacheInterface corresponds to a single collection of cache items with a single key namespace\" is not that specific). This means delete()/set() have the same caveats as BagOStuff, so I suppose it\u0027s no worse in that regard.\n\nSo, it could perhaps be hacked up to work, but all the use-case advantages of WAN cache go away, in which case one may as well use PSR-16 or BagOStuff directly IMO.",
+      "parentUuid": "e200cbb8_e39896fe",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "91c4970e9416af2ac35f9d9f8fa80fbd919faa7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d3dfde3_842ca565",
         "filename": "lib/includes/SimpleWANObjectCache.php",
         "patchSetId": 3
