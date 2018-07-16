@@ -189,6 +189,52 @@
       "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7d93c90_7c4643f6",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-16T09:25:41Z",
+      "side": 1,
+      "message": "\"a possible next step\"",
+      "range": {
+        "startLine": 17,
+        "startChar": 82,
+        "endLine": 17,
+        "endChar": 91
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5bd6d11e_e96a1a2b",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-16T09:25:41Z",
+      "side": 1,
+      "message": "The adapters _will_ need to be added to allow for the next sentence to be truthy.",
+      "range": {
+        "startLine": 29,
+        "startChar": 246,
+        "endLine": 29,
+        "endChar": 251
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
