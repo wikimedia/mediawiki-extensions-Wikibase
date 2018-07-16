@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c2e3e7bd_ed8bae40",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T08:15:56Z",
+      "side": 1,
+      "message": "will add it to the next paragraph, I think it fits the best there. \n\nFeel free to suggest placing it somewhere else!",
+      "parentUuid": "b21436b8_49f61e8a",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 106
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d50baa_095604bb",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 8
