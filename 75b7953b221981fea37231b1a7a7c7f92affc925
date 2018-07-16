@@ -46,6 +46,23 @@
       "revId": "75b7953b221981fea37231b1a7a7c7f92affc925",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9722106_d8280138",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:52:25Z",
+      "side": 1,
+      "message": "Given that changes to this PHP file are only deployed weekly, maybe we would like to consider moving the $max to a config variable, as it is is easier to adjust in the production environment?\nOn the flip side, this would move the max far away from the affected code.",
+      "revId": "75b7953b221981fea37231b1a7a7c7f92affc925",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
