@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -12,6 +12,10 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Store\EntityInfo;
+use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * EntityInfoBuilder based on an EntityLookup.
