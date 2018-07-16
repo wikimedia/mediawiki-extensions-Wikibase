@@ -5,7 +5,8 @@
 			"Macofe",
 			"Srdjan m",
 			"Obsuser",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Zoranzoki21"
 		]
 	},
 	"wikibase-desc": "Skladište struktuiranih podataka",
@@ -23,10 +24,10 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Na drugim jezicima",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Podesi",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Poznato i kao",
-	"wikibase-label-empty": "Naziv nije naveden",
+	"wikibase-label-empty": "Naziv nije definisan",
 	"wikibase-label-edit-placeholder": "unesite naziv",
 	"wikibase-label-edit-placeholder-language-aware": "unesite naziv na $1",
-	"wikibase-description-empty": "Opis nije naveden",
+	"wikibase-description-empty": "Opis nije definisan",
 	"wikibase-description-edit-placeholder": "unesite opis",
 	"wikibase-description-edit-placeholder-language-aware": "unesite opis na $1",
 	"wikibase-aliases-edit-placeholder": "unesite neke alijase",

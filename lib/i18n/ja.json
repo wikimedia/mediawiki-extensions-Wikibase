@@ -152,7 +152,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$3|主張}}に関する{{PLURAL:$4|$4個の情報源}}を変更",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "{{PLURAL:$3|主張}}のランクを変更",
 	"wikibase-entity-summary-clientsitelink-update": "ページ [$3] を [$4] に移動",
-	"wikibase-entity-summary-clientsitelink-remove": "[$3]のページが削除されました",
+	"wikibase-entity-summary-clientsitelink-remove": "[$3]のページは削除済",
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|修飾子}}を追加",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|修飾子}}を変更",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|修飾子}}を除去",

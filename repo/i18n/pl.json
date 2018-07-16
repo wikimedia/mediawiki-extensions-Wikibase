@@ -178,6 +178,7 @@
 	"wikibase-newproperty-datatype": "Typ danych:",
 	"wikibase-newproperty-invalid-datatype": "Podano nieprawidłowy typ danych.",
 	"wikibase-newproperty-insufficient-data": "Należy wpisać przynajmniej etykietę, opis lub inną nazwę.",
+	"wikibase-newproperty-pick-data-type": "(wybierz typ danych)",
 	"wikibase-description-helppage": "Help:Opis",
 	"wikibase-label-helppage": "Help:Etykieta",
 	"special-newitem": "Utwórz nowy element",
