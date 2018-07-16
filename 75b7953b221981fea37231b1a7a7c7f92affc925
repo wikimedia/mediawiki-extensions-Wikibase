@@ -22,6 +22,30 @@
       "revId": "75b7953b221981fea37231b1a7a7c7f92affc925",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c72e066_f166ead4",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T12:09:59Z",
+      "side": 1,
+      "message": "Not saying this is necessarily better, but something like this should work:\n\n1. get( EntityId ), returns TermFallback, either from cache, or the from the lookup\n2. cache( TermFallback ) writes to cache. I imagine it would do $this-\u003ecache-\u003ehas( $xxx ) call to check if the entry in the cache already exists, and only do \"cache-\u003eset\" if needed",
+      "parentUuid": "947072ba_f5890883",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 51
+      },
+      "revId": "75b7953b221981fea37231b1a7a7c7f92affc925",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
