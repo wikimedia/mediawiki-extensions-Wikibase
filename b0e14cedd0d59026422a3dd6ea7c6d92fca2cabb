@@ -239,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "f3204b2c_d0cbf818",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-16T13:45:05Z",
+      "side": 1,
+      "message": "Thanks for the article fix! (which my initial comment was purely about)\n\nConcerning the wikibase or core question: I\u0027m pro changing problems as far upstream as it is in our power. Cost-value ratio has to be sane, though - easy to push for things when not the implementing party.",
+      "parentUuid": "d91417e0_fc6fec4c",
+      "range": {
+        "startLine": 17,
+        "startChar": 82,
+        "endLine": 17,
+        "endChar": 91
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bd6d11e_e96a1a2b",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 8
