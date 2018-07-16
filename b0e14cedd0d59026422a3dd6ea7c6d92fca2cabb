@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "d91417e0_fc6fec4c",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T13:24:13Z",
+      "side": 1,
+      "message": "I missed to save the comment I wrote here earlier in the morning, which also included me noticing the missing article!\n\nRegarding the \"will\" or \"attitude\", I was wondering whether the existing next sentence (\"It might be a possible next step\") is not good enough? Or does it sound to negative.\n\nOpinions on what to move to mediawiki aside (clearly we all have an opinion on this topic), is this something which is a crucial factor to consider when deciding on the issue at hand, i.e. using the PSR-16 interface in Wikibase?\n\nIt more seems to me like a possible follow up, etc, thus subject to future discussions and ADRs.",
+      "parentUuid": "d7d93c90_7c4643f6",
+      "range": {
+        "startLine": 17,
+        "startChar": 82,
+        "endLine": 17,
+        "endChar": 91
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bd6d11e_e96a1a2b",
         "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
         "patchSetId": 8
@@ -226,6 +250,30 @@
       "writtenOn": "2018-07-16T09:25:41Z",
       "side": 1,
       "message": "The adapters _will_ need to be added to allow for the next sentence to be truthy.",
+      "range": {
+        "startLine": 29,
+        "startChar": 246,
+        "endLine": 29,
+        "endChar": 251
+      },
+      "revId": "b0e14cedd0d59026422a3dd6ea7c6d92fca2cabb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb600e99_76f3583d",
+        "filename": "docs/adr/000x-use-psr-16-cache-interface.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-16T13:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bd6d11e_e96a1a2b",
       "range": {
         "startLine": 29,
         "startChar": 246,
