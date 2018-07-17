@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Store\Sql;
 use DBAccessBase;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use RuntimeException;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
@@ -139,7 +138,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param EntityId[] $ids
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
@@ -148,7 +146,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
-		array $ids,
 		$wiki = false,
 		$repositoryName = ''
 	) {
@@ -166,8 +163,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityIdComposer = $entityIdComposer;
 		$this->repositoryName = $repositoryName;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-
-		$this->setEntityIds( $this->filterForeignEntityIds( $ids ) );
 	}
 
 	/**
@@ -191,14 +186,8 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * @param EntityId[] $ids
-	 *
-	 * @throws RuntimeException If called more than once.
 	 */
 	private function setEntityIds( array $ids ) {
-		if ( $this->entityIds !== null ) {
-			throw new RuntimeException( 'EntityIds have already been initialized' );
-		}
-
 		$this->entityIds = [];
 		$this->entityInfo = [];
 		$this->numericPropertyIds = [];
@@ -741,12 +730,16 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityId[] $ids
 	 */
 	private function retainEntityInfo( array $ids ) {
-		$retain = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
+		$retain = $this->convertEntityIdsToStrings( $ids );
 		$remove = array_diff( array_keys( $this->entityInfo ), $retain );
 		$this->unsetEntityInfo( $remove );
 	}
 
 	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+		$ids = $this->filterForeignEntityIds( $entityIds );
+
+		$this->setEntityIds( $ids );
+
 		$this->resolveRedirects();
 
 		$this->collectTerms(
@@ -756,7 +749,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->removeMissing();
 		$this->collectDataTypes();
-		$this->retainEntityInfo( $entityIds );
+		$this->retainEntityInfo( $ids );
 
 		return $this->getEntityInfo();
 	}
