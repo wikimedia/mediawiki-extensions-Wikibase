@@ -6,8 +6,8 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -112,9 +112,9 @@ interface Store {
 	public function getEntityStoreWatcher();
 
 	/**
-	 * @return EntityInfoBuilderFactory
+	 * @return EntityInfoBuilder
 	 */
-	public function getEntityInfoBuilderFactory();
+	public function getEntityInfoBuilder();
 
 	/**
 	 * @return PropertyInfoLookup

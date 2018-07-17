@@ -22,7 +22,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
@@ -212,7 +212,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getEntityViewFactory( $createView ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
-			new SqlEntityInfoBuilderFactory(
+			new SqlEntityInfoBuilder(
 				$entityIdParser,
 				new EntityIdComposer( [] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
@@ -400,7 +400,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getViewFactoryForRedirectTest(),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
-			new SqlEntityInfoBuilderFactory(
+			new SqlEntityInfoBuilder(
 				$entityIdParser,
 				new EntityIdComposer( [
 					'item' => function( $ignore, $idPart ) {

@@ -187,6 +187,10 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		}
 	}
 
+	public function getEntityInfoBuilder() {
+		return $this->getService( 'EntityInfoBuilder' );
+	}
+
 	public function getEntityInfoBuilderFactory() {
 		return $this->getService( 'EntityInfoBuilderFactory' );
 	}

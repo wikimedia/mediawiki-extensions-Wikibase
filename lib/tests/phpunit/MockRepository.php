@@ -22,10 +22,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Tests\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
@@ -43,7 +41,7 @@ use Wikibase\Lib\Store\RedirectRevision;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRedirectLookup,
+class MockRepository implements EntityLookup, EntityRedirectLookup,
 	EntityRevisionLookup, EntityStore, PropertyDataTypeLookup, SiteLinkLookup {
 
 	/**
@@ -420,15 +418,6 @@ class MockRepository implements EntityInfoBuilderFactory, EntityLookup, EntityRe
 		}
 
 		return null;
-	}
-
-	/**
-	 * @param EntityId[] $entityIds
-	 *
-	 * @return GenericEntityInfoBuilder
-	 */
-	public function newEntityInfoBuilder( array $entityIds ) {
-		return new GenericEntityInfoBuilder( $entityIds, new BasicEntityIdParser(), $this );
 	}
 
 	/**

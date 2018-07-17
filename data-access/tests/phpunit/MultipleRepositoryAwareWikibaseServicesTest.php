@@ -16,7 +16,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -61,8 +61,8 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 		$testCase = $this;
 
 		return [
-			'EntityInfoBuilderFactory' => function () use ( $testCase ) {
-				return $testCase->getMock( EntityInfoBuilderFactory::class );
+			'EntityInfoBuilder' => function () use ( $testCase ) {
+				return $testCase->getMock( EntityInfoBuilder::class );
 			},
 			'EntityPrefetcher' => function () use ( $testCase ) {
 				return $testCase->getMock( EntityPrefetcher::class );
@@ -85,10 +85,10 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 		];
 	}
 
-	public function testGetEntityInfoBuilderFactory() {
+	public function testGetEntityInfoBuilder() {
 		$wikibaseServices = $this->newMultipleRepositoryAwareWikibaseServices();
 
-		$this->assertInstanceOf( EntityInfoBuilderFactory::class, $wikibaseServices->getEntityInfoBuilderFactory() );
+		$this->assertInstanceOf( EntityInfoBuilder::class, $wikibaseServices->getEntityInfoBuilder() );
 	}
 
 	public function testGetEntityNamespaceLookup() {
@@ -185,7 +185,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 
 		$this->assertEquals(
 			[
-				'EntityInfoBuilderFactory',
+				'EntityInfoBuilder',
 				'EntityNamespaceLookup',
 				'EntityPrefetcher',
 				'EntityRevisionLookup',
