@@ -16,7 +16,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -132,8 +132,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		$genericServices = $this->genericServices;
 
 		$this->applyWiring( [
-			'EntityInfoBuilderFactory' => function() use ( $multiRepositoryServices ) {
-				return $multiRepositoryServices->getEntityInfoBuilderFactory();
+			'EntityInfoBuilder' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getEntityInfoBuilder();
 			},
 			'EntityNamespaceLookup' => function() use ( $genericServices ) {
 				return $genericServices->getEntityNamespaceLookup();
@@ -181,10 +181,10 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	}
 
 	/**
-	 * @return EntityInfoBuilderFactory
+	 * @return EntityInfoBuilder
 	 */
-	public function getEntityInfoBuilderFactory() {
-		return $this->getService( 'EntityInfoBuilderFactory' );
+	public function getEntityInfoBuilder() {
+		return $this->getService( 'EntityInfoBuilder' );
 	}
 
 	/**

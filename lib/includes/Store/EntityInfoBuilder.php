@@ -7,8 +7,6 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * A builder for collecting information about a batch of entities.
  *
- * @see EntityInfoBuilderFactory
- *
  * @license GPL-2.0-or-later
  */
 interface EntityInfoBuilder {

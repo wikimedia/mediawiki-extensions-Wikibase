@@ -2,7 +2,7 @@
 
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
@@ -15,9 +15,9 @@ use Wikimedia\Assert\Assert;
 
 return [
 
-	'EntityInfoBuilderFactory' => function( MultiRepositoryServices $multiRepositoryServices ) {
-		return new DispatchingEntityInfoBuilderFactory(
-			$multiRepositoryServices->getServiceMap( 'EntityInfoBuilderFactory' )
+	'EntityInfoBuilder' => function( MultiRepositoryServices $multiRepositoryServices ) {
+		return new DispatchingEntityInfoBuilder(
+			$multiRepositoryServices->getServiceMap( 'EntityInfoBuilder' )
 		);
 	},
 

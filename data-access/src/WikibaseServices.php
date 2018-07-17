@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -23,9 +23,9 @@ use Wikibase\StringNormalizer;
 interface WikibaseServices {
 
 	/**
-	 * @return EntityInfoBuilderFactory
+	 * @return EntityInfoBuilder
 	 */
-	public function getEntityInfoBuilderFactory();
+	public function getEntityInfoBuilder();
 
 	/**
 	 * @return EntityNamespaceLookup
