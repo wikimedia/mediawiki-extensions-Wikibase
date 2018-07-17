@@ -988,7 +988,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return EntityIdParser
+	 * @return SuffixEntityIdParser
 	 */
 	public function getLocalItemUriParser() {
 		return new SuffixEntityIdParser(
