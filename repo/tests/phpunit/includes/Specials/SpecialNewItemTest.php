@@ -52,7 +52,8 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
-			$this->siteStore
+			$this->siteStore,
+			$wikibaseRepo->getTermValidatorFactory()
 		);
 	}
 
@@ -245,6 +246,45 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, 'could not be found on' );
+	}
+
+	public function testErrorTooLong_WhenLabelIsTooLong() {
+		$formData = [
+			SpecialNewItem::FIELD_LABEL => str_repeat( 'suchLongFoo', 200 )
+		];
+
+		$this->assertErrorTooLong( $formData );
+	}
+
+	public function testErrorTooLong_WhenDescriptionIsTooLong() {
+		$formData = [
+			SpecialNewItem::FIELD_DESCRIPTION => str_repeat( 'SuchLongFoo', 200 )
+		];
+
+		$this->assertErrorTooLong( $formData );
+	}
+
+	public function testErrorTooLong_WhenAliasIsTooLong() {
+		$formData = [
+			SpecialNewItem::FIELD_ALIASES => str_repeat( 'SuchLongFoo', 200 )
+		];
+
+		$this->assertErrorTooLong( $formData );
+	}
+
+	public function testErrorTooLong_WhenAliasesAreTooLong() {
+		$formData = [
+			SpecialNewItem::FIELD_ALIASES =>
+				str_repeat( 'SuchLongFoo', 200 ) . '|' . str_repeat( 'SuchLongFoo', 200 )
+		];
+
+		$this->assertErrorTooLong( $formData );
+	}
+
+	private function assertErrorTooLong( $formData ) {
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'Must be no more than' );
 	}
 
 	/**
