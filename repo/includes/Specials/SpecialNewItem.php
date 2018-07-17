@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -38,13 +39,19 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	private $siteLookup;
 
+	/**
+	 * @var TermValidatorFactory
+	 */
+	private $termValidatorFactory;
+
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		TermValidatorFactory $termValidatorFactory
 	) {
 		parent::__construct(
 			'NewItem',
@@ -56,6 +63,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			$editEntityFactory
 		);
 		$this->siteLookup = $siteLookup;
+		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
 	/**
@@ -225,7 +233,43 @@ class SpecialNewItem extends SpecialNewEntity {
 			return Status::newFatal( 'wikibase-newitem-insufficient-data' );
 		}
 
+		if ( $formData[self::FIELD_LABEL] != '' ) {
+			$validator = $this->termValidatorFactory->getLabelValidator( $this->getEntityType() );
+			$result = $validator->validate( $formData[self::FIELD_LABEL] );
+			if ( !$result->isValid() ) {
+				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
+			}
+		}
+
+		if ( $formData[self::FIELD_DESCRIPTION] != '' ) {
+			$validator = $this->termValidatorFactory->getDescriptionValidator();
+			$result = $validator->validate( $formData[self::FIELD_DESCRIPTION] );
+			if ( !$result->isValid() ) {
+				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
+			}
+		}
+
+		if ( $formData[self::FIELD_ALIASES] !== [] ) {
+			$validator = $this->termValidatorFactory->getAliasValidator( $this->getEntityType() );
+			foreach ( $formData[self::FIELD_ALIASES] as $alias ) {
+				$result = $validator->validate( $alias );
+				if ( ! $result->isValid() ) {
+					return $this->createStatusFromValidatorError( $result->getErrors()[0] );
+				}
+			}
+
+			$result = $validator->validate( implode( '|', $formData[self::FIELD_ALIASES] ) );
+			if ( !$result->isValid() ) {
+				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
+			}
+		}
+
 		return Status::newGood();
+	}
+
+	private function createStatusFromValidatorError( $error ) {
+		$params = array_merge( [ 'wikibase-validator-' . $error->getCode() ],  $error->getParameters() );
+		return call_user_func_array( 'Status::newFatal', $params );
 	}
 
 	/**
