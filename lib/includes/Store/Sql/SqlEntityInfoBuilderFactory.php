@@ -87,7 +87,6 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 			$this->entityIdParser,
 			$this->entityIdComposer,
 			$this->entityNamespaceLookup,
-			$entityIds,
 			$this->wiki,
 			$this->repositoryName
 		);
