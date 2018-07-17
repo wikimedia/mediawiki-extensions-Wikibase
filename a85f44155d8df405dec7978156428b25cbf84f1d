@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "262edfbc_bdd652b0",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-07-17T12:22:52Z",
+      "side": 1,
+      "message": "This is not so nice...\nAny proposals for a better approach?\ncall_user_fun()?",
+      "range": {
+        "startLine": 264,
+        "startChar": 2,
+        "endLine": 266,
+        "endChar": 3
+      },
+      "revId": "a85f44155d8df405dec7978156428b25cbf84f1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
