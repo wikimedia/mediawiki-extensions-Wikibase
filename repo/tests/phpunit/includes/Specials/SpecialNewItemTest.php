@@ -11,7 +11,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
+use ValueValidators\Error;
+use ValueValidators\Result;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewItem
@@ -46,13 +49,15 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		return new SpecialNewItem(
 			$this->copyrightView,
 			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => $namespaceNumber ] ),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
-			$this->siteStore
+			$this->siteStore,
+			$this->getTermValidatorFactorMock()
 		);
 	}
 
@@ -247,6 +252,44 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->assertHtmlContainsErrorMessage( $html, 'could not be found on' );
 	}
 
+	public function testWhenLabelIsInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+				SpecialNewItem::FIELD_LABEL => 'TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	public function testWhenDescriptionIsInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+				SpecialNewItem::FIELD_DESCRIPTION => 'TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	public function testWhenAliasIsInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+				SpecialNewItem::FIELD_ALIASES => 'TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	public function testWhenAliasesAreInvalid_ThenHtmlContainsErrorMessage() {
+		$formData = [
+			SpecialNewItem::FIELD_ALIASES => 'TOO_LONG_ERROR|TOO_LONG_ERROR'
+		];
+
+		$this->assertHtmlContainsErrorTooLongMessage( $formData );
+	}
+
+	private function assertHtmlContainsErrorTooLongMessage( $formData ) {
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'Must be no more than' );
+	}
+
 	/**
 	 * @param string $url
 	 *
@@ -291,11 +334,43 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	 */
 	private function givenSiteWithNoPagesExists( $existingSiteId ) {
 		/** @var \PHPUnit_Framework_MockObject_MockObject|Site $siteMock */
-		$siteMock = $this->getMock( Site::class, [ 'normalizePageName' ] );
+		$siteMock = $this->getMock( Site::class, [
+			'normalizePageName'
+		] );
 		$siteMock->setGlobalId( $existingSiteId );
 		$siteMock->method( 'normalizePageName' )->willReturn( false );
 
 		$this->siteStore->saveSite( $siteMock );
+	}
+
+	private function getTermValidatorFactorMock() {
+		$validatorMock = $this->getValidatorMock();
+
+		/** @var \PHPUnit_Framework_MockObject_MockObject|TermValidatorFactory $mock */
+		$mock = $this->createMock( TermValidatorFactory::Class );
+		$mock->method( 'getLabelValidator' )
+			->will( $this->returnValue( $validatorMock ) );
+		$mock->method( 'getDescriptionValidator' )
+			->will( $this->returnValue( $validatorMock ) );
+		$mock->method( 'getAliasValidator' )
+			->will( $this->returnValue( $validatorMock ) );
+
+		return $mock;
+	}
+
+	private function getValidatorMock() {
+		/** @var \PHPUnit_Framework_MockObject_MockObject|ValueValidator $validatorMock */
+		$validatorMock = $this->getMock( 'ValueValidators\ValueValidator', [ 'validate', 'setOptions' ] );
+		$validatorMock->method( 'validate' )->will(
+			$this->returnCallback(
+				function ( $value ) {
+				if ( $value === 'TOO_LONG_ERROR' ) {
+					return Result::newError( [ Error::newError( 'This is the too long error', null, 'too-long' ) ] );
+				}
+				return Result::newSuccess();
+			 } ) );
+
+		return $validatorMock;
 	}
 
 }
