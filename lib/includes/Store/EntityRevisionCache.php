@@ -100,4 +100,21 @@ class EntityRevisionCache {
 		$this->cache->delete( $key );
 	}
 
+	public function getMultiple( array $entityIds ) {
+		$keys = array_map( [ $this, 'getCacheKey' ], $entityIds );
+		// TODO replace with CacheInterface::getMultiple
+		$cachedRevisions = $this->cache->getMulti( $keys/*, null */ );
+		$result = [];
+		foreach ( $keys as $key ) {
+			// TODO: silly!
+			$id = substr( $key, strlen( $this->cacheKeyPrefix . ':' ) );
+			if ( !array_key_exists( $key, $cachedRevisions ) ) {
+				$result[$id] = null;
+			} else {
+				$result[$id] = $cachedRevisions[$key];
+			}
+		}
+		return $result;
+	}
+
 }
