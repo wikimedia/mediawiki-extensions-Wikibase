@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d5530870_d7465391",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-18T09:52:56Z",
+      "side": 1,
+      "message": "argument order should be the other way round, no?\n\nOn more general note: Is it how this is expected to be validated?\nI\u0027d expect each alias to be validated individually.\nAs far as I understand \"foo   \" is invalid alias, but if I entered \"foo   \" and \"bar\", this would pass validation, wouldnt it?",
+      "range": {
+        "startLine": 254,
+        "startChar": 43,
+        "endLine": 254,
+        "endChar": 81
+      },
+      "revId": "a85f44155d8df405dec7978156428b25cbf84f1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "262edfbc_bdd652b0",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 1
@@ -19,6 +42,70 @@
         "endLine": 266,
         "endChar": 3
       },
+      "revId": "a85f44155d8df405dec7978156428b25cbf84f1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1312d4ec_b4d6fe6b",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-18T09:52:56Z",
+      "side": 1,
+      "message": "Sorry for being lazy to check myself, but what those parameters would actually be? Invalid values entered? Is it important for status to include these?",
+      "parentUuid": "262edfbc_bdd652b0",
+      "range": {
+        "startLine": 264,
+        "startChar": 2,
+        "endLine": 266,
+        "endChar": 3
+      },
+      "revId": "a85f44155d8df405dec7978156428b25cbf84f1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "820d3ed3_7851b15a",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-18T09:52:56Z",
+      "side": 1,
+      "message": "no such variable?",
+      "range": {
+        "startLine": 268,
+        "startChar": 70,
+        "endLine": 268,
+        "endChar": 80
+      },
+      "revId": "a85f44155d8df405dec7978156428b25cbf84f1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42310976_3f31ec17",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-18T09:52:56Z",
+      "side": 1,
+      "message": "I wouldn\u0027t mind having some other invalid data case covered by tests, or using test double to have invalid data covered more generally -\u003e this could also make the assertion method nicer, as now it could be frowned upon (string-contains assertion is not very specific really)",
       "revId": "a85f44155d8df405dec7978156428b25cbf84f1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
