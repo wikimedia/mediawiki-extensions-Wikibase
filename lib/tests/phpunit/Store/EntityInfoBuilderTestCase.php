@@ -169,16 +169,6 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info['Q12']['labels'] );
 	}
 
-	public function testGivenPropertyId_entityInfoContainsDatatype() {
-		$id = new PropertyId( 'P2' );
-
-		$builder = $this->newEntityInfoBuilder( [ $id ] );
-
-		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
-
-		$this->assertEquals( 'string', $info['P2']['datatype'] );
-	}
-
 	public function testGivenNonExistingIds_nonExistingIdsSkippedInResult() {
 		$existingId = new ItemId( 'Q1' );
 		$nonExistingId = new ItemId( 'Q1000' );
