@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use Serializers\Serializer;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -45,7 +44,6 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 				->disableOriginalConstructor()->getMock(),
 			$this->getMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
-			new ItemIdParser(),
 			$this->getMock( Serializer::class ),
 			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
 				->disableOriginalConstructor()->getMock()

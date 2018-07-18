@@ -6,7 +6,6 @@ use ExtensionRegistry;
 use Language;
 use PageImages;
 use Serializers\Serializer;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
@@ -60,11 +59,6 @@ class EntityParserOutputGeneratorFactory {
 	private $propertyDataTypeLookup;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $externalEntityIdParser;
-
-	/**
 	 * @var Serializer
 	 */
 	private $entitySerializer;
@@ -98,7 +92,6 @@ class EntityParserOutputGeneratorFactory {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 * @param EntityIdParser $externalEntityIdParser
 	 * @param Serializer $entitySerializer
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
 	 * @param string[] $preferredGeoDataProperties
@@ -114,7 +107,6 @@ class EntityParserOutputGeneratorFactory {
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityIdParser $externalEntityIdParser,
 		Serializer $entitySerializer,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
 		array $preferredGeoDataProperties = [],
@@ -128,7 +120,6 @@ class EntityParserOutputGeneratorFactory {
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
-		$this->externalEntityIdParser = $externalEntityIdParser;
 		$this->entitySerializer = $entitySerializer;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
@@ -189,8 +180,7 @@ class EntityParserOutputGeneratorFactory {
 		$updaters = [
 			new ReferencedEntitiesDataUpdater(
 				$this->entityReferenceExtractorDelegator,
-				$this->entityTitleLookup,
-				$this->externalEntityIdParser
+				$this->entityTitleLookup
 			),
 			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
 			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
