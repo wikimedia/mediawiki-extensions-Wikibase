@@ -66,5 +66,47 @@ namespace Wikibase\Lib\Tests {
 			new SimpleCacheWithBagOStuff( $inner, $prefix );
 		}
 
+		/**
+		 * This test ensures that we cannot accidentally deserialize arbitrary classes
+		 * because it is unsecure.
+		 *
+		 * @see https://phabricator.wikimedia.org/T161647
+		 * @see https://secure.php.net/manual/en/function.unserialize.php
+		 * @see https://www.owasp.org/index.php/PHP_Object_Injection
+		 */
+		public function testObjectsCanNotBeStored_WhenRetrievedGetIncompleteClass() {
+			$inner = new HashBagOStuff();
+			$initialValue = new \DateTime();
+
+			$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_' );
+			$cache->set( 'key', $initialValue );
+			$gotValue = $cache->get( 'key' );
+
+			$this->assertInstanceOf( \__PHP_Incomplete_Class::class, $gotValue );
+			$this->assertFalse( $initialValue == $gotValue );
+		}
+
+		/**
+		 * This test ensures that if data in cache storage is compromised we won't accidentally
+		 * use it.
+		 *
+		 * @see https://phabricator.wikimedia.org/T161647
+		 * @see https://secure.php.net/manual/en/function.unserialize.php
+		 * @see https://www.owasp.org/index.php/PHP_Object_Injection
+		 */
+		public function testGet_GivenSignatureIsWrong_ThrowsAnException() {
+			$inner = new HashBagOStuff();
+			$initialValue = new \DateTime();
+
+			$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_' );
+			$cache->set( 'key', 'some_string' );
+			$value = $inner->get( 'prefix_key', $initialValue );
+			list( $signature, $data ) = json_decode( $value );
+			$inner->set( 'prefix_key', json_encode( [ 'wrong signature', $data ] ) );
+
+			$this->expectException( \Exception::class );
+			$cache->get( 'key' );
+		}
+
 	}
 }
