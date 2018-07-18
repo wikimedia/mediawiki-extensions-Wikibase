@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -41,11 +39,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $termTable;
 
 	/**
-	 * @var string The name of the database table holding property info.
-	 */
-	private $propertyInfoTable;
-
-	/**
 	 * EntityId objects indexed by serialized ID. This allows us to re-use
 	 * the original EntityId object and avoids parsing the string again.
 	 *
@@ -63,15 +56,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *      id-string => record
 	 */
 	private $entityInfo = null;
-
-	/**
-	 * Maps of id strings to numeric property ids.
-	 * Used to build database queries on wb_property_info
-	 *
-	 * @var array[] map of id-strings to numeric ids:
-	 *      type => id-int
-	 */
-	private $numericPropertyIds = [];
 
 	/**
 	 * Maps of ID strings to local ID parts (i.e. excluding the repository prefix, if the
@@ -152,7 +136,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		parent::__construct( $wiki );
 
 		$this->termTable = 'wb_terms';
-		$this->propertyInfoTable = 'wb_property_info';
 
 		$this->idParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
@@ -185,7 +168,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function setEntityIds( array $ids ) {
 		$this->entityIds = [];
 		$this->entityInfo = [];
-		$this->numericPropertyIds = [];
 		$this->localIdsByType = [];
 
 		foreach ( $ids as $id ) {
@@ -217,7 +199,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * Applied the given redirect to the internal data structure.
 	 *
 	 * After this method returns, the old ID will have been replaced by the target ID
-	 * in the $entityInfo as well as the $numericPropertyIds structures. In $entityInfo,
+	 * in the $entityInfo. In $entityInfo,
 	 * the old key will remain as a reference to the entry under the new (target) key.
 	 *
 	 * @param string $idString The redirected entity id
@@ -258,7 +240,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * Removes any references to the given entity from the $entityInfo data
-	 * structure as well as the $numericPropertyIds cache, but not from
+	 * structure, but not from
 	 * the $entityIds cache.
 	 *
 	 * @param string $idString
@@ -269,7 +251,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$type = $id->getEntityType();
 
 		unset( $this->entityInfo[$idString] );
-		unset( $this->numericPropertyIds[$idString] );
 		unset( $this->localIdsByType[$type][$idString] );
 	}
 
@@ -288,7 +269,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * Updates the $entityInfo structure and makes the ID
-	 * available via the $numericPropertyIds and $entityIds caches.
+	 * available via the $entityIds cache.
 	 *
 	 * @param EntityId $id
 	 */
@@ -302,9 +283,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityIds[$key] = $id;
 		$this->entityInfo[$key]['id'] = $key;
 		$this->localIdsByType[$type][$key] = $id->getLocalPart();
-		if ( $type === Property::ENTITY_TYPE ) {
-			$this->numericPropertyIds[$key] = $id->getNumericId();
-		}
 	}
 
 	/**
@@ -455,53 +433,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		];
 	}
 
-	private function collectDataTypes() {
-		//TODO: use PropertyDataTypeLookup service to make use of caching!
-
-		if ( empty( $this->numericPropertyIds ) ) {
-			// there are no Property entities, so there is nothing to do.
-			return;
-		}
-
-		$dbw = $this->getConnection( DB_REPLICA );
-
-		$res = $dbw->select(
-			$this->propertyInfoTable,
-			[ 'pi_property_id', 'pi_type' ],
-			[ 'pi_property_id' => $this->numericPropertyIds ],
-			__METHOD__
-		);
-
-		$this->injectDataTypes( $res );
-		$this->setDefaultValue( 'datatype', null, function( $entity ) {
-			return $entity['type'] === Property::ENTITY_TYPE;
-		} );
-
-		$this->releaseConnection( $dbw );
-	}
-
-	/**
-	 * Injects data types from a DB result into the $entityInfo structure.
-	 *
-	 * @note: Keep in sync with ItemSerializer!
-	 *
-	 * @param IResultWrapper $dbResult
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function injectDataTypes( IResultWrapper $dbResult ) {
-		foreach ( $dbResult as $row ) {
-			$id = PropertyId::newFromNumber( (int)$row->pi_property_id );
-			$key = $id->getSerialization();
-
-			if ( !isset( $this->entityInfo[$key] ) ) {
-				continue;
-			}
-
-			$this->entityInfo[$key]['datatype'] = $row->pi_type;
-		}
-	}
-
 	private function removeMissing() {
 		$missingIds = $this->getMissingIds();
 
@@ -516,7 +447,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function unsetEntityInfo( array $ids ) {
 		$this->entityInfo = array_diff_key( $this->entityInfo, array_flip( $ids ) );
 		$this->entityIds = array_diff_key( $this->entityIds, array_flip( $ids ) );
-		$this->numericPropertyIds = array_diff_key( $this->numericPropertyIds, array_flip( $ids ) );
 
 		foreach ( $this->localIdsByType as &$idsByType ) {
 			$idsByType = array_diff_key( $idsByType, array_flip( $ids ) );
@@ -703,7 +633,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->collectTerms( $languageCodes );
 
 		$this->removeMissing();
-		$this->collectDataTypes();
 		$this->retainEntityInfo( $ids );
 
 		return $this->getEntityInfo();
