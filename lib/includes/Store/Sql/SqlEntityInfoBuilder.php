@@ -455,53 +455,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		];
 	}
 
-	private function collectDataTypes() {
-		//TODO: use PropertyDataTypeLookup service to make use of caching!
-
-		if ( empty( $this->numericPropertyIds ) ) {
-			// there are no Property entities, so there is nothing to do.
-			return;
-		}
-
-		$dbw = $this->getConnection( DB_REPLICA );
-
-		$res = $dbw->select(
-			$this->propertyInfoTable,
-			[ 'pi_property_id', 'pi_type' ],
-			[ 'pi_property_id' => $this->numericPropertyIds ],
-			__METHOD__
-		);
-
-		$this->injectDataTypes( $res );
-		$this->setDefaultValue( 'datatype', null, function( $entity ) {
-			return $entity['type'] === Property::ENTITY_TYPE;
-		} );
-
-		$this->releaseConnection( $dbw );
-	}
-
-	/**
-	 * Injects data types from a DB result into the $entityInfo structure.
-	 *
-	 * @note: Keep in sync with ItemSerializer!
-	 *
-	 * @param IResultWrapper $dbResult
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function injectDataTypes( IResultWrapper $dbResult ) {
-		foreach ( $dbResult as $row ) {
-			$id = PropertyId::newFromNumber( (int)$row->pi_property_id );
-			$key = $id->getSerialization();
-
-			if ( !isset( $this->entityInfo[$key] ) ) {
-				continue;
-			}
-
-			$this->entityInfo[$key]['datatype'] = $row->pi_type;
-		}
-	}
-
 	private function removeMissing() {
 		$missingIds = $this->getMissingIds();
 
@@ -703,7 +656,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->collectTerms( $languageCodes );
 
 		$this->removeMissing();
-		$this->collectDataTypes();
 		$this->retainEntityInfo( $ids );
 
 		return $this->getEntityInfo();
