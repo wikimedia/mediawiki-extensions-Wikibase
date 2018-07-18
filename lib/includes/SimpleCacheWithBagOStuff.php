@@ -22,6 +22,8 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	private $prefix;
 
+	private $secret = 'secret';
+
 	/**
 	 * SimpleCacheWithBagOStuff constructor.
 	 * @param \BagOStuff $inner
@@ -30,6 +32,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws \InvalidArgumentException If prefix has wrong format
 	 */
 	public function __construct( \BagOStuff $inner, $prefix ) {
+		//FIXME: make secret configurable
 		$this->assertKeyIsValid( $prefix );
 
 		$this->inner = $inner;
@@ -55,7 +58,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			return $default;
 		}
 
-		return $result;
+		return $this->unserialize( $result );
 	}
 
 	/**
@@ -76,7 +79,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$this->assertKeyIsValid( $key );
 		$ttl = $this->normalizeTtl( $ttl );
 
-		$value = serialize( $value );
+		$value = $this->serialize( $value );
 
 		return $this->inner->set( $this->prefix . $key, $value, $ttl );
 	}
@@ -136,7 +139,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			if ( !array_key_exists( $this->prefix . $key, $innerResult ) ) {
 				$result[ $key ] = $default;
 			} else {
-				$result[ $key ] = unserialize( $innerResult[ $this->prefix . $key ] );
+				$result[ $key ] = $this->unserialize( $innerResult[ $this->prefix . $key ] );
 			}
 		}
 
@@ -163,7 +166,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$ttl = $this->normalizeTtl( $ttl );
 
 		foreach ( $values as $key => $value ) {
-			$values[ $this->prefix . $key ] = serialize( $value );
+			$values[ $this->prefix . $key ] = $this->serialize( $value );
 		}
 
 		return $this->inner->setMulti( $values, $ttl ?: 0 );
@@ -321,6 +324,51 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			$type = gettype( $ttl );
 			throw $this->invalidArgument( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
 		}
+	}
+
+	private function serialize( $value ) {
+		$serializedValue = serialize( $value );
+		$dataToStore = utf8_encode( $serializedValue );
+
+		$signature = hash_hmac( 'sha256', $dataToStore, $this->secret );
+		return json_encode( [ $signature, $dataToStore ] );
+	}
+
+	/**
+	 * @param string $string
+	 * @return mixed
+	 * @throws \Exception
+	 *
+	 * @note This implementation is so complicated because we cannot use PHP serialization due to
+	 *            the possibility of Object Injection attack.
+	 *
+	 * @see https://phabricator.wikimedia.org/T161647
+	 * @see https://secure.php.net/manual/en/function.unserialize.php
+	 * @see https://www.owasp.org/index.php/PHP_Object_Injection
+	 */
+	private function unserialize( $string ) {
+		$result = json_decode( $string );
+
+		list( $signatureToCheck, $data ) = $result;
+		$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
+		$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
+		if ( !$hashEquals ) {
+			throw new \Exception( 'Invalid signature' );
+		}
+		$decodedData = utf8_decode( $data );
+
+		if ( $decodedData === serialize( false ) ) {
+			return false;
+		}
+
+		$value = unserialize(
+			$decodedData,
+			[
+				'allowed_classes' => [ \stdClass::class ]
+			]
+		);
+
+		return $value;
 	}
 
 }
