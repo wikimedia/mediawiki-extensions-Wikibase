@@ -6,8 +6,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
@@ -213,18 +211,6 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 			$this->injectDescriptions( $entityRecord, $descriptions );
 		}
-
-		if ( $entity instanceof AliasesProvider
-			&& ( $types === null || in_array( 'alias', $types ) )
-		) {
-			$aliases = $entity->getAliasGroups();
-
-			if ( $languages !== null ) {
-				$aliases = $aliases->getWithLanguages( $languages );
-			}
-
-			$this->injectAliases( $entityRecord, $aliases );
-		}
 	}
 
 	private function injectLabels( array &$entityRecord, TermList $labels ) {
@@ -250,24 +236,6 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 				'language' => $lang,
 				'value' => $text,
 			];
-		}
-	}
-
-	private function injectAliases( array &$entityRecord, AliasGroupList $aliasGroups ) {
-		if ( !isset( $entityRecord['aliases'] ) ) {
-			$entityRecord['aliases'] = [];
-		}
-
-		foreach ( $aliasGroups->toArray() as $aliasGroup ) {
-			$lang = $aliasGroup->getLanguageCode();
-			$entityRecord['aliases'][$lang] = [];
-
-			foreach ( $aliasGroup->getAliases() as $text ) {
-				$entityRecord['aliases'][$lang][] = [ // note: append
-					'language' => $lang,
-					'value' => $text,
-				];
-			}
 		}
 	}
 
