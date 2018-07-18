@@ -343,6 +343,8 @@
 	"wikibase-listdatatypes-commonsmedia-body": "Odkaz na soubory uložené na Wikimedia Commons. Když je zadána hodnota, vyhledají se odpovídající soubory ve jmenném prostoru „File“ na Commons.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Zeměpisné souřadnice",
 	"wikibase-listdatatypes-globe-coordinate-body": "Literálová datová položka pro zeměpisnou polohu uvedenou dvojicí šířka–délka v gms nebo desetinných stupních v gms nebo desetinných stupních pro uvedené astronomické těleso. Implicitními hodnotami jsou „Země“ a „WGS84“. Přidává rozlišení a rozsah.\n* zeměpisná šířka – implicitní první část (desetinné číslo, dms, dm, dd) řetězce souřadnic, směr je dán buď znaménkem na začátku, nebo znakem N/S na konci\n* zeměpisná délka – implicitní druhá část (desetinné číslo, dms, dm, dd) řetězce souřadnic, směr je dán buď znaménkem na začátku, nebo znakem E/W na konci\n* glóbus – explicitní (?) hodnota, uvedená jako astronomické těleso, implicitní hodnotou je Země „http://www.wikidata.org/entity/Q2<nowiki>“</nowiki>\n* přesnost – číselná přesnost souřadnic",
+	"wikibase-listdatatypes-geo-shape-head": "Geografický tvar",
+	"wikibase-listdatatypes-tabular-data-head": "Tabulková data",
 	"wikibase-listdatatypes-quantity-head": "Množství",
 	"wikibase-listdatatypes-quantity-body": "Literálová datová položka pro množství vztahující se k nějaké dobře definované jednotce. Konkrétní jednotka je součástí zadávaných dat.\n* množství – implicitní část řetězce\n* jednotka – implicitní část řetězce, implicitní hodnotou je „1“\n* horní mez – horní mez množství\n* dolní mez – dolní mez množství",
 	"wikibase-listdatatypes-monolingualtext-head": "Jednojazyčný text",

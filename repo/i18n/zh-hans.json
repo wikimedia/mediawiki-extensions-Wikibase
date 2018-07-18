@@ -136,7 +136,7 @@
 	"wikibase-entityselector-notfound": "找不到匹配项目",
 	"wikibase-anonymouseditwarning": "警告：您没有登录。\n您的IP地址将被记录在该实体的编辑历史中。",
 	"wikibase-move-error": "您不能移动数据（data）名字空间的页面，并且您也不能移动页面至此。",
-	"wikibase-validator-sitelink-conflict": "网站链接$1已经被项$2使用。如果连接错误，您可以前往$2移除，或将之合并至此项。",
+	"wikibase-validator-sitelink-conflict": "链接$1已经被项$2使用。如果该链接不适合$2，您可以从该项移除；或如果它们有关完全相同话题的话，您可以合并两项。",
 	"wikibase-validator-label-conflict": "属性$3已经关联语言代码$2的标签“$1”。",
 	"wikibase-validator-label-with-description-conflict": "项$3已经关联语言代码$2的标签“$1”，使用同一描述文本。",
 	"wikibase-validator-label-no-entityid": "该标签不是有效的实体ID。",

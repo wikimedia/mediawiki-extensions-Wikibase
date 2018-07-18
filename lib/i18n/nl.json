@@ -153,6 +153,7 @@
 	"wikibase-entity-summary-wbsetclaimvalue": "Verklaringwaarde{{PLURAL:$1||n}} ingesteld",
 	"wikibase-entity-summary-wbremoveclaims": "Verklaring{{PLURAL:$1||en}} verwijderd",
 	"wikibase-entity-summary-wbremoveclaims-remove": "Verklaring{{PLURAL:$1||en}} verwijderd",
+	"wikibase-entity-summary-wbremoveclaims-update": "Verklaring{{PLURAL:$1||en}} verwijderd",
 	"wikibase-entity-summary-special-create-item": "Item voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt",
 	"wikibase-entity-summary-wbcreateclaim-create": "Verklaring aangemaakt",
 	"wikibase-entity-summary-wbsetclaim-update": "Verklaring{{PLURAL:$3||en}} gewijzigd",
