@@ -100,4 +100,10 @@ class EntityRevisionCache {
 		$this->cache->delete( $key );
 	}
 
+	public function getMultiple( array $entityIds ) {
+		$keys = array_map( [ $this, 'getCacheKey' ], $entityIds );
+		// TODO replace with CacheInterface::getMultiple
+		return $this->cache->getMulti( $keys/*, null */ );
+	}
+
 }
