@@ -176,11 +176,9 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 	}
 
 	/**
-	 * @param EntityId[] $ids
-	 *
 	 * @return SqlEntityInfoBuilder
 	 */
-	protected function newEntityInfoBuilder( array $ids ) {
+	protected function newEntityInfoBuilder() {
 		return new SqlEntityInfoBuilder(
 			new BasicEntityIdParser(),
 			new EntityIdComposer( [
