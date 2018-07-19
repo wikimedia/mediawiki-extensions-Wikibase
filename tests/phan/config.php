@@ -57,14 +57,14 @@ return [
 			'view/WikibaseView.php',
 			'Wikibase.php',
 		],
-		// Include extension stubs if extensions not available locally.
-		// TODO: Technically extensions could also be in ./extensions/.
-		!is_dir( './../../extensions/Babel' ) ? [ 'tests/phan/stubs/babel.php' ] : [],
-		!is_dir( './../../extensions/CirrusSearch' ) ? [ 'tests/phan/stubs/cirrussearch.php' ] : [],
-		!is_dir( './../../extensions/Echo' ) ? [ 'tests/phan/stubs/echo.php56' ] : [],
-		!is_dir( './../../extensions/GeoData' ) ? [ 'tests/phan/stubs/geodata.php' ] : [],
-		!is_dir( './../../extensions/PageImages' ) ? [ 'tests/phan/stubs/pageimages.php' ] : [],
-		!is_dir( './../../extensions/Scribunto' ) ? [ 'tests/phan/stubs/scribunto.php' ] : []
+		// Include extension stubs so we don't require extensions to be available locally.
+		[ 'tests/phan/stubs/babel.php' ],
+		[ 'tests/phan/stubs/cirrussearch.php' ],
+		// FIXME: Why is this .php56
+		[ 'tests/phan/stubs/echo.php56' ],
+		[ 'tests/phan/stubs/geodata.php' ],
+		[ 'tests/phan/stubs/pageimages.php' ],
+		[ 'tests/phan/stubs/scribunto.php' ]
 	),
 
 	/**
