@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -63,14 +62,12 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityId[] $ids
-	 *
 	 * @return EntityInfoBuilder
 	 */
-	abstract protected function newEntityInfoBuilder( array $ids );
+	abstract protected function newEntityInfoBuilder();
 
 	public function testGivenEmptyIdList_returnsEmptyEntityInfo() {
-		$builder = $this->newEntityInfoBuilder( [] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$this->assertEmpty( $builder->collectEntityInfo( [], [] )->asArray() );
 	}
@@ -81,7 +78,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 			new PropertyId( 'P3' )
 		];
 
-		$builder = $this->newEntityInfoBuilder( $ids );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( $ids, [] )->asArray();
 
@@ -95,7 +92,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenDuplicateIds_eachIdsOnlyIncludedOnceInResult() {
 		$id = new ItemId( 'Q1' );
 
-		$builder = $this->newEntityInfoBuilder( [ $id ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $id, $id ], [] )->asArray();
 
@@ -106,7 +103,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenEmptyLanguageCodeList_returnsNoLabelsAndDescriptionsInEntityInfo() {
 		$id = new ItemId( 'Q1' );
 
-		$builder = $this->newEntityInfoBuilder( [ $id ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
 
@@ -117,7 +114,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenLanguageCode_returnsOnlyTermsInTheLanguage() {
 		$id = new ItemId( 'Q1' );
 
-		$builder = $this->newEntityInfoBuilder( [ $id ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $id ], [ 'de' ] )->asArray();
 
@@ -131,7 +128,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenMultipleLanguageCodes_returnsTermsInTheLanguagesGiven() {
 		$id = new ItemId( 'Q1' );
 
-		$builder = $this->newEntityInfoBuilder( [ $id ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $id ], [ 'en', 'de' ] )->asArray();
 
@@ -152,7 +149,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenRedirect_returnsTargetIdInEntityInfo() {
 		$redirectId = new ItemId( 'Q12' );
 
-		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
 
@@ -162,7 +159,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenRedirectId_returnsTermsOfTheTarget() {
 		$redirectId = new ItemId( 'Q12' );
 
-		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $redirectId ], [ 'de' ] )->asArray();
 
@@ -172,7 +169,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenRedirect_entityInfoUsesRedirectSourceAsKey() {
 		$redirectId = new ItemId( 'Q12' );
 
-		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
 
@@ -184,7 +181,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$existingId = new ItemId( 'Q1' );
 		$nonExistingId = new ItemId( 'Q1000' );
 
-		$builder = $this->newEntityInfoBuilder( [ $existingId ] );
+		$builder = $this->newEntityInfoBuilder();
 
 		$info = $builder->collectEntityInfo( [ $existingId, $nonExistingId ], [] )->asArray();
 
