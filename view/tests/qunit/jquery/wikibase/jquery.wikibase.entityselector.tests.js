@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, QUnit ) {
+( function ( $, QUnit, sinon, mw ) {
 	'use strict';
 
 	/**
@@ -171,4 +171,97 @@
 		} );
 	} );
 
-}( jQuery, QUnit ) );
+	QUnit.test( 'When fireSearchHook is called with term', function ( assert ) {
+		var hookStub = sinon.stub( mw, 'hook' ),
+			fireSpy = sinon.spy(),
+			hook = 'HOOK_NAME',
+			term = '[TERM]',
+			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		hookStub.withArgs( hook ).returns( { fire: fireSpy } );
+		entitySelector._fireSearchHook( term );
+
+		assert.equal( fireSpy.getCall( 0 ).args[ 0 ].term, term, 'Then mw.hook().fire() is called with term' );
+
+		hookStub.restore();
+	} );
+
+	QUnit.test( 'When fireSearchHook is called and a promise is added to the list', function ( assert ) {
+		var hookStub = sinon.stub( mw, 'hook' ),
+			hook = 'HOOK_NAME',
+			promise = '[PROMISE]',
+			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		hookStub.withArgs( hook ).returns( {
+			fire: function ( data, addPromise ) {
+				addPromise( promise );
+			}
+		} );
+
+		assert.deepEqual( entitySelector._fireSearchHook(), [ promise ], 'Then the list returned should contain the promise' );
+
+		hookStub.restore();
+	} );
+
+	QUnit.test( 'When processSearchHook is called with promised item list', function ( assert ) {
+		var done = assert.async(),
+			itemList = [ { id: '[ID]' } ],
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._processSearchHook( [ $.Deferred().resolve( itemList ).promise() ] ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				itemList,
+				'Then item list is returned'
+			);
+			done();
+		} );
+	} );
+
+	QUnit.test( 'When processSearchHook is called with multiple promised item lists', function ( assert ) {
+		var done = assert.async(),
+			itemList = [ { id: '[ID]' } ],
+			itemList1 = [ { id: '[ID1]' } ],
+			itemList2 = [ { id: '[ID2]' } ],
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._processSearchHook( [
+			$.Deferred().resolve( itemList1 ).promise(),
+			$.Deferred().resolve( itemList2 ).promise()
+		],
+		itemList ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				itemList2.concat( itemList1 ).concat( itemList ),
+				'Then all items are added to the front of the list that is returned'
+			);
+			done();
+		} );
+	} );
+
+	QUnit.test( 'When promised item list contains ID that is already in the list', function ( assert ) {
+		var done = assert.async(),
+			hook = 'HOOK_NAME_' + Math.random(),
+			itemList = [ { id: '[ID]', data: '[OLD]' } ],
+			itemListConsumer = [ { id: '[ID]', data: '[NEW]' } ],
+			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._processSearchHook( [
+			$.Deferred().resolve( itemListConsumer ).promise() ],
+		itemList
+		).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				itemListConsumer,
+				'Then items with the same ID are overwritten'
+			);
+			done();
+		} );
+	} );
+
+}( jQuery, QUnit, sinon, mediaWiki ) );

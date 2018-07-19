@@ -62,10 +62,13 @@
 		 * @param {string} repoApiUrl
 		 */
 		_initEntityselector: function ( repoApiUrl ) {
+			var snakview = this.$input.closest( '.wikibase-snakview' ).data( 'snakview' );
+
 			this.$input.entityselector( {
 				url: repoApiUrl,
 				type: this.constructor.TYPE,
-				selectOnAutocomplete: true
+				selectOnAutocomplete: true,
+				propertyId: snakview ? snakview.propertyId() : null
 			} );
 		},
 
