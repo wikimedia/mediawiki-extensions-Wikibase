@@ -56,7 +56,7 @@
 		var $entitySelector = newTestEntitySelector();
 
 		assert.ok(
-			$entitySelector.data( 'entityselector' ) instanceof $.wikibase.entityselector,
+			false,
 			'Instantiated entityselector.'
 		);
 	} );
@@ -170,5 +170,21 @@
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should not concat on existing cache' );
 		} );
 	} );
+
+	QUnit.test( 'When creating hook then search term is passed to consumer', function ( assert ) {
+		var done = assert.async(),
+			$entitySelector = newTestEntitySelector(),
+			term = 'SEARCH_TERM';
+
+
+		mw.hook( $entitySelector.options.searchHookName ).add( function ( data ) {
+			assert.equal( data.term, term, 'Search term is passed correctly' );
+			done();
+		} );
+
+		$entitySelector._createSearchHook( term );
+		assert.ok(false, 'foo');
+	} );
+
 
 }( jQuery, QUnit ) );

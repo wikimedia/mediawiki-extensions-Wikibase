@@ -65,7 +65,8 @@
 			this.$input.entityselector( {
 				url: repoApiUrl,
 				type: this.constructor.TYPE,
-				selectOnAutocomplete: true
+				selectOnAutocomplete: true,
+				propertyId: this.$input.closest( '.wikibase-snakview' ).data( 'snakview' ).propertyId()
 			} );
 		},
 
