@@ -33,39 +33,36 @@ return [
 	 * project. directory_list won't find .inc files so
 	 * we augment it here.
 	 */
-	'file_list' => array_merge(
-		[
-			'client/WikibaseClient.datatypes.php',
-			'client/ClientHooks.php',
-			'client/WikibaseClient.i18n.alias.php',
-			'client/WikibaseClient.i18n.magic.php',
-			'client/WikibaseClient.php',
-			'lib/config/WikibaseLib.default.php',
-			'lib/WikibaseLib.datatypes.php',
-			'lib/WikibaseLib.entitytypes.php',
-			'lib/LibHooks.php',
-			'lib/WikibaseLib.php',
-			'repo/config/Wikibase.default.php',
-			'repo/config/Wikibase.searchindex.php',
-			'repo/RepoHooks.php',
-			'repo/Wikibase.i18n.alias.php',
-			'repo/Wikibase.i18n.namespaces.php',
-			'repo/Wikibase.php',
-			'repo/WikibaseRepo.datatypes.php',
-			'repo/WikibaseRepo.entitytypes.php',
-			'view/resources.php',
-			'view/WikibaseView.php',
-			'Wikibase.php',
-		],
-		// Include extension stubs if extensions not available locally.
-		// TODO: Technically extensions could also be in ./extensions/.
-		!is_dir( './../../extensions/Babel' ) ? [ 'tests/phan/stubs/babel.php' ] : [],
-		!is_dir( './../../extensions/CirrusSearch' ) ? [ 'tests/phan/stubs/cirrussearch.php' ] : [],
-		!is_dir( './../../extensions/Echo' ) ? [ 'tests/phan/stubs/echo.php' ] : [],
-		!is_dir( './../../extensions/GeoData' ) ? [ 'tests/phan/stubs/geodata.php' ] : [],
-		!is_dir( './../../extensions/PageImages' ) ? [ 'tests/phan/stubs/pageimages.php' ] : [],
-		!is_dir( './../../extensions/Scribunto' ) ? [ 'tests/phan/stubs/scribunto.php' ] : []
-	),
+	'file_list' => [
+		'client/WikibaseClient.datatypes.php',
+		'client/ClientHooks.php',
+		'client/WikibaseClient.i18n.alias.php',
+		'client/WikibaseClient.i18n.magic.php',
+		'client/WikibaseClient.php',
+		'lib/config/WikibaseLib.default.php',
+		'lib/WikibaseLib.datatypes.php',
+		'lib/WikibaseLib.entitytypes.php',
+		'lib/LibHooks.php',
+		'lib/WikibaseLib.php',
+		'repo/config/Wikibase.default.php',
+		'repo/config/Wikibase.searchindex.php',
+		'repo/RepoHooks.php',
+		'repo/Wikibase.i18n.alias.php',
+		'repo/Wikibase.i18n.namespaces.php',
+		'repo/Wikibase.php',
+		'repo/WikibaseRepo.datatypes.php',
+		'repo/WikibaseRepo.entitytypes.php',
+		'view/resources.php',
+		'view/WikibaseView.php',
+		'Wikibase.php',
+		// Include extension stubs so we don't require extensions to be available locally.
+		'tests/phan/stubs/babel.php',
+		'tests/phan/stubs/cirrussearch.php',
+		'tests/phan/stubs/echo.php',
+		'tests/phan/stubs/geodata.php',
+		'tests/phan/stubs/pageimages.php',
+		'tests/phan/stubs/scribunto.php',
+	],
 
 	/**
 	 * A list of directories that should be parsed for class and
