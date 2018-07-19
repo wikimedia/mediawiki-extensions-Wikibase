@@ -16,6 +16,23 @@
       "revId": "01628d321d403622decd6f9b4584064741b607a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e4f62bf_be02352b",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-19T13:49:32Z",
+      "side": 1,
+      "message": "its been a silly hack to avoid parallel-lint fail. I just made I8ad3969c6108577d2fc53734274eefcc8c8c470e to remove it. But actually it would be fine to simply do the file rename here as well, if you prefer Legoktm!",
+      "revId": "01628d321d403622decd6f9b4584064741b607a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
