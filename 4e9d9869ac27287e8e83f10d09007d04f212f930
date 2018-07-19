@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b18a22d9_51fc413b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-19T13:04:51Z",
+      "side": 1,
+      "message": "The original format we used was\n\ntestWhenStuff_thenSuchThings\n\nSo the order is different and the capitalization after the underscore is.\n\nNot saying you should change this here or now but beware that this is a mutated version. Might want to stick to one for consistency.",
+      "revId": "4e9d9869ac27287e8e83f10d09007d04f212f930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94049606_f250502b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-19T13:04:51Z",
+      "side": 1,
+      "message": "Disregarding standard formats... this name is not good. You are not testing that the error is too long, which is what the name suggests.",
+      "revId": "4e9d9869ac27287e8e83f10d09007d04f212f930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e98654f_a7e02dfb",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-19T13:04:51Z",
+      "side": 1,
+      "message": "$validatorMock could be created in its own method",
+      "revId": "4e9d9869ac27287e8e83f10d09007d04f212f930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8dd1404_eb5ecdeb",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-19T13:04:51Z",
+      "side": 1,
+      "message": "Unless you are still using an old version of PHPUnit you can just use createMock.",
+      "revId": "4e9d9869ac27287e8e83f10d09007d04f212f930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1111826_a78c59bf",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-19T13:04:51Z",
+      "side": 1,
+      "message": "It is unfortunate to need to create a mock this complicated. It is a sign something is wrong somewhere.",
+      "revId": "4e9d9869ac27287e8e83f10d09007d04f212f930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
