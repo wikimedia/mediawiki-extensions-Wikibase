@@ -35,7 +35,7 @@ class GenericEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$repo->putRedirect( new EntityRedirect( new ItemId( $from ), $toId ) );
 		}
 
-		return new GenericEntityInfoBuilder( $ids, new BasicEntityIdParser(), $repo );
+		return new GenericEntityInfoBuilder( new BasicEntityIdParser(), $repo );
 	}
 
 }

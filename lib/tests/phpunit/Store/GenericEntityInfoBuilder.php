@@ -60,16 +60,13 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	private $redirects = null;
 
 	/**
-	 * @param EntityId[] $entityIds
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 */
 	public function __construct(
-		array $entityIds,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup
 	) {
-		$this->setEntityIds( $entityIds );
 		$this->idParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
@@ -297,6 +294,8 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+		$this->setEntityIds( $entityIds );
+
 		$this->resolveRedirects();
 
 		$this->collectTerms(
