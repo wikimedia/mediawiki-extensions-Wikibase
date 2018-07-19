@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Tests\MockRepository;
@@ -20,11 +19,9 @@ use Wikibase\Lib\Tests\MockRepository;
 class GenericEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 	/**
-	 * @param EntityId[] $ids
-	 *
 	 * @return GenericEntityInfoBuilder
 	 */
-	protected function newEntityInfoBuilder( array $ids ) {
+	protected function newEntityInfoBuilder() {
 		$repo = new MockRepository();
 
 		foreach ( $this->getKnownEntities() as $entity ) {
