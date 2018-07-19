@@ -20,14 +20,15 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  */
 abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
+	const REDIRECT_SOURCE_ID = 'Q12';
+	const REDIRECT_TARGET_ID = 'Q2';
+
 	/**
 	 * @return ItemId[]
 	 */
 	protected function getKnownRedirects() {
 		return [
-			'Q7' => new ItemId( 'Q2' ),
-			'Q12' => new ItemId( 'Q2' ),
-			'Q22' => new ItemId( 'Q2' ),
+			self::REDIRECT_SOURCE_ID => new ItemId( self::REDIRECT_TARGET_ID ),
 		];
 	}
 
@@ -150,23 +151,34 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	}
 
 	public function testGivenRedirect_returnsTargetIdInEntityInfo() {
-		$redirectId = new ItemId( 'Q12' );
+		$redirectId = new ItemId( self::REDIRECT_SOURCE_ID );
 
 		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
 
 		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
 
-		$this->assertEquals( 'Q2', $info['Q12']['id'] );
+		$this->assertEquals( self::REDIRECT_TARGET_ID, $info[self::REDIRECT_SOURCE_ID]['id'] );
 	}
 
 	public function testGivenRedirectId_returnsTermsOfTheTarget() {
-		$redirectId = new ItemId( 'Q12' );
+		$redirectId = new ItemId( self::REDIRECT_SOURCE_ID );
 
 		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
 
 		$info = $builder->collectEntityInfo( [ $redirectId ], [ 'de' ] )->asArray();
 
-		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info['Q12']['labels'] );
+		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info[self::REDIRECT_SOURCE_ID]['labels'] );
+	}
+
+	public function testGivenRedirect_entityInfoUsesRedirectSourceAsKey() {
+		$redirectId = new ItemId( self::REDIRECT_SOURCE_ID );
+
+		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+
+		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
+
+		$this->assertArrayHasKey( self::REDIRECT_SOURCE_ID, $info );
+		$this->assertArrayNotHasKey( self::REDIRECT_TARGET_ID, $info );
 	}
 
 	public function testGivenNonExistingIds_nonExistingIdsSkippedInResult() {
