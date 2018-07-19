@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "837ad5c8_be9d08ed",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-07-19T13:45:27Z",
+      "side": 1,
+      "message": "We could get rid of this array_merge() now and just have one long array, no?",
+      "revId": "01628d321d403622decd6f9b4584064741b607a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
