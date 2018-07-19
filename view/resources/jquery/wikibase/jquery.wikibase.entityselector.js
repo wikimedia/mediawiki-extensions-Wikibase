@@ -74,6 +74,10 @@
 	 *        Messages should be specified using `mwMsgOrString(<resource loader module message key>,
 	 *        <fallback message>)` in order to use the messages specified in the resource loader module
 	 *        (if loaded).
+	 * @param {string} [options.searchHookName='wikibase.entityselector.search']
+	 *        Name of the hook that fires when searching for entities.
+	 * @param {string} [options.messages.propertyId]
+	 *        Property Id if available in the context.
 	 * @param {string} [options.messages.more='more']
 	 *        Label of the link to display more suggestions.
 	 */
@@ -98,7 +102,9 @@
 			messages: {
 				more: mwMsgOrString( 'wikibase-entityselector-more', 'more' ),
 				notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'Nothing found' )
-			}
+			},
+			searchHookName: 'wikibase.entityselector.search',
+			propertyId: null
 		},
 
 		/**
@@ -277,7 +283,8 @@
 			var self = this;
 
 			return function ( term ) {
-				var deferred = $.Deferred();
+				var deferred = $.Deferred(),
+					promises = self._fireSearchHook( term );
 
 				$.ajax( {
 					url: self.options.url,
@@ -286,16 +293,18 @@
 					data: self._getSearchApiParameters( term )
 				} )
 				.done( function ( response ) {
-					if ( response.error ) {
-						deferred.reject( response.error.info );
-						return;
-					}
+					self._processSearchHook( promises, response.search ).then( function ( results ) {
+						if ( response.error ) {
+							deferred.reject( response.error.info );
+							return;
+						}
 
-					deferred.resolve(
-						response.search,
-						term,
-						response[ 'search-continue' ]
-					);
+						deferred.resolve(
+							results,
+							term,
+							response[ 'search-continue' ]
+						);
+					} );
 				} )
 				.fail( function ( jqXHR, textStatus ) {
 					deferred.reject( textStatus );
@@ -304,7 +313,52 @@
 				return deferred.promise();
 			};
 		},
+		/**
+		 * @private
+		 */
+		_fireSearchHook: function ( term ) {
+			var promises = [],
+				addPromise = function ( p ) {
+					promises.push( p );
+				};
 
+			mw.hook( this.options.searchHookName ).fire( {
+				term: term,
+				type: this.options.type,
+				language: this.options.language,
+				propertyId: this.options.propertyId
+			}, addPromise );
+
+			return promises;
+		},
+		/**
+		 * @private
+		 */
+		_processSearchHook: function ( promises, results ) {
+			var deferred = $.Deferred(),
+				ids = {},
+				uniqueFilter = function ( item ) {
+					if ( ids[ item.id ] ) {
+						return false;
+					}
+					ids[ item.id ] = true;
+					return true;
+				};
+
+			results = results || [];
+
+			$.when.apply( $, promises ).then( function () {
+
+				$.each( arguments, function ( key, data ) {
+					results = data.concat( results );
+				} );
+
+				results = results.filter( uniqueFilter );
+				deferred.resolve( results );
+			} );
+
+			return deferred.promise();
+		},
 		/**
 		 * @inheritdoc
 		 * @protected
