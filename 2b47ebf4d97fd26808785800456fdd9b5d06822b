@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6f051bf_dfbc954b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-07-19T15:19:37Z",
+      "side": 1,
+      "message": "Everytime a mock returns a mock a fairy dies\nhttps://tuhrig.de/everytime-a-mock-returns-a-mock-a-fairy-dies/",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 50
+      },
+      "revId": "2b47ebf4d97fd26808785800456fdd9b5d06822b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
