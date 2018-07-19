@@ -169,6 +169,17 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info['Q12']['labels'] );
 	}
 
+	public function testGivenRedirect_entityInfoUsesRedirectSourceAsKey() {
+		$redirectId = new ItemId( 'Q12' );
+
+		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+
+		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
+
+		$this->assertArrayHasKey( 'Q12', $info );
+		$this->assertArrayNotHasKey( 'Q2', $info );
+	}
+
 	public function testGivenNonExistingIds_nonExistingIdsSkippedInResult() {
 		$existingId = new ItemId( 'Q1' );
 		$nonExistingId = new ItemId( 'Q1000' );
