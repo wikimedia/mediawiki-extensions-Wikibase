@@ -73,23 +73,6 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$this->assertEmpty( $builder->collectEntityInfo( [], [] )->asArray() );
 	}
 
-	public function testGivenIds_returnsEntityInfoWithIdAndType() {
-		$ids = [
-			new ItemId( 'Q1' ),
-			new PropertyId( 'P3' )
-		];
-
-		$builder = $this->newEntityInfoBuilder();
-
-		$info = $builder->collectEntityInfo( $ids, [] )->asArray();
-
-		$this->assertEquals( 'Q1', $info['Q1']['id'] );
-		$this->assertEquals( 'item', $info['Q1']['type'] );
-
-		$this->assertEquals( 'P3', $info['P3']['id'] );
-		$this->assertEquals( 'property', $info['P3']['type'] );
-	}
-
 	public function testGivenDuplicateIds_eachIdsOnlyIncludedOnceInResult() {
 		$id = new ItemId( 'Q1' );
 
@@ -145,16 +128,6 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 			),
 			$info['Q1']['descriptions']
 		);
-	}
-
-	public function testGivenRedirect_returnsTargetIdInEntityInfo() {
-		$redirectId = new ItemId( self::REDIRECT_SOURCE_ID );
-
-		$builder = $this->newEntityInfoBuilder();
-
-		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
-
-		$this->assertEquals( self::REDIRECT_TARGET_ID, $info[self::REDIRECT_SOURCE_ID]['id'] );
 	}
 
 	public function testGivenRedirectId_returnsTermsOfTheTarget() {

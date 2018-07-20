@@ -277,11 +277,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$type = $id->getEntityType();
 		$key = $id->getSerialization();
 
-		// NOTE: we assume that the type of entity never changes.
-		$this->initEntityInfo( $key, [ 'type' => $type ] );
+		$this->initEntityInfo( $key, [] );
 
 		$this->entityIds[$key] = $id;
-		$this->entityInfo[$key]['id'] = $key;
 		$this->localIdsByType[$type][$key] = $id->getLocalPart();
 	}
 
