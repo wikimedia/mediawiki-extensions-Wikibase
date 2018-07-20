@@ -79,12 +79,8 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 		foreach ( $entityIds as $entityId ) {
 			$key = $entityId->getSerialization();
-			$type = $entityId->getEntityType();
 
-			$this->entityInfo[$key] = [
-				'id' => $key,
-				'type' => $type,
-			];
+			$this->entityInfo[$key] = [];
 		}
 	}
 
@@ -148,7 +144,6 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		// happened.
 		if ( !isset( $this->entityInfo[$targetKey] ) ) {
 			$this->entityInfo[$targetKey] = $this->entityInfo[$idString]; // copy
-			$this->entityInfo[$targetKey]['id'] = $targetKey; // update id
 		}
 
 		// Make the redirected key a reference to the target record.
