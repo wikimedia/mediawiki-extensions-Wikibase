@@ -33,6 +33,29 @@
       "revId": "01628d321d403622decd6f9b4584064741b607a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddf038d3_dcf4b680",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-20T09:01:37Z",
+      "side": 1,
+      "message": "oh, and all this could now also go away, I guess?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 84
+      },
+      "revId": "01628d321d403622decd6f9b4584064741b607a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
