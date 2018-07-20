@@ -291,6 +291,9 @@ class EntityParserOutputGenerator {
 
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
 		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
+		// TODO WikibaseMediaInfo needs to be able to configure this TermsListView
+		// They have a MediaInfoTermsListView (currently working on the file page via a hook) but not when viewing the entity directly
+		// I guess once MCR is 'all done' this is the code path that will be used so more flexibility is needed here
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
