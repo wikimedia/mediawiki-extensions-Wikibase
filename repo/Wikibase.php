@@ -688,7 +688,8 @@ call_user_func( function() {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
-			$wikibaseRepo->getSiteLookup()
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getTermValidatorFactory()
 		);
 	};
 	$wgSpecialPages['NewProperty'] = function () {
