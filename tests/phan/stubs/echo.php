@@ -6,6 +6,10 @@
  * @codingStandardsIgnoreFile
  */
 
+class EchoAttributeManager {
+	const ATTR_LOCATORS = 'user-locators';
+}
+
 class EchoEvent {
 	/**
 	 * @param array $info
@@ -102,4 +106,7 @@ class EchoEventPresentationModel {
 	 */
 	protected function msg( ...$parameters ) {
 	}
+}
+
+class EchoUserLocator {
 }

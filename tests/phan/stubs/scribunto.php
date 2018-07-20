@@ -20,6 +20,9 @@ class Scribunto_LuaEngine {
 
 }
 
+class Scribunto_LuaError {
+}
+
 class Scribunto_LuaLibraryBase {
 
 	/**
