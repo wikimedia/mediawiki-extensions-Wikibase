@@ -15,6 +15,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use ValueValidators\Error;
 use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewItem
@@ -348,11 +349,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 		/** @var \PHPUnit_Framework_MockObject_MockObject|TermValidatorFactory $mock */
 		$mock = $this->createMock( TermValidatorFactory::Class );
-		$mock->method( 'getLabelValidator' )
-			->will( $this->returnValue( $validatorMock ) );
-		$mock->method( 'getDescriptionValidator' )
-			->will( $this->returnValue( $validatorMock ) );
-		$mock->method( 'getAliasValidator' )
+		$mock->method( $this->anything() )
 			->will( $this->returnValue( $validatorMock ) );
 
 		return $mock;
@@ -360,7 +357,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	private function getValidatorMock() {
 		/** @var \PHPUnit_Framework_MockObject_MockObject|ValueValidator $validatorMock */
-		$validatorMock = $this->getMock( 'ValueValidators\ValueValidator', [ 'validate', 'setOptions' ] );
+		$validatorMock = $this->createMock( ValueValidator::class );
 		$validatorMock->method( 'validate' )->will(
 			$this->returnCallback(
 				function ( $value ) {
