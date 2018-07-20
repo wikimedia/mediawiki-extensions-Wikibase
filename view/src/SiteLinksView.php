@@ -2,6 +2,7 @@
 
 namespace Wikibase\View;
 
+use LanguageCode;
 use Sanitizer;
 use Site;
 use SiteList;
@@ -321,7 +322,7 @@ class SiteLinksView {
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			htmlspecialchars( $pageName ),
 			$this->getHtmlForBadges( $siteLink->getBadges() ),
-			$site->getLanguageCode(),
+			htmlspecialchars( LanguageCode::bcp47( $site->getLanguageCode() ) ),
 			'auto'
 		);
 	}
