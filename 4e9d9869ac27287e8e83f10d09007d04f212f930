@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "e0f4146a_2981f24d",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-20T09:26:20Z",
+      "side": 1,
+      "message": "Jonas didn\u0027t answer, but FWIW: while MediaWiki has this trait PHPUnit4And6Compat which has getMock/createMock polyfills for old/newer PHPUnit versions, we are still happy users of PHPUnit 4.8 (but PHPUnit 6 too!).\nBut indeed, but should work, and probably going on with createMock in the new code might be a good practice to start.",
+      "parentUuid": "c8dd1404_eb5ecdeb",
+      "revId": "4e9d9869ac27287e8e83f10d09007d04f212f930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1111826_a78c59bf",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
         "patchSetId": 3
