@@ -38,6 +38,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/Changes/TestChanges.php',
 				'tests/phpunit/Store/EntityInfoBuilderTestCase.php',
 				'tests/phpunit/Store/EntityTermLookupTest.php',
+				'tests/phpunit/Store/GenericEntityInfoBuilder.php',
 				'tests/phpunit/Store/HttpUrlPropertyOrderProviderTestMockHttp.php',
 				'tests/phpunit/Store/MockChunkAccess.php',
 				'tests/phpunit/Store/MockPropertyInfoLookup.php',

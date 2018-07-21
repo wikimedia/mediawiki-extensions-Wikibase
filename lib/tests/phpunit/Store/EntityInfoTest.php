@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**

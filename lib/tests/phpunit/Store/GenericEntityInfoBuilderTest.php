@@ -6,11 +6,10 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Lib\Store\GenericEntityInfoBuilder
+ * @covers \Wikibase\Lib\Tests\Store\GenericEntityInfoBuilder
  *
  * @group Wikibase
  * @group WikibaseEntityLookup
