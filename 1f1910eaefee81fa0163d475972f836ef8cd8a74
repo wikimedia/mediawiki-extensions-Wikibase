@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6412a8_e9b8c8ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-07-21T20:36:08Z",
+      "side": 1,
+      "message": "Yes, there are. See the detailed explanation in T190712.",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a4a6fd2_086a1878",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-07-21T20:36:08Z",
+      "side": 1,
+      "message": "I note that this change will cause EntityContent to use a different value of $pOpt-\u003egetTidy() compared to every other Content implementation, likely a different value of -\u003egetEnableLimitReport() too, and different values for various user-dependent options of which the user language is only one.",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "867a5121_e8c45be8",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-07-21T20:36:08Z",
+      "side": 1,
+      "message": "This does not actually do anything. All calls to this method were removed in I01373b29 and the various extension patches at with topic:bug/T194263-deprecate-ContentHandler-makeParserOptions",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
