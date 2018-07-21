@@ -472,5 +472,7 @@
 	"apihelp-wbgetentities-example-12": "Атрымаць спасылкі на сайт для элемэнту <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Атрымаць элемэнты з ідэнтыфікатарам <samp>Q42</samp>, якія будуць паказваць толькі спасылкі на сайт з «<var>enwiki</var>»",
 	"apihelp-wblinktitles-description": "Злучае дзьве старонкі ў дзьвюх розных вікі з элемэнтам Вікібазы.",
-	"apihelp-wblinktitles-summary": "Злучае дзьве старонкі ў дзьвюх розных вікі з элемэнтам Вікібазы."
+	"apihelp-wblinktitles-summary": "Злучае дзьве старонкі ў дзьвюх розных вікі з элемэнтам Вікібазы.",
+	"apihelp-wblinktitles-param-tosite": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>totitle</var>, каб зрабіць поўную спасылку на сайт.",
+	"apihelp-wblinktitles-param-totitle": "Назва старонкі для злучэньня.\nУжывайце разам з <var>tosite</var>, каб зрабіць поўную спасылку на сайт."
 }

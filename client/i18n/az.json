@@ -21,5 +21,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktəsi",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} redaktələri",
 	"wikibase-pageinfo-entity-id": "Elementin {{WBREPONAME}} identifikatoru",
+	"wikibase-pageinfo-entity-usage": "Bu səhifədə istifadə edilən {{WBREPONAME}} vahidləri",
 	"wikibase-otherprojects": "Digər layihələr"
 }

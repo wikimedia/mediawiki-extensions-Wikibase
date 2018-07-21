@@ -69,6 +69,7 @@
 	"wikibase-sitelinks-special": "Druge lokacije",
 	"wikibase-badgeselector-badge-placeholder-title": "Kliknite za dodjelu značke.",
 	"wikibase-remove": "ukloni",
+	"wikibase-summary-generated": "Sažetak (biti će pridodan automatski generiranom sažetku):",
 	"wikibase-aliases-input-help-message": "Da biste olakšali nalaženje jedinice, možete unijeti zamjenske nazive.",
 	"wikibase-propertypage-datatype": "Vrsta podataka",
 	"wikibase-claimview-snak-tooltip": "Unesite vrijednost koja odgovara svojstvu \"$1\". Ako svojstvo nema vrijednosti ili je trenutačna vrijednost nepoznata, možete odabrati alternativnu vrstu klikom na ikonu ispred polja za unos.",
