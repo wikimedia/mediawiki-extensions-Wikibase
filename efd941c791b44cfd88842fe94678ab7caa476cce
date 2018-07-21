@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a5a03d_8f95819e",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-21T15:18:47Z",
+      "side": 1,
+      "message": "No point having the var now either",
+      "revId": "efd941c791b44cfd88842fe94678ab7caa476cce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
