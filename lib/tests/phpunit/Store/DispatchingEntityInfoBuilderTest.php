@@ -145,29 +145,6 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 		$dispatchingBuilder->removeMissing( $redirectsFlag );
 	}
 
-	public function testRemoveEntityInfoCallsTheMethodOnRelevantRepositorysBuilderWithItsOwnEntitiesOnly() {
-		$localIdOne = new ItemId( 'Q11' );
-		$localIdTwo = new ItemId( 'Q12' );
-		$otherId = new ItemId( 'other:Q22' );
-		$anotherId = new ItemId( 'another:Q33' );
-
-		$localBuilder = $this->getMock( EntityInfoBuilder::class );
-		$localBuilder->expects( $this->atLeastOnce() )
-			->method( 'removeEntityInfo' )
-			->with( [ $localIdOne, $localIdTwo ] );
-
-		$otherBuilder = $this->getMock( EntityInfoBuilder::class );
-		$otherBuilder->expects( $this->atLeastOnce() )
-			->method( 'removeEntityInfo' )
-			->with( [ $otherId ] );
-
-		$dispatchingBuilder = new DispatchingEntityInfoBuilder( [
-			'' => $localBuilder, 'other' => $otherBuilder,
-		] );
-
-		$dispatchingBuilder->removeEntityInfo( [ $localIdOne, $otherId, $localIdTwo, $anotherId ] );
-	}
-
 	public function testRetainEntityInfoCallsTheMethodOnRelevantRepositorysBuilderWithItsOwnEntitiesOnly() {
 		$localIdOne = new ItemId( 'Q11' );
 		$localIdTwo = new ItemId( 'Q12' );

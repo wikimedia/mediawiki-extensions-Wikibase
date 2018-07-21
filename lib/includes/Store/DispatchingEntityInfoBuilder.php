@@ -92,22 +92,6 @@ class DispatchingEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @see EntityInfoBuilder::removeEntityInfo
-	 *
-	 * @param EntityId[] $ids
-	 */
-	public function removeEntityInfo( array $ids ) {
-		$idsPerRepo = $this->groupEntityIdsByRepository( $ids );
-
-		foreach ( $idsPerRepo as $repositoryName => $repositoryIds ) {
-			$builder = $this->getBuilderForRepository( $repositoryName );
-			if ( $builder !== null ) {
-				$builder->removeEntityInfo( $repositoryIds );
-			}
-		}
-	}
-
-	/**
 	 * @see EntityInfoBuilder::retainEntityInfo
 	 *
 	 * @param EntityId[] $ids

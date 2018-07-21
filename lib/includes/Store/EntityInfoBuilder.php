@@ -83,13 +83,6 @@ interface EntityInfoBuilder {
 	public function removeMissing( $redirects = 'keep-redirects' );
 
 	/**
-	 * Remove info records for the given EntityIds.
-	 *
-	 * @param EntityId[] $ids
-	 */
-	public function removeEntityInfo( array $ids );
-
-	/**
 	 * Retain only info records for the given EntityIds, and remove all other records.
 	 * Useful e.g. after resolveRedirects(), to remove explicit entries for
 	 * redirect targets not present in the original input.

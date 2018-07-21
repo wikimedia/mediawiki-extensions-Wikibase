@@ -741,16 +741,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * Remove info records for the given EntityIds.
-	 *
-	 * @param EntityId[] $ids
-	 */
-	public function removeEntityInfo( array $ids ) {
-		$remove = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
-		$this->unsetEntityInfo( $remove );
-	}
-
-	/**
 	 * Retain only info records for the given EntityIds.
 	 * Useful e.g. after resolveRedirects(), to remove explicit entries for
 	 * redirect targets not present in the original input.
