@@ -16,6 +16,7 @@ use LogicException;
 use MWException;
 use ParserOptions;
 use ParserOutput;
+use RequestContext;
 use RuntimeException;
 use Serializers\Exceptions\SerializationException;
 use Status;
@@ -208,7 +209,7 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
 			if ( $options === null ) {
-				$options = ParserOptions::newCanonical( 'canonical' );
+				$options = ParserOptions::newFromContext( RequestContext::getMain() );
 			}
 
 			return $this->getParserOutputFromEntityView( $revisionId, $options, $generateHtml );

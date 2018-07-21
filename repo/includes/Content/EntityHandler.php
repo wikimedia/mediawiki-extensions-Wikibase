@@ -15,6 +15,7 @@ use Language;
 use MWContentSerializationException;
 use MWException;
 use ParserOutput;
+use RequestContext;
 use Revision;
 use SearchEngine;
 use Title;
@@ -128,6 +129,23 @@ abstract class EntityHandler extends ContentHandler {
 		$this->entityIdParser = $entityIdParser;
 		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
 		$this->fieldDefinitions = $fieldDefinitions;
+	}
+
+	/**
+	 * @see ContentHandler::makeParserOptions
+	 *
+	 * @param IContextSource|User|string $context
+	 *
+	 * @return ParserOptions
+	 */
+	public function makeParserOptions( $context ) {
+		if ( $context === 'canonical' ) {
+			// There are no "canonical" ParserOptions for Wikibase,
+			// as everything is User-language dependent
+			$context = RequestContext::getMain();
+		}
+
+		return parent::makeParserOptions( $context );
 	}
 
 	/**
