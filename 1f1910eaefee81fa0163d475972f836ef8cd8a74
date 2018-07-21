@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a871e444_90bab863",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-07-21T22:04:29Z",
+      "side": 1,
+      "message": "That would require probably at least changing EntityHandler::getPageViewLanguage… but I don\u0027t know how that would look like.",
+      "parentUuid": "9a6412a8_e9b8c8ac",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a4a6fd2_086a1878",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e0c9b439_ac7679c5",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-07-21T22:04:29Z",
+      "side": 1,
+      "message": "I know that this is pretty awful, but probably best for now.",
+      "parentUuid": "9a4a6fd2_086a1878",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "867a5121_e8c45be8",
         "filename": "repo/includes/Content/EntityHandler.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2018-07-21T20:36:08Z",
       "side": 1,
       "message": "This does not actually do anything. All calls to this method were removed in I01373b29 and the various extension patches at with topic:bug/T194263-deprecate-ContentHandler-makeParserOptions",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1400a0a3_7a118375",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-07-21T22:04:29Z",
+      "side": 1,
+      "message": "Weird, because I tested this.",
+      "parentUuid": "867a5121_e8c45be8",
       "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
