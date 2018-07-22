@@ -28,6 +28,7 @@
 	"wikibase-label-input-help-message": "Ipasok ang pamagat ng pangkat ng dato na ito sa loob ng $1.",
 	"wikibase-sitelinks": "Listahan ng mga pahinang nakakawing papunta sa bagay na ito",
 	"wikibase-sitelinks-empty": "Wala pang kawing na pampook para sa bagay na ito.",
+	"wikibase-sitelinks-special": "Ibang mga sityo",
 	"wikibase-remove": "tanggalin",
 	"wikibase-undo-title": "Hindi na isinasagawa ang pamamatnugot sa \"$1\"",
 	"wikibase-restore-title": "Ipinanunumbalik ang lumang rebisyon ng \"$1\"",

@@ -4,9 +4,11 @@
 			"Chocoj"
 		]
 	},
+	"tooltip-t-wikibase": "Okb'äl pa yakb'äl ximon samajib'äl",
 	"wikibase-comment-update": "{{WBREPONAME}} xjalöx wachinäq",
 	"wikibase-dataitem": "{{WBREPONAME}} rutzijol na'oj",
 	"wikibase-editlinks": "Tinuk' taq ximoj",
+	"wikibase-editlinkstitle": "Tajala' ri jalch'ab'äl okb'äl",
 	"wikibase-rc-wikibase-edit-letter": "T",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} tanuk'u'"
 }
