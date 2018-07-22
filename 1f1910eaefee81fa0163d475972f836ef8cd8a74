@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ea4c044b_095cc7c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-22T10:07:45Z",
+      "side": 1,
+      "message": "\"canonical\" is a bit misleading - in practice, it\u0027s the ParserOptions used to generate and cache output on save. We can\u0027t do that for all languages. The max we could do for \"no canonical\" would be to not put anything into the parser cache on save.\n\nAs a side note: getPageViewLanguage() should not exist in my mind, introducing it was a mistake. Content should know what language it is in, ParserOptions shhould know what language is desired, and ParserOutput should know what language it is in. The effective output language is determined based on the content\u0027s language and the desired target language by the code that generates the ParserOutput. getPageViewLanguage() is really a distraction. Compare T114640 and T109705.",
+      "parentUuid": "a871e444_90bab863",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a4a6fd2_086a1878",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I know that this is pretty awful, but probably best for now.",
       "parentUuid": "9a4a6fd2_086a1878",
+      "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "173ca1e3_b6ba7655",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-22T10:07:45Z",
+      "side": 1,
+      "message": "The fact that this seems to be needed implies to me that there are callers that should be passing $options explicitly, but do not. These callers should be identified and fixed.",
+      "parentUuid": "e0c9b439_ac7679c5",
       "revId": "1f1910eaefee81fa0163d475972f836ef8cd8a74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
