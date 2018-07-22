@@ -633,6 +633,7 @@
 	"apihelp-query+wbsearch-example-1": "{{doc-apihelp-example|query+wbsearch}}",
 	"apihelp-query+wbsearch-example-2": "{{doc-apihelp-example|query+wbsearch}}",
 	"apihelp-query+wbsearch-example-3": "{{doc-apihelp-example|query+wbsearch}}",
+	"apihelp-query+wbsearch-example-4": "{{doc-apihelp-example|query+wbsearch}}",
 	"apihelp-query+wbsubscribers-description": "{{doc-apihelp-description|query+wbsubscribers}}",
 	"apihelp-query+wbsubscribers-summary": "{{doc-apihelp-summary|query+wbsubscribers}}",
 	"apihelp-query+wbsubscribers-param-entities": "{{doc-apihelp-param|query+wbsubscribers|entities}}",
