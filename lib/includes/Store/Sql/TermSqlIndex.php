@@ -999,6 +999,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$matchConditions = [
 				'L.term_language' => $lang,
+				'D.term_language' => $lang,
 			];
 			if ( $this->useSearchFields ) {
 				$matchConditions['L.term_search_key'] = $this->getSearchKey( $label );
