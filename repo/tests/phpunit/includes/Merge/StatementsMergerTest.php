@@ -11,8 +11,8 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\Merge\StatementsMerger;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Merge\StatementsMerger
@@ -40,6 +40,25 @@ class StatementsMergerTest extends TestCase {
 		$this->assertEmpty( $source->getStatements() );
 	}
 
+	public function testGivenStatementAddedToTarget_setsNewGUID() {
+		$id = 'Q42';
+		$target = new Item( new ItemId( $id ) );
+		$source = NewItem::withId( 'Q789' )
+			->andStatement( NewStatement::forProperty( 'P987' )
+				->withValue( 'hello' )
+				->withSomeGuid()
+				->build() )
+			->build();
+
+		$merger = $this->newStatementsMerger();
+		$merger->merge( $source, $target );
+
+		$this->assertStringStartsWith(
+			$id,
+			$target->getStatements()->toArray()[0]->getGuid()
+		);
+	}
+
 	/**
 	 * Checks whether statements are equivalent without checking GUIDs
 	 *
@@ -61,9 +80,7 @@ class StatementsMergerTest extends TestCase {
 	 * @return StatementsMerger
 	 */
 	private function newStatementsMerger() {
-		return new StatementsMerger(
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getStatementChangeOpFactory()
-		);
+		return new StatementsMerger();
 	}
 
 	public function statementsProvider() {

@@ -123,13 +123,6 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * @return StatementChangeOpFactory
-	 */
-	private function getStatementChangeOpFactory() {
-		return $this->changeOpFactoryProvider->getStatementChangeOpFactory();
-	}
-
-	/**
 	 * @return SiteLinkChangeOpFactory
 	 */
 	private function getSiteLinkChangeOpFactory() {
@@ -150,7 +143,7 @@ class ChangeOpsMerge {
 		$this->toChangeOps->apply( $this->toItem );
 
 		$this->checkStatementLinks();
-		$statementsMerger = new StatementsMerger( $this->getStatementChangeOpFactory() );
+		$statementsMerger = new StatementsMerger();
 		$statementsMerger->merge( $this->fromItem, $this->toItem );
 
 		//NOTE: we apply constraint checks on the modified items, but no

@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Merge;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\ChangeOp\ChangeOps;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 
 /**
  * Merges statements of two StatementListProvider objects.
@@ -15,39 +15,29 @@ use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
  */
 class StatementsMerger {
 
-	/**
-	 * @var StatementChangeOpFactory
-	 */
-	private $changeOpFactory;
-
-	public function __construct( StatementChangeOpFactory $changeOpFactory ) {
-		$this->changeOpFactory = $changeOpFactory;
-	}
-
 	public function merge( StatementListProvider $source, StatementListProvider $target ) {
-		$removeOps = $this->generateRemoveStatementOps( $source );
-		$mergeOps = $this->generateMergeChangeOps( $source, $target );
-
-		$removeOps->apply( $source );
-		$mergeOps->apply( $target );
+		$this->addOrMergeStatements( $source, $target );
+		$source->getStatements()->clear();
 	}
 
-	private function generateMergeChangeOps( StatementListProvider $source, StatementListProvider $target ) {
-		$changeOps = new ChangeOps();
-
+	private function addOrMergeStatements( StatementListProvider $source, StatementListProvider $target ) {
 		foreach ( $source->getStatements()->toArray() as $sourceStatement ) {
 			$toStatement = clone $sourceStatement;
 			$toStatement->setGuid( null );
 			$toMergeToStatement = $this->findEquivalentStatement( $toStatement, $target );
 
 			if ( $toMergeToStatement ) {
-				$changeOps->add( $this->generateReferencesChangeOps( $toStatement, $toMergeToStatement ) );
+				$this->mergeStatements( $toStatement, $toMergeToStatement );
 			} else {
-				$changeOps->add( $this->changeOpFactory->newSetStatementOp( $toStatement ) );
+				/** @var EntityDocument $target */
+				$target->getStatements()->addNewStatement(
+					$sourceStatement->getMainSnak(),
+					$sourceStatement->getQualifiers(),
+					$sourceStatement->getReferences(),
+					( new GuidGenerator() )->newGuid( $target->getId() )
+				);
 			}
 		}
-
-		return $changeOps;
 	}
 
 	/**
@@ -80,37 +70,13 @@ class StatementsMerger {
 		return $statement->getMainSnak()->getHash() . $statement->getQualifiers()->getHash();
 	}
 
-	/**
-	 * @param Statement $fromStatement statement to take references from
-	 * @param Statement $toStatement statement to add references to
-	 *
-	 * @return ChangeOps
-	 */
-	private function generateReferencesChangeOps( Statement $fromStatement, Statement $toStatement ) {
-		$changeOps = new ChangeOps();
-
+	private function mergeStatements( Statement $source, Statement $target ) {
 		/** @var Reference $reference */
-		foreach ( $fromStatement->getReferences() as $reference ) {
-			if ( !$toStatement->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
-				$changeOps->add( $this->changeOpFactory->newSetReferenceOp(
-					$toStatement->getGuid(),
-					$reference,
-					''
-				) );
+		foreach ( $source->getReferences() as $reference ) {
+			if ( !$target->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
+				$target->addNewReference( $reference->getSnaks() );
 			}
 		}
-
-		return $changeOps;
-	}
-
-	private function generateRemoveStatementOps( StatementListProvider $source ) {
-		$changeOps = new ChangeOps();
-
-		foreach ( $source->getStatements() as $statement ) {
-			$changeOps->add( $this->changeOpFactory->newRemoveStatementOp( $statement->getGuid() ) );
-		}
-
-		return $changeOps;
 	}
 
 }
