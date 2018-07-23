@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "27bea15a_e9c42684",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-23T15:48:20Z",
+      "side": 1,
+      "message": "\u003e The change to this line would fix a bug where people were seeing English when their own language is set to something else. Has that also been reported?\n\nI don\u0027t think so",
+      "parentUuid": "0e2e7bcf_eb39741c",
+      "revId": "aa6cb34462b760c60ec3634d2b20d53e6c2cad22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b06ae4b1_311caf21",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 4
