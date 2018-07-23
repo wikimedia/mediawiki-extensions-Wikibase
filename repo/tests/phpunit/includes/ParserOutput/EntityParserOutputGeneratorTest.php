@@ -426,7 +426,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				EditSectionGenerator $editSectionGenerator,
 				EntityTermsView $entityTermsView
 			) use ( $repo ) {
-				$viewFactory = $repo->getViewFactory();
+				$viewFactory = $repo->getViewFactory( $languageCode );
 				return $viewFactory->newItemView(
 					$languageCode,
 					$labelDescriptionLookup,

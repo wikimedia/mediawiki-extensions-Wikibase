@@ -1744,8 +1744,8 @@ class WikibaseRepo {
 	/**
 	 * @return ViewFactory
 	 */
-	public function getViewFactory() {
-		$lang = $this->getUserLanguage();
+	public function getViewFactory( $languageCode ) {
+		$lang = Language::factory( $languageCode );
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$this->settings->getSetting( 'statementSections' ),
@@ -1775,7 +1775,7 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang->getCode() )
+			new MediaWikiLocalizedTextProvider( $languageCode )
 		);
 	}
 

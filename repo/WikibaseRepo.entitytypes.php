@@ -55,7 +55,7 @@ return [
 			EditSectionGenerator $editSectionGenerator,
 			EntityTermsView $entityTermsView
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
+			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory( $languageCode );
 			return $viewFactory->newItemView(
 				$languageCode,
 				$labelDescriptionLookup,
@@ -182,7 +182,7 @@ return [
 			EditSectionGenerator $editSectionGenerator,
 			EntityTermsView $entityTermsView
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
+			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory( $languageCode );
 			return $viewFactory->newPropertyView(
 				$languageCode,
 				$labelDescriptionLookup,
