@@ -9,7 +9,6 @@ use InvalidArgumentException;
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Thiemo Mättig
  */
 class DataType {
 

@@ -16,7 +16,6 @@ use OutOfBoundsException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @author Thiemo Mättig
  */
 class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
