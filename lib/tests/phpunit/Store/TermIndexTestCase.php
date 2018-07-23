@@ -656,6 +656,13 @@ abstract class TermIndexTestCase extends \MediaWikiTestCase {
 				[ 'de' => 'Bar', 'en' => 'Bar' ],
 				[ 'Q1', 'Q3' ],
 			],
+			'same label and description, different language' => [
+				$entities,
+				Item::ENTITY_TYPE,
+				[ 'en' => 'Foo' ],
+				[ 'en' => 'Quux' ],
+				[],
+			],
 		];
 	}
 
