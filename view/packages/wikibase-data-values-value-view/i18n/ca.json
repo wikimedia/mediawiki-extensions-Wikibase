@@ -4,7 +4,8 @@
 			"Arnaugir",
 			"Pitort",
 			"Paucabot",
-			"Fitoschido"
+			"Fitoschido",
+			"Toniher"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "buit",
@@ -19,5 +20,6 @@
 	"valueview-expertextender-languageselector-label": "Llengua (obligatori):",
 	"valueview-expertextender-unitsuggester-label": "Unitat (opcional):",
 	"valueview-preview-label": "es mostrarà com:",
-	"valueview-preview-novalue": "no s'ha reconegut cap valor vàlid"
+	"valueview-preview-novalue": "no s'ha reconegut cap valor vàlid",
+	"valueview-listrotator-manually": "defineix manualment"
 }
