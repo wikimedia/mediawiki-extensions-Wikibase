@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6dc1327_46cb88d9",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-23T09:34:36Z",
+      "side": 1,
+      "message": "This effectively prevents unit testing of the code below on MySQL!",
+      "revId": "ff028b0b1573b5f6874a30b42ed20ffa3fe20e02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
