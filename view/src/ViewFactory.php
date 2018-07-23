@@ -96,11 +96,6 @@ class ViewFactory {
 	private $badgeItems;
 
 	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
-
-	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -115,7 +110,6 @@ class ViewFactory {
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
-	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -133,8 +127,7 @@ class ViewFactory {
 		NumberLocalizer $numberLocalizer,
 		array $siteLinkGroups = [],
 		array $specialSiteLinkGroups = [],
-		array $badgeItems = [],
-		LocalizedTextProvider $textProvider
+		array $badgeItems = []
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -156,7 +149,6 @@ class ViewFactory {
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -186,6 +178,7 @@ class ViewFactory {
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 * @param EntityTermsView $entityTermsView
+	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @return ItemView
 	 */
@@ -194,13 +187,15 @@ class ViewFactory {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EntityTermsView $entityTermsView,
+		LocalizedTextProvider $textProvider
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$labelDescriptionLookup,
 			$fallbackChain,
-			$editSectionGenerator
+			$editSectionGenerator,
+			$textProvider
 		);
 
 		$siteLinksView = new SiteLinksView(
@@ -212,7 +207,7 @@ class ViewFactory {
 			$this->numberLocalizer,
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 
 		return new ItemView(
@@ -223,7 +218,7 @@ class ViewFactory {
 			$languageCode,
 			$siteLinksView,
 			$this->siteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -235,6 +230,7 @@ class ViewFactory {
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 * @param EntityTermsView $entityTermsView
+	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @return PropertyView
 	 */
@@ -243,13 +239,15 @@ class ViewFactory {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EntityTermsView $entityTermsView,
+		LocalizedTextProvider $textProvider
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$labelDescriptionLookup,
 			$fallbackChain,
-			$editSectionGenerator
+			$editSectionGenerator,
+			$textProvider
 		);
 
 		return new PropertyView(
@@ -259,7 +257,7 @@ class ViewFactory {
 			$statementSectionsView,
 			$this->dataTypeFactory,
 			$languageCode,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -268,6 +266,7 @@ class ViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @return StatementSectionsView
 	 */
@@ -275,20 +274,22 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		EditSectionGenerator $editSectionGenerator,
+		LocalizedTextProvider $textProvider
 	) {
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
 			$labelDescriptionLookup,
 			$fallbackChain,
-			$editSectionGenerator
+			$editSectionGenerator,
+			$textProvider
 		);
 
 		return new StatementSectionsView(
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -297,6 +298,7 @@ class ViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @return StatementGroupListView
 	 */
@@ -304,7 +306,8 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		EditSectionGenerator $editSectionGenerator,
+		LocalizedTextProvider $textProvider
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
@@ -318,13 +321,13 @@ class ViewFactory {
 			$this->templateFactory,
 			$snakFormatter,
 			$propertyIdFormatter,
-			$this->textProvider
+			$textProvider
 		);
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$this->templateFactory,
 			$snakHtmlGenerator,
 			$this->numberLocalizer,
-			$this->textProvider
+			$textProvider
 		);
 
 		return new StatementGroupListView(

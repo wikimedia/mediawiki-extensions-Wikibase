@@ -323,7 +323,8 @@ class EntityParserOutputGenerator {
 			$referencedEntitiesLabelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator,
-			$entityTermsView
+			$entityTermsView,
+			$this->textProvider
 		);
 
 		// Set the display title to display the label together with the item's id

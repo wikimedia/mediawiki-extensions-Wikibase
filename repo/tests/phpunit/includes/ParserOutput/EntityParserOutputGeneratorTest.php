@@ -424,7 +424,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				LabelDescriptionLookup $labelDescriptionLookup,
 				LanguageFallbackChain $fallbackChain,
 				EditSectionGenerator $editSectionGenerator,
-				EntityTermsView $entityTermsView
+				EntityTermsView $entityTermsView,
+				LocalizedTextProvider $textProvider
 			) use ( $repo ) {
 				$viewFactory = $repo->getViewFactory();
 				return $viewFactory->newItemView(
@@ -432,7 +433,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 					$labelDescriptionLookup,
 					$fallbackChain,
 					$editSectionGenerator,
-					$entityTermsView
+					$entityTermsView,
+					$textProvider
 				);
 			},
 		] );

@@ -1774,8 +1774,7 @@ class WikibaseRepo {
 			new MediaWikiNumberLocalizer( $lang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
-			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang->getCode() )
+			$this->settings->getSetting( 'badgeItems' )
 		);
 	}
 

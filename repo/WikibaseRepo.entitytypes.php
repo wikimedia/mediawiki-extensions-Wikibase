@@ -41,6 +41,7 @@ use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
+use Wikibase\View\LocalizedTextProvider;
 use Wikimedia\Purtle\RdfWriter;
 
 return [
@@ -53,7 +54,8 @@ return [
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
 			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			EntityTermsView $entityTermsView,
+			LocalizedTextProvider $textProvider
 		) {
 			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
 			return $viewFactory->newItemView(
@@ -61,7 +63,8 @@ return [
 				$labelDescriptionLookup,
 				$fallbackChain,
 				$editSectionGenerator,
-				$entityTermsView
+				$entityTermsView,
+				$textProvider
 			);
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_ITEM,
@@ -180,7 +183,8 @@ return [
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
 			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			EntityTermsView $entityTermsView,
+			LocalizedTextProvider $textProvider
 		) {
 			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
 			return $viewFactory->newPropertyView(
@@ -188,7 +192,8 @@ return [
 				$labelDescriptionLookup,
 				$fallbackChain,
 				$editSectionGenerator,
-				$entityTermsView
+				$entityTermsView,
+				$textProvider
 			);
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_PROPERTY,

@@ -9,6 +9,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
+use Wikibase\View\LocalizedTextProvider;
 
 /**
  * @group Wikibase
@@ -60,7 +61,8 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$entityTermsView,
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		$this->assertInstanceOf( EntityView::class, $entityView );

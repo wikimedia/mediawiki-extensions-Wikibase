@@ -12,6 +12,7 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
+use Wikibase\View\LocalizedTextProvider;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
@@ -48,7 +49,8 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$entityTermsView,
+			$this->getMock( LocalizedTextProvider::class )
 		);
 	}
 
@@ -71,7 +73,8 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$entityTermsView,
+			$this->getMock( LocalizedTextProvider::class )
 		);
 	}
 
@@ -116,7 +119,8 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$labelDescriptionLookup,
 			$languageFallbackChain,
 			$editSectionGenerator,
-			$entityTermsView
+			$entityTermsView,
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		$this->assertSame( $entityView, $newEntityView );

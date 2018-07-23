@@ -79,8 +79,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			new BasicNumberLocalizer(),
 			[],
 			[],
-			[],
-			$this->getMock( LocalizedTextProvider::class )
+			[]
 		);
 	}
 
@@ -114,7 +113,8 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
 			$editSectionGenerator,
-			$this->getMock( EntityTermsView::class )
+			$this->getMock( EntityTermsView::class ),
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		$this->assertInstanceOf( ItemView::class, $itemView );
@@ -128,7 +128,8 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
 			$editSectionGenerator,
-			$this->getMock( EntityTermsView::class )
+			$this->getMock( EntityTermsView::class ),
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		$this->assertInstanceOf( PropertyView::class, $propertyView );
@@ -139,7 +140,8 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class )
+			$this->getMock( EditSectionGenerator::class ),
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		$this->assertInstanceOf( StatementSectionsView::class, $statementSectionsView );
