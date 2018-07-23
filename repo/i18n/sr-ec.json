@@ -117,7 +117,7 @@
 	"wikibase-validator-not-a-language": "„$1“ није познат језички код.",
 	"wikibase-item-reference-edit-placeholder": "Унесите идентификатор ставке, нпр. Q10",
 	"wikibase-wikibaserepopage-invalid-langcode": "Језички код „$1“ је непознат. Молимо користите језичке кодове познате систему, као што је „sr“.",
-	"wikibase-wikibaserepopage-invalid-id": "ID „$1” је непознат систему. Користите ваљан ID ентитета.",
+	"wikibase-wikibaserepopage-invalid-id": "ID „$1” је непознат систему. Користите валидан ID ентитета.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 је преусмерење.",
 	"special-availablebadges": "Доступне ознаке",
 	"wikibase-availablebadges-emptylist": "Нема ознака конфигурисаних на овој Вики.",
