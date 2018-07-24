@@ -554,11 +554,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * @see EntityInfoBuilder::removeMissing
-	 *
-	 * @param string $redirects A flag, either "keep-redirects" (default) or "remove-redirects".
 	 */
-	private function removeMissing( $redirects = 'keep-redirects' ) {
-		$missingIds = $this->getMissingIds( $redirects !== 'keep-redirects' );
+	private function removeMissing() {
+		$missingIds = $this->getMissingIds();
 
 		$this->unsetEntityInfo( $missingIds );
 	}
@@ -687,21 +685,16 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @param bool $includeRedirects Whether redirects should be included in the list of missing ids.
-	 *
 	 * @return string[] The subset of entity ids supplied to the constructor that
 	 * do not represent actual entities.
 	 */
-	private function getMissingIds( $includeRedirects = false ) {
+	private function getMissingIds() {
 		$pageInfo = $this->getPageInfo();
 		$missingIds = [];
 
 		foreach ( $this->entityInfo as $key => $info ) {
 			if ( isset( $pageInfo[$key] ) ) {
-				// ID found. If we don't want to include redirects, or it's not a redirect, skip it.
-				if ( !$includeRedirects || $pageInfo[$key]['redirect_target'] === null ) {
-					continue;
-				}
+				continue;
 			}
 
 			$missingIds[] = $key;
