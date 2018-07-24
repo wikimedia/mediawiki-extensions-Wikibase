@@ -60,6 +60,7 @@ return [
 		'tests/phan/stubs/cirrussearch.php',
 		'tests/phan/stubs/echo.php',
 		'tests/phan/stubs/geodata.php',
+		'tests/phan/stubs/math.php',
 		'tests/phan/stubs/pageimages.php',
 		'tests/phan/stubs/scribunto.php',
 	],
