@@ -124,7 +124,7 @@ class MagicWordHookHandlers {
 	 *  words to string values
 	 */
 	protected function doResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
-		$lang = Language::factory( $context->getLanguage() );
+		$lang = $context->getLanguage();
 		$magicWords['WBREPONAME'] = $this->getRepoName( $lang );
 	}
 
