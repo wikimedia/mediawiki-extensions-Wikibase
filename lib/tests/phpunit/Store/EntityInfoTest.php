@@ -44,8 +44,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 			$entityRevisionLookup
 		);
 
-		$builder->collectTerms();
-		return $builder->getEntityInfo();
+		return $builder->collectEntityInfo( $ids, [ 'en' ] );
 	}
 
 	/**

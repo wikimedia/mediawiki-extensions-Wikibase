@@ -204,18 +204,7 @@ class EntityParserOutputGenerator {
 
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
-		$entityInfoBuilder->resolveRedirects();
-
-		$entityInfoBuilder->collectTerms(
-			[ 'label', 'description' ],
-			$this->languageFallbackChain->getFetchLanguageCodes()
-		);
-
-		$entityInfoBuilder->removeMissing();
-		$entityInfoBuilder->collectDataTypes();
-		$entityInfoBuilder->retainEntityInfo( $entityIds );
-
-		return $entityInfoBuilder->getEntityInfo();
+		return $entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
 	}
 
 	/**

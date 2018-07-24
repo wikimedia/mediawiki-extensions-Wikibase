@@ -214,14 +214,14 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @return EntityInfo
 	 */
-	public function getEntityInfo() {
+	private function getEntityInfo() {
 		return new EntityInfo( $this->entityInfo );
 	}
 
 	/**
 	 * @see EntityInfoBuilder::resolveRedirects
 	 */
-	public function resolveRedirects() {
+	private function resolveRedirects() {
 		if ( $this->redirects !== null ) {
 			// already done
 			return;
@@ -359,7 +359,15 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string[]|null $termTypes Which types of terms to include (e.g. "label", "description", "aliases").
 	 * @param string[]|null $languages Which languages to include
 	 */
-	public function collectTerms( array $termTypes = null, array $languages = null ) {
+	private function collectTerms( array $termTypes = null, array $languages = null ) {
+		if ( $termTypes === null ) {
+			$termTypes = array_keys( self::$termTypeFields );
+		}
+
+		foreach ( $termTypes as $type ) {
+			$this->setDefaultValue( self::$termTypeFields[$type], [] );
+		}
+
 		if ( $termTypes === [] || $languages === [] ) {
 			// nothing to do
 			return;
@@ -369,14 +377,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		//      database index on the term_entity_type field.
 		foreach ( array_keys( $this->localIdsByType ) as $type ) {
 			$this->collectTermsForEntities( $type, $termTypes, $languages );
-		}
-
-		if ( $termTypes === null ) {
-			$termTypes = array_keys( self::$termTypeFields );
-		}
-
-		foreach ( $termTypes as $type ) {
-			$this->setDefaultValue( self::$termTypeFields[$type], [] );
 		}
 	}
 
@@ -505,7 +505,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::collectDataTypes
 	 */
-	public function collectDataTypes() {
+	private function collectDataTypes() {
 		//TODO: use PropertyDataTypeLookup service to make use of caching!
 
 		if ( empty( $this->numericPropertyIds ) ) {
@@ -557,7 +557,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @param string $redirects A flag, either "keep-redirects" (default) or "remove-redirects".
 	 */
-	public function removeMissing( $redirects = 'keep-redirects' ) {
+	private function removeMissing( $redirects = 'keep-redirects' ) {
 		$missingIds = $this->getMissingIds( $redirects !== 'keep-redirects' );
 
 		$this->unsetEntityInfo( $missingIds );
@@ -747,10 +747,25 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @param EntityId[] $ids
 	 */
-	public function retainEntityInfo( array $ids ) {
+	private function retainEntityInfo( array $ids ) {
 		$retain = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
 		$remove = array_diff( array_keys( $this->entityInfo ), $retain );
 		$this->unsetEntityInfo( $remove );
+	}
+
+	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+		$this->resolveRedirects();
+
+		$this->collectTerms(
+			[ 'label', 'description' ],
+			$languageCodes
+		);
+
+		$this->removeMissing();
+		$this->collectDataTypes();
+		$this->retainEntityInfo( $entityIds );
+
+		return $this->getEntityInfo();
 	}
 
 }

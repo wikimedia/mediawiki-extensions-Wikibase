@@ -40,14 +40,10 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$q1->setLabel( 'de', 'label:Q1/de' );
 		$q1->setDescription( 'en', 'description:Q1/en' );
 		$q1->setDescription( 'de', 'description:Q1/de' );
-		$q1->setAliases( 'en', [ 'alias:Q1/en#1' ] );
-		$q1->setAliases( 'de', [ 'alias:Q1/de#1', 'alias:Q1/de#2' ] );
 
 		$q2 = new Item( new ItemId( 'Q2' ) );
 		$q2->setLabel( 'en', 'label:Q2/en' );
 		$q2->setLabel( 'de', 'label:Q2/de' );
-		$q2->setAliases( 'en', [ 'alias:Q2/en#1' ] );
-		$q2->setAliases( 'de', [ 'alias:Q2/de#1', 'alias:Q2/de#2' ] );
 
 		$p2 = Property::newFromType( 'string' );
 		$p2->setId( new PropertyId( 'P2' ) );
@@ -55,8 +51,6 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		$p2->setLabel( 'de', 'label:P2/de' );
 		$p2->setDescription( 'en', 'description:P2/en' );
 		$p2->setDescription( 'de', 'description:P2/de' );
-		$p2->setAliases( 'en', [ 'alias:P2/en#1' ] );
-		$p2->setAliases( 'de', [ 'alias:P2/de#1', 'alias:P2/de#2' ] );
 
 		$p3 = Property::newFromType( 'string' );
 		$p3->setId( new PropertyId( 'P3' ) );
@@ -75,85 +69,126 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	 */
 	abstract protected function newEntityInfoBuilder( array $ids );
 
-	public function getEntityInfoProvider() {
-		return [
-			[
-				[],
-				[]
-			],
+	public function testGivenEmptyIdList_returnsEmptyEntityInfo() {
+		$builder = $this->newEntityInfoBuilder( [] );
 
-			[
-				[
-					new ItemId( 'Q1' ),
-					new PropertyId( 'P3' )
-				],
-				[
-					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ],
-					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE ],
-				]
-			],
+		$this->assertEmpty( $builder->collectEntityInfo( [], [] )->asArray() );
+	}
 
-			[
-				[
-					new ItemId( 'Q1' ),
-					new ItemId( 'Q1' ),
-				],
-				[
-					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ],
-				]
-			],
+	public function testGivenIds_returnsEntityInfoWithIdAndType() {
+		$ids = [
+			new ItemId( 'Q1' ),
+			new PropertyId( 'P3' )
 		];
-	}
 
-	/**
-	 * @dataProvider getEntityInfoProvider
-	 */
-	public function testGetEntityInfo( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-		$actual = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( $expected, $actual, false, true );
-	}
-
-	public function resolveRedirectsProvider() {
-		return [
-			'empty' => [
-				[],
-				[]
-			],
-
-			'some redirects' => [
-				[
-					new ItemId( 'Q2' ),
-					new ItemId( 'Q12' ),
-					new ItemId( 'Q22' ),
-				],
-				[
-					'Q2' => 'Q2',
-					'Q12' => 'Q2',
-					'Q22' => 'Q2',
-				],
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider resolveRedirectsProvider
-	 */
-	public function testResolveRedirects( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
-		$builder->resolveRedirects();
-		$entityInfo = $builder->getEntityInfo()->asArray();
+		$info = $builder->collectEntityInfo( $ids, [] )->asArray();
 
-		$resolvedIds = array_map(
-			function( $record ) {
-				return $record['id'];
-			},
-			$entityInfo
+		$this->assertEquals( 'Q1', $info['Q1']['id'] );
+		$this->assertEquals( 'item', $info['Q1']['type'] );
+
+		$this->assertEquals( 'P3', $info['P3']['id'] );
+		$this->assertEquals( 'property', $info['P3']['type'] );
+	}
+
+	public function testGivenDuplicateIds_eachIdsOnlyIncludedOnceInResult() {
+		$id = new ItemId( 'Q1' );
+
+		$builder = $this->newEntityInfoBuilder( [ $id ] );
+
+		$info = $builder->collectEntityInfo( [ $id, $id ], [] )->asArray();
+
+		$this->assertCount( 1, array_keys( $info ) );
+		$this->assertArrayHasKey( 'Q1', $info );
+	}
+
+	public function testGivenEmptyLanguageCodeList_returnsNoLabelsAndDescriptionsInEntityInfo() {
+		$id = new ItemId( 'Q1' );
+
+		$builder = $this->newEntityInfoBuilder( [ $id ] );
+
+		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
+
+		$this->assertEmpty( $info['Q1']['labels'] );
+		$this->assertEmpty( $info['Q1']['descriptions'] );
+	}
+
+	public function testGivenLanguageCode_returnsOnlyTermsInTheLanguage() {
+		$id = new ItemId( 'Q1' );
+
+		$builder = $this->newEntityInfoBuilder( [ $id ] );
+
+		$info = $builder->collectEntityInfo( [ $id ], [ 'de' ] )->asArray();
+
+		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ), $info['Q1']['labels'] );
+		$this->assertEquals(
+			$this->makeLanguageValueRecords( [ 'de' => 'description:Q1/de' ] ),
+			$info['Q1']['descriptions']
 		);
+	}
 
-		$this->assertArrayEquals( $expected, $resolvedIds );
+	public function testGivenMultipleLanguageCodes_returnsTermsInTheLanguagesGiven() {
+		$id = new ItemId( 'Q1' );
+
+		$builder = $this->newEntityInfoBuilder( [ $id ] );
+
+		$info = $builder->collectEntityInfo( [ $id ], [ 'en', 'de' ] )->asArray();
+
+		$this->assertEquals(
+			$this->makeLanguageValueRecords(
+				[ 'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ]
+			),
+			$info['Q1']['labels']
+		);
+		$this->assertEquals(
+			$this->makeLanguageValueRecords(
+				[ 'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ]
+			),
+			$info['Q1']['descriptions']
+		);
+	}
+
+	public function testGivenRedirect_returnsTargetIdInEntityInfo() {
+		$redirectId = new ItemId( 'Q12' );
+
+		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+
+		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
+
+		$this->assertEquals( 'Q2', $info['Q12']['id'] );
+	}
+
+	public function testGivenRedirectId_returnsTermsOfTheTarget() {
+		$redirectId = new ItemId( 'Q12' );
+
+		$builder = $this->newEntityInfoBuilder( [ $redirectId ] );
+
+		$info = $builder->collectEntityInfo( [ $redirectId ], [ 'de' ] )->asArray();
+
+		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info['Q12']['labels'] );
+	}
+
+	public function testGivenPropertyId_entityInfoContainsDatatype() {
+		$id = new PropertyId( 'P2' );
+
+		$builder = $this->newEntityInfoBuilder( [ $id ] );
+
+		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
+
+		$this->assertEquals( 'string', $info['P2']['datatype'] );
+	}
+
+	public function testGivenNonExistingIds_nonExistingIdsSkippedInResult() {
+		$existingId = new ItemId( 'Q1' );
+		$nonExistingId = new ItemId( 'Q1000' );
+
+		$builder = $this->newEntityInfoBuilder( [ $existingId ] );
+
+		$info = $builder->collectEntityInfo( [ $existingId, $nonExistingId ], [] )->asArray();
+
+		$this->assertArrayHasKey( 'Q1', $info );
+		$this->assertArrayNotHasKey( 'Q1000', $info );
 	}
 
 	/**
@@ -186,340 +221,6 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		}
 
 		return $records;
-	}
-
-	public function collectTermsProvider() {
-		return [
-			'empty set' => [
-				[],
-				null,
-				null,
-				[]
-			],
-
-			'all term types' => [
-				[
-					new ItemId( 'Q1' ),
-					new PropertyId( 'P3' ),
-					new ItemId( 'Q7' ),
-				],
-				null,
-				null,
-				[
-					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( [
-							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ] ),
-						'descriptions' => $this->makeLanguageValueRecords( [
-							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ] ),
-						'aliases' => $this->makeLanguageValueRecords( [
-							'en' => [ 'alias:Q1/en#1' ],
-							'de' => [ 'alias:Q1/de#1', 'alias:Q1/de#2' ] ] ),
-					],
-					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( [
-							'en' => 'label:P3/en', 'de' => 'label:P3/de' ] ),
-						'descriptions' => $this->makeLanguageValueRecords( [
-							'en' => 'description:P3/en', 'de' => 'description:P3/de' ] ),
-						'aliases' => [],
-					],
-					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
-						'labels' => [],
-						'descriptions' => [],
-						'aliases' => []
-					],
-				]
-			],
-
-			'one term type' => [
-				[
-					new ItemId( 'Q1' ),
-					new PropertyId( 'P3' ),
-					new ItemId( 'Q7' ),
-				],
-				[ 'label' ],
-				[ 'de' ],
-				[
-					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ),
-					],
-					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:P3/de' ] ),
-					],
-					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => [] ],
-				]
-			],
-
-			'two term types' => [
-				[
-					new ItemId( 'Q1' ),
-					new PropertyId( 'P3' ),
-					new ItemId( 'Q7' ),
-				],
-				[ 'label', 'description' ],
-				null,
-				[
-					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( [
-							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ] ),
-						'descriptions' => $this->makeLanguageValueRecords( [
-							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ] )
-					],
-					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( [
-							'en' => 'label:P3/en', 'de' => 'label:P3/de' ] ),
-						'descriptions' => $this->makeLanguageValueRecords( [
-							'en' => 'description:P3/en', 'de' => 'description:P3/de' ] )
-					],
-					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
-						'labels' => [],
-						'descriptions' => []
-					],
-				]
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider collectTermsProvider
-	 */
-	public function testCollectTerms(
-		array $ids,
-		array $types = null,
-		array $languages = null,
-		array $expected
-	) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->collectTerms( $types, $languages );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertSameSize( $expected, $entityInfo );
-
-		foreach ( $expected as $id => $expectedRecord ) {
-			$this->assertArrayHasKey( $id, $entityInfo );
-			$actualRecord = $entityInfo[$id];
-
-			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
-		}
-	}
-
-	public function testCollectTerms_redirect() {
-		$ids = [ new ItemId( 'Q7' ), new ItemId( 'Q1' ) ];
-
-		$expected = [
-			'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ),
-			],
-			'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
-			],
-			'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
-			],
-		];
-
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->resolveRedirects();
-		$builder->collectTerms( [ 'label' ], [ 'de' ] );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertEquals( array_keys( $expected ), array_keys( $entityInfo ) );
-
-		foreach ( $expected as $id => $expectedRecord ) {
-			$this->assertArrayHasKey( $id, $entityInfo );
-			$actualRecord = $entityInfo[$id];
-
-			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
-		}
-	}
-
-	public function collectDataTypesProvider() {
-		return [
-			[
-				[],
-				[]
-			],
-
-			[
-				[
-					new PropertyId( 'P2' ),
-					new PropertyId( 'P3' ),
-					new ItemId( 'Q7' ),
-					new PropertyId( 'P7' ),
-				],
-				[
-					'P2' => [ 'id' => 'P2', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ],
-					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ],
-					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ],
-					'P7' => [ 'id' => 'P7', 'type' => Property::ENTITY_TYPE, 'datatype' => null ],
-				]
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider collectDataTypesProvider
-	 */
-	public function testCollectDataTypes( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->collectDataTypes();
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertSameSize( $expected, $entityInfo );
-
-		foreach ( $expected as $id => $expectedRecord ) {
-			$this->assertArrayHasKey( $id, $entityInfo );
-			$actualRecord = $entityInfo[$id];
-
-			$this->assertArrayEquals( $expectedRecord, $actualRecord, false, true );
-		}
-	}
-
-	public function removeMissingAndRedirectsProvider() {
-		return [
-			'empty' => [
-				[],
-				[]
-			],
-
-			'found' => [
-				[
-					new ItemId( 'Q2' ),
-				],
-				[
-					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
-				],
-			],
-
-			'missing' => [
-				[
-					new ItemId( 'Q77' ),
-				],
-				[]
-			],
-
-			'some found' => [
-				[
-					new ItemId( 'Q2' ),
-					new PropertyId( 'P7' ),
-					new ItemId( 'Q7' ),
-					new PropertyId( 'P2' ),
-				],
-				[
-					'P2' => [ 'id' => 'P2', 'type' => Property::ENTITY_TYPE ],
-					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
-				]
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider removeMissingAndRedirectsProvider
-	 */
-	public function testRemoveMissingAndRedirects( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->removeMissing( 'remove-redirects' );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
-	}
-
-	public function removeMissingButKeepRedirects() {
-		return [
-			'empty' => [
-				[],
-				[]
-			],
-
-			'unrelated redirect' => [
-				[
-					new ItemId( 'Q2' ),
-				],
-				[
-					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
-				],
-			],
-
-			'redirect resolved' => [
-				[
-					new ItemId( 'Q7' ),
-				],
-				[
-					'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
-				],
-			],
-
-			'some found, some resolved' => [
-				[
-					new ItemId( 'Q2' ),
-					new PropertyId( 'P7' ),
-					new ItemId( 'Q7' ),
-					new PropertyId( 'P2' ),
-				],
-				[
-					'P2' => [ 'id' => 'P2', 'type' => Property::ENTITY_TYPE ],
-					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
-					'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
-				]
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider removeMissingButKeepRedirects
-	 */
-	public function testRemoveMissingButKeepRedirects( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->removeMissing();
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
-	}
-
-	public function retainEntityInfoProvider() {
-		return [
-			'empty' => [
-				[],
-				[],
-				[],
-			],
-			'retain nonexisting' => [
-				[
-					new ItemId( 'Q1' ),
-				],
-				[
-					new ItemId( 'Q2' ),
-				],
-				[],
-			],
-			'retain some' => [
-				[
-					new ItemId( 'Q1' ),
-					new ItemId( 'Q2' ),
-					new ItemId( 'Q3' ),
-				],
-				[
-					new ItemId( 'Q2' ),
-				],
-				[ 'Q2' ],
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider retainEntityInfoProvider
-	 */
-	public function testRetainEntityInfo( array $ids, array $retain, array $expected ) {
-		$builder = $this->newEntityInfoBuilder( $ids );
-
-		$builder->retainEntityInfo( $retain );
-		$entityInfo = $builder->getEntityInfo()->asArray();
-
-		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
 	}
 
 }
