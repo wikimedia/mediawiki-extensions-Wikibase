@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -26,20 +26,18 @@ use Wikimedia\Assert\Assert;
 
 return [
 
-	'EntityInfoBuilderFactory' => function (
+	'EntityInfoBuilder' => function (
 		PerRepositoryServiceContainer $services,
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
-		$factory = new SqlEntityInfoBuilderFactory(
+		return new SqlEntityInfoBuilder(
 			$services->getEntityIdParser(),
 			$services->getEntityIdComposer(),
 			$genericServices->getEntityNamespaceLookup(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
-
-		return $factory;
 	},
 
 	'EntityPrefetcher' => function (

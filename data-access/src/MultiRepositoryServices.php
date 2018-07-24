@@ -8,10 +8,10 @@ use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -137,10 +137,10 @@ class MultiRepositoryServices extends ServiceContainer implements DataAccessServ
 	}
 
 	/**
-	 * @return EntityInfoBuilderFactory
+	 * @return EntityInfoBuilder
 	 */
-	public function getEntityInfoBuilderFactory() {
-		return $this->getService( 'EntityInfoBuilderFactory' );
+	public function getEntityInfoBuilder() {
+		return $this->getService( 'EntityInfoBuilder' );
 	}
 
 	/**

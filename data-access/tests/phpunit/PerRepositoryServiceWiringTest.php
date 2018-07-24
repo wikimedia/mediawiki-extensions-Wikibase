@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -52,7 +52,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideServices() {
 		return [
-			[ 'EntityInfoBuilderFactory', EntityInfoBuilderFactory::class ],
+			[ 'EntityInfoBuilder', EntityInfoBuilder::class ],
 			[ 'EntityPrefetcher', EntityPrefetcher::class ],
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PrefetchingTermLookup', PrefetchingTermLookup::class ],
@@ -80,7 +80,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			[
-				'EntityInfoBuilderFactory',
+				'EntityInfoBuilder',
 				'EntityPrefetcher',
 				'EntityRevisionLookup',
 				'PrefetchingTermLookup',

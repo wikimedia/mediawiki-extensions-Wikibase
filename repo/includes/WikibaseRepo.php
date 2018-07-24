@@ -1722,7 +1722,7 @@ class WikibaseRepo {
 
 		return new EntityParserOutputGeneratorFactory(
 			$this->getEntityViewFactory(),
-			$this->getStore()->getEntityInfoBuilderFactory(),
+			$this->getStore()->getEntityInfoBuilder(),
 			$this->getEntityTitleLookup(),
 			$this->getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),

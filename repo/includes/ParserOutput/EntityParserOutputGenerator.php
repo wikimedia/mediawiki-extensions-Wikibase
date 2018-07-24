@@ -16,7 +16,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -55,9 +55,9 @@ class EntityParserOutputGenerator {
 	private $entityTitleLookup;
 
 	/**
-	 * @var EntityInfoBuilderFactory
+	 * @var EntityInfoBuilder
 	 */
-	private $entityInfoBuilderFactory;
+	private $entityInfoBuilder;
 
 	/**
 	 * @var LanguageFallbackChain
@@ -93,7 +93,7 @@ class EntityParserOutputGenerator {
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
@@ -105,7 +105,7 @@ class EntityParserOutputGenerator {
 		DispatchingEntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
+		EntityInfoBuilder $entityInfoBuilder,
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		LocalizedTextProvider $textProvider,
@@ -116,7 +116,7 @@ class EntityParserOutputGenerator {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
+		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->templateFactory = $templateFactory;
 		$this->textProvider = $textProvider;
@@ -202,9 +202,7 @@ class EntityParserOutputGenerator {
 			$entityIds = [];
 		}
 
-		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
-
-		return $entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
+		return $this->entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
 	}
 
 	/**

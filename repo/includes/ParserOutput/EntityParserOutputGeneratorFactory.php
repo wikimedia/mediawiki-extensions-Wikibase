@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -34,9 +34,9 @@ class EntityParserOutputGeneratorFactory {
 	private $entityViewFactory;
 
 	/**
-	 * @var EntityInfoBuilderFactory
+	 * @var EntityInfoBuilder
 	 */
-	private $entityInfoBuilderFactory;
+	private $entityInfoBuilder;
 
 	/**
 	 * @var EntityTitleLookup
@@ -86,7 +86,7 @@ class EntityParserOutputGeneratorFactory {
 
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TemplateFactory $templateFactory
@@ -101,7 +101,7 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
+		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TemplateFactory $templateFactory,
@@ -114,7 +114,7 @@ class EntityParserOutputGeneratorFactory {
 		array $globeUris = []
 	) {
 		$this->entityViewFactory = $entityViewFactory;
-		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
+		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->templateFactory = $templateFactory;
@@ -141,7 +141,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
-			$this->entityInfoBuilderFactory,
+			$this->entityInfoBuilder,
 			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->templateFactory,
 			new MediaWikiLocalizedTextProvider( $userLanguageCode ),

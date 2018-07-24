@@ -22,8 +22,8 @@ use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -530,12 +530,12 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::getEntityInfoBuilderFactory
+	 * @see Store::getEntityInfoBuilder
 	 *
-	 * @return EntityInfoBuilderFactory
+	 * @return EntityInfoBuilder
 	 */
-	public function getEntityInfoBuilderFactory() {
-		return $this->wikibaseServices->getEntityInfoBuilderFactory();
+	public function getEntityInfoBuilder() {
+		return $this->wikibaseServices->getEntityInfoBuilder();
 	}
 
 	/**
