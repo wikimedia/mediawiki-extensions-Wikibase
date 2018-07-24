@@ -475,5 +475,6 @@
 	"apihelp-wblinktitles-summary": "Злучае дзьве старонкі ў дзьвюх розных вікі з элемэнтам Вікібазы.",
 	"apihelp-wblinktitles-param-tosite": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>totitle</var>, каб зрабіць поўную спасылку на сайт.",
 	"apihelp-wblinktitles-param-totitle": "Назва старонкі для злучэньня.\nУжывайце разам з <var>tosite</var>, каб зрабіць поўную спасылку на сайт.",
-	"apihelp-wblinktitles-param-fromsite": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>fromtitle</var>, каб зрабіць поўную спасылку на сайт."
+	"apihelp-wblinktitles-param-fromsite": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>fromtitle</var>, каб зрабіць поўную спасылку на сайт.",
+	"apihelp-wblinktitles-param-fromtitle": "Назва старонкі для злучэньня.\nУжывайце разам з <var>fromsite</var>, каб зрабіць поўную спасылку на сайт."
 }

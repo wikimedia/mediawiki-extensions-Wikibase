@@ -21,7 +21,8 @@
 			"Omotecho",
 			"Wicklo",
 			"Translatealcd",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Kkairri"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -360,6 +361,7 @@
 	"action-item-merge": "項目を統合",
 	"action-property-create": "プロパティを作成",
 	"wikibase-pageinfo-subscription-none": "なし",
+	"wikibase-search-namespace-mix": "現在、エンティティとそれ以外の名前空間を同時に検索することができません。エンティティの検索結果のみを示しています。",
 	"apihelp-wbcreateclaim-description": "Wikibaseの主張を作成",
 	"apihelp-wbcreateclaim-param-entity": "主張を追加するエンティティのID",
 	"apihelp-wbcreateredirect-description": "エンティティのリダイレクトを作成します。",
