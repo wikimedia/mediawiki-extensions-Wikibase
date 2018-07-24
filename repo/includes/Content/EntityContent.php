@@ -270,7 +270,7 @@ abstract class EntityContent extends AbstractContent {
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
 
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$options->getUserLang()
+			$options->getUserLangObj()
 		);
 
 		$entityRevision = $this->getEntityRevision( $revisionId );
