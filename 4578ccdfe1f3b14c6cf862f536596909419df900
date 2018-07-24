@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f2e7c8b_d46a33bb",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:33:44Z",
+      "side": 1,
+      "message": "/* private */ const LABEL \u003d \u0027label\u0027;\n\nIf you do it like that it is clear what the comment applies to and is easily search-and-replacable when php 7.1. It\u0027s what we did in the fundraising codebases back when we where 7.0.",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6c27d3_cc988b0c",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:33:44Z",
+      "side": 1,
+      "message": "cacheTtlInSeconds? :) THE classic example of poor variable naming causing the need for comments.",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a05f545_05df4902",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:33:44Z",
+      "side": 1,
+      "message": "same here. ttlInSeconds. Users should not have to go look at docs of private fields to understand object construction.",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591c8d5b_6c424ccd",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:33:44Z",
+      "side": 1,
+      "message": "Looks like (most of) the body of the if can indeed be its own method.",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28e01d0a_6be37ab0",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:33:44Z",
+      "side": 1,
+      "message": "Own method to avoid mixing high and low level stuff?",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
