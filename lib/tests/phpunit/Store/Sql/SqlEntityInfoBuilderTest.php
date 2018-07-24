@@ -191,8 +191,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 					return new PropertyId( 'P' . $uniquePart );
 				},
 			] ),
-			$this->getEntityNamespaceLookup(),
-			$ids
+			$this->getEntityNamespaceLookup()
 		);
 	}
 
@@ -232,7 +231,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new BasicEntityIdParser(),
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
-			[],
 			$databaseName,
 			$repositoryName
 		);
@@ -246,13 +244,14 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new BasicEntityIdParser(),
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
-			[ $itemId, $propertyId ],
 			false,
 			''
 		);
 
-		$this->assertTrue( $builder->collectEntityInfo( [ $itemId, $propertyId ], [] )->hasEntityInfo( $itemId ) );
-		$this->assertFalse( $builder->collectEntityInfo( [ $itemId, $propertyId ], [] )->hasEntityInfo( $propertyId ) );
+		$entityInfo = $builder->collectEntityInfo( [ $itemId, $propertyId ], [] );
+
+		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
+		$this->assertFalse( $entityInfo->hasEntityInfo( $propertyId ) );
 	}
 
 	private function saveFakeForeignItemTermUsingFullItemId( ItemId $itemId, $termType, $termLanguage, $termText ) {
@@ -313,7 +312,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				},
 			] ),
 			$this->getEntityNamespaceLookup(),
-			[ $itemId ],
 			false,
 			'foo'
 		);
