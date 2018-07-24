@@ -33,7 +33,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private static $termTypeFields = [
 		'label' => 'labels',
 		'description' => 'descriptions',
-		'alias' => 'aliases',
 	];
 
 	/**
@@ -50,8 +49,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * EntityId objects indexed by serialized ID. This allows us to re-use
 	 * the original EntityId object and avoids parsing the string again.
 	 *
-	 * @see getEntityId()
-	 *
 	 * @var EntityId[]|null map of id-strings to EntityId objects: id-string => EntityId
 	 */
 	private $entityIds = null;
@@ -61,8 +58,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * After resolveRedirects() is called, this will contain entries for the redirect targets
 	 * in addition to the entries for the redirected IDs. Entries for the redirected IDs
 	 * will be php references to the entries that use the actual (target) IDs as keys.
-	 *
-	 * @see EntityInfoBuilder::getEntityInfo()
 	 *
 	 * @var array[]|null map of id-strings to entity-record arrays:
 	 *      id-string => record
@@ -199,17 +194,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @see EntityInfoBuilder::getEntityInfo
-	 *
 	 * @return EntityInfo
 	 */
 	private function getEntityInfo() {
 		return new EntityInfo( $this->entityInfo );
 	}
 
-	/**
-	 * @see EntityInfoBuilder::resolveRedirects
-	 */
 	private function resolveRedirects() {
 		if ( $this->redirects !== null ) {
 			// already done
@@ -343,21 +333,16 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @see EntityInfoBuilder::collectTerms
-	 *
-	 * @param string[]|null $termTypes Which types of terms to include (e.g. "label", "description", "aliases").
-	 * @param string[]|null $languages Which languages to include
+	 * @param string[] $languages Which languages to include
 	 */
-	private function collectTerms( array $termTypes = null, array $languages = null ) {
-		if ( $termTypes === null ) {
-			$termTypes = array_keys( self::$termTypeFields );
-		}
+	private function collectTerms( array $languages ) {
+		$termTypes = array_keys( self::$termTypeFields );
 
 		foreach ( $termTypes as $type ) {
 			$this->setDefaultValue( self::$termTypeFields[$type], [] );
 		}
 
-		if ( $termTypes === [] || $languages === [] ) {
+		if ( $languages === [] ) {
 			// nothing to do
 			return;
 		}
@@ -365,7 +350,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the term_entity_type field.
 		foreach ( array_keys( $this->localIdsByType ) as $type ) {
-			$this->collectTermsForEntities( $type, $termTypes, $languages );
+			$this->collectTermsForEntities( $type, $languages );
 		}
 	}
 
@@ -373,21 +358,15 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * Collects the terms for a number of entities (of the given types, in the given languages)
 	 *
 	 * @param string $entityType
-	 * @param string[]|null $termTypes
-	 * @param string[]|null $languages
+	 * @param string[] $languages
 	 */
-	private function collectTermsForEntities( $entityType, array $termTypes = null, array $languages = null ) {
-		$where = [];
+	private function collectTermsForEntities( $entityType, array $languages ) {
+		$termTypes = array_keys( self::$termTypeFields );
 
-		$where['term_full_entity_id'] = $this->localIdsByType[$entityType];
-
-		if ( $termTypes === null ) {
-			$termTypes = [ null ];
-		}
-
-		if ( $languages ) {
-			$where['term_language'] = $languages;
-		}
+		$where = [
+			'term_full_entity_id' => $this->localIdsByType[$entityType],
+			'term_language' => $languages,
+		];
 
 		$fields = [ 'term_type', 'term_language', 'term_text', 'term_full_entity_id' ];
 
@@ -403,7 +382,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$res = $dbr->select(
 				$this->termTable,
 				$fields,
-				array_merge( $where, $termType !== null ? [ 'term_type' => $termType ] : [] ),
+				array_merge( $where, [ 'term_type' => $termType ] ),
 				__METHOD__
 			);
 
@@ -446,9 +425,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 				case 'description':
 					$this->injectDescription( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
 					break;
-				case 'alias':
-					$this->injectAlias( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
-					break;
 				default:
 					wfDebugLog( __CLASS__, __FUNCTION__ . ': unknown term type: ' . $row->term_type );
 			}
@@ -479,21 +455,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		];
 	}
 
-	/**
-	 * @param array[]|null $termGroupList
-	 * @param string $language
-	 * @param string $text
-	 */
-	private function injectAlias( &$termGroupList, $language, $text ) {
-		$termGroupList[$language][] = [ // note that we are appending here.
-			'language' => $language,
-			'value' => $text,
-		];
-	}
-
-	/**
-	 * @see EntityInfoBuilder::collectDataTypes
-	 */
 	private function collectDataTypes() {
 		//TODO: use PropertyDataTypeLookup service to make use of caching!
 
@@ -541,9 +502,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		}
 	}
 
-	/**
-	 * @see EntityInfoBuilder::removeMissing
-	 */
 	private function removeMissing() {
 		$missingIds = $this->getMissingIds();
 
@@ -742,10 +700,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->resolveRedirects();
 
-		$this->collectTerms(
-			[ 'label', 'description' ],
-			$languageCodes
-		);
+		$this->collectTerms( $languageCodes );
 
 		$this->removeMissing();
 		$this->collectDataTypes();
