@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -273,27 +272,6 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @see EntityInfoBuilder::collectDataTypes
-	 */
-	private function collectDataTypes() {
-		foreach ( $this->entityInfo as $id => &$entityRecord ) {
-			$id = $this->parseId( $id );
-
-			if ( $id->getEntityType() !== Property::ENTITY_TYPE ) {
-				continue;
-			}
-
-			$entity = $this->getEntity( $id );
-
-			if ( $entity instanceof Property ) {
-				$entityRecord['datatype'] = $entity->getDataTypeId();
-			} else {
-				$entityRecord['datatype'] = null;
-			}
-		}
-	}
-
-	/**
 	 * @see EntityInfoBuilder::removeMissing
 	 *
 	 * @param string $redirects A flag, either "keep-redirects" (default) or "remove-redirects".
@@ -359,7 +337,6 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		);
 
 		$this->removeMissing();
-		$this->collectDataTypes();
 		$this->retainEntityInfo( $entityIds );
 
 		return $this->getEntityInfo();
