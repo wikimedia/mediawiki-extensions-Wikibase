@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2beac0c6_65680e58",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2018-07-24T07:30:42Z",
+      "side": 1,
+      "message": "Better use\n\n !$options-\u003egetUserLangObj()-\u003eequals( RequestContext::getMain()-\u003egetLanguage() )",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 87
+      },
+      "revId": "2e9a2937b3e98dcbdcb9b67b377fb63d71b1fc56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
