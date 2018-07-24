@@ -76,7 +76,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 
 	private function newParserOutputGenerator() {
 		return WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator( 'en' );
+			->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 	}
 
 	private function saveItem( $id ) {

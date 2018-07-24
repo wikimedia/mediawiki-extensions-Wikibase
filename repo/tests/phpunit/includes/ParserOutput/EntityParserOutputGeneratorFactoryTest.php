@@ -28,7 +28,7 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	public function testGetEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( 'en' );
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 
 		$this->assertInstanceOf( EntityParserOutputGenerator::class, $instance );
 	}
