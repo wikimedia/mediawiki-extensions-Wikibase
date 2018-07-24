@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6037bda4_0b746b73",
+        "filename": "repo/includes/Merge/StatementsMerger.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:14:50Z",
+      "side": 1,
+      "message": "I\u0027m all for gradual refactoring and not needing to get things perfect the first time: if a change goes in the right direction I think it can generally be merged. Mentioning this since I\u0027m not sure if the below possible issues where already somehow present or not.\n\nI find this methods signature surprising. There is no return value; instead the arguments are modified. This is extra surprising since these are not services. They are ... not actually value objects...? Which is another thing I find strange. Why use this StatementListProvider container when all you need are statement lists?\n\nWhat about having this merge method take two StatementList and return a merged StatementList. Then deciding what thing gets the merged list and which one gets cleared is up to the caller, which seems to make sense, since that is quite different from merging two StatementList.",
+      "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "811b8de4_a4eaaa20",
+        "filename": "repo/tests/phpunit/includes/Merge/StatementsMergerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:14:50Z",
+      "side": 1,
+      "message": "If this kind of Item construction (just giving an id and one specific thing) is common, then perhaps it pays to have alternative constructors such as Item::newFromStatements()? That would improve readability a lot. Especially when you do not have an IDE, like when you are doing review on a random laptop, spotting a missing or extra null is kinda difficult.",
+      "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05504a17_66d71e98",
+        "filename": "repo/tests/phpunit/includes/Merge/StatementsMergerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:14:50Z",
+      "side": 1,
+      "message": "\u003c3 for yield",
+      "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af790069_98adeaf5",
+        "filename": "repo/tests/phpunit/includes/Merge/StatementsMergerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-24T17:14:50Z",
+      "side": 1,
+      "message": "Having all this construction (low level) here obscures what is being tested (high level). If you have a createStatementWithreference method(s) or something similar you can also avoid having the extra state in this function.",
+      "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
