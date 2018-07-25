@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Interactors\RedirectCreationInteractor
+ * @covers \Wikibase\Repo\Interactors\RedirectCreationInteractor
  *
  * @group Wikibase
  *
@@ -195,21 +195,63 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 	public function createRedirectProvider_failure() {
 		return [
-			'source not found' => [ new ItemId( 'Q77' ), new ItemId( 'Q12' ), 'no-such-entity' ],
-			'target not found' => [ new ItemId( 'Q11' ), new ItemId( 'Q77' ), 'no-such-entity' ],
-			'target is a redirect' => [ new ItemId( 'Q11' ), new ItemId( 'Q22' ), 'target-is-redirect' ],
-			'target is incompatible' => [ new ItemId( 'Q11' ), new PropertyId( 'P11' ), 'target-is-incompatible' ],
+			'source not found' => [
+				new ItemId( 'Q77' ),
+				new ItemId( 'Q12' ),
+				'no-such-entity',
+				[ 'Q77' ]
+			],
+			'target not found' => [
+				new ItemId( 'Q11' ),
+				new ItemId( 'Q77' ),
+				'no-such-entity',
+				[ 'Q77' ]
+			],
+			'target is a redirect' => [
+				new ItemId( 'Q11' ),
+				new ItemId( 'Q22' ),
+				'target-is-redirect',
+				[ 'Q22' ]
+			],
+			'target is incompatible' => [
+				new ItemId( 'Q11' ),
+				new PropertyId( 'P11' ),
+				'target-is-incompatible',
+				[]
+			],
 
-			'source not empty' => [ new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'origin-not-empty' ],
-			'can\'t redirect' => [ new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ],
-			'can\'t redirect EditFilter' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect', Status::newFatal( 'EF' ) ],
+			'source not empty' => [
+				new ItemId( 'Q12' ),
+				new ItemId( 'Q11' ),
+				'origin-not-empty',
+				[ 'Q12' ]
+			],
+			'can\'t redirect' => [
+				new PropertyId( 'P11' ),
+				new PropertyId( 'P12' ),
+				'cant-redirect',
+				[]
+			],
+			'can\'t redirect EditFilter' => [
+				new ItemId( 'Q11' ),
+				new ItemId( 'Q12' ),
+				'cant-redirect-due-to-edit-filter-hook',
+				[],
+				Status::newFatal( 'EF' )
+			],
 		];
 	}
 
 	/**
 	 * @dataProvider createRedirectProvider_failure
 	 */
-	public function testCreateRedirect_failure( EntityId $fromId, EntityId $toId, $expectedCode, Status $efStatus = null ) {
+	public function testCreateRedirect_failure(
+		EntityId $fromId,
+		EntityId $toId,
+		$expectedCode,
+		array $messageParams,
+		Status $efStatus = null
+	) {
 		$interactor = $this->newInteractor( null, $efStatus );
 
 		try {
@@ -217,6 +259,8 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			$this->fail( 'createRedirect not fail with error ' . $expectedCode . ' as expected!' );
 		} catch ( RedirectCreationException $ex ) {
 			$this->assertEquals( $expectedCode, $ex->getErrorCode() );
+			$this->assertSame( 'wikibase-redirect-' . $expectedCode, $ex->getKey() );
+			$this->assertSame( $messageParams, $ex->getParams() );
 		}
 	}
 
