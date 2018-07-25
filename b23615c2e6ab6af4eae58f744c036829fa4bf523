@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "33f65bf2_98c5099a",
+        "filename": "repo/includes/Merge/StatementsMerger.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-25T14:09:08Z",
+      "side": 1,
+      "message": "Yes, I agree that the method signature is not great. I believe that this issue is present (even more so?) in ChangeOpsMerge where this is extracted from. There two entities are passed into the constructor and then the ChangeOpsMerge::apply() modifies these two objects by reference. \nReasons other than \"it\u0027s already done this way\":\n* the way ChangeOps work, i.e. modifying the the Entity passed into apply, is the same and makes it hard for it to change in this initial refactoring step\n* both $source and $target are modified in this case, so a single return value will not do\n* given we return the post-merge $target, we would end up in a situation where we have two references to the same entity in different states - pre-merge and post-merge\n\nRegarding StatementListProvider vs StatementList: What I would like to hint against is actually EntityDocument + StatementListProvider. EntityDocument is needed to generate the statements\u0027 GUID. Also, as you can see below, this class uses ChangeOps to perform the merge action on these two entities. I added the missing Assert::parameterType for EntityDocument.",
+      "parentUuid": "6037bda4_0b746b73",
+      "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "811b8de4_a4eaaa20",
         "filename": "repo/tests/phpunit/includes/Merge/StatementsMergerTest.php",
         "patchSetId": 5
@@ -67,6 +85,24 @@
       "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdf79e68_4388b2d8",
+        "filename": "repo/tests/phpunit/includes/Merge/StatementsMergerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-25T14:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af790069_98adeaf5",
+      "revId": "b23615c2e6ab6af4eae58f744c036829fa4bf523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
