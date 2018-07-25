@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7662d82_8aceda7a",
+        "filename": "repo/includes/Api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-25T17:44:35Z",
+      "side": 1,
+      "message": "Would do as a quick fix (not sure if we need to quick-fix to unblock the train any more), though arguably the catch not really fitting here. The code \"deserializes\" the user input, and suddenly we\u0027re talking about entity ID parsing.\nPossibly the serialzer could catch the exception in the relevant place, and rethrow as InvalidArgumentException, or whatever is the part of the deserializer contract?",
+      "revId": "ced84326d6362952359751492c1bd5a05c12ad0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
