@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use CirrusSearch;
 use PHPUnit4And6Compat;
+use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\Search\Elastic\Fields\StatementQuantityField;
@@ -91,13 +92,14 @@ class StatementQuantityFieldTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetMapping() {
 		$field = $this->createStatementQuantityField();
-		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
+		$searchEngine = $this->getMockBuilder( [ CirrusSearch::class, SearchEngine::class ] )
+			->getMock();
 		$this->assertInternalType( 'array', $field->getMapping( $searchEngine ) );
 	}
 
 	public function testGetMappingNotCirrus() {
 		$field = $this->createStatementQuantityField();
-		$searchEngine = $this->getMockBuilder( \SearchEngine::class )->getMock();
+		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 		$this->assertEmpty( $field->getMapping( $searchEngine ) );
 	}
 
