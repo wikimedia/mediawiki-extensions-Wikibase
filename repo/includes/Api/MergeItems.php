@@ -8,7 +8,7 @@ use Exception;
 use InvalidArgumentException;
 use LogicException;
 use ApiUsageException;
-use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
+use Wikibase\Repo\Merge\ItemMerger;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -193,7 +193,7 @@ class MergeItems extends ApiBase {
 			],
 			'ignoreconflicts' => [
 				self::PARAM_ISMULTI => true,
-				self::PARAM_TYPE => ChangeOpsMerge::$conflictTypes,
+				self::PARAM_TYPE => ItemMerger::$conflictTypes,
 				self::PARAM_REQUIRED => false,
 			],
 			'summary' => [

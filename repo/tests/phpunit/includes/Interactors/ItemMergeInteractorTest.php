@@ -9,9 +9,9 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Merge\ItemMergerFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -133,14 +133,14 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		//XXX: we may want or need to mock some of these services
-		$changeOpsFactory = new MergeChangeOpsFactory(
+		$itemMergerFactory = new ItemMergerFactory(
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
 		);
 
 		$interactor = new ItemMergeInteractor(
-			$changeOpsFactory,
+			$itemMergerFactory,
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionChecker(),
