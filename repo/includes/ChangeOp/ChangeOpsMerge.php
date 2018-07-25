@@ -11,10 +11,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Merge\StatementsMerger;
 use Wikibase\Repo\Validators\CompositeEntityValidator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\UniquenessViolation;
@@ -149,6 +149,10 @@ class ChangeOpsMerge {
 		$this->fromChangeOps->apply( $this->fromItem );
 		$this->toChangeOps->apply( $this->toItem );
 
+		$this->checkStatementLinks();
+		$statementsMerger = new StatementsMerger( $this->getStatementChangeOpFactory() );
+		$statementsMerger->merge( $this->fromItem, $this->toItem );
+
 		//NOTE: we apply constraint checks on the modified items, but no
 		//      validation of individual change ops, since we are merging
 		//      two valid items.
@@ -160,7 +164,6 @@ class ChangeOpsMerge {
 		$this->generateDescriptionsChangeOps();
 		$this->generateAliasesChangeOps();
 		$this->generateSitelinksChangeOps();
-		$this->generateStatementsChangeOps();
 	}
 
 	private function generateLabelsChangeOps() {
@@ -259,32 +262,6 @@ class ChangeOpsMerge {
 		return $site;
 	}
 
-	private function generateStatementsChangeOps() {
-		if ( !in_array( 'statement', $this->ignoreConflicts ) ) {
-			foreach ( $this->toItem->getStatements()->toArray() as $toStatement ) {
-				$this->checkIsLink( $toStatement, $this->fromItem->getId() );
-			}
-		}
-
-		foreach ( $this->fromItem->getStatements()->toArray() as $fromStatement ) {
-			if ( !in_array( 'statement', $this->ignoreConflicts ) ) {
-				$this->checkIsLink( $fromStatement, $this->toItem->getId() );
-			}
-
-			$this->fromChangeOps->add( $this->getStatementChangeOpFactory()->newRemoveStatementOp( $fromStatement->getGuid() ) );
-
-			$toStatement = clone $fromStatement;
-			$toStatement->setGuid( null );
-			$toMergeToStatement = $this->findEquivalentStatement( $toStatement );
-
-			if ( $toMergeToStatement ) {
-				$this->generateReferencesChangeOps( $toStatement, $toMergeToStatement );
-			} else {
-				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetStatementOp( $toStatement ) );
-			}
-		}
-	}
-
 	/**
 	 * Checks if the statement's main snak is a link to the given item id
 	 *
@@ -310,53 +287,6 @@ class ChangeOpsMerge {
 			throw new ChangeOpException(
 				"The two items cannot be merged because one of them links to the other using property {$statement->getPropertyId()}"
 			);
-		}
-	}
-
-	/**
-	 * Finds a statement in the target entity with the same main snak and qualifiers as $fromStatement
-	 *
-	 * @param Statement $fromStatement
-	 *
-	 * @return Statement|false Statement to merge reference into or false
-	 */
-	private function findEquivalentStatement( Statement $fromStatement ) {
-		$fromHash = $this->getStatementHash( $fromStatement );
-
-		/** @var Statement $statement */
-		foreach ( $this->toItem->getStatements() as $statement ) {
-			$toHash = $this->getStatementHash( $statement );
-			if ( $toHash === $fromHash ) {
-				return $statement;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * @param Statement $statement
-	 *
-	 * @return string combined hash of the Mainsnak and Qualifiers
-	 */
-	private function getStatementHash( Statement $statement ) {
-		return $statement->getMainSnak()->getHash() . $statement->getQualifiers()->getHash();
-	}
-
-	/**
-	 * @param Statement $fromStatement statement to take references from
-	 * @param Statement $toStatement statement to add references to
-	 */
-	private function generateReferencesChangeOps( Statement $fromStatement, Statement $toStatement ) {
-		/** @var Reference $reference */
-		foreach ( $fromStatement->getReferences() as $reference ) {
-			if ( !$toStatement->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
-				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetReferenceOp(
-					$toStatement->getGuid(),
-					$reference,
-					''
-				) );
-			}
 		}
 	}
 
@@ -404,6 +334,18 @@ class ChangeOpsMerge {
 		}
 
 		return $filtered;
+	}
+
+	private function checkStatementLinks() {
+		if ( !in_array( 'statement', $this->ignoreConflicts ) ) {
+			foreach ( $this->toItem->getStatements()->toArray() as $toStatement ) {
+				$this->checkIsLink( $toStatement, $this->fromItem->getId() );
+			}
+
+			foreach ( $this->fromItem->getStatements()->toArray() as $fromStatement ) {
+				$this->checkIsLink( $fromStatement, $this->toItem->getId() );
+			}
+		}
 	}
 
 }
