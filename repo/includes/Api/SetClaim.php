@@ -13,6 +13,7 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use ApiUsageException;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -196,6 +197,12 @@ class SetClaim extends ApiBase {
 		} catch ( InvalidArgumentException $invalidArgumentException ) {
 			$this->errorReporter->dieError(
 				'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(),
+				'invalid-claim'
+			);
+		} catch ( EntityIdParsingException $idParsingException ) {
+			// https://phabricator.wikimedia.org/T200340
+			$this->errorReporter->dieError(
+				'Failed to get claim from claim Serialization ' . $idParsingException->getMessage(),
 				'invalid-claim'
 			);
 		} catch ( OutOfBoundsException $outOfBoundsException ) {
