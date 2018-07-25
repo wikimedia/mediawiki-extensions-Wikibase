@@ -90,6 +90,10 @@ class StatementQuantityFieldTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetMapping() {
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch needed.' );
+		}
+
 		$field = $this->createStatementQuantityField();
 		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
 		$this->assertInternalType( 'array', $field->getMapping( $searchEngine ) );
