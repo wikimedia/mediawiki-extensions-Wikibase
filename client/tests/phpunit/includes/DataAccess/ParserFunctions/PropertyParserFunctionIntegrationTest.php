@@ -49,8 +49,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 			'Mocking the default ClientStore failed'
 		);
 
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
-		$this->setMwGlobals( 'wgLanguageCode', 'de' );
+		$this->setContentLang( 'de' );
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
