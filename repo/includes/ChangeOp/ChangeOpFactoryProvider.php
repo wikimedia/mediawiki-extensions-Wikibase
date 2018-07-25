@@ -124,15 +124,4 @@ class ChangeOpFactoryProvider {
 		return new SiteLinkChangeOpFactory( $this->allowedBadgeItemIds );
 	}
 
-	/**
-	 * @return MergeChangeOpsFactory
-	 */
-	public function getMergeChangeOpFactory() {
-		return new MergeChangeOpsFactory(
-			$this->constraintProvider,
-			$this,
-			$this->siteLookup
-		);
-	}
-
 }

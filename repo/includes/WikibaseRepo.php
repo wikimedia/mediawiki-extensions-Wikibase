@@ -95,6 +95,7 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
+use Wikibase\Repo\Merge\ItemMergerFactory;
 use Wikibase\Repo\Modules\PropertyValueExpertsModule;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -1674,7 +1675,11 @@ class WikibaseRepo {
 		$user = $context->getUser();
 
 		return new ItemMergeInteractor(
-			$this->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+			new ItemMergerFactory(
+				$this->getEntityConstraintProvider(),
+				$this->getChangeOpFactoryProvider(),
+				$this->siteLookup
+			),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),

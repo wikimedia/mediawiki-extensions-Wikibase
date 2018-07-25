@@ -22,6 +22,7 @@ use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\Merge\ItemMergerFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
@@ -193,7 +194,11 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			'wbmergeitems',
 			new ItemIdParser(),
 			new ItemMergeInteractor(
-				$changeOpsFactoryProvider->getMergeChangeOpFactory(),
+				new ItemMergerFactory(
+					$wikibaseRepo->getEntityConstraintProvider(),
+					$changeOpsFactoryProvider,
+					$wikibaseRepo->getSiteLookup()
+				),
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),

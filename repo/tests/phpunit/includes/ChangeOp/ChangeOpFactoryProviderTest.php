@@ -7,7 +7,6 @@ use PHPUnit4And6Compat;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
@@ -78,11 +77,6 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 	public function testGetSiteLinkChangeOpFactory() {
 		$factory = $this->newChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$this->assertInstanceOf( SiteLinkChangeOpFactory::class, $factory );
-	}
-
-	public function testGetMergeChangeOpFactory() {
-		$factory = $this->newChangeOpFactoryProvider()->getMergeChangeOpFactory();
-		$this->assertInstanceOf( MergeChangeOpsFactory::class, $factory );
 	}
 
 }

@@ -13,7 +13,6 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;
@@ -24,6 +23,7 @@ use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Merge\ItemMergerFactory;
 use Wikibase\Repo\Specials\SpecialMergeItems;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -121,7 +121,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
-		$changeOpsFactory = new MergeChangeOpsFactory(
+		$itemMergerFactory = new ItemMergerFactory(
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
@@ -156,7 +156,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $this->user ),
 			new ItemMergeInteractor(
-				$changeOpsFactory,
+				$itemMergerFactory,
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),

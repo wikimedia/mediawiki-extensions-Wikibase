@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Interactors;
 use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -14,6 +12,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Merge\ItemMerger;
+use Wikibase\Repo\Merge\ItemMergerFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -29,11 +29,6 @@ use Wikibase\SummaryFormatter;
  * @author Lucie-Aimée Kaffee
  */
 class ItemMergeInteractor {
-
-	/**
-	 * @var MergeChangeOpsFactory
-	 */
-	private $changeOpFactory;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -70,8 +65,13 @@ class ItemMergeInteractor {
 	 */
 	private $entityTitleLookup;
 
+	/**
+	 * @var ItemMergerFactory
+	 */
+	private $mergerFactory;
+
 	public function __construct(
-		MergeChangeOpsFactory $changeOpFactory,
+		ItemMergerFactory $mergerFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
@@ -80,7 +80,7 @@ class ItemMergeInteractor {
 		RedirectCreationInteractor $interactorRedirect,
 		EntityTitleStoreLookup $entityTitleLookup
 	) {
-		$this->changeOpFactory = $changeOpFactory;
+		$this->mergerFactory = $mergerFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
@@ -147,16 +147,11 @@ class ItemMergeInteractor {
 		$this->validateEntities( $fromItem, $toItem );
 
 		// strip any bad values from $ignoreConflicts
-		$ignoreConflicts = array_intersect( $ignoreConflicts, ChangeOpsMerge::$conflictTypes );
+		$ignoreConflicts = array_intersect( $ignoreConflicts, ItemMerger::$conflictTypes );
 
 		try {
-			$changeOps = $this->changeOpFactory->newMergeOps(
-				$fromItem,
-				$toItem,
-				$ignoreConflicts
-			);
-
-			$changeOps->apply();
+			$this->mergerFactory->newItemMerger( $ignoreConflicts )
+				->merge( $fromItem, $toItem );
 		} catch ( ChangeOpException $e ) {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}

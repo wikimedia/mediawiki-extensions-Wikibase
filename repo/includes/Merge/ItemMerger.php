@@ -1,12 +1,13 @@
 <?php
 
-namespace Wikibase\Repo\ChangeOp;
+namespace Wikibase\Repo\Merge;
 
 use InvalidArgumentException;
 use Site;
 use SiteLookup;
 use ValueValidators\Error;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -14,7 +15,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\Merge\StatementsMerger;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\Validators\CompositeEntityValidator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\UniquenessViolation;
@@ -24,7 +31,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @author Addshore
  * @author Daniel Kinzler
  */
-class ChangeOpsMerge {
+class ItemMerger implements EntityMerger {
 
 	/**
 	 * @var Item
@@ -69,8 +76,6 @@ class ChangeOpsMerge {
 	public static $conflictTypes = [ 'description', 'sitelink', 'statement' ];
 
 	/**
-	 * @param Item $fromItem
-	 * @param Item $toItem
 	 * @param string[] $ignoreConflicts list of elements to ignore conflicts for
 	 *        can only contain 'description' and or 'sitelink' and or 'statement'
 	 * @param EntityConstraintProvider $constraintProvider
@@ -82,8 +87,6 @@ class ChangeOpsMerge {
 	 *        to merge different kinds of entities nicely, too.
 	 */
 	public function __construct(
-		Item $fromItem,
-		Item $toItem,
 		array $ignoreConflicts,
 		EntityConstraintProvider $constraintProvider,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
@@ -91,8 +94,6 @@ class ChangeOpsMerge {
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 
-		$this->fromItem = $fromItem;
-		$this->toItem = $toItem;
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
@@ -139,7 +140,10 @@ class ChangeOpsMerge {
 	/**
 	 * @throws ChangeOpException
 	 */
-	public function apply() {
+	public function merge( EntityDocument $source, EntityDocument $target ) {
+		$this->fromItem = $source;
+		$this->toItem = $target;
+
 		// NOTE: we don't want to validate the ChangeOps individually, since they represent
 		// data already present and saved on the system. Also, validating each would be
 		// potentially expensive.

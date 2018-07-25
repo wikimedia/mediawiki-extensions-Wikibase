@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ChangeOp;
+namespace Wikibase\Repo\Tests\Merge;
 
 use HashSiteStore;
 use InvalidArgumentException;
@@ -9,9 +9,10 @@ use Site;
 use TestSites;
 use ValueValidators\Error;
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,13 +22,15 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Merge\ItemMerger;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpsMerge
+ * @covers Wikibase\Repo\Merge\ItemMerger
  *
  * @group Wikibase
  * @group ChangeOp
@@ -36,7 +39,7 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class ChangeOpsMergeTest extends MediaWikiTestCase {
+class ItemMergerTest extends MediaWikiTestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider
@@ -54,9 +57,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
-	protected function makeChangeOpsMerge(
-		Item $fromItem,
-		Item $toItem,
+	protected function newItemMerger(
 		array $ignoreConflicts = [],
 		$siteLookup = null
 	) {
@@ -87,16 +88,14 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$constraintProvider,
 			new GuidGenerator(),
 			$this->mockProvider->getMockGuidValidator(),
-			$this->mockProvider->getMockGuidParser( $toItem->getId() ),
+			new StatementGuidParser( new ItemIdParser() ),
 			$this->mockProvider->getMockSnakValidator(),
 			$this->mockProvider->getMockTermValidatorFactory(),
 			$siteLookup,
 			[]
 		);
 
-		return new ChangeOpsMerge(
-			$fromItem,
-			$toItem,
+		return new ItemMerger(
 			$ignoreConflicts,
 			$constraintProvider,
 			$changeOpFactoryProvider,
@@ -108,12 +107,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @dataProvider provideValidConstruction
 	 */
 	public function testCanConstruct( Item $from, Item $to, array $ignoreConflicts ) {
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
+		$changeOps = $this->newItemMerger(
 			$ignoreConflicts
 		);
-		$this->assertInstanceOf( ChangeOpsMerge::class, $changeOps );
+		$this->assertInstanceOf( ItemMerger::class, $changeOps );
 	}
 
 	public function provideValidConstruction() {
@@ -133,9 +130,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 */
 	public function testInvalidIgnoreConflicts( Item $from, Item $to, array $ignoreConflicts ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		$this->makeChangeOpsMerge(
-			$from,
-			$to,
+		$this->newItemMerger(
 			$ignoreConflicts
 		);
 	}
@@ -168,13 +163,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$from->setId( new ItemId( 'Q111' ) );
 		$to->setId( new ItemId( 'Q222' ) );
 
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
+		$changeOps = $this->newItemMerger(
 			$ignoreConflicts
 		);
 
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 
 		$this->removeClaimsGuids( $from );
 		$this->removeClaimsGuids( $expectedFrom );
@@ -428,14 +421,12 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$mockSiteStore = new HashSiteStore( TestSites::getSites() );
 		$mockSiteStore->saveSite( $enwiki );
 
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
+		$changeOps = $this->newItemMerger(
 			[],
 			$mockSiteStore
 		);
 
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 
 		$this->assertFalse( $from->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ) );
 		$this->assertTrue( $to->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ) );
@@ -450,9 +441,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->andSiteLink( 'enwiki', 'Foo' )
 			->build();
 
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
+		$changeOps = $this->newItemMerger(
 			[],
 			new HashSiteStore()
 		);
@@ -462,7 +451,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			'Conflicting sitelinks for enwiki, Failed to normalize'
 		);
 
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 	}
 
 	public function testExceptionThrownWhenSitelinkDuplicatesDetected() {
@@ -470,13 +459,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$to = $this->newItemWithId( 'Q222' );
 		$to->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'DUPE' );
 
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to
-		);
+		$changeOps = $this->newItemMerger();
 
 		$this->setExpectedException( ChangeOpException::class, 'SiteLink conflict' );
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 	}
 
 	public function testExceptionNotThrownWhenSitelinkDuplicatesDetectedOnFromItem() {
@@ -487,13 +473,9 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$to = $this->newItemWithId( 'Q222' );
 		$to->getSiteLinkList()->addNewSiteLink( 'nnwiki', 'BLOOP' );
 
-		$changeOps = $this->makeChangeOpsMerge(
-			$from,
-			$to,
-			[ 'sitelink' ]
-		);
+		$changeOps = $this->newItemMerger( [ 'sitelink' ] );
 
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 		$this->assertTrue( true ); // no exception thrown
 	}
 
@@ -507,13 +489,13 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$to = NewItem::withId( 'Q222' )
 			->build();
 
-		$changeOps = $this->makeChangeOpsMerge( $from, $to );
+		$changeOps = $this->newItemMerger();
 
 		$this->setExpectedException(
 			ChangeOpException::class,
 			'The two items cannot be merged because one of them links to the other using property P42'
 		);
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 	}
 
 	public function testExceptionThrownWhenToHasLink() {
@@ -526,13 +508,13 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			)
 			->build();
 
-		$changeOps = $this->makeChangeOpsMerge( $from, $to );
+		$changeOps = $this->newItemMerger();
 
 		$this->setExpectedException(
 			ChangeOpException::class,
 			'The two items cannot be merged because one of them links to the other using property P42'
 		);
-		$changeOps->apply();
+		$changeOps->merge( $from, $to );
 	}
 
 }
