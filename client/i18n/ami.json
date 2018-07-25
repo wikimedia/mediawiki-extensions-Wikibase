@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vickylin77s"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} kamok",
+	"wikibase-rc-hide-wikidata": "$1 a {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawit"
+}

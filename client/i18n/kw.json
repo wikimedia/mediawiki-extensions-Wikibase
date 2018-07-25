@@ -11,5 +11,7 @@
 	"wikibase-editlinkstitle": "Chanjya an kevrennow yeth",
 	"wikibase-rc-hide-wikidata-show": "Diskwedhes",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Chanjyans {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Chanj {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-usage": "Elvennow {{WBREPONAME}} usys y'n folen ma",
+	"wikibase-otherprojects": "Yn ragdresow erel"
 }

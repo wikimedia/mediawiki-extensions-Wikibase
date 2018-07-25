@@ -69,13 +69,17 @@
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-pageinfo-entity-usage": "Einingar frå {{WBREPONAME}} nytta på sida",
 	"wikibase-pageinfo-entity-usage-S": "Nettstadlenkje",
+	"wikibase-pageinfo-entity-usage-L": "Nokre merkelappar",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Merkelapp: $1",
+	"wikibase-pageinfo-entity-usage-D": "Nokre skildringar",
 	"wikibase-pageinfo-entity-usage-T": "Tittel",
+	"wikibase-pageinfo-entity-usage-C": "Nokre utsegner",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Utsegn: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle einingsdata",
 	"wikibase-pageinfo-entity-usage-O": "Anna (utsegner)",
 	"wikibase-property-render-error": "Kunne ikkje visa eigenskapen $1: $2",
 	"wikibase-otherprojects": "På andre prosjekt",
+	"echo-pref-tooltip-wikibase-action": "Meld meg når nokon koplar ei side eg {{GENDER:|oppretta}} til eit {{WBREPONAME}}-element.",
 	"unresolved-property-category": "Sider med uavklara eigenskapar",
 	"connected-redirect-category": "Omdirigeringar knytt til eit {{WBREPONAME}}-objekt"
 }

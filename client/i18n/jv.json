@@ -74,7 +74,7 @@
 	"wikibase-error-serialize-error": "Wurung nyambungaké data.",
 	"wikibase-error-invalid-entity-id": "ID sing dilebokaké ora kawruhan déning sistem. Mangga anggoa ID èntitas sing sah.",
 	"wikibase-error-exceeded-entity-access-limit": "Kakèhan èntitas {{WBREPONAME}} sing diaksès.",
-	"unconnectedpages": "Kaca sing ora nggayut ing wiji",
+	"unconnectedpages": "Kaca kang ora nggayut wiji",
 	"unconnectedpages-summary": "Kaca iki mratélakaké kaca-kaca sing tanpa wiji data kagayut (ing jagad aran sing njurung wiji kagayut). Pratélan iku diurutaké miturut ID kaca saka paling anyar supaya kaca-kaca paling anyar kapacak pisanan.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|pranala antarabasa}} ing kaca)",
 	"wikibase-unconnectedpages-submit": "Tuduhaké kaca",
