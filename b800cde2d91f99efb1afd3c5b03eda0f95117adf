@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1450af53_0752a071",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementQuantityFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-07-25T19:04:02Z",
+      "side": 1,
+      "message": "Please prefer ExtensionRegistry::getInstance()-\u003eisLoaded( \u0027…\u0027 ) if possible. But I see the same class_exists check a few lines above, so this is fine for now.",
+      "revId": "b800cde2d91f99efb1afd3c5b03eda0f95117adf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
