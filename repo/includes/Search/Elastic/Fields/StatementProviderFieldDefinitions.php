@@ -34,19 +34,26 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @var array
 	 */
 	private $excludedIds;
+	/**
+	 * @var array
+	 */
+	private $allowedQualifierPropertyIdsForQuantityStatements;
 
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $propertyIds,
 		array $indexedTypes,
 		array $excludedIds,
-		array $searchIndexDataFormatters
+		array $searchIndexDataFormatters,
+		array $allowedQualifierPropertyIdsForQuantityStatements
 	) {
 		$this->propertyIds = $propertyIds;
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->indexedTypes = $indexedTypes;
 		$this->excludedIds = $excludedIds;
+		$this->allowedQualifierPropertyIdsForQuantityStatements =
+			$allowedQualifierPropertyIdsForQuantityStatements;
 	}
 
 	/**
@@ -54,7 +61,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @return WikibaseIndexField[] key is field name, value is WikibaseIndexField
 	 */
 	public function getFields() {
-		return [
+		$fields = [
 			StatementsField::NAME => new StatementsField(
 				$this->propertyDataTypeLookup,
 				$this->propertyIds,
@@ -64,6 +71,17 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 			),
 			StatementCountField::NAME => new StatementCountField(),
 		];
+		if ( !empty( $this->allowedQualifierPropertyIdsForQuantityStatements ) ) {
+			$fields[StatementQuantityField::NAME] = new StatementQuantityField(
+				$this->propertyDataTypeLookup,
+				$this->propertyIds,
+				$this->indexedTypes,
+				$this->excludedIds,
+				$this->searchIndexDataFormatters,
+				$this->allowedQualifierPropertyIdsForQuantityStatements
+			);
+		}
+		return $fields;
 	}
 
 }

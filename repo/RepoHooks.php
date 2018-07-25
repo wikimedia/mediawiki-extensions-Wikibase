@@ -1024,6 +1024,13 @@ final class RepoHooks {
 			'max_token_count' => 1
 		];
 
+		// Analyzer for extracting quantity data and storing it in a term frequency field
+		$config['analyzer']['extract_wb_quantity'] = [
+			'type' => 'custom',
+			'tokenizer' => 'keyword',
+			'filter' => [ 'term_freq' ],
+		];
+
 		// Language analyzers for descriptions
 		$repo = WikibaseRepo::getDefaultInstance();
 		$wbBuilder = new ConfigBuilder( $repo->getTermsLanguages()->getLanguages(),
