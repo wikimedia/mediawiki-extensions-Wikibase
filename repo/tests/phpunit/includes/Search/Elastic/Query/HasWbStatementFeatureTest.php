@@ -17,7 +17,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		if ( !class_exists( \CirrusSearch::class ) ) {
+		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 	}
