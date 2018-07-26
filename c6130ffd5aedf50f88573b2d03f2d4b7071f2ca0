@@ -16,6 +16,24 @@
       "revId": "c6130ffd5aedf50f88573b2d03f2d4b7071f2ca0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7019bb1_c15ba027",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-07-26T07:32:11Z",
+      "side": 1,
+      "message": "What do you mean?\nThe then part is within the assert...",
+      "parentUuid": "a41c4dff_20cf2d3a",
+      "revId": "c6130ffd5aedf50f88573b2d03f2d4b7071f2ca0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
