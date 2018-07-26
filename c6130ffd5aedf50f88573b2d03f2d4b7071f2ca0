@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a41c4dff_20cf2d3a",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-26T04:28:52Z",
+      "side": 1,
+      "message": "Looks like you forgetti\u0027d something",
+      "revId": "c6130ffd5aedf50f88573b2d03f2d4b7071f2ca0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
