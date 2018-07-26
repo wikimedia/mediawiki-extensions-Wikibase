@@ -8,13 +8,11 @@ use SiteLookup;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Merge\StatementsMerger;
+use Wikibase\Repo\Merge\Validator\NoCrossReferencingStatements;
 use Wikibase\Repo\Validators\CompositeEntityValidator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\UniquenessViolation;
@@ -263,34 +261,6 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * Checks if the statement's main snak is a link to the given item id
-	 *
-	 * @param Statement $statement
-	 * @param ItemId $itemId
-	 *
-	 * @throws ChangeOpException
-	 */
-	private function checkIsLink( Statement $statement, ItemId $itemId ) {
-		$snak = $statement->getMainSnak();
-
-		if ( !( $snak instanceof PropertyValueSnak ) ) {
-			return;
-		}
-
-		$dataValue = $snak->getDataValue();
-
-		if ( !( $dataValue instanceof EntityIdValue ) ) {
-			return;
-		}
-
-		if ( $dataValue->getEntityId()->equals( $itemId ) ) {
-			throw new ChangeOpException(
-				"The two items cannot be merged because one of them links to the other using property {$statement->getPropertyId()}"
-			);
-		}
-	}
-
-	/**
 	 * @param Item $item
 	 * @param ItemId $fromId
 	 *
@@ -337,15 +307,19 @@ class ChangeOpsMerge {
 	}
 
 	private function checkStatementLinks() {
-		if ( !in_array( 'statement', $this->ignoreConflicts ) ) {
-			foreach ( $this->toItem->getStatements()->toArray() as $toStatement ) {
-				$this->checkIsLink( $toStatement, $this->fromItem->getId() );
-			}
-
-			foreach ( $this->fromItem->getStatements()->toArray() as $fromStatement ) {
-				$this->checkIsLink( $fromStatement, $this->toItem->getId() );
-			}
+		if ( in_array( 'statement', $this->ignoreConflicts ) ) {
+			return;
 		}
+
+		$validator = new NoCrossReferencingStatements();
+		if ( $validator->validate( $this->fromItem, $this->toItem ) ) {
+			return;
+		}
+
+		throw new ChangeOpException(
+			'The two items cannot be merged because one of them links to the other using the properties: ' .
+			implode( ', ', $validator->getViolations() )
+		);
 	}
 
 }

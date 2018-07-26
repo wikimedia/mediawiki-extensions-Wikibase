@@ -37,7 +37,7 @@ use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Api\MergeItems
+ * @covers \Wikibase\Repo\Api\MergeItems
  *
  * @group API
  * @group Wikibase
@@ -511,7 +511,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 					'type' => 'statement', 'rank' => 'normal' ] ] ]
 				],
 				[],
-				[ 'The two items cannot be merged because one of them links to the other using property P1' ],
+				[ 'The two items cannot be merged because one of them links to the other using the properties: P1' ],
 			],
 			[
 				[],
@@ -521,7 +521,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 					],
 					'type' => 'statement', 'rank' => 'normal' ] ] ]
 				],
-				[ 'The two items cannot be merged because one of them links to the other using property P1' ],
+				[ 'The two items cannot be merged because one of them links to the other using the properties: P1' ],
 			]
 		];
 	}
