@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c0f9cf1_0aba56e1",
+        "filename": "repo/includes/Merge/StatementsMerger.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-07-26T10:29:54Z",
+      "side": 1,
+      "message": "Let\u0027s finish pondering if going the ChangeOp way would not be the wiser thing to do before we merge this.",
+      "range": {
+        "startLine": 33,
+        "startChar": 30,
+        "endLine": 33,
+        "endChar": 45
+      },
+      "revId": "938b46f0ad81752e1873ad11dc20a997313e8a44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
