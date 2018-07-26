@@ -86,9 +86,9 @@ class EntityParserOutputGenerator {
 	private $dataUpdaters;
 
 	/**
-	 * @var string
+	 * @var Language
 	 */
-	private $languageCode;
+	private $language;
 
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
@@ -100,7 +100,7 @@ class EntityParserOutputGenerator {
 	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
-	 * @param string $languageCode
+	 * @param Language|string $language
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
@@ -112,7 +112,7 @@ class EntityParserOutputGenerator {
 		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		$languageCode
+		$language
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
@@ -123,7 +123,8 @@ class EntityParserOutputGenerator {
 		$this->textProvider = $textProvider;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
-		$this->languageCode = $languageCode;
+		$this->language = $language instanceof Language ? $language :
+			Language::factory( $language );
 	}
 
 	/**
@@ -278,11 +279,11 @@ class EntityParserOutputGenerator {
 		);
 
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
-		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
+		$languageNameLookup = new LanguageNameLookup( $this->language->getCode() );
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
-			new MediaWikiLocalizedTextProvider( Language::factory( $this->languageCode ) ),
+			new MediaWikiLocalizedTextProvider( $this->language ),
 			$languageDirectionalityLookup
 		);
 
@@ -307,7 +308,7 @@ class EntityParserOutputGenerator {
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entity->getType(),
-			$this->languageCode,
+			$this->language->getCode(),
 			$referencedEntitiesLabelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator,
@@ -325,7 +326,7 @@ class EntityParserOutputGenerator {
 		$parserOutput->setExtensionData(
 			'wikibase-terms-list-items',
 			$entityTermsView->getTermsListItems(
-				$this->languageCode,
+				$this->language->getCode(),
 				$entity instanceof LabelsProvider ? $entity->getLabels() : new TermList(),
 				$entity instanceof DescriptionsProvider ? $entity->getDescriptions() : new TermList(),
 				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null
