@@ -16,6 +16,24 @@
       "revId": "b8a440de956894225e5e8e2a270a057d51d0aa9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b41859f_b45099b8",
+        "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTestCase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-26T08:22:46Z",
+      "side": 1,
+      "message": "Moved to a constant",
+      "parentUuid": "959108de_7070b18b",
+      "revId": "b8a440de956894225e5e8e2a270a057d51d0aa9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
