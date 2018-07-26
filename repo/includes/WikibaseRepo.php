@@ -3,6 +3,8 @@
 namespace Wikibase\Repo;
 
 use Deserializers\DispatchableDeserializer;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
@@ -1455,9 +1457,20 @@ class WikibaseRepo {
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
 			'wikibase-entityid' => function ( $value ) {
-				return isset( $value['id'] )
-					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
-					: EntityIdValue::newFromArray( $value );
+				// TODO this should perhaps be factored out into a class
+				if ( isset( $value['id'] ) ) {
+					try {
+						return new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) );
+					} catch ( EntityIdParsingException $parsingException ) {
+						throw new InvalidArgumentException(
+							'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with',
+							0,
+							$parsingException
+						);
+					}
+				} else {
+					return EntityIdValue::newFromArray( $value );
+				}
 			},
 		] );
 	}
