@@ -200,7 +200,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 		// test nl
 		$this->setMwGlobals( 'wgLang', Language::factory( "nl" ) );
-		$this->setMwGlobals( 'wgContLang', Language::factory( "fr" ) );
+		$this->setContentLang( 'fr' );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 	}

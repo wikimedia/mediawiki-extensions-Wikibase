@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use Language;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,7 +24,7 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( [ 'wgContLang' => Language::factory( 'qqx' ) ] );
+		$this->setContentLang( 'qqx' );
 	}
 
 	protected function newSpecialPage() {
