@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use Language;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
@@ -28,7 +29,7 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	public function testGetEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( 'en' );
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 
 		$this->assertInstanceOf( EntityParserOutputGenerator::class, $instance );
 	}
