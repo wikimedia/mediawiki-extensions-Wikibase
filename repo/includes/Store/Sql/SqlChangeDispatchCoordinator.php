@@ -499,7 +499,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$db->begin( __METHOD__ );
 
 		try {
-			$this->releaseClientLock( $db, $state['chd_lock'] );
+			$lock = $this->getClientLockName( $siteID );
+			$this->releaseClientLock( $db, $lock );
 
 			$state['chd_lock'] = null;
 			$state['chd_touched'] = wfTimestamp( TS_MW, $this->now() );
