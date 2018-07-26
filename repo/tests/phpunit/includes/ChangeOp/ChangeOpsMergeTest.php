@@ -511,7 +511,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$this->setExpectedException(
 			ChangeOpException::class,
-			'The two items cannot be merged because one of them links to the other using property P42'
+			'The two items cannot be merged because one of them links to the other using the properties: P42'
 		);
 		$changeOps->apply();
 	}
@@ -530,7 +530,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$this->setExpectedException(
 			ChangeOpException::class,
-			'The two items cannot be merged because one of them links to the other using property P42'
+			'The two items cannot be merged because one of them links to the other using the properties: P42'
 		);
 		$changeOps->apply();
 	}

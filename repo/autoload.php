@@ -219,6 +219,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\MediaWikiLanguageDirectionalityLookup' => __DIR__ . '/includes/MediaWikiLanguageDirectionalityLookup.php',
 	'Wikibase\\Repo\\MediaWikiLocalizedTextProvider' => __DIR__ . '/includes/MediaWikiLocalizedTextProvider.php',
 	'Wikibase\\Repo\\Merge\\StatementsMerger' => __DIR__ . '/includes/Merge/StatementsMerger.php',
+	'Wikibase\\Repo\\Merge\\Validator\\NoCrossReferencingStatements' => __DIR__ . '/includes/Merge/Validator/NoCrossReferencingStatements.php',
 	'Wikibase\\Repo\\Modules\\DataTypesModule' => __DIR__ . '/includes/Modules/DataTypesModule.php',
 	'Wikibase\\Repo\\Modules\\EntityTypesConfigValueProvider' => __DIR__ . '/includes/Modules/EntityTypesConfigValueProvider.php',
 	'Wikibase\\Repo\\Modules\\MediaWikiConfigModule' => __DIR__ . '/includes/Modules/MediaWikiConfigModule.php',
