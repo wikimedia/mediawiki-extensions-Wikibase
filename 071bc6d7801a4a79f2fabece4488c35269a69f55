@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fa6cd38_9a33fa88",
+        "filename": "repo/tests/phpunit/includes/Merge/Validator/NoCrossReferencingStatementsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T15:26:58Z",
+      "side": 1,
+      "message": "Ain\u0027t nothing qualified about that.",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 13
+      },
+      "revId": "071bc6d7801a4a79f2fabece4488c35269a69f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1faedf9f_97742d10",
+        "filename": "repo/tests/phpunit/includes/Merge/Validator/NoCrossReferencingStatementsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T15:26:58Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "071bc6d7801a4a79f2fabece4488c35269a69f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cb5a829_7f9bbd50",
+        "filename": "repo/tests/phpunit/includes/Merge/Validator/NoCrossReferencingStatementsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T15:26:58Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 13
+      },
+      "revId": "071bc6d7801a4a79f2fabece4488c35269a69f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df01c1b4_4ce955ba",
+        "filename": "repo/tests/phpunit/includes/Merge/Validator/NoCrossReferencingStatementsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T15:26:58Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "071bc6d7801a4a79f2fabece4488c35269a69f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a760cd35_46611f88",
+        "filename": "repo/tests/phpunit/includes/Merge/Validator/NoCrossReferencingStatementsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T15:26:58Z",
+      "side": 1,
+      "message": "This one is qualified!",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 13
+      },
+      "revId": "071bc6d7801a4a79f2fabece4488c35269a69f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f683f59a_e99ecc0f",
+        "filename": "repo/tests/phpunit/includes/Merge/Validator/NoCrossReferencingStatementsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T15:26:58Z",
+      "side": 1,
+      "message": "not qualified",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 13
+      },
+      "revId": "071bc6d7801a4a79f2fabece4488c35269a69f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
