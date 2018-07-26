@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use Language;
 use OutputPage;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -240,7 +241,7 @@ class OutputPageBeforeHTMLHookHandler {
 			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $languageCode ),
+			new MediaWikiLocalizedTextProvider( Language::factory( $languageCode ) ),
 			$this->cookiePrefix,
 			$termsListItemsHtml ?: []
 		);

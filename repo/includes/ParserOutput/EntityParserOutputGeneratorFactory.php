@@ -142,7 +142,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityInfoBuilder,
 			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->templateFactory,
-			new MediaWikiLocalizedTextProvider( $userLanguage->getCode() ),
+			new MediaWikiLocalizedTextProvider( $userLanguage ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage->getCode()
