@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "188cf9d4_b7dd311f",
+        "filename": "repo/includes/Merge/EntityMerger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-26T20:36:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "958c5246_a1fa31af",
+      "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80df67ce_cfb7b4dc",
         "filename": "repo/includes/Merge/ItemMerger.php",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "There won\u0027t be a PropertyMerger, but there will be a LexemeMerger. There is currently a service called ItemMergeInteractor which has an ItemMerger to perform the merge. The ItemMergeInteractor loads, merges, saves and creates a redirect from the source entity to the target. All of this works the same for all types of entities, with the difference being the way they\u0027re merged. Making this ItemMergeInteractor an EntityMergeInteractor that holds a polymorphic EntityMerger sounds like a good idea to me.",
       "parentUuid": "80df67ce_cfb7b4dc",
+      "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d68bdea_ab44224d",
+        "filename": "repo/includes/Merge/ItemMerger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-26T20:36:05Z",
+      "side": 1,
+      "message": "I think you are likely better off creating dedicated Lexeme services. You will be duplicating some code which has an associated cost, though that cost is MUCH less than that of binding different entities together like this. You get strong coupling across different \"codebases\", different subdomains and different groups of people. I covered that in the linked blog post. Do you think what I wrote there does not apply here? If so I am very curious of why not.\n\nThis stuff is also relevant: https://www.entropywins.wtf/blog/2017/09/06/the-fallacy-of-dry/\n\nI don\u0027t strongly object against this change itself, though do think the generic handling approach is very bad for maintainability of Wikibase and that you should carefully consider each additional step you take down that path. Most of the cost of such coupling comes from the first few bits of it, and since there are already a pile, one more does comparatively little harm. (Yet it does make it harder to get to the point where you can reap the big benefits of going from some to 0 of the coupling.)",
+      "parentUuid": "a0c687e0_7b095d4a",
       "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
