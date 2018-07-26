@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "958c5246_a1fa31af",
+        "filename": "repo/includes/Merge/EntityMerger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T09:28:31Z",
+      "side": 1,
+      "message": "StatementsMerger works with EntityDocument objects too so for the sake of having \"all things that performs some sort of merges on entities\" it could implement this too. Typing this out made me realize that there is probably never going to be a situation where one would hint against EntityMerger and want a StatementMerger. I\u0027ll leave this here for now but might remove the \"parts of\" bit as this is obviously unclear.",
+      "parentUuid": "5b55d16e_1e0aaf0a",
+      "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80df67ce_cfb7b4dc",
         "filename": "repo/includes/Merge/ItemMerger.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-07-26T04:22:07Z",
       "side": 1,
       "message": "Should be items no?\n\nEdit:\n\noh I see... You are forced into it by the interface. I realized this as I was about to comment on the interface asking why it exists. Why do you have a generic interface to deal with all types of entities? Seems like you don\u0027t need that here. Will there be a PropertyMerger? And if so, can\u0027t you just have an ItemMerged and a PropertyMerger without a common interface?\n\nIf you have an EntitySomethingWhatever interface that gets an EntityDocument, this is a red flag to me. Almost always an anti-pattern. I wrote about that in some detail here https://www.entropywins.wtf/blog/2017/05/24/generic-entity-handling-code/",
+      "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0c687e0_7b095d4a",
+        "filename": "repo/includes/Merge/ItemMerger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-26T09:28:31Z",
+      "side": 1,
+      "message": "There won\u0027t be a PropertyMerger, but there will be a LexemeMerger. There is currently a service called ItemMergeInteractor which has an ItemMerger to perform the merge. The ItemMergeInteractor loads, merges, saves and creates a redirect from the source entity to the target. All of this works the same for all types of entities, with the difference being the way they\u0027re merged. Making this ItemMergeInteractor an EntityMergeInteractor that holds a polymorphic EntityMerger sounds like a good idea to me.",
+      "parentUuid": "80df67ce_cfb7b4dc",
       "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
