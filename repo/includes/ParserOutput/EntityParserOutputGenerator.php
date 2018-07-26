@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use Language;
 use InvalidArgumentException;
 use ParserOutput;
 use SpecialPage;
@@ -281,7 +282,7 @@ class EntityParserOutputGenerator {
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $this->languageCode ),
+			new MediaWikiLocalizedTextProvider( Language::factory( $this->languageCode ) ),
 			$languageDirectionalityLookup
 		);
 
