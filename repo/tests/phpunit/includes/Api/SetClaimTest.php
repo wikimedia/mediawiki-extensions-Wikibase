@@ -234,6 +234,29 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$statement->setGuid( 'XXXX' );
 		$cases['invalid GUID'] = [ $deletedEntityId, $statement, 'invalid-claim' ];
 
+		// Statement with a bad datavalue id, for example QQ1234
+		// https://phabricator.wikimedia.org/T200340
+		$statement = json_decode( '{
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "' . $p11->getSerialization() . '",
+                    "hash": "481c0a0ccbe34a98f027fbdd5b202a54c98f3494",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 4288,
+                            "id": "Q' . $q17->getSerialization() . '"
+                        },
+                        "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                },
+                "type": "statement",
+                "id": "' . $q17->getSerialization() . '$151fed00-42f6-4125-0316-736e56a12026",
+                "rank": "normal"
+            }', true );
+		$cases['invalid datavalue id'] = [ $q17, $statement, 'modification-failed' ];
+
 		return $cases;
 	}
 
@@ -344,8 +367,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 			}
 		} catch ( ApiUsageException $ex ) {
 			if ( $error ) {
+				/** @var \ApiMessage $msg */
 				$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
-				$this->assertEquals( $error, $msg->getApiCode(), 'expected error' );
+				$this->assertEquals( $error, $msg->getApiCode(), 'Wrong error code: ' . $msg->toString() );
 			} else {
 				$this->fail( "Caused unexpected error!" . $ex );
 			}
