@@ -249,7 +249,7 @@ class EntityParserOutputGenerator {
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $this->languageCode ),
+			new MediaWikiLocalizedTextProvider( $this->language ),
 			$languageDirectionalityLookup
 		);
 
