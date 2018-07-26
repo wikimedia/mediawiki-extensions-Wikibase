@@ -1793,7 +1793,7 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang->getCode() )
+			new MediaWikiLocalizedTextProvider( $lang )
 		);
 	}
 
