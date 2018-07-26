@@ -34,7 +34,7 @@ class EntityTermsViewFactory {
 		Language $language,
 		LanguageFallbackChain $fallbackChain
 	) {
-		$textProvider = new MediaWikiLocalizedTextProvider( $language->getCode() );
+		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
 		$languageNameLookup = new LanguageNameLookup( $language->getCode() );
