@@ -30,7 +30,7 @@ interface LocalizedTextProvider {
 	/**
 	 * @param string $key
 	 *
-	 * @return string The language of the text returned for a specific key
+	 * @return string The language code of the text returned for a specific key
 	 */
 	public function getLanguageOf( $key );
 
