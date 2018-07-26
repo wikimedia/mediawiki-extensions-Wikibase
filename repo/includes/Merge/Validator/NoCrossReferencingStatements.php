@@ -47,8 +47,7 @@ class NoCrossReferencingStatements {
 	}
 
 	private function checkStatementHasLink( Statement $statement, EntityId $id ) {
-		// TODO will be getAllSnaks() in next step
-		$snaks = [ $statement->getMainSnak() ];
+		$snaks = $statement->getAllSnaks();
 
 		foreach ( $snaks as $snak ) {
 			$this->checkSnakIsLink( $snak, $id );
