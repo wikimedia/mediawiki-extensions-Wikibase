@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
+use Language;
 use MediaWikiTestCase;
 use SpecialPage;
 use Title;
@@ -221,7 +222,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			'en'
+			Language::factory( 'en' )
 		);
 	}
 
@@ -412,7 +413,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getMock( LocalizedTextProvider::class ),
 			new EntityDataFormatProvider(),
 			$dataUpdaters,
-			'en'
+			Language::factory( 'en' )
 		);
 	}
 

@@ -145,7 +145,7 @@ class EntityParserOutputGeneratorFactory {
 			new MediaWikiLocalizedTextProvider( $userLanguage ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$userLanguage->getCode()
+			$userLanguage
 		);
 	}
 
