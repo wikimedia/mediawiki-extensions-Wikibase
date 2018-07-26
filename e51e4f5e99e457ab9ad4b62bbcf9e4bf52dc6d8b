@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5b55d16e_1e0aaf0a",
+        "filename": "repo/includes/Merge/EntityMerger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-07-26T04:22:41Z",
+      "side": 1,
+      "message": "I\u0027m confoosed by the \"or parts of entities\" part :)",
+      "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80df67ce_cfb7b4dc",
         "filename": "repo/includes/Merge/ItemMerger.php",
         "patchSetId": 2
