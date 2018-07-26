@@ -15,15 +15,18 @@ use Wikibase\View\LocalizedTextProvider;
 class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 
 	/**
-	 * @var string
+	 * @var Language
 	 */
-	private $languageCode;
+	private $language;
 
 	/**
-	 * @param string $languageCode
+	 * @param Language|string $language
 	 */
-	public function __construct( $languageCode ) {
-		$this->languageCode = $languageCode;
+	public function __construct( $language ) {
+		if ( !$language instanceof Language ) {
+			$language = Lanuage::factory( $language );
+		}
+		$this->language = $language;
 	}
 
 	/**
@@ -33,7 +36,7 @@ class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 	 * @return string The localized text
 	 */
 	public function get( $key, array $params = [] ) {
-		return ( new Message( $key, $params, Language::factory( $this->languageCode ) ) )->text();
+		return ( new Message( $key, $params, $this->language ) )->text();
 	}
 
 	/**
@@ -48,10 +51,10 @@ class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 	/**
 	 * @param string $key Currently ignored
 	 *
-	 * @return string The language of the text returned for a specific key.
+	 * @return string The language code of the text returned for a specific key.
 	 */
 	public function getLanguageOf( $key ) {
-		return $this->languageCode;
+		return $this->language->getCode();
 	}
 
 }
