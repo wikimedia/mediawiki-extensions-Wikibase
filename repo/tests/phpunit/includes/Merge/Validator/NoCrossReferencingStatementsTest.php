@@ -86,7 +86,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 		] );
 
 		yield 'item with cross-reference in statement\'s references' => [
-			true,
+			false,
 			NewItem::withId( 'Q1' )
 				->andStatement( $qualifiedStatement )
 				->build(),
@@ -100,7 +100,7 @@ class NoCrossReferencingStatementsTest extends TestCase {
 			->build();
 
 		yield 'item with cross-reference in statement\'s qualifiers' => [
-			true,
+			false,
 			NewItem::withId( 'Q1' )
 				->andStatement( $qualifiedStatement )
 				->build(),
