@@ -334,6 +334,30 @@
     },
     {
       "key": {
+        "uuid": "757b3492_9e537bac",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-07-27T14:06:40Z",
+      "side": 1,
+      "message": "That sounds like a good plan, the contract of BagOStuffs would then essentially follow the part of the contract for psr16 we are trying to adhere to here.",
+      "parentUuid": "35e927fd_1c4ead7c",
+      "range": {
+        "startLine": 79,
+        "startChar": 11,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "dca27125b5002d17b14f7364670c2cb764fb3e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ced71be2_2218b00a",
         "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
         "patchSetId": 11
