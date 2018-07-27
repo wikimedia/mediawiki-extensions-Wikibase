@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77c96c7a_81ac676b",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-27T09:52:11Z",
+      "side": 1,
+      "message": "Am I interpreting right that this method is now not used?",
+      "revId": "58eaf9e9ebe81624f8d8bbc6652a7a2fa8f92d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77adef33_98af1212",
+        "filename": "view/lib/wikibase-data-model",
+        "patchSetId": 24
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-07-27T09:52:11Z",
+      "side": 1,
+      "message": "unrelated, and causes merge conflict. will fix",
+      "revId": "58eaf9e9ebe81624f8d8bbc6652a7a2fa8f92d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
