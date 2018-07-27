@@ -2083,7 +2083,13 @@ class WikibaseRepo {
 	 * @return string[]
 	 */
 	public function getFulltextSearchTypes() {
-		return $this->entityTypeDefinitions->getFulltextSearchTypes();
+		$searchTypes = $this->entityTypeDefinitions->getFulltextSearchTypes();
+		foreach ( $searchTypes as $key => $value ) {
+			if ( is_callable( $value ) ) {
+				$searchTypes[$key] = $value();
+			}
+		}
+		return $searchTypes;
 	}
 
 }
