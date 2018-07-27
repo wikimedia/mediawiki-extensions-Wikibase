@@ -42,6 +42,7 @@
 	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<file>.</file>
+	<exclude-pattern>tests/phan/stubs</exclude-pattern>
 	<exclude-pattern>repo/tests/browser</exclude-pattern>
 	<exclude-pattern>view/lib/wikibase-api/WikibaseJavaScriptApi.php</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
