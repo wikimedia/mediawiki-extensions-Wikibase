@@ -246,8 +246,8 @@ class EntityTypeDefinitions {
 	}
 
 	/**
-	 * @return string[] An array mapping entity type identifiers
-	 * to fulltext search types.
+	 * @return string[]|callable[] An array mapping entity type identifiers
+	 * to fulltext search types or callables that return the search type as a string.
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getFulltextSearchTypes() {
