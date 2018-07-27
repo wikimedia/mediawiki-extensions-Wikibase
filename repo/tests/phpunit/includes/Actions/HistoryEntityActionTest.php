@@ -93,6 +93,9 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		$context->method( 'getLanguage' )
 			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
 
+		$context->method( 'getTitle' )
+			->willReturn( $this->getArticle()->getTitle() );
+
 		$output->expects( $this->once() )
 			->method( 'getContext' )
 			->willReturn( $context );
