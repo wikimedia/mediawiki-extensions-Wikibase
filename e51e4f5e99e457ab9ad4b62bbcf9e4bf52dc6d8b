@@ -105,6 +105,24 @@
       "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445ab710_a891429a",
+        "filename": "repo/includes/Merge/ItemMerger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-27T10:38:07Z",
+      "side": 1,
+      "message": "You probably have a point. I\u0027ll start with a more top-down approach and create a separate LexemeMergeInteractor and see how much overlap there is with the existing ItemMergeInteractor, and whether it makes sense to instead extract the different parts of it (loading, saving, redirect creation) so that the two MergeInteractors can remain separate and decoupled, but share code through composition.\n\nI\u0027ll still leave this patch open for now.",
+      "parentUuid": "9d68bdea_ab44224d",
+      "revId": "e51e4f5e99e457ab9ad4b62bbcf9e4bf52dc6d8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
