@@ -298,6 +298,7 @@
 	"wikibase-redirectentity-fromid": "Identyfikator, z którego idzie przekierowanie",
 	"wikibase-redirectentity-toid": "Identyfikator, na który jest przekierowanie",
 	"wikibase-redirectentity-submit": "Przekieruj",
+	"wikibase-redirect-permissiondenied": "Brak dostępu",
 	"wikibase-mylanguagefallbackchain-babel": "Możesz to zmienić wstawiając <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|swojej}} [[Special:MyPage|stronie użytkownika]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, przekonwertowano z $3 - $4",
 	"wikibase-api-no-such-sitelink": "Nie udało się znaleźć takiego linku do strony",

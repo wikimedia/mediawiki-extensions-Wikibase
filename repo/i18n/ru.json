@@ -319,6 +319,7 @@
 	"wikibase-redirectentity-fromid": "Идентификатор, с которого идёт перенаправление",
 	"wikibase-redirectentity-toid": "Идентификатор, на который идёт перенаправление",
 	"wikibase-redirectentity-submit": "Перенаправление",
+	"wikibase-redirect-permissiondenied": "Доступ запрещён",
 	"special-mylanguagefallbackchain": "Моя цепочка резервных языков",
 	"wikibase-mylanguagefallbackchain-text": "Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].",

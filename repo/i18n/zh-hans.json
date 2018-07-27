@@ -24,7 +24,8 @@
 			"NigelSoft",
 			"王庭茂",
 			"Duolaimi",
-			"凡人丶"
+			"凡人丶",
+			"Wxyveronica"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -326,6 +327,10 @@
 	"wikibase-redirectentity-fromid": "重定向的来自ID",
 	"wikibase-redirectentity-toid": "重定向的目标ID",
 	"wikibase-redirectentity-submit": "重定向",
+	"wikibase-redirect-target-is-incompatible": "不兼容的实体类型",
+	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook已停止重定向创建",
+	"wikibase-redirect-cant-redirect": "技术问题导致重定向创建失败",
+	"wikibase-redirect-permissiondenied": "没有权限",
 	"special-mylanguagefallbackchain": "我的语言备选链",
 	"wikibase-mylanguagefallbackchain-text": "用于为您显示实体标签的语言备选链显示在下方。",
 	"wikibase-mylanguagefallbackchain-babel": "您可以通过在{{GENDER:$1|您的}}[[Special:MyPage|用户页]]加入<nowiki>{{#babel: }}</nowiki>来编辑。",
@@ -571,6 +576,7 @@
 	"apihelp-query+wbsearch-example-1": "搜索英语中的“abc”，使用默认类型和限制",
 	"apihelp-query+wbsearch-example-2": "搜索英语“abc”，限定为50",
 	"apihelp-query+wbsearch-example-3": "搜索英语属性类型“alphabet”",
+	"apihelp-query+wbsearch-example-4": "搜索英文“alphabet”作为生成器",
 	"apihelp-query+wbsubscribers-description": "获取对提供实体的订阅。",
 	"apihelp-query+wbsubscribers-summary": "获取对提供实体的订阅。",
 	"apihelp-query+wbsubscribers-param-entities": "要获取订阅者的实体",

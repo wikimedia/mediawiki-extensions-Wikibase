@@ -4,7 +4,16 @@
 			"Vickylin77s"
 		]
 	},
+	"tooltip-t-wikibase": "militing i mapalitingay to a tatiri’en a kamok no pina’angan",
+	"wikibase-comment-update": "Mafalicay to  {{WBREPONAME}} a kamok",
 	"wikibase-dataitem": "{{WBREPONAME}} kamok",
+	"wikibase-editlinks": "  misinanot tongod",
+	"wikibase-editlinkstitle": "  misinanot to katatongod no caay kalecad a sowal",
+	"wikibase-linkitem-input-page": " o felih",
 	"wikibase-rc-hide-wikidata": "$1 a {{WBREPONAME}}",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawit"
+	"wikibase-rc-hide-wikidata-hide": " himed",
+	"wikibase-rc-hide-wikidata-show": "pahapinang",
+	"wikibase-rc-wikibase-edit-letter": "su-wey",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} mikawit",
+	"wikibase-otherprojects": "o roma a hahalakaen a demak"
 }

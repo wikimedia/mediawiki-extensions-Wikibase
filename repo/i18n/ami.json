@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vickylin77s"
+		]
+	},
+	"wikibase-edit": "misinanot",
+	"wikibase-cancel": "Sawaden miforic",
+	"wikibase-add": "mitongal",
+	"wikibase-entitytermsforlanguagelistview-description": " kimad",
+	"wikibase-label-empty": "caayay ho kasongila’ ko sakacipinang to to sowal",
+	"wikibase-description-empty": "caayay ho kasongila’ ko patonekan to sowal",
+	"wikibase-diffview-rank-normal": " o kananaman no mita rekad",
+	"wikibase-diffview-description": " kimad",
+	"wikibase-sitelink-page-edit-placeholder": " o felih",
+	"wikibase-sitelinks-special": "O no roma a wang-can",
+	"wikibase-remove": "falah",
+	"wikibase-move-up": "Milinah patalafaled/patalafafaw",
+	"wikibase-move-down": "Milinah patalaeno/patalararem",
+	"wikibase-statementview-rank-normal": " o kananaman no mita rekad",
+	"wikibase-entityselector-more": "matongal ko adihay",
+	"wikibase-itembytitle-lookup-page": " o felih",
+	"wikibase-itembytitle-submit": " saoo’",
+	"wikibase-gotolinkedpage-submit": " pidemak",
+	"wikibase-itemdisambiguation-submit": " saoo’",
+	"wikibase-newentity-description": " kimad",
+	"wikibase-newentity-submit": " misanga’",
+	"wikibase-setlabeldescriptionaliases-description-label": " kimad"
+}

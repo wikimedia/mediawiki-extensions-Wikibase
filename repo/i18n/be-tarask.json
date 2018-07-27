@@ -305,6 +305,7 @@
 	"wikibase-redirectentity-fromid": "Ідэнтыфікатар, зь якога перанакіроўваць",
 	"wikibase-redirectentity-toid": "Ідэнтыфікатар, на які перанакіроўваць",
 	"wikibase-redirectentity-submit": "Перанакіраваць",
+	"wikibase-redirect-origin-not-empty": "Немагчыма стварыць перанакіраваньне зь непустога элемэнту $1",
 	"special-mylanguagefallbackchain": "Мой парадак запасных моваў",
 	"wikibase-mylanguagefallbackchain-text": "Ніжэй пералічаны парадак запасных моваў, на якіх адлюстроўваюцца меткі аб’ектаў.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можаце зьмяніць яго, дадаўшы <nowiki>{{#babel: }}</nowiki> на [[Special:MyPage|Вашую старонку {{GENDER:$1|ўдзельніка|ўдзельніцы}}]].",
