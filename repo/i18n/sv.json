@@ -394,6 +394,7 @@
 	"wikibase-search-bad-entity-type": "Trasig entitetstyp: $1",
 	"wikibase-search-bad-profile-name": "Trasig sökning av profilnamn: $1",
 	"wikibase-search-namespace-mix": "Det finns för tillfället inget stöd för att blanda entitet- och artikelnamnrymder i sökningen. Endast entitetsnamnrymder kommer att sökas igenom.",
+	"wikibase-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
 	"apihelp-wbavailablebadges-description": "Frågar efter tillgängliga emblemföremål.",
 	"apihelp-wbavailablebadges-summary": "Frågar efter tillgängliga emblemföremål.",
 	"apihelp-wbavailablebadges-example-1": "Frågar efter alla tillgängliga emblemföremål",

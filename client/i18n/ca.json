@@ -34,6 +34,7 @@
 	"apihelp-query+pageterms-param-terms": "Els tipus de termes que s'obtindran. P. ex., 'etiqueta', 'descripció', 'àlies'.",
 	"apihelp-query+description-extended-description": "La descripció és text pla, en una sola línia, però altrament arbitrària (potencialment inclou etiquetes d'HTML crues, que també poden interpretar-se com a text pla). No s'ha d'utilitzar amb HTML no escapat.",
 	"apihelp-query+description-example": "Aconsegueix la descripció de la pàgina 'Londres'.",
+	"apihelp-query+wikibase-summary": "Obté informació del client de Wikibase i del repositori de Wikibase associat.",
 	"wikibase-after-page-move": "També podeu [$1 actualitzar] l'element associat de {{WBREPONAME}} per a mantenir els enllaços d'idioma en la pàgina que s'ha desplaçat.",
 	"wikibase-after-page-move-queued": "L'[$1 element de {{WBREPONAME}}] associat a aquesta pàgina s'actualitzarà automàticament. Tingueu en compte que això potser no és immediat.",
 	"wikibase-after-page-delete-queued": "L'[$1 element de {{WBREPONAME}}] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",

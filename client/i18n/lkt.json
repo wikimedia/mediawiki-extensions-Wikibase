@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Peter57770"
+			"Peter57770",
+			"R12ntech"
 		]
 	},
 	"tooltip-t-wikibase": "Wamnáyaŋpi wóičhikȟoyake",
 	"wikibase-dataitem": "{{WBREPONAME}} wamnáyaŋpi",
 	"wikibase-editlinks": "Wóičhikȟoyake kiŋ yutȟókča yo/ye",
-	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča yo/ye"
+	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča yo/ye",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} yutȟókeča"
 }

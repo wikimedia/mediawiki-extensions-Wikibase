@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Peter57770"
+			"Peter57770",
+			"R12ntech"
 		]
 	},
-	"wikibase-edit": "Yutȟókeča yo/ye"
+	"wikibase-edit": "Yutȟókeča yo/ye",
+	"wikibase-itembytitle-submit": "Wóle",
+	"wikibase-itemdisambiguation-submit": "Wóle"
 }
