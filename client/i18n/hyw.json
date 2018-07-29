@@ -2,14 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"ArmenBakkalian",
-			"Azniv Stepanian"
+			"Azniv Stepanian",
+			"Rajemian"
 		]
 	},
+	"tooltip-t-wikibase": "Յղում տուեալներու աղբիւրի համապատասխան գրառման",
+	"wikibase-comment-update": "{{WBREPONAME}} տարրը փոփոխուած է",
+	"wikibase-dataitem": "{{WBREPONAME}}ի տարր",
 	"wikibase-editlinks": "Խմբագրել յղումները",
 	"wikibase-editlinkstitle": "‎Խմբագրել միջլեզուական յղումները",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Թաքցնել",
-	"wikibase-rc-hide-wikidata-show": "Ցուցադրել",
+	"wikibase-rc-hide-wikidata-show": "Ցուցնել",
 	"wikibase-rc-wikibase-edit-letter": "Տ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
 	"wikibase-otherprojects": "Այլ նախագիծերու մէջ"

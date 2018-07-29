@@ -438,6 +438,8 @@
 	"wikibase-search-bad-entity-type": "Type invalide d'entité: $1",
 	"wikibase-search-bad-profile-name": "Nom de profil recherché invalide: $1",
 	"wikibase-search-namespace-mix": "Il n'est actuellement pas autorisé pour une recherche, d'utiliser les espaces de noms des entités avec ceux des articles. La recherche ne sera faite que sur l'espace de noms des entités.",
+	"wikibase-search-config-notfound": "Configuration de recherche en plein texte non trouvée : $1",
+	"wikibase-search-config-badclass": "Mauvaise classe de constructeur de requête : $1",
 	"apihelp-wbavailablebadges-description": "Recherche les éléments de badge disponibles.",
 	"apihelp-wbavailablebadges-summary": "Recherche les éléments de badge disponibles.",
 	"apihelp-wbavailablebadges-example-1": "Recherche tous les éléments de badge disponibles",
