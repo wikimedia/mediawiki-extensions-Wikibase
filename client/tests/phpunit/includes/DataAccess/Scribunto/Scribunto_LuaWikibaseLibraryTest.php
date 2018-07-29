@@ -115,9 +115,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testGetEntity_hasLanguageFallback() {
-		$this->setMwGlobals( [
-			'wgContLang' => Language::factory( 'ku-arab' )
-		] );
+		$this->setContentLang( 'ku-arab' );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$entityArray = $luaWikibaseLibrary->getEntity( 'Q885588' );
@@ -245,7 +243,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
 	public function testGetLabel( $allowDataAccessInUserLanguage ) {
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'en' ) );
+		$this->setContentLang( 'en' );
 
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
