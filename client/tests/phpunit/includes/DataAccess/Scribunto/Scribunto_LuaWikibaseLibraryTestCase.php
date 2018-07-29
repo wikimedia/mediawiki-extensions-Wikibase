@@ -140,7 +140,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			'Mocking the default ClientStore failed'
 		);
 
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
+		$this->setContentLang( 'de' ) );
 	}
 
 	protected function tearDown() {
