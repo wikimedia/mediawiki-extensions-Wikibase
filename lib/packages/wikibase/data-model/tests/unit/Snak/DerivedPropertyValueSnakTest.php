@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\DerivedPropertyValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Snak\DerivedPropertyValueSnak
+ * @covers \Wikibase\DataModel\Snak\DerivedPropertyValueSnak
  *
  * @group Wikibase
  * @group WikibaseDataModel

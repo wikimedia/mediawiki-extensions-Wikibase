@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
 
 /**
- * @covers Wikibase\DataModel\Entity\ItemIdSet
+ * @covers \Wikibase\DataModel\Entity\ItemIdSet
  *
  * @group Wikibase
  * @group WikibaseDataModel

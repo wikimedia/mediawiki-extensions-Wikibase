@@ -9,7 +9,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Internal\MapValueHasher
+ * @covers \Wikibase\DataModel\Internal\MapValueHasher
  *
  * @group Wikibase
  * @group WikibaseDataModel

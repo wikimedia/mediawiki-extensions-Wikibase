@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\ByPropertyIdArray
+ * @covers \Wikibase\DataModel\ByPropertyIdArray
  *
  * @group Wikibase
  * @group WikibaseDataModel

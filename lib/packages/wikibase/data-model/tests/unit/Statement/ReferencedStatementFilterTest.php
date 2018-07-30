@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\ReferencedStatementFilter;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Statement\ReferencedStatementFilter
+ * @covers \Wikibase\DataModel\Statement\ReferencedStatementFilter
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

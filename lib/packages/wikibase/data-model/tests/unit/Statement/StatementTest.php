@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Statement\Statement
+ * @covers \Wikibase\DataModel\Statement\Statement
  *
  * @group Wikibase
  * @group WikibaseDataModel

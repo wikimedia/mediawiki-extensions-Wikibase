@@ -10,7 +10,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
- * @covers Wikibase\DataModel\SiteLinkList
+ * @covers \Wikibase\DataModel\SiteLinkList
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

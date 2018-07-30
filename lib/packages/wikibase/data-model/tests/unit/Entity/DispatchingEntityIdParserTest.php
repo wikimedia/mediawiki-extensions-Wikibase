@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\DataModel\Entity\DispatchingEntityIdParser
+ * @covers \Wikibase\DataModel\Entity\DispatchingEntityIdParser
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

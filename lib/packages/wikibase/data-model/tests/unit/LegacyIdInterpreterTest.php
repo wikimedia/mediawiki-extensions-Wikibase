@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
- * @covers Wikibase\DataModel\LegacyIdInterpreter
+ * @covers \Wikibase\DataModel\LegacyIdInterpreter
  *
  * @group Wikibase
  * @group WikibaseDataModel

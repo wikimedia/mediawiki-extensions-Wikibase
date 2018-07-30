@@ -11,8 +11,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * @covers Wikibase\DataModel\Snak\PropertyNoValueSnak
- * @covers Wikibase\DataModel\Snak\SnakObject
+ * @covers \Wikibase\DataModel\Snak\PropertyNoValueSnak
+ * @covers \Wikibase\DataModel\Snak\SnakObject
  *
  * @group Wikibase
  * @group WikibaseDataModel

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\ReferenceList
+ * @covers \Wikibase\DataModel\ReferenceList
  *
  * @group Wikibase
  * @group WikibaseDataModel

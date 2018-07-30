@@ -6,7 +6,7 @@ use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\DataModel\Assert\RepositoryNameAssert
+ * @covers \Wikibase\DataModel\Assert\RepositoryNameAssert
  *
  * @license GPL-2.0+
  */

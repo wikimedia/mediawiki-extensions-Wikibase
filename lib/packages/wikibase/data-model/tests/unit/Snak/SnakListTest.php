@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Snak\SnakList
+ * @covers \Wikibase\DataModel\Snak\SnakList
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

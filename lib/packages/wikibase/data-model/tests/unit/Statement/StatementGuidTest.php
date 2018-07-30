@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\DataModel\Statement\StatementGuid
+ * @covers \Wikibase\DataModel\Statement\StatementGuid
  *
  * @group Wikibase
  * @group WikibaseDataModel

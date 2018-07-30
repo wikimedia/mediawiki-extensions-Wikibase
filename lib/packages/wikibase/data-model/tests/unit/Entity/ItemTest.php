@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Entity\Item
+ * @covers \Wikibase\DataModel\Entity\Item
  *
  * @group Wikibase
  * @group WikibaseDataModel

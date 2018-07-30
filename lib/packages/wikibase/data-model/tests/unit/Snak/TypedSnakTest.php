@@ -6,7 +6,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\TypedSnak;
 
 /**
- * @covers Wikibase\DataModel\Snak\TypedSnak
+ * @covers \Wikibase\DataModel\Snak\TypedSnak
  *
  * @group Wikibase
  * @group WikibaseDataModel

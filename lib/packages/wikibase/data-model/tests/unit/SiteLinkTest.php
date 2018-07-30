@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\SiteLink
+ * @covers \Wikibase\DataModel\SiteLink
  *
  * @group Wikibase
  * @group WikibaseDataModel
