@@ -235,6 +235,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ParserOutput\\DispatchingEntityViewFactory' => __DIR__ . '/includes/ParserOutput/DispatchingEntityViewFactory.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityParserOutputDataUpdaterCollection' => __DIR__ . '/includes/ParserOutput/EntityParserOutputDataUpdaterCollection.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityParserOutputDataUpdater' => __DIR__ . '/includes/ParserOutput/EntityParserOutputDataUpdater.php',
+	'Wikibase\\Repo\\ParserOutput\\EntityPageTitleTextGenerator' => __DIR__ . '/includes/ParserOutput/EntityPageTitleTextGenerator.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityParserOutputGenerator' => __DIR__ . '/includes/ParserOutput/EntityParserOutputGenerator.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityStatementDataUpdaterAdapter' => __DIR__ . '/includes/ParserOutput/EntityStatementDataUpdaterAdapter.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityParserOutputGeneratorFactory' => __DIR__ . '/includes/ParserOutput/EntityParserOutputGeneratorFactory.php',

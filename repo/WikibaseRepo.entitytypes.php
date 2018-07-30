@@ -64,6 +64,20 @@ return [
 				$entityTermsView
 			);
 		},
+		'page-title-text-generator-callback' => function($entity, $languageFallbackChain) {
+			$titleText = null;
+
+			if ( $entity instanceof LabelsProvider ) {
+				$labels = $entity->getLabels()->toTextArray();
+				$preferred = $languageFallbackChain->extractPreferredValue( $labels );
+
+				if ( is_array( $preferred ) ) {
+					$titleText = $preferred['value'];
+				}
+			}
+
+			return $titleText;
+		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_ITEM,
 		'content-handler-factory-callback' => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -190,6 +204,20 @@ return [
 				$editSectionGenerator,
 				$entityTermsView
 			);
+		},
+		'page-title-text-generator-callback' => function($entity, $languageFallbackChain) {
+			$titleText = null;
+
+			if ( $entity instanceof LabelsProvider ) {
+				$labels = $entity->getLabels()->toTextArray();
+				$preferred = $languageFallbackChain->extractPreferredValue( $labels );
+
+				if ( is_array( $preferred ) ) {
+					$titleText = $preferred['value'];
+				}
+			}
+
+			return $titleText;
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_PROPERTY,
 		'content-handler-factory-callback' => function() {

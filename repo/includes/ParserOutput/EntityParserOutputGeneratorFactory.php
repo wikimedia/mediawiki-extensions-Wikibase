@@ -103,6 +103,7 @@ class EntityParserOutputGeneratorFactory {
 		DispatchingEntityViewFactory $entityViewFactory,
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
+		EntityPageTitleTextGenerator $entityPageTitleTextGenerator,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
@@ -116,6 +117,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityPageTitleTextGenerator = $entityPageTitleTextGenerator;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
@@ -140,6 +142,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilder,
+			$this->entityPageTitleTextGenerator,
 			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->templateFactory,
 			new MediaWikiLocalizedTextProvider( $userLanguage->getCode() ),

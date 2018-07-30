@@ -107,6 +107,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
+use Wikibase\Repo\ParserOutput\EntityPageTitleTextGenerator;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
@@ -1713,6 +1714,10 @@ class WikibaseRepo {
 		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() );
 	}
 
+	public function getEntityPageTitleTextGenerator() {
+		return new EntityPageTitleTextGenerator( $this->entityTypeDefinitions->getPageTitleTextGeneratorCallbacks() );
+	}
+
 	/**
 	 * @return EntityParserOutputGeneratorFactory
 	 */
@@ -1725,6 +1730,7 @@ class WikibaseRepo {
 			$this->getEntityViewFactory(),
 			$this->getStore()->getEntityInfoBuilder(),
 			$this->getEntityTitleLookup(),
+			$this->getEntityPageTitleTextGenerator(),
 			$this->getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,

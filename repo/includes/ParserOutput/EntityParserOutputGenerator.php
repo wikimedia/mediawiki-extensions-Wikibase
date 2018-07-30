@@ -60,6 +60,11 @@ class EntityParserOutputGenerator {
 	private $entityInfoBuilder;
 
 	/**
+	 * @var EntityPageTitleTextGenerator
+	 */
+	private $entityPageTitleTextGenerator;
+
+	/**
 	 * @var LanguageFallbackChain
 	 */
 	private $languageFallbackChain;
@@ -94,6 +99,7 @@ class EntityParserOutputGenerator {
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityPageTitleTextGenerator $entityPageTitleTextGenerator
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
@@ -106,6 +112,7 @@ class EntityParserOutputGenerator {
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityInfoBuilder $entityInfoBuilder,
+		EntityPageTitleTextGenerator $entityPageTitleTextGenerator,
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		LocalizedTextProvider $textProvider,
@@ -117,6 +124,7 @@ class EntityParserOutputGenerator {
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
+		$this->entityPageTitleTextGenerator = $entityPageTitleTextGenerator;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->templateFactory = $templateFactory;
 		$this->textProvider = $textProvider;
@@ -235,14 +243,7 @@ class EntityParserOutputGenerator {
 	private function getTitleText( EntityDocument $entity ) {
 		$titleText = null;
 
-		if ( $entity instanceof LabelsProvider ) {
-			$labels = $entity->getLabels()->toTextArray();
-			$preferred = $this->languageFallbackChain->extractPreferredValue( $labels );
-
-			if ( is_array( $preferred ) ) {
-				$titleText = $preferred['value'];
-			}
-		}
+		$titleText = $this->entityPageTitleTextGenerator->generatePageTitleText($entity, $this->languageFallbackChain);
 
 		if ( !is_string( $titleText ) ) {
 			$entityId = $entity->getId();

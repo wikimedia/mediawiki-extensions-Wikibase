@@ -116,6 +116,13 @@ class EntityTypeDefinitions {
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	public function getPageTitleTextGeneratorCallbacks() {
+		return $this->getMapForDefinitionField( 'page-title-text-generator-callback' );
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public function getContentModelIds() {
