@@ -7,7 +7,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 
 /**
- * @covers Wikibase\DataModel\Term\AliasGroup
+ * @covers \Wikibase\DataModel\Term\AliasGroup
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

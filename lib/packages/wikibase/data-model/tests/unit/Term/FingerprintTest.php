@@ -10,12 +10,12 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Term\Fingerprint
- * @uses Wikibase\DataModel\Term\AliasGroup
- * @uses Wikibase\DataModel\Term\AliasGroupList
- * @uses Wikibase\DataModel\Term\Fingerprint
- * @uses Wikibase\DataModel\Term\Term
- * @uses Wikibase\DataModel\Term\TermList
+ * @covers \Wikibase\DataModel\Term\Fingerprint
+ * @uses \Wikibase\DataModel\Term\AliasGroup
+ * @uses \Wikibase\DataModel\Term\AliasGroupList
+ * @uses \Wikibase\DataModel\Term\Fingerprint
+ * @uses \Wikibase\DataModel\Term\Term
+ * @uses \Wikibase\DataModel\Term\TermList
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Fixtures\CustomEntityId;
 
 /**
- * @covers Wikibase\DataModel\Entity\EntityIdValue
+ * @covers \Wikibase\DataModel\Entity\EntityIdValue
  *
  * @group Wikibase
  * @group WikibaseDataModel

@@ -9,8 +9,8 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
- * @covers Wikibase\DataModel\Term\AliasGroupList
- * @uses Wikibase\DataModel\Term\AliasGroup
+ * @covers \Wikibase\DataModel\Term\AliasGroupList
+ * @uses \Wikibase\DataModel\Term\AliasGroup
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

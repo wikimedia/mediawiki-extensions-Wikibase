@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 
 /**
- * @covers Wikibase\DataModel\Entity\ItemIdParser
+ * @covers \Wikibase\DataModel\Entity\ItemIdParser
  *
  * @license GPL-2.0+
  * @author Thiemo Kreuz

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 
 /**
- * @covers Wikibase\DataModel\Term\AliasGroupFallback
+ * @covers \Wikibase\DataModel\Term\AliasGroupFallback
  *
  * @license GPL-2.0+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >

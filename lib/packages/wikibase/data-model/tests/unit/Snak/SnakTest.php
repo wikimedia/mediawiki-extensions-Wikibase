@@ -11,15 +11,15 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * @covers Wikibase\DataModel\Snak\PropertyNoValueSnak
- * @covers Wikibase\DataModel\Snak\PropertySomeValueSnak
- * @covers Wikibase\DataModel\Snak\PropertyValueSnak
- * @covers Wikibase\DataModel\Snak\Snak
- * @uses Wikibase\DataModel\Snak\SnakObject
+ * @covers \Wikibase\DataModel\Snak\PropertyNoValueSnak
+ * @covers \Wikibase\DataModel\Snak\PropertySomeValueSnak
+ * @covers \Wikibase\DataModel\Snak\PropertyValueSnak
+ * @covers \Wikibase\DataModel\Snak\Snak
+ * @uses \Wikibase\DataModel\Snak\SnakObject
  * @uses DataValues\NumberValue
  * @uses DataValues\StringValue
- * @uses Wikibase\DataModel\Entity\EntityId
- * @uses Wikibase\DataModel\Entity\PropertyId
+ * @uses \Wikibase\DataModel\Entity\EntityId
+ * @uses \Wikibase\DataModel\Entity\PropertyId
  *
  * @group Wikibase
  * @group WikibaseDataModel

@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\DataModel\Entity\ItemId
- * @covers Wikibase\DataModel\Entity\EntityId
+ * @covers \Wikibase\DataModel\Entity\ItemId
+ * @covers \Wikibase\DataModel\Entity\EntityId
  *
  * @group Wikibase
  * @group WikibaseDataModel

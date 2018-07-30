@@ -9,9 +9,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\DataModel\Entity\EntityId
- * @uses Wikibase\DataModel\Entity\ItemId
- * @uses Wikibase\DataModel\Entity\PropertyId
+ * @covers \Wikibase\DataModel\Entity\EntityId
+ * @uses \Wikibase\DataModel\Entity\ItemId
+ * @uses \Wikibase\DataModel\Entity\PropertyId
  *
  * @group Wikibase
  * @group WikibaseDataModel

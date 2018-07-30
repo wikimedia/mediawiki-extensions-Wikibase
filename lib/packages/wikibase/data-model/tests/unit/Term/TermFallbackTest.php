@@ -7,7 +7,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 
 /**
- * @covers Wikibase\DataModel\Term\TermFallback
+ * @covers \Wikibase\DataModel\Term\TermFallback
  *
  * @license GPL-2.0+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
