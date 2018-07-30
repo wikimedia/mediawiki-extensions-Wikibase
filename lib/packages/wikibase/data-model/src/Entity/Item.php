@@ -26,7 +26,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Item implements EntityDocument, FingerprintProvider, StatementListHolder,
+class Item implements StatementListProvidingEntity, FingerprintProvider, StatementListHolder,
 	LabelsProvider, DescriptionsProvider, AliasesProvider {
 
 	const ENTITY_TYPE = 'item';

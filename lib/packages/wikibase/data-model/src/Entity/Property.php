@@ -23,7 +23,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Property implements EntityDocument, FingerprintProvider, StatementListHolder,
+class Property implements StatementListProvidingEntity, FingerprintProvider, StatementListHolder,
 	LabelsProvider, DescriptionsProvider, AliasesProvider {
 
 	const ENTITY_TYPE = 'property';
