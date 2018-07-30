@@ -38,6 +38,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$this->setupUser();
 
 		if ( !$isSetup ) {
+			$this->overrideMwServices();
 			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
