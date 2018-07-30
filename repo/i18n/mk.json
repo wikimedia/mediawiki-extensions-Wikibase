@@ -300,6 +300,8 @@
 	"wikibase-redirectentity-fromid": "Назнака од која се пренасочува",
 	"wikibase-redirectentity-toid": "Назнака кон која се пренасочува",
 	"wikibase-redirectentity-submit": "Пренасочи",
+	"wikibase-redirect-target-is-redirect": "Единицата $1 е пренасочување",
+	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook запре создавање на пренасочување",
 	"special-mylanguagefallbackchain": "Мој ланец на резервни јазици",
 	"wikibase-mylanguagefallbackchain-text": "Подолу е прикажан ланецот на резервни јазици што се користи за да ви ги прикаже вашите предметни натписи.",
 	"wikibase-mylanguagefallbackchain-babel": "Можете да го измените, ставајќи <nowiki>{{#babel: }}</nowiki> на {{GENDER:$1|вашата}} [[Special:MyPage|корисничка страница]].",

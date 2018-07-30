@@ -5,6 +5,7 @@
 			"Chaduvari"
 		]
 	},
+	"wikibase-deletedentity-item": "తొలగించిన అంశం",
 	"wikibase-error-remove-generic": "ఏదో లోపం కారణంగా తీసివేయలేకపోయాం.",
 	"wikibase-error-save-connection": "కనెక్షను లోపం కారణంగా భద్రపరచలేకపోయాం. మీ అంతర్జాల కనెక్షన్ను చెక్ చేసుకోండి.",
 	"wikibase-timedetails-time": "సమయం",
@@ -25,7 +26,13 @@
 	"datatypes-type-time": "సమయం",
 	"datatypes-type-wikibase-item": "అంశం",
 	"datatypes-type-wikibase-property": "లక్షణం",
+	"wikibase-entity-summary-wbsetitem": "కొత్త అంశాన్ని సృష్టించారు",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "[$2] బ్యాడ్జీలతో కలిసిన లింకును చేర్చాం",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "[$2] కొరకు బ్యాడ్జీలను మార్చాం",
-	"wikibase-entity-summary-wbsetsitelink-set-both": "[$2] కు లింకు, బ్యాడ్జీలను మార్చాం"
+	"wikibase-entity-summary-wbsetsitelink-set-both": "[$2] కు లింకు, బ్యాడ్జీలను మార్చాం",
+	"wikibase-entity-summary-special-create-item": "{{PLURAL:$1|విలువ|విలువల}}తో ఒక [$2] అంశాన్ని సృష్టించారు",
+	"wikibase-entity-summary-wbmergeitems-from": "$3 లోని అంశాన్ని విలీనం చేసారు",
+	"wikibase-item-summary-wbcreate-new": "కొత్త అంశాన్ని సృష్టించారు",
+	"wikibase-item-summary-wbeditentity-create": "కొత్త అంశాన్ని సృష్టించారు",
+	"wikibase-item-summary-wbeditentity-override": "కొత్త అంశాన్ని సృష్టించారు"
 }

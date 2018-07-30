@@ -307,6 +307,7 @@
 	"wikibase-redirectentity-submit": "Перанакіраваць",
 	"wikibase-redirect-origin-not-empty": "Немагчыма стварыць перанакіраваньне зь непустога элемэнту $1",
 	"wikibase-redirect-no-such-entity": "Не атрымалася знайсьці элемэнт $1",
+	"wikibase-redirect-cant-load-entity-content": "Немагчыма атрымаць доступ да зьместу, вэрсія магла быць выдаленая.",
 	"special-mylanguagefallbackchain": "Мой парадак запасных моваў",
 	"wikibase-mylanguagefallbackchain-text": "Ніжэй пералічаны парадак запасных моваў, на якіх адлюстроўваюцца меткі аб’ектаў.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можаце зьмяніць яго, дадаўшы <nowiki>{{#babel: }}</nowiki> на [[Special:MyPage|Вашую старонку {{GENDER:$1|ўдзельніка|ўдзельніцы}}]].",
