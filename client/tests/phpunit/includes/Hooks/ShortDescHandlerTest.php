@@ -85,6 +85,8 @@ class ShortDescHandlerTest extends TestCase {
 		$output = $this->getMockBuilder( \OutputPage::class )->disableOriginalConstructor()->getMock();
 		$parser = $this->getMockBuilder( \Parser::class )->disableOriginalConstructor()->getMock();
 		$parser->expects( $this->any() )->method( 'getOutput' )->willReturn( $output );
+		$parser->expects( $this->any() )->method( 'getMagicWordFactory' )->willReturn(
+			MediaWikiServices::getInstance()->getMagicWordFactory() );
 		if ( $pageProperty === null ) {
 			$output->expects( $this->never() )->method( 'setProperty' );
 		} else {
