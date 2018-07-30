@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-use Language;
 use PHPUnit_Framework_TestSuite;
 use Scribunto_LuaEngineTestBase;
 use Title;
@@ -140,7 +139,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			'Mocking the default ClientStore failed'
 		);
 
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
+		$this->setContentLang( 'de' );
 	}
 
 	protected function tearDown() {
