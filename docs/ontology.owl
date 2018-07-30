@@ -405,4 +405,18 @@
       <rdfs:comment>Wiki group that the site belongs to.</rdfs:comment>
   </owl:DatatypeProperty>
 
+  <!--
+    For WikibaseQualityConstraint extension. Published by action=constraintsrdf, e.g.:
+    https://www.wikidata.org/wiki/Q1?action=constraintsrdf
+    See documentation at: 
+    https://www.mediawiki.org/wiki/Wikibase_Quality_Extensions
+    https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format#Constraints
+  -->
+  <owl:ObjectProperty rdf:about="&wikibase;hasViolationForConstraint">
+      <rdfs:label>hasViolationForConstraint</rdfs:label>
+      <rdfs:comment>Link between statement violating constraint and the constraint.</rdfs:comment>
+      <rdfs:domain rdf:resource="&wikibase;Statement"/>
+      <rdfs:range rdf:resource="&wikibase;Statement"/>
+  </owl:ObjectProperty>
+
 </rdf:RDF>
