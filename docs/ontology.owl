@@ -405,4 +405,11 @@
       <rdfs:comment>Wiki group that the site belongs to.</rdfs:comment>
   </owl:DatatypeProperty>
 
+  <owl:ObjectProperty rdf:about="&wikibase;hasViolationForConstraint">
+      <rdfs:label>hasViolationForConstraint</rdfs:label>
+      <rdfs:comment>Link between statement violating constraint and the constraint.</rdfs:comment>
+      <rdfs:domain rdf:resource="&wikibase;Statement"/>
+      <rdfs:range rdf:resource="&wikibase;Statement"/>
+  </owl:ObjectProperty>
+
 </rdf:RDF>
