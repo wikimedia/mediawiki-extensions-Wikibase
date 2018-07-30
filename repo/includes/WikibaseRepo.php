@@ -243,11 +243,6 @@ class WikibaseRepo {
 	private $exceptionLocalizer = null;
 
 	/**
-	 * @var SiteLookup|null
-	 */
-	private $siteLookup = null;
-
-	/**
 	 * @var Store|null
 	 */
 	private $store = null;
@@ -1226,11 +1221,7 @@ class WikibaseRepo {
 	 * @return SiteLookup
 	 */
 	public function getSiteLookup() {
-		if ( $this->siteLookup === null ) {
-			$this->siteLookup = MediaWikiServices::getInstance()->getSiteLookup();
-		}
-
-		return $this->siteLookup;
+		return MediaWikiServices::getInstance()->getSiteLookup();
 	}
 
 	/**
