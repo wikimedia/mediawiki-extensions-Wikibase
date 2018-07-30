@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37d39ed7_c86bb1f3",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-30T12:28:06Z",
+      "side": 1,
+      "message": "I would prefer if the callback only returned a service that knows how to generate the title text. This way it becomes better testable and dependencies would be injected in a cleaner way, especially given lexemes don\u0027t care at all about the $languageFallbackChain as far as I know.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "3b3f70acbdecad647858dfd9d64650bfab410335",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0830dcf8_2f5ce6be",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-07-30T12:28:06Z",
+      "side": 1,
+      "message": "Given we have access to the entity specific EntityView object here, how terrible do you think it would be to let it handle the title, too?",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 44
+      },
+      "revId": "3b3f70acbdecad647858dfd9d64650bfab410335",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
