@@ -5,6 +5,8 @@
 			"Veeven"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" విలువల వాడకానికి ఇంకా మద్దతు లేదు.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" డేటా రకానికి విలువల వాడకానికి ఇంకా మద్దతు లేదు.",
 	"valueview-expert-emptyvalue-empty": "ఖాళీ",
 	"valueview-expert-globecoordinateinput-customprecision": "ప్రత్యేక ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "గ్రెగోరియన్",
@@ -12,5 +14,6 @@
 	"valueview-expert-timeinput-calendar": "క్యాలెండరు:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "భాష (తప్పనిసరి):",
+	"valueview-expertextender-unitsuggester-label": "కొలమానం (ఐచ్ఛికం):",
 	"valueview-preview-label": "ఇలాఅ చూపిస్తాం:"
 }
