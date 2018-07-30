@@ -97,8 +97,6 @@ final class ClientHooks {
 			return;
 		}
 
-		StubObject::unstub( $wgContLang );
-
 		$formatter = new AutoCommentFormatter( $wgContLang, [ 'wikibase-entity' ] );
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
