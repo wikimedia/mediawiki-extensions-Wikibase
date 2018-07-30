@@ -39,7 +39,6 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$builder = new GenericEntityInfoBuilder(
-			$ids,
 			new ItemIdParser(),
 			$entityRevisionLookup
 		);
