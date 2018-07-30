@@ -185,4 +185,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		return $this->matchStatements( $statements );
 	}
 
+	public function DO_NOT_MERGE() {
+		throw new \RuntimeException('Why did you call me?')
+	}
 }
