@@ -177,6 +177,7 @@ class WikiPageEntityStore implements EntityStore {
 		$flags = 0,
 		$baseRevId = false
 	) {
+		wfDebugLog( __CLASS__, $entity->getId() );
 		if ( $entity->getId() === null ) {
 			if ( !( $flags & EDIT_NEW ) ) {
 				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
@@ -184,6 +185,7 @@ class WikiPageEntityStore implements EntityStore {
 
 			$this->assignFreshId( $entity );
 		}
+		wfDebugLog( __CLASS__, $entity->getId() );
 
 		$this->assertLocalEntityId( $entity->getId() );
 
