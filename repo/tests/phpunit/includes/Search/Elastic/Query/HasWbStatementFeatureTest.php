@@ -122,7 +122,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	public function testApply( array $expected = null, $term, $foreignRepoNames ) {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
 		$kwAssertions = $this->getKWAssertions();
-		$expectedWarnings = $expected === null ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$expectedWarnings = $expected === null ? [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
 		if ( $expected === null ) {
@@ -151,7 +151,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 
 	public function testInvalidStatementWarning() {
 		$feature = new HasWbStatementFeature( [ 'P999' ] );
-		$expectedWarnings = [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
+		$expectedWarnings = [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, 'haswbstatement:INVALID', [ 'statements' => [] ], $expectedWarnings );
 		$kwAssertions->assertExpandedData( $feature, 'haswbstatement:INVALID', [], [] );
@@ -164,7 +164,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	 */
 	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
-		$expectedWarnings = $warningExpected ? [ [ 'cirrussearch-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$expectedWarnings = $warningExpected ? [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", [ 'statements' => $expected ], $expectedWarnings );
 	}
