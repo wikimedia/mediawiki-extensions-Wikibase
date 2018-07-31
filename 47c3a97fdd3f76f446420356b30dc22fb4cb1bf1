@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d9c578f_f855c0ed",
+        "filename": "repo/autoload.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-07-31T15:35:56Z",
+      "side": 1,
+      "message": "duplicated entry",
+      "revId": "47c3a97fdd3f76f446420356b30dc22fb4cb1bf1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
