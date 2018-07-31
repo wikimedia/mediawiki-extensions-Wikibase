@@ -125,6 +125,13 @@ class SummaryFormatter {
 	 */
 	public function formatAutoSummary( FormatableSummary $summary ) {
 		$summaryArgs = $summary->getAutoSummaryArgs();
+		$languageCode = $summary->getLanguageCode();
+		if ( count( $summaryArgs ) === 1 && array_key_exists( $languageCode, $summaryArgs ) ) {
+			// HACK: if the only key is the language code,
+			// assume the message already includes the language code and don’t repeat it here
+			$summaryArgs[0] = $summaryArgs[$languageCode];
+			unset( $summaryArgs[$languageCode] );
+		}
 		$parts = $this->formatArgList( $summaryArgs );
 
 		$count = count( $parts );

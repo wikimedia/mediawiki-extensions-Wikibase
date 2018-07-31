@@ -433,6 +433,15 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				'/* summarytest-testing:2|nl|x|foo: 1, bar: 2 */ A, foo: 1, bar: 2'
 			],
+			'redundant associative language code' => [
+				'summarytest',
+				'testing',
+				'en',
+				null,
+				[ [ 'en' => 'a test' ] ],
+				null,
+				'/* summarytest-testing:1|en */ a test'
+			],
 		];
 	}
 
