@@ -352,6 +352,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			'wikibase.repo.wb_terms.select.SqlEntityInfoBuilder_collectTermsForEntities',
 			count( $termTypes )
 		);
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->updateCount(
+			'wikibase.repo.wb_terms.SqlEntityInfoBuilder_collectTermsForEntities.idCount',
+			count( $this->localIdsByType[$entityType] )
+		);
 
 		$dbr = $this->getConnection( DB_REPLICA );
 
