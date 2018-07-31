@@ -310,6 +310,7 @@ abstract class ModifyEntity extends ApiBase {
 		} catch ( MWContentSerializationException $ex ) {
 			// This happens if the $entity created via modifyEntity() above (possibly cleared
 			// before) is not sufficiently initialized and failed serialization.
+			var_dump( $ex );
 			$this->errorReporter->dieError( $ex->getMessage(), 'failed-save' );
 		}
 

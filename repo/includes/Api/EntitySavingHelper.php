@@ -425,6 +425,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		} elseif ( $status->isOK() ) {
 			$this->errorReporter->reportStatusWarnings( $status );
 		} else {
+			var_dump( $status );
 			$this->errorReporter->reportStatusWarnings( $status );
 			$this->errorReporter->dieStatus( $status, $errorCode );
 		}
