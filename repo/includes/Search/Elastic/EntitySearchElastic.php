@@ -282,4 +282,17 @@ class EntitySearchElastic implements EntitySearchHelper {
 		return $result;
 	}
 
+	/**
+	 * Determine from the classpath which elastic version we
+	 * aim to be compatible with.
+	 * @return int
+	 */
+	public static function getExpectedElasticMajorVersion() {
+		if ( class_exists( '\Elastica\Task' ) ) {
+			return 6;
+		}
+
+		return 5;
+	}
+
 }

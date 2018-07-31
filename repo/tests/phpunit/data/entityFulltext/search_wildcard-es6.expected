@@ -1,0 +1,56 @@
+{
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "query_string": {
+                        "query": "(title.plain:Duc*^20 OR all.plain:Duc*)",
+                        "fields": [
+                            "all.plain^1",
+                            "all^0.5"
+                        ],
+                        "auto_generate_phrase_queries": true,
+                        "phrase_slop": 0,
+                        "default_operator": "AND",
+                        "allow_leading_wildcard": true,
+                        "fuzzy_prefix_length": 2,
+                        "rewrite": "top_terms_boost_1024",
+                        "max_determinized_states": 500
+                    }
+                }
+            ],
+            "filter": [
+                {
+                    "terms": {
+                        "namespace": [
+                            0
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "rescore_query": [
+        {
+            "window_size": 8192,
+            "query": {
+                "query_weight": 1,
+                "rescore_query_weight": 1,
+                "score_mode": "multiply",
+                "rescore_query": {
+                    "function_score": {
+                        "functions": [
+                            {
+                                "field_value_factor": {
+                                    "field": "incoming_links",
+                                    "modifier": "log2p",
+                                    "missing": 0
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

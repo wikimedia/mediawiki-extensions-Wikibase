@@ -1,0 +1,541 @@
+{
+    "description": "wikibase_prefix search for '\u7236\u985e'",
+    "params": {
+        "timeout": "20s"
+    },
+    "query": {
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        "bool": {
+                            "filter": [
+                                {
+                                    "match": {
+                                        "labels_all.prefix": "\u7236\u985e"
+                                    }
+                                }
+                            ],
+                            "should": [
+                                {
+                                    "dis_max": {
+                                        "tie_breaker": 0,
+                                        "queries": [
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 2
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.6
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.1
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels_all.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.001
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hans.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.71
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hans.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.17
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hans.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.36
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hant.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.539
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hant.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.053
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hant.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.324
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-cn.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.3851
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-cn.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.9477
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-cn.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.2916
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-tw.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.24659
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-tw.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.85293
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-tw.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.26244
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hk.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.121931
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hk.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.767637
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hk.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.236196
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-sg.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.0097379
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-sg.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.6908733
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-sg.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.2125764
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-mo.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.90876411
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-mo.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.62178597
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-mo.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.19131876
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-my.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.817887699
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-my.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.559607373
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-my.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.172186884
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.near_match": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.7360989291
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.near_match_folded": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.5036466357
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.en.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.1549681956
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "term": {
+                            "title.keyword": "\u7236\u985e"
+                        }
+                    }
+                ],
+                "minimum_should_match": 1,
+                "filter": [
+                    {
+                        "term": {
+                            "content_model": "wikibase-property"
+                        }
+                    }
+                ]
+            }
+        },
+        "_source": [
+            "namespace",
+            "title",
+            "labels.zh",
+            "descriptions.zh",
+            "labels.zh-hans",
+            "descriptions.zh-hans",
+            "labels.zh-hant",
+            "descriptions.zh-hant",
+            "labels.zh-cn",
+            "descriptions.zh-cn",
+            "labels.zh-tw",
+            "descriptions.zh-tw",
+            "labels.zh-hk",
+            "descriptions.zh-hk",
+            "labels.zh-sg",
+            "descriptions.zh-sg",
+            "labels.zh-mo",
+            "descriptions.zh-mo",
+            "labels.zh-my",
+            "descriptions.zh-my",
+            "labels.en",
+            "descriptions.en"
+        ],
+        "stored_fields": [],
+        "highlight": {
+            "pre_tags": [
+                ""
+            ],
+            "post_tags": [
+                ""
+            ],
+            "fields": {
+                "title": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "matched_fields": [
+                        "title.keyword"
+                    ]
+                },
+                "labels.zh.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-hans.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-hant.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-cn.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-tw.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-hk.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-sg.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-mo.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.zh-my.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.en.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                },
+                "labels.*.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true,
+                        "return_snippets_and_offsets": true
+                    }
+                }
+            }
+        },
+        "size": 10,
+        "rescore": [
+            {
+                "window_size": 8192,
+                "query": {
+                    "query_weight": 1,
+                    "rescore_query_weight": 1,
+                    "score_mode": "total",
+                    "rescore_query": {
+                        "function_score": {
+                            "score_mode": "sum",
+                            "functions": [
+                                {
+                                    "script_score": {
+                                        "script": {
+                                            "source": "pow(doc['incoming_links'].value , 1) \/ ( pow(doc['incoming_links'].value, 1) + pow(100,1))",
+                                            "lang": "expression"
+                                        }
+                                    },
+                                    "weight": 0.6
+                                },
+                                {
+                                    "script_score": {
+                                        "script": {
+                                            "source": "pow(doc['sitelink_count'].value , 2) \/ ( pow(doc['sitelink_count'].value, 2) + pow(20,2))",
+                                            "lang": "expression"
+                                        }
+                                    },
+                                    "weight": 0.4
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "stats": [
+            "wikibase-prefix"
+        ]
+    },
+    "options": {
+        "timeout": "20s"
+    }
+}
