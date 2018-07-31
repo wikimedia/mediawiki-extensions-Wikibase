@@ -99,7 +99,12 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	private function matchStatements( array $statements ) {
 		$query = new BoolQuery();
 		foreach ( $statements as $statement ) {
-			$query->addShould( new Match( StatementsField::NAME, [ 'query' => $statement ] ) );
+			if ( strchr( $statement, '=' ) === false ) {
+				$query->addShould( new Match( StatementsField::NAME . '.property',
+					[ 'query' => $statement ] ) );
+			} else {
+				$query->addShould( new Match( StatementsField::NAME, [ 'query' => $statement ] ) );
+			}
 		}
 		return $query;
 	}
@@ -163,7 +168,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		$validStatementStringPattern = '/^' .
 			'((' . implode( '|', $this->foreignRepoNames ) .'):)?' .
 			$propertyIdPattern .
-			StatementsField::STATEMENT_SEPARATOR .
+			'(' . StatementsField::STATEMENT_SEPARATOR . '|$)' .
 			'/i';
 
 		return (bool)preg_match(

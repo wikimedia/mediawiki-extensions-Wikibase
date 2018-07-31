@@ -113,6 +113,37 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'search string' => 'haswbstatement:INVALID',
 				'foreignRepoNames' => [],
 			],
+			'property only' => [
+				'expected' => [ 'bool' => [
+					'should' => [
+						[ 'match' => [
+							'statement_keywords.property' => [
+								'query' => 'P999',
+							],
+						] ]
+					]
+				] ],
+				'search string' => 'haswbstatement:P999',
+				'foreignRepoNames' => [],
+			],
+			'property and value' => [
+				'expected' => [ 'bool' => [
+					'should' => [
+						[ 'match' => [
+							'statement_keywords.property' => [
+								'query' => 'P999',
+							],
+						] ],
+						[ 'match' => [
+							'statement_keywords' => [
+								'query' => 'P777=someString',
+							],
+						] ]
+					]
+				] ],
+				'search string' => 'haswbstatement:P999|P777=someString',
+				'foreignRepoNames' => [],
+			],
 		];
 	}
 
@@ -222,6 +253,36 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'Wikidata:P999=Wikidata:Q888',
 				],
+				'warningExpected' => false,
+			],
+			'single property without value' => [
+				'foreignRepoNames' => [],
+				'value' => 'P999',
+				'expected' => [ 'P999' ],
+				'warningExpected' => false,
+			],
+			'federated property without value' => [
+				'foreignRepoNames' => [ 'Wikidata' ],
+				'value' => 'Wikidata:P999',
+				'expected' => [ 'Wikidata:P999' ],
+				'warningExpected' => false,
+			],
+			'multiple properties with and without value' => [
+				'foreignRepoNames' => [],
+				'value' => 'P999|P123=A456',
+				'expected' => [ 'P999', 'P123=A456' ],
+				'warningExpected' => false,
+			],
+			'invalid without value' => [
+				'foreignRepoNames' => [],
+				'value' => 'P123,abc',
+				'expected' => [],
+				'warningExpected' => true,
+			],
+			'invalid and valid property' => [
+				'foreignRepoNames' => [],
+				'value' => 'P123,abc|P345',
+				'expected' => [ 'P345' ],
 				'warningExpected' => false,
 			],
 		];
