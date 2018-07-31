@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "004f5139_6bd68d80",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-07-31T17:48:15Z",
+      "side": 1,
+      "message": "This is where we\u0027ll need to configure which slot we want!",
+      "revId": "343dfcf7284f5e29ab64612e75b6738aa28c1675",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
