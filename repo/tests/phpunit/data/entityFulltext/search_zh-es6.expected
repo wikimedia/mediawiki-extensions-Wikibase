@@ -1,0 +1,583 @@
+{
+    "query": {
+        "bool": {
+            "disable_coord": true,
+            "should": [
+                {
+                    "term": {
+                        "title.keyword": "\u7236\u985e"
+                    }
+                },
+                {
+                    "bool": {
+                        "filter": [
+                            {
+                                "bool": {
+                                    "should": [
+                                        {
+                                            "match": {
+                                                "all": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "all.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-hans.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-hant.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-cn.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-tw.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-hk.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-sg.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-mo.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.zh-my.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "descriptions.en": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "AND"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "should": [
+                            {
+                                "dis_max": {
+                                    "tie_breaker": 0,
+                                    "queries": [
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 0.78
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 0.01
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-hans.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 0.038
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-hans.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 0.0005
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-hant.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 0.0038
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-hant.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-5
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-cn.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 0.00038
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-cn.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-6
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-tw.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 3.8e-5
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-tw.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-7
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-hk.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 3.8e-6
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-hk.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-8
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-sg.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 3.8e-7
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-sg.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-9
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-mo.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 3.8e-8
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-mo.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-10
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-my.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 3.8e-9
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.zh-my.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-11
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.en.near_match": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 3.8e-10
+                                            }
+                                        },
+                                        {
+                                            "constant_score": {
+                                                "filter": {
+                                                    "match": {
+                                                        "labels.en.near_match_folded": "\u7236\u985e"
+                                                    }
+                                                },
+                                                "boost": 5.0e-12
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "bool": {
+                                    "should": [
+                                        {
+                                            "match": {
+                                                "all": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "OR",
+                                                    "boost": 0.04
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "match": {
+                                                "all.plain": {
+                                                    "query": "\u7236\u985e",
+                                                    "operator": "OR",
+                                                    "boost": 0.04
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "dis_max": {
+                                                "tie_breaker": 0.2,
+                                                "queries": [
+                                                    {
+                                                        "match": {
+                                                            "labels.zh.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 0.07
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 0.07
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-hans.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 0.003
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-hans.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 0.003
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-hant.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 0.0003
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-hant.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 0.0003
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-cn.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-5
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-cn.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-5
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-tw.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-6
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-tw.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-6
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-hk.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-7
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-hk.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-7
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-sg.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-8
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-sg.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-8
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-mo.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-9
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-mo.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-9
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.zh-my.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-10
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.zh-my.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-10
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.en.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-11
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.en": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-11
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.en.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-11
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "minimum_should_match": 1,
+            "filter": [
+                {
+                    "terms": {
+                        "namespace": [
+                            5
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "rescore_query": [
+        {
+            "window_size": 8192,
+            "query": {
+                "query_weight": 1,
+                "rescore_query_weight": 1,
+                "score_mode": "total",
+                "rescore_query": {
+                    "function_score": {
+                        "score_mode": "sum",
+                        "functions": [
+                            {
+                                "script_score": {
+                                    "script": {
+                                        "source": "pow(doc['incoming_links'].value , 1) \/ ( pow(doc['incoming_links'].value, 1) + pow(100,1))",
+                                        "lang": "expression"
+                                    }
+                                },
+                                "weight": 0.6
+                            },
+                            {
+                                "script_score": {
+                                    "script": {
+                                        "source": "pow(doc['sitelink_count'].value , 2) \/ ( pow(doc['sitelink_count'].value, 2) + pow(20,2))",
+                                        "lang": "expression"
+                                    }
+                                },
+                                "weight": 0.4
+                            },
+                            {
+                                "weight": -1,
+                                "filter": {
+                                    "term": {
+                                        "statement_keywords": "P31=Q4167410"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
