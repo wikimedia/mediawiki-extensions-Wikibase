@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6419e671_fef4b9c1",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-07-31T13:12:39Z",
+      "side": 1,
+      "message": "TODO: Check `false` return in case of invalid serialization",
+      "range": {
+        "startLine": 369,
+        "startChar": 2,
+        "endLine": 369,
+        "endChar": 4
+      },
+      "revId": "4fc9ca23cc99bb358f946a2c2313adafe372f370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
