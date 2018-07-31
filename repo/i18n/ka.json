@@ -6,10 +6,12 @@
 			"MIKHEIL",
 			"Macofe",
 			"BRUTE",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Otogi"
 		]
 	},
 	"wikibase-desc": "სტრუქტურირებული მონაცემების საცავი",
+	"wikibase-entity": "წარმონაქმნი",
 	"wikibase-entity-item": "ელემენტი",
 	"wikibase-entity-property": "თვისება",
 	"wikibase-entity-query": "მოთხოვნა",

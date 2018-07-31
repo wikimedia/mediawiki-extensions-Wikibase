@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kw-Moon"
+			"Kw-Moon",
+			"Nrowe"
 		]
 	},
-	"wikibase-edit": "chanjya"
+	"wikibase-edit": "chanjya",
+	"wikibase-add": "keworra",
+	"wikibase-sitelinks-special": "Gwiasvaow erel"
 }

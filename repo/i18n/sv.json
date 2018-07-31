@@ -313,6 +313,7 @@
 	"wikibase-redirectentity-fromid": "ID att omdirigera från",
 	"wikibase-redirectentity-toid": "ID att omdirigera till",
 	"wikibase-redirectentity-submit": "Omdirigera",
+	"wikibase-redirect-origin-not-empty": "Kan inte skapa omdirigering på den icke-tomma entiteten $1",
 	"wikibase-redirect-no-such-entity": "Kunde inte hitta entiteten $1",
 	"wikibase-redirect-cant-load-entity-content": "Kan inte komma åt innehåll, sidversionen kanske raderas.",
 	"wikibase-redirect-target-is-redirect": "Entiteten $1 är en omdirigering",
