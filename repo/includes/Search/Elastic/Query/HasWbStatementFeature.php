@@ -163,7 +163,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		$validStatementStringPattern = '/^' .
 			'((' . implode( '|', $this->foreignRepoNames ) .'):)?' .
 			$propertyIdPattern .
-			StatementsField::STATEMENT_SEPARATOR .
+			StatementsField::STATEMENT_SEPARATOR . '?' .
 			'/i';
 
 		return (bool)preg_match(

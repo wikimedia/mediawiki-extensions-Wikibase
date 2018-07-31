@@ -224,6 +224,24 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				],
 				'warningExpected' => false,
 			],
+			'single property without value' => [
+				'foreignRepoNames' => [],
+				'value' => 'P999',
+				'expected' => [ 'P999' ],
+				'warningExpected' => false,
+			],
+			'federated property without value' => [
+				'foreignRepoNames' => [ 'Wikidata' ],
+				'value' => 'Wikidata:P999',
+				'expected' => [ 'Wikidata:P999' ],
+				'warningExpected' => false,
+			],
+			'multiple properties with and without value' => [
+				'foreignRepoNames' => [],
+				'value' => 'P999|P123=A456',
+				'expected' => [ 'P999', 'P123=A456' ],
+				'warningExpected' => false,
+			],
 		];
 	}
 
