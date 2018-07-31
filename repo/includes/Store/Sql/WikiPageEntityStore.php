@@ -270,6 +270,7 @@ class WikiPageEntityStore implements EntityStore {
 		if ( $flags & EDIT_NEW ) {
 			$title = $page->getTitle();
 			if ( $title->exists() ) {
+				wfDebugLog( __CLASS__, $title->getText() );
 				throw new StorageException( Status::newFatal( 'edit-already-exists' ) );
 			}
 		}
