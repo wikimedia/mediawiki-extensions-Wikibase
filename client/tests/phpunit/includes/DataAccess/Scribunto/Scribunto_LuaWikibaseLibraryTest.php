@@ -333,6 +333,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->setFineGrainedLuaTracking( $fineGrainedTracking );
 		$cacheSplit = false;
 		$lang = Language::factory( 'ku' );
+		$this->setContentLang( 'ku' );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
