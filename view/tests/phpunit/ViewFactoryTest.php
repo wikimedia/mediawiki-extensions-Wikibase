@@ -76,11 +76,9 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$templateFactory,
 			$languageNameLookup,
 			$this->getMock( LanguageDirectionalityLookup::class ),
-			new BasicNumberLocalizer(),
 			[],
 			[],
-			[],
-			$this->getMock( LocalizedTextProvider::class )
+			[]
 		);
 	}
 
