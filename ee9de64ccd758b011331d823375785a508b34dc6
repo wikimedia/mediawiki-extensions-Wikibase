@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2022313_1c2a5f00",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-08-01T08:37:58Z",
+      "side": 1,
+      "message": "you should use the field statement_keywords.property if the statement has no value.",
+      "range": {
+        "startLine": 102,
+        "startChar": 50,
+        "endLine": 102,
+        "endChar": 54
+      },
+      "revId": "ee9de64ccd758b011331d823375785a508b34dc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ccb55f8_361d681a",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-08-01T08:37:58Z",
+      "side": 1,
+      "message": "I think you should enforce that if there are no values you must be at the end, e.g.\n\n \u003e haswbstatement:P1234,dfkjhdsf\n\nshould not match and it seems to me that it\u0027ll match with this regex",
+      "revId": "ee9de64ccd758b011331d823375785a508b34dc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
