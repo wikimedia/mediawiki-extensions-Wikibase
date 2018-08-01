@@ -475,6 +475,7 @@
 	"wikibase-search-namespace-mix": "Warning when using mixed namespaces in fulltext search",
 	"wikibase-search-config-notfound": "Error message displayed when configured search profile can not be loaded",
 	"wikibase-search-config-badclass": "Error message displayed when configured query builder can not be found or has wrong type",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Error message when haswbstatement keyword has no valid arguments",
 	"apihelp-wbavailablebadges-description": "{{doc-apihelp-description|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-summary": "{{doc-apihelp-summary|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",
