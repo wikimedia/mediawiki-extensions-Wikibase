@@ -83,7 +83,7 @@ class ShortDescHandler {
 	 * @return void
 	 */
 	public function doHandle( Parser $parser, $shortDesc, $controlArg ) {
-		$noReplace = $this->parseNoReplace( $controlArg );
+		$noReplace = $this->parseNoReplace( $parser, $controlArg );
 		$out = $parser->getOutput();
 
 		if ( $out->getProperty( 'wikibase-shortdesc' ) !== false && $noReplace ) {
@@ -97,13 +97,18 @@ class ShortDescHandler {
 	}
 
 	/**
+	 * @param Parser $parser
 	 * @param string $controlArg
 	 * @return bool
 	 */
-	private function parseNoReplace( $controlArg ) {
+	private function parseNoReplace( $parser, $controlArg ) {
 		static $magicWord = null;
 		if ( is_null( $magicWord ) ) {
-			$magicWord = MagicWord::get( 'shortdesc_noreplace' );
+			if ( class_exists( 'MagicWordFactory' ) ) {
+				$magicWord = $parser->getMagicWordFactory()->get( 'shortdesc_noreplace' );
+			} else {
+				$magicWord = MagicWord::get( 'shortdesc_noreplace' );
+			}
 		}
 		return $magicWord->matchStartToEnd( $controlArg );
 	}
