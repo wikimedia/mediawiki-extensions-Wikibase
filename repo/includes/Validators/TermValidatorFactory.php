@@ -91,7 +91,7 @@ class TermValidatorFactory {
 	 * @return ValueValidator
 	 */
 	public function getLabelValidator( $entityType ) {
-		$validators = $this->getCommonTermValidators();
+		$validators = $this->getCommonTermValidators( 'label-' );
 
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 		if ( $entityType === Property::ENTITY_TYPE ) {
@@ -105,7 +105,7 @@ class TermValidatorFactory {
 	 * @return ValueValidator
 	 */
 	public function getDescriptionValidator() {
-		$validators = $this->getCommonTermValidators();
+		$validators = $this->getCommonTermValidators( 'description-' );
 
 		return new CompositeValidator( $validators, true );
 	}
@@ -116,7 +116,7 @@ class TermValidatorFactory {
 	 * @return ValueValidator
 	 */
 	public function getAliasValidator( $entityType ) {
-		$validators = $this->getCommonTermValidators();
+		$validators = $this->getCommonTermValidators( 'alias-' );
 
 		return new CompositeValidator( $validators, true );
 	}
@@ -124,10 +124,10 @@ class TermValidatorFactory {
 	/**
 	 * @return ValueValidator[]
 	 */
-	private function getCommonTermValidators() {
+	private function getCommonTermValidators( $errorCodePrefix ) {
 		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new StringLengthValidator( 1, $this->maxLength, 'mb_strlen' );
+		$validators[] = new StringLengthValidator( 1, $this->maxLength, 'mb_strlen', $errorCodePrefix );
 		// no leading/trailing whitespace, no tab or vertical whitespace, no line breaks.
 		$validators[] = new RegexValidator( '/^\s|[\v\t]|\s$/u', true );
 

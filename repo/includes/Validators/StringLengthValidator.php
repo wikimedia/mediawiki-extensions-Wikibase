@@ -30,19 +30,26 @@ class StringLengthValidator implements ValueValidator {
 	private $measure;
 
 	/**
+	 * @var string
+	 */
+	private $errorCodePrefix;
+
+	/**
 	 * @param int             $minLength
 	 * @param int             $maxLength
 	 * @param callable|string $measure The function to use to measure the string's length.
 	 *                        Use 'strlen' for byte length and 'mb_strlen' for character length.
 	 *                        A callable can be used to provide an alternative measure.
 	 */
-	public function __construct( $minLength, $maxLength, $measure = 'strlen' ) {
+	public function __construct( $minLength, $maxLength, $measure = 'strlen', $errorCodePrefix = '' ) {
 		//TODO: check type
 		$this->minLength = $minLength;
 		$this->maxLength = $maxLength;
 
 		//TODO: check callable
 		$this->measure = $measure;
+
+		$this->errorCodePrefix = $errorCodePrefix;
 	}
 
 	/**
@@ -61,7 +68,7 @@ class StringLengthValidator implements ValueValidator {
 				Error::newError(
 					'Too short, minimum length is ' . $this->minLength,
 					null,
-					'too-short',
+					$this->errorCodePrefix . 'too-short',
 					[ $this->minLength, $value ]
 				),
 			] );
@@ -72,7 +79,7 @@ class StringLengthValidator implements ValueValidator {
 				Error::newError(
 					'Too long, maximum length is ' . $this->maxLength,
 					null,
-					'too-long',
+					$this->errorCodePrefix . 'too-long',
 					[ $this->maxLength, $this->truncateValue( $value ) ]
 				),
 			] );
