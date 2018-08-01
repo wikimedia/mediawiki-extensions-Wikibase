@@ -4,5 +4,8 @@
 			"Jawadywn"
 		]
 	},
-	"wikibase-edit": "anyari"
+	"wikibase-edit": "robah",
+	"wikibase-add": "imbuh",
+	"wikibase-description-empty": "Katek gambaran",
+	"wikibase-statementview-rank-normal": "Peréngkat normal"
 }

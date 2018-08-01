@@ -4,7 +4,15 @@
 			"Jawadywn"
 		]
 	},
+	"tooltip-t-wikibase": "Gentolan buat ngubungke objek dalem bilik penyetoran data.",
+	"wikibase-comment-update": "Item {{WBREPONAME}} berobah",
+	"wikibase-dataitem": "Aitem di {{WBREPONAME}}",
 	"wikibase-editlinks": "Anyari kaitan",
+	"wikibase-editlinkstitle": "Robah géntolan interwiki",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Singitke",
+	"wikibase-rc-hide-wikidata-show": "Jingokke",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Anyaran {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Robahan {{WBREPONAME}}",
+	"wikibase-otherprojects": "Dalem gawéan laén"
 }
