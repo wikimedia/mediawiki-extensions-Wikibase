@@ -209,15 +209,10 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
 			if ( $options === null ) {
-				$options = ParserOptions::newFromContext( RequestContext::getMain() );
+				$options = ParserOptions::newFromContext( 'canonical' );
 			}
 
 			$out = $this->getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
-
-			if ( !$options->getUserLangObj()->equals( RequestContext::getMain()->getLanguage() ) ) {
-				// HACK: Don't save to parser cache if this is not in the user's lang: T199983.
-				$out->updateCacheExpiry( 0 );
-			}
 
 			return $out;
 		}

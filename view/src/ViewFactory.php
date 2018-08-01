@@ -2,16 +2,18 @@
 
 namespace Wikibase\View;
 
+use Language;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use SiteLookup;
-use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiNumberLocalizer;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -76,11 +78,6 @@ class ViewFactory {
 	private $languageDirectionalityLookup;
 
 	/**
-	 * @var NumberLocalizer
-	 */
-	private $numberLocalizer;
-
-	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -96,11 +93,6 @@ class ViewFactory {
 	private $badgeItems;
 
 	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
-
-	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -111,11 +103,9 @@ class ViewFactory {
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
-	 * @param NumberLocalizer $numberLocalizer
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
-	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -130,11 +120,9 @@ class ViewFactory {
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
-		NumberLocalizer $numberLocalizer,
 		array $siteLinkGroups = [],
 		array $specialSiteLinkGroups = [],
-		array $badgeItems = [],
-		LocalizedTextProvider $textProvider
+		array $badgeItems = []
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -152,11 +140,9 @@ class ViewFactory {
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
-		$this->numberLocalizer = $numberLocalizer;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -203,16 +189,18 @@ class ViewFactory {
 			$editSectionGenerator
 		);
 
+		$textProvider = new MediaWikiLocalizedTextProvider( $languageCode );
+
 		$siteLinksView = new SiteLinksView(
 			$this->templateFactory,
 			$this->siteLookup->getSites(),
 			$editSectionGenerator,
 			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
 			$this->languageNameLookup,
-			$this->numberLocalizer,
+			new MediaWikiNumberLocalizer( Language::factory( $languageCode ) ),
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 
 		return new ItemView(
@@ -223,7 +211,7 @@ class ViewFactory {
 			$languageCode,
 			$siteLinksView,
 			$this->siteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -259,7 +247,7 @@ class ViewFactory {
 			$statementSectionsView,
 			$this->dataTypeFactory,
 			$languageCode,
-			$this->textProvider
+			new MediaWikiLocalizedTextProvider( $languageCode )
 		);
 	}
 
@@ -288,7 +276,7 @@ class ViewFactory {
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
-			$this->textProvider
+			new MediaWikiLocalizedTextProvider( $languageCode )
 		);
 	}
 
@@ -314,17 +302,20 @@ class ViewFactory {
 		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
 			$labelDescriptionLookup
 		);
+
+		$textProvider = new MediaWikiLocalizedTextProvider( $languageCode );
+
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
 			$snakFormatter,
 			$propertyIdFormatter,
-			$this->textProvider
+			$textProvider
 		);
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$this->templateFactory,
 			$snakHtmlGenerator,
-			$this->numberLocalizer,
-			$this->textProvider
+			new MediaWikiNumberLocalizer( Language::factory( $languageCode ) ),
+			$textProvider
 		);
 
 		return new StatementGroupListView(
