@@ -8,5 +8,7 @@
 	"wikibase-comment-update": "{{WBREPONAME}} မွဲဒကုတ်မွဲဒကဴ ပြံင်လှာဲလဝ်",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "ပလေဝ် လေန်ဂမၠိုင်",
-	"wikibase-editlinkstitle": "ပလေဝ် လေန် အရေဝ်ဘာသာသအာင်"
+	"wikibase-editlinkstitle": "ပလေဝ် လေန် အရေဝ်ဘာသာသအာင်",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ပလေဝ်ဒါန်"
 }
