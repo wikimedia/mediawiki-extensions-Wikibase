@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db73ae82_5b3b48f1",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-01T10:08:46Z",
+      "side": 1,
+      "message": "Hmm, this looks odd, im sure I remember seeing something like this where $idCount was actually included in the metric name before?",
+      "range": {
+        "startLine": 359,
+        "startChar": 2,
+        "endLine": 362,
+        "endChar": 4
+      },
+      "revId": "716403425c6d6d05ee567f9ed22ee19fc639dc39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
