@@ -2,10 +2,10 @@
 
 namespace Wikibase\View;
 
+use ValueFormatters\NumberLocalizer;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use SiteLookup;
-use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
@@ -76,9 +76,9 @@ class ViewFactory {
 	private $languageDirectionalityLookup;
 
 	/**
-	 * @var NumberLocalizer
+	 * @var callable ( $languageCode ) : NumberLocalizer
 	 */
-	private $numberLocalizer;
+	private $numberLocalizerInstantiator;
 
 	/**
 	 * @var string[]
@@ -96,9 +96,9 @@ class ViewFactory {
 	private $badgeItems;
 
 	/**
-	 * @var LocalizedTextProvider
+	 * @var callable ( $languageCode ) : LocalizedTextProvider
 	 */
-	private $textProvider;
+	private $textProviderInstantiator;
 
 	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
@@ -111,11 +111,11 @@ class ViewFactory {
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
-	 * @param NumberLocalizer $numberLocalizer
+	 * @param callable $numberLocalizerInstantiator
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
-	 * @param LocalizedTextProvider $textProvider
+	 * @param callable $textProviderInstantiator
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -130,11 +130,11 @@ class ViewFactory {
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
-		NumberLocalizer $numberLocalizer,
+		callable $numberLocalizerInstantiator,
 		array $siteLinkGroups = [],
 		array $specialSiteLinkGroups = [],
 		array $badgeItems = [],
-		LocalizedTextProvider $textProvider
+		callable $textProviderInstantiator
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -152,11 +152,39 @@ class ViewFactory {
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
-		$this->numberLocalizer = $numberLocalizer;
+		$this->numberLocalizerInstantiator = $numberLocalizerInstantiator;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->textProvider = $textProvider;
+		$this->textProviderInstantiator = $textProviderInstantiator;
+	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return LocalizedTextProvider
+	 */
+	private function newLocalizedTextProvider( $languageCode ) {
+		$localizedTextProvider = call_user_func(
+			$this->textProviderInstantiator,
+			$languageCode
+		);
+
+		return $localizedTextProvider;
+	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return NumberLocalizer
+	 */
+	private function newNumberLocalizer( $languageCode ) {
+		$localizedTextProvider = call_user_func(
+			$this->numberLocalizerInstantiator,
+			$languageCode
+		);
+
+		return $localizedTextProvider;
 	}
 
 	/**
@@ -203,16 +231,18 @@ class ViewFactory {
 			$editSectionGenerator
 		);
 
+		$textProvider = $this->newLocalizedTextProvider( $languageCode );
+
 		$siteLinksView = new SiteLinksView(
 			$this->templateFactory,
 			$this->siteLookup->getSites(),
 			$editSectionGenerator,
 			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
 			$this->languageNameLookup,
-			$this->numberLocalizer,
+			$this->newNumberLocalizer( $languageCode ),
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 
 		return new ItemView(
@@ -223,7 +253,7 @@ class ViewFactory {
 			$languageCode,
 			$siteLinksView,
 			$this->siteLinkGroups,
-			$this->textProvider
+			$textProvider
 		);
 	}
 
@@ -259,7 +289,7 @@ class ViewFactory {
 			$statementSectionsView,
 			$this->dataTypeFactory,
 			$languageCode,
-			$this->textProvider
+			$this->newLocalizedTextProvider( $languageCode )
 		);
 	}
 
@@ -288,7 +318,7 @@ class ViewFactory {
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
-			$this->textProvider
+			$this->newLocalizedTextProvider( $languageCode )
 		);
 	}
 
@@ -314,17 +344,20 @@ class ViewFactory {
 		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
 			$labelDescriptionLookup
 		);
+
+		$textProvider = $this->newLocalizedTextProvider( $languageCode );
+
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
 			$snakFormatter,
 			$propertyIdFormatter,
-			$this->textProvider
+			$textProvider
 		);
 		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$this->templateFactory,
 			$snakHtmlGenerator,
-			$this->numberLocalizer,
-			$this->textProvider
+			$this->newNumberLocalizer( $languageCode ),
+			$textProvider
 		);
 
 		return new StatementGroupListView(

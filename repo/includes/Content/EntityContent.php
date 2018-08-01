@@ -16,7 +16,6 @@ use LogicException;
 use MWException;
 use ParserOptions;
 use ParserOutput;
-use RequestContext;
 use RuntimeException;
 use Serializers\Exceptions\SerializationException;
 use Status;
@@ -209,15 +208,10 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
 			if ( $options === null ) {
-				$options = ParserOptions::newFromContext( RequestContext::getMain() );
+				$options = ParserOptions::newCanonical( 'canonical' );
 			}
 
 			$out = $this->getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
-
-			if ( !$options->getUserLangObj()->equals( RequestContext::getMain()->getLanguage() ) ) {
-				// HACK: Don't save to parser cache if this is not in the user's lang: T199983.
-				$out->updateCacheExpiry( 0 );
-			}
 
 			return $out;
 		}

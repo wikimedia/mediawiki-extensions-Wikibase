@@ -1248,7 +1248,7 @@ class WikibaseRepo {
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			new EntityIdLinkFormatter( $this->getEntityTitleLookup() ),
 			$this->getSiteLookup(),
-			$this->getUserLanguage()
+			$this->getUserLanguage() // FIXME
 		);
 	}
 
@@ -1759,8 +1759,6 @@ class WikibaseRepo {
 	 * @return ViewFactory
 	 */
 	public function getViewFactory() {
-		$lang = $this->getUserLanguage();
-
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$this->settings->getSetting( 'statementSections' ),
 			$this->getPropertyDataTypeLookup(),
@@ -1785,11 +1783,15 @@ class WikibaseRepo {
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),
 			new MediaWikiLanguageDirectionalityLookup(),
-			new MediaWikiNumberLocalizer( $lang ),
+			function ( $languageCode ) {
+				return new MediaWikiNumberLocalizer( Language::factory( $languageCode ) );
+			},
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang->getCode() )
+			function ( $languageCode ) {
+				return new MediaWikiLocalizedTextProvider( $languageCode );
+			}
 		);
 	}
 
