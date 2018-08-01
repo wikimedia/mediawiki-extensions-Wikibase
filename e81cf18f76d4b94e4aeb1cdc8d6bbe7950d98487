@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b883a3f6_2cf5e9d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-08-01T18:30:57Z",
+      "side": 1,
+      "message": "I don\u0027t think that alternative is viable in an MCR world. The ParserOptions will generally be created by core MediaWiki code and used to parse multiple Content objects, rather than being created by the now-unused ContentHandler-\u003emakeParserOptions() method.\n\nEventually in core we should probably deprecate passing null for Content::getParserOutput()\u0027s $parserOptions parameter entirely.",
+      "revId": "e81cf18f76d4b94e4aeb1cdc8d6bbe7950d98487",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
