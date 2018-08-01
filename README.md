@@ -42,11 +42,28 @@ hhvm.enable_zend_compat = true
 Wikibase depends on various libraries such as [DataValues](https://github.com/DataValues/) components,
 and uses [Composer](http://getcomposer.org/) to make it easy to install and manage those.
 
-Once you have Wikibase in your MediaWiki extensions directory, then run:
+Once you have Wikibase in your MediaWiki extensions directory, add the `composer.json` of Wikibase to `composer.local.json` at the root of your mediawiki folder, as documented in [MediaWiki's Composer documentation](https://www.mediawiki.org/wiki/Composer#Using_composer-merge-plugin).
 
+It should now look similar to:
+```
+{
+  "extra": {
+    "merge-plugin": {
+       "include": [
+         "extensions/Wikibase/composer.json"
+       ]
+    }
+  }
+}
+```
+
+
+Then, in the root of your mediawiki folder, run:
 ```bash
 composer install
 ```
+
+> When using ways to combine MediaWiki with the extension folders (e.g. symlinks or docker volumes) please make sure that the folders are available to composer in the same structure they are available to the webserver, too.
 
 This will install both Wikibase Client and Repo together on the same wiki.
 
@@ -54,10 +71,21 @@ If you want to only have one or the other, then set `$wgEnableWikibaseRepo = fal
 `$wgEnableWikibaseClient` to false for the one you don't want to enable.
 
 Wikibase also depends on several JavaScript libraries. They are included in this repository as submodules.
-To fetch files of these libraries, you might need to run the following commands:
+To fetch files of these libraries, you might need to run, in the Wikibase extension folder, the following command:
 ```bash
 git submodule update --init
 ```
+
+### Development
+
+Wikibase uses tools to ensure the quality of software developed. To invoke these tools, inside the Wikibase folder, run
+
+```bash
+composer install
+composer run-script test
+```
+
+> As this uses development dependencies and custom configuration, executing it from the MediaWiki root folder (via `composer run-script test extensions/Wikibase`) will not work satisfactorily
 
 ## The Wikibase software
 
