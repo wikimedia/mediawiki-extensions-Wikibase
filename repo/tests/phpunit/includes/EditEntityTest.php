@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use ObjectCache;
 use ReflectionMethod;
@@ -19,7 +20,9 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
+use WikiPage;
 
 /**
  * @covers Wikibase\EditEntity
@@ -27,7 +30,6 @@ use Wikimedia\TestingAccessWrapper;
  * @group Wikibase
  *
  * @group Database
- *        ^--- needed just because we are using Title objects.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -748,6 +750,45 @@ class EditEntityTest extends MediaWikiTestCase {
 		$repo->saveEntity( $item, 'testIsNew', $this->getUser( 'EditEntityTestUser1' ) );
 		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );
 		$this->assertFalse( $isNew->invoke( $edit ), "Entity exists" );
+	}
+
+	public function testAttemptSaveParserCacheIntegration() {
+		$user = $this->getUser( 'EditEntityTestUser2' );
+
+		$this->setContentLang( 'en' );
+		$this->setUserLang( 'de' );
+
+		// This is an integration test, so write to the database!
+		$editEntityFactory = WikibaseRepo::getDefaultInstance()->newEditEntityFactory();
+		$edit = $editEntityFactory->newEditEntity( $user );
+
+		$item = new Item();
+		$item->setLabel( "en", "New Test EN" );
+		$item->setLabel( "de", "New Test DE" );
+
+		$status = $edit->attemptSave( $item, "testing", EDIT_NEW, false );
+
+		$this->assertTrue( $status->isOK(), "edit failed: " . $status->getWikiText() ); // sanity
+
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$title = $titleLookup->getTitleForId( $item->getId() );
+		$page = WikiPage::factory( $title );
+		$canonicalParserOptions = $page->makeParserOptions( 'canonical' );
+		$userParserOptions = $page->makeParserOptions( $user );
+
+		$parserCache = MediaWikiServices::getInstance()->getParserCache();
+		$canonicalOutput = $parserCache->get( $page, $canonicalParserOptions );
+		$userOutput = $parserCache->get( $page, $userParserOptions );
+
+		$this->assertFalse( $userOutput, 'user language output' );
+		$this->assertNotFalse( $canonicalOutput, 'canonical output' );
+
+		$this->assertContains( 'New Test EN', $canonicalOutput->getDisplayTitle() );
+
+		$canonicalHtml = $canonicalOutput ? $canonicalOutput->getText() : false;
+		$this->assertContains( 'class="wikibase-entityview wb-item" lang="en"', $canonicalHtml );
+		$this->assertContains( '<span class="mw-headline" id="claims">Statements</span>', $canonicalHtml );
+		$this->assertContains( '<span class="mw-headline" id="sitelinks">Sitelinks</span>', $canonicalHtml );
 	}
 
 	public function provideHookRunnerReturnStatus() {
