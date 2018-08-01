@@ -125,12 +125,17 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 
 		$record = $info->getEntityInfo( new ItemId( 'Q11' ) );
 		$this->assertInternalType( 'array', $record );
-		$this->assertEquals( 'Q11', $record['id'] );
+		$this->assertEquals(
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'London' ] ], 'descriptions' => [] ],
+			$record
+		);
 
 		$record = $info->getEntityInfo( new ItemId( 'Q33' ) );
 		$this->assertInternalType( 'array', $record );
-		$this->assertEquals( 'Q33', $record['id'] );
-		$this->assertArrayHasKey( 'labels', $record );
+		$this->assertEquals(
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Berlin' ] ], 'descriptions' => [] ],
+			$record
+		);
 
 		$this->setExpectedException( OutOfBoundsException::class );
 		$info->getEntityInfo( new ItemId( 'Q99' ) );
