@@ -294,6 +294,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\WikibaseIndexField' => __DIR__ . '/includes/Search/Elastic/Fields/WikibaseIndexField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\WikibaseNumericField' => __DIR__ . '/includes/Search/Elastic/Fields/WikibaseNumericField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Query\\HasWbStatementFeature' => __DIR__ . '/includes/Search/Elastic/Query/HasWbStatementFeature.php',
+	'Wikibase\\Repo\\Search\\Elastic\\Query\\WbStatementQuantityFeature' => __DIR__ . '/includes/Search/Elastic/Query/WbStatementQuantityFeature.php',
 	'Wikibase\\Repo\\Search\\Elastic\\WikibasePrefixSearcher' => __DIR__ . '/includes/Search/Elastic/WikibasePrefixSearcher.php',
 	'Wikibase\\Repo\\SiteLinkTargetProvider' => __DIR__ . '/includes/SiteLinkTargetProvider.php',
 	'Wikibase\\Repo\\SnakFactory' => __DIR__ . '/includes/SnakFactory.php',
