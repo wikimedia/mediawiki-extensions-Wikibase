@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use Language;
 use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
 
@@ -25,7 +26,9 @@ class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setContentLang( 'qqx' );
+		$this->setMwGlobals( [
+			'wgContLang' => Language::factory( 'qqx' )
+		] );
 	}
 
 	protected function newSpecialPage() {

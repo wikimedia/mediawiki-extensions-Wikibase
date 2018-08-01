@@ -65,7 +65,8 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->store = $store;
 
-		$this->setContentLang( 'de' );
+		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
+		$this->setMwGlobals( 'wgLanguageCode', 'de' );
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();

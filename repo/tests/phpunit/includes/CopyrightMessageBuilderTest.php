@@ -18,7 +18,9 @@ class CopyrightMessageBuilderTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setContentLang( 'qqx' );
+		$this->setMwGlobals( [
+			'wgContLang' => Language::factory( 'qqx' )
+		] );
 	}
 
 	/**
