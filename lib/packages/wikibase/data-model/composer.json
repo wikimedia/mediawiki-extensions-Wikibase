@@ -24,7 +24,7 @@
 	},
 	"require": {
 		"php": ">=5.5.9",
-		"data-values/data-values": "~0.1|~1.0",
+		"data-values/data-values": "~0.1|~1.0|~2.0",
 		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
