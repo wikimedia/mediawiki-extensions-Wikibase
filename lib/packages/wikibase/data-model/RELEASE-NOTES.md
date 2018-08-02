@@ -2,8 +2,6 @@
 
 ## Version 8.0.0 (dev)
 
-This release removes integers as acceptable entity IDs.
-
 #### Breaking changes
 
 * `Item::setId` and `Property::setId` no longer accept integers
