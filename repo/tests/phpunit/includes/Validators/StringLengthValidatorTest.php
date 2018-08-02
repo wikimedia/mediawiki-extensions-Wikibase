@@ -50,4 +50,17 @@ class StringLengthValidatorTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
+	public function testWhenErrorCodePrefixIsPassedAndErrorIsTriggered() {
+		$errorCodePrefix = '[PREFIX]';
+		$maxLength = 0;
+		$tooLongFunction = function() use ( $maxLength ) {
+			return $maxLength + 1;
+		};
+
+		$errorCode = ( new StringLengthValidator( null, $maxLength, $tooLongFunction, $errorCodePrefix ) )
+		->validate( null )->getErrors()[0]->getCode();
+
+		$this->assertStringStartsWith( $errorCodePrefix, $errorCode, 'Then error code starts with prefix' );
+	}
+
 }
