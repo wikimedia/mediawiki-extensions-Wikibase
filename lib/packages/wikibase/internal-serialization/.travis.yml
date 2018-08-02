@@ -14,7 +14,7 @@ matrix:
       php: 5.6
     - env: DM=~6.0
       php: 7.0
-    - env: DM=~4.2
+    - env: DM=~5.0
       php: 7.1
     - env: DM=~7.0
       php: hhvm

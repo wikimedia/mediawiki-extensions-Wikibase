@@ -99,11 +99,15 @@ via TravisCI, as a TravisCI configuration file is also provided in the root dire
 
 ## Authors
 
-Wikibase Internal Serialization has been written by [Jeroen De Dauw]
-(https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw), partially as [Wikimedia Germany]
-(https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
+Wikibase Internal Serialization has been written by
+[Jeroen De Dauw](https://entropywins.wtf/), partially as
+[Wikimedia Germany](https://wikimedia.de/en) employee for the [Wikidata project](https://wikidata.org/).
 
 ## Release notes
+
+### 2.8.0 (dev)
+
+* Dropped compatibility with Wikibase DataModel 4.x
 
 ### 2.7.0 (2017-10-26)
 
@@ -187,7 +191,7 @@ Initial release with these features:
 * [Wikibase Internal Serialization on Packagist](https://packagist.org/packages/wikibase/internal-serialization)
 * [Wikibase Internal Serialization on TravisCI](https://travis-ci.org/wmde/WikibaseInternalSerialization)
 * [Wikibase Internal Serialization on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
-* [Wikibase Internal Serialization on Ohloh](https://www.ohloh.net/p/WikibaseInternalSerialization)
+* [Wikibase Internal Serialization on OpenHub](https://www.openhub.net/p/WikibaseInternalSerialization)
 
 ## See also
 

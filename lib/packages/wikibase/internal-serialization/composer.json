@@ -24,7 +24,7 @@
 	},
 	"require": {
 		"php": ">=5.5.9",
-		"wikibase/data-model": "~7.0|~6.0|~5.0|~4.2",
+		"wikibase/data-model": "~7.0|~6.0|~5.0",
 		"wikibase/data-model-serialization": "~2.0",
 		"serialization/serialization": "~4.0|~3.2"
 	},
@@ -32,7 +32,7 @@
 		"phpmd/phpmd": "~2.3",
 		"phpunit/phpunit": "~4.8",
 		"data-values/common": ">=0.1 <0.5",
-		"data-values/geo": ">=1.0 <3.0",
+		"data-values/geo": ">=1.0 <4.0",
 		"data-values/number": ">=0.1 <0.10",
 		"data-values/time": ">=0.1 <0.9",
 		"wikibase/wikibase-codesniffer": "^0.2.0"
@@ -44,7 +44,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.7.x-dev"
+			"dev-master": "2.8.x-dev"
 		}
 	},
 	"scripts": {
