@@ -61,13 +61,16 @@ class GenericServices {
 	/**
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param int[] $entityNamespaces
+	 * @param string[] $entitySlots
 	 */
 	public function __construct(
 		EntityTypeDefinitions $entityTypeDefinitions,
-		array $entityNamespaces
+		array $entityNamespaces,
+		array $entitySlots = []
 	) {
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->entityNamespaces = $entityNamespaces;
+		$this->entitySlots = $entitySlots;
 	}
 
 	/**
@@ -75,7 +78,10 @@ class GenericServices {
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup( $this->entityNamespaces );
+			$this->entityNamespaceLookup = new EntityNamespaceLookup(
+				$this->entityNamespaces,
+				$this->entitySlots
+			);
 		}
 
 		return $this->entityNamespaceLookup;

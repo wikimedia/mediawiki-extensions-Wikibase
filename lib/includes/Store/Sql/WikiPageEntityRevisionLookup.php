@@ -168,11 +168,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 */
 	private function loadEntity( $row ) {
 		$revision = $this->revisionStore->getRevisionById( $row->rev_id );
+		$slotRole = $row->role_name ?? 'main';
 
 		try {
-			// TODO The slot to load the entity from should be configurable
 			/** @var EntityContent $content */
-			$content = $revision->getContent( 'main' );
+			$content = $revision->getContent( $slotRole );
 		} catch ( RevisionAccessException $e ) {
 			throw new StorageException( 'getContent failed', 0, $e );
 		}
