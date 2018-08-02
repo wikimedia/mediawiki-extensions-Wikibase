@@ -462,7 +462,7 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @see EntityHandler::getEntityNamespace
+	 * Returns the namespace that is to be used for this kind of entities.
 	 *
 	 * @return int
 	 */
@@ -470,6 +470,17 @@ abstract class EntityHandler extends ContentHandler {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
+	}
+
+	/**
+	 * Returns the slot that is to be used for this kind of entities.
+	 *
+	 * @return string the role name of the slot
+	 */
+	final public function getEntitySlotRole() {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		return $entityNamespaceLookup->getEntitySlotRole( $this->getEntityType() );
 	}
 
 	/**

@@ -188,6 +188,19 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	}
 
 	/**
+	 * Determines which slot is used to store a given type of entities.
+	 *
+	 * @param string $entityType
+	 *
+	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
+	 * @return string the role name of the slot
+	 */
+	public function getSlotRoleForType( $entityType ) {
+		$handler = $this->getContentHandlerForType( $entityType );
+		return $handler->getEntitySlotRole();
+	}
+
+	/**
 	 * Returns the EntityHandler for the given entity type.
 	 *
 	 * @param string $entityType
