@@ -30,6 +30,7 @@
 	* `getSiteLink`
 	* `hasLinkToSite`
 	* `removeSiteLink`
+* Installation together with DataValues 2.x is now supported
 
 ## Version 7.5.0 (2018-05-02)
 
