@@ -24,6 +24,7 @@
 
 #### Other changes
 
+* Added `StatementListProvidingEntity`
 * Un-deprecated several sitelink related shortcuts from `Item`:
 	* `addSiteLink`
 	* `getSiteLink`
