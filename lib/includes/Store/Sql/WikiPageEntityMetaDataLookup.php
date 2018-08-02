@@ -236,9 +236,18 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
 
+		$fields = $this->selectFields();
+
+		// Attach the appropriate role name.
+		// This could as well come from the database, if the query was written accordingly.
+		$roleName = $this->entityNamespaceLookup->getEntitySlotRole(
+			$entityId->getEntityType()
+		);
+		$fields['role_name'] = $db->addQuotes( $roleName );
+
 		$row = $db->selectRow(
 			[ 'revision', 'page' ],
-			$this->selectFields(),
+			$fields,
 			[ 'rev_id' => $revisionId ],
 			__METHOD__,
 			[],
@@ -348,7 +357,15 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			$result[$serializedId] = false;
 
 			if ( isset( $rows[$idLocalPart] ) ) {
-				$result[$serializedId] = $rows[$idLocalPart];
+				$row = $rows[$idLocalPart];
+
+				// Attach the appropriate role name.
+				// This could as well come from the database, if the query was written accordingly.
+				$row->role_name = $this->entityNamespaceLookup->getEntitySlotRole(
+					$entityId->getEntityType()
+				);
+
+				$result[$serializedId] = $row;
 			}
 		}
 
