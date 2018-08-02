@@ -283,7 +283,11 @@ class WikiPageEntityStore implements EntityStore {
 	) {
 		global $wgUseNPPatrol, $wgUseRCPatrol;
 
-		$page = $this->getWikiPageForEntity( $entityContent->getEntityId() );
+		$id = $entityContent->getEntityId();
+
+		$page = $this->getWikiPageForEntity( $id );
+		$slotRole = $this->contentFactory->getSlotRoleForType( $id->getEntityType() );
+
 		$updater = $page->newPageUpdater( $user );
 
 		if ( $baseRevId && $updater->hasEditConflict( $baseRevId ) ) {
@@ -301,8 +305,7 @@ class WikiPageEntityStore implements EntityStore {
 		$page->clear();
 		$page->clearPreparedEdit();
 
-		// TODO provide a way for entities to be stored in different slots
-		$updater->setContent( 'main', $entityContent );
+		$updater->setContent( $slotRole, $entityContent );
 		$needsPatrol = $wgUseRCPatrol || ( $wgUseNPPatrol && !$page->exists() );
 
 		// TODO: this logic should not be in the storage layer, it's here for compatibility

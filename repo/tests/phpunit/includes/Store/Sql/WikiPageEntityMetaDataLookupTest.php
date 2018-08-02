@@ -156,6 +156,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
+		$this->assertSame( 'main', $result->role_name );
 	}
 
 	public function testLoadRevisionInformationById_masterFallback() {
@@ -270,6 +271,9 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			);
 
 		$this->assertRevisionInformation( $entityIds, $result );
+
+		$key = $entityIds[0]->getSerialization();
+		$this->assertSame( 'main', $result[$key]->role_name );
 	}
 
 	public function testLoadRevisionInformation_masterFallback() {
