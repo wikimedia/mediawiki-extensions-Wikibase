@@ -64,7 +64,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 
 		$this->genericServices = new GenericServices(
 			$entityTypeDefinitions,
-			$repositoryDefinitions->getEntityNamespaces()
+			$repositoryDefinitions->getEntityNamespaces(),
+			$repositoryDefinitions->getEntitySlots()
 		);
 
 		$this->multiRepositoryServices = $this->createMultiRepositoryServices(
