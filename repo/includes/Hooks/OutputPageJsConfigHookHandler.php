@@ -94,7 +94,10 @@ class OutputPageJsConfigHookHandler {
 	 */
 	public function doOutputPageBeforeHtmlRegisterConfig( OutputPage $out ) {
 		$title = $out->getTitle();
-		if ( !$title || !$this->entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+
+		if ( !$title
+			|| !$this->entityNamespaceLookup->isNamespaceWithEntities( $title->getNamespace() )
+		) {
 			return true;
 		}
 

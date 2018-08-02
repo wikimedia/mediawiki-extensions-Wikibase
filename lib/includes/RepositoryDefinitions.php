@@ -56,6 +56,11 @@ class RepositoryDefinitions {
 	private $entityNamespaces;
 
 	/**
+	 * @var string[]
+	 */
+	private $entitySlots;
+
+	/**
 	 * @param array[] $repositoryDefinitions Associative array mapping repository names to an array of
 	 * repository settings. Empty-string key stands for local repository.
 	 * See class description for information on the expected format of $repositoryDefinitions
@@ -126,8 +131,9 @@ class RepositoryDefinitions {
 
 	/**
 	 * @return array[] Associative array (string => array) mapping entity types to a list of
-	 * [string repository name, int namespace] pairs, for repositories that provide entities of the given type,
-	 * and the namespace ID on the respective repository.
+	 * [string repository name, int namespace, string slot] tupels, for repositories that
+	 * provide entities of the given type, the namespace ID on the respective repository,
+	 * and the name of the slot in which the entities are stored in pages on that namespace.
 	 * Note: Sub entities are not represented in the return as they do not have a namespace.
 	 */
 	public function getEntityTypeToRepositoryMapping() {
@@ -168,6 +174,17 @@ class RepositoryDefinitions {
 	}
 
 	/**
+	 * @return string[] Associative array (string => string) mapping entity type names to
+	 * the role names of the slots that are used to store that type of entity on the repository
+	 * that provides entities of the given type.
+	 * Note: if the entity is stored in the main slot, it may be omitted from the mapping returned
+	 * by this method.
+	 */
+	public function getEntitySlots() {
+		return $this->entitySlots;
+	}
+
+	/**
 	 * @param array $definition
 	 * @param array $requiredFields
 	 *
@@ -191,7 +208,7 @@ class RepositoryDefinitions {
 		$this->entityNamespaces = [];
 
 		foreach ( $repositoryDefinitions as $repositoryName => $definition ) {
-			foreach ( $definition['entity-namespaces'] as $type => $namespace ) {
+			foreach ( $definition['entity-namespaces'] as $type => $namespaceAndSlot ) {
 				if ( isset( $this->entityTypeToRepositoryMapping[$type] ) ) {
 					throw new InvalidArgumentException(
 						'Using same entity types on multiple repositories is not supported yet. '
@@ -200,8 +217,15 @@ class RepositoryDefinitions {
 					);
 				}
 
-				$this->entityTypeToRepositoryMapping[$type][] = [ $repositoryName, $namespace ];
+				list( $namespace, $slotName ) = $this->splitNamespaceAndSlot( $namespaceAndSlot );
+
+				$this->entityTypeToRepositoryMapping[$type][] = [
+					$repositoryName,
+					$namespace,
+					$slotName,
+				];
 				$this->entityNamespaces[$type] = $namespace;
+				$this->entitySlots[$type] = $slotName;
 
 				$this->entityTypesPerRepository[$repositoryName][] = $type;
 				if ( array_key_exists( $type, $subEntityTypeMap ) ) {
@@ -211,6 +235,29 @@ class RepositoryDefinitions {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param $namespaceAndSlot
+	 *
+	 * @return array list( $namespace, $slotName )
+	 */
+	private function splitNamespaceAndSlot( $namespaceAndSlot ) {
+		if ( is_int( $namespaceAndSlot ) ) {
+			return [ $namespaceAndSlot, 'main' ];
+		}
+
+		if ( !preg_match( '/^(\d+)(@(\w+))?/', $namespaceAndSlot, $m ) ) {
+			throw new InvalidArgumentException(
+				'Bad namespace/slot specification: must be either an integer, or have the form '
+				. '<namespace-id>@<slot-name>. Found ' . $namespaceAndSlot
+			);
+		}
+
+		return [
+			intval( $m[1] ),
+			$m[3] ?? 'main'
+		];
 	}
 
 	/**
