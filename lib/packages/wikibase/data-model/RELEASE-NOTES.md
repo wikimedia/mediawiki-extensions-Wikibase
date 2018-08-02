@@ -5,19 +5,32 @@
 This release removes integers as acceptable entity IDs.
 
 #### Breaking changes
-* `Item::setId` and `Property::setId` do not accept integers any more.
-* Removed `Item::getSiteLinks` and `Item::hasSiteLinks`.
-* Removed `HashArray`.
-* `SnakList` does not extend `HashArray` any more. This removes the following public and protected
-  methods, or makes them private: `addElement`, `getByElementHash`, `getNewOffset`, `getObjectType`,
-  `hasElement`, `hasElementHash`, `hasValidType`, `preSetElement`, `removeByElementHash`,
-  `removeElement`, and `setElement`.
-* Added periods to the list of disallowed characters in `RepositoryNameAssert`.
+
+* `Item::setId` and `Property::setId` no longer accept integers
+* Removed `Item::getSiteLinks` and `Item::hasSiteLinks`
+* Removed `HashArray`
+* `SnakList` no longer extends `HashArray` and no longer has these public and protected methods:
+	* `addElement`
+	* `getByElementHash`
+	* `getNewOffset`
+	* `getObjectType`
+	* `hasElement`
+	* `hasElementHash`
+	* `hasValidType`
+	* `preSetElement`
+	* `removeByElementHash`
+	* `removeElement`
+	* `setElement`
+* Added periods to the list of disallowed characters in `RepositoryNameAssert`
 * `EntityDocument` now extends `ClearableEntity`
 
 #### Other changes
-* Un-deprecated several sitelink related shortcuts from `Item`: `addSiteLink`, `getSiteLink`,
-  `hasLinkToSite`, and `removeSiteLink`.
+
+* Un-deprecated several sitelink related shortcuts from `Item`:
+	* `addSiteLink`
+	* `getSiteLink`
+	* `hasLinkToSite`
+	* `removeSiteLink`
 
 ## Version 7.5.0 (2018-05-02)
 
