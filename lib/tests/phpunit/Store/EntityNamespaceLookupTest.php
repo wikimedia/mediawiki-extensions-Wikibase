@@ -20,6 +20,9 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 		return new EntityNamespaceLookup( [
 			'item' => 120,
 			'property' => 122,
+			'mediainfo' => NS_FILE,
+		], [
+			'mediainfo' => 'mediainfo'
 		] );
 	}
 
@@ -29,6 +32,7 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'item' => 120,
 			'property' => 122,
+			'mediainfo' => NS_FILE,
 		];
 		$this->assertSame( $expected, $lookup->getEntityNamespaces() );
 	}
@@ -37,7 +41,15 @@ class EntityNamespaceLookupTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->newInstance();
 
 		$this->assertSame( 120, $lookup->getEntityNamespace( 'item' ), 'found' );
+		$this->assertSame( NS_FILE, $lookup->getEntityNamespace( 'mediainfo' ), 'found' );
 		$this->assertNull( $lookup->getEntityNamespace( 'kittens' ), 'not found' );
+	}
+
+	public function testGetEntitySlotRole() {
+		$lookup = $this->newInstance();
+
+		$this->assertSame( 'main', $lookup->getEntitySlotRole( 'item' ), 'found' );
+		$this->assertSame( 'mediainfo', $lookup->getEntitySlotRole( 'mediainfo' ), 'found' );
 	}
 
 	public function testIsEntityNamespace() {
