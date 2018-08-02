@@ -65,7 +65,9 @@ class InfoActionHookHandler {
 		// Check if wikibase namespace is enabled
 		$title = $context->getTitle();
 
-		if ( $this->namespaceChecker->isEntityNamespace( $title->getNamespace() ) && $title->exists() ) {
+		if ( $this->namespaceChecker->isNamespaceWithEntities( $title->getNamespace() )
+			&& $title->exists()
+		) {
 			$pageInfo['header-properties'][] = $this->getPageInfoRow( $title );
 		}
 
