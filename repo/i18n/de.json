@@ -413,6 +413,7 @@
 	"wikibase-search-namespace-mix": "Das Vermischen der Objekt- und Artikelnamensräume in der Suche wird derzeit nicht unterstützt. Es werden nur die Objektnamensräume durchsucht.",
 	"wikibase-search-config-notfound": "Volltext-Suchkonfiguration nicht gefunden: $1",
 	"wikibase-search-config-badclass": "Ungültige Abfragenbuilder-Klasse: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Das Schlüsselwort haswbstatement enthält keine gültigen Aussagen",
 	"apihelp-wbavailablebadges-description": "Fragt verfügbare Auszeichnungs-Datenobjekte ab.",
 	"apihelp-wbavailablebadges-summary": "Fragt verfügbare Auszeichnungsobjekte ab.",
 	"apihelp-wbavailablebadges-example-1": "Fragt alle verfügbaren Auszeichnungs-Datenobjekte ab",
