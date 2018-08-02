@@ -163,6 +163,7 @@
 			} )
 			.on( 'focusin', function () {
 				self._inEditMode();
+				self._showDefaultSuggestions();
 			} );
 		},
 
@@ -358,6 +359,27 @@
 
 			return deferred.promise();
 		},
+
+		/**
+		 * @private
+		 */
+		_showDefaultSuggestions: function () {
+			if ( this.element.val() !== '' ) {
+				return;
+			}
+
+			var self = this,
+				term = this.element.val(),
+				promises = this._fireSearchHook( term );
+
+			this._combineResults( promises, [] ).then( function ( suggestions ) {
+				if ( suggestions.length > 0 ) {
+					self._updateMenu( suggestions, term );
+				}
+			} );
+
+		},
+
 		/**
 		 * @inheritdoc
 		 * @protected
