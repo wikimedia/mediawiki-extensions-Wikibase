@@ -163,7 +163,10 @@
 			} )
 			.on( 'focusin', function () {
 				self._inEditMode();
-			} );
+
+			} )
+			.on( 'focusin', $.proxy( self._showDefaultSuggestions, self ) )
+			.on( 'change', $.proxy( self._showDefaultSuggestions, self ) );
 		},
 
 		_indicateRecognizedInput: function () {
@@ -358,6 +361,27 @@
 
 			return deferred.promise();
 		},
+
+		/**
+		 * @private
+		 */
+		_showDefaultSuggestions: function () {
+			if ( this.element.val() !== '' ) {
+				return;
+			}
+
+			var self = this,
+				term = this.element.val(),
+				promises = this._fireSearchHook( term );
+
+			this._processSearchHook( promises, [] ).then( function ( suggestions ) {
+				if ( suggestions.length > 0 ) {
+					self._updateMenu( suggestions, term );
+				}
+			} );
+
+		},
+
 		/**
 		 * @inheritdoc
 		 * @protected
