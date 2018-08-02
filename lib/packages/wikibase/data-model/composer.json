@@ -34,9 +34,6 @@
 		"wikibase/wikibase-codesniffer": "^0.3.0"
 	},
 	"autoload": {
-		"files" : [
-			"WikibaseDataModel.php"
-		],
 		"psr-4": {
 			"Wikibase\\DataModel\\": "src/"
 		}
