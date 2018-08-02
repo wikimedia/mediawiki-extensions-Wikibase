@@ -32,7 +32,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 
 === Basic Settings ===
 
-;entityNamespaces: Defines which kind of entity is managed in which namespace. It is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. Mapping must be done for each type of entity that should be supported.
+;entityNamespaces: Defines which kind of entity is managed in which namespace. It is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. Mapping must be done for each type of entity that should be supported. If entities are stored in alternative slots, the syntax <namespace-id>@<slot-name> can be used to define which slot to use.
 ;dataRightsUrl: URL to link to license for data contents. Defaults to <code>$wgRightsUrl</code> setting.
 ;dataRightsText: Text for data license link. Defaults to <code>$wgRightsText</code> setting.
 ;sparqlEndpoint: URL to the service description of the SPARQL end point for the repository. Defaults to null, meaning there is no SPARQL endpoint.
@@ -42,7 +42,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;preferredGeoDataProperties: List of properties (by ID string), in order of preference, that are considered when finding primary coordinates for the GeoData extension on an entity. Defaults to an empty array.
 ;localClientDatabases: An array of locally accessible client databases, for use by the <code>dispatchChanges.php</code> script. This setting determines to which wikis changes are pushed directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases. The default is an empty array, indicating no local client databases.
 ;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
-:;'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces identifiers (numbers) related to pages of entities of the given type on foreign repository's wiki..
+:;'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces identifiers (numbers) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax <namespace-id>@<slot-name> can be used to define which slot to use.
 :;'repoDatabase': A symbolic database identifier (string) that MediaWiki's LBFactory class understands.
 :;'baseUri': A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
 :;'prefixMapping': A prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
@@ -95,7 +95,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;namespaces: List of namespaces on the client wiki that should have access to repository items. Default: <code>array()</code> (treated as setting is not set, ie. namespaces are enabled).
 ;excludeNamespaces: List of namespaces on the client wiki to disable wikibase links, etc. for.  Default: <code>array()</code>. Example: <code>array( NS_USER_TALK )</code>.
 ;repositories: An associative array mapping repository names to settings relevant to the particular repository. Local repository is identified using the empty string as its name. Each repository's settings are an associative array containing the following keys:
-:;'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces identifiers (numbers) related to pages of entities of the given type on foreign repository's wiki..
+:;'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces identifiers (numbers) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax <namespace-id>@<slot-name> can be used to define which slot to use.
 :;'repoDatabase': A symbolic database identifier (string) that MediaWiki's LBFactory class understands. Note that <code>false</code> would mean "this wiki's database"!
 :;'baseUri': A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
 :;'prefixMapping': A prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
