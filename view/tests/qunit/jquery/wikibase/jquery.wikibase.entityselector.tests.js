@@ -263,4 +263,38 @@
 		} );
 	} );
 
+	QUnit.test( 'When showDefaultSuggestions() is called and value is empty', function ( assert ) {
+		var hookStub = sinon.stub( mw, 'hook' ),
+			fireSpy = sinon.spy(),
+			hook = 'HOOK_NAME',
+			emtpyValue = '',
+			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		hookStub.withArgs( hook ).returns( { fire: fireSpy } );
+
+		$entitySelector.val( emtpyValue );
+		entitySelector._showDefaultSuggestions();
+
+		assert.equal( fireSpy.getCall( 0 ).args[ 0 ].term, emtpyValue, 'Then mw.hook().fire() is called with empty value' );
+		hookStub.restore();
+	} );
+
+	QUnit.test( 'When showDefaultSuggestions() is called and value is NOT empty', function ( assert ) {
+		var hookStub = sinon.stub( mw, 'hook' ),
+			fireSpy = sinon.spy(),
+			hook = 'HOOK_NAME',
+			value = '[NOT_EMPTY]',
+			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		hookStub.withArgs( hook ).returns( { fire: fireSpy } );
+
+		$entitySelector.val( value );
+		entitySelector._showDefaultSuggestions();
+
+		assert.equal( fireSpy.getCall( 0 ), null, 'Then mw.hook().fire() is NOT called' );
+		hookStub.restore();
+	} );
+
 }( jQuery, QUnit, sinon, mediaWiki ) );
