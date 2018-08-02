@@ -17,11 +17,20 @@ class EntityNamespaceLookup {
 	private $entityNamespaces;
 
 	/**
-	 * @param int[] $entityNamespaces
+	 * @var string[]
 	 */
-	public function __construct( array $entityNamespaces ) {
+	private $entitySlots;
+
+	/**
+	 * @param int[] $entityNamespaces
+	 * @param string[] $entitySlots
+	 */
+	public function __construct( array $entityNamespaces, array $entitySlots = [] ) {
 		Assert::parameterElementType( 'integer', $entityNamespaces, '$entityNamespaces' );
+		Assert::parameterElementType( 'string', $entitySlots, '$entitySlots' );
+
 		$this->entityNamespaces = $entityNamespaces;
+		$this->entitySlots = $entitySlots;
 	}
 
 	/**
@@ -49,15 +58,48 @@ class EntityNamespaceLookup {
 	}
 
 	/**
-	 * Determines whether the given namespace is designated to hold some kind of Wikibase entity.
-	 * Shorthand for in_array( $ns, self::getEntityNamespaces() );
+	 * @param string $entityType
+	 *
+	 * @return int The role name of the slot that this kind of entity is stored in.
+	 *         In dedicated entity namespaces, this will be the "main" slot, but
+	 *         other slots may be used when entities are "attached" to other kinds of
+	 *         pages.
+	 */
+	public function getEntitySlotRole( $entityType ) {
+		return isset( $this->entitySlots[$entityType] )
+			? $this->entitySlots[$entityType]
+			: 'main';
+	}
+
+	/**
+	 * Determines whether the given namespace contains some kind of Wikibase entity.
+	 * This will return true if pages in this namespace may contain entities in any slot.
+	 *
+	 * @see isEntityNamespace()
+	 *
+	 * @param int $ns the namespace ID
+	 *
+	 * @return bool true if $ns is an entity namespace
+	 */
+	public function isNamespaceWithEntities( $ns ) {
+		return in_array( $ns, $this->entityNamespaces, true );
+	}
+
+	/**
+	 * Determines whether the given namespace is reserved for holding some kind of Wikibase entity.
+	 * Note that this will return only if the namespace contains entities in the page's main slots.
+	 * When other slots are used to "attache" entities to other kind of content, this returns false.
+	 *
+	 * @see isNamespaceWithEntities()
 	 *
 	 * @param int $ns the namespace ID
 	 *
 	 * @return bool true if $ns is an entity namespace
 	 */
 	public function isEntityNamespace( $ns ) {
-		return in_array( $ns, $this->entityNamespaces, true );
+		$entityType = array_search( $ns, $this->entityNamespaces, true );
+
+		return $entityType !== false && $this->getEntitySlotRole( $entityType ) === 'main';
 	}
 
 	/**

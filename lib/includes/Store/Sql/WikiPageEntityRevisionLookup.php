@@ -12,7 +12,6 @@ use MWContentSerializationException;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\EntityContent;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -183,6 +182,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// TODO: WikiPageEntityMetaDataLookup should use RevisionStore::getQueryInfo,
 		// then we could use RevisionStore::newRevisionFromRow here!
 		$revision = $this->revisionStore->getRevisionById( $row->rev_id );
+		$slotRole = $row->role_name ?? 'main';
 
 		// NOTE: Support for cross-wiki content access in RevisionStore is incomplete when,
 		// reading from the pre-MCR database schema, see T201194.
@@ -191,8 +191,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// TODO Once we can rely on the new MCR enabled DB schema, use getContent() directly!
 
 		try {
-			// TODO The slot to load the entity from should be configurable
-			$slot = $revision->getSlot( 'main' );
+			$slot = $revision->getSlot( $slotRole );
 		} catch ( RevisionAccessException $e ) {
 			throw new StorageException( 'Failed to load slot', 0, $e );
 		}

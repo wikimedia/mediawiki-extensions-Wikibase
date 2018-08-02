@@ -27,6 +27,7 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 
 	const ITEM_NAMESPACE = 100;
 	const PROPERTY_NAMESPACE = 300;
+	const FROBNIZ_NAMESPACE = 500;
 
 	private function getRepositoryDefinition( $repositoryName, array $customSettings ) {
 		return [ $repositoryName => array_merge(
@@ -61,8 +62,19 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 			$containerFactory,
 			new RepositoryDefinitions(
 				array_merge(
-					$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ Item::ENTITY_TYPE => self::ITEM_NAMESPACE ] ] ),
-					$this->getRepositoryDefinition( 'foo', [ 'entity-namespaces' => [ Property::ENTITY_TYPE => self::PROPERTY_NAMESPACE ] ] )
+					$this->getRepositoryDefinition(
+						'',
+						[ 'entity-namespaces' => [ Item::ENTITY_TYPE => self::ITEM_NAMESPACE ] ]
+					),
+					$this->getRepositoryDefinition(
+						'foo',
+						[
+							'entity-namespaces' => [
+								Property::ENTITY_TYPE => self::PROPERTY_NAMESPACE,
+								'frobniz' => self::FROBNIZ_NAMESPACE . '@frob',
+							],
+						]
+					)
 				),
 				new EntityTypeDefinitions( [] )
 			)
@@ -180,8 +192,9 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			[
-				Item::ENTITY_TYPE => [ [ '', self::ITEM_NAMESPACE ] ],
-				Property::ENTITY_TYPE => [ [ 'foo', self::PROPERTY_NAMESPACE ] ],
+				Item::ENTITY_TYPE => [ [ '', self::ITEM_NAMESPACE, 'main' ] ],
+				Property::ENTITY_TYPE => [ [ 'foo', self::PROPERTY_NAMESPACE, 'main' ] ],
+				'frobniz' => [ [ 'foo', self::FROBNIZ_NAMESPACE, 'frob' ] ],
 			],
 			$services->getEntityTypeToRepoMapping()
 		);
