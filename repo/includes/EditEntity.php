@@ -733,6 +733,12 @@ class EditEntity {
 			);
 
 			$this->entityId = $newEntity->getId();
+
+			if ( $this->entityId->getSerialization() === 'Q1' ) {
+				wfDebugLog( 'XXX', wfTimestamp() );
+				wfDebugLog( 'XXX', wfBacktrace() );
+			}
+
 			$editStatus = Status::newGood( [ 'revision' => $entityRevision ] );
 		} catch ( StorageException $ex ) {
 			$editStatus = $ex->getStatus();
