@@ -78,7 +78,7 @@ final class RepoHooks {
 	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skin ) {
 		$title = $out->getTitle();
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-		$isEntityTitle = $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() );
+		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $title->getNamespace() );
 
 		if ( $isEntityTitle ) {
 			$out->addModules( 'wikibase.mobile' );
@@ -99,6 +99,7 @@ final class RepoHooks {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$namespaces = $wikibaseRepo->getLocalEntityNamespaces();
+		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 
 		// Register entity namespaces.
 		// Note that $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this
@@ -106,7 +107,13 @@ final class RepoHooks {
 		$contentModelIds = $wikibaseRepo->getContentModelMappings();
 
 		foreach ( $namespaces as $entityType => $namespace ) {
-			if ( !isset( $wgNamespaceContentModels[$namespace] ) ) {
+			// TODO: once there is a mechanism for registering the default content model for
+			// slots other than the main slot, do that!
+			// XXX: we should probably not just ignore $entityTypes that don't match $contentModelIds.
+			if ( !isset( $wgNamespaceContentModels[$namespace] )
+				&& isset( $contentModelIds[$entityType] )
+				&& $namespaceLookup->getEntitySlotRole( $namespace ) === 'main'
+			) {
 				$wgNamespaceContentModels[$namespace] = $contentModelIds[$entityType];
 			}
 		}
@@ -865,7 +872,7 @@ final class RepoHooks {
 		$title = $skinTemplate->getTitle();
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( !$title || !$namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( !$title || !$namespaceLookup->isNamespaceWithEntities( $title->getNamespace() ) ) {
 			return;
 		}
 
@@ -953,7 +960,7 @@ final class RepoHooks {
 		$namespaceChecker = $wikibaseRepo->getEntityNamespaceLookup();
 		$title = $context->getTitle();
 
-		if ( !$title || !$namespaceChecker->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( !$title || !$namespaceChecker->isNamespaceWithEntities( $title->getNamespace() ) ) {
 			// shorten out
 			return;
 		}

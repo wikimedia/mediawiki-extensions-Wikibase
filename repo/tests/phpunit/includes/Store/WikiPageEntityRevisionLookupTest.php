@@ -3,8 +3,15 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Storage\BlobStore;
+use MediaWiki\Storage\MutableRevisionRecord;
+use MediaWiki\Storage\RevisionStore;
+use MediaWiki\Storage\SlotRecord;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -128,6 +135,76 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		);
 
 		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId, 'load-mode' );
+
+		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
+	}
+
+	public function testGetEntityRevision_fromAlternativeSlot() {
+		$entity = new Item( new ItemId( 'Q765' ) );
+		$entityId = $entity->getId();
+		$revisionId = 117;
+
+		$slot = new SlotRecord( (object)[
+			'slot_revision_id' => $revisionId,
+			'slot_content_id' => 1234567,
+			'slot_origin' => 77,
+			'content_address' => 'xx:blob',
+			'content_format' => CONTENT_FORMAT_JSON,
+
+			// Currently, the model must be ignored. That may change in the future!
+			'model_name' => 'WRONG',
+			'role_name' => 'kittens',
+		], function() {
+			// This doesn#t work cross-wiki yet, so make sure we don't try.
+			$this->fail( 'Content should not be constructed by the RevisionStore' );
+		} );
+
+		$revision = new MutableRevisionRecord( Title::newFromText( $entityId->getSerialization() ) );
+		$revision->setId( $revisionId );
+		$revision->setTimestamp( wfTimestampNow() );
+		$revision->setSlot( $slot );
+
+		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$metaDataLookup->expects( $this->once() )
+			->method( 'loadRevisionInformationByRevisionId' )
+			->with( $entityId, $revisionId )
+			->will( $this->returnValue(
+				(object)[ 'rev_id' => $revisionId, 'role_name' => 'kittens' ]
+			) );
+
+		$revisionStore = $this->getMockBuilder( RevisionStore::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$revisionStore->expects( $this->once() )
+			->method( 'getRevisionById' )
+			->with( $revisionId )
+			->will( $this->returnValue(
+				$revision
+			) );
+
+		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+
+		$blobStore = $this->getMock( BlobStore::class );
+		$blobStore->expects( $this->once() )
+			->method( 'getBlob' )
+			->with( 'xx:blob' )
+			->will( $this->returnValue(
+				$codec->encodeEntity( $entity, CONTENT_FORMAT_JSON )
+			) );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			$codec,
+			$metaDataLookup,
+			$revisionStore,
+			$blobStore,
+			false
+		);
+
+		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId );
 
 		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
 	}

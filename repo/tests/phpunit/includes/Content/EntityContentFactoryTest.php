@@ -175,6 +175,14 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertGreaterThanOrEqual( 0, $ns, 'namespace' );
 	}
 
+	public function testGetSlotRoleForType() {
+		$factory = $this->newFactory();
+		$id = new ItemId( 'Q42' );
+
+		$role = $factory->getSlotRoleForType( $id->getEntityType() );
+		$this->assertSame( 'main', $role );
+	}
+
 	public function testGetContentHandlerForType() {
 		$factory = $this->newFactory();
 

@@ -60,7 +60,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'media' => [
 				'database' => 'foowiki',
 				'base-uri' => 'http://foo.test/concept/',
-				'entity-namespaces' => [ 'mediainfo' => 888 ],
+				'entity-namespaces' => [ 'mediainfo' => '888@mediainfo' ],
 				'prefix-mapping' => [],
 			],
 			'lexeme' => [
@@ -127,10 +127,10 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			[
-				'item' => [ [ '', 666 ] ],
-				'property' => [ [ '', 777 ] ],
-				'mediainfo' => [ [ 'media', 888 ] ],
-				'lexeme' => [ [ 'lexeme', 999 ] ]
+				'item' => [ [ '', 666, 'main' ] ],
+				'property' => [ [ '', 777, 'main' ] ],
+				'mediainfo' => [ [ 'media', 888, 'mediainfo' ] ],
+				'lexeme' => [ [ 'lexeme', 999, 'main' ] ]
 			],
 			$definitions->getEntityTypeToRepositoryMapping()
 		);
@@ -165,6 +165,15 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals(
 			[ 'item' => 666, 'property' => 777, 'mediainfo' => 888, 'lexeme' => 999 ],
 			$definitions->getEntityNamespaces()
+		);
+	}
+
+	public function testGetEntitySlots() {
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), $this->getEntityTypeDefinitions() );
+
+		$this->assertEquals(
+			[ 'item' => 'main', 'property' => 'main', 'mediainfo' => 'mediainfo', 'lexeme' => 'main' ],
+			$definitions->getEntitySlots()
 		);
 	}
 

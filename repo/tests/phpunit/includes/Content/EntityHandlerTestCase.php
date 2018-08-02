@@ -180,6 +180,16 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$this->assertTrue( $this->getHandler()->isParserCacheSupported() );
 	}
 
+	public function testGetEntityNamespace() {
+		$handler = $this->getHandler();
+		$this->assertGreaterThanOrEqual( 0, $handler->getEntityNamespace() );
+	}
+
+	public function testGetEntitySlotRole() {
+		$handler = $this->getHandler();
+		$this->assertInternalType( 'string', $handler->getEntitySlotRole() );
+	}
+
 	public function testGetPageLanguage() {
 		global $wgContLang;
 
