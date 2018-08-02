@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bd875e5_8fb326d2",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-02T15:40:24Z",
+      "side": 1,
+      "message": "Ideally we should also bump the version in mediawiki-vendor with this change",
+      "range": {
+        "startLine": 28,
+        "startChar": 23,
+        "endLine": 28,
+        "endChar": 28
+      },
+      "revId": "16a5fc6734ac7ebcc61f66f62d69c7be8572e523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
