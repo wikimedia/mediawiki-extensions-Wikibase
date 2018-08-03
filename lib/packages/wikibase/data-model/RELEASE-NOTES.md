@@ -19,6 +19,7 @@
 	* `removeByElementHash`
 	* `removeElement`
 	* `setElement`
+* Removed `WIKIBASE_DATAMODEL_VERSION` constant
 * Added periods to the list of disallowed characters in `RepositoryNameAssert`
 * `EntityDocument` now extends `ClearableEntity`
 
