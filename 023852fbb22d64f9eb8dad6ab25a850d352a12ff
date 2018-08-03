@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3123bf3_aa7898c1",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-03T15:28:07Z",
+      "side": 1,
+      "message": "I had `$wgEnableParserCache` turned off in my LocalSettings and got burned - as I am likely not the only one should we explicitly turn it on for this test?",
+      "range": {
+        "startLine": 784,
+        "startChar": 9,
+        "endLine": 784,
+        "endChar": 23
+      },
+      "revId": "023852fbb22d64f9eb8dad6ab25a850d352a12ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d4070c2_ea62b9e4",
+        "filename": "view/lib/wikibase-data-model",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-03T15:28:07Z",
+      "side": 1,
+      "message": "If I am not mistaken this resolves to release 4.0.0 of the data model. This change is likely here by accident. Correct?\n\nhttps://github.com/wmde/WikibaseDataModelJavaScript/releases",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "023852fbb22d64f9eb8dad6ab25a850d352a12ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60ea9ad5_d75938db",
+        "filename": "view/lib/wikibase-data-values-value-view",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-03T15:28:07Z",
+      "side": 1,
+      "message": "This would take us back from 0.22.2 to 0.22.1\nThe change is likely here by accident. Correct?",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "023852fbb22d64f9eb8dad6ab25a850d352a12ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
