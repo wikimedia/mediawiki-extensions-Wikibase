@@ -16,6 +16,24 @@
       "revId": "e81cf18f76d4b94e4aeb1cdc8d6bbe7950d98487",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c24f836f_cfea3a7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-03T12:32:25Z",
+      "side": 1,
+      "message": "I agree, but I\u0027d like to point out that part of the confusion is caused by ParserOptions::getUserLangObject not returning the user\u0027s language object. Also, the distinction between the target language and the user language is rather confusing.",
+      "parentUuid": "b883a3f6_2cf5e9d9",
+      "revId": "e81cf18f76d4b94e4aeb1cdc8d6bbe7950d98487",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
