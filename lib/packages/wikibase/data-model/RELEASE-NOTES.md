@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 8.0.0 (dev)
+## Version 8.0.0 (2018-08-03)
 
 #### Breaking changes
 
