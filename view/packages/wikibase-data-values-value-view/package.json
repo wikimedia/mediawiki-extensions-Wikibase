@@ -3,7 +3,7 @@
   "description": "Provides JS widgets to edit values defined by the DataValues library",
   "version": "0.22.2",
   "homepage": "https://www.mediawiki.org/wiki/Extension:ValueView",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "contributors": [
     {
       "name": "Daniel Werner",
