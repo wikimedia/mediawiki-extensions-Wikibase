@@ -29,9 +29,11 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 * @dataProvider constructorProvider
 	 */
 	public function testConstructor( array $excluded, array $enabled ) {
+		var_dump( MWNamespace::getValidNamespaces() );
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
 		$this->assertEquals( $enabled, $namespaceChecker->getEnabledNamespaces() );
 		$this->assertEquals( $excluded, $namespaceChecker->getExcludedNamespaces() );
+		var_dump( MWNamespace::getValidNamespaces() );
 	}
 
 	public function enabledProvider() {
@@ -57,18 +59,22 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 * @dataProvider enabledProvider
 	 */
 	public function testIsWikibaseEnabled( $namespace, $excluded, $enabled, $expected ) {
+		var_dump( MWNamespace::getValidNamespaces() );
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
 		$result = $namespaceChecker->isWikibaseEnabled( $namespace );
 		$this->assertEquals( $expected, $result );
+		var_dump( MWNamespace::getValidNamespaces() );
 	}
 
 	/**
 	 * @dataProvider enabledInvalidProvider
 	 */
 	public function testIsWikibaseEnabledInvalid( $namespace, $excluded, $enabled ) {
+		var_dump( MWNamespace::getValidNamespaces() );
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
 		$this->setExpectedException( InvalidArgumentException::class );
 		$namespaceChecker->isWikibaseEnabled( $namespace );
+		var_dump( MWNamespace::getValidNamespaces() );
 	}
 
 	public function enabledInvalidProvider() {
@@ -86,6 +92,7 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		// * if the ns is in both, include and exclude, then it is excluded.
 
 		$all = MWNamespace::getValidNamespaces();
+		var_dump( $all );
 
 		return [
 			[ [], [], $all ], // #0
@@ -100,9 +107,13 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 * @dataProvider wikibaseNamespacesProvider
 	 */
 	public function testGetWikibaseNamespaces( $excluded, $enabled, $expected ) {
+		var_dump( MWNamespace::getValidNamespaces() );
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		var_dump( MWNamespace::getValidNamespaces() );
 		$result = $namespaceChecker->getWikibaseNamespaces();
+		var_dump( MWNamespace::getValidNamespaces() );
 		$this->assertArrayEquals( $expected, $result );
+		var_dump( MWNamespace::getValidNamespaces() );
 	}
 
 }
