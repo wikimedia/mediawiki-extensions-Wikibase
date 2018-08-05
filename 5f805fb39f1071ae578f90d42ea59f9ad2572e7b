@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "766009c1_94d8d50d",
+        "filename": "docs/options.wiki",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-05T18:13:41Z",
+      "side": 1,
+      "message": "Also needs the blurb about slots.",
+      "revId": "5f805fb39f1071ae578f90d42ea59f9ad2572e7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
