@@ -171,7 +171,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 		try {
 			// TODO The slot to load the entity from should be configurable
-			/** @var EntityContent $content */
 			$content = $revision->getContent( 'main' );
 		} catch ( RevisionAccessException $e ) {
 			throw new StorageException( 'getContent failed', 0, $e );
@@ -183,6 +182,15 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			// Wikibase should handle old revisions with suppressed content gracefully.
 			// @see https://phabricator.wikimedia.org/T198467
 			return [ null, null ];
+		}
+
+		if ( ! $content instanceof EntityContent ) {
+			throw new StorageException(
+				'Expected an EntityContent instance, found a ' . get_class( $content )
+				. ' instance with content model ' . $content->getModel() . ' while reading'
+				. ' revision ' . $row->rev_id
+				. ' (wiki id: ' . var_export( $revision->getWikiId(), true ). ').'
+			);
 		}
 
 		if ( !$content->isRedirect() ) {
