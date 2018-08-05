@@ -85,12 +85,17 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		//   accepted if and only if the include array is empty.
 		// * if the ns is in both, include and exclude, then it is excluded.
 
-		$all = MWNamespace::getValidNamespaces();
-
+		// @todo For some reason getValidNamespaces() returns different results here and in the
+		// actual test (maybe spillover from a different test?).  Work around the issue with
+		// callbacks until the actual problem is resolved.
 		return [
-			[ [], [], $all ], // #0
+			[ [], [], function () {
+				return MWNamespace::getValidNamespaces();
+			} ], // #0
 			[ [], [ NS_MAIN ], [ NS_MAIN ] ], // #1
-			[ [ NS_USER_TALK ], [], array_diff( $all, [ NS_USER_TALK ] ) ], // #2
+			[ [ NS_USER_TALK ], [], function () {
+				return array_diff( MWNamespace::getValidNamespaces(), [ NS_USER_TALK ] );
+			} ], // #2
 			[ [ NS_CATEGORY ], [ NS_USER_TALK ], [ NS_USER_TALK ] ], // #3
 			[ [ NS_USER_TALK ], [ NS_USER_TALK ], [] ] // #4
 		];
@@ -100,6 +105,9 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 * @dataProvider wikibaseNamespacesProvider
 	 */
 	public function testGetWikibaseNamespaces( $excluded, $enabled, $expected ) {
+		if ( is_callable( $expected ) ) {
+			$expected = $expected();
+		}
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
 		$result = $namespaceChecker->getWikibaseNamespaces();
 		$this->assertArrayEquals( $expected, $result );
