@@ -25,6 +25,18 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		];
 	}
 
+	public static function setUpBeforeClass() {
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
+		parent::setUpBeforeClass();
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
+	}
+
+	public function setUp() {
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
+		parent::setUp();
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
+	}
+
 	/**
 	 * @dataProvider constructorProvider
 	 */
@@ -86,6 +98,7 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		// * if the ns is in both, include and exclude, then it is excluded.
 
 		$all = MWNamespace::getValidNamespaces();
+		var_dump( __FILE__ . ':' . __LINE__, $all );
 
 		return [
 			[ [], [], $all ], // #0
@@ -100,9 +113,13 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 * @dataProvider wikibaseNamespacesProvider
 	 */
 	public function testGetWikibaseNamespaces( $excluded, $enabled, $expected ) {
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
 		$result = $namespaceChecker->getWikibaseNamespaces();
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
 		$this->assertArrayEquals( $expected, $result );
+		var_dump( __FILE__ . ':' . __LINE__, MWNamespace::getValidNamespaces() );
 	}
 
 }
