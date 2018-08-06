@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8a2be3d_884f6900",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-06T19:37:28Z",
+      "side": 1,
+      "message": "Filed -\u003e Failed",
+      "range": {
+        "startLine": 209,
+        "startChar": 32,
+        "endLine": 209,
+        "endChar": 37
+      },
+      "revId": "bf35a155f827683071f6772c2d30e7967000b1c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
