@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Merge\Validator\DifferentEntities;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -226,7 +227,8 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( 'One or more of the entities are not items', 'not-item' );
 		}
 
-		if ( $toEntity->getId()->equals( $fromEntity->getId() ) ) {
+		$differentEntities = new DifferentEntities();
+		if ( !$differentEntities->validate( $fromEntity, $toEntity ) ) {
 			throw new ItemMergeException( 'You must provide unique ids', 'cant-merge-self' );
 		}
 	}
