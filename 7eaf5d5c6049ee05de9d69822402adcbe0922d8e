@@ -22,6 +22,30 @@
       "revId": "7eaf5d5c6049ee05de9d69822402adcbe0922d8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70d2a532_34b2a560",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-06T08:54:43Z",
+      "side": 1,
+      "message": "Well, something really *did* go wrong, with either the store (as is currently the case), or the Title lookup.\n\nI cannot think of a situation where recovery from this situation would be different from the recovery from \"oops that content blob doesn\u0027t exist\" or some such. \n\nWe could distinguish misconfiguration from data corruption. That may seem nice in theory, but I do not see the benefit in practice. Also, this situation might arise through data corruption as well as through mis-configuration or a bug. There is really no way to tell here.",
+      "parentUuid": "5d3ce7b1_1072d5ee",
+      "range": {
+        "startLine": 188,
+        "startChar": 13,
+        "endLine": 188,
+        "endChar": 29
+      },
+      "revId": "7eaf5d5c6049ee05de9d69822402adcbe0922d8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
