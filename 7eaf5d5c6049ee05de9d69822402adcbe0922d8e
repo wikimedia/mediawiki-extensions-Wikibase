@@ -46,6 +46,30 @@
       "revId": "7eaf5d5c6049ee05de9d69822402adcbe0922d8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1f3411a_fca8edbd",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-06T09:54:32Z",
+      "side": 1,
+      "message": "Thanks for taking the time to explain your thinking - just wanted to make sure it is not left unconsidered.",
+      "parentUuid": "70d2a532_34b2a560",
+      "range": {
+        "startLine": 188,
+        "startChar": 13,
+        "endLine": 188,
+        "endChar": 29
+      },
+      "revId": "7eaf5d5c6049ee05de9d69822402adcbe0922d8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
