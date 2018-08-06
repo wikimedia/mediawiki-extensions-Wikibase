@@ -63,7 +63,7 @@ class Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @return Lua
+	 * @return array Lua package
 	 */
 	function register() {
 	}
