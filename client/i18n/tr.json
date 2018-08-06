@@ -43,7 +43,7 @@
 	"wikibase-rc-hide-wikidata-hide": "gizle",
 	"wikibase-rc-hide-wikidata-show": "göster",
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} değişikliklerini son değişikliklerde göster",
-	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-letter": "V",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} düzenlemeleri",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}}'den gelen düzenlemeler.",
@@ -61,6 +61,7 @@
 	"wikibase-otherprojects": "Diğer projelerde",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
 	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler.",
+	"notification-header-page-connection": "<strong>$3</strong> adlı sayfa, konuyla ilgili verileri içeren {{PLURAL:$4|-1=bir {{WBREPONAME}} öğesine|$4 numaralı {{WBREPONAME}} öğesine}} {{GENDER:$2|bağlandı}}.",
 	"connected-redirect-category": "Bir {{WBREPONAME}} öğesine bağlı olan yönlendirmeler",
 	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler."
 }

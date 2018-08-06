@@ -139,6 +139,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "افزودن و حذف {{PLURAL:$1|نام مستعار|نام‌های مستعار}}[$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "افزودن {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "حذف {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-update": "بروزرسانی {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "[$2] برچسب، شرح و نام‌های مستعار تغییر یافت",
 	"wikibase-entity-summary-wbsetsitelink-add": "پیوند مشخص‌کنندهٔ وب‌گاه [$2] افزوده شد",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "پیوند اضافه‌شده با نشان‌ها به [$2]",

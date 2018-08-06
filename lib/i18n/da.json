@@ -9,7 +9,8 @@
 			"Steenth",
 			"Fitoschido",
 			"Peter Alberti",
-			"Sarrus"
+			"Sarrus",
+			"Saederup92"
 		]
 	},
 	"wikibase-lib-desc": "Fælles funktionalitet for Wikibase og Wikibase-klientudvidelser",
@@ -32,6 +33,7 @@
 	"wikibase-quantitydetails-upperbound": "Øvre grænse",
 	"wikibase-quantitydetails-lowerbound": "Nedre grænse",
 	"wikibase-quantitydetails-unit": "Enhed",
+	"wikibase-timedetails-time": "Tidspunkt",
 	"wikibase-timedetails-timezone": "Tidszone",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-timedetails-precision": "Præcision",

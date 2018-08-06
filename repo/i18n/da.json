@@ -11,7 +11,8 @@
 			"아라",
 			"Macofe",
 			"Sarrus",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Saederup92"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -29,6 +30,7 @@
 	"wikibase-statementlistview-add": "tilføj",
 	"wikibase-statementgrouplistview-add": "tilføj",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "På flere sprog",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Også kendt som",
 	"wikibase-entitytermsforlanguagelistview-description": "Beskrivelse",
 	"wikibase-entitytermsforlanguagelistview-language": "Sprog",
 	"wikibase-entitytermsforlanguagelistview-more": "Flere sprog",
@@ -196,6 +198,7 @@
 	"wikibase-history-title-without-label": "Versionshistorik for $1",
 	"wikibase-listproperties-datatype": "Datatype:",
 	"wikibase-listproperties-all": "Alle datatyper",
+	"wikibase-listproperties-submit": "Find",
 	"special-entitieswithoutdescription": "Entiteter uden beskrivelse",
 	"wikibase-entitieswithoutdescription-legend": "Få en liste af entiteter uden beskrivelse",
 	"special-entitieswithoutlabel": "Entiteter uden etiket",
@@ -215,6 +218,7 @@
 	"wikibase-entitydata-title": "Entitetsdata",
 	"wikibase-entitydata-text": "Denne side giver datahenvisninger til entitetsværdier. Angiv entitets-ID i URL-adressen ved hjælp af undersidesyntaks.",
 	"wikibase-redirectentity-submit": "Omdiriger",
+	"wikibase-redirect-permissiondenied": "Tilladelse nægtet",
 	"special-mylanguagefallbackchain": "Min rækkefølge af sprog at falde tilbage på",
 	"wikibase-mylanguagefallbackchain-text": "Rækkefølgen af sprog at falde tilbage på, der bruges til at vise dig etiketter for entiteter, er vist nedenfor.",
 	"wikibase-mylanguagefallbackchain-babel": "Du kan redigere den ved at sætte <nowiki>{{#babel:}}</nowiki> på {{GENDER:$1|din}} [[Special:MyPage|brugerside]].",

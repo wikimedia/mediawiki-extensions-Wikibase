@@ -61,6 +61,8 @@
 	"wikibase-validator-missing-field": "필수 칸 '$1'이 없습니다.",
 	"wikibase-validator-bad-type": "$1 대신 $2",
 	"wikibase-validator-too-long": "{{PLURAL:$1|한 문자|$1 문자}}보다 더 길지 않아야 합니다",
+	"wikibase-validator-label-too-long": "레이블은 {{PLURAL:$1|1자|$1자}}를 초과할 수 없습니다",
+	"wikibase-validator-description-too-long": "설명은 {{PLURAL:$1|1자|$1자}}를 초과할 수 없습니다",
 	"wikibase-validator-too-short": "{{PLURAL:$1|한 문자|$1 문자}} 이상이어야 합니다",
 	"wikibase-validator-too-high": "범위는 $1보다 클 수 없습니다.",
 	"wikibase-validator-too-low": "범위는 $1보다 작을 수 없습니다.",

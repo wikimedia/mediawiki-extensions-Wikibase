@@ -53,6 +53,8 @@
 	"wikibase-validator-missing-field": "প্রয়োজনীয় ক্ষেত্র \"$1\" অনুপস্থিত",
 	"wikibase-validator-bad-type": "$1 এর পরিবর্তে $2",
 	"wikibase-validator-too-long": "{{PLURAL:$1|একটি অক্ষরের|$1টি অক্ষরের}} চেয়ে বেশি হবে না",
+	"wikibase-validator-label-too-long": "লেবেল {{PLURAL:$1|এক অক্ষরের|$1 অক্ষরের}} চেয়ে দীর্ঘ হতে পারবে না",
+	"wikibase-validator-description-too-long": "বিবরণ {{PLURAL:$1|এক অক্ষরের|$1 অক্ষরের}} চেয়ে দীর্ঘ হতে পারবে না",
 	"wikibase-validator-too-short": "অন্তত {{PLURAL:$1|একটি অক্ষর|$1টি অক্ষর}} হতে হবে",
 	"wikibase-validator-too-high": "সীমার বাইরে, অবশ্যই $1-এর থেকে বেশি হতে পারবে না।",
 	"wikibase-validator-too-low": "সীমার বাইরে, অবশ্যই $1-এর থেকে কম হতে পারবে না।",

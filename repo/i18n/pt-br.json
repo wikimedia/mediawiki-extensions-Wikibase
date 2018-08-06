@@ -411,6 +411,7 @@
 	"wikibase-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",
 	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida",
 	"apihelp-wbavailablebadges-description": "Consulta os itens de emblema disponíveis.",
 	"apihelp-wbavailablebadges-summary": "Consulta os itens de emblema disponíveis.",
 	"apihelp-wbavailablebadges-example-1": "Consulta todos os itens de emblema disponíveis",

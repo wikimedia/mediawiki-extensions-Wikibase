@@ -56,6 +56,8 @@
 	"wikibase-validator-missing-field": "Saknar obligatoriskt fält '$1'",
 	"wikibase-validator-bad-type": "$2 istället för $1",
 	"wikibase-validator-too-long": "Får inte vara mer än {{PLURAL:$1|ett tecken|$1 tecken}} lång",
+	"wikibase-validator-label-too-long": "Etiketten får inte vara mer än {{PLURAL:$1|ett tecken|$1 tecken}} lång",
+	"wikibase-validator-description-too-long": "Beskrivningen får inte vara längre än {{PLURAL:$1|et tecken|$1 tecken}} långt",
 	"wikibase-validator-too-short": "Måste vara minst {{PLURAL:$1|ett tecken|$1 tecken}} lång",
 	"wikibase-validator-too-high": "Utanför intervallet, får inte vara högre än $1",
 	"wikibase-validator-too-low": "Utanför intervallet, får inte vara lägre än $1",

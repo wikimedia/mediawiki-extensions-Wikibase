@@ -99,7 +99,7 @@
 	"wikibase-error-serialize-error": "Falló la serialización de los datos",
 	"wikibase-error-invalid-entity-id": "La ID «$2» ye desconocida pal sistema. Por favor, usa una ID d'entidá válida.",
 	"wikibase-error-exceeded-entity-access-limit": "Accedióse a demasiaes entidaes de {{WBREPONAME}}.",
-	"wikibase-error-exceeded-referenced-entity-id-limit": "Demasiaes llamaes \"mw.wikibase.getReferencedEntityId\", permítese sólo un máximu de $2.",
+	"wikibase-error-exceeded-referenced-entity-id-limit": "Demasiaes llamaes \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|permítese|permítense}} sólo un máximu de $2.",
 	"unconnectedpages": "Páxines nun coneutaes con elementos",
 	"unconnectedpages-summary": "Esta páxina ye una llista de páxines sin nengún elementu de datos conectáu (en espacios de nomes qu'almiten elementos coneutaos). La llista ta ordenada por ID de páxina descendente, de mou que les páxines más nueves apaecen primero.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|enllaz interllingüísticu|enllaces interllingüísticos}} na páxina)",

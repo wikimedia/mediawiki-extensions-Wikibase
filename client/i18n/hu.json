@@ -10,7 +10,8 @@
 			"Dorgan",
 			"Grin",
 			"Urbalazs",
-			"Bencemac"
+			"Bencemac",
+			"Einstein2"
 		]
 	},
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
@@ -60,7 +61,7 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} szerkesztések mutatása a friss változtatásokban",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-szerkesztés",
-	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} szerkesztések",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-szerkesztések",
 	"wikibase-replicationnote": "A változtatás néhány percen belül minden wikin látható lesz.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon",
 	"wikibase-error-invalid-entity-id": "A(z) „$2” azonosító ismeretlen a rendszeren. Használjon érvényes entitásazonosítót.",

@@ -38,7 +38,8 @@
 			"Luzcaru",
 			"MarcoAurelio",
 			"Ladsgroup",
-			"Adjen"
+			"Adjen",
+			"Jelou"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -279,7 +280,7 @@
 	"wikibase-dispatchstats-changes": "Estadísticas del registro de modificaciones",
 	"wikibase-dispatchstats-stats": "Estadísticas de distribución",
 	"wikibase-dispatchstats-change-id": "Id.",
-	"wikibase-dispatchstats-change-timestamp": "Fecha y hora",
+	"wikibase-dispatchstats-change-timestamp": "Marca de tiempo",
 	"wikibase-dispatchstats-oldest-change": "Más antiguas",
 	"wikibase-dispatchstats-newest-change": "Más nuevas",
 	"wikibase-dispatchstats-site-id": "Sitio",
@@ -391,6 +392,7 @@
 	"wikibase-search-bad-entity-type": "Tipo de entidad erróneo: $1",
 	"wikibase-search-bad-profile-name": "Nombre de perfil de búsqueda erróneo: $1",
 	"wikibase-search-namespace-mix": "No se admite mezclar los espacios de nombres de las entidades y de los artículos. Solo se buscará en el espacio de nombres de las entidades.",
+	"wikibase-haswbstatement-feature-no-valid-statements": "La palabra clave «haswbstatement» no contiene declaraciones válidas",
 	"apihelp-wbavailablebadges-description": "Consulta los elementos de insignias disponibles.",
 	"apihelp-wbavailablebadges-example-1": "Consulta todos elementos de insignias disponibles",
 	"apihelp-wbcreateclaim-param-bot": "Marca esta edición como realizada por un bot. Esta marca de URL solo se respetará si el usuario pertenece al grupo \"{{int:group-bot}}\".",

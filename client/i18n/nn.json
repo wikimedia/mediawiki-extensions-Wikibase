@@ -42,6 +42,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Du lyt vera innlogga",
 	"wikibase-linkitem-not-loggedin": "Du lyt vera innlogga på denne wikien og på det [$1 sentrale datalageret] for å nytta denne funksjonen.",
 	"wikibase-linkitem-success-link": "Sidene vart lenkja til kvarandre. Du kan finna elementet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.",
+	"limitreport-entityaccesscount": "Tal på Wikibase-element lasta",
 	"wikibase-property-notfound": "Eigenskapen $1 vart ikkje funnen.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Gøym",

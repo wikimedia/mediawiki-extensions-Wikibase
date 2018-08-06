@@ -8,7 +8,8 @@
 			"Сербијана",
 			"Obsuser",
 			"Srdjan m",
-			"Acamicamacaraca"
+			"Acamicamacaraca",
+			"BadDog"
 		]
 	},
 	"wikibase-lib-desc": "Садржи заједничке функционалности за Викибазу и проширења за клијента Викибазе",
@@ -105,10 +106,10 @@
 	"wikibase-entity-summary-wbsetreference-add": "Додата референца за тврдњу",
 	"wikibase-entity-summary-wbsetreference-set": "Промењена референца за тврдњу:",
 	"wikibase-entity-summary-wbsetlabel-add": "Додат [$2] назив",
-	"wikibase-entity-summary-wbsetlabel-set": "Измењен [$2] назив",
+	"wikibase-entity-summary-wbsetlabel-set": "Промењен [$2] назив",
 	"wikibase-entity-summary-wbsetlabel-remove": "Уклоњен [$2] назив",
 	"wikibase-entity-summary-wbsetdescription-add": "Додат [$2] опис",
-	"wikibase-entity-summary-wbsetdescription-set": "Измењен [$2] опис",
+	"wikibase-entity-summary-wbsetdescription-set": "Промењен [$2] опис",
 	"wikibase-entity-summary-wbsetdescription-remove": "Уклоњен [$2] опис",
 	"wikibase-entity-summary-wbsetaliases-set": "Постављено [$2] {{PLURAL:$1|псеудоним|псеудонима}}",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Додато и уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}",

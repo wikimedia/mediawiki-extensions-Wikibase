@@ -118,7 +118,7 @@
 	"wikibase-snakview-variation-datavaluetypemismatch-details": "Neočekávaný rozpor mezi datovým typem vlastnosti „$2“ a datovým typem hodnoty „$1“.",
 	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "Smazané vlastnosti nelze definovat novou hodnotu.",
 	"wikibase-snakview-variations-somevalue-label": "neznámá hodnota",
-	"wikibase-snakview-variations-novalue-label": "žádná hodnota",
+	"wikibase-snakview-variations-novalue-label": "bez hodnoty",
 	"wikibase-snakview-snaktypeselector-value": "uživatelská hodnota",
 	"wikibase-snakformat-invalid-value": "Neplatná hodnota.",
 	"wikibase-snakformat-propertynotfound": "Vlastnost nebyla nalezena.",
