@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3fed7583_78c0c89b",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-06T13:10:42Z",
+      "side": 1,
+      "message": "Yes, good point!",
+      "parentUuid": "d3123bf3_aa7898c1",
+      "range": {
+        "startLine": 784,
+        "startChar": 9,
+        "endLine": 784,
+        "endChar": 23
+      },
+      "revId": "023852fbb22d64f9eb8dad6ab25a850d352a12ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d4070c2_ea62b9e4",
         "filename": "view/lib/wikibase-data-model",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c468423d_2e64c861",
+        "filename": "view/lib/wikibase-data-model",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-06T13:10:42Z",
+      "side": 1,
+      "message": "Yes, this was unintentional. Submodules confuse me.",
+      "parentUuid": "5d4070c2_ea62b9e4",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "023852fbb22d64f9eb8dad6ab25a850d352a12ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60ea9ad5_d75938db",
         "filename": "view/lib/wikibase-data-values-value-view",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2018-08-03T15:28:07Z",
       "side": 1,
       "message": "This would take us back from 0.22.2 to 0.22.1\nThe change is likely here by accident. Correct?",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "023852fbb22d64f9eb8dad6ab25a850d352a12ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "159fb966_dbcb3b23",
+        "filename": "view/lib/wikibase-data-values-value-view",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-06T13:10:42Z",
+      "side": 1,
+      "message": "Yes, this was unintentional. Submodules confuse me.",
+      "parentUuid": "60ea9ad5_d75938db",
       "range": {
         "startLine": 1,
         "startChar": 18,
