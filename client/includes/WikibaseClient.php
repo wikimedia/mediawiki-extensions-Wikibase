@@ -236,19 +236,18 @@ final class WikibaseClient {
 	private $sidebarLinkBadgeDisplay = null;
 
 	/**
+	 * @var WikibaseValueFormatterBuilders|null
+	 */
+	private $valueFormatterBuilders = null;
+
+	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public static function getDefaultValueFormatterBuilders() {
-		static $builders;
-
-		if ( $builders === null ) {
-			$builders = self::getDefaultInstance()->newWikibaseValueFormatterBuilders();
-		}
-
-		return $builders;
+		return self::getDefaultInstance()->newWikibaseValueFormatterBuilders();
 	}
 
 	/**
@@ -260,20 +259,24 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
-		$entityTitleLookup = new ClientSiteLinkTitleLookup(
-			$this->getStore()->getSiteLinkLookup(),
-			$this->settings->getSetting( 'siteGlobalID' )
-		);
+		if ( $this->valueFormatterBuilders === null ) {
+			$entityTitleLookup = new ClientSiteLinkTitleLookup(
+				$this->getStore()->getSiteLinkLookup(),
+				$this->settings->getSetting( 'siteGlobalID' )
+			);
 
-		return new WikibaseValueFormatterBuilders(
-			$this->getContentLanguage(),
-			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
-			$this->getRepoItemUriParser(),
-			$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
-			$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
-			$entityTitleLookup
-		);
+			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
+				$this->getContentLanguage(),
+				new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
+				new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
+				$this->getRepoItemUriParser(),
+				$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
+				$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
+				$entityTitleLookup
+			);
+		}
+
+		return $this->valueFormatterBuilders;
 	}
 
 	/**
