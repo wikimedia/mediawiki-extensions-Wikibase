@@ -87,7 +87,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup(), false ),
-			MediaWikiServices::getInstance()->getRevisionStore(),
 			false
 		);
 
@@ -111,8 +110,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				]
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
-			$wikibaseRepo->getEntityIdComposer(),
-			MediaWikiServices::getInstance()->getRevisionStore()
+			$wikibaseRepo->getEntityIdComposer()
 		);
 
 		return [ $store, $lookup ];

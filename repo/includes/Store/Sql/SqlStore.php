@@ -419,12 +419,7 @@ class SqlStore implements Store {
 		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$idGenerator = $this->newIdGenerator();
 
-		$store = new WikiPageEntityStore(
-			$contentFactory,
-			$idGenerator,
-			$this->entityIdComposer,
-			MediaWikiServices::getInstance()->getRevisionStore()
-		);
+		$store = new WikiPageEntityStore( $contentFactory, $idGenerator, $this->entityIdComposer );
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
 
 		$store = new TypeDispatchingEntityStore(

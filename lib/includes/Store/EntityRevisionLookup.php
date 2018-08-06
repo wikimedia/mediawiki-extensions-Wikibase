@@ -40,7 +40,7 @@ interface EntityRevisionLookup {
 
 	/**
 	 * Returns the entity revision with the provided id or null if there is no such
-	 * entity or if access if forbidden. If a $revision is given, the requested revision of the entity is loaded.
+	 * entity. If a $revision is given, the requested revision of the entity is loaded.
 	 * If that revision does not exist or does not belong to the given entity,
 	 * an exception is thrown.
 	 *
