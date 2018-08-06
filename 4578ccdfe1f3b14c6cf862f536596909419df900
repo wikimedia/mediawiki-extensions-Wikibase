@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6cfe0a7f_411fc102",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f2e7c8b_d46a33bb",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dc6c27d3_cc988b0c",
         "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
         "patchSetId": 14
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "bb0e427a_a48da648",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc6c27d3_cc988b0c",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a05f545_05df4902",
         "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
         "patchSetId": 14
@@ -47,6 +83,24 @@
       "writtenOn": "2018-07-24T17:33:44Z",
       "side": 1,
       "message": "same here. ttlInSeconds. Users should not have to go look at docs of private fields to understand object construction.",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7706b52c_1b44d78f",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a05f545_05df4902",
       "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "1b9aa649_c1611d88",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28e01d0a_6be37ab0",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2bdb498a_1c50be0d",
         "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
         "patchSetId": 14
@@ -98,6 +170,24 @@
       "writtenOn": "2018-07-24T17:37:28Z",
       "side": 1,
       "message": "You can also indicate those as private",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d7f1db4_98253c25",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bdb498a_1c50be0d",
       "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "6ab2dbe7_24b91ea7",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505ef206_ad9a4ed2",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43b952af_a1e843ce",
         "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
         "patchSetId": 14
@@ -132,6 +240,24 @@
       "writtenOn": "2018-07-24T17:37:28Z",
       "side": 1,
       "message": "can just be createMock no?",
+      "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "733625a1_55574e25",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-06T16:12:22Z",
+      "side": 1,
+      "message": "not really, as the point of this test is to assert this cache is being written to (see $cache-\u003eset()-\u003eshouldHaveBeenCalled() below)",
+      "parentUuid": "43b952af_a1e843ce",
       "revId": "4578ccdfe1f3b14c6cf862f536596909419df900",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
