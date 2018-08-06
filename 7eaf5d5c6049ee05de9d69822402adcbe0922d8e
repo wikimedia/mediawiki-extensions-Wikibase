@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d3ce7b1_1072d5ee",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-06T07:37:38Z",
+      "side": 1,
+      "message": "Wonder if this warrants a dedicated exception (sub)type to make it possible to catch that case in particular (nothing really went wrong with the store), and making the due test more explicit.",
+      "range": {
+        "startLine": 188,
+        "startChar": 13,
+        "endLine": 188,
+        "endChar": 29
+      },
+      "revId": "7eaf5d5c6049ee05de9d69822402adcbe0922d8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
