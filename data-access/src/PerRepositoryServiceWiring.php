@@ -77,9 +77,14 @@ return [
 		/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
 		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
 
+		$revisionStoreFactory = \MediaWiki\MediaWikiServices::getInstance()->getRevisionStoreFactory();
+		$blobStoreFactory = \MediaWiki\MediaWikiServices::getInstance()->getBlobStoreFactory();
+
 		return new WikiPageEntityRevisionLookup(
 			$codec,
 			$metaDataAccessor,
+			$revisionStoreFactory->getRevisionStore( $services->getDatabaseName() ),
+			$blobStoreFactory->newBlobStore( $services->getDatabaseName() ),
 			$services->getDatabaseName()
 		);
 	},
