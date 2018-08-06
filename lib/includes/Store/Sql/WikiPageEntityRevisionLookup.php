@@ -3,11 +3,16 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
+use MediaWiki\Storage\BlobAccessException;
+use MediaWiki\Storage\BlobStore;
+use MediaWiki\Storage\RevisionAccessException;
+use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Storage\RevisionStore;
 use MWContentSerializationException;
-use Revision;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -37,13 +42,29 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $entityMetaDataAccessor;
 
 	/**
+	 * @var RevisionStore
+	 */
+	private $revisionStore;
+
+	/**
+	 * @var BlobStore
+	 *
+	 * @todo remove this once we no longer need to be compatible to the pre-MCR database schema
+	 */
+	private $blobStore;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
+	 * @param RevisionStore $revisionStore
+	 * @param BlobStore $blobStore
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
+		RevisionStore $revisionStore,
+		BlobStore $blobStore,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
@@ -51,6 +72,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$this->contentCodec = $contentCodec;
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
+		$this->revisionStore = $revisionStore;
+		$this->blobStore = $blobStore;
 	}
 
 	/**
@@ -104,7 +127,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			}
 
 			if ( $entityRevision === null ) {
-				// This only happens when there is a problem with the external store.
+				// This happens when there is a problem with the external store or if access is forbidden
 				wfLogWarning( __METHOD__ . ': Entity not loaded for ' . $entityId );
 			}
 		}
@@ -149,68 +172,66 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * Construct an EntityRevision object from a database row from the revision and text tables.
 	 *
-	 * @see loadEntityBlob()
-	 *
 	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
-	 * @throws MWContentSerializationException
+	 * @throws StorageException
 	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
-		$blob = $this->loadEntityBlob( $row );
-		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
+		// TODO: WikiPageEntityMetaDataLookup should use RevisionStore::getQueryInfo,
+		// then we could use RevisionStore::newRevisionFromRow here!
+		$revision = $this->revisionStore->getRevisionById( $row->rev_id );
+
+		// NOTE: Support for cross-wiki content access in RevisionStore is incomplete when,
+		// reading from the pre-MCR database schema, see T201194.
+		// For that reason, we have to load and decode the content blob directly,
+		// instead of using RevisionRecord::getContent() or SlotRecord::getContent().
+		// TODO Once we can rely on the new MCR enabled DB schema, use getContent() directly!
+
+		try {
+			// TODO The slot to load the entity from should be configurable
+			$slot = $revision->getSlot( 'main' );
+		} catch ( RevisionAccessException $e ) {
+			throw new StorageException( 'Failed to load slot', 0, $e );
+		}
+
+		// WARNING: This will make it look like suppressed revisions don't exist at all.
+		// Wikibase should handle old revisions with suppressed content gracefully.
+		// @see https://phabricator.wikimedia.org/T198467
+		if ( !$revision->audienceCan( RevisionRecord::DELETED_TEXT, RevisionRecord::FOR_PUBLIC ) ) {
+			return [ null, null ];
+		}
+
+		try {
+			$blob = $this->blobStore->getBlob( $slot->getAddress() );
+		} catch ( BlobAccessException $e ) {
+			throw new StorageException( 'Filed to load blob', 0, $e );
+		}
+
+		$entity = $this->contentCodec->decodeEntity( $blob, $slot->getFormat() );
 
 		if ( $entity ) {
-			$entityRevision = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+			$entityRevision = new EntityRevision(
+				$entity,
+				$revision->getId(),
+				$revision->getTimestamp()
+			);
 
-			$result = [ $entityRevision, null ];
+			return [ $entityRevision, null ];
 		} else {
-			$redirect = $this->contentCodec->decodeRedirect( $blob, $row->rev_content_format );
+			$redirect = $this->contentCodec->decodeRedirect( $blob, $slot->getFormat() );
 
 			if ( !$redirect ) {
-				throw new MWContentSerializationException(
-					'The serialized data contains neither an Entity nor an EntityRedirect!'
+				throw new StorageException(
+					'The serialized data of revision ' . $revision->getId()
+					. ' contains neither an Entity nor an EntityRedirect!'
 				);
 			}
 
-			$result = [ null, $redirect ];
+			return [ null, $redirect ];
 		}
-
-		return $result;
-	}
-
-	/**
-	 * Loads a blob based on a database row from the revision and text tables.
-	 *
-	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
-	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
-	 *
-	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
-	 *        should contain the relevant fields from the revision and/or text table.
-	 *
-	 * @throws MWContentSerializationException
-	 * @return string The blob
-	 */
-	private function loadEntityBlob( $row ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': Calling getRevisionText() on revision '
-			. $row->rev_id );
-
-		//NOTE: $row contains revision fields from another wiki. This SHOULD not
-		//      cause any problems, since getRevisionText should only look at the old_flags
-		//      and old_text fields. But be aware.
-		$blob = Revision::getRevisionText( $row, 'old_', $this->wiki );
-
-		if ( $blob === false ) {
-			wfWarn( 'Unable to load raw content blob for revision ' . $row->rev_id );
-
-			throw new MWContentSerializationException(
-				'Unable to load raw content blob for revision ' . $row->rev_id
-			);
-		}
-
-		return $blob;
 	}
 
 }
