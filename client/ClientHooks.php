@@ -10,7 +10,6 @@ use OutputPage;
 use Parser;
 use RecentChange;
 use Skin;
-use StubObject;
 use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
@@ -96,8 +95,6 @@ final class ClientHooks {
 		if ( $wikiId !== $repoId ) {
 			return;
 		}
-
-		StubObject::unstub( $wgContLang );
 
 		$formatter = new AutoCommentFormatter( $wgContLang, [ 'wikibase-entity' ] );
 		$formattedComment = $formatter->formatAutoComment( $auto );
