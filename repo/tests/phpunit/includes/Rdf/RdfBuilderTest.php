@@ -219,6 +219,32 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
 	}
 
+	public function provideAddSubEntity() {
+		return [ [ 'Q2', 'Q3', [ 'Q2_meta', 'Q2_version', 'Q2_stub', 'Q2_aliases', 'Q3_meta', 'Q3_version', 'Q3_sitelinks' ] ] ];
+	}
+
+	/**
+	 * @dataProvider provideAddSubEntity
+	 */
+	public function testAddSubEntity( $mainEntityName, $subEntityName, $dataSetNames ) {
+		$mainEntity = $this->getEntityData( $mainEntityName );
+		$subEntity = $this->getEntityData( $subEntityName );
+
+		$builder = $this->newRdfBuilder(
+			RdfProducer::PRODUCE_ALL_STATEMENTS |
+			RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+			RdfProducer::PRODUCE_QUALIFIERS |
+			RdfProducer::PRODUCE_REFERENCES |
+			RdfProducer::PRODUCE_SITELINKS |
+			RdfProducer::PRODUCE_VERSION_INFO |
+			RdfProducer::PRODUCE_FULL_VALUES
+		);
+		$builder->subEntityMentioned( $subEntity );
+		$builder->addEntity( $mainEntity );
+
+		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $builder->getRDF() );
+	}
+
 	public function testAddEntityRedirect() {
 		$builder = self::newRdfBuilder( 0 );
 

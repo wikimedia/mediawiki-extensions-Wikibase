@@ -4,6 +4,7 @@ namespace Wikibase\Rdf;
 
 use PageProps;
 use SiteList;
+use SplQueue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -30,6 +31,13 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @var bool[]
 	 */
 	private $entitiesResolved = [];
+
+	/**
+	 * A queue of entities to output by this builder.
+	 *
+	 * @var SplQueue<EntityDocument>
+	 */
+	private $entitiesToOutput;
 
 	/**
 	 * What the serializer would produce?
@@ -102,6 +110,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		DedupeBag $dedupeBag,
 		EntityTitleLookup $titleLookup
 	) {
+		$this->entitiesToOutput = new SplQueue();
 		$this->vocabulary = $vocabulary;
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
@@ -256,6 +265,15 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
+	 * @see EntityMentionListener::subEntityMentioned
+	 *
+	 * @param EntityDocument $entity
+	 */
+	public function subEntityMentioned( EntityDocument $entity ) {
+		$this->entitiesToOutput->enqueue( $entity );
+	}
+
+	/**
 	 * Registers an entity as mentioned.
 	 * Will be recorded as unresolved
 	 * if it wasn't already marked as resolved.
@@ -380,11 +398,22 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 	/**
 	 * Add an entity to the RDF graph, including all supported structural components
-	 * of the entity.
+	 * of the entity and its sub entities.
 	 *
 	 * @param EntityDocument $entity the entity to output.
 	 */
 	public function addEntity( EntityDocument $entity ) {
+		$this->addSingleEntity( $entity );
+		$this->addQueuedEntities();
+	}
+
+	/**
+	 * Add a single entity to the RDF graph, including all supported structural components
+	 * of the entity.
+	 *
+	 * @param EntityDocument $entity the entity to output.
+	 */
+	private function addSingleEntity( EntityDocument $entity ) {
 		$this->addEntityMetaData( $entity );
 
 		foreach ( $this->builders as $builder ) {
@@ -392,6 +421,15 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		}
 
 		$this->entityResolved( $entity->getId() );
+	}
+
+	/**
+	 * Add the RDF serialization of all entities in the entitiesToOutput queue
+	 */
+	private function addQueuedEntities() {
+		while ( !$this->entitiesToOutput->isEmpty() ) {
+			$this->addSingleEntity( $this->entitiesToOutput->dequeue() );
+		}
 	}
 
 	/**
