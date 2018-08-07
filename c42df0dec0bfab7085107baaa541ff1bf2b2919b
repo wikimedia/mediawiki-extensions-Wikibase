@@ -16,6 +16,24 @@
       "revId": "c42df0dec0bfab7085107baaa541ff1bf2b2919b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88d8f512_38f35069",
+        "filename": "lib/includes/SimpleCacheWithBagOStuff.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-07T13:24:53Z",
+      "side": 1,
+      "message": "See Id0f30d1af57717201d32ce29f5c5f17f177771a0",
+      "parentUuid": "7e9ad0c8_5538cd07",
+      "revId": "c42df0dec0bfab7085107baaa541ff1bf2b2919b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
