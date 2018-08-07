@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
+ * @author Thomas Pellissier Tanon
  */
 interface EntityMentionListener {
 
@@ -30,5 +32,13 @@ interface EntityMentionListener {
 	 * @param PropertyId $id
 	 */
 	public function propertyMentioned( PropertyId $id );
+
+	/**
+	 * Should be called when a sub entity is encountered.
+	 * For example, in WikibaseLexeme, when a Form or a Sense is encountered when serializing a Lexeme.
+	 *
+	 * @param EntityDocument $entity
+	 */
+	public function subEntityMentioned( EntityDocument $entity );
 
 }
