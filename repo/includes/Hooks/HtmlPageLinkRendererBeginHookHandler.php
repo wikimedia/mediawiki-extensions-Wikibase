@@ -8,8 +8,8 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Special\SpecialPageFactory;
 use RequestContext;
-use SpecialPageFactory;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -70,6 +70,11 @@ class HtmlPageLinkRendererBeginHookHandler {
 	private $linkFormatterFactory;
 
 	/**
+	 * @var SpecialPageFactory
+	 */
+	private $specialPageFactory;
+
+	/**
 	 * @return self
 	 */
 	private static function newFromGlobalState() {
@@ -83,14 +88,16 @@ class HtmlPageLinkRendererBeginHookHandler {
 			$wikibaseRepo->getTermLookup(),
 			$languageFallbackChain
 		);
+		$services = MediaWikiServices::getInstance();
 
 		return new self(
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityIdParser(),
 			$labelDescriptionLookup,
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getInterwikiLookup(),
-			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() )
+			$services->getInterwikiLookup(),
+			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() ),
+			$services->getSpecialPageFactory()
 		);
 	}
 
@@ -141,6 +148,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param InterwikiLookup $interwikiLookup
 	 * @param EntityLinkFormatterFactory $linkFormatterFactory
+	 * @param SpecialPageFactory $specialPageFactory
 	 */
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
@@ -148,7 +156,8 @@ class HtmlPageLinkRendererBeginHookHandler {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		InterwikiLookup $interwikiLookup,
-		EntityLinkFormatterFactory $linkFormatterFactory
+		EntityLinkFormatterFactory $linkFormatterFactory,
+		SpecialPageFactory $specialPageFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityIdParser = $entityIdParser;
@@ -156,6 +165,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->interwikiLookup = $interwikiLookup;
 		$this->linkFormatterFactory = $linkFormatterFactory;
+		$this->specialPageFactory = $specialPageFactory;
 	}
 
 	/**
@@ -212,7 +222,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 		// EditEntity::getContextForEditFilter(). For instance, a link to Property:NewProperty
 		// would be replaced by a link to Special:NewProperty. This is useful in logs,
 		// to indicate that the logged action occurred while creating an entity.
-		if ( SpecialPageFactory::exists( $targetText ) ) {
+		if ( $this->specialPageFactory->exists( $targetText ) ) {
 			$target = Title::makeTitle( NS_SPECIAL, $targetText );
 			$html = $linkRenderer->makeKnownLink( $target );
 			return false;
