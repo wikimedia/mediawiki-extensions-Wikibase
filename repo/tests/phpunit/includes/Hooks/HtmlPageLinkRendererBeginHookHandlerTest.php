@@ -9,7 +9,6 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
-use SpecialPageFactory;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -185,7 +184,7 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 
 		$specialPageTitle = Title::makeTitle(
 			NS_SPECIAL,
-			SpecialPageFactory::getLocalNameFor( $linkTitle )
+			MediaWikiServices::getInstance()->getSpecialPageFactory()->getLocalNameFor( $linkTitle )
 		);
 
 		$this->assertFalse( $ret );

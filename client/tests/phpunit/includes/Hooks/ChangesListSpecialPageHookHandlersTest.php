@@ -6,8 +6,8 @@ use ChangesListBooleanFilter;
 use ExtensionRegistry;
 use FauxRequest;
 use FormOptions;
+use MediaWiki\MediaWikiServices;
 use PHPUnit4And6Compat;
-use SpecialPageFactory;
 use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
@@ -67,7 +67,8 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		);
 
 		/** @var SpecialRecentChanges $specialPage */
-		$specialPage = SpecialPageFactory::getPage( 'Recentchanges' );
+		$specialPage = MediaWikiServices::getInstance()->getSpecialPageFactory()->
+			getPage( 'Recentchanges' );
 
 		/** @var SpecialRecentChanges $wrappedSpecialPage */
 		$wrappedSpecialPage = TestingAccessWrapper::newFromObject( $specialPage );
