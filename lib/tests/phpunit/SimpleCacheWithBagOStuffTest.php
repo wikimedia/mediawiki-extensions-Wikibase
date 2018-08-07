@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Tests;
 
 use Cache\IntegrationTests\SimpleCacheTest;
 use HashBagOStuff;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 
@@ -82,18 +84,44 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 	 * @see https://secure.php.net/manual/en/function.unserialize.php
 	 * @see https://www.owasp.org/index.php/PHP_Object_Injection
 	 */
-	public function testGet_GivenSignatureIsWrong_ThrowsAnException() {
+	public function testGet_GivenSignatureIsWrong_ReturnsDefaultValue() {
 		$inner = new HashBagOStuff();
 		$initialValue = new \DateTime();
 
 		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
 		$cache->set( 'key', 'some_string' );
-		$value = $inner->get( 'prefix_key', $initialValue );
+		$this->spoilTheSignature( $inner, 'prefix_key' );
+
+		$got = $cache->get( 'key', 'some default value' );
+		$this->assertEquals( 'some default value', $got );
+	}
+
+	public function testGetMultiple_GivenSignatureIsWrong_ReturnsDefaultValue() {
+		$inner = new HashBagOStuff();
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
+		$cache->set( 'key', 'some_string' );
+		$this->spoilTheSignature( $inner, 'prefix_key' );
+
+		$got = $cache->getMultiple( [ 'key' ], 'some default value' );
+		$this->assertEquals( [ 'key' => 'some default value' ], $got );
+	}
+
+	public function testGet_GivenSignatureIsWrong_LoggsTheEvent() {
+		$logger = $this->prophesize( LoggerInterface::class );
+
+		$inner = new HashBagOStuff();
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
+		$cache->setLogger( $logger->reveal() );
+		$cache->set( 'key', 'some_string' );
+		$value = $inner->get( 'prefix_key' );
 		list( $signature, $data ) = json_decode( $value );
 		$inner->set( 'prefix_key', json_encode( [ 'wrong signature', $data ] ) );
 
-		$this->setExpectedException( \Exception::class );
-		$cache->get( 'key' );
+		$got = $cache->get( 'key', 'some default value' );
+
+		$logger->alert( Argument::any(), Argument::any() )->shouldHaveBeenCalled();
 	}
 
 	public function testCachedValueCannotBeUnserialized_ThrowsAnException() {
@@ -106,9 +134,8 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 		$cache->set( 'key', 'some_string' );
 		$inner->set( 'prefix_key', json_encode( [ $correctSignature, $brokenData ] ) );
 
-		$this->setExpectedException( \Exception::class );
-
-		$cache->get( 'key' );
+		$got = $cache->get( 'key', 'some default value' );
+		$this->assertEquals( 'some default value', $got );
 	}
 
 	public function testSecretCanNotBeEmpty() {
@@ -116,6 +143,16 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 
 		$this->setExpectedException( \Exception::class );
 		new SimpleCacheWithBagOStuff( $inner, 'prefix_', '' );
+	}
+
+	/**
+	 * @param $inner
+	 * @param $key
+	 */
+	protected function spoilTheSignature( $inner, $key ) {
+		$value = $inner->get( $key );
+		list( $signature, $data ) = json_decode( $value );
+		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
 	}
 
 }
