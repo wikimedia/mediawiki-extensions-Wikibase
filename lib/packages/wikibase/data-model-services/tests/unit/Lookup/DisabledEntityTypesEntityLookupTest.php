@@ -20,7 +20,7 @@ class DisabledEntityTypesEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$entityLookup = $this->getMock( EntityLookup::class );
+		$entityLookup = $this->createMock( EntityLookup::class );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'hasEntity' )

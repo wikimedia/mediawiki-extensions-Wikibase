@@ -16,7 +16,7 @@ use Wikibase\DataModel\Term\Term;
 class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetLabelCallsTermLookupAndReturnsStringAsTerm() {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->expects( $this->once() )
 			->method( 'getLabel' )
@@ -32,7 +32,7 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDescriptionCallsTermLookupAndReturnsStringAsTerm() {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->expects( $this->once() )
 			->method( 'getDescription' )
@@ -48,7 +48,7 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWhenGettingNull_getLabelReturnsNull() {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->expects( $this->once() )
 			->method( 'getLabel' )
@@ -60,7 +60,7 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWhenGettingNull_getDescriptionReturnsNull() {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->expects( $this->once() )
 			->method( 'getDescription' )

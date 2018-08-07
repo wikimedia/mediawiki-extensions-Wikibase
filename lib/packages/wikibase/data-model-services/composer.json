@@ -28,7 +28,7 @@
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~4.8",
+		"phpunit/phpunit": "~5.7",
 		"wikibase/wikibase-codesniffer": "^0.3.0"
 	},
 	"autoload": {
