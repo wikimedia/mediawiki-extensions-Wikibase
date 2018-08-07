@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03a21f47_3d876b60",
+        "filename": "lib/includes/Store/CachingFallbackLabelDescriptionLookup.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-07T11:10:34Z",
+      "side": 1,
+      "message": "There is an issue with this approach: extra network round-trip (if cache is stored in Memcached or Redis).",
+      "range": {
+        "startLine": 129,
+        "startChar": 10,
+        "endLine": 129,
+        "endChar": 41
+      },
+      "revId": "38f92b8024602e2ffe52c3ea348debe1ffece2ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
