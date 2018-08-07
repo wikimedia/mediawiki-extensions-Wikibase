@@ -183,10 +183,13 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$ret = $handler->doHtmlPageLinkRendererBegin(
 			$this->getLinkRenderer(), $title, $text, $attribs, $context, $html );
 
-		$specialPageTitle = Title::makeTitle(
-			NS_SPECIAL,
-			SpecialPageFactory::getLocalNameFor( $linkTitle )
-		);
+		if ( method_exists( MediaWikiServices::class, 'getSpecialPageFactory' ) ) {
+			$name = MediaWikiServices::getInstance()->getSpecialPageFactory()->
+				getLocalNameFor( $linkTitle );
+		} else {
+			$name = SpecialPageFactory::getLocalNameFor( $linkTitle );
+		}
+		$specialPageTitle = Title::makeTitle( NS_SPECIAL, $name );
 
 		$this->assertFalse( $ret );
 		$this->assertContains(

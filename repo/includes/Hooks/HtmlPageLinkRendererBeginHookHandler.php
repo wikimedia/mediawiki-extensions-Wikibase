@@ -212,7 +212,13 @@ class HtmlPageLinkRendererBeginHookHandler {
 		// EditEntity::getContextForEditFilter(). For instance, a link to Property:NewProperty
 		// would be replaced by a link to Special:NewProperty. This is useful in logs,
 		// to indicate that the logged action occurred while creating an entity.
-		if ( SpecialPageFactory::exists( $targetText ) ) {
+		if ( method_exists( MediaWikiServices::class, 'getSpecialPageFactory' ) ) {
+			$exists = MediaWikiServices::getInstance()->getSpecialPageFactory()->
+				exists( $targetText );
+		} else {
+			$exists = SpecialPageFactory::exists( $targetText );
+		}
+		if ( $exists ) {
 			$target = Title::makeTitle( NS_SPECIAL, $targetText );
 			$html = $linkRenderer->makeKnownLink( $target );
 			return false;
