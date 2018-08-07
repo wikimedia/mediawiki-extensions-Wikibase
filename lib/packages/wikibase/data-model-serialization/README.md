@@ -109,7 +109,7 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 * [Wikibase DataModel Serialization on Packagist](https://packagist.org/packages/wikibase/data-model-serialization)
 * [Wikibase DataModel Serialization on TravisCI](https://travis-ci.org/wmde/WikibaseDataModelSerialization)
 * [Wikibase DataModel Serialization on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
-* [Wikibase DataModel Serialization on Ohloh](https://www.ohloh.net/p/WikibaseDataModelSerialization)
+* [Wikibase DataModel Serialization on OpenHub](https://www.openhub.net/p/WikibaseDataModelSerialization)
 
 ## See also 
 
