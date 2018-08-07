@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Specials;
 
+use MediaWiki\MediaWikiServices;
 use RequestContext;
-use SpecialPageFactory;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\Client\Specials\SpecialEntityUsage;
@@ -82,7 +82,8 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$this->assertContains( 'Tehran', $result );
 		$this->assertContains( 'Athena', $result );
 		$this->assertNotContains( '<p class="error"', $result );
-		$expected = SpecialPageFactory::getLocalNameFor( 'EntityUsage', 'Q3' );
+		$expected = MediaWikiServices::getInstance()->getSpecialPageFactory()
+			->getLocalNameFor( 'EntityUsage', 'Q3' );
 		$this->assertContains( $expected, $result );
 		$this->assertContains( ': ' . $aspectListTehran . '</li>', $result );
 		$this->assertContains( ': ' . $aspectListAthena . '</li>', $result );
