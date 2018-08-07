@@ -30,7 +30,7 @@
 		"data-values/number": "^0.10.0",
 		"data-values/time": "^0.8.4",
 		"data-values/serialization": "^1.2.1",
-		"wikibase/data-model": "^7.5.0",
+		"wikibase/data-model": "^8.0.0|^7.5.0",
 		"wikibase/data-model-serialization": "^2.5.0",
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.10.0",
