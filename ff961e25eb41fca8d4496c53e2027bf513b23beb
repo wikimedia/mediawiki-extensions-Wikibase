@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "220a2400_0bdc35ec",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-07T13:09:15Z",
+      "side": 1,
+      "message": "This is just to make an explicit statement that we depend on `psr/log`.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "ff961e25eb41fca8d4496c53e2027bf513b23beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
