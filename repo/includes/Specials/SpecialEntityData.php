@@ -118,8 +118,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$titleLookup
 		);
 
-		$disabledRdfExportEntityTypes = $wikibaseRepo->getSettings()->getSetting( 'disabledRdfExportEntityTypes' );
-
 		return new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
@@ -128,7 +126,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityRedirectLookup,
 			$serializationService,
 			$this->entityDataFormatProvider,
-			$disabledRdfExportEntityTypes,
 			$defaultFormat,
 			$maxAge,
 			$wgUseSquid,
