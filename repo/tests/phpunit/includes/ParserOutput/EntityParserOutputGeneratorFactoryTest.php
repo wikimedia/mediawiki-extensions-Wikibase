@@ -10,6 +10,7 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -37,6 +38,8 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	private function getEntityParserOutputGeneratorFactory() {
 		return new EntityParserOutputGeneratorFactory(
 			$this->getMockBuilder( DispatchingEntityViewFactory::class )
+				->disableOriginalConstructor()->getMock(),
+			$this->getMockBuilder( DispatchingEntityMetaTagsFactory::class )
 				->disableOriginalConstructor()->getMock(),
 			$this->getMock( EntityInfoBuilder::class ),
 			$this->getMock( EntityTitleLookup::class ),
