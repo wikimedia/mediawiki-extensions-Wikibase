@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib;
 
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 
@@ -9,6 +11,8 @@ use Psr\SimpleCache\InvalidArgumentException;
  * @license GPL-2.0-or-later
  */
 class SimpleCacheWithBagOStuff implements CacheInterface {
+
+	use LoggerAwareTrait;
 
 	const KEY_REGEX = '/^[a-zA-Z0-9_\-.]+\z/';
 
@@ -39,12 +43,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$this->assertKeyIsValid( $prefix );
 
 		if ( !is_string( $secret ) || empty( $secret ) ) {
-			throw new \InvalidArgumentException("Secret is required to be a nonempty string");
+			throw new \InvalidArgumentException( "Secret is required to be a nonempty string" );
 		}
 
 		$this->inner = $inner;
 		$this->prefix = $prefix;
 		$this->secret = $secret;
+		$this->logger = new NullLogger();
 	}
 
 	/**
@@ -66,7 +71,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			return $default;
 		}
 
-		return $this->unserialize( $result );
+		return $this->unserialize( $result, $default, [ 'key' => $key, 'prefix' => $this->prefix ] );
 	}
 
 	/**
@@ -147,7 +152,11 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			if ( !array_key_exists( $this->prefix . $key, $innerResult ) ) {
 				$result[ $key ] = $default;
 			} else {
-				$result[ $key ] = $this->unserialize( $innerResult[ $this->prefix . $key ] );
+				$result[ $key ] = $this->unserialize(
+					$innerResult[ $this->prefix . $key ],
+					$default,
+					[ 'key' => $key, 'prefix' => $this->prefix ]
+				);
 			}
 		}
 
@@ -344,6 +353,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 	/**
 	 * @param string $string
+	 * @param mixed $default
 	 * @return mixed
 	 * @throws \Exception
 	 *
@@ -354,14 +364,16 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @see https://secure.php.net/manual/en/function.unserialize.php
 	 * @see https://www.owasp.org/index.php/PHP_Object_Injection
 	 */
-	private function unserialize( $string ) {
+	private function unserialize( $string, $default, array $loggingContext ) {
 		$result = json_decode( $string );
 
 		list( $signatureToCheck, $data ) = $result;
 		$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
 		$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
 		if ( !$hashEquals ) {
-			throw new \Exception( 'Invalid signature' );
+			$this->logger->alert( "Incorrect signature", $loggingContext );
+
+			return $default;
 		}
 		$decodedData = utf8_decode( $data );
 
@@ -378,7 +390,9 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		);
 
 		if ( $value === false ) {
-			throw new \Exception( 'value cannot be unserialized' );
+			$this->logger->alert( "Cannot deserialize stored value", $loggingContext );
+
+			return $default;
 		}
 
 		return $value;
