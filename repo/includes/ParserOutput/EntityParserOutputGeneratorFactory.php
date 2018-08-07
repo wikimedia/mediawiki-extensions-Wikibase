@@ -202,7 +202,9 @@ class EntityParserOutputGeneratorFactory {
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Math' ) ) {
-			$updaters[] = new \MathDataUpdater( $propertyDataTypeMatcher );
+			$updaters[] = new EntityStatementDataUpdaterAdapter(
+				new \MathDataUpdater( $propertyDataTypeMatcher )
+			);
 		}
 
 		return $updaters;
