@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9efed267_b946c90d",
+        "filename": "lib/includes/Store/EntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6da25802_f91a7e2c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "Probably meant to be a plain comment?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca3b0544_5d118565",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "Just the revision table now.",
+      "range": {
+        "startLine": 172,
+        "startChar": 68,
+        "endLine": 172,
+        "endChar": 92
+      },
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "498b583d_4c76c3a3",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "expected by",
+      "range": {
+        "startLine": 174,
+        "startChar": 41,
+        "endLine": 174,
+        "endChar": 49
+      },
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a4a0f2f_ade1266d",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "RevisionStore::newRevisionFromRow (eventually; just the revision ID now)",
+      "range": {
+        "startLine": 174,
+        "startChar": 50,
+        "endLine": 174,
+        "endChar": 77
+      },
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "463f691f_2831751b",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "Should there be some way to document which classes can take a foreign RevisionStore? This class can\u0027t because there is no way to pass it to PageUpdater, for example.",
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "665231a6_1dda201b",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 389
+      },
+      "writtenOn": "2018-08-07T12:49:55Z",
+      "side": 1,
+      "message": "Is all this copypaste better than just calling WikiPage::doEditContent?",
+      "revId": "bc5312a5ee9b488c280580d016b173f44b51f99b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
