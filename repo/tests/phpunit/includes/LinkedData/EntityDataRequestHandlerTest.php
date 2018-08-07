@@ -157,7 +157,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$service,
 			$entityDataFormatProvider,
-			[ 'property' ],
 			'json',
 			1800,
 			false,
