@@ -22,8 +22,8 @@ class StatementDeserializerTest extends PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$legacyDeserializer = $this->getMock( DispatchableDeserializer::class );
-		$currentDeserializer = $this->getMock( DispatchableDeserializer::class );
+		$legacyDeserializer = $this->createMock( DispatchableDeserializer::class );
+		$currentDeserializer = $this->createMock( DispatchableDeserializer::class );
 		$this->deserializer = new StatementDeserializer( $legacyDeserializer, $currentDeserializer );
 	}
 

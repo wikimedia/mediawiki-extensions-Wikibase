@@ -31,7 +31,7 @@ class TestFactoryBuilder {
 	 * @return Deserializer
 	 */
 	private static function newFakeDataValueDeserializer( PHPUnit_Framework_TestCase $testCase ) {
-		$dataValueDeserializer = $testCase->getMock( Deserializer::class );
+		$dataValueDeserializer = $testCase->getMockBuilder( Deserializer::class )->getMock();
 
 		$dataValueDeserializer->expects( $testCase->any() )
 			->method( 'deserialize' )

@@ -28,7 +28,7 @@ class LegacyStatementDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( Deserializer::class ) );
+		$snakDeserializer = new LegacySnakDeserializer( $this->createMock( Deserializer::class ) );
 		$qualifiersDeserializer = new LegacySnakListDeserializer( $snakDeserializer );
 
 		$this->deserializer = new LegacyStatementDeserializer( $snakDeserializer, $qualifiersDeserializer );

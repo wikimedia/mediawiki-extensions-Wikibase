@@ -37,9 +37,9 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructWithCustomEntityDeserializer() {
 		$factory = new DeserializerFactory(
-			$this->getMock( Deserializer::class ),
+			$this->createMock( Deserializer::class ),
 			new BasicEntityIdParser(),
-			$this->getMock( DispatchableDeserializer::class )
+			$this->createMock( DispatchableDeserializer::class )
 		);
 
 		$deserializer = $factory->newEntityDeserializer();

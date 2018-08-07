@@ -27,7 +27,7 @@ class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$dataValueDeserializer = $this->getMock( Deserializer::class );
+		$dataValueDeserializer = $this->createMock( Deserializer::class );
 
 		$dataValueDeserializer->expects( $this->any() )
 			->method( 'deserialize' )

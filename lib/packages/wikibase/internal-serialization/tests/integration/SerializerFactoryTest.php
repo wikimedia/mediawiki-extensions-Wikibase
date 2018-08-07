@@ -20,7 +20,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	private $factory;
 
 	protected function setUp() {
-		$this->factory = new SerializerFactory( $this->getMock( Serializer::class ) );
+		$this->factory = new SerializerFactory( $this->createMock( Serializer::class ) );
 	}
 
 	public function testEntitySerializerConstruction() {

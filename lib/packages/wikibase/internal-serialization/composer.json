@@ -23,14 +23,14 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": ">=5.5.9",
+		"php": ">=5.6",
 		"wikibase/data-model": "~8.0|~7.0|~6.0|~5.0",
 		"wikibase/data-model-serialization": "~2.0",
 		"serialization/serialization": "~4.0|~3.2"
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~4.8",
+		"phpunit/phpunit": "~5.7",
 		"data-values/common": ">=0.1 <0.5",
 		"data-values/geo": ">=1.0 <4.0",
 		"data-values/number": ">=0.1 <0.10",
