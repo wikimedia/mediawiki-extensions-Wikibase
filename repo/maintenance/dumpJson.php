@@ -61,7 +61,6 @@ class DumpJson extends DumpEntities {
 	public function setServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
 		array $existingEntityTypes,
-		array $disabledEntityTypes,
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityLookup $entityLookup,
@@ -70,7 +69,6 @@ class DumpJson extends DumpEntities {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
 			$existingEntityTypes,
-			$disabledEntityTypes
 		);
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
@@ -93,7 +91,6 @@ class DumpJson extends DumpEntities {
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getEnabledEntityTypes(),
-				[],
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				new RevisionBasedEntityLookup( $revisionLookup ),
