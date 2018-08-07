@@ -11,6 +11,14 @@ use Wikibase\LanguageFallbackChain;
 
 /**
  * @license GPL-2.0-or-later
+ *
+ * @note The class uses immutable cache approach: cached data never changes once persisted.
+ *       For this purpose we not only include Item ID in cache key construction, but also
+ *       Item's current revision ID. Revisions never change, the cached data doesn not need
+ *       to change as well, what means that we don't need to purge caches. As soon as new revision
+ *       is created, cache key will change and old cache data will eventually be purged by
+ *       the caching system (eg. APC, Memcached, ...) as Least Recently Used  as soon as no code
+ *       will request it.
  */
 class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 
