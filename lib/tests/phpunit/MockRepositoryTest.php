@@ -77,7 +77,7 @@ class MockRepositoryTest extends TestCase {
 		// set up a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setLabel( 'en', 'foo' );
-		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
+		$prop->setId( PropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
 		$this->repo->putEntity( $prop );
@@ -116,7 +116,7 @@ class MockRepositoryTest extends TestCase {
 		// set up a property
 		$prop = Property::newFromType( 'string' );
 		$prop->setLabel( 'en', 'foo' );
-		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
+		$prop->setId( PropertyId::newFromNumber( $itemId->getNumericId() ) ); // same numeric id, different prefix
 
 		$propId = $prop->getId();
 		$this->repo->putEntity( $prop );
