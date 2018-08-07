@@ -170,7 +170,7 @@ class EntityParserOutputGeneratorFactory {
 	}
 
 	/**
-	 * @return ParserOutputDataUpdater[]
+	 * @return EntityParserOutputDataUpdater[]
 	 */
 	private function getDataUpdaters() {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
