@@ -1,3 +1,0 @@
-Dumping entities of type item
-Dumping shard 0/1
-Processed 3 entities.
