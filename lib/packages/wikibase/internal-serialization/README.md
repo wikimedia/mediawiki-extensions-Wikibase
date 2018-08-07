@@ -105,8 +105,9 @@ Wikibase Internal Serialization has been written by
 
 ## Release notes
 
-### 2.8.0 (dev)
+### 2.8.0 (2018-08-07)
 
+* Added compatibility with Wikibase DataModel 8.x
 * Dropped compatibility with Wikibase DataModel 4.x
 
 ### 2.7.0 (2017-10-26)
