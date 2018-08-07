@@ -22,7 +22,6 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 	public function testGetEntityTypes_yieldsRelevantTypes(
 		array $expected,
 		array $existingEntityTypes,
-		array $disabledEntityTypes,
 		array $cliEntityTypes
 	) {
 		$dumper = $this->getMockForAbstractClass( DumpEntities::class );
@@ -30,8 +29,7 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 			$this->getMockBuilder( SqlEntityIdPagerFactory::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			$existingEntityTypes,
-			$disabledEntityTypes
+			$existingEntityTypes
 		);
 
 		$argv = [ 'dumpRdf.php' ];
@@ -51,13 +49,6 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 		yield [
 			[ 'item', 'property' ],
 			[ 'item', 'property' ],
-			[],
-			[]
-		];
-		yield [
-			[ 'item', 'property' ],
-			[ 'item', 'property', 'lexeme' ],
-			[ 'lexeme' ],
 			[]
 		];
 		yield [
@@ -69,26 +60,17 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 		yield [
 			[ 'lexeme' ],
 			[ 'item', 'property', 'lexeme' ],
-			[],
 			[ 'lexeme' ]
 		];
 		yield [
 			[ 'item', 'property' ],
 			[ 'item', 'property', 'lexeme' ],
-			[],
 			[ 'item', 'property' ]
 		];
 		yield [
 			[ 'item' ],
 			[ 'item', 'property', 'lexeme' ],
-			[ 'lexeme' ],
 			[ 'item' ]
-		];
-		yield [
-			[], // TODO handle scenario where effectively no entity types are returned
-			[ 'item', 'property', 'lexeme' ],
-			[ 'lexeme' ],
-			[ 'lexeme' ]
 		];
 	}
 

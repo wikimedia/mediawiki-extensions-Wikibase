@@ -136,7 +136,6 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
 			[ 'item', 'property' ],
-			[],
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$mockRepo,
