@@ -22,6 +22,29 @@
       "revId": "ff961e25eb41fca8d4496c53e2027bf513b23beb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "433d3ab6_57baabbe",
+        "filename": "lib/tests/phpunit/SimpleCacheWithBagOStuffTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-07T13:50:05Z",
+      "side": 1,
+      "message": "does not throw any exception any more",
+      "range": {
+        "startLine": 127,
+        "startChar": 54,
+        "endLine": 127,
+        "endChar": 68
+      },
+      "revId": "ff961e25eb41fca8d4496c53e2027bf513b23beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
