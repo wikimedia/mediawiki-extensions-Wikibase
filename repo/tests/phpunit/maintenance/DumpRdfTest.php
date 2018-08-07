@@ -61,8 +61,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	}
 
 	private function getDumpRdf(
-		array $existingEntityTypes,
-		array $disabledEntityTypes
+		array $existingEntityTypes
 	) {
 		$dumpScript = new DumpRdf();
 
@@ -151,10 +150,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			->getMock();
 		$sqlEntityIdPagerFactory->expects( $this->once() )
 			->method( 'newSqlEntityIdPager' )
-			->with(
-				array_diff( $existingEntityTypes, $disabledEntityTypes ),
-				EntityIdPager::INCLUDE_REDIRECTS
-			)
+			->with( $existingEntityTypes, EntityIdPager::INCLUDE_REDIRECTS )
 			->will( $this->returnValue( $mockEntityIdPager ) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -164,7 +160,6 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
 			$existingEntityTypes,
-			$disabledEntityTypes,
 			new NullEntityPrefetcher(),
 			new HashSiteStore( TestSites::getSites() ),
 			$this->getMockPropertyDataTypeLookup(),
@@ -182,27 +177,18 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		return [
 			'dump everything' => [
 				[ 'item', 'property' ],
-				[ 'lexeme' ],
 				[],
 				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
 				__DIR__ . '/../data/maintenance/dumpRdf-out.txt',
 			],
 			'dump with part-id' => [
 				[ 'item', 'property' ],
-				[ 'lexeme' ],
 				[
 					'part-id' => 'blah',
 				],
 				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
 				__DIR__ . '/../data/maintenance/dumpRdf-part-id-blah-out.txt',
 			],
-			'dump with property disabled (e.g. disabledRdfExportEntityTypes)' => [
-				[ 'item', 'property' ],
-				[ 'property' ],
-				[],
-				__DIR__ . '/../data/maintenance/dumpRdf-disable-property-log.txt',
-				__DIR__ . '/../data/maintenance/dumpRdf-disable-property-out.txt',
-			]
 		];
 	}
 
@@ -211,12 +197,11 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 */
 	public function testScript(
 		array $existingEntityTypes,
-		array $disabledEntityTypes,
 		array $opts,
 		$expectedLogFile,
 		$expectedOutFile
 	) {
-		$dumpScript = $this->getDumpRdf( $existingEntityTypes, $disabledEntityTypes );
+		$dumpScript = $this->getDumpRdf( $existingEntityTypes );
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
 		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );

@@ -40,8 +40,6 @@ abstract class DumpEntities extends Maintenance {
 
 	private $existingEntityTypes = [];
 
-	private $disabledEntityTypes = [];
-
 	public function __construct() {
 		parent::__construct();
 
@@ -81,12 +79,10 @@ abstract class DumpEntities extends Maintenance {
 
 	public function setDumpEntitiesServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
-		array $existingEntityTypes,
-		array $disabledEntityTypes
+		array $existingEntityTypes
 	) {
 		$this->sqlEntityIdPagerFactory = $sqlEntityIdPagerFactory;
 		$this->existingEntityTypes = $existingEntityTypes;
-		$this->disabledEntityTypes = $disabledEntityTypes;
 	}
 
 	/**
@@ -232,10 +228,7 @@ abstract class DumpEntities extends Maintenance {
 	}
 
 	private function getEntityTypes() {
-		return array_diff(
-			$this->getOption( 'entity-type', $this->existingEntityTypes ),
-			$this->disabledEntityTypes
-		);
+		$this->getOption( 'entity-type', $this->existingEntityTypes );
 	}
 
 	/**
