@@ -76,6 +76,7 @@
 	"wikibase-pageinfo-entity-usage-O": "دیگر (بیانات)",
 	"wikibase-otherprojects": "دیگر منصوبوں میں",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} سے {{PLURAL:$1|رابطہ|رابطے}}",
+	"notification-header-page-connection": "صفحہ <strong>$3</strong> {{PLURAL:$4|-1={{WBREPONAME}} کے آئٹم|\n{{WBREPONAME}} کے آئٹم $4}} سے  {{GENDER:$2|مربوط}} تھا جو موضوع سے متعلق ڈیٹا رکھتا ہے۔",
 	"notification-link-text-view-item": "آئٹم {{GENDER:$1|دیکھیں}}",
 	"connected-redirect-category": "{{WBREPONAME}} آئٹم سے مربوط رجوع مکررات",
 	"connected-redirect-category-desc": "اس زمرے میں ان رجوع مکررات کی فہرست ہے جو {{WBREPONAME}} کے کسی آئٹم سے مربوط ہیں۔"

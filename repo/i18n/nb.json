@@ -307,6 +307,7 @@
 	"wikibase-redirectentity-submit": "Omdiriger",
 	"wikibase-redirect-origin-not-empty": "Kan ikke opprette omdirigering på ikke-tom entitet $1",
 	"wikibase-redirect-no-such-entity": "Kunne ikke finne entiteten $1",
+	"wikibase-redirect-cant-load-entity-content": "Får ikke tilgang til innholdet, revisjonen kan være slettet.",
 	"wikibase-redirect-target-is-incompatible": "Inkombatible entitetstyper",
 	"wikibase-redirect-target-is-redirect": "Entiteten $1 er en omdirigering",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook stoppet opprettelse av omdirigering",
