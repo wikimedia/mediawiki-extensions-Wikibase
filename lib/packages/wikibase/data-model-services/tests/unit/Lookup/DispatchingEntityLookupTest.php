@@ -81,7 +81,7 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getExceptionThrowingLookup( Exception $exception ) {
-		$lookup = $this->getMock( EntityLookup::class );
+		$lookup = $this->createMock( EntityLookup::class );
 		$lookup->expects( $this->any() )
 			->method( $this->anything() )
 			->will( $this->throwException( $exception ) );
@@ -120,7 +120,7 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenEntityIdFromUnknownRepository_hasEntityReturnsFalse() {
-		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->getMock( EntityLookup::class ), ] );
+		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->createMock( EntityLookup::class ), ] );
 
 		$this->assertFalse( $dispatchingLookup->hasEntity( new ItemId( 'foo:Q1' ) ) );
 	}

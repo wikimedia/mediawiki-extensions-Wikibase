@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 class InProcessCachingDataTypeLookupTest extends PHPUnit_Framework_TestCase {
 
 	public function testWhenCacheIsEmpty_decoratedLookupValueIsReturned() {
-		$decoratedLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$decoratedLookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$decoratedLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )
@@ -32,7 +32,7 @@ class InProcessCachingDataTypeLookupTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testWhenValueInCache_cacheValueIsReturned() {
-		$decoratedLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$decoratedLookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$decoratedLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )

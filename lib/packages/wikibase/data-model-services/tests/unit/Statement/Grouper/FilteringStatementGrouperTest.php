@@ -24,7 +24,7 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 	 * @return StatementFilter
 	 */
 	private function newStatementFilter( $propertyId = 'P1' ) {
-		$filter = $this->getMock( StatementFilter::class );
+		$filter = $this->createMock( StatementFilter::class );
 
 		$filter->expects( $this->any() )
 			->method( 'statementMatches' )

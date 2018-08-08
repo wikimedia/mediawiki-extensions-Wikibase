@@ -60,7 +60,7 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return LabelLookup
 	 */
 	private function getLabelLookup( $languageCode ) {
-		$labelLookup = $this->getMock( LabelLookup::class );
+		$labelLookup = $this->createMock( LabelLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )

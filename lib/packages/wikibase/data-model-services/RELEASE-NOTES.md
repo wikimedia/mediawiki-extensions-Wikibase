@@ -1,5 +1,11 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.11.0 (2018-08-07)
+
+* Added compatibility with Wikibase DataModel 8.x
+* Added compatibility with DataValues 2.x
+* Raised minimum PHP version to 5.6
+
 ## Version 3.10.0 (2018-05-31)
 
 * Added `ReferencedEntityIdLookup` interface, along with:

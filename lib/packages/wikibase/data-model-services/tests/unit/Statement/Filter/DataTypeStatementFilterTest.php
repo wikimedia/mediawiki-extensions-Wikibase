@@ -22,7 +22,7 @@ class DataTypeStatementFilterTest extends PHPUnit_Framework_TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getDataTypeLookup() {
-		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$dataTypeLookup->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )

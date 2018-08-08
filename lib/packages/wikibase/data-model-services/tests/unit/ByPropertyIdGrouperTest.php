@@ -179,7 +179,7 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	 * @return PropertyIdProvider
 	 */
 	private function getPropertyIdProviderMock( $propertyId, $type = null ) {
-		$propertyIdProvider = $this->getMock( Snak::class );
+		$propertyIdProvider = $this->createMock( Snak::class );
 
 		$propertyIdProvider->expects( $this->once() )
 			->method( 'getPropertyId' )

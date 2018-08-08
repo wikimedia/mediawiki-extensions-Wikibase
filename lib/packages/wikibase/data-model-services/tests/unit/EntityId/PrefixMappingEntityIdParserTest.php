@@ -74,7 +74,7 @@ class PrefixMappingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEntityIdParsingExceptionsAreNotCaught() {
-		$regularParser = $this->getMock( EntityIdParser::class );
+		$regularParser = $this->createMock( EntityIdParser::class );
 		$regularParser->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->throwException( new EntityIdParsingException() ) );

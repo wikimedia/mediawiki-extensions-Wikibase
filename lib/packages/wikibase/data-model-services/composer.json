@@ -20,15 +20,15 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": ">=5.5.9",
-		"wikibase/data-model": "~7.0|~6.3",
-		"data-values/data-values": "~0.1|~1.0",
+		"php": ">=5.6.0",
+		"wikibase/data-model": "~8.0|~7.0|~6.3",
+		"data-values/data-values": "~2.0|~1.0",
 		"diff/diff": "~2.3|~1.0",
 		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~4.8",
+		"phpunit/phpunit": "~5.7",
 		"wikibase/wikibase-codesniffer": "^0.3.0"
 	},
 	"autoload": {
@@ -38,7 +38,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "3.10.x-dev"
+			"dev-master": "3.11.x-dev"
 		}
 	},
 	"scripts": {

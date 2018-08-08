@@ -38,7 +38,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends PHPUnit_Framew
 	 * @return EntityLookup
 	 */
 	private function restrictEntityLookup( EntityLookup $entityLookup, $expectedNumberOfGetEntityCalls = null ) {
-		$entityLookupMock = $this->getMock( EntityLookup::class );
+		$entityLookupMock = $this->createMock( EntityLookup::class );
 
 		$entityLookupMock->expects(
 			$expectedNumberOfGetEntityCalls === null ? $this->any() : $this->exactly( $expectedNumberOfGetEntityCalls )
@@ -56,7 +56,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends PHPUnit_Framew
 	 * @return EntityPrefetcher
 	 */
 	private function newEntityPrefetcher( $expectedPrefetches ) {
-		$entityPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$entityPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$entityPrefetcher->expects( $this->exactly( $expectedPrefetches ) )
 			->method( 'prefetch' )
 			->with( $this->isType( 'array' ) );

@@ -51,8 +51,6 @@ class FakeEntityDocument implements EntityDocument {
 	/**
 	 * @see EntityDocument::equals
 	 *
-	 * @since 3.3
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool Always true.
@@ -64,12 +62,16 @@ class FakeEntityDocument implements EntityDocument {
 	/**
 	 * @see EntityDocument::copy
 	 *
-	 * @since 3.3
-	 *
 	 * @return self
 	 */
 	public function copy() {
 		return new self( $this->id );
+	}
+
+	/**
+	 * @see EntityDocument::clear
+	 */
+	public function clear() {
 	}
 
 }

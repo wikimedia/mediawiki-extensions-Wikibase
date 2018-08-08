@@ -40,8 +40,6 @@ class EntityOfUnknownType implements EntityDocument {
 	/**
 	 * @see EntityDocument::equals
 	 *
-	 * @since 3.3
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool Always true.
@@ -53,12 +51,16 @@ class EntityOfUnknownType implements EntityDocument {
 	/**
 	 * @see EntityDocument::copy
 	 *
-	 * @since 3.3
-	 *
 	 * @return self
 	 */
 	public function copy() {
 		return $this;
+	}
+
+	/**
+	 * @see EntityDocument::clear
+	 */
+	public function clear() {
 	}
 
 }
