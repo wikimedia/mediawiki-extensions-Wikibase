@@ -48,7 +48,7 @@ call_user_func( function() {
 
 	// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
 
-	// Tell MediaWIki to search the item namespace
+	// Tell MediaWiki to search the item namespace
 	$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
 	// the special group includes all the sites in the specialSiteLinkGroups,
