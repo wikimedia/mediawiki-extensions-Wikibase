@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1f83e536_f23ad3a8",
+        "filename": "repo/includes/Rdf/EntityMentionListener.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-08-08T08:30:38Z",
+      "side": 1,
+      "message": "Yes, indeed having this method here is not the best place even if this method, just like the other ones, is used to ask for a sometime partial and optional serialization of an other entity.\n \nWe need a way for implementations of EntityRdfBuilder from Wikibase extensions like WikibaseLexeme to call the other RDF builders (e.g. the StatementDocument builders) hopefully without having to build a strong dependency on them. The implementations of EntityRdfBuilder are not able with the current extension design to call RDFBuilder (the dependency is in the other direction) and, so, are not able to directly call the generic conversion codes (for statements...) in an easy and extensible way.\nThe only other way I have seen without making a huge refactoring of the RDF converters core logic is to make LexemeRdfBuilder instantiate its own StatementRdfBuilder and so one for serializing forms and senses statements when they are serialized as part of a lexeme serialization (but not when they are serialized as stand-alone, like for building the answer of Special:EntityData/L1-F1.json). It involved writing much more code and building a strong dependency on how statements are currently serialized, and it does not looked future proof to me and it means that is other Wikibase extension want also to have sub entities they would have to solve the exact same problem again.",
+      "parentUuid": "85e5a81b_bf5fa39d",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6c684d7_c335d9d4",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-08-08T06:54:11Z",
       "side": 1,
       "message": "Same here - why we need to queue anything? Why can\u0027t we output the forms when we output the data for the lexeme, just as we output other parts? I don\u0027t see any reason to make any special queue for them, am I missing something?",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ce3ac15_7681a620",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-08-08T08:30:38Z",
+      "side": 1,
+      "message": "I used a queue here in order to get a nicer RDF output. I wanted to output the forms and senses after the output of the lexeme in itself is finished in order to get Turtle like:\n\nwd:L1 ontolex:form wd:L1-F1 , wd:L1-F1 .\nwd:L1-F1 .... .\nwd:L1-F2 .... .\n\nand not like:\n\nwd:L1 ontolex:form wd:L1-F1 .\nwd:L1-F1 .... .\nwd:L1 ontolex:form wd:L1-F2 .\nwd:L1-F2 .... .",
+      "parentUuid": "d6c684d7_c335d9d4",
       "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
