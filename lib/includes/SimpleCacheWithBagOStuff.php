@@ -329,12 +329,18 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws InvalidArgumentException
 	 */
 	private function normalizeTtl( $ttl ) {
+		// Addition of `1` to timestamp is required to avoid the issue when we read timestamp in
+		// the very end of the pending second (lets say 57.999) so that effective TTL becomes
+		// very small (in former example it will be 0.001). This issue makes tests flacky.
+		// @see https://phabricator.wikimedia.org/T201453
 		if ( $ttl instanceof \DateInterval ) {
 			$date = new \DateTime();
 			$date->add( $ttl );
-			return $date->getTimestamp();
+			return $date->getTimestamp() + 1;
+		} elseif ( is_int( $ttl ) && $ttl === 0 ) {
+			return time();
 		} elseif ( is_int( $ttl ) ) {
-			return $ttl + time();
+			return $ttl + time() + 1;
 		} elseif ( $ttl === null ) {
 			return \BagOStuff::TTL_INDEFINITE;
 		} else {
