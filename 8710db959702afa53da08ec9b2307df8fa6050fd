@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85e5a81b_bf5fa39d",
+        "filename": "repo/includes/Rdf/EntityMentionListener.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-08-08T06:54:11Z",
+      "side": 1,
+      "message": "I don\u0027t think it is the same use case here. As far as I understand, this is for entities mentioning other entities, in which case we may later decide, whether or not we want to output that other entity. In this case, however, we always want to output forms when we output Lexeme, so why not just output them, the same way we output statements for entities?",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6c684d7_c335d9d4",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-08-08T06:54:11Z",
+      "side": 1,
+      "message": "Same here - why we need to queue anything? Why can\u0027t we output the forms when we output the data for the lexeme, just as we output other parts? I don\u0027t see any reason to make any special queue for them, am I missing something?",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
