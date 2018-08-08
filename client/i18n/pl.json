@@ -108,6 +108,7 @@
 	"wikibase-pageinfo-entity-id": "Identyfikator elementu Wikidanych",
 	"wikibase-pageinfo-entity-id-none": "brak",
 	"wikibase-pageinfo-description-local": "Lokalny opis",
+	"wikibase-pageinfo-description-central": "Centralny opis",
 	"wikibase-pageinfo-entity-usage": "Obiekty z Wikidanych użyte na tej stronie",
 	"wikibase-pageinfo-entity-usage-S": "Link do strony",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etykieta: $1",

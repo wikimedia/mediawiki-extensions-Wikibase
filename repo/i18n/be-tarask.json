@@ -392,6 +392,7 @@
 	"wikibase-search-namespace-mix": "Адначасовае выкарыстаньне прастораў назваў элемэнтаў і артыкулаў у цяперашні час не падтрымліваецца. Пошук будзе адбывацца толькі ў прасторы назваў элемэнтаў.",
 	"wikibase-search-config-notfound": "Канфігурацыя паўнатэкставага пошуку ня знойдзеная: $1",
 	"wikibase-search-config-badclass": "Кепская кляса пабудовы запыту: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement ня ўтрымлівае слушных сьцьверджаньняў",
 	"apihelp-wbavailablebadges-description": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-summary": "Запытвае даступныя элемэнты адзнакаў.",
 	"apihelp-wbavailablebadges-example-1": "Запытвае ўсе даступныя элемэнты адзнакаў",

@@ -9,7 +9,8 @@
 			"Steenth",
 			"Peter Alberti",
 			"Fnielsen",
-			"Sarrus"
+			"Sarrus",
+			"Saederup92"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -67,6 +68,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-emner, der bruges på denne side",
 	"wikibase-pageinfo-entity-usage-S": "Sidehenvisning",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiket: $1",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Beskrivelse: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
 	"wikibase-otherprojects": "I andre projekter",

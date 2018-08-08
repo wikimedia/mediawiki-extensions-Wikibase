@@ -73,7 +73,7 @@
 	"datatypes-type-unknown": "Uspecificeret",
 	"datatypes-type-boolean": "Boolesk",
 	"datatypes-type-globe-coordinate": "Geografiske koordinater",
-	"datatypes-type-time": "Tid",
+	"datatypes-type-time": "Tidspunkt",
 	"datatypes-type-wikibase-item": "Emne",
 	"datatypes-type-commonsMedia": "Commons media-fil",
 	"version-wikibase": "Wikibase",

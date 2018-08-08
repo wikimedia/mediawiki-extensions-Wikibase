@@ -386,6 +386,7 @@
 	"wikibase-pageinfo-subscription-none": "Ingen",
 	"wikibase-search-bad-entity-type": "Ugyldig entitetstype: $1",
 	"wikibase-search-bad-profile-name": "Ugyldig søkeprofilnavn: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Nøkkelordet haswbstatement inneholder ingen gyldige påstander",
 	"apihelp-wbavailablebadges-description": "Kjører spørring mot tilgjengelige merkeelementer.",
 	"apihelp-wbavailablebadges-summary": "Kjører spørring mot tilgjengelige merkeelementer.",
 	"apihelp-wbavailablebadges-example-1": "Kjører spørring mot alle tilgjengelige merkeelementer",
