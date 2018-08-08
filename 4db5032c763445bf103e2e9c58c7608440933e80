@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "562659e7_5a995f96",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-08T15:32:25Z",
+      "side": 1,
+      "message": "Use Wikibase setting `sharedCacheDuration`",
+      "range": {
+        "startLine": 237,
+        "startChar": 11,
+        "endLine": 237,
+        "endChar": 47
+      },
+      "revId": "4db5032c763445bf103e2e9c58c7608440933e80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
