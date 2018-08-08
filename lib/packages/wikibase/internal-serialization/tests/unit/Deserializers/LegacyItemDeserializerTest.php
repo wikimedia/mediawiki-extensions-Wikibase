@@ -32,7 +32,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$idDeserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 
-		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( Deserializer::class ) );
+		$snakDeserializer = new LegacySnakDeserializer( $this->createMock( Deserializer::class ) );
 
 		$statementDeserializer = new LegacyStatementDeserializer(
 			$snakDeserializer,

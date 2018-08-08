@@ -31,7 +31,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @return DispatchableDeserializer
 	 */
 	private function getStubLegacyDeserializer() {
-		$legacyDeserializer = $this->getMock( DispatchableDeserializer::class );
+		$legacyDeserializer = $this->createMock( DispatchableDeserializer::class );
 
 		$legacyDeserializer->expects( $this->any() )
 			->method( 'isDeserializerFor' )
@@ -50,7 +50,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @return DispatchableDeserializer
 	 */
 	private function getStubCurrentDeserializer() {
-		$currentDeserializer = $this->getMock( DispatchableDeserializer::class );
+		$currentDeserializer = $this->createMock( DispatchableDeserializer::class );
 
 		$currentDeserializer->expects( $this->any() )
 			->method( 'isDeserializerFor' )
@@ -79,7 +79,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @return DispatchableDeserializer
 	 */
 	private function getThrowingDeserializer() {
-		$currentDeserializer = $this->getMock( DispatchableDeserializer::class );
+		$currentDeserializer = $this->createMock( DispatchableDeserializer::class );
 
 		$currentDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
