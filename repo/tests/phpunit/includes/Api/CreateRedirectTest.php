@@ -21,7 +21,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
@@ -110,7 +110,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	/**
 	 * @param array $params
 	 * @param User $user
-	 * @param RedirectCreationInteractor|null $interactor RedirectCreationInteractor to use, mock interactor
+	 * @param ItemRedirectCreationInteractor|null $interactor RedirectCreationInteractor to use, mock interactor
 	 * will be used if null provided.
 	 *
 	 * @return CreateRedirect
@@ -118,7 +118,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	private function newApiModule(
 		array $params,
 		User $user,
-		RedirectCreationInteractor $interactor = null
+		ItemRedirectCreationInteractor $interactor = null
 	) {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request, true );
@@ -135,7 +135,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$context->setRequest( new FauxRequest() );
 
 		if ( !$interactor ) {
-			$interactor = new RedirectCreationInteractor(
+			$interactor = new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
@@ -178,7 +178,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	private function callApiModule(
 		array $params,
 		User $user = null,
-		RedirectCreationInteractor $interactor = null
+		ItemRedirectCreationInteractor $interactor = null
 	) {
 		global $wgUser;
 

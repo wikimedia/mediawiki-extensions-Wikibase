@@ -19,13 +19,13 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers \Wikibase\Repo\Interactors\RedirectCreationInteractor
+ * @covers \Wikibase\Repo\Interactors\ItemRedirectCreationInteractor
  *
  * @group Wikibase
  *
@@ -120,7 +120,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @param Status|null $efHookStatus
 	 * @param User|null $user
 	 *
-	 * @return RedirectCreationInteractor
+	 * @return ItemRedirectCreationInteractor
 	 */
 	private function newInteractor(
 		$efHookCalls = null,
@@ -136,7 +136,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
-		$interactor = new RedirectCreationInteractor(
+		$interactor = new ItemRedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionChecker(),

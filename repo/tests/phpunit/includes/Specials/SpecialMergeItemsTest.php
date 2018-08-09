@@ -20,7 +20,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -162,7 +162,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$this->user,
-				new RedirectCreationInteractor(
+				new ItemRedirectCreationInteractor(
 						$this->mockRepository,
 						$this->mockRepository,
 						$this->getPermissionCheckers(),
