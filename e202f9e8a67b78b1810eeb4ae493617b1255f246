@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94eed009_837d0e77",
+        "filename": "lib/tests/phpunit/SimpleCacheWithBagOStuffTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-09T16:44:53Z",
+      "side": 1,
+      "message": "clutter doc",
+      "revId": "e202f9e8a67b78b1810eeb4ae493617b1255f246",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6c92eb2_46b502c8",
+        "filename": "lib/tests/phpunit/SimpleCacheWithBagOStuffTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-09T16:44:53Z",
+      "side": 1,
+      "message": "Why not private?",
+      "revId": "e202f9e8a67b78b1810eeb4ae493617b1255f246",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
