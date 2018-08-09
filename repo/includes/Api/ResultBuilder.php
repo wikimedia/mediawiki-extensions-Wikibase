@@ -1054,7 +1054,7 @@ class ResultBuilder {
 	 *  object in the 'revision' field. If $oldRevId is set and the latest edit was null,
 	 * a 'nochange' flag is also added.
 	 *
-	 * If no revision is found the the Status object, this method does nothing.
+	 * If no revision is found the Status object, this method does nothing.
 	 *
 	 * @see ApiResult::addValue()
 	 *
