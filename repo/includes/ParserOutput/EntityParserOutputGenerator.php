@@ -103,6 +103,7 @@ class EntityParserOutputGenerator {
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
+		DispatchingEntityMetaTagsFactory $entityMetaTagsFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityInfoBuilder $entityInfoBuilder,
@@ -114,6 +115,7 @@ class EntityParserOutputGenerator {
 		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
+		$this->entityMetaTagsFactory = $entityMetaTagsFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
@@ -145,7 +147,10 @@ class EntityParserOutputGenerator {
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
-		$parserOutput->setExtensionData( 'wikibase-meta-tags', $this->getMetaTags( $entity ) );
+
+		$entityMetaTags = $this->entityMetaTagsFactory->newEntityMetaTags( $entity->getType(), $this->languageFallbackChain );
+
+		$parserOutput->setExtensionData( 'wikibase-meta-tags', $entityMetaTags->getMetaTags( $entity ) );
 
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
@@ -203,56 +208,6 @@ class EntityParserOutputGenerator {
 		}
 
 		return $this->entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string[]
-	 */
-	private function getMetaTags( EntityDocument $entity ) {
-		$meta = [
-			'title' => $this->getTitleText( $entity ),
-		];
-
-		if ( $entity instanceof DescriptionsProvider ) {
-			$descriptions = $entity->getDescriptions()->toTextArray();
-			$preferred = $this->languageFallbackChain->extractPreferredValue( $descriptions );
-
-			if ( is_array( $preferred ) ) {
-				$meta['description'] = $preferred['value'];
-			}
-		}
-
-		return $meta;
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string|null
-	 */
-	private function getTitleText( EntityDocument $entity ) {
-		$titleText = null;
-
-		if ( $entity instanceof LabelsProvider ) {
-			$labels = $entity->getLabels()->toTextArray();
-			$preferred = $this->languageFallbackChain->extractPreferredValue( $labels );
-
-			if ( is_array( $preferred ) ) {
-				$titleText = $preferred['value'];
-			}
-		}
-
-		if ( !is_string( $titleText ) ) {
-			$entityId = $entity->getId();
-
-			if ( $entityId instanceof EntityId ) {
-				$titleText = $entityId->getSerialization();
-			}
-		}
-
-		return $titleText;
 	}
 
 	private function addHtmlToParserOutput(
