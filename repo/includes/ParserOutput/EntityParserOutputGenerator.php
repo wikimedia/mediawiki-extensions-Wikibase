@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
+use Language;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -89,6 +90,11 @@ class EntityParserOutputGenerator {
 	 */
 	private $languageCode;
 
+	/*
+	 * @var Language
+	 */
+	private $language;
+
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
@@ -103,6 +109,7 @@ class EntityParserOutputGenerator {
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
+		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityInfoBuilder $entityInfoBuilder,
@@ -111,9 +118,10 @@ class EntityParserOutputGenerator {
 		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		$languageCode
+		Language $language
 	) {
 		$this->entityViewFactory = $entityViewFactory;
+		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
@@ -122,7 +130,8 @@ class EntityParserOutputGenerator {
 		$this->textProvider = $textProvider;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
-		$this->languageCode = $languageCode;
+		$this->language = $language;
+		$this->languageCode = $language->getCode();
 	}
 
 	/**
@@ -145,7 +154,10 @@ class EntityParserOutputGenerator {
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
-		$parserOutput->setExtensionData( 'wikibase-meta-tags', $this->getMetaTags( $entity ) );
+
+		$entityMetaTagsCreator = $this->entityMetaTagsCreatorFactory->newEntityMetaTags( $entity->getType(), $this->language );
+
+		$parserOutput->setExtensionData( 'wikibase-meta-tags', $entityMetaTagsCreator->getMetaTags( $entity ) );
 
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
@@ -203,56 +215,6 @@ class EntityParserOutputGenerator {
 		}
 
 		return $this->entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string[]
-	 */
-	private function getMetaTags( EntityDocument $entity ) {
-		$meta = [
-			'title' => $this->getTitleText( $entity ),
-		];
-
-		if ( $entity instanceof DescriptionsProvider ) {
-			$descriptions = $entity->getDescriptions()->toTextArray();
-			$preferred = $this->languageFallbackChain->extractPreferredValue( $descriptions );
-
-			if ( is_array( $preferred ) ) {
-				$meta['description'] = $preferred['value'];
-			}
-		}
-
-		return $meta;
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string|null
-	 */
-	private function getTitleText( EntityDocument $entity ) {
-		$titleText = null;
-
-		if ( $entity instanceof LabelsProvider ) {
-			$labels = $entity->getLabels()->toTextArray();
-			$preferred = $this->languageFallbackChain->extractPreferredValue( $labels );
-
-			if ( is_array( $preferred ) ) {
-				$titleText = $preferred['value'];
-			}
-		}
-
-		if ( !is_string( $titleText ) ) {
-			$entityId = $entity->getId();
-
-			if ( $entityId instanceof EntityId ) {
-				$titleText = $entityId->getSerialization();
-			}
-		}
-
-		return $titleText;
 	}
 
 	private function addHtmlToParserOutput(
