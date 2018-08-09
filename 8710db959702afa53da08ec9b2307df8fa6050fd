@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "9d3066fd_aa2a4681",
+        "filename": "repo/includes/Rdf/EntityMentionListener.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-08-09T07:15:10Z",
+      "side": 1,
+      "message": "\u003e  If we can\u0027t express sub-entites properly, maybe we should fix it in another place\n\nYes, having something like an EntityWithSubEntities interface that would be implemented for Lexemes seems much nicer to me too.\n\n\u003e Are we ever going to serialize forms as RDF alone?\n\nWe probably need to serialize a \"stub\" for them if they are used as a value in a statement on an other item or lexeme. WikibaseLexemes and Wikidata now provides a \"Lexeme Form id\" datatype.\n\n\u003e Is this supported? I am not sure we need to even support it. \n\nIt is currently working because not actively disabled. At least we need to support \"stubs\" for forms so it looked meaningful to me to also support full output of just one form.",
+      "parentUuid": "ea0624a5_a6d9dee7",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6c684d7_c335d9d4",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 3
