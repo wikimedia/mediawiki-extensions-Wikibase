@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
@@ -146,7 +146,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 			$this->getPermissionChecker(),
 			$summaryFormatter,
 			$user,
-			new RedirectCreationInteractor(
+			new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionChecker(),

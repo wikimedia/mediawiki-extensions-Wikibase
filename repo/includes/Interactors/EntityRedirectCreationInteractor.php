@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Interactors;
 
 use User;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
@@ -25,7 +26,7 @@ use Wikibase\SummaryFormatter;
  * @author Daniel Kinzler
  * @author Addshore
  */
-class RedirectCreationInteractor {
+abstract class EntityRedirectCreationInteractor {
 
 	/**
 	 * @var EntityTitleStoreLookup
@@ -161,14 +162,7 @@ class RedirectCreationInteractor {
 					);
 				}
 			} else {
-				$entity = $revision->getEntity();
-				if ( !$entity->isEmpty() ) {
-					throw new RedirectCreationException(
-						"Can't create redirect on non empty item $entityId",
-						'origin-not-empty',
-						[ $entityId->serialize() ]
-					);
-				}
+				$this->assertEntityIsRedirectable( $revision->getEntity() );
 			}
 
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
@@ -263,5 +257,16 @@ class RedirectCreationInteractor {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', [], $ex );
 		}
 	}
+
+	/**
+	 * Used to assert that the source entity is redirectable. This can differ depending on the entity type.
+	 *
+	 * @param EntityDocument $entity
+	 *
+	 * @return void
+	 *
+	 * @throws RedirectCreationException
+	 */
+	abstract protected function assertEntityIsRedirectable( EntityDocument $entity );
 
 }
