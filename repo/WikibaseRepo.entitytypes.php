@@ -41,6 +41,7 @@ use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
+use Wikibase\View\FingerprintableEntityMetaTags;
 use Wikimedia\Purtle\RdfWriter;
 
 return [
@@ -63,6 +64,12 @@ return [
 				$editSectionGenerator,
 				$entityTermsView
 			);
+		},
+		'meta-tags-factory-callback' => function ( $userLanguage ) {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
+			return new FingerprintableEntityMetaTags( $languageFallbackChain );
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_ITEM,
 		'content-handler-factory-callback' => function() {
@@ -191,6 +198,12 @@ return [
 				$editSectionGenerator,
 				$entityTermsView
 			);
+		},
+		'meta-tags-factory-callback' => function ( Language $userLanguage ) {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
+			return new FingerprintableEntityMetaTags( $languageFallbackChain );
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_PROPERTY,
 		'content-handler-factory-callback' => function() {
