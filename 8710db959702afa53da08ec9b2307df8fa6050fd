@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ea0624a5_a6d9dee7",
+        "filename": "repo/includes/Rdf/EntityMentionListener.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-08-09T06:56:10Z",
+      "side": 1,
+      "message": "That\u0027s the point - I don\u0027t think it should be either optional or partial. \n\n\u003e to call the other RDF builders (e.g. the StatementDocument builders) hopefully without having to build a strong dependency on them.\n\nNot sure that if you use statement builder you should avoid dependency on it. De-facto dependency then does exist. I haven\u0027t looked into the best way of expressing it (I\u0027m kind of on vacation today and tomorrow) but it feels like doing it through thiese kinds of handlers feels wrong. They are for optional links between entities, not for whole owned sub-entities. If we can\u0027t express sub-entites properly, maybe we should fix it in another place, but not repurpose these listeners for what they aren\u0027t meant for. \n\nI\u0027ll take another look into this once I\u0027m back from vacation and see if I can suggest a better way. \n\n\u003e serializing forms and senses statements when they are serialized as part of a lexeme serialization (but not when they are serialized as stand-alone\n\nAre we ever going to serialize forms as RDF alone? I am not sure there\u0027s a use case for it. I was under impression they exist only inside the Lexeme. \n\n\u003e like for building the answer of Special:EntityData/L1-F1.json\n\nIs this supported? I am not sure we need to even support it. Having just a form without a lexeme doesn\u0027t sound very useful. I mean, I am not exactly against it, but I wouldn\u0027t shed any tears if it wasn\u0027t supported.",
+      "parentUuid": "1f83e536_f23ad3a8",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6c684d7_c335d9d4",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 3
