@@ -489,5 +489,6 @@
 	"apihelp-wblinktitles-param-fromsite": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>fromtitle</var>, каб зрабіць поўную спасылку на сайт.",
 	"apihelp-wblinktitles-param-fromtitle": "Назва старонкі для злучэньня.\nУжывайце разам з <var>fromsite</var>, каб зрабіць поўную спасылку на сайт.",
 	"apihelp-wblinktitles-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «bot».",
-	"apihelp-wblinktitles-example-1": "Дадаць спасылку «Hydrogen» з ангельскай старонкі да «Wasserstoff» на нямецкай старонцы"
+	"apihelp-wblinktitles-example-1": "Дадаць спасылку «Hydrogen» з ангельскай старонкі да «Wasserstoff» на нямецкай старонцы",
+	"apihelp-wbmergeitems-description": "Аб’ядноўвае некалькі элемэнтаў."
 }

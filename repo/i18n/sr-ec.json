@@ -33,7 +33,7 @@
 	"wikibase-statementgrouplistview-add-tooltip": "Додај нову изјаву",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На другим језицима",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Подеси",
-	"wikibase-entitytermsforlanguagelistview-aliases": "Познато и као",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Псеудоними",
 	"wikibase-entitytermsforlanguagelistview-description": "Опис",
 	"wikibase-entitytermsforlanguagelistview-label": "Ознака",
 	"wikibase-entitytermsforlanguagelistview-language": "Језик",

@@ -23,7 +23,7 @@
 	"wikibase-remove-inprogress": "Uklanjanje...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Na drugim jezicima",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Podesi",
-	"wikibase-entitytermsforlanguagelistview-aliases": "Poznato i kao",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Pseudonimi",
 	"wikibase-label-empty": "Naziv nije definisan",
 	"wikibase-label-edit-placeholder": "unesite naziv",
 	"wikibase-label-edit-placeholder-language-aware": "unesite naziv na $1",

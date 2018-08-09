@@ -53,5 +53,7 @@
 	"wikibase-pageswithbadges-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "ھیچ",
-	"wikibase-otherprojects": "لە پڕۆژەکانی تر"
+	"wikibase-otherprojects": "لە پڕۆژەکانی تر",
+	"notification-header-page-connection": "پەڕەی <strong>$3</strong> بەسترایەوە بە {{PLURAL:$4|-1= {{WBREPONAME}}|{{WBREPONAME}} زانیاریی $4}}، کە دراوەی پەیوەندیدار بە بابەتەکەی لەخۆ گرتووە.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> و {{PLURAL:$4|یەک پەڕەی تر|$4 تر pages|100=99+ پەڕەی تر}} بەسترانەوە بە {{WBREPONAME}}ەوە."
 }
