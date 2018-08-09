@@ -85,6 +85,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/Specials/SpecialNewEntityTestCase.php',
 				'tests/phpunit/includes/Specials/SpecialWikibaseRepoPageTestBase.php',
 				'tests/phpunit/includes/Validators/TestValidator.php',
+				'tests/phpunit/includes/ParserOutput/MockEntityMetaTags.php',
 				'tests/phpunit/maintenance/MockAddUnits.php',
 			]
 		);
@@ -108,6 +109,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 			[ 'src' ],
 			[
 				'tests/phpunit/EntityViewTestCase.php',
+				'tests/phpunit/EntityMetaTagsTestCase.php',
 			]
 		);
 
