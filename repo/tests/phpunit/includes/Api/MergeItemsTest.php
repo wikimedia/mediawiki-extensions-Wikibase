@@ -27,7 +27,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -108,10 +108,10 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @param EntityRedirect|null $redirect
 	 *
-	 * @return RedirectCreationInteractor
+	 * @return ItemRedirectCreationInteractor
 	 */
 	public function getMockRedirectCreationInteractor( EntityRedirect $redirect = null ) {
-		$mock = $this->getMockBuilder( RedirectCreationInteractor::class )
+		$mock = $this->getMockBuilder( ItemRedirectCreationInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
 

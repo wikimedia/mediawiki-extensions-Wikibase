@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 
 /**
  * API module for creating entity redirects.
@@ -31,7 +31,7 @@ class CreateRedirect extends ApiBase {
 	private $errorReporter;
 
 	/**
-	 * @var RedirectCreationInteractor
+	 * @var ItemRedirectCreationInteractor
 	 */
 	private $interactor;
 
@@ -42,14 +42,14 @@ class CreateRedirect extends ApiBase {
 	 * @param string $moduleName
 	 * @param EntityIdParser $idParser
 	 * @param ApiErrorReporter $errorReporter
-	 * @param RedirectCreationInteractor $interactor
+	 * @param ItemRedirectCreationInteractor $interactor
 	 */
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
-		RedirectCreationInteractor $interactor
+		ItemRedirectCreationInteractor $interactor
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
