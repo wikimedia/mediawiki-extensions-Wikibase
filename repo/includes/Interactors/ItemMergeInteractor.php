@@ -61,7 +61,7 @@ class ItemMergeInteractor {
 	private $user;
 
 	/**
-	* @var RedirectCreationInteractor
+	* @var ItemRedirectCreationInteractor
 	*/
 	private $interactorRedirect;
 
@@ -77,7 +77,7 @@ class ItemMergeInteractor {
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
 		User $user,
-		RedirectCreationInteractor $interactorRedirect,
+		ItemRedirectCreationInteractor $interactorRedirect,
 		EntityTitleStoreLookup $entityTitleLookup
 	) {
 		$this->changeOpFactory = $changeOpFactory;

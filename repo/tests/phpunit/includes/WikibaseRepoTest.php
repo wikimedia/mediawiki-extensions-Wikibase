@@ -65,7 +65,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -241,8 +241,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$context = new RequestContext();
-		$returnValue = $this->getWikibaseRepo()->newRedirectCreationInteractor( $user, $context );
-		$this->assertInstanceOf( RedirectCreationInteractor::class, $returnValue );
+		$returnValue = $this->getWikibaseRepo()->newItemRedirectCreationInteractor( $user, $context );
+		$this->assertInstanceOf( ItemRedirectCreationInteractor::class, $returnValue );
 	}
 
 	public function testNewTermSearchInteractorReturnType() {
