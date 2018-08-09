@@ -103,7 +103,7 @@ class LineReader implements Iterator {
 	}
 
 	/**
-	 * Reads the the next line. Use current() to get the line's content.
+	 * Reads the next line. Use current() to get the line's content.
 	 *
 	 * @link http://php.net/manual/en/iterator.next.php
 	 */

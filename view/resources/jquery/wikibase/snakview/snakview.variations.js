@@ -26,7 +26,7 @@
 	var SELF = $.wikibase.snakview.variations = {
 		/**
 		 * Registers a new `jQuery.wikibase.snakview.variations.Variation` definition to enable
-		 * using a a specific `Snak` type within `jQuery.wikibase.snakview`. Acts like the
+		 * using a specific `Snak` type within `jQuery.wikibase.snakview`. Acts like the
 		 * `jQuery.Widget` factory.
 		 *
 		 * @param {wikibase.datamodel.Snak} snakConstructor The constructor of the `Snak` the

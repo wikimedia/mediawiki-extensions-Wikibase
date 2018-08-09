@@ -47,7 +47,7 @@ interface PageUpdater {
 	);
 
 	/**
-	 * Injects an RC entry into the recentchanges, using the the given title and attribs
+	 * Injects an RC entry into the recentchanges, using the given title and attribs
 	 *
 	 * @param Title[] $titles
 	 * @param EntityChange $change

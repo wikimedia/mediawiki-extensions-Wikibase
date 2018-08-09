@@ -266,7 +266,7 @@
 		},
 
 		/**
-		 * Initializes the default source pointing the the `wbsearchentities` API module via the URL
+		 * Initializes the default source pointing to the `wbsearchentities` API module via the URL
 		 * provided in the options.
 		 *
 		 * @protected

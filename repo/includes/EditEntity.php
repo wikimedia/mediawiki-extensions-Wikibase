@@ -143,7 +143,7 @@ class EditEntity {
 
 	/**
 	 * Indicates that the content failed some precondition to saving,
-	 * such a a global uniqueness constraint.
+	 * such as a global uniqueness constraint.
 	 */
 	const PRECONDITION_FAILED = 16;
 
@@ -321,7 +321,7 @@ class EditEntity {
 	}
 
 	/**
-	 * Return the the base revision for the edit. If no base revision ID was supplied to
+	 * Return the base revision for the edit. If no base revision ID was supplied to
 	 * the constructor, this returns the latest revision. If the entity does not exist
 	 * yet, this returns null.
 	 *
