@@ -45,6 +45,30 @@
       "revId": "3b3f70acbdecad647858dfd9d64650bfab410335",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe5a605_6c40db9e",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-09T22:43:56Z",
+      "side": 1,
+      "message": "In principle I like this idea but this would mean also creating an EntityView when generateHtml is false.",
+      "parentUuid": "0830dcf8_2f5ce6be",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 44
+      },
+      "revId": "3b3f70acbdecad647858dfd9d64650bfab410335",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
